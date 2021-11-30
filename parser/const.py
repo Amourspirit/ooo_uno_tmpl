@@ -1,19 +1,22 @@
 #!/usr/bin/env python
+import os
 import argparse
-from typing import List, Union
+from typing import Dict, List, Union
 from bs4 import BeautifulSoup
 from bs4.element import ResultSet, SoupStrainer, Tag
 import requests
-from kwhelp.decorator import DecFuncEnum, RuleCheckAllKw
+from kwhelp.decorator import DecFuncEnum, RuleCheckAllKw, TypeCheckKw
 from kwhelp import rules
 from collections import namedtuple
-
+from base import WriteBase
+from pathlib import Path
+import textwrap
+# import pyperclip as pc
 dataitem = namedtuple(
     'dataitem', ['value', 'raw_value', 'name', 'datatype', 'lines'])
 
 
-class ConstWriter:
-    pass
+    
 
 
 class Parser:
@@ -23,10 +26,12 @@ class Parser:
                     rules=[rules.RuleStrNotNullEmptyWs, rules.RuleBool],
                     ftype=DecFuncEnum.METHOD)
     def __init__(self, **kwargs):
+        self._indent = '    '
         self._url = kwargs.get('url', '')
         self._raw = ''
         self._sort = kwargs.get('sort', True)
         self._replace_dual_colon = kwargs.get('replace_dual_colon', True)
+        self._title_full = None
 
     # endregion init
 
@@ -38,6 +43,75 @@ class Parser:
         html_text = response.text
         return html_text
     # endregion request
+
+    # region Info
+    def get_info(self) -> Dict[str, str]:
+        """
+        Gets info
+
+        Returns:
+            Dict[str, str]: {
+                "name": "name of constant",
+                "desc": "description of constant",
+                "url": "Url to LibreOffice of constant"
+            }
+        """
+        if not self._url:
+            raise ValueError('URL is not set')
+        soup = BeautifulSoup(self.get_raw_html(), 'lxml')
+        name = self._get_name(soup=soup)
+        desc = self._get_desc(soup=soup)
+        info = {
+            "name": name,
+            "desc": desc,
+            "url": self.url
+        }
+        return info
+    
+    def _get_desc(self, soup: BeautifulSoup):
+        contents = soup.find('div', class_='contents')
+        block = contents.find('div', class_='textblock')
+        soup_lines:ResultSet = block.find_all('p')
+        lines = []
+        for i, ln in enumerate(soup_lines):
+            s = ln.text.strip()
+            if i > 0:
+                lines.append("")
+            lines.append(s)
+        since = self._get_since(block=block)
+        if len(since) > 0:
+            lines.append('')
+            lines.extend(since)
+        result = "\n".join(lines)
+        return result
+    
+    def _get_since(self, block: Tag) -> List[str]:
+        result = []
+        since = block.find('dl', class_='section since')
+        if since:
+            s = since.find('dd').text.strip()
+            result.append("**Since**")
+            result.append("")
+            result.append(self._indent + s)
+        return result
+            
+    
+    
+    def _get_name(self, soup: BeautifulSoup):
+        full = self._get_full_title(soup=soup)
+        parts = full.split('.')
+        return parts[len(parts) - 1]
+    
+    def _get_full_title(self, soup: BeautifulSoup):
+        if self._title_full is None:
+            header = soup.find('div', class_='title').text.strip()
+            header = header.replace('::', '.')
+            self._title_full = header.split()[0]
+        return self._title_full
+        
+        
+        
+    # endregion Info
 
     # region Data
 
@@ -68,10 +142,10 @@ class Parser:
         return result.strip()
 
     def get_formated_data(self):
-        data = self.get_data()
+        data = self.get_table_data()
         lines = []
         for itm in data:
-            s = f'"{itm.name}": ("{itm.raw_value}"'
+            s = f'"{itm.name}": ["{itm.raw_value}"'
             if len(itm.lines) > 0:
                 s_ln = ', [\n'
                 for j, line in enumerate(itm.lines):
@@ -80,7 +154,7 @@ class Parser:
                     s_ln += f'    "{self._clean_desc(line)}"'
                 s_ln += '\n]'
                 s += s_ln
-            s += ')'
+            s += ']'
             lines.append(s)
         result = ',\n'.join(lines)
         return result
@@ -174,6 +248,64 @@ class Parser:
 
     # endregion Properties
 
+
+class ConstWriter(WriteBase):
+    def __init__(self, parser:Parser, **kwargs):
+        self._parser = parser
+        self._hex = kwargs.get('hex', False)
+        self._sort = kwargs.get('sort', True)
+        self._flags = kwargs.get('flags', False)
+        self._copy_clipboard = kwargs.get('copy_clipboard', False)
+        self._print = kwargs.get('print', False)
+        self._indent_amt = 4
+        self._p_name = None
+        self._p_url = None
+        self._p_desc = None
+        _path = Path(os.path.dirname(__file__), 'template', 'const.tmpl')
+        if not _path.exists():
+            raise FileNotFoundError(f"unable to find templae file '{_path}'")
+        self._template_file = _path
+        self._template: str = self._get_template()
+
+    def _get_template(self):
+        with open(self._template_file) as f:
+            contents = f.read()
+        return contents
+
+    def write(self):
+        self._set_info()
+        self._set_template_data()
+        # if self._copy_clipboard:
+        #     pc.copy(self._template)
+        if self._print:
+            os.system('cls' if os.name == 'nt' else 'clear')
+            print(self._template)
+
+    def _set_template_data(self):
+        self._template = self._template.replace('{hex}', str(self._hex))
+        self._template = self._template.replace('{sort}', str(self._sort))
+        self._template = self._template.replace('{flags}', str(self._flags))
+        self._template = self._template.replace('{name}', self._p_name)
+        self._template = self._template.replace('{link}', self._p_url)
+        indent = ' ' * self._indent_amt
+        indented = textwrap.indent(self._p_desc, indent).lstrip()
+        self._template = self._template.replace('{desc}', indented)
+        indented = textwrap.indent(self._p_data, indent)
+        # indented = indented.lstrip()
+        self._template = self._template.replace('{data}', indented)
+        
+
+    def _write_file(self):
+        pass
+
+    def _set_info(self):
+        data = self._parser.get_info()
+        self._p_name = data['name']
+        self._p_desc = data['desc']
+        self._p_url = data['url']
+        self._p_data = self._parser.get_formated_data()
+
+
 def main():
     parser = argparse.ArgumentParser(description='const')
     parser.add_argument('-u', '--url',
@@ -182,14 +314,19 @@ def main():
         '-s', '--sort', help='Sort results', type=bool, default=True)
     parser.add_argument(
         '-d', '--dual-colon', help='Replace :: with .', type=bool, default=True)
+    
+    parser.add_argument(
+        '-f', '--flags', help='Treat as flags', type=bool, default=False)
+    parser.add_argument(
+        '-x', '--hex', help='Treat as hex', type=bool, default=False)
+    
     args = parser.parse_args()
     p = Parser(url=args.url, sort=args.sort,
                replace_dual_colon=args.dual_colon)
-
-    # print(p._get_data())
-    f_data = p.get_formated_data()
     print('')
-    print(f_data)
+    w = ConstWriter(parser=p, copy_clipboard=True, print=True, flags=args.flags, hex=args.hex)
+    w.write()
+ 
 
 
 if __name__ == '__main__':

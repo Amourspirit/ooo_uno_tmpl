@@ -64,7 +64,7 @@ class Make:
             Path(dest_dir).mkdir(parents=True, exist_ok=True)
 
     def _get_template_files(self):
-        dirname = str(self._root_dir)
+        dirname = str(self._root_dir / 'uno_obj')
         # https://stackoverflow.com/questions/20638040/glob-exclude-pattern
         # exclude files that start with _
         pattern = dirname + '/**/[!_]*.tmpl'
