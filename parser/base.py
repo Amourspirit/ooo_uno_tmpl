@@ -8,6 +8,7 @@ TYPE_MAP = {
     "short": "int",
     "long": "int",
     "float": "float",
+    "double": "float",
     "string": "str",
     "char": "str",
     "boolean": "bool"
