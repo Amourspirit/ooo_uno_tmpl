@@ -6,12 +6,12 @@ from bs4 import BeautifulSoup
 from bs4.element import ResultSet, SoupStrainer, Tag
 import requests
 from kwhelp.decorator import DecFuncEnum, RuleCheckAllKw, TypeCheckKw
-from kwhelp import rules
+from kwhelp import KwArg, rules
 from collections import namedtuple
 from base import WriteBase
 from pathlib import Path
 import textwrap
-# import pyperclip as pc
+import xerox # requires xclip - sudo apt-get install xclip
 dataitem = namedtuple(
     'dataitem', ['value', 'raw_value', 'name', 'datatype', 'lines'])
 
@@ -52,6 +52,7 @@ class Parser:
         Returns:
             Dict[str, str]: {
                 "name": "name of constant",
+                "fullname": "full name such as com.sun.star.awt.Command"
                 "desc": "description of constant",
                 "url": "Url to LibreOffice of constant"
             }
@@ -59,10 +60,12 @@ class Parser:
         if not self._url:
             raise ValueError('URL is not set')
         soup = BeautifulSoup(self.get_raw_html(), 'lxml')
+        full_name = self._get_full_name(soup=soup)
         name = self._get_name(soup=soup)
         desc = self._get_desc(soup=soup)
         info = {
             "name": name,
+            "fullname": full_name,
             "desc": desc,
             "url": self.url
         }
@@ -98,11 +101,11 @@ class Parser:
     
     
     def _get_name(self, soup: BeautifulSoup):
-        full = self._get_full_title(soup=soup)
+        full = self._get_full_name(soup=soup)
         parts = full.split('.')
         return parts[len(parts) - 1]
     
-    def _get_full_title(self, soup: BeautifulSoup):
+    def _get_full_name(self, soup: BeautifulSoup):
         if self._title_full is None:
             header = soup.find('div', class_='title').text.strip()
             header = header.replace('::', '.')
@@ -258,10 +261,14 @@ class ConstWriter(WriteBase):
         self._copy_clipboard = kwargs.get('copy_clipboard', False)
         self._print = kwargs.get('print', False)
         self._indent_amt = 4
+        self._write_file = kwargs.get('write_file', False)
+        self._file_full_path = None
         self._p_name = None
+        self._p_fullname = None
         self._p_url = None
         self._p_desc = None
-        _path = Path(os.path.dirname(__file__), 'template', 'const.tmpl')
+        self._path_dir = Path(os.path.dirname(__file__))
+        _path = Path(self._path_dir, 'template', 'const.tmpl')
         if not _path.exists():
             raise FileNotFoundError(f"unable to find templae file '{_path}'")
         self._template_file = _path
@@ -275,11 +282,17 @@ class ConstWriter(WriteBase):
     def write(self):
         self._set_info()
         self._set_template_data()
-        # if self._copy_clipboard:
-        #     pc.copy(self._template)
+        if self._copy_clipboard:
+            xerox.copy(self._template)
         if self._print:
             os.system('cls' if os.name == 'nt' else 'clear')
             print(self._template)
+        if self._write_file:
+            self._write_to_file()
+
+    def _write_to_file(self):
+        with open(self._file_full_path, 'w') as f:
+            f.write(self._template)
 
     def _set_template_data(self):
         self._template = self._template.replace('{hex}', str(self._hex))
@@ -293,19 +306,37 @@ class ConstWriter(WriteBase):
         indented = textwrap.indent(self._p_data, indent)
         # indented = indented.lstrip()
         self._template = self._template.replace('{data}', indented)
-        
-
-    def _write_file(self):
-        pass
 
     def _set_info(self):
         data = self._parser.get_info()
         self._p_name = data['name']
         self._p_desc = data['desc']
         self._p_url = data['url']
+        self._p_fullname = data['fullname']
         self._p_data = self._parser.get_formated_data()
+        if self._write_file:
+            self._file_full_path = self._get_uno_obj_path()
+        
 
+    def _get_uno_obj_path(self) -> Path:
+        root_path = self._path_dir.parent
+        name_parts = self._p_fullname.split('.')
+        # ignore com, sun, star
+        path_parts = name_parts[3:]
+        index = len(path_parts) -1
+        path_parts[index] = path_parts[index] + '.tmpl'
+        obj_path = root_path.joinpath(*path_parts)
+        self._mkdirp(obj_path.parent)
+        return obj_path
 
+def _main():
+    # for debugging
+    p = Parser(url='https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1awt_1_1Command.html')
+    print('')
+    w = ConstWriter(parser=p)
+    w._set_info()
+    print(w._get_uno_obj_path())
+    
 def main():
     parser = argparse.ArgumentParser(description='const')
     parser.add_argument('-u', '--url',
@@ -320,11 +351,19 @@ def main():
     parser.add_argument(
         '-x', '--hex', help='Treat as hex', type=bool, default=False)
     
+    parser.add_argument(
+        '-c', '--clipboard', help='Copy to clipboard', type=bool, default=False)
+    parser.add_argument(
+        '-p', '--print', help='print to terminal', type=bool, default=True)
+    
+    parser.add_argument(
+        '-w', '--write-file', help='Write file into obj_uno subfolder', type=bool, default=False)
+    
     args = parser.parse_args()
     p = Parser(url=args.url, sort=args.sort,
                replace_dual_colon=args.dual_colon)
     print('')
-    w = ConstWriter(parser=p, copy_clipboard=True, print=True, flags=args.flags, hex=args.hex)
+    w = ConstWriter(parser=p, copy_clipboard=args.clipboard, print=args.print, flags=args.flags, hex=args.hex, write_file=args.write_file)
     w.write()
  
 
