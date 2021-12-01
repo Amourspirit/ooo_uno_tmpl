@@ -11,7 +11,6 @@ import glob
 import subprocess
 import argparse
 import re
-camel_to_snake_pattern = re.compile(r'(?<!^)(?=[A-Z])')
 
 class CompareEnum(IntEnum):
     Before = -1

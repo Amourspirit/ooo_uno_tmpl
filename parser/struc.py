@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import os
 import argparse
-from typing import Dict, List, NamedTuple, Union
+from typing import Dict, List, NamedTuple, Set, Tuple, Union
 from bs4 import BeautifulSoup
 from bs4.element import ResultSet, SoupStrainer, Tag
 from kwhelp.decorator import DecFuncEnum, RuleCheckAllKw, TypeCheckKw
@@ -25,6 +25,7 @@ class Parser(ParserBase):
         super().__init__(**kwargs)
         self._data = None
         self._data_formated = None
+        self._auto_imports = set()
 
     # endregion init
     # region Info
@@ -124,6 +125,7 @@ class Parser(ParserBase):
                 return n_type
             # unknow type. wrap in quotes.
             # Todo: Consider auto import option for unknown types
+            self._auto_imports.add(in_type)
             return f"'{p_type}'"
 
         for itm in memitetms:
@@ -145,12 +147,20 @@ class Parser(ParserBase):
         return results
     # endregion Data
 
+    # region Properties
+    @property
+    def auto_imports(self) -> set:
+        """Specifies auto_imports"""
+        return self._auto_imports
+
+    # endregion Properties
 class StructWriter(WriteBase):
     @TypeCheckKw(arg_info={
         "sort": 0,
         "copy_clipboard": 0,
         "print": 0,
-        "write_file": 0
+        "write_file": 0,
+        "auto_import": 0
         },
         types=[bool],
         ftype=DecFuncEnum.METHOD)
@@ -159,6 +169,7 @@ class StructWriter(WriteBase):
         self._sort = kwargs.get('sort', True)
         self._copy_clipboard = kwargs.get('copy_clipboard', False)
         self._print = kwargs.get('print', False)
+        self._auto_import = kwargs.get('auto_import', True)
         self._indent_amt = 4
         self._write_file = kwargs.get('write_file', False)
         self._file_full_path = None
@@ -199,6 +210,7 @@ class StructWriter(WriteBase):
         indented = textwrap.indent(self._p_data, indent)
         # indented = indented.lstrip()
         self._template = self._template.replace('{data}', indented)
+        self._template = self._template.replace('{auto_import}', str(self._auto_imports()))
 
     def _write_to_file(self):
         with open(self._file_full_path, 'w') as f:
@@ -227,33 +239,96 @@ class StructWriter(WriteBase):
         self._mkdirp(obj_path.parent)
         return obj_path
 
+    def _auto_imports(self) -> List[Tuple[str, str]]:
+        results = []
+        if not self._auto_import:
+            return results
+        auto: Set[str] = self._parser.auto_imports
+        if len(auto) == 0:
+            return results
+        local_ns_str = self._p_fullname.rsplit('.', 1)[0]
+        local_parts = local_ns_str.split('.')
+
+        for name in auto:
+            name_ns_str = name.rsplit('.', 1)[0]
+            name_ns = name_ns_str.split('.')
+            if len(name_ns) == 1:
+                # this is a single word
+                # assume it is in the same namespace as this import
+                results.append((f'.{self._parser.camel_to_snake(name)}', f'{name}'))
+                continue
+            # struct_name = name_parts[len(name_parts)-1:][0]
+            struct_name = name.rsplit('.', 1)[1]
+            camel_name = self._parser.camel_to_snake(struct_name)
+            if name_ns_str == local_ns_str:
+                results.append((f'.{camel_name}', f'{struct_name}'))
+                continue
+            commmon_count = 0
+            for i, ns in enumerate(name_ns):
+                if ns != local_parts[i]:
+                    break
+                commmon_count += 1
+            if commmon_count > 0:
+                common_ns = name_ns[commmon_count:]
+                dot_ext = len(local_parts) - commmon_count
+                dot = "." * dot_ext
+                rel = ".".join(common_ns)
+                str_from = f'{dot}{rel}.{camel_name}'
+                results.append((str_from, struct_name))
+        return results
+        
+        
 def _main():
-    p = Parser(url='https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1awt_1_1KeyEvent.html')
-    formated = p.get_formated_data()
-    print(formated)
+    p = Parser(url='https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1awt_1_1SystemDependentXWindow.html')
+    w = StructWriter(parser=p, print=True, auto_import=True)
+    w.write()
 
 def main():
+    # http://pymotw.com/2/argparse/
     parser = argparse.ArgumentParser(description='const')
     parser.add_argument('-u', '--url',
                         help='Url to parse', type=str, required=True)
     parser.add_argument(
-        '-s', '--sort', help='Sort results', type=bool, default=True)
+        '-s', '--sort',
+        help='Sort results',
+        type=bool,
+        default=True)
     parser.add_argument(
         '-d', '--dual-colon', help='Replace :: with .', type=bool, default=True)
     
     parser.add_argument(
-        '-c', '--clipboard', help='Copy to clipboard', type=bool, default=False)
+        '-c',
+        help='Copy to clipboard',
+        dest='clipboard',
+        action='store_true',
+        default=False)
     parser.add_argument(
-        '-p', '--print', help='print to terminal', type=bool, default=True)
+        '-a', '--auto-import',
+        action='store_true',
+        dest='auto_import',
+        help='Auto import types that are not python types',
+        default=False)
+    # parser.add_argument(
+    #     '-p', '--print', help='print to terminal', type=bool, default=True)
     
     parser.add_argument(
-        '-w', '--write-file', help='Write file into obj_uno subfolder', type=bool, default=False)
+        '-w', '--write-file',
+        help='Write file into obj_uno subfolder',
+        action='store_true',
+        default=False)
     
+    parser.add_argument('-p', action='store_true', default=False,
+                    dest='print',
+                    help='Set a switch to true')
     args = parser.parse_args()
+    # print("auto", args.auto_import)
+    # print('print', args.print)
+    # return
     p = Parser(url=args.url, sort=args.sort,
                replace_dual_colon=args.dual_colon)
     print('')
-    w = StructWriter(parser=p, copy_clipboard=args.clipboard, print=args.print, write_file=args.write_file)
+    w = StructWriter(parser=p, copy_clipboard=args.clipboard, print=args.print, write_file=args.write_file,
+                     auto_import=args.auto_import)
     w.write()
     
 if __name__ == '__main__':
