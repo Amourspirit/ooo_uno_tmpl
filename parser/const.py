@@ -4,11 +4,10 @@ import argparse
 from typing import Dict, List, Union
 from bs4 import BeautifulSoup
 from bs4.element import ResultSet, SoupStrainer, Tag
-import requests
 from kwhelp.decorator import DecFuncEnum, RuleCheckAllKw, TypeCheckKw
 from kwhelp import KwArg, rules
 from collections import namedtuple
-from base import WriteBase
+from base import WriteBase, ParserBase
 from pathlib import Path
 import textwrap
 import xerox # requires xclip - sudo apt-get install xclip
@@ -16,30 +15,16 @@ dataitem = namedtuple(
     'dataitem', ['value', 'raw_value', 'name', 'datatype', 'lines'])
 
 
-class Parser:
+class Parser(ParserBase):
     
     # region init
     @RuleCheckAllKw(arg_info={"url": 0, "sort": 1, "replace_dual_colon": 1},
                     rules=[rules.RuleStrNotNullEmptyWs, rules.RuleBool],
                     ftype=DecFuncEnum.METHOD)
     def __init__(self, **kwargs):
-        self._indent = '    '
-        self._url = kwargs.get('url', '')
-        self._raw = ''
-        self._sort = kwargs.get('sort', True)
-        self._replace_dual_colon = kwargs.get('replace_dual_colon', True)
-        self._title_full = None
+        super().__init__(**kwargs)
 
     # endregion init
-
-    # region request
-    def get_request_text(self, url: str) -> str:
-        response = requests.get(url=url)
-        if response.status_code != 200:
-            raise Exception('bad response code:' + str(response.status_code))
-        html_text = response.text
-        return html_text
-    # endregion request
 
     # region Info
     def get_info(self) -> Dict[str, str]:
@@ -67,55 +52,13 @@ class Parser:
             "url": self.url
         }
         return info
-    
-    def _get_desc(self, soup: BeautifulSoup):
-        contents = soup.find('div', class_='contents')
-        block = contents.find('div', class_='textblock')
-        soup_lines:ResultSet = block.find_all('p')
-        lines = []
-        for i, ln in enumerate(soup_lines):
-            s = ln.text.strip()
-            if i > 0:
-                lines.append("")
-            lines.append(s)
-        since = self._get_since(block=block)
-        if len(since) > 0:
-            lines.append('')
-            lines.extend(since)
-        result = "\n".join(lines)
-        return result
-    
-    def _get_since(self, block: Tag) -> List[str]:
-        result = []
-        since = block.find('dl', class_='section since')
-        if since:
-            s = since.find('dd').text.strip()
-            result.append("**Since**")
-            result.append("")
-            result.append(self._indent + s)
-        return result
-            
-    
-    
-    def _get_name(self, soup: BeautifulSoup):
-        full = self._get_full_name(soup=soup)
-        parts = full.split('.')
-        return parts[len(parts) - 1]
-    
-    def _get_full_name(self, soup: BeautifulSoup):
-        if self._title_full is None:
-            header = soup.find('div', class_='title').text.strip()
-            header = header.replace('::', '.')
-            self._title_full = header.split()[0]
-        return self._title_full
-        
-        
-        
+
+
     # endregion Info
 
     # region Data
 
-    def get_table_data(self) -> List[dataitem]:
+    def get_data(self) -> List[dataitem]:
         """
         Gets constants data
 
@@ -142,7 +85,7 @@ class Parser:
         return result.strip()
 
     def get_formated_data(self):
-        data = self.get_table_data()
+        data = self.get_data()
         lines = []
         for itm in data:
             s = f'"{itm.name}": ["{itm.raw_value}"'
@@ -202,51 +145,6 @@ class Parser:
         return tbl.find_all(check_row)
     # endregion Data
 
-    # region internal Non specific methods
-    def _get_number(self, input: str) -> Union[str, int, float]:
-        if not input:
-            return ''
-        try:
-            return int(input)
-        except ValueError:
-            pass
-        try:
-            return int(input, 16)
-        except ValueError:
-            pass
-        try:
-            return float(input)
-        except ValueError:
-            pass
-        return input
-    # endregion internal Non specific methods
-
-    # region raw html
-
-    def get_raw_html(self) -> str:
-        if not self._url:
-            return ''
-        if not self._raw:
-            self._raw = self.get_request_text(self.url)
-        return self._raw
-
-    # endregion raw html
-
-    # region Properties
-    @property
-    def url(self) -> str:
-        """Specifies url
-
-            :getter: Gets url value.
-            :setter: Sets url value.
-        """
-        return self._url
-
-    @url.setter
-    def url(self, value: str):
-        self._url = value
-
-    # endregion Properties
 
 
 class ConstWriter(WriteBase):
@@ -266,7 +164,7 @@ class ConstWriter(WriteBase):
         self._sort = kwargs.get('sort', True)
         self._flags = kwargs.get('flags', False)
         self._copy_clipboard = kwargs.get('copy_clipboard', False)
-        self._print = kwargs.get('print', False)
+        self._print = kwargs.get('print', True)
         self._indent_amt = 4
         self._write_file = kwargs.get('write_file', False)
         self._file_full_path = None
@@ -341,8 +239,7 @@ def _main():
     p = Parser(url='https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1awt_1_1Command.html')
     print('')
     w = ConstWriter(parser=p, write_file=True)
-    w._set_info()
-    print(w._get_uno_obj_path())
+    w.write()
     
 def main():
     parser = argparse.ArgumentParser(description='const')
