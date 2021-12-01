@@ -3,6 +3,7 @@ from pathlib import Path
 from bs4 import BeautifulSoup
 from bs4.element import ResultSet, Tag
 import requests
+import re
 
 TYPE_MAP = {
     "short": "int",
@@ -141,6 +142,22 @@ class ParserBase(object):
         return soup.find_all('div', class_='memitem')
 
     # endregion Data
+
+    # region util
+    def camel_to_snake(self, name: str)-> str:
+        """
+        Converts Camel case to snake clase
+
+        Args:
+            name (str): Camel name
+
+        Returns:
+            str: snake case
+        """
+        _name = re.sub('(.)([A-Z][a-z]+)', r'\1_\2', name)
+        return re.sub('([a-z0-9])([A-Z])', r'\1_\2', _name).lower()
+
+    # endregion util
 
      # region Properties
     @property
