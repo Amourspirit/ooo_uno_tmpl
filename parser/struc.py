@@ -159,7 +159,8 @@ class StructWriter(WriteBase):
         "sort": 0,
         "copy_clipboard": 0,
         "print": 0,
-        "write_file": 0
+        "write_file": 0,
+        "auto_import": 0
         },
         types=[bool],
         ftype=DecFuncEnum.METHOD)
@@ -247,10 +248,15 @@ class StructWriter(WriteBase):
             return results
         local_ns_str = self._p_fullname.rsplit('.', 1)[0]
         local_parts = local_ns_str.split('.')
-        
+
         for name in auto:
             name_ns_str = name.rsplit('.', 1)[0]
             name_ns = name_ns_str.split('.')
+            if len(name_ns) == 1:
+                # this is a single word
+                # assume it is in the same namespace as this import
+                results.append((f'.{self._parser.camel_to_snake(name)}', f'{name}'))
+                continue
             # struct_name = name_parts[len(name_parts)-1:][0]
             struct_name = name.rsplit('.', 1)[1]
             camel_name = self._parser.camel_to_snake(struct_name)
@@ -273,30 +279,51 @@ class StructWriter(WriteBase):
         
         
 def _main():
-    p = Parser(url='https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1awt_1_1EnhancedMouseEvent.html')
-    w = StructWriter(parser=p, print=True)
+    p = Parser(url='https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1awt_1_1SystemDependentXWindow.html')
+    w = StructWriter(parser=p, print=True, auto_import=True)
     w.write()
 
 def main():
+    # http://pymotw.com/2/argparse/
     parser = argparse.ArgumentParser(description='const')
     parser.add_argument('-u', '--url',
                         help='Url to parse', type=str, required=True)
     parser.add_argument(
-        '-s', '--sort', help='Sort results', type=bool, default=True)
+        '-s', '--sort',
+        help='Sort results',
+        type=bool,
+        default=True)
     parser.add_argument(
         '-d', '--dual-colon', help='Replace :: with .', type=bool, default=True)
     
     parser.add_argument(
-        '-c', '--clipboard', help='Copy to clipboard', type=bool, default=False)
+        '-c',
+        help='Copy to clipboard',
+        dest='clipboard',
+        action='store_true',
+        default=False)
     parser.add_argument(
-        '-a', '--auto-import', help='Auto import types that are not python types', type=bool, default=True)
-    parser.add_argument(
-        '-p', '--print', help='print to terminal', type=bool, default=True)
+        '-a', '--auto-import',
+        action='store_true',
+        dest='auto_import',
+        help='Auto import types that are not python types',
+        default=False)
+    # parser.add_argument(
+    #     '-p', '--print', help='print to terminal', type=bool, default=True)
     
     parser.add_argument(
-        '-w', '--write-file', help='Write file into obj_uno subfolder', type=bool, default=False)
+        '-w', '--write-file',
+        help='Write file into obj_uno subfolder',
+        action='store_true',
+        default=False)
     
+    parser.add_argument('-p', action='store_true', default=False,
+                    dest='print',
+                    help='Set a switch to true')
     args = parser.parse_args()
+    # print("auto", args.auto_import)
+    # print('print', args.print)
+    # return
     p = Parser(url=args.url, sort=args.sort,
                replace_dual_colon=args.dual_colon)
     print('')
