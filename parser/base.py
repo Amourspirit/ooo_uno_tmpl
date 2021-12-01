@@ -112,6 +112,26 @@ class ParserBase(object):
         return result
     # endregion Info
 
+    # region Tidy
+    def _clean_str(self, input: str) -> str:
+        """
+        Cleans and encodes string for template replacemnt
+        """
+        result = input
+        if self._replace_dual_colon:
+            result = result.replace("::", ".")
+        result = result.replace('\\n', '\\\\\\\\n').replace('\\r', '\\\\\\\\r')
+        result = result.replace('"', '\\"')
+        return result.strip()
+
+    # endregion Tidy
+
+    # region Data
+    def _get_memitems(self, soup: BeautifulSoup) -> ResultSet:
+        return soup.find_all('div', class_='memitem')
+
+    # endregion Data
+
      # region Properties
     @property
     def url(self) -> str:

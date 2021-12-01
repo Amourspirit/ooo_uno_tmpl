@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import os
 import argparse
-from typing import Dict, List, Union
+from typing import Dict, List, NamedTuple, Union
 from bs4 import BeautifulSoup
 from bs4.element import ResultSet, SoupStrainer, Tag
 from kwhelp.decorator import DecFuncEnum, RuleCheckAllKw, TypeCheckKw
@@ -11,6 +11,10 @@ from base import WriteBase, ParserBase
 from pathlib import Path
 import textwrap
 import xerox # requires xclip - sudo apt-get install xclip
+
+dataitem = namedtuple(
+    'dataitem', ['name', 'datatype', 'lines'])
+
 
 class Parser(ParserBase):
     # region init
@@ -47,9 +51,26 @@ class Parser(ParserBase):
             "url": self.url
         }
         return info
-        
-
     # endregion Info
+
+    # region Data
+    def get_data(self) -> List[dataitem]:
+        if not self._url:
+            raise ValueError('URL is not set')
+        soup = BeautifulSoup(self.get_raw_html(), 'lxml')
+        items = self._get_memitems(soup=soup)
+
+    def _get_struct_details(self, memitetms: ResultSet) -> List[dataitem]:
+        result = []
+        for itm in memitetms:
+            # text in format of com::sun::star::awt::AdjustmentType Type
+            text: str = itm.find("td", class_='memname',
+                                 recursive=True).text.strip().replace('::', '.')
+            parts = text.split()
+            _type = parts[0]
+            name = parts[1]
+            
+    # endregion Data
 
 class ConstWriter(WriteBase):
     @TypeCheckKw(arg_info={

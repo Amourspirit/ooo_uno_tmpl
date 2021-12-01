@@ -76,14 +76,6 @@ class Parser(ParserBase):
         const_info = self._get_const_details(memitetms=items)
         return const_info
 
-    def _clean_desc(self, desc: str) -> str:
-        result = desc
-        if self._replace_dual_colon:
-            result = result.replace("::", ".")
-        result = result.replace('\\n', '\\\\\\\\n').replace('\\r', '\\\\\\\\r')
-        result = result.replace('"', '\\"')
-        return result.strip()
-
     def get_formated_data(self):
         data = self.get_data()
         lines = []
@@ -94,7 +86,7 @@ class Parser(ParserBase):
                 for j, line in enumerate(itm.lines):
                     if j > 0:
                         s_ln += ',\n    "",\n'
-                    s_ln += f'    "{self._clean_desc(line)}"'
+                    s_ln += f'    "{self._clean_str(line)}"'
                 s_ln += '\n]'
                 s += s_ln
             s += ']'
@@ -104,6 +96,16 @@ class Parser(ParserBase):
 
     def _get_const_details(self, memitetms: ResultSet) -> List[dataitem]:
         results = []
+        def get_doc_lines(item_tag:Tag) -> list:
+            docs = item_tag.find('div', class_='memdoc')
+            lines = []
+            if docs:
+                doc_lines = docs.find_all('p')
+                if doc_lines:
+                    for ln in doc_lines:
+                        lines.append(ln.text)
+            return lines
+
         for itm in memitetms:
             text: str = itm.find("td", class_='memname',
                                  recursive=True).text.replace(' ', ',')
@@ -112,13 +114,7 @@ class Parser(ParserBase):
             name = parts[2]
             raw_value = parts[4]
             value = self._get_number(raw_value)
-            docs = itm.find('div', class_='memdoc')
-            lines = []
-            if docs:
-                doc_lines = docs.find_all('p')
-                if doc_lines:
-                    for ln in doc_lines:
-                        lines.append(ln.text)
+            lines = get_doc_lines(itm)
             di = dataitem(value=value, raw_value=raw_value, name=name,
                           datatype=_type, lines=lines)
             results.append(di)
@@ -126,8 +122,7 @@ class Parser(ParserBase):
             results.sort()
         return results
 
-    def _get_memitems(self, soup: BeautifulSoup) -> ResultSet:
-        return soup.find_all('div', class_='memitem')
+        
 
     def _get_tbl(self, soup: BeautifulSoup) -> ResultSet:
         return soup.find('table', class_='memberdecls')
