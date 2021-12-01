@@ -3,6 +3,15 @@ from pathlib import Path
 from bs4 import BeautifulSoup
 from bs4.element import ResultSet, Tag
 import requests
+
+TYPE_MAP = {
+    "short": "int",
+    "long": "int",
+    "float": "float",
+    "string": "str",
+    "char": "str",
+    "boolean": "bool"
+}
 class WriteBase(object):
     def _mkdirp(self, dest_dir):
         # Python ≥ 3.5

@@ -23,6 +23,8 @@ class Parser(ParserBase):
                     ftype=DecFuncEnum.METHOD)
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
+        self._data = None
+        self._data_formated = None
 
     # endregion init
 
@@ -68,15 +70,20 @@ class Parser(ParserBase):
         Raises:
             ValueError: If url is not set.
         """
+        if self._data:
+            return self._data
         if not self._url:
             raise ValueError('URL is not set')
         soup = BeautifulSoup(self.get_raw_html(), 'lxml')
 
         items = self._get_memitems(soup=soup)
         const_info = self._get_const_details(memitetms=items)
-        return const_info
+        self._data = const_info
+        return self._data
 
     def get_formated_data(self):
+        if self._data_formated:
+            return self._data_formated
         data = self.get_data()
         lines = []
         for itm in data:
@@ -92,7 +99,8 @@ class Parser(ParserBase):
             s += ']'
             lines.append(s)
         result = ',\n'.join(lines)
-        return result
+        self._data_formated = result
+        return self._data_formated
 
     def _get_const_details(self, memitetms: ResultSet) -> List[dataitem]:
         results = []
