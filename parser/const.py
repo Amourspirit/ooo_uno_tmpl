@@ -16,9 +16,6 @@ dataitem = namedtuple(
     'dataitem', ['value', 'raw_value', 'name', 'datatype', 'lines'])
 
 
-    
-
-
 class Parser:
     
     # region init
@@ -253,6 +250,16 @@ class Parser:
 
 
 class ConstWriter(WriteBase):
+    @TypeCheckKw(arg_info={
+        "hex": 0,
+        "sort": 0,
+        "flags": 0,
+        "copy_clipboard": 0,
+        "print": 0,
+        "write_file": 0
+        },
+        types=[bool],
+        ftype=DecFuncEnum.METHOD)
     def __init__(self, parser:Parser, **kwargs):
         self._parser = parser
         self._hex = kwargs.get('hex', False)
@@ -319,13 +326,13 @@ class ConstWriter(WriteBase):
         
 
     def _get_uno_obj_path(self) -> Path:
-        root_path = self._path_dir.parent
+        uno_obj_path = Path(self._path_dir.parent, 'uno_obj')
         name_parts = self._p_fullname.split('.')
         # ignore com, sun, star
         path_parts = name_parts[3:]
         index = len(path_parts) -1
         path_parts[index] = path_parts[index] + '.tmpl'
-        obj_path = root_path.joinpath(*path_parts)
+        obj_path = uno_obj_path.joinpath(*path_parts)
         self._mkdirp(obj_path.parent)
         return obj_path
 
@@ -333,7 +340,7 @@ def _main():
     # for debugging
     p = Parser(url='https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1awt_1_1Command.html')
     print('')
-    w = ConstWriter(parser=p)
+    w = ConstWriter(parser=p, write_file=True)
     w._set_info()
     print(w._get_uno_obj_path())
     
