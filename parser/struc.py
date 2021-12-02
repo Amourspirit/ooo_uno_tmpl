@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 import os
+import sys
 import argparse
 from typing import Dict, List, NamedTuple, Set, Tuple, Union
 from bs4 import BeautifulSoup
@@ -11,6 +12,9 @@ from base import WriteBase, ParserBase, TYPE_MAP
 from pathlib import Path
 import textwrap
 import xerox # requires xclip - sudo apt-get install xclip
+from logger.log_handle import get_logger
+
+logger = get_logger(Path(__file__).stem)
 
 dataitem = namedtuple(
     'dataitem', ['name', 'datatype', 'orig_type', 'lines'])
@@ -41,32 +45,38 @@ class Parser(ParserBase):
                 "url": "Url to LibreOffice of constant"
             }
         """
-        if not self._url:
-            raise ValueError('URL is not set')
-        soup = BeautifulSoup(self.get_raw_html(), 'lxml')
-        full_name = self._get_full_name(soup=soup)
-        name = self._get_name(soup=soup)
-        desc = self._get_desc(soup=soup)
-        info = {
-            "name": name,
-            "fullname": full_name,
-            "desc": desc,
-            "url": self.url
-        }
-        return info
+        try:
+            if not self._url:
+                raise ValueError('URL is not set')
+            soup = BeautifulSoup(self.get_raw_html(), 'lxml')
+            full_name = self._get_full_name(soup=soup)
+            name = self._get_name(soup=soup)
+            desc = self._get_desc(soup=soup)
+            info = {
+                "name": name,
+                "fullname": full_name,
+                "desc": desc,
+                "url": self.url
+            }
+            return info
+        except Exception as e:
+            logger.error(e)
     # endregion Info
 
     # region Data
     def get_data(self) -> List[dataitem]:
         if self._data:
             return self._data
-        if not self._url:
-            raise ValueError('URL is not set')
-        soup = BeautifulSoup(self.get_raw_html(), 'lxml')
-        items = self._get_memitems(soup=soup)
-        struct_info = self._get_struct_details(memitetms=items)
-        self._data = struct_info
-        return self._data
+        try:
+            if not self._url:
+                raise ValueError('URL is not set')
+            soup = BeautifulSoup(self.get_raw_html(), 'lxml')
+            items = self._get_memitems(soup=soup)
+            struct_info = self._get_struct_details(memitetms=items)
+            self._data = struct_info
+            return self._data
+        except Exception as e:
+            logger.error(e)
 
     def get_formated_data(self):
         if self._data_formated:
@@ -87,23 +97,26 @@ class Parser(ParserBase):
             return s_ln
 
         data = self.get_data()
-        lines = []
-        
-        for itm in data:
-            s = '{\n'
-            s += self._indent + f'"name": "{itm.name}",\n'
-            s += self._indent + f'"type": "{itm.datatype}",\n'
-            s += self._indent + f'"orig_type": "{itm.orig_type}",\n'
-            if len(itm.lines) > 0:
-               ln_str = get_lines(itm.lines)
-               s += self._indent + f'"lines": {ln_str}'
-            else:
-                s += self._indent + '"lines": ""'
-            s += '\n}'
-            lines.append(s)
-        result = ',\n'.join(lines)
-        self._data_formated = result
-        return self._data_formated
+        try:
+            lines = []
+            
+            for itm in data:
+                s = '{\n'
+                s += self._indent + f'"name": "{itm.name}",\n'
+                s += self._indent + f'"type": "{itm.datatype}",\n'
+                s += self._indent + f'"orig_type": "{itm.orig_type}",\n'
+                if len(itm.lines) > 0:
+                    ln_str = get_lines(itm.lines)
+                    s += self._indent + f'"lines": {ln_str}'
+                else:
+                    s += self._indent + '"lines": ""'
+                s += '\n}'
+                lines.append(s)
+            result = ',\n'.join(lines)
+            self._data_formated = result
+            return self._data_formated
+        except Exception as e:
+            logger.error(e)
 
     def _get_struct_details(self, memitetms: ResultSet) -> List[dataitem]:
         results = []
@@ -155,6 +168,7 @@ class Parser(ParserBase):
 
     # endregion Properties
 class StructWriter(WriteBase):
+
     @TypeCheckKw(arg_info={
         "sort": 0,
         "copy_clipboard": 0,
@@ -192,13 +206,19 @@ class StructWriter(WriteBase):
     def write(self):
         self._set_info()
         self._set_template_data()
-        if self._copy_clipboard:
-            xerox.copy(self._template)
-        if self._print:
-            os.system('cls' if os.name == 'nt' else 'clear')
-            print(self._template)
-        if self._write_file:
-            self._write_to_file()
+        logger.info("Processing %s", self._p_fullname)
+        try:
+            if self._copy_clipboard:
+                xerox.copy(self._template)
+                logger.debug('copied to clipbord')
+            if self._print:
+                logger.debug('Printing to terminal')
+                os.system('cls' if os.name == 'nt' else 'clear')
+                print(self._template)
+            if self._write_file:
+                self._write_to_file()
+        except Exception as e:
+            logger.exception(e)
 
     def _set_template_data(self):
         self._template = self._template.replace('{sort}', str(self._sort))
@@ -215,7 +235,7 @@ class StructWriter(WriteBase):
     def _write_to_file(self):
         with open(self._file_full_path, 'w') as f:
             f.write(self._template)
-
+        logger.info("Created file: %s", self._file_full_path)
 
     def _set_info(self):
         data = self._parser.get_info()
@@ -237,6 +257,7 @@ class StructWriter(WriteBase):
         path_parts[index] = path_parts[index] + '.tmpl'
         obj_path = uno_obj_path.joinpath(*path_parts)
         self._mkdirp(obj_path.parent)
+        self._create_sys_links(obj_path.parent)
         return obj_path
 
     def _auto_imports(self) -> List[Tuple[str, str]]:
@@ -284,6 +305,7 @@ def _main():
     w.write()
 
 def main():
+    logger.info('Executing command: %s', sys.argv[1:])
     # http://pymotw.com/2/argparse/
     parser = argparse.ArgumentParser(description='const')
     parser.add_argument(

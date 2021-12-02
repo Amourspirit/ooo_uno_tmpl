@@ -88,9 +88,9 @@ class Parser(ParserBase):
             logger.error(e)
 
     def get_formated_data(self):
+        if self._data_formated:
+            return self._data_formated
         try:
-            if self._data_formated:
-                return self._data_formated
             data = self.get_data()
             lines = []
             for itm in data:
@@ -216,7 +216,8 @@ class ConstWriter(WriteBase):
     def _write_to_file(self):
         with open(self._file_full_path, 'w') as f:
             f.write(self._template)
-
+        logger.info("Created file: %s", self._file_full_path)
+        
     def _set_template_data(self):
         self._template = self._template.replace('{hex}', str(self._hex))
         self._template = self._template.replace('{sort}', str(self._sort))

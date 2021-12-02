@@ -13,7 +13,7 @@ from pathlib import Path
 from typing import Iterable, List, Union
 sys.path.insert(0, os.path.abspath('..'))
 from logger.log_handle import get_logger
-logger = get_logger(Path(__file__).stem)
+logger = get_logger(__name__)
 
 TYPE_MAP = {
     "short": "int",
