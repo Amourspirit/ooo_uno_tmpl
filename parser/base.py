@@ -1,13 +1,19 @@
-from typing import Iterable, List, Union
-from pathlib import Path
+import os
+import sys
+import re
+import requests
+import textwrap
+from abc import ABC, abstractmethod
 from bs4 import BeautifulSoup
 from bs4.element import ResultSet, Tag
-import requests
-import re
+from glob import glob
 from kwhelp.decorator import DecFuncEnum, RuleCheckAll
 from kwhelp import rules
-from abc import ABC, abstractmethod
-import textwrap
+from pathlib import Path
+from typing import Iterable, List, Union
+sys.path.insert(0, os.path.abspath('..'))
+from logger.log_handle import get_logger
+logger = get_logger(Path(__file__).stem)
 
 TYPE_MAP = {
     "short": "int",
@@ -262,17 +268,35 @@ class WriteBase(object):
         else:
             Path(dest_dir).mkdir(parents=True, exist_ok=True)
     
-    def _get_rel_template_path(self, dest: Path):
-        tp = self._get_template_path()
-        rel = tp.relative_to(dest)
-        return rel
-    
     def _get_project_path(self) -> Path:
-        return Path(__file__).parent
-    
-    def _get_template_path(self):
+        return Path(__file__).parent.parent
+
+    def _get_template_path(self) -> Path:
         project_path = self._get_project_path()
         return project_path.joinpath('template')
+
+    def _get_template_files(self) -> List[str]:
+        p = self._get_template_path()
+        pattern = str(p) + '/_*.py'
+        files = glob(pattern, recursive=False)
+        return files
+
+    def _create_sys_links(self, dest: Path):
+        files = self._get_template_files()
+        rel = Path('../../template')
+        for file in files:
+            try:
+                p_file = Path(file)
+                rel_file = rel.joinpath(p_file.name)
+                dst_file = dest / p_file.name
+                os.symlink(
+                    src=rel_file,
+                    dst=dst_file
+                )
+                msg = f"Created system link: {dst_file} -> {rel_file}"
+                logger.info(msg)
+            except FileExistsError:
+                continue
 
 class ParserBase(object):
     def __init__(self, **kwargs):

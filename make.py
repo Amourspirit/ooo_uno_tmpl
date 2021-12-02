@@ -11,7 +11,9 @@ import glob
 import subprocess
 import argparse
 import re
+from logger.log_handle import get_logger
 
+logger = get_logger(Path(__file__).stem)
 class CompareEnum(IntEnum):
     Before = -1
     Equal = 0
@@ -40,6 +42,7 @@ class Make:
         self._force_compile = bool(kwargs.get('force_compile', False))
         if os.path.exists(str(self._scratch)):
             if self._clean:
+                logger.info('Deleting %s', str(self._scratch))
                 shutil.rmtree(str(self._scratch))
         self._mkdirp(self._scratch)
         self._make()
@@ -49,11 +52,12 @@ class Make:
         for file in files:
             try:
                 if not self._is_skip_compile(tmpl_file=file):
+                    logger.info('Compiling file: %s', file)
                     self._compile(tmpl_file=file)
                 py_file = self._get_py_path(tmpl_file=file)
                 self._write(py_file)
-            except Exception:
-                print(Exception)
+            except Exception as e:
+                logger.error(e)
 
     def _mkdirp(self, dest_dir):
         # Python ≥ 3.5
@@ -88,9 +92,9 @@ class Make:
         cmd_str = f"cheetah compile --nobackup {tmpl_file}"
         res = subprocess.run(cmd_str.split())
         if res.stdout:
-            print(res.stdout)
+            logger.info(res.stdout)
         if res.stderr:
-            print(res.stderr)
+            logger.error(res.stderr)
 
     def _get_scratch_path(self, tmpl_file) -> Path:
         p_file = Path(tmpl_file)
@@ -114,25 +118,34 @@ class Make:
     def _write(self, py_file):
         f = Path(py_file)
         p_out = self._get_scratch_path(tmpl_file=py_file)
-        cmd_str = f"python {py_file}"
         with open(p_out, "w") as outfile:
             subprocess.run([sys.executable, py_file], stdout=outfile)
 
 
 def main():
+    if len(sys.argv) > 1:
+        logger.info('Executing command: %s', sys.argv[1:])
+    else:
+        logger.info('Running with no args.')
     parser = argparse.ArgumentParser(description='make')
-    parser.add_argument('-f', '--force-compile',
-                        help='Force Compile of templates', type=bool, default=False)
     parser.add_argument(
-        '-c', '--clean-scratch', help='Wipes all files in scratch', type=bool, default=False)
+        '-f', '--force-compile',
+        help='Force Compile of templates',
+        action='store_true',
+        dest='force_compile',
+        default=False)
+    parser.add_argument(
+        '-c', '--clean-scratch',
+        help='Wipes all files in scratch',
+        action='store_true',
+        dest='clean_scratch',
+        default=False)
     args = parser.parse_args()
-    # print("clean", args.clean_scratch)
-    # /home/paul/Documents/Projects/Python/Cheeta3/ooo_uno/uno_obj/style/ParagraphAdjust.tmpl
-    make = Make(force_compile=args.force_compile, clean=args.clean_scratch)
-    print('Finished!')
-    # f = '/home/paul/Documents/Projects/Python/Cheeta3/ooo_uno/uno_obj/style/ParagraphAdjust.py'
-    # make._write(tmpl_file=f)
-
+    try:
+        make = Make(force_compile=args.force_compile, clean=args.clean_scratch)
+    except Exception as e:
+        logger.error(e)
+    logger.info('Finished!')
 
 if __name__ == '__main__':
     main()

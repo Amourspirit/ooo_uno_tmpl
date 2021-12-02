@@ -11,8 +11,6 @@ from base import TagsStrObj, WriteBase, ParserBase, SoupObj, UrlObj, BlockObj
 from pathlib import Path
 import textwrap
 import xerox # requires xclip - sudo apt-get install xclip
-sys.path.insert(0, os.path.abspath('..'))
-print(sys.path)
 from logger.log_handle import get_logger
 
 logger = get_logger(Path(__file__).stem)
@@ -291,6 +289,7 @@ class EnumWriter(WriteBase):
         path_parts.append(self._p_name + '.tmpl')
         obj_path = uno_obj_path.joinpath(*path_parts)
         self._mkdirp(obj_path.parent)
+        self._create_sys_links(dest=obj_path.parent)
         return obj_path
 
 
