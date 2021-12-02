@@ -286,21 +286,28 @@ def _main():
 def main():
     # http://pymotw.com/2/argparse/
     parser = argparse.ArgumentParser(description='const')
-    parser.add_argument('-u', '--url',
-                        help='Url to parse', type=str, required=True)
     parser.add_argument(
-        '-s', '--sort',
-        help='Sort results',
-        type=bool,
+        '-u', '--url',
+        help='Source Url',
+        type=str,
+        required=True)
+    parser.add_argument(
+        '-s', '--no-sort',
+        help='No sorting of results',
+        action='store_false',
+        dest='sort',
         default=True)
     parser.add_argument(
-        '-d', '--dual-colon', help='Replace :: with .', type=bool, default=True)
-    
+        '-d', '--no-dual',
+        help='Do NOT replace :: with .',
+        action='store_false',
+        dest='dual_colon',
+        default=True)
     parser.add_argument(
-        '-c',
+        '-c', '--clipboard',
         help='Copy to clipboard',
-        dest='clipboard',
         action='store_true',
+        dest='clipboard',
         default=False)
     parser.add_argument(
         '-a', '--auto-import',

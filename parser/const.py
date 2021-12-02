@@ -246,25 +246,53 @@ def _main():
     
 def main():
     parser = argparse.ArgumentParser(description='const')
-    parser.add_argument('-u', '--url',
-                        help='Url to parse', type=str, required=True)
     parser.add_argument(
-        '-s', '--sort', help='Sort results', type=bool, default=True)
+        '-u', '--url',
+        help='Source Url',
+        type=str,
+        required=True)
     parser.add_argument(
-        '-d', '--dual-colon', help='Replace :: with .', type=bool, default=True)
-    
+        '-s', '--no-sort',
+        help='No sorting of results',
+        action='store_false',
+        dest='sort',
+        default=True)
     parser.add_argument(
-        '-f', '--flags', help='Treat as flags', type=bool, default=False)
+        '-d', '--no-dual',
+        help='Do NOT replace :: with .',
+        action='store_false',
+        dest='dual_colon',
+        default=True)
     parser.add_argument(
-        '-x', '--hex', help='Treat as hex', type=bool, default=False)
-    
+        '-f', '--flags',
+        help='Treat as flags',
+        action='store_true',
+        dest='flags',
+        default=False)
     parser.add_argument(
-        '-c', '--clipboard', help='Copy to clipboard', type=bool, default=False)
+        '-x', '--hex',
+        help='Treat as hex',
+        action='store_true',
+        dest='hex',
+        default=False)
     parser.add_argument(
-        '-p', '--print', help='print to terminal', type=bool, default=True)
-    
+        '-c', '--clipboard',
+        help='Copy to clipboard',
+        action='store_true',
+        dest='clipboard',
+        default=False)
     parser.add_argument(
-        '-w', '--write-file', help='Write file into obj_uno subfolder', type=bool, default=False)
+        '-p', '--no-print',
+        help='Do NOT print to terminal',
+        action='store_false',
+        dest='print',
+        default=True)
+    parser.add_argument(
+        '-w', '--write',
+        help='Write file into obj_uno subfolder',
+        action='store_true',
+        dest='write',
+        default=False)
     
     args = parser.parse_args()
     p = Parser(url=args.url, sort=args.sort,

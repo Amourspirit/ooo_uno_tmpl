@@ -1,9 +1,13 @@
-from typing import List, Union
+from typing import Iterable, List, Union
 from pathlib import Path
 from bs4 import BeautifulSoup
 from bs4.element import ResultSet, Tag
 import requests
 import re
+from kwhelp.decorator import DecFuncEnum, RuleCheckAll
+from kwhelp import rules
+from abc import ABC, abstractmethod
+import textwrap
 
 TYPE_MAP = {
     "short": "int",
@@ -14,6 +18,242 @@ TYPE_MAP = {
     "char": "str",
     "boolean": "bool"
 }
+
+def str_clean(input: str, **kwargs) -> str:
+        """
+        Cleans and encodes string for template replacemnt
+        
+        Keyword Arguments:
+            replace_dual (bool, optional): Replace ``::`` with ``.`` Default ``True``
+        """
+        _replace_dual = bool(kwargs.get('replace_dual', True))
+        result = input
+        if _replace_dual:
+            result = result.replace("::", ".")
+        result = result.replace('\\n', '\\\\\\\\n').replace('\\r', '\\\\\\\\r')
+        result = result.replace('"', '\\"')
+        return result.strip()
+class ResponseObj:
+    @RuleCheckAll(rules.RuleStrNotNullEmptyWs, ftype=DecFuncEnum.METHOD)
+    def __init__(self, url:str):
+        self._url = url
+        self._text = None
+    
+    def _get_request_text(self) -> str:
+        response = requests.get(url=self._url)
+        if response.status_code != 200:
+            raise Exception('bad response code:' + str(response.status_code))
+        html_text = response.text
+        return html_text
+    
+    @property
+    def url(self) -> str:
+        """Specifies url"""
+        return self._url
+    
+    @property
+    def raw_html(self) -> str:
+        """
+        Gets raw html of url
+        """
+        if not self._text:
+            self._text = self._get_request_text()
+        return self._text
+
+class SoupObj:
+    @RuleCheckAll(rules.RuleStrNotNullEmptyWs, ftype=DecFuncEnum.METHOD)
+    def __init__(self, url:str) -> None:
+        self._response = ResponseObj(url)
+        self._soup = None
+    
+    @property
+    def soup(self) -> BeautifulSoup:
+        """Gets soup for this instance"""
+        if not self._soup:
+            self._soup = BeautifulSoup(self._response.raw_html, 'lxml')
+        return self._soup
+
+    @property
+    def response(self) -> ResponseObj:
+        """Gets this instance response"""
+        return self._response
+    
+    @property
+    def url(self) -> str:
+        """Specifies url"""
+        return self.response.url
+
+class UrlObj:
+    """Properties of url"""
+    @RuleCheckAll(rules.RuleStrNotNullEmptyWs, ftype=DecFuncEnum.METHOD)
+    def __init__(self, url: str):
+        """
+        Constructor
+
+        Args:
+            url (str): Url
+        """
+        self._url = url
+        # similar to: namespacecom_1_1sun_1_1star_1_1style.html#a3ae28cb49c180ec160a0984600b2b925
+        self._page_link = self._url.rsplit('/',1)[1]
+        self._is_frag = False
+        try:
+            self._fragment = self._page_link.split('#')[1]
+            self._is_frag = True
+        except IndexError:
+            self._fragment = ''
+        self._ns = self._get_ns()
+        self._ns_str = None
+    
+    def _get_ns(self) -> List[str]:
+        ns_part = self._page_link.split('.')[0].lower()
+        if ns_part.startswith('namespace'):
+            ns_part = ns_part[9:]
+        return ns_part.split('_1_1')
+
+    @property
+    def page_link(self) -> str:
+        """
+        Gets page link similar to ``namespacecom_1_1sun_1_1star_1_1style.html#a3ae28cb49c180ec160a0984600b2b925``
+        """
+        return self._page_link
+
+    @property
+    def fragment(self) -> str:
+        """
+        Gets fragment simalar to a3ae28cb49c180ec160a0984600b2b925
+        """
+        return self._fragment
+    
+    @property
+    def is_fragment(self) -> str:
+        """
+        Gets if there is a fragment
+        """
+        return self._is_frag
+
+    @property
+    def namespace(self) -> List[str]:
+        """
+        Gets Namespace in format of ['com', 'sun', 'star', 'style']
+        """
+        return self._ns
+
+    @property
+    def namespace_str(self) -> str:
+        """
+        Gets namespace in format of 'com.sun.star.style'
+        """
+        if not self._ns_str:
+            self._ns_str = '.'.join(self.namespace)
+        return self._ns_str
+class BlockObj(ABC):
+    """
+    Abstract Class.
+    
+    Represents a Html Block.
+    """
+    def __init__(self, soup:SoupObj):
+        """
+        Constructor
+
+        Args:
+            soup (SoupObj): soup for this instance
+        """
+        self._soup = soup
+        self._urlobj = UrlObj(url=soup.url)
+        self._url = soup.url
+    
+    @abstractmethod
+    def get_obj(self) -> Tag:
+        """Get object"""
+
+    @property
+    def url(self) -> str:
+        """Gets Url"""
+        return self._url
+    
+    @property
+    def soup(self) -> SoupObj:
+        """Gets SoupObj instance for this instance"""
+        return self._soup
+    
+    @property
+    def url_obj(self) -> UrlObj:
+        """Gets UrlObj instance for this instance"""
+        return self._urlobj
+
+class TagsStrObj:
+    """Class that converts list of tags to string"""
+    def __init__(self, tags: Iterable[Tag], **kwargs):
+        """
+        Constructor
+
+        Args:
+            tags (Iterable[Tag]): List of tags
+
+        Keyword Arguments:
+            clean (bool, optional): If ``True`` then data will be cleaned
+                using ``str_clean`` method. Default ``True``
+            empty (bool, optional): If ``True`` empty lines will be added
+                between other lines. Default ``True``
+            indent (int, optional): The number of spaces to indent for 
+                methods that return a string. Default ``0``
+        """
+        self._tags = tags
+        self._clean = bool(kwargs.get('clean', True))
+        self._empty_lines = bool(kwargs.get('empty', True))
+        self._indent_amt = int(kwargs.get('indent', 0))
+        
+    
+    def get_lines(self) -> List[str]:
+        """Gets lines for this instance"""
+        lines = []
+        for i, ln in enumerate(self._tags):
+            s = ln.text.strip()
+            if self._clean:
+                s = str_clean(input=s)
+            if i > 0 and self._empty_lines:
+                lines.append("")
+            lines.append(s)
+        return lines
+    
+    def get_data(self) -> str:
+        """Gets Lines as string for this instance"""
+        lines =self.get_lines()
+        s = "\n".join(lines)
+        s = self._indent(s)
+        return s
+
+    def get_string_list(self) -> str:
+        lines = self._encode_list(self.get_lines())
+        c_lines = self._decode_list(str(lines).split(','))
+        s = ',\n'.join(c_lines)
+        s = self._indent(s)
+        return s
+    
+    def _encode_list(self, lst:List[str]) -> List[str]:
+        # \xff and \xfe are BOM chars
+        results = []
+        for el in lst:
+            s = el.replace(',', '\xff')
+            results.append(s)
+        return results
+
+    def _decode_list(self, lst: List[str]) -> List[str]:
+        # \xff and \xfe are BOM chars
+        results = []
+        for el in lst:
+            s = el.replace('\xff', ',')
+            results.append(s)
+        return results
+
+    def _indent(self, text: str) -> str:
+        if self._indent_amt <= 0:
+            return text
+        indent = ' ' * self._indent_amt
+        s = textwrap.indent(text, indent)
+        return s
 class WriteBase(object):
     def _mkdirp(self, dest_dir):
         # Python ≥ 3.5
@@ -128,12 +368,7 @@ class ParserBase(object):
         """
         Cleans and encodes string for template replacemnt
         """
-        result = input
-        if self._replace_dual_colon:
-            result = result.replace("::", ".")
-        result = result.replace('\\n', '\\\\\\\\n').replace('\\r', '\\\\\\\\r')
-        result = result.replace('"', '\\"')
-        return result.strip()
+        return str_clean(input=input, replace_dual=self._replace_dual_colon)
 
     # endregion Tidy
 
