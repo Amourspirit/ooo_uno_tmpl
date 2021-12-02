@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 import os
+import sys
 import argparse
 from typing import Dict, List
 from bs4.element import ResultSet, Tag
@@ -10,6 +11,11 @@ from base import TagsStrObj, WriteBase, ParserBase, SoupObj, UrlObj, BlockObj
 from pathlib import Path
 import textwrap
 import xerox # requires xclip - sudo apt-get install xclip
+sys.path.insert(0, os.path.abspath('..'))
+print(sys.path)
+from logger.log_handle import get_logger
+
+logger = get_logger(Path(__file__).stem)
 
 EnumDataItem = namedtuple(
     'EnumDataItem',
@@ -172,32 +178,38 @@ class ParserEnum(ParserBase):
                 "ns": "Namesapce of Enum"
             }
         """
-        block = self._get_enum_block()
-        n_obj = EnumName(block=block)
-        d_obj = EnumDesc(block=block)
-        name = n_obj.get_data()
-        desc = d_obj.get_data()
-        result = {
-            "name": name,
-            "desc": desc,
-            "url": self._url,
-            'ns': self._block.url_obj.namespace_str
-        }
-        return result
+        try:
+            block = self._get_enum_block()
+            n_obj = EnumName(block=block)
+            d_obj = EnumDesc(block=block)
+            name = n_obj.get_data()
+            desc = d_obj.get_data()
+            result = {
+                "name": name,
+                "desc": desc,
+                "url": self._url,
+                'ns': self._block.url_obj.namespace_str
+            }
+            return result
+        except Exception as e:
+            logger.error(e)
 
     def get_formated_data(self):
-        block = self._get_enum_block()
-        e_obj = EnumItems(block=block, sort=self._sort)
-        enums = e_obj.get_data()
-        s = ''
-        lst_indent = self._indent * 2
-        for i, e in enumerate(enums):
-            if i > 0:
-                s += ',\n'
-            s_desc = textwrap.indent(e.desc, lst_indent).lstrip()
+        try:
+            block = self._get_enum_block()
+            e_obj = EnumItems(block=block, sort=self._sort)
+            enums = e_obj.get_data()
+            s = ''
+            lst_indent = self._indent * 2
+            for i, e in enumerate(enums):
+                if i > 0:
+                    s += ',\n'
+                s_desc = textwrap.indent(e.desc, lst_indent).lstrip()
 
-            s += f'{self._indent}"{e.name}": {s_desc}'
-        return s
+                s += f'{self._indent}"{e.name}": {s_desc}'
+            return s
+        except Exception as e:
+            logger.error(e)
 
 class EnumWriter(WriteBase):
     
@@ -228,17 +240,24 @@ class EnumWriter(WriteBase):
     def write(self):
         self._set_info()
         self._set_template_data()
-        if self._copy_clipboard:
-            xerox.copy(self._template)
-        if self._print:
-            os.system('cls' if os.name == 'nt' else 'clear')
-            print(self._template)
-        if self._write_file:
-            self._write_to_file()
+        logger.info("Processing %s.%s", self._p_namespace, self._p_name)
+        try:
+            if self._copy_clipboard:
+                xerox.copy(self._template)
+                logger.debug('copied to clipbord')
+            if self._print:
+                logger.debug('Printing to terminal')
+                os.system('cls' if os.name == 'nt' else 'clear')
+                print(self._template)
+            if self._write_file:
+                self._write_to_file()
+        except Exception as e:
+            logger.exception(e)
 
     def _write_to_file(self):
         with open(self._file_full_path, 'w') as f:
             f.write(self._template)
+        logger.info("Created file: %s", self._file_full_path)
 
     def _set_template_data(self):
         self._template = self._template.replace('{sort}', str(self._sort))
@@ -285,6 +304,7 @@ def _main():
     # t = TagsStrObj(tags=["ones", "twos", "Three", "four"], indent=8)
     # print(t.get_string_list())
 def main():
+    logger.info('Executing command: %s', sys.argv[1:])
     parser = argparse.ArgumentParser(description='enum')
     parser.add_argument(
         '-u', '--url',
@@ -323,7 +343,7 @@ def main():
         default=False)
 
     args = parser.parse_args()
-    
+    logger.info('Parsing Url %s' % args.url)
     p = ParserEnum(
         url=args.url, sort=args.sort,
         replace_dual_colon=args.dual_colon)
@@ -333,7 +353,8 @@ def main():
         copy_clipboard=args.clipboard,
         sort=args.sort,
         write_file=args.write)
-    print('')
+    if args.print:
+        print('')
     w.write()
 
 if __name__ == '__main__':

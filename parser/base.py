@@ -261,6 +261,18 @@ class WriteBase(object):
             dest_dir.mkdir(parents=True, exist_ok=True)
         else:
             Path(dest_dir).mkdir(parents=True, exist_ok=True)
+    
+    def _get_rel_template_path(self, dest: Path):
+        tp = self._get_template_path()
+        rel = tp.relative_to(dest)
+        return rel
+    
+    def _get_project_path(self) -> Path:
+        return Path(__file__).parent
+    
+    def _get_template_path(self):
+        project_path = self._get_project_path()
+        return project_path.joinpath('template')
 
 class ParserBase(object):
     def __init__(self, **kwargs):
