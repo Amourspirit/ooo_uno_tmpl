@@ -352,7 +352,7 @@ def main():
         copy_clipboard=args.clipboard,
         sort=args.sort,
         write_file=args.write)
-    if args.print:
+    if not args.print:
         print('')
     w.write()
 
