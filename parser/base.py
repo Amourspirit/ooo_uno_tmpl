@@ -11,7 +11,7 @@ from kwhelp.decorator import DecFuncEnum, RuleCheckAll
 from kwhelp import rules
 from pathlib import Path
 from typing import Iterable, List, Union
-sys.path.insert(0, os.path.abspath('..'))
+sys.path.insert(0, os.path.abspath('.'))
 from logger.log_handle import get_logger
 logger = get_logger(__name__)
 
@@ -22,7 +22,9 @@ TYPE_MAP = {
     "double": "float",
     "string": "str",
     "char": "str",
-    "boolean": "bool"
+    "boolean": "bool",
+    "sequence": "list",
+    "void": "None"
 }
 
 def str_clean(input: str, **kwargs) -> str:
