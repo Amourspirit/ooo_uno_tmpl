@@ -1,0 +1,61 @@
+#import typing
+#from _interface_base import BaseInterface
+
+#extends BaseInterface
+## see: https://cheetahtemplate.org/users_guide/inheritanceEtc.html#implements
+#implements respond
+#attr $sort = True ## set is attribs is sorted
+#attr $name = "XFont"
+#attr $desc = []
+#attr $link = ""
+#attr $inherits = ""
+#attr $imports = ['typing']
+## $from_imports is a tuple eg: $from_imports = [('.tab_align', 'TabAlign')]
+#attr $from_imports = []
+## $auto_imports is a tuple eg: $from_imports = [('.tab_align', 'TabAlign')]
+#attr $auto_imports = []
+#attr $attribs = {}
+## main Template
+# coding: utf-8
+#for $imp in $imports
+import $imp
+#end for
+from abc import abstractmethod
+#for $frm, $imp in $from_imports
+from $frm import $imp
+#end for
+#*
+Auto imports are added automatically be parser script.
+The auto import are intended to guared by TYPE_CHECKING
+*#
+#if len($auto_imports) > 0:
+#for $frm, $imp in $auto_imports
+from $frm import $imp
+#end for
+#end if
+
+class ${name}(${inherits}):
+    """
+    #for $line in $self.line_gen($desc)
+    $line
+    #end for
+#if $link:
+
+    See Also:
+        `API $name <$link>`_
+#end if
+    """
+
+#if 'methods' in $attribs
+#set $methods = $attribs['methods']
+    #for $method in $methods
+#set $m_desc = $method['desc']
+    @abstractmethod
+    $self.get_formated_meth($method)
+        """
+        #for $line in $self.line_gen($m_desc)
+        $line
+        #end for
+        """
+    #end for
+#end if

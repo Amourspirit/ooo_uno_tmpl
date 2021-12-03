@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 import os
+import sys
 import argparse
 from typing import Dict, List, Union
 from bs4 import BeautifulSoup
@@ -251,7 +252,7 @@ class ConstWriter(WriteBase):
         path_parts[index] = path_parts[index] + '.tmpl'
         obj_path = uno_obj_path.joinpath(*path_parts)
         self._mkdirp(obj_path.parent)
-        self._create_sys_links(dest=obj_path)
+        self._create_sys_links(dest=obj_path.parent)
         return obj_path
 
 def _main():
@@ -309,7 +310,7 @@ def main():
         '-w', '--write',
         help='Write file into obj_uno subfolder',
         action='store_true',
-        dest='write',
+        dest='write_file',
         default=False)
     
     args = parser.parse_args()

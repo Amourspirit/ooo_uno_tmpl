@@ -297,6 +297,8 @@ class WriteBase(object):
                 logger.info(msg)
             except FileExistsError:
                 continue
+            except Exception as e:
+                logger.error(e)
 
 class ParserBase(object):
     def __init__(self, **kwargs):
