@@ -194,7 +194,7 @@ class SdkMethodData:
     # endregion Properties
 
 
-class MethodsText:
+class SdkMethodsText:
     """
     Responsible for getting all lines of Component
     lines have a simple cleaning that replace :: with .
@@ -231,14 +231,14 @@ class MethodsText:
         return self._component
 
 
-class Methods:
+class SdkMethods:
     """Iterable class that iterates through Methods and returns info"""
 
     def __init__(self, url: str):
         self._soup = SoupObj(url=url)
         self._c_text = SdkCodeText(soup=self._soup)
         self._component = SdkComponentText(c_text=self._c_text)
-        self._mt = MethodsText(f_text=self._component)
+        self._mt = SdkMethodsText(f_text=self._component)
         self._index = 0
         self._len = 0
         self._init = False
@@ -634,7 +634,7 @@ def main():
     # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1media_1_1XPlayerWindow.html'
     url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1beans_1_1XHierarchicalPropertySet.html'
     p_info = PageInfo(url=url)
-    m = Methods(url=p_info.sdk_link)
+    m = SdkMethods(url=p_info.sdk_link)
     ns = NamesSpaceInfo(text=m.code_text)
     ni = NameInfo(text=m.component)
     im = Imports(text=m.code_text)
