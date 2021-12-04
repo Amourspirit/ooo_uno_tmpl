@@ -5,7 +5,7 @@ import os
 import sys
 import argparse
 import textwrap
-from typing import Dict, List, Set
+from typing import Dict, List, Set, Tuple
 from bs4 import BeautifulSoup
 from bs4.element import PageElement, ResultSet, Tag
 from kwhelp.decorator import DecFuncEnum, RuleCheckAllKw, RequireArgs
@@ -845,15 +845,6 @@ class ParserInterface(ParserBase):
         str_lst = Util.get_formated_dict_list_str(obj=attribs, indent=4)
         return str_lst
 
-    def get_py_type(in_type: str) -> str:
-        p_type = Util.get_last_part(input=in_type)
-        n_type = TYPE_MAP.get(p_type, None)
-        if n_type:
-            return n_type
-        # unknow type. wrap in quotes.
-        # Todo: Consider auto import option for unknown types
-        self._auto_imports.add(in_type)
-        return f"'{p_type}'"
 # endregion Parse
 
 # region Writer
@@ -901,13 +892,26 @@ class InterfaceWriter(WriteBase):
         return contents
 
     def _set_template_data(self):
+        def get_from_imports() -> List[List[str]]:
+            lst = []
+            for ns in self._p_imports:
+                f, n = Util.get_rel_import(
+                    i_str=ns, ns=self._p_namespace
+                )
+                lst.append([f, n])
+            return lst
+
         self._template = self._template.replace('{name}', self._p_name)
         self._template = self._template.replace('{ns}', str(self._p_namespace))
         self._template = self._template.replace('{link}', self._p_url)
         self._template = self._template.replace(
             '{inherits}', Util.get_string_list(lines=self._p_extends))
         self._template = self._template.replace(
-            '{imports}', Util.get_string_list(lines=self._p_imports))
+            '{imports}', "[]")
+        self._template = self._template.replace(
+            '{from_imports}',
+            Util.get_formated_dict_list_str(get_from_imports())
+        )
         self._template = self._template.replace('{from_imports}', "[]")
         if len(self._p_desc) > 0:
             desc = Util.get_formated_dict_list_str(self._p_desc, indent=4)

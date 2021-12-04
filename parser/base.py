@@ -189,31 +189,46 @@ class Util:
 
     @staticmethod
     def get_rel_import(i_str: str, ns: str) -> Tuple[str, str]:
+        logger.debug('Util.get_rel_import')
+        logger.debug("i_str: '%s' ns: '%s'",i_str, ns)
         name_ns_str = i_str.rsplit('.', 1)[0] # drop last word
+        logger.debug("Namespace from i_str: '%s'", name_ns_str)
         name_ns: List[str] = name_ns_str.split('.')
+        logger.debug("i_str Namespace Parts: '%s'", str(name_ns))
         if len(name_ns) == 1:
             # this is a single word
             # assume it is in the same namespace as this import
+            logger.debug("'%s', single word. Converting to from import and returning", i_str)
             return (f'.{Util.camel_to_snake(i_str)}', f'{i_str}')
-        camel_name = Util.camel_to_snake(name_ns_str)
         name = Util.get_last_part(input=i_str)
+        camel_name = Util.camel_to_snake(name)
+        logger.debug("Name from i_str: '%s'", name)
         ns_parts = ns.split('.')
         if name_ns_str == ns:
-           return (f'.{camel_name}', f'{name}')
+            logger.debug("Names are equal: '%s'", ns)
+            logger.debug(f"Returning (.{camel_name}', '{name})")
+            return (f'.{camel_name}', f'{name}')
         commmon_count = 0
         for i, ns in enumerate(name_ns):
             if ns != ns_parts[i]:
                 break
             commmon_count += 1
         if commmon_count > 0:
+            logger.debug('found common %d namespace elements', commmon_count)
             common_ns = name_ns[commmon_count:]
+            logger.debug("Common elements: '$s'", str(common_ns))
             dot_ext = len(ns_parts) - commmon_count
+            logger.debug("'.' to prepend is: %d", dot_ext)
             dot = "." * dot_ext
             rel = ".".join(common_ns)
+            logger.debug("Realitive part is '%s'", rel)
             str_from = f'{dot}{rel}.{camel_name}'
+            logger.debug("From String to return is:'%s'", str_from)
             return (str_from, name)
         # last ditch effort to import via full path
         short = name_ns_str.replace('com.sun.star.', '')
+        logger.debug(
+            f"Last ditch effort. Returning: (ooo_uno.uno_obj.{short}.{camel_name}', {name})")
         return (f'ooo_uno.uno_obj.{short}.{camel_name}', f'{name}')
 
     @staticmethod
