@@ -1,22 +1,21 @@
 #!/usr/bin/env python
+import pprint
 from logging import DEBUG
 import os
 import sys
 import argparse
-from typing import Dict, List
+import textwrap
+from typing import Dict, List, Set
 from bs4 import BeautifulSoup
-from bs4.element import NavigableString, PageElement, ResultSet, Tag
+from bs4.element import PageElement, ResultSet, Tag
 from kwhelp.decorator import DecFuncEnum, RuleCheckAllKw, RequireArgs
 from kwhelp import rules
-from collections import namedtuple
-from base import TYPE_MAP, TagsStrObj, WriteBase, ParserBase, SoupObj, UrlObj, BlockObj, str_clean
+from base import TYPE_MAP, TagsStrObj, ParserBase, SoupObj, BlockObj, Util, WriteBase
 from pathlib import Path
-import textwrap
 import xerox  # requires xclip - sudo apt-get install xclip
 from logger.log_handle import get_logger
 from parser.enm import main
 from dataclasses import dataclass
-from enum import IntEnum
 import re
 
 DEBUGGING = False
@@ -141,6 +140,8 @@ class SdkComponentText:
             if matches:
                 m = matches[0]
                 self._data = m
+        if not self._data:
+            self._data = ''
         return self._data
 
     @property
@@ -682,20 +683,19 @@ class ApiMethodName:
 
 
 class ApiMethodDesc:
-    """Gets Enum Description"""
+    """Gets Method Description"""
 
     def __init__(self, block: ApiMethodBlock):
         self._block = block
         self._cls = 'memdoc'
         self._el = 'div'
 
-    def get_data(self) -> str:
+    def get_data(self) -> List[str]:
         info = self._block.get_obj()
         tag = info.tag_main.find(self._el, class_=self._cls)
         lines_found: ResultSet = tag.select(f'{self._el}.{self._cls} > p')
         p_obj = TagsStrObj(tags=lines_found)
-        desc = p_obj.get_data()
-        return desc
+        return p_obj.get_lines()
 
 
 class ApiSdkLink:
@@ -714,6 +714,28 @@ class ApiSdkLink:
         return self._soup
 
 
+class ApiDesc:
+    """Gets the description"""
+    def __init__(self, soup:SoupObj):
+        self._soup = soup
+        self._data = None
+
+    def get_obj(self) -> List[str]:
+        """
+        Gets description as list of str
+
+        Returns:
+            List[str]: description lines
+        """
+        if self._data:
+            return self._data
+        lines_found: ResultSet = self._soup.soup.select(
+            'body > div.contents > div.textblock > p')
+        p_obj = TagsStrObj(tags=lines_found)
+        desc = p_obj.get_lines()
+        return desc
+        
+        
 class ApiInfo:
     def __init__(self, url: str):
         self._url = url
@@ -731,7 +753,7 @@ class ApiInfo:
             self._dict[name.get_obj()] = desc.get_data()
 
     @property
-    def desc_dict(self) -> Dict[str, str]:
+    def desc_dict(self) -> Dict[str, List[str]]:
         """Dictionary that contains descriptions. Key is method name"""
         return self._dict
 
@@ -752,52 +774,242 @@ class ApiInfo:
 # endregion Main Page Parsing
 
 
-def main2():
-    os.system('cls' if os.name == 'nt' else 'clear')
-    url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XFont.html'
-    m_blocks = ApiMethodBlocks(url=url)
-    lnk = ApiSdkLink(soup=m_blocks.soup)
-    print(lnk.get_obj())
-    return
-    # body > div.contents > ul > li > a
-    for block in m_blocks:
-        info = block.get_obj()
-        name = PageMethodName(block=block)
-        desc = PageMethodDesc(block=block)
-        print(name.get_obj())
-        print(desc.get_data())
-        # print("tag",info.tag_id)
-        # print("main", info.tag_main)
-        # print("title",info.tag_title)
+# region Parse
+class ParserInterface(ParserBase):
 
 
-def main():
+    @RequireArgs('url', ftype=DecFuncEnum.METHOD)
+    @RuleCheckAllKw(arg_info={"url": 0, "sort": 1, "replace_dual_colon": 1},
+                    rules=[rules.RuleStrNotNullEmptyWs, rules.RuleBool],
+                    ftype=DecFuncEnum.METHOD)
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self._api_info = ApiInfo(url=self.url)
+        self._sdk_method_info = SdkMethods(url=self._api_info.sdk_link)
+        self._sort = True
+        self._info = None    
+
+    def get_info(self) -> Dict[str, object]:
+        """
+        Gets info
+
+        Returns:
+            Dict[str, object]: {
+                "name": "str, class name",
+                "imports": "List[str], imports",
+                "namespace": "str, Namespace",
+                "extends": "List[str], class extends",
+                "desc": "List[str], class description",
+                "url": "str, api url"
+            }
+        """
+        if self._info:
+            return self._info
+        ns = SdkNamesSpaceInfo(text=self._sdk_method_info.code_text)
+        ni = SdkNameInfo(text=self._sdk_method_info.component)
+        im = SdkImports(c_text=self._sdk_method_info.code_text)
+        ex = SdkExtends(c_text=self._sdk_method_info.component,
+                        m_text=self._sdk_method_info.methods_text)
+        desc = ApiDesc(soup=self._api_info.soup)
+        result = {
+            'name': ni.name,
+            'imports': im.get_obj(),
+            'namespace': ns.namespace,
+            'extends': ex.ex_lst,
+            'desc': desc.get_obj(),
+            "url": self._api_info.soup.url
+        }
+        self._info = result
+        return self._info
+    
+    def get_formated_data(self) -> str:
+        attribs = {}
+        for i, m in enumerate(self._sdk_method_info):
+            if i == 0:
+                attribs['methods'] = []
+            if not m.name:
+                continue
+            attrib = {
+                "name": m.name,
+                "returns": m.return_type,
+                "desc": self._api_info.desc_dict.get(m.name, [])
+            }
+            args = []
+            for pi in m.args:
+                args.append([pi.name, pi.type, pi.direction])
+            attrib['args'] = args
+            attribs['methods'].append(attrib)
+        if self._sort:
+            newlist = sorted(attribs['methods'], key=lambda d: d['name'])
+            attribs['methods'] = newlist
+        str_lst = Util.get_formated_dict_list_str(obj=attribs, indent=4)
+        return str_lst
+
+    def get_py_type(in_type: str) -> str:
+        p_type = Util.get_last_part(input=in_type)
+        n_type = TYPE_MAP.get(p_type, None)
+        if n_type:
+            return n_type
+        # unknow type. wrap in quotes.
+        # Todo: Consider auto import option for unknown types
+        self._auto_imports.add(in_type)
+        return f"'{p_type}'"
+# endregion Parse
+
+# region Writer
+class InterfaceWriter(WriteBase):
+    def __init__(self, parser: ParserInterface, **kwargs):
+        self._parser: ParserInterface = parser
+        self._copy_clipboard = kwargs.get('copy_clipboard', False)
+        self._print = kwargs.get('print', True)
+        self._write_file = kwargs.get('write_file', False)
+        self._indent_amt = 4
+        self._p_name: str = None
+        self._p_imports: List[str] = None
+        self._p_namespace: str = None
+        self._p_extends: List[str] = None
+        self._p_desc: List[str] = None
+        self._p_data: str = None
+        self._p_url: str = None
+        self._path_dir = Path(os.path.dirname(__file__))
+        _path = Path(self._path_dir, 'template', 'interface.tmpl')
+        if not _path.exists():
+            raise FileNotFoundError(f"unable to find templae file '{_path}'")
+        self._template_file = _path
+        self._template: str = self._get_template()
+    
+    def write(self):
+        self._set_info()
+        self._set_template_data()
+        logger.info("Processing %s.%s", self._p_namespace, self._p_name)
+        try:
+            if self._copy_clipboard:
+                xerox.copy(self._template)
+                logger.debug('copied to clipbord')
+            if self._print:
+                logger.debug('Printing to terminal')
+                os.system('cls' if os.name == 'nt' else 'clear')
+                print(self._template)
+            if self._write_file:
+                self._write_to_file()
+        except Exception as e:
+            logger.exception(e)
+    
+    def _get_template(self):
+        with open(self._template_file) as f:
+            contents = f.read()
+        return contents
+
+    def _set_template_data(self):
+        self._template = self._template.replace('{name}', self._p_name)
+        self._template = self._template.replace('{ns}', str(self._p_namespace))
+        self._template = self._template.replace('{link}', self._p_url)
+        self._template = self._template.replace(
+            '{inherits}', Util.get_string_list(lines=self._p_extends))
+        self._template = self._template.replace(
+            '{imports}', Util.get_string_list(lines=self._p_imports))
+        self._template = self._template.replace('{from_imports}', "[]")
+        if len(self._p_desc) > 0:
+            desc = Util.get_formated_dict_list_str(self._p_desc, indent=4)
+        else:
+            desc = "[]"
+        self._template = self._template.replace('{desc}', desc)
+        if self._indent_amt > 0:
+            indent = ' ' * self._indent_amt
+            indented = textwrap.indent(self._p_data, indent).lstrip()
+        else:
+            indented = self._p_data.lstrip()
+        self._template = self._template.replace('{data}', indented)
+
+    def _set_info(self):
+        def get_extends(lst:List[str]) -> List[str]:
+            return [s.rsplit('.', 1)[1] for s in lst]
+        data = self._parser.get_info()
+        self._p_name = data['name']
+        self._p_imports = data['imports']
+        self._p_namespace = data['namespace']
+        self._p_extends = get_extends(data['extends'])
+        self._p_desc = data['desc']
+        self._p_url = data['url']
+        self._p_data = self._parser.get_formated_data()
+        if self._write_file:
+            self._file_full_path = self._get_uno_obj_path()
+    
+    def _get_uno_obj_path(self) -> Path:
+        uno_obj_path = Path(self._path_dir.parent, 'uno_obj')
+        name_parts: List[str] = self._p_namespace.split('.')
+        # ignore com, sun, star
+        path_parts = name_parts[3:]
+        path_parts.append(self._p_name + '.tmpl')
+        obj_path = uno_obj_path.joinpath(*path_parts)
+        self._mkdirp(obj_path.parent)
+        self._create_sys_links(dest=obj_path.parent)
+        return obj_path
+
+    def _write_to_file(self):
+        with open(self._file_full_path, 'w') as f:
+            f.write(self._template)
+        logger.info("Created file: %s", self._file_full_path)
+# endregion Writer
+
+
+def _main():
     os.system('cls' if os.name == 'nt' else 'clear')
-    # url = 'https://api.libreoffice.org/docs/idl/ref/XWindow_8idl_source.html'
-    # url = 'https://api.libreoffice.org/docs/idl/ref/XFont_8idl_source.html'
     # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XFont.html'
     # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1media_1_1XPlayerWindow.html'
     url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1beans_1_1XHierarchicalPropertySet.html'
 
     # interfaces
     # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1beans_1_1XPropertyBag.html'
-    p_info = ApiInfo(url=url)
-    m = SdkMethods(url=p_info.sdk_link)
-    ns = SdkNamesSpaceInfo(text=m.code_text)
-    ni = SdkNameInfo(text=m.component)
-    im = SdkImports(c_text=m.code_text)
-    ex = SdkExtends(c_text=m.component, m_text=m.methods_text)
-    print(ni.name)
-    print("imports:", im.get_obj())
-    print("Extends:", ex.ex_lst)
-    print("Namespace:", ns.namespace)
+    p = ParserInterface(url=url)
+    pprint.pprint(p.get_info())
+    print(p.get_formated_data())
 
-    for meth in m:
-        print("name:", meth.name)
-        print("return type:", meth.return_type)
-        print("args:", meth.args)
-        print("raises:", meth.raises)
-        print("Desc:", p_info.desc_dict.get(meth.name, ''))
+def main():
+    logger.info('Executing command: %s', sys.argv[1:])
+    parser = argparse.ArgumentParser(description='enum')
+    parser.add_argument(
+        '-u', '--url',
+        help='Source Url',
+        type=str,
+        required=True)
+    parser.add_argument(
+        '-s', '--no-sort',
+        help='No sorting of results',
+        action='store_false',
+        dest='sort',
+        default=True)
+    parser.add_argument(
+        '-c', '--clipboard',
+        help='Copy to clipboard',
+        action='store_true',
+        dest='clipboard',
+        default=False)
+    parser.add_argument(
+        '-p', '--no-print',
+        help='Do NOT print to terminal',
+        action='store_false',
+        dest='print',
+        default=True)
+    parser.add_argument(
+        '-w', '--write',
+        help='Write file into obj_uno subfolder',
+        action='store_true',
+        dest='write',
+        default=False)
+
+    args = parser.parse_args()
+    logger.info('Parsing Url %s' % args.url)
+    
+    p = ParserInterface(url=args.url, sort=args.sort)
+    w = InterfaceWriter(
+        parser=p,
+        print=args.print,
+        copy_clipboard=args.clipboard,
+        write_file=args.write)
+    if not args.print:
+        print('')
+    w.write()
 
 # region Debugging Data
 

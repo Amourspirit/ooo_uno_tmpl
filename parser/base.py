@@ -3,6 +3,7 @@ import sys
 import re
 import requests
 import textwrap
+import json
 from abc import ABC, abstractmethod
 from bs4 import BeautifulSoup
 from bs4.element import ResultSet, Tag
@@ -10,8 +11,8 @@ from glob import glob
 from kwhelp.decorator import DecFuncEnum, RuleCheckAll
 from kwhelp import rules
 from pathlib import Path
-from typing import Iterable, List, Union
-sys.path.insert(0, os.path.abspath('.'))
+from typing import Iterable, List, Tuple, Union
+sys.path.insert(0, os.path.abspath('..'))
 from logger.log_handle import get_logger
 logger = get_logger(__name__)
 
@@ -28,38 +29,41 @@ TYPE_MAP = {
     "void": "None"
 }
 
+
 def str_clean(input: str, **kwargs) -> str:
-        """
-        Cleans and encodes string for template replacemnt
-        
-        Keyword Arguments:
-            replace_dual (bool, optional): Replace ``::`` with ``.`` Default ``True``
-        """
-        _replace_dual = bool(kwargs.get('replace_dual', True))
-        result = input
-        if _replace_dual:
-            result = result.replace("::", ".")
-        result = result.replace('\\n', '\\\\\\\\n').replace('\\r', '\\\\\\\\r')
-        result = result.replace('"', '\\"')
-        return result.strip()
+    """
+    Cleans and encodes string for template replacemnt
+
+    Keyword Arguments:
+        replace_dual (bool, optional): Replace ``::`` with ``.`` Default ``True``
+    """
+    _replace_dual = bool(kwargs.get('replace_dual', True))
+    result = input
+    if _replace_dual:
+        result = result.replace("::", ".")
+    result = result.replace('\\n', '\\\\\\\\n').replace('\\r', '\\\\\\\\r')
+    result = result.replace('"', '\\"')
+    return result.strip()
+
+
 class ResponseObj:
     @RuleCheckAll(rules.RuleStrNotNullEmptyWs, ftype=DecFuncEnum.METHOD)
-    def __init__(self, url:str):
+    def __init__(self, url: str):
         self._url = url
         self._text = None
-    
+
     def _get_request_text(self) -> str:
         response = requests.get(url=self._url)
         if response.status_code != 200:
             raise Exception('bad response code:' + str(response.status_code))
         html_text = response.text
         return html_text
-    
+
     @property
     def url(self) -> str:
         """Specifies url"""
         return self._url
-    
+
     @property
     def raw_html(self) -> str:
         """
@@ -69,12 +73,13 @@ class ResponseObj:
             self._text = self._get_request_text()
         return self._text
 
+
 class SoupObj:
     @RuleCheckAll(rules.RuleStrNotNullEmptyWs, ftype=DecFuncEnum.METHOD)
-    def __init__(self, url:str) -> None:
+    def __init__(self, url: str) -> None:
         self._response = ResponseObj(url)
         self._soup = None
-    
+
     @property
     def soup(self) -> BeautifulSoup:
         """Gets soup for this instance"""
@@ -86,11 +91,148 @@ class SoupObj:
     def response(self) -> ResponseObj:
         """Gets this instance response"""
         return self._response
-    
+
     @property
     def url(self) -> str:
         """Specifies url"""
         return self.response.url
+
+
+class Util:
+    """Static Class or helper methods"""
+    @staticmethod
+    def get_formated_dict_list_str(obj: Union[dict, list], indent=4) -> str:
+        """
+        Get a formated dictionary or list
+
+        Args:
+            obj (Union[dict, list]): Dict or list to get formates string for.
+            indent (int, optional): The number of spaces to indent string.. Defaults to ``2``.
+
+        Returns:
+            str: string of formated dictionary properties and values
+        """
+        if not isinstance(obj, dict) and not isinstance(obj, list):
+            return "{}"
+        _indent = 4 if indent < 0 else indent
+        formatted = json.dumps(obj, indent=_indent)
+        return formatted
+
+    @staticmethod
+    def get_string_list(lines: List[str], indent_amt: int = 0) -> str:
+        """
+        Converts a list into str.
+        Similar to calling str(lines) but handles more edge cases.
+
+        Args:
+            lines (List[str]): list to convert
+            indent_amt (int, optional): Amount to indent results. Defaults to 0.
+
+        Returns:
+            str: List as string.
+        """
+        _lines = Util._encode_list(lines)
+        c_lines = Util._decode_list(str(_lines).split(','))
+        s = ',\n'.join(c_lines)
+        if indent_amt > 0:
+            s = Util.indent(text=s, indent_amt=indent_amt)
+        return s
+
+    @staticmethod
+    def get_last_part(input: str, sep='.') -> str:
+        """
+        Splits a string and returns the last part
+
+        Args:
+            input (str): string to get last part of.
+            sep (str, optional): string used to split. Defaults to ``.``
+
+        Returns:
+            str: [description]
+        """
+        if not input:
+            return ''
+        _parts = input.rsplit(sep, 1)
+        return _parts[0] if len(_parts) == 1 else _parts[1]
+
+    @staticmethod
+    def indent(text: str, indent_amt: int = 4) -> str:
+        """
+        Indents a multi line string
+
+        Args:
+            text (str): text to apply indent
+            indent_amt (int, optional): Amout of indent. Defaults to 4.
+
+        Returns:
+            str: indented text.
+        """
+        if indent_amt <= 0:
+            return text
+        indent = ' ' * indent_amt
+        s = textwrap.indent(text, indent)
+        return s
+
+    @staticmethod
+    def camel_to_snake(input: str) -> str:
+        """
+        Converts Camel case to snake clase
+
+        Args:
+            name (str): Camel name
+
+        Returns:
+            str: snake case
+        """
+        _input = re.sub('(.)([A-Z][a-z]+)', r'\1_\2', input)
+        return re.sub('([a-z0-9])([A-Z])', r'\1_\2', _input).lower()
+
+    @staticmethod
+    def get_rel_import(i_str: str, ns: str) -> Tuple[str, str]:
+        name_ns_str = i_str.rsplit('.', 1)[0] # drop last word
+        name_ns: List[str] = name_ns_str.split('.')
+        if len(name_ns) == 1:
+            # this is a single word
+            # assume it is in the same namespace as this import
+            return (f'.{Util.camel_to_snake(i_str)}', f'{i_str}')
+        camel_name = Util.camel_to_snake(name_ns_str)
+        name = Util.get_last_part(input=i_str)
+        ns_parts = ns.split('.')
+        if name_ns_str == ns:
+           return (f'.{camel_name}', f'{name}')
+        commmon_count = 0
+        for i, ns in enumerate(name_ns):
+            if ns != ns_parts[i]:
+                break
+            commmon_count += 1
+        if commmon_count > 0:
+            common_ns = name_ns[commmon_count:]
+            dot_ext = len(ns_parts) - commmon_count
+            dot = "." * dot_ext
+            rel = ".".join(common_ns)
+            str_from = f'{dot}{rel}.{camel_name}'
+            return (str_from, name)
+        # last ditch effort to import via full path
+        short = name_ns_str.replace('com.sun.star.', '')
+        return (f'ooo_uno.uno_obj.{short}.{camel_name}', f'{name}')
+
+    @staticmethod
+    def _encode_list(lst: List[str]) -> List[str]:
+        # \xff and \xfe are BOM chars
+        results = []
+        for el in lst:
+            s = el.replace(',', '\xff')
+            results.append(s)
+        return results
+
+    @staticmethod
+    def _decode_list(lst: List[str]) -> List[str]:
+        # \xff and \xfe are BOM chars
+        results = []
+        for el in lst:
+            s = el.replace('\xff', ',')
+            results.append(s)
+        return results
 
 class UrlObj:
     """Properties of url"""
@@ -104,7 +246,7 @@ class UrlObj:
         """
         self._url = url
         # similar to: namespacecom_1_1sun_1_1star_1_1style.html#a3ae28cb49c180ec160a0984600b2b925
-        self._page_link = self._url.rsplit('/',1)[1]
+        self._page_link = self._url.rsplit('/', 1)[1]
         self._is_frag = False
         try:
             self._fragment = self._page_link.split('#')[1]
@@ -113,7 +255,7 @@ class UrlObj:
             self._fragment = ''
         self._ns = self._get_ns()
         self._ns_str = None
-    
+
     def _get_ns(self) -> List[str]:
         ns_part = self._page_link.split('.')[0].lower()
         if ns_part.startswith('namespace'):
@@ -133,7 +275,7 @@ class UrlObj:
         Gets fragment simalar to a3ae28cb49c180ec160a0984600b2b925
         """
         return self._fragment
-    
+
     @property
     def is_fragment(self) -> str:
         """
@@ -156,13 +298,16 @@ class UrlObj:
         if not self._ns_str:
             self._ns_str = '.'.join(self.namespace)
         return self._ns_str
+
+
 class BlockObj(ABC):
     """
     Abstract Class.
-    
+
     Represents a Html Block.
     """
-    def __init__(self, soup:SoupObj):
+
+    def __init__(self, soup: SoupObj):
         """
         Constructor
 
@@ -172,7 +317,7 @@ class BlockObj(ABC):
         self._soup = soup
         self._urlobj = UrlObj(url=soup.url)
         self._url = soup.url
-    
+
     @abstractmethod
     def get_obj(self) -> Tag:
         """Get object"""
@@ -181,19 +326,21 @@ class BlockObj(ABC):
     def url(self) -> str:
         """Gets Url"""
         return self._url
-    
+
     @property
     def soup(self) -> SoupObj:
         """Gets SoupObj instance for this instance"""
         return self._soup
-    
+
     @property
     def url_obj(self) -> UrlObj:
         """Gets UrlObj instance for this instance"""
         return self._urlobj
 
+
 class TagsStrObj:
     """Class that converts list of tags to string"""
+
     def __init__(self, tags: Iterable[Tag], **kwargs):
         """
         Constructor
@@ -213,8 +360,7 @@ class TagsStrObj:
         self._clean = bool(kwargs.get('clean', True))
         self._empty_lines = bool(kwargs.get('empty', True))
         self._indent_amt = int(kwargs.get('indent', 0))
-        
-    
+
     def get_lines(self) -> List[str]:
         """Gets lines for this instance"""
         lines = []
@@ -226,43 +372,24 @@ class TagsStrObj:
                 lines.append("")
             lines.append(s)
         return lines
-    
+
     def get_data(self) -> str:
         """Gets Lines as string for this instance"""
-        lines =self.get_lines()
+        lines = self.get_lines()
         s = "\n".join(lines)
-        s = self._indent(s)
+        if self._indent_amt > 0:
+            s = Util.indent(text=s, indent_amt=self._indent_amt)
         return s
 
     def get_string_list(self) -> str:
         lines = self._encode_list(self.get_lines())
         c_lines = self._decode_list(str(lines).split(','))
         s = ',\n'.join(c_lines)
-        s = self._indent(s)
+        if self._indent_amt > 0:
+            s = Util.indent(text=s, indent_amt=self._indent_amt)
         return s
-    
-    def _encode_list(self, lst:List[str]) -> List[str]:
-        # \xff and \xfe are BOM chars
-        results = []
-        for el in lst:
-            s = el.replace(',', '\xff')
-            results.append(s)
-        return results
 
-    def _decode_list(self, lst: List[str]) -> List[str]:
-        # \xff and \xfe are BOM chars
-        results = []
-        for el in lst:
-            s = el.replace('\xff', ',')
-            results.append(s)
-        return results
 
-    def _indent(self, text: str) -> str:
-        if self._indent_amt <= 0:
-            return text
-        indent = ' ' * self._indent_amt
-        s = textwrap.indent(text, indent)
-        return s
 class WriteBase(object):
     def _mkdirp(self, dest_dir):
         # Python ≥ 3.5
@@ -270,7 +397,7 @@ class WriteBase(object):
             dest_dir.mkdir(parents=True, exist_ok=True)
         else:
             Path(dest_dir).mkdir(parents=True, exist_ok=True)
-    
+
     def _get_project_path(self) -> Path:
         return Path(__file__).parent.parent
 
@@ -302,6 +429,7 @@ class WriteBase(object):
                 continue
             except Exception as e:
                 logger.error(e)
+
 
 class ParserBase(object):
     def __init__(self, **kwargs):
@@ -370,16 +498,16 @@ class ParserBase(object):
             # text = nav.text.replace('\n', '.').strip()
             self._title_full = text
         return self._title_full
-    
+
     def _get_name(self, soup: BeautifulSoup):
         full = self._get_full_name(soup=soup)
         parts = full.split('.')
         return parts[len(parts) - 1]
-    
+
     def _get_desc(self, soup: BeautifulSoup):
         contents = soup.find('div', class_='contents')
         block = contents.find('div', class_='textblock')
-        soup_lines:ResultSet = block.find_all('p')
+        soup_lines: ResultSet = block.find_all('p')
         lines = []
         for i, ln in enumerate(soup_lines):
             s = ln.text.strip()
@@ -392,7 +520,7 @@ class ParserBase(object):
             lines.extend(since)
         result = "\n".join(lines)
         return result
-    
+
     def _get_since(self, block: Tag) -> List[str]:
         result = []
         since = block.find('dl', class_='section since')
@@ -420,7 +548,7 @@ class ParserBase(object):
     # endregion Data
 
     # region util
-    def camel_to_snake(self, name: str)-> str:
+    def camel_to_snake(self, name: str) -> str:
         """
         Converts Camel case to snake clase
 
@@ -430,8 +558,7 @@ class ParserBase(object):
         Returns:
             str: snake case
         """
-        _name = re.sub('(.)([A-Z][a-z]+)', r'\1_\2', name)
-        return re.sub('([a-z0-9])([A-Z])', r'\1_\2', _name).lower()
+        return Util.camel_to_snake(name)
 
     # endregion util
 

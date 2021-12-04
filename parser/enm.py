@@ -216,13 +216,14 @@ class EnumWriter(WriteBase):
         self._copy_clipboard = kwargs.get('copy_clipboard', False)
         self._sort = kwargs.get('sort', True)
         self._print = kwargs.get('print', True)
-        self._indent_amt = 4
         self._write_file = kwargs.get('write_file', False)
+        self._indent_amt = 4
         self._file_full_path = None
         self._p_name = None
         self._p_namespace = None
         self._p_url = None
         self._p_desc = None
+        self._p_data = None
         self._path_dir = Path(os.path.dirname(__file__))
         _path = Path(self._path_dir, 'template', 'enum.tmpl')
         if not _path.exists():
