@@ -427,9 +427,9 @@ class MethodBlockInfo:
     tag_main: Tag
 
 class ApiMethodBlock:
-    def __init__(self, block: Tag, blocks: 'MethodBlocks'):
+    def __init__(self, block: Tag, blocks: 'ApiMethodBlocks'):
         self._block: Tag = block
-        self._blocks: MethodBlocks = blocks
+        self._blocks: ApiMethodBlocks = blocks
         self._data = None
 
     def _get_next_sibling(self, el: PageElement) -> PageElement:
@@ -478,13 +478,13 @@ class ApiMethodBlock:
         return True
 
     @property
-    def blocks(self) -> 'MethodBlocks':
+    def blocks(self) -> 'ApiMethodBlocks':
         """
         Gets MethodBlocks instance that generated this instance.
         """
         return self._blocks
 
-class MethodBlocks(BlockObj):
+class ApiMethodBlocks(BlockObj):
     """Get all methods"""
 
     def __init__(self, url:str):
@@ -576,7 +576,7 @@ class PageInfo:
         self._url = url
         self._sdk_link = ''
         self._dict = {}
-        self._mb = MethodBlocks(url=self._url)
+        self._mb = ApiMethodBlocks(url=self._url)
         self._init()
     
     def _init(self):
@@ -603,7 +603,7 @@ class PageInfo:
         return self._mb.soup
     
     @property
-    def method_blocks(self) -> MethodBlocks:
+    def method_blocks(self) -> ApiMethodBlocks:
         """Gets method_blocks value"""
         return self._mb
 # endregion Main Page Parsing
@@ -611,7 +611,7 @@ class PageInfo:
 def main2():
     os.system('cls' if os.name == 'nt' else 'clear')
     url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XFont.html'
-    m_blocks = MethodBlocks(url=url)
+    m_blocks = ApiMethodBlocks(url=url)
     lnk = PageSDKLink(soup=m_blocks.soup)
     print(lnk.get_obj())
     return
