@@ -426,7 +426,7 @@ class MethodBlockInfo:
     tag_title: Tag
     tag_main: Tag
 
-class MethodBlock:
+class ApiMethodBlock:
     def __init__(self, block: Tag, blocks: 'MethodBlocks'):
         self._block: Tag = block
         self._blocks: MethodBlocks = blocks
@@ -508,14 +508,14 @@ class MethodBlocks(BlockObj):
 
         return self._obj_data
 
-    def _get_next(self) -> MethodBlock:
+    def _get_next(self) -> ApiMethodBlock:
         if self._index >= self._len:
             self._index = 0
             self._cur_obj = None
             raise StopIteration
         itm = self._obj_data[self._index]
         self._index += 1
-        mb = MethodBlock(block=itm, blocks=self)
+        mb = ApiMethodBlock(block=itm, blocks=self)
         if not mb.is_valid():
             mb = self._get_next()
         return mb
@@ -523,7 +523,7 @@ class MethodBlocks(BlockObj):
     def __iter__(self):
         return self
 
-    def __next__(self) -> MethodBlock:
+    def __next__(self) -> ApiMethodBlock:
         if not self._obj_data:
             self.get_obj()
             self._len = len(self._obj_data)
@@ -531,8 +531,8 @@ class MethodBlocks(BlockObj):
 
 
 class PageMethodName:
-    def __init__(self, block: MethodBlock):
-        self._block: MethodBlock = block
+    def __init__(self, block: ApiMethodBlock):
+        self._block: ApiMethodBlock = block
 
     def get_obj(self) -> str:
         info = self._block.get_obj()
@@ -542,7 +542,7 @@ class PageMethodName:
 class PageMethodDesc:
     """Gets Enum Description"""
 
-    def __init__(self, block: MethodBlock):
+    def __init__(self, block: ApiMethodBlock):
         self._block = block
         self._cls = 'memdoc'
         self._el = 'div'
