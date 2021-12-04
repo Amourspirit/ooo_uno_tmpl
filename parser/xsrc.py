@@ -539,7 +539,7 @@ class ApiMethodName:
         name: str = info.tag_title.contents[1]
         name = name.replace('(', '').replace(')', '').strip()
         return name
-class PageMethodDesc:
+class ApiMethodDesc:
     """Gets Enum Description"""
 
     def __init__(self, block: ApiMethodBlock):
@@ -584,7 +584,7 @@ class PageInfo:
         self._sdk_link = lnk.get_obj()
         for block in self._mb:
             name = ApiMethodName(block=block)
-            desc = PageMethodDesc(block=block)
+            desc = ApiMethodDesc(block=block)
             self._dict[name.get_obj()] = desc.get_data()
     
     @property
