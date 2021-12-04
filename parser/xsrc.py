@@ -386,7 +386,7 @@ class SdkNamesSpaceInfo:
     # endregion Properties
 
 
-class NameInfo:
+class SdkNameInfo:
     """Gets Name of interface/class etc"""
 
     def __init__(self, text: SdkComponentText):
@@ -636,7 +636,7 @@ def main():
     p_info = PageInfo(url=url)
     m = SdkMethods(url=p_info.sdk_link)
     ns = SdkNamesSpaceInfo(text=m.code_text)
-    ni = NameInfo(text=m.component)
+    ni = SdkNameInfo(text=m.component)
     im = SdkImports(text=m.code_text)
     ex = SdkExtends(text=m.component)
     # print(im.get_obj())
