@@ -340,7 +340,7 @@ class SdkImports:
         """Gets CodeText value"""
         return self._text
     # endregion Properties
-class NamesSpaceInfo:
+class SdkNamesSpaceInfo:
     def __init__(self, text: SdkCodeText):
         self._text = text
         self._ns = ""
@@ -635,7 +635,7 @@ def main():
     url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1beans_1_1XHierarchicalPropertySet.html'
     p_info = PageInfo(url=url)
     m = SdkMethods(url=p_info.sdk_link)
-    ns = NamesSpaceInfo(text=m.code_text)
+    ns = SdkNamesSpaceInfo(text=m.code_text)
     ni = NameInfo(text=m.component)
     im = SdkImports(text=m.code_text)
     ex = SdkExtends(text=m.component)
