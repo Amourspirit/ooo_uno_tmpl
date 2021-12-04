@@ -19,7 +19,7 @@ from dataclasses import dataclass
 from enum import IntEnum
 import re
 
-DEBUGGING = True
+DEBUGGING = False
 
 logger = get_logger(Path(__file__).stem)
 
@@ -30,8 +30,12 @@ re_args_pattern = re.compile(r"\s*(?:\[(\S{2,3})\])?\s*(\S*)\s(\S*)")
 # https://regex101.com/r/HU09ZZ/1
 re_method_pattern = re.compile(
     r"(\S*)\s*(?:(\S*)\()(?:\s(.*)\))|(\S*)\s*([0-9A-Z-a-z]*)")
+# https://regex101.com/r/BdDT4u/1
 re_raises_pattern = re.compile(r"\s*(raises\s*\(.*\))")
+
+re_interface_pattern = re.compile(r"interface\s*([a-zA-Z0-9.]*)\s*;")
 # endregion SDK API Reference
+
 
 @dataclass
 class ParamInfo:
@@ -39,7 +43,16 @@ class ParamInfo:
     name: str
     type: str
 
+# region Exceptions
+
+
+class MethodInvalidError(Exception):
+    pass
+# endregion Exceptions
+
 # region SDK API Reference
+
+
 class SdkCodeText(BlockObj):
     """Responsible for getting code from url"""
 
@@ -52,8 +65,7 @@ class SdkCodeText(BlockObj):
     def get_obj(self) -> str:
         if self._data:
             return self._data
-        
-        print("")
+
         def repl(m):
             multi_line: str = m.group(1)
             lines = multi_line.splitlines(keepends=False)
@@ -111,19 +123,31 @@ class SdkComponentText:
         text = self._code_text.get_obj()
         # https://regex101.com/r/xAqRAU/1/
         # regex = r"published.*\s\{(\s*?.*?)*?\}"
-        
+
         # https://regex101.com/r/xAqRAU/2/
+        # https://regex101.com/r/xAqRAU/4/
         # much more generic
-        regex = r"[a-zA-Z0-9]*\s[a-zA-Z0-9]*:.*\s\{(\s*?.*?)*?\}"
+        regex = r"[a-zA-Z0-9 :]*\n\{(\s*?.*?)*?\}"
+        # regex = r"[a-zA-Z0-9]*\s[a-zA-Z0-9]*:.*\s\{(\s*?.*?)*?\}"
         matches = re.search(regex, text)
-        m = matches[0]
-        self._data = m
+        if matches:
+            m = matches[0]
+            self._data = m
+        else:
+            # https://regex101.com/r/cYL6hj/1
+            # matches when component is not extendes ( no trailing : ...)
+            regex = r"[a-zA-Z0-9]*\s[a-zA-Z0-9]*.*\s\{(\s*?.*?)*?\}"
+            matches = re.search(regex, text)
+            if matches:
+                m = matches[0]
+                self._data = m
         return self._data
 
     @property
     def code_text(self) -> SdkCodeText:
         """Gets code_text value"""
         return self._code_text
+
 
 class SdkMethodData:
     """Gets the info for a single method"""
@@ -138,6 +162,10 @@ class SdkMethodData:
 
     def _set_data(self):
         text = self._param
+        matches = re.search(re_interface_pattern, text)
+        if matches:
+            raise MethodInvalidError(f"'{text}' matches interface")
+
         # check if method include raises...
         matches = re.search(re_raises_pattern, text)
         if matches:
@@ -172,16 +200,20 @@ class SdkMethodData:
                 self._p_return = TYPE_MAP.get(g[0], g[0])
                 self._process_args(g[2])
         return matches
-    
-    def _process_raises(self, text:str):
+
+    def _process_raises(self, text: str):
         # raises( com::sun::star::beans::UnknownPropertyException, com::sun::star::lang::IllegalArgumentException, com::sun::star::lang::WrappedTargetException )
-        s = text.replace('(','|').replace(')', '|').split('|')
+        s = text.replace('(', '|').replace(')', '|').split('|')
         if len(s) <= 1:
             return
         ex = s[1].strip().replace('::', ":").replace(' ', '').split(',')
         self._p_raises.extend(ex)
-        
-        
+
+    def _process_interface(self, text: str):
+        # interface com::sun::star::beans::XPropertySet
+        parts = text.strip().replace("::", '.').rsplit(
+            '.', 1)  # 'com.sun.star.beans', 'XPropertySet'
+        return
 
     def _process_args(self, args: str):
         a = args.replace(', ', ',').strip()
@@ -245,14 +277,14 @@ class SdkMethodsText:
         self._data = self._clean_lines(lines=lines)
         return self._data
 
-    def _get_proper_lines(self, input:str) -> str:
+    def _get_proper_lines(self, input: str) -> str:
         if not input:
             return ''
         # methods may be split across multiple lines.
         # start by collapsing all lines into a single line
         single_line = " ".join(input.splitlines()).strip()
-        
-        #now split all lines by ; and put on new lines again
+
+        # now split all lines by ; and put on new lines again
         new_lines = ";\n".join(single_line.split(';'))
         return new_lines
 
@@ -272,6 +304,24 @@ class SdkMethodsText:
         return self._component
 
 
+class SdkInterfaceData:
+    def __init__(self, text: SdkMethodsText):
+        self._text = text
+        self._data = None
+
+    def get_obj(self) -> List[str]:
+        if self._data:
+            return self._data
+        self._data = []
+        lines = self._text.get_obj()
+        for line in lines:
+            matches = re.search(re_interface_pattern, line)
+            if matches:
+                g = matches.groups()
+                self._data.append(g[0].strip())
+        return self._data
+
+
 class SdkMethods:
     """Iterable class that iterates through Methods and returns info"""
 
@@ -285,6 +335,18 @@ class SdkMethods:
         self._init = False
         self._data: List[str] = None
 
+    def _get_next(self) -> SdkMethodData:
+        if self._index >= self._len:
+            self._index = 0
+            raise StopIteration
+        ln = self._data[self._index]
+        self._index += 1
+        try:
+            md = SdkMethodData(ln)
+        except MethodInvalidError:
+            md = self._get_next()
+        return md
+
     def __iter__(self):
         return self
 
@@ -293,13 +355,7 @@ class SdkMethods:
             self._data: List[str] = self._mt.get_obj()
             self._len = len(self._data)
             self._init = True
-        if self._index >= self._len:
-            self._index = 0
-            raise StopIteration
-        ln = self._data[self._index]
-        md = SdkMethodData(ln)
-        self._index += 1
-        return md
+        return self._get_next()
 
     @property
     def component(self) -> SdkComponentText:
@@ -311,22 +367,32 @@ class SdkMethods:
         """Gets component value"""
         return self._c_text
 
+    @property
+    def methods_text(self) -> SdkMethodsText:
+        return self._mt
+
+
 class SdkExtends:
-    def __init__(self, text: SdkComponentText):
-        self._text = text
-        self._name = ''
+    def __init__(self, c_text: SdkComponentText, m_text: SdkMethodsText):
+        self._c_text = c_text
+        self._m_text = m_text
+        self._ex_lst: List[str] = []
+        self._i_data: SdkInterfaceData = SdkInterfaceData(text=m_text)
         self._init()
-    
+
     def _init(self):
         # regex = r"interface.*:\s*(com::.*)"
-        
+
         # more generic so can work with struct, interface etc
         regex = r"[a-zA-Z]*:\s*(com::.*)"
-        s = self._text.get_text()
+        s = self._c_text.get_text()
         matches = re.search(regex, s)
         if matches:
             g = matches.groups()
-            self._name = g[0].strip().replace('::', '.')
+            self._ex_lst.append(g[0].strip().replace('::', '.'))
+        i_data = self._i_data.get_obj()
+        if len(i_data) > 0:
+            self._ex_lst.extend(i_data)
 
     # region Properties
     @property
@@ -335,18 +401,30 @@ class SdkExtends:
         return self._name
 
     @property
+    def ex_lst(self) -> List[str]:
+        """Gets ex_lst value"""
+        return self._ex_lst
+
+    @property
     def component(self) -> SdkComponentText:
         """Gets component object"""
-        return self._text
+        return self._c_text
+
+    @property
+    def method_text(self) -> SdkMethodsText:
+        """Gets CodeText value"""
+        return self._m_text
     # endregion Properties
+
+
 class SdkImports:
     """
     Gets imports for interface/class etc
     Fromat: ``com.sun.star.awt.Rectangle``
     """
 
-    def __init__(self, text: SdkCodeText):
-        self._text = text
+    def __init__(self, c_text: SdkCodeText,):
+        self._c_text = c_text
         self._imports: List[str] = None
 
     def get_obj(self) -> List[str]:
@@ -360,13 +438,14 @@ class SdkImports:
         if self._imports:
             return self._imports
         self._imports = []
-        
+
         regex = r"#include\s*<(.*)\.idl"
-        test_str = self._text.get_obj()
+        test_str = self._c_text.get_obj()
         matches = re.finditer(regex, test_str)
         for _, match in enumerate(matches, start=1):
             g = match.groups()
             self._process_match(g[0])
+
         return self._imports
 
     def _process_match(self, match: str):
@@ -376,11 +455,15 @@ class SdkImports:
         ns = '.'.join(parts)
         self._imports.append(ns)
     # region Properties
+
     @property
     def code_text(self) -> SdkCodeText:
         """Gets CodeText value"""
-        return self._text
+        return self._c_text
+
     # endregion Properties
+
+
 class SdkNamesSpaceInfo:
     def __init__(self, text: SdkCodeText):
         self._text = text
@@ -434,17 +517,29 @@ class SdkNameInfo:
         self._text = text
         self._name = ''
         self._init()
-    
-    def _init(self):      
+
+    def _init(self):
         # https://regex101.com/r/aNblTo/1/
+        # https://regex101.com/r/aNblTo/2/
+        # https://regex101.com/r/aNblTo/3/
         # more generic so can work with struct, interface etc
-        regex = r"([a-zA-Z0-9]*)\s*:\s*(:?::)?com::"
+        regex = r"([a-zA-Z0-9 :]*)\n\{"
         s = self._text.get_text()
         matches = re.search(regex, s)
         if matches:
             g = matches.groups()
-            self._name = g[0].strip()
-    # region Properties
+            s: str = g[0]
+            # published interface XFont: ::com::sun::star::uno::XInterface
+            # or
+            # published interface XPropertyBag
+            s = s.replace(' ::com', ' com').replace('::', '.')
+            # published interface XFont: com.sun.star.unoXInterface
+
+            s = s.split(':', 1)[0]
+            # published interface XFont
+            self._name = s.rsplit(maxsplit=1)[1].strip()
+            # region Properties
+
     @property
     def name(self) -> str:
         """Gets name value"""
@@ -466,6 +561,7 @@ class MethodBlockInfo:
     tag_id: Tag
     tag_title: Tag
     tag_main: Tag
+
 
 class ApiMethodBlock:
     def __init__(self, block: Tag, blocks: 'ApiMethodBlocks'):
@@ -525,10 +621,11 @@ class ApiMethodBlock:
         """
         return self._blocks
 
+
 class ApiMethodBlocks(BlockObj):
     """Get all methods"""
 
-    def __init__(self, url:str):
+    def __init__(self, url: str):
         soup = SoupObj(url=url)
         if DEBUGGING:
             soup._soup = BeautifulSoup(get_soup_data(), 'lxml')
@@ -582,6 +679,8 @@ class ApiMethodName:
         name: str = info.tag_title.contents[1]
         name = name.replace('(', '').replace(')', '').strip()
         return name
+
+
 class ApiMethodDesc:
     """Gets Enum Description"""
 
@@ -602,7 +701,7 @@ class ApiMethodDesc:
 class ApiSdkLink:
     def __init__(self, soup: SoupObj):
         self._soup = soup
-    
+
     def get_obj(self):
         a = self._soup.soup.select_one("body > div.contents > ul > li > a")
         url = self._soup.url
@@ -614,6 +713,7 @@ class ApiSdkLink:
         """Gets SoupObj instance for this instance"""
         return self._soup
 
+
 class ApiInfo:
     def __init__(self, url: str):
         self._url = url
@@ -621,7 +721,7 @@ class ApiInfo:
         self._dict = {}
         self._mb = ApiMethodBlocks(url=self._url)
         self._init()
-    
+
     def _init(self):
         lnk = ApiSdkLink(soup=self.soup)
         self._sdk_link = lnk.get_obj()
@@ -629,27 +729,28 @@ class ApiInfo:
             name = ApiMethodName(block=block)
             desc = ApiMethodDesc(block=block)
             self._dict[name.get_obj()] = desc.get_data()
-    
+
     @property
     def desc_dict(self) -> Dict[str, str]:
         """Dictionary that contains descriptions. Key is method name"""
         return self._dict
-    
+
     @property
     def sdk_link(self) -> str:
         """Gets sdk_link value"""
         return self._sdk_link
-    
+
     @property
     def soup(self) -> SoupObj:
         """Gets SoupObj instance for this instance"""
         return self._mb.soup
-    
+
     @property
     def method_blocks(self) -> ApiMethodBlocks:
         """Gets method_blocks value"""
         return self._mb
 # endregion Main Page Parsing
+
 
 def main2():
     os.system('cls' if os.name == 'nt' else 'clear')
@@ -669,6 +770,7 @@ def main2():
         # print("main", info.tag_main)
         # print("title",info.tag_title)
 
+
 def main():
     os.system('cls' if os.name == 'nt' else 'clear')
     # url = 'https://api.libreoffice.org/docs/idl/ref/XWindow_8idl_source.html'
@@ -676,23 +778,28 @@ def main():
     # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XFont.html'
     # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1media_1_1XPlayerWindow.html'
     url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1beans_1_1XHierarchicalPropertySet.html'
+
+    # interfaces
+    # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1beans_1_1XPropertyBag.html'
     p_info = ApiInfo(url=url)
     m = SdkMethods(url=p_info.sdk_link)
     ns = SdkNamesSpaceInfo(text=m.code_text)
     ni = SdkNameInfo(text=m.component)
-    im = SdkImports(text=m.code_text)
-    ex = SdkExtends(text=m.component)
-    # print(im.get_obj())
+    im = SdkImports(c_text=m.code_text)
+    ex = SdkExtends(c_text=m.component, m_text=m.methods_text)
     print(ni.name)
-    print("Extends:", ex.name)
-    print("Namespace:",ns.namespace)
-    
+    print("imports:", im.get_obj())
+    print("Extends:", ex.ex_lst)
+    print("Namespace:", ns.namespace)
+
     for meth in m:
-        print("name:" ,meth.name)
-        print("return type:",meth.return_type)
+        print("name:", meth.name)
+        print("return type:", meth.return_type)
         print("args:", meth.args)
         print("raises:", meth.raises)
         print("Desc:", p_info.desc_dict.get(meth.name, ''))
+
+# region Debugging Data
 
 
 def get_code_text_data():
@@ -1008,5 +1115,9 @@ Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="foote
 </html>
 """
     return result
+
+# endregion Debugging Data
+
+
 if __name__ == '__main__':
     main()
