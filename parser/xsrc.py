@@ -298,7 +298,7 @@ class SdkExtends:
         """Gets component object"""
         return self._text
     # endregion Properties
-class Imports:
+class SdkImports:
     """
     Gets imports for interface/class etc
     Fromat: ``com.sun.star.awt.Rectangle``
@@ -637,7 +637,7 @@ def main():
     m = SdkMethods(url=p_info.sdk_link)
     ns = NamesSpaceInfo(text=m.code_text)
     ni = NameInfo(text=m.component)
-    im = Imports(text=m.code_text)
+    im = SdkImports(text=m.code_text)
     ex = SdkExtends(text=m.component)
     # print(im.get_obj())
     print(ni.name)
