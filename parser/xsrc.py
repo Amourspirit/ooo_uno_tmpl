@@ -123,7 +123,7 @@ class SdkComponentText:
         """Gets code_text value"""
         return self._code_text
 
-class MethodData:
+class SdkMethodData:
     """Gets the info for a single method"""
 
     def __init__(self, parm: str):
@@ -247,7 +247,7 @@ class Methods:
     def __iter__(self):
         return self
 
-    def __next__(self) -> MethodData:
+    def __next__(self) -> SdkMethodData:
         if not self._init:
             self._data: List[str] = self._mt.get_obj()
             self._len = len(self._data)
@@ -256,7 +256,7 @@ class Methods:
             self._index = 0
             raise StopIteration
         ln = self._data[self._index]
-        md = MethodData(ln)
+        md = SdkMethodData(ln)
         self._index += 1
         return md
 
