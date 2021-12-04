@@ -30,6 +30,7 @@ re_args_pattern = re.compile(r"\s*(?:\[(\S{2,3})\])?\s*(\S*)\s(\S*)")
 # https://regex101.com/r/HU09ZZ/1
 re_method_pattern = re.compile(
     r"(\S*)\s*(?:(\S*)\()(?:\s(.*)\))|(\S*)\s*([0-9A-Z-a-z]*)")
+re_raises_pattern = re.compile(r"\s*(raises\s*\(.*\))")
 # endregion SDK API Reference
 
 @dataclass
@@ -45,8 +46,8 @@ class SdkCodeText(BlockObj):
     def __init__(self, soup: SoupObj):
         super().__init__(soup=soup)
         self._data = None
-        if DEBUGGING:
-            self._data = get_code_text_data()
+        # if DEBUGGING:
+        #     self._data = get_code_text_data()
 
     def get_obj(self) -> str:
         if self._data:
@@ -64,9 +65,10 @@ class SdkCodeText(BlockObj):
             if r_text:
                 lines.append(r_text)
         result = '\n'.join(lines)
+        # xerox.copy(result)
         # some methods are are written on several lines. Replace to remove line breaks
-        result = re.sub('((?:[a-zA-Z0-9]*)\( .*?\);)',
-                        repl, result, flags=re.DOTALL)
+        # result = re.sub(r'((?:[a-zA-Z0-9]*)\( .*?\);)',
+        #                 repl, result, flags=re.DOTALL)
         self._data = result
         # print("")
         # print("CodeText Data:")
@@ -131,10 +133,19 @@ class SdkMethodData:
         self._p_name = ''
         self._p_return = ''
         self._p_args: List[ParamInfo] = []
+        self._p_raises: List[str] = []
         self._set_data()
 
     def _set_data(self):
-        matches = re.search(re_method_pattern, self._param)
+        text = self._param
+        # check if method include raises...
+        matches = re.search(re_raises_pattern, text)
+        if matches:
+            g = matches.groups()
+            self._process_raises(g[0])
+            # remove raises text section
+            text = re.sub(re_raises_pattern, '', text)
+        matches = re.search(re_method_pattern, text)
         # when there are parameters
         #   group 0 return type eg: com.sun.star.awt.Rectangle
         #   group 1 method name eg: getPosSize
@@ -161,6 +172,16 @@ class SdkMethodData:
                 self._p_return = TYPE_MAP.get(g[0], g[0])
                 self._process_args(g[2])
         return matches
+    
+    def _process_raises(self, text:str):
+        # raises( com::sun::star::beans::UnknownPropertyException, com::sun::star::lang::IllegalArgumentException, com::sun::star::lang::WrappedTargetException )
+        s = text.replace('(','|').replace(')', '|').split('|')
+        if len(s) <= 1:
+            return
+        ex = s[1].strip().replace('::', ":").replace(' ', '').split(',')
+        self._p_raises.extend(ex)
+        
+        
 
     def _process_args(self, args: str):
         a = args.replace(', ', ',').strip()
@@ -191,13 +212,17 @@ class SdkMethodData:
         """Gets method Return Type"""
         return self._p_return
 
+    @property
+    def raises(self) -> List[str]:
+        """Gets raises value"""
+        return self._p_raises
     # endregion Properties
 
 
 class SdkMethodsText:
     """
-    Responsible for getting all lines of Component
-    lines have a simple cleaning that replace :: with .
+    Responsible for getting all lines of Component.
+    Lines have a simple cleaning that replace :: with .
     """
 
     def __init__(self, f_text: SdkComponentText):
@@ -208,16 +233,32 @@ class SdkMethodsText:
         if self._data:
             return self._data
         text = self._component.get_text()
-        regex = r"\{\s((\s*?.*?)*?)\}"
-        matches = re.search(regex, text)
-        m = matches[1]
-        lines = self._remove_empty(m)
+        # text includes name and {} such as interface XHierarchicalPropertySet: com::sun::star::uno::XInterface\n{...\n}
+        # remove the outter text
+        inner_re = r"\{(.*)\}"
+        matches = re.search(inner_re, text, flags=re.DOTALL)
+        if matches:
+            g = matches.groups()
+            text = g[0]
+        text = self._get_proper_lines(input=text)
+        lines = self._remove_empty(text)
         self._data = self._clean_lines(lines=lines)
         return self._data
 
+    def _get_proper_lines(self, input:str) -> str:
+        if not input:
+            return ''
+        # methods may be split across multiple lines.
+        # start by collapsing all lines into a single line
+        single_line = " ".join(input.splitlines()).strip()
+        
+        #now split all lines by ; and put on new lines again
+        new_lines = ";\n".join(single_line.split(';'))
+        return new_lines
+
     def _remove_empty(self, input: str) -> List[str]:
         lines = input.splitlines(keepends=False)
-        return [line for line in lines if line.strip() != '']
+        return [line.strip() for line in lines if line.strip() != '']
 
     def _clean_lines(self, lines: List[str]) -> List[str]:
         result = []
@@ -489,6 +530,8 @@ class ApiMethodBlocks(BlockObj):
 
     def __init__(self, url:str):
         soup = SoupObj(url=url)
+        if DEBUGGING:
+            soup._soup = BeautifulSoup(get_soup_data(), 'lxml')
         super().__init__(soup=soup)
         self._obj_data = None
         self._index = 0
@@ -648,6 +691,7 @@ def main():
         print("name:" ,meth.name)
         print("return type:",meth.return_type)
         print("args:", meth.args)
+        print("raises:", meth.raises)
         print("Desc:", p_info.desc_dict.get(meth.name, ''))
 
 
@@ -694,5 +738,275 @@ any getHierarchicalPropertyValue( [in] string aHierarchicalPropertyName ) raises
 """
     return result
 
+
+def get_soup_data():
+    result = """
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>LibreOffice: XHierarchicalPropertySet Interface Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">LibreOffice
+   </div>
+   <div id="projectbrief">LibreOffice 7.2 SDK API Reference</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.1 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Search','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespacecom.html">com</a></li><li class="navelem"><a class="el" href="namespacecom_1_1sun.html">sun</a></li><li class="navelem"><a class="el" href="namespacecom_1_1sun_1_1star.html">star</a></li><li class="navelem"><a class="el" href="namespacecom_1_1sun_1_1star_1_1beans.html">beans</a></li><li class="navelem"><a class="el" href="interfacecom_1_1sun_1_1star_1_1beans_1_1XHierarchicalPropertySet.html">XHierarchicalPropertySet</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="interfacecom_1_1sun_1_1star_1_1beans_1_1XHierarchicalPropertySet-members.html">List of all members</a>  </div>
+  <div class="headertitle">
+<div class="title">XHierarchicalPropertySet Interface Reference<span class="mlabels"><span class="mlabel">published</span></span></div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>provides information about and access to the a hierarchy of properties from an implementation.  
+ <a href="interfacecom_1_1sun_1_1star_1_1beans_1_1XHierarchicalPropertySet.html#details">More...</a></p>
+
+<p><code>import&quot;<a class="el" href="XHierarchicalPropertySet_8idl_source.html">XHierarchicalPropertySet.idl</a>&quot;;</code></p>
+<div class="dynheader">
+Inheritance diagram for XHierarchicalPropertySet:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="interfacecom_1_1sun_1_1star_1_1beans_1_1XHierarchicalPropertySet.png" usemap="#XHierarchicalPropertySet_map" alt=""/>
+  <map id="XHierarchicalPropertySet_map" name="XHierarchicalPropertySet_map">
+<area href="interfacecom_1_1sun_1_1star_1_1uno_1_1XInterface.html" title="base interface of all UNO interfaces" alt="XInterface" shape="rect" coords="89,0,258,24"/>
+<area href="servicecom_1_1sun_1_1star_1_1configuration_1_1PropertyHierarchy.html" title="provides access to and information about properties and subproperties of an implementation." alt="PropertyHierarchy" shape="rect" coords="89,112,258,136"/>
+<area href="servicecom_1_1sun_1_1star_1_1configuration_1_1GroupAccess.html" title="provides access to a predefined heterogeneous group of values and nested trees as part of a hierarchy..." alt="GroupAccess" shape="rect" coords="89,168,258,192"/>
+<area href="servicecom_1_1sun_1_1star_1_1configuration_1_1ConfigurationAccess.html" title="provides read access to a fragment of the configuration hierarchy." alt="ConfigurationAccess" shape="rect" coords="0,224,169,248"/>
+<area href="servicecom_1_1sun_1_1star_1_1configuration_1_1GroupUpdate.html" title="provides write access to a predefined heterogeneous group of values and nested trees as part of a hie..." alt="GroupUpdate" shape="rect" coords="179,224,348,248"/>
+<area href="servicecom_1_1sun_1_1star_1_1configuration_1_1ConfigurationUpdateAccess.html" title="provides modifying access to a fragment of the configuration hierarchy." alt="ConfigurationUpdateAccess" shape="rect" coords="0,280,169,304"/>
+<area href="servicecom_1_1sun_1_1star_1_1configuration_1_1ConfigurationUpdateAccess.html" title="provides modifying access to a fragment of the configuration hierarchy." alt="ConfigurationUpdateAccess" shape="rect" coords="179,280,348,304"/>
+  </map>
+</div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a4d570f251588935879de379bfe7e90a3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="interfacecom_1_1sun_1_1star_1_1beans_1_1XHierarchicalPropertySetInfo.html">com::sun::star::beans::XHierarchicalPropertySetInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfacecom_1_1sun_1_1star_1_1beans_1_1XHierarchicalPropertySet.html#a4d570f251588935879de379bfe7e90a3">getHierarchicalPropertySetInfo</a> ()</td></tr>
+<tr class="memdesc:a4d570f251588935879de379bfe7e90a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">retrieve information about the hierarchy of properties  <a href="interfacecom_1_1sun_1_1star_1_1beans_1_1XHierarchicalPropertySet.html#a4d570f251588935879de379bfe7e90a3">More...</a><br /></td></tr>
+<tr class="separator:a4d570f251588935879de379bfe7e90a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3199a2c3aac68e54fb0c3e5678dd27d4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfacecom_1_1sun_1_1star_1_1beans_1_1XHierarchicalPropertySet.html#a3199a2c3aac68e54fb0c3e5678dd27d4">setHierarchicalPropertyValue</a> ([in] string aHierarchicalPropertyName, [in] any aValue)  raises ( com::sun::star::beans::UnknownPropertyException,                    com::sun::star::beans::PropertyVetoException,                    com::sun::star::lang::IllegalArgumentException,                    com::sun::star::lang::WrappedTargetException )</td></tr>
+<tr class="memdesc:a3199a2c3aac68e54fb0c3e5678dd27d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">sets the value of the property with the specified nested name.  <a href="interfacecom_1_1sun_1_1star_1_1beans_1_1XHierarchicalPropertySet.html#a3199a2c3aac68e54fb0c3e5678dd27d4">More...</a><br /></td></tr>
+<tr class="separator:a3199a2c3aac68e54fb0c3e5678dd27d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a57310c407a4938c0e3d7e1d9f9117750"><td class="memItemLeft" align="right" valign="top">any&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfacecom_1_1sun_1_1star_1_1beans_1_1XHierarchicalPropertySet.html#a57310c407a4938c0e3d7e1d9f9117750">getHierarchicalPropertyValue</a> ([in] string aHierarchicalPropertyName)  raises ( com::sun::star::beans::UnknownPropertyException,                    com::sun::star::lang::IllegalArgumentException,                    com::sun::star::lang::WrappedTargetException )</td></tr>
+<tr class="separator:a57310c407a4938c0e3d7e1d9f9117750"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_interfacecom_1_1sun_1_1star_1_1uno_1_1XInterface"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_interfacecom_1_1sun_1_1star_1_1uno_1_1XInterface')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="interfacecom_1_1sun_1_1star_1_1uno_1_1XInterface.html">XInterface</a></td></tr>
+<tr class="memitem:ac368fa472a7f656e0b7c77859c971fc4 inherit pub_methods_interfacecom_1_1sun_1_1star_1_1uno_1_1XInterface"><td class="memItemLeft" align="right" valign="top">any&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfacecom_1_1sun_1_1star_1_1uno_1_1XInterface.html#ac368fa472a7f656e0b7c77859c971fc4">queryInterface</a> ([in] type aType)</td></tr>
+<tr class="memdesc:ac368fa472a7f656e0b7c77859c971fc4 inherit pub_methods_interfacecom_1_1sun_1_1star_1_1uno_1_1XInterface"><td class="mdescLeft">&#160;</td><td class="mdescRight">queries for a new interface to an existing UNO object.  <a href="interfacecom_1_1sun_1_1star_1_1uno_1_1XInterface.html#ac368fa472a7f656e0b7c77859c971fc4">More...</a><br /></td></tr>
+<tr class="separator:ac368fa472a7f656e0b7c77859c971fc4 inherit pub_methods_interfacecom_1_1sun_1_1star_1_1uno_1_1XInterface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af9f5b35a212d21af601a8213ed325871 inherit pub_methods_interfacecom_1_1sun_1_1star_1_1uno_1_1XInterface"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfacecom_1_1sun_1_1star_1_1uno_1_1XInterface.html#af9f5b35a212d21af601a8213ed325871">acquire</a> ()</td></tr>
+<tr class="memdesc:af9f5b35a212d21af601a8213ed325871 inherit pub_methods_interfacecom_1_1sun_1_1star_1_1uno_1_1XInterface"><td class="mdescLeft">&#160;</td><td class="mdescRight">increases the reference counter by one.  <a href="interfacecom_1_1sun_1_1star_1_1uno_1_1XInterface.html#af9f5b35a212d21af601a8213ed325871">More...</a><br /></td></tr>
+<tr class="separator:af9f5b35a212d21af601a8213ed325871 inherit pub_methods_interfacecom_1_1sun_1_1star_1_1uno_1_1XInterface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a23b477d0e2d399f75d585d154c346591 inherit pub_methods_interfacecom_1_1sun_1_1star_1_1uno_1_1XInterface"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfacecom_1_1sun_1_1star_1_1uno_1_1XInterface.html#a23b477d0e2d399f75d585d154c346591">release</a> ()</td></tr>
+<tr class="memdesc:a23b477d0e2d399f75d585d154c346591 inherit pub_methods_interfacecom_1_1sun_1_1star_1_1uno_1_1XInterface"><td class="mdescLeft">&#160;</td><td class="mdescRight">decreases the reference counter by one.  <a href="interfacecom_1_1sun_1_1star_1_1uno_1_1XInterface.html#a23b477d0e2d399f75d585d154c346591">More...</a><br /></td></tr>
+<tr class="separator:a23b477d0e2d399f75d585d154c346591 inherit pub_methods_interfacecom_1_1sun_1_1star_1_1uno_1_1XInterface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>provides information about and access to the a hierarchy of properties from an implementation. </p>
+<p>Usually an object that implements this interface also implements <a class="el" href="interfacecom_1_1sun_1_1star_1_1beans_1_1XPropertySet.html" title="provides information about and access to the properties from an implementation.">XPropertySet</a> and at least some of the properties have subproperties. </p>
+<p>This interface allows direct access to subsubproperties, ... up to an arbitrary nesting depth. Often the intermediate elements of the hierarchy implement <a class="el" href="interfacecom_1_1sun_1_1star_1_1beans_1_1XProperty.html" title="Is implemented by objects that also are a property of some other object.">XProperty</a>. </p>
+<p>Each implementation specifies how the hierarchical property names, that are used to access the elements of the hierarchy, are formed. </p>
+<p>Commonly a notation similar to filesystem paths (separated by '/' slashes) or nested module names (separated by dots '.' or '::') is used. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a4d570f251588935879de379bfe7e90a3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4d570f251588935879de379bfe7e90a3">&#9670;&nbsp;</a></span>getHierarchicalPropertySetInfo()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="interfacecom_1_1sun_1_1star_1_1beans_1_1XHierarchicalPropertySetInfo.html">com::sun::star::beans::XHierarchicalPropertySetInfo</a> getHierarchicalPropertySetInfo </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>retrieve information about the hierarchy of properties </p>
+<dl class="section return"><dt>Returns</dt><dd>the <a class="el" href="interfacecom_1_1sun_1_1star_1_1beans_1_1XHierarchicalPropertySetInfo.html" title="specifies a hierarchy of properties.">XHierarchicalPropertySetInfo</a> interface, which describes the property hierarchy of the object which supplies this interface.</dd>
+<dd>
+<code>NULL</code> if the implementation cannot or will not provide information about the properties; otherwise the interface <a class="el" href="interfacecom_1_1sun_1_1star_1_1beans_1_1XHierarchicalPropertySetInfo.html" title="specifies a hierarchy of properties.">XHierarchicalPropertySetInfo</a> is returned. </dd></dl>
+
+</div>
+</div>
+<a id="a57310c407a4938c0e3d7e1d9f9117750"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a57310c407a4938c0e3d7e1d9f9117750">&#9670;&nbsp;</a></span>getHierarchicalPropertyValue()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">any getHierarchicalPropertyValue </td>
+          <td>(</td>
+          <td class="paramtype">[in] string&#160;</td>
+          <td class="paramname"><em>aHierarchicalPropertyName</em></td><td>)</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td align="right">raises </td><td>(</td><td colspan="2"> <a class="el" href="exceptioncom_1_1sun_1_1star_1_1beans_1_1UnknownPropertyException.html">com::sun::star::beans::UnknownPropertyException</a>,</td>
+        </tr>
+        <tr>
+          <td align="right"></td><td></td><td colspan="2">                    <a class="el" href="exceptioncom_1_1sun_1_1star_1_1lang_1_1IllegalArgumentException.html">com::sun::star::lang::IllegalArgumentException</a>,</td>
+        </tr>
+        <tr>
+          <td align="right"></td><td></td><td colspan="2"><a class="el" href="exceptioncom_1_1sun_1_1star_1_1lang_1_1WrappedTargetException.html">com::sun::star::lang::WrappedTargetException</a></td>
+        </tr>
+        <tr>
+          <td align="right"></td><td>)</td><td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>the value of the property with the specified nested name.</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">aHierarchicalPropertyName</td><td>This parameter specifies the name of the property.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="exceptioncom_1_1sun_1_1star_1_1beans_1_1UnknownPropertyException.html" title="This exception is thrown to indicate that the property name is unknown to the implementation.">UnknownPropertyException</a></td><td>if the property does not exist.</td></tr>
+    <tr><td class="paramname">com::sun::star::uno::lang::IllegalArgumentException</td><td>if <em>aHierarchicalPropertyName</em> is not a well-formed nested name for this hierarchy. An implementation is not required to detect this condition.</td></tr>
+    <tr><td class="paramname"><a class="el" href="exceptioncom_1_1sun_1_1star_1_1lang_1_1WrappedTargetException.html" title="This is a checked exception that wraps an exception thrown by the original target.">com::sun::star::lang::WrappedTargetException</a></td><td>if the implementation has an internal reason for the exception. In this case the original exception is wrapped into that <a class="el" href="exceptioncom_1_1sun_1_1star_1_1lang_1_1WrappedTargetException.html" title="This is a checked exception that wraps an exception thrown by the original target.">com::sun::star::lang::WrappedTargetException</a>.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="interfacecom_1_1sun_1_1star_1_1beans_1_1XPropertySet.html#a233801155a885acba5038e2dfb414ab4">XPropertySet::getPropertyValue</a> </dd></dl>
+
+</div>
+</div>
+<a id="a3199a2c3aac68e54fb0c3e5678dd27d4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3199a2c3aac68e54fb0c3e5678dd27d4">&#9670;&nbsp;</a></span>setHierarchicalPropertyValue()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void setHierarchicalPropertyValue </td>
+          <td>(</td>
+          <td class="paramtype">[in] string&#160;</td>
+          <td class="paramname"><em>aHierarchicalPropertyName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">[in] any&#160;</td>
+          <td class="paramname"><em>aValue</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+        <tr>
+          <td align="right">raises </td><td>(</td><td colspan="2"> <a class="el" href="exceptioncom_1_1sun_1_1star_1_1beans_1_1UnknownPropertyException.html">com::sun::star::beans::UnknownPropertyException</a>,</td>
+        </tr>
+        <tr>
+          <td align="right"></td><td></td><td colspan="2">                    <a class="el" href="exceptioncom_1_1sun_1_1star_1_1beans_1_1PropertyVetoException.html">com::sun::star::beans::PropertyVetoException</a>,</td>
+        </tr>
+        <tr>
+          <td align="right"></td><td></td><td colspan="2">                    <a class="el" href="exceptioncom_1_1sun_1_1star_1_1lang_1_1IllegalArgumentException.html">com::sun::star::lang::IllegalArgumentException</a>,</td>
+        </tr>
+        <tr>
+          <td align="right"></td><td></td><td colspan="2"><a class="el" href="exceptioncom_1_1sun_1_1star_1_1lang_1_1WrappedTargetException.html">com::sun::star::lang::WrappedTargetException</a></td>
+        </tr>
+        <tr>
+          <td align="right"></td><td>)</td><td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>sets the value of the property with the specified nested name. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">aHierarchicalPropertyName</td><td>This parameter specifies the name of the property.</td></tr>
+    <tr><td class="paramname">aValue</td><td>This parameter specifies the new value for the property.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="exceptioncom_1_1sun_1_1star_1_1beans_1_1UnknownPropertyException.html" title="This exception is thrown to indicate that the property name is unknown to the implementation.">UnknownPropertyException</a></td><td>if the property does not exist.</td></tr>
+    <tr><td class="paramname"><a class="el" href="exceptioncom_1_1sun_1_1star_1_1beans_1_1PropertyVetoException.html" title="This exception is thrown when a proposed change to a property represents an unacceptable value.">PropertyVetoException</a></td><td>if the property is constrained and the change is vetoed by a <a class="el" href="interfacecom_1_1sun_1_1star_1_1beans_1_1XVetoableChangeListener.html" title="is used to receive PropertyChangeEvents whenever a &quot;constrained&quot; property is changed.">XVetoableChangeListener</a>.</td></tr>
+    <tr><td class="paramname">com::sun::star::uno::lang::IllegalArgumentException</td><td>if <em>aValue</em> is not a legal value for this property or if <em>aHierarchicalPropertyName</em> is not a well-formed nested name for this hierarchy. An implementation is not required to detect the latter condition.</td></tr>
+    <tr><td class="paramname"><a class="el" href="exceptioncom_1_1sun_1_1star_1_1lang_1_1WrappedTargetException.html" title="This is a checked exception that wraps an exception thrown by the original target.">com::sun::star::lang::WrappedTargetException</a></td><td>if the implementation has an internal reason for the exception. In this case the original exception is wrapped into that <a class="el" href="exceptioncom_1_1sun_1_1star_1_1lang_1_1WrappedTargetException.html" title="This is a checked exception that wraps an exception thrown by the original target.">com::sun::star::lang::WrappedTargetException</a>.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="interfacecom_1_1sun_1_1star_1_1beans_1_1XPropertySet.html#ac83d5c7678aa889b81dd1d59ebcd2a96" title="sets the value of the property with the specified name.">XPropertySet::setPropertyValue</a> </dd></dl>
+
+</div>
+</div>
+<hr/>The documentation for this interface was generated from the following file:<ul>
+<li>com/sun/star/beans/<a class="el" href="XHierarchicalPropertySet_8idl_source.html">XHierarchicalPropertySet.idl</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+</small></address>
+</body>
+</html>
+"""
+    return result
 if __name__ == '__main__':
     main()

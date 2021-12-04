@@ -16,6 +16,7 @@ from logger.log_handle import get_logger
 logger = get_logger(__name__)
 
 TYPE_MAP = {
+    "any": "object",
     "short": "int",
     "long": "int",
     "float": "float",
