@@ -270,7 +270,7 @@ class SdkMethods:
         """Gets component value"""
         return self._c_text
 
-class Extends:
+class SdkExtends:
     def __init__(self, text: SdkComponentText):
         self._text = text
         self._name = ''
@@ -638,7 +638,7 @@ def main():
     ns = NamesSpaceInfo(text=m.code_text)
     ni = NameInfo(text=m.component)
     im = Imports(text=m.code_text)
-    ex = Extends(text=m.component)
+    ex = SdkExtends(text=m.component)
     # print(im.get_obj())
     print(ni.name)
     print("Extends:", ex.name)
