@@ -382,11 +382,9 @@ class NameInfo:
         self._init()
     
     def _init(self):      
-        # will also match published Interface
-        # regex = r"interface\s*(\S*):"
-        
+        # https://regex101.com/r/aNblTo/1/
         # more generic so can work with struct, interface etc
-        regex = r"[a-zA-Z]*\s*(\S*):\s"
+        regex = r"([a-zA-Z0-9]*)\s*:\s*(:?::)?com::"
         s = self._text.get_text()
         matches = re.search(regex, s)
         if matches:
@@ -406,24 +404,237 @@ class NameInfo:
 
 # endregion SDK API Reference
 
+# region Main Page Parsing
+
+
+@dataclass
+class MethodBlockInfo:
+    tag_id: Tag
+    tag_title: Tag
+    tag_main: Tag
+
+class MethodBlock:
+    def __init__(self, block: Tag, blocks: 'MethodBlocks'):
+        self._block: Tag = block
+        self._blocks: MethodBlocks = blocks
+        self._data = None
+
+    def _get_next_sibling(self, el: PageElement) -> PageElement:
+        # get the next sibling recursivly because
+        # BeautifulSoup will also find whitesapce on next_sibling
+        if not isinstance(el, PageElement):
+            raise TypeError(
+                f"MethodBlock._get_next_sibling() el is not a PageElement")
+        next = el.next_sibling
+        # https://stackoverflow.com/questions/10711116/strip-spaces-tabs-newlines-python
+        # use split join to remove whitespace and new line
+        s = ''.join(str(next).split())
+        if s == '':
+            next = self._get_next_sibling(next)
+        return next
+
+    def get_obj(self) -> MethodBlockInfo:
+        # BeautifulSoup will also find whitesapce on next_sibling
+        # https://stackoverflow.com/questions/5690686/using-nextsibling-from-beautifulsoup-outputs-nothing
+        if self._data:
+            return self._data
+        tag = self._block  # a tag with id
+        try:
+            title: PageElement = self._get_next_sibling(tag)
+            main = self._get_next_sibling(title)
+            mi = MethodBlockInfo(
+                tag_id=tag,
+                tag_title=title,
+                tag_main=main
+            )
+        except Exception as e:
+            logger.error(e)
+            raise e
+        self._data = mi
+        return self._data
+
+    def is_valid(self) -> bool:
+        if not self._block:
+            return False
+        tag = self._block
+        _id = tag.attrs.get('id', None)
+        if not _id:
+            return False
+        if str(_id).lower() == 'details':
+            return False
+        return True
+
+    @property
+    def blocks(self) -> 'MethodBlocks':
+        """
+        Gets MethodBlocks instance that generated this instance.
+        """
+        return self._blocks
+
+class MethodBlocks(BlockObj):
+    """Get all methods"""
+
+    def __init__(self, url:str):
+        soup = SoupObj(url=url)
+        super().__init__(soup=soup)
+        self._obj_data = None
+        self._index = 0
+        self._len = 0
+
+    def get_obj(self) -> ResultSet:
+        """
+        Gets all items, methods etc
+
+        Returns:
+            ResultSet: List of items
+        """
+        if self._obj_data:
+            return self._obj_data
+        # _cls = 'memitem'
+        self._obj_data = self._soup.soup.select("a[id]")
+
+        return self._obj_data
+
+    def _get_next(self) -> MethodBlock:
+        if self._index >= self._len:
+            self._index = 0
+            self._cur_obj = None
+            raise StopIteration
+        itm = self._obj_data[self._index]
+        self._index += 1
+        mb = MethodBlock(block=itm, blocks=self)
+        if not mb.is_valid():
+            mb = self._get_next()
+        return mb
+
+    def __iter__(self):
+        return self
+
+    def __next__(self) -> MethodBlock:
+        if not self._obj_data:
+            self.get_obj()
+            self._len = len(self._obj_data)
+        return self._get_next()
+
+
+class PageMethodName:
+    def __init__(self, block: MethodBlock):
+        self._block: MethodBlock = block
+
+    def get_obj(self) -> str:
+        info = self._block.get_obj()
+        name: str = info.tag_title.contents[1]
+        name = name.replace('(', '').replace(')', '').strip()
+        return name
+class PageMethodDesc:
+    """Gets Enum Description"""
+
+    def __init__(self, block: MethodBlock):
+        self._block = block
+        self._cls = 'memdoc'
+        self._el = 'div'
+
+    def get_data(self) -> str:
+        info = self._block.get_obj()
+        tag = info.tag_main.find(self._el, class_=self._cls)
+        lines_found: ResultSet = tag.select(f'{self._el}.{self._cls} > p')
+        p_obj = TagsStrObj(tags=lines_found)
+        desc = p_obj.get_data()
+        return desc
+
+
+class PageSDKLink:
+    def __init__(self, soup: SoupObj):
+        self._soup = soup
+    
+    def get_obj(self):
+        a = self._soup.soup.select_one("body > div.contents > ul > li > a")
+        url = self._soup.url
+        parts = url.rsplit('/', 1)
+        return parts[0] + '/' + a['href']
+
+    @property
+    def soup(self) -> SoupObj:
+        """Gets SoupObj instance for this instance"""
+        return self._soup
+
+class PageInfo:
+    def __init__(self, url: str):
+        self._url = url
+        self._sdk_link = ''
+        self._dict = {}
+        self._mb = MethodBlocks(url=self._url)
+        self._init()
+    
+    def _init(self):
+        lnk = PageSDKLink(soup=self.soup)
+        self._sdk_link = lnk.get_obj()
+        for block in self._mb:
+            name = PageMethodName(block=block)
+            desc = PageMethodDesc(block=block)
+            self._dict[name.get_obj()] = desc.get_data()
+    
+    @property
+    def desc_dict(self) -> Dict[str, str]:
+        """Dictionary that contains descriptions. Key is method name"""
+        return self._dict
+    
+    @property
+    def sdk_link(self) -> str:
+        """Gets sdk_link value"""
+        return self._sdk_link
+    
+    @property
+    def soup(self) -> SoupObj:
+        """Gets SoupObj instance for this instance"""
+        return self._mb.soup
+    
+    @property
+    def method_blocks(self) -> MethodBlocks:
+        """Gets method_blocks value"""
+        return self._mb
+# endregion Main Page Parsing
+
+def main2():
+    os.system('cls' if os.name == 'nt' else 'clear')
+    url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XFont.html'
+    m_blocks = MethodBlocks(url=url)
+    lnk = PageSDKLink(soup=m_blocks.soup)
+    print(lnk.get_obj())
+    return
+    # body > div.contents > ul > li > a
+    for block in m_blocks:
+        info = block.get_obj()
+        name = PageMethodName(block=block)
+        desc = PageMethodDesc(block=block)
+        print(name.get_obj())
+        print(desc.get_data())
+        # print("tag",info.tag_id)
+        # print("main", info.tag_main)
+        # print("title",info.tag_title)
+
 def main():
     os.system('cls' if os.name == 'nt' else 'clear')
-    url = 'https://api.libreoffice.org/docs/idl/ref/XWindow_8idl_source.html'
+    # url = 'https://api.libreoffice.org/docs/idl/ref/XWindow_8idl_source.html'
     # url = 'https://api.libreoffice.org/docs/idl/ref/XFont_8idl_source.html'
-    m = Methods(url=url)
+    url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XFont.html'
+    # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1media_1_1XPlayerWindow.html'
+    p_info = PageInfo(url=url)
+    m = Methods(url=p_info.sdk_link)
     ns = NamesSpaceInfo(text=m.code_text)
     ni = NameInfo(text=m.component)
     im = Imports(text=m.code_text)
     ex = Extends(text=m.component)
-    print(im.get_obj())
+    # print(im.get_obj())
     print(ni.name)
     print("Extends:", ex.name)
+    print("Namespace:",ns.namespace)
     
-    # for meth in m:
-    #     print(meth.name)
-    #     print(meth.return_type)
-    #     print(meth.args)
-    print(ns.namespace)
+    for meth in m:
+        print("name:" ,meth.name)
+        print("return type:",meth.return_type)
+        print("args:", meth.args)
+        print("Desc:", p_info.desc_dict.get(meth.name, ''))
 
 
 if __name__ == '__main__':
