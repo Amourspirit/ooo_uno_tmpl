@@ -21,3 +21,21 @@ class BaseTpml(Template):
             return
         for s in input:
             yield s
+
+    def lst_to_str(self, input, sep:str = ', ') -> str:
+        """
+        Writes list items into a str seperated by ``sep``.
+        If input is ``str`` then it is returned verbatium
+
+        Args:
+            input (str, Iterable[str]): input to parse
+            sep (str, optional): Seperate usd when joining list. Defaults to ', '.
+
+        Returns:
+            str: value
+        """
+        if isinstance(input, str):
+            return input
+        if len(input) == 0:
+            return ''
+        return sep.join(input)
