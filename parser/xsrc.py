@@ -81,7 +81,7 @@ class SdkCodeText(BlockObj):
         return ls
 
 
-class ComponentText:
+class SdkComponentText:
     """
     gets the text of the Component area
 
@@ -200,7 +200,7 @@ class MethodsText:
     lines have a simple cleaning that replace :: with .
     """
 
-    def __init__(self, f_text: ComponentText):
+    def __init__(self, f_text: SdkComponentText):
         self._component = f_text
         self._data = None
 
@@ -226,7 +226,7 @@ class MethodsText:
         return result
 
     @property
-    def component(self) -> ComponentText:
+    def component(self) -> SdkComponentText:
         """Gets component value"""
         return self._component
 
@@ -237,7 +237,7 @@ class Methods:
     def __init__(self, url: str):
         self._soup = SoupObj(url=url)
         self._c_text = SdkCodeText(soup=self._soup)
-        self._component = ComponentText(c_text=self._c_text)
+        self._component = SdkComponentText(c_text=self._c_text)
         self._mt = MethodsText(f_text=self._component)
         self._index = 0
         self._len = 0
@@ -261,7 +261,7 @@ class Methods:
         return md
 
     @property
-    def component(self) -> ComponentText:
+    def component(self) -> SdkComponentText:
         """Gets component value"""
         return self._component
 
@@ -271,7 +271,7 @@ class Methods:
         return self._c_text
 
 class Extends:
-    def __init__(self, text: ComponentText):
+    def __init__(self, text: SdkComponentText):
         self._text = text
         self._name = ''
         self._init()
@@ -294,7 +294,7 @@ class Extends:
         return self._name
 
     @property
-    def component(self) -> ComponentText:
+    def component(self) -> SdkComponentText:
         """Gets component object"""
         return self._text
     # endregion Properties
@@ -388,7 +388,8 @@ class NamesSpaceInfo:
 
 class NameInfo:
     """Gets Name of interface/class etc"""
-    def __init__(self, text: ComponentText):
+
+    def __init__(self, text: SdkComponentText):
         self._text = text
         self._name = ''
         self._init()
@@ -409,7 +410,7 @@ class NameInfo:
         return self._name
 
     @property
-    def component(self) -> ComponentText:
+    def component(self) -> SdkComponentText:
         """Gets component object"""
         return self._text
     # endregion Properties
