@@ -530,7 +530,7 @@ class ApiMethodBlocks(BlockObj):
         return self._get_next()
 
 
-class PageMethodName:
+class ApiMethodName:
     def __init__(self, block: ApiMethodBlock):
         self._block: ApiMethodBlock = block
 
@@ -583,7 +583,7 @@ class PageInfo:
         lnk = PageSDKLink(soup=self.soup)
         self._sdk_link = lnk.get_obj()
         for block in self._mb:
-            name = PageMethodName(block=block)
+            name = ApiMethodName(block=block)
             desc = PageMethodDesc(block=block)
             self._dict[name.get_obj()] = desc.get_data()
     
