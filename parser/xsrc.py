@@ -571,7 +571,7 @@ class ApiSdkLink:
         """Gets SoupObj instance for this instance"""
         return self._soup
 
-class PageInfo:
+class ApiInfo:
     def __init__(self, url: str):
         self._url = url
         self._sdk_link = ''
@@ -633,7 +633,7 @@ def main():
     # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XFont.html'
     # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1media_1_1XPlayerWindow.html'
     url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1beans_1_1XHierarchicalPropertySet.html'
-    p_info = PageInfo(url=url)
+    p_info = ApiInfo(url=url)
     m = SdkMethods(url=p_info.sdk_link)
     ns = SdkNamesSpaceInfo(text=m.code_text)
     ni = SdkNameInfo(text=m.component)
