@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+from logging import DEBUG
 import os
 import sys
 import argparse
@@ -17,6 +18,9 @@ from parser.enm import main
 from dataclasses import dataclass
 from enum import IntEnum
 import re
+
+DEBUGGING = True
+
 logger = get_logger(Path(__file__).stem)
 
 # region SDK API Reference
@@ -35,17 +39,20 @@ class ParamInfo:
     type: str
 
 # region SDK API Reference
-class CodeText(BlockObj):
+class SdkCodeText(BlockObj):
     """Responsible for getting code from url"""
 
     def __init__(self, soup: SoupObj):
         super().__init__(soup=soup)
         self._data = None
+        if DEBUGGING:
+            self._data = get_code_text_data()
 
     def get_obj(self) -> str:
         if self._data:
             return self._data
-
+        
+        print("")
         def repl(m):
             multi_line: str = m.group(1)
             lines = multi_line.splitlines(keepends=False)
@@ -61,6 +68,10 @@ class CodeText(BlockObj):
         result = re.sub('((?:[a-zA-Z0-9]*)\( .*?\);)',
                         repl, result, flags=re.DOTALL)
         self._data = result
+        # print("")
+        # print("CodeText Data:")
+        # print("")
+        # print(result)
         return self._data
 
     def _get_row_text(self, row: Tag) -> str:
@@ -88,7 +99,7 @@ class ComponentText:
         }
     """
 
-    def __init__(self, c_text: CodeText):
+    def __init__(self, c_text: SdkCodeText):
         self._code_text = c_text
         self._data = None
 
@@ -108,7 +119,7 @@ class ComponentText:
         return self._data
 
     @property
-    def code_text(self) -> CodeText:
+    def code_text(self) -> SdkCodeText:
         """Gets code_text value"""
         return self._code_text
 
@@ -225,7 +236,7 @@ class Methods:
 
     def __init__(self, url: str):
         self._soup = SoupObj(url=url)
-        self._c_text = CodeText(soup=self._soup)
+        self._c_text = SdkCodeText(soup=self._soup)
         self._component = ComponentText(c_text=self._c_text)
         self._mt = MethodsText(f_text=self._component)
         self._index = 0
@@ -255,7 +266,7 @@ class Methods:
         return self._component
 
     @property
-    def code_text(self) -> CodeText:
+    def code_text(self) -> SdkCodeText:
         """Gets component value"""
         return self._c_text
 
@@ -292,7 +303,8 @@ class Imports:
     Gets imports for interface/class etc
     Fromat: ``com.sun.star.awt.Rectangle``
     """
-    def __init__(self, text: CodeText):
+
+    def __init__(self, text: SdkCodeText):
         self._text = text
         self._imports: List[str] = None
 
@@ -324,12 +336,12 @@ class Imports:
         self._imports.append(ns)
     # region Properties
     @property
-    def code_text(self) -> CodeText:
+    def code_text(self) -> SdkCodeText:
         """Gets CodeText value"""
         return self._text
     # endregion Properties
 class NamesSpaceInfo:
-    def __init__(self, text: CodeText):
+    def __init__(self, text: SdkCodeText):
         self._text = text
         self._ns = ""
         self._ns_lst = None
@@ -368,7 +380,7 @@ class NamesSpaceInfo:
         return self._ns_lst
 
     @property
-    def code_text(self) -> CodeText:
+    def code_text(self) -> SdkCodeText:
         """Gets CodeText value"""
         return self._text
     # endregion Properties
@@ -617,8 +629,9 @@ def main():
     os.system('cls' if os.name == 'nt' else 'clear')
     # url = 'https://api.libreoffice.org/docs/idl/ref/XWindow_8idl_source.html'
     # url = 'https://api.libreoffice.org/docs/idl/ref/XFont_8idl_source.html'
-    url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XFont.html'
+    # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XFont.html'
     # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1media_1_1XPlayerWindow.html'
+    url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1beans_1_1XHierarchicalPropertySet.html'
     p_info = PageInfo(url=url)
     m = Methods(url=p_info.sdk_link)
     ns = NamesSpaceInfo(text=m.code_text)
@@ -636,6 +649,49 @@ def main():
         print("args:", meth.args)
         print("Desc:", p_info.desc_dict.get(meth.name, ''))
 
+
+def get_code_text_data():
+    result = """
+CodeText Data:
+
+/* -*- Mode: C++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- */
+/*
+* This file is part of the LibreOffice project.
+*
+* This Source Code Form is subject to the terms of the Mozilla Public
+* License, v. 2.0. If a copy of the MPL was not distributed with this
+* file, You can obtain one at http://mozilla.org/MPL/2.0/.
+*
+* This file incorporates work covered by the following license notice:
+*
+*   Licensed to the Apache Software Foundation (ASF) under one or more
+*   contributor license agreements. See the NOTICE file distributed
+*   with this work for additional information regarding copyright
+*   ownership. The ASF licenses this file to you under the Apache
+*   License, Version 2.0 (the "License"); you may not use this file
+*   except in compliance with the License. You may obtain a copy of
+*   the License at http://www.apache.org/licenses/LICENSE-2.0 .
+*/
+#ifndef __com_sun_star_beans_XHierarchicalPropertySet_idl__
+#define __com_sun_star_beans_XHierarchicalPropertySet_idl__
+#include <com/sun/star/uno/XInterface.idl>
+#include <com/sun/star/beans/XHierarchicalPropertySetInfo.idl>
+#include <com/sun/star/beans/UnknownPropertyException.idl>
+#include <com/sun/star/beans/PropertyVetoException.idl>
+#include <com/sun/star/lang/IllegalArgumentException.idl>
+#include <com/sun/star/lang/WrappedTargetException.idl>
+module com {  module sun {  module star {  module beans {
+published interface XHierarchicalPropertySet: com::sun::star::uno::XInterface
+{
+com::sun::star::beans::XHierarchicalPropertySetInfo
+getHierarchicalPropertySetInfo();
+void setHierarchicalPropertyValue( [in] string aHierarchicalPropertyName, [in] any aValue ) raises( com::sun::star::beans::UnknownPropertyException, com::sun::star::beans::PropertyVetoException, com::sun::star::lang::IllegalArgumentException, com::sun::star::lang::WrappedTargetException );
+any getHierarchicalPropertyValue( [in] string aHierarchicalPropertyName ) raises( com::sun::star::beans::UnknownPropertyException, com::sun::star::lang::IllegalArgumentException, com::sun::star::lang::WrappedTargetException );
+};
+}; }; }; };
+#endif    
+"""
+    return result
 
 if __name__ == '__main__':
     main()
