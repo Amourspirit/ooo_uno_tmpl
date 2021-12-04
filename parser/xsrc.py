@@ -97,7 +97,11 @@ class ComponentText:
             return self._data
         text = self._code_text.get_obj()
         # https://regex101.com/r/xAqRAU/1/
-        regex = r"published.*\s\{(\s*?.*?)*?\}"
+        # regex = r"published.*\s\{(\s*?.*?)*?\}"
+        
+        # https://regex101.com/r/xAqRAU/2/
+        # much more generic
+        regex = r"[a-zA-Z0-9]*\s[a-zA-Z0-9]*:.*\s\{(\s*?.*?)*?\}"
         matches = re.search(regex, text)
         m = matches[0]
         self._data = m
@@ -262,7 +266,10 @@ class Extends:
         self._init()
     
     def _init(self):
-        regex = r"published\s*interface.*:\s*(com::.*)"
+        # regex = r"interface.*:\s*(com::.*)"
+        
+        # more generic so can work with struct, interface etc
+        regex = r"[a-zA-Z]*:\s*(com::.*)"
         s = self._text.get_text()
         matches = re.search(regex, s)
         if matches:
@@ -374,8 +381,12 @@ class NameInfo:
         self._name = ''
         self._init()
     
-    def _init(self):
-        regex = r"published\s*interface\s*(\S*):"
+    def _init(self):      
+        # will also match published Interface
+        # regex = r"interface\s*(\S*):"
+        
+        # more generic so can work with struct, interface etc
+        regex = r"[a-zA-Z]*\s*(\S*):\s"
         s = self._text.get_text()
         matches = re.search(regex, s)
         if matches:
@@ -397,8 +408,8 @@ class NameInfo:
 
 def main():
     os.system('cls' if os.name == 'nt' else 'clear')
-    # url = 'https://api.libreoffice.org/docs/idl/ref/XWindow_8idl_source.html'
-    url = 'https://api.libreoffice.org/docs/idl/ref/XFont_8idl_source.html'
+    url = 'https://api.libreoffice.org/docs/idl/ref/XWindow_8idl_source.html'
+    # url = 'https://api.libreoffice.org/docs/idl/ref/XFont_8idl_source.html'
     m = Methods(url=url)
     ns = NamesSpaceInfo(text=m.code_text)
     ni = NameInfo(text=m.component)
