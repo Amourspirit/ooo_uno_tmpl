@@ -39,3 +39,9 @@ class BaseTpml(Template):
         if len(input) == 0:
             return ''
         return sep.join(input)
+    
+    def is_out_arg(self, input: str) -> bool:
+        """Gets if input is ``out`"""
+        if not input:
+            return False
+        return input == 'out'

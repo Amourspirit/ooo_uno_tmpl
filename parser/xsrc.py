@@ -225,8 +225,10 @@ class SdkMethodData:
                 continue
             g = matches.groups()
             _dir = 'in' if g[0] is None else g[0].lower()
+            stype = Util.get_last_part(g[1])
+            stype = TYPE_MAP.get(stype, stype)
             info = ParamInfo(
-                direction=_dir, name=g[2], type=TYPE_MAP.get(g[1], g[1]))
+                direction=_dir, name=g[2], type=stype)
             self._p_args.append(info)
 
     # region Properties

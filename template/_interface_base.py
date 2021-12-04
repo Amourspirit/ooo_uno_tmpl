@@ -15,11 +15,20 @@ class BaseInterface(BaseTpml):
             result += self._get_formated_arg(arg=arg)
         return result
     
+    def get_out_args(self, meth:dict) -> List[str]:
+        args: list = meth['args']
+        results: List[str] = []
+        for arg in args:
+            if len(arg) >= 3:
+                if self.is_out_arg(arg[2]): #dir in or out
+                    results.append(arg[1]) # arg name
+        return results
+
     def get_formated_meth(self, meth:dict) -> str:
         name = meth['name']
         iter_args:list = meth['args']
         if len(iter_args) > 0:
-            args = 'self, ' + self.get_args(args= meth['args'])
+            args = 'self, ' + self.get_args(args=meth['args'])
         else:
             args = 'self'
         result = f"def {name}({args})"

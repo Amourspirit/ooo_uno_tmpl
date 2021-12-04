@@ -44,12 +44,19 @@ class ${name}($self.lst_to_str($inherits)):
 #set $methods = $attribs['methods']
     #for $method in $methods
 #set $m_desc = $method['desc']
+#set $out_args = $self.get_out_args($method)
     @abstractmethod
     $self.get_formated_meth($method)
         """
         #for $line in $self.line_gen($m_desc)
         $line
         #end for
+    #if len($out_args) > 0
+
+        #for $arg in $out_args
+        * ``${arg}`` is an out direction argument.
+        #end for
+    #end if
         """
     #end for
 #end if

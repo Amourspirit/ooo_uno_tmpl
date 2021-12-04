@@ -217,7 +217,7 @@ class Util:
             logger.debug('found common %d namespace elements', commmon_count)
             common_ns = name_ns[commmon_count:]
             logger.debug("Common elements: '$s'", str(common_ns))
-            dot_ext = len(ns_parts) - commmon_count
+            dot_ext = (len(ns_parts) - commmon_count) + 1
             logger.debug("'.' to prepend is: %d", dot_ext)
             dot = "." * dot_ext
             rel = ".".join(common_ns)
