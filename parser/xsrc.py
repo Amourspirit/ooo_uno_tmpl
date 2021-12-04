@@ -556,7 +556,7 @@ class ApiMethodDesc:
         return desc
 
 
-class PageSDKLink:
+class ApiSdkLink:
     def __init__(self, soup: SoupObj):
         self._soup = soup
     
@@ -580,7 +580,7 @@ class PageInfo:
         self._init()
     
     def _init(self):
-        lnk = PageSDKLink(soup=self.soup)
+        lnk = ApiSdkLink(soup=self.soup)
         self._sdk_link = lnk.get_obj()
         for block in self._mb:
             name = ApiMethodName(block=block)
@@ -612,7 +612,7 @@ def main2():
     os.system('cls' if os.name == 'nt' else 'clear')
     url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XFont.html'
     m_blocks = ApiMethodBlocks(url=url)
-    lnk = PageSDKLink(soup=m_blocks.soup)
+    lnk = ApiSdkLink(soup=m_blocks.soup)
     print(lnk.get_obj())
     return
     # body > div.contents > ul > li > a
