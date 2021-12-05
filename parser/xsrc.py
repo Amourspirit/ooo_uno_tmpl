@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+import logging
 import pprint
 from logging import DEBUG
 import os
@@ -33,6 +34,7 @@ re_method_pattern = re.compile(
 re_raises_pattern = re.compile(r"\s*(raises\s*\(.*\))")
 
 re_interface_pattern = re.compile(r"interface\s*([a-zA-Z0-9.]*)\s*;")
+re_property_pattern = re.compile(r"(?:\[attribute\])(?:[ ]+)([a-zA-Z0-9. {}()]*);")
 # endregion SDK API Reference
 
 
@@ -81,10 +83,7 @@ class SdkCodeText(BlockObj):
         # result = re.sub(r'((?:[a-zA-Z0-9]*)\( .*?\);)',
         #                 repl, result, flags=re.DOTALL)
         self._data = result
-        # print("")
-        # print("CodeText Data:")
-        # print("")
-        # print(result)
+        # logger.debug('SdkCodeText.get_ojb() data:\n%s', self._data)
         return self._data
 
     def _get_row_text(self, row: Tag) -> str:
@@ -126,22 +125,36 @@ class SdkComponentText:
         # https://regex101.com/r/xAqRAU/2/
         # https://regex101.com/r/xAqRAU/4/
         # much more generic
-        regex = r"[a-zA-Z0-9 :]*\n\{(\s*?.*?)*?\}"
-        # regex = r"[a-zA-Z0-9]*\s[a-zA-Z0-9]*:.*\s\{(\s*?.*?)*?\}"
-        matches = re.search(regex, text)
-        if matches:
-            m = matches[0]
-            self._data = m
-        else:
-            # https://regex101.com/r/cYL6hj/1
-            # matches when component is not extendes ( no trailing : ...)
-            regex = r"[a-zA-Z0-9]*\s[a-zA-Z0-9]*.*\s\{(\s*?.*?)*?\}"
-            matches = re.search(regex, text)
-            if matches:
-                m = matches[0]
-                self._data = m
+        # regex = r"[a-zA-Z0-9 :]*\n\{(\s*?.*?)*?\}"
+        # matches = re.search(regex, text)
+        
+        regex_start = r"module (com \{.*)\{"
+        regex_end = r"}; (?:[ ;}])*\n#endif"
+        matches_start = re.search(regex_start, text)
+        matches_end = re.search(regex_end, text)
+        if matches_start and matches_end:
+            # print(matches)
+            print(matches_start.span())
+            start = matches_start.span()[1]
+            end = matches_end.span()[0]
+            self._data = text[start:end].strip()
+        # if matches:
+        #     m = matches[0]
+        #     self._data = m
+        # else:
+        #     # https://regex101.com/r/cYL6hj/1
+        #     # matches when component is not extendes ( no trailing : ...)
+        #     regex = r"[a-zA-Z0-9]*\s[a-zA-Z0-9]*.*\s\{(\s*?.*?)*?\}"
+        #     matches = re.search(regex, text)
+        #     if matches:
+        #         m = matches[0]
+        #         self._data = m
         if not self._data:
             self._data = ''
+        # cleans out [atribute]
+        # regex = r"\[(:?[a-zA-Z]*)\](?:[ ]*)"
+        # self._data = re.sub(regex,'', self._data)
+        logger.debug('Componnent text:\n%s', self._data)
         return self._data
 
     @property
@@ -165,7 +178,12 @@ class SdkMethodData:
         text = self._param
         matches = re.search(re_interface_pattern, text)
         if matches:
+            logger.debug("SdkMethodData data matched interface. Raising error")
             raise MethodInvalidError(f"'{text}' matches interface")
+        matches = re.search(re_property_pattern, text)
+        if matches:
+            logger.debug("SdkMethodData data matched property. Raising error")
+            raise MethodInvalidError(f"'{text}' matches property")
 
         # check if method include raises...
         matches = re.search(re_raises_pattern, text)
@@ -278,6 +296,8 @@ class SdkMethodsText:
         text = self._get_proper_lines(input=text)
         lines = self._remove_empty(text)
         self._data = self._clean_lines(lines=lines)
+        if logger.level <= logging.DEBUG:
+            logger.debug('SdkMethodsText.get_obj data:\n%s', '\n'.join(self._data))
         return self._data
 
     def _get_proper_lines(self, input: str) -> str:
@@ -842,8 +862,9 @@ class ParserInterface(ParserBase):
             attrib['args'] = args
             attribs['methods'].append(attrib)
         if self._sort:
-            newlist = sorted(attribs['methods'], key=lambda d: d['name'])
-            attribs['methods'] = newlist
+            if 'methods' in attribs:
+                newlist = sorted(attribs['methods'], key=lambda d: d['name'])
+                attribs['methods'] = newlist
         str_lst = Util.get_formated_dict_list_str(obj=attribs, indent=4)
         return str_lst
 
