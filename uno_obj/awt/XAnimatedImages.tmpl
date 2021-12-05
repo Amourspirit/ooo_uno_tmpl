@@ -8,8 +8,7 @@
     "Components implementing this interface maintain a variable number of image sets. Components displaying those images will choose the best-fitting image set depending on the available space, and possibly other restrictions."
 ]
 #attr $link = "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XAnimatedImages.html"
-#attr $inherits = ['IllegalArgumentException);',
- 'XContainer']
+#attr $inherits = ['XContainer']
 #attr $imports = []
 #attr $from_imports = [
     [
@@ -32,6 +31,14 @@
 #attr $namespace = "com.sun.star.awt"
 #attr $attribs = {
         "methods": [
+            {
+                "name": "getImageSet",
+                "returns": "typing.List[str]",
+                "desc": [
+                    "returns the URLs of the image set with the given index"
+                ],
+                "args": []
+            },
             {
                 "name": "getImageSetCount",
                 "returns": "int",
@@ -62,12 +69,6 @@
                 "desc": [
                     "replaces the image set given by index with a new one"
                 ],
-                "args": []
-            },
-            {
-                "name": "string",
-                "returns": "sequence<",
-                "desc": [],
                 "args": []
             }
         ]

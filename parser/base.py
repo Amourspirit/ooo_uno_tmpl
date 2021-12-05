@@ -12,7 +12,11 @@ from kwhelp.decorator import DecFuncEnum, RuleCheckAll
 from kwhelp import rules
 from pathlib import Path
 from typing import Iterable, List, Tuple, Union
+# this is for VS code debuging
+sys.path.insert(0, os.path.abspath('.'))
+# this is for command line
 sys.path.insert(0, os.path.abspath('..'))
+
 from logger.log_handle import get_logger
 logger = get_logger(__name__)
 
@@ -232,20 +236,74 @@ class Util:
         return (f'ooo_uno.uno_obj.{short}.{camel_name}', f'{name}')
 
     @staticmethod
+    def encode_char(input:str, replace:str, en:str = '\xff') -> str:
+        """
+        Encodes all matching chars in a string with the value of ``en``.
+        Chars ``\\xff`` and ``\\xfe`` are BOM
+
+        Args:
+            input (str): text to search and replace
+            replace (str): char to replace all instances of
+            en (str, optional): Value to replace. Defaults to ``\\xff``.
+
+        Returns:
+            str: input with chars replace with ``en`` value
+        """
+        return input.replace(replace, en)
+
+    @staticmethod
+    def decode_char(input: str, restore: str, de: str = '\xff') -> str:
+        """
+        Decodes allmathing chars in a string with the value of ``restore``.
+        Chars ``\\xff`` and ``\\xfe`` are BOM
+
+        Args:
+            input (str): text to search and restore
+            restore (str): char to restore
+            de (str, optional): value to decode. Defaults to ``\\xff``.
+
+        Returns:
+            str: [description]
+        """
+        return input.replace(de, restore)
+    
+    @staticmethod
+    def get_py_type(uno_type: str, **kwargs) -> str:
+        if not uno_type:
+            return ''
+        add_typeings = bool(kwargs.get('typings', True))
+        _u_type = uno_type.strip().replace("::", ".")
+        # check for # sequence< string >
+        parts = _u_type.split(sep='<', maxsplit=1)
+        if len(parts) > 1:
+            wrapper = TYPE_MAP.get(parts[0].strip(), None)
+            type_pre = "typing." if add_typeings else ''
+            if wrapper:
+                # got a match from TYPE_MAP
+                # title case the word and add typings
+                wrapper = type_pre + wrapper.title()
+            else:
+                wrapper = type_pre + 'List'
+            _type = parts[1].replace('>', '').strip()
+            _type = Util.get_last_part(_type)
+            _type = TYPE_MAP.get(_type, _type)
+            return f"{wrapper}[{_type}]"
+        _u_type = Util.get_last_part(_u_type)
+        return TYPE_MAP.get(_u_type, _u_type)
+    
+    @staticmethod
     def _encode_list(lst: List[str]) -> List[str]:
-        # \xff and \xfe are BOM chars
         results = []
         for el in lst:
-            s = el.replace(',', '\xff')
+            s = Util.encode_char(el, ',')
             results.append(s)
         return results
 
     @staticmethod
     def _decode_list(lst: List[str]) -> List[str]:
-        # \xff and \xfe are BOM chars
         results = []
         for el in lst:
-            s = el.replace('\xff', ',')
+            s = Util.decode_char(el, ',')
             results.append(s)
         return results
 

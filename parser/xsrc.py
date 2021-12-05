@@ -154,7 +154,7 @@ class SdkComponentText:
         # cleans out [atribute]
         # regex = r"\[(:?[a-zA-Z]*)\](?:[ ]*)"
         # self._data = re.sub(regex,'', self._data)
-        logger.debug('Componnent text:\n%s', self._data)
+        # logger.debug('Componnent text:\n%s', self._data)
         return self._data
 
     @property
@@ -162,6 +162,125 @@ class SdkComponentText:
         """Gets code_text value"""
         return self._code_text
 
+
+class SdkComponentLines:
+    """
+    Responsible for getting all lines of Component.
+    Lines have a simple cleaning that replace :: with .
+    """
+
+    def __init__(self, f_text: SdkComponentText):
+        self._component = f_text
+        self._data = None
+
+    def get_obj(self) -> List[str]:
+        if self._data:
+            return self._data
+        text = self._component.get_text()
+        # text includes name and {} such as interface XHierarchicalPropertySet: com::sun::star::uno::XInterface\n{...\n}
+        # remove the outter text
+        # inner_re = r"\{(.*)\}"
+        # matches = re.search(inner_re, text, flags=re.DOTALL)
+        inner_re = r"[{]((?:[^{}]*|[{][^{}]*[}])*)[}]"
+        matches = re.search(inner_re, text)
+        if matches:
+            g = matches.groups()
+            text = g[0]
+        text = self._get_proper_lines(input=text)
+        lines = self._remove_empty(text)
+        self._data = self._clean_lines(lines=lines)
+        if logger.level <= logging.DEBUG:
+            logger.debug('SdkComponentLines.get_obj data:\n%s',
+                         '\n'.join(self._data))
+        return self._data
+
+    def _get_proper_lines(self, input: str) -> str:
+        if not input:
+            return ''
+        # methods may be split across multiple lines.
+        # start by collapsing all lines into a single line
+        single_line = " ".join(input.splitlines()).strip()
+        # logger.debug('single Line\n%s', single_line)
+        # bit of a hack here but best fix I can find so far
+        # fixes parsing issue when interface such as:
+        # https://api.libreoffice.org/docs/idl/ref/XAnimatedImages_8idl_source.html
+        single_line = Util.encode_char(single_line, '); }')
+
+        # now split all lines by ; and put on new lines again
+        new_lines = ";\n".join(single_line.split(';'))
+        return Util.decode_char(new_lines, '); }')
+        # return new_lines
+
+    def _remove_empty(self, input: str) -> List[str]:
+        lines = input.splitlines(keepends=False)
+        return [line.strip() for line in lines if line.strip() != '']
+
+    def _clean_lines(self, lines: List[str]) -> List[str]:
+        result = []
+        for line in lines:
+            result.append(line.replace('::', '.'))
+        return result
+
+    @property
+    def component(self) -> SdkComponentText:
+        """Gets component value"""
+        return self._component
+
+class SdkMethodLines:
+    def __init__(self, c_lines: SdkComponentLines) -> None:
+        self._c_lines = c_lines
+        self._data = None
+    
+    def get_obj(self) -> List[str]:
+        if self._data:
+            return self._data
+        results: List[str] = []
+        lines = self._c_lines.get_obj()
+        for line in lines:
+            match = re.match(re_interface_pattern, line)
+            if match:
+                continue
+            match = re.match(re_property_pattern, line)
+            if match:
+                continue
+            match = re.match(re_method_pattern, line)
+            if match:
+                results.append(line)
+        self._data = results
+        if logger.level <= logging.DEBUG:
+            logger.debug("SdkMethodLines.get_obj() data:\n%s", "\n".join(self._data))
+        return self._data
+    
+    @property
+    def component_lines(self) -> SdkComponentLines:
+        """Gets component_lines value"""
+        return self._c_lines
+
+
+class SdkPropertyLines:
+    def __init__(self, c_lines: SdkComponentLines) -> None:
+        self._c_lines = c_lines
+        self._data = None
+
+    def get_obj(self) -> List[str]:
+        if self._data:
+            return self._data
+        results: List[str] = []
+        lines = self._c_lines.get_obj()
+        for line in lines:
+            match = re.match(re_property_pattern, line)
+            if match:
+                results.append(line)
+        self._data = results
+        if logger.level <= logging.DEBUG:
+            logger.debug("SdkMethodLines.get_obj() data:\n%s",
+                         "\n".join(self._data))
+        return self._data
+
+    @property
+    def component_lines(self) -> SdkComponentLines:
+        """Gets component_lines value"""
+        return self._c_lines
 
 class SdkMethodData:
     """Gets the info for a single method"""
@@ -185,6 +304,12 @@ class SdkMethodData:
             logger.debug("SdkMethodData data matched property. Raising error")
             raise MethodInvalidError(f"'{text}' matches property")
 
+        seq_regex = r"([a-zA-Z]*)< *([a-zA-A0-9]*) *>"
+        m = re.match(seq_regex, text)
+        if m:
+            # replace sequence< string > with sequence<string>
+            # this is necessary to prevent following steps from parsing incorectly
+            text = re.sub(seq_regex, f'{m.group(1)}<{m.group(2)}>', text, 1)
         # check if method include raises...
         matches = re.search(re_raises_pattern, text)
         if matches:
@@ -213,10 +338,10 @@ class SdkMethodData:
             if g[0] is None:
                 # no params
                 self._p_name = g[4]
-                self._p_return = TYPE_MAP.get(g[3], g[3])
+                self._p_return = Util.get_py_type(g[3])
             else:
                 self._p_name = g[1]
-                self._p_return = TYPE_MAP.get(g[0], g[0])
+                self._p_return = Util.get_py_type(g[0])
                 self._process_args(g[2])
         return matches
 
@@ -225,7 +350,7 @@ class SdkMethodData:
         s = text.replace('(', '|').replace(')', '|').split('|')
         if len(s) <= 1:
             return
-        ex = s[1].strip().replace('::', ":").replace(' ', '').split(',')
+        ex = s[1].strip().replace('::', ".").replace(' ', '').replace('.com.', 'com.').split(',')
         self._p_raises.extend(ex)
 
     def _process_interface(self, text: str):
@@ -235,6 +360,7 @@ class SdkMethodData:
         return
 
     def _process_args(self, args: str):
+        logger.debug("SdkMethodData._process_args() Processing args: %s", args)
         a = args.replace(', ', ',').strip()
         arg_lst = a.split(',')
         for arg in arg_lst:
@@ -243,8 +369,7 @@ class SdkMethodData:
                 continue
             g = matches.groups()
             _dir = 'in' if g[0] is None else g[0].lower()
-            stype = Util.get_last_part(g[1])
-            stype = TYPE_MAP.get(stype, stype)
+            stype = Util.get_py_type(stype)
             info = ParamInfo(
                 direction=_dir, name=g[2], type=stype)
             self._p_args.append(info)
@@ -270,65 +395,76 @@ class SdkMethodData:
         """Gets raises value"""
         return self._p_raises
     # endregion Properties
+class SdkProperyData:
+    """Gets the info for a single method"""
 
+    def __init__(self, parm: str):
+        self._param = parm
+        self._p_name = ''
+        self._p_return = ''
+        self._p_set_raises: List[str] = []
+        self._p_get_raises: List[str] = []
+        self._set_data()
 
-class SdkMethodsText:
-    """
-    Responsible for getting all lines of Component.
-    Lines have a simple cleaning that replace :: with .
-    """
-
-    def __init__(self, f_text: SdkComponentText):
-        self._component = f_text
-        self._data = None
-
-    def get_obj(self) -> List[str]:
-        if self._data:
-            return self._data
-        text = self._component.get_text()
-        # text includes name and {} such as interface XHierarchicalPropertySet: com::sun::star::uno::XInterface\n{...\n}
-        # remove the outter text
-        inner_re = r"\{(.*)\}"
-        matches = re.search(inner_re, text, flags=re.DOTALL)
+    def _set_data(self):
+        text = self._param
+  
+        # remove [attribute] from start of string
+        regex = r"\[(:?[a-zA-Z<]*)\] *"
+        text = re.sub(regex, '', text, 1)
+   
+        # check if method include raises...
+        matches = re.search(re_raises_pattern, text)
         if matches:
             g = matches.groups()
-            text = g[0]
-        text = self._get_proper_lines(input=text)
-        lines = self._remove_empty(text)
-        self._data = self._clean_lines(lines=lines)
-        if logger.level <= logging.DEBUG:
-            logger.debug('SdkMethodsText.get_obj data:\n%s', '\n'.join(self._data))
-        return self._data
+            self._process_raises(g[0])
+            # remove raises text section
+            text = re.sub(re_raises_pattern, '', text)
+        parts = text.split(maxsplit=2)
+        self._p_return = Util.get_py_type(parts[1])
+        self._p_name = parts[1]
 
-    def _get_proper_lines(self, input: str) -> str:
-        if not input:
-            return ''
-        # methods may be split across multiple lines.
-        # start by collapsing all lines into a single line
-        single_line = " ".join(input.splitlines()).strip()
 
-        # now split all lines by ; and put on new lines again
-        new_lines = ";\n".join(single_line.split(';'))
-        return new_lines
+    def _process_raises(self, text: str):
+        # { set raises (::com::sun::star::lang::IllegalArgumentException, com::sun::star::beans::UnknownPropertyException); };
+        s = text.replace('::', '.').replace('{', '').replace('}', '').strip()
+        s = s.replace('.com.', 'com.')
+        # set raises (com.sun.star.lang.IllegalArgumentException, com.sun.star.beans.UnknownPropertyException);
+        parts = s.replace('(', '|').replace(')', '|').rsplit('|', 2)
+        if len(parts) <= 1:
+            return
+        
+        ex = parts[1].strip().replace(' ', '').split(',')
+        if parts[0].split()[0] == 'get':
+            self._p_get_raises.extend(ex)
+        else:
+            self._p_set_raises.extend(ex)
 
-    def _remove_empty(self, input: str) -> List[str]:
-        lines = input.splitlines(keepends=False)
-        return [line.strip() for line in lines if line.strip() != '']
-
-    def _clean_lines(self, lines: List[str]) -> List[str]:
-        result = []
-        for line in lines:
-            result.append(line.replace('::', '.'))
-        return result
+    # region Properties
 
     @property
-    def component(self) -> SdkComponentText:
-        """Gets component value"""
-        return self._component
+    def name(self) -> str:
+        """Gets Method Name"""
+        return self._p_name
 
+    @property
+    def return_type(self) -> str:
+        """Gets method Return Type"""
+        return self._p_return
+
+    @property
+    def raises_get(self) -> List[str]:
+        """Gets raises values for property get"""
+        return self._p_get_raises
+
+    @property
+    def raises_set(self) -> List[str]:
+        """Gets raises values for property set"""
+        return self._p_set_raises
+    # endregion Properties
 
 class SdkInterfaceData:
-    def __init__(self, text: SdkMethodsText):
+    def __init__(self, text: SdkComponentLines):
         self._text = text
         self._data = None
 
@@ -352,7 +488,8 @@ class SdkMethods:
         self._soup = SoupObj(url=url)
         self._c_text = SdkCodeText(soup=self._soup)
         self._component = SdkComponentText(c_text=self._c_text)
-        self._mt = SdkMethodsText(f_text=self._component)
+        self._mt = SdkComponentLines(f_text=self._component)
+        self._method_lines = SdkMethodLines(c_lines=self._mt)
         self._index = 0
         self._len = 0
         self._init = False
@@ -375,7 +512,7 @@ class SdkMethods:
 
     def __next__(self) -> SdkMethodData:
         if not self._init:
-            self._data: List[str] = self._mt.get_obj()
+            self._data: List[str] = self._method_lines.get_obj()
             self._len = len(self._data)
             self._init = True
         return self._get_next()
@@ -391,12 +528,44 @@ class SdkMethods:
         return self._c_text
 
     @property
-    def methods_text(self) -> SdkMethodsText:
+    def component_lines(self) -> SdkComponentLines:
         return self._mt
+class SdkProperties:
+    """Iterable class that iterates through Properties and returns info"""
+
+    def __init__(self, c_lines: SdkComponentLines):
+        self._c_lines = c_lines
+        self._property_lines: SdkPropertyLines = SdkPropertyLines(c_lines=self._c_lines)
+        self._index = 0
+        self._len = 0
+        self._init = False
+        self._data: List[str] = None
+
+    def _get_next(self) -> SdkProperyData:
+        if self._index >= self._len:
+            self._index = 0
+            raise StopIteration
+        ln = self._data[self._index]
+        self._index += 1
+        return SdkProperyData(ln)
+
+    def __iter__(self):
+        return self
+
+    def __next__(self) -> SdkProperyData:
+        if not self._init:
+            self._data: List[str] = self._property_lines.get_obj()
+            self._len = len(self._data)
+            self._init = True
+        return self._get_next()
+
+    @property
+    def component_lines(self) -> SdkComponentLines:
+        return self._c_lines
 
 
 class SdkExtends:
-    def __init__(self, c_text: SdkComponentText, m_text: SdkMethodsText):
+    def __init__(self, c_text: SdkComponentText, m_text: SdkComponentLines):
         self._c_text = c_text
         self._m_text = m_text
         self._ex_lst: List[str] = []
@@ -404,15 +573,12 @@ class SdkExtends:
         self._init()
 
     def _init(self):
-        # regex = r"interface.*:\s*(com::.*)"
-
-        # more generic so can work with struct, interface etc
-        regex = r"[a-zA-Z]*:\s*(com::.*)"
         s = self._c_text.get_text()
-        matches = re.search(regex, s)
-        if matches:
-            g = matches.groups()
-            self._ex_lst.append(g[0].strip().replace('::', '.'))
+        f_line = s.split(sep='\n', maxsplit=1)[0]
+        
+        parts = f_line.replace('::', '.').split(":")
+        if len(parts) > 1:
+            self._ex_lst.append(parts[0].strip())
         i_data = self._i_data.get_obj()
         if len(i_data) > 0:
             self._ex_lst.extend(i_data)
@@ -434,7 +600,7 @@ class SdkExtends:
         return self._c_text
 
     @property
-    def method_text(self) -> SdkMethodsText:
+    def method_text(self) -> SdkComponentLines:
         """Gets CodeText value"""
         return self._m_text
     # endregion Properties
@@ -808,6 +974,7 @@ class ParserInterface(ParserBase):
         super().__init__(**kwargs)
         self._api_info = ApiInfo(url=self.url)
         self._sdk_method_info = SdkMethods(url=self._api_info.sdk_link)
+        self._sdk_property_info = SdkProperties(c_lines=self._sdk_method_info.component_lines)
         self._sort = True
         self._info = None    
 
@@ -831,7 +998,7 @@ class ParserInterface(ParserBase):
         ni = SdkNameInfo(text=self._sdk_method_info.component)
         im = SdkImports(c_text=self._sdk_method_info.code_text)
         ex = SdkExtends(c_text=self._sdk_method_info.component,
-                        m_text=self._sdk_method_info.methods_text)
+                        m_text=self._sdk_method_info.component_lines)
         desc = ApiDesc(soup=self._api_info.soup)
         result = {
             'name': ni.name,
@@ -846,6 +1013,18 @@ class ParserInterface(ParserBase):
     
     def get_formated_data(self) -> str:
         attribs = {}
+        methods = self._get_methods_data()
+        prop = self._get_properties_data()
+        if 'methods' in methods:
+            attribs.update(methods)
+        if 'properties' in prop:
+            attribs.update(prop)
+        
+        str_lst = Util.get_formated_dict_list_str(obj=attribs, indent=4)
+        return str_lst
+
+    def _get_methods_data(self):
+        attribs = {}
         for i, m in enumerate(self._sdk_method_info):
             if i == 0:
                 attribs['methods'] = []
@@ -854,7 +1033,8 @@ class ParserInterface(ParserBase):
             attrib = {
                 "name": m.name,
                 "returns": m.return_type,
-                "desc": self._api_info.desc_dict.get(m.name, [])
+                "desc": self._api_info.desc_dict.get(m.name, []),
+                "raises": m.raises
             }
             args = []
             for pi in m.args:
@@ -865,8 +1045,28 @@ class ParserInterface(ParserBase):
             if 'methods' in attribs:
                 newlist = sorted(attribs['methods'], key=lambda d: d['name'])
                 attribs['methods'] = newlist
-        str_lst = Util.get_formated_dict_list_str(obj=attribs, indent=4)
-        return str_lst
+        return attribs
+    
+    def _get_properties_data(self):
+        attribs = {}
+        for i, m in enumerate(self._sdk_property_info):
+            if i == 0:
+                attribs['properties'] = []
+            if not m.name:
+                continue
+            attrib = {
+                "name": m.name,
+                "returns": m.return_type,
+                "desc": self._api_info.desc_dict.get(m.name, []),
+                "raises_get": m.raises_get,
+                "raises_set": m.raises_set
+            }
+            attribs['properties'].append(attrib)
+        if self._sort:
+            if 'properties' in attribs:
+                newlist = sorted(attribs['properties'], key=lambda d: d['name'])
+                attribs['properties'] = newlist
+        return attribs
 
 # endregion Parse
 
@@ -984,7 +1184,7 @@ def _main():
     os.system('cls' if os.name == 'nt' else 'clear')
     # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XFont.html'
     # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1media_1_1XPlayerWindow.html'
-    url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1beans_1_1XHierarchicalPropertySet.html'
+    url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XAnimatedImages.html'
 
     # interfaces
     # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1beans_1_1XPropertyBag.html'
