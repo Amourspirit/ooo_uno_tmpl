@@ -154,7 +154,7 @@ class SdkComponentText:
         # cleans out [atribute]
         # regex = r"\[(:?[a-zA-Z]*)\](?:[ ]*)"
         # self._data = re.sub(regex,'', self._data)
-        # logger.debug('Componnent text:\n%s', self._data)
+        logger.debug('Componnent text:\n%s', self._data)
         return self._data
 
     @property
@@ -291,14 +291,17 @@ class SdkMethodData:
         self._p_return = ''
         self._p_args: List[ParamInfo] = []
         self._p_raises: List[str] = []
-        self._set_data()
         self._imports: Set[str] = set()
+        self._set_data()
 
     def _set_data(self):
+        is_py_type = True
         def cb(wrapper: bool, data: str):
+            nonlocal is_py_type
             logger.debug(
                 "Callback SdkMethodData._set_data() get_py_type() Wrapper: '%s', Data: '%s'", str(wrapper), data)
             self._imports.add(data)
+            is_py_type = False
         text = self._param
         matches = re.search(re_interface_pattern, text)
         if matches:
@@ -343,10 +346,20 @@ class SdkMethodData:
             if g[0] is None:
                 # no params
                 self._p_name = g[4]
-                self._p_return = Util.get_py_type(g[3], cb=cb)
+                result = Util.get_py_type(g[3], cb=cb)
+                if is_py_type:
+                    self._p_return = result
+                else:
+                    self._p_return = f"'{result}'"
             else:
                 self._p_name = g[1]
-                self._p_return = Util.get_py_type(g[0], cb=cb)
+                self._p_name = g[4]
+                result = Util.get_py_type(g[0], cb=cb)
+                if is_py_type:
+                    self._p_return = result
+                else:
+                    self._p_return = f"'{result}'"
+                
                 self._process_args(g[2])
         return matches
 
@@ -365,20 +378,26 @@ class SdkMethodData:
         return
 
     def _process_args(self, args: str):
+        is_py_type = True
         def cb(wrapper: bool, data: str):
+            nonlocal is_py_type
             logger.debug(
                 "Callback SdkMethodData._process_args() get_py_type() Wrapper: '%s', Data: '%s'", str(wrapper), data)
             self._imports.add(data)
+            is_py_type = False
         logger.debug("SdkMethodData._process_args() Processing args: %s", args)
         a = args.replace(', ', ',').strip()
         arg_lst = a.split(',')
         for arg in arg_lst:
+            is_py_type = True
             matches = re.search(re_args_pattern, arg)
             if not matches:
                 continue
             g = matches.groups()
             _dir = 'in' if g[0] is None else g[0].lower()
-            stype = Util.get_py_type(stype, cb=cb)
+            stype = Util.get_py_type(g[1], cb=cb)
+            if not is_py_type:
+                stype = f"'{stype}'"
             info = ParamInfo(
                 direction=_dir, name=g[2], type=stype)
             self._p_args.append(info)
@@ -422,10 +441,13 @@ class SdkProperyData:
         self._set_data()
 
     def _set_data(self):
+        is_py_type = True
         def cb(wrapper:bool, data: str):
+            nonlocal is_py_type
             logger.debug(
                 "Callback SdkProperyData.get_py_type() Wrapper: '%s', Data: '%s'", str(wrapper), data)
             self._imports.add(data)
+            is_py_type = False
         text = self._param
         # remove [attribute] from start of string
         regex = r"\[(:?[a-zA-Z<]*)\] *"
@@ -439,7 +461,11 @@ class SdkProperyData:
             # remove raises text section
             text = re.sub(re_raises_pattern, '', text)
         parts = text.split(maxsplit=2)
-        self._p_return = Util.get_py_type(parts[1], cb=cb)
+        result = Util.get_py_type(parts[0], cb=cb)
+        if is_py_type:
+            self._p_return = result
+        else:
+            self._p_return = f"'{result}'"
         self._p_name = Util.get_clean_name(parts[1])
 
 
@@ -589,22 +615,41 @@ class SdkProperties:
 
 class SdkExtends:
     def __init__(self, c_text: SdkComponentText, m_text: SdkComponentLines):
-        self._c_text = c_text
-        self._m_text = m_text
+        self._c_text: SdkComponentText = c_text
+        self._m_text: SdkComponentLines = m_text
         self._ex_lst: List[str] = []
         self._i_data: SdkInterfaceData = SdkInterfaceData(text=m_text)
         self._init()
 
     def _init(self):
-        s = self._c_text.get_text()
-        f_line = s.split(sep='\n', maxsplit=1)[0]
-        
-        parts = f_line.replace('::', '.').split(":")
+        lines = self._c_text.get_text().splitlines()
+        if len(lines) == 0:
+            return
+        s = lines[0]
+        logger.debug("SdkExtends._init() First Line: %s", s)
+        # published interface XFont: com::sun::star::uno::XInterface
+        s = s.replace('::', ".")
+        logger.debug("SdkExtends._init() Replaced :: %s", s)
+        parts = s.rsplit(sep=':', maxsplit=1)
         if len(parts) > 1:
-            self._ex_lst.append(parts[0].strip())
-        i_data = self._i_data.get_obj()
-        if len(i_data) > 0:
-            self._ex_lst.extend(i_data)
+            logger.debug("SdkExtends._init() No ':' seperator Did not find extends on first line.")
+            s = parts[1]
+            logger.debug("SdkExtends._init() Processing: '%s'", s)
+            s = Util.get_clean_ns(s)
+            self._ex_lst.append(s)
+            logger.debug("SdkExtends._init() Added Extends: '%s'", s)
+
+        logger.debug("SdkExtends._init() Processing lines for interfaces.")
+        lines = self._m_text.get_obj()
+        for line in lines:
+            logger.debug("SdkExtends._init() Processing line: %s", line)
+            if re_interface_pattern.match(line):
+                logger.debug("SdkExtends._init() Found interface Match")
+                # interface .com.sun.star.container.XContainer;
+                s = line.rsplit(maxsplit=1)[1].lstrip('.')
+                s = Util.get_clean_ns(s)
+                self._ex_lst.append(s)
+                logger.debug("SdkExtends._init() Added Extends: '%s'", s)
 
     # region Properties
     @property
@@ -667,13 +712,6 @@ class SdkImports:
                 logger.debug(
                     "SdkImports.get_obj() adding Import: '%s'", s)
                 self._imports.add(s)
-            logger.debug("SdkImports.get_obj() No Match.")
-        # regex = r"#include\s*<(.*)\.idl"
-        # test_str = self._c_text.get_obj()
-        # matches = re.finditer(regex, test_str)
-        # for _, match in enumerate(matches, start=1):
-        #     g = match.groups()
-        #     self._process_match(g[0])
 
         return self._imports
 
@@ -1139,6 +1177,7 @@ class InterfaceWriter(WriteBase):
         self._indent_amt = 4
         self._p_name: str = None
         self._p_imports: Set[str] = set()
+        self._p_imports_typing: Set[str] = set()
         self._p_namespace: str = None
         self._p_extends: List[str] = None
         self._p_desc: List[str] = None
@@ -1183,6 +1222,15 @@ class InterfaceWriter(WriteBase):
                 lst.append([f, n])
             return lst
 
+        def get_from_imports_typing() -> List[List[str]]:
+            lst = []
+            for ns in self._p_imports_typing:
+                f, n = Util.get_rel_import(
+                    i_str=ns, ns=self._p_namespace
+                )
+                lst.append([f, n])
+            return lst
+
         self._template = self._template.replace('{name}', self._p_name)
         self._template = self._template.replace('{ns}', str(self._p_namespace))
         self._template = self._template.replace('{link}', self._p_url)
@@ -1194,7 +1242,10 @@ class InterfaceWriter(WriteBase):
             '{from_imports}',
             Util.get_formated_dict_list_str(get_from_imports())
         )
-        self._template = self._template.replace('{from_imports}', "[]")
+        self._template = self._template.replace(
+            '{from_imports_typing}',
+            Util.get_formated_dict_list_str(get_from_imports_typing())
+        )
         if len(self._p_desc) > 0:
             desc = Util.get_formated_dict_list_str(self._p_desc, indent=4)
         else:
@@ -1209,7 +1260,8 @@ class InterfaceWriter(WriteBase):
 
     def _set_info(self):
         def get_extends(lst:List[str]) -> List[str]:
-            return [s.rsplit('.', 1)[1] for s in lst]
+            return [Util.get_last_part(s) for s in lst]
+            # return [s.rsplit('.', 1)[1] for s in lst]
         data = self._parser.get_info()
         self._p_name = data['name']
         self._p_namespace = data['namespace']
@@ -1220,7 +1272,8 @@ class InterfaceWriter(WriteBase):
         
         _imports = data['imports']
         self._p_imports.update(_imports)
-        self._p_imports.update(self._parser.imports)
+        self._p_imports.update(data['extends'])
+        self._p_imports_typing.update(self._parser.imports)
         if self._write_file:
             self._file_full_path = self._get_uno_obj_path()
     
@@ -1244,9 +1297,9 @@ class InterfaceWriter(WriteBase):
 
 def _main():
     os.system('cls' if os.name == 'nt' else 'clear')
-    # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XFont.html'
+    url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XFont.html'
     # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1media_1_1XPlayerWindow.html'
-    url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XAnimatedImages.html'
+    # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XAnimatedImages.html'
 
     # interfaces
     # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1beans_1_1XPropertyBag.html'

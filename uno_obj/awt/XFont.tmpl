@@ -8,97 +8,46 @@
     "All values are in pixels within this device."
 ]
 #attr $link = "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XFont.html"
-#attr $inherits = "XInterface"
-#attr $imports = ['typing']
-## $from_imports is a tuple eg: $from_imports = [('.tab_align', 'TabAlign')]
+#attr $inherits = ['XInterface']
+#attr $imports = []
 #attr $from_imports = [
-    ('.font_descriptor', 'FontDescriptor'),
-    ('.simple_font_metric','SimpleFontMetric'),
-    ('..uno.x_interface', 'XInterface')
-]
-#attr $attribs = {
-    "methods": [
-        {
-            "name": "getCharWidth",
-            "args": [("c", "str", "in")],
-            "returns": "",
-            "desc": [
-                "returns the width of the specified character.",
-                "",
-                "Returns:",
-                "    the character width measured in pixels for the device."
-            ]
-        },
-        {
-            "name": "getCharWidths",
-            "args": [
-                ("nFirst", "str", "in"),
-                ("nLast", "str", "in")
-                ],
-            "returns": "",
-            "desc": [
-                "returns the widths of the specified characters.",
-                "",
-                "Returns:",
-                "    a sequence of the widths of subsequent characters for this font."
-            ]
-        },
-        {
-            "name": "getFontDescriptor",
-            "args": [],
-            "returns": "'FontDescriptor'",
-            "desc": ["returns the description of the font.",
-                "",
-                "The unit of measurement is pixels for the device."]
-        },
-        {
-            "name": "getFontMetric",
-            "args": [],
-            "returns": "'SimpleFontMetric'",
-            "desc": "returns additional information about the font."
-        },
-        {
-            "name": "getKernPairs",
-            "args": [
-                ("Chars1", "typing.List[str]", "out"),
-                ("Chars2", "typing.List[str]", "out"),
-                ("Kerns ", "typing.List[int]", "out")
-            ],
-            "returns": "",
-            "desc": "queries the kerning pair table."
-        },
-        {
-            "name": "getStringWidth",
-            "args": [
-                ("str", "str", "in")
-            ],
-            "returns": "int",
-            "desc": [
-                "returns the string width.",
-                "",
-                "Returns:",
-                "    int: the width of the specified string of characters measured in pixels for the device."
-            ]
-
-        },
-        {
-            "name": "getStringWidthArray",
-            "args": [
-                ("str", "str", "in"),
-                ("aDXArray", "typing.List[int]", "out")
-            ],
-            "returns": "int",
-            "desc": [
-                "returns the string and the character widths.",
-                "",
-                "Args:",
-                "    str (str): the input string."
-                "",
-                "    aDXArray (List[int]): receives the width of every single character measured in pixels for the device.",
-                "",
-                "Returns:",
-                "    int: the width of the specified string of characters measured in pixels for the device."
-            ]
-        }
+    [
+        "..uno.x_interface",
+        "XInterface"
     ]
-}
+]
+#attr $from_imports_typing = [
+    [
+        ".font_descriptor",
+        "FontDescriptor"
+    ],
+    [
+        ".simple_font_metric",
+        "SimpleFontMetric"
+    ]
+]
+#attr $namespace = "com.sun.star.awt"
+#attr $attribs = {
+        "methods": [
+            {
+                "name": "getFontDescriptor",
+                "returns": "'FontDescriptor'",
+                "desc": [
+                    "returns the description of the font.",
+                    "",
+                    "The unit of measurement is pixels for the device."
+                ],
+                "raises": [],
+                "args": []
+            },
+            {
+                "name": "getFontMetric",
+                "returns": "'SimpleFontMetric'",
+                "desc": [
+                    "returns additional information about the font."
+                ],
+                "raises": [],
+                "args": []
+            }
+        ]
+    }
