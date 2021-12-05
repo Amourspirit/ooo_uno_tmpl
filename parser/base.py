@@ -307,12 +307,21 @@ class Util:
     def get_py_type(uno_type: str, **kwargs) -> str:
         if not uno_type:
             return ''
+        def do_cb(_cb:callable, wrapper: bool, data):
+            if not _cb:
+                return
+            _cb(wrapper, Util.get_clean_ns(data))
+    
         add_typeings = bool(kwargs.get('typings', True))
+        cb = kwargs.get('cb', None)
         _u_type = uno_type.strip().replace("::", ".")
         # check for # sequence< string >
         parts = _u_type.split(sep='<', maxsplit=1)
         if len(parts) > 1:
-            wrapper = TYPE_MAP.get(Util.get_clean_name(parts[0]), None)
+            clean_wrapper = Util.get_last_part(Util.get_clean_name(parts[0]))
+            wrapper = TYPE_MAP.get(clean_wrapper, None)
+            if not wrapper:
+                do_cb(cb, True, clean_wrapper)
             type_pre = "typing." if add_typeings else ''
             if wrapper:
                 # got a match from TYPE_MAP
@@ -324,8 +333,12 @@ class Util:
             _type = Util.get_clean_name(Util.get_last_part(_type))
             _type = TYPE_MAP.get(_type, _type)
             return f"{wrapper}[{_type}]"
-        _u_type = Util.get_clean_name(Util.get_last_part(_u_type))
-        return TYPE_MAP.get(_u_type, _u_type)
+        _u_type_clean = Util.get_clean_name(Util.get_last_part(_u_type))
+        result = TYPE_MAP.get(_u_type_clean, None)
+        if result:
+            return result
+        do_cb(cb, False, _u_type)
+        return _u_type_clean
     
     @staticmethod
     def _encode_list(lst: List[str]) -> List[str]:

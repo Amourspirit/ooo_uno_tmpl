@@ -292,8 +292,13 @@ class SdkMethodData:
         self._p_args: List[ParamInfo] = []
         self._p_raises: List[str] = []
         self._set_data()
+        self._imports: Set[str] = set()
 
     def _set_data(self):
+        def cb(wrapper: bool, data: str):
+            logger.debug(
+                "Callback SdkMethodData._set_data() get_py_type() Wrapper: '%s', Data: '%s'", str(wrapper), data)
+            self._imports.add(data)
         text = self._param
         matches = re.search(re_interface_pattern, text)
         if matches:
@@ -338,10 +343,10 @@ class SdkMethodData:
             if g[0] is None:
                 # no params
                 self._p_name = g[4]
-                self._p_return = Util.get_py_type(g[3])
+                self._p_return = Util.get_py_type(g[3], cb=cb)
             else:
                 self._p_name = g[1]
-                self._p_return = Util.get_py_type(g[0])
+                self._p_return = Util.get_py_type(g[0], cb=cb)
                 self._process_args(g[2])
         return matches
 
@@ -360,6 +365,10 @@ class SdkMethodData:
         return
 
     def _process_args(self, args: str):
+        def cb(wrapper: bool, data: str):
+            logger.debug(
+                "Callback SdkMethodData._process_args() get_py_type() Wrapper: '%s', Data: '%s'", str(wrapper), data)
+            self._imports.add(data)
         logger.debug("SdkMethodData._process_args() Processing args: %s", args)
         a = args.replace(', ', ',').strip()
         arg_lst = a.split(',')
@@ -369,7 +378,7 @@ class SdkMethodData:
                 continue
             g = matches.groups()
             _dir = 'in' if g[0] is None else g[0].lower()
-            stype = Util.get_py_type(stype)
+            stype = Util.get_py_type(stype, cb=cb)
             info = ParamInfo(
                 direction=_dir, name=g[2], type=stype)
             self._p_args.append(info)
@@ -394,6 +403,11 @@ class SdkMethodData:
     def raises(self) -> List[str]:
         """Gets raises value"""
         return self._p_raises
+    
+    @property
+    def imports(self) -> Set[str]:
+        """Gets imports value"""
+        return self._imports
     # endregion Properties
 class SdkProperyData:
     """Gets the info for a single method"""
@@ -404,11 +418,15 @@ class SdkProperyData:
         self._p_return = ''
         self._p_set_raises: List[str] = []
         self._p_get_raises: List[str] = []
+        self._imports: Set[str] = set()
         self._set_data()
 
     def _set_data(self):
+        def cb(wrapper:bool, data: str):
+            logger.debug(
+                "Callback SdkProperyData.get_py_type() Wrapper: '%s', Data: '%s'", str(wrapper), data)
+            self._imports.add(data)
         text = self._param
-  
         # remove [attribute] from start of string
         regex = r"\[(:?[a-zA-Z<]*)\] *"
         text = re.sub(regex, '', text, 1)
@@ -421,7 +439,7 @@ class SdkProperyData:
             # remove raises text section
             text = re.sub(re_raises_pattern, '', text)
         parts = text.split(maxsplit=2)
-        self._p_return = Util.get_py_type(parts[1])
+        self._p_return = Util.get_py_type(parts[1], cb=cb)
         self._p_name = Util.get_clean_name(parts[1])
 
 
@@ -461,6 +479,11 @@ class SdkProperyData:
     def raises_set(self) -> List[str]:
         """Gets raises values for property set"""
         return self._p_set_raises
+
+    @property
+    def imports(self) -> Set[str]:
+        """Gets imports value"""
+        return self._imports
     # endregion Properties
 
 class SdkInterfaceData:
@@ -612,11 +635,11 @@ class SdkImports:
     Fromat: ``com.sun.star.awt.Rectangle``
     """
 
-    def __init__(self, c_text: SdkCodeText,):
-        self._c_text = c_text
-        self._imports: List[str] = None
+    def __init__(self, c_lines: SdkComponentLines):
+        self._c_lines = c_lines
+        self._imports: Set[str] = None
 
-    def get_obj(self) -> List[str]:
+    def get_obj(self) -> Set[str]:
         """
         Gets the imports as a list of strings
         Fromat: ``com.sun.star.awt.Rectangle``
@@ -626,14 +649,31 @@ class SdkImports:
         """
         if self._imports:
             return self._imports
-        self._imports = []
-
-        regex = r"#include\s*<(.*)\.idl"
-        test_str = self._c_text.get_obj()
-        matches = re.finditer(regex, test_str)
-        for _, match in enumerate(matches, start=1):
-            g = match.groups()
-            self._process_match(g[0])
+        self._imports = set()
+        # interface ::com::sun::star::container::XContainer;
+        regex = r"interface +([a-zA-Z0-9\.]*)"
+        # group ::com::sun::star::container::XContainer
+        lines = self._c_lines.get_obj()
+        for line in lines:
+            logger.debug("SdkImports.get_obj() Processing Line: %s", line)
+            matches = re.search(regex, line)
+            if matches:
+                g = matches.groups()
+                logger.debug(
+                    'SdkImports.get_obj() Found Interface Line. Groups info: %s', str(g))
+                logger.debug('SdkImports.get_obj() Found Interface Line: %s', g[0])
+                s = g[0].lstrip('.')
+                s = Util.get_clean_ns(s)
+                logger.debug(
+                    "SdkImports.get_obj() adding Import: '%s'", s)
+                self._imports.add(s)
+            logger.debug("SdkImports.get_obj() No Match.")
+        # regex = r"#include\s*<(.*)\.idl"
+        # test_str = self._c_text.get_obj()
+        # matches = re.finditer(regex, test_str)
+        # for _, match in enumerate(matches, start=1):
+        #     g = match.groups()
+        #     self._process_match(g[0])
 
         return self._imports
 
@@ -976,7 +1016,9 @@ class ParserInterface(ParserBase):
         self._sdk_method_info = SdkMethods(url=self._api_info.sdk_link)
         self._sdk_property_info = SdkProperties(c_lines=self._sdk_method_info.component_lines)
         self._sort = True
-        self._info = None    
+        self._info = None
+        self._imports: Set[str] = set()
+        self._formated_data = None
 
     def get_info(self) -> Dict[str, object]:
         """
@@ -994,11 +1036,11 @@ class ParserInterface(ParserBase):
         """
         if self._info:
             return self._info
-        ns = SdkNamesSpaceInfo(text=self._sdk_method_info.code_text)
-        ni = SdkNameInfo(text=self._sdk_method_info.component)
-        im = SdkImports(c_text=self._sdk_method_info.code_text)
+        ns = SdkNamesSpaceInfo(self._sdk_method_info.code_text)
+        ni = SdkNameInfo(self._sdk_method_info.component)
         ex = SdkExtends(c_text=self._sdk_method_info.component,
                         m_text=self._sdk_method_info.component_lines)
+        im = SdkImports(self._sdk_method_info.component_lines)
         desc = ApiDesc(soup=self._api_info.soup)
         result = {
             'name': ni.name,
@@ -1012,6 +1054,8 @@ class ParserInterface(ParserBase):
         return self._info
     
     def get_formated_data(self) -> str:
+        if self._formated_data:
+            return self._formated_data
         attribs = {}
         methods = self._get_methods_data()
         prop = self._get_properties_data()
@@ -1021,7 +1065,8 @@ class ParserInterface(ParserBase):
             attribs.update(prop)
         
         str_lst = Util.get_formated_dict_list_str(obj=attribs, indent=4)
-        return str_lst
+        self._formated_data = str_lst
+        return self._formated_data
 
     def _get_methods_data(self):
         attribs = {}
@@ -1030,6 +1075,7 @@ class ParserInterface(ParserBase):
                 attribs['methods'] = []
             if not m.name:
                 continue
+            self._imports.update(m.imports)
             attrib = {
                 "name": m.name,
                 "returns": m.return_type,
@@ -1054,6 +1100,7 @@ class ParserInterface(ParserBase):
                 attribs['properties'] = []
             if not m.name:
                 continue
+            self._imports.update(m.imports)
             attrib = {
                 "name": m.name,
                 "returns": m.return_type,
@@ -1068,6 +1115,18 @@ class ParserInterface(ParserBase):
                 attribs['properties'] = newlist
         return attribs
 
+    @property
+    def imports(self) -> Set[str]:
+        """Gets imports value"""
+        try:
+            if not self._formated_data:
+                msg = "ParserInterface.get_formated_data() method must be called before accessing imports"
+                raise Exception(msg)
+        except Exception as e:
+            logger.error(e)
+            raise e
+            
+        return self._imports
 # endregion Parse
 
 # region Writer
@@ -1079,7 +1138,7 @@ class InterfaceWriter(WriteBase):
         self._write_file = kwargs.get('write_file', False)
         self._indent_amt = 4
         self._p_name: str = None
-        self._p_imports: List[str] = None
+        self._p_imports: Set[str] = set()
         self._p_namespace: str = None
         self._p_extends: List[str] = None
         self._p_desc: List[str] = None
@@ -1153,12 +1212,15 @@ class InterfaceWriter(WriteBase):
             return [s.rsplit('.', 1)[1] for s in lst]
         data = self._parser.get_info()
         self._p_name = data['name']
-        self._p_imports = data['imports']
         self._p_namespace = data['namespace']
         self._p_extends = get_extends(data['extends'])
         self._p_desc = data['desc']
         self._p_url = data['url']
         self._p_data = self._parser.get_formated_data()
+        
+        _imports = data['imports']
+        self._p_imports.update(_imports)
+        self._p_imports.update(self._parser.imports)
         if self._write_file:
             self._file_full_path = self._get_uno_obj_path()
     
