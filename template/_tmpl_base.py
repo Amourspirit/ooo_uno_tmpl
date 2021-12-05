@@ -1,10 +1,23 @@
 # coding: utf-8
+import re
 from typing import Tuple, List
 from Cheetah.Template import Template
-
-
+py_name_pattern = re.compile('[\W_]+')
 class BaseTpml(Template):
     """Base class for all templtes"""
+    
+    def get_clean_name(self, input: str) -> str:
+        """
+        Removes all char from a string except for ``a-zA-Z0-9_``
+
+        Args:
+            input (str): string to clean    
+
+        Returns:
+            str: input with any other chars removed
+        """
+        # https://stackoverflow.com/questions/1276764/stripping-everything-but-alphanumeric-chars-from-a-string-in-python
+        return py_name_pattern.sub('', input)
     
     def line_gen(self, input) -> str:
         """
@@ -45,3 +58,19 @@ class BaseTpml(Template):
         if not input:
             return False
         return input == 'out'
+    
+    def get_last_part(self, input: str, sep='.') -> str:
+        """
+        Splits a string and returns the last part
+
+        Args:
+            input (str): string to get last part of.
+            sep (str, optional): string used to split. Defaults to ``.``
+
+        Returns:
+            str: [description]
+        """
+        if not input:
+            return ''
+        _parts = input.rsplit(sep, 1)
+        return _parts[0] if len(_parts) == 1 else _parts[1]

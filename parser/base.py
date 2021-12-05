@@ -20,6 +20,10 @@ sys.path.insert(0, os.path.abspath('..'))
 from logger.log_handle import get_logger
 logger = get_logger(__name__)
 
+#  \W = [^a-zA-Z0-9_]
+py_name_pattern = re.compile('[\W_]+')
+py_ns_pattern = re.compile(r'[^a-zA-Z0-9\._]+')
+
 TYPE_MAP = {
     "any": "object",
     "short": "int",
@@ -103,6 +107,38 @@ class SoupObj:
 
 
 class Util:
+    @staticmethod
+    def get_clean_name(input: str, sub: str = '') -> str:
+        """
+        Removes all char from a string except for ``a-zA-Z0-9_``
+
+        Args:
+            input (str): string to clean
+            sub (str, optional): replacement string for non matching characters.
+                Default is empty string.
+
+        Returns:
+            str: input with any other chars replaced
+        """
+        # https://stackoverflow.com/questions/1276764/stripping-everything-but-alphanumeric-chars-from-a-string-in-python
+        return py_name_pattern.sub(sub, input)
+    
+    @staticmethod
+    def get_clean_ns(input: str, sub: str='') -> str:
+        """
+        Removes all char from a string except for ``a-zA-Z0-9_.``
+
+        Args:
+            input (str): string to clean
+            sub (str, optional): replacement string for non matching characters.
+                Default is empty string.
+
+        Returns:
+            str: input with any other chars replaced
+        """
+        # https://stackoverflow.com/questions/1276764/stripping-everything-but-alphanumeric-chars-from-a-string-in-python
+        return py_ns_pattern.sub(sub, input)
+
     """Static Class or helper methods"""
     @staticmethod
     def get_formated_dict_list_str(obj: Union[dict, list], indent=4) -> str:
@@ -276,7 +312,7 @@ class Util:
         # check for # sequence< string >
         parts = _u_type.split(sep='<', maxsplit=1)
         if len(parts) > 1:
-            wrapper = TYPE_MAP.get(parts[0].strip(), None)
+            wrapper = TYPE_MAP.get(Util.get_clean_name(parts[0]), None)
             type_pre = "typing." if add_typeings else ''
             if wrapper:
                 # got a match from TYPE_MAP
@@ -285,10 +321,10 @@ class Util:
             else:
                 wrapper = type_pre + 'List'
             _type = parts[1].replace('>', '').strip()
-            _type = Util.get_last_part(_type)
+            _type = Util.get_clean_name(Util.get_last_part(_type))
             _type = TYPE_MAP.get(_type, _type)
             return f"{wrapper}[{_type}]"
-        _u_type = Util.get_last_part(_u_type)
+        _u_type = Util.get_clean_name(Util.get_last_part(_u_type))
         return TYPE_MAP.get(_u_type, _u_type)
     
     @staticmethod

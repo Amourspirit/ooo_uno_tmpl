@@ -37,6 +37,9 @@
                 "desc": [
                     "returns the URLs of the image set with the given index"
                 ],
+                "raises": [
+                    "com.sun.star.lang.IndexOutOfBoundsException"
+                ],
                 "args": []
             },
             {
@@ -45,6 +48,7 @@
                 "desc": [
                     "returns the number of images sets maintained by the component."
                 ],
+                "raises": [],
                 "args": []
             },
             {
@@ -52,6 +56,9 @@
                 "returns": "None",
                 "desc": [
                     "sets the URLs of the image set with the given index"
+                ],
+                "raises": [
+                    "com.sun.star.lang.IndexOutOfBoundsException"
                 ],
                 "args": []
             },
@@ -61,6 +68,9 @@
                 "desc": [
                     "removes the image set with the given index"
                 ],
+                "raises": [
+                    "com.sun.star.lang.IndexOutOfBoundsException"
+                ],
                 "args": []
             },
             {
@@ -69,7 +79,47 @@
                 "desc": [
                     "replaces the image set given by index with a new one"
                 ],
+                "raises": [
+                    "com.sun.star.lang.IndexOutOfBoundsException"
+                ],
                 "args": []
+            }
+        ],
+        "properties": [
+            {
+                "name": "AutoRepeat",
+                "returns": "AutoRepeat",
+                "desc": [
+                    "specifies whether the animation should start over with the first image of the image series when the last image has been played.",
+                    "",
+                    "The default value for this attribute is TRUE."
+                ],
+                "raises_get": [],
+                "raises_set": []
+            },
+            {
+                "name": "ScaleMode",
+                "returns": "ScaleMode",
+                "desc": [
+                    "controls the way the images are scaled up or down, when the available space is larger or smaller than what is needed for them.",
+                    "",
+                    "Allowed values are those from the ImageScaleMode constants group."
+                ],
+                "raises_get": [],
+                "raises_set": [
+                    "com.sun.star.lang.IllegalArgumentException"
+                ]
+            },
+            {
+                "name": "StepTime",
+                "returns": "StepTime",
+                "desc": [
+                    "specifies the time in milliseconds between two animation steps.",
+                    "",
+                    "This is the minimum time, the actual value might be longer due to system load. The default value will be 100 ms."
+                ],
+                "raises_get": [],
+                "raises_set": []
             }
         ]
     }

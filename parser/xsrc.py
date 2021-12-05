@@ -422,7 +422,7 @@ class SdkProperyData:
             text = re.sub(re_raises_pattern, '', text)
         parts = text.split(maxsplit=2)
         self._p_return = Util.get_py_type(parts[1])
-        self._p_name = parts[1]
+        self._p_name = Util.get_clean_name(parts[1])
 
 
     def _process_raises(self, text: str):
@@ -920,8 +920,8 @@ class ApiDesc:
         lines_found: ResultSet = self._soup.soup.select(
             'body > div.contents > div.textblock > p')
         p_obj = TagsStrObj(tags=lines_found)
-        desc = p_obj.get_lines()
-        return desc
+        self._data = p_obj.get_lines()
+        return self._data
         
         
 class ApiInfo:
