@@ -307,37 +307,62 @@ class Util:
     def get_py_type(uno_type: str, **kwargs) -> str:
         if not uno_type:
             return ''
-        def do_cb(_cb:callable, wrapper: bool, data):
+        def do_cb(_cb:callable, data):
             if not _cb:
                 return
-            _cb(wrapper, Util.get_clean_ns(data))
+            _cb(data)
     
         add_typeings = bool(kwargs.get('typings', True))
         cb = kwargs.get('cb', None)
+        cb_data = {
+            "uno_type": uno_type,
+            "is_py_type": False,
+            "is_wrapper": False,
+            "is_typing": False,
+            "wdata": {}
+        }
         _u_type = uno_type.strip().replace("::", ".")
         # check for # sequence< string >
         parts = _u_type.split(sep='<', maxsplit=1)
         if len(parts) > 1:
+            is_pytype = True
+            cb_data['is_wrapper'] = True
             clean_wrapper = Util.get_last_part(Util.get_clean_name(parts[0]))
             wrapper = TYPE_MAP.get(clean_wrapper, None)
-            if not wrapper:
-                do_cb(cb, True, clean_wrapper)
+            if wrapper:
+                cb_data['wdata']['is_py_type'] = True
+            else:
+                is_pytype = False
+                cb_data['wdata']['is_py_type'] = False
             type_pre = "typing." if add_typeings else ''
+            cb_data['is_typing'] = add_typeings
+            cb_data['wdata']['prefix'] = type_pre
             if wrapper:
                 # got a match from TYPE_MAP
                 # title case the word and add typings
                 wrapper = type_pre + wrapper.title()
             else:
                 wrapper = type_pre + 'List'
+            cb_data['wdata']['wrapper'] = wrapper
             _type = parts[1].replace('>', '').strip()
             _type = Util.get_clean_name(Util.get_last_part(_type))
-            _type = TYPE_MAP.get(_type, _type)
+            map_type = TYPE_MAP.get(_type, None)
+            if not map_type:
+                is_pytype = False
+                map_type = _type
+            cb_data['is_py_type'] = is_pytype
+            cb_data['type'] = _type
+            do_cb(cb, cb_data)
             return f"{wrapper}[{_type}]"
         _u_type_clean = Util.get_clean_name(Util.get_last_part(_u_type))
         result = TYPE_MAP.get(_u_type_clean, None)
         if result:
+            cb_data['is_py_type'] = True
+            cb_data['type'] = result
+            do_cb(cb, cb_data)
             return result
-        do_cb(cb, False, _u_type)
+        cb_data['type'] = _u_type_clean
+        do_cb(cb, cb_data)
         return _u_type_clean
     
     @staticmethod

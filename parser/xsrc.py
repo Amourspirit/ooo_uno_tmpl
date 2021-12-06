@@ -292,16 +292,19 @@ class SdkMethodData:
         self._p_args: List[ParamInfo] = []
         self._p_raises: List[str] = []
         self._imports: Set[str] = set()
+        self._requires_typing = False
         self._set_data()
 
     def _set_data(self):
         is_py_type = True
-        def cb(wrapper: bool, data: str):
+
+        def cb(data: dict):
             nonlocal is_py_type
-            logger.debug(
-                "Callback SdkMethodData._set_data() get_py_type() Wrapper: '%s', Data: '%s'", str(wrapper), data)
-            self._imports.add(data)
-            is_py_type = False
+            is_py_type = data['is_py_type']
+            if not is_py_type:
+                self._imports.add(data['type'])
+            if data['is_typing']:
+                self._requires_typing = True
         text = self._param
         matches = re.search(re_interface_pattern, text)
         if matches:
@@ -379,12 +382,14 @@ class SdkMethodData:
 
     def _process_args(self, args: str):
         is_py_type = True
-        def cb(wrapper: bool, data: str):
+
+        def cb(data: dict):
             nonlocal is_py_type
-            logger.debug(
-                "Callback SdkMethodData._process_args() get_py_type() Wrapper: '%s', Data: '%s'", str(wrapper), data)
-            self._imports.add(data)
-            is_py_type = False
+            is_py_type = data['is_py_type']
+            if not is_py_type:
+                self._imports.add(data['type'])
+            if data['is_typing']:
+                self._requires_typing = True
         logger.debug("SdkMethodData._process_args() Processing args: %s", args)
         a = args.replace(', ', ',').strip()
         arg_lst = a.split(',')
@@ -427,6 +432,11 @@ class SdkMethodData:
     def imports(self) -> Set[str]:
         """Gets imports value"""
         return self._imports
+
+    @property
+    def requires_typing(self) -> bool:
+        """Gets requires_typing value"""
+        return self._requires_typing
     # endregion Properties
 class SdkProperyData:
     """Gets the info for a single method"""
@@ -438,16 +448,18 @@ class SdkProperyData:
         self._p_set_raises: List[str] = []
         self._p_get_raises: List[str] = []
         self._imports: Set[str] = set()
+        self._requires_typing = False
         self._set_data()
 
     def _set_data(self):
         is_py_type = True
-        def cb(wrapper:bool, data: str):
+        def cb(data: dict):
             nonlocal is_py_type
-            logger.debug(
-                "Callback SdkProperyData.get_py_type() Wrapper: '%s', Data: '%s'", str(wrapper), data)
-            self._imports.add(data)
-            is_py_type = False
+            is_py_type = data['is_py_type']
+            if not is_py_type:
+                self._imports.add(data['type'])
+            if data['is_typing']:
+                self._requires_typing = True
         text = self._param
         # remove [attribute] from start of string
         regex = r"\[(:?[a-zA-Z<]*)\] *"
@@ -510,6 +522,10 @@ class SdkProperyData:
     def imports(self) -> Set[str]:
         """Gets imports value"""
         return self._imports
+    @property
+    def requires_typing(self) -> bool:
+        """Gets requires_typing value"""
+        return self._requires_typing
     # endregion Properties
 
 class SdkInterfaceData:
@@ -1055,6 +1071,7 @@ class ParserInterface(ParserBase):
         self._sdk_property_info = SdkProperties(c_lines=self._sdk_method_info.component_lines)
         self._sort = True
         self._info = None
+        self._requires_typing = False
         self._imports: Set[str] = set()
         self._formated_data = None
 
@@ -1113,6 +1130,8 @@ class ParserInterface(ParserBase):
                 attribs['methods'] = []
             if not m.name:
                 continue
+            if m.requires_typing:
+                self._requires_typing = True
             self._imports.update(m.imports)
             attrib = {
                 "name": m.name,
@@ -1138,6 +1157,8 @@ class ParserInterface(ParserBase):
                 attribs['properties'] = []
             if not m.name:
                 continue
+            if m.requires_typing:
+                self._requires_typing = True
             self._imports.update(m.imports)
             attrib = {
                 "name": m.name,
@@ -1163,8 +1184,18 @@ class ParserInterface(ParserBase):
         except Exception as e:
             logger.error(e)
             raise e
-            
         return self._imports
+    @property
+    def requires_typing(self) -> Set[str]:
+        """Gets requires typing value"""
+        try:
+            if not self._formated_data:
+                msg = "ParserInterface.get_formated_data() method must be called before accessing imports"
+                raise Exception(msg)
+        except Exception as e:
+            logger.error(e)
+            raise e
+        return self._requires_typing
 # endregion Parse
 
 # region Writer
@@ -1183,6 +1214,7 @@ class InterfaceWriter(WriteBase):
         self._p_desc: List[str] = None
         self._p_data: str = None
         self._p_url: str = None
+        self._p_requires_typing = False
         self._path_dir = Path(os.path.dirname(__file__))
         _path = Path(self._path_dir, 'template', 'interface.tmpl')
         if not _path.exists():
@@ -1235,6 +1267,8 @@ class InterfaceWriter(WriteBase):
         self._template = self._template.replace('{ns}', str(self._p_namespace))
         self._template = self._template.replace('{link}', self._p_url)
         self._template = self._template.replace(
+            '{requires_typing}', str(self._p_requires_typing))
+        self._template = self._template.replace(
             '{inherits}', Util.get_string_list(lines=self._p_extends))
         self._template = self._template.replace(
             '{imports}', "[]")
@@ -1274,6 +1308,7 @@ class InterfaceWriter(WriteBase):
         self._p_imports.update(_imports)
         self._p_imports.update(data['extends'])
         self._p_imports_typing.update(self._parser.imports)
+        self._p_requires_typing = self._parser.requires_typing
         if self._write_file:
             self._file_full_path = self._get_uno_obj_path()
     
