@@ -561,6 +561,8 @@ class TagsStrObj:
 
 
 class WriteBase(object):
+    def __init__(self, **kwargs):
+        pass
     def _mkdirp(self, dest_dir):
         # Python ≥ 3.5
         if isinstance(dest_dir, Path):
