@@ -11,7 +11,7 @@ from bs4 import BeautifulSoup
 from bs4.element import PageElement, ResultSet, Tag
 from kwhelp.decorator import DecFuncEnum, RuleCheckAllKw, RequireArgs
 from kwhelp import rules
-from base import TYPE_MAP, TagsStrObj, ParserBase, SoupObj, BlockObj, Util, WriteBase
+from base import TYPE_MAP, TagsStrObj, ParserBase, SoupObj, BlockObj, Util, WriteBase, str_clean
 from pathlib import Path
 import xerox  # requires xclip - sudo apt-get install xclip
 from logger.log_handle import get_logger
@@ -993,6 +993,7 @@ class ApiSdkLink:
         return self._soup
 
 
+
 class ApiDesc:
     """Gets the description"""
     def __init__(self, soup:SoupObj):
@@ -1012,9 +1013,49 @@ class ApiDesc:
             'body > div.contents > div.textblock > p')
         p_obj = TagsStrObj(tags=lines_found)
         self._data = p_obj.get_lines()
+        see_obj = ApiDescSeeAlso(self._soup)
+        see = see_obj.get_obj()
+        if see:
+            self._data.append('')
+            self._data.append('**See Also**')
+            self._data.append('')
+            self._data.append(f"    {see}")
         return self._data
-        
-        
+    @property
+    def soup(self) -> SoupObj:
+        """Gets soup value"""
+        return self._soup
+
+class ApiDescSeeAlso:
+    """Gets the description"""
+
+    def __init__(self, soup: SoupObj):
+        self._soup = soup
+        self._data = None
+        self._init = False
+
+    def get_obj(self) -> str:
+        """
+        Gets See alos of Interface
+
+        Returns:
+            str: See also. if it exist; Otherwise empty string.
+        """
+        if self._init:
+            return self._data
+        self._init = True
+        tag = self._soup.soup.select_one(
+            'body > div.contents > div.textblock > dl > dd')
+        if not tag:
+            self._data = ''
+            return self._data
+        self._data = str_clean(" ".join(tag.text.split()))
+        return self._data
+    
+    @property
+    def soup(self) -> SoupObj:
+        """Gets soup value"""
+        return self._soup
 class ApiInfo:
     def __init__(self, url: str):
         self._url = url
