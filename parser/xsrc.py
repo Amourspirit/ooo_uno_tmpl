@@ -1263,12 +1263,12 @@ class ParserInterface(ParserBase):
 
 # region Writer
 class InterfaceWriter(WriteBase):
-    @RuleCheckAllKw(arg_info={
+    @TypeCheckKw(arg_info={
         "write_file": 0, "write_json": 0,
         "copy_clipboard": 0, "print_template": 0,
         "print_json": 0
         },
-        rules=[rules.RuleBool],
+        types=[bool],
         ftype=DecFuncEnum.METHOD)
     def __init__(self, parser: ParserInterface, **kwargs):
         super().__init__(**kwargs)
@@ -1291,8 +1291,12 @@ class InterfaceWriter(WriteBase):
         self._p_requires_typing = False
         self._path_dir = Path(os.path.dirname(__file__))
         _path = Path(self._path_dir, 'template', 'interface.tmpl')
-        if not _path.exists():
-            raise FileNotFoundError(f"unable to find templae file '{_path}'")
+        try:
+            if not _path.exists():
+                raise FileNotFoundError(f"unable to find templae file '{_path}'")
+        except Exception as e:
+            logger.error(e)
+            raise e
         self._template_file = _path
         self._template: str = self._get_template()
     
@@ -1507,8 +1511,9 @@ def main():
         print_json=args.print_json,
         copy_clipboard=args.clipboard,
         write_template=args.write_template,
-        write_json=args.write_json)
-    if args.print_json is False and args.print_json is False:
+        write_json=args.write_json
+        )
+    if args.print_template is False and args.print_json is False:
         print('')
     w.write()
 
