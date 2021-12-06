@@ -68,6 +68,7 @@ class Parser(ParserBase):
             logger.error(e)
             raise e
         return self._data_info
+
     def get_parser_args(self) -> dict:
         args = {
             "sort": self._sort

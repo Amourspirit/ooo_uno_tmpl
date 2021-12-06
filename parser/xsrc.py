@@ -18,7 +18,7 @@ from logger.log_handle import get_logger
 from parser.enm import main
 from dataclasses import dataclass
 import re
-from parser import __version__
+from parser import __version__, JSON_ID
 DEBUGGING = False
 
 logger = get_logger(Path(__file__).stem)
@@ -1127,6 +1127,12 @@ class ParserInterface(ParserBase):
         items = self._get_data_items()
         info['items'] = items
         return info
+    
+    def get_parser_args(self) -> dict:
+        args = {
+            "sort": self._sort
+        }
+        return args
         
     def get_info(self) -> Dict[str, object]:
         """
@@ -1263,6 +1269,7 @@ class ParserInterface(ParserBase):
 
 # region Writer
 class InterfaceWriter(WriteBase):
+    # region Constructor
     @TypeCheckKw(arg_info={
         "write_file": 0, "write_json": 0,
         "copy_clipboard": 0, "print_template": 0,
@@ -1299,7 +1306,8 @@ class InterfaceWriter(WriteBase):
             raise e
         self._template_file = _path
         self._template: str = self._get_template()
-    
+    # endregion Constructor
+
     def write(self):
         self._set_info()
         self._set_template_data()
@@ -1327,10 +1335,13 @@ class InterfaceWriter(WriteBase):
             return self._json_str
         p_dict = self._parser.get_dict_data()
         json_dict = {
+            "id": JSON_ID,
             "version": __version__,
-            "type": "interface",
             "name": p_dict['name'],
+            "type": "interface",
             "namespace": p_dict['namespace'],
+            "parser_args": self._parser.get_parser_args(),
+            "writer_args": {},
             "data": p_dict
         }
         str_jsn = Util.get_formated_dict_list_str(obj=json_dict, indent=2)
