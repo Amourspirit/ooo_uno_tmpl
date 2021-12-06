@@ -11,7 +11,7 @@ from bs4 import BeautifulSoup
 from bs4.element import PageElement, ResultSet, Tag
 from kwhelp.decorator import DecFuncEnum, RuleCheckAllKw, RequireArgs
 from kwhelp import rules
-from base import TYPE_MAP, TagsStrObj, ParserBase, SoupObj, BlockObj, Util, WriteBase, str_clean
+from base import TYPE_MAP, TagsStrObj, ParserBase, SoupObj, BlockObj, UrlObj, Util, WriteBase, str_clean
 from pathlib import Path
 import xerox  # requires xclip - sudo apt-get install xclip
 from logger.log_handle import get_logger
@@ -114,35 +114,39 @@ class SdkComponentText:
     def __init__(self, c_text: SdkCodeText):
         self._code_text = c_text
         self._data = None
+        self._init = False
 
     def get_text(self) -> str:
-        if self._data:
+        if self._init:
             return self._data
+        self._init = True
         text = self._code_text.get_obj()
-        # https://regex101.com/r/xAqRAU/1/
-        # regex = r"published.*\s\{(\s*?.*?)*?\}"
-
-        # https://regex101.com/r/xAqRAU/2/
-        # https://regex101.com/r/xAqRAU/4/
-        # much more generic
-        # regex = r"[a-zA-Z0-9 :]*\n\{(\s*?.*?)*?\}"
-        # matches = re.search(regex, text)
+        # it is possible that SDK file has more than one interface
+        # See: https://api.libreoffice.org/docs/idl/ref/XComponentContext_8idl_source.html
+        # for this reason will narrow text untill the last match is found.
+        self._data = self._get_text_aggresive(text)
+        logger.debug('Component text:\n%s', self._data)
         
+        return self._data
+
+    def _get_text_aggresive(self, text:str) -> str:
         regex_start = r"module (com \{.*)\{"
         regex_end = r"}; (?:[ ;}])*\n#endif"
         matches_start = re.search(regex_start, text)
         matches_end = re.search(regex_end, text)
+        result = ''
         if matches_start and matches_end:
-            # print(matches)
-            print(matches_start.span())
             start = matches_start.span()[1]
             end = matches_end.span()[0]
-            self._data = text[start:end].strip()
-        if not self._data:
-            self._data = ''
-        # logger.debug('Component text:\n%s', self._data)
-        return self._data
+            result = text[start:end]
+            matches_start = re.search(regex_start, result)
+        while matches_start:
+            start = matches_start.span()[1]
+            result = result[start:]
+            matches_start = re.search(regex_start, result)
+        return result.strip()
 
+        
     @property
     def code_text(self) -> SdkCodeText:
         """Gets code_text value"""
@@ -158,17 +162,17 @@ class SdkComponentLines:
     def __init__(self, f_text: SdkComponentText):
         self._component = f_text
         self._data = None
+        self._init = False
 
     def get_obj(self) -> List[str]:
-        if self._data:
+        if self._init:
             return self._data
+        self._init = True
         text = self._component.get_text()
         # text includes name and {} such as interface XHierarchicalPropertySet: com::sun::star::uno::XInterface\n{...\n}
         # remove the outter text
-        # inner_re = r"\{(.*)\}"
-        # matches = re.search(inner_re, text, flags=re.DOTALL)
-        inner_re = r"[{]((?:[^{}]*|[{][^{}]*[}])*)[}]"
-        matches = re.search(inner_re, text)
+        inner_re = r"\{(.*)\}"
+        matches = re.search(inner_re, text, flags=re.DOTALL)
         if matches:
             g = matches.groups()
             text = g[0]
@@ -645,7 +649,7 @@ class SdkExtends:
         logger.debug("SdkExtends._init() Replaced :: %s", s)
         parts = s.rsplit(sep=':', maxsplit=1)
         if len(parts) > 1:
-            logger.debug("SdkExtends._init() No ':' seperator Did not find extends on first line.")
+            logger.debug("SdkExtends._init() ':' seperator found extends on first line.")
             s = parts[1]
             logger.debug("SdkExtends._init() Processing: '%s'", s)
             s = Util.get_clean_ns(s)
@@ -745,14 +749,18 @@ class SdkImports:
 
 
 class SdkNamesSpaceInfo:
-    def __init__(self, text: SdkCodeText):
-        self._text = text
+    def __init__(self, text: SdkComponentText):
+        self._text: SdkComponentText = text
         self._ns = ""
         self._ns_lst = None
         self._init()
 
     def _init(self) -> str:
-        text = self._text.get_obj()
+        text = self._text.get_text()
+        if not text:
+            return
+        # get the first line.
+        text = text.split('\n', maxsplit=1)[0]
         regex = r"module (com \{.*)\{"
         # regex = r"module com \{  module sun \{  module star \{  module awt \{"
         matches = re.search(regex, text, flags=re.MULTILINE)
@@ -1129,7 +1137,8 @@ class ParserInterface(ParserBase):
         """
         if self._info:
             return self._info
-        ns = SdkNamesSpaceInfo(self._sdk_method_info.code_text)
+        # ns = SdkNamesSpaceInfo(self._sdk_method_info.component)
+        ns = UrlObj(self._url)
         ni = SdkNameInfo(self._sdk_method_info.component)
         ex = SdkExtends(c_text=self._sdk_method_info.component,
                         m_text=self._sdk_method_info.component_lines)
@@ -1138,11 +1147,13 @@ class ParserInterface(ParserBase):
         result = {
             'name': ni.name,
             'imports': im.get_obj(),
-            'namespace': ns.namespace,
+            'namespace': ns.namespace_str,
             'extends': ex.ex_lst,
             'desc': desc.get_obj(),
             "url": self._api_info.soup.url
         }
+        logger.debug('ParserInterface.get_info() name: %s', ni.name)
+        logger.debug('ParserInterface.get_info() namespace: %s', ns.namespace_str)
         self._info = result
         return self._info
     
@@ -1379,7 +1390,10 @@ def _main():
     # interfaces
     # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1beans_1_1XPropertyBag.html'
     
-    url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1uno_1_1XInterface.html'
+    url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1uno_1_1XComponentContext.html'
+    ns = UrlObj(url)
+    print(ns.namespace_str)
+    return
     p = ParserInterface(url=url)
     pprint.pprint(p.get_info())
     print(p.get_formated_data())

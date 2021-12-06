@@ -407,14 +407,22 @@ class UrlObj:
             self._is_frag = True
         except IndexError:
             self._fragment = ''
-        self._ns = self._get_ns()
+        self._ns = None
         self._ns_str = None
 
     def _get_ns(self) -> List[str]:
-        ns_part = self._page_link.split('.')[0].lower()
-        if ns_part.startswith('namespace'):
-            ns_part = ns_part[9:]
-        return ns_part.split('_1_1')
+        result = ''
+        try:
+            ns_part = self._page_link.split('.')[0].lower()
+            s = ns_part.replace('_1_1', '.').lstrip('.')
+            # the frist part on the str usually is prefixe with namespace, interface or whatever.
+            # namespace always start with com so just drop the first part to clean it up.
+            s = 'com.' + s.split('.', maxsplit=1)[1]
+            result = s.split('.')
+        except Exception as e:
+            logger.error(e)
+            logger.info('UrlObj_get_ns() returning empty string')
+        return result
 
     @property
     def page_link(self) -> str:
@@ -442,6 +450,8 @@ class UrlObj:
         """
         Gets Namespace in format of ['com', 'sun', 'star', 'style']
         """
+        if self._ns is None:
+            self._ns = self._get_ns()
         return self._ns
 
     @property
