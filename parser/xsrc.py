@@ -134,6 +134,9 @@ class SdkComponentText:
         regex_end = r"}; (?:[ ;}])*\n#endif"
         matches_start = re.search(regex_start, text)
         matches_end = re.search(regex_end, text)
+        if not matches_end:
+            regex_end = r"(\}; ){2,4}(\}[; ])+\n"
+            matches_end = re.search(regex_end, text)
         result = ''
         if matches_start and matches_end:
             start = matches_start.span()[1]
@@ -993,7 +996,9 @@ class ApiSdkLink:
         a = self._soup.soup.select_one("body > div.contents > ul > li > a")
         url = self._soup.url
         parts = url.rsplit('/', 1)
-        return parts[0] + '/' + a['href']
+        href = parts[0] + '/' + a['href']
+        logger.debug("ApiSdkLink.get_obj() Link: %s", href)
+        return href
 
     @property
     def soup(self) -> SoupObj:
@@ -1458,10 +1463,7 @@ def _main():
     # interfaces
     # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1beans_1_1XPropertyBag.html'
     
-    url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1uno_1_1XComponentContext.html'
-    ns = UrlObj(url)
-    print(ns.namespace_str)
-    return
+    url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1uno_1_1XNamingService.html'
     p = ParserInterface(url=url)
     pprint.pprint(p.get_info())
     print(p.get_formated_data())
