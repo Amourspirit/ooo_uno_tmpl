@@ -1,0 +1,56 @@
+#import typing
+#from _x_base import x_base as XBase
+#extends XBase
+#attr $name = "XInterface"
+#attr $desc = [
+    "base interface of all UNO interfaces",
+    "",
+    "It provides lifetime control by reference counting and the possibility of querying for other interfaces of the same logical object.",
+    "",
+    "\\\"Logical Object\\\" in this case means that the interfaces actually can be supported by internal (e.g. aggregated) physical objects.",
+    "",
+    "Deriving from this interface is mandatory for all UNO interfaces.",
+    "",
+    "Each language binding (Java, C++, StarBasic, Python, ... ) may provide a different mapping of this interface, please look into the language dependent documentation.",
+    "",
+    "The UNO object does not export the state of the reference count (acquire() and release() do not have return values). In general, also the UNO object itself should not make any assumption on the concrete value of the reference count (except on the transition from one to zero )."
+]
+#attr $link = "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1uno_1_1XInterface.html"
+#attr $requires_typing = False
+#attr $inherits = []
+#attr $imports = []
+#attr $from_imports = []
+#attr $from_imports_typing = []
+#attr $namespace = "com.sun.star.uno"
+#attr $attribs = {
+        "methods": [
+            {
+                "name": "acquire",
+                "returns": "None",
+                "desc": [
+                    "increases the reference counter by one.",
+                    "",
+                    "When you have called acquire() on the UNO object, it is often said, that you have a reference or a hard reference to the object.",
+                    "",
+                    "It is only allowed to invoke a method on a UNO object, when you keep a hard reference to it.",
+                    "",
+                    "Every call to acquire must be followed by a corresponding call to release some time later, which may eventually lead to the destruction of the object."
+                ],
+                "raises": [],
+                "args": []
+            },
+            {
+                "name": "release",
+                "returns": "None",
+                "desc": [
+                    "decreases the reference counter by one.",
+                    "",
+                    "When the reference counter reaches 0, the object gets deleted.",
+                    "",
+                    "Calling release() on the object is often called releasing or clearing the reference to an object."
+                ],
+                "raises": [],
+                "args": []
+            }
+        ]
+    }

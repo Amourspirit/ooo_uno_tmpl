@@ -1308,7 +1308,10 @@ class InterfaceWriter(WriteBase):
         self._p_imports.update(_imports)
         self._p_imports.update(data['extends'])
         self._p_imports_typing.update(self._parser.imports)
-        self._p_requires_typing = self._parser.requires_typing
+        if len(self._p_imports_typing) > 0:
+            self._p_requires_typing = True
+        if not self._p_requires_typing:
+            self._p_requires_typing = self._parser.requires_typing
         if self._write_file:
             self._file_full_path = self._get_uno_obj_path()
     

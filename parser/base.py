@@ -351,9 +351,9 @@ class Util:
                 is_pytype = False
                 map_type = _type
             cb_data['is_py_type'] = is_pytype
-            cb_data['type'] = _type
+            cb_data['type'] = map_type
             do_cb(cb, cb_data)
-            return f"{wrapper}[{_type}]"
+            return f"{wrapper}[{map_type}]"
         _u_type_clean = Util.get_clean_name(Util.get_last_part(_u_type))
         result = TYPE_MAP.get(_u_type_clean, None)
         if result:
