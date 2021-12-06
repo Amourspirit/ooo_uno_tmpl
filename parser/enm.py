@@ -4,14 +4,15 @@ import sys
 import argparse
 from typing import Dict, List
 from bs4.element import ResultSet, Tag
-from kwhelp.decorator import DecFuncEnum, RuleCheckAllKw, RequireArgs
+from kwhelp.decorator import DecFuncEnum, RuleCheckAllKw, RequireArgs, TypeCheckKw
 from kwhelp import rules
 from collections import namedtuple
-from base import TagsStrObj, WriteBase, ParserBase, SoupObj, UrlObj, BlockObj
+from base import TagsStrObj, Util, WriteBase, ParserBase, SoupObj, UrlObj, BlockObj
 from pathlib import Path
 import textwrap
 import xerox # requires xclip - sudo apt-get install xclip
 from logger.log_handle import get_logger
+from parser import __version__, JSON_ID
 import pprint
 
 logger = get_logger(Path(__file__).stem)
@@ -166,7 +167,7 @@ class EnumItems:
         t_obj = TagsStrObj(tags=p_lines)
         di = EnumDataItem(name=name,
                           value=name,
-                          desc=t_obj.get_string_list())
+                          desc=t_obj.get_lines())
         return di
 
 class ParserEnum(ParserBase):
@@ -181,11 +182,22 @@ class ParserEnum(ParserBase):
         self._data_formated = None
         self._soup = SoupObj(url=self._url)
         self._block = None
+        self._data_formated = None
+        self._data_items = None
 
     def _get_enum_block(self) -> EnumBlock:
         if not self._block:
             self._block = EnumBlock(soup=self._soup)
         return self._block
+
+    # region Data
+    def get_dict_data(self) -> dict:
+        info = self.get_info()
+        items = self._get_data_items()
+        # set to list for json
+        info['items'] = items
+        return info
+    # endregion Data
 
     def get_info(self) -> Dict[str, object]:
         """
@@ -215,8 +227,17 @@ class ParserEnum(ParserBase):
             return result
         except Exception as e:
             logger.error(e)
+            raise e
+    
+    def get_parser_args(self) -> dict:
+        args = {
+            "sort": self._sort
+        }
+        return args
 
     def get_formated_data(self):
+        if not self._data_formated is None:
+            return self._data_formated
         try:
             block = self._get_enum_block()
             e_obj = EnumItems(block=block, sort=self._sort)
@@ -226,22 +247,57 @@ class ParserEnum(ParserBase):
             for i, e in enumerate(enums):
                 if i > 0:
                     s += ',\n'
-                s_desc = textwrap.indent(e.desc, lst_indent).lstrip()
+                s_desc = textwrap.indent(Util.get_string_list(e.desc), lst_indent).lstrip()
 
                 s += f'{self._indent}"{e.name}": {s_desc}'
-            return s
+            self._data_formated = s
         except Exception as e:
             logger.error(e)
-
-class EnumWriter(WriteBase):
+        return self._data_formated
     
+    def _get_data_items(self) -> List[dict]:
+        if not self._data_items is None:
+            return self._data_items
+        result = []
+        try:
+            block = self._get_enum_block()
+            e_obj = EnumItems(block=block, sort=self._sort)
+            enums = e_obj.get_data()
+            for e in enums:
+                result.append(
+                    {
+                        "name": e.name,
+                        "value": e.value,
+                        "desc": e.desc
+                    }
+                )
+        except Exception as e:
+            logger.error(e)
+            raise e
+        self._data_items = result
+        return self._data_items
+class EnumWriter(WriteBase):
+    # region constructor
+    @TypeCheckKw(arg_info={
+        "copy_clipboard": 0,
+        "write_template": 0,
+        "print_template": 0,
+        "print_json": 0,
+        "write_json": 0
+    },
+        types=[bool],
+        ftype=DecFuncEnum.METHOD)
     def __init__(self, parser: ParserEnum, **kwargs):
+        super().__init__(**kwargs)
         self._parser = parser
         self._copy_clipboard = kwargs.get('copy_clipboard', False)
         self._sort = kwargs.get('sort', True)
-        self._print = kwargs.get('print', True)
-        self._write_file = kwargs.get('write_file', False)
+        self._print_template = kwargs.get('print_template', True)
+        self._write_file = kwargs.get('write_template', False)
+        self._print_json = kwargs.get('print_json', True)
+        self._write_json = kwargs.get('write_json', False)
         self._indent_amt = 4
+        self._json_str = None
         self._file_full_path = None
         self._p_name = None
         self._p_namespace = None
@@ -254,7 +310,8 @@ class EnumWriter(WriteBase):
             raise FileNotFoundError(f"unable to find templae file '{_path}'")
         self._template_file = _path
         self._template: str = self._get_template()
-    
+    # enregion constructor
+
     def _get_template(self):
         with open(self._template_file) as f:
             contents = f.read()
@@ -268,19 +325,50 @@ class EnumWriter(WriteBase):
             if self._copy_clipboard:
                 xerox.copy(self._template)
                 logger.debug('copied to clipbord')
-            if self._print:
+            if self._print_template or self._print_json:
                 logger.debug('Printing to terminal')
                 os.system('cls' if os.name == 'nt' else 'clear')
+            if self._print_template:
                 print(self._template)
+            if self._print_json:
+                print(self._get_json())
             if self._write_file:
                 self._write_to_file()
+            if self._write_json:
+                self._write_to_json()
         except Exception as e:
             logger.exception(e)
+
+    def _get_json(self) -> str:
+        if not self._json_str is None:
+            return self._json_str
+        p_dict = self._parser.get_dict_data()
+        json_dict = {
+            "id": JSON_ID,
+            "version": __version__,
+            "name": p_dict['name'],
+            "type": "enum",
+            "namespace": p_dict['ns'],
+            "parser_args": self._parser.get_parser_args(),
+            "writer_args": {},
+            "data": p_dict
+        }
+        str_jsn = Util.get_formated_dict_list_str(obj=json_dict, indent=2)
+        self._json_str = str_jsn
+        return self._json_str
 
     def _write_to_file(self):
         with open(self._file_full_path, 'w') as f:
             f.write(self._template)
         logger.info("Created file: %s", self._file_full_path)
+    
+    def _write_to_json(self):
+        p = self._file_full_path.parent
+        jsn_p = p / (str(self._file_full_path.stem) + '.json')
+        jsn_str = self._get_json()
+        with open(jsn_p, 'w') as f:
+            f.write(jsn_str)
+        logger.info("Created file: %s", jsn_p)
 
     def _set_template_data(self):
         self._template = self._template.replace('{sort}', str(self._sort))
@@ -302,7 +390,7 @@ class EnumWriter(WriteBase):
         self._p_url = data['url']
         self._p_namespace = data['ns']
         self._p_data = self._parser.get_formated_data()
-        if self._write_file:
+        if self._write_file or self._write_json:
             self._file_full_path = self._get_uno_obj_path()
         
 
@@ -357,16 +445,28 @@ def main():
         dest='clipboard',
         default=False)
     parser.add_argument(
-        '-p', '--no-print',
-        help='Do NOT print to terminal',
-        action='store_false',
-        dest='print',
-        default=True)
-    parser.add_argument(
-        '-w', '--write',
-        help='Write file into obj_uno subfolder',
+        '-n', '--print-json',
+        help='Print json to terminal',
         action='store_true',
-        dest='write',
+        dest='print_json',
+        default=False)
+    parser.add_argument(
+        '-m', '--print-template',
+        help='Print template to terminal',
+        action='store_true',
+        dest='print_template',
+        default=False)
+    parser.add_argument(
+        '-t', '--write-template',
+        help='Write template file into obj_uno subfolder',
+        action='store_true',
+        dest='write_template',
+        default=False)
+    parser.add_argument(
+        '-j', '--write-json',
+        help='Write json file into obj_uno subfolder',
+        action='store_true',
+        dest='write_json',
         default=False)
 
     args = parser.parse_args()
@@ -376,11 +476,13 @@ def main():
         replace_dual_colon=args.dual_colon)
     w = EnumWriter(
         parser=p,
-        print=args.print,
+        print_template=args.print_template,
+        print_json=args.print_json,
         copy_clipboard=args.clipboard,
-        sort=args.sort,
-        write_file=args.write)
-    if not args.print:
+        write_template=args.write_template,
+        write_json=args.write_json
+        )
+    if args.print_template is False and args.print_json is False:
         print('')
     w.write()
 

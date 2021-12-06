@@ -8,11 +8,13 @@ from bs4.element import ResultSet, SoupStrainer, Tag
 from kwhelp.decorator import DecFuncEnum, RuleCheckAllKw, TypeCheckKw
 from kwhelp import KwArg, rules
 from collections import namedtuple
-from base import WriteBase, ParserBase, TYPE_MAP
+from base import UrlObj, Util, WriteBase, ParserBase, TYPE_MAP
 from pathlib import Path
 import textwrap
 import xerox # requires xclip - sudo apt-get install xclip
 from logger.log_handle import get_logger
+
+from parser import __version__, JSON_ID
 
 logger = get_logger(Path(__file__).stem)
 
@@ -21,7 +23,7 @@ dataitem = namedtuple(
 
 
 class Parser(ParserBase):
-    # region init
+    # region Constructor
     @RuleCheckAllKw(arg_info={"url": 0, "sort": 1, "replace_dual_colon": 1},
                     rules=[rules.RuleStrNotNullEmptyWs, rules.RuleBool],
                     ftype=DecFuncEnum.METHOD)
@@ -29,9 +31,21 @@ class Parser(ParserBase):
         super().__init__(**kwargs)
         self._data = None
         self._data_formated = None
+        self._data_info = None
+        self._data_items = None
         self._auto_imports = set()
 
-    # endregion init
+    # endregion Constructor
+
+    # region Data
+    def get_dict_data(self) -> dict:
+        info = self.get_info()
+        items = self._get_data_items()
+        # set to list for json
+        info["auto_imports"] = list(self.auto_imports)
+        info['items'] = items
+        return info
+    # endregion Data
     # region Info
     def get_info(self) -> Dict[str, str]:
         """
@@ -42,9 +56,12 @@ class Parser(ParserBase):
                 "name": "name of constant",
                 "fullname": "full name such as com.sun.star.awt.Command"
                 "desc": "description of constant",
-                "url": "Url to LibreOffice of constant"
+                "url": "Url to LibreOffice of constant",
+                "namespace: "namespace"
             }
         """
+        if not  self._data_info is None:
+            return self._data_info
         try:
             if not self._url:
                 raise ValueError('URL is not set')
@@ -52,20 +69,31 @@ class Parser(ParserBase):
             full_name = self._get_full_name(soup=soup)
             name = self._get_name(soup=soup)
             desc = self._get_desc(soup=soup)
+            ns = UrlObj(self.url)
             info = {
                 "name": name,
                 "fullname": full_name,
                 "desc": desc,
-                "url": self.url
+                "url": self.url,
+                "namespace": ns.namespace_str
             }
-            return info
+            self._data_info = info
+            return self._data_info
         except Exception as e:
             logger.error(e)
+            raise e
+
+    def get_parser_args(self) -> dict:
+        args = {
+            "sort": self._sort
+        }
+        return args
+
     # endregion Info
 
     # region Data
     def get_data(self) -> List[dataitem]:
-        if self._data:
+        if not self._data is None:
             return self._data
         try:
             if not self._url:
@@ -78,8 +106,8 @@ class Parser(ParserBase):
         except Exception as e:
             logger.error(e)
 
-    def get_formated_data(self):
-        if self._data_formated:
+    def get_formated_data(self) -> str:
+        if not self._data_formated is None:
             return self._data_formated
         def get_lines(lines:List[str]) -> str:
             line_indent = self._indent * 2
@@ -117,6 +145,27 @@ class Parser(ParserBase):
             return self._data_formated
         except Exception as e:
             logger.error(e)
+            raise e
+    
+    def _get_data_items(self) -> List[dict]:
+        if not self._data_items is None:
+            return self._data_items
+        result = []
+        data = self.get_data()
+        try:
+            for itm in data:
+                d_itm = {
+                    "name": itm.name,
+                    "type": itm.datatype,
+                    "orig_type": itm.orig_type,
+                    "lines": itm.lines
+                }
+                result.append(d_itm)
+        except Exception as e:
+            logger.error(e)
+            raise e
+        self._data_items = result
+        return self._data_items
 
     def _get_struct_details(self, memitetms: ResultSet) -> List[dataitem]:
         results = []
@@ -172,23 +221,30 @@ class Parser(ParserBase):
     # endregion Properties
 class StructWriter(WriteBase):
 
+    # region Constructor
     @TypeCheckKw(arg_info={
         "sort": 0,
         "copy_clipboard": 0,
-        "print": 0,
+        "print_template": 0,
+        "print_json": 0,
         "write_file": 0,
+        "write_json": 0,
         "auto_import": 0
         },
         types=[bool],
         ftype=DecFuncEnum.METHOD)
     def __init__(self, parser:Parser, **kwargs):
+        super().__init__(**kwargs)
         self._parser = parser
         self._sort = kwargs.get('sort', True)
         self._copy_clipboard = kwargs.get('copy_clipboard', False)
-        self._print = kwargs.get('print', False)
+        self._print_template = kwargs.get('print_template', False)
         self._auto_import = kwargs.get('auto_import', True)
+        self._write_file = kwargs.get('write_template', False)
+        self._print_json = kwargs.get('print_json', True)
+        self._write_json = kwargs.get('write_json', False)
         self._indent_amt = 4
-        self._write_file = kwargs.get('write_file', False)
+        self._json_str = None
         self._file_full_path = None
         self._p_name = None
         self._p_fullname = None
@@ -196,10 +252,16 @@ class StructWriter(WriteBase):
         self._p_desc = None
         self._path_dir = Path(os.path.dirname(__file__))
         _path = Path(self._path_dir, 'template', 'struct.tmpl')
-        if not _path.exists():
-            raise FileNotFoundError(f"unable to find templae file '{_path}'")
+        try:
+            if not _path.exists():
+                raise FileNotFoundError(f"unable to find templae file '{_path}'")
+        except Exception as e:
+            logger.error(e)
+            raise e
         self._template_file = _path
         self._template: str = self._get_template()
+    # endregion Constructor
+
 
     def _get_template(self):
         with open(self._template_file) as f:
@@ -214,14 +276,40 @@ class StructWriter(WriteBase):
             if self._copy_clipboard:
                 xerox.copy(self._template)
                 logger.debug('copied to clipbord')
-            if self._print:
+            if self._print_template or self._print_json:
                 logger.debug('Printing to terminal')
                 os.system('cls' if os.name == 'nt' else 'clear')
+            if self._print_template:
                 print(self._template)
+            if self._print_json:
+                print(self._get_json())
             if self._write_file:
                 self._write_to_file()
+            if self._write_json:
+                self._write_to_json()
         except Exception as e:
             logger.exception(e)
+
+    def _get_json(self) -> str:
+        if not self._json_str is None:
+            return self._json_str
+        p_dict = self._parser.get_dict_data()
+        json_dict = {
+            "id": JSON_ID,
+            "version": __version__,
+            "type": "struct",
+            "name": p_dict['name'],
+            "namespace": p_dict['namespace'],
+            "parser_args": self._parser.get_parser_args(),
+            "writer_args": {
+                "sort": self._sort,
+                "auto_import": self._auto_import
+            },
+            "data": p_dict
+        }
+        str_jsn = Util.get_formated_dict_list_str(obj=json_dict, indent=2)
+        self._json_str = str_jsn
+        return self._json_str
 
     def _set_template_data(self):
         self._template = self._template.replace('{sort}', str(self._sort))
@@ -239,6 +327,14 @@ class StructWriter(WriteBase):
         with open(self._file_full_path, 'w') as f:
             f.write(self._template)
         logger.info("Created file: %s", self._file_full_path)
+    
+    def _write_to_json(self):
+        p = self._file_full_path.parent
+        jsn_p = p / (str(self._file_full_path.stem) + '.json')
+        jsn_str = self._get_json()
+        with open(jsn_p, 'w') as f:
+            f.write(jsn_str)
+        logger.info("Created file: %s", jsn_p)
 
     def _set_info(self):
         data = self._parser.get_info()
@@ -247,7 +343,7 @@ class StructWriter(WriteBase):
         self._p_url = data['url']
         self._p_fullname = data['fullname']
         self._p_data = self._parser.get_formated_data()
-        if self._write_file:
+        if self._write_file or self._write_json:
             self._file_full_path = self._get_uno_obj_path()
         
 
@@ -341,27 +437,48 @@ def main():
         dest='auto_import',
         help='Auto import types that are not python types',
         default=False)
-    # parser.add_argument(
-    #     '-p', '--print', help='print to terminal', type=bool, default=True)
-    
     parser.add_argument(
-        '-w', '--write-file',
-        help='Write file into obj_uno subfolder',
+        '-t', '--write-template',
+        help='Write template file into obj_uno subfolder',
         action='store_true',
+        dest='write_template',
         default=False)
     
-    parser.add_argument('-p', action='store_true', default=False,
-                    dest='print',
-                    help='Set a switch to true')
+    parser.add_argument(
+        '-m', '--print-template',
+        help='Print template to terminal',
+        action='store_true',
+        dest='print_template',
+        default=False)
+    parser.add_argument(
+        '-n', '--print-json',
+        help='Print json to terminal',
+        action='store_true',
+        dest='print_json',
+        default=False)
+    parser.add_argument(
+        '-j', '--write-json',
+        help='Write json file into obj_uno subfolder',
+        action='store_true',
+        dest='write_json',
+        default=False)
     args = parser.parse_args()
     # print("auto", args.auto_import)
     # print('print', args.print)
     # return
     p = Parser(url=args.url, sort=args.sort,
                replace_dual_colon=args.dual_colon)
-    print('')
-    w = StructWriter(parser=p, copy_clipboard=args.clipboard, print=args.print, write_file=args.write_file,
-                     auto_import=args.auto_import)
+    if args.print_template is False and args.print_json is False:
+        print('')
+    w = StructWriter(
+        parser=p,
+        copy_clipboard=args.clipboard,
+        print_template=args.print_template,
+        print_json=args.print_json,
+        auto_import=args.auto_import,
+        write_template=args.write_template,
+        write_json=args.write_json
+        )
     w.write()
     
 if __name__ == '__main__':
