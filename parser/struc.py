@@ -80,6 +80,7 @@ class Parser(ParserBase):
             return self._data_info
         except Exception as e:
             logger.error(e)
+            raise e
     # endregion Info
 
     # region Data
@@ -224,6 +225,7 @@ class StructWriter(WriteBase):
         types=[bool],
         ftype=DecFuncEnum.METHOD)
     def __init__(self, parser:Parser, **kwargs):
+        super().__init__(**kwargs)
         self._parser = parser
         self._sort = kwargs.get('sort', True)
         self._copy_clipboard = kwargs.get('copy_clipboard', False)

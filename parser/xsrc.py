@@ -9,7 +9,7 @@ import textwrap
 from typing import Dict, List, Set, Tuple
 from bs4 import BeautifulSoup
 from bs4.element import PageElement, ResultSet, Tag
-from kwhelp.decorator import DecFuncEnum, RuleCheckAllKw, RequireArgs
+from kwhelp.decorator import DecFuncEnum, RuleCheckAllKw, RequireArgs, TypeCheckKw
 from kwhelp import rules
 from base import TYPE_MAP, TagsStrObj, ParserBase, SoupObj, BlockObj, UrlObj, Util, WriteBase, str_clean
 from pathlib import Path
@@ -1275,8 +1275,8 @@ class InterfaceWriter(WriteBase):
         self._parser: ParserInterface = parser
         self._copy_clipboard = kwargs.get('copy_clipboard', False)
         self._print_template = kwargs.get('print_template', False)
-        self._print_json = kwargs.get('print_json', True)
         self._write_file = kwargs.get('write_template', False)
+        self._print_json = kwargs.get('print_json', True)
         self._write_json = kwargs.get('write_json', False)
         self._indent_amt = 4
         self._json_str = None
@@ -1305,12 +1305,12 @@ class InterfaceWriter(WriteBase):
         self._set_template_data()
         logger.info("Processing %s.%s", self._p_namespace, self._p_name)
         try:
-            if self._copy_clipboard:
-                xerox.copy(self._template)
-                logger.debug('copied to clipbord')
             if self._print_template or self._print_json:
                 logger.debug('Printing to terminal')
                 os.system('cls' if os.name == 'nt' else 'clear')
+            if self._copy_clipboard:
+                xerox.copy(self._template)
+                logger.debug('copied to clipbord')
             if self._print_template:
                 print(self._template)
             if self._print_json:
