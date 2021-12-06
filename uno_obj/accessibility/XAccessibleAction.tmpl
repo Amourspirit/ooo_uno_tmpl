@@ -1,0 +1,75 @@
+#import typing
+#from _x_base import x_base as XBase
+#extends XBase
+#attr $name = "XAccessibleAction"
+#attr $desc = [
+    "Implement this interface to give access to actions that can be executed for accessible objects.",
+    "",
+    "Every accessible object that can be manipulated beyond its methods exported over the accessibility API should support this interface to expose all actions that it can perform. Each action can be performed or be queried for a description or associated key bindings.",
+    "",
+    "**See Also**",
+    "",
+    "    OOo 1.1.2"
+]
+#attr $link = "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1accessibility_1_1XAccessibleAction.html"
+#attr $requires_typing = True
+#attr $inherits = []
+#attr $imports = []
+#attr $from_imports = []
+#attr $from_imports_typing = [
+    [
+        ".x_accessible_key_binding",
+        "XAccessibleKeyBinding"
+    ]
+]
+#attr $namespace = "com.sun.star.accessibility"
+#attr $attribs = {
+        "methods": [
+            {
+                "name": "doAccessibleAction",
+                "returns": "bool",
+                "desc": [
+                    "Perform the specified Action on the object."
+                ],
+                "raises": [
+                    "com.sun.star.lang.IndexOutOfBoundsException"
+                ],
+                "args": []
+            },
+            {
+                "name": "getAccessibleActionCount",
+                "returns": "int",
+                "desc": [
+                    "Returns the number of accessible actions available in this object.",
+                    "",
+                    "If there are more than one, the first one is considered the \\\"default\\\" action of the object."
+                ],
+                "raises": [],
+                "args": []
+            },
+            {
+                "name": "getAccessibleActionDescription",
+                "returns": "str",
+                "desc": [
+                    "Returns a description of the specified action of the object."
+                ],
+                "raises": [
+                    "com.sun.star.lang.IndexOutOfBoundsException"
+                ],
+                "args": []
+            },
+            {
+                "name": "getAccessibleActionKeyBinding",
+                "returns": "'XAccessibleKeyBinding'",
+                "desc": [
+                    "Returns a key binding object, if there is one, associated with the specified action.",
+                    "",
+                    "Note that there can be several alternative key bindings for an action. See XAccessibleKeyBinding for more information about how key bindings are represented."
+                ],
+                "raises": [
+                    "com.sun.star.lang.IndexOutOfBoundsException"
+                ],
+                "args": []
+            }
+        ]
+    }

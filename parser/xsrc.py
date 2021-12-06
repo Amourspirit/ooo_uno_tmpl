@@ -819,16 +819,21 @@ class SdkNameInfo:
         matches = re.search(regex, s)
         if matches:
             g = matches.groups()
-            s: str = g[0]
+            logger.debug('SdkNameInfo: Processing: %s', g[0])
             # published interface XFont: ::com::sun::star::uno::XInterface
             # or
             # published interface XPropertyBag
-            s = s.replace(' ::com', ' com').replace('::', '.')
+            
+            # can be : ::com::sun::star::accessibility::XAccessibleText
+            s: str = str(g[0]).strip(':').strip().lstrip(':')
+            
+            s = s.replace('::', '.')
             # published interface XFont: com.sun.star.unoXInterface
 
-            s = s.split(':', 1)[0]
+            s = s.rsplit('.', 1).pop()
             # published interface XFont
-            self._name = s.rsplit(maxsplit=1)[1].strip()
+            self._name = s
+            logger.debug('SdkNameInfo.name: %s', self._name)
             # region Properties
 
     @property
@@ -1470,7 +1475,7 @@ def _main():
     # interfaces
     # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1beans_1_1XPropertyBag.html'
     
-    url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1uno_1_1XNamingService.html'
+    url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1accessibility_1_1XAccessibleEditableText.html'
     p = ParserInterface(url=url)
     pprint.pprint(p.get_info())
     print(p.get_formated_data())

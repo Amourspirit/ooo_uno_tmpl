@@ -194,6 +194,7 @@ class Parser(ParserBase):
             # text in format of com::sun::star::awt::AdjustmentType Type
             text: str = itm.find("td", class_='memname',
                                  recursive=True).text.strip().replace('::', '.')
+            logger.debug("Processing line: %s", text)
             # parts = text.split()
             parts = text.rsplit(maxsplit=2)
             # some unsigned short Data > ['some unsigned', 'short', 'Data3']
@@ -202,6 +203,7 @@ class Parser(ParserBase):
             py_type = get_py_type(_type)
             name = parts.pop()
             lines = get_doc_lines(itm)
+            logger.debug("Detils: Name: %s, Type: %s, Orig: %s", name, py_type, _type)
             di = dataitem(name=name,
                           datatype=py_type,
                           orig_type=_type,
