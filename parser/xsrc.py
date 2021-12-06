@@ -889,7 +889,7 @@ class ApiMethodBlock:
                 tag_main=main
             )
         except Exception as e:
-            logger.error(e)
+            logger.error(e, exc_info=True)
             raise e
         self._data = mi
         return self._data
@@ -1256,7 +1256,7 @@ class ParserInterface(ParserBase):
                 msg = "ParserInterface.get_formated_data() method must be called before accessing imports"
                 raise Exception(msg)
         except Exception as e:
-            logger.error(e)
+            logger.error(e, exc_info=True)
             raise e
         return self._imports
     @property
@@ -1267,7 +1267,7 @@ class ParserInterface(ParserBase):
                 msg = "ParserInterface.get_formated_data() method must be called before accessing imports"
                 raise Exception(msg)
         except Exception as e:
-            logger.error(e)
+            logger.error(e, exc_info=True)
             raise e
         return self._requires_typing
 # endregion Parse
@@ -1307,7 +1307,7 @@ class InterfaceWriter(WriteBase):
             if not _path.exists():
                 raise FileNotFoundError(f"unable to find templae file '{_path}'")
         except Exception as e:
-            logger.error(e)
+            logger.error(e, exc_info=True)
             raise e
         self._template_file = _path
         self._template: str = self._get_template()
@@ -1434,7 +1434,7 @@ class InterfaceWriter(WriteBase):
             try:
                 raise Exception("InterfaceWriter._get_uno_obj_path() Parser provided a name the is an empty string.")
             except Exception as e:
-                logger.error(e)
+                logger.error(e, exc_info=True)
                 raise e
             
         uno_obj_path = Path(self._path_dir.parent, 'uno_obj')

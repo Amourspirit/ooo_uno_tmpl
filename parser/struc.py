@@ -80,7 +80,7 @@ class Parser(ParserBase):
             self._data_info = info
             return self._data_info
         except Exception as e:
-            logger.error(e)
+            logger.error(e, exc_info=True)
             raise e
 
     def get_parser_args(self) -> dict:
@@ -104,7 +104,7 @@ class Parser(ParserBase):
             self._data = struct_info
             return self._data
         except Exception as e:
-            logger.error(e)
+            logger.error(e, exc_info=True)
 
     def get_formated_data(self) -> str:
         if not self._data_formated is None:
@@ -144,7 +144,7 @@ class Parser(ParserBase):
             self._data_formated = result
             return self._data_formated
         except Exception as e:
-            logger.error(e)
+            logger.error(e, exc_info=True)
             raise e
     
     def _get_data_items(self) -> List[dict]:
@@ -162,7 +162,7 @@ class Parser(ParserBase):
                 }
                 result.append(d_itm)
         except Exception as e:
-            logger.error(e)
+            logger.error(e, exc_info=True)
             raise e
         self._data_items = result
         return self._data_items
@@ -256,7 +256,7 @@ class StructWriter(WriteBase):
             if not _path.exists():
                 raise FileNotFoundError(f"unable to find templae file '{_path}'")
         except Exception as e:
-            logger.error(e)
+            logger.error(e, exc_info=True)
             raise e
         self._template_file = _path
         self._template: str = self._get_template()
@@ -358,7 +358,7 @@ class StructWriter(WriteBase):
                 raise Exception(
                     "StructWriter._get_uno_obj_path() parsing path yielded an empty string")
             except Exception as e:
-                logger.error(e)
+                logger.error(e, exc_info=True)
                 raise e
         path_parts[index] = path_parts[index] + '.tmpl'
         obj_path = uno_obj_path.joinpath(*path_parts)

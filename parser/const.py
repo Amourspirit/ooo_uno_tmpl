@@ -14,7 +14,9 @@ import textwrap
 import xerox # requires xclip - sudo apt-get install xclip
 from logger.log_handle import get_logger
 from parser import __version__, JSON_ID
+import traceback
 logger = get_logger(Path(__file__).name)
+logger
 dataitem = namedtuple(
     'dataitem', ['value', 'raw_value', 'name', 'datatype', 'lines'])
 
@@ -65,7 +67,7 @@ class Parser(ParserBase):
             }
             self._data_info = info
         except Exception as e:
-            logger.error(e)
+            logger.error(e, exc_info=True)
             raise e
         return self._data_info
 
@@ -106,7 +108,7 @@ class Parser(ParserBase):
             self._data = const_info
             return self._data
         except Exception as e:
-            logger.error(e)
+            logger.error(e, exc_info=True)
 
     def get_formated_data(self):
         if not self._data_formated is None:
@@ -129,7 +131,7 @@ class Parser(ParserBase):
             result = ',\n'.join(lines)
             self._data_formated = result
         except Exception as e:
-            logger.error(e)
+            logger.error(e, exc_info=True)
             raise e
         return self._data_formated
 
@@ -148,7 +150,7 @@ class Parser(ParserBase):
                 }
                 result.append(d_itm)
         except Exception as e:
-            logger.error(e)
+            logger.error(e, exc_info=True)
             raise e
         self._data_items = result
         return self._data_items
@@ -338,7 +340,7 @@ class ConstWriter(WriteBase):
                 raise Exception(
                     "ConstWriter._get_uno_obj_path() parsing path yielded an empty string")
             except Exception as e:
-                logger.error(e)
+                logger.error(e, exc_info=True)
                 raise e
         path_parts[index] = path_parts[index] + '.tmpl'
         obj_path = uno_obj_path.joinpath(*path_parts)

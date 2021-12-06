@@ -13,6 +13,7 @@ import textwrap
 import xerox # requires xclip - sudo apt-get install xclip
 from logger.log_handle import get_logger
 from parser import __version__, JSON_ID
+
 import pprint
 
 logger = get_logger(Path(__file__).stem)
@@ -37,7 +38,7 @@ class EnumUrl(UrlObj):
             s = 'com.' + s.split('.', maxsplit=1)[1]
             result = s.split('.')
         except Exception as e:
-            logger.error(e)
+            logger.error(e, exc_info=True)
             logger.info('EnumUrl._get_ns() returning empty list.')
         return result
 
@@ -226,7 +227,7 @@ class ParserEnum(ParserBase):
             }
             return result
         except Exception as e:
-            logger.error(e)
+            logger.error(e, exc_info=True)
             raise e
     
     def get_parser_args(self) -> dict:
@@ -252,7 +253,7 @@ class ParserEnum(ParserBase):
                 s += f'{self._indent}"{e.name}": {s_desc}'
             self._data_formated = s
         except Exception as e:
-            logger.error(e)
+            logger.error(e, exc_info=True)
         return self._data_formated
     
     def _get_data_items(self) -> List[dict]:
@@ -272,7 +273,7 @@ class ParserEnum(ParserBase):
                     }
                 )
         except Exception as e:
-            logger.error(e)
+            logger.error(e, exc_info=True)
             raise e
         self._data_items = result
         return self._data_items
@@ -400,7 +401,7 @@ class EnumWriter(WriteBase):
                 raise Exception(
                     "EnumWriter._get_uno_obj_path() Parser provided a name the is an empty string.")
             except Exception as e:
-                logger.error(e)
+                logger.error(e, exc_info=True)
                 raise e
         uno_obj_path = Path(self._path_dir.parent, 'uno_obj')
         name_parts:List[str] = self._p_namespace.split('.')
