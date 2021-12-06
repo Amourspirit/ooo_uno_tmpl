@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import os
 import sys
+from typing import Set
 from kwhelp import rules
 from kwhelp.decorator import DecFuncEnum, RuleCheckAll
 from kwhelp.exceptions import RuleError
@@ -14,6 +15,8 @@ import re
 from logger.log_handle import get_logger
 
 logger = get_logger(Path(__file__).stem)
+
+
 class CompareEnum(IntEnum):
     Before = -1
     Equal = 0
@@ -37,9 +40,13 @@ class CompareFile:
 class Make:
     def __init__(self, **kwargs) -> None:
         self._clean = bool(kwargs.get('clean', False))
-        self._root_dir = Path(os.path.dirname(__file__))
+        self._root_dir = Path(__file__).parent
         self._scratch = self._root_dir / 'scratch'
         self._force_compile = bool(kwargs.get('force_compile', False))
+        self._processed_dirs: Set[str] = set()
+        # exclude files that start with _
+        pattern = str(self._root_dir.joinpath('template'))  + '/[_]*.py'
+        self._template_py_files=glob.glob(pattern)
         if os.path.exists(str(self._scratch)):
             if self._clean:
                 logger.info('Deleting %s', str(self._scratch))
@@ -47,11 +54,34 @@ class Make:
         self._mkdirp(self._scratch)
         self._make()
 
+    def _create_sys_links(self, dest: Path):
+        rel = Path('../../template')
+        for file in self._template_py_files:
+            try:
+                p_file = Path(file)
+                rel_file = rel.joinpath(p_file.name)
+                dst_file = dest / p_file.name
+                os.symlink(
+                    src=rel_file,
+                    dst=dst_file
+                )
+                msg = f"Created system link: {dst_file} -> {rel_file}"
+                logger.info(msg)
+            except FileExistsError:
+                continue
+            except Exception as e:
+                logger.error(e)
+
     def _make(self):
         files = self._get_template_files()
         for file in files:
             try:
                 if not self._is_skip_compile(tmpl_file=file):
+                    f_dir = Path(file).parent
+                    if not f_dir in self._processed_dirs:
+                        self._processed_dirs.add(f_dir)
+                        # logger.debug("_make() current dir: %s", f_dir)
+                        self._create_sys_links(f_dir)
                     logger.info('Compiling file: %s', file)
                     self._compile(tmpl_file=file)
                 py_file = self._get_py_path(tmpl_file=file)
@@ -111,7 +141,7 @@ class Make:
         p_file = Path(t_file.parent, str(t_file.stem) + '.py')
         return p_file
 
-    def _camel_to_snake(self, name: str)-> str:
+    def _camel_to_snake(self, name: str) -> str:
         _name = re.sub('(.)([A-Z][a-z]+)', r'\1_\2', name)
         return re.sub('([a-z0-9])([A-Z])', r'\1_\2', _name).lower()
 
@@ -146,6 +176,7 @@ def main():
     except Exception as e:
         logger.error(e)
     logger.info('Finished!')
+
 
 if __name__ == '__main__':
     main()

@@ -565,25 +565,6 @@ class WriteBase(object):
         files = glob(pattern, recursive=False)
         return files
 
-    def _create_sys_links(self, dest: Path):
-        files = self._get_template_files()
-        rel = Path('../../template')
-        for file in files:
-            try:
-                p_file = Path(file)
-                rel_file = rel.joinpath(p_file.name)
-                dst_file = dest / p_file.name
-                os.symlink(
-                    src=rel_file,
-                    dst=dst_file
-                )
-                msg = f"Created system link: {dst_file} -> {rel_file}"
-                logger.info(msg)
-            except FileExistsError:
-                continue
-            except Exception as e:
-                logger.error(e)
-
 
 class ParserBase(object):
     def __init__(self, **kwargs):

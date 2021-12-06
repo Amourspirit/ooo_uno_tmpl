@@ -290,7 +290,6 @@ class EnumWriter(WriteBase):
         path_parts.append(self._p_name + '.tmpl')
         obj_path = uno_obj_path.joinpath(*path_parts)
         self._mkdirp(obj_path.parent)
-        self._create_sys_links(dest=obj_path.parent)
         return obj_path
 
 
