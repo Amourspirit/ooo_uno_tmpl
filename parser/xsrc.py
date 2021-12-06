@@ -1399,6 +1399,7 @@ def _main():
     print(p.get_formated_data())
 
 def main():
+    os.system('cls' if os.name == 'nt' else 'clear')
     logger.info('Executing command: %s', sys.argv[1:])
     parser = argparse.ArgumentParser(description='enum')
     parser.add_argument(

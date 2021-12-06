@@ -131,24 +131,27 @@ class Parser(ParserBase):
             return lines
 
         def get_py_type(in_type: str) -> str:
-            _parts = in_type.split('.')
-            p_type = _parts[len(_parts) - 1]
-            n_type = TYPE_MAP.get(p_type, None)
+            # _parts = in_type.rsplit(sep='.', maxsplit=2)
+            # p_type = _parts[:-1]
+            n_type = TYPE_MAP.get(in_type, None)
             if n_type:
                 return n_type
             # unknow type. wrap in quotes.
             # Todo: Consider auto import option for unknown types
             self._auto_imports.add(in_type)
-            return f"'{p_type}'"
+            return f"'{in_type}'"
 
         for itm in memitetms:
             # text in format of com::sun::star::awt::AdjustmentType Type
             text: str = itm.find("td", class_='memname',
                                  recursive=True).text.strip().replace('::', '.')
-            parts = text.split()
-            _type = parts[0]
+            # parts = text.split()
+            parts = text.rsplit(maxsplit=2)
+            # some unsigned short Data > ['some unsigned', 'short', 'Data3']
+            # short Data > ['short', 'Data3']
+            _type = parts[0] if len(parts) == 2 else parts[1]
             py_type = get_py_type(_type)
-            name = parts[1]
+            name = parts.pop()
             lines = get_doc_lines(itm)
             di = dataitem(name=name,
                           datatype=py_type,
@@ -299,11 +302,13 @@ class StructWriter(WriteBase):
         
         
 def _main():
-    p = Parser(url='https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1awt_1_1SystemDependentXWindow.html')
+    os.system('cls' if os.name == 'nt' else 'clear')
+    url = 'https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1uno_1_1Uik.html'
+    p = Parser(url=url)
     w = StructWriter(parser=p, print=True, auto_import=True)
     w.write()
-
 def main():
+    os.system('cls' if os.name == 'nt' else 'clear')
     logger.info('Executing command: %s', sys.argv[1:])
     # http://pymotw.com/2/argparse/
     parser = argparse.ArgumentParser(description='const')
