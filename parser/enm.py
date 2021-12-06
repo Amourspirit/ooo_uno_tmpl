@@ -167,7 +167,7 @@ class EnumItems:
         t_obj = TagsStrObj(tags=p_lines)
         di = EnumDataItem(name=name,
                           value=name,
-                          desc=t_obj.get_string_list())
+                          desc=t_obj.get_lines())
         return di
 
 class ParserEnum(ParserBase):
@@ -247,7 +247,7 @@ class ParserEnum(ParserBase):
             for i, e in enumerate(enums):
                 if i > 0:
                     s += ',\n'
-                s_desc = textwrap.indent(e.desc, lst_indent).lstrip()
+                s_desc = textwrap.indent(Util.get_string_list(e.desc), lst_indent).lstrip()
 
                 s += f'{self._indent}"{e.name}": {s_desc}'
             self._data_formated = s
