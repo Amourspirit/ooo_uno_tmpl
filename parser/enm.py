@@ -395,6 +395,13 @@ class EnumWriter(WriteBase):
         
 
     def _get_uno_obj_path(self) -> Path:
+        if not self._p_name:
+            try:
+                raise Exception(
+                    "EnumWriter._get_uno_obj_path() Parser provided a name the is an empty string.")
+            except Exception as e:
+                logger.error(e)
+                raise e
         uno_obj_path = Path(self._path_dir.parent, 'uno_obj')
         name_parts:List[str] = self._p_namespace.split('.')
         # ignore com, sun, star

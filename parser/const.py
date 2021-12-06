@@ -333,6 +333,13 @@ class ConstWriter(WriteBase):
         # ignore com, sun, star
         path_parts = name_parts[3:]
         index = len(path_parts) -1
+        if not path_parts[index]:
+            try:
+                raise Exception(
+                    "ConstWriter._get_uno_obj_path() parsing path yielded an empty string")
+            except Exception as e:
+                logger.error(e)
+                raise e
         path_parts[index] = path_parts[index] + '.tmpl'
         obj_path = uno_obj_path.joinpath(*path_parts)
         self._mkdirp(obj_path.parent)
