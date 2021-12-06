@@ -178,8 +178,8 @@ class Parser(ParserBase):
                 name = parts.pop() # parts[2]
                 _type = parts.pop() # parts[1]
             except Exception as e:
-                logger.error(e, exc_info=True)
-                raise e
+                logger.warning('Failed to process Line: %s', text)
+                continue
             value = self._get_number(raw_value)
             lines = get_doc_lines(itm)
             di = dataitem(value=value, raw_value=raw_value, name=name,
@@ -442,4 +442,4 @@ def main():
     w.write()
  
 if __name__ == '__main__':
-    _main()
+    main()
