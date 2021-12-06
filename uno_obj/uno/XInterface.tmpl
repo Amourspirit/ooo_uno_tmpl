@@ -16,7 +16,7 @@
     "The UNO object does not export the state of the reference count (acquire() and release() do not have return values). In general, also the UNO object itself should not make any assumption on the concrete value of the reference count (except on the transition from one to zero )."
 ]
 #attr $link = "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1uno_1_1XInterface.html"
-#attr $requires_typing = False
+#attr $requires_typing = True
 #attr $inherits = []
 #attr $imports = []
 #attr $from_imports = []
@@ -38,6 +38,39 @@
                 ],
                 "raises": [],
                 "args": []
+            },
+            {
+                "name": "queryInterface",
+                "returns": "object",
+                "desc": [
+                    "queries for a new interface to an existing UNO object.",
+                    "",
+                    "The queryInterface() method is the entry point to obtain other interfaces which are exported by the object. The caller asks the implementation of the object, if it supports the interface specified by the type argument. The call may either return with an interface reference of the requested type or with a void any.",
+                    "",
+                    "There are certain specifications, a queryInterface() implementation must not violate.",
+                    "",
+                    "1) If queryInterface on a specific object has once returned a valid interface reference for a given type, it must return a valid reference for any successive queryInterface calls on this object for the same type.",
+                    "",
+                    "2) If queryInterface on a specific object has once returned a null reference for a given type, it must always return a null reference for the same type.",
+                    "",
+                    "3) If queryInterface on a reference A returns reference B, queryInterface on B for Type A must return interface reference A or calls made on the returned reference must be equivalent to calls made on reference A.",
+                    "",
+                    "4) If queryInterface on a reference A returns reference B, queryInterface on A and B for XInterface must return the same interface reference (object identity).",
+                    "",
+                    "The reason for the strong specification is, that a Uno Runtime Environment (URE) may choose to cache queryInterface() calls.",
+                    "",
+                    "As mentioned above, certain language bindings may map this function differently also with different specifications, please visit the language dependent specification for it. The current C++ binding sticks to the specification state",
+                    "",
+                    "The rules mentioned above are basically identical to the rules of QueryInterface in MS COM."
+                ],
+                "raises": [],
+                "args": [
+                    [
+                        "aType",
+                        "typing.Type",
+                        "in"
+                    ]
+                ]
             },
             {
                 "name": "release",

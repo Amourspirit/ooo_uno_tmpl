@@ -138,23 +138,9 @@ class SdkComponentText:
             start = matches_start.span()[1]
             end = matches_end.span()[0]
             self._data = text[start:end].strip()
-        # if matches:
-        #     m = matches[0]
-        #     self._data = m
-        # else:
-        #     # https://regex101.com/r/cYL6hj/1
-        #     # matches when component is not extendes ( no trailing : ...)
-        #     regex = r"[a-zA-Z0-9]*\s[a-zA-Z0-9]*.*\s\{(\s*?.*?)*?\}"
-        #     matches = re.search(regex, text)
-        #     if matches:
-        #         m = matches[0]
-        #         self._data = m
         if not self._data:
             self._data = ''
-        # cleans out [atribute]
-        # regex = r"\[(:?[a-zA-Z]*)\](?:[ ]*)"
-        # self._data = re.sub(regex,'', self._data)
-        logger.debug('Componnent text:\n%s', self._data)
+        # logger.debug('Component text:\n%s', self._data)
         return self._data
 
     @property
@@ -190,8 +176,8 @@ class SdkComponentLines:
         lines = self._remove_empty(text)
         self._data = self._clean_lines(lines=lines)
         if logger.level <= logging.DEBUG:
-            logger.debug('SdkComponentLines.get_obj data:\n%s',
-                         '\n'.join(self._data))
+            for line in self._data:
+                logger.debug("SdkComponentLines.get_obj() found: %s", line)
         return self._data
 
     def _get_proper_lines(self, input: str) -> str:
@@ -237,18 +223,25 @@ class SdkMethodLines:
         results: List[str] = []
         lines = self._c_lines.get_obj()
         for line in lines:
+            logger.debug("SdkMethodLines.get_obj() Processing Line: %s", line)
             match = re.match(re_interface_pattern, line)
             if match:
+                logger.debug("SdkMethodLines.get_obj() Line Matched Interface. continuing...")
                 continue
             match = re.match(re_property_pattern, line)
             if match:
+                logger.debug(
+                    "SdkMethodLines.get_obj() Line Matched Property. continuing...")
                 continue
             match = re.match(re_method_pattern, line)
             if match:
+                logger.debug("SdkMethodLines.get_obj() Line Matched")
                 results.append(line)
+            else: 
+                logger.debug("SdkMethodLines.get_obj() No Match")
         self._data = results
-        if logger.level <= logging.DEBUG:
-            logger.debug("SdkMethodLines.get_obj() data:\n%s", "\n".join(self._data))
+        # if logger.level <= logging.DEBUG:
+        #     logger.debug("SdkMethodLines.get_obj() data:\n%s", "\n".join(self._data))
         return self._data
     
     @property
@@ -268,13 +261,18 @@ class SdkPropertyLines:
         results: List[str] = []
         lines = self._c_lines.get_obj()
         for line in lines:
+            logger.debug(
+                "SdkPropertyLines.get_obj() Processing Line: %s", line)
             match = re.match(re_property_pattern, line)
             if match:
                 results.append(line)
+                logger.debug("SdkPropertyLines.get_obj() Line Matched")
+            else:
+                logger.debug("SdkPropertyLines.get_obj() No Match")
         self._data = results
-        if logger.level <= logging.DEBUG:
-            logger.debug("SdkMethodLines.get_obj() data:\n%s",
-                         "\n".join(self._data))
+        # if logger.level <= logging.DEBUG:
+        #     logger.debug("SdkMethodLines.get_obj() data:\n%s",
+        #                  "\n".join(self._data))
         return self._data
 
     @property
@@ -356,7 +354,6 @@ class SdkMethodData:
                     self._p_return = f"'{result}'"
             else:
                 self._p_name = g[1]
-                self._p_name = g[4]
                 result = Util.get_py_type(g[0], cb=cb)
                 if is_py_type:
                     self._p_return = result
@@ -1335,12 +1332,14 @@ class InterfaceWriter(WriteBase):
 
 def _main():
     os.system('cls' if os.name == 'nt' else 'clear')
-    url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XFont.html'
+    # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XFont.html'
     # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1media_1_1XPlayerWindow.html'
     # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XAnimatedImages.html'
 
     # interfaces
     # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1beans_1_1XPropertyBag.html'
+    
+    url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1uno_1_1XInterface.html'
     p = ParserInterface(url=url)
     pprint.pprint(p.get_info())
     print(p.get_formated_data())

@@ -34,7 +34,9 @@ TYPE_MAP = {
     "char": "str",
     "boolean": "bool",
     "sequence": "list",
-    "void": "None"
+    "aDXArray": "list",
+    "void": "None",
+    'type': 'object'
 }
 
 
@@ -357,6 +359,11 @@ class Util:
         _u_type_clean = Util.get_clean_name(Util.get_last_part(_u_type))
         result = TYPE_MAP.get(_u_type_clean, None)
         if result:
+            if _u_type_clean == "type":
+                # edge case of type of type
+                # type is mapped to object in TYPE_MAP
+                cb_data['is_typing'] = True
+                result = f"typing.Type"
             cb_data['is_py_type'] = True
             cb_data['type'] = result
             do_cb(cb, cb_data)
