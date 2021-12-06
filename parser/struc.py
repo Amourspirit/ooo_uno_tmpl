@@ -14,7 +14,7 @@ import textwrap
 import xerox # requires xclip - sudo apt-get install xclip
 from logger.log_handle import get_logger
 
-from parser import __version__
+from parser import __version__, JSON_ID
 
 logger = get_logger(Path(__file__).stem)
 
@@ -23,7 +23,7 @@ dataitem = namedtuple(
 
 
 class Parser(ParserBase):
-    # region init
+    # region Constructor
     @RuleCheckAllKw(arg_info={"url": 0, "sort": 1, "replace_dual_colon": 1},
                     rules=[rules.RuleStrNotNullEmptyWs, rules.RuleBool],
                     ftype=DecFuncEnum.METHOD)
@@ -35,7 +35,8 @@ class Parser(ParserBase):
         self._data_items = None
         self._auto_imports = set()
 
-    # endregion init
+    # endregion Constructor
+
     # region Data
     def get_dict_data(self) -> dict:
         info = self.get_info()
@@ -81,6 +82,13 @@ class Parser(ParserBase):
         except Exception as e:
             logger.error(e)
             raise e
+
+    def get_parser_args(self) -> dict:
+        args = {
+            "sort": self._sort
+        }
+        return args
+
     # endregion Info
 
     # region Data
@@ -213,6 +221,7 @@ class Parser(ParserBase):
     # endregion Properties
 class StructWriter(WriteBase):
 
+    # region Constructor
     @TypeCheckKw(arg_info={
         "sort": 0,
         "copy_clipboard": 0,
@@ -251,6 +260,8 @@ class StructWriter(WriteBase):
             raise e
         self._template_file = _path
         self._template: str = self._get_template()
+    # endregion Constructor
+
 
     def _get_template(self):
         with open(self._template_file) as f:
@@ -284,10 +295,16 @@ class StructWriter(WriteBase):
             return self._json_str
         p_dict = self._parser.get_dict_data()
         json_dict = {
+            "id": JSON_ID,
             "version": __version__,
             "type": "struct",
             "name": p_dict['name'],
             "namespace": p_dict['namespace'],
+            "parser_args": self._parser.get_parser_args(),
+            "writer_args": {
+                "sort": self._sort,
+                "auto_import": self._auto_import
+            },
             "data": p_dict
         }
         str_jsn = Util.get_formated_dict_list_str(obj=json_dict, indent=2)
