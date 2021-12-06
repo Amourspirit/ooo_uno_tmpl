@@ -411,7 +411,7 @@ class UrlObj:
         self._ns_str = None
 
     def _get_ns(self) -> List[str]:
-        result = ''
+        result = []
         try:
             ns_part = self._page_link.split('.')[0].lower()
             s = ns_part.replace('_1_1', '.').lstrip('.')
@@ -419,9 +419,11 @@ class UrlObj:
             # namespace always start with com so just drop the first part to clean it up.
             s = 'com.' + s.split('.', maxsplit=1)[1]
             result = s.split('.')
+            # Drop the component from the result
+            return result[:-1]
         except Exception as e:
             logger.error(e)
-            logger.info('UrlObj_get_ns() returning empty string')
+            logger.info('UrlObj._get_ns() returning empty list.')
         return result
 
     @property
@@ -479,8 +481,11 @@ class BlockObj(ABC):
             soup (SoupObj): soup for this instance
         """
         self._soup = soup
-        self._urlobj = UrlObj(url=soup.url)
         self._url = soup.url
+        self._urlobj = self._get_url_obj()
+
+    def _get_url_obj(self):
+        return UrlObj(self._url)
 
     @abstractmethod
     def get_obj(self) -> Tag:
@@ -546,9 +551,10 @@ class TagsStrObj:
         return s
 
     def get_string_list(self) -> str:
-        lines = self._encode_list(self.get_lines())
-        c_lines = self._decode_list(str(lines).split(','))
-        s = ',\n'.join(c_lines)
+        # lines = self._encode_list(self.get_lines())
+        # c_lines = self._decode_list(str(lines).split(','))
+        # s = ',\n'.join(c_lines)
+        s = Util.get_string_list(self.get_lines())
         if self._indent_amt > 0:
             s = Util.indent(text=s, indent_amt=self._indent_amt)
         return s

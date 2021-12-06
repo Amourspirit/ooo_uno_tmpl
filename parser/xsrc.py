@@ -125,7 +125,7 @@ class SdkComponentText:
         # See: https://api.libreoffice.org/docs/idl/ref/XComponentContext_8idl_source.html
         # for this reason will narrow text untill the last match is found.
         self._data = self._get_text_aggresive(text)
-        logger.debug('Component text:\n%s', self._data)
+        # logger.debug('Component text:\n%s', self._data)
         
         return self._data
 
