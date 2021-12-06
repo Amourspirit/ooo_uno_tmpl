@@ -1,0 +1,115 @@
+#import typing
+#from _x_base import x_base as XBase
+#extends XBase
+#attr $name = "XAnimatedImages"
+#attr $desc = [
+    "allows administrating a set of images, to be displayed as animated seres.",
+    "",
+    "Components implementing this interface maintain a variable number of image sets. Components displaying those images will choose the best-fitting image set depending on the available space, and possibly other restrictions."
+]
+#attr $link = "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XAnimatedImages.html"
+#attr $requires_typing = True
+#attr $inherits = ['XContainer']
+#attr $imports = []
+#attr $from_imports = [
+    [
+        "..container.x_container",
+        "XContainer"
+    ]
+]
+#attr $from_imports_typing = []
+#attr $namespace = "com.sun.star.awt"
+#attr $attribs = {
+        "methods": [
+            {
+                "name": "getImageSet",
+                "returns": "typing.List[str]",
+                "desc": [
+                    "returns the URLs of the image set with the given index"
+                ],
+                "raises": [
+                    "com.sun.star.lang.IndexOutOfBoundsException"
+                ],
+                "args": []
+            },
+            {
+                "name": "getImageSetCount",
+                "returns": "int",
+                "desc": [
+                    "returns the number of images sets maintained by the component."
+                ],
+                "raises": [],
+                "args": []
+            },
+            {
+                "name": "insertImageSet",
+                "returns": "None",
+                "desc": [
+                    "sets the URLs of the image set with the given index"
+                ],
+                "raises": [
+                    "com.sun.star.lang.IndexOutOfBoundsException"
+                ],
+                "args": []
+            },
+            {
+                "name": "removeImageSet",
+                "returns": "None",
+                "desc": [
+                    "removes the image set with the given index"
+                ],
+                "raises": [
+                    "com.sun.star.lang.IndexOutOfBoundsException"
+                ],
+                "args": []
+            },
+            {
+                "name": "replaceImageSet",
+                "returns": "None",
+                "desc": [
+                    "replaces the image set given by index with a new one"
+                ],
+                "raises": [
+                    "com.sun.star.lang.IndexOutOfBoundsException"
+                ],
+                "args": []
+            }
+        ],
+        "properties": [
+            {
+                "name": "AutoRepeat",
+                "returns": "bool",
+                "desc": [
+                    "specifies whether the animation should start over with the first image of the image series when the last image has been played.",
+                    "",
+                    "The default value for this attribute is TRUE."
+                ],
+                "raises_get": [],
+                "raises_set": []
+            },
+            {
+                "name": "ScaleMode",
+                "returns": "int",
+                "desc": [
+                    "controls the way the images are scaled up or down, when the available space is larger or smaller than what is needed for them.",
+                    "",
+                    "Allowed values are those from the ImageScaleMode constants group."
+                ],
+                "raises_get": [],
+                "raises_set": [
+                    "com.sun.star.lang.IllegalArgumentException"
+                ]
+            },
+            {
+                "name": "StepTime",
+                "returns": "int",
+                "desc": [
+                    "specifies the time in milliseconds between two animation steps.",
+                    "",
+                    "This is the minimum time, the actual value might be longer due to system load. The default value will be 100 ms."
+                ],
+                "raises_get": [],
+                "raises_set": []
+            }
+        ]
+    }

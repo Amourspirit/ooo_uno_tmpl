@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 import os
+import sys
 import argparse
 from typing import Dict, List, Union
 from bs4 import BeautifulSoup
@@ -11,9 +12,10 @@ from base import WriteBase, ParserBase
 from pathlib import Path
 import textwrap
 import xerox # requires xclip - sudo apt-get install xclip
+from logger.log_handle import get_logger
+logger = get_logger(Path(__file__).name)
 dataitem = namedtuple(
     'dataitem', ['value', 'raw_value', 'name', 'datatype', 'lines'])
-
 
 class Parser(ParserBase):
     
@@ -41,20 +43,22 @@ class Parser(ParserBase):
                 "url": "Url to LibreOffice of constant"
             }
         """
-        if not self._url:
-            raise ValueError('URL is not set')
-        soup = BeautifulSoup(self.get_raw_html(), 'lxml')
-        full_name = self._get_full_name(soup=soup)
-        name = self._get_name(soup=soup)
-        desc = self._get_desc(soup=soup)
-        info = {
-            "name": name,
-            "fullname": full_name,
-            "desc": desc,
-            "url": self.url
-        }
-        return info
-
+        try:
+            if not self._url:
+                raise ValueError('URL is not set')
+            soup = BeautifulSoup(self.get_raw_html(), 'lxml')
+            full_name = self._get_full_name(soup=soup)
+            name = self._get_name(soup=soup)
+            desc = self._get_desc(soup=soup)
+            info = {
+                "name": name,
+                "fullname": full_name,
+                "desc": desc,
+                "url": self.url
+            }
+            return info
+        except Exception as e:
+            logger.error(e)
 
     # endregion Info
 
@@ -70,37 +74,43 @@ class Parser(ParserBase):
         Raises:
             ValueError: If url is not set.
         """
-        if self._data:
-            return self._data
-        if not self._url:
-            raise ValueError('URL is not set')
-        soup = BeautifulSoup(self.get_raw_html(), 'lxml')
+        try:
+            if self._data:
+                return self._data
+            if not self._url:
+                raise ValueError('URL is not set')
+            soup = BeautifulSoup(self.get_raw_html(), 'lxml')
 
-        items = self._get_memitems(soup=soup)
-        const_info = self._get_const_details(memitetms=items)
-        self._data = const_info
-        return self._data
+            items = self._get_memitems(soup=soup)
+            const_info = self._get_const_details(memitetms=items)
+            self._data = const_info
+            return self._data
+        except Exception as e:
+            logger.error(e)
 
     def get_formated_data(self):
         if self._data_formated:
             return self._data_formated
-        data = self.get_data()
-        lines = []
-        for itm in data:
-            s = f'"{itm.name}": ["{itm.raw_value}"'
-            if len(itm.lines) > 0:
-                s_ln = ', [\n'
-                for j, line in enumerate(itm.lines):
-                    if j > 0:
-                        s_ln += ',\n    "",\n'
-                    s_ln += f'    "{self._clean_str(line)}"'
-                s_ln += '\n]'
-                s += s_ln
-            s += ']'
-            lines.append(s)
-        result = ',\n'.join(lines)
-        self._data_formated = result
-        return self._data_formated
+        try:
+            data = self.get_data()
+            lines = []
+            for itm in data:
+                s = f'"{itm.name}": ["{itm.raw_value}"'
+                if len(itm.lines) > 0:
+                    s_ln = ', [\n'
+                    for j, line in enumerate(itm.lines):
+                        if j > 0:
+                            s_ln += ',\n    "",\n'
+                        s_ln += f'    "{self._clean_str(line)}"'
+                    s_ln += '\n]'
+                    s += s_ln
+                s += ']'
+                lines.append(s)
+            result = ',\n'.join(lines)
+            self._data_formated = result
+            return self._data_formated
+        except Exception as e:
+            logger.error(e)
 
     def _get_const_details(self, memitetms: ResultSet) -> List[dataitem]:
         results = []
@@ -190,18 +200,25 @@ class ConstWriter(WriteBase):
     def write(self):
         self._set_info()
         self._set_template_data()
-        if self._copy_clipboard:
-            xerox.copy(self._template)
-        if self._print:
-            os.system('cls' if os.name == 'nt' else 'clear')
-            print(self._template)
-        if self._write_file:
-            self._write_to_file()
+        logger.info("Processing %s", self._p_fullname)
+        try:
+            if self._copy_clipboard:
+                xerox.copy(self._template)
+                logger.debug('copied to clipbord')
+            if self._print:
+                logger.debug('Printing to terminal')
+                os.system('cls' if os.name == 'nt' else 'clear')
+                print(self._template)
+            if self._write_file:
+                self._write_to_file()
+        except Exception as e:
+            logger.exception(e)
 
     def _write_to_file(self):
         with open(self._file_full_path, 'w') as f:
             f.write(self._template)
-
+        logger.info("Created file: %s", self._file_full_path)
+        
     def _set_template_data(self):
         self._template = self._template.replace('{hex}', str(self._hex))
         self._template = self._template.replace('{sort}', str(self._sort))
@@ -245,6 +262,7 @@ def _main():
     w.write()
     
 def main():
+    logger.info('Executing command: %s', sys.argv[1:])
     parser = argparse.ArgumentParser(description='const')
     parser.add_argument(
         '-u', '--url',
@@ -291,13 +309,14 @@ def main():
         '-w', '--write',
         help='Write file into obj_uno subfolder',
         action='store_true',
-        dest='write',
+        dest='write_file',
         default=False)
     
     args = parser.parse_args()
     p = Parser(url=args.url, sort=args.sort,
                replace_dual_colon=args.dual_colon)
-    print('')
+    if not args.print:
+        print('')
     w = ConstWriter(parser=p, copy_clipboard=args.clipboard, print=args.print, flags=args.flags, hex=args.hex, write_file=args.write_file)
     w.write()
  

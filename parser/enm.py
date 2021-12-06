@@ -12,6 +12,7 @@ from pathlib import Path
 import textwrap
 import xerox # requires xclip - sudo apt-get install xclip
 from logger.log_handle import get_logger
+import pprint
 
 logger = get_logger(Path(__file__).stem)
 
@@ -20,6 +21,25 @@ EnumDataItem = namedtuple(
     ['name', 'value', 'desc']
 )
 
+class EnumUrl(UrlObj):
+    """Gets Url data for enum"""
+    def _get_ns(self) -> List[str]:
+        # UrlObj strips off the last part of ns
+        # because is is the component name in most cases.
+        # enums do not have ther own page therefore no component name.
+        result = []
+        try:
+            ns_part = self._page_link.split('.')[0].lower()
+            s = ns_part.replace('_1_1', '.').lstrip('.')
+            # the frist part on the str usually is prefixe with namespace, interface or whatever.
+            # namespace always start with com so just drop the first part to clean it up.
+            s = 'com.' + s.split('.', maxsplit=1)[1]
+            result = s.split('.')
+        except Exception as e:
+            logger.error(e)
+            logger.info('EnumUrl._get_ns() returning empty list.')
+        return result
+
 class EnumBlock(BlockObj):
     """
     Get Enum Block. The block contains all the details of the enum
@@ -27,6 +47,10 @@ class EnumBlock(BlockObj):
     def __init__(self, soup:SoupObj):
         super().__init__(soup=soup)
         self._obj_data = None
+    
+    def _get_url_obj(self):
+        # override base class.
+        return EnumUrl(self._url)
     
     def get_obj(self) -> Tag:
         """
@@ -72,7 +96,7 @@ class EnumName:
         """
         _cls = self._cls
         _url = self._block.url
-        self._urlobj = UrlObj(url=_url)
+        self._urlobj = EnumUrl(url=_url)
         _block_obj = self._block.get_obj()
         text = _block_obj.find(self._el, class_=_cls, attrs={"href" : self._urlobj.page_link}).text
         return text.strip()
@@ -216,13 +240,14 @@ class EnumWriter(WriteBase):
         self._copy_clipboard = kwargs.get('copy_clipboard', False)
         self._sort = kwargs.get('sort', True)
         self._print = kwargs.get('print', True)
-        self._indent_amt = 4
         self._write_file = kwargs.get('write_file', False)
+        self._indent_amt = 4
         self._file_full_path = None
         self._p_name = None
         self._p_namespace = None
         self._p_url = None
         self._p_desc = None
+        self._p_data = None
         self._path_dir = Path(os.path.dirname(__file__))
         _path = Path(self._path_dir, 'template', 'enum.tmpl')
         if not _path.exists():
@@ -289,16 +314,19 @@ class EnumWriter(WriteBase):
         path_parts.append(self._p_name + '.tmpl')
         obj_path = uno_obj_path.joinpath(*path_parts)
         self._mkdirp(obj_path.parent)
-        self._create_sys_links(dest=obj_path.parent)
         return obj_path
 
 
 def _main():
-    p = ParserEnum(url='https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1style.html#a3ae28cb49c180ec160a0984600b2b925')
-    w = EnumWriter(parser=p)
-    w._set_info()
-    _path = w._get_uno_obj_path()
-    print(_path)
+    url = 'https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1uno.html#a00683ed3ec24b47c36ead10a20d6f328'
+
+    p = ParserEnum(
+        url=url)
+    w = EnumWriter(
+        parser=p,
+        print=True,
+        write_file=False)
+    w.write()
     
     # t = TagsStrObj(tags=["ones", "twos", "Three", "four"], indent=8)
     # print(t.get_string_list())
@@ -352,7 +380,7 @@ def main():
         copy_clipboard=args.clipboard,
         sort=args.sort,
         write_file=args.write)
-    if args.print:
+    if not args.print:
         print('')
     w.write()
 

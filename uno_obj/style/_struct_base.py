@@ -1,1 +1,0 @@
-../../template/_struct_base.py

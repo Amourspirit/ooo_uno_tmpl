@@ -1,0 +1,79 @@
+#import typing
+#from _x_base import x_base as XBase
+#extends XBase
+#attr $name = "XAdapter"
+#attr $desc = [
+    "This is the server-side interface to a weak adapter.",
+    "",
+    "The implementation of XAdapter must know but not hold the adapted object, because it must not affect the lifetime of the adapted object.",
+    "",
+    "**See Also**",
+    "",
+    "    XWeak for description of concepts."
+]
+#attr $link = "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1uno_1_1XAdapter.html"
+#attr $requires_typing = True
+#attr $inherits = ['XInterface']
+#attr $imports = []
+#attr $from_imports = [
+    [
+        ".x_interface",
+        "XInterface"
+    ]
+]
+#attr $from_imports_typing = [
+    [
+        ".x_reference",
+        "XReference"
+    ],
+    [
+        ".x_interface",
+        "XInterface"
+    ]
+]
+#attr $namespace = "com.sun.star.uno"
+#attr $attribs = {
+        "methods": [
+            {
+                "name": "addReference",
+                "returns": "None",
+                "desc": [
+                    "adds a reference to the adapter.",
+                    "",
+                    "All added references are called when the adapted object dies."
+                ],
+                "raises": [],
+                "args": [
+                    [
+                        "xRef",
+                        "'XReference'",
+                        "in"
+                    ]
+                ]
+            },
+            {
+                "name": "queryAdapted",
+                "returns": "'XInterface'",
+                "desc": [
+                    "queries the adapted object if it is alive."
+                ],
+                "raises": [],
+                "args": []
+            },
+            {
+                "name": "removeReference",
+                "returns": "None",
+                "desc": [
+                    "removes a reference from the adapter."
+                ],
+                "raises": [],
+                "args": [
+                    [
+                        "xRef",
+                        "'XReference'",
+                        "in"
+                    ]
+                ]
+            }
+        ]
+    }
