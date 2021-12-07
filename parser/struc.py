@@ -80,7 +80,7 @@ class Parser(ParserBase):
             self._data_info = info
             return self._data_info
         except Exception as e:
-            logger.error(e)
+            logger.error(e, exc_info=True)
             raise e
 
     def get_parser_args(self) -> dict:
@@ -104,7 +104,7 @@ class Parser(ParserBase):
             self._data = struct_info
             return self._data
         except Exception as e:
-            logger.error(e)
+            logger.error(e, exc_info=True)
 
     def get_formated_data(self) -> str:
         if not self._data_formated is None:
@@ -144,7 +144,7 @@ class Parser(ParserBase):
             self._data_formated = result
             return self._data_formated
         except Exception as e:
-            logger.error(e)
+            logger.error(e, exc_info=True)
             raise e
     
     def _get_data_items(self) -> List[dict]:
@@ -162,7 +162,7 @@ class Parser(ParserBase):
                 }
                 result.append(d_itm)
         except Exception as e:
-            logger.error(e)
+            logger.error(e, exc_info=True)
             raise e
         self._data_items = result
         return self._data_items
@@ -180,28 +180,55 @@ class Parser(ParserBase):
             return lines
 
         def get_py_type(in_type: str) -> str:
+            cb_data = None
+            def cb(data:dict):
+                nonlocal cb_data
+                cb_data = data
+
             # _parts = in_type.rsplit(sep='.', maxsplit=2)
             # p_type = _parts[:-1]
             n_type = TYPE_MAP.get(in_type, None)
             if n_type:
                 return n_type
+            n_type = Util.get_py_type(uno_type=in_type, cb=cb)
             # unknow type. wrap in quotes.
             # Todo: Consider auto import option for unknown types
-            self._auto_imports.add(in_type)
-            return f"'{in_type}'"
+            auto_import = False
+            is_wrapper = cb_data['is_wrapper']
+            is_py = cb_data['is_py_type']
+            _result = n_type
+            if is_wrapper:
+                # wrapper such as typings.List[XInterface]
+                wdata: dict = cb_data['wdata']
+                if not wdata['py_type_inner']:
+                    auto_import = True
+            else:
+                if is_py is False:
+                    auto_import = True
+            if auto_import:
+                self._auto_imports.add(cb_data['long_type'])
+                logger.debug("Parser: Adding autoimport %s",
+                             cb_data['long_type'])
+            return _result
 
         for itm in memitetms:
             # text in format of com::sun::star::awt::AdjustmentType Type
+            # or sequence< ::com::sun::star::uno::XInterface> TargetSet
             text: str = itm.find("td", class_='memname',
                                  recursive=True).text.strip().replace('::', '.')
+            logger.debug("Processing line: %s", text)
             # parts = text.split()
-            parts = text.rsplit(maxsplit=2)
+            # if text.find('<') >= 0:
+                # likely sequence< > such as sequence< ::com::sun::star::uno::XInterface> TargetSet
+            parts = text.rsplit(maxsplit=1)
             # some unsigned short Data > ['some unsigned', 'short', 'Data3']
             # short Data > ['short', 'Data3']
             _type = parts[0] if len(parts) == 2 else parts[1]
+            # _type = _type.strip('.').replace('>','').strip()
             py_type = get_py_type(_type)
             name = parts.pop()
             lines = get_doc_lines(itm)
+            logger.debug("Detils: Name: %s, Type: %s, Orig: %s", name, py_type, _type)
             di = dataitem(name=name,
                           datatype=py_type,
                           orig_type=_type,
@@ -217,7 +244,6 @@ class Parser(ParserBase):
     def auto_imports(self) -> set:
         """Specifies auto_imports"""
         return self._auto_imports
-
     # endregion Properties
 class StructWriter(WriteBase):
 
@@ -256,7 +282,7 @@ class StructWriter(WriteBase):
             if not _path.exists():
                 raise FileNotFoundError(f"unable to find templae file '{_path}'")
         except Exception as e:
-            logger.error(e)
+            logger.error(e, exc_info=True)
             raise e
         self._template_file = _path
         self._template: str = self._get_template()
@@ -353,6 +379,13 @@ class StructWriter(WriteBase):
         # ignore com, sun, star
         path_parts = name_parts[3:]
         index = len(path_parts) -1
+        if not path_parts[index]:
+            try:
+                raise Exception(
+                    "StructWriter._get_uno_obj_path() parsing path yielded an empty string")
+            except Exception as e:
+                logger.error(e, exc_info=True)
+                raise e
         path_parts[index] = path_parts[index] + '.tmpl'
         obj_path = uno_obj_path.joinpath(*path_parts)
         self._mkdirp(obj_path.parent)
@@ -366,40 +399,16 @@ class StructWriter(WriteBase):
         if len(auto) == 0:
             return results
         local_ns_str = self._p_fullname.rsplit('.', 1)[0]
-        local_parts = local_ns_str.split('.')
-
         for name in auto:
-            name_ns_str = name.rsplit('.', 1)[0]
-            name_ns = name_ns_str.split('.')
-            if len(name_ns) == 1:
-                # this is a single word
-                # assume it is in the same namespace as this import
-                results.append((f'.{self._parser.camel_to_snake(name)}', f'{name}'))
-                continue
-            # struct_name = name_parts[len(name_parts)-1:][0]
-            struct_name = name.rsplit('.', 1)[1]
-            camel_name = self._parser.camel_to_snake(struct_name)
-            if name_ns_str == local_ns_str:
-                results.append((f'.{camel_name}', f'{struct_name}'))
-                continue
-            commmon_count = 0
-            for i, ns in enumerate(name_ns):
-                if ns != local_parts[i]:
-                    break
-                commmon_count += 1
-            if commmon_count > 0:
-                common_ns = name_ns[commmon_count:]
-                dot_ext = len(local_parts) - commmon_count
-                dot = "." * dot_ext
-                rel = ".".join(common_ns)
-                str_from = f'{dot}{rel}.{camel_name}'
-                results.append((str_from, struct_name))
+            
+            im = Util.get_rel_import(i_str=name, ns=local_ns_str)
+            results.append(im)
         return results
         
         
 def _main():
     os.system('cls' if os.name == 'nt' else 'clear')
-    url = 'https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1uno_1_1Uik.html'
+    url = 'https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1accessibility_1_1AccessibleRelation.html'
     p = Parser(url=url)
     w = StructWriter(parser=p, print=True, auto_import=True)
     w.write()
@@ -432,11 +441,11 @@ def main():
         dest='clipboard',
         default=False)
     parser.add_argument(
-        '-a', '--auto-import',
-        action='store_true',
+        '-a', '--no-auto-import',
+        action='store_false',
         dest='auto_import',
         help='Auto import types that are not python types',
-        default=False)
+        default=True)
     parser.add_argument(
         '-t', '--write-template',
         help='Write template file into obj_uno subfolder',

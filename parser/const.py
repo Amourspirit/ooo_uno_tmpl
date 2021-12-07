@@ -14,7 +14,9 @@ import textwrap
 import xerox # requires xclip - sudo apt-get install xclip
 from logger.log_handle import get_logger
 from parser import __version__, JSON_ID
+import traceback
 logger = get_logger(Path(__file__).name)
+logger
 dataitem = namedtuple(
     'dataitem', ['value', 'raw_value', 'name', 'datatype', 'lines'])
 
@@ -65,7 +67,7 @@ class Parser(ParserBase):
             }
             self._data_info = info
         except Exception as e:
-            logger.error(e)
+            logger.error(e, exc_info=True)
             raise e
         return self._data_info
 
@@ -106,7 +108,8 @@ class Parser(ParserBase):
             self._data = const_info
             return self._data
         except Exception as e:
-            logger.error(e)
+            logger.error(e, exc_info=True)
+            raise e
 
     def get_formated_data(self):
         if not self._data_formated is None:
@@ -129,7 +132,7 @@ class Parser(ParserBase):
             result = ',\n'.join(lines)
             self._data_formated = result
         except Exception as e:
-            logger.error(e)
+            logger.error(e, exc_info=True)
             raise e
         return self._data_formated
 
@@ -148,7 +151,7 @@ class Parser(ParserBase):
                 }
                 result.append(d_itm)
         except Exception as e:
-            logger.error(e)
+            logger.error(e, exc_info=True)
             raise e
         self._data_items = result
         return self._data_items
@@ -167,11 +170,16 @@ class Parser(ParserBase):
 
         for itm in memitetms:
             text: str = itm.find("td", class_='memname',
-                                 recursive=True).text.replace(' ', ',')
-            parts = text.split(',')
-            _type = parts[1]
-            name = parts[2]
-            raw_value = parts[4]
+                                 recursive=True).text.replace(' ', ',').replace('=,', '').replace('=', '')
+            logger.debug("Parser._get_const_details() Processing: %s", text)
+            try:
+                parts = text.rsplit(',', maxsplit=3)
+                raw_value = parts.pop()
+                name = parts.pop() # parts[2]
+                _type = parts.pop() # parts[1]
+            except Exception as e:
+                logger.warning('Failed to process Line: %s', text)
+                continue
             value = self._get_number(raw_value)
             lines = get_doc_lines(itm)
             di = dataitem(value=value, raw_value=raw_value, name=name,
@@ -333,6 +341,13 @@ class ConstWriter(WriteBase):
         # ignore com, sun, star
         path_parts = name_parts[3:]
         index = len(path_parts) -1
+        if not path_parts[index]:
+            try:
+                raise Exception(
+                    "ConstWriter._get_uno_obj_path() parsing path yielded an empty string")
+            except Exception as e:
+                logger.error(e, exc_info=True)
+                raise e
         path_parts[index] = path_parts[index] + '.tmpl'
         obj_path = uno_obj_path.joinpath(*path_parts)
         self._mkdirp(obj_path.parent)
@@ -340,11 +355,19 @@ class ConstWriter(WriteBase):
 
 def _main():
     # for debugging
-    p = Parser(url='https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1awt_1_1Command.html')
-    print('')
-    w = ConstWriter(parser=p, write_file=True)
+    url = 'https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1accessibility_1_1AccessibleEventId.html'
+    p = Parser(url=url)
+    w = ConstWriter(
+        parser=p,
+        print_template=False,
+        print_json=True,
+        flags=False,
+        hex=False,
+        write_template=False,
+        write_json=False
+    )
     w.write()
-    
+
 def main():
     logger.info('Executing command: %s', sys.argv[1:])
     parser = argparse.ArgumentParser(description='const')

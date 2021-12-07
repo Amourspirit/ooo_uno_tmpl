@@ -258,7 +258,7 @@ class Util:
         if commmon_count > 0:
             logger.debug('found common %d namespace elements', commmon_count)
             common_ns = name_ns[commmon_count:]
-            logger.debug("Common elements: '$s'", str(common_ns))
+            logger.debug("Common elements: '%s'", str(common_ns))
             dot_ext = (len(ns_parts) - commmon_count) + 1
             logger.debug("'.' to prepend is: %d", dot_ext)
             dot = "." * dot_ext
@@ -307,6 +307,54 @@ class Util:
     
     @staticmethod
     def get_py_type(uno_type: str, **kwargs) -> str:
+        """
+        Gets python type from uno type.
+        
+        Converts values such as ``sequence< ::com::sun::star::uno::XInterface>`` =>
+        ``List[XInterface]``. Also simple conversion such as ``long`` => ``int``
+        
+        Args:
+            uno_type (str): Uno type such as ``long``
+        
+        Keyword Args:
+            typings (bool, optional): If ``True`` typings is added in front of wrapped
+                so ``List[int]`` => ``typing.List[int]. Default ``True``
+            cb (callable, optional): callback function. eg: ``cb(data)``
+            quote (bool, optional): If ``True`` return value will be wrapped in quotes
+                for non python types such as ``'XInterface'``. Default ``True``
+
+        Returns:
+            str: ``uno_type`` converted to python type.
+
+        Notes:
+            Conversion can be complex operation. For this reason a callback function
+            can be passed in.
+            
+            Callback function signature is ``cb(data)``
+            Callback ``data`` is a dictionary of information about the conversion.
+            If ``uno_type`` is a sequence (list) then ``data['wdata']`` contains info
+            on the sequence.
+            
+            ``data``: {
+                "uno_type":     "(str): original uno_type value passed in",
+                "is_py_type":   "(bool): Will be True if uno_type is converted to a python type
+                                    such as long => int. Will also be True for sequences that match
+                                    such as sequence<long> => list[int].",
+                "is_wrapper":   "(bool): if conversoin results in sequence<long> => List[int]",
+                "is_typing":    "(bool): True if is wrapped and typings arg is True; Otherwise, False",
+                "long_type":    "(str): ns and type such as com.sun.star.awt.AdjustmentType
+                                    When sequence is found this will still be the long name of the inner wrapped.
+                "wdata": {
+                    "is_py_type":    "(bool): True if wrapper type is a python type such as List; Otherwise, False",
+                    "py_type_inner": "(bool): True if wrapped is a python type such as int; Otherwise, False",
+                    "prefix":        "(str): prefixe will not be added if typings arg is False",
+                    "wrapper":       "(str): Wrapper such as typing.List or List",
+                    "long_type":     "(str); ns and type such as com.sun.star.awt.AdjustmentType
+                },
+                "returns": "(object, optional): Default value is None. If a value is assigned
+                            during callback then the value of returns will be returned from method.
+            }
+        """
         if not uno_type:
             return ''
         def do_cb(_cb:callable, data):
@@ -314,16 +362,18 @@ class Util:
                 return
             _cb(data)
     
-        add_typeings = bool(kwargs.get('typings', True))
+        add_typings = bool(kwargs.get('typings', True))
+        arg_quote = bool(kwargs.get('quote', True))
         cb = kwargs.get('cb', None)
         cb_data = {
             "uno_type": uno_type,
             "is_py_type": False,
             "is_wrapper": False,
             "is_typing": False,
+            "returns": None,
             "wdata": {}
         }
-        _u_type = uno_type.strip().replace("::", ".")
+        _u_type = uno_type.strip().lstrip(':').lstrip().replace("::", ".")
         # check for # sequence< string >
         parts = _u_type.split(sep='<', maxsplit=1)
         if len(parts) > 1:
@@ -336,8 +386,8 @@ class Util:
             else:
                 is_pytype = False
                 cb_data['wdata']['is_py_type'] = False
-            type_pre = "typing." if add_typeings else ''
-            cb_data['is_typing'] = add_typeings
+            type_pre = "typing." if add_typings else ''
+            cb_data['is_typing'] = add_typings
             cb_data['wdata']['prefix'] = type_pre
             if wrapper:
                 # got a match from TYPE_MAP
@@ -346,16 +396,27 @@ class Util:
             else:
                 wrapper = type_pre + 'List'
             cb_data['wdata']['wrapper'] = wrapper
-            _type = parts[1].replace('>', '').strip()
+            _type = parts[1].replace('>', '').strip().lstrip('.')
+            cb_data['long_type'] = Util.get_clean_ns(_type)
             _type = Util.get_clean_name(Util.get_last_part(_type))
             map_type = TYPE_MAP.get(_type, None)
+            is_inner_py_type = True
             if not map_type:
+                is_inner_py_type = False
                 is_pytype = False
                 map_type = _type
+            cb_data['wdata']['py_type_inner'] = is_inner_py_type
+                
             cb_data['is_py_type'] = is_pytype
             cb_data['type'] = map_type
+                
             do_cb(cb, cb_data)
+            if cb_data['returns']:
+                return cb_data['returns']
+            if is_inner_py_type is False and arg_quote is True:
+                return f"'{wrapper}[{map_type}']"
             return f"{wrapper}[{map_type}]"
+        cb_data['long_type'] = Util.get_clean_ns(_u_type)
         _u_type_clean = Util.get_clean_name(Util.get_last_part(_u_type))
         result = TYPE_MAP.get(_u_type_clean, None)
         if result:
@@ -370,6 +431,10 @@ class Util:
             return result
         cb_data['type'] = _u_type_clean
         do_cb(cb, cb_data)
+        if cb_data['returns']:
+            return cb_data['returns']
+        if arg_quote:
+            return f"'{_u_type_clean}'"
         return _u_type_clean
     
     @staticmethod

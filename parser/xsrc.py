@@ -134,6 +134,9 @@ class SdkComponentText:
         regex_end = r"}; (?:[ ;}])*\n#endif"
         matches_start = re.search(regex_start, text)
         matches_end = re.search(regex_end, text)
+        if not matches_end:
+            regex_end = r"(\}; ){2,4}(\}[; ])+\n"
+            matches_end = re.search(regex_end, text)
         result = ''
         if matches_start and matches_end:
             start = matches_start.span()[1]
@@ -816,16 +819,21 @@ class SdkNameInfo:
         matches = re.search(regex, s)
         if matches:
             g = matches.groups()
-            s: str = g[0]
+            logger.debug('SdkNameInfo: Processing: %s', g[0])
             # published interface XFont: ::com::sun::star::uno::XInterface
             # or
             # published interface XPropertyBag
-            s = s.replace(' ::com', ' com').replace('::', '.')
+            
+            # can be : ::com::sun::star::accessibility::XAccessibleText
+            s: str = str(g[0]).strip(':').strip().lstrip(':')
+            
+            s = s.replace('::', '.')
             # published interface XFont: com.sun.star.unoXInterface
 
-            s = s.split(':', 1)[0]
+            s = s.rsplit('.', 1).pop()
             # published interface XFont
-            self._name = s.rsplit(maxsplit=1)[1].strip()
+            self._name = s
+            logger.debug('SdkNameInfo.name: %s', self._name)
             # region Properties
 
     @property
@@ -886,7 +894,7 @@ class ApiMethodBlock:
                 tag_main=main
             )
         except Exception as e:
-            logger.error(e)
+            logger.error(e, exc_info=True)
             raise e
         self._data = mi
         return self._data
@@ -993,7 +1001,9 @@ class ApiSdkLink:
         a = self._soup.soup.select_one("body > div.contents > ul > li > a")
         url = self._soup.url
         parts = url.rsplit('/', 1)
-        return parts[0] + '/' + a['href']
+        href = parts[0] + '/' + a['href']
+        logger.debug("ApiSdkLink.get_obj() Link: %s", href)
+        return href
 
     @property
     def soup(self) -> SoupObj:
@@ -1251,7 +1261,7 @@ class ParserInterface(ParserBase):
                 msg = "ParserInterface.get_formated_data() method must be called before accessing imports"
                 raise Exception(msg)
         except Exception as e:
-            logger.error(e)
+            logger.error(e, exc_info=True)
             raise e
         return self._imports
     @property
@@ -1262,7 +1272,7 @@ class ParserInterface(ParserBase):
                 msg = "ParserInterface.get_formated_data() method must be called before accessing imports"
                 raise Exception(msg)
         except Exception as e:
-            logger.error(e)
+            logger.error(e, exc_info=True)
             raise e
         return self._requires_typing
 # endregion Parse
@@ -1302,7 +1312,7 @@ class InterfaceWriter(WriteBase):
             if not _path.exists():
                 raise FileNotFoundError(f"unable to find templae file '{_path}'")
         except Exception as e:
-            logger.error(e)
+            logger.error(e, exc_info=True)
             raise e
         self._template_file = _path
         self._template: str = self._get_template()
@@ -1425,6 +1435,13 @@ class InterfaceWriter(WriteBase):
             self._file_full_path = self._get_uno_obj_path()
     
     def _get_uno_obj_path(self) -> Path:
+        if not self._p_name:
+            try:
+                raise Exception("InterfaceWriter._get_uno_obj_path() Parser provided a name the is an empty string.")
+            except Exception as e:
+                logger.error(e, exc_info=True)
+                raise e
+            
         uno_obj_path = Path(self._path_dir.parent, 'uno_obj')
         name_parts: List[str] = self._p_namespace.split('.')
         # ignore com, sun, star
@@ -1458,10 +1475,7 @@ def _main():
     # interfaces
     # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1beans_1_1XPropertyBag.html'
     
-    url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1uno_1_1XComponentContext.html'
-    ns = UrlObj(url)
-    print(ns.namespace_str)
-    return
+    url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1accessibility_1_1XAccessibleEditableText.html'
     p = ParserInterface(url=url)
     pprint.pprint(p.get_info())
     print(p.get_formated_data())

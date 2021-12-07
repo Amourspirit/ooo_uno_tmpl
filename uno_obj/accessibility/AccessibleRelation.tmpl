@@ -1,0 +1,33 @@
+#from _struct_base import struct_base as s_base
+#extends s_base
+#attr $sort = True
+#attr $name = "AccessibleRelation"
+#attr $desc = """An AccessibleRelation object defines a one-to-many relation.
+
+    The represented relation points from the implementing object to a set of target objects.
+
+    **Since**
+
+        OOo 1.1.2"""
+#attr $link = "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1accessibility_1_1AccessibleRelation.html"
+#attr $imports = []
+#attr $from_imports = []
+#attr $auto_imports = [('..uno.x_interface', 'XInterface')]
+#attr $attribs = [
+    {
+        "name": "RelationType",
+        "type": "int",
+        "orig_type": "short",
+        "lines": ["Type of the relation.",
+            "",
+            "Its value has to be one of the constants defined by AccessibleRelationType. If that value is INVALID then the whole relation is regarded as invalid. The content of the TargetSet is then undefined."]
+    },
+    {
+        "name": "TargetSet",
+        "type": "typing.List['XInterface']",
+        "orig_type": "sequence< .com.sun.star.uno.XInterface>",
+        "lines": ["Set of objects that are the relation's targets.",
+            "",
+            "The content of this set is undefined if the relation's type is INVALID. The set must not contain references to one object more than once."]
+    }
+]
