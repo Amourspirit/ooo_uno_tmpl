@@ -125,7 +125,7 @@ class SdkComponentText:
         # See: https://api.libreoffice.org/docs/idl/ref/XComponentContext_8idl_source.html
         # for this reason will narrow text untill the last match is found.
         self._data = self._get_text_aggresive(text)
-        # logger.debug('Component text:\n%s', self._data)
+        logger.debug('Component text:\n%s', self._data)
         
         return self._data
 
@@ -155,7 +155,38 @@ class SdkComponentText:
         """Gets code_text value"""
         return self._code_text
 
+class SdkComponentStart:
+    """
+    Responsible for getting first line of component such as:
+    interface XAccessibleHyperlink : ::com::sun::star::accessibility::XAccessibleAction
+    """
+    def __init__(self, c_text: SdkComponentText):
+        self._component: SdkComponentText = c_text
+        self._data = None
+    
+    def get_obj(self) -> str:
+        if not self._data is None:
+            return self._data
+        self._data = ''
+        try:
+            text = self._component.get_text()
+            regex = r"(interface.*){"
+            matches = re.search(regex, text, re.DOTALL)
+            if matches:
+                g = matches.groups()
+                self._data = " ".join(g[0].replace("{","").rstrip().split())
+            else:
+                raise Exception(
+                    "SdkComponentStart: Unable to match regex for first line")
+        except Exception as e:
+            logger.error("SdkComponentStart: Processing first line")
+            raise e
+        return self._data
 
+    @property
+    def component_text(self) -> str:
+        """Gets component_text value"""
+        return self._component
 class SdkComponentLines:
     """
     Responsible for getting all lines of Component.
@@ -807,6 +838,7 @@ class SdkNameInfo:
     def __init__(self, text: SdkComponentText):
         self._text = text
         self._name = ''
+        self._start_info = SdkComponentStart(self._text)
         self._init()
 
     def _init(self):
@@ -815,24 +847,40 @@ class SdkNameInfo:
         # https://regex101.com/r/aNblTo/3/
         # more generic so can work with struct, interface etc
         regex = r"([a-zA-Z0-9 :]*)\n\{"
-        s = self._text.get_text()
+        s = self._start_info.get_obj()
         matches = re.search(regex, s)
         if matches:
             g = matches.groups()
-            logger.debug('SdkNameInfo: Processing: %s', g[0])
+            s = g[0]
+            logger.debug('SdkNameInfo: Processing: %s', s)
             # published interface XFont: ::com::sun::star::uno::XInterface
             # or
             # published interface XPropertyBag
             
-            # can be : ::com::sun::star::accessibility::XAccessibleText
-            s: str = str(g[0]).strip(':').strip().lstrip(':')
-            
-            s = s.replace('::', '.')
-            # published interface XFont: com.sun.star.unoXInterface
-
-            s = s.rsplit('.', 1).pop()
-            # published interface XFont
-            self._name = s
+            # can be interface XAccessibleText : ::com::sun::star::uno::XInterface
+            # or
+            # interface XAccessibleEventBroadcaster: ::com::sun::star::uno::XInterface
+            # or the following is a possibility if sdk SdkComponentText does not do its job correctly
+            # ::com::sun::star::accessibility::XAccessibleAction
+            try:
+                regex_start = r"(interface)\s*[a-zA-Z0-9]+[ :]+"
+                
+                matches = re.search(regex_start, s)
+                if matches:
+                    # find the index of interface and drop anything before
+                    start = matches.span(1)[0]
+                    if start >  0:
+                        s = s[start:]
+                regex = r"interface\s*(?P<NAME>[a-zA-Z0-9_]+)"
+                m = re.match(regex, s)
+                if m:
+                    s = m.group('NAME')
+                else:
+                    raise Exception("SdkNameInfo: Unable to find name in %s" % g[0])
+                self._name = s
+            except Exception as e:
+                logger.error("SdkNameInfo: Error Processing: %s", g[0])
+                raise e
             logger.debug('SdkNameInfo.name: %s', self._name)
             # region Properties
 
@@ -1283,18 +1331,19 @@ class InterfaceWriter(WriteBase):
     @TypeCheckKw(arg_info={
         "write_file": 0, "write_json": 0,
         "copy_clipboard": 0, "print_template": 0,
-        "print_json": 0
+        "print_json": 0, "clear_on_print": 0
         },
         types=[bool],
         ftype=DecFuncEnum.METHOD)
     def __init__(self, parser: ParserInterface, **kwargs):
         super().__init__(**kwargs)
         self._parser: ParserInterface = parser
-        self._copy_clipboard = kwargs.get('copy_clipboard', False)
-        self._print_template = kwargs.get('print_template', False)
-        self._write_file = kwargs.get('write_template', False)
-        self._print_json = kwargs.get('print_json', True)
-        self._write_json = kwargs.get('write_json', False)
+        self._copy_clipboard: bool = kwargs.get('copy_clipboard', False)
+        self._print_template: bool = kwargs.get('print_template', False)
+        self._write_file: bool = kwargs.get('write_template', False)
+        self._print_json: bool = kwargs.get('print_json', True)
+        self._write_json: bool = kwargs.get('write_json', False)
+        self._clear_on_print: bool = kwargs.get('clear_on_print', True)
         self._indent_amt = 4
         self._json_str = None
         self._p_name: str = None
@@ -1323,7 +1372,7 @@ class InterfaceWriter(WriteBase):
         self._set_template_data()
         logger.info("Processing %s.%s", self._p_namespace, self._p_name)
         try:
-            if self._print_template or self._print_json:
+            if self._clear_on_print and (self._print_template or self._print_json):
                 logger.debug('Printing to terminal')
                 os.system('cls' if os.name == 'nt' else 'clear')
             if self._copy_clipboard:
@@ -1467,23 +1516,15 @@ class InterfaceWriter(WriteBase):
 
 
 def _main():
-    os.system('cls' if os.name == 'nt' else 'clear')
-    # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XFont.html'
-    # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1media_1_1XPlayerWindow.html'
-    # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XAnimatedImages.html'
-
-    # interfaces
-    # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1beans_1_1XPropertyBag.html'
-    
-    url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1accessibility_1_1XAccessibleEditableText.html'
-    p = ParserInterface(url=url)
-    pprint.pprint(p.get_info())
-    print(p.get_formated_data())
+    # os.system('cls' if os.name == 'nt' else 'clear')
+    url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1accessibility_1_1XAccessibleHyperlink.html'
+    # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1accessibility_1_1XAccessibleText.html'
+    sys.argv.extend(['-v', '-n', '-u', url])
+    main()
 
 def main():
-    os.system('cls' if os.name == 'nt' else 'clear')
-    logger.info('Executing command: %s', sys.argv[1:])
-    parser = argparse.ArgumentParser(description='enum')
+    # region Parser
+    parser = argparse.ArgumentParser(description='interface')
     parser.add_argument(
         '-u', '--url',
         help='Source Url',
@@ -1494,6 +1535,12 @@ def main():
         help='No sorting of results',
         action='store_false',
         dest='sort',
+        default=True)
+    parser.add_argument(
+        '-p', '--no-print-clear',
+        help='No clearing of terminal when output to terminal.',
+        action='store_false',
+        dest='no_print_clear',
         default=True)
     parser.add_argument(
         '-c', '--clipboard',
@@ -1525,8 +1572,24 @@ def main():
         action='store_true',
         dest='write_json',
         default=False)
-
+    # region Dummy Args for Logging
+    parser.add_argument(
+        '-v', '--verbose',
+        help='verbose logging',
+        action='store_true',
+        dest='verbose',
+        default=False)
+    parser.add_argument(
+        '-L', '--log-file',
+        help='Log file to use',
+        type=str,
+        required=False)
+    # endregion Dummy Args for Logging
     args = parser.parse_args()
+    # endregion Parser
+    if not args.no_print_clear:
+        os.system('cls' if os.name == 'nt' else 'clear')
+    logger.info('Executing command: %s', sys.argv[1:])
     logger.info('Parsing Url %s' % args.url)
     
     p = ParserInterface(url=args.url, sort=args.sort)
@@ -1536,7 +1599,8 @@ def main():
         print_json=args.print_json,
         copy_clipboard=args.clipboard,
         write_template=args.write_template,
-        write_json=args.write_json
+        write_json=args.write_json,
+        clear_on_print=(not args.no_print_clear)
         )
     if args.print_template is False and args.print_json is False:
         print('')
@@ -1559,4 +1623,4 @@ def get_soup_data():
 
 
 if __name__ == '__main__':
-    main()
+    _main()
