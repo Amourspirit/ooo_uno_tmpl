@@ -13,9 +13,10 @@ from kwhelp import rules
 from pathlib import Path
 from typing import Iterable, List, Tuple, Union
 # this is for VS code debuging
-sys.path.insert(0, os.path.abspath('.'))
+sys.path.insert(0, str(Path(__file__).parent.parent))
+print(sys.path)
 # this is for command line
-sys.path.insert(0, os.path.abspath('..'))
+# sys.path.insert(0, os.path.abspath('..'))
 
 from logger.log_handle import get_logger
 logger = get_logger(__name__)

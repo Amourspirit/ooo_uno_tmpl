@@ -1,23 +1,21 @@
 #!/usr/bin/env python
-import logging
-import pprint
-from logging import DEBUG
 import os
 import sys
 import argparse
+import logging
 import textwrap
-from typing import Dict, List, Set, Tuple
+import xerox  # requires xclip - sudo apt-get install xclip
+import re
+from typing import Dict, List, Set
 from bs4 import BeautifulSoup
 from bs4.element import PageElement, ResultSet, Tag
 from kwhelp.decorator import DecFuncEnum, RuleCheckAllKw, RequireArgs, TypeCheckKw
 from kwhelp import rules
 from base import TYPE_MAP, TagsStrObj, ParserBase, SoupObj, BlockObj, UrlObj, Util, WriteBase, str_clean
 from pathlib import Path
-import xerox  # requires xclip - sudo apt-get install xclip
-from logger.log_handle import get_logger
+from logger.log_handle import get_logger, LOG_FILE_HANDLER, get_file_handler
 from parser.enm import main
 from dataclasses import dataclass
-import re
 from parser import __version__, JSON_ID
 DEBUGGING = False
 
@@ -1593,10 +1591,15 @@ class InterfaceWriter(WriteBase):
 
 
 def _main():
+    # replace logging file handler for debugging.
+    logger.removeHandler(LOG_FILE_HANDLER)
+    hndl = get_file_handler('debug.log')
+    logger.addHandler(hndl)
+    logger.level = logging.DEBUG
     # os.system('cls' if os.name == 'nt' else 'clear')
     url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1accessibility_1_1XAccessibleTextAttributes.html'
     # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1accessibility_1_1XAccessibleText.html'
-    sys.argv.extend(['-v', '-n', '-u', url])
+    sys.argv.extend(['--log-file', 'debug.log', '-v', '-n', '-u', url])
     main()
 
 def main():

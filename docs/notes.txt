@@ -1,0 +1,33 @@
+Compile changed templates in template dir.
+Just run make after changes.
+eg:
+    :~/Projects/ooo_uno_tmpl/template $ make
+    cheetah compile --nobackup _enum_base.tmpl
+    Compiling _enum_base.tmpl -> _enum_base.py
+Note:
+    After compiling template file the changes are reflected automatically
+    for all subsequent make.py builds.
+
+Rebuilding all files in a dir.
+open dir in terminal
+remove all .py files
+rm *.py
+USE CAUTION HERE to not to delete anything other then py files.
+It is fine to delete any sys links as make.py will rebuild them.
+Next run: python make.py from the project root.
+make.py will rebuild any template that has missing py file.
+eg:
+    cd uno_obj/
+    cd cd accessibility/
+    :~/Projects/ooo_uno_tmpl/uno_obj/accessibility $ rm *.py
+    cd ..
+    cd ..
+    :~/Projects/ooo_uno_tmpl $ python make.py
+
+Removing debug statements from log files.
+Regex: ^\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2},[0-9]+.*DEBUG.*$
+In vs.code find and replace with nothing using regex.
+Now log will contain a bunch of empty lines.
+Regex: $\n
+Find and replace with nothing again.
+All done.

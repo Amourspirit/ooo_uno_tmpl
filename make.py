@@ -170,6 +170,19 @@ def main():
         action='store_true',
         dest='clean_scratch',
         default=False)
+    # region Dummy Args for Logging
+    parser.add_argument(
+        '-v', '--verbose',
+        help='verbose logging',
+        action='store_true',
+        dest='verbose',
+        default=False)
+    parser.add_argument(
+        '-L', '--log-file',
+        help='Log file to use',
+        type=str,
+        required=False)
+    # endregion Dummy Args for Logging
     args = parser.parse_args()
     try:
         make = Make(force_compile=args.force_compile, clean=args.clean_scratch)
