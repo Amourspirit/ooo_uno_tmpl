@@ -125,7 +125,7 @@ class SdkComponentText:
         # See: https://api.libreoffice.org/docs/idl/ref/XComponentContext_8idl_source.html
         # for this reason will narrow text untill the last match is found.
         self._data = self._get_text_aggresive(text)
-        logger.debug('Component text:\n%s', self._data)
+        # logger.debug('Component text:\n%s', self._data)
         
         return self._data
 
@@ -187,6 +187,7 @@ class SdkComponentStart:
     def component_text(self) -> str:
         """Gets component_text value"""
         return self._component
+
 class SdkComponentLines:
     """
     Responsible for getting all lines of Component.
@@ -665,18 +666,15 @@ class SdkProperties:
 
 
 class SdkExtends:
-    def __init__(self, c_text: SdkComponentText, m_text: SdkComponentLines):
-        self._c_text: SdkComponentText = c_text
+    def __init__(self, c_text: SdkComponentStart, m_text: SdkComponentLines):
+        self._c_start: SdkComponentStart = c_text
         self._m_text: SdkComponentLines = m_text
         self._ex_lst: List[str] = []
         self._i_data: SdkInterfaceData = SdkInterfaceData(text=m_text)
         self._init()
 
     def _init(self):
-        lines = self._c_text.get_text().splitlines()
-        if len(lines) == 0:
-            return
-        s = lines[0]
+        s = self._c_start.get_obj()
         logger.debug("SdkExtends._init() First Line: %s", s)
         # published interface XFont: com::sun::star::uno::XInterface
         s = s.replace('::', ".")
@@ -686,7 +684,7 @@ class SdkExtends:
             logger.debug("SdkExtends._init() ':' seperator found extends on first line.")
             s = parts[1]
             logger.debug("SdkExtends._init() Processing: '%s'", s)
-            s = Util.get_clean_ns(s)
+            s = Util.get_clean_ns(s).lstrip('.')
             self._ex_lst.append(s)
             logger.debug("SdkExtends._init() Added Extends: '%s'", s)
 
@@ -835,10 +833,9 @@ class SdkNamesSpaceInfo:
 class SdkNameInfo:
     """Gets Name of interface/class etc"""
 
-    def __init__(self, text: SdkComponentText):
-        self._text = text
+    def __init__(self, c_start: SdkComponentStart):
         self._name = ''
-        self._start_info = SdkComponentStart(self._text)
+        self._start_info = c_start
         self._init()
 
     def _init(self):
@@ -846,43 +843,29 @@ class SdkNameInfo:
         # https://regex101.com/r/aNblTo/2/
         # https://regex101.com/r/aNblTo/3/
         # more generic so can work with struct, interface etc
-        regex = r"([a-zA-Z0-9 :]*)\n\{"
         s = self._start_info.get_obj()
-        matches = re.search(regex, s)
-        if matches:
-            g = matches.groups()
-            s = g[0]
-            logger.debug('SdkNameInfo: Processing: %s', s)
-            # published interface XFont: ::com::sun::star::uno::XInterface
-            # or
-            # published interface XPropertyBag
-            
-            # can be interface XAccessibleText : ::com::sun::star::uno::XInterface
-            # or
-            # interface XAccessibleEventBroadcaster: ::com::sun::star::uno::XInterface
-            # or the following is a possibility if sdk SdkComponentText does not do its job correctly
-            # ::com::sun::star::accessibility::XAccessibleAction
-            try:
-                regex_start = r"(interface)\s*[a-zA-Z0-9]+[ :]+"
-                
-                matches = re.search(regex_start, s)
-                if matches:
-                    # find the index of interface and drop anything before
-                    start = matches.span(1)[0]
-                    if start >  0:
-                        s = s[start:]
-                regex = r"interface\s*(?P<NAME>[a-zA-Z0-9_]+)"
-                m = re.match(regex, s)
-                if m:
-                    s = m.group('NAME')
-                else:
-                    raise Exception("SdkNameInfo: Unable to find name in %s" % g[0])
-                self._name = s
-            except Exception as e:
-                logger.error("SdkNameInfo: Error Processing: %s", g[0])
-                raise e
-            logger.debug('SdkNameInfo.name: %s', self._name)
-            # region Properties
+        try:
+            regex_start = r"(interface)\s*[a-zA-Z0-9]+[ :]+"
+
+            matches = re.search(regex_start, s)
+            if matches:
+                # find the index of interface and drop anything before
+                start = matches.span(1)[0]
+                if start > 0:
+                    s = s[start:]
+            regex = r"interface\s*(?P<NAME>[a-zA-Z0-9_]+)"
+            m = re.match(regex, s)
+            if m:
+                s = m.group('NAME')
+            else:
+                raise Exception(
+                    "SdkNameInfo: Unable to find name in %s" % s)
+            self._name = s
+        except Exception as e:
+            logger.error("SdkNameInfo: Error Processing: %s", s)
+            raise e
+        logger.debug('SdkNameInfo.name: %s', self._name)
+        
 
     @property
     def name(self) -> str:
@@ -890,9 +873,9 @@ class SdkNameInfo:
         return self._name
 
     @property
-    def component(self) -> SdkComponentText:
+    def component_start(self) -> SdkComponentStart:
         """Gets component object"""
-        return self._text
+        return self._start_info
     # endregion Properties
 
 # endregion SDK API Reference
@@ -1210,9 +1193,9 @@ class ParserInterface(ParserBase):
             return self._info
         # ns = SdkNamesSpaceInfo(self._sdk_method_info.component)
         ns = UrlObj(self._url)
-        ni = SdkNameInfo(self._sdk_method_info.component)
-        ex = SdkExtends(c_text=self._sdk_method_info.component,
-                        m_text=self._sdk_method_info.component_lines)
+        start_ln = SdkComponentStart(self._sdk_method_info.component)
+        ni = SdkNameInfo(start_ln)
+        ex = SdkExtends(start_ln, self._sdk_method_info.component_lines)
         im = SdkImports(self._sdk_method_info.component_lines)
         desc = ApiDesc(soup=self._api_info.soup)
         result = {
@@ -1471,7 +1454,7 @@ class InterfaceWriter(WriteBase):
         self._p_desc = data['desc']
         self._p_url = data['url']
         self._p_data = self._parser.get_formated_data()
-        
+        self._validate_p_info()
         _imports = data['imports']
         self._p_imports.update(_imports)
         self._p_imports.update(data['extends'])
@@ -1483,10 +1466,25 @@ class InterfaceWriter(WriteBase):
         if self._write_file or self._write_json:
             self._file_full_path = self._get_uno_obj_path()
     
+    def _validate_p_info(self):
+        try:
+            if not self._p_name:
+                raise Exception(
+                    "InterfaceWriter: validation fail: name is an empty string.")
+            if not self._p_url:
+                raise Exception(
+                    "InterfaceWriter: validation fail: url is an empty string.")
+            if not self._p_namespace:
+                raise Exception(
+                    "InterfaceWriter: validation fail: namespace is an empty string.")
+        except Exception as e:
+            logger.error(e)
+            raise e
+    
     def _get_uno_obj_path(self) -> Path:
         if not self._p_name:
             try:
-                raise Exception("InterfaceWriter._get_uno_obj_path() Parser provided a name the is an empty string.")
+                raise Exception("InterfaceWriter._get_uno_obj_path() Parser provided a name that is an empty string.")
             except Exception as e:
                 logger.error(e, exc_info=True)
                 raise e
@@ -1623,4 +1621,4 @@ def get_soup_data():
 
 
 if __name__ == '__main__':
-    _main()
+    main()
