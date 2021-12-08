@@ -185,14 +185,10 @@ class Parser(ParserBase):
                 nonlocal cb_data
                 cb_data = data
 
-            # _parts = in_type.rsplit(sep='.', maxsplit=2)
-            # p_type = _parts[:-1]
             n_type = TYPE_MAP.get(in_type, None)
             if n_type:
                 return n_type
             n_type = Util.get_py_type(uno_type=in_type, cb=cb)
-            # unknow type. wrap in quotes.
-            # Todo: Consider auto import option for unknown types
             auto_import = False
             is_wrapper = cb_data['is_wrapper']
             is_py = cb_data['is_py_type']

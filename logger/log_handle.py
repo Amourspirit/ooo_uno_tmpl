@@ -1,13 +1,51 @@
 # coding: utf-8
 import logging
 import sys
+import re
 from pathlib import Path
+from typing import Dict
 # from logging.handlers import TimedRotatingFileHandler
 
 FORMATTER = logging.Formatter(
     "%(asctime)s — %(name)s — %(levelname)s — %(message)s")
-LOG_FILE = Path(__file__).parent.parent / 'app.log'
-LOG_LEVEL = logging.DEBUG
+LOG_FILE = 'app.log'
+LOG_LEVEL = logging.INFO
+
+def _parse_log_options():
+    global LOG_FILE, LOG_LEVEL
+    if len(sys.argv) <= 1:
+        LOG_LEVEL = logging.DEBUG
+        LOG_FILE = Path(__file__).parent.parent / 'debug.log'
+        return
+
+    args_str = " ".join(sys.argv[1:])
+    opts = [opt for opt in sys.argv[1:] if opt.startswith("-")]
+    if any(map(lambda v: v in opts, ("-v", '--verbose'))):
+        LOG_LEVEL = logging.DEBUG
+
+    p = LOG_FILE
+    regex = r"((?:-L|--log-file)\s(?P<LOG_FILE>.*?)(?:\s|$))"
+    matches = re.search(regex, args_str)
+    if matches:
+        # print(m)
+        p = matches.group('LOG_FILE').strip()
+    try:
+        if p == LOG_FILE:
+            LOG_FILE = Path(__file__).parent.parent / p
+            return
+        tmp_p = Path(p)
+        if tmp_p.is_file():
+            return
+        if tmp_p.is_absolute():
+            LOG_FILE = tmp_p
+            return
+        LOG_FILE = Path(Path(__file__).parent.parent, tmp_p)
+        return
+    except Exception:
+        pass
+    LOG_FILE = Path(__file__).parent.parent / "app.log"
+
+_parse_log_options()
 
 def get_console_handler():
     """

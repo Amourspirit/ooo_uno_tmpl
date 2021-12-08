@@ -35,6 +35,7 @@ re_raises_pattern = re.compile(r"\s*(raises\s*\(.*\))")
 
 re_interface_pattern = re.compile(r"interface\s*([a-zA-Z0-9.]*)\s*;")
 re_property_pattern = re.compile(r"(?:\[attribute\])(?:[ ]+)([a-zA-Z0-9. {}()]*);")
+re_comment_start_pattern = re.compile(r"(?:(\/\*)|(?:\*)\s)")
 # endregion SDK API Reference
 
 
@@ -155,6 +156,38 @@ class SdkComponentText:
         """Gets code_text value"""
         return self._code_text
 
+class SdkComponentStart:
+    """
+    Responsible for getting first line of component such as:
+    interface XAccessibleHyperlink : ::com::sun::star::accessibility::XAccessibleAction
+    """
+    def __init__(self, c_text: SdkComponentText):
+        self._component: SdkComponentText = c_text
+        self._data = None
+    
+    def get_obj(self) -> str:
+        if not self._data is None:
+            return self._data
+        self._data = ''
+        try:
+            text = self._component.get_text()
+            regex = r"(interface.*){"
+            matches = re.search(regex, text, re.DOTALL)
+            if matches:
+                g = matches.groups()
+                self._data = " ".join(g[0].replace("{","").rstrip().split())
+            else:
+                raise Exception(
+                    "SdkComponentStart: Unable to match regex for first line")
+        except Exception as e:
+            logger.error("SdkComponentStart: Processing first line")
+            raise e
+        return self._data
+
+    @property
+    def component_text(self) -> str:
+        """Gets component_text value"""
+        return self._component
 
 class SdkComponentLines:
     """
@@ -192,7 +225,17 @@ class SdkComponentLines:
             return ''
         # methods may be split across multiple lines.
         # start by collapsing all lines into a single line
-        single_line = " ".join(input.splitlines()).strip()
+        lines  = input.splitlines()
+        new_lines = list[str]()
+        for line in lines:
+            s = line.strip().lstrip(':')
+            m = re_comment_start_pattern.match(s)
+            if m:
+                logger.debug(
+                    'SdkComponentLines: Skipping comment line: %s', line)
+                continue
+            new_lines.append(s)
+        single_line = " ".join(new_lines)
         # logger.debug('single Line\n%s', single_line)
         # bit of a hack here but best fix I can find so far
         # fixes parsing issue when interface such as:
@@ -303,21 +346,15 @@ class SdkMethodData:
     def _set_data(self):
         is_py_type = True
 
-        def cb(data: dict):
-            nonlocal is_py_type
-            is_py_type = data['is_py_type']
-            if not is_py_type:
-                self._imports.add(data['type'])
-            if data['is_typing']:
-                self._requires_typing = True
         text = self._param
+        logger.debug('SdkMethodData._set_data() Processing: %s', text)
         matches = re.search(re_interface_pattern, text)
         if matches:
-            logger.debug("SdkMethodData data matched interface. Raising error")
+            logger.debug("SdkMethodData._set_data() data matched interface. Raising error")
             raise MethodInvalidError(f"'{text}' matches interface")
         matches = re.search(re_property_pattern, text)
         if matches:
-            logger.debug("SdkMethodData data matched property. Raising error")
+            logger.debug("SdkMethodData._set_data() data matched property. Raising error")
             raise MethodInvalidError(f"'{text}' matches property")
 
         seq_regex = r"([a-zA-Z]*)< *([a-zA-A0-9]*) *>"
@@ -325,14 +362,23 @@ class SdkMethodData:
         if m:
             # replace sequence< string > with sequence<string>
             # this is necessary to prevent following steps from parsing incorectly
-            text = re.sub(seq_regex, f'{m.group(1)}<{m.group(2)}>', text, 1)
+            replacement = f'{m.group(1)}<{m.group(2)}>'
+            text = re.sub(seq_regex, replacement, text, 1)
+            logger.debug("SdkMethodData._set_data() replaced < spaces >. Now: %s", text)
         # check if method include raises...
         matches = re.search(re_raises_pattern, text)
         if matches:
+            logger.debug('SdkMethodData._set_data() found raises for method.')
             g = matches.groups()
             self._process_raises(g[0])
             # remove raises text section
             text = re.sub(re_raises_pattern, '', text)
+            logger.debug('SdkMethodData._set_data() remove raise match: %s', text)
+        else:
+            logger.debug('SdkMethodData._set_data() did not find raises for method.')
+        
+        # imports are handled in _get_py_type that is called in this method and in _process_args
+        # self._process_imports(text)
         matches = re.search(re_method_pattern, text)
         # when there are parameters
         #   group 0 return type eg: com.sun.star.awt.Rectangle
@@ -351,32 +397,53 @@ class SdkMethodData:
         #     if len(groups)
         if matches:
             g = matches.groups()
+            logger.debug("SdkMethodData._set_data() Matches for method Params: %s", str(g))
             if g[0] is None:
                 # no params
                 self._p_name = g[4]
-                result = Util.get_py_type(g[3], cb=cb)
-                if is_py_type:
-                    self._p_return = result
-                else:
-                    self._p_return = f"'{result}'"
+                # result = Util.get_py_type(g[3], cb=cb)
+                result = self._get_py_type(g[3])
+                self._p_return = result
             else:
                 self._p_name = g[1]
-                result = Util.get_py_type(g[0], cb=cb)
-                if is_py_type:
-                    self._p_return = result
-                else:
-                    self._p_return = f"'{result}'"
-                
+                # result = Util.get_py_type(g[0], cb=cb)
+                result = self._get_py_type(g[0])
+                self._p_return = result
                 self._process_args(g[2])
+        else:
+            logger.debug(
+                "SdkMethodData._set_data() No method found in: %s", text)
         return matches
 
+    def _process_imports(self, text: str):
+        regex = r"(com.sun[\w.]+)"
+        matches = re.finditer(regex, text)
+        for matchNum, match in enumerate(matches, start=1):
+            logger.debug("SdkMethodData._process_imports() Match {matchNum} was found at {start}-{end}: {match}".format(
+                matchNum=matchNum, start=match.start(), end=match.end(), match=match.group()))
+            for groupNum in range(0, len(match.groups())):
+                groupNum = groupNum + 1
+                ns = match.group(groupNum)
+                logger.debug("SdkMethodData._process_imports() Group {groupNum} found at {start}-{end}: {group}".format(groupNum=groupNum,
+                    start=match.start(groupNum), end=match.end(groupNum), group=ns))
+                self._imports.add(match.group(groupNum))
+                logger.debug("SdkMethodData._process_imports() added import: %s", ns)
+                self._requires_typing = True
+                
     def _process_raises(self, text: str):
         # raises( com::sun::star::beans::UnknownPropertyException, com::sun::star::lang::IllegalArgumentException, com::sun::star::lang::WrappedTargetException )
         s = text.replace('(', '|').replace(')', '|').split('|')
         if len(s) <= 1:
+            logger.debug('SdkMethodData._process_raises() Invalid raises text: %s', text)
             return
-        ex = s[1].strip().replace('::', ".").replace(' ', '').replace('.com.', 'com.').split(',')
-        self._p_raises.extend(ex)
+        ex_parts = s[1].replace("::",".").split(',')
+        new_parts = list[str]()
+        for part in ex_parts:
+            new_parts.append(Util.get_clean_ns(input=part, ltrim=True))
+        # ex = s[1].strip().replace('::', ".").replace(' ', '').replace('.com.', 'com.').split(',')
+        self._p_raises.extend(new_parts)
+        if logger.level <= logging.DEBUG:
+            logger.debug('SdkMethodData._process_raises() added raise: %s', str(new_parts))
 
     def _process_interface(self, text: str):
         # interface com::sun::star::beans::XPropertySet
@@ -384,31 +451,60 @@ class SdkMethodData:
             '.', 1)  # 'com.sun.star.beans', 'XPropertySet'
         return
 
-    def _process_args(self, args: str):
-        is_py_type = True
+    def _get_py_type(self, in_type: str) -> str:
+        cb_data = None
 
         def cb(data: dict):
-            nonlocal is_py_type
-            is_py_type = data['is_py_type']
-            if not is_py_type:
-                self._imports.add(data['type'])
-            if data['is_typing']:
+            nonlocal cb_data
+            cb_data = data
+
+        n_type = TYPE_MAP.get(in_type, None)
+        if n_type:
+            logger.debug(
+                "SdkMethodData._get_py_type() Found python type: %s", n_type)
+            return n_type
+        n_type = Util.get_py_type(uno_type=in_type, cb=cb)
+        is_wrapper = cb_data['is_wrapper']
+        is_py = cb_data['is_py_type']
+        _result = n_type
+        if is_wrapper:
+            self._requires_typing = True
+            logger.debug("SdkMethodData._get_py_type() wrapper arg %s", in_type)
+            logger.debug("SdkMethodData._get_py_type() wrapper arg Typing is Required.")
+            wdata: dict = cb_data['wdata']
+            if not wdata['py_type_inner']:
+                logger.debug(
+                    "SdkMethodData._get_py_type() wrapper inner requires typing arg %s", in_type)
+                self._imports.add(cb_data['long_type'])
+                logger.debug(
+                    "SdkMethodData._get_py_type() added import %s", cb_data['long_type'])
+        else:
+            if is_py is False:
+                logger.debug(
+                    "SdkMethodData._get_py_type() requires typing arg %s", in_type)
                 self._requires_typing = True
-        logger.debug("SdkMethodData._process_args() Processing args: %s", args)
-        a = args.replace(', ', ',').strip()
+                self._imports.add(cb_data['long_type'])
+                logger.debug(
+                    "SdkMethodData._get_py_type() added import %s", cb_data['long_type'])
+        return _result
+
+    def _process_args(self, args: str):      
+        a = args.replace(' ', '').strip()
+        logger.debug('SdkMethodData._process_args() parsing args: %s', a)
         arg_lst = a.split(',')
         for arg in arg_lst:
-            is_py_type = True
             matches = re.search(re_args_pattern, arg)
             if not matches:
                 continue
+            logger.debug('SdkMethodData_process_args() parsing arg: %s', arg)
             g = matches.groups()
             _dir = 'in' if g[0] is None else g[0].lower()
-            stype = Util.get_py_type(g[1], cb=cb)
-            if not is_py_type:
-                stype = f"'{stype}'"
+            stype = self._get_py_type(g[1])
             info = ParamInfo(
                 direction=_dir, name=g[2], type=stype)
+            logger.debug(
+                'SdkMethodData_process_args() ParamInfo DIRECTION: %s, NAME: %s, TYPE: %s'
+                , arg)
             self._p_args.append(info)
 
     # region Properties
@@ -478,10 +574,7 @@ class SdkProperyData:
             text = re.sub(re_raises_pattern, '', text)
         parts = text.split(maxsplit=2)
         result = Util.get_py_type(parts[0], cb=cb)
-        if is_py_type:
-            self._p_return = result
-        else:
-            self._p_return = f"'{result}'"
+        self._p_return = result
         self._p_name = Util.get_clean_name(parts[1])
 
 
@@ -634,18 +727,15 @@ class SdkProperties:
 
 
 class SdkExtends:
-    def __init__(self, c_text: SdkComponentText, m_text: SdkComponentLines):
-        self._c_text: SdkComponentText = c_text
+    def __init__(self, c_text: SdkComponentStart, m_text: SdkComponentLines):
+        self._c_start: SdkComponentStart = c_text
         self._m_text: SdkComponentLines = m_text
         self._ex_lst: List[str] = []
         self._i_data: SdkInterfaceData = SdkInterfaceData(text=m_text)
         self._init()
 
     def _init(self):
-        lines = self._c_text.get_text().splitlines()
-        if len(lines) == 0:
-            return
-        s = lines[0]
+        s = self._c_start.get_obj()
         logger.debug("SdkExtends._init() First Line: %s", s)
         # published interface XFont: com::sun::star::uno::XInterface
         s = s.replace('::', ".")
@@ -655,7 +745,7 @@ class SdkExtends:
             logger.debug("SdkExtends._init() ':' seperator found extends on first line.")
             s = parts[1]
             logger.debug("SdkExtends._init() Processing: '%s'", s)
-            s = Util.get_clean_ns(s)
+            s = Util.get_clean_ns(s).lstrip('.')
             self._ex_lst.append(s)
             logger.debug("SdkExtends._init() Added Extends: '%s'", s)
 
@@ -732,7 +822,8 @@ class SdkImports:
                 logger.debug(
                     "SdkImports.get_obj() adding Import: '%s'", s)
                 self._imports.add(s)
-
+            else:
+                logger.debug("SdkImports.get_obj() No Match")
         return self._imports
 
     def _process_match(self, match: str):
@@ -804,9 +895,9 @@ class SdkNamesSpaceInfo:
 class SdkNameInfo:
     """Gets Name of interface/class etc"""
 
-    def __init__(self, text: SdkComponentText):
-        self._text = text
+    def __init__(self, c_start: SdkComponentStart):
         self._name = ''
+        self._start_info = c_start
         self._init()
 
     def _init(self):
@@ -814,27 +905,29 @@ class SdkNameInfo:
         # https://regex101.com/r/aNblTo/2/
         # https://regex101.com/r/aNblTo/3/
         # more generic so can work with struct, interface etc
-        regex = r"([a-zA-Z0-9 :]*)\n\{"
-        s = self._text.get_text()
-        matches = re.search(regex, s)
-        if matches:
-            g = matches.groups()
-            logger.debug('SdkNameInfo: Processing: %s', g[0])
-            # published interface XFont: ::com::sun::star::uno::XInterface
-            # or
-            # published interface XPropertyBag
-            
-            # can be : ::com::sun::star::accessibility::XAccessibleText
-            s: str = str(g[0]).strip(':').strip().lstrip(':')
-            
-            s = s.replace('::', '.')
-            # published interface XFont: com.sun.star.unoXInterface
+        s = self._start_info.get_obj()
+        try:
+            regex_start = r"(interface)\s*[a-zA-Z0-9]+[ :]+"
 
-            s = s.rsplit('.', 1).pop()
-            # published interface XFont
+            matches = re.search(regex_start, s)
+            if matches:
+                # find the index of interface and drop anything before
+                start = matches.span(1)[0]
+                if start > 0:
+                    s = s[start:]
+            regex = r"interface\s*(?P<NAME>[a-zA-Z0-9_]+)"
+            m = re.match(regex, s)
+            if m:
+                s = m.group('NAME')
+            else:
+                raise Exception(
+                    "SdkNameInfo: Unable to find name in %s" % s)
             self._name = s
-            logger.debug('SdkNameInfo.name: %s', self._name)
-            # region Properties
+        except Exception as e:
+            logger.error("SdkNameInfo: Error Processing: %s", s)
+            raise e
+        logger.debug('SdkNameInfo.name: %s', self._name)
+        
 
     @property
     def name(self) -> str:
@@ -842,9 +935,9 @@ class SdkNameInfo:
         return self._name
 
     @property
-    def component(self) -> SdkComponentText:
+    def component_start(self) -> SdkComponentStart:
         """Gets component object"""
-        return self._text
+        return self._start_info
     # endregion Properties
 
 # endregion SDK API Reference
@@ -998,13 +1091,16 @@ class ApiSdkLink:
         self._soup = soup
 
     def get_obj(self):
-        a = self._soup.soup.select_one("body > div.contents > ul > li > a")
-        url = self._soup.url
-        parts = url.rsplit('/', 1)
-        href = parts[0] + '/' + a['href']
-        logger.debug("ApiSdkLink.get_obj() Link: %s", href)
-        return href
-
+        try:
+            a = self._soup.soup.select_one("body > div.contents > ul > li > a")
+            url = self._soup.url
+            parts = url.rsplit('/', 1)
+            href = parts[0] + '/' + a['href']
+            logger.debug("ApiSdkLink.get_obj() Link: %s", href)
+            return href
+        except Exception as e:
+            logger.error("ApiSdk Failed to get Link: Are you sure you inputing correct url?")
+            raise e
     @property
     def soup(self) -> SoupObj:
         """Gets SoupObj instance for this instance"""
@@ -1115,7 +1211,7 @@ class ApiInfo:
 # region Parse
 class ParserInterface(ParserBase):
 
-
+    # region Constructor
     @RequireArgs('url', ftype=DecFuncEnum.METHOD)
     @RuleCheckAllKw(arg_info={"url": 0, "sort": 1, "replace_dual_colon": 1},
                     rules=[rules.RuleStrNotNullEmptyWs, rules.RuleBool],
@@ -1131,6 +1227,7 @@ class ParserInterface(ParserBase):
         self._imports: Set[str] = set()
         self._formated_data = None
         self._data_items = None
+    # endregion Constructor
 
     def get_dict_data(self) -> dict:
         info = self.get_info()
@@ -1162,9 +1259,9 @@ class ParserInterface(ParserBase):
             return self._info
         # ns = SdkNamesSpaceInfo(self._sdk_method_info.component)
         ns = UrlObj(self._url)
-        ni = SdkNameInfo(self._sdk_method_info.component)
-        ex = SdkExtends(c_text=self._sdk_method_info.component,
-                        m_text=self._sdk_method_info.component_lines)
+        start_ln = SdkComponentStart(self._sdk_method_info.component)
+        ni = SdkNameInfo(start_ln)
+        ex = SdkExtends(start_ln, self._sdk_method_info.component_lines)
         im = SdkImports(self._sdk_method_info.component_lines)
         desc = ApiDesc(soup=self._api_info.soup)
         result = {
@@ -1283,18 +1380,19 @@ class InterfaceWriter(WriteBase):
     @TypeCheckKw(arg_info={
         "write_file": 0, "write_json": 0,
         "copy_clipboard": 0, "print_template": 0,
-        "print_json": 0
+        "print_json": 0, "clear_on_print": 0
         },
         types=[bool],
         ftype=DecFuncEnum.METHOD)
     def __init__(self, parser: ParserInterface, **kwargs):
         super().__init__(**kwargs)
         self._parser: ParserInterface = parser
-        self._copy_clipboard = kwargs.get('copy_clipboard', False)
-        self._print_template = kwargs.get('print_template', False)
-        self._write_file = kwargs.get('write_template', False)
-        self._print_json = kwargs.get('print_json', True)
-        self._write_json = kwargs.get('write_json', False)
+        self._copy_clipboard: bool = kwargs.get('copy_clipboard', False)
+        self._print_template: bool = kwargs.get('print_template', False)
+        self._write_file: bool = kwargs.get('write_template', False)
+        self._print_json: bool = kwargs.get('print_json', True)
+        self._write_json: bool = kwargs.get('write_json', False)
+        self._clear_on_print: bool = kwargs.get('clear_on_print', True)
         self._indent_amt = 4
         self._json_str = None
         self._p_name: str = None
@@ -1307,6 +1405,7 @@ class InterfaceWriter(WriteBase):
         self._p_url: str = None
         self._p_requires_typing = False
         self._path_dir = Path(os.path.dirname(__file__))
+        self._cache: Dict[str, object] = {}
         _path = Path(self._path_dir, 'template', 'interface.tmpl')
         try:
             if not _path.exists():
@@ -1323,7 +1422,7 @@ class InterfaceWriter(WriteBase):
         self._set_template_data()
         logger.info("Processing %s.%s", self._p_namespace, self._p_name)
         try:
-            if self._print_template or self._print_json:
+            if self._clear_on_print and (self._print_template or self._print_json):
                 logger.debug('Printing to terminal')
                 os.system('cls' if os.name == 'nt' else 'clear')
             if self._copy_clipboard:
@@ -1350,6 +1449,8 @@ class InterfaceWriter(WriteBase):
             "name": p_dict['name'],
             "type": "interface",
             "namespace": p_dict['namespace'],
+            "from_imports": self._get_from_imports(),
+            "from_imports_typing": self._get_from_imports_typing(),
             "parser_args": self._parser.get_parser_args(),
             "writer_args": {},
             "data": p_dict
@@ -1363,25 +1464,35 @@ class InterfaceWriter(WriteBase):
             contents = f.read()
         return contents
 
+    # region get Imports
+    def _get_from_imports(self) -> List[List[str]]:
+        key = '_get_from_imports'
+        if key in self._cache:
+            return self._cache[key]
+        lst = []
+        for ns in self._p_imports:
+            f, n = Util.get_rel_import(
+                i_str=ns, ns=self._p_namespace
+            )
+            lst.append([f, n])
+        self._cache[key] = lst
+        return self._cache[key]
+
+    def _get_from_imports_typing(self) -> List[List[str]]:
+        key = '_get_from_imports_typing'
+        if key in self._cache:
+            return self._cache[key]
+        lst = []
+        for ns in self._p_imports_typing:
+            f, n = Util.get_rel_import(
+                i_str=ns, ns=self._p_namespace
+            )
+            lst.append([f, n])
+        self._cache[key] = lst
+        return self._cache[key]
+    # endregion get Imports
+    
     def _set_template_data(self):
-        def get_from_imports() -> List[List[str]]:
-            lst = []
-            for ns in self._p_imports:
-                f, n = Util.get_rel_import(
-                    i_str=ns, ns=self._p_namespace
-                )
-                lst.append([f, n])
-            return lst
-
-        def get_from_imports_typing() -> List[List[str]]:
-            lst = []
-            for ns in self._p_imports_typing:
-                f, n = Util.get_rel_import(
-                    i_str=ns, ns=self._p_namespace
-                )
-                lst.append([f, n])
-            return lst
-
         self._template = self._template.replace('{name}', self._p_name)
         self._template = self._template.replace('{ns}', str(self._p_namespace))
         self._template = self._template.replace('{link}', self._p_url)
@@ -1393,11 +1504,11 @@ class InterfaceWriter(WriteBase):
             '{imports}', "[]")
         self._template = self._template.replace(
             '{from_imports}',
-            Util.get_formated_dict_list_str(get_from_imports())
+            Util.get_formated_dict_list_str(self._get_from_imports())
         )
         self._template = self._template.replace(
             '{from_imports_typing}',
-            Util.get_formated_dict_list_str(get_from_imports_typing())
+            Util.get_formated_dict_list_str(self._get_from_imports_typing())
         )
         if len(self._p_desc) > 0:
             desc = Util.get_formated_dict_list_str(self._p_desc, indent=4)
@@ -1422,7 +1533,7 @@ class InterfaceWriter(WriteBase):
         self._p_desc = data['desc']
         self._p_url = data['url']
         self._p_data = self._parser.get_formated_data()
-        
+        self._validate_p_info()
         _imports = data['imports']
         self._p_imports.update(_imports)
         self._p_imports.update(data['extends'])
@@ -1434,10 +1545,25 @@ class InterfaceWriter(WriteBase):
         if self._write_file or self._write_json:
             self._file_full_path = self._get_uno_obj_path()
     
+    def _validate_p_info(self):
+        try:
+            if not self._p_name:
+                raise Exception(
+                    "InterfaceWriter: validation fail: name is an empty string.")
+            if not self._p_url:
+                raise Exception(
+                    "InterfaceWriter: validation fail: url is an empty string.")
+            if not self._p_namespace:
+                raise Exception(
+                    "InterfaceWriter: validation fail: namespace is an empty string.")
+        except Exception as e:
+            logger.error(e)
+            raise e
+    
     def _get_uno_obj_path(self) -> Path:
         if not self._p_name:
             try:
-                raise Exception("InterfaceWriter._get_uno_obj_path() Parser provided a name the is an empty string.")
+                raise Exception("InterfaceWriter._get_uno_obj_path() Parser provided a name that is an empty string.")
             except Exception as e:
                 logger.error(e, exc_info=True)
                 raise e
@@ -1467,23 +1593,15 @@ class InterfaceWriter(WriteBase):
 
 
 def _main():
-    os.system('cls' if os.name == 'nt' else 'clear')
-    # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XFont.html'
-    # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1media_1_1XPlayerWindow.html'
-    # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XAnimatedImages.html'
-
-    # interfaces
-    # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1beans_1_1XPropertyBag.html'
-    
-    url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1accessibility_1_1XAccessibleEditableText.html'
-    p = ParserInterface(url=url)
-    pprint.pprint(p.get_info())
-    print(p.get_formated_data())
+    # os.system('cls' if os.name == 'nt' else 'clear')
+    url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1accessibility_1_1XAccessibleTextAttributes.html'
+    # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1accessibility_1_1XAccessibleText.html'
+    sys.argv.extend(['-v', '-n', '-u', url])
+    main()
 
 def main():
-    os.system('cls' if os.name == 'nt' else 'clear')
-    logger.info('Executing command: %s', sys.argv[1:])
-    parser = argparse.ArgumentParser(description='enum')
+    # region Parser
+    parser = argparse.ArgumentParser(description='interface')
     parser.add_argument(
         '-u', '--url',
         help='Source Url',
@@ -1494,6 +1612,12 @@ def main():
         help='No sorting of results',
         action='store_false',
         dest='sort',
+        default=True)
+    parser.add_argument(
+        '-p', '--no-print-clear',
+        help='No clearing of terminal when output to terminal.',
+        action='store_false',
+        dest='no_print_clear',
         default=True)
     parser.add_argument(
         '-c', '--clipboard',
@@ -1525,8 +1649,24 @@ def main():
         action='store_true',
         dest='write_json',
         default=False)
-
+    # region Dummy Args for Logging
+    parser.add_argument(
+        '-v', '--verbose',
+        help='verbose logging',
+        action='store_true',
+        dest='verbose',
+        default=False)
+    parser.add_argument(
+        '-L', '--log-file',
+        help='Log file to use',
+        type=str,
+        required=False)
+    # endregion Dummy Args for Logging
     args = parser.parse_args()
+    # endregion Parser
+    if not args.no_print_clear:
+        os.system('cls' if os.name == 'nt' else 'clear')
+    logger.info('Executing command: %s', sys.argv[1:])
     logger.info('Parsing Url %s' % args.url)
     
     p = ParserInterface(url=args.url, sort=args.sort)
@@ -1536,7 +1676,8 @@ def main():
         print_json=args.print_json,
         copy_clipboard=args.clipboard,
         write_template=args.write_template,
-        write_json=args.write_json
+        write_json=args.write_json,
+        clear_on_print=(not args.no_print_clear)
         )
     if args.print_template is False and args.print_json is False:
         print('')

@@ -126,7 +126,7 @@ class Util:
         return py_name_pattern.sub(sub, input)
     
     @staticmethod
-    def get_clean_ns(input: str, sub: str='') -> str:
+    def get_clean_ns(input: str, sub: str='', ltrim=False) -> str:
         """
         Removes all char from a string except for ``a-zA-Z0-9_.``
 
@@ -134,12 +134,15 @@ class Util:
             input (str): string to clean
             sub (str, optional): replacement string for non matching characters.
                 Default is empty string.
+            ltrim (bool, optonal): if ``True`` leading ``.`` are removed. Default ``False``
 
         Returns:
             str: input with any other chars replaced
         """
         # https://stackoverflow.com/questions/1276764/stripping-everything-but-alphanumeric-chars-from-a-string-in-python
-        return py_ns_pattern.sub(sub, input)
+        if ltrim is False:
+            return py_ns_pattern.sub(sub, input)
+        return py_ns_pattern.sub(sub, input).lstrip('.')
 
     """Static Class or helper methods"""
     @staticmethod
@@ -396,9 +399,9 @@ class Util:
             else:
                 wrapper = type_pre + 'List'
             cb_data['wdata']['wrapper'] = wrapper
-            _type = parts[1].replace('>', '').strip().lstrip('.')
-            cb_data['long_type'] = Util.get_clean_ns(_type)
-            _type = Util.get_clean_name(Util.get_last_part(_type))
+            _type = Util.get_clean_ns(input=parts[1],ltrim=True)
+            cb_data['long_type'] = _type
+            _type = Util.get_last_part(_type)
             map_type = TYPE_MAP.get(_type, None)
             is_inner_py_type = True
             if not map_type:
@@ -414,7 +417,7 @@ class Util:
             if cb_data['returns']:
                 return cb_data['returns']
             if is_inner_py_type is False and arg_quote is True:
-                return f"'{wrapper}[{map_type}']"
+                return f"'{wrapper}[{map_type}]'"
             return f"{wrapper}[{map_type}]"
         cb_data['long_type'] = Util.get_clean_ns(_u_type)
         _u_type_clean = Util.get_clean_name(Util.get_last_part(_u_type))
