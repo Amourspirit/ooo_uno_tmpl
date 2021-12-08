@@ -387,18 +387,11 @@ class SdkMethodData:
                 # no params
                 self._p_name = g[4]
                 result = Util.get_py_type(g[3], cb=cb)
-                if is_py_type:
-                    self._p_return = result
-                else:
-                    self._p_return = f"'{result}'"
+                self._p_return = result
             else:
                 self._p_name = g[1]
                 result = Util.get_py_type(g[0], cb=cb)
-                if is_py_type:
-                    self._p_return = result
-                else:
-                    self._p_return = f"'{result}'"
-                
+                self._p_return = result
                 self._process_args(g[2])
         return matches
 
@@ -437,8 +430,6 @@ class SdkMethodData:
             g = matches.groups()
             _dir = 'in' if g[0] is None else g[0].lower()
             stype = Util.get_py_type(g[1], cb=cb)
-            if not is_py_type:
-                stype = f"'{stype}'"
             info = ParamInfo(
                 direction=_dir, name=g[2], type=stype)
             self._p_args.append(info)
@@ -510,10 +501,7 @@ class SdkProperyData:
             text = re.sub(re_raises_pattern, '', text)
         parts = text.split(maxsplit=2)
         result = Util.get_py_type(parts[0], cb=cb)
-        if is_py_type:
-            self._p_return = result
-        else:
-            self._p_return = f"'{result}'"
+        self._p_return = result
         self._p_name = Util.get_clean_name(parts[1])
 
 
