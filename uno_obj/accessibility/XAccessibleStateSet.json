@@ -1,0 +1,71 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.0",
+  "name": "XAccessibleStateSet",
+  "type": "interface",
+  "namespace": "com.sun.star.accessibility",
+  "parser_args": {
+    "sort": true
+  },
+  "writer_args": {},
+  "data": {
+    "name": "XAccessibleStateSet",
+    "imports": [],
+    "namespace": "com.sun.star.accessibility",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "Implement this interface to represent a set of states.",
+      "",
+      "The interface XAccessibleStateSet represents a set of states of an accessible object. It can hold any combination of states defined by the constants collection AccessibleStateType.",
+      "",
+      "**See Also**",
+      "",
+      "    OOo 1.1.2"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1accessibility_1_1XAccessibleStateSet.html",
+    "items": {
+      "methods": [
+        {
+          "name": "contains",
+          "returns": "bool",
+          "desc": [
+            "Checks if the given state is a member of the state set of the called object."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "containsAll",
+          "returns": "bool",
+          "desc": [
+            "Checks if all of the given states are in the state set of the called object."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getStates",
+          "returns": "typing.List[int]",
+          "desc": [
+            "Get all currently set states as a sequence of state ids.",
+            "",
+            "The purpose of this function is to reduce the communication between accessibility objects and AT. Without this function an AT-Tool had to call contains() for every state type. Now a single call is sufficient."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "isEmpty",
+          "returns": "bool",
+          "desc": [
+            "Checks whether the current state set is empty."
+          ],
+          "raises": [],
+          "args": []
+        }
+      ]
+    }
+  }
+}

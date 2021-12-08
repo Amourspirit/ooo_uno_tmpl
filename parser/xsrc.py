@@ -228,7 +228,7 @@ class SdkComponentLines:
         lines  = input.splitlines()
         new_lines = list[str]()
         for line in lines:
-            s = line.strip()
+            s = line.strip().lstrip(':')
             m = re_comment_start_pattern.match(s)
             if m:
                 logger.debug(
@@ -346,21 +346,15 @@ class SdkMethodData:
     def _set_data(self):
         is_py_type = True
 
-        def cb(data: dict):
-            nonlocal is_py_type
-            is_py_type = data['is_py_type']
-            if not is_py_type:
-                self._imports.add(data['type'])
-            if data['is_typing']:
-                self._requires_typing = True
         text = self._param
+        logger.debug('SdkMethodData._set_data() Processing: %s', text)
         matches = re.search(re_interface_pattern, text)
         if matches:
-            logger.debug("SdkMethodData data matched interface. Raising error")
+            logger.debug("SdkMethodData._set_data() data matched interface. Raising error")
             raise MethodInvalidError(f"'{text}' matches interface")
         matches = re.search(re_property_pattern, text)
         if matches:
-            logger.debug("SdkMethodData data matched property. Raising error")
+            logger.debug("SdkMethodData._set_data() data matched property. Raising error")
             raise MethodInvalidError(f"'{text}' matches property")
 
         seq_regex = r"([a-zA-Z]*)< *([a-zA-A0-9]*) *>"
@@ -368,14 +362,23 @@ class SdkMethodData:
         if m:
             # replace sequence< string > with sequence<string>
             # this is necessary to prevent following steps from parsing incorectly
-            text = re.sub(seq_regex, f'{m.group(1)}<{m.group(2)}>', text, 1)
+            replacement = f'{m.group(1)}<{m.group(2)}>'
+            text = re.sub(seq_regex, replacement, text, 1)
+            logger.debug("SdkMethodData._set_data() replaced < spaces >. Now: %s", text)
         # check if method include raises...
         matches = re.search(re_raises_pattern, text)
         if matches:
+            logger.debug('SdkMethodData._set_data() found raises for method.')
             g = matches.groups()
             self._process_raises(g[0])
             # remove raises text section
             text = re.sub(re_raises_pattern, '', text)
+            logger.debug('SdkMethodData._set_data() remove raise match: %s', text)
+        else:
+            logger.debug('SdkMethodData._set_data() did not find raises for method.')
+        
+        # imports are handled in _get_py_type that is called in this method and in _process_args
+        # self._process_imports(text)
         matches = re.search(re_method_pattern, text)
         # when there are parameters
         #   group 0 return type eg: com.sun.star.awt.Rectangle
@@ -394,25 +397,53 @@ class SdkMethodData:
         #     if len(groups)
         if matches:
             g = matches.groups()
+            logger.debug("SdkMethodData._set_data() Matches for method Params: %s", str(g))
             if g[0] is None:
                 # no params
                 self._p_name = g[4]
-                result = Util.get_py_type(g[3], cb=cb)
+                # result = Util.get_py_type(g[3], cb=cb)
+                result = self._get_py_type(g[3])
                 self._p_return = result
             else:
                 self._p_name = g[1]
-                result = Util.get_py_type(g[0], cb=cb)
+                # result = Util.get_py_type(g[0], cb=cb)
+                result = self._get_py_type(g[0])
                 self._p_return = result
                 self._process_args(g[2])
+        else:
+            logger.debug(
+                "SdkMethodData._set_data() No method found in: %s", text)
         return matches
 
+    def _process_imports(self, text: str):
+        regex = r"(com.sun[\w.]+)"
+        matches = re.finditer(regex, text)
+        for matchNum, match in enumerate(matches, start=1):
+            logger.debug("SdkMethodData._process_imports() Match {matchNum} was found at {start}-{end}: {match}".format(
+                matchNum=matchNum, start=match.start(), end=match.end(), match=match.group()))
+            for groupNum in range(0, len(match.groups())):
+                groupNum = groupNum + 1
+                ns = match.group(groupNum)
+                logger.debug("SdkMethodData._process_imports() Group {groupNum} found at {start}-{end}: {group}".format(groupNum=groupNum,
+                    start=match.start(groupNum), end=match.end(groupNum), group=ns))
+                self._imports.add(match.group(groupNum))
+                logger.debug("SdkMethodData._process_imports() added import: %s", ns)
+                self._requires_typing = True
+                
     def _process_raises(self, text: str):
         # raises( com::sun::star::beans::UnknownPropertyException, com::sun::star::lang::IllegalArgumentException, com::sun::star::lang::WrappedTargetException )
         s = text.replace('(', '|').replace(')', '|').split('|')
         if len(s) <= 1:
+            logger.debug('SdkMethodData._process_raises() Invalid raises text: %s', text)
             return
-        ex = s[1].strip().replace('::', ".").replace(' ', '').replace('.com.', 'com.').split(',')
-        self._p_raises.extend(ex)
+        ex_parts = s[1].replace("::",".").split(',')
+        new_parts = list[str]()
+        for part in ex_parts:
+            new_parts.append(Util.get_clean_ns(input=part, ltrim=True))
+        # ex = s[1].strip().replace('::', ".").replace(' ', '').replace('.com.', 'com.').split(',')
+        self._p_raises.extend(new_parts)
+        if logger.level <= logging.DEBUG:
+            logger.debug('SdkMethodData._process_raises() added raise: %s', str(new_parts))
 
     def _process_interface(self, text: str):
         # interface com::sun::star::beans::XPropertySet
@@ -420,29 +451,58 @@ class SdkMethodData:
             '.', 1)  # 'com.sun.star.beans', 'XPropertySet'
         return
 
-    def _process_args(self, args: str):
-        is_py_type = True
+    def _get_py_type(self, in_type: str) -> str:
+        cb_data = None
 
         def cb(data: dict):
-            nonlocal is_py_type
-            is_py_type = data['is_py_type']
-            if not is_py_type:
-                self._imports.add(data['type'])
-            if data['is_typing']:
+            nonlocal cb_data
+            cb_data = data
+
+        n_type = TYPE_MAP.get(in_type, None)
+        if n_type:
+            logger.debug(
+                "SdkMethodData._get_py_type() Found python type: %s", n_type)
+            return n_type
+        n_type = Util.get_py_type(uno_type=in_type, cb=cb)
+        is_wrapper = cb_data['is_wrapper']
+        is_py = cb_data['is_py_type']
+        _result = n_type
+        if is_wrapper:
+            logger.debug(
+                "SdkMethodData._get_py_type() wrapper arg %s", in_type)
+            wdata: dict = cb_data['wdata']
+            if not wdata['py_type_inner']:
+                logger.debug(
+                    "SdkMethodData._get_py_type() wrapper inner requires typing arg %s", in_type)
                 self._requires_typing = True
-        logger.debug("SdkMethodData._process_args() Processing args: %s", args)
-        a = args.replace(', ', ',').strip()
+        else:
+            if is_py is False:
+                logger.debug(
+                    "SdkMethodData._get_py_type() requires typing arg %s", in_type)
+
+                self._requires_typing = True
+                self._imports.add(cb_data['long_type'])
+                logger.debug(
+                    "SdkMethodData._get_py_type() added import %s", cb_data['long_type'])
+        return _result
+
+    def _process_args(self, args: str):      
+        a = args.replace(' ', '').strip()
+        logger.debug('SdkMethodData._process_args() parsing args: %s', a)
         arg_lst = a.split(',')
         for arg in arg_lst:
-            is_py_type = True
             matches = re.search(re_args_pattern, arg)
             if not matches:
                 continue
+            logger.debug('SdkMethodData_process_args() parsing arg: %s', arg)
             g = matches.groups()
             _dir = 'in' if g[0] is None else g[0].lower()
-            stype = Util.get_py_type(g[1], cb=cb)
+            stype = self._get_py_type(g[1])
             info = ParamInfo(
                 direction=_dir, name=g[2], type=stype)
+            logger.debug(
+                'SdkMethodData_process_args() ParamInfo DIRECTION: %s, NAME: %s, TYPE: %s'
+                , arg)
             self._p_args.append(info)
 
     # region Properties
@@ -760,7 +820,8 @@ class SdkImports:
                 logger.debug(
                     "SdkImports.get_obj() adding Import: '%s'", s)
                 self._imports.add(s)
-
+            else:
+                logger.debug("SdkImports.get_obj() No Match")
         return self._imports
 
     def _process_match(self, match: str):
@@ -1148,7 +1209,7 @@ class ApiInfo:
 # region Parse
 class ParserInterface(ParserBase):
 
-
+    # region Constructor
     @RequireArgs('url', ftype=DecFuncEnum.METHOD)
     @RuleCheckAllKw(arg_info={"url": 0, "sort": 1, "replace_dual_colon": 1},
                     rules=[rules.RuleStrNotNullEmptyWs, rules.RuleBool],
@@ -1164,6 +1225,7 @@ class ParserInterface(ParserBase):
         self._imports: Set[str] = set()
         self._formated_data = None
         self._data_items = None
+    # endregion Constructor
 
     def get_dict_data(self) -> dict:
         info = self.get_info()
@@ -1341,6 +1403,7 @@ class InterfaceWriter(WriteBase):
         self._p_url: str = None
         self._p_requires_typing = False
         self._path_dir = Path(os.path.dirname(__file__))
+        self._cache: Dict[str, object] = {}
         _path = Path(self._path_dir, 'template', 'interface.tmpl')
         try:
             if not _path.exists():
@@ -1384,6 +1447,8 @@ class InterfaceWriter(WriteBase):
             "name": p_dict['name'],
             "type": "interface",
             "namespace": p_dict['namespace'],
+            "from_imports": self._get_from_imports(),
+            "from_imports_typing": self._get_from_imports_typing(),
             "parser_args": self._parser.get_parser_args(),
             "writer_args": {},
             "data": p_dict
@@ -1397,25 +1462,35 @@ class InterfaceWriter(WriteBase):
             contents = f.read()
         return contents
 
+    # region get Imports
+    def _get_from_imports(self) -> List[List[str]]:
+        key = '_get_from_imports'
+        if key in self._cache:
+            return self._cache[key]
+        lst = []
+        for ns in self._p_imports:
+            f, n = Util.get_rel_import(
+                i_str=ns, ns=self._p_namespace
+            )
+            lst.append([f, n])
+        self._cache[key] = lst
+        return self._cache[key]
+
+    def _get_from_imports_typing(self) -> List[List[str]]:
+        key = '_get_from_imports_typing'
+        if key in self._cache:
+            return self._cache[key]
+        lst = []
+        for ns in self._p_imports_typing:
+            f, n = Util.get_rel_import(
+                i_str=ns, ns=self._p_namespace
+            )
+            lst.append([f, n])
+        self._cache[key] = lst
+        return self._cache[key]
+    # endregion get Imports
+    
     def _set_template_data(self):
-        def get_from_imports() -> List[List[str]]:
-            lst = []
-            for ns in self._p_imports:
-                f, n = Util.get_rel_import(
-                    i_str=ns, ns=self._p_namespace
-                )
-                lst.append([f, n])
-            return lst
-
-        def get_from_imports_typing() -> List[List[str]]:
-            lst = []
-            for ns in self._p_imports_typing:
-                f, n = Util.get_rel_import(
-                    i_str=ns, ns=self._p_namespace
-                )
-                lst.append([f, n])
-            return lst
-
         self._template = self._template.replace('{name}', self._p_name)
         self._template = self._template.replace('{ns}', str(self._p_namespace))
         self._template = self._template.replace('{link}', self._p_url)
@@ -1427,11 +1502,11 @@ class InterfaceWriter(WriteBase):
             '{imports}', "[]")
         self._template = self._template.replace(
             '{from_imports}',
-            Util.get_formated_dict_list_str(get_from_imports())
+            Util.get_formated_dict_list_str(self._get_from_imports())
         )
         self._template = self._template.replace(
             '{from_imports_typing}',
-            Util.get_formated_dict_list_str(get_from_imports_typing())
+            Util.get_formated_dict_list_str(self._get_from_imports_typing())
         )
         if len(self._p_desc) > 0:
             desc = Util.get_formated_dict_list_str(self._p_desc, indent=4)
@@ -1517,7 +1592,7 @@ class InterfaceWriter(WriteBase):
 
 def _main():
     # os.system('cls' if os.name == 'nt' else 'clear')
-    url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1accessibility_1_1XAccessibleExtendedAttributes.html'
+    url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1accessibility_1_1XAccessibleText.html'
     # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1accessibility_1_1XAccessibleText.html'
     sys.argv.extend(['-v', '-n', '-u', url])
     main()
