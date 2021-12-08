@@ -5,7 +5,7 @@ import re
 from pathlib import Path
 from typing import Dict
 # from logging.handlers import TimedRotatingFileHandler
-print("sys argv:", sys.argv)
+
 FORMATTER = logging.Formatter(
     "%(asctime)s — %(name)s — %(levelname)s — %(message)s")
 LOG_FILE = 'app.log'

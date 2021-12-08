@@ -35,6 +35,7 @@ re_raises_pattern = re.compile(r"\s*(raises\s*\(.*\))")
 
 re_interface_pattern = re.compile(r"interface\s*([a-zA-Z0-9.]*)\s*;")
 re_property_pattern = re.compile(r"(?:\[attribute\])(?:[ ]+)([a-zA-Z0-9. {}()]*);")
+re_comment_start_pattern = re.compile(r"(?:(\/\*)|(?:\*)\s)")
 # endregion SDK API Reference
 
 
@@ -224,7 +225,17 @@ class SdkComponentLines:
             return ''
         # methods may be split across multiple lines.
         # start by collapsing all lines into a single line
-        single_line = " ".join(input.splitlines()).strip()
+        lines  = input.splitlines()
+        new_lines = list[str]()
+        for line in lines:
+            s = line.strip()
+            m = re_comment_start_pattern.match(s)
+            if m:
+                logger.debug(
+                    'SdkComponentLines: Skipping comment line: %s', line)
+                continue
+            new_lines.append(s)
+        single_line = " ".join(new_lines)
         # logger.debug('single Line\n%s', single_line)
         # bit of a hack here but best fix I can find so far
         # fixes parsing issue when interface such as:
@@ -1017,13 +1028,16 @@ class ApiSdkLink:
         self._soup = soup
 
     def get_obj(self):
-        a = self._soup.soup.select_one("body > div.contents > ul > li > a")
-        url = self._soup.url
-        parts = url.rsplit('/', 1)
-        href = parts[0] + '/' + a['href']
-        logger.debug("ApiSdkLink.get_obj() Link: %s", href)
-        return href
-
+        try:
+            a = self._soup.soup.select_one("body > div.contents > ul > li > a")
+            url = self._soup.url
+            parts = url.rsplit('/', 1)
+            href = parts[0] + '/' + a['href']
+            logger.debug("ApiSdkLink.get_obj() Link: %s", href)
+            return href
+        except Exception as e:
+            logger.error("ApiSdk Failed to get Link: Are you sure you inputing correct url?")
+            raise e
     @property
     def soup(self) -> SoupObj:
         """Gets SoupObj instance for this instance"""
@@ -1503,7 +1517,7 @@ class InterfaceWriter(WriteBase):
 
 def _main():
     # os.system('cls' if os.name == 'nt' else 'clear')
-    url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1accessibility_1_1XAccessibleHyperlink.html'
+    url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1accessibility_1_1XAccessibleExtendedAttributes.html'
     # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1accessibility_1_1XAccessibleText.html'
     sys.argv.extend(['-v', '-n', '-u', url])
     main()

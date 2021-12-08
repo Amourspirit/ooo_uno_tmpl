@@ -414,7 +414,7 @@ class Util:
             if cb_data['returns']:
                 return cb_data['returns']
             if is_inner_py_type is False and arg_quote is True:
-                return f"'{wrapper}[{map_type}']"
+                return f"'{wrapper}[{map_type}]'"
             return f"{wrapper}[{map_type}]"
         cb_data['long_type'] = Util.get_clean_ns(_u_type)
         _u_type_clean = Util.get_clean_name(Util.get_last_part(_u_type))
