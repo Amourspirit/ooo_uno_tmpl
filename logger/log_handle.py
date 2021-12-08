@@ -3,19 +3,23 @@ import logging
 import sys
 import re
 from pathlib import Path
-from typing import Dict
+from typing import Union
 # from logging.handlers import TimedRotatingFileHandler
 
 FORMATTER = logging.Formatter(
     "%(asctime)s — %(name)s — %(levelname)s — %(message)s")
 LOG_FILE = 'app.log'
 LOG_LEVEL = logging.INFO
-
+LOG_FILE_HANDLER = None
+"""
+This is the last file handler created using ``get_file_handler()`` method
+"""
+    
 def _parse_log_options():
     global LOG_FILE, LOG_LEVEL
     if len(sys.argv) <= 1:
-        LOG_LEVEL = logging.DEBUG
-        LOG_FILE = Path(__file__).parent.parent / 'debug.log'
+        LOG_LEVEL = logging.INFO
+        LOG_FILE = Path(__file__).parent.parent / 'app.log'
         return
 
     args_str = " ".join(sys.argv[1:])
@@ -59,22 +63,33 @@ def get_console_handler():
     return console_handler
 
 
-def get_file_handler():
+def get_file_handler(log_file: Union[str, Path, None] = None):
     """
-    Gets a file handler for usage with logger
+    Gets a file handler for usage with logger.
+    The file handler created in this method will be stored in LOG_FILE_HANDLER.
 
-    Raises:
-        ValueError: If ``globals.LOG_PATH`` is not set.
+    Arguments:
+        log_file (StrPath, optional): name of file for the handler.
+        Default is the value of global var ``LOG_FILE``
 
     Returns:
-        TimedRotatingFileHandler: Handler that rotates log every Monday.
+        FileHandler: File Handler
     """
     # https://docs.python.org/3/library/logging.handlers.html#timedrotatingfilehandler
     # W0 rotate every monday.
     # file_handler = TimedRotatingFileHandler(LOG_FILE, when='midnight')
-    file_handler = logging.FileHandler(LOG_FILE)
-    file_handler.setFormatter(FORMATTER)
-    return file_handler
+    global LOG_FILE_HANDLER
+    if not log_file:
+        file_handler = logging.FileHandler(LOG_FILE)
+        file_handler.setFormatter(FORMATTER)
+    else:
+        p_log: Path = log_file
+        if isinstance(log_file, str):
+            p_log = Path(p_log)
+        file_handler = logging.FileHandler(p_log)
+        file_handler.setFormatter(FORMATTER)
+    LOG_FILE_HANDLER = file_handler
+    return LOG_FILE_HANDLER
 
 
 def get_logger(logger_name):
