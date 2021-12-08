@@ -399,9 +399,9 @@ class Util:
             else:
                 wrapper = type_pre + 'List'
             cb_data['wdata']['wrapper'] = wrapper
-            _type = parts[1].replace('>', '').strip().lstrip('.')
-            cb_data['long_type'] = Util.get_clean_ns(_type)
-            _type = Util.get_clean_name(Util.get_last_part(_type))
+            _type = Util.get_clean_ns(input=parts[1],ltrim=True)
+            cb_data['long_type'] = _type
+            _type = Util.get_last_part(_type)
             map_type = TYPE_MAP.get(_type, None)
             is_inner_py_type = True
             if not map_type:

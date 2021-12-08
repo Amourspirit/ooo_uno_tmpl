@@ -468,18 +468,20 @@ class SdkMethodData:
         is_py = cb_data['is_py_type']
         _result = n_type
         if is_wrapper:
-            logger.debug(
-                "SdkMethodData._get_py_type() wrapper arg %s", in_type)
+            self._requires_typing = True
+            logger.debug("SdkMethodData._get_py_type() wrapper arg %s", in_type)
+            logger.debug("SdkMethodData._get_py_type() wrapper arg Typing is Required.")
             wdata: dict = cb_data['wdata']
             if not wdata['py_type_inner']:
                 logger.debug(
                     "SdkMethodData._get_py_type() wrapper inner requires typing arg %s", in_type)
-                self._requires_typing = True
+                self._imports.add(cb_data['long_type'])
+                logger.debug(
+                    "SdkMethodData._get_py_type() added import %s", cb_data['long_type'])
         else:
             if is_py is False:
                 logger.debug(
                     "SdkMethodData._get_py_type() requires typing arg %s", in_type)
-
                 self._requires_typing = True
                 self._imports.add(cb_data['long_type'])
                 logger.debug(
@@ -1592,7 +1594,7 @@ class InterfaceWriter(WriteBase):
 
 def _main():
     # os.system('cls' if os.name == 'nt' else 'clear')
-    url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1accessibility_1_1XAccessibleText.html'
+    url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1accessibility_1_1XAccessibleTextAttributes.html'
     # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1accessibility_1_1XAccessibleText.html'
     sys.argv.extend(['-v', '-n', '-u', url])
     main()
