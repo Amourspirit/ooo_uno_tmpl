@@ -68,9 +68,26 @@ class BaseTpml(Template):
             sep (str, optional): string used to split. Defaults to ``.``
 
         Returns:
-            str: [description]
+            str: last part of input
         """
         if not input:
             return ''
         _parts = input.rsplit(sep, 1)
         return _parts[0] if len(_parts) == 1 else _parts[1]
+
+    def convert_lst_last(self, lst: List[str], sep='.') -> List[str]:
+        """
+        Converts a list of Long names such as ["com.sun.star.uno.XInterface"]
+        into list of last part such as ["XInterface"]
+
+        Args:
+            lst (List[str]): Input list
+            sep (str, optional): string used to split. Defaults to ``.``
+
+        Returns:
+            List[str]: result list
+        """
+        result =[]
+        for itm in lst:
+            result.append(self.get_last_part(input=itm, sep=sep))
+        return result

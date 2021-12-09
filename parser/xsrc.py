@@ -1440,15 +1440,17 @@ class InterfaceWriter(WriteBase):
     def _get_json(self) -> str:
         if not self._json_str is None:
             return self._json_str
-        p_dict = self._parser.get_dict_data()
+        p_dict = {}
+        p_dict['from_imports'] = self._get_from_imports()
+        p_dict['from_imports_typing'] = self._get_from_imports_typing(),
+        p_dict.update(self._parser.get_dict_data())
+        
         json_dict = {
             "id": JSON_ID,
             "version": __version__,
             "name": p_dict['name'],
             "type": "interface",
             "namespace": p_dict['namespace'],
-            "from_imports": self._get_from_imports(),
-            "from_imports_typing": self._get_from_imports_typing(),
             "parser_args": self._parser.get_parser_args(),
             "writer_args": {},
             "data": p_dict
@@ -1485,7 +1487,8 @@ class InterfaceWriter(WriteBase):
             f, n = Util.get_rel_import(
                 i_str=ns, ns=self._p_namespace
             )
-            lst.append([f, n])
+            lst.append(f)
+            lst.append(n)
         self._cache[key] = lst
         return self._cache[key]
     # endregion get Imports
