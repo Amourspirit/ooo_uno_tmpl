@@ -14,12 +14,11 @@ from pathlib import Path
 from typing import Iterable, List, Tuple, Union
 # this is for VS code debuging
 sys.path.insert(0, str(Path(__file__).parent.parent))
-print(sys.path)
+# print(sys.path)
 # this is for command line
 # sys.path.insert(0, os.path.abspath('..'))
 
-from logger.log_handle import get_logger
-logger = get_logger(__name__)
+logger = None
 
 #  \W = [^a-zA-Z0-9_]
 py_name_pattern = re.compile('[\W_]+')

@@ -2,12 +2,12 @@
 import os
 import sys
 import argparse
+import base
 from typing import Dict, List
 from bs4.element import ResultSet, Tag
 from kwhelp.decorator import DecFuncEnum, RuleCheckAllKw, RequireArgs, TypeCheckKw
 from kwhelp import rules
 from collections import namedtuple
-from base import TagsStrObj, Util, WriteBase, ParserBase, SoupObj, UrlObj, BlockObj
 from pathlib import Path
 import textwrap
 import xerox # requires xclip - sudo apt-get install xclip
@@ -17,13 +17,15 @@ from parser import __version__, JSON_ID
 import pprint
 
 logger = get_logger(Path(__file__).stem)
+base.logger = logger
 
 EnumDataItem = namedtuple(
     'EnumDataItem',
     ['name', 'value', 'desc']
 )
 
-class EnumUrl(UrlObj):
+
+class EnumUrl(base.UrlObj):
     """Gets Url data for enum"""
     def _get_ns(self) -> List[str]:
         # UrlObj strips off the last part of ns
@@ -42,11 +44,13 @@ class EnumUrl(UrlObj):
             logger.info('EnumUrl._get_ns() returning empty list.')
         return result
 
-class EnumBlock(BlockObj):
+
+class EnumBlock(base.BlockObj):
     """
     Get Enum Block. The block contains all the details of the enum
     """
-    def __init__(self, soup:SoupObj):
+
+    def __init__(self, soup: base.SoupObj):
         super().__init__(soup=soup)
         self._obj_data = None
     
@@ -116,7 +120,7 @@ class EnumDesc:
         _block_obj = self._block.get_obj()
         tag = _block_obj.find(self._el, class_=self._cls)
         lines_found: ResultSet = tag.select(f'{self._el}.{self._cls} > p')
-        p_obj = TagsStrObj(tags=lines_found)
+        p_obj = base.TagsStrObj(tags=lines_found)
         desc = p_obj.get_data()
         if not desc:
             e_obj = EnumName(block=self._block)
@@ -165,13 +169,14 @@ class EnumItems:
         tag = row.find('td', class_='fieldname')
         name:str = tag.text.strip()
         p_lines = row.select('td.fielddoc > p')
-        t_obj = TagsStrObj(tags=p_lines)
+        t_obj = base.TagsStrObj(tags=p_lines)
         di = EnumDataItem(name=name,
                           value=name,
                           desc=t_obj.get_lines())
         return di
 
-class ParserEnum(ParserBase):
+
+class ParserEnum(base.ParserBase):
     # region init
     @RequireArgs('url', ftype=DecFuncEnum.METHOD)
     @RuleCheckAllKw(arg_info={"url": 0, "sort": 1, "replace_dual_colon": 1},
@@ -181,7 +186,7 @@ class ParserEnum(ParserBase):
         super().__init__(**kwargs)
         self._data = None
         self._data_formated = None
-        self._soup = SoupObj(url=self._url)
+        self._soup = base.SoupObj(url=self._url)
         self._block = None
         self._data_formated = None
         self._data_items = None
@@ -243,7 +248,7 @@ class ParserEnum(ParserBase):
         di: List[dict] = self._get_data_items()
         for itm in di:
             result[itm['name']] = itm['desc']
-        s = Util.get_formated_dict_list_str(result)
+        s = base.Util.get_formated_dict_list_str(result)
         self._data_formated =s
         return self._data_formated
         try:
@@ -284,7 +289,9 @@ class ParserEnum(ParserBase):
             raise e
         self._data_items = result
         return self._data_items
-class EnumWriter(WriteBase):
+
+
+class EnumWriter(base.WriteBase):
     # region constructor
     @TypeCheckKw(arg_info={
         "copy_clipboard": 0,
@@ -368,7 +375,7 @@ class EnumWriter(WriteBase):
             "writer_args": {},
             "data": p_dict
         }
-        str_jsn = Util.get_formated_dict_list_str(obj=json_dict, indent=2)
+        str_jsn = base.Util.get_formated_dict_list_str(obj=json_dict, indent=2)
         self._json_str = str_jsn
         return self._json_str
 
@@ -392,7 +399,7 @@ class EnumWriter(WriteBase):
         self._template = self._template.replace('{ns}', str(self._p_namespace))
         self._template = self._template.replace('{name}', self._p_name)
         self._template = self._template.replace('{link}', self._p_url)
-        str_json_desc = Util.get_formated_dict_list_str(self._p_desc)
+        str_json_desc = base.Util.get_formated_dict_list_str(self._p_desc)
         self._template = self._template.replace('{desc}', str_json_desc)
         self._template = self._template.replace('{data}', self._p_data)
 

@@ -2,13 +2,13 @@
 import os
 import sys
 import argparse
+import base
 from typing import Dict, List, NamedTuple, Set, Tuple, Union
 from bs4 import BeautifulSoup
 from bs4.element import ResultSet, SoupStrainer, Tag
 from kwhelp.decorator import DecFuncEnum, RuleCheckAllKw, TypeCheckKw
 from kwhelp import KwArg, rules
 from collections import namedtuple
-from base import UrlObj, Util, WriteBase, ParserBase, TYPE_MAP
 from pathlib import Path
 import textwrap
 import xerox # requires xclip - sudo apt-get install xclip
@@ -17,12 +17,12 @@ from logger.log_handle import get_logger
 from parser import __version__, JSON_ID
 
 logger = get_logger(Path(__file__).stem)
-
+base.logger = logger
 dataitem = namedtuple(
     'dataitem', ['name', 'datatype', 'orig_type', 'lines'])
 
 
-class Parser(ParserBase):
+class Parser(base.ParserBase):
     # region Constructor
     @RuleCheckAllKw(arg_info={"url": 0, "sort": 1, "replace_dual_colon": 1},
                     rules=[rules.RuleStrNotNullEmptyWs, rules.RuleBool],
@@ -55,7 +55,7 @@ class Parser(ParserBase):
         if len(auto) == 0:
             return results
         for name in auto:
-            results.append(Util.get_rel_import(i_str=name, ns=ns))
+            results.append(base.Util.get_rel_import(i_str=name, ns=ns))
         return results
     # endregion Data
     # region Info
@@ -81,7 +81,7 @@ class Parser(ParserBase):
             full_name = self._get_full_name(soup=soup)
             name = self._get_name(soup=soup)
             desc = self._get_desc(soup=soup)
-            ns = UrlObj(self.url)
+            ns = base.UrlObj(self.url)
             info = {
                 "name": name,
                 "fullname": full_name,
@@ -203,10 +203,10 @@ class Parser(ParserBase):
                 nonlocal cb_data
                 cb_data = data
 
-            n_type = TYPE_MAP.get(in_type, None)
+            n_type = base.TYPE_MAP.get(in_type, None)
             if n_type:
                 return n_type
-            n_type = Util.get_py_type(uno_type=in_type, cb=cb)
+            n_type = base.Util.get_py_type(uno_type=in_type, cb=cb)
             auto_import = False
             is_wrapper = cb_data['is_wrapper']
             is_py = cb_data['is_py_type']
@@ -259,7 +259,9 @@ class Parser(ParserBase):
         """Specifies auto_imports"""
         return self._auto_imports
     # endregion Properties
-class StructWriter(WriteBase):
+
+
+class StructWriter(base.WriteBase):
 
     # region Constructor
     @TypeCheckKw(arg_info={
@@ -356,7 +358,7 @@ class StructWriter(WriteBase):
             },
             "data": p_dict
         }
-        str_jsn = Util.get_formated_dict_list_str(obj=json_dict, indent=2)
+        str_jsn = base.Util.get_formated_dict_list_str(obj=json_dict, indent=2)
         self._json_str = str_jsn
         return self._json_str
 
@@ -368,7 +370,7 @@ class StructWriter(WriteBase):
         self._template = self._template.replace('{ns}', self._p_namespace)
         self._template = self._template.replace('{link}', self._p_url)
         indent = ' ' * self._indent_amt
-        str_json_desc = Util.get_formated_dict_list_str(self._p_desc)
+        str_json_desc = base.Util.get_formated_dict_list_str(self._p_desc)
         self._template = self._template.replace('{desc}', str_json_desc)
         indented = textwrap.indent(self._p_data, indent)
         self._template = self._template.replace('{data}', indented)
@@ -427,7 +429,7 @@ class StructWriter(WriteBase):
         local_ns_str = self._p_fullname.rsplit('.', 1)[0]
         for name in auto:
             
-            im = Util.get_rel_import(i_str=name, ns=local_ns_str)
+            im = base.Util.get_rel_import(i_str=name, ns=local_ns_str)
             results.append(im)
         return results
         

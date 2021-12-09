@@ -6,12 +6,12 @@ import logging
 import textwrap
 import xerox  # requires xclip - sudo apt-get install xclip
 import re
+import base
 from typing import Dict, List, Set
 from bs4 import BeautifulSoup
 from bs4.element import PageElement, ResultSet, Tag
 from kwhelp.decorator import DecFuncEnum, RuleCheckAllKw, RequireArgs, TypeCheckKw
 from kwhelp import rules
-from base import TYPE_MAP, TagsStrObj, ParserBase, SoupObj, BlockObj, UrlObj, Util, WriteBase, str_clean
 from pathlib import Path
 from logger.log_handle import get_logger, LOG_FILE_HANDLER, get_file_handler
 from parser.enm import main
@@ -21,6 +21,10 @@ DEBUGGING = False
 
 logger = get_logger(Path(__file__).stem)
 
+
+re_component_start = re.compile(r"(interface.*){", re.DOTALL)
+re_name_info_start = re.compile(r"(interface)\s*[a-zA-Z0-9]+[ :]+")
+re_name_info_name = re.compile(r"interface\s*(?P<NAME>[a-zA-Z0-9_]+)")
 # region SDK API Reference
 re_ln_pattern = re.compile(r"\A\s*(:?[0-9]*)\s*")
 # https://regex101.com/r/xAqRAU/1/
@@ -53,10 +57,10 @@ class MethodInvalidError(Exception):
 # region SDK API Reference
 
 
-class SdkCodeText(BlockObj):
+class SdkCodeText(base.BlockObj):
     """Responsible for getting code from url"""
 
-    def __init__(self, soup: SoupObj):
+    def __init__(self, soup: base.SoupObj):
         super().__init__(soup=soup)
         self._data = None
         # if DEBUGGING:
@@ -169,8 +173,8 @@ class SdkComponentStart:
         self._data = ''
         try:
             text = self._component.get_text()
-            regex = r"(interface.*){"
-            matches = re.search(regex, text, re.DOTALL)
+            # regex = r"(interface.*){"
+            matches = re_component_start.search(text)
             if matches:
                 g = matches.groups()
                 self._data = " ".join(g[0].replace("{","").rstrip().split())
@@ -238,11 +242,11 @@ class SdkComponentLines:
         # bit of a hack here but best fix I can find so far
         # fixes parsing issue when interface such as:
         # https://api.libreoffice.org/docs/idl/ref/XAnimatedImages_8idl_source.html
-        single_line = Util.encode_char(single_line, '); }')
+        single_line = base.Util.encode_char(single_line, '); }')
 
         # now split all lines by ; and put on new lines again
         new_lines = ";\n".join(single_line.split(';'))
-        return Util.decode_char(new_lines, '); }')
+        return base.Util.decode_char(new_lines, '); }')
         # return new_lines
 
     def _remove_empty(self, input: str) -> List[str]:
@@ -437,7 +441,7 @@ class SdkMethodData:
         ex_parts = s[1].replace("::",".").split(',')
         new_parts = list[str]()
         for part in ex_parts:
-            new_parts.append(Util.get_clean_ns(input=part, ltrim=True))
+            new_parts.append(base.Util.get_clean_ns(input=part, ltrim=True))
         # ex = s[1].strip().replace('::', ".").replace(' ', '').replace('.com.', 'com.').split(',')
         self._p_raises.extend(new_parts)
         if logger.level <= logging.DEBUG:
@@ -456,12 +460,12 @@ class SdkMethodData:
             nonlocal cb_data
             cb_data = data
 
-        n_type = TYPE_MAP.get(in_type, None)
+        n_type = base.TYPE_MAP.get(in_type, None)
         if n_type:
             logger.debug(
                 "SdkMethodData._get_py_type() Found python type: %s", n_type)
             return n_type
-        n_type = Util.get_py_type(uno_type=in_type, cb=cb)
+        n_type = base.Util.get_py_type(uno_type=in_type, cb=cb)
         is_wrapper = cb_data['is_wrapper']
         is_py = cb_data['is_py_type']
         _result = n_type
@@ -571,9 +575,9 @@ class SdkProperyData:
             # remove raises text section
             text = re.sub(re_raises_pattern, '', text)
         parts = text.split(maxsplit=2)
-        result = Util.get_py_type(parts[0], cb=cb)
+        result = base.Util.get_py_type(parts[0], cb=cb)
         self._p_return = result
-        self._p_name = Util.get_clean_name(parts[1])
+        self._p_name = base.Util.get_clean_name(parts[1])
 
 
     def _process_raises(self, text: str):
@@ -645,7 +649,7 @@ class SdkMethods:
     """Iterable class that iterates through Methods and returns info"""
 
     def __init__(self, url: str):
-        self._soup = SoupObj(url=url)
+        self._soup = base.SoupObj(url=url)
         self._c_text = SdkCodeText(soup=self._soup)
         self._component = SdkComponentText(c_text=self._c_text)
         self._mt = SdkComponentLines(f_text=self._component)
@@ -743,7 +747,7 @@ class SdkExtends:
             logger.debug("SdkExtends._init() ':' seperator found extends on first line.")
             s = parts[1]
             logger.debug("SdkExtends._init() Processing: '%s'", s)
-            s = Util.get_clean_ns(s).lstrip('.')
+            s = base.Util.get_clean_ns(s).lstrip('.')
             self._ex_lst.append(s)
             logger.debug("SdkExtends._init() Added Extends: '%s'", s)
 
@@ -755,7 +759,7 @@ class SdkExtends:
                 logger.debug("SdkExtends._init() Found interface Match")
                 # interface .com.sun.star.container.XContainer;
                 s = line.rsplit(maxsplit=1)[1].lstrip('.')
-                s = Util.get_clean_ns(s)
+                s = base.Util.get_clean_ns(s)
                 self._ex_lst.append(s)
                 logger.debug("SdkExtends._init() Added Extends: '%s'", s)
 
@@ -816,7 +820,7 @@ class SdkImports:
                     'SdkImports.get_obj() Found Interface Line. Groups info: %s', str(g))
                 logger.debug('SdkImports.get_obj() Found Interface Line: %s', g[0])
                 s = g[0].lstrip('.')
-                s = Util.get_clean_ns(s)
+                s = base.Util.get_clean_ns(s)
                 logger.debug(
                     "SdkImports.get_obj() adding Import: '%s'", s)
                 self._imports.add(s)
@@ -905,16 +909,16 @@ class SdkNameInfo:
         # more generic so can work with struct, interface etc
         s = self._start_info.get_obj()
         try:
-            regex_start = r"(interface)\s*[a-zA-Z0-9]+[ :]+"
+            # regex_start = r"(interface)\s*[a-zA-Z0-9]+[ :]+"
 
-            matches = re.search(regex_start, s)
+            matches = re_name_info_start.search(s)
             if matches:
                 # find the index of interface and drop anything before
                 start = matches.span(1)[0]
                 if start > 0:
                     s = s[start:]
-            regex = r"interface\s*(?P<NAME>[a-zA-Z0-9_]+)"
-            m = re.match(regex, s)
+            # regex = r"interface\s*(?P<NAME>[a-zA-Z0-9_]+)"
+            m = re_name_info_name.match(s)
             if m:
                 s = m.group('NAME')
             else:
@@ -1009,11 +1013,11 @@ class ApiMethodBlock:
         return self._blocks
 
 
-class ApiMethodBlocks(BlockObj):
+class ApiMethodBlocks(base.BlockObj):
     """Get all methods"""
 
     def __init__(self, url: str):
-        soup = SoupObj(url=url)
+        soup = base.SoupObj(url=url)
         if DEBUGGING:
             soup._soup = BeautifulSoup(get_soup_data(), 'lxml')
         super().__init__(soup=soup)
@@ -1080,12 +1084,12 @@ class ApiMethodDesc:
         info = self._block.get_obj()
         tag = info.tag_main.find(self._el, class_=self._cls)
         lines_found: ResultSet = tag.select(f'{self._el}.{self._cls} > p')
-        p_obj = TagsStrObj(tags=lines_found)
+        p_obj = base.TagsStrObj(tags=lines_found)
         return p_obj.get_lines()
 
 
 class ApiSdkLink:
-    def __init__(self, soup: SoupObj):
+    def __init__(self, soup: base.SoupObj):
         self._soup = soup
 
     def get_obj(self):
@@ -1100,7 +1104,7 @@ class ApiSdkLink:
             logger.error("ApiSdk Failed to get Link: Are you sure you inputing correct url?")
             raise e
     @property
-    def soup(self) -> SoupObj:
+    def soup(self) -> base.SoupObj:
         """Gets SoupObj instance for this instance"""
         return self._soup
 
@@ -1108,7 +1112,8 @@ class ApiSdkLink:
 
 class ApiDesc:
     """Gets the description"""
-    def __init__(self, soup:SoupObj):
+
+    def __init__(self, soup: base.SoupObj):
         self._soup = soup
         self._data = None
 
@@ -1123,7 +1128,7 @@ class ApiDesc:
             return self._data
         lines_found: ResultSet = self._soup.soup.select(
             'body > div.contents > div.textblock > p')
-        p_obj = TagsStrObj(tags=lines_found)
+        p_obj = base.TagsStrObj(tags=lines_found)
         self._data = p_obj.get_lines()
         see_obj = ApiDescSeeAlso(self._soup)
         see = see_obj.get_obj()
@@ -1134,14 +1139,14 @@ class ApiDesc:
             self._data.append(f"    {see}")
         return self._data
     @property
-    def soup(self) -> SoupObj:
+    def soup(self) -> base.SoupObj:
         """Gets soup value"""
         return self._soup
 
 class ApiDescSeeAlso:
     """Gets the description"""
 
-    def __init__(self, soup: SoupObj):
+    def __init__(self, soup: base.SoupObj):
         self._soup = soup
         self._data = None
         self._init = False
@@ -1161,11 +1166,11 @@ class ApiDescSeeAlso:
         if not tag:
             self._data = ''
             return self._data
-        self._data = str_clean(" ".join(tag.text.split()))
+        self._data = base.str_clean(" ".join(tag.text.split()))
         return self._data
     
     @property
-    def soup(self) -> SoupObj:
+    def soup(self) -> base.SoupObj:
         """Gets soup value"""
         return self._soup
 class ApiInfo:
@@ -1195,7 +1200,7 @@ class ApiInfo:
         return self._sdk_link
 
     @property
-    def soup(self) -> SoupObj:
+    def soup(self) -> base.SoupObj:
         """Gets SoupObj instance for this instance"""
         return self._mb.soup
 
@@ -1207,7 +1212,7 @@ class ApiInfo:
 
 
 # region Parse
-class ParserInterface(ParserBase):
+class ParserInterface(base.ParserBase):
 
     # region Constructor
     @RequireArgs('url', ftype=DecFuncEnum.METHOD)
@@ -1256,7 +1261,7 @@ class ParserInterface(ParserBase):
         if self._info is not None:
             return self._info
         # ns = SdkNamesSpaceInfo(self._sdk_method_info.component)
-        ns = UrlObj(self._url)
+        ns = base.UrlObj(self._url)
         start_ln = SdkComponentStart(self._sdk_method_info.component)
         ni = SdkNameInfo(start_ln)
         ex = SdkExtends(start_ln, self._sdk_method_info.component_lines)
@@ -1280,7 +1285,7 @@ class ParserInterface(ParserBase):
         if self._formated_data:
             return self._formated_data
         attribs = self._get_data_items()
-        str_lst = Util.get_formated_dict_list_str(obj=attribs, indent=4)
+        str_lst = base.Util.get_formated_dict_list_str(obj=attribs, indent=4)
         self._formated_data = str_lst
         return self._formated_data
 
@@ -1373,7 +1378,9 @@ class ParserInterface(ParserBase):
 # endregion Parse
 
 # region Writer
-class InterfaceWriter(WriteBase):
+
+
+class InterfaceWriter(base.WriteBase):
     # region Constructor
     @TypeCheckKw(arg_info={
         "write_file": 0, "write_json": 0,
@@ -1462,7 +1469,7 @@ class InterfaceWriter(WriteBase):
             "writer_args": {},
             "data": p_dict
         }
-        str_jsn = Util.get_formated_dict_list_str(obj=json_dict, indent=2)
+        str_jsn = base.Util.get_formated_dict_list_str(obj=json_dict, indent=2)
         self._json_str = str_jsn
         return self._json_str
     
@@ -1478,7 +1485,7 @@ class InterfaceWriter(WriteBase):
             return self._cache[key]
         lst = []
         for ns in self._p_imports:
-            f, n = Util.get_rel_import(
+            f, n = base.Util.get_rel_import(
                 i_str=ns, ns=self._p_namespace
             )
             lst.append([f, n])
@@ -1491,7 +1498,7 @@ class InterfaceWriter(WriteBase):
             return self._cache[key]
         lst = []
         for ns in self._p_imports_typing:
-            f, n = Util.get_rel_import(
+            f, n = base.Util.get_rel_import(
                 i_str=ns, ns=self._p_namespace
             )
             lst.append(f)
@@ -1509,19 +1516,20 @@ class InterfaceWriter(WriteBase):
         self._template = self._template.replace(
             '{requires_typing}', str(self._p_requires_typing))
         self._template = self._template.replace(
-            '{inherits}', Util.get_string_list(lines=self._p_extends))
+            '{inherits}', base.Util.get_string_list(lines=self._p_extends))
         self._template = self._template.replace(
             '{imports}', "[]")
         self._template = self._template.replace(
             '{from_imports}',
-            Util.get_formated_dict_list_str(self._get_from_imports())
+            base.Util.get_formated_dict_list_str(self._get_from_imports())
         )
         self._template = self._template.replace(
             '{from_imports_typing}',
-            Util.get_formated_dict_list_str(self._get_from_imports_typing())
+            base.Util.get_formated_dict_list_str(
+                self._get_from_imports_typing())
         )
         if len(self._p_desc) > 0:
-            desc = Util.get_formated_dict_list_str(self._p_desc, indent=4)
+            desc = base.Util.get_formated_dict_list_str(self._p_desc, indent=4)
         else:
             desc = "[]"
         self._template = self._template.replace('{desc}', desc)
@@ -1534,7 +1542,7 @@ class InterfaceWriter(WriteBase):
 
     def _set_info(self):
         def get_extends(lst:List[str]) -> List[str]:
-            return [Util.get_last_part(s) for s in lst]
+            return [base.Util.get_last_part(s) for s in lst]
             # return [s.rsplit('.', 1)[1] for s in lst]
         data = self._parser.get_info()
         self._p_name = data['name']
