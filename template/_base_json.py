@@ -1,7 +1,7 @@
 # coding: utf-8
 from abc import abstractmethod
 import json
-from _tmpl_base import BaseTpml
+from _base_tmpl import BaseTpml
 from pathlib import Path
 
 

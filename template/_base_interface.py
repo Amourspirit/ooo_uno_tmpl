@@ -1,7 +1,7 @@
 # coding: utf-8
 import json
 from typing import Tuple, List
-from _tmpl_base import BaseTpml
+from _base_tmpl import BaseTpml
 from pathlib import Path
 from verr import Version
 
