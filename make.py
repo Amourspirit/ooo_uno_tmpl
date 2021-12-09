@@ -84,10 +84,11 @@ class Make:
                         self._processed_dirs.add(f_dir)
                         # logger.debug("_make() current dir: %s", f_dir)
                         self._create_sys_links(f_dir)
-                    logger.info('Compiling file: %s', file)
+                    logger.debug('Compiling file: %s', file)
                     self._compile(tmpl_file=file)
-                py_file = self._get_py_path(tmpl_file=file)
-                self._write(py_file)
+                    
+                    py_file = self._get_py_path(tmpl_file=file)
+                    self._write(py_file)
             except Exception as e:
                 logger.error(e)
 
@@ -115,13 +116,17 @@ class Make:
         try:
             fc = CompareFile.compare(file1=t_file, file2=p_file)
             if fc > CompareEnum.Equal:
+                logger.debug('Including file: %s', str(t_file))
                 return False
+            logger.debug('Excluding file: %s', str(t_file))
             return True
         except RuleError:
+            logger.debug("Including File due to no py file: %s", str(p_file))
             return False
 
     def _compile(self, tmpl_file):
         cmd_str = f"cheetah compile --nobackup {tmpl_file}"
+        logger.info('Running subprocess: %s', cmd_str)
         res = subprocess.run(cmd_str.split())
         if res.stdout:
             logger.info(res.stdout)
@@ -148,10 +153,10 @@ class Make:
         return re.sub('([a-z0-9])([A-Z])', r'\1_\2', _name).lower()
 
     def _write(self, py_file):
-        f = Path(py_file)
         p_out = self._get_scratch_path(tmpl_file=py_file)
         with open(p_out, "w") as outfile:
             subprocess.run([sys.executable, py_file], stdout=outfile)
+            logger.info('Wrote file: %s', str(p_out))
 
 
 def main():
