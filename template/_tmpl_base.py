@@ -5,7 +5,7 @@ import re
 import importlib
 import logging
 from types import ModuleType
-from typing import Tuple, List
+from typing import Dict, Tuple, List
 from Cheetah.Template import Template
 
 # set up path for importing modules from main app
@@ -32,7 +32,9 @@ class BaseTpml(Template):
 
         if get_logger:
             self._logger: logging.Logger = get_logger(
-                logger_name=self.__class__.__name__, add_handler_console=False)
+                logger_name="Template — " + self.__class__.__name__,
+                add_handler_console=False
+                )
 
     def init_data(self):
         self._is_class_init = True
@@ -146,6 +148,31 @@ class BaseTpml(Template):
         for itm in lst:
             result.append(self.get_last_part(input=itm, sep=sep))
         return result
+    
+    # region sorting
+    def _sort_dicts(self, lst: List[dict], sort_key: str) -> List[dict]:
+        """
+        Sort a list of Dictionaries
+
+        Args:
+            lst (List[dict]): List of dictionaries to sort
+            sort_key (str): Key of dictionary used for sorting
+
+        Returns:
+            List[dict]: Sorted list of dictionaries.
+        """
+        if len(lst) == 0:
+            return lst
+        keys: List[str] = []
+        _result: List[dict] = []
+        for i, itm in enumerate(lst):
+            keys.append((itm[sort_key], i))
+        keys.sort()
+        for k in keys:
+            _result.append(lst[k[1]])
+        return _result
+
+    # endregion sorting
     
     def dynamic_imp(self, package: str, mod_name: str, class_name: str) -> Tuple[ModuleType, object]:
         try:

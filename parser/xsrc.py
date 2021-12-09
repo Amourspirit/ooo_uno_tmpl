@@ -1378,7 +1378,8 @@ class InterfaceWriter(WriteBase):
     @TypeCheckKw(arg_info={
         "write_file": 0, "write_json": 0,
         "copy_clipboard": 0, "print_template": 0,
-        "print_json": 0, "clear_on_print": 0
+        "print_json": 0, "clear_on_print": 0,
+        "write_template_long": 0
         },
         types=[bool],
         ftype=DecFuncEnum.METHOD)
@@ -1391,6 +1392,7 @@ class InterfaceWriter(WriteBase):
         self._print_json: bool = kwargs.get('print_json', True)
         self._write_json: bool = kwargs.get('write_json', False)
         self._clear_on_print: bool = kwargs.get('clear_on_print', True)
+        self._write_template_long: bool = kwargs.get('write_template_long', False)
         self._indent_amt = 4
         self._json_str = None
         self._p_name: str = None
@@ -1404,7 +1406,12 @@ class InterfaceWriter(WriteBase):
         self._p_requires_typing = False
         self._path_dir = Path(os.path.dirname(__file__))
         self._cache: Dict[str, object] = {}
-        _path = Path(self._path_dir, 'template', 'interface.tmpl')
+        
+        t_file = 'interface'
+        if not self._write_template_long:
+            t_file += '_stub'
+        t_file += '.tmpl'
+        _path = Path(self._path_dir, 'template', t_file)
         try:
             if not _path.exists():
                 raise FileNotFoundError(f"unable to find templae file '{_path}'")
@@ -1494,6 +1501,8 @@ class InterfaceWriter(WriteBase):
     # endregion get Imports
     
     def _set_template_data(self):
+        if self._write_template_long is False:
+            return
         self._template = self._template.replace('{name}', self._p_name)
         self._template = self._template.replace('{ns}', str(self._p_namespace))
         self._template = self._template.replace('{link}', self._p_url)
@@ -1626,6 +1635,12 @@ def main():
         dest='no_print_clear',
         default=True)
     parser.add_argument(
+        '-g', '--long-template',
+        help='Writes a long format template. Requires --write-template is set. No Autoload',
+        action='store_true',
+        dest='long_format',
+        default=False)
+    parser.add_argument(
         '-c', '--clipboard',
         help='Copy to clipboard',
         action='store_true',
@@ -1683,7 +1698,8 @@ def main():
         copy_clipboard=args.clipboard,
         write_template=args.write_template,
         write_json=args.write_json,
-        clear_on_print=(not args.no_print_clear)
+        clear_on_print=(not args.no_print_clear),
+        write_template_long=args.long_format
         )
     if args.print_template is False and args.print_json is False:
         print('')

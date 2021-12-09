@@ -1,5 +1,7 @@
-##from _struct_base import struct_base as s_base
-##extends s_base
+#from _base_struct import BaseStruct
+#extends BaseStruct
+#implements respond
+$self.init_data()#slurp
 #attr $sort = True ## set is attribs is sorted
 #attr $name = ""
 #attr $desc = "" ## str, list, tupple
@@ -21,10 +23,12 @@
 ]
 *# 
 #attr $attribs = []
+$self.load_data()#slurp
 ## Main Template
 #set $lst_attrib = []
 #set $s_attribs = ''
 #set $constructor_str = ''
+#set $namespace = ''
 #set $sorted = []
 #for $i, $itm in enumerate($attribs)
 $sorted.append(($itm['name'], $i))#slurp

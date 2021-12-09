@@ -1,14 +1,9 @@
 # coding: utf-8
-import logging
-import os
-import sys
 import json
 from typing import Tuple, List
 from _tmpl_base import BaseTpml
 from pathlib import Path
 from verr import Version
-from inspect import getsourcefile
-_logger_module = None
 
 
 class BaseInterface(BaseTpml):
