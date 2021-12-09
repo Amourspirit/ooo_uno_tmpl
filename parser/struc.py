@@ -42,9 +42,21 @@ class Parser(ParserBase):
         info = self.get_info()
         items = self._get_data_items()
         # set to list for json
-        info["auto_imports"] = list(self.auto_imports)
+        info["auto_imports"] = self._get_auto_imports(ns=info['namespace'])
+        info["imports"] = []
         info['items'] = items
         return info
+
+    def _get_auto_imports(self, ns:str) -> List[Tuple[str, str]]:
+        results = []
+        if not self.auto_imports:
+            return results
+        auto: Set[str] = self.auto_imports
+        if len(auto) == 0:
+            return results
+        for name in auto:
+            results.append(Util.get_rel_import(i_str=name, ns=ns))
+        return results
     # endregion Data
     # region Info
     def get_info(self) -> Dict[str, str]:
@@ -55,7 +67,7 @@ class Parser(ParserBase):
             Dict[str, str]: {
                 "name": "name of constant",
                 "fullname": "full name such as com.sun.star.awt.Command"
-                "desc": "description of constant",
+                "desc": "(List[str]), description of constant",
                 "url": "Url to LibreOffice of constant",
                 "namespace: "namespace"
             }
@@ -176,7 +188,13 @@ class Parser(ParserBase):
                 doc_lines = docs.find_all('p')
                 if doc_lines:
                     for ln in doc_lines:
-                        lines.append(ln.text)
+                        _line = str(ln.text)
+                        _lines = _line.splitlines()
+                        for i, _nl in enumerate(_lines):
+                            # if i > 0:
+                            #     lines.append("")
+                            lines.append(_nl)
+                        # lines.append(ln.text)
             return lines
 
         def get_py_type(in_type: str) -> str:
@@ -251,7 +269,8 @@ class StructWriter(WriteBase):
         "print_json": 0,
         "write_file": 0,
         "write_json": 0,
-        "auto_import": 0
+        "auto_import": 0,
+        "write_template_long": 0
         },
         types=[bool],
         ftype=DecFuncEnum.METHOD)
@@ -265,15 +284,23 @@ class StructWriter(WriteBase):
         self._write_file = kwargs.get('write_template', False)
         self._print_json = kwargs.get('print_json', True)
         self._write_json = kwargs.get('write_json', False)
+        self._write_template_long: bool = kwargs.get(
+            'write_template_long', False)
         self._indent_amt = 4
         self._json_str = None
         self._file_full_path = None
         self._p_name = None
+        self._p_namespace = None
         self._p_fullname = None
         self._p_url = None
         self._p_desc = None
+        
         self._path_dir = Path(os.path.dirname(__file__))
-        _path = Path(self._path_dir, 'template', 'struct.tmpl')
+        t_file = 'struct'
+        if not self._write_template_long:
+            t_file += '_stub'
+        t_file += '.tmpl'
+        _path = Path(self._path_dir, 'template', t_file)
         try:
             if not _path.exists():
                 raise FileNotFoundError(f"unable to find templae file '{_path}'")
@@ -334,14 +361,16 @@ class StructWriter(WriteBase):
         return self._json_str
 
     def _set_template_data(self):
+        if self._write_template_long is False:
+            return
         self._template = self._template.replace('{sort}', str(self._sort))
         self._template = self._template.replace('{name}', self._p_name)
+        self._template = self._template.replace('{ns}', self._p_namespace)
         self._template = self._template.replace('{link}', self._p_url)
         indent = ' ' * self._indent_amt
-        indented = textwrap.indent(self._p_desc, indent).lstrip()
-        self._template = self._template.replace('{desc}', indented)
+        str_json_desc = Util.get_formated_dict_list_str(self._p_desc)
+        self._template = self._template.replace('{desc}', str_json_desc)
         indented = textwrap.indent(self._p_data, indent)
-        # indented = indented.lstrip()
         self._template = self._template.replace('{data}', indented)
         self._template = self._template.replace('{auto_import}', str(self._auto_imports()))
 
@@ -365,6 +394,7 @@ class StructWriter(WriteBase):
         self._p_url = data['url']
         self._p_fullname = data['fullname']
         self._p_data = self._parser.get_formated_data()
+        self._p_namespace = data['namespace']
         if self._write_file or self._write_json:
             self._file_full_path = self._get_uno_obj_path()
         
@@ -443,12 +473,17 @@ def main():
         help='Auto import types that are not python types',
         default=True)
     parser.add_argument(
+        '-g', '--long-template',
+        help='Writes a long format template. Requires --write-template is set. No Autoload',
+        action='store_true',
+        dest='long_format',
+        default=False)
+    parser.add_argument(
         '-t', '--write-template',
         help='Write template file into obj_uno subfolder',
         action='store_true',
         dest='write_template',
         default=False)
-    
     parser.add_argument(
         '-m', '--print-template',
         help='Print template to terminal',
@@ -467,6 +502,21 @@ def main():
         action='store_true',
         dest='write_json',
         default=False)
+
+    # region Dummy Args for Logging
+    parser.add_argument(
+        '-v', '--verbose',
+        help='verbose logging',
+        action='store_true',
+        dest='verbose',
+        default=False)
+    parser.add_argument(
+        '-L', '--log-file',
+        help='Log file to use',
+        type=str,
+        required=False)
+    # endregion Dummy Args for Logging
+
     args = parser.parse_args()
     # print("auto", args.auto_import)
     # print('print', args.print)
@@ -482,7 +532,8 @@ def main():
         print_json=args.print_json,
         auto_import=args.auto_import,
         write_template=args.write_template,
-        write_json=args.write_json
+        write_json=args.write_json,
+        write_template_long=args.long_format
         )
     w.write()
     

@@ -2,11 +2,11 @@
 import os
 import sys
 import argparse
-from typing import Dict, List, Union
+from typing import Dict, List
 from bs4 import BeautifulSoup
-from bs4.element import ResultSet, SoupStrainer, Tag
+from bs4.element import ResultSet, Tag
 from kwhelp.decorator import DecFuncEnum, RuleCheckAllKw, TypeCheckKw
-from kwhelp import KwArg, rules
+from kwhelp import rules
 from collections import namedtuple
 from base import UrlObj, Util, WriteBase, ParserBase
 from pathlib import Path
@@ -14,9 +14,9 @@ import textwrap
 import xerox # requires xclip - sudo apt-get install xclip
 from logger.log_handle import get_logger
 from parser import __version__, JSON_ID
-import traceback
-logger = get_logger(Path(__file__).name)
-logger
+
+logger = get_logger(Path(__file__).stem)
+
 dataitem = namedtuple(
     'dataitem', ['value', 'raw_value', 'name', 'datatype', 'lines'])
 
@@ -45,7 +45,8 @@ class Parser(ParserBase):
                 "name": "name of constant",
                 "fullname": "full name such as com.sun.star.awt.Command"
                 "desc": "description of constant",
-                "url": "Url to LibreOffice of constant"
+                "url": "Url to LibreOffice of constant",
+                "namespace": "Namespace sucn ascom.sun.star.awt.Command"
             }
         """
         if not self._data_info is None:
@@ -219,7 +220,8 @@ class ConstWriter(WriteBase):
         "write_template": 0,
         "print_template": 0,
         "print_json": 0,
-        "write_json": 0
+        "write_json": 0,
+        "write_template_long": 0
         },
         types=[bool],
         ftype=DecFuncEnum.METHOD)
@@ -234,15 +236,22 @@ class ConstWriter(WriteBase):
         self._write_file = kwargs.get('write_template', False)
         self._print_json = kwargs.get('print_json', True)
         self._write_json = kwargs.get('write_json', False)
+        self._write_template_long: bool = kwargs.get(
+            'write_template_long', False)
         self._indent_amt = 4
         self._json_str = None
         self._file_full_path = None
         self._p_name = None
+        self._p_namespace = None
         self._p_fullname = None
         self._p_url = None
         self._p_desc = None
         self._path_dir = Path(os.path.dirname(__file__))
-        _path = Path(self._path_dir, 'template', 'const.tmpl')
+        t_file = 'const'
+        if not self._write_template_long:
+            t_file += '_stub'
+        t_file += '.tmpl'
+        _path = Path(self._path_dir, 'template', t_file)
         if not _path.exists():
             raise FileNotFoundError(f"unable to find templae file '{_path}'")
         self._template_file = _path
@@ -312,14 +321,19 @@ class ConstWriter(WriteBase):
         logger.info("Created file: %s", jsn_p)
         
     def _set_template_data(self):
+        if self._write_template_long is False:
+            return
         self._template = self._template.replace('{hex}', str(self._hex))
         self._template = self._template.replace('{sort}', str(self._sort))
         self._template = self._template.replace('{flags}', str(self._flags))
         self._template = self._template.replace('{name}', self._p_name)
+        self._template = self._template.replace('{ns}', self._p_namespace)
         self._template = self._template.replace('{link}', self._p_url)
         indent = ' ' * self._indent_amt
-        indented = textwrap.indent(self._p_desc, indent).lstrip()
-        self._template = self._template.replace('{desc}', indented)
+        str_json_desc = Util.get_formated_dict_list_str(self._p_desc)
+        self._template = self._template.replace('{desc}', str_json_desc)
+        # indented = textwrap.indent(self._p_desc, indent).lstrip()
+        # self._template = self._template.replace('{desc}', indented)
         indented = textwrap.indent(self._p_data, indent)
         # indented = indented.lstrip()
         self._template = self._template.replace('{data}', indented)
@@ -327,6 +341,7 @@ class ConstWriter(WriteBase):
     def _set_info(self):
         data = self._parser.get_info()
         self._p_name = data['name']
+        self._p_namespace = data['namespace']
         self._p_desc = data['desc']
         self._p_url = data['url']
         self._p_fullname = data['fullname']
@@ -413,6 +428,12 @@ def main():
         dest='print_template',
         default=False)
     parser.add_argument(
+        '-g', '--long-template',
+        help='Writes a long format template. Requires --write-template is set. No Autoload',
+        action='store_true',
+        dest='long_format',
+        default=False)
+    parser.add_argument(
         '-t', '--write-template',
         help='Write template file into obj_uno subfolder',
         action='store_true',
@@ -437,7 +458,8 @@ def main():
         flags=args.flags,
         hex=args.hex,
         write_template=args.write_template,
-        write_json=args.write_json
+        write_json=args.write_json,
+        write_template_long=args.long_format
         )
     w.write()
  

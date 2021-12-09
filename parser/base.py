@@ -611,13 +611,9 @@ class TagsStrObj:
             lines.append(s)
         return lines
 
-    def get_data(self) -> str:
+    def get_data(self) -> List[str]:
         """Gets Lines as string for this instance"""
-        lines = self.get_lines()
-        s = "\n".join(lines)
-        if self._indent_amt > 0:
-            s = Util.indent(text=s, indent_amt=self._indent_amt)
-        return s
+        return self.get_lines()
 
     def get_string_list(self) -> str:
         # lines = self._encode_list(self.get_lines())
@@ -726,7 +722,7 @@ class ParserBase(object):
         parts = full.split('.')
         return parts[len(parts) - 1]
 
-    def _get_desc(self, soup: BeautifulSoup):
+    def _get_desc(self, soup: BeautifulSoup) -> List[str]:
         contents = soup.find('div', class_='contents')
         block = contents.find('div', class_='textblock')
         soup_lines: ResultSet = block.find_all('p')
@@ -740,8 +736,8 @@ class ParserBase(object):
         if len(since) > 0:
             lines.append('')
             lines.extend(since)
-        result = "\n".join(lines)
-        return result
+        # result = "\n".join(lines)
+        return lines
 
     def _get_since(self, block: Tag) -> List[str]:
         result = []
