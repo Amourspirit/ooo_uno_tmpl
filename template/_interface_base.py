@@ -40,12 +40,14 @@ class BaseInterface(BaseTpml):
         if not self.auto_load:
             self._linfo('Auto Load disabled.')
             return
+        
         json_data: dict = None
         p_j = Path(self._json_data_file)
         if not p_j.is_absolute():
             p_j = Path(Path(__file__).parent, p_j)
         with open(p_j) as file:
             json_data: dict = json.load(file)
+        self._linfo('Auto Loaded file: %s', str(p_j))
         try:
             self._validate_data(json_data)
         except Exception as e:
