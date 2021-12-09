@@ -92,16 +92,24 @@ def get_file_handler(log_file: Union[str, Path, None] = None):
     return LOG_FILE_HANDLER
 
 
-def get_logger(logger_name):
+def get_logger(logger_name, **kwargs):
     """
     Gets a logger
 
     Args:
         logger_name (str): name of logger
+    
+    Keyword Args:
+        level (int, optional): Logger logging level. Default is value of ``LOG_LEVEL``
+        add_handler_file (bool, optional): If ``True`` a default file handler is added. Default ``True``
+        add_handler_console (bool, optional): If ``True`` a default console handler is added. Default ``True``
 
     Returns:
         Logger: A logger for the curren name.
     """
+    add_file_handler = bool(kwargs.get('add_handler_file', True))
+    add_console_handler = bool(kwargs.get('add_handler_console', True))
+    _level = int(kwargs.get('level', LOG_LEVEL))
     try:
         # https://stackoverflow.com/questions/53129716/how-to-check-if-a-logger-exists
         # Undocumneted method so wrap in try to future proof
@@ -112,9 +120,11 @@ def get_logger(logger_name):
         pass
     logger = logging.getLogger(logger_name)
     # better to have too much log than not enough
-    logger.setLevel(LOG_LEVEL)
-    logger.addHandler(get_console_handler())
-    logger.addHandler(get_file_handler())
+    logger.setLevel(_level)
+    if add_console_handler:
+        logger.addHandler(get_console_handler())
+    if add_file_handler:
+        logger.addHandler(get_file_handler())
     # with this pattern, it's rarely necessary to propagate the error up to parent
     logger.propagate = False
     return logger

@@ -1,9 +1,64 @@
 # coding: utf-8
+import os
+import sys
 import re
+import importlib
+import logging
+from types import ModuleType
 from typing import Tuple, List
 from Cheetah.Template import Template
+
+# set up path for importing modules from main app
+_project_root = os.environ.get('project_root', None)
+if _project_root:
+    if not _project_root in sys.path:
+        sys.path.insert(0, _project_root)
+
 py_name_pattern = re.compile('[\W_]+')
 class BaseTpml(Template):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self._is_class_init = True
+        self._is_class_data = False
+        self._logger = None
+        get_logger = None
+        self._logger: logging.Logger = None
+        try:
+            _, get_logger = self.dynamic_imp(
+                'logger', 'log_handle', 'get_logger')
+        except Exception as e:
+            # print("# Error importing logger:", e)
+            pass
+
+        if get_logger:
+            self._logger: logging.Logger = get_logger(
+                logger_name=self.__class__.__name__, add_handler_console=False)
+
+    def init_data(self):
+        self._is_class_init = True
+
+    def load_data(self):
+        self._is_class_data = True
+
+    # region Logger
+    def _log_to_logger(self, level: int, msg: object, *args, **kwargs):
+        if not self._logger:
+            return
+        self._logger.log(level, msg, *args, **kwargs)
+
+    def _ldebug(self, msg: object, *args, **kwargs):
+        self._log_to_logger(logging.debug, msg, *args, **kwargs)
+
+    def _linfo(self, msg: object, *args, **kwargs):
+        self._log_to_logger(logging.INFO, msg, *args, **kwargs)
+    
+    def _lwarn(self, msg: object, *args, **kwargs):
+        self._log_to_logger(logging.WARN, msg, *args, **kwargs)
+
+    def _lerr(self, msg: object, *args, **kwargs):
+        self._log_to_logger(logging.ERROR, msg, *args, **kwargs)
+    # endregion Logger
+
     """Base class for all templtes"""
     
     def get_clean_name(self, input: str) -> str:
@@ -91,3 +146,12 @@ class BaseTpml(Template):
         for itm in lst:
             result.append(self.get_last_part(input=itm, sep=sep))
         return result
+    
+    def dynamic_imp(self, package: str, mod_name: str, class_name: str) -> Tuple[ModuleType, object]:
+        try:
+            module = importlib.import_module(f"{package}.{mod_name}")
+            my_class = getattr(module, class_name)
+            return module, my_class
+        except Exception as e:
+            # print(e)
+            raise e

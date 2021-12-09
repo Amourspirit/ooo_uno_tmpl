@@ -1,21 +1,28 @@
 # coding: utf-8
+import logging
+import os
+import sys
 import json
 from typing import Tuple, List
 from _tmpl_base import BaseTpml
 from pathlib import Path
 from verr import Version
-# from logger.log_handle import get_logger
+from inspect import getsourcefile
+_logger_module = None
 
 
 class BaseInterface(BaseTpml):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        # self._linfo('hello')
 
     def init_data(self):
+        super().init_data()
         if getattr(self, 'auto_load', None) is None:
             self.auto_load = False
         # setting path in init_data allows for json_data_file
         # to be overridden in template
+        self._linfo('init template.')
         data_file = getattr(self, 'json_data_file', None)
         if data_file is None:
             p = Path(__file__).parent  # dir
@@ -23,24 +30,32 @@ class BaseInterface(BaseTpml):
             self._json_data_file = str(p)
         else:
             self._json_data_file = data_file
+        self._is_class_init = True
 
     def load_data(self):
+        super().load_data()
+        if not self._is_class_init:
+            self._lerr('load_data() called without calling init_data() first')
+            return
         if not self.auto_load:
+            self._linfo('Auto Load disabled.')
             return
         json_data: dict = None
-        if not self._json_data_file:
-            return
         p_j = Path(self._json_data_file)
         if not p_j.is_absolute():
             p_j = Path(Path(__file__).parent, p_j)
-        print('# Path:', str(p_j))
         with open(p_j) as file:
             json_data: dict = json.load(file)
         try:
             self._validate_data(json_data)
-        except:
+        except Exception as e:
+            self._lerr('load_data() Validation Failed: %s', str(e))
             return
-        self._hydrate_data(json_data)
+        try:
+            self._hydrate_data(json_data)
+        except Exception as e:
+            self._lerr(e)
+            raise e
 
     def _hydrate_data(self, json_data: dict):
         data = json_data['data']
@@ -224,3 +239,4 @@ class BaseInterface(BaseTpml):
                 result += f" -> {ret}"
         result += ':'
         return result
+

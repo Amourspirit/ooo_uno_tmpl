@@ -16,6 +16,8 @@ from logger.log_handle import get_logger
 
 logger = get_logger(Path(__file__).stem)
 
+os.environ['project_root'] = str(Path(__file__).parent)
+# logger/log_handle.py
 
 class CompareEnum(IntEnum):
     Before = -1
