@@ -367,13 +367,10 @@ class StructWriter(WriteBase):
         self._template = self._template.replace('{name}', self._p_name)
         self._template = self._template.replace('{ns}', self._p_namespace)
         self._template = self._template.replace('{link}', self._p_url)
-        
         indent = ' ' * self._indent_amt
         str_json_desc = Util.get_formated_dict_list_str(self._p_desc)
-        # indented = textwrap.indent(str_json_desc, indent).lstrip()
         self._template = self._template.replace('{desc}', str_json_desc)
         indented = textwrap.indent(self._p_data, indent)
-        # indented = indented.lstrip()
         self._template = self._template.replace('{data}', indented)
         self._template = self._template.replace('{auto_import}', str(self._auto_imports()))
 

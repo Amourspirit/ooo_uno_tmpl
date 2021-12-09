@@ -92,6 +92,22 @@ class BaseTpml(Template):
         for s in input:
             yield s
 
+    def dict_keys_to_str(self, input: dict, sep: str = ', ') -> str:
+        """
+        Converts a dictionary's keys into a string seperated by ``sep``
+
+        Args:
+            input (dict): input dictionary
+            sep (str, optional): seperator. Defaults to ``', '``
+
+        Returns:
+            str: keys a string.
+        """
+        keys = list(input.keys())
+        if len(keys) == 0:
+            return ''
+        return sep.join(keys)
+
     def lst_to_str(self, input, sep:str = ', ') -> str:
         """
         Writes list items into a str seperated by ``sep``.

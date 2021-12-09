@@ -611,13 +611,9 @@ class TagsStrObj:
             lines.append(s)
         return lines
 
-    def get_data(self) -> str:
+    def get_data(self) -> List[str]:
         """Gets Lines as string for this instance"""
-        lines = self.get_lines()
-        s = "\n".join(lines)
-        if self._indent_amt > 0:
-            s = Util.indent(text=s, indent_amt=self._indent_amt)
-        return s
+        return self.get_lines()
 
     def get_string_list(self) -> str:
         # lines = self._encode_list(self.get_lines())

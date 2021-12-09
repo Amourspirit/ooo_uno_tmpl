@@ -239,6 +239,13 @@ class ParserEnum(ParserBase):
     def get_formated_data(self):
         if not self._data_formated is None:
             return self._data_formated
+        result = {}
+        di: List[dict] = self._get_data_items()
+        for itm in di:
+            result[itm['name']] = itm['desc']
+        s = Util.get_formated_dict_list_str(result)
+        self._data_formated =s
+        return self._data_formated
         try:
             block = self._get_enum_block()
             e_obj = EnumItems(block=block, sort=self._sort)
@@ -284,7 +291,8 @@ class EnumWriter(WriteBase):
         "write_template": 0,
         "print_template": 0,
         "print_json": 0,
-        "write_json": 0
+        "write_json": 0,
+        "write_template_long": 0
     },
         types=[bool],
         ftype=DecFuncEnum.METHOD)
@@ -297,6 +305,8 @@ class EnumWriter(WriteBase):
         self._write_file = kwargs.get('write_template', False)
         self._print_json = kwargs.get('print_json', True)
         self._write_json = kwargs.get('write_json', False)
+        self._write_template_long: bool = kwargs.get(
+            'write_template_long', False)
         self._indent_amt = 4
         self._json_str = None
         self._file_full_path = None
@@ -306,7 +316,11 @@ class EnumWriter(WriteBase):
         self._p_desc = None
         self._p_data = None
         self._path_dir = Path(os.path.dirname(__file__))
-        _path = Path(self._path_dir, 'template', 'enum.tmpl')
+        t_file = 'enum'
+        if not self._write_template_long:
+            t_file += '_stub'
+        t_file += '.tmpl'
+        _path = Path(self._path_dir, 'template', t_file)
         if not _path.exists():
             raise FileNotFoundError(f"unable to find templae file '{_path}'")
         self._template_file = _path
@@ -372,16 +386,14 @@ class EnumWriter(WriteBase):
         logger.info("Created file: %s", jsn_p)
 
     def _set_template_data(self):
+        if self._write_template_long is False:
+            return
         self._template = self._template.replace('{sort}', str(self._sort))
         self._template = self._template.replace('{ns}', str(self._p_namespace))
         self._template = self._template.replace('{name}', self._p_name)
         self._template = self._template.replace('{link}', self._p_url)
-        indent = ' ' * self._indent_amt
-        # self._template = self._template.replace('{desc}', self._p_desc)
-        indented = textwrap.indent(self._p_desc, indent).lstrip()
-        self._template = self._template.replace('{desc}', indented)
-        # indented = textwrap.indent(self._p_data, indent)
-        # self._template = self._template.replace('{data}', indented)
+        str_json_desc = Util.get_formated_dict_list_str(self._p_desc)
+        self._template = self._template.replace('{desc}', str_json_desc)
         self._template = self._template.replace('{data}', self._p_data)
 
     def _set_info(self):
@@ -465,6 +477,12 @@ def main():
         dest='print_template',
         default=False)
     parser.add_argument(
+        '-g', '--long-template',
+        help='Writes a long format template. Requires --write-template is set. No Autoload',
+        action='store_true',
+        dest='long_format',
+        default=False)
+    parser.add_argument(
         '-t', '--write-template',
         help='Write template file into obj_uno subfolder',
         action='store_true',
@@ -476,6 +494,21 @@ def main():
         action='store_true',
         dest='write_json',
         default=False)
+    
+
+    # region Dummy Args for Logging
+    parser.add_argument(
+        '-v', '--verbose',
+        help='verbose logging',
+        action='store_true',
+        dest='verbose',
+        default=False)
+    parser.add_argument(
+        '-L', '--log-file',
+        help='Log file to use',
+        type=str,
+        required=False)
+    # endregion Dummy Args for Logging
 
     args = parser.parse_args()
     logger.info('Parsing Url %s' % args.url)
@@ -488,7 +521,8 @@ def main():
         print_json=args.print_json,
         copy_clipboard=args.clipboard,
         write_template=args.write_template,
-        write_json=args.write_json
+        write_json=args.write_json,
+        write_template_long=args.long_format
         )
     if args.print_template is False and args.print_json is False:
         print('')
