@@ -1449,7 +1449,7 @@ class InterfaceWriter(WriteBase):
             return self._json_str
         p_dict = {}
         p_dict['from_imports'] = self._get_from_imports()
-        p_dict['from_imports_typing'] = self._get_from_imports_typing(),
+        p_dict['from_imports_typing'] = self._get_from_imports_typing()
         p_dict.update(self._parser.get_dict_data())
         
         json_dict = {
@@ -1609,7 +1609,7 @@ def _main():
     logger.addHandler(hndl)
     logger.level = logging.DEBUG
     # os.system('cls' if os.name == 'nt' else 'clear')
-    url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1accessibility_1_1XAccessibleTextAttributes.html'
+    url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1accessibility_1_1XAccessibleEditableText.html'
     # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1accessibility_1_1XAccessibleText.html'
     sys.argv.extend(['--log-file', 'debug.log', '-v', '-n', '-u', url])
     main()
