@@ -318,8 +318,10 @@ class ConstWriter(WriteBase):
         self._template = self._template.replace('{name}', self._p_name)
         self._template = self._template.replace('{link}', self._p_url)
         indent = ' ' * self._indent_amt
-        indented = textwrap.indent(self._p_desc, indent).lstrip()
-        self._template = self._template.replace('{desc}', indented)
+        str_json_desc = Util.get_formated_dict_list_str(self._p_desc)
+        self._template = self._template.replace('{desc}', str_json_desc)
+        # indented = textwrap.indent(self._p_desc, indent).lstrip()
+        # self._template = self._template.replace('{desc}', indented)
         indented = textwrap.indent(self._p_data, indent)
         # indented = indented.lstrip()
         self._template = self._template.replace('{data}', indented)
