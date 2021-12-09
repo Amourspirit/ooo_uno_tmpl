@@ -150,6 +150,27 @@ class BaseTpml(Template):
         return result
     
     # region sorting
+    def _sort_dict(self, d:dict, reverse: bool = False) -> dict:
+        """
+        Sorts a dictionary by its keys
+
+        Args:
+            d (dict): input dictionary
+            reverse (bool, optional): If ``True`` result are reversed. Defaults to ``False``.
+
+        Returns:
+            dict: new sorted dict.
+        """
+        if not d:
+            return {}
+        keys = list(d.keys())
+        keys.sort(reverse=reverse)
+        result = {}
+        for key in keys:
+            result[key] = d[key]
+        return result
+        
+        
     def _sort_dicts(self, lst: List[dict], sort_key: str) -> List[dict]:
         """
         Sort a list of Dictionaries

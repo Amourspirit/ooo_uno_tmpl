@@ -133,7 +133,7 @@ class BaseInterface(BaseTpml):
             raise Exception('Invalid Data: Data has no name attribute')
         if not data['id'] == 'uno-ooo-parser':
             raise Exception(
-                f"Invalid Data: Expected type to be 'ooo' got '{data['id']}'")
+                f"Invalid Data: Expected type to be 'uno-ooo-parser' got '{data['id']}'")
         if not data['type'] == 'interface':
             raise Exception(
                 f"Invalid Data: Expected type to be 'interface' got '{data['type']}'")
