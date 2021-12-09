@@ -67,7 +67,7 @@ class Parser(ParserBase):
             Dict[str, str]: {
                 "name": "name of constant",
                 "fullname": "full name such as com.sun.star.awt.Command"
-                "desc": "description of constant",
+                "desc": "(List[str]), description of constant",
                 "url": "Url to LibreOffice of constant",
                 "namespace: "namespace"
             }
@@ -188,7 +188,13 @@ class Parser(ParserBase):
                 doc_lines = docs.find_all('p')
                 if doc_lines:
                     for ln in doc_lines:
-                        lines.append(ln.text)
+                        _line = str(ln.text)
+                        _lines = _line.splitlines()
+                        for i, _nl in enumerate(_lines):
+                            # if i > 0:
+                            #     lines.append("")
+                            lines.append(_nl)
+                        # lines.append(ln.text)
             return lines
 
         def get_py_type(in_type: str) -> str:
@@ -363,8 +369,9 @@ class StructWriter(WriteBase):
         self._template = self._template.replace('{link}', self._p_url)
         
         indent = ' ' * self._indent_amt
-        indented = textwrap.indent(self._p_desc, indent).lstrip()
-        self._template = self._template.replace('{desc}', indented)
+        str_json_desc = Util.get_formated_dict_list_str(self._p_desc)
+        # indented = textwrap.indent(str_json_desc, indent).lstrip()
+        self._template = self._template.replace('{desc}', str_json_desc)
         indented = textwrap.indent(self._p_data, indent)
         # indented = indented.lstrip()
         self._template = self._template.replace('{data}', indented)
@@ -528,7 +535,8 @@ def main():
         print_json=args.print_json,
         auto_import=args.auto_import,
         write_template=args.write_template,
-        write_json=args.write_json
+        write_json=args.write_json,
+        write_template_long=args.long_format
         )
     w.write()
     

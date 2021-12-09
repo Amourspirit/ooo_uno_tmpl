@@ -726,7 +726,7 @@ class ParserBase(object):
         parts = full.split('.')
         return parts[len(parts) - 1]
 
-    def _get_desc(self, soup: BeautifulSoup):
+    def _get_desc(self, soup: BeautifulSoup) -> List[str]:
         contents = soup.find('div', class_='contents')
         block = contents.find('div', class_='textblock')
         soup_lines: ResultSet = block.find_all('p')
@@ -740,8 +740,8 @@ class ParserBase(object):
         if len(since) > 0:
             lines.append('')
             lines.extend(since)
-        result = "\n".join(lines)
-        return result
+        # result = "\n".join(lines)
+        return lines
 
     def _get_since(self, block: Tag) -> List[str]:
         result = []
