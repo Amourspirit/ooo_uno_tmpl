@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+import logging
 import os
 import sys
 from typing import Set
@@ -14,7 +15,7 @@ import argparse
 import re
 from logger.log_handle import get_logger
 
-logger = get_logger(Path(__file__).stem)
+logger = None
 
 os.environ['project_root'] = str(Path(__file__).parent)
 # logger/log_handle.py
@@ -57,12 +58,20 @@ class Make:
         self._make()
 
     def _create_sys_links(self, dest: Path):
-        rel = Path('../../template')
+        # rel = Path('../../template')
         for file in self._template_py_files:
             try:
+                
                 p_file = Path(file)
-                rel_file = rel.joinpath(p_file.name)
                 dst_file = dest / p_file.name
+                
+                root_rel = dst_file.relative_to(self._root_dir)
+                rel_str = '../' * (len(root_rel.parts) -1)
+                rel = Path(rel_str + 'template')
+                logger.debug("_create_sys_links() rel to template: %s", str(rel))
+                rel_file = rel.joinpath(p_file.name)
+                # logger.debug("_create_sys_links() file rel to root: %s", str(root_rel))
+                # logger.debug("create_sys_links() file rel parts: %s", str(root_rel.parts))
                 os.symlink(
                     src=rel_file,
                     dst=dst_file
@@ -75,6 +84,10 @@ class Make:
                 logger.error(e)
 
     def _make(self):
+        self._make_tmpl()
+        self._make_tppi()
+    
+    def _make_tmpl(self):
         files = self._get_template_files()
         for file in files:
             try:
@@ -86,6 +99,24 @@ class Make:
                         self._create_sys_links(f_dir)
                     logger.debug('Compiling file: %s', file)
                     self._compile(tmpl_file=file)
+                    
+                    py_file = self._get_py_path(tmpl_file=file)
+                    self._write(py_file)
+            except Exception as e:
+                logger.error(e)
+    
+    def _make_tppi(self):
+        files = self._get_template_tppi_files()
+        for file in files:
+            try:
+                if not self._is_skip_compile(tmpl_file=file):
+                    f_dir = Path(file).parent
+                    if not f_dir in self._processed_dirs:
+                        self._processed_dirs.add(f_dir)
+                        # logger.debug("_make() current dir: %s", f_dir)
+                        self._create_sys_links(f_dir)
+                    logger.debug('Compiling file: %s', file)
+                    self._compile_tppi(tmpl_file=file)
                     
                     py_file = self._get_py_path(tmpl_file=file)
                     self._write(py_file)
@@ -104,6 +135,13 @@ class Make:
         # https://stackoverflow.com/questions/20638040/glob-exclude-pattern
         # exclude files that start with _
         pattern = dirname + '/**/[!_]*.tmpl'
+        files = glob.glob(pattern, recursive=True)
+        # print('files', files)
+        return files
+    
+    def _get_template_tppi_files(self):
+        dirname = str(self._root_dir / 'uno_obj')
+        pattern = dirname + '/**/*.tppi'
         files = glob.glob(pattern, recursive=True)
         # print('files', files)
         return files
@@ -126,6 +164,15 @@ class Make:
 
     def _compile(self, tmpl_file):
         cmd_str = f"cheetah compile --nobackup {tmpl_file}"
+        logger.info('Running subprocess: %s', cmd_str)
+        res = subprocess.run(cmd_str.split())
+        if res.stdout:
+            logger.info(res.stdout)
+        if res.stderr:
+            logger.error(res.stderr)
+    
+    def _compile_tppi(self, tmpl_file):
+        cmd_str = f"cheetah compile --nobackup --iext=.tppi {tmpl_file}"
         logger.info('Running subprocess: %s', cmd_str)
         res = subprocess.run(cmd_str.split())
         if res.stdout:
@@ -160,10 +207,8 @@ class Make:
 
 
 def main():
-    if len(sys.argv) > 1:
-        logger.info('Executing command: %s', sys.argv[1:])
-    else:
-        logger.info('Running with no args.')
+    global logger
+
     parser = argparse.ArgumentParser(description='make')
     parser.add_argument(
         '-f', '--force-compile',
@@ -187,10 +232,23 @@ def main():
     parser.add_argument(
         '-L', '--log-file',
         help='Log file to use',
+        action='store',
+        dest='log_file',
         type=str,
-        required=False)
+        default=None)
     # endregion Dummy Args for Logging
     args = parser.parse_args()
+    if logger is None:
+        log_args = {}
+        if args.log_file:
+            log_args['log_file'] = args.log_file
+        if args.verbose:
+            log_args['level'] = logging.DEBUG
+        logger = get_logger(logger_name=Path(__file__).stem)
+    if len(sys.argv) > 1:
+        logger.info('Executing command: %s', sys.argv[1:])
+    else:
+        logger.info('Running with no args.')
     try:
         make = Make(force_compile=args.force_compile, clean=args.clean_scratch)
     except Exception as e:
