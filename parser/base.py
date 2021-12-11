@@ -13,7 +13,9 @@ from kwhelp import rules
 from pathlib import Path
 from typing import Iterable, List, Tuple, Union
 # this is for VS code debuging
-sys.path.insert(0, str(Path(__file__).parent.parent))
+_app_root = os.environ.get('project_root', str(Path(__file__).parent.parent))
+if not _app_root in sys.path:
+    sys.path.insert(0, _app_root)
 # print(sys.path)
 # this is for command line
 # sys.path.insert(0, os.path.abspath('..'))
@@ -533,6 +535,10 @@ class UrlObj:
             self._ns_str = '.'.join(self.namespace)
         return self._ns_str
 
+    @property
+    def url(self) -> str:
+        """Gets url value"""
+        return self._url
 
 class BlockObj(ABC):
     """
@@ -601,13 +607,17 @@ class TagsStrObj:
     def get_lines(self) -> List[str]:
         """Gets lines for this instance"""
         lines = []
-        for i, ln in enumerate(self._tags):
+        i = 0
+        for ln in self._tags:
             s = ln.text.strip()
+            if not s:
+                continue
             if self._clean:
                 s = str_clean(input=s)
             if i > 0 and self._empty_lines:
                 lines.append("")
             lines.append(s)
+            i += 1
         return lines
 
     def get_data(self) -> List[str]:

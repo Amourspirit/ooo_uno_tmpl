@@ -26,14 +26,13 @@ class BaseInterface(BaseJson):
         setattr(self, 'inherits', _inherits)
         set_data('imports')
         set_data('namespace')
-        sort = bool(json_data['parser_args']['sort'])
+        sort = bool(json_data['parser_args'].get('sort', False))
         self.attribs = self._get_attribs(json_data=json_data, sort=sort)
         ver_0_1_1 = Version(0, 1, 1)
         ver_json = Version.parse(json_data.get('version'))
         if ver_json == ver_0_1_1:
             self._load_0_1_1(json_data=json_data)
         else:
-            setattr(self, 'requires_typing', True)
             setattr(self, 'from_imports', [])
             setattr(self, 'from_imports_typing', [])
             set_data('from_imports')

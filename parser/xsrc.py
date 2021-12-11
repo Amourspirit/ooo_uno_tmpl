@@ -7,7 +7,7 @@ import textwrap
 import xerox  # requires xclip - sudo apt-get install xclip
 import re
 import base
-from typing import Dict, List, Set
+from typing import Dict, List, Set, Union
 from bs4 import BeautifulSoup
 from bs4.element import PageElement, ResultSet, Tag
 from kwhelp.decorator import DecFuncEnum, RuleCheckAllKw, RequireArgs, TypeCheckKw
@@ -94,7 +94,6 @@ class SdkCodeText(base.BlockObj):
         row_text: str = row.text
         ls: str = re.sub(re_ln_pattern, '', row_text)
         return ls
-
 
 class SdkComponentText:
     """
@@ -648,8 +647,11 @@ class SdkInterfaceData:
 class SdkMethods:
     """Iterable class that iterates through Methods and returns info"""
 
-    def __init__(self, url: str):
-        self._soup = base.SoupObj(url=url)
+    def __init__(self, url_soup: Union[str, base.SoupObj]):
+        if isinstance(url_soup, str):
+            self._soup = base.SoupObj(url_soup)
+        else:
+            self._soup = url_soup
         self._c_text = SdkCodeText(soup=self._soup)
         self._component = SdkComponentText(c_text=self._c_text)
         self._mt = SdkComponentLines(f_text=self._component)
@@ -680,6 +682,11 @@ class SdkMethods:
             self._len = len(self._data)
             self._init = True
         return self._get_next()
+
+    @property
+    def soup(self) -> base.SoupObj:
+        """Gets soup value"""
+        return self._soup
 
     @property
     def component(self) -> SdkComponentText:
@@ -765,11 +772,6 @@ class SdkExtends:
 
     # region Properties
     @property
-    def name(self) -> str:
-        """Gets name value"""
-        return self._name
-
-    @property
     def ex_lst(self) -> List[str]:
         """Gets ex_lst value"""
         return self._ex_lst
@@ -841,56 +843,6 @@ class SdkImports:
         """Gets CodeText value"""
         return self._c_text
 
-    # endregion Properties
-
-
-class SdkNamesSpaceInfo:
-    def __init__(self, text: SdkComponentText):
-        self._text: SdkComponentText = text
-        self._ns = ""
-        self._ns_lst = None
-        self._init()
-
-    def _init(self) -> str:
-        text = self._text.get_text()
-        if not text:
-            return
-        # get the first line.
-        text = text.split('\n', maxsplit=1)[0]
-        regex = r"module (com \{.*)\{"
-        # regex = r"module com \{  module sun \{  module star \{  module awt \{"
-        matches = re.search(regex, text, flags=re.MULTILINE)
-        result = []
-        if matches:
-            result = self._process(matches[0])
-        self._ns_lst = result
-        self._ns = '.'.join(self._ns_lst)
-
-    def _process(self, input: str) -> List[str]:
-        # module com {  module sun {  module star {  module awt
-        results = []
-        parts = input.split('{')
-        for part in parts:
-            p = part.split()
-            if len(p) >= 2:
-                results.append(p[1])
-        return results
-
-    # region Properties
-    @property
-    def namespace(self) -> str:
-        """Gets namespace"""
-        return self._ns
-
-    @property
-    def parts(self) -> List[str]:
-        """Gets parts value"""
-        return self._ns_lst
-
-    @property
-    def code_text(self) -> SdkCodeText:
-        """Gets CodeText value"""
-        return self._text
     # endregion Properties
 
 
@@ -1016,8 +968,12 @@ class ApiMethodBlock:
 class ApiMethodBlocks(base.BlockObj):
     """Get all methods"""
 
-    def __init__(self, url: str):
-        soup = base.SoupObj(url=url)
+    def __init__(self, url_soup: Union[str, base.SoupObj]):
+        if isinstance(url_soup, str):
+            self._soup_obj = base.SoupObj(url_soup)
+        else:
+            self._soup_obj = url_soup
+        soup = self._soup_obj
         if DEBUGGING:
             soup._soup = BeautifulSoup(get_soup_data(), 'lxml')
         super().__init__(soup=soup)
@@ -1089,10 +1045,20 @@ class ApiMethodDesc:
 
 
 class ApiSdkLink:
+    """Manages getting SDK Link from API page"""
     def __init__(self, soup: base.SoupObj):
         self._soup = soup
 
-    def get_obj(self):
+    def get_obj(self) -> str:
+        """
+        Gets url of SDK link from API page
+
+        Raises:
+            Excepton: If unable to parse page link
+
+        Returns:
+            str: Url of SDK
+        """
         try:
             a = self._soup.soup.select_one("body > div.contents > ul > li > a")
             url = self._soup.url
@@ -1174,29 +1140,36 @@ class ApiDescSeeAlso:
         """Gets soup value"""
         return self._soup
 class ApiInfo:
-    def __init__(self, url: str):
-        self._url = url
-        self._sdk_link = ''
+    def __init__(self,  url_soup: Union[str, base.SoupObj]):
+        if isinstance(url_soup, str):
+            self._url = url_soup
+            self._soup_obj = base.SoupObj(url_soup)
+        else:
+            self._url = url_soup.url
+            self._soup_obj = url_soup
+        self._sdk_link = None
+        self._dict = None
+        self._mb = ApiMethodBlocks(self._soup_obj)
+        self._api_sdk_link = None
+        
+    @property
+    def desc_dict(self) -> Dict[str, List[str]]:
+        """Dictionary that contains descriptions. Key is method name"""
+        if not self._dict is None:
+            return self._dict
         self._dict = {}
-        self._mb = ApiMethodBlocks(url=self._url)
-        self._init()
-
-    def _init(self):
-        lnk = ApiSdkLink(soup=self.soup)
-        self._sdk_link = lnk.get_obj()
         for block in self._mb:
             name = ApiMethodName(block=block)
             desc = ApiMethodDesc(block=block)
             self._dict[name.get_obj()] = desc.get_data()
-
-    @property
-    def desc_dict(self) -> Dict[str, List[str]]:
-        """Dictionary that contains descriptions. Key is method name"""
         return self._dict
 
     @property
     def sdk_link(self) -> str:
         """Gets sdk_link value"""
+        if not self._sdk_link is None:
+            return self._sdk_link
+        self._sdk_link = self.api_sdk_link.get_obj()
         return self._sdk_link
 
     @property
@@ -1208,9 +1181,130 @@ class ApiInfo:
     def method_blocks(self) -> ApiMethodBlocks:
         """Gets method_blocks value"""
         return self._mb
+    
+    @property
+    def api_sdk_link(self) -> ApiSdkLink:
+        if not self._api_sdk_link is None:
+            return self._api_sdk_link
+        self._api_sdk_link = ApiSdkLink(soup=self.soup)
+        return self._api_sdk_link
 # endregion Main Page Parsing
 
 
+class SdkData():
+    """Sdk Data bring together most Sdk object in one easy to upse place"""
+    def __init__(self, url: str):
+        """
+        Constructor
+
+        Args:
+            url (str): Url to Api Main Page
+        """
+        self._url = url
+        self._api_sdk_link = ApiSdkLink(base.SoupObj(self._url))
+        self._soup_obj = None
+        self._code_text = None
+        self._componnet_text = None
+        self._component_start = None
+        self._component_lines = None
+        self._method_lines = None
+        self._property_lines = None
+        self._properties = None
+        self._extends = None
+        self._imports = None
+        self._name_info = None
+        self._url_obj = None
+    
+    @property
+    def url_obj(self) -> base.UrlObj:
+        """Url Object for Api main page"""
+        if self._url_obj is None:
+            self._url_obj = base.UrlObj(self._url)
+        return self._url_obj
+    
+    @property
+    def code_text(self) -> SdkCodeText:
+        """Gets sdk_code_text value"""
+        if self._code_text is None:
+            self._code_text = SdkCodeText(self.sdk_soup_obj)
+        return self._code_text
+
+    @property
+    def componnet_text(self) -> SdkComponentText:
+        """Gets componnet value"""
+        if self._componnet_text is None:
+            self._componnet_text = SdkComponentText(self.code_text)
+        return self._componnet_text
+
+    @property
+    def component_start(self) -> SdkComponentStart:
+        """Gets component_start value"""
+        if self._component_start is None:
+            self._component_start = SdkComponentStart(self.componnet_text)
+        return self._component_start
+    
+    @property
+    def component_lines(self) -> SdkComponentLines:
+        """Gets component_lines value"""
+        if self._component_lines is None:
+            self._component_lines = SdkComponentLines(self.componnet_text)
+        return self._component_lines
+    
+    @property
+    def method_lines(self) -> SdkMethodLines:
+        """Gets method_lines value"""
+        if self._method_lines is None:
+            self._method_lines = SdkMethodLines(self.component_lines)
+        return self._method_lines
+    
+    @property
+    def property_lines(self) -> SdkPropertyLines:
+        """Gets property_lines value"""
+        if self._property_lines is None:
+            self._property_lines = SdkPropertyLines(self.component_lines)
+        return self._property_lines
+    
+    @property
+    def properties(self) -> SdkProperties:
+        """Get properites value"""
+        if self._properties is None:
+            self._properties = SdkProperties(self.component_lines)
+    @property
+    def extends(self) -> SdkExtends:
+        """Gets extends value"""
+        if self._extends is None:
+            self._extends = SdkExtends(self.component_start, self.component_lines)
+        return self._extends
+    
+    @property
+    def imports(self) -> SdkImports:
+        """Gets imports value"""
+        if self._imports is None:
+            self._imports = SdkImports(self.component_lines)
+        return self._imports
+    
+    @property
+    def name_info(self) -> SdkNameInfo:
+        """Gets name_info value"""
+        if self._name_info is None:
+            self._name_info = SdkNameInfo(self.component_start)
+        return self._name_info
+    @property
+    def api_sdk_link(self) -> ApiSdkLink:
+        """Gets api_sdk_link value"""
+        return self._api_sdk_link
+    
+    @property
+    def sdk_soup_obj(self) -> base.SoupObj:
+        """Gets the Soup object reated to SDK page"""
+        if self._soup_obj is None:
+            self._soup_obj = base.SoupObj(self.api_sdk_link.get_obj())
+        return self._soup_obj
+
+    @property
+    def api_soup_obj(self) -> base.SoupObj:
+        """Gets the Soup object reated to Api page"""
+        return self.api_sdk_link.soup
 # region Parse
 class ParserInterface(base.ParserBase):
 
@@ -1221,9 +1315,11 @@ class ParserInterface(base.ParserBase):
                     ftype=DecFuncEnum.METHOD)
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self._api_info = ApiInfo(url=self.url)
-        self._sdk_method_info = SdkMethods(url=self._api_info.sdk_link)
-        self._sdk_property_info = SdkProperties(c_lines=self._sdk_method_info.component_lines)
+        self._sdk_data = SdkData(self.url)
+        soup = self._sdk_data.api_sdk_link.soup
+        self._api_info = ApiInfo(soup)
+        self._sdk_method_info = SdkMethods(soup)
+        self._sdk_property_info = SdkProperties(self._sdk_data.component_lines)
         self._sort = True
         self._info = None
         self._requires_typing = False
@@ -1262,10 +1358,9 @@ class ParserInterface(base.ParserBase):
             return self._info
         # ns = SdkNamesSpaceInfo(self._sdk_method_info.component)
         ns = base.UrlObj(self._url)
-        start_ln = SdkComponentStart(self._sdk_method_info.component)
-        ni = SdkNameInfo(start_ln)
-        ex = SdkExtends(start_ln, self._sdk_method_info.component_lines)
-        im = SdkImports(self._sdk_method_info.component_lines)
+        ni = self._sdk_data.name_info
+        ex = self._sdk_data.extends
+        im = self._sdk_data.imports
         desc = ApiDesc(soup=self._api_info.soup)
         result = {
             'name': ni.name,
@@ -1365,11 +1460,11 @@ class ParserInterface(base.ParserBase):
             raise e
         return self._imports
     @property
-    def requires_typing(self) -> Set[str]:
+    def requires_typing(self) -> bool:
         """Gets requires typing value"""
         try:
             if not self._formated_data:
-                msg = "ParserInterface.get_formated_data() method must be called before accessing imports"
+                msg = "ParserInterface.get_formated_data() method must be called before accessing requires_typing"
                 raise Exception(msg)
         except Exception as e:
             logger.error(e, exc_info=True)
