@@ -1,0 +1,88 @@
+#import typing
+#from _x_base import x_base as XBase
+#extends XBase
+#attr $name = "XAccessibleMultiLineText"
+#attr $desc = [
+    "Implement this interface to give provide a mapping between text index and line numbers.",
+    "",
+    "This interface is typically used in conjunction with the XAccessibleText interface and extents it with a notion of line numbers",
+    "",
+    "**See Also**",
+    "",
+    "    OOo 3.0 not yet published"
+]
+#attr $link = "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1accessibility_1_1XAccessibleMultiLineText.html"
+#attr $requires_typing = True
+#attr $inherits = ['XAccessibleText']
+#attr $imports = []
+#attr $from_imports = [
+    [
+        ".x_accessible_text",
+        "XAccessibleText"
+    ]
+]
+#attr $from_imports_typing = [
+    [
+        ".text_segment",
+        "TextSegment"
+    ]
+]
+#attr $namespace = "com.sun.star.accessibility"
+#attr $attribs = {
+        "methods": [
+            {
+                "name": "getLineNumberAtIndex",
+                "returns": "int",
+                "desc": [
+                    "Returns the line number at the specified index.",
+                    "",
+                    "For a text object that is spread over multiple lines, this method provides a mapping from a text index to the corresponding line number."
+                ],
+                "raises": [
+                    "com.sun.star.lang.IndexOutOfBoundsException"
+                ],
+                "args": []
+            },
+            {
+                "name": "getNumberOfLineWithCaret",
+                "returns": "int",
+                "desc": [
+                    "Returns the number of the line in which the caret is located.",
+                    "",
+                    "The line number returned will most of the time be identical to calling XAccessibleMultiLineText.getLineNumberAtIndex() with the index returned by XAccessibleText.getCaretPosition() beside the following special case:",
+                    "",
+                    "Some text implementations place the caret at the end of the current line when the End key gets pressed. Since the index of this position is identical to the one of the first character of the following line, XAccessibleMultiLineText.getLineNumberAtIndex() will return the line following the current one in this case."
+                ],
+                "raises": [],
+                "args": []
+            },
+            {
+                "name": "getTextAtLineNumber",
+                "returns": "'TextSegment'",
+                "desc": [
+                    "Returns the text of the specified line.",
+                    "",
+                    "Returns the substring of text that makes up the specified line number.",
+                    "",
+                    "The number of lines can be obtained by calling XAccessibleMultiLineText.getLineNumberAtIndex() with the index of the last character. In a loop, the last line has been reached when TextSegment.SegmentEnd of the returned value is equal to the index of the last character of the text."
+                ],
+                "raises": [
+                    "com.sun.star.lang.IndexOutOfBoundsException"
+                ],
+                "args": []
+            },
+            {
+                "name": "getTextAtLineWithCaret",
+                "returns": "'TextSegment'",
+                "desc": [
+                    "Returns the text of the line in which the caret is located.",
+                    "",
+                    "The substring returned will most of the time be identical to calling XAccessibleText.getTextAtIndex() with the index returned by XAccessibleText.getCaretPosition() and type AccessibleTextType.LINE beside the following special case:",
+                    "",
+                    "Some text implementations place the caret at the end of the current line when the End key gets pressed. Since the index of this position is identical to the one of the first character of the following line, XAccessibleMultiLineText.getLineNumberAtIndex() will return the line following the current one in this case."
+                ],
+                "raises": [],
+                "args": []
+            }
+        ]
+    }

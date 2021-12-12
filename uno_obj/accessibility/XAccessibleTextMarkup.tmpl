@@ -1,0 +1,79 @@
+#import typing
+#from _x_base import x_base as XBase
+#extends XBase
+#attr $name = "XAccessibleTextMarkup"
+#attr $desc = [
+    "Implement this interface to expose the text markups of a text.",
+    "",
+    "The XAccessibleTextMarkup interface is the main interface to expose text markups in a text, typically of a text document, that are used to reference other (parts of) documents. For supporting the XAccessibleTextMarkup.getTextMarkupIndex() method of this interface and other character related methods of the XAccessibleTextMarkup interface, it is necessary to also support the XAccessibleText interface.",
+    "",
+    "**See Also**",
+    "",
+    "    XAccessibleText"
+]
+#attr $link = "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1accessibility_1_1XAccessibleTextMarkup.html"
+#attr $requires_typing = True
+#attr $inherits = ['XAccessibleText']
+#attr $imports = []
+#attr $from_imports = [
+    [
+        ".x_accessible_text",
+        "XAccessibleText"
+    ]
+]
+#attr $from_imports_typing = [
+    [
+        ".text_segment",
+        "TextSegment"
+    ]
+]
+#attr $namespace = "com.sun.star.accessibility"
+#attr $attribs = {
+        "methods": [
+            {
+                "name": "getTextMarkup",
+                "returns": "'TextSegment'",
+                "desc": [
+                    "Returns the text segment of the text markup of the given index and of the given text mark type.",
+                    "",
+                    "Throws IndexOutOfBoundsException, if given index is out of valid range.",
+                    "",
+                    "Throws IllegalArgumentException, if given text markup type is out of valid range."
+                ],
+                "raises": [
+                    "com.sun.star.lang.IndexOutOfBoundsException",
+                    "com.sun.star.lang.IllegalArgumentException"
+                ],
+                "args": []
+            },
+            {
+                "name": "getTextMarkupAtIndex",
+                "returns": "'typing.List[TextSegment]'",
+                "desc": [
+                    "returns a sequence of the text segments of the text markups at the given character index and of the given text markup type.",
+                    "",
+                    "Throws IndexOutOfBoundsException, if given character index is out of range [0..number of characters in the text).",
+                    "",
+                    "Throws IllegalArgumentException, if given text markup type is out of valid range."
+                ],
+                "raises": [
+                    "com.sun.star.lang.IndexOutOfBoundsException",
+                    "com.sun.star.lang.IllegalArgumentException"
+                ],
+                "args": []
+            },
+            {
+                "name": "getTextMarkupCount",
+                "returns": "int",
+                "desc": [
+                    "Returns the number of text markup of the given text markup type of a text.",
+                    "",
+                    "Throws IllegalArgumentException, if given text markup type is out of valid range."
+                ],
+                "raises": [
+                    "com.sun.star.lang.IllegalArgumentException"
+                ],
+                "args": []
+            }
+        ]
+    }

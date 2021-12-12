@@ -1,0 +1,58 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.2",
+  "name": "XAccessible",
+  "type": "interface",
+  "namespace": "com.sun.star.accessibility",
+  "parser_args": {
+    "sort": true
+  },
+  "writer_args": {},
+  "data": {
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".x_accessible_context",
+        "XAccessibleContext"
+      ]
+    ],
+    "name": "XAccessible",
+    "imports": [],
+    "namespace": "com.sun.star.accessibility",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "This interface has to be implemented by any class that wants to be accessible.",
+      "",
+      "It is used to provide access to the XAccessibleContext interface but allows at the same time that the interface is implemented by another class.",
+      "",
+      "The distinction between the interfaces XAccessible and XAccessibleContext makes it possible to split up the implementation of the class that is made accessible and the actual accessibility code into two (mostly) independent parts. The only necessary dependence is the XAccessible.getAccessibleContext() function that returns the accessible context. This one-way link has to be persistent in some sense: As long as there is at least one reference to a specific XAccessibleContext object the XAccessible object has to return the same context for every call to XAccessible.getAccessibleContext(). This is necessary to allow the use of object identity for comparing accessibility contexts for being equal.",
+      "",
+      "**See Also**",
+      "",
+      "    AccessibleContext"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1accessibility_1_1XAccessible.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getAccessibleContext",
+          "returns": "'XAccessibleContext'",
+          "desc": [
+            "Returns the AccessibleContext associated with this object.",
+            "",
+            "The idea to let this interface only return an XAccessibleContext instead of directly supporting its functions is to allow the separation of the implementation of the functions that make a class accessible from the implementation of that class. You may, of course, implement XAccessible and XAccessibleContext in one class."
+          ],
+          "raises": [],
+          "args": []
+        }
+      ]
+    }
+  }
+}
