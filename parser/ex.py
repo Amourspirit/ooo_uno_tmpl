@@ -713,21 +713,13 @@ class WriterEx(base.WriteBase):
         logger.info("Created file: %s", jsn_p)
 
 def _main():
-    logger.removeHandler(LOG_FILE_HANDLER)
-    hndl = get_file_handler('debug.log')
-    logger.addHandler(hndl)
-    logger.level = logging.DEBUG
-    url = 'https://api.libreoffice.org/docs/idl/ref/exceptioncom_1_1sun_1_1star_1_1uno_1_1Exception.html'
-    # url = 'https://api.libreoffice.org/docs/idl/ref/exceptioncom_1_1sun_1_1star_1_1auth_1_1UnsupportedException.html'
-    sd = xsrc.SdkData(url)
-    api = ApiData(sd.api_sdk_link.soup)
-    p = ParserEx(url=url)
-    w = WriterEx(parser=p)
-    w.write()
-
-
+    url = 'https://api.libreoffice.org/docs/idl/ref/exceptioncom_1_1sun_1_1star_1_1configuration_1_1CannotLoadConfigurationException.html'
+    sys.argv.extend(['-d', '-n', '-j', '-t', '-v', '-L', 'debug.log', '-u', url])
+    main()
+    
 def main():
-    _set_loggers(get_logger(Path(__file__).stem))
+    global logger
+    
     # region Parser
     parser = argparse.ArgumentParser(description='interface')
     parser.add_argument(
@@ -803,6 +795,13 @@ def main():
         required=False)
     # endregion Dummy Args for Logging
     args = parser.parse_args()
+    if logger is None:
+        log_args = {}
+        if args.log_file:
+            log_args['log_file'] = args.log_file
+        if args.verbose:
+            log_args['level'] = logging.DEBUG
+        _set_loggers(get_logger(logger_name=Path(__file__).stem, **log_args))
     # endregion Parser
     if not args.no_print_clear:
         os.system('cls' if os.name == 'nt' else 'clear')

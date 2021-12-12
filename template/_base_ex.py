@@ -73,3 +73,15 @@ class BaseEx(BaseJson):
         if ver < min_ver:
             raise Exception(
                 "Invalid Data: Expected version to be at least '{min_ver}' got {ver}")
+
+    def _is_properties(self) -> bool:
+        key = 'properties'
+        if not key in self.attribs:
+            return False
+        return len(self.attribs[key]) > 0
+
+    def get_class_end(self):
+        end = ':'
+        if not self.include_desc and not self._is_properties():
+            end += ' ...'
+        return end

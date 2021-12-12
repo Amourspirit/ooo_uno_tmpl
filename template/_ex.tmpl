@@ -36,7 +36,7 @@ if typing.TYPE_CHECKING:
 #end if
 
 
-class ${name}($self.lst_to_str($inherits)):
+class ${name}($self.lst_to_str($inherits))$self.get_class_end()
 #if $include_desc
     """
     #for $line in $self.line_gen($desc)
@@ -48,21 +48,21 @@ class ${name}($self.lst_to_str($inherits)):
         `API $name <$link>`_
     #end if
     """
-#end if
 
+#end if
 #if $is_properties
 #set $properties = $attribs['properties']
 #for $property in $properties
 #set $p_name = $property['name']
-#set $p_return = $property['returns']
+#set $p_type = $property['type']
 #set $p_desc = $property['desc']
-    ${p_name}: $p_return = ...
+    ${p_name}: $p_type = ...
     #if $include_desc
-        """
+    """
     #for $line in $self.line_gen($p_desc)
-        $line
+    $line
     #end for
-        """
+    """
     #end if
 #end for
 #end if

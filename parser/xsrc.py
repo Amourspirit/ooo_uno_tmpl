@@ -132,18 +132,27 @@ class SdkComponentText:
         return self._data
 
     def _get_text_aggresive(self, text:str) -> str:
+        def clean_curly(input: str) -> str:
+            _regex = r"^(}[ ;}]+)"
+            def cb(match) -> str:
+                return base.Util.clean_curly_brace_close(match.group(1))
+            
+            return re.sub(pattern=_regex, repl=cb, string=input, flags=re.MULTILINE)
+        # remove all spaces between } and ;
+        _text = clean_curly(text)
+
         regex_start = r"module (com \{.*)\{"
-        regex_end = r"}; (?:[ ;}])*\n#endif"
-        matches_start = re.search(regex_start, text)
-        matches_end = re.search(regex_end, text)
+        regex_end = r"^(};){3,5}"
+        matches_start = re.search(regex_start, _text)
+        matches_end = re.search(pattern=regex_end, string=_text, flags=re.MULTILINE)
         if not matches_end:
-            regex_end = r"(\}; ){2,4}(\}[; ])+\n"
-            matches_end = re.search(regex_end, text)
+            regex_end = r"(\};){2,4}(\}[;])+\n"
+            matches_end = re.search(pattern=regex_end, string=_text, flags=re.DOTALL)
         result = ''
         if matches_start and matches_end:
             start = matches_start.span()[1]
             end = matches_end.span()[0]
-            result = text[start:end]
+            result = _text[start:end]
             matches_start = re.search(regex_start, result)
         while matches_start:
             start = matches_start.span()[1]

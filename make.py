@@ -119,7 +119,7 @@ class Make:
                     self._compile_tppi(tmpl_file=file)
                     
                     py_file = self._get_py_path(tmpl_file=file)
-                    self._write(py_file)
+                    self._write(py_file, '.pyi')
             except Exception as e:
                 logger.error(e)
 
@@ -181,13 +181,15 @@ class Make:
             logger.error(res.stderr)
 
     def _get_scratch_path(self, tmpl_file) -> Path:
+        
         p_file = Path(tmpl_file)
+        ext = p_file.suffix
         p_dir = p_file.parent
         p_rel = p_dir.relative_to(self._root_dir)
         p_scratch_dir = Path(self._scratch, p_rel)
         self._mkdirp(p_scratch_dir)
         p_scratch = Path(
-            p_scratch_dir, self._camel_to_snake(str(p_file.stem)) + '.py')
+            p_scratch_dir, self._camel_to_snake(str(p_file.stem)) + ext)
         return p_scratch
 
     def _get_py_path(self, tmpl_file) -> Path:
@@ -199,12 +201,22 @@ class Make:
         _name = re.sub('(.)([A-Z][a-z]+)', r'\1_\2', name)
         return re.sub('([a-z0-9])([A-Z])', r'\1_\2', _name).lower()
 
-    def _write(self, py_file):
-        p_out = self._get_scratch_path(tmpl_file=py_file)
+    def _write(self, py_file, ext:str =''):
+        _file = py_file
+        if ext:
+            _tmp = Path(_file)
+            _file = _tmp.parent
+            _file = _file.joinpath(_tmp.stem + ext)
+            
+        p_out = self._get_scratch_path(tmpl_file=_file)
         with open(p_out, "w") as outfile:
             subprocess.run([sys.executable, py_file], stdout=outfile)
             logger.info('Wrote file: %s', str(p_out))
 
+
+def _main():
+    sys.argv.extend(['-v', '--log-file', 'make.log'])
+    main()
 
 def main():
     global logger
@@ -244,7 +256,7 @@ def main():
             log_args['log_file'] = args.log_file
         if args.verbose:
             log_args['level'] = logging.DEBUG
-        logger = get_logger(logger_name=Path(__file__).stem)
+        logger = get_logger(logger_name=Path(__file__).stem, **log_args)
     if len(sys.argv) > 1:
         logger.info('Executing command: %s', sys.argv[1:])
     else:
@@ -257,4 +269,4 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    _main()
