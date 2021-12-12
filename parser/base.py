@@ -1,9 +1,11 @@
+from dataclasses import dataclass
 import os
 import sys
 import re
 import requests
 import textwrap
 import json
+import logging
 from abc import ABC, abstractmethod
 from bs4 import BeautifulSoup
 from bs4.element import ResultSet, Tag
@@ -12,18 +14,21 @@ from kwhelp.decorator import DecFuncEnum, RuleCheckAll
 from kwhelp import rules
 from pathlib import Path
 from typing import Iterable, List, Tuple, Union
+
 # this is for VS code debuging
-sys.path.insert(0, str(Path(__file__).parent.parent))
-print(sys.path)
+_app_root = os.environ.get('project_root', str(Path(__file__).parent.parent))
+if not _app_root in sys.path:
+    sys.path.insert(0, _app_root)
+# print(sys.path)
 # this is for command line
 # sys.path.insert(0, os.path.abspath('..'))
 
-from logger.log_handle import get_logger
-logger = get_logger(__name__)
+logger: logging.Logger  = None
 
 #  \W = [^a-zA-Z0-9_]
 py_name_pattern = re.compile('[\W_]+')
 py_ns_pattern = re.compile(r'[^a-zA-Z0-9\._]+')
+curly_brace_close_pattern = re.compile(r'[^};]')
 
 TYPE_MAP = {
     "any": "object",
@@ -110,6 +115,73 @@ class SoupObj:
 
 
 class Util:
+    @dataclass
+    class RealitiveInfo:
+        """
+        Realitive info
+        """
+        in_branch: str
+        """Original input branch"""
+        comp_branch: str
+        """Original branch to compare to in_branch"""
+        sep: str
+        """Seperator"""
+        in_branch_rel: List[str]
+        """Compare result relative part of in_branch"""
+        comp_branch_rel: List[str]
+        """Compare result relative part of comp_branch"""
+        distance: int
+        """Distance between branches"""
+        common_parts: List[str]
+        """part that in_branch and comp_branch have in common"""
+
+    @staticmethod
+    def get_rel_info(in_branch: str, comp_branch: str, sep: str = '.') -> RealitiveInfo:
+        """
+        Gets realitive info between branches such as ``com.sun.star.configuration``
+        and ``com.sun.star.uno``
+
+        Args:
+            in_branch (str): branch to compare
+            comp_branch (str): branch to get realitive information from compared to ``in_branch``
+            sep (str, optional): Branch seperator. Defaults to ``.``
+
+        Returns:
+            RealitiveInfo: Class instance containing realitive info.
+        """
+        in_branch_parts = in_branch.split(sep)
+        comp_branch_parts = comp_branch.split(sep)
+        rel_len = len(comp_branch_parts)
+        common_roots = 0
+        for i, b in enumerate(in_branch_parts):
+            if i > rel_len:
+                break
+            try:
+                if b == comp_branch_parts[i]:
+                    common_roots += 1
+                    continue
+            except IndexError:
+                break
+            break
+        # comp_branch_rel = in_branch_parts[common_roots:]
+        comp_branch_rel = comp_branch_parts[common_roots:]
+        in_branch_rel = in_branch_parts[common_roots:]
+        diff = len(in_branch_rel)
+        distance = diff
+        common_parts = in_branch_parts[:common_roots]
+        # result = ((diff + 1), sep.join(comp_branch_rel))
+        result = Util.RealitiveInfo(
+            in_branch=in_branch,
+            comp_branch=comp_branch,
+            sep=sep,
+            in_branch_rel=in_branch_rel,
+            comp_branch_rel=comp_branch_rel,
+            distance=distance,
+            common_parts=common_parts
+        )
+        # sep_str = sep * (diff + 1)
+        logger.debug("Util.get_rel_info(): %s", str(result))
+        return result
     @staticmethod
     def get_clean_name(input: str, sub: str = '') -> str:
         """
@@ -144,6 +216,18 @@ class Util:
         if ltrim is False:
             return py_ns_pattern.sub(sub, input)
         return py_ns_pattern.sub(sub, input).lstrip('.')
+    
+    def clean_curly_brace_close(input: str) -> str:
+        """
+        Removes all char from a string except for ``};``
+
+        Args:
+            input (str): string to clean
+
+        Returns:
+            str: input with any other chars replaced
+        """
+        return curly_brace_close_pattern.sub('', input)
 
     """Static Class or helper methods"""
     @staticmethod
@@ -234,47 +318,48 @@ class Util:
         return re.sub('([a-z0-9])([A-Z])', r'\1_\2', _input).lower()
 
     @staticmethod
-    def get_rel_import(i_str: str, ns: str) -> Tuple[str, str]:
-        logger.debug('Util.get_rel_import')
-        logger.debug("i_str: '%s' ns: '%s'",i_str, ns)
-        name_ns_str = i_str.rsplit('.', 1)[0] # drop last word
-        logger.debug("Namespace from i_str: '%s'", name_ns_str)
-        name_ns: List[str] = name_ns_str.split('.')
-        logger.debug("i_str Namespace Parts: '%s'", str(name_ns))
-        if len(name_ns) == 1:
+    def get_rel_import(i_str: str, ns: str, sep: str = '.') -> Tuple[str, str]:
+        """
+        Gets realitive import Tuple
+
+        Args:
+            i_str (str): Namespace and object such as ``com.sun.star.uno.Exception``
+            ns (str): Namespace used to get realitive postion such as ``com.sun.star.awt``
+            sep (str, optional): Namespace seperator. Defaults to ``.``
+
+        Returns:
+            Tuple[str, str]: realitive import info such as ``('..uno.exception', 'Exception')``
+        """
+        # i_str = com.sun.star.uno.Exception
+        # ns = com.sun.star.configuration
+        # ("..uno.exception", "Exception")
+        # compare ns to ns so drop last name of i_str
+        name_parts = i_str.split(sep)
+        name = name_parts.pop()
+        camel_name = Util.camel_to_snake(name)
+        ns2 = sep.join(name_parts)
+        if ns2 == ns:
+            logger.debug("get_rel_import(): Names are equal: '%s'", ns)
+            logger.debug(f"get_rel_import(): Returning (.{camel_name}', '{name})")
+            return (f'.{camel_name}', f'{name}')
+        if len(name_parts) == 1:
             # this is a single word
             # assume it is in the same namespace as this import
-            logger.debug("'%s', single word. Converting to from import and returning", i_str)
+            logger.debug(
+                "get_rel_import(): '%s', single word. Converting to from import and returning", i_str)
             return (f'.{Util.camel_to_snake(i_str)}', f'{i_str}')
-        name = Util.get_last_part(input=i_str)
-        camel_name = Util.camel_to_snake(name)
-        logger.debug("Name from i_str: '%s'", name)
-        ns_parts = ns.split('.')
-        if name_ns_str == ns:
-            logger.debug("Names are equal: '%s'", ns)
-            logger.debug(f"Returning (.{camel_name}', '{name})")
-            return (f'.{camel_name}', f'{name}')
-        commmon_count = 0
-        for i, ns in enumerate(name_ns):
-            if ns != ns_parts[i]:
-                break
-            commmon_count += 1
-        if commmon_count > 0:
-            logger.debug('found common %d namespace elements', commmon_count)
-            common_ns = name_ns[commmon_count:]
-            logger.debug("Common elements: '%s'", str(common_ns))
-            dot_ext = (len(ns_parts) - commmon_count) + 1
-            logger.debug("'.' to prepend is: %d", dot_ext)
-            dot = "." * dot_ext
-            rel = ".".join(common_ns)
-            logger.debug("Realitive part is '%s'", rel)
-            str_from = f'{dot}{rel}.{camel_name}'
-            logger.debug("From String to return is:'%s'", str_from)
-            return (str_from, name)
-        # last ditch effort to import via full path
-        short = name_ns_str.replace('com.sun.star.', '')
-        logger.debug(
-            f"Last ditch effort. Returning: (ooo_uno.uno_obj.{short}.{camel_name}', {name})")
+        try:
+            info = Util.get_rel_info(in_branch=ns, comp_branch=ns2, sep=sep)
+            prefix = sep * (info.distance + 1)
+            result_parts = info.comp_branch_rel + [camel_name]
+            from_str = prefix
+            from_str = from_str + sep.join(result_parts)
+            return (from_str, name)
+        except Exception as e:
+            logger.error(e, exc_info=True)
+        short = ns2.replace('com.sun.star.', '')
+        logger.warn(
+            f"get_rel_import(): Last ditch effort. Returning: (ooo_uno.uno_obj.{short}.{camel_name}', {name})")
         return (f'ooo_uno.uno_obj.{short}.{camel_name}', f'{name}')
 
     @staticmethod
@@ -534,6 +619,10 @@ class UrlObj:
             self._ns_str = '.'.join(self.namespace)
         return self._ns_str
 
+    @property
+    def url(self) -> str:
+        """Gets url value"""
+        return self._url
 
 class BlockObj(ABC):
     """
@@ -602,13 +691,17 @@ class TagsStrObj:
     def get_lines(self) -> List[str]:
         """Gets lines for this instance"""
         lines = []
-        for i, ln in enumerate(self._tags):
+        i = 0
+        for ln in self._tags:
             s = ln.text.strip()
+            if not s:
+                continue
             if self._clean:
                 s = str_clean(input=s)
             if i > 0 and self._empty_lines:
                 lines.append("")
             lines.append(s)
+            i += 1
         return lines
 
     def get_data(self) -> List[str]:

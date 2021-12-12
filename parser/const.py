@@ -2,13 +2,13 @@
 import os
 import sys
 import argparse
+import base
 from typing import Dict, List
 from bs4 import BeautifulSoup
 from bs4.element import ResultSet, Tag
 from kwhelp.decorator import DecFuncEnum, RuleCheckAllKw, TypeCheckKw
 from kwhelp import rules
 from collections import namedtuple
-from base import UrlObj, Util, WriteBase, ParserBase
 from pathlib import Path
 import textwrap
 import xerox # requires xclip - sudo apt-get install xclip
@@ -16,11 +16,12 @@ from logger.log_handle import get_logger
 from parser import __version__, JSON_ID
 
 logger = get_logger(Path(__file__).stem)
-
+base.logger = logger
 dataitem = namedtuple(
     'dataitem', ['value', 'raw_value', 'name', 'datatype', 'lines'])
 
-class Parser(ParserBase):
+
+class Parser(base.ParserBase):
     
     # region init
     @RuleCheckAllKw(arg_info={"url": 0, "sort": 1},
@@ -58,7 +59,7 @@ class Parser(ParserBase):
             full_name = self._get_full_name(soup=soup)
             name = self._get_name(soup=soup)
             desc = self._get_desc(soup=soup)
-            ns = UrlObj(self.url)
+            ns = base.UrlObj(self.url)
             info = {
                 "name": name,
                 "fullname": full_name,
@@ -146,7 +147,7 @@ class Parser(ParserBase):
             for itm in data:
                 d_itm = {
                     "name": itm.name,
-                    "type": Util.get_py_type(itm.datatype),
+                    "type": base.Util.get_py_type(itm.datatype),
                     "value": itm.value,
                     "lines": itm.lines
                 }
@@ -209,8 +210,7 @@ class Parser(ParserBase):
     # endregion Data
 
 
-
-class ConstWriter(WriteBase):
+class ConstWriter(base.WriteBase):
     # region Constructor
     @TypeCheckKw(arg_info={
         "hex": 0,
@@ -303,7 +303,7 @@ class ConstWriter(WriteBase):
             },
             "data": p_dict
         }
-        str_jsn = Util.get_formated_dict_list_str(obj=json_dict, indent=2)
+        str_jsn = base.Util.get_formated_dict_list_str(obj=json_dict, indent=2)
         self._json_str = str_jsn
         return self._json_str
 
@@ -330,7 +330,7 @@ class ConstWriter(WriteBase):
         self._template = self._template.replace('{ns}', self._p_namespace)
         self._template = self._template.replace('{link}', self._p_url)
         indent = ' ' * self._indent_amt
-        str_json_desc = Util.get_formated_dict_list_str(self._p_desc)
+        str_json_desc = base.Util.get_formated_dict_list_str(self._p_desc)
         self._template = self._template.replace('{desc}', str_json_desc)
         # indented = textwrap.indent(self._p_desc, indent).lstrip()
         # self._template = self._template.replace('{desc}', indented)
