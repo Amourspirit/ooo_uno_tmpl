@@ -382,6 +382,7 @@ class ParserEx(base.ParserBase):
             Dict[str, object]: {
                 "name": "str, class name",
                 "imports": "List[str], imports",
+                "typing_imports": "List[str], imports that require typing",
                 "namespace": "str, Namespace",
                 "extends": "List[str], class extends",
                 "desc": "List[str], class description",
@@ -401,7 +402,8 @@ class ParserEx(base.ParserBase):
         result = {
             'name': ni.name,
             'namespace': ns.namespace_str,
-            'imports': list(self._api_data.api_properties.imports),
+            'imports': [],
+            'typing_imports': list(self._api_data.api_properties.imports),
             'extends': ex.ex_lst,
             'desc': desc.get_obj(),
             "url": ns.url
@@ -553,6 +555,8 @@ class WriterEx(base.WriteBase):
         p_dict['from_imports'] = self._get_from_imports()
         p_dict['from_imports_typing'] = self._get_from_imports_typing()
         p_dict.update(self._parser.get_dict_data())
+        if 'typing_imports' in p_dict:
+            del p_dict['typing_imports']
 
         json_dict = {
             "id": JSON_ID,
@@ -634,8 +638,7 @@ class WriterEx(base.WriteBase):
             f, n = base.Util.get_rel_import(
                 i_str=ns, ns=self._p_namespace
             )
-            lst.append(f)
-            lst.append(n)
+            lst.append([f, n])
         self._cache[key] = lst
         return self._cache[key]
      
@@ -653,8 +656,8 @@ class WriterEx(base.WriteBase):
         self._p_url = data['url']
         self._p_data = self._parser.get_formated_data()
         self._validate_p_info()
-        _imports = data['imports']
-        self._p_imports_typing.update(_imports)
+        typing_imports = data['typing_imports']
+        self._p_imports_typing.update(typing_imports)
         self._p_imports.update(data['extends'])
         if len(self._p_imports_typing) > 0:
             self._p_requires_typing = True
@@ -713,7 +716,8 @@ class WriterEx(base.WriteBase):
         logger.info("Created file: %s", jsn_p)
 
 def _main():
-    url = 'https://api.libreoffice.org/docs/idl/ref/exceptioncom_1_1sun_1_1star_1_1configuration_1_1CannotLoadConfigurationException.html'
+    # url = 'https://api.libreoffice.org/docs/idl/ref/exceptioncom_1_1sun_1_1star_1_1configuration_1_1CannotLoadConfigurationException.html'
+    url = 'https://api.libreoffice.org/docs/idl/ref/exceptioncom_1_1sun_1_1star_1_1uno_1_1Exception.html'
     sys.argv.extend(['-d', '-n', '-j', '-t', '-v', '-L', 'debug.log', '-u', url])
     main()
     
