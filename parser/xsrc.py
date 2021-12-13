@@ -8,12 +8,10 @@ import xerox  # requires xclip - sudo apt-get install xclip
 import re
 import base
 from typing import Dict, List, Set, Union
-from bs4 import BeautifulSoup
 from bs4.element import PageElement, ResultSet, Tag
-from kwhelp.decorator import DecFuncEnum, RuleCheckAllKw, RequireArgs, TypeCheckKw
-from kwhelp import rules
+from kwhelp.decorator import DecFuncEnum, TypeCheckKw
 from pathlib import Path
-from logger.log_handle import get_logger, LOG_FILE_HANDLER, get_file_handler
+from logger.log_handle import get_logger
 from parser.enm import main
 from dataclasses import dataclass
 from parser import __version__, JSON_ID

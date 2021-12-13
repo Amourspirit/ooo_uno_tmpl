@@ -1,13 +1,14 @@
 #!/usr/bin/env python
 import os
 import sys
+import logging
 import argparse
 import base
-from typing import Dict, List, NamedTuple, Set, Tuple, Union
+from typing import Dict, List, Set, Tuple, Union
 from bs4 import BeautifulSoup
-from bs4.element import ResultSet, SoupStrainer, Tag
+from bs4.element import ResultSet, Tag
 from kwhelp.decorator import DecFuncEnum, RuleCheckAllKw, TypeCheckKw
-from kwhelp import KwArg, rules
+from kwhelp import rules
 from collections import namedtuple
 from pathlib import Path
 import textwrap
@@ -16,8 +17,15 @@ from logger.log_handle import get_logger
 
 from parser import __version__, JSON_ID
 
-logger = get_logger(Path(__file__).stem)
-base.logger = logger
+logger = None
+
+def _set_loggers(l: Union[logging.Logger, None]):
+    global logger, base
+    logger = l
+    base.logger = l
+
+_set_loggers(None)
+
 dataitem = namedtuple(
     'dataitem', ['name', 'datatype', 'orig_type', 'lines'])
 
@@ -435,14 +443,13 @@ class StructWriter(base.WriteBase):
         
         
 def _main():
-    os.system('cls' if os.name == 'nt' else 'clear')
     url = 'https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1accessibility_1_1AccessibleRelation.html'
     p = Parser(url=url)
     w = StructWriter(parser=p, print=True, auto_import=True)
     w.write()
 def main():
-    os.system('cls' if os.name == 'nt' else 'clear')
-    logger.info('Executing command: %s', sys.argv[1:])
+    global logger
+
     # http://pymotw.com/2/argparse/
     parser = argparse.ArgumentParser(description='const')
     parser.add_argument(
@@ -450,6 +457,18 @@ def main():
         help='Source Url',
         type=str,
         required=True)
+    parser.add_argument(
+        '-x', '--no-cache',
+        help='No caching',
+        action='store_false',
+        dest='cache',
+        default=True)
+    parser.add_argument(
+        '-p', '--no-print-clear',
+        help='No clearing of terminal when output to terminal.',
+        action='store_false',
+        dest='no_print_clear',
+        default=True)
     parser.add_argument(
         '-s', '--no-sort',
         help='No sorting of results',
@@ -504,8 +523,6 @@ def main():
         action='store_true',
         dest='write_json',
         default=False)
-
-    # region Dummy Args for Logging
     parser.add_argument(
         '-v', '--verbose',
         help='verbose logging',
@@ -517,14 +534,28 @@ def main():
         help='Log file to use',
         type=str,
         required=False)
-    # endregion Dummy Args for Logging
 
     args = parser.parse_args()
-    # print("auto", args.auto_import)
-    # print('print', args.print)
-    # return
-    p = Parser(url=args.url, sort=args.sort,
-               replace_dual_colon=args.dual_colon)
+
+    if logger is None:
+        log_args = {}
+        if args.log_file:
+            log_args['log_file'] = args.log_file
+        if args.verbose:
+            log_args['level'] = logging.DEBUG
+        _set_loggers(get_logger(logger_name=Path(__file__).stem, **log_args))
+
+    if not args.no_print_clear:
+        os.system('cls' if os.name == 'nt' else 'clear')
+
+    logger.info('Executing command: %s', sys.argv[1:])
+    logger.info('Parsing Url %s' % args.url)
+    p = Parser(
+        url=args.url,
+        sort=args.sort,
+        replace_dual_colon=args.dual_colon,
+        cache=args.cache
+        )
     if args.print_template is False and args.print_json is False:
         print('')
     w = StructWriter(
