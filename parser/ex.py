@@ -146,7 +146,7 @@ class ApiPropertyInfo:
             item = self._get_next_sibling(title)
         except TypeError:
             logger.error(
-                "ApiPropertyInfo.get_obj() Not Title object for Name '%s' with id: %s", name, self._id)
+                "ApiPropertyInfo.get_obj() No Title object for id: %s", self._id)
             return None
         # item contains type, name and desc
         tn = item.find_next('td', class_='memname')

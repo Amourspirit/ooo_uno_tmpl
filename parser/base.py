@@ -13,7 +13,7 @@ from abc import ABC, abstractmethod
 from bs4 import BeautifulSoup
 from bs4.element import ResultSet, Tag
 from glob import glob
-from kwhelp.decorator import DecFuncEnum, RuleCheckAll, RuleCheckAllKw
+from kwhelp.decorator import DecFuncEnum, RuleCheckAll, RuleCheckAllKw, TypeCheck
 from kwhelp import rules
 from pathlib import Path
 from typing import Iterable, List, Tuple, Union
@@ -67,20 +67,34 @@ def str_clean(input: str, **kwargs) -> str:
     return result.strip()
 
 class FileCache:
+    """
+    Caches files and retreives cached files.
+    Cached file are in a subfolder of system tmp dir.
+    """
+    
     def __init__(self, tmp_dir='ooo_uno_tmpl', lifetime: float = 60.0) -> None:
+        """
+        Constructor
+
+        Args:
+            tmp_dir (str, optional): Dir name to create in tmp folder. Defaults to 'ooo_uno_tmpl'.
+            lifetime (float, optional): Time in seconds that cache is good for. Defaults to 60 seconds.
+        """
         t_path =Path(tempfile.gettempdir())
         self._cache_path = t_path / tmp_dir
-        self._mkdirp(self._cache_path)
+        Util.mkdirp(self._cache_path)
         self._lifetime = lifetime   
-    
-    def _mkdirp(self, dest_dir):
-        # Python ≥ 3.5
-        if isinstance(dest_dir, Path):
-            dest_dir.mkdir(parents=True, exist_ok=True)
-        else:
-            Path(dest_dir).mkdir(parents=True, exist_ok=True)
 
-    def fetch_from_cache(self, filename) -> Union[str, None]:
+    def fetch_from_cache(self, filename: Union[str, Path]) -> Union[str, None]:
+        """
+        Fetches file contents from cache if it exist and is not expired
+
+        Args:
+            filename (Union[str, Path]): File to retrieve
+
+        Returns:
+            Union[str, None]: File contents if retrieved; Otherwise, ``None``
+        """
         f = Path(self._cache_path, filename)
         if not f.exists():
             return None
@@ -101,7 +115,14 @@ class FileCache:
         except IOError:
             return None
 
-    def save_in_cache(self, filename, content):
+    def save_in_cache(self, filename: Union[str, Path], content: str):
+        """
+        Saves file contents into cache
+
+        Args:
+            filename (Union[str, Path]): filename to write.
+            content (str): Contents to write into file.
+        """
         f = Path(self._cache_path, filename)
         # print('Saving a copy of {} in the cache'.format(filename))
         with open(f, 'w') as cached_file:
@@ -109,18 +130,22 @@ class FileCache:
 
 
 class ResponseObj:
-    @RuleCheckAllKw(
-        arg_info={
-            'url': rules.RuleStrNotNullEmptyWs,
-            'allow_cache': rules.RuleBool
-        },
-        ftype=DecFuncEnum.METHOD
-    )
-    def __init__(self, url: str, allow_cache: bool = True):
+    """Gets response data"""
+    @TypeCheck(str, (float , int), ftype=DecFuncEnum.METHOD)
+    def __init__(self, url: str, cache_seconds:float = 604800.0):
+        """
+        Constructor
+
+        Args:
+            url (str): Url to retrieve html
+            allow_cache (bool, optional): Determins if caching is used.
+                If ``True`` html will be written to cache. Defaults to True.
+            cache_seconds (float, optional): The number of seconds that html
+                contents will be cached for. Default is ``604800.0`` ( one week )
+        """
         self._url = url
-        self._allow_cache = False
-        self.allow_cache = allow_cache # for logging purposes
-        if self._allow_cache:
+        self._lifetime = cache_seconds
+        if self._lifetime > 0:
             self._url_hash = hashlib.md5(self._url.encode('utf-8')).hexdigest()
         else:
             self._url_hash = ''
@@ -129,10 +154,9 @@ class ResponseObj:
     # cache for one week - 604800.0 seconds
     def _get_request_text(self) -> str:
         global RESPONSE_CACHE
-        if self._allow_cache:
+        if self._lifetime > 0:
             if not RESPONSE_CACHE:
-                # lifetime 604800.0 one week
-                RESPONSE_CACHE = FileCache(lifetime=604800.0)
+                RESPONSE_CACHE = FileCache(lifetime=self._lifetime)
             html_text = RESPONSE_CACHE.fetch_from_cache(self._url_hash)
             if html_text:
                 logger.debug("ResponseObj._get_request_text() retreived data from Cache")
@@ -159,21 +183,22 @@ class ResponseObj:
             self._text = self._get_request_text()
         return self._text
     @property
-    def allow_cache(self) -> bool:
+    def cache_seconds(self) -> float:
         """Specifies allow_cache
     
-            :getter: Gets allow_cache value.
-            :setter: Sets allow_cache value.
+            :getter: Gets cache_seconds value.
+            :setter: Sets cache_seconds value.
         """
-        return self._allow_cache
+        return self._lifetime
     
-    @allow_cache.setter
-    def allow_cache(self, value: bool):
-        self._allow_cache = value
-        logger.debug('ResponseObj: caching is set to: %s', str(value))
+    @cache_seconds.setter
+    def cache_seconds(self, value: float):
+        self._lifetime = value
+        logger.debug('ResponseObj: caching is set to: %d', value)
 
 
 class SoupObj:
+    """Wrapper for BeautifulSoup"""
     @RuleCheckAllKw(
         arg_info={
             'url': rules.RuleStrNotNullEmptyWs,
@@ -182,7 +207,17 @@ class SoupObj:
         ftype=DecFuncEnum.METHOD
     )
     def __init__(self, url: str, allow_cache: bool = True) -> None:
-        self._response = ResponseObj(url=url,allow_cache=allow_cache)
+        """
+        Constructor
+
+        Args:
+            url (str): Url of http page
+            allow_cache (bool, optional): If ``True`` html contents are cached. Defaults to ``True``.
+        """
+        if allow_cache:
+            self._response = ResponseObj(url=url)
+        else:
+            self._response = ResponseObj(url=url, cache_seconds=0)
         self._soup = None
 
     @property
@@ -216,6 +251,7 @@ class SoupObj:
         self._response.allow_cache = value
 
 class Util:
+    """Utility class of static methods for operations"""
     @dataclass
     class RealitiveInfo:
         """
@@ -283,6 +319,7 @@ class Util:
         # sep_str = sep * (diff + 1)
         logger.debug("Util.get_rel_info(): %s", str(result))
         return result
+
     @staticmethod
     def get_clean_name(input: str, sub: str = '') -> str:
         """
@@ -626,7 +663,22 @@ class Util:
         if arg_quote:
             return f"'{_u_type_clean}'"
         return _u_type_clean
-    
+
+    @staticmethod
+    def mkdirp(dest_dir: Union[str, Path]):
+        """
+        Creates directory and all child directories if needed
+
+        Args:
+            dest_dir (Union[str, Path]): path to create directories for.
+                Must be dir path only. No checking is done for file names.
+        """
+        # Python ≥ 3.5
+        if isinstance(dest_dir, Path):
+            dest_dir.mkdir(parents=True, exist_ok=True)
+        else:
+            Path(dest_dir).mkdir(parents=True, exist_ok=True)
+
     @staticmethod
     def _encode_list(lst: List[str]) -> List[str]:
         results = []

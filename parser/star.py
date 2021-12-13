@@ -98,7 +98,7 @@ class ApiLink:
             td: Tag = tr.find('td', class_='mdescRight')
             return " ".join(td.text.strip().splitlines())
         except Exception as e:
-            logger.error("ApiLink._get_desc() Error %s", e)
+            logger.warn("ApiLink._get_desc() Error %s", e)
             return ''
     
     def get_obj(self) -> List[LinkInfo]:
@@ -111,14 +111,15 @@ class ApiLink:
         self._data = ni_lst
         return self._data
 class ApiData:
-    @TypeCheck((str, base.SoupObj), ftype=DecFuncEnum.METHOD)
-    def __init__(self, url_soup: Union[str, base.SoupObj]):
+    @TypeCheck((str, base.SoupObj), bool, ftype=DecFuncEnum.METHOD)
+    def __init__(self, url_soup: Union[str, base.SoupObj], allow_cache:bool):
         if isinstance(url_soup, str):
             self._url = url_soup
-            self._soup_obj = base.SoupObj(url_soup)
+            self._soup_obj = base.SoupObj(url=url_soup,allow_cache=allow_cache)
         else:
             self._url = url_soup.url
             self._soup_obj = url_soup
+            self._soup_obj.allow_cache = allow_cache
 
         self._api_module_block: ApiModuleBlock = None
         self._api_link: ApiLink = None
@@ -137,6 +138,71 @@ class ApiData:
             self._api_link = ApiLink(self.api_module_block)
         return self._api_link
 
+class ParserStar:
+    @TypeCheckKw(arg_info={'cache': 0}, types=[bool], ftype=DecFuncEnum.METHOD)
+    @RuleCheckAllKw(arg_info={'url': rules.RuleStrNotNullEmptyWs}, ftype=DecFuncEnum.METHOD)
+    def __init__(self, url: str,**kwargs) -> None:
+        self._url: str = url
+        self._allow_cache: bool = kwargs.get('cache', True)
+        self._api_data = ApiData(
+            url_soup=self._url, allow_cache=self._allow_cache)
+        self._cache = {}
+        
+    
+    def get_data(self) -> Dict[str, str]:
+        key = 'get_data'
+        if key in self._cache:
+            return self._cache[key]
+        data = self._api_data.api_link.get_obj()
+        results = []
+        for itm in data:
+            result = {
+                "name": itm.Name,
+                "href": itm.href,
+                "desc": itm.desc
+            }
+            results.append(result)
+        self._cache[key] = results
+        return self._cache[key]
+
+class WriteStar:
+    @TypeCheckKw(arg_info={
+        "write_json": 0,
+        "print_json": 0,
+        "clear_on_print": 0
+    },
+        types=[bool],
+        ftype=DecFuncEnum.METHOD
+    )
+    def __init__(self, parser: ParserStar, **kwargs) -> None:
+        self._parser: ParserStar = parser
+        self._print_json: bool = kwargs.get('print_json', True)
+        self._write_json: bool = kwargs.get('write_json', False)
+        self._clear_on_print: bool = kwargs.get('clear_on_print', True)
+        self._cache = {}
+        
+    def write(self):
+        try:
+            if self._print_json:
+                print(self._get_json())
+        except Exception as e:
+            logger.exception(e)
+
+    def _get_json(self) -> str:
+        key = '_get_json'
+        if key in self._cache:
+            return self._cache[key]
+        json_dict = {
+            "id": JSON_ID,
+            "version": __version__,
+            "name": 'star links',
+            "type": "namespace_url",
+            "data": self._parser.get_data()
+        }
+        str_jsn = base.Util.get_formated_dict_list_str(obj=json_dict, indent=2)
+        self._cache[key] = str_jsn
+        return self._cache[key]
+
 def main():
     global logger
     log_args = {
@@ -149,9 +215,10 @@ def main():
     
     url = 'https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star.html'
     
-    api_data = ApiData(url)
+    p = ParserStar(url=url, cache=True)
     
-    print(api_data.api_link.get_obj())
+    w = WriteStar(parser=p)
+    w.write()
     
 if __name__ == '__main__':
     main()
