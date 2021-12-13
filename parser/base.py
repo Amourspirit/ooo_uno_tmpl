@@ -154,7 +154,8 @@ class ResponseObj:
     # cache for one week - 604800.0 seconds
     def _get_request_text(self) -> str:
         global RESPONSE_CACHE
-        if self._lifetime > 0:
+        allow_cache = self._lifetime > 0
+        if allow_cache:
             if not RESPONSE_CACHE:
                 RESPONSE_CACHE = FileCache(lifetime=self._lifetime)
             html_text = RESPONSE_CACHE.fetch_from_cache(self._url_hash)
@@ -165,7 +166,7 @@ class ResponseObj:
         if response.status_code != 200:
             raise Exception('bad response code:' + str(response.status_code))
         html_text = response.text
-        if self._allow_cache:
+        if allow_cache:
             RESPONSE_CACHE.save_in_cache(self._url_hash, html_text)
         return html_text
 

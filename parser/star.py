@@ -90,7 +90,7 @@ class ApiLink:
             ))
         return result
     
-    def _get_desc(self, class_:str) -> str:
+    def _get_desc(self, class_:str, name:str) -> str:
         try:
             full_class = 'memdesc:' + class_
             tag = self._api_module_block.get_obj()
@@ -98,7 +98,8 @@ class ApiLink:
             td: Tag = tr.find('td', class_='mdescRight')
             return " ".join(td.text.strip().splitlines())
         except Exception as e:
-            logger.warn("ApiLink._get_desc() Error %s", e)
+            logger.warning(
+                'ApiLink._get_desc() No description found for: %s', name)
             return ''
     
     def get_obj(self) -> List[LinkInfo]:
@@ -107,7 +108,7 @@ class ApiLink:
         ni_lst: List[LinkInfo] = self._get_name_info()
         for ni in ni_lst:
             class_ = base.Util.get_last_part(input=ni.class_name, sep=':')
-            ni.desc = self._get_desc(class_)
+            ni.desc = self._get_desc(class_, ni.Name)
         self._data = ni_lst
         return self._data
 class ApiData:
@@ -179,12 +180,17 @@ class WriteStar:
         self._print_json: bool = kwargs.get('print_json', True)
         self._write_json: bool = kwargs.get('write_json', False)
         self._clear_on_print: bool = kwargs.get('clear_on_print', True)
+        self._file_name: bool = kwargs.get('filename', 'star.json')
+        self._dir_name: bool = kwargs.get('dirname', 'resources')
+        self._path_dir = Path(__file__).parent
         self._cache = {}
         
     def write(self):
         try:
             if self._print_json:
                 print(self._get_json())
+            if self._write_json:
+                self._write_to_json()
         except Exception as e:
             logger.exception(e)
 
@@ -203,21 +209,99 @@ class WriteStar:
         self._cache[key] = str_jsn
         return self._cache[key]
 
+    def _get_path(self) -> Path:
+        dir_path = Path(self._path_dir.parent, self._dir_name)
+        base.Util.mkdirp(dir_path)
+        return dir_path.joinpath(self._file_name)
+
+    def _write_to_json(self):
+        jsn_p = self._get_path()
+        jsn_str = self._get_json()
+        with open(jsn_p, 'w') as f:
+            f.write(jsn_str)
+        logger.info("Created file: %s", jsn_p)
+
 def main():
     global logger
-    log_args = {
-        'log_file': 'debug.log',
-        'level': logging.DEBUG
-    }
-    _set_loggers(get_logger(logger_name=Path(__file__).stem, **log_args))
-    
-    os.system('cls' if os.name == 'nt' else 'clear')
     
     url = 'https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star.html'
+    file_name = 'star.json'
+    dir_name = 'resources'
+    # region Parser
+    parser = argparse.ArgumentParser(description='star')
+    parser.add_argument(
+        '-u', '--url',
+        help='Source Url',
+        type=str,
+        required=False,
+        default=url)
+    parser.add_argument(
+        '-f', '--file-name',
+        help='Dest file',
+        type=str,
+        dest='file_name',
+        required=False,
+        default=file_name)
+    parser.add_argument(
+        '-d', '--dir-name',
+        help='Dest directory',
+        type=str,
+        dest='dir_name',
+        required=False,
+        default=dir_name)
+    parser.add_argument(
+        '-x', '--no-cache',
+        help='No caching',
+        action='store_false',
+        dest='cache',
+        default=True)
+    parser.add_argument(
+        '-n', '--print-json',
+        help='Print json to terminal',
+        action='store_true',
+        dest='print_json',
+        default=False)
+    parser.add_argument(
+        '-j', '--write-json',
+        help='Write json file into obj_uno subfolder',
+        action='store_true',
+        dest='write_json',
+        default=False)
+    parser.add_argument(
+        '-v', '--verbose',
+        help='verbose logging',
+        action='store_true',
+        dest='verbose',
+        default=False)
+    parser.add_argument(
+        '-L', '--log-file',
+        help='Log file to use',
+        type=str,
+        required=False)
+    args = parser.parse_args()
+    # endregion Parser
+    if logger is None:
+        log_args = {}
+        if args.log_file:
+            log_args['log_file'] = args.log_file
+        if args.verbose:
+            log_args['level'] = logging.DEBUG
+        _set_loggers(get_logger(logger_name=Path(__file__).stem, **log_args))
+    if len(sys.argv) > 1:
+        logger.info('Executing command: %s', sys.argv[1:])
+    logger.info('Parsing Url %s' % args.url)
+    p = ParserStar(
+        url=args.url,
+        cache=args.cache,
+        filename=args.file_name,
+        dirname=args.dir_name
+        )
     
-    p = ParserStar(url=url, cache=True)
-    
-    w = WriteStar(parser=p)
+    w = WriteStar(
+        parser=p,
+        write_json=args.write_json,
+        print_json=args.print_json
+        )
     w.write()
     
 if __name__ == '__main__':

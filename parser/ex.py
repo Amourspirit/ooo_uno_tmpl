@@ -513,7 +513,7 @@ class WriterEx(base.WriteBase):
         self._p_data: str = None
         self._p_url: str = None
         self._p_requires_typing = False
-        self._path_dir = Path(os.path.dirname(__file__))
+        self._path_dir = Path(__file__).parent
         self._cache: Dict[str, object] = {}
 
         t_file = 'exception'
