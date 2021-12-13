@@ -434,6 +434,18 @@ def main():
         type=str,
         required=True)
     parser.add_argument(
+        '-x', '--no-cache',
+        help='No caching',
+        action='store_false',
+        dest='cache',
+        default=True)
+    parser.add_argument(
+        '-p', '--no-print-clear',
+        help='No clearing of terminal when output to terminal.',
+        action='store_false',
+        dest='no_print_clear',
+        default=True)
+    parser.add_argument(
         '-s', '--no-sort',
         help='No sorting of results',
         action='store_false',
@@ -502,11 +514,18 @@ def main():
             log_args['level'] = logging.DEBUG
         _set_loggers(get_logger(logger_name=Path(__file__).stem, **log_args))
 
+    if not args.no_print_clear:
+        os.system('cls' if os.name == 'nt' else 'clear')
+
     logger.info('Executing command: %s', sys.argv[1:])
     logger.info('Parsing Url %s' % args.url)
+
     p = ParserEnum(
-        url=args.url, sort=args.sort,
-        replace_dual_colon=args.dual_colon)
+        url=args.url,
+        sort=args.sort,
+        replace_dual_colon=args.dual_colon,
+        cache=args.cache
+        )
     w = EnumWriter(
         parser=p,
         print_template=args.print_template,

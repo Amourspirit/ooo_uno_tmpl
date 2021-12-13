@@ -144,9 +144,10 @@ class ResponseObj:
                 contents will be cached for. Default is ``604800.0`` ( one week )
         """
         self._url = url
+        self._url_obj = UrlObj(self._url)
         self._lifetime = cache_seconds
         if self._lifetime > 0:
-            self._url_hash = hashlib.md5(self._url.encode('utf-8')).hexdigest()
+            self._url_hash = hashlib.md5(self._url_obj.url_only.encode('utf-8')).hexdigest()
         else:
             self._url_hash = ''
         self._text = None
@@ -168,12 +169,18 @@ class ResponseObj:
         html_text = response.text
         if allow_cache:
             RESPONSE_CACHE.save_in_cache(self._url_hash, html_text)
+            logger.debug("ResponseObj._get_request_text() Saving to cache as: %s", self._url_hash)
         return html_text
 
     @property
     def url(self) -> str:
         """Specifies url"""
         return self._url
+    
+    @property
+    def url_obj(self) -> 'UrlObj':
+        """Gets url_obj value"""
+        return self._url_obj
 
     @property
     def raw_html(self) -> str:
@@ -236,7 +243,12 @@ class SoupObj:
     @property
     def url(self) -> str:
         """Specifies url"""
-        return self.response.url
+        return self._response.url
+    
+    @property
+    def url_obj(self) -> str:
+        """Specifies url"""
+        return self._response.url_obj
 
     @property
     def allow_cache(self) -> bool:
@@ -709,14 +721,19 @@ class UrlObj:
         self._url = url
         # similar to: namespacecom_1_1sun_1_1star_1_1style.html#a3ae28cb49c180ec160a0984600b2b925
         self._page_link = self._url.rsplit('/', 1)[1]
-        self._is_frag = False
-        try:
-            self._fragment = self._page_link.split('#')[1]
+        f_parts = self._url.split(sep='#', maxsplit=1)
+        if len(f_parts) > 1:
+            self._url_only = f_parts[0]
+            self._fragment = f_parts[1]
             self._is_frag = True
-        except IndexError:
+        else:
+            self._url_only = self._url
             self._fragment = ''
+            self._is_frag = False
+
         self._ns = None
         self._ns_str = None
+        
 
     def _get_ns(self) -> List[str]:
         result = []
@@ -777,6 +794,13 @@ class UrlObj:
     def url(self) -> str:
         """Gets url value"""
         return self._url
+    
+    @property
+    def url_only(self) -> str:
+        """
+        Gets full url without fragment
+        """
+        return self._url_only
 
 class BlockObj(ABC):
     """
