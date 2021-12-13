@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 from dataclasses import dataclass
-import os
 import sys
 import argparse
 import base
@@ -8,12 +7,9 @@ import re
 import logging
 from typing import Dict, List, Tuple, Union
 from bs4.element import ResultSet, Tag
-from kwhelp.decorator import DecFuncEnum, RuleCheckAllKw, RequireArgs, TypeCheckKw, TypeCheck
+from kwhelp.decorator import DecFuncEnum, RuleCheckAllKw, TypeCheckKw, TypeCheck
 from kwhelp import rules
-from collections import namedtuple
 from pathlib import Path
-import textwrap
-import xerox  # requires xclip - sudo apt-get install xclip
 from logger.log_handle import get_logger
 from parser import __version__, JSON_ID
 

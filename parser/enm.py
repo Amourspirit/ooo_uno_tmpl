@@ -6,11 +6,9 @@ import argparse
 import base
 from typing import Dict, List, Union
 from bs4.element import ResultSet, Tag
-from kwhelp.decorator import DecFuncEnum, RuleCheckAllKw, RequireArgs, TypeCheckKw
-from kwhelp import rules
+from kwhelp.decorator import DecFuncEnum, TypeCheckKw
 from collections import namedtuple
 from pathlib import Path
-import textwrap
 import xerox # requires xclip - sudo apt-get install xclip
 from logger.log_handle import get_logger
 from parser import __version__, JSON_ID

@@ -12,13 +12,12 @@ from typing import Dict, List, Set, Union
 from bs4.element import PageElement, ResultSet, Tag
 from kwhelp.decorator import DecFuncEnum, RuleCheckAllKw, RequireArgs, TypeCheck, TypeCheckKw
 from kwhelp import rules
-from collections import namedtuple
 from pathlib import Path
 import textwrap
 import xerox  # requires xclip - sudo apt-get install xclip
-from logger.log_handle import get_logger, LOG_FILE_HANDLER, get_file_handler
+from logger.log_handle import get_logger
 from parser import __version__, JSON_ID
-import pprint
+
 # some exceptions are Depreciated such as IntrospectionException https://api.libreoffice.org/docs/idl/ref/exceptioncom_1_1sun_1_1star_1_1beans_1_1IntrospectionException.html
 
 logger = None
