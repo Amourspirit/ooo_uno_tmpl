@@ -17,10 +17,17 @@ from logger.log_handle import get_logger, LOG_FILE_HANDLER, get_file_handler
 from parser.enm import main
 from dataclasses import dataclass
 from parser import __version__, JSON_ID
-DEBUGGING = False
 
-logger = get_logger(Path(__file__).stem)
+logger = None
 
+
+def _set_loggers(l: Union[logging.Logger, None]):
+    global logger, base
+    logger = l
+    base.logger = l
+
+
+_set_loggers(None)
 
 re_component_start = re.compile(r"(interface.*){", re.DOTALL)
 re_name_info_start = re.compile(r"(interface)\s*[a-zA-Z0-9]+[ :]+")
@@ -63,8 +70,6 @@ class SdkCodeText(base.BlockObj):
     def __init__(self, soup: base.SoupObj):
         super().__init__(soup=soup)
         self._data = None
-        # if DEBUGGING:
-        #     self._data = get_code_text_data()
 
     def get_obj(self) -> str:
         if self._data:
@@ -983,8 +988,6 @@ class ApiMethodBlocks(base.BlockObj):
         else:
             self._soup_obj = url_soup
         soup = self._soup_obj
-        if DEBUGGING:
-            soup._soup = BeautifulSoup(get_soup_data(), 'lxml')
         super().__init__(soup=soup)
         self._obj_data = None
         self._index = 0
@@ -1810,6 +1813,13 @@ def main():
         required=False)
     # endregion Dummy Args for Logging
     args = parser.parse_args()
+    if logger is None:
+        log_args = {}
+        if args.log_file:
+            log_args['log_file'] = args.log_file
+        if args.verbose:
+            log_args['level'] = logging.DEBUG
+        _set_loggers(get_logger(logger_name=Path(__file__).stem, **log_args))
     # endregion Parser
     if not args.no_print_clear:
         os.system('cls' if os.name == 'nt' else 'clear')
@@ -1834,22 +1844,6 @@ def main():
     if args.print_template is False and args.print_json is False:
         print('')
     w.write()
-
-# region Debugging Data
-
-
-def get_code_text_data():
-    # code text value
-    result = None
-    return result
-
-def get_soup_data():
-    # raw html
-    result = None
-    return result
-
-# endregion Debugging Data
-
 
 if __name__ == '__main__':
     main()
