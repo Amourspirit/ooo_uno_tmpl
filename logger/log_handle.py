@@ -85,7 +85,7 @@ def get_file_handler(log_file: Union[str, Path, None] = None):
     else:
         p_log: Path = log_file
         if isinstance(log_file, str):
-            p_log = Path(p_log)
+            p_log = Path(Path(__file__).parent.parent, log_file)
         file_handler = logging.FileHandler(p_log)
         file_handler.setFormatter(FORMATTER)
     LOG_FILE_HANDLER = file_handler

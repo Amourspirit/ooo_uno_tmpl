@@ -1202,15 +1202,17 @@ class ApiInfo:
 
 class SdkData():
     """Sdk Data bring together most Sdk object in one easy to upse place"""
-    def __init__(self, url: str):
+    def __init__(self, url: str, allow_cache: bool = True):
         """
         Constructor
 
         Args:
             url (str): Url to Api Main Page
+            allow_cache (bool, optional): determins if file caching is used
+                on response data. Default ``True``
         """
         self._url = url
-        self._api_sdk_link = ApiSdkLink(base.SoupObj(self._url))
+        self._api_sdk_link = ApiSdkLink(base.SoupObj(url=self._url, allow_cache=allow_cache))
         self._soup_obj = None
         self._code_text = None
         self._componnet_text = None
@@ -1319,12 +1321,18 @@ class ParserInterface(base.ParserBase):
 
     # region Constructor
     @RequireArgs('url', ftype=DecFuncEnum.METHOD)
-    @RuleCheckAllKw(arg_info={"url": 0, "sort": 1, "replace_dual_colon": 1},
+    @RuleCheckAllKw(arg_info={
+        "url": 0,
+        "sort": 1,
+        "replace_dual_colon": 1,
+        'cache': 1
+        },
                     rules=[rules.RuleStrNotNullEmptyWs, rules.RuleBool],
                     ftype=DecFuncEnum.METHOD)
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self._sdk_data = SdkData(self.url)
+        self._allow_cache: bool = kwargs.get('cache', True)
+        self._sdk_data = SdkData(self.url, allow_cache=self._allow_cache)
         soup = self._sdk_data.api_sdk_link.soup
         self._api_info = ApiInfo(soup)
         self._sdk_method_info = SdkMethods(soup)
@@ -1741,6 +1749,12 @@ def main():
         dest='sort',
         default=True)
     parser.add_argument(
+        '-x', '--no-cache',
+        help='No caching',
+        action='store_false',
+        dest='cache',
+        default=True)
+    parser.add_argument(
         '-p', '--no-print-clear',
         help='No clearing of terminal when output to terminal.',
         action='store_false',
@@ -1802,7 +1816,11 @@ def main():
     logger.info('Executing command: %s', sys.argv[1:])
     logger.info('Parsing Url %s' % args.url)
     
-    p = ParserInterface(url=args.url, sort=args.sort)
+    p = ParserInterface(
+        url=args.url,
+        sort=args.sort,
+        cache=args.cache
+    )
     w = InterfaceWriter(
         parser=p,
         print_template=args.print_template,

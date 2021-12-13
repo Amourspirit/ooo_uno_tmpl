@@ -6,11 +6,14 @@ import requests
 import textwrap
 import json
 import logging
+import tempfile
+import time
+import hashlib
 from abc import ABC, abstractmethod
 from bs4 import BeautifulSoup
 from bs4.element import ResultSet, Tag
 from glob import glob
-from kwhelp.decorator import DecFuncEnum, RuleCheckAll
+from kwhelp.decorator import DecFuncEnum, RuleCheckAll, RuleCheckAllKw
 from kwhelp import rules
 from pathlib import Path
 from typing import Iterable, List, Tuple, Union
@@ -29,6 +32,8 @@ logger: logging.Logger  = None
 py_name_pattern = re.compile('[\W_]+')
 py_ns_pattern = re.compile(r'[^a-zA-Z0-9\._]+')
 curly_brace_close_pattern = re.compile(r'[^};]')
+RESPONSE_CACHE: 'FileCache' = None
+"""FileCache object for caching response data"""
 
 TYPE_MAP = {
     "any": "object",
@@ -61,18 +66,83 @@ def str_clean(input: str, **kwargs) -> str:
     result = result.replace('"', '\\"')
     return result.strip()
 
+class FileCache:
+    def __init__(self, tmp_dir='ooo_uno_tmpl', lifetime: float = 60.0) -> None:
+        t_path =Path(tempfile.gettempdir())
+        self._cache_path = t_path / tmp_dir
+        self._mkdirp(self._cache_path)
+        self._lifetime = lifetime   
+    
+    def _mkdirp(self, dest_dir):
+        # Python ≥ 3.5
+        if isinstance(dest_dir, Path):
+            dest_dir.mkdir(parents=True, exist_ok=True)
+        else:
+            Path(dest_dir).mkdir(parents=True, exist_ok=True)
+
+    def fetch_from_cache(self, filename) -> Union[str, None]:
+        f = Path(self._cache_path, filename)
+        if not f.exists():
+            return None
+
+        if self._lifetime > 0:
+            f_stat = f.stat()
+            ti_m = f_stat.st_mtime
+            age = time.time() - ti_m
+            if age >= self._lifetime:
+                return None
+        try:
+            # Check if we have this file locally
+            
+            with open(f) as fin:
+                content = fin.read()
+            # If we have it, let's send it
+            return content
+        except IOError:
+            return None
+
+    def save_in_cache(self, filename, content):
+        f = Path(self._cache_path, filename)
+        # print('Saving a copy of {} in the cache'.format(filename))
+        with open(f, 'w') as cached_file:
+            cached_file.write(content)
+
 
 class ResponseObj:
-    @RuleCheckAll(rules.RuleStrNotNullEmptyWs, ftype=DecFuncEnum.METHOD)
-    def __init__(self, url: str):
+    @RuleCheckAllKw(
+        arg_info={
+            'url': rules.RuleStrNotNullEmptyWs,
+            'allow_cache': rules.RuleBool
+        },
+        ftype=DecFuncEnum.METHOD
+    )
+    def __init__(self, url: str, allow_cache: bool = True):
         self._url = url
+        self._allow_cache = False
+        self.allow_cache = allow_cache # for logging purposes
+        if self._allow_cache:
+            self._url_hash = hashlib.md5(self._url.encode('utf-8')).hexdigest()
+        else:
+            self._url_hash = ''
         self._text = None
 
+    # cache for one week - 604800.0 seconds
     def _get_request_text(self) -> str:
+        global RESPONSE_CACHE
+        if self._allow_cache:
+            if not RESPONSE_CACHE:
+                # lifetime 604800.0 one week
+                RESPONSE_CACHE = FileCache(lifetime=604800.0)
+            html_text = RESPONSE_CACHE.fetch_from_cache(self._url_hash)
+            if html_text:
+                logger.debug("ResponseObj._get_request_text() retreived data from Cache")
+                return html_text
         response = requests.get(url=self._url)
         if response.status_code != 200:
             raise Exception('bad response code:' + str(response.status_code))
         html_text = response.text
+        if self._allow_cache:
+            RESPONSE_CACHE.save_in_cache(self._url_hash, html_text)
         return html_text
 
     @property
@@ -85,15 +155,34 @@ class ResponseObj:
         """
         Gets raw html of url
         """
-        if not self._text:
+        if self._text is None:
             self._text = self._get_request_text()
         return self._text
+    @property
+    def allow_cache(self) -> bool:
+        """Specifies allow_cache
+    
+            :getter: Gets allow_cache value.
+            :setter: Sets allow_cache value.
+        """
+        return self._allow_cache
+    
+    @allow_cache.setter
+    def allow_cache(self, value: bool):
+        self._allow_cache = value
+        logger.debug('ResponseObj: caching is set to: %s', str(value))
 
 
 class SoupObj:
-    @RuleCheckAll(rules.RuleStrNotNullEmptyWs, ftype=DecFuncEnum.METHOD)
-    def __init__(self, url: str) -> None:
-        self._response = ResponseObj(url)
+    @RuleCheckAllKw(
+        arg_info={
+            'url': rules.RuleStrNotNullEmptyWs,
+            'allow_cache': rules.RuleBool
+        },
+        ftype=DecFuncEnum.METHOD
+    )
+    def __init__(self, url: str, allow_cache: bool = True) -> None:
+        self._response = ResponseObj(url=url,allow_cache=allow_cache)
         self._soup = None
 
     @property
@@ -113,6 +202,18 @@ class SoupObj:
         """Specifies url"""
         return self.response.url
 
+    @property
+    def allow_cache(self) -> bool:
+        """Specifies allow_cache
+    
+            :getter: Gets allow_cache value.
+            :setter: Sets allow_cache value.
+        """
+        return self._response.allow_cache
+    
+    @allow_cache.setter
+    def allow_cache(self, value: bool):
+        self._response.allow_cache = value
 
 class Util:
     @dataclass

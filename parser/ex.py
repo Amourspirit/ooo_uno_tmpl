@@ -303,14 +303,16 @@ class ApiDesc:
 
 class ApiData:
 
-    @TypeCheck((str, base.SoupObj), ftype=DecFuncEnum.METHOD)
-    def __init__(self, url_soup: Union[str, base.SoupObj]):
+    @TypeCheck((str, base.SoupObj), bool, ftype=DecFuncEnum.METHOD)
+    def __init__(self, url_soup: Union[str, base.SoupObj], allow_cache: bool):
         if isinstance(url_soup, str):
             self._url = url_soup
-            self._soup_obj = base.SoupObj(url_soup)
+            self._soup_obj = base.SoupObj(
+                url=url_soup, allow_cache=allow_cache)
         else:
             self._url = url_soup.url
             self._soup_obj = url_soup
+            self._soup_obj.allow_cache = allow_cache
 
         self._property_ids = None
         self._api_properties = None
@@ -340,14 +342,18 @@ class ApiData:
 class ParserEx(base.ParserBase):
     # region Constructor
     @RequireArgs('url', ftype=DecFuncEnum.METHOD)
-    @RuleCheckAllKw(arg_info={"url": 0, "sort": 1},
+    @RuleCheckAllKw(arg_info={"url": 0, "sort": 1, 'cache': 1},
                     rules=[rules.RuleStrNotNullEmptyWs, rules.RuleBool],
                     ftype=DecFuncEnum.METHOD)
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self._sdk_data = xsrc.SdkData(self.url)
+        self._allow_cache: bool = kwargs.get('cache', True)
+        self._sdk_data = xsrc.SdkData(
+            url=self.url,
+            allow_cache=self._allow_cache
+            )
         soup = self._sdk_data.api_sdk_link.soup
-        self._api_data = ApiData(soup)
+        self._api_data = ApiData(url_soup=soup, allow_cache=self._allow_cache)
         self._imports: Set[str] = set()
         self._requires_typing = False
         self._cache = {}
@@ -738,6 +744,12 @@ def main():
         dest='sort',
         default=True)
     parser.add_argument(
+        '-x', '--no-cache',
+        help='No caching',
+        action='store_false',
+        dest='cache',
+        default=True)
+    parser.add_argument(
         '-d', '--no-desc',
         help='No description will be outputed in template',
         action='store_false',
@@ -812,7 +824,11 @@ def main():
     logger.info('Executing command: %s', sys.argv[1:])
     logger.info('Parsing Url %s' % args.url)
 
-    p = ParserEx(url=args.url, sort=args.sort)
+    p = ParserEx(
+        url=args.url,
+        sort=args.sort,
+        cache=args.cache
+    )
     w = WriterEx(
         parser=p,
         print_template=args.print_template,
