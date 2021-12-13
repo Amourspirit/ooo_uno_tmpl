@@ -1738,6 +1738,7 @@ def _main():
     main()
 
 def main():
+    global logger
     # region Parser
     parser = argparse.ArgumentParser(description='interface')
     parser.add_argument(

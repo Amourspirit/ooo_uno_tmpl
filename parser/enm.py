@@ -1,9 +1,10 @@
 #!/usr/bin/env python
 import os
 import sys
+import logging
 import argparse
 import base
-from typing import Dict, List
+from typing import Dict, List, Union
 from bs4.element import ResultSet, Tag
 from kwhelp.decorator import DecFuncEnum, RuleCheckAllKw, RequireArgs, TypeCheckKw
 from kwhelp import rules
@@ -14,10 +15,15 @@ import xerox # requires xclip - sudo apt-get install xclip
 from logger.log_handle import get_logger
 from parser import __version__, JSON_ID
 
-import pprint
+logger = None
 
-logger = get_logger(Path(__file__).stem)
-base.logger = logger
+def _set_loggers(l: Union[logging.Logger, None]):
+    global logger, base
+    logger = l
+    base.logger = l
+
+
+_set_loggers(None)
 
 EnumDataItem = namedtuple(
     'EnumDataItem',
@@ -446,7 +452,8 @@ def _main():
     # t = TagsStrObj(tags=["ones", "twos", "Three", "four"], indent=8)
     # print(t.get_string_list())
 def main():
-    logger.info('Executing command: %s', sys.argv[1:])
+    global logger
+
     parser = argparse.ArgumentParser(description='enum')
     parser.add_argument(
         '-u', '--url',
@@ -501,9 +508,6 @@ def main():
         action='store_true',
         dest='write_json',
         default=False)
-    
-
-    # region Dummy Args for Logging
     parser.add_argument(
         '-v', '--verbose',
         help='verbose logging',
@@ -515,9 +519,17 @@ def main():
         help='Log file to use',
         type=str,
         required=False)
-    # endregion Dummy Args for Logging
 
     args = parser.parse_args()
+    if logger is None:
+        log_args = {}
+        if args.log_file:
+            log_args['log_file'] = args.log_file
+        if args.verbose:
+            log_args['level'] = logging.DEBUG
+        _set_loggers(get_logger(logger_name=Path(__file__).stem, **log_args))
+
+    logger.info('Executing command: %s', sys.argv[1:])
     logger.info('Parsing Url %s' % args.url)
     p = ParserEnum(
         url=args.url, sort=args.sort,
