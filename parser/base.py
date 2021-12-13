@@ -13,7 +13,7 @@ from abc import ABC, abstractmethod
 from bs4 import BeautifulSoup
 from bs4.element import ResultSet, Tag
 from glob import glob
-from kwhelp.decorator import DecFuncEnum, RuleCheckAll, RuleCheckAllKw, TypeCheck
+from kwhelp.decorator import DecFuncEnum, RequireArgs, RuleCheckAll, RuleCheckAllKw, TypeCheck
 from kwhelp import rules
 from pathlib import Path
 from typing import Iterable, List, Tuple, Union
@@ -897,13 +897,19 @@ class WriteBase(object):
 
 
 class ParserBase(object):
+    @RequireArgs('url', ftype=DecFuncEnum.METHOD)
+    @RuleCheckAllKw(arg_info={"url": 0, "sort": 1, "cache": 1, "replace_dual_colon": 1},
+                    rules=[rules.RuleStrNotNullEmptyWs, rules.RuleBool],
+                    ftype=DecFuncEnum.METHOD)
     def __init__(self, **kwargs):
+        self._allow_cache: bool = kwargs.get('cache', True)
         self._indent = '    '
         self._url = kwargs.get('url', '')
         self._raw = ''
         self._sort = kwargs.get('sort', True)
         self._replace_dual_colon = kwargs.get('replace_dual_colon', True)
         self._title_full = None
+        self._response_obj = None
 
     # region internal Non specific methods
     def _get_number(self, input: str) -> Union[str, int, float]:
@@ -926,11 +932,13 @@ class ParserBase(object):
 
     # region request
     def get_request_text(self, url: str) -> str:
-        response = requests.get(url=url)
-        if response.status_code != 200:
-            raise Exception('bad response code:' + str(response.status_code))
-        html_text = response.text
-        return html_text
+        if self._response_obj is None:
+            if self.allow_cache:
+                self._response_obj = ResponseObj(url=url)
+            else:
+                self._response_obj = ResponseObj(url=url, cache_seconds=0)
+        return self._response_obj.raw_html
+
     # endregion request
 
     # region raw html
@@ -1027,7 +1035,21 @@ class ParserBase(object):
 
     # endregion util
 
-     # region Properties
+    # region Properties
+    
+    @property
+    def sort(self) -> bool:
+        """Specifies sort
+    
+            :getter: Gets sort value.
+            :setter: Sets sort value.
+        """
+        return self._sort
+    
+    @sort.setter
+    def sort(self, value: bool):
+        self._sort = value    
+     
     @property
     def url(self) -> str:
         """Specifies url
@@ -1041,4 +1063,16 @@ class ParserBase(object):
     def url(self, value: str):
         self._url = value
 
+    @property
+    def allow_cache(self) -> bool:
+        """Specifies allow_cache
+    
+            :getter: Gets allow_cache value.
+            :setter: Sets allow_cache value.
+        """
+        return self._allow_cache
+    
+    @allow_cache.setter
+    def allow_cache(self, value: bool):
+        self._allow_cache = value 
     # endregion Properties

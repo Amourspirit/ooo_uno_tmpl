@@ -184,15 +184,11 @@ class EnumItems:
 
 class ParserEnum(base.ParserBase):
     # region init
-    @RequireArgs('url', ftype=DecFuncEnum.METHOD)
-    @RuleCheckAllKw(arg_info={"url": 0, "sort": 1, "replace_dual_colon": 1},
-                    rules=[rules.RuleStrNotNullEmptyWs, rules.RuleBool],
-                    ftype=DecFuncEnum.METHOD)
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self._data = None
         self._data_formated = None
-        self._soup = base.SoupObj(url=self._url)
+        self._soup = base.SoupObj(url=self.url, allow_cache=self.allow_cache)
         self._block = None
         self._data_formated = None
         self._data_items = None
@@ -243,7 +239,7 @@ class ParserEnum(base.ParserBase):
     
     def get_parser_args(self) -> dict:
         args = {
-            "sort": self._sort
+            "sort": self.sort
         }
         return args
 
@@ -257,22 +253,6 @@ class ParserEnum(base.ParserBase):
         s = base.Util.get_formated_dict_list_str(result)
         self._data_formated =s
         return self._data_formated
-        try:
-            block = self._get_enum_block()
-            e_obj = EnumItems(block=block, sort=self._sort)
-            enums = e_obj.get_data()
-            s = ''
-            lst_indent = self._indent * 2
-            for i, e in enumerate(enums):
-                if i > 0:
-                    s += ',\n'
-                s_desc = textwrap.indent(Util.get_string_list(e.desc), lst_indent).lstrip()
-
-                s += f'{self._indent}"{e.name}": {s_desc}'
-            self._data_formated = s
-        except Exception as e:
-            logger.error(e, exc_info=True)
-        return self._data_formated
     
     def _get_data_items(self) -> List[dict]:
         if not self._data_items is None:
@@ -280,7 +260,7 @@ class ParserEnum(base.ParserBase):
         result = []
         try:
             block = self._get_enum_block()
-            e_obj = EnumItems(block=block, sort=self._sort)
+            e_obj = EnumItems(block=block, sort=self.sort)
             enums = e_obj.get_data()
             for e in enums:
                 result.append(
@@ -439,18 +419,11 @@ class EnumWriter(base.WriteBase):
 
 
 def _main():
-    url = 'https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1uno.html#a00683ed3ec24b47c36ead10a20d6f328'
+    url = 'https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1awt.html#aa6b9d577a1700f29923f49f7b77d165f'
 
-    p = ParserEnum(
-        url=url)
-    w = EnumWriter(
-        parser=p,
-        print=True,
-        write_file=False)
-    w.write()
-    
-    # t = TagsStrObj(tags=["ones", "twos", "Three", "four"], indent=8)
-    # print(t.get_string_list())
+    sys.argv.extend(['--log-file', 'debug.log', '-v', '-n', '-u', url])
+    main()
+
 def main():
     global logger
 

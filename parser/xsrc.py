@@ -1323,24 +1323,13 @@ class SdkData():
 class ParserInterface(base.ParserBase):
 
     # region Constructor
-    @RequireArgs('url', ftype=DecFuncEnum.METHOD)
-    @RuleCheckAllKw(arg_info={
-        "url": 0,
-        "sort": 1,
-        "replace_dual_colon": 1,
-        'cache': 1
-        },
-                    rules=[rules.RuleStrNotNullEmptyWs, rules.RuleBool],
-                    ftype=DecFuncEnum.METHOD)
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self._allow_cache: bool = kwargs.get('cache', True)
-        self._sdk_data = SdkData(self.url, allow_cache=self._allow_cache)
+        self._sdk_data = SdkData(self.url, allow_cache=self.allow_cache)
         soup = self._sdk_data.api_sdk_link.soup
         self._api_info = ApiInfo(soup)
         self._sdk_method_info = SdkMethods(soup)
         self._sdk_property_info = SdkProperties(self._sdk_data.component_lines)
-        self._sort = True
         self._info = None
         self._requires_typing = False
         self._imports: Set[str] = set()
@@ -1356,7 +1345,7 @@ class ParserInterface(base.ParserBase):
     
     def get_parser_args(self) -> dict:
         args = {
-            "sort": self._sort
+            "sort": self.sort
         }
         return args
         
@@ -1438,7 +1427,7 @@ class ParserInterface(base.ParserBase):
                 args.append([pi.name, pi.type, pi.direction])
             attrib['args'] = args
             attribs['methods'].append(attrib)
-        if self._sort:
+        if self.sort:
             if 'methods' in attribs:
                 newlist = sorted(attribs['methods'], key=lambda d: d['name'])
                 attribs['methods'] = newlist
@@ -1462,7 +1451,7 @@ class ParserInterface(base.ParserBase):
                 "raises_set": m.raises_set
             }
             attribs['properties'].append(attrib)
-        if self._sort:
+        if self.sort:
             if 'properties' in attribs:
                 newlist = sorted(attribs['properties'], key=lambda d: d['name'])
                 attribs['properties'] = newlist
@@ -1726,12 +1715,7 @@ class InterfaceWriter(base.WriteBase):
 
 
 def _main():
-    # replace logging file handler for debugging.
-    logger.removeHandler(LOG_FILE_HANDLER)
-    hndl = get_file_handler('debug.log')
-    logger.addHandler(hndl)
-    logger.level = logging.DEBUG
-    # os.system('cls' if os.name == 'nt' else 'clear')
+   
     url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1accessibility_1_1XAccessibleEditableText.html'
     # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1accessibility_1_1XAccessibleText.html'
     sys.argv.extend(['--log-file', 'debug.log', '-v', '-n', '-u', url])
@@ -1800,7 +1784,6 @@ def main():
         action='store_true',
         dest='write_json',
         default=False)
-    # region Dummy Args for Logging
     parser.add_argument(
         '-v', '--verbose',
         help='verbose logging',
@@ -1812,7 +1795,7 @@ def main():
         help='Log file to use',
         type=str,
         required=False)
-    # endregion Dummy Args for Logging
+
     args = parser.parse_args()
     if logger is None:
         log_args = {}

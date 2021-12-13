@@ -1,9 +1,10 @@
 #!/usr/bin/env python
 import os
 import sys
+import logging
 import argparse
 import base
-from typing import Dict, List
+from typing import Dict, List, Union
 from bs4 import BeautifulSoup
 from bs4.element import ResultSet, Tag
 from kwhelp.decorator import DecFuncEnum, RuleCheckAllKw, TypeCheckKw
@@ -15,8 +16,15 @@ import xerox # requires xclip - sudo apt-get install xclip
 from logger.log_handle import get_logger
 from parser import __version__, JSON_ID
 
-logger = get_logger(Path(__file__).stem)
-base.logger = logger
+logger = None
+
+def _set_loggers(l: Union[logging.Logger, None]):
+    global logger, base
+    logger = l
+    base.logger = l
+
+_set_loggers(None)
+
 dataitem = namedtuple(
     'dataitem', ['value', 'raw_value', 'name', 'datatype', 'lines'])
 
@@ -24,15 +32,13 @@ dataitem = namedtuple(
 class Parser(base.ParserBase):
     
     # region init
-    @RuleCheckAllKw(arg_info={"url": 0, "sort": 1},
-                    rules=[rules.RuleStrNotNullEmptyWs, rules.RuleBool],
-                    ftype=DecFuncEnum.METHOD)
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self._data = None
         self._data_formated = None
         self._data_info = None
         self._data_items = None
+        self._soup = base.SoupObj(url=self.url, allow_cache=self.allow_cache)
 
     # endregion init
 
@@ -47,7 +53,7 @@ class Parser(base.ParserBase):
                 "fullname": "full name such as com.sun.star.awt.Command"
                 "desc": "description of constant",
                 "url": "Url to LibreOffice of constant",
-                "namespace": "Namespace sucn ascom.sun.star.awt.Command"
+                "namespace": "Namespace such as com.sun.star.awt.Command"
             }
         """
         if not self._data_info is None:
@@ -55,7 +61,7 @@ class Parser(base.ParserBase):
         try:
             if not self._url:
                 raise ValueError('URL is not set')
-            soup = BeautifulSoup(self.get_raw_html(), 'lxml')
+            soup = self._soup.soup
             full_name = self._get_full_name(soup=soup)
             name = self._get_name(soup=soup)
             desc = self._get_desc(soup=soup)
@@ -75,7 +81,7 @@ class Parser(base.ParserBase):
 
     def get_parser_args(self) -> dict:
         args = {
-            "sort": self._sort
+            "sort": self.sort
         }
         return args
     # endregion Info
@@ -187,7 +193,7 @@ class Parser(base.ParserBase):
             di = dataitem(value=value, raw_value=raw_value, name=name,
                           datatype=_type, lines=lines)
             results.append(di)
-        if self._sort:
+        if self.sort:
             results.sort()
         return results
 
@@ -371,20 +377,12 @@ class ConstWriter(base.WriteBase):
 def _main():
     # for debugging
     url = 'https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1accessibility_1_1AccessibleEventId.html'
-    p = Parser(url=url)
-    w = ConstWriter(
-        parser=p,
-        print_template=False,
-        print_json=True,
-        flags=False,
-        hex=False,
-        write_template=False,
-        write_json=False
-    )
-    w.write()
+    sys.argv.extend(['--log-file', 'debug.log', '-v', '-n', '-u', url])
+    main()
 
 def main():
-    logger.info('Executing command: %s', sys.argv[1:])
+    global logger
+    
     parser = argparse.ArgumentParser(description='const')
     parser.add_argument(
         '-u', '--url',
@@ -404,7 +402,19 @@ def main():
         dest='flags',
         default=False)
     parser.add_argument(
-        '-x', '--hex',
+        '-x', '--no-cache',
+        help='No caching',
+        action='store_false',
+        dest='cache',
+        default=True)
+    parser.add_argument(
+        '-p', '--no-print-clear',
+        help='No clearing of terminal when output to terminal.',
+        action='store_false',
+        dest='no_print_clear',
+        default=True)
+    parser.add_argument(
+        '-y', '--hex',
         help='Treat as hex',
         action='store_true',
         dest='hex',
@@ -445,9 +455,38 @@ def main():
         action='store_true',
         dest='write_json',
         default=False)
-    
+    parser.add_argument(
+        '-v', '--verbose',
+        help='verbose logging',
+        action='store_true',
+        dest='verbose',
+        default=False)
+    parser.add_argument(
+        '-L', '--log-file',
+        help='Log file to use',
+        type=str,
+        required=False)
+
     args = parser.parse_args()
-    p = Parser(url=args.url, sort=args.sort)
+    if logger is None:
+        log_args = {}
+        if args.log_file:
+            log_args['log_file'] = args.log_file
+        if args.verbose:
+            log_args['level'] = logging.DEBUG
+        _set_loggers(get_logger(logger_name=Path(__file__).stem, **log_args))
+    # endregion Parser
+    if not args.no_print_clear:
+        os.system('cls' if os.name == 'nt' else 'clear')
+
+    logger.info('Executing command: %s', sys.argv[1:])
+    logger.info('Parsing Url %s' % args.url)
+
+    p = Parser(
+        url=args.url,
+        sort=args.sort,
+        cache=args.cache
+    )
     if not args.print_json and not args.print_template:
         print('')
     w = ConstWriter(
