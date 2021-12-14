@@ -246,7 +246,7 @@ class SoupObj:
         return self._response.url
     
     @property
-    def url_obj(self) -> str:
+    def url_obj(self) -> 'UrlObj':
         """Specifies url"""
         return self._response.url_obj
 
@@ -730,7 +730,8 @@ class UrlObj:
             self._url_only = self._url
             self._fragment = ''
             self._is_frag = False
-
+        self._name = None
+        
         self._ns = None
         self._ns_str = None
         
@@ -738,14 +739,16 @@ class UrlObj:
     def _get_ns(self) -> List[str]:
         result = []
         try:
-            ns_part = self._page_link.split('.')[0].lower()
+            ns_part = self._page_link.split('.')[0]
             s = ns_part.replace('_1_1', '.').lstrip('.')
-            # the frist part on the str usually is prefixe with namespace, interface or whatever.
+            # the frist part on the str usually is prefixed with namespace, interface or whatever.
             # namespace always start with com so just drop the first part to clean it up.
             s = 'com.' + s.split('.', maxsplit=1)[1]
             result = s.split('.')
+            # get that last item
+            self._name = result[-1:][0]
             # Drop the component from the result
-            return result[:-1]
+            self._ns = result[:-1]
         except Exception as e:
             logger.error(e)
             logger.info('UrlObj._get_ns() returning empty list.')
@@ -766,7 +769,16 @@ class UrlObj:
         return self._fragment
 
     @property
-    def is_fragment(self) -> str:
+    def name(self) -> str:
+        """
+        Get name portion of html link such as SpinningProgressControlModel
+        """
+        if self._name is None:
+            self._get_ns()
+        return self._name
+
+    @property
+    def is_fragment(self) -> bool:
         """
         Gets if there is a fragment
         """
@@ -778,7 +790,7 @@ class UrlObj:
         Gets Namespace in format of ['com', 'sun', 'star', 'style']
         """
         if self._ns is None:
-            self._ns = self._get_ns()
+            self._get_ns()
         return self._ns
 
     @property

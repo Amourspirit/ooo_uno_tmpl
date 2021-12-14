@@ -340,13 +340,8 @@ class ApiData:
 
 class ParserEx(base.ParserBase):
     # region Constructor
-    @RequireArgs('url', ftype=DecFuncEnum.METHOD)
-    @RuleCheckAllKw(arg_info={"url": 0, "sort": 1, 'cache': 1},
-                    rules=[rules.RuleStrNotNullEmptyWs, rules.RuleBool],
-                    ftype=DecFuncEnum.METHOD)
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self._allow_cache: bool = kwargs.get('cache', True)
         self._sdk_data = xsrc.SdkData(
             url=self.url,
             allow_cache=self._allow_cache
@@ -360,7 +355,7 @@ class ParserEx(base.ParserBase):
 
     def get_parser_args(self) -> dict:
         args = {
-            "sort": self._sort
+            "sort": self.sort
         }
         return args
 
