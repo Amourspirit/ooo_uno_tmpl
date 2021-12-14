@@ -31,3 +31,20 @@ Now log will contain a bunch of empty lines.
 Regex: $\n
 Find and replace with nothing again.
 All done.
+
+-------------------------------------------------------------------------
+Building Services.
+
+Services as show in Api documentation sometime inherit interfaces that are also inherited by a child class.
+One example of this is the AccessibleButton class.
+https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1awt_1_1AccessibleButton.html
+AccessibleButton class inherites XAccessibleComponent and XAccessibleExtendedComponent, However XAccessibleExtendedComponent already inherits XAccessibleComponent.
+
+I could find no way from the api to filter this properly to inherit only XAccessibleExtendedComponent and not also XAccessibleComponent.
+If this is not limited then python complains.
+
+My solution is to dynamically load all the imports when the service is being build. Via the parsers/service.py module.
+For this reason services should be built last after all other classes have been built into scratch directory. This waill make any classes
+needed for dynamic loading available when the service are being built.
+
+Also all folder containing modules need to have an __init__.py in them in order for dynamic importing to work.
