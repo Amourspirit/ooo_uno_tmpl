@@ -135,7 +135,7 @@ class FileCache:
 class ResponseObj:
     """Gets response data"""
     @TypeCheck(str, (float , int), ftype=DecFuncEnum.METHOD)
-    def __init__(self, url: str, cache_seconds:float = 604800.0):
+    def __init__(self, url: str, cache_seconds:float = 604800.0, **kwargs):
         """
         Constructor
 
@@ -145,9 +145,14 @@ class ResponseObj:
                 If ``True`` html will be written to cache. Defaults to True.
             cache_seconds (float, optional): The number of seconds that html
                 contents will be cached for. Default is ``604800.0`` ( one week )
+
+        Keyword Arguments:
+            has_name (bool, optional): If ``True`` name is extracted from
+                url and namespace excludes name. Default ``True``.
+                This applies to ``url_obj`` property
         """
         self._url = url
-        self._url_obj = UrlObj(self._url)
+        self._url_obj = UrlObj(self._url, kwargs)
         self._lifetime = cache_seconds
         if self._lifetime > 0:
             self._url_hash = hashlib.md5(self._url_obj.url_only.encode('utf-8')).hexdigest()
@@ -217,18 +222,23 @@ class SoupObj:
         },
         ftype=DecFuncEnum.METHOD
     )
-    def __init__(self, url: str, allow_cache: bool = True) -> None:
+    def __init__(self, url: str, allow_cache: bool = True, **kwargs) -> None:
         """
         Constructor
 
         Args:
             url (str): Url of http page
             allow_cache (bool, optional): If ``True`` html contents are cached. Defaults to ``True``.
+
+        Keyword Arguments:
+            has_name (bool, optional): If ``True`` name is extracted from
+                url and namespace excludes name. Default ``True``.
+                This applies to ``url_obj`` property
         """
         if allow_cache:
-            self._response = ResponseObj(url=url)
+            self._response = ResponseObj(url=url, kwargs=kwargs)
         else:
-            self._response = ResponseObj(url=url, cache_seconds=0)
+            self._response = ResponseObj(url=url, cache_seconds=0, kwargs=kwargs)
         self._soup = None
 
     @property
@@ -838,15 +848,26 @@ class ImportCheck:
 
 class UrlObj:
     """Properties of url"""
-    @RuleCheckAll(rules.RuleStrNotNullEmptyWs, ftype=DecFuncEnum.METHOD)
-    def __init__(self, url: str):
+    @RuleCheckAllKw(
+        arg_info={
+            "url": rules.RuleStrNotNullEmptyWs,
+            "has_name": rules.RuleBool
+        },
+        ftype=DecFuncEnum.METHOD
+    )
+    def __init__(self, url: str, **kwargs):
         """
         Constructor
 
         Args:
             url (str): Url
+
+        Keyword Arguments:
+            has_name (bool, optional): If ``True`` name is extracted from
+                url and namespace excludes name. Default ``True``
         """
         self._url = url
+        self._has_name = kwargs.get('has_name', True)
         # similar to: namespacecom_1_1sun_1_1star_1_1style.html#a3ae28cb49c180ec160a0984600b2b925
         self._page_link = self._url.rsplit('/', 1)[1]
         f_parts = self._url.split(sep='#', maxsplit=1)
@@ -858,7 +879,7 @@ class UrlObj:
             self._url_only = self._url
             self._fragment = ''
             self._is_frag = False
-        self._name = None
+        self._name = None if self._has_name else ''
         
         self._ns = None
         self._ns_str = None
@@ -876,7 +897,10 @@ class UrlObj:
             # get that last item
             self._name = result[-1:][0]
             # Drop the component from the result
-            self._ns = result[:-1]
+            if self._has_name:
+                self._ns = result[:-1]
+            else:
+                self._ns = result
         except Exception as e:
             logger.error(e)
             logger.info('UrlObj._get_ns() returning empty list.')
@@ -1040,11 +1064,7 @@ class WriteBase(object):
     def __init__(self, **kwargs):
         pass
     def _mkdirp(self, dest_dir):
-        # Python ≥ 3.5
-        if isinstance(dest_dir, Path):
-            dest_dir.mkdir(parents=True, exist_ok=True)
-        else:
-            Path(dest_dir).mkdir(parents=True, exist_ok=True)
+        Util.mkdirp(dest_dir=dest_dir)
 
     def _get_project_path(self) -> Path:
         return Path(__file__).parent.parent

@@ -15,6 +15,7 @@ from kwhelp import rules
 from pathlib import Path
 from logger.log_handle import get_logger
 from parser import __version__, JSON_ID
+from parser.service import WriterService
 # endregion Imports
 
 # region Logging
@@ -126,9 +127,9 @@ class ApiTableLinks:
         self._table_block = table_block
         self._data = None
     
-    def get_obj(self):
+    def get_obj(self) -> List[Link]:
         if not self._data is None:
-            return self.Data
+            return self._data
         self._data = []
         tag_tbl =self._table_block.get_obj()
         if not tag_tbl:
@@ -176,7 +177,7 @@ class ApiData:
         if isinstance(url_soup, str):
             self._url = url_soup
             self._soup_obj = base.SoupObj(
-                url=url_soup, allow_cache=allow_cache)
+                url=url_soup, allow_cache=allow_cache, has_name=False)
         else:
             self._url = url_soup.url
             self._soup_obj = url_soup
@@ -193,6 +194,14 @@ class ApiData:
     # endregion constructor
     
     # region Properties
+    @property
+    def soup_obj(self) -> base.SoupObj:
+        return self._soup_obj
+    
+    @property
+    def url_obj(self) -> base.UrlObj:
+        return self._soup_obj.url_obj
+
     @property
     def api_tables(self) -> ApiTables:
         """Gets tables on a page"""
@@ -259,7 +268,6 @@ class ApiData:
 
 # region Parser Class
 
-
 class ParserMod:
     @RequireArgs('url', ftype=DecFuncEnum.METHOD, opt_logger=logger)
     @TypeCheckKw(arg_info={'cache': 0}, types=[bool], ftype=DecFuncEnum.METHOD, opt_logger=logger)
@@ -271,6 +279,132 @@ class ParserMod:
             url_soup=self._url, allow_cache=self._allow_cache)
         self._cache = {}
 
+    def _get_module_links(self) -> List[Dict[str, str]]:
+        module_links = self._api_data.api_modules_links.get_obj()
+        links = []
+        if module_links:
+            for link in module_links:
+                links.append(
+                    {
+                        "name": link.name,
+                        "href": link.href
+                    }
+                )
+        logger.debug("ParserMod.get_data() %d moduled links.",
+                     len(module_links))
+        return links
+    def _get_enum_links(self) -> List[Dict[str, str]]:
+        enum_links = self._api_data.api_enum_links.get_obj()
+        links = []
+        if enum_links:
+            for link in enum_links:
+                links.append(
+                    {
+                        "name": link.name,
+                        "href": link.href
+                    }
+                )
+        logger.debug("ParserMod.get_data() %d enum links.", len(enum_links))
+        return links
+    def _get_class_links(self):
+        class_links = self._api_data.api_class_links.get_obj()
+        results = {}
+        for link in class_links:
+            if not link.type in results:
+                results[link.type] = []
+            results[link.type].append(
+                {
+                    "name": link.name,
+                    "href": link.href
+                }
+            )
+        logger.debug("ParserMod.get_data() %d Class links.",
+                     len(class_links))
+        return results
+
+    def get_data(self) -> Dict[str, str]:
+        key = 'get_data'
+        if key in self._cache:
+            return self._cache[key]
+        results = {
+            "modules": self._get_module_links(),
+            "enums": self._get_enum_links(),
+            "classes": self._get_class_links()
+        }
+        self._cache[key] = results
+        return self._cache[key]
+    @property
+    def api_data(self) -> ApiData:
+        """Gets api_data value"""
+        return self._api_data
+# endregion Parser Class
+
+# region Writer Class
+
+
+class WriterMod():
+    @TypeCheckKw(arg_info={
+        "write_json": 0,
+        "print_json": 0,
+        "clear_on_print": 0
+    },
+        types=[bool],
+        ftype=DecFuncEnum.METHOD
+    )
+    def __init__(self, parser: ParserMod, **kwargs) -> None:
+        self._parser: ParserMod = parser
+        self._print_json: bool = kwargs.get('print_json', True)
+        self._write_json: bool = kwargs.get('write_json', False)
+        self._clear_on_print: bool = kwargs.get('clear_on_print', True)
+        self._file_name: bool = kwargs.get('filename', 'module.json')
+        self._dir_name: bool = kwargs.get('dirname', 'resources')
+        self._path_dir = Path(__file__).parent
+        self._cache = {}
+
+    def write(self):
+        try:
+            if self._print_json:
+                print(self._get_json())
+            if self._write_json:
+                self._write_to_json()
+        except Exception as e:
+            logger.exception(e)
+
+    def _get_json(self) -> str:
+        key = '_get_json'
+        if key in self._cache:
+            return self._cache[key]
+        # name = f"{self._parser.api_data.url_obj.namespace_str}.{self._parser.api_data.url_obj.name}"
+        name = self._parser.api_data.url_obj.namespace_str
+        json_dict = {
+            "id": JSON_ID,
+            "version": __version__,
+            "name": name,
+            "type": "module_links",
+            "data": self._parser.get_data()
+        }
+        str_jsn = base.Util.get_formated_dict_list_str(obj=json_dict, indent=2)
+        self._cache[key] = str_jsn
+        return self._cache[key]
+
+
+    def _write_to_json(self):
+        jsn_p = self._get_uno_obj_path()
+        jsn_str = self._get_json()
+        with open(jsn_p, 'w') as f:
+            f.write(jsn_str)
+        logger.info("Created file: %s", jsn_p)
+    
+    def _get_uno_obj_path(self) -> Path:
+        uno_obj_path = Path(self._path_dir.parent, 'uno_obj')     
+        name_parts: List[str] = self._parser.api_data.url_obj.namespace
+        # ignore com, sun, star
+        path_parts = name_parts[3:]
+        path_parts.append('module_links.json')
+        obj_path = uno_obj_path.joinpath(*path_parts)
+        base.Util.mkdirp(dest_dir=obj_path.parent)
+        return obj_path
+# endregion Writer Class
 def main():
     global logger
     if logger is None:
@@ -281,12 +415,9 @@ def main():
         _set_loggers(get_logger(logger_name=Path(__file__).stem, **log_args))
     os.system('cls' if os.name == 'nt' else 'clear')
     url = 'https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1awt.html'
-    data = ApiData(url_soup=url, allow_cache=True)
-    module_links = data.api_modules_links.get_obj()
-    class_links = data.api_class_links.get_obj()
-    const_links = data.api_constants_links.get_obj()
-    enum_links = data.api_enum_links.get_obj()
-    print(enum_links)
+    p = ParserMod(url=url)
+    w = WriterMod(parser=p, write_json=True)
+    w.write()
 
 if __name__ == '__main__':
     main()
