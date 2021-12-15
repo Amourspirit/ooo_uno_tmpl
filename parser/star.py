@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# region Imports
 from dataclasses import dataclass
 import sys
 import argparse
@@ -12,7 +13,9 @@ from kwhelp import rules
 from pathlib import Path
 from logger.log_handle import get_logger
 from parser import __version__, JSON_ID
+# endregion Imports
 
+# region Logging
 logger:logging.Logger = None
 
 
@@ -23,14 +26,18 @@ def _set_loggers(l: Union[logging.Logger, None]):
 
 
 _set_loggers(None)
+# endregion Logging
 
+# region Data Classes
 @dataclass
 class LinkInfo:
     Name: str
     href: str
     desc: str
     class_name: str
+# endregion Data Classes
 
+# region API Classes
 class ApiModuleBlock(base.BlockObj):
     @TypeCheck(base.SoupObj, ftype=DecFuncEnum.METHOD)
     def __init__(self, soup: base.SoupObj):
@@ -135,6 +142,9 @@ class ApiData:
             self._api_link = ApiLink(self.api_module_block)
         return self._api_link
 
+# endregion API Classes
+
+# region Parser Class
 class ParserStar:
     @TypeCheckKw(arg_info={'cache': 0}, types=[bool], ftype=DecFuncEnum.METHOD)
     @RuleCheckAllKw(arg_info={'url': rules.RuleStrNotNullEmptyWs}, ftype=DecFuncEnum.METHOD)
@@ -162,6 +172,9 @@ class ParserStar:
         self._cache[key] = results
         return self._cache[key]
 
+# endregion Parser Class
+
+# region Writer Class
 class WriteStar:
     @TypeCheckKw(arg_info={
         "write_json": 0,
@@ -216,6 +229,10 @@ class WriteStar:
         with open(jsn_p, 'w') as f:
             f.write(jsn_str)
         logger.info("Created file: %s", jsn_p)
+
+# region Writer Class
+
+# region Main
 
 def main():
     global logger
@@ -299,7 +316,9 @@ def main():
         print_json=args.print_json
         )
     w.write()
-    
+
+# endregion Main
+
 if __name__ == '__main__':
     main()
 

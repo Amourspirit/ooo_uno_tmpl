@@ -498,7 +498,7 @@ class WriterService(base.WriteBase):
         self._p_imports.update(data['extends'])
         if self._write_file or self._write_json:
             self._file_full_path = self._get_uno_obj_path()
-    # end region set data
+    # endregion set data
     # region validation
 
     def _validate_p_info(self):
@@ -607,8 +607,8 @@ class WriterService(base.WriteBase):
         except Exception as e:
             logger.exception(e)
     # endregion Write
-# endregion writer
 # endregion Writer
+
 # region Main
 def _main():
     # ic = ImportCheck()
@@ -741,4 +741,4 @@ def main():
 # endregion Main
 
 if __name__ == '__main__':
-   _main()
+   main()
