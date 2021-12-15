@@ -201,6 +201,12 @@ class Make:
         _name = re.sub('(.)([A-Z][a-z]+)', r'\1_\2', name)
         return re.sub('([a-z0-9])([A-Z])', r'\1_\2', _name).lower()
 
+    def _ensure_init(self, path:Path):
+        init_file = Path(path, '__init__.py')
+        if not init_file.exists():
+            init_file.touch()
+            logger.info('Created File: %s', str(init_file))
+
     def _write(self, py_file, ext:str =''):
         _file = py_file
         if ext:
@@ -209,6 +215,7 @@ class Make:
             _file = _file.joinpath(_tmp.stem + ext)
             
         p_out = self._get_scratch_path(tmpl_file=_file)
+        self._ensure_init(p_out.parent)
         with open(p_out, "w") as outfile:
             subprocess.run([sys.executable, py_file], stdout=outfile)
             logger.info('Wrote file: %s', str(p_out))
