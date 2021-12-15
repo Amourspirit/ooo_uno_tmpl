@@ -356,13 +356,15 @@ class WriterMod():
         self._print_json: bool = kwargs.get('print_json', True)
         self._write_json: bool = kwargs.get('write_json', False)
         self._clear_on_print: bool = kwargs.get('clear_on_print', True)
-        self._file_name: bool = kwargs.get('filename', 'module.json')
-        self._dir_name: bool = kwargs.get('dirname', 'resources')
+        self._clear_on_print: bool = kwargs.get('clear_on_print', True)
         self._path_dir = Path(__file__).parent
         self._cache = {}
 
     def write(self):
         try:
+            if self._clear_on_print and self._print_json:
+                logger.debug('Printing to terminal')
+                os.system('cls' if os.name == 'nt' else 'clear')
             if self._print_json:
                 print(self._get_json())
             if self._write_json:
@@ -381,6 +383,7 @@ class WriterMod():
             "version": __version__,
             "name": name,
             "type": "module_links",
+            "url_base": self._parser.api_data.url_obj.url_base,
             "data": self._parser.get_data()
         }
         str_jsn = base.Util.get_formated_dict_list_str(obj=json_dict, indent=2)
@@ -405,19 +408,104 @@ class WriterMod():
         base.Util.mkdirp(dest_dir=obj_path.parent)
         return obj_path
 # endregion Writer Class
+
+def work(url: str, **kwargs):
+    logger.info('Parsing Url %s', url)
+    recursive = bool(kwargs.get('recursive', False))
+    p = ParserMod(url=url, **kwargs)
+    w = WriterMod(parser=p, **kwargs)
+    w.write()
+    if recursive:
+        data = p.get_data()
+        base_url = p.api_data.url_obj.url_base
+        key = 'modules'
+        if key in data:
+            mods: List[dict] = data[key]
+            for mod in mods:
+                href: str = mod['href']
+                _url = f"{base_url}/{href}"
+                work(url=_url, **kwargs)
+
+def _main():
+    url = 'https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1awt.html'
+    sys.argv.extend(['--log-file', 'debug.log', '-v', '-n', '-u', url])
+    main()
+
+
 def main():
     global logger
+    # region Parser
+    parser = argparse.ArgumentParser(description='interface')
+    parser.add_argument(
+        '-u', '--url',
+        help='Source Url',
+        type=str,
+        required=True)
+    parser.add_argument(
+        '-x', '--no-cache',
+        help='No caching',
+        action='store_false',
+        dest='cache',
+        default=True)
+    parser.add_argument(
+        '-p', '--no-print-clear',
+        help='No clearing of terminal when output to terminal.',
+        action='store_false',
+        dest='no_print_clear',
+        default=True)
+    parser.add_argument(
+        '-n', '--print-json',
+        help='Print json to terminal',
+        action='store_true',
+        dest='print_json',
+        default=False)
+    parser.add_argument(
+        '-j', '--write-json',
+        help='Write json file into obj_uno subfolder',
+        action='store_true',
+        dest='write_json',
+        default=False)
+    parser.add_argument(
+        '-r', '--recursive',
+        help='Recursivly process modules. If url contains links other modules they will be processed',
+        action='store_true',
+        dest='recursive',
+        default=False)
+    parser.add_argument(
+        '-v', '--verbose',
+        help='verbose logging',
+        action='store_true',
+        dest='verbose',
+        default=False)
+    parser.add_argument(
+        '-L', '--log-file',
+        help='Log file to use. Defaults to mod.log',
+        type=str,
+        required=False)
+
+    args = parser.parse_args()
     if logger is None:
-        log_args = {
-            'log_file': 'mod.log',
-            'level': logging.DEBUG
-        }
+        log_args = {}
+        if args.log_file:
+            log_args['log_file'] = args.log_file
+        else:
+            log_args['log_file'] = 'mod.log'
+        if args.verbose:
+            log_args['level'] = logging.DEBUG
         _set_loggers(get_logger(logger_name=Path(__file__).stem, **log_args))
-    os.system('cls' if os.name == 'nt' else 'clear')
-    url = 'https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1awt.html'
-    p = ParserMod(url=url)
-    w = WriterMod(parser=p, write_json=True)
-    w.write()
+    # endregion Parser
+    if not args.no_print_clear:
+        os.system('cls' if os.name == 'nt' else 'clear')
+    logger.info('Executing command: %s', sys.argv[1:])
+    work(
+        url=args.url,
+        cache=args.cache,
+        print_json=args.print_json,
+        write_json=args.write_json,
+        clear_on_print=(not args.no_print_clear),
+        recursive=args.recursive
+    )
+ 
 
 if __name__ == '__main__':
     main()

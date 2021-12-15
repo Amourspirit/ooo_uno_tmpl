@@ -134,7 +134,13 @@ class FileCache:
 
 class ResponseObj:
     """Gets response data"""
-    @TypeCheck(str, (float , int), ftype=DecFuncEnum.METHOD)
+    @RuleCheckAllKw(
+        arg_info={
+            "url": rules.RuleStrNotNullEmptyWs,
+            "cache_seconds": rules.RuleNumber
+        },
+        ftype=DecFuncEnum.METHOD
+    )
     def __init__(self, url: str, cache_seconds:float = 604800.0, **kwargs):
         """
         Constructor
@@ -152,7 +158,7 @@ class ResponseObj:
                 This applies to ``url_obj`` property
         """
         self._url = url
-        self._url_obj = UrlObj(self._url, kwargs)
+        self._url_obj = UrlObj(url=self._url, **kwargs)
         self._lifetime = cache_seconds
         if self._lifetime > 0:
             self._url_hash = hashlib.md5(self._url_obj.url_only.encode('utf-8')).hexdigest()
@@ -236,9 +242,9 @@ class SoupObj:
                 This applies to ``url_obj`` property
         """
         if allow_cache:
-            self._response = ResponseObj(url=url, kwargs=kwargs)
+            self._response = ResponseObj(url=url, **kwargs)
         else:
-            self._response = ResponseObj(url=url, cache_seconds=0, kwargs=kwargs)
+            self._response = ResponseObj(url=url, cache_seconds=0, **kwargs)
         self._soup = None
 
     @property
@@ -868,8 +874,10 @@ class UrlObj:
         """
         self._url = url
         self._has_name = kwargs.get('has_name', True)
+        u_parts = self._url.rsplit('/', 1)
         # similar to: namespacecom_1_1sun_1_1star_1_1style.html#a3ae28cb49c180ec160a0984600b2b925
-        self._page_link = self._url.rsplit('/', 1)[1]
+        self._page_link = u_parts[1]
+        self._url_base = u_parts[0]
         f_parts = self._url.split(sep='#', maxsplit=1)
         if len(f_parts) > 1:
             self._url_only = f_parts[0]
@@ -958,6 +966,14 @@ class UrlObj:
     def url(self) -> str:
         """Gets url value"""
         return self._url
+
+    @property
+    def url_base(self) -> str:
+        """
+        Gets url base value such as:
+        ``https://api.libreoffice.org/docs/idl/ref``
+        """
+        return self._url_base
     
     @property
     def url_only(self) -> str:
