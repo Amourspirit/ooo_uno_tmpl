@@ -10,7 +10,7 @@ from dataclasses import dataclass
 from abc import abstractmethod
 from typing import Dict, List, Tuple, Union
 from bs4.element import ResultSet, Tag
-from kwhelp.decorator import DecFuncEnum, RuleCheckAllKw, TypeCheckKw, TypeCheck
+from kwhelp.decorator import DecFuncEnum, RequireArgs, RuleCheckAllKw, TypeCheckKw, TypeCheck
 from kwhelp import rules
 from pathlib import Path
 from logger.log_handle import get_logger
@@ -256,6 +256,20 @@ class ApiData:
     # endregion Properties
 
 # endregion API Classes
+
+# region Parser Class
+
+
+class ParserMod:
+    @RequireArgs('url', ftype=DecFuncEnum.METHOD, opt_logger=logger)
+    @TypeCheckKw(arg_info={'cache': 0}, types=[bool], ftype=DecFuncEnum.METHOD, opt_logger=logger)
+    @RuleCheckAllKw(arg_info={'url': rules.RuleStrNotNullEmptyWs}, ftype=DecFuncEnum.METHOD, opt_logger=logger)
+    def __init__(self, url: str, **kwargs) -> None:
+        self._url: str = url
+        self._allow_cache: bool = kwargs.get('cache', True)
+        self._api_data = ApiData(
+            url_soup=self._url, allow_cache=self._allow_cache)
+        self._cache = {}
 
 def main():
     global logger
