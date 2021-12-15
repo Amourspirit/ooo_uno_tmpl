@@ -400,6 +400,9 @@ class WriterMod():
         logger.info("Created file: %s", jsn_p)
     
     def _get_uno_obj_path(self) -> Path:
+        key = '_get_uno_obj_path'
+        if key in self._cache:
+            return self._cache[key]
         uno_obj_path = Path(self._path_dir.parent, 'uno_obj')     
         name_parts: List[str] = self._parser.api_data.url_obj.namespace
         # ignore com, sun, star
@@ -407,7 +410,8 @@ class WriterMod():
         path_parts.append('module_links.json')
         obj_path = uno_obj_path.joinpath(*path_parts)
         base.Util.mkdirp(dest_dir=obj_path.parent)
-        return obj_path
+        self._cache[key] = obj_path
+        return self._cache[key]
 # endregion Writer Class
 
 def work(url: str, **kwargs):

@@ -297,6 +297,7 @@ class StructWriter(base.WriteBase):
         self._write_template_long: bool = kwargs.get(
             'write_template_long', False)
         self._indent_amt = 4
+        self._cache = {}
         self._json_str = None
         self._file_full_path = None
         self._p_name = None
@@ -410,6 +411,9 @@ class StructWriter(base.WriteBase):
         
 
     def _get_uno_obj_path(self) -> Path:
+        key = '_get_uno_obj_path'
+        if key in self._cache:
+            return self._cache[key]
         uno_obj_path = Path(self._path_dir.parent, 'uno_obj')
         name_parts = self._p_fullname.split('.')
         # ignore com, sun, star
@@ -425,7 +429,8 @@ class StructWriter(base.WriteBase):
         path_parts[index] = path_parts[index] + '.tmpl'
         obj_path = uno_obj_path.joinpath(*path_parts)
         self._mkdirp(obj_path.parent)
-        return obj_path
+        self._cache[key] = obj_path
+        return self._cache[key]
 
     def _auto_imports(self) -> List[Tuple[str, str]]:
         results = []

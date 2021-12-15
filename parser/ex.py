@@ -685,6 +685,9 @@ class WriterEx(base.WriteBase):
     # endregion validation
 
     def _get_uno_obj_path(self) -> Path:
+        key = '_get_uno_obj_path'
+        if key in self._cache:
+            return self._cache[key]
         if not self._p_name:
             try:
                 raise Exception(
@@ -700,7 +703,8 @@ class WriterEx(base.WriteBase):
         path_parts.append(self._p_name + '.tppi')
         obj_path = uno_obj_path.joinpath(*path_parts)
         self._mkdirp(obj_path.parent)
-        return obj_path
+        self._cache[key] = obj_path
+        return self._cache[key]
 
     def _write_to_file(self):
         with open(self._file_full_path, 'w') as f:

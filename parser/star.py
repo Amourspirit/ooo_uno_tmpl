@@ -239,9 +239,13 @@ class WriteStar:
         return self._cache[key]
 
     def _get_path(self) -> Path:
+        key = '_get_path'
+        if key in self._cache:
+            return self._cache[key]
         dir_path = Path(self._path_dir.parent, self._dir_name)
         base.Util.mkdirp(dir_path)
-        return dir_path.joinpath(self._file_name)
+        self._cache[key] = dir_path.joinpath(self._file_name)
+        return self._cache[key]
 
     def _write_to_json(self):
         jsn_p = self._get_path()

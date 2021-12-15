@@ -35,10 +35,8 @@ class Parser(base.ParserBase):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self._data = None
-        self._data_formated = None
-        self._data_info = None
-        self._data_items = None
         self._soup = base.SoupObj(url=self.url, allow_cache=self.allow_cache)
+        self._cache = {}
 
     # endregion init
 
@@ -56,8 +54,10 @@ class Parser(base.ParserBase):
                 "namespace": "Namespace such as com.sun.star.awt.Command"
             }
         """
-        if not self._data_info is None:
-            return self._data_info
+        key = 'get_info'
+        if key in self._cache:
+            return self._cache[key]
+        self._cache[key] = {}
         try:
             if not self._url:
                 raise ValueError('URL is not set')
@@ -73,11 +73,11 @@ class Parser(base.ParserBase):
                 "url": self.url,
                 "namespace": ns.namespace_str
             }
-            self._data_info = info
+            self._cache[key].update(info)
         except Exception as e:
             logger.error(e, exc_info=True)
             raise e
-        return self._data_info
+        return self._cache[key]
 
     def get_parser_args(self) -> dict:
         args = {
@@ -120,8 +120,9 @@ class Parser(base.ParserBase):
             raise e
 
     def get_formated_data(self):
-        if not self._data_formated is None:
-            return self._data_formated
+        key = 'get_formated_data'
+        if key in self._cache:
+            return self._cache[key]
         try:
             data = self.get_data()
             lines = []
@@ -138,15 +139,16 @@ class Parser(base.ParserBase):
                 s += ']'
                 lines.append(s)
             result = ',\n'.join(lines)
-            self._data_formated = result
+            self._cache[key] = result
         except Exception as e:
             logger.error(e, exc_info=True)
             raise e
-        return self._data_formated
+        return self._cache[key]
 
     def _get_data_items(self) -> List[dict]:
-        if not self._data_items is None:
-            return self._data_items
+        key = '_get_data_items'
+        if key in self._cache:
+            return self._cache[key]
         result = []
         data = self.get_data()
         try:
@@ -161,8 +163,8 @@ class Parser(base.ParserBase):
         except Exception as e:
             logger.error(e, exc_info=True)
             raise e
-        self._data_items = result
-        return self._data_items
+        self._cache[key] = result
+        return self._cache[key]
 
     def _get_const_details(self, memitetms: ResultSet) -> List[dataitem]:
         results = []
@@ -262,6 +264,7 @@ class ConstWriter(base.WriteBase):
             raise FileNotFoundError(f"unable to find templae file '{_path}'")
         self._template_file = _path
         self._template: str = self._get_template()
+        self._cache = {}
     # endregion Constructor
 
     def _get_template(self):
@@ -357,6 +360,9 @@ class ConstWriter(base.WriteBase):
         
 
     def _get_uno_obj_path(self) -> Path:
+        key = '_get_uno_obj_path'
+        if key in self._cache:
+            return self._cache[key]
         uno_obj_path = Path(self._path_dir.parent, 'uno_obj')
         name_parts = self._p_fullname.split('.')
         # ignore com, sun, star
@@ -372,7 +378,8 @@ class ConstWriter(base.WriteBase):
         path_parts[index] = path_parts[index] + '.tmpl'
         obj_path = uno_obj_path.joinpath(*path_parts)
         self._mkdirp(obj_path.parent)
-        return obj_path
+        self._cache[key] = obj_path
+        return self._cache[key]
 
 def _main():
     # for debugging

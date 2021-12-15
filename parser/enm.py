@@ -299,6 +299,7 @@ class EnumWriter(base.WriteBase):
         self._write_template_long: bool = kwargs.get(
             'write_template_long', False)
         self._indent_amt = 4
+        self._cache = {}
         self._json_str = None
         self._file_full_path = None
         self._p_name = None
@@ -399,6 +400,9 @@ class EnumWriter(base.WriteBase):
         
 
     def _get_uno_obj_path(self) -> Path:
+        key = '_get_uno_obj_path'
+        if key in self._cache:
+            return self._cache[key]
         if not self._p_name:
             try:
                 raise Exception(
@@ -413,7 +417,8 @@ class EnumWriter(base.WriteBase):
         path_parts.append(self._p_name + '.tmpl')
         obj_path = uno_obj_path.joinpath(*path_parts)
         self._mkdirp(obj_path.parent)
-        return obj_path
+        self._cache[key] = obj_path
+        return self._cache[key]
 
 
 def _main():
