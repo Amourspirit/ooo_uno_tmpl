@@ -308,7 +308,7 @@ def main():
         default=False)
     parser.add_argument(
         '-L', '--log-file',
-        help='Log file to use',
+        help='Log file to use. Defaults to app.log',
         type=str,
         required=False)
     args = parser.parse_args()

@@ -16,7 +16,7 @@ from abc import ABC, abstractmethod
 from bs4 import BeautifulSoup
 from bs4.element import ResultSet, Tag
 from glob import glob
-from kwhelp.decorator import DecFuncEnum, RequireArgs, RuleCheckAll, RuleCheckAllKw, TypeCheck
+from kwhelp.decorator import AcceptedTypes, DecArgEnum, DecFuncEnum, RequireArgs, RuleCheckAll, RuleCheckAllKw, TypeCheck, TypeCheckKw
 from kwhelp import rules
 from pathlib import Path
 from typing import Iterable, List, Set, Tuple, Union
@@ -352,6 +352,29 @@ class Util:
         logger.debug("Util.get_rel_info(): %s", str(result))
         return result
 
+    @AcceptedTypes(int, opt_all_args=True, ftype=DecFuncEnum.METHOD_STATIC)
+    @staticmethod
+    def is_enum_nums(*args: int) -> bool:
+        """
+        Test to see if a sequence of numbers can be combinded a flags
+
+        Returns:
+            bool: ``True`` if can be combined as flags; Otherwise ``False``
+        """
+        nums = [*args]
+        nums.sort()
+        n = 0
+        for num in nums:
+            if num < 0:
+                return False
+            _n = n
+            _n = _n ^ num
+            if _n <= n:
+                return False
+            n = _n
+        return True
+
+    @AcceptedTypes(str, opt_all_args=True, ftype=DecFuncEnum.METHOD_STATIC)
     @staticmethod
     def get_clean_name(input: str, sub: str = '') -> str:
         """
@@ -368,6 +391,7 @@ class Util:
         # https://stackoverflow.com/questions/1276764/stripping-everything-but-alphanumeric-chars-from-a-string-in-python
         return py_name_pattern.sub(sub, input)
     
+    @AcceptedTypes(str,str, bool, ftype=DecFuncEnum.METHOD_STATIC)
     @staticmethod
     def get_clean_ns(input: str, sub: str='', ltrim=False) -> str:
         """
@@ -387,6 +411,8 @@ class Util:
             return py_ns_pattern.sub(sub, input)
         return py_ns_pattern.sub(sub, input).lstrip('.')
     
+    @AcceptedTypes(str, ftype=DecFuncEnum.METHOD_STATIC)
+    @staticmethod
     def clean_curly_brace_close(input: str) -> str:
         """
         Removes all char from a string except for ``};``
@@ -399,7 +425,7 @@ class Util:
         """
         return curly_brace_close_pattern.sub('', input)
 
-    """Static Class or helper methods"""
+    @AcceptedTypes((dict, list), int, ftype=DecFuncEnum.METHOD_STATIC)
     @staticmethod
     def get_formated_dict_list_str(obj: Union[dict, list], indent=4) -> str:
         """
@@ -418,6 +444,7 @@ class Util:
         formatted = json.dumps(obj, indent=_indent)
         return formatted
 
+    @AcceptedTypes((list, tuple), int, ftype=DecFuncEnum.METHOD_STATIC)
     @staticmethod
     def get_string_list(lines: List[str], indent_amt: int = 0) -> str:
         """
@@ -438,6 +465,7 @@ class Util:
             s = Util.indent(text=s, indent_amt=indent_amt)
         return s
 
+    @AcceptedTypes(str, opt_all_args=True, ftype=DecFuncEnum.METHOD_STATIC)
     @staticmethod
     def get_last_part(input: str, sep='.') -> str:
         """
@@ -455,6 +483,7 @@ class Util:
         _parts = input.rsplit(sep, 1)
         return _parts[0] if len(_parts) == 1 else _parts[1]
 
+    @AcceptedTypes(str, int, ftype=DecFuncEnum.METHOD_STATIC)
     @staticmethod
     def indent(text: str, indent_amt: int = 4) -> str:
         """
@@ -473,6 +502,7 @@ class Util:
         s = textwrap.indent(text, indent)
         return s
 
+    @AcceptedTypes(str, ftype=DecFuncEnum.METHOD_STATIC)
     @staticmethod
     def camel_to_snake(input: str) -> str:
         """
@@ -487,6 +517,7 @@ class Util:
         _input = re.sub('(.)([A-Z][a-z]+)', r'\1_\2', input)
         return re.sub('([a-z0-9])([A-Z])', r'\1_\2', _input).lower()
 
+    @AcceptedTypes(str, opt_all_args=True, ftype=DecFuncEnum.METHOD_STATIC)
     @staticmethod
     def get_rel_import(i_str: str, ns: str, sep: str = '.') -> Tuple[str, str]:
         """
@@ -532,6 +563,7 @@ class Util:
             f"get_rel_import(): Last ditch effort. Returning: (ooo_uno.uno_obj.{short}.{camel_name}', {name})")
         return (f'ooo_uno.uno_obj.{short}.{camel_name}', f'{name}')
 
+    @AcceptedTypes(str, opt_all_args=True, ftype=DecFuncEnum.METHOD_STATIC)
     @staticmethod
     def encode_char(input:str, replace:str, en:str = '\xff') -> str:
         """
@@ -548,6 +580,7 @@ class Util:
         """
         return input.replace(replace, en)
 
+    @AcceptedTypes(str, opt_all_args=True, ftype=DecFuncEnum.METHOD_STATIC)
     @staticmethod
     def decode_char(input: str, restore: str, de: str = '\xff') -> str:
         """
@@ -563,7 +596,9 @@ class Util:
             str: [description]
         """
         return input.replace(de, restore)
-    
+
+    @TypeCheckKw(arg_info={"typings": 0, "quote": 0}, types=[bool], ftype=DecFuncEnum.METHOD_STATIC)
+    @AcceptedTypes(str, opt_args_filter=DecArgEnum.NAMED_ARGS, ftype = DecFuncEnum.METHOD_STATIC)
     @staticmethod
     def get_py_type(uno_type: str, **kwargs) -> str:
         """
@@ -696,6 +731,7 @@ class Util:
             return f"'{_u_type_clean}'"
         return _u_type_clean
 
+    @AcceptedTypes((str, Path), ftype=DecFuncEnum.METHOD_STATIC)
     @staticmethod
     def mkdirp(dest_dir: Union[str, Path]):
         """
@@ -738,6 +774,7 @@ class ImportCheck:
     child class.
     """
     # https://stackoverflow.com/questions/31028237/getting-all-superclasses-in-python-3
+    @AcceptedTypes(str, ftype=DecFuncEnum.METHOD)
     def __init__(self, ns: str):
         """
         Constructor
@@ -761,6 +798,7 @@ class ImportCheck:
             name = self._ns_mod + '.' + name
         return name
 
+    @AcceptedTypes((list, tuple, set), ftype=DecFuncEnum.METHOD)
     def load_imports(self, imports: List[str]):
         """
         Load a list of import names for later comparsion.
@@ -795,6 +833,7 @@ class ImportCheck:
             for n in names_lst:
                 self._unique.add(n)
 
+    @AcceptedTypes(str, ftype=DecFuncEnum.METHOD)
     def is_inherited(self, import_name: str) -> bool:
         """
         Test if the ``import_name`` is inherited by any of the current
@@ -816,7 +855,7 @@ class ImportCheck:
         return class_name
 
     # Works both for python 2 and 3
-
+    @AcceptedTypes(object, bool, ftype=DecFuncEnum.METHOD)
     def get_class_names(self, obj: object, include_obj: bool = True):
         class_name = []
         if (inspect.isclass(obj) == False):
@@ -836,6 +875,7 @@ class ImportCheck:
                 class_name.append(f"{_mod}.{name}")
         return class_name
 
+    @AcceptedTypes(str, opt_all_args=True, ftype=DecFuncEnum.METHOD)
     def dynamic_imp(self, package: str, mod_name: str, class_name: str) -> Tuple[ModuleType, object]:
         try:
             key = f"{package}.{mod_name}"

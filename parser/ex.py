@@ -800,7 +800,7 @@ def main():
         default=False)
     parser.add_argument(
         '-L', '--log-file',
-        help='Log file to use',
+        help='Log file to use. Defaults to exception.log',
         type=str,
         required=False)
     # endregion Dummy Args for Logging
@@ -809,6 +809,8 @@ def main():
         log_args = {}
         if args.log_file:
             log_args['log_file'] = args.log_file
+        else:
+            log_args['log_file'] = 'exception.log'
         if args.verbose:
             log_args['level'] = logging.DEBUG
         _set_loggers(get_logger(logger_name=Path(__file__).stem, **log_args))
