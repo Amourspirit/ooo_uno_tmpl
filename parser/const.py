@@ -1,9 +1,12 @@
 #!/usr/bin/env python
 import os
 import sys
+import re
 import logging
 import argparse
 import base
+import xerox # requires xclip - sudo apt-get install xclip
+import textwrap
 from typing import Dict, List, Union
 from bs4 import BeautifulSoup
 from bs4.element import ResultSet, Tag
@@ -11,8 +14,6 @@ from kwhelp.decorator import DecFuncEnum, RuleCheckAllKw, TypeCheckKw
 from kwhelp import rules
 from collections import namedtuple
 from pathlib import Path
-import textwrap
-import xerox # requires xclip - sudo apt-get install xclip
 from logger.log_handle import get_logger
 from parser import __version__, JSON_ID
 
@@ -25,6 +26,8 @@ def _set_loggers(l: Union[logging.Logger, None]):
 
 _set_loggers(None)
 
+pattern_hex = re.compile(r"0x[0-9A-Fa-f]+")
+
 dataitem = namedtuple(
     'dataitem', ['value', 'raw_value', 'name', 'datatype', 'lines'])
 
@@ -34,7 +37,6 @@ class Parser(base.ParserBase):
     # region init
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self._data = None
         self._soup = base.SoupObj(url=self.url, allow_cache=self.allow_cache)
         self._cache = {}
 
@@ -104,20 +106,21 @@ class Parser(base.ParserBase):
         Raises:
             ValueError: If url is not set.
         """
+        key = 'get_data'
+        if key in self._cache:
+            return self._cache[key]
         try:
-            if self._data:
-                return self._data
             if not self._url:
                 raise ValueError('URL is not set')
             soup = BeautifulSoup(self.get_raw_html(), 'lxml')
 
             items = self._get_memitems(soup=soup)
             const_info = self._get_const_details(memitetms=items)
-            self._data = const_info
-            return self._data
+            self._cache[key] = const_info
         except Exception as e:
             logger.error(e, exc_info=True)
             raise e
+        return self._cache[key]
 
     def get_formated_data(self):
         key = 'get_formated_data'
@@ -144,7 +147,51 @@ class Parser(base.ParserBase):
             logger.error(e, exc_info=True)
             raise e
         return self._cache[key]
+    
+    def get_is_flags(self) -> bool:
+        """
+        Gets if const has values that can be Flags Enum.
+        This is a calculated result.
 
+        Returns:
+            bool: ``True`` if can be flags; Otherwise, ``False``
+        """
+        key = 'get_is_flags'
+        if key in self._cache:
+            return self._cache[key]
+        self._cache[key] = False
+        data = self.get_data()
+        nums = []
+        try:
+            for itm in data:
+                nums.append(int(itm.value))
+        except:
+            return self._cache[key]
+        if len(nums) == 0:
+            return self._cache[key]
+        self._cache[key] = base.Util.is_enum_nums(*nums)
+        return self._cache[key]
+
+    def get_is_hex(self) -> bool:
+        """
+        Gets if the parsed data is in hex format of 0x12AB
+
+        Returns:
+            bool: ``True`` if hex is matched; Otherwise, ``False``
+        """
+        key = 'get_is_hex'
+        if key in self._cache:
+            return self._cache[key]
+        self._cache[key] = False
+        data = self.get_data()
+        if len(data) == 0:
+            return self._cache[key]
+        m = pattern_hex.match(data[0].raw_value)
+        if m:
+            self._cache[key] = True
+        return self._cache[key]
+        
+        
     def _get_data_items(self) -> List[dict]:
         key = '_get_data_items'
         if key in self._cache:
@@ -223,7 +270,7 @@ class ConstWriter(base.WriteBase):
     @TypeCheckKw(arg_info={
         "hex": 0,
         "sort": 0,
-        "flags": 0,
+        "flags": 1,
         "copy_clipboard": 0,
         "write_template": 0,
         "print_template": 0,
@@ -231,14 +278,14 @@ class ConstWriter(base.WriteBase):
         "write_json": 0,
         "write_template_long": 0
         },
-        types=[bool],
+        types=[bool, (bool, type(None))],
         ftype=DecFuncEnum.METHOD)
     def __init__(self, parser:Parser, **kwargs):
         super().__init__(**kwargs)
         self._parser = parser
         self._hex = kwargs.get('hex', False)
         self._sort = kwargs.get('sort', True)
-        self._flags = kwargs.get('flags', False)
+        self._flags = kwargs.get('flags', None)
         self._copy_clipboard = kwargs.get('copy_clipboard', False)
         self._print_template = kwargs.get('print_template', True)
         self._write_file = kwargs.get('write_template', False)
@@ -247,7 +294,6 @@ class ConstWriter(base.WriteBase):
         self._write_template_long: bool = kwargs.get(
             'write_template_long', False)
         self._indent_amt = 4
-        self._json_str = None
         self._file_full_path = None
         self._p_name = None
         self._p_namespace = None
@@ -265,7 +311,13 @@ class ConstWriter(base.WriteBase):
         self._template_file = _path
         self._template: str = self._get_template()
         self._cache = {}
+        self._set_flags()
     # endregion Constructor
+    def _set_flags(self):
+        # if flags is not specifically set in constructor then get flags from parser
+        if self._flags is None:
+            self._flags = self._parser.get_is_flags()
+
 
     def _get_template(self):
         with open(self._template_file) as f:
@@ -295,8 +347,9 @@ class ConstWriter(base.WriteBase):
             logger.exception(e)
 
     def _get_json(self) -> str:
-        if not self._json_str is None:
-            return self._json_str
+        key = '_get_json'
+        if key in self._cache:
+            return self._cache[key]
         p_dict = self._parser.get_dict_data()
         json_dict = {
             "id": JSON_ID,
@@ -313,8 +366,8 @@ class ConstWriter(base.WriteBase):
             "data": p_dict
         }
         str_jsn = base.Util.get_formated_dict_list_str(obj=json_dict, indent=2)
-        self._json_str = str_jsn
-        return self._json_str
+        self._cache[key] = str_jsn
+        return self._cache[key]
 
     def _write_to_file(self):
         with open(self._file_full_path, 'w') as f:
@@ -407,7 +460,7 @@ def main():
         help='Treat as flags',
         action='store_true',
         dest='flags',
-        default=False)
+        default=None)
     parser.add_argument(
         '-x', '--no-cache',
         help='No caching',
