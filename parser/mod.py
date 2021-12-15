@@ -382,6 +382,7 @@ class WriterMod():
             "id": JSON_ID,
             "version": __version__,
             "name": name,
+            "namespace": name,
             "type": "module_links",
             "url_base": self._parser.api_data.url_obj.url_base,
             "data": self._parser.get_data()

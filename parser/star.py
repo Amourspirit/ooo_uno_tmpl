@@ -119,7 +119,11 @@ class ApiData:
     def __init__(self, url_soup: Union[str, base.SoupObj], allow_cache:bool):
         if isinstance(url_soup, str):
             self._url = url_soup
-            self._soup_obj = base.SoupObj(url=url_soup,allow_cache=allow_cache)
+            self._soup_obj = base.SoupObj(
+                url=url_soup,
+                allow_cache=allow_cache,
+                has_name=False
+                )
         else:
             self._url = url_soup.url
             self._soup_obj = url_soup
@@ -127,7 +131,16 @@ class ApiData:
 
         self._api_module_block: ApiModuleBlock = None
         self._api_link: ApiLink = None
-    
+
+    # region Properties
+    @property
+    def soup_obj(self) -> base.SoupObj:
+        return self._soup_obj
+
+    @property
+    def url_obj(self) -> base.UrlObj:
+        return self._soup_obj.url_obj
+
     @property
     def api_module_block(self) -> ApiModuleBlock:
         """Gets api_module_block value"""
@@ -141,6 +154,7 @@ class ApiData:
         if self._api_link is None:
             self._api_link = ApiLink(self.api_module_block)
         return self._api_link
+    # endregion Properties
 
 # endregion API Classes
 
@@ -172,6 +186,10 @@ class ParserStar:
         self._cache[key] = results
         return self._cache[key]
 
+    @property
+    def api_data(self) -> ApiData:
+        """Gets api_data value"""
+        return self._api_data
 # endregion Parser Class
 
 # region Writer Class
@@ -211,7 +229,9 @@ class WriteStar:
             "id": JSON_ID,
             "version": __version__,
             "name": 'star links',
+            "namespace": self._parser.api_data.url_obj.namespace_str,
             "type": "namespace_url",
+            "url_base": self._parser.api_data.url_obj.url_base,
             "data": self._parser.get_data()
         }
         str_jsn = base.Util.get_formated_dict_list_str(obj=json_dict, indent=2)
