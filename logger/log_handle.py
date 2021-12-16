@@ -1,4 +1,7 @@
 # coding: utf-8
+"""
+Module responsible for getting and managing logging.
+"""
 import logging
 import sys
 import re

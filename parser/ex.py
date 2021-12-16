@@ -1,5 +1,8 @@
 #!/usr/bin/env python
-# exception parser
+# coding: utf-8
+"""
+Process a link to a page that contains an exception
+"""
 from dataclasses import dataclass
 import os
 import sys

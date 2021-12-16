@@ -1,3 +1,7 @@
+# coding: utf-8
+"""
+Base classes and helper functions of various types that are used with different parsers
+"""
 from dataclasses import dataclass
 import os
 import sys

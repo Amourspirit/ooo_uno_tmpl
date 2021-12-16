@@ -1,4 +1,9 @@
 #!/usr/bin/env python
+# coding: utf-8
+"""
+Process a link to a page that contains links to modules.
+Modules data is writen in json format into namespace converted to directories.
+"""
 # region Imports
 import sys
 import os

@@ -1,4 +1,8 @@
 #!/usr/bin/env python
+# coding: utf-8
+"""
+Process link to star namesapec that contains links to modules
+"""
 # region Imports
 from dataclasses import dataclass
 import sys

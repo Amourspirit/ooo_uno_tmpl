@@ -1,4 +1,8 @@
 #!/usr/bin/env python
+# coding: utf-8
+"""
+Process a link to a page that contains enums
+"""
 import os
 import sys
 import logging
