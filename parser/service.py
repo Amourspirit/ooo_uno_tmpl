@@ -111,6 +111,44 @@ class ApiExportedInterfacesBlock(ApiTableFindBase):
     def _get_a_name(self) -> str:
         return 'interfaces'
 
+
+class ApiInheritedBlock(ApiTableFindBase):
+
+    def _get_a_name(self) -> str:
+        return 'inherited'
+
+
+class ApiComponentExtendsInherited:
+    def __init__(self, table: ApiInheritedBlock) -> None:
+        self._table = table
+        self._data = None
+    
+    def _process_url_ns(self, tag:Tag) -> Union[str, None]:
+        # interfacecom_1_1sun_1_1star_1_1accessibility_1_1XAccessibleContext.html
+        href = tag.get('href', None)
+        if not href:
+            return None
+        href = href.rsplit(sep='.', maxsplit=1)[0]
+        # interfacecom_1_1sun_1_1star_1_1accessibility_1_1XAccessibleContext
+        parts = href.split('_1_1')
+        final_parts = ['com'] + parts[1:]
+        return '.'.join(final_parts)
+    
+    def get_obj(self) -> List[str]:
+        if not self._data is None:
+            return self._data
+        tag = self._table.get_obj()
+        rs: ResultSet = tag.find_all('tr', class_='inherit_header')
+        results = []
+        for r in rs:
+            tag_a = r.find('a', class_='el')
+            ns = self._process_url_ns(tag_a)
+            if ns:
+                results.append(ns)
+        self._data = results
+        return self._data
+            
+
 class ApiComponentExtends:
     @SubClass(ApiTableFindBase, ftype=DecFuncEnum.METHOD)
     def __init__(self, table: ApiTableFindBase):
@@ -261,8 +299,10 @@ class ApiData:
         self._api_tables: ApiTables = None
         self._api_included_services_block: ApiIncludedServicesBlock = None
         self._api_exported_interfaces_block: ApiExportedInterfacesBlock = None
+        self._api_inherited_block: ApiInheritedBlock = None
         self._api_services: ApiComponentExtends = None
         self._api_interfaces: ApiComponentExtends = None
+        self._api_component_extends_inherited: ApiComponentExtendsInherited = None
         self._api_desc_block: ApiDescBlock = None
         self._api_desc: ApiDesc = None
         self._api_since: ApiSince = None
@@ -294,6 +334,19 @@ class ApiData:
             self._api_exported_interfaces_block = ApiExportedInterfacesBlock(
                 self.api_tables)
         return self._api_exported_interfaces_block
+
+    @property
+    def api_inherited_block(self) -> ApiInheritedBlock:
+        if self._api_inherited_block is None:
+            self._api_inherited_block = ApiInheritedBlock(self.api_tables)
+        return self._api_inherited_block
+    
+    @property
+    def api_component_extends_inherited(self) -> ApiComponentExtendsInherited:
+        if self._api_component_extends_inherited is None:
+            self._api_component_extends_inherited = ApiComponentExtendsInherited(
+                self.api_inherited_block)
+        return self._api_component_extends_inherited
 
     @property
     def api_services(self) -> ApiComponentExtends:
@@ -350,22 +403,28 @@ class ParserService(base.ParserBase):
         return info
     
     def _get_extends(self) -> List[str]:
-        extends = []
+        extends = set()
         service_e = self._api_data.api_services.get_obj()
+        interface_e = self._api_data.api_interfaces.get_obj()
+        c_extends = self._api_data.api_component_extends_inherited.get_obj()
+        for s in service_e:
+            extends.add(s)
+        for s in interface_e:
+            extends.add(s)
+        for s in c_extends:
+            extends.add(s)
+        ext = list(extends)
+        if len(ext) <= 1:
+            return ext
+        results = []
         ns_obj = self._api_data.soup.url_obj
         ic = base.ImportCheck(ns_obj.namespace_str)
-        ic.load_imports(service_e)
-        for ns in service_e:
+        ic.load_imports(ext)
+        for ns in ext:
             if ic.is_inherited(ns):
                 continue
-            extends.append(ns)
-        interface_e = self._api_data.api_interfaces.get_obj()
-        ic.load_imports(interface_e)
-        for ns in interface_e:
-            if ic.is_inherited(ns):
-                continue
-            extends.append(ns)
-        return extends
+            results.append(ns)
+        return results
     
     def get_formated_data(self, indent=4) -> str:
         key = 'get_formated_data'
@@ -627,7 +686,8 @@ def _main():
     # url = "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1awt_1_1AnimatedImagesControlModel.html"
     # url = "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1awt_1_1SpinningProgressControlModel.html"
     url = "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1awt_1_1AccessibleCheckBox.html"
-    sys.argv.extend(['-n', '-j', '-t', '-v', '-L', 'service.log', '-u', url])
+    url = "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1awt_1_1AsyncCallback.html"
+    sys.argv.extend(['-n', '-v', '-L', 'service.log', '-u', url])
     main()
 
 
