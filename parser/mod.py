@@ -381,6 +381,7 @@ class WriterMod():
         json_dict = {
             "id": JSON_ID,
             "version": __version__,
+            "timestamp": str(base.Util.get_timestamp_utc()),
             "name": name,
             "namespace": name,
             "type": "module_links",

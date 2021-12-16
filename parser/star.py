@@ -228,6 +228,7 @@ class WriteStar:
         json_dict = {
             "id": JSON_ID,
             "version": __version__,
+            "timestamp": str(base.Util.get_timestamp_utc()),
             "name": 'star links',
             "namespace": self._parser.api_data.url_obj.namespace_str,
             "type": "namespace_url",

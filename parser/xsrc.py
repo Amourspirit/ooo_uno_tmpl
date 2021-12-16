@@ -1564,6 +1564,7 @@ class InterfaceWriter(base.WriteBase):
         json_dict = {
             "id": JSON_ID,
             "version": __version__,
+            "timestamp": str(base.Util.get_timestamp_utc()),
             "name": p_dict['name'],
             "type": "interface",
             "namespace": p_dict['namespace'],

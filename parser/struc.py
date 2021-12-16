@@ -357,6 +357,7 @@ class StructWriter(base.WriteBase):
         json_dict = {
             "id": JSON_ID,
             "version": __version__,
+            "timestamp": str(base.Util.get_timestamp_utc()),
             "type": "struct",
             "name": p_dict['name'],
             "namespace": p_dict['namespace'],

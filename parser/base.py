@@ -8,6 +8,7 @@ import json
 import logging
 import tempfile
 import time
+import calendar
 import hashlib
 import inspect
 import importlib
@@ -20,6 +21,7 @@ from kwhelp.decorator import AcceptedTypes, DecArgEnum, DecFuncEnum, RequireArgs
 from kwhelp import rules
 from pathlib import Path
 from typing import Iterable, List, Set, Tuple, Union
+from datetime import datetime, timezone
 
 # this is for VS code debuging
 _app_root = os.environ.get('project_root', str(Path(__file__).parent.parent))
@@ -351,6 +353,37 @@ class Util:
         # sep_str = sep * (diff + 1)
         logger.debug("Util.get_rel_info(): %s", str(result))
         return result
+    
+    @staticmethod
+    def get_timestamp_utc() -> datetime:
+        """
+        Gets utc timestamp in format of ``2021-12-16 11:37:50+00:00``
+
+        Returns:
+            datetime: utc timestamp
+        """
+        current_GMT = time.gmtime()
+        ts = calendar.timegm(current_GMT)
+        return datetime.fromtimestamp(ts, tz=timezone.utc)
+
+    @AcceptedTypes(str, ftype=DecFuncEnum.METHOD_STATIC)
+    @staticmethod
+    def get_timestamp_from_str(input:str) -> datetime:
+        """
+        Converts input in the format of ``2021-12-16 11:37:50+00:00`` into datetime
+
+        Args:
+            input (str): input date string
+
+        Returns:
+            datetime: input converted to ``datetime``
+        """
+        try:
+            dt_object = datetime.strptime(input, "%Y-%m-%d %H:%M:%S%z")
+            return dt_object
+        except ValueError as e:
+            logger.error("Util.get_timestamp_from_str() Error: %s", str(e))
+            raise e
 
     @AcceptedTypes(int, opt_all_args=True, ftype=DecFuncEnum.METHOD_STATIC)
     @staticmethod
