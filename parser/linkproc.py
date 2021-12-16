@@ -48,7 +48,7 @@ class ParserLinks:
     def _load_json(self):
         j_p = Path(self._json_path)
         if not j_p.is_absolute():
-            j_P = Path(Path(__file__).parent.parent, j_p)
+            j_p = Path(Path(__file__).parent.parent, j_p)
         if not j_p.exists():
             msg = f"Unable to find json file: '{self._json_path}'"
             logger.error(msg)

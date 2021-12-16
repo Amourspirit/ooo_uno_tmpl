@@ -127,6 +127,12 @@ class ApiModulesBlock(ApiTableFindBase):
     def _get_heading_text(self) -> str:
         return 'modules'
 
+
+class ApiTypeDefsBlock(ApiTableFindBase):
+
+    def _get_heading_text(self) -> str:
+        return 'typedefs'
+
 class ApiTableLinks:
     def __init__(self, table_block: ApiTableFindBase) -> List[Link]:
         self._table_block = table_block
@@ -192,10 +198,12 @@ class ApiData:
         self._api_class_block: ApiClassBlock = None
         self._api_modules_block: ApiModulesBlock = None
         self._api_enum_block: ApiEnumBlock = None
+        self._api_type_defs_block: ApiTypeDefsBlock = None
         self._api_constants_links: ApiTableLinks = None
         self._api_class_links: ApiTableLinks = None
         self._api_modules_links: ApiTableLinks = None
         self._api_enum_links: ApiTableLinks = None
+        self._api_type_defs_links: ApiTableLinks = None
     # endregion constructor
     
     # region Properties
@@ -240,6 +248,14 @@ class ApiData:
         if self._api_enum_block is None:
             self._api_enum_block = ApiEnumBlock(self.api_tables)
         return self._api_enum_block
+    
+
+    @property
+    def api_type_defs_block(self) -> ApiTypeDefsBlock:
+        """Gets Table representing Enums ona page"""
+        if self._api_type_defs_block is None:
+            self._api_type_defs_block = ApiTypeDefsBlock(self.api_tables)
+        return self._api_type_defs_block
     @property
     def api_constants_links(self) -> ApiTableLinks:
         """Gets Data representing Constant Links on a page"""
@@ -267,6 +283,13 @@ class ApiData:
         if self._api_enum_links is None:
             self._api_enum_links = ApiTableLinks(self.api_enum_block)
         return self._api_enum_links
+
+    @property
+    def api_type_defs_links(self) -> ApiTableLinks:
+        """Gets Data representing Module Links on a page"""
+        if self._api_type_defs_links is None:
+            self._api_type_defs_links = ApiTableLinks(self.api_type_defs_block)
+        return self._api_type_defs_links
     # endregion Properties
 
 # endregion API Classes
@@ -311,6 +334,21 @@ class ParserMod:
                 )
         logger.debug("ParserMod.get_data() %d enum links.", len(enum_links))
         return links
+
+    def _get_type_def_links(self) -> List[Dict[str, str]]:
+        type_def_links = self._api_data.api_type_defs_links.get_obj()
+        links = []
+        if type_def_links:
+            for link in type_def_links:
+                links.append(
+                    {
+                        "name": link.name,
+                        "href": link.href
+                    }
+                )
+        logger.debug("ParserMod.get_data() %d type_def links.",
+                     len(type_def_links))
+        return links
     def _get_class_links(self):
         class_links = self._api_data.api_class_links.get_obj()
         results = {}
@@ -334,6 +372,7 @@ class ParserMod:
         results = {
             "modules": self._get_module_links(),
             "enums": self._get_enum_links(),
+            "typedef": self._get_type_def_links(),
             "classes": self._get_class_links()
         }
         self._cache[key] = results
