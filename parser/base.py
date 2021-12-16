@@ -42,6 +42,7 @@ py_name_pattern = re.compile('[\W_]+')
 py_ns_pattern = re.compile(r'[^a-zA-Z0-9\._]+')
 curly_brace_close_pattern = re.compile(r'[^};]')
 RESPONSE_CACHE: 'FileCache' = None
+pattern_http = re.compile(r"^https?:\/\/")
 """FileCache object for caching response data"""
 
 TYPE_MAP = {
@@ -970,7 +971,7 @@ class UrlObj:
         self._ns_str = None
         
 
-    def _get_ns(self) -> List[str]:
+    def get_split_ns(self) -> List[str]:
         result = []
         try:
             ns_part = self._page_link.split('.')[0]
@@ -979,6 +980,15 @@ class UrlObj:
             # namespace always start with com so just drop the first part to clean it up.
             s = 'com.' + s.split('.', maxsplit=1)[1]
             result = s.split('.')
+        except Exception as e:
+            logger.error(e)
+            logger.info('UrlObj._get_ns() returning empty list.')
+        return result
+    
+    def _get_ns(self) -> List[str]:
+        try:
+            result = self.get_split_ns()
+        
             # get that last item
             self._name = result[-1:][0]
             # Drop the component from the result
@@ -990,6 +1000,8 @@ class UrlObj:
             logger.error(e)
             logger.info('UrlObj._get_ns() returning empty list.')
         return result
+
+
 
     @property
     def page_link(self) -> str:

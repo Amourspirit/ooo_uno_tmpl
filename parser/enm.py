@@ -35,7 +35,8 @@ EnumDataItem = namedtuple(
 
 class EnumUrl(base.UrlObj):
     """Gets Url data for enum"""
-    def _get_ns(self) -> List[str]:
+
+    def get_split_ns(self) -> List[str]:
         # UrlObj strips off the last part of ns
         # because is is the component name in most cases.
         # enums do not have ther own page therefore no component name.
@@ -87,9 +88,27 @@ class EnumBlock(base.BlockObj):
         link = links[1]
         if not link:
             raise Exception(f"Element not found: Class: {_cls}, href: {self._urlobj.page_link}")
-        result = link
-        for _ in range(_up_steps):
+        result:Tag = link
+        class_ = result.get('class', [])
+        class_name = "" if len(class_) == 0 else class_[0].lower()
+        i = 0
+        while class_name != 'memitem':
+            if i > _up_steps:
+                break
             result = result.parent
+            if not result:
+                break
+            class_ = result.get('class', [])
+            class_name = "" if len(class_) == 0 else class_[0].lower()
+            i += 1
+        # for _ in range(_up_steps):
+        #     result = result.parent
+        class_ = result.get('class', [])
+        class_name = "" if len(class_) == 0 else class_[0].lower()
+        if class_name != 'memitem':
+            msg = "EnumBlock.get_obj(). Faild to find Enumblock"
+            logger.error(msg)
+            raise Exception(msg)
         self._obj_data = result
         return self._obj_data
 
@@ -228,11 +247,13 @@ class ParserEnum(base.ParserBase):
             d_obj = EnumDesc(block=block)
             name = n_obj.get_data()
             desc = d_obj.get_data()
+            ns = base.UrlObj(self.url,has_name=False)
             result = {
                 "name": name,
                 "desc": desc,
                 "url": self._url,
-                'ns': self._block.url_obj.namespace_str
+                # 'ns': self._block.url_obj.namespace_str
+                'ns': ns.namespace_str
             }
             return result
         except Exception as e:
@@ -298,7 +319,7 @@ class EnumWriter(base.WriteBase):
         self._sort = kwargs.get('sort', True)
         self._print_template = kwargs.get('print_template', True)
         self._write_file = kwargs.get('write_template', False)
-        self._print_json = kwargs.get('print_json', True)
+        self._print_json = kwargs.get('print_json', False)
         self._write_json = kwargs.get('write_json', False)
         self._write_template_long: bool = kwargs.get(
             'write_template_long', False)
@@ -427,8 +448,8 @@ class EnumWriter(base.WriteBase):
 
 
 def _main():
-    url = 'https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1awt.html#aa6b9d577a1700f29923f49f7b77d165f'
-
+    # url = 'https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1awt.html#aa6b9d577a1700f29923f49f7b77d165f'
+    url = 'https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1chart2.html#aa17c0b28cca2adc2be9b3c5954111489'
     sys.argv.extend(['--log-file', 'debug.log', '-v', '-n', '-u', url])
     main()
 

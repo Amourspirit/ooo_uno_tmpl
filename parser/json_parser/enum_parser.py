@@ -1,14 +1,14 @@
 #!/usr/bin/env python
 # coding: utf-8
 """
-Module reads a json file of links that contain links to modules.
+Module reads a json file of links that contain links to enum pages
 This module then parses each link and calls the correct module to process each link.
 """
 # region imports
+import os
 import sys
 import argparse
 import logging
-import base
 import re
 import subprocess
 import json
@@ -16,9 +16,14 @@ import concurrent.futures
 from collections import namedtuple
 from typing import List, Union
 from pathlib import Path
-from logger.log_handle import get_logger
-from parser import __version__, JSON_ID
 from verr import Version
+_app_root = os.environ.get('project_root', str(Path(__file__).parent.parent.parent))
+if not _app_root in sys.path:
+    sys.path.insert(0, _app_root)
+from logger.log_handle import get_logger
+import parser.base as base
+from parser import __version__, JSON_ID
+
 # endregion imports
 
 # region Logger
@@ -34,21 +39,21 @@ def _set_loggers(l: Union[logging.Logger, None]):
 _set_loggers(None)
 # endregion Logger
 
-# pattern_http = re.compile(r"^https?:\/\/")
-
 urldata = namedtuple('urldata', ['name', 'href'])
 
-class ParserLinks:
-    def __init__(self, json_path: Union[str,Path]) -> None:
+class ParserEnum:
+    def __init__(self, json_path: Union[str, Path]) -> None:
         self._json_path = json_path
         self._json_data: dict = None
+        self._dir = Path(__file__).parent
+        self._app_root = self._dir.parent.parent
         self._cache = {}
         self._load_json()
     
     def _load_json(self):
         j_p = Path(self._json_path)
         if not j_p.is_absolute():
-            j_P = Path(Path(__file__).parent.parent, j_p)
+            j_p = Path(self._app_root, j_p)
         if not j_p.exists():
             msg = f"Unable to find json file: '{self._json_path}'"
             logger.error(msg)
@@ -61,7 +66,7 @@ class ParserLinks:
             raise Exception(msg)
         self._json_data = json_data
     
-    def _is_valid_json(self, data:dict) -> bool:
+    def _is_valid_json(self, data: dict) -> bool:
         key = 'id'
         if not key in data:
             return False
@@ -70,7 +75,7 @@ class ParserLinks:
         key = 'type'
         if not key in data:
             return False
-        if data[key] != 'namespace_url':
+        if data[key] != 'module_links':
             return False
         key = 'url_base'
         if not key in data:
@@ -85,35 +90,40 @@ class ParserLinks:
         key = 'data'
         if not key in data:
             return False
-        if not isinstance(data[key], list):
+        if not isinstance(data[key], dict):
             return False
         return True
-    
+
     def get_links(self) -> List[urldata]:
         key = 'get_links'
         if key in self._cache:
             return self._cache[key]
         url_base = self._json_data['url_base']
-        data: List[dict] = self._json_data['data']
+        enum_links: List[dict] = self._json_data['data'].get('enums', [])
+    
         result: List[urldata] = []
-        for itm in data:
+        for itm in enum_links:
             name = itm['name']
             href = itm['href']
             m = base.pattern_http.match(href)
             if not m:
                 href = url_base + '/' + href
-            result.append(urldata(name=name,href=href))
+            result.append(urldata(name=name, href=href))
         self._cache[key] = result
         return self._cache[key]
 
-class WriterLinks:
-    def __init__(self, parser: ParserLinks) -> None:
-        self._parser = parser
-        self._dir = Path(__file__).parent
-        self._mod = Path(self._dir, 'mod.py')
-    
+    @property
+    def app_root(self) -> Path:
+        """Gets app_root value"""
+        return self._app_root
+
+class WriterEnums:
+    def __init__(self, parser: ParserEnum) -> None:
+        self._parser: ParserEnum = parser
+        self._enm = Path(self._parser.app_root, 'parser', 'enm.py')
+
     def _process_link(self, url_data: urldata) -> bool:
-        cmd_str = f"{self._mod} -r -j -u {url_data.href}"
+        cmd_str = f"{self._enm} -t -j -u {url_data.href}"
         logger.info('Running subprocess: %s', cmd_str)
         cmd = [sys.executable] + cmd_str.split()
         res = subprocess.run(cmd)
@@ -128,38 +138,25 @@ class WriterLinks:
     def Write(self):
         links = self._parser.get_links()
         with concurrent.futures.ProcessPoolExecutor() as executor:
-            results = [executor.submit(self._process_link, link) for link in links]
+            results = [executor.submit(self._process_link, link)
+                       for link in links]
             for f in concurrent.futures.as_completed(results):
                 logger.info(f.result())
-        # self._process_link(links[1].href)
-        
-
-def _main():
-    global logger
-    if logger is None:
-        log_args = {
-            'log_file': 'linkproc.log',
-            'level': logging.DEBUG
-        }
-        _set_loggers(get_logger(logger_name=Path(__file__).stem, **log_args))
-    data_link = "resources/star.json"
-    p = ParserLinks(json_path=data_link)
-    w = WriterLinks(parser=p)
-    w.Write()
 
 
 def main():
     global logger
     # region Parser
-    json_file = "resources/star.json"
+    # json_file = "uno_obj/chart2/module_links.json"
+    # json_file = "uno_obj/chart2/data/module_links.json"
     parser = argparse.ArgumentParser(description='interface')
     parser.add_argument(
         '-f', '--json-file',
         help='Source Url',
         type=str,
         dest='json_file',
-        required=False,
-        default=json_file)
+        required=True
+        )
     parser.add_argument(
         '-v', '--verbose',
         help='verbose logging',
@@ -178,7 +175,7 @@ def main():
         if args.log_file:
             log_args['log_file'] = args.log_file
         else:
-            log_args['log_file'] = 'linkproc.log'
+            log_args['log_file'] = 'enum_parser.log'
         if args.verbose:
             log_args['level'] = logging.DEBUG
         _set_loggers(get_logger(logger_name=Path(__file__).stem, **log_args))
@@ -187,9 +184,10 @@ def main():
         logger.info('Executing command: %s', sys.argv[1:])
     logger.info('Parsing File %s' % args.json_file)
 
-    p = ParserLinks(json_path=args.json_file)
-    w = WriterLinks(parser=p)
+    p = ParserEnum(json_path=args.json_file)
+    w = WriterEnums(parser=p)
     w.Write()
+
 
 if __name__ == "__main__":
     main()
