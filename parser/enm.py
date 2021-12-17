@@ -61,11 +61,20 @@ class EnumBlock(base.BlockObj):
 
     def __init__(self, soup: base.SoupObj):
         super().__init__(soup=soup)
-        self._obj_data = None
+        self._obj_data = False
     
     def _get_url_obj(self):
         # override base class.
         return EnumUrl(self._url)
+
+    def _is_valid_block(self, tag: Tag) -> bool:
+        # it is possible not to find the correct block using url when there are typedef
+        # such as https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1drawing.html#af3965fa427851bc02bfe32c5d95d7406
+        # for additional validation look for table
+        if not tag:
+            return False
+        tbl = tag.find('table', class_='fieldtable')
+        return not tbl is None
     
     def get_obj(self) -> Tag:
         """
@@ -78,38 +87,54 @@ class EnumBlock(base.BlockObj):
         Returns:
             Tag: [description]
         """
-        if self._obj_data:
+        if not self._obj_data is False:
             return self._obj_data
-        _up_steps = 8
-        _cls = 'el'
-        links = self._soup.soup.find_all('a', class_=_cls, attrs={"href" : self._urlobj.page_link})
-        if len(links) < 2:
-            raise Exception(f"Second match ont found: Class: {_cls}, href: {self._urlobj.page_link}")
-        link = links[1]
-        if not link:
-            raise Exception(f"Element not found: Class: {_cls}, href: {self._urlobj.page_link}")
-        result:Tag = link
-        class_ = result.get('class', [])
-        class_name = "" if len(class_) == 0 else class_[0].lower()
-        i = 0
-        while class_name != 'memitem':
-            if i > _up_steps:
-                break
-            result = result.parent
-            if not result:
-                break
-            class_ = result.get('class', [])
-            class_name = "" if len(class_) == 0 else class_[0].lower()
-            i += 1
-        # for _ in range(_up_steps):
-        #     result = result.parent
-        class_ = result.get('class', [])
-        class_name = "" if len(class_) == 0 else class_[0].lower()
-        if class_name != 'memitem':
-            msg = "EnumBlock.get_obj(). Faild to find Enumblock"
+        self._obj_data = None
+        try:
+            _cls = 'el'
+            links = self._soup.soup.find_all('a', class_=_cls, attrs={"href" : self._urlobj.page_link})
+            for link in links:
+                # if len(links) < 2:
+                #     raise Exception(f"Second match ont found: Class: {_cls}, href: {self._urlobj.page_link}")
+                # link = links[1]
+                if not link:
+                    raise Exception(f"Element not found: Class: {_cls}, href: {self._urlobj.page_link}")
+                result:Tag = link
+                class_ = result.get('class', [])
+                class_name = "" if len(class_) == 0 else class_[0].lower()
+                too_far = False
+                while class_name != 'memitem':
+                    result = result.parent
+                    if not result:
+                        break
+                    class_ = result.get('class', [])
+                    class_name = "" if len(class_) == 0 else class_[0].lower()
+                    if class_name == 'contents':
+                        too_far = True
+                        break
+                if too_far:
+                    continue
+                # for _ in range(_up_steps):
+                #     result = result.parent
+                try:
+                    class_ = result.get('class', [])
+                    class_name = "" if len(class_) == 0 else class_[0].lower()
+                    if class_name == 'memitem':
+                        if not self._is_valid_block(result):
+                            continue
+                        self._obj_data = result
+                        break
+                except Exception:
+                    continue
+        except Exception as e:
+            url = self.url_obj.url
+            logger.error(
+                "EnumBlock.get_obj() Error parsing Link: '%s' Error: %s", url, str(e))
+            raise e
+        if self._obj_data is None:
+            msg = f"EnumBlock.get_obj() Error parsing Link: {self.url_obj.url}"
             logger.error(msg)
             raise Exception(msg)
-        self._obj_data = result
         return self._obj_data
 
 
@@ -142,18 +167,28 @@ class EnumDesc:
         self._block = block
         self._cls = 'memdoc'
         self._el = 'div'
+        self._data = None
 
     def get_data(self) -> str:
-        _block_obj = self._block.get_obj()
-        tag = _block_obj.find(self._el, class_=self._cls)
-        lines_found: ResultSet = tag.select(f'{self._el}.{self._cls} > p')
-        p_obj = base.TagsStrObj(tags=lines_found)
-        desc = p_obj.get_data()
-        if not desc:
-            e_obj = EnumName(block=self._block)
-            e_name = e_obj.get_data()
-            desc = "ENUM " + e_name
-        return desc
+        if not self._data is None:
+            return self._data
+        self._data = ''
+        try:
+            _block_obj = self._block.get_obj()
+            tag = _block_obj.find(self._el, class_=self._cls)
+            lines_found: ResultSet = tag.select(f'{self._el}.{self._cls} > p')
+            p_obj = base.TagsStrObj(tags=lines_found)
+            desc = p_obj.get_data()
+            if not desc:
+                e_obj = EnumName(block=self._block)
+                e_name = e_obj.get_data()
+                desc = "ENUM " + e_name
+                self._data = desc
+        except Exception as e:
+            msg = f"EnumDesc: An error as occured processing link: {self._block.url_obj.url}. Error {e}"
+            logger.error(msg)
+            raise e
+        return self._data
 
 class EnumItemsBlock:
     """
@@ -171,21 +206,30 @@ class EnumItemsBlock:
 
 class EnumItems:
     def __init__(self, block: EnumBlock, sort: bool = True):
-        self._enum_block = EnumItemsBlock(block=block)
+        self._block = block
+        self._enum_block = EnumItemsBlock(block=self._block)
         self._sort = sort
     
     def get_data(self) -> List[EnumDataItem]:
         tag = self._enum_block.get_obj()
         # body > div.contents > div:nth-child(11) > div.memdoc > table > tbody > tr
-        rows = tag.select('tr')
-        # the first row is a header with a td that has a comlum span
-        result = []
-        for row in rows:
-            if not self._is_valid_row(row=row): continue
-            di = self._process_row(row=row)
-            result.append(di)
-        if self._sort:
-            result.sort()
+        rows = None
+        try:
+            if not rows:
+                rows = tag.select('tr')
+            # body > div.contents > div:nth-child(110) > div.memdoc > table
+            # the first row is a header with a td that has a comlum span
+            result = []
+            for row in rows:
+                if not self._is_valid_row(row=row): continue
+                di = self._process_row(row=row)
+                result.append(di)
+            if self._sort:
+                result.sort()
+        except Exception as e:
+            msg = f"EnumItems.get_data() error processing '{self._block.url_obj.url}' Error: {e}"
+            logger.error(msg)
+            raise e
         return result
 
     def _is_valid_row(self, row: Tag) -> bool:
@@ -449,7 +493,8 @@ class EnumWriter(base.WriteBase):
 
 def _main():
     # url = 'https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1awt.html#aa6b9d577a1700f29923f49f7b77d165f'
-    url = 'https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1chart2.html#aa17c0b28cca2adc2be9b3c5954111489'
+    # url = 'https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1chart2.html#aa17c0b28cca2adc2be9b3c5954111489'
+    url = 'https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1drawing.html#af3965fa427851bc02bfe32c5d95d7406'
     sys.argv.extend(['--log-file', 'debug.log', '-v', '-n', '-u', url])
     main()
 

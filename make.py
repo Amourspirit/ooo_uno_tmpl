@@ -2,19 +2,20 @@
 import logging
 import os
 import sys
-from typing import Set
+import re
+import shutil
+import glob
+import argparse
+import subprocess
+from typing import List, Set
 from kwhelp import rules
 from kwhelp.decorator import DecFuncEnum, RuleCheckAll
 from kwhelp.exceptions import RuleError
 from enum import IntEnum
 from pathlib import Path
-import shutil
-import glob
-import subprocess
-import argparse
-import re
 from logger.log_handle import get_logger
-
+from parser import __version__, JSON_ID
+from verr import Version
 logger = None
 
 os.environ['project_root'] = str(Path(__file__).parent)
@@ -39,7 +40,51 @@ class CompareFile:
             return CompareEnum.After
         return CompareEnum.Equal
 
+class BaseCompile:
+    def __init__(self) -> None:
+        self._root_dir = Path(__file__).parent
+        self._json_parser_path = Path(self._root_dir, 'parser', 'json_parser')
+    
+    def get_module_link_files(self) -> List[str]:
+        dirname = str(self._root_dir / 'uno_obj')
+        # https://stackoverflow.com/questions/20638040/glob-exclude-pattern
+        # exclude files that start with _
+        pattern = dirname + '/**/module_links.json'
+        files = glob.glob(pattern, recursive=True)
+        # print('files', files)
+        return files
+    
+    @property
+    def root_dir(self) -> Path:
+        """Gets root_dir value"""
+        return self._root_dir
+    
+    @property
+    def json_parser_path(self) -> Path:
+        """Gets json_parser_path value"""
+        return self._json_parser_path
 
+
+class CompileEnumLinks(BaseCompile):
+    def __init__(self) -> None:
+        super().__init__()
+        self._processer = str(Path(self.json_parser_path, 'enum_parser.py'))
+        self._process_files()
+
+    def _subprocess(self, file:str):
+        cmd_str = f"{self._processer} -f {file}"
+        cmd = [sys.executable] + cmd_str.split()
+        logger.info("CompileEnumLinks: Processing enums in file: %s", file)
+        res = subprocess.run(cmd)
+        if res.stdout:
+            logger.info(res.stdout)
+        if res.stderr:
+            logger.error(res.stderr)
+
+    def _process_files(self):
+        link_files = self.get_module_link_files()
+        for file in link_files:
+            self._subprocess(file)
 class Make:
     def __init__(self, **kwargs) -> None:
         self._clean = bool(kwargs.get('clean', False))
@@ -229,13 +274,23 @@ def main():
     global logger
 
     parser = argparse.ArgumentParser(description='make')
-    parser.add_argument(
+    subparser = parser.add_subparsers(dest='command')
+    enum_parser = subparser.add_parser(name='enum')
+    enum_parser.add_argument(
+        '-a', '--all',
+        help='Compile all enums recursivly',
+        action='store_true',
+        dest='enum_all',
+        default=False
+    )
+    make_parser = subparser.add_parser(name='make')
+    make_parser.add_argument(
         '-f', '--force-compile',
         help='Force Compile of templates',
         action='store_true',
         dest='force_compile',
         default=False)
-    parser.add_argument(
+    make_parser.add_argument(
         '-c', '--clean-scratch',
         help='Wipes all files in scratch',
         action='store_true',
@@ -268,10 +323,14 @@ def main():
         logger.info('Executing command: %s', sys.argv[1:])
     else:
         logger.info('Running with no args.')
-    try:
-        make = Make(force_compile=args.force_compile, clean=args.clean_scratch)
-    except Exception as e:
-        logger.error(e)
+    if args.command == 'make':
+        try:
+            make = Make(force_compile=args.force_compile, clean=args.clean_scratch)
+        except Exception as e:
+            logger.error(e)
+    if args.command == 'enum':
+        if args.enum_all:
+            CompileEnumLinks()
     logger.info('Finished!')
 
 
