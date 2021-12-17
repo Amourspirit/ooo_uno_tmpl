@@ -156,8 +156,10 @@ class EnumName:
         _url = self._block.url
         self._urlobj = EnumUrl(url=_url)
         _block_obj = self._block.get_obj()
-        text = _block_obj.find(self._el, class_=_cls, attrs={"href" : self._urlobj.page_link}).text
-        return text.strip()
+        text = _block_obj.find(self._el, class_=_cls, attrs={"href" : self._urlobj.page_link}).text.replace("::",'.')
+        text = base.Util.get_clean_ns(input=text,ltrim=True)
+        text = base.Util.get_last_part(input=text)
+        return text
 
 
 
@@ -494,7 +496,7 @@ class EnumWriter(base.WriteBase):
 def _main():
     # url = 'https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1awt.html#aa6b9d577a1700f29923f49f7b77d165f'
     # url = 'https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1chart2.html#aa17c0b28cca2adc2be9b3c5954111489'
-    url = 'https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1drawing.html#af3965fa427851bc02bfe32c5d95d7406'
+    url = 'https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1sheet.html#a75a9acd74effffae38daed55136b0980'
     sys.argv.extend(['--log-file', 'debug.log', '-v', '-n', '-u', url])
     main()
 
