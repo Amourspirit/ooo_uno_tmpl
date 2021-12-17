@@ -1,0 +1,53 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.3",
+  "timestamp": "2021-12-17 02:31:31+00:00",
+  "type": "struct",
+  "name": "DictionaryListEvent",
+  "namespace": "com.sun.star.linguistic2",
+  "parser_args": {
+    "sort": true
+  },
+  "writer_args": {
+    "sort": true,
+    "auto_import": true
+  },
+  "data": {
+    "name": "DictionaryListEvent",
+    "fullname": "com.sun.star.linguistic2.DictionaryListEvent",
+    "desc": [
+      "structure representing a dictionary-list event.",
+      "",
+      "This structure is used by the dictionary-list to inform its listeners about certain events. Since the dictionary-list is able to collect several single events before broadcasting them to its listeners the integer argument may be a combination (logical or) of several event types. If more specific information about the events is requested by a listener, a sequence of all dictionary-list events since the last broadcasting will be supplied. Otherwise, that list will be empty."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1linguistic2_1_1DictionaryListEvent.html",
+    "namespace": "com.sun.star.linguistic2",
+    "auto_imports": [
+      [
+        ".dictionary_event",
+        "DictionaryEvent"
+      ]
+    ],
+    "imports": [],
+    "items": [
+      {
+        "name": "aDictionaryEvents",
+        "type": "'typing.List[DictionaryEvent]'",
+        "orig_type": "sequence< com.sun.star.linguistic2.DictionaryEvent >",
+        "lines": [
+          "list of accumulated dictionary events. ",
+          "It will be empty if all com::sun::star::linguistic2::XDictionaryListEventListener are satisfied with the condensed representation of the com::sun::star::linguistic2::DictionaryListEvent::nCondensedEvent()."
+        ]
+      },
+      {
+        "name": "nCondensedEvent",
+        "type": "int",
+        "orig_type": "short",
+        "lines": [
+          "the combined type of the accumulated events. ",
+          "The value can be the combination of multiple com::sun::star::linguistic2::DictionaryListEventFlags by applying the logical OR to them."
+        ]
+      }
+    ]
+  }
+}

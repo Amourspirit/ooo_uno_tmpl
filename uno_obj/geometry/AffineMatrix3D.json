@@ -1,0 +1,138 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.3",
+  "timestamp": "2021-12-17 02:32:39+00:00",
+  "type": "struct",
+  "name": "AffineMatrix3D",
+  "namespace": "com.sun.star.geometry",
+  "parser_args": {
+    "sort": true
+  },
+  "writer_args": {
+    "sort": true,
+    "auto_import": true
+  },
+  "data": {
+    "name": "AffineMatrix3D",
+    "fullname": "com.sun.star.geometry.AffineMatrix3D",
+    "desc": [
+      "This structure defines a 3 by 4 affine matrix.",
+      "",
+      "The matrix defined by this structure constitutes an affine mapping of a point in 3D to another point in 3D. The last line of a complete 4 by 4 matrix is omitted, since it is implicitly assumed to be [0,0,0,1].",
+      "",
+      "An affine mapping, as performed by this matrix, can be written out as follows, where xs, ys and zs are the source, and xd, yd and zd the corresponding result coordinates:",
+      "",
+      "xd = m00*xs + m01*ys + m02*zs + m03; yd = m10*xs + m11*ys + m12*zs + m13; zd = m20*xs + m21*ys + m22*zs + m23;",
+      "",
+      "Thus, in common matrix language, with M being the AffineMatrix3D and vs=[xs,ys,zs]^T, vd=[xd,yd,zd]^T two 3D vectors, the affine transformation is written as vd=M*vs. Concatenation of transformations amounts to multiplication of matrices, i.e. a translation, given by T, followed by a rotation, given by R, is expressed as vd=R*(T*vs) in the above notation. Since matrix multiplication is associative, this can be shortened to vd=(R*T)*vs=M'*vs. Therefore, a set of consecutive transformations can be accumulated into a single AffineMatrix3D, by multiplying the current transformation with the additional transformation from the left.",
+      "",
+      "Due to this transformational approach, all geometry data types are points in abstract integer or real coordinate spaces, without any physical dimensions attached to them. This physical measurement units are typically only added when using these data types to render something onto a physical output device. For 3D coordinates there is also a projection from 3D to 2D device coordinates needed. Only then the total transformation matrix (including projection to 2D) and the device resolution determine the actual measurement unit in 3D.",
+      "",
+      "**Since**",
+      "",
+      "    OOo 2.0"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1geometry_1_1AffineMatrix3D.html",
+    "namespace": "com.sun.star.geometry",
+    "auto_imports": [],
+    "imports": [],
+    "items": [
+      {
+        "name": "m00",
+        "type": "float",
+        "orig_type": "double",
+        "lines": [
+          "The top, left matrix entry. "
+        ]
+      },
+      {
+        "name": "m01",
+        "type": "float",
+        "orig_type": "double",
+        "lines": [
+          "The top, left middle matrix entry. "
+        ]
+      },
+      {
+        "name": "m02",
+        "type": "float",
+        "orig_type": "double",
+        "lines": [
+          "The top, right middle matrix entry. "
+        ]
+      },
+      {
+        "name": "m03",
+        "type": "float",
+        "orig_type": "double",
+        "lines": [
+          "The top, right matrix entry. "
+        ]
+      },
+      {
+        "name": "m10",
+        "type": "float",
+        "orig_type": "double",
+        "lines": [
+          "The middle, left matrix entry. "
+        ]
+      },
+      {
+        "name": "m11",
+        "type": "float",
+        "orig_type": "double",
+        "lines": [
+          "The middle, middle left matrix entry. "
+        ]
+      },
+      {
+        "name": "m12",
+        "type": "float",
+        "orig_type": "double",
+        "lines": [
+          "The middle, middle right matrix entry. "
+        ]
+      },
+      {
+        "name": "m13",
+        "type": "float",
+        "orig_type": "double",
+        "lines": [
+          "The middle, right matrix entry. "
+        ]
+      },
+      {
+        "name": "m20",
+        "type": "float",
+        "orig_type": "double",
+        "lines": [
+          "The bottom, left matrix entry. "
+        ]
+      },
+      {
+        "name": "m21",
+        "type": "float",
+        "orig_type": "double",
+        "lines": [
+          "The bottom, middle left matrix entry. "
+        ]
+      },
+      {
+        "name": "m22",
+        "type": "float",
+        "orig_type": "double",
+        "lines": [
+          "The bottom, middle right matrix entry. "
+        ]
+      },
+      {
+        "name": "m23",
+        "type": "float",
+        "orig_type": "double",
+        "lines": [
+          "The bottom, right matrix entry. "
+        ]
+      }
+    ]
+  }
+}

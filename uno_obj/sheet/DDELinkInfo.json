@@ -1,0 +1,66 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.3",
+  "timestamp": "2021-12-17 02:32:55+00:00",
+  "type": "struct",
+  "name": "DDELinkInfo",
+  "namespace": "com.sun.star.sheet",
+  "parser_args": {
+    "sort": true
+  },
+  "writer_args": {
+    "sort": true,
+    "auto_import": true
+  },
+  "data": {
+    "name": "DDELinkInfo",
+    "fullname": "com.sun.star.sheet.DDELinkInfo",
+    "desc": [
+      "describes all items of a DDE connection used in formulas.",
+      "",
+      "A DDE connection consists of the DDE service name, the DDE topic and a list of DDE items which may contain results cached from the last update.",
+      "",
+      "The formula that would need this information for example would contain =[1]!'R1C1' or =[2]!'Sheet1.A1' where [1] is an external link with DDE service name \"excel\" and the topic \"X:\\PATH\\[FILE.XLSX]Sheet1\", and [2] contains service \"soffice\" and topic \"file:///X:/PATH/FILE.ODS\". The service name is stored in DDELinkInfo::Service, the topic is stored in DDELinkInfo::Topic. Note that if the DDE item contains single quotes they are escaped by doubling them, as usual, for example =[2]!'''Sheet name''.A1' in a \"soffice\" service.",
+      "",
+      "**Since**",
+      "",
+      "    OOo 3.1"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1sheet_1_1DDELinkInfo.html",
+    "namespace": "com.sun.star.sheet",
+    "auto_imports": [
+      [
+        "......dde_item_info",
+        "DDEItemInfo"
+      ]
+    ],
+    "imports": [],
+    "items": [
+      {
+        "name": "Items",
+        "type": "'typing.List[DDEItemInfo]'",
+        "orig_type": "sequence< DDEItemInfo >",
+        "lines": [
+          "A list of DDE items. ",
+          "Each item may contain its results from the last update. "
+        ]
+      },
+      {
+        "name": "Service",
+        "type": "str",
+        "orig_type": "string",
+        "lines": [
+          "The DDE service name. "
+        ]
+      },
+      {
+        "name": "Topic",
+        "type": "str",
+        "orig_type": "string",
+        "lines": [
+          "The DDE topic. "
+        ]
+      }
+    ]
+  }
+}

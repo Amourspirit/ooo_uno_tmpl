@@ -1267,10 +1267,16 @@ class ParserBase(object):
         return parts[len(parts) - 1]
 
     def _get_desc(self, soup: BeautifulSoup) -> List[str]:
-        contents = soup.find('div', class_='contents')
-        block = contents.find('div', class_='textblock')
-        soup_lines: ResultSet = block.find_all('p')
         lines = []
+        contents = soup.find('div', class_='contents')
+        if not contents:
+            return lines
+        block = contents.find('div', class_='textblock')
+        if not block:
+            return lines
+        soup_lines: ResultSet = block.find_all('p')
+        if not soup_lines:
+            return lines
         for i, ln in enumerate(soup_lines):
             s = ln.text.strip()
             if i > 0:
