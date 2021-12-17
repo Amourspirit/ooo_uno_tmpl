@@ -1,13 +1,18 @@
 #!/usr/bin/env python
+# coding: utf-8
+"""
+Process a link to a page that contains a structure
+"""
 import os
 import sys
+import logging
 import argparse
 import base
-from typing import Dict, List, NamedTuple, Set, Tuple, Union
+from typing import Dict, List, Set, Tuple, Union
 from bs4 import BeautifulSoup
-from bs4.element import ResultSet, SoupStrainer, Tag
+from bs4.element import ResultSet, Tag
 from kwhelp.decorator import DecFuncEnum, RuleCheckAllKw, TypeCheckKw
-from kwhelp import KwArg, rules
+from kwhelp import rules
 from collections import namedtuple
 from pathlib import Path
 import textwrap
@@ -16,8 +21,15 @@ from logger.log_handle import get_logger
 
 from parser import __version__, JSON_ID
 
-logger = get_logger(Path(__file__).stem)
-base.logger = logger
+logger = None
+
+def _set_loggers(l: Union[logging.Logger, None]):
+    global logger, base
+    logger = l
+    base.logger = l
+
+_set_loggers(None)
+
 dataitem = namedtuple(
     'dataitem', ['name', 'datatype', 'orig_type', 'lines'])
 
@@ -193,7 +205,8 @@ class Parser(base.ParserBase):
                         for i, _nl in enumerate(_lines):
                             # if i > 0:
                             #     lines.append("")
-                            lines.append(_nl)
+                            _ln = _nl.replace('::', '.').strip()
+                            lines.append(_ln)
                         # lines.append(ln.text)
             return lines
 
@@ -240,7 +253,7 @@ class Parser(base.ParserBase):
             _type = parts[0] if len(parts) == 2 else parts[1]
             # _type = _type.strip('.').replace('>','').strip()
             py_type = get_py_type(_type)
-            name = parts.pop()
+            name = base.Util.get_clean_classname(parts.pop())
             lines = get_doc_lines(itm)
             logger.debug("Detils: Name: %s, Type: %s, Orig: %s", name, py_type, _type)
             di = dataitem(name=name,
@@ -289,6 +302,7 @@ class StructWriter(base.WriteBase):
         self._write_template_long: bool = kwargs.get(
             'write_template_long', False)
         self._indent_amt = 4
+        self._cache = {}
         self._json_str = None
         self._file_full_path = None
         self._p_name = None
@@ -348,6 +362,7 @@ class StructWriter(base.WriteBase):
         json_dict = {
             "id": JSON_ID,
             "version": __version__,
+            "timestamp": str(base.Util.get_timestamp_utc()),
             "type": "struct",
             "name": p_dict['name'],
             "namespace": p_dict['namespace'],
@@ -402,6 +417,9 @@ class StructWriter(base.WriteBase):
         
 
     def _get_uno_obj_path(self) -> Path:
+        key = '_get_uno_obj_path'
+        if key in self._cache:
+            return self._cache[key]
         uno_obj_path = Path(self._path_dir.parent, 'uno_obj')
         name_parts = self._p_fullname.split('.')
         # ignore com, sun, star
@@ -414,10 +432,11 @@ class StructWriter(base.WriteBase):
             except Exception as e:
                 logger.error(e, exc_info=True)
                 raise e
-        path_parts[index] = path_parts[index] + '.tmpl'
+        path_parts[index] = base.Util.get_clean_filename(path_parts[index]) + '.tmpl'
         obj_path = uno_obj_path.joinpath(*path_parts)
         self._mkdirp(obj_path.parent)
-        return obj_path
+        self._cache[key] = obj_path
+        return self._cache[key]
 
     def _auto_imports(self) -> List[Tuple[str, str]]:
         results = []
@@ -435,14 +454,12 @@ class StructWriter(base.WriteBase):
         
         
 def _main():
-    os.system('cls' if os.name == 'nt' else 'clear')
-    url = 'https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1accessibility_1_1AccessibleRelation.html'
-    p = Parser(url=url)
-    w = StructWriter(parser=p, print=True, auto_import=True)
-    w.write()
+    url = 'https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1beans_1_1Ambiguous_3_01T_01_4.html'
+    sys.argv.extend(['--log-file', 'debug.log', '-v', '-n', '-u', url])
+    main()
 def main():
-    os.system('cls' if os.name == 'nt' else 'clear')
-    logger.info('Executing command: %s', sys.argv[1:])
+    global logger
+
     # http://pymotw.com/2/argparse/
     parser = argparse.ArgumentParser(description='const')
     parser.add_argument(
@@ -450,6 +467,18 @@ def main():
         help='Source Url',
         type=str,
         required=True)
+    parser.add_argument(
+        '-x', '--no-cache',
+        help='No caching',
+        action='store_false',
+        dest='cache',
+        default=True)
+    parser.add_argument(
+        '-p', '--no-print-clear',
+        help='No clearing of terminal when output to terminal.',
+        action='store_false',
+        dest='no_print_clear',
+        default=True)
     parser.add_argument(
         '-s', '--no-sort',
         help='No sorting of results',
@@ -504,8 +533,6 @@ def main():
         action='store_true',
         dest='write_json',
         default=False)
-
-    # region Dummy Args for Logging
     parser.add_argument(
         '-v', '--verbose',
         help='verbose logging',
@@ -514,17 +541,33 @@ def main():
         default=False)
     parser.add_argument(
         '-L', '--log-file',
-        help='Log file to use',
+        help='Log file to use. Default to struct.log',
         type=str,
         required=False)
-    # endregion Dummy Args for Logging
 
     args = parser.parse_args()
-    # print("auto", args.auto_import)
-    # print('print', args.print)
-    # return
-    p = Parser(url=args.url, sort=args.sort,
-               replace_dual_colon=args.dual_colon)
+
+    if logger is None:
+        log_args = {}
+        if args.log_file:
+            log_args['log_file'] = args.log_file
+        else:
+            log_args['log_file'] = 'struct.log'
+        if args.verbose:
+            log_args['level'] = logging.DEBUG
+        _set_loggers(get_logger(logger_name=Path(__file__).stem, **log_args))
+
+    if not args.no_print_clear:
+        os.system('cls' if os.name == 'nt' else 'clear')
+
+    logger.info('Executing command: %s', sys.argv[1:])
+    logger.info('Parsing Url %s' % args.url)
+    p = Parser(
+        url=args.url,
+        sort=args.sort,
+        replace_dual_colon=args.dual_colon,
+        cache=args.cache
+        )
     if args.print_template is False and args.print_json is False:
         print('')
     w = StructWriter(

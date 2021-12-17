@@ -2,19 +2,20 @@
 import logging
 import os
 import sys
-from typing import Set
+import re
+import shutil
+import glob
+import argparse
+import subprocess
+from typing import List, Set
 from kwhelp import rules
 from kwhelp.decorator import DecFuncEnum, RuleCheckAll
 from kwhelp.exceptions import RuleError
 from enum import IntEnum
 from pathlib import Path
-import shutil
-import glob
-import subprocess
-import argparse
-import re
 from logger.log_handle import get_logger
-
+from parser import __version__, JSON_ID
+from verr import Version
 logger = None
 
 os.environ['project_root'] = str(Path(__file__).parent)
@@ -38,6 +39,96 @@ class CompareFile:
         if time1 > time2:
             return CompareEnum.After
         return CompareEnum.Equal
+
+class BaseCompile:
+    def __init__(self) -> None:
+        self._root_dir = Path(__file__).parent
+        self._json_parser_path = Path(self._root_dir, 'parser', 'json_parser')
+    
+    def get_module_link_files(self) -> List[str]:
+        dirname = str(self._root_dir / 'uno_obj')
+        # https://stackoverflow.com/questions/20638040/glob-exclude-pattern
+        # exclude files that start with _
+        pattern = dirname + '/**/module_links.json'
+        files = glob.glob(pattern, recursive=True)
+        # print('files', files)
+        return files
+    
+    @property
+    def root_dir(self) -> Path:
+        """Gets root_dir value"""
+        return self._root_dir
+    
+    @property
+    def json_parser_path(self) -> Path:
+        """Gets json_parser_path value"""
+        return self._json_parser_path
+
+
+class CompileEnumLinks(BaseCompile):
+    def __init__(self) -> None:
+        super().__init__()
+        self._processer = str(Path(self.json_parser_path, 'enum_parser.py'))
+        self._process_files()
+
+    def _subprocess(self, file:str):
+        cmd_str = f"{self._processer} -f {file}"
+        cmd = [sys.executable] + cmd_str.split()
+        logger.info("CompileEnumLinks: Processing enums in file: %s", file)
+        res = subprocess.run(cmd)
+        if res.stdout:
+            logger.info(res.stdout)
+        if res.stderr:
+            logger.error(res.stderr)
+
+    def _process_files(self):
+        link_files = self.get_module_link_files()
+        for file in link_files:
+            self._subprocess(file)
+
+
+class CompileStructLinks(BaseCompile):
+    def __init__(self) -> None:
+        super().__init__()
+        self._processer = str(Path(self.json_parser_path, 'struct_parser.py'))
+        self._process_files()
+
+    def _subprocess(self, file: str):
+        cmd_str = f"{self._processer} -f {file}"
+        cmd = [sys.executable] + cmd_str.split()
+        logger.info("CompileStructLinks: Processing struct in file: %s", file)
+        res = subprocess.run(cmd)
+        if res.stdout:
+            logger.info(res.stdout)
+        if res.stderr:
+            logger.error(res.stderr)
+
+    def _process_files(self):
+        link_files = self.get_module_link_files()
+        for file in link_files:
+            self._subprocess(file)
+
+class CompileInterfaceLinks(BaseCompile):
+
+    def __init__(self) -> None:
+        super().__init__()
+        self._processer = str(Path(self.json_parser_path, 'interface_parser.py'))
+        self._process_files()
+
+    def _subprocess(self, file: str):
+        cmd_str = f"{self._processer} -f {file}"
+        cmd = [sys.executable] + cmd_str.split()
+        logger.info("CompileStructLinks: Processing interface in file: %s", file)
+        res = subprocess.run(cmd)
+        if res.stdout:
+            logger.info(res.stdout)
+        if res.stderr:
+            logger.error(res.stderr)
+
+    def _process_files(self):
+        link_files = self.get_module_link_files()
+        for file in link_files:
+            self._subprocess(file)
 
 
 class Make:
@@ -165,11 +256,13 @@ class Make:
     def _compile(self, tmpl_file):
         cmd_str = f"cheetah compile --nobackup {tmpl_file}"
         logger.info('Running subprocess: %s', cmd_str)
-        res = subprocess.run(cmd_str.split())
-        if res.stdout:
-            logger.info(res.stdout)
-        if res.stderr:
-            logger.error(res.stderr)
+        p = subprocess.run(cmd_str.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        exit_status = p.returncode
+        std_out = p.stdout.decode()
+        if std_out:
+            logger.info("Cheetah output: %s", std_out)
+        if exit_status != 0:
+            logger.warning("Cheeta error Outuput: %s", p.stderr.decode())
     
     def _compile_tppi(self, tmpl_file):
         cmd_str = f"cheetah compile --nobackup --iext=.tppi {tmpl_file}"
@@ -201,6 +294,12 @@ class Make:
         _name = re.sub('(.)([A-Z][a-z]+)', r'\1_\2', name)
         return re.sub('([a-z0-9])([A-Z])', r'\1_\2', _name).lower()
 
+    def _ensure_init(self, path:Path):
+        init_file = Path(path, '__init__.py')
+        if not init_file.exists():
+            init_file.touch()
+            logger.info('Created File: %s', str(init_file))
+
     def _write(self, py_file, ext:str =''):
         _file = py_file
         if ext:
@@ -209,6 +308,7 @@ class Make:
             _file = _file.joinpath(_tmp.stem + ext)
             
         p_out = self._get_scratch_path(tmpl_file=_file)
+        self._ensure_init(p_out.parent)
         with open(p_out, "w") as outfile:
             subprocess.run([sys.executable, py_file], stdout=outfile)
             logger.info('Wrote file: %s', str(p_out))
@@ -222,13 +322,39 @@ def main():
     global logger
 
     parser = argparse.ArgumentParser(description='make')
-    parser.add_argument(
+    subparser = parser.add_subparsers(dest='command')
+    enum_parser = subparser.add_parser(name='enum')
+    struct_parser = subparser.add_parser(name='struct')
+    interface_parser = subparser.add_parser(name='interface')
+    enum_parser.add_argument(
+        '-a', '--all',
+        help='Compile all enums recursivly',
+        action='store_true',
+        dest='enum_all',
+        default=False
+    )
+    struct_parser.add_argument(
+        '-a', '--all',
+        help='Compile all struct recursivly',
+        action='store_true',
+        dest='struct_all',
+        default=False
+    )
+    interface_parser.add_argument(
+        '-a', '--all',
+        help='Compile all interface recursivly',
+        action='store_true',
+        dest='interface_all',
+        default=False
+    )
+    make_parser = subparser.add_parser(name='make')
+    make_parser.add_argument(
         '-f', '--force-compile',
         help='Force Compile of templates',
         action='store_true',
         dest='force_compile',
         default=False)
-    parser.add_argument(
+    make_parser.add_argument(
         '-c', '--clean-scratch',
         help='Wipes all files in scratch',
         action='store_true',
@@ -261,10 +387,20 @@ def main():
         logger.info('Executing command: %s', sys.argv[1:])
     else:
         logger.info('Running with no args.')
-    try:
-        make = Make(force_compile=args.force_compile, clean=args.clean_scratch)
-    except Exception as e:
-        logger.error(e)
+    if args.command == 'make':
+        try:
+            make = Make(force_compile=args.force_compile, clean=args.clean_scratch)
+        except Exception as e:
+            logger.error(e)
+    if args.command == 'enum':
+        if args.enum_all:
+            CompileEnumLinks()
+    if args.command == 'struct':
+        if args.struct_all:
+            CompileStructLinks()
+    if args.command == 'interface':
+        if args.interface_all:
+            CompileInterfaceLinks()
     logger.info('Finished!')
 
 

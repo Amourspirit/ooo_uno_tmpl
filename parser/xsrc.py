@@ -1,4 +1,8 @@
 #!/usr/bin/env python
+# coding: utf-8
+"""
+Process a link to a page that contains an interface
+"""
 import os
 import sys
 import argparse
@@ -8,19 +12,24 @@ import xerox  # requires xclip - sudo apt-get install xclip
 import re
 import base
 from typing import Dict, List, Set, Union
-from bs4 import BeautifulSoup
 from bs4.element import PageElement, ResultSet, Tag
-from kwhelp.decorator import DecFuncEnum, RuleCheckAllKw, RequireArgs, TypeCheckKw
-from kwhelp import rules
+from kwhelp.decorator import DecFuncEnum, TypeCheckKw
 from pathlib import Path
-from logger.log_handle import get_logger, LOG_FILE_HANDLER, get_file_handler
+from logger.log_handle import get_logger
 from parser.enm import main
 from dataclasses import dataclass
 from parser import __version__, JSON_ID
-DEBUGGING = False
 
-logger = get_logger(Path(__file__).stem)
+logger = None
 
+
+def _set_loggers(l: Union[logging.Logger, None]):
+    global logger, base
+    logger = l
+    base.logger = l
+
+
+_set_loggers(None)
 
 re_component_start = re.compile(r"(interface.*){", re.DOTALL)
 re_name_info_start = re.compile(r"(interface)\s*[a-zA-Z0-9]+[ :]+")
@@ -36,7 +45,7 @@ re_method_pattern = re.compile(
 re_raises_pattern = re.compile(r"\s*(raises\s*\(.*\))")
 
 re_interface_pattern = re.compile(r"interface\s*([a-zA-Z0-9.]*)\s*;")
-re_property_pattern = re.compile(r"(?:\[attribute\])(?:[ ]+)([a-zA-Z0-9. {}()]*);")
+re_property_pattern = re.compile(r"(?:\[attribute[ ,a-z]*\])(?:[ ]+)([a-zA-Z0-9. {}()]*);")
 re_comment_start_pattern = re.compile(r"(?:(\/\*)|(?:\*)\s)")
 # endregion SDK API Reference
 
@@ -63,17 +72,36 @@ class SdkCodeText(base.BlockObj):
     def __init__(self, soup: base.SoupObj):
         super().__init__(soup=soup)
         self._data = None
-        # if DEBUGGING:
-        #     self._data = get_code_text_data()
 
     def get_obj(self) -> str:
         if self._data:
             return self._data
 
-        def repl(m):
-            multi_line: str = m.group(1)
-            lines = multi_line.splitlines(keepends=False)
-            return " ".join(lines)
+        def clean_lines(text: str) -> str:
+            lns = text.splitlines()
+            new_lines = []
+            for l in lns:
+                ln = l.strip()
+                if ln == '':
+                    continue
+                if ln.startswith('#'):
+                    continue
+                new_lines.append(ln)
+            return "\n".join(new_lines)
+
+        def comment_remover(text):
+
+            def replacer(match):
+                s = match.group(0)
+                if s.startswith('/'):
+                    return " "  # note: a space and not an empty string
+                else:
+                    return s
+            pattern = re.compile(
+                r'//.*?$|/\*.*?\*/|\'(?:\\.|[^\\\'])*\'|"(?:\\.|[^\\"])*"',
+                re.DOTALL | re.MULTILINE
+            )
+            return re.sub(pattern, replacer, text)
         rows = self._soup.soup.find_all('div', class_='line')
         lines = []
         for row in rows:
@@ -85,7 +113,8 @@ class SdkCodeText(base.BlockObj):
         # some methods are are written on several lines. Replace to remove line breaks
         # result = re.sub(r'((?:[a-zA-Z0-9]*)\( .*?\);)',
         #                 repl, result, flags=re.DOTALL)
-        self._data = result
+        self._data = comment_remover(result)
+        self._data = clean_lines(self._data)
         # logger.debug('SdkCodeText.get_ojb() data:\n%s', self._data)
         return self._data
 
@@ -94,7 +123,7 @@ class SdkCodeText(base.BlockObj):
         row_text: str = row.text
         ls: str = re.sub(re_ln_pattern, '', row_text)
         return ls
-
+    
 class SdkComponentText:
     """
     gets the text of the Component area
@@ -132,14 +161,22 @@ class SdkComponentText:
         return self._data
 
     def _get_text_aggresive(self, text:str) -> str:
+        def single_line_ns(input: str) -> str:
+            _regex = r"(module[{ \na-z-A-Z0-9]+)interface"
+            def cb(match) -> str:
+                return str(match.group(1)).replace('\n', ' ') + '\ninterface'
+            return re.sub(pattern=_regex, repl=cb, string=input, flags=re.DOTALL)
         def clean_curly(input: str) -> str:
             _regex = r"^(}[ ;}]+)"
             def cb(match) -> str:
                 return base.Util.clean_curly_brace_close(match.group(1))
-            
             return re.sub(pattern=_regex, repl=cb, string=input, flags=re.MULTILINE)
+        def remove_single_line_comments(input: str) -> str:
+            return re.sub(r"(//[ a-z-A-Z0-9]+\n)",'', input, re.DOTALL)
         # remove all spaces between } and ;
-        _text = clean_curly(text)
+        _text = single_line_ns(text)
+        _text = remove_single_line_comments(_text)
+        _text = clean_curly(_text)
 
         regex_start = r"module (com \{.*)\{"
         regex_end = r"^(};){3,5}"
@@ -182,15 +219,24 @@ class SdkComponentStart:
         try:
             text = self._component.get_text()
             # regex = r"(interface.*){"
-            matches = re_component_start.search(text)
+            matches = re.search(
+                r"(interface[ ]+[a-zA-Z0-9]+[^;][a-z-A-Z0-9_: ]+)\n{", text)
+            if not matches:
+                matches = re_component_start.search(text)
+            if not matches:
+                matches = re.search(r"interface[a-zA-Z0-9_ :]+\n{", text)
             if matches:
                 g = matches.groups()
                 self._data = " ".join(g[0].replace("{","").rstrip().split())
             else:
-                raise Exception(
-                    "SdkComponentStart: Unable to match regex for first line")
+                if logger.level <= logging.DEBUG:
+                    logger.debug("SdkComponentStart.get_obj() unable to match first line. Returning text. URL: %s",
+                                 self._component.code_text.url_obj.url)
+                    self._data = text
+                # raise Exception("SdkComponentStart: Unable to match regex for first line")
         except Exception as e:
-            logger.error("SdkComponentStart: Processing first line")
+            url = self._component.code_text.url_obj.url
+            logger.error("SdkComponentStart: Processing first line. Url: %s", url)
             raise e
         return self._data
 
@@ -562,19 +608,10 @@ class SdkProperyData:
         self._set_data()
 
     def _set_data(self):
-        is_py_type = True
-        def cb(data: dict):
-            nonlocal is_py_type
-            is_py_type = data['is_py_type']
-            if not is_py_type:
-                self._imports.add(data['type'])
-            if data['is_typing']:
-                self._requires_typing = True
         text = self._param
         # remove [attribute] from start of string
-        regex = r"\[(:?[a-zA-Z<]*)\] *"
-        text = re.sub(regex, '', text, 1)
-   
+        text = base.Util.clean_sq_braces(text).lstrip()
+        
         # check if method include raises...
         matches = re.search(re_raises_pattern, text)
         if matches:
@@ -583,9 +620,50 @@ class SdkProperyData:
             # remove raises text section
             text = re.sub(re_raises_pattern, '', text)
         parts = text.split(maxsplit=2)
-        result = base.Util.get_py_type(parts[0], cb=cb)
+        # result = base.Util.get_py_type(parts[0], cb=cb)
+        ns_clean = base.Util.get_clean_ns(input=parts[0], ltrim=True)
+        result = self._get_py_type(in_type=ns_clean)
         self._p_return = result
         self._p_name = base.Util.get_clean_name(parts[1])
+
+    def _get_py_type(self, in_type: str) -> str:
+        cb_data = None
+
+        def cb(data: dict):
+            nonlocal cb_data
+            cb_data = data
+
+        n_type = base.TYPE_MAP.get(in_type, None)
+        if n_type:
+            logger.debug(
+                "SdkProperyData._get_py_type() Found python type: %s", n_type)
+            return n_type
+        n_type = base.Util.get_py_type(uno_type=in_type, cb=cb)
+        is_wrapper = cb_data['is_wrapper']
+        is_py = cb_data['is_py_type']
+        _result = n_type
+        if is_wrapper:
+            self._requires_typing = True
+            logger.debug(
+                "SdkProperyData._get_py_type() wrapper arg %s", in_type)
+            logger.debug(
+                "SdkProperyData._get_py_type() wrapper arg Typing is Required.")
+            wdata: dict = cb_data['wdata']
+            if not wdata['py_type_inner']:
+                logger.debug(
+                    "SdkProperyData._get_py_type() wrapper inner requires typing arg %s", in_type)
+                self._imports.add(cb_data['long_type'])
+                logger.debug(
+                    "SdkProperyData._get_py_type() added import %s", cb_data['long_type'])
+        else:
+            if is_py is False:
+                logger.debug(
+                    "SdkProperyData._get_py_type() requires typing arg %s", in_type)
+                self._requires_typing = True
+                self._imports.add(cb_data['long_type'])
+                logger.debug(
+                    "SdkProperyData._get_py_type() added import %s", cb_data['long_type'])
+        return _result
 
 
     def _process_raises(self, text: str):
@@ -830,8 +908,7 @@ class SdkImports:
                 logger.debug(
                     'SdkImports.get_obj() Found Interface Line. Groups info: %s', str(g))
                 logger.debug('SdkImports.get_obj() Found Interface Line: %s', g[0])
-                s = g[0].lstrip('.')
-                s = base.Util.get_clean_ns(s)
+                s = base.Util.get_clean_ns(input=g[0], ltrim=True)
                 logger.debug(
                     "SdkImports.get_obj() adding Import: '%s'", s)
                 self._imports.add(s)
@@ -925,14 +1002,17 @@ class ApiMethodBlock:
         # get the next sibling recursivly because
         # BeautifulSoup will also find whitesapce on next_sibling
         if not isinstance(el, PageElement):
+            
             raise TypeError(
-                f"MethodBlock._get_next_sibling() el is not a PageElement")
+                f"MethodBlock._get_next_sibling() el is not a PageElement Url: {self._blocks.url_obj.url}")
         next = el.next_sibling
         # https://stackoverflow.com/questions/10711116/strip-spaces-tabs-newlines-python
         # use split join to remove whitespace and new line
         s = ''.join(str(next).split())
         if s == '':
             next = self._get_next_sibling(next)
+            # if next is None:
+            #     print(None)
         return next
 
     def get_obj(self) -> MethodBlockInfo:
@@ -983,10 +1063,8 @@ class ApiMethodBlocks(base.BlockObj):
         else:
             self._soup_obj = url_soup
         soup = self._soup_obj
-        if DEBUGGING:
-            soup._soup = BeautifulSoup(get_soup_data(), 'lxml')
         super().__init__(soup=soup)
-        self._obj_data = None
+        self._obj_data: ResultSet = None
         self._index = 0
         self._len = 0
 
@@ -1000,7 +1078,8 @@ class ApiMethodBlocks(base.BlockObj):
         if self._obj_data:
             return self._obj_data
         # _cls = 'memitem'
-        self._obj_data = self._soup.soup.select("a[id]")
+        # self._obj_data = self._soup.soup.select("a[id]")
+        self._obj_data = self._soup.soup.find_all("a", id=base.pattern_id)
 
         return self._obj_data
 
@@ -1011,9 +1090,14 @@ class ApiMethodBlocks(base.BlockObj):
             raise StopIteration
         itm = self._obj_data[self._index]
         self._index += 1
-        mb = ApiMethodBlock(block=itm, blocks=self)
-        if not mb.is_valid():
-            mb = self._get_next()
+        try:
+            mb = ApiMethodBlock(block=itm, blocks=self)
+            if not mb.is_valid():
+                mb = self._get_next()
+        except Exception as e:
+            # probally nothing to worrie about. could simple be a bad match
+            logger.warning("")
+            mb = self._get_next("ApiMethodBlocks.Next() No method data block for '%s' Url: %s", str(itm), self.url_obj.url)
         return mb
 
     def __iter__(self):
@@ -1202,15 +1286,17 @@ class ApiInfo:
 
 class SdkData():
     """Sdk Data bring together most Sdk object in one easy to upse place"""
-    def __init__(self, url: str):
+    def __init__(self, url: str, allow_cache: bool = True):
         """
         Constructor
 
         Args:
             url (str): Url to Api Main Page
+            allow_cache (bool, optional): determins if file caching is used
+                on response data. Default ``True``
         """
         self._url = url
-        self._api_sdk_link = ApiSdkLink(base.SoupObj(self._url))
+        self._api_sdk_link = ApiSdkLink(base.SoupObj(url=self._url, allow_cache=allow_cache))
         self._soup_obj = None
         self._code_text = None
         self._componnet_text = None
@@ -1318,18 +1404,13 @@ class SdkData():
 class ParserInterface(base.ParserBase):
 
     # region Constructor
-    @RequireArgs('url', ftype=DecFuncEnum.METHOD)
-    @RuleCheckAllKw(arg_info={"url": 0, "sort": 1, "replace_dual_colon": 1},
-                    rules=[rules.RuleStrNotNullEmptyWs, rules.RuleBool],
-                    ftype=DecFuncEnum.METHOD)
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self._sdk_data = SdkData(self.url)
+        self._sdk_data = SdkData(self.url, allow_cache=self.allow_cache)
         soup = self._sdk_data.api_sdk_link.soup
         self._api_info = ApiInfo(soup)
         self._sdk_method_info = SdkMethods(soup)
         self._sdk_property_info = SdkProperties(self._sdk_data.component_lines)
-        self._sort = True
         self._info = None
         self._requires_typing = False
         self._imports: Set[str] = set()
@@ -1345,7 +1426,7 @@ class ParserInterface(base.ParserBase):
     
     def get_parser_args(self) -> dict:
         args = {
-            "sort": self._sort
+            "sort": self.sort
         }
         return args
         
@@ -1367,20 +1448,23 @@ class ParserInterface(base.ParserBase):
             return self._info
         # ns = SdkNamesSpaceInfo(self._sdk_method_info.component)
         ns = base.UrlObj(self._url)
-        ni = self._sdk_data.name_info
+        
+        # ni = self._sdk_data.name_info
         ex = self._sdk_data.extends
-        im = self._sdk_data.imports
+        # im = self._sdk_data.imports
         desc = ApiDesc(soup=self._api_info.soup)
         result = {
-            'name': ni.name,
+            # 'name': ni.name,
+            'name': ns.name,
             # convert set to list for json
-            'imports': list(im.get_obj()),
+            # 'imports': list(im.get_obj()),
+            'imports': [],
             'namespace': ns.namespace_str,
             'extends': ex.ex_lst,
             'desc': desc.get_obj(),
             "url": self._api_info.soup.url
         }
-        logger.debug('ParserInterface.get_info() name: %s', ni.name)
+        logger.debug('ParserInterface.get_info() name: %s', ns.name)
         logger.debug('ParserInterface.get_info() namespace: %s', ns.namespace_str)
         self._info = result
         return self._info
@@ -1427,7 +1511,7 @@ class ParserInterface(base.ParserBase):
                 args.append([pi.name, pi.type, pi.direction])
             attrib['args'] = args
             attribs['methods'].append(attrib)
-        if self._sort:
+        if self.sort:
             if 'methods' in attribs:
                 newlist = sorted(attribs['methods'], key=lambda d: d['name'])
                 attribs['methods'] = newlist
@@ -1451,7 +1535,7 @@ class ParserInterface(base.ParserBase):
                 "raises_set": m.raises_set
             }
             attribs['properties'].append(attrib)
-        if self._sort:
+        if self.sort:
             if 'properties' in attribs:
                 newlist = sorted(attribs['properties'], key=lambda d: d['name'])
                 attribs['properties'] = newlist
@@ -1515,7 +1599,7 @@ class InterfaceWriter(base.WriteBase):
         self._p_data: str = None
         self._p_url: str = None
         self._p_requires_typing = False
-        self._path_dir = Path(os.path.dirname(__file__))
+        self._path_dir = Path(__file__).parent
         self._cache: Dict[str, object] = {}
         
         t_file = 'interface'
@@ -1566,6 +1650,7 @@ class InterfaceWriter(base.WriteBase):
         json_dict = {
             "id": JSON_ID,
             "version": __version__,
+            "timestamp": str(base.Util.get_timestamp_utc()),
             "name": p_dict['name'],
             "type": "interface",
             "namespace": p_dict['namespace'],
@@ -1605,8 +1690,9 @@ class InterfaceWriter(base.WriteBase):
             f, n = base.Util.get_rel_import(
                 i_str=ns, ns=self._p_namespace
             )
-            lst.append(f)
-            lst.append(n)
+            # lst.append(f)
+            # lst.append(n)
+            lst.append([f, n])
         self._cache[key] = lst
         return self._cache[key]
     # endregion get Imports
@@ -1683,6 +1769,9 @@ class InterfaceWriter(base.WriteBase):
             raise e
     
     def _get_uno_obj_path(self) -> Path:
+        key = '_get_uno_obj_path'
+        if key in self._cache:
+            return self._cache[key]
         if not self._p_name:
             try:
                 raise Exception("InterfaceWriter._get_uno_obj_path() Parser provided a name that is an empty string.")
@@ -1697,7 +1786,8 @@ class InterfaceWriter(base.WriteBase):
         path_parts.append(self._p_name + '.tmpl')
         obj_path = uno_obj_path.joinpath(*path_parts)
         self._mkdirp(obj_path.parent)
-        return obj_path
+        self._cache[key] = obj_path
+        return self._cache[key]
 
     def _write_to_file(self):
         with open(self._file_full_path, 'w') as f:
@@ -1715,18 +1805,14 @@ class InterfaceWriter(base.WriteBase):
 
 
 def _main():
-    # replace logging file handler for debugging.
-    logger.removeHandler(LOG_FILE_HANDLER)
-    hndl = get_file_handler('debug.log')
-    logger.addHandler(hndl)
-    logger.level = logging.DEBUG
-    # os.system('cls' if os.name == 'nt' else 'clear')
-    url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1accessibility_1_1XAccessibleEditableText.html'
-    # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1accessibility_1_1XAccessibleText.html'
+   
+    # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1graphic_1_1XSvgParser.html'
+    url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1office_1_1XAnnotation.html'
     sys.argv.extend(['--log-file', 'debug.log', '-v', '-n', '-u', url])
     main()
 
 def main():
+    global logger
     # region Parser
     parser = argparse.ArgumentParser(description='interface')
     parser.add_argument(
@@ -1739,6 +1825,12 @@ def main():
         help='No sorting of results',
         action='store_false',
         dest='sort',
+        default=True)
+    parser.add_argument(
+        '-x', '--no-cache',
+        help='No caching',
+        action='store_false',
+        dest='cache',
         default=True)
     parser.add_argument(
         '-p', '--no-print-clear',
@@ -1782,7 +1874,6 @@ def main():
         action='store_true',
         dest='write_json',
         default=False)
-    # region Dummy Args for Logging
     parser.add_argument(
         '-v', '--verbose',
         help='verbose logging',
@@ -1791,18 +1882,31 @@ def main():
         default=False)
     parser.add_argument(
         '-L', '--log-file',
-        help='Log file to use',
+        help='Log file to use. Defaults to interface.log',
         type=str,
         required=False)
-    # endregion Dummy Args for Logging
+
     args = parser.parse_args()
+    if logger is None:
+        log_args = {}
+        if args.log_file:
+            log_args['log_file'] = args.log_file
+        else:
+            log_args['log_file'] = 'interface.log'
+        if args.verbose:
+            log_args['level'] = logging.DEBUG
+        _set_loggers(get_logger(logger_name=Path(__file__).stem, **log_args))
     # endregion Parser
     if not args.no_print_clear:
         os.system('cls' if os.name == 'nt' else 'clear')
     logger.info('Executing command: %s', sys.argv[1:])
     logger.info('Parsing Url %s' % args.url)
     
-    p = ParserInterface(url=args.url, sort=args.sort)
+    p = ParserInterface(
+        url=args.url,
+        sort=args.sort,
+        cache=args.cache
+    )
     w = InterfaceWriter(
         parser=p,
         print_template=args.print_template,
@@ -1816,22 +1920,6 @@ def main():
     if args.print_template is False and args.print_json is False:
         print('')
     w.write()
-
-# region Debugging Data
-
-
-def get_code_text_data():
-    # code text value
-    result = None
-    return result
-
-def get_soup_data():
-    # raw html
-    result = None
-    return result
-
-# endregion Debugging Data
-
 
 if __name__ == '__main__':
     main()

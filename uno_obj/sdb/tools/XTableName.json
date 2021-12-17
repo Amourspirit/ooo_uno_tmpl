@@ -1,0 +1,81 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.3",
+  "timestamp": "2021-12-17 11:16:46+00:00",
+  "name": "XTableName",
+  "type": "interface",
+  "namespace": "com.sun.star.sdb.tools",
+  "parser_args": {
+    "sort": true
+  },
+  "writer_args": {},
+  "data": {
+    "from_imports": [],
+    "from_imports_typing": [
+      ".......x_property_set",
+      "XPropertySet"
+    ],
+    "name": "XTableName",
+    "imports": [],
+    "namespace": "com.sun.star.sdb.tools",
+    "extends": [],
+    "desc": [
+      "allows to manipulate table names.",
+      "",
+      "When, in a database application, dealing with table names, there's many degrees of freedom to deal with. For instance, suppose you want to have the full name of a table object, as it should be used in a SELECT statement's FROM part. This requires you to evaluate whether or not the table has a catalog and/or schema name, to combine the catalog, the schema, and the basic table name into one name, respecting the database's quoting character, and the order in which all those parts should be combined. Additionally, you have to respect the client-side settings which tell OpenOffice.org to use or not use catalogs and schemas in SELECT at all.",
+      "",
+      "The XTableName interface eases this and other, similar tasks around table names.",
+      "",
+      "The component itself does not have life-time control mechanisms, i.e. you cannot explicitly dispose it (com.sun.star.lang.XComponent.dispose()), and you cannot be notified when it dies.\n However, if your try to access any of its methods or attributes, after the connection which was used to create it was closed, a com.sun.star.lang.DisposedException will be thrown.",
+      "",
+      "**See Also**",
+      "",
+      "    XConnectionTools"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1sdb_1_1tools_1_1XTableName.html",
+    "items": {
+      "properties": [
+        {
+          "name": "CatalogName",
+          "returns": "str",
+          "desc": [
+            "denotes the name of the catalog which the table is a part of"
+          ],
+          "raises_get": [],
+          "raises_set": []
+        },
+        {
+          "name": "SchemaName",
+          "returns": "str",
+          "desc": [
+            "denotes the name of the schema which the table is a part of"
+          ],
+          "raises_get": [],
+          "raises_set": []
+        },
+        {
+          "name": "Table",
+          "returns": "'XPropertySet'",
+          "desc": [
+            "is the com.sun.star.sdb.Table object specified by the current name.",
+            "",
+            "Retrieving this attribute is equivalent to obtaining the tables container from the connection (via com.sun.star.sdbcx.XTablesSupplier), and calling its com.sun.star.container.XNameAccess.getByName() method with the ComposedName."
+          ],
+          "raises_get": [],
+          "raises_set": [
+            "com.sun.star.container.NoSuchElementException"
+          ]
+        },
+        {
+          "name": "TableName",
+          "returns": "str",
+          "desc": [
+            "denotes the mere, unqualified table name, excluding any catalog and schema."
+          ],
+          "raises_get": [],
+          "raises_set": []
+        }
+      ]
+    }
+  }
+}

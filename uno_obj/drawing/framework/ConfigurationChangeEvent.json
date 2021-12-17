@@ -1,0 +1,88 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.3",
+  "timestamp": "2021-12-17 18:24:46+00:00",
+  "type": "struct",
+  "name": "ConfigurationChangeEvent",
+  "namespace": "com.sun.star.drawing.framework",
+  "parser_args": {
+    "sort": true
+  },
+  "writer_args": {
+    "sort": true,
+    "auto_import": true
+  },
+  "data": {
+    "name": "ConfigurationChangeEvent",
+    "fullname": "com.sun.star.drawing.framework.ConfigurationChangeEvent",
+    "desc": [
+      "Objects of this class are used for notifying changes of the configuration.",
+      "",
+      "They are broadcasted by the configuration controller which maintains the configuration. The set of types of configuration changes is not fixed and is not maintained or documented in one place.",
+      "",
+      "The set of used members and the exact meaning of their values is not the same for all types. Therefore, the descriptions of the members are just general guidelines. See XConfigurationController for a list of event types used by the basic drawing framework."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1drawing_1_1framework_1_1ConfigurationChangeEvent.html",
+    "namespace": "com.sun.star.drawing.framework",
+    "auto_imports": [
+      [
+        ".x_resource_id",
+        "XResourceId"
+      ],
+      [
+        "...uno.x_interface",
+        "XInterface"
+      ],
+      [
+        ".x_configuration",
+        "XConfiguration"
+      ]
+    ],
+    "imports": [],
+    "items": [
+      {
+        "name": "Configuration",
+        "type": "'XConfiguration'",
+        "orig_type": "XConfiguration",
+        "lines": [
+          "The current configuration, depending on the event type, either before or after the change.",
+          "May be an empty reference."
+        ]
+      },
+      {
+        "name": "ResourceId",
+        "type": "'XResourceId'",
+        "orig_type": "XResourceId",
+        "lines": [
+          "The resource id that is part of the configuration change."
+        ]
+      },
+      {
+        "name": "ResourceObject",
+        "type": "'XInterface'",
+        "orig_type": "com.sun.star.uno.XInterface",
+        "lines": [
+          "The resource object that corresponds to the ResourceId.",
+          "May be an empty reference."
+        ]
+      },
+      {
+        "name": "Type",
+        "type": "str",
+        "orig_type": "string",
+        "lines": [
+          "The type of configuration change is a free-form string.",
+          "This is the only member that is always set. The values of the other members depend on the configuration change type and may or may not be set."
+        ]
+      },
+      {
+        "name": "UserData",
+        "type": "object",
+        "orig_type": "any",
+        "lines": [
+          "Each listener is called with exactly the UserData that was given when the listener was registered."
+        ]
+      }
+    ]
+  }
+}

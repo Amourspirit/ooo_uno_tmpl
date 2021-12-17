@@ -1,0 +1,72 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.3",
+  "timestamp": "2021-12-17 11:16:14+00:00",
+  "name": "XNumericControl",
+  "type": "interface",
+  "namespace": "com.sun.star.inspection",
+  "parser_args": {
+    "sort": true
+  },
+  "writer_args": {},
+  "data": {
+    "from_imports": [
+      [
+        "......x_property_control",
+        "XPropertyControl"
+      ]
+    ],
+    "from_imports_typing": [],
+    "name": "XNumericControl",
+    "imports": [],
+    "namespace": "com.sun.star.inspection",
+    "extends": [
+      "XPropertyControl"
+    ],
+    "desc": [
+      "defines the interface for an XPropertyControl which supports displaying and entering numerical values.",
+      "",
+      "**See Also**",
+      "",
+      "    OOo 2.0.3"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1inspection_1_1XNumericControl.html",
+    "items": {
+      "properties": [
+        {
+          "name": "DecimalDigits",
+          "returns": "int",
+          "desc": [
+            "describes the number of decimal digits to use for the value"
+          ],
+          "raises_get": [],
+          "raises_set": []
+        },
+        {
+          "name": "DisplayUnit",
+          "returns": "int",
+          "desc": [
+            "describes a com.sun.star.util.MeasureUnit to be applied for displaying values.",
+            "",
+            "Only a certain set of com.sun.star.util.MeasureUnit values is supported. In particular, every value which denotes a fraction of another unit (like 100th millimeters) cannot be used as DisplayUnit."
+          ],
+          "raises_get": [],
+          "raises_set": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ]
+        },
+        {
+          "name": "ValueUnit",
+          "returns": "int",
+          "desc": [
+            "describes a com.sun.star.util.MeasureUnit to be applied for transferring values.",
+            "",
+            "The core measurement unit for a property value might differ from the unit which is used by the control to display it. For instance, your property value might require that your values denote 100th millimeters, but to the user, you want to present the value as, say, inches. In this case, a numeric control can automatically handle the value conversion for you, if you give it a ValueUnit different from the DisplayUnit."
+          ],
+          "raises_get": [],
+          "raises_set": []
+        }
+      ]
+    }
+  }
+}

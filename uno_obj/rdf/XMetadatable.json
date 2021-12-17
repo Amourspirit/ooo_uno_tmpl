@@ -1,0 +1,59 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.3",
+  "timestamp": "2021-12-17 11:16:26+00:00",
+  "name": "XMetadatable",
+  "type": "interface",
+  "namespace": "com.sun.star.rdf",
+  "parser_args": {
+    "sort": true
+  },
+  "writer_args": {},
+  "data": {
+    "from_imports": [
+      [
+        "......xuri",
+        "XURI"
+      ]
+    ],
+    "from_imports_typing": [
+      "......string_pair",
+      "StringPair"
+    ],
+    "name": "XMetadatable",
+    "imports": [],
+    "namespace": "com.sun.star.rdf",
+    "extends": [
+      "XURI"
+    ],
+    "desc": [
+      "marks an object representing an ODF element that may have RDF meta data attached.",
+      "",
+      "To make using ODF elements as part of RDF statements more convenient, this interface inherits from XURI. The URI is constructed by concatenating the URI of the document, the stream name, a fragment separator, and the XML ID.",
+      "",
+      "Note that using the XURI interface on an instance of XMetadatable may have the side effect of creating a metadata reference for the instance.",
+      "",
+      "**See Also**",
+      "",
+      "    OOo 3.2"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1rdf_1_1XMetadatable.html",
+    "items": {
+      "properties": [
+        {
+          "name": "MetadataReference",
+          "returns": "'StringPair'",
+          "desc": [
+            "a metadata reference, comprising the stream name and the XML ID.",
+            "",
+            "Note that this metadata reference must be unique for the ODF document. This implies that the XML ID part must be unique for every stream. A pair of two empty strings signifies \\\"no metadata reference\\\". For example: Pair(\\\"content.xml\\\", \\\"foo-element-1\\\")"
+          ],
+          "raises_get": [],
+          "raises_set": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ]
+        }
+      ]
+    }
+  }
+}

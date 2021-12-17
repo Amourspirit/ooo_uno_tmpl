@@ -1,0 +1,59 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.3",
+  "timestamp": "2021-12-17 18:23:33+00:00",
+  "type": "struct",
+  "name": "FocusEvent",
+  "namespace": "com.sun.star.awt",
+  "parser_args": {
+    "sort": true
+  },
+  "writer_args": {
+    "sort": true,
+    "auto_import": true
+  },
+  "data": {
+    "name": "FocusEvent",
+    "fullname": "com.sun.star.awt.FocusEvent",
+    "desc": [
+      "specifies a keyboard focus event.",
+      "",
+      "There are two levels of focus change events: permanent and temporary. Permanent focus change events occur when focus is directly moved from one component to another, such as through calls to requestFocus() or as the user uses the Tab key to traverse components. Temporary focus change events occur when focus is gained or lost for a component as the indirect result of another operation, such as window deactivation or a scrollbar drag. In this case, the original focus state will automatically be restored once that operation is finished, or for the case of window deactivation, when the window is reactivated. Both permanent and temporary focus events are delivered using the FOCUS_GAINED and FOCUS_LOST event ids; the levels may be distinguished in the event using the isTemporary() method."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1awt_1_1FocusEvent.html",
+    "namespace": "com.sun.star.awt",
+    "auto_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface"
+      ]
+    ],
+    "imports": [],
+    "items": [
+      {
+        "name": "FocusFlags",
+        "type": "int",
+        "orig_type": "short",
+        "lines": [
+          "specifies the reason for the focus change as an arithmetic-or combination of FocusChangeReason."
+        ]
+      },
+      {
+        "name": "NextFocus",
+        "type": "'XInterface'",
+        "orig_type": "com.sun.star.uno.XInterface",
+        "lines": [
+          "contains the window which gets the focus on a lose focus event."
+        ]
+      },
+      {
+        "name": "Temporary",
+        "type": "bool",
+        "orig_type": "boolean",
+        "lines": [
+          "specifies if this focus change event is a temporary change."
+        ]
+      }
+    ]
+  }
+}

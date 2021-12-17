@@ -1,0 +1,60 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.3",
+  "timestamp": "2021-12-17 18:23:13+00:00",
+  "type": "struct",
+  "name": "SocketPermission",
+  "namespace": "com.sun.star.connection",
+  "parser_args": {
+    "sort": true
+  },
+  "writer_args": {
+    "sort": true,
+    "auto_import": true
+  },
+  "data": {
+    "name": "SocketPermission",
+    "fullname": "com.sun.star.connection.SocketPermission",
+    "desc": [
+      "This permission represents access to a network via sockets.",
+      "",
+      "A SocketPermission consists of a host specification and a set of actions specifying ways to connect to that host. The host is specified as",
+      "",
+      "The host is expressed as a DNS name, as a numerical IP address, or as \"localhost\" (for the local machine). The wildcard \"*\" may be included once in a DNS name host specification. If it is included, it must be in the leftmost position, as in \"*.sun.com\". \n The port or portrange is optional. A port specification of the form \"N-\", where N is a port number, signifies all ports numbered N and above, while a specification of the form \"-N\" indicates all ports numbered N and below.",
+      "",
+      "The possible ways to connect to the host are",
+      "",
+      "The \"listen\" action is only meaningful when used with \"localhost\". The \"resolve\" (resolve host/ip name service lookups) action is implied when any of the other actions are present. \n As an example of the creation and meaning of SocketPermissions, note that if the following permission",
+      "",
+      "is granted, it allows to connect to port 7777 on foo.bar.com, and to accept connections on that port. \n Similarly, if the following permission",
+      "",
+      "is granted, it allows that code to accept connections on, connect to, or listen on any port between 1024 and 65535 on the local host.",
+      "",
+      "**Since**",
+      "",
+      "    OOo 1.1.2"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1connection_1_1SocketPermission.html",
+    "namespace": "com.sun.star.connection",
+    "auto_imports": [],
+    "imports": [],
+    "items": [
+      {
+        "name": "Actions",
+        "type": "str",
+        "orig_type": "string",
+        "lines": [
+          "comma separated actions list"
+        ]
+      },
+      {
+        "name": "Host",
+        "type": "str",
+        "orig_type": "string",
+        "lines": [
+          "target host with optional portrange"
+        ]
+      }
+    ]
+  }
+}

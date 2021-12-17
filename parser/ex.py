@@ -1,5 +1,8 @@
 #!/usr/bin/env python
-# exception parser
+# coding: utf-8
+"""
+Process a link to a page that contains an exception
+"""
 from dataclasses import dataclass
 import os
 import sys
@@ -12,13 +15,12 @@ from typing import Dict, List, Set, Union
 from bs4.element import PageElement, ResultSet, Tag
 from kwhelp.decorator import DecFuncEnum, RuleCheckAllKw, RequireArgs, TypeCheck, TypeCheckKw
 from kwhelp import rules
-from collections import namedtuple
 from pathlib import Path
 import textwrap
 import xerox  # requires xclip - sudo apt-get install xclip
-from logger.log_handle import get_logger, LOG_FILE_HANDLER, get_file_handler
+from logger.log_handle import get_logger
 from parser import __version__, JSON_ID
-import pprint
+
 # some exceptions are Depreciated such as IntrospectionException https://api.libreoffice.org/docs/idl/ref/exceptioncom_1_1sun_1_1star_1_1beans_1_1IntrospectionException.html
 
 logger = None
@@ -94,8 +96,8 @@ class ApiPropertyIds(base.BlockObj):
             msg = "ApiPropertyIds.get_obj() Unable to find contents of page"
             logger.error(msg)
             raise Exception(msg)
-        rs: ResultSet = ctx.find_all(
-            'a', id=re.compile(r'[a-z0-9]{28,38}'))
+        # rs: ResultSet = ctx.find_all('a', id=re.compile(r'[a-z0-9]{28,38}'))
+        rs: ResultSet = ctx.find_all('a', id=base.pattern_id)
         
         results = []
         for r in rs:
@@ -146,7 +148,7 @@ class ApiPropertyInfo:
             item = self._get_next_sibling(title)
         except TypeError:
             logger.error(
-                "ApiPropertyInfo.get_obj() Not Title object for Name '%s' with id: %s", name, self._id)
+                "ApiPropertyInfo.get_obj() No Title object for id: %s", self._id)
             return None
         # item contains type, name and desc
         tn = item.find_next('td', class_='memname')
@@ -303,14 +305,16 @@ class ApiDesc:
 
 class ApiData:
 
-    @TypeCheck((str, base.SoupObj), ftype=DecFuncEnum.METHOD)
-    def __init__(self, url_soup: Union[str, base.SoupObj]):
+    @TypeCheck((str, base.SoupObj), bool, ftype=DecFuncEnum.METHOD)
+    def __init__(self, url_soup: Union[str, base.SoupObj], allow_cache: bool):
         if isinstance(url_soup, str):
             self._url = url_soup
-            self._soup_obj = base.SoupObj(url_soup)
+            self._soup_obj = base.SoupObj(
+                url=url_soup, allow_cache=allow_cache)
         else:
             self._url = url_soup.url
             self._soup_obj = url_soup
+            self._soup_obj.allow_cache = allow_cache
 
         self._property_ids = None
         self._api_properties = None
@@ -339,15 +343,14 @@ class ApiData:
 
 class ParserEx(base.ParserBase):
     # region Constructor
-    @RequireArgs('url', ftype=DecFuncEnum.METHOD)
-    @RuleCheckAllKw(arg_info={"url": 0, "sort": 1},
-                    rules=[rules.RuleStrNotNullEmptyWs, rules.RuleBool],
-                    ftype=DecFuncEnum.METHOD)
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self._sdk_data = xsrc.SdkData(self.url)
+        self._sdk_data = xsrc.SdkData(
+            url=self.url,
+            allow_cache=self._allow_cache
+            )
         soup = self._sdk_data.api_sdk_link.soup
-        self._api_data = ApiData(soup)
+        self._api_data = ApiData(url_soup=soup, allow_cache=self._allow_cache)
         self._imports: Set[str] = set()
         self._requires_typing = False
         self._cache = {}
@@ -355,7 +358,7 @@ class ParserEx(base.ParserBase):
 
     def get_parser_args(self) -> dict:
         args = {
-            "sort": self._sort
+            "sort": self.sort
         }
         return args
 
@@ -507,7 +510,7 @@ class WriterEx(base.WriteBase):
         self._p_data: str = None
         self._p_url: str = None
         self._p_requires_typing = False
-        self._path_dir = Path(os.path.dirname(__file__))
+        self._path_dir = Path(__file__).parent
         self._cache: Dict[str, object] = {}
 
         t_file = 'exception'
@@ -561,6 +564,7 @@ class WriterEx(base.WriteBase):
         json_dict = {
             "id": JSON_ID,
             "version": __version__,
+            "timestamp": str(base.Util.get_timestamp_utc()),
             "name": p_dict['name'],
             "type": "exception",
             "namespace": p_dict['namespace'],
@@ -685,6 +689,9 @@ class WriterEx(base.WriteBase):
     # endregion validation
 
     def _get_uno_obj_path(self) -> Path:
+        key = '_get_uno_obj_path'
+        if key in self._cache:
+            return self._cache[key]
         if not self._p_name:
             try:
                 raise Exception(
@@ -700,7 +707,8 @@ class WriterEx(base.WriteBase):
         path_parts.append(self._p_name + '.tppi')
         obj_path = uno_obj_path.joinpath(*path_parts)
         self._mkdirp(obj_path.parent)
-        return obj_path
+        self._cache[key] = obj_path
+        return self._cache[key]
 
     def _write_to_file(self):
         with open(self._file_full_path, 'w') as f:
@@ -736,6 +744,12 @@ def main():
         help='No sorting of results',
         action='store_false',
         dest='sort',
+        default=True)
+    parser.add_argument(
+        '-x', '--no-cache',
+        help='No caching',
+        action='store_false',
+        dest='cache',
         default=True)
     parser.add_argument(
         '-d', '--no-desc',
@@ -794,7 +808,7 @@ def main():
         default=False)
     parser.add_argument(
         '-L', '--log-file',
-        help='Log file to use',
+        help='Log file to use. Defaults to exception.log',
         type=str,
         required=False)
     # endregion Dummy Args for Logging
@@ -803,6 +817,8 @@ def main():
         log_args = {}
         if args.log_file:
             log_args['log_file'] = args.log_file
+        else:
+            log_args['log_file'] = 'exception.log'
         if args.verbose:
             log_args['level'] = logging.DEBUG
         _set_loggers(get_logger(logger_name=Path(__file__).stem, **log_args))
@@ -812,7 +828,11 @@ def main():
     logger.info('Executing command: %s', sys.argv[1:])
     logger.info('Parsing Url %s' % args.url)
 
-    p = ParserEx(url=args.url, sort=args.sort)
+    p = ParserEx(
+        url=args.url,
+        sort=args.sort,
+        cache=args.cache
+    )
     w = WriterEx(
         parser=p,
         print_template=args.print_template,

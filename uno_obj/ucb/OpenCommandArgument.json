@@ -1,0 +1,72 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.3",
+  "timestamp": "2021-12-17 18:23:53+00:00",
+  "type": "struct",
+  "name": "OpenCommandArgument",
+  "namespace": "com.sun.star.ucb",
+  "parser_args": {
+    "sort": true
+  },
+  "writer_args": {
+    "sort": true,
+    "auto_import": true
+  },
+  "data": {
+    "name": "OpenCommandArgument",
+    "fullname": "com.sun.star.ucb.OpenCommandArgument",
+    "desc": [
+      "The argument for commands like \"open\", \"update\", and \"synchronize\"."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1ucb_1_1OpenCommandArgument.html",
+    "namespace": "com.sun.star.ucb",
+    "auto_imports": [
+      [
+        "..beans.property",
+        "Property"
+      ],
+      [
+        "..uno.x_interface",
+        "XInterface"
+      ]
+    ],
+    "imports": [],
+    "items": [
+      {
+        "name": "Mode",
+        "type": "int",
+        "orig_type": "long",
+        "lines": [
+          "A mode.",
+          "The value can be one of the OpenMode constants."
+        ]
+      },
+      {
+        "name": "Priority",
+        "type": "int",
+        "orig_type": "long",
+        "lines": [
+          "The command's priority, in the range 0 (highest) to 65535 (lowest)."
+        ]
+      },
+      {
+        "name": "Properties",
+        "type": "'typing.List[Property]'",
+        "orig_type": "sequence< com.sun.star.beans.Property >",
+        "lines": [
+          "The properties, for that the values shall be provided by the DynamicResultSet returned by the command)."
+        ]
+      },
+      {
+        "name": "Sink",
+        "type": "'XInterface'",
+        "orig_type": "com.sun.star.uno.XInterface",
+        "lines": [
+          "The data sink to write the contents into (supporting either com.sun.star.io.XActiveDataSink, com.sun.star.io.XOutputStream or com.sun.star.io.XActiveDataStreamer).",
+          "XActiveDataSink and XOutputStream give the caller read-only access to the contents. XActiveDataStreamer offers both read and write access to the contents.",
+          "If an XActiveDataSink is supplied, the implementation of the command needs to provide an implementation of an object implementing the interface com.sun.star.io.XInputStream. It is highly recommended that this object also implements the interface com.sun.star.io.XSeekable, if this can be done without wasting resources (i.e. allocating huge memory buffers). The implementation object has to be supplied to the data sink."
+        ]
+      }
+    ]
+  }
+}

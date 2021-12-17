@@ -1,0 +1,115 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.3",
+  "timestamp": "2021-12-17 18:23:26+00:00",
+  "type": "struct",
+  "name": "FontInfo",
+  "namespace": "com.sun.star.rendering",
+  "parser_args": {
+    "sort": true
+  },
+  "writer_args": {
+    "sort": true,
+    "auto_import": true
+  },
+  "data": {
+    "name": "FontInfo",
+    "fullname": "com.sun.star.rendering.FontInfo",
+    "desc": [
+      "This structure provides information about a specific font.",
+      "",
+      "**Since**",
+      "",
+      "    OOo 2.0"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1rendering_1_1FontInfo.html",
+    "namespace": "com.sun.star.rendering",
+    "auto_imports": [
+      [
+        ".panose",
+        "Panose"
+      ],
+      [
+        "......com.sun.star.util.tri_state",
+        "TriState"
+      ]
+    ],
+    "imports": [],
+    "items": [
+      {
+        "name": "FamilyName",
+        "type": "str",
+        "orig_type": "string",
+        "lines": [
+          "The name of the font family.",
+          "The family name is the one normally associated to a font, such as Times New Roman, Thorndale, Andale or Arial.",
+          "Note: outlined fonts are now specified with \"outline\" as part of the family name."
+        ]
+      },
+      {
+        "name": "FontDescription",
+        "type": "'Panose'",
+        "orig_type": "Panose",
+        "lines": [
+          "The PANOSE font classification.",
+          "TODO: Document semantics in Panose.idl"
+        ]
+      },
+      {
+        "name": "IsSymbolFont",
+        "type": "'TriState'",
+        "orig_type": ".com.sun.star.util.TriState",
+        "lines": [
+          "Specifies whether the font is a symbol font.",
+          "If yes, text written in this symbol font does not have a specified meaning."
+        ]
+      },
+      {
+        "name": "IsVertical",
+        "type": "'TriState'",
+        "orig_type": ".com.sun.star.util.TriState",
+        "lines": [
+          "Set to true, if the font is usable for vertical text output.",
+          "Vertical fonts have subtle differences to horizontal ones, e.g. rotated or differently shaped glyphs, or special rotated versions of normally upright glyphs (e.g. brackets)."
+        ]
+      },
+      {
+        "name": "StyleName",
+        "type": "str",
+        "orig_type": "string",
+        "lines": [
+          "The name of the specific font style within its family.",
+          "For example, oblique, italic, or narrow."
+        ]
+      },
+      {
+        "name": "UnicodeRanges0",
+        "type": "int",
+        "orig_type": "long",
+        "lines": [
+          "This value specifies which Unicode ranges are supported by this font.",
+          "This is to be interpreted as a split-up 128-bit value, see Adobe's OpenType specification for the specific meaning of each bit. UnicodeRanges0 contains the least significant bits, UnicodeRanges3 the most significant ones.",
+          "const int128 UNICODE_RANGE_BASIC_LATIN = 1; const int128 UNICODE_RANGE_LATIN_SUPPLEMENT = 2; const int128 UNICODE_RANGE_LATIN_EXTENDED_A = 4; const int128 UNICODE_RANGE_LATIN_EXTENDED_B = 4; ... const int128 UNICODE_RANGE_MASK_LATIN = 1; const int128 UNICODE_RANGE_MASK_CJK = (31<<48) + (3<<55) + (1<<59); const int128 UNICODE_RANGE_MASK_CTL = (1<<11) + (1<<13) + (0x3FFF<<15) + (0x0FFF<<70);"
+        ]
+      },
+      {
+        "name": "UnicodeRanges1",
+        "type": "int",
+        "orig_type": "long",
+        "lines": []
+      },
+      {
+        "name": "UnicodeRanges2",
+        "type": "int",
+        "orig_type": "long",
+        "lines": []
+      },
+      {
+        "name": "UnicodeRanges3",
+        "type": "int",
+        "orig_type": "long",
+        "lines": []
+      }
+    ]
+  }
+}

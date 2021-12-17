@@ -1,0 +1,75 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.3",
+  "timestamp": "2021-12-17 18:24:49+00:00",
+  "type": "struct",
+  "name": "FeatureStateEvent",
+  "namespace": "com.sun.star.frame",
+  "parser_args": {
+    "sort": true
+  },
+  "writer_args": {
+    "sort": true,
+    "auto_import": true
+  },
+  "data": {
+    "name": "FeatureStateEvent",
+    "fullname": "com.sun.star.frame.FeatureStateEvent",
+    "desc": [
+      "This event is broadcast by a Controller whenever the state of the feature changes."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1frame_1_1FeatureStateEvent.html",
+    "namespace": "com.sun.star.frame",
+    "auto_imports": [
+      [
+        "..util.url",
+        "URL"
+      ]
+    ],
+    "imports": [],
+    "items": [
+      {
+        "name": "FeatureDescriptor",
+        "type": "str",
+        "orig_type": "string",
+        "lines": [
+          "contains a descriptor of the feature for the user interface."
+        ]
+      },
+      {
+        "name": "FeatureURL",
+        "type": "'URL'",
+        "orig_type": "com.sun.star.util.URL",
+        "lines": [
+          "contains the URL of the feature."
+        ]
+      },
+      {
+        "name": "IsEnabled",
+        "type": "bool",
+        "orig_type": "boolean",
+        "lines": [
+          "specifies whether the feature is currently enabled or disabled."
+        ]
+      },
+      {
+        "name": "Requery",
+        "type": "bool",
+        "orig_type": "boolean",
+        "lines": [
+          "specifies whether the XDispatch has to be required.",
+          "Interest code should listen for FrameActionEvent too, to update own feature states and dispatch listener on FrameAction.CONTEXT_CHANGED."
+        ]
+      },
+      {
+        "name": "State",
+        "type": "object",
+        "orig_type": "any",
+        "lines": [
+          "contains the state of the feature in this dispatch.",
+          "This can be, for example, simply TRUE for a boolean feature like underline on/off. Some simple types like string or boolean are useful here for generic UI elements, like a checkmark in a menu."
+        ]
+      }
+    ]
+  }
+}
