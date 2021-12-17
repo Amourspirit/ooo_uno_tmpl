@@ -1,0 +1,48 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.3",
+  "timestamp": "2021-12-17 11:18:58+00:00",
+  "name": "XDynamicResultSet",
+  "type": "interface",
+  "namespace": "com.sun.star.ucb",
+  "parser_args": {
+    "sort": true
+  },
+  "writer_args": {},
+  "data": {
+    "from_imports": [
+      [
+        "..lang.x_component",
+        "XComponent"
+      ]
+    ],
+    "from_imports_typing": [],
+    "name": "XDynamicResultSet",
+    "imports": [],
+    "namespace": "com.sun.star.ucb",
+    "extends": [
+      "com.sun.star.lang.XComponent"
+    ],
+    "desc": [
+      "Provides read access to a ContentResultSet.",
+      "",
+      "You can either get a simple static ContentResultSet or you can listen to change-notifications and then swap from the old to a new ContentResultSet.",
+      "",
+      "The following describes the dynamic use:",
+      "",
+      "XDynamicResultSet provides the possibility to get notifications about changes on a ContentResultSet and have an listener-controlled update from one version to the next version. Two ContentResultSet implementations were given to the listener in the first notification as interface com.sun.star.sdbc.XResultSet.",
+      "",
+      "To get notifications the listener has to be of type XDynamicResultSetListener.",
+      "",
+      "After registration you will get notifications for events of type ListEvent.",
+      "",
+      "The calling of XDynamicResultSetListener.notify() has to happen in an own thread, because it could take a longer time and any actions ??? until the listener returns the call. So don't block the notify-causing action.",
+      "",
+      "While one notify-call is going on:",
+      "",
+      "After the listener has returned the notify-call:"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1ucb_1_1XDynamicResultSet.html",
+    "items": {}
+  }
+}

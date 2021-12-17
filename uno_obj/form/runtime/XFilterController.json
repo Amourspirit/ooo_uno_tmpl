@@ -1,0 +1,53 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.3",
+  "timestamp": "2021-12-17 11:20:14+00:00",
+  "name": "XFilterController",
+  "type": "interface",
+  "namespace": "com.sun.star.form.runtime",
+  "parser_args": {
+    "sort": true
+  },
+  "writer_args": {},
+  "data": {
+    "from_imports": [],
+    "from_imports_typing": [],
+    "name": "XFilterController",
+    "imports": [],
+    "namespace": "com.sun.star.form.runtime",
+    "extends": [],
+    "desc": [
+      "provides access to a form based filter for a database form",
+      "",
+      "In a form based filter, form controls bound to a searchable database field are replaced with a control which allows entering a search expression. This so-called predicate expression is basically a part of an SQL WHERE clause, but without the part denoting the database column. For instance, if you have a form control bound to a table column named Name, then entering the string LIKE 'Smith' effectively constitutes a SQL WHERE clause \\\"Name\\\" LIKE 'Smith'.",
+      "",
+      "In the actual document view, there are usually some relaxations to this. For instance, keywords such as LIKE might be localized, according to OpenOffice.org's UI locale. Also, for an equality criterion, the equality sign = is usually omitted. However, this interface here provides programmatic access to the form based filter, so those relaxations are not considered here.",
+      "",
+      "The filter maintained by a filter controller is, logically, a disjunctive normal form of an SQL WHERE class. That is, it is a disjunction of m terms, where each term is a conjunction of n clauses of the form <column> <predicate> <literal> or of the form <column> IS [NOT] NULL.",
+      "",
+      "n equals the number of filter controls which the filter controller is responsible for. This number doesn't change during one session of the form based filter. On the other hand, m, the number of disjunctive terms, is dynamic.",
+      "",
+      "With the above, there are potentially m * n predicate expressions (though usually only a fraction of those will actually exist). Since in a form based filter, there are only n filter controls, and each filter control displays exactly one predicate expression, this means that only a part of the complete filter can be displayed, in particular, only one disjunctive term can be displayed at a time. Thus, the filter controller knows the concept of an active term, denoted by the ActiveTerm attribute, controls which of the terms is currently displayed in the form controls.",
+      "",
+      "**See Also**",
+      "",
+      "    XFormController"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1form_1_1runtime_1_1XFilterController.html",
+    "items": {
+      "properties": [
+        {
+          "name": "ActiveTerm",
+          "returns": "int",
+          "desc": [
+            "denotes the active term of the filter controller."
+          ],
+          "raises_get": [],
+          "raises_set": [
+            "com.sun.star.lang.IndexOutOfBoundsException"
+          ]
+        }
+      ]
+    }
+  }
+}

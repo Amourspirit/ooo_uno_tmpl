@@ -77,10 +77,31 @@ class SdkCodeText(base.BlockObj):
         if self._data:
             return self._data
 
-        def repl(m):
-            multi_line: str = m.group(1)
-            lines = multi_line.splitlines(keepends=False)
-            return " ".join(lines)
+        def clean_lines(text: str) -> str:
+            lns = text.splitlines()
+            new_lines = []
+            for l in lns:
+                ln = l.strip()
+                if ln == '':
+                    continue
+                if ln.startswith('#'):
+                    continue
+                new_lines.append(ln)
+            return "\n".join(new_lines)
+
+        def comment_remover(text):
+
+            def replacer(match):
+                s = match.group(0)
+                if s.startswith('/'):
+                    return " "  # note: a space and not an empty string
+                else:
+                    return s
+            pattern = re.compile(
+                r'//.*?$|/\*.*?\*/|\'(?:\\.|[^\\\'])*\'|"(?:\\.|[^\\"])*"',
+                re.DOTALL | re.MULTILINE
+            )
+            return re.sub(pattern, replacer, text)
         rows = self._soup.soup.find_all('div', class_='line')
         lines = []
         for row in rows:
@@ -92,7 +113,8 @@ class SdkCodeText(base.BlockObj):
         # some methods are are written on several lines. Replace to remove line breaks
         # result = re.sub(r'((?:[a-zA-Z0-9]*)\( .*?\);)',
         #                 repl, result, flags=re.DOTALL)
-        self._data = result
+        self._data = comment_remover(result)
+        self._data = clean_lines(self._data)
         # logger.debug('SdkCodeText.get_ojb() data:\n%s', self._data)
         return self._data
 
@@ -101,7 +123,7 @@ class SdkCodeText(base.BlockObj):
         row_text: str = row.text
         ls: str = re.sub(re_ln_pattern, '', row_text)
         return ls
-
+    
 class SdkComponentText:
     """
     gets the text of the Component area
@@ -139,14 +161,22 @@ class SdkComponentText:
         return self._data
 
     def _get_text_aggresive(self, text:str) -> str:
+        def single_line_ns(input: str) -> str:
+            _regex = r"(module[{ \na-z-A-Z0-9]+)interface"
+            def cb(match) -> str:
+                return str(match.group(1)).replace('\n', ' ') + '\ninterface'
+            return re.sub(pattern=_regex, repl=cb, string=input, flags=re.DOTALL)
         def clean_curly(input: str) -> str:
             _regex = r"^(}[ ;}]+)"
             def cb(match) -> str:
                 return base.Util.clean_curly_brace_close(match.group(1))
-            
             return re.sub(pattern=_regex, repl=cb, string=input, flags=re.MULTILINE)
+        def remove_single_line_comments(input: str) -> str:
+            return re.sub(r"(//[ a-z-A-Z0-9]+\n)",'', input, re.DOTALL)
         # remove all spaces between } and ;
-        _text = clean_curly(text)
+        _text = single_line_ns(text)
+        _text = remove_single_line_comments(_text)
+        _text = clean_curly(_text)
 
         regex_start = r"module (com \{.*)\{"
         regex_end = r"^(};){3,5}"
@@ -189,15 +219,24 @@ class SdkComponentStart:
         try:
             text = self._component.get_text()
             # regex = r"(interface.*){"
-            matches = re_component_start.search(text)
+            matches = re.search(
+                r"(interface[ ]+[a-zA-Z0-9]+[^;][a-z-A-Z0-9_: ]+)\n{", text)
+            if not matches:
+                matches = re_component_start.search(text)
+            if not matches:
+                matches = re.search(r"interface[a-zA-Z0-9_ :]+\n{", text)
             if matches:
                 g = matches.groups()
                 self._data = " ".join(g[0].replace("{","").rstrip().split())
             else:
-                raise Exception(
-                    "SdkComponentStart: Unable to match regex for first line")
+                if logger.level <= logging.DEBUG:
+                    logger.debug("SdkComponentStart.get_obj() unable to match first line. Returning text. URL: %s",
+                                 self._component.code_text.url_obj.url)
+                    self._data = text
+                # raise Exception("SdkComponentStart: Unable to match regex for first line")
         except Exception as e:
-            logger.error("SdkComponentStart: Processing first line")
+            url = self._component.code_text.url_obj.url
+            logger.error("SdkComponentStart: Processing first line. Url: %s", url)
             raise e
         return self._data
 
@@ -932,14 +971,17 @@ class ApiMethodBlock:
         # get the next sibling recursivly because
         # BeautifulSoup will also find whitesapce on next_sibling
         if not isinstance(el, PageElement):
+            
             raise TypeError(
-                f"MethodBlock._get_next_sibling() el is not a PageElement")
+                f"MethodBlock._get_next_sibling() el is not a PageElement Url: {self._blocks.url_obj.url}")
         next = el.next_sibling
         # https://stackoverflow.com/questions/10711116/strip-spaces-tabs-newlines-python
         # use split join to remove whitespace and new line
         s = ''.join(str(next).split())
         if s == '':
             next = self._get_next_sibling(next)
+            # if next is None:
+            #     print(None)
         return next
 
     def get_obj(self) -> MethodBlockInfo:
@@ -991,7 +1033,7 @@ class ApiMethodBlocks(base.BlockObj):
             self._soup_obj = url_soup
         soup = self._soup_obj
         super().__init__(soup=soup)
-        self._obj_data = None
+        self._obj_data: ResultSet = None
         self._index = 0
         self._len = 0
 
@@ -1005,7 +1047,8 @@ class ApiMethodBlocks(base.BlockObj):
         if self._obj_data:
             return self._obj_data
         # _cls = 'memitem'
-        self._obj_data = self._soup.soup.select("a[id]")
+        # self._obj_data = self._soup.soup.select("a[id]")
+        self._obj_data = self._soup.soup.find_all("a", id=base.pattern_id)
 
         return self._obj_data
 
@@ -1016,9 +1059,14 @@ class ApiMethodBlocks(base.BlockObj):
             raise StopIteration
         itm = self._obj_data[self._index]
         self._index += 1
-        mb = ApiMethodBlock(block=itm, blocks=self)
-        if not mb.is_valid():
-            mb = self._get_next()
+        try:
+            mb = ApiMethodBlock(block=itm, blocks=self)
+            if not mb.is_valid():
+                mb = self._get_next()
+        except Exception as e:
+            # probally nothing to worrie about. could simple be a bad match
+            logger.warning("")
+            mb = self._get_next("ApiMethodBlocks.Next() No method data block for '%s' Url: %s", str(itm), self.url_obj.url)
         return mb
 
     def __iter__(self):
@@ -1369,12 +1417,14 @@ class ParserInterface(base.ParserBase):
             return self._info
         # ns = SdkNamesSpaceInfo(self._sdk_method_info.component)
         ns = base.UrlObj(self._url)
-        ni = self._sdk_data.name_info
+        
+        # ni = self._sdk_data.name_info
         ex = self._sdk_data.extends
         im = self._sdk_data.imports
         desc = ApiDesc(soup=self._api_info.soup)
         result = {
-            'name': ni.name,
+            # 'name': ni.name,
+            'name': ns.name,
             # convert set to list for json
             'imports': list(im.get_obj()),
             'namespace': ns.namespace_str,
@@ -1382,7 +1432,7 @@ class ParserInterface(base.ParserBase):
             'desc': desc.get_obj(),
             "url": self._api_info.soup.url
         }
-        logger.debug('ParserInterface.get_info() name: %s', ni.name)
+        logger.debug('ParserInterface.get_info() name: %s', ns.name)
         logger.debug('ParserInterface.get_info() namespace: %s', ns.namespace_str)
         self._info = result
         return self._info
@@ -1723,8 +1773,8 @@ class InterfaceWriter(base.WriteBase):
 
 def _main():
    
-    url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1accessibility_1_1XAccessibleEditableText.html'
-    # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1accessibility_1_1XAccessibleText.html'
+    # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1graphic_1_1XSvgParser.html'
+    url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1form_1_1runtime_1_1XFilterController.html'
     sys.argv.extend(['--log-file', 'debug.log', '-v', '-n', '-u', url])
     main()
 

@@ -1,0 +1,65 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.3",
+  "timestamp": "2021-12-17 11:16:14+00:00",
+  "name": "XObjectInspector",
+  "type": "interface",
+  "namespace": "com.sun.star.inspection",
+  "parser_args": {
+    "sort": true
+  },
+  "writer_args": {},
+  "data": {
+    "from_imports": [
+      [
+        "..frame.x_controller",
+        "XController"
+      ],
+      [
+        "..frame.x_dispatch_provider",
+        "XDispatchProvider"
+      ]
+    ],
+    "from_imports_typing": [
+      "......x_object_inspector_model",
+      "XObjectInspectorModel"
+    ],
+    "name": "XObjectInspector",
+    "imports": [
+      "com.sun.star.frame.XController",
+      "com.sun.star.frame.XDispatchProvider"
+    ],
+    "namespace": "com.sun.star.inspection",
+    "extends": [
+      "com.sun.star.frame.XController",
+      "com.sun.star.frame.XDispatchProvider"
+    ],
+    "desc": [
+      "describes the main interface of an ObjectInspector.",
+      "",
+      "**See Also**",
+      "",
+      "    ObjectInspector"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1inspection_1_1XObjectInspector.html",
+    "items": {
+      "properties": [
+        {
+          "name": "InspectorModel",
+          "returns": "'XObjectInspectorModel'",
+          "desc": [
+            "provides access to the current model of the inspector",
+            "",
+            "The model is mainly responsible for providing the property handlers. Additionally, it can provide user interface names and help URLs for property categories.",
+            "",
+            "Note that there are two ways of setting or retrieving the current model: You can either use com.sun.star.frame.XModel.setModel(), or, if you do not want or need to implement the full-blown com.sun.star.frame.XModel interface, you can use this property directly. Both approaches are semantically equivalent.",
+            "",
+            "If a new model is set at the inspector, the complete UI will be rebuilt to reflect the change, using the new property handlers provided by the new model."
+          ],
+          "raises_get": [],
+          "raises_set": []
+        }
+      ]
+    }
+  }
+}

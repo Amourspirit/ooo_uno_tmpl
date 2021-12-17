@@ -96,8 +96,8 @@ class ApiPropertyIds(base.BlockObj):
             msg = "ApiPropertyIds.get_obj() Unable to find contents of page"
             logger.error(msg)
             raise Exception(msg)
-        rs: ResultSet = ctx.find_all(
-            'a', id=re.compile(r'[a-z0-9]{28,38}'))
+        # rs: ResultSet = ctx.find_all('a', id=re.compile(r'[a-z0-9]{28,38}'))
+        rs: ResultSet = ctx.find_all('a', id=base.pattern_id)
         
         results = []
         for r in rs:

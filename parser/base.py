@@ -43,6 +43,7 @@ py_ns_pattern = re.compile(r'[^a-zA-Z0-9\._]+')
 curly_brace_close_pattern = re.compile(r'[^};]')
 RESPONSE_CACHE: 'FileCache' = None
 pattern_http = re.compile(r"^https?:\/\/")
+pattern_id = re.compile(r'[a-z0-9]{28,38}')
 """FileCache object for caching response data"""
 
 TYPE_MAP = {

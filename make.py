@@ -107,6 +107,30 @@ class CompileStructLinks(BaseCompile):
         link_files = self.get_module_link_files()
         for file in link_files:
             self._subprocess(file)
+
+class CompileInterfaceLinks(BaseCompile):
+
+    def __init__(self) -> None:
+        super().__init__()
+        self._processer = str(Path(self.json_parser_path, 'interface_parser.py'))
+        self._process_files()
+
+    def _subprocess(self, file: str):
+        cmd_str = f"{self._processer} -f {file}"
+        cmd = [sys.executable] + cmd_str.split()
+        logger.info("CompileStructLinks: Processing interface in file: %s", file)
+        res = subprocess.run(cmd)
+        if res.stdout:
+            logger.info(res.stdout)
+        if res.stderr:
+            logger.error(res.stderr)
+
+    def _process_files(self):
+        link_files = self.get_module_link_files()
+        for file in link_files:
+            self._subprocess(file)
+
+
 class Make:
     def __init__(self, **kwargs) -> None:
         self._clean = bool(kwargs.get('clean', False))
@@ -299,6 +323,7 @@ def main():
     subparser = parser.add_subparsers(dest='command')
     enum_parser = subparser.add_parser(name='enum')
     struct_parser = subparser.add_parser(name='struct')
+    interface_parser = subparser.add_parser(name='interface')
     enum_parser.add_argument(
         '-a', '--all',
         help='Compile all enums recursivly',
@@ -311,6 +336,13 @@ def main():
         help='Compile all struct recursivly',
         action='store_true',
         dest='struct_all',
+        default=False
+    )
+    interface_parser.add_argument(
+        '-a', '--all',
+        help='Compile all interface recursivly',
+        action='store_true',
+        dest='interface_all',
         default=False
     )
     make_parser = subparser.add_parser(name='make')
@@ -364,6 +396,9 @@ def main():
     if args.command == 'struct':
         if args.struct_all:
             CompileStructLinks()
+    if args.command == 'interface':
+        if args.interface_all:
+            CompileInterfaceLinks()
     logger.info('Finished!')
 
 
