@@ -44,6 +44,11 @@ class EnumUrl(base.UrlObj):
         try:
             ns_part = self._page_link.split('.')[0].lower()
             s = ns_part.replace('_1_1', '.').lstrip('.')
+            
+            # in some cases such as generics the name can have _3_01 and or _01_4 in the last part of the name
+            # best guess _3 is < and _4 is > and _01 is space.
+            # just split _3 dropping the end
+            s = s.rsplit(sep='_3', maxsplit=1)[0]
             # the frist part on the str usually is prefixe with namespace, interface or whatever.
             # namespace always start with com so just drop the first part to clean it up.
             s = 'com.' + s.split('.', maxsplit=1)[1]

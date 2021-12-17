@@ -42,8 +42,11 @@ py_name_pattern = re.compile('[\W_]+')
 py_ns_pattern = re.compile(r'[^a-zA-Z0-9\._]+')
 curly_brace_close_pattern = re.compile(r'[^};]')
 RESPONSE_CACHE: 'FileCache' = None
+pattern_sq_braket = re.compile(r"\[.*\]")
 pattern_http = re.compile(r"^https?:\/\/")
 pattern_id = re.compile(r'[a-z0-9]{28,38}')
+pattern_generic_name = re.compile(r"([a-zA-Z0-9_]+)(<[A-Z, ]+>)")
+
 """FileCache object for caching response data"""
 
 TYPE_MAP = {
@@ -58,7 +61,9 @@ TYPE_MAP = {
     "sequence": "list",
     "aDXArray": "list",
     "void": "None",
-    'type': 'object'
+    'type': 'object',
+    'T': 'object',
+    'U': 'object'
 }
 
 
@@ -361,6 +366,12 @@ class Util:
         return result
     
     @staticmethod
+    def encode_file_name(name: Union[Path, str]) -> str:
+        _name = str(name)
+        _name = _name.replace(' ', '_').replace('<', '').replace('>', '')
+        return _name
+    
+    @staticmethod
     def get_timestamp_utc() -> datetime:
         """
         Gets utc timestamp in format of ``2021-12-16 11:37:50+00:00``
@@ -430,6 +441,40 @@ class Util:
         # https://stackoverflow.com/questions/1276764/stripping-everything-but-alphanumeric-chars-from-a-string-in-python
         return py_name_pattern.sub(sub, input)
     
+    @AcceptedTypes(str, ftype=DecFuncEnum.METHOD_STATIC)
+    def get_clean_classname(input: str) -> str:
+        """
+        Clean a file name and changes name suah as ``Pair< T, U >`` to ``Pair``
+
+        Args:
+            input (str): filename
+
+        Returns:
+            str: cleaned file name
+        """
+        # convert 'Pair< T, U >' to 'Pair'
+        s = pattern_generic_name.sub(r'\g<1>', input)
+        s = s.replace(" ", "_")
+        return s
+    
+    @AcceptedTypes(str, ftype=DecFuncEnum.METHOD_STATIC)
+    @staticmethod
+    def get_clean_filename(input: str) -> str:
+        """
+        Clean a file name and changes name suah as ``Pair< T, U >`` to ``Pair``
+
+        Args:
+            input (str): filename
+
+        Returns:
+            str: cleaned file name
+        """
+        # convert 'Pair< T, U >' to 'Pair'
+        s = pattern_generic_name.sub(r'\g<1>', input)
+        s = s.replace(" ", "_")
+        return s
+  
+    
     @AcceptedTypes(str,str, bool, ftype=DecFuncEnum.METHOD_STATIC)
     @staticmethod
     def get_clean_ns(input: str, sub: str='', ltrim=False) -> str:
@@ -463,6 +508,20 @@ class Util:
             str: input with any other chars replaced
         """
         return curly_brace_close_pattern.sub('', input)
+    
+    @AcceptedTypes(str, ftype=DecFuncEnum.METHOD_STATIC)
+    @staticmethod
+    def clean_sq_braces(input: str) -> str:
+        """
+        Removes opening ``[.*]``
+
+        Args:
+            input (str): string to clean
+
+        Returns:
+            str: input to remove square brackets and all in between
+        """
+        return pattern_sq_braket.sub('', input)
 
     @AcceptedTypes((dict, list), int, ftype=DecFuncEnum.METHOD_STATIC)
     @staticmethod
@@ -577,6 +636,12 @@ class Util:
         name_parts = i_str.split(sep)
         name = name_parts.pop()
         camel_name = Util.camel_to_snake(name)
+        if len(name_parts) == 0:
+            # this is a single word such as XInterface
+            # assume it is in the same namespace as this import
+            logger.debug(
+                "get_rel_import(): '%s', single word. Converting to from import and returning", name)
+            return (f'.{camel_name}', f'{name}')
         ns2 = sep.join(name_parts)
         if ns2 == ns:
             logger.debug("get_rel_import(): Names are equal: '%s'", ns)
@@ -977,6 +1042,13 @@ class UrlObj:
         try:
             ns_part = self._page_link.split('.')[0]
             s = ns_part.replace('_1_1', '.').lstrip('.')
+            
+            # in some cases such as generics the name can have _3_01 and or _01_4 in the last part of the name
+            # best guess _3 is < and _4 is > and _01 is space.
+            # just split _3 dropping the end
+            s = s.rsplit(sep='_3', maxsplit=1)[0]
+            
+            # https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1beans_1_1Pair_3_01T_00_01U_01_4.html
             # the frist part on the str usually is prefixed with namespace, interface or whatever.
             # namespace always start with com so just drop the first part to clean it up.
             s = 'com.' + s.split('.', maxsplit=1)[1]
@@ -1141,7 +1213,7 @@ class TagsStrObj:
         lines = []
         i = 0
         for ln in self._tags:
-            s = ln.text.strip()
+            s = ln.text.strip().replace("::", '.')
             if not s:
                 continue
             if self._clean:
@@ -1259,7 +1331,7 @@ class ParserBase(object):
                     text += '.'
                 text += el.text.strip()
             # text = nav.text.replace('\n', '.').strip()
-            self._title_full = text
+            self._title_full = Util.get_clean_classname(text)
         return self._title_full
 
     def _get_name(self, soup: BeautifulSoup):
@@ -1279,7 +1351,7 @@ class ParserBase(object):
         if not soup_lines:
             return lines
         for i, ln in enumerate(soup_lines):
-            s = ln.text.strip()
+            s = ln.text.strip().replace('::', '.')
             if i > 0:
                 lines.append("")
             lines.append(s)

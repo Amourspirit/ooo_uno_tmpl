@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
   "version": "0.1.3",
-  "timestamp": "2021-12-17 11:22:39+00:00",
+  "timestamp": "2021-12-17 16:15:59+00:00",
   "name": "XAnnotation",
   "type": "interface",
   "namespace": "com.sun.star.office",
@@ -12,27 +12,34 @@
   "data": {
     "from_imports": [
       [
-        "..lang.x_component",
-        "XComponent"
-      ],
-      [
         "..beans.x_property_set",
         "XPropertySet"
+      ],
+      [
+        "..lang.x_component",
+        "XComponent"
       ]
     ],
     "from_imports_typing": [
-      "......date_time",
-      "DateTime",
-      "......real_size2_d",
-      "RealSize2D",
-      "......real_point2_d",
-      "RealPoint2D"
+      [
+        "..geometry.real_point2_d",
+        "RealPoint2D"
+      ],
+      [
+        "..text.x_text",
+        "XText"
+      ],
+      [
+        "..geometry.real_size2_d",
+        "RealSize2D"
+      ],
+      [
+        "..util.date_time",
+        "DateTime"
+      ]
     ],
     "name": "XAnnotation",
-    "imports": [
-      "com.sun.star.lang.XComponent",
-      "com.sun.star.beans.XPropertySet"
-    ],
+    "imports": [],
     "namespace": "com.sun.star.office",
     "extends": [
       "com.sun.star.beans.XPropertySet",
@@ -44,6 +51,15 @@
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1office_1_1XAnnotation.html",
     "items": {
       "properties": [
+        {
+          "name": "Anchor",
+          "returns": "object",
+          "desc": [
+            "a reference to the document content this annotation is anchored to."
+          ],
+          "raises_get": [],
+          "raises_set": []
+        },
         {
           "name": "Author",
           "returns": "str",
@@ -87,6 +103,15 @@
           "returns": "'RealSize2D'",
           "desc": [
             "this is an optional size that gives the user interface a hint how large the annotation should be rendered."
+          ],
+          "raises_get": [],
+          "raises_set": []
+        },
+        {
+          "name": "TextRange",
+          "returns": "'XText'",
+          "desc": [
+            "gives access to the annotations text."
           ],
           "raises_get": [],
           "raises_set": []

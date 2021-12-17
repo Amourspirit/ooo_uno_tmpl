@@ -205,7 +205,8 @@ class Parser(base.ParserBase):
                         for i, _nl in enumerate(_lines):
                             # if i > 0:
                             #     lines.append("")
-                            lines.append(_nl)
+                            _ln = _nl.replace('::', '.').strip()
+                            lines.append(_ln)
                         # lines.append(ln.text)
             return lines
 
@@ -252,7 +253,7 @@ class Parser(base.ParserBase):
             _type = parts[0] if len(parts) == 2 else parts[1]
             # _type = _type.strip('.').replace('>','').strip()
             py_type = get_py_type(_type)
-            name = parts.pop()
+            name = base.Util.get_clean_classname(parts.pop())
             lines = get_doc_lines(itm)
             logger.debug("Detils: Name: %s, Type: %s, Orig: %s", name, py_type, _type)
             di = dataitem(name=name,
@@ -431,7 +432,7 @@ class StructWriter(base.WriteBase):
             except Exception as e:
                 logger.error(e, exc_info=True)
                 raise e
-        path_parts[index] = path_parts[index] + '.tmpl'
+        path_parts[index] = base.Util.get_clean_filename(path_parts[index]) + '.tmpl'
         obj_path = uno_obj_path.joinpath(*path_parts)
         self._mkdirp(obj_path.parent)
         self._cache[key] = obj_path
@@ -453,10 +454,9 @@ class StructWriter(base.WriteBase):
         
         
 def _main():
-    url = 'https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1accessibility_1_1AccessibleRelation.html'
-    p = Parser(url=url)
-    w = StructWriter(parser=p, print=True, auto_import=True)
-    w.write()
+    url = 'https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1beans_1_1Ambiguous_3_01T_01_4.html'
+    sys.argv.extend(['--log-file', 'debug.log', '-v', '-n', '-u', url])
+    main()
 def main():
     global logger
 

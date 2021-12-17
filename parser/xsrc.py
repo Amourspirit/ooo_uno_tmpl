@@ -45,7 +45,7 @@ re_method_pattern = re.compile(
 re_raises_pattern = re.compile(r"\s*(raises\s*\(.*\))")
 
 re_interface_pattern = re.compile(r"interface\s*([a-zA-Z0-9.]*)\s*;")
-re_property_pattern = re.compile(r"(?:\[attribute\])(?:[ ]+)([a-zA-Z0-9. {}()]*);")
+re_property_pattern = re.compile(r"(?:\[attribute[ ,a-z]*\])(?:[ ]+)([a-zA-Z0-9. {}()]*);")
 re_comment_start_pattern = re.compile(r"(?:(\/\*)|(?:\*)\s)")
 # endregion SDK API Reference
 
@@ -608,19 +608,10 @@ class SdkProperyData:
         self._set_data()
 
     def _set_data(self):
-        is_py_type = True
-        def cb(data: dict):
-            nonlocal is_py_type
-            is_py_type = data['is_py_type']
-            if not is_py_type:
-                self._imports.add(data['type'])
-            if data['is_typing']:
-                self._requires_typing = True
         text = self._param
         # remove [attribute] from start of string
-        regex = r"\[(:?[a-zA-Z<]*)\] *"
-        text = re.sub(regex, '', text, 1)
-   
+        text = base.Util.clean_sq_braces(text).lstrip()
+        
         # check if method include raises...
         matches = re.search(re_raises_pattern, text)
         if matches:
@@ -629,9 +620,50 @@ class SdkProperyData:
             # remove raises text section
             text = re.sub(re_raises_pattern, '', text)
         parts = text.split(maxsplit=2)
-        result = base.Util.get_py_type(parts[0], cb=cb)
+        # result = base.Util.get_py_type(parts[0], cb=cb)
+        ns_clean = base.Util.get_clean_ns(input=parts[0], ltrim=True)
+        result = self._get_py_type(in_type=ns_clean)
         self._p_return = result
         self._p_name = base.Util.get_clean_name(parts[1])
+
+    def _get_py_type(self, in_type: str) -> str:
+        cb_data = None
+
+        def cb(data: dict):
+            nonlocal cb_data
+            cb_data = data
+
+        n_type = base.TYPE_MAP.get(in_type, None)
+        if n_type:
+            logger.debug(
+                "SdkProperyData._get_py_type() Found python type: %s", n_type)
+            return n_type
+        n_type = base.Util.get_py_type(uno_type=in_type, cb=cb)
+        is_wrapper = cb_data['is_wrapper']
+        is_py = cb_data['is_py_type']
+        _result = n_type
+        if is_wrapper:
+            self._requires_typing = True
+            logger.debug(
+                "SdkProperyData._get_py_type() wrapper arg %s", in_type)
+            logger.debug(
+                "SdkProperyData._get_py_type() wrapper arg Typing is Required.")
+            wdata: dict = cb_data['wdata']
+            if not wdata['py_type_inner']:
+                logger.debug(
+                    "SdkProperyData._get_py_type() wrapper inner requires typing arg %s", in_type)
+                self._imports.add(cb_data['long_type'])
+                logger.debug(
+                    "SdkProperyData._get_py_type() added import %s", cb_data['long_type'])
+        else:
+            if is_py is False:
+                logger.debug(
+                    "SdkProperyData._get_py_type() requires typing arg %s", in_type)
+                self._requires_typing = True
+                self._imports.add(cb_data['long_type'])
+                logger.debug(
+                    "SdkProperyData._get_py_type() added import %s", cb_data['long_type'])
+        return _result
 
 
     def _process_raises(self, text: str):
@@ -876,8 +908,7 @@ class SdkImports:
                 logger.debug(
                     'SdkImports.get_obj() Found Interface Line. Groups info: %s', str(g))
                 logger.debug('SdkImports.get_obj() Found Interface Line: %s', g[0])
-                s = g[0].lstrip('.')
-                s = base.Util.get_clean_ns(s)
+                s = base.Util.get_clean_ns(input=g[0], ltrim=True)
                 logger.debug(
                     "SdkImports.get_obj() adding Import: '%s'", s)
                 self._imports.add(s)
@@ -1420,13 +1451,14 @@ class ParserInterface(base.ParserBase):
         
         # ni = self._sdk_data.name_info
         ex = self._sdk_data.extends
-        im = self._sdk_data.imports
+        # im = self._sdk_data.imports
         desc = ApiDesc(soup=self._api_info.soup)
         result = {
             # 'name': ni.name,
             'name': ns.name,
             # convert set to list for json
-            'imports': list(im.get_obj()),
+            # 'imports': list(im.get_obj()),
+            'imports': [],
             'namespace': ns.namespace_str,
             'extends': ex.ex_lst,
             'desc': desc.get_obj(),
@@ -1658,8 +1690,9 @@ class InterfaceWriter(base.WriteBase):
             f, n = base.Util.get_rel_import(
                 i_str=ns, ns=self._p_namespace
             )
-            lst.append(f)
-            lst.append(n)
+            # lst.append(f)
+            # lst.append(n)
+            lst.append([f, n])
         self._cache[key] = lst
         return self._cache[key]
     # endregion get Imports
@@ -1774,7 +1807,7 @@ class InterfaceWriter(base.WriteBase):
 def _main():
    
     # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1graphic_1_1XSvgParser.html'
-    url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1form_1_1runtime_1_1XFilterController.html'
+    url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1office_1_1XAnnotation.html'
     sys.argv.extend(['--log-file', 'debug.log', '-v', '-n', '-u', url])
     main()
 

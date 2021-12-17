@@ -256,11 +256,13 @@ class Make:
     def _compile(self, tmpl_file):
         cmd_str = f"cheetah compile --nobackup {tmpl_file}"
         logger.info('Running subprocess: %s', cmd_str)
-        res = subprocess.run(cmd_str.split())
-        if res.stdout:
-            logger.info(res.stdout)
-        if res.stderr:
-            logger.error(res.stderr)
+        p = subprocess.run(cmd_str.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        exit_status = p.returncode
+        std_out = p.stdout.decode()
+        if std_out:
+            logger.info("Cheetah output: %s", std_out)
+        if exit_status != 0:
+            logger.warning("Cheeta error Outuput: %s", p.stderr.decode())
     
     def _compile_tppi(self, tmpl_file):
         cmd_str = f"cheetah compile --nobackup --iext=.tppi {tmpl_file}"
