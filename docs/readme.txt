@@ -15,3 +15,18 @@ for help run:
 python make.py --help
 
 output is copied into scratch folder with the same dir structure as uno_obj
+
+
+Links of intrest
+----------------
+
+Contins Typedefs
+https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1beans.html
+
+Interface:
+    deprecated
+    https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XVclContainerPeer.html
+
+    Interface with Properties
+    https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1animations_1_1XAnimate.html
+    

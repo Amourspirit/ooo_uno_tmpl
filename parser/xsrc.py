@@ -3,6 +3,7 @@
 """
 Process a link to a page that contains an interface
 """
+from abc import abstractmethod
 import os
 import sys
 import argparse
@@ -12,8 +13,8 @@ import xerox  # requires xclip - sudo apt-get install xclip
 import re
 import base
 from typing import Dict, List, Set, Union
-from bs4.element import PageElement, ResultSet, Tag
-from kwhelp.decorator import DecFuncEnum, TypeCheckKw
+from bs4.element import NavigableString, PageElement, ResultSet, Tag
+from kwhelp.decorator import DecFuncEnum, TypeCheck, TypeCheckKw
 from pathlib import Path
 from logger.log_handle import get_logger
 from parser.enm import main
@@ -47,14 +48,15 @@ re_raises_pattern = re.compile(r"\s*(raises\s*\(.*\))")
 re_interface_pattern = re.compile(r"interface\s*([a-zA-Z0-9.]*)\s*;")
 re_property_pattern = re.compile(r"(?:\[attribute[ ,a-z]*\])(?:[ ]+)([a-zA-Z0-9. {}()]*);")
 re_comment_start_pattern = re.compile(r"(?:(\/\*)|(?:\*)\s)")
+re_dir_pattern = re.compile(r"\[((?:in)|(?:out))\]", re.IGNORECASE)
 # endregion SDK API Reference
 
 
 @dataclass
 class ParamInfo:
-    direction: str
-    name: str
-    type: str
+    direction: str = ''
+    name: str = ''
+    type: str =''
 
 # region Exceptions
 
@@ -982,7 +984,7 @@ class SdkNameInfo:
 
 # endregion SDK API Reference
 
-# region Main Page Parsing
+# region API Parsing
 
 
 @dataclass
@@ -1281,7 +1283,7 @@ class ApiInfo:
             return self._api_sdk_link
         self._api_sdk_link = ApiSdkLink(soup=self.soup)
         return self._api_sdk_link
-# endregion Main Page Parsing
+# endregion API Parsing
 
 
 class SdkData():
@@ -1400,6 +1402,689 @@ class SdkData():
     def api_soup_obj(self) -> base.SoupObj:
         """Gets the Soup object reated to Api page"""
         return self.api_sdk_link.soup
+
+
+# region API Interface classes
+@dataclass(frozen=True)
+class SummaryInfo:
+    id: str
+    name: str
+    return_type: str
+
+class ApiInterfacePublicMembers(base.BlockObj):
+    """Gets all blocks with condensed info such as Public Member Functions"""
+    @TypeCheck(base.SoupObj, ftype=DecFuncEnum.METHOD)
+    def __init__(self, soup: base.SoupObj):
+        self._soup = soup
+        super().__init__(soup)
+        self._data = False
+    
+    def get_obj(self) -> Union[ResultSet, None]:
+        if not self._data is False:
+            return self._data
+        self._data = None
+        soup = self.soup.soup
+        rs = soup.find_all('table', class_='memberdecls')
+        self._data = rs
+        return self._data
+
+class ApiInterfaceSummaryBlock(base.BlockObj):
+    def __init__(self, block: ApiInterfacePublicMembers):
+        self._block: ApiInterfacePublicMembers = block
+        super().__init__(self._block.soup)
+        self._data = False
+    @abstractmethod
+    def _get_match_name(self) -> str:
+        pass
+
+    def get_obj(self) -> Union[Tag, None]:
+        if not self._data is False:
+            return self._data
+        self._data = None
+        rs = self._block.get_obj()
+        if not rs:
+            return self._data
+        match_name = self._get_match_name()
+        for tag in rs:
+            # tag is a table
+            # body > div.contents > table > tbody > tr.heading > td > h2 > a
+            t: Tag = tag
+            a_lnk = t.select_one('tr.heading > td > h2 > a')
+            if a_lnk:
+                name = a_lnk.get('name', None)
+                if name == match_name:
+                    self._data = tag
+                    break
+        return self._data
+
+
+class ApiInterfaceFunctionsBlock(ApiInterfaceSummaryBlock):
+    def _get_match_name(self) -> str:
+        return 'pub-methods'
+
+
+class ApiInterfacePropertiesBlock(ApiInterfaceSummaryBlock):
+    def _get_match_name(self) -> str:
+        return 'pub-attribs'
+class ApiInterfaceSummaryRows:
+    """Gets the rows that contain short details and desc for a Function/properyty block"""
+    def __init__(self, block: ApiInterfaceSummaryBlock):
+        self._block: ApiInterfaceSummaryBlock = block
+        self._data = None
+
+    def get_obj(self) -> List[Tag]:
+        if not self._data is None:
+            return self._data
+        self._data = []
+        tbl_tag: Tag = self._block.get_obj()
+        if not tbl_tag:
+            return self._data
+        rs_rows: ResultSet = tbl_tag.find_all('tr')
+        if not rs_rows:
+            return self._data
+        for row in rs_rows:
+            r: Tag = row
+            _class = r.get('class', [])
+            if len(_class) == 0:
+                continue
+            class_str = _class[0]
+            if class_str == 'inherit_header':
+                # Public Member Functions inherited from ...
+                break
+            if class_str.startswith('memitem:'):
+                self._data.append(row)
+        return self._data
+
+class ApiInterfaceSummaries:
+    def __init__(self, block: ApiInterfaceSummaryRows) -> None:
+        self._block: ApiInterfaceSummaryRows = block
+        self._data = None
+
+    def get_obj(self) -> List[SummaryInfo]:
+        if not self._data is None:
+            return self._data
+        self._data = []
+        rows = self._block.get_obj()
+        for row in rows:
+            cls_name = row.get('class')[0]
+            id_str = cls_name.rsplit(sep=':',maxsplit=1)[1]
+            itm_lft = row.find('td', class_='memItemLeft')
+            r_type = ''
+            name = ''
+            if itm_lft:
+                r_type = itm_lft.text.strip().replace('::', '.')
+                r_type = base.Util.get_clean_ns(input=r_type, ltrim=True)
+            itm_rgt = row.find('td', class_='memItemRight')
+            if itm_rgt:
+                itm_name = itm_rgt.select_one('a')
+                if itm_name:
+                    name = itm_name.text.strip()
+                    name = base.Util.get_clean_method_name(name)
+            si = SummaryInfo(id=id_str,name=name,return_type=r_type)
+            self._data.append(si)
+        return self._data
+            
+class ApiInterfaceDetailBlock(base.BlockObj):
+    def __init__(self, soup: base.SoupObj, si: SummaryInfo) -> None:
+        super().__init__(soup)
+        self._si = si
+        self._data = False
+    
+    def get_obj(self) -> Union[Tag, None]:
+        if not self._data is False:
+            return self._data
+        self._data = None
+        soup = self.soup.soup
+        a_tag: Tag = soup.find('a', id=self._si.id)
+        if not a_tag:
+            return self._data
+        self._data = a_tag.find_next('div', class_='memitem')
+        return self._data
+    @property
+    def summary_info(self) -> SummaryInfo:
+        """Gets summary_info value"""
+        return self._si
+class ApiInterfaceProtoBlock(base.BlockObj):
+    """Gets Detailed Method data block"""
+
+    def __init__(self, block: ApiInterfaceDetailBlock) -> None:
+        self._block: ApiInterfaceDetailBlock = block
+        super().__init__(self._block.soup)
+        self._data = False
+    
+    def get_obj(self) -> Union[Tag, None]:
+        if not self._data is False:
+            return self._data
+        self._data = None
+        tag = self._block.get_obj()
+        if not tag:
+            return self._data
+        proto = tag.findChild('div', class_='memproto')
+        self._data = proto
+        self._data
+
+    @property
+    def summary_info(self) -> SummaryInfo:
+        """Gets summary_info value"""
+        return self._block.summary_info
+
+
+class ApiInterfaceDescBlock(base.BlockObj):
+    """Gets Detailed Method description block"""
+
+    def __init__(self, block: ApiInterfaceDetailBlock) -> None:
+        self._block: ApiInterfaceDetailBlock = block
+        super().__init__(self._block.soup)
+        self._data = False
+
+    def get_obj(self) -> Union[Tag, None]:
+        if not self._data is False:
+            return self._data
+        self._data = None
+        tag = self._block.get_obj()
+        if not tag:
+            return self._data
+        desc = tag.findChild('div', class_='memdoc')
+        self._data = desc
+        return self._data
+
+    @property
+    def summary_info(self) -> SummaryInfo:
+        """Gets summary_info value"""
+        return self._block.summary_info
+
+class ApiInterfaceFuncPramsInfo(base.BlockObj):
+    """Gets List of Parameter information for a funciton"""
+    def __init__(self, block: ApiInterfaceProtoBlock) -> None:
+        self._block: ApiInterfaceProtoBlock = block
+        super().__init__(self._block.soup)
+        self._data = None
+
+    def get_obj(self) -> List[ParamInfo]:
+        if not self._data is None:
+            return self._data
+        self._data = []
+        proto = self._block.get_obj()
+        if not proto:
+            return self._data
+        p_type_tag = proto.find_all('td', class_='paramtype')
+        p_name_tag= proto.find_all('td', class_='paramname')
+        if not p_type_tag and not p_name_tag:
+            if logger.level <= logging.DEBUG:
+                logger.debug('ApiInterfacePramsInfoget_obj() No Parmas for %s', self._block.summary_info.name)
+            return self._data
+        
+        try:
+            if len(p_type_tag) != len(p_name_tag):
+                if len(p_type_tag) == 0 and len(p_name_tag) == 1:
+                    # no params. p_name_tag will usually be 1
+                    # when there are not paramters.
+                    return self._data
+                raise Exception
+        except Exception as e:
+            msg = "ApiInterfaceFuncPramsInfo.get_obj(), Parameter Name and Parameter Types do not have the same length. Function Summary: %s Url: %s" % (str(
+                self._block.summary_info), self.url_obj.url)
+            logger.error(msg)
+            raise Exception(msg)
+        p_info = zip(p_name_tag, p_type_tag)
+        self._data = self._process_params(params=p_info)
+        return self._data
+    
+    def _process_name_tag(self, name_tag: Tag, pinfo:ParamInfo):
+        name = name_tag.text
+        pinfo.name = base.Util.get_clean_name(name)
+    
+    def _process_type_tag(self, type_tag: Tag, pinfo: ParamInfo):
+        pinfo.direction = 'in'
+        # dir_tag: NavigableString = type_tag.find(text=True, recursive=False)
+        # dir_str could be in format of: [in] sequence< ::
+        dir_str: str = type_tag.text.strip()
+        m = re_dir_pattern.match(dir_str)
+        if m:
+            g_dir = m.group(1).lower()
+            pinfo.direction = g_dir # in or out
+            dir_str = dir_str.split(maxsplit=1)[1]
+        pinfo.type = dir_str.replace("::", '.').lstrip('.')
+        return
+
+    def _process_params(self, params:zip) -> List[ParamInfo]:
+        results = []
+        for p_name_tag, p_type_tag in params:
+            p_info = ParamInfo()
+            self._process_name_tag(name_tag=p_name_tag, pinfo=p_info)
+            if not p_info.name:
+                msg = f"ApiInterfaceFuncPramsInfo: unable to find parameter name for method {self.summary_info.name!r}. Url: {self.url_obj.url}"
+                logger.error(msg)
+                raise Exception(msg)
+            self._process_type_tag(type_tag=p_type_tag, pinfo=p_info)
+            if not p_info.type:
+                msg = f"ApiInterfaceFuncPramsInfo: unable to find parameter type for method {self.summary_info.name!r} with param name of {p_info.name!r}. Url: {self.url_obj.url}"
+                logger.error(msg)
+                raise Exception(msg)
+            results.append(p_info)
+        return results
+    
+    @property
+    def summary_info(self) -> SummaryInfo:
+        """Gets summary_info value"""
+        return self._block.summary_info
+
+
+class ApiInterfaceMethodException(base.BlockObj):
+    """Gets errors for a funciton"""
+    # have not found an example with more than one exception so assuming
+    # singular excpetion
+    def __init__(self, block: ApiInterfaceProtoBlock) -> None:
+        self._block: ApiInterfaceProtoBlock = block
+        super().__init__(self._block.soup)
+        self._data = False
+
+    def _get_raises_row(self):
+        proto = self._block.get_obj()
+        rows: ResultSet = proto.find_all('tr')
+        result = None
+        for row in rows:
+            td: Tag = row.select_one('td')
+            if td.text.strip().lower() == 'raises':
+                result = row
+                break
+        return result
+    
+    def _get_raises_text(self, row:Tag):
+        if not row:
+            return None
+        s: str = row.text.rsplit(maxsplit=1)[1] # drop raises
+        s = s.replace('(', '').replace(')', '').replace('::', '.').strip().lstrip('.')
+        return s
+    
+    def get_obj(self) -> Union[str, None]:
+        """
+        Get name of error that is raises
+
+        Returns:
+            Union[str, None]: String containing type of error if it exist; Otherwise, ``None``
+        """
+        if not self._data is False:
+            return self._data
+        self._data = None
+        row = self._get_raises_row()
+        if not row:
+            return self._data
+        self._data = self._get_raises_text(row)        
+        return self._data
+
+    @property
+    def summary_info(self) -> SummaryInfo:
+        """Gets summary_info value"""
+        return self._block.summary_info
+
+
+class ApiInterfaceDescDetail(base.BlockObj):
+    def __init__(self, block: ApiInterfaceDescBlock) -> None:
+        self._block: ApiInterfaceDescBlock = block
+        super().__init__(self._block.soup)
+        self._data = None
+        self._cls = 'memdoc'
+        self._el = 'div'
+
+    def get_obj(self) -> List[str]:
+        if not self._data is None:
+            return self._data
+        self._data = []
+        tag = self._block.get_obj()
+        if not tag:
+            return self._data
+        lines_found: ResultSet = tag.select(f'{self._el}.{self._cls} > p')
+        if not lines_found:
+            return self._data
+        p_obj = base.TagsStrObj(tags=lines_found)
+        self._data = p_obj.get_lines()
+        since_obj = ApiInterfaceDescDetailSince(self._block)
+        since = since_obj.get_obj()
+        if since:
+            self._data.append('')
+            self._data.append('**since**')
+            self._data.append('')
+            self._data.append(f"    {since}")
+        return self._data
+
+class ApiInterfaceDescDetailSince(base.BlockObj):
+    def __init__(self, block: ApiInterfaceDescBlock) -> None:
+        self._block: ApiInterfaceDescBlock = block
+        super().__init__(self._block.soup)
+        self._data = False
+    
+    def get_obj(self) -> Union[str, None]:
+        if not self._data is False:
+            return self._data
+        self._data = None
+        tag: Tag = self._block.get_obj()
+        if not tag:
+            return self._data
+        dl_tag = tag.select_one('dl.section.since')
+        if not dl_tag:
+            return self._data
+        dd_tag = dl_tag.find('dd')
+        if not dd_tag:
+            return self._data
+        self._data = dd_tag.text.strip()
+        return self._data
+
+class ApiInterfaceName(base.ApiName):
+    """Get the Name object for the interface"""
+class ApiInterfaceNamespace(base.ApiNamespace):
+    """Get the Name object for the interface"""
+    def __init__(self, soup: base.SoupObj):
+        super().__init__(soup)
+        self._namespace_str = None
+        self._namespace = None
+    
+    @property
+    def namespace(self) -> List[str]:
+        """Gets namespace value"""
+        if self._namespace is None:
+            self._namespace = self.get_obj()[:-1]
+        return self._namespace
+    
+    
+    @property
+    def namespace_str(self) -> str:
+        if self._namespace_str is None:
+            self._namespace_str = '.'.join(self.namespace)
+        return self._namespace_str
+
+class ApiInterfaceDesc(base.BlockObj):
+    """Gets the description"""
+
+    def __init__(self, soup: base.SoupObj):
+        super().__init__(soup)
+        self._data = None
+
+    def get_obj(self) -> List[str]:
+        """
+        Gets description as list of str
+
+        Returns:
+            List[str]: description lines
+        """
+        if self._data:
+            return self._data
+        lines_found: ResultSet = self.soup.soup.select(
+            'body > div.contents > div.textblock > p')
+        p_obj = base.TagsStrObj(tags=lines_found)
+        self._data = p_obj.get_lines()
+        since_obj = ApiInterfaceDescSince(self.soup)
+        since = since_obj.get_obj()
+        if since:
+            self._data.append('')
+            self._data.append('**since**')
+            self._data.append('')
+            self._data.append(f"    {since}")
+        #.. deprecated::
+        dep_obj = ApiInterfaceDepreciated(self.soup)
+        dep = dep_obj.get_obj()
+        if dep:
+            self._data.append('')
+            self._data.append('.. deprecated::')
+            self._data.append('')
+            self._data.append('    Interface is deprecated.')
+        return self._data
+
+    @property
+    def summary_info(self) -> SummaryInfo:
+        """Gets summary_info value"""
+        return self._block.summary_info
+
+class ApiInterfaceDescSince(base.BlockObj):
+    """Gets the Since if it exist"""
+
+    def __init__(self, soup: base.SoupObj):
+        super().__init__(soup)
+        self._data = False
+
+    def get_obj(self) -> Union[str, None]:
+        """
+        Gets See alos of Interface
+
+        Returns:
+            str: See also. if it exist; Otherwise empty string.
+        """
+        if not self._data is False:
+            return self._data
+        self._data = None
+        dl_tag = self._soup.soup.select_one('dl.section.since')
+        if not dl_tag:
+            return self._data
+        dd_tag = dl_tag.find('dd')
+        if not dd_tag:
+            return self._data
+        self._data = dd_tag.text.strip()
+        return self._data
+
+class ApiInterfaceDepreciated(base.BlockObj):
+    """Gets if an interface is deprecated"""
+    # eg: https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XVclContainerPeer.html
+    def __init__(self, soup: base.SoupObj):
+        super().__init__(soup)
+        self._data = None
+
+    def get_obj(self) -> bool:
+        """
+        Gets See alos of Interface
+
+        Returns:
+            str: See also. if it exist; Otherwise empty string.
+        """
+        if not self._data is None:
+            return self._data
+        soup = self.soup.soup
+        tag = soup.select_one('div.textblock > dl.deprecated')
+        if tag:
+            self._data = True
+        else:
+            self._data = False
+        return self._data
+
+class ApiInterfaceData:
+    def __init__(self, url_soup: Union[str, base.SoupObj], allow_cache: bool):
+        if isinstance(url_soup, str):
+            self._url = url_soup
+            self._soup_obj = base.SoupObj(
+                url=url_soup, allow_cache=allow_cache)
+        else:
+            self._url = url_soup.url
+            self._soup_obj = url_soup
+            self._soup_obj.allow_cache = allow_cache
+        self._si_key = 'summeries'
+        self._detail_block_key = 'detail_block'
+        self._api_interface_name: ApiInterfaceName = None
+        self._api_interface_namespace: ApiInterfaceNamespace = None
+        self._api_interface_public_members: ApiInterfacePublicMembers = None
+        self._api_interface_properties_block: ApiInterfacePropertiesBlock = None
+        self._api_interface_functions_block: ApiInterfaceFunctionsBlock = None
+        self._api_interface_functions_summary_rows: ApiInterfaceSummaryRows = None
+        self._api_interface_property_summary_rows: ApiInterfaceSummaryRows = None
+        self._api_interface_function_summaries: ApiInterfaceSummaries = None
+        self._api_interface_property_summaries: ApiInterfaceSummaries = None
+        self._api_interface_desc: ApiInterfaceDesc = None
+        self._cache = {
+            self._si_key: {},
+            self._detail_block_key: {}
+        }
+    # region Methods
+    def get_cached_summary(self, si_id: str) -> SummaryInfo:
+        """
+        Gets a method summary infom cache.
+
+        Args:
+            si (SummaryInfo): Summary info
+
+        Raises:
+            KeyError if summary does not exist in cache
+
+        Returns:
+            SummaryInfo: Summary info
+        """
+        if self._api_interface_function_summaries is None:
+            # set up the cache
+            _ = self.api_interface_function_summaries
+        if self._api_interface_property_summaries is None:
+            # set up the cache
+            _ = self.api_interface_property_summaries
+        return self._cache[self._si_key][si_id]
+    
+    def get_api_interface_detail_block(self, si_id: str) -> ApiInterfaceDetailBlock:
+        """
+        Gets detail block of a function.
+        Gets the 
+
+        Args:
+            si (SummaryInfo): Function summary Info to get the details block for.
+
+        Returns:
+            ApiInterfaceDetailBlock: object
+        """
+        key = f"get_api_interface_detail_block_{si_id}"
+        if key in self._cache:
+            return self._cache[key]
+        si = self.get_cached_summary(si_id=si_id)
+        result = ApiInterfaceDetailBlock(soup=self.soup_obj, si=si)
+        self._cache[key] = result
+        return result
+    
+    def get_api_interface_proto_block(self, si_id: str) -> ApiInterfaceProtoBlock:
+        """Gets the block for a method information"""
+        key = f"get_api_interface_proto_block_{si_id}"
+        if key in self._cache:
+            return self._cache[key]
+        detail_block = self.get_api_interface_detail_block(si_id)
+        result = ApiInterfaceProtoBlock(block=detail_block)
+        self._cache[key] = result
+        return self._cache[key]
+    
+    def get_api_interface_desc_block(self, si_id: str) -> ApiInterfaceDescBlock:
+        """Gets the block for a method description"""
+        key = f"get_api_interface_desc_block_{si_id}"
+        if key in self._cache:
+            return self._cache[key]
+        detail_block = self.get_api_interface_detail_block(si_id)
+        result = ApiInterfaceDescBlock(block=detail_block)
+        self._cache[key] = result
+        return self._cache[key]
+    
+    def get_api_interface_prams_info(self, si_id:str) -> ApiInterfaceFuncPramsInfo:
+        """Gets parameter info for all parameters of a a method"""
+        block = self.get_api_interface_proto_block(si_id=si_id)
+        result = ApiInterfaceFuncPramsInfo(block=block)
+        return result
+    
+    def get_api_interface_method_exception(self, si_id: str) -> ApiInterfaceMethodException:
+        """Gets raisee info for method"""
+        block = self.get_api_interface_proto_block(si_id=si_id)
+        result = ApiInterfaceMethodException(block=block)
+        return result
+    
+    def get_api_interface_desc_detail(self, si_id: str) -> ApiInterfaceDescDetail:
+        """Gets Description obj for method or property"""
+        block = self.get_api_interface_desc_block(si_id=si_id)
+        result = ApiInterfaceDescDetail(block=block)
+        return result
+    # endregion Methods
+    # region Properties
+    
+    @property
+    def api_interface_name(self) -> ApiInterfaceName:
+        if self._api_interface_name is None:
+            self._api_interface_name = ApiInterfaceName(
+                self._soup_obj)
+        return self._api_interface_name
+
+    @property
+    def api_interface_namespace(self) -> ApiInterfaceNamespace:
+        """Gets the interface Description object"""
+        if self._api_interface_namespace is None:
+            self._api_interface_namespace = ApiInterfaceNamespace(
+                self.soup_obj)
+        return self._api_interface_namespace
+
+    @property
+    def api_interface_public_members(self) -> ApiInterfacePublicMembers:
+        if self._api_interface_public_members is None:
+            self._api_interface_public_members = ApiInterfacePublicMembers(self._soup_obj)
+        return self._api_interface_public_members
+    
+    @property
+    def api_interface_functions_block(self) -> ApiInterfaceFunctionsBlock:
+        """Gets Summary Functions block"""
+        if self._api_interface_functions_block is None:
+            self._api_interface_functions_block = ApiInterfaceFunctionsBlock(
+                self.api_interface_public_members)
+        return self._api_interface_functions_block
+    
+    @property
+    def api_interface_properties_block(self) -> ApiInterfacePropertiesBlock:
+        """Gets Summary Properties block"""
+        if self._api_interface_properties_block is None:
+            self._api_interface_properties_block = ApiInterfacePropertiesBlock(
+                self.api_interface_public_members)
+        return self._api_interface_properties_block
+    @property
+    def api_interface_functions_summary_rows(self) -> ApiInterfaceSummaryRows:
+        """Get Summary rows for functions"""
+        if self._api_interface_functions_summary_rows is None:
+            self._api_interface_functions_summary_rows = ApiInterfaceSummaryRows(
+                self.api_interface_functions_block)
+        return self._api_interface_functions_summary_rows
+    
+    @property
+    def api_interface_property_summary_rows(self) -> ApiInterfaceSummaryRows:
+        """Get Summary rows for Properties"""
+        if self._api_interface_property_summary_rows is None:
+            self._api_interface_property_summary_rows = ApiInterfaceSummaryRows(
+                self.api_interface_properties_block)
+        return self._api_interface_property_summary_rows
+    
+    @property
+    def api_interface_function_summaries(self) -> ApiInterfaceSummaries:
+        """Get Summary info list for functions"""
+        if self._api_interface_function_summaries is None:
+            self._api_interface_function_summaries = ApiInterfaceSummaries(
+                self.api_interface_functions_summary_rows)
+            d = {}
+            summaries = self._api_interface_function_summaries.get_obj()
+            for si in summaries:
+                d[si.id] = si
+            self._cache[self._si_key].update(d)
+        return self._api_interface_function_summaries
+    
+    @property
+    def api_interface_property_summaries(self) -> ApiInterfaceSummaries:
+        """Get Summary info list for Properties"""
+        if self._api_interface_property_summaries is None:
+            self._api_interface_property_summaries = ApiInterfaceSummaries(
+                self.api_interface_property_summary_rows)
+            d = {}
+            summaries = self._api_interface_property_summaries.get_obj()
+            for si in summaries:
+                d[si.id] = si
+            self._cache[self._si_key].update(d)
+        return self._api_interface_property_summaries
+
+    @property
+    def api_interface_desc(self) -> ApiInterfaceDesc:
+        """Gets the interface Description object"""
+        if self._api_interface_desc is None:
+            self._api_interface_desc = ApiInterfaceDesc(self.soup_obj)
+        return self._api_interface_desc
+    
+    
+    @property
+    def soup_obj(self) -> base.SoupObj:
+        """Gets soup_obj value"""
+        return self._soup_obj
+    # endregion Properties
+# endregion API Interface classes
+
 # region Parse
 class ParserInterface(base.ParserBase):
 
@@ -1921,5 +2606,45 @@ def main():
         print('')
     w.write()
 
+def _memain():
+    global logger
+    if logger is None:
+        log_args = {
+            'log_file': 'debug.log',
+            'level': logging.DEBUG
+        }
+        _set_loggers(get_logger(logger_name=Path(__file__).stem, **log_args))
+    # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XButton.html'
+    # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XDialogProvider2.html'
+    # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XGraphics.html'
+    # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1accessibility_1_1XAccessibleContext3.html'
+    # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XVclContainerPeer.html'  # deprecated
+    # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1animations_1_1XAnimate.html' # Properties
+    url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XToolkitExperimental.html' # method since
+    a_data = ApiInterfaceData(url_soup=url, allow_cache=True)
+    print('Name:', a_data.api_interface_name.get_obj())
+    print('Namespace:', a_data.api_interface_namespace.namespace_str)
+    func_data = a_data.api_interface_function_summaries.get_obj()
+    prop_data = a_data.api_interface_property_summaries.get_obj()
+    print("Description:", a_data.api_interface_desc.get_obj())
+    for si in func_data:
+        print(si)
+        p_info = a_data.get_api_interface_prams_info(si_id=si.id)
+        # print(p_info)
+        print(p_info.get_obj())
+        desc = a_data.get_api_interface_desc_detail(si_id=si.id)
+        print(desc.get_obj())
+        p_exception = a_data.get_api_interface_method_exception(si_id=si.id)
+        ex = p_exception.get_obj()
+        if ex:
+            print('Raises:', ex)
+    for si in prop_data:
+        print(si)
+        desc = a_data.get_api_interface_desc_detail(si_id=si.id)
+        print(desc.get_obj())
+    # proto = a_data.get_api_interface_proto_block(si_id=si.id)
+   
+    # print(data)
+
 if __name__ == '__main__':
-    main()
+    _memain()

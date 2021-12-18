@@ -231,6 +231,8 @@ class ResponseObj:
         self._lifetime = value
         logger.debug('ResponseObj: caching is set to: %d', value)
 
+# region Soup Related:
+
 
 class SoupObj:
     """Wrapper for BeautifulSoup"""
@@ -276,7 +278,7 @@ class SoupObj:
     def url(self) -> str:
         """Specifies url"""
         return self._response.url
-    
+
     @property
     def url_obj(self) -> 'UrlObj':
         """Specifies url"""
@@ -290,10 +292,245 @@ class SoupObj:
             :setter: Sets allow_cache value.
         """
         return self._response.allow_cache
-    
+
     @allow_cache.setter
     def allow_cache(self, value: bool):
         self._response.allow_cache = value
+
+
+class UrlObj:
+    """Properties of url"""
+    @RuleCheckAllKw(
+        arg_info={
+            "url": rules.RuleStrNotNullEmptyWs,
+            "has_name": rules.RuleBool
+        },
+        ftype=DecFuncEnum.METHOD
+    )
+    def __init__(self, url: str, **kwargs):
+        """
+        Constructor
+
+        Args:
+            url (str): Url
+
+        Keyword Arguments:
+            has_name (bool, optional): If ``True`` name is extracted from
+                url and namespace excludes name. Default ``True``
+        """
+        self._url = url
+        self._has_name = kwargs.get('has_name', True)
+        u_parts = self._url.rsplit('/', 1)
+        # similar to: namespacecom_1_1sun_1_1star_1_1style.html#a3ae28cb49c180ec160a0984600b2b925
+        self._page_link = u_parts[1]
+        self._url_base = u_parts[0]
+        f_parts = self._url.split(sep='#', maxsplit=1)
+        if len(f_parts) > 1:
+            self._url_only = f_parts[0]
+            self._fragment = f_parts[1]
+            self._is_frag = True
+        else:
+            self._url_only = self._url
+            self._fragment = ''
+            self._is_frag = False
+        self._name = None if self._has_name else ''
+
+        self._ns = None
+        self._ns_str = None
+
+    def get_split_ns(self) -> List[str]:
+        result = []
+        try:
+            ns_part = self._page_link.split('.')[0]
+            s = ns_part.replace('_1_1', '.').lstrip('.')
+
+            # in some cases such as generics the name can have _3_01 and or _01_4 in the last part of the name
+            # best guess _3 is < and _4 is > and _01 is space.
+            # just split _3 dropping the end
+            s = s.rsplit(sep='_3', maxsplit=1)[0]
+
+            # https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1beans_1_1Pair_3_01T_00_01U_01_4.html
+            # the frist part on the str usually is prefixed with namespace, interface or whatever.
+            # namespace always start with com so just drop the first part to clean it up.
+            s = 'com.' + s.split('.', maxsplit=1)[1]
+            result = s.split('.')
+        except Exception as e:
+            logger.error(e)
+            logger.info('UrlObj._get_ns() returning empty list.')
+        return result
+
+    def _get_ns(self) -> List[str]:
+        try:
+            result = self.get_split_ns()
+
+            # get that last item
+            self._name = result[-1:][0]
+            # Drop the component from the result
+            if self._has_name:
+                self._ns = result[:-1]
+            else:
+                self._ns = result
+        except Exception as e:
+            logger.error(e)
+            logger.info('UrlObj._get_ns() returning empty list.')
+        return result
+
+    @property
+    def page_link(self) -> str:
+        """
+        Gets page link similar to ``namespacecom_1_1sun_1_1star_1_1style.html#a3ae28cb49c180ec160a0984600b2b925``
+        """
+        return self._page_link
+
+    @property
+    def fragment(self) -> str:
+        """
+        Gets fragment simalar to a3ae28cb49c180ec160a0984600b2b925
+        """
+        return self._fragment
+
+    @property
+    def name(self) -> str:
+        """
+        Get name portion of html link such as SpinningProgressControlModel
+        """
+        if self._name is None:
+            self._get_ns()
+        return self._name
+
+    @property
+    def is_fragment(self) -> bool:
+        """
+        Gets if there is a fragment
+        """
+        return self._is_frag
+
+    @property
+    def namespace(self) -> List[str]:
+        """
+        Gets Namespace in format of ['com', 'sun', 'star', 'style']
+        """
+        if self._ns is None:
+            self._get_ns()
+        return self._ns
+
+    @property
+    def namespace_str(self) -> str:
+        """
+        Gets namespace in format of 'com.sun.star.style'
+        """
+        if not self._ns_str:
+            self._ns_str = '.'.join(self.namespace)
+        return self._ns_str
+
+    @property
+    def url(self) -> str:
+        """Gets url value"""
+        return self._url
+
+    @property
+    def url_base(self) -> str:
+        """
+        Gets url base value such as:
+        ``https://api.libreoffice.org/docs/idl/ref``
+        """
+        return self._url_base
+
+    @property
+    def url_only(self) -> str:
+        """
+        Gets full url without fragment
+        """
+        return self._url_only
+
+
+class BlockObj(ABC):
+    """
+    Abstract Class.
+
+    Represents a Html Block.
+    """
+
+    def __init__(self, soup: SoupObj):
+        """
+        Constructor
+
+        Args:
+            soup (SoupObj): soup for this instance
+        """
+        self._soup = soup
+        self._url = soup.url
+        self._urlobj = self._get_url_obj()
+
+    def _get_url_obj(self):
+        return UrlObj(self._url)
+
+    @abstractmethod
+    def get_obj(self) -> Tag:
+        """Get object"""
+
+    @property
+    def url(self) -> str:
+        """Gets Url"""
+        return self._url
+
+    @property
+    def soup(self) -> SoupObj:
+        """Gets SoupObj instance for this instance"""
+        return self._soup
+
+    @property
+    def url_obj(self) -> UrlObj:
+        """Gets UrlObj instance for this instance"""
+        return self._urlobj
+
+
+class ApiName(BlockObj):
+    """Get the Name object for the interface"""
+
+    def __init__(self, soup: SoupObj):
+        super().__init__(soup)
+        self._data = None
+
+    def get_obj(self) -> str:
+        if not self._data is None:
+            return self._data
+        soup = self.soup.soup
+        try:
+            tag_div_nav: Tag = soup.select_one('div#nav-path')
+            name = tag_div_nav.find_all(
+                'li', class_='navelem')[-1].text.strip()
+            self._data = name
+            return self._data
+        except Exception as e:
+            logger.error(
+                "ApiName.get_obj() Error getting name.", exc_info=True)
+            raise e
+
+class ApiNamespace(BlockObj):
+    """Get the Namespace object for component"""
+
+    def __init__(self, soup: SoupObj):
+        super().__init__(soup)
+        self._data = None
+
+    def get_obj(self) -> List[str]:
+        if not self._data is None:
+            return self._data
+        soup = self.soup.soup
+        self._data = []
+        try:
+            tag_div_nav: Tag = soup.select_one('div#nav-path')
+            names = tag_div_nav.find_all('li', class_='navelem')
+            for name in names:
+                self._data.append(name.text.strip())
+            return self._data
+        except Exception as e:
+            logger.error(
+                "ApiNamespace.get_obj() Error getting Namespace.", exc_info=True)
+            raise e
+
+# endregion Soup Related:
 
 class Util:
     """Utility class of static methods for operations"""
@@ -442,15 +679,28 @@ class Util:
         return py_name_pattern.sub(sub, input)
     
     @AcceptedTypes(str, ftype=DecFuncEnum.METHOD_STATIC)
-    def get_clean_classname(input: str) -> str:
+    def get_clean_method_name(input: str) -> str:
         """
-        Clean a file name and changes name suah as ``Pair< T, U >`` to ``Pair``
+        Clean a methpd/property name and changes name suah as ``Pair< T, U >`` to ``Pair``
 
         Args:
-            input (str): filename
+            input (str): name
 
         Returns:
-            str: cleaned file name
+            str: cleaned name
+        """
+        return Util.get_clean_classname(input=input)
+    
+    @AcceptedTypes(str, ftype=DecFuncEnum.METHOD_STATIC)
+    def get_clean_classname(input: str) -> str:
+        """
+        Clean a class name and changes name suah as ``Pair< T, U >`` to ``Pair``
+
+        Args:
+            input (str): name
+
+        Returns:
+            str: cleaned name
         """
         # convert 'Pair< T, U >' to 'Pair'
         s = pattern_generic_name.sub(r'\g<1>', input)
@@ -867,6 +1117,8 @@ class Util:
             results.append(s)
         return results
 
+
+
 # region Import check
 
 
@@ -995,194 +1247,6 @@ class ImportCheck:
             raise e
 
 # endregion Import check
-
-class UrlObj:
-    """Properties of url"""
-    @RuleCheckAllKw(
-        arg_info={
-            "url": rules.RuleStrNotNullEmptyWs,
-            "has_name": rules.RuleBool
-        },
-        ftype=DecFuncEnum.METHOD
-    )
-    def __init__(self, url: str, **kwargs):
-        """
-        Constructor
-
-        Args:
-            url (str): Url
-
-        Keyword Arguments:
-            has_name (bool, optional): If ``True`` name is extracted from
-                url and namespace excludes name. Default ``True``
-        """
-        self._url = url
-        self._has_name = kwargs.get('has_name', True)
-        u_parts = self._url.rsplit('/', 1)
-        # similar to: namespacecom_1_1sun_1_1star_1_1style.html#a3ae28cb49c180ec160a0984600b2b925
-        self._page_link = u_parts[1]
-        self._url_base = u_parts[0]
-        f_parts = self._url.split(sep='#', maxsplit=1)
-        if len(f_parts) > 1:
-            self._url_only = f_parts[0]
-            self._fragment = f_parts[1]
-            self._is_frag = True
-        else:
-            self._url_only = self._url
-            self._fragment = ''
-            self._is_frag = False
-        self._name = None if self._has_name else ''
-        
-        self._ns = None
-        self._ns_str = None
-        
-
-    def get_split_ns(self) -> List[str]:
-        result = []
-        try:
-            ns_part = self._page_link.split('.')[0]
-            s = ns_part.replace('_1_1', '.').lstrip('.')
-            
-            # in some cases such as generics the name can have _3_01 and or _01_4 in the last part of the name
-            # best guess _3 is < and _4 is > and _01 is space.
-            # just split _3 dropping the end
-            s = s.rsplit(sep='_3', maxsplit=1)[0]
-            
-            # https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1beans_1_1Pair_3_01T_00_01U_01_4.html
-            # the frist part on the str usually is prefixed with namespace, interface or whatever.
-            # namespace always start with com so just drop the first part to clean it up.
-            s = 'com.' + s.split('.', maxsplit=1)[1]
-            result = s.split('.')
-        except Exception as e:
-            logger.error(e)
-            logger.info('UrlObj._get_ns() returning empty list.')
-        return result
-    
-    def _get_ns(self) -> List[str]:
-        try:
-            result = self.get_split_ns()
-        
-            # get that last item
-            self._name = result[-1:][0]
-            # Drop the component from the result
-            if self._has_name:
-                self._ns = result[:-1]
-            else:
-                self._ns = result
-        except Exception as e:
-            logger.error(e)
-            logger.info('UrlObj._get_ns() returning empty list.')
-        return result
-
-
-
-    @property
-    def page_link(self) -> str:
-        """
-        Gets page link similar to ``namespacecom_1_1sun_1_1star_1_1style.html#a3ae28cb49c180ec160a0984600b2b925``
-        """
-        return self._page_link
-
-    @property
-    def fragment(self) -> str:
-        """
-        Gets fragment simalar to a3ae28cb49c180ec160a0984600b2b925
-        """
-        return self._fragment
-
-    @property
-    def name(self) -> str:
-        """
-        Get name portion of html link such as SpinningProgressControlModel
-        """
-        if self._name is None:
-            self._get_ns()
-        return self._name
-
-    @property
-    def is_fragment(self) -> bool:
-        """
-        Gets if there is a fragment
-        """
-        return self._is_frag
-
-    @property
-    def namespace(self) -> List[str]:
-        """
-        Gets Namespace in format of ['com', 'sun', 'star', 'style']
-        """
-        if self._ns is None:
-            self._get_ns()
-        return self._ns
-
-    @property
-    def namespace_str(self) -> str:
-        """
-        Gets namespace in format of 'com.sun.star.style'
-        """
-        if not self._ns_str:
-            self._ns_str = '.'.join(self.namespace)
-        return self._ns_str
-
-    @property
-    def url(self) -> str:
-        """Gets url value"""
-        return self._url
-
-    @property
-    def url_base(self) -> str:
-        """
-        Gets url base value such as:
-        ``https://api.libreoffice.org/docs/idl/ref``
-        """
-        return self._url_base
-    
-    @property
-    def url_only(self) -> str:
-        """
-        Gets full url without fragment
-        """
-        return self._url_only
-
-class BlockObj(ABC):
-    """
-    Abstract Class.
-
-    Represents a Html Block.
-    """
-
-    def __init__(self, soup: SoupObj):
-        """
-        Constructor
-
-        Args:
-            soup (SoupObj): soup for this instance
-        """
-        self._soup = soup
-        self._url = soup.url
-        self._urlobj = self._get_url_obj()
-
-    def _get_url_obj(self):
-        return UrlObj(self._url)
-
-    @abstractmethod
-    def get_obj(self) -> Tag:
-        """Get object"""
-
-    @property
-    def url(self) -> str:
-        """Gets Url"""
-        return self._url
-
-    @property
-    def soup(self) -> SoupObj:
-        """Gets SoupObj instance for this instance"""
-        return self._soup
-
-    @property
-    def url_obj(self) -> UrlObj:
-        """Gets UrlObj instance for this instance"""
-        return self._urlobj
 
 
 class TagsStrObj:
