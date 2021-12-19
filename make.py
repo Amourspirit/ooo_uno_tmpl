@@ -16,6 +16,7 @@ from pathlib import Path
 from logger.log_handle import get_logger
 from parser import __version__, JSON_ID
 from verr import Version
+from config import AppConfig, read_config
 logger = None
 
 os.environ['project_root'] = str(Path(__file__).parent)
@@ -41,18 +42,19 @@ class CompareFile:
         return CompareEnum.Equal
 
 class BaseCompile:
-    def __init__(self) -> None:
+    def __init__(self, config:AppConfig) -> None:
         self._root_dir = Path(__file__).parent
         self._json_parser_path = Path(self._root_dir, 'parser', 'json_parser')
+        self._config = config
     
     def get_module_link_files(self) -> Set[str]:
-        dirname = str(self._root_dir / 'uno_obj')
+        dirname = str(self._root_dir / self._config.uno_base_dir)
         # https://stackoverflow.com/questions/20638040/glob-exclude-pattern
         # root module_links.json needs to be remove from listing.
         # it will not need any processing here.
         # using sets and deduct seem the simplist way.
-        pattern = dirname + '/**/module_links.json'
-        root_json = Path(dirname, 'module_links.json')
+        pattern = dirname + f'/**/{self._config.module_links_file}'
+        root_json = Path(dirname, self._config.module_links_file)
         files = set(glob.glob(pattern, recursive=True))
         ex_files = set()
         ex_files.add(str(root_json))
@@ -71,8 +73,8 @@ class BaseCompile:
 
 
 class CompileEnumLinks(BaseCompile):
-    def __init__(self) -> None:
-        super().__init__()
+    def __init__(self, config: AppConfig) -> None:
+        super().__init__(config=config)
         self._processer = str(Path(self.json_parser_path, 'enum_parser.py'))
         self._process_files()
 
@@ -93,8 +95,8 @@ class CompileEnumLinks(BaseCompile):
 
 
 class CompileStructLinks(BaseCompile):
-    def __init__(self) -> None:
-        super().__init__()
+    def __init__(self, config: AppConfig) -> None:
+        super().__init__(config=config)
         self._processer = str(Path(self.json_parser_path, 'struct_parser.py'))
         self._process_files()
 
@@ -115,8 +117,8 @@ class CompileStructLinks(BaseCompile):
 
 class CompileInterfaceLinks(BaseCompile):
 
-    def __init__(self) -> None:
-        super().__init__()
+    def __init__(self, config: AppConfig) -> None:
+        super().__init__(config=config)
         self._processer = str(Path(self.json_parser_path, 'interface_parser.py'))
         self._process_files()
 
@@ -325,7 +327,7 @@ def _main():
 
 def main():
     global logger
-
+    config = read_config('./config.json')
     parser = argparse.ArgumentParser(description='make')
     subparser = parser.add_subparsers(dest='command')
     enum_parser = subparser.add_parser(name='enum')
@@ -399,13 +401,13 @@ def main():
             logger.error(e)
     if args.command == 'enum':
         if args.enum_all:
-            CompileEnumLinks()
+            CompileEnumLinks(config=config)
     if args.command == 'struct':
         if args.struct_all:
-            CompileStructLinks()
+            CompileStructLinks(config=config)
     if args.command == 'interface':
         if args.interface_all:
-            CompileInterfaceLinks()
+            CompileInterfaceLinks(config=config)
     logger.info('Finished!')
 
 

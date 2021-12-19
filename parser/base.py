@@ -27,15 +27,21 @@ from pathlib import Path
 from typing import Iterable, List, Set, Tuple, Union
 from datetime import datetime, timezone
 
-# this is for VS code debuging
 _app_root = os.environ.get('project_root', str(Path(__file__).parent.parent))
 if not _app_root in sys.path:
     sys.path.insert(0, _app_root)
+from config import read_config, AppConfig, read_config_default
 # print(sys.path)
 # this is for command line
 # sys.path.insert(0, os.path.abspath('..'))
 
 logger: logging.Logger  = None
+APP_CONFIG: AppConfig = None
+def _load_config():
+    global APP_CONFIG
+    APP_CONFIG = read_config_default()
+    
+_load_config()
 
 #  \W = [^a-zA-Z0-9_]
 py_name_pattern = re.compile('[\W_]+')

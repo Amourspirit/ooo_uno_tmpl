@@ -593,7 +593,8 @@ class WriterService(base.WriteBase):
             except Exception as e:
                 logger.error(e, exc_info=True)
                 raise e
-        uno_obj_path = Path(self._path_dir.parent, 'uno_obj')
+        uno_obj_path = Path(self._path_dir.parent,
+                            base.APP_CONFIG.uno_base_dir)
         name_parts: List[str] = self._p_namespace.split('.')
         # ignore com, sun, star
         path_parts = name_parts[3:]
