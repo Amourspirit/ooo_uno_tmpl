@@ -5,12 +5,22 @@ import glob
 import logging
 import json
 from pathlib import Path
-from typing import List
+from typing import Any, Awaitable, Dict, List, Tuple
+import asyncio
 APP_ROOT:str = os.environ.get('project_root', str(Path(__file__).parent.parent.parent))
 if not APP_ROOT in sys.path:
     sys.path.insert(0, APP_ROOT)
 from parser import base
 
+
+async def run_sequence(*functions: Awaitable[Any]) -> None:
+    for function in functions:
+        await function
+
+
+async def run_parallel(*functions: Awaitable[Any]) -> None:
+    await asyncio.gather(*functions)
+    
 def get_module_link_files(exclude_root: bool = False) -> List[str]:
     dirname = str(Path(APP_ROOT, base.APP_CONFIG.uno_base_dir))
     # https://stackoverflow.com/questions/20638040/glob-exclude-pattern
@@ -27,11 +37,11 @@ def get_module_link_files(exclude_root: bool = False) -> List[str]:
     return files - ex_files
 
 
-class NamespaceBuild:
-    def __init__(self) -> None:
-        self._link_files = list(get_module_link_files())
-        self._link_files.sort()
-        self._data = []
+class _FileWorker:
+    def __init__(self, file: str) -> None:
+        self._file = file
+        self._data = {}
+        self._ns: str = None
         self._build_data()
 
     def _load_file(self, file):
@@ -40,10 +50,10 @@ class NamespaceBuild:
         return data
     # region Process
 
-    def _process(self, ns: str, d_in: dict, d_out: dict):
-        if not ns in d_out:
-            d_out[ns] = []
-        d_out[ns].append(d_in['name'])
+    def _process(self, d_in: dict):
+        if not self._ns in self._data:
+            self._data[self._ns] = []
+        self._data[self._ns].append(d_in['name'])
 
     def _get_class_section(self, j_data: dict, key: str) -> List[dict]:
         result = []
@@ -61,10 +71,10 @@ class NamespaceBuild:
         except Exception:
             return []
 
-    def _process_enums(self, ns: str, j_data: dict, d_out: dict):
+    def _process_enums(self,j_data: dict):
         values = self._get_enums(j_data)
         for d in values:
-            self._process(ns=ns, d_in=d, d_out=d_out)
+            self._process(d_in=d)
     # endregion Process Enums
     # region process Typedef
 
@@ -74,57 +84,72 @@ class NamespaceBuild:
         except Exception:
             return []
 
-    def _process_typedef(self, ns: str, j_data: dict, d_out: dict):
+    def _process_typedef(self, j_data: dict):
         values = self._get_typedef(j_data)
         for d in values:
-            self._process(ns=ns, d_in=d, d_out=d_out)
+            self._process(d_in=d)
     # endregion process Typedef
     # region Process Service
 
-    def _process_service(self, ns: str, j_data: dict, d_out: dict):
+    def _process_service(self, j_data: dict):
         values = self._get_class_section(j_data, 'service')
         for d in values:
-            self._process(ns=ns, d_in=d, d_out=d_out)
+            self._process(d_in=d)
     # endregion Process Service
     # region Process Struct
 
-    def _process_struct(self, ns: str, j_data: dict, d_out: dict):
+    def _process_struct(self, j_data: dict):
         values = self._get_class_section(j_data, 'struct')
         for d in values:
-            self._process(ns=ns, d_in=d, d_out=d_out)
+            self._process(d_in=d)
     # endregion Process Struct
     # region Process Exception
 
-    def _process_exception(self, ns: str, j_data: dict, d_out: dict):
+    def _process_exception(self, j_data: dict):
         values = self._get_class_section(j_data, 'exception')
         for d in values:
-            self._process(ns=ns, d_in=d, d_out=d_out)
+            self._process(d_in=d)
     # endregion Process Exception
     # region Process Interface
 
-    def _process_interface(self, ns: str, j_data: dict, d_out: dict):
+    def _process_interface(self, j_data: dict):
         values = self._get_class_section(j_data, 'interface')
         for d in values:
-            self._process(ns=ns, d_in=d, d_out=d_out)
+            self._process(d_in=d)
     # endregion Process Interface
     # endregion Process
 
     def _build_data(self):
-        d_ns = {}
-        j_data_raw = self._load_file(self._link_files[0])
-        j_ns = j_data_raw['namespace']
+        j_data_raw = self._load_file(self._file)
+        self._ns = j_data_raw['namespace']
         j_data = j_data_raw['data']
-        self._process_enums(ns=j_ns, j_data=j_data, d_out=d_ns)
-        self._process_typedef(ns=j_ns, j_data=j_data, d_out=d_ns)
-        self._process_service(ns=j_ns, j_data=j_data, d_out=d_ns)
-        self._process_struct(ns=j_ns, j_data=j_data, d_out=d_ns)
-        self._process_exception(ns=j_ns, j_data=j_data, d_out=d_ns)
-        self._process_interface(ns=j_ns, j_data=j_data, d_out=d_ns)
-        print(d_ns)
+        self._process_enums(j_data=j_data)
+        self._process_typedef(j_data=j_data, )
+        self._process_service(j_data=j_data)
+        self._process_struct(j_data=j_data)
+        self._process_exception(j_data=j_data)
+        self._process_interface(j_data=j_data)
 
+    @property
+    def ns_data(self) -> Dict[str, str]:
+        """Gets ns_data value"""
+        return self._data
+
+    @property
+    def namespace(self) -> str:
+        """Gets namespace value"""
+        return self._ns
+
+def process_file(file:str) -> Tuple[str, str]:
+    fw = _FileWorker(file=file)
+    return fw.namespace, fw.ns_data
 
 def main() -> None:
-    ns = NamespaceBuild()
+    files = list(get_module_link_files())
+    files.sort()
+    ns, data = process_file(files[0])
+    print(data)
+    print(ns)
 
 
 if __name__ == '__main__':
