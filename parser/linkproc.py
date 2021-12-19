@@ -94,8 +94,15 @@ class ParserLinks:
         if key in self._cache:
             return self._cache[key]
         url_base = self._json_data['url_base']
+        url_root = self._json_data['url']
         data: List[dict] = self._json_data['data']
         result: List[urldata] = []
+        # add root url so module_links.json is written in uno_obj folder.
+        m = base.pattern_http.match(url_root)
+        if not m:
+            url_root = url_base + '/' + url_root
+        result.append(urldata(name='star', href=url_root))
+        m = None
         for itm in data:
             name = itm['name']
             href = itm['href']

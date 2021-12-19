@@ -479,7 +479,8 @@ def work(url: str, **kwargs):
                 work(url=_url, **kwargs)
 
 def _main():
-    url = 'https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1awt.html'
+    # url = 'https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1awt.html'
+    url = 'https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star.html'
     sys.argv.extend(['--log-file', 'debug.log', '-v', '-n', '-u', url])
     main()
 
