@@ -45,14 +45,19 @@ class BaseCompile:
         self._root_dir = Path(__file__).parent
         self._json_parser_path = Path(self._root_dir, 'parser', 'json_parser')
     
-    def get_module_link_files(self) -> List[str]:
+    def get_module_link_files(self) -> Set[str]:
         dirname = str(self._root_dir / 'uno_obj')
         # https://stackoverflow.com/questions/20638040/glob-exclude-pattern
-        # exclude files that start with _
+        # root module_links.json needs to be remove from listing.
+        # it will not need any processing here.
+        # using sets and deduct seem the simplist way.
         pattern = dirname + '/**/module_links.json'
-        files = glob.glob(pattern, recursive=True)
-        # print('files', files)
-        return files
+        root_json = Path(dirname, 'module_links.json')
+        files = set(glob.glob(pattern, recursive=True))
+        ex_files = set()
+        ex_files.add(str(root_json))
+        # deduct sets:
+        return files - ex_files
     
     @property
     def root_dir(self) -> Path:
