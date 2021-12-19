@@ -13,14 +13,13 @@ import re
 import logging
 from dataclasses import dataclass
 from abc import abstractmethod
-from typing import Dict, List, Tuple, Union
+from typing import Dict, List,  Union
 from bs4.element import ResultSet, Tag
 from kwhelp.decorator import DecFuncEnum, RequireArgs, RuleCheckAllKw, TypeCheckKw, TypeCheck
 from kwhelp import rules
 from pathlib import Path
 from logger.log_handle import get_logger
 from parser import __version__, JSON_ID
-from parser.service import WriterService
 # endregion Imports
 
 # region Logging
@@ -321,6 +320,7 @@ class ParserMod:
         logger.debug("ParserMod.get_data() %d moduled links.",
                      len(module_links))
         return links
+
     def _get_enum_links(self) -> List[Dict[str, str]]:
         enum_links = self._api_data.api_enum_links.get_obj()
         links = []
@@ -349,6 +349,7 @@ class ParserMod:
         logger.debug("ParserMod.get_data() %d type_def links.",
                      len(type_def_links))
         return links
+
     def _get_class_links(self):
         class_links = self._api_data.api_class_links.get_obj()
         results = {}
@@ -377,6 +378,7 @@ class ParserMod:
         }
         self._cache[key] = results
         return self._cache[key]
+
     @property
     def api_data(self) -> ApiData:
         """Gets api_data value"""

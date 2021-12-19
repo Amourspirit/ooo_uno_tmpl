@@ -237,6 +237,7 @@ class WriteStar:
             "namespace": self._parser.api_data.url_obj.namespace_str,
             "type": "namespace_url",
             "url_base": self._parser.api_data.url_obj.url_base,
+            "url": self._parser.api_data.url_obj.url,
             "data": self._parser.get_data()
         }
         str_jsn = base.Util.get_formated_dict_list_str(obj=json_dict, indent=2)

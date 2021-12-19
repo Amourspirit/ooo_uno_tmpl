@@ -30,3 +30,9 @@ Interface:
     Interface with Properties
     https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1animations_1_1XAnimate.html
     
+    Interface that inherite more than one interface
+    https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1animations_1_1XParallelTimeContainer.html
+
+    Exported Interfaces can be inherited interfaces;
+    see: https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1animations_1_1XParallelTimeContainer.html
+    see: https://code.woboq.org/libreoffice/libreoffice/workdir/UnoApiHeadersTarget/offapi/normal/com/sun/star/animations/XParallelTimeContainer.hdl.html

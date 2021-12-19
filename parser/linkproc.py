@@ -116,7 +116,7 @@ class WriterLinks:
         cmd_str = f"{self._mod} -r -j -u {url_data.href}"
         logger.info('Running subprocess: %s', cmd_str)
         cmd = [sys.executable] + cmd_str.split()
-        res = subprocess.run(cmd)
+        res = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         result = f"{url_data.name}, Success"
         if res.stdout:
             logger.info(res.stdout)

@@ -1466,6 +1466,12 @@ class ApiInterfaceFunctionsBlock(ApiInterfaceSummaryBlock):
 class ApiInterfacePropertiesBlock(ApiInterfaceSummaryBlock):
     def _get_match_name(self) -> str:
         return 'pub-attribs'
+
+class ApiInterfacesBlock(ApiInterfaceSummaryBlock):
+    """Gets Block object for Exported Interfaces"""
+    def _get_match_name(self) -> str:
+        return 'interfaces'
+
 class ApiInterfaceSummaryRows:
     """Gets the rows that contain short details and desc for a Function/properyty block"""
     def __init__(self, block: ApiInterfaceSummaryBlock):
@@ -1885,6 +1891,9 @@ class ApiInterfaceDepreciated(base.BlockObj):
             self._data = False
         return self._data
 
+
+class ApiInterfaceExtends:
+    pass
 class ApiInterfaceData:
     def __init__(self, url_soup: Union[str, base.SoupObj], allow_cache: bool):
         if isinstance(url_soup, str):
@@ -1902,10 +1911,13 @@ class ApiInterfaceData:
         self._api_interface_public_members: ApiInterfacePublicMembers = None
         self._api_interface_properties_block: ApiInterfacePropertiesBlock = None
         self._api_interface_functions_block: ApiInterfaceFunctionsBlock = None
+        self._api_interfaces_block: ApiInterfacesBlock = None
         self._api_interface_functions_summary_rows: ApiInterfaceSummaryRows = None
         self._api_interface_property_summary_rows: ApiInterfaceSummaryRows = None
+        self._api_interface_exported_summary_rows: ApiInterfaceSummaryRows = None
         self._api_interface_function_summaries: ApiInterfaceSummaries = None
         self._api_interface_property_summaries: ApiInterfaceSummaries = None
+        self._api_interface_exported_summaries: ApiInterfaceSummaries = None
         self._api_interface_desc: ApiInterfaceDesc = None
         self._cache = {
             self._si_key: {},
@@ -2028,6 +2040,15 @@ class ApiInterfaceData:
             self._api_interface_properties_block = ApiInterfacePropertiesBlock(
                 self.api_interface_public_members)
         return self._api_interface_properties_block
+    
+    @property
+    def api_interfaces_block(self) -> ApiInterfacesBlock:
+        """Gets Summary Exported Interfaces block"""
+        if self._api_interfaces_block is None:
+            self._api_interfaces_block = ApiInterfacesBlock(
+                self.api_interface_public_members)
+        return self._api_interfaces_block
+    
     @property
     def api_interface_functions_summary_rows(self) -> ApiInterfaceSummaryRows:
         """Get Summary rows for functions"""
@@ -2043,6 +2064,14 @@ class ApiInterfaceData:
             self._api_interface_property_summary_rows = ApiInterfaceSummaryRows(
                 self.api_interface_properties_block)
         return self._api_interface_property_summary_rows
+    
+    @property
+    def api_interface_exported_summary_rows(self) -> ApiInterfaceSummaryRows:
+        """Get Summary rows for Exported Interfaces"""
+        if self._api_interface_exported_summary_rows is None:
+            self._api_interface_exported_summary_rows = ApiInterfaceSummaryRows(
+                self.api_interfaces_block)
+        return self._api_interface_exported_summary_rows
     
     @property
     def api_interface_function_summaries(self) -> ApiInterfaceSummaries:
@@ -2069,6 +2098,14 @@ class ApiInterfaceData:
                 d[si.id] = si
             self._cache[self._si_key].update(d)
         return self._api_interface_property_summaries
+    
+    @property
+    def api_interface_exported_summaries(self) -> ApiInterfaceSummaries:
+        """Get Summary info list for Exported Interfaces"""
+        if self._api_interface_exported_summaries is None:
+            self._api_interface_exported_summaries = ApiInterfaceSummaries(
+                self.api_interface_exported_summary_rows)
+        return self._api_interface_exported_summaries
 
     @property
     def api_interface_desc(self) -> ApiInterfaceDesc:
@@ -2084,6 +2121,8 @@ class ApiInterfaceData:
         return self._soup_obj
     # endregion Properties
 # endregion API Interface classes
+
+
 
 # region Parse
 class ParserInterface(base.ParserBase):
@@ -2626,7 +2665,9 @@ def _memain():
     print('Namespace:', a_data.api_interface_namespace.namespace_str)
     func_data = a_data.api_interface_function_summaries.get_obj()
     prop_data = a_data.api_interface_property_summaries.get_obj()
+    exported_interfaces = a_data.api_interface_exported_summaries.get_obj()
     print("Description:", a_data.api_interface_desc.get_obj())
+    print("Exported Interfaces:", exported_interfaces)
     for si in func_data:
         print(si)
         p_info = a_data.get_api_interface_prams_info(si_id=si.id)
