@@ -146,7 +146,7 @@ class ResponseImg(base.ResponseBase):
 # endregion Response
 
 
-def get_image_pixels_by_mode(image: Image.Image):
+def get_image_pixels_by_mode(image: Image.Image, dtype='int8'):
     """Get a numpy array of an image so that one can access values[x][y]."""
     # https://stackoverflow.com/questions/138250/how-to-read-the-rgb-value-of-a-given-pixel-in-python
     width, height = image.size
@@ -159,17 +159,19 @@ def get_image_pixels_by_mode(image: Image.Image):
     else:
         print("Unknown mode: %s" % image.mode)
         return None
-    pixel_values = numpy.array(list(image.getdata())).reshape(
+    pixel_values = numpy.array(image.getdata(), dtype=dtype).reshape(
         (height, width, channels))
     # pixel_values = numpy.array(pixel_values).reshape((width, height))
     return pixel_values
 
 
-def get_image_pixels(image: Image.Image):
+def get_image_pixels(image: Image.Image, dtype='int8'):
     """Get a numpy array of an image so that one can access values[x][y]."""
     width, height = image.size
-    lst = list(image.getdata())
-    pixel_values = numpy.array(lst).reshape((height, width))
+    # lst = list(image.getdata())
+    # pixel_values = numpy.array(lst, dtype=dtype).reshape((height, width))
+    pixel_values = numpy.array(
+        image.getdata(), dtype=dtype).reshape((height, width))
     return pixel_values
 
 def is_inherit_img(url:str) -> bool:
@@ -186,7 +188,8 @@ def is_inherit_img(url:str) -> bool:
         if txt:
             result = int(txt)
             return result == base.APP_CONFIG.pixel_inherit
-        pix = get_image_pixels(RESPONSE_IMG.img)
+        im = RESPONSE_IMG.img
+        pix = get_image_pixels(im)
         row = pix[0, :] # row 0
         # images are expected to be indexed png files
         # find the first pixel that does not have index of 0

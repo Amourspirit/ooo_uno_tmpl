@@ -19,6 +19,9 @@ import calendar
 import hashlib
 import inspect
 import importlib
+import shutil  # to save it locally
+import numpy as np
+from PIL import Image
 from types import ModuleType
 from abc import ABC, abstractmethod
 from bs4 import BeautifulSoup
@@ -27,7 +30,7 @@ from glob import glob
 from kwhelp.decorator import AcceptedTypes, DecArgEnum, DecFuncEnum, RequireArgs, RuleCheckAll, RuleCheckAllKw, TypeCheck, TypeCheckKw
 from kwhelp import rules
 from pathlib import Path
-from typing import Any, Iterable, List, Optional, Set, Tuple, Union
+from typing import Any, Dict, Iterable, List, Optional, Set, Tuple, Union
 from datetime import datetime, timezone
 
 _app_root = os.environ.get('project_root', str(Path(__file__).parent.parent))
@@ -50,7 +53,7 @@ _load_config()
 py_name_pattern = re.compile('[\W_]+')
 py_ns_pattern = re.compile(r'[^a-zA-Z0-9\._]+')
 curly_brace_close_pattern = re.compile(r'[^};]')
-RESPONSE_TEXT_CACHE: 'TextCache' = None
+TEXT_CACHE: 'TextCache' = None
 """TextCache object for caching response data"""
 pattern_sq_braket = re.compile(r"\[.*\]")
 pattern_http = re.compile(r"^https?:\/\/")
@@ -74,7 +77,10 @@ TYPE_MAP = {
     'T': 'object',
     'U': 'object'
 }
-
+# region image process const
+IMG_CACHE: 'ImageCache' = None
+RESPONSE_IMG: 'ResponseImg' = None
+# endregion image process const
 
 def str_clean(input: str, **kwargs) -> str:
     """
@@ -140,8 +146,9 @@ class CacheBase(ABC):
         Args:
             filename (Union[str, Path]): file to delete.
         """
-        if os.path.exists(filename):
-            os.remove(filename)
+        f = Path(self.path, filename)
+        if os.path.exists(f):
+            os.remove(f)
 
     @property
     def seconds(self) -> float:
@@ -304,14 +311,14 @@ class ResponseObj(ResponseBase):
 
     # cache for one week - 604800.0 seconds
     def _get_request_text(self) -> str:
-        global RESPONSE_TEXT_CACHE
+        global TEXT_CACHE
         allow_cache = self.cache_seconds > 0
         filename = self._url_hash + self._file_ext
         if allow_cache:
-            if not RESPONSE_TEXT_CACHE:
-                RESPONSE_TEXT_CACHE = TextCache(
+            if not TEXT_CACHE:
+                TEXT_CACHE = TextCache(
                     tmp_dir=APP_CONFIG.cache_dir, lifetime=self.cache_seconds)
-            html_text = RESPONSE_TEXT_CACHE.fetch_from_cache(filename=filename)
+            html_text = TEXT_CACHE.fetch_from_cache(filename=filename)
             if html_text:
                 logger.debug(
                     "ResponseObj._get_request_text() retreived data from Cache")
@@ -321,9 +328,9 @@ class ResponseObj(ResponseBase):
             raise Exception('bad response code:' + str(response.status_code))
         html_text = response.text
         if allow_cache:
-            RESPONSE_TEXT_CACHE.save_in_cache(filename=filename, content=html_text)
+            TEXT_CACHE.save_in_cache(filename=filename, content=html_text)
             logger.debug(
-                "ResponseObj._get_request_text() Saving to cache as: %s", Path(RESPONSE_TEXT_CACHE.path, filename))
+                "ResponseObj._get_request_text() Saving to cache as: %s", Path(TEXT_CACHE.path, filename))
         return html_text
 
     @property
@@ -1627,3 +1634,428 @@ class ParserBase(object):
     def allow_cache(self, value: bool):
         self._allow_cache = value 
     # endregion Properties
+
+# region Image Process
+
+# region Cache
+
+
+class ImageCache(CacheBase):
+    """
+    Caches files and retreives cached files.
+    Cached file are in a subfolder of system tmp dir.
+    """
+
+    def fetch_from_cache(self, filename: Union[str, Path]) -> Union[Image.Image, None]:
+        """
+        Fetches file contents from cache if it exist and is not expired
+
+        Args:
+            filename (Union[str, Path]): File to retrieve
+
+        Returns:
+            Union[str, None]: File contents if retrieved; Otherwise, ``None``
+        """
+        f = Path(self.path, filename)
+        if not f.exists():
+            return None
+
+        if self.seconds > 0:
+            f_stat = f.stat()
+            ti_m = f_stat.st_mtime
+            age = time.time() - ti_m
+            if age >= self.seconds:
+                return None
+        try:
+            # Check if we have this file locally
+            with Image.open(f) as img:
+                img.load()
+                return img
+        except IOError:
+            return None
+
+    def save_in_cache(self, filename: Union[str, Path], content: Any):
+        """
+        Saves file contents into cache
+
+        Args:
+            filename (Union[str, Path]): filename to write.
+            content (str): Contents to write into file.
+        """
+        f = Path(self.path, filename)
+        # print('Saving a copy of {} in the cache'.format(filename))
+        with open(f, 'wb') as file:
+            shutil.copyfileobj(content, file)
+
+# endregion Cache
+
+# region Response
+
+
+class ResponseImg(ResponseBase):
+    """Gets response data for an image"""
+
+    def __init__(self, url: str, cache_seconds: Optional[float] = None, **kwargs):
+        """
+        Constructor
+
+        Args:
+            url (str): Url to retrieve html
+            allow_cache (bool, optional): Determins if caching is used.
+                If ``True`` html will be written to cache. Defaults to True.
+            cache_seconds (float, optional): The number of seconds that html
+                contents will be cached for. Default is ``604800.0`` ( one week )
+
+        Keyword Arguments:
+            has_name (bool, optional): If ``True`` name is extracted from
+                url and namespace excludes name. Default ``True``.
+                This applies to ``url_obj`` property
+            file_ext (str, optional): Extension if file. Default ext of url.
+                Format must prepend ``.`` such as ``.png``
+        """
+        if cache_seconds is None:
+            cache_seconds = APP_CONFIG.cache_duration
+        super().__init__(url=url, cache_seconds=cache_seconds, **kwargs)
+        self._img: Image.Image = None
+
+    # cache for one week - 604800.0 seconds
+    def _get_request_data(self) -> Image.Image:
+        global IMG_CACHE
+        allow_cache = self.cache_seconds > 0
+        filename = self._url_hash + self._file_ext
+        if not IMG_CACHE:
+            IMG_CACHE = ImageCache(
+                tmp_dir=APP_CONFIG.cache_dir, lifetime=self.cache_seconds)
+        if allow_cache:
+            img = IMG_CACHE.fetch_from_cache(filename=filename)
+            if img:
+                logger.debug(
+                    "ResponseImg._get_request_data() retreived data from Cache")
+                return img
+        response = requests.get(url=self.url, stream=True)
+        if response.status_code != 200:
+            raise Exception('bad response code:' + str(response.status_code))
+        response.raw.decode_content = True
+        IMG_CACHE.save_in_cache(
+            filename=filename, content=response.raw)
+        img = IMG_CACHE.fetch_from_cache(filename=filename)
+        if allow_cache:
+            logger.debug(
+                "ResponseImg._get_request_data() Saving to cache as: %s", Path(IMG_CACHE.path, filename))
+        else:
+            IMG_CACHE.del_from_cache(filename=filename)
+        return img
+
+    @property
+    def img(self) -> Image.Image:
+        """
+        Gets image
+        """
+        if self._img is None:
+            try:
+                self._img = self._get_request_data()
+            except Exception as e:
+                logger.error(e)
+                raise e
+        return self._img
+# endregion Response
+
+
+def get_image_pixels_by_mode(image: Image.Image, dtype='int8'):
+    """Get a numpy array of an image so that one can access values[x][y]."""
+    # https://stackoverflow.com/questions/138250/how-to-read-the-rgb-value-of-a-given-pixel-in-python
+    width, height = image.size
+    if image.mode == "RGB":
+        channels = 3
+    elif image.mode == "L":
+        channels = 1
+    elif image.mode == "P":
+        channels = 1
+    else:
+        print("Unknown mode: %s" % image.mode)
+        return None
+    pixel_values = np.array(image.getdata(), dtype=dtype).reshape(
+        (height, width, channels))
+    # pixel_values = numpy.array(pixel_values).reshape((width, height))
+    return pixel_values
+
+
+def get_image_pixels(image: Image.Image, dtype='int8'):
+    """Get a numpy array of an image so that one can access values[x][y]."""
+    width, height = image.size
+    # lst = list(image.getdata())
+    # pixel_values = numpy.array(lst, dtype=dtype).reshape((height, width))
+    pixel_values = np.array(
+        image.getdata(), dtype=dtype).reshape((height, width))
+    return pixel_values
+
+
+def is_inherit_img(url: str) -> bool:
+    global RESPONSE_IMG, TEXT_CACHE
+    if RESPONSE_IMG is None:
+        # no reason to cache image. caching result instead
+        RESPONSE_IMG = ResponseImg(url=url, cache_seconds=0)
+    if TEXT_CACHE is None:
+        TEXT_CACHE = TextCache(tmp_dir=APP_CONFIG.cache_dir)
+    try:
+        filename = RESPONSE_IMG.url_hash + '.txt'
+        result = -1
+        txt = TEXT_CACHE.fetch_from_cache(filename=filename)
+        if txt:
+            result = int(txt)
+            return result == APP_CONFIG.pixel_inherit
+        im = RESPONSE_IMG.img
+        pix = get_image_pixels(im)
+        row = pix[0, :]  # row 0
+        # images are expected to be indexed png files
+        # find the first pixel that does not have index of 0
+        # if first pixes is 1 then not inherited, if 3 inherited
+        for px in row:
+            if px != 0:
+                result = px
+                break
+        if result == -1:
+            msg = f"Failed to find colored pixel in first row of image pixels. Url: {url}"
+            raise Exception(msg)
+        content = str(result)
+        TEXT_CACHE.save_in_cache(filename=filename, content=content)
+        return result == APP_CONFIG.pixel_inherit
+    except Exception as e:
+        logger.error(e)
+        raise e
+
+# endregion Image Process
+
+# region Area Process
+
+
+@dataclass
+class Area:
+    name: str
+    href: str
+    x1: int
+    y1: int
+    x2: int
+    y2: int
+    title: str = ''
+
+
+class ApiDyContent(BlockObj):
+    """Gets dyncontent block that contains area data and image data"""
+
+    def __init__(self, block: BlockObj):
+        """
+        Constructor
+
+        Args:
+            block (BlockObj): Block obj containing full page html
+        """
+        self._block = block
+        super().__init__(self._block.soup)
+        self._data = False
+
+    def _log_missing(self):
+        logger.warning(
+            "ApiDyContent.get_obj() Failed to get find data. Url: %s", self.url_obj.url)
+
+    def get_obj(self) -> Union[Tag, None]:
+        """Gets dyncontent block that contains area data and image data"""
+        if not self._data is False:
+            return self._data
+        tag: Tag = self._block.get_obj()
+        if not tag:
+            logger.warning(
+                "ApiAreaBlock.get_obj() Failed to get data from self._block. Url: %s", self.url_obj.url)
+            return self._data
+        tag_dyn = tag.find('div', class_='dyncontent')
+        if not tag_dyn:
+            self._log_missing()
+            return self._data
+        self._data = tag_dyn
+        return self._data
+
+
+class ApiAreaBlock(BlockObj):
+    def __init__(self, block: ApiDyContent):
+        self._block: ApiDyContent = block
+        super().__init__(self._block.soup)
+        self._data = False
+
+    def _log_missing(self):
+        logger.warning(
+            "ApiAreaBlock.get_obj() Failed to get find data. Url: %s", self.url_obj.url)
+
+    def get_obj(self) -> Union[Tag, None]:
+        if not self._data is False:
+            return self._data
+        self._data = None
+        tag: Tag = self._block.get_obj()
+        if not tag:
+            self._log_missing()
+            return self._data
+        tag_map = tag.find('map')
+        if not tag_map:
+            self._log_missing()
+            return self._data
+        self._data = tag_map
+        return self._data
+
+
+class ApiImage(BlockObj):
+    """Gets url of image that represents map"""
+
+    def __init__(self, block: ApiDyContent):
+        self._block: ApiDyContent = block
+        super().__init__(self._block.soup)
+        self._data = False
+
+    def _log_missing(self, for_str: Optional[str] = None):
+        if for_str:
+            f_str = f" for {for_str}"
+        else:
+            f_str = ''
+        logger.warning(
+            "ApiImage.get_obj() Failed to get find data%s. Url: %s", f_str, self.url_obj.url)
+
+    def get_obj(self) -> Union[str, None]:
+        """Gets url of image that represents map"""
+        if not self._data is False:
+            return self._data
+        self._data = None
+        tag: Tag = self._block.get_obj()
+        if not tag:
+            self._log_missing()
+            return self._data
+        tag_img = tag.find('img')
+        if not tag_img:
+            self._log_missing()
+            return self._data
+        src = tag.img.get('src', None)
+        if src is None:
+            self._log_missing('image src')
+            return self._data
+        m = pattern_http.match(src)
+        if m:
+            self._data = src
+        else:
+            self._data = self.url_obj.url_base + '/' + src
+        return self._data
+
+
+class ApiArea(BlockObj):
+    """List of area items"""
+
+    def __init__(self, block: ApiAreaBlock):
+        self._block: ApiAreaBlock = block
+        super().__init__(self._block.soup)
+        self._data = None
+
+    def _log_missing(self, for_str: Optional[str] = None):
+        if for_str:
+            f_str = f" for {for_str}"
+        else:
+            f_str = ''
+        logger.warning(
+            "ApiArea.get_obj() Failed to get find data%s. Url: %s", f_str, self.url_obj.url)
+
+    def get_obj(self) -> List[Area]:
+        """List of area items"""
+        if not self._data is None:
+            return self._data
+        self._data = []
+        tag = self._block.get_obj()
+        if not tag:
+            self._log_missing('ApiAreaBlock instance')
+            return self._data
+        rs = tag.select('area')
+        if not rs:
+            self._log_missing('area tags')
+            return self._data
+        for el in rs:
+            href = el.get('href', None)
+            if not href:
+                self._log_missing('area href')
+                continue
+            name = el.get('alt', None)
+            if not name:
+                self._log_missing('area alt')
+                continue
+            coords = el.get('coords', None)
+            if not coords:
+                self._log_missing('area cords')
+                continue
+            title = el.get('title', '')
+            a_coords = coords.split(',')
+            if len(a_coords) != 4:
+                logger.warning(
+                    "ApiArea.get_obj() Bad Coords for %s. Url: %s", name, self.url_obj.url)
+                continue
+            x1 = int(a_coords[0].strip())
+            y1 = int(a_coords[1].strip())
+            x2 = int(a_coords[2].strip())
+            y2 = int(a_coords[3].strip())
+            m = pattern_http.match(href)
+            if not m:
+                href = self.url_obj.url_base + '/' + href
+            area = Area(name=name, href=href, x1=x1,
+                        y1=y1, x2=x2, y2=y2, title=title)
+            self._data.append(area)
+
+
+class AreaFilter:
+    def __init__(self, alst: List[Area], is_inherited: bool) -> None:
+        self._lst = alst
+        self._is_inherited = is_inherited
+        self._first: Area = None if len(self._lst) == 0 else self._lst[0]
+
+    def get_inherited(self) -> Union[List[Area], None]:
+        if self._is_inherited is False:
+            return None
+        if self._first is None:
+            return None
+        d_lst = self._list_dict(lst=self._lst)
+        match_lst = d_lst[self._first.y1]
+        in_lst = [area for area in match_lst]  # make a copy
+        # remove first first group
+        # del d_lst[self._first.y1]
+
+        # get a list of all other upper area items.
+        upper: List[Area] = []
+        keys = list(d_lst.keys())  # list of y1
+        for k in keys:
+            if k < self._first.y1:
+                upper.extend(d_lst[k])
+        if len(upper) == 0:
+            return match_lst
+        # search for name in upper that are in inherited.
+        # if found then remove from inherited.
+        unique_names: Set[str] = set()
+        for area in upper:
+            unique_names.add(area.name)
+        remove_indexes: List[int] = []
+        for i, area in enumerate(match_lst):
+            if area.name in unique_names:
+                remove_indexes.append(i)
+        if len(remove_indexes) == 0:
+            return match_lst
+        remove_indexes.sort(reverse=True)
+        for i in remove_indexes:
+            match_lst.pop(i)
+        return match_lst
+
+    def _list_dict(self, lst: List[Area]) -> Dict[int, List[Area]]:
+        d = {}
+        for area in lst:
+            if not area.y1 in d:
+                d[area.y1] = []
+            d[area.y1].append(area)
+        return d
+
+    def _get_group_by(self, lst: List[Area]) -> List[List[Area]]:
+        # use y1 as key to get all items that are on same row level
+        d = self._list_dict(lst)
+        result: List[List[Area]] = []
+        for _, v in d.items():
+            result.append(v)
+        return result
+# endregion Area Process
