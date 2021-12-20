@@ -10,6 +10,7 @@ import sys
 import requests
 import logging
 import shutil  # to save it locally
+import numpy
 from pathlib import Path
 from typing import Any, Awaitable, Dict, List, Optional, Tuple, Union
 import asyncio
@@ -20,7 +21,9 @@ if not APP_ROOT in sys.path:
     sys.path.insert(0, APP_ROOT)
 from parser import base
 
-RESPONSE_IMG_CACHE: 'ImageCache' = None
+IMG_CACHE: 'ImageCache' = None
+RESPONSE_IMG: 'ResponseImg' = None
+TEXT_CACHE: base.TextCache = None
 logger: logging.Logger = None
 
 # region Cache
@@ -92,7 +95,7 @@ class ResponseImg(base.ResponseBase):
             has_name (bool, optional): If ``True`` name is extracted from
                 url and namespace excludes name. Default ``True``.
                 This applies to ``url_obj`` property
-            file_ext (str, optional): Extension if file. Default is empty str.
+            file_ext (str, optional): Extension if file. Default ext of url.
                 Format must prepend ``.`` such as ``.png``
         """
         if cache_seconds is None:
@@ -102,14 +105,14 @@ class ResponseImg(base.ResponseBase):
 
     # cache for one week - 604800.0 seconds
     def _get_request_data(self) -> Image.Image:
-        global RESPONSE_IMG_CACHE
+        global IMG_CACHE
         allow_cache = self.cache_seconds > 0
         filename = self._url_hash + self._file_ext
+        if not IMG_CACHE:
+            IMG_CACHE = ImageCache(
+                tmp_dir=base.APP_CONFIG.cache_dir, lifetime=self.cache_seconds)
         if allow_cache:
-            if not RESPONSE_IMG_CACHE:
-                RESPONSE_IMG_CACHE = ImageCache(
-                    tmp_dir=base.APP_CONFIG.cache_dir, lifetime=self.cache_seconds)
-            img = RESPONSE_IMG_CACHE.fetch_from_cache(filename=filename)
+            img = IMG_CACHE.fetch_from_cache(filename=filename)
             if img:
                 logger.debug(
                     "ResponseImg._get_request_data() retreived data from Cache")
@@ -118,14 +121,14 @@ class ResponseImg(base.ResponseBase):
         if response.status_code != 200:
             raise Exception('bad response code:' + str(response.status_code))
         response.raw.decode_content = True
-        RESPONSE_IMG_CACHE.save_in_cache(
+        IMG_CACHE.save_in_cache(
             filename=filename, content=response.raw)
-        img = RESPONSE_IMG_CACHE.fetch_from_cache(filename=filename)
+        img = IMG_CACHE.fetch_from_cache(filename=filename)
         if allow_cache:
             logger.debug(
-                "ResponseImg._get_request_data() Saving to cache as: %s", Path(RESPONSE_IMG_CACHE.path, filename))
+                "ResponseImg._get_request_data() Saving to cache as: %s", Path(IMG_CACHE.path, filename))
         else:
-            RESPONSE_IMG_CACHE.del_from_cache(filename=filename)
+            IMG_CACHE.del_from_cache(filename=filename)
         return img
 
     @property
@@ -141,3 +144,63 @@ class ResponseImg(base.ResponseBase):
                 raise e
         return self._img
 # endregion Response
+
+
+def get_image_pixels_by_mode(image: Image.Image):
+    """Get a numpy array of an image so that one can access values[x][y]."""
+    # https://stackoverflow.com/questions/138250/how-to-read-the-rgb-value-of-a-given-pixel-in-python
+    width, height = image.size
+    if image.mode == "RGB":
+        channels = 3
+    elif image.mode == "L":
+        channels = 1
+    elif image.mode == "P":
+        channels = 1
+    else:
+        print("Unknown mode: %s" % image.mode)
+        return None
+    pixel_values = numpy.array(list(image.getdata())).reshape(
+        (height, width, channels))
+    # pixel_values = numpy.array(pixel_values).reshape((width, height))
+    return pixel_values
+
+
+def get_image_pixels(image: Image.Image):
+    """Get a numpy array of an image so that one can access values[x][y]."""
+    width, height = image.size
+    lst = list(image.getdata())
+    pixel_values = numpy.array(lst).reshape((height, width))
+    return pixel_values
+
+def is_inherit_img(url:str) -> bool:
+    global RESPONSE_IMG, TEXT_CACHE
+    if RESPONSE_IMG is None:
+        # no reason to cache image. caching result instead
+        RESPONSE_IMG = ResponseImg(url=url,cache_seconds=0)
+    if TEXT_CACHE is None:
+        TEXT_CACHE = base.TextCache(tmp_dir=base.APP_CONFIG.cache_dir)
+    try:
+        filename = RESPONSE_IMG.url_hash + '.txt'
+        result = -1
+        txt = TEXT_CACHE.fetch_from_cache(filename=filename)
+        if txt:
+            result = int(txt)
+            return result == base.APP_CONFIG.pixel_inherit
+        pix = get_image_pixels(RESPONSE_IMG.img)
+        row = pix[0, :] # row 0
+        # images are expected to be indexed png files
+        # find the first pixel that does not have index of 0
+        # if first pixes is 1 then not inherited, if 3 inherited
+        for px in row:
+            if px != 0:
+                result = px
+                break
+        if result == -1:
+            msg = f"Failed to find colored pixel in first row of image pixels. Url: {url}"
+            raise Exception(msg)
+        content = str(result)
+        TEXT_CACHE.save_in_cache(filename=filename, content=content)
+        return result == base.APP_CONFIG.pixel_inherit
+    except Exception as e:
+        logger.error(e)
+        raise e

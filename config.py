@@ -16,6 +16,14 @@ class AppConfig:
     Note:
         Files cached in system tmp folder will be cleared upon reboot.
     """
+    pixel_inherit: int
+    """
+    Index color of component map images for inherits.
+    """
+    pixel_noinherit: int
+    """
+    Index color of component map images for NON-inherits.
+    """
 
 def read_config(config_file: str) -> AppConfig:
     """

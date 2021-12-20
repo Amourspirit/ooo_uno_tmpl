@@ -237,11 +237,9 @@ class ResponseBase(ABC):
         self._url = url
         self._url_obj = UrlObj(url=self._url, **kwargs)
         self._lifetime = cache_seconds
-        if self._lifetime > 0:
-            self._url_hash = hashlib.md5(
-                self._url_obj.url_only.encode('utf-8')).hexdigest()
-        else:
-            self._url_hash = ''
+        self._url_hash = hashlib.md5(
+            self._url_obj.url_only.encode('utf-8')).hexdigest()
+
         self._file_ext = kwargs.get('file_ext', None)
         if self._file_ext is None:
             self._file_ext = self._url_obj.ext
@@ -255,6 +253,11 @@ class ResponseBase(ABC):
     def url_obj(self) -> 'UrlObj':
         """Gets url_obj value"""
         return self._url_obj
+
+    @property
+    def url_hash(self) -> str:
+        """Gets url_hash value"""
+        return self._url_hash
 
     @property
     def cache_seconds(self) -> float:
