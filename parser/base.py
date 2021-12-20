@@ -24,7 +24,7 @@ from glob import glob
 from kwhelp.decorator import AcceptedTypes, DecArgEnum, DecFuncEnum, RequireArgs, RuleCheckAll, RuleCheckAllKw, TypeCheck, TypeCheckKw
 from kwhelp import rules
 from pathlib import Path
-from typing import Iterable, List, Set, Tuple, Union
+from typing import Iterable, List, Optional, Set, Tuple, Union
 from datetime import datetime, timezone
 
 _app_root = os.environ.get('project_root', str(Path(__file__).parent.parent))
@@ -94,7 +94,7 @@ class FileCache:
     Cached file are in a subfolder of system tmp dir.
     """
     
-    def __init__(self, tmp_dir='ooo_uno_tmpl', lifetime: float = 60.0) -> None:
+    def __init__(self, tmp_dir: str, lifetime: float = 60.0) -> None:
         """
         Constructor
 
@@ -160,7 +160,7 @@ class ResponseObj:
         },
         ftype=DecFuncEnum.METHOD
     )
-    def __init__(self, url: str, cache_seconds:float = 604800.0, **kwargs):
+    def __init__(self, url: str, cache_seconds: Optional[float] = None , **kwargs):
         """
         Constructor
 
@@ -176,6 +176,8 @@ class ResponseObj:
                 url and namespace excludes name. Default ``True``.
                 This applies to ``url_obj`` property
         """
+        if cache_seconds is None:
+            cache_seconds = APP_CONFIG.cache_duration
         self._url = url
         self._url_obj = UrlObj(url=self._url, **kwargs)
         self._lifetime = cache_seconds
@@ -191,7 +193,8 @@ class ResponseObj:
         allow_cache = self._lifetime > 0
         if allow_cache:
             if not RESPONSE_CACHE:
-                RESPONSE_CACHE = FileCache(lifetime=self._lifetime)
+                RESPONSE_CACHE = FileCache(
+                    tmp_dir=APP_CONFIG.cache_dir, lifetime=self._lifetime)
             html_text = RESPONSE_CACHE.fetch_from_cache(self._url_hash)
             if html_text:
                 logger.debug("ResponseObj._get_request_text() retreived data from Cache")

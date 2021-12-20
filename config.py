@@ -7,6 +7,15 @@ class AppConfig:
     """Base Directory for Uno such as uno_obj"""
     module_links_file: str
     """Json file name for module links such as module_links.json"""
+    cache_dir: str
+    """The cache directory to use. This is generally used in creating a cache directory is system temp dir."""
+    cache_duration: float
+    """
+    The amount of time in seconds to keep files in cache.
+
+    Note:
+        Files cached in system tmp folder will be cleared upon reboot.
+    """
 
 def read_config(config_file: str) -> AppConfig:
     """
