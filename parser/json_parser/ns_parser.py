@@ -7,6 +7,7 @@ import json
 from pathlib import Path
 from typing import Any, Awaitable, Dict, List, Tuple
 import asyncio
+import time
 APP_ROOT:str = os.environ.get('project_root', str(Path(__file__).parent.parent.parent))
 if not APP_ROOT in sys.path:
     sys.path.insert(0, APP_ROOT)
@@ -40,7 +41,7 @@ def get_module_link_files(exclude_root: bool = False) -> List[str]:
 class _FileWorker:
     def __init__(self, file: str) -> None:
         self._file = file
-        self._data = {}
+        self._data:List[str] = []
         self._ns: str = None
         self._build_data()
 
@@ -51,9 +52,7 @@ class _FileWorker:
     # region Process
 
     def _process(self, d_in: dict):
-        if not self._ns in self._data:
-            self._data[self._ns] = []
-        self._data[self._ns].append(d_in['name'])
+        self._data.append(d_in['name'])
 
     def _get_class_section(self, j_data: dict, key: str) -> List[dict]:
         result = []
@@ -131,7 +130,7 @@ class _FileWorker:
         self._process_interface(j_data=j_data)
 
     @property
-    def ns_data(self) -> Dict[str, str]:
+    def ns_data(self) -> List[str]:
         """Gets ns_data value"""
         return self._data
 
@@ -140,18 +139,68 @@ class _FileWorker:
         """Gets namespace value"""
         return self._ns
 
-def process_file(file:str) -> Tuple[str, str]:
+async def process_file(file:str, d: dict) -> Tuple[str, str]:
     fw = _FileWorker(file=file)
-    return fw.namespace, fw.ns_data
+    d[fw.namespace] = fw._data
+    # return fw.namespace, fw.ns_data
 
-def main() -> None:
+
+async def process_file_fn(file: str, ) -> _FileWorker:
+    fw = _FileWorker(file=file)
+    # d[fw.namespace] = fw._data
+    return fw
+
+async def _main() -> None:
     files = list(get_module_link_files())
     files.sort()
-    ns, data = process_file(files[0])
-    print(data)
-    print(ns)
+    d = {}
+    await asyncio.gather(*[process_file(f, d) for f in files])
+    # await run_parallel(
+    #     process_file(files[0], d),
+    #     process_file(files[1], d)
+    # )
+    # print(d)
+    # ns, data = process_file(files[0])
+    # print(data)
+    # print(ns)
 
+
+async def main() -> None:
+    files = get_module_link_files(True)
+    # files.sort()
+    d = {}
+    results = await asyncio.gather(*[process_file_fn(f) for f in files])
+    for f in results:
+        d[f.namespace]= f.ns_data
+    keys = list(d.keys())
+    keys.sort()
+    for key in keys:
+        print(key)
+    print(d['com.sun.star.accessibility'])
+    # print(d.keys())
+
+def sync_main() -> None:
+    files = get_module_link_files()
+    # files.sort()
+    d = {}
+    for file in files:
+        fw = _FileWorker(file=file)
+        d[fw.namespace] = fw.ns_data
+    # print(d)
 
 if __name__ == '__main__':
     os.system('cls' if os.name == 'nt' else 'clear')
-    main()
+    start = time.time()
+    asyncio.run(main())
+    end = time.time()
+    print("The time of execution of above program is :", end-start)
+    """
+    start = time.time()
+    asyncio.run(_main())
+    end = time.time()
+    print("The time of execution of above program is :", end-start)
+    start = time.time()
+    sync_main()
+    end = time.time()
+    print("The time of execution of above program is :", end-start)
+    """
