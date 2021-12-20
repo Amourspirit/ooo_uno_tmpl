@@ -1,6 +1,9 @@
 # coding: utf-8
 """
-Base classes and helper functions of various types that are used with different parsers
+Base classes and helper functions of various types that are used with different parsers.
+Module logger must be set before calling any class or function.
+eg: import base
+    base.logger = mylogger
 """
 from dataclasses import dataclass
 import os
@@ -24,7 +27,7 @@ from glob import glob
 from kwhelp.decorator import AcceptedTypes, DecArgEnum, DecFuncEnum, RequireArgs, RuleCheckAll, RuleCheckAllKw, TypeCheck, TypeCheckKw
 from kwhelp import rules
 from pathlib import Path
-from typing import Iterable, List, Optional, Set, Tuple, Union
+from typing import Any, Iterable, List, Optional, Set, Tuple, Union
 from datetime import datetime, timezone
 
 _app_root = os.environ.get('project_root', str(Path(__file__).parent.parent))
@@ -95,7 +98,7 @@ class CacheBase(ABC):
     Cached file are in a subfolder of system tmp dir.
     """
 
-    def __init__(self, tmp_dir: str, lifetime: float = 60.0) -> None:
+    def __init__(self, tmp_dir: str, lifetime: Optional[float] = None) -> None:
         """
         Constructor
 
@@ -106,7 +109,7 @@ class CacheBase(ABC):
         t_path = Path(tempfile.gettempdir())
         self._cache_path = t_path / tmp_dir
         Util.mkdirp(self._cache_path)
-        self._lifetime = lifetime
+        self._lifetime = lifetime or APP_CONFIG.cache_duration
 
     @abstractmethod
     def fetch_from_cache(self, filename: Union[str, Path]):
@@ -130,6 +133,26 @@ class CacheBase(ABC):
             content (any): Contents to write into file.
         """
 
+    def del_from_cache(self,  filename: Union[str, Path]) -> None:
+        """
+        Deletes a file from cache if it exist
+
+        Args:
+            filename (Union[str, Path]): file to delete.
+        """
+        if os.path.exists(filename):
+            os.remove(filename)
+
+    @property
+    def seconds(self) -> float:
+        """Gets cache time in seconds"""
+        return self._lifetime
+    
+    @property
+    def path(self) -> Path:
+        """Gets cache path"""
+        return self._cache_path
+
 
 class TextCache(CacheBase):
     """
@@ -147,15 +170,15 @@ class TextCache(CacheBase):
         Returns:
             Union[str, None]: File contents if retrieved; Otherwise, ``None``
         """
-        f = Path(self._cache_path, filename)
+        f = Path(self.path, filename)
         if not f.exists():
             return None
 
-        if self._lifetime > 0:
+        if self.seconds > 0:
             f_stat = f.stat()
             ti_m = f_stat.st_mtime
             age = time.time() - ti_m
-            if age >= self._lifetime:
+            if age >= self.seconds:
                 return None
         try:
             # Check if we have this file locally
@@ -175,7 +198,7 @@ class TextCache(CacheBase):
             filename (Union[str, Path]): filename to write.
             content (str): Contents to write into file.
         """
-        f = Path(self._cache_path, filename)
+        f = Path(self.path, filename)
         # print('Saving a copy of {} in the cache'.format(filename))
         with open(f, 'w') as cached_file:
             cached_file.write(content)
@@ -188,7 +211,8 @@ class ResponseBase(ABC):
     @RuleCheckAllKw(
         arg_info={
             "url": rules.RuleStrNotNullEmptyWs,
-            "cache_seconds": rules.RuleNumber
+            "cache_seconds": rules.RuleNumber,
+            "file_ext": rules.RuleStr
         },
         ftype=DecFuncEnum.METHOD
     )
@@ -207,6 +231,8 @@ class ResponseBase(ABC):
             has_name (bool, optional): If ``True`` name is extracted from
                 url and namespace excludes name. Default ``True``.
                 This applies to ``url_obj`` property
+            file_ext (str, optional): Extension if file. Default is empty str.
+                Format must prepend ``.`` such as ``.png``
         """
         self._url = url
         self._url_obj = UrlObj(url=self._url, **kwargs)
@@ -216,6 +242,7 @@ class ResponseBase(ABC):
                 self._url_obj.url_only.encode('utf-8')).hexdigest()
         else:
             self._url_hash = ''
+        self._file_ext = kwargs.get('file_ext', '')
 
     @property
     def url(self) -> str:
@@ -244,8 +271,8 @@ class ResponseBase(ABC):
 
 class ResponseObj(ResponseBase):
     """Gets response data"""
- 
-    def __init__(self, url: str, cache_seconds: Optional[float] = None , **kwargs):
+
+    def __init__(self, url: str, cache_seconds: Optional[float] = None, **kwargs):
         """
         Constructor
 
@@ -260,33 +287,39 @@ class ResponseObj(ResponseBase):
             has_name (bool, optional): If ``True`` name is extracted from
                 url and namespace excludes name. Default ``True``.
                 This applies to ``url_obj`` property
+            file_ext (str, optional): Extension if file. Default is empty ``.html``.
+                Format must prepend ``.`` such as ``.png``
         """
         if cache_seconds is None:
             cache_seconds = APP_CONFIG.cache_duration
-        super().__init__(url=url,cache_seconds=cache_seconds, **kwargs)
+        super().__init__(url=url, cache_seconds=cache_seconds, **kwargs)
         self._text = None
+        if not 'file_ext' in kwargs:
+            self._file_ext = '.html'
 
     # cache for one week - 604800.0 seconds
     def _get_request_text(self) -> str:
         global RESPONSE_TEXT_CACHE
         allow_cache = self.cache_seconds > 0
+        filename = self._url_hash + self._file_ext
         if allow_cache:
             if not RESPONSE_TEXT_CACHE:
                 RESPONSE_TEXT_CACHE = TextCache(
                     tmp_dir=APP_CONFIG.cache_dir, lifetime=self.cache_seconds)
-            html_text = RESPONSE_TEXT_CACHE.fetch_from_cache(self._url_hash)
+            html_text = RESPONSE_TEXT_CACHE.fetch_from_cache(filename=filename)
             if html_text:
-                logger.debug("ResponseObj._get_request_text() retreived data from Cache")
+                logger.debug(
+                    "ResponseObj._get_request_text() retreived data from Cache")
                 return html_text
         response = requests.get(url=self.url)
         if response.status_code != 200:
             raise Exception('bad response code:' + str(response.status_code))
         html_text = response.text
         if allow_cache:
-            RESPONSE_TEXT_CACHE.save_in_cache(self._url_hash, html_text)
-            logger.debug("ResponseObj._get_request_text() Saving to cache as: %s", self._url_hash)
+            RESPONSE_TEXT_CACHE.save_in_cache(filename=filename, content=html_text)
+            logger.debug(
+                "ResponseObj._get_request_text() Saving to cache as: %s", filename)
         return html_text
-
 
     @property
     def raw_html(self) -> str:
@@ -300,6 +333,7 @@ class ResponseObj(ResponseBase):
                 logger.error(e)
                 raise e
         return self._text
+
 
 # endregion Response
 
