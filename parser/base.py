@@ -47,13 +47,13 @@ _load_config()
 py_name_pattern = re.compile('[\W_]+')
 py_ns_pattern = re.compile(r'[^a-zA-Z0-9\._]+')
 curly_brace_close_pattern = re.compile(r'[^};]')
-RESPONSE_CACHE: 'FileCache' = None
+RESPONSE_TEXT_CACHE: 'TextCache' = None
+"""TextCache object for caching response data"""
 pattern_sq_braket = re.compile(r"\[.*\]")
 pattern_http = re.compile(r"^https?:\/\/")
 pattern_id = re.compile(r'[a-z0-9]{28,38}')
 pattern_generic_name = re.compile(r"([a-zA-Z0-9_]+)(<[A-Z, ]+>)")
 
-"""FileCache object for caching response data"""
 
 TYPE_MAP = {
     "any": "object",
@@ -88,12 +88,13 @@ def str_clean(input: str, **kwargs) -> str:
     result = result.replace('"', '\\"')
     return result.strip()
 
-class FileCache:
+# region Cache
+class CacheBase(ABC):
     """
     Caches files and retreives cached files.
     Cached file are in a subfolder of system tmp dir.
     """
-    
+
     def __init__(self, tmp_dir: str, lifetime: float = 60.0) -> None:
         """
         Constructor
@@ -102,10 +103,39 @@ class FileCache:
             tmp_dir (str, optional): Dir name to create in tmp folder. Defaults to 'ooo_uno_tmpl'.
             lifetime (float, optional): Time in seconds that cache is good for. Defaults to 60 seconds.
         """
-        t_path =Path(tempfile.gettempdir())
+        t_path = Path(tempfile.gettempdir())
         self._cache_path = t_path / tmp_dir
         Util.mkdirp(self._cache_path)
-        self._lifetime = lifetime   
+        self._lifetime = lifetime
+
+    @abstractmethod
+    def fetch_from_cache(self, filename: Union[str, Path]):
+        """
+        Fetches file contents from cache if it exist and is not expired
+
+        Args:
+            filename (Union[str, Path]): File to retrieve
+
+        Returns:
+            Union[str, None]: File contents if retrieved; Otherwise, ``None``
+        """
+
+    @abstractmethod
+    def save_in_cache(self, filename: Union[str, Path], content):
+        """
+        Saves file contents into cache
+
+        Args:
+            filename (Union[str, Path]): filename to write.
+            content (any): Contents to write into file.
+        """
+
+
+class TextCache(CacheBase):
+    """
+    Caches files and retreives cached files.
+    Cached file are in a subfolder of system tmp dir.
+    """
 
     def fetch_from_cache(self, filename: Union[str, Path]) -> Union[str, None]:
         """
@@ -150,8 +180,10 @@ class FileCache:
         with open(f, 'w') as cached_file:
             cached_file.write(content)
 
+# endregion Cache
 
-class ResponseObj:
+# region Response
+class ResponseBase(ABC):
     """Gets response data"""
     @RuleCheckAllKw(
         arg_info={
@@ -160,6 +192,59 @@ class ResponseObj:
         },
         ftype=DecFuncEnum.METHOD
     )
+    def __init__(self, url: str, cache_seconds: float, **kwargs):
+        """
+        Constructor
+
+        Args:
+            url (str): Url to retrieve html
+            allow_cache (bool, optional): Determins if caching is used.
+                If ``True`` html will be written to cache. Defaults to True.
+            cache_seconds (float, optional): The number of seconds that html
+                contents will be cached for. Default is ``604800.0`` ( one week )
+
+        Keyword Arguments:
+            has_name (bool, optional): If ``True`` name is extracted from
+                url and namespace excludes name. Default ``True``.
+                This applies to ``url_obj`` property
+        """
+        self._url = url
+        self._url_obj = UrlObj(url=self._url, **kwargs)
+        self._lifetime = cache_seconds
+        if self._lifetime > 0:
+            self._url_hash = hashlib.md5(
+                self._url_obj.url_only.encode('utf-8')).hexdigest()
+        else:
+            self._url_hash = ''
+
+    @property
+    def url(self) -> str:
+        """Specifies url"""
+        return self._url
+
+    @property
+    def url_obj(self) -> 'UrlObj':
+        """Gets url_obj value"""
+        return self._url_obj
+
+    @property
+    def cache_seconds(self) -> float:
+        """Specifies allow_cache
+    
+            :getter: Gets cache_seconds value.
+            :setter: Sets cache_seconds value.
+        """
+        return self._lifetime
+
+    @cache_seconds.setter
+    def cache_seconds(self, value: float):
+        self._lifetime = value
+        logger.debug('ResponseBase: caching is set to: %d', value)
+
+
+class ResponseObj(ResponseBase):
+    """Gets response data"""
+ 
     def __init__(self, url: str, cache_seconds: Optional[float] = None , **kwargs):
         """
         Constructor
@@ -178,45 +263,30 @@ class ResponseObj:
         """
         if cache_seconds is None:
             cache_seconds = APP_CONFIG.cache_duration
-        self._url = url
-        self._url_obj = UrlObj(url=self._url, **kwargs)
-        self._lifetime = cache_seconds
-        if self._lifetime > 0:
-            self._url_hash = hashlib.md5(self._url_obj.url_only.encode('utf-8')).hexdigest()
-        else:
-            self._url_hash = ''
+        super().__init__(url=url,cache_seconds=cache_seconds, **kwargs)
         self._text = None
 
     # cache for one week - 604800.0 seconds
     def _get_request_text(self) -> str:
-        global RESPONSE_CACHE
-        allow_cache = self._lifetime > 0
+        global RESPONSE_TEXT_CACHE
+        allow_cache = self.cache_seconds > 0
         if allow_cache:
-            if not RESPONSE_CACHE:
-                RESPONSE_CACHE = FileCache(
-                    tmp_dir=APP_CONFIG.cache_dir, lifetime=self._lifetime)
-            html_text = RESPONSE_CACHE.fetch_from_cache(self._url_hash)
+            if not RESPONSE_TEXT_CACHE:
+                RESPONSE_TEXT_CACHE = TextCache(
+                    tmp_dir=APP_CONFIG.cache_dir, lifetime=self.cache_seconds)
+            html_text = RESPONSE_TEXT_CACHE.fetch_from_cache(self._url_hash)
             if html_text:
                 logger.debug("ResponseObj._get_request_text() retreived data from Cache")
                 return html_text
-        response = requests.get(url=self._url)
+        response = requests.get(url=self.url)
         if response.status_code != 200:
             raise Exception('bad response code:' + str(response.status_code))
         html_text = response.text
         if allow_cache:
-            RESPONSE_CACHE.save_in_cache(self._url_hash, html_text)
+            RESPONSE_TEXT_CACHE.save_in_cache(self._url_hash, html_text)
             logger.debug("ResponseObj._get_request_text() Saving to cache as: %s", self._url_hash)
         return html_text
 
-    @property
-    def url(self) -> str:
-        """Specifies url"""
-        return self._url
-    
-    @property
-    def url_obj(self) -> 'UrlObj':
-        """Gets url_obj value"""
-        return self._url_obj
 
     @property
     def raw_html(self) -> str:
@@ -224,21 +294,14 @@ class ResponseObj:
         Gets raw html of url
         """
         if self._text is None:
-            self._text = self._get_request_text()
+            try:
+                self._text = self._get_request_text()
+            except Exception as e:
+                logger.error(e)
+                raise e
         return self._text
-    @property
-    def cache_seconds(self) -> float:
-        """Specifies allow_cache
-    
-            :getter: Gets cache_seconds value.
-            :setter: Sets cache_seconds value.
-        """
-        return self._lifetime
-    
-    @cache_seconds.setter
-    def cache_seconds(self, value: float):
-        self._lifetime = value
-        logger.debug('ResponseObj: caching is set to: %d', value)
+
+# endregion Response
 
 # region Soup Related:
 
