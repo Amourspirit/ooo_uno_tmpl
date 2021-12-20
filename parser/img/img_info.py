@@ -68,8 +68,8 @@ class ImageCache(base.CacheBase):
         """
         f = Path(self.path, filename)
         # print('Saving a copy of {} in the cache'.format(filename))
-        with open(filename, 'wb') as f:
-            shutil.copyfileobj(content, f)
+        with open(f, 'wb') as file:
+            shutil.copyfileobj(content, file)
 
 # endregion Cache
 
@@ -98,10 +98,10 @@ class ResponseImg(base.ResponseBase):
         if cache_seconds is None:
             cache_seconds = base.APP_CONFIG.cache_duration
         super().__init__(url=url, cache_seconds=cache_seconds, **kwargs)
-        self._img: Image = None
+        self._img: Image.Image = None
 
     # cache for one week - 604800.0 seconds
-    def _get_request_data(self) -> Image:
+    def _get_request_data(self) -> Image.Image:
         global RESPONSE_IMG_CACHE
         allow_cache = self.cache_seconds > 0
         filename = self._url_hash + self._file_ext
@@ -123,13 +123,13 @@ class ResponseImg(base.ResponseBase):
         img = RESPONSE_IMG_CACHE.fetch_from_cache(filename=filename)
         if allow_cache:
             logger.debug(
-                "ResponseImg._get_request_data() Saving to cache as: %s", filename)
+                "ResponseImg._get_request_data() Saving to cache as: %s", Path(RESPONSE_IMG_CACHE.path, filename))
         else:
             RESPONSE_IMG_CACHE.del_from_cache(filename=filename)
         return img
 
     @property
-    def img(self) -> Image:
+    def img(self) -> Image.Image:
         """
         Gets image
         """

@@ -231,7 +231,7 @@ class ResponseBase(ABC):
             has_name (bool, optional): If ``True`` name is extracted from
                 url and namespace excludes name. Default ``True``.
                 This applies to ``url_obj`` property
-            file_ext (str, optional): Extension if file. Default is empty str.
+            file_ext (str, optional): Extension if file. Default is read from url.
                 Format must prepend ``.`` such as ``.png``
         """
         self._url = url
@@ -242,7 +242,9 @@ class ResponseBase(ABC):
                 self._url_obj.url_only.encode('utf-8')).hexdigest()
         else:
             self._url_hash = ''
-        self._file_ext = kwargs.get('file_ext', '')
+        self._file_ext = kwargs.get('file_ext', None)
+        if self._file_ext is None:
+            self._file_ext = self._url_obj.ext
 
     @property
     def url(self) -> str:
@@ -318,7 +320,7 @@ class ResponseObj(ResponseBase):
         if allow_cache:
             RESPONSE_TEXT_CACHE.save_in_cache(filename=filename, content=html_text)
             logger.debug(
-                "ResponseObj._get_request_text() Saving to cache as: %s", filename)
+                "ResponseObj._get_request_text() Saving to cache as: %s", Path(RESPONSE_TEXT_CACHE.path, filename))
         return html_text
 
     @property
@@ -443,6 +445,7 @@ class UrlObj:
 
         self._ns = None
         self._ns_str = None
+        self._ext = None
 
     def get_split_ns(self) -> List[str]:
         result = []
@@ -549,6 +552,13 @@ class UrlObj:
         """
         return self._url_only
 
+    @property
+    def ext(self) -> str:
+        """Gets ext value such as ``.html`` or ``.png``"""
+        if self._ext is None:
+            parts = self.url_only.rsplit(sep='.', maxsplit=1)
+            self._ext = '' if len(parts) == 1 else ('.' + parts[1])
+        return self._ext
 
 class BlockObj(ABC):
     """
