@@ -5,7 +5,7 @@ Module logger must be set before calling any class or function.
 eg: import base
     base.logger = mylogger
 """
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 import os
 import sys
 import re
@@ -81,6 +81,40 @@ TYPE_MAP = {
 IMG_CACHE: 'ImageCache' = None
 RESPONSE_IMG: 'ResponseImg' = None
 # endregion image process const
+
+# region Data Classes
+
+
+@dataclass
+class ImportInfo:
+    requires_typing: bool = False
+    imports: Set[str] = field(default_factory=set)
+
+@dataclass
+class PythonType(ImportInfo):
+    type: str = ''
+
+
+@dataclass(frozen=True)
+class Area:
+    name: str
+    href: str
+    x1: int
+    y1: int
+    x2: int
+    y2: int
+    title: str = ''
+
+
+@dataclass(frozen=True)
+class Ns:
+    name: str
+    namespace: str
+
+    @property
+    def fullns(self):
+        return self.namespace + '.' + self.name
+# endregion Data Classes
 
 def str_clean(input: str, **kwargs) -> str:
     """
@@ -570,6 +604,7 @@ class UrlObj:
             self._ext = '' if len(parts) == 1 else ('.' + parts[1])
         return self._ext
 
+
 class BlockObj(ABC):
     """
     Abstract Class.
@@ -590,6 +625,7 @@ class BlockObj(ABC):
 
     def _get_url_obj(self):
         return UrlObj(self._url)
+
 
     @abstractmethod
     def get_obj(self) -> Tag:
@@ -1211,6 +1247,62 @@ class Util:
             return f"'{_u_type_clean}'"
         return _u_type_clean
 
+    @staticmethod
+    def get_python_type(in_type: str) -> PythonType:
+        """
+        Gets Python Type info including an required imports.
+        This method simplifies ``get_py_type`` when a callback is needed.
+
+        Args:
+            in_type (str): uno type
+
+        Returns:
+            PythonType: class that contains type, requires typing and imporst info.
+        """
+        cb_data = None
+        _requires_typing = False
+        _imports = []
+
+        def cb(data: dict):
+            nonlocal cb_data
+            cb_data = data
+
+        n_type = TYPE_MAP.get(in_type, None)
+        if n_type:
+            logger.debug(
+                "Util.get_python_type() Found python type: %s", n_type)
+            return PythonType(requires_typing=False, type=n_type)
+
+        n_type = Util.get_py_type(uno_type=in_type, cb=cb)
+        is_wrapper = cb_data['is_wrapper']
+        is_py = cb_data['is_py_type']
+        _result = n_type
+        if is_wrapper:
+            _requires_typing = True
+            logger.debug(
+                "Util.get_python_type() wrapper arg %s", in_type)
+            logger.debug(
+                "Util.get_python_type() wrapper arg Typing is Required.")
+            wdata: dict = cb_data['wdata']
+            if not wdata['py_type_inner']:
+                logger.debug(
+                    "Util.get_python_type() wrapper inner requires typing arg %s", in_type)
+                _imports.append(cb_data['long_type'])
+                logger.debug(
+                    "Util.get_python_type() added import %s", cb_data['long_type'])
+        else:
+            if is_py is False:
+                logger.debug(
+                    "Util.get_python_type() requires typing arg %s", in_type)
+                _requires_typing = True
+                _imports.append(cb_data['long_type'])
+                logger.debug(
+                    "Util.get_python_type() added import %s", cb_data['long_type'])
+        p_type = PythonType(type=_result, requires_typing=_requires_typing)
+        for im in _imports:
+            p_type.imports.add(Util.get_clean_ns(input=im, ltrim=True))
+        return p_type
+
     @AcceptedTypes((str, Path), ftype=DecFuncEnum.METHOD_STATIC)
     @staticmethod
     def mkdirp(dest_dir: Union[str, Path]):
@@ -1830,25 +1922,6 @@ class ImageInfo:
 
 # region Area Process
 
-
-@dataclass
-class Area:
-    name: str
-    href: str
-    x1: int
-    y1: int
-    x2: int
-    y2: int
-    title: str = ''
-
-@dataclass(frozen=True)
-class Ns:
-    name: str
-    namespace: str
-
-    @property
-    def fullns(self):
-        return self.namespace + '.' + self.name
 
 class ApiDyContent(BlockObj):
     """Gets dyncontent block that contains area data and image data"""
