@@ -1760,69 +1760,71 @@ class ResponseImg(ResponseBase):
         return self._img
 # endregion Response
 
+class ImageInfo:
+    """Gets various image data like is inherited and pixel data"""
+    @staticmethod
+    def get_image_pixels_by_mode(image: Image.Image, dtype='int8'):
+        """Get a numpy array of an image so that one can access values[x][y]."""
+        # https://stackoverflow.com/questions/138250/how-to-read-the-rgb-value-of-a-given-pixel-in-python
+        width, height = image.size
+        if image.mode == "RGB":
+            channels = 3
+        elif image.mode == "L":
+            channels = 1
+        elif image.mode == "P":
+            channels = 1
+        else:
+            print("Unknown mode: %s" % image.mode)
+            return None
+        pixel_values = np.array(image.getdata(), dtype=dtype).reshape(
+            (height, width, channels))
+        # pixel_values = numpy.array(pixel_values).reshape((width, height))
+        return pixel_values
 
-def get_image_pixels_by_mode(image: Image.Image, dtype='int8'):
-    """Get a numpy array of an image so that one can access values[x][y]."""
-    # https://stackoverflow.com/questions/138250/how-to-read-the-rgb-value-of-a-given-pixel-in-python
-    width, height = image.size
-    if image.mode == "RGB":
-        channels = 3
-    elif image.mode == "L":
-        channels = 1
-    elif image.mode == "P":
-        channels = 1
-    else:
-        print("Unknown mode: %s" % image.mode)
-        return None
-    pixel_values = np.array(image.getdata(), dtype=dtype).reshape(
-        (height, width, channels))
-    # pixel_values = numpy.array(pixel_values).reshape((width, height))
-    return pixel_values
+    @staticmethod
+    def get_image_pixels(image: Image.Image, dtype='int8'):
+        """Get a numpy array of an image so that one can access values[x][y]."""
+        width, height = image.size
+        # lst = list(image.getdata())
+        # pixel_values = numpy.array(lst, dtype=dtype).reshape((height, width))
+        pixel_values = np.array(
+            image.getdata(), dtype=dtype).reshape((height, width))
+        return pixel_values
 
-
-def get_image_pixels(image: Image.Image, dtype='int8'):
-    """Get a numpy array of an image so that one can access values[x][y]."""
-    width, height = image.size
-    # lst = list(image.getdata())
-    # pixel_values = numpy.array(lst, dtype=dtype).reshape((height, width))
-    pixel_values = np.array(
-        image.getdata(), dtype=dtype).reshape((height, width))
-    return pixel_values
-
-
-def is_inherit_img(url: str) -> bool:
-    global RESPONSE_IMG, TEXT_CACHE
-    if RESPONSE_IMG is None:
-        # no reason to cache image. caching result instead
-        RESPONSE_IMG = ResponseImg(url=url, cache_seconds=0)
-    if TEXT_CACHE is None:
-        TEXT_CACHE = TextCache(tmp_dir=APP_CONFIG.cache_dir)
-    try:
-        filename = RESPONSE_IMG.url_hash + '.txt'
-        result = -1
-        txt = TEXT_CACHE.fetch_from_cache(filename=filename)
-        if txt:
-            result = int(txt)
+    @staticmethod
+    def is_inherit_img(url: str) -> bool:
+        global RESPONSE_IMG, TEXT_CACHE
+        if RESPONSE_IMG is None:
+            # no reason to cache image. caching result instead
+            RESPONSE_IMG = ResponseImg(url=url, cache_seconds=0)
+        if TEXT_CACHE is None:
+            TEXT_CACHE = TextCache(tmp_dir=APP_CONFIG.cache_dir)
+        try:
+            filename = RESPONSE_IMG.url_hash + '.txt'
+            result = -1
+            txt = TEXT_CACHE.fetch_from_cache(filename=filename)
+            if txt:
+                result = int(txt)
+                return result == APP_CONFIG.pixel_inherit
+            im = RESPONSE_IMG.img
+            pix = ImageInfo.get_image_pixels(im)
+            row = pix[0, :]  # row 0
+            # images are expected to be indexed png files
+            # find the first pixel that does not have index of 0
+            # if first pixes is 1 then not inherited, if 3 inherited
+            for px in row:
+                if px != 0:
+                    result = px
+                    break
+            if result == -1:
+                msg = f"Failed to find colored pixel in first row of image pixels. Url: {url}"
+                raise Exception(msg)
+            content = str(result)
+            TEXT_CACHE.save_in_cache(filename=filename, content=content)
             return result == APP_CONFIG.pixel_inherit
-        im = RESPONSE_IMG.img
-        pix = get_image_pixels(im)
-        row = pix[0, :]  # row 0
-        # images are expected to be indexed png files
-        # find the first pixel that does not have index of 0
-        # if first pixes is 1 then not inherited, if 3 inherited
-        for px in row:
-            if px != 0:
-                result = px
-                break
-        if result == -1:
-            msg = f"Failed to find colored pixel in first row of image pixels. Url: {url}"
-            raise Exception(msg)
-        content = str(result)
-        TEXT_CACHE.save_in_cache(filename=filename, content=content)
-        return result == APP_CONFIG.pixel_inherit
-    except Exception as e:
-        logger.error(e)
-        raise e
+        except Exception as e:
+            logger.error(e)
+            raise e
 
 # endregion Image Process
 
@@ -1839,19 +1841,26 @@ class Area:
     y2: int
     title: str = ''
 
+@dataclass(frozen=True)
+class Ns:
+    name: str
+    namespace: str
+
+    @property
+    def fullns(self):
+        return self.namespace + '.' + self.name
 
 class ApiDyContent(BlockObj):
     """Gets dyncontent block that contains area data and image data"""
 
-    def __init__(self, block: BlockObj):
+    def __init__(self, soup: SoupObj):
         """
         Constructor
 
         Args:
             block (BlockObj): Block obj containing full page html
         """
-        self._block = block
-        super().__init__(self._block.soup)
+        super().__init__(soup)
         self._data = False
 
     def _log_missing(self):
@@ -1862,12 +1871,8 @@ class ApiDyContent(BlockObj):
         """Gets dyncontent block that contains area data and image data"""
         if not self._data is False:
             return self._data
-        tag: Tag = self._block.get_obj()
-        if not tag:
-            logger.warning(
-                "ApiAreaBlock.get_obj() Failed to get data from self._block. Url: %s", self.url_obj.url)
-            return self._data
-        tag_dyn = tag.find('div', class_='dyncontent')
+        soup = self.soup.soup
+        tag_dyn = soup.find('div', class_='dyncontent')
         if not tag_dyn:
             self._log_missing()
             return self._data
@@ -2000,19 +2005,20 @@ class ApiArea(BlockObj):
             area = Area(name=name, href=href, x1=x1,
                         y1=y1, x2=x2, y2=y2, title=title)
             self._data.append(area)
-
+        return self._data
 
 class AreaFilter:
     def __init__(self, alst: List[Area], is_inherited: bool) -> None:
         self._lst = alst
         self._is_inherited = is_inherited
         self._first: Area = None if len(self._lst) == 0 else self._lst[0]
+        self._inherited = self._get_inherited()
 
-    def get_inherited(self) -> Union[List[Area], None]:
+    def _get_inherited(self) -> List[Area]:
         if self._is_inherited is False:
-            return None
+            return []
         if self._first is None:
-            return None
+            return []
         d_lst = self._list_dict(lst=self._lst)
         match_lst = d_lst[self._first.y1]
         in_lst = [area for area in match_lst]  # make a copy
@@ -2058,4 +2064,72 @@ class AreaFilter:
         for _, v in d.items():
             result.append(v)
         return result
+
+    def get_as_ns(self) -> List[Ns]:
+        """
+        Gets the current inherited list of Area as a list of ``Ns``
+
+        Returns:
+            List[Ns]: List if inherited Namespaces
+        """
+        def get_ns(area: Area) -> Ns:
+            href_parts = area.href.rsplit(sep='/', maxsplit=1)
+            if len(href_parts) == 1:
+                href = href_parts[0]
+            else:
+                href = href_parts[1]
+            # interfacecom_1_1sun_1_1star_1_1accessibility_1_1XAccessibleContext.html
+            parts = href.split('_1_1')
+            parts[0] = 'com'
+            parts.pop()
+            # parts.append(area.name)
+            _ns = '.'.join(parts)
+            ns = Ns(area.name, namespace=_ns)
+            return ns
+        results = []
+        for el in self.inherited:
+            results.append(get_ns(area=el))
+        return results
+
+    @property
+    def inherited(self) -> List[Area]:
+        """Gets inherited value"""
+        return self._inherited
+
+class ApiInherited(BlockObj):
+
+    def __init__(self, soup: SoupObj) -> None:
+        super().__init__(soup)
+        self._api_dy_content: ApiDyContent = ApiDyContent(self.soup)
+        self._data = None
+
+    def _log_missing(self, for_str: Optional[str] = None, raise_error: bool = False):
+        if for_str:
+            f_str = f" for {for_str}"
+        else:
+            f_str = ''
+        msg = f"ApiInherited.get_obj() Failed to get find data{f_str}. Url: {self.url_obj.url}"
+        if raise_error:
+            logger.error(msg)
+            raise Exception(msg)
+        logger.warning(msg)
+
+    def get_obj(self) -> List[Ns]:
+        if not self._data is None:
+            return self._data
+        self._data = []
+        ai = ApiImage(self._api_dy_content)
+        image_url = ai.get_obj()
+        if not image_url:
+            self._log_missing(for_str='image url', raise_error=True)
+        is_inherited = ImageInfo.is_inherit_img(url=image_url)
+        ab: ApiAreaBlock = ApiAreaBlock(self._api_dy_content)
+        api_area: ApiArea = ApiArea(ab)
+        lst = api_area.get_obj()
+        filter = AreaFilter(lst, is_inherited=is_inherited)
+        extends = filter.get_as_ns()
+        if not extends:
+            return self._data
+        self._data = extends
+        return self._data
 # endregion Area Process

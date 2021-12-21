@@ -12,7 +12,7 @@ import textwrap
 import xerox  # requires xclip - sudo apt-get install xclip
 import re
 import base
-from typing import Dict, List, Set, Union
+from typing import Dict, List, Optional, Set, Union
 from bs4.element import NavigableString, PageElement, ResultSet, Tag
 from kwhelp.decorator import DecFuncEnum, TypeCheck, TypeCheckKw
 from pathlib import Path
@@ -1892,8 +1892,6 @@ class ApiInterfaceDepreciated(base.BlockObj):
         return self._data
 
 
-class ApiInterfaceExtends:
-    pass
 class ApiInterfaceData:
     def __init__(self, url_soup: Union[str, base.SoupObj], allow_cache: bool):
         if isinstance(url_soup, str):
@@ -1919,6 +1917,7 @@ class ApiInterfaceData:
         self._api_interface_property_summaries: ApiInterfaceSummaries = None
         self._api_interface_exported_summaries: ApiInterfaceSummaries = None
         self._api_interface_desc: ApiInterfaceDesc = None
+        self._api_inherited: base.ApiInherited = None
         self._cache = {
             self._si_key: {},
             self._detail_block_key: {}
@@ -2114,7 +2113,13 @@ class ApiInterfaceData:
             self._api_interface_desc = ApiInterfaceDesc(self.soup_obj)
         return self._api_interface_desc
     
-    
+    @property
+    def api_inherited(self) -> base.ApiInherited:
+        """Gets class that get all inherited value"""
+        if self._api_inherited is None:
+            self._api_inherited = base.ApiInherited(self.soup_obj)
+        return self._api_inherited
+
     @property
     def soup_obj(self) -> base.SoupObj:
         """Gets soup_obj value"""
@@ -2660,8 +2665,15 @@ def _memain():
     # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1accessibility_1_1XAccessibleContext3.html'
     # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XVclContainerPeer.html'  # deprecated
     # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1animations_1_1XAnimate.html' # Properties
-    url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XToolkitExperimental.html' # method since
+    # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XToolkitExperimental.html' # method since
+    # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XToolkit2.html' # map above and below
+    url = 'https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1awt_1_1AccessibleButton.html' # inherits parent inherits
     a_data = ApiInterfaceData(url_soup=url, allow_cache=True)
+    
+    extends = a_data.api_inherited.get_obj()
+    for ext in extends:
+        print(ext)
+    return
     print('Name:', a_data.api_interface_name.get_obj())
     print('Namespace:', a_data.api_interface_namespace.namespace_str)
     func_data = a_data.api_interface_function_summaries.get_obj()
