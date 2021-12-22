@@ -50,4 +50,26 @@ def test_rule_primative_seq(test_log):
     seq = 'sequence< com.sun.star.beans.Pair< string, string > >'
     assert rule.get_is_match(seq) == False
 
-    
+
+def test_rule_seq(test_log):
+    tester = tm.TypeRules(logger=test_log)
+    seq = 'sequence< com.sun.star.beans.XThing >'
+    p_type = tester.get_python_type(seq)
+    assert p_type.type == "'typing.List[XThing]'"
+    assert p_type.requires_typing
+    assert p_type.imports == set(['com.sun.star.beans.XThing'])
+    rule = tm.RuleSeqLikeNonPrim(tester)
+    seq = 'sequence< .com.sun.star.beans.XThing >'
+    assert rule.get_is_match(seq)
+    p_type = rule.get_python_type(seq)
+    assert p_type.type == "'typing.List[XThing]'"
+    assert p_type.requires_typing
+    assert p_type.imports == set(['com.sun.star.beans.XThing'])
+    seq = 'sequence< XThing >'
+    assert rule.get_is_match(seq)
+    p_type = rule.get_python_type(seq)
+    assert p_type.type == "'typing.List[XThing]'"
+    assert p_type.requires_typing
+    assert p_type.imports == set(['XThing'])
+    seq = 'sequence< long >'
+    assert rule.get_is_match(seq) == False
