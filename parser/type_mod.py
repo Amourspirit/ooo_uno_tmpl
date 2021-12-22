@@ -5,10 +5,7 @@ Handles conversion of LibreOffice types to Python Types
 import re
 from abc import ABC, abstractmethod, abstractproperty
 from dataclasses import dataclass, field
-import logging
 from typing import List, Match, Set, Union
-from logger.log_handle import get_logger
-import hashlib
 
 TYPE_MAP_PRIMITIVE = {
     "any": "object",
@@ -24,7 +21,8 @@ TYPE_MAP_PRIMITIVE = {
 
 TYPE_MAP_KNOWN = {
     "sequence": "list",
-    "aDXArray": "list"
+    "aDXArray": "list",
+    "com.sun.star.beans.Pair": "tuple"
 }
 
 TYPE_MAP_PY_WRAPPER = {
@@ -71,19 +69,15 @@ class ITypeRules(ABC):
 
 
 class TypeRules(ITypeRules):
-    def __init__(self, **kwargs) -> None:
+    def __init__(self) -> None:
         self._rules: List[ITypeRule] = []
-        self._log: logging.Logger = kwargs.get('logger', None)
         self._cache = {}
-        if self._log is None:
-            self._log = get_logger('type_mod')
         self._register_known_rules()
     
     def register_rule(self, rule: ITypeRule) -> None:
 
         if not issubclass(rule, ITypeRule):
             msg = "TypeRules.register_rule(), rule arg must be child class of ITypeRule"
-            self._log.error(msg)
             raise TypeError(msg)
         if rule in self._rules:
             msg = "TypeRules.register_rule() Rule is already registered"
@@ -101,7 +95,8 @@ class TypeRules(ITypeRules):
         try:
             self._rules.remove(rule)
         except ValueError as e:
-            self._log.error("unable to unregister rule. %s", str(e))
+            msg = f"{self.__class__.__name__}.unregister_rule() Unable to unregister rule."
+            raise ValueError(msg) from e
 
 
     def _reg_rule(self, rule: ITypeRule):
@@ -110,8 +105,11 @@ class TypeRules(ITypeRules):
     def _register_known_rules(self):
         self._reg_rule(rule=RulePrimative)
         self._reg_rule(rule=RuleKnownType)
+        self._reg_rule(rule=RuleComType)
         self._reg_rule(rule=RuleSeqLikePrimative)
         self._reg_rule(rule=RuleSeqLikeNonPrim)
+        self._reg_rule(rule=RuleTuple2Like)
+        self._reg_rule(rule=RuleSeqLikePair)
 
     def _get_rule(self, in_type:str) -> Union[ITypeRule, None]:
         
@@ -160,6 +158,43 @@ class RulePrimative(ITypeRule):
             requires_typing=False
         )
 
+class RuleComType(ITypeRule):
+    """Matches types that start wihh com.sun.star. such as com.sun.star.uno.XInterface"""
+
+    def __init__(self, rules: ITypeRules) -> None:
+        self._rules = rules
+        self._rx = re.compile(r"[.]*(com\.sun\.star\.[a-zA-Z0-9_.]+)$")
+        self._match: Union[Match[str], None] = False
+
+    def _set_match(self, in_type: str) -> None:
+        if not self._match is False:
+            return
+        self._match = self._rx.match(in_type)
+    
+    def _set_default(self):
+        self._match = False
+    
+    def get_is_match(self, in_type: str) -> bool:
+        self._set_default()
+        self._set_match(in_type)
+        if not self._match:
+            return False
+        return True
+
+    def get_python_type(self, in_type: str) -> PythonType:
+        self._set_match(in_type)
+        if not self._match:
+            msg = f"{self.__class__.__name__} get_python_type() Match Failure."
+            msg += "Did you forget to call get_is_match()?"
+            raise Exception(msg)
+        g = self._match.groups()
+        s_type: str = g[0]  # like com.sun.star.beans.Pair
+        parts = s_type.rsplit(sep='.', maxsplit=1)
+        return PythonType(
+            type= parts.pop(),
+            requires_typing=False,
+            imports=set([s_type])
+        )
 class RuleKnownType(ITypeRule):
     """Rule for Known uno types sucha s sequence"""
 
@@ -185,6 +220,7 @@ class RuleSeqLikePrimative(ITypeRule):
         self._rx = re.compile(r"([a-zA-Z]+)<[ ]*([a-zA-Z]+)[ ]*>")
         self._match: Union[Match[str], None] = False
         self._wrapper_type: PythonType = None
+        self._recursive_state = False
         # match sequence< string >
         # do not match
         # sequence< com.sun.star.beans.Pair< string, string > >
@@ -197,13 +233,17 @@ class RuleSeqLikePrimative(ITypeRule):
     def _set_wrapper(self, in_type: str):
         if self._wrapper_type:
             return self._wrapper_type
+        self._recursive_state = True
         self._wrapper_type = self._rules.get_python_type(in_type=in_type)
+        self._recursive_state = False
 
     def _set_default(self):
         self._match = False
         self._wrapper_type = None
 
     def get_is_match(self, in_type: str) -> bool:
+        if self._recursive_state:
+            return False
         self._set_default()
         self._set_match(in_type)
         if not self._match:
@@ -251,6 +291,7 @@ class RuleSeqLikeNonPrim(ITypeRule):
         self._rx = re.compile(r"([a-zA-Z]+)<[ ]*([a-zA-Z0-9._]+)[ ]*>")
         self._match: Union[Match[str], None] = False
         self._wrapper_type: PythonType = None
+        self._recursive_state = False
 
     def _set_match(self, in_type: str) -> None:
         if not self._match is False:
@@ -260,13 +301,17 @@ class RuleSeqLikeNonPrim(ITypeRule):
     def _set_wrapper(self, in_type: str):
         if self._wrapper_type:
             return self._wrapper_type
+        self._recursive_state = True
         self._wrapper_type = self._rules.get_python_type(in_type=in_type)
+        self._recursive_state = False
 
     def _set_default(self):
         self._match = False
         self._wrapper_type = None
 
     def get_is_match(self, in_type: str) -> bool:
+        if self._recursive_state:
+            return False
         if self._seq_prim.get_is_match(in_type=in_type):
             # this is a sequence with a primative. let that rule handle it.
             return False
@@ -299,10 +344,150 @@ class RuleSeqLikeNonPrim(ITypeRule):
             w = f"'{s}[{t_name}]'"
         else:
             w = f"'typing.List[{t_name}]'"
-       
+
         p_type = PythonType(
             type=w,
             requires_typing=True
         )
         p_type.imports.add(inner_str)
         return p_type
+
+class RuleSeqLikePair(ITypeRule):
+    """Matches single sequence with embeded pair such as sequence< com.sun.star.beans.Pair< string, string > >"""
+
+    def __init__(self, rules: ITypeRules) -> None:
+        self._rules = rules
+        self._seq_prim = self._rules.get_rule_instance(RuleSeqLikePrimative)
+        self._rx = re.compile(r"([a-zA-Z]+)<[ ]*([a-zA-Z0-9._]+[ ]*<.*>)[ ]*>")
+        self._match: Union[Match[str], None] = False
+        self._wrapper_type: PythonType = None
+        self._recursive_state = False
+
+    def _set_match(self, in_type: str) -> None:
+        if not self._match is False:
+            return
+        self._match = self._rx.match(in_type)
+
+    def _set_wrapper(self, in_type: str):
+        if self._wrapper_type:
+            return self._wrapper_type
+        self._recursive_state = True
+        self._wrapper_type = self._rules.get_python_type(in_type=in_type)
+        self._recursive_state = False
+
+    def _set_default(self):
+        self._match = False
+        self._wrapper_type = None
+
+    def get_is_match(self, in_type: str) -> bool:
+        if self._recursive_state:
+            return False
+        self._set_default()
+        self._set_match(in_type)
+        if not self._match:
+            return False
+        return True
+
+    def get_python_type(self, in_type: str) -> PythonType:
+        self._set_match(in_type)
+        if not self._match:
+            msg = f"{self.__class__.__name__} get_python_type() Match Failure."
+            msg += "Did you forget to call get_is_match()?"
+            raise Exception(msg)
+
+        #sequence
+        wrapper_str: str = self._match.groups()[0]
+
+        # com.sun.star.beans.Pair< string, string >
+        inner_str: str = self._match.groups()[1]
+        inner_str = inner_str.lstrip(".").lstrip()
+        self._recursive_state = True
+        p_inner = self._rules.get_python_type(inner_str)
+        self._recursive_state = False
+
+        t_name = p_inner.type.replace("'", "")
+        self._set_wrapper(wrapper_str)
+        if self._wrapper_type.type in TYPE_MAP_PY_WRAPPER:
+            s = TYPE_MAP_PY_WRAPPER[self._wrapper_type.type]
+            w = f"{s}[{t_name}]"
+        else:
+            w = f"typing.List[{t_name}]"
+        if len(p_inner.imports) > 0:
+            w = "'" + w + "'"
+        p_type = PythonType(
+            type=w,
+            requires_typing=True
+        )
+        p_type.imports.update(p_inner.imports)
+        return p_type
+
+
+class RuleTuple2Like(ITypeRule):
+    """Matches items that can be converted to tuple such as com.sun.star.beans.Pair< string, string >"""
+
+    def __init__(self, rules: ITypeRules) -> None:
+        self._rules = rules
+        self._seq_prim = self._rules.get_rule_instance(RuleSeqLikePrimative)
+        # https://regex101.com/r/aOHaCG/1
+        self._rx = re.compile(
+            r"([a-zA-Z0-9_.]+)<[ ]*([a-zA-Z0-9._]+),[ ]*([a-zA-Z0-9._]+)[ ]*>")
+        self._match: Union[Match[str], None] = False
+        self._recursive_state = False
+
+    def _set_match(self, in_type: str) -> None:
+        if not self._match is False:
+            return
+        self._match = self._rx.match(in_type)
+
+    def _set_default(self):
+        self._match = False
+
+    def get_is_match(self, in_type: str) -> bool:
+        if self._recursive_state:
+            return False
+        self._set_default()
+        self._set_match(in_type)
+        if not self._match:
+            return False
+        return True
+
+    def _get_clean_type(self, in_type: str) -> str:
+        s = in_type.lstrip(".").lstrip()
+        return s
+
+    def get_python_type(self, in_type: str) -> PythonType:
+        self._set_match(in_type)
+        if not self._match:
+            msg = f"{self.__class__.__name__} get_python_type() Match Failure."
+            msg += "Did you forget to call get_is_match()?"
+            raise Exception(msg)
+        g = self._match.groups()
+        s_type: str = self._get_clean_type(g[0])  # like com.sun.star.beans.Pair
+        s_one: str = self._get_clean_type(g[1])
+        s_two: str = self._get_clean_type(g[2])
+        self._recursive_state = True
+        if s_type in TYPE_MAP_KNOWN:
+            p_type = PythonType(
+                type=TYPE_MAP_KNOWN[s_type],
+                requires_typing=True
+            )
+        else:
+            p_type = self._rules.get_python_type(s_type)
+
+        p_type_one = self._rules.get_python_type(s_one)
+        p_type_two = self._rules.get_python_type(s_two)
+        self._recursive_state = False
+        if p_type.type in TYPE_MAP_PY_WRAPPER:
+            f_str = TYPE_MAP_PY_WRAPPER[p_type.type]
+            f_str = f_str + f"[{p_type_one.type}, {p_type_two.type}]"
+        else:
+            f_str = f"typing.Tuple[{p_type_one.type}, {p_type_two.type}]"
+        if len(p_type_one.imports) > 0 or len(p_type_two.imports) > 0:
+            f_str = f"'{f_str}'"
+        r_type = PythonType()
+        r_type.requires_typing = True
+        r_type.imports.update(p_type.imports)
+        r_type.imports.update(p_type_one.imports)
+        r_type.imports.update(p_type_two.imports)
+        r_type.type = f_str
+        return r_type
