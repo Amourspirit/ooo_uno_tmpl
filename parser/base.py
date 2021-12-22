@@ -32,6 +32,7 @@ from kwhelp import rules
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Optional, Set, Tuple, Union
 from datetime import datetime, timezone
+from type_mod import TypeRules, PythonType
 
 _app_root = os.environ.get('project_root', str(Path(__file__).parent.parent))
 if not _app_root in sys.path:
@@ -99,9 +100,9 @@ class ImportInfo:
     requires_typing: bool = False
     imports: Set[str] = field(default_factory=set)
 
-@dataclass
-class PythonType(ImportInfo):
-    type: str = ''
+# @dataclass
+# class PythonType(ImportInfo):
+#     type: str = ''
 
 
 @dataclass(frozen=True)
@@ -705,6 +706,8 @@ class ApiNamespace(BlockObj):
 
 class Util:
     """Utility class of static methods for operations"""
+    
+    TYPE_RULES: TypeRules = None
     @dataclass
     class RealitiveInfo:
         """
@@ -1308,51 +1311,13 @@ class Util:
         Returns:
             PythonType: class that contains type, requires typing and imporst info.
         """
-        cb_data = None
-        _requires_typing = None
-        _imports = []
-
-        def cb(data: dict):
-            nonlocal cb_data
-            cb_data = data
-
-        n_type = TYPE_MAP.get(in_type, None)
-        if n_type:
-            logger.debug(
-                "Util.get_python_type() Found python type: %s", n_type)
-            return PythonType(requires_typing=False, type=n_type)
-
-        n_type = Util.get_py_type(uno_type=in_type, cb=cb)
-        is_wrapper = cb_data['is_wrapper']
-        is_py = cb_data['is_py_type']
-        _result = n_type
-        if is_wrapper:
-            _requires_typing = True
-            logger.debug(
-                "Util.get_python_type() wrapper arg %s", in_type)
-            logger.debug(
-                "Util.get_python_type() wrapper arg Typing is Required.")
-            wdata: dict = cb_data['wdata']
-            if not wdata['py_type_inner']:
-                logger.debug(
-                    "Util.get_python_type() wrapper inner requires typing arg %s", in_type)
-                _imports.append(cb_data['long_type'])
-                logger.debug(
-                    "Util.get_python_type() added import %s", cb_data['long_type'])
-        else:
-            if is_py is False:
-                logger.debug(
-                    "Util.get_python_type() requires typing arg %s", in_type)
-                _requires_typing = True
-                _imports.append(cb_data['long_type'])
-                logger.debug(
-                    "Util.get_python_type() added import %s", cb_data['long_type'])
-        if _requires_typing is None:
-            _requires_typing = cb_data.get("is_typing", False)
-        p_type = PythonType(type=_result, requires_typing=_requires_typing)
-        for im in _imports:
-            p_type.imports.add(Util.get_clean_ns(input=im, ltrim=True))
-        return p_type
+        if Util.TYPE_RULES is None:
+            Util.TYPE_RULES = TypeRules()
+        try:
+            return Util.TYPE_RULES.get_python_type(in_type)
+        except Exception as e:
+            logger.error(e, exc_info=True)
+            raise e
 
     @AcceptedTypes((str, Path), ftype=DecFuncEnum.METHOD_STATIC)
     @staticmethod

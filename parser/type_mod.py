@@ -358,6 +358,7 @@ class RuleSeqLikePair(ITypeRule):
     def __init__(self, rules: ITypeRules) -> None:
         self._rules = rules
         self._seq_prim = self._rules.get_rule_instance(RuleSeqLikePrimative)
+        # https://regex101.com/r/yd32Z6/1
         self._rx = re.compile(r"([a-zA-Z]+)<[ ]*([a-zA-Z0-9._]+[ ]*<.*>)[ ]*>")
         self._match: Union[Match[str], None] = False
         self._wrapper_type: PythonType = None
