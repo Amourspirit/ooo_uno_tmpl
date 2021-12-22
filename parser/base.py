@@ -77,6 +77,15 @@ TYPE_MAP = {
     'T': 'object',
     'U': 'object'
 }
+TYPE_MAP_EX = {
+    "com.sun.star.beans.Pair": {
+        "replace": "typing.Tuple[{0}, {1}]",
+        "regex": r".*<[ ]*([a-zA-Z]+),[ ]*([a-zA-Z]+)",
+        "is_typing": True,
+        "is_wrapper": False,
+        "is_py_type": True
+    }
+}
 # region image process const
 IMG_CACHE: 'ImageCache' = None
 RESPONSE_IMG: 'ResponseImg' = None
@@ -1167,6 +1176,30 @@ class Util:
         """
         if not uno_type:
             return ''
+        def ex_type(in_parts: List[str]) -> Union[dict, None]:
+            start = in_parts[0].rstrip()
+            if not start in TYPE_MAP_EX:
+                return None
+            params: dict = TYPE_MAP_EX[start]
+            _results = {
+                "is_typing": params.get("is_typing", False),
+                "is_py_type": params.get("is_py_type", True)
+            }
+            full = '<'.join(in_parts)
+            _regx = params.get('regex', None)
+            _replace: str = params['replace']
+            if _regx:
+                m = re.match(_regx, full)
+                if m:
+                    groups = m.groups()
+                    replacements = []
+                    for t in groups:
+                        replacements.append(TYPE_MAP.get(t, 'object'))
+                    _replace = _replace.format(*replacements)
+            _results['type'] = _replace
+            _results['long_type'] = params.get('long_type', _replace)
+            return _results
+
         def do_cb(_cb:callable, data):
             if not _cb:
                 return
@@ -1181,12 +1214,28 @@ class Util:
             "is_wrapper": False,
             "is_typing": False,
             "returns": None,
-            "wdata": {}
+            "wdata": {
+                "is_wrapper": False,
+                "is_py_type": False,
+                "wdata": {
+                    "prefix": "",
+                    "wrapper": "",
+                    "py_type_inner": False
+                }
+            }
         }
-        _u_type = uno_type.strip().lstrip(':').lstrip().replace("::", ".")
+        _u_type = uno_type.strip().lstrip().replace("::", ".").lstrip('.')
         # check for # sequence< string >
         parts = _u_type.split(sep='<', maxsplit=1)
         if len(parts) > 1:
+            ex_info = ex_type(parts)
+            if ex_info:
+                cb_data['is_wrapper'] = ex_info.get('is_wrapper', False)
+                cb_data['is_typing'] = ex_info.get('is_typing', False)
+                cb_data['long_type'] = ex_info['long_type']
+                cb_data['is_py_type'] = ex_info['is_py_type']
+                do_cb(cb, cb_data)
+                return ex_info['type']
             is_pytype = True
             cb_data['is_wrapper'] = True
             clean_wrapper = Util.get_last_part(Util.get_clean_name(parts[0]))
@@ -1260,7 +1309,7 @@ class Util:
             PythonType: class that contains type, requires typing and imporst info.
         """
         cb_data = None
-        _requires_typing = False
+        _requires_typing = None
         _imports = []
 
         def cb(data: dict):
@@ -1298,6 +1347,8 @@ class Util:
                 _imports.append(cb_data['long_type'])
                 logger.debug(
                     "Util.get_python_type() added import %s", cb_data['long_type'])
+        if _requires_typing is None:
+            _requires_typing = cb_data.get("is_typing", False)
         p_type = PythonType(type=_result, requires_typing=_requires_typing)
         for im in _imports:
             p_type.imports.add(Util.get_clean_ns(input=im, ltrim=True))

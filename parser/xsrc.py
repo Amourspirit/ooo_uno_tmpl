@@ -1297,7 +1297,8 @@ class InterfaceWriter(base.WriteBase):
 def _main():
    
     # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1graphic_1_1XSvgParser.html'
-    url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1office_1_1XAnnotation.html'
+    # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1office_1_1XAnnotation.html'
+    url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XItemList.html'
     sys.argv.extend(['--log-file', 'debug.log', '-v', '-n', '-u', url])
     main()
 
@@ -1411,29 +1412,7 @@ def main():
         print('')
     w.write()
 
-def _memain():
-    global logger
-    if logger is None:
-        log_args = {
-            'log_file': 'debug.log',
-            'level': logging.DEBUG
-        }
-        _set_loggers(get_logger(logger_name=Path(__file__).stem, **log_args))
-    # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XButton.html'
-    # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XDialogProvider2.html'
-    # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XGraphics.html'
-    # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1accessibility_1_1XAccessibleContext3.html'
-    # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XVclContainerPeer.html'  # deprecated
-    # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1animations_1_1XAnimate.html' # Properties
-    url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XToolkitExperimental.html' # method since
-    # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XToolkit2.html' # map above and below
-    # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XMessageBoxFactory.html'
-    p = ParserInterface(url=url)
-    # proto = a_data.get_proto_block(si_id=si.id)
-    info = p.get_info()
-    print(info)
-    print(p.get_formated_data())
-    # print(data)
+
 
 if __name__ == '__main__':
     _main()
