@@ -2187,10 +2187,11 @@ class AreaFilter:
 
 class ApiInherited(BlockObj):
 
-    def __init__(self, soup: SoupObj) -> None:
+    def __init__(self, soup: SoupObj,**kwargs) -> None:
         super().__init__(soup)
         self._api_dy_content: ApiDyContent = ApiDyContent(self.soup)
         self._data = None
+        self._raise_errors = bool(kwargs.get('raise_error', True))
 
     def _log_missing(self, for_str: Optional[str] = None, raise_error: bool = False):
         if for_str:
@@ -2210,7 +2211,9 @@ class ApiInherited(BlockObj):
         ai = ApiImage(self._api_dy_content)
         image_url = ai.get_obj()
         if not image_url:
-            self._log_missing(for_str='image url', raise_error=True)
+            self._log_missing(for_str='image url',
+                              raise_error=self._raise_errors)
+            return self._data
         is_inherited = ImageInfo.is_inherit_img(url=image_url)
         ab: ApiAreaBlock = ApiAreaBlock(self._api_dy_content)
         api_area: ApiArea = ApiArea(ab)

@@ -54,8 +54,9 @@ class Parser(base.ParserBase):
         info = self.get_info()
         items = self._get_data_items()
         # set to list for json
-        info["auto_imports"] = self._get_auto_imports(ns=info['namespace'])
         info["imports"] = []
+        info["auto_imports"] = self._get_auto_imports(ns=info['namespace'])
+        info["from_imports"] = [] # placeholder. picked up in writer
         info['items'] = items
         return info
 
@@ -81,15 +82,19 @@ class Parser(base.ParserBase):
                 "fullname": "full name such as com.sun.star.awt.Command"
                 "desc": "(List[str]), description of constant",
                 "url": "Url to LibreOffice of constant",
-                "namespace: "namespace"
+                "namespace": "namespace",
+                "extends": "(List[str]), inherits"
             }
         """
         if not  self._data_info is None:
             return self._data_info
         try:
-            if not self._url:
-                raise ValueError('URL is not set')
-            soup = BeautifulSoup(self.get_raw_html(), 'lxml')
+            soup_obj = base.SoupObj(self.url, allow_cache=True)
+            soup =soup_obj.soup
+            inherits = base.ApiInherited(soup=soup_obj, raise_error=False)
+            ex = []
+            for el in inherits.get_obj():
+                ex.append(el.fullns)
             full_name = self._get_full_name(soup=soup)
             name = self._get_name(soup=soup)
             desc = self._get_desc(soup=soup)
@@ -99,7 +104,8 @@ class Parser(base.ParserBase):
                 "fullname": full_name,
                 "desc": desc,
                 "url": self.url,
-                "namespace": ns.namespace_str
+                "namespace": ns.namespace_str,
+                "extends": ex
             }
             self._data_info = info
             return self._data_info
@@ -264,7 +270,8 @@ class StructWriter(base.WriteBase):
         "write_file": 0,
         "write_json": 0,
         "auto_import": 0,
-        "write_template_long": 0
+        "write_template_long": 0,
+        "_dynamic_struct": 0
         },
         types=[bool],
         ftype=DecFuncEnum.METHOD)
@@ -278,6 +285,7 @@ class StructWriter(base.WriteBase):
         self._write_file = kwargs.get('write_template', False)
         self._print_json = kwargs.get('print_json', True)
         self._write_json = kwargs.get('write_json', False)
+        self._dynamic_struct = kwargs.get('dynamic_struct', False)
         self._write_template_long: bool = kwargs.get(
             'write_template_long', False)
         self._indent_amt = 4
@@ -289,6 +297,8 @@ class StructWriter(base.WriteBase):
         self._p_fullname = None
         self._p_url = None
         self._p_desc = None
+        self._p_extends: List[str] = None
+        self._p_imports: Set[str] = set()
         
         self._path_dir = Path(os.path.dirname(__file__))
         t_file = 'struct'
@@ -338,6 +348,7 @@ class StructWriter(base.WriteBase):
         if not self._json_str is None:
             return self._json_str
         p_dict = self._parser.get_dict_data()
+        p_dict['from_imports'] = self._get_from_imports()
         json_dict = {
             "id": JSON_ID,
             "version": __version__,
@@ -348,7 +359,8 @@ class StructWriter(base.WriteBase):
             "parser_args": self._parser.get_parser_args(),
             "writer_args": {
                 "sort": self._sort,
-                "auto_import": self._auto_import
+                "auto_import": self._auto_import,
+                "dynamic_struct": self._dynamic_struct
             },
             "data": p_dict
         }
@@ -356,9 +368,26 @@ class StructWriter(base.WriteBase):
         self._json_str = str_jsn
         return self._json_str
 
+    # region get Imports
+    def _get_from_imports(self) -> List[List[str]]:
+        key = '_get_from_imports'
+        if key in self._cache:
+            return self._cache[key]
+        lst = []
+        for ns in self._p_imports:
+            f, n = base.Util.get_rel_import(
+                i_str=ns, ns=self._p_namespace
+            )
+            lst.append([f, n])
+        self._cache[key] = lst
+        return self._cache[key]
+    # endregion get Imports
+
     def _set_template_data(self):
         if self._write_template_long is False:
             return
+        self._template = self._template.replace(
+            '{dynamic_struct}', str(self._dynamic_struct))
         self._template = self._template.replace('{sort}', str(self._sort))
         self._template = self._template.replace('{name}', self._p_name)
         self._template = self._template.replace('{ns}', self._p_namespace)
@@ -369,6 +398,12 @@ class StructWriter(base.WriteBase):
         indented = textwrap.indent(self._p_data, indent)
         self._template = self._template.replace('{data}', indented)
         self._template = self._template.replace('{auto_import}', str(self._auto_imports()))
+        self._template = self._template.replace(
+            '{from_imports}',
+            base.Util.get_formated_dict_list_str(self._get_from_imports())
+        )
+        self._template = self._template.replace(
+            '{inherits}', base.Util.get_string_list(lines=self._p_extends))
 
     def _write_to_file(self):
         with open(self._file_full_path, 'w') as f:
@@ -384,6 +419,8 @@ class StructWriter(base.WriteBase):
         logger.info("Created file: %s", jsn_p)
 
     def _set_info(self):
+        def get_extends(lst: List[str]) -> List[str]:
+            return [base.Util.get_last_part(s) for s in lst]
         data = self._parser.get_info()
         self._p_name = data['name']
         self._p_desc = data['desc']
@@ -391,6 +428,8 @@ class StructWriter(base.WriteBase):
         self._p_fullname = data['fullname']
         self._p_data = self._parser.get_formated_data()
         self._p_namespace = data['namespace']
+        self._p_imports.update(data['extends'])
+        self._p_extends = get_extends(data['extends'])
         if self._write_file or self._write_json:
             self._file_full_path = self._get_uno_obj_path()
         
@@ -435,9 +474,11 @@ class StructWriter(base.WriteBase):
         
 def _main():
     # url = 'https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1beans_1_1Ambiguous_3_01T_01_4.html'
+    # url = 'https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1beans_1_1GetPropertyTolerantResult.html'
     url = 'https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1beans_1_1GetDirectPropertyTolerantResult.html'
     sys.argv.extend(['--log-file', 'debug.log', '-v', '-n', '-u', url])
     main()
+
 def main():
     global logger
 
@@ -467,11 +508,11 @@ def main():
         dest='sort',
         default=True)
     parser.add_argument(
-        '-d', '--no-dual',
-        help='Do NOT replace :: with .',
-        action='store_false',
-        dest='dual_colon',
-        default=True)
+        '-d', '--dynamic_struct',
+        help='Template will generate dynamic struct content',
+        action='store_true',
+        dest='dynamic_struct',
+        default=False)
     parser.add_argument(
         '-c', '--clipboard',
         help='Copy to clipboard',
@@ -546,7 +587,6 @@ def main():
     p = Parser(
         url=args.url,
         sort=args.sort,
-        replace_dual_colon=args.dual_colon,
         cache=args.cache
         )
     if args.print_template is False and args.print_json is False:
@@ -559,9 +599,10 @@ def main():
         auto_import=args.auto_import,
         write_template=args.write_template,
         write_json=args.write_json,
-        write_template_long=args.long_format
+        write_template_long=args.long_format,
+        dynamic_struct=args.dynamic_struct
         )
     w.write()
     
 if __name__ == '__main__':
-    _main()
+    main()

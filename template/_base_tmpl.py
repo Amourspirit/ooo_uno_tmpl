@@ -61,7 +61,18 @@ class BaseTpml(Template):
         self._log_to_logger(logging.ERROR, msg, *args, **kwargs)
     # endregion Logger
 
-    """Base class for all templtes"""
+    def camel_to_snake(self, input: str) -> str:
+        """
+        Converts Camel case to snake clase
+
+        Args:
+            name (str): Camel name
+
+        Returns:
+            str: snake case
+        """
+        _input = re.sub('(.)([A-Z][a-z]+)', r'\1_\2', input)
+        return re.sub('([a-z0-9])([A-Z])', r'\1_\2', _input).lower()
     
     def get_clean_name(self, input: str) -> str:
         """

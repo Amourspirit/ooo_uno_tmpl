@@ -75,7 +75,13 @@ class BaseStruct(BaseTpml):
         set_data('from_imports')
         sort = bool(json_data['parser_args']['sort'])
         self.attribs = self._get_attribs(json_data=json_data, sort=sort)
-
+        ver_json = Version.parse(json_data.get('version'))
+        ver_0_1_3 = Version(0, 1, 3)
+        if ver_json > ver_0_1_3:
+            _inherits = self.convert_lst_last(data.get('extends', []))
+            setattr(self, 'inherits', _inherits)
+            self.dynamic_struct = bool(
+                json_data['writer_args'].get('dynamic_struct', False))
 
     def _get_attribs(self, json_data: dict, sort: bool) -> dict:
         items: List[dict] = json_data['data']['items']
