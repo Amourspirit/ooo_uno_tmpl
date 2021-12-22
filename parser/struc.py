@@ -18,7 +18,7 @@ from pathlib import Path
 import textwrap
 import xerox # requires xclip - sudo apt-get install xclip
 from logger.log_handle import get_logger
-
+from type_mod import PythonType
 from parser import __version__, JSON_ID
 
 logger = None
@@ -211,32 +211,11 @@ class Parser(base.ParserBase):
             return lines
 
         def get_py_type(in_type: str) -> str:
-            cb_data = None
-            def cb(data:dict):
-                nonlocal cb_data
-                cb_data = data
-
-            n_type = base.TYPE_MAP.get(in_type, None)
-            if n_type:
-                return n_type
-            n_type = base.Util.get_py_type(uno_type=in_type, cb=cb)
-            auto_import = False
-            is_wrapper = cb_data['is_wrapper']
-            is_py = cb_data['is_py_type']
-            _result = n_type
-            if is_wrapper:
-                # wrapper such as typings.List[XInterface]
-                wdata: dict = cb_data['wdata']
-                if not wdata['py_type_inner']:
-                    auto_import = True
-            else:
-                if is_py is False:
-                    auto_import = True
-            if auto_import:
-                self._auto_imports.add(cb_data['long_type'])
-                logger.debug("Parser: Adding autoimport %s",
-                             cb_data['long_type'])
-            return _result
+            
+            p_type: PythonType = base.Util.get_python_type(in_type=in_type)
+            for im in p_type.imports:
+                self._auto_imports.add(im)
+            return p_type.type
 
         for itm in memitetms:
             # text in format of com::sun::star::awt::AdjustmentType Type
@@ -455,7 +434,8 @@ class StructWriter(base.WriteBase):
         
         
 def _main():
-    url = 'https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1beans_1_1Ambiguous_3_01T_01_4.html'
+    # url = 'https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1beans_1_1Ambiguous_3_01T_01_4.html'
+    url = 'https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1beans_1_1GetDirectPropertyTolerantResult.html'
     sys.argv.extend(['--log-file', 'debug.log', '-v', '-n', '-u', url])
     main()
 def main():
@@ -584,4 +564,4 @@ def main():
     w.write()
     
 if __name__ == '__main__':
-    main()
+    _main()
