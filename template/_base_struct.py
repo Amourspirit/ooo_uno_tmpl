@@ -78,6 +78,7 @@ class BaseStruct(BaseTpml):
         ver_json = Version.parse(json_data.get('version'))
         ver_0_1_3 = Version(0, 1, 3)
         if ver_json > ver_0_1_3:
+            # self.requires_typing = data.get('requires_typing', False)
             _inherits = self.convert_lst_last(data.get('extends', []))
             setattr(self, 'inherits', _inherits)
             self.dynamic_struct = bool(
