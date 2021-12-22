@@ -3,7 +3,7 @@
 Handles conversion of LibreOffice types to Python Types
 """
 import re
-from abc import ABC, abstractmethod, abstractproperty
+from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
 from typing import List, Match, Set, Union
 
