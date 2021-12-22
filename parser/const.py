@@ -206,7 +206,7 @@ class Parser(base.ParserBase):
             for itm in data:
                 d_itm = {
                     "name": itm.name,
-                    "type": base.Util.get_py_type(itm.datatype),
+                    "type": base.Util.get_python_type(itm.datatype).type,
                     "value": itm.value,
                     "lines": itm.lines
                 }
