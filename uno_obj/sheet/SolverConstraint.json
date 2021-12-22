@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 18:24:39+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 21:23:30+00:00",
   "type": "struct",
   "name": "SolverConstraint",
   "namespace": "com.sun.star.sheet",
@@ -10,7 +10,8 @@
   },
   "writer_args": {
     "sort": true,
-    "auto_import": true
+    "auto_import": true,
+    "dynamic_struct": false
   },
   "data": {
     "name": "SolverConstraint",
@@ -20,21 +21,19 @@
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1sheet_1_1SolverConstraint.html",
     "namespace": "com.sun.star.sheet",
+    "extends": [],
+    "imports": [],
     "auto_imports": [
       [
         "..table.cell_address",
         "CellAddress"
-      ],
-      [
-        ".solver_constraint_operator",
-        "SolverConstraintOperator"
       ]
     ],
-    "imports": [],
+    "from_imports": [],
     "items": [
       {
         "name": "Left",
-        "type": "'CellAddress'",
+        "type": "CellAddress",
         "orig_type": "com.sun.star.table.CellAddress",
         "lines": [
           "The address of the cell that is constrained."
@@ -42,7 +41,7 @@
       },
       {
         "name": "Operator",
-        "type": "'SolverConstraintOperator'",
+        "type": "object",
         "orig_type": "SolverConstraintOperator",
         "lines": [
           "The type of the constraint."

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 18:24:06+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 21:22:58+00:00",
   "type": "struct",
   "name": "PropertyStateChangeEvent",
   "namespace": "com.sun.star.beans",
@@ -10,7 +10,8 @@
   },
   "writer_args": {
     "sort": true,
-    "auto_import": true
+    "auto_import": true,
+    "dynamic_struct": false
   },
   "data": {
     "name": "PropertyStateChangeEvent",
@@ -26,17 +27,26 @@
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1beans_1_1PropertyStateChangeEvent.html",
     "namespace": "com.sun.star.beans",
+    "extends": [
+      "com.sun.star.lang.EventObject"
+    ],
+    "imports": [],
     "auto_imports": [
       [
         ".property_state",
         "PropertyState"
       ]
     ],
-    "imports": [],
+    "from_imports": [
+      [
+        "..lang.event_object",
+        "EventObject"
+      ]
+    ],
     "items": [
       {
         "name": "NewValue",
-        "type": "'PropertyState'",
+        "type": "PropertyState",
         "orig_type": "com.sun.star.beans.PropertyState",
         "lines": [
           "contains the new value of the property."
@@ -44,7 +54,7 @@
       },
       {
         "name": "OldValue",
-        "type": "'PropertyState'",
+        "type": "PropertyState",
         "orig_type": "com.sun.star.beans.PropertyState",
         "lines": [
           "contains the old value of the property."

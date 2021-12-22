@@ -32,11 +32,11 @@ from kwhelp import rules
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Optional, Set, Tuple, Union
 from datetime import datetime, timezone
-from type_mod import TypeRules, PythonType
 
 _app_root = os.environ.get('project_root', str(Path(__file__).parent.parent))
 if not _app_root in sys.path:
     sys.path.insert(0, _app_root)
+from parser.type_mod import TypeRules, PythonType
 from config import read_config, AppConfig, read_config_default
 # print(sys.path)
 # this is for command line

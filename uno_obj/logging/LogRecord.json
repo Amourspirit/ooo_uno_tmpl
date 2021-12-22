@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 18:24:54+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 21:23:05+00:00",
   "type": "struct",
   "name": "LogRecord",
   "namespace": "com.sun.star.logging",
@@ -10,7 +10,8 @@
   },
   "writer_args": {
     "sort": true,
-    "auto_import": true
+    "auto_import": true,
+    "dynamic_struct": false
   },
   "data": {
     "name": "LogRecord",
@@ -24,17 +25,15 @@
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1logging_1_1LogRecord.html",
     "namespace": "com.sun.star.logging",
+    "extends": [],
+    "imports": [],
     "auto_imports": [
       [
-        "......com.sun.star.util.date_time",
+        "..util.date_time",
         "DateTime"
-      ],
-      [
-        ".hyper",
-        "hyper"
       ]
     ],
-    "imports": [],
+    "from_imports": [],
     "items": [
       {
         "name": "Level",
@@ -46,7 +45,7 @@
       },
       {
         "name": "LogTime",
-        "type": "'DateTime'",
+        "type": "DateTime",
         "orig_type": ".com.sun.star.util.DateTime",
         "lines": [
           "specifies the time at which the event was logged"
@@ -70,7 +69,7 @@
       },
       {
         "name": "SequenceNumber",
-        "type": "'hyper'",
+        "type": "object",
         "orig_type": "hyper",
         "lines": [
           "specifies the number of the log event.",

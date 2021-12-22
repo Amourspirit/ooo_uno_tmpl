@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 18:24:52+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 21:23:40+00:00",
   "type": "struct",
   "name": "DocumentEvent",
   "namespace": "com.sun.star.document",
@@ -10,7 +10,8 @@
   },
   "writer_args": {
     "sort": true,
-    "auto_import": true
+    "auto_import": true,
+    "dynamic_struct": false
   },
   "data": {
     "name": "DocumentEvent",
@@ -28,13 +29,22 @@
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1document_1_1DocumentEvent.html",
     "namespace": "com.sun.star.document",
+    "extends": [
+      "com.sun.star.lang.EventObject"
+    ],
+    "imports": [],
     "auto_imports": [
       [
-        "......com.sun.star.frame.x_controller2",
+        "..frame.x_controller2",
         "XController2"
       ]
     ],
-    "imports": [],
+    "from_imports": [
+      [
+        "..lang.event_object",
+        "EventObject"
+      ]
+    ],
     "items": [
       {
         "name": "EventName",
@@ -56,7 +66,7 @@
       },
       {
         "name": "ViewController",
-        "type": "'XController2'",
+        "type": "XController2",
         "orig_type": ".com.sun.star.frame.XController2",
         "lines": [
           "denotes the view respectively controller which the event applies to.",

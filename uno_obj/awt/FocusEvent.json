@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 18:23:33+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 21:21:02+00:00",
   "type": "struct",
   "name": "FocusEvent",
   "namespace": "com.sun.star.awt",
@@ -10,7 +10,8 @@
   },
   "writer_args": {
     "sort": true,
-    "auto_import": true
+    "auto_import": true,
+    "dynamic_struct": false
   },
   "data": {
     "name": "FocusEvent",
@@ -22,13 +23,22 @@
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1awt_1_1FocusEvent.html",
     "namespace": "com.sun.star.awt",
+    "extends": [
+      "com.sun.star.lang.EventObject"
+    ],
+    "imports": [],
     "auto_imports": [
       [
         "..uno.x_interface",
         "XInterface"
       ]
     ],
-    "imports": [],
+    "from_imports": [
+      [
+        "..lang.event_object",
+        "EventObject"
+      ]
+    ],
     "items": [
       {
         "name": "FocusFlags",
@@ -40,7 +50,7 @@
       },
       {
         "name": "NextFocus",
-        "type": "'XInterface'",
+        "type": "XInterface",
         "orig_type": "com.sun.star.uno.XInterface",
         "lines": [
           "contains the window which gets the focus on a lose focus event."

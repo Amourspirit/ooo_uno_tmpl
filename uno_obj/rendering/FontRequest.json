@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 18:23:26+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 21:21:27+00:00",
   "type": "struct",
   "name": "FontRequest",
   "namespace": "com.sun.star.rendering",
@@ -10,7 +10,8 @@
   },
   "writer_args": {
     "sort": true,
-    "auto_import": true
+    "auto_import": true,
+    "dynamic_struct": false
   },
   "data": {
     "name": "FontRequest",
@@ -28,17 +29,15 @@
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1rendering_1_1FontRequest.html",
     "namespace": "com.sun.star.rendering",
+    "extends": [],
+    "imports": [],
     "auto_imports": [
       [
-        "......com.sun.star.lang.locale",
+        "..lang.locale",
         "Locale"
-      ],
-      [
-        ".font_info",
-        "FontInfo"
       ]
     ],
-    "imports": [],
+    "from_imports": [],
     "items": [
       {
         "name": "CellSize",
@@ -54,7 +53,7 @@
       },
       {
         "name": "FontDescription",
-        "type": "'FontInfo'",
+        "type": "object",
         "orig_type": "FontInfo",
         "lines": [
           "The description of the font.",
@@ -63,7 +62,7 @@
       },
       {
         "name": "Locale",
-        "type": "'Locale'",
+        "type": "Locale",
         "orig_type": ".com.sun.star.lang.Locale",
         "lines": [
           "The locale this font should be able to render.",

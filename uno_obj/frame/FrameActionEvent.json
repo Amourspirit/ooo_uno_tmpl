@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 18:24:49+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 21:22:31+00:00",
   "type": "struct",
   "name": "FrameActionEvent",
   "namespace": "com.sun.star.frame",
@@ -10,7 +10,8 @@
   },
   "writer_args": {
     "sort": true,
-    "auto_import": true
+    "auto_import": true,
+    "dynamic_struct": false
   },
   "data": {
     "name": "FrameActionEvent",
@@ -20,21 +21,21 @@
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1frame_1_1FrameActionEvent.html",
     "namespace": "com.sun.star.frame",
-    "auto_imports": [
-      [
-        ".frame_action",
-        "FrameAction"
-      ],
-      [
-        ".x_frame",
-        "XFrame"
-      ]
+    "extends": [
+      "com.sun.star.lang.EventObject"
     ],
     "imports": [],
+    "auto_imports": [],
+    "from_imports": [
+      [
+        "..lang.event_object",
+        "EventObject"
+      ]
+    ],
     "items": [
       {
         "name": "Action",
-        "type": "'FrameAction'",
+        "type": "object",
         "orig_type": "FrameAction",
         "lines": [
           "specifies the concrete event"
@@ -42,7 +43,7 @@
       },
       {
         "name": "Frame",
-        "type": "'XFrame'",
+        "type": "object",
         "orig_type": "XFrame",
         "lines": [
           "contains the frame in which the event occurred"

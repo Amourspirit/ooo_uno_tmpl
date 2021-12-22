@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 18:23:34+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 21:21:03+00:00",
   "type": "struct",
   "name": "ItemListEvent",
   "namespace": "com.sun.star.awt",
@@ -10,7 +10,8 @@
   },
   "writer_args": {
     "sort": true,
-    "auto_import": true
+    "auto_import": true,
+    "dynamic_struct": false
   },
   "data": {
     "name": "ItemListEvent",
@@ -20,12 +21,21 @@
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1awt_1_1ItemListEvent.html",
     "namespace": "com.sun.star.awt",
-    "auto_imports": [],
+    "extends": [
+      "com.sun.star.lang.EventObject"
+    ],
     "imports": [],
+    "auto_imports": [],
+    "from_imports": [
+      [
+        "..lang.event_object",
+        "EventObject"
+      ]
+    ],
     "items": [
       {
         "name": "ItemImageURL",
-        "type": "typing.List[str]",
+        "type": "object",
         "orig_type": ".com.sun.star.beans.Optional< string >",
         "lines": [
           "the URL of the image of the item",
@@ -43,7 +53,7 @@
       },
       {
         "name": "ItemText",
-        "type": "typing.List[str]",
+        "type": "object",
         "orig_type": ".com.sun.star.beans.Optional< string >",
         "lines": [
           "the text of the item.",

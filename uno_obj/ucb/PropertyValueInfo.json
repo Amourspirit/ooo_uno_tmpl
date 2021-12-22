@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 18:23:54+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 21:21:46+00:00",
   "type": "struct",
   "name": "PropertyValueInfo",
   "namespace": "com.sun.star.ucb",
@@ -10,7 +10,8 @@
   },
   "writer_args": {
     "sort": true,
-    "auto_import": true
+    "auto_import": true,
+    "dynamic_struct": false
   },
   "data": {
     "name": "PropertyValueInfo",
@@ -20,17 +21,26 @@
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1ucb_1_1PropertyValueInfo.html",
     "namespace": "com.sun.star.ucb",
+    "extends": [
+      "com.sun.star.beans.PropertyValue"
+    ],
+    "imports": [],
     "auto_imports": [
       [
         ".property_value_state",
         "PropertyValueState"
       ]
     ],
-    "imports": [],
+    "from_imports": [
+      [
+        "..beans.property_value",
+        "PropertyValue"
+      ]
+    ],
     "items": [
       {
         "name": "ValueState",
-        "type": "'PropertyValueState'",
+        "type": "PropertyValueState",
         "orig_type": "com.sun.star.ucb.PropertyValueState",
         "lines": [
           "the state of the property value."
