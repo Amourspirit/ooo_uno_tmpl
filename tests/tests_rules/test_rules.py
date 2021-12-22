@@ -28,7 +28,7 @@ def test_rule_primative(test_log):
         assert p_type.requires_typing == False
 
 
-def test_rule_primative_sequence(test_log):
+def test_rule_primative_seq(test_log):
     tester = tm.TypeRules(logger=test_log)
     seq = 'sequence< long >'
     p_type = tester.get_python_type(seq)
@@ -38,7 +38,11 @@ def test_rule_primative_sequence(test_log):
     p_type = tester.get_python_type(seq)
     assert p_type.type == 'typing.List[str]'
     assert p_type.requires_typing
-    rule = tm.RuleSequencePrimative()
+    seq = 'aDXArray<string>'
+    p_type = tester.get_python_type(seq)
+    assert p_type.type == 'typing.List[str]'
+    assert p_type.requires_typing
+    rule = tm.RuleSeqLikePrimative(tester)
     seq = 'sequence<string>'
     assert rule.get_is_match(seq) == True
     seq = 'sequence< Pair >'
@@ -46,22 +50,4 @@ def test_rule_primative_sequence(test_log):
     seq = 'sequence< com.sun.star.beans.Pair< string, string > >'
     assert rule.get_is_match(seq) == False
 
-
-def test_rule_single_sequence(test_log):
-    seq = 'sequence< .com.sun.star.beans.XThing >'
-    rule = tm.RuleSequenceSingle()
-    assert rule.get_is_match(seq) == True
-    ptype = rule.get_python_type(seq)
-    assert ptype.type == "'typing.List[XThing]'"
-    assert ptype.requires_typing
-    assert ptype.imports == set(['com.sun.star.beans.XThing'])
-    seq = 'sequence< XThing >'
-    assert rule.get_is_match(seq) == True
-    ptype = rule.get_python_type(seq)
-    assert ptype.type == "'typing.List[XThing]'"
-    assert ptype.requires_typing
-    assert ptype.imports == set(['XThing'])
-    
-    seq = 'sequence< com.sun.star.beans.Pair< string, string > >'
-    assert rule.get_is_match(seq) == False
     

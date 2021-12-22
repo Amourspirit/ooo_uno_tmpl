@@ -6,10 +6,31 @@ import re
 from abc import ABC, abstractmethod, abstractproperty
 from dataclasses import dataclass, field
 import logging
-from typing import List, Set, Union
+from typing import List, Match, Set, Union
 from logger.log_handle import get_logger
 import hashlib
 
+TYPE_MAP_PRIMITIVE = {
+    "any": "object",
+    "short": "int",
+    "long": "int",
+    "float": "float",
+    "double": "float",
+    "string": "str",
+    "char": "str",
+    "boolean": "bool",
+    "void": "None"
+}
+
+TYPE_MAP_KNOWN = {
+    "sequence": "list",
+    "aDXArray": "list"
+}
+
+TYPE_MAP_PY_WRAPPER = {
+    "list": "typing.List",
+    "tuple": "typing.Tuple"
+}
 @dataclass
 class PythonType:
     type: str = 'object'
@@ -17,6 +38,9 @@ class PythonType:
     imports: Set[str] = field(default_factory=set)
 
 class ITypeRule(ABC):
+    @abstractmethod
+    def __init__(self, rules: 'ITypeRules') -> None:
+        """Constructor"""
     @abstractmethod
     def get_is_match(self, in_type:str) -> bool:
         """
@@ -35,7 +59,18 @@ class ITypeRule(ABC):
             in_type (str): LibreOffice Api type such as Long.
         """
 
-class TypeRules:
+
+class ITypeRules(ABC):
+    @abstractmethod
+    def get_python_type(self, in_type: str) -> PythonType:
+        """gets Python Type info"""
+
+    @abstractmethod
+    def get_rule_instance(self, rule: ITypeRule) -> ITypeRule:
+        """Gets a rule instance"""
+
+
+class TypeRules(ITypeRules):
     def __init__(self, **kwargs) -> None:
         self._rules: List[ITypeRule] = []
         self._log: logging.Logger = kwargs.get('logger', None)
@@ -74,8 +109,8 @@ class TypeRules:
 
     def _register_known_rules(self):
         self._reg_rule(rule=RulePrimative)
-        self._reg_rule(rule=RuleSequencePrimative)
-        self._reg_rule(RuleSequenceSingle)
+        self._reg_rule(rule=RuleKnownType)
+        self._reg_rule(rule=RuleSeqLikePrimative)
 
     def _get_rule(self, in_type:str) -> Union[ITypeRule, None]:
         
@@ -85,7 +120,7 @@ class TypeRules:
             if key in self._cache:
                 inst = self._cache[key]
             else:
-                inst: ITypeRule = rule()
+                inst: ITypeRule = rule(self)
                 self._cache[key] = inst
             if inst.get_is_match(in_type):
                 match_inst = inst
@@ -98,88 +133,109 @@ class TypeRules:
             return match.get_python_type(in_type)
         return PythonType()
     
+    def get_rule_instance(self, rule: ITypeRule) -> ITypeRule:
+        if not issubclass(rule, ITypeRule):
+            msg = "TypeRules.get_rule_instance(), rule arg must be child class of ITypeRule"
+            self._log.error(msg)
+            raise TypeError(msg)
+        key = str(id(rule))
+        if key in self._cache:
+                return self._cache[key]
+        else:
+            self._cache[key] = rule(self)
+        return self._cache[key]
+    
 class RulePrimative(ITypeRule):
-    def __init__(self) -> None:
-        self._type_map = {
-            "any": "object",
-            "short": "int",
-            "long": "int",
-            "float": "float",
-            "double": "float",
-            "string": "str",
-            "char": "str",
-            "boolean": "bool",
-            "void": "None"
-        }
+    def __init__(self, rules: ITypeRules) -> None:
+        self._rules =rules
+
     def get_is_match(self, in_type: str) -> bool:
-        return in_type in self._type_map
+        return in_type in TYPE_MAP_PRIMITIVE
     
     def get_python_type(self, in_type: str) -> PythonType:
         return PythonType(
-            type=self._type_map[in_type],
+            type=TYPE_MAP_PRIMITIVE[in_type],
             requires_typing=False
         )
 
-class RuleSequencePrimative(ITypeRule):
-    """Matches single sequence that does have primitive inner type"""
-    def __init__(self) -> None:
-        self._prim = RulePrimative()
-        self._rx = re.compile(r"sequence<[ ]*([a-zA-Z]+)")
+class RuleKnownType(ITypeRule):
+    """Rule for Known uno types sucha s sequence"""
+
+    def __init__(self, rules: ITypeRules) -> None:
+        self._rules = rules
+    
+    def get_is_match(self, in_type: str) -> bool:
+        return in_type in TYPE_MAP_KNOWN
+
+    def get_python_type(self, in_type: str) -> PythonType:
+        return PythonType(
+            type = TYPE_MAP_KNOWN[in_type],
+            requires_typing=False
+        )
+
+class RuleSeqLikePrimative(ITypeRule):
+    """Matches single sequence or simalar, such as aDXArray, that does have primitive inner type"""
+
+    def __init__(self, rules: ITypeRules) -> None:
+        self._rules = rules
+        self._prim: RulePrimative = self._rules.get_rule_instance(
+            RulePrimative)
+        self._rx = re.compile(r"([a-zA-Z]+)<[ ]*([a-zA-Z]+)[ ]*>")
+        self._match: Union[Match[str], None] = False
+        self._wrapper_type: PythonType = None
         # match sequence< string >
         # do not match
         # sequence< com.sun.star.beans.Pair< string, string > >
 
-
-    def get_is_match(self, in_type: str) -> bool:
-        parts = in_type.split('<')
-        if len(parts) != 2:
-            return False
-        m = self._rx.match(in_type)
-        if not m:
-            return False
-        prim_str: str = m.groups()[0]
-        return self._prim.get_is_match(prim_str)
-        
-    def get_python_type(self, in_type: str) -> PythonType:
-        m = self._rx.match(in_type)
-        prim_str: str = m.groups()[0]
-        p_type = self._prim.get_python_type(prim_str)
-        t = f"typing.List[{p_type.type}]"
-        return PythonType(
-            type = t,
-            requires_typing=True
-        )
-
-
-class RuleSequenceSingle(ITypeRule):
-    """Matches single sequence that does not have primitive inner type"""
-    def __init__(self) -> None:
-        self._prim = RuleSequencePrimative()
-        self._rx = re.compile(r"sequence<[ ]*([a-zA-Z0-9_.]+)")
-        self._parts: List[str] = None
-        self._match = None
-
-    def get_is_match(self, in_type: str) -> bool:
-        if self._prim.get_is_match(in_type):
-            # let RuleSequencePrimative handle it
-            return False
-        self._parts = in_type.split('<')
-        if len(self._parts) != 2:
-            return False
+    def _set_match(self, in_type: str)-> None:
+        if not self._match is False:
+            return
         self._match = self._rx.match(in_type)
+
+    def _set_wrapper(self, in_type: str):
+        if self._wrapper_type:
+            return self._wrapper_type
+        self._wrapper_type = self._rules.get_python_type(in_type=in_type)
+
+    def _set_default(self):
+        self._match = False
+        self._wrapper_type = None
+
+    def get_is_match(self, in_type: str) -> bool:
+        self._set_default()
+        self._set_match(in_type)
         if not self._match:
             return False
+        known_str: str = self._match.groups()[0]
+        prim_str: str = self._match.groups()[1]
+        is_prim = self._prim.get_is_match(prim_str)
+        if not is_prim:
+            return False
+        # recursivly look for wrapper such as list
+        self._set_wrapper(known_str)
+        if self._wrapper_type.type == "object":
+            return False
+        if self._wrapper_type.requires_typing:
+            return False
         return True
-
+        
     def get_python_type(self, in_type: str) -> PythonType:
-        # inner type is not a python type.
-        s: str = self._match.groups()[0]
-        s = s.lstrip('.')
-        parts = s.split('.')
-        t = f"'typing.List[{parts.pop()}]'"
-        p_type = PythonType(
-            type=t,
+        self._set_match(in_type)
+        if not self._match:
+            msg = f"{self.__class__.__name__} get_python_type() Match Failure."
+            msg += "Did you forget to call get_is_match()?"
+            raise Exception(msg)
+        known_str: str = self._match.groups()[0]
+        prim_str: str = self._match.groups()[1]
+        self._set_wrapper(known_str)
+        p_type = self._prim.get_python_type(prim_str)
+        if self._wrapper_type.type in TYPE_MAP_PY_WRAPPER:
+            w = TYPE_MAP_PY_WRAPPER[self._wrapper_type.type]
+            w += f"[{p_type.type}]"
+        else:
+            w = f"'typing.List[{p_type.type}]'"
+        return PythonType(
+            type = w,
             requires_typing=True
         )
-        p_type.imports.add(s)
-        return p_type
+
