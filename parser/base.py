@@ -5,7 +5,7 @@ Module logger must be set before calling any class or function.
 eg: import base
     base.logger = mylogger
 """
-from dataclasses import dataclass, field
+# region imports
 import os
 import sys
 import re
@@ -21,6 +21,8 @@ import inspect
 import importlib
 import shutil  # to save it locally
 import numpy as np
+from dataclasses import dataclass, field
+from deprecated import deprecated
 from PIL import Image
 from types import ModuleType
 from abc import ABC, abstractmethod
@@ -38,18 +40,19 @@ if not _app_root in sys.path:
     sys.path.insert(0, _app_root)
 from parser.type_mod import TypeRules, PythonType
 from config import read_config, AppConfig, read_config_default
-# print(sys.path)
-# this is for command line
-# sys.path.insert(0, os.path.abspath('..'))
+# endregion imports
 
 logger: logging.Logger  = None
+# region config
 APP_CONFIG: AppConfig = None
 def _load_config():
     global APP_CONFIG
     APP_CONFIG = read_config_default()
     
 _load_config()
+# endregion config
 
+# region regex
 #  \W = [^a-zA-Z0-9_]
 py_name_pattern = re.compile('[\W_]+')
 py_ns_pattern = re.compile(r'[^a-zA-Z0-9\._]+')
@@ -61,6 +64,10 @@ pattern_http = re.compile(r"^https?:\/\/")
 pattern_id = re.compile(r'[a-z0-9]{28,38}')
 pattern_generic_name = re.compile(r"([a-zA-Z0-9_]+)(<[A-Z, ]+>)")
 
+# endregion regex
+
+# region Type Map
+# TYPE_MAP and TYPE_MAP_EX are only used with deprecated method get_py_type
 
 TYPE_MAP = {
     "any": "object",
@@ -87,6 +94,8 @@ TYPE_MAP_EX = {
         "is_py_type": True
     }
 }
+# endregion Type Map
+
 # region image process const
 IMG_CACHE: 'ImageCache' = None
 RESPONSE_IMG: 'ResponseImg' = None
@@ -125,21 +134,6 @@ class Ns:
     def fullns(self):
         return self.namespace + '.' + self.name
 # endregion Data Classes
-
-def str_clean(input: str, **kwargs) -> str:
-    """
-    Cleans and encodes string for template replacemnt
-
-    Keyword Arguments:
-        replace_dual (bool, optional): Replace ``::`` with ``.`` Default ``True``
-    """
-    _replace_dual = bool(kwargs.get('replace_dual', True))
-    result = input
-    if _replace_dual:
-        result = result.replace("::", ".")
-    result = result.replace('\\n', '\\\\\\\\n').replace('\\r', '\\\\\\\\r')
-    result = result.replace('"', '\\"')
-    return result.strip()
 
 # region Cache
 class CacheBase(ABC):
@@ -394,8 +388,6 @@ class ResponseObj(ResponseBase):
 # endregion Response
 
 # region Soup Related:
-
-
 class SoupObj:
     """Wrapper for BeautifulSoup"""
     @RuleCheckAllKw(
@@ -459,7 +451,9 @@ class SoupObj:
     def allow_cache(self, value: bool):
         self._response.allow_cache = value
 
+# endregion Soup Related:
 
+# region Url
 class UrlObj:
     """Properties of url"""
     @RuleCheckAllKw(
@@ -614,6 +608,62 @@ class UrlObj:
             self._ext = '' if len(parts) == 1 else ('.' + parts[1])
         return self._ext
 
+# endregion Url
+
+# region block and api classes
+
+class TagsStrObj:
+    """Class that converts list of tags to string"""
+
+    def __init__(self, tags: Iterable[Tag], **kwargs):
+        """
+        Constructor
+
+        Args:
+            tags (Iterable[Tag]): List of tags
+
+        Keyword Arguments:
+            clean (bool, optional): If ``True`` then data will be cleaned
+                using ``str_clean`` method. Default ``True``
+            empty (bool, optional): If ``True`` empty lines will be added
+                between other lines. Default ``True``
+            indent (int, optional): The number of spaces to indent for 
+                methods that return a string. Default ``0``
+        """
+        self._tags = tags
+        self._clean = bool(kwargs.get('clean', True))
+        self._empty_lines = bool(kwargs.get('empty', True))
+        self._indent_amt = int(kwargs.get('indent', 0))
+
+    def get_lines(self) -> List[str]:
+        """Gets lines for this instance"""
+        lines = []
+        i = 0
+        for ln in self._tags:
+            s = ln.text.strip().replace("::", '.')
+            if not s:
+                continue
+            if self._clean:
+                s = str_clean(input=s)
+            if i > 0 and self._empty_lines:
+                lines.append("")
+            lines.append(s)
+            i += 1
+        return lines
+
+    def get_data(self) -> List[str]:
+        """Gets Lines as string for this instance"""
+        return self.get_lines()
+
+    def get_string_list(self) -> str:
+        # lines = self._encode_list(self.get_lines())
+        # c_lines = self._decode_list(str(lines).split(','))
+        # s = ',\n'.join(c_lines)
+        s = Util.get_string_list(self.get_lines())
+        if self._indent_amt > 0:
+            s = Util.indent(text=s, indent_amt=self._indent_amt)
+        return s
+
 
 class BlockObj(ABC):
     """
@@ -679,6 +729,7 @@ class ApiName(BlockObj):
                 "ApiName.get_obj() Error getting name.", exc_info=True)
             raise e
 
+
 class ApiNamespace(BlockObj):
     """Get the Namespace object for component"""
 
@@ -702,8 +753,408 @@ class ApiNamespace(BlockObj):
                 "ApiNamespace.get_obj() Error getting Namespace.", exc_info=True)
             raise e
 
-# endregion Soup Related:
 
+class ApiPublicMembers(BlockObj):
+    """Gets all blocks with condensed info such as Public Member Functions"""
+    @TypeCheck(SoupObj, ftype=DecFuncEnum.METHOD)
+    def __init__(self, soup: SoupObj):
+        self._soup = soup
+        super().__init__(soup)
+        self._data = False
+
+    def get_obj(self) -> Union[ResultSet, None]:
+        if not self._data is False:
+            return self._data
+        self._data = None
+        soup = self.soup.soup
+        rs = soup.find_all('table', class_='memberdecls')
+        self._data = rs
+        return self._data
+
+
+class ApiSummaryBlock(BlockObj):
+    """
+    Abstract class for getting sumary block form ApiPublicMembers
+    """
+    def __init__(self, block: ApiPublicMembers):
+        self._block: ApiPublicMembers = block
+        super().__init__(self._block.soup)
+        self._data = False
+
+    @abstractmethod
+    def _get_match_name(self) -> str:
+        """
+        Name of a sction to match
+
+        Returns:
+            str: section heading name such as ``interfaces``
+        """
+
+    def get_obj(self) -> Union[Tag, None]:
+        if not self._data is False:
+            return self._data
+        self._data = None
+        rs = self._block.get_obj()
+        if not rs:
+            return self._data
+        match_name = self._get_match_name()
+        for tag in rs:
+            # tag is a table
+            # body > div.contents > table > tbody > tr.heading > td > h2 > a
+            t: Tag = tag
+            a_lnk = t.select_one('tr.heading > td > h2 > a')
+            if a_lnk:
+                name = a_lnk.get('name', None)
+                if name == match_name:
+                    self._data = tag
+                    break
+        if self._data is None and logger.level <= logging.WARNING:
+            logger.warning(
+                "ApiSummaryBlock.get_obj() No summary block found for '%s'", match_name)
+        return self._data
+
+
+class ApiSummaryRows(BlockObj):
+    """Gets the rows that contain short details and desc for a Function/properyty block"""
+
+    def __init__(self, block: ApiSummaryBlock):
+        self._block: ApiSummaryBlock = block
+        super().__init__(self._block.soup)
+        self._data = None
+
+    def get_obj(self) -> List[Tag]:
+        if not self._data is None:
+            return self._data
+        self._data = []
+        tbl_tag: Tag = self._block.get_obj()
+        if not tbl_tag:
+            return self._data
+        rs_rows: ResultSet = tbl_tag.find_all('tr')
+        if not rs_rows:
+            return self._data
+        for row in rs_rows:
+            r: Tag = row
+            _class = r.get('class', [])
+            if len(_class) == 0:
+                continue
+            class_str = _class[0]
+            if class_str == 'inherit_header':
+                # Public Member Functions inherited from ...
+                break
+            if class_str.startswith('memitem:'):
+                self._data.append(row)
+        return self._data
+
+
+class ApiDescDetailSince(BlockObj):
+    """Gets the Since part if it exist of a detailed block section"""
+    def __init__(self, block: BlockObj) -> None:
+        self._block: BlockObj = block
+        super().__init__(self._block.soup)
+        self._data = False
+
+    def get_obj(self) -> Union[str, None]:
+        if not self._data is False:
+            return self._data
+        self._data = None
+        tag: Tag = self._block.get_obj()
+        if not tag:
+            return self._data
+        dl_tag = tag.select_one('dl.section.since')
+        if not dl_tag:
+            return self._data
+        dd_tag = dl_tag.find('dd')
+        if not dd_tag:
+            return self._data
+        self._data = dd_tag.text.strip()
+        return self._data
+class ApiDescDetail(BlockObj):
+    """Gets description of a detail block section"""
+    def __init__(self, block: BlockObj) -> None:
+        self._block: BlockObj = block
+        super().__init__(self._block.soup)
+        self._data = None
+        self._cls = 'memdoc'
+        self._el = 'div'
+
+    def get_obj(self) -> List[str]:
+        if not self._data is None:
+            return self._data
+        self._data = []
+        tag = self._block.get_obj()
+        if not tag:
+            return self._data
+        lines_found: ResultSet = tag.select(f'{self._el}.{self._cls} > p')
+        if not lines_found:
+            return self._data
+        p_obj = TagsStrObj(tags=lines_found)
+        self._data = p_obj.get_lines()
+        since_obj = ApiDescDetailSince(self._block)
+        since = since_obj.get_obj()
+        if since:
+            self._data.append('')
+            self._data.append('**since**')
+            self._data.append('')
+            self._data.append(f"    {since}")
+        return self._data
+
+
+class ApiDesc(BlockObj):
+    """Gets the description"""
+
+    def __init__(self, soup: SoupObj):
+        super().__init__(soup)
+        self._data = None
+
+    def get_obj(self) -> List[str]:
+        """
+        Gets description as list of str
+
+        Returns:
+            List[str]: description lines
+        """
+        if self._data:
+            return self._data
+        lines_found: ResultSet = self.soup.soup.select(
+            'body > div.contents > div.textblock > p')
+        p_obj = TagsStrObj(tags=lines_found)
+        self._data = p_obj.get_lines()
+        since_obj = ApiDescSince(self.soup)
+        since = since_obj.get_obj()
+        if since:
+            self._data.append('')
+            self._data.append('**since**')
+            self._data.append('')
+            self._data.append(f"    {since}")
+        #.. deprecated::
+        dep_obj = ApiDepreciated(self.soup)
+        dep = dep_obj.get_obj()
+        if dep:
+            self._data.append('')
+            self._data.append('.. deprecated::')
+            self._data.append('')
+            self._data.append('    Interface is deprecated.')
+        return self._data
+
+
+class ApiDescSince(BlockObj):
+    """Gets the Since if it exist"""
+
+    def __init__(self, soup: SoupObj):
+        super().__init__(soup)
+        self._data = False
+
+    def get_obj(self) -> Union[str, None]:
+        """
+        Gets See alos of Interface
+
+        Returns:
+            str: See also. if it exist; Otherwise empty string.
+        """
+        if not self._data is False:
+            return self._data
+        self._data = None
+        dl_tag = self._soup.soup.select_one('dl.section.since')
+        if not dl_tag:
+            return self._data
+        dd_tag = dl_tag.find('dd')
+        if not dd_tag:
+            return self._data
+        self._data = dd_tag.text.strip()
+        return self._data
+
+
+class ApiDepreciated(BlockObj):
+    """Gets if block is deprecated"""
+    # eg: https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XVclContainerPeer.html
+
+    def __init__(self, soup: SoupObj):
+        super().__init__(soup)
+        self._data = None
+
+    def get_obj(self) -> bool:
+        """
+        Gets See alos of Interface
+
+        Returns:
+            str: See also. if it exist; Otherwise empty string.
+        """
+        if not self._data is None:
+            return self._data
+        soup = self.soup.soup
+        tag = soup.select_one('div.textblock > dl.deprecated')
+        if tag:
+            self._data = True
+        else:
+            self._data = False
+        return self._data
+
+
+class ApiDetailBlock(BlockObj):
+    """Get Details block from block id"""
+
+    def __init__(self, soup: SoupObj, a_id: str) -> None:
+        """
+        ApiDetailBlock Constructor
+
+        Args:
+            soup (base.SoupObj): Soup Obj
+            a_id (str): id of block such as ``aa1d747451151fbd244196e6305348dbc``
+        """
+        super().__init__(soup)
+        self._a_d = a_id
+        self._data = False
+
+    def get_obj(self) -> Union[Tag, None]:
+        if not self._data is False:
+            return self._data
+        self._data = None
+        soup = self.soup.soup
+        a_tag: Tag = soup.find('a', id=self._a_d)
+        if not a_tag:
+            return self._data
+        self._data = a_tag.find_next('div', class_='memitem')
+        return self._data
+
+
+class ApiProtoBlock(BlockObj):
+    """Gets Detailed data block"""
+
+    def __init__(self, block: ApiDetailBlock) -> None:
+        self._block: ApiDetailBlock = block
+        super().__init__(self._block.soup)
+        self._data = False
+
+    def get_obj(self) -> Union[Tag, None]:
+        if not self._data is False:
+            return self._data
+        self._data = None
+        tag = self._block.get_obj()
+        if not tag:
+            return self._data
+        proto = tag.findChild('div', class_='memproto')
+        self._data = proto
+        self._data
+
+
+class ApiDescBlock(BlockObj):
+    """Gets Detailed description block of method or component"""
+
+    def __init__(self, block: ApiDetailBlock) -> None:
+        self._block: ApiDetailBlock = block
+        super().__init__(self._block.soup)
+        self._data = False
+
+    def get_obj(self) -> Union[Tag, None]:
+        if not self._data is False:
+            return self._data
+        self._data = None
+        tag = self._block.get_obj()
+        if not tag:
+            return self._data
+        desc = tag.findChild('div', class_='memdoc')
+        self._data = desc
+        return self._data
+
+
+class APIData:
+    def __init__(self, url_soup: Union[str, SoupObj], allow_cache: bool):
+        if isinstance(url_soup, str):
+            self._url = url_soup
+            self._soup_obj = SoupObj(
+                url=url_soup, allow_cache=allow_cache)
+        else:
+            self._url = url_soup.url
+            self._soup_obj = url_soup
+            self._soup_obj.allow_cache = allow_cache
+        self._api_data_public_members: ApiPublicMembers = None
+        self._api_data_name: ApiName = None
+    
+    # region Methods
+
+    @AcceptedTypes(str, ftype=DecFuncEnum.METHOD)
+    def get_detail_block(self, a_id: str) -> ApiDetailBlock:
+        """
+        Gets detail block of a function.
+        Gets the 
+
+        Args:
+            si (SummaryInfo): Function summary Info to get the details block for.
+
+        Returns:
+            ApiDetailBlock: object
+        """
+        return ApiDetailBlock(soup=self.soup_obj, a_id=a_id)
+
+    @AcceptedTypes(str, ftype=DecFuncEnum.METHOD)
+    def get_desc_detail(self, a_id: str) -> ApiDescDetail:
+        """Gets Description obj for method or property"""
+        block = self.get_desc_block(a_id=a_id)
+        return ApiDescDetail(block=block)
+
+    @AcceptedTypes(str, ftype=DecFuncEnum.METHOD)
+    def get_proto_block(self, a_id: str) -> ApiProtoBlock:
+        """Gets the block for a method information"""
+
+        detail_block = self.get_detail_block(a_id=a_id)
+        return ApiProtoBlock(block=detail_block)
+
+    @AcceptedTypes(str, ftype=DecFuncEnum.METHOD)
+    def get_desc_block(self, a_id: str) -> ApiDescBlock:
+        """Gets the block for a method description"""
+        detail_block = self.get_detail_block(a_id=a_id)
+        return ApiDescBlock(block=detail_block)
+
+    @AcceptedTypes(str, ftype=DecFuncEnum.METHOD)
+    def get_desc_detail(self, a_id: str) -> ApiDescDetail:
+        """Gets Description obj for method or property"""
+        block = self.get_desc_block(a_id=a_id)
+        return ApiDescDetail(block=block)
+    # endregion Methods
+
+    # region Properties
+    @property
+    def name(self) -> ApiName:
+        if self._api_data_name is None:
+            self._api_data_name = ApiName(
+                self._soup_obj)
+        return self._api_data_name
+
+    @property
+    def public_members(self) -> ApiPublicMembers:
+        if self._api_data_public_members is None:
+            self._api_data_public_members = ApiPublicMembers(self._soup_obj)
+        return self._api_data_public_members
+    
+    @property
+    def soup_obj(self) -> SoupObj:
+        """Gets soup_obj value"""
+        return self._soup_obj
+
+    @property
+    def url_obj(self) -> UrlObj:
+        return self._soup_obj.url_obj
+    # region Properties
+
+# endregion block and api classes
+
+# region util
+
+
+def str_clean(input: str, **kwargs) -> str:
+    """
+    Cleans and encodes string for template replacemnt
+
+    Keyword Arguments:
+        replace_dual (bool, optional): Replace ``::`` with ``.`` Default ``True``
+    """
+    _replace_dual = bool(kwargs.get('replace_dual', True))
+    result = input
+    if _replace_dual:
+        result = result.replace("::", ".")
+    result = result.replace('\\n', '\\\\\\\\n').replace('\\r', '\\\\\\\\r')
+    result = result.replace('"', '\\"')
+    return result.strip()
 class Util:
     """Utility class of static methods for operations"""
     
@@ -1127,6 +1578,7 @@ class Util:
 
     @TypeCheckKw(arg_info={"typings": 0, "quote": 0}, types=[bool], ftype=DecFuncEnum.METHOD_STATIC)
     @AcceptedTypes(str, opt_args_filter=DecArgEnum.NAMED_ARGS, ftype = DecFuncEnum.METHOD_STATIC)
+    @deprecated(version='0.1.4', reason='Deprecated, use get_python_type() instead')
     @staticmethod
     def get_py_type(uno_type: str, **kwargs) -> str:
         """
@@ -1177,6 +1629,9 @@ class Util:
                             during callback then the value of returns will be returned from method.
             }
         """
+        logger.warning(
+            'Util.get_py_type is deprecated, use get_python_type() instead')
+
         if not uno_type:
             return ''
         def ex_type(in_parts: List[str]) -> Union[dict, None]:
@@ -1351,7 +1806,7 @@ class Util:
             results.append(s)
         return results
 
-
+# endregion util
 
 # region Import check
 
@@ -1482,60 +1937,7 @@ class ImportCheck:
 
 # endregion Import check
 
-
-class TagsStrObj:
-    """Class that converts list of tags to string"""
-
-    def __init__(self, tags: Iterable[Tag], **kwargs):
-        """
-        Constructor
-
-        Args:
-            tags (Iterable[Tag]): List of tags
-
-        Keyword Arguments:
-            clean (bool, optional): If ``True`` then data will be cleaned
-                using ``str_clean`` method. Default ``True``
-            empty (bool, optional): If ``True`` empty lines will be added
-                between other lines. Default ``True``
-            indent (int, optional): The number of spaces to indent for 
-                methods that return a string. Default ``0``
-        """
-        self._tags = tags
-        self._clean = bool(kwargs.get('clean', True))
-        self._empty_lines = bool(kwargs.get('empty', True))
-        self._indent_amt = int(kwargs.get('indent', 0))
-
-    def get_lines(self) -> List[str]:
-        """Gets lines for this instance"""
-        lines = []
-        i = 0
-        for ln in self._tags:
-            s = ln.text.strip().replace("::", '.')
-            if not s:
-                continue
-            if self._clean:
-                s = str_clean(input=s)
-            if i > 0 and self._empty_lines:
-                lines.append("")
-            lines.append(s)
-            i += 1
-        return lines
-
-    def get_data(self) -> List[str]:
-        """Gets Lines as string for this instance"""
-        return self.get_lines()
-
-    def get_string_list(self) -> str:
-        # lines = self._encode_list(self.get_lines())
-        # c_lines = self._decode_list(str(lines).split(','))
-        # s = ',\n'.join(c_lines)
-        s = Util.get_string_list(self.get_lines())
-        if self._indent_amt > 0:
-            s = Util.indent(text=s, indent_amt=self._indent_amt)
-        return s
-
-
+# region Writer/parser base
 class WriteBase(object):
     def __init__(self, **kwargs):
         pass
@@ -1742,6 +2144,8 @@ class ParserBase(object):
     def allow_cache(self, value: bool):
         self._allow_cache = value 
     # endregion Properties
+
+# endregion Writer/parser base
 
 # region Image Process
 

@@ -14,7 +14,7 @@ import re
 import base
 from typing import Dict, List, Optional, Set, Union
 from bs4.element import NavigableString, PageElement, ResultSet, Tag
-from kwhelp.decorator import DecFuncEnum, TypeCheck, TypeCheckKw
+from kwhelp.decorator import AcceptedTypes, DecFuncEnum, TypeCheck, TypeCheckKw
 from pathlib import Path
 from logger.log_handle import get_logger
 from parser.enm import main
@@ -46,23 +46,20 @@ re_method_pattern = re.compile(
 re_raises_pattern = re.compile(r"\s*(raises\s*\(.*\))")
 
 re_interface_pattern = re.compile(r"interface\s*([a-zA-Z0-9.]*)\s*;")
-re_property_pattern = re.compile(r"(?:\[attribute[ ,a-z]*\])(?:[ ]+)([a-zA-Z0-9. {}()]*);")
+re_property_pattern = re.compile(
+    r"(?:\[attribute[ ,a-z]*\])(?:[ ]+)([a-zA-Z0-9. {}()]*);")
 re_comment_start_pattern = re.compile(r"(?:(\/\*)|(?:\*)\s)")
 re_dir_pattern = re.compile(r"\[((?:in)|(?:out))\]", re.IGNORECASE)
 # endregion SDK API Reference
 
 # region Data Classes
+
+
 @dataclass
 class ParamInfo:
     direction: str = ''
     name: str = ''
-    type: str =''
-
-@dataclass
-class MethodBlockInfo:
-    tag_id: Tag
-    tag_title: Tag
-    tag_main: Tag
+    type: str = ''
 
 
 @dataclass(frozen=True)
@@ -74,100 +71,29 @@ class SummaryInfo:
 
 # region API Interface classes
 
-class ApiPublicMembers(base.BlockObj):
-    """Gets all blocks with condensed info such as Public Member Functions"""
-    @TypeCheck(base.SoupObj, ftype=DecFuncEnum.METHOD)
-    def __init__(self, soup: base.SoupObj):
-        self._soup = soup
-        super().__init__(soup)
-        self._data = False
-    
-    def get_obj(self) -> Union[ResultSet, None]:
-        if not self._data is False:
-            return self._data
-        self._data = None
-        soup = self.soup.soup
-        rs = soup.find_all('table', class_='memberdecls')
-        self._data = rs
-        return self._data
 
-class ApiSummaryBlock(base.BlockObj):
-    def __init__(self, block: ApiPublicMembers):
-        self._block: ApiPublicMembers = block
-        super().__init__(self._block.soup)
-        self._data = False
-    @abstractmethod
-    def _get_match_name(self) -> str:
-        pass
-
-    def get_obj(self) -> Union[Tag, None]:
-        if not self._data is False:
-            return self._data
-        self._data = None
-        rs = self._block.get_obj()
-        if not rs:
-            return self._data
-        match_name = self._get_match_name()
-        for tag in rs:
-            # tag is a table
-            # body > div.contents > table > tbody > tr.heading > td > h2 > a
-            t: Tag = tag
-            a_lnk = t.select_one('tr.heading > td > h2 > a')
-            if a_lnk:
-                name = a_lnk.get('name', None)
-                if name == match_name:
-                    self._data = tag
-                    break
-        return self._data
-
-
-class ApiFunctionsBlock(ApiSummaryBlock):
+class ApiFunctionsBlock(base.ApiSummaryBlock):
     def _get_match_name(self) -> str:
         return 'pub-methods'
 
 
-class ApiPropertiesBlock(ApiSummaryBlock):
+class ApiPropertiesBlock(base.ApiSummaryBlock):
     def _get_match_name(self) -> str:
         return 'pub-attribs'
 
-class ApiInterfacesBlock(ApiSummaryBlock):
+
+class ApiInterfacesBlock(base.ApiSummaryBlock):
     """Gets Block object for Exported Interfaces"""
+
     def _get_match_name(self) -> str:
         return 'interfaces'
 
-class ApiSummaryRows(base.BlockObj):
-    """Gets the rows that contain short details and desc for a Function/properyty block"""
-    def __init__(self, block: ApiSummaryBlock):
-        self._block: ApiSummaryBlock = block
-        super().__init__(self._block.soup)
-        self._data = None
-
-    def get_obj(self) -> List[Tag]:
-        if not self._data is None:
-            return self._data
-        self._data = []
-        tbl_tag: Tag = self._block.get_obj()
-        if not tbl_tag:
-            return self._data
-        rs_rows: ResultSet = tbl_tag.find_all('tr')
-        if not rs_rows:
-            return self._data
-        for row in rs_rows:
-            r: Tag = row
-            _class = r.get('class', [])
-            if len(_class) == 0:
-                continue
-            class_str = _class[0]
-            if class_str == 'inherit_header':
-                # Public Member Functions inherited from ...
-                break
-            if class_str.startswith('memitem:'):
-                self._data.append(row)
-        return self._data
 
 class ApiSummaries(base.BlockObj):
-    def __init__(self, block: ApiSummaryRows) -> None:
-        self._block: ApiSummaryRows = block
+    """Gets summary information for a public member block"""
+
+    def __init__(self, block: base.ApiSummaryRows) -> None:
+        self._block: base.ApiSummaryRows = block
         super().__init__(self._block.soup)
         self._requires_typing = False
         self._imports: Set[str] = set()
@@ -180,7 +106,7 @@ class ApiSummaries(base.BlockObj):
         rows = self._block.get_obj()
         for row in rows:
             cls_name = row.get('class')[0]
-            id_str = cls_name.rsplit(sep=':',maxsplit=1)[1]
+            id_str = cls_name.rsplit(sep=':', maxsplit=1)[1]
             itm_lft = row.find('td', class_='memItemLeft')
             r_type = ''
             name = ''
@@ -193,7 +119,7 @@ class ApiSummaries(base.BlockObj):
                     name = itm_name.text.strip()
                     name = base.Util.get_clean_method_name(name)
             p_type = base.Util.get_python_type(in_type=r_type)
-            si = SummaryInfo(id=id_str,name=name,return_type=p_type.type)
+            si = SummaryInfo(id=id_str, name=name, return_type=p_type.type)
             if p_type.requires_typing:
                 self._requires_typing = True
             for im in p_type.imports:
@@ -211,81 +137,12 @@ class ApiSummaries(base.BlockObj):
         """Gets imports value"""
         return self._imports
 
-class ApiDetailBlock(base.BlockObj):
-    def __init__(self, soup: base.SoupObj, si: SummaryInfo) -> None:
-        super().__init__(soup)
-        self._si = si
-        self._data = False
-    
-    def get_obj(self) -> Union[Tag, None]:
-        if not self._data is False:
-            return self._data
-        self._data = None
-        soup = self.soup.soup
-        a_tag: Tag = soup.find('a', id=self._si.id)
-        if not a_tag:
-            return self._data
-        self._data = a_tag.find_next('div', class_='memitem')
-        return self._data
-    @property
-    def summary_info(self) -> SummaryInfo:
-        """Gets summary_info value"""
-        return self._si
-
-
-class ApiProtoBlock(base.BlockObj):
-    """Gets Detailed Method data block"""
-
-    def __init__(self, block: ApiDetailBlock) -> None:
-        self._block: ApiDetailBlock = block
-        super().__init__(self._block.soup)
-        self._data = False
-    
-    def get_obj(self) -> Union[Tag, None]:
-        if not self._data is False:
-            return self._data
-        self._data = None
-        tag = self._block.get_obj()
-        if not tag:
-            return self._data
-        proto = tag.findChild('div', class_='memproto')
-        self._data = proto
-        self._data
-
-    @property
-    def summary_info(self) -> SummaryInfo:
-        """Gets summary_info value"""
-        return self._block.summary_info
-
-
-class ApiDescBlock(base.BlockObj):
-    """Gets Detailed Method description block"""
-
-    def __init__(self, block: ApiDetailBlock) -> None:
-        self._block: ApiDetailBlock = block
-        super().__init__(self._block.soup)
-        self._data = False
-
-    def get_obj(self) -> Union[Tag, None]:
-        if not self._data is False:
-            return self._data
-        self._data = None
-        tag = self._block.get_obj()
-        if not tag:
-            return self._data
-        desc = tag.findChild('div', class_='memdoc')
-        self._data = desc
-        return self._data
-
-    @property
-    def summary_info(self) -> SummaryInfo:
-        """Gets summary_info value"""
-        return self._block.summary_info
 
 class ApiFnPramsInfo(base.BlockObj):
     """Gets List of Parameter information for a funciton"""
-    def __init__(self, block: ApiProtoBlock) -> None:
-        self._block: ApiProtoBlock = block
+
+    def __init__(self, block: base.ApiProtoBlock) -> None:
+        self._block: base.ApiProtoBlock = block
         super().__init__(self._block.soup)
         self._requires_typing = False
         self._imports: Set[str] = set()
@@ -299,12 +156,13 @@ class ApiFnPramsInfo(base.BlockObj):
         if not proto:
             return self._data
         p_type_tag = proto.find_all('td', class_='paramtype')
-        p_name_tag= proto.find_all('td', class_='paramname')
+        p_name_tag = proto.find_all('td', class_='paramname')
         if not p_type_tag and not p_name_tag:
             if logger.level <= logging.DEBUG:
-                logger.debug('ApiInterfacePramsInfoget_obj() No Parmas for %s', self._block.summary_info.name)
+                logger.debug(
+                    'ApiInterfacePramsInfoget_obj() No Parmas for %s', self._block.summary_info.name)
             return self._data
-        
+
         try:
             if len(p_type_tag) != len(p_name_tag):
                 if len(p_type_tag) == 0 and len(p_name_tag) == 1:
@@ -320,11 +178,11 @@ class ApiFnPramsInfo(base.BlockObj):
         p_info = zip(p_name_tag, p_type_tag)
         self._data = self._process_params(params=p_info)
         return self._data
-    
-    def _process_name_tag(self, name_tag: Tag, pinfo:ParamInfo):
+
+    def _process_name_tag(self, name_tag: Tag, pinfo: ParamInfo):
         name = name_tag.text
         pinfo.name = base.Util.get_clean_name(name)
-    
+
     def _process_type_tag(self, type_tag: Tag, pinfo: ParamInfo):
         pinfo.direction = 'in'
         # dir_tag: NavigableString = type_tag.find(text=True, recursive=False)
@@ -333,7 +191,7 @@ class ApiFnPramsInfo(base.BlockObj):
         m = re_dir_pattern.match(dir_str)
         if m:
             g_dir = m.group(1).lower()
-            pinfo.direction = g_dir # in or out
+            pinfo.direction = g_dir  # in or out
             dir_str = dir_str.split(maxsplit=1)[1]
         _type = dir_str.replace("::", '.').lstrip('.')
         t_info: base.PythonType = base.Util.get_python_type(in_type=_type)
@@ -344,7 +202,7 @@ class ApiFnPramsInfo(base.BlockObj):
             self._imports.add(im)
         return
 
-    def _process_params(self, params:zip) -> List[ParamInfo]:
+    def _process_params(self, params: zip) -> List[ParamInfo]:
         results = []
         for p_name_tag, p_type_tag in params:
             p_info = ParamInfo()
@@ -381,8 +239,9 @@ class ApiMethodException(base.BlockObj):
     """Gets errors for a funciton"""
     # have not found an example with more than one exception so assuming
     # singular excpetion
-    def __init__(self, block: ApiProtoBlock) -> None:
-        self._block: ApiProtoBlock = block
+
+    def __init__(self, block: base.ApiProtoBlock) -> None:
+        self._block: base.ApiProtoBlock = block
         super().__init__(self._block.soup)
         self._data = False
 
@@ -396,14 +255,15 @@ class ApiMethodException(base.BlockObj):
                 result = row
                 break
         return result
-    
-    def _get_raises_text(self, row:Tag):
+
+    def _get_raises_text(self, row: Tag):
         if not row:
             return None
-        s: str = row.text.rsplit(maxsplit=1)[1] # drop raises
-        s = s.replace('(', '').replace(')', '').replace('::', '.').strip().lstrip('.')
+        s: str = row.text.rsplit(maxsplit=1)[1]  # drop raises
+        s = s.replace('(', '').replace(')', '').replace(
+            '::', '.').strip().lstrip('.')
         return s
-    
+
     def get_obj(self) -> Union[str, None]:
         """
         Get name of error that is raises
@@ -417,7 +277,7 @@ class ApiMethodException(base.BlockObj):
         row = self._get_raises_row()
         if not row:
             return self._data
-        self._data = self._get_raises_text(row)        
+        self._data = self._get_raises_text(row)
         return self._data
 
     @property
@@ -426,229 +286,53 @@ class ApiMethodException(base.BlockObj):
         return self._block.summary_info
 
 
-class ApiDescDetail(base.BlockObj):
-    def __init__(self, block: ApiDescBlock) -> None:
-        self._block: ApiDescBlock = block
-        super().__init__(self._block.soup)
-        self._data = None
-        self._cls = 'memdoc'
-        self._el = 'div'
-
-    def get_obj(self) -> List[str]:
-        if not self._data is None:
-            return self._data
-        self._data = []
-        tag = self._block.get_obj()
-        if not tag:
-            return self._data
-        lines_found: ResultSet = tag.select(f'{self._el}.{self._cls} > p')
-        if not lines_found:
-            return self._data
-        p_obj = base.TagsStrObj(tags=lines_found)
-        self._data = p_obj.get_lines()
-        since_obj = ApiDescDetailSince(self._block)
-        since = since_obj.get_obj()
-        if since:
-            self._data.append('')
-            self._data.append('**since**')
-            self._data.append('')
-            self._data.append(f"    {since}")
-        return self._data
-
-class ApiDescDetailSince(base.BlockObj):
-    def __init__(self, block: ApiDescBlock) -> None:
-        self._block: ApiDescBlock = block
-        super().__init__(self._block.soup)
-        self._data = False
-    
-    def get_obj(self) -> Union[str, None]:
-        if not self._data is False:
-            return self._data
-        self._data = None
-        tag: Tag = self._block.get_obj()
-        if not tag:
-            return self._data
-        dl_tag = tag.select_one('dl.section.since')
-        if not dl_tag:
-            return self._data
-        dd_tag = dl_tag.find('dd')
-        if not dd_tag:
-            return self._data
-        self._data = dd_tag.text.strip()
-        return self._data
-
-class ApiInterfaceName(base.ApiName):
-    """Get the Name object for the interface"""
 class ApiNs(base.ApiNamespace):
     """Get the Name object for the interface"""
+
     def __init__(self, soup: base.SoupObj):
         super().__init__(soup)
         self._namespace_str = None
         self._namespace = None
-    
+
     @property
     def namespace(self) -> List[str]:
         """Gets namespace value"""
         if self._namespace is None:
             self._namespace = self.get_obj()[:-1]
         return self._namespace
-    
-    
+
     @property
     def namespace_str(self) -> str:
         if self._namespace_str is None:
             self._namespace_str = '.'.join(self.namespace)
         return self._namespace_str
 
-class ApiDesc(base.BlockObj):
-    """Gets the description"""
 
-    def __init__(self, soup: base.SoupObj):
-        super().__init__(soup)
-        self._data = None
-
-    def get_obj(self) -> List[str]:
-        """
-        Gets description as list of str
-
-        Returns:
-            List[str]: description lines
-        """
-        if self._data:
-            return self._data
-        lines_found: ResultSet = self.soup.soup.select(
-            'body > div.contents > div.textblock > p')
-        p_obj = base.TagsStrObj(tags=lines_found)
-        self._data = p_obj.get_lines()
-        since_obj = ApiDescSince(self.soup)
-        since = since_obj.get_obj()
-        if since:
-            self._data.append('')
-            self._data.append('**since**')
-            self._data.append('')
-            self._data.append(f"    {since}")
-        #.. deprecated::
-        dep_obj = ApiDepreciated(self.soup)
-        dep = dep_obj.get_obj()
-        if dep:
-            self._data.append('')
-            self._data.append('.. deprecated::')
-            self._data.append('')
-            self._data.append('    Interface is deprecated.')
-        return self._data
-
-    @property
-    def summary_info(self) -> SummaryInfo:
-        """Gets summary_info value"""
-        return self._block.summary_info
-
-class ApiDescSince(base.BlockObj):
-    """Gets the Since if it exist"""
-
-    def __init__(self, soup: base.SoupObj):
-        super().__init__(soup)
-        self._data = False
-
-    def get_obj(self) -> Union[str, None]:
-        """
-        Gets See alos of Interface
-
-        Returns:
-            str: See also. if it exist; Otherwise empty string.
-        """
-        if not self._data is False:
-            return self._data
-        self._data = None
-        dl_tag = self._soup.soup.select_one('dl.section.since')
-        if not dl_tag:
-            return self._data
-        dd_tag = dl_tag.find('dd')
-        if not dd_tag:
-            return self._data
-        self._data = dd_tag.text.strip()
-        return self._data
-
-class ApiDepreciated(base.BlockObj):
-    """Gets if an interface is deprecated"""
-    # eg: https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XVclContainerPeer.html
-    def __init__(self, soup: base.SoupObj):
-        super().__init__(soup)
-        self._data = None
-
-    def get_obj(self) -> bool:
-        """
-        Gets See alos of Interface
-
-        Returns:
-            str: See also. if it exist; Otherwise empty string.
-        """
-        if not self._data is None:
-            return self._data
-        soup = self.soup.soup
-        tag = soup.select_one('div.textblock > dl.deprecated')
-        if tag:
-            self._data = True
-        else:
-            self._data = False
-        return self._data
-
-
-class ApiInterfaceData:
+class ApiInterfaceData(base.APIData):
     def __init__(self, url_soup: Union[str, base.SoupObj], allow_cache: bool):
-        if isinstance(url_soup, str):
-            self._url = url_soup
-            self._soup_obj = base.SoupObj(
-                url=url_soup, allow_cache=allow_cache)
-        else:
-            self._url = url_soup.url
-            self._soup_obj = url_soup
-            self._soup_obj.allow_cache = allow_cache
+        super().__init__(url_soup=url_soup, allow_cache=allow_cache)
         self._si_key = 'summeries'
         self._detail_block_key = 'detail_block'
-        self._name: ApiInterfaceName = None
         self._ns: ApiNs = None
-        self._public_members: ApiPublicMembers = None
         self._properties_block: ApiPropertiesBlock = None
         self._func_block: ApiFunctionsBlock = None
         self._interfaces_block: ApiInterfacesBlock = None
-        self._func_summary_rows: ApiSummaryRows = None
-        self._property_summary_rows: ApiSummaryRows = None
-        self._export_summary_rows: ApiSummaryRows = None
+        self._func_summary_rows: base.ApiSummaryRows = None
+        self._property_summary_rows: base.ApiSummaryRows = None
+        self._export_summary_rows: base.ApiSummaryRows = None
         self._func_summaries: ApiSummaries = None
         self._property_summaries: ApiSummaries = None
         self._exported_summaries: ApiSummaries = None
-        self._desc: ApiDesc = None
+        self._desc: base.ApiDesc = None
         self._inherited: base.ApiInherited = None
         self._cache = {
             self._si_key: {},
             self._detail_block_key: {}
         }
+
     # region Methods
-
-    def get_cached_summary(self, si_id: Union[str, SummaryInfo]) -> SummaryInfo:
-        """
-        Gets a method summary info cache.
-
-        Args:
-            si (SummaryInfo): Summary info
-
-        Raises:
-            KeyError if summary does not exist in cache
-
-        Returns:
-            SummaryInfo: Summary info
-        """
-        if isinstance(si_id, SummaryInfo):
-            return si_id
-        if self._func_summaries is None:
-            # set up the cache
-            _ = self.func_summaries
-        if self._property_summaries is None:
-            # set up the cache
-            _ = self.property_summaries
-        return self._cache[self._si_key][si_id]
-    
-    def get_detail_block(self, si_id: Union[str, SummaryInfo]) -> ApiDetailBlock:
+    @AcceptedTypes(str, ftype=DecFuncEnum.METHOD)
+    def get_detail_block(self, a_id: str) -> base.ApiDetailBlock:
         """
         Gets detail block of a function.
         Gets the 
@@ -659,65 +343,48 @@ class ApiInterfaceData:
         Returns:
             ApiDetailBlock: object
         """
-        if isinstance(si_id, SummaryInfo):
-            id = si_id.id
-        else:
-            id = si_id
-        key = f"get_detail_block_{id}"
+        key = f"get_detail_block_{a_id}"
         if key in self._cache:
             return self._cache[key]
-        si = self.get_cached_summary(si_id=si_id)
-        result = ApiDetailBlock(soup=self.soup_obj, si=si)
+        result = super().get_detail_block(a_id=a_id)
         self._cache[key] = result
         return result
-    
-    def get_proto_block(self, si_id: Union[str, SummaryInfo]) -> ApiProtoBlock:
+
+    @AcceptedTypes(str, ftype=DecFuncEnum.METHOD)
+    def get_proto_block(self, a_id: str) -> base.ApiProtoBlock:
         """Gets the block for a method information"""
-        if isinstance(si_id, SummaryInfo):
-            id = si_id.id
-        else:
-            id = si_id
-        key = f"get_proto_block_{id}"
+        key = f"get_proto_block_{a_id}"
         if key in self._cache:
             return self._cache[key]
-        detail_block = self.get_detail_block(si_id)
-        result = ApiProtoBlock(block=detail_block)
+        result = super().get_proto_block(a_id=a_id)
         self._cache[key] = result
         return self._cache[key]
-    
-    def get_desc_block(self, si_id: Union[str, SummaryInfo]) -> ApiDescBlock:
-        """Gets the block for a method description"""
-        if isinstance(si_id, SummaryInfo):
-            id = si_id.id
-        else:
-            id = si_id
-        key = f"get_desc_block_{id}"
-        if key in self._cache:
-            return self._cache[key]
-        detail_block = self.get_detail_block(si_id)
-        result = ApiDescBlock(block=detail_block)
-        self._cache[key] = result
-        return self._cache[key]
-    
-    def get_prams_info(self, si_id: Union[str, SummaryInfo]) -> ApiFnPramsInfo:
+
+    @AcceptedTypes(str, ftype=DecFuncEnum.METHOD)
+    def get_prams_info(self, a_id: str) -> ApiFnPramsInfo:
         """Gets parameter info for all parameters of a a method"""
-        block = self.get_proto_block(si_id=si_id)
+        block = self.get_proto_block(a_id=a_id)
         result = ApiFnPramsInfo(block=block)
         return result
-    
-    def get_method_ex(self, si_id: Union[str, SummaryInfo]) -> ApiMethodException:
+
+    @AcceptedTypes(str, ftype=DecFuncEnum.METHOD)
+    def get_method_ex(self, a_id: str) -> ApiMethodException:
         """Gets raises info for method"""
-        block = self.get_proto_block(si_id=si_id)
+        block = self.get_proto_block(a_id=a_id)
         result = ApiMethodException(block=block)
         return result
-    
-    def get_desc_detail(self, si_id: Union[str, SummaryInfo]) -> ApiDescDetail:
+
+    @AcceptedTypes(str, ftype=DecFuncEnum.METHOD)
+    def get_desc_detail(self, a_id: str) -> base.ApiDescDetail:
         """Gets Description obj for method or property"""
-        block = self.get_desc_block(si_id=si_id)
-        result = ApiDescDetail(block=block)
-        return result
-    
-    def get_import_info_method(self, si_id: Union[str, SummaryInfo]) -> base.ImportInfo:
+        key = f"get_desc_detail_{a_id}"
+        if key in self._cache:
+            return self._cache[key]
+        self._cache[key] = super().get_desc_detail(a_id=a_id)
+        return self._cache[key]
+
+    @AcceptedTypes(str, ftype=DecFuncEnum.METHOD)
+    def get_import_info_method(self, a_id: str) -> base.ImportInfo:
         """
         Gets imports for method params and return type
 
@@ -728,7 +395,7 @@ class ApiInterfaceData:
             base.ImportInfo: Import info
         """
         info = base.ImportInfo()
-        params_info = self.get_prams_info(si_id=si_id)
+        params_info = self.get_prams_info(a_id=a_id)
         fn_info = self.func_summaries
         # ensure data is primed
         fn_info.get_obj()
@@ -736,7 +403,7 @@ class ApiInterfaceData:
         info.imports.update(params_info.imports)
         info.imports.update(fn_info.imports)
         return info
-    
+
     def get_import_info_property(self) -> base.ImportInfo:
         """
         Gets imports for properties
@@ -755,14 +422,9 @@ class ApiInterfaceData:
         info.imports.update(p_info.imports)
         return info
     # endregion Methods
+
     # region Properties
-    
-    @property
-    def name(self) -> ApiInterfaceName:
-        if self._name is None:
-            self._name = ApiInterfaceName(
-                self._soup_obj)
-        return self._name
+
 
     @property
     def ns(self) -> ApiNs:
@@ -773,19 +435,13 @@ class ApiInterfaceData:
         return self._ns
 
     @property
-    def public_members(self) -> ApiPublicMembers:
-        if self._public_members is None:
-            self._public_members = ApiPublicMembers(self._soup_obj)
-        return self._public_members
-    
-    @property
     def func_block(self) -> ApiFunctionsBlock:
         """Gets Summary Functions block"""
         if self._func_block is None:
             self._func_block = ApiFunctionsBlock(
                 self.public_members)
         return self._func_block
-    
+
     @property
     def properties_block(self) -> ApiPropertiesBlock:
         """Gets Summary Properties block"""
@@ -793,7 +449,7 @@ class ApiInterfaceData:
             self._properties_block = ApiPropertiesBlock(
                 self.public_members)
         return self._properties_block
-    
+
     @property
     def interfaces_block(self) -> ApiInterfacesBlock:
         """Gets Summary Exported Interfaces block"""
@@ -801,31 +457,31 @@ class ApiInterfaceData:
             self._interfaces_block = ApiInterfacesBlock(
                 self.public_members)
         return self._interfaces_block
-    
+
     @property
-    def func_summary_rows(self) -> ApiSummaryRows:
+    def func_summary_rows(self) -> base.ApiSummaryRows:
         """Get Summary rows for functions"""
         if self._func_summary_rows is None:
-            self._func_summary_rows = ApiSummaryRows(
+            self._func_summary_rows = base.ApiSummaryRows(
                 self.func_block)
         return self._func_summary_rows
-    
+
     @property
-    def property_summary_rows(self) -> ApiSummaryRows:
+    def property_summary_rows(self) -> base.ApiSummaryRows:
         """Get Summary rows for Properties"""
         if self._property_summary_rows is None:
-            self._property_summary_rows = ApiSummaryRows(
+            self._property_summary_rows = base.ApiSummaryRows(
                 self.properties_block)
         return self._property_summary_rows
-    
+
     @property
-    def export_summary_rows(self) -> ApiSummaryRows:
+    def export_summary_rows(self) -> base.ApiSummaryRows:
         """Get Summary rows for Exported Interfaces"""
         if self._export_summary_rows is None:
-            self._export_summary_rows = ApiSummaryRows(
+            self._export_summary_rows = base.ApiSummaryRows(
                 self.interfaces_block)
         return self._export_summary_rows
-    
+
     @property
     def func_summaries(self) -> ApiSummaries:
         """Get Summary info list for functions"""
@@ -838,7 +494,7 @@ class ApiInterfaceData:
                 d[si.id] = si
             self._cache[self._si_key].update(d)
         return self._func_summaries
-    
+
     @property
     def property_summaries(self) -> ApiSummaries:
         """Get Summary info list for Properties"""
@@ -851,7 +507,7 @@ class ApiInterfaceData:
                 d[si.id] = si
             self._cache[self._si_key].update(d)
         return self._property_summaries
-    
+
     @property
     def exported_summaries(self) -> ApiSummaries:
         """Get Summary info list for Exported Interfaces"""
@@ -861,38 +517,38 @@ class ApiInterfaceData:
         return self._exported_summaries
 
     @property
-    def desc(self) -> ApiDesc:
+    def desc(self) -> base.ApiDesc:
         """Gets the interface Description object"""
         if self._desc is None:
-            self._desc = ApiDesc(self.soup_obj)
+            self._desc = base.ApiDesc(self.soup_obj)
         return self._desc
-    
+
     @property
     def inherited(self) -> base.ApiInherited:
         """Gets class that get all inherited value"""
         if self._inherited is None:
-            self._inherited = base.ApiInherited(soup=self.soup_obj, raise_error=False)
+            self._inherited = base.ApiInherited(
+                soup=self.soup_obj, raise_error=False)
         return self._inherited
 
-    @property
-    def soup_obj(self) -> base.SoupObj:
-        """Gets soup_obj value"""
-        return self._soup_obj
-
-    @property
-    def url_obj(self) -> base.UrlObj:
-        return self._soup_obj.url_obj
     # endregion Properties
 # endregion API Interface classes
 
 # region Parse
+
+
 class ParserInterface(base.ParserBase):
 
     # region Constructor
+    @TypeCheckKw(
+        arg_info={"allow_cache": bool},
+        ftype=DecFuncEnum.METHOD
+    )
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self._allow_caching = bool(kwargs.get('allow_cache', True))
-        self._api_data = ApiInterfaceData(url_soup=self.url, allow_cache=self._allow_cache)
+        self._allow_caching = kwargs.get('allow_cache', True)
+        self._api_data = ApiInterfaceData(
+            url_soup=self.url, allow_cache=self._allow_cache)
         self._requires_typing = False
         self._imports: Set[str] = set()
         self._cache = {}
@@ -903,13 +559,13 @@ class ParserInterface(base.ParserBase):
         items = self._get_data_items()
         info['items'] = items
         return info
-    
+
     def get_parser_args(self) -> dict:
         args = {
             "sort": self.sort
         }
         return args
-        
+
     def get_info(self) -> Dict[str, object]:
         """
         Gets info
@@ -947,7 +603,7 @@ class ParserInterface(base.ParserBase):
                      result['namespace'])
         self._cache[key] = result
         return self._cache[key]
-    
+
     def get_formated_data(self) -> str:
         key = 'get_formated_data'
         if key in self._cache:
@@ -970,13 +626,13 @@ class ParserInterface(base.ParserBase):
             attribs.update(prop)
         self._cache[key] = attribs
         return self._cache[key]
-        
+
     def _get_methods_data(self):
         attribs = {}
-        si_lst  = self._api_data.func_summaries.get_obj()
+        si_lst = self._api_data.func_summaries.get_obj()
         for i, si in enumerate(si_lst):
-            import_info = self._api_data.get_import_info_method(si)
-            params_info = self._api_data.get_prams_info(si)
+            import_info = self._api_data.get_import_info_method(si.id)
+            params_info = self._api_data.get_prams_info(si.id)
             lst_info = params_info.get_obj()
             if i == 0:
                 attribs['methods'] = []
@@ -987,8 +643,8 @@ class ParserInterface(base.ParserBase):
             attrib = {
                 "name": si.name,
                 "returns": si.return_type,
-                "desc": self._api_data.get_desc_detail(si).get_obj(),
-                "raises": self._api_data.get_method_ex(si).get_obj() or ''
+                "desc": self._api_data.get_desc_detail(si.id).get_obj(),
+                "raises": self._api_data.get_method_ex(si.id).get_obj() or ''
             }
             for pi in lst_info:
                 args.append((pi.name, pi.type, pi.direction))
@@ -1000,7 +656,7 @@ class ParserInterface(base.ParserBase):
                 newlist = sorted(attribs['methods'], key=lambda d: d['name'])
                 attribs['methods'] = newlist
         return attribs
-    
+
     def _get_properties_data(self):
         attribs = {}
         si_lst = self._api_data.property_summaries.get_obj()
@@ -1012,7 +668,7 @@ class ParserInterface(base.ParserBase):
             attrib = {
                 "name": si.name,
                 "returns": si.return_type,
-                "desc": self._api_data.get_desc_detail(si).get_obj(),
+                "desc": self._api_data.get_desc_detail(si.id).get_obj(),
                 "raises_get": '',
                 "raises_set": ''
             }
@@ -1024,7 +680,8 @@ class ParserInterface(base.ParserBase):
 
         if self.sort:
             if 'properties' in attribs:
-                newlist = sorted(attribs['properties'], key=lambda d: d['name'])
+                newlist = sorted(attribs['properties'],
+                                 key=lambda d: d['name'])
                 attribs['properties'] = newlist
         return attribs
 
@@ -1040,6 +697,7 @@ class ParserInterface(base.ParserBase):
             logger.error(e, exc_info=True)
             raise e
         return self._imports
+
     @property
     def requires_typing(self) -> bool:
         """Gets requires typing value"""
@@ -1064,7 +722,7 @@ class InterfaceWriter(base.WriteBase):
         "copy_clipboard": 0, "print_template": 0,
         "print_json": 0, "clear_on_print": 0,
         "write_template_long": 0
-        },
+    },
         types=[bool],
         ftype=DecFuncEnum.METHOD)
     def __init__(self, parser: ParserInterface, **kwargs):
@@ -1076,7 +734,8 @@ class InterfaceWriter(base.WriteBase):
         self._print_json: bool = kwargs.get('print_json', True)
         self._write_json: bool = kwargs.get('write_json', False)
         self._clear_on_print: bool = kwargs.get('clear_on_print', True)
-        self._write_template_long: bool = kwargs.get('write_template_long', False)
+        self._write_template_long: bool = kwargs.get(
+            'write_template_long', False)
         self._indent_amt = 4
         self._json_str = None
         self._p_name: str = None
@@ -1090,7 +749,7 @@ class InterfaceWriter(base.WriteBase):
         self._p_requires_typing = False
         self._path_dir = Path(__file__).parent
         self._cache: Dict[str, object] = {}
-        
+
         t_file = 'interface'
         if not self._write_template_long:
             t_file += '_stub'
@@ -1098,7 +757,8 @@ class InterfaceWriter(base.WriteBase):
         _path = Path(self._path_dir, 'template', t_file)
         try:
             if not _path.exists():
-                raise FileNotFoundError(f"unable to find templae file '{_path}'")
+                raise FileNotFoundError(
+                    f"unable to find templae file '{_path}'")
         except Exception as e:
             logger.error(e, exc_info=True)
             raise e
@@ -1127,7 +787,7 @@ class InterfaceWriter(base.WriteBase):
                 self._write_to_json()
         except Exception as e:
             logger.exception(e)
-    
+
     def _get_json(self) -> str:
         if not self._json_str is None:
             return self._json_str
@@ -1135,7 +795,7 @@ class InterfaceWriter(base.WriteBase):
         p_dict['from_imports'] = self._get_from_imports()
         p_dict['from_imports_typing'] = self._get_from_imports_typing()
         p_dict.update(self._parser.get_dict_data())
-        
+
         json_dict = {
             "id": JSON_ID,
             "version": __version__,
@@ -1150,7 +810,7 @@ class InterfaceWriter(base.WriteBase):
         str_jsn = base.Util.get_formated_dict_list_str(obj=json_dict, indent=2)
         self._json_str = str_jsn
         return self._json_str
-    
+
     def _get_template(self):
         with open(self._template_file) as f:
             contents = f.read()
@@ -1185,7 +845,7 @@ class InterfaceWriter(base.WriteBase):
         self._cache[key] = lst
         return self._cache[key]
     # endregion get Imports
-    
+
     def _set_template_data(self):
         if self._write_template_long is False:
             return
@@ -1220,7 +880,7 @@ class InterfaceWriter(base.WriteBase):
         self._template = self._template.replace('{data}', indented)
 
     def _set_info(self):
-        def get_extends(lst:List[str]) -> List[str]:
+        def get_extends(lst: List[str]) -> List[str]:
             return [base.Util.get_last_part(s) for s in lst]
             # return [s.rsplit('.', 1)[1] for s in lst]
         data = self._parser.get_info()
@@ -1241,7 +901,7 @@ class InterfaceWriter(base.WriteBase):
             self._p_requires_typing = self._parser.requires_typing
         if self._write_file or self._write_json:
             self._file_full_path = self._get_uno_obj_path()
-    
+
     def _validate_p_info(self):
         try:
             if not self._p_name:
@@ -1256,18 +916,19 @@ class InterfaceWriter(base.WriteBase):
         except Exception as e:
             logger.error(e)
             raise e
-    
+
     def _get_uno_obj_path(self) -> Path:
         key = '_get_uno_obj_path'
         if key in self._cache:
             return self._cache[key]
         if not self._p_name:
             try:
-                raise Exception("InterfaceWriter._get_uno_obj_path() Parser provided a name that is an empty string.")
+                raise Exception(
+                    "InterfaceWriter._get_uno_obj_path() Parser provided a name that is an empty string.")
             except Exception as e:
                 logger.error(e, exc_info=True)
                 raise e
-            
+
         uno_obj_path = Path(self._path_dir.parent,
                             base.APP_CONFIG.uno_base_dir)
         name_parts: List[str] = self._p_namespace.split('.')
@@ -1283,7 +944,7 @@ class InterfaceWriter(base.WriteBase):
         with open(self._file_full_path, 'w') as f:
             f.write(self._template)
         logger.info("Created file: %s", self._file_full_path)
-    
+
     def _write_to_json(self):
         p = self._file_full_path.parent
         jsn_p = p / (str(self._file_full_path.stem) + '.json')
@@ -1295,12 +956,13 @@ class InterfaceWriter(base.WriteBase):
 
 
 def _main():
-   
+
     # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1graphic_1_1XSvgParser.html'
     url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1office_1_1XAnnotation.html'
     # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XItemList.html'
     sys.argv.extend(['--log-file', 'debug.log', '-v', '-n', '-u', url])
     main()
+
 
 def main():
     global logger
@@ -1392,7 +1054,7 @@ def main():
         os.system('cls' if os.name == 'nt' else 'clear')
     logger.info('Executing command: %s', sys.argv[1:])
     logger.info('Parsing Url %s' % args.url)
-    
+
     p = ParserInterface(
         url=args.url,
         sort=args.sort,
@@ -1407,11 +1069,10 @@ def main():
         write_json=args.write_json,
         clear_on_print=(not args.no_print_clear),
         write_template_long=args.long_format
-        )
+    )
     if args.print_template is False and args.print_json is False:
         print('')
     w.write()
-
 
 
 if __name__ == '__main__':
