@@ -239,6 +239,7 @@ class ApiMethodException(base.BlockObj):
     """Gets errors for a funciton"""
     # have not found an example with more than one exception so assuming
     # singular excpetion
+    # returning as a list of str for future consideration
 
     def __init__(self, block: base.ApiProtoBlock) -> None:
         self._block: base.ApiProtoBlock = block
@@ -264,7 +265,7 @@ class ApiMethodException(base.BlockObj):
             '::', '.').strip().lstrip('.')
         return s
 
-    def get_obj(self) -> Union[str, None]:
+    def get_obj(self) -> Union[List[str], None]:
         """
         Get name of error that is raises
 
@@ -277,7 +278,7 @@ class ApiMethodException(base.BlockObj):
         row = self._get_raises_row()
         if not row:
             return self._data
-        self._data = self._get_raises_text(row)
+        self._data = [self._get_raises_text(row)]
         return self._data
 
     @property
@@ -644,7 +645,7 @@ class ParserInterface(base.ParserBase):
                 "name": si.name,
                 "returns": si.return_type,
                 "desc": self._api_data.get_desc_detail(si.id).get_obj(),
-                "raises": self._api_data.get_method_ex(si.id).get_obj() or ''
+                "raises": self._api_data.get_method_ex(si.id).get_obj() or []
             }
             for pi in lst_info:
                 args.append((pi.name, pi.type, pi.direction))
@@ -958,8 +959,9 @@ class InterfaceWriter(base.WriteBase):
 def _main():
 
     # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1graphic_1_1XSvgParser.html'
-    url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1office_1_1XAnnotation.html'
+    # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1office_1_1XAnnotation.html'
     # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XItemList.html'
+    url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1accessibility_1_1XAccessibleAction.html'
     sys.argv.extend(['--log-file', 'debug.log', '-v', '-n', '-u', url])
     main()
 
