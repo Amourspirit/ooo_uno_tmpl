@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:16:58+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:41:08+00:00",
   "name": "XCertificate",
   "type": "interface",
   "namespace": "com.sun.star.security",
@@ -16,7 +16,16 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..util.date_time",
+        "DateTime"
+      ],
+      [
+        ".certificate_kind",
+        "CertificateKind"
+      ]
+    ],
     "name": "XCertificate",
     "imports": [],
     "namespace": "com.sun.star.security",
@@ -26,9 +35,114 @@
     "desc": [
       "Interface of a PKI Certificate.",
       "",
-      "This interface represents a certificate (X.509 or OpenPGP) ."
+      "This interface represents a certificate (X.509 or OpenPGP) .",
+      "",
+      "**since**",
+      "",
+      "    LibreOffice 5.4"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1security_1_1XCertificate.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "findCertificateExtension",
+          "returns": "object",
+          "desc": [
+            "Find an extension with an object identifier."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getCertificateUsage",
+          "returns": "int",
+          "desc": [
+            "get the certificate usage.",
+            "",
+            "The return value is a set of bits, as defined in RFC3280 for the KeyUsage BIT STRING. Note the bit and byte order used in ASN.1, so for instance the bit dataEncipherment in KeyUsage, \\\"bit 3\\\", corresponds to CERT_DATA_ENCIPHERMENT_KEY_USAGE in Win32 and KU_DATA_ENCIPHERMENT in NSS, both with value 0x10."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ],
+      "properties": [
+        {
+          "name": "CertificateKind",
+          "returns": "CertificateKind",
+          "desc": [
+            "the kind of certificate, X.509 or OpenPGP",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 5.4"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "IssuerName",
+          "returns": "str",
+          "desc": [
+            "the issuer name attribute of the certificate."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "NotValidAfter",
+          "returns": "DateTime",
+          "desc": [
+            "the validity NotAfter date attribute of the certificate."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "NotValidBefore",
+          "returns": "DateTime",
+          "desc": [
+            "the validity NotBefore date attribute of the certificate."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "SignatureAlgorithm",
+          "returns": "str",
+          "desc": [
+            "the signature algorithm"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "SubjectName",
+          "returns": "str",
+          "desc": [
+            "the subject name attribute of the certificate."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "SubjectPublicKeyAlgorithm",
+          "returns": "str",
+          "desc": [
+            "the algorithm of the subject public key"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Version",
+          "returns": "int",
+          "desc": [
+            "the version number attribute of the certificate."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
   }
 }

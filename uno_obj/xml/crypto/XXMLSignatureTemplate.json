@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:18:33+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:42:43+00:00",
   "name": "XXMLSignatureTemplate",
   "type": "interface",
   "namespace": "com.sun.star.xml.crypto",
@@ -12,16 +12,25 @@
   "data": {
     "from_imports": [
       [
-        ".......xxml_security_template",
+        ".xxml_security_template",
         "XXMLSecurityTemplate"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_uri_binding",
+        "XUriBinding"
+      ],
+      [
+        "..wrapper.xxml_element_wrapper",
+        "XXMLElementWrapper"
+      ]
+    ],
     "name": "XXMLSignatureTemplate",
     "imports": [],
     "namespace": "com.sun.star.xml.crypto",
     "extends": [
-      "XXMLSecurityTemplate"
+      "com.sun.star.xml.crypto.XXMLSecurityTemplate"
     ],
     "desc": [
       "Interface of XML signature template.",
@@ -33,6 +42,38 @@
       "With the help of signature context, the signer or verifier specifies the key from the KeyInfo in the signature template."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1xml_1_1crypto_1_1XXMLSignatureTemplate.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getBinding",
+          "returns": "XUriBinding",
+          "desc": [
+            "Get the dynamic URI binding."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getTargets",
+          "returns": "'typing.List[XXMLElementWrapper]'",
+          "desc": [
+            "Get the target XML element, i.e.",
+            "",
+            "the element to be signed"
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "setBinding",
+          "returns": "None",
+          "desc": [
+            "Set the dynamic URI binding."
+          ],
+          "raises": "com.sun.star.lang.IllegalArgumentException",
+          "args": []
+        }
+      ]
+    }
   }
 }

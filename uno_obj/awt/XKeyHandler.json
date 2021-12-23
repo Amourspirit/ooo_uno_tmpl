@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:17:51+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:37:13+00:00",
   "name": "XKeyHandler",
   "type": "interface",
   "namespace": "com.sun.star.awt",
@@ -28,11 +28,42 @@
       "",
       "If a key event is consumed by one handler both the following handlers, with respect to the list of key handlers of the broadcaster, and a following handling by the broadcaster will not take place.",
       "",
-      "**See Also**",
+      "**since**",
       "",
       "    OOo 1.1.2"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XKeyHandler.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "keyPressed",
+          "returns": "bool",
+          "desc": [
+            "This function is called by the broadcaster, an com.sun.star.awt.XExtendedToolkit for instance, after a key has been pressed but before it is released.",
+            "",
+            "The return value decides about whether other handlers will be called and a handling by the broadcaster will take place.",
+            "",
+            "Consume the event if the action performed by the implementation is mutually exclusive with the default action of the broadcaster or, when known, with that of other handlers.",
+            "",
+            "Consuming this event does not prevent the pending key-release event from being broadcasted."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "keyReleased",
+          "returns": "bool",
+          "desc": [
+            "This function is called by the broadcaster, an com.sun.star.awt.XExtendedToolkit for instance, after a key has been pressed and released.",
+            "",
+            "The return value decides about whether other handlers will be called and a handling by the broadcaster will take place.",
+            "",
+            "Consume the event if the action performed by the implementation is mutually exclusive with the default action of the broadcaster or, when known, with that of other handlers."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

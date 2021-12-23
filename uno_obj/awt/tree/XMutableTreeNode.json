@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:18:11+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:39:27+00:00",
   "name": "XMutableTreeNode",
   "type": "interface",
   "namespace": "com.sun.star.awt.tree",
@@ -12,7 +12,7 @@
   "data": {
     "from_imports": [
       [
-        ".......x_tree_node",
+        ".x_tree_node",
         "XTreeNode"
       ]
     ],
@@ -21,13 +21,93 @@
     "imports": [],
     "namespace": "com.sun.star.awt.tree",
     "extends": [
-      "XTreeNode"
+      "com.sun.star.awt.tree.XTreeNode"
     ],
     "desc": [
       "Represents a mutable tree node as used by the MutableTreeDataModel."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1tree_1_1XMutableTreeNode.html",
     "items": {
+      "methods": [
+        {
+          "name": "appendChild",
+          "returns": "None",
+          "desc": [
+            "appends ChildNode to this instance."
+          ],
+          "raises": "com.sun.star.lang.IllegalArgumentException",
+          "args": []
+        },
+        {
+          "name": "insertChildByIndex",
+          "returns": "None",
+          "desc": [
+            "inserts ChildNode to this instance at the given index."
+          ],
+          "raises": "com.sun.star.lang.IllegalArgumentException,",
+          "args": []
+        },
+        {
+          "name": "removeChildByIndex",
+          "returns": "None",
+          "desc": [
+            "removes the node from this instance at the specified index."
+          ],
+          "raises": "com.sun.star.lang.IndexOutOfBoundsException",
+          "args": []
+        },
+        {
+          "name": "setCollapsedGraphicURL",
+          "returns": "None",
+          "desc": [
+            "The URL for a graphic that is rendered to visualize collapsed non leaf nodes.",
+            "",
+            "If URL is empty, XTreeControl.DefaultCollapsedGraphicURL is used."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "setDisplayValue",
+          "returns": "None",
+          "desc": [
+            "sets the display value of this node"
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "setExpandedGraphicURL",
+          "returns": "None",
+          "desc": [
+            "The URL for a graphic that is rendered to visualize expanded non leaf nodes.",
+            "",
+            "If URL is empty, XTreeControl.DefaultExpandedGraphicURL is used."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "setHasChildrenOnDemand",
+          "returns": "None",
+          "desc": [
+            "Changes if the children of this node are created on demand."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "setNodeGraphicURL",
+          "returns": "None",
+          "desc": [
+            "The URL for a graphic that is rendered before the text part of this node.",
+            "",
+            "If this URL is empty, no graphic is rendered."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ],
       "properties": [
         {
           "name": "DataValue",
@@ -37,8 +117,8 @@
             "",
             "You can use this attribute to store data for this node that is independent of the display value"
           ],
-          "raises_get": [],
-          "raises_set": []
+          "raises_get": "",
+          "raises_set": ""
         }
       ]
     }

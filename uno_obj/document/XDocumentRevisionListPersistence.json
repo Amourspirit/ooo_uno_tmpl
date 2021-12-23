@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:22:00+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:34:06+00:00",
   "name": "XDocumentRevisionListPersistence",
   "type": "interface",
   "namespace": "com.sun.star.document",
@@ -16,7 +16,12 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..util.revision_tag",
+        "RevisionTag"
+      ]
+    ],
     "name": "XDocumentRevisionListPersistence",
     "imports": [],
     "namespace": "com.sun.star.document",
@@ -27,6 +32,31 @@
       "interface to load or store a list of document revisions from or to a document using the packed XML file format"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1document_1_1XDocumentRevisionListPersistence.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "load",
+          "returns": "'typing.List[RevisionTag]'",
+          "desc": [
+            "Loads a list of available revisions from a storage.",
+            "",
+            "This method does not load any revision itself"
+          ],
+          "raises": "com.sun.star.container.NoSuchElementException,",
+          "args": []
+        },
+        {
+          "name": "store",
+          "returns": "None",
+          "desc": [
+            "Stores a list of available revisions to a storage.",
+            "",
+            "This method does not store revisions themselves"
+          ],
+          "raises": "com.sun.star.io.IOException,",
+          "args": []
+        }
+      ]
+    }
   }
 }

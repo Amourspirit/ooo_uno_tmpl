@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:21:45+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:44:01+00:00",
   "name": "XDispatchRecorderSupplier",
   "type": "interface",
   "namespace": "com.sun.star.frame",
@@ -16,7 +16,12 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_dispatch_recorder",
+        "XDispatchRecorder"
+      ]
+    ],
     "name": "XDispatchRecorderSupplier",
     "imports": [],
     "namespace": "com.sun.star.frame",
@@ -28,11 +33,47 @@
       "",
       "With a XDispatchRecorder it's possible to record calls of XDispatch.dispatch(). The recorded data (may a script) can be used to automate recorded dispatch and start it at later time again. This supplier provides access to the recorder and supports some functionality to work with the macro recording mechanism in an easy manner.",
       "",
-      "**See Also**",
+      "**since**",
       "",
-      "    XDispatchRecorder"
+      "    OOo 1.1.2"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1frame_1_1XDispatchRecorderSupplier.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "dispatchAndRecord",
+          "returns": "None",
+          "desc": [
+            "dispatch given URL and record it if recording is enabled",
+            "",
+            "Parameter Dispatcher is used internally to make the dispatch. If recording isn't enabled it will be a normal XDispatch.dispatch() call. Otherwise follow algorithm is used:"
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getDispatchRecorder",
+          "returns": "XDispatchRecorder",
+          "desc": [
+            "provides access on the recorder of this supplier",
+            "",
+            "Returned recorder can be used to record dispatches manually or to get recorded data for further using e.g. saving. He is internally used too due to the method XDispatchRecorderSupplier.dispatchAndRecord()."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "setDispatchRecorder",
+          "returns": "None",
+          "desc": [
+            "set a dispatch recorder on this supplier",
+            "",
+            "Setting of a new recorder make it possible to change recording mode. May there can exist different implementations of a recorder (e.g. to generate Java, Basic or other formats). Changing between local recording inside one Frame or global one by using more than ones can be forced too."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:17:51+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:37:13+00:00",
   "name": "XItemList",
   "type": "interface",
   "namespace": "com.sun.star.awt",
@@ -20,6 +20,166 @@
       "provides convenient access to the list of items in a list box"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XItemList.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "addItemListListener",
+          "returns": "None",
+          "desc": [
+            "registers a listener which is notified about changes in the item list."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getAllItems",
+          "returns": "typing.List[typing.Tuple[str, str]]",
+          "desc": [
+            "retrieves the texts and images of all items in the list"
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getItemData",
+          "returns": "object",
+          "desc": [
+            "retrieves the implementation dependent value associated with the given list item."
+          ],
+          "raises": "com.sun.star.lang.IndexOutOfBoundsException",
+          "args": []
+        },
+        {
+          "name": "getItemImage",
+          "returns": "str",
+          "desc": [
+            "retrieves the URL of the image of an existing item"
+          ],
+          "raises": "com.sun.star.lang.IndexOutOfBoundsException",
+          "args": []
+        },
+        {
+          "name": "getItemText",
+          "returns": "str",
+          "desc": [
+            "retrieves the text of an existing item"
+          ],
+          "raises": "com.sun.star.lang.IndexOutOfBoundsException",
+          "args": []
+        },
+        {
+          "name": "getItemTextAndImage",
+          "returns": "typing.Tuple[str, str]",
+          "desc": [
+            "retrieves both the text and the image URL of an existing item"
+          ],
+          "raises": "com.sun.star.lang.IndexOutOfBoundsException",
+          "args": []
+        },
+        {
+          "name": "insertItem",
+          "returns": "None",
+          "desc": [
+            "inserts a new item into the list"
+          ],
+          "raises": "com.sun.star.lang.IndexOutOfBoundsException",
+          "args": []
+        },
+        {
+          "name": "insertItemImage",
+          "returns": "None",
+          "desc": [
+            "inserts an item which has only an image, but no text"
+          ],
+          "raises": "com.sun.star.lang.IndexOutOfBoundsException",
+          "args": []
+        },
+        {
+          "name": "insertItemText",
+          "returns": "None",
+          "desc": [
+            "inserts an item which has only a text, but no image"
+          ],
+          "raises": "com.sun.star.lang.IndexOutOfBoundsException",
+          "args": []
+        },
+        {
+          "name": "removeAllItems",
+          "returns": "None",
+          "desc": [
+            "removes all items from the list"
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "removeItem",
+          "returns": "None",
+          "desc": [
+            "removes an item from the list"
+          ],
+          "raises": "com.sun.star.lang.IndexOutOfBoundsException",
+          "args": []
+        },
+        {
+          "name": "removeItemListListener",
+          "returns": "None",
+          "desc": [
+            "revokes a listener which is notified about changes in the item list."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "setItemData",
+          "returns": "None",
+          "desc": [
+            "associates an implementation dependent value with the given list item.",
+            "",
+            "You can use this to store data for an item which does not interfere with the displayed text and image, but can be used by the client of the list box for an arbitrary purpose."
+          ],
+          "raises": "com.sun.star.lang.IndexOutOfBoundsException",
+          "args": []
+        },
+        {
+          "name": "setItemImage",
+          "returns": "None",
+          "desc": [
+            "sets a new image for an existing item"
+          ],
+          "raises": "com.sun.star.lang.IndexOutOfBoundsException",
+          "args": []
+        },
+        {
+          "name": "setItemText",
+          "returns": "None",
+          "desc": [
+            "sets a new text for an existing item"
+          ],
+          "raises": "com.sun.star.lang.IndexOutOfBoundsException",
+          "args": []
+        },
+        {
+          "name": "setItemTextAndImage",
+          "returns": "None",
+          "desc": [
+            "sets both a new position and text for an existing item"
+          ],
+          "raises": "com.sun.star.lang.IndexOutOfBoundsException",
+          "args": []
+        }
+      ],
+      "properties": [
+        {
+          "name": "ItemCount",
+          "returns": "int",
+          "desc": [
+            "is the number of items in the list"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
   }
 }

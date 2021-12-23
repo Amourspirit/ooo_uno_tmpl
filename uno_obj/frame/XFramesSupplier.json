@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:21:48+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:44:07+00:00",
   "name": "XFramesSupplier",
   "type": "interface",
   "namespace": "com.sun.star.frame",
@@ -12,7 +12,7 @@
   "data": {
     "from_imports": [
       [
-        "......x_frame",
+        ".x_frame",
         "XFrame"
       ]
     ],
@@ -21,16 +21,50 @@
     "imports": [],
     "namespace": "com.sun.star.frame",
     "extends": [
-      "XFrame"
+      "com.sun.star.frame.XFrame"
     ],
     "desc": [
-      "provides access to sub frames of current one",
-      "",
-      "**See Also**",
-      "",
-      "    XFrames"
+      "provides access to sub frames of current one"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1frame_1_1XFramesSupplier.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getActiveFrame",
+          "returns": "object",
+          "desc": [
+            "gets the current active frame of this container (not of any other available supplier)",
+            "",
+            "This may be the frame itself. The active frame is defined as the frame which contains (recursively) the window with the focus. If no window within the frame contains the focus, this method returns the last frame which had the focus. If no containing window ever had the focus, the first frame within this frame is returned."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getFrames",
+          "returns": "object",
+          "desc": [
+            "provides access to this container and to all other XFramesSupplier which are available from this node of frame tree"
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "setActiveFrame",
+          "returns": "None",
+          "desc": [
+            "is called on activation of a direct sub-frame.",
+            "",
+            "This method is only allowed to be called by a sub-frame according to XFrame.activate() or XFramesSupplier.setActiveFrame(). After this call XFramesSupplier.getActiveFrame() will return the frame specified by Frame.",
+            "",
+            "In general this method first calls the method XFramesSupplier.setActiveFrame() at the creator frame with this as the current argument. Then it broadcasts the FrameActionEvent FrameAction.FRAME_ACTIVATED.",
+            "",
+            "Note: Given parameter Frame must already exist inside the container (e.g., inserted by using XFrames.append())"
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

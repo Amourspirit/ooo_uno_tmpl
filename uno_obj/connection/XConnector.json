@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:16:49+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:43:44+00:00",
   "name": "XConnector",
   "type": "interface",
   "namespace": "com.sun.star.connection",
@@ -24,13 +24,23 @@
       "com.sun.star.uno.XInterface"
     ],
     "desc": [
-      "allows to actively establish an interprocess connection.",
-      "",
-      "**See Also**",
-      "",
-      "    ProUNO - Opening a Connection"
+      "allows to actively establish an interprocess connection."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1connection_1_1XConnector.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "connect",
+          "returns": "object",
+          "desc": [
+            "creates a new connection interprocess connection.",
+            "",
+            "Tries to connect to an XAcceptor. Behavior is unspecified if a call to connect is made when another call to connect either has not yet returned or has returned successfully without raising an exception."
+          ],
+          "raises": "NoConnectException,",
+          "args": []
+        }
+      ]
+    }
   }
 }

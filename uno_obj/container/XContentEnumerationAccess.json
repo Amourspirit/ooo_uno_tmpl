@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:22:17+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:35:24+00:00",
   "name": "XContentEnumerationAccess",
   "type": "interface",
   "namespace": "com.sun.star.container",
@@ -16,7 +16,12 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_enumeration",
+        "XEnumeration"
+      ]
+    ],
     "name": "XContentEnumerationAccess",
     "imports": [],
     "namespace": "com.sun.star.container",
@@ -26,13 +31,28 @@
     "desc": [
       "allows access to the collections of all content types within the object.",
       "",
-      "This example prints the names of all tables:",
-      "",
-      "**See Also**",
-      "",
-      "    Text - Iterating over Text ProUNO - Service Manager - XContentEnumerationAccess Interface"
+      "This example prints the names of all tables:"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1container_1_1XContentEnumerationAccess.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "createContentEnumeration",
+          "returns": "XEnumeration",
+          "desc": [],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getAvailableServiceNames",
+          "returns": "typing.List[str]",
+          "desc": [
+            "XContentEnumerationAccess.createContentEnumeration() creates an enumeration for all the service names which are listed here. For all others it creates no enumeration."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

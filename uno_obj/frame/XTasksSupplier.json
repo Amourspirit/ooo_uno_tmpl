@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:21:54+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:44:21+00:00",
   "name": "XTasksSupplier",
   "type": "interface",
   "namespace": "com.sun.star.frame",
@@ -16,7 +16,12 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..container.x_enumeration_access",
+        "XEnumerationAccess"
+      ]
+    ],
     "name": "XTasksSupplier",
     "imports": [],
     "namespace": "com.sun.star.frame",
@@ -24,9 +29,34 @@
       "com.sun.star.uno.XInterface"
     ],
     "desc": [
-      "use XFramesSupplier instead of that"
+      "use XFramesSupplier instead of that",
+      "",
+      ".. deprecated::",
+      "",
+      "    Interface is deprecated."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1frame_1_1XTasksSupplier.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getActiveTask",
+          "returns": "object",
+          "desc": [
+            "use XFramesSupplier.getActiveFrame() instead of this one"
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getTasks",
+          "returns": "XEnumerationAccess",
+          "desc": [
+            "use XFramesSupplier.getFrames() instead of this one"
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

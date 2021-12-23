@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:17:14+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:40:33+00:00",
   "name": "XIdlField2",
   "type": "interface",
   "namespace": "com.sun.star.reflection",
@@ -16,7 +16,16 @@
         "XIdlMember"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".field_access_mode",
+        "FieldAccessMode"
+      ],
+      [
+        ".x_idl_class",
+        "XIdlClass"
+      ]
+    ],
     "name": "XIdlField2",
     "imports": [],
     "namespace": "com.sun.star.reflection",
@@ -29,6 +38,55 @@
       "struct/exception) member."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1reflection_1_1XIdlField2.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "get",
+          "returns": "object",
+          "desc": [
+            "Gets the value of the reflected field from the given object, i.e.",
+            "",
+            "an interface, enum or compound type (struct/exception). For enums, the given object is ignored; the returned value reflects the constant enum 32-bit value.",
+            "",
+            "When setting an interface attribute raises a non com.sun.star.uno.RuntimeException, it is wrapped in a com.sun.star.lang.WrappedTargetRuntimeException."
+          ],
+          "raises": "com.sun.star.lang.IllegalArgumentException",
+          "args": []
+        },
+        {
+          "name": "getAccessMode",
+          "returns": "FieldAccessMode",
+          "desc": [
+            "Returns the access mode of the field, i.e.",
+            "",
+            "read-write, read-only or write-only (access mode \\\"const\\\" is deprecated)."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getType",
+          "returns": "XIdlClass",
+          "desc": [
+            "Returns the type of the field."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "set",
+          "returns": "None",
+          "desc": [
+            "Sets the value of the reflected field of the given object, i.e.",
+            "",
+            "an interface or compound type (struct/exception).",
+            "",
+            "When setting an interface attribute raises a non com.sun.star.uno.RuntimeException, it is wrapped in a com.sun.star.lang.WrappedTargetRuntimeException."
+          ],
+          "raises": "com.sun.star.lang.IllegalArgumentException,",
+          "args": []
+        }
+      ]
+    }
   }
 }

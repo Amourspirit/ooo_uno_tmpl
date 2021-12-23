@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:17:37+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:39:45+00:00",
   "name": "XIntegerBitmapColorSpace",
   "type": "interface",
   "namespace": "com.sun.star.rendering",
@@ -12,16 +12,33 @@
   "data": {
     "from_imports": [
       [
-        "......x_color_space",
+        ".x_color_space",
         "XColorSpace"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".color_component",
+        "ColorComponent"
+      ],
+      [
+        ".rgb_color",
+        "RGBColor"
+      ],
+      [
+        ".argb_color",
+        "ARGBColor"
+      ],
+      [
+        ".byte",
+        "byte"
+      ]
+    ],
     "name": "XIntegerBitmapColorSpace",
     "imports": [],
     "namespace": "com.sun.star.rendering",
     "extends": [
-      "XColorSpace"
+      "com.sun.star.rendering.XColorSpace"
     ],
     "desc": [
       "A color space for integer bitmap formats.",
@@ -29,6 +46,128 @@
       "This interface encapsulates all information specific to a certain integer bitmap color space, like for example 1555 ARGB. Note that the individual elements of the integer color representation sequence need not correspond to the color space's components - instead, the color components might be packed back-to-back into those bytes, as they appear in the raw bitmap data."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1rendering_1_1XIntegerBitmapColorSpace.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "convertFromIntegerColorSpace",
+          "returns": "'typing.List[ColorComponent]'",
+          "desc": [
+            "Convert integer bitmap color to generic IEEE double device color of another color space.",
+            "",
+            "Color values are properly rounded and clipped, to be valid in the target color space."
+          ],
+          "raises": "com.sun.star.lang.IllegalArgumentException",
+          "args": []
+        },
+        {
+          "name": "convertIntegerFromARGB",
+          "returns": "'typing.List[byte]'",
+          "desc": [
+            "Convert sRGB color with linear alpha into this color space.",
+            "",
+            "If this color space does not convey alpha information, the specified alpha value is silently ignored. Color values are properly rounded and clipped, to be valid in the target color space."
+          ],
+          "raises": "com.sun.star.lang.IllegalArgumentException",
+          "args": []
+        },
+        {
+          "name": "convertIntegerFromPARGB",
+          "returns": "'typing.List[byte]'",
+          "desc": [
+            "Convert premultiplied sRGB color with linear alpha into this color space.",
+            "",
+            "If this color space does not convey alpha information, the specified alpha value is silently ignored. Color values are properly rounded and clipped, to be valid in the target color space."
+          ],
+          "raises": "com.sun.star.lang.IllegalArgumentException",
+          "args": []
+        },
+        {
+          "name": "convertIntegerFromRGB",
+          "returns": "'typing.List[byte]'",
+          "desc": [
+            "Convert sRGB color to an integer representation in this color space.",
+            "",
+            "If this color space conveys alpha information, it is assumed be fully opaque for the given RGB color value. Color values are properly rounded and clipped, to be valid in the target color space."
+          ],
+          "raises": "com.sun.star.lang.IllegalArgumentException",
+          "args": []
+        },
+        {
+          "name": "convertIntegerToARGB",
+          "returns": "'typing.List[ARGBColor]'",
+          "desc": [
+            "Convert color value in this color space to sRGB color values, with linear alpha.",
+            "",
+            "If the given input color does not carry alpha information, an alpha value of 1.0 (fully opaque) is assumed. Color values are properly rounded and clipped, to be valid in the target color space."
+          ],
+          "raises": "com.sun.star.lang.IllegalArgumentException",
+          "args": []
+        },
+        {
+          "name": "convertIntegerToPARGB",
+          "returns": "'typing.List[ARGBColor]'",
+          "desc": [
+            "Convert color value in this color space to premultiplied sRGB color values, with linear alpha.",
+            "",
+            "If the given input color does not carry alpha information, an alpha value of 1.0 (fully opaque) is assumed. Color values are properly rounded and clipped, to be valid in the target color space. The resulting individual RGB color values are premultiplied by the alpha value (e.g. if alpha is 0.5, each color value has only half of the original intensity)."
+          ],
+          "raises": "com.sun.star.lang.IllegalArgumentException",
+          "args": []
+        },
+        {
+          "name": "convertIntegerToRGB",
+          "returns": "'typing.List[RGBColor]'",
+          "desc": [
+            "Convert color value in this color space to sRGB color values.",
+            "",
+            "Any information not representable in the RGBColor struct is discarded during the conversion. This includes alpha information. Color values are properly rounded and clipped, to be valid in the target color space."
+          ],
+          "raises": "com.sun.star.lang.IllegalArgumentException",
+          "args": []
+        },
+        {
+          "name": "convertToIntegerColorSpace",
+          "returns": "'typing.List[byte]'",
+          "desc": [
+            "Convert integer bitmap color to integer bitmap color of another integer bitmap color space.",
+            "",
+            "Color values are properly rounded and clipped, to be valid in the target color space."
+          ],
+          "raises": "com.sun.star.lang.IllegalArgumentException",
+          "args": []
+        },
+        {
+          "name": "getBitsPerPixel",
+          "returns": "int",
+          "desc": [
+            "Query number of bits used per bitmap pixel.",
+            "",
+            "This method yields the total number of bits used for a color value. At the associated XIntegerBitmap, the XIntegerBitmap.setPixel() method will expect a sequence of ceil(BitsPerPixel/8) bytes, and the XIntegerReadOnlyBitmap.getPixel() will return that number of bytes. Similarly, the color conversion expect input data in multiples of ceil(BitsPerPixel/8), and also return converted data in chunks of this."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getComponentBitCounts",
+          "returns": "typing.List[int]",
+          "desc": [
+            "Query the number of bits used for each component.",
+            "",
+            "This method returns a sequence of integers, each denoting the number of bits occupied by the respective component. The sum of all component bits must be less or equal than the value returned from getBitsPerPixel(). If the sum is less, excess bits are always kept in the most significant bits of a pixel. Color components will appear in the byte sequences returned from the XIntegerBitmap methods in the order defined here, with the first element starting from the least significant bits of the pixel, etc."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getEndianness",
+          "returns": "object",
+          "desc": [
+            "Query whether color data bytes need to be swapped."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

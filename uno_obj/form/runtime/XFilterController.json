@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:20:14+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:40:29+00:00",
   "name": "XFilterController",
   "type": "interface",
   "namespace": "com.sun.star.form.runtime",
@@ -11,7 +11,12 @@
   "writer_args": {},
   "data": {
     "from_imports": [],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "...awt.x_control",
+        "XControl"
+      ]
+    ],
     "name": "XFilterController",
     "imports": [],
     "namespace": "com.sun.star.form.runtime",
@@ -29,12 +34,83 @@
       "",
       "With the above, there are potentially m * n predicate expressions (though usually only a fraction of those will actually exist). Since in a form based filter, there are only n filter controls, and each filter control displays exactly one predicate expression, this means that only a part of the complete filter can be displayed, in particular, only one disjunctive term can be displayed at a time. Thus, the filter controller knows the concept of an active term, denoted by the ActiveTerm attribute, controls which of the terms is currently displayed in the form controls.",
       "",
-      "**See Also**",
+      "**since**",
       "",
-      "    XFormController"
+      "    OOo 3.3"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1form_1_1runtime_1_1XFilterController.html",
     "items": {
+      "methods": [
+        {
+          "name": "addFilterControllerListener",
+          "returns": "None",
+          "desc": [
+            "registers a listener to be notified of certain changes in the form based filter.",
+            "",
+            "Registering the same listener multiple times results in multiple notifications of the same event, and also requires multiple revocations of the listener."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "appendEmptyDisjunctiveTerm",
+          "returns": "None",
+          "desc": [
+            "appends an empty disjunctive term to the list of terms."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getFilterComponent",
+          "returns": "XControl",
+          "desc": [
+            "retrieves the filter component with the given index.",
+            "",
+            "The filter control has the same control model as the control which it stands in for. Consequently, you can use this method to obtain the database column which the filter control works on, by examining the control model's BoundField property."
+          ],
+          "raises": "com.sun.star.lang.IndexOutOfBoundsException",
+          "args": []
+        },
+        {
+          "name": "getPredicateExpressions",
+          "returns": "typing.List[typing.List[str]]",
+          "desc": [
+            "retrieves the entirety of the predicate expressions represented by the filter controller.",
+            "",
+            "Each element of the returned sequence is a disjunctive term, having exactly FilterComponents elements, which denote the single predicate expressions of this term."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "removeDisjunctiveTerm",
+          "returns": "None",
+          "desc": [
+            "removes a given disjunctive term"
+          ],
+          "raises": "com.sun.star.lang.IndexOutOfBoundsException",
+          "args": []
+        },
+        {
+          "name": "removeFilterControllerListener",
+          "returns": "None",
+          "desc": [
+            "revokes a listener which was previously registered to be notified of certain changes in the form based filter."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "setPredicateExpression",
+          "returns": "None",
+          "desc": [
+            "sets a given predicate expression"
+          ],
+          "raises": "com.sun.star.lang.IndexOutOfBoundsException",
+          "args": []
+        }
+      ],
       "properties": [
         {
           "name": "ActiveTerm",
@@ -42,10 +118,28 @@
           "desc": [
             "denotes the active term of the filter controller."
           ],
-          "raises_get": [],
-          "raises_set": [
-            "com.sun.star.lang.IndexOutOfBoundsException"
-          ]
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "DisjunctiveTerms",
+          "returns": "int",
+          "desc": [
+            "is the number of disjunctive terms of the filter expression represented by the form based filter."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "FilterComponents",
+          "returns": "int",
+          "desc": [
+            "is the number of filter components, or filter controls, which the filter controller is responsible for.",
+            "",
+            "This number is constant during one session of the form based filter."
+          ],
+          "raises_get": "",
+          "raises_set": ""
         }
       ]
     }

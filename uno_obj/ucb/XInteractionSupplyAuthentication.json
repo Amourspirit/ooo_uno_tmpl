@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:19:00+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:42:15+00:00",
   "name": "XInteractionSupplyAuthentication",
   "type": "interface",
   "namespace": "com.sun.star.ucb",
@@ -16,7 +16,12 @@
         "XInteractionContinuation"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".remember_authentication",
+        "RememberAuthentication"
+      ]
+    ],
     "name": "XInteractionSupplyAuthentication",
     "imports": [],
     "namespace": "com.sun.star.ucb",
@@ -29,6 +34,129 @@
       "This continuation is typically used in conjunction with AuthenticationRequest."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1ucb_1_1XInteractionSupplyAuthentication.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "canSetAccount",
+          "returns": "bool",
+          "desc": [
+            "Specifies if an \\\"account\\\" value can be handed back."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "canSetPassword",
+          "returns": "bool",
+          "desc": [
+            "Specifies if a \\\"password\\\" value can be handed back."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "canSetRealm",
+          "returns": "bool",
+          "desc": [
+            "Specifies if a new \\\"realm\\\" value can be handed back."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "canSetUserName",
+          "returns": "bool",
+          "desc": [
+            "Specifies if a \\\"user name\\\" value can be handed back."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getRememberAccountModes",
+          "returns": "'typing.List[RememberAuthentication]'",
+          "desc": [
+            "Specifies the available modes of how long to remember the account."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getRememberPasswordModes",
+          "returns": "'typing.List[RememberAuthentication]'",
+          "desc": [
+            "Specifies the available modes of how long to remember the password."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "setAccount",
+          "returns": "None",
+          "desc": [
+            "Set a new \\\"account\\\" value to hand back.",
+            "",
+            "This method should be called before com.sun.star.task.XInteractionContinuation.select(), and should only be called if XInteractionSupplyAuthentication.canSetAccount() returned TRUE."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "setPassword",
+          "returns": "None",
+          "desc": [
+            "Set a new \\\"password\\\" value to hand back.",
+            "",
+            "This method should be called before com.sun.star.task.XInteractionContinuation.select(), and should only be called if XInteractionSupplyAuthentication.canSetPassword() returned TRUE."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "setRealm",
+          "returns": "None",
+          "desc": [
+            "Set a new \\\"realm\\\" value to hand back.",
+            "",
+            "This method should be called before com.sun.star.task.XInteractionContinuation.select(), and should only be called if XInteractionSupplyAuthentication.canSetRealm() returned TRUE."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "setRememberAccount",
+          "returns": "None",
+          "desc": [
+            "Set a new mode of how long to remember the account.",
+            "",
+            "This method should be called before com.sun.star.task.XInteractionContinuation.select(), and should only be called if XInteractionSupplyAuthentication.setAccount() is also called."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "setRememberPassword",
+          "returns": "None",
+          "desc": [
+            "Set a new mode of how long to remember the password.",
+            "",
+            "This method should be called before com.sun.star.task.XInteractionContinuation.select(), and should only be called if XInteractionSupplyAuthentication.setPassword() is also called."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "setUserName",
+          "returns": "None",
+          "desc": [
+            "Set a new \\\"user name\\\" value to hand back.",
+            "",
+            "This method should be called before com.sun.star.task.XInteractionContinuation.select(), and should only be called if XInteractionSupplyAuthentication.canSetUserName() returned TRUE."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

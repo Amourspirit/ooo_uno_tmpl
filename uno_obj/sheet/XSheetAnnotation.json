@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:21:13+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:41:48+00:00",
   "name": "XSheetAnnotation",
   "type": "interface",
   "namespace": "com.sun.star.sheet",
@@ -16,7 +16,12 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..table.cell_address",
+        "CellAddress"
+      ]
+    ],
     "name": "XSheetAnnotation",
     "imports": [],
     "namespace": "com.sun.star.sheet",
@@ -24,13 +29,57 @@
       "com.sun.star.uno.XInterface"
     ],
     "desc": [
-      "provides methods to query data of the annotation and to show and hide it.",
-      "",
-      "**See Also**",
-      "",
-      "    com.sun.star.sheet.CellAnnotation"
+      "provides methods to query data of the annotation and to show and hide it."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1sheet_1_1XSheetAnnotation.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getAuthor",
+          "returns": "str",
+          "desc": [
+            "returns the name of the user who last changed the annotation."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getDate",
+          "returns": "str",
+          "desc": [
+            "returns a formatted string representing the date when the annotation was last changed."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getIsVisible",
+          "returns": "bool",
+          "desc": [
+            "returns, whether the annotation is permanently visible."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getPosition",
+          "returns": "CellAddress",
+          "desc": [
+            "returns the position of cell in the spreadsheet document that contains this annotation."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "setIsVisible",
+          "returns": "None",
+          "desc": [
+            "specifies whether the annotation is permanently visible."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

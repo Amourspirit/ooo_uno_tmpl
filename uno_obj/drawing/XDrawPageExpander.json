@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:21:28+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:38:52+00:00",
   "name": "XDrawPageExpander",
   "type": "interface",
   "namespace": "com.sun.star.drawing",
@@ -16,7 +16,12 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_draw_pages",
+        "XDrawPages"
+      ]
+    ],
     "name": "XDrawPageExpander",
     "imports": [],
     "namespace": "com.sun.star.drawing",
@@ -26,11 +31,23 @@
     "desc": [
       "is implemented by documents that can expand the contents of a summary on a DrawPage into a collection of DrawPages.",
       "",
-      "**See Also**",
+      ".. deprecated::",
       "",
-      "    XDrawPageSummarizer"
+      "    Interface is deprecated."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1drawing_1_1XDrawPageExpander.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "expand",
+          "returns": "XDrawPages",
+          "desc": [
+            "creates a collection of DrawPages from the summary inside the given DrawPage and adds them to the same model as the source DrawPage."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

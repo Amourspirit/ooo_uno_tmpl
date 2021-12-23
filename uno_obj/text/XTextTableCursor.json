@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:22:37+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:36:39+00:00",
   "name": "XTextTableCursor",
   "type": "interface",
   "namespace": "com.sun.star.text",
@@ -24,13 +24,102 @@
       "com.sun.star.uno.XInterface"
     ],
     "desc": [
-      "The TextTableCursor provide methods to navigate through the table structure, to merge and split cells.",
-      "",
-      "**See Also**",
-      "",
-      "    com.sun.star.text.TextTable"
+      "The TextTableCursor provide methods to navigate through the table structure, to merge and split cells."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1text_1_1XTextTableCursor.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getRangeName",
+          "returns": "str",
+          "desc": [
+            "The name is the cell name of the top left table cell of the range concatenated by \\\":\\\" with the table cell name of the bottom left table cell of the cell range. If the range consists of one table cell only then the name of that table cell is returned."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "goDown",
+          "returns": "bool",
+          "desc": [
+            "moves the cursor to the bottom neighbor cell."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "goLeft",
+          "returns": "bool",
+          "desc": [
+            "moves the cursor to the left neighbor."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "goRight",
+          "returns": "bool",
+          "desc": [
+            "moves the cursor to the right neighbor."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "goUp",
+          "returns": "bool",
+          "desc": [
+            "moves the cursor to the top neighbor."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "gotoCellByName",
+          "returns": "bool",
+          "desc": [
+            "moves the cursor to the cell with the specified name."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "gotoEnd",
+          "returns": "None",
+          "desc": [
+            "moves the cursor to the bottom right cell of the table."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "gotoStart",
+          "returns": "None",
+          "desc": [
+            "moves the cursor to the top left cell of the table."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "mergeRange",
+          "returns": "bool",
+          "desc": [
+            "merges the selected range of cells."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "splitRange",
+          "returns": "bool",
+          "desc": [
+            "splits the range of cells."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:21:49+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:44:09+00:00",
   "name": "XLayoutManager",
   "type": "interface",
   "namespace": "com.sun.star.frame",
@@ -16,7 +16,28 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..awt.point",
+        "Point"
+      ],
+      [
+        "..ui.x_docking_area_acceptor",
+        "XDockingAreaAcceptor"
+      ],
+      [
+        "..awt.size",
+        "Size"
+      ],
+      [
+        "..awt.rectangle",
+        "Rectangle"
+      ],
+      [
+        "..ui.xui_element",
+        "XUIElement"
+      ]
+    ],
     "name": "XLayoutManager",
     "imports": [],
     "namespace": "com.sun.star.frame",
@@ -32,11 +53,321 @@
       "",
       "Currently the following user interface element types are defined:",
       "",
-      "**See Also**",
+      "**since**",
       "",
-      "    com.sun.star.ui.UIElementTypes"
+      "    OOo 2.0"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1frame_1_1XLayoutManager.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "attachFrame",
+          "returns": "None",
+          "desc": [
+            "attaches a com.sun.star.frame.XFrame to a layout manager.",
+            "",
+            "A layout manager needs a com.sun.star.frame.XFrame to be able to work. Without a it no user interface elements can be created."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "createElement",
+          "returns": "None",
+          "desc": [
+            "creates a new user interface element."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "destroyElement",
+          "returns": "None",
+          "desc": [
+            "destroys a user interface element."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "doLayout",
+          "returns": "None",
+          "desc": [
+            "forces a complete new layouting of all user interface elements."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "dockAllWindows",
+          "returns": "bool",
+          "desc": [
+            "docks all windows which are member of the provided user interface element type."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "dockWindow",
+          "returns": "bool",
+          "desc": [
+            "docks a window based user interface element to a specified docking area."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "floatWindow",
+          "returns": "bool",
+          "desc": [
+            "forces a window based user interface element to float."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getCurrentDockingArea",
+          "returns": "Rectangle",
+          "desc": [
+            "provides the current docking area size of the layout manager."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getDockingAreaAcceptor",
+          "returns": "XDockingAreaAcceptor",
+          "desc": [
+            "retrieves the current docking area acceptor that controls the border space of the frame's container window.",
+            "",
+            "A docking area acceptor retrieved by this method is owned by the layout manager. It is not allowed to dispose this object, it will be destroyed on reference count!"
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getElement",
+          "returns": "XUIElement",
+          "desc": [
+            "retrieves a user interface element which has been created before.",
+            "",
+            "The layout manager instance is owner of the returned user interface element. That means that the life time of the user interface element is controlled by the layout manager. It can be disposed at every time!"
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getElementPos",
+          "returns": "Point",
+          "desc": [
+            "retrieves the current pixel position of a window based user interface element."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getElementSize",
+          "returns": "Size",
+          "desc": [
+            "retrieves the current size of a window based user interface element."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getElements",
+          "returns": "'typing.List[XUIElement]'",
+          "desc": [
+            "retrieves all user interface elements which are currently instantiated.",
+            "",
+            "The layout manager instance is owner of the returned user interface elements. That means that the life time of the user interface elements is controlled by the layout manager. They can be disposed at every time!"
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "hideElement",
+          "returns": "bool",
+          "desc": [
+            "hides a user interface element."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "isElementDocked",
+          "returns": "bool",
+          "desc": [
+            "retrieves the current docking state of a window based user interface element."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "isElementFloating",
+          "returns": "bool",
+          "desc": [
+            "retrieves the current floating state of a window based user interface element."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "isElementLocked",
+          "returns": "bool",
+          "desc": [
+            "retrieves the current lock state of a window based user interface element."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "isElementVisible",
+          "returns": "bool",
+          "desc": [
+            "retrieves the current visibility state of a window based user interface element."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "isVisible",
+          "returns": "bool",
+          "desc": [
+            "retrieves the visibility state of a layout manager.",
+            "",
+            "A layout manager can be set to invisible state to force it to hide all of its user interface elements. If another component wants to use the window for its own user interface elements it can use this function. This function is normally used to implement inplace editing."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "lock",
+          "returns": "None",
+          "desc": [
+            "prohibit all layout updates until unlock is called again.",
+            "",
+            "This call can be used to speed up the creation process of several user interface elements. Otherwise the layout manager would calculate the layout for every creation."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "lockWindow",
+          "returns": "bool",
+          "desc": [
+            "locks a window based user interface element if it's in a docked state."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "requestElement",
+          "returns": "bool",
+          "desc": [
+            "request to make a user interface element visible if it is not in hidden state.",
+            "",
+            "If a user interface element should forced to the visible state XLayoutManager.showElement() should be used. This function can be used for context dependent elements which should respect the current visibility state."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "reset",
+          "returns": "None",
+          "desc": [
+            "resets the layout manager and remove all of its internal user interface elements.",
+            "",
+            "This call should be handled with care as all user interface elements will be destroyed and the layout manager is reset to a state after a attachFrame() has been made. That means an attached frame which has been set by attachFrame() is not released. The layout manager itself calls reset after a component has been attached or reattached to a frame."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "setDockingAreaAcceptor",
+          "returns": "None",
+          "desc": [
+            "sets a docking area acceptor that controls the border space of the frame's container window.",
+            "",
+            "A docking area acceptor decides if the layout manager can use requested border space for docking windows. If the acceptor denies the requested space the layout manager automatically set all docked windows into floating state and will not use this space for docking.\n After setting a docking area acceptor the object is owned by the layout manager. It is not allowed to dispose this object, it will be destroyed on reference count!"
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "setElementPos",
+          "returns": "None",
+          "desc": [
+            "sets a new position for a window based user interface element.",
+            "",
+            "It is up to the layout manager to decide if the user interface element can be moved. The new position can be retrieved by calling getElementPos()."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "setElementPosSize",
+          "returns": "None",
+          "desc": [
+            "sets a new position and size for a window based user interface element.",
+            "",
+            "It is up to the layout manager to decide if the user interface element can be moved and resized. The new position and size can be retrieved by calling getElementPos() and getElementSize()."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "setElementSize",
+          "returns": "None",
+          "desc": [
+            "sets a new size for a window based user interface element.",
+            "",
+            "It is up to the layout manager to decide if the user interface element can be resized. The new size can be retrieved by calling getElementSize()."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "setVisible",
+          "returns": "None",
+          "desc": [
+            "sets the layout manager to invisible state and hides all user interface elements.",
+            "",
+            "A layout manager can be set to invisible state to force it to hide all of its user interface elements. If another component wants to use the window for its own user interface elements it can use this function. This function is normally used to implement inplace editing."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "showElement",
+          "returns": "bool",
+          "desc": [
+            "shows a user interface element."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "unlock",
+          "returns": "None",
+          "desc": [
+            "permit layout updates again.",
+            "",
+            "This function should be called to permit layout updates. The layout manager starts to calculate the new layout after this call."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "unlockWindow",
+          "returns": "bool",
+          "desc": [
+            "unlocks a window based user interface element if it's in a docked state."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

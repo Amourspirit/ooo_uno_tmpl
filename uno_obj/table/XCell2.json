@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:19:20+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:43:45+00:00",
   "name": "XCell2",
   "type": "interface",
   "namespace": "com.sun.star.table",
@@ -24,13 +24,34 @@
       "com.sun.star.table.XCell"
     ],
     "desc": [
-      "extends XCell methods to access the contents of a cell in a table.",
-      "",
-      "**See Also**",
-      "",
-      "    com.sun.star.table.Cell"
+      "extends XCell methods to access the contents of a cell in a table."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1table_1_1XCell2.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "setFormulaResult",
+          "returns": "None",
+          "desc": [
+            "sets a formula result into the cell.",
+            "",
+            "When assigned, the formula cell's result will be set to this value and will not be calculated - unless a HardRecalc is executed."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "setFormulaString",
+          "returns": "None",
+          "desc": [
+            "sets a formula string into the cell.",
+            "",
+            "When assigned, the formula is set into the string. But is not compiled, tokenized or calculated. Its useful when loading a document and setFormulaResult() is used. Otherwise it is compiled on trying to fetch a result value."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

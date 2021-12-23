@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:21:43+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:43:56+00:00",
   "name": "XControllerBorder",
   "type": "interface",
   "namespace": "com.sun.star.frame",
@@ -16,7 +16,12 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..awt.rectangle",
+        "Rectangle"
+      ]
+    ],
     "name": "XControllerBorder",
     "imports": [],
     "namespace": "com.sun.star.frame",
@@ -27,6 +32,47 @@
       "allows to retrieve information about controller's border."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1frame_1_1XControllerBorder.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "addBorderResizeListener",
+          "returns": "None",
+          "desc": [
+            "adds the specified listener to receive events about controller's border resizing."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getBorder",
+          "returns": "object",
+          "desc": [
+            "allows to get current border sizes of the document."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "queryBorderedArea",
+          "returns": "Rectangle",
+          "desc": [
+            "allows to get suggestion for resizing of object area surrounded by the border.",
+            "",
+            "If the view is going to be resized/moved this method can be used to get suggested object area. Pixels are used as units."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "removeBorderResizeListener",
+          "returns": "None",
+          "desc": [
+            "removes the specified listener."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

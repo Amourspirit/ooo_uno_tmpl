@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:21:45+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:43:59+00:00",
   "name": "XDispatchProviderInterceptor",
   "type": "interface",
   "namespace": "com.sun.star.frame",
@@ -12,7 +12,7 @@
   "data": {
     "from_imports": [
       [
-        "......x_dispatch_provider",
+        ".x_dispatch_provider",
         "XDispatchProvider"
       ]
     ],
@@ -21,18 +21,53 @@
     "imports": [],
     "namespace": "com.sun.star.frame",
     "extends": [
-      "XDispatchProvider"
+      "com.sun.star.frame.XDispatchProvider"
     ],
     "desc": [
       "makes it possible to intercept request of XDispatch.",
       "",
-      "Can be registered as an interceptor by using interface XDispatchProviderInterception.",
-      "",
-      "**See Also**",
-      "",
-      "    XDispatchProviderInterception"
+      "Can be registered as an interceptor by using interface XDispatchProviderInterception."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1frame_1_1XDispatchProviderInterceptor.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getMasterDispatchProvider",
+          "returns": "object",
+          "desc": [
+            "access to the master XDispatchProvider of this interceptor"
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getSlaveDispatchProvider",
+          "returns": "object",
+          "desc": [
+            "access to the slave XDispatchProvider of this interceptor"
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "setMasterDispatchProvider",
+          "returns": "None",
+          "desc": [
+            "sets the master XDispatchProvider, which may forward calls to its XDispatchProvider.queryDispatch() to this dispatch provider."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "setSlaveDispatchProvider",
+          "returns": "None",
+          "desc": [
+            "sets the slave XDispatchProvider to which calls to XDispatchProvider.queryDispatch() can be forwarded under control of this dispatch provider."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

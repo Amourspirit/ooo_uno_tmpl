@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:18:59+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:42:11+00:00",
   "name": "XDynamicResultSetListener",
   "type": "interface",
   "namespace": "com.sun.star.ucb",
@@ -27,6 +27,26 @@
       "used to receive notifications from an XDynamicResultSet."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1ucb_1_1XDynamicResultSetListener.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "notify",
+          "returns": "None",
+          "desc": [
+            "A method used to propagate changes of a result set.",
+            "",
+            "In the first notify-call the listener gets two(!) com.sun.star.sdbc.XResultSets and has to hold them. The com.sun.star.sdbc.XResultSets are implementations of the service ContentResultSet.",
+            "",
+            "The notified new com.sun.star.sdbc.XResultSet will stay valid after returning from this method. The old one will become invalid after returning.",
+            "",
+            "While in notify-call the listener is allowed to read from old and new result set, except in the first call, where only the new result set is valid.",
+            "",
+            "The Listener is allowed to stay (block) this call, until he really wants to use the new result set. The only situation, where the listener has to return immediately is while he disposes his broadcaster or while he is removing himself as listener (otherwise you deadlock)!!!"
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

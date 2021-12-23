@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:22:44+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:40:09+00:00",
   "name": "XModel",
   "type": "interface",
   "namespace": "com.sun.star.xforms",
@@ -11,7 +11,20 @@
   "writer_args": {},
   "data": {
     "from_imports": [],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..xml.dom.x_document",
+        "XDocument"
+      ],
+      [
+        "..container.x_set",
+        "XSet"
+      ],
+      [
+        "..beans.x_property_set",
+        "XPropertySet"
+      ]
+    ],
     "name": "XModel",
     "imports": [],
     "namespace": "com.sun.star.xforms",
@@ -20,6 +33,216 @@
       "represent an XForms model"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1xforms_1_1XModel.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "cloneBinding",
+          "returns": "XPropertySet",
+          "desc": [
+            "clone an arbitrary binding element for this model; still needs",
+            "",
+            "The returned binding still needs to be inserted into the bindings container."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "cloneSubmission",
+          "returns": "object",
+          "desc": [
+            "clone an arbitrary submission element for this model",
+            "",
+            "The returned submission element still needs to be inserted into the submission container."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "createBinding",
+          "returns": "XPropertySet",
+          "desc": [
+            "create a binding element for this model",
+            "",
+            "The returned binding still needs to be inserted into the bindings container."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "createSubmission",
+          "returns": "object",
+          "desc": [
+            "create a submission element for this model",
+            "",
+            "The returned submission element still needs to be inserted into the submission container."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getBinding",
+          "returns": "XPropertySet",
+          "desc": [
+            "get a binding with a certain ID",
+            "",
+            "This is a convenience method: the same result can also be obtained through getBindings()"
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getBindings",
+          "returns": "XSet",
+          "desc": [
+            "get a container containing all bindings; also supports XNameAccess"
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getDataTypeRepository",
+          "returns": "object",
+          "desc": [
+            "provides management access to the XSD data types associated with the model"
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getDefaultInstance",
+          "returns": "XDocument",
+          "desc": [
+            "get the default instance for this model"
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getID",
+          "returns": "str",
+          "desc": [
+            "get the XForms model ID"
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getInstanceDocument",
+          "returns": "XDocument",
+          "desc": [
+            "retrieves the instance with the given id"
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getInstances",
+          "returns": "XSet",
+          "desc": [
+            "gets container containing all instances;",
+            "",
+            "The elements of the set are arrays of com.sun.star.beans.PropertyValues, containing the ID, the URL, and the instance itself."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getSubmission",
+          "returns": "object",
+          "desc": [
+            "get a submission with a certain ID.",
+            "",
+            "This is a convenience method: the same result can also be obtained through getSubmissions()."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getSubmissions",
+          "returns": "XSet",
+          "desc": [
+            "get container containing all submissions; also supports XNameAccess"
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "initialize",
+          "returns": "None",
+          "desc": [
+            "initialize the model"
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "rebuild",
+          "returns": "None",
+          "desc": [
+            "rebuild the model"
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "recalculate",
+          "returns": "None",
+          "desc": [
+            "re-evaluate all calculate attributes"
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "refresh",
+          "returns": "None",
+          "desc": [
+            "refresh the model"
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "revalidate",
+          "returns": "None",
+          "desc": [
+            "re-evaluate all validity attributes"
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "setID",
+          "returns": "None",
+          "desc": [
+            "set the XForms model ID"
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "submit",
+          "returns": "None",
+          "desc": [
+            "submit form through given submission id",
+            "",
+            "This is a convenience method. Calling it is equivalent to calling getSubmission()( id ).submit()."
+          ],
+          "raises": "com.sun.star.util.VetoException,",
+          "args": []
+        },
+        {
+          "name": "submitWithInteraction",
+          "returns": "None",
+          "desc": [
+            "submit form through given submission id",
+            "",
+            "This is a convenience method. Calling it is equivalent to calling getSubmission()( id, handler ).submit()."
+          ],
+          "raises": "com.sun.star.util.VetoException,",
+          "args": []
+        }
+      ]
+    }
   }
 }

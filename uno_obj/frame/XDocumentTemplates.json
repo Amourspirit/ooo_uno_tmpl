@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:21:45+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:44:01+00:00",
   "name": "XDocumentTemplates",
   "type": "interface",
   "namespace": "com.sun.star.frame",
@@ -16,7 +16,12 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..ucb.x_content",
+        "XContent"
+      ]
+    ],
     "name": "XDocumentTemplates",
     "imports": [],
     "namespace": "com.sun.star.frame",
@@ -29,6 +34,94 @@
       "Template information is saved as links to the original content and organized in groups. This data should be persistent and can be updated by calling special method XDocumentTemplates.update(). A real implementation of this interface can do that on top of a ucb content provider. Method XDocumentTemplates.getContent() force that."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1frame_1_1XDocumentTemplates.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "addGroup",
+          "returns": "bool",
+          "desc": [
+            "creates a new group"
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "addTemplate",
+          "returns": "bool",
+          "desc": [
+            "creates the template with the given name in the given group using the given URL"
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getContent",
+          "returns": "XContent",
+          "desc": [
+            "provides access to the root of internal used hierarchy",
+            "",
+            "This content can be used for accessing the groups directly."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "removeGroup",
+          "returns": "bool",
+          "desc": [
+            "remove an existing group"
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "removeTemplate",
+          "returns": "bool",
+          "desc": [
+            "remove a template from specified group"
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "renameGroup",
+          "returns": "bool",
+          "desc": [
+            "rename an existing group"
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "renameTemplate",
+          "returns": "bool",
+          "desc": [
+            "rename a template inside specified group"
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "storeTemplate",
+          "returns": "bool",
+          "desc": [
+            "creates the template with the given name in the given group using the data from the storable"
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "update",
+          "returns": "None",
+          "desc": [
+            "force an update for internal structures",
+            "",
+            "Because the templates are well known by links and not as direct content they can be outdated. An update force actualization of that to find wrong links."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

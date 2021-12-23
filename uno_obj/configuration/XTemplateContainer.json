@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:17:07+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:34:58+00:00",
   "name": "XTemplateContainer",
   "type": "interface",
   "namespace": "com.sun.star.configuration",
@@ -28,13 +28,25 @@
       "",
       "An implementation will also implement com.sun.star.lang.XSingleServiceFactory, in which case that interface creates instances of the specified template.",
       "",
-      "If multiple templates are supported, the supported factory interface may be com.sun.star.lang.XMultiServiceFactory, in which case the string returned from XTemplateContainer.getElementTemplateName() can be used as the service name argument.",
-      "",
-      "**See Also**",
-      "",
-      "    XTemplateInstance"
+      "If multiple templates are supported, the supported factory interface may be com.sun.star.lang.XMultiServiceFactory, in which case the string returned from XTemplateContainer.getElementTemplateName() can be used as the service name argument."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1configuration_1_1XTemplateContainer.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getElementTemplateName",
+          "returns": "str",
+          "desc": [
+            "retrieves the name of the template",
+            "",
+            "If instances of multiple templates are accepted by the container, this is the name of the basic or primary template.",
+            "",
+            "Instances of the template must be created using an appropriate factory."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:21:18+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:41:53+00:00",
   "name": "XSolver",
   "type": "interface",
   "namespace": "com.sun.star.sheet",
@@ -17,10 +17,10 @@
       ]
     ],
     "from_imports_typing": [
-      "......x_spreadsheet_document",
-      "XSpreadsheetDocument",
-      "......cell_address",
-      "CellAddress"
+      [
+        "..table.cell_address",
+        "CellAddress"
+      ]
     ],
     "name": "XSolver",
     "imports": [],
@@ -33,15 +33,26 @@
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1sheet_1_1XSolver.html",
     "items": {
+      "methods": [
+        {
+          "name": "solve",
+          "returns": "None",
+          "desc": [
+            "executes the calculation and tries to find a solution."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ],
       "properties": [
         {
           "name": "Document",
-          "returns": "'XSpreadsheetDocument'",
+          "returns": "object",
           "desc": [
             "The spreadsheet document that contains the cells."
           ],
-          "raises_get": [],
-          "raises_set": []
+          "raises_get": "",
+          "raises_set": ""
         },
         {
           "name": "Maximize",
@@ -49,17 +60,35 @@
           "desc": [
             "selects if the objective value is maximized or minimized."
           ],
-          "raises_get": [],
-          "raises_set": []
+          "raises_get": "",
+          "raises_set": ""
         },
         {
           "name": "Objective",
-          "returns": "'CellAddress'",
+          "returns": "CellAddress",
           "desc": [
             "The address of the cell that contains the objective value."
           ],
-          "raises_get": [],
-          "raises_set": []
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ResultValue",
+          "returns": "float",
+          "desc": [
+            "contains the objective value for the solution, if a solution was found."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Success",
+          "returns": "bool",
+          "desc": [
+            "contains TRUE if a solution was found."
+          ],
+          "raises_get": "",
+          "raises_set": ""
         }
       ]
     }

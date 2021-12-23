@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:18:41+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:37:58+00:00",
   "name": "XPackageTypeInfo",
   "type": "interface",
   "namespace": "com.sun.star.deployment",
@@ -19,11 +19,63 @@
     "desc": [
       "Objects of this interface provide information about a package's type.",
       "",
-      "**See Also**",
+      "**since**",
       "",
       "    OOo 2.0"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1deployment_1_1XPackageTypeInfo.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getDescription",
+          "returns": "str",
+          "desc": [
+            "returns a description string to describe a package type."
+          ],
+          "raises": "ExtensionRemovedException",
+          "args": []
+        },
+        {
+          "name": "getFileFilter",
+          "returns": "str",
+          "desc": [
+            "returns a file filter string for the file picker user interface.",
+            "",
+            "Both, the short description string and file filter string will be passed to com.sun.star.ui.dialogs.XFilterManager.appendFilter()."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getIcon",
+          "returns": "object",
+          "desc": [
+            "returns an icon for a package."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getMediaType",
+          "returns": "str",
+          "desc": [
+            "returns the media type of a package, e.g.",
+            "",
+            "application/vnd.sun.star.basic-script."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getShortDescription",
+          "returns": "str",
+          "desc": [
+            "returns a short description string to describe a package type (one line only)."
+          ],
+          "raises": "ExtensionRemovedException",
+          "args": []
+        }
+      ]
+    }
   }
 }

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:22:08+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:35:15+00:00",
   "name": "XConnectionPointContainer",
   "type": "interface",
   "namespace": "com.sun.star.lang",
@@ -16,7 +16,12 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".type",
+        "type"
+      ]
+    ],
     "name": "XConnectionPointContainer",
     "imports": [],
     "namespace": "com.sun.star.lang",
@@ -26,13 +31,48 @@
     "desc": [
       "makes it possible to locate a specific connection point for a specified UIK and manages a sequence of connections points.",
       "",
-      "An implementation of this interface must support the com.sun.star.uno.XWeak interface. Look at the language binding for a superclass or something else.",
-      "",
-      "**See Also**",
-      "",
-      "    XConnectionPoint"
+      "An implementation of this interface must support the com.sun.star.uno.XWeak interface. Look at the language binding for a superclass or something else."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1lang_1_1XConnectionPointContainer.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "advise",
+          "returns": "None",
+          "desc": [
+            "creates a connection between this object and a client's sink, where the sink implements the outgoing interface specified with ID.",
+            "",
+            "The interface is advised under the connection point you get with queryConnectionPoint( id ).",
+            "",
+            "Use this method instead of the advise method at the connection point, only if you know that the broadcaster supports the outgoing interface, or if it does not matter that the outgoing interface is not supported."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getConnectionPointTypes",
+          "returns": "'typing.List[type]'",
+          "desc": [],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "queryConnectionPoint",
+          "returns": "object",
+          "desc": [],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "unadvise",
+          "returns": "None",
+          "desc": [
+            "terminates a notification previously set up with advise at the container or at the suitable connection point."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

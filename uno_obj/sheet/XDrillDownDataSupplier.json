@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:21:06+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:41:39+00:00",
   "name": "XDrillDownDataSupplier",
   "type": "interface",
   "namespace": "com.sun.star.sheet",
@@ -28,11 +28,23 @@
       "",
       "A service that acts as a DataPilot data source can optionally implement this interface to allow drill-down of result data. The method this interface provides is used internally when calling XDataPilotTable2.getDrillDownData() or XDataPilotTable2.insertDrillDownSheet(). If the data source service does not implement this interface, then the aforementioned two methods will have no effect.",
       "",
-      "**See Also**",
+      "**since**",
       "",
-      "    com.sun.star.sheet.DataPilotSource"
+      "    OOo 3.0"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1sheet_1_1XDrillDownDataSupplier.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getDrillDownData",
+          "returns": "typing.List[typing.List[object]]",
+          "desc": [
+            "This method returns filtered subset of the original source data based on a given set of filtering criteria."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:18:29+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:44:31+00:00",
   "name": "XFastShapeContextHandler",
   "type": "interface",
   "namespace": "com.sun.star.xml.sax",
@@ -17,14 +17,26 @@
       ]
     ],
     "from_imports_typing": [
-      ".......x_document_properties",
-      "XDocumentProperties",
-      ".......point",
-      "Point",
-      ".......x_model",
-      "XModel",
-      ".......x_draw_page",
-      "XDrawPage"
+      [
+        "...document.x_document_properties",
+        "XDocumentProperties"
+      ],
+      [
+        "...awt.point",
+        "Point"
+      ],
+      [
+        "...drawing.x_draw_page",
+        "XDrawPage"
+      ],
+      [
+        "...drawing.x_shape",
+        "XShape"
+      ],
+      [
+        "...frame.x_model",
+        "XModel"
+      ]
     ],
     "name": "XFastShapeContextHandler",
     "imports": [],
@@ -35,54 +47,78 @@
     "desc": [
       "receives notification of sax document events from a XFastParser.",
       "",
-      "**See Also**",
+      "**since**",
       "",
-      "    XFastDocumentHandler"
+      "    LibreOffice 7.1"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1xml_1_1sax_1_1XFastShapeContextHandler.html",
     "items": {
+      "methods": [
+        {
+          "name": "setGraphicMapper",
+          "returns": "None",
+          "desc": [
+            "Graphic mapper to map a key/id string to a XGraphic.",
+            "",
+            "This is needed to remember for XGraphics for a path in the document storage",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 7.1"
+          ],
+          "raises": "",
+          "args": []
+        }
+      ],
       "properties": [
         {
           "name": "DocumentProperties",
-          "returns": "'XDocumentProperties'",
+          "returns": "XDocumentProperties",
           "desc": [],
-          "raises_get": [],
-          "raises_set": []
+          "raises_get": "",
+          "raises_set": ""
         },
         {
           "name": "DrawPage",
-          "returns": "'XDrawPage'",
+          "returns": "XDrawPage",
           "desc": [],
-          "raises_get": [],
-          "raises_set": []
+          "raises_get": "",
+          "raises_set": ""
         },
         {
           "name": "Model",
-          "returns": "'XModel'",
+          "returns": "XModel",
           "desc": [],
-          "raises_get": [],
-          "raises_set": []
+          "raises_get": "",
+          "raises_set": ""
         },
         {
           "name": "Position",
-          "returns": "'Point'",
+          "returns": "Point",
           "desc": [],
-          "raises_get": [],
-          "raises_set": []
+          "raises_get": "",
+          "raises_set": ""
         },
         {
           "name": "RelationFragmentPath",
           "returns": "str",
           "desc": [],
-          "raises_get": [],
-          "raises_set": []
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Shape",
+          "returns": "XShape",
+          "desc": [],
+          "raises_get": "",
+          "raises_set": ""
         },
         {
           "name": "StartToken",
           "returns": "int",
           "desc": [],
-          "raises_get": [],
-          "raises_set": []
+          "raises_get": "",
+          "raises_set": ""
         }
       ]
     }

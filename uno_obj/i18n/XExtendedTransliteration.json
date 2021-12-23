@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:20:40+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:37:38+00:00",
   "name": "XExtendedTransliteration",
   "type": "interface",
   "namespace": "com.sun.star.i18n",
@@ -28,11 +28,45 @@
       "",
       "It is derived from com.sun.star.i18n.XTransliteration and provides additional functionality for character to character and string to string without offset parameter transliteration. These should be used for performance reason if their full-blown counterparts aren't needed.",
       "",
-      "**See Also**",
+      "**since**",
       "",
       "    OOo 1.1.2"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1i18n_1_1XExtendedTransliteration.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "transliterateChar2Char",
+          "returns": "str",
+          "desc": [
+            "Transliterate a character to a character.",
+            "",
+            "If the output contains multiple characters, for example when transliterating German sharp \\\"s\\\" (the one that looks like a Greek Beta) to upper case \\\"SS\\\", MultipleCharsOutputException will be thrown, the caller must catch the exception and then call XTransliteration.transliterateChar2String() to obtain the correct result."
+          ],
+          "raises": "MultipleCharsOutputException",
+          "args": []
+        },
+        {
+          "name": "transliterateChar2String",
+          "returns": "str",
+          "desc": [
+            "Transliterate a character to a string."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "transliterateString2String",
+          "returns": "str",
+          "desc": [
+            "Transliterate a substring.",
+            "",
+            "The functionality is the same as com.sun.star.i18n.XTransliteration.transliterate() but omits the offset parameter to improve performance."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

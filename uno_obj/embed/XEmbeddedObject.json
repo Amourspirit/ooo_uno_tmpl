@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:18:46+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:43:09+00:00",
   "name": "XEmbeddedObject",
   "type": "interface",
   "namespace": "com.sun.star.embed",
@@ -12,46 +12,44 @@
   "data": {
     "from_imports": [
       [
-        "......x_classified_object",
+        ".x_classified_object",
         "XClassifiedObject"
       ],
       [
-        "......x_state_change_broadcaster",
-        "XStateChangeBroadcaster"
+        ".x_component_supplier",
+        "XComponentSupplier"
       ],
       [
-        "......x_visual_object",
+        ".x_visual_object",
         "XVisualObject"
+      ],
+      [
+        ".x_state_change_broadcaster",
+        "XStateChangeBroadcaster"
       ],
       [
         "..util.x_closeable",
         "XCloseable"
       ],
       [
-        "......x_component_supplier",
-        "XComponentSupplier"
-      ],
-      [
         "..document.x_event_broadcaster",
         "XEventBroadcaster"
       ]
     ],
-    "from_imports_typing": [],
-    "name": "XEmbeddedObject",
-    "imports": [
-      "XClassifiedObject",
-      "XStateChangeBroadcaster",
-      "XVisualObject",
-      "com.sun.star.util.XCloseable",
-      "XComponentSupplier",
-      "com.sun.star.document.XEventBroadcaster"
+    "from_imports_typing": [
+      [
+        ".verb_descriptor",
+        "VerbDescriptor"
+      ]
     ],
+    "name": "XEmbeddedObject",
+    "imports": [],
     "namespace": "com.sun.star.embed",
     "extends": [
-      "XVisualObject",
-      "XClassifiedObject",
-      "XComponentSupplier",
-      "XStateChangeBroadcaster",
+      "com.sun.star.embed.XVisualObject",
+      "com.sun.star.embed.XClassifiedObject",
+      "com.sun.star.embed.XComponentSupplier",
+      "com.sun.star.embed.XStateChangeBroadcaster",
       "com.sun.star.document.XEventBroadcaster",
       "com.sun.star.util.XCloseable"
     ],
@@ -59,6 +57,108 @@
       "represents common functionality for embedded objects."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1embed_1_1XEmbeddedObject.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "changeState",
+          "returns": "None",
+          "desc": [
+            "changes the state of the object to the requested one."
+          ],
+          "raises": "com.sun.star.embed.UnreachableStateException,",
+          "args": []
+        },
+        {
+          "name": "doVerb",
+          "returns": "None",
+          "desc": [
+            "lets object perform an action referenced by nVerbID."
+          ],
+          "raises": "com.sun.star.lang.IllegalArgumentException,",
+          "args": []
+        },
+        {
+          "name": "getClientSite",
+          "returns": "object",
+          "desc": [
+            "provides access to the internal link to the container client."
+          ],
+          "raises": "com.sun.star.embed.WrongStateException",
+          "args": []
+        },
+        {
+          "name": "getCurrentState",
+          "returns": "int",
+          "desc": [
+            "returns the current state of the object."
+          ],
+          "raises": "com.sun.star.embed.WrongStateException",
+          "args": []
+        },
+        {
+          "name": "getReachableStates",
+          "returns": "typing.List[int]",
+          "desc": [
+            "returns supported states for the object."
+          ],
+          "raises": "com.sun.star.embed.NeedsRunningStateException,",
+          "args": []
+        },
+        {
+          "name": "getStatus",
+          "returns": "object",
+          "desc": [
+            "retrieves the status of the object."
+          ],
+          "raises": "com.sun.star.embed.WrongStateException",
+          "args": []
+        },
+        {
+          "name": "getSupportedVerbs",
+          "returns": "'typing.List[VerbDescriptor]'",
+          "desc": [
+            "returns supported verbs for the object."
+          ],
+          "raises": "com.sun.star.embed.NeedsRunningStateException,",
+          "args": []
+        },
+        {
+          "name": "setClientSite",
+          "returns": "None",
+          "desc": [
+            "sets a connection to the container's client."
+          ],
+          "raises": "com.sun.star.embed.WrongStateException",
+          "args": []
+        },
+        {
+          "name": "setContainerName",
+          "returns": "None",
+          "desc": [
+            "provides object with the name of container document."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "setUpdateMode",
+          "returns": "None",
+          "desc": [
+            "specifies how often the object's representation should be updated."
+          ],
+          "raises": "com.sun.star.embed.WrongStateException",
+          "args": []
+        },
+        {
+          "name": "update",
+          "returns": "None",
+          "desc": [
+            "updates object's representations."
+          ],
+          "raises": "com.sun.star.embed.WrongStateException,",
+          "args": []
+        }
+      ]
+    }
   }
 }

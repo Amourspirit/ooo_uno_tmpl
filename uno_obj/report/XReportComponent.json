@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:16:31+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:35:02+00:00",
   "name": "XReportComponent",
   "type": "interface",
   "namespace": "com.sun.star.report",
@@ -12,35 +12,34 @@
   "data": {
     "from_imports": [
       [
-        "..container.x_child",
-        "XChild"
+        "..lang.x_component",
+        "XComponent"
+      ],
+      [
+        "..beans.x_property_set",
+        "XPropertySet"
       ],
       [
         "..drawing.x_shape",
         "XShape"
       ],
       [
-        "..lang.x_component",
-        "XComponent"
+        "..container.x_child",
+        "XChild"
       ],
       [
         "..util.x_cloneable",
         "XCloneable"
-      ],
-      [
-        "..beans.x_property_set",
-        "XPropertySet"
       ]
     ],
-    "from_imports_typing": [],
-    "name": "XReportComponent",
-    "imports": [
-      "com.sun.star.container.XChild",
-      "com.sun.star.drawing.XShape",
-      "com.sun.star.lang.XComponent",
-      "com.sun.star.util.XCloneable",
-      "com.sun.star.beans.XPropertySet"
+    "from_imports_typing": [
+      [
+        ".x_section",
+        "XSection"
+      ]
     ],
+    "name": "XReportComponent",
+    "imports": [],
     "namespace": "com.sun.star.report",
     "extends": [
       "com.sun.star.util.XCloneable",
@@ -50,13 +49,108 @@
       "com.sun.star.beans.XPropertySet"
     ],
     "desc": [
-      "describes a component which may be part of a report.",
-      "",
-      "**See Also**",
-      "",
-      "    XReportDefinition"
+      "describes a component which may be part of a report."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1report_1_1XReportComponent.html",
-    "items": {}
+    "items": {
+      "properties": [
+        {
+          "name": "AutoGrow",
+          "returns": "bool",
+          "desc": [
+            "Specifies that the control containing data shall automatically grow to the optimal height to show the data without wasting space."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ControlBorder",
+          "returns": "int",
+          "desc": [
+            "specifies the border style of the control."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ControlBorderColor",
+          "returns": "int",
+          "desc": [
+            "specifies the color of the border, if present",
+            "",
+            "Not every border style (see Border) may support coloring. For instance, usually a border with 3D effect will ignore the BorderColor setting."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Height",
+          "returns": "int",
+          "desc": [
+            "specifies the height of the control."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Name",
+          "returns": "str",
+          "desc": [
+            "the name of the component."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "PositionX",
+          "returns": "int",
+          "desc": [
+            "specifies the horizontal position of the control."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "PositionY",
+          "returns": "int",
+          "desc": [
+            "specifies the vertical position of the control."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "PrintRepeatedValues",
+          "returns": "bool",
+          "desc": [
+            "Specifies that recurring values are printed.",
+            "",
+            "If set to TRUE then the value will be printed every time. If set to FALSE then the value will only be printed once. The default value is TRUE."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Section",
+          "returns": "XSection",
+          "desc": [
+            "Specifies the section where the control belongs to.",
+            "",
+            "This is a shortcut to get control hierarchy up. This value is NULL when the control was not inserted in any section."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Width",
+          "returns": "int",
+          "desc": [
+            "specifies the width of the control."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
   }
 }

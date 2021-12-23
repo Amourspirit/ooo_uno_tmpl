@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:17:03+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:38:28+00:00",
   "name": "XPersistObject",
   "type": "interface",
   "namespace": "com.sun.star.io",
@@ -32,13 +32,47 @@
       "",
       "The serialization format (the series of strings, integers, objects) must be specified at the specification of the concrete service.",
       "",
-      "The interface does not support any special versioning mechanism.",
-      "",
-      "**See Also**",
-      "",
-      "    com.sun.star.io.XObjectOutputStream"
+      "The interface does not support any special versioning mechanism."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1io_1_1XPersistObject.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getServiceName",
+          "returns": "str",
+          "desc": [
+            "gives the service name of the object",
+            "",
+            "This name is used to create such an object by a factory during deserialization."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "read",
+          "returns": "None",
+          "desc": [
+            "reads all the persistent data of the object from the stream.",
+            "",
+            "In case other XPersistObjects are read from the stream, the implementation uses a factory to create these objects (in general the global service manager).",
+            "",
+            "The implementation must read the data in the order documented at the service specification."
+          ],
+          "raises": "com.sun.star.io.IOException",
+          "args": []
+        },
+        {
+          "name": "write",
+          "returns": "None",
+          "desc": [
+            "writes all the persistent data of the object to the stream.",
+            "",
+            "The implementation must write the data in the order documented in the service specification."
+          ],
+          "raises": "com.sun.star.io.IOException",
+          "args": []
+        }
+      ]
+    }
   }
 }

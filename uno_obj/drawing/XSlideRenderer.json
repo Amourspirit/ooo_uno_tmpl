@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:21:34+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:39:00+00:00",
   "name": "XSlideRenderer",
   "type": "interface",
   "namespace": "com.sun.star.drawing",
@@ -11,7 +11,20 @@
   "writer_args": {},
   "data": {
     "from_imports": [],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..awt.size",
+        "Size"
+      ],
+      [
+        "..rendering.x_bitmap",
+        "XBitmap"
+      ],
+      [
+        "..awt.x_bitmap",
+        "XBitmap"
+      ]
+    ],
     "name": "XSlideRenderer",
     "imports": [],
     "namespace": "com.sun.star.drawing",
@@ -20,6 +33,38 @@
       "Create preview bitmaps for single slides."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1drawing_1_1XSlideRenderer.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "calculatePreviewSize",
+          "returns": "Size",
+          "desc": [
+            "Return a size that has the given aspect ratio and shares either the width or the height with the given maximum size."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "createPreview",
+          "returns": "XBitmap",
+          "desc": [
+            "Create a preview for the given slide that has the same aspect ratio as the page and is as large as possible but not larger than the specified size.",
+            "",
+            "The reason for not using the given size directly as preview size and thus possibly changing the aspect ratio is that a) a different aspect ratio is not used often, and b) leaving the adaptation of the actual preview size (according to the aspect ratio of the slide) to the slide renderer is more convenient to the caller than having to this himself."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "createPreviewForCanvas",
+          "returns": "XBitmap",
+          "desc": [
+            "Exactly the same functionality as createPreview(), only a different return type: com.sun.star.rendering.XBitmap instead of com.sun.star.awt.XBitmap."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

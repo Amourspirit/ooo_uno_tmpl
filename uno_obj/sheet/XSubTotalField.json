@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:21:20+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:41:56+00:00",
   "name": "XSubTotalField",
   "type": "interface",
   "namespace": "com.sun.star.sheet",
@@ -16,7 +16,12 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".sub_total_column",
+        "SubTotalColumn"
+      ]
+    ],
     "name": "XSubTotalField",
     "imports": [],
     "namespace": "com.sun.star.sheet",
@@ -24,13 +29,48 @@
       "com.sun.star.uno.XInterface"
     ],
     "desc": [
-      "provides access to the settings of a field in a subtotal descriptor.",
-      "",
-      "**See Also**",
-      "",
-      "    com.sun.star.sheet.SubTotalField"
+      "provides access to the settings of a field in a subtotal descriptor."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1sheet_1_1XSubTotalField.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getGroupColumn",
+          "returns": "int",
+          "desc": [
+            "returns the column by which entries are grouped."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getSubTotalColumns",
+          "returns": "'typing.List[SubTotalColumn]'",
+          "desc": [
+            "returns the definitions of which columns should have subtotals added to them."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "setGroupColumn",
+          "returns": "None",
+          "desc": [
+            "sets the column by which entries are grouped."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "setSubTotalColumns",
+          "returns": "None",
+          "desc": [
+            "sets the definitions of which columns should have subtotals added to them."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

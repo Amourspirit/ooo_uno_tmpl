@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:20:47+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:38:05+00:00",
   "name": "XAccessibleHypertext",
   "type": "interface",
   "namespace": "com.sun.star.accessibility",
@@ -28,11 +28,45 @@
       "",
       "The XAccessibleHypertext interface is the main interface to expose hyperlinks in a document, typically a text document, that are used to reference other (parts of) documents. For supporting the XAccessibleHypertext.getLinkIndex() method of this interface and other character related methods of the XAccessibleHyperlink interface, it is necessary to also support the XAccessibleText interface.",
       "",
-      "**See Also**",
+      "**since**",
       "",
-      "    XAccessibleHyperlink, XAccessibleText"
+      "    OOo 1.1.2"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1accessibility_1_1XAccessibleHypertext.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getHyperLink",
+          "returns": "object",
+          "desc": [
+            "Return the specified link.",
+            "",
+            "The returned XAccessibleHyperlink object encapsulates the hyperlink and provides several kinds of information describing it."
+          ],
+          "raises": "com.sun.star.lang.IndexOutOfBoundsException",
+          "args": []
+        },
+        {
+          "name": "getHyperLinkCount",
+          "returns": "int",
+          "desc": [
+            "Returns the number of links and link groups contained within this hypertext document."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getHyperLinkIndex",
+          "returns": "int",
+          "desc": [
+            "Returns the index of the hyperlink that is associated with this character index.",
+            "",
+            "In a HTML document this is the case when a <a href> tag spans (includes) the given character index."
+          ],
+          "raises": "com.sun.star.lang.IndexOutOfBoundsException",
+          "args": []
+        }
+      ]
+    }
   }
 }

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:16:55+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:39:21+00:00",
   "name": "XSearchableDictionaryList",
   "type": "interface",
   "namespace": "com.sun.star.linguistic2",
@@ -16,7 +16,12 @@
         "XDictionaryList"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_dictionary_entry",
+        "XDictionaryEntry"
+      ]
+    ],
     "name": "XSearchableDictionaryList",
     "imports": [],
     "namespace": "com.sun.star.linguistic2",
@@ -26,13 +31,21 @@
     "desc": [
       "allows searching for an entry in all dictionaries of the dictionary-list.",
       "",
-      "Only active dictionaries of a suitable language will be searched for the entry. The language is suitable if it is the same as the dictionary's language or the dictionary may hold entries of all languages.",
-      "",
-      "**See Also**",
-      "",
-      "    com.sun.star.linguistic2.XDictionaryList"
+      "Only active dictionaries of a suitable language will be searched for the entry. The language is suitable if it is the same as the dictionary's language or the dictionary may hold entries of all languages."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1linguistic2_1_1XSearchableDictionaryList.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "queryDictionaryEntry",
+          "returns": "XDictionaryEntry",
+          "desc": [
+            "looks for an entry for a given word in the list of dictionaries."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

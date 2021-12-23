@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:17:29+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:41:01+00:00",
   "name": "XRangeXMLConversion",
   "type": "interface",
   "namespace": "com.sun.star.chart2.data",
@@ -10,16 +10,46 @@
   },
   "writer_args": {},
   "data": {
-    "from_imports": [],
+    "from_imports": [
+      [
+        "...uno.x_interface",
+        "XInterface"
+      ]
+    ],
     "from_imports_typing": [],
     "name": "XRangeXMLConversion",
     "imports": [],
     "namespace": "com.sun.star.chart2.data",
-    "extends": [],
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
     "desc": [
       "An application that provides data for a chart must implement this interface."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1chart2_1_1data_1_1XRangeXMLConversion.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "convertRangeFromXML",
+          "returns": "str",
+          "desc": [
+            "converts an XML-style range into the internal DataProvider's format."
+          ],
+          "raises": "com.sun.star.lang.IllegalArgumentException",
+          "args": []
+        },
+        {
+          "name": "convertRangeToXML",
+          "returns": "str",
+          "desc": [
+            "converts the range to a valid XML syntax.",
+            "",
+            "For example spreadsheet ranges consisting of more than one consecutive region are usually separated by a semicolon whereas in XML you separate multiple regions by a space."
+          ],
+          "raises": "com.sun.star.lang.IllegalArgumentException",
+          "args": []
+        }
+      ]
+    }
   }
 }

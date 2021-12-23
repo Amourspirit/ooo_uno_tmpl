@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:20:21+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:34:39+00:00",
   "name": "XTransferable",
   "type": "interface",
   "namespace": "com.sun.star.datatransfer",
@@ -16,7 +16,12 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".data_flavor",
+        "DataFlavor"
+      ]
+    ],
     "name": "XTransferable",
     "imports": [],
     "namespace": "com.sun.star.datatransfer",
@@ -24,13 +29,43 @@
       "com.sun.star.uno.XInterface"
     ],
     "desc": [
-      "Interface to be implemented by objects used to provide data for a data transfer operation.",
-      "",
-      "**See Also**",
-      "",
-      "    com.sun.star.datatransfer.DataFlavor"
+      "Interface to be implemented by objects used to provide data for a data transfer operation."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1datatransfer_1_1XTransferable.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getTransferData",
+          "returns": "object",
+          "desc": [
+            "Called by a data consumer to obtain data from the source in a specified format."
+          ],
+          "raises": "UnsupportedFlavorException,",
+          "args": []
+        },
+        {
+          "name": "getTransferDataFlavors",
+          "returns": "'typing.List[DataFlavor]'",
+          "desc": [
+            "Returns a sequence of supported DataFlavor."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "isDataFlavorSupported",
+          "returns": "bool",
+          "desc": [
+            "Checks if the data object supports the specified data flavor.",
+            "",
+            "A value of FALSE if the DataFlavor is unsupported by the transfer source.",
+            "",
+            "Note: This method is only for analogy with the JAVA Clipboard interface. To avoid many calls, the caller should instead use com.sun.star.datatransfer.XTransferable.getTransferDataFlavors()."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

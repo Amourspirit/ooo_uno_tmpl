@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:20:22+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:39:07+00:00",
   "name": "XClipboard",
   "type": "interface",
   "namespace": "com.sun.star.datatransfer.clipboard",
@@ -16,20 +16,58 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..x_transferable",
+        "XTransferable"
+      ]
+    ],
     "name": "XClipboard",
     "imports": [],
     "namespace": "com.sun.star.datatransfer.clipboard",
     "extends": [
       "com.sun.star.uno.XInterface"
     ],
-    "desc": [
-      "",
-      "**See Also**",
-      "",
-      "    OfficeDev - Common Application Features - Clipboard"
-    ],
+    "desc": [],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1datatransfer_1_1clipboard_1_1XClipboard.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getContents",
+          "returns": "XTransferable",
+          "desc": [
+            "To get the current content of the clipboard."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getName",
+          "returns": "str",
+          "desc": [
+            "To get the name of the clipboard instance.",
+            "",
+            "If the returned string is empty the clipboard instance is the system clipboard."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "setContents",
+          "returns": "None",
+          "desc": [
+            "Sets the current contents of the clipboard to the specified transferable object and registers the specified clipboard owner as the owner of the new contents.",
+            "",
+            "If the given com.sun.star.datatransfer.XTransferable has no com.sun.star.datatransfer.DataFlavor the clipboard will be deleted.",
+            "",
+            "A NULL value is not allowed.",
+            "",
+            "NULL is an acceptable value and means that the caller is not interested in lost ownership notifications."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

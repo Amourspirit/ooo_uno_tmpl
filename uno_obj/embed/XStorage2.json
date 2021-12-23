@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:18:52+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:43:21+00:00",
   "name": "XStorage2",
   "type": "interface",
   "namespace": "com.sun.star.embed",
@@ -12,21 +12,57 @@
   "data": {
     "from_imports": [
       [
-        "......x_storage",
+        ".x_storage",
         "XStorage"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..io.x_stream",
+        "XStream"
+      ]
+    ],
     "name": "XStorage2",
     "imports": [],
     "namespace": "com.sun.star.embed",
     "extends": [
-      "XStorage"
+      "com.sun.star.embed.XStorage"
     ],
     "desc": [
       "This interface extends the base XStorage interface."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1embed_1_1XStorage2.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "cloneEncryptedStream",
+          "returns": "XStream",
+          "desc": [
+            "allows to get readonly copy of a child encrypted stream with encryption data.",
+            "",
+            "If storage does not allow any encryption this method will always throw com.sun.star.packages.NoEncryptionException.",
+            "",
+            "The stream is open in readonly mode so the com.sun.star.io.XStream.getOutputStream() method will return an empty reference.",
+            "",
+            "This method allows to specify encryption data for the child stream explicitly."
+          ],
+          "raises": "com.sun.star.embed.InvalidStorageException,",
+          "args": []
+        },
+        {
+          "name": "openEncryptedStream",
+          "returns": "XStream",
+          "desc": [
+            "allows to get access to a child encrypted stream with EncryptionData.",
+            "",
+            "If storage does not allow any encryption this method will always throw com.sun.star.packages.NoEncryptionException.",
+            "",
+            "In case the stream is open in readonly mode the com.sun.star.io.XStream.getOutputStream() method will return an empty reference."
+          ],
+          "raises": "com.sun.star.embed.InvalidStorageException,",
+          "args": []
+        }
+      ]
+    }
   }
 }

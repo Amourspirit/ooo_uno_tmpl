@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:21:07+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:41:40+00:00",
   "name": "XExternalSheetCache",
   "type": "interface",
   "namespace": "com.sun.star.sheet",
@@ -19,11 +19,73 @@
     "desc": [
       "Primary interface for the com.sun.star.sheet.ExternalSheetCache service.",
       "",
-      "**See Also**",
+      "**since**",
       "",
-      "    com.sun.star.sheet.ExternalSheetCache"
+      "    OOo 3.1"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1sheet_1_1XExternalSheetCache.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getAllColumns",
+          "returns": "typing.List[int]",
+          "desc": [
+            "Given a row number, this method returns a list of all columns numbers that store cached cell values in that row.",
+            "",
+            "The column numbers are sorted in ascending order."
+          ],
+          "raises": "com.sun.star.lang.IllegalArgumentException",
+          "args": []
+        },
+        {
+          "name": "getAllRows",
+          "returns": "typing.List[int]",
+          "desc": [
+            "It returns a list of all row numbers where a cached cell or cells exist.",
+            "",
+            "The row numbers are sorted in ascending order."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getCellValue",
+          "returns": "object",
+          "desc": [
+            "It retrieves a cached value from a specified cell position.",
+            "",
+            "The cached value can be either string or double."
+          ],
+          "raises": "com.sun.star.lang.IllegalArgumentException",
+          "args": []
+        },
+        {
+          "name": "setCellValue",
+          "returns": "None",
+          "desc": [
+            "It sets a cached value for a specified cell position.",
+            "",
+            "The value is expected to be either of type string or of type double. No other data types are supported."
+          ],
+          "raises": "com.sun.star.lang.IllegalArgumentException",
+          "args": []
+        }
+      ],
+      "properties": [
+        {
+          "name": "TokenIndex",
+          "returns": "int",
+          "desc": [
+            "Index corresponding to this instance of an external sheet cache for usage in formula tokens.",
+            "",
+            "This index to the external sheet cache is expected in the SingleReference.Sheet member if it is part of an external reference token.",
+            "",
+            "Each external sheet cache has a unique index value inside the ExternalDocLink instance."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
   }
 }

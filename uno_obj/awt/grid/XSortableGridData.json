@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:18:10+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:37:54+00:00",
   "name": "XSortableGridData",
   "type": "interface",
   "namespace": "com.sun.star.awt.grid",
@@ -10,16 +10,53 @@
   },
   "writer_args": {},
   "data": {
-    "from_imports": [],
+    "from_imports": [
+      [
+        ".x_sortable_mutable_grid_data_model",
+        "XSortableMutableGridDataModel"
+      ]
+    ],
     "from_imports_typing": [],
     "name": "XSortableGridData",
     "imports": [],
     "namespace": "com.sun.star.awt.grid",
-    "extends": [],
+    "extends": [
+      "com.sun.star.awt.grid.XSortableMutableGridDataModel"
+    ],
     "desc": [
       "allows to sort the data represented by a XGridDataModel"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1grid_1_1XSortableGridData.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getCurrentSortOrder",
+          "returns": "typing.Tuple[int, bool]",
+          "desc": [
+            "returns the current sort order."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "removeColumnSort",
+          "returns": "None",
+          "desc": [
+            "removes any possibly present sorting of the grid data"
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "sortByColumn",
+          "returns": "None",
+          "desc": [
+            "sorts the rows represented by the model by a given column's data."
+          ],
+          "raises": "com.sun.star.lang.IndexOutOfBoundsException",
+          "args": []
+        }
+      ]
+    }
   }
 }

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:18:54+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:42:01+00:00",
   "name": "XCommandEnvironment",
   "type": "interface",
   "namespace": "com.sun.star.ucb",
@@ -16,7 +16,16 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..task.x_interaction_handler",
+        "XInteractionHandler"
+      ],
+      [
+        ".x_progress_handler",
+        "XProgressHandler"
+      ]
+    ],
     "name": "XCommandEnvironment",
     "imports": [],
     "namespace": "com.sun.star.ucb",
@@ -24,13 +33,34 @@
       "com.sun.star.uno.XInterface"
     ],
     "desc": [
-      "defines the environment for a command.",
-      "",
-      "**See Also**",
-      "",
-      "    1.0"
+      "defines the environment for a command."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1ucb_1_1XCommandEnvironment.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getInteractionHandler",
+          "returns": "XInteractionHandler",
+          "desc": [
+            "returns the command's interaction handler.",
+            "",
+            "If called multiple times, this method should consistently return the same value (to allow caching)."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getProgressHandler",
+          "returns": "XProgressHandler",
+          "desc": [
+            "returns the command's progress handler.",
+            "",
+            "If called multiple times, this method should consistently return the same value (to allow caching)."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

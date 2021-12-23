@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:22:31+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:36:28+00:00",
   "name": "XRubySelection",
   "type": "interface",
   "namespace": "com.sun.star.text",
@@ -16,7 +16,12 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..beans.property_values",
+        "PropertyValues"
+      ]
+    ],
     "name": "XRubySelection",
     "imports": [],
     "namespace": "com.sun.star.text",
@@ -24,13 +29,34 @@
       "com.sun.star.uno.XInterface"
     ],
     "desc": [
-      "This interface enables the object to handle list of ruby lines (aka Furigana lines).",
-      "",
-      "**See Also**",
-      "",
-      "    Text - Ruby"
+      "This interface enables the object to handle list of ruby lines (aka Furigana lines)."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1text_1_1XRubySelection.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getRubyList",
+          "returns": "'typing.List[PropertyValues]'",
+          "desc": [
+            "returns a sequence of ruby elements.",
+            "",
+            "Each element contains at least a string that contains the selected text and the ruby text. Additional parameters can be the ruby adjustment, the name of a character style."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "setRubyList",
+          "returns": "None",
+          "desc": [
+            "applies the RubyList to the current selection.",
+            "",
+            "The number of elements must be equal to the number of elements that are returned by getRubyList. Automatic must be set equally, too."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:21:04+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:41:37+00:00",
   "name": "XDataPilotResults",
   "type": "interface",
   "namespace": "com.sun.star.sheet",
@@ -16,7 +16,12 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".data_result",
+        "DataResult"
+      ]
+    ],
     "name": "XDataPilotResults",
     "imports": [],
     "namespace": "com.sun.star.sheet",
@@ -26,13 +31,30 @@
     "desc": [
       "provides access to a table of results of a data pilot source.",
       "",
-      "These results are used to fill the data area of a data pilot table.",
-      "",
-      "**See Also**",
-      "",
-      "    com.sun.star.sheet.DataPilotSource"
+      "These results are used to fill the data area of a data pilot table."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1sheet_1_1XDataPilotResults.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getFilteredResults",
+          "returns": "typing.List[float]",
+          "desc": [],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getResults",
+          "returns": "'typing.List[typing.List[DataResult]]'",
+          "desc": [
+            "returns the result array.",
+            "",
+            "The outer sequence contains the value rows. The inner sequences contain the values for one row."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

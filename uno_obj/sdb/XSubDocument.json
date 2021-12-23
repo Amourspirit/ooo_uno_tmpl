@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:16:44+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:43:36+00:00",
   "name": "XSubDocument",
   "type": "interface",
   "namespace": "com.sun.star.sdb",
@@ -11,7 +11,12 @@
   "writer_args": {},
   "data": {
     "from_imports": [],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..lang.x_component",
+        "XComponent"
+      ]
+    ],
     "name": "XSubDocument",
     "imports": [],
     "namespace": "com.sun.star.sdb",
@@ -19,11 +24,52 @@
     "desc": [
       "allows operating on a sub document of an OfficeDatabaseDocument",
       "",
-      "**See Also**",
+      "**since**",
       "",
       "    OOo 3.1"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1sdb_1_1XSubDocument.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "close",
+          "returns": "bool",
+          "desc": [
+            "closes the sub document, if it had previously been opened in either mode"
+          ],
+          "raises": "com.sun.star.lang.WrappedTargetException",
+          "args": []
+        },
+        {
+          "name": "open",
+          "returns": "XComponent",
+          "desc": [
+            "opens the sub document",
+            "",
+            "Note that opening the document means it is displayed in an own top-level frame on the desktop."
+          ],
+          "raises": "com.sun.star.lang.WrappedTargetException",
+          "args": []
+        },
+        {
+          "name": "openDesign",
+          "returns": "XComponent",
+          "desc": [
+            "opens the sub document in design mode"
+          ],
+          "raises": "com.sun.star.lang.WrappedTargetException",
+          "args": []
+        },
+        {
+          "name": "store",
+          "returns": "None",
+          "desc": [
+            "stores the sub document, if it had previously been opened in either mode"
+          ],
+          "raises": "com.sun.star.lang.WrappedTargetException",
+          "args": []
+        }
+      ]
+    }
   }
 }

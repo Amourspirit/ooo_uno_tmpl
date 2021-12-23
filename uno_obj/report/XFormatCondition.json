@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:16:29+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:35:00+00:00",
   "name": "XFormatCondition",
   "type": "interface",
   "namespace": "com.sun.star.report",
@@ -12,29 +12,49 @@
   "data": {
     "from_imports": [
       [
-        "..beans.x_property_set",
-        "XPropertySet"
+        ".x_report_control_format",
+        "XReportControlFormat"
       ],
       [
-        "......x_report_control_format",
-        "XReportControlFormat"
+        "..beans.x_property_set",
+        "XPropertySet"
       ]
     ],
     "from_imports_typing": [],
     "name": "XFormatCondition",
-    "imports": [
-      "com.sun.star.beans.XPropertySet",
-      "XReportControlFormat"
-    ],
+    "imports": [],
     "namespace": "com.sun.star.report",
     "extends": [
-      "XReportControlFormat",
+      "com.sun.star.report.XReportControlFormat",
       "com.sun.star.beans.XPropertySet"
     ],
     "desc": [
       "specifies a format condition for a control."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1report_1_1XFormatCondition.html",
-    "items": {}
+    "items": {
+      "properties": [
+        {
+          "name": "Enabled",
+          "returns": "bool",
+          "desc": [
+            "specifies if the condition is enabled or not."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Formula",
+          "returns": "str",
+          "desc": [
+            "defines the formula of the format condition.",
+            "",
+            "If the formula evaluates to TRUE then the format will be applied."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
   }
 }

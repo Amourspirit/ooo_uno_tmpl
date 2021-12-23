@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:18:30+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:36:43+00:00",
   "name": "XXMLDocumentWrapper",
   "type": "interface",
   "namespace": "com.sun.star.xml.wrapper",
@@ -33,6 +33,114 @@
       "In another word, this interface wraps language dependent methods, then other component can manipulate DOM data through UNO methods."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1xml_1_1wrapper_1_1XXMLDocumentWrapper.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "clearUselessData",
+          "returns": "None",
+          "desc": [
+            "Clears all useless element in a branch of the DOM tree along the tree order."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "collapse",
+          "returns": "None",
+          "desc": [
+            "Collapses a tree path.",
+            "",
+            "Each element in the ancestor path of the node will be checked, if this element is empty, then deletes it."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "generateSAXEvents",
+          "returns": "None",
+          "desc": [
+            "Converts a part of the DOM tree into SAX events."
+          ],
+          "raises": "com.sun.star.xml.sax.SAXException",
+          "args": []
+        },
+        {
+          "name": "getCurrentElement",
+          "returns": "object",
+          "desc": [
+            "Gets the current element."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getNodeName",
+          "returns": "str",
+          "desc": [
+            "Gets the name of the element."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getTree",
+          "returns": "None",
+          "desc": [
+            "Converts the whole DOM tree into a SAX event stream."
+          ],
+          "raises": "com.sun.star.xml.sax.SAXException",
+          "args": []
+        },
+        {
+          "name": "isCurrent",
+          "returns": "bool",
+          "desc": [
+            "Checks whether an element is the current element."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "isCurrentElementEmpty",
+          "returns": "bool",
+          "desc": [
+            "Checks whether the current element is empty."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "rebuildIDLink",
+          "returns": "None",
+          "desc": [
+            "Rebuild the ID attribute in the branch starting from the particular element."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "removeCurrentElement",
+          "returns": "None",
+          "desc": [
+            "Removes the current element.",
+            "",
+            "When the current element is removed, then its parent element becomes the new current element."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "setCurrentElement",
+          "returns": "None",
+          "desc": [
+            "Sets the current element.",
+            "",
+            "When the current element is replaced outside of this interface, then uses this method can update the current element pointer."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

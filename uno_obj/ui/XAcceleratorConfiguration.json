@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:19:48+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:42:45+00:00",
   "name": "XAcceleratorConfiguration",
   "type": "interface",
   "namespace": "com.sun.star.ui",
@@ -12,25 +12,26 @@
   "data": {
     "from_imports": [
       [
+        ".xui_configuration",
+        "XUIConfiguration"
+      ],
+      [
         ".xui_configuration_persistence",
         "XUIConfigurationPersistence"
       ],
       [
         ".xui_configuration_storage",
         "XUIConfigurationStorage"
-      ],
-      [
-        ".xui_configuration",
-        "XUIConfiguration"
       ]
     ],
-    "from_imports_typing": [],
-    "name": "XAcceleratorConfiguration",
-    "imports": [
-      "com.sun.star.ui.XUIConfigurationPersistence",
-      "com.sun.star.ui.XUIConfiguration",
-      "com.sun.star.ui.XUIConfigurationStorage"
+    "from_imports_typing": [
+      [
+        "..awt.key_event",
+        "KeyEvent"
+      ]
     ],
+    "name": "XAcceleratorConfiguration",
+    "imports": [],
     "namespace": "com.sun.star.ui",
     "extends": [
       "com.sun.star.ui.XUIConfigurationPersistence",
@@ -44,11 +45,99 @@
       "",
       "Note further:\n All changes you made on this configuration access modify the configuration set inside memory only. You have to use the com.sun.star.util.XFlushable interface (which must be available at the same implementation object too), to make it persistent.",
       "",
-      "**See Also**",
+      "**since**",
       "",
-      "    AcceleratorConfiguration"
+      "    OOo 2.0"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1ui_1_1XAcceleratorConfiguration.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getAllKeyEvents",
+          "returns": "'typing.List[KeyEvent]'",
+          "desc": [
+            "return the list of all key events, which are available at this configuration set.",
+            "",
+            "The key events are the \\\"primary keys\\\" of this configuration sets. Means: Commands are registered for key events.",
+            "",
+            "Such key event can be mapped to its bound command, using the method getCommandForKeyEvent()."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getCommandByKeyEvent",
+          "returns": "str",
+          "desc": [
+            "return the registered command for the specified key event.",
+            "",
+            "This function can be used to:"
+          ],
+          "raises": "com.sun.star.container.NoSuchElementException",
+          "args": []
+        },
+        {
+          "name": "getKeyEventsByCommand",
+          "returns": "'typing.List[KeyEvent]'",
+          "desc": [
+            "optimized access to the relation \\\"command-key\\\" instead of \\\"key-command\\\" which is provided normally by this interface.",
+            "",
+            "It can be used to implement collision handling, if more than one key event match to the same command. The returned list contains all possible key events - and the outside code can select a possible one. Of course - mostly this list will contain only one key event ..."
+          ],
+          "raises": ",",
+          "args": []
+        },
+        {
+          "name": "getPreferredKeyEventsForCommandList",
+          "returns": "typing.List[object]",
+          "desc": [
+            "optimized function to map a list of commands to a corresponding list of key events.",
+            "",
+            "It provides a fast mapping, which is e.g. needed by a menu or toolbar implementation. E.g. a sub menu is described by a list of commands - and the implementation of the menu must show the corresponding shortcuts. Iteration over all items of this configuration set can be very expensive.",
+            "",
+            "Instead to the method getKeyEventsForCommand() the returned list contains only one(!) key event bound to one(!) requested command. If more than one key event is bound to a command - a selection is done inside this method. This internal selection can't be influenced from outside."
+          ],
+          "raises": "com.sun.star.lang.IllegalArgumentException,",
+          "args": []
+        },
+        {
+          "name": "removeCommandFromAllKeyEvents",
+          "returns": "None",
+          "desc": [
+            "search for a key-command-binding inside this configuration set, where the specified command is used.",
+            "",
+            "If such binding could be located, the command will be removed from it. If as result of that the key binding will be empty, if will be removed too.",
+            "",
+            "This is an optimized method, which can perform removing of commands from this configuration set. Because normally Commands are \\\"foreign keys\\\" and key identifier the \\\"primary keys\\\" - it needs some work to remove all commands outside this container ..."
+          ],
+          "raises": ",",
+          "args": []
+        },
+        {
+          "name": "removeKeyEvent",
+          "returns": "None",
+          "desc": [
+            "remove a key-command-binding from this configuration set."
+          ],
+          "raises": "com.sun.star.container.NoSuchElementException",
+          "args": []
+        },
+        {
+          "name": "setKeyEvent",
+          "returns": "None",
+          "desc": [
+            "modify or create a key - command - binding.",
+            "",
+            "If the specified key event does not already exists inside this configuration access, it will be created and the command will be registered for it.",
+            "",
+            "If the specified key event already exists, its command will be overwritten with the new command. There is no warning nor any error about that! The outside code has to use the method getCommandForKeyEvent() to check for possible collisions.",
+            "",
+            "Note: This method can't be used to remove entities from the configuration set. Empty parameters will result into an exception! Use the method removeKeyEvent() instead."
+          ],
+          "raises": "com.sun.star.lang.IllegalArgumentException,",
+          "args": []
+        }
+      ]
+    }
   }
 }

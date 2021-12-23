@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:17:38+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:39:48+00:00",
   "name": "XSpriteCanvas",
   "type": "interface",
   "namespace": "com.sun.star.rendering",
@@ -12,7 +12,7 @@
   "data": {
     "from_imports": [
       [
-        "......x_canvas",
+        ".x_canvas",
         "XCanvas"
       ]
     ],
@@ -21,16 +21,72 @@
     "imports": [],
     "namespace": "com.sun.star.rendering",
     "extends": [
-      "XCanvas"
+      "com.sun.star.rendering.XCanvas"
     ],
     "desc": [
-      "Specialization of a XCanvas, where moving, animated objects (called sprites) are supported.",
-      "",
-      "**See Also**",
-      "",
-      "    The screen output of canvas drawing operations is undefined, unless XSpriteCanvas.updateScreen() is called. This is because a sprite canvas might choose to employ double buffering to reduce animation flicker, and cannot know the instant suitable to display the newly rendered canvas content. When using external double-buffering via XBufferController on a sprite canvas, the implementation takes care of this issue, and in this case is able to render correctly even without explicit updateScreen() calls (because there's a defined moment in time where content display can happen, namely the XBufferController.showBuffer()) call. If you don't need sprite functionality, and don't want the updateScreen hassle, simply use the XCanvas."
+      "Specialization of a XCanvas, where moving, animated objects (called sprites) are supported."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1rendering_1_1XSpriteCanvas.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "createClonedSprite",
+          "returns": "object",
+          "desc": [
+            "Create a cloned version of an already existing sprite object.",
+            "",
+            "The cloned sprite always shows the same content as its original, but of course the sprite position, visibility, alpha etc. can be modified independently."
+          ],
+          "raises": "com.sun.star.lang.IllegalArgumentException",
+          "args": []
+        },
+        {
+          "name": "createCustomSprite",
+          "returns": "object",
+          "desc": [
+            "Create a custom, user-handles-it-all sprite object.",
+            "",
+            "A sprite is a back-buffered object with its own, independent animation."
+          ],
+          "raises": "com.sun.star.lang.IllegalArgumentException",
+          "args": []
+        },
+        {
+          "name": "createSpriteFromAnimation",
+          "returns": "object",
+          "desc": [
+            "Create a sprite object from the specified animation sequence.",
+            "",
+            "A sprite is a back-buffered object with its own, independent animation."
+          ],
+          "raises": "com.sun.star.lang.IllegalArgumentException",
+          "args": []
+        },
+        {
+          "name": "createSpriteFromBitmaps",
+          "returns": "object",
+          "desc": [
+            "Create a sprite object from the specified animation sequence.",
+            "",
+            "A sprite is a back-buffered object with its own, independent animation."
+          ],
+          "raises": "com.sun.star.lang.IllegalArgumentException,",
+          "args": []
+        },
+        {
+          "name": "updateScreen",
+          "returns": "bool",
+          "desc": [
+            "Tells the sprite canvas to now update the screen representation.",
+            "",
+            "Required to display rendered changes to the canvas, and updates to stopped animations and XCustomSprites in general. This method will return only after the screen update is done, or earlier if an error happened.",
+            "",
+            "If double buffering is enabled via XBufferController, no explicit call of updateScreen() is necessary, since the XBufferController methods will automatically notify all associated XSpriteCanvas instances."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

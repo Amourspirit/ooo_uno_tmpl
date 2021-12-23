@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:21:08+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:41:41+00:00",
   "name": "XFormulaQuery",
   "type": "interface",
   "namespace": "com.sun.star.sheet",
@@ -16,7 +16,12 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_sheet_cell_ranges",
+        "XSheetCellRanges"
+      ]
+    ],
     "name": "XFormulaQuery",
     "imports": [],
     "namespace": "com.sun.star.sheet",
@@ -26,13 +31,34 @@
     "desc": [
       "provides methods to query cells for dependencies in formulas.",
       "",
-      "All methods return a collection of cell ranges.",
-      "",
-      "**See Also**",
-      "",
-      "    com.sun.star.sheet.SheetRangesQuery"
+      "All methods return a collection of cell ranges."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1sheet_1_1XFormulaQuery.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "queryDependents",
+          "returns": "XSheetCellRanges",
+          "desc": [
+            "queries all dependent formula cells.",
+            "",
+            "Dependent cells are cells containing formulas with references to the original cell."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "queryPrecedents",
+          "returns": "XSheetCellRanges",
+          "desc": [
+            "queries all precedent cells.",
+            "",
+            "Precedent cells are cells which are referenced from a formula cell."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

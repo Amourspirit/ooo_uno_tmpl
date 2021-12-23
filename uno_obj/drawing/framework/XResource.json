@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:21:37+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:34:36+00:00",
   "name": "XResource",
   "type": "interface",
   "namespace": "com.sun.star.drawing.framework",
@@ -20,6 +20,33 @@
       "Base interface that provides functionality shared by all resource types of the drawing framework."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1drawing_1_1framework_1_1XResource.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getResourceId",
+          "returns": "object",
+          "desc": [
+            "Return an XResourceId object for the called resource.",
+            "",
+            "The returned id unambiguously identifies the resource."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "isAnchorOnly",
+          "returns": "bool",
+          "desc": [
+            "Some resources must not be leafs, i.e.",
+            "",
+            "have to be anchor to at least one other resource. Most panes are examples for this. Views on the other hand are in most cases no anchors. So the typical pane will return TRUE and the typical view will return FALSE.",
+            "",
+            "The return value is used to determine whether a resource has to be deactivated when it has no children, either because none is requested or because none can be created."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

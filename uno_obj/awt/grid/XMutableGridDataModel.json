@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:18:10+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:37:54+00:00",
   "name": "XMutableGridDataModel",
   "type": "interface",
   "namespace": "com.sun.star.awt.grid",
@@ -12,7 +12,7 @@
   "data": {
     "from_imports": [
       [
-        ".......x_grid_data_model",
+        ".x_grid_data_model",
         "XGridDataModel"
       ]
     ],
@@ -21,12 +21,136 @@
     "imports": [],
     "namespace": "com.sun.star.awt.grid",
     "extends": [
-      "XGridDataModel"
+      "com.sun.star.awt.grid.XGridDataModel"
     ],
     "desc": [
       "allows to modify the data represented by a XGridDataModel"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1grid_1_1XMutableGridDataModel.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "addGridDataListener",
+          "returns": "None",
+          "desc": [
+            "registers listener to be notified of data changes in the model"
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "addRow",
+          "returns": "None",
+          "desc": [
+            "appends a row to the model."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "addRows",
+          "returns": "None",
+          "desc": [
+            "appends multiple rows of data to the model."
+          ],
+          "raises": "com.sun.star.lang.IllegalArgumentException",
+          "args": []
+        },
+        {
+          "name": "insertRow",
+          "returns": "None",
+          "desc": [
+            "inserts a row into the set of data rows"
+          ],
+          "raises": "com.sun.star.lang.IndexOutOfBoundsException",
+          "args": []
+        },
+        {
+          "name": "insertRows",
+          "returns": "None",
+          "desc": [
+            "inserts multiple rows of data into the model."
+          ],
+          "raises": ",",
+          "args": []
+        },
+        {
+          "name": "removeAllRows",
+          "returns": "None",
+          "desc": [
+            "Removes all rows from the model."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "removeGridDataListener",
+          "returns": "None",
+          "desc": [
+            "revokes a listener which was previously registered via addGridDataListener()"
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "removeRow",
+          "returns": "None",
+          "desc": [
+            "removes a row of data from the model"
+          ],
+          "raises": "com.sun.star.lang.IndexOutOfBoundsException",
+          "args": []
+        },
+        {
+          "name": "updateCellData",
+          "returns": "None",
+          "desc": [
+            "updates the content of the given cell"
+          ],
+          "raises": "com.sun.star.lang.IndexOutOfBoundsException",
+          "args": []
+        },
+        {
+          "name": "updateCellToolTip",
+          "returns": "None",
+          "desc": [
+            "updates the tooltip to be displayed for a given cell"
+          ],
+          "raises": "com.sun.star.lang.IndexOutOfBoundsException",
+          "args": []
+        },
+        {
+          "name": "updateRowData",
+          "returns": "None",
+          "desc": [
+            "updates the content of a given row.",
+            "",
+            "The change in the data model will be notified to registered listeners via XGridDataListener.dataChanged(). The GridDataEvent.FirstColumn and GridDataEvent.LastColumn will denote the smallest respectively largest column index from ColumnIndexes."
+          ],
+          "raises": ",",
+          "args": []
+        },
+        {
+          "name": "updateRowHeading",
+          "returns": "None",
+          "desc": [
+            "sets a new title for a given row."
+          ],
+          "raises": "com.sun.star.lang.IndexOutOfBoundsException",
+          "args": []
+        },
+        {
+          "name": "updateRowToolTip",
+          "returns": "None",
+          "desc": [
+            "updates the tooltip for all cells of a given row",
+            "",
+            "Effectively this method is a shortcut for calling updateCellToolTip() multiple times in a row, for all cells of a given row."
+          ],
+          "raises": "com.sun.star.lang.IndexOutOfBoundsException",
+          "args": []
+        }
+      ]
+    }
   }
 }

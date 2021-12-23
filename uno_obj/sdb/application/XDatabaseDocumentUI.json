@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:16:48+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:41:04+00:00",
   "name": "XDatabaseDocumentUI",
   "type": "interface",
   "namespace": "com.sun.star.sdb.application",
@@ -11,7 +11,24 @@
   "writer_args": {},
   "data": {
     "from_imports": [],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "...sdbc.x_data_source",
+        "XDataSource"
+      ],
+      [
+        "...lang.x_component",
+        "XComponent"
+      ],
+      [
+        "...awt.x_window",
+        "XWindow"
+      ],
+      [
+        "...sdbc.x_connection",
+        "XConnection"
+      ]
+    ],
     "name": "XDatabaseDocumentUI",
     "imports": [],
     "namespace": "com.sun.star.sdb.application",
@@ -21,11 +38,149 @@
       "",
       "This interface is available when a database document has been loaded into a frame, at the controller of this frame.",
       "",
-      "**See Also**",
+      "**since**",
       "",
-      "    com.sun.star.frame.Controller"
+      "    OOo 2.2"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1sdb_1_1application_1_1XDatabaseDocumentUI.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "closeSubComponents",
+          "returns": "bool",
+          "desc": [
+            "closes all sub components of the database document.",
+            "",
+            "During working with the database, the user might open different sub components: forms, reports, tables, queries. If you need to close all those documents, use closeSubComponents, which will gracefully do this.",
+            "",
+            "In a first step, the sub components will be suspended (com.sun.star.frame.XController.suspend()). There are basically two reasons why suspending a single sub component can fail: The user might veto it (she's asked if the document is currently modified), and the component might be uncloseable currently, e.g. due to an open modal dialog, or a long-lasting operation running currently (e.g. printing).",
+            "",
+            "Once all sub components have been suspended, they will, in a second step, be closed. Again, closing might be vetoed by other instances, e.g. by a close listener registered at the component.",
+            "",
+            "**since**",
+            "",
+            "    OOo 3.0"
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "connect",
+          "returns": "None",
+          "desc": [
+            "lets the application connect to the database",
+            "",
+            "If the application is already connected, nothing happens. If it is not connected, the application will try to establish a connection by using com.sun.star.sdbc.XDataSource.getConnection() with the current settings, as specified in the com.sun.star.sdb.DataSource.Settings member.",
+            "",
+            "If the connection cannot be established, the respective error message is shown in the application window."
+          ],
+          "raises": "com.sun.star.sdbc.SQLException",
+          "args": []
+        },
+        {
+          "name": "createComponent",
+          "returns": "XComponent",
+          "desc": [
+            "creates a new sub component of the given type"
+          ],
+          "raises": "com.sun.star.lang.IllegalArgumentException,",
+          "args": []
+        },
+        {
+          "name": "createComponentWithArguments",
+          "returns": "XComponent",
+          "desc": [
+            "creates a new sub component of the given type",
+            "",
+            "In opposite to createComponent(), this method allows you to specify additional arguments which are passed to the to-be-loaded component."
+          ],
+          "raises": "com.sun.star.lang.IllegalArgumentException,",
+          "args": []
+        },
+        {
+          "name": "identifySubComponent",
+          "returns": "typing.Tuple[int, str]",
+          "desc": [
+            "identifies the given sub component"
+          ],
+          "raises": "com.sun.star.lang.IllegalArgumentException",
+          "args": []
+        },
+        {
+          "name": "isConnected",
+          "returns": "bool",
+          "desc": [
+            "determines whether the application is currently connected to the database"
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "loadComponent",
+          "returns": "XComponent",
+          "desc": [
+            "loads the given sub component of the database document",
+            "",
+            "This method allows programmatic access to the functionality which is present in the UI: it allows opening a table, query, form, or report for either editing or viewing.",
+            "",
+            "This method is a convenience wrapper for API which is also available otherwise. For instance, for loading forms and reports, you could use the com.sun.star.frame.XComponentLoader interface of the com.sun.star.sdb.Forms resp. com.sun.star.sdb.Reports collections.",
+            "",
+            "Note there must exist a connection to the database before you can call this method.",
+            "",
+            "If an error occurs opening the given object, then this is reported to the user via an error dialog.",
+            "",
+            "For the different object types, this means the following"
+          ],
+          "raises": "com.sun.star.lang.IllegalArgumentException,",
+          "args": []
+        },
+        {
+          "name": "loadComponentWithArguments",
+          "returns": "XComponent",
+          "desc": [
+            "loads the given sub component of the database document",
+            "",
+            "In opposite to loadComponent(), this method allows you to specify additional arguments which are passed to the to-be-loaded component.",
+            "",
+            "The meaning of the arguments is defined at the service which is effectively created. See the above table for a list of those services."
+          ],
+          "raises": "com.sun.star.lang.IllegalArgumentException,",
+          "args": []
+        }
+      ],
+      "properties": [
+        {
+          "name": "ActiveConnection",
+          "returns": "XConnection",
+          "desc": [
+            "provides access to the current connection of the application",
+            "",
+            "Note that the connection returned here is really the working connection of the application. Clients should not misuse it, in particular, closing the connection can yield unexpected results and should definitely be avoided. If you need a separate connection to the data source, use com.sun.star.sdbc.XDataSource.getConnection()."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ApplicationMainWindow",
+          "returns": "XWindow",
+          "desc": [
+            "provides access to the application's main window",
+            "",
+            "Note that reading this attribute is equivalent to querying the component for the com.sun.star.frame.XController interface, asking the controller for its frame, and asking this frame for its container window."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "DataSource",
+          "returns": "XDataSource",
+          "desc": [
+            "provides access to the data source belong to the database document"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
   }
 }

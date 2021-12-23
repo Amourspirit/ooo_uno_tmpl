@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:19:52+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:42:54+00:00",
   "name": "XUIElement",
   "type": "interface",
   "namespace": "com.sun.star.ui",
@@ -16,7 +16,16 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..frame.x_frame",
+        "XFrame"
+      ],
+      [
+        "..uno.x_interface",
+        "XInterface"
+      ]
+    ],
     "name": "XUIElement",
     "imports": [],
     "namespace": "com.sun.star.ui",
@@ -29,6 +38,49 @@
       "The type of the interface depends on the real type of the user interface element. A menubar user interface element provides access to its com.sun.star.awt.XSystemDependentMenuBarPeer which supports to retrieve the system dependent menu handle. A floating window or a toolbar user interface element return a com.sun.star.awt.XWindow interface."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1ui_1_1XUIElement.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getRealInterface",
+          "returns": "XInterface",
+          "desc": [
+            "returns an interface to get access to user interface type specific functions."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ],
+      "properties": [
+        {
+          "name": "Frame",
+          "returns": "XFrame",
+          "desc": [
+            "determines the document frame to which this element is bound to.",
+            "",
+            "The life time of a user interface element does not explicitly depend on the frame itself but on the visible component attached to the frame. It is possible to exchange the visible component of a frame and that will lead to the end of life of all user interface elements."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ResourceURL",
+          "returns": "str",
+          "desc": [
+            "a resource URL which is a unique identifier of a user interface element."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Type",
+          "returns": "int",
+          "desc": [
+            "determines the type of the user interface element."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
   }
 }

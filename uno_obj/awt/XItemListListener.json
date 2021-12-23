@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:17:51+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:37:13+00:00",
   "name": "XItemListListener",
   "type": "interface",
   "namespace": "com.sun.star.awt",
@@ -24,13 +24,63 @@
       "com.sun.star.lang.XEventListener"
     ],
     "desc": [
-      "describes a listener for changes in an item list",
-      "",
-      "**See Also**",
-      "",
-      "    XListItems"
+      "describes a listener for changes in an item list"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XItemListListener.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "allItemsRemoved",
+          "returns": "None",
+          "desc": [
+            "is called when the list has been completely cleared, i.e.",
+            "",
+            "after an invocation of XItemList.removeAllItems()"
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "itemListChanged",
+          "returns": "None",
+          "desc": [
+            "is called when the changes to the item list which occurred are too complex to be notified in single events.",
+            "",
+            "Consumers of this event should discard their cached information about the current item list, and completely refresh it from the XItemList's current state."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "listItemInserted",
+          "returns": "None",
+          "desc": [
+            "is called when an item is inserted into the list"
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "listItemModified",
+          "returns": "None",
+          "desc": [
+            "is called when an item in the list is modified, i.e.",
+            "",
+            "its text or image changed"
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "listItemRemoved",
+          "returns": "None",
+          "desc": [
+            "is called when an item is removed from the list"
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:20:32+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:40:51+00:00",
   "name": "XLibraryContainer",
   "type": "interface",
   "namespace": "com.sun.star.script",
@@ -16,7 +16,16 @@
         "XNameAccess"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..container.x_name_access",
+        "XNameAccess"
+      ],
+      [
+        "..container.x_name_container",
+        "XNameContainer"
+      ]
+    ],
     "name": "XLibraryContainer",
     "imports": [],
     "namespace": "com.sun.star.script",
@@ -27,6 +36,58 @@
       "Provides access to a library system."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1script_1_1XLibraryContainer.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "createLibrary",
+          "returns": "XNameContainer",
+          "desc": [
+            "Creates a new library."
+          ],
+          "raises": "com.sun.star.lang.IllegalArgumentException,",
+          "args": []
+        },
+        {
+          "name": "createLibraryLink",
+          "returns": "XNameAccess",
+          "desc": [
+            "Creates a link to an \\\"external\\\" library that then can be accessed using this library manager.",
+            "",
+            "The format of the StorageURL is a matter of the implementation. If the read only flag is set, the linked library cannot be modified. In this case, the returned interface really is only an XNameAccess. If ReadOnly is false (and the referenced storage allows write access) the returned interface also can be a com.sun.star.container.XNameContainer."
+          ],
+          "raises": "com.sun.star.lang.IllegalArgumentException,",
+          "args": []
+        },
+        {
+          "name": "isLibraryLoaded",
+          "returns": "bool",
+          "desc": [
+            "returns true if the accessed library is already loaded from the storage, otherwise false."
+          ],
+          "raises": "com.sun.star.container.NoSuchElementException",
+          "args": []
+        },
+        {
+          "name": "loadLibrary",
+          "returns": "None",
+          "desc": [
+            "Causes the accessed library to be loaded from its storage if it hasn't already been loaded."
+          ],
+          "raises": "com.sun.star.container.NoSuchElementException,",
+          "args": []
+        },
+        {
+          "name": "removeLibrary",
+          "returns": "None",
+          "desc": [
+            "removes the library item with the specified name.",
+            "",
+            "If the accessed library item is a link only the link is removed, not the target library."
+          ],
+          "raises": "com.sun.star.container.NoSuchElementException,",
+          "args": []
+        }
+      ]
+    }
   }
 }

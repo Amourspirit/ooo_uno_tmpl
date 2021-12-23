@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:18:40+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:37:56+00:00",
   "name": "XPackage",
   "type": "interface",
   "namespace": "com.sun.star.deployment",
@@ -12,20 +12,34 @@
   "data": {
     "from_imports": [
       [
-        "..lang.x_component",
-        "XComponent"
-      ],
-      [
         "..util.x_modify_broadcaster",
         "XModifyBroadcaster"
+      ],
+      [
+        "..lang.x_component",
+        "XComponent"
       ]
     ],
-    "from_imports_typing": [],
-    "name": "XPackage",
-    "imports": [
-      "com.sun.star.lang.XComponent",
-      "com.sun.star.util.XModifyBroadcaster"
+    "from_imports_typing": [
+      [
+        "..graphic.x_graphic",
+        "XGraphic"
+      ],
+      [
+        "..beans.string_pair",
+        "StringPair"
+      ],
+      [
+        ".x_package",
+        "XPackage"
+      ],
+      [
+        "..task.x_abort_channel",
+        "XAbortChannel"
+      ]
     ],
+    "name": "XPackage",
+    "imports": [],
     "namespace": "com.sun.star.deployment",
     "extends": [
       "com.sun.star.lang.XComponent",
@@ -34,11 +48,253 @@
     "desc": [
       "Objects of this interface reflect a bound package and are issued by a PackageRegistryBackend.",
       "",
-      "**See Also**",
+      "**since**",
       "",
       "    OOo 2.0"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1deployment_1_1XPackage.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "checkDependencies",
+          "returns": "bool",
+          "desc": [
+            "checks if the dependencies for this package are still satisfied",
+            "",
+            "After updating the OpenOffice.org, some dependencies for packages might no longer be satisfied.",
+            "",
+            "**since**",
+            "",
+            "    OOo 3.2"
+          ],
+          "raises": "DeploymentException,",
+          "args": []
+        },
+        {
+          "name": "checkPrerequisites",
+          "returns": "int",
+          "desc": [
+            "checks if the package can be installed.",
+            "",
+            "Only if the return value is TRUE the package is allowed to be installed. In case of FALSE or in case of an exception, the package must be removed completely. After return of this function no code from the extension may be used anymore, so that the extension can be safely removed from the hard disk."
+          ],
+          "raises": "DeploymentException,",
+          "args": []
+        },
+        {
+          "name": "createAbortChannel",
+          "returns": "XAbortChannel",
+          "desc": [
+            "creates a command channel to be used to asynchronously abort a command."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "exportTo",
+          "returns": "None",
+          "desc": [
+            "exports package to given destination URL."
+          ],
+          "raises": "ExtensionRemovedException,",
+          "args": []
+        },
+        {
+          "name": "getBundle",
+          "returns": "'typing.List[XPackage]'",
+          "desc": [
+            "Gets packages of the bundle.",
+            "",
+            "If isRemoved() returns TRUE then getBundle may return an empty sequence in case the object is not registered."
+          ],
+          "raises": "DeploymentException,",
+          "args": []
+        },
+        {
+          "name": "getDescription",
+          "returns": "str",
+          "desc": [
+            "returns a description string to describe the package."
+          ],
+          "raises": "ExtensionRemovedException",
+          "args": []
+        },
+        {
+          "name": "getDisplayName",
+          "returns": "str",
+          "desc": [
+            "returns the display name of the package, e.g.",
+            "",
+            "for graphical user interfaces (GUI)."
+          ],
+          "raises": "ExtensionRemovedException",
+          "args": []
+        },
+        {
+          "name": "getIcon",
+          "returns": "XGraphic",
+          "desc": [
+            "returns an icon for a package."
+          ],
+          "raises": "ExtensionRemovedException",
+          "args": []
+        },
+        {
+          "name": "getIdentifier",
+          "returns": "object",
+          "desc": [
+            "returns the unique extension identifier."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getLicenseText",
+          "returns": "str",
+          "desc": [
+            "returns a string containing the license text."
+          ],
+          "raises": "DeploymentException,",
+          "args": []
+        },
+        {
+          "name": "getName",
+          "returns": "str",
+          "desc": [
+            "returns the file name of the package."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getPackageType",
+          "returns": "object",
+          "desc": [
+            "returns the XPackageTypeInfo, e.g.",
+            "",
+            "media-type etc."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getPublisherInfo",
+          "returns": "StringPair",
+          "desc": [
+            "returns the publisher info for the package, the strings might be empty, if there is no publisher",
+            "",
+            "com.sun.star.beans.StringPair.First represents the publisher name and com.sun.star.beans.StringPair.Second represents the URL to the publisher."
+          ],
+          "raises": "ExtensionRemovedException",
+          "args": []
+        },
+        {
+          "name": "getRegistrationDataURL",
+          "returns": "object",
+          "desc": [
+            "return a URL to a directory which contains the registration data.",
+            "",
+            "This data may be created when calling XPackage.registerPackage(). If this is the case is indicated by com.sun.star.beans.Optional.IsPresent of the return value. If registration data are created during registration, but the package is currently not registered, for example after calling XPackage.revokePackage(), then com.sun.star.beans.Optional.IsPresent is TRUE and the com.sun.star.beans.Optional.Value may be an empty string."
+          ],
+          "raises": "DeploymentException,",
+          "args": []
+        },
+        {
+          "name": "getRepositoryName",
+          "returns": "str",
+          "desc": [
+            "returns the name of the repository where this object comes from."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getURL",
+          "returns": "str",
+          "desc": [
+            "returns the location of the package."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getUpdateInformationURLs",
+          "returns": "typing.List[str]",
+          "desc": [
+            "returns a sequence of update information URLs.",
+            "",
+            "The sequence may be empty in case no update information is available. If the sequence contains more than one URL, the extra URLs must mirror the information available at the first URL."
+          ],
+          "raises": "ExtensionRemovedException",
+          "args": []
+        },
+        {
+          "name": "getVersion",
+          "returns": "str",
+          "desc": [
+            "returns the textual version representation of the package.",
+            "",
+            "A textual version representation is a finite string following the BNF\n version .= [element (\\\".\\\" element)*]\n element .= (\\\"0\\\" | \\\"1\\\" | \\\"2\\\" | \\\"3\\\" | \\\"4\\\" | \\\"5\\\" | \\\"6\\\" | \\\"7\\\" | \\\"8\\\" | \\\"9\\\")+"
+          ],
+          "raises": "ExtensionRemovedException",
+          "args": []
+        },
+        {
+          "name": "isBundle",
+          "returns": "bool",
+          "desc": [
+            "reflects whether this package is a bundle of one or more packages, e.g.",
+            "",
+            "a zip (legacy) package file or a document hosting script packages."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "isRegistered",
+          "returns": "object",
+          "desc": [
+            "determines whether the package is currently registered, i.e.",
+            "",
+            "whether it is active."
+          ],
+          "raises": "DeploymentException,",
+          "args": []
+        },
+        {
+          "name": "isRemoved",
+          "returns": "bool",
+          "desc": [
+            "indicates if this object represents a removed extension or extension item.",
+            "",
+            "This is the case when it was created by providing TRUE for the removed parameter in the function XPackageRegistry.bindPackage()."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "registerPackage",
+          "returns": "None",
+          "desc": [
+            "registers this XPackage.",
+            "",
+            "NEVER call this directly. This is done by the extension manager if necessary."
+          ],
+          "raises": "DeploymentException,",
+          "args": []
+        },
+        {
+          "name": "revokePackage",
+          "returns": "None",
+          "desc": [
+            "revokes this XPackage.",
+            "",
+            "NEVER call this directly. This is done by the extension manager if necessary."
+          ],
+          "raises": "DeploymentException,",
+          "args": []
+        }
+      ]
+    }
   }
 }

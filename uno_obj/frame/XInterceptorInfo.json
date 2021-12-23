@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:21:48+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:44:07+00:00",
   "name": "XInterceptorInfo",
   "type": "interface",
   "namespace": "com.sun.star.frame",
@@ -26,13 +26,23 @@
     "desc": [
       "makes it possible to get information about a registered interceptor and is used by frame interceptor mechanism to perform interception.",
       "",
-      "Frame can call right interceptor directly without calling all of registered ones. Use it as an additional interface to XDispatchProviderInterceptor. If any interceptor in list doesn't support this interface - these mechanism will be broken and normal list of master-slave interceptor objects will be used from top to the bottom.",
-      "",
-      "**See Also**",
-      "",
-      "    XDispatchProviderInterception"
+      "Frame can call right interceptor directly without calling all of registered ones. Use it as an additional interface to XDispatchProviderInterceptor. If any interceptor in list doesn't support this interface - these mechanism will be broken and normal list of master-slave interceptor objects will be used from top to the bottom."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1frame_1_1XInterceptorInfo.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getInterceptedURLs",
+          "returns": "typing.List[str]",
+          "desc": [
+            "returns the URL list for interception.",
+            "",
+            "Wildcards inside the URLs are allowed to register the interceptor for URLs too, which can have optional arguments (e.g. \\\"..#..\\\" or \\\"..?..\\\")."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:21:42+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:43:52+00:00",
   "name": "XComponentLoader",
   "type": "interface",
   "namespace": "com.sun.star.frame",
@@ -16,7 +16,12 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..lang.x_component",
+        "XComponent"
+      ]
+    ],
     "name": "XComponentLoader",
     "imports": [],
     "namespace": "com.sun.star.frame",
@@ -24,13 +29,31 @@
       "com.sun.star.uno.XInterface"
     ],
     "desc": [
-      "this is a simple interface to load components by a URL into a frame environment",
-      "",
-      "**See Also**",
-      "",
-      "    Desktop"
+      "this is a simple interface to load components by a URL into a frame environment"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1frame_1_1XComponentLoader.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "loadComponentFromURL",
+          "returns": "XComponent",
+          "desc": [
+            "loads a component specified by a URL into the specified new or existing frame.",
+            "",
+            "To create new documents, use \\\"private:factory/scalc\\\", \\\"private:factory/swriter\\\", etc. Other special protocols (e.g. \\\"slot:\\\", \\\".uno\\\") are not allowed and raise a com.sun.star.lang.IllegalArgumentException.",
+            "",
+            "If a frame with the specified name already exists, it is used, otherwise it is created. There exist some special targets which never can be used as real frame names:",
+            "",
+            "Note: These flags are optional ones and will be used for non special target names only.",
+            "",
+            "For example, \\\"ReadOnly\\\" with a boolean value specifies whether the document is opened read-only. \\\"FilterName\\\" specifies the component type to create and the filter to use, for example: \\\"Text - CSV\\\". For more information see com.sun.star.document.MediaDescriptor.",
+            "",
+            "This interface is a generic one and can be used to start further requests on loaded document or control the lifetime of it (means dispose() it after using). The real document service behind this interface can be one of follow three ones:"
+          ],
+          "raises": "com.sun.star.io.IOException,",
+          "args": []
+        }
+      ]
+    }
   }
 }

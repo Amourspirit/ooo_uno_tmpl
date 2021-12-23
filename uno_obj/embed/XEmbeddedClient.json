@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:18:45+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:43:09+00:00",
   "name": "XEmbeddedClient",
   "type": "interface",
   "namespace": "com.sun.star.embed",
@@ -12,7 +12,7 @@
   "data": {
     "from_imports": [
       [
-        "......x_component_supplier",
+        ".x_component_supplier",
         "XComponentSupplier"
       ]
     ],
@@ -21,12 +21,33 @@
     "imports": [],
     "namespace": "com.sun.star.embed",
     "extends": [
-      "XComponentSupplier"
+      "com.sun.star.embed.XComponentSupplier"
     ],
     "desc": [
       "represents common functionality for embedded clients."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1embed_1_1XEmbeddedClient.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "saveObject",
+          "returns": "None",
+          "desc": [
+            "asks client to let the object store itself."
+          ],
+          "raises": "com.sun.star.embed.ObjectSaveVetoException,",
+          "args": []
+        },
+        {
+          "name": "visibilityChanged",
+          "returns": "None",
+          "desc": [
+            "An object can use this method to notify the client when the object outplace window becomes visible or invisible."
+          ],
+          "raises": "com.sun.star.embed.WrongStateException",
+          "args": []
+        }
+      ]
+    }
   }
 }

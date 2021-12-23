@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:18:55+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:42:01+00:00",
   "name": "XCommandInfo",
   "type": "interface",
   "namespace": "com.sun.star.ucb",
@@ -16,7 +16,12 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".command_info",
+        "CommandInfo"
+      ]
+    ],
     "name": "XCommandInfo",
     "imports": [],
     "namespace": "com.sun.star.ucb",
@@ -24,13 +29,57 @@
       "com.sun.star.uno.XInterface"
     ],
     "desc": [
-      "provides access to information on a set of commands.",
-      "",
-      "**See Also**",
-      "",
-      "    1.0"
+      "provides access to information on a set of commands."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1ucb_1_1XCommandInfo.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getCommandInfoByHandle",
+          "returns": "CommandInfo",
+          "desc": [
+            "returns information for a specific command."
+          ],
+          "raises": "com.sun.star.ucb.UnsupportedCommandException",
+          "args": []
+        },
+        {
+          "name": "getCommandInfoByName",
+          "returns": "CommandInfo",
+          "desc": [
+            "returns information for a specific command."
+          ],
+          "raises": "com.sun.star.ucb.UnsupportedCommandException",
+          "args": []
+        },
+        {
+          "name": "getCommands",
+          "returns": "'typing.List[CommandInfo]'",
+          "desc": [
+            "obtains information for all supported commands."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "hasCommandByHandle",
+          "returns": "bool",
+          "desc": [
+            "checks whether a specific command is supported."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "hasCommandByName",
+          "returns": "bool",
+          "desc": [
+            "checks whether a command specific is supported."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

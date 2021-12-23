@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:18:08+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:37:50+00:00",
   "name": "XGridColumn",
   "type": "interface",
   "namespace": "com.sun.star.awt.grid",
@@ -10,25 +10,68 @@
   },
   "writer_args": {},
   "data": {
-    "from_imports": [],
+    "from_imports": [
+      [
+        "...lang.x_component",
+        "XComponent"
+      ],
+      [
+        "...util.x_cloneable",
+        "XCloneable"
+      ]
+    ],
     "from_imports_typing": [
-      ".......horizontal_alignment",
-      "HorizontalAlignment"
+      [
+        "...style.horizontal_alignment",
+        "HorizontalAlignment"
+      ]
     ],
     "name": "XGridColumn",
     "imports": [],
     "namespace": "com.sun.star.awt.grid",
-    "extends": [],
+    "extends": [
+      "com.sun.star.lang.XComponent",
+      "com.sun.star.util.XCloneable"
+    ],
     "desc": [
       "The XGridColumn defines the properties and behavior of a column in a grid control.",
       "",
-      "**See Also**",
+      "**since**",
       "",
       "    OOo 3.3"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1grid_1_1XGridColumn.html",
     "items": {
+      "methods": [
+        {
+          "name": "addGridColumnListener",
+          "returns": "None",
+          "desc": [
+            "Adds a listener for the GridColumnEvent posted after the grid changes."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "removeGridColumnListener",
+          "returns": "None",
+          "desc": [
+            "Removes a listener previously added with addColumnListener()."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ],
       "properties": [
+        {
+          "name": "ColumnWidth",
+          "returns": "int",
+          "desc": [
+            "specifies the current width of the column."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
         {
           "name": "DataColumnIndex",
           "returns": "int",
@@ -41,8 +84,25 @@
             "",
             "If DataColumnIndex is negative, the it will be ignored, then the column's index within its column model, as determined by the Index attribute, will be used."
           ],
-          "raises_get": [],
-          "raises_set": []
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Flexibility",
+          "returns": "int",
+          "desc": [
+            "specifies the flexibility of the column when it is automatically resized due to the grid control as a whole being resized.",
+            "",
+            "Specify 0 here if you do not want the column to be resized automatically.",
+            "",
+            "If a column has a flexibility greater than 0, it is set in relationship to the flexibility of all other such columns, and the respective widths of the columns are changed in the same relationship.",
+            "",
+            "Note that a column's flexibility is ignored if its Resizeable attribute is FALSE.",
+            "",
+            "A column's flexibility cannot be negative, attempts to set a negative value will raise an exception."
+          ],
+          "raises_get": "",
+          "raises_set": ""
         },
         {
           "name": "HelpText",
@@ -52,17 +112,68 @@
             "",
             "A grid control will usually display a column's help text as tooltip."
           ],
-          "raises_get": [],
-          "raises_set": []
+          "raises_get": "",
+          "raises_set": ""
         },
         {
           "name": "HorizontalAlign",
-          "returns": "'HorizontalAlignment'",
+          "returns": "HorizontalAlignment",
           "desc": [
             "Specifies the horizontal alignment of the content in the control."
           ],
-          "raises_get": [],
-          "raises_set": []
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Identifier",
+          "returns": "object",
+          "desc": [
+            "specifies an identifier of the column",
+            "",
+            "This identifier will not be evaluated by the grid control, or its model. It is merely for clients to identify particular columns."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Index",
+          "returns": "int",
+          "desc": [
+            "denotes the index of the column within the grid column model it belongs to",
+            "",
+            "If the column is not yet part of a column model, Index is -1."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "MaxWidth",
+          "returns": "int",
+          "desc": [
+            "specifies the maximal width the column can have."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "MinWidth",
+          "returns": "int",
+          "desc": [
+            "specifies the minimal width the column can have."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Resizeable",
+          "returns": "bool",
+          "desc": [
+            "controls whether or not the column's width is fixed or not.",
+            "",
+            "If this is TRUE, the user can interactively change the column's width. Also, the column is subject to auto-resizing, if its Flexibility attribute is greater 0."
+          ],
+          "raises_get": "",
+          "raises_set": ""
         },
         {
           "name": "Title",
@@ -70,8 +181,8 @@
           "desc": [
             "A title is displayed in the column header row if UnoControlGridModel.ShowColumnHeader() is set to TRUE"
           ],
-          "raises_get": [],
-          "raises_set": []
+          "raises_get": "",
+          "raises_set": ""
         }
       ]
     }

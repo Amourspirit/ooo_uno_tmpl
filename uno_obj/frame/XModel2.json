@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:21:50+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:44:12+00:00",
   "name": "XModel2",
   "type": "interface",
   "namespace": "com.sun.star.frame",
@@ -16,7 +16,16 @@
         "XModel"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..container.x_enumeration",
+        "XEnumeration"
+      ],
+      [
+        ".x_controller2",
+        "XController2"
+      ]
+    ],
     "name": "XModel2",
     "imports": [],
     "namespace": "com.sun.star.frame",
@@ -26,9 +35,75 @@
     "desc": [
       "extends interface XModel.",
       "",
-      "The following functions are added:"
+      "The following functions are added:",
+      "",
+      "**since**",
+      "",
+      "    LibreOffice 6.3"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1frame_1_1XModel2.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "createDefaultViewController",
+          "returns": "XController2",
+          "desc": [
+            "creates the default view instance for this model.",
+            "",
+            "Effectively, this method is equivalent to calling createView() with the ViewName being \\\"Default\\\"."
+          ],
+          "raises": "com.sun.star.lang.IllegalArgumentException,",
+          "args": []
+        },
+        {
+          "name": "createViewController",
+          "returns": "XController2",
+          "desc": [
+            "creates a new view instance classified by the specified name and arguments.",
+            "",
+            "The newly created controller must not be connected with the document and the frame. That is, you should neither call XFrame.setComponent(), nor XController.attachFrame(), nor XController.attachModel(), nor XModel.connectController(), not XModel.setCurrentController(). All of this is the responsibility of the caller, which will do it in the proper order."
+          ],
+          "raises": "com.sun.star.lang.IllegalArgumentException,",
+          "args": []
+        },
+        {
+          "name": "getAvailableViewControllerNames",
+          "returns": "typing.List[str]",
+          "desc": [
+            "provides the available names of the factory to be used to create views.",
+            "",
+            "The names are usually logical view names. The following names have a defined meaning, i.e. every concrete implementation which returns such a name must ensure it has the same meaning, and if a concrete implementation has a view with the given meaning, it must give it the name as defined here:",
+            "",
+            "Implementations of this interface might decide to support additional view names, which then are documented in the respective service descriptions."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getControllers",
+          "returns": "XEnumeration",
+          "desc": [
+            "provides list of all currently connected controller objects.",
+            "",
+            "Please note: Because this interface will might be used inside multi threaded environments those list can contain still disposed items or it new added controller will be missing (if they were added after this enumeration was created)."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "setArgs",
+          "returns": "None",
+          "desc": [
+            "Sets com.sun.star.document.MediaDescriptor properties of the current model during runtime.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 6.3"
+          ],
+          "raises": "com.sun.star.lang.IllegalArgumentException,",
+          "args": []
+        }
+      ]
+    }
   }
 }

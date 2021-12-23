@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:19:57+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:38:14+00:00",
   "name": "XFilePreview",
   "type": "interface",
   "namespace": "com.sun.star.ui.dialogs",
@@ -16,7 +16,12 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "...util.color",
+        "Color"
+      ]
+    ],
     "name": "XFilePreview",
     "imports": [],
     "namespace": "com.sun.star.ui.dialogs",
@@ -27,6 +32,86 @@
       "FilePicker that support the preview of various file formats should implement this interface."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1ui_1_1dialogs_1_1XFilePreview.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getAvailableHeight",
+          "returns": "int",
+          "desc": [
+            "The method returns the available height of the preview window even if the window is invisible or could not be created.",
+            "",
+            "If a service implementation doesn't support a file preview 0 will be returned."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getAvailableWidth",
+          "returns": "int",
+          "desc": [
+            "The method returns the available width of the preview window even if the window is invisible or could not be created.",
+            "",
+            "If a service implementation doesn't support a file preview 0 will be returned."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getShowState",
+          "returns": "bool",
+          "desc": [
+            "Returns the current show state of the preview.",
+            "",
+            "A value of FALSE if the preview window is invisible."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getSupportedImageFormats",
+          "returns": "typing.List[int]",
+          "desc": [
+            "The method returns all image formats that the preview supports."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getTargetColorDepth",
+          "returns": "Color",
+          "desc": [
+            "The method returns the supported color depth of the target device."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "setImage",
+          "returns": "None",
+          "desc": [
+            "Sets a new image.",
+            "",
+            "If the preview is currently hidden the image will be ignored. An empty any will clear the preview window."
+          ],
+          "raises": "com.sun.star.lang.IllegalArgumentException",
+          "args": []
+        },
+        {
+          "name": "setShowState",
+          "returns": "bool",
+          "desc": [
+            "Optionally sets the current show state of the preview.",
+            "",
+            "It is possible that the preview implementation doesn't support hiding the preview.",
+            "",
+            "A value of FALSE hides the preview window.",
+            "",
+            "A value of FALSE if the operation fails for any reason or the preview implementation doesn't support hiding the preview."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

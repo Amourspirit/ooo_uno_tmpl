@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:19:28+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:41:18+00:00",
   "name": "XPropertyAccess",
   "type": "interface",
   "namespace": "com.sun.star.beans",
@@ -16,7 +16,12 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".property_value",
+        "PropertyValue"
+      ]
+    ],
     "name": "XPropertyAccess",
     "imports": [],
     "namespace": "com.sun.star.beans",
@@ -31,6 +36,27 @@
       "Another advantage of this method is that conflicts are avoided if property value restrictions depend on the value of other properties."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1beans_1_1XPropertyAccess.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getPropertyValues",
+          "returns": "'typing.List[PropertyValue]'",
+          "desc": [],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "setPropertyValues",
+          "returns": "None",
+          "desc": [
+            "sets the values of given properties.",
+            "",
+            "All properties which are not contained in the sequence aProps will be left unchanged."
+          ],
+          "raises": "com.sun.star.beans.UnknownPropertyException,",
+          "args": []
+        }
+      ]
+    }
   }
 }

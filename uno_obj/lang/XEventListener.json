@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:22:08+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:35:16+00:00",
   "name": "XEventListener",
   "type": "interface",
   "namespace": "com.sun.star.lang",
@@ -24,13 +24,25 @@
       "com.sun.star.uno.XInterface"
     ],
     "desc": [
-      "base interface for all event listeners interfaces.",
-      "",
-      "**See Also**",
-      "",
-      "    ProUNO - Event Model ProUNO - Bridge - Automation Objects with UNO Interfaces ProUNO - Basic - Listeners"
+      "base interface for all event listeners interfaces."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1lang_1_1XEventListener.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "disposing",
+          "returns": "None",
+          "desc": [
+            "gets called when the broadcaster is about to be disposed.",
+            "",
+            "All listeners and all other objects, which reference the broadcaster should release the reference to the source. No method should be invoked anymore on this object ( including XComponent.removeEventListener() ).",
+            "",
+            "This method is called for every listener registration of derived listener interfaced, not only for registrations at XComponent."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

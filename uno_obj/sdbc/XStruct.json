@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:19:47+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:40:04+00:00",
   "name": "XStruct",
   "type": "interface",
   "namespace": "com.sun.star.sdbc",
@@ -12,23 +12,46 @@
   "data": {
     "from_imports": [
       [
-        "......x_name_access",
-        "XNameAccess"
+        "..uno.x_interface",
+        "XInterface"
       ]
     ],
     "from_imports_typing": [],
     "name": "XStruct",
-    "imports": [
-      "XNameAccess"
-    ],
+    "imports": [],
     "namespace": "com.sun.star.sdbc",
-    "extends": [],
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
     "desc": [
       "is used for the standard mapping for a SQL structured type.",
       "",
       "A Struct object contains a value for each attribute of the SQL structured type that it represents. By default, an instance of Struct is valid as long as the application has a reference to it."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1sdbc_1_1XStruct.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getAttributes",
+          "returns": "typing.List[object]",
+          "desc": [
+            "produces the ordered values of the attributes of the SQL structured type that this Struct object represents.",
+            "",
+            "This method uses the given type map for customizations of the type mappings. If there is no entry in the given type map that matches or the given type map is NULL , the structured type that this Struct object represents, the driver uses the connection type mapping."
+          ],
+          "raises": "SQLException",
+          "args": []
+        },
+        {
+          "name": "getSQLTypeName",
+          "returns": "str",
+          "desc": [
+            "retrieves the SQL type name of the SQL structured type that this Struct object represents."
+          ],
+          "raises": "SQLException",
+          "args": []
+        }
+      ]
+    }
   }
 }

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:20:31+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:40:48+00:00",
   "name": "XLibraryAccess",
   "type": "interface",
   "namespace": "com.sun.star.script",
@@ -16,7 +16,12 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".byte",
+        "byte"
+      ]
+    ],
     "name": "XLibraryAccess",
     "imports": [],
     "namespace": "com.sun.star.script",
@@ -26,9 +31,81 @@
     "desc": [
       "provides access to additional scripting code.",
       "",
-      "This code is organized in modules and these modules contain the functions. It is possible to get just the code from a function, but you can also get the whole code of a module with all functions in it."
+      "This code is organized in modules and these modules contain the functions. It is possible to get just the code from a function, but you can also get the whole code of a module with all functions in it.",
+      "",
+      ".. deprecated::",
+      "",
+      "    Interface is deprecated."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1script_1_1XLibraryAccess.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getFunctionCode",
+          "returns": "'typing.List[byte]'",
+          "desc": [
+            "Get the compiled code of a function."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getFunctionSource",
+          "returns": "str",
+          "desc": [
+            "get the source code of a function."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getModuleCode",
+          "returns": "'typing.List[byte]'",
+          "desc": [
+            "Get the whole compiled code of a module."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getModuleNames",
+          "returns": "typing.List[str]",
+          "desc": [
+            "Return all module names which contain code.",
+            "",
+            "e.g., { \\\"UtilLibrary.ModuleDate\\\", \\\"UtilLibrary.Output\\\", ... }"
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getModuleSource",
+          "returns": "str",
+          "desc": [
+            "get the source code of a module."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "isFunction",
+          "returns": "bool",
+          "desc": [
+            "returns TRUE, if the function is accessible through this library; otherwise it returns FALSE."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "isValidPath",
+          "returns": "bool",
+          "desc": [
+            "returns TRUE if a fully qualified function name begins with this name."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

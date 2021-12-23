@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:16:29+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:35:00+00:00",
   "name": "XFormattedField",
   "type": "interface",
   "namespace": "com.sun.star.report",
@@ -12,27 +12,49 @@
   "data": {
     "from_imports": [
       [
-        "......x_report_control_model",
+        ".x_report_control_model",
         "XReportControlModel"
       ]
     ],
-    "from_imports_typing": [],
-    "name": "XFormattedField",
-    "imports": [
-      "XReportControlModel"
+    "from_imports_typing": [
+      [
+        "..util.x_number_formats_supplier",
+        "XNumberFormatsSupplier"
+      ]
     ],
+    "name": "XFormattedField",
+    "imports": [],
     "namespace": "com.sun.star.report",
     "extends": [
-      "XReportControlModel"
+      "com.sun.star.report.XReportControlModel"
     ],
     "desc": [
-      "describes a control which can be used for displaying values with an arbitrary formatting.",
-      "",
-      "**See Also**",
-      "",
-      "    com.sun.star.report.XReportControlModel"
+      "describes a control which can be used for displaying values with an arbitrary formatting."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1report_1_1XFormattedField.html",
-    "items": {}
+    "items": {
+      "properties": [
+        {
+          "name": "FormatKey",
+          "returns": "int",
+          "desc": [
+            "specifies the format to be used when formatting the field input and output.",
+            "",
+            "This value is meaningful relative to the FormatsSupplier attribute only."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "FormatsSupplier",
+          "returns": "XNumberFormatsSupplier",
+          "desc": [
+            "supplies the formats the field should work with."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
   }
 }

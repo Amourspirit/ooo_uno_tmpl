@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:16:48+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:41:04+00:00",
   "name": "XCopyTableListener",
   "type": "interface",
   "namespace": "com.sun.star.sdb.application",
@@ -24,13 +24,43 @@
       "com.sun.star.lang.XEventListener"
     ],
     "desc": [
-      "specifies the interface required to listen for progress in copying table rows via a CopyTableWizard.",
-      "",
-      "**See Also**",
-      "",
-      "    CopyTableRowEvent"
+      "specifies the interface required to listen for progress in copying table rows via a CopyTableWizard."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1sdb_1_1application_1_1XCopyTableListener.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "copiedRow",
+          "returns": "None",
+          "desc": [
+            "is called when a row was successfully copied.",
+            "",
+            "This method is called right after a row has been successfully copied. It might be used, for instance, to update a progress indicator."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "copyRowError",
+          "returns": "int",
+          "desc": [
+            "is called when copying a row failed."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "copyingRow",
+          "returns": "None",
+          "desc": [
+            "is called when a row is about to be copied.",
+            "",
+            "This method is called immediately before a row is copied. It might be used, for instance, to update a progress indicator."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

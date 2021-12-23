@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:22:09+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:35:18+00:00",
   "name": "XMultiServiceFactory",
   "type": "interface",
   "namespace": "com.sun.star.lang",
@@ -16,7 +16,12 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..uno.x_interface",
+        "XInterface"
+      ]
+    ],
     "name": "XMultiServiceFactory",
     "imports": [],
     "namespace": "com.sun.star.lang",
@@ -24,13 +29,39 @@
       "com.sun.star.uno.XInterface"
     ],
     "desc": [
-      "Allows creating instances specified by a string name.",
-      "",
-      "**See Also**",
-      "",
-      "    Although this interface deals with the notion of \\\"services\\\", it is not restricted to services but is more general. This interface can be used for all kinds of factories for all kinds of instances, not only UNO services."
+      "Allows creating instances specified by a string name."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1lang_1_1XMultiServiceFactory.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "createInstance",
+          "returns": "XInterface",
+          "desc": [
+            "Creates an instance classified by the specified name."
+          ],
+          "raises": "com.sun.star.uno.Exception",
+          "args": []
+        },
+        {
+          "name": "createInstanceWithArguments",
+          "returns": "XInterface",
+          "desc": [
+            "Creates an instance classified by the specified name and passes the arguments to that instance."
+          ],
+          "raises": "com.sun.star.uno.Exception",
+          "args": []
+        },
+        {
+          "name": "getAvailableServiceNames",
+          "returns": "typing.List[str]",
+          "desc": [
+            "Provides the available names of the factory to be used to create instances."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

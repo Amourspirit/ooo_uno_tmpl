@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:20:24+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:40:10+00:00",
   "name": "XDragSource",
   "type": "interface",
   "namespace": "com.sun.star.datatransfer.dnd",
@@ -29,6 +29,40 @@
       "Differently to Java, the association between view and interface is fixed and can not be changed. Otherwise, the AWT messaging would have to be implemented for any window supporting Drag and Drop operations, which would be a real performance issue."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1datatransfer_1_1dnd_1_1XDragSource.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getDefaultCursor",
+          "returns": "int",
+          "desc": [
+            "To get the default cursor for a specified drag action.",
+            "",
+            "The returned value may be used as parameter for the method com.sun.star.datatransfer.dnd.XDragSourceContext.setCursor()."
+          ],
+          "raises": "com.sun.star.lang.IllegalArgumentException",
+          "args": []
+        },
+        {
+          "name": "isDragImageSupported",
+          "returns": "bool",
+          "desc": [
+            "In order to query if drag image support is available."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "startDrag",
+          "returns": "None",
+          "desc": [
+            "Starts the drag operation.",
+            "",
+            "Note: this call does not block until the drag and drop operation ends. If the Drag and Drop system is unable to initiate a drag operation or if the user attempts to start a drag while an existing drag operation is still executing, the action fails immediately. This is indicated by calling com.sun.star.datatransfer.dnd.XDragSourceListener.dragDropEnd() on the parameter listener with a DragSourceDragEvent showing a failure."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

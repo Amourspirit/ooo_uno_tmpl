@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:16:49+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:43:43+00:00",
   "name": "XConnection",
   "type": "interface",
   "namespace": "com.sun.star.connection",
@@ -26,13 +26,67 @@
     "desc": [
       "A bidirectional bytestream.",
       "",
-      "You should additionally implement XConnection2.",
-      "",
-      "**See Also**",
-      "",
-      "    XConnection2"
+      "You should additionally implement XConnection2."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1connection_1_1XConnection.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "close",
+          "returns": "None",
+          "desc": [
+            "Immediately terminates any ongoing read or write calls.",
+            "",
+            "All subsequent read or write calls()"
+          ],
+          "raises": "com.sun.star.io.IOException",
+          "args": []
+        },
+        {
+          "name": "flush",
+          "returns": "None",
+          "desc": [
+            "Empties all internal buffers."
+          ],
+          "raises": "com.sun.star.io.IOException",
+          "args": []
+        },
+        {
+          "name": "getDescription",
+          "returns": "str",
+          "desc": [
+            "A unique string describing the connection.",
+            "",
+            "This string is different from the arguments to XConnection.accept() and XConnector.connect(). In general, the string contains an additional handle value. For example, \\\"socket,host=localhost,port=2002,uniqueValue=2324\\\"."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "read",
+          "returns": "int",
+          "desc": [
+            "reads a requested number of bytes from the connection.",
+            "",
+            "This method is blocking, meaning that it always returns a bytesequence with the requested number of bytes, unless it has reached end of file (which often means, that close() has been called).",
+            "",
+            "please see also the readSomeBytes() method of XConnection2."
+          ],
+          "raises": "com.sun.star.io.IOException",
+          "args": []
+        },
+        {
+          "name": "write",
+          "returns": "None",
+          "desc": [
+            "writes the given bytesequence to the stream.",
+            "",
+            "The method blocks until the whole sequence is written."
+          ],
+          "raises": "com.sun.star.io.IOException",
+          "args": []
+        }
+      ]
+    }
   }
 }

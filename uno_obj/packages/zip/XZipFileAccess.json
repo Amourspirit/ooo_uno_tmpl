@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:19:24+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:35:40+00:00",
   "name": "XZipFileAccess",
   "type": "interface",
   "namespace": "com.sun.star.packages.zip",
@@ -16,7 +16,12 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "...io.x_input_stream",
+        "XInputStream"
+      ]
+    ],
     "name": "XZipFileAccess",
     "imports": [],
     "namespace": "com.sun.star.packages.zip",
@@ -27,6 +32,20 @@
       "allows to get reading access to non-encrypted entries inside zip file."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1packages_1_1zip_1_1XZipFileAccess.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getStreamByPattern",
+          "returns": "XInputStream",
+          "desc": [
+            "allows to get stream by specifying a pattern.",
+            "",
+            "The first stream with a name that fits to the pattern will be returned. The pattern allows to use \\\"*\\\" wildcard symbol. If the name contains \\\"*\\\" or \\\"\\\\\" symbols itself they must guarded with backslash \\\"\\\\\". The slashes have no special meaning here so they can be replaced by wildcards also."
+          ],
+          "raises": "com.sun.star.container.NoSuchElementException,",
+          "args": []
+        }
+      ]
+    }
   }
 }

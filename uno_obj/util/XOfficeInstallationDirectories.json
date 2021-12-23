@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:19:14+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:36:05+00:00",
   "name": "XOfficeInstallationDirectories",
   "type": "interface",
   "namespace": "com.sun.star.util",
@@ -28,11 +28,54 @@
       "",
       "This functionality is useful when data containing references to the current office installation directory must be made persistent and re-read later. In many cases, storing the reference directly would destroy the relocatability of an office installation.",
       "",
-      "**See Also**",
+      "**since**",
       "",
       "    OOo 2.0"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1util_1_1XOfficeInstallationDirectories.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getOfficeInstallationDirectoryURL",
+          "returns": "str",
+          "desc": [
+            "returns the absolute URL containing the directory of the current office installation (for example \\\"file:///opt/LibreOffice\\\")"
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getOfficeUserDataDirectoryURL",
+          "returns": "str",
+          "desc": [
+            "returns the absolute URL containing the directory where the current office installation expects its user data (for example \\\"file:///home/kso/.config/libreoffice/4\\\")"
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "makeAbsoluteURL",
+          "returns": "str",
+          "desc": [
+            "the counterpart of makeRelocatableURL.",
+            "",
+            "If the given URL contains a placeholder for an absolute reference to the current office installation directory or for the office user data directory, that was created using makeRelocatableURL, the respective placeholder will be replaced by an absolute reference to the current office installation directory or office user data directory."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "makeRelocatableURL",
+          "returns": "str",
+          "desc": [
+            "calculates a relocatable URL from the given URL.",
+            "",
+            "If the given URL contains an absolute reference to the current office installation directory or office user data directory, this method will replace the absolute reference by an opaque placeholder string. makeRelocatableURL must be used in order to re-replace the placeholder by an absolute reference."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:19:04+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:42:24+00:00",
   "name": "XSimpleFileAccess",
   "type": "interface",
   "namespace": "com.sun.star.ucb",
@@ -16,7 +16,24 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..io.x_output_stream",
+        "XOutputStream"
+      ],
+      [
+        "..util.date_time",
+        "DateTime"
+      ],
+      [
+        "..io.x_input_stream",
+        "XInputStream"
+      ],
+      [
+        "..io.x_stream",
+        "XStream"
+      ]
+    ],
     "name": "XSimpleFileAccess",
     "imports": [],
     "namespace": "com.sun.star.ucb",
@@ -27,6 +44,157 @@
       "This is the basic interface to read data from a stream."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1ucb_1_1XSimpleFileAccess.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "copy",
+          "returns": "None",
+          "desc": [
+            "Copies a file."
+          ],
+          "raises": "com.sun.star.ucb.CommandAbortedException,",
+          "args": []
+        },
+        {
+          "name": "createFolder",
+          "returns": "None",
+          "desc": [
+            "Creates a new Folder."
+          ],
+          "raises": "com.sun.star.ucb.CommandAbortedException,",
+          "args": []
+        },
+        {
+          "name": "exists",
+          "returns": "bool",
+          "desc": [
+            "Checks if a file exists."
+          ],
+          "raises": "com.sun.star.ucb.CommandAbortedException,",
+          "args": []
+        },
+        {
+          "name": "getContentType",
+          "returns": "str",
+          "desc": [
+            "Returns the content type of a file."
+          ],
+          "raises": "com.sun.star.ucb.CommandAbortedException,",
+          "args": []
+        },
+        {
+          "name": "getDateTimeModified",
+          "returns": "DateTime",
+          "desc": [
+            "Returns the last modified date for the file."
+          ],
+          "raises": "com.sun.star.ucb.CommandAbortedException,",
+          "args": []
+        },
+        {
+          "name": "getFolderContents",
+          "returns": "typing.List[str]",
+          "desc": [
+            "Returns the contents of a folder."
+          ],
+          "raises": "com.sun.star.ucb.CommandAbortedException,",
+          "args": []
+        },
+        {
+          "name": "getSize",
+          "returns": "int",
+          "desc": [
+            "Returns the size of a file."
+          ],
+          "raises": "com.sun.star.ucb.CommandAbortedException,",
+          "args": []
+        },
+        {
+          "name": "isFolder",
+          "returns": "bool",
+          "desc": [
+            "Checks if a URL represents a folder."
+          ],
+          "raises": "com.sun.star.ucb.CommandAbortedException,",
+          "args": []
+        },
+        {
+          "name": "isReadOnly",
+          "returns": "bool",
+          "desc": [
+            "Checks if a file is \\\"read only\\\"."
+          ],
+          "raises": "com.sun.star.ucb.CommandAbortedException,",
+          "args": []
+        },
+        {
+          "name": "kill",
+          "returns": "None",
+          "desc": [
+            "Removes a file.",
+            "",
+            "If the URL represents a folder, the folder will be removed, even if it's not empty."
+          ],
+          "raises": "com.sun.star.ucb.CommandAbortedException,",
+          "args": []
+        },
+        {
+          "name": "move",
+          "returns": "None",
+          "desc": [
+            "Moves a file."
+          ],
+          "raises": "com.sun.star.ucb.CommandAbortedException,",
+          "args": []
+        },
+        {
+          "name": "openFileRead",
+          "returns": "XInputStream",
+          "desc": [
+            "Opens file to read."
+          ],
+          "raises": "com.sun.star.ucb.CommandAbortedException,",
+          "args": []
+        },
+        {
+          "name": "openFileReadWrite",
+          "returns": "XStream",
+          "desc": [
+            "Opens file to read and write."
+          ],
+          "raises": "com.sun.star.ucb.CommandAbortedException,",
+          "args": []
+        },
+        {
+          "name": "openFileWrite",
+          "returns": "XOutputStream",
+          "desc": [
+            "Opens file to write."
+          ],
+          "raises": "com.sun.star.ucb.CommandAbortedException,",
+          "args": []
+        },
+        {
+          "name": "setInteractionHandler",
+          "returns": "None",
+          "desc": [
+            "Sets an interaction handler to be used for further operations.",
+            "",
+            "A default interaction handler is available as service com.sun.star.task.InteractionHandler. The documentation of this service also contains further information about the interaction handler concept."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "setReadOnly",
+          "returns": "None",
+          "desc": [
+            "Sets the \\\"read only\\\" of a file according to the boolean parameter, if the actual process has the right to do so."
+          ],
+          "raises": "com.sun.star.ucb.CommandAbortedException,",
+          "args": []
+        }
+      ]
+    }
   }
 }

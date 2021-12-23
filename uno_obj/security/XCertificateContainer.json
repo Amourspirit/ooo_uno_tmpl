@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:16:59+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:41:08+00:00",
   "name": "XCertificateContainer",
   "type": "interface",
   "namespace": "com.sun.star.security",
@@ -10,20 +10,48 @@
   },
   "writer_args": {},
   "data": {
-    "from_imports": [],
+    "from_imports": [
+      [
+        ".certificate_container",
+        "CertificateContainer"
+      ]
+    ],
     "from_imports_typing": [],
     "name": "XCertificateContainer",
     "imports": [],
     "namespace": "com.sun.star.security",
-    "extends": [],
+    "extends": [
+      "com.sun.star.security.CertificateContainer"
+    ],
     "desc": [
       "Manage user certificate for temporary connections.",
       "",
-      "**See Also**",
+      "**since**",
       "",
-      "    CertificateContainer"
+      "    OOo 2.3.1"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1security_1_1XCertificateContainer.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "addCertificate",
+          "returns": "bool",
+          "desc": [
+            "Store the certificate in memory."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "hasCertificate",
+          "returns": "object",
+          "desc": [
+            "Check if a certificate was stored earlier before."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

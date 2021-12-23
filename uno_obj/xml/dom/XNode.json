@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:18:20+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:36:47+00:00",
   "name": "XNode",
   "type": "interface",
   "namespace": "com.sun.star.xml.dom",
@@ -32,11 +32,277 @@
       "",
       "The values of nodeName, nodeValue, and attributes vary according to the node type as follows:",
       "",
-      "**See Also**",
+      "**since**",
       "",
-      "    Document Object Model (DOM) Level 2 Core Specification"
+      "    OOo 2.0"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1xml_1_1dom_1_1XNode.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "appendChild",
+          "returns": "object",
+          "desc": [
+            "Adds the node newChild to the end of the list of children of this node.",
+            "",
+            "HIERARCHY_REQUEST_ERR: Raised if this node is of a type that does not allow children of the type of the newChild node, or if the node to append is one of this node's ancestors or this node itself.",
+            "",
+            "WRONG_DOCUMENT_ERR: Raised if newChild was created from a different document than the one that created this node.",
+            "",
+            "NO_MODIFICATION_ALLOWED_ERR: Raised if this node is readonly or if the previous parent of the node being inserted is readonly."
+          ],
+          "raises": "DOMException",
+          "args": []
+        },
+        {
+          "name": "cloneNode",
+          "returns": "object",
+          "desc": [
+            "Returns a duplicate of this node, i.e., serves as a generic copy constructor for nodes."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getAttributes",
+          "returns": "object",
+          "desc": [
+            "A NamedNodeMap containing the attributes of this node (if it is an Element) or null otherwise."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getChildNodes",
+          "returns": "object",
+          "desc": [
+            "A NodeList that contains all children of this node."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getFirstChild",
+          "returns": "object",
+          "desc": [
+            "The first child of this node."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getLastChild",
+          "returns": "object",
+          "desc": [
+            "The last child of this node."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getLocalName",
+          "returns": "str",
+          "desc": [
+            "Returns the local part of the qualified name of this node."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getNamespaceURI",
+          "returns": "str",
+          "desc": [
+            "The namespace URI of this node, or null if it is unspecified."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getNextSibling",
+          "returns": "object",
+          "desc": [
+            "The node immediately following this node."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getNodeName",
+          "returns": "str",
+          "desc": [
+            "The name of this node, depending on its type; see the table above."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getNodeType",
+          "returns": "object",
+          "desc": [
+            "A code representing the type of the underlying object, as defined above."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getNodeValue",
+          "returns": "str",
+          "desc": [
+            "The value of this node, depending on its type; see the table above.",
+            "",
+            "DOMSTRING_SIZE_ERR: Raised when it would return more characters than fit in a DOMString variable on the implementation platform."
+          ],
+          "raises": "DOMException",
+          "args": []
+        },
+        {
+          "name": "getOwnerDocument",
+          "returns": "object",
+          "desc": [
+            "The Document object associated with this node."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getParentNode",
+          "returns": "object",
+          "desc": [
+            "The parent of this node."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getPrefix",
+          "returns": "str",
+          "desc": [
+            "The namespace prefix of this node, or null if it is unspecified."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getPreviousSibling",
+          "returns": "object",
+          "desc": [
+            "The node immediately preceding this node."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "hasAttributes",
+          "returns": "bool",
+          "desc": [
+            "Returns whether this node (if it is an element) has any attributes."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "hasChildNodes",
+          "returns": "bool",
+          "desc": [
+            "Returns whether this node has any children."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "insertBefore",
+          "returns": "object",
+          "desc": [
+            "Inserts the node newChild before the existing child node refChild.",
+            "",
+            "HIERARCHY_REQUEST_ERR: Raised if this node is of a type that does not allow children of the type of the newChild node, or if the node to insert is one of this node's ancestors or this node itself.",
+            "",
+            "WRONG_DOCUMENT_ERR: Raised if newChild was created from a different document than the one that created this node.",
+            "",
+            "NO_MODIFICATION_ALLOWED_ERR: Raised if this node is readonly or if the parent of the node being inserted is readonly.",
+            "",
+            "NOT_FOUND_ERR: Raised if refChild is not a child of this node."
+          ],
+          "raises": "DOMException",
+          "args": []
+        },
+        {
+          "name": "isSupported",
+          "returns": "bool",
+          "desc": [
+            "Tests whether the DOM implementation implements a specific feature and that feature is supported by this node."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "normalize",
+          "returns": "None",
+          "desc": [
+            "Puts all Text nodes in the full depth of the sub-tree underneath this Node, including attribute nodes, into a \\\"normal\\\" form where only structure (e.g., elements, comments, processing instructions, CDATA sections, and entity references) separates Text nodes, i.e., there are neither adjacent Text nodes nor empty Text nodes."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "removeChild",
+          "returns": "object",
+          "desc": [
+            "Removes the child node indicated by oldChild from the list of children, and returns it.",
+            "",
+            "NO_MODIFICATION_ALLOWED_ERR: Raised if this node is readonly.",
+            "",
+            "NOT_FOUND_ERR: Raised if oldChild is not a child of this node."
+          ],
+          "raises": "DOMException",
+          "args": []
+        },
+        {
+          "name": "replaceChild",
+          "returns": "object",
+          "desc": [
+            "Replaces the child node oldChild with newChild in the list of children, and returns the oldChild node.",
+            "",
+            "HIERARCHY_REQUEST_ERR: Raised if this node is of a type that does not allow children of the type of the newChild node, or if the node to put in is one of this node's ancestors or this node itself.",
+            "",
+            "WRONG_DOCUMENT_ERR: Raised if newChild was created from a different document than the one that created this node.",
+            "",
+            "NO_MODIFICATION_ALLOWED_ERR: Raised if this node or the parent of the new node is readonly.",
+            "",
+            "NOT_FOUND_ERR: Raised if oldChild is not a child of this node."
+          ],
+          "raises": "DOMException",
+          "args": []
+        },
+        {
+          "name": "setNodeValue",
+          "returns": "None",
+          "desc": [
+            "The value of this node, depending on its type; see the table above.",
+            "",
+            "NO_MODIFICATION_ALLOWED_ERR: Raised when the node is readonly.",
+            "",
+            "DOMSTRING_SIZE_ERR: Raised when it would return more characters than fit in a DOMString variable on the implementation platform."
+          ],
+          "raises": "DOMException",
+          "args": []
+        },
+        {
+          "name": "setPrefix",
+          "returns": "None",
+          "desc": [
+            "The namespace prefix of this node, or null if it is unspecified.",
+            "",
+            "INVALID_CHARACTER_ERR: Raised if the specified prefix contains an illegal character, per the XML 1.0 specification .",
+            "",
+            "NO_MODIFICATION_ALLOWED_ERR: Raised if this node is readonly.",
+            "",
+            "NAMESPACE_ERR: Raised if the specified prefix is malformed per the Namespaces in XML specification, if the namespaceURI of this node is null, if the specified prefix is \\\"xml\\\" and the namespaceURI of this node is different from \\\"http://www.w3.org/XML/1998/namespace\\\", if this node is an attribute and the specified prefix is \\\"xmlns\\\" and the namespaceURI of this node is different from \\\" http://www.w3.org/2000/xmlns/\\\", or if this node is an attribute and the qualifiedName of this node is \\\"xmlns\\\" ."
+          ],
+          "raises": "DOMException",
+          "args": []
+        }
+      ]
+    }
   }
 }

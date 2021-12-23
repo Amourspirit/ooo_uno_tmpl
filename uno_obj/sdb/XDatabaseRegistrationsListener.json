@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:16:39+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:43:31+00:00",
   "name": "XDatabaseRegistrationsListener",
   "type": "interface",
   "namespace": "com.sun.star.sdb",
@@ -26,11 +26,43 @@
     "desc": [
       "implemented by components which want to be notified of changes in the application-wide registered databases.",
       "",
-      "**See Also**",
+      "**since**",
       "",
-      "    XDatabaseRegistrations"
+      "    OOo 3.3"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1sdb_1_1XDatabaseRegistrationsListener.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "changedDatabaseLocation",
+          "returns": "None",
+          "desc": [
+            "called when the location of a registered database changed",
+            "",
+            "Note that this talks about registration data only. That is, if the actual file denoted by the database registration is moved, this is in no way monitored or reported. Only (successful) calls to XDatabaseRegistrations.changeDatabaseLocation() are reported here."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "registeredDatabaseLocation",
+          "returns": "None",
+          "desc": [
+            "called when a database has been registered"
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "revokedDatabaseLocation",
+          "returns": "None",
+          "desc": [
+            "called when a database registration has been revoked"
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

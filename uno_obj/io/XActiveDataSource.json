@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:17:00+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:38:25+00:00",
   "name": "XActiveDataSource",
   "type": "interface",
   "namespace": "com.sun.star.io",
@@ -16,7 +16,12 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_output_stream",
+        "XOutputStream"
+      ]
+    ],
     "name": "XActiveDataSource",
     "imports": [],
     "namespace": "com.sun.star.io",
@@ -24,13 +29,30 @@
       "com.sun.star.uno.XInterface"
     ],
     "desc": [
-      "has to be implemented if the class should be able to write into an output stream.",
-      "",
-      "**See Also**",
-      "",
-      "    XActiveDataControl."
+      "has to be implemented if the class should be able to write into an output stream."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1io_1_1XActiveDataSource.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getOutputStream",
+          "returns": "XOutputStream",
+          "desc": [],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "setOutputStream",
+          "returns": "None",
+          "desc": [
+            "plugs the output stream.",
+            "",
+            "If XConnectable is also implemented, this method should query aStream for a XConnectable and connect both."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:22:25+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:36:14+00:00",
   "name": "XDefaultNumberingProvider",
   "type": "interface",
   "namespace": "com.sun.star.text",
@@ -16,7 +16,16 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..container.x_index_access",
+        "XIndexAccess"
+      ],
+      [
+        "..beans.property_values",
+        "PropertyValues"
+      ]
+    ],
     "name": "XDefaultNumberingProvider",
     "imports": [],
     "namespace": "com.sun.star.text",
@@ -24,13 +33,34 @@
       "com.sun.star.uno.XInterface"
     ],
     "desc": [
-      "provides access to default com.sun.star.text.NumberingRules according to a given locale information.",
-      "",
-      "**See Also**",
-      "",
-      "    com.sun.star.text.NumberingRules"
+      "provides access to default com.sun.star.text.NumberingRules according to a given locale information."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1text_1_1XDefaultNumberingProvider.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getDefaultContinuousNumberingLevels",
+          "returns": "'typing.List[PropertyValues]'",
+          "desc": [
+            "provides access to outline numberings according to a given com.sun.star.lang.Locale.",
+            "",
+            "In contrast to outline numberings the continuous numberings consist of level using the equal settings in all numbering levels."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getDefaultOutlineNumberings",
+          "returns": "'typing.List[XIndexAccess]'",
+          "desc": [
+            "provides access to outline numberings according to a given com.sun.star.lang.Locale.",
+            "",
+            "Outline numberings usually consist of levels with different settings."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:18:41+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:37:58+00:00",
   "name": "XUpdateInformationProvider",
   "type": "interface",
   "namespace": "com.sun.star.deployment",
@@ -12,27 +12,75 @@
   "data": {
     "from_imports": [
       [
-        "......x_enumeration",
-        "XEnumeration"
+        ".update_information_provider",
+        "UpdateInformationProvider"
       ]
     ],
-    "from_imports_typing": [],
-    "name": "XUpdateInformationProvider",
-    "imports": [
-      "XEnumeration"
+    "from_imports_typing": [
+      [
+        "..container.x_enumeration",
+        "XEnumeration"
+      ],
+      [
+        "..xml.dom.x_element",
+        "XElement"
+      ]
     ],
+    "name": "XUpdateInformationProvider",
+    "imports": [],
     "namespace": "com.sun.star.deployment",
     "extends": [
-      "XEnumeration"
+      "com.sun.star.deployment.UpdateInformationProvider"
     ],
     "desc": [
       "Objects implementing this interface provide access to the xml root of one or more update information files for a given set of URLs.",
       "",
-      "**See Also**",
+      "**since**",
       "",
       "    OOo 2.2"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1deployment_1_1XUpdateInformationProvider.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "cancel",
+          "returns": "None",
+          "desc": [
+            "interrupts a getUpdateInformation call and let's it return immediately."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getUpdateInformation",
+          "returns": "'typing.List[XElement]'",
+          "desc": [
+            "get update information for a specific extension or all available information from a repository."
+          ],
+          "raises": "com.sun.star.uno.Exception",
+          "args": []
+        },
+        {
+          "name": "getUpdateInformationEnumeration",
+          "returns": "XEnumeration",
+          "desc": [
+            "get update information for a specific extension or all available information from a repository."
+          ],
+          "raises": "com.sun.star.uno.Exception",
+          "args": []
+        },
+        {
+          "name": "setInteractionHandler",
+          "returns": "None",
+          "desc": [
+            "Sets an interaction handler to be used for further operations.",
+            "",
+            "A default interaction handler is available as service com.sun.star.task.InteractionHandler. The documentation of this service also contains further information about the interaction handler concept."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

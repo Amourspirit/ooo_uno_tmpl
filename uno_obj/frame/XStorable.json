@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:21:53+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:44:18+00:00",
   "name": "XStorable",
   "type": "interface",
   "namespace": "com.sun.star.frame",
@@ -26,13 +26,76 @@
     "desc": [
       "offers a simple way to store a component to a URL.",
       "",
-      "It is usually only useful for two cases:",
-      "",
-      "**See Also**",
-      "",
-      "    Drawings - Storing OfficeDev - Storing Documents Spreadsheets - Saving Spreadsheet Documents - Storing Text - Saving Text Documents - Storing"
+      "It is usually only useful for two cases:"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1frame_1_1XStorable.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getLocation",
+          "returns": "str",
+          "desc": [
+            "After XStorable.storeAsURL() it returns the URL the object was stored to."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "hasLocation",
+          "returns": "bool",
+          "desc": [
+            "The object may know the location because it was loaded from there, or because it is stored there."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "isReadonly",
+          "returns": "bool",
+          "desc": [
+            "It is not possible to call XStorable.store() successfully when the data store is read-only."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "store",
+          "returns": "None",
+          "desc": [
+            "stores the data to the URL from which it was loaded.",
+            "",
+            "Only objects which know their locations can be stored."
+          ],
+          "raises": "com.sun.star.io.IOException",
+          "args": []
+        },
+        {
+          "name": "storeAsURL",
+          "returns": "None",
+          "desc": [
+            "stores the object's persistent data to a URL and makes this URL the new location of the object.",
+            "",
+            "This is the normal behavior for UI's \\\"save-as\\\" feature.",
+            "",
+            "The change of the location makes it necessary to store the document in a format that the object can load. For this reason the implementation of XStorable.storeAsURL() will throw an exception if a pure export filter is used, it will accept only combined import/export filters. For such filters the method XStorable.storeToURL() must be used that does not change the location of the object."
+          ],
+          "raises": "com.sun.star.io.IOException",
+          "args": []
+        },
+        {
+          "name": "storeToURL",
+          "returns": "None",
+          "desc": [
+            "stores the object's persistent data to a URL and continues to be a representation of the old URL.",
+            "",
+            "This is the normal behavior for UI's export feature.",
+            "",
+            "This method accepts all kinds of export filters, not only combined import/export filters because it implements an exporting capability, not a persistence capability."
+          ],
+          "raises": "com.sun.star.io.IOException",
+          "args": []
+        }
+      ]
+    }
   }
 }

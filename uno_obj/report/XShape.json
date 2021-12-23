@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:16:33+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:35:04+00:00",
   "name": "XShape",
   "type": "interface",
   "namespace": "com.sun.star.report",
@@ -12,18 +12,21 @@
   "data": {
     "from_imports": [
       [
-        "......x_report_control_model",
+        ".x_report_control_model",
         "XReportControlModel"
       ]
     ],
-    "from_imports_typing": [],
-    "name": "XShape",
-    "imports": [
-      "XReportControlModel"
+    "from_imports_typing": [
+      [
+        "..drawing.homogen_matrix3",
+        "HomogenMatrix3"
+      ]
     ],
+    "name": "XShape",
+    "imports": [],
     "namespace": "com.sun.star.report",
     "extends": [
-      "XReportControlModel"
+      "com.sun.star.report.XReportControlModel"
     ],
     "desc": [],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1report_1_1XShape.html",
@@ -35,8 +38,8 @@
           "desc": [
             "This property can be used to store data that the CustomShapeEngine may use for rendering."
           ],
-          "raises_get": [],
-          "raises_set": []
+          "raises_get": "",
+          "raises_set": ""
         },
         {
           "name": "CustomShapeEngine",
@@ -44,8 +47,37 @@
           "desc": [
             "This property contains the CustomShapeEngine service name that has to be used for rendering."
           ],
-          "raises_get": [],
-          "raises_set": []
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Opaque",
+          "returns": "bool",
+          "desc": [
+            "determines if the object is opaque or transparent for text."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Transformation",
+          "returns": "HomogenMatrix3",
+          "desc": [
+            "this property lets you get and set the transformation matrix for this shape.",
+            "",
+            "The transformation is a 3x3 homogeneous matrix and can contain translation, rotation, shearing and scaling."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ZOrder",
+          "returns": "int",
+          "desc": [
+            "is used to query or change the ZOrder of this Shape."
+          ],
+          "raises_get": "",
+          "raises_set": ""
         }
       ]
     }

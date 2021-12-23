@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:22:11+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:38:23+00:00",
   "name": "XLogger",
   "type": "interface",
   "namespace": "com.sun.star.logging",
@@ -21,12 +21,65 @@
       "",
       "This interface is roughly designed after the Java Logging API. However, there are some differences, the major ones being:",
       "",
-      "**See Also**",
+      "**since**",
       "",
       "    OOo 2.3"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1logging_1_1XLogger.html",
     "items": {
+      "methods": [
+        {
+          "name": "addLogHandler",
+          "returns": "None",
+          "desc": [
+            "adds the given handler to the list of handlers.",
+            "",
+            "When an event is logged, the logger will create a LogRecord for this event, and pass this record to all registered handlers. Single handlers might or might not log those records at their own discretion, and depending on additional restrictions such as filters specified at handler level.",
+            "",
+            "Note: The log level of the given handler (XLogHandler.Level) will not be touched. In particular, it will not be set to the logger's log level. It's the responsibility of the component which knits a logger with one or more log handlers to ensure that all loggers have appropriate levels set."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "isLoggable",
+          "returns": "bool",
+          "desc": [
+            "determines whether logger instance would produce any output for the given level.",
+            "",
+            "The method can be used to optimize performance as maybe complex parameter evaluation in the log calls can be omitted if isLoggable evaluates to false."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "log",
+          "returns": "None",
+          "desc": [
+            "logs a given message"
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "logp",
+          "returns": "None",
+          "desc": [
+            "logs a given message, detailing the source class and method at which the logged event occurred."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "removeLogHandler",
+          "returns": "None",
+          "desc": [
+            "removes the given handler from the list of handlers."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ],
       "properties": [
         {
           "name": "Level",
@@ -34,8 +87,17 @@
           "desc": [
             "specifies which log events are logged or ignored."
           ],
-          "raises_get": [],
-          "raises_set": []
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Name",
+          "returns": "str",
+          "desc": [
+            "denotes the name of the logger."
+          ],
+          "raises_get": "",
+          "raises_set": ""
         }
       ]
     }

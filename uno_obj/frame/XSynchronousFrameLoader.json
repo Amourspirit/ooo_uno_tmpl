@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:21:54+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:44:19+00:00",
   "name": "XSynchronousFrameLoader",
   "type": "interface",
   "namespace": "com.sun.star.frame",
@@ -26,13 +26,32 @@
     "desc": [
       "loads a resource into a Frame.",
       "",
-      "Unlike the XFrameLoader interface, this loading will be synchronous.",
-      "",
-      "**See Also**",
-      "",
-      "    XFrameLoader"
+      "Unlike the XFrameLoader interface, this loading will be synchronous."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1frame_1_1XSynchronousFrameLoader.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "cancel",
+          "returns": "None",
+          "desc": [
+            "cancels the loading process.",
+            "",
+            "No notifications (neither to the frame or the caller) must be notified. Because it's a synchronous process this cancel call can be forced by another thread the loader thread only. Method XSynchronousFrameLoader.load() must return FALSE then and caller of this method XSynchronousFrameLoader.cancel() already knows the state ..."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "load",
+          "returns": "bool",
+          "desc": [
+            "starts the loading of the specified resource into the specified Frame."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

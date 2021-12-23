@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:21:54+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:44:19+00:00",
   "name": "XSubToolbarController",
   "type": "interface",
   "namespace": "com.sun.star.frame",
@@ -28,11 +28,54 @@
       "",
       "This interface is normally used to implement the toolbar button/sub- toolbar function feature. It exchanges the function of the toolbar button, that opened the sub-toolbar, with the one that has been selected on the sub-toolbar.",
       "",
-      "**See Also**",
+      "**since**",
       "",
-      "    com.sun.star.frame.ToolbarController"
+      "    OOo 2.0"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1frame_1_1XSubToolbarController.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "functionSelected",
+          "returns": "None",
+          "desc": [
+            "gets called to notify a controller that a sub-toolbar function has been selected."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getSubToolbarName",
+          "returns": "str",
+          "desc": [
+            "provides the resource URL of the sub-toolbar this controller opens."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "opensSubToolbar",
+          "returns": "bool",
+          "desc": [
+            "if the controller features a sub-toolbar.",
+            "",
+            "Enables implementations to dynamically decide to support sub-toolbars or not."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "updateImage",
+          "returns": "None",
+          "desc": [
+            "gets called to notify a controller that it should set an image which represents the current selected function.",
+            "",
+            "Only the controller instance is able to set the correct image for the current function. A toolbar implementation will ask sub-toolbar controllers to update their image whenever it has to update the images of all its buttons."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

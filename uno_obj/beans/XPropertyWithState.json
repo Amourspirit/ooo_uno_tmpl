@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:19:30+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:41:23+00:00",
   "name": "XPropertyWithState",
   "type": "interface",
   "namespace": "com.sun.star.beans",
@@ -16,7 +16,16 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..uno.x_interface",
+        "XInterface"
+      ],
+      [
+        ".property_state",
+        "PropertyState"
+      ]
+    ],
     "name": "XPropertyWithState",
     "imports": [],
     "namespace": "com.sun.star.beans",
@@ -33,6 +42,36 @@
       "Generally objects that implement this interface also implement XProperty."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1beans_1_1XPropertyWithState.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getDefaultAsProperty",
+          "returns": "XInterface",
+          "desc": [
+            "If no default exists, is not known or is void, then the return value is NULL."
+          ],
+          "raises": "com.sun.star.lang.WrappedTargetException",
+          "args": []
+        },
+        {
+          "name": "getStateAsProperty",
+          "returns": "PropertyState",
+          "desc": [],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "setToDefaultAsProperty",
+          "returns": "None",
+          "desc": [
+            "sets this to its default value.",
+            "",
+            "The value depends on the implementation of this interface. If this is a bound property, the value changes before the change events are fired. If this is a constrained property, the vetoable event is fired before the property value changes."
+          ],
+          "raises": "com.sun.star.lang.WrappedTargetException",
+          "args": []
+        }
+      ]
+    }
   }
 }

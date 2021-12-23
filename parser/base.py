@@ -2188,10 +2188,19 @@ class AreaFilter:
 class ApiInherited(BlockObj):
 
     def __init__(self, soup: SoupObj,**kwargs) -> None:
+        """
+        Constructor
+
+        Args:
+            soup (SoupObj): Soup object
+
+        Keyword Arguments:
+            raise_error (bool, optional): Determines if errors will be raised when they occur: Default ``False``
+        """
         super().__init__(soup)
         self._api_dy_content: ApiDyContent = ApiDyContent(self.soup)
         self._data = None
-        self._raise_errors = bool(kwargs.get('raise_error', True))
+        self._raise_errors = bool(kwargs.get('raise_error', False))
 
     def _log_missing(self, for_str: Optional[str] = None, raise_error: bool = False):
         if for_str:

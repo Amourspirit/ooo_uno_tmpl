@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:20:43+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:37:43+00:00",
   "name": "XNumberFormatCode",
   "type": "interface",
   "namespace": "com.sun.star.i18n",
@@ -16,7 +16,12 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".number_format_code",
+        "NumberFormatCode"
+      ]
+    ],
     "name": "XNumberFormatCode",
     "imports": [],
     "namespace": "com.sun.star.i18n",
@@ -24,13 +29,48 @@
       "com.sun.star.uno.XInterface"
     ],
     "desc": [
-      "Access number format codes defined in locale data.",
-      "",
-      "**See Also**",
-      "",
-      "    OfficeDev - Overview and Using the API - XNumberFormatCode"
+      "Access number format codes defined in locale data."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1i18n_1_1XNumberFormatCode.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getAllFormatCode",
+          "returns": "'typing.List[NumberFormatCode]'",
+          "desc": [
+            "returns all format codes for a given nFormatUsage and locale."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getAllFormatCodes",
+          "returns": "'typing.List[NumberFormatCode]'",
+          "desc": [
+            "returns all format codes for a given locale."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getDefault",
+          "returns": "object",
+          "desc": [
+            "returns the default number format code of a specific category (usage group) for a given locale and format length type."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getFormatCode",
+          "returns": "object",
+          "desc": [
+            "returns the number format pointed to by nFormatIndex for a given locale."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

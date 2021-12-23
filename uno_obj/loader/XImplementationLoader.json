@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:18:14+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:34:54+00:00",
   "name": "XImplementationLoader",
   "type": "interface",
   "namespace": "com.sun.star.loader",
@@ -16,7 +16,12 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..uno.x_interface",
+        "XInterface"
+      ]
+    ],
     "name": "XImplementationLoader",
     "imports": [],
     "namespace": "com.sun.star.loader",
@@ -24,13 +29,36 @@
       "com.sun.star.uno.XInterface"
     ],
     "desc": [
-      "handles activation (loading) of a UNO component.",
-      "",
-      "**See Also**",
-      "",
-      "    com.sun.star.registry.XImplementationRegistration"
+      "handles activation (loading) of a UNO component."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1loader_1_1XImplementationLoader.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "activate",
+          "returns": "XInterface",
+          "desc": [
+            "activates a concrete implementation within a component.",
+            "",
+            "Special loaders may define their own protocol (for instance an executable loader may need more than only one file url)."
+          ],
+          "raises": "com.sun.star.loader.CannotActivateFactoryException",
+          "args": []
+        },
+        {
+          "name": "writeRegistryInfo",
+          "returns": "bool",
+          "desc": [
+            "writes a list of all implementations hosted by this component into a registry key.",
+            "",
+            "This method is called during registering a component.",
+            "",
+            "Special loaders may define their own protocol (for instance an executable loader may need more than only one file url)."
+          ],
+          "raises": "com.sun.star.registry.CannotRegisterImplementationException",
+          "args": []
+        }
+      ]
+    }
   }
 }

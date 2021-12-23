@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:19:48+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:42:47+00:00",
   "name": "XDockingAreaAcceptor",
   "type": "interface",
   "namespace": "com.sun.star.ui",
@@ -16,7 +16,12 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..awt.x_window",
+        "XWindow"
+      ]
+    ],
     "name": "XDockingAreaAcceptor",
     "imports": [],
     "namespace": "com.sun.star.ui",
@@ -28,11 +33,47 @@
       "",
       "A docking area acceptor is responsible to control the docking area of a container window. As OLE for example supports inplace and outplace editing, there are different parts of code responsible for the container window. This interface enables developer to make support implementations for these scenarios.",
       "",
-      "**See Also**",
+      "**since**",
       "",
-      "    com.sun.star.frame.XFrame"
+      "    OOo 2.0"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1ui_1_1XDockingAreaAcceptor.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getContainerWindow",
+          "returns": "XWindow",
+          "desc": [
+            "provide the container window where the layout manager can request border space for docking windows.",
+            "",
+            "Additionally the layout manager uses this window to create its own child windows for docking purposes."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "requestDockingAreaSpace",
+          "returns": "bool",
+          "desc": [
+            "method to ask an implementation if the provided space for docking windows is available or not.",
+            "",
+            "The com.sun.star.awt.Rectangle parameter is filled by the caller with pixel data. The members of com.sun.star.awt.Rectangle must be filled as following:"
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "setDockingAreaSpace",
+          "returns": "None",
+          "desc": [
+            "method to brief an implementation that we need new border space.",
+            "",
+            "The callee must size its document window so that we have the amount of space we have provided. The com.sun.star.awt.Rectangle parameter is filled by the caller with pixel data. The members of com.sun.star.awt.Rectangle must be filled as following:"
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

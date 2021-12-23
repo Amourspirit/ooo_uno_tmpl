@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:21:37+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:34:35+00:00",
   "name": "XPaneBorderPainter",
   "type": "interface",
   "namespace": "com.sun.star.drawing.framework",
@@ -11,7 +11,16 @@
   "writer_args": {},
   "data": {
     "from_imports": [],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "...awt.rectangle",
+        "Rectangle"
+      ],
+      [
+        "...awt.point",
+        "Point"
+      ]
+    ],
     "name": "XPaneBorderPainter",
     "imports": [],
     "namespace": "com.sun.star.drawing.framework",
@@ -22,6 +31,62 @@
       "Calling objects have to be able to derive inner bounding boxes of the border from the outer ones and inner ones from outer ones. This conversion and the painting of the border involves three rectangles. The inner and outer bounding box of the border. This is a logical bounding box which the paint methods may paint over. The center box is the third rectangle. This is the actual border between outer and inner background color or bitmap and it is used for placing the bitmaps that are used paint the border. The inner sides and corners are places relative to this center box, i.e. when not further offsets are given then the upper left corner bitmap is painted with its lower right at the upper left of the center box."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1drawing_1_1framework_1_1XPaneBorderPainter.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "addBorder",
+          "returns": "Rectangle",
+          "desc": [
+            "Enlarge the given rectangle by the size of the specified part of the border.",
+            "",
+            "This method can be used to convert an inner bounding box into the center box or the outer bounding box."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getCalloutOffset",
+          "returns": "Point",
+          "desc": [
+            "Return the offset of a call out anchor with respect to the outer border.",
+            "",
+            "This value is used when the call out is realized by a fixed bitmap in order to determine the size and/or location of the outer border for a given call out."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "paintBorder",
+          "returns": "None",
+          "desc": [
+            "Paint the border around a pane."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "paintBorderWithCallout",
+          "returns": "None",
+          "desc": [
+            "Paint the border around a pane where the border includes a call out that is anchored at the given point.",
+            "",
+            "Most arguments have the same meaning as in the paintBorder()."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "removeBorder",
+          "returns": "Rectangle",
+          "desc": [
+            "Shrink the given rectangle by the size of the specified part of the border.",
+            "",
+            "This method can be used to convert an outer bounding box into the center box or the inner bounding box."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

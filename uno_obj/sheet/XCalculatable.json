@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:20:59+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:41:31+00:00",
   "name": "XCalculatable",
   "type": "interface",
   "namespace": "com.sun.star.sheet",
@@ -27,6 +27,51 @@
       "represents something that can recalculate."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1sheet_1_1XCalculatable.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "calculate",
+          "returns": "None",
+          "desc": [
+            "recalculates all dirty cells.",
+            "",
+            "This calculates all formula cells which have not yet been calculated after their precedents have changed."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "calculateAll",
+          "returns": "None",
+          "desc": [
+            "recalculates all cells."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "enableAutomaticCalculation",
+          "returns": "None",
+          "desc": [
+            "enables automatic calculation.",
+            "",
+            "With automatic calculation, each formula cell is recalculated whenever its value is needed after its precedents have changed. The value is needed if the cell is displayed or used in another calculation."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "isAutomaticCalculationEnabled",
+          "returns": "bool",
+          "desc": [
+            "returns whether automatic calculation is enabled.",
+            "",
+            "With automatic calculation, each formula cell is recalculated whenever its value is needed after its precedents have changed. The value is needed if the cell is displayed or used in another calculation."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

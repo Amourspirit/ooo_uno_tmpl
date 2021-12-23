@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:16:42+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:43:33+00:00",
   "name": "XResultSetAccess",
   "type": "interface",
   "namespace": "com.sun.star.sdb",
@@ -12,25 +12,38 @@
   "data": {
     "from_imports": [
       [
-        "......x_result_set",
+        "..uno.x_interface",
+        "XInterface"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..sdbc.x_result_set",
         "XResultSet"
       ]
     ],
-    "from_imports_typing": [],
     "name": "XResultSetAccess",
-    "imports": [
-      "XResultSet"
-    ],
+    "imports": [],
     "namespace": "com.sun.star.sdb",
-    "extends": [],
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
     "desc": [
-      "is the interface to create a com.sun.star.sdbc.ResultSet based on the object providing the interface.",
-      "",
-      "**See Also**",
-      "",
-      "    Database - Clones of the RowSet Service"
+      "is the interface to create a com.sun.star.sdbc.ResultSet based on the object providing the interface."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1sdb_1_1XResultSetAccess.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "createResultSet",
+          "returns": "XResultSet",
+          "desc": [
+            "returns a new com.sun.star.sdbc.ResultSet based on the object."
+          ],
+          "raises": "com.sun.star.sdbc.SQLException",
+          "args": []
+        }
+      ]
+    }
   }
 }

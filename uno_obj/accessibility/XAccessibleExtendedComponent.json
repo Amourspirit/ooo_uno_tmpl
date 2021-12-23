@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:20:47+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:38:04+00:00",
   "name": "XAccessibleExtendedComponent",
   "type": "interface",
   "namespace": "com.sun.star.accessibility",
@@ -12,16 +12,21 @@
   "data": {
     "from_imports": [
       [
-        "......x_accessible_component",
+        ".x_accessible_component",
         "XAccessibleComponent"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..awt.x_font",
+        "XFont"
+      ]
+    ],
     "name": "XAccessibleExtendedComponent",
     "imports": [],
     "namespace": "com.sun.star.accessibility",
     "extends": [
-      "XAccessibleComponent"
+      "com.sun.star.accessibility.XAccessibleComponent"
     ],
     "desc": [
       "The XAccessibleExtendedComponent interface contains additional methods to those of the XAccessibleComponent interface.",
@@ -30,11 +35,45 @@
       "",
       "This interface provides extended access to retrieve information concerning the graphical representation of an object. This interface combines methods from the Java interfaces javax.accessibility.AccessibleComponent and javax.accessibility.AccessibleExtendedComponent.",
       "",
-      "**See Also**",
+      "**since**",
       "",
       "    OOo 1.1.2"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1accessibility_1_1XAccessibleExtendedComponent.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getFont",
+          "returns": "XFont",
+          "desc": [
+            "Returns the font of this object."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getTitledBorderText",
+          "returns": "str",
+          "desc": [
+            "Returns the titled border text.",
+            "",
+            "This method stems from the Java interface AccessibleExtendedComponent."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getToolTipText",
+          "returns": "str",
+          "desc": [
+            "Returns the tool tip text of this object.",
+            "",
+            "This method stems from the Java interface AccessibleExtendedComponent."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:20:42+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:37:39+00:00",
   "name": "XLocaleData",
   "type": "interface",
   "namespace": "com.sun.star.i18n",
@@ -16,7 +16,28 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".calendar",
+        "Calendar"
+      ],
+      [
+        ".currency",
+        "Currency"
+      ],
+      [
+        ".format_element",
+        "FormatElement"
+      ],
+      [
+        ".implementation",
+        "Implementation"
+      ],
+      [
+        "..lang.locale",
+        "Locale"
+      ]
+    ],
     "name": "XLocaleData",
     "imports": [],
     "namespace": "com.sun.star.i18n",
@@ -26,13 +47,120 @@
     "desc": [
       "Access locale specific data as it is defined in XML locale data files compiled into the binary data libraries liblocaledata*.so respectively localedata*.dll.",
       "",
-      "For XML locale data files definitions see the DTD file.",
-      "",
-      "**See Also**",
-      "",
-      "    OfficeDev - Overview and Using the API - XLocaleData OfficeDev - Implementing a New Locale - XLocaleData"
+      "For XML locale data files definitions see the DTD file."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1i18n_1_1XLocaleData.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getAllCalendars",
+          "returns": "'typing.List[Calendar]'",
+          "desc": [
+            "returns all LC_CALENDAR calendars for a locale."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getAllCurrencies",
+          "returns": "'typing.List[Currency]'",
+          "desc": [
+            "returns all LC_CURRENCY currencies for a locale."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getAllFormats",
+          "returns": "'typing.List[FormatElement]'",
+          "desc": [
+            "returns all LC_FORMAT format elements for a locale."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getAllInstalledLocaleNames",
+          "returns": "'typing.List[Locale]'",
+          "desc": [
+            "returns all available locales."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getCollationOptions",
+          "returns": "typing.List[str]",
+          "desc": [
+            "returns all LC_COLLATION collation options for a locale."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getCollatorImplementations",
+          "returns": "'typing.List[Implementation]'",
+          "desc": [
+            "returns all LC_COLLATION collators for a locale."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getForbiddenCharacters",
+          "returns": "object",
+          "desc": [
+            "returns all LC_MISC forbidden characters for a locale."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getLanguageCountryInfo",
+          "returns": "object",
+          "desc": [
+            "returns the LC_INFO locale information."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getLocaleItem",
+          "returns": "object",
+          "desc": [
+            "returns LC_CTYPE separators and markers."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getReservedWord",
+          "returns": "typing.List[str]",
+          "desc": [
+            "returns all LC_MISC reserved words for a locale."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getSearchOptions",
+          "returns": "typing.List[str]",
+          "desc": [
+            "returns all LC_SEARCH search options for a locale."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getTransliterations",
+          "returns": "typing.List[str]",
+          "desc": [
+            "returns all LC_TRANSLITERATION transliterations for a locale."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

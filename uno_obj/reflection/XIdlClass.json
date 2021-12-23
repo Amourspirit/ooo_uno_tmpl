@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:17:13+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:40:32+00:00",
   "name": "XIdlClass",
   "type": "interface",
   "namespace": "com.sun.star.reflection",
@@ -16,7 +16,28 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_idl_field",
+        "XIdlField"
+      ],
+      [
+        "..uno.type_class",
+        "TypeClass"
+      ],
+      [
+        ".x_idl_method",
+        "XIdlMethod"
+      ],
+      [
+        "..uno.uik",
+        "Uik"
+      ],
+      [
+        ".x_idl_class",
+        "XIdlClass"
+      ]
+    ],
     "name": "XIdlClass",
     "imports": [],
     "namespace": "com.sun.star.reflection",
@@ -27,6 +48,173 @@
       "Provides information reflecting a UNO type."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1reflection_1_1XIdlClass.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "createObject",
+          "returns": "None",
+          "desc": [
+            "This method creates instances of the reflected type."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "equals",
+          "returns": "bool",
+          "desc": [
+            "Tests whether two reflecting objects reflect the same type."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getArray",
+          "returns": "object",
+          "desc": [
+            "If the reflected type is an array, then you get a XIdlArray interface to modify instances of the array type.",
+            "",
+            "If the reflected type is not an array, then a null-reference is returned."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getClass",
+          "returns": "object",
+          "desc": [
+            "Deprecated.",
+            "",
+            "Do not call."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getClasses",
+          "returns": "'typing.List[XIdlClass]'",
+          "desc": [
+            "Deprecated.",
+            "",
+            "Do not call."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getComponentType",
+          "returns": "object",
+          "desc": [
+            "If the reflected type is an array or sequence, then this method returns a XIdlClass interface reflecting the element."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getField",
+          "returns": "object",
+          "desc": [
+            "If the reflected type is an interface, struct or union, then you get a XIdlField interface reflecting the demanded field (/interface attribute) by name.",
+            "",
+            "If the reflected type is not an interface, struct or union or the interface, struct or union does not have a field (/interface attribute) with the demanded name, then a null-reference is returned."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getFields",
+          "returns": "'typing.List[XIdlField]'",
+          "desc": [
+            "If the reflected type is an interface, struct or union, then you get a sequence of XIdlField interfaces reflecting all fields (/interface attributes).",
+            "",
+            "This also includes all inherited fields (/interface attributes) of the interface, struct of union. \n If the reflected type is not an interface, struct or union or the interface, struct or union does not have any field (/interface attribute), then an empty sequence is returned."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getInterfaces",
+          "returns": "'typing.List[XIdlClass]'",
+          "desc": [
+            "Deprecated.",
+            "",
+            "Do not call."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getMethod",
+          "returns": "object",
+          "desc": [
+            "If the reflected type is an interface, then you get a XIdlMethod interface reflecting the demanded method by name.",
+            "",
+            "If the reflected type is not an interface or the interface does not have a method with the demanded name (including inherited methods), then a null-reference is returned."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getMethods",
+          "returns": "'typing.List[XIdlMethod]'",
+          "desc": [
+            "If the reflected type is an interface, then you get a sequence of XIdlMethod interfaces reflecting all methods of the interface.",
+            "",
+            "This also includes the inherited methods of the interface. \n If the reflected type is not an interface or the interface does not have any methods, then a null-reference is returned."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getName",
+          "returns": "str",
+          "desc": [
+            "Returns the fully-qualified name of the reflected type."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getSuperclasses",
+          "returns": "'typing.List[XIdlClass]'",
+          "desc": [
+            "If the reflected type is an interface, then the returned sequence of XIdlClass reflect the base interfaces.",
+            "",
+            "If the reflected type is not an interface or an interface that is not derived from another, then an empty sequence is returned."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getTypeClass",
+          "returns": "TypeClass",
+          "desc": [
+            "Returns the com.sun.star.uno.TypeClass of the reflected type."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getUik",
+          "returns": "Uik",
+          "desc": [
+            "Deprecated.",
+            "",
+            "Do not call."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "isAssignableFrom",
+          "returns": "bool",
+          "desc": [
+            "Tests whether values of this reflected type are assignable from values of a second one (xType)."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:19:51+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:42:51+00:00",
   "name": "XToolPanel",
   "type": "interface",
   "namespace": "com.sun.star.ui",
@@ -11,7 +11,16 @@
   "writer_args": {},
   "data": {
     "from_imports": [],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..accessibility.x_accessible",
+        "XAccessible"
+      ],
+      [
+        "..awt.x_window",
+        "XWindow"
+      ]
+    ],
     "name": "XToolPanel",
     "imports": [],
     "namespace": "com.sun.star.ui",
@@ -20,6 +29,31 @@
       "describes the basic interface to be implemented by a tool panel"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1ui_1_1XToolPanel.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "createAccessible",
+          "returns": "XAccessible",
+          "desc": [
+            "creates the root of the Accessibility object tree for the tool panel"
+          ],
+          "raises": "",
+          "args": []
+        }
+      ],
+      "properties": [
+        {
+          "name": "Window",
+          "returns": "XWindow",
+          "desc": [
+            "provides access to the tool panel's main window.",
+            "",
+            "It is allowed for an implementation to return NULL here, but in this case some functionality, for instance automatic positioning of the tool panel, might not be available, and must be implemented by the tool panel itself."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
   }
 }

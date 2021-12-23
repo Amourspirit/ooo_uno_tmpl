@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:18:28+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:44:30+00:00",
   "name": "XFastParser",
   "type": "interface",
   "namespace": "com.sun.star.xml.sax",
@@ -52,11 +52,114 @@
       "",
       "After the last element is processed the parser generates an end document event at the XFastDocumentHandler by calling XFastDocumentHandler.endDocument().",
       "",
-      "**See Also**",
+      "**since**",
       "",
-      "    http://wiki.openoffice.org/wiki/FastParser"
+      "    LibreOffice 7.1"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1xml_1_1sax_1_1XFastParser.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getNamespaceURL",
+          "returns": "str",
+          "desc": [
+            "Gets the namespace url string."
+          ],
+          "raises": "com.sun.star.lang.IllegalArgumentException",
+          "args": []
+        },
+        {
+          "name": "parseStream",
+          "returns": "None",
+          "desc": [
+            "parses an XML document from a stream.",
+            "",
+            "Set the desired handlers before calling this method."
+          ],
+          "raises": "SAXException,",
+          "args": []
+        },
+        {
+          "name": "registerNamespace",
+          "returns": "None",
+          "desc": [
+            "registers a known namespace url with the given integer token."
+          ],
+          "raises": "com.sun.star.lang.IllegalArgumentException",
+          "args": []
+        },
+        {
+          "name": "setCustomEntityNames",
+          "returns": "None",
+          "desc": [
+            "Simulate a DTD file.",
+            "",
+            "Will allow to use customized entity references like \u221e .",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 7.1"
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "setEntityResolver",
+          "returns": "None",
+          "desc": [
+            "allows an application to register a DTD-Handler."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "setErrorHandler",
+          "returns": "None",
+          "desc": [
+            "allows an application to register an error event handler.",
+            "",
+            "Note that the error handler can throw an exception when an error or warning occurs. Note that an exception is thrown by the parser when an unrecoverable (fatal) error occurs."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "setFastDocumentHandler",
+          "returns": "None",
+          "desc": [
+            "Application must register a document event handler to get sax events for the parsed stream."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "setLocale",
+          "returns": "None",
+          "desc": [
+            "sets a locale specified for localization of warnings and error messages.",
+            "",
+            "Set the language of the error messages. Useful when the parsing errors will be presented to the user."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "setNamespaceHandler",
+          "returns": "None",
+          "desc": [],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "setTokenHandler",
+          "returns": "None",
+          "desc": [
+            "must be registered to translate known XML names to integer tokens."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:18:43+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:34:20+00:00",
   "name": "XReference",
   "type": "interface",
   "namespace": "com.sun.star.uno",
@@ -24,13 +24,23 @@
       "com.sun.star.uno.XInterface"
     ],
     "desc": [
-      "must be implemented by anyone who holds the adapter on the client side.",
-      "",
-      "**See Also**",
-      "",
-      "    XWeak for description af concepts."
+      "must be implemented by anyone who holds the adapter on the client side."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1uno_1_1XReference.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "dispose",
+          "returns": "None",
+          "desc": [
+            "removes all references to the adapter.",
+            "",
+            "This method is called when the adapted object dies. The implementation of the client-side's weak reference must include removal of all references to the adapter. Otherwise, the adapted object will be destroyed, but the adapter will be alive."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

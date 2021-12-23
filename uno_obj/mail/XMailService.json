@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:20:00+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:39:04+00:00",
   "name": "XMailService",
   "type": "interface",
   "namespace": "com.sun.star.mail",
@@ -16,7 +16,12 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..uno.x_current_context",
+        "XCurrentContext"
+      ]
+    ],
     "name": "XMailService",
     "imports": [],
     "namespace": "com.sun.star.mail",
@@ -26,11 +31,83 @@
     "desc": [
       "Represents a mail server abstraction.",
       "",
-      "**See Also**",
+      "**since**",
       "",
       "    OOo 2.0"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1mail_1_1XMailService.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "addConnectionListener",
+          "returns": "None",
+          "desc": [
+            "Register a connection listener."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "connect",
+          "returns": "None",
+          "desc": [
+            "Connect to a mail service.",
+            "",
+            "Only one connection to a mail service can be established at a time."
+          ],
+          "raises": "com.sun.star.lang.IllegalArgumentException,",
+          "args": []
+        },
+        {
+          "name": "disconnect",
+          "returns": "None",
+          "desc": [
+            "Disconnect from a mail service."
+          ],
+          "raises": "com.sun.star.mail.MailException",
+          "args": []
+        },
+        {
+          "name": "getCurrentConnectionContext",
+          "returns": "XCurrentContext",
+          "desc": [
+            "Return the context of the current connection.",
+            "",
+            "The context contains information like the server name, port, connection type etc."
+          ],
+          "raises": "com.sun.star.io.NotConnectedException",
+          "args": []
+        },
+        {
+          "name": "getSupportedConnectionTypes",
+          "returns": "typing.List[str]",
+          "desc": [
+            "Returns all connection types which are supported to connect to the mail service.",
+            "",
+            "At least support insecure connections must be supported. Currently defined connection types are (the values should be handled case insensitive): \\\"Insecure\\\" - insecure connections \\\"SSL\\\" - Secure Socket Layer 2.0/3.0 based connection"
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "isConnected",
+          "returns": "bool",
+          "desc": [
+            "Returns whether a connection to a mail service currently exist or not."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "removeConnectionListener",
+          "returns": "None",
+          "desc": [
+            "Unregister a connection listener."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

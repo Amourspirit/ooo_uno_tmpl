@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:20:59+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:41:32+00:00",
   "name": "XCellRangeData",
   "type": "interface",
   "namespace": "com.sun.star.sheet",
@@ -26,13 +26,34 @@
     "desc": [
       "allows to get and set an array of data from a cell range.",
       "",
-      "The outer sequence represents the rows and the inner sequence the columns of the array.",
-      "",
-      "**See Also**",
-      "",
-      "    Spreadsheets - Data Array"
+      "The outer sequence represents the rows and the inner sequence the columns of the array."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1sheet_1_1XCellRangeData.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getDataArray",
+          "returns": "typing.List[typing.List[object]]",
+          "desc": [
+            "gets an array from the contents of the cell range.",
+            "",
+            "Each element of the result contains a double or a string."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "setDataArray",
+          "returns": "None",
+          "desc": [
+            "fills the cell range with values from an array.",
+            "",
+            "The size of the array must be the same as the size of the cell range. Each element of the array must contain a double or a string."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

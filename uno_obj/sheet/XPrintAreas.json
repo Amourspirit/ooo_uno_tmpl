@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:21:11+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:41:46+00:00",
   "name": "XPrintAreas",
   "type": "interface",
   "namespace": "com.sun.star.sheet",
@@ -16,7 +16,12 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..table.cell_range_address",
+        "CellRangeAddress"
+      ]
+    ],
     "name": "XPrintAreas",
     "imports": [],
     "namespace": "com.sun.star.sheet",
@@ -24,13 +29,116 @@
       "com.sun.star.uno.XInterface"
     ],
     "desc": [
-      "represents a sheet which has print areas.",
-      "",
-      "**See Also**",
-      "",
-      "    Spreadsheets - Printing Spreadsheet Documents - Print Areas"
+      "represents a sheet which has print areas."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1sheet_1_1XPrintAreas.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getPrintAreas",
+          "returns": "'typing.List[CellRangeAddress]'",
+          "desc": [
+            "returns a sequence containing all print areas of the sheet."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getPrintTitleColumns",
+          "returns": "bool",
+          "desc": [
+            "returns, whether the title columns are repeated on all subsequent print pages to the right."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getPrintTitleRows",
+          "returns": "bool",
+          "desc": [
+            "returns, whether the title rows are repeated on all subsequent print pages to the bottom."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getTitleColumns",
+          "returns": "CellRangeAddress",
+          "desc": [
+            "returns the range that is specified as title columns range.",
+            "",
+            "Title columns can be automatically repeated on all subsequent print pages to the right, using XPrintAreas.setPrintTitleColumns()."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getTitleRows",
+          "returns": "CellRangeAddress",
+          "desc": [
+            "returns the range that is specified as title rows range.",
+            "",
+            "Title rows can be automatically repeated on all subsequent print pages to the bottom, using XPrintAreas.setPrintTitleRows()."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "setPrintAreas",
+          "returns": "None",
+          "desc": [
+            "sets the print areas of the sheet.",
+            "",
+            "If none of the sheets in a document have print areas, the whole sheets are printed. If any sheet contains print areas, other sheets without print areas are not printed."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "setPrintTitleColumns",
+          "returns": "None",
+          "desc": [
+            "specifies whether the title columns are repeated on all subsequent print pages to the right."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "setPrintTitleRows",
+          "returns": "None",
+          "desc": [
+            "specifies whether the title rows are repeated on all subsequent print pages to the bottom."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "setTitleColumns",
+          "returns": "None",
+          "desc": [
+            "specifies a range of columns as title columns range.",
+            "",
+            "The rows of the passed range are ignored.",
+            "",
+            "Title columns can be automatically repeated on all subsequent print pages to the right, using XPrintAreas.setPrintTitleColumns()."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "setTitleRows",
+          "returns": "None",
+          "desc": [
+            "specifies a range of rows as title rows range.",
+            "",
+            "The columns of the passed range are ignored.",
+            "",
+            "Title rows can be automatically repeated on all subsequent print pages to the bottom, using XPrintAreas.setPrintTitleRows()."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

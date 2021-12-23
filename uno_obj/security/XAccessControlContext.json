@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:16:58+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:41:06+00:00",
   "name": "XAccessControlContext",
   "type": "interface",
   "namespace": "com.sun.star.security",
@@ -28,11 +28,27 @@
       "",
       "More specifically, it encapsulates a context and has methods to check permissions equivalent to XAccessController interface, with one difference: The XAccessControlContext makes access decisions based on the context it encapsulates, rather than that of the current execution thread.",
       "",
-      "**See Also**",
+      "**since**",
       "",
       "    OOo 1.1.2"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1security_1_1XAccessControlContext.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "checkPermission",
+          "returns": "None",
+          "desc": [
+            "Determines whether the access request indicated by the specified permission should be allowed or denied, based on this context.",
+            "",
+            "The semantics are equivalent to the security permission classes of the Java platform.",
+            "",
+            "You can also pass a sequence of permissions (sequence< any >) to check a set of permissions, e.g. for performance reasons. This method quietly returns if the access request is permitted, or throws a suitable AccessControlException otherwise."
+          ],
+          "raises": "AccessControlException",
+          "args": []
+        }
+      ]
+    }
   }
 }

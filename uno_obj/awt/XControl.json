@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:17:44+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:37:05+00:00",
   "name": "XControl",
   "type": "interface",
   "namespace": "com.sun.star.awt",
@@ -16,7 +16,24 @@
         "XComponent"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_view",
+        "XView"
+      ],
+      [
+        "..uno.x_interface",
+        "XInterface"
+      ],
+      [
+        ".x_window_peer",
+        "XWindowPeer"
+      ],
+      [
+        ".x_control_model",
+        "XControlModel"
+      ]
+    ],
     "name": "XControl",
     "imports": [],
     "namespace": "com.sun.star.awt",
@@ -31,6 +48,103 @@
       "If the implementation of the control does not distinguish between model, view and controller, it must allow to set a new XGraphics in the view, so that the control can be printed."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XControl.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "createPeer",
+          "returns": "None",
+          "desc": [
+            "creates a \\\"child\\\" window on the screen.",
+            "",
+            "If the parent is NULL, then the desktop window of the toolkit is the parent."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getContext",
+          "returns": "XInterface",
+          "desc": [
+            "gets the context of the control."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getModel",
+          "returns": "XControlModel",
+          "desc": [
+            "returns the model for this control."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getPeer",
+          "returns": "XWindowPeer",
+          "desc": [
+            "returns the peer which was previously created or set."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getView",
+          "returns": "XView",
+          "desc": [
+            "returns the view of this control."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "isDesignMode",
+          "returns": "bool",
+          "desc": [
+            "returns TRUE if the control is in design mode, FALSE otherwise."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "isTransparent",
+          "returns": "bool",
+          "desc": [
+            "returns TRUE if the control is transparent, FALSE otherwise."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "setContext",
+          "returns": "None",
+          "desc": [
+            "sets the context of the control."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "setDesignMode",
+          "returns": "None",
+          "desc": [
+            "sets the design mode for use in a design editor.",
+            "",
+            "Normally the control will be painted directly without a peer."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "setModel",
+          "returns": "bool",
+          "desc": [
+            "sets a model for the control."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

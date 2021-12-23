@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:17:41+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:35:08+00:00",
   "name": "XInstanceProvider",
   "type": "interface",
   "namespace": "com.sun.star.bridge",
@@ -16,7 +16,12 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..uno.x_interface",
+        "XInterface"
+      ]
+    ],
     "name": "XInstanceProvider",
     "imports": [],
     "namespace": "com.sun.star.bridge",
@@ -24,13 +29,23 @@
       "com.sun.star.uno.XInterface"
     ],
     "desc": [
-      "allows to export UNO objects to other processes.",
-      "",
-      "**See Also**",
-      "",
-      "    XBridge"
+      "allows to export UNO objects to other processes."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1bridge_1_1XInstanceProvider.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getInstance",
+          "returns": "XInterface",
+          "desc": [
+            "gets called, when an initial object is requested from a remote process.",
+            "",
+            "You may either create a new instance or return an existing object."
+          ],
+          "raises": "com.sun.star.container.NoSuchElementException",
+          "args": []
+        }
+      ]
+    }
   }
 }

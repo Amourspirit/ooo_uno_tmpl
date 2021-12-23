@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:18:12+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:39:29+00:00",
   "name": "XTreeEditListener",
   "type": "interface",
   "namespace": "com.sun.star.awt.tree",
@@ -29,6 +29,29 @@
       "You have to set the TreeControlModel.Editable property to TRUE before a tree supports editing."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1tree_1_1XTreeEditListener.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "nodeEdited",
+          "returns": "None",
+          "desc": [
+            "This method is called from the TreeControl implementation when editing of Node is finished and was not canceled.",
+            "",
+            "Implementations that register a XTreeEditListener must update the display value at the Node."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "nodeEditing",
+          "returns": "None",
+          "desc": [
+            "This method is called from the TreeControl implementation when editing of Node is requested by calling XTreeControl.startEditingAtNode()."
+          ],
+          "raises": "com.sun.star.util.VetoException",
+          "args": []
+        }
+      ]
+    }
   }
 }

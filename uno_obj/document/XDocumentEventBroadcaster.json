@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:21:59+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:34:05+00:00",
   "name": "XDocumentEventBroadcaster",
   "type": "interface",
   "namespace": "com.sun.star.document",
@@ -21,11 +21,47 @@
       "",
       "This interface is the successor of the XEventBroadcaster interface, which should not be used anymore.",
       "",
-      "**See Also**",
+      "**since**",
       "",
-      "    DocumentEvent"
+      "    OOo 3.1"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1document_1_1XDocumentEventBroadcaster.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "addDocumentEventListener",
+          "returns": "None",
+          "desc": [
+            "registers a listener which is notified about document events"
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "notifyDocumentEvent",
+          "returns": "None",
+          "desc": [
+            "causes the broadcaster to notify all registered listeners of the given event",
+            "",
+            "The method will create a DocumentEvent instance with the given parameters, and fill in the Source member (denoting the broadcaster) as appropriate.",
+            "",
+            "Whether the actual notification happens synchronously or asynchronously is up to the implementor of this method. However, implementations are encouraged to specify this, for the list of supported event types, in their service contract.",
+            "",
+            "Implementations might also decide to limit the list of allowed events (means event names) at their own discretion. Again, in this case they're encouraged to document this in their service contract."
+          ],
+          "raises": "com.sun.star.lang.IllegalArgumentException,",
+          "args": []
+        },
+        {
+          "name": "removeDocumentEventListener",
+          "returns": "None",
+          "desc": [
+            "revokes a listener which has previously been registered to be notified about document events."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

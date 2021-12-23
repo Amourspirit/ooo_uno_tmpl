@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:16:52+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:39:12+00:00",
   "name": "XDictionaryEntry",
   "type": "interface",
   "namespace": "com.sun.star.linguistic2",
@@ -30,13 +30,37 @@
       "",
       "Hyphenation positions are represented by an \\\"=\\\" in the word. If the \\\"=\\\" is the last character of the word this means it should not be hyphenated. If there is no \\\"=\\\" charter in the word, hyphenation positions will be determined automatically (i.e., from the hyphenator service alone).",
       "",
-      "Entries whose words only differ in hyphenation are considered to be equal. Also a \\\".\\\" at the end of the word will make no difference.",
-      "",
-      "**See Also**",
-      "",
-      "    com.sun.star.linguistic2.XDictionary"
+      "Entries whose words only differ in hyphenation are considered to be equal. Also a \\\".\\\" at the end of the word will make no difference."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1linguistic2_1_1XDictionaryEntry.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getDictionaryWord",
+          "returns": "str",
+          "desc": [],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getReplacementText",
+          "returns": "str",
+          "desc": [
+            "is the suggested replacement text for negative words.",
+            "",
+            "It is undefined if the entry is not negative."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "isNegative",
+          "returns": "bool",
+          "desc": [],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

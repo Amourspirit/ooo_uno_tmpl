@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:20:35+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:34:24+00:00",
   "name": "XScript",
   "type": "interface",
   "namespace": "com.sun.star.script.provider",
@@ -27,6 +27,20 @@
       "This interface represents an invocable script or UNO function."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1script_1_1provider_1_1XScript.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "invoke",
+          "returns": "object",
+          "desc": [
+            "invoke the script or function represented by the implementing object",
+            "",
+            "For example, if the script had the signature\nlong foo( [inout] string a, [in] string b, [out] string c ) \n the call would look like\nbar.invoke( {\\\"foo\\\", \\\"foo2\\\", \\\"this-is-ignored\\\" }, aOutParamIndex, aOutParam); \n and after the call the out sequences would contain"
+          ],
+          "raises": ",",
+          "args": []
+        }
+      ]
+    }
   }
 }

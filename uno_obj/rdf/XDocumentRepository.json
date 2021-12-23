@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:16:25+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:42:33+00:00",
   "name": "XDocumentRepository",
   "type": "interface",
   "namespace": "com.sun.star.rdf",
@@ -12,27 +12,81 @@
   "data": {
     "from_imports": [
       [
-        "......x_repository",
+        ".x_repository",
         "XRepository"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..container.x_enumeration",
+        "XEnumeration"
+      ]
+    ],
     "name": "XDocumentRepository",
     "imports": [],
     "namespace": "com.sun.star.rdf",
     "extends": [
-      "XRepository"
+      "com.sun.star.rdf.XRepository"
     ],
     "desc": [
       "extends XRepository with document-specific functionality.",
       "",
       "This subclass of XRepository provides some methods which only make sense for repositories that are attached to a document. For example, the methods allow for manipulating in-content metadata, which is stored as RDFa.",
       "",
-      "**See Also**",
+      "**since**",
       "",
       "    OOo 3.2"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1rdf_1_1XDocumentRepository.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getStatementRDFa",
+          "returns": "object",
+          "desc": [
+            "find the RDFa statement(s) associated with an ODF element."
+          ],
+          "raises": "com.sun.star.lang.IllegalArgumentException,",
+          "args": []
+        },
+        {
+          "name": "getStatementsRDFa",
+          "returns": "XEnumeration",
+          "desc": [
+            "gets matching RDFa statements from the repository.",
+            "",
+            "This method exists because RDFa statements are not part of any named graph, and thus they cannot be enumerated with XNamedGraph.getStatements().",
+            "",
+            "Any parameter may be NULL, which acts as a wildcard. For example, to get all statements about myURI: getStatementsRDFa(myURI, null, null)"
+          ],
+          "raises": "RepositoryException",
+          "args": []
+        },
+        {
+          "name": "removeStatementRDFa",
+          "returns": "None",
+          "desc": [
+            "remove the RDFa statement(s) that correspond to an ODF element from the repository.",
+            "",
+            "RDFa statements are handled specially because they are not logically part of any graph."
+          ],
+          "raises": "com.sun.star.lang.IllegalArgumentException,",
+          "args": []
+        },
+        {
+          "name": "setStatementRDFa",
+          "returns": "None",
+          "desc": [
+            "update the RDFa statement(s) that correspond to an ODF element in the repository.",
+            "",
+            "This method will do the following steps:",
+            "",
+            "RDFa statements are handled specially because they are not logically part of any named graph in the repository. Also, they have rather unusual semantics; just using XNamedGraph.addStatement() would be ambiguous: if the object is a XMetadatable, do we insert the object itself (URI) or its literal content (RDFa)?"
+          ],
+          "raises": "com.sun.star.lang.IllegalArgumentException,",
+          "args": []
+        }
+      ]
+    }
   }
 }

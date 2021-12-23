@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:20:46+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:38:02+00:00",
   "name": "XAccessibleContext2",
   "type": "interface",
   "namespace": "com.sun.star.accessibility",
@@ -28,11 +28,25 @@
       "",
       "This is an extension of XAccessibleContext to add getAccessibleId().",
       "",
-      "**See Also**",
+      "**since**",
       "",
       "    LibreOffice 6.3"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1accessibility_1_1XAccessibleContext2.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getAccessibleId",
+          "returns": "str",
+          "desc": [
+            "Return the object's identifier.",
+            "",
+            "This is not meant to be presented to the user, but to be an ID which is stable over application development. Typically, this is the gtkbuilder ID. Such an ID can then be used to identify a given well-known accessible object independently from the current locale, user-visible labelling, or dialog structure. This can then be used for tailored screen reading (e.g. automatically announcing the content of a well-known object), or for automatic regression testing (to check the behavior of well-known objects). Uniqueness within the window is thus desirable when returning a non-empty string."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

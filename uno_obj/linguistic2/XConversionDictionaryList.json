@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:16:51+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:39:10+00:00",
   "name": "XConversionDictionaryList",
   "type": "interface",
   "namespace": "com.sun.star.linguistic2",
@@ -16,7 +16,16 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..container.x_name_container",
+        "XNameContainer"
+      ],
+      [
+        ".x_conversion_dictionary",
+        "XConversionDictionary"
+      ]
+    ],
     "name": "XConversionDictionaryList",
     "imports": [],
     "namespace": "com.sun.star.linguistic2",
@@ -28,11 +37,64 @@
       "",
       "The dictionaries added to the list may or may not support the com.sun.star.util.XFlushable interface. If they do those dictionaries have to be flushed upon termination of the dictionary list.",
       "",
-      "**See Also**",
+      "**since**",
       "",
       "    OOo 1.1.2"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1linguistic2_1_1XConversionDictionaryList.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "addNewDictionary",
+          "returns": "XConversionDictionary",
+          "desc": [
+            "creates a new dictionary and adds it to the dictionary list.",
+            "",
+            "The dictionary will be empty and active."
+          ],
+          "raises": "com.sun.star.lang.NoSupportException,",
+          "args": []
+        },
+        {
+          "name": "getDictionaryContainer",
+          "returns": "XNameContainer",
+          "desc": [
+            "The interface can be used to add, remove or retrieve dictionaries from the list by specifying the name of the dictionary, and (in case of inserting) the interface to the dictionary as second parameter.",
+            "",
+            "A dictionary to be added must support the com.sun.star.linguistic2.XConversionDictionary interface. The dictionary to be added needs not necessarily be created by this service.",
+            "",
+            "The com.sun.star.container.XNameReplace.replaceByName function is implemented empty since renaming of dictionaries is not allowed."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "queryConversions",
+          "returns": "typing.List[str]",
+          "desc": [
+            "searches for entries that match the given text.",
+            "",
+            "All active dictionaries with matching locales and conversion type will be searched for entries matching the given text.",
+            "",
+            "The exact string to be looked for is the substring from the aText parameter that starts at position nStartPos and has the length nLength."
+          ],
+          "raises": "com.sun.star.lang.IllegalArgumentException,",
+          "args": []
+        },
+        {
+          "name": "queryMaxCharCount",
+          "returns": "int",
+          "desc": [
+            "returns the maximum number of characters used as left or right text in entries.",
+            "",
+            "All active dictionaries of the specified locale and type will be looked up to get the result.",
+            "",
+            "The parameter eDirection specifies if only the left text or the right text from entries should be considered."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

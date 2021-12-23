@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:16:53+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:39:14+00:00",
   "name": "XHyphenator",
   "type": "interface",
   "namespace": "com.sun.star.linguistic2",
@@ -16,7 +16,16 @@
         "XSupportedLocales"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_possible_hyphens",
+        "XPossibleHyphens"
+      ],
+      [
+        ".x_hyphenated_word",
+        "XHyphenatedWord"
+      ]
+    ],
     "name": "XHyphenator",
     "imports": [],
     "namespace": "com.sun.star.linguistic2",
@@ -30,13 +39,55 @@
       "",
       "A hyphenation position for a word with n characters is represented by a value in the range from 0 to n-2, indicating the position of the character after which the hyphenation is done. That is, it is after the first and before the last character.",
       "",
-      "A valid hyphenation position is a hyphenation position that fulfills all the restrictions implied by the properties MinLeading, MinTrailing and MinWordLength.",
-      "",
-      "**See Also**",
-      "",
-      "    com.sun.star.linguistic2.LinguProperties"
+      "A valid hyphenation position is a hyphenation position that fulfills all the restrictions implied by the properties MinLeading, MinTrailing and MinWordLength."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1linguistic2_1_1XHyphenator.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "createPossibleHyphens",
+          "returns": "XPossibleHyphens",
+          "desc": [
+            "returns information about all possible hyphenation positions of a word.",
+            "",
+            "If the language is not supported, an IllegalArgumentException exception is raised."
+          ],
+          "raises": "com.sun.star.lang.IllegalArgumentException",
+          "args": []
+        },
+        {
+          "name": "hyphenate",
+          "returns": "XHyphenatedWord",
+          "desc": [
+            "tries to find a valid hyphenation position relative to the beginning of a word.",
+            "",
+            "Note: Some languages, for example Arabic, are written from right to left.",
+            "",
+            "If the language is not supported, an IllegalArgumentException exception is raised.",
+            "",
+            "It has to be greater than or equal to 0."
+          ],
+          "raises": "com.sun.star.lang.IllegalArgumentException",
+          "args": []
+        },
+        {
+          "name": "queryAlternativeSpelling",
+          "returns": "XHyphenatedWord",
+          "desc": [
+            "checks whether hyphenation at a position in a word will result in an alternative spelling or not.",
+            "",
+            "An alternative spelling position is a hyphen position where, if hyphenation is done here, the writing of the word changes. Example: \\\"B&auml;cker\\\" in German pre spelling-reform becomes \\\"B&auml;kker\\\" if hyphenation is done after the \\\"c\\\".",
+            "",
+            "The hyphenation position does not need to be a valid one to be an alternative spelling position.",
+            "",
+            "If the language is not supported, an IllegalArgumentException exception is raised.",
+            "",
+            "If the length of the word is n, the value of this parameter has to be in the range from 0 to n-2."
+          ],
+          "raises": "com.sun.star.lang.IllegalArgumentException",
+          "args": []
+        }
+      ]
+    }
   }
 }

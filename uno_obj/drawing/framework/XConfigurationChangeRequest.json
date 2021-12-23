@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:21:35+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:34:33+00:00",
   "name": "XConfigurationChangeRequest",
   "type": "interface",
   "namespace": "com.sun.star.drawing.framework",
@@ -21,13 +21,21 @@
       "",
       "The requested change is committed to a configuration only when the execute() method is called. Configuration change requests are executed asynchronously. This is done to avoid reentrance problems with objects that are registered as XConfigurationChangeListener and at the same time make configuration change requests. When the requests were executed synchronously then the listeners would be notified of the changes while their request call has not yet returned.",
       "",
-      "This interface is typically used internally by the XConfigurationController",
-      "",
-      "**See Also**",
-      "",
-      "    XConfigurationController"
+      "This interface is typically used internally by the XConfigurationController"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1drawing_1_1framework_1_1XConfigurationChangeRequest.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "execute",
+          "returns": "None",
+          "desc": [
+            "Commit the configuration change request represented by the called object to the given configuration."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

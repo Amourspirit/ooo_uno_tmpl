@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:17:03+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:38:29+00:00",
   "name": "XSeekable",
   "type": "interface",
   "namespace": "com.sun.star.io",
@@ -29,6 +29,38 @@
       "This interface should be supported, if it is possible to access the data at the new position quickly. You should not support this interface, if you have a continuous stream, for example, a video stream."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1io_1_1XSeekable.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getLength",
+          "returns": "object",
+          "desc": [
+            "returns the length of the stream."
+          ],
+          "raises": "com.sun.star.io.IOException",
+          "args": []
+        },
+        {
+          "name": "getPosition",
+          "returns": "object",
+          "desc": [
+            "returns the current offset of the stream."
+          ],
+          "raises": "com.sun.star.io.IOException",
+          "args": []
+        },
+        {
+          "name": "seek",
+          "returns": "None",
+          "desc": [
+            "changes the seek pointer to a new location relative to the beginning of the stream.",
+            "",
+            "This method changes the seek pointer so subsequent reads and writes can take place at a different location in the stream object. It is an error to seek before the beginning of the stream or after the end of the stream."
+          ],
+          "raises": "com.sun.star.lang.IllegalArgumentException,",
+          "args": []
+        }
+      ]
+    }
   }
 }

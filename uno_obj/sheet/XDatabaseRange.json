@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:21:03+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:41:35+00:00",
   "name": "XDatabaseRange",
   "type": "interface",
   "namespace": "com.sun.star.sheet",
@@ -16,7 +16,16 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..beans.property_value",
+        "PropertyValue"
+      ],
+      [
+        "..table.cell_range_address",
+        "CellRangeAddress"
+      ]
+    ],
     "name": "XDatabaseRange",
     "imports": [],
     "namespace": "com.sun.star.sheet",
@@ -24,13 +33,79 @@
       "com.sun.star.uno.XInterface"
     ],
     "desc": [
-      "provides access to the settings and options of a database range.",
-      "",
-      "**See Also**",
-      "",
-      "    com.sun.star.sheet.DatabaseRange"
+      "provides access to the settings and options of a database range."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1sheet_1_1XDatabaseRange.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getDataArea",
+          "returns": "CellRangeAddress",
+          "desc": [
+            "returns the data area of the database range in the spreadsheet document."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getFilterDescriptor",
+          "returns": "object",
+          "desc": [
+            "returns the filter descriptor stored with the database range.",
+            "",
+            "If the filter descriptor is modified, the new filtering is carried out when XDatabaseRange.refresh() is called."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getImportDescriptor",
+          "returns": "'typing.List[PropertyValue]'",
+          "desc": [
+            "returns the database import descriptor stored with this database range."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getSortDescriptor",
+          "returns": "'typing.List[PropertyValue]'",
+          "desc": [
+            "returns the sort descriptor stored with the database range."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getSubTotalDescriptor",
+          "returns": "object",
+          "desc": [
+            "returns the subtotal descriptor stored with the database range.",
+            "",
+            "If the subtotal descriptor is modified, the new subtotals are inserted when XDatabaseRange.refresh() is called."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "refresh",
+          "returns": "None",
+          "desc": [
+            "executes the stored import, filter, sorting, and subtotals descriptors again."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "setDataArea",
+          "returns": "None",
+          "desc": [
+            "sets the data area of the database range."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

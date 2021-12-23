@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:20:28+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:40:42+00:00",
   "name": "XEngine",
   "type": "interface",
   "namespace": "com.sun.star.script",
@@ -16,7 +16,12 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..uno.x_interface",
+        "XInterface"
+      ]
+    ],
     "name": "XEngine",
     "imports": [],
     "namespace": "com.sun.star.script",
@@ -24,9 +29,109 @@
       "com.sun.star.uno.XInterface"
     ],
     "desc": [
-      "makes it possible to control a scripting engine."
+      "makes it possible to control a scripting engine.",
+      "",
+      ".. deprecated::",
+      "",
+      "    Interface is deprecated."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1script_1_1XEngine.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "addEngineListener",
+          "returns": "None",
+          "desc": [
+            "adds an engine listener.",
+            "",
+            "It is suggested to allow multiple registration of the same listener, thus for each time a listener is added, it has to be removed."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "cancel",
+          "returns": "None",
+          "desc": [
+            "terminates the execution of the running script.",
+            "",
+            "The waiting queue is cleared too."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "compile",
+          "returns": "bool",
+          "desc": [
+            "compiles a script module in the scope of the root object."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getRoot",
+          "returns": "XInterface",
+          "desc": [
+            "gets an interface to the object which is the scripting root."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "removeEngineListener",
+          "returns": "None",
+          "desc": [
+            "removes an engine listener.",
+            "",
+            "It is suggested to allow multiple registration of the same listener, thus for each time a listener is added, it has to be removed."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "run",
+          "returns": "object",
+          "desc": [
+            "runs a script specified by a string.",
+            "",
+            "The arguments given in aArgs can be ignored by the engine. The Script is executed synchronously."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "runAsync",
+          "returns": "None",
+          "desc": [
+            "runs the script specified by a string and makes callbacks.",
+            "",
+            "The arguments given in aArgs can be ignored by the engine. The script is executed asynchronously."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "setLibraryAccess",
+          "returns": "None",
+          "desc": [
+            "sets an access object to get external functions."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "setRoot",
+          "returns": "None",
+          "desc": [
+            "sets an interface to an object as a scripting root.",
+            "",
+            "If the root object implements the XInvocation interface, then the engine uses this interface to set/get properties and call methods."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

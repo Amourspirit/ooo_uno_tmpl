@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:21:51+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:44:14+00:00",
   "name": "XModuleManager",
   "type": "interface",
   "namespace": "com.sun.star.frame",
@@ -26,11 +26,29 @@
     "desc": [
       "can be used to identify office modules.",
       "",
-      "**See Also**",
+      "**since**",
       "",
       "    OOo 2.0"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1frame_1_1XModuleManager.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "identify",
+          "returns": "str",
+          "desc": [
+            "identifies the given module.",
+            "",
+            "This identifier can then be used at the service ModuleManager to get more information about this module.",
+            "",
+            "For identification the interface com.sun.star.lang.XServiceInfo is requested on the given module. Because all module service registrations must be unique this value can be queried and checked against the configuration.",
+            "",
+            "Since OOo 2.3.0 also the optional interface XModule will be used. If its exists it will be preferred."
+          ],
+          "raises": "com.sun.star.lang.IllegalArgumentException,",
+          "args": []
+        }
+      ]
+    }
   }
 }

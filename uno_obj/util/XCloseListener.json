@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:19:09+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:35:59+00:00",
   "name": "XCloseListener",
   "type": "interface",
   "namespace": "com.sun.star.util",
@@ -28,13 +28,40 @@
       "",
       "Such close events are broadcasted by a XCloseBroadcaster if somewhere tries to close it by calling XCloseable.close(). Listener can:",
       "",
-      "If an event com.sun.star.lang.XEventListener.disposing() occurred, nobody called XCloseable.close() on listened object before. Then it's not allowed to break this request - it must be accepted!",
-      "",
-      "**See Also**",
-      "",
-      "    XCloseable"
+      "If an event com.sun.star.lang.XEventListener.disposing() occurred, nobody called XCloseable.close() on listened object before. Then it's not allowed to break this request - it must be accepted!"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1util_1_1XCloseListener.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "notifyClosing",
+          "returns": "None",
+          "desc": [
+            "is called when the listened object is closed really",
+            "",
+            "Now the listened object is closed really. Listener has to accept that; should deregister himself and release all references to it. It's not allowed nor possible to disagree with that by throwing any exception.",
+            "",
+            "If the event com.sun.star.lang.XEventListener.disposing() occurred before it must be accepted too. There exist no chance for a disagreement any more."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "queryClosing",
+          "returns": "None",
+          "desc": [
+            "is called when somewhere tries to close listened object",
+            "",
+            "Is called before XCloseListener.notifyClosing(). Listener has the chance to break that by throwing a CloseVetoException. This exception must be passed to the original caller of XCloseable.close() without any interaction.",
+            "",
+            "The parameter GetsOwnership regulate who has to try to close the listened object again, if this listener disagree with the request by throwing the exception. If it's set to FALSE the original caller of XCloseable.close() will be the owner in every case. It's not allowed to call close() from this listener then. If it's set to TRUE this listener will be the new owner if he throw the exception, otherwise not! If his still running processes will be finished he must call close() on listened object again then.",
+            "",
+            "If this listener doesn't disagree with th close request it depends from his internal implementation if he deregister himself at the listened object. But normally this must be done in XCloseListener.notifyClosing()."
+          ],
+          "raises": "CloseVetoException",
+          "args": []
+        }
+      ]
+    }
   }
 }

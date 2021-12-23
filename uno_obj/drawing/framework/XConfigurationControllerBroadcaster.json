@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:21:36+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:34:34+00:00",
   "name": "XConfigurationControllerBroadcaster",
   "type": "interface",
   "namespace": "com.sun.star.drawing.framework",
@@ -22,6 +22,38 @@
       "The listeners are called in the order in which they are registered."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1drawing_1_1framework_1_1XConfigurationControllerBroadcaster.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "addConfigurationChangeListener",
+          "returns": "None",
+          "desc": [
+            "Add a new listener for configuration changes.",
+            "",
+            "The listener is notified only for the specified type of configuration changes. When the listener is interested in more than one event type this method has to be called multiple times. Alternatively it can register as universal listener that will be called for all event types. However, this option is provided primarily to support debugging and monitoring."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "notifyEvent",
+          "returns": "None",
+          "desc": [
+            "With this method other objects can send events to all the registered listeners."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "removeConfigurationChangeListener",
+          "returns": "None",
+          "desc": [
+            "Remove a listener for configuration changes."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

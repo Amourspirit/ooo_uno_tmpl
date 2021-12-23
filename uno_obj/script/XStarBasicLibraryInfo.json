@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:20:32+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:40:50+00:00",
   "name": "XStarBasicLibraryInfo",
   "type": "interface",
   "namespace": "com.sun.star.script",
@@ -16,7 +16,12 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..container.x_name_container",
+        "XNameContainer"
+      ]
+    ],
     "name": "XStarBasicLibraryInfo",
     "imports": [],
     "namespace": "com.sun.star.script",
@@ -24,9 +29,78 @@
       "com.sun.star.uno.XInterface"
     ],
     "desc": [
-      "Interface representing a library and provides access to its modules."
+      "Interface representing a library and provides access to its modules.",
+      "",
+      ".. deprecated::",
+      "",
+      "    Interface is deprecated."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1script_1_1XStarBasicLibraryInfo.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getDialogContainer",
+          "returns": "XNameContainer",
+          "desc": [
+            "returns the dialog container giving access to the dialogs stored in the library.",
+            "",
+            "The container has to be returned in any case, no matter if the library is stored embedded, external, or linked."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getExternalSourceURL",
+          "returns": "str",
+          "desc": [
+            "returns an URL describing the location where the library is stored if the library is stored separately (for example not in the main XML file but in a special library format file), an empty string otherwise.",
+            "",
+            "This information can be useful to optimize the access to the library, e.g., for loading on demand."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getLinkTargetURL",
+          "returns": "str",
+          "desc": [
+            "returns an URL describing the location of the library linked to.",
+            "",
+            "HINT: This method can be removed when there is a generic interface for linking. Then the implementation will simply support this \\\"XLinked\\\" interface and it can be checked by queryInterface()."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getModuleContainer",
+          "returns": "XNameContainer",
+          "desc": [
+            "returns the module container giving access to the modules stored in the library.",
+            "",
+            "The container has to be returned in any case, no matter if the library is stored embedded, external, or linked."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getName",
+          "returns": "str",
+          "desc": [
+            "returns the library's name"
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getPassword",
+          "returns": "str",
+          "desc": [
+            "returns the password, if the library is protected with one, an empty string otherwise."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

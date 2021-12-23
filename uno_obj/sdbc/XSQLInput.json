@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:19:46+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:40:04+00:00",
   "name": "XSQLInput",
   "type": "interface",
   "namespace": "com.sun.star.sdbc",
@@ -12,17 +12,38 @@
   "data": {
     "from_imports": [
       [
-        "......x_input_stream",
-        "XInputStream"
+        "..uno.x_interface",
+        "XInterface"
       ]
     ],
-    "from_imports_typing": [],
-    "name": "XSQLInput",
-    "imports": [
-      "XInputStream"
+    "from_imports_typing": [
+      [
+        "..util.time",
+        "Time"
+      ],
+      [
+        "..util.date_time",
+        "DateTime"
+      ],
+      [
+        "..util.date",
+        "Date"
+      ],
+      [
+        "..io.x_input_stream",
+        "XInputStream"
+      ],
+      [
+        ".byte",
+        "byte"
+      ]
     ],
+    "name": "XSQLInput",
+    "imports": [],
     "namespace": "com.sun.star.sdbc",
-    "extends": [],
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
     "desc": [
       "represents an input stream that contains a stream of values representing an instance of a SQL structured or distinct type.",
       "",
@@ -31,6 +52,195 @@
       "When the method getObject is called with an object of a service implementing the interface SQLData , the SDBC driver calls the method com.sun.star.sdbc.XSQLData.getSQLType() to determine the SQL type of the user-defined type (UDT) being custom mapped. The driver creates an instance of com.sun.star.sdbc.XSQLInput , populating it with the attributes of the UDT. The driver then passes the input stream to the method com.sun.star.sdbc.XSQLData.readSQL() , which in turn calls the XSQLInput.readXXX methods in its implementation for reading the attributes from the input stream."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1sdbc_1_1XSQLInput.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "readArray",
+          "returns": "object",
+          "desc": [
+            "reads an array from the stream."
+          ],
+          "raises": "SQLException",
+          "args": []
+        },
+        {
+          "name": "readBinaryStream",
+          "returns": "XInputStream",
+          "desc": [
+            "reads the next attribute in the stream as sequence of bytes."
+          ],
+          "raises": "SQLException",
+          "args": []
+        },
+        {
+          "name": "readBlob",
+          "returns": "object",
+          "desc": [
+            "reads a BLOB from the stream."
+          ],
+          "raises": "SQLException",
+          "args": []
+        },
+        {
+          "name": "readBoolean",
+          "returns": "bool",
+          "desc": [
+            "reads the next attribute in the stream as boolean."
+          ],
+          "raises": "SQLException",
+          "args": []
+        },
+        {
+          "name": "readByte",
+          "returns": "object",
+          "desc": [
+            "reads the next attribute in the stream as byte."
+          ],
+          "raises": "SQLException",
+          "args": []
+        },
+        {
+          "name": "readBytes",
+          "returns": "'typing.List[byte]'",
+          "desc": [
+            "reads the next attribute in the stream as sequence of bytes."
+          ],
+          "raises": "SQLException",
+          "args": []
+        },
+        {
+          "name": "readCharacterStream",
+          "returns": "XInputStream",
+          "desc": [
+            "reads the next attribute in the stream as a Unicode string."
+          ],
+          "raises": "SQLException",
+          "args": []
+        },
+        {
+          "name": "readClob",
+          "returns": "object",
+          "desc": [
+            "reads a CLOB from the stream."
+          ],
+          "raises": "SQLException",
+          "args": []
+        },
+        {
+          "name": "readDate",
+          "returns": "Date",
+          "desc": [
+            "reads the next attribute in the stream as date."
+          ],
+          "raises": "SQLException",
+          "args": []
+        },
+        {
+          "name": "readDouble",
+          "returns": "float",
+          "desc": [
+            "reads the next attribute in the stream as double."
+          ],
+          "raises": "SQLException",
+          "args": []
+        },
+        {
+          "name": "readFloat",
+          "returns": "float",
+          "desc": [
+            "reads the next attribute in the stream as float."
+          ],
+          "raises": "SQLException",
+          "args": []
+        },
+        {
+          "name": "readInt",
+          "returns": "int",
+          "desc": [
+            "reads the next attribute in the stream as long."
+          ],
+          "raises": "SQLException",
+          "args": []
+        },
+        {
+          "name": "readLong",
+          "returns": "object",
+          "desc": [
+            "reads the next attribute in the stream as hyper."
+          ],
+          "raises": "SQLException",
+          "args": []
+        },
+        {
+          "name": "readObject",
+          "returns": "object",
+          "desc": [
+            "returns the datum at the head of the stream as an any.",
+            "",
+            "The actual type of the any returned is determined by the default type mapping, and any customizations present in this stream's type map.",
+            "",
+            "A type map is registered with the stream by the SDBC driver before the stream is passed to the application.",
+            "",
+            "When the datum at the head of the stream is a SQL NULL, the method returns VOID. If the datum is a SQL structured or distinct type, it determines the SQL type of the datum at the head of the stream, constructs an object of the appropriate service, and calls the method com.sun.star.sdbc.XSQLData.readSQL() on that object, which reads additional data from the stream using the protocol described for that method."
+          ],
+          "raises": "SQLException",
+          "args": []
+        },
+        {
+          "name": "readRef",
+          "returns": "object",
+          "desc": [
+            "reads a REF(&lt;structured-type&gt;) from the stream."
+          ],
+          "raises": "SQLException",
+          "args": []
+        },
+        {
+          "name": "readShort",
+          "returns": "int",
+          "desc": [
+            "reads the next attribute in the stream as short."
+          ],
+          "raises": "SQLException",
+          "args": []
+        },
+        {
+          "name": "readString",
+          "returns": "str",
+          "desc": [
+            "reads the next attribute in the stream as string."
+          ],
+          "raises": "SQLException",
+          "args": []
+        },
+        {
+          "name": "readTime",
+          "returns": "Time",
+          "desc": [
+            "reads the next attribute in the stream as time."
+          ],
+          "raises": "SQLException",
+          "args": []
+        },
+        {
+          "name": "readTimestamp",
+          "returns": "DateTime",
+          "desc": [
+            "reads the next attribute in the stream as datetime."
+          ],
+          "raises": "SQLException",
+          "args": []
+        },
+        {
+          "name": "wasNull",
+          "returns": "bool",
+          "desc": [
+            "determines whether the last value read was null."
+          ],
+          "raises": "SQLException",
+          "args": []
+        }
+      ]
+    }
   }
 }

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:17:10+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:39:32+00:00",
   "name": "XMultiLayerStratum",
   "type": "interface",
   "namespace": "com.sun.star.configuration.backend",
@@ -16,7 +16,12 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_layer",
+        "XLayer"
+      ]
+    ],
     "name": "XMultiLayerStratum",
     "imports": [],
     "namespace": "com.sun.star.configuration.backend",
@@ -28,11 +33,108 @@
       "",
       "The interface provides access to data for multiple entities and timestamp-checking capabilities for efficient caching.",
       "",
-      "**See Also**",
+      "**since**",
       "",
-      "    com.sun.star.configuration.backend.XBackendEntities"
+      "    OOo 1.1.2"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1configuration_1_1backend_1_1XMultiLayerStratum.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getLayer",
+          "returns": "object",
+          "desc": [
+            "retrieves a layer associated to a layer id, if newer than indicated.",
+            "",
+            "A timestamp can be provided, which is used to indicate a point in time. The layer should be returned only if is modified since that time.",
+            "",
+            "Layer ids can be obtained from XMultiLayerStratum.listLayerIds() or XMultiLayerStratum.getUpdateLayerId().",
+            "",
+            "An empty timestamp indicates, that the layer should be retrieved irrespective of its modification time.",
+            "",
+            "The format and meaning of a timestamp depends on the implementation. Timestamps can be obtained using com.sun.star.util.XTimeStamped.getTimestamp()."
+          ],
+          "raises": "BackendAccessException,",
+          "args": []
+        },
+        {
+          "name": "getLayers",
+          "returns": "'typing.List[XLayer]'",
+          "desc": [
+            "retrieves the layers associated to a series of layer ids, if newer than indicated.",
+            "",
+            "A timestamp can be provided, which is used to indicate a point in time. Only layers that are modified since that time should be returned. The same timestamp is used for all layers.",
+            "",
+            "Layer ids can be obtained from XMultiLayerStratum.listLayerIds().",
+            "",
+            "An empty timestamp indicates, that the layers should be retrieved irrespective of their modification time.",
+            "",
+            "The format and meaning of a timestamp depends on the implementation. Timestamps can be obtained using com.sun.star.util.XTimeStamped.getTimestamp().",
+            "",
+            "The list has the same length as aLayerIds. Each layer object is associated to the layer id in the corresponding position.",
+            "",
+            "For layers that are newer than indicated by the timestamp, the list contains a NULL element."
+          ],
+          "raises": "BackendAccessException,",
+          "args": []
+        },
+        {
+          "name": "getMultipleLayers",
+          "returns": "'typing.List[XLayer]'",
+          "desc": [
+            "retrieves the layers associated to a series of layer ids, if newer than indicated for each layer.",
+            "",
+            "For each layer an individual timestamp can be provided, which is used to indicate the last known version of the layer. Only layers that are modified since that time should be returned.",
+            "",
+            "Layer ids can be obtained from XMultiLayerStratum.listLayerIds().",
+            "",
+            "This list must have the same length as aLayerIds. Timestamps are matched to layer ids by their position.",
+            "",
+            "An empty timestamp indicates, that the associated layer should be retrieved irrespective of its modification time.",
+            "",
+            "The format and meaning of a timestamp depends on the implementation. Timestamps can be obtained using com.sun.star.util.XTimeStamped.getTimestamp().",
+            "",
+            "The list has the same length as aLayerIds. Each layer object is associated to the layer id in the corresponding position.",
+            "",
+            "For layers that are newer than indicated by the corresponding timestamp, the list contains a NULL element."
+          ],
+          "raises": "BackendAccessException,",
+          "args": []
+        },
+        {
+          "name": "getUpdatableLayer",
+          "returns": "object",
+          "desc": [
+            "retrieves a writable representation of the layer associated to a layer id.",
+            "",
+            "A layer id for writing can be obtained from XMultiLayerStratum.getUpdateLayerId()."
+          ],
+          "raises": "BackendAccessException,",
+          "args": []
+        },
+        {
+          "name": "getUpdateLayerId",
+          "returns": "str",
+          "desc": [
+            "identifies the layer which should be modified to update data of a component on behalf of an entity.",
+            "",
+            "The layer id returned is one of the layer ids obtained from XMultiLayerStratum.listLayerIds() for the same component and entity."
+          ],
+          "raises": "BackendAccessException,",
+          "args": []
+        },
+        {
+          "name": "listLayerIds",
+          "returns": "typing.List[str]",
+          "desc": [
+            "identifies the layers within this stratum which should be read and merged to determine data of a component for an entity",
+            "",
+            "The list is ordered by priority. Typically the most general layers (global defaults, entire organization) are first, more specific layers (associated to specific groups or roles) are next and the entity's own data is last."
+          ],
+          "raises": "BackendAccessException,",
+          "args": []
+        }
+      ]
+    }
   }
 }

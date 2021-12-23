@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:20:14+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:40:30+00:00",
   "name": "XFormOperations",
   "type": "interface",
   "namespace": "com.sun.star.form.runtime",
@@ -17,8 +17,18 @@
       ]
     ],
     "from_imports_typing": [
-      ".......x_feature_invalidation",
-      "XFeatureInvalidation"
+      [
+        ".x_form_controller",
+        "XFormController"
+      ],
+      [
+        "...sdbc.x_result_set_update",
+        "XResultSetUpdate"
+      ],
+      [
+        "...sdbc.x_row_set",
+        "XRowSet"
+      ]
     ],
     "name": "XFormOperations",
     "imports": [],
@@ -37,16 +47,118 @@
       "",
       "If you agree that this is ugly to do and maintain, then XFormOperations is for you. It provides an execute() method, which will do all of the above for you; plus some similar convenient wrappers for similar functionality.",
       "",
-      "**See Also**",
+      "**since**",
       "",
-      "    FormFeature"
+      "    OOo 2.2"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1form_1_1runtime_1_1XFormOperations.html",
     "items": {
+      "methods": [
+        {
+          "name": "commitCurrentControl",
+          "returns": "bool",
+          "desc": [
+            "commits the current control of our controller"
+          ],
+          "raises": "com.sun.star.sdbc.SQLException",
+          "args": []
+        },
+        {
+          "name": "commitCurrentRecord",
+          "returns": "bool",
+          "desc": [
+            "commits the current record of the form"
+          ],
+          "raises": "com.sun.star.sdbc.SQLException",
+          "args": []
+        },
+        {
+          "name": "execute",
+          "returns": "None",
+          "desc": [
+            "executes the operation associated with the given feature"
+          ],
+          "raises": ",",
+          "args": []
+        },
+        {
+          "name": "executeWithArguments",
+          "returns": "None",
+          "desc": [
+            "executes the operation associated with the given feature, with passing arguments for execution"
+          ],
+          "raises": ",",
+          "args": []
+        },
+        {
+          "name": "getState",
+          "returns": "object",
+          "desc": [
+            "retrieves the current state of the given feature",
+            "",
+            "You would usually use this to update some user interface to reflect this state. For instance, you could imagine a toolbar button which is associated with a given feature. This button would be enabled if and only if the respective feature is currently available, and be checked if and only if the feature state is a boolean evaluating to TRUE."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "isEnabled",
+          "returns": "bool",
+          "desc": [
+            "determines whether a feature is currently enabled.",
+            "",
+            "Calling this is equivalent to calling getState(), and evaluating the FeatureState.Enabled member."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "isInsertionRow",
+          "returns": "bool",
+          "desc": [
+            "determines whether the form is currently positioned on the insertion row",
+            "",
+            "This is a convenience method only. Calling it is equivalent to examining the com.sun.star.sdb.RowSet.IsNew property of the form."
+          ],
+          "raises": "com.sun.star.lang.WrappedTargetException",
+          "args": []
+        },
+        {
+          "name": "isModifiedRow",
+          "returns": "bool",
+          "desc": [
+            "determines whether the current row of the form is modified",
+            "",
+            "This is a convenience method only. Calling it is equivalent to examining the com.sun.star.sdb.RowSet.IsModified property of the form."
+          ],
+          "raises": "com.sun.star.lang.WrappedTargetException",
+          "args": []
+        }
+      ],
       "properties": [
         {
+          "name": "Controller",
+          "returns": "XFormController",
+          "desc": [
+            "provides access to the form controller which the instance is operating on.",
+            "",
+            "Note that it is possible to operate on a user interface form without actually having access to the form controller instance. However, in this case some functionality will not be available. In particular, every feature which relies on the active control of the controller might be of limited use."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Cursor",
+          "returns": "XRowSet",
+          "desc": [
+            "provides access to the cursor of the form the instance is operating on."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
           "name": "FeatureInvalidation",
-          "returns": "'XFeatureInvalidation'",
+          "returns": "object",
           "desc": [
             "denotes the instance which should be notified about features whose state might have changed.",
             "",
@@ -56,8 +168,17 @@
             "",
             "Note that the instance does not actually notify changes in the feature states, but only potential changes: It's up to the callee to react on this appropriately. This is since OpenOffice.org's application framework features own mechanisms to cache and invalidate feature states, so we do not burden this implementation here with such mechanisms."
           ],
-          "raises_get": [],
-          "raises_set": []
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "UpdateCursor",
+          "returns": "XResultSetUpdate",
+          "desc": [
+            "provides access to the update cursor of the form the instance is operating on."
+          ],
+          "raises_get": "",
+          "raises_set": ""
         }
       ]
     }

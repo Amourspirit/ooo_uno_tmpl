@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:16:15+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:42:29+00:00",
   "name": "XObjectInspectorUI",
   "type": "interface",
   "namespace": "com.sun.star.inspection",
@@ -23,11 +23,128 @@
       "",
       "As a consequence, methods operating on the UI for a property, and taking the name of this property, are tolerant against properties which do not exist. For instance, if a property handler tries to disable the UI for property Foo, but another handler has superseded this property, then the ObjectInspector will not have any UI for it. In this case, the call to enablePropertyUI( \\\"Foo\\\" ) will simply be ignored.",
       "",
-      "**See Also**",
+      "**since**",
       "",
       "    OOo 2.0.3"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1inspection_1_1XObjectInspectorUI.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "enablePropertyUI",
+          "returns": "None",
+          "desc": [
+            "enables or disables all components belonging to the UI representation of a property",
+            "",
+            "This is usually used by an XPropertyHandler if it handles properties, where one does only make sense if another one has a certain value."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "enablePropertyUIElements",
+          "returns": "None",
+          "desc": [
+            "enables or disables the single elements which can be part of the UI representation of a property",
+            "",
+            "Note that the complete UI for the property must be enabled in order for these settings to be evaluated. That is, enablePropertyUIElements() does not have any effect if somebody previously disabled the complete UI for this property with enablePropertyUI()."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getPropertyControl",
+          "returns": "object",
+          "desc": [
+            "retrieves the control currently used to display a given property"
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "hidePropertyUI",
+          "returns": "None",
+          "desc": [
+            "hides the UI for a given property"
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "rebuildPropertyUI",
+          "returns": "None",
+          "desc": [
+            "completely rebuilds the UI for the given property.",
+            "",
+            "This method might be used by an XPropertyHandler if it wants to change the type of control (see PropertyControlType) used to display a certain property.",
+            "",
+            "The object inspector will then call describePropertyLine again, and update its UI accordingly.",
+            "",
+            "Note that the property whose UI should be rebuilt must not necessarily be (though usually is) in the responsibility of the handler which calls this method. The object inspector will look up the handler with the responsibility for PropertyName and call its XPropertyHandler.describePropertyLine()"
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "registerControlObserver",
+          "returns": "None",
+          "desc": [
+            "registers an observer for all property controls",
+            "",
+            "The given XPropertyControlObserver will be notified of all changes in all property controls.",
+            "",
+            "**since**",
+            "",
+            "    OOo 2.2"
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "revokeControlObserver",
+          "returns": "None",
+          "desc": [
+            "revokes a previously registered control observer",
+            "",
+            "**since**",
+            "",
+            "    OOo 2.2"
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "setHelpSectionText",
+          "returns": "None",
+          "desc": [
+            "sets the text of the help section, if the object inspector contains one.",
+            "",
+            "**since**",
+            "",
+            "    OOo 2.2"
+          ],
+          "raises": "com.sun.star.lang.NoSupportException",
+          "args": []
+        },
+        {
+          "name": "showCategory",
+          "returns": "None",
+          "desc": [
+            "shows or hides all properties belonging to a given category"
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "showPropertyUI",
+          "returns": "None",
+          "desc": [
+            "shows the UI for a given property"
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

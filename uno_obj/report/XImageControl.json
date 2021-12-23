@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:16:31+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:35:02+00:00",
   "name": "XImageControl",
   "type": "interface",
   "namespace": "com.sun.star.report",
@@ -10,14 +10,71 @@
   },
   "writer_args": {},
   "data": {
-    "from_imports": [],
+    "from_imports": [
+      [
+        ".x_report_control_model",
+        "XReportControlModel"
+      ],
+      [
+        "..form.x_image_producer_supplier",
+        "XImageProducerSupplier"
+      ]
+    ],
     "from_imports_typing": [],
     "name": "XImageControl",
     "imports": [],
     "namespace": "com.sun.star.report",
-    "extends": [],
-    "desc": [],
+    "extends": [
+      "com.sun.star.report.XReportControlModel",
+      "com.sun.star.form.XImageProducerSupplier"
+    ],
+    "desc": [
+      "",
+      "**since**",
+      "",
+      "    OOo 3.2"
+    ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1report_1_1XImageControl.html",
-    "items": {}
+    "items": {
+      "properties": [
+        {
+          "name": "ImageURL",
+          "returns": "str",
+          "desc": [
+            "specifies a URL to an image to use for the control."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "PreserveIRI",
+          "returns": "bool",
+          "desc": [
+            "Specifies that the IRI given in the data field should be preserved, otherwise the content will be inserted in the resulting report document.",
+            "",
+            "If the data field contains something different as string then this attribute will be ignored."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ScaleMode",
+          "returns": "int",
+          "desc": [
+            "defines how to scale the image",
+            "",
+            "If this property is present, it supersedes the ScaleImage property.",
+            "",
+            "The value of this property is one of the com.sun.star.awt.ImageScaleMode constants.",
+            "",
+            "**since**",
+            "",
+            "    OOo 3.2"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
   }
 }

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:19:39+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:39:55+00:00",
   "name": "XBlob",
   "type": "interface",
   "namespace": "com.sun.star.sdbc",
@@ -12,17 +12,26 @@
   "data": {
     "from_imports": [
       [
-        "......x_input_stream",
+        "..uno.x_interface",
+        "XInterface"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".byte",
+        "byte"
+      ],
+      [
+        "..io.x_input_stream",
         "XInputStream"
       ]
     ],
-    "from_imports_typing": [],
     "name": "XBlob",
-    "imports": [
-      "XInputStream"
-    ],
+    "imports": [],
     "namespace": "com.sun.star.sdbc",
-    "extends": [],
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
     "desc": [
       "is the representation (mapping) of an SQL BLOB.",
       "",
@@ -31,6 +40,60 @@
       "Methods in the interfaces com.sun.star.sdbc.XResultSet , and com.sun.star.sdbc.XPreparedStatement , such as getBlob and setBlob allow a programmer to access the SQL BLOB. \n The Blob interface provides methods for getting the length of a SQL  BLOB  (Binary Large Object) value, for materializing a  BLOB  value on the client and for determining the position of a pattern of bytes within a  BLOB  value."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1sdbc_1_1XBlob.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getBinaryStream",
+          "returns": "XInputStream",
+          "desc": [
+            "retrieves the  BLOB  designated by this Blob instance as a stream."
+          ],
+          "raises": "SQLException",
+          "args": []
+        },
+        {
+          "name": "getBytes",
+          "returns": "'typing.List[byte]'",
+          "desc": [
+            "returns as an array of bytes part or all of the  BLOB  value that this Blob object designates.",
+            "",
+            "The byte array contains up to length consecutive bytes starting at position pos."
+          ],
+          "raises": "SQLException",
+          "args": []
+        },
+        {
+          "name": "length",
+          "returns": "object",
+          "desc": [
+            "returns the number of bytes in the  BLOB  value designated by this Blob object."
+          ],
+          "raises": "SQLException",
+          "args": []
+        },
+        {
+          "name": "position",
+          "returns": "object",
+          "desc": [
+            "determines the byte position at which the specified byte pattern begins within the  BLOB  value that this Blob object represents.",
+            "",
+            "The search for pattern begins at position start."
+          ],
+          "raises": "SQLException",
+          "args": []
+        },
+        {
+          "name": "positionOfBlob",
+          "returns": "object",
+          "desc": [
+            "determines the byte position in the  BLOB  value designated by this Blob object at which pattern begins.",
+            "",
+            "The search begins at position start."
+          ],
+          "raises": "SQLException",
+          "args": []
+        }
+      ]
+    }
   }
 }

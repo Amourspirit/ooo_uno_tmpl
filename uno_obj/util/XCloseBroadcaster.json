@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:19:08+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:35:59+00:00",
   "name": "XCloseBroadcaster",
   "type": "interface",
   "namespace": "com.sun.star.util",
@@ -29,6 +29,27 @@
       "The called object for closing must post the closing events immediately and before any internal cancel operations will be started. If a listener disagree with that it should throw a CloseVetoException and called function XCloseable.close() must be broken immediately. It's not allowed to catch it inside the close() request. If no listener nor internal processes hinder the object on closing all listeners get a notification about real closing."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1util_1_1XCloseBroadcaster.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "addCloseListener",
+          "returns": "None",
+          "desc": [
+            "adds the specified listener to receive or have a veto for \\\"close\\\" events"
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "removeCloseListener",
+          "returns": "None",
+          "desc": [
+            "removes the specified listener"
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:21:38+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:34:36+00:00",
   "name": "XResourceFactory",
   "type": "interface",
   "namespace": "com.sun.star.drawing.framework",
@@ -24,6 +24,33 @@
       "A factory may want to implement a cache to reuse previously released resources."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1drawing_1_1framework_1_1XResourceFactory.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "createResource",
+          "returns": "object",
+          "desc": [
+            "Create a resource for the given XResourceId object.",
+            "",
+            "Valid values are those for which the factory has previously been registered at the XConfigurationController",
+            "",
+            "."
+          ],
+          "raises": "com.sun.star.lang.IllegalArgumentException,",
+          "args": []
+        },
+        {
+          "name": "releaseResource",
+          "returns": "None",
+          "desc": [
+            "Call this method to tell a factory that the given resource is no longer in use.",
+            "",
+            "The factory can decide whether to destroy the resource or to keep it in a cache in order to reuse it later."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

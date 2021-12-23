@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:19:01+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:42:16+00:00",
   "name": "XParameterizedContentProvider",
   "type": "interface",
   "namespace": "com.sun.star.ucb",
@@ -16,7 +16,12 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_content_provider",
+        "XContentProvider"
+      ]
+    ],
     "name": "XParameterizedContentProvider",
     "imports": [],
     "namespace": "com.sun.star.ucb",
@@ -24,13 +29,30 @@
       "com.sun.star.uno.XInterface"
     ],
     "desc": [
-      "Register specially adjusted instances of content providers on URL templates and supplementary arguments.",
-      "",
-      "**See Also**",
-      "",
-      "    1.0"
+      "Register specially adjusted instances of content providers on URL templates and supplementary arguments."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1ucb_1_1XParameterizedContentProvider.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "deregisterInstance",
+          "returns": "XContentProvider",
+          "desc": [
+            "Deregisters a content provider."
+          ],
+          "raises": "com.sun.star.lang.IllegalArgumentException",
+          "args": []
+        },
+        {
+          "name": "registerInstance",
+          "returns": "XContentProvider",
+          "desc": [
+            "Register a content provider on a URL template and supplementary arguments."
+          ],
+          "raises": "com.sun.star.lang.IllegalArgumentException",
+          "args": []
+        }
+      ]
+    }
   }
 }

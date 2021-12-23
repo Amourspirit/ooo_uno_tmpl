@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:19:13+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:36:05+00:00",
   "name": "XNumberFormatter",
   "type": "interface",
   "namespace": "com.sun.star.util",
@@ -16,7 +16,16 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_number_formats_supplier",
+        "XNumberFormatsSupplier"
+      ],
+      [
+        ".color",
+        "Color"
+      ]
+    ],
     "name": "XNumberFormatter",
     "imports": [],
     "namespace": "com.sun.star.util",
@@ -24,13 +33,93 @@
       "com.sun.star.uno.XInterface"
     ],
     "desc": [
-      "represents a number formatter.",
-      "",
-      "**See Also**",
-      "",
-      "    OfficeDev - Number Formats"
+      "represents a number formatter."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1util_1_1XNumberFormatter.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "attachNumberFormatsSupplier",
+          "returns": "None",
+          "desc": [
+            "attaches an XNumberFormatsSupplier to this NumberFormatter.",
+            "",
+            "This NumberFormatter will only use the NumberFormats specified in the attached XNumberFormatsSupplier. Without an attached XNumberFormatsSupplier, no formatting is possible."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "convertNumberToString",
+          "returns": "str",
+          "desc": [
+            "converts a number into a string."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "convertStringToNumber",
+          "returns": "float",
+          "desc": [
+            "converts a string which contains a formatted number into a number.",
+            "",
+            "If this is a text format, the string will not be converted."
+          ],
+          "raises": "com.sun.star.util.NotNumericException",
+          "args": []
+        },
+        {
+          "name": "detectNumberFormat",
+          "returns": "int",
+          "desc": [
+            "detects the number format in a string which contains a formatted number."
+          ],
+          "raises": "com.sun.star.util.NotNumericException",
+          "args": []
+        },
+        {
+          "name": "formatString",
+          "returns": "str",
+          "desc": [
+            "converts a string into another string."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getInputString",
+          "returns": "str",
+          "desc": [
+            "converts a number into a string with the specified format.",
+            "",
+            "This string can always be converted back to a number using the same format."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getNumberFormatsSupplier",
+          "returns": "XNumberFormatsSupplier",
+          "desc": [],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "queryColorForNumber",
+          "returns": "Color",
+          "desc": [],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "queryColorForString",
+          "returns": "Color",
+          "desc": [],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:18:47+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:43:12+00:00",
   "name": "XEncryptionProtectedStorage",
   "type": "interface",
   "namespace": "com.sun.star.embed",
@@ -12,25 +12,72 @@
   "data": {
     "from_imports": [
       [
-        "......x_encryption_protected_source2",
+        ".x_encryption_protected_source2",
         "XEncryptionProtectedSource2"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..beans.named_value",
+        "NamedValue"
+      ]
+    ],
     "name": "XEncryptionProtectedStorage",
     "imports": [],
     "namespace": "com.sun.star.embed",
     "extends": [
-      "XEncryptionProtectedSource2"
+      "com.sun.star.embed.XEncryptionProtectedSource2"
     ],
     "desc": [
       "This interface allows to set a password for an object.",
       "",
-      "**See Also**",
+      "**since**",
       "",
       "    OOo 3.4"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1embed_1_1XEncryptionProtectedStorage.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getEncryptionAlgorithms",
+          "returns": "'typing.List[NamedValue]'",
+          "desc": [
+            "allows to get the encryption algorithms of the object."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "setEncryptionAlgorithms",
+          "returns": "None",
+          "desc": [
+            "allows to set the encryption algorithms for the object.",
+            "",
+            "The algorithms will of course be used only for streams that have been marked to be encrypted. If no stream in the storage is marked to be encrypted, the algorithms-related information may have no effect to the result package.",
+            "",
+            "The following values could be part of the provided sequence:"
+          ],
+          "raises": "com.sun.star.lang.IllegalArgumentException",
+          "args": []
+        },
+        {
+          "name": "setGpgProperties",
+          "returns": "None",
+          "desc": [
+            "set OpenPGP-specific encryption properties",
+            "",
+            "When provided, switch ODF package encryption to OpenPGP.",
+            "",
+            "For each recipient, add one sequence of named values, each of the same structure. The following values could be part of that provided sequence:",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 6.0"
+          ],
+          "raises": "com.sun.star.lang.IllegalArgumentException",
+          "args": []
+        }
+      ]
+    }
   }
 }

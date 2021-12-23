@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:20:39+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:37:37+00:00",
   "name": "XCharacterClassification",
   "type": "interface",
   "namespace": "com.sun.star.i18n",
@@ -24,13 +24,108 @@
       "com.sun.star.uno.XInterface"
     ],
     "desc": [
-      "Character classification (upper, lower, digit, letter, number, ...) and generic Unicode enabled parser.",
-      "",
-      "**See Also**",
-      "",
-      "    OfficeDev - Implementing a New Locale - XCharacterClassification OfficeDev - Overview and Using the API - XCharacterClassification"
+      "Character classification (upper, lower, digit, letter, number, ...) and generic Unicode enabled parser."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1i18n_1_1XCharacterClassification.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getCharacterDirection",
+          "returns": "int",
+          "desc": [
+            "Get DirectionProperty of character at position nPos."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getCharacterType",
+          "returns": "int",
+          "desc": [
+            "Get KCharacterType of character at position nPos."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getScript",
+          "returns": "int",
+          "desc": [
+            "Get UnicodeScript of character at position nPos."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getStringType",
+          "returns": "int",
+          "desc": [
+            "Get accumulated KCharacterTypes of string starting at position nPos of length nCount code points."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getType",
+          "returns": "int",
+          "desc": [
+            "Get UnicodeType of character at position nPos."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "parseAnyToken",
+          "returns": "object",
+          "desc": [
+            "Parse a string for a token starting at position nPos.",
+            "",
+            "A name or identifier must match the KParseTokens criteria passed in nStartCharFlags and nContCharFlags and may additionally contain characters of aUserDefinedCharactersStart and/or aUserDefinedCharactersCont.",
+            "",
+            "If a token may represent either a numeric value or a name according to the passed Start/Cont-Flags/Chars, both KParseType.ASC_NUM (or KParseType.UNI_NUM) and KParseType.IDENTNAME are set in ParseResult.TokenType."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "parsePredefinedToken",
+          "returns": "object",
+          "desc": [
+            "Parse a string for a token of type nTokenType starting at position nPos.",
+            "",
+            "Other parameters are the same as in parseAnyToken(). If the actual token does not match the passed nTokenType a ParseResult.TokenType set to 0 (zero) is returned."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "toLower",
+          "returns": "str",
+          "desc": [
+            "Convert upper case alpha to lower case alpha, starting at position nPos for nCount code points."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "toTitle",
+          "returns": "str",
+          "desc": [
+            "Convert to title case, starting at position nPos for nCount code points."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "toUpper",
+          "returns": "str",
+          "desc": [
+            "Convert lower case alpha to upper case alpha, starting at position nPos for nCount code points."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

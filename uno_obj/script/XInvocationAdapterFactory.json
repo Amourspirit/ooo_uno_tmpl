@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:20:30+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:40:46+00:00",
   "name": "XInvocationAdapterFactory",
   "type": "interface",
   "namespace": "com.sun.star.script",
@@ -16,7 +16,12 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..uno.x_interface",
+        "XInterface"
+      ]
+    ],
     "name": "XInvocationAdapterFactory",
     "imports": [],
     "namespace": "com.sun.star.script",
@@ -26,9 +31,25 @@
     "desc": [
       "Interface to create adapter objects giving a type to be supported and a an invocation interface incoming calls are delegated to.",
       "",
-      "This interface is deprecated. Use XInvocationAdapterFactory2."
+      "This interface is deprecated. Use XInvocationAdapterFactory2.",
+      "",
+      ".. deprecated::",
+      "",
+      "    Interface is deprecated."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1script_1_1XInvocationAdapterFactory.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "createAdapter",
+          "returns": "XInterface",
+          "desc": [
+            "Creates an adapter interface of given type for calling the given XInvocation interface."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

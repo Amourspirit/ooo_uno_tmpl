@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:17:17+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:40:37+00:00",
   "name": "XServiceTypeDescription2",
   "type": "interface",
   "namespace": "com.sun.star.reflection",
@@ -12,27 +12,62 @@
   "data": {
     "from_imports": [
       [
-        "......x_service_type_description",
+        ".x_service_type_description",
         "XServiceTypeDescription"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_service_constructor_description",
+        "XServiceConstructorDescription"
+      ]
+    ],
     "name": "XServiceTypeDescription2",
     "imports": [],
     "namespace": "com.sun.star.reflection",
     "extends": [
-      "XServiceTypeDescription"
+      "com.sun.star.reflection.XServiceTypeDescription"
     ],
     "desc": [
       "Reflects a service, supporting single-interface\u2013based services.",
       "",
       "This type supersedes XServiceTypeDescription, which only supports obsolete, accumulation-based services.",
       "",
-      "**See Also**",
+      "**since**",
       "",
       "    OOo 2.0"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1reflection_1_1XServiceTypeDescription2.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getConstructors",
+          "returns": "'typing.List[XServiceConstructorDescription]'",
+          "desc": [
+            "Returns the constructors of the service."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getInterface",
+          "returns": "object",
+          "desc": [
+            "Returns the interface type associated with the service."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "isSingleInterfaceBased",
+          "returns": "bool",
+          "desc": [
+            "Returns whether this object reflects a single-interface\u2013based service."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:16:34+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:34:27+00:00",
   "name": "XFormulaParser",
   "type": "interface",
   "namespace": "com.sun.star.report.meta",
@@ -24,13 +24,14 @@
         "XComponent"
       ]
     ],
-    "from_imports_typing": [],
-    "name": "XFormulaParser",
-    "imports": [
-      "com.sun.star.sheet.XFormulaParser",
-      "com.sun.star.beans.XPropertySet",
-      "com.sun.star.lang.XComponent"
+    "from_imports_typing": [
+      [
+        "...sheet.x_formula_op_code_mapper",
+        "XFormulaOpCodeMapper"
+      ]
     ],
+    "name": "XFormulaParser",
+    "imports": [],
     "namespace": "com.sun.star.report.meta",
     "extends": [
       "com.sun.star.lang.XComponent",
@@ -41,6 +42,18 @@
       "identifies a XFormulaParser which allows to retrieve the meta data of all supported functions."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1report_1_1meta_1_1XFormulaParser.html",
-    "items": {}
+    "items": {
+      "properties": [
+        {
+          "name": "FormulaOpCodeMapper",
+          "returns": "XFormulaOpCodeMapper",
+          "desc": [
+            "return the mapper for op codes."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
   }
 }

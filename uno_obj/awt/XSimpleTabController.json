@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:17:57+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:37:21+00:00",
   "name": "XSimpleTabController",
   "type": "interface",
   "namespace": "com.sun.star.awt",
@@ -16,7 +16,12 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..beans.named_value",
+        "NamedValue"
+      ]
+    ],
     "name": "XSimpleTabController",
     "imports": [],
     "namespace": "com.sun.star.awt",
@@ -27,6 +32,83 @@
       "specifies the basic operations for a tab controller, but does not require XControl as type of tabs."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XSimpleTabController.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "activateTab",
+          "returns": "None",
+          "desc": [
+            "activate the specified tab.",
+            "",
+            "The new tab will be activated and all listener will get an event describing this. Of course there will be an event too, which notifies listener about the deactivation of the last active tab."
+          ],
+          "raises": "com.sun.star.lang.IndexOutOfBoundsException",
+          "args": []
+        },
+        {
+          "name": "addTabListener",
+          "returns": "None",
+          "desc": [
+            "register listener for inserting/removing tabs and changing their properties."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getActiveTabID",
+          "returns": "int",
+          "desc": [
+            "return the unique ID of the current active tab."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getTabProps",
+          "returns": "'typing.List[NamedValue]'",
+          "desc": [
+            "retrieve the set of properties for the specified tab."
+          ],
+          "raises": "com.sun.star.lang.IndexOutOfBoundsException",
+          "args": []
+        },
+        {
+          "name": "insertTab",
+          "returns": "int",
+          "desc": [
+            "create a new tab and return a unique ID, which can be used further to address this tab by using other methods of this interface."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "removeTab",
+          "returns": "None",
+          "desc": [
+            "remove a tab with the given ID."
+          ],
+          "raises": "com.sun.star.lang.IndexOutOfBoundsException",
+          "args": []
+        },
+        {
+          "name": "removeTabListener",
+          "returns": "None",
+          "desc": [
+            "unregister listener for inserting/removing tabs and changing their properties."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "setTabProps",
+          "returns": "None",
+          "desc": [
+            "change some properties of the specified tab."
+          ],
+          "raises": "com.sun.star.lang.IndexOutOfBoundsException",
+          "args": []
+        }
+      ]
+    }
   }
 }

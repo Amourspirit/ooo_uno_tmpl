@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:19:58+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:38:16+00:00",
   "name": "XWizard",
   "type": "interface",
   "namespace": "com.sun.star.ui.dialogs",
@@ -12,18 +12,21 @@
   "data": {
     "from_imports": [
       [
-        ".......x_executable_dialog",
+        ".x_executable_dialog",
         "XExecutableDialog"
       ]
     ],
-    "from_imports_typing": [],
-    "name": "XWizard",
-    "imports": [
-      "XExecutableDialog"
+    "from_imports_typing": [
+      [
+        "...awt.x_window",
+        "XWindow"
+      ]
     ],
+    "name": "XWizard",
+    "imports": [],
     "namespace": "com.sun.star.ui.dialogs",
     "extends": [
-      "XExecutableDialog"
+      "com.sun.star.ui.dialogs.XExecutableDialog"
     ],
     "desc": [
       "is the main interface implemented by the Wizard services.",
@@ -44,21 +47,156 @@
       "",
       "The state of the Next button in the dialog will be automatically maintained in most situations, depending on the results of calls to the XWizardController.canAdvance() and XWizardPage.canAdvance() methods. More sophisticated wizard logic, however, will need manual calls to the enableButton() method. Also, the Finish button needs to be maintained by the wizard's controller, too, as it cannot be decided generically in which situations it should be enabled or disabled.",
       "",
-      "**See Also**",
+      "**since**",
       "",
-      "    XWizardController"
+      "    OOo 3.3"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1ui_1_1dialogs_1_1XWizard.html",
     "items": {
+      "methods": [
+        {
+          "name": "activatePath",
+          "returns": "None",
+          "desc": [
+            "activates a path",
+            "",
+            "If the wizard has been created with multiple paths of control flow, then this method allows switching to another path.",
+            "",
+            "You can only activate a path which shares the first k pages with the path which is previously active (if any), where k is the index of the current page within the current path.",
+            "",
+            "Example: Say you have paths, (0,1,2,5) and (0,1,4,5) (with the numbers denoting page IDs). This means that after page 1, you either continue with page 2 or state 4,and after this, you finish in state 5.\n Now if the first path is active, and your current state is 1, then you can easily switch to the second path, since both paths start with (0,1).\n However, if your current state is 2, then you can not switch to the second path anymore.",
+            "",
+            "If TRUE, the path will be completely activated, even if it is a conflicting path (i.e. there is another path which shares the first k states with the to-be-activated path.)",
+            "",
+            "If FALSE, then the new path is checked for conflicts with other paths. If such conflicts exists, the path is not completely activated, but only up to the point where it does not conflict.",
+            "",
+            "In this latter case, you need another activatePath method (usually triggered by the user doing some decisions and entering some data on the reachable pages) before the wizard can actually be finished.",
+            "",
+            "With the paths in the example above, if you activate the second path, then only steps 0 and 1 are activated, since they are common to both paths. Steps 2, 4, and 5 are not reachable, yet."
+          ],
+          "raises": ",",
+          "args": []
+        },
+        {
+          "name": "advanceTo",
+          "returns": "bool",
+          "desc": [
+            "advances to the given page, if possible.",
+            "",
+            "Calling this method is equivalent to the user repeatedly pressing the Next button, until the given page is reached. Consequently, the method will fail if one of the intermediate pages does not allow advancing to the next page."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "enableButton",
+          "returns": "None",
+          "desc": [
+            "enables or disables a certain button in the wizard",
+            "",
+            "Normally, you will want to use this method for the Finish button only: The Next and Back buttons are usually maintained automatically, the Help and Cancel buttons are unlikely to ever being disabled."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "enablePage",
+          "returns": "None",
+          "desc": [
+            "enables or disables the given page",
+            "",
+            "You can use this method when not all pages of your wizard are necessarily needed in all cases. For instance, assume that your first wizard page contains a check box, which the user can check to enter additional data. If you place this data on the second page, then you will want to enable this second page if and only if the checkbox is checked.",
+            "",
+            "If a page is disabled, it can reached neither by clicking the respective item in the wizard's roadmap, nor by sequential traveling. Still, the page's item is displayed in the roadmap, though disabled."
+          ],
+          "raises": ",",
+          "args": []
+        },
+        {
+          "name": "getCurrentPage",
+          "returns": "object",
+          "desc": [
+            "provides access to the current page of the wizard"
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "goBackTo",
+          "returns": "bool",
+          "desc": [
+            "goes back to the given page, if possible.",
+            "",
+            "Calling this method is equivalent to the user repeatedly pressing the Back button, until the given page is reached."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "setDefaultButton",
+          "returns": "None",
+          "desc": [
+            "sets a button in the wizard as default button",
+            "",
+            "In general, the default button in a wizard is the one which is activated when the user presses the return key while the focus is in a control which does not handle this key itself (such as ordinary input controls).",
+            "",
+            "You can use this method, for instance, to make the Next button the default button on all pages except the last one, where Finish should be defaulted."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "travelNext",
+          "returns": "bool",
+          "desc": [
+            "travels to the next page, if possible",
+            "",
+            "Calling this method is equivalent to the user pressing the Next button in the wizard. Consequently, the method will fail if in the current state of the wizard, it is not allowed to advance to a next page."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "travelPrevious",
+          "returns": "bool",
+          "desc": [
+            "travels to the next page, if possible",
+            "",
+            "Calling this method is equivalent to the user pressing the Back button in the wizard."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "updateTravelUI",
+          "returns": "None",
+          "desc": [
+            "updates the wizard elements which are related to traveling.",
+            "",
+            "For instance, the Next button is disabled if the current page's XWizardPage.canAdvance() method returns FALSE.",
+            "",
+            "You usually call this method from within a wizard page whose state changed in a way that it affects the user's ability to reach other pages."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ],
       "properties": [
+        {
+          "name": "DialogWindow",
+          "returns": "XWindow",
+          "desc": [],
+          "raises_get": "",
+          "raises_set": ""
+        },
         {
           "name": "HelpURL",
           "returns": "str",
           "desc": [
             "is the help URL of the wizard's main window."
           ],
-          "raises_get": [],
-          "raises_set": []
+          "raises_get": "",
+          "raises_set": ""
         }
       ]
     }

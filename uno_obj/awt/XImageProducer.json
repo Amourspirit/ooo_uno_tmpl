@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:17:50+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:37:12+00:00",
   "name": "XImageProducer",
   "type": "interface",
   "namespace": "com.sun.star.awt",
@@ -27,6 +27,42 @@
       "specifies a source for an image."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XImageProducer.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "addConsumer",
+          "returns": "None",
+          "desc": [
+            "registers an image consumer with the image producer for accessing the image data during a later reconstruction of the image.",
+            "",
+            "The image producer may, at its discretion, start delivering the image data to the consumer using the XImageConsumer interface immediately, or when the next available image reconstruction is triggered by a call to the startProduction method."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "removeConsumer",
+          "returns": "None",
+          "desc": [
+            "removes the given com.sun.star.awt.XImageConsumer callback from the list of consumers currently registered to receive image data.",
+            "",
+            "It is not considered an error to remove a consumer that is not currently registered. The image producer should stop sending data to this consumer as soon as it is feasible."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "startProduction",
+          "returns": "None",
+          "desc": [
+            "registers the given image consumer as a consumer and starts an immediate reconstruction of the image data.",
+            "",
+            "The image data will then be delivered to this consumer and any other consumer which may have already been registered with the producer. This method differs from the addConsumer method in that a reproduction of the image data should be triggered as soon as possible."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:21:47+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:44:03+00:00",
   "name": "XFrame2",
   "type": "interface",
   "namespace": "com.sun.star.frame",
@@ -12,51 +12,49 @@
   "data": {
     "from_imports": [
       [
-        "......x_frames_supplier",
-        "XFramesSupplier"
+        ".x_dispatch_provider",
+        "XDispatchProvider"
       ],
       [
-        "......x_dispatch_provider_interception",
-        "XDispatchProviderInterception"
+        ".x_frames_supplier",
+        "XFramesSupplier"
       ],
       [
         "..task.x_status_indicator_factory",
         "XStatusIndicatorFactory"
       ],
       [
-        "......x_dispatch_provider",
-        "XDispatchProvider"
+        ".x_dispatch_provider_interception",
+        "XDispatchProviderInterception"
       ],
       [
-        "......x_dispatch_information_provider",
+        ".x_dispatch_information_provider",
         "XDispatchInformationProvider"
       ]
     ],
     "from_imports_typing": [
-      "......x_interface",
-      "XInterface",
-      "......x_dispatch_recorder_supplier",
-      "XDispatchRecorderSupplier"
+      [
+        "..uno.x_interface",
+        "XInterface"
+      ],
+      [
+        "..container.x_name_container",
+        "XNameContainer"
+      ]
     ],
     "name": "XFrame2",
-    "imports": [
-      "XFramesSupplier",
-      "XDispatchProviderInterception",
-      "com.sun.star.task.XStatusIndicatorFactory",
-      "XDispatchProvider",
-      "XDispatchInformationProvider"
-    ],
+    "imports": [],
     "namespace": "com.sun.star.frame",
     "extends": [
-      "XDispatchProvider",
-      "XDispatchInformationProvider",
-      "XDispatchProviderInterception",
-      "XFramesSupplier",
+      "com.sun.star.frame.XDispatchProvider",
+      "com.sun.star.frame.XDispatchInformationProvider",
+      "com.sun.star.frame.XDispatchProviderInterception",
+      "com.sun.star.frame.XFramesSupplier",
       "com.sun.star.task.XStatusIndicatorFactory"
     ],
     "desc": [
       "",
-      "**See Also**",
+      "**since**",
       "",
       "    LibreOffice 4.1"
     ],
@@ -65,27 +63,31 @@
       "properties": [
         {
           "name": "DispatchRecorderSupplier",
-          "returns": "'XDispatchRecorderSupplier'",
+          "returns": "object",
           "desc": [
             "provides access to the dispatch recorder of the frame",
             "",
             "Such recorder can be used to record dispatch requests. The supplier contains a dispatch recorder and provide the functionality to use it for any dispatch object from outside which supports the interface XDispatch. A supplier is available only, if recording was enabled. That means: if someone wishes to enable recoding on a frame he must set a supplier with a recorder object inside of it. Every user of dispatches has to check then if such supplier is available at this frame property. If value of this property is NULL he must call XDispatch.dispatch() on the original dispatch object. If it's a valid value he must use the supplier by calling his method XDispatchRecorderSupplier.dispatchAndRecord() with the original dispatch object as argument.",
             "",
-            "Note:\n It's not recommended to cache an already gotten supplier. Because there exist no possibility to check for enabled/disabled recording then."
+            "Note:\n It's not recommended to cache an already gotten supplier. Because there exist no possibility to check for enabled/disabled recording then.",
+            "",
+            "**since**",
+            "",
+            "    OOo 1.1.2"
           ],
-          "raises_get": [],
-          "raises_set": []
+          "raises_get": "",
+          "raises_set": ""
         },
         {
           "name": "LayoutManager",
-          "returns": "'XInterface'",
+          "returns": "XInterface",
           "desc": [
             "Provides access to the LayoutManager of the frame.",
             "",
             "This is actually of type XLayoutManager, but this API is still experimental (unpublished)."
           ],
-          "raises_get": [],
-          "raises_set": []
+          "raises_get": "",
+          "raises_set": ""
         },
         {
           "name": "Title",
@@ -95,8 +97,17 @@
             "",
             "It depends from the type of the frame container window. If it is a system task window all will be OK. Otherwise the title can't be set. Setting/getting of the pure value of this property must be possible in every case. Only showing on the UI can be fail."
           ],
-          "raises_get": [],
-          "raises_set": []
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "UserDefinedAttributes",
+          "returns": "XNameContainer",
+          "desc": [
+            "contains user defined attributes."
+          ],
+          "raises_get": "",
+          "raises_set": ""
         }
       ]
     }

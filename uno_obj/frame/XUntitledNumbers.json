@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:21:57+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:44:26+00:00",
   "name": "XUntitledNumbers",
   "type": "interface",
   "namespace": "com.sun.star.frame",
@@ -27,6 +27,53 @@
       "knows all currently used and all free numbers for using with untitled but counted objects."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1frame_1_1XUntitledNumbers.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getUntitledPrefix",
+          "returns": "str",
+          "desc": [
+            "returns the localized string value to be used for untitled objects in combination with the leased number.",
+            "",
+            "Note: Such string already contains leading spaces/tabs etc. ! The only thing which an outside code has todo then ... adding a leased number to the string."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "leaseNumber",
+          "returns": "int",
+          "desc": [
+            "callee has to lease a number before he can use it within in its own title.",
+            "",
+            "Such number must be freed after using e.g. while the object was closed or gets another title (e.g. by saving a document to a real location on disc)."
+          ],
+          "raises": "com.sun.star.lang.IllegalArgumentException",
+          "args": []
+        },
+        {
+          "name": "releaseNumber",
+          "returns": "None",
+          "desc": [
+            "has to be used to mark those numbers as \\\"free for using\\\".",
+            "",
+            "If the registered component does not use such leased number any longer it has to be released so it can be used for new components.",
+            "",
+            "Note: calling this method with an unknown (but normally valid number) has to be ignored. No exceptions - no errors."
+          ],
+          "raises": "com.sun.star.lang.IllegalArgumentException",
+          "args": []
+        },
+        {
+          "name": "releaseNumberForComponent",
+          "returns": "None",
+          "desc": [
+            "does the same then releaseNumber () but it searches the corresponding number for the specified component and deregister it."
+          ],
+          "raises": "com.sun.star.lang.IllegalArgumentException",
+          "args": []
+        }
+      ]
+    }
   }
 }

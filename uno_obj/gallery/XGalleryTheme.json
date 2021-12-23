@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:17:39+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:35:46+00:00",
   "name": "XGalleryTheme",
   "type": "interface",
   "namespace": "com.sun.star.gallery",
@@ -28,13 +28,68 @@
       "",
       "It also allows inserting and removing of single items.",
       "",
-      "This interface extends the interface com.sun.star.container.XIndexAccess which provides access to existing Gallery items collection.",
-      "",
-      "**See Also**",
-      "",
-      "    com.sun.star.container.XIndexAccess"
+      "This interface extends the interface com.sun.star.container.XIndexAccess which provides access to existing Gallery items collection."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1gallery_1_1XGalleryTheme.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getName",
+          "returns": "str",
+          "desc": [
+            "retrieves the name of the Gallery theme"
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "insertDrawingByIndex",
+          "returns": "int",
+          "desc": [
+            "inserts an item"
+          ],
+          "raises": "com.sun.star.lang.WrappedTargetException",
+          "args": []
+        },
+        {
+          "name": "insertGraphicByIndex",
+          "returns": "int",
+          "desc": [
+            "inserts an item"
+          ],
+          "raises": "com.sun.star.lang.WrappedTargetException",
+          "args": []
+        },
+        {
+          "name": "insertURLByIndex",
+          "returns": "int",
+          "desc": [
+            "inserts an item"
+          ],
+          "raises": "com.sun.star.lang.WrappedTargetException",
+          "args": []
+        },
+        {
+          "name": "removeByIndex",
+          "returns": "None",
+          "desc": [
+            "deletes an item from the collection"
+          ],
+          "raises": "com.sun.star.lang.IndexOutOfBoundsException",
+          "args": []
+        },
+        {
+          "name": "update",
+          "returns": "None",
+          "desc": [
+            "updates the theme",
+            "",
+            "This method iterates over each item of the Gallery theme and updates it accordingly. Main purpose is to automatically regenerate the thumbnails and to remove invalid items, that is items who have got a URL that has become invalid. This method also optimizes underlying data structures."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

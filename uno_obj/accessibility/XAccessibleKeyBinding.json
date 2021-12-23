@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:20:48+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:38:06+00:00",
   "name": "XAccessibleKeyBinding",
   "type": "interface",
   "namespace": "com.sun.star.accessibility",
@@ -16,7 +16,12 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..awt.key_stroke",
+        "KeyStroke"
+      ]
+    ],
     "name": "XAccessibleKeyBinding",
     "imports": [],
     "namespace": "com.sun.star.accessibility",
@@ -30,11 +35,34 @@
       "",
       "A key binding describes alternative ways how to invoke an action with pressing one or more keys after each other. Each individual sequence of key strokes",
       "",
-      "**See Also**",
+      "**since**",
       "",
       "    OOo 1.1.2"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1accessibility_1_1XAccessibleKeyBinding.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getAccessibleKeyBinding",
+          "returns": "'typing.List[KeyStroke]'",
+          "desc": [
+            "The returned sequence of key strokes describes one method to invoke the associated action (the one from which you obtained the object at which you called this method) by pressing keys.",
+            "",
+            "The keys specified by each of the returned key strokes have to be pressed at the same time (the Control-key and the A-key for example). The keys of one key stroke have to be released before pressing those of the next. The order of the key strokes in the sequence define the order in which to press them."
+          ],
+          "raises": "com.sun.star.lang.IndexOutOfBoundsException",
+          "args": []
+        },
+        {
+          "name": "getAccessibleKeyBindingCount",
+          "returns": "int",
+          "desc": [
+            "Return the number of available key bindings."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:16:47+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:43:05+00:00",
   "name": "XViewAccess",
   "type": "interface",
   "namespace": "com.sun.star.sdb.tools",
@@ -12,27 +12,46 @@
   "data": {
     "from_imports": [
       [
-        ".......x_connection_supplier",
+        ".x_connection_supplier",
         "XConnectionSupplier"
       ]
     ],
     "from_imports_typing": [],
     "name": "XViewAccess",
-    "imports": [
-      "XConnectionSupplier"
-    ],
+    "imports": [],
     "namespace": "com.sun.star.sdb.tools",
     "extends": [
-      "XConnectionSupplier"
+      "com.sun.star.sdb.tools.XConnectionSupplier"
     ],
     "desc": [
       "allows to fetch and to change the sql statements of views",
       "",
-      "**See Also**",
+      "**since**",
       "",
-      "    com.sun.star.sdb.DataSource.Settings"
+      "    OOo 3.3"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1sdb_1_1tools_1_1XViewAccess.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "alterCommand",
+          "returns": "None",
+          "desc": [
+            "allows to alter the SQL statement of a view"
+          ],
+          "raises": "com.sun.star.sdbc.SQLException",
+          "args": []
+        },
+        {
+          "name": "getCommand",
+          "returns": "str",
+          "desc": [
+            "returns the SQL statement of the view"
+          ],
+          "raises": "com.sun.star.sdbc.SQLException",
+          "args": []
+        }
+      ]
+    }
   }
 }

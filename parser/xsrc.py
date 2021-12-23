@@ -871,7 +871,7 @@ class ApiInterfaceData:
     def inherited(self) -> base.ApiInherited:
         """Gets class that get all inherited value"""
         if self._inherited is None:
-            self._inherited = base.ApiInherited(self.soup_obj)
+            self._inherited = base.ApiInherited(soup=self.soup_obj, raise_error=False)
         return self._inherited
 
     @property

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:20:40+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:37:37+00:00",
   "name": "XCollator",
   "type": "interface",
   "namespace": "com.sun.star.i18n",
@@ -24,13 +24,75 @@
       "com.sun.star.uno.XInterface"
     ],
     "desc": [
-      "provides locale-sensitive collation algorithms for string comparison.",
-      "",
-      "**See Also**",
-      "",
-      "    OfficeDev - Implementing a New Locale - XCollator OfficeDev - Overview and Using the API - XCollator"
+      "provides locale-sensitive collation algorithms for string comparison."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1i18n_1_1XCollator.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "compareString",
+          "returns": "int",
+          "desc": [
+            "Compare 2 strings in specific locale and algorithm."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "compareSubstring",
+          "returns": "int",
+          "desc": [
+            "Compare 2 substrings in specific locale and algorithm."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "listCollatorAlgorithms",
+          "returns": "typing.List[str]",
+          "desc": [
+            "List all collator algorithms for a given locale."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "listCollatorOptions",
+          "returns": "typing.List[int]",
+          "desc": [
+            "List all end user collator options for a given algorithm."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "loadCollatorAlgorithm",
+          "returns": "int",
+          "desc": [
+            "Load a particular collator algorithm for the locale."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "loadCollatorAlgorithmWithEndUserOption",
+          "returns": "None",
+          "desc": [
+            "Load a collator algorithm with options chosen by end user."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "loadDefaultCollator",
+          "returns": "int",
+          "desc": [
+            "Load the collator with default algorithm defined in locale data."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

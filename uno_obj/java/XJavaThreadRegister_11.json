@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 10:16:08+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:34:48+00:00",
   "name": "XJavaThreadRegister_11",
   "type": "interface",
   "namespace": "com.sun.star.java",
@@ -26,11 +26,45 @@
     "desc": [
       "must be implemented by the user of the XJavaThreadRegister_11.",
       "",
-      "**See Also**",
+      ".. deprecated::",
       "",
-      "    incomplete"
+      "    Interface is deprecated."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1java_1_1XJavaThreadRegister__11.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "isThreadAttached",
+          "returns": "bool",
+          "desc": [
+            "returns TRUE if the current thread is already attached to the VM otherwise FALSE."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "registerThread",
+          "returns": "None",
+          "desc": [
+            "registers the current thread.",
+            "",
+            "This method should be called every time a JNI function is called from Java."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "revokeThread",
+          "returns": "None",
+          "desc": [
+            "revokes the current thread from the list of registered threads.",
+            "",
+            "This method should be called at the end of every JNI call from Java."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

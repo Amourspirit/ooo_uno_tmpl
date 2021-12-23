@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:17:32+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:39:36+00:00",
   "name": "XAnimatedSprite",
   "type": "interface",
   "namespace": "com.sun.star.rendering",
@@ -12,7 +12,7 @@
   "data": {
     "from_imports": [
       [
-        "......x_sprite",
+        ".x_sprite",
         "XSprite"
       ]
     ],
@@ -21,18 +21,89 @@
     "imports": [],
     "namespace": "com.sun.star.rendering",
     "extends": [
-      "XSprite"
+      "com.sun.star.rendering.XSprite"
     ],
     "desc": [
       "This interface can be used to control an animated sprite object.",
       "",
       "This interface can be used to control an animated sprite object on an XSpriteCanvas. Sprites are moving, animated objects.",
       "",
-      "**See Also**",
+      "**since**",
       "",
       "    OOo 2.0"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1rendering_1_1XAnimatedSprite.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "resetAnimation",
+          "returns": "None",
+          "desc": [
+            "Reset the animation sequence to start with the first frame.",
+            "",
+            "If the animation is currently running, the next frame that is drawn after this method has finished, will be the first one. Please note that if an animation is not started, the associated XSpriteCanvas does not update changed sprites automatically."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "setAll",
+          "returns": "None",
+          "desc": [
+            "Changes all of the sprite's attributes at one atomic instance.",
+            "",
+            "This is useful at times where one does not want multiple redraws for every state change.",
+            "",
+            "Please note that if an animation is not started, the associated XSpriteCanvas does not update changed sprites automatically, but has to be told to do so via XSpriteCanvas.updateScreen()."
+          ],
+          "raises": "com.sun.star.lang.IllegalArgumentException",
+          "args": []
+        },
+        {
+          "name": "setViewState",
+          "returns": "None",
+          "desc": [
+            "Changes the view state in place for this sprite's animation.",
+            "",
+            "The state given here is used when calling the XAnimation.render() method, or when drawing the sprite's bitmaps, respectively. There's no need to call XSpriteCanvas.updateAnimation() after this method, as it automatically rerenders, if necessary. Please note that if an animation is not started, the associated XSpriteCanvas does not update changed sprites automatically, but has to be told to do so via XSpriteCanvas.updateScreen()."
+          ],
+          "raises": "com.sun.star.lang.IllegalArgumentException",
+          "args": []
+        },
+        {
+          "name": "startAnimation",
+          "returns": "None",
+          "desc": [
+            "Start animation sequence of this sprite.",
+            "",
+            "The speed of the animation is given in cycles per second (where a cycle is defined as one full animation run, i.e. the full [0,1] range of the XAnimation.render()'s t parameter, or a full sequence of sprite bitmaps drawn). Once an animation is running, the associated XSpriteCanvas handles screen updates automatically. That means, changes to position or alpha are reflected on screen automatically. Please note further that sprite visibility and animation are unrelated, i.e. a hidden sprite can have a running animation, which then displays in the middle of the animation sequence, when a show() is called later on."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "stopAnimation",
+          "returns": "None",
+          "desc": [
+            "Stop the animation sequence.",
+            "",
+            "A subsequent XAnimatedSprite.startAnimation() will commence the sequence at the point where it was stopped with here. Once an animation is stopped, the associated XSpriteCanvas does not update changed sprites anymore."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "updateAnimation",
+          "returns": "None",
+          "desc": [
+            "Issue an additional render call to this sprite's animation.",
+            "",
+            "This method has no effect when called for a bitmap-sequence sprite. Please note that if an animation is not started, the associated XSpriteCanvas does not update changed sprites automatically, but has to be told to do so via XSpriteCanvas.updateScreen()."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

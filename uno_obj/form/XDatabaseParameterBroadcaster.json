@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:20:03+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:38:38+00:00",
   "name": "XDatabaseParameterBroadcaster",
   "type": "interface",
   "namespace": "com.sun.star.form",
@@ -26,13 +26,30 @@
     "desc": [
       "provides the possibility of receiving an event for configuration of parameters.",
       "",
-      "This interface is usually implemented by components which are to execute a statement, and may need parameter information. For example, the com.sun.star.form.component.DataForm is such a component. When it is bound to a statement which contains parameters, or to a query which is based upon a parametrized statement, it needs values to fill in the parameters with actual values when it is being loaded. One method to gather these values is calling the XDatabaseParameterListener listeners, which can fill them in.",
-      "",
-      "**See Also**",
-      "",
-      "    Forms - Parameters"
+      "This interface is usually implemented by components which are to execute a statement, and may need parameter information. For example, the com.sun.star.form.component.DataForm is such a component. When it is bound to a statement which contains parameters, or to a query which is based upon a parametrized statement, it needs values to fill in the parameters with actual values when it is being loaded. One method to gather these values is calling the XDatabaseParameterListener listeners, which can fill them in."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1form_1_1XDatabaseParameterBroadcaster.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "addParameterListener",
+          "returns": "None",
+          "desc": [
+            "adds the specified listener, to allow it to fill in necessary parameter values."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "removeParameterListener",
+          "returns": "None",
+          "desc": [
+            "removes the specified listener."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

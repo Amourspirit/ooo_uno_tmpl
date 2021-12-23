@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:17:33+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:39:38+00:00",
   "name": "XBitmapCanvas",
   "type": "interface",
   "namespace": "com.sun.star.rendering",
@@ -12,7 +12,7 @@
   "data": {
     "from_imports": [
       [
-        "......x_canvas",
+        ".x_canvas",
         "XCanvas"
       ]
     ],
@@ -21,18 +21,32 @@
     "imports": [],
     "namespace": "com.sun.star.rendering",
     "extends": [
-      "XCanvas"
+      "com.sun.star.rendering.XCanvas"
     ],
     "desc": [
       "This is a specialization of the canvas interface for bitmapped canvases.",
       "",
       "This interface is a specialization of the canvas interface for bitmapped canvases, where additional methods for accessing and moving of bitmap content are provided.",
       "",
-      "**See Also**",
+      "**since**",
       "",
       "    OOo 2.0"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1rendering_1_1XBitmapCanvas.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "copyRect",
+          "returns": "None",
+          "desc": [
+            "This method copies a rectangular area from a place of one canvas to a place on another.",
+            "",
+            "This method copies a rectangular area from a place of one canvas to a place on another. Source and destination areas are permitted to overlap. If the source view or render state has a clipping set, the regions clipped away from the source rectangle are regarded fully transparent for the copy operation. The device color for both source and destination render state is ignored, the compositing mode only for the source render state."
+          ],
+          "raises": "com.sun.star.lang.IllegalArgumentException,",
+          "args": []
+        }
+      ]
+    }
   }
 }

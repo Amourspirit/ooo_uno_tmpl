@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:20:39+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:37:35+00:00",
   "name": "XCalendar4",
   "type": "interface",
   "namespace": "com.sun.star.i18n",
@@ -28,11 +28,66 @@
       "",
       "It is derived from com.sun.star.i18n.XCalendar3 and provides additional methods to set and get the local time.",
       "",
-      "**See Also**",
+      "**since**",
       "",
       "    LibreOffice 5.0"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1i18n_1_1XCalendar4.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getLocalDateTime",
+          "returns": "float",
+          "desc": [
+            "Get the local date/time as an offset to the start of the calendar at 1-Jan-1970 00:00.",
+            "",
+            "The integer part represents the number of days passed since start date. The fractional part represents fractions of a day, thus 0.5 means 12 hours.",
+            "",
+            "The actual timezone and daylight saving time offsets effective at the given date and time are considered and added to the UTC time at the calendar."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "loadCalendarTZ",
+          "returns": "None",
+          "desc": [
+            "Load a specific calendar for the given locale with a given time zone.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 6.3"
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "loadDefaultCalendarTZ",
+          "returns": "None",
+          "desc": [
+            "Load the default calendar for the given locale with a given time zone.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 6.3"
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "setLocalDateTime",
+          "returns": "None",
+          "desc": [
+            "Set the local date/time as an offset to the start of the calendar at 1-Jan-1970 00:00.",
+            "",
+            "The integer part represents the number of days passed since start date. The fractional part represents fractions of a day, thus 0.5 means 12 hours.",
+            "",
+            "The actual timezone and daylight saving time offsets effective at the given date and time are considered and subtracted before setting the UTC time at the calendar."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

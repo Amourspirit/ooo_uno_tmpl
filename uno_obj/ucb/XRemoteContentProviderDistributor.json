@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:19:04+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:42:22+00:00",
   "name": "XRemoteContentProviderDistributor",
   "type": "interface",
   "namespace": "com.sun.star.ucb",
@@ -24,13 +24,41 @@
       "com.sun.star.uno.XInterface"
     ],
     "desc": [
-      "Distribute a content broker to various XRemoteContentProviderAcceptors.",
-      "",
-      "**See Also**",
-      "",
-      "    1.0"
+      "Distribute a content broker to various XRemoteContentProviderAcceptors."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1ucb_1_1XRemoteContentProviderDistributor.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "connectToRemoteAcceptor",
+          "returns": "bool",
+          "desc": [
+            "Offer the local content broker to a remote content provider acceptor.",
+            "",
+            "The Uno Url is handed to the com.sun.star.bridge.UnoUrlResolver service, which is responsible for raising any of the advertised exceptions."
+          ],
+          "raises": "com.sun.star.connection.NoConnectException,",
+          "args": []
+        },
+        {
+          "name": "disconnectFromAll",
+          "returns": "None",
+          "desc": [
+            "Undo the offering of the local content broker to all remote content provider acceptors."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "disconnectFromRemoteAcceptor",
+          "returns": "bool",
+          "desc": [
+            "Undo the offering of the local content broker to a specific remote content provider acceptor."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

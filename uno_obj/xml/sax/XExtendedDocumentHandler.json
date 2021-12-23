@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:18:27+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:44:29+00:00",
   "name": "XExtendedDocumentHandler",
   "type": "interface",
   "namespace": "com.sun.star.xml.sax",
@@ -29,6 +29,58 @@
       "Note: Whether or not every callback is supported is dependent on the parser implementation."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1xml_1_1sax_1_1XExtendedDocumentHandler.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "allowLineBreak",
+          "returns": "None",
+          "desc": [
+            "informs a writer that it is allowable to insert a line break and indentation before the next XDocumentHandler-call."
+          ],
+          "raises": "com.sun.star.xml.sax.SAXException",
+          "args": []
+        },
+        {
+          "name": "comment",
+          "returns": "None",
+          "desc": [
+            "receives notification about a comment in the XML-source."
+          ],
+          "raises": "com.sun.star.xml.sax.SAXException",
+          "args": []
+        },
+        {
+          "name": "endCDATA",
+          "returns": "None",
+          "desc": [
+            "informs about the end of a CDATA-Section.",
+            "",
+            "Note that startCDATA/endCDATA MUST NOT enclose any startElement/endElement-call!"
+          ],
+          "raises": "com.sun.star.xml.sax.SAXException",
+          "args": []
+        },
+        {
+          "name": "startCDATA",
+          "returns": "None",
+          "desc": [
+            "receives notification about the start of a CDATA section in the XML-source.",
+            "",
+            "Any string coming in via character handler may include chars, that would otherwise be interpreted as markup."
+          ],
+          "raises": "com.sun.star.xml.sax.SAXException",
+          "args": []
+        },
+        {
+          "name": "unknown",
+          "returns": "None",
+          "desc": [
+            "notifies that any characters that cannot be handled by other callback methods are announced through this method."
+          ],
+          "raises": "com.sun.star.xml.sax.SAXException",
+          "args": []
+        }
+      ]
+    }
   }
 }

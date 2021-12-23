@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:18:01+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:37:26+00:00",
   "name": "XToolkit",
   "type": "interface",
   "namespace": "com.sun.star.awt",
@@ -16,7 +16,24 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".rectangle",
+        "Rectangle"
+      ],
+      [
+        ".x_region",
+        "XRegion"
+      ],
+      [
+        ".x_window_peer",
+        "XWindowPeer"
+      ],
+      [
+        ".x_device",
+        "XDevice"
+      ]
+    ],
     "name": "XToolkit",
     "imports": [],
     "namespace": "com.sun.star.awt",
@@ -26,13 +43,68 @@
     "desc": [
       "specifies a factory interface for the window toolkit.",
       "",
-      "This is similar to the abstract window toolkit (AWT) in Java.",
-      "",
-      "**See Also**",
-      "",
-      "    OfficeDev - Java Window Integration"
+      "This is similar to the abstract window toolkit (AWT) in Java."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XToolkit.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "createRegion",
+          "returns": "XRegion",
+          "desc": [
+            "creates a region."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "createScreenCompatibleDevice",
+          "returns": "XDevice",
+          "desc": [
+            "creates a virtual device that is compatible with the screen."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "createWindow",
+          "returns": "XWindowPeer",
+          "desc": [
+            "creates a new window using the given descriptor."
+          ],
+          "raises": "com.sun.star.lang.IllegalArgumentException",
+          "args": []
+        },
+        {
+          "name": "createWindows",
+          "returns": "'typing.List[XWindowPeer]'",
+          "desc": [
+            "returns a sequence of windows which are newly created using the given descriptors."
+          ],
+          "raises": "com.sun.star.lang.IllegalArgumentException",
+          "args": []
+        },
+        {
+          "name": "getDesktopWindow",
+          "returns": "XWindowPeer",
+          "desc": [
+            "returns the desktop window."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getWorkArea",
+          "returns": "Rectangle",
+          "desc": [
+            "For LibreOffice versions < 4.1, this method just returned an empty rectangle.",
+            "",
+            "After that, it started returning a valid value."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

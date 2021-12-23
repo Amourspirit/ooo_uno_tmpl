@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:22:11+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:38:23+00:00",
   "name": "XCsvLogFormatter",
   "type": "interface",
   "namespace": "com.sun.star.logging",
@@ -12,7 +12,7 @@
   "data": {
     "from_imports": [
       [
-        "......x_log_formatter",
+        ".x_log_formatter",
         "XLogFormatter"
       ]
     ],
@@ -21,17 +21,32 @@
     "imports": [],
     "namespace": "com.sun.star.logging",
     "extends": [
-      "XLogFormatter"
+      "com.sun.star.logging.XLogFormatter"
     ],
     "desc": [
       "specifies the interface used for formatting log records for RFC4180 CSV output",
       "",
-      "**See Also**",
+      "**since**",
       "",
-      "    XLogFormatter, XLogHandler"
+      "    OOo 3.0"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1logging_1_1XCsvLogFormatter.html",
     "items": {
+      "methods": [
+        {
+          "name": "formatMultiColumn",
+          "returns": "str",
+          "desc": [
+            "if the CsvLogFormatter is set to have more than one column, any logged information has to be send through this method before calling log().",
+            "",
+            "E.g.:",
+            "",
+            "XLoggerInstance.log(1000, XCsvLogFormatterInstance.formatMultiColumn(columnData))"
+          ],
+          "raises": "",
+          "args": []
+        }
+      ],
       "properties": [
         {
           "name": "LogEventNo",
@@ -39,8 +54,8 @@
           "desc": [
             "Defines if the EventNo should be logged."
           ],
-          "raises_get": [],
-          "raises_set": []
+          "raises_get": "",
+          "raises_set": ""
         },
         {
           "name": "LogSource",
@@ -48,8 +63,8 @@
           "desc": [
             "Defines if the Source should be logged."
           ],
-          "raises_get": [],
-          "raises_set": []
+          "raises_get": "",
+          "raises_set": ""
         },
         {
           "name": "LogThread",
@@ -57,8 +72,8 @@
           "desc": [
             "Defines if the ThreadId should be logged."
           ],
-          "raises_get": [],
-          "raises_set": []
+          "raises_get": "",
+          "raises_set": ""
         },
         {
           "name": "LogTimestamp",
@@ -66,8 +81,8 @@
           "desc": [
             "Defines if the Timestamp should be logged."
           ],
-          "raises_get": [],
-          "raises_set": []
+          "raises_get": "",
+          "raises_set": ""
         }
       ]
     }

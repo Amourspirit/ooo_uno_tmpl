@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:22:33+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:36:31+00:00",
   "name": "XTextColumns",
   "type": "interface",
   "namespace": "com.sun.star.text",
@@ -16,7 +16,12 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".text_column",
+        "TextColumn"
+      ]
+    ],
     "name": "XTextColumns",
     "imports": [],
     "namespace": "com.sun.star.text",
@@ -29,6 +34,56 @@
       "The values used are relative. So it is not necessary to know the width of the object. The sum of the relative width values depends on the object and is defined in \\\"ReferenceValue.\\\""
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1text_1_1XTextColumns.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getColumnCount",
+          "returns": "int",
+          "desc": [],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getColumns",
+          "returns": "'typing.List[TextColumn]'",
+          "desc": [
+            "returns the column description of the object."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getReferenceValue",
+          "returns": "int",
+          "desc": [
+            "As described above, the width values are relative."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "setColumnCount",
+          "returns": "None",
+          "desc": [
+            "sets the number of columns.",
+            "",
+            "The minimum is 1 column."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "setColumns",
+          "returns": "None",
+          "desc": [
+            "sets the descriptors of all columns.",
+            "",
+            "The number of members in the sequence must be the same as the number of columns of the object."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

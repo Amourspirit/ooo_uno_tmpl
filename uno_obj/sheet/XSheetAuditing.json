@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:21:15+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:41:49+00:00",
   "name": "XSheetAuditing",
   "type": "interface",
   "namespace": "com.sun.star.sheet",
@@ -24,13 +24,83 @@
       "com.sun.star.uno.XInterface"
     ],
     "desc": [
-      "provides methods to access auditing (detective) features in a spreadsheet.",
-      "",
-      "**See Also**",
-      "",
-      "    Spreadsheets - Detective"
+      "provides methods to access auditing (detective) features in a spreadsheet."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1sheet_1_1XSheetAuditing.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "clearArrows",
+          "returns": "None",
+          "desc": [
+            "removes all auditing arrows from the spreadsheet."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "hideDependents",
+          "returns": "bool",
+          "desc": [
+            "removes arrows for one level of dependents of a formula cell.",
+            "",
+            "If the method is executed again for the same cell, the previous level of dependent cells is removed."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "hidePrecedents",
+          "returns": "bool",
+          "desc": [
+            "removes arrows for one level of precedents of a formula cell.",
+            "",
+            "If the method is executed again for the same cell, the previous level of dependent cells is removed."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "showDependents",
+          "returns": "bool",
+          "desc": [
+            "draws arrows between a formula cell and its dependents.",
+            "",
+            "If the method is executed again for the same cell, the next level of dependent cells is marked."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "showErrors",
+          "returns": "bool",
+          "desc": [
+            "draws arrows between a formula cell containing an error and the cells causing the error."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "showInvalid",
+          "returns": "bool",
+          "desc": [
+            "marks all cells containing invalid values."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "showPrecedents",
+          "returns": "bool",
+          "desc": [
+            "draws arrows between a formula cell and its precedents.",
+            "",
+            "If the method is executed again for the same cell, the next level of dependent cells is marked."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

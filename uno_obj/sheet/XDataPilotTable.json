@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:21:04+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:41:37+00:00",
   "name": "XDataPilotTable",
   "type": "interface",
   "namespace": "com.sun.star.sheet",
@@ -16,7 +16,12 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..table.cell_range_address",
+        "CellRangeAddress"
+      ]
+    ],
     "name": "XDataPilotTable",
     "imports": [],
     "namespace": "com.sun.star.sheet",
@@ -24,13 +29,30 @@
       "com.sun.star.uno.XInterface"
     ],
     "desc": [
-      "provides methods to control a data pilot table which has already been created.",
-      "",
-      "**See Also**",
-      "",
-      "    com.sun.star.sheet.DataPilotTable"
+      "provides methods to control a data pilot table which has already been created."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1sheet_1_1XDataPilotTable.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getOutputRange",
+          "returns": "CellRangeAddress",
+          "desc": [
+            "returns the address of the cell range that contains the data pilot table."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "refresh",
+          "returns": "None",
+          "desc": [
+            "recreates the data pilot table with current data from the source cell range."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:17:37+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:39:46+00:00",
   "name": "XParametricPolyPolygon2D",
   "type": "interface",
   "namespace": "com.sun.star.rendering",
@@ -16,7 +16,12 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".color_component",
+        "ColorComponent"
+      ]
+    ],
     "name": "XParametricPolyPolygon2D",
     "imports": [],
     "namespace": "com.sun.star.rendering",
@@ -29,6 +34,47 @@
       "The returned poly-polygon should normally be contained in the [0,1]x[0,1] rectangle. At least that is the dimension expected at other places. e.g. Texture."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1rendering_1_1XParametricPolyPolygon2D.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getColor",
+          "returns": "'typing.List[ColorComponent]'",
+          "desc": [
+            "Query the color value for the polygonal area at the specified parameter value."
+          ],
+          "raises": "com.sun.star.lang.IllegalArgumentException",
+          "args": []
+        },
+        {
+          "name": "getColorSpace",
+          "returns": "object",
+          "desc": [
+            "Query the color space employed by this object."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getOutline",
+          "returns": "object",
+          "desc": [
+            "Query the polygonal outline at the specified value.",
+            "",
+            "The returned outline should be clipped to the [0,1]x[0,1] rectangle."
+          ],
+          "raises": "com.sun.star.lang.IllegalArgumentException",
+          "args": []
+        },
+        {
+          "name": "getPointColor",
+          "returns": "'typing.List[ColorComponent]'",
+          "desc": [
+            "Query the color for a dedicated point in the plane."
+          ],
+          "raises": "com.sun.star.lang.IllegalArgumentException",
+          "args": []
+        }
+      ]
+    }
   }
 }

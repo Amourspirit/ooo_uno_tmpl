@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:22:29+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:36:24+00:00",
   "name": "XNumberingTypeInfo",
   "type": "interface",
   "namespace": "com.sun.star.text",
@@ -26,13 +26,48 @@
     "desc": [
       "provides access to the numbering types that are supported by a component.",
       "",
-      "To be able to store unknown numbering types in a file format the numbering types correspond to an identifier.",
-      "",
-      "**See Also**",
-      "",
-      "    com.sun.star.text.NumberingRules"
+      "To be able to store unknown numbering types in a file format the numbering types correspond to an identifier."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1text_1_1XNumberingTypeInfo.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getNumberingIdentifier",
+          "returns": "str",
+          "desc": [
+            "returns the corresponding identifier to a numbering type."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getNumberingType",
+          "returns": "int",
+          "desc": [
+            "returns the corresponding numbering type to an identifier."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getSupportedNumberingTypes",
+          "returns": "typing.List[int]",
+          "desc": [
+            "returns the numbering type values that are supported by the component."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "hasNumberingType",
+          "returns": "bool",
+          "desc": [
+            "determines whether an identifier is supported."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

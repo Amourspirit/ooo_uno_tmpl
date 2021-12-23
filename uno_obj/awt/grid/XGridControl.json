@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:18:08+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:37:50+00:00",
   "name": "XGridControl",
   "type": "interface",
   "namespace": "com.sun.star.awt.grid",
@@ -10,20 +10,79 @@
   },
   "writer_args": {},
   "data": {
-    "from_imports": [],
+    "from_imports": [
+      [
+        ".uno_control_grid",
+        "UnoControlGrid"
+      ]
+    ],
     "from_imports_typing": [],
     "name": "XGridControl",
     "imports": [],
     "namespace": "com.sun.star.awt.grid",
-    "extends": [],
+    "extends": [
+      "com.sun.star.awt.grid.UnoControlGrid"
+    ],
     "desc": [
       "An interface to a control that displays a tabular data.",
       "",
-      "**See Also**",
+      "**since**",
       "",
-      "    UnoControlGrid"
+      "    OOo 3.3"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1grid_1_1XGridControl.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getColumnAtPoint",
+          "returns": "int",
+          "desc": [
+            "retrieves the column which a given point belongs to"
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getCurrentColumn",
+          "returns": "int",
+          "desc": [
+            "returns the column index of the currently active cell",
+            "",
+            "If the grid control's does not contain any cells (which happens if the grid column model does not contain any columns, or if grid data model does not contain any rows), then -1 is returned."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getCurrentRow",
+          "returns": "int",
+          "desc": [
+            "returns the row index of the currently active cell",
+            "",
+            "If the grid control's does not contain any cells (which happens if the grid column model does not contain any columns, or if grid data model does not contain any rows), then -1 is returned."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getRowAtPoint",
+          "returns": "int",
+          "desc": [
+            "retrieves the row which a given point belongs to"
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "goToCell",
+          "returns": "None",
+          "desc": [
+            "moves the cursor to the given cell"
+          ],
+          "raises": ",",
+          "args": []
+        }
+      ]
+    }
   }
 }

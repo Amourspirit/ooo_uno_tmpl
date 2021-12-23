@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:17:37+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:39:47+00:00",
   "name": "XSimpleCanvas",
   "type": "interface",
   "namespace": "com.sun.star.rendering",
@@ -16,7 +16,20 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..geometry.affine_matrix2_d",
+        "AffineMatrix2D"
+      ],
+      [
+        "..util.color",
+        "Color"
+      ],
+      [
+        "..geometry.real_rectangle2_d",
+        "RealRectangle2D"
+      ]
+    ],
     "name": "XSimpleCanvas",
     "imports": [],
     "namespace": "com.sun.star.rendering",
@@ -31,6 +44,206 @@
       "In contrast to the XCanvas interface, XSimpleCanvas does not distinguish between stroke and fill operations; instead, switching between stroke and fill (or taking both) works by setting appropriate pen and fill colors."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1rendering_1_1XSimpleCanvas.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "drawBitmap",
+          "returns": "None",
+          "desc": [
+            "Draws the bitmap on the canvas."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "drawLine",
+          "returns": "None",
+          "desc": [
+            "Draws a line on the canvas."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "drawPixel",
+          "returns": "None",
+          "desc": [
+            "Sets a single pixel on the canvas."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "drawPolyPolygon",
+          "returns": "None",
+          "desc": [
+            "Draws a poly-polygon on the canvas."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "drawRect",
+          "returns": "None",
+          "desc": [
+            "Draws a rectangle on the canvas."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "drawText",
+          "returns": "None",
+          "desc": [
+            "Draws text on the canvas."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getCanvas",
+          "returns": "object",
+          "desc": [
+            "Query the underlying XCanvas."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getCurrentClipRect",
+          "returns": "RealRectangle2D",
+          "desc": [
+            "Retrieve current clip rect."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getCurrentFillColor",
+          "returns": "Color",
+          "desc": [
+            "Retrieve color currently used for fills."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getCurrentFont",
+          "returns": "object",
+          "desc": [
+            "Retrieve currently selected font."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getCurrentPenColor",
+          "returns": "Color",
+          "desc": [
+            "Retrieve color currently used for lines."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getCurrentRenderState",
+          "returns": "object",
+          "desc": [
+            "Retrieve render state."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getCurrentTransformation",
+          "returns": "AffineMatrix2D",
+          "desc": [
+            "Retrieve current transformation matrix."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getCurrentViewState",
+          "returns": "object",
+          "desc": [
+            "Retrieve view state."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getDevice",
+          "returns": "object",
+          "desc": [
+            "Request the associated graphic device for this canvas.",
+            "",
+            "A graphic device provides methods specific to the underlying output device capabilities, which are common for all canvases rendering to such a device. This includes device resolution, color space, or bitmap formats."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getFontMetrics",
+          "returns": "object",
+          "desc": [
+            "Request the font metrics of the current font."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "selectFont",
+          "returns": "None",
+          "desc": [
+            "Select a font.",
+            "",
+            "This method selects the specified font (or a close substitute) as the current font for text output."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "setFillColor",
+          "returns": "None",
+          "desc": [
+            "Sets the fill color.",
+            "",
+            "To disable filling, simply set this color to something with zero alpha (i.e. fully transparent)."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "setPenColor",
+          "returns": "None",
+          "desc": [
+            "Sets the color used by line and text operations.",
+            "",
+            "To disable stroking, simply set this color to something with zero alpha (i.e. fully transparent)."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "setRectClip",
+          "returns": "None",
+          "desc": [
+            "Sets the clip to the specified rectangle."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "setTransformation",
+          "returns": "None",
+          "desc": [
+            "Set the current transform matrix."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:17:34+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:39:40+00:00",
   "name": "XCustomSprite",
   "type": "interface",
   "namespace": "com.sun.star.rendering",
@@ -12,7 +12,7 @@
   "data": {
     "from_imports": [
       [
-        "......x_sprite",
+        ".x_sprite",
         "XSprite"
       ]
     ],
@@ -21,7 +21,7 @@
     "imports": [],
     "namespace": "com.sun.star.rendering",
     "extends": [
-      "XSprite"
+      "com.sun.star.rendering.XSprite"
     ],
     "desc": [
       "Interface to control a custom sprite object on a XSpriteCanvas.",
@@ -31,6 +31,20 @@
       "TODO: Maybe more than alpha has to be overridden from render state. TODO: Provide means to change the output area"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1rendering_1_1XCustomSprite.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getContentCanvas",
+          "returns": "object",
+          "desc": [
+            "Query a render canvas for this sprite's content.",
+            "",
+            "Whatever is rendered to this canvas will become visible on the screen only after a XSpriteCanvas.updateScreen() call at the associated sprite canvas. This canvas is not equivalent to the host canvas of the sprite. At the very least, all output happens relative to the sprite's upper left corner, i.e. the origin of the sprite's canvas device coordinate system will move with the sprite across the screen."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

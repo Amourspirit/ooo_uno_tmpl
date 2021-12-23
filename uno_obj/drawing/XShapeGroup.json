@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:21:32+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:38:58+00:00",
   "name": "XShapeGroup",
   "type": "interface",
   "namespace": "com.sun.star.drawing",
@@ -24,9 +24,42 @@
       "com.sun.star.drawing.XShape"
     ],
     "desc": [
-      "is implemented by Shapes that contain other Shapes."
+      "is implemented by Shapes that contain other Shapes.",
+      "",
+      ".. deprecated::",
+      "",
+      "    Interface is deprecated."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1drawing_1_1XShapeGroup.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "enterGroup",
+          "returns": "None",
+          "desc": [
+            "enters the group which enables the editing function for the parts of a grouped Shape.",
+            "",
+            "Then the parts can be edited instead of the group as a whole.",
+            "",
+            "This affects only the user interface. The behavior is not specified if this instance is not visible on any view. In this case it may or may not work."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "leaveGroup",
+          "returns": "None",
+          "desc": [
+            "leaves the group, which disables the editing function for the parts of a grouped Shape.",
+            "",
+            "Then only the group as a whole can be edited.",
+            "",
+            "This affects only the user interface. The behavior is not specified if this instance is not visible on any view. In this case it may or may not work."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:19:06+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:35:56+00:00",
   "name": "XAtomServer",
   "type": "interface",
   "namespace": "com.sun.star.util",
@@ -10,12 +10,24 @@
   },
   "writer_args": {},
   "data": {
-    "from_imports": [],
-    "from_imports_typing": [],
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".atom_description",
+        "AtomDescription"
+      ]
+    ],
     "name": "XAtomServer",
     "imports": [],
     "namespace": "com.sun.star.util",
-    "extends": [],
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
     "desc": [
       "an interface to map between strings and ids",
       "",
@@ -24,6 +36,56 @@
       "Additionally there is the abstraction of atom class:\n Atoms are grouped into classes, so that an id can be assigned to multiple strings, depending on the class context. The main advantage of this is that atoms in one class may be kept to small numbers, so that bandwidth can be reduced by sending the atoms only as 16 bit values. Note that it is up to the user in this case to handle overflows."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1util_1_1XAtomServer.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getAtom",
+          "returns": "int",
+          "desc": [
+            "registers or searches for a string"
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getAtomDescriptions",
+          "returns": "typing.List[str]",
+          "desc": [
+            "returns the strings for an arbitrary amount of atoms of multiple classes"
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getClass",
+          "returns": "'typing.List[AtomDescription]'",
+          "desc": [
+            "returns a whole atom class"
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getClasses",
+          "returns": "'typing.List[typing.List[AtomDescription]]'",
+          "desc": [
+            "returns multiple atom classes"
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getRecentAtoms",
+          "returns": "'typing.List[AtomDescription]'",
+          "desc": [
+            "returns the atoms that have been registered to a class after an already known atom",
+            "",
+            "Hint to implementor: using ascending atoms is the easiest way to decide, which atoms are recent."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

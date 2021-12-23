@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:20:32+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:40:51+00:00",
   "name": "XTypeConverter",
   "type": "interface",
   "namespace": "com.sun.star.script",
@@ -24,13 +24,34 @@
       "com.sun.star.uno.XInterface"
     ],
     "desc": [
-      "Interface to provide standard type conversions.",
-      "",
-      "**See Also**",
-      "",
-      "    Converter"
+      "Interface to provide standard type conversions."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1script_1_1XTypeConverter.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "convertTo",
+          "returns": "object",
+          "desc": [
+            "Converts the value aFrom to the specified type xDestinationType.",
+            "",
+            "Throws a CannotConvertException if the conversion failed."
+          ],
+          "raises": "com.sun.star.lang.IllegalArgumentException,",
+          "args": []
+        },
+        {
+          "name": "convertToSimpleType",
+          "returns": "object",
+          "desc": [
+            "Converts the value aFrom to the specified simple type aDestinationType.",
+            "",
+            "Throws a CannotConvertException if the conversion failed and a com.sun.star.lang.IllegalArgumentException if the destination com.sun.star.uno.TypeClass is not simple, e.g. not long or byte."
+          ],
+          "raises": "com.sun.star.lang.IllegalArgumentException,",
+          "args": []
+        }
+      ]
+    }
   }
 }

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:21:51+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:44:12+00:00",
   "name": "XModel3",
   "type": "interface",
   "namespace": "com.sun.star.frame",
@@ -16,7 +16,12 @@
         "XModel2"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..beans.property_value",
+        "PropertyValue"
+      ]
+    ],
     "name": "XModel3",
     "imports": [],
     "namespace": "com.sun.star.frame",
@@ -27,6 +32,20 @@
       "extends interface XModel2 with optimised read access getArgs()."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1frame_1_1XModel3.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getArgs2",
+          "returns": "'typing.List[PropertyValue]'",
+          "desc": [
+            "Provides optimised read access (so we don't need to fetch expensive properties that we are not interested in) on currently representation of the com.sun.star.document.MediaDescriptor of this model which describes the model and its state.",
+            "",
+            "Returns only the selected args."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

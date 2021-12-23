@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:19:23+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:43:27+00:00",
   "name": "XDataSinkEncrSupport",
   "type": "interface",
   "namespace": "com.sun.star.packages",
@@ -16,7 +16,12 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..io.x_input_stream",
+        "XInputStream"
+      ]
+    ],
     "name": "XDataSinkEncrSupport",
     "imports": [],
     "namespace": "com.sun.star.packages",
@@ -27,6 +32,64 @@
       "Allows to get access to the stream of a PackageStream."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1packages_1_1XDataSinkEncrSupport.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getDataStream",
+          "returns": "XInputStream",
+          "desc": [
+            "Allows to get access to the data of the PackageStream.",
+            "",
+            "In case stream is encrypted one and the key for the stream is not set, an exception must be thrown."
+          ],
+          "raises": "com.sun.star.packages.WrongPasswordException,",
+          "args": []
+        },
+        {
+          "name": "getPlainRawStream",
+          "returns": "XInputStream",
+          "desc": [
+            "Allows to get access to the raw data of the stream as it is stored in the package."
+          ],
+          "raises": "com.sun.star.io.IOException,",
+          "args": []
+        },
+        {
+          "name": "getRawStream",
+          "returns": "XInputStream",
+          "desc": [
+            "Allows to get access to the data of the PackageStream as to raw stream.",
+            "",
+            "In case stream is not encrypted an exception will be thrown.",
+            "",
+            "The difference of raw stream is that it contains header for encrypted data, so an encrypted stream can be copied from one PackageStream to another one without decryption."
+          ],
+          "raises": "com.sun.star.packages.NoEncryptionException,",
+          "args": []
+        },
+        {
+          "name": "setDataStream",
+          "returns": "None",
+          "desc": [
+            "Allows to set a data stream for the PackageStream.",
+            "",
+            "In case PackageStream is marked as encrypted the data stream will be encrypted on storing."
+          ],
+          "raises": "com.sun.star.io.IOException",
+          "args": []
+        },
+        {
+          "name": "setRawStream",
+          "returns": "None",
+          "desc": [
+            "Allows to set raw stream for the PackageStream.",
+            "",
+            "The PackageStream object can not be marked as encrypted one, an exception will be thrown in such case."
+          ],
+          "raises": "com.sun.star.packages.EncryptionNotAllowedException,",
+          "args": []
+        }
+      ]
+    }
   }
 }

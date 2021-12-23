@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:17:40+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:35:07+00:00",
   "name": "XBridge",
   "type": "interface",
   "namespace": "com.sun.star.bridge",
@@ -16,7 +16,12 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..uno.x_interface",
+        "XInterface"
+      ]
+    ],
     "name": "XBridge",
     "imports": [],
     "namespace": "com.sun.star.bridge",
@@ -27,6 +32,38 @@
       "main interface for an interprocess bridge."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1bridge_1_1XBridge.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getDescription",
+          "returns": "str",
+          "desc": [
+            "a unique descriptive string: protocol + \\\":\\\" + XConnection.getDescription()"
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getInstance",
+          "returns": "XInterface",
+          "desc": [
+            "tries to get an interface from the remote that is known by this name.",
+            "",
+            "In general, this method is called once to get the initial object from the remote, but it is allowed to call the method multiple times."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getName",
+          "returns": "str",
+          "desc": [
+            "name that the bridge got when it was created."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

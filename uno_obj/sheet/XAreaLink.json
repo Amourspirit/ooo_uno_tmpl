@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:20:58+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:41:30+00:00",
   "name": "XAreaLink",
   "type": "interface",
   "namespace": "com.sun.star.sheet",
@@ -16,7 +16,12 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..table.cell_range_address",
+        "CellRangeAddress"
+      ]
+    ],
     "name": "XAreaLink",
     "imports": [],
     "namespace": "com.sun.star.sheet",
@@ -24,13 +29,52 @@
       "com.sun.star.uno.XInterface"
     ],
     "desc": [
-      "provides methods to change the settings of a linked cell range.",
-      "",
-      "**See Also**",
-      "",
-      "    com.sun.star.sheet.CellAreaLink"
+      "provides methods to change the settings of a linked cell range."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1sheet_1_1XAreaLink.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getDestArea",
+          "returns": "CellRangeAddress",
+          "desc": [
+            "returns the position of the linked range in the destination document."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getSourceArea",
+          "returns": "str",
+          "desc": [
+            "returns the source of the range within the source document.",
+            "",
+            "This can be the address of a cell or range in the form \\\"Sheet1.A1:C5\\\", or the name of a named range or database range."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "setDestArea",
+          "returns": "None",
+          "desc": [
+            "sets the position of the linked range in the destination document."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "setSourceArea",
+          "returns": "None",
+          "desc": [
+            "sets the source of the range within the source document.",
+            "",
+            "This can be the address of a cell or range in the form \\\"Sheet1.A1:C5\\\", or the name of a named range or database range."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

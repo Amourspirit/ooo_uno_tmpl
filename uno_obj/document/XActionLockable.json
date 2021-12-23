@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:21:58+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:34:04+00:00",
   "name": "XActionLockable",
   "type": "interface",
   "namespace": "com.sun.star.document",
@@ -24,13 +24,59 @@
       "com.sun.star.uno.XInterface"
     ],
     "desc": [
-      "makes it possible to prevent object internal updates for a certain period to be able to quickly change multiple parts of the objects, where the updates would invalidate each other, anyway.",
-      "",
-      "**See Also**",
-      "",
-      "    Spreadsheets - Protecting Spreadsheets"
+      "makes it possible to prevent object internal updates for a certain period to be able to quickly change multiple parts of the objects, where the updates would invalidate each other, anyway."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1document_1_1XActionLockable.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "addActionLock",
+          "returns": "None",
+          "desc": [
+            "increments the lock count of the object by one."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "isActionLocked",
+          "returns": "bool",
+          "desc": [],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "removeActionLock",
+          "returns": "None",
+          "desc": [
+            "decrements the lock count of the object by one."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "resetActionLocks",
+          "returns": "int",
+          "desc": [
+            "resets the locking level.",
+            "",
+            "This method is used for debugging purposes. The debugging environment of a programming language can reset the locks to allow refreshing of the view if a breakpoint is reached or step execution is used."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "setActionLocks",
+          "returns": "None",
+          "desc": [
+            "sets the locking level.",
+            "",
+            "This method is used for debugging purposes. The programming environment can restore the locking after a break of a debug session."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

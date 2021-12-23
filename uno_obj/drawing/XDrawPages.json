@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:21:28+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:38:53+00:00",
   "name": "XDrawPages",
   "type": "interface",
   "namespace": "com.sun.star.drawing",
@@ -16,7 +16,12 @@
         "XIndexAccess"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_draw_page",
+        "XDrawPage"
+      ]
+    ],
     "name": "XDrawPages",
     "imports": [],
     "namespace": "com.sun.star.drawing",
@@ -28,13 +33,30 @@
       "",
       "The pages are stored in an index container. The order is determined by the index.",
       "",
-      "You usually get this interface if you use the XDrawPagesSupplier or the XMasterPagesSupplier at a model that contains DrawPages or MasterPages",
-      "",
-      "**See Also**",
-      "",
-      "    Drawings - Working with Drawing Documents - Page Handling"
+      "You usually get this interface if you use the XDrawPagesSupplier or the XMasterPagesSupplier at a model that contains DrawPages or MasterPages"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1drawing_1_1XDrawPages.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "insertNewByIndex",
+          "returns": "XDrawPage",
+          "desc": [
+            "creates and inserts a new DrawPage or MasterPage into this container"
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "remove",
+          "returns": "None",
+          "desc": [
+            "removes a DrawPage or MasterPage from this container."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

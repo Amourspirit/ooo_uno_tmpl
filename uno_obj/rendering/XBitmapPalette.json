@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:17:33+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:39:38+00:00",
   "name": "XBitmapPalette",
   "type": "interface",
   "namespace": "com.sun.star.rendering",
@@ -26,11 +26,50 @@
     "desc": [
       "Interface to access the palette of a color-indexed bitmap.",
       "",
-      "**See Also**",
+      "**since**",
       "",
       "    OOo 2.0"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1rendering_1_1XBitmapPalette.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getColorSpace",
+          "returns": "object",
+          "desc": [
+            "Query associated color space."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getIndex",
+          "returns": "bool",
+          "desc": [
+            "Request the color for the given palette entry."
+          ],
+          "raises": "com.sun.star.lang.IndexOutOfBoundsException",
+          "args": []
+        },
+        {
+          "name": "getNumberOfEntries",
+          "returns": "int",
+          "desc": [
+            "Request the number of palette entries available."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "setIndex",
+          "returns": "bool",
+          "desc": [
+            "Set the color for the given palette entry."
+          ],
+          "raises": "com.sun.star.lang.IndexOutOfBoundsException,",
+          "args": []
+        }
+      ]
+    }
   }
 }

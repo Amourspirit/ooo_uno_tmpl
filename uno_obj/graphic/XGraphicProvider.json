@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:22:41+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:43:40+00:00",
   "name": "XGraphicProvider",
   "type": "interface",
   "namespace": "com.sun.star.graphic",
@@ -16,7 +16,12 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..beans.x_property_set",
+        "XPropertySet"
+      ]
+    ],
     "name": "XGraphicProvider",
     "imports": [],
     "namespace": "com.sun.star.graphic",
@@ -29,6 +34,38 @@
       "It is used to load graphics, store graphics and to get information about unloaded graphics"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1graphic_1_1XGraphicProvider.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "queryGraphic",
+          "returns": "object",
+          "desc": [
+            "Calling this method returns a XGraphic interface that holds the graphic content after loading the graphic."
+          ],
+          "raises": "com.sun.star.io.IOException,",
+          "args": []
+        },
+        {
+          "name": "queryGraphicDescriptor",
+          "returns": "XPropertySet",
+          "desc": [
+            "Calling this method returns a com.sun.star.beans.XPropertySet interface that gives access to the properties of the unloaded graphic.",
+            "",
+            "In most cases, this method will be used to query the mime type of the graphic and, in the case of pixel graphics, the resulting size after loading"
+          ],
+          "raises": "com.sun.star.io.IOException,",
+          "args": []
+        },
+        {
+          "name": "storeGraphic",
+          "returns": "None",
+          "desc": [
+            "Store the graphic content, represented through the XGraphic interface at the specified location."
+          ],
+          "raises": "com.sun.star.io.IOException,",
+          "args": []
+        }
+      ]
+    }
   }
 }

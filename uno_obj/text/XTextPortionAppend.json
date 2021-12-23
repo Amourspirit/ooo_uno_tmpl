@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:22:35+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:36:36+00:00",
   "name": "XTextPortionAppend",
   "type": "interface",
   "namespace": "com.sun.star.text",
@@ -16,7 +16,12 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_text_range",
+        "XTextRange"
+      ]
+    ],
     "name": "XTextPortionAppend",
     "imports": [],
     "namespace": "com.sun.star.text",
@@ -24,9 +29,38 @@
       "com.sun.star.uno.XInterface"
     ],
     "desc": [
-      "allows inserting and appending formatted text portions."
+      "allows inserting and appending formatted text portions.",
+      "",
+      "**since**",
+      "",
+      "    LibreOffice 4.0"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1text_1_1XTextPortionAppend.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "appendTextPortion",
+          "returns": "XTextRange",
+          "desc": [
+            "appends a new text portion to the paragraph at the end of the text."
+          ],
+          "raises": "com.sun.star.lang.IllegalArgumentException,",
+          "args": []
+        },
+        {
+          "name": "insertTextPortion",
+          "returns": "XTextRange",
+          "desc": [
+            "inserts a new text portion to the paragraph at a given position.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 4.0"
+          ],
+          "raises": "com.sun.star.lang.IllegalArgumentException,",
+          "args": []
+        }
+      ]
+    }
   }
 }

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:20:53+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:35:43+00:00",
   "name": "XChartDocument",
   "type": "interface",
   "namespace": "com.sun.star.chart",
@@ -16,7 +16,24 @@
         "XModel"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..drawing.x_shape",
+        "XShape"
+      ],
+      [
+        ".x_diagram",
+        "XDiagram"
+      ],
+      [
+        "..beans.x_property_set",
+        "XPropertySet"
+      ],
+      [
+        ".x_chart_data",
+        "XChartData"
+      ]
+    ],
     "name": "XChartDocument",
     "imports": [],
     "namespace": "com.sun.star.chart",
@@ -24,13 +41,92 @@
       "com.sun.star.frame.XModel"
     ],
     "desc": [
-      "manages the chart document.",
-      "",
-      "**See Also**",
-      "",
-      "    XDiagram"
+      "manages the chart document."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1chart_1_1XChartDocument.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "attachData",
+          "returns": "None",
+          "desc": [
+            "attaches data to the chart.",
+            "",
+            "The given object needs to support interface XChartDataArray.",
+            "",
+            "Since OOo 3.3 if the given object might support interface XComplexDescriptionAccess which allows to set complex hierarchical axis descriptions.",
+            "",
+            "Since OOo 3.4 if the given object might support interface XDateCategories which allows to set date values as x values for category charts.",
+            "",
+            "The given data is copied before it is applied to the chart. So changing xData after this call will have no effect on the chart."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getArea",
+          "returns": "XPropertySet",
+          "desc": [
+            "The area's extent is equal to the document size. If you want to access properties of the background area of the diagram, in which the actual data is represented, you have to change the chart wall which you get from the X3DDisplay."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getData",
+          "returns": "XChartData",
+          "desc": [
+            "The returned object supports interface XChartDataArray which can be used to access the concrete data.",
+            "",
+            "Since OOo 3.3 the returned object also supports interface XComplexDescriptionAccess which can be used to access complex hierarchical axis descriptions.",
+            "",
+            "Since OOo 3.4 the returned object also supports interface XDateCategories."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getDiagram",
+          "returns": "XDiagram",
+          "desc": [],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getLegend",
+          "returns": "XShape",
+          "desc": [],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getSubTitle",
+          "returns": "XShape",
+          "desc": [
+            "Usually the subtitle is smaller than the main title by default. And it is most commonly placed below the main title by default."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getTitle",
+          "returns": "XShape",
+          "desc": [],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "setDiagram",
+          "returns": "None",
+          "desc": [
+            "sets the diagram for the chart document.",
+            "",
+            "Setting a new diagram implicitly disposes the previous diagram."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

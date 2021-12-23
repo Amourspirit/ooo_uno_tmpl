@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:16:34+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:34:28+00:00",
   "name": "XFunctionManager",
   "type": "interface",
   "namespace": "com.sun.star.report.meta",
@@ -22,10 +22,7 @@
     ],
     "from_imports_typing": [],
     "name": "XFunctionManager",
-    "imports": [
-      "com.sun.star.container.XIndexAccess",
-      "com.sun.star.lang.XComponent"
-    ],
+    "imports": [],
     "namespace": "com.sun.star.report.meta",
     "extends": [
       "com.sun.star.lang.XComponent",
@@ -35,6 +32,27 @@
       "identifies a XFunctionManager which allows to retrieve the meta data of all supported functions."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1report_1_1meta_1_1XFunctionManager.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getCategory",
+          "returns": "object",
+          "desc": [
+            "same as getByIndex."
+          ],
+          "raises": "com.sun.star.lang.IndexOutOfBoundsException,",
+          "args": []
+        },
+        {
+          "name": "getFunctionByName",
+          "returns": "object",
+          "desc": [
+            "get the function description by name"
+          ],
+          "raises": "com.sun.star.container.NoSuchElementException",
+          "args": []
+        }
+      ]
+    }
   }
 }

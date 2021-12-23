@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:16:18+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:34:44+00:00",
   "name": "XAsyncJob",
   "type": "interface",
   "namespace": "com.sun.star.task",
@@ -26,13 +26,21 @@
     "desc": [
       "specifies a job which must be executed asynchronously",
       "",
-      "Instead of XJob the implementation of this interface must be aware, that execution can be made real asynchronous (e.g. by using threads). Because the environment wish to have creation and using of threads under control, it's not allowed for a real job implementation to use such mechanism by itself. The outside code decide, if it's possible and how it can be made asynchronous. In some special cases it can be, that asynchronous jobs will be executed synchronously.",
-      "",
-      "**See Also**",
-      "",
-      "    XJob"
+      "Instead of XJob the implementation of this interface must be aware, that execution can be made real asynchronous (e.g. by using threads). Because the environment wish to have creation and using of threads under control, it's not allowed for a real job implementation to use such mechanism by itself. The outside code decide, if it's possible and how it can be made asynchronous. In some special cases it can be, that asynchronous jobs will be executed synchronously."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1task_1_1XAsyncJob.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "executeAsync",
+          "returns": "None",
+          "desc": [
+            "executes the job asynchronously"
+          ],
+          "raises": "com.sun.star.lang.IllegalArgumentException",
+          "args": []
+        }
+      ]
+    }
   }
 }

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:17:48+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:37:09+00:00",
   "name": "XExtendedToolkit",
   "type": "interface",
   "namespace": "com.sun.star.awt",
@@ -16,7 +16,12 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_top_window",
+        "XTopWindow"
+      ]
+    ],
     "name": "XExtendedToolkit",
     "imports": [],
     "namespace": "com.sun.star.awt",
@@ -34,11 +39,127 @@
       "",
       "The last event broadcaster sends events on focus changes of all elements that can have the input focus.",
       "",
-      "**See Also**",
+      "**since**",
       "",
-      "    This interface was only implemented in an intermediate developer release anyway."
+      "    OOo 1.1.2",
+      "",
+      ".. deprecated::",
+      "",
+      "    Interface is deprecated."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XExtendedToolkit.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "addFocusListener",
+          "returns": "None",
+          "desc": [
+            "Add a new listener that is called on com.sun.star.awt.FocusEvent.",
+            "",
+            "Use this focus broadcaster to keep track of the object that currently has the input focus."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "addKeyHandler",
+          "returns": "None",
+          "desc": [
+            "Add a new listener that is called on com.sun.star.awt.KeyEvent.",
+            "",
+            "Every listener is given the opportunity to consume the event, i.e. prevent the not yet called listeners from being called."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "addTopWindowListener",
+          "returns": "None",
+          "desc": [
+            "Add a new listener that is called for events that involve com.sun.star.awt.XTopWindow.",
+            "",
+            "After having obtained the current list of existing top-level windows you can keep this list up-to-date by listening to opened or closed top-level windows. Wait for activations or deactivations of top-level windows to keep track of the currently active frame."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "fireFocusGained",
+          "returns": "None",
+          "desc": [
+            "Broadcasts the a focusGained on all registered focus listeners."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "fireFocusLost",
+          "returns": "None",
+          "desc": [
+            "Broadcasts the a focusGained on all registered focus listeners."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getActiveTopWindow",
+          "returns": "XTopWindow",
+          "desc": [
+            "Return the currently active top-level window, i.e.",
+            "",
+            "which has currently the input focus."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getTopWindow",
+          "returns": "XTopWindow",
+          "desc": [
+            "Return a reference to the specified top-level window.",
+            "",
+            "Note that the number of top-level windows may change between a call to getTopWindowCount() and successive calls to this function."
+          ],
+          "raises": "com.sun.star.lang.IndexOutOfBoundsException",
+          "args": []
+        },
+        {
+          "name": "getTopWindowCount",
+          "returns": "int",
+          "desc": [
+            "This function returns the number of currently existing top-level windows."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "removeFocusListener",
+          "returns": "None",
+          "desc": [
+            "Remove the specified listener from the list of listeners."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "removeKeyHandler",
+          "returns": "None",
+          "desc": [
+            "Remove the specified listener from the list of listeners."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "removeTopWindowListener",
+          "returns": "None",
+          "desc": [
+            "Remove the specified listener from the list of listeners."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

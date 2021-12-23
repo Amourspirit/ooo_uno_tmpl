@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:17:40+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:35:07+00:00",
   "name": "XBridgeSupplier",
   "type": "interface",
   "namespace": "com.sun.star.bridge",
@@ -32,11 +32,23 @@
       "",
       "Any implementation can supply its own bridges to other object models by implementing this interface and returning the bridge when the method is called with itself as the first parameter.",
       "",
-      "**See Also**",
+      ".. deprecated::",
       "",
-      "    The any carries normal UNO types, which can be any base type, struct, sequence, enum, or interface."
+      "    Interface is deprecated."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1bridge_1_1XBridgeSupplier.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "createBridge",
+          "returns": "object",
+          "desc": [
+            "creates a bridge to provide an object of one object model with another."
+          ],
+          "raises": "com.sun.star.lang.IllegalArgumentException",
+          "args": []
+        }
+      ]
+    }
   }
 }

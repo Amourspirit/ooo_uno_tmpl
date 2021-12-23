@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:20:19+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:35:12+00:00",
   "name": "XTransitionFactory",
   "type": "interface",
   "namespace": "com.sun.star.presentation",
@@ -12,45 +12,48 @@
   "data": {
     "from_imports": [
       [
-        "......x_slide_show_view",
-        "XSlideShowView"
-      ],
-      [
         "..uno.x_interface",
         "XInterface"
-      ],
-      [
-        "......x_transition",
-        "XTransition"
-      ],
-      [
-        "......x_transition_factory",
-        "XTransitionFactory"
       ]
     ],
     "from_imports_typing": [],
     "name": "XTransitionFactory",
-    "imports": [
-      "XTransitionFactory",
-      "XTransition",
-      "XSlideShowView"
-    ],
+    "imports": [],
     "namespace": "com.sun.star.presentation",
     "extends": [
-      "com.sun.star.uno.XInterface",
-      "XTransition",
-      "XSlideShowView"
+      "com.sun.star.uno.XInterface"
     ],
     "desc": [
       "TransitionFactory interface to request optional custom Transition instances for slide show transitions.",
       "",
       "This interface provides the necessary methods to query and create optional transition effects for a SlideShow",
       "",
-      "**See Also**",
+      "**since**",
       "",
       "    OOo 2.4"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1presentation_1_1XTransitionFactory.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "createTransition",
+          "returns": "object",
+          "desc": [
+            "Actually create a transition for the given transition id."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "hasTransition",
+          "returns": "bool",
+          "desc": [
+            "Checks whether this instance provides an implementation for given transition id."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

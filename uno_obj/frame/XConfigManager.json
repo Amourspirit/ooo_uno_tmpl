@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:21:42+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:43:54+00:00",
   "name": "XConfigManager",
   "type": "interface",
   "namespace": "com.sun.star.frame",
@@ -10,14 +10,69 @@
   },
   "writer_args": {},
   "data": {
-    "from_imports": [],
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface"
+      ]
+    ],
     "from_imports_typing": [],
     "name": "XConfigManager",
     "imports": [],
     "namespace": "com.sun.star.frame",
-    "extends": [],
-    "desc": [],
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "",
+      ".. deprecated::",
+      "",
+      "    Interface is deprecated."
+    ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1frame_1_1XConfigManager.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "addPropertyChangeListener",
+          "returns": "None",
+          "desc": [
+            "add a listener to notify changes on well known variables inside the real implementation",
+            "",
+            "Listener can update his text values by calling XConfigManager.substituteVariables() again. If KeyName specifies a group of keys, the listener gets one notify for each subkey."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "flush",
+          "returns": "None",
+          "desc": [
+            "was designed for additional functionality for interface com.sun.star.registry.XSimpleRegistry and make no sense without that"
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "removePropertyChangeListener",
+          "returns": "None",
+          "desc": [
+            "remove a registered listener"
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "substituteVariables",
+          "returns": "str",
+          "desc": [
+            "substitute variables (place holder) inside given parameter Text",
+            "",
+            "The value of Text is NOT changed."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:17:14+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:40:34+00:00",
   "name": "XInterfaceAttributeTypeDescription2",
   "type": "interface",
   "namespace": "com.sun.star.reflection",
@@ -12,27 +12,62 @@
   "data": {
     "from_imports": [
       [
-        "......x_interface_attribute_type_description",
+        ".x_interface_attribute_type_description",
         "XInterfaceAttributeTypeDescription"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_compound_type_description",
+        "XCompoundTypeDescription"
+      ]
+    ],
     "name": "XInterfaceAttributeTypeDescription2",
     "imports": [],
     "namespace": "com.sun.star.reflection",
     "extends": [
-      "XInterfaceAttributeTypeDescription"
+      "com.sun.star.reflection.XInterfaceAttributeTypeDescription"
     ],
     "desc": [
       "Reflects an interface attribute, supporting extended attributes that are bound or raise exceptions.",
       "",
       "This type supersedes XInterfaceAttributeTypeDescription, which does not support extended attributes.",
       "",
-      "**See Also**",
+      "**since**",
       "",
       "    OOo 2.0"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1reflection_1_1XInterfaceAttributeTypeDescription2.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getGetExceptions",
+          "returns": "'typing.List[XCompoundTypeDescription]'",
+          "desc": [
+            "Returns the exceptions that can be raised by the attribute's getter."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getSetExceptions",
+          "returns": "'typing.List[XCompoundTypeDescription]'",
+          "desc": [
+            "Returns the exceptions that can be raised by the attribute's setter."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "isBound",
+          "returns": "bool",
+          "desc": [
+            "Returns whether this object reflects a bound attribute."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

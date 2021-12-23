@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:17:19+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:34:50+00:00",
   "name": "XSSOManager",
   "type": "interface",
   "namespace": "com.sun.star.auth",
@@ -26,11 +26,41 @@
     "desc": [
       "supports the creation of security contexts for both the initiator/source side and the acceptor/target side.",
       "",
-      "**See Also**",
+      "**since**",
       "",
       "    OOo 1.1.2"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1auth_1_1XSSOManager.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "createAcceptorContext",
+          "returns": "object",
+          "desc": [
+            "creates an acceptor side security context."
+          ],
+          "raises": "InvalidArgumentException,",
+          "args": []
+        },
+        {
+          "name": "createInitiatorContext",
+          "returns": "object",
+          "desc": [
+            "creates an initiator side security context."
+          ],
+          "raises": "InvalidArgumentException,",
+          "args": []
+        },
+        {
+          "name": "getMechanism",
+          "returns": "str",
+          "desc": [
+            "retrieves the mechanism name of all security contexts created using this manager."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:19:51+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:42:52+00:00",
   "name": "XUIConfigurationManager",
   "type": "interface",
   "namespace": "com.sun.star.ui",
@@ -16,7 +16,28 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..container.x_index_container",
+        "XIndexContainer"
+      ],
+      [
+        ".x_accelerator_configuration",
+        "XAcceleratorConfiguration"
+      ],
+      [
+        "..beans.property_value",
+        "PropertyValue"
+      ],
+      [
+        "..uno.x_interface",
+        "XInterface"
+      ],
+      [
+        "..container.x_index_access",
+        "XIndexAccess"
+      ]
+    ],
     "name": "XUIConfigurationManager",
     "imports": [],
     "namespace": "com.sun.star.ui",
@@ -26,11 +47,129 @@
     "desc": [
       "specifies a user interface configuration manager interface which controls the structure of all customizable user interface elements.",
       "",
-      "**See Also**",
+      "**since**",
       "",
       "    OOo 2.0"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1ui_1_1XUIConfigurationManager.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "createSettings",
+          "returns": "XIndexContainer",
+          "desc": [
+            "creates an empty settings data container."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getEventsManager",
+          "returns": "XInterface",
+          "desc": [
+            "retrieves the events manager from the user interface configuration manager.",
+            "",
+            "Every user interface configuration manager has one events manager instance which controls the mapping of events to script URLs of a module or document."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getImageManager",
+          "returns": "XInterface",
+          "desc": [
+            "retrieves the image manager from the user interface configuration manager.",
+            "",
+            "Every user interface configuration manager has one image manager instance which controls all images of a module or document."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getSettings",
+          "returns": "XIndexAccess",
+          "desc": [
+            "retrieves the settings of a user interface element."
+          ],
+          "raises": "com.sun.star.container.NoSuchElementException,",
+          "args": []
+        },
+        {
+          "name": "getShortCutManager",
+          "returns": "XAcceleratorConfiguration",
+          "desc": [
+            "retrieves the keyboard short cut manager from the user interface configuration manager.",
+            "",
+            "Every user interface configuration manager has one keyboard short cut manager instance which controls all short cuts of a module or document."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getUIElementsInfo",
+          "returns": "'typing.List[typing.List[PropertyValue]]'",
+          "desc": [
+            "retrieves information about all user interface elements within the user interface configuration manager.",
+            "",
+            "The following com.sun.star.beans.PropertyValue entries are defined inside the sequence for every user interface element."
+          ],
+          "raises": "com.sun.star.lang.IllegalArgumentException",
+          "args": []
+        },
+        {
+          "name": "hasSettings",
+          "returns": "bool",
+          "desc": [
+            "determines if the settings of a user interface element is part the user interface configuration manager."
+          ],
+          "raises": "com.sun.star.lang.IllegalArgumentException",
+          "args": []
+        },
+        {
+          "name": "insertSettings",
+          "returns": "None",
+          "desc": [
+            "inserts the settings of a new user interface element.",
+            "",
+            "If the settings data is already present a com.sun.star.container.ElementExistException is thrown. If the NewResourceURL is not valid or describes an unknown type a com.sun.star.lang.IllegalArgumentException is thrown. If the configuration manager is read-only a com.sun.star.lang.IllegalAccessException is thrown."
+          ],
+          "raises": "com.sun.star.container.ElementExistException,",
+          "args": []
+        },
+        {
+          "name": "removeSettings",
+          "returns": "None",
+          "desc": [
+            "removes the settings of an existing user interface element.",
+            "",
+            "If the settings data cannot be found a com.sun.star.container.NoSuchElementException is thrown. If the ResourceURL is not valid or describes an unknown type a com.sun.star.lang.IllegalArgumentException is thrown. If the configuration manager is read-only a com.sun.star.lang.IllegalAccessException is thrown."
+          ],
+          "raises": "com.sun.star.container.NoSuchElementException,",
+          "args": []
+        },
+        {
+          "name": "replaceSettings",
+          "returns": "None",
+          "desc": [
+            "replaces the settings of a user interface element with new settings.",
+            "",
+            "If the settings data cannot be found a com.sun.star.container.NoSuchElementException is thrown. If the ResourceURL is not valid or describes an unknown type a com.sun.star.lang.IllegalArgumentException is thrown. If the configuration manager is read-only a com.sun.star.lang.IllegalAccessException is thrown."
+          ],
+          "raises": "com.sun.star.container.NoSuchElementException,",
+          "args": []
+        },
+        {
+          "name": "reset",
+          "returns": "None",
+          "desc": [
+            "resets the configuration manager to the default user interface configuration data.",
+            "",
+            "This means that all user interface configuration data of the instance will be removed. A module based user interface configuration manager removes user defined elements, but set all other elements back to default. It is not possible to remove default elements from a module user interface configuration manager."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:18:31+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:42:40+00:00",
   "name": "XCertificateCreator",
   "type": "interface",
   "namespace": "com.sun.star.xml.crypto",
@@ -16,7 +16,12 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "...security.x_certificate",
+        "XCertificate"
+      ]
+    ],
     "name": "XCertificateCreator",
     "imports": [],
     "namespace": "com.sun.star.xml.crypto",
@@ -26,11 +31,32 @@
     "desc": [
       "Interface for creating and adding certificates.",
       "",
-      "**See Also**",
+      "**since**",
       "",
       "    LibreOffice 6.2"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1xml_1_1crypto_1_1XCertificateCreator.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "addDERCertificateToTheDatabase",
+          "returns": "XCertificate",
+          "desc": [
+            "Adds a certificate to the certificate database with the trust provided by the trust string."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "createDERCertificateWithPrivateKey",
+          "returns": "XCertificate",
+          "desc": [
+            "Create certificate from raw DER encoded certificate and associate the private key with the certificate."
+          ],
+          "raises": "com.sun.star.uno.SecurityException",
+          "args": []
+        }
+      ]
+    }
   }
 }

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:17:19+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:34:50+00:00",
   "name": "XSSOContext",
   "type": "interface",
   "namespace": "com.sun.star.auth",
@@ -26,11 +26,52 @@
     "desc": [
       "Base SSO security context representation.",
       "",
-      "**See Also**",
+      "**since**",
       "",
       "    OOo 1.1.2"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1auth_1_1XSSOContext.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getMechanism",
+          "returns": "str",
+          "desc": [
+            "retrieves the mechanism associated with the context."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getMutual",
+          "returns": "bool",
+          "desc": [
+            "retrieves whether or not the context supports mutual authentication"
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getSource",
+          "returns": "str",
+          "desc": [
+            "retrieves the principal name of the source/initiator of the context.",
+            "",
+            "In the case of an acceptor side security context, the source principal name is available only after the initiator has been authenticated."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getTarget",
+          "returns": "str",
+          "desc": [
+            "retrieves the principal name of the target/acceptor of the context."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:16:52+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:39:12+00:00",
   "name": "XDictionary",
   "type": "interface",
   "namespace": "com.sun.star.linguistic2",
@@ -16,7 +16,20 @@
         "XNamed"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..lang.locale",
+        "Locale"
+      ],
+      [
+        ".x_dictionary_entry",
+        "XDictionaryEntry"
+      ],
+      [
+        ".dictionary_type",
+        "DictionaryType"
+      ]
+    ],
     "name": "XDictionary",
     "imports": [],
     "namespace": "com.sun.star.linguistic2",
@@ -26,13 +39,149 @@
     "desc": [
       "This interfaces enables the object to access personal dictionaries.",
       "",
-      "Personal dictionaries are used to supply additional information for spell checking and hyphenation (see com.sun.star.linguistic2.XDictionaryEntry). Only active dictionaries with an appropriate language are used for that purpose. The entries of an active, positive dictionary are words that are required to be recognized as correct during the spell checking process. Additionally, they will be used for hyphenation. Entries of a negative dictionary are required to be recognized as negative words, for example, words that should not be used, during SPELLCHECK. An entry in a negative dictionary may supply a proposal for a word to be used instead of the one being used.",
-      "",
-      "**See Also**",
-      "",
-      "    com.sun.star.linguistic2.XDictionaryEvent"
+      "Personal dictionaries are used to supply additional information for spell checking and hyphenation (see com.sun.star.linguistic2.XDictionaryEntry). Only active dictionaries with an appropriate language are used for that purpose. The entries of an active, positive dictionary are words that are required to be recognized as correct during the spell checking process. Additionally, they will be used for hyphenation. Entries of a negative dictionary are required to be recognized as negative words, for example, words that should not be used, during SPELLCHECK. An entry in a negative dictionary may supply a proposal for a word to be used instead of the one being used."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1linguistic2_1_1XDictionary.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "add",
+          "returns": "bool",
+          "desc": [
+            "is used to make an entry in the dictionary.",
+            "",
+            "If an entry already exists, the dictionary remains unchanged and FALSE will be returned.",
+            "",
+            "In positive dictionaries only positive entries can be made, and in negative ones only negative entries."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "addDictionaryEventListener",
+          "returns": "bool",
+          "desc": [
+            "adds an entry to the list of dictionary event listeners.",
+            "",
+            "On dictionary events, each entry in the listener list will be notified via a call to com.sun.star.linguistic2.XDictionaryEventListener.processDictionaryEvent()."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "addEntry",
+          "returns": "bool",
+          "desc": [
+            "is used to add an entry to the dictionary.",
+            "",
+            "If an entry already exists, the dictionary remains unchanged and FALSE will be returned.",
+            "",
+            "In positive dictionaries only positive entries can be made, and in negative ones only negative entries."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "clear",
+          "returns": "None",
+          "desc": [
+            "removes all entries from the dictionary."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getCount",
+          "returns": "int",
+          "desc": [],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getDictionaryType",
+          "returns": "DictionaryType",
+          "desc": [
+            "returns the type of the dictionary."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getEntries",
+          "returns": "'typing.List[XDictionaryEntry]'",
+          "desc": [
+            "This function should no longer be used since with the expansion of the maximum number of allowed entries the result may become unreasonable large!"
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getEntry",
+          "returns": "XDictionaryEntry",
+          "desc": [
+            "searches for an entry that matches the given word."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getLocale",
+          "returns": "Locale",
+          "desc": [],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "isActive",
+          "returns": "bool",
+          "desc": [],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "isFull",
+          "returns": "bool",
+          "desc": [],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "remove",
+          "returns": "bool",
+          "desc": [
+            "removes an entry from the dictionary."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "removeDictionaryEventListener",
+          "returns": "bool",
+          "desc": [
+            "removes an entry from the list of dictionary event listeners."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "setActive",
+          "returns": "None",
+          "desc": [
+            "specifies whether the dictionary should be used or not ."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "setLocale",
+          "returns": "None",
+          "desc": [
+            "is used to set the language of the dictionary."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

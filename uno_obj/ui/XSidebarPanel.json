@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:19:50+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:42:50+00:00",
   "name": "XSidebarPanel",
   "type": "interface",
   "namespace": "com.sun.star.ui",
@@ -20,6 +20,33 @@
       "Optional interface of sidebar panels."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1ui_1_1XSidebarPanel.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getHeightForWidth",
+          "returns": "object",
+          "desc": [
+            "For a given width of the container the layouter asks every ui element for its optimal height.",
+            "",
+            "The height to which a ui element is set may differ from the returned value.",
+            "",
+            "The height is set via the XWindow interface."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getMinimalWidth",
+          "returns": "int",
+          "desc": [
+            "Minimal possible width of this panel in pixels.",
+            "",
+            "If this value is smaller than the maximum allowed size of the Sidebar (see config option 'org.openoffice.Office.UI.Sidebar.General.MaximumWidth'), the config option will be ignored and the new maximum Sidebar width will be getMinimalWidth() + 100px."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:20:14+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:40:29+00:00",
   "name": "XFeatureInvalidation",
   "type": "interface",
   "namespace": "com.sun.star.form.runtime",
@@ -19,11 +19,36 @@
     "desc": [
       "implements a callback for a XFormOperations instance, which is called when the state of one or more FormFeatures might have changed.",
       "",
-      "**See Also**",
+      "**since**",
       "",
-      "    XFormOperations"
+      "    OOo 2.2"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1form_1_1runtime_1_1XFeatureInvalidation.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "invalidateAllFeatures",
+          "returns": "None",
+          "desc": [
+            "invalidates all features",
+            "",
+            "This method is used of it cannot be exactly and reliably determined which features might actually have changed their state. In this case, the callee should assume all features it is interested in must be required."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "invalidateFeatures",
+          "returns": "None",
+          "desc": [
+            "invalidates the given FormFeatures",
+            "",
+            "Invalidation means that any user interface representation (such as toolbox buttons), or any dispatches associated with the features in question are potentially out-of-date, and need to be updated."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

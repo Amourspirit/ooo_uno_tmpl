@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:20:07+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:38:47+00:00",
   "name": "XLoadable",
   "type": "interface",
   "namespace": "com.sun.star.form",
@@ -26,13 +26,70 @@
     "desc": [
       "provides functionality to implement objects which may be loaded.",
       "",
-      "The object is typically implemented by high-level objects which can connect to a data source.",
-      "",
-      "**See Also**",
-      "",
-      "    XLoadListener"
+      "The object is typically implemented by high-level objects which can connect to a data source."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1form_1_1XLoadable.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "addLoadListener",
+          "returns": "None",
+          "desc": [
+            "adds the specified listener to receive load-related events"
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "isLoaded",
+          "returns": "bool",
+          "desc": [
+            "returns if the object is in loaded state."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "load",
+          "returns": "None",
+          "desc": [
+            "loads the data.",
+            "",
+            "If the data is already loaded (->isLoaded), then the method returns silently. In this case, you should use ->reload."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "reload",
+          "returns": "None",
+          "desc": [
+            "does a smart refresh of the object.",
+            "",
+            "The final state will be the same as if unload and load were called, but reload is the more efficient way to do the same. If the object isn't loaded, nothing happens."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "removeLoadListener",
+          "returns": "None",
+          "desc": [
+            "removes the specified listener."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "unload",
+          "returns": "None",
+          "desc": [
+            "unloads the data."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

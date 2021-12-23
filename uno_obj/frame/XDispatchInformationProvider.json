@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:21:44+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:43:58+00:00",
   "name": "XDispatchInformationProvider",
   "type": "interface",
   "namespace": "com.sun.star.frame",
@@ -16,7 +16,12 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".dispatch_information",
+        "DispatchInformation"
+      ]
+    ],
     "name": "XDispatchInformationProvider",
     "imports": [],
     "namespace": "com.sun.star.frame",
@@ -28,11 +33,32 @@
       "",
       "This interface can be used to retrieve additional information about supported commands. This interface is normally used by configuration implementations to retrieve all supported commands. A dispatch information provider is normally supported by a Frame service.",
       "",
-      "**See Also**",
+      "**since**",
       "",
-      "    Frame"
+      "    OOo 2.0"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1frame_1_1XDispatchInformationProvider.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getConfigurableDispatchInformation",
+          "returns": "'typing.List[DispatchInformation]'",
+          "desc": [
+            "returns additional information about supported commands of a given command group."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getSupportedCommandGroups",
+          "returns": "typing.List[int]",
+          "desc": [
+            "returns all supported command groups."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

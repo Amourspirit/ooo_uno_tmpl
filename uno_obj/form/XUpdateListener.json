@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:20:09+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:38:50+00:00",
   "name": "XUpdateListener",
   "type": "interface",
   "namespace": "com.sun.star.form",
@@ -26,13 +26,32 @@
     "desc": [
       "used to listen on objects which allow updating their data.",
       "",
-      "In addition to just get notified when a data update happened, the listener has a chance to veto updates before they happen.",
-      "",
-      "**See Also**",
-      "",
-      "    XUpdateBroadcaster"
+      "In addition to just get notified when a data update happened, the listener has a chance to veto updates before they happen."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1form_1_1XUpdateListener.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "approveUpdate",
+          "returns": "bool",
+          "desc": [
+            "is invoked to check the current data.",
+            "",
+            "For a given update process, if one of the XUpdateListeners vetoes the change, the update is canceled, and no further notification happens."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "updated",
+          "returns": "None",
+          "desc": [
+            "is invoked when an object has finished processing the updates and the data has been successfully written."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

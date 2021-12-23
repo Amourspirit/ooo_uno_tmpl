@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:18:31+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:42:40+00:00",
   "name": "XCipherContext",
   "type": "interface",
   "namespace": "com.sun.star.xml.crypto",
@@ -16,7 +16,12 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".byte",
+        "byte"
+      ]
+    ],
     "name": "XCipherContext",
     "imports": [],
     "namespace": "com.sun.star.xml.crypto",
@@ -28,11 +33,36 @@
       "",
       "The algorithm as well as encryption data are specified on object creation.",
       "",
-      "**See Also**",
+      "**since**",
       "",
-      "    XCipherContextSupplier"
+      "    OOo 3.4"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1xml_1_1crypto_1_1XCipherContext.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "convertWithCipherContext",
+          "returns": "'typing.List[byte]'",
+          "desc": [
+            "encrypts/decrypts the data using the cipher.",
+            "",
+            "Please have in mind, the cipher object state might depend from the already encrypted/decrypted data ( it depends from the used algorithm ).",
+            "",
+            "Whether the object does encryption or decryption is specified by creation of the object."
+          ],
+          "raises": "com.sun.star.lang.IllegalArgumentException,",
+          "args": []
+        },
+        {
+          "name": "finalizeCipherContextAndDispose",
+          "returns": "'typing.List[byte]'",
+          "desc": [
+            "finalizes cipher and disposes context."
+          ],
+          "raises": "com.sun.star.lang.DisposedException",
+          "args": []
+        }
+      ]
+    }
   }
 }

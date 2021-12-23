@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:19:49+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:42:48+00:00",
   "name": "XImageManager",
   "type": "interface",
   "namespace": "com.sun.star.ui",
@@ -16,26 +16,26 @@
         "XInitialization"
       ],
       [
-        ".xui_configuration",
-        "XUIConfiguration"
+        "..lang.x_component",
+        "XComponent"
       ],
       [
         ".xui_configuration_persistence",
         "XUIConfigurationPersistence"
       ],
       [
-        "..lang.x_component",
-        "XComponent"
+        ".xui_configuration",
+        "XUIConfiguration"
       ]
     ],
-    "from_imports_typing": [],
-    "name": "XImageManager",
-    "imports": [
-      "com.sun.star.lang.XComponent",
-      "com.sun.star.lang.XInitialization",
-      "com.sun.star.ui.XUIConfigurationPersistence",
-      "com.sun.star.ui.XUIConfiguration"
+    "from_imports_typing": [
+      [
+        "..graphic.x_graphic",
+        "XGraphic"
+      ]
     ],
+    "name": "XImageManager",
+    "imports": [],
     "namespace": "com.sun.star.ui",
     "extends": [
       "com.sun.star.ui.XUIConfigurationPersistence",
@@ -49,6 +49,80 @@
       "An image manager controls a number of image sets which are specified by an ImageType."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1ui_1_1XImageManager.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getAllImageNames",
+          "returns": "typing.List[str]",
+          "desc": [
+            "retrieves the list of command URLs which have images associated."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getImages",
+          "returns": "'typing.List[XGraphic]'",
+          "desc": [
+            "retrieves the associated images of command URLs."
+          ],
+          "raises": "com.sun.star.lang.IllegalArgumentException",
+          "args": []
+        },
+        {
+          "name": "hasImage",
+          "returns": "bool",
+          "desc": [
+            "determines if a command URL has an associated image."
+          ],
+          "raises": "com.sun.star.lang.IllegalArgumentException",
+          "args": []
+        },
+        {
+          "name": "insertImages",
+          "returns": "None",
+          "desc": [
+            "inserts new image/command associations to an image manager.",
+            "",
+            "If an association is already present it is replaced. If aCommandURLSequence contains an invalid command URL a com.sun.star.lang.IllegalArgumentException is thrown. If the configuration manager is read-only a com.sun.star.lang.IllegalAccessException is thrown."
+          ],
+          "raises": "com.sun.star.container.ElementExistException,",
+          "args": []
+        },
+        {
+          "name": "removeImages",
+          "returns": "None",
+          "desc": [
+            "removes associated images to a command URL.",
+            "",
+            "If the aCommandURLSequence contains an invalid command URL a com.sun.star.lang.IllegalArgumentException is thrown. If the image manager is associated with a read-only configuration manager a com.sun.star.lang.IllegalAccessException is thrown."
+          ],
+          "raises": "com.sun.star.lang.IllegalArgumentException,",
+          "args": []
+        },
+        {
+          "name": "replaceImages",
+          "returns": "None",
+          "desc": [
+            "replaces the associated images of command URLs.",
+            "",
+            "If a command URL cannot be found the replace call will be omitted. If aCommandURLSequence contains an invalid command URL a com.sun.star.lang.IllegalArgumentException is thrown. If the image manager is associated with a read-only configuration manager a com.sun.star.lang.IllegalAccessException is thrown."
+          ],
+          "raises": "com.sun.star.lang.IllegalArgumentException,",
+          "args": []
+        },
+        {
+          "name": "reset",
+          "returns": "None",
+          "desc": [
+            "resets the image manager to default data.",
+            "",
+            "This means that all user images of the instance will be removed."
+          ],
+          "raises": "com.sun.star.lang.IllegalArgumentException,",
+          "args": []
+        }
+      ]
+    }
   }
 }

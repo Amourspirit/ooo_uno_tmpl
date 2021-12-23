@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:17:19+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:34:50+00:00",
   "name": "XSSOAcceptorContext",
   "type": "interface",
   "namespace": "com.sun.star.auth",
@@ -16,7 +16,12 @@
         "XSSOContext"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".byte",
+        "byte"
+      ]
+    ],
     "name": "XSSOAcceptorContext",
     "imports": [],
     "namespace": "com.sun.star.auth",
@@ -28,11 +33,25 @@
       "",
       "This context may be used to authenticate a Single Sign-on initiator based on a security token sent by the initiator and to generate a token to be sent back to the initiator so that it can authenticate the acceptor.",
       "",
-      "**See Also**",
+      "**since**",
       "",
       "    OOo 1.1.2"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1auth_1_1XSSOAcceptorContext.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "accept",
+          "returns": "'typing.List[byte]'",
+          "desc": [
+            "accepts/authenticates an SSO token sent from the context initiator side.",
+            "",
+            "accept() should be called only once. Subsequent calls produce undefined results."
+          ],
+          "raises": "InvalidArgumentException,",
+          "args": []
+        }
+      ]
+    }
   }
 }

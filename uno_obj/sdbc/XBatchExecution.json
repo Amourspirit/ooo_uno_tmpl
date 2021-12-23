@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:19:39+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:39:55+00:00",
   "name": "XBatchExecution",
   "type": "interface",
   "namespace": "com.sun.star.sdbc",
@@ -27,6 +27,36 @@
       "is used for collecting and executing a set of SQL statements."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1sdbc_1_1XBatchExecution.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "addBatch",
+          "returns": "None",
+          "desc": [
+            "adds a SQL command to the current batch of commands for the statement object."
+          ],
+          "raises": "SQLException",
+          "args": []
+        },
+        {
+          "name": "clearBatch",
+          "returns": "None",
+          "desc": [
+            "makes the set of commands in the current batch empty."
+          ],
+          "raises": "SQLException",
+          "args": []
+        },
+        {
+          "name": "executeBatch",
+          "returns": "typing.List[int]",
+          "desc": [
+            "submits a batch of commands to the database for execution."
+          ],
+          "raises": "SQLException",
+          "args": []
+        }
+      ]
+    }
   }
 }

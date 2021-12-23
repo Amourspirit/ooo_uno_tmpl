@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:19:37+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:43:00+00:00",
   "name": "XAnimationListener",
   "type": "interface",
   "namespace": "com.sun.star.animations",
@@ -26,11 +26,53 @@
     "desc": [
       "makes it possible to register listeners, which are called whenever an animation event occurs.",
       "",
-      "**See Also**",
+      "**since**",
       "",
       "    OOo 3.0"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1animations_1_1XAnimationListener.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "beginEvent",
+          "returns": "None",
+          "desc": [
+            "This event is raised when the element local timeline begins to play.",
+            "",
+            "It will be raised each time the element begins the active duration (i.e. when it restarts, but not when it repeats).",
+            "",
+            "It may be raised both in the course of normal (i.e. scheduled or interactive) timeline play, as well as in the case that the element was begun with an interface method."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "endEvent",
+          "returns": "None",
+          "desc": [
+            "This event is raised at the active end of the element.",
+            "",
+            "Note that this event is not raised at the simple end of each repeat.",
+            "",
+            "This event may be raised both in the course of normal (i.e. scheduled or interactive) timeline play, as well as in the case that the element was ended with a DOM method."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "repeat",
+          "returns": "None",
+          "desc": [
+            "This event is raised when the element local timeline repeats.",
+            "",
+            "It will be raised each time the element repeats, after the first iteration.",
+            "",
+            "Associated with the repeat event is an integer that indicates which repeat iteration is beginning."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

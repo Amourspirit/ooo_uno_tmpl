@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:20:30+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:40:46+00:00",
   "name": "XInvocation2",
   "type": "interface",
   "namespace": "com.sun.star.script",
@@ -16,7 +16,12 @@
         "XInvocation"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".invocation_info",
+        "InvocationInfo"
+      ]
+    ],
     "name": "XInvocation2",
     "imports": [],
     "namespace": "com.sun.star.script",
@@ -27,6 +32,36 @@
       "Extension of XInvocation to provide additional information about the methods and properties that are accessible via XInvocation."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1script_1_1XInvocation2.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getInfo",
+          "returns": "'typing.List[InvocationInfo]'",
+          "desc": [
+            "returns information items for all methods and properties accessible via XInvocation."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getInfoForName",
+          "returns": "object",
+          "desc": [
+            "returns information item for the method or property defined by aName"
+          ],
+          "raises": "com.sun.star.lang.IllegalArgumentException",
+          "args": []
+        },
+        {
+          "name": "getMemberNames",
+          "returns": "typing.List[str]",
+          "desc": [
+            "returns the names of all methods and properties accessible via XInvocation."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

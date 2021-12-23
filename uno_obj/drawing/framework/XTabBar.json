@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:21:38+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:34:37+00:00",
   "name": "XTabBar",
   "type": "interface",
   "namespace": "com.sun.star.drawing.framework",
@@ -11,7 +11,12 @@
   "writer_args": {},
   "data": {
     "from_imports": [],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".tab_bar_button",
+        "TabBarButton"
+      ]
+    ],
     "name": "XTabBar",
     "imports": [],
     "namespace": "com.sun.star.drawing.framework",
@@ -25,13 +30,61 @@
       "",
       "Tab bar buttons are identified by their resource id. Note that because the resource anchors are all the same (the tab bar), it is the resource URL that really identifies a button. There can not be two buttons with the same resource id.",
       "",
-      "A better place for this interface (in an extended version) would be com.sun.star.awt",
-      "",
-      "**See Also**",
-      "",
-      "    TabBarButton"
+      "A better place for this interface (in an extended version) would be com.sun.star.awt"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1drawing_1_1framework_1_1XTabBar.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "addTabBarButtonAfter",
+          "returns": "None",
+          "desc": [
+            "Add a tab bar button to the right of another one."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "appendTabBarButton",
+          "returns": "None",
+          "desc": [
+            "Add a tab bar button at the right most position."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getTabBarButtons",
+          "returns": "'typing.List[TabBarButton]'",
+          "desc": [
+            "Return a sequence of all the tab bar buttons.",
+            "",
+            "Their order reflects the visible order in the tab bar.",
+            "",
+            "This method can be used when addTabBarButtonAfter() does not provide enough control as to where to insert a new button."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "hasTabBarButton",
+          "returns": "bool",
+          "desc": [
+            "Test whether the specified button exists in the tab bar."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "removeTabBarButton",
+          "returns": "None",
+          "desc": [
+            "Remove a tab bar button."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

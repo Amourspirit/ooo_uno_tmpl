@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:20:26+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:39:53+00:00",
   "name": "XMapping2D",
   "type": "interface",
   "namespace": "com.sun.star.geometry",
@@ -28,11 +28,34 @@
       "",
       "This interface provides methods to define an arbitrary bijective mapping from R^2 to R^2, i.e. from the two-dimensional space of real numbers onto itself, as is representable by the double floating point type. The mapping must be bijective, i.e. map a pair of real numbers to exactly one other pair of real numbers and vice versa, to facilitate a working inverse. Bijectiveness also implies completeness, i.e. for every pair of real numbers there must be another pair that is mapped upon them.",
       "",
-      "**See Also**",
+      "**since**",
       "",
       "    OOo 2.0"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1geometry_1_1XMapping2D.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "map",
+          "returns": "object",
+          "desc": [
+            "Forward 2D mapping function."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "mapInverse",
+          "returns": "object",
+          "desc": [
+            "Inverse 2D mapping function.",
+            "",
+            "The following invariant must hold: map(mapInverse(p))=p. This effectively rules out non-bijective mappings."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

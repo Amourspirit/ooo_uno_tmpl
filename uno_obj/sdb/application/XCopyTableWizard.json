@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:16:48+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:41:04+00:00",
   "name": "XCopyTableWizard",
   "type": "interface",
   "namespace": "com.sun.star.sdb.application",
@@ -30,13 +30,52 @@
       "",
       "The copy table wizard described by this interfaces cares for those, and other, settings.",
       "",
-      "**See Also**",
+      "**since**",
       "",
       "    OOo 2.4"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1sdb_1_1application_1_1XCopyTableWizard.html",
     "items": {
+      "methods": [
+        {
+          "name": "addCopyTableListener",
+          "returns": "None",
+          "desc": [
+            "adds a listener which is to be notified of progress in the copy operation"
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "removeCopyTableListener",
+          "returns": "None",
+          "desc": [
+            "removes a listener"
+          ],
+          "raises": "",
+          "args": []
+        }
+      ],
       "properties": [
+        {
+          "name": "CreatePrimaryKey",
+          "returns": "object",
+          "desc": [
+            "specifies that a new primary key is to be created in the target database",
+            "",
+            "At initialization time, you can specify the initial settings for the primary key in the UI.",
+            "",
+            "You cannot use this attribute to determine the primary key, possibly created by the wizard, after it finished. The reason is that during the wizard run, the user can define an arbitrarily complex primary key, e.g. including multiple columns, which cannot be represented in this simple attribute anymore.",
+            "",
+            "This attribute is ignored if Operation is CopyTableOperation.AppendData.",
+            "",
+            "Changing this attribute while the dialog is running is not supported, the result of such an attempt is undefined.",
+            "",
+            "When a primary key is to be created by the wizard, it will be an auto-increment column, if possible."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
         {
           "name": "DestinationTableName",
           "returns": "str",
@@ -49,8 +88,8 @@
             "",
             "Changing this attribute while the dialog is running is not supported, the result of such an attempt is undefined."
           ],
-          "raises_get": [],
-          "raises_set": []
+          "raises_get": "",
+          "raises_set": ""
         },
         {
           "name": "Operation",
@@ -66,10 +105,8 @@
             "",
             "Changing this attribute while the dialog is running is not supported, the result of such an attempt is undefined."
           ],
-          "raises_get": [],
-          "raises_set": [
-            "com.sun.star.lang.IllegalArgumentException"
-          ]
+          "raises_get": "",
+          "raises_set": ""
         },
         {
           "name": "UseHeaderLineAsColumnNames",
@@ -79,8 +116,8 @@
             "",
             "This attribute is ignored when the source defines the column names which isn't the case when only a part of a table should be copied e.g. in the RTF format or in the HTML format."
           ],
-          "raises_get": [],
-          "raises_set": []
+          "raises_get": "",
+          "raises_set": ""
         }
       ]
     }

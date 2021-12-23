@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:17:55+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:37:18+00:00",
   "name": "XPrinterPropertySet",
   "type": "interface",
   "namespace": "com.sun.star.awt",
@@ -16,7 +16,12 @@
         "XPropertySet"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".byte",
+        "byte"
+      ]
+    ],
     "name": "XPrinterPropertySet",
     "imports": [],
     "namespace": "com.sun.star.awt",
@@ -26,13 +31,61 @@
     "desc": [
       "represents an extended property set for printer properties.",
       "",
-      "All properties are vetoable properties. If you change the properties between com.sun.star.awt.XPrinter.startPage() and com.sun.star.awt.XPrinter.endPage(), a com.sun.star.beans.PropertyVetoException is thrown.",
-      "",
-      "**See Also**",
-      "",
-      "    XPrinter"
+      "All properties are vetoable properties. If you change the properties between com.sun.star.awt.XPrinter.startPage() and com.sun.star.awt.XPrinter.endPage(), a com.sun.star.beans.PropertyVetoException is thrown."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XPrinterPropertySet.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getBinarySetup",
+          "returns": "'typing.List[byte]'",
+          "desc": [
+            "returns a binary encoded version of the printer setup."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getFormDescriptions",
+          "returns": "typing.List[str]",
+          "desc": [
+            "returns descriptions of all available printer forms."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "selectForm",
+          "returns": "None",
+          "desc": [
+            "sets the form that should be used.",
+            "",
+            "Indirectly a printer is selected."
+          ],
+          "raises": "com.sun.star.beans.PropertyVetoException,",
+          "args": []
+        },
+        {
+          "name": "setBinarySetup",
+          "returns": "None",
+          "desc": [
+            "sets the data specific to the printer driver.",
+            "",
+            "Get this data from the info printer and set the data to the printer."
+          ],
+          "raises": "com.sun.star.beans.PropertyVetoException,",
+          "args": []
+        },
+        {
+          "name": "setHorizontal",
+          "returns": "None",
+          "desc": [
+            "sets the orientation."
+          ],
+          "raises": "com.sun.star.beans.PropertyVetoException,",
+          "args": []
+        }
+      ]
+    }
   }
 }

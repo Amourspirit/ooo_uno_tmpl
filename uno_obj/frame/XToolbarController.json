@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:21:55+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:44:22+00:00",
   "name": "XToolbarController",
   "type": "interface",
   "namespace": "com.sun.star.frame",
@@ -16,7 +16,12 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..awt.x_window",
+        "XWindow"
+      ]
+    ],
     "name": "XToolbarController",
     "imports": [],
     "namespace": "com.sun.star.frame",
@@ -28,11 +33,61 @@
       "",
       "A generic toolbar function is represented as a button which has a state (enabled,disabled and selected, not selected). A toolbar controller can be added to a toolbar and provide information or functions with a more sophisticated user interface.\n A typical example for toolbar controller is a font chooser on a toolbar. It provides all available fonts in a dropdown box and shows the current chosen font.",
       "",
-      "**See Also**",
+      "**since**",
       "",
-      "    com.sun.star.frame.XDispatchProvider"
+      "    OOo 2.0"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1frame_1_1XToolbarController.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "click",
+          "returns": "None",
+          "desc": [
+            "notifies a component that a single click has been made on the toolbar item."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "createItemWindow",
+          "returns": "XWindow",
+          "desc": [
+            "requests to create an item window which can be added to the toolbar."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "createPopupWindow",
+          "returns": "XWindow",
+          "desc": [
+            "requests to create a pop-up window for additional functions."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "doubleClick",
+          "returns": "None",
+          "desc": [
+            "notifies a component that a double click has been made on the toolbar item."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "execute",
+          "returns": "None",
+          "desc": [
+            "provides a function to execute the command which is bound to the toolbar controller.",
+            "",
+            "This function is usually called by a toolbar implementation when a user clicked on a toolbar button or pressed enter on the keyboard when the item has the input focus."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

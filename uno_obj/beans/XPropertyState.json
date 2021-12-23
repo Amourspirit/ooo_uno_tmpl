@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:19:29+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:41:21+00:00",
   "name": "XPropertyState",
   "type": "interface",
   "namespace": "com.sun.star.beans",
@@ -16,7 +16,12 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".property_state",
+        "PropertyState"
+      ]
+    ],
     "name": "XPropertyState",
     "imports": [],
     "namespace": "com.sun.star.beans",
@@ -26,13 +31,48 @@
     "desc": [
       "makes it possible to query information about the state of one or more properties.",
       "",
-      "The state contains the information if:",
-      "",
-      "**See Also**",
-      "",
-      "    ProUNO - Properties Forms - Control Models"
+      "The state contains the information if:"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1beans_1_1XPropertyState.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getPropertyDefault",
+          "returns": "object",
+          "desc": [
+            "If no default exists, is not known or is void, then the return type is void."
+          ],
+          "raises": "com.sun.star.beans.UnknownPropertyException,",
+          "args": []
+        },
+        {
+          "name": "getPropertyState",
+          "returns": "PropertyState",
+          "desc": [],
+          "raises": "com.sun.star.beans.UnknownPropertyException",
+          "args": []
+        },
+        {
+          "name": "getPropertyStates",
+          "returns": "'typing.List[PropertyState]'",
+          "desc": [
+            "The order of the states is correlating to the order of the given property names."
+          ],
+          "raises": "com.sun.star.beans.UnknownPropertyException",
+          "args": []
+        },
+        {
+          "name": "setPropertyToDefault",
+          "returns": "None",
+          "desc": [
+            "Sets the property to default value.",
+            "",
+            "The value depends on the implementation of this interface. If it is a bound property, you must change the value before the change events are fired. If it is a constrained property, you must fire the vetoable event before you change the property value."
+          ],
+          "raises": "com.sun.star.beans.UnknownPropertyException",
+          "args": []
+        }
+      ]
+    }
   }
 }

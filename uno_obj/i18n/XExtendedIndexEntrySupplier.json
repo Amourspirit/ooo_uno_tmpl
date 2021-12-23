@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:20:40+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:37:37+00:00",
   "name": "XExtendedIndexEntrySupplier",
   "type": "interface",
   "namespace": "com.sun.star.i18n",
@@ -16,7 +16,12 @@
         "XIndexEntrySupplier"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..lang.locale",
+        "Locale"
+      ]
+    ],
     "name": "XExtendedIndexEntrySupplier",
     "imports": [],
     "namespace": "com.sun.star.i18n",
@@ -28,11 +33,81 @@
       "",
       "It is derived from com.sun.star.i18n.XIndexEntrySupplier and provides following additional functionalities.",
       "",
-      "**See Also**",
+      "**since**",
       "",
       "    OOo 1.1.2"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1i18n_1_1XExtendedIndexEntrySupplier.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "compareIndexEntry",
+          "returns": "int",
+          "desc": [
+            "Compares index entries.",
+            "",
+            "Note that loadAlgorithm should be called before calling this function."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getAlgorithmList",
+          "returns": "typing.List[str]",
+          "desc": [
+            "Returns index algorithm list for specific locale."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getIndexKey",
+          "returns": "str",
+          "desc": [
+            "Returns index key.",
+            "",
+            "Note that loadAlgorithm should be called before calling this function."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getLocaleList",
+          "returns": "'typing.List[Locale]'",
+          "desc": [
+            "Returns locale list for which the IndexEntrySupplier provides service."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "getPhoneticCandidate",
+          "returns": "str",
+          "desc": [
+            "Returns phonetic candidate for index entry for the locale."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "loadAlgorithm",
+          "returns": "bool",
+          "desc": [
+            "Loads index algorithm for the locale."
+          ],
+          "raises": "",
+          "args": []
+        },
+        {
+          "name": "usePhoneticEntry",
+          "returns": "bool",
+          "desc": [
+            "Checks if Phonetic Entry should be used for the locale."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }

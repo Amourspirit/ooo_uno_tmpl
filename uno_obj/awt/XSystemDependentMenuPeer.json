@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:17:59+00:00",
+  "version": "0.1.4",
+  "timestamp": "2021-12-22 22:37:22+00:00",
   "name": "XSystemDependentMenuPeer",
   "type": "interface",
   "namespace": "com.sun.star.awt",
@@ -24,13 +24,23 @@
       "com.sun.star.uno.XInterface"
     ],
     "desc": [
-      "provides access to the system dependent implementation of the window.",
-      "",
-      "**See Also**",
-      "",
-      "    com.sun.star.lang.SystemDependent"
+      "provides access to the system dependent implementation of the window."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XSystemDependentMenuPeer.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getMenuHandle",
+          "returns": "object",
+          "desc": [
+            "returns a system-specific window handle.",
+            "",
+            "You must check the machine ID and the process ID.\n WIN32: Returns an HMENU if possible, otherwise 0.\n WIN16: Returns an HMENU if possible, otherwise 0."
+          ],
+          "raises": "",
+          "args": []
+        }
+      ]
+    }
   }
 }
