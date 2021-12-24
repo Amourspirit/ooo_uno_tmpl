@@ -19,13 +19,7 @@ $self.load_data()#slurp
 #set $s_attribs = ''
 #set $constructor_str = ''
 #set $namespace = ''
-#set $sorted = []
-#for $i, $itm in enumerate($attribs)
-$sorted.append(($itm['name'], $i))#slurp
-#end for
-#if $sort
-$sorted.sort()#slurp
-#end if
+#set $sorted = $self.get_sorted_names()
 #for $i, $tpl in enumerate($sorted)
 #set $index = tpl[1]
 #set $itm = $attribs[$index]
@@ -96,7 +90,7 @@ class ${name}(${str_inherits}):
 #end for
 #for $i, $tpl in enumerate($sorted)
 #set $index = tpl[1]
-#set $itm = $attribs[$index]
+#set $itm = $self.get_attrib_for_prop($index)
 
     @property
     def ${itm.name}(self) -> $itm.type:

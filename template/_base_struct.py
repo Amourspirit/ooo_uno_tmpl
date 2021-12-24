@@ -122,9 +122,11 @@ class BaseStruct(BaseTpml):
             return self._sorted_key_index
         sorted = []
         d_lst: List[Dict[str, object]] = getattr(self, 'attribs', [])
+        sort: bool = getattr(self, 'sort', False)
         for i, d in enumerate(d_lst):
             sorted.append((d['name'], i))
-        sorted.sort()
+        if sort:
+            sorted.sort()
         self._sorted_key_index = sorted
         return self._sorted_key_index
 
@@ -148,3 +150,14 @@ class BaseStruct(BaseTpml):
             c_str += s
             
         return c_str
+    
+    def get_attrib_for_prop(self, index: int) -> Dict[str, object]:
+        d_lst: List[Dict[str, object]] = getattr(self, 'attribs', [])
+        lst = self.get_sorted_names()
+        itm: Dict[str, object] = d_lst[index]
+        result = {}
+        result.update(itm)
+        is_py_type: bool = bool(result.get('is_py_type', False))
+        if not is_py_type:
+            result['type'] = "'" + result['type'] + "'"
+        return result
