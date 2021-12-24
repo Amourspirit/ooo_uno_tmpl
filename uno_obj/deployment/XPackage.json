@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.4",
-  "timestamp": "2021-12-22 22:37:56+00:00",
+  "version": "0.1.5",
+  "timestamp": "2021-12-24 00:49:19+00:00",
   "name": "XPackage",
   "type": "interface",
   "namespace": "com.sun.star.deployment",
@@ -12,15 +12,19 @@
   "data": {
     "from_imports": [
       [
-        "..util.x_modify_broadcaster",
-        "XModifyBroadcaster"
-      ],
-      [
         "..lang.x_component",
         "XComponent"
+      ],
+      [
+        "..util.x_modify_broadcaster",
+        "XModifyBroadcaster"
       ]
     ],
     "from_imports_typing": [
+      [
+        "..task.x_abort_channel",
+        "XAbortChannel"
+      ],
       [
         "..graphic.x_graphic",
         "XGraphic"
@@ -32,10 +36,6 @@
       [
         ".x_package",
         "XPackage"
-      ],
-      [
-        "..task.x_abort_channel",
-        "XAbortChannel"
       ]
     ],
     "name": "XPackage",
@@ -67,7 +67,9 @@
             "",
             "    OOo 3.2"
           ],
-          "raises": "DeploymentException,",
+          "raises": [
+            "DeploymentException,"
+          ],
           "args": []
         },
         {
@@ -78,7 +80,9 @@
             "",
             "Only if the return value is TRUE the package is allowed to be installed. In case of FALSE or in case of an exception, the package must be removed completely. After return of this function no code from the extension may be used anymore, so that the extension can be safely removed from the hard disk."
           ],
-          "raises": "DeploymentException,",
+          "raises": [
+            "DeploymentException,"
+          ],
           "args": []
         },
         {
@@ -87,7 +91,7 @@
           "desc": [
             "creates a command channel to be used to asynchronously abort a command."
           ],
-          "raises": "",
+          "raises": [],
           "args": []
         },
         {
@@ -96,7 +100,9 @@
           "desc": [
             "exports package to given destination URL."
           ],
-          "raises": "ExtensionRemovedException,",
+          "raises": [
+            "ExtensionRemovedException,"
+          ],
           "args": []
         },
         {
@@ -107,7 +113,9 @@
             "",
             "If isRemoved() returns TRUE then getBundle may return an empty sequence in case the object is not registered."
           ],
-          "raises": "DeploymentException,",
+          "raises": [
+            "DeploymentException,"
+          ],
           "args": []
         },
         {
@@ -116,7 +124,9 @@
           "desc": [
             "returns a description string to describe the package."
           ],
-          "raises": "ExtensionRemovedException",
+          "raises": [
+            "ExtensionRemovedException"
+          ],
           "args": []
         },
         {
@@ -127,7 +137,9 @@
             "",
             "for graphical user interfaces (GUI)."
           ],
-          "raises": "ExtensionRemovedException",
+          "raises": [
+            "ExtensionRemovedException"
+          ],
           "args": []
         },
         {
@@ -136,7 +148,9 @@
           "desc": [
             "returns an icon for a package."
           ],
-          "raises": "ExtensionRemovedException",
+          "raises": [
+            "ExtensionRemovedException"
+          ],
           "args": []
         },
         {
@@ -145,7 +159,7 @@
           "desc": [
             "returns the unique extension identifier."
           ],
-          "raises": "",
+          "raises": [],
           "args": []
         },
         {
@@ -154,7 +168,9 @@
           "desc": [
             "returns a string containing the license text."
           ],
-          "raises": "DeploymentException,",
+          "raises": [
+            "DeploymentException,"
+          ],
           "args": []
         },
         {
@@ -163,7 +179,7 @@
           "desc": [
             "returns the file name of the package."
           ],
-          "raises": "",
+          "raises": [],
           "args": []
         },
         {
@@ -174,7 +190,7 @@
             "",
             "media-type etc."
           ],
-          "raises": "",
+          "raises": [],
           "args": []
         },
         {
@@ -185,7 +201,9 @@
             "",
             "com.sun.star.beans.StringPair.First represents the publisher name and com.sun.star.beans.StringPair.Second represents the URL to the publisher."
           ],
-          "raises": "ExtensionRemovedException",
+          "raises": [
+            "ExtensionRemovedException"
+          ],
           "args": []
         },
         {
@@ -196,7 +214,9 @@
             "",
             "This data may be created when calling XPackage.registerPackage(). If this is the case is indicated by com.sun.star.beans.Optional.IsPresent of the return value. If registration data are created during registration, but the package is currently not registered, for example after calling XPackage.revokePackage(), then com.sun.star.beans.Optional.IsPresent is TRUE and the com.sun.star.beans.Optional.Value may be an empty string."
           ],
-          "raises": "DeploymentException,",
+          "raises": [
+            "DeploymentException,"
+          ],
           "args": []
         },
         {
@@ -205,7 +225,7 @@
           "desc": [
             "returns the name of the repository where this object comes from."
           ],
-          "raises": "",
+          "raises": [],
           "args": []
         },
         {
@@ -214,7 +234,7 @@
           "desc": [
             "returns the location of the package."
           ],
-          "raises": "",
+          "raises": [],
           "args": []
         },
         {
@@ -225,7 +245,9 @@
             "",
             "The sequence may be empty in case no update information is available. If the sequence contains more than one URL, the extra URLs must mirror the information available at the first URL."
           ],
-          "raises": "ExtensionRemovedException",
+          "raises": [
+            "ExtensionRemovedException"
+          ],
           "args": []
         },
         {
@@ -236,7 +258,9 @@
             "",
             "A textual version representation is a finite string following the BNF\n version .= [element (\\\".\\\" element)*]\n element .= (\\\"0\\\" | \\\"1\\\" | \\\"2\\\" | \\\"3\\\" | \\\"4\\\" | \\\"5\\\" | \\\"6\\\" | \\\"7\\\" | \\\"8\\\" | \\\"9\\\")+"
           ],
-          "raises": "ExtensionRemovedException",
+          "raises": [
+            "ExtensionRemovedException"
+          ],
           "args": []
         },
         {
@@ -247,7 +271,7 @@
             "",
             "a zip (legacy) package file or a document hosting script packages."
           ],
-          "raises": "",
+          "raises": [],
           "args": []
         },
         {
@@ -258,7 +282,9 @@
             "",
             "whether it is active."
           ],
-          "raises": "DeploymentException,",
+          "raises": [
+            "DeploymentException,"
+          ],
           "args": []
         },
         {
@@ -269,7 +295,7 @@
             "",
             "This is the case when it was created by providing TRUE for the removed parameter in the function XPackageRegistry.bindPackage()."
           ],
-          "raises": "",
+          "raises": [],
           "args": []
         },
         {
@@ -280,7 +306,9 @@
             "",
             "NEVER call this directly. This is done by the extension manager if necessary."
           ],
-          "raises": "DeploymentException,",
+          "raises": [
+            "DeploymentException,"
+          ],
           "args": []
         },
         {
@@ -291,7 +319,9 @@
             "",
             "NEVER call this directly. This is done by the extension manager if necessary."
           ],
-          "raises": "DeploymentException,",
+          "raises": [
+            "DeploymentException,"
+          ],
           "args": []
         }
       ]

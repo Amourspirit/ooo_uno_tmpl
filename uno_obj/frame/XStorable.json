@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.4",
-  "timestamp": "2021-12-22 22:44:18+00:00",
+  "version": "0.1.5",
+  "timestamp": "2021-12-24 00:51:59+00:00",
   "name": "XStorable",
   "type": "interface",
   "namespace": "com.sun.star.frame",
@@ -37,7 +37,7 @@
           "desc": [
             "After XStorable.storeAsURL() it returns the URL the object was stored to."
           ],
-          "raises": "",
+          "raises": [],
           "args": []
         },
         {
@@ -46,7 +46,7 @@
           "desc": [
             "The object may know the location because it was loaded from there, or because it is stored there."
           ],
-          "raises": "",
+          "raises": [],
           "args": []
         },
         {
@@ -55,7 +55,7 @@
           "desc": [
             "It is not possible to call XStorable.store() successfully when the data store is read-only."
           ],
-          "raises": "",
+          "raises": [],
           "args": []
         },
         {
@@ -66,7 +66,9 @@
             "",
             "Only objects which know their locations can be stored."
           ],
-          "raises": "com.sun.star.io.IOException",
+          "raises": [
+            "com.sun.star.io.IOException"
+          ],
           "args": []
         },
         {
@@ -79,7 +81,9 @@
             "",
             "The change of the location makes it necessary to store the document in a format that the object can load. For this reason the implementation of XStorable.storeAsURL() will throw an exception if a pure export filter is used, it will accept only combined import/export filters. For such filters the method XStorable.storeToURL() must be used that does not change the location of the object."
           ],
-          "raises": "com.sun.star.io.IOException",
+          "raises": [
+            "com.sun.star.io.IOException"
+          ],
           "args": []
         },
         {
@@ -92,7 +96,9 @@
             "",
             "This method accepts all kinds of export filters, not only combined import/export filters because it implements an exporting capability, not a persistence capability."
           ],
-          "raises": "com.sun.star.io.IOException",
+          "raises": [
+            "com.sun.star.io.IOException"
+          ],
           "args": []
         }
       ]

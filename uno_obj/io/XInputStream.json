@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.4",
-  "timestamp": "2021-12-22 22:38:26+00:00",
+  "version": "0.1.5",
+  "timestamp": "2021-12-24 00:49:47+00:00",
   "name": "XInputStream",
   "type": "interface",
   "namespace": "com.sun.star.io",
@@ -39,7 +39,9 @@
             "",
             "Note: This method offers no information on whether the EOF has been reached."
           ],
-          "raises": "com.sun.star.io.NotConnectedException,",
+          "raises": [
+            "com.sun.star.io.NotConnectedException,"
+          ],
           "args": []
         },
         {
@@ -50,7 +52,9 @@
             "",
             "Users must close the stream explicitly when no further reading should be done. (There may exist ring references to chained objects that can only be released during this call. Thus not calling this method would result in a leak of memory or external resources.)"
           ],
-          "raises": "com.sun.star.io.NotConnectedException,",
+          "raises": [
+            "com.sun.star.io.NotConnectedException,"
+          ],
           "args": []
         },
         {
@@ -61,7 +65,9 @@
             "",
             "The return value specifies the number of bytes which have been put into the sequence. A difference between nBytesToRead and the return value indicates that EOF has been reached. This means that the method blocks until the specified number of bytes are available or the EOF is reached."
           ],
-          "raises": "com.sun.star.io.NotConnectedException,",
+          "raises": [
+            "com.sun.star.io.NotConnectedException,"
+          ],
           "args": []
         },
         {
@@ -72,7 +78,9 @@
             "",
             "This method is very similar to the readBytes method, except that it has different blocking behaviour. The method blocks as long as at least 1 byte is available or EOF has been reached. EOF has only been reached, when the method returns 0 and the corresponding byte sequence is empty. Otherwise, after the call, aData contains the available, but no more than nMaxBytesToRead, bytes."
           ],
-          "raises": "com.sun.star.io.NotConnectedException,",
+          "raises": [
+            "com.sun.star.io.NotConnectedException,"
+          ],
           "args": []
         },
         {
@@ -83,7 +91,9 @@
             "",
             "It is up to the implementation whether this method is blocking the thread or not."
           ],
-          "raises": "com.sun.star.io.NotConnectedException,",
+          "raises": [
+            "com.sun.star.io.NotConnectedException,"
+          ],
           "args": []
         }
       ]

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.4",
-  "timestamp": "2021-12-22 22:39:45+00:00",
+  "version": "0.1.5",
+  "timestamp": "2021-12-24 00:52:42+00:00",
   "name": "XIntegerBitmapColorSpace",
   "type": "interface",
   "namespace": "com.sun.star.rendering",
@@ -18,20 +18,20 @@
     ],
     "from_imports_typing": [
       [
-        ".color_component",
-        "ColorComponent"
-      ],
-      [
-        ".rgb_color",
-        "RGBColor"
-      ],
-      [
         ".argb_color",
         "ARGBColor"
       ],
       [
         ".byte",
         "byte"
+      ],
+      [
+        ".color_component",
+        "ColorComponent"
+      ],
+      [
+        ".rgb_color",
+        "RGBColor"
       ]
     ],
     "name": "XIntegerBitmapColorSpace",
@@ -56,7 +56,9 @@
             "",
             "Color values are properly rounded and clipped, to be valid in the target color space."
           ],
-          "raises": "com.sun.star.lang.IllegalArgumentException",
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
           "args": []
         },
         {
@@ -67,7 +69,9 @@
             "",
             "If this color space does not convey alpha information, the specified alpha value is silently ignored. Color values are properly rounded and clipped, to be valid in the target color space."
           ],
-          "raises": "com.sun.star.lang.IllegalArgumentException",
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
           "args": []
         },
         {
@@ -78,7 +82,9 @@
             "",
             "If this color space does not convey alpha information, the specified alpha value is silently ignored. Color values are properly rounded and clipped, to be valid in the target color space."
           ],
-          "raises": "com.sun.star.lang.IllegalArgumentException",
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
           "args": []
         },
         {
@@ -89,7 +95,9 @@
             "",
             "If this color space conveys alpha information, it is assumed be fully opaque for the given RGB color value. Color values are properly rounded and clipped, to be valid in the target color space."
           ],
-          "raises": "com.sun.star.lang.IllegalArgumentException",
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
           "args": []
         },
         {
@@ -100,7 +108,9 @@
             "",
             "If the given input color does not carry alpha information, an alpha value of 1.0 (fully opaque) is assumed. Color values are properly rounded and clipped, to be valid in the target color space."
           ],
-          "raises": "com.sun.star.lang.IllegalArgumentException",
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
           "args": []
         },
         {
@@ -111,7 +121,9 @@
             "",
             "If the given input color does not carry alpha information, an alpha value of 1.0 (fully opaque) is assumed. Color values are properly rounded and clipped, to be valid in the target color space. The resulting individual RGB color values are premultiplied by the alpha value (e.g. if alpha is 0.5, each color value has only half of the original intensity)."
           ],
-          "raises": "com.sun.star.lang.IllegalArgumentException",
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
           "args": []
         },
         {
@@ -122,7 +134,9 @@
             "",
             "Any information not representable in the RGBColor struct is discarded during the conversion. This includes alpha information. Color values are properly rounded and clipped, to be valid in the target color space."
           ],
-          "raises": "com.sun.star.lang.IllegalArgumentException",
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
           "args": []
         },
         {
@@ -133,7 +147,9 @@
             "",
             "Color values are properly rounded and clipped, to be valid in the target color space."
           ],
-          "raises": "com.sun.star.lang.IllegalArgumentException",
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
           "args": []
         },
         {
@@ -144,7 +160,7 @@
             "",
             "This method yields the total number of bits used for a color value. At the associated XIntegerBitmap, the XIntegerBitmap.setPixel() method will expect a sequence of ceil(BitsPerPixel/8) bytes, and the XIntegerReadOnlyBitmap.getPixel() will return that number of bytes. Similarly, the color conversion expect input data in multiples of ceil(BitsPerPixel/8), and also return converted data in chunks of this."
           ],
-          "raises": "",
+          "raises": [],
           "args": []
         },
         {
@@ -155,7 +171,7 @@
             "",
             "This method returns a sequence of integers, each denoting the number of bits occupied by the respective component. The sum of all component bits must be less or equal than the value returned from getBitsPerPixel(). If the sum is less, excess bits are always kept in the most significant bits of a pixel. Color components will appear in the byte sequences returned from the XIntegerBitmap methods in the order defined here, with the first element starting from the least significant bits of the pixel, etc."
           ],
-          "raises": "",
+          "raises": [],
           "args": []
         },
         {
@@ -164,7 +180,7 @@
           "desc": [
             "Query whether color data bytes need to be swapped."
           ],
-          "raises": "",
+          "raises": [],
           "args": []
         }
       ]

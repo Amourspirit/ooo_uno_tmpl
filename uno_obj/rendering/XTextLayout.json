@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.4",
-  "timestamp": "2021-12-22 22:39:49+00:00",
+  "version": "0.1.5",
+  "timestamp": "2021-12-24 00:52:44+00:00",
   "name": "XTextLayout",
   "type": "interface",
   "namespace": "com.sun.star.rendering",
@@ -18,12 +18,12 @@
     ],
     "from_imports_typing": [
       [
-        "..geometry.real_rectangle2_d",
-        "RealRectangle2D"
-      ],
-      [
         ".x_poly_polygon2_d",
         "XPolyPolygon2D"
+      ],
+      [
+        "..geometry.real_rectangle2_d",
+        "RealRectangle2D"
       ]
     ],
     "name": "XTextLayout",
@@ -54,7 +54,9 @@
             "",
             "This method applies the specified advancements to every logical character in the input string (not for every glyph. There might be multiple glyphs per input character, or multiple input characters per glyph). This is useful to explicitly manipulate the exact output positions of characters, e.g. relative to a reference output device."
           ],
-          "raises": "com.sun.star.lang.IllegalArgumentException",
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
           "args": []
         },
         {
@@ -65,7 +67,9 @@
             "",
             "This method can be used to combine the layout of a text line into a single justification run. This is e.g. useful if the line consists of several text portions (e.g. because of different fonts or colors), but it is desirable to spread the available space more globally across the different layout objects. If, for example, one layout object contains significantly more whitespace or Kashidas than the rest, this method can assign proportionally more space to this layout object."
           ],
-          "raises": "com.sun.star.lang.IllegalArgumentException",
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
           "args": []
         },
         {
@@ -76,7 +80,7 @@
             "",
             "This method returns the baseline offset for this layout object, either measured from the top or the left edge, depending on the writing direction (horizontally or vertically). Since rendering this layout via XCanvas.drawTextLayout() outputs relative to the layout object's baseline, this method can be used to e.g. output relative to the left, top edge."
           ],
-          "raises": "",
+          "raises": [],
           "args": []
         },
         {
@@ -87,7 +91,9 @@
             "",
             "This method generates caret information for a given insertion point in the layout text."
           ],
-          "raises": "com.sun.star.lang.IndexOutOfBoundsException",
+          "raises": [
+            "com.sun.star.lang.IndexOutOfBoundsException"
+          ],
           "args": []
         },
         {
@@ -96,7 +102,7 @@
           "desc": [
             "Request the associated font for this layout."
           ],
-          "raises": "",
+          "raises": [],
           "args": []
         },
         {
@@ -107,7 +113,7 @@
             "",
             "This method returns the main writing direction of this layout, i.e. either LEFT_TO_RIGHT or RIGHT_TO_LEFT."
           ],
-          "raises": "",
+          "raises": [],
           "args": []
         },
         {
@@ -118,7 +124,9 @@
             "",
             "This method calculates a new insertion index, given a start index and the number of characters to skip. This is most useful for caret traveling."
           ],
-          "raises": "com.sun.star.lang.IndexOutOfBoundsException",
+          "raises": [
+            "com.sun.star.lang.IndexOutOfBoundsException"
+          ],
           "args": []
         },
         {
@@ -127,7 +135,7 @@
           "desc": [
             "Request the text this layout contains."
           ],
-          "raises": "",
+          "raises": [],
           "args": []
         },
         {
@@ -138,7 +146,7 @@
             "",
             "This method determines the index of the character hit at the specified position (in font coordinate space)."
           ],
-          "raises": "",
+          "raises": [],
           "args": []
         },
         {
@@ -149,7 +157,9 @@
             "",
             "This method is the core of the XTextLayout interface, because it layouts the text in a typographically correct way into the available space."
           ],
-          "raises": "com.sun.star.lang.IllegalArgumentException",
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
           "args": []
         },
         {
@@ -160,7 +170,7 @@
             "",
             "Ink, or tight bounding boxes in this case means that for e.g. an \\\"a\\\", the bounding box for the XPolyPolygon2D describing the glyph \\\"a\\\" is returned, not the logical dimensions of the character in the font."
           ],
-          "raises": "",
+          "raises": [],
           "args": []
         },
         {
@@ -175,7 +185,7 @@
             "",
             "This method can be used to query for the layout's default advancements, which can subsequently be changed and applied to the layout via XTextLayout.applyLogicalAdvancements()."
           ],
-          "raises": "",
+          "raises": [],
           "args": []
         },
         {
@@ -186,7 +196,9 @@
             "",
             "This method generates a highlighting polygon from two insertion indices. This polygon will not always be visually continuous, if e.g. the text direction changes in the middle of the selection, the might be parts visually between start and end position that are not selected."
           ],
-          "raises": "com.sun.star.lang.IndexOutOfBoundsException",
+          "raises": [
+            "com.sun.star.lang.IndexOutOfBoundsException"
+          ],
           "args": []
         },
         {
@@ -197,7 +209,7 @@
             "",
             "Logical bounding boxes means the space that the font allocates for the given character, which, e.g. for a \\\".\\\", might be significantly broader than the bounds returned via XTextLayout.queryInkMeasures()."
           ],
-          "raises": "",
+          "raises": [],
           "args": []
         },
         {
@@ -208,7 +220,7 @@
             "",
             "This method is similar to XTextLayout.queryTextMeasures(), only that the overall bounds are returned by this method."
           ],
-          "raises": "",
+          "raises": [],
           "args": []
         },
         {
@@ -219,7 +231,7 @@
             "",
             "Each glyph is represented by a separate XPolyPolygon2D in the returned sequence."
           ],
-          "raises": "",
+          "raises": [],
           "args": []
         },
         {
@@ -230,7 +242,9 @@
             "",
             "This method generates a highlighting polygon from two insertion indices. This polygon will be visually continuous, i.e. will not have non-highlighted text in between."
           ],
-          "raises": "com.sun.star.lang.IndexOutOfBoundsException",
+          "raises": [
+            "com.sun.star.lang.IndexOutOfBoundsException"
+          ],
           "args": []
         }
       ]

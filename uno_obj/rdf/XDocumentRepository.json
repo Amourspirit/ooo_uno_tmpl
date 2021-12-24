@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.4",
-  "timestamp": "2021-12-22 22:42:33+00:00",
+  "version": "0.1.5",
+  "timestamp": "2021-12-24 00:45:29+00:00",
   "name": "XDocumentRepository",
   "type": "interface",
   "namespace": "com.sun.star.rdf",
@@ -46,7 +46,9 @@
           "desc": [
             "find the RDFa statement(s) associated with an ODF element."
           ],
-          "raises": "com.sun.star.lang.IllegalArgumentException,",
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException,"
+          ],
           "args": []
         },
         {
@@ -59,7 +61,9 @@
             "",
             "Any parameter may be NULL, which acts as a wildcard. For example, to get all statements about myURI: getStatementsRDFa(myURI, null, null)"
           ],
-          "raises": "RepositoryException",
+          "raises": [
+            "RepositoryException"
+          ],
           "args": []
         },
         {
@@ -70,7 +74,9 @@
             "",
             "RDFa statements are handled specially because they are not logically part of any graph."
           ],
-          "raises": "com.sun.star.lang.IllegalArgumentException,",
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException,"
+          ],
           "args": []
         },
         {
@@ -83,7 +89,9 @@
             "",
             "RDFa statements are handled specially because they are not logically part of any named graph in the repository. Also, they have rather unusual semantics; just using XNamedGraph.addStatement() would be ambiguous: if the object is a XMetadatable, do we insert the object itself (URI) or its literal content (RDFa)?"
           ],
-          "raises": "com.sun.star.lang.IllegalArgumentException,",
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException,"
+          ],
           "args": []
         }
       ]

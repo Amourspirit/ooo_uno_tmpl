@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.4",
-  "timestamp": "2021-12-22 22:37:56+00:00",
+  "version": "0.1.5",
+  "timestamp": "2021-12-24 00:49:20+00:00",
   "name": "XPackageManager",
   "type": "interface",
   "namespace": "com.sun.star.deployment",
@@ -22,12 +22,12 @@
     ],
     "from_imports_typing": [
       [
-        "..task.x_abort_channel",
-        "XAbortChannel"
-      ],
-      [
         ".x_package",
         "XPackage"
+      ],
+      [
+        "..task.x_abort_channel",
+        "XAbortChannel"
       ],
       [
         ".x_package_type_info",
@@ -73,7 +73,9 @@
             "",
             "The properties argument is currently only used to suppress the license information for shared extensions."
           ],
-          "raises": "DeploymentException,",
+          "raises": [
+            "DeploymentException,"
+          ],
           "args": []
         },
         {
@@ -84,7 +86,9 @@
             "",
             "The extension must be managed by this package manager, that is, it must be recorded in its database. The package manager calls XPackage.checkPrerequisites and updates its data base with the result. The result, which is from Prerequisites will be returned."
           ],
-          "raises": "DeploymentException,",
+          "raises": [
+            "DeploymentException,"
+          ],
           "args": []
         },
         {
@@ -93,7 +97,7 @@
           "desc": [
             "creates a command channel to be used to asynchronously abort a command."
           ],
-          "raises": "",
+          "raises": [],
           "args": []
         },
         {
@@ -102,7 +106,7 @@
           "desc": [
             "returns the underlying deployment context, that is, the name of the repository."
           ],
-          "raises": "",
+          "raises": [],
           "args": []
         },
         {
@@ -111,7 +115,9 @@
           "desc": [
             "gets a deployed package."
           ],
-          "raises": "DeploymentException,",
+          "raises": [
+            "DeploymentException,"
+          ],
           "args": []
         },
         {
@@ -120,7 +126,9 @@
           "desc": [
             "gets all currently deployed packages."
           ],
-          "raises": "DeploymentException,",
+          "raises": [
+            "DeploymentException,"
+          ],
           "args": []
         },
         {
@@ -133,7 +141,9 @@
             "",
             "Extensions which allow the license to be suppressed, that is, it does not need to be displayed, and which are installed with the corresponding option, are also not returned."
           ],
-          "raises": "DeploymentException",
+          "raises": [
+            "DeploymentException"
+          ],
           "args": []
         },
         {
@@ -142,7 +152,7 @@
           "desc": [
             "gets the supported XPackageTypeInfos."
           ],
-          "raises": "",
+          "raises": [],
           "args": []
         },
         {
@@ -153,7 +163,9 @@
             "",
             "This copies the extension. If it was from the same repository, which is represented by this XPackageManager interface, then nothing happens."
           ],
-          "raises": "DeploymentException,",
+          "raises": [
+            "DeploymentException,"
+          ],
           "args": []
         },
         {
@@ -164,7 +176,7 @@
             "",
             "Normally one would call a method and handle the exception if writing failed. However, a GUI interface may need to know beforehand if writing is allowed. For example, the Extension Manager dialog needs to enable / disable the Add button depending if the user has write permission. Only the XPackageManager implementation knows the location of the installed extensions. Therefore it is not possible to check \\\"externally\\\" for write permission."
           ],
-          "raises": "",
+          "raises": [],
           "args": []
         },
         {
@@ -177,7 +189,9 @@
             "",
             "Please use this in case of suspected cache inconsistencies only."
           ],
-          "raises": "DeploymentException,",
+          "raises": [
+            "DeploymentException,"
+          ],
           "args": []
         },
         {
@@ -186,7 +200,9 @@
           "desc": [
             "removes a UNO package."
           ],
-          "raises": "DeploymentException,",
+          "raises": [
+            "DeploymentException,"
+          ],
           "args": []
         },
         {
@@ -197,7 +213,9 @@
             "",
             "Added extensions will be added to the database and removed extensions will be removed from the database."
           ],
-          "raises": "DeploymentException,",
+          "raises": [
+            "DeploymentException,"
+          ],
           "args": []
         }
       ]

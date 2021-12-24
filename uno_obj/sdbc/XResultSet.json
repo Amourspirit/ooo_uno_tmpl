@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.4",
-  "timestamp": "2021-12-22 22:40:01+00:00",
+  "version": "0.1.5",
+  "timestamp": "2021-12-24 00:48:19+00:00",
   "name": "XResultSet",
   "type": "interface",
   "namespace": "com.sun.star.sdbc",
@@ -52,7 +52,9 @@
             "",
             "Note: Calling absolute(1) is the same as calling com.sun.star.sdbc.XResultSet.first(). Calling moveToPosition(-1) is the same as calling moveToLast()."
           ],
-          "raises": "SQLException",
+          "raises": [
+            "SQLException"
+          ],
           "args": []
         },
         {
@@ -63,7 +65,9 @@
             "",
             "Has no effect if the result set contains no rows."
           ],
-          "raises": "SQLException",
+          "raises": [
+            "SQLException"
+          ],
           "args": []
         },
         {
@@ -74,7 +78,9 @@
             "",
             "Has no effect if the result set contains no rows."
           ],
-          "raises": "SQLException",
+          "raises": [
+            "SQLException"
+          ],
           "args": []
         },
         {
@@ -83,7 +89,9 @@
           "desc": [
             "moves the cursor to the first row in the result set."
           ],
-          "raises": "SQLException",
+          "raises": [
+            "SQLException"
+          ],
           "args": []
         },
         {
@@ -94,7 +102,9 @@
             "",
             "The first row is number 1, the second number 2, and so on."
           ],
-          "raises": "SQLException",
+          "raises": [
+            "SQLException"
+          ],
           "args": []
         },
         {
@@ -105,7 +115,9 @@
             "",
             "If the result set was generated some other way, such as by an com.sun.star.sdbc.XDatabaseMetaData method, this method returns NULL."
           ],
-          "raises": "SQLException",
+          "raises": [
+            "SQLException"
+          ],
           "args": []
         },
         {
@@ -114,7 +126,9 @@
           "desc": [
             "indicates whether the cursor is after the last row in the result set."
           ],
-          "raises": "SQLException",
+          "raises": [
+            "SQLException"
+          ],
           "args": []
         },
         {
@@ -123,7 +137,9 @@
           "desc": [
             "indicates whether the cursor is before the first row in the result set."
           ],
-          "raises": "SQLException",
+          "raises": [
+            "SQLException"
+          ],
           "args": []
         },
         {
@@ -132,7 +148,9 @@
           "desc": [
             "indicates whether the cursor is on the first row of the result set."
           ],
-          "raises": "SQLException",
+          "raises": [
+            "SQLException"
+          ],
           "args": []
         },
         {
@@ -143,7 +161,9 @@
             "",
             "Note:  Calling the method isAtLast may be expensive because the SDBC driver might need to fetch ahead one row in order to determine whether the current row is the last row in the result set."
           ],
-          "raises": "SQLException",
+          "raises": [
+            "SQLException"
+          ],
           "args": []
         },
         {
@@ -152,7 +172,9 @@
           "desc": [
             "moves the cursor to the last row in the result set."
           ],
-          "raises": "SQLException",
+          "raises": [
+            "SQLException"
+          ],
           "args": []
         },
         {
@@ -165,7 +187,9 @@
             "",
             "If an input stream is open for the current row, a call to the method next will implicitly close it. The ResultSet's warning chain is cleared when a new row is read."
           ],
-          "raises": "SQLException",
+          "raises": [
+            "SQLException"
+          ],
           "args": []
         },
         {
@@ -176,7 +200,9 @@
             "",
             "Note: previous() is not the same as relative(-1) because it makes sense to call previous() when there is no current row."
           ],
-          "raises": "SQLException",
+          "raises": [
+            "SQLException"
+          ],
           "args": []
         },
         {
@@ -187,7 +213,9 @@
             "",
             "Cannot be called when on the insert row. The refreshRow method provides a way for an application to explicitly tell the SDBC driver to refetch a row(s) from the database. An application may want to call refreshRow when caching or prefetching is being done by the SDBC driver to fetch the latest value of a row from the database. The SDBC driver may actually refresh multiple rows at once if the fetch size is greater than one. All values are refetched subject to the transaction isolation level and cursor sensitivity. If refreshRow is called after calling updateXXX , but before calling com.sun.star.sdbc.XResultSet.updateRow() , then the updates made to the row are lost. Calling the method refreshRow frequently will likely slow performance."
           ],
-          "raises": "SQLException",
+          "raises": [
+            "SQLException"
+          ],
           "args": []
         },
         {
@@ -200,7 +228,9 @@
             "",
             "Note: Calling relative(1) is different from calling com.sun.star.sdbc.XResultSet.next() because is makes sense to call next() when there is no current row, for example, when the cursor is positioned before the first row or after the last row of the result set."
           ],
-          "raises": "SQLException",
+          "raises": [
+            "SQLException"
+          ],
           "args": []
         },
         {
@@ -211,7 +241,9 @@
             "",
             "A deleted row may leave a visible \\\"hole\\\" in a result set. This method can be used to detect holes in a result set. The value returned depends on whether or not the result set can detect deletions."
           ],
-          "raises": "SQLException",
+          "raises": [
+            "SQLException"
+          ],
           "args": []
         },
         {
@@ -222,7 +254,9 @@
             "",
             "The value returned depends on whether or not the result set can detect visible inserts."
           ],
-          "raises": "SQLException",
+          "raises": [
+            "SQLException"
+          ],
           "args": []
         },
         {
@@ -233,7 +267,9 @@
             "",
             "The value returned depends on whether or not the result set can detect updates."
           ],
-          "raises": "SQLException",
+          "raises": [
+            "SQLException"
+          ],
           "args": []
         }
       ]

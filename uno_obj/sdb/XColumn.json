@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.4",
-  "timestamp": "2021-12-22 22:43:28+00:00",
+  "version": "0.1.5",
+  "timestamp": "2021-12-24 00:49:36+00:00",
   "name": "XColumn",
   "type": "interface",
   "namespace": "com.sun.star.sdb",
@@ -18,8 +18,32 @@
     ],
     "from_imports_typing": [
       [
+        "..util.time",
+        "Time"
+      ],
+      [
+        "..util.date_time",
+        "DateTime"
+      ],
+      [
         "..io.x_input_stream",
         "XInputStream"
+      ],
+      [
+        ".byte",
+        "byte"
+      ],
+      [
+        "..sdbc.x_clob",
+        "XClob"
+      ],
+      [
+        "..sdbc.x_array",
+        "XArray"
+      ],
+      [
+        "..util.date",
+        "Date"
       ],
       [
         "..sdbc.x_blob",
@@ -28,30 +52,6 @@
       [
         "..sdbc.x_ref",
         "XRef"
-      ],
-      [
-        "..sdbc.x_array",
-        "XArray"
-      ],
-      [
-        "..sdbc.x_clob",
-        "XClob"
-      ],
-      [
-        "..util.date",
-        "Date"
-      ],
-      [
-        ".byte",
-        "byte"
-      ],
-      [
-        "..util.date_time",
-        "DateTime"
-      ],
-      [
-        "..util.time",
-        "Time"
       ]
     ],
     "name": "XColumn",
@@ -72,7 +72,9 @@
           "desc": [
             "gets a SQL ARRAY value from the current row."
           ],
-          "raises": "com.sun.star.sdbc.SQLException",
+          "raises": [
+            "com.sun.star.sdbc.SQLException"
+          ],
           "args": []
         },
         {
@@ -85,7 +87,9 @@
             "",
             "Note: All the data in the returned stream must be read prior to getting the value of any other column. The next call to a get method implicitly closes the stream. Also, a stream may return 0 when the method com.sun.star.io.XInputStream.available() is called whether there is data available or not."
           ],
-          "raises": "com.sun.star.sdbc.SQLException",
+          "raises": [
+            "com.sun.star.sdbc.SQLException"
+          ],
           "args": []
         },
         {
@@ -94,7 +98,9 @@
           "desc": [
             "gets a BLOB (Binary Large OBject) value in the current row."
           ],
-          "raises": "com.sun.star.sdbc.SQLException",
+          "raises": [
+            "com.sun.star.sdbc.SQLException"
+          ],
           "args": []
         },
         {
@@ -103,7 +109,9 @@
           "desc": [
             "gets the value of a column in the current row as boolean."
           ],
-          "raises": "com.sun.star.sdbc.SQLException",
+          "raises": [
+            "com.sun.star.sdbc.SQLException"
+          ],
           "args": []
         },
         {
@@ -112,7 +120,9 @@
           "desc": [
             "gets the value of a column in the current row as a byte."
           ],
-          "raises": "com.sun.star.sdbc.SQLException",
+          "raises": [
+            "com.sun.star.sdbc.SQLException"
+          ],
           "args": []
         },
         {
@@ -123,7 +133,9 @@
             "",
             "The bytes represent the raw values returned by the driver."
           ],
-          "raises": "com.sun.star.sdbc.SQLException",
+          "raises": [
+            "com.sun.star.sdbc.SQLException"
+          ],
           "args": []
         },
         {
@@ -136,7 +148,9 @@
             "",
             "Note: All the data in the returned stream must be read prior to getting the value of any other column. The next call to a get method implicitly closes the stream. Also, a stream may return 0 when the method com.sun.star.io.XInputStream.available() is called whether there is data available or not."
           ],
-          "raises": "com.sun.star.sdbc.SQLException",
+          "raises": [
+            "com.sun.star.sdbc.SQLException"
+          ],
           "args": []
         },
         {
@@ -145,7 +159,9 @@
           "desc": [
             "gets a CLOB value in the current row of this ResultSet object."
           ],
-          "raises": "com.sun.star.sdbc.SQLException",
+          "raises": [
+            "com.sun.star.sdbc.SQLException"
+          ],
           "args": []
         },
         {
@@ -154,7 +170,9 @@
           "desc": [
             "gets the value of a column in the current row as a date object."
           ],
-          "raises": "com.sun.star.sdbc.SQLException",
+          "raises": [
+            "com.sun.star.sdbc.SQLException"
+          ],
           "args": []
         },
         {
@@ -163,7 +181,9 @@
           "desc": [
             "gets the value of a column in the current row as a double."
           ],
-          "raises": "com.sun.star.sdbc.SQLException",
+          "raises": [
+            "com.sun.star.sdbc.SQLException"
+          ],
           "args": []
         },
         {
@@ -172,7 +192,9 @@
           "desc": [
             "gets the value of a column in the current row as a float."
           ],
-          "raises": "com.sun.star.sdbc.SQLException",
+          "raises": [
+            "com.sun.star.sdbc.SQLException"
+          ],
           "args": []
         },
         {
@@ -181,7 +203,9 @@
           "desc": [
             "gets the value of a column in the current row as a long."
           ],
-          "raises": "com.sun.star.sdbc.SQLException",
+          "raises": [
+            "com.sun.star.sdbc.SQLException"
+          ],
           "args": []
         },
         {
@@ -190,14 +214,18 @@
           "desc": [
             "gets the value of a column in the current row as a hyper."
           ],
-          "raises": "com.sun.star.sdbc.SQLException",
+          "raises": [
+            "com.sun.star.sdbc.SQLException"
+          ],
           "args": []
         },
         {
           "name": "getObject",
           "returns": "object",
           "desc": [],
-          "raises": "com.sun.star.sdbc.SQLException",
+          "raises": [
+            "com.sun.star.sdbc.SQLException"
+          ],
           "args": []
         },
         {
@@ -206,7 +234,9 @@
           "desc": [
             "gets a REF(<structured-type&gt) column value from the current row."
           ],
-          "raises": "com.sun.star.sdbc.SQLException",
+          "raises": [
+            "com.sun.star.sdbc.SQLException"
+          ],
           "args": []
         },
         {
@@ -215,7 +245,9 @@
           "desc": [
             "gets the value of a column in the current row as a short."
           ],
-          "raises": "com.sun.star.sdbc.SQLException",
+          "raises": [
+            "com.sun.star.sdbc.SQLException"
+          ],
           "args": []
         },
         {
@@ -224,7 +256,9 @@
           "desc": [
             "gets the value of a column in the current row as a String."
           ],
-          "raises": "com.sun.star.sdbc.SQLException",
+          "raises": [
+            "com.sun.star.sdbc.SQLException"
+          ],
           "args": []
         },
         {
@@ -233,7 +267,9 @@
           "desc": [
             "gets the value of a column in the current row as a time object."
           ],
-          "raises": "com.sun.star.sdbc.SQLException",
+          "raises": [
+            "com.sun.star.sdbc.SQLException"
+          ],
           "args": []
         },
         {
@@ -242,7 +278,9 @@
           "desc": [
             "gets the value of a column in the current row as a datetime object."
           ],
-          "raises": "com.sun.star.sdbc.SQLException",
+          "raises": [
+            "com.sun.star.sdbc.SQLException"
+          ],
           "args": []
         },
         {
@@ -253,7 +291,9 @@
             "",
             "Note that you must first call getXXX on a column to try to read its value and then call wasNull() to see if the value read was SQL NULL."
           ],
-          "raises": "com.sun.star.sdbc.SQLException",
+          "raises": [
+            "com.sun.star.sdbc.SQLException"
+          ],
           "args": []
         }
       ]

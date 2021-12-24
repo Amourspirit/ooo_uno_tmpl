@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.4",
-  "timestamp": "2021-12-22 22:43:04+00:00",
+  "version": "0.1.5",
+  "timestamp": "2021-12-24 00:49:14+00:00",
   "name": "XObjectNames",
   "type": "interface",
   "namespace": "com.sun.star.sdb.tools",
@@ -42,7 +42,9 @@
             "",
             "This method basically does the same checks as isNameUsed() and isNameValid(). In case the given name is not allowed, it throws an exception. This error can be presented to the user, to give it a common experience in all cases where he's required to enter an object name."
           ],
-          "raises": "com.sun.star.sdbc.SQLException",
+          "raises": [
+            "com.sun.star.sdbc.SQLException"
+          ],
           "args": []
         },
         {
@@ -53,7 +55,7 @@
             "",
             "The conversion takes place by converting every character which is neither allowed by the SQL-92 standard, nor part of the special characters supported by the database, with an underscore character (_)."
           ],
-          "raises": "",
+          "raises": [],
           "args": []
         },
         {
@@ -66,7 +68,9 @@
             "",
             "As before, the information you obtain by calling this method might be obsolete in the very moment you evaluate this, in case another process or thread interferes. However, it's usually sufficiently up-to-date for purpose of using it in a database application driven by user interactions."
           ],
-          "raises": "com.sun.star.lang.IllegalArgumentException,",
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException,"
+          ],
           "args": []
         },
         {
@@ -79,7 +83,9 @@
             "",
             "For queries, names are nearly arbitrary, except that usual quoting characters must not be part of the name."
           ],
-          "raises": "com.sun.star.lang.IllegalArgumentException",
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
           "args": []
         },
         {
@@ -94,7 +100,9 @@
             "",
             "This implies that you cannot rely on the name's uniqueness, but you can use it as first guess to present to the user. In most cases, it will still be sufficient when you are actually creating the table respectively query."
           ],
-          "raises": "com.sun.star.lang.IllegalArgumentException,",
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException,"
+          ],
           "args": []
         }
       ]

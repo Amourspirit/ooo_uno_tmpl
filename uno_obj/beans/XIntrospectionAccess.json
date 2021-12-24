@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.4",
-  "timestamp": "2021-12-22 22:41:14+00:00",
+  "version": "0.1.5",
+  "timestamp": "2021-12-24 00:52:46+00:00",
   "name": "XIntrospectionAccess",
   "type": "interface",
   "namespace": "com.sun.star.beans",
@@ -18,20 +18,20 @@
     ],
     "from_imports_typing": [
       [
-        ".property",
-        "Property"
-      ],
-      [
         "..uno.x_interface",
         "XInterface"
       ],
       [
-        "..reflection.x_idl_method",
-        "XIdlMethod"
+        ".property",
+        "Property"
       ],
       [
         ".type",
         "type"
+      ],
+      [
+        "..reflection.x_idl_method",
+        "XIdlMethod"
       ]
     ],
     "name": "XIntrospectionAccess",
@@ -60,7 +60,9 @@
             "",
             "The information is provided as com.sun.star.reflection.XIdlMethod."
           ],
-          "raises": "com.sun.star.lang.NoSuchMethodException",
+          "raises": [
+            "com.sun.star.lang.NoSuchMethodException"
+          ],
           "args": []
         },
         {
@@ -69,7 +71,7 @@
           "desc": [
             "returns a sequence of methods of the introspected object."
           ],
-          "raises": "",
+          "raises": [],
           "args": []
         },
         {
@@ -78,7 +80,7 @@
           "desc": [
             "returns a sequence of properties of the introspected object"
           ],
-          "raises": "",
+          "raises": [],
           "args": []
         },
         {
@@ -89,7 +91,9 @@
             "",
             "The information is provided as Property struct."
           ],
-          "raises": "com.sun.star.container.NoSuchElementException",
+          "raises": [
+            "com.sun.star.container.NoSuchElementException"
+          ],
           "args": []
         },
         {
@@ -100,7 +104,7 @@
             "",
             "The minimum supported concepts should be:"
           ],
-          "raises": "",
+          "raises": [],
           "args": []
         },
         {
@@ -111,7 +115,7 @@
             "",
             "The minimum supported concepts should be:"
           ],
-          "raises": "",
+          "raises": [],
           "args": []
         },
         {
@@ -122,7 +126,7 @@
             "",
             "If the introspected object has the methods addFooListener( XFooListener xFoo ) and removeFooListener( XFooListener xFoo ) the type of XFooListener will be one of the elements in the returned sequence."
           ],
-          "raises": "",
+          "raises": [],
           "args": []
         },
         {
@@ -131,7 +135,7 @@
           "desc": [
             "allows to ask if a method with the demanded name exists and if it accords to one of the demanded MethodConcept."
           ],
-          "raises": "",
+          "raises": [],
           "args": []
         },
         {
@@ -140,7 +144,7 @@
           "desc": [
             "allows to ask if a property with the demanded name exists and if it accords to one of the demanded PropertyConcept."
           ],
-          "raises": "",
+          "raises": [],
           "args": []
         },
         {
@@ -161,7 +165,9 @@
             "",
             "To implement inaccurate name access, at all objects, which implement the com.sun.star.container.XNameAccess or XPropertySet interface, the XExactName interface has to be supported."
           ],
-          "raises": "com.sun.star.beans.IllegalTypeException",
+          "raises": [
+            "com.sun.star.beans.IllegalTypeException"
+          ],
           "args": []
         }
       ]

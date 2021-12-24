@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.4",
-  "timestamp": "2021-12-22 22:34:13+00:00",
+  "version": "0.1.5",
+  "timestamp": "2021-12-24 00:49:33+00:00",
   "name": "XUndoManager",
   "type": "interface",
   "namespace": "com.sun.star.document",
@@ -12,12 +12,12 @@
   "data": {
     "from_imports": [
       [
-        "..util.x_lockable",
-        "XLockable"
-      ],
-      [
         "..container.x_child",
         "XChild"
+      ],
+      [
+        "..util.x_lockable",
+        "XLockable"
       ]
     ],
     "from_imports_typing": [],
@@ -60,7 +60,9 @@
             "",
             "If the Undo manager is locked at the moment the method is called, the call will be ignored, and the undo action will immediately be disposed, if applicable."
           ],
-          "raises": "com.sun.star.lang.IllegalArgumentException",
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
           "args": []
         },
         {
@@ -69,7 +71,7 @@
           "desc": [
             "adds a listener to be notified of changes in the Undo/Redo stacks."
           ],
-          "raises": "",
+          "raises": [],
           "args": []
         },
         {
@@ -80,7 +82,9 @@
             "",
             "All actions will be removed from both the Undo and the Redo stack. Actions which implement the com.sun.star.lang.XComponent interface will be disposed."
           ],
-          "raises": "com.sun.star.document.UndoContextNotClosedException",
+          "raises": [
+            "com.sun.star.document.UndoContextNotClosedException"
+          ],
           "args": []
         },
         {
@@ -91,7 +95,9 @@
             "",
             "All actions will be removed from the Redo stack. Actions which implement the com.sun.star.lang.XComponent interface will be disposed."
           ],
-          "raises": "com.sun.star.document.UndoContextNotClosedException",
+          "raises": [
+            "com.sun.star.document.UndoContextNotClosedException"
+          ],
           "args": []
         },
         {
@@ -108,7 +114,9 @@
             "",
             "Undo contexts can be nested, i.e. it is legitimate to call enterUndoContext() and enterHiddenUndoContext multiple times without calling leaveUndoContext() inbetween."
           ],
-          "raises": "EmptyUndoStackException",
+          "raises": [
+            "EmptyUndoStackException"
+          ],
           "args": []
         },
         {
@@ -123,7 +131,7 @@
             "",
             "Undo contexts can be nested, i.e. it is legitimate to call enterUndoContext and enterHiddenUndoContext() multiple times without calling leaveUndoContext() inbetween."
           ],
-          "raises": "",
+          "raises": [],
           "args": []
         },
         {
@@ -132,7 +140,7 @@
           "desc": [
             "returns the titles of all actions currently on the Redo stack, from top to bottom"
           ],
-          "raises": "",
+          "raises": [],
           "args": []
         },
         {
@@ -141,7 +149,7 @@
           "desc": [
             "returns the titles of all actions currently on the undo stack, from top to bottom"
           ],
-          "raises": "",
+          "raises": [],
           "args": []
         },
         {
@@ -150,7 +158,9 @@
           "desc": [
             "returns the title of the top-most action on the Redo stack"
           ],
-          "raises": "com.sun.star.document.EmptyUndoStackException",
+          "raises": [
+            "com.sun.star.document.EmptyUndoStackException"
+          ],
           "args": []
         },
         {
@@ -159,7 +169,9 @@
           "desc": [
             "returns the title of the top-most action on the undo stack"
           ],
-          "raises": "com.sun.star.document.EmptyUndoStackException",
+          "raises": [
+            "com.sun.star.document.EmptyUndoStackException"
+          ],
           "args": []
         },
         {
@@ -168,7 +180,7 @@
           "desc": [
             "determines whether redo() can reasonably be expected to succeed."
           ],
-          "raises": "",
+          "raises": [],
           "args": []
         },
         {
@@ -177,7 +189,7 @@
           "desc": [
             "determines whether undo() can reasonably be expected to succeed."
           ],
-          "raises": "",
+          "raises": [],
           "args": []
         },
         {
@@ -190,7 +202,9 @@
             "",
             "Otherwise, the undo context will be closed, and added to the Undo stack; the redo stack will be cleared, and listeners will be notified via XUndoManagerListener.leftContext() resp. XUndoManagerListener.leftHiddenContext()"
           ],
-          "raises": "com.sun.star.util.InvalidStateException",
+          "raises": [
+            "com.sun.star.util.InvalidStateException"
+          ],
           "args": []
         },
         {
@@ -201,7 +215,9 @@
             "",
             "Effectively, invoking this method will"
           ],
-          "raises": "com.sun.star.document.EmptyUndoStackException,",
+          "raises": [
+            "com.sun.star.document.EmptyUndoStackException,"
+          ],
           "args": []
         },
         {
@@ -210,7 +226,7 @@
           "desc": [
             "removes a previously added listener"
           ],
-          "raises": "",
+          "raises": [],
           "args": []
         },
         {
@@ -223,7 +239,7 @@
             "",
             "Note that possible listeners will not get notifications for the single parts of the reset, i.e. there will be no single XUndoManagerListener.allActionsCleared(), XUndoManagerListener.leftContext(), etc., notifications. Instead, listeners will be notified of the reset by calling their XUndoManagerListener.resetAll() method."
           ],
-          "raises": "",
+          "raises": [],
           "args": []
         },
         {
@@ -234,7 +250,9 @@
             "",
             "Effectively, invoking this method will"
           ],
-          "raises": "com.sun.star.document.EmptyUndoStackException,",
+          "raises": [
+            "com.sun.star.document.EmptyUndoStackException,"
+          ],
           "args": []
         }
       ]

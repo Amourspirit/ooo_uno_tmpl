@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.4",
-  "timestamp": "2021-12-22 22:35:03+00:00",
+  "version": "0.1.5",
+  "timestamp": "2021-12-24 00:53:04+00:00",
   "name": "XReportDefinition",
   "type": "interface",
   "namespace": "com.sun.star.report",
@@ -26,12 +26,12 @@
         "XSection"
       ],
       [
-        "..sdbc.x_connection",
-        "XConnection"
-      ],
-      [
         "..document.x_event_broadcaster",
         "XEventBroadcaster"
+      ],
+      [
+        "..sdbc.x_connection",
+        "XConnection"
       ]
     ],
     "name": "XReportDefinition",
@@ -56,7 +56,9 @@
           "desc": [
             "returns a sequence of the currently supported output formats."
           ],
-          "raises": "com.sun.star.lang.DisposedException,",
+          "raises": [
+            "com.sun.star.lang.DisposedException,"
+          ],
           "args": []
         },
         {
@@ -67,7 +69,9 @@
             "",
             "This is a workaround due to the fact that this interface can not be directly inherited from com.sun.star.document.XEventBroadcaster because the methods addEventListener and removeEventListener are already defined in com.sun.star.lang.XComponent. A queryInterface call is still supported to the com.sun.star.document.XEventBroadcaster interface."
           ],
-          "raises": "com.sun.star.lang.DisposedException,",
+          "raises": [
+            "com.sun.star.lang.DisposedException,"
+          ],
           "args": []
         }
       ],

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.4",
-  "timestamp": "2021-12-22 22:38:25+00:00",
+  "version": "0.1.5",
+  "timestamp": "2021-12-24 00:49:46+00:00",
   "name": "XAsyncOutputMonitor",
   "type": "interface",
   "namespace": "com.sun.star.io",
@@ -36,7 +36,9 @@
             "",
             "Calling this method is potentially expensive (even if the associated com.sun.star.io.XOutputStream represents a local file not accessed via NFS, for example). This method has a similar description to com.sun.star.io.XOutputStream.flush(). However, where the semantics of flush are rather vague, waitForCompletion has very specific semantics\u2014it just blocks long enough so that any errors encountered during previous calls to com.sun.star.io.XOutputStream.writeBytes() can reliably be reported. It specifically does not guarantee that any data have safely been stored on a stable physical medium, like a hard disk (and it is completely unspecified whether flush should give this guarantee)."
           ],
-          "raises": "IOException",
+          "raises": [
+            "IOException"
+          ],
           "args": []
         }
       ]

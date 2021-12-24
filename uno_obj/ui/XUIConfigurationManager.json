@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.4",
-  "timestamp": "2021-12-22 22:42:52+00:00",
+  "version": "0.1.5",
+  "timestamp": "2021-12-24 00:48:09+00:00",
   "name": "XUIConfigurationManager",
   "type": "interface",
   "namespace": "com.sun.star.ui",
@@ -18,24 +18,24 @@
     ],
     "from_imports_typing": [
       [
-        "..container.x_index_container",
-        "XIndexContainer"
+        "..uno.x_interface",
+        "XInterface"
       ],
       [
         ".x_accelerator_configuration",
         "XAcceleratorConfiguration"
       ],
       [
-        "..beans.property_value",
-        "PropertyValue"
-      ],
-      [
-        "..uno.x_interface",
-        "XInterface"
-      ],
-      [
         "..container.x_index_access",
         "XIndexAccess"
+      ],
+      [
+        "..container.x_index_container",
+        "XIndexContainer"
+      ],
+      [
+        "..beans.property_value",
+        "PropertyValue"
       ]
     ],
     "name": "XUIConfigurationManager",
@@ -60,7 +60,7 @@
           "desc": [
             "creates an empty settings data container."
           ],
-          "raises": "",
+          "raises": [],
           "args": []
         },
         {
@@ -71,7 +71,7 @@
             "",
             "Every user interface configuration manager has one events manager instance which controls the mapping of events to script URLs of a module or document."
           ],
-          "raises": "",
+          "raises": [],
           "args": []
         },
         {
@@ -82,7 +82,7 @@
             "",
             "Every user interface configuration manager has one image manager instance which controls all images of a module or document."
           ],
-          "raises": "",
+          "raises": [],
           "args": []
         },
         {
@@ -91,7 +91,9 @@
           "desc": [
             "retrieves the settings of a user interface element."
           ],
-          "raises": "com.sun.star.container.NoSuchElementException,",
+          "raises": [
+            "com.sun.star.container.NoSuchElementException,"
+          ],
           "args": []
         },
         {
@@ -102,7 +104,7 @@
             "",
             "Every user interface configuration manager has one keyboard short cut manager instance which controls all short cuts of a module or document."
           ],
-          "raises": "",
+          "raises": [],
           "args": []
         },
         {
@@ -113,7 +115,9 @@
             "",
             "The following com.sun.star.beans.PropertyValue entries are defined inside the sequence for every user interface element."
           ],
-          "raises": "com.sun.star.lang.IllegalArgumentException",
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
           "args": []
         },
         {
@@ -122,7 +126,9 @@
           "desc": [
             "determines if the settings of a user interface element is part the user interface configuration manager."
           ],
-          "raises": "com.sun.star.lang.IllegalArgumentException",
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
           "args": []
         },
         {
@@ -133,7 +139,9 @@
             "",
             "If the settings data is already present a com.sun.star.container.ElementExistException is thrown. If the NewResourceURL is not valid or describes an unknown type a com.sun.star.lang.IllegalArgumentException is thrown. If the configuration manager is read-only a com.sun.star.lang.IllegalAccessException is thrown."
           ],
-          "raises": "com.sun.star.container.ElementExistException,",
+          "raises": [
+            "com.sun.star.container.ElementExistException,"
+          ],
           "args": []
         },
         {
@@ -144,7 +152,9 @@
             "",
             "If the settings data cannot be found a com.sun.star.container.NoSuchElementException is thrown. If the ResourceURL is not valid or describes an unknown type a com.sun.star.lang.IllegalArgumentException is thrown. If the configuration manager is read-only a com.sun.star.lang.IllegalAccessException is thrown."
           ],
-          "raises": "com.sun.star.container.NoSuchElementException,",
+          "raises": [
+            "com.sun.star.container.NoSuchElementException,"
+          ],
           "args": []
         },
         {
@@ -155,7 +165,9 @@
             "",
             "If the settings data cannot be found a com.sun.star.container.NoSuchElementException is thrown. If the ResourceURL is not valid or describes an unknown type a com.sun.star.lang.IllegalArgumentException is thrown. If the configuration manager is read-only a com.sun.star.lang.IllegalAccessException is thrown."
           ],
-          "raises": "com.sun.star.container.NoSuchElementException,",
+          "raises": [
+            "com.sun.star.container.NoSuchElementException,"
+          ],
           "args": []
         },
         {
@@ -166,7 +178,7 @@
             "",
             "This means that all user interface configuration data of the instance will be removed. A module based user interface configuration manager removes user defined elements, but set all other elements back to default. It is not possible to remove default elements from a module user interface configuration manager."
           ],
-          "raises": "",
+          "raises": [],
           "args": []
         }
       ]

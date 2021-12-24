@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.4",
-  "timestamp": "2021-12-22 22:42:31+00:00",
+  "version": "0.1.5",
+  "timestamp": "2021-12-24 00:46:37+00:00",
   "name": "XPropertyHandler",
   "type": "interface",
   "namespace": "com.sun.star.inspection",
@@ -56,7 +56,9 @@
             "",
             "This method is called whenever a property value changes, limited to those properties whose changes the handler expressed interest in (see getActuatingProperties())."
           ],
-          "raises": "com.sun.star.lang.NullPointerException",
+          "raises": [
+            "com.sun.star.lang.NullPointerException"
+          ],
           "args": []
         },
         {
@@ -69,7 +71,9 @@
             "",
             "If a handler implementation supports property change listeners, it must be able to cope with a call to addPropertyChangeListener() even if currently no component is being inspected. In this case, the listener must become active as soon as a new introspection is set in the next inspect() call."
           ],
-          "raises": "com.sun.star.lang.NullPointerException",
+          "raises": [
+            "com.sun.star.lang.NullPointerException"
+          ],
           "args": []
         },
         {
@@ -86,7 +90,9 @@
             "",
             "The method is not invoked if the control's value type (XPropertyControl.ValueType equals the property's value type."
           ],
-          "raises": "com.sun.star.beans.UnknownPropertyException",
+          "raises": [
+            "com.sun.star.beans.UnknownPropertyException"
+          ],
           "args": []
         },
         {
@@ -99,7 +105,9 @@
             "",
             "This method converts a control value into a property value, which subsequently can be used in conjunction with setPropertyValue()."
           ],
-          "raises": "com.sun.star.beans.UnknownPropertyException",
+          "raises": [
+            "com.sun.star.beans.UnknownPropertyException"
+          ],
           "args": []
         },
         {
@@ -108,7 +116,9 @@
           "desc": [
             "describes the UI to be used to represent the property"
           ],
-          "raises": "com.sun.star.beans.UnknownPropertyException,",
+          "raises": [
+            "com.sun.star.beans.UnknownPropertyException,"
+          ],
           "args": []
         },
         {
@@ -125,7 +135,7 @@
             "",
             "If getSupportedProperties() returned an empty sequence, this method will not be called"
           ],
-          "raises": "",
+          "raises": [],
           "args": []
         },
         {
@@ -134,7 +144,9 @@
           "desc": [
             "returns the state of a property"
           ],
-          "raises": "com.sun.star.beans.UnknownPropertyException",
+          "raises": [
+            "com.sun.star.beans.UnknownPropertyException"
+          ],
           "args": []
         },
         {
@@ -143,7 +155,9 @@
           "desc": [
             "retrieves the current value of a property"
           ],
-          "raises": "com.sun.star.beans.UnknownPropertyException",
+          "raises": [
+            "com.sun.star.beans.UnknownPropertyException"
+          ],
           "args": []
         },
         {
@@ -166,7 +180,7 @@
             "",
             "If getSupportedProperties() returned an empty sequence, this method will not be called."
           ],
-          "raises": "",
+          "raises": [],
           "args": []
         },
         {
@@ -179,7 +193,7 @@
             "",
             "In the case of returning an empty sequence here, the property handler is ignored by all further processing in the object inspector."
           ],
-          "raises": "",
+          "raises": [],
           "args": []
         },
         {
@@ -188,7 +202,9 @@
           "desc": [
             "binds the property handler to a new component"
           ],
-          "raises": "com.sun.star.lang.NullPointerException",
+          "raises": [
+            "com.sun.star.lang.NullPointerException"
+          ],
           "args": []
         },
         {
@@ -199,7 +215,9 @@
             "",
             "An object inspector can inspect multiple components at once, displaying the intersection of their properties. For this, all components are examined for their properties, and all properties which exist for all components, and are declared to be composable by their respective handler, are displayed in the inspector UI."
           ],
-          "raises": "com.sun.star.beans.UnknownPropertyException",
+          "raises": [
+            "com.sun.star.beans.UnknownPropertyException"
+          ],
           "args": []
         },
         {
@@ -220,7 +238,9 @@
             "",
             "If a property is not composable, directly setting the new property value does not yield any problem, as long as property listeners are properly notified of the change."
           ],
-          "raises": "com.sun.star.beans.UnknownPropertyException,",
+          "raises": [
+            "com.sun.star.beans.UnknownPropertyException,"
+          ],
           "args": []
         },
         {
@@ -229,7 +249,7 @@
           "desc": [
             "revokes a listener for notification about property value changes"
           ],
-          "raises": "",
+          "raises": [],
           "args": []
         },
         {
@@ -238,7 +258,9 @@
           "desc": [
             "sets the value of a property"
           ],
-          "raises": "com.sun.star.beans.UnknownPropertyException,",
+          "raises": [
+            "com.sun.star.beans.UnknownPropertyException,"
+          ],
           "args": []
         },
         {
@@ -253,7 +275,7 @@
             "",
             "If suspension is not to be vetoed, then all non-modal UI components opened by the handler should have been closed when it returns from the suspend() call."
           ],
-          "raises": "",
+          "raises": [],
           "args": []
         }
       ]

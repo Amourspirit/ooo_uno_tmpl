@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.4",
-  "timestamp": "2021-12-22 22:42:37+00:00",
+  "version": "0.1.5",
+  "timestamp": "2021-12-24 00:45:31+00:00",
   "name": "XRepository",
   "type": "interface",
   "namespace": "com.sun.star.rdf",
@@ -10,16 +10,7 @@
   },
   "writer_args": {},
   "data": {
-    "from_imports": [
-      [
-        ".repository",
-        "Repository"
-      ],
-      [
-        ".x_document_repository",
-        "XDocumentRepository"
-      ]
-    ],
+    "from_imports": [],
     "from_imports_typing": [
       [
         "..container.x_enumeration",
@@ -33,10 +24,7 @@
     "name": "XRepository",
     "imports": [],
     "namespace": "com.sun.star.rdf",
-    "extends": [
-      "com.sun.star.rdf.Repository",
-      "com.sun.star.rdf.XDocumentRepository"
-    ],
+    "extends": [],
     "desc": [
       "provides access to a set of named RDF graphs.",
       "",
@@ -57,7 +45,7 @@
           "desc": [
             "creates a fresh unique blank node."
           ],
-          "raises": "",
+          "raises": [],
           "args": []
         },
         {
@@ -68,7 +56,9 @@
             "",
             "The name must be unique within the repository."
           ],
-          "raises": "com.sun.star.lang.IllegalArgumentException,",
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException,"
+          ],
           "args": []
         },
         {
@@ -79,7 +69,9 @@
             "",
             "This invalidates any instances of XNamedGraph for the argument."
           ],
-          "raises": "com.sun.star.lang.IllegalArgumentException,",
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException,"
+          ],
           "args": []
         },
         {
@@ -90,7 +82,9 @@
             "",
             "Implementations must support RDF/XML format. Support for other RDF formats is optional. If the format is not supported by the implementation, an com.sun.star.datatransfer.UnsupportedFlavorException is raised."
           ],
-          "raises": "com.sun.star.lang.IllegalArgumentException,",
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException,"
+          ],
           "args": []
         },
         {
@@ -99,7 +93,9 @@
           "desc": [
             "gets a graph by its name."
           ],
-          "raises": "com.sun.star.lang.IllegalArgumentException,",
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException,"
+          ],
           "args": []
         },
         {
@@ -108,7 +104,9 @@
           "desc": [
             "gets the names of all the graphs in the repository."
           ],
-          "raises": "RepositoryException",
+          "raises": [
+            "RepositoryException"
+          ],
           "args": []
         },
         {
@@ -119,7 +117,9 @@
             "",
             "Any parameter may be NULL, which acts as a wildcard. For example, to get all statements about myURI: getStatements(myURI, null, null)"
           ],
-          "raises": "RepositoryException",
+          "raises": [
+            "RepositoryException"
+          ],
           "args": []
         },
         {
@@ -130,7 +130,9 @@
             "",
             "Implementations must support RDF/XML format. Support for other RDF formats is optional. If the format is not supported by the implementation, an com.sun.star.datatransfer.UnsupportedFlavorException is raised. If the format requires use of a BaseURI, but none is given, an com.sun.star.lang.IllegalArgumentException is raised."
           ],
-          "raises": "com.sun.star.lang.IllegalArgumentException,",
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException,"
+          ],
           "args": []
         },
         {
@@ -141,7 +143,9 @@
             "",
             "This method runs a SPARQL query that computes a boolean, i.e., a query beginning with \\\"ASK\\\"."
           ],
-          "raises": "QueryException,",
+          "raises": [
+            "QueryException,"
+          ],
           "args": []
         },
         {
@@ -152,7 +156,9 @@
             "",
             "This method runs a SPARQL query that constructs a result graph, i.e., a query beginning with \\\"CONSTRUCT\\\"."
           ],
-          "raises": "QueryException,",
+          "raises": [
+            "QueryException,"
+          ],
           "args": []
         },
         {
@@ -163,7 +169,9 @@
             "",
             "This method runs a SPARQL query that returns a list of variable bindings, i.e., a query beginning with \\\"SELECT\\\". The result is basically a (rectangular) table with labeled columns, where individual cells may be NULL."
           ],
-          "raises": "QueryException,",
+          "raises": [
+            "QueryException,"
+          ],
           "args": []
         }
       ]
