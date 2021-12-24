@@ -17,6 +17,7 @@ from logger.log_handle import get_logger
 from parser import __version__, JSON_ID
 from config import AppConfig, read_config
 from parser.json_parser.interface_parser import parse as parse_interface
+from parser.json_parser.struct_parser import parse as parse_struct
 logger = None
 
 os.environ['project_root'] = str(Path(__file__).parent)
@@ -95,9 +96,13 @@ class CompileEnumLinks(BaseCompile):
 
 
 class CompileStructLinks(BaseCompile):
-    def __init__(self, config: AppConfig) -> None:
+    def __init__(self, config: AppConfig, use_subprocess: bool) -> None:
         super().__init__(config=config)
-        self._processer = str(Path(self.json_parser_path, 'struct_parser.py'))
+        self._do_sub = use_subprocess
+        if self._do_sub:
+            self._processer = str(Path(self.json_parser_path, 'struct_parser.py'))
+        else:
+            self._processer = ''
         self._process_files()
 
     def _subprocess(self, file: str):
@@ -110,10 +115,18 @@ class CompileStructLinks(BaseCompile):
         if res.stderr:
             logger.error(res.stderr)
 
+    def _process_direct(self, file: str):
+        logger.info(
+            "CompileInterfaceLinks: Processing interface in file: %s", file)
+        parse_struct('t', 'j', f=file)
+
     def _process_files(self):
         link_files = self.get_module_link_files()
         for file in link_files:
-            self._subprocess(file)
+            if self._do_sub:
+                self._subprocess(file)
+            else:
+                self._process_direct(file)
 
 class CompileInterfaceLinks(BaseCompile):
 
@@ -427,7 +440,7 @@ def main():
             CompileEnumLinks(config=config)
     if args.command == 'struct':
         if args.struct_all:
-            CompileStructLinks(config=config)
+            CompileStructLinks(config=config, use_subprocess=False)
     if args.command == 'interface':
         if args.interface_all:
             CompileInterfaceLinks(config=config, use_subprocess=False)

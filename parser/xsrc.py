@@ -11,17 +11,16 @@ import logging
 import textwrap
 import xerox  # requires xclip - sudo apt-get install xclip
 import re
-try:
-    import base
-except ModuleNotFoundError:
-    import parser.base as base
-
 from typing import Dict, List, Set, Union
 from bs4.element import ResultSet, Tag
 from kwhelp.decorator import AcceptedTypes, DecFuncEnum, TypeCheckKw
 from pathlib import Path
 from logger.log_handle import get_logger
 from dataclasses import dataclass
+try:
+    import base
+except ModuleNotFoundError:
+    import parser.base as base
 from parser import __version__, JSON_ID
 
 logger = None
@@ -961,7 +960,7 @@ class InterfaceWriter(base.WriteBase):
 # endregion Writer
 
 
-
+# region Parse method
 def _get_parsed_kwargs(**kwargs) -> Dict[str, str]:
     required = ("url",)
     lookups = {
@@ -1091,6 +1090,7 @@ def parse(*args, **kwargs):
             log_args['level'] = logging.DEBUG
         _set_loggers(get_logger(logger_name=Path(__file__).stem, **log_args))
     w.write()
+# endregion Parse method
 
 def _main():
 

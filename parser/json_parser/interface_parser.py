@@ -13,7 +13,7 @@ import json
 import logging
 import concurrent.futures
 from collections import namedtuple
-from typing import Dict, List, Union
+from typing import Dict, List, Tuple, Union
 from pathlib import Path
 from verr import Version
 _app_root = os.environ.get('project_root', str(
@@ -142,19 +142,19 @@ class WriterInterface:
             logger.error(res.stderr)
         return result
 
-    def _process_direct(self, url_data: urldata, *args, **kwargs) -> str:
+    def _process_direct(self, url_data: urldata, *args, **kwargs) -> Tuple[bool, str]:
         flags = [arg for arg in args if isinstance(arg, str)]
         if len(flags) == 0:
             flags.append('t')
             flags.append('j')
         kargs = kwargs.copy()
         kargs['url'] = url_data.href
-        result = f"{url_data.name}, Success"
+        result = True
         try:
             xsrc.parse(*flags, **kargs)
         except Exception:
-            result = f"{url_data.name}, Fail"
-        return result
+            result = False
+        return result, url_data.name
 
     def Write(self, *args, **kwargs):
         links = self._parser.get_links()
@@ -162,14 +162,19 @@ class WriterInterface:
             results = [executor.submit(self._process_direct, link, *args, **kwargs)
                        for link in links]
             for f in concurrent.futures.as_completed(results):
-                logger.info(f.result())
+                state, name = f.result()
+                if state:
+                    logger.info(f"Success processing: {name}")
+                else:
+                    logger.error(f"Failed processing: {name}")
 
+# region Parse method
 
 def _get_parsed_kwargs(**kwargs) -> Dict[str, str]:
     required = ("json_file",)
     lookups = {
         "f": "json_file",
-        "url": "url",
+        "json_file": "json_file",
         "L": "log_file",
         "log_file": "log_file"
     }
@@ -247,6 +252,8 @@ def parse(*args, **kwargs):
     p = ParserInterface(json_path=pkwargs['json_file'])
     w = WriterInterface(parser=p)
     w.Write(*args, **kwargs)
+
+# endregion Parse method
 
 def main():
     global logger
