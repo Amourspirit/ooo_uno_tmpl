@@ -29,7 +29,7 @@ from abc import ABC, abstractmethod
 from bs4 import BeautifulSoup
 from bs4.element import ResultSet, Tag
 from glob import glob
-from kwhelp.decorator import AcceptedTypes, DecArgEnum, DecFuncEnum, RequireArgs, RuleCheckAll, RuleCheckAllKw, TypeCheck, TypeCheckKw
+from kwhelp.decorator import AcceptedTypes, DecArgEnum, DecFuncEnum, RequireArgs, RuleCheckAllKw, TypeCheck, TypeCheckKw
 from kwhelp import rules
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Optional, Set, Tuple, Union
@@ -221,6 +221,14 @@ class TextCache(CacheBase):
 
         if self.seconds > 0:
             f_stat = f.stat()
+            if f_stat.st_size == 0:
+                # shoud not be zero byte file.
+                try:
+                    self.del_from_cache(f)
+                except Exception as e:
+                    logger.warning(
+                        'Not able to delete 0 byte file: %s, error: %s', filename, str(e))
+                return None
             ti_m = f_stat.st_mtime
             age = time.time() - ti_m
             if age >= self.seconds:
@@ -1134,7 +1142,7 @@ class APIData:
     @property
     def url_obj(self) -> UrlObj:
         return self._soup_obj.url_obj
-    # region Properties
+    # endregion Properties
 
 # endregion block and api classes
 
@@ -2174,6 +2182,14 @@ class ImageCache(CacheBase):
 
         if self.seconds > 0:
             f_stat = f.stat()
+            if f_stat.st_size == 0:
+                # shoud not be zero byte file.
+                try:
+                    self.del_from_cache(f)
+                except Exception as e:
+                    logger.warning(
+                        'Not able to delete 0 byte file: %s, error: %s', filename, str(e))
+                return None
             ti_m = f_stat.st_mtime
             age = time.time() - ti_m
             if age >= self.seconds:
