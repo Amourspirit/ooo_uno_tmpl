@@ -8,7 +8,6 @@ This module then parses each link and calls the correct module to process each l
 import os
 import sys
 import argparse
-import re
 import subprocess
 import json
 import logging
@@ -135,11 +134,11 @@ class WriterStruct:
         logger.info('Running subprocess: %s', cmd_str)
         cmd = [sys.executable] + cmd_str.split()
         res = subprocess.run(cmd)
-        result = f"{url_data.name}, Success"
+        result = f"Success, {url_data.name}"
         if res.stdout:
             logger.info(res.stdout)
         if res.stderr:
-            result = f"{url_data.name}, Fail"
+            result = f"Fail, {url_data.name}"
             logger.error(res.stderr)
         return result
 
@@ -170,8 +169,6 @@ class WriterStruct:
                     logger.error(f"Failed processing: {name}")
 
 # region Parse method
-
-
 def _get_parsed_kwargs(**kwargs) -> Dict[str, str]:
     required = ("json_file",)
     lookups = {
@@ -224,8 +221,8 @@ def parse(*args, **kwargs):
         'no_sort' (str, optional): Short form ``'s'``. No sorting of results. Default ``False``
         'no_cache' (str, optional): Short form ``'x'``. No caching. Default ``False``
         'no_print_clear (str, optional): Short form ``'p'``. No clearing of terminal
-        'no_auto_import' (str, optional): Short form ``'a'``. Auto import types that are not python types. Default ``True``
             when otuput to terminal. Default ``False``
+        'no_auto_import' (str, optional): Short form ``'a'``. Auto import types that are not python types. Default ``True``
         'dynamic_struct' (str, optional): Short form ``'d'``. Template will generate dynameic struct conten. Default ``False``
         'print_json' (str, optional): Short form ``'n'``. Print json to termainl. Default ``False``
         'print_template' (str, optional): Short form ``'m'``. Print template to terminal. Default ``False``
@@ -249,7 +246,7 @@ def parse(*args, **kwargs):
         if 'log_file' in pkwargs:
             log_args['log_file'] = pkwargs['log_file']
         else:
-            log_args['log_file'] = 'interface_parse.log'
+            log_args['log_file'] = 'struct_parser.log'
         if pargs['verbose']:
             log_args['level'] = logging.DEBUG
         _set_loggers(get_logger(logger_name=Path(__file__).stem, **log_args))
@@ -291,7 +288,7 @@ def main():
         if args.log_file:
             log_args['log_file'] = args.log_file
         else:
-            log_args['log_file'] = 'enum_parser.log'
+            log_args['log_file'] = 'struct_parser.log'
         if args.verbose:
             log_args['level'] = logging.DEBUG
         _set_loggers(get_logger(logger_name=Path(__file__).stem, **log_args))

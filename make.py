@@ -18,6 +18,7 @@ from parser import __version__, JSON_ID
 from config import AppConfig, read_config
 from parser.json_parser.interface_parser import parse as parse_interface
 from parser.json_parser.struct_parser import parse as parse_struct
+from parser.json_parser.enum_parser import parse as parse_enm
 logger = None
 
 os.environ['project_root'] = str(Path(__file__).parent)
@@ -74,9 +75,13 @@ class BaseCompile:
 
 
 class CompileEnumLinks(BaseCompile):
-    def __init__(self, config: AppConfig) -> None:
+    def __init__(self, config: AppConfig, use_subprocess: bool) -> None:
         super().__init__(config=config)
-        self._processer = str(Path(self.json_parser_path, 'enum_parser.py'))
+        self._do_sub = use_subprocess
+        if self._do_sub:
+            self._processer = str(Path(self.json_parser_path, 'enum_parser.py'))
+        else:
+            self._processer = ''
         self._process_files()
 
     def _subprocess(self, file:str):
@@ -89,10 +94,18 @@ class CompileEnumLinks(BaseCompile):
         if res.stderr:
             logger.error(res.stderr)
 
+    def _process_direct(self, file: str):
+        logger.info(
+            "CompileEnumLinks: Processing interface in file: %s", file)
+        parse_enm('t', 'j', f=file)
+
     def _process_files(self):
         link_files = self.get_module_link_files()
         for file in link_files:
-            self._subprocess(file)
+            if self._do_sub:
+                self._subprocess(file)
+            else:
+                self._process_direct(file)
 
 
 class CompileStructLinks(BaseCompile):
@@ -437,7 +450,7 @@ def main():
             logger.error(e)
     if args.command == 'enum':
         if args.enum_all:
-            CompileEnumLinks(config=config)
+            CompileEnumLinks(config=config, use_subprocess=False)
     if args.command == 'struct':
         if args.struct_all:
             CompileStructLinks(config=config, use_subprocess=False)

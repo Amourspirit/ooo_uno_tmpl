@@ -134,11 +134,11 @@ class WriterInterface:
         logger.info('Running subprocess: %s', cmd_str)
         cmd = [sys.executable] + cmd_str.split()
         res = subprocess.run(cmd)
-        result = f"{url_data.name}, Success"
+        rresult = f"Success, {url_data.name}"
         if res.stdout:
             logger.info(res.stdout)
         if res.stderr:
-            result = f"{url_data.name}, Fail"
+            result = result = f"Fail, {url_data.name}"
             logger.error(res.stderr)
         return result
 
