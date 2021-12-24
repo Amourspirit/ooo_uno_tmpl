@@ -8,6 +8,7 @@ import sys
 import logging
 import argparse
 import base
+from dataclasses import dataclass, field
 from typing import Dict, List, Set, Tuple, Union
 from bs4 import BeautifulSoup
 from bs4.element import ResultSet, Tag
@@ -30,9 +31,19 @@ def _set_loggers(l: Union[logging.Logger, None]):
 
 _set_loggers(None)
 
-dataitem = namedtuple(
-    'dataitem', ['name', 'datatype', 'orig_type', 'lines'])
+# dataitem = namedtuple(
+#     'dataitem', ['name', 'datatype', 'orig_type', 'lines'])
+@dataclass
+class DataItem:
+    name: str
+    is_py_type: bool
+    datatype: str
+    orig_type: str
+    lines: List[str] = field(default_factory=list)
 
+    def __lt__(self, other: 'DataItem'):
+        return self.name < other.name
+    
 
 class Parser(base.ParserBase):
     # region Constructor
@@ -46,6 +57,7 @@ class Parser(base.ParserBase):
         self._data_info = None
         self._data_items = None
         self._auto_imports = set()
+        self._requires_typing = False
 
     # endregion Constructor
 
@@ -57,6 +69,7 @@ class Parser(base.ParserBase):
         info["imports"] = []
         info["auto_imports"] = self._get_auto_imports(ns=info['namespace'])
         info["from_imports"] = [] # placeholder. picked up in writer
+        info["requires_typing"] = self.requires_typing
         info['items'] = items
         return info
 
@@ -122,7 +135,7 @@ class Parser(base.ParserBase):
     # endregion Info
 
     # region Data
-    def get_data(self) -> List[dataitem]:
+    def get_data(self) -> List[DataItem]:
         if not self._data is None:
             return self._data
         try:
@@ -161,6 +174,7 @@ class Parser(base.ParserBase):
             for itm in data:
                 s = '{\n'
                 s += self._indent + f'"name": "{itm.name}",\n'
+                s += self._indent + f'"is_py_type": "{itm.is_py_type}",\n'
                 s += self._indent + f'"type": "{itm.datatype}",\n'
                 s += self._indent + f'"orig_type": "{itm.orig_type}",\n'
                 if len(itm.lines) > 0:
@@ -186,6 +200,7 @@ class Parser(base.ParserBase):
             for itm in data:
                 d_itm = {
                     "name": itm.name,
+                    "is_py_type": itm.is_py_type,
                     "type": itm.datatype,
                     "orig_type": itm.orig_type,
                     "lines": itm.lines
@@ -197,7 +212,7 @@ class Parser(base.ParserBase):
         self._data_items = result
         return self._data_items
 
-    def _get_struct_details(self, memitetms: ResultSet) -> List[dataitem]:
+    def _get_struct_details(self, memitetms: ResultSet) -> List[DataItem]:
         results = []
         def get_doc_lines(item_tag:Tag) -> list:
             docs = item_tag.find('div', class_='memdoc')
@@ -216,12 +231,14 @@ class Parser(base.ParserBase):
                         # lines.append(ln.text)
             return lines
 
-        def get_py_type(in_type: str) -> str:
+        def get_py_type(in_type: str) -> PythonType:
             
             p_type: PythonType = base.Util.get_python_type(in_type=in_type)
             for im in p_type.imports:
                 self._auto_imports.add(im)
-            return p_type.type
+            if p_type.requires_typing:
+                self._requires_typing = True
+            return p_type
 
         for itm in memitetms:
             # text in format of com::sun::star::awt::AdjustmentType Type
@@ -241,10 +258,13 @@ class Parser(base.ParserBase):
             name = base.Util.get_clean_classname(parts.pop())
             lines = get_doc_lines(itm)
             logger.debug("Detils: Name: %s, Type: %s, Orig: %s", name, py_type, _type)
-            di = dataitem(name=name,
-                          datatype=py_type,
-                          orig_type=_type,
-                          lines=lines)
+            di = DataItem(
+                name=name,
+                is_py_type=py_type.is_py_type,
+                datatype=py_type.type,
+                orig_type=_type,
+                lines=lines
+            )
             results.append(di)
         if self._sort:
             results.sort()
@@ -256,6 +276,11 @@ class Parser(base.ParserBase):
     def auto_imports(self) -> set:
         """Specifies auto_imports"""
         return self._auto_imports
+
+    @property
+    def requires_typing(self) -> set:
+        """Gets if import if typing is required"""
+        return self._requires_typing
     # endregion Properties
 
 
@@ -392,6 +417,8 @@ class StructWriter(base.WriteBase):
         self._template = self._template.replace('{name}', self._p_name)
         self._template = self._template.replace('{ns}', self._p_namespace)
         self._template = self._template.replace('{link}', self._p_url)
+        self._template = self._template.replace(
+            '{requires_typing}', str(self._parser.requires_typing))
         indent = ' ' * self._indent_amt
         str_json_desc = base.Util.get_formated_dict_list_str(self._p_desc)
         self._template = self._template.replace('{desc}', str_json_desc)
@@ -475,7 +502,7 @@ class StructWriter(base.WriteBase):
 def _main():
     # url = 'https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1beans_1_1Ambiguous_3_01T_01_4.html'
     # url = 'https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1beans_1_1GetPropertyTolerantResult.html'
-    url = 'https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1beans_1_1GetDirectPropertyTolerantResult.html'
+    url = 'https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1text_1_1TextMarkupDescriptor.html'
     sys.argv.extend(['--log-file', 'debug.log', '-v', '-n', '-u', url])
     main()
 

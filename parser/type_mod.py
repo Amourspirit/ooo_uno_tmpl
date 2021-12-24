@@ -34,6 +34,7 @@ class PythonType:
     type: str = 'object'
     requires_typing: bool = False
     imports: Set[str] = field(default_factory=set)
+    is_py_type: bool = False
 
 class ITypeRule(ABC):
     @abstractmethod
@@ -155,7 +156,8 @@ class RulePrimative(ITypeRule):
     def get_python_type(self, in_type: str) -> PythonType:
         return PythonType(
             type=TYPE_MAP_PRIMITIVE[in_type],
-            requires_typing=False
+            requires_typing=False,
+            is_py_type=True
         )
 
 class RuleComType(ITypeRule):
@@ -193,7 +195,8 @@ class RuleComType(ITypeRule):
         return PythonType(
             type= parts.pop(),
             requires_typing=False,
-            imports=set([s_type])
+            imports=set([s_type]),
+            is_py_type=False
         )
 class RuleKnownType(ITypeRule):
     """Rule for Known uno types sucha s sequence"""
@@ -207,7 +210,8 @@ class RuleKnownType(ITypeRule):
     def get_python_type(self, in_type: str) -> PythonType:
         return PythonType(
             type = TYPE_MAP_KNOWN[in_type],
-            requires_typing=False
+            requires_typing=False,
+            is_py_type=True
         )
 
 class RuleSeqLikePrimative(ITypeRule):
@@ -278,7 +282,8 @@ class RuleSeqLikePrimative(ITypeRule):
             w = f"'typing.List[{p_type.type}]'"
         return PythonType(
             type = w,
-            requires_typing=True
+            requires_typing=True,
+            is_py_type=p_type.is_py_type
         )
 
 
@@ -347,7 +352,8 @@ class RuleSeqLikeNonPrim(ITypeRule):
 
         p_type = PythonType(
             type=w,
-            requires_typing=True
+            requires_typing=True,
+            is_py_type=False
         )
         p_type.imports.add(inner_str)
         return p_type
@@ -417,7 +423,8 @@ class RuleSeqLikePair(ITypeRule):
             w = "'" + w + "'"
         p_type = PythonType(
             type=w,
-            requires_typing=True
+            requires_typing=True,
+            is_py_type=p_inner.is_py_type
         )
         p_type.imports.update(p_inner.imports)
         return p_type
@@ -470,7 +477,8 @@ class RuleTuple2Like(ITypeRule):
         if s_type in TYPE_MAP_KNOWN:
             p_type = PythonType(
                 type=TYPE_MAP_KNOWN[s_type],
-                requires_typing=True
+                requires_typing=True,
+                is_py_type=True
             )
         else:
             p_type = self._rules.get_python_type(s_type)
@@ -491,4 +499,5 @@ class RuleTuple2Like(ITypeRule):
         r_type.imports.update(p_type_one.imports)
         r_type.imports.update(p_type_two.imports)
         r_type.type = f_str
+        r_type.is_py_type = p_type.is_py_type and p_type_one.is_py_type and p_type_two.is_py_type
         return r_type

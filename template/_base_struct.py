@@ -1,6 +1,6 @@
 # coding: utf-8
 import json
-from typing import Tuple, List
+from typing import Dict, Tuple, List
 from _base_tmpl import BaseTpml
 from pathlib import Path
 from verr import Version
@@ -10,6 +10,7 @@ class BaseStruct(BaseTpml):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         # self._linfo('hello')
+        self._sorted_key_index = None
 
     def init_data(self):
         super().init_data()
@@ -55,7 +56,7 @@ class BaseStruct(BaseTpml):
             raise e
 
     def _hydrate_data(self, json_data: dict):
-        data = json_data['data']
+        data:dict = json_data['data']
 
         def set_data(_key: str, a_name=None):
             attr_name = _key if not a_name else a_name
@@ -73,6 +74,7 @@ class BaseStruct(BaseTpml):
         set_data('auto_imports')
         set_data('namespace')
         set_data('from_imports')
+        self.requires_typing = data.get('requires_typing', False)
         sort = bool(json_data['parser_args']['sort'])
         self.attribs = self._get_attribs(json_data=json_data, sort=sort)
         ver_json = Version.parse(json_data.get('version'))
@@ -114,3 +116,35 @@ class BaseStruct(BaseTpml):
             raise Exception(
                 "Invalid Data: Expected version to be at least '{min_ver}' got {ver}")
 
+    def get_sorted_names(self) -> List[Tuple[str, int]]:
+        """Gets a list of tuples of name and index"""
+        if not self._sorted_key_index is None:
+            return self._sorted_key_index
+        sorted = []
+        d_lst: List[Dict[str, object]] = getattr(self, 'attribs', [])
+        for i, d in enumerate(d_lst):
+            sorted.append((d['name'], i))
+        sorted.sort()
+        self._sorted_key_index = sorted
+        return self._sorted_key_index
+
+    def get_constructor_str(self) -> str:
+        sorted = self.get_sorted_names()
+        d_lst: List[Dict[str, object]] = getattr(self, 'attribs', [])
+        
+        c_str = ''
+        for i, tpl in enumerate(sorted):
+            if i > 0:
+               c_str += ', ' 
+            index = tpl[1]
+            itm: Dict[str, object] = d_lst[index]
+            name: str = itm['name']
+            is_py_type: bool = bool(itm.get('is_py_type', False))
+            t: str = itm['type']
+            if is_py_type:
+                s = f"{name}: {t}"
+            else:
+                s = f"{name}: '{t}'"
+            c_str += s
+            
+        return c_str
