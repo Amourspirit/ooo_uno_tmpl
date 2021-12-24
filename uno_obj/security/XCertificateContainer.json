@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
   "version": "0.1.5",
-  "timestamp": "2021-12-24 00:48:49+00:00",
+  "timestamp": "2021-12-24 19:07:08+00:00",
   "name": "XCertificateContainer",
   "type": "interface",
   "namespace": "com.sun.star.security",
@@ -10,12 +10,19 @@
   },
   "writer_args": {},
   "data": {
-    "from_imports": [],
+    "from_imports": [
+      [
+        ".certificate_container",
+        "CertificateContainer"
+      ]
+    ],
     "from_imports_typing": [],
     "name": "XCertificateContainer",
     "imports": [],
     "namespace": "com.sun.star.security",
-    "extends": [],
+    "extends": [
+      "com.sun.star.security.CertificateContainer"
+    ],
     "desc": [
       "Manage user certificate for temporary connections.",
       "",
@@ -33,7 +40,23 @@
             "Store the certificate in memory."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "url",
+              "str",
+              "in"
+            ],
+            [
+              "cert",
+              "str",
+              "in"
+            ],
+            [
+              "trust",
+              "bool",
+              "in"
+            ]
+          ]
         },
         {
           "name": "hasCertificate",
@@ -42,7 +65,18 @@
             "Check if a certificate was stored earlier before."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "url",
+              "str",
+              "in"
+            ],
+            [
+              "cert",
+              "str",
+              "in"
+            ]
+          ]
         }
       ]
     }

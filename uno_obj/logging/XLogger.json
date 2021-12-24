@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
   "version": "0.1.5",
-  "timestamp": "2021-12-24 00:52:07+00:00",
+  "timestamp": "2021-12-24 18:43:44+00:00",
   "name": "XLogger",
   "type": "interface",
   "namespace": "com.sun.star.logging",
@@ -39,7 +39,13 @@
             "Note: The log level of the given handler (XLogHandler.Level) will not be touched. In particular, it will not be set to the logger's log level. It's the responsibility of the component which knits a logger with one or more log handlers to ensure that all loggers have appropriate levels set."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "LogHandler",
+              "object",
+              "in"
+            ]
+          ]
         },
         {
           "name": "isLoggable",
@@ -50,7 +56,13 @@
             "The method can be used to optimize performance as maybe complex parameter evaluation in the log calls can be omitted if isLoggable evaluates to false."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "Level",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "log",
@@ -59,7 +71,18 @@
             "logs a given message"
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "Level",
+              "int",
+              "in"
+            ],
+            [
+              "Message",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "logp",
@@ -68,7 +91,28 @@
             "logs a given message, detailing the source class and method at which the logged event occurred."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "Level",
+              "int",
+              "in"
+            ],
+            [
+              "SourceClass",
+              "str",
+              "in"
+            ],
+            [
+              "SourceMethod",
+              "str",
+              "in"
+            ],
+            [
+              "Message",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "removeLogHandler",
@@ -77,7 +121,13 @@
             "removes the given handler from the list of handlers."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "LogHandler",
+              "object",
+              "in"
+            ]
+          ]
         }
       ],
       "properties": [

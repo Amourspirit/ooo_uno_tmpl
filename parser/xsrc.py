@@ -9,17 +9,18 @@ import sys
 import argparse
 import logging
 import textwrap
-from typing_extensions import Required
-from kwhelp import KwArg
 import xerox  # requires xclip - sudo apt-get install xclip
 import re
-import base
-from typing import Dict, List, Optional, Set, Union
-from bs4.element import NavigableString, PageElement, ResultSet, Tag
-from kwhelp.decorator import AcceptedTypes, DecFuncEnum, TypeCheck, TypeCheckKw
+try:
+    import base
+except ModuleNotFoundError:
+    import parser.base as base
+
+from typing import Dict, List, Set, Union
+from bs4.element import ResultSet, Tag
+from kwhelp.decorator import AcceptedTypes, DecFuncEnum, TypeCheckKw
 from pathlib import Path
 from logger.log_handle import get_logger
-from parser.enm import main
 from dataclasses import dataclass
 from parser import __version__, JSON_ID
 
@@ -1082,7 +1083,7 @@ def parse(*args, **kwargs):
     )
     if logger is None:
         log_args = {}
-        if '__log_file' in pkwargs:
+        if 'log_file' in pkwargs:
             log_args['log_file'] = pkwargs['log_file']
         else:
             log_args['log_file'] = 'interface.log'

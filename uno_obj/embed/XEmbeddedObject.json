@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
   "version": "0.1.5",
-  "timestamp": "2021-12-24 00:46:42+00:00",
+  "timestamp": "2021-12-24 18:43:46+00:00",
   "name": "XEmbeddedObject",
   "type": "interface",
   "namespace": "com.sun.star.embed",
@@ -12,16 +12,12 @@
   "data": {
     "from_imports": [
       [
-        ".x_component_supplier",
-        "XComponentSupplier"
+        "..document.x_event_broadcaster",
+        "XEventBroadcaster"
       ],
       [
         ".x_visual_object",
         "XVisualObject"
-      ],
-      [
-        ".x_state_change_broadcaster",
-        "XStateChangeBroadcaster"
       ],
       [
         ".x_classified_object",
@@ -32,8 +28,12 @@
         "XCloseable"
       ],
       [
-        "..document.x_event_broadcaster",
-        "XEventBroadcaster"
+        ".x_state_change_broadcaster",
+        "XStateChangeBroadcaster"
+      ],
+      [
+        ".x_component_supplier",
+        "XComponentSupplier"
       ]
     ],
     "from_imports_typing": [
@@ -68,7 +68,13 @@
           "raises": [
             "com.sun.star.embed.UnreachableStateException,"
           ],
-          "args": []
+          "args": [
+            [
+              "nNewState",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "doVerb",
@@ -79,7 +85,13 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException,"
           ],
-          "args": []
+          "args": [
+            [
+              "nVerbID",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getClientSite",
@@ -123,7 +135,13 @@
           "raises": [
             "com.sun.star.embed.WrongStateException"
           ],
-          "args": []
+          "args": [
+            [
+              "nAspect",
+              "object",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getSupportedVerbs",
@@ -145,7 +163,13 @@
           "raises": [
             "com.sun.star.embed.WrongStateException"
           ],
-          "args": []
+          "args": [
+            [
+              "xClient",
+              "object",
+              "in"
+            ]
+          ]
         },
         {
           "name": "setContainerName",
@@ -154,7 +178,13 @@
             "provides object with the name of container document."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "sName",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "setUpdateMode",
@@ -165,7 +195,13 @@
           "raises": [
             "com.sun.star.embed.WrongStateException"
           ],
-          "args": []
+          "args": [
+            [
+              "nMode",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "update",

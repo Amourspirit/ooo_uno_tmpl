@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
   "version": "0.1.5",
-  "timestamp": "2021-12-24 00:52:51+00:00",
+  "timestamp": "2021-12-24 18:43:40+00:00",
   "name": "XTolerantMultiPropertySet",
   "type": "interface",
   "namespace": "com.sun.star.beans",
@@ -18,12 +18,12 @@
     ],
     "from_imports_typing": [
       [
-        ".get_direct_property_tolerant_result",
-        "GetDirectPropertyTolerantResult"
-      ],
-      [
         ".set_property_tolerant_failed",
         "SetPropertyTolerantFailed"
+      ],
+      [
+        ".get_direct_property_tolerant_result",
+        "GetDirectPropertyTolerantResult"
       ],
       [
         ".get_property_tolerant_result",
@@ -57,7 +57,13 @@
             "If the names are not sorted the behaviour of the method is undefined!"
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aPropertyNames",
+              "typing.List[str]",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getPropertyValuesTolerant",
@@ -70,7 +76,13 @@
             "If the names are not sorted the behaviour of the method is undefined!"
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aPropertyNames",
+              "typing.List[str]",
+              "in"
+            ]
+          ]
         },
         {
           "name": "setPropertyValuesTolerant",
@@ -85,7 +97,18 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException"
           ],
-          "args": []
+          "args": [
+            [
+              "aPropertyNames",
+              "typing.List[str]",
+              "in"
+            ],
+            [
+              "aValues",
+              "typing.List[object]",
+              "in"
+            ]
+          ]
         }
       ]
     }

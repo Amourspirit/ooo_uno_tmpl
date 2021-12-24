@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
   "version": "0.1.5",
-  "timestamp": "2021-12-24 00:48:49+00:00",
+  "timestamp": "2021-12-24 19:07:08+00:00",
   "name": "XDocumentDigitalSignatures",
   "type": "interface",
   "namespace": "com.sun.star.security",
@@ -18,12 +18,12 @@
     ],
     "from_imports_typing": [
       [
-        ".x_certificate",
-        "XCertificate"
-      ],
-      [
         ".document_signature_information",
         "DocumentSignatureInformation"
+      ],
+      [
+        ".x_certificate",
+        "XCertificate"
       ]
     ],
     "name": "XDocumentDigitalSignatures",
@@ -49,14 +49,26 @@
           "returns": "None",
           "desc": [],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "Author",
+              "XCertificate",
+              "in"
+            ]
+          ]
         },
         {
           "name": "addLocationToTrustedSources",
           "returns": "None",
           "desc": [],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "Location",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "chooseCertificate",
@@ -69,7 +81,13 @@
             "    LibreOffice 5.3"
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "Description",
+              "str",
+              "out"
+            ]
+          ]
         },
         {
           "name": "chooseCertificateWithProps",
@@ -82,7 +100,13 @@
             "    LibreOffice 6.0"
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "Properties",
+              "'typing.List[PropertyValue]'",
+              "out"
+            ]
+          ]
         },
         {
           "name": "chooseEncryptionCertificate",
@@ -110,7 +134,13 @@
             "    LibreOffice 6.0"
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "Description",
+              "str",
+              "out"
+            ]
+          ]
         },
         {
           "name": "getDocumentContentSignatureDefaultStreamName",
@@ -144,14 +174,26 @@
           "returns": "bool",
           "desc": [],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "Author",
+              "XCertificate",
+              "in"
+            ]
+          ]
         },
         {
           "name": "isLocationTrusted",
           "returns": "bool",
           "desc": [],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "Location",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "manageTrustedSources",
@@ -173,7 +215,13 @@
             "    LibreOffice 6.1"
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "Description",
+              "str",
+              "out"
+            ]
+          ]
         },
         {
           "name": "selectSigningCertificateWithType",
@@ -188,7 +236,18 @@
             "    LibreOffice 6.2"
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "certificateKind",
+              "object",
+              "in"
+            ],
+            [
+              "Description",
+              "str",
+              "out"
+            ]
+          ]
         },
         {
           "name": "setParentWindow",
@@ -201,14 +260,26 @@
             "    LibreOffice 6.3"
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "xParentWindow",
+              "XWindow",
+              "in"
+            ]
+          ]
         },
         {
           "name": "showCertificate",
           "returns": "None",
           "desc": [],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "Certificate",
+              "XCertificate",
+              "in"
+            ]
+          ]
         },
         {
           "name": "showDocumentContentSignatures",
@@ -217,7 +288,18 @@
             "shows the digital signatures of the document content"
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "xStorage",
+              "XStorage",
+              "in"
+            ],
+            [
+              "xSignInStream",
+              "XInputStream",
+              "in"
+            ]
+          ]
         },
         {
           "name": "showPackageSignatures",
@@ -226,7 +308,18 @@
             "shows the digital signatures of the package"
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "xStorage",
+              "XStorage",
+              "in"
+            ],
+            [
+              "xSignInStream",
+              "XInputStream",
+              "in"
+            ]
+          ]
         },
         {
           "name": "showScriptingContentSignatures",
@@ -235,7 +328,18 @@
             "shows the digital signatures of the scripting content"
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "xStorage",
+              "XStorage",
+              "in"
+            ],
+            [
+              "xSignInStream",
+              "XInputStream",
+              "in"
+            ]
+          ]
         },
         {
           "name": "signDocumentContent",
@@ -246,7 +350,18 @@
             "Macros will not be signed."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "xStorage",
+              "XStorage",
+              "in"
+            ],
+            [
+              "xSignStream",
+              "XStream",
+              "in"
+            ]
+          ]
         },
         {
           "name": "signDocumentWithCertificate",
@@ -259,7 +374,23 @@
             "    LibreOffice 6.2"
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "xCertificate",
+              "XCertificate",
+              "in"
+            ],
+            [
+              "xStorage",
+              "XStorage",
+              "in"
+            ],
+            [
+              "xStream",
+              "XStream",
+              "in"
+            ]
+          ]
         },
         {
           "name": "signPackage",
@@ -268,7 +399,18 @@
             "signs the full Package, which means everything in the storage except the content of META-INF"
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "Storage",
+              "XStorage",
+              "in"
+            ],
+            [
+              "xSignStream",
+              "XStream",
+              "in"
+            ]
+          ]
         },
         {
           "name": "signPackageWithCertificate",
@@ -281,7 +423,23 @@
             "    LibreOffice 7.0"
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "xCertificate",
+              "XCertificate",
+              "in"
+            ],
+            [
+              "xStorage",
+              "XStorage",
+              "in"
+            ],
+            [
+              "xStream",
+              "XStream",
+              "in"
+            ]
+          ]
         },
         {
           "name": "signScriptingContent",
@@ -292,7 +450,18 @@
             "The rest of document content will not be signed."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "xStorage",
+              "XStorage",
+              "in"
+            ],
+            [
+              "xSignStream",
+              "XStream",
+              "in"
+            ]
+          ]
         },
         {
           "name": "signScriptingContentWithCertificate",
@@ -307,7 +476,23 @@
             "    LibreOffice 7.0"
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "xCertificate",
+              "XCertificate",
+              "in"
+            ],
+            [
+              "xStorage",
+              "XStorage",
+              "in"
+            ],
+            [
+              "xStream",
+              "XStream",
+              "in"
+            ]
+          ]
         },
         {
           "name": "signSignatureLine",
@@ -324,7 +509,43 @@
             "    LibreOffice 6.1"
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "xStorage",
+              "XStorage",
+              "in"
+            ],
+            [
+              "xSignStream",
+              "XStream",
+              "in"
+            ],
+            [
+              "signatureLineId",
+              "str",
+              "in"
+            ],
+            [
+              "xCertificate",
+              "XCertificate",
+              "in"
+            ],
+            [
+              "xValidGraphic",
+              "XGraphic",
+              "in"
+            ],
+            [
+              "xInvalidGraphic",
+              "XGraphic",
+              "in"
+            ],
+            [
+              "comment",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "verifyDocumentContentSignatures",
@@ -335,7 +556,18 @@
             "Only document content will be checked."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "xStorage",
+              "XStorage",
+              "in"
+            ],
+            [
+              "xSignInStream",
+              "XInputStream",
+              "in"
+            ]
+          ]
         },
         {
           "name": "verifyPackageSignatures",
@@ -346,7 +578,18 @@
             "Only Package content will be checked."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "Storage",
+              "XStorage",
+              "in"
+            ],
+            [
+              "xSignInStream",
+              "XInputStream",
+              "in"
+            ]
+          ]
         },
         {
           "name": "verifyScriptingContentSignatures",
@@ -357,7 +600,18 @@
             "Only Scripting content will be checked."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "xStorage",
+              "XStorage",
+              "in"
+            ],
+            [
+              "xSignInStream",
+              "XInputStream",
+              "in"
+            ]
+          ]
         }
       ]
     }

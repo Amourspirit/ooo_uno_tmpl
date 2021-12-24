@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
   "version": "0.1.5",
-  "timestamp": "2021-12-24 00:45:11+00:00",
+  "timestamp": "2021-12-24 18:43:47+00:00",
   "name": "XScannerManager",
   "type": "interface",
   "namespace": "com.sun.star.scanner",
@@ -18,12 +18,12 @@
     ],
     "from_imports_typing": [
       [
-        ".scan_error",
-        "ScanError"
-      ],
-      [
         "..awt.x_bitmap",
         "XBitmap"
+      ],
+      [
+        ".scan_error",
+        "ScanError"
       ],
       [
         ".scanner_context",
@@ -49,7 +49,13 @@
           "raises": [
             "com.sun.star.scanner.ScannerException"
           ],
-          "args": []
+          "args": [
+            [
+              "scannerContext",
+              "object",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getAvailableScanners",
@@ -69,7 +75,13 @@
           "raises": [
             "com.sun.star.scanner.ScannerException"
           ],
-          "args": []
+          "args": [
+            [
+              "scannerContext",
+              "ScannerContext",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getError",
@@ -80,7 +92,13 @@
           "raises": [
             "com.sun.star.scanner.ScannerException"
           ],
-          "args": []
+          "args": [
+            [
+              "scannerContext",
+              "ScannerContext",
+              "in"
+            ]
+          ]
         },
         {
           "name": "startScan",
@@ -91,7 +109,18 @@
           "raises": [
             "com.sun.star.scanner.ScannerException"
           ],
-          "args": []
+          "args": [
+            [
+              "scannerContext",
+              "ScannerContext",
+              "in"
+            ],
+            [
+              "listener",
+              "XEventListener",
+              "in"
+            ]
+          ]
         }
       ]
     }

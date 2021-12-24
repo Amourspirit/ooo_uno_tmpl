@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
   "version": "0.1.5",
-  "timestamp": "2021-12-24 00:52:14+00:00",
+  "timestamp": "2021-12-24 19:07:05+00:00",
   "name": "XFormOperations",
   "type": "interface",
   "namespace": "com.sun.star.form.runtime",
@@ -18,12 +18,12 @@
     ],
     "from_imports_typing": [
       [
-        ".x_form_controller",
-        "XFormController"
-      ],
-      [
         "...sdbc.x_result_set_update",
         "XResultSetUpdate"
+      ],
+      [
+        ".x_form_controller",
+        "XFormController"
       ],
       [
         "...sdbc.x_row_set",
@@ -74,7 +74,13 @@
           "raises": [
             "com.sun.star.sdbc.SQLException"
           ],
-          "args": []
+          "args": [
+            [
+              "RecordInserted",
+              "bool",
+              "out"
+            ]
+          ]
         },
         {
           "name": "execute",
@@ -85,7 +91,13 @@
           "raises": [
             ","
           ],
-          "args": []
+          "args": [
+            [
+              "Feature",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "executeWithArguments",
@@ -96,7 +108,18 @@
           "raises": [
             ","
           ],
-          "args": []
+          "args": [
+            [
+              "Feature",
+              "int",
+              "in"
+            ],
+            [
+              "Arguments",
+              "'typing.List[NamedValue]'",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getState",
@@ -107,7 +130,13 @@
             "You would usually use this to update some user interface to reflect this state. For instance, you could imagine a toolbar button which is associated with a given feature. This button would be enabled if and only if the respective feature is currently available, and be checked if and only if the feature state is a boolean evaluating to TRUE."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "Feature",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "isEnabled",
@@ -118,7 +147,13 @@
             "Calling this is equivalent to calling getState(), and evaluating the FeatureState.Enabled member."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "Feature",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "isInsertionRow",

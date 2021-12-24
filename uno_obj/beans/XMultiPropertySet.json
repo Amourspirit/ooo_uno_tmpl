@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
   "version": "0.1.5",
-  "timestamp": "2021-12-24 00:52:47+00:00",
+  "timestamp": "2021-12-24 18:43:40+00:00",
   "name": "XMultiPropertySet",
   "type": "interface",
   "namespace": "com.sun.star.beans",
@@ -45,7 +45,18 @@
             "It is suggested to allow multiple registration of the same listener, thus for each time a listener is added, it has to be removed."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aPropertyNames",
+              "typing.List[str]",
+              "in"
+            ],
+            [
+              "xListener",
+              "XPropertiesChangeListener",
+              "in"
+            ]
+          ]
         },
         {
           "name": "firePropertiesChangeEvent",
@@ -54,7 +65,18 @@
             "fires a sequence of PropertyChangeEvents to the specified listener."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aPropertyNames",
+              "typing.List[str]",
+              "in"
+            ],
+            [
+              "xListener",
+              "XPropertiesChangeListener",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getPropertySetInfo",
@@ -70,7 +92,13 @@
             "The order of the values in the returned sequence will be the same as the order of the names in the argument."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aPropertyNames",
+              "typing.List[str]",
+              "in"
+            ]
+          ]
         },
         {
           "name": "removePropertiesChangeListener",
@@ -83,7 +111,13 @@
             "It is suggested to allow multiple registration of the same listener, thus for each time a listener is added, it has to be removed."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "xListener",
+              "XPropertiesChangeListener",
+              "in"
+            ]
+          ]
         },
         {
           "name": "setPropertyValues",
@@ -96,7 +130,18 @@
           "raises": [
             "com.sun.star.beans.PropertyVetoException,"
           ],
-          "args": []
+          "args": [
+            [
+              "aPropertyNames",
+              "typing.List[str]",
+              "in"
+            ],
+            [
+              "aValues",
+              "typing.List[object]",
+              "in"
+            ]
+          ]
         }
       ]
     }

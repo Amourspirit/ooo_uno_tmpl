@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
   "version": "0.1.5",
-  "timestamp": "2021-12-24 00:52:34+00:00",
+  "timestamp": "2021-12-24 18:43:42+00:00",
   "name": "XDatabaseDocumentUI",
   "type": "interface",
   "namespace": "com.sun.star.sdb.application",
@@ -13,16 +13,16 @@
     "from_imports": [],
     "from_imports_typing": [
       [
+        "...lang.x_component",
+        "XComponent"
+      ],
+      [
         "...awt.x_window",
         "XWindow"
       ],
       [
         "...sdbc.x_data_source",
         "XDataSource"
-      ],
-      [
-        "...lang.x_component",
-        "XComponent"
       ],
       [
         "...sdbc.x_connection",
@@ -88,7 +88,18 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException,"
           ],
-          "args": []
+          "args": [
+            [
+              "ObjectType",
+              "int",
+              "in"
+            ],
+            [
+              "DocumentDefinition",
+              "XComponent",
+              "out"
+            ]
+          ]
         },
         {
           "name": "createComponentWithArguments",
@@ -101,7 +112,23 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException,"
           ],
-          "args": []
+          "args": [
+            [
+              "ObjectType",
+              "int",
+              "in"
+            ],
+            [
+              "Arguments",
+              "'typing.List[PropertyValue]'",
+              "in"
+            ],
+            [
+              "DocumentDefinition",
+              "XComponent",
+              "out"
+            ]
+          ]
         },
         {
           "name": "identifySubComponent",
@@ -112,7 +139,13 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException"
           ],
-          "args": []
+          "args": [
+            [
+              "SubComponent",
+              "XComponent",
+              "in"
+            ]
+          ]
         },
         {
           "name": "isConnected",
@@ -142,7 +175,23 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException,"
           ],
-          "args": []
+          "args": [
+            [
+              "ObjectType",
+              "int",
+              "in"
+            ],
+            [
+              "ObjectName",
+              "str",
+              "in"
+            ],
+            [
+              "ForEditing",
+              "bool",
+              "in"
+            ]
+          ]
         },
         {
           "name": "loadComponentWithArguments",
@@ -157,7 +206,28 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException,"
           ],
-          "args": []
+          "args": [
+            [
+              "ObjectType",
+              "int",
+              "in"
+            ],
+            [
+              "ObjectName",
+              "str",
+              "in"
+            ],
+            [
+              "ForEditing",
+              "bool",
+              "in"
+            ],
+            [
+              "Arguments",
+              "'typing.List[PropertyValue]'",
+              "in"
+            ]
+          ]
         }
       ],
       "properties": [

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
   "version": "0.1.5",
-  "timestamp": "2021-12-24 00:49:19+00:00",
+  "timestamp": "2021-12-24 18:43:38+00:00",
   "name": "XPackage",
   "type": "interface",
   "namespace": "com.sun.star.deployment",
@@ -26,12 +26,12 @@
         "XAbortChannel"
       ],
       [
-        "..graphic.x_graphic",
-        "XGraphic"
-      ],
-      [
         "..beans.string_pair",
         "StringPair"
+      ],
+      [
+        "..graphic.x_graphic",
+        "XGraphic"
       ],
       [
         ".x_package",
@@ -70,7 +70,13 @@
           "raises": [
             "DeploymentException,"
           ],
-          "args": []
+          "args": [
+            [
+              "xCmdEnv",
+              "XCommandEnvironment",
+              "in"
+            ]
+          ]
         },
         {
           "name": "checkPrerequisites",
@@ -83,7 +89,23 @@
           "raises": [
             "DeploymentException,"
           ],
-          "args": []
+          "args": [
+            [
+              "xAbortChannel",
+              "XAbortChannel",
+              "in"
+            ],
+            [
+              "xCmdEnv",
+              "XCommandEnvironment",
+              "in"
+            ],
+            [
+              "alreadyInstalled",
+              "bool",
+              "in"
+            ]
+          ]
         },
         {
           "name": "createAbortChannel",
@@ -103,7 +125,28 @@
           "raises": [
             "ExtensionRemovedException,"
           ],
-          "args": []
+          "args": [
+            [
+              "destFolderURL",
+              "str",
+              "in"
+            ],
+            [
+              "newTitle",
+              "str",
+              "in"
+            ],
+            [
+              "nameClashAction",
+              "int",
+              "in"
+            ],
+            [
+              "xCmdEnv",
+              "XCommandEnvironment",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getBundle",
@@ -116,7 +159,18 @@
           "raises": [
             "DeploymentException,"
           ],
-          "args": []
+          "args": [
+            [
+              "xAbortChannel",
+              "XAbortChannel",
+              "in"
+            ],
+            [
+              "xCmdEnv",
+              "XCommandEnvironment",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getDescription",
@@ -151,7 +205,13 @@
           "raises": [
             "ExtensionRemovedException"
           ],
-          "args": []
+          "args": [
+            [
+              "highContrast",
+              "bool",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getIdentifier",
@@ -285,7 +345,18 @@
           "raises": [
             "DeploymentException,"
           ],
-          "args": []
+          "args": [
+            [
+              "xAbortChannel",
+              "XAbortChannel",
+              "in"
+            ],
+            [
+              "xCmdEnv",
+              "XCommandEnvironment",
+              "in"
+            ]
+          ]
         },
         {
           "name": "isRemoved",
@@ -309,7 +380,23 @@
           "raises": [
             "DeploymentException,"
           ],
-          "args": []
+          "args": [
+            [
+              "startup",
+              "bool",
+              "in"
+            ],
+            [
+              "xAbortChannel",
+              "XAbortChannel",
+              "in"
+            ],
+            [
+              "xCmdEnv",
+              "XCommandEnvironment",
+              "in"
+            ]
+          ]
         },
         {
           "name": "revokePackage",
@@ -322,7 +409,23 @@
           "raises": [
             "DeploymentException,"
           ],
-          "args": []
+          "args": [
+            [
+              "startup",
+              "bool",
+              "in"
+            ],
+            [
+              "xAbortChannel",
+              "XAbortChannel",
+              "in"
+            ],
+            [
+              "xCmdEnv",
+              "XCommandEnvironment",
+              "in"
+            ]
+          ]
         }
       ]
     }

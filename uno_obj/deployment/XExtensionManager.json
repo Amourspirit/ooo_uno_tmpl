@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
   "version": "0.1.5",
-  "timestamp": "2021-12-24 00:49:19+00:00",
+  "timestamp": "2021-12-24 18:43:38+00:00",
   "name": "XExtensionManager",
   "type": "interface",
   "namespace": "com.sun.star.deployment",
@@ -22,16 +22,16 @@
     ],
     "from_imports_typing": [
       [
-        ".x_package",
-        "XPackage"
+        ".x_package_type_info",
+        "XPackageTypeInfo"
       ],
       [
         "..task.x_abort_channel",
         "XAbortChannel"
       ],
       [
-        ".x_package_type_info",
-        "XPackageTypeInfo"
+        ".x_package",
+        "XPackage"
       ]
     ],
     "name": "XExtensionManager",
@@ -62,7 +62,33 @@
           "raises": [
             "DeploymentException,"
           ],
-          "args": []
+          "args": [
+            [
+              "url",
+              "str",
+              "in"
+            ],
+            [
+              "properties",
+              "'typing.List[NamedValue]'",
+              "in"
+            ],
+            [
+              "repository",
+              "str",
+              "in"
+            ],
+            [
+              "xAbortChannel",
+              "XAbortChannel",
+              "in"
+            ],
+            [
+              "xCmdEnv",
+              "XCommandEnvironment",
+              "in"
+            ]
+          ]
         },
         {
           "name": "checkPrerequisitesAndEnable",
@@ -73,7 +99,23 @@
           "raises": [
             "DeploymentException,"
           ],
-          "args": []
+          "args": [
+            [
+              "extension",
+              "object",
+              "in"
+            ],
+            [
+              "xAbortChannel",
+              "XAbortChannel",
+              "in"
+            ],
+            [
+              "xCmdEnv",
+              "XCommandEnvironment",
+              "in"
+            ]
+          ]
         },
         {
           "name": "createAbortChannel",
@@ -95,7 +137,23 @@
           "raises": [
             "DeploymentException,"
           ],
-          "args": []
+          "args": [
+            [
+              "extension",
+              "object",
+              "in"
+            ],
+            [
+              "xAbortChannel",
+              "XAbortChannel",
+              "in"
+            ],
+            [
+              "xCmdEnv",
+              "XCommandEnvironment",
+              "in"
+            ]
+          ]
         },
         {
           "name": "enableExtension",
@@ -108,7 +166,23 @@
           "raises": [
             "DeploymentException,"
           ],
-          "args": []
+          "args": [
+            [
+              "extension",
+              "object",
+              "in"
+            ],
+            [
+              "xAbortChannel",
+              "XAbortChannel",
+              "in"
+            ],
+            [
+              "xCmdEnv",
+              "XCommandEnvironment",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getAllExtensions",
@@ -121,7 +195,18 @@
           "raises": [
             "DeploymentException,"
           ],
-          "args": []
+          "args": [
+            [
+              "xAbortChannel",
+              "XAbortChannel",
+              "in"
+            ],
+            [
+              "xCmdEnv",
+              "XCommandEnvironment",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getDeployedExtension",
@@ -132,7 +217,28 @@
           "raises": [
             "DeploymentException,"
           ],
-          "args": []
+          "args": [
+            [
+              "repository",
+              "str",
+              "in"
+            ],
+            [
+              "identifier",
+              "str",
+              "in"
+            ],
+            [
+              "fileName",
+              "str",
+              "in"
+            ],
+            [
+              "xCmdEnv",
+              "XCommandEnvironment",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getDeployedExtensions",
@@ -143,7 +249,23 @@
           "raises": [
             "DeploymentException,"
           ],
-          "args": []
+          "args": [
+            [
+              "repository",
+              "str",
+              "in"
+            ],
+            [
+              "xAbortChannel",
+              "XAbortChannel",
+              "in"
+            ],
+            [
+              "xCmdEnv",
+              "XCommandEnvironment",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getExtensionsWithSameIdentifier",
@@ -156,7 +278,23 @@
           "raises": [
             "DeploymentException,"
           ],
-          "args": []
+          "args": [
+            [
+              "identifier",
+              "str",
+              "in"
+            ],
+            [
+              "fileName",
+              "str",
+              "in"
+            ],
+            [
+              "xCmdEnv",
+              "XCommandEnvironment",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getExtensionsWithUnacceptedLicenses",
@@ -173,7 +311,18 @@
           "raises": [
             "DeploymentException,"
           ],
-          "args": []
+          "args": [
+            [
+              "repository",
+              "str",
+              "in"
+            ],
+            [
+              "xCmdEnv",
+              "XCommandEnvironment",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getSupportedPackageTypes",
@@ -191,7 +340,13 @@
             "determines if the current user has write access to the extensions folder of the repository."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "repository",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "reinstallDeployedExtensions",
@@ -206,7 +361,28 @@
           "raises": [
             "DeploymentException,"
           ],
-          "args": []
+          "args": [
+            [
+              "force",
+              "bool",
+              "in"
+            ],
+            [
+              "repository",
+              "str",
+              "in"
+            ],
+            [
+              "xAbortChannel",
+              "XAbortChannel",
+              "in"
+            ],
+            [
+              "xCmdEnv",
+              "XCommandEnvironment",
+              "in"
+            ]
+          ]
         },
         {
           "name": "removeExtension",
@@ -217,7 +393,33 @@
           "raises": [
             "DeploymentException,"
           ],
-          "args": []
+          "args": [
+            [
+              "identifier",
+              "str",
+              "in"
+            ],
+            [
+              "fileName",
+              "str",
+              "in"
+            ],
+            [
+              "repository",
+              "str",
+              "in"
+            ],
+            [
+              "xAbortChannel",
+              "XAbortChannel",
+              "in"
+            ],
+            [
+              "xCmdEnv",
+              "XCommandEnvironment",
+              "in"
+            ]
+          ]
         },
         {
           "name": "synchronize",
@@ -230,7 +432,18 @@
           "raises": [
             "DeploymentException,"
           ],
-          "args": []
+          "args": [
+            [
+              "xAbortChannel",
+              "XAbortChannel",
+              "in"
+            ],
+            [
+              "xCmdEnv",
+              "XCommandEnvironment",
+              "in"
+            ]
+          ]
         }
       ]
     }

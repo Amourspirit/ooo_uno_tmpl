@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
   "version": "0.1.5",
-  "timestamp": "2021-12-24 00:46:47+00:00",
+  "timestamp": "2021-12-24 18:43:46+00:00",
   "name": "XOptimizedStorage",
   "type": "interface",
   "namespace": "com.sun.star.embed",
@@ -35,7 +35,18 @@
           "raises": [
             "com.sun.star.embed.InvalidStorageException,"
           ],
-          "args": []
+          "args": [
+            [
+              "sURL",
+              "str",
+              "in"
+            ],
+            [
+              "bReadOnly",
+              "bool",
+              "in"
+            ]
+          ]
         },
         {
           "name": "copyElementDirectlyTo",
@@ -46,7 +57,23 @@
           "raises": [
             "com.sun.star.embed.InvalidStorageException,"
           ],
-          "args": []
+          "args": [
+            [
+              "sSourceName",
+              "str",
+              "in"
+            ],
+            [
+              "xTargetStorage",
+              "XOptimizedStorage",
+              "in"
+            ],
+            [
+              "sTargetName",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "copyStreamElementData",
@@ -57,7 +84,18 @@
           "raises": [
             "com.sun.star.embed.InvalidStorageException,"
           ],
-          "args": []
+          "args": [
+            [
+              "sStreamName",
+              "str",
+              "in"
+            ],
+            [
+              "xTargetStream",
+              "XStream",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getElementPropertyValue",
@@ -70,7 +108,18 @@
           "raises": [
             "com.sun.star.embed.InvalidStorageException,"
           ],
-          "args": []
+          "args": [
+            [
+              "sElementName",
+              "str",
+              "in"
+            ],
+            [
+              "sPropertyName",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "insertRawNonEncrStreamElementDirect",
@@ -81,7 +130,18 @@
           "raises": [
             "com.sun.star.embed.InvalidStorageException,"
           ],
-          "args": []
+          "args": [
+            [
+              "sStreamName",
+              "str",
+              "in"
+            ],
+            [
+              "xInStream",
+              "XInputStream",
+              "in"
+            ]
+          ]
         },
         {
           "name": "insertStreamElementDirect",
@@ -94,7 +154,23 @@
           "raises": [
             "com.sun.star.embed.InvalidStorageException,"
           ],
-          "args": []
+          "args": [
+            [
+              "sStreamName",
+              "str",
+              "in"
+            ],
+            [
+              "xInStream",
+              "XInputStream",
+              "in"
+            ],
+            [
+              "aProperties",
+              "'typing.List[PropertyValue]'",
+              "in"
+            ]
+          ]
         },
         {
           "name": "writeAndAttachToStream",
@@ -107,7 +183,13 @@
           "raises": [
             "com.sun.star.embed.InvalidStorageException,"
           ],
-          "args": []
+          "args": [
+            [
+              "xStream",
+              "XStream",
+              "in"
+            ]
+          ]
         }
       ]
     }

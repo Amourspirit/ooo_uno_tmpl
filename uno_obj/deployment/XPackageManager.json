@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
   "version": "0.1.5",
-  "timestamp": "2021-12-24 00:49:20+00:00",
+  "timestamp": "2021-12-24 18:43:38+00:00",
   "name": "XPackageManager",
   "type": "interface",
   "namespace": "com.sun.star.deployment",
@@ -12,26 +12,26 @@
   "data": {
     "from_imports": [
       [
-        "..util.x_modify_broadcaster",
-        "XModifyBroadcaster"
-      ],
-      [
         "..lang.x_component",
         "XComponent"
+      ],
+      [
+        "..util.x_modify_broadcaster",
+        "XModifyBroadcaster"
       ]
     ],
     "from_imports_typing": [
       [
-        ".x_package",
-        "XPackage"
+        ".x_package_type_info",
+        "XPackageTypeInfo"
       ],
       [
         "..task.x_abort_channel",
         "XAbortChannel"
       ],
       [
-        ".x_package_type_info",
-        "XPackageTypeInfo"
+        ".x_package",
+        "XPackage"
       ]
     ],
     "name": "XPackageManager",
@@ -76,7 +76,33 @@
           "raises": [
             "DeploymentException,"
           ],
-          "args": []
+          "args": [
+            [
+              "url",
+              "str",
+              "in"
+            ],
+            [
+              "properties",
+              "'typing.List[NamedValue]'",
+              "in"
+            ],
+            [
+              "mediaType",
+              "str",
+              "in"
+            ],
+            [
+              "xAbortChannel",
+              "XAbortChannel",
+              "in"
+            ],
+            [
+              "xCmdEnv",
+              "XCommandEnvironment",
+              "in"
+            ]
+          ]
         },
         {
           "name": "checkPrerequisites",
@@ -89,7 +115,23 @@
           "raises": [
             "DeploymentException,"
           ],
-          "args": []
+          "args": [
+            [
+              "extension",
+              "object",
+              "in"
+            ],
+            [
+              "xAbortChannel",
+              "XAbortChannel",
+              "in"
+            ],
+            [
+              "xCmdEnv",
+              "XCommandEnvironment",
+              "in"
+            ]
+          ]
         },
         {
           "name": "createAbortChannel",
@@ -118,7 +160,23 @@
           "raises": [
             "DeploymentException,"
           ],
-          "args": []
+          "args": [
+            [
+              "identifier",
+              "str",
+              "in"
+            ],
+            [
+              "fileName",
+              "str",
+              "in"
+            ],
+            [
+              "xCmdEnv",
+              "XCommandEnvironment",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getDeployedPackages",
@@ -129,7 +187,18 @@
           "raises": [
             "DeploymentException,"
           ],
-          "args": []
+          "args": [
+            [
+              "xAbortChannel",
+              "XAbortChannel",
+              "in"
+            ],
+            [
+              "xCmdEnv",
+              "XCommandEnvironment",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getExtensionsWithUnacceptedLicenses",
@@ -144,7 +213,13 @@
           "raises": [
             "DeploymentException"
           ],
-          "args": []
+          "args": [
+            [
+              "xCmdEnv",
+              "XCommandEnvironment",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getSupportedPackageTypes",
@@ -166,7 +241,23 @@
           "raises": [
             "DeploymentException,"
           ],
-          "args": []
+          "args": [
+            [
+              "extension",
+              "object",
+              "in"
+            ],
+            [
+              "xAbortChannel",
+              "XAbortChannel",
+              "in"
+            ],
+            [
+              "xCmdEnv",
+              "XCommandEnvironment",
+              "in"
+            ]
+          ]
         },
         {
           "name": "isReadOnly",
@@ -192,7 +283,23 @@
           "raises": [
             "DeploymentException,"
           ],
-          "args": []
+          "args": [
+            [
+              "force",
+              "bool",
+              "in"
+            ],
+            [
+              "xAbortChannel",
+              "XAbortChannel",
+              "in"
+            ],
+            [
+              "xCmdEnv",
+              "XCommandEnvironment",
+              "in"
+            ]
+          ]
         },
         {
           "name": "removePackage",
@@ -203,7 +310,28 @@
           "raises": [
             "DeploymentException,"
           ],
-          "args": []
+          "args": [
+            [
+              "identifier",
+              "str",
+              "in"
+            ],
+            [
+              "fileName",
+              "str",
+              "in"
+            ],
+            [
+              "xAbortChannel",
+              "XAbortChannel",
+              "in"
+            ],
+            [
+              "xCmdEnv",
+              "XCommandEnvironment",
+              "in"
+            ]
+          ]
         },
         {
           "name": "synchronize",
@@ -216,7 +344,18 @@
           "raises": [
             "DeploymentException,"
           ],
-          "args": []
+          "args": [
+            [
+              "xAbortChannel",
+              "XAbortChannel",
+              "in"
+            ],
+            [
+              "xCmdEnv",
+              "XCommandEnvironment",
+              "in"
+            ]
+          ]
         }
       ]
     }

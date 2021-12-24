@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
   "version": "0.1.5",
-  "timestamp": "2021-12-24 00:47:19+00:00",
+  "timestamp": "2021-12-24 18:43:47+00:00",
   "name": "XJavaVM",
   "type": "interface",
   "namespace": "com.sun.star.java",
@@ -50,7 +50,13 @@
             "The first form (returning a JNI JavaVM pointer) is mainly for backwards compatibility, new code should use the second form (returning a pointer to a jvmaccess.VirtualMachine) if it does not want to use the Java UNO environment, and it should use the third form (returning a pointer to a jvmaccess.UnoVirtualMachine) if it wants to use the Java UNO environment. For example, one advantage of using jvmaccess.VirtualMachine instead of the raw JavaVM pointer is that whenever you attach a native thread to the Java virtual machine, that thread's context ClassLoader (see java.lang.Thread.getContextClassLoader) will automatically be set to a meaningful value."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "processID",
+              "'typing.List[byte]'",
+              "in"
+            ]
+          ]
         },
         {
           "name": "isVMEnabled",

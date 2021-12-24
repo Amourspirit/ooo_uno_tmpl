@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
   "version": "0.1.5",
-  "timestamp": "2021-12-24 00:45:49+00:00",
+  "timestamp": "2021-12-24 18:43:45+00:00",
   "name": "XCellRange",
   "type": "interface",
   "namespace": "com.sun.star.table",
@@ -18,12 +18,12 @@
     ],
     "from_imports_typing": [
       [
-        ".x_cell",
-        "XCell"
-      ],
-      [
         ".x_cell_range",
         "XCellRange"
+      ],
+      [
+        ".x_cell",
+        "XCell"
       ]
     ],
     "name": "XCellRange",
@@ -47,7 +47,18 @@
           "raises": [
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
-          "args": []
+          "args": [
+            [
+              "nColumn",
+              "int",
+              "in"
+            ],
+            [
+              "nRow",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getCellRangeByName",
@@ -58,7 +69,13 @@
             "The sub-range is specified by its name. The format of the range name is dependent of the context of the table. In spreadsheets valid names may be \\\"A1:C5\\\" or \\\"$B$2\\\" or even defined names for cell ranges such as \\\"MySpecialCell\\\"."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aRange",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getCellRangeByPosition",
@@ -69,7 +86,28 @@
           "raises": [
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
-          "args": []
+          "args": [
+            [
+              "nLeft",
+              "int",
+              "in"
+            ],
+            [
+              "nTop",
+              "int",
+              "in"
+            ],
+            [
+              "nRight",
+              "int",
+              "in"
+            ],
+            [
+              "nBottom",
+              "int",
+              "in"
+            ]
+          ]
         }
       ]
     }
