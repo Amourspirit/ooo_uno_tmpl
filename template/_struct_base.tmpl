@@ -15,22 +15,8 @@ $self.init_data()#slurp
 #attr $attribs = []
 $self.load_data()#slurp
 ## Main Template
-#set $lst_attrib = []
-#set $s_attribs = ''
-#set $constructor_str = ''
 #set $namespace = ''
 #set $sorted = $self.get_sorted_names()
-#for $i, $tpl in enumerate($sorted)
-#set $index = tpl[1]
-#set $itm = $attribs[$index]
-    #if $i > 0
-#set $s_attribs += ', '
-#set $constructor_str += ', '
-    #end if
-#set $s_attribs += "'%s'" % ($itm['name'],)
-#set $constructor_str += "%s: %s" % ($itm['name'], $itm['type'])
-$lst_attrib.append($itm['name'])#slurp
-#end for
 #set $str_inherits = "object"
 #set $is_inherits = len($inherits) > 0
 #if $is_inherits:
@@ -122,7 +108,7 @@ def _dynamic_struct():
         return
     # if statment is to stop VS Code from reporting errors
     if not typing.TYPE_CHECKING:
-        ${name} = namedtuple('$name', [$s_attribs])
+        ${name} = namedtuple('$name', [$self.get_nt_names_str()])
 
 if not typing.TYPE_CHECKING:
     _dynamic_struct()

@@ -151,6 +151,20 @@ class BaseStruct(BaseTpml):
             
         return c_str
     
+    def get_nt_names_str(self) -> str:
+        sorted = self.get_sorted_names()
+        d_lst: List[Dict[str, object]] = getattr(self, 'attribs', [])
+
+        c_str = ''
+        for i, tpl in enumerate(sorted):
+            if i > 0:
+               c_str += ', '
+            index = tpl[1]
+            itm: Dict[str, object] = d_lst[index]
+            c_str += "'" + itm['name'] + "'"
+
+        return c_str
+    
     def get_attrib_for_prop(self, index: int) -> Dict[str, object]:
         d_lst: List[Dict[str, object]] = getattr(self, 'attribs', [])
         lst = self.get_sorted_names()
