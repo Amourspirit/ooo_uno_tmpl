@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
   "version": "0.1.5",
-  "timestamp": "2021-12-24 00:45:29+00:00",
+  "timestamp": "2021-12-24 19:15:57+00:00",
   "name": "XDocumentMetadataAccess",
   "type": "interface",
   "namespace": "com.sun.star.rdf",
@@ -58,7 +58,13 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException,"
           ],
-          "args": []
+          "args": [
+            [
+              "FileName",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "addMetadataFile",
@@ -71,7 +77,18 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException,"
           ],
-          "args": []
+          "args": [
+            [
+              "FileName",
+              "str",
+              "in"
+            ],
+            [
+              "Types",
+              "'typing.List[XURI]'",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getElementByMetadataReference",
@@ -80,7 +97,13 @@
             "get the unique ODF element with the given metadata reference."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "MetadataReference",
+              "StringPair",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getElementByURI",
@@ -91,7 +114,13 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException"
           ],
-          "args": []
+          "args": [
+            [
+              "URI",
+              "object",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getMetadataGraphsWithType",
@@ -102,7 +131,13 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException"
           ],
-          "args": []
+          "args": [
+            [
+              "Type",
+              "object",
+              "in"
+            ]
+          ]
         },
         {
           "name": "importMetadataFile",
@@ -115,7 +150,33 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException,"
           ],
-          "args": []
+          "args": [
+            [
+              "Format",
+              "int",
+              "in"
+            ],
+            [
+              "InStream",
+              "XInputStream",
+              "in"
+            ],
+            [
+              "FileName",
+              "str",
+              "in"
+            ],
+            [
+              "BaseURI",
+              "object",
+              "in"
+            ],
+            [
+              "Types",
+              "'typing.List[XURI]'",
+              "in"
+            ]
+          ]
         },
         {
           "name": "loadMetadataFromMedium",
@@ -128,7 +189,13 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException,"
           ],
-          "args": []
+          "args": [
+            [
+              "Medium",
+              "'typing.List[PropertyValue]'",
+              "in"
+            ]
+          ]
         },
         {
           "name": "loadMetadataFromStorage",
@@ -147,7 +214,23 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException,"
           ],
-          "args": []
+          "args": [
+            [
+              "Storage",
+              "XStorage",
+              "in"
+            ],
+            [
+              "BaseURI",
+              "object",
+              "in"
+            ],
+            [
+              "InteractionHandler",
+              "XInteractionHandler",
+              "in"
+            ]
+          ]
         },
         {
           "name": "removeContentOrStylesFile",
@@ -160,7 +243,13 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException,"
           ],
-          "args": []
+          "args": [
+            [
+              "FileName",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "removeMetadataFile",
@@ -173,7 +262,13 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException,"
           ],
-          "args": []
+          "args": [
+            [
+              "GraphName",
+              "object",
+              "in"
+            ]
+          ]
         },
         {
           "name": "storeMetadataToMedium",
@@ -184,7 +279,13 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException,"
           ],
-          "args": []
+          "args": [
+            [
+              "Medium",
+              "'typing.List[PropertyValue]'",
+              "in"
+            ]
+          ]
         },
         {
           "name": "storeMetadataToStorage",
@@ -199,7 +300,13 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException,"
           ],
-          "args": []
+          "args": [
+            [
+              "Storage",
+              "XStorage",
+              "in"
+            ]
+          ]
         }
       ]
     }

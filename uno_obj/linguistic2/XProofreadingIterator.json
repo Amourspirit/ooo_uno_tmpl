@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
   "version": "0.1.5",
-  "timestamp": "2021-12-24 00:51:12+00:00",
+  "timestamp": "2021-12-24 19:16:02+00:00",
   "name": "XProofreadingIterator",
   "type": "interface",
   "namespace": "com.sun.star.linguistic2",
@@ -42,7 +42,43 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException"
           ],
-          "args": []
+          "args": [
+            [
+              "xDocument",
+              "XInterface",
+              "in"
+            ],
+            [
+              "xFlatParagraph",
+              "XFlatParagraph",
+              "in"
+            ],
+            [
+              "aText",
+              "str",
+              "in"
+            ],
+            [
+              "aLocale",
+              "Locale",
+              "in"
+            ],
+            [
+              "nStartOfSentencePosition",
+              "int",
+              "in"
+            ],
+            [
+              "nSuggestedBehindEndOfSentencePosition",
+              "int",
+              "in"
+            ],
+            [
+              "nErrorPositionInParagraph",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "isProofreading",
@@ -51,7 +87,13 @@
             "checks if the given document is currently being checked"
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "xDocument",
+              "XInterface",
+              "in"
+            ]
+          ]
         },
         {
           "name": "resetIgnoreRules",
@@ -71,7 +113,18 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException"
           ],
-          "args": []
+          "args": [
+            [
+              "xDocument",
+              "XInterface",
+              "in"
+            ],
+            [
+              "xIteratorProvider",
+              "XFlatParagraphIteratorProvider",
+              "in"
+            ]
+          ]
         }
       ]
     }

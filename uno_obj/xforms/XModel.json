@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
   "version": "0.1.5",
-  "timestamp": "2021-12-24 00:48:41+00:00",
+  "timestamp": "2021-12-24 19:16:00+00:00",
   "name": "XModel",
   "type": "interface",
   "namespace": "com.sun.star.xforms",
@@ -10,25 +10,32 @@
   },
   "writer_args": {},
   "data": {
-    "from_imports": [],
+    "from_imports": [
+      [
+        ".x_model2",
+        "XModel2"
+      ]
+    ],
     "from_imports_typing": [
       [
         "..xml.dom.x_document",
         "XDocument"
       ],
       [
-        "..container.x_set",
-        "XSet"
-      ],
-      [
         "..beans.x_property_set",
         "XPropertySet"
+      ],
+      [
+        "..container.x_set",
+        "XSet"
       ]
     ],
     "name": "XModel",
     "imports": [],
     "namespace": "com.sun.star.xforms",
-    "extends": [],
+    "extends": [
+      "com.sun.star.xforms.XModel2"
+    ],
     "desc": [
       "represent an XForms model"
     ],
@@ -44,7 +51,13 @@
             "The returned binding still needs to be inserted into the bindings container."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "binding",
+              "XPropertySet",
+              "in"
+            ]
+          ]
         },
         {
           "name": "cloneSubmission",
@@ -55,7 +68,13 @@
             "The returned submission element still needs to be inserted into the submission container."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "submission",
+              "XPropertySet",
+              "in"
+            ]
+          ]
         },
         {
           "name": "createBinding",
@@ -88,7 +107,13 @@
             "This is a convenience method: the same result can also be obtained through getBindings()"
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "id",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getBindings",
@@ -133,7 +158,13 @@
             "retrieves the instance with the given id"
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "id",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getInstances",
@@ -155,7 +186,13 @@
             "This is a convenience method: the same result can also be obtained through getSubmissions()."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "id",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getSubmissions",
@@ -218,7 +255,13 @@
             "set the XForms model ID"
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "id",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "submit",
@@ -231,7 +274,13 @@
           "raises": [
             "com.sun.star.util.VetoException,"
           ],
-          "args": []
+          "args": [
+            [
+              "id",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "submitWithInteraction",
@@ -244,7 +293,18 @@
           "raises": [
             "com.sun.star.util.VetoException,"
           ],
-          "args": []
+          "args": [
+            [
+              "id",
+              "str",
+              "in"
+            ],
+            [
+              "aHandler",
+              "XInteractionHandler",
+              "in"
+            ]
+          ]
         }
       ]
     }

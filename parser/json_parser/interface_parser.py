@@ -246,7 +246,7 @@ def parse(*args, **kwargs):
         _set_loggers(get_logger(logger_name=Path(__file__).stem, **log_args))
     p = ParserInterface(json_path=pkwargs['json_file'])
     w = WriterInterface(parser=p)
-    w.Write()
+    w.Write(*args, **kwargs)
 
 def main():
     global logger

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
   "version": "0.1.5",
-  "timestamp": "2021-12-24 00:51:10+00:00",
+  "timestamp": "2021-12-24 19:16:02+00:00",
   "name": "XLanguageGuessing",
   "type": "interface",
   "namespace": "com.sun.star.linguistic2",
@@ -10,7 +10,12 @@
   },
   "writer_args": {},
   "data": {
-    "from_imports": [],
+    "from_imports": [
+      [
+        ".language_guessing",
+        "LanguageGuessing"
+      ]
+    ],
     "from_imports_typing": [
       [
         "..lang.locale",
@@ -20,7 +25,9 @@
     "name": "XLanguageGuessing",
     "imports": [],
     "namespace": "com.sun.star.linguistic2",
-    "extends": [],
+    "extends": [
+      "com.sun.star.linguistic2.LanguageGuessing"
+    ],
     "desc": [
       "This interface allows to guess the language of a text.",
       "",
@@ -44,7 +51,13 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException"
           ],
-          "args": []
+          "args": [
+            [
+              "aLanguages",
+              "'typing.List[Locale]'",
+              "in"
+            ]
+          ]
         },
         {
           "name": "enableLanguages",
@@ -57,7 +70,13 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException"
           ],
-          "args": []
+          "args": [
+            [
+              "aLanguages",
+              "'typing.List[Locale]'",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getAvailableLanguages",
@@ -101,7 +120,23 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException"
           ],
-          "args": []
+          "args": [
+            [
+              "aText",
+              "str",
+              "in"
+            ],
+            [
+              "nStartPos",
+              "int",
+              "in"
+            ],
+            [
+              "nLen",
+              "int",
+              "in"
+            ]
+          ]
         }
       ]
     }

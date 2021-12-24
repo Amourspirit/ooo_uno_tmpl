@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
   "version": "0.1.5",
-  "timestamp": "2021-12-24 00:51:09+00:00",
+  "timestamp": "2021-12-24 19:16:02+00:00",
   "name": "XDictionaryList",
   "type": "interface",
   "namespace": "com.sun.star.linguistic2",
@@ -45,7 +45,13 @@
             "Additionally, the dictionary-list will add itself to the list of dictionary event listeners of that dictionary."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "xDictionary",
+              "XDictionary",
+              "in"
+            ]
+          ]
         },
         {
           "name": "addDictionaryListEventListener",
@@ -56,7 +62,18 @@
             "On dictionary-list events, each entry in the listener list will be notified via a call to com.sun.star.linguistic2.XDictionaryListEventListener.processDictionaryListEvent()."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "xListener",
+              "XDictionaryListEventListener",
+              "in"
+            ],
+            [
+              "bReceiveVerbose",
+              "bool",
+              "in"
+            ]
+          ]
         },
         {
           "name": "beginCollectEvents",
@@ -76,7 +93,28 @@
             "creates a new dictionary."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aName",
+              "str",
+              "in"
+            ],
+            [
+              "aLocale",
+              "Locale",
+              "in"
+            ],
+            [
+              "eDicType",
+              "DictionaryType",
+              "in"
+            ],
+            [
+              "aURL",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "endCollectEvents",
@@ -119,7 +157,13 @@
             "searches the list for a dictionary with a given name."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aDictionaryName",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "removeDictionary",
@@ -130,7 +174,13 @@
             "If the dictionary is still active, it will be deactivated first. The dictionary-list will remove itself from the list of dictionary event listeners of the dictionary."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "xDictionary",
+              "XDictionary",
+              "in"
+            ]
+          ]
         },
         {
           "name": "removeDictionaryListEventListener",
@@ -139,7 +189,13 @@
             "removes an entry from the list of dictionary-list event listeners."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "xListener",
+              "XDictionaryListEventListener",
+              "in"
+            ]
+          ]
         }
       ]
     }

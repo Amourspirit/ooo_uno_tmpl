@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
   "version": "0.1.5",
-  "timestamp": "2021-12-24 00:49:07+00:00",
+  "timestamp": "2021-12-24 19:16:01+00:00",
   "name": "XUriReferenceFactory",
   "type": "interface",
   "namespace": "com.sun.star.uri",
@@ -42,7 +42,28 @@
             "resolves a relative URI reference to absolute form."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "baseUriReference",
+              "object",
+              "in"
+            ],
+            [
+              "uriReference",
+              "object",
+              "in"
+            ],
+            [
+              "processAdditionalSpecialSegments",
+              "bool",
+              "in"
+            ],
+            [
+              "excessParentSegments",
+              "object",
+              "in"
+            ]
+          ]
         },
         {
           "name": "makeRelative",
@@ -51,7 +72,33 @@
             "changes an absolute URI reference to relative form."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "baseUriReference",
+              "object",
+              "in"
+            ],
+            [
+              "uriReference",
+              "object",
+              "in"
+            ],
+            [
+              "preferAuthorityOverRelativePath",
+              "bool",
+              "in"
+            ],
+            [
+              "preferAbsoluteOverRelativePath",
+              "bool",
+              "in"
+            ],
+            [
+              "encodeRetainedSpecialSegments",
+              "bool",
+              "in"
+            ]
+          ]
         },
         {
           "name": "parse",
@@ -60,7 +107,13 @@
             "parses the textual representation of a URI reference."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "uriReference",
+              "str",
+              "in"
+            ]
+          ]
         }
       ]
     }

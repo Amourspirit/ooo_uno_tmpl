@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
   "version": "0.1.5",
-  "timestamp": "2021-12-24 00:51:12+00:00",
+  "timestamp": "2021-12-24 19:16:02+00:00",
   "name": "XLinguServiceManager",
   "type": "interface",
   "namespace": "com.sun.star.linguistic2",
@@ -18,16 +18,16 @@
     ],
     "from_imports_typing": [
       [
+        ".x_thesaurus",
+        "XThesaurus"
+      ],
+      [
         ".x_spell_checker",
         "XSpellChecker"
       ],
       [
         ".x_hyphenator",
         "XHyphenator"
-      ],
-      [
-        ".x_thesaurus",
-        "XThesaurus"
       ]
     ],
     "name": "XLinguServiceManager",
@@ -57,14 +57,31 @@
             "The listeners may support one or both of com.sun.star.linguistic2.XDictionaryEventListener and com.sun.star.linguistic2.XLinguServiceEventListener interfaces."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "xListener",
+              "XEventListener",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getAvailableServices",
           "returns": "typing.List[str]",
           "desc": [],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aServiceName",
+              "str",
+              "in"
+            ],
+            [
+              "aLocale",
+              "Locale",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getConfiguredServices",
@@ -73,7 +90,18 @@
             "queries the list of service implementations to be used for a given service and language."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aServiceName",
+              "str",
+              "in"
+            ],
+            [
+              "aLocale",
+              "Locale",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getHyphenator",
@@ -103,7 +131,13 @@
             "removes a listener from the list of event listeners."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "xListener",
+              "XEventListener",
+              "in"
+            ]
+          ]
         },
         {
           "name": "setConfiguredServices",
@@ -112,7 +146,23 @@
             "sets the list of service implementations to be used for a given service and language."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aServiceName",
+              "str",
+              "in"
+            ],
+            [
+              "aLocale",
+              "Locale",
+              "in"
+            ],
+            [
+              "aServiceImplNames",
+              "typing.List[str]",
+              "in"
+            ]
+          ]
         }
       ]
     }

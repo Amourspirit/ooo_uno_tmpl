@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
   "version": "0.1.5",
-  "timestamp": "2021-12-24 00:45:31+00:00",
+  "timestamp": "2021-12-24 19:15:57+00:00",
   "name": "XRepository",
   "type": "interface",
   "namespace": "com.sun.star.rdf",
@@ -10,21 +10,33 @@
   },
   "writer_args": {},
   "data": {
-    "from_imports": [],
-    "from_imports_typing": [
+    "from_imports": [
       [
-        "..container.x_enumeration",
-        "XEnumeration"
+        ".x_document_repository",
+        "XDocumentRepository"
       ],
+      [
+        ".repository",
+        "Repository"
+      ]
+    ],
+    "from_imports_typing": [
       [
         ".xuri",
         "XURI"
+      ],
+      [
+        "..container.x_enumeration",
+        "XEnumeration"
       ]
     ],
     "name": "XRepository",
     "imports": [],
     "namespace": "com.sun.star.rdf",
-    "extends": [],
+    "extends": [
+      "com.sun.star.rdf.Repository",
+      "com.sun.star.rdf.XDocumentRepository"
+    ],
     "desc": [
       "provides access to a set of named RDF graphs.",
       "",
@@ -59,7 +71,13 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException,"
           ],
-          "args": []
+          "args": [
+            [
+              "GraphName",
+              "object",
+              "in"
+            ]
+          ]
         },
         {
           "name": "destroyGraph",
@@ -72,7 +90,13 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException,"
           ],
-          "args": []
+          "args": [
+            [
+              "GraphName",
+              "object",
+              "in"
+            ]
+          ]
         },
         {
           "name": "exportGraph",
@@ -85,7 +109,28 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException,"
           ],
-          "args": []
+          "args": [
+            [
+              "Format",
+              "int",
+              "in"
+            ],
+            [
+              "OutStream",
+              "XOutputStream",
+              "in"
+            ],
+            [
+              "GraphName",
+              "object",
+              "in"
+            ],
+            [
+              "BaseURI",
+              "object",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getGraph",
@@ -96,7 +141,13 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException,"
           ],
-          "args": []
+          "args": [
+            [
+              "GraphName",
+              "object",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getGraphNames",
@@ -120,7 +171,23 @@
           "raises": [
             "RepositoryException"
           ],
-          "args": []
+          "args": [
+            [
+              "Subject",
+              "object",
+              "in"
+            ],
+            [
+              "Predicate",
+              "object",
+              "in"
+            ],
+            [
+              "Object",
+              "object",
+              "in"
+            ]
+          ]
         },
         {
           "name": "importGraph",
@@ -133,7 +200,28 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException,"
           ],
-          "args": []
+          "args": [
+            [
+              "Format",
+              "int",
+              "in"
+            ],
+            [
+              "InStream",
+              "XInputStream",
+              "in"
+            ],
+            [
+              "GraphName",
+              "object",
+              "in"
+            ],
+            [
+              "BaseURI",
+              "object",
+              "in"
+            ]
+          ]
         },
         {
           "name": "queryAsk",
@@ -146,7 +234,13 @@
           "raises": [
             "QueryException,"
           ],
-          "args": []
+          "args": [
+            [
+              "Query",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "queryConstruct",
@@ -159,7 +253,13 @@
           "raises": [
             "QueryException,"
           ],
-          "args": []
+          "args": [
+            [
+              "Query",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "querySelect",
@@ -172,7 +272,13 @@
           "raises": [
             "QueryException,"
           ],
-          "args": []
+          "args": [
+            [
+              "Query",
+              "str",
+              "in"
+            ]
+          ]
         }
       ]
     }
