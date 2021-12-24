@@ -101,6 +101,11 @@ IMG_CACHE: 'ImageCache' = None
 RESPONSE_IMG: 'ResponseImg' = None
 # endregion image process const
 
+# region Exceptions
+class RequiredError(Exception):
+    """Error for required"""
+# endregion Exceptions
+
 # region Data Classes
 
 
