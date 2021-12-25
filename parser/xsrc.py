@@ -15,12 +15,12 @@ from typing import Dict, List, Set, Union
 from bs4.element import ResultSet, Tag
 from kwhelp.decorator import AcceptedTypes, DecFuncEnum, TypeCheckKw
 from pathlib import Path
-from logger.log_handle import get_logger
 from dataclasses import dataclass
 try:
     import base
 except ModuleNotFoundError:
     import parser.base as base
+from logger.log_handle import get_logger
 from parser import __version__, JSON_ID
 
 logger = None
@@ -743,6 +743,7 @@ class InterfaceWriter(base.WriteBase):
         p_dict = {}
         p_dict['from_imports'] = self._get_from_imports()
         p_dict['from_imports_typing'] = self._get_from_imports_typing()
+        p_dict['typings'] = self._get_from_imports_flat()
         p_dict.update(self._parser.get_dict_data())
 
         json_dict = {
@@ -793,6 +794,17 @@ class InterfaceWriter(base.WriteBase):
             lst.append([f, n])
         self._cache[key] = lst
         return self._cache[key]
+    
+    def _get_from_imports_flat(self) -> List[List[str]]:
+        key = '_get_from_imports_flat'
+        if key in self._cache:
+            return self._cache[key]
+        results = []
+        lst = self._get_from_imports_typing()
+        for t in lst:
+            results.append(t[1])
+        self._cache[key] = results
+        return self._cache[key]
     # endregion get Imports
 
     def _set_template_data(self):
@@ -829,6 +841,9 @@ class InterfaceWriter(base.WriteBase):
         self._template = self._template.replace('{data}', indented)
 
     def _set_info(self):
+        key = '_set_info'
+        if key in self._cache:
+            return
         def get_extends(lst: List[str]) -> List[str]:
             return [base.Util.get_last_part(s) for s in lst]
             # return [s.rsplit('.', 1)[1] for s in lst]
@@ -851,6 +866,7 @@ class InterfaceWriter(base.WriteBase):
             self._p_requires_typing = self._parser.requires_typing
         if self._write_file or self._write_json:
             self._file_full_path = self._get_uno_obj_path()
+        self._cache[key] = True
 
     def _validate_p_info(self):
         try:
@@ -1038,11 +1054,13 @@ def parse(*args, **kwargs):
 # endregion Parse method
 
 def _main():
-
+    os.system('cls' if os.name == 'nt' else 'clear')
     # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1graphic_1_1XSvgParser.html'
     # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1office_1_1XAnnotation.html'
     # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XItemList.html'
-    url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1accessibility_1_1XMSAAService.html'
+    # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1accessibility_1_1XMSAAService.html'
+    # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1beans_1_1XHierarchicalPropertySet.html'
+    url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1beans_1_1XIntrospectionAccess.html' # has a sequence
     args = ('v', 'n')
     kwargs = {
         "u": url,

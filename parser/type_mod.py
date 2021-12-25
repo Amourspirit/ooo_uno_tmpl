@@ -19,12 +19,17 @@ TYPE_MAP_PRIMITIVE = {
     "void": "None"
 }
 
-TYPE_MAP_KNOWN = {
+TYPE_MAP_KNOWN_ITTER = {
     "sequence": "list",
     "aDXArray": "list",
     "com.sun.star.beans.Pair": "tuple"
 }
 
+TYPE_MAP_KNOWN_PRIMITAVE = {
+    "type": "object",
+    "T": "object",
+    "U": "object"
+}
 TYPE_MAP_PY_WRAPPER = {
     "list": "typing.List",
     "tuple": "typing.Tuple"
@@ -105,7 +110,8 @@ class TypeRules(ITypeRules):
 
     def _register_known_rules(self):
         self._reg_rule(rule=RulePrimative)
-        self._reg_rule(rule=RuleKnownType)
+        self._reg_rule(rule=RuleKnownPrimative)
+        self._reg_rule(rule=RuleKnownItterType)
         self._reg_rule(rule=RuleComType)
         self._reg_rule(rule=RuleSeqLikePrimative)
         self._reg_rule(rule=RuleSeqLikeNonPrim)
@@ -160,6 +166,22 @@ class RulePrimative(ITypeRule):
             is_py_type=True
         )
 
+
+class RuleKnownPrimative(ITypeRule):
+    def __init__(self, rules: ITypeRules) -> None:
+        self._rules = rules
+
+    def get_is_match(self, in_type: str) -> bool:
+        return in_type in TYPE_MAP_KNOWN_PRIMITAVE
+
+    def get_python_type(self, in_type: str) -> PythonType:
+        return PythonType(
+            type=TYPE_MAP_KNOWN_PRIMITAVE[in_type],
+            requires_typing=False,
+            is_py_type=True
+        )
+
+
 class RuleComType(ITypeRule):
     """Matches types that start wihh com.sun.star. such as com.sun.star.uno.XInterface"""
 
@@ -198,18 +220,20 @@ class RuleComType(ITypeRule):
             imports=set([s_type]),
             is_py_type=False
         )
-class RuleKnownType(ITypeRule):
-    """Rule for Known uno types sucha s sequence"""
+
+
+class RuleKnownItterType(ITypeRule):
+    """Rule for Known itter uno types sucha s sequence"""
 
     def __init__(self, rules: ITypeRules) -> None:
         self._rules = rules
     
     def get_is_match(self, in_type: str) -> bool:
-        return in_type in TYPE_MAP_KNOWN
+        return in_type in TYPE_MAP_KNOWN_ITTER
 
     def get_python_type(self, in_type: str) -> PythonType:
         return PythonType(
-            type = TYPE_MAP_KNOWN[in_type],
+            type = TYPE_MAP_KNOWN_ITTER[in_type],
             requires_typing=False,
             is_py_type=True
         )
@@ -279,7 +303,7 @@ class RuleSeqLikePrimative(ITypeRule):
             w = TYPE_MAP_PY_WRAPPER[self._wrapper_type.type]
             w += f"[{p_type.type}]"
         else:
-            w = f"'typing.List[{p_type.type}]'"
+            w = f"typing.List[{p_type.type}]"
         return PythonType(
             type = w,
             requires_typing=True,
@@ -338,24 +362,30 @@ class RuleSeqLikeNonPrim(ITypeRule):
             msg = f"{self.__class__.__name__} get_python_type() Match Failure."
             msg += "Did you forget to call get_is_match()?"
             raise Exception(msg)
+        is_py_type = False
         wrapper_str: str = self._match.groups()[0]
         inner_str: str = self._match.groups()[1]
         inner_str = inner_str.lstrip(".").lstrip()
         parts = inner_str.split('.')
         t_name = parts.pop()
+ 
+        if t_name in TYPE_MAP_KNOWN_PRIMITAVE:
+            t_name = TYPE_MAP_KNOWN_PRIMITAVE[t_name]
+            is_py_type = True
         self._set_wrapper(wrapper_str)
         if self._wrapper_type.type in TYPE_MAP_PY_WRAPPER:
             s = TYPE_MAP_PY_WRAPPER[self._wrapper_type.type]
-            w = f"'{s}[{t_name}]'"
+            w = f"{s}[{t_name}]"
         else:
-            w = f"'typing.List[{t_name}]'"
+            w = f"typing.List[{t_name}]"
 
         p_type = PythonType(
             type=w,
             requires_typing=True,
-            is_py_type=False
+            is_py_type=is_py_type
         )
-        p_type.imports.add(inner_str)
+        if not is_py_type:
+            p_type.imports.add(inner_str)
         return p_type
 
 class RuleSeqLikePair(ITypeRule):
@@ -395,6 +425,15 @@ class RuleSeqLikePair(ITypeRule):
             return False
         return True
 
+    def _get_ptype(self, in_type: str) -> PythonType:
+        try:
+            self._recursive_state = True
+            result = self._rules.get_python_type(in_type)
+            return result
+        finally:
+            self._recursive_state = False
+        
+    
     def get_python_type(self, in_type: str) -> PythonType:
         self._set_match(in_type)
         if not self._match:
@@ -408,9 +447,7 @@ class RuleSeqLikePair(ITypeRule):
         # com.sun.star.beans.Pair< string, string >
         inner_str: str = self._match.groups()[1]
         inner_str = inner_str.lstrip(".").lstrip()
-        self._recursive_state = True
-        p_inner = self._rules.get_python_type(inner_str)
-        self._recursive_state = False
+        p_inner = self._get_ptype(inner_str)
 
         t_name = p_inner.type.replace("'", "")
         self._set_wrapper(wrapper_str)
@@ -419,8 +456,8 @@ class RuleSeqLikePair(ITypeRule):
             w = f"{s}[{t_name}]"
         else:
             w = f"typing.List[{t_name}]"
-        if len(p_inner.imports) > 0:
-            w = "'" + w + "'"
+        # if len(p_inner.imports) > 0:
+        #     w = "'" + w + "'"
         p_type = PythonType(
             type=w,
             requires_typing=True,
@@ -463,6 +500,14 @@ class RuleTuple2Like(ITypeRule):
         s = in_type.lstrip(".").lstrip()
         return s
 
+    def _get_ptype(self, in_type: str) -> PythonType:
+        try:
+            self._recursive_state = True
+            result = self._rules.get_python_type(in_type)
+            return result
+        finally:
+            self._recursive_state = False
+
     def get_python_type(self, in_type: str) -> PythonType:
         self._set_match(in_type)
         if not self._match:
@@ -473,26 +518,24 @@ class RuleTuple2Like(ITypeRule):
         s_type: str = self._get_clean_type(g[0])  # like com.sun.star.beans.Pair
         s_one: str = self._get_clean_type(g[1])
         s_two: str = self._get_clean_type(g[2])
-        self._recursive_state = True
-        if s_type in TYPE_MAP_KNOWN:
+        if s_type in TYPE_MAP_KNOWN_ITTER:
             p_type = PythonType(
-                type=TYPE_MAP_KNOWN[s_type],
+                type=TYPE_MAP_KNOWN_ITTER[s_type],
                 requires_typing=True,
                 is_py_type=True
             )
         else:
-            p_type = self._rules.get_python_type(s_type)
+            p_type = self._get_ptype(s_type)
 
-        p_type_one = self._rules.get_python_type(s_one)
-        p_type_two = self._rules.get_python_type(s_two)
-        self._recursive_state = False
+        p_type_one = self._get_ptype(s_one)
+        p_type_two = self._get_ptype(s_two)
         if p_type.type in TYPE_MAP_PY_WRAPPER:
             f_str = TYPE_MAP_PY_WRAPPER[p_type.type]
             f_str = f_str + f"[{p_type_one.type}, {p_type_two.type}]"
         else:
             f_str = f"typing.Tuple[{p_type_one.type}, {p_type_two.type}]"
-        if len(p_type_one.imports) > 0 or len(p_type_two.imports) > 0:
-            f_str = f"'{f_str}'"
+        # if len(p_type_one.imports) > 0 or len(p_type_two.imports) > 0:
+        #     f_str = f"'{f_str}'"
         r_type = PythonType()
         r_type.requires_typing = True
         r_type.imports.update(p_type.imports)
