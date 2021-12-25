@@ -6,12 +6,8 @@ Process a link to a page that contains an exception
 import os
 import sys
 import argparse
-
 import logging
-import re
-from dataclasses import dataclass
 from typing import Dict, List, Set, Union
-from bs4.element import PageElement, ResultSet, Tag
 from kwhelp.decorator import DecFuncEnum, TypeCheck, TypeCheckKw
 from pathlib import Path
 import textwrap
@@ -683,8 +679,9 @@ def parse(*args, **kwargs):
 
 def _main():
     # url = 'https://api.libreoffice.org/docs/idl/ref/exceptioncom_1_1sun_1_1star_1_1configuration_1_1CannotLoadConfigurationException.html'
-    # url = 'https://api.libreoffice.org/docs/idl/ref/exceptioncom_1_1sun_1_1star_1_1uno_1_1Exception.html'
-    url = 'https://api.libreoffice.org/docs/idl/ref/exceptioncom_1_1sun_1_1star_1_1accessibility_1_1IllegalAccessibleComponentStateException.html'
+    url = 'https://api.libreoffice.org/docs/idl/ref/exceptioncom_1_1sun_1_1star_1_1uno_1_1Exception.html'
+    # url = 'https://api.libreoffice.org/docs/idl/ref/exceptioncom_1_1sun_1_1star_1_1accessibility_1_1IllegalAccessibleComponentStateException.html'
+    # url = 'https://api.libreoffice.org/docs/idl/ref/exceptioncom_1_1sun_1_1star_1_1beans_1_1IntrospectionException.html'
     args = ('v', 'n')
     kwargs = {
         "u": url,
