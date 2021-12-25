@@ -16,8 +16,6 @@ from bs4.element import ResultSet, Tag
 from kwhelp.decorator import AcceptedTypes, DecFuncEnum, TypeCheckKw
 from pathlib import Path
 from dataclasses import dataclass
-
-from parser.base import APIData
 try:
     import base
 except ModuleNotFoundError:
@@ -146,8 +144,7 @@ class ApiFnPramsInfo(base.BlockObj):
         pinfo.type = t_info.type
         if t_info.requires_typing:
             self._requires_typing = True
-        for im in t_info.imports:
-            self._imports.add(im)
+        self._imports.update(t_info.get_all_imports())
         return
 
     def _process_params(self, params: zip) -> List[ParamInfo]:
@@ -749,7 +746,8 @@ class InterfaceWriter(base.WriteBase):
         p_dict = {}
         p_dict['from_imports'] = self._get_from_imports()
         p_dict['from_imports_typing'] = self._get_from_imports_typing()
-        p_dict['typings'] = self._get_from_imports_flat()
+        p_dict['quote'] = self._get_quote_flat()
+        p_dict['typings'] = self._get_typings()
         p_dict.update(self._parser.get_dict_data())
 
         json_dict = {
@@ -801,30 +799,23 @@ class InterfaceWriter(base.WriteBase):
         self._cache[key] = lst
         return self._cache[key]
     
-    def _get_from_imports_flat(self) -> List[List[str]]:
-        key = '_get_from_imports_flat'
-        if key in self._cache:
-            return self._cache[key]
+    def _get_quote_flat(self) -> List[List[str]]:
         si_lst = self._parser.api_data.func_summaries.get_obj()
-        results = []
+        t_set : Set[str] = set()
+        for si in si_lst:
+            t = si.p_type
+            if t.requires_typing or t.is_py_type is False:
+                t_set.add(t.type)
+        return list(t_set)
+    
+    def _get_typings(self) -> List[List[str]]:
+        si_lst = self._parser.api_data.func_summaries.get_obj()
+        t_set: Set[str] = set()
         for si in si_lst:
             t = si.p_type
             if t.requires_typing:
-                # make sure the type is not already imported
-                i_len = len(t.imports)
-                if i_len == 0:
-                    results.append(t.type)
-                    continue
-                if i_len == 1:
-                    if t.imports[0] in self._p_imports_typing:
-                        results.append(t.type)
-                    continue
-                
-        lst = self._get_from_imports_typing()
-        for t in lst:
-            results.append(t[1])
-        self._cache[key] = results
-        return self._cache[key]
+                t_set.add(t.type)
+        return list(t_set)
     # endregion get Imports
 
     def _set_template_data(self):

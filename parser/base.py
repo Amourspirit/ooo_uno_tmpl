@@ -899,8 +899,8 @@ class ApiSummaries(BlockObj):
             si = SummaryInfo(id=id_str, name=name, type=p_type.type, p_type=p_type)
             if p_type.requires_typing:
                 self._requires_typing = True
-            for im in p_type.imports:
-                self._imports.add(im)
+            im = p_type.get_all_imports()
+            self._imports.update(im)
             self._data.append(si)
         return self._data
 
