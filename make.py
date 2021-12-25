@@ -19,6 +19,7 @@ from config import AppConfig, read_config
 from parser.json_parser.interface_parser import parse as parse_interface
 from parser.json_parser.struct_parser import parse as parse_struct
 from parser.json_parser.enum_parser import parse as parse_enm
+from parser.json_parser.exception_parser import parse as parse_ex
 logger = None
 
 os.environ['project_root'] = str(Path(__file__).parent)
@@ -176,7 +177,40 @@ class CompileInterfaceLinks(BaseCompile):
             else:
                 self._process_direct(file)
 
+class CompileExLinks(BaseCompile):
+    def __init__(self, config: AppConfig, use_subprocess: bool) -> None:
+        super().__init__(config=config)
+        self._do_sub = use_subprocess
+        if self._do_sub:
+            self._processer = str(
+                Path(self.json_parser_path, 'exception_parser.py'))
+        else:
+            self._processer = ''
+        self._process_files()
 
+    def _subprocess(self, file: str):
+        cmd_str = f"{self._processer} -f {file}"
+        cmd = [sys.executable] + cmd_str.split()
+        logger.info(
+            "CompileExLinks: Processing interface in file: %s", file)
+        res = subprocess.run(cmd)
+        if res.stdout:
+            logger.info(res.stdout)
+        if res.stderr:
+            logger.error(res.stderr)
+
+    def _process_direct(self, file: str):
+        logger.info(
+            "CompileExLinks: Processing interface in file: %s", file)
+        parse_ex('t', 'j', f=file)
+
+    def _process_files(self):
+        link_files = self.get_module_link_files()
+        for file in link_files:
+            if self._do_sub:
+                self._subprocess(file)
+            else:
+                self._process_direct(file)
 class Make:
     def __init__(self, **kwargs) -> None:
         self._clean = bool(kwargs.get('clean', False))
@@ -369,9 +403,20 @@ def main():
     config = read_config('./config.json')
     parser = argparse.ArgumentParser(description='make')
     subparser = parser.add_subparsers(dest='command')
+    ex_parser = subparser.add_parser(name='ex')
     enum_parser = subparser.add_parser(name='enum')
     struct_parser = subparser.add_parser(name='struct')
     interface_parser = subparser.add_parser(name='interface')
+    # region ex args
+    ex_parser.add_argument(
+        '-a', '--all',
+        help='Compile all exceptions recursivly',
+        action='store_true',
+        dest='ex_all',
+        default=False
+    )
+    # endregion ex args
+
     # region enum args
     enum_parser.add_argument(
         '-a', '--all',
@@ -448,6 +493,9 @@ def main():
             make = Make(force_compile=args.force_compile, clean=args.clean_scratch)
         except Exception as e:
             logger.error(e)
+    if args.command == 'ex':
+        if args.ex_all:
+            CompileExLinks(config=config, use_subprocess=False)
     if args.command == 'enum':
         if args.enum_all:
             CompileEnumLinks(config=config, use_subprocess=False)

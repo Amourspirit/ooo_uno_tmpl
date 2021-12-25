@@ -14,7 +14,7 @@ import json
 import logging
 import concurrent.futures
 from collections import namedtuple
-from typing import List, Union
+from typing import Dict, List, Tuple, Union
 from pathlib import Path
 from verr import Version
 _app_root = os.environ.get('project_root', str(
@@ -22,6 +22,7 @@ _app_root = os.environ.get('project_root', str(
 if not _app_root in sys.path:
     sys.path.insert(0, _app_root)
 import parser.base as base
+import parser.ex as ex
 from logger.log_handle import get_logger
 from parser import __version__, JSON_ID
 
@@ -142,14 +143,121 @@ class WriterException:
             logger.error(res.stderr)
         return result
 
-    def Write(self):
+    def _process_direct(self, url_data: urldata, *args, **kwargs) -> Tuple[bool, str]:
+        flags = [arg for arg in args if isinstance(arg, str)]
+        if len(flags) == 0:
+            flags.append('t')
+            flags.append('j')
+        kargs = kwargs.copy()
+        kargs['url'] = url_data.href
+        result = True
+        try:
+            ex.parse(*flags, **kargs)
+        except Exception:
+            result = False
+        return result, url_data.name
+
+    def Write(self, *args, **kwargs):
         links = self._parser.get_links()
         with concurrent.futures.ProcessPoolExecutor() as executor:
-            results = [executor.submit(self._process_link, link)
+            results = [executor.submit(self._process_direct, link, *args, **kwargs)
                        for link in links]
             for f in concurrent.futures.as_completed(results):
-                logger.info(f.result())
+                state, name = f.result()
+                if state:
+                    logger.info(f"Success processing: {name}")
+                else:
+                    logger.error(f"Failed processing: {name}")
 
+# region Parse method
+
+
+def _get_parsed_kwargs(**kwargs) -> Dict[str, str]:
+    required = ("json_file",)
+    lookups = {
+        "f": "json_file",
+        "json_file": "json_file",
+        "L": "log_file",
+        "log_file": "log_file"
+    }
+    result = {}
+    for k, v in kwargs.items():
+        if not isinstance(k, str):
+            continue
+        if k in lookups:
+            key = lookups[k]
+            result[key] = v
+    for k in required:
+        if not k in result:
+            # k is missing from kwargs
+            raise base.RequiredError(f"Missing required arg {k}.")
+    return result
+
+
+def _get_parsed_args(*args) -> Dict[str, bool]:
+    # key, value and value is a key into defaults
+    defaults = {
+        "verbose": False
+    }
+    found = {
+        "verbose": True
+    }
+    lookups = {
+        "v": "verbose",
+        "verbose": "verbose"
+    }
+    result = {k: v for k, v in defaults.items()}
+    for arg in args:
+        if not isinstance(arg, str):
+            continue
+        if arg in lookups:
+            key = lookups[arg]
+            result[key] = found[key]
+    return result
+
+
+def parse(*args, **kwargs):
+    """
+    Parses data, alternative to running on command line.
+
+    Other Arguments:
+        'no_sort' (str, optional): Short form ``'s'``. No sorting of results. Default ``False``
+        'no_cache' (str, optional): Short form ``'x'``. No caching. Default ``False``
+        'no_print_clear (str, optional): Short form ``'p'``. No clearing of terminal
+            when otuput to terminal. Default ``False``
+        'no_desc' (str, optional): Short from ``'d'``. No description will be outputed in template. Default ``False``
+        'print_json' (str, optional): Short form ``'n'``. Print json to termainl. Default ``False``
+        'print_template' (str, optional): Short form ``'m'``. Print template to terminal. Default ``False``
+        'write_template' (str, optional): Short form ``'t'``. Write template file into obj_uno subfolder. Default ``False``
+        'long_template' (str, optional): Short form ``'g'``. Writes a long format template.
+            Requires write_template is set. Default ``False``
+        'clipboard' (str, optional): Short form ``'c'``. Copy to clipboard. Default ``False``
+        'write_json' (str, optional): Short form ``'j'``. Write json file into obj_uno subfolder. Default ``False``
+        'verbose' (str, optional): Short form ``'v'``. Verobose output.
+
+    Keyword Arguments:
+        json_file (str): Short form ``f``. url to parse
+        log_file (str, optional): Short form ``L``. Log File
+    """
+    global logger
+    pkwargs = _get_parsed_kwargs(**kwargs)
+    pargs = _get_parsed_args(*args)
+
+    if logger is None:
+        log_args = {}
+        if 'log_file' in pkwargs:
+            log_args['log_file'] = pkwargs['log_file']
+        else:
+            log_args['log_file'] = 'ex_parser.log'
+        if pargs['verbose']:
+            log_args['level'] = logging.DEBUG
+        _set_loggers(get_logger(logger_name=Path(__file__).stem, **log_args))
+
+    p = ParserException(json_path=pkwargs['json_file'])
+    w = WriterException(parser=p)
+    w.Write(*args, **kwargs)
+
+# endregion Parse method
 
 def main():
     global logger
@@ -182,7 +290,7 @@ def main():
         if args.log_file:
             log_args['log_file'] = args.log_file
         else:
-            log_args['log_file'] = 'enum_parser.log'
+            log_args['log_file'] = 'ex_parser.log'
         if args.verbose:
             log_args['level'] = logging.DEBUG
         _set_loggers(get_logger(logger_name=Path(__file__).stem, **log_args))
@@ -193,7 +301,7 @@ def main():
 
     p = ParserException(json_path=args.json_file)
     w = WriterException(parser=p)
-    w.Write()
+    w.Write('t', 'j')
 
 
 if __name__ == "__main__":
