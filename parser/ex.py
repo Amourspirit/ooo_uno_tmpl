@@ -472,6 +472,11 @@ class WriterEx(base.WriteBase):
         self._p_imports.update(_imports)
         self._p_imports.update(data['extends'])
         self._p_imports_typing.update(self._parser.imports)
+        # in some cases such as XIntrospectionAccess
+        # https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1beans_1_1XIntrospectionAccess.html
+        # class is a subclass of XInterface and has a method the has return type XInterface.
+        # remove any overlap in _p_imports_typing
+        self._p_imports_typing = self._p_imports_typing - self._p_imports
         if len(self._p_imports_typing) > 0:
             self._p_requires_typing = True
         if not self._p_requires_typing:
