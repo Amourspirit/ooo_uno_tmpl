@@ -11,7 +11,7 @@ class BaseEnum(BaseJson):
 
     def _hydrate_data(self, json_data: dict):
         # print('# _hydrate_data()')
-        data = json_data['data']
+        data: Dict[str, object] = json_data['data']
 
         def set_data(_key: str, a_name=None):
             attr_name = _key if not a_name else a_name
@@ -24,6 +24,10 @@ class BaseEnum(BaseJson):
         set_data('desc')
         set_data('url', 'link')
         self.sort = bool(json_data['parser_args'].get('sort', False))
+        quote: List[str] = data.get('quote', [])
+        self.quote.update(quote)
+        typings: List[str] = data.get('typings', [])
+        self.typings.update(typings)
 
         def get_dict() -> Dict[str, list]:
             # Format:

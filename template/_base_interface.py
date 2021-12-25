@@ -1,6 +1,6 @@
 # coding: utf-8
 import json
-from typing import Tuple, List
+from typing import Dict, Tuple, List
 from _base_json import BaseJson
 from verr import Version
 
@@ -10,7 +10,7 @@ class BaseInterface(BaseJson):
         super().__init__(*args, **kwargs)
 
     def _hydrate_data(self, json_data: dict):
-        data = json_data['data']
+        data: Dict[str, object] = json_data['data']
 
         def set_data(_key: str, a_name=None):
             attr_name = _key if not a_name else a_name
@@ -29,8 +29,7 @@ class BaseInterface(BaseJson):
         sort = bool(json_data['parser_args'].get('sort', False))
         self.attribs = self._get_attribs(json_data=json_data, sort=sort)
         ver_0_1_1 = Version(0, 1, 1)
-        ver_json = Version.parse(json_data.get('version'))
-        if ver_json == ver_0_1_1:
+        if self.json_version == ver_0_1_1:
             self._load_0_1_1(json_data=json_data)
         else:
             setattr(self, 'from_imports', [])
@@ -39,6 +38,10 @@ class BaseInterface(BaseJson):
             set_data('from_imports_typing')
             self.requires_typing = False if len(
                 self.from_imports_typing) == 0 else True
+            quote: List[str] = data.get('quote', [])
+            self.quote.update(quote)
+            typings: List[str] = data.get('typings', [])
+            self.typings.update(typings)
 
     def _load_0_1_1(self, json_data: dict):
         def set_j_data(_key: str):
@@ -92,7 +95,7 @@ class BaseInterface(BaseJson):
                 "Invalid Data: Expected version to be at least '{min_ver}' got {ver}")
 
     def _get_formated_arg(self, arg: Tuple[str]) -> str:
-        return f"{arg[0]}: {arg[1]}"
+        return f"{arg[0]}: {self.get_q_type(arg[1])}"
 
     def get_args(self, args: List[Tuple[str]]) -> str:
         result = ''
@@ -179,6 +182,6 @@ class BaseInterface(BaseJson):
         if key in meth:
             ret = meth[key]
             if ret:
-                result += f" -> {ret}"
+                result += f" -> {self.get_q_type(ret)}"
         result += ':'
         return result

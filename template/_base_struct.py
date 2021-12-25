@@ -56,7 +56,7 @@ class BaseStruct(BaseTpml):
             raise e
 
     def _hydrate_data(self, json_data: dict):
-        data:dict = json_data['data']
+        data: Dict[str, object] = json_data['data']
 
         def set_data(_key: str, a_name=None):
             attr_name = _key if not a_name else a_name
@@ -74,6 +74,11 @@ class BaseStruct(BaseTpml):
         set_data('auto_imports')
         set_data('namespace')
         set_data('from_imports')
+        quote: List[str] = data.get('quote', [])
+        self.quote.update(quote)
+        typings: List[str] = data.get('typings', [])
+        self.typings.update(typings)
+
         self.requires_typing = data.get('requires_typing', False)
         sort = bool(json_data['parser_args']['sort'])
         self.attribs = self._get_attribs(json_data=json_data, sort=sort)

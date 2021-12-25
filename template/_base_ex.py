@@ -38,6 +38,10 @@ class BaseEx(BaseJson):
         set_data('from_imports_typing')
         self.requires_typing = False if len(
             self.from_imports_typing) == 0 else True
+        quote: List[str] = data.get('quote', [])
+        self.quote.update(quote)
+        typings: List[str] = data.get('typings', [])
+        self.typings.update(typings)
 
     def _get_attribs(self, json_data: dict, sort: bool) -> dict:
         items: dict = json_data['data']['items']

@@ -230,3 +230,9 @@ class BaseTpml(Template):
         except Exception as e:
             # print(e)
             raise e
+
+    def get_q_type(self, in_type: str) -> str:
+        """If in_type is in quote then it is quoted.  Otherwise in_type is retruned"""
+        if in_type in self.quote:
+            return f"'{in_type}'"
+        return in_type

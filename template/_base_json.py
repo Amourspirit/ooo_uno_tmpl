@@ -1,14 +1,16 @@
 # coding: utf-8
 from abc import abstractmethod
 import json
+from typing import Dict
 from _base_tmpl import BaseTpml
 from pathlib import Path
-
+from verr import Version
 
 class BaseJson(BaseTpml):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self._is_class_init = False
+        self._json_version: Version = None
 
     def init_data(self):
         super().init_data()
@@ -59,6 +61,10 @@ class BaseJson(BaseTpml):
     def _validate_data(self, data: dict) -> bool:
         if not data:
             raise Exception('Invalid Data: No Data to validate')
+        if not isinstance(data, dict):
+            raise Exception('Invalid Data: Expected a dictionary. Got: ' + type(data))
+        if not 'data' in data:
+            raise Exception('Invalid Data: data attribute is missing')
         if not 'id' in data:
             raise Exception('Invalid Data: Data has no id attribute')
         if not 'type' in data:
@@ -70,3 +76,19 @@ class BaseJson(BaseTpml):
                 f"Invalid Data: Expected type to be 'uno-ooo-parser' got '{data['id']}'")
         if not data['name']:
             raise Exception('Invalid Data: name attribute missing')
+        try:
+            self._json_version = Version.parse(data['version'])
+        except Exception:
+            raise Exception('Invalid Data: version attribute missing or malformed')
+        _data: Dict[str, object] = data['data']
+        ver_0_1_6 = Version(0, 1, 6)
+        if self._json_version >= ver_0_1_6:
+            if not 'quote' in _data:
+                raise Exception('Invalid Data: data attribute does not have a quote attribute')
+            if not 'typings' in _data:
+                raise Exception(
+                    'Invalid Data: data attribute does not have a typings attribute')
+
+    @property
+    def json_version(self) -> Version:
+        return self._json_version

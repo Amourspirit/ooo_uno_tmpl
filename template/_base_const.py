@@ -11,7 +11,7 @@ class BaseConst(BaseJson):
 
     def _hydrate_data(self, json_data: dict):
         # print('# _hydrate_data()')
-        data = json_data['data']
+        data: Dict[str, object] = json_data['data']
 
         def set_data(_key: str, a_name=None):
             attr_name = _key if not a_name else a_name
@@ -29,7 +29,10 @@ class BaseConst(BaseJson):
         self.sort = bool(json_data['parser_args'].get('sort', False))
         self.hex = bool(json_data['writer_args'].get('hex', False))
         self.flags = bool(json_data['writer_args'].get('flags',False))
-        
+        quote: List[str] = data.get('quote', [])
+        self.quote.update(quote)
+        typings: List[str] = data.get('typings', [])
+        self.typings.update(typings)
         # NameMapper.NotFound: cannot find 'keys' while searching for 'keys'
         # _dict = self._get_attribs(data=data, sort=self.sort)
         def get_const_dict() -> Dict[str, list]:
