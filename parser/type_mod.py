@@ -41,6 +41,7 @@ class PythonType:
     imports: Set[str] = field(default_factory=set)
     is_py_type: bool = False
     children: List['PythonType'] = field(default_factory=list)
+    realtype: str = 'object'
 
 class ITypeRule(ABC):
     @abstractmethod
@@ -161,10 +162,12 @@ class RulePrimative(ITypeRule):
         return in_type in TYPE_MAP_PRIMITIVE
     
     def get_python_type(self, in_type: str) -> PythonType:
+        s = TYPE_MAP_PRIMITIVE[in_type]
         return PythonType(
-            type=TYPE_MAP_PRIMITIVE[in_type],
+            type=s,
             requires_typing=False,
-            is_py_type=True
+            is_py_type=True,
+            realtype=s
         )
 
 
@@ -176,10 +179,12 @@ class RuleKnownPrimative(ITypeRule):
         return in_type in TYPE_MAP_KNOWN_PRIMITAVE
 
     def get_python_type(self, in_type: str) -> PythonType:
+        s = TYPE_MAP_KNOWN_PRIMITAVE[in_type]
         return PythonType(
-            type=TYPE_MAP_KNOWN_PRIMITAVE[in_type],
+            type=s,
             requires_typing=False,
-            is_py_type=True
+            is_py_type=True,
+            realtype=s
         )
 
 
@@ -215,11 +220,13 @@ class RuleComType(ITypeRule):
         g = self._match.groups()
         s_type: str = g[0]  # like com.sun.star.beans.Pair
         parts = s_type.rsplit(sep='.', maxsplit=1)
+        s = parts.pop()
         return PythonType(
-            type= parts.pop(),
-            requires_typing=False,
-            imports=set([s_type]),
-            is_py_type=False
+            type = s,
+            requires_typing = False,
+            imports = set([s_type]),
+            is_py_type = False,
+            realtype=s
         )
 
 
@@ -233,10 +240,12 @@ class RuleKnownItterType(ITypeRule):
         return in_type in TYPE_MAP_KNOWN_ITTER
 
     def get_python_type(self, in_type: str) -> PythonType:
+        s = TYPE_MAP_KNOWN_ITTER[in_type]
         return PythonType(
-            type = TYPE_MAP_KNOWN_ITTER[in_type],
-            requires_typing=False,
-            is_py_type=True
+            type = s,
+            requires_typing = False,
+            is_py_type = True,
+            realtype = s
         )
 
 class RuleSeqLikePrimative(ITypeRule):
@@ -302,13 +311,16 @@ class RuleSeqLikePrimative(ITypeRule):
         p_type = self._prim.get_python_type(inner_str)
         if self._wrapper_type.type in TYPE_MAP_PY_WRAPPER:
             w = TYPE_MAP_PY_WRAPPER[self._wrapper_type.type]
+            realtype = self._wrapper_type.type
             w += f"[{p_type.type}]"
         else:
             w = f"typing.List[{p_type.type}]"
+            realtype = 'list'
         result = PythonType(
             type = w,
             requires_typing=True,
-            is_py_type=p_type.is_py_type
+            is_py_type=p_type.is_py_type,
+            realtype = realtype
         )
         result.children.append(p_type)
         return result
@@ -384,6 +396,7 @@ class RuleSeqLikeNonPrim(ITypeRule):
         if child.type == 'object':
             # default, t_name will never be object
             child.type = t_name
+            child.realtype = t_name
             child.is_py_type = False
             child.requires_typing = True
         if t_name in TYPE_MAP_KNOWN_PRIMITAVE:
@@ -395,18 +408,22 @@ class RuleSeqLikeNonPrim(ITypeRule):
             child.is_py_type = True
             child.requires_typing = False
             child.type = t_name
+            child.realtype = t_name
         self._set_wrapper(wrapper_str)
         if self._wrapper_type.type in TYPE_MAP_PY_WRAPPER:
+            realtype = self._wrapper_type.type
             s = TYPE_MAP_PY_WRAPPER[self._wrapper_type.type]
             w = f"{s}[{child.type}]"
         else:
+            realtype = 'list'
             w = f"typing.List[{child.type}]"
 
         p_type = PythonType(
-            type=w,
-            requires_typing=True,
-            is_py_type=is_py_type,
-            children = [child]
+            type = w,
+            requires_typing = True,
+            is_py_type = is_py_type,
+            children = [child],
+            realtype = realtype
         )
         if not is_py_type:
             p_type.imports.add(inner_str)
@@ -475,16 +492,19 @@ class RuleSeqLikePair(ITypeRule):
 
         self._set_wrapper(wrapper_str)
         if self._wrapper_type.type in TYPE_MAP_PY_WRAPPER:
+            realtype = self._wrapper_type.type
             s = TYPE_MAP_PY_WRAPPER[self._wrapper_type.type]
             w = f"{s}[{p_inner.type}]"
         else:
+            realtype = 'list'
             w = f"typing.List[{p_inner.type}]"
         # if len(p_inner.imports) > 0:
         #     w = "'" + w + "'"
         p_type = PythonType(
-            type=w,
-            requires_typing=True,
-            is_py_type=p_inner.is_py_type
+            type = w,
+            requires_typing = True,
+            is_py_type = p_inner.is_py_type,
+            realtype = realtype
         )
         p_type.children.append(p_inner)
         p_type.imports.update(p_inner.imports)
@@ -554,18 +574,18 @@ class RuleTuple2Like(ITypeRule):
         p_type_one = self._get_ptype(s_one)
         p_type_two = self._get_ptype(s_two)
         if p_type.type in TYPE_MAP_PY_WRAPPER:
+            realtype = p_type.type
             f_str = TYPE_MAP_PY_WRAPPER[p_type.type]
             f_str = f_str + f"[{p_type_one.type}, {p_type_two.type}]"
         else:
+            realtype = 'tuple'
             f_str = f"typing.Tuple[{p_type_one.type}, {p_type_two.type}]"
         # if len(p_type_one.imports) > 0 or len(p_type_two.imports) > 0:
         #     f_str = f"'{f_str}'"
-        r_type = PythonType()
-        r_type.requires_typing = True
+        r_type = PythonType(type=f_str, realtype=realtype, requires_typing=True)
         r_type.imports.update(p_type.imports)
         r_type.imports.update(p_type_one.imports)
         r_type.imports.update(p_type_two.imports)
-        r_type.type = f_str
         r_type.is_py_type = p_type.is_py_type and p_type_one.is_py_type and p_type_two.is_py_type
         r_type.children.append(p_type_one)
         r_type.children.append(p_type_two)

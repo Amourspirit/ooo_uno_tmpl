@@ -27,6 +27,7 @@ def test_rule_primative():
         assert p_type.type == type_map[key]
         assert p_type.requires_typing == False
         assert p_type.is_py_type
+        assert p_type.realtype == type_map[key]
 
 
 def test_rule_primative_seq():
@@ -36,9 +37,11 @@ def test_rule_primative_seq():
     assert p_type.type == 'typing.List[int]'
     assert p_type.requires_typing
     assert p_type.is_py_type
+    assert p_type.realtype == 'list'
     assert len(p_type.children) == 1
     p_child = p_type.children[0]
     assert p_child.type == 'int'
+    assert p_child.realtype == 'int'
     assert p_child.is_py_type
     assert p_child.requires_typing == False
     assert len(p_child.children) == 0
@@ -52,8 +55,12 @@ def test_rule_primative_seq():
     seq = 'aDXArray<string>'
     p_type = tester.get_python_type(seq)
     assert p_type.type == 'typing.List[str]'
+    assert p_type.realtype == 'list'
     assert p_type.requires_typing
     assert p_type.is_py_type
+    p_child = p_type.children[0]
+    assert p_child.type == 'str'
+    assert p_child.realtype == 'str'
     rule = tm.RuleSeqLikePrimative(tester)
     seq = 'sequence<string>'
     assert rule.get_is_match(seq) == True
@@ -70,10 +77,12 @@ def test_rule_seq():
     assert p_type.type == "typing.List[XThing]"
     assert p_type.requires_typing
     assert p_type.is_py_type == False
+    assert p_type.realtype == 'list'
     assert p_type.imports == set(['com.sun.star.beans.XThing'])
     assert len(p_type.children) == 1
     p_child = p_type.children[0]
     assert p_child.type == 'XThing'
+    assert p_child.realtype == 'XThing'
     assert p_child.is_py_type == False
     assert p_child.requires_typing == True
     assert len(p_child.children) == 0
@@ -90,6 +99,7 @@ def test_rule_seq():
     assert len(p_type.children) == 1
     p_child = p_type.children[0]
     assert p_child.type == 'XThing'
+    assert p_child.realtype == 'XThing'
     assert p_child.is_py_type == False
     assert p_child.requires_typing == True
     assert len(p_child.children) == 0
@@ -105,6 +115,7 @@ def test_rule_seq():
     assert len(p_type.children) == 1
     p_child = p_type.children[0]
     assert p_child.type == 'XThing'
+    assert p_child.realtype == 'XThing'
     assert p_child.is_py_type == False
     assert p_child.requires_typing == True
     assert len(p_child.children) == 0
@@ -122,6 +133,7 @@ def test_rule_seq():
     assert len(p_type.children) == 1
     p_child = p_type.children[0]
     assert p_child.type == 'object'
+    assert p_child.realtype == 'object'
     assert p_child.is_py_type == True
     assert p_child.requires_typing == False
     assert len(p_child.children) == 0
@@ -134,6 +146,7 @@ def test_rule_com():
     seq = 'com.sun.star.beans.Pair'
     p_type = tester.get_python_type(seq)
     assert p_type.type == "tuple"
+    assert p_type.realtype == "tuple"
     assert p_type.requires_typing == False
     assert p_type.is_py_type
     assert len(p_type.imports) == 0
@@ -151,6 +164,7 @@ def test_rule_com():
     assert rule.get_is_match(seq)
     p_type = rule.get_python_type(seq)
     assert p_type.type == "XThing"
+    assert p_type.realtype == "XThing"
     assert p_type.requires_typing == False
     assert p_type.imports == set(['com.sun.star.beans.XThing'])
     assert p_type.is_py_type == False
@@ -162,24 +176,47 @@ def test_rule_tup2():
     seq = 'com.sun.star.beans.Pair< string, string >'
     p_type = tester.get_python_type(seq)
     assert p_type.type == "typing.Tuple[str, str]"
+    assert p_type.realtype == 'tuple'
     assert p_type.requires_typing
     assert p_type.is_py_type == True
     assert len(p_type.imports) == 0
+    p1 = p_type.children[0]
+    p2 = p_type.children[1]
+    assert p1.type == 'str'
+    assert p1.realtype == 'str'
+    assert p2.type == 'str'
+    assert p2.realtype == 'str'
     rule = tm.RuleTuple2Like(tester)
     seq = 'com.sun.star.beans.Pair< string, string >'
     assert rule.get_is_match(seq)
     p_type = rule.get_python_type(seq)
     assert p_type.type == "typing.Tuple[str, str]"
+    assert p_type.realtype == 'tuple'
     assert p_type.requires_typing
     assert p_type.is_py_type == True
     assert len(p_type.imports) == 0
+    p1 = p_type.children[0]
+    p2 = p_type.children[1]
+    assert p1.type == 'str'
+    assert p1.realtype == 'str'
+    assert p2.type == 'str'
+    assert p2.realtype == 'str'
     seq = 'com.sun.star.beans.Pair< com.sun.star.uno.XInterface, string >'
     assert rule.get_is_match(seq)
     p_type = rule.get_python_type(seq)
     assert p_type.requires_typing
     assert p_type.imports == set(['com.sun.star.uno.XInterface'])
     assert p_type.type == "typing.Tuple[XInterface, str]"
+    assert p_type.realtype == 'tuple'
     assert p_type.is_py_type == False
+    p1 = p_type.children[0]
+    p2 = p_type.children[1]
+    assert p1.type == 'XInterface'
+    assert p1.realtype == 'XInterface'
+    assert p1.is_py_type == False
+    assert p2.type == 'str'
+    assert p2.realtype == 'str'
+    assert p2.is_py_type == True
     seq = 'sequence< com.sun.star.uno.XInterface >'
     assert rule.get_is_match(seq) == False
 
