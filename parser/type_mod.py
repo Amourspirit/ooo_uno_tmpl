@@ -5,7 +5,7 @@ Handles conversion of LibreOffice types to Python Types
 import re
 from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
-from typing import List, Match, Set, Union
+from typing import List, Match, Optional, Set, Union
 
 TYPE_MAP_PRIMITIVE = {
     "any": "object",
@@ -38,11 +38,26 @@ TYPE_MAP_PY_WRAPPER = {
 class PythonType:
     type: str = 'object'
     requires_typing: bool = False
-    imports: Set[str] = field(default_factory=set)
+    imports: Optional[str] = None
     is_py_type: bool = False
     children: List['PythonType'] = field(default_factory=list)
     realtype: str = 'object'
 
+    def get_all_imports(self) -> Set[str]:
+        """
+        Get import for inststance and allof children recursivly
+
+        Returns:
+            Set[str]: Set containing all imports
+        """
+        def _get_imports(p_type: PythonType, imports: Set[str]) -> None:
+            if p_type.imports:
+                imports.add(p_type.imports)
+            for child in p_type.children:
+                _get_imports(child, imports)
+        im: Set[str] = set()
+        _get_imports(self, im)
+        return im
 class ITypeRule(ABC):
     @abstractmethod
     def __init__(self, rules: 'ITypeRules') -> None:
@@ -224,7 +239,7 @@ class RuleComType(ITypeRule):
         return PythonType(
             type = s,
             requires_typing = False,
-            imports = set([s_type]),
+            imports = s_type,
             is_py_type = False,
             realtype=s
         )
@@ -404,7 +419,7 @@ class RuleSeqLikeNonPrim(ITypeRule):
             is_py_type = True
             child.is_py_type = True
             child.children.clear()
-            child.imports.clear()
+            child.imports = None
             child.is_py_type = True
             child.requires_typing = False
             child.type = t_name
@@ -426,7 +441,7 @@ class RuleSeqLikeNonPrim(ITypeRule):
             realtype = realtype
         )
         if not is_py_type:
-            p_type.imports.add(inner_str)
+            p_type.imports = inner_str
         return p_type
 
 class RuleSeqLikePair(ITypeRule):
@@ -507,7 +522,7 @@ class RuleSeqLikePair(ITypeRule):
             realtype = realtype
         )
         p_type.children.append(p_inner)
-        p_type.imports.update(p_inner.imports)
+        # p_type.imports.update(p_inner.imports)
         return p_type
 
 
@@ -583,9 +598,7 @@ class RuleTuple2Like(ITypeRule):
         # if len(p_type_one.imports) > 0 or len(p_type_two.imports) > 0:
         #     f_str = f"'{f_str}'"
         r_type = PythonType(type=f_str, realtype=realtype, requires_typing=True)
-        r_type.imports.update(p_type.imports)
-        r_type.imports.update(p_type_one.imports)
-        r_type.imports.update(p_type_two.imports)
+        r_type.imports = p_type.imports
         r_type.is_py_type = p_type.is_py_type and p_type_one.is_py_type and p_type_two.is_py_type
         r_type.children.append(p_type_one)
         r_type.children.append(p_type_two)

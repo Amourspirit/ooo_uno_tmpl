@@ -244,4 +244,33 @@ def test_rule_seq_pair():
     assert p_type.requires_typing
     assert p_type.is_py_type == False
     assert p_type.imports == set(['com.sun.star.uno.XInterface'])
+
+def test_python_type_imports():
+    p_a = tm.PythonType(imports='a')
+    p_b = tm.PythonType(imports='b')
+    p_c = tm.PythonType(imports='c')
+    p_1a = tm.PythonType(imports='1a')
+    p_1b = tm.PythonType(imports='1b')
+    p_1c = tm.PythonType(imports='1c')
+    p_1c_a = tm.PythonType(imports='1ca')
+    p_1c.children.append(p_1c_a)
+    p_a.children.append(p_1a)
+    p_b.children.append(p_1b)
+    p_c.children.append(p_1c)
+    p_main = tm.PythonType(imports='main')
+    p_main.children.append(p_a)
+    p_main.children.append(p_b)
+    p_main.children.append(p_c)
+    im = set([
+        'a',
+        'b',
+        'c',
+        '1a',
+        '1b',
+        '1c',
+        '1ca',
+        'main'
+    ])
+    imports = p_main.get_all_imports()
+    assert imports == im
     
