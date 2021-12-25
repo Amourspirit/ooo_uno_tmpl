@@ -799,16 +799,16 @@ class InterfaceWriter(base.WriteBase):
         self._cache[key] = lst
         return self._cache[key]
     
-    def _get_quote_flat(self) -> List[List[str]]:
+    def _get_quote_flat(self) -> List[str]:
         si_lst = self._parser.api_data.func_summaries.get_obj()
-        t_set : Set[str] = set()
+        t_set: Set[str] = set()
         for si in si_lst:
             t = si.p_type
             if t.requires_typing or t.is_py_type is False:
                 t_set.add(t.type)
         return list(t_set)
-    
-    def _get_typings(self) -> List[List[str]]:
+
+    def _get_typings(self) -> List[str]:
         si_lst = self._parser.api_data.func_summaries.get_obj()
         t_set: Set[str] = set()
         for si in si_lst:

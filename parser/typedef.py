@@ -24,6 +24,7 @@ from pathlib import Path
 from logger.log_handle import get_logger
 from dataclasses import dataclass, field
 from parser import __version__, JSON_ID
+from parser.type_mod import PythonType
 
 logger = None
 
@@ -44,6 +45,7 @@ class SummaryInfo:
     type: str
     requires_typing: bool
     imports: Set[str] = field(default_factory=set)
+    p_type: PythonType = None
 
     def __lt__(self, other: 'SummaryInfo'):
         return self.name < other.name
@@ -98,6 +100,12 @@ class ApiSummaries(base.BlockObj):
                     _req_typing = True
                 _imports.update(p_type.get_all_imports())
             else:
+                p_type = PythonType(
+                    name=name,
+                    type=s_type,
+                    realtype=s_type,
+                    requires_typing=_req_typing
+                )
                 msg = f"{self.__class__.__name__}.get_obj(). Missing return type for {name}. Url: {self.url_obj.url_only}"
                 logger.error(msg)
                 raise Exception(msg)
@@ -107,8 +115,10 @@ class ApiSummaries(base.BlockObj):
                 name=name,
                 type=s_type,
                 requires_typing=_req_typing,
-                imports=_imports
+                imports=_imports,
+                p_type=p_type
                 )
+            
             self._data.append(si)
         return self._data
 
@@ -290,6 +300,10 @@ class ParserTypeDef(base.ParserBase):
         str_lst = base.Util.get_formated_dict_list_str(obj=attribs, indent=4)
         self._cache[key] = str_lst
         return self._cache[key]
+
+    @property
+    def api_data(self) -> ApiData:
+        return self._api_data
 # endregion Parse
 
 # region Writer
@@ -369,6 +383,8 @@ class WriterTypeDef(base.WriteBase):
         
         p_dict['from_imports'] = self._get_from_imports(t_def)
         p_dict['imports'] = list(t_def.imports)
+        p_dict['quote'] = self._get_quote_flat()
+        p_dict['typings'] = self._get_typings()
         p_dict['desc'] = t_def.desc
         
 
@@ -409,6 +425,32 @@ class WriterTypeDef(base.WriteBase):
         return self._cache[key]
     # endregion get Imports
 
+    def _get_quote_flat(self) -> List[str]:
+        key = '_get_quote_flat'
+        if key in self._cache:
+            return self._cache[key]
+        si_lst = self._parser.api_data.type_def_summaries.get_obj()
+        t_set: Set[str] = set()
+        for si in si_lst:
+            t = si.p_type
+            if t.requires_typing or t.is_py_type is False:
+                t_set.add(t.type)
+        self._cache[key] = list(t_set)
+        return self._cache[key]
+
+    def _get_typings(self) -> List[str]:
+        key = '_get_typings'
+        if key in self._cache:
+            return self._cache[key]
+        si_lst = self._parser.api_data.type_def_summaries.get_obj()
+        t_set: Set[str] = set()
+        for si in si_lst:
+            t = si.p_type
+            if t.requires_typing:
+                t_set.add(t.type)
+        self._cache[key] = list(t_set)
+        return self._cache[key]
+
     def _get_template_data(self, t_def: TypeDef) -> str:
         if self._write_template_long is False:
             return self._template
@@ -419,6 +461,12 @@ class WriterTypeDef(base.WriteBase):
         t = t.replace('{ns}', str(self._p_namespace))
         t = t.replace('{link}', self._p_url)
         t = t.replace('{type}', t_def.type)
+        t = t.replace(
+            '{quote}',
+            str(set(self._get_quote_flat())))
+        t = t.replace(
+            '{typings}',
+            str(set(self._get_typings())))
         t = t.replace(
             '{requires_typing}', str(t_def.requires_typing))
         t = t.replace(
