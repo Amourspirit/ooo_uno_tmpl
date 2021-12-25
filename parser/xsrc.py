@@ -824,6 +824,14 @@ class InterfaceWriter(base.WriteBase):
         self._template = self._template.replace('{name}', self._p_name)
         self._template = self._template.replace('{ns}', str(self._p_namespace))
         self._template = self._template.replace('{link}', self._p_url)
+        
+        self._template = self._template.replace(
+            '{quote}',
+            str(set(self._get_quote_flat())))
+        self._template = self._template.replace(
+            '{typings}',
+            str(set(self._get_typings())))
+        
         self._template = self._template.replace(
             '{requires_typing}', str(self._p_requires_typing))
         self._template = self._template.replace(

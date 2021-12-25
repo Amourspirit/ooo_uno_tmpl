@@ -96,8 +96,7 @@ class ApiSummaries(base.BlockObj):
                 s_type =p_type.type
                 if p_type.requires_typing:
                     _req_typing = True
-                for im in p_type.imports:
-                    _imports.add(im)
+                _imports.update(p_type.get_all_imports())
             else:
                 msg = f"{self.__class__.__name__}.get_obj(). Missing return type for {name}. Url: {self.url_obj.url_only}"
                 logger.error(msg)
@@ -659,4 +658,4 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    _main()
