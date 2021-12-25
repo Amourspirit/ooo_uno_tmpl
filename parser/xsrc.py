@@ -16,6 +16,8 @@ from bs4.element import ResultSet, Tag
 from kwhelp.decorator import AcceptedTypes, DecFuncEnum, TypeCheckKw
 from pathlib import Path
 from dataclasses import dataclass
+
+from parser.base import APIData
 try:
     import base
 except ModuleNotFoundError:
@@ -659,6 +661,10 @@ class ParserInterface(base.ParserBase):
             logger.error(e, exc_info=True)
             raise e
         return self._requires_typing
+
+    @property
+    def api_data(self) -> ApiInterfaceData:
+        return self._api_data
 # endregion Parse
 
 # region Writer
@@ -799,7 +805,21 @@ class InterfaceWriter(base.WriteBase):
         key = '_get_from_imports_flat'
         if key in self._cache:
             return self._cache[key]
+        si_lst = self._parser.api_data.func_summaries.get_obj()
         results = []
+        for si in si_lst:
+            t = si.p_type
+            if t.requires_typing:
+                # make sure the type is not already imported
+                i_len = len(t.imports)
+                if i_len == 0:
+                    results.append(t.type)
+                    continue
+                if i_len == 1:
+                    if t.imports[0] in self._p_imports_typing:
+                        results.append(t.type)
+                    continue
+                
         lst = self._get_from_imports_typing()
         for t in lst:
             results.append(t[1])
