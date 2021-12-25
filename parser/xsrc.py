@@ -63,12 +63,6 @@ class ParamInfo:
     name: str = ''
     type: str = ''
 
-
-@dataclass(frozen=True)
-class SummaryInfo:
-    id: str
-    name: str
-    return_type: str
 # endregion Data Classes
 
 # region API Interface classes
@@ -89,56 +83,6 @@ class ApiInterfacesBlock(base.ApiSummaryBlock):
 
     def _get_match_name(self) -> str:
         return 'interfaces'
-
-
-class ApiSummaries(base.BlockObj):
-    """Gets summary information for a public member block"""
-
-    def __init__(self, block: base.ApiSummaryRows) -> None:
-        self._block: base.ApiSummaryRows = block
-        super().__init__(self._block.soup)
-        self._requires_typing = False
-        self._imports: Set[str] = set()
-        self._data = None
-
-    def get_obj(self) -> List[SummaryInfo]:
-        if not self._data is None:
-            return self._data
-        self._data = []
-        rows = self._block.get_obj()
-        for row in rows:
-            cls_name = row.get('class')[0]
-            id_str = cls_name.rsplit(sep=':', maxsplit=1)[1]
-            itm_lft = row.find('td', class_='memItemLeft')
-            r_type = ''
-            name = ''
-            if itm_lft:
-                r_type = itm_lft.text.strip().replace('::', '.')
-            itm_rgt = row.find('td', class_='memItemRight')
-            if itm_rgt:
-                itm_name = itm_rgt.select_one('a')
-                if itm_name:
-                    name = itm_name.text.strip()
-                    name = base.Util.get_clean_method_name(name)
-            p_type = base.Util.get_python_type(in_type=r_type)
-            si = SummaryInfo(id=id_str, name=name, return_type=p_type.type)
-            if p_type.requires_typing:
-                self._requires_typing = True
-            for im in p_type.imports:
-                self._imports.add(im)
-            self._data.append(si)
-        return self._data
-
-    @property
-    def requires_typing(self) -> bool:
-        """Gets requires_typing value"""
-        return self._requires_typing
-
-    @property
-    def imports(self) -> Set[str]:
-        """Gets imports value"""
-        return self._imports
-
 
 class ApiFnPramsInfo(base.BlockObj):
     """Gets List of Parameter information for a funciton"""
@@ -232,7 +176,7 @@ class ApiFnPramsInfo(base.BlockObj):
         return self._imports
 
     @property
-    def summary_info(self) -> SummaryInfo:
+    def summary_info(self) -> base.SummaryInfo:
         """Gets summary_info value"""
         return self._block.summary_info
 
@@ -284,7 +228,7 @@ class ApiMethodException(base.BlockObj):
         return self._data
 
     @property
-    def summary_info(self) -> SummaryInfo:
+    def summary_info(self) -> base.SummaryInfo:
         """Gets summary_info value"""
         return self._block.summary_info
 
@@ -323,9 +267,9 @@ class ApiInterfaceData(base.APIData):
         self._func_summary_rows: base.ApiSummaryRows = None
         self._property_summary_rows: base.ApiSummaryRows = None
         self._export_summary_rows: base.ApiSummaryRows = None
-        self._func_summaries: ApiSummaries = None
-        self._property_summaries: ApiSummaries = None
-        self._exported_summaries: ApiSummaries = None
+        self._func_summaries: base.ApiSummaries = None
+        self._property_summaries: base.ApiSummaries = None
+        self._exported_summaries: base.ApiSummaries = None
         self._desc: base.ApiDesc = None
         self._inherited: base.ApiInherited = None
         self._cache = {
@@ -488,10 +432,10 @@ class ApiInterfaceData(base.APIData):
         return self._export_summary_rows
 
     @property
-    def func_summaries(self) -> ApiSummaries:
+    def func_summaries(self) -> base.ApiSummaries:
         """Get Summary info list for functions"""
         if self._func_summaries is None:
-            self._func_summaries = ApiSummaries(
+            self._func_summaries = base.ApiSummaries(
                 self.func_summary_rows)
             d = {}
             summaries = self._func_summaries.get_obj()
@@ -501,10 +445,10 @@ class ApiInterfaceData(base.APIData):
         return self._func_summaries
 
     @property
-    def property_summaries(self) -> ApiSummaries:
+    def property_summaries(self) -> base.ApiSummaries:
         """Get Summary info list for Properties"""
         if self._property_summaries is None:
-            self._property_summaries = ApiSummaries(
+            self._property_summaries = base.ApiSummaries(
                 self.property_summary_rows)
             d = {}
             summaries = self._property_summaries.get_obj()
@@ -514,10 +458,10 @@ class ApiInterfaceData(base.APIData):
         return self._property_summaries
 
     @property
-    def exported_summaries(self) -> ApiSummaries:
+    def exported_summaries(self) -> base.ApiSummaries:
         """Get Summary info list for Exported Interfaces"""
         if self._exported_summaries is None:
-            self._exported_summaries = ApiSummaries(
+            self._exported_summaries = base.ApiSummaries(
                 self.export_summary_rows)
         return self._exported_summaries
 
@@ -895,6 +839,7 @@ class InterfaceWriter(base.WriteBase):
         self._p_desc = data['desc']
         self._p_url = data['url']
         self._p_data = self._parser.get_formated_data()
+        self._p_requires_typing = False
         self._validate_p_info()
         _imports = data['imports']
         self._p_imports.update(_imports)

@@ -138,6 +138,13 @@ class Ns:
     @property
     def fullns(self):
         return self.namespace + '.' + self.name
+
+
+@dataclass(frozen=True)
+class SummaryInfo:
+    id: str
+    name: str
+    return_type: str
 # endregion Data Classes
 
 # region Cache
@@ -858,6 +865,53 @@ class ApiSummaryRows(BlockObj):
                 self._data.append(row)
         return self._data
 
+class ApiSummaries(BlockObj):
+    """Gets summary information for a public member block"""
+
+    def __init__(self, block: ApiSummaryRows) -> None:
+        self._block: ApiSummaryRows = block
+        super().__init__(self._block.soup)
+        self._requires_typing = False
+        self._imports: Set[str] = set()
+        self._data = None
+
+    def get_obj(self) -> List[SummaryInfo]:
+        if not self._data is None:
+            return self._data
+        self._data = []
+        rows = self._block.get_obj()
+        for row in rows:
+            cls_name = row.get('class')[0]
+            id_str = cls_name.rsplit(sep=':', maxsplit=1)[1]
+            itm_lft = row.find('td', class_='memItemLeft')
+            r_type = ''
+            name = ''
+            if itm_lft:
+                r_type = itm_lft.text.strip().replace('::', '.')
+            itm_rgt = row.find('td', class_='memItemRight')
+            if itm_rgt:
+                itm_name = itm_rgt.select_one('a')
+                if itm_name:
+                    name = itm_name.text.strip()
+                    name = Util.get_clean_method_name(name)
+            p_type = Util.get_python_type(in_type=r_type)
+            si = SummaryInfo(id=id_str, name=name, return_type=p_type.type)
+            if p_type.requires_typing:
+                self._requires_typing = True
+            for im in p_type.imports:
+                self._imports.add(im)
+            self._data.append(si)
+        return self._data
+
+    @property
+    def requires_typing(self) -> bool:
+        """Gets requires_typing value"""
+        return self._requires_typing
+
+    @property
+    def imports(self) -> Set[str]:
+        """Gets imports value"""
+        return self._imports
 
 class ApiDescDetailSince(BlockObj):
     """Gets the Since part if it exist of a detailed block section"""

@@ -1457,17 +1457,124 @@ class ApiData:
 
 # endregion API
 
+# region API Ex
 
+
+class ApiPropertiesBlock(base.ApiSummaryBlock):
+    def _get_match_name(self) -> str:
+        return 'pub-attribs'
+class ApiNs(base.ApiNamespace):
+    """Get the Name object for the interface"""
+
+    def __init__(self, soup: base.SoupObj):
+        super().__init__(soup)
+        self._namespace_str = None
+        self._namespace = None
+
+    @property
+    def namespace(self) -> List[str]:
+        """Gets namespace value"""
+        if self._namespace is None:
+            self._namespace = self.get_obj()[:-1]
+        return self._namespace
+
+    @property
+    def namespace_str(self) -> str:
+        if self._namespace_str is None:
+            self._namespace_str = '.'.join(self.namespace)
+        return self._namespace_str
+
+
+class ApiExData(base.APIData):
+    # region constructor
+    @TypeCheck((str, base.SoupObj), bool, ftype=DecFuncEnum.METHOD)
+    def __init__(self, url_soup: Union[str, base.SoupObj], allow_cache: bool):
+        super().__init__(url_soup=url_soup, allow_cache=allow_cache)
+
+        self._ns: ApiNs = None
+        self._desc: base.ApiDesc = None
+        self._inherited: base.ApiInherited = None
+        self._properties_block: ApiPropertiesBlock = None
+        self._property_summaries: base.ApiSummaries = None
+        self._property_summary_rows: base.ApiSummaryRows = None
+    # endregion constructor
+
+    # region methods
+
+    def get_import_info_property(self) -> base.ImportInfo:
+        """
+        Gets imports for properties
+
+        Args:
+            si_id (str): Property summary Info
+
+        Returns:
+            base.ImportInfo: Import info
+        """
+        info = base.ImportInfo()
+        p_info = self.property_summaries
+        # ensure data is primed
+        p_info.get_obj()
+        info.requires_typing = p_info.requires_typing
+        info.imports.update(p_info.imports)
+        return info
+    # endregion methods
+
+    # region Properties
+    @property
+    def ns(self) -> ApiNs:
+        """Gets the interface Description object"""
+        if self._ns is None:
+            self._ns = ApiNs(
+                self.soup_obj)
+        return self._ns
+
+    @property
+    def desc(self) -> base.ApiDesc:
+        """Gets the interface Description object"""
+        if self._desc is None:
+            self._desc = base.ApiDesc(self.soup_obj)
+        return self._desc
+
+    @property
+    def inherited(self) -> base.ApiInherited:
+        """Gets class that get all inherited value"""
+        if self._inherited is None:
+            self._inherited = base.ApiInherited(
+                soup=self.soup_obj, raise_error=False)
+        return self._inherited
+
+    @property
+    def properties_block(self) -> ApiPropertiesBlock:
+        """Gets Summary Properties block"""
+        if self._properties_block is None:
+            self._properties_block = ApiPropertiesBlock(
+                self.public_members)
+        return self._properties_block
+    
+    @property
+    def property_summary_rows(self) -> base.ApiSummaryRows:
+        """Get Summary rows for Properties"""
+        if self._property_summary_rows is None:
+            self._property_summary_rows = base.ApiSummaryRows(
+                self.properties_block)
+        return self._property_summary_rows
+    
+    @property
+    def property_summaries(self) -> base.ApiSummaries:
+        """Get Summary info list for Properties"""
+        if self._property_summaries is None:
+            self._property_summaries = base.ApiSummaries(
+                self.property_summary_rows)
+        return self._property_summaries
+    # endregion Properties
+# region API Ex
 class ParserEx(base.ParserBase):
     # region Constructor
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self._sdk_data = SdkData(
-            url=self.url,
-            allow_cache=self._allow_cache
-            )
-        soup = self._sdk_data.api_sdk_link.soup
-        self._api_data = ApiData(url_soup=soup, allow_cache=self._allow_cache)
+        self._allow_caching = kwargs.get('allow_cache', True)
+        self._api_data = ApiExData(url_soup=self.url, allow_cache=self._allow_cache)
         self._imports: Set[str] = set()
         self._requires_typing = False
         self._cache = {}
@@ -1483,8 +1590,9 @@ class ParserEx(base.ParserBase):
         key = 'get_formated_data'
         if key in self._cache:
             return self._cache[key]
-        attribs = self._get_data_items()
-        str_lst = base.Util.get_formated_dict_list_str(obj=attribs, indent=indent)
+        items = self._get_data_items()
+        str_lst = base.Util.get_formated_dict_list_str(
+            obj=items, indent=indent)
         self._cache[key] = str_lst
         return self._cache[key]
 
@@ -1512,29 +1620,24 @@ class ParserEx(base.ParserBase):
         key = 'get_info'
         if key in self._cache:
             return self._cache[key]
-        ns = base.UrlObj(self._url)
-        ni = self._sdk_data.name_info
-        ex = self._sdk_data.extends
-        desc = ApiDesc(self._api_data)
-        # must be called here to make sure imports are included.
-        # method is cached so no big dea.
-        self._get_data_items()
+        ex = []
+        for el in self._api_data.inherited.get_obj():
+            ex.append(el.fullns)
         result = {
-            'name': ni.name,
-            'namespace': ns.namespace_str,
+            'name': self._api_data.name.get_obj(),
+            'namespace': self._api_data.ns.namespace_str,
             'imports': [],
-            'typing_imports': list(self._api_data.api_properties.imports),
-            'extends': ex.ex_lst,
-            'desc': desc.get_obj(),
-            "url": ns.url
+            'extends': ex,
+            'desc': self._api_data.desc.get_obj(),
+            "url": self._api_data.url_obj.url
         }
         # if ni.name == 'Exception':
         #     # make special exception for root exception:
         #     result['extends'] = ['XInterface']
 
-        logger.debug('ParserEx.get_info() name: %s', ni.name)
+        logger.debug('ParserEx.get_info() name: %s', result['name'])
         logger.debug('ParserEx.get_info() namespace: %s',
-                     ns.namespace_str)
+                     result['namespace'])
         self._cache[key] = result
         return self._cache[key]
 
@@ -1545,25 +1648,35 @@ class ParserEx(base.ParserBase):
         attribs = {}
         prop = self._get_properties_data()
         attribs['properties'] = prop
-
         self._cache[key] = attribs
         return self._cache[key]
 
-    def _get_properties_data(self) -> List[dict]:
-        attribs = []
-        props = self._api_data.api_properties
-        if props.requires_typing:
-            self._requires_typing = True
-        properties: List[Property] = props.properties
-        for p in properties:
-            if not p.name:
+    def _get_properties_data(self):
+        attribs = {}
+        si_lst = self._api_data.property_summaries.get_obj()
+        for i, si in enumerate(si_lst):
+            if i == 0:
+                attribs['properties'] = []
+            if not si.name:
                 continue
-            d = {
-                "name": p.name,
-                "type": p.type,
-                "desc": p.desc
+            attrib = {
+                "name": si.name,
+                "returns": si.return_type,
+                "desc": self._api_data.get_desc_detail(si.id).get_obj(),
+                "raises_get": '',
+                "raises_set": ''
             }
-            attribs.append(d)
+            attribs['properties'].append(attrib)
+        import_info = self._api_data.get_import_info_property()
+        if import_info.requires_typing:
+            self._requires_typing = True
+        self._imports.update(import_info.imports)
+
+        if self.sort:
+            if 'properties' in attribs:
+                newlist = sorted(attribs['properties'],
+                                 key=lambda d: d['name'])
+                attribs['properties'] = newlist
         return attribs
 
     @property
@@ -1645,6 +1758,8 @@ class WriterEx(base.WriteBase):
         self._template_file = _path
         self._template: str = self._get_template()
     # endregion Constructor
+
+   
 
     def write(self):
         self._set_info()
@@ -1767,8 +1882,9 @@ class WriterEx(base.WriteBase):
 
     # region set data
     def _set_info(self):
-        def get_extends(lst:List[str]) -> List[str]:
+        def get_extends(lst: List[str]) -> List[str]:
             return [base.Util.get_last_part(s) for s in lst]
+            # return [s.rsplit('.', 1)[1] for s in lst]
         data = self._parser.get_info()
         self._p_name = data['name']
         self._p_namespace = data['namespace']
@@ -1776,10 +1892,12 @@ class WriterEx(base.WriteBase):
         self._p_desc = data['desc']
         self._p_url = data['url']
         self._p_data = self._parser.get_formated_data()
+        self._p_requires_typing = False
         self._validate_p_info()
-        typing_imports = data['typing_imports']
-        self._p_imports_typing.update(typing_imports)
+        _imports = data['imports']
+        self._p_imports.update(_imports)
         self._p_imports.update(data['extends'])
+        self._p_imports_typing.update(self._parser.imports)
         if len(self._p_imports_typing) > 0:
             self._p_requires_typing = True
         if not self._p_requires_typing:
@@ -1841,11 +1959,6 @@ class WriterEx(base.WriteBase):
             f.write(jsn_str)
         logger.info("Created file: %s", jsn_p)
 
-def _main():
-    # url = 'https://api.libreoffice.org/docs/idl/ref/exceptioncom_1_1sun_1_1star_1_1configuration_1_1CannotLoadConfigurationException.html'
-    url = 'https://api.libreoffice.org/docs/idl/ref/exceptioncom_1_1sun_1_1star_1_1uno_1_1Exception.html'
-    sys.argv.extend(['-d', '-n', '-j', '-t', '-v', '-L', 'debug.log', '-u', url])
-    main()
 
 # region Parse method
 
@@ -1989,6 +2102,20 @@ def parse(*args, **kwargs):
     w.write()
 # endregion Parse method
 
+
+def _main():
+    # url = 'https://api.libreoffice.org/docs/idl/ref/exceptioncom_1_1sun_1_1star_1_1configuration_1_1CannotLoadConfigurationException.html'
+    # url = 'https://api.libreoffice.org/docs/idl/ref/exceptioncom_1_1sun_1_1star_1_1uno_1_1Exception.html'
+    url = 'https://api.libreoffice.org/docs/idl/ref/exceptioncom_1_1sun_1_1star_1_1accessibility_1_1IllegalAccessibleComponentStateException.html'
+    args = ('v', 'n')
+    kwargs = {
+        "u": url,
+        "log_file": "debug.log"
+    }
+    parse(*args, **kwargs)
+    # sys.argv.extend(['-d', '-n', '-j', '-t', '-v', '-L', 'debug.log', '-u', url])
+    # main()
+
 def main():
     global logger
     
@@ -2109,4 +2236,4 @@ def main():
     w.write()
 
 if __name__ == '__main__':
-    main()
+    _main()
