@@ -144,7 +144,8 @@ class Ns:
 class SummaryInfo:
     id: str
     name: str
-    return_type: str
+    type: str
+    p_type: PythonType
 # endregion Data Classes
 
 # region Cache
@@ -895,7 +896,7 @@ class ApiSummaries(BlockObj):
                     name = itm_name.text.strip()
                     name = Util.get_clean_method_name(name)
             p_type = Util.get_python_type(in_type=r_type)
-            si = SummaryInfo(id=id_str, name=name, return_type=p_type.type)
+            si = SummaryInfo(id=id_str, name=name, type=p_type.type, p_type=p_type)
             if p_type.requires_typing:
                 self._requires_typing = True
             for im in p_type.imports:

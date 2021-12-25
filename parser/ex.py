@@ -235,7 +235,7 @@ class ParserEx(base.ParserBase):
                 continue
             attrib = {
                 "name": si.name,
-                "returns": si.return_type,
+                "returns": si.type,
                 "desc": self._api_data.get_desc_detail(si.id).get_obj(),
                 "raises_get": '',
                 "raises_set": ''
@@ -816,4 +816,4 @@ def main():
     w.write()
 
 if __name__ == '__main__':
-    _main()
+    main()

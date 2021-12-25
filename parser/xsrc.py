@@ -591,7 +591,7 @@ class ParserInterface(base.ParserBase):
             args = []
             attrib = {
                 "name": si.name,
-                "returns": si.return_type,
+                "returns": si.type,
                 "desc": self._api_data.get_desc_detail(si.id).get_obj(),
                 "raises": self._api_data.get_method_ex(si.id).get_obj() or []
             }
