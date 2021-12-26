@@ -12,7 +12,6 @@ color.pyi => Color
 language.pyi => Language
 
 """
-from abc import abstractmethod
 import os
 import sys
 import argparse
@@ -383,8 +382,8 @@ class WriterTypeDef(base.WriteBase):
         
         p_dict['from_imports'] = self._get_from_imports(t_def)
         p_dict['imports'] = list(t_def.imports)
-        p_dict['quote'] = self._get_quote_flat()
-        p_dict['typings'] = self._get_typings()
+        p_dict['quote'] = self._get_quote_flat(t_def.id)
+        p_dict['typings'] = self._get_typings(t_def.id)
         p_dict['desc'] = t_def.desc
         
 
@@ -425,31 +424,28 @@ class WriterTypeDef(base.WriteBase):
         return self._cache[key]
     # endregion get Imports
 
-    def _get_quote_flat(self) -> List[str]:
-        key = '_get_quote_flat'
-        if key in self._cache:
-            return self._cache[key]
+    def _get_quote_flat(self, si_id: str) -> List[str]:
+        # si_id will limit this to one item max
         si_lst = self._parser.api_data.type_def_summaries.get_obj()
-        t_set: Set[str] = set()
+        t_lst = []
         for si in si_lst:
-            t = si.p_type
-            if t.requires_typing or t.is_py_type is False:
-                t_set.add(t.type)
-        self._cache[key] = list(t_set)
-        return self._cache[key]
+            if si.id == si_id:
+                t = si.p_type
+                if t.requires_typing or t.is_py_type is False:
+                    t_lst.append(t.type)
+                break
+        return t_lst
 
-    def _get_typings(self) -> List[str]:
-        key = '_get_typings'
-        if key in self._cache:
-            return self._cache[key]
+    def _get_typings(self, si_id: str) -> List[str]:
         si_lst = self._parser.api_data.type_def_summaries.get_obj()
-        t_set: Set[str] = set()
+        t_lst = []
         for si in si_lst:
-            t = si.p_type
-            if t.requires_typing:
-                t_set.add(t.type)
-        self._cache[key] = list(t_set)
-        return self._cache[key]
+            if si.id == si_id:
+                t = si.p_type
+                if t.requires_typing:
+                    t_lst.append(t.type)
+                break
+        return t_lst
 
     def _get_template_data(self, t_def: TypeDef) -> str:
         if self._write_template_long is False:
@@ -463,10 +459,10 @@ class WriterTypeDef(base.WriteBase):
         t = t.replace('{type}', t_def.type)
         t = t.replace(
             '{quote}',
-            str(set(self._get_quote_flat())))
+            str(set(self._get_quote_flat(t_def.id))))
         t = t.replace(
             '{typings}',
-            str(set(self._get_typings())))
+            str(set(self._get_typings(t_def.id))))
         t = t.replace(
             '{requires_typing}', str(t_def.requires_typing))
         t = t.replace(
@@ -706,4 +702,4 @@ def main():
 
 
 if __name__ == '__main__':
-    _main()
+    main()

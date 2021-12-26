@@ -800,22 +800,51 @@ class InterfaceWriter(base.WriteBase):
         return self._cache[key]
     
     def _get_quote_flat(self) -> List[str]:
+        key = '_get_quote_flat'
+        if key in self._cache:
+            return self._cache[key]
+        
         si_lst = self._parser.api_data.func_summaries.get_obj()
         t_set: Set[str] = set()
         for si in si_lst:
             t = si.p_type
             if t.requires_typing or t.is_py_type is False:
                 t_set.add(t.type)
-        return list(t_set)
+        si_lst = self._parser.api_data.property_summaries.get_obj()
+        for si in si_lst:
+            t = si.p_type
+            if t.requires_typing:
+                t_set.add(t.type)
+        si_lst = self._parser.api_data.exported_summaries.get_obj()
+        for si in si_lst:
+            t = si.p_type
+            if t.requires_typing:
+                t_set.add(t.type)
+        self._cache[key] = list(t_set)
+        return self._cache[key]
 
     def _get_typings(self) -> List[str]:
+        key = '_get_typings'
+        if key in self._cache:
+            return self._cache[key]
         si_lst = self._parser.api_data.func_summaries.get_obj()
         t_set: Set[str] = set()
         for si in si_lst:
             t = si.p_type
             if t.requires_typing:
                 t_set.add(t.type)
-        return list(t_set)
+        si_lst = self._parser.api_data.property_summaries.get_obj()
+        for si in si_lst:
+            t = si.p_type
+            if t.requires_typing:
+                t_set.add(t.type)
+        si_lst = self._parser.api_data.exported_summaries.get_obj()
+        for si in si_lst:
+            t = si.p_type
+            if t.requires_typing:
+                t_set.add(t.type)
+        self._cache[key] = list(t_set)
+        return self._cache[key]
     # endregion get Imports
 
     def _set_template_data(self):
