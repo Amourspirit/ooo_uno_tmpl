@@ -11,7 +11,7 @@ import logging
 import textwrap
 import xerox  # requires xclip - sudo apt-get install xclip
 import re
-from typing import Dict, List, Set, Union
+from typing import Dict, List, Optional, Set, Union
 from bs4.element import ResultSet, Tag
 from kwhelp.decorator import AcceptedTypes, DecFuncEnum, TypeCheckKw
 from pathlib import Path
@@ -21,6 +21,7 @@ try:
 except ModuleNotFoundError:
     import parser.base as base
 from logger.log_handle import get_logger
+from parser.type_mod import PythonType
 from parser import __version__, JSON_ID
 
 logger = None
@@ -62,6 +63,7 @@ class ParamInfo:
     direction: str = ''
     name: str = ''
     type: str = ''
+    p_type: Optional[PythonType] = None
 
 # endregion Data Classes
 
@@ -142,6 +144,7 @@ class ApiFnPramsInfo(base.BlockObj):
         _type = dir_str.replace("::", '.').lstrip('.')
         t_info: base.PythonType = base.Util.get_python_type(in_type=_type)
         pinfo.type = t_info.type
+        pinfo.p_type = t_info
         if t_info.requires_typing:
             self._requires_typing = True
         self._imports.update(t_info.get_all_imports())
@@ -436,11 +439,6 @@ class ApiInterfaceData(base.APIData):
         if self._func_summaries is None:
             self._func_summaries = base.ApiSummaries(
                 self.func_summary_rows)
-            d = {}
-            summaries = self._func_summaries.get_obj()
-            for si in summaries:
-                d[si.id] = si
-            self._cache[self._si_key].update(d)
         return self._func_summaries
 
     @property
@@ -449,11 +447,6 @@ class ApiInterfaceData(base.APIData):
         if self._property_summaries is None:
             self._property_summaries = base.ApiSummaries(
                 self.property_summary_rows)
-            d = {}
-            summaries = self._property_summaries.get_obj()
-            for si in summaries:
-                d[si.id] = si
-            self._cache[self._si_key].update(d)
         return self._property_summaries
 
     @property
@@ -579,22 +572,38 @@ class ParserInterface(base.ParserBase):
         attribs = {}
         si_lst = self._api_data.func_summaries.get_obj()
         for i, si in enumerate(si_lst):
+            if logger.level <= logging.DEBUG:
+                logger.debug(
+                    "%s._get_methods_data() Processing: %s, %s",
+                    self.__class__.__name__, si.name, si.id )
             import_info = self._api_data.get_import_info_method(si.id)
             params_info = self._api_data.get_prams_info(si.id)
             lst_info = params_info.get_obj()
             if i == 0:
                 attribs['methods'] = []
             if import_info.requires_typing:
+                logger.debug(
+                    "%s._get_properties_data() Imports require typing for: %s, %s",
+                    self.__class__.__name__, si.name, si.id)
                 self._requires_typing = True
             self._imports.update(import_info.imports)
+            if params_info.requires_typing:
+                logger.debug(
+                    "%s._get_properties_data() Params require typing for: %s, %s",
+                    self.__class__.__name__, si.name, si.id)
+                self._requires_typing = True
+            self._imports.update(params_info.imports)
             args = []
             attrib = {
                 "name": si.name,
-                "returns": si.type,
+                "returns": si.p_type.type,
                 "desc": self._api_data.get_desc_detail(si.id).get_obj(),
                 "raises": self._api_data.get_method_ex(si.id).get_obj() or []
             }
             for pi in lst_info:
+                if logger.level <= logging.DEBUG:
+                    logger.debug(
+                        f"{self.__class__.__name__}._get_methods_data() {si.name} param, Name: {pi.name}, Type: {pi.type}, Direction: {pi.direction}")
                 args.append((pi.name, pi.type, pi.direction))
             attrib['args'] = args
             attribs['methods'].append(attrib)
@@ -609,6 +618,10 @@ class ParserInterface(base.ParserBase):
         attribs = {}
         si_lst = self._api_data.property_summaries.get_obj()
         for i, si in enumerate(si_lst):
+            if logger.level <= logging.DEBUG:
+                logger.debug(
+                    "%s._get_properties_data() Processing: %s, %s",
+                    self.__class__.__name__, si.name, si.id)
             if i == 0:
                 attribs['properties'] = []
             if not si.name:
@@ -810,6 +823,13 @@ class InterfaceWriter(base.WriteBase):
             t = si.p_type
             if t.requires_typing or t.is_py_type is False:
                 t_set.add(t.type)
+            # process method params
+            params_info = self._parser.api_data.get_prams_info(si.id)
+            p_lst = params_info.get_obj()
+            for pinfo in p_lst:
+                if pinfo.p_type:
+                    if pinfo.p_type.requires_typing or pinfo.p_type.is_py_type is False:
+                        t_set.add(pinfo.p_type.type)
         si_lst = self._parser.api_data.property_summaries.get_obj()
         for si in si_lst:
             t = si.p_type
@@ -833,6 +853,13 @@ class InterfaceWriter(base.WriteBase):
             t = si.p_type
             if t.requires_typing:
                 t_set.add(t.type)
+            # process method params
+            params_info = self._parser.api_data.get_prams_info(si.id)
+            p_lst = params_info.get_obj()
+            for pinfo in p_lst:
+                if pinfo.p_type:
+                    if pinfo.p_type.requires_typing:
+                        t_set.add(pinfo.p_type.type)
         si_lst = self._parser.api_data.property_summaries.get_obj()
         for si in si_lst:
             t = si.p_type
@@ -1108,12 +1135,9 @@ def parse(*args, **kwargs):
 
 def _main():
     os.system('cls' if os.name == 'nt' else 'clear')
-    # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1graphic_1_1XSvgParser.html'
-    # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1office_1_1XAnnotation.html'
-    # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XItemList.html'
-    # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1accessibility_1_1XMSAAService.html'
     # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1beans_1_1XHierarchicalPropertySet.html'
-    url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1beans_1_1XIntrospectionAccess.html' # has a sequence
+    # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1beans_1_1XIntrospectionAccess.html' # has a sequence
+    url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1accessibility_1_1XAccessibleTextSelection.html'
     args = ('v', 'n')
     kwargs = {
         "u": url,

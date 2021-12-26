@@ -888,14 +888,16 @@ class ApiSummaries(BlockObj):
             r_type = ''
             name = ''
             if itm_lft:
-                r_type = itm_lft.text.strip().replace('::', '.')
+                r_type = itm_lft.text.strip().replace('::', '.').rstrip('.')
             itm_rgt = row.find('td', class_='memItemRight')
             if itm_rgt:
                 itm_name = itm_rgt.select_one('a')
                 if itm_name:
                     name = itm_name.text.strip()
                     name = Util.get_clean_method_name(name)
+            # logger.debug('ApiSummaries.get_obj() r_type in: %s', r_type)
             p_type = Util.get_python_type(in_type=r_type)
+            # logger.debug('ApiSummaries.get_obj() p_type in: %s', p_type.type)
             si = SummaryInfo(id=id_str, name=name, type=p_type.type, p_type=p_type)
             if p_type.requires_typing:
                 self._requires_typing = True
