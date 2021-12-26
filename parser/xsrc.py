@@ -343,6 +343,9 @@ class ApiInterfaceData(base.APIData):
         Returns:
             base.ImportInfo: Import info
         """
+        key = 'get_import_info_method_' + a_id
+        if key in self._cache:
+            return self._cache[key]
         info = base.ImportInfo()
         params_info = self.get_prams_info(a_id=a_id)
         fn_info = self.func_summaries
@@ -353,7 +356,8 @@ class ApiInterfaceData(base.APIData):
         info.requires_typing = params_info.requires_typing or fn_info.requires_typing
         info.imports.update(params_info.imports)
         info.imports.update(fn_info.imports)
-        return info
+        self._cache[key] = info
+        return self._cache[key]
 
     def get_import_info_property(self) -> base.ImportInfo:
         """
@@ -1137,7 +1141,8 @@ def _main():
     os.system('cls' if os.name == 'nt' else 'clear')
     # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1beans_1_1XHierarchicalPropertySet.html'
     # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1beans_1_1XIntrospectionAccess.html' # has a sequence
-    url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1accessibility_1_1XAccessibleTextSelection.html'
+    # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1accessibility_1_1XAccessibleTextSelection.html'
+    url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1accessibility_1_1XMSAAService.html'
     args = ('v', 'n')
     kwargs = {
         "u": url,

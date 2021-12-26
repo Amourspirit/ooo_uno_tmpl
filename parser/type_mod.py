@@ -39,7 +39,7 @@ class PythonType:
     type: str = 'object'
     requires_typing: bool = False
     imports: Optional[str] = None
-    is_py_type: bool = False
+    is_py_type: bool = True
     children: List['PythonType'] = field(default_factory=list)
     realtype: str = 'object'
 
