@@ -194,7 +194,39 @@ class ApiMethodException(base.BlockObj):
         super().__init__(self._block.soup)
         self._data = False
 
-    def _get_raises_row(self):
+    
+
+    def _get_raises_lst(self) -> List[str]:
+        # rows for raise a bit messy.
+        # see: https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1animations_1_1XTimeContainer.html
+        # first row of raise will contain only the first exception.
+        # if there is another exception then the row text should end with a comma
+        row: Tag = None 
+        def ex_gen():
+            nonlocal row
+            while row:
+                if row is None:
+                    break
+                text = self._get_raises_text(row)
+                s = text
+                if text.endswith(","):
+                    row = row.find_next_sibling('tr')
+                    s = s.rstrip(',')
+                else:
+                    row = None
+                yield s
+    
+        results = []
+        row = self._get_raises_row()
+        if not row:
+            return results
+        # errs = ex()
+        for err in ex_gen():
+            results.append(err)
+        return results
+            
+        
+    def _get_raises_row(self) -> Union[Tag, None]:
         proto = self._block.get_obj()
         rows: ResultSet = proto.find_all('tr')
         result = None
@@ -208,7 +240,8 @@ class ApiMethodException(base.BlockObj):
     def _get_raises_text(self, row: Tag):
         if not row:
             return None
-        s: str = row.text.rsplit(maxsplit=1)[1]  # drop raises
+        parts = row.text.rsplit(maxsplit=1) # in case starts with raises
+        s: str = parts.pop()
         s = s.replace('(', '').replace(')', '').replace(
             '::', '.').strip().lstrip('.')
         return s
@@ -223,10 +256,11 @@ class ApiMethodException(base.BlockObj):
         if not self._data is False:
             return self._data
         self._data = None
-        row = self._get_raises_row()
-        if not row:
-            return self._data
-        self._data = [self._get_raises_text(row)]
+        # row = self._get_raises_row()
+        # if not row:
+        #     return self._data
+        # self._data = [self._get_raises_text(row)]
+        self._data = self._get_raises_lst()
         return self._data
 
     @property
@@ -1154,7 +1188,7 @@ def _main():
     # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1beans_1_1XHierarchicalPropertySet.html'
     # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1beans_1_1XIntrospectionAccess.html' # has a sequence
     # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1accessibility_1_1XAccessibleTextSelection.html'
-    url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1accessibility_1_1XAccessibleTable.html'
+    url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1animations_1_1XTimeContainer.html'
     args = ('v', 'n')
     kwargs = {
         "u": url,
