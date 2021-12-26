@@ -38,7 +38,7 @@ from datetime import datetime, timezone
 _app_root = os.environ.get('project_root', str(Path(__file__).parent.parent))
 if not _app_root in sys.path:
     sys.path.insert(0, _app_root)
-from parser.type_mod import TypeRules, PythonType
+from parser.type_mod import TypeRules, PythonType, DEFAULT_PYTHON_TYPE
 from config import read_config, AppConfig, read_config_default
 # endregion imports
 
@@ -875,6 +875,30 @@ class ApiSummaries(BlockObj):
         self._requires_typing = False
         self._imports: Set[str] = set()
         self._data = None
+    
+    def _get_type_from_inner_link(self, mem_item_left: Tag, name:str) -> Union[str, None]:
+        logger.debug('ApiSummaries._get_type_from_inner_link() Searching for %s link.', name)
+        if not mem_item_left:
+            return None
+        a_tag = mem_item_left.findChild('a')
+        if not a_tag:
+            return None
+        a_name = a_tag.text.strip()
+        if a_name != name:
+            return None
+        href: str = a_tag.get('href', None)
+        if not href:
+            return None
+        parts = href.split('_1_1')
+        if len(parts) == 1:
+            return None
+        parts[0] = 'com'
+        parts.pop()
+        parts.append(name)
+        s = '.'.join(parts)
+        logger.debug(
+            'ApiSummaries._get_type_from_inner_link() found: %s', s)
+        return s
 
     def get_obj(self) -> List[SummaryInfo]:
         if not self._data is None:
@@ -888,7 +912,7 @@ class ApiSummaries(BlockObj):
             r_type = ''
             name = ''
             if itm_lft:
-                r_type = itm_lft.text.strip().replace('::', '.').rstrip('.')
+                r_type = itm_lft.text.strip().replace('::', '.').lstrip('.')
             itm_rgt = row.find('td', class_='memItemRight')
             if itm_rgt:
                 itm_name = itm_rgt.select_one('a')
@@ -898,6 +922,22 @@ class ApiSummaries(BlockObj):
             # logger.debug('ApiSummaries.get_obj() r_type in: %s', r_type)
             p_type = Util.get_python_type(in_type=r_type)
             # logger.debug('ApiSummaries.get_obj() p_type in: %s', p_type.type)
+            if p_type is DEFAULT_PYTHON_TYPE:
+                logger.debug(
+                    'ApiSummaries.get_obj() %s: p_type is Default. Looking for %s', name, r_type)
+                # defaulted to object.
+                # this could be an object in the same namespace.
+                # test for link and namespace and try again.
+                r2_type = self._get_type_from_inner_link(itm_lft, r_type)
+                if r2_type:
+                    p2_type = Util.get_python_type(r2_type)
+                    if not p2_type is DEFAULT_PYTHON_TYPE:
+                        p_type = p2_type
+                        logger.debug(
+                            'ApiSummaries.get_obj() %s: p_type is now %s', name, r_type)
+            else:
+                logger.debug(
+                    'ApiSummaries.get_obj() %s: p_type is %s for %s', name, p_type.type, r_type)
             si = SummaryInfo(id=id_str, name=name, type=p_type.type, p_type=p_type)
             if p_type.requires_typing:
                 self._requires_typing = True

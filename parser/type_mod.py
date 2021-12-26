@@ -59,6 +59,8 @@ class PythonType:
         im: Set[str] = set()
         _get_imports(self, im)
         return im
+
+DEFAULT_PYTHON_TYPE = PythonType()
 class ITypeRule(ABC):
     @abstractmethod
     def __init__(self, rules: 'ITypeRules') -> None:
@@ -156,7 +158,7 @@ class TypeRules(ITypeRules):
         match = self._get_rule(in_type=_in)
         if match:
             return match.get_python_type(_in)
-        return PythonType()
+        return DEFAULT_PYTHON_TYPE
     
     def get_rule_instance(self, rule: ITypeRule) -> ITypeRule:
         if not issubclass(rule, ITypeRule):
