@@ -671,7 +671,7 @@ class ParserInterface(base.ParserBase):
                 continue
             attrib = {
                 "name": si.name,
-                "returns": si.return_type,
+                "returns": si.p_type.type,
                 "desc": self._api_data.get_desc_detail(si.id).get_obj(),
                 "raises_get": '',
                 "raises_set": ''
@@ -1188,7 +1188,7 @@ def _main():
     # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1beans_1_1XHierarchicalPropertySet.html'
     # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1beans_1_1XIntrospectionAccess.html' # has a sequence
     # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1accessibility_1_1XAccessibleTextSelection.html'
-    url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1animations_1_1XTimeContainer.html'
+    url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1animations_1_1XIterateContainer.html'
     args = ('v', 'n')
     kwargs = {
         "u": url,

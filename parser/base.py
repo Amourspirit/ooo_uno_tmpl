@@ -658,7 +658,7 @@ class TagsStrObj:
 
     def get_lines(self) -> List[str]:
         """Gets lines for this instance"""
-        lines = []
+        lines: List[str] = []
         i = 0
         for ln in self._tags:
             s = ln.text.strip().replace("::", '.')
@@ -668,9 +668,9 @@ class TagsStrObj:
                 s = str_clean(input=s)
             if i > 0 and self._empty_lines:
                 lines.append("")
-            lines.append(s)
+            lines.extend(s.splitlines())
             i += 1
-        return lines
+        return [line.strip() for line in lines]
 
     def get_data(self) -> List[str]:
         """Gets Lines as string for this instance"""
