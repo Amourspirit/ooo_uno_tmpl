@@ -9,6 +9,7 @@ from typing import List, Match, Optional, Set, Union
 
 TYPE_MAP_PRIMITIVE = {
     "any": "object",
+    "byte": "int",
     "short": "int",
     "long": "int",
     "float": "float",
