@@ -867,6 +867,7 @@ class InterfaceWriter(base.WriteBase):
         if key in self._cache:
             return self._cache[key]
         
+        # grab all the methods that need quotes
         si_lst = self._parser.api_data.func_summaries.get_obj()
         t_set: Set[str] = set()
         for si in si_lst:
@@ -880,15 +881,19 @@ class InterfaceWriter(base.WriteBase):
                 if pinfo.p_type:
                     if pinfo.p_type.requires_typing or pinfo.p_type.is_py_type is False:
                         t_set.add(pinfo.p_type.type)
+
+        # grab all the properties that need quotes
         si_lst = self._parser.api_data.property_summaries.get_obj()
         for si in si_lst:
             t = si.p_type
-            if t.requires_typing:
+            if t.requires_typing or t.is_py_type is False:
                 t_set.add(t.type)
+
+        # grab all export summaries
         si_lst = self._parser.api_data.exported_summaries.get_obj()
         for si in si_lst:
             t = si.p_type
-            if t.requires_typing:
+            if t.requires_typing or t.is_py_type is False:
                 t_set.add(t.type)
         self._cache[key] = list(t_set)
         return self._cache[key]
@@ -1188,7 +1193,7 @@ def _main():
     # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1beans_1_1XHierarchicalPropertySet.html'
     # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1beans_1_1XIntrospectionAccess.html' # has a sequence
     # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1accessibility_1_1XAccessibleTextSelection.html'
-    url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1animations_1_1XIterateContainer.html'
+    url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XStyleSettings.html'
     args = ('v', 'n')
     kwargs = {
         "u": url,
