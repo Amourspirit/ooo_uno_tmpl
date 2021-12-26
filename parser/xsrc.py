@@ -587,16 +587,21 @@ class ParserInterface(base.ParserBase):
                 attribs['methods'] = []
             if import_info.requires_typing:
                 logger.debug(
-                    "%s._get_properties_data() Imports require typing for: %s, %s",
+                    "%s._get_methods_data() Imports require typing for: %s, %s",
                     self.__class__.__name__, si.name, si.id)
                 self._requires_typing = True
             self._imports.update(import_info.imports)
             if params_info.requires_typing:
                 logger.debug(
-                    "%s._get_properties_data() Params require typing for: %s, %s",
+                    "%s._get_methods_data() Params require typing for: %s, %s",
                     self.__class__.__name__, si.name, si.id)
                 self._requires_typing = True
             self._imports.update(params_info.imports)
+            if si.p_type.requires_typing:
+                logger.debug(
+                    "%s._get_methods_data() Return '%s' type require typing for: %s, %s",
+                    self.__class__.__name__, si.p_type.type, si.name, si.id)
+                self._requires_typing = True
             args = []
             attrib = {
                 "name": si.name,
@@ -638,10 +643,16 @@ class ParserInterface(base.ParserBase):
                 "raises_set": ''
             }
             attribs['properties'].append(attrib)
+            if si.p_type.requires_typing:
+                logger.debug(
+                    "%s._get_properties_data() Return '%s' type require typing for: %s, %s",
+                    self.__class__.__name__, si.p_type.type, si.name, si.id)
+                self._requires_typing = True
         import_info = self._api_data.get_import_info_property()
         if import_info.requires_typing:
             self._requires_typing = True
         self._imports.update(import_info.imports)
+    
 
         if self.sort:
             if 'properties' in attribs:
@@ -1142,7 +1153,7 @@ def _main():
     # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1beans_1_1XHierarchicalPropertySet.html'
     # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1beans_1_1XIntrospectionAccess.html' # has a sequence
     # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1accessibility_1_1XAccessibleTextSelection.html'
-    url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1accessibility_1_1XMSAAService.html'
+    url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1accessibility_1_1XAccessibleTable.html'
     args = ('v', 'n')
     kwargs = {
         "u": url,
