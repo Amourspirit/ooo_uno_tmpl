@@ -28,6 +28,7 @@ class BaseInterface(BaseJson):
         set_data('namespace')
         sort = bool(json_data['parser_args'].get('sort', False))
         self.attribs = self._get_attribs(json_data=json_data, sort=sort)
+        setattr(self, 'requires_typing', data.get('requires_typing', False))
         ver_0_1_1 = Version(0, 1, 1)
         if self.json_version == ver_0_1_1:
             self._load_0_1_1(json_data=json_data)
@@ -36,8 +37,8 @@ class BaseInterface(BaseJson):
             setattr(self, 'from_imports_typing', [])
             set_data('from_imports')
             set_data('from_imports_typing')
-            self.requires_typing = False if len(
-                self.from_imports_typing) == 0 else True
+            # self.requires_typing = False if len(
+            #     self.from_imports_typing) == 0 else True
             quote: List[str] = data.get('quote', [])
             self.quote.update(quote)
             typings: List[str] = data.get('typings', [])

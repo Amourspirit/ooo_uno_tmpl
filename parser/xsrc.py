@@ -531,7 +531,7 @@ class ParserInterface(base.ParserBase):
         ex = []
         for el in self._api_data.inherited.get_obj():
             ex.append(el.fullns)
-        # im = self._sdk_data.imports
+
         result = {
             # 'name': ni.name,
             'name': self._api_data.name.get_obj(),
@@ -541,7 +541,7 @@ class ParserInterface(base.ParserBase):
             'namespace': self._api_data.ns.namespace_str,
             'extends': ex,
             'desc': self._api_data.desc.get_obj(),
-            "url": self._api_data.url_obj.url
+            "url": self._api_data.url_obj.url,
         }
         logger.debug('ParserInterface.get_info() name: %s', result['name'])
         logger.debug('ParserInterface.get_info() namespace: %s',
@@ -776,6 +776,7 @@ class InterfaceWriter(base.WriteBase):
         p_dict['from_imports_typing'] = self._get_from_imports_typing()
         p_dict['quote'] = self._get_quote_flat()
         p_dict['typings'] = self._get_typings()
+        p_dict['requires_typing'] = self._p_requires_typing
         p_dict.update(self._parser.get_dict_data())
 
         json_dict = {
