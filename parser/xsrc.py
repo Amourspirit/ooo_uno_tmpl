@@ -21,7 +21,7 @@ try:
 except ModuleNotFoundError:
     import parser.base as base
 from logger.log_handle import get_logger
-from parser.type_mod import PythonType
+from parser.type_mod import PythonType, DEFAULT_PYTHON_TYPE
 from parser import __version__, JSON_ID
 
 logger = None
@@ -131,6 +131,31 @@ class ApiFnPramsInfo(base.BlockObj):
         name = name_tag.text
         pinfo.name = base.Util.get_clean_name(name)
 
+    def _get_type_from_inner_link(self, paramtype: Tag, name: str) -> Union[str, None]:
+        logger.debug(
+            'ApiFnPramsInfo._get_type_from_inner_link() Searching for %s link.', name)
+        if not paramtype:
+            return None
+        a_tag = paramtype.findChild('a')
+        if not a_tag:
+            return None
+        a_name = a_tag.text.strip()
+        if a_name != name:
+            return None
+        href: str = a_tag.get('href', None)
+        if not href:
+            return None
+        parts = href.split('_1_1')
+        if len(parts) == 1:
+            return None
+        parts[0] = 'com'
+        parts.pop()
+        parts.append(name)
+        s = '.'.join(parts)
+        logger.debug(
+            'ApiFnPramsInfo._get_type_from_inner_link() found: %s', s)
+        return s
+
     def _process_type_tag(self, type_tag: Tag, pinfo: ParamInfo):
         pinfo.direction = 'in'
         # dir_tag: NavigableString = type_tag.find(text=True, recursive=False)
@@ -143,6 +168,17 @@ class ApiFnPramsInfo(base.BlockObj):
             dir_str = dir_str.split(maxsplit=1)[1]
         _type = dir_str.replace("::", '.').lstrip('.')
         t_info: base.PythonType = base.Util.get_python_type(in_type=_type)
+        if t_info is DEFAULT_PYTHON_TYPE:
+            logger.debug(
+                'ApiFnPramsInfo._process_type_tag() p_type is Default. Looking for %s',  _type)
+            t2_type = self._get_type_from_inner_link(type_tag, _type)
+            if t2_type:
+                t2_info = base.Util.get_python_type(t2_type)
+                if not t2_info is DEFAULT_PYTHON_TYPE:
+                    t_info = t2_info
+                    logger.debug(
+                        'ApiFnPramsInfo.get_obj() p_type is now %s', t_info.type)
+                
         pinfo.type = t_info.type
         pinfo.p_type = t_info
         if t_info.requires_typing:
