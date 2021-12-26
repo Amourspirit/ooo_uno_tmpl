@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:51:55+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:48+00:00",
   "name": "XModel2",
   "type": "interface",
   "namespace": "com.sun.star.frame",
@@ -18,13 +18,21 @@
     ],
     "from_imports_typing": [
       [
-        "..container.x_enumeration",
-        "XEnumeration"
-      ],
-      [
         ".x_controller2",
         "XController2"
+      ],
+      [
+        "..container.x_enumeration",
+        "XEnumeration"
       ]
+    ],
+    "quote": [
+      "typing.List[str]",
+      "XController2",
+      "XEnumeration"
+    ],
+    "typings": [
+      "typing.List[str]"
     ],
     "name": "XModel2",
     "imports": [],
@@ -55,7 +63,13 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException,"
           ],
-          "args": []
+          "args": [
+            [
+              "Frame",
+              "XFrame",
+              "in"
+            ]
+          ]
         },
         {
           "name": "createViewController",
@@ -68,7 +82,23 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException,"
           ],
-          "args": []
+          "args": [
+            [
+              "ViewName",
+              "str",
+              "in"
+            ],
+            [
+              "Arguments",
+              "typing.List[PropertyValue]",
+              "in"
+            ],
+            [
+              "Frame",
+              "XFrame",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getAvailableViewControllerNames",
@@ -107,7 +137,13 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException,"
           ],
-          "args": []
+          "args": [
+            [
+              "Arguments",
+              "typing.List[PropertyValue]",
+              "in"
+            ]
+          ]
         }
       ]
     }

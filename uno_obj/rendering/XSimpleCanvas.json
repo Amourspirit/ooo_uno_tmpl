@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:52:43+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:54+00:00",
   "name": "XSimpleCanvas",
   "type": "interface",
   "namespace": "com.sun.star.rendering",
@@ -22,14 +22,21 @@
         "AffineMatrix2D"
       ],
       [
-        "..geometry.real_rectangle2_d",
-        "RealRectangle2D"
-      ],
-      [
         "..util.color",
         "Color"
+      ],
+      [
+        "..geometry.real_rectangle2_d",
+        "RealRectangle2D"
       ]
     ],
+    "quote": [
+      "Color",
+      "RealRectangle2D",
+      "object",
+      "AffineMatrix2D"
+    ],
+    "typings": [],
     "name": "XSimpleCanvas",
     "imports": [],
     "namespace": "com.sun.star.rendering",
@@ -53,7 +60,18 @@
             "Draws the bitmap on the canvas."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "xBitmap",
+              "object",
+              "in"
+            ],
+            [
+              "aLeftTop",
+              "RealPoint2D",
+              "in"
+            ]
+          ]
         },
         {
           "name": "drawLine",
@@ -62,7 +80,18 @@
             "Draws a line on the canvas."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aStartPoint",
+              "RealPoint2D",
+              "in"
+            ],
+            [
+              "aEndPoint",
+              "RealPoint2D",
+              "in"
+            ]
+          ]
         },
         {
           "name": "drawPixel",
@@ -71,7 +100,13 @@
             "Sets a single pixel on the canvas."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aPoint",
+              "RealPoint2D",
+              "in"
+            ]
+          ]
         },
         {
           "name": "drawPolyPolygon",
@@ -80,7 +115,13 @@
             "Draws a poly-polygon on the canvas."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "xPolyPolygon",
+              "object",
+              "in"
+            ]
+          ]
         },
         {
           "name": "drawRect",
@@ -89,7 +130,13 @@
             "Draws a rectangle on the canvas."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aRect",
+              "RealRectangle2D",
+              "in"
+            ]
+          ]
         },
         {
           "name": "drawText",
@@ -98,7 +145,23 @@
             "Draws text on the canvas."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aText",
+              "object",
+              "in"
+            ],
+            [
+              "aOutPos",
+              "RealPoint2D",
+              "in"
+            ],
+            [
+              "nTextDirection",
+              "object",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getCanvas",
@@ -152,7 +215,13 @@
             "Retrieve render state."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "bUseFillColor",
+              "bool",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getCurrentTransformation",
@@ -201,7 +270,28 @@
             "This method selects the specified font (or a close substitute) as the current font for text output."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "sFontName",
+              "str",
+              "in"
+            ],
+            [
+              "size",
+              "float",
+              "in"
+            ],
+            [
+              "bold",
+              "bool",
+              "in"
+            ],
+            [
+              "italic",
+              "bool",
+              "in"
+            ]
+          ]
         },
         {
           "name": "setFillColor",
@@ -212,7 +302,13 @@
             "To disable filling, simply set this color to something with zero alpha (i.e. fully transparent)."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "nsRgbaColor",
+              "Color",
+              "in"
+            ]
+          ]
         },
         {
           "name": "setPenColor",
@@ -223,7 +319,13 @@
             "To disable stroking, simply set this color to something with zero alpha (i.e. fully transparent)."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "nsRgbaColor",
+              "Color",
+              "in"
+            ]
+          ]
         },
         {
           "name": "setRectClip",
@@ -232,7 +334,13 @@
             "Sets the clip to the specified rectangle."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aRect",
+              "RealRectangle2D",
+              "in"
+            ]
+          ]
         },
         {
           "name": "setTransformation",
@@ -241,7 +349,13 @@
             "Set the current transform matrix."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aTransform",
+              "AffineMatrix2D",
+              "in"
+            ]
+          ]
         }
       ]
     }

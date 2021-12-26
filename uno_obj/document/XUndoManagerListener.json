@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:49:33+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:40+00:00",
   "name": "XUndoManagerListener",
   "type": "interface",
   "namespace": "com.sun.star.document",
@@ -17,6 +17,8 @@
       ]
     ],
     "from_imports_typing": [],
+    "quote": [],
+    "typings": [],
     "name": "XUndoManagerListener",
     "imports": [],
     "namespace": "com.sun.star.document",
@@ -40,7 +42,13 @@
             "is called when the top-most action of the Redo stack has been re-applied."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "iEvent",
+              "object",
+              "in"
+            ]
+          ]
         },
         {
           "name": "actionUndone",
@@ -49,7 +57,13 @@
             "is called when the top-most action of the undo stack has been undone."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "iEvent",
+              "object",
+              "in"
+            ]
+          ]
         },
         {
           "name": "allActionsCleared",
@@ -58,7 +72,13 @@
             "is called when both the Undo and the Redo stack have been cleared from all Undo actions."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "iEvent",
+              "EventObject",
+              "in"
+            ]
+          ]
         },
         {
           "name": "cancelledContext",
@@ -69,7 +89,13 @@
             "In such a case, the context which has just been left will not contribute to the undo stack, but instead be silently removed. Consequently, the UndoManagerEvent.UndoActionTitle is empty."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "iEvent",
+              "object",
+              "in"
+            ]
+          ]
         },
         {
           "name": "enteredContext",
@@ -80,7 +106,13 @@
             "UndoManagerEvent.UndoActionTitle carries the title of the Undo context, and UndoManagerEvent.UndoContextDepth the number of open Undo contexts, including the one just entered."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "iEvent",
+              "object",
+              "in"
+            ]
+          ]
         },
         {
           "name": "enteredHiddenContext",
@@ -91,7 +123,13 @@
             "UndoManagerEvent.UndoActionTitle carries the title of the Undo context, and UndoManagerEvent.UndoContextDepth the number of open Undo contexts, including the one just entered."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "iEvent",
+              "object",
+              "in"
+            ]
+          ]
         },
         {
           "name": "leftContext",
@@ -102,7 +140,13 @@
             "UndoManagerEvent.UndoActionTitle carries the title of the Undo context, and UndoManagerEvent.UndoContextDepth the number of open Undo contexts, excluding the one just left."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "iEvent",
+              "object",
+              "in"
+            ]
+          ]
         },
         {
           "name": "leftHiddenContext",
@@ -113,7 +157,13 @@
             "UndoManagerEvent.UndoActionTitle is empty, as hidden Undo contexts don't have a title."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "iEvent",
+              "object",
+              "in"
+            ]
+          ]
         },
         {
           "name": "redoActionsCleared",
@@ -122,7 +172,13 @@
             "is called when the Redo stack has been cleared."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "iEvent",
+              "EventObject",
+              "in"
+            ]
+          ]
         },
         {
           "name": "resetAll",
@@ -131,7 +187,13 @@
             "called when the complete undo manager has been reset"
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "iEvent",
+              "EventObject",
+              "in"
+            ]
+          ]
         },
         {
           "name": "undoActionAdded",
@@ -142,7 +204,13 @@
             "Note that the action must not necessarily be the new top element of the stack: In case there's an open Undo context, UndoManagerEvent.UndoContextDepth will be greater 0, and the newly added action will be subordinate of the context action."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "iEvent",
+              "object",
+              "in"
+            ]
+          ]
         }
       ]
     }

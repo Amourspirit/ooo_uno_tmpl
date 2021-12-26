@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:49:33+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:40+00:00",
   "name": "XUndoManager",
   "type": "interface",
   "namespace": "com.sun.star.document",
@@ -12,15 +12,21 @@
   "data": {
     "from_imports": [
       [
-        "..container.x_child",
-        "XChild"
-      ],
-      [
         "..util.x_lockable",
         "XLockable"
+      ],
+      [
+        "..container.x_child",
+        "XChild"
       ]
     ],
     "from_imports_typing": [],
+    "quote": [
+      "typing.List[str]"
+    ],
+    "typings": [
+      "typing.List[str]"
+    ],
     "name": "XUndoManager",
     "imports": [],
     "namespace": "com.sun.star.document",
@@ -63,7 +69,13 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException"
           ],
-          "args": []
+          "args": [
+            [
+              "iAction",
+              "object",
+              "in"
+            ]
+          ]
         },
         {
           "name": "addUndoManagerListener",
@@ -72,7 +84,13 @@
             "adds a listener to be notified of changes in the Undo/Redo stacks."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "iListener",
+              "object",
+              "in"
+            ]
+          ]
         },
         {
           "name": "clear",
@@ -132,7 +150,13 @@
             "Undo contexts can be nested, i.e. it is legitimate to call enterUndoContext and enterHiddenUndoContext() multiple times without calling leaveUndoContext() inbetween."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "iTitle",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getAllRedoActionTitles",
@@ -227,7 +251,13 @@
             "removes a previously added listener"
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "iListener",
+              "object",
+              "in"
+            ]
+          ]
         },
         {
           "name": "reset",

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:49:22+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:42+00:00",
   "name": "XStringResourceResolver",
   "type": "interface",
   "namespace": "com.sun.star.resource",
@@ -21,6 +21,15 @@
         "..lang.locale",
         "Locale"
       ]
+    ],
+    "quote": [
+      "Locale",
+      "typing.List[Locale]",
+      "typing.List[str]"
+    ],
+    "typings": [
+      "typing.List[Locale]",
+      "typing.List[str]"
     ],
     "name": "XStringResourceResolver",
     "imports": [],
@@ -62,7 +71,7 @@
         },
         {
           "name": "getLocales",
-          "returns": "'typing.List[Locale]'",
+          "returns": "typing.List[Locale]",
           "desc": [
             "Returns a sequence of all supported locales."
           ],
@@ -87,7 +96,13 @@
             "It's not recommended to use this method to get the best performance as the implementation may be optimized for the use of the current locale."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "locale",
+              "Locale",
+              "in"
+            ]
+          ]
         },
         {
           "name": "hasEntryForId",
@@ -96,7 +111,13 @@
             "Checks if the resource contains an entry for the given ResourceID and current locale."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "ResourceID",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "hasEntryForIdAndLocale",
@@ -107,7 +128,18 @@
             "It's not recommended to use this method to get the best performance as the implementation may be optimized for the use of the current locale."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "ResourceID",
+              "str",
+              "in"
+            ],
+            [
+              "locale",
+              "Locale",
+              "in"
+            ]
+          ]
         },
         {
           "name": "resolveString",
@@ -120,7 +152,13 @@
           "raises": [
             "com.sun.star.resource.MissingResourceException"
           ],
-          "args": []
+          "args": [
+            [
+              "ResourceID",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "resolveStringForLocale",
@@ -133,7 +171,18 @@
           "raises": [
             "com.sun.star.resource.MissingResourceException"
           ],
-          "args": []
+          "args": [
+            [
+              "ResourceID",
+              "str",
+              "in"
+            ],
+            [
+              "locale",
+              "Locale",
+              "in"
+            ]
+          ]
         }
       ]
     }

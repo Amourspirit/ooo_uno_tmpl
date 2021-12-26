@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:50:24+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:46+00:00",
   "name": "XSimpleText",
   "type": "interface",
   "namespace": "com.sun.star.text",
@@ -22,6 +22,10 @@
         "XTextCursor"
       ]
     ],
+    "quote": [
+      "XTextCursor"
+    ],
+    "typings": [],
     "name": "XSimpleText",
     "imports": [],
     "namespace": "com.sun.star.text",
@@ -50,7 +54,13 @@
             "The initial position is set to aTextPosition."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aTextPosition",
+              "XTextRange",
+              "in"
+            ]
+          ]
         },
         {
           "name": "insertControlCharacter",
@@ -61,7 +71,23 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException"
           ],
-          "args": []
+          "args": [
+            [
+              "xRange",
+              "XTextRange",
+              "in"
+            ],
+            [
+              "nControlCharacter",
+              "int",
+              "in"
+            ],
+            [
+              "bAbsorb",
+              "bool",
+              "in"
+            ]
+          ]
         },
         {
           "name": "insertString",
@@ -74,7 +100,23 @@
             "If the parameter bAbsorb() was TRUE the text range will contain the new inserted string, otherwise the range (and it's text) will remain unchanged."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "xRange",
+              "XTextRange",
+              "in"
+            ],
+            [
+              "aString",
+              "str",
+              "in"
+            ],
+            [
+              "bAbsorb",
+              "bool",
+              "in"
+            ]
+          ]
         }
       ]
     }

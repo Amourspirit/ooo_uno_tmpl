@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:51:49+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:47+00:00",
   "name": "XDispatchProvider",
   "type": "interface",
   "namespace": "com.sun.star.frame",
@@ -22,6 +22,13 @@
         "XDispatch"
       ]
     ],
+    "quote": [
+      "typing.List[XDispatch]",
+      "object"
+    ],
+    "typings": [
+      "typing.List[XDispatch]"
+    ],
     "name": "XDispatchProvider",
     "imports": [],
     "namespace": "com.sun.star.frame",
@@ -41,18 +48,40 @@
             "searches for an XDispatch for the specified URL within the specified target frame."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "URL",
+              "URL",
+              "in"
+            ],
+            [
+              "TargetFrameName",
+              "str",
+              "in"
+            ],
+            [
+              "SearchFlags",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "queryDispatches",
-          "returns": "'typing.List[XDispatch]'",
+          "returns": "typing.List[XDispatch]",
           "desc": [
             "actually this method is redundant to XDispatchProvider.queryDispatch() to avoid multiple remote calls.",
             "",
             "It's not allowed to pack it - because every request must match to its real result. Means: don't delete NULL entries inside this list."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "Requests",
+              "typing.List[DispatchDescriptor]",
+              "in"
+            ]
+          ]
         }
       ]
     }

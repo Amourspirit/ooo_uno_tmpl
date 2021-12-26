@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:51:16+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:58+00:00",
   "name": "XAtomServer",
   "type": "interface",
   "namespace": "com.sun.star.util",
@@ -21,6 +21,16 @@
         ".atom_description",
         "AtomDescription"
       ]
+    ],
+    "quote": [
+      "typing.List[typing.List[AtomDescription]]",
+      "typing.List[AtomDescription]",
+      "typing.List[str]"
+    ],
+    "typings": [
+      "typing.List[typing.List[AtomDescription]]",
+      "typing.List[AtomDescription]",
+      "typing.List[str]"
     ],
     "name": "XAtomServer",
     "imports": [],
@@ -45,7 +55,23 @@
             "registers or searches for a string"
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "atomClass",
+              "int",
+              "in"
+            ],
+            [
+              "description",
+              "str",
+              "in"
+            ],
+            [
+              "create",
+              "bool",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getAtomDescriptions",
@@ -54,36 +80,65 @@
             "returns the strings for an arbitrary amount of atoms of multiple classes"
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "atoms",
+              "typing.List[AtomClassRequest]",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getClass",
-          "returns": "'typing.List[AtomDescription]'",
+          "returns": "typing.List[AtomDescription]",
           "desc": [
             "returns a whole atom class"
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "atomClass",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getClasses",
-          "returns": "'typing.List[typing.List[AtomDescription]]'",
+          "returns": "typing.List[typing.List[AtomDescription]]",
           "desc": [
             "returns multiple atom classes"
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "atomClasses",
+              "typing.List[int]",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getRecentAtoms",
-          "returns": "'typing.List[AtomDescription]'",
+          "returns": "typing.List[AtomDescription]",
           "desc": [
             "returns the atoms that have been registered to a class after an already known atom",
             "",
             "Hint to implementor: using ascending atoms is the easiest way to decide, which atoms are recent."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "atomClass",
+              "int",
+              "in"
+            ],
+            [
+              "atom",
+              "int",
+              "in"
+            ]
+          ]
         }
       ]
     }

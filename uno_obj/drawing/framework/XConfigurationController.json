@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:48:23+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:26+00:00",
   "name": "XConfigurationController",
   "type": "interface",
   "namespace": "com.sun.star.drawing.framework",
@@ -12,19 +12,23 @@
   "data": {
     "from_imports": [
       [
+        ".x_resource_factory_manager",
+        "XResourceFactoryManager"
+      ],
+      [
         ".x_configuration_controller_request_queue",
         "XConfigurationControllerRequestQueue"
       ],
       [
         ".x_configuration_controller_broadcaster",
         "XConfigurationControllerBroadcaster"
-      ],
-      [
-        ".x_resource_factory_manager",
-        "XResourceFactoryManager"
       ]
     ],
     "from_imports_typing": [],
+    "quote": [
+      "object"
+    ],
+    "typings": [],
     "name": "XConfigurationController",
     "imports": [],
     "namespace": "com.sun.star.drawing.framework",
@@ -76,7 +80,13 @@
             "Return the active resource specified by the given resource id."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "xResourceId",
+              "object",
+              "in"
+            ]
+          ]
         },
         {
           "name": "lock",
@@ -104,7 +114,18 @@
             "When eMode is ADD then the resource is requested without further changes."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "xResourceId",
+              "object",
+              "in"
+            ],
+            [
+              "eMode",
+              "object",
+              "in"
+            ]
+          ]
         },
         {
           "name": "requestResourceDeactivation",
@@ -117,7 +138,13 @@
             "Requesting the deactivation of a resource that is not active is not an error."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "xResourceId",
+              "object",
+              "in"
+            ]
+          ]
         },
         {
           "name": "restoreConfiguration",
@@ -132,7 +159,13 @@
             "Note that because of the configuration change notifications listeners can make more configuration change requests, so that the resulting requested configuration can be different from the given configuration."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "xConfiguration",
+              "object",
+              "in"
+            ]
+          ]
         },
         {
           "name": "unlock",

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:48:23+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:26+00:00",
   "name": "XConfiguration",
   "type": "interface",
   "namespace": "com.sun.star.drawing.framework",
@@ -21,6 +21,12 @@
         ".x_resource_id",
         "XResourceId"
       ]
+    ],
+    "quote": [
+      "typing.List[XResourceId]"
+    ],
+    "typings": [
+      "typing.List[XResourceId]"
     ],
     "name": "XConfiguration",
     "imports": [],
@@ -47,11 +53,17 @@
             "This method should be used only by objects that implement the XConfigurationRequest interface or by the configuration controller."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "xResourceId",
+              "object",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getResources",
-          "returns": "'typing.List[XResourceId]'",
+          "returns": "typing.List[XResourceId]",
           "desc": [
             "Returns the list of resources that are bound directly and/or indirectly to the given anchor.",
             "",
@@ -60,7 +72,23 @@
             "Use an empty string to prevent filtering out resource ids."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "xAnchorId",
+              "object",
+              "in"
+            ],
+            [
+              "sTargetURLPrefix",
+              "str",
+              "in"
+            ],
+            [
+              "eSearchMode",
+              "object",
+              "in"
+            ]
+          ]
         },
         {
           "name": "hasResource",
@@ -71,7 +99,13 @@
             "This is independent of whether the resource does really exist and is active, i.e. has a visible representation in the GUI."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "xResourceId",
+              "object",
+              "in"
+            ]
+          ]
         },
         {
           "name": "removeResource",
@@ -82,7 +116,13 @@
             "This method should be used only by objects that implement the XConfigurationRequest interface or by the configuration controller."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "xResourceId",
+              "object",
+              "in"
+            ]
+          ]
         }
       ]
     }

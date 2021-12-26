@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:51:21+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:59+00:00",
   "name": "XLocalizedAliases",
   "type": "interface",
   "namespace": "com.sun.star.util",
@@ -21,6 +21,12 @@
         ".alias_programmatic_pair",
         "AliasProgrammaticPair"
       ]
+    ],
+    "quote": [
+      "typing.List[AliasProgrammaticPair]"
+    ],
+    "typings": [
+      "typing.List[AliasProgrammaticPair]"
     ],
     "name": "XLocalizedAliases",
     "imports": [],
@@ -45,16 +51,38 @@
           "raises": [
             "com.sun.star.container.ElementExistException"
           ],
-          "args": []
+          "args": [
+            [
+              "programmaticName",
+              "str",
+              "in"
+            ],
+            [
+              "locale",
+              "Locale",
+              "in"
+            ],
+            [
+              "alias",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "listAliases",
-          "returns": "'typing.List[AliasProgrammaticPair]'",
+          "returns": "typing.List[AliasProgrammaticPair]",
           "desc": [
             "retrieves a list of all registered aliases for a certain language."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "locale",
+              "Locale",
+              "in"
+            ]
+          ]
         },
         {
           "name": "lookupAlias",
@@ -65,7 +93,18 @@
           "raises": [
             "com.sun.star.container.NoSuchElementException"
           ],
-          "args": []
+          "args": [
+            [
+              "locale",
+              "Locale",
+              "in"
+            ],
+            [
+              "Alias",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "lookupProgrammatic",
@@ -76,7 +115,18 @@
           "raises": [
             "com.sun.star.container.NoSuchElementException"
           ],
-          "args": []
+          "args": [
+            [
+              "locale",
+              "Locale",
+              "in"
+            ],
+            [
+              "programmatic",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "rebindAliases",
@@ -87,7 +137,18 @@
           "raises": [
             "com.sun.star.container.NoSuchElementException,"
           ],
-          "args": []
+          "args": [
+            [
+              "currentProgrammatic",
+              "str",
+              "in"
+            ],
+            [
+              "newProgrammatic",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "renameAlias",
@@ -98,7 +159,23 @@
           "raises": [
             "com.sun.star.container.NoSuchElementException,"
           ],
-          "args": []
+          "args": [
+            [
+              "locale",
+              "Locale",
+              "in"
+            ],
+            [
+              "oldName",
+              "str",
+              "in"
+            ],
+            [
+              "aNewName",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "unbindAlias",
@@ -109,7 +186,18 @@
           "raises": [
             "com.sun.star.container.NoSuchElementException"
           ],
-          "args": []
+          "args": [
+            [
+              "locale",
+              "Locale",
+              "in"
+            ],
+            [
+              "alias",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "unbindAliases",
@@ -120,7 +208,13 @@
           "raises": [
             "com.sun.star.container.NoSuchElementException"
           ],
-          "args": []
+          "args": [
+            [
+              "programmaticName",
+              "str",
+              "in"
+            ]
+          ]
         }
       ]
     }

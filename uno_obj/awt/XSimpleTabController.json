@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:46:24+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:16+00:00",
   "name": "XSimpleTabController",
   "type": "interface",
   "namespace": "com.sun.star.awt",
@@ -21,6 +21,12 @@
         "..beans.named_value",
         "NamedValue"
       ]
+    ],
+    "quote": [
+      "typing.List[NamedValue]"
+    ],
+    "typings": [
+      "typing.List[NamedValue]"
     ],
     "name": "XSimpleTabController",
     "imports": [],
@@ -45,7 +51,13 @@
           "raises": [
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
-          "args": []
+          "args": [
+            [
+              "ID",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "addTabListener",
@@ -54,7 +66,13 @@
             "register listener for inserting/removing tabs and changing their properties."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "Listener",
+              "object",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getActiveTabID",
@@ -67,14 +85,20 @@
         },
         {
           "name": "getTabProps",
-          "returns": "'typing.List[NamedValue]'",
+          "returns": "typing.List[NamedValue]",
           "desc": [
             "retrieve the set of properties for the specified tab."
           ],
           "raises": [
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
-          "args": []
+          "args": [
+            [
+              "ID",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "insertTab",
@@ -94,7 +118,13 @@
           "raises": [
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
-          "args": []
+          "args": [
+            [
+              "ID",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "removeTabListener",
@@ -103,7 +133,13 @@
             "unregister listener for inserting/removing tabs and changing their properties."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "Listener",
+              "object",
+              "in"
+            ]
+          ]
         },
         {
           "name": "setTabProps",
@@ -114,7 +150,18 @@
           "raises": [
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
-          "args": []
+          "args": [
+            [
+              "ID",
+              "int",
+              "in"
+            ],
+            [
+              "Properties",
+              "typing.List[NamedValue]",
+              "in"
+            ]
+          ]
         }
       ]
     }

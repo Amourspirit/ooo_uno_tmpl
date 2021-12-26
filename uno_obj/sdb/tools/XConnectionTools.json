@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:49:13+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:40+00:00",
   "name": "XConnectionTools",
   "type": "interface",
   "namespace": "com.sun.star.sdb.tools",
@@ -21,6 +21,12 @@
         "XSingleSelectQueryComposer"
       ]
     ],
+    "quote": [
+      "XSingleSelectQueryComposer",
+      "XNameAccess",
+      "object"
+    ],
+    "typings": [],
     "name": "XConnectionTools",
     "imports": [],
     "namespace": "com.sun.star.sdb.tools",
@@ -57,7 +63,18 @@
             "get the composer initialized with a command and command type."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "commandType",
+              "int",
+              "in"
+            ],
+            [
+              "command",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getDataSourceMetaData",
@@ -79,7 +96,23 @@
           "raises": [
             "com.sun.star.sdbc.SQLException"
           ],
-          "args": []
+          "args": [
+            [
+              "commandType",
+              "int",
+              "in"
+            ],
+            [
+              "command",
+              "str",
+              "in"
+            ],
+            [
+              "keepFieldsAlive",
+              "XComponent",
+              "out"
+            ]
+          ]
         },
         {
           "name": "getObjectNames",

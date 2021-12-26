@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:48:13+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:49+00:00",
   "name": "XBlob",
   "type": "interface",
   "namespace": "com.sun.star.sdbc",
@@ -25,6 +25,14 @@
         "..io.x_input_stream",
         "XInputStream"
       ]
+    ],
+    "quote": [
+      "typing.List[byte]",
+      "XInputStream",
+      "object"
+    ],
+    "typings": [
+      "typing.List[byte]"
     ],
     "name": "XBlob",
     "imports": [],
@@ -55,7 +63,7 @@
         },
         {
           "name": "getBytes",
-          "returns": "'typing.List[byte]'",
+          "returns": "typing.List[byte]",
           "desc": [
             "returns as an array of bytes part or all of the  BLOB  value that this Blob object designates.",
             "",
@@ -64,7 +72,18 @@
           "raises": [
             "SQLException"
           ],
-          "args": []
+          "args": [
+            [
+              "pos",
+              "object",
+              "in"
+            ],
+            [
+              "length",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "length",
@@ -88,7 +107,18 @@
           "raises": [
             "SQLException"
           ],
-          "args": []
+          "args": [
+            [
+              "pattern",
+              "typing.List[byte]",
+              "in"
+            ],
+            [
+              "start",
+              "object",
+              "in"
+            ]
+          ]
         },
         {
           "name": "positionOfBlob",
@@ -101,7 +131,18 @@
           "raises": [
             "SQLException"
           ],
-          "args": []
+          "args": [
+            [
+              "pattern",
+              "object",
+              "in"
+            ],
+            [
+              "start",
+              "object",
+              "in"
+            ]
+          ]
         }
       ]
     }

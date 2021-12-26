@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:46:36+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:21+00:00",
   "name": "XObjectInspectorUI",
   "type": "interface",
   "namespace": "com.sun.star.inspection",
@@ -12,6 +12,10 @@
   "data": {
     "from_imports": [],
     "from_imports_typing": [],
+    "quote": [
+      "object"
+    ],
+    "typings": [],
     "name": "XObjectInspectorUI",
     "imports": [],
     "namespace": "com.sun.star.inspection",
@@ -39,7 +43,18 @@
             "This is usually used by an XPropertyHandler if it handles properties, where one does only make sense if another one has a certain value."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "PropertyName",
+              "str",
+              "in"
+            ],
+            [
+              "Enable",
+              "bool",
+              "in"
+            ]
+          ]
         },
         {
           "name": "enablePropertyUIElements",
@@ -50,7 +65,23 @@
             "Note that the complete UI for the property must be enabled in order for these settings to be evaluated. That is, enablePropertyUIElements() does not have any effect if somebody previously disabled the complete UI for this property with enablePropertyUI()."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "PropertyName",
+              "str",
+              "in"
+            ],
+            [
+              "Elements",
+              "int",
+              "in"
+            ],
+            [
+              "Enable",
+              "bool",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getPropertyControl",
@@ -59,7 +90,13 @@
             "retrieves the control currently used to display a given property"
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "PropertyName",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "hidePropertyUI",
@@ -68,7 +105,13 @@
             "hides the UI for a given property"
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "PropertyName",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "rebuildPropertyUI",
@@ -83,7 +126,13 @@
             "Note that the property whose UI should be rebuilt must not necessarily be (though usually is) in the responsibility of the handler which calls this method. The object inspector will look up the handler with the responsibility for PropertyName and call its XPropertyHandler.describePropertyLine()"
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "PropertyName",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "registerControlObserver",
@@ -98,7 +147,13 @@
             "    OOo 2.2"
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "Observer",
+              "object",
+              "in"
+            ]
+          ]
         },
         {
           "name": "revokeControlObserver",
@@ -111,7 +166,13 @@
             "    OOo 2.2"
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "Observer",
+              "object",
+              "in"
+            ]
+          ]
         },
         {
           "name": "setHelpSectionText",
@@ -126,7 +187,13 @@
           "raises": [
             "com.sun.star.lang.NoSupportException"
           ],
-          "args": []
+          "args": [
+            [
+              "HelpText",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "showCategory",
@@ -135,7 +202,18 @@
             "shows or hides all properties belonging to a given category"
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "Category",
+              "str",
+              "in"
+            ],
+            [
+              "Show",
+              "bool",
+              "in"
+            ]
+          ]
         },
         {
           "name": "showPropertyUI",
@@ -144,7 +222,13 @@
             "shows the UI for a given property"
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "PropertyName",
+              "str",
+              "in"
+            ]
+          ]
         }
       ]
     }

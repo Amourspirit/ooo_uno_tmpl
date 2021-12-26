@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:52:40+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:53+00:00",
   "name": "XGraphicDevice",
   "type": "interface",
   "namespace": "com.sun.star.rendering",
@@ -26,6 +26,12 @@
         "XMultiServiceFactory"
       ]
     ],
+    "quote": [
+      "XMultiServiceFactory",
+      "RealSize2D",
+      "object"
+    ],
+    "typings": [],
     "name": "XGraphicDevice",
     "imports": [],
     "namespace": "com.sun.star.rendering",
@@ -51,7 +57,13 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException"
           ],
-          "args": []
+          "args": [
+            [
+              "size",
+              "IntegerSize2D",
+              "in"
+            ]
+          ]
         },
         {
           "name": "createCompatibleBezierPolyPolygon",
@@ -60,7 +72,13 @@
             "Create a Bezier poly-polygon which can internally use device-optimized representations already."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "points",
+              "typing.List[typing.List[RealBezierSegment2D]]",
+              "in"
+            ]
+          ]
         },
         {
           "name": "createCompatibleBitmap",
@@ -71,7 +89,13 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException"
           ],
-          "args": []
+          "args": [
+            [
+              "size",
+              "IntegerSize2D",
+              "in"
+            ]
+          ]
         },
         {
           "name": "createCompatibleLinePolyPolygon",
@@ -80,7 +104,13 @@
             "Create a line poly-polygon which can internally use device-optimized representations already."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "points",
+              "typing.List[typing.List[RealPoint2D]]",
+              "in"
+            ]
+          ]
         },
         {
           "name": "createVolatileAlphaBitmap",
@@ -93,7 +123,13 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException"
           ],
-          "args": []
+          "args": [
+            [
+              "size",
+              "IntegerSize2D",
+              "in"
+            ]
+          ]
         },
         {
           "name": "createVolatileBitmap",
@@ -106,7 +142,13 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException"
           ],
-          "args": []
+          "args": [
+            [
+              "size",
+              "IntegerSize2D",
+              "in"
+            ]
+          ]
         },
         {
           "name": "enterFullScreenMode",
@@ -117,7 +159,13 @@
             "The return value denotes the success of the operation."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "bEnter",
+              "bool",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getBufferController",

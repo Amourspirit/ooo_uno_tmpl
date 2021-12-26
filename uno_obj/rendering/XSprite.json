@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:52:44+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:53+00:00",
   "name": "XSprite",
   "type": "interface",
   "namespace": "com.sun.star.rendering",
@@ -17,6 +17,8 @@
       ]
     ],
     "from_imports_typing": [],
+    "quote": [],
+    "typings": [],
     "name": "XSprite",
     "imports": [],
     "namespace": "com.sun.star.rendering",
@@ -44,7 +46,13 @@
             "Specifying an empty interface denotes no clipping, i.e. everything contained in the sprite will be visible (subject to device-dependent constraints, of course). Specifying an empty XPolyPolygon2D, i.e. a poly-polygon containing zero polygons, or an XPolyPolygon2D with any number of empty sub-polygons, denotes the NULL clip. That means, nothing from the sprite will be visible."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aClip",
+              "object",
+              "in"
+            ]
+          ]
         },
         {
           "name": "hide",
@@ -70,7 +78,23 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException"
           ],
-          "args": []
+          "args": [
+            [
+              "aNewPos",
+              "RealPoint2D",
+              "in"
+            ],
+            [
+              "aViewState",
+              "object",
+              "in"
+            ],
+            [
+              "aRenderState",
+              "object",
+              "in"
+            ]
+          ]
         },
         {
           "name": "setAlpha",
@@ -85,7 +109,13 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException"
           ],
-          "args": []
+          "args": [
+            [
+              "nAlpha",
+              "float",
+              "in"
+            ]
+          ]
         },
         {
           "name": "setPriority",
@@ -96,7 +126,13 @@
             "The sprite priority determines the order of rendering relative to all other sprites of the associated canvas. The higher the priority, the later will the sprite be rendered, or, in other words, the closer to the screen surface the sprite is shown."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "nPriority",
+              "float",
+              "in"
+            ]
+          ]
         },
         {
           "name": "show",
@@ -122,7 +158,13 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException"
           ],
-          "args": []
+          "args": [
+            [
+              "aTransformation",
+              "AffineMatrix2D",
+              "in"
+            ]
+          ]
         }
       ]
     }

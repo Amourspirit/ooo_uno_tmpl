@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:49:30+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:40+00:00",
   "name": "XGraphicStorageHandler",
   "type": "interface",
   "namespace": "com.sun.star.document",
@@ -26,6 +26,11 @@
         "XInputStream"
       ]
     ],
+    "quote": [
+      "XInputStream",
+      "XGraphic"
+    ],
+    "typings": [],
     "name": "XGraphicStorageHandler",
     "imports": [],
     "namespace": "com.sun.star.document",
@@ -49,7 +54,13 @@
             "create an input stream from the input graphic"
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "xGraphic",
+              "XGraphic",
+              "in"
+            ]
+          ]
         },
         {
           "name": "loadGraphic",
@@ -58,7 +69,13 @@
             "load a graphic defined by the URL from the storage"
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aURL",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "loadGraphicFromOutputStream",
@@ -67,7 +84,13 @@
             "load a graphic from the output stream"
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "xOutputStream",
+              "XOutputStream",
+              "in"
+            ]
+          ]
         },
         {
           "name": "saveGraphic",
@@ -76,7 +99,13 @@
             "save the graphic to the storage and return the URL reference to its location inside the storage"
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "xGraphic",
+              "XGraphic",
+              "in"
+            ]
+          ]
         },
         {
           "name": "saveGraphicByName",
@@ -85,7 +114,23 @@
             "save the graphic to the storage with a requested name and return the URL reference to its location inside the storage and the mime type of the format that the graphic was saved to as an output parameter"
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "xGraphic",
+              "XGraphic",
+              "in"
+            ],
+            [
+              "savedMimeType",
+              "str",
+              "out"
+            ],
+            [
+              "aRequestedName",
+              "str",
+              "in"
+            ]
+          ]
         }
       ]
     }

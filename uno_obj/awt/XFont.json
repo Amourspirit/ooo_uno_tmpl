@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:46:15+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:14+00:00",
   "name": "XFont",
   "type": "interface",
   "namespace": "com.sun.star.awt",
@@ -26,6 +26,14 @@
         "FontDescriptor"
       ]
     ],
+    "quote": [
+      "FontDescriptor",
+      "typing.List[int]",
+      "SimpleFontMetric"
+    ],
+    "typings": [
+      "typing.List[int]"
+    ],
     "name": "XFont",
     "imports": [],
     "namespace": "com.sun.star.awt",
@@ -47,7 +55,13 @@
             "returns the width of the specified character."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "c",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getCharWidths",
@@ -56,7 +70,18 @@
             "returns the widths of the specified characters."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "nFirst",
+              "str",
+              "in"
+            ],
+            [
+              "nLast",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getFontDescriptor",
@@ -85,7 +110,23 @@
             "queries the kerning pair table."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "Chars1",
+              "typing.List[str]",
+              "out"
+            ],
+            [
+              "Chars2",
+              "typing.List[str]",
+              "out"
+            ],
+            [
+              "Kerns",
+              "typing.List[int]",
+              "out"
+            ]
+          ]
         },
         {
           "name": "getStringWidth",
@@ -94,7 +135,13 @@
             "returns the string width."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "str",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getStringWidthArray",
@@ -103,7 +150,18 @@
             "returns the string and the character widths."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "str",
+              "str",
+              "in"
+            ],
+            [
+              "aDXArray",
+              "typing.List[int]",
+              "out"
+            ]
+          ]
         }
       ]
     }

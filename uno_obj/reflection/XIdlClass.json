@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 19:15:59+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:52+00:00",
   "name": "XIdlClass",
   "type": "interface",
   "namespace": "com.sun.star.reflection",
@@ -18,6 +18,14 @@
     ],
     "from_imports_typing": [
       [
+        ".x_idl_method",
+        "XIdlMethod"
+      ],
+      [
+        "..uno.type_class",
+        "TypeClass"
+      ],
+      [
         ".x_idl_field",
         "XIdlField"
       ],
@@ -28,15 +36,20 @@
       [
         "..uno.uik",
         "Uik"
-      ],
-      [
-        "..uno.type_class",
-        "TypeClass"
-      ],
-      [
-        ".x_idl_method",
-        "XIdlMethod"
       ]
+    ],
+    "quote": [
+      "object",
+      "TypeClass",
+      "Uik",
+      "typing.List[XIdlMethod]",
+      "typing.List[XIdlField]",
+      "typing.List[XIdlClass]"
+    ],
+    "typings": [
+      "typing.List[XIdlMethod]",
+      "typing.List[XIdlClass]",
+      "typing.List[XIdlField]"
     ],
     "name": "XIdlClass",
     "imports": [],
@@ -110,7 +123,7 @@
         },
         {
           "name": "getClasses",
-          "returns": "'typing.List[XIdlClass]'",
+          "returns": "typing.List[XIdlClass]",
           "desc": [
             "Deprecated.",
             "",
@@ -147,7 +160,7 @@
         },
         {
           "name": "getFields",
-          "returns": "'typing.List[XIdlField]'",
+          "returns": "typing.List[XIdlField]",
           "desc": [
             "If the reflected type is an interface, struct or union, then you get a sequence of XIdlField interfaces reflecting all fields (/interface attributes).",
             "",
@@ -158,7 +171,7 @@
         },
         {
           "name": "getInterfaces",
-          "returns": "'typing.List[XIdlClass]'",
+          "returns": "typing.List[XIdlClass]",
           "desc": [
             "Deprecated.",
             "",
@@ -186,7 +199,7 @@
         },
         {
           "name": "getMethods",
-          "returns": "'typing.List[XIdlMethod]'",
+          "returns": "typing.List[XIdlMethod]",
           "desc": [
             "If the reflected type is an interface, then you get a sequence of XIdlMethod interfaces reflecting all methods of the interface.",
             "",
@@ -206,7 +219,7 @@
         },
         {
           "name": "getSuperclasses",
-          "returns": "'typing.List[XIdlClass]'",
+          "returns": "typing.List[XIdlClass]",
           "desc": [
             "If the reflected type is an interface, then the returned sequence of XIdlClass reflect the base interfaces.",
             "",

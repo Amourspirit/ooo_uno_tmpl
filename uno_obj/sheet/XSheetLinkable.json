@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:47:52+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:35+00:00",
   "name": "XSheetLinkable",
   "type": "interface",
   "namespace": "com.sun.star.sheet",
@@ -22,6 +22,10 @@
         "SheetLinkMode"
       ]
     ],
+    "quote": [
+      "SheetLinkMode"
+    ],
+    "typings": [],
     "name": "XSheetLinkable",
     "imports": [],
     "namespace": "com.sun.star.sheet",
@@ -78,7 +82,33 @@
             "A SheetLink object is created if it does not exist, and the link mode, the URL of the linked document and the linked sheet name are set."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aUrl",
+              "str",
+              "in"
+            ],
+            [
+              "aSheetName",
+              "str",
+              "in"
+            ],
+            [
+              "aFilterName",
+              "str",
+              "in"
+            ],
+            [
+              "aFilterOptions",
+              "str",
+              "in"
+            ],
+            [
+              "nMode",
+              "SheetLinkMode",
+              "in"
+            ]
+          ]
         },
         {
           "name": "setLinkMode",
@@ -89,7 +119,13 @@
             "If the value is SheetLinkMode.NORMAL, formulas are copied. With SheetLinkMode.VALUE, only results of formulas are used."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "nLinkMode",
+              "SheetLinkMode",
+              "in"
+            ]
+          ]
         },
         {
           "name": "setLinkSheetName",
@@ -100,7 +136,13 @@
             "This method sets the sheet name in the SheetLink object, it does not modify the sheet name in the source document."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aLinkSheetName",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "setLinkUrl",
@@ -111,7 +153,13 @@
             "A SheetLink object with the same file name must exist already or the link will not work."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aLinkUrl",
+              "str",
+              "in"
+            ]
+          ]
         }
       ]
     }

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:50:51+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:05:01+00:00",
   "name": "XMutableGridDataModel",
   "type": "interface",
   "namespace": "com.sun.star.awt.grid",
@@ -17,6 +17,8 @@
       ]
     ],
     "from_imports_typing": [],
+    "quote": [],
+    "typings": [],
     "name": "XMutableGridDataModel",
     "imports": [],
     "namespace": "com.sun.star.awt.grid",
@@ -36,7 +38,13 @@
             "registers listener to be notified of data changes in the model"
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "Listener",
+              "object",
+              "in"
+            ]
+          ]
         },
         {
           "name": "addRow",
@@ -45,7 +53,18 @@
             "appends a row to the model."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "Heading",
+              "object",
+              "in"
+            ],
+            [
+              "Data",
+              "typing.List[object]",
+              "in"
+            ]
+          ]
         },
         {
           "name": "addRows",
@@ -56,7 +75,18 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException"
           ],
-          "args": []
+          "args": [
+            [
+              "Headings",
+              "typing.List[object]",
+              "in"
+            ],
+            [
+              "Data",
+              "typing.List[typing.List[object]]",
+              "in"
+            ]
+          ]
         },
         {
           "name": "insertRow",
@@ -67,7 +97,23 @@
           "raises": [
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
-          "args": []
+          "args": [
+            [
+              "Index",
+              "int",
+              "in"
+            ],
+            [
+              "Heading",
+              "object",
+              "in"
+            ],
+            [
+              "Data",
+              "typing.List[object]",
+              "in"
+            ]
+          ]
         },
         {
           "name": "insertRows",
@@ -78,7 +124,23 @@
           "raises": [
             ","
           ],
-          "args": []
+          "args": [
+            [
+              "Index",
+              "int",
+              "in"
+            ],
+            [
+              "Headings",
+              "typing.List[object]",
+              "in"
+            ],
+            [
+              "Data",
+              "typing.List[typing.List[object]]",
+              "in"
+            ]
+          ]
         },
         {
           "name": "removeAllRows",
@@ -96,7 +158,13 @@
             "revokes a listener which was previously registered via addGridDataListener()"
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "Listener",
+              "object",
+              "in"
+            ]
+          ]
         },
         {
           "name": "removeRow",
@@ -107,7 +175,13 @@
           "raises": [
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
-          "args": []
+          "args": [
+            [
+              "RowIndex",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "updateCellData",
@@ -118,7 +192,23 @@
           "raises": [
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
-          "args": []
+          "args": [
+            [
+              "ColumnIndex",
+              "int",
+              "in"
+            ],
+            [
+              "RowIndex",
+              "int",
+              "in"
+            ],
+            [
+              "Value",
+              "object",
+              "in"
+            ]
+          ]
         },
         {
           "name": "updateCellToolTip",
@@ -129,7 +219,23 @@
           "raises": [
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
-          "args": []
+          "args": [
+            [
+              "ColumnIndex",
+              "int",
+              "in"
+            ],
+            [
+              "RowIndex",
+              "int",
+              "in"
+            ],
+            [
+              "Value",
+              "object",
+              "in"
+            ]
+          ]
         },
         {
           "name": "updateRowData",
@@ -142,7 +248,23 @@
           "raises": [
             ","
           ],
-          "args": []
+          "args": [
+            [
+              "ColumnIndexes",
+              "typing.List[int]",
+              "in"
+            ],
+            [
+              "RowIndex",
+              "int",
+              "in"
+            ],
+            [
+              "Values",
+              "typing.List[object]",
+              "in"
+            ]
+          ]
         },
         {
           "name": "updateRowHeading",
@@ -153,7 +275,18 @@
           "raises": [
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
-          "args": []
+          "args": [
+            [
+              "RowIndex",
+              "int",
+              "in"
+            ],
+            [
+              "Heading",
+              "object",
+              "in"
+            ]
+          ]
         },
         {
           "name": "updateRowToolTip",
@@ -166,7 +299,18 @@
           "raises": [
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
-          "args": []
+          "args": [
+            [
+              "RowIndex",
+              "int",
+              "in"
+            ],
+            [
+              "Value",
+              "object",
+              "in"
+            ]
+          ]
         }
       ]
     }

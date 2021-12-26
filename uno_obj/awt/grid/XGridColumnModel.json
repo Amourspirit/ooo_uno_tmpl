@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:50:50+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:05:01+00:00",
   "name": "XGridColumnModel",
   "type": "interface",
   "namespace": "com.sun.star.awt.grid",
@@ -12,16 +12,16 @@
   "data": {
     "from_imports": [
       [
+        "...lang.x_component",
+        "XComponent"
+      ],
+      [
         "...util.x_cloneable",
         "XCloneable"
       ],
       [
         "...container.x_container",
         "XContainer"
-      ],
-      [
-        "...lang.x_component",
-        "XComponent"
       ]
     ],
     "from_imports_typing": [
@@ -29,6 +29,13 @@
         ".x_grid_column",
         "XGridColumn"
       ]
+    ],
+    "quote": [
+      "typing.List[XGridColumn]",
+      "object"
+    ],
+    "typings": [
+      "typing.List[XGridColumn]"
     ],
     "name": "XGridColumnModel",
     "imports": [],
@@ -63,7 +70,13 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException"
           ],
-          "args": []
+          "args": [
+            [
+              "column",
+              "object",
+              "in"
+            ]
+          ]
         },
         {
           "name": "createColumn",
@@ -85,7 +98,13 @@
           "raises": [
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
-          "args": []
+          "args": [
+            [
+              "index",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getColumnCount",
@@ -98,7 +117,7 @@
         },
         {
           "name": "getColumns",
-          "returns": "'typing.List[XGridColumn]'",
+          "returns": "typing.List[XGridColumn]",
           "desc": [
             "Returns all columns of the model."
           ],
@@ -116,7 +135,13 @@
           "raises": [
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
-          "args": []
+          "args": [
+            [
+              "ColumnIndex",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "setDefaultColumns",
@@ -127,7 +152,13 @@
             "Existing columns will be removed before adding new columns. Listeners at the column model will be notified one com.sun.star.container.XContainerListener.elementRemoved() event for each removed column, and one com.sun.star.container.XContainerListener.elementInserted() event for each insertion."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "elements",
+              "int",
+              "in"
+            ]
+          ]
         }
       ]
     }

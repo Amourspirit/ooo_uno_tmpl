@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:52:59+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:11+00:00",
   "name": "XTransliteration",
   "type": "interface",
   "namespace": "com.sun.star.i18n",
@@ -17,6 +17,12 @@
       ]
     ],
     "from_imports_typing": [],
+    "quote": [
+      "typing.List[str]"
+    ],
+    "typings": [
+      "typing.List[str]"
+    ],
     "name": "XTransliteration",
     "imports": [],
     "namespace": "com.sun.star.i18n",
@@ -48,7 +54,18 @@
             "It translates both strings before comparing them."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aStr1",
+              "str",
+              "in"
+            ],
+            [
+              "aStr2",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "compareSubstring",
@@ -59,7 +76,38 @@
             "It translates both substrings before comparing them."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aStr1",
+              "str",
+              "in"
+            ],
+            [
+              "nOff1",
+              "int",
+              "in"
+            ],
+            [
+              "nLen1",
+              "int",
+              "in"
+            ],
+            [
+              "aStr2",
+              "str",
+              "in"
+            ],
+            [
+              "nOff2",
+              "int",
+              "in"
+            ],
+            [
+              "nLen2",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "equals",
@@ -72,14 +120,76 @@
             "Returns the number of matched code points in any case, even if strings are not equal, for example: \n equals( \\\"a\\\", 0, 1, nMatch1, \\\"aaa\\\", 0, 3, nMatch2 ) \n returns FALSE and nMatch:=1 and nMatch2:=1 \n equals( \\\"aab\\\", 0, 3, nMatch1, \\\"aaa\\\", 0, 3, nMatch2 ) \n returns FALSE and nMatch:=2 and nMatch2:=2"
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aStr1",
+              "str",
+              "in"
+            ],
+            [
+              "nPos1",
+              "int",
+              "in"
+            ],
+            [
+              "nCount1",
+              "int",
+              "in"
+            ],
+            [
+              "rMatch1",
+              "int",
+              "out"
+            ],
+            [
+              "aStr2",
+              "str",
+              "in"
+            ],
+            [
+              "nPos2",
+              "int",
+              "in"
+            ],
+            [
+              "nCount2",
+              "int",
+              "in"
+            ],
+            [
+              "rMatch2",
+              "int",
+              "out"
+            ]
+          ]
         },
         {
           "name": "folding",
           "returns": "str",
           "desc": [],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aInStr",
+              "str",
+              "in"
+            ],
+            [
+              "nStartPos",
+              "int",
+              "in"
+            ],
+            [
+              "nCount",
+              "int",
+              "in"
+            ],
+            [
+              "rOffset",
+              "typing.List[int]",
+              "out"
+            ]
+          ]
         },
         {
           "name": "getAvailableModules",
@@ -90,7 +200,18 @@
             "It can be filtered based on its type."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aLocale",
+              "Locale",
+              "in"
+            ],
+            [
+              "nType",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getName",
@@ -121,7 +242,18 @@
             "Load instance of predefined module - old style method."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "eModType",
+              "object",
+              "in"
+            ],
+            [
+              "aLocale",
+              "Locale",
+              "in"
+            ]
+          ]
         },
         {
           "name": "loadModuleByImplName",
@@ -132,7 +264,18 @@
             "Each transliteration module is registered under a different service name. The convention for the service name is com.sun.star.i18n.Transliteration.l10n.{implName}. The {implName} is a unique name used to identify a module. The implName is used to get a localized name for the transliteration module. The implName is used in locale data to list the available transliteration modules for the locale. There are some transliteration modules that are always available. The names of those modules are listed as enum TransliterationModules names. For modules not listed there it is possible to load them directly by their implName."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aImplName",
+              "str",
+              "in"
+            ],
+            [
+              "aLocale",
+              "Locale",
+              "in"
+            ]
+          ]
         },
         {
           "name": "loadModuleNew",
@@ -141,7 +284,18 @@
             "Load a sequence of instances of predefined modules - supersedes method XTransliteration.loadModule()."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aModType",
+              "typing.List[TransliterationModulesNew]",
+              "in"
+            ],
+            [
+              "aLocale",
+              "Locale",
+              "in"
+            ]
+          ]
         },
         {
           "name": "loadModulesByImplNames",
@@ -152,7 +306,18 @@
             "Output of one module is fed as input to the next module in the sequence. The object created by this call has TransliterationType CASCADE and IGNORE types."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aImplNameList",
+              "typing.List[str]",
+              "in"
+            ],
+            [
+              "aLocale",
+              "Locale",
+              "in"
+            ]
+          ]
         },
         {
           "name": "transliterate",
@@ -163,7 +328,28 @@
             "This method can be called if the object doesn't have TransliterationType IGNORE attribute."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aInStr",
+              "str",
+              "in"
+            ],
+            [
+              "nStartPos",
+              "int",
+              "in"
+            ],
+            [
+              "nCount",
+              "int",
+              "in"
+            ],
+            [
+              "rOffset",
+              "typing.List[int]",
+              "out"
+            ]
+          ]
         },
         {
           "name": "transliterateRange",
@@ -178,7 +364,18 @@
             "Use this transliteration to create regular expressions like [a-i] --> [A-Ia-i]."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aStr1",
+              "str",
+              "in"
+            ],
+            [
+              "aStr2",
+              "str",
+              "in"
+            ]
+          ]
         }
       ]
     }

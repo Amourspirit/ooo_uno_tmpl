@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:52:21+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:24+00:00",
   "name": "XSecurityEnvironment",
   "type": "interface",
   "namespace": "com.sun.star.xml.crypto",
@@ -22,6 +22,13 @@
         "XCertificate"
       ]
     ],
+    "quote": [
+      "XCertificate",
+      "typing.List[XCertificate]"
+    ],
+    "typings": [
+      "typing.List[XCertificate]"
+    ],
     "name": "XSecurityEnvironment",
     "imports": [],
     "namespace": "com.sun.star.xml.crypto",
@@ -40,14 +47,20 @@
       "methods": [
         {
           "name": "buildCertificatePath",
-          "returns": "'typing.List[XCertificate]'",
+          "returns": "typing.List[XCertificate]",
           "desc": [
             "Build certificate path from a certain certificate."
           ],
           "raises": [
             "com.sun.star.uno.SecurityException"
           ],
-          "args": []
+          "args": [
+            [
+              "beginCert",
+              "XCertificate",
+              "in"
+            ]
+          ]
         },
         {
           "name": "createCertificateFromAscii",
@@ -58,7 +71,13 @@
           "raises": [
             "com.sun.star.uno.SecurityException"
           ],
-          "args": []
+          "args": [
+            [
+              "asciiCertificate",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "createCertificateFromRaw",
@@ -69,11 +88,17 @@
           "raises": [
             "com.sun.star.uno.SecurityException"
           ],
-          "args": []
+          "args": [
+            [
+              "rawCertificate",
+              "typing.List[byte]",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getAllCertificates",
-          "returns": "'typing.List[XCertificate]'",
+          "returns": "typing.List[XCertificate]",
           "desc": [
             "List all certificates, private (as returned by getPersonalCertificates) as well as those of other people/orgas.",
             "",
@@ -95,7 +120,18 @@
           "raises": [
             "com.sun.star.uno.SecurityException"
           ],
-          "args": []
+          "args": [
+            [
+              "issuerName",
+              "str",
+              "in"
+            ],
+            [
+              "serialNumber",
+              "typing.List[byte]",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getCertificateCharacters",
@@ -110,11 +146,17 @@
           "raises": [
             "com.sun.star.uno.SecurityException"
           ],
-          "args": []
+          "args": [
+            [
+              "xCertificate",
+              "XCertificate",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getPersonalCertificates",
-          "returns": "'typing.List[XCertificate]'",
+          "returns": "typing.List[XCertificate]",
           "desc": [
             "Get personal certificates from the environment."
           ],
@@ -143,7 +185,18 @@
           "raises": [
             "com.sun.star.uno.SecurityException"
           ],
-          "args": []
+          "args": [
+            [
+              "xEECertificate",
+              "XCertificate",
+              "in"
+            ],
+            [
+              "intermediateCertificates",
+              "typing.List[XCertificate]",
+              "in"
+            ]
+          ]
         }
       ]
     }

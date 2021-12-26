@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:50:29+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:47+00:00",
   "name": "XTextTable",
   "type": "interface",
   "namespace": "com.sun.star.text",
@@ -18,21 +18,31 @@
     ],
     "from_imports_typing": [
       [
-        "..table.x_table_rows",
-        "XTableRows"
-      ],
-      [
-        "..table.x_cell",
-        "XCell"
+        ".x_text_table_cursor",
+        "XTextTableCursor"
       ],
       [
         "..table.x_table_columns",
         "XTableColumns"
       ],
       [
-        ".x_text_table_cursor",
-        "XTextTableCursor"
+        "..table.x_cell",
+        "XCell"
+      ],
+      [
+        "..table.x_table_rows",
+        "XTableRows"
       ]
+    ],
+    "quote": [
+      "XTableRows",
+      "XTableColumns",
+      "XTextTableCursor",
+      "typing.List[str]",
+      "XCell"
+    ],
+    "typings": [
+      "typing.List[str]"
     ],
     "name": "XTextTable",
     "imports": [],
@@ -55,7 +65,13 @@
             "Initially the cursor is positioned in the cell with the specified name."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aCellName",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getCellByName",
@@ -68,7 +84,13 @@
             "Example: If the cell \\\"D3\\\" is horizontally split, it now contains the cells \\\"D3.1.1\\\" and \\\"D3.1.2\\\""
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aCellName",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getCellNames",
@@ -100,7 +122,18 @@
             "This method must be called after the object is created and before the object is insert or attached elsewhere."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "nRows",
+              "int",
+              "in"
+            ],
+            [
+              "nColumns",
+              "int",
+              "in"
+            ]
+          ]
         }
       ]
     }

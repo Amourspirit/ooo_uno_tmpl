@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:52:54+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:11+00:00",
   "name": "XCharacterClassification",
   "type": "interface",
   "namespace": "com.sun.star.i18n",
@@ -17,6 +17,10 @@
       ]
     ],
     "from_imports_typing": [],
+    "quote": [
+      "object"
+    ],
+    "typings": [],
     "name": "XCharacterClassification",
     "imports": [],
     "namespace": "com.sun.star.i18n",
@@ -36,7 +40,18 @@
             "Get DirectionProperty of character at position nPos."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aText",
+              "str",
+              "in"
+            ],
+            [
+              "nPos",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getCharacterType",
@@ -45,7 +60,23 @@
             "Get KCharacterType of character at position nPos."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aText",
+              "str",
+              "in"
+            ],
+            [
+              "nPos",
+              "int",
+              "in"
+            ],
+            [
+              "aLocale",
+              "Locale",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getScript",
@@ -54,7 +85,18 @@
             "Get UnicodeScript of character at position nPos."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aText",
+              "str",
+              "in"
+            ],
+            [
+              "nPos",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getStringType",
@@ -63,7 +105,28 @@
             "Get accumulated KCharacterTypes of string starting at position nPos of length nCount code points."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aText",
+              "str",
+              "in"
+            ],
+            [
+              "nPos",
+              "int",
+              "in"
+            ],
+            [
+              "nCount",
+              "int",
+              "in"
+            ],
+            [
+              "aLocale",
+              "Locale",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getType",
@@ -72,7 +135,18 @@
             "Get UnicodeType of character at position nPos."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aText",
+              "str",
+              "in"
+            ],
+            [
+              "nPos",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "parseAnyToken",
@@ -85,7 +159,43 @@
             "If a token may represent either a numeric value or a name according to the passed Start/Cont-Flags/Chars, both KParseType.ASC_NUM (or KParseType.UNI_NUM) and KParseType.IDENTNAME are set in ParseResult.TokenType."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aText",
+              "str",
+              "in"
+            ],
+            [
+              "nPos",
+              "int",
+              "in"
+            ],
+            [
+              "aLocale",
+              "Locale",
+              "in"
+            ],
+            [
+              "nStartCharFlags",
+              "int",
+              "in"
+            ],
+            [
+              "aUserDefinedCharactersStart",
+              "str",
+              "in"
+            ],
+            [
+              "nContCharFlags",
+              "int",
+              "in"
+            ],
+            [
+              "aUserDefinedCharactersCont",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "parsePredefinedToken",
@@ -96,7 +206,48 @@
             "Other parameters are the same as in parseAnyToken(). If the actual token does not match the passed nTokenType a ParseResult.TokenType set to 0 (zero) is returned."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "nTokenType",
+              "int",
+              "in"
+            ],
+            [
+              "aText",
+              "str",
+              "in"
+            ],
+            [
+              "nPos",
+              "int",
+              "in"
+            ],
+            [
+              "aLocale",
+              "Locale",
+              "in"
+            ],
+            [
+              "nStartCharFlags",
+              "int",
+              "in"
+            ],
+            [
+              "aUserDefinedCharactersStart",
+              "str",
+              "in"
+            ],
+            [
+              "nContCharFlags",
+              "int",
+              "in"
+            ],
+            [
+              "aUserDefinedCharactersCont",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "toLower",
@@ -105,7 +256,28 @@
             "Convert upper case alpha to lower case alpha, starting at position nPos for nCount code points."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aText",
+              "str",
+              "in"
+            ],
+            [
+              "nPos",
+              "int",
+              "in"
+            ],
+            [
+              "nCount",
+              "int",
+              "in"
+            ],
+            [
+              "aLocale",
+              "Locale",
+              "in"
+            ]
+          ]
         },
         {
           "name": "toTitle",
@@ -114,7 +286,28 @@
             "Convert to title case, starting at position nPos for nCount code points."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aText",
+              "str",
+              "in"
+            ],
+            [
+              "nPos",
+              "int",
+              "in"
+            ],
+            [
+              "nCount",
+              "int",
+              "in"
+            ],
+            [
+              "aLocale",
+              "Locale",
+              "in"
+            ]
+          ]
         },
         {
           "name": "toUpper",
@@ -123,7 +316,28 @@
             "Convert lower case alpha to upper case alpha, starting at position nPos for nCount code points."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aText",
+              "str",
+              "in"
+            ],
+            [
+              "nPos",
+              "int",
+              "in"
+            ],
+            [
+              "nCount",
+              "int",
+              "in"
+            ],
+            [
+              "aLocale",
+              "Locale",
+              "in"
+            ]
+          ]
         }
       ]
     }

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:47:37+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:32+00:00",
   "name": "XDataPilotTable2",
   "type": "interface",
   "namespace": "com.sun.star.sheet",
@@ -21,6 +21,14 @@
         "..table.cell_range_address",
         "CellRangeAddress"
       ]
+    ],
+    "quote": [
+      "CellRangeAddress",
+      "object",
+      "typing.List[typing.List[object]]"
+    ],
+    "typings": [
+      "typing.List[typing.List[object]]"
     ],
     "name": "XDataPilotTable2",
     "imports": [],
@@ -47,7 +55,13 @@
             "When the address of a cell within the result area is given, XDataPilotTable2.getDrillDownData() returns its drill-down output table that includes only those rows that contribute to the value of that cell."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aAddr",
+              "CellAddress",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getOutputRangeByType",
@@ -58,7 +72,13 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException"
           ],
-          "args": []
+          "args": [
+            [
+              "nType",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getPositionData",
@@ -69,7 +89,13 @@
             "The type of information returned depends upon whether the cell is within the result area or column/row header area."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aAddr",
+              "CellAddress",
+              "in"
+            ]
+          ]
         },
         {
           "name": "insertDrillDownSheet",
@@ -80,7 +106,13 @@
             "The new sheet is always inserted to the immediate left of the current sheet where the DataPilot table is. Note that when the drill-down data is empty, no new sheet is inserted."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aAddr",
+              "CellAddress",
+              "in"
+            ]
+          ]
         }
       ]
     }

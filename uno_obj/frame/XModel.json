@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:51:55+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:48+00:00",
   "name": "XModel",
   "type": "interface",
   "namespace": "com.sun.star.frame",
@@ -18,13 +18,21 @@
     ],
     "from_imports_typing": [
       [
-        "..beans.property_value",
-        "PropertyValue"
-      ],
-      [
         "..uno.x_interface",
         "XInterface"
+      ],
+      [
+        "..beans.property_value",
+        "PropertyValue"
       ]
+    ],
+    "quote": [
+      "typing.List[PropertyValue]",
+      "object",
+      "XInterface"
+    ],
+    "typings": [
+      "typing.List[PropertyValue]"
     ],
     "name": "XModel",
     "imports": [],
@@ -51,7 +59,18 @@
             "informs a model about its resource description."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "URL",
+              "str",
+              "in"
+            ],
+            [
+              "Arguments",
+              "typing.List[PropertyValue]",
+              "in"
+            ]
+          ]
         },
         {
           "name": "connectController",
@@ -62,7 +81,13 @@
             "The com.sun.star.lang.XComponent interface of the controller must be used to recognize when it is deleted."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "Controller",
+              "object",
+              "in"
+            ]
+          ]
         },
         {
           "name": "disconnectController",
@@ -73,11 +98,17 @@
             "The com.sun.star.lang.XComponent interface of the controller must be used to recognize when it is deleted."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "Controller",
+              "object",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getArgs",
-          "returns": "'typing.List[PropertyValue]'",
+          "returns": "typing.List[PropertyValue]",
           "desc": [
             "provides read access on currently representation of the com.sun.star.document.MediaDescriptor of this model which describes the model and its state"
           ],
@@ -142,7 +173,13 @@
           "raises": [
             "com.sun.star.container.NoSuchElementException"
           ],
-          "args": []
+          "args": [
+            [
+              "Controller",
+              "object",
+              "in"
+            ]
+          ]
         },
         {
           "name": "unlockControllers",

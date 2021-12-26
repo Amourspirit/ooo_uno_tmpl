@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:45:34+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:22+00:00",
   "name": "XEventAttacher",
   "type": "interface",
   "namespace": "com.sun.star.script",
@@ -22,6 +22,10 @@
         "XEventListener"
       ]
     ],
+    "quote": [
+      "XEventListener"
+    ],
+    "typings": [],
     "name": "XEventAttacher",
     "imports": [],
     "namespace": "com.sun.star.script",
@@ -43,7 +47,33 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException,"
           ],
-          "args": []
+          "args": [
+            [
+              "xTarget",
+              "XInterface",
+              "in"
+            ],
+            [
+              "xAllListener",
+              "XAllListener",
+              "in"
+            ],
+            [
+              "aHelper",
+              "object",
+              "in"
+            ],
+            [
+              "aListenerType",
+              "str",
+              "in"
+            ],
+            [
+              "aAddListenerParam",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "attachSingleEventListener",
@@ -56,7 +86,38 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException,"
           ],
-          "args": []
+          "args": [
+            [
+              "xTarget",
+              "XInterface",
+              "in"
+            ],
+            [
+              "xAllListener",
+              "XAllListener",
+              "in"
+            ],
+            [
+              "aHelper",
+              "object",
+              "in"
+            ],
+            [
+              "aListenerType",
+              "str",
+              "in"
+            ],
+            [
+              "aAddListenerParam",
+              "str",
+              "in"
+            ],
+            [
+              "aEventMethod",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "removeListener",
@@ -69,7 +130,28 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException,"
           ],
-          "args": []
+          "args": [
+            [
+              "xTarget",
+              "XInterface",
+              "in"
+            ],
+            [
+              "aListenerType",
+              "str",
+              "in"
+            ],
+            [
+              "aRemoveListenerParam",
+              "str",
+              "in"
+            ],
+            [
+              "xToRemoveListener",
+              "XEventListener",
+              "in"
+            ]
+          ]
         }
       ]
     }

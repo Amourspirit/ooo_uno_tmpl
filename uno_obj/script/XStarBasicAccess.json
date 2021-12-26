@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:45:37+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:22+00:00",
   "name": "XStarBasicAccess",
   "type": "interface",
   "namespace": "com.sun.star.script",
@@ -22,6 +22,10 @@
         "XNameContainer"
       ]
     ],
+    "quote": [
+      "XNameContainer"
+    ],
+    "typings": [],
     "name": "XStarBasicAccess",
     "imports": [],
     "namespace": "com.sun.star.script",
@@ -49,7 +53,23 @@
           "raises": [
             "com.sun.star.container.NoSuchElementException"
           ],
-          "args": []
+          "args": [
+            [
+              "LibraryName",
+              "str",
+              "in"
+            ],
+            [
+              "DialogName",
+              "str",
+              "in"
+            ],
+            [
+              "Data",
+              "typing.List[byte]",
+              "in"
+            ]
+          ]
         },
         {
           "name": "addModule",
@@ -62,7 +82,28 @@
           "raises": [
             "com.sun.star.container.NoSuchElementException"
           ],
-          "args": []
+          "args": [
+            [
+              "LibraryName",
+              "str",
+              "in"
+            ],
+            [
+              "ModuleName",
+              "str",
+              "in"
+            ],
+            [
+              "Language",
+              "str",
+              "in"
+            ],
+            [
+              "Source",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "createLibrary",
@@ -75,7 +116,28 @@
           "raises": [
             "com.sun.star.container.ElementExistException"
           ],
-          "args": []
+          "args": [
+            [
+              "LibName",
+              "str",
+              "in"
+            ],
+            [
+              "Password",
+              "str",
+              "in"
+            ],
+            [
+              "ExternalSourceURL",
+              "str",
+              "in"
+            ],
+            [
+              "LinkTargetURL",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getLibraryContainer",

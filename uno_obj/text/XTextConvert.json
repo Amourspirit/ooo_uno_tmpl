@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:50:25+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:46+00:00",
   "name": "XTextConvert",
   "type": "interface",
   "namespace": "com.sun.star.text",
@@ -26,6 +26,11 @@
         "XTextTable"
       ]
     ],
+    "quote": [
+      "XTextContent",
+      "XTextTable"
+    ],
+    "typings": [],
     "name": "XTextConvert",
     "imports": [],
     "namespace": "com.sun.star.text",
@@ -49,7 +54,28 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException,"
           ],
-          "args": []
+          "args": [
+            [
+              "TableRanges",
+              "typing.List[object]",
+              "in"
+            ],
+            [
+              "CellProperties",
+              "typing.List[typing.List[PropertyValues]]",
+              "in"
+            ],
+            [
+              "RowProperties",
+              "typing.List[PropertyValues]",
+              "in"
+            ],
+            [
+              "TableProperties",
+              "PropertyValues",
+              "in"
+            ]
+          ]
         },
         {
           "name": "convertToTextFrame",
@@ -60,7 +86,23 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException,"
           ],
-          "args": []
+          "args": [
+            [
+              "Start",
+              "XTextRange",
+              "in"
+            ],
+            [
+              "End",
+              "XTextRange",
+              "in"
+            ],
+            [
+              "FrameProperties",
+              "PropertyValues",
+              "in"
+            ]
+          ]
         }
       ]
     }

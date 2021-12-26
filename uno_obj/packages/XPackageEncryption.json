@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:47:04+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:18+00:00",
   "name": "XPackageEncryption",
   "type": "interface",
   "namespace": "com.sun.star.packages",
@@ -21,6 +21,12 @@
         "..beans.named_value",
         "NamedValue"
       ]
+    ],
+    "quote": [
+      "typing.List[NamedValue]"
+    ],
+    "typings": [
+      "typing.List[NamedValue]"
     ],
     "name": "XPackageEncryption",
     "imports": [],
@@ -51,14 +57,20 @@
         },
         {
           "name": "createEncryptionData",
-          "returns": "'typing.List[NamedValue]'",
+          "returns": "typing.List[NamedValue]",
           "desc": [
             "Create key-value list of encryption meta data.",
             "",
             "After generateEncryptionKey() succeeded in setting up crypto, use this method to create requisite meta data. Depending on underlying crypto, this can be a salt, init vector, or other algorithm-specific information that needs to be stored alongside an encrypted document"
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "rPassword",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "decrypt",
@@ -69,18 +81,35 @@
             "After crypto setup via readEncryptionInfo(), pipe package bits through encryption engine."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "rxInputStream",
+              "XInputStream",
+              "in"
+            ],
+            [
+              "rxOutputStream",
+              "XOutputStream",
+              "out"
+            ]
+          ]
         },
         {
           "name": "encrypt",
-          "returns": "'typing.List[NamedValue]'",
+          "returns": "typing.List[NamedValue]",
           "desc": [
             "Encrypt given stream.",
             "",
             "After setting up crypto via setupEncryption(), use this method to encrypt content."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "rxInputStream",
+              "XInputStream",
+              "in"
+            ]
+          ]
         },
         {
           "name": "generateEncryptionKey",
@@ -89,7 +118,13 @@
             "Set or refresh encryption key."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "rPassword",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "readEncryptionInfo",
@@ -98,7 +133,13 @@
             "Read package crypto information."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "rStreams",
+              "typing.List[NamedValue]",
+              "in"
+            ]
+          ]
         },
         {
           "name": "setupEncryption",
@@ -109,7 +150,13 @@
             "Use this method to setup requisite encryption meta data. Depending on the underlying crypto, this can be a salt, init vector, or other algorithm-specific information that needs to be stored alongside an encrypted document"
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "rMediaEncData",
+              "typing.List[NamedValue]",
+              "in"
+            ]
+          ]
         }
       ]
     }

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:49:25+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:40+00:00",
   "name": "XDocumentEventBroadcaster",
   "type": "interface",
   "namespace": "com.sun.star.document",
@@ -10,12 +10,31 @@
   },
   "writer_args": {},
   "data": {
-    "from_imports": [],
+    "from_imports": [
+      [
+        "..sdb.office_database_document",
+        "OfficeDatabaseDocument"
+      ],
+      [
+        ".office_document",
+        "OfficeDocument"
+      ],
+      [
+        "..frame.x_global_event_broadcaster",
+        "XGlobalEventBroadcaster"
+      ]
+    ],
     "from_imports_typing": [],
+    "quote": [],
+    "typings": [],
     "name": "XDocumentEventBroadcaster",
     "imports": [],
     "namespace": "com.sun.star.document",
-    "extends": [],
+    "extends": [
+      "com.sun.star.document.OfficeDocument",
+      "com.sun.star.frame.XGlobalEventBroadcaster",
+      "com.sun.star.sdb.OfficeDatabaseDocument"
+    ],
     "desc": [
       "allows to be notified of events happening in an OfficeDocument, and to cause notification of such events.",
       "",
@@ -35,7 +54,13 @@
             "registers a listener which is notified about document events"
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "Listener",
+              "object",
+              "in"
+            ]
+          ]
         },
         {
           "name": "notifyDocumentEvent",
@@ -52,7 +77,23 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException,"
           ],
-          "args": []
+          "args": [
+            [
+              "EventName",
+              "str",
+              "in"
+            ],
+            [
+              "ViewController",
+              "XController2",
+              "in"
+            ],
+            [
+              "Supplement",
+              "object",
+              "in"
+            ]
+          ]
         },
         {
           "name": "removeDocumentEventListener",
@@ -61,7 +102,13 @@
             "revokes a listener which has previously been registered to be notified about document events."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "Listener",
+              "object",
+              "in"
+            ]
+          ]
         }
       ]
     }

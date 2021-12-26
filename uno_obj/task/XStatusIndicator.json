@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:45:46+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:09+00:00",
   "name": "XStatusIndicator",
   "type": "interface",
   "namespace": "com.sun.star.task",
@@ -17,6 +17,8 @@
       ]
     ],
     "from_imports_typing": [],
+    "quote": [],
+    "typings": [],
     "name": "XStatusIndicator",
     "imports": [],
     "namespace": "com.sun.star.task",
@@ -62,7 +64,13 @@
             "Initial value can be set during starting of the progress by calling XStatusIndicator.start(). Stopped indicators must ignore this call."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "Text",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "setValue",
@@ -73,7 +81,13 @@
             "Wrong values must be ignored and stopped indicators must ignore this call generally."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "Value",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "start",
@@ -84,7 +98,18 @@
             "It activates a new created or reactivate an already used indicator (must be finished by calling XStatusIndicator.end() before!). By the way it's possible to set first progress description and the possible range of progress value. That means that a progress can runs from 0 to Range."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "Text",
+              "str",
+              "in"
+            ],
+            [
+              "Range",
+              "int",
+              "in"
+            ]
+          ]
         }
       ]
     }

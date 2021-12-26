@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:52:55+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:11+00:00",
   "name": "XExtendedTransliteration",
   "type": "interface",
   "namespace": "com.sun.star.i18n",
@@ -17,6 +17,8 @@
       ]
     ],
     "from_imports_typing": [],
+    "quote": [],
+    "typings": [],
     "name": "XExtendedTransliteration",
     "imports": [],
     "namespace": "com.sun.star.i18n",
@@ -46,7 +48,13 @@
           "raises": [
             "MultipleCharsOutputException"
           ],
-          "args": []
+          "args": [
+            [
+              "cChar",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "transliterateChar2String",
@@ -55,7 +63,13 @@
             "Transliterate a character to a string."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "cChar",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "transliterateString2String",
@@ -66,7 +80,23 @@
             "The functionality is the same as com.sun.star.i18n.XTransliteration.transliterate() but omits the offset parameter to improve performance."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aStr",
+              "str",
+              "in"
+            ],
+            [
+              "nStartPos",
+              "int",
+              "in"
+            ],
+            [
+              "nCount",
+              "int",
+              "in"
+            ]
+          ]
         }
       ]
     }

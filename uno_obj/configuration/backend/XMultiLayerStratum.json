@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:45:15+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:06+00:00",
   "name": "XMultiLayerStratum",
   "type": "interface",
   "namespace": "com.sun.star.configuration.backend",
@@ -21,6 +21,15 @@
         ".x_layer",
         "XLayer"
       ]
+    ],
+    "quote": [
+      "typing.List[XLayer]",
+      "object",
+      "typing.List[str]"
+    ],
+    "typings": [
+      "typing.List[XLayer]",
+      "typing.List[str]"
     ],
     "name": "XMultiLayerStratum",
     "imports": [],
@@ -57,11 +66,22 @@
           "raises": [
             "BackendAccessException,"
           ],
-          "args": []
+          "args": [
+            [
+              "aLayerId",
+              "str",
+              "in"
+            ],
+            [
+              "aTimestamp",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getLayers",
-          "returns": "'typing.List[XLayer]'",
+          "returns": "typing.List[XLayer]",
           "desc": [
             "retrieves the layers associated to a series of layer ids, if newer than indicated.",
             "",
@@ -80,11 +100,22 @@
           "raises": [
             "BackendAccessException,"
           ],
-          "args": []
+          "args": [
+            [
+              "aLayerIds",
+              "typing.List[str]",
+              "in"
+            ],
+            [
+              "aTimestamp",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getMultipleLayers",
-          "returns": "'typing.List[XLayer]'",
+          "returns": "typing.List[XLayer]",
           "desc": [
             "retrieves the layers associated to a series of layer ids, if newer than indicated for each layer.",
             "",
@@ -105,7 +136,18 @@
           "raises": [
             "BackendAccessException,"
           ],
-          "args": []
+          "args": [
+            [
+              "aLayerIds",
+              "typing.List[str]",
+              "in"
+            ],
+            [
+              "aTimestamps",
+              "typing.List[str]",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getUpdatableLayer",
@@ -118,7 +160,13 @@
           "raises": [
             "BackendAccessException,"
           ],
-          "args": []
+          "args": [
+            [
+              "aLayerId",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getUpdateLayerId",
@@ -131,7 +179,18 @@
           "raises": [
             "BackendAccessException,"
           ],
-          "args": []
+          "args": [
+            [
+              "aComponent",
+              "str",
+              "in"
+            ],
+            [
+              "aEntity",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "listLayerIds",
@@ -144,7 +203,18 @@
           "raises": [
             "BackendAccessException,"
           ],
-          "args": []
+          "args": [
+            [
+              "aComponent",
+              "str",
+              "in"
+            ],
+            [
+              "aEntity",
+              "str",
+              "in"
+            ]
+          ]
         }
       ]
     }

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:48:16+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:49+00:00",
   "name": "XDriverManager",
   "type": "interface",
   "namespace": "com.sun.star.sdbc",
@@ -17,6 +17,10 @@
       ]
     ],
     "from_imports_typing": [],
+    "quote": [
+      "object"
+    ],
+    "typings": [],
     "name": "XDriverManager",
     "imports": [],
     "namespace": "com.sun.star.sdbc",
@@ -42,7 +46,13 @@
           "raises": [
             "SQLException"
           ],
-          "args": []
+          "args": [
+            [
+              "url",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getConnectionWithInfo",
@@ -55,7 +65,18 @@
           "raises": [
             "SQLException"
           ],
-          "args": []
+          "args": [
+            [
+              "url",
+              "str",
+              "in"
+            ],
+            [
+              "info",
+              "typing.List[PropertyValue]",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getLoginTimeout",
@@ -73,7 +94,13 @@
             "sets the maximum time in seconds that a driver will wait while attempting to connect to a database."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "seconds",
+              "int",
+              "in"
+            ]
+          ]
         }
       ]
     }

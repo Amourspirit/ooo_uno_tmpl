@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:48:24+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:26+00:00",
   "name": "XConfigurationControllerRequestQueue",
   "type": "interface",
   "namespace": "com.sun.star.drawing.framework",
@@ -10,12 +10,21 @@
   },
   "writer_args": {},
   "data": {
-    "from_imports": [],
+    "from_imports": [
+      [
+        ".x_configuration_controller",
+        "XConfigurationController"
+      ]
+    ],
     "from_imports_typing": [],
+    "quote": [],
+    "typings": [],
     "name": "XConfigurationControllerRequestQueue",
     "imports": [],
     "namespace": "com.sun.star.drawing.framework",
-    "extends": [],
+    "extends": [
+      "com.sun.star.drawing.framework.XConfigurationController"
+    ],
     "desc": [
       "The request queue of the configuration controller handles requests for changes to the current configuration.",
       "",
@@ -42,7 +51,13 @@
             "This method should not be called from outside the drawing framework. Other sub controllers of the drawing framework are typical callers. They can add change requests that can not be made with the requestResourceActivation() and requestResourceDeactivation() methods."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "xRequest",
+              "object",
+              "in"
+            ]
+          ]
         }
       ]
     }

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:49:14+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:40+00:00",
   "name": "XObjectNames",
   "type": "interface",
   "namespace": "com.sun.star.sdb.tools",
@@ -12,6 +12,8 @@
   "data": {
     "from_imports": [],
     "from_imports_typing": [],
+    "quote": [],
+    "typings": [],
     "name": "XObjectNames",
     "imports": [],
     "namespace": "com.sun.star.sdb.tools",
@@ -45,7 +47,18 @@
           "raises": [
             "com.sun.star.sdbc.SQLException"
           ],
-          "args": []
+          "args": [
+            [
+              "CommandType",
+              "int",
+              "in"
+            ],
+            [
+              "Name",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "convertToSQLName",
@@ -56,7 +69,13 @@
             "The conversion takes place by converting every character which is neither allowed by the SQL-92 standard, nor part of the special characters supported by the database, with an underscore character (_)."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "Name",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "isNameUsed",
@@ -71,7 +90,18 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException,"
           ],
-          "args": []
+          "args": [
+            [
+              "CommandType",
+              "int",
+              "in"
+            ],
+            [
+              "Name",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "isNameValid",
@@ -86,7 +116,18 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException"
           ],
-          "args": []
+          "args": [
+            [
+              "CommandType",
+              "int",
+              "in"
+            ],
+            [
+              "Name",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "suggestName",
@@ -103,7 +144,18 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException,"
           ],
-          "args": []
+          "args": [
+            [
+              "CommandType",
+              "int",
+              "in"
+            ],
+            [
+              "BaseName",
+              "str",
+              "in"
+            ]
+          ]
         }
       ]
     }

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:52:21+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:24+00:00",
   "name": "XCertificateCreator",
   "type": "interface",
   "namespace": "com.sun.star.xml.crypto",
@@ -22,6 +22,10 @@
         "XCertificate"
       ]
     ],
+    "quote": [
+      "XCertificate"
+    ],
+    "typings": [],
     "name": "XCertificateCreator",
     "imports": [],
     "namespace": "com.sun.star.xml.crypto",
@@ -45,7 +49,18 @@
             "Adds a certificate to the certificate database with the trust provided by the trust string."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aDerCertificate",
+              "typing.List[byte]",
+              "in"
+            ],
+            [
+              "aTrustString",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "createDERCertificateWithPrivateKey",
@@ -56,7 +71,18 @@
           "raises": [
             "com.sun.star.uno.SecurityException"
           ],
-          "args": []
+          "args": [
+            [
+              "aDerCertificate",
+              "typing.List[byte]",
+              "in"
+            ],
+            [
+              "aPrivateKey",
+              "typing.List[byte]",
+              "in"
+            ]
+          ]
         }
       ]
     }

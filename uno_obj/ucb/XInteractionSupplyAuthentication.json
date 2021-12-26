@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:50:39+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:44+00:00",
   "name": "XInteractionSupplyAuthentication",
   "type": "interface",
   "namespace": "com.sun.star.ucb",
@@ -21,6 +21,12 @@
         ".remember_authentication",
         "RememberAuthentication"
       ]
+    ],
+    "quote": [
+      "typing.List[RememberAuthentication]"
+    ],
+    "typings": [
+      "typing.List[RememberAuthentication]"
     ],
     "name": "XInteractionSupplyAuthentication",
     "imports": [],
@@ -74,21 +80,33 @@
         },
         {
           "name": "getRememberAccountModes",
-          "returns": "'typing.List[RememberAuthentication]'",
+          "returns": "typing.List[RememberAuthentication]",
           "desc": [
             "Specifies the available modes of how long to remember the account."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "Default",
+              "RememberAuthentication",
+              "out"
+            ]
+          ]
         },
         {
           "name": "getRememberPasswordModes",
-          "returns": "'typing.List[RememberAuthentication]'",
+          "returns": "typing.List[RememberAuthentication]",
           "desc": [
             "Specifies the available modes of how long to remember the password."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "Default",
+              "RememberAuthentication",
+              "out"
+            ]
+          ]
         },
         {
           "name": "setAccount",
@@ -99,7 +117,13 @@
             "This method should be called before com.sun.star.task.XInteractionContinuation.select(), and should only be called if XInteractionSupplyAuthentication.canSetAccount() returned TRUE."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "Account",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "setPassword",
@@ -110,7 +134,13 @@
             "This method should be called before com.sun.star.task.XInteractionContinuation.select(), and should only be called if XInteractionSupplyAuthentication.canSetPassword() returned TRUE."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "Password",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "setRealm",
@@ -121,7 +151,13 @@
             "This method should be called before com.sun.star.task.XInteractionContinuation.select(), and should only be called if XInteractionSupplyAuthentication.canSetRealm() returned TRUE."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "Realm",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "setRememberAccount",
@@ -132,7 +168,13 @@
             "This method should be called before com.sun.star.task.XInteractionContinuation.select(), and should only be called if XInteractionSupplyAuthentication.setAccount() is also called."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "Remember",
+              "RememberAuthentication",
+              "in"
+            ]
+          ]
         },
         {
           "name": "setRememberPassword",
@@ -143,7 +185,13 @@
             "This method should be called before com.sun.star.task.XInteractionContinuation.select(), and should only be called if XInteractionSupplyAuthentication.setPassword() is also called."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "Remember",
+              "RememberAuthentication",
+              "in"
+            ]
+          ]
         },
         {
           "name": "setUserName",
@@ -154,7 +202,13 @@
             "This method should be called before com.sun.star.task.XInteractionContinuation.select(), and should only be called if XInteractionSupplyAuthentication.canSetUserName() returned TRUE."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "UserName",
+              "str",
+              "in"
+            ]
+          ]
         }
       ]
     }

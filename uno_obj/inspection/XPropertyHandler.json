@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:46:37+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:21+00:00",
   "name": "XPropertyHandler",
   "type": "interface",
   "namespace": "com.sun.star.inspection",
@@ -18,17 +18,28 @@
     ],
     "from_imports_typing": [
       [
-        "..beans.property",
-        "Property"
-      ],
-      [
         "..beans.property_state",
         "PropertyState"
+      ],
+      [
+        "..beans.property",
+        "Property"
       ],
       [
         ".interactive_selection_result",
         "InteractiveSelectionResult"
       ]
+    ],
+    "quote": [
+      "PropertyState",
+      "InteractiveSelectionResult",
+      "object",
+      "typing.List[Property]",
+      "typing.List[str]"
+    ],
+    "typings": [
+      "typing.List[Property]",
+      "typing.List[str]"
     ],
     "name": "XPropertyHandler",
     "imports": [],
@@ -59,7 +70,33 @@
           "raises": [
             "com.sun.star.lang.NullPointerException"
           ],
-          "args": []
+          "args": [
+            [
+              "ActuatingPropertyName",
+              "str",
+              "in"
+            ],
+            [
+              "NewValue",
+              "object",
+              "in"
+            ],
+            [
+              "OldValue",
+              "object",
+              "in"
+            ],
+            [
+              "InspectorUI",
+              "object",
+              "in"
+            ],
+            [
+              "FirstTimeInit",
+              "bool",
+              "in"
+            ]
+          ]
         },
         {
           "name": "addPropertyChangeListener",
@@ -74,7 +111,13 @@
           "raises": [
             "com.sun.star.lang.NullPointerException"
           ],
-          "args": []
+          "args": [
+            [
+              "Listener",
+              "XPropertyChangeListener",
+              "in"
+            ]
+          ]
         },
         {
           "name": "convertToControlValue",
@@ -93,7 +136,23 @@
           "raises": [
             "com.sun.star.beans.UnknownPropertyException"
           ],
-          "args": []
+          "args": [
+            [
+              "PropertyName",
+              "str",
+              "in"
+            ],
+            [
+              "PropertyValue",
+              "object",
+              "in"
+            ],
+            [
+              "ControlValueType",
+              "object",
+              "in"
+            ]
+          ]
         },
         {
           "name": "convertToPropertyValue",
@@ -108,7 +167,18 @@
           "raises": [
             "com.sun.star.beans.UnknownPropertyException"
           ],
-          "args": []
+          "args": [
+            [
+              "PropertyName",
+              "str",
+              "in"
+            ],
+            [
+              "ControlValue",
+              "object",
+              "in"
+            ]
+          ]
         },
         {
           "name": "describePropertyLine",
@@ -119,7 +189,18 @@
           "raises": [
             "com.sun.star.beans.UnknownPropertyException,"
           ],
-          "args": []
+          "args": [
+            [
+              "PropertyName",
+              "str",
+              "in"
+            ],
+            [
+              "ControlFactory",
+              "object",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getActuatingProperties",
@@ -147,7 +228,13 @@
           "raises": [
             "com.sun.star.beans.UnknownPropertyException"
           ],
-          "args": []
+          "args": [
+            [
+              "PropertyName",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getPropertyValue",
@@ -158,7 +245,13 @@
           "raises": [
             "com.sun.star.beans.UnknownPropertyException"
           ],
-          "args": []
+          "args": [
+            [
+              "PropertyName",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getSupersededProperties",
@@ -185,7 +278,7 @@
         },
         {
           "name": "getSupportedProperties",
-          "returns": "'typing.List[Property]'",
+          "returns": "typing.List[Property]",
           "desc": [
             "returns the properties which the handler can handle",
             "",
@@ -205,7 +298,13 @@
           "raises": [
             "com.sun.star.lang.NullPointerException"
           ],
-          "args": []
+          "args": [
+            [
+              "Component",
+              "XInterface",
+              "in"
+            ]
+          ]
         },
         {
           "name": "isComposable",
@@ -218,7 +317,13 @@
           "raises": [
             "com.sun.star.beans.UnknownPropertyException"
           ],
-          "args": []
+          "args": [
+            [
+              "PropertyName",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "onInteractivePropertySelection",
@@ -241,7 +346,28 @@
           "raises": [
             "com.sun.star.beans.UnknownPropertyException,"
           ],
-          "args": []
+          "args": [
+            [
+              "PropertyName",
+              "str",
+              "in"
+            ],
+            [
+              "Primary",
+              "bool",
+              "in"
+            ],
+            [
+              "outData",
+              "object",
+              "out"
+            ],
+            [
+              "InspectorUI",
+              "object",
+              "in"
+            ]
+          ]
         },
         {
           "name": "removePropertyChangeListener",
@@ -250,7 +376,13 @@
             "revokes a listener for notification about property value changes"
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "Listener",
+              "XPropertyChangeListener",
+              "in"
+            ]
+          ]
         },
         {
           "name": "setPropertyValue",
@@ -261,7 +393,18 @@
           "raises": [
             "com.sun.star.beans.UnknownPropertyException,"
           ],
-          "args": []
+          "args": [
+            [
+              "PropertyName",
+              "str",
+              "in"
+            ],
+            [
+              "Value",
+              "object",
+              "in"
+            ]
+          ]
         },
         {
           "name": "suspend",
@@ -276,7 +419,13 @@
             "If suspension is not to be vetoed, then all non-modal UI components opened by the handler should have been closed when it returns from the suspend() call."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "Suspend",
+              "bool",
+              "in"
+            ]
+          ]
         }
       ]
     }

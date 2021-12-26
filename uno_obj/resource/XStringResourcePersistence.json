@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:49:22+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:42+00:00",
   "name": "XStringResourcePersistence",
   "type": "interface",
   "namespace": "com.sun.star.resource",
@@ -22,6 +22,12 @@
         "byte"
       ]
     ],
+    "quote": [
+      "typing.List[byte]"
+    ],
+    "typings": [
+      "typing.List[byte]"
+    ],
     "name": "XStringResourcePersistence",
     "imports": [],
     "namespace": "com.sun.star.resource",
@@ -36,7 +42,7 @@
       "methods": [
         {
           "name": "exportBinary",
-          "returns": "'typing.List[byte]'",
+          "returns": "typing.List[byte]",
           "desc": [
             "Returns a sequence of byte representing the complete string resource in a binary format.",
             "",
@@ -64,7 +70,13 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException"
           ],
-          "args": []
+          "args": [
+            [
+              "Data",
+              "typing.List[byte]",
+              "in"
+            ]
+          ]
         },
         {
           "name": "isModified",
@@ -84,7 +96,13 @@
             "This interface method can be used to overwrite the comment used during initialization of the services StringResourceWithLocation or StringResourceWithStorage"
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "Comment",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "store",
@@ -124,7 +142,23 @@
           "raises": [
             "com.sun.star.uno.Exception"
           ],
-          "args": []
+          "args": [
+            [
+              "Storage",
+              "XStorage",
+              "in"
+            ],
+            [
+              "BaseName",
+              "str",
+              "in"
+            ],
+            [
+              "Comment",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "storeToURL",
@@ -139,7 +173,28 @@
           "raises": [
             "com.sun.star.uno.Exception"
           ],
-          "args": []
+          "args": [
+            [
+              "URL",
+              "str",
+              "in"
+            ],
+            [
+              "BaseName",
+              "str",
+              "in"
+            ],
+            [
+              "Comment",
+              "str",
+              "in"
+            ],
+            [
+              "Handler",
+              "XInteractionHandler",
+              "in"
+            ]
+          ]
         }
       ]
     }

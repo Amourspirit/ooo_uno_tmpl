@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 19:15:58+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:05:00+00:00",
   "name": "XUpdateInformationProvider",
   "type": "interface",
   "namespace": "com.sun.star.deployment",
@@ -10,7 +10,12 @@
   },
   "writer_args": {},
   "data": {
-    "from_imports": [],
+    "from_imports": [
+      [
+        ".update_information_provider",
+        "UpdateInformationProvider"
+      ]
+    ],
     "from_imports_typing": [
       [
         "..xml.dom.x_element",
@@ -21,10 +26,19 @@
         "XEnumeration"
       ]
     ],
+    "quote": [
+      "typing.List[XElement]",
+      "XEnumeration"
+    ],
+    "typings": [
+      "typing.List[XElement]"
+    ],
     "name": "XUpdateInformationProvider",
     "imports": [],
     "namespace": "com.sun.star.deployment",
-    "extends": [],
+    "extends": [
+      "com.sun.star.deployment.UpdateInformationProvider"
+    ],
     "desc": [
       "Objects implementing this interface provide access to the xml root of one or more update information files for a given set of URLs.",
       "",
@@ -46,7 +60,7 @@
         },
         {
           "name": "getUpdateInformation",
-          "returns": "'typing.List[XElement]'",
+          "returns": "typing.List[XElement]",
           "desc": [
             "get update information for a specific extension or all available information from a repository."
           ],

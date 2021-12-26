@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:52:44+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:54+00:00",
   "name": "XTextLayout",
   "type": "interface",
   "namespace": "com.sun.star.rendering",
@@ -25,6 +25,18 @@
         "..geometry.real_rectangle2_d",
         "RealRectangle2D"
       ]
+    ],
+    "quote": [
+      "typing.List[float]",
+      "typing.List[XPolyPolygon2D]",
+      "typing.List[RealRectangle2D]",
+      "RealRectangle2D",
+      "object"
+    ],
+    "typings": [
+      "typing.List[float]",
+      "typing.List[XPolyPolygon2D]",
+      "typing.List[RealRectangle2D]"
     ],
     "name": "XTextLayout",
     "imports": [],
@@ -57,7 +69,13 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException"
           ],
-          "args": []
+          "args": [
+            [
+              "aAdvancements",
+              "typing.List[float]",
+              "in"
+            ]
+          ]
         },
         {
           "name": "combinedJustify",
@@ -70,7 +88,18 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException"
           ],
-          "args": []
+          "args": [
+            [
+              "aNextLayouts",
+              "typing.List[XTextLayout]",
+              "in"
+            ],
+            [
+              "nSize",
+              "float",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getBaselineOffset",
@@ -94,7 +123,18 @@
           "raises": [
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
-          "args": []
+          "args": [
+            [
+              "nInsertionIndex",
+              "int",
+              "in"
+            ],
+            [
+              "bExcludeLigatures",
+              "bool",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getFont",
@@ -127,7 +167,23 @@
           "raises": [
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
-          "args": []
+          "args": [
+            [
+              "nStartIndex",
+              "int",
+              "in"
+            ],
+            [
+              "nCaretAdvancement",
+              "int",
+              "in"
+            ],
+            [
+              "bExcludeLigatures",
+              "bool",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getText",
@@ -147,7 +203,13 @@
             "This method determines the index of the character hit at the specified position (in font coordinate space)."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aHitPoint",
+              "RealPoint2D",
+              "in"
+            ]
+          ]
         },
         {
           "name": "justify",
@@ -160,11 +222,17 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException"
           ],
-          "args": []
+          "args": [
+            [
+              "nSize",
+              "float",
+              "in"
+            ]
+          ]
         },
         {
           "name": "queryInkMeasures",
-          "returns": "'typing.List[RealRectangle2D]'",
+          "returns": "typing.List[RealRectangle2D]",
           "desc": [
             "Query the ink bounding boxes for every glyph in the layouted text.",
             "",
@@ -199,11 +267,22 @@
           "raises": [
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
-          "args": []
+          "args": [
+            [
+              "nStartIndex",
+              "int",
+              "in"
+            ],
+            [
+              "nEndIndex",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "queryMeasures",
-          "returns": "'typing.List[RealRectangle2D]'",
+          "returns": "typing.List[RealRectangle2D]",
           "desc": [
             "Query the logical bounding boxes of every character in the given text string.",
             "",
@@ -225,7 +304,7 @@
         },
         {
           "name": "queryTextShapes",
-          "returns": "'typing.List[XPolyPolygon2D]'",
+          "returns": "typing.List[XPolyPolygon2D]",
           "desc": [
             "Extract the polygonal shapes of the layouted text.",
             "",
@@ -245,7 +324,18 @@
           "raises": [
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
-          "args": []
+          "args": [
+            [
+              "nStartIndex",
+              "int",
+              "in"
+            ],
+            [
+              "nEndIndex",
+              "int",
+              "in"
+            ]
+          ]
         }
       ]
     }

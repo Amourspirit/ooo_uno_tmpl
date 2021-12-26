@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:47:33+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:32+00:00",
   "name": "XCellRangesAccess",
   "type": "interface",
   "namespace": "com.sun.star.sheet",
@@ -18,13 +18,21 @@
     ],
     "from_imports_typing": [
       [
-        "..table.x_cell",
-        "XCell"
-      ],
-      [
         "..table.x_cell_range",
         "XCellRange"
+      ],
+      [
+        "..table.x_cell",
+        "XCell"
       ]
+    ],
+    "quote": [
+      "XCellRange",
+      "XCell",
+      "typing.List[XCellRange]"
+    ],
+    "typings": [
+      "typing.List[XCellRange]"
     ],
     "name": "XCellRangesAccess",
     "imports": [],
@@ -47,7 +55,23 @@
           "raises": [
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
-          "args": []
+          "args": [
+            [
+              "nColumn",
+              "int",
+              "in"
+            ],
+            [
+              "nRow",
+              "int",
+              "in"
+            ],
+            [
+              "nSheet",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getCellRangeByPosition",
@@ -58,11 +82,37 @@
           "raises": [
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
-          "args": []
+          "args": [
+            [
+              "nLeft",
+              "int",
+              "in"
+            ],
+            [
+              "nTop",
+              "int",
+              "in"
+            ],
+            [
+              "nRight",
+              "int",
+              "in"
+            ],
+            [
+              "nBottom",
+              "int",
+              "in"
+            ],
+            [
+              "nSheet",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getCellRangesByName",
-          "returns": "'typing.List[XCellRange]'",
+          "returns": "typing.List[XCellRange]",
           "desc": [
             "Returns a sub-range of cells within the range.",
             "",
@@ -71,7 +121,13 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException"
           ],
-          "args": []
+          "args": [
+            [
+              "aRange",
+              "str",
+              "in"
+            ]
+          ]
         }
       ]
     }

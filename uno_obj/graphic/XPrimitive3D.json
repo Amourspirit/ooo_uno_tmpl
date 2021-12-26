@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:52:32+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:10+00:00",
   "name": "XPrimitive3D",
   "type": "interface",
   "namespace": "com.sun.star.graphic",
@@ -18,13 +18,20 @@
     ],
     "from_imports_typing": [
       [
-        "..geometry.real_rectangle3_d",
-        "RealRectangle3D"
-      ],
-      [
         ".x_primitive3_d",
         "XPrimitive3D"
+      ],
+      [
+        "..geometry.real_rectangle3_d",
+        "RealRectangle3D"
       ]
+    ],
+    "quote": [
+      "typing.List[XPrimitive3D]",
+      "RealRectangle3D"
+    ],
+    "typings": [
+      "typing.List[XPrimitive3D]"
     ],
     "name": "XPrimitive3D",
     "imports": [],
@@ -42,7 +49,7 @@
       "methods": [
         {
           "name": "getDecomposition",
-          "returns": "'typing.List[XPrimitive3D]'",
+          "returns": "typing.List[XPrimitive3D]",
           "desc": [
             "Retrieve decomposed list of simpler primitives.",
             "",
@@ -51,7 +58,13 @@
             "Defines the point in time for which the geometry is defined. This may lead to varied results for animated objects. This value is defined in the range [0.0 .. n[, negative values are not allowed. If not given, a value of 0.0 is implied."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aViewParameters",
+              "typing.List[PropertyValue]",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getRange",
@@ -62,7 +75,13 @@
             "This method calculates the actual bound rect of the area in world coordinates. Note that for view-dependent primitives, the necessary pixel adjustments are taken into account. For that reason the ViewParameters need to be given."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aViewParameters",
+              "typing.List[PropertyValue]",
+              "in"
+            ]
+          ]
         }
       ]
     }

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:48:58+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:12+00:00",
   "name": "XChartTypeTemplate",
   "type": "interface",
   "namespace": "com.sun.star.chart2",
@@ -17,6 +17,10 @@
       ]
     ],
     "from_imports_typing": [],
+    "quote": [
+      "object"
+    ],
+    "typings": [],
     "name": "XChartTypeTemplate",
     "imports": [],
     "namespace": "com.sun.star.chart2",
@@ -36,7 +40,28 @@
             "symbols) to all series in the sequence aSeries."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "xSeries",
+              "object",
+              "in"
+            ],
+            [
+              "nChartTypeGroupIndex",
+              "int",
+              "in"
+            ],
+            [
+              "nSeriesIndex",
+              "int",
+              "in"
+            ],
+            [
+              "nSeriesCount",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "changeDiagram",
@@ -47,7 +72,13 @@
             "Note, that if matchesTemplate() returns TRUE for the given XDiagram, the latter should not be changed."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "xDiagram",
+              "object",
+              "in"
+            ]
+          ]
         },
         {
           "name": "changeDiagramData",
@@ -62,7 +93,23 @@
             "For standard parameters that may be used, see the service StandardDiagramCreationParameters."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "xDiagram",
+              "object",
+              "in"
+            ],
+            [
+              "xDataSource",
+              "XDataSource",
+              "in"
+            ],
+            [
+              "aArguments",
+              "typing.List[PropertyValue]",
+              "in"
+            ]
+          ]
         },
         {
           "name": "createDiagramByDataSource",
@@ -73,7 +120,18 @@
             "For standard parameters that may be used, see the service StandardDiagramCreationParameters."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "xDataSource",
+              "XDataSource",
+              "in"
+            ],
+            [
+              "aArguments",
+              "typing.List[PropertyValue]",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getChartTypeForNewSeries",
@@ -82,7 +140,13 @@
             "Provides a chart type object that can be used to create new series."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aFormerlyUsedChartTypes",
+              "typing.List[XChartType]",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getDataInterpreter",
@@ -102,7 +166,18 @@
             "For analysis all parts of the diagram may be used, e.g. also properties set at the data series (like symbols)./p>"
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "xDiagram",
+              "object",
+              "in"
+            ],
+            [
+              "bAdaptProperties",
+              "bool",
+              "in"
+            ]
+          ]
         },
         {
           "name": "resetStyles",
@@ -115,7 +190,13 @@
             "If for example the template changed the com.sun.star.drawing.LineStyle of all series to NONE, this method should reset all series with LineStyle NONE back to SOLID. If a series has a style DASH, it must not be changed."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "xDiagram",
+              "object",
+              "in"
+            ]
+          ]
         },
         {
           "name": "supportsCategories",

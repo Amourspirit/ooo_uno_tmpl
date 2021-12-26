@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:50:33+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:43+00:00",
   "name": "XCommandInfo",
   "type": "interface",
   "namespace": "com.sun.star.ucb",
@@ -21,6 +21,13 @@
         ".command_info",
         "CommandInfo"
       ]
+    ],
+    "quote": [
+      "CommandInfo",
+      "typing.List[CommandInfo]"
+    ],
+    "typings": [
+      "typing.List[CommandInfo]"
     ],
     "name": "XCommandInfo",
     "imports": [],
@@ -43,7 +50,13 @@
           "raises": [
             "com.sun.star.ucb.UnsupportedCommandException"
           ],
-          "args": []
+          "args": [
+            [
+              "Handle",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getCommandInfoByName",
@@ -54,11 +67,17 @@
           "raises": [
             "com.sun.star.ucb.UnsupportedCommandException"
           ],
-          "args": []
+          "args": [
+            [
+              "Name",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getCommands",
-          "returns": "'typing.List[CommandInfo]'",
+          "returns": "typing.List[CommandInfo]",
           "desc": [
             "obtains information for all supported commands."
           ],
@@ -72,7 +91,13 @@
             "checks whether a specific command is supported."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "Handle",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "hasCommandByName",
@@ -81,7 +106,13 @@
             "checks whether a command specific is supported."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "Name",
+              "str",
+              "in"
+            ]
+          ]
         }
       ]
     }

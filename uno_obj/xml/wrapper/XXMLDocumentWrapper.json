@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:46:56+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:27+00:00",
   "name": "XXMLDocumentWrapper",
   "type": "interface",
   "namespace": "com.sun.star.xml.wrapper",
@@ -17,6 +17,10 @@
       ]
     ],
     "from_imports_typing": [],
+    "quote": [
+      "object"
+    ],
+    "typings": [],
     "name": "XXMLDocumentWrapper",
     "imports": [],
     "namespace": "com.sun.star.xml.wrapper",
@@ -42,7 +46,23 @@
             "Clears all useless element in a branch of the DOM tree along the tree order."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "node",
+              "object",
+              "in"
+            ],
+            [
+              "reservedDescendants",
+              "typing.List[XXMLElementWrapper]",
+              "in"
+            ],
+            [
+              "stopAtNode",
+              "object",
+              "in"
+            ]
+          ]
         },
         {
           "name": "collapse",
@@ -53,7 +73,13 @@
             "Each element in the ancestor path of the node will be checked, if this element is empty, then deletes it."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "node",
+              "object",
+              "in"
+            ]
+          ]
         },
         {
           "name": "generateSAXEvents",
@@ -64,7 +90,28 @@
           "raises": [
             "com.sun.star.xml.sax.SAXException"
           ],
-          "args": []
+          "args": [
+            [
+              "handler",
+              "XDocumentHandler",
+              "in"
+            ],
+            [
+              "saxEventKeeperHandler",
+              "XDocumentHandler",
+              "in"
+            ],
+            [
+              "startNode",
+              "object",
+              "in"
+            ],
+            [
+              "endNode",
+              "object",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getCurrentElement",
@@ -82,7 +129,13 @@
             "Gets the name of the element."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "node",
+              "object",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getTree",
@@ -93,7 +146,13 @@
           "raises": [
             "com.sun.star.xml.sax.SAXException"
           ],
-          "args": []
+          "args": [
+            [
+              "handler",
+              "XDocumentHandler",
+              "in"
+            ]
+          ]
         },
         {
           "name": "isCurrent",
@@ -102,7 +161,13 @@
             "Checks whether an element is the current element."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "node",
+              "object",
+              "in"
+            ]
+          ]
         },
         {
           "name": "isCurrentElementEmpty",
@@ -120,7 +185,13 @@
             "Rebuild the ID attribute in the branch starting from the particular element."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "node",
+              "object",
+              "in"
+            ]
+          ]
         },
         {
           "name": "removeCurrentElement",
@@ -142,7 +213,13 @@
             "When the current element is replaced outside of this interface, then uses this method can update the current element pointer."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "element",
+              "object",
+              "in"
+            ]
+          ]
         }
       ]
     }

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:45:34+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:22+00:00",
   "name": "XEngine",
   "type": "interface",
   "namespace": "com.sun.star.script",
@@ -16,12 +16,11 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [
-      [
-        "..uno.x_interface",
-        "XInterface"
-      ]
+    "from_imports_typing": [],
+    "quote": [
+      "XInterface"
     ],
+    "typings": [],
     "name": "XEngine",
     "imports": [],
     "namespace": "com.sun.star.script",
@@ -47,7 +46,13 @@
             "It is suggested to allow multiple registration of the same listener, thus for each time a listener is added, it has to be removed."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "Listener",
+              "XEngineListener",
+              "in"
+            ]
+          ]
         },
         {
           "name": "cancel",
@@ -67,7 +72,23 @@
             "compiles a script module in the scope of the root object."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "ModuleName",
+              "str",
+              "in"
+            ],
+            [
+              "Script",
+              "str",
+              "in"
+            ],
+            [
+              "CreateDebugInfo",
+              "bool",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getRoot",
@@ -87,7 +108,13 @@
             "It is suggested to allow multiple registration of the same listener, thus for each time a listener is added, it has to be removed."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "Listener",
+              "XEngineListener",
+              "in"
+            ]
+          ]
         },
         {
           "name": "run",
@@ -98,7 +125,23 @@
             "The arguments given in aArgs can be ignored by the engine. The Script is executed synchronously."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aScript",
+              "str",
+              "in"
+            ],
+            [
+              "xThis",
+              "XInterface",
+              "in"
+            ],
+            [
+              "aArgs",
+              "typing.List[object]",
+              "in"
+            ]
+          ]
         },
         {
           "name": "runAsync",
@@ -109,7 +152,28 @@
             "The arguments given in aArgs can be ignored by the engine. The script is executed asynchronously."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "acript",
+              "str",
+              "in"
+            ],
+            [
+              "xThis",
+              "XInterface",
+              "in"
+            ],
+            [
+              "args",
+              "typing.List[object]",
+              "in"
+            ],
+            [
+              "xCallback",
+              "XEngineListener",
+              "in"
+            ]
+          ]
         },
         {
           "name": "setLibraryAccess",
@@ -118,7 +182,13 @@
             "sets an access object to get external functions."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "Library",
+              "XLibraryAccess",
+              "in"
+            ]
+          ]
         },
         {
           "name": "setRoot",
@@ -129,7 +199,13 @@
             "If the root object implements the XInvocation interface, then the engine uses this interface to set/get properties and call methods."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "xRoot",
+              "XInterface",
+              "in"
+            ]
+          ]
         }
       ]
     }

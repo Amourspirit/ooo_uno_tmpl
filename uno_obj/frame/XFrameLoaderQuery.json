@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:51:52+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:48+00:00",
   "name": "XFrameLoaderQuery",
   "type": "interface",
   "namespace": "com.sun.star.frame",
@@ -21,6 +21,14 @@
         "..beans.property_value",
         "PropertyValue"
       ]
+    ],
+    "quote": [
+      "typing.List[PropertyValue]",
+      "typing.List[str]"
+    ],
+    "typings": [
+      "typing.List[PropertyValue]",
+      "typing.List[str]"
     ],
     "name": "XFrameLoaderQuery",
     "imports": [],
@@ -49,12 +57,18 @@
         },
         {
           "name": "getLoaderProperties",
-          "returns": "'typing.List[PropertyValue]'",
+          "returns": "typing.List[PropertyValue]",
           "desc": [
             "use member com.sun.star.container.XNameAccess.getByName() provided by service FrameLoaderFactory instead of this"
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "sFilterName",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "searchFilter",
@@ -63,7 +77,18 @@
             "use member com.sun.star.container.XContainerQuery provided by service FrameLoaderFactory instead of this"
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "sURL",
+              "str",
+              "in"
+            ],
+            [
+              "seqArguments",
+              "typing.List[PropertyValue]",
+              "in"
+            ]
+          ]
         }
       ]
     }

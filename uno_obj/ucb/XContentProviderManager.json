@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:50:36+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:43+00:00",
   "name": "XContentProviderManager",
   "type": "interface",
   "namespace": "com.sun.star.ucb",
@@ -26,6 +26,13 @@
         "ContentProviderInfo"
       ]
     ],
+    "quote": [
+      "XContentProvider",
+      "typing.List[ContentProviderInfo]"
+    ],
+    "typings": [
+      "typing.List[ContentProviderInfo]"
+    ],
     "name": "XContentProviderManager",
     "imports": [],
     "namespace": "com.sun.star.ucb",
@@ -45,7 +52,18 @@
             "deregisters a content provider."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "Provider",
+              "XContentProvider",
+              "in"
+            ],
+            [
+              "Scheme",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "queryContentProvider",
@@ -54,11 +72,17 @@
             "returns the currently active content provider for a content identifier."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "Identifier",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "queryContentProviders",
-          "returns": "'typing.List[ContentProviderInfo]'",
+          "returns": "typing.List[ContentProviderInfo]",
           "desc": [
             "returns a list of information on all registered content providers."
           ],
@@ -82,7 +106,23 @@
           "raises": [
             "com.sun.star.ucb.DuplicateProviderException"
           ],
-          "args": []
+          "args": [
+            [
+              "Provider",
+              "XContentProvider",
+              "in"
+            ],
+            [
+              "Scheme",
+              "str",
+              "in"
+            ],
+            [
+              "ReplaceExisting",
+              "bool",
+              "in"
+            ]
+          ]
         }
       ]
     }

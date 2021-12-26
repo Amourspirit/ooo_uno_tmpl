@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:51:54+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:48+00:00",
   "name": "XLayoutManager",
   "type": "interface",
   "namespace": "com.sun.star.frame",
@@ -22,21 +22,32 @@
         "Rectangle"
       ],
       [
-        "..ui.x_docking_area_acceptor",
-        "XDockingAreaAcceptor"
+        "..awt.size",
+        "Size"
       ],
       [
-        "..awt.point",
-        "Point"
+        "..ui.x_docking_area_acceptor",
+        "XDockingAreaAcceptor"
       ],
       [
         "..ui.xui_element",
         "XUIElement"
       ],
       [
-        "..awt.size",
-        "Size"
+        "..awt.point",
+        "Point"
       ]
+    ],
+    "quote": [
+      "Point",
+      "typing.List[XUIElement]",
+      "XDockingAreaAcceptor",
+      "Size",
+      "XUIElement",
+      "Rectangle"
+    ],
+    "typings": [
+      "typing.List[XUIElement]"
     ],
     "name": "XLayoutManager",
     "imports": [],
@@ -69,7 +80,13 @@
             "A layout manager needs a com.sun.star.frame.XFrame to be able to work. Without a it no user interface elements can be created."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "Frame",
+              "XFrame",
+              "in"
+            ]
+          ]
         },
         {
           "name": "createElement",
@@ -78,7 +95,13 @@
             "creates a new user interface element."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "ResourceURL",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "destroyElement",
@@ -87,7 +110,13 @@
             "destroys a user interface element."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "ResourceURL",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "doLayout",
@@ -105,7 +134,13 @@
             "docks all windows which are member of the provided user interface element type."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "nElementType",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "dockWindow",
@@ -114,7 +149,23 @@
             "docks a window based user interface element to a specified docking area."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "ResourceURL",
+              "str",
+              "in"
+            ],
+            [
+              "DockingArea",
+              "DockingArea",
+              "in"
+            ],
+            [
+              "Pos",
+              "Point",
+              "in"
+            ]
+          ]
         },
         {
           "name": "floatWindow",
@@ -123,7 +174,13 @@
             "forces a window based user interface element to float."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "ResourceURL",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getCurrentDockingArea",
@@ -154,7 +211,13 @@
             "The layout manager instance is owner of the returned user interface element. That means that the life time of the user interface element is controlled by the layout manager. It can be disposed at every time!"
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "ResourceURL",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getElementPos",
@@ -163,7 +226,13 @@
             "retrieves the current pixel position of a window based user interface element."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "ResourceURL",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getElementSize",
@@ -172,11 +241,17 @@
             "retrieves the current size of a window based user interface element."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "ResourceURL",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getElements",
-          "returns": "'typing.List[XUIElement]'",
+          "returns": "typing.List[XUIElement]",
           "desc": [
             "retrieves all user interface elements which are currently instantiated.",
             "",
@@ -192,7 +267,13 @@
             "hides a user interface element."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "ResourceURL",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "isElementDocked",
@@ -201,7 +282,13 @@
             "retrieves the current docking state of a window based user interface element."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "ResourceURL",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "isElementFloating",
@@ -210,7 +297,13 @@
             "retrieves the current floating state of a window based user interface element."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "ResourceURL",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "isElementLocked",
@@ -219,7 +312,13 @@
             "retrieves the current lock state of a window based user interface element."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "ResourceURL",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "isElementVisible",
@@ -228,7 +327,13 @@
             "retrieves the current visibility state of a window based user interface element."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "ResourceURL",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "isVisible",
@@ -259,7 +364,13 @@
             "locks a window based user interface element if it's in a docked state."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "ResourceURL",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "requestElement",
@@ -270,7 +381,13 @@
             "If a user interface element should forced to the visible state XLayoutManager.showElement() should be used. This function can be used for context dependent elements which should respect the current visibility state."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "ResourceURL",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "reset",
@@ -292,7 +409,13 @@
             "A docking area acceptor decides if the layout manager can use requested border space for docking windows. If the acceptor denies the requested space the layout manager automatically set all docked windows into floating state and will not use this space for docking.\n After setting a docking area acceptor the object is owned by the layout manager. It is not allowed to dispose this object, it will be destroyed on reference count!"
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "xDockingAreaAcceptor",
+              "XDockingAreaAcceptor",
+              "in"
+            ]
+          ]
         },
         {
           "name": "setElementPos",
@@ -303,7 +426,18 @@
             "It is up to the layout manager to decide if the user interface element can be moved. The new position can be retrieved by calling getElementPos()."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "ResourceURL",
+              "str",
+              "in"
+            ],
+            [
+              "Pos",
+              "Point",
+              "in"
+            ]
+          ]
         },
         {
           "name": "setElementPosSize",
@@ -314,7 +448,23 @@
             "It is up to the layout manager to decide if the user interface element can be moved and resized. The new position and size can be retrieved by calling getElementPos() and getElementSize()."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "ResourceURL",
+              "str",
+              "in"
+            ],
+            [
+              "Pos",
+              "Point",
+              "in"
+            ],
+            [
+              "Size",
+              "Size",
+              "in"
+            ]
+          ]
         },
         {
           "name": "setElementSize",
@@ -325,7 +475,18 @@
             "It is up to the layout manager to decide if the user interface element can be resized. The new size can be retrieved by calling getElementSize()."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "ResourceURL",
+              "str",
+              "in"
+            ],
+            [
+              "Size",
+              "Size",
+              "in"
+            ]
+          ]
         },
         {
           "name": "setVisible",
@@ -336,7 +497,13 @@
             "A layout manager can be set to invisible state to force it to hide all of its user interface elements. If another component wants to use the window for its own user interface elements it can use this function. This function is normally used to implement inplace editing."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "Visible",
+              "bool",
+              "in"
+            ]
+          ]
         },
         {
           "name": "showElement",
@@ -345,7 +512,13 @@
             "shows a user interface element."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "ResourceURL",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "unlock",
@@ -365,7 +538,13 @@
             "unlocks a window based user interface element if it's in a docked state."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "ResourceURL",
+              "str",
+              "in"
+            ]
+          ]
         }
       ]
     }

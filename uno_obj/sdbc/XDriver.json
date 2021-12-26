@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:48:15+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:49+00:00",
   "name": "XDriver",
   "type": "interface",
   "namespace": "com.sun.star.sdbc",
@@ -21,6 +21,13 @@
         ".driver_property_info",
         "DriverPropertyInfo"
       ]
+    ],
+    "quote": [
+      "typing.List[DriverPropertyInfo]",
+      "object"
+    ],
+    "typings": [
+      "typing.List[DriverPropertyInfo]"
     ],
     "name": "XDriver",
     "imports": [],
@@ -51,7 +58,13 @@
           "raises": [
             "SQLException"
           ],
-          "args": []
+          "args": [
+            [
+              "url",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "connect",
@@ -68,7 +81,18 @@
           "raises": [
             "SQLException"
           ],
-          "args": []
+          "args": [
+            [
+              "url",
+              "str",
+              "in"
+            ],
+            [
+              "info",
+              "typing.List[PropertyValue]",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getMajorVersion",
@@ -94,7 +118,7 @@
         },
         {
           "name": "getPropertyInfo",
-          "returns": "'typing.List[DriverPropertyInfo]'",
+          "returns": "typing.List[DriverPropertyInfo]",
           "desc": [
             "gets information about the possible properties for this driver.",
             "",
@@ -103,7 +127,18 @@
           "raises": [
             "SQLException"
           ],
-          "args": []
+          "args": [
+            [
+              "url",
+              "str",
+              "in"
+            ],
+            [
+              "info",
+              "typing.List[PropertyValue]",
+              "in"
+            ]
+          ]
         }
       ]
     }

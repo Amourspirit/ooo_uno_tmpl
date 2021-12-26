@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:52:42+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:53+00:00",
   "name": "XLinePolyPolygon2D",
   "type": "interface",
   "namespace": "com.sun.star.rendering",
@@ -21,6 +21,13 @@
         "..geometry.real_point2_d",
         "RealPoint2D"
       ]
+    ],
+    "quote": [
+      "typing.List[typing.List[RealPoint2D]]",
+      "RealPoint2D"
+    ],
+    "typings": [
+      "typing.List[typing.List[RealPoint2D]]"
     ],
     "name": "XLinePolyPolygon2D",
     "imports": [],
@@ -47,18 +54,50 @@
           "raises": [
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
-          "args": []
+          "args": [
+            [
+              "nPolygonIndex",
+              "int",
+              "in"
+            ],
+            [
+              "nPointIndex",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getPoints",
-          "returns": "'typing.List[typing.List[RealPoint2D]]'",
+          "returns": "typing.List[typing.List[RealPoint2D]]",
           "desc": [
             "Query subset of this poly-polygon, starting at the given polygon and the given point within that polygon, and containing the specified number of polygons and points in the last polygon."
           ],
           "raises": [
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
-          "args": []
+          "args": [
+            [
+              "nPolygonIndex",
+              "int",
+              "in"
+            ],
+            [
+              "nNumberOfPolygons",
+              "int",
+              "in"
+            ],
+            [
+              "nPointIndex",
+              "int",
+              "in"
+            ],
+            [
+              "nNumberOfPoints",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "setPoint",
@@ -71,7 +110,23 @@
           "raises": [
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
-          "args": []
+          "args": [
+            [
+              "point",
+              "RealPoint2D",
+              "in"
+            ],
+            [
+              "nPolygonIndex",
+              "int",
+              "in"
+            ],
+            [
+              "nPointIndex",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "setPoints",
@@ -84,7 +139,18 @@
           "raises": [
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
-          "args": []
+          "args": [
+            [
+              "points",
+              "typing.List[typing.List[RealPoint2D]]",
+              "in"
+            ],
+            [
+              "nPolygonIndex",
+              "int",
+              "in"
+            ]
+          ]
         }
       ]
     }

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:48:07+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:55+00:00",
   "name": "XImageManager",
   "type": "interface",
   "namespace": "com.sun.star.ui",
@@ -12,20 +12,20 @@
   "data": {
     "from_imports": [
       [
-        ".xui_configuration",
-        "XUIConfiguration"
-      ],
-      [
         "..lang.x_initialization",
         "XInitialization"
       ],
       [
-        ".xui_configuration_persistence",
-        "XUIConfigurationPersistence"
-      ],
-      [
         "..lang.x_component",
         "XComponent"
+      ],
+      [
+        ".xui_configuration",
+        "XUIConfiguration"
+      ],
+      [
+        ".xui_configuration_persistence",
+        "XUIConfigurationPersistence"
       ]
     ],
     "from_imports_typing": [
@@ -33,6 +33,14 @@
         "..graphic.x_graphic",
         "XGraphic"
       ]
+    ],
+    "quote": [
+      "typing.List[XGraphic]",
+      "typing.List[str]"
+    ],
+    "typings": [
+      "typing.List[XGraphic]",
+      "typing.List[str]"
     ],
     "name": "XImageManager",
     "imports": [],
@@ -58,18 +66,35 @@
             "retrieves the list of command URLs which have images associated."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "nImageType",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getImages",
-          "returns": "'typing.List[XGraphic]'",
+          "returns": "typing.List[XGraphic]",
           "desc": [
             "retrieves the associated images of command URLs."
           ],
           "raises": [
             "com.sun.star.lang.IllegalArgumentException"
           ],
-          "args": []
+          "args": [
+            [
+              "nImageType",
+              "int",
+              "in"
+            ],
+            [
+              "aCommandURLSequence",
+              "typing.List[str]",
+              "in"
+            ]
+          ]
         },
         {
           "name": "hasImage",
@@ -80,7 +105,18 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException"
           ],
-          "args": []
+          "args": [
+            [
+              "nImageType",
+              "int",
+              "in"
+            ],
+            [
+              "CommandURL",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "insertImages",
@@ -93,7 +129,23 @@
           "raises": [
             "com.sun.star.container.ElementExistException,"
           ],
-          "args": []
+          "args": [
+            [
+              "nImageType",
+              "int",
+              "in"
+            ],
+            [
+              "aCommandURLSequence",
+              "typing.List[str]",
+              "in"
+            ],
+            [
+              "aGraphicSequence",
+              "typing.List[XGraphic]",
+              "in"
+            ]
+          ]
         },
         {
           "name": "removeImages",
@@ -106,7 +158,18 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException,"
           ],
-          "args": []
+          "args": [
+            [
+              "nImageType",
+              "int",
+              "in"
+            ],
+            [
+              "CommandURLs",
+              "typing.List[str]",
+              "in"
+            ]
+          ]
         },
         {
           "name": "replaceImages",
@@ -119,7 +182,23 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException,"
           ],
-          "args": []
+          "args": [
+            [
+              "nImageType",
+              "int",
+              "in"
+            ],
+            [
+              "aCommandURLSequence",
+              "typing.List[str]",
+              "in"
+            ],
+            [
+              "aGraphicsSequence",
+              "typing.List[XGraphic]",
+              "in"
+            ]
+          ]
         },
         {
           "name": "reset",

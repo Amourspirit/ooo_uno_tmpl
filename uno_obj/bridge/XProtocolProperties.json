@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:45:27+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:42+00:00",
   "name": "XProtocolProperties",
   "type": "interface",
   "namespace": "com.sun.star.bridge",
@@ -21,6 +21,12 @@
         ".protocol_property",
         "ProtocolProperty"
       ]
+    ],
+    "quote": [
+      "typing.List[ProtocolProperty]"
+    ],
+    "typings": [
+      "typing.List[ProtocolProperty]"
     ],
     "name": "XProtocolProperties",
     "imports": [],
@@ -51,11 +57,17 @@
           "raises": [
             "com.sun.star.bridge.InvalidProtocolChangeException"
           ],
-          "args": []
+          "args": [
+            [
+              "newValues",
+              "typing.List[ProtocolProperty]",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getProperties",
-          "returns": "'typing.List[ProtocolProperty]'",
+          "returns": "typing.List[ProtocolProperty]",
           "desc": [
             "called to get a list of bridge internal properties.",
             "",
@@ -75,7 +87,13 @@
             "This method should always be called in the scope of the local bridge setting object, because the remote counter part may do such a call at the same time (typically at startup time)."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "nRandomNumber",
+              "int",
+              "in"
+            ]
+          ]
         }
       ]
     }

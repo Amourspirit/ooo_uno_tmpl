@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:52:43+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:53+00:00",
   "name": "XParametricPolyPolygon2D",
   "type": "interface",
   "namespace": "com.sun.star.rendering",
@@ -22,6 +22,13 @@
         "ColorComponent"
       ]
     ],
+    "quote": [
+      "typing.List[ColorComponent]",
+      "object"
+    ],
+    "typings": [
+      "typing.List[ColorComponent]"
+    ],
     "name": "XParametricPolyPolygon2D",
     "imports": [],
     "namespace": "com.sun.star.rendering",
@@ -38,14 +45,20 @@
       "methods": [
         {
           "name": "getColor",
-          "returns": "'typing.List[ColorComponent]'",
+          "returns": "typing.List[ColorComponent]",
           "desc": [
             "Query the color value for the polygonal area at the specified parameter value."
           ],
           "raises": [
             "com.sun.star.lang.IllegalArgumentException"
           ],
-          "args": []
+          "args": [
+            [
+              "t",
+              "float",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getColorSpace",
@@ -67,18 +80,30 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException"
           ],
-          "args": []
+          "args": [
+            [
+              "t",
+              "float",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getPointColor",
-          "returns": "'typing.List[ColorComponent]'",
+          "returns": "typing.List[ColorComponent]",
           "desc": [
             "Query the color for a dedicated point in the plane."
           ],
           "raises": [
             "com.sun.star.lang.IllegalArgumentException"
           ],
-          "args": []
+          "args": [
+            [
+              "point",
+              "RealPoint2D",
+              "in"
+            ]
+          ]
         }
       ]
     }

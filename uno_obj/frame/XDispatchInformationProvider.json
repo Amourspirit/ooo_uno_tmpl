@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:51:48+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:47+00:00",
   "name": "XDispatchInformationProvider",
   "type": "interface",
   "namespace": "com.sun.star.frame",
@@ -21,6 +21,14 @@
         ".dispatch_information",
         "DispatchInformation"
       ]
+    ],
+    "quote": [
+      "typing.List[DispatchInformation]",
+      "typing.List[int]"
+    ],
+    "typings": [
+      "typing.List[DispatchInformation]",
+      "typing.List[int]"
     ],
     "name": "XDispatchInformationProvider",
     "imports": [],
@@ -42,12 +50,18 @@
       "methods": [
         {
           "name": "getConfigurableDispatchInformation",
-          "returns": "'typing.List[DispatchInformation]'",
+          "returns": "typing.List[DispatchInformation]",
           "desc": [
             "returns additional information about supported commands of a given command group."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "CommandGroup",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getSupportedCommandGroups",

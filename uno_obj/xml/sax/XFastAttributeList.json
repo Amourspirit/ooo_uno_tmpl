@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:47:59+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:08+00:00",
   "name": "XFastAttributeList",
   "type": "interface",
   "namespace": "com.sun.star.xml.sax",
@@ -18,13 +18,21 @@
     ],
     "from_imports_typing": [
       [
-        "..fast_attribute",
-        "FastAttribute"
-      ],
-      [
         "..attribute",
         "Attribute"
+      ],
+      [
+        "..fast_attribute",
+        "FastAttribute"
       ]
+    ],
+    "quote": [
+      "typing.List[FastAttribute]",
+      "typing.List[Attribute]"
+    ],
+    "typings": [
+      "typing.List[FastAttribute]",
+      "typing.List[Attribute]"
     ],
     "name": "XFastAttributeList",
     "imports": [],
@@ -44,7 +52,7 @@
       "methods": [
         {
           "name": "getFastAttributes",
-          "returns": "'typing.List[FastAttribute]'",
+          "returns": "typing.List[FastAttribute]",
           "desc": [
             "returns a sequence of attributes which names and or namespaces URLS are translated to tokens."
           ],
@@ -60,7 +68,13 @@
             "If the attribute name has a namespace that was registered with the XFastParser, Token contains the integer token of the attributes local name from the XFastTokenHandler and the integer token of the namespace combined with an arithmetic or operation."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "Token",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getOptionalValueToken",
@@ -71,11 +85,22 @@
             "If the attribute name has a namespace that was registered with the XFastParser, Token contains the integer token of the attributes local name from the XFastTokenHandler and the integer token of the namespace combined with an arithmetic or operation."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "Token",
+              "int",
+              "in"
+            ],
+            [
+              "Default",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getUnknownAttributes",
-          "returns": "'typing.List[Attribute]'",
+          "returns": "typing.List[Attribute]",
           "desc": [
             "returns a sequence of attributes which names and or namespaces URLS can not be translated to tokens."
           ],
@@ -93,7 +118,13 @@
           "raises": [
             "SAXException"
           ],
-          "args": []
+          "args": [
+            [
+              "Token",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getValueToken",
@@ -106,7 +137,13 @@
           "raises": [
             "SAXException"
           ],
-          "args": []
+          "args": [
+            [
+              "Token",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "hasAttribute",
@@ -117,7 +154,13 @@
             "If the attribute name has a namespace that was registered with the XFastParser, Token contains the integer token of the attributes local name from the XFastTokenHandler and the integer token of the namespace combined with an arithmetic or operation."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "Token",
+              "int",
+              "in"
+            ]
+          ]
         }
       ]
     }

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:52:38+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:53+00:00",
   "name": "XBezierPolyPolygon2D",
   "type": "interface",
   "namespace": "com.sun.star.rendering",
@@ -21,6 +21,13 @@
         "..geometry.real_bezier_segment2_d",
         "RealBezierSegment2D"
       ]
+    ],
+    "quote": [
+      "RealBezierSegment2D",
+      "typing.List[typing.List[RealBezierSegment2D]]"
+    ],
+    "typings": [
+      "typing.List[typing.List[RealBezierSegment2D]]"
     ],
     "name": "XBezierPolyPolygon2D",
     "imports": [],
@@ -51,11 +58,22 @@
           "raises": [
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
-          "args": []
+          "args": [
+            [
+              "nPolygonIndex",
+              "int",
+              "in"
+            ],
+            [
+              "nPointIndex",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getBezierSegments",
-          "returns": "'typing.List[typing.List[RealBezierSegment2D]]'",
+          "returns": "typing.List[typing.List[RealBezierSegment2D]]",
           "desc": [
             "Query subset of this poly-polygon.",
             "",
@@ -64,7 +82,28 @@
           "raises": [
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
-          "args": []
+          "args": [
+            [
+              "nPolygonIndex",
+              "int",
+              "in"
+            ],
+            [
+              "nNumberOfPolygons",
+              "int",
+              "in"
+            ],
+            [
+              "nPointIndex",
+              "int",
+              "in"
+            ],
+            [
+              "nNumberOfPoints",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "setBezierSegment",
@@ -77,7 +116,23 @@
           "raises": [
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
-          "args": []
+          "args": [
+            [
+              "point",
+              "RealBezierSegment2D",
+              "in"
+            ],
+            [
+              "nPolygonIndex",
+              "int",
+              "in"
+            ],
+            [
+              "nPointIndex",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "setBezierSegments",
@@ -90,7 +145,18 @@
           "raises": [
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
-          "args": []
+          "args": [
+            [
+              "points",
+              "typing.List[typing.List[RealBezierSegment2D]]",
+              "in"
+            ],
+            [
+              "nPolygonIndex",
+              "int",
+              "in"
+            ]
+          ]
         }
       ]
     }

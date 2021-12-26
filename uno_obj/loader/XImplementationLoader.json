@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:49:12+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:43+00:00",
   "name": "XImplementationLoader",
   "type": "interface",
   "namespace": "com.sun.star.loader",
@@ -16,12 +16,11 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [
-      [
-        "..uno.x_interface",
-        "XInterface"
-      ]
+    "from_imports_typing": [],
+    "quote": [
+      "XInterface"
     ],
+    "typings": [],
     "name": "XImplementationLoader",
     "imports": [],
     "namespace": "com.sun.star.loader",
@@ -45,7 +44,28 @@
           "raises": [
             "com.sun.star.loader.CannotActivateFactoryException"
           ],
-          "args": []
+          "args": [
+            [
+              "implementationName",
+              "str",
+              "in"
+            ],
+            [
+              "implementationLoaderUrl",
+              "str",
+              "in"
+            ],
+            [
+              "locationUrl",
+              "str",
+              "in"
+            ],
+            [
+              "xKey",
+              "XRegistryKey",
+              "in"
+            ]
+          ]
         },
         {
           "name": "writeRegistryInfo",
@@ -60,7 +80,23 @@
           "raises": [
             "com.sun.star.registry.CannotRegisterImplementationException"
           ],
-          "args": []
+          "args": [
+            [
+              "xKey",
+              "XRegistryKey",
+              "in"
+            ],
+            [
+              "implementationLoaderUrl",
+              "str",
+              "in"
+            ],
+            [
+              "locationUrl",
+              "str",
+              "in"
+            ]
+          ]
         }
       ]
     }

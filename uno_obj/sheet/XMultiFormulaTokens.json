@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:47:44+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:34+00:00",
   "name": "XMultiFormulaTokens",
   "type": "interface",
   "namespace": "com.sun.star.sheet",
@@ -16,6 +16,12 @@
         ".formula_token",
         "FormulaToken"
       ]
+    ],
+    "quote": [
+      "typing.List[FormulaToken]"
+    ],
+    "typings": [
+      "typing.List[FormulaToken]"
     ],
     "name": "XMultiFormulaTokens",
     "imports": [],
@@ -40,14 +46,20 @@
         },
         {
           "name": "getTokens",
-          "returns": "'typing.List[FormulaToken]'",
+          "returns": "typing.List[FormulaToken]",
           "desc": [
             "returns the formula at specified index as sequence of tokens."
           ],
           "raises": [
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
-          "args": []
+          "args": [
+            [
+              "nIndex",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "setTokens",
@@ -58,7 +70,18 @@
           "raises": [
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
-          "args": []
+          "args": [
+            [
+              "nIndex",
+              "int",
+              "in"
+            ],
+            [
+              "aTokens",
+              "typing.List[FormulaToken]",
+              "in"
+            ]
+          ]
         }
       ]
     }

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:49:02+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:12+00:00",
   "name": "XRegressionCurveCalculator",
   "type": "interface",
   "namespace": "com.sun.star.chart2",
@@ -21,6 +21,12 @@
         "..geometry.real_point2_d",
         "RealPoint2D"
       ]
+    ],
+    "quote": [
+      "typing.List[RealPoint2D]"
+    ],
+    "typings": [
+      "typing.List[RealPoint2D]"
     ],
     "name": "XRegressionCurveCalculator",
     "imports": [],
@@ -54,11 +60,17 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException"
           ],
-          "args": []
+          "args": [
+            [
+              "x",
+              "float",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getCurveValues",
-          "returns": "'typing.List[RealPoint2D]'",
+          "returns": "typing.List[RealPoint2D]",
           "desc": [
             "calculate multiple points of a regression curve at once.",
             "",
@@ -69,7 +81,38 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException"
           ],
-          "args": []
+          "args": [
+            [
+              "min",
+              "float",
+              "in"
+            ],
+            [
+              "max",
+              "float",
+              "in"
+            ],
+            [
+              "nPointCount",
+              "int",
+              "in"
+            ],
+            [
+              "xScalingX",
+              "object",
+              "in"
+            ],
+            [
+              "xScalingY",
+              "object",
+              "in"
+            ],
+            [
+              "bMaySkipPointsInCalculation",
+              "bool",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getFormattedRepresentation",
@@ -80,7 +123,23 @@
             "Wrap equation to fit in nFormulaLength characters"
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "xNumFmtSupplier",
+              "XNumberFormatsSupplier",
+              "in"
+            ],
+            [
+              "nNumberFormatKey",
+              "int",
+              "in"
+            ],
+            [
+              "nFormulaLength",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getRepresentation",
@@ -98,7 +157,18 @@
             "recalculates the parameters of the internal regression curve according to the x- and y-values given."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aXValues",
+              "typing.List[float]",
+              "in"
+            ],
+            [
+              "aYValues",
+              "typing.List[float]",
+              "in"
+            ]
+          ]
         },
         {
           "name": "setRegressionProperties",
@@ -107,7 +177,33 @@
             "set calculation properties for curve calculation."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "degree",
+              "int",
+              "in"
+            ],
+            [
+              "forceIntercept",
+              "bool",
+              "in"
+            ],
+            [
+              "interceptValue",
+              "float",
+              "in"
+            ],
+            [
+              "period",
+              "int",
+              "in"
+            ],
+            [
+              "movingType",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "setXYNames",
@@ -116,7 +212,18 @@
             "Set the names of X and Y variables of the equation to replace \\\"x\\\" and \\\"f(x)\\\" in representation."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aXName",
+              "str",
+              "in"
+            ],
+            [
+              "aYName",
+              "str",
+              "in"
+            ]
+          ]
         }
       ]
     }

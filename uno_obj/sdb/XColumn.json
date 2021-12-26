@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 19:15:58+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:23+00:00",
   "name": "XColumn",
   "type": "interface",
   "namespace": "com.sun.star.sdb",
@@ -18,16 +18,32 @@
     ],
     "from_imports_typing": [
       [
-        "..sdbc.x_array",
-        "XArray"
+        "..util.date_time",
+        "DateTime"
+      ],
+      [
+        "..sdbc.x_blob",
+        "XBlob"
       ],
       [
         "..sdbc.x_clob",
         "XClob"
       ],
       [
+        "..sdbc.x_ref",
+        "XRef"
+      ],
+      [
         "..util.time",
         "Time"
+      ],
+      [
+        "..io.x_input_stream",
+        "XInputStream"
+      ],
+      [
+        "..sdbc.x_array",
+        "XArray"
       ],
       [
         ".byte",
@@ -36,23 +52,22 @@
       [
         "..util.date",
         "Date"
-      ],
-      [
-        "..sdbc.x_blob",
-        "XBlob"
-      ],
-      [
-        "..util.date_time",
-        "DateTime"
-      ],
-      [
-        "..sdbc.x_ref",
-        "XRef"
-      ],
-      [
-        "..io.x_input_stream",
-        "XInputStream"
       ]
+    ],
+    "quote": [
+      "XClob",
+      "Date",
+      "Time",
+      "XBlob",
+      "object",
+      "typing.List[byte]",
+      "XInputStream",
+      "DateTime",
+      "XRef",
+      "XArray"
+    ],
+    "typings": [
+      "typing.List[byte]"
     ],
     "name": "XColumn",
     "imports": [],
@@ -127,7 +142,7 @@
         },
         {
           "name": "getBytes",
-          "returns": "'typing.List[byte]'",
+          "returns": "typing.List[byte]",
           "desc": [
             "gets the value of a column in the current row as a byte array.",
             "",

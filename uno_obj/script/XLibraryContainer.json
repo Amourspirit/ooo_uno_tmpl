@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:45:38+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:22+00:00",
   "name": "XLibraryContainer",
   "type": "interface",
   "namespace": "com.sun.star.script",
@@ -18,14 +18,15 @@
     ],
     "from_imports_typing": [
       [
-        "..container.x_name_access",
-        "XNameAccess"
-      ],
-      [
         "..container.x_name_container",
         "XNameContainer"
       ]
     ],
+    "quote": [
+      "XNameContainer",
+      "XNameAccess"
+    ],
+    "typings": [],
     "name": "XLibraryContainer",
     "imports": [],
     "namespace": "com.sun.star.script",
@@ -47,7 +48,13 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException,"
           ],
-          "args": []
+          "args": [
+            [
+              "Name",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "createLibraryLink",
@@ -60,7 +67,23 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException,"
           ],
-          "args": []
+          "args": [
+            [
+              "Name",
+              "str",
+              "in"
+            ],
+            [
+              "StorageURL",
+              "str",
+              "in"
+            ],
+            [
+              "ReadOnly",
+              "bool",
+              "in"
+            ]
+          ]
         },
         {
           "name": "isLibraryLoaded",
@@ -71,7 +94,13 @@
           "raises": [
             "com.sun.star.container.NoSuchElementException"
           ],
-          "args": []
+          "args": [
+            [
+              "Name",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "loadLibrary",
@@ -82,7 +111,13 @@
           "raises": [
             "com.sun.star.container.NoSuchElementException,"
           ],
-          "args": []
+          "args": [
+            [
+              "Name",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "removeLibrary",
@@ -95,7 +130,13 @@
           "raises": [
             "com.sun.star.container.NoSuchElementException,"
           ],
-          "args": []
+          "args": [
+            [
+              "Name",
+              "str",
+              "in"
+            ]
+          ]
         }
       ]
     }

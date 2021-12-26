@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:50:18+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:46+00:00",
   "name": "XFlatParagraph",
   "type": "interface",
   "namespace": "com.sun.star.text",
@@ -21,6 +21,13 @@
         "..lang.locale",
         "Locale"
       ]
+    ],
+    "quote": [
+      "Locale",
+      "typing.List[int]"
+    ],
+    "typings": [
+      "typing.List[int]"
     ],
     "name": "XFlatParagraph",
     "imports": [],
@@ -47,7 +54,23 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException"
           ],
-          "args": []
+          "args": [
+            [
+              "nPos",
+              "int",
+              "in"
+            ],
+            [
+              "nLen",
+              "int",
+              "in"
+            ],
+            [
+              "aAttributes",
+              "typing.List[PropertyValue]",
+              "in"
+            ]
+          ]
         },
         {
           "name": "changeText",
@@ -58,7 +81,28 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException"
           ],
-          "args": []
+          "args": [
+            [
+              "nPos",
+              "int",
+              "in"
+            ],
+            [
+              "nLen",
+              "int",
+              "in"
+            ],
+            [
+              "NewText",
+              "str",
+              "in"
+            ],
+            [
+              "aAttributes",
+              "typing.List[PropertyValue]",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getLanguageOfText",
@@ -69,7 +113,18 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException"
           ],
-          "args": []
+          "args": [
+            [
+              "nPos",
+              "int",
+              "in"
+            ],
+            [
+              "nLen",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getLanguagePortions",
@@ -89,7 +144,18 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException"
           ],
-          "args": []
+          "args": [
+            [
+              "nPos",
+              "int",
+              "in"
+            ],
+            [
+              "nLen",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getText",
@@ -107,7 +173,13 @@
             "returns whether the respective text node has already been processed"
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "nType",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "isModified",
@@ -125,7 +197,18 @@
             "change the \\\"checked\\\" flag of the respective text node, i.e., mark the text node as \\\"processed\\\""
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "nType",
+              "int",
+              "in"
+            ],
+            [
+              "bVal",
+              "bool",
+              "in"
+            ]
+          ]
         }
       ]
     }

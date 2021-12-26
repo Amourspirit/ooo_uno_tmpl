@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:48:26+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:26+00:00",
   "name": "XResourceFactoryManager",
   "type": "interface",
   "namespace": "com.sun.star.drawing.framework",
@@ -10,12 +10,23 @@
   },
   "writer_args": {},
   "data": {
-    "from_imports": [],
+    "from_imports": [
+      [
+        ".x_configuration_controller",
+        "XConfigurationController"
+      ]
+    ],
     "from_imports_typing": [],
+    "quote": [
+      "object"
+    ],
+    "typings": [],
     "name": "XResourceFactoryManager",
     "imports": [],
     "namespace": "com.sun.star.drawing.framework",
-    "extends": [],
+    "extends": [
+      "com.sun.star.drawing.framework.XConfigurationController"
+    ],
     "desc": [
       "The XResourceFactoryManager is part of the configuration controller and manages the set of registered resource factories."
     ],
@@ -31,7 +42,18 @@
             "When one factory is responsible for more than one type of resource then this method has to be called for each type. If this method is called multiple times for the same URL then a previously registered factory is removed for the URL."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "sResourceURL",
+              "str",
+              "in"
+            ],
+            [
+              "xResourceFactory",
+              "object",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getResourceFactory",
@@ -42,7 +64,13 @@
             "This method is typically called by one of the resource controllers."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "sResourceURL",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "removeResourceFactoryForReference",
@@ -53,7 +81,13 @@
             "Use removeResourceFactoryForURL() to remove a factory just for one resource type and to leave it registered for others."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "xResourceFactory",
+              "object",
+              "in"
+            ]
+          ]
         },
         {
           "name": "removeResourceFactoryForURL",
@@ -64,7 +98,13 @@
             "When the factory has been registered for other URLs as well then it remains registered for them. Use the removeResourceFactoryForReference() to remove a factory completely."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "sResourceURL",
+              "str",
+              "in"
+            ]
+          ]
         }
       ]
     }

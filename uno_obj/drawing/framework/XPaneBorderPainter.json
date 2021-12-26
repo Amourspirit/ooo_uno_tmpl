@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:48:25+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:26+00:00",
   "name": "XPaneBorderPainter",
   "type": "interface",
   "namespace": "com.sun.star.drawing.framework",
@@ -21,6 +21,11 @@
         "Point"
       ]
     ],
+    "quote": [
+      "Point",
+      "Rectangle"
+    ],
+    "typings": [],
     "name": "XPaneBorderPainter",
     "imports": [],
     "namespace": "com.sun.star.drawing.framework",
@@ -42,7 +47,23 @@
             "This method can be used to convert an inner bounding box into the center box or the outer bounding box."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "sPaneBorderStyleName",
+              "str",
+              "in"
+            ],
+            [
+              "aRectangle",
+              "Rectangle",
+              "in"
+            ],
+            [
+              "eBorderType",
+              "object",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getCalloutOffset",
@@ -53,7 +74,13 @@
             "This value is used when the call out is realized by a fixed bitmap in order to determine the size and/or location of the outer border for a given call out."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "sPaneBorderStyleName",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "paintBorder",
@@ -62,7 +89,33 @@
             "Paint the border around a pane."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "sPaneBorderStyleName",
+              "str",
+              "in"
+            ],
+            [
+              "xCanvas",
+              "XCanvas",
+              "in"
+            ],
+            [
+              "aOuterBorderRectangle",
+              "Rectangle",
+              "in"
+            ],
+            [
+              "aRepaintArea",
+              "Rectangle",
+              "in"
+            ],
+            [
+              "sTitle",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "paintBorderWithCallout",
@@ -73,7 +126,38 @@
             "Most arguments have the same meaning as in the paintBorder()."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "sPaneBorderStyleName",
+              "str",
+              "in"
+            ],
+            [
+              "xCanvas",
+              "XCanvas",
+              "in"
+            ],
+            [
+              "aOuterBorderRectangle",
+              "Rectangle",
+              "in"
+            ],
+            [
+              "aRepaintArea",
+              "Rectangle",
+              "in"
+            ],
+            [
+              "sTitle",
+              "str",
+              "in"
+            ],
+            [
+              "aCalloutAnchor",
+              "Point",
+              "in"
+            ]
+          ]
         },
         {
           "name": "removeBorder",
@@ -84,7 +168,23 @@
             "This method can be used to convert an outer bounding box into the center box or the inner bounding box."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "sPaneBorderStyleName",
+              "str",
+              "in"
+            ],
+            [
+              "aRectangle",
+              "Rectangle",
+              "in"
+            ],
+            [
+              "eBorderType",
+              "object",
+              "in"
+            ]
+          ]
         }
       ]
     }

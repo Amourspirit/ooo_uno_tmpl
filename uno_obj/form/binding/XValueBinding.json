@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:50:56+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:58+00:00",
   "name": "XValueBinding",
   "type": "interface",
   "namespace": "com.sun.star.form.binding",
@@ -16,11 +16,12 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [
-      [
-        ".type",
-        "type"
-      ]
+    "from_imports_typing": [],
+    "quote": [
+      "typing.List[object]"
+    ],
+    "typings": [
+      "typing.List[object]"
     ],
     "name": "XValueBinding",
     "imports": [],
@@ -36,7 +37,7 @@
       "methods": [
         {
           "name": "getSupportedValueTypes",
-          "returns": "'typing.List[type]'",
+          "returns": "typing.List[object]",
           "desc": [
             "determines the types which are supported by this binding for value exchange"
           ],
@@ -52,7 +53,13 @@
           "raises": [
             "IncompatibleTypesException"
           ],
-          "args": []
+          "args": [
+            [
+              "aType",
+              "object",
+              "in"
+            ]
+          ]
         },
         {
           "name": "setValue",
@@ -63,7 +70,13 @@
           "raises": [
             "IncompatibleTypesException,"
           ],
-          "args": []
+          "args": [
+            [
+              "aValue",
+              "object",
+              "in"
+            ]
+          ]
         },
         {
           "name": "supportsType",
@@ -74,7 +87,13 @@
             "Calling this method is equal to calling getSupportedValueTypes(), and looking up the given type in the resulting type sequence."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aType",
+              "object",
+              "in"
+            ]
+          ]
         }
       ]
     }

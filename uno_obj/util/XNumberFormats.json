@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:51:25+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:59+00:00",
   "name": "XNumberFormats",
   "type": "interface",
   "namespace": "com.sun.star.util",
@@ -21,6 +21,13 @@
         "..beans.x_property_set",
         "XPropertySet"
       ]
+    ],
+    "quote": [
+      "XPropertySet",
+      "typing.List[int]"
+    ],
+    "typings": [
+      "typing.List[int]"
     ],
     "name": "XNumberFormats",
     "imports": [],
@@ -45,7 +52,18 @@
           "raises": [
             "com.sun.star.util.MalformedNumberFormatException"
           ],
-          "args": []
+          "args": [
+            [
+              "aFormat",
+              "str",
+              "in"
+            ],
+            [
+              "nLocale",
+              "Locale",
+              "in"
+            ]
+          ]
         },
         {
           "name": "addNewConverted",
@@ -56,7 +74,23 @@
           "raises": [
             "com.sun.star.util.MalformedNumberFormatException"
           ],
-          "args": []
+          "args": [
+            [
+              "aFormat",
+              "str",
+              "in"
+            ],
+            [
+              "nLocale",
+              "Locale",
+              "in"
+            ],
+            [
+              "nNewLocale",
+              "Locale",
+              "in"
+            ]
+          ]
         },
         {
           "name": "generateFormat",
@@ -65,14 +99,51 @@
             "generates a format string from several parameters without creating an actual number format."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "nBaseKey",
+              "int",
+              "in"
+            ],
+            [
+              "nLocale",
+              "Locale",
+              "in"
+            ],
+            [
+              "bThousands",
+              "bool",
+              "in"
+            ],
+            [
+              "bRed",
+              "bool",
+              "in"
+            ],
+            [
+              "nDecimals",
+              "int",
+              "in"
+            ],
+            [
+              "nLeading",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getByKey",
           "returns": "XPropertySet",
           "desc": [],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "nKey",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "queryKey",
@@ -81,14 +152,46 @@
             "finds a number format by its format string and returns its key."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aFormat",
+              "str",
+              "in"
+            ],
+            [
+              "nLocale",
+              "Locale",
+              "in"
+            ],
+            [
+              "bScan",
+              "bool",
+              "in"
+            ]
+          ]
         },
         {
           "name": "queryKeys",
           "returns": "typing.List[int]",
           "desc": [],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "nType",
+              "int",
+              "in"
+            ],
+            [
+              "nLocale",
+              "Locale",
+              "in"
+            ],
+            [
+              "bCreate",
+              "bool",
+              "in"
+            ]
+          ]
         },
         {
           "name": "removeByKey",
@@ -97,7 +200,13 @@
             "removes a number format from the list."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "nKey",
+              "int",
+              "in"
+            ]
+          ]
         }
       ]
     }

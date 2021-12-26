@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:46:10+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:13+00:00",
   "name": "XDataTransferProviderAccess",
   "type": "interface",
   "namespace": "com.sun.star.awt",
@@ -18,6 +18,10 @@
     ],
     "from_imports_typing": [
       [
+        "..datatransfer.dnd.x_drag_source",
+        "XDragSource"
+      ],
+      [
         "..datatransfer.dnd.x_drop_target",
         "XDropTarget"
       ],
@@ -28,12 +32,15 @@
       [
         "..datatransfer.clipboard.x_clipboard",
         "XClipboard"
-      ],
-      [
-        "..datatransfer.dnd.x_drag_source",
-        "XDragSource"
       ]
     ],
+    "quote": [
+      "XDragSource",
+      "XClipboard",
+      "XDropTarget",
+      "XDragGestureRecognizer"
+    ],
+    "typings": [],
     "name": "XDataTransferProviderAccess",
     "imports": [],
     "namespace": "com.sun.star.awt",
@@ -53,7 +60,13 @@
             "returns the specified clipboard."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "clipboardName",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getDragGestureRecognizer",
@@ -62,7 +75,13 @@
             "returns the drag gesture recognizer of the specified window."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "window",
+              "object",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getDragSource",
@@ -71,7 +90,13 @@
             "returns the drag source of the specified window."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "window",
+              "object",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getDropTarget",
@@ -80,7 +105,13 @@
             "returns the drop target of the specified window."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "window",
+              "object",
+              "in"
+            ]
+          ]
         }
       ]
     }

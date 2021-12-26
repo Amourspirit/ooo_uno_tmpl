@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:46:16+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:14+00:00",
   "name": "XImageConsumer",
   "type": "interface",
   "namespace": "com.sun.star.awt",
@@ -17,6 +17,8 @@
       ]
     ],
     "from_imports_typing": [],
+    "quote": [],
+    "typings": [],
     "name": "XImageConsumer",
     "imports": [],
     "namespace": "com.sun.star.awt",
@@ -40,7 +42,18 @@
             "The complete method is called when the image producer has finished delivering all of the pixels that the source image contains, or when a single frame of a multi-frame animation has been completed, or when an error in loading or producing the image has occurred. The image consumer should remove itself from the list of consumers registered with the image producer at this time, unless it is interested in successive frames."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "Status",
+              "int",
+              "in"
+            ],
+            [
+              "xProducer",
+              "object",
+              "in"
+            ]
+          ]
         },
         {
           "name": "init",
@@ -49,7 +62,18 @@
             "initializes the consumer with image dimensions."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "Width",
+              "int",
+              "in"
+            ],
+            [
+              "Height",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "setColorModel",
@@ -58,7 +82,38 @@
             "changes color model for next pixels typically called once after initialization."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "BitCount",
+              "int",
+              "in"
+            ],
+            [
+              "RGBAPal",
+              "typing.List[int]",
+              "in"
+            ],
+            [
+              "RedMask",
+              "int",
+              "in"
+            ],
+            [
+              "GreenMask",
+              "int",
+              "in"
+            ],
+            [
+              "BlueMask",
+              "int",
+              "in"
+            ],
+            [
+              "AlphaMask",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "setPixelsByBytes",
@@ -69,7 +124,43 @@
             "The pixels of the image are delivered using one or more calls to this method. Each call specifies the location and size of the rectangle of source pixels that are contained in the array of pixels. The specified color model object should be used to convert the pixels into their corresponding color and alpha components. Pixel (m,n) is stored in the pixels array at index (n * nScanSize"
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "nX",
+              "int",
+              "in"
+            ],
+            [
+              "nY",
+              "int",
+              "in"
+            ],
+            [
+              "nWidth",
+              "int",
+              "in"
+            ],
+            [
+              "nHeight",
+              "int",
+              "in"
+            ],
+            [
+              "aProducerData",
+              "typing.List[byte]",
+              "in"
+            ],
+            [
+              "nOffset",
+              "int",
+              "in"
+            ],
+            [
+              "nScanSize",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "setPixelsByLongs",
@@ -80,7 +171,43 @@
             "The pixels of the image are delivered using one or more calls to this method. Each call specifies the location and size of the rectangle of source pixels that are contained in the array of pixels. The specified color model object should be used to convert the pixels into their corresponding color and alpha components. Pixel (m,n) is stored in the pixels array at index (n * nScanSize"
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "nX",
+              "int",
+              "in"
+            ],
+            [
+              "nY",
+              "int",
+              "in"
+            ],
+            [
+              "nWidth",
+              "int",
+              "in"
+            ],
+            [
+              "nHeight",
+              "int",
+              "in"
+            ],
+            [
+              "aProducerData",
+              "typing.List[int]",
+              "in"
+            ],
+            [
+              "nOffset",
+              "int",
+              "in"
+            ],
+            [
+              "nScanSize",
+              "int",
+              "in"
+            ]
+          ]
         }
       ]
     }

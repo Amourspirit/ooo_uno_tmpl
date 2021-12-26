@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:52:54+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:11+00:00",
   "name": "XCalendar",
   "type": "interface",
   "namespace": "com.sun.star.i18n",
@@ -21,6 +21,15 @@
         ".calendar_item",
         "CalendarItem"
       ]
+    ],
+    "quote": [
+      "typing.List[CalendarItem]",
+      "object",
+      "typing.List[str]"
+    ],
+    "typings": [
+      "typing.List[CalendarItem]",
+      "typing.List[str]"
     ],
     "name": "XCalendar",
     "imports": [],
@@ -45,7 +54,18 @@
             "Add an amount to a field."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "nCalendarFieldIndex",
+              "int",
+              "in"
+            ],
+            [
+              "nAmount",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getAllCalendars",
@@ -54,7 +74,13 @@
             "Returns all available calendars for the given locale."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "rLocale",
+              "Locale",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getDateTime",
@@ -69,7 +95,7 @@
         },
         {
           "name": "getDays",
-          "returns": "'typing.List[CalendarItem]'",
+          "returns": "typing.List[CalendarItem]",
           "desc": [
             "returns a sequence of CalendarItem describing the day names."
           ],
@@ -91,7 +117,23 @@
             "    LibreOffice 3.5"
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "nCalendarDisplayIndex",
+              "int",
+              "in"
+            ],
+            [
+              "nIdx",
+              "int",
+              "in"
+            ],
+            [
+              "nNameType",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getFirstDayOfWeek",
@@ -122,7 +164,7 @@
         },
         {
           "name": "getMonths",
-          "returns": "'typing.List[CalendarItem]'",
+          "returns": "typing.List[CalendarItem]",
           "desc": [
             "returns a sequence of CalendarItem describing the month names."
           ],
@@ -163,7 +205,13 @@
             "Get the value of a field."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "nCalendarFieldIndex",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "isValid",
@@ -183,7 +231,18 @@
             "Load a specific calendar for the given locale."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "uniqueID",
+              "str",
+              "in"
+            ],
+            [
+              "rLocale",
+              "Locale",
+              "in"
+            ]
+          ]
         },
         {
           "name": "loadDefaultCalendar",
@@ -192,7 +251,13 @@
             "Load the default calendar for the given locale."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "rLocale",
+              "Locale",
+              "in"
+            ]
+          ]
         },
         {
           "name": "setDateTime",
@@ -203,7 +268,13 @@
             "The integer part represents the number of days passed since start date. The fractional part represents fractions of a day, thus 0.5 means 12 hours."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "nTimeInDays",
+              "float",
+              "in"
+            ]
+          ]
         },
         {
           "name": "setFirstDayOfWeek",
@@ -212,7 +283,13 @@
             "Set the first day of a week, one of Weekdays values."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "nDay",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "setMinimumNumberOfDaysForFirstWeek",
@@ -221,7 +298,13 @@
             "Set how many days of a week must reside in the first week of a year."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "nDays",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "setValue",
@@ -230,7 +313,18 @@
             "Set the value of a field."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "nCalendarFieldIndex",
+              "int",
+              "in"
+            ],
+            [
+              "nValue",
+              "int",
+              "in"
+            ]
+          ]
         }
       ]
     }

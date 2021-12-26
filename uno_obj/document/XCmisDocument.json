@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:49:24+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:40+00:00",
   "name": "XCmisDocument",
   "type": "interface",
   "namespace": "com.sun.star.document",
@@ -21,6 +21,12 @@
         ".cmis_version",
         "CmisVersion"
       ]
+    ],
+    "quote": [
+      "typing.List[CmisVersion]"
+    ],
+    "typings": [
+      "typing.List[CmisVersion]"
     ],
     "name": "XCmisDocument",
     "imports": [],
@@ -71,7 +77,18 @@
             "Creates a new version of the document from the private working copy."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "isMajor",
+              "bool",
+              "in"
+            ],
+            [
+              "comment",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "checkOut",
@@ -84,7 +101,7 @@
         },
         {
           "name": "getAllVersions",
-          "returns": "'typing.List[CmisVersion]'",
+          "returns": "typing.List[CmisVersion]",
           "desc": [],
           "raises": [],
           "args": []
@@ -103,7 +120,13 @@
           "returns": "None",
           "desc": [],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "cmisProperties",
+              "typing.List[CmisProperty]",
+              "in"
+            ]
+          ]
         }
       ]
     }

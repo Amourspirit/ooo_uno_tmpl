@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:48:11+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:55+00:00",
   "name": "XUIElementFactoryRegistration",
   "type": "interface",
   "namespace": "com.sun.star.ui",
@@ -18,13 +18,20 @@
     ],
     "from_imports_typing": [
       [
-        "..beans.property_value",
-        "PropertyValue"
-      ],
-      [
         ".xui_element_factory",
         "XUIElementFactory"
+      ],
+      [
+        "..beans.property_value",
+        "PropertyValue"
       ]
+    ],
+    "quote": [
+      "XUIElementFactory",
+      "typing.List[typing.List[PropertyValue]]"
+    ],
+    "typings": [
+      "typing.List[typing.List[PropertyValue]]"
     ],
     "name": "XUIElementFactoryRegistration",
     "imports": [],
@@ -59,7 +66,23 @@
           "raises": [
             "com.sun.star.container.NoSuchElementException"
           ],
-          "args": []
+          "args": [
+            [
+              "aType",
+              "str",
+              "in"
+            ],
+            [
+              "aName",
+              "str",
+              "in"
+            ],
+            [
+              "ModuleIdentifier",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getFactory",
@@ -68,11 +91,22 @@
             "function to retrieve a previously registered user interface element factory."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "ResourceURL",
+              "str",
+              "in"
+            ],
+            [
+              "ModuleIdentifier",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getRegisteredFactories",
-          "returns": "'typing.List[typing.List[PropertyValue]]'",
+          "returns": "typing.List[typing.List[PropertyValue]]",
           "desc": [
             "function to retrieve a list of all registered user interface element factories",
             "",
@@ -90,7 +124,28 @@
           "raises": [
             "com.sun.star.container.ElementExistException"
           ],
-          "args": []
+          "args": [
+            [
+              "aType",
+              "str",
+              "in"
+            ],
+            [
+              "aName",
+              "str",
+              "in"
+            ],
+            [
+              "aModuleIdentifier",
+              "str",
+              "in"
+            ],
+            [
+              "aFactoryImplementationName",
+              "str",
+              "in"
+            ]
+          ]
         }
       ]
     }

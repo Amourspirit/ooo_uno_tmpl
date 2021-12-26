@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:52:31+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:10+00:00",
   "name": "XPdfDecomposer",
   "type": "interface",
   "namespace": "com.sun.star.graphic",
@@ -21,6 +21,12 @@
         ".x_primitive2_d",
         "XPrimitive2D"
       ]
+    ],
+    "quote": [
+      "typing.List[XPrimitive2D]"
+    ],
+    "typings": [
+      "typing.List[XPrimitive2D]"
     ],
     "name": "XPdfDecomposer",
     "imports": [],
@@ -42,14 +48,25 @@
       "methods": [
         {
           "name": "getDecomposition",
-          "returns": "'typing.List[XPrimitive2D]'",
+          "returns": "typing.List[XPrimitive2D]",
           "desc": [
             "Retrieve decomposed list - in this case a bitmap with the rendered PDF.",
             "",
             "sal_Int32 PageIndex - which page to use"
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "xDataContainer",
+              "XBinaryDataContainer",
+              "in"
+            ],
+            [
+              "xDecompositionParameters",
+              "typing.List[PropertyValue]",
+              "in"
+            ]
+          ]
         }
       ]
     }

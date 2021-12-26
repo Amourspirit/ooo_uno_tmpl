@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:52:42+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:53+00:00",
   "name": "XIntegerBitmapColorSpace",
   "type": "interface",
   "namespace": "com.sun.star.rendering",
@@ -18,10 +18,6 @@
     ],
     "from_imports_typing": [
       [
-        ".argb_color",
-        "ARGBColor"
-      ],
-      [
         ".byte",
         "byte"
       ],
@@ -30,9 +26,28 @@
         "ColorComponent"
       ],
       [
+        ".argb_color",
+        "ARGBColor"
+      ],
+      [
         ".rgb_color",
         "RGBColor"
       ]
+    ],
+    "quote": [
+      "typing.List[RGBColor]",
+      "typing.List[ColorComponent]",
+      "object",
+      "typing.List[ARGBColor]",
+      "typing.List[byte]",
+      "typing.List[int]"
+    ],
+    "typings": [
+      "typing.List[RGBColor]",
+      "typing.List[ColorComponent]",
+      "typing.List[ARGBColor]",
+      "typing.List[byte]",
+      "typing.List[int]"
     ],
     "name": "XIntegerBitmapColorSpace",
     "imports": [],
@@ -50,7 +65,7 @@
       "methods": [
         {
           "name": "convertFromIntegerColorSpace",
-          "returns": "'typing.List[ColorComponent]'",
+          "returns": "typing.List[ColorComponent]",
           "desc": [
             "Convert integer bitmap color to generic IEEE double device color of another color space.",
             "",
@@ -59,11 +74,22 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException"
           ],
-          "args": []
+          "args": [
+            [
+              "deviceColor",
+              "typing.List[byte]",
+              "in"
+            ],
+            [
+              "targetColorSpace",
+              "object",
+              "in"
+            ]
+          ]
         },
         {
           "name": "convertIntegerFromARGB",
-          "returns": "'typing.List[byte]'",
+          "returns": "typing.List[byte]",
           "desc": [
             "Convert sRGB color with linear alpha into this color space.",
             "",
@@ -72,11 +98,17 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException"
           ],
-          "args": []
+          "args": [
+            [
+              "rgbColor",
+              "typing.List[ARGBColor]",
+              "in"
+            ]
+          ]
         },
         {
           "name": "convertIntegerFromPARGB",
-          "returns": "'typing.List[byte]'",
+          "returns": "typing.List[byte]",
           "desc": [
             "Convert premultiplied sRGB color with linear alpha into this color space.",
             "",
@@ -85,11 +117,17 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException"
           ],
-          "args": []
+          "args": [
+            [
+              "rgbColor",
+              "typing.List[ARGBColor]",
+              "in"
+            ]
+          ]
         },
         {
           "name": "convertIntegerFromRGB",
-          "returns": "'typing.List[byte]'",
+          "returns": "typing.List[byte]",
           "desc": [
             "Convert sRGB color to an integer representation in this color space.",
             "",
@@ -98,11 +136,17 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException"
           ],
-          "args": []
+          "args": [
+            [
+              "rgbColor",
+              "typing.List[RGBColor]",
+              "in"
+            ]
+          ]
         },
         {
           "name": "convertIntegerToARGB",
-          "returns": "'typing.List[ARGBColor]'",
+          "returns": "typing.List[ARGBColor]",
           "desc": [
             "Convert color value in this color space to sRGB color values, with linear alpha.",
             "",
@@ -111,11 +155,17 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException"
           ],
-          "args": []
+          "args": [
+            [
+              "deviceColor",
+              "typing.List[byte]",
+              "in"
+            ]
+          ]
         },
         {
           "name": "convertIntegerToPARGB",
-          "returns": "'typing.List[ARGBColor]'",
+          "returns": "typing.List[ARGBColor]",
           "desc": [
             "Convert color value in this color space to premultiplied sRGB color values, with linear alpha.",
             "",
@@ -124,11 +174,17 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException"
           ],
-          "args": []
+          "args": [
+            [
+              "deviceColor",
+              "typing.List[byte]",
+              "in"
+            ]
+          ]
         },
         {
           "name": "convertIntegerToRGB",
-          "returns": "'typing.List[RGBColor]'",
+          "returns": "typing.List[RGBColor]",
           "desc": [
             "Convert color value in this color space to sRGB color values.",
             "",
@@ -137,11 +193,17 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException"
           ],
-          "args": []
+          "args": [
+            [
+              "deviceColor",
+              "typing.List[byte]",
+              "in"
+            ]
+          ]
         },
         {
           "name": "convertToIntegerColorSpace",
-          "returns": "'typing.List[byte]'",
+          "returns": "typing.List[byte]",
           "desc": [
             "Convert integer bitmap color to integer bitmap color of another integer bitmap color space.",
             "",
@@ -150,7 +212,18 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException"
           ],
-          "args": []
+          "args": [
+            [
+              "deviceColor",
+              "typing.List[byte]",
+              "in"
+            ],
+            [
+              "targetColorSpace",
+              "object",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getBitsPerPixel",

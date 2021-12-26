@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:51:43+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:07+00:00",
   "name": "XSlidePreviewCache",
   "type": "interface",
   "namespace": "com.sun.star.drawing",
@@ -17,6 +17,10 @@
         "XBitmap"
       ]
     ],
+    "quote": [
+      "XBitmap"
+    ],
+    "typings": [],
     "name": "XSlidePreviewCache",
     "imports": [],
     "namespace": "com.sun.star.drawing",
@@ -38,7 +42,13 @@
             "Register a listener that is called when a preview has been created asynchronously."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "xListener",
+              "object",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getSlidePreview",
@@ -53,7 +63,18 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException"
           ],
-          "args": []
+          "args": [
+            [
+              "nSlideIndex",
+              "int",
+              "in"
+            ],
+            [
+              "xCanvas",
+              "XCanvas",
+              "in"
+            ]
+          ]
         },
         {
           "name": "pause",
@@ -73,7 +94,13 @@
             "Remove a previously registered listener for preview creations."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "xListener",
+              "object",
+              "in"
+            ]
+          ]
         },
         {
           "name": "resume",
@@ -93,7 +120,18 @@
             "All slides in the given XIndexAccess are required to come from the given model."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "xSlides",
+              "XIndexAccess",
+              "in"
+            ],
+            [
+              "xDocument",
+              "XInterface",
+              "in"
+            ]
+          ]
         },
         {
           "name": "setPreviewSize",
@@ -102,7 +140,13 @@
             "Define the size of the previews that are managed by the called cache."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aSize",
+              "IntegerSize2D",
+              "in"
+            ]
+          ]
         },
         {
           "name": "setVisibleRange",
@@ -113,7 +157,18 @@
             "This information is used for give preview creation for visible slides a higher priority than for those slides that are not visible."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "nFirstVisibleSlideIndex",
+              "int",
+              "in"
+            ],
+            [
+              "nLastVisibleSlideIndex",
+              "int",
+              "in"
+            ]
+          ]
         }
       ]
     }

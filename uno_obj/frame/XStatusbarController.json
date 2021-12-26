@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:51:58+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:48+00:00",
   "name": "XStatusbarController",
   "type": "interface",
   "namespace": "com.sun.star.frame",
@@ -12,23 +12,25 @@
   "data": {
     "from_imports": [
       [
-        "..lang.x_component",
-        "XComponent"
-      ],
-      [
         "..lang.x_initialization",
         "XInitialization"
       ],
       [
-        "..util.x_updatable",
-        "XUpdatable"
-      ],
-      [
         ".x_status_listener",
         "XStatusListener"
+      ],
+      [
+        "..lang.x_component",
+        "XComponent"
+      ],
+      [
+        "..util.x_updatable",
+        "XUpdatable"
       ]
     ],
     "from_imports_typing": [],
+    "quote": [],
+    "typings": [],
     "name": "XStatusbarController",
     "imports": [],
     "namespace": "com.sun.star.frame",
@@ -57,7 +59,13 @@
             "is called by a status bar if the user clicked with mouse into the field of the corresponding control."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aPos",
+              "Point",
+              "in"
+            ]
+          ]
         },
         {
           "name": "command",
@@ -66,7 +74,28 @@
             "is called by a status bar if a command event is available for a controller."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aPos",
+              "Point",
+              "in"
+            ],
+            [
+              "nCommand",
+              "int",
+              "in"
+            ],
+            [
+              "bMouseEvent",
+              "bool",
+              "in"
+            ],
+            [
+              "aData",
+              "object",
+              "in"
+            ]
+          ]
         },
         {
           "name": "doubleClick",
@@ -75,7 +104,13 @@
             "is called by a status bar if the user double-clicked with mouse into the field of the corresponding control."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aPos",
+              "Point",
+              "in"
+            ]
+          ]
         },
         {
           "name": "mouseButtonDown",
@@ -86,7 +121,13 @@
             "If the controller has captured the mouse input this function is also called when the mouse position is not within the controller."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aMouseEvent",
+              "MouseEvent",
+              "in"
+            ]
+          ]
         },
         {
           "name": "mouseButtonUp",
@@ -97,7 +138,13 @@
             "If the controller has captured the mouse input this function is also called when the mouse position is not within the controller."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aMouseEvent",
+              "MouseEvent",
+              "in"
+            ]
+          ]
         },
         {
           "name": "mouseMove",
@@ -108,7 +155,13 @@
             "If the controller has captured the mouse input this function is also called when the mouse position is not within the controller."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aMouseEvent",
+              "MouseEvent",
+              "in"
+            ]
+          ]
         },
         {
           "name": "paint",
@@ -117,7 +170,23 @@
             "is called by a status bar if the controller has to update the visual representation."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "xGraphics",
+              "XGraphics",
+              "in"
+            ],
+            [
+              "OutputRectangle",
+              "Rectangle",
+              "in"
+            ],
+            [
+              "nStyle",
+              "int",
+              "in"
+            ]
+          ]
         }
       ]
     }

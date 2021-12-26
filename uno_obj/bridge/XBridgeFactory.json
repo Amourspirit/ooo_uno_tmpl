@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:45:27+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:42+00:00",
   "name": "XBridgeFactory",
   "type": "interface",
   "namespace": "com.sun.star.bridge",
@@ -21,6 +21,13 @@
         ".x_bridge",
         "XBridge"
       ]
+    ],
+    "quote": [
+      "typing.List[XBridge]",
+      "object"
+    ],
+    "typings": [
+      "typing.List[XBridge]"
     ],
     "name": "XBridgeFactory",
     "imports": [],
@@ -45,7 +52,28 @@
           "raises": [
             ","
           ],
-          "args": []
+          "args": [
+            [
+              "sName",
+              "str",
+              "in"
+            ],
+            [
+              "sProtocol",
+              "str",
+              "in"
+            ],
+            [
+              "aConnection",
+              "XConnection",
+              "in"
+            ],
+            [
+              "anInstanceProvider",
+              "object",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getBridge",
@@ -56,11 +84,17 @@
             "Cannot be retrieved, when the bridge got disposed before."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "sName",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getExistingBridges",
-          "returns": "'typing.List[XBridge]'",
+          "returns": "typing.List[XBridge]",
           "desc": [
             "returns the sequence of all named and unnamed UNO interprocess bridges that are instantiated at the time the call is made."
           ],

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:52:55+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:11+00:00",
   "name": "XExtendedIndexEntrySupplier",
   "type": "interface",
   "namespace": "com.sun.star.i18n",
@@ -21,6 +21,14 @@
         "..lang.locale",
         "Locale"
       ]
+    ],
+    "quote": [
+      "typing.List[Locale]",
+      "typing.List[str]"
+    ],
+    "typings": [
+      "typing.List[Locale]",
+      "typing.List[str]"
     ],
     "name": "XExtendedIndexEntrySupplier",
     "imports": [],
@@ -49,7 +57,38 @@
             "Note that loadAlgorithm should be called before calling this function."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aIndexEntry1",
+              "str",
+              "in"
+            ],
+            [
+              "aPhoneticEntry1",
+              "str",
+              "in"
+            ],
+            [
+              "aLocale1",
+              "Locale",
+              "in"
+            ],
+            [
+              "aIndexEntry2",
+              "str",
+              "in"
+            ],
+            [
+              "aPhoneticEntry2",
+              "str",
+              "in"
+            ],
+            [
+              "aLocale2",
+              "Locale",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getAlgorithmList",
@@ -58,7 +97,13 @@
             "Returns index algorithm list for specific locale."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aLocale",
+              "Locale",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getIndexKey",
@@ -69,11 +114,27 @@
             "Note that loadAlgorithm should be called before calling this function."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aIndexEntry",
+              "str",
+              "in"
+            ],
+            [
+              "aPhoneticEntry",
+              "str",
+              "in"
+            ],
+            [
+              "aLocale",
+              "Locale",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getLocaleList",
-          "returns": "'typing.List[Locale]'",
+          "returns": "typing.List[Locale]",
           "desc": [
             "Returns locale list for which the IndexEntrySupplier provides service."
           ],
@@ -87,7 +148,18 @@
             "Returns phonetic candidate for index entry for the locale."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aIndexEntry",
+              "str",
+              "in"
+            ],
+            [
+              "aLocale",
+              "Locale",
+              "in"
+            ]
+          ]
         },
         {
           "name": "loadAlgorithm",
@@ -96,7 +168,23 @@
             "Loads index algorithm for the locale."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aLocale",
+              "Locale",
+              "in"
+            ],
+            [
+              "aIndexAlgorithm",
+              "str",
+              "in"
+            ],
+            [
+              "nCollatorOptions",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "usePhoneticEntry",
@@ -105,7 +193,13 @@
             "Checks if Phonetic Entry should be used for the locale."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aLocale",
+              "Locale",
+              "in"
+            ]
+          ]
         }
       ]
     }

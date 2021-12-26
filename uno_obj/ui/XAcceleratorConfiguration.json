@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:48:05+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:54+00:00",
   "name": "XAcceleratorConfiguration",
   "type": "interface",
   "namespace": "com.sun.star.ui",
@@ -30,6 +30,14 @@
         "KeyEvent"
       ]
     ],
+    "quote": [
+      "typing.List[KeyEvent]",
+      "typing.List[object]"
+    ],
+    "typings": [
+      "typing.List[KeyEvent]",
+      "typing.List[object]"
+    ],
     "name": "XAcceleratorConfiguration",
     "imports": [],
     "namespace": "com.sun.star.ui",
@@ -54,7 +62,7 @@
       "methods": [
         {
           "name": "getAllKeyEvents",
-          "returns": "'typing.List[KeyEvent]'",
+          "returns": "typing.List[KeyEvent]",
           "desc": [
             "return the list of all key events, which are available at this configuration set.",
             "",
@@ -76,11 +84,17 @@
           "raises": [
             "com.sun.star.container.NoSuchElementException"
           ],
-          "args": []
+          "args": [
+            [
+              "aKeyEvent",
+              "KeyEvent",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getKeyEventsByCommand",
-          "returns": "'typing.List[KeyEvent]'",
+          "returns": "typing.List[KeyEvent]",
           "desc": [
             "optimized access to the relation \\\"command-key\\\" instead of \\\"key-command\\\" which is provided normally by this interface.",
             "",
@@ -89,7 +103,13 @@
           "raises": [
             ","
           ],
-          "args": []
+          "args": [
+            [
+              "sCommand",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getPreferredKeyEventsForCommandList",
@@ -104,7 +124,13 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException,"
           ],
-          "args": []
+          "args": [
+            [
+              "lCommandList",
+              "typing.List[str]",
+              "in"
+            ]
+          ]
         },
         {
           "name": "removeCommandFromAllKeyEvents",
@@ -119,7 +145,13 @@
           "raises": [
             ","
           ],
-          "args": []
+          "args": [
+            [
+              "sCommand",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "removeKeyEvent",
@@ -130,7 +162,13 @@
           "raises": [
             "com.sun.star.container.NoSuchElementException"
           ],
-          "args": []
+          "args": [
+            [
+              "aKeyEvent",
+              "KeyEvent",
+              "in"
+            ]
+          ]
         },
         {
           "name": "setKeyEvent",
@@ -147,7 +185,18 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException,"
           ],
-          "args": []
+          "args": [
+            [
+              "aKeyEvent",
+              "KeyEvent",
+              "in"
+            ],
+            [
+              "sCommand",
+              "str",
+              "in"
+            ]
+          ]
         }
       ]
     }

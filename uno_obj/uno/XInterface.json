@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:48:36+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:56+00:00",
   "name": "XInterface",
   "type": "interface",
   "namespace": "com.sun.star.uno",
@@ -10,12 +10,21 @@
   },
   "writer_args": {},
   "data": {
-    "from_imports": [],
+    "from_imports": [
+      [
+        "..bridge.ole_application_registration",
+        "OleApplicationRegistration"
+      ]
+    ],
     "from_imports_typing": [],
+    "quote": [],
+    "typings": [],
     "name": "XInterface",
     "imports": [],
     "namespace": "com.sun.star.uno",
-    "extends": [],
+    "extends": [
+      "com.sun.star.bridge.OleApplicationRegistration"
+    ],
     "desc": [
       "base interface of all UNO interfaces",
       "",
@@ -72,7 +81,13 @@
             "The rules mentioned above are basically identical to the rules of QueryInterface in MS COM."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aType",
+              "object",
+              "in"
+            ]
+          ]
         },
         {
           "name": "release",

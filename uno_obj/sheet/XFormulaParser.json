@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:47:41+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:33+00:00",
   "name": "XFormulaParser",
   "type": "interface",
   "namespace": "com.sun.star.sheet",
@@ -10,17 +10,40 @@
   },
   "writer_args": {},
   "data": {
-    "from_imports": [],
+    "from_imports": [
+      [
+        ".formula_parser",
+        "FormulaParser"
+      ],
+      [
+        ".x_filter_formula_parser",
+        "XFilterFormulaParser"
+      ],
+      [
+        "..report.meta.x_formula_parser",
+        "XFormulaParser"
+      ]
+    ],
     "from_imports_typing": [
       [
         ".formula_token",
         "FormulaToken"
       ]
     ],
+    "quote": [
+      "typing.List[FormulaToken]"
+    ],
+    "typings": [
+      "typing.List[FormulaToken]"
+    ],
     "name": "XFormulaParser",
     "imports": [],
     "namespace": "com.sun.star.sheet",
-    "extends": [],
+    "extends": [
+      "com.sun.star.report.meta.XFormulaParser",
+      "com.sun.star.sheet.FormulaParser",
+      "com.sun.star.sheet.XFilterFormulaParser"
+    ],
     "desc": [
       "converts between text and token representations of formulas."
     ],
@@ -29,12 +52,23 @@
       "methods": [
         {
           "name": "parseFormula",
-          "returns": "'typing.List[FormulaToken]'",
+          "returns": "typing.List[FormulaToken]",
           "desc": [
             "parses a formula into a sequence of tokens."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aFormula",
+              "str",
+              "in"
+            ],
+            [
+              "aReferencePos",
+              "CellAddress",
+              "in"
+            ]
+          ]
         },
         {
           "name": "printFormula",
@@ -43,7 +77,18 @@
             "converts a formula into a string."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aTokens",
+              "typing.List[FormulaToken]",
+              "in"
+            ],
+            [
+              "aReferencePos",
+              "CellAddress",
+              "in"
+            ]
+          ]
         }
       ]
     }

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:50:27+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:47+00:00",
   "name": "XTextMarkup",
   "type": "interface",
   "namespace": "com.sun.star.text",
@@ -10,17 +10,28 @@
   },
   "writer_args": {},
   "data": {
-    "from_imports": [],
+    "from_imports": [
+      [
+        ".x_flat_paragraph",
+        "XFlatParagraph"
+      ]
+    ],
     "from_imports_typing": [
       [
         "..container.x_string_key_map",
         "XStringKeyMap"
       ]
     ],
+    "quote": [
+      "XStringKeyMap"
+    ],
+    "typings": [],
     "name": "XTextMarkup",
     "imports": [],
     "namespace": "com.sun.star.text",
-    "extends": [],
+    "extends": [
+      "com.sun.star.text.XFlatParagraph"
+    ],
     "desc": [
       "provides functionality to markup text.",
       "",
@@ -38,14 +49,61 @@
             "submits a new markup range."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "nType",
+              "int",
+              "in"
+            ],
+            [
+              "aIdentifier",
+              "str",
+              "in"
+            ],
+            [
+              "nStart",
+              "int",
+              "in"
+            ],
+            [
+              "nLength",
+              "int",
+              "in"
+            ],
+            [
+              "xMarkupInfoContainer",
+              "XStringKeyMap",
+              "in"
+            ]
+          ]
         },
         {
           "name": "commitTextRangeMarkup",
           "returns": "None",
           "desc": [],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "nType",
+              "int",
+              "in"
+            ],
+            [
+              "aIdentifier",
+              "str",
+              "in"
+            ],
+            [
+              "xRange",
+              "XTextRange",
+              "in"
+            ],
+            [
+              "xMarkupInfoContainer",
+              "XStringKeyMap",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getMarkupInfoContainer",

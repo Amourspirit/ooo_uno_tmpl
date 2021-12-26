@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:45:35+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:22+00:00",
   "name": "XInvocation",
   "type": "interface",
   "namespace": "com.sun.star.script",
@@ -22,6 +22,10 @@
         "XIntrospectionAccess"
       ]
     ],
+    "quote": [
+      "XIntrospectionAccess"
+    ],
+    "typings": [],
     "name": "XInvocation",
     "imports": [],
     "namespace": "com.sun.star.script",
@@ -54,7 +58,13 @@
           "raises": [
             "com.sun.star.beans.UnknownPropertyException"
           ],
-          "args": []
+          "args": [
+            [
+              "aPropertyName",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "hasMethod",
@@ -65,7 +75,13 @@
             "This optimizes the calling sequence ( XInvocation.hasMethod(), XInvocation.invoke() )!"
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aName",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "hasProperty",
@@ -74,7 +90,13 @@
             "returns TRUE if the property with the specified name exists, else FALSE."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aName",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "invoke",
@@ -87,7 +109,28 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException,"
           ],
-          "args": []
+          "args": [
+            [
+              "aFunctionName",
+              "str",
+              "in"
+            ],
+            [
+              "aParams",
+              "typing.List[object]",
+              "in"
+            ],
+            [
+              "aOutParamIndex",
+              "typing.List[int]",
+              "out"
+            ],
+            [
+              "aOutParam",
+              "typing.List[object]",
+              "out"
+            ]
+          ]
         },
         {
           "name": "setValue",
@@ -100,7 +143,18 @@
           "raises": [
             "com.sun.star.beans.UnknownPropertyException,"
           ],
-          "args": []
+          "args": [
+            [
+              "aPropertyName",
+              "str",
+              "in"
+            ],
+            [
+              "aValue",
+              "object",
+              "in"
+            ]
+          ]
         }
       ]
     }

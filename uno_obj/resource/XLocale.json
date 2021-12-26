@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:49:22+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:42+00:00",
   "name": "XLocale",
   "type": "interface",
   "namespace": "com.sun.star.resource",
@@ -21,6 +21,15 @@
         "..lang.locale",
         "Locale"
       ]
+    ],
+    "quote": [
+      "Locale",
+      "typing.List[Locale]",
+      "typing.List[str]"
+    ],
+    "typings": [
+      "typing.List[Locale]",
+      "typing.List[str]"
     ],
     "name": "XLocale",
     "imports": [],
@@ -45,7 +54,23 @@
             "Note: The Java class Locale returns the old codes."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aLanguage",
+              "str",
+              "in"
+            ],
+            [
+              "aCountry",
+              "str",
+              "in"
+            ],
+            [
+              "aVariant",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "equals",
@@ -54,11 +79,22 @@
             "A locale is deemed equal to another locale with identical language, country, and variant, and unequal to all other objects."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "l1",
+              "Locale",
+              "in"
+            ],
+            [
+              "l2",
+              "Locale",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getAvailableLocales",
-          "returns": "'typing.List[Locale]'",
+          "returns": "typing.List[Locale]",
           "desc": [],
           "raises": [],
           "args": []
@@ -83,56 +119,124 @@
           "returns": "str",
           "desc": [],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "locale",
+              "Locale",
+              "in"
+            ],
+            [
+              "inLocale",
+              "Locale",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getDisplayCountry_Default",
           "returns": "str",
           "desc": [],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "locale",
+              "Locale",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getDisplayLanguage",
           "returns": "str",
           "desc": [],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "locale",
+              "Locale",
+              "in"
+            ],
+            [
+              "inLocale",
+              "Locale",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getDisplayLanguage_Default",
           "returns": "str",
           "desc": [],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "locale",
+              "Locale",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getDisplayName",
           "returns": "str",
           "desc": [],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "locale",
+              "Locale",
+              "in"
+            ],
+            [
+              "inLocale",
+              "Locale",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getDisplayName_Default",
           "returns": "str",
           "desc": [],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "locale",
+              "Locale",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getDisplayVariant",
           "returns": "str",
           "desc": [],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "locale",
+              "Locale",
+              "in"
+            ],
+            [
+              "inLocale",
+              "Locale",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getDisplayVariant_Default",
           "returns": "str",
           "desc": [],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "locale",
+              "Locale",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getISO3Country",
@@ -141,7 +245,13 @@
           "raises": [
             "com.sun.star.resource.MissingResourceException"
           ],
-          "args": []
+          "args": [
+            [
+              "locale",
+              "Locale",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getISO3Language",
@@ -150,7 +260,13 @@
           "raises": [
             "com.sun.star.resource.MissingResourceException"
           ],
-          "args": []
+          "args": [
+            [
+              "locale",
+              "Locale",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getISOCountries",
@@ -171,7 +287,13 @@
           "returns": "typing.List[str]",
           "desc": [],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "country",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "setDefault",
@@ -182,7 +304,13 @@
             "It is normally set once at the beginning of an application, then never reset. setDefault does not reset the host locale."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "newLocale",
+              "Locale",
+              "in"
+            ]
+          ]
         }
       ]
     }

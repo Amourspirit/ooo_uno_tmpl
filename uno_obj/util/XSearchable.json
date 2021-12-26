@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:51:27+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:59+00:00",
   "name": "XSearchable",
   "type": "interface",
   "namespace": "com.sun.star.util",
@@ -22,14 +22,16 @@
         "XSearchDescriptor"
       ],
       [
-        "..uno.x_interface",
-        "XInterface"
-      ],
-      [
         "..container.x_index_access",
         "XIndexAccess"
       ]
     ],
+    "quote": [
+      "XIndexAccess",
+      "XSearchDescriptor",
+      "XInterface"
+    ],
+    "typings": [],
     "name": "XSearchable",
     "imports": [],
     "namespace": "com.sun.star.util",
@@ -60,7 +62,13 @@
             "searches the contained texts for all occurrences of whatever is specified."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "xDesc",
+              "XSearchDescriptor",
+              "in"
+            ]
+          ]
         },
         {
           "name": "findFirst",
@@ -69,7 +77,13 @@
             "searches the contained texts for the next occurrence of whatever is specified."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "xDesc",
+              "XSearchDescriptor",
+              "in"
+            ]
+          ]
         },
         {
           "name": "findNext",
@@ -78,7 +92,18 @@
             "searches the contained texts for the next occurrence of whatever is specified."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "xStartAt",
+              "XInterface",
+              "in"
+            ],
+            [
+              "xDesc",
+              "XSearchDescriptor",
+              "in"
+            ]
+          ]
         }
       ]
     }

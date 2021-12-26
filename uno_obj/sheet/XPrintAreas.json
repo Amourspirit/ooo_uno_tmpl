@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:47:46+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:34+00:00",
   "name": "XPrintAreas",
   "type": "interface",
   "namespace": "com.sun.star.sheet",
@@ -22,6 +22,13 @@
         "CellRangeAddress"
       ]
     ],
+    "quote": [
+      "CellRangeAddress",
+      "typing.List[CellRangeAddress]"
+    ],
+    "typings": [
+      "typing.List[CellRangeAddress]"
+    ],
     "name": "XPrintAreas",
     "imports": [],
     "namespace": "com.sun.star.sheet",
@@ -36,7 +43,7 @@
       "methods": [
         {
           "name": "getPrintAreas",
-          "returns": "'typing.List[CellRangeAddress]'",
+          "returns": "typing.List[CellRangeAddress]",
           "desc": [
             "returns a sequence containing all print areas of the sheet."
           ],
@@ -92,7 +99,13 @@
             "If none of the sheets in a document have print areas, the whole sheets are printed. If any sheet contains print areas, other sheets without print areas are not printed."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aPrintAreas",
+              "typing.List[CellRangeAddress]",
+              "in"
+            ]
+          ]
         },
         {
           "name": "setPrintTitleColumns",
@@ -101,7 +114,13 @@
             "specifies whether the title columns are repeated on all subsequent print pages to the right."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "bPrintTitleColumns",
+              "bool",
+              "in"
+            ]
+          ]
         },
         {
           "name": "setPrintTitleRows",
@@ -110,7 +129,13 @@
             "specifies whether the title rows are repeated on all subsequent print pages to the bottom."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "bPrintTitleRows",
+              "bool",
+              "in"
+            ]
+          ]
         },
         {
           "name": "setTitleColumns",
@@ -123,7 +148,13 @@
             "Title columns can be automatically repeated on all subsequent print pages to the right, using XPrintAreas.setPrintTitleColumns()."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aTitleColumns",
+              "CellRangeAddress",
+              "in"
+            ]
+          ]
         },
         {
           "name": "setTitleRows",
@@ -136,7 +167,13 @@
             "Title rows can be automatically repeated on all subsequent print pages to the bottom, using XPrintAreas.setPrintTitleRows()."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aTitleRows",
+              "CellRangeAddress",
+              "in"
+            ]
+          ]
         }
       ]
     }

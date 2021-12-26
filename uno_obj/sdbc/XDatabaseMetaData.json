@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:48:20+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:52+00:00",
   "name": "XDatabaseMetaData",
   "type": "interface",
   "namespace": "com.sun.star.sdbc",
@@ -17,6 +17,10 @@
       ]
     ],
     "from_imports_typing": [],
+    "quote": [
+      "object"
+    ],
+    "typings": [],
     "name": "XDatabaseMetaData",
     "imports": [],
     "namespace": "com.sun.star.sdbc",
@@ -90,7 +94,13 @@
           "raises": [
             "SQLException"
           ],
-          "args": []
+          "args": [
+            [
+              "setType",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "doesMaxRowSizeIncludeBlobs",
@@ -116,7 +126,33 @@
           "raises": [
             "SQLException"
           ],
-          "args": []
+          "args": [
+            [
+              "catalog",
+              "object",
+              "in"
+            ],
+            [
+              "schema",
+              "str",
+              "in"
+            ],
+            [
+              "table",
+              "str",
+              "in"
+            ],
+            [
+              "scope",
+              "int",
+              "in"
+            ],
+            [
+              "nullable",
+              "bool",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getCatalogSeparator",
@@ -168,7 +204,28 @@
           "raises": [
             "SQLException"
           ],
-          "args": []
+          "args": [
+            [
+              "catalog",
+              "object",
+              "in"
+            ],
+            [
+              "schema",
+              "str",
+              "in"
+            ],
+            [
+              "table",
+              "str",
+              "in"
+            ],
+            [
+              "columnNamePattern",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getColumns",
@@ -183,7 +240,28 @@
           "raises": [
             "SQLException"
           ],
-          "args": []
+          "args": [
+            [
+              "catalog",
+              "object",
+              "in"
+            ],
+            [
+              "schemaPattern",
+              "str",
+              "in"
+            ],
+            [
+              "tableNamePattern",
+              "str",
+              "in"
+            ],
+            [
+              "columnNamePattern",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getConnection",
@@ -209,7 +287,38 @@
           "raises": [
             "SQLException"
           ],
-          "args": []
+          "args": [
+            [
+              "primaryCatalog",
+              "object",
+              "in"
+            ],
+            [
+              "primarySchema",
+              "str",
+              "in"
+            ],
+            [
+              "primaryTable",
+              "str",
+              "in"
+            ],
+            [
+              "foreignCatalog",
+              "object",
+              "in"
+            ],
+            [
+              "foreignSchema",
+              "str",
+              "in"
+            ],
+            [
+              "foreignTable",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getDatabaseProductName",
@@ -299,7 +408,23 @@
           "raises": [
             "SQLException"
           ],
-          "args": []
+          "args": [
+            [
+              "catalog",
+              "object",
+              "in"
+            ],
+            [
+              "schema",
+              "str",
+              "in"
+            ],
+            [
+              "table",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getExtraNameCharacters",
@@ -336,7 +461,23 @@
           "raises": [
             "SQLException"
           ],
-          "args": []
+          "args": [
+            [
+              "catalog",
+              "object",
+              "in"
+            ],
+            [
+              "schema",
+              "str",
+              "in"
+            ],
+            [
+              "table",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getIndexInfo",
@@ -351,7 +492,33 @@
           "raises": [
             "SQLException"
           ],
-          "args": []
+          "args": [
+            [
+              "catalog",
+              "object",
+              "in"
+            ],
+            [
+              "schema",
+              "str",
+              "in"
+            ],
+            [
+              "table",
+              "str",
+              "in"
+            ],
+            [
+              "unique",
+              "bool",
+              "in"
+            ],
+            [
+              "approximate",
+              "bool",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getMaxBinaryLiteralLength",
@@ -599,7 +766,23 @@
           "raises": [
             "SQLException"
           ],
-          "args": []
+          "args": [
+            [
+              "catalog",
+              "object",
+              "in"
+            ],
+            [
+              "schema",
+              "str",
+              "in"
+            ],
+            [
+              "table",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getProcedureColumns",
@@ -616,7 +799,28 @@
           "raises": [
             "SQLException"
           ],
-          "args": []
+          "args": [
+            [
+              "catalog",
+              "object",
+              "in"
+            ],
+            [
+              "schemaPattern",
+              "str",
+              "in"
+            ],
+            [
+              "procedureNamePattern",
+              "str",
+              "in"
+            ],
+            [
+              "columnNamePattern",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getProcedureTerm",
@@ -642,7 +846,23 @@
           "raises": [
             "SQLException"
           ],
-          "args": []
+          "args": [
+            [
+              "catalog",
+              "object",
+              "in"
+            ],
+            [
+              "schemaPattern",
+              "str",
+              "in"
+            ],
+            [
+              "procedureNamePattern",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getSQLKeywords",
@@ -739,7 +959,23 @@
           "raises": [
             "SQLException"
           ],
-          "args": []
+          "args": [
+            [
+              "catalog",
+              "object",
+              "in"
+            ],
+            [
+              "schemaPattern",
+              "str",
+              "in"
+            ],
+            [
+              "tableNamePattern",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getTableTypes",
@@ -771,7 +1007,28 @@
           "raises": [
             "SQLException"
           ],
-          "args": []
+          "args": [
+            [
+              "catalog",
+              "object",
+              "in"
+            ],
+            [
+              "schemaPattern",
+              "str",
+              "in"
+            ],
+            [
+              "tableNamePattern",
+              "str",
+              "in"
+            ],
+            [
+              "types",
+              "typing.List[str]",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getTimeDateFunctions",
@@ -816,7 +1073,28 @@
           "raises": [
             "SQLException"
           ],
-          "args": []
+          "args": [
+            [
+              "catalog",
+              "object",
+              "in"
+            ],
+            [
+              "schemaPattern",
+              "str",
+              "in"
+            ],
+            [
+              "typeNamePattern",
+              "str",
+              "in"
+            ],
+            [
+              "types",
+              "typing.List[int]",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getURL",
@@ -853,7 +1131,23 @@
           "raises": [
             "SQLException"
           ],
-          "args": []
+          "args": [
+            [
+              "catalog",
+              "object",
+              "in"
+            ],
+            [
+              "schema",
+              "str",
+              "in"
+            ],
+            [
+              "table",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "insertsAreDetected",
@@ -866,7 +1160,13 @@
           "raises": [
             "SQLException"
           ],
-          "args": []
+          "args": [
+            [
+              "setType",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "isCatalogAtStart",
@@ -954,7 +1254,13 @@
           "raises": [
             "SQLException"
           ],
-          "args": []
+          "args": [
+            [
+              "setType",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "othersInsertsAreVisible",
@@ -965,7 +1271,13 @@
           "raises": [
             "SQLException"
           ],
-          "args": []
+          "args": [
+            [
+              "setType",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "othersUpdatesAreVisible",
@@ -976,7 +1288,13 @@
           "raises": [
             "SQLException"
           ],
-          "args": []
+          "args": [
+            [
+              "setType",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "ownDeletesAreVisible",
@@ -987,7 +1305,13 @@
           "raises": [
             "SQLException"
           ],
-          "args": []
+          "args": [
+            [
+              "setType",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "ownInsertsAreVisible",
@@ -998,7 +1322,13 @@
           "raises": [
             "SQLException"
           ],
-          "args": []
+          "args": [
+            [
+              "setType",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "ownUpdatesAreVisible",
@@ -1009,7 +1339,13 @@
           "raises": [
             "SQLException"
           ],
-          "args": []
+          "args": [
+            [
+              "setType",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "storesLowerCaseIdentifiers",
@@ -1214,7 +1550,18 @@
           "raises": [
             "SQLException"
           ],
-          "args": []
+          "args": [
+            [
+              "fromType",
+              "int",
+              "in"
+            ],
+            [
+              "toType",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "supportsCoreSQLGrammar",
@@ -1525,7 +1872,18 @@
           "raises": [
             "SQLException"
           ],
-          "args": []
+          "args": [
+            [
+              "setType",
+              "int",
+              "in"
+            ],
+            [
+              "concurrency",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "supportsResultSetType",
@@ -1536,7 +1894,13 @@
           "raises": [
             "SQLException"
           ],
-          "args": []
+          "args": [
+            [
+              "setType",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "supportsSchemasInDataManipulation",
@@ -1679,7 +2043,13 @@
           "raises": [
             "SQLException"
           ],
-          "args": []
+          "args": [
+            [
+              "level",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "supportsTransactions",
@@ -1734,7 +2104,13 @@
           "raises": [
             "SQLException"
           ],
-          "args": []
+          "args": [
+            [
+              "setType",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "usesLocalFilePerTable",

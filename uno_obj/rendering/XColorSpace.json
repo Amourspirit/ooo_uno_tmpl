@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:52:40+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:53+00:00",
   "name": "XColorSpace",
   "type": "interface",
   "namespace": "com.sun.star.rendering",
@@ -10,11 +10,16 @@
   },
   "writer_args": {},
   "data": {
-    "from_imports": [],
+    "from_imports": [
+      [
+        ".x_integer_bitmap_color_space",
+        "XIntegerBitmapColorSpace"
+      ]
+    ],
     "from_imports_typing": [
       [
-        "..beans.property_value",
-        "PropertyValue"
+        ".argb_color",
+        "ARGBColor"
       ],
       [
         ".rgb_color",
@@ -25,18 +30,35 @@
         "byte"
       ],
       [
-        ".color_component",
-        "ColorComponent"
+        "..beans.property_value",
+        "PropertyValue"
       ],
       [
-        ".argb_color",
-        "ARGBColor"
+        ".color_component",
+        "ColorComponent"
       ]
+    ],
+    "quote": [
+      "typing.List[PropertyValue]",
+      "typing.List[RGBColor]",
+      "typing.List[ColorComponent]",
+      "object",
+      "typing.List[ARGBColor]",
+      "typing.List[byte]"
+    ],
+    "typings": [
+      "typing.List[PropertyValue]",
+      "typing.List[RGBColor]",
+      "typing.List[ColorComponent]",
+      "typing.List[ARGBColor]",
+      "typing.List[byte]"
     ],
     "name": "XColorSpace",
     "imports": [],
     "namespace": "com.sun.star.rendering",
-    "extends": [],
+    "extends": [
+      "com.sun.star.rendering.XIntegerBitmapColorSpace"
+    ],
     "desc": [
       "Information how to interpret certain color data.",
       "",
@@ -49,18 +71,29 @@
       "methods": [
         {
           "name": "convertColorSpace",
-          "returns": "'typing.List[ColorComponent]'",
+          "returns": "typing.List[ColorComponent]",
           "desc": [
             "Convert to color of another color space."
           ],
           "raises": [
             "com.sun.star.lang.IllegalArgumentException"
           ],
-          "args": []
+          "args": [
+            [
+              "deviceColor",
+              "typing.List[ColorComponent]",
+              "in"
+            ],
+            [
+              "targetColorSpace",
+              "object",
+              "in"
+            ]
+          ]
         },
         {
           "name": "convertFromARGB",
-          "returns": "'typing.List[ColorComponent]'",
+          "returns": "typing.List[ColorComponent]",
           "desc": [
             "Convert sRGB color with linear alpha into this color space.",
             "",
@@ -69,11 +102,17 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException"
           ],
-          "args": []
+          "args": [
+            [
+              "rgbColor",
+              "typing.List[ARGBColor]",
+              "in"
+            ]
+          ]
         },
         {
           "name": "convertFromPARGB",
-          "returns": "'typing.List[ColorComponent]'",
+          "returns": "typing.List[ColorComponent]",
           "desc": [
             "Convert premultiplied sRGB color with linear alpha into this color space.",
             "",
@@ -82,11 +121,17 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException"
           ],
-          "args": []
+          "args": [
+            [
+              "rgbColor",
+              "typing.List[ARGBColor]",
+              "in"
+            ]
+          ]
         },
         {
           "name": "convertFromRGB",
-          "returns": "'typing.List[ColorComponent]'",
+          "returns": "typing.List[ColorComponent]",
           "desc": [
             "Convert sRGB color to a representation in this color space.",
             "",
@@ -95,11 +140,17 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException"
           ],
-          "args": []
+          "args": [
+            [
+              "rgbColor",
+              "typing.List[RGBColor]",
+              "in"
+            ]
+          ]
         },
         {
           "name": "convertToARGB",
-          "returns": "'typing.List[ARGBColor]'",
+          "returns": "typing.List[ARGBColor]",
           "desc": [
             "Convert color value in this color space to sRGB color values, with linear alpha.",
             "",
@@ -108,11 +159,17 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException"
           ],
-          "args": []
+          "args": [
+            [
+              "deviceColor",
+              "typing.List[ColorComponent]",
+              "in"
+            ]
+          ]
         },
         {
           "name": "convertToPARGB",
-          "returns": "'typing.List[ARGBColor]'",
+          "returns": "typing.List[ARGBColor]",
           "desc": [
             "Convert color value in this color space to premultiplied sRGB color values, with linear alpha.",
             "",
@@ -121,11 +178,17 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException"
           ],
-          "args": []
+          "args": [
+            [
+              "deviceColor",
+              "typing.List[ColorComponent]",
+              "in"
+            ]
+          ]
         },
         {
           "name": "convertToRGB",
-          "returns": "'typing.List[RGBColor]'",
+          "returns": "typing.List[RGBColor]",
           "desc": [
             "Convert color value in this color space to sRGB color values.",
             "",
@@ -134,11 +197,17 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException"
           ],
-          "args": []
+          "args": [
+            [
+              "deviceColor",
+              "typing.List[ColorComponent]",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getComponentTags",
-          "returns": "'typing.List[byte]'",
+          "returns": "typing.List[byte]",
           "desc": [
             "Query the kind for each color component.",
             "",
@@ -151,7 +220,7 @@
         },
         {
           "name": "getProperties",
-          "returns": "'typing.List[PropertyValue]'",
+          "returns": "typing.List[PropertyValue]",
           "desc": [
             "Query various optional properties from the color space.",
             "",

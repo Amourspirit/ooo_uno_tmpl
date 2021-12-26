@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:51:40+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:07+00:00",
   "name": "XPresenterHelper",
   "type": "interface",
   "namespace": "com.sun.star.drawing",
@@ -17,18 +17,25 @@
         "Rectangle"
       ],
       [
-        "..rendering.x_canvas",
-        "XCanvas"
+        "..awt.x_window",
+        "XWindow"
       ],
       [
         "..rendering.x_bitmap",
         "XBitmap"
       ],
       [
-        "..awt.x_window",
-        "XWindow"
+        "..rendering.x_canvas",
+        "XCanvas"
       ]
     ],
+    "quote": [
+      "XWindow",
+      "XCanvas",
+      "Rectangle",
+      "XBitmap"
+    ],
+    "typings": [],
     "name": "XPresenterHelper",
     "imports": [],
     "namespace": "com.sun.star.drawing",
@@ -52,7 +59,13 @@
             "Note that this is a potentially dangerous method. Not calling releaseMouse eventually can lead to an unresponsive application."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "xWindow",
+              "XWindow",
+              "in"
+            ]
+          ]
         },
         {
           "name": "createCanvas",
@@ -61,7 +74,23 @@
             "Create a new canvas for the given window."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "xWindow",
+              "XWindow",
+              "in"
+            ],
+            [
+              "nRequestedCanvasFeatureList",
+              "int",
+              "in"
+            ],
+            [
+              "sOptionalCanvasServiceName",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "createSharedCanvas",
@@ -72,7 +101,33 @@
             "The new canvas is a wrapper around the given shared canvas. The wrapper only modifies the origin in all output and clipping methods."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "xUpdateCanvas",
+              "XSpriteCanvas",
+              "in"
+            ],
+            [
+              "xUpdateWindow",
+              "XWindow",
+              "in"
+            ],
+            [
+              "xSharedCanvas",
+              "XCanvas",
+              "in"
+            ],
+            [
+              "xSharedWindow",
+              "XWindow",
+              "in"
+            ],
+            [
+              "xWindow",
+              "XWindow",
+              "in"
+            ]
+          ]
         },
         {
           "name": "createWindow",
@@ -81,7 +136,33 @@
             "Create a new window as child window of the given parent window."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "xParentWindow",
+              "XWindow",
+              "in"
+            ],
+            [
+              "bCreateSystemChildWindow",
+              "bool",
+              "in"
+            ],
+            [
+              "bInitiallyVisible",
+              "bool",
+              "in"
+            ],
+            [
+              "bEnableChildTransparentMode",
+              "bool",
+              "in"
+            ],
+            [
+              "bEnableParentClip",
+              "bool",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getWindowExtentsRelative",
@@ -90,7 +171,18 @@
             "Return the bounding box of the given child window relative to the direct or indirect parent window."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "xChildWindow",
+              "XWindow",
+              "in"
+            ],
+            [
+              "xParentWindow",
+              "XWindow",
+              "in"
+            ]
+          ]
         },
         {
           "name": "loadBitmap",
@@ -99,7 +191,18 @@
             "Load a bitmap with a given ID."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "id",
+              "str",
+              "in"
+            ],
+            [
+              "xCanvas",
+              "XCanvas",
+              "in"
+            ]
+          ]
         },
         {
           "name": "releaseMouse",
@@ -108,7 +211,13 @@
             "Release a previously captured mouse."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "xWindow",
+              "XWindow",
+              "in"
+            ]
+          ]
         },
         {
           "name": "toTop",
@@ -119,7 +228,13 @@
             "As a result the window will be painted over all its overlapping siblings."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "xWindow",
+              "XWindow",
+              "in"
+            ]
+          ]
         }
       ]
     }

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:45:33+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:22+00:00",
   "name": "XDebugging",
   "type": "interface",
   "namespace": "com.sun.star.script",
@@ -21,6 +21,13 @@
         ".context_information",
         "ContextInformation"
       ]
+    ],
+    "quote": [
+      "typing.List[str]",
+      "ContextInformation"
+    ],
+    "typings": [
+      "typing.List[str]"
     ],
     "name": "XDebugging",
     "imports": [],
@@ -45,7 +52,13 @@
             "clears all breakpoints in the module set by \\\"setBreakPoint\\\"."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aModuleName",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "doContinue",
@@ -63,7 +76,18 @@
             "returns the value of the variable at the given stack position."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aVariableName",
+              "str",
+              "in"
+            ],
+            [
+              "nCallStackPos",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "eval",
@@ -72,7 +96,18 @@
             "Evaluates an expression."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aSourceCode",
+              "str",
+              "in"
+            ],
+            [
+              "nCallStackPos",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getContextInformation",
@@ -81,7 +116,13 @@
             "returns more detailed information about a specified stack frame."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "nCallStackPos",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getStackTrace",
@@ -101,7 +142,18 @@
             "returns whether the given variable exists within the specified stack frame."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aVariableName",
+              "str",
+              "in"
+            ],
+            [
+              "nCallStackPos",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "setBreakPoint",
@@ -110,7 +162,23 @@
             "returns the source code line where the breakpoint was set."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aModuleName",
+              "str",
+              "in"
+            ],
+            [
+              "nSourceCodeLine",
+              "int",
+              "in"
+            ],
+            [
+              "bOn",
+              "bool",
+              "in"
+            ]
+          ]
         },
         {
           "name": "setVariable",
@@ -119,7 +187,23 @@
             "sets the value of the specified variable within the specified stack frame."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aVariableName",
+              "str",
+              "in"
+            ],
+            [
+              "aValue",
+              "str",
+              "in"
+            ],
+            [
+              "nCallStackPos",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "stepIn",

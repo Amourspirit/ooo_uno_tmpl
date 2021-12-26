@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:52:58+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:11+00:00",
   "name": "XNumberFormatCode",
   "type": "interface",
   "namespace": "com.sun.star.i18n",
@@ -22,6 +22,13 @@
         "NumberFormatCode"
       ]
     ],
+    "quote": [
+      "typing.List[NumberFormatCode]",
+      "object"
+    ],
+    "typings": [
+      "typing.List[NumberFormatCode]"
+    ],
     "name": "XNumberFormatCode",
     "imports": [],
     "namespace": "com.sun.star.i18n",
@@ -36,21 +43,38 @@
       "methods": [
         {
           "name": "getAllFormatCode",
-          "returns": "'typing.List[NumberFormatCode]'",
+          "returns": "typing.List[NumberFormatCode]",
           "desc": [
             "returns all format codes for a given nFormatUsage and locale."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "nFormatUsage",
+              "int",
+              "in"
+            ],
+            [
+              "rLocale",
+              "Locale",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getAllFormatCodes",
-          "returns": "'typing.List[NumberFormatCode]'",
+          "returns": "typing.List[NumberFormatCode]",
           "desc": [
             "returns all format codes for a given locale."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "rLocale",
+              "Locale",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getDefault",
@@ -59,7 +83,23 @@
             "returns the default number format code of a specific category (usage group) for a given locale and format length type."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "nFormatType",
+              "int",
+              "in"
+            ],
+            [
+              "nFormatUsage",
+              "int",
+              "in"
+            ],
+            [
+              "rLocale",
+              "Locale",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getFormatCode",
@@ -68,7 +108,18 @@
             "returns the number format pointed to by nFormatIndex for a given locale."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "nFormatIndex",
+              "int",
+              "in"
+            ],
+            [
+              "rLocale",
+              "Locale",
+              "in"
+            ]
+          ]
         }
       ]
     }

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:48:01+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:08+00:00",
   "name": "XFastParser",
   "type": "interface",
   "namespace": "com.sun.star.xml.sax",
@@ -17,6 +17,8 @@
       ]
     ],
     "from_imports_typing": [],
+    "quote": [],
+    "typings": [],
     "name": "XFastParser",
     "imports": [],
     "namespace": "com.sun.star.xml.sax",
@@ -68,7 +70,13 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException"
           ],
-          "args": []
+          "args": [
+            [
+              "prefix",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "parseStream",
@@ -81,7 +89,13 @@
           "raises": [
             "SAXException,"
           ],
-          "args": []
+          "args": [
+            [
+              "aInputSource",
+              "object",
+              "in"
+            ]
+          ]
         },
         {
           "name": "registerNamespace",
@@ -92,7 +106,18 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException"
           ],
-          "args": []
+          "args": [
+            [
+              "NamespaceURL",
+              "str",
+              "in"
+            ],
+            [
+              "NamespaceToken",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "setCustomEntityNames",
@@ -107,7 +132,13 @@
             "    LibreOffice 7.1"
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "replacements",
+              "typing.List[typing.Tuple[str, str]]",
+              "in"
+            ]
+          ]
         },
         {
           "name": "setEntityResolver",
@@ -116,7 +147,13 @@
             "allows an application to register a DTD-Handler."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "Resolver",
+              "object",
+              "in"
+            ]
+          ]
         },
         {
           "name": "setErrorHandler",
@@ -127,7 +164,13 @@
             "Note that the error handler can throw an exception when an error or warning occurs. Note that an exception is thrown by the parser when an unrecoverable (fatal) error occurs."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "Handler",
+              "object",
+              "in"
+            ]
+          ]
         },
         {
           "name": "setFastDocumentHandler",
@@ -136,7 +179,13 @@
             "Application must register a document event handler to get sax events for the parsed stream."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "Handler",
+              "object",
+              "in"
+            ]
+          ]
         },
         {
           "name": "setLocale",
@@ -147,14 +196,26 @@
             "Set the language of the error messages. Useful when the parsing errors will be presented to the user."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "locale",
+              "Locale",
+              "in"
+            ]
+          ]
         },
         {
           "name": "setNamespaceHandler",
           "returns": "None",
           "desc": [],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "Handler",
+              "object",
+              "in"
+            ]
+          ]
         },
         {
           "name": "setTokenHandler",
@@ -163,7 +224,13 @@
             "must be registered to translate known XML names to integer tokens."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "Handler",
+              "object",
+              "in"
+            ]
+          ]
         }
       ]
     }

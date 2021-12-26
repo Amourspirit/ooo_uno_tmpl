@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:52:38+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:53+00:00",
   "name": "XAnimatedSprite",
   "type": "interface",
   "namespace": "com.sun.star.rendering",
@@ -17,6 +17,8 @@
       ]
     ],
     "from_imports_typing": [],
+    "quote": [],
+    "typings": [],
     "name": "XAnimatedSprite",
     "imports": [],
     "namespace": "com.sun.star.rendering",
@@ -59,7 +61,33 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException"
           ],
-          "args": []
+          "args": [
+            [
+              "aNewPos",
+              "RealPoint2D",
+              "in"
+            ],
+            [
+              "aViewState",
+              "object",
+              "in"
+            ],
+            [
+              "aRenderState",
+              "object",
+              "in"
+            ],
+            [
+              "nAlpha",
+              "float",
+              "in"
+            ],
+            [
+              "bUpdateAnimation",
+              "bool",
+              "in"
+            ]
+          ]
         },
         {
           "name": "setViewState",
@@ -72,7 +100,13 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException"
           ],
-          "args": []
+          "args": [
+            [
+              "aViewState",
+              "object",
+              "in"
+            ]
+          ]
         },
         {
           "name": "startAnimation",
@@ -83,7 +117,13 @@
             "The speed of the animation is given in cycles per second (where a cycle is defined as one full animation run, i.e. the full [0,1] range of the XAnimation.render()'s t parameter, or a full sequence of sprite bitmaps drawn). Once an animation is running, the associated XSpriteCanvas handles screen updates automatically. That means, changes to position or alpha are reflected on screen automatically. Please note further that sprite visibility and animation are unrelated, i.e. a hidden sprite can have a running animation, which then displays in the middle of the animation sequence, when a show() is called later on."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "nSpeed",
+              "float",
+              "in"
+            ]
+          ]
         },
         {
           "name": "stopAnimation",

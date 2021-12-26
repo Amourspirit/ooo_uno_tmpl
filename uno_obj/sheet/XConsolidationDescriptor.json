@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:47:35+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:32+00:00",
   "name": "XConsolidationDescriptor",
   "type": "interface",
   "namespace": "com.sun.star.sheet",
@@ -18,17 +18,25 @@
     ],
     "from_imports_typing": [
       [
-        "..table.cell_address",
-        "CellAddress"
+        "..table.cell_range_address",
+        "CellRangeAddress"
       ],
       [
         ".general_function",
         "GeneralFunction"
       ],
       [
-        "..table.cell_range_address",
-        "CellRangeAddress"
+        "..table.cell_address",
+        "CellAddress"
       ]
+    ],
+    "quote": [
+      "CellAddress",
+      "GeneralFunction",
+      "typing.List[CellRangeAddress]"
+    ],
+    "typings": [
+      "typing.List[CellRangeAddress]"
     ],
     "name": "XConsolidationDescriptor",
     "imports": [],
@@ -66,7 +74,7 @@
         },
         {
           "name": "getSources",
-          "returns": "'typing.List[CellRangeAddress]'",
+          "returns": "typing.List[CellRangeAddress]",
           "desc": [
             "returns the cell ranges which are consolidated."
           ],
@@ -107,7 +115,13 @@
             "sets the function by which the ranges are consolidated."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "nFunction",
+              "GeneralFunction",
+              "in"
+            ]
+          ]
         },
         {
           "name": "setInsertLinks",
@@ -116,7 +130,13 @@
             "specifies if links to the original data are inserted in the output area."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "bInsertLinks",
+              "bool",
+              "in"
+            ]
+          ]
         },
         {
           "name": "setSources",
@@ -125,7 +145,13 @@
             "sets the cell ranges which are consolidated."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aSources",
+              "typing.List[CellRangeAddress]",
+              "in"
+            ]
+          ]
         },
         {
           "name": "setStartOutputPosition",
@@ -134,7 +160,13 @@
             "sets the position of the top left cell of the cell range where the consolidated data are copied."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aStartOutputPosition",
+              "CellAddress",
+              "in"
+            ]
+          ]
         },
         {
           "name": "setUseColumnHeaders",
@@ -143,7 +175,13 @@
             "specifies if column headers from the cell ranges are used to find matching data."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "bUseColumnHeaders",
+              "bool",
+              "in"
+            ]
+          ]
         },
         {
           "name": "setUseRowHeaders",
@@ -152,7 +190,13 @@
             "specifies if row headers from the cell ranges are used to find matching data."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "bUseRowHeaders",
+              "bool",
+              "in"
+            ]
+          ]
         }
       ]
     }

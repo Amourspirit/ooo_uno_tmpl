@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:50:51+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:05:01+00:00",
   "name": "XGridRowSelection",
   "type": "interface",
   "namespace": "com.sun.star.awt.grid",
@@ -10,12 +10,25 @@
   },
   "writer_args": {},
   "data": {
-    "from_imports": [],
+    "from_imports": [
+      [
+        ".uno_control_grid",
+        "UnoControlGrid"
+      ]
+    ],
     "from_imports_typing": [],
+    "quote": [
+      "typing.List[int]"
+    ],
+    "typings": [
+      "typing.List[int]"
+    ],
     "name": "XGridRowSelection",
     "imports": [],
     "namespace": "com.sun.star.awt.grid",
-    "extends": [],
+    "extends": [
+      "com.sun.star.awt.grid.UnoControlGrid"
+    ],
     "desc": [
       "This interfaces provides access to the selection of row for UnoControlGrid.",
       "",
@@ -33,7 +46,13 @@
             "Adds a listener for the GridSelectionEvent posted after the grid changes."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "listener",
+              "object",
+              "in"
+            ]
+          ]
         },
         {
           "name": "deselectAllRows",
@@ -53,7 +72,13 @@
           "raises": [
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
-          "args": []
+          "args": [
+            [
+              "RowIndex",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getSelectedRows",
@@ -80,7 +105,13 @@
             "Returns whether a specific row is selected."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "RowIndex",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "removeSelectionListener",
@@ -89,7 +120,13 @@
             "Removes a listener previously added with addSelectionListener()."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "listener",
+              "object",
+              "in"
+            ]
+          ]
         },
         {
           "name": "selectAllRows",
@@ -109,7 +146,13 @@
           "raises": [
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
-          "args": []
+          "args": [
+            [
+              "RowIndex",
+              "int",
+              "in"
+            ]
+          ]
         }
       ]
     }

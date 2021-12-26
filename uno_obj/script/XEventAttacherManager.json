@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:45:35+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:22+00:00",
   "name": "XEventAttacherManager",
   "type": "interface",
   "namespace": "com.sun.star.script",
@@ -21,6 +21,12 @@
         ".script_event_descriptor",
         "ScriptEventDescriptor"
       ]
+    ],
+    "quote": [
+      "typing.List[ScriptEventDescriptor]"
+    ],
+    "typings": [
+      "typing.List[ScriptEventDescriptor]"
     ],
     "name": "XEventAttacherManager",
     "imports": [],
@@ -47,7 +53,13 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException"
           ],
-          "args": []
+          "args": [
+            [
+              "xListener",
+              "XScriptListener",
+              "in"
+            ]
+          ]
         },
         {
           "name": "attach",
@@ -60,7 +72,23 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException,"
           ],
-          "args": []
+          "args": [
+            [
+              "nIndex",
+              "int",
+              "in"
+            ],
+            [
+              "xObject",
+              "XInterface",
+              "in"
+            ],
+            [
+              "aHelper",
+              "object",
+              "in"
+            ]
+          ]
         },
         {
           "name": "detach",
@@ -73,16 +101,33 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException"
           ],
-          "args": []
+          "args": [
+            [
+              "nIndex",
+              "int",
+              "in"
+            ],
+            [
+              "xObject",
+              "XInterface",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getScriptEvents",
-          "returns": "'typing.List[ScriptEventDescriptor]'",
+          "returns": "typing.List[ScriptEventDescriptor]",
           "desc": [],
           "raises": [
             "com.sun.star.lang.IllegalArgumentException"
           ],
-          "args": []
+          "args": [
+            [
+              "Index",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "insertEntry",
@@ -95,7 +140,13 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException"
           ],
-          "args": []
+          "args": [
+            [
+              "nIndex",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "registerScriptEvent",
@@ -110,7 +161,18 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException"
           ],
-          "args": []
+          "args": [
+            [
+              "nIndex",
+              "int",
+              "in"
+            ],
+            [
+              "aScriptEvent",
+              "ScriptEventDescriptor",
+              "in"
+            ]
+          ]
         },
         {
           "name": "registerScriptEvents",
@@ -127,7 +189,18 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException"
           ],
-          "args": []
+          "args": [
+            [
+              "nIndex",
+              "int",
+              "in"
+            ],
+            [
+              "aScriptEvents",
+              "typing.List[ScriptEventDescriptor]",
+              "in"
+            ]
+          ]
         },
         {
           "name": "removeEntry",
@@ -140,7 +213,13 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException"
           ],
-          "args": []
+          "args": [
+            [
+              "nIndex",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "removeScriptListener",
@@ -155,7 +234,13 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException"
           ],
-          "args": []
+          "args": [
+            [
+              "Listener",
+              "XScriptListener",
+              "in"
+            ]
+          ]
         },
         {
           "name": "revokeScriptEvent",
@@ -170,7 +255,28 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException"
           ],
-          "args": []
+          "args": [
+            [
+              "nIndex",
+              "int",
+              "in"
+            ],
+            [
+              "aListenerType",
+              "str",
+              "in"
+            ],
+            [
+              "aEventMethod",
+              "str",
+              "in"
+            ],
+            [
+              "aRemoveListenerParam",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "revokeScriptEvents",
@@ -183,7 +289,13 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException"
           ],
-          "args": []
+          "args": [
+            [
+              "nIndex",
+              "int",
+              "in"
+            ]
+          ]
         }
       ]
     }

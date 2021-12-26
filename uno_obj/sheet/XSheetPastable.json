@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:47:53+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:35+00:00",
   "name": "XSheetPastable",
   "type": "interface",
   "namespace": "com.sun.star.sheet",
@@ -17,6 +17,8 @@
       ]
     ],
     "from_imports_typing": [],
+    "quote": [],
+    "typings": [],
     "name": "XSheetPastable",
     "imports": [],
     "namespace": "com.sun.star.sheet",
@@ -40,7 +42,13 @@
             "pastes the contents of the clipboard at the specified position on the sheet."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aDestination",
+              "CellAddress",
+              "in"
+            ]
+          ]
         },
         {
           "name": "pasteCellRange",
@@ -51,7 +59,43 @@
             "The contents of the clipboard must be from a cell range."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aDestination",
+              "CellRangeAddress",
+              "in"
+            ],
+            [
+              "nOperation",
+              "PasteOperation",
+              "in"
+            ],
+            [
+              "nContents",
+              "int",
+              "in"
+            ],
+            [
+              "bSkipEmpty",
+              "bool",
+              "in"
+            ],
+            [
+              "bTranspose",
+              "bool",
+              "in"
+            ],
+            [
+              "bAsLink",
+              "bool",
+              "in"
+            ],
+            [
+              "nInsert",
+              "CellInsertMode",
+              "in"
+            ]
+          ]
         },
         {
           "name": "pasteFormat",
@@ -60,7 +104,18 @@
             "pastes the contents of the clipboard at the specified position on the sheet, using the specified format."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aDestination",
+              "CellAddress",
+              "in"
+            ],
+            [
+              "aFormat",
+              "str",
+              "in"
+            ]
+          ]
         }
       ]
     }

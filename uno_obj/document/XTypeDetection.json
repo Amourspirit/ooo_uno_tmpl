@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:49:33+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:40+00:00",
   "name": "XTypeDetection",
   "type": "interface",
   "namespace": "com.sun.star.document",
@@ -17,6 +17,8 @@
       ]
     ],
     "from_imports_typing": [],
+    "quote": [],
+    "typings": [],
     "name": "XTypeDetection",
     "imports": [],
     "namespace": "com.sun.star.document",
@@ -40,7 +42,18 @@
             "Instead of XTypeDetection.queryTypeByURL() this function use a MediaDescriptor to specify the document for detection. Such descriptor hold different information about the document. He will be passed to any part of made detection process and every part can change it to actualize it. The property MediaDescriptor.URL should be set on this descriptor as minimum. It specifies the location of the document. If this parameter is missing another one is required: MediaDescriptor.InputStream. This can be useful to prevent operation against multiple opening of the stream and perform the operation. If this stream isn't already included the detection will open it (if allowed!) and add it to the descriptor so it will be available for all following parts. A combination of both parameters can be useful to perform the operation and make results more stable; but only one of them is required. Of course its possible to specify more document properties (e.g. MediaDescriptor.ReadOnly). \n As an additional feature it's possible to suppress \\\"deep\\\" detection by using argument AllowDeep."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "Descriptor",
+              "object",
+              "in"
+            ],
+            [
+              "AllowDeep",
+              "bool",
+              "in"
+            ]
+          ]
         },
         {
           "name": "queryTypeByURL",
@@ -51,7 +64,13 @@
             "It use given URL in combination with the internal configuration of well known types only to specify the format of given document."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "URL",
+              "str",
+              "in"
+            ]
+          ]
         }
       ]
     }

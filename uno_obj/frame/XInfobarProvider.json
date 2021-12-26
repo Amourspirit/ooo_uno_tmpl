@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:51:53+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:48+00:00",
   "name": "XInfobarProvider",
   "type": "interface",
   "namespace": "com.sun.star.frame",
@@ -17,6 +17,8 @@
       ]
     ],
     "from_imports_typing": [],
+    "quote": [],
+    "typings": [],
     "name": "XInfobarProvider",
     "imports": [],
     "namespace": "com.sun.star.frame",
@@ -44,7 +46,38 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException"
           ],
-          "args": []
+          "args": [
+            [
+              "id",
+              "str",
+              "in"
+            ],
+            [
+              "primaryMessage",
+              "str",
+              "in"
+            ],
+            [
+              "secondaryMessage",
+              "str",
+              "in"
+            ],
+            [
+              "infobarType",
+              "int",
+              "in"
+            ],
+            [
+              "actionButtons",
+              "typing.List[StringPair]",
+              "in"
+            ],
+            [
+              "showCloseButton",
+              "bool",
+              "in"
+            ]
+          ]
         },
         {
           "name": "hasInfobar",
@@ -57,7 +90,13 @@
             "    LibreOffice 7.0"
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "id",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "removeInfobar",
@@ -68,7 +107,13 @@
           "raises": [
             "com.sun.star.container.NoSuchElementException"
           ],
-          "args": []
+          "args": [
+            [
+              "id",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "updateInfobar",
@@ -81,7 +126,28 @@
           "raises": [
             "com.sun.star.container.NoSuchElementException"
           ],
-          "args": []
+          "args": [
+            [
+              "id",
+              "str",
+              "in"
+            ],
+            [
+              "primaryMessage",
+              "str",
+              "in"
+            ],
+            [
+              "secondaryMessage",
+              "str",
+              "in"
+            ],
+            [
+              "infobarType",
+              "int",
+              "in"
+            ]
+          ]
         }
       ]
     }

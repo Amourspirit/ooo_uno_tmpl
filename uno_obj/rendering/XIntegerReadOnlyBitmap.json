@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:52:42+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:53+00:00",
   "name": "XIntegerReadOnlyBitmap",
   "type": "interface",
   "namespace": "com.sun.star.rendering",
@@ -21,6 +21,13 @@
         ".byte",
         "byte"
       ]
+    ],
+    "quote": [
+      "typing.List[byte]",
+      "object"
+    ],
+    "typings": [
+      "typing.List[byte]"
     ],
     "name": "XIntegerReadOnlyBitmap",
     "imports": [],
@@ -42,7 +49,7 @@
       "methods": [
         {
           "name": "getData",
-          "returns": "'typing.List[byte]'",
+          "returns": "typing.List[byte]",
           "desc": [
             "Query the raw data of this bitmap.",
             "",
@@ -53,7 +60,18 @@
           "raises": [
             "com.sun.star.lang.IndexOutOfBoundsException,"
           ],
-          "args": []
+          "args": [
+            [
+              "bitmapLayout",
+              "object",
+              "out"
+            ],
+            [
+              "rect",
+              "IntegerRectangle2D",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getMemoryLayout",
@@ -68,7 +86,7 @@
         },
         {
           "name": "getPixel",
-          "returns": "'typing.List[byte]'",
+          "returns": "typing.List[byte]",
           "desc": [
             "Get a single pixel of the bitmap, returning its color value.",
             "",
@@ -79,7 +97,18 @@
           "raises": [
             "com.sun.star.lang.IndexOutOfBoundsException,"
           ],
-          "args": []
+          "args": [
+            [
+              "bitmapLayout",
+              "object",
+              "out"
+            ],
+            [
+              "pos",
+              "IntegerPoint2D",
+              "in"
+            ]
+          ]
         }
       ]
     }

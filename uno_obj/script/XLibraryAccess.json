@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:45:36+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:22+00:00",
   "name": "XLibraryAccess",
   "type": "interface",
   "namespace": "com.sun.star.script",
@@ -21,6 +21,14 @@
         ".byte",
         "byte"
       ]
+    ],
+    "quote": [
+      "typing.List[byte]",
+      "typing.List[str]"
+    ],
+    "typings": [
+      "typing.List[byte]",
+      "typing.List[str]"
     ],
     "name": "XLibraryAccess",
     "imports": [],
@@ -42,12 +50,18 @@
       "methods": [
         {
           "name": "getFunctionCode",
-          "returns": "'typing.List[byte]'",
+          "returns": "typing.List[byte]",
           "desc": [
             "Get the compiled code of a function."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "FunctionName",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getFunctionSource",
@@ -56,16 +70,28 @@
             "get the source code of a function."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aFunctionName",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getModuleCode",
-          "returns": "'typing.List[byte]'",
+          "returns": "typing.List[byte]",
           "desc": [
             "Get the whole compiled code of a module."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aModuleName",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getModuleNames",
@@ -85,7 +111,13 @@
             "get the source code of a module."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aModulName",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "isFunction",
@@ -94,7 +126,13 @@
             "returns TRUE, if the function is accessible through this library; otherwise it returns FALSE."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aFunctionName",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "isValidPath",
@@ -103,7 +141,13 @@
             "returns TRUE if a fully qualified function name begins with this name."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aPathName",
+              "str",
+              "in"
+            ]
+          ]
         }
       ]
     }

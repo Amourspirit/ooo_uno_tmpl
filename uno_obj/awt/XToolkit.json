@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:46:30+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:16+00:00",
   "name": "XToolkit",
   "type": "interface",
   "namespace": "com.sun.star.awt",
@@ -18,21 +18,31 @@
     ],
     "from_imports_typing": [
       [
-        ".x_region",
-        "XRegion"
+        ".rectangle",
+        "Rectangle"
       ],
       [
-        ".x_window_peer",
-        "XWindowPeer"
+        ".x_region",
+        "XRegion"
       ],
       [
         ".x_device",
         "XDevice"
       ],
       [
-        ".rectangle",
-        "Rectangle"
+        ".x_window_peer",
+        "XWindowPeer"
       ]
+    ],
+    "quote": [
+      "XWindowPeer",
+      "XRegion",
+      "typing.List[XWindowPeer]",
+      "XDevice",
+      "Rectangle"
+    ],
+    "typings": [
+      "typing.List[XWindowPeer]"
     ],
     "name": "XToolkit",
     "imports": [],
@@ -64,7 +74,18 @@
             "creates a virtual device that is compatible with the screen."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "Width",
+              "int",
+              "in"
+            ],
+            [
+              "Height",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "createWindow",
@@ -75,18 +96,30 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException"
           ],
-          "args": []
+          "args": [
+            [
+              "Descriptor",
+              "WindowDescriptor",
+              "in"
+            ]
+          ]
         },
         {
           "name": "createWindows",
-          "returns": "'typing.List[XWindowPeer]'",
+          "returns": "typing.List[XWindowPeer]",
           "desc": [
             "returns a sequence of windows which are newly created using the given descriptors."
           ],
           "raises": [
             "com.sun.star.lang.IllegalArgumentException"
           ],
-          "args": []
+          "args": [
+            [
+              "Descriptors",
+              "typing.List[WindowDescriptor]",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getDesktopWindow",

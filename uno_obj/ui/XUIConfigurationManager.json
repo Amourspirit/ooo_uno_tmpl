@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:48:09+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:55+00:00",
   "name": "XUIConfigurationManager",
   "type": "interface",
   "namespace": "com.sun.star.ui",
@@ -18,25 +18,31 @@
     ],
     "from_imports_typing": [
       [
-        "..uno.x_interface",
-        "XInterface"
-      ],
-      [
-        ".x_accelerator_configuration",
-        "XAcceleratorConfiguration"
+        "..container.x_index_container",
+        "XIndexContainer"
       ],
       [
         "..container.x_index_access",
         "XIndexAccess"
       ],
       [
-        "..container.x_index_container",
-        "XIndexContainer"
-      ],
-      [
         "..beans.property_value",
         "PropertyValue"
+      ],
+      [
+        ".x_accelerator_configuration",
+        "XAcceleratorConfiguration"
       ]
+    ],
+    "quote": [
+      "XIndexContainer",
+      "XIndexAccess",
+      "XInterface",
+      "XAcceleratorConfiguration",
+      "typing.List[typing.List[PropertyValue]]"
+    ],
+    "typings": [
+      "typing.List[typing.List[PropertyValue]]"
     ],
     "name": "XUIConfigurationManager",
     "imports": [],
@@ -94,7 +100,18 @@
           "raises": [
             "com.sun.star.container.NoSuchElementException,"
           ],
-          "args": []
+          "args": [
+            [
+              "ResourceURL",
+              "str",
+              "in"
+            ],
+            [
+              "bWriteable",
+              "bool",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getShortCutManager",
@@ -109,7 +126,7 @@
         },
         {
           "name": "getUIElementsInfo",
-          "returns": "'typing.List[typing.List[PropertyValue]]'",
+          "returns": "typing.List[typing.List[PropertyValue]]",
           "desc": [
             "retrieves information about all user interface elements within the user interface configuration manager.",
             "",
@@ -118,7 +135,13 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException"
           ],
-          "args": []
+          "args": [
+            [
+              "ElementType",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "hasSettings",
@@ -129,7 +152,13 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException"
           ],
-          "args": []
+          "args": [
+            [
+              "ResourceURL",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "insertSettings",
@@ -142,7 +171,18 @@
           "raises": [
             "com.sun.star.container.ElementExistException,"
           ],
-          "args": []
+          "args": [
+            [
+              "NewResourceURL",
+              "str",
+              "in"
+            ],
+            [
+              "aNewData",
+              "XIndexAccess",
+              "in"
+            ]
+          ]
         },
         {
           "name": "removeSettings",
@@ -155,7 +195,13 @@
           "raises": [
             "com.sun.star.container.NoSuchElementException,"
           ],
-          "args": []
+          "args": [
+            [
+              "ResourceURL",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "replaceSettings",
@@ -168,7 +214,18 @@
           "raises": [
             "com.sun.star.container.NoSuchElementException,"
           ],
-          "args": []
+          "args": [
+            [
+              "ResourceURL",
+              "str",
+              "in"
+            ],
+            [
+              "aNewData",
+              "XIndexAccess",
+              "in"
+            ]
+          ]
         },
         {
           "name": "reset",

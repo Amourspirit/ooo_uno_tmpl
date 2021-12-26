@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:47:45+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:34+00:00",
   "name": "XNamedRanges",
   "type": "interface",
   "namespace": "com.sun.star.sheet",
@@ -17,6 +17,8 @@
       ]
     ],
     "from_imports_typing": [],
+    "quote": [],
+    "typings": [],
     "name": "XNamedRanges",
     "imports": [],
     "namespace": "com.sun.star.sheet",
@@ -40,7 +42,28 @@
             "This parameter will be zero for any common named range."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aName",
+              "str",
+              "in"
+            ],
+            [
+              "aContent",
+              "str",
+              "in"
+            ],
+            [
+              "aPosition",
+              "CellAddress",
+              "in"
+            ],
+            [
+              "nType",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "addNewFromTitles",
@@ -53,7 +76,18 @@
             "Example: The source range is A1:B3. The named ranges shall be created using row titles. This requires Border.TOP for the second parameter. The method creates two named ranges. The name of the first is equal to the content of cell A1 and contains the range $Sheet.$A$2:$A$3 (excluding the title cell). The latter named range is named using cell B1 and contains the cell range address $Sheet.$B$2:$B$3."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aSource",
+              "CellRangeAddress",
+              "in"
+            ],
+            [
+              "aBorder",
+              "Border",
+              "in"
+            ]
+          ]
         },
         {
           "name": "outputList",
@@ -64,7 +98,13 @@
             "The first column of the list contains the names. The second column contains the contents of the named ranges."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aOutputPosition",
+              "CellAddress",
+              "in"
+            ]
+          ]
         },
         {
           "name": "removeByName",
@@ -73,7 +113,13 @@
             "removes a named range from the collection."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aName",
+              "str",
+              "in"
+            ]
+          ]
         }
       ]
     }

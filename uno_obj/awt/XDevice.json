@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:46:11+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:13+00:00",
   "name": "XDevice",
   "type": "interface",
   "namespace": "com.sun.star.awt",
@@ -18,17 +18,26 @@
     ],
     "from_imports_typing": [
       [
-        ".font_descriptor",
-        "FontDescriptor"
-      ],
-      [
         ".device_info",
         "DeviceInfo"
+      ],
+      [
+        ".font_descriptor",
+        "FontDescriptor"
       ],
       [
         ".x_font",
         "XFont"
       ]
+    ],
+    "quote": [
+      "typing.List[FontDescriptor]",
+      "object",
+      "DeviceInfo",
+      "XFont"
+    ],
+    "typings": [
+      "typing.List[FontDescriptor]"
     ],
     "name": "XDevice",
     "imports": [],
@@ -51,7 +60,28 @@
             "If the specified area does not lie entirely in the device, the bits outside are not specified."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "nX",
+              "int",
+              "in"
+            ],
+            [
+              "nY",
+              "int",
+              "in"
+            ],
+            [
+              "nWidth",
+              "int",
+              "in"
+            ],
+            [
+              "nHeight",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "createDevice",
@@ -62,7 +92,18 @@
             "If the device does not support the GETBITS device capability, this method returns NULL."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "nWidth",
+              "int",
+              "in"
+            ],
+            [
+              "nHeight",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "createDisplayBitmap",
@@ -73,7 +114,13 @@
             "The data of the bitmap is in process memory instead of in the device, so that the output operation is fast."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "Bitmap",
+              "object",
+              "in"
+            ]
+          ]
         },
         {
           "name": "createGraphics",
@@ -91,11 +138,17 @@
             "returns information about a font offered by this device."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aDescriptor",
+              "object",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getFontDescriptors",
-          "returns": "'typing.List[FontDescriptor]'",
+          "returns": "typing.List[FontDescriptor]",
           "desc": [
             "returns the list of available font descriptors."
           ],

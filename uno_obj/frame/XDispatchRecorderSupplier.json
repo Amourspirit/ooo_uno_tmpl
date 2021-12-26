@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:51:50+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:47+00:00",
   "name": "XDispatchRecorderSupplier",
   "type": "interface",
   "namespace": "com.sun.star.frame",
@@ -22,6 +22,10 @@
         "XDispatchRecorder"
       ]
     ],
+    "quote": [
+      "XDispatchRecorder"
+    ],
+    "typings": [],
     "name": "XDispatchRecorderSupplier",
     "imports": [],
     "namespace": "com.sun.star.frame",
@@ -49,7 +53,23 @@
             "Parameter Dispatcher is used internally to make the dispatch. If recording isn't enabled it will be a normal XDispatch.dispatch() call. Otherwise follow algorithm is used:"
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "URL",
+              "URL",
+              "in"
+            ],
+            [
+              "Arguments",
+              "typing.List[PropertyValue]",
+              "in"
+            ],
+            [
+              "Dispatcher",
+              "object",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getDispatchRecorder",
@@ -71,7 +91,13 @@
             "Setting of a new recorder make it possible to change recording mode. May there can exist different implementations of a recorder (e.g. to generate Java, Basic or other formats). Changing between local recording inside one Frame or global one by using more than ones can be forced too."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "Recorder",
+              "XDispatchRecorder",
+              "in"
+            ]
+          ]
         }
       ]
     }

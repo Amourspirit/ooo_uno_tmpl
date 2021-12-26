@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:52:11+00:00",
+  "version": "0.1.6",
+  "timestamp": "2021-12-26 00:04:44+00:00",
   "name": "XImplementationRegistration",
   "type": "interface",
   "namespace": "com.sun.star.registry",
@@ -17,6 +17,12 @@
       ]
     ],
     "from_imports_typing": [],
+    "quote": [
+      "typing.List[str]"
+    ],
+    "typings": [
+      "typing.List[str]"
+    ],
     "name": "XImplementationRegistration",
     "imports": [],
     "namespace": "com.sun.star.registry",
@@ -34,14 +40,31 @@
           "returns": "typing.List[str]",
           "desc": [],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "implementationName",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getImplementations",
           "returns": "typing.List[str]",
           "desc": [],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aImplementationLoader",
+              "str",
+              "in"
+            ],
+            [
+              "aLocation",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "registerImplementation",
@@ -52,7 +75,23 @@
           "raises": [
             "com.sun.star.registry.CannotRegisterImplementationException"
           ],
-          "args": []
+          "args": [
+            [
+              "aImplementationLoader",
+              "str",
+              "in"
+            ],
+            [
+              "aLocation",
+              "str",
+              "in"
+            ],
+            [
+              "xReg",
+              "XSimpleRegistry",
+              "in"
+            ]
+          ]
         },
         {
           "name": "revokeImplementation",
@@ -61,7 +100,18 @@
             "revokes a component and all their provided implementations from the registry."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aLocation",
+              "str",
+              "in"
+            ],
+            [
+              "xReg",
+              "XSimpleRegistry",
+              "in"
+            ]
+          ]
         }
       ]
     }
