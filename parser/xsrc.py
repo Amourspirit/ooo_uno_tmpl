@@ -161,7 +161,7 @@ class ApiFnPramsInfo(base.BlockObj):
         t_info: base.PythonType = base.Util.get_python_type(in_type=_type)
         if t_info.is_default():
             logger.debug(
-                'ApiFnPramsInfo._process_type_tag() %s type is Default. Looking for %s', pinfo.name,_type)
+                'ApiFnPramsInfo._process_type_tag() %s type is Default. Looking for %s', pinfo.name, _type)
             t2_type = self._get_type_from_inner_link(type_tag, _type)
             if t2_type:
                 t2_info = base.Util.get_python_type(t2_type)
@@ -1220,7 +1220,7 @@ def _main():
     # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1beans_1_1XIntrospectionAccess.html' # has a sequence
     # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1accessibility_1_1XAccessibleTextSelection.html'
     # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XStyleSettings.html'
-    url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XToolkit.html'
+    url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XMessageBoxFactory.html'
     args = ('v', 'n')
     kwargs = {
         "u": url,

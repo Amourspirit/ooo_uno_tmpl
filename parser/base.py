@@ -524,7 +524,7 @@ class UrlObj:
         result = []
         try:
             ns_part = self._page_link.split('.')[0]
-            s = ns_part.replace('_1_1', '.').lstrip('.')
+            s = ns_part.replace(URL_SPLIT, '.').lstrip('.')
 
             # in some cases such as generics the name can have _3_01 and or _01_4 in the last part of the name
             # best guess _3 is < and _4 is > and _01 is space.
@@ -1311,8 +1311,7 @@ class Util:
 
         Args:
             url (str): full or realitve Url string
-            name (str, optional): Optional name that is use to replace the last part of namespace return when there is no fragment.
-                This option is provided as a way to ensure clear return value.
+            name (str, optional): Optional name that is use to replace or appnd to namespace return.
                 Some urls may have a unexpected ending such as ``structcom_1_1sun_1_1star_1_1beans_1_1Pair_3_01T_00_01U_01_4.html``.
                 Defaults to ``None``.
 
@@ -1320,7 +1319,8 @@ class Util:
             str: namespace format sucha as ``com.sun.star.awt`` or ``com.sun.star.awt.XMessageBoxFactory``
 
         Note:
-            ``name`` param is ignored with url contains a fragment ( # ).
+            ``name`` param is appended with urls that contain a fragment ( # ).
+            ``name`` param replaces name part of urls that do not have a fragment.
         """
         parts = url.split(URL_SPLIT)
         parts[0] = 'com'
@@ -1328,6 +1328,8 @@ class Util:
             # fragment such as: namespacecom_1_1sun_1_1star_1_1awt.html#ad249d76933bdf54c35f4eaf51a5b7965
             last = parts.pop() # awt.html#ad249d76933bdf54c35f4eaf51a5b7965
             parts.append(last.split(sep='.', maxsplit=1)[0])
+            if name:
+                parts.append(name)
         else:
             # No fragment sucha as: interfacecom_1_1sun_1_1star_1_1awt_1_1XMessageBoxFactory.html
             last = parts.pop() # XMessageBoxFactory.html
@@ -1338,7 +1340,8 @@ class Util:
                 # some url are not ending in a clean name such as
                 # urls for generic types Pair < U, T > ect...
                 parts.append(last.split(sep='.', maxsplit=1)[0])
-            
+        return ".".join(parts)
+
     @staticmethod
     def get_ns_from_a_tag(a_tag: Tag) -> Union[str, None]:
         """
@@ -2766,7 +2769,7 @@ class AreaFilter:
             else:
                 href = href_parts[1]
             # interfacecom_1_1sun_1_1star_1_1accessibility_1_1XAccessibleContext.html
-            parts = href.split('_1_1')
+            parts = href.split(URL_SPLIT)
             parts[0] = 'com'
             parts.pop()
             # parts.append(area.name)
