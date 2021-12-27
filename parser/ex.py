@@ -229,18 +229,27 @@ class ParserEx(base.ParserBase):
         attribs = {}
         si_lst = self._api_data.property_summaries.get_obj()
         for i, si in enumerate(si_lst):
+            if logger.level <= logging.DEBUG:
+                logger.debug(
+                    "%s._get_properties_data() Processing: %s, %s",
+                    self.__class__.__name__, si.name, si.id)
             if i == 0:
                 attribs['properties'] = []
             if not si.name:
                 continue
             attrib = {
                 "name": si.name,
-                "returns": si.type,
+                "returns": si.p_type.type,
                 "desc": self._api_data.get_desc_detail(si.id).get_obj(),
                 "raises_get": '',
                 "raises_set": ''
             }
             attribs['properties'].append(attrib)
+            if si.p_type.requires_typing:
+                logger.debug(
+                    "%s._get_properties_data() Return '%s' type require typing for: %s, %s",
+                    self.__class__.__name__, si.p_type.type, si.name, si.id)
+                self._requires_typing = True
         import_info = self._api_data.get_import_info_property()
         if import_info.requires_typing:
             self._requires_typing = True
@@ -279,6 +288,9 @@ class ParserEx(base.ParserBase):
             raise e
         return self._requires_typing
 
+    @property
+    def api_data(self) -> ApiExData:
+        return self._api_data
 class WriterEx(base.WriteBase):
     # region Constructor
     @TypeCheckKw(arg_info={
@@ -333,7 +345,6 @@ class WriterEx(base.WriteBase):
         self._template: str = self._get_template()
     # endregion Constructor
 
-   
 
     def write(self):
         self._set_info()
@@ -363,6 +374,9 @@ class WriterEx(base.WriteBase):
         p_dict = {}
         p_dict['from_imports'] = self._get_from_imports()
         p_dict['from_imports_typing'] = self._get_from_imports_typing()
+        p_dict['quote'] = self._get_quote_flat()
+        p_dict['typings'] = self._get_typings()
+        p_dict['requires_typing'] = self._p_requires_typing
         p_dict.update(self._parser.get_dict_data())
         if 'typing_imports' in p_dict:
             del p_dict['typing_imports']
@@ -395,6 +409,12 @@ class WriterEx(base.WriteBase):
         self._template = self._template.replace('{name}', self._p_name)
         self._template = self._template.replace('{ns}', str(self._p_namespace))
         self._template = self._template.replace('{link}', self._p_url)
+        self._template = self._template.replace(
+            '{quote}',
+            str(set(self._get_quote_flat())))
+        self._template = self._template.replace(
+            '{typings}',
+            str(set(self._get_typings())))
         self._template = self._template.replace(
             '{requires_typing}', str(self._p_requires_typing))
         self._template = self._template.replace(
@@ -483,7 +503,7 @@ class WriterEx(base.WriteBase):
             self._p_requires_typing = self._parser.requires_typing
         if self._write_file or self._write_json:
             self._file_full_path = self._get_uno_obj_path()
-    # end region set data
+    # endregion set data
 
     # region validation
     def _validate_p_info(self):
@@ -501,6 +521,36 @@ class WriterEx(base.WriteBase):
             logger.error(e)
             raise e
     # endregion validation
+
+    # region typing/quote
+    def _get_quote_flat(self) -> List[str]:
+        key = '_get_quote_flat'
+        if key in self._cache:
+            return self._cache[key]
+
+        t_set: Set[str] = set()
+        # grab all the properties that need quotes
+        si_lst = self._parser.api_data.property_summaries.get_obj()
+        for si in si_lst:
+            t = si.p_type
+            if t.requires_typing or t.is_py_type is False:
+                t_set.add(t.type)
+        self._cache[key] = list(t_set)
+        return self._cache[key]
+
+    def _get_typings(self) -> List[str]:
+        key = '_get_typings'
+        if key in self._cache:
+            return self._cache[key]
+        t_set: Set[str] = set()
+        si_lst = self._parser.api_data.property_summaries.get_obj()
+        for si in si_lst:
+            t = si.p_type
+            if t.requires_typing:
+                t_set.add(t.type)
+        self._cache[key] = list(t_set)
+        return self._cache[key]
+    # endregion typings/quote
 
     def _get_uno_obj_path(self) -> Path:
         key = '_get_uno_obj_path'

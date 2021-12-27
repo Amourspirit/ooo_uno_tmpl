@@ -11,7 +11,7 @@ class BaseEx(BaseJson):
 
     def _hydrate_data(self, json_data: dict):
         # print('# _hydrate_data()')
-        data = json_data['data']
+        data: Dict[str, object] = json_data['data']
 
         def set_data(_key: str, a_name=None):
             attr_name = _key if not a_name else a_name
@@ -31,13 +31,13 @@ class BaseEx(BaseJson):
         self.include_desc = bool(
             json_data['writer_args'].get('include_desc', True))
         self.attribs = self._get_attribs(json_data=json_data, sort=self.sort)
-  
         self.from_imports = []
         self.from_imports_typing = []
+        self.requires_typing = bool(data.get('requires_typing', False))
         set_data('from_imports')
         set_data('from_imports_typing')
-        self.requires_typing = False if len(
-            self.from_imports_typing) == 0 else True
+        # self.requires_typing = False if len(
+        #     self.from_imports_typing) == 0 else True
         quote: List[str] = data.get('quote', [])
         self.quote.update(quote)
         typings: List[str] = data.get('typings', [])

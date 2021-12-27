@@ -3,7 +3,8 @@
 """
 Process a link to a page that contains an interface
 """
-from abc import abstractmethod
+
+# region Imports
 import os
 import sys
 import argparse
@@ -23,6 +24,7 @@ except ModuleNotFoundError:
 from logger.log_handle import get_logger
 from parser.type_mod import PythonType
 from parser import __version__, JSON_ID
+# endregion Imports
 
 logger = None
 
@@ -712,7 +714,6 @@ class ParserInterface(base.ParserBase):
         if import_info.requires_typing:
             self._requires_typing = True
         self._imports.update(import_info.imports)
-    
 
         if self.sort:
             if 'properties' in attribs:
@@ -893,9 +894,9 @@ class InterfaceWriter(base.WriteBase):
         if key in self._cache:
             return self._cache[key]
         
+        t_set: Set[str] = set()
         # grab all the methods that need quotes
         si_lst = self._parser.api_data.func_summaries.get_obj()
-        t_set: Set[str] = set()
         for si in si_lst:
             t = si.p_type
             if t.requires_typing or t.is_py_type is False:
@@ -928,8 +929,8 @@ class InterfaceWriter(base.WriteBase):
         key = '_get_typings'
         if key in self._cache:
             return self._cache[key]
-        si_lst = self._parser.api_data.func_summaries.get_obj()
         t_set: Set[str] = set()
+        si_lst = self._parser.api_data.func_summaries.get_obj()
         for si in si_lst:
             t = si.p_type
             if t.requires_typing:
