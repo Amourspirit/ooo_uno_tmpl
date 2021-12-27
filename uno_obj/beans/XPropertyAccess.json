@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:25+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:31+00:00",
   "name": "XPropertyAccess",
   "type": "interface",
   "namespace": "com.sun.star.beans",
@@ -28,6 +28,7 @@
     "typings": [
       "typing.List[PropertyValue]"
     ],
+    "requires_typing": true,
     "name": "XPropertyAccess",
     "imports": [],
     "namespace": "com.sun.star.beans",
@@ -60,7 +61,10 @@
             "All properties which are not contained in the sequence aProps will be left unchanged."
           ],
           "raises": [
-            "com.sun.star.beans.UnknownPropertyException,"
+            "com.sun.star.beans.UnknownPropertyException",
+            "com.sun.star.beans.PropertyVetoException",
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
             [

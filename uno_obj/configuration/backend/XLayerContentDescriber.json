@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:06+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:39+00:00",
   "name": "XLayerContentDescriber",
   "type": "interface",
   "namespace": "com.sun.star.configuration.backend",
@@ -16,9 +16,24 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
-    "quote": [],
-    "typings": [],
+    "from_imports_typing": [
+      [
+        ".x_layer_handler",
+        "XLayerHandler"
+      ],
+      [
+        ".property_info",
+        "PropertyInfo"
+      ]
+    ],
+    "quote": [
+      "XLayerHandler",
+      "typing.List[PropertyInfo]"
+    ],
+    "typings": [
+      "typing.List[PropertyInfo]"
+    ],
+    "requires_typing": true,
     "name": "XLayerContentDescriber",
     "imports": [],
     "namespace": "com.sun.star.configuration.backend",
@@ -40,12 +55,14 @@
             "describes the contents of the layer to an XLayerHandler."
           ],
           "raises": [
-            "com.sun.star.lang.NullPointerException,"
+            "com.sun.star.lang.NullPointerException",
+            "com.sun.star.lang.WrappedTargetException",
+            "MalformedDataException"
           ],
           "args": [
             [
               "aHandler",
-              "object",
+              "XLayerHandler",
               "in"
             ],
             [

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:46:04+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:32+00:00",
   "name": "XStringKeyMap",
   "type": "interface",
   "namespace": "com.sun.star.container",
@@ -12,6 +12,9 @@
   "data": {
     "from_imports": [],
     "from_imports_typing": [],
+    "quote": [],
+    "typings": [],
+    "requires_typing": false,
     "name": "XStringKeyMap",
     "imports": [],
     "namespace": "com.sun.star.container",
@@ -35,7 +38,13 @@
           "raises": [
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
-          "args": []
+          "args": [
+            [
+              "nIndex",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getValue",
@@ -46,7 +55,13 @@
           "raises": [
             "com.sun.star.container.NoSuchElementException"
           ],
-          "args": []
+          "args": [
+            [
+              "aKey",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getValueByIndex",
@@ -57,7 +72,13 @@
           "raises": [
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
-          "args": []
+          "args": [
+            [
+              "nIndex",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "hasValue",
@@ -66,7 +87,13 @@
             "checks for element existence."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aKey",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "insertValue",
@@ -75,9 +102,21 @@
             "writes data to the map."
           ],
           "raises": [
-            "com.sun.star.lang.IllegalArgumentException,"
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.container.ElementExistException"
           ],
-          "args": []
+          "args": [
+            [
+              "aKey",
+              "str",
+              "in"
+            ],
+            [
+              "aValue",
+              "object",
+              "in"
+            ]
+          ]
         }
       ],
       "properties": [

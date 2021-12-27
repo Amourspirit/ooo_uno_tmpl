@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:23+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:12+00:00",
   "name": "XColumn",
   "type": "interface",
   "namespace": "com.sun.star.sdb",
@@ -18,8 +18,32 @@
     ],
     "from_imports_typing": [
       [
+        "..util.date",
+        "Date"
+      ],
+      [
+        "..container.x_name_access",
+        "XNameAccess"
+      ],
+      [
+        "..io.x_input_stream",
+        "XInputStream"
+      ],
+      [
         "..util.date_time",
         "DateTime"
+      ],
+      [
+        "..sdbc.x_array",
+        "XArray"
+      ],
+      [
+        "..util.time",
+        "Time"
+      ],
+      [
+        "..sdbc.x_ref",
+        "XRef"
       ],
       [
         "..sdbc.x_blob",
@@ -28,47 +52,24 @@
       [
         "..sdbc.x_clob",
         "XClob"
-      ],
-      [
-        "..sdbc.x_ref",
-        "XRef"
-      ],
-      [
-        "..util.time",
-        "Time"
-      ],
-      [
-        "..io.x_input_stream",
-        "XInputStream"
-      ],
-      [
-        "..sdbc.x_array",
-        "XArray"
-      ],
-      [
-        ".byte",
-        "byte"
-      ],
-      [
-        "..util.date",
-        "Date"
       ]
     ],
     "quote": [
-      "XClob",
-      "Date",
-      "Time",
+      "typing.List[int]",
       "XBlob",
-      "object",
-      "typing.List[byte]",
-      "XInputStream",
-      "DateTime",
+      "Date",
       "XRef",
-      "XArray"
+      "Time",
+      "XClob",
+      "DateTime",
+      "XArray",
+      "XNameAccess",
+      "XInputStream"
     ],
     "typings": [
-      "typing.List[byte]"
+      "typing.List[int]"
     ],
+    "requires_typing": true,
     "name": "XColumn",
     "imports": [],
     "namespace": "com.sun.star.sdb",
@@ -131,7 +132,7 @@
         },
         {
           "name": "getByte",
-          "returns": "object",
+          "returns": "int",
           "desc": [
             "gets the value of a column in the current row as a byte."
           ],
@@ -142,7 +143,7 @@
         },
         {
           "name": "getBytes",
-          "returns": "typing.List[byte]",
+          "returns": "typing.List[int]",
           "desc": [
             "gets the value of a column in the current row as a byte array.",
             "",

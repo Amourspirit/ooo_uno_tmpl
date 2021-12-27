@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:08+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:23+00:00",
   "name": "XFastParser",
   "type": "interface",
   "namespace": "com.sun.star.xml.sax",
@@ -16,9 +16,50 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
-    "quote": [],
-    "typings": [],
+    "from_imports_typing": [
+      [
+        ".x_entity_resolver",
+        "XEntityResolver"
+      ],
+      [
+        ".x_fast_token_handler",
+        "XFastTokenHandler"
+      ],
+      [
+        ".input_source",
+        "InputSource"
+      ],
+      [
+        ".x_fast_document_handler",
+        "XFastDocumentHandler"
+      ],
+      [
+        ".x_fast_namespace_handler",
+        "XFastNamespaceHandler"
+      ],
+      [
+        "...lang.locale",
+        "Locale"
+      ],
+      [
+        ".x_error_handler",
+        "XErrorHandler"
+      ]
+    ],
+    "quote": [
+      "Locale",
+      "XErrorHandler",
+      "XFastNamespaceHandler",
+      "XFastTokenHandler",
+      "typing.List[typing.Tuple[str, str]]",
+      "XFastDocumentHandler",
+      "InputSource",
+      "XEntityResolver"
+    ],
+    "typings": [
+      "typing.List[typing.Tuple[str, str]]"
+    ],
+    "requires_typing": true,
     "name": "XFastParser",
     "imports": [],
     "namespace": "com.sun.star.xml.sax",
@@ -42,7 +83,8 @@
       "",
       "Setting a XFastTokenHandler with setTokenHandler() is optional, but without a XFastTokenHandler you will only get unknown sax events. This can be useful if you are only interested in the namespace handling and/or the context feature.",
       "",
-      "For each element the parser sends a create child element event to the elements parent context by calling XFastContextHandler.createFastChildContext() for known elements or XFastContextHandler.createUnknownChildContext() for unknown elements. \nThe parent context for the root element is the XFastDocumentHandler itself.",
+      "For each element the parser sends a create child element event to the elements parent context by calling XFastContextHandler.createFastChildContext() for known elements or XFastContextHandler.createUnknownChildContext() for unknown elements.",
+      "The parent context for the root element is the XFastDocumentHandler itself.",
       "",
       "If the parent context returns an empty reference, no further events for the element and all of its children are created.",
       "",
@@ -87,12 +129,13 @@
             "Set the desired handlers before calling this method."
           ],
           "raises": [
-            "SAXException,"
+            "SAXException",
+            "com.sun.star.io.IOException"
           ],
           "args": [
             [
               "aInputSource",
-              "object",
+              "InputSource",
               "in"
             ]
           ]
@@ -150,7 +193,7 @@
           "args": [
             [
               "Resolver",
-              "object",
+              "XEntityResolver",
               "in"
             ]
           ]
@@ -167,7 +210,7 @@
           "args": [
             [
               "Handler",
-              "object",
+              "XErrorHandler",
               "in"
             ]
           ]
@@ -182,7 +225,7 @@
           "args": [
             [
               "Handler",
-              "object",
+              "XFastDocumentHandler",
               "in"
             ]
           ]
@@ -212,7 +255,7 @@
           "args": [
             [
               "Handler",
-              "object",
+              "XFastNamespaceHandler",
               "in"
             ]
           ]
@@ -227,7 +270,7 @@
           "args": [
             [
               "Handler",
-              "object",
+              "XFastTokenHandler",
               "in"
             ]
           ]

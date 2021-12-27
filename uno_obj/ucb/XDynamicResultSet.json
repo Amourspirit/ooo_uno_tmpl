@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:44+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:25+00:00",
   "name": "XDynamicResultSet",
   "type": "interface",
   "namespace": "com.sun.star.ucb",
@@ -20,12 +20,23 @@
       [
         "..sdbc.x_result_set",
         "XResultSet"
+      ],
+      [
+        ".x_dynamic_result_set",
+        "XDynamicResultSet"
+      ],
+      [
+        ".x_dynamic_result_set_listener",
+        "XDynamicResultSetListener"
       ]
     ],
     "quote": [
-      "XResultSet"
+      "XResultSet",
+      "XDynamicResultSet",
+      "XDynamicResultSetListener"
     ],
     "typings": [],
+    "requires_typing": true,
     "name": "XDynamicResultSet",
     "imports": [],
     "namespace": "com.sun.star.ucb",
@@ -65,12 +76,14 @@
             "After this method has returned you can and have to use the given result set cache for further access."
           ],
           "raises": [
-            ","
+            "",
+            "",
+            "com.sun.star.ucb.ServiceNotFoundException"
           ],
           "args": [
             [
               "Cache",
-              "object",
+              "XDynamicResultSet",
               "in"
             ]
           ]
@@ -109,7 +122,7 @@
           "args": [
             [
               "Listener",
-              "object",
+              "XDynamicResultSetListener",
               "in"
             ]
           ]

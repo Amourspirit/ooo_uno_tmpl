@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:15+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:19+00:00",
   "name": "XPrinterPropertySet",
   "type": "interface",
   "namespace": "com.sun.star.awt",
@@ -16,20 +16,16 @@
         "XPropertySet"
       ]
     ],
-    "from_imports_typing": [
-      [
-        ".byte",
-        "byte"
-      ]
-    ],
+    "from_imports_typing": [],
     "quote": [
-      "typing.List[byte]",
+      "typing.List[int]",
       "typing.List[str]"
     ],
     "typings": [
-      "typing.List[byte]",
+      "typing.List[int]",
       "typing.List[str]"
     ],
+    "requires_typing": true,
     "name": "XPrinterPropertySet",
     "imports": [],
     "namespace": "com.sun.star.awt",
@@ -46,7 +42,7 @@
       "methods": [
         {
           "name": "getBinarySetup",
-          "returns": "typing.List[byte]",
+          "returns": "typing.List[int]",
           "desc": [
             "returns a binary encoded version of the printer setup."
           ],
@@ -71,7 +67,8 @@
             "Indirectly a printer is selected."
           ],
           "raises": [
-            "com.sun.star.beans.PropertyVetoException,"
+            "com.sun.star.beans.PropertyVetoException",
+            "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
             [
@@ -90,12 +87,13 @@
             "Get this data from the info printer and set the data to the printer."
           ],
           "raises": [
-            "com.sun.star.beans.PropertyVetoException,"
+            "com.sun.star.beans.PropertyVetoException",
+            "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
             [
               "data",
-              "typing.List[byte]",
+              "typing.List[int]",
               "in"
             ]
           ]
@@ -107,7 +105,8 @@
             "sets the orientation."
           ],
           "raises": [
-            "com.sun.star.beans.PropertyVetoException,"
+            "com.sun.star.beans.PropertyVetoException",
+            "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
             [

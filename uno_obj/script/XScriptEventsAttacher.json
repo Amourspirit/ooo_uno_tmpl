@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:22+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:34+00:00",
   "name": "XScriptEventsAttacher",
   "type": "interface",
   "namespace": "com.sun.star.script",
@@ -16,9 +16,20 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
-    "quote": [],
-    "typings": [],
+    "from_imports_typing": [
+      [
+        ".x_script_listener",
+        "XScriptListener"
+      ]
+    ],
+    "quote": [
+      "typing.List[XInterface]",
+      "XScriptListener"
+    ],
+    "typings": [
+      "typing.List[XInterface]"
+    ],
+    "requires_typing": true,
     "name": "XScriptEventsAttacher",
     "imports": [],
     "namespace": "com.sun.star.script",
@@ -38,7 +49,10 @@
             "Attaches the events defined by XScriptEventsSupplier to the corresponding object implementing XScriptEventsSupplier."
           ],
           "raises": [
-            "com.sun.star.lang.IllegalArgumentException,"
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.beans.IntrospectionException",
+            "com.sun.star.script.CannotCreateAdapterException",
+            "com.sun.star.lang.ServiceNotRegisteredException"
           ],
           "args": [
             [

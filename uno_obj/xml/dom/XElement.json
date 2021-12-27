@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:19+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:03+00:00",
   "name": "XElement",
   "type": "interface",
   "namespace": "com.sun.star.xml.dom",
@@ -16,11 +16,22 @@
         "XNode"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_node_list",
+        "XNodeList"
+      ],
+      [
+        ".x_attr",
+        "XAttr"
+      ]
+    ],
     "quote": [
-      "object"
+      "XNodeList",
+      "XAttr"
     ],
     "typings": [],
+    "requires_typing": true,
     "name": "XElement",
     "imports": [],
     "namespace": "com.sun.star.xml.dom",
@@ -68,7 +79,7 @@
         },
         {
           "name": "getAttributeNode",
-          "returns": "object",
+          "returns": "XAttr",
           "desc": [
             "Retrieves an attribute node by name."
           ],
@@ -83,7 +94,7 @@
         },
         {
           "name": "getAttributeNodeNS",
-          "returns": "object",
+          "returns": "XAttr",
           "desc": [
             "Retrieves an Attr node by local name and namespace URI."
           ],
@@ -103,7 +114,7 @@
         },
         {
           "name": "getElementsByTagName",
-          "returns": "object",
+          "returns": "XNodeList",
           "desc": [
             "Returns a NodeList of all descendant Elements with a given tag name, in the order in which they are encountered in a preorder traversal of this Element tree."
           ],
@@ -118,7 +129,7 @@
         },
         {
           "name": "getElementsByTagNameNS",
-          "returns": "object",
+          "returns": "XNodeList",
           "desc": [
             "Returns a NodeList of all the descendant Elements with a given local name and namespace URI in the order in which they are encountered in a preorder traversal of this Element tree."
           ],
@@ -225,7 +236,7 @@
         },
         {
           "name": "removeAttributeNode",
-          "returns": "object",
+          "returns": "XAttr",
           "desc": [
             "Removes the specified attribute node.",
             "",
@@ -237,7 +248,7 @@
           "args": [
             [
               "oldAttr",
-              "object",
+              "XAttr",
               "in"
             ]
           ]
@@ -297,7 +308,7 @@
         },
         {
           "name": "setAttributeNode",
-          "returns": "object",
+          "returns": "XAttr",
           "desc": [
             "Adds a new attribute node.",
             "",
@@ -309,14 +320,14 @@
           "args": [
             [
               "newAttr",
-              "object",
+              "XAttr",
               "in"
             ]
           ]
         },
         {
           "name": "setAttributeNodeNS",
-          "returns": "object",
+          "returns": "XAttr",
           "desc": [
             "Adds a new attribute.",
             "",
@@ -328,7 +339,7 @@
           "args": [
             [
               "newAttr",
-              "object",
+              "XAttr",
               "in"
             ]
           ]

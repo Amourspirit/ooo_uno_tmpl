@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:21+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:27+00:00",
   "name": "XPropertyHandler",
   "type": "interface",
   "namespace": "com.sun.star.inspection",
@@ -26,21 +26,46 @@
         "Property"
       ],
       [
+        "..uno.x_interface",
+        "XInterface"
+      ],
+      [
+        ".x_object_inspector_ui",
+        "XObjectInspectorUI"
+      ],
+      [
+        ".x_property_control_factory",
+        "XPropertyControlFactory"
+      ],
+      [
+        "..beans.x_property_change_listener",
+        "XPropertyChangeListener"
+      ],
+      [
         ".interactive_selection_result",
         "InteractiveSelectionResult"
+      ],
+      [
+        ".line_descriptor",
+        "LineDescriptor"
       ]
     ],
     "quote": [
-      "PropertyState",
-      "InteractiveSelectionResult",
-      "object",
       "typing.List[Property]",
+      "InteractiveSelectionResult",
+      "XPropertyControlFactory",
+      "XPropertyChangeListener",
+      "LineDescriptor",
+      "XInterface",
+      "PropertyState",
+      "XObjectInspectorUI",
       "typing.List[str]"
     ],
     "typings": [
       "typing.List[Property]",
       "typing.List[str]"
     ],
+    "requires_typing": true,
     "name": "XPropertyHandler",
     "imports": [],
     "namespace": "com.sun.star.inspection",
@@ -88,7 +113,7 @@
             ],
             [
               "InspectorUI",
-              "object",
+              "XObjectInspectorUI",
               "in"
             ],
             [
@@ -182,12 +207,13 @@
         },
         {
           "name": "describePropertyLine",
-          "returns": "object",
+          "returns": "LineDescriptor",
           "desc": [
             "describes the UI to be used to represent the property"
           ],
           "raises": [
-            "com.sun.star.beans.UnknownPropertyException,"
+            "com.sun.star.beans.UnknownPropertyException",
+            "com.sun.star.lang.NullPointerException"
           ],
           "args": [
             [
@@ -197,7 +223,7 @@
             ],
             [
               "ControlFactory",
-              "object",
+              "XPropertyControlFactory",
               "in"
             ]
           ]
@@ -344,7 +370,8 @@
             "If a property is not composable, directly setting the new property value does not yield any problem, as long as property listeners are properly notified of the change."
           ],
           "raises": [
-            "com.sun.star.beans.UnknownPropertyException,"
+            "com.sun.star.beans.UnknownPropertyException",
+            "com.sun.star.lang.NullPointerException"
           ],
           "args": [
             [
@@ -364,7 +391,7 @@
             ],
             [
               "InspectorUI",
-              "object",
+              "XObjectInspectorUI",
               "in"
             ]
           ]
@@ -391,7 +418,8 @@
             "sets the value of a property"
           ],
           "raises": [
-            "com.sun.star.beans.UnknownPropertyException,"
+            "com.sun.star.beans.UnknownPropertyException",
+            "com.sun.star.beans.PropertyVetoException"
           ],
           "args": [
             [

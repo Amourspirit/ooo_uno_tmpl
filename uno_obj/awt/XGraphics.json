@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:15+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:19+00:00",
   "name": "XGraphics",
   "type": "interface",
   "namespace": "com.sun.star.awt",
@@ -16,11 +16,62 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
-    "quote": [
-      "object"
+    "from_imports_typing": [
+      [
+        ".x_device",
+        "XDevice"
+      ],
+      [
+        ".font_descriptor",
+        "FontDescriptor"
+      ],
+      [
+        "..raster_operation",
+        "RasterOperation"
+      ],
+      [
+        ".simple_font_metric",
+        "SimpleFontMetric"
+      ],
+      [
+        ".x_font",
+        "XFont"
+      ],
+      [
+        ".gradient",
+        "Gradient"
+      ],
+      [
+        ".x_region",
+        "XRegion"
+      ],
+      [
+        "..util.color",
+        "Color"
+      ],
+      [
+        ".x_display_bitmap",
+        "XDisplayBitmap"
+      ]
     ],
-    "typings": [],
+    "quote": [
+      "XRegion",
+      "typing.List[int]",
+      "Color",
+      "XDisplayBitmap",
+      "XDevice",
+      "XFont",
+      "SimpleFontMetric",
+      "typing.List[typing.List[int]]",
+      "Gradient",
+      "RasterOperation",
+      "FontDescriptor"
+    ],
+    "typings": [
+      "typing.List[int]",
+      "typing.List[typing.List[int]]"
+    ],
+    "requires_typing": true,
     "name": "XGraphics",
     "imports": [],
     "namespace": "com.sun.star.awt",
@@ -43,7 +94,7 @@
           "args": [
             [
               "xSource",
-              "object",
+              "XDevice",
               "in"
             ],
             [
@@ -98,7 +149,7 @@
           "args": [
             [
               "xBitmapHandle",
-              "object",
+              "XDisplayBitmap",
               "in"
             ],
             [
@@ -305,7 +356,7 @@
             ],
             [
               "aGradient",
-              "object",
+              "Gradient",
               "in"
             ]
           ]
@@ -597,7 +648,7 @@
         },
         {
           "name": "getDevice",
-          "returns": "object",
+          "returns": "XDevice",
           "desc": [
             "returns the device of this graphics."
           ],
@@ -606,7 +657,7 @@
         },
         {
           "name": "getFontMetric",
-          "returns": "object",
+          "returns": "SimpleFontMetric",
           "desc": [
             "returns the font metric of the current font."
           ],
@@ -623,7 +674,7 @@
           "args": [
             [
               "xClipping",
-              "object",
+              "XRegion",
               "in"
             ]
           ]
@@ -656,7 +707,7 @@
           "args": [
             [
               "aDescription",
-              "object",
+              "FontDescriptor",
               "in"
             ]
           ]
@@ -671,7 +722,7 @@
           "args": [
             [
               "Clipping",
-              "object",
+              "XRegion",
               "in"
             ]
           ]
@@ -701,7 +752,7 @@
           "args": [
             [
               "xNewFont",
-              "object",
+              "XFont",
               "in"
             ]
           ]
@@ -733,7 +784,7 @@
           "args": [
             [
               "ROP",
-              "object",
+              "RasterOperation",
               "in"
             ]
           ]

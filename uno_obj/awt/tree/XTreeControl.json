@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:52:25+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:13+00:00",
   "name": "XTreeControl",
   "type": "interface",
   "namespace": "com.sun.star.awt.tree",
@@ -20,8 +20,28 @@
       [
         "..rectangle",
         "Rectangle"
+      ],
+      [
+        ".x_tree_edit_listener",
+        "XTreeEditListener"
+      ],
+      [
+        ".x_tree_node",
+        "XTreeNode"
+      ],
+      [
+        ".x_tree_expansion_listener",
+        "XTreeExpansionListener"
       ]
     ],
+    "quote": [
+      "XTreeExpansionListener",
+      "Rectangle",
+      "XTreeEditListener",
+      "XTreeNode"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XTreeControl",
     "imports": [],
     "namespace": "com.sun.star.awt.tree",
@@ -41,7 +61,13 @@
             "Adds a XTreeEditListener."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "Listener",
+              "XTreeEditListener",
+              "in"
+            ]
+          ]
         },
         {
           "name": "addTreeExpansionListener",
@@ -50,7 +76,13 @@
             "Adds a listener for TreeExpansion events."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "Listener",
+              "XTreeExpansionListener",
+              "in"
+            ]
+          ]
         },
         {
           "name": "cancelEditing",
@@ -70,9 +102,16 @@
             "Ensures that Node is collapsed."
           ],
           "raises": [
-            "com.sun.star.lang.IllegalArgumentException,"
+            "com.sun.star.lang.IllegalArgumentException",
+            "ExpandVetoException"
           ],
-          "args": []
+          "args": [
+            [
+              "Node",
+              "XTreeNode",
+              "in"
+            ]
+          ]
         },
         {
           "name": "expandNode",
@@ -83,29 +122,58 @@
             "If Node is a leaf node, this will have no effect."
           ],
           "raises": [
-            "com.sun.star.lang.IllegalArgumentException,"
+            "com.sun.star.lang.IllegalArgumentException",
+            "ExpandVetoException"
           ],
-          "args": []
+          "args": [
+            [
+              "Node",
+              "XTreeNode",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getClosestNodeForLocation",
-          "returns": "object",
+          "returns": "XTreeNode",
           "desc": [
             "Returns the node that is closest to x,y.",
             "",
             "If no nodes are currently viewable, or there is no model, returns null, otherwise it always returns a valid node. To test if the node is exactly at x, y, use getNodeForLocation()."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "x",
+              "int",
+              "in"
+            ],
+            [
+              "y",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getNodeForLocation",
-          "returns": "object",
+          "returns": "XTreeNode",
           "desc": [
             "Returns the node at the specified location."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "x",
+              "int",
+              "in"
+            ],
+            [
+              "y",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getNodeRect",
@@ -116,7 +184,13 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException"
           ],
-          "args": []
+          "args": [
+            [
+              "Node",
+              "XTreeNode",
+              "in"
+            ]
+          ]
         },
         {
           "name": "isEditing",
@@ -138,7 +212,13 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException"
           ],
-          "args": []
+          "args": [
+            [
+              "Node",
+              "XTreeNode",
+              "in"
+            ]
+          ]
         },
         {
           "name": "isNodeExpanded",
@@ -149,7 +229,13 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException"
           ],
-          "args": []
+          "args": [
+            [
+              "Node",
+              "XTreeNode",
+              "in"
+            ]
+          ]
         },
         {
           "name": "isNodeVisible",
@@ -162,7 +248,13 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException"
           ],
-          "args": []
+          "args": [
+            [
+              "Node",
+              "XTreeNode",
+              "in"
+            ]
+          ]
         },
         {
           "name": "makeNodeVisible",
@@ -173,9 +265,16 @@
             "This includes expanding all parent nodes and scroll the control so this node is visible in the controls display area."
           ],
           "raises": [
-            "com.sun.star.lang.IllegalArgumentException,"
+            "com.sun.star.lang.IllegalArgumentException",
+            "ExpandVetoException"
           ],
-          "args": []
+          "args": [
+            [
+              "Node",
+              "XTreeNode",
+              "in"
+            ]
+          ]
         },
         {
           "name": "removeTreeEditListener",
@@ -184,7 +283,13 @@
             "Removes a XTreeEditListener."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "Listener",
+              "XTreeEditListener",
+              "in"
+            ]
+          ]
         },
         {
           "name": "removeTreeExpansionListener",
@@ -193,7 +298,13 @@
             "Removes a listener for TreeExpansion events."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "Listener",
+              "XTreeExpansionListener",
+              "in"
+            ]
+          ]
         },
         {
           "name": "startEditingAtNode",
@@ -208,7 +319,13 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException"
           ],
-          "args": []
+          "args": [
+            [
+              "Node",
+              "XTreeNode",
+              "in"
+            ]
+          ]
         },
         {
           "name": "stopEditing",

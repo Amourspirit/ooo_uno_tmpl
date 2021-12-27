@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:05:02+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:22+00:00",
   "name": "XSSOAcceptorContext",
   "type": "interface",
   "namespace": "com.sun.star.auth",
@@ -16,18 +16,14 @@
         "XSSOContext"
       ]
     ],
-    "from_imports_typing": [
-      [
-        ".byte",
-        "byte"
-      ]
-    ],
+    "from_imports_typing": [],
     "quote": [
-      "typing.List[byte]"
+      "typing.List[int]"
     ],
     "typings": [
-      "typing.List[byte]"
+      "typing.List[int]"
     ],
+    "requires_typing": true,
     "name": "XSSOAcceptorContext",
     "imports": [],
     "namespace": "com.sun.star.auth",
@@ -48,19 +44,22 @@
       "methods": [
         {
           "name": "accept",
-          "returns": "typing.List[byte]",
+          "returns": "typing.List[int]",
           "desc": [
             "accepts/authenticates an SSO token sent from the context initiator side.",
             "",
             "accept() should be called only once. Subsequent calls produce undefined results."
           ],
           "raises": [
-            "InvalidArgumentException,"
+            "InvalidArgumentException",
+            "InvalidCredentialException",
+            "InvalidContextException",
+            "AuthenticationFailedException"
           ],
           "args": [
             [
               "Token",
-              "typing.List[byte]",
+              "typing.List[int]",
               "in"
             ]
           ]

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:24+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:26+00:00",
   "name": "XXMLEncryption",
   "type": "interface",
   "namespace": "com.sun.star.xml.crypto",
@@ -18,14 +18,25 @@
     ],
     "from_imports_typing": [
       [
+        ".x_security_environment",
+        "XSecurityEnvironment"
+      ],
+      [
         ".xxml_encryption_template",
         "XXMLEncryptionTemplate"
+      ],
+      [
+        ".xxml_security_context",
+        "XXMLSecurityContext"
       ]
     ],
     "quote": [
-      "XXMLEncryptionTemplate"
+      "XSecurityEnvironment",
+      "XXMLEncryptionTemplate",
+      "XXMLSecurityContext"
     ],
     "typings": [],
+    "requires_typing": true,
     "name": "XXMLEncryption",
     "imports": [],
     "namespace": "com.sun.star.xml.crypto",
@@ -53,7 +64,8 @@
             "Perform decryption in the environment of encryption template and context."
           ],
           "raises": [
-            ","
+            "",
+            "com.sun.star.uno.SecurityException"
           ],
           "args": [
             [
@@ -75,7 +87,8 @@
             "Perform encryption in the environment of encryption template and context."
           ],
           "raises": [
-            ","
+            "",
+            "com.sun.star.uno.SecurityException"
           ],
           "args": [
             [

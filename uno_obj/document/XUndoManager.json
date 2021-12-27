@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:40+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:05+00:00",
   "name": "XUndoManager",
   "type": "interface",
   "namespace": "com.sun.star.document",
@@ -12,21 +12,33 @@
   "data": {
     "from_imports": [
       [
-        "..util.x_lockable",
-        "XLockable"
-      ],
-      [
         "..container.x_child",
         "XChild"
+      ],
+      [
+        "..util.x_lockable",
+        "XLockable"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_undo_manager_listener",
+        "XUndoManagerListener"
+      ],
+      [
+        ".x_undo_action",
+        "XUndoAction"
+      ]
+    ],
     "quote": [
+      "XUndoManagerListener",
+      "XUndoAction",
       "typing.List[str]"
     ],
     "typings": [
       "typing.List[str]"
     ],
+    "requires_typing": true,
     "name": "XUndoManager",
     "imports": [],
     "namespace": "com.sun.star.document",
@@ -41,9 +53,11 @@
       "",
       "Additionally, the Undo manager manages a Redo stack: Actions which are undone are moved from the Undo to the Redo stack, so it is possible to re-apply the changes to the document.",
       "",
-      "For collecting multiple changes in a single undo action, so-called Undo contexts are provided. When an Undo context is entered, all subsequently added Undo actions are not pushed onto the undo stack directly, but considered a sub action of the Undo context. Once the Undo context is left, a single undo action is pushed onto the undo stack, which comprises all those single Undo actions.\n Undo contexts can be arbitrarily nested.",
+      "For collecting multiple changes in a single undo action, so-called Undo contexts are provided. When an Undo context is entered, all subsequently added Undo actions are not pushed onto the undo stack directly, but considered a sub action of the Undo context. Once the Undo context is left, a single undo action is pushed onto the undo stack, which comprises all those single Undo actions.",
+      "Undo contexts can be arbitrarily nested.",
       "",
-      "Hidden Undo actions are those which in no observable way contribute to the undo stack. That is, any method retrieving information about the stack will behave as if the undo action does not exist. Nonetheless, calling undo() respectively redo() will include those actions.\n Hidden Undo actions can be created by calling enterHiddenUndoContext(), following by leaveUndoContext().",
+      "Hidden Undo actions are those which in no observable way contribute to the undo stack. That is, any method retrieving information about the stack will behave as if the undo action does not exist. Nonetheless, calling undo() respectively redo() will include those actions.",
+      "Hidden Undo actions can be created by calling enterHiddenUndoContext(), following by leaveUndoContext().",
       "",
       "An Undo manager can be locked and unlocked, using the XLockable.lock() and XLockable.unlock() methods. When it is locked, then every attempt to add an undo action, or to enter or leave an Undo context, will be silently ignored.",
       "",
@@ -72,7 +86,7 @@
           "args": [
             [
               "iAction",
-              "object",
+              "XUndoAction",
               "in"
             ]
           ]
@@ -87,7 +101,7 @@
           "args": [
             [
               "iListener",
-              "object",
+              "XUndoManagerListener",
               "in"
             ]
           ]
@@ -240,7 +254,9 @@
             "Effectively, invoking this method will"
           ],
           "raises": [
-            "com.sun.star.document.EmptyUndoStackException,"
+            "com.sun.star.document.EmptyUndoStackException",
+            "com.sun.star.document.UndoContextNotClosedException",
+            "com.sun.star.document.UndoFailedException"
           ],
           "args": []
         },
@@ -254,7 +270,7 @@
           "args": [
             [
               "iListener",
-              "object",
+              "XUndoManagerListener",
               "in"
             ]
           ]
@@ -281,7 +297,9 @@
             "Effectively, invoking this method will"
           ],
           "raises": [
-            "com.sun.star.document.EmptyUndoStackException,"
+            "com.sun.star.document.EmptyUndoStackException",
+            "com.sun.star.document.UndoContextNotClosedException",
+            "com.sun.star.document.UndoFailedException"
           ],
           "args": []
         }

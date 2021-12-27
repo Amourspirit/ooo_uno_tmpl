@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:41+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:31+00:00",
   "name": "XConversionDictionaryList",
   "type": "interface",
   "namespace": "com.sun.star.linguistic2",
@@ -18,22 +18,33 @@
     ],
     "from_imports_typing": [
       [
-        ".x_conversion_dictionary",
-        "XConversionDictionary"
-      ],
-      [
         "..container.x_name_container",
         "XNameContainer"
+      ],
+      [
+        "..lang.locale",
+        "Locale"
+      ],
+      [
+        ".conversion_direction",
+        "ConversionDirection"
+      ],
+      [
+        ".x_conversion_dictionary",
+        "XConversionDictionary"
       ]
     ],
     "quote": [
+      "Locale",
       "XNameContainer",
       "XConversionDictionary",
+      "ConversionDirection",
       "typing.List[str]"
     ],
     "typings": [
       "typing.List[str]"
     ],
+    "requires_typing": true,
     "name": "XConversionDictionaryList",
     "imports": [],
     "namespace": "com.sun.star.linguistic2",
@@ -61,7 +72,8 @@
             "The dictionary will be empty and active."
           ],
           "raises": [
-            "com.sun.star.lang.NoSupportException,"
+            "com.sun.star.lang.NoSupportException",
+            "com.sun.star.container.ElementExistException"
           ],
           "args": [
             [
@@ -105,7 +117,8 @@
             "The exact string to be looked for is the substring from the aText parameter that starts at position nStartPos and has the length nLength."
           ],
           "raises": [
-            "com.sun.star.lang.IllegalArgumentException,"
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.lang.NoSupportException"
           ],
           "args": [
             [

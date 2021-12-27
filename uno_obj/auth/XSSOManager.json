@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:05:02+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:22+00:00",
   "name": "XSSOManager",
   "type": "interface",
   "namespace": "com.sun.star.auth",
@@ -16,11 +16,22 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".xsso_initiator_context",
+        "XSSOInitiatorContext"
+      ],
+      [
+        ".xsso_acceptor_context",
+        "XSSOAcceptorContext"
+      ]
+    ],
     "quote": [
-      "object"
+      "XSSOInitiatorContext",
+      "XSSOAcceptorContext"
     ],
     "typings": [],
+    "requires_typing": true,
     "name": "XSSOManager",
     "imports": [],
     "namespace": "com.sun.star.auth",
@@ -39,12 +50,15 @@
       "methods": [
         {
           "name": "createAcceptorContext",
-          "returns": "object",
+          "returns": "XSSOAcceptorContext",
           "desc": [
             "creates an acceptor side security context."
           ],
           "raises": [
-            "InvalidArgumentException,"
+            "InvalidArgumentException",
+            "InvalidCredentialException",
+            "InvalidPrincipalException",
+            "UnsupportedException"
           ],
           "args": [
             [
@@ -56,12 +70,15 @@
         },
         {
           "name": "createInitiatorContext",
-          "returns": "object",
+          "returns": "XSSOInitiatorContext",
           "desc": [
             "creates an initiator side security context."
           ],
           "raises": [
-            "InvalidArgumentException,"
+            "InvalidArgumentException",
+            "InvalidCredentialException",
+            "InvalidPrincipalException",
+            "UnsupportedException"
           ],
           "args": [
             [

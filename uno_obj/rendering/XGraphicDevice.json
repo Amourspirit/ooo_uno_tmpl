@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:53+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:15+00:00",
   "name": "XGraphicDevice",
   "type": "interface",
   "namespace": "com.sun.star.rendering",
@@ -18,20 +18,68 @@
     ],
     "from_imports_typing": [
       [
+        ".x_bezier_poly_polygon2_d",
+        "XBezierPolyPolygon2D"
+      ],
+      [
+        ".x_color_space",
+        "XColorSpace"
+      ],
+      [
+        "..geometry.real_point2_d",
+        "RealPoint2D"
+      ],
+      [
+        "..geometry.real_bezier_segment2_d",
+        "RealBezierSegment2D"
+      ],
+      [
         "..geometry.real_size2_d",
         "RealSize2D"
       ],
       [
+        ".x_buffer_controller",
+        "XBufferController"
+      ],
+      [
         "..lang.x_multi_service_factory",
         "XMultiServiceFactory"
+      ],
+      [
+        ".x_volatile_bitmap",
+        "XVolatileBitmap"
+      ],
+      [
+        "..geometry.integer_size2_d",
+        "IntegerSize2D"
+      ],
+      [
+        ".x_line_poly_polygon2_d",
+        "XLinePolyPolygon2D"
+      ],
+      [
+        ".x_bitmap",
+        "XBitmap"
       ]
     ],
     "quote": [
+      "XBezierPolyPolygon2D",
       "XMultiServiceFactory",
+      "XColorSpace",
+      "IntegerSize2D",
+      "XVolatileBitmap",
+      "typing.List[typing.List[RealPoint2D]]",
+      "XBufferController",
       "RealSize2D",
-      "object"
+      "XBitmap",
+      "XLinePolyPolygon2D",
+      "typing.List[typing.List[RealBezierSegment2D]]"
     ],
-    "typings": [],
+    "typings": [
+      "typing.List[typing.List[RealPoint2D]]",
+      "typing.List[typing.List[RealBezierSegment2D]]"
+    ],
+    "requires_typing": true,
     "name": "XGraphicDevice",
     "imports": [],
     "namespace": "com.sun.star.rendering",
@@ -50,7 +98,7 @@
       "methods": [
         {
           "name": "createCompatibleAlphaBitmap",
-          "returns": "object",
+          "returns": "XBitmap",
           "desc": [
             "Create a bitmap with alpha channel whose memory layout and sample model is compatible to the graphic device."
           ],
@@ -67,7 +115,7 @@
         },
         {
           "name": "createCompatibleBezierPolyPolygon",
-          "returns": "object",
+          "returns": "XBezierPolyPolygon2D",
           "desc": [
             "Create a Bezier poly-polygon which can internally use device-optimized representations already."
           ],
@@ -82,7 +130,7 @@
         },
         {
           "name": "createCompatibleBitmap",
-          "returns": "object",
+          "returns": "XBitmap",
           "desc": [
             "Create a bitmap whose memory layout and sample model is compatible to the graphic device."
           ],
@@ -99,7 +147,7 @@
         },
         {
           "name": "createCompatibleLinePolyPolygon",
-          "returns": "object",
+          "returns": "XLinePolyPolygon2D",
           "desc": [
             "Create a line poly-polygon which can internally use device-optimized representations already."
           ],
@@ -114,7 +162,7 @@
         },
         {
           "name": "createVolatileAlphaBitmap",
-          "returns": "object",
+          "returns": "XVolatileBitmap",
           "desc": [
             "Create a volatile bitmap with alpha channel that is usable with this graphic device.",
             "",
@@ -133,7 +181,7 @@
         },
         {
           "name": "createVolatileBitmap",
-          "returns": "object",
+          "returns": "XVolatileBitmap",
           "desc": [
             "Create a volatile bitmap that is usable with this graphic device.",
             "",
@@ -169,7 +217,7 @@
         },
         {
           "name": "getBufferController",
-          "returns": "object",
+          "returns": "XBufferController",
           "desc": [
             "Query the controller for multi buffering functionality on this graphic device.",
             "",
@@ -180,7 +228,7 @@
         },
         {
           "name": "getDeviceColorSpace",
-          "returns": "object",
+          "returns": "XColorSpace",
           "desc": [
             "Query the color space interface for this graphic device.",
             "",

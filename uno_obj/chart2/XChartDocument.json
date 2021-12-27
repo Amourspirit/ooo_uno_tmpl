@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:12+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:36+00:00",
   "name": "XChartDocument",
   "type": "interface",
   "namespace": "com.sun.star.chart2",
@@ -18,20 +18,30 @@
     ],
     "from_imports_typing": [
       [
-        ".data.x_data_provider",
-        "XDataProvider"
+        ".x_chart_type_manager",
+        "XChartTypeManager"
+      ],
+      [
+        ".x_diagram",
+        "XDiagram"
       ],
       [
         "..beans.x_property_set",
         "XPropertySet"
+      ],
+      [
+        ".data.x_data_provider",
+        "XDataProvider"
       ]
     ],
     "quote": [
-      "XDataProvider",
+      "XChartTypeManager",
       "XPropertySet",
-      "object"
+      "XDiagram",
+      "XDataProvider"
     ],
     "typings": [],
+    "requires_typing": true,
     "name": "XChartDocument",
     "imports": [],
     "namespace": "com.sun.star.chart2",
@@ -72,7 +82,7 @@
         },
         {
           "name": "getChartTypeManager",
-          "returns": "object",
+          "returns": "XChartTypeManager",
           "desc": [
             "retrieves the component that is able to create different chart type templates (components of type ChartTypeTemplate)"
           ],
@@ -92,7 +102,7 @@
         },
         {
           "name": "getFirstDiagram",
-          "returns": "object",
+          "returns": "XDiagram",
           "desc": [
             "Notes: this is preliminary, we need an API that supports more than one diagram. The method name getDiagram exists in the css.chart API, so there is would be no way to chose either this or the other method from Basic (it would chose one or the other by random)."
           ],
@@ -129,7 +139,7 @@
           "args": [
             [
               "xNewManager",
-              "object",
+              "XChartTypeManager",
               "in"
             ]
           ]
@@ -144,7 +154,7 @@
           "args": [
             [
               "xDiagram",
-              "object",
+              "XDiagram",
               "in"
             ]
           ]

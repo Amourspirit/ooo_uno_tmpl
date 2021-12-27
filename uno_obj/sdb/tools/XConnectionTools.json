@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:40+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:06+00:00",
   "name": "XConnectionTools",
   "type": "interface",
   "namespace": "com.sun.star.sdb.tools",
@@ -13,20 +13,40 @@
     "from_imports": [],
     "from_imports_typing": [
       [
-        "...container.x_name_access",
-        "XNameAccess"
+        ".x_data_source_meta_data",
+        "XDataSourceMetaData"
+      ],
+      [
+        "...lang.x_component",
+        "XComponent"
+      ],
+      [
+        ".x_object_names",
+        "XObjectNames"
       ],
       [
         "..x_single_select_query_composer",
         "XSingleSelectQueryComposer"
+      ],
+      [
+        "...container.x_name_access",
+        "XNameAccess"
+      ],
+      [
+        ".x_table_name",
+        "XTableName"
       ]
     ],
     "quote": [
+      "XTableName",
+      "XComponent",
       "XSingleSelectQueryComposer",
+      "XDataSourceMetaData",
       "XNameAccess",
-      "object"
+      "XObjectNames"
     ],
     "typings": [],
+    "requires_typing": true,
     "name": "XConnectionTools",
     "imports": [],
     "namespace": "com.sun.star.sdb.tools",
@@ -47,7 +67,7 @@
       "methods": [
         {
           "name": "createTableName",
-          "returns": "object",
+          "returns": "XTableName",
           "desc": [
             "creates an instance supporting the XTableName interface, which can be used to manipulate table names for various purposes.",
             "",
@@ -78,7 +98,7 @@
         },
         {
           "name": "getDataSourceMetaData",
-          "returns": "object",
+          "returns": "XDataSourceMetaData",
           "desc": [
             "provides access to the application-level data source meta data"
           ],
@@ -116,7 +136,7 @@
         },
         {
           "name": "getObjectNames",
-          "returns": "object",
+          "returns": "XObjectNames",
           "desc": [
             "returns an instance supporting the XObjectNames interface, which provides access to functionality around table and query names.",
             "",

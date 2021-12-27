@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:27+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:32+00:00",
   "name": "XContainerQuery",
   "type": "interface",
   "namespace": "com.sun.star.container",
@@ -16,11 +16,24 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
-    "quote": [
-      "object"
+    "from_imports_typing": [
+      [
+        ".x_enumeration",
+        "XEnumeration"
+      ],
+      [
+        "..beans.named_value",
+        "NamedValue"
+      ]
     ],
-    "typings": [],
+    "quote": [
+      "XEnumeration",
+      "typing.List[NamedValue]"
+    ],
+    "typings": [
+      "typing.List[NamedValue]"
+    ],
+    "requires_typing": true,
     "name": "XContainerQuery",
     "imports": [],
     "namespace": "com.sun.star.container",
@@ -37,7 +50,7 @@
       "methods": [
         {
           "name": "createSubSetEnumerationByProperties",
-          "returns": "object",
+          "returns": "XEnumeration",
           "desc": [
             "creates a sub set of container items which supports searched properties as minimum",
             "",
@@ -54,7 +67,7 @@
         },
         {
           "name": "createSubSetEnumerationByQuery",
-          "returns": "object",
+          "returns": "XEnumeration",
           "desc": [
             "creates a sub set of container items which match given query command",
             "",

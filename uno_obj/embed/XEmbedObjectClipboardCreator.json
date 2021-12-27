@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:30+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:38+00:00",
   "name": "XEmbedObjectClipboardCreator",
   "type": "interface",
   "namespace": "com.sun.star.embed",
@@ -16,11 +16,29 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
-    "quote": [
-      "object"
+    "from_imports_typing": [
+      [
+        "..beans.property_value",
+        "PropertyValue"
+      ],
+      [
+        ".inserted_object_info",
+        "InsertedObjectInfo"
+      ],
+      [
+        ".x_storage",
+        "XStorage"
+      ]
     ],
-    "typings": [],
+    "quote": [
+      "XStorage",
+      "typing.List[PropertyValue]",
+      "InsertedObjectInfo"
+    ],
+    "typings": [
+      "typing.List[PropertyValue]"
+    ],
+    "requires_typing": true,
     "name": "XEmbedObjectClipboardCreator",
     "imports": [],
     "namespace": "com.sun.star.embed",
@@ -37,7 +55,7 @@
       "methods": [
         {
           "name": "createInstanceInitFromClipboard",
-          "returns": "object",
+          "returns": "InsertedObjectInfo",
           "desc": [
             "creates a new object and initializes it from the system clipboard.",
             "",
@@ -46,7 +64,9 @@
             "The clipboard can provide a number of choices that are container related. This information will be returned in the InsertedObjectInfo object."
           ],
           "raises": [
-            "com.sun.star.lang.IllegalArgumentException,"
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.io.IOException",
+            "com.sun.star.uno.Exception"
           ],
           "args": [
             [

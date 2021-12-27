@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:40+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:04+00:00",
   "name": "XDocumentRevisionListPersistence",
   "type": "interface",
   "namespace": "com.sun.star.document",
@@ -20,14 +20,20 @@
       [
         "..util.revision_tag",
         "RevisionTag"
+      ],
+      [
+        "..embed.x_storage",
+        "XStorage"
       ]
     ],
     "quote": [
+      "XStorage",
       "typing.List[RevisionTag]"
     ],
     "typings": [
       "typing.List[RevisionTag]"
     ],
+    "requires_typing": true,
     "name": "XDocumentRevisionListPersistence",
     "imports": [],
     "namespace": "com.sun.star.document",
@@ -49,7 +55,9 @@
             "This method does not load any revision itself"
           ],
           "raises": [
-            "com.sun.star.container.NoSuchElementException,"
+            "com.sun.star.container.NoSuchElementException",
+            "com.sun.star.io.IOException",
+            "com.sun.star.uno.Exception"
           ],
           "args": [
             [
@@ -68,7 +76,8 @@
             "This method does not store revisions themselves"
           ],
           "raises": [
-            "com.sun.star.io.IOException,"
+            "com.sun.star.io.IOException",
+            "com.sun.star.uno.Exception"
           ],
           "args": [
             [

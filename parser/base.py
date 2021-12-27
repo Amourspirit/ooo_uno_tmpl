@@ -38,7 +38,7 @@ from datetime import datetime, timezone
 _app_root = os.environ.get('project_root', str(Path(__file__).parent.parent))
 if not _app_root in sys.path:
     sys.path.insert(0, _app_root)
-from parser.type_mod import TypeRules, PythonType, DEFAULT_PYTHON_TYPE
+from parser.type_mod import TypeRules, PythonType
 from config import read_config, AppConfig, read_config_default
 # endregion imports
 
@@ -922,7 +922,7 @@ class ApiSummaries(BlockObj):
             # logger.debug('ApiSummaries.get_obj() r_type in: %s', r_type)
             p_type = Util.get_python_type(in_type=r_type)
             # logger.debug('ApiSummaries.get_obj() p_type in: %s', p_type.type)
-            if p_type is DEFAULT_PYTHON_TYPE:
+            if p_type.is_default():
                 logger.debug(
                     'ApiSummaries.get_obj() %s: p_type is Default. Looking for %s', name, r_type)
                 # defaulted to object.
@@ -931,7 +931,7 @@ class ApiSummaries(BlockObj):
                 r2_type = self._get_type_from_inner_link(itm_lft, r_type)
                 if r2_type:
                     p2_type = Util.get_python_type(r2_type)
-                    if not p2_type is DEFAULT_PYTHON_TYPE:
+                    if not p2_type.is_default():
                         p_type = p2_type
                         logger.debug(
                             'ApiSummaries.get_obj() %s: p_type is now %s', name, r_type)

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:30+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:30+00:00",
   "name": "XMailServiceProvider",
   "type": "interface",
   "namespace": "com.sun.star.mail",
@@ -16,11 +16,22 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_mail_service",
+        "XMailService"
+      ],
+      [
+        "..mail_service_type",
+        "MailServiceType"
+      ]
+    ],
     "quote": [
-      "object"
+      "XMailService",
+      "MailServiceType"
     ],
     "typings": [],
+    "requires_typing": true,
     "name": "XMailServiceProvider",
     "imports": [],
     "namespace": "com.sun.star.mail",
@@ -39,17 +50,18 @@
       "methods": [
         {
           "name": "create",
-          "returns": "object",
+          "returns": "XMailService",
           "desc": [
             "A factory method."
           ],
           "raises": [
-            "com.sun.star.mail.NoMailServiceProviderException,"
+            "com.sun.star.mail.NoMailServiceProviderException",
+            "com.sun.star.uno.Exception"
           ],
           "args": [
             [
               "aType",
-              "object",
+              "MailServiceType",
               "in"
             ]
           ]

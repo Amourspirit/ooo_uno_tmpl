@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:31+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:38+00:00",
   "name": "XLinkCreator",
   "type": "interface",
   "namespace": "com.sun.star.embed",
@@ -16,11 +16,25 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
-    "quote": [
-      "XInterface"
+    "from_imports_typing": [
+      [
+        "..beans.property_value",
+        "PropertyValue"
+      ],
+      [
+        ".x_storage",
+        "XStorage"
+      ]
     ],
-    "typings": [],
+    "quote": [
+      "XInterface",
+      "XStorage",
+      "typing.List[PropertyValue]"
+    ],
+    "typings": [
+      "typing.List[PropertyValue]"
+    ],
+    "requires_typing": true,
     "name": "XLinkCreator",
     "imports": [],
     "namespace": "com.sun.star.embed",
@@ -44,7 +58,9 @@
             "In case the entry exists already all its contents will be ignored and rewritten on storing of the object."
           ],
           "raises": [
-            "com.sun.star.lang.IllegalArgumentException,"
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.io.IOException",
+            "com.sun.star.uno.Exception"
           ],
           "args": [
             [

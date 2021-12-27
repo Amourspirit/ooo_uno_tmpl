@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:59+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:07+00:00",
   "name": "XLocalizedAliases",
   "type": "interface",
   "namespace": "com.sun.star.util",
@@ -18,16 +18,22 @@
     ],
     "from_imports_typing": [
       [
+        "..lang.locale",
+        "Locale"
+      ],
+      [
         ".alias_programmatic_pair",
         "AliasProgrammaticPair"
       ]
     ],
     "quote": [
+      "Locale",
       "typing.List[AliasProgrammaticPair]"
     ],
     "typings": [
       "typing.List[AliasProgrammaticPair]"
     ],
+    "requires_typing": true,
     "name": "XLocalizedAliases",
     "imports": [],
     "namespace": "com.sun.star.util",
@@ -135,7 +141,8 @@
             "rebinds all aliases registered to a given URL to a new one."
           ],
           "raises": [
-            "com.sun.star.container.NoSuchElementException,"
+            "com.sun.star.container.NoSuchElementException",
+            "com.sun.star.container.ElementExistException"
           ],
           "args": [
             [
@@ -157,7 +164,8 @@
             "renames an alias for a programmatic name."
           ],
           "raises": [
-            "com.sun.star.container.NoSuchElementException,"
+            "com.sun.star.container.NoSuchElementException",
+            "com.sun.star.container.ElementExistException"
           ],
           "args": [
             [

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:45+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:02+00:00",
   "name": "XDataReceiver",
   "type": "interface",
   "namespace": "com.sun.star.chart2.data",
@@ -18,18 +18,44 @@
     ],
     "from_imports_typing": [
       [
+        "...util.x_number_formats_supplier",
+        "XNumberFormatsSupplier"
+      ],
+      [
         "...awt.x_request_callback",
         "XRequestCallback"
+      ],
+      [
+        ".x_data_source",
+        "XDataSource"
+      ],
+      [
+        ".x_data_provider",
+        "XDataProvider"
+      ],
+      [
+        "...beans.property_value",
+        "PropertyValue"
+      ],
+      [
+        ".x_range_highlighter",
+        "XRangeHighlighter"
       ]
     ],
     "quote": [
+      "XRangeHighlighter",
+      "typing.List[PropertyValue]",
+      "XDataProvider",
       "XRequestCallback",
-      "object",
+      "XDataSource",
+      "XNumberFormatsSupplier",
       "typing.List[str]"
     ],
     "typings": [
+      "typing.List[PropertyValue]",
       "typing.List[str]"
     ],
+    "requires_typing": true,
     "name": "XDataReceiver",
     "imports": [],
     "namespace": "com.sun.star.chart2.data",
@@ -57,7 +83,7 @@
           "args": [
             [
               "xProvider",
-              "object",
+              "XDataProvider",
               "in"
             ]
           ]
@@ -94,7 +120,7 @@
         },
         {
           "name": "getRangeHighlighter",
-          "returns": "object",
+          "returns": "XRangeHighlighter",
           "desc": [
             "Returns a component at which a view representing the data of the attached data provider may listen for highlighting the data ranges used by the currently selected objects in the data receiver component.",
             "",
@@ -107,7 +133,7 @@
         },
         {
           "name": "getUsedData",
-          "returns": "object",
+          "returns": "XDataSource",
           "desc": [
             "Returns the data requested by the most recently attached data provider, that is still used."
           ],

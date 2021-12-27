@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:30+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:38+00:00",
   "name": "XCommonEmbedPersist",
   "type": "interface",
   "namespace": "com.sun.star.embed",
@@ -16,9 +16,19 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
-    "quote": [],
-    "typings": [],
+    "from_imports_typing": [
+      [
+        "..beans.property_value",
+        "PropertyValue"
+      ]
+    ],
+    "quote": [
+      "typing.List[PropertyValue]"
+    ],
+    "typings": [
+      "typing.List[PropertyValue]"
+    ],
+    "requires_typing": true,
     "name": "XCommonEmbedPersist",
     "imports": [],
     "namespace": "com.sun.star.embed",
@@ -51,7 +61,10 @@
             "If the object has persistence it will be reloaded from its persistent entry."
           ],
           "raises": [
-            "com.sun.star.lang.IllegalArgumentException,"
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.embed.WrongStateException",
+            "com.sun.star.io.IOException",
+            "com.sun.star.uno.Exception"
           ],
           "args": [
             [
@@ -73,7 +86,9 @@
             "lets the object or the link store itself."
           ],
           "raises": [
-            "com.sun.star.embed.WrongStateException,"
+            "com.sun.star.embed.WrongStateException",
+            "com.sun.star.io.IOException",
+            "com.sun.star.uno.Exception"
           ],
           "args": []
         }

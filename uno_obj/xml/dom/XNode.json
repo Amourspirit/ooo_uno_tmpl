@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:19+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:03+00:00",
   "name": "XNode",
   "type": "interface",
   "namespace": "com.sun.star.xml.dom",
@@ -16,11 +16,37 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_node",
+        "XNode"
+      ],
+      [
+        ".x_node_list",
+        "XNodeList"
+      ],
+      [
+        ".x_named_node_map",
+        "XNamedNodeMap"
+      ],
+      [
+        ".x_document",
+        "XDocument"
+      ],
+      [
+        "..node_type",
+        "NodeType"
+      ]
+    ],
     "quote": [
-      "object"
+      "XNodeList",
+      "NodeType",
+      "XNode",
+      "XDocument",
+      "XNamedNodeMap"
     ],
     "typings": [],
+    "requires_typing": true,
     "name": "XNode",
     "imports": [],
     "namespace": "com.sun.star.xml.dom",
@@ -45,7 +71,7 @@
       "methods": [
         {
           "name": "appendChild",
-          "returns": "object",
+          "returns": "XNode",
           "desc": [
             "Adds the node newChild to the end of the list of children of this node.",
             "",
@@ -61,14 +87,14 @@
           "args": [
             [
               "newChild",
-              "object",
+              "XNode",
               "in"
             ]
           ]
         },
         {
           "name": "cloneNode",
-          "returns": "object",
+          "returns": "XNode",
           "desc": [
             "Returns a duplicate of this node, i.e., serves as a generic copy constructor for nodes."
           ],
@@ -83,7 +109,7 @@
         },
         {
           "name": "getAttributes",
-          "returns": "object",
+          "returns": "XNamedNodeMap",
           "desc": [
             "A NamedNodeMap containing the attributes of this node (if it is an Element) or null otherwise."
           ],
@@ -92,7 +118,7 @@
         },
         {
           "name": "getChildNodes",
-          "returns": "object",
+          "returns": "XNodeList",
           "desc": [
             "A NodeList that contains all children of this node."
           ],
@@ -101,7 +127,7 @@
         },
         {
           "name": "getFirstChild",
-          "returns": "object",
+          "returns": "XNode",
           "desc": [
             "The first child of this node."
           ],
@@ -110,7 +136,7 @@
         },
         {
           "name": "getLastChild",
-          "returns": "object",
+          "returns": "XNode",
           "desc": [
             "The last child of this node."
           ],
@@ -137,7 +163,7 @@
         },
         {
           "name": "getNextSibling",
-          "returns": "object",
+          "returns": "XNode",
           "desc": [
             "The node immediately following this node."
           ],
@@ -155,7 +181,7 @@
         },
         {
           "name": "getNodeType",
-          "returns": "object",
+          "returns": "NodeType",
           "desc": [
             "A code representing the type of the underlying object, as defined above."
           ],
@@ -177,7 +203,7 @@
         },
         {
           "name": "getOwnerDocument",
-          "returns": "object",
+          "returns": "XDocument",
           "desc": [
             "The Document object associated with this node."
           ],
@@ -186,7 +212,7 @@
         },
         {
           "name": "getParentNode",
-          "returns": "object",
+          "returns": "XNode",
           "desc": [
             "The parent of this node."
           ],
@@ -204,7 +230,7 @@
         },
         {
           "name": "getPreviousSibling",
-          "returns": "object",
+          "returns": "XNode",
           "desc": [
             "The node immediately preceding this node."
           ],
@@ -231,7 +257,7 @@
         },
         {
           "name": "insertBefore",
-          "returns": "object",
+          "returns": "XNode",
           "desc": [
             "Inserts the node newChild before the existing child node refChild.",
             "",
@@ -249,12 +275,12 @@
           "args": [
             [
               "newChild",
-              "object",
+              "XNode",
               "in"
             ],
             [
               "refChild",
-              "object",
+              "XNode",
               "in"
             ]
           ]
@@ -290,7 +316,7 @@
         },
         {
           "name": "removeChild",
-          "returns": "object",
+          "returns": "XNode",
           "desc": [
             "Removes the child node indicated by oldChild from the list of children, and returns it.",
             "",
@@ -304,14 +330,14 @@
           "args": [
             [
               "oldChild",
-              "object",
+              "XNode",
               "in"
             ]
           ]
         },
         {
           "name": "replaceChild",
-          "returns": "object",
+          "returns": "XNode",
           "desc": [
             "Replaces the child node oldChild with newChild in the list of children, and returns the oldChild node.",
             "",
@@ -329,12 +355,12 @@
           "args": [
             [
               "newChild",
-              "object",
+              "XNode",
               "in"
             ],
             [
               "oldChild",
-              "object",
+              "XNode",
               "in"
             ]
           ]

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:52+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:11+00:00",
   "name": "XDatabaseMetaData",
   "type": "interface",
   "namespace": "com.sun.star.sdbc",
@@ -16,11 +16,27 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
-    "quote": [
-      "object"
+    "from_imports_typing": [
+      [
+        ".x_result_set",
+        "XResultSet"
+      ],
+      [
+        ".x_connection",
+        "XConnection"
+      ]
     ],
-    "typings": [],
+    "quote": [
+      "typing.List[int]",
+      "XResultSet",
+      "XConnection",
+      "typing.List[str]"
+    ],
+    "typings": [
+      "typing.List[int]",
+      "typing.List[str]"
+    ],
+    "requires_typing": true,
     "name": "XDatabaseMetaData",
     "imports": [],
     "namespace": "com.sun.star.sdbc",
@@ -115,7 +131,7 @@
         },
         {
           "name": "getBestRowIdentifier",
-          "returns": "object",
+          "returns": "XResultSet",
           "desc": [
             "gets a description of a table's optimal set of columns that uniquely identifies a row.",
             "",
@@ -178,7 +194,7 @@
         },
         {
           "name": "getCatalogs",
-          "returns": "object",
+          "returns": "XResultSet",
           "desc": [
             "gets the catalog names available in this database.",
             "",
@@ -193,7 +209,7 @@
         },
         {
           "name": "getColumnPrivileges",
-          "returns": "object",
+          "returns": "XResultSet",
           "desc": [
             "gets a description of the access rights for a table's columns.",
             "",
@@ -229,7 +245,7 @@
         },
         {
           "name": "getColumns",
-          "returns": "object",
+          "returns": "XResultSet",
           "desc": [
             "gets a description of table columns available in the specified catalog.",
             "",
@@ -265,7 +281,7 @@
         },
         {
           "name": "getConnection",
-          "returns": "object",
+          "returns": "XConnection",
           "desc": [
             "retrieves the connection that produced this metadata object."
           ],
@@ -276,7 +292,7 @@
         },
         {
           "name": "getCrossReference",
-          "returns": "object",
+          "returns": "XResultSet",
           "desc": [
             "gets a description of the foreign key columns in the foreign key table that reference the primary key columns of the primary key table (describe how one table imports another's key.) This should normally return a single foreign key/primary key pair (most tables only import a foreign key from a table once.).",
             "",
@@ -397,7 +413,7 @@
         },
         {
           "name": "getExportedKeys",
-          "returns": "object",
+          "returns": "XResultSet",
           "desc": [
             "gets a description of the foreign key columns that reference a table's primary key columns (the foreign keys exported by a table).",
             "",
@@ -450,7 +466,7 @@
         },
         {
           "name": "getImportedKeys",
-          "returns": "object",
+          "returns": "XResultSet",
           "desc": [
             "gets a description of the primary key columns that are referenced by a table's foreign key columns (the primary keys imported by a table).",
             "",
@@ -481,7 +497,7 @@
         },
         {
           "name": "getIndexInfo",
-          "returns": "object",
+          "returns": "XResultSet",
           "desc": [
             "gets a description of a table's indices and statistics.",
             "",
@@ -755,7 +771,7 @@
         },
         {
           "name": "getPrimaryKeys",
-          "returns": "object",
+          "returns": "XResultSet",
           "desc": [
             "gets a description of a table's primary key columns.",
             "",
@@ -786,7 +802,7 @@
         },
         {
           "name": "getProcedureColumns",
-          "returns": "object",
+          "returns": "XResultSet",
           "desc": [
             "gets a description of a catalog's stored procedure parameters and result columns.",
             "",
@@ -835,7 +851,7 @@
         },
         {
           "name": "getProcedures",
-          "returns": "object",
+          "returns": "XResultSet",
           "desc": [
             "Gets a description of the stored procedures available in a catalog.",
             "",
@@ -888,7 +904,7 @@
         },
         {
           "name": "getSchemas",
-          "returns": "object",
+          "returns": "XResultSet",
           "desc": [
             "Gets the schema names available in this database.",
             "",
@@ -946,7 +962,7 @@
         },
         {
           "name": "getTablePrivileges",
-          "returns": "object",
+          "returns": "XResultSet",
           "desc": [
             "gets a description of the access rights for each table available in a catalog.",
             "",
@@ -979,7 +995,7 @@
         },
         {
           "name": "getTableTypes",
-          "returns": "object",
+          "returns": "XResultSet",
           "desc": [
             "gets the table types available in this database.",
             "",
@@ -994,7 +1010,7 @@
         },
         {
           "name": "getTables",
-          "returns": "object",
+          "returns": "XResultSet",
           "desc": [
             "gets a description of tables available in a catalog.",
             "",
@@ -1043,7 +1059,7 @@
         },
         {
           "name": "getTypeInfo",
-          "returns": "object",
+          "returns": "XResultSet",
           "desc": [
             "gets a description of all the standard SQL types supported by this database.",
             "",
@@ -1058,7 +1074,7 @@
         },
         {
           "name": "getUDTs",
-          "returns": "object",
+          "returns": "XResultSet",
           "desc": [
             "Gets a description of the user-defined types defined in a particular schema.",
             "",
@@ -1120,7 +1136,7 @@
         },
         {
           "name": "getVersionColumns",
-          "returns": "object",
+          "returns": "XResultSet",
           "desc": [
             "gets a description of a table's columns that are automatically updated when any value in a row is updated.",
             "",

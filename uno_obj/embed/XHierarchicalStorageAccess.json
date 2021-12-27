@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:31+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:38+00:00",
   "name": "XHierarchicalStorageAccess",
   "type": "interface",
   "namespace": "com.sun.star.embed",
@@ -16,11 +16,17 @@
         "XHierarchicalStorageAccess2"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_extended_storage_stream",
+        "XExtendedStorageStream"
+      ]
+    ],
     "quote": [
-      "object"
+      "XExtendedStorageStream"
     ],
     "typings": [],
+    "requires_typing": true,
     "name": "XHierarchicalStorageAccess",
     "imports": [],
     "namespace": "com.sun.star.embed",
@@ -39,7 +45,7 @@
       "methods": [
         {
           "name": "openEncryptedStreamElementByHierarchicalName",
-          "returns": "object",
+          "returns": "XExtendedStorageStream",
           "desc": [
             "allows to get access to a child encrypted stream with password using hierarchical path.",
             "",
@@ -48,7 +54,12 @@
             "In case the stream is open in readonly mode the com.sun.star.io.XStream.getOutputStream() method will return an empty reference."
           ],
           "raises": [
-            "com.sun.star.embed.InvalidStorageException,"
+            "com.sun.star.embed.InvalidStorageException",
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.packages.NoEncryptionException",
+            "com.sun.star.packages.WrongPasswordException",
+            "com.sun.star.io.IOException",
+            "com.sun.star.embed.StorageWrappedTargetException"
           ],
           "args": [
             [
@@ -70,14 +81,18 @@
         },
         {
           "name": "openStreamElementByHierarchicalName",
-          "returns": "object",
+          "returns": "XExtendedStorageStream",
           "desc": [
             "allows to get access to a child stream of the storage, using hierarchical path.",
             "",
             "In case the stream is open in readonly mode the com.sun.star.io.XStream.getOutputStream() method will return an empty reference."
           ],
           "raises": [
-            "com.sun.star.embed.InvalidStorageException,"
+            "com.sun.star.embed.InvalidStorageException",
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.packages.WrongPasswordException",
+            "com.sun.star.io.IOException",
+            "com.sun.star.embed.StorageWrappedTargetException"
           ],
           "args": [
             [
@@ -99,7 +114,11 @@
             "removes a stream specified by hierarchical name from a storage."
           ],
           "raises": [
-            "com.sun.star.embed.InvalidStorageException,"
+            "com.sun.star.embed.InvalidStorageException",
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.container.NoSuchElementException",
+            "com.sun.star.io.IOException",
+            "com.sun.star.embed.StorageWrappedTargetException"
           ],
           "args": [
             [

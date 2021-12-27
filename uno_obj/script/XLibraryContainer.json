@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:22+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:34+00:00",
   "name": "XLibraryContainer",
   "type": "interface",
   "namespace": "com.sun.star.script",
@@ -23,10 +23,11 @@
       ]
     ],
     "quote": [
-      "XNameContainer",
-      "XNameAccess"
+      "XNameAccess",
+      "XNameContainer"
     ],
     "typings": [],
+    "requires_typing": true,
     "name": "XLibraryContainer",
     "imports": [],
     "namespace": "com.sun.star.script",
@@ -46,7 +47,8 @@
             "Creates a new library."
           ],
           "raises": [
-            "com.sun.star.lang.IllegalArgumentException,"
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.container.ElementExistException"
           ],
           "args": [
             [
@@ -65,7 +67,8 @@
             "The format of the StorageURL is a matter of the implementation. If the read only flag is set, the linked library cannot be modified. In this case, the returned interface really is only an XNameAccess. If ReadOnly is false (and the referenced storage allows write access) the returned interface also can be a com.sun.star.container.XNameContainer."
           ],
           "raises": [
-            "com.sun.star.lang.IllegalArgumentException,"
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.container.ElementExistException"
           ],
           "args": [
             [
@@ -109,7 +112,8 @@
             "Causes the accessed library to be loaded from its storage if it hasn't already been loaded."
           ],
           "raises": [
-            "com.sun.star.container.NoSuchElementException,"
+            "com.sun.star.container.NoSuchElementException",
+            "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
             [
@@ -128,7 +132,8 @@
             "If the accessed library item is a link only the link is removed, not the target library."
           ],
           "raises": [
-            "com.sun.star.container.NoSuchElementException,"
+            "com.sun.star.container.NoSuchElementException",
+            "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
             [

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:56+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:21+00:00",
   "name": "XDataDefinitionSupplier",
   "type": "interface",
   "namespace": "com.sun.star.sdbcx",
@@ -10,16 +10,41 @@
   },
   "writer_args": {},
   "data": {
-    "from_imports": [],
-    "from_imports_typing": [],
-    "quote": [
-      "object"
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface"
+      ]
     ],
-    "typings": [],
+    "from_imports_typing": [
+      [
+        "..beans.property_value",
+        "PropertyValue"
+      ],
+      [
+        ".x_tables_supplier",
+        "XTablesSupplier"
+      ],
+      [
+        "..sdbc.x_connection",
+        "XConnection"
+      ]
+    ],
+    "quote": [
+      "typing.List[PropertyValue]",
+      "XTablesSupplier",
+      "XConnection"
+    ],
+    "typings": [
+      "typing.List[PropertyValue]"
+    ],
+    "requires_typing": true,
     "name": "XDataDefinitionSupplier",
     "imports": [],
     "namespace": "com.sun.star.sdbcx",
-    "extends": [],
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
     "desc": [
       "provides the access to data definition beans from a connected database."
     ],
@@ -28,7 +53,7 @@
       "methods": [
         {
           "name": "getDataDefinitionByConnection",
-          "returns": "object",
+          "returns": "XTablesSupplier",
           "desc": [
             "returns at least the container of tables related to the given connection."
           ],
@@ -45,7 +70,7 @@
         },
         {
           "name": "getDataDefinitionByURL",
-          "returns": "object",
+          "returns": "XTablesSupplier",
           "desc": [
             "returns at least the container of tables related to the given Database URL."
           ],

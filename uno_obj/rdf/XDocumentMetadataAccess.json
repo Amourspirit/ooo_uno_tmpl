@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:38+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:33+00:00",
   "name": "XDocumentMetadataAccess",
   "type": "interface",
   "namespace": "com.sun.star.rdf",
@@ -12,27 +12,59 @@
   "data": {
     "from_imports": [
       [
-        ".x_repository_supplier",
-        "XRepositorySupplier"
-      ],
-      [
         ".xuri",
         "XURI"
+      ],
+      [
+        ".x_repository_supplier",
+        "XRepositorySupplier"
       ]
     ],
     "from_imports_typing": [
       [
+        ".x_metadatable",
+        "XMetadatable"
+      ],
+      [
+        "..task.x_interaction_handler",
+        "XInteractionHandler"
+      ],
+      [
+        "..io.x_input_stream",
+        "XInputStream"
+      ],
+      [
         ".xuri",
         "XURI"
+      ],
+      [
+        "..beans.property_value",
+        "PropertyValue"
+      ],
+      [
+        "..beans.string_pair",
+        "StringPair"
+      ],
+      [
+        "..embed.x_storage",
+        "XStorage"
       ]
     ],
     "quote": [
-      "object",
-      "typing.List[XURI]"
+      "XStorage",
+      "XMetadatable",
+      "XInteractionHandler",
+      "StringPair",
+      "XURI",
+      "typing.List[PropertyValue]",
+      "typing.List[XURI]",
+      "XInputStream"
     ],
     "typings": [
+      "typing.List[PropertyValue]",
       "typing.List[XURI]"
     ],
+    "requires_typing": true,
     "name": "XDocumentMetadataAccess",
     "imports": [],
     "namespace": "com.sun.star.rdf",
@@ -63,7 +95,8 @@
             "This convenience method adds the required statements declaring a content or styles file to the manifest graph."
           ],
           "raises": [
-            "com.sun.star.lang.IllegalArgumentException,"
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.container.ElementExistException"
           ],
           "args": [
             [
@@ -75,14 +108,15 @@
         },
         {
           "name": "addMetadataFile",
-          "returns": "object",
+          "returns": "XURI",
           "desc": [
             "add a metadata file to the manifest.",
             "",
             "This convenience method does the following:"
           ],
           "raises": [
-            "com.sun.star.lang.IllegalArgumentException,"
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.container.ElementExistException"
           ],
           "args": [
             [
@@ -99,7 +133,7 @@
         },
         {
           "name": "getElementByMetadataReference",
-          "returns": "object",
+          "returns": "XMetadatable",
           "desc": [
             "get the unique ODF element with the given metadata reference."
           ],
@@ -114,7 +148,7 @@
         },
         {
           "name": "getElementByURI",
-          "returns": "object",
+          "returns": "XMetadatable",
           "desc": [
             "get the ODF element that corresponds to a URI."
           ],
@@ -124,7 +158,7 @@
           "args": [
             [
               "URI",
-              "object",
+              "XURI",
               "in"
             ]
           ]
@@ -141,21 +175,25 @@
           "args": [
             [
               "Type",
-              "object",
+              "XURI",
               "in"
             ]
           ]
         },
         {
           "name": "importMetadataFile",
-          "returns": "object",
+          "returns": "XURI",
           "desc": [
             "import a metadata file into the document repository, and add it to the manifest.",
             "",
             "This convenience method does the following:"
           ],
           "raises": [
-            "com.sun.star.lang.IllegalArgumentException,"
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.datatransfer.UnsupportedFlavorException",
+            "com.sun.star.container.ElementExistException",
+            "ParseException",
+            "com.sun.star.io.IOException"
           ],
           "args": [
             [
@@ -175,7 +213,7 @@
             ],
             [
               "BaseURI",
-              "object",
+              "XURI",
               "in"
             ],
             [
@@ -194,7 +232,8 @@
             "If the Medium contains an InteractionHandler, it will be used for error reporting."
           ],
           "raises": [
-            "com.sun.star.lang.IllegalArgumentException,"
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
             [
@@ -219,7 +258,8 @@
             "N.B.: when loading from an ODF package, the base URI is not the URI of the package, but the URI of the directory in the package that contains the metadata.rdf"
           ],
           "raises": [
-            "com.sun.star.lang.IllegalArgumentException,"
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
             [
@@ -229,7 +269,7 @@
             ],
             [
               "BaseURI",
-              "object",
+              "XURI",
               "in"
             ],
             [
@@ -248,7 +288,8 @@
             "This convenience method removes the statements declaring a content or styles file from the manifest graph."
           ],
           "raises": [
-            "com.sun.star.lang.IllegalArgumentException,"
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.container.NoSuchElementException"
           ],
           "args": [
             [
@@ -267,12 +308,13 @@
             "This convenience method does the following:"
           ],
           "raises": [
-            "com.sun.star.lang.IllegalArgumentException,"
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.container.NoSuchElementException"
           ],
           "args": [
             [
               "GraphName",
-              "object",
+              "XURI",
               "in"
             ]
           ]
@@ -284,7 +326,8 @@
             "stores document metadata to a medium."
           ],
           "raises": [
-            "com.sun.star.lang.IllegalArgumentException,"
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
             [
@@ -305,7 +348,8 @@
             "Note that to be stored correctly, a named graph must have a complete entry in the manifest graph."
           ],
           "raises": [
-            "com.sun.star.lang.IllegalArgumentException,"
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
             [

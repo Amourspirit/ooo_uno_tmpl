@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:52:52+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:06+00:00",
   "name": "XFunctionCategory",
   "type": "interface",
   "namespace": "com.sun.star.report.meta",
@@ -12,15 +12,25 @@
   "data": {
     "from_imports": [
       [
-        "...beans.x_property_set",
-        "XPropertySet"
-      ],
-      [
         "...container.x_index_access",
         "XIndexAccess"
+      ],
+      [
+        "...beans.x_property_set",
+        "XPropertySet"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_function_description",
+        "XFunctionDescription"
+      ]
+    ],
+    "quote": [
+      "XFunctionDescription"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XFunctionCategory",
     "imports": [],
     "namespace": "com.sun.star.report.meta",
@@ -36,14 +46,21 @@
       "methods": [
         {
           "name": "getFunction",
-          "returns": "object",
+          "returns": "XFunctionDescription",
           "desc": [
             "same as getByIndex."
           ],
           "raises": [
-            "com.sun.star.lang.IndexOutOfBoundsException,"
+            "com.sun.star.lang.IndexOutOfBoundsException",
+            "com.sun.star.lang.WrappedTargetException"
           ],
-          "args": []
+          "args": [
+            [
+              "position",
+              "int",
+              "in"
+            ]
+          ]
         }
       ],
       "properties": [

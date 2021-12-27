@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:49+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:09+00:00",
   "name": "XParameters",
   "type": "interface",
   "namespace": "com.sun.star.sdbc",
@@ -16,9 +16,55 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
-    "quote": [],
-    "typings": [],
+    "from_imports_typing": [
+      [
+        "..util.date",
+        "Date"
+      ],
+      [
+        "..io.x_input_stream",
+        "XInputStream"
+      ],
+      [
+        "..util.date_time",
+        "DateTime"
+      ],
+      [
+        ".x_array",
+        "XArray"
+      ],
+      [
+        "..util.time",
+        "Time"
+      ],
+      [
+        ".x_ref",
+        "XRef"
+      ],
+      [
+        ".x_blob",
+        "XBlob"
+      ],
+      [
+        ".x_clob",
+        "XClob"
+      ]
+    ],
+    "quote": [
+      "typing.List[int]",
+      "Date",
+      "XRef",
+      "Time",
+      "XClob",
+      "DateTime",
+      "XArray",
+      "XBlob",
+      "XInputStream"
+    ],
+    "typings": [
+      "typing.List[int]"
+    ],
+    "requires_typing": true,
     "name": "XParameters",
     "imports": [],
     "namespace": "com.sun.star.sdbc",
@@ -30,7 +76,9 @@
       "",
       "Note: The setXXX methods for setting IN parameter values must specify types that are compatible with the defined SQL type of the input parameter. For instance, if the IN parameter has SQL type Integer, then the method com.sun.star.sdbc.XParameters.setInt() should be used.",
       "",
-      "If arbitrary parameter type conversions are required, the method com.sun.star.sdbc.XParameters.setObject() should be used with a target SQL type. \n\n Example of setting a parameter; con is an active connection."
+      "If arbitrary parameter type conversions are required, the method com.sun.star.sdbc.XParameters.setObject() should be used with a target SQL type.",
+      "",
+      "Example of setting a parameter; con is an active connection."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1sdbc_1_1XParameters.html",
     "items": {
@@ -65,7 +113,7 @@
             ],
             [
               "x",
-              "object",
+              "XArray",
               "in"
             ]
           ]
@@ -116,7 +164,7 @@
             ],
             [
               "x",
-              "object",
+              "XBlob",
               "in"
             ]
           ]
@@ -164,7 +212,7 @@
             ],
             [
               "x",
-              "object",
+              "int",
               "in"
             ]
           ]
@@ -188,7 +236,7 @@
             ],
             [
               "x",
-              "typing.List[byte]",
+              "typing.List[int]",
               "in"
             ]
           ]
@@ -239,7 +287,7 @@
             ],
             [
               "x",
-              "object",
+              "XClob",
               "in"
             ]
           ]
@@ -420,7 +468,8 @@
             "",
             "This version of setNull should be used for user-named types and REF type parameters. Examples of user-named types include: STRUCT, DISTINCT, OBJECT, and named array types.",
             "",
-            "Note: To be portable, applications must give the SQL type code and the fully-qualified SQL type name when specifying a NULL user-defined or REF parameter. In the case of a user-named type the name is the type name of the parameter itself. For a REF parameter the name is the type name of the referenced type. If a SDBC driver does not need the type code or type name information, it may ignore it. \n Although it is intended for user-named and Ref parameters, this method may be used to set a null parameter of any JDBC type. If the parameter does not have a user-named or REF type, the given typeName is ignored."
+            "Note: To be portable, applications must give the SQL type code and the fully-qualified SQL type name when specifying a NULL user-defined or REF parameter. In the case of a user-named type the name is the type name of the parameter itself. For a REF parameter the name is the type name of the referenced type. If a SDBC driver does not need the type code or type name information, it may ignore it.",
+            "Although it is intended for user-named and Ref parameters, this method may be used to set a null parameter of any JDBC type. If the parameter does not have a user-named or REF type, the given typeName is ignored."
           ],
           "raises": [
             "SQLException"
@@ -496,7 +545,7 @@
             ],
             [
               "x",
-              "object",
+              "XRef",
               "in"
             ]
           ]

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:53+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:15+00:00",
   "name": "XBitmapPalette",
   "type": "interface",
   "namespace": "com.sun.star.rendering",
@@ -16,11 +16,24 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
-    "quote": [
-      "object"
+    "from_imports_typing": [
+      [
+        ".color_component",
+        "ColorComponent"
+      ],
+      [
+        ".x_color_space",
+        "XColorSpace"
+      ]
     ],
-    "typings": [],
+    "quote": [
+      "XColorSpace",
+      "typing.List[ColorComponent]"
+    ],
+    "typings": [
+      "typing.List[ColorComponent]"
+    ],
+    "requires_typing": true,
     "name": "XBitmapPalette",
     "imports": [],
     "namespace": "com.sun.star.rendering",
@@ -39,7 +52,7 @@
       "methods": [
         {
           "name": "getColorSpace",
-          "returns": "object",
+          "returns": "XColorSpace",
           "desc": [
             "Query associated color space."
           ],
@@ -84,7 +97,8 @@
             "Set the color for the given palette entry."
           ],
           "raises": [
-            "com.sun.star.lang.IndexOutOfBoundsException,"
+            "com.sun.star.lang.IndexOutOfBoundsException",
+            "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
             [

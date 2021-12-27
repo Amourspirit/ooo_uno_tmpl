@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:22+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:34+00:00",
   "name": "XEventAttacher2",
   "type": "interface",
   "namespace": "com.sun.star.script",
@@ -20,14 +20,26 @@
       [
         "..lang.x_event_listener",
         "XEventListener"
+      ],
+      [
+        ".event_listener",
+        "EventListener"
+      ],
+      [
+        "..uno.x_interface",
+        "XInterface"
       ]
     ],
     "quote": [
+      "XInterface",
+      "typing.List[EventListener]",
       "typing.List[XEventListener]"
     ],
     "typings": [
+      "typing.List[EventListener]",
       "typing.List[XEventListener]"
     ],
+    "requires_typing": true,
     "name": "XEventAttacher2",
     "imports": [],
     "namespace": "com.sun.star.script",
@@ -47,7 +59,10 @@
             "Besides passing multiple listeners, the behavior of this method is identical to that of attachSingleEventListener()."
           ],
           "raises": [
-            "com.sun.star.lang.IllegalArgumentException,"
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.beans.IntrospectionException",
+            "com.sun.star.script.CannotCreateAdapterException",
+            "com.sun.star.lang.ServiceNotRegisteredException"
           ],
           "args": [
             [

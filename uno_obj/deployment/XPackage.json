@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:05:00+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:28+00:00",
   "name": "XPackage",
   "type": "interface",
   "namespace": "com.sun.star.deployment",
@@ -22,6 +22,14 @@
     ],
     "from_imports_typing": [
       [
+        "..ucb.x_command_environment",
+        "XCommandEnvironment"
+      ],
+      [
+        ".x_package_type_info",
+        "XPackageTypeInfo"
+      ],
+      [
         "..task.x_abort_channel",
         "XAbortChannel"
       ],
@@ -30,26 +38,28 @@
         "XGraphic"
       ],
       [
-        ".x_package",
-        "XPackage"
-      ],
-      [
         "..beans.string_pair",
         "StringPair"
+      ],
+      [
+        ".x_package",
+        "XPackage"
       ]
     ],
     "quote": [
-      "object",
-      "XGraphic",
-      "typing.List[str]",
+      "XCommandEnvironment",
+      "XPackageTypeInfo",
+      "StringPair",
       "XAbortChannel",
+      "XGraphic",
       "typing.List[XPackage]",
-      "StringPair"
+      "typing.List[str]"
     ],
     "typings": [
       "typing.List[XPackage]",
       "typing.List[str]"
     ],
+    "requires_typing": true,
     "name": "XPackage",
     "imports": [],
     "namespace": "com.sun.star.deployment",
@@ -80,7 +90,9 @@
             "    OOo 3.2"
           ],
           "raises": [
-            "DeploymentException,"
+            "DeploymentException",
+            "ExtensionRemovedException",
+            "com.sun.star.ucb.CommandFailedException"
           ],
           "args": [
             [
@@ -99,7 +111,10 @@
             "Only if the return value is TRUE the package is allowed to be installed. In case of FALSE or in case of an exception, the package must be removed completely. After return of this function no code from the extension may be used anymore, so that the extension can be safely removed from the hard disk."
           ],
           "raises": [
-            "DeploymentException,"
+            "DeploymentException",
+            "ExtensionRemovedException",
+            "com.sun.star.ucb.CommandFailedException",
+            "com.sun.star.ucb.CommandAbortedException"
           ],
           "args": [
             [
@@ -135,7 +150,10 @@
             "exports package to given destination URL."
           ],
           "raises": [
-            "ExtensionRemovedException,"
+            "ExtensionRemovedException",
+            "com.sun.star.ucb.CommandFailedException",
+            "com.sun.star.ucb.CommandAbortedException",
+            "com.sun.star.ucb.ContentCreationException"
           ],
           "args": [
             [
@@ -169,7 +187,10 @@
             "If isRemoved() returns TRUE then getBundle may return an empty sequence in case the object is not registered."
           ],
           "raises": [
-            "DeploymentException,"
+            "DeploymentException",
+            "com.sun.star.ucb.CommandFailedException",
+            "com.sun.star.ucb.CommandAbortedException",
+            "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
             [
@@ -241,7 +262,8 @@
             "returns a string containing the license text."
           ],
           "raises": [
-            "DeploymentException,"
+            "DeploymentException",
+            "ExtensionRemovedException"
           ],
           "args": []
         },
@@ -256,7 +278,7 @@
         },
         {
           "name": "getPackageType",
-          "returns": "object",
+          "returns": "XPackageTypeInfo",
           "desc": [
             "returns the XPackageTypeInfo, e.g.",
             "",
@@ -287,7 +309,8 @@
             "This data may be created when calling XPackage.registerPackage(). If this is the case is indicated by com.sun.star.beans.Optional.IsPresent of the return value. If registration data are created during registration, but the package is currently not registered, for example after calling XPackage.revokePackage(), then com.sun.star.beans.Optional.IsPresent is TRUE and the com.sun.star.beans.Optional.Value may be an empty string."
           ],
           "raises": [
-            "DeploymentException,"
+            "DeploymentException",
+            "ExtensionRemovedException"
           ],
           "args": []
         },
@@ -328,7 +351,9 @@
           "desc": [
             "returns the textual version representation of the package.",
             "",
-            "A textual version representation is a finite string following the BNF\n version .= [element (\\\".\\\" element)*]\n element .= (\\\"0\\\" | \\\"1\\\" | \\\"2\\\" | \\\"3\\\" | \\\"4\\\" | \\\"5\\\" | \\\"6\\\" | \\\"7\\\" | \\\"8\\\" | \\\"9\\\")+"
+            "A textual version representation is a finite string following the BNF",
+            "version .= [element (\\\".\\\" element)*]",
+            "element .= (\\\"0\\\" | \\\"1\\\" | \\\"2\\\" | \\\"3\\\" | \\\"4\\\" | \\\"5\\\" | \\\"6\\\" | \\\"7\\\" | \\\"8\\\" | \\\"9\\\")+"
           ],
           "raises": [
             "ExtensionRemovedException"
@@ -355,7 +380,9 @@
             "whether it is active."
           ],
           "raises": [
-            "DeploymentException,"
+            "DeploymentException",
+            "com.sun.star.ucb.CommandFailedException",
+            "com.sun.star.ucb.CommandAbortedException"
           ],
           "args": [
             [
@@ -390,7 +417,11 @@
             "NEVER call this directly. This is done by the extension manager if necessary."
           ],
           "raises": [
-            "DeploymentException,"
+            "DeploymentException",
+            "ExtensionRemovedException",
+            "com.sun.star.ucb.CommandFailedException",
+            "com.sun.star.ucb.CommandAbortedException",
+            "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
             [
@@ -419,7 +450,10 @@
             "NEVER call this directly. This is done by the extension manager if necessary."
           ],
           "raises": [
-            "DeploymentException,"
+            "DeploymentException",
+            "com.sun.star.ucb.CommandFailedException",
+            "com.sun.star.ucb.CommandAbortedException",
+            "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
             [

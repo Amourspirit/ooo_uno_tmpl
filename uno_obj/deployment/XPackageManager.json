@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:05:00+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:28+00:00",
   "name": "XPackageManager",
   "type": "interface",
   "namespace": "com.sun.star.deployment",
@@ -22,12 +22,24 @@
     ],
     "from_imports_typing": [
       [
-        "..task.x_abort_channel",
-        "XAbortChannel"
+        "..ucb.x_command_environment",
+        "XCommandEnvironment"
       ],
       [
         ".x_package_type_info",
         "XPackageTypeInfo"
+      ],
+      [
+        "..task.x_abort_channel",
+        "XAbortChannel"
+      ],
+      [
+        ".x_package",
+        "XPackage"
+      ],
+      [
+        "..beans.named_value",
+        "NamedValue"
       ],
       [
         ".x_package",
@@ -35,15 +47,19 @@
       ]
     ],
     "quote": [
-      "typing.List[XPackage]",
-      "object",
+      "XCommandEnvironment",
+      "typing.List[NamedValue]",
       "typing.List[XPackageTypeInfo]",
-      "XAbortChannel"
+      "XAbortChannel",
+      "typing.List[XPackage]",
+      "XPackage"
     ],
     "typings": [
+      "typing.List[NamedValue]",
       "typing.List[XPackage]",
       "typing.List[XPackageTypeInfo]"
     ],
+    "requires_typing": true,
     "name": "XPackageManager",
     "imports": [],
     "namespace": "com.sun.star.deployment",
@@ -77,14 +93,17 @@
       "methods": [
         {
           "name": "addPackage",
-          "returns": "object",
+          "returns": "XPackage",
           "desc": [
             "adds a UNO package.",
             "",
             "The properties argument is currently only used to suppress the license information for shared extensions."
           ],
           "raises": [
-            "DeploymentException,"
+            "DeploymentException",
+            "com.sun.star.ucb.CommandFailedException",
+            "com.sun.star.ucb.CommandAbortedException",
+            "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
             [
@@ -123,12 +142,15 @@
             "The extension must be managed by this package manager, that is, it must be recorded in its database. The package manager calls XPackage.checkPrerequisites and updates its data base with the result. The result, which is from Prerequisites will be returned."
           ],
           "raises": [
-            "DeploymentException,"
+            "DeploymentException",
+            "com.sun.star.ucb.CommandFailedException",
+            "com.sun.star.ucb.CommandAbortedException",
+            "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
             [
               "extension",
-              "object",
+              "XPackage",
               "in"
             ],
             [
@@ -163,12 +185,14 @@
         },
         {
           "name": "getDeployedPackage",
-          "returns": "object",
+          "returns": "XPackage",
           "desc": [
             "gets a deployed package."
           ],
           "raises": [
-            "DeploymentException,"
+            "DeploymentException",
+            "com.sun.star.ucb.CommandFailedException",
+            "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
             [
@@ -195,7 +219,10 @@
             "gets all currently deployed packages."
           ],
           "raises": [
-            "DeploymentException,"
+            "DeploymentException",
+            "com.sun.star.ucb.CommandFailedException",
+            "com.sun.star.ucb.CommandAbortedException",
+            "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
             [
@@ -242,19 +269,22 @@
         },
         {
           "name": "importExtension",
-          "returns": "object",
+          "returns": "XPackage",
           "desc": [
             "adds an extension.",
             "",
             "This copies the extension. If it was from the same repository, which is represented by this XPackageManager interface, then nothing happens."
           ],
           "raises": [
-            "DeploymentException,"
+            "DeploymentException",
+            "com.sun.star.ucb.CommandFailedException",
+            "com.sun.star.ucb.CommandAbortedException",
+            "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
             [
               "extension",
-              "object",
+              "XPackage",
               "in"
             ],
             [
@@ -291,7 +321,10 @@
             "Please use this in case of suspected cache inconsistencies only."
           ],
           "raises": [
-            "DeploymentException,"
+            "DeploymentException",
+            "com.sun.star.ucb.CommandFailedException",
+            "com.sun.star.ucb.CommandAbortedException",
+            "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
             [
@@ -318,7 +351,10 @@
             "removes a UNO package."
           ],
           "raises": [
-            "DeploymentException,"
+            "DeploymentException",
+            "com.sun.star.ucb.CommandFailedException",
+            "com.sun.star.ucb.CommandAbortedException",
+            "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
             [
@@ -352,7 +388,10 @@
             "Added extensions will be added to the database and removed extensions will be removed from the database."
           ],
           "raises": [
-            "DeploymentException,"
+            "DeploymentException",
+            "com.sun.star.ucb.ContentCreationException",
+            "com.sun.star.ucb.CommandFailedException",
+            "com.sun.star.ucb.CommandAbortedException"
           ],
           "args": [
             [

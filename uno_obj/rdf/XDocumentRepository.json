@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:38+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:33+00:00",
   "name": "XDocumentRepository",
   "type": "interface",
   "namespace": "com.sun.star.rdf",
@@ -18,15 +18,42 @@
     ],
     "from_imports_typing": [
       [
+        ".x_metadatable",
+        "XMetadatable"
+      ],
+      [
         "..container.x_enumeration",
         "XEnumeration"
+      ],
+      [
+        ".x_resource",
+        "XResource"
+      ],
+      [
+        ".xuri",
+        "XURI"
+      ],
+      [
+        ".xuri",
+        "XURI"
+      ],
+      [
+        ".x_node",
+        "XNode"
       ]
     ],
     "quote": [
-      "object",
-      "XEnumeration"
+      "XResource",
+      "XMetadatable",
+      "XNode",
+      "XURI",
+      "XEnumeration",
+      "typing.List[XURI]"
     ],
-    "typings": [],
+    "typings": [
+      "typing.List[XURI]"
+    ],
+    "requires_typing": true,
     "name": "XDocumentRepository",
     "imports": [],
     "namespace": "com.sun.star.rdf",
@@ -52,12 +79,13 @@
             "find the RDFa statement(s) associated with an ODF element."
           ],
           "raises": [
-            "com.sun.star.lang.IllegalArgumentException,"
+            "com.sun.star.lang.IllegalArgumentException",
+            "RepositoryException"
           ],
           "args": [
             [
               "Element",
-              "object",
+              "XMetadatable",
               "in"
             ]
           ]
@@ -78,17 +106,17 @@
           "args": [
             [
               "Subject",
-              "object",
+              "XResource",
               "in"
             ],
             [
               "Predicate",
-              "object",
+              "XURI",
               "in"
             ],
             [
               "Object",
-              "object",
+              "XNode",
               "in"
             ]
           ]
@@ -102,12 +130,13 @@
             "RDFa statements are handled specially because they are not logically part of any graph."
           ],
           "raises": [
-            "com.sun.star.lang.IllegalArgumentException,"
+            "com.sun.star.lang.IllegalArgumentException",
+            "RepositoryException"
           ],
           "args": [
             [
               "Element",
-              "object",
+              "XMetadatable",
               "in"
             ]
           ]
@@ -123,12 +152,13 @@
             "RDFa statements are handled specially because they are not logically part of any named graph in the repository. Also, they have rather unusual semantics; just using XNamedGraph.addStatement() would be ambiguous: if the object is a XMetadatable, do we insert the object itself (URI) or its literal content (RDFa)?"
           ],
           "raises": [
-            "com.sun.star.lang.IllegalArgumentException,"
+            "com.sun.star.lang.IllegalArgumentException",
+            "RepositoryException"
           ],
           "args": [
             [
               "Subject",
-              "object",
+              "XResource",
               "in"
             ],
             [
@@ -138,7 +168,7 @@
             ],
             [
               "Object",
-              "object",
+              "XMetadatable",
               "in"
             ],
             [
@@ -148,7 +178,7 @@
             ],
             [
               "RDFaDatatype",
-              "object",
+              "XURI",
               "in"
             ]
           ]

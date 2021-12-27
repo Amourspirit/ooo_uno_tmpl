@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:06+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:40+00:00",
   "name": "XLayerImporter",
   "type": "interface",
   "namespace": "com.sun.star.configuration.backend",
@@ -16,11 +16,22 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_backend",
+        "XBackend"
+      ],
+      [
+        ".x_layer",
+        "XLayer"
+      ]
+    ],
     "quote": [
-      "object"
+      "XBackend",
+      "XLayer"
     ],
     "typings": [],
+    "requires_typing": true,
     "name": "XLayerImporter",
     "imports": [],
     "namespace": "com.sun.star.configuration.backend",
@@ -39,7 +50,7 @@
       "methods": [
         {
           "name": "getTargetBackend",
-          "returns": "object",
+          "returns": "XBackend",
           "desc": [
             "gets the target backend for importing."
           ],
@@ -55,12 +66,15 @@
             "This method imports data for the current entity of the backend."
           ],
           "raises": [
-            "MalformedDataException,"
+            "MalformedDataException",
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.lang.NullPointerException",
+            "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
             [
               "aLayer",
-              "object",
+              "XLayer",
               "in"
             ]
           ]
@@ -74,12 +88,15 @@
             "This method imports data for the current entity of the backend."
           ],
           "raises": [
-            "MalformedDataException,"
+            "MalformedDataException",
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.lang.NullPointerException",
+            "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
             [
               "aLayer",
-              "object",
+              "XLayer",
               "in"
             ],
             [
@@ -101,7 +118,7 @@
           "args": [
             [
               "aBackend",
-              "object",
+              "XBackend",
               "in"
             ]
           ]

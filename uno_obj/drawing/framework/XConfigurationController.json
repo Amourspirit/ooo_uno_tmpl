@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:26+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:22+00:00",
   "name": "XConfigurationController",
   "type": "interface",
   "namespace": "com.sun.star.drawing.framework",
@@ -12,23 +12,44 @@
   "data": {
     "from_imports": [
       [
-        ".x_resource_factory_manager",
-        "XResourceFactoryManager"
-      ],
-      [
         ".x_configuration_controller_request_queue",
         "XConfigurationControllerRequestQueue"
       ],
       [
         ".x_configuration_controller_broadcaster",
         "XConfigurationControllerBroadcaster"
+      ],
+      [
+        ".x_resource_factory_manager",
+        "XResourceFactoryManager"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_resource",
+        "XResource"
+      ],
+      [
+        ".x_configuration",
+        "XConfiguration"
+      ],
+      [
+        ".x_resource_id",
+        "XResourceId"
+      ],
+      [
+        "..resource_activation_mode",
+        "ResourceActivationMode"
+      ]
+    ],
     "quote": [
-      "object"
+      "XConfiguration",
+      "XResource",
+      "XResourceId",
+      "ResourceActivationMode"
     ],
     "typings": [],
+    "requires_typing": true,
     "name": "XConfigurationController",
     "imports": [],
     "namespace": "com.sun.star.drawing.framework",
@@ -53,7 +74,7 @@
       "methods": [
         {
           "name": "getCurrentConfiguration",
-          "returns": "object",
+          "returns": "XConfiguration",
           "desc": [
             "Return a copy of the current configuration.",
             "",
@@ -64,7 +85,7 @@
         },
         {
           "name": "getRequestedConfiguration",
-          "returns": "object",
+          "returns": "XConfiguration",
           "desc": [
             "Return a copy of the requested configuration.",
             "",
@@ -75,7 +96,7 @@
         },
         {
           "name": "getResource",
-          "returns": "object",
+          "returns": "XResource",
           "desc": [
             "Return the active resource specified by the given resource id."
           ],
@@ -83,7 +104,7 @@
           "args": [
             [
               "xResourceId",
-              "object",
+              "XResourceId",
               "in"
             ]
           ]
@@ -117,12 +138,12 @@
           "args": [
             [
               "xResourceId",
-              "object",
+              "XResourceId",
               "in"
             ],
             [
               "eMode",
-              "object",
+              "ResourceActivationMode",
               "in"
             ]
           ]
@@ -141,7 +162,7 @@
           "args": [
             [
               "xResourceId",
-              "object",
+              "XResourceId",
               "in"
             ]
           ]
@@ -162,7 +183,7 @@
           "args": [
             [
               "xConfiguration",
-              "object",
+              "XConfiguration",
               "in"
             ]
           ]

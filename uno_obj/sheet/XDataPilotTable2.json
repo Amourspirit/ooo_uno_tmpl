@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:32+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:13+00:00",
   "name": "XDataPilotTable2",
   "type": "interface",
   "namespace": "com.sun.star.sheet",
@@ -18,18 +18,28 @@
     ],
     "from_imports_typing": [
       [
+        ".data_pilot_table_position_data",
+        "DataPilotTablePositionData"
+      ],
+      [
+        "..table.cell_address",
+        "CellAddress"
+      ],
+      [
         "..table.cell_range_address",
         "CellRangeAddress"
       ]
     ],
     "quote": [
+      "typing.List[typing.List[object]]",
       "CellRangeAddress",
-      "object",
-      "typing.List[typing.List[object]]"
+      "DataPilotTablePositionData",
+      "CellAddress"
     ],
     "typings": [
       "typing.List[typing.List[object]]"
     ],
+    "requires_typing": true,
     "name": "XDataPilotTable2",
     "imports": [],
     "namespace": "com.sun.star.sheet",
@@ -82,7 +92,7 @@
         },
         {
           "name": "getPositionData",
-          "returns": "object",
+          "returns": "DataPilotTablePositionData",
           "desc": [
             "Given a cell address, it returns the information about that cell.",
             "",

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:54+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:16+00:00",
   "name": "XSimpleCanvas",
   "type": "interface",
   "namespace": "com.sun.star.rendering",
@@ -18,25 +18,75 @@
     ],
     "from_imports_typing": [
       [
-        "..geometry.affine_matrix2_d",
-        "AffineMatrix2D"
+        "..geometry.real_rectangle2_d",
+        "RealRectangle2D"
+      ],
+      [
+        ".string_context",
+        "StringContext"
+      ],
+      [
+        ".x_canvas",
+        "XCanvas"
+      ],
+      [
+        ".x_poly_polygon2_d",
+        "XPolyPolygon2D"
+      ],
+      [
+        "..geometry.real_point2_d",
+        "RealPoint2D"
+      ],
+      [
+        ".x_canvas_font",
+        "XCanvasFont"
+      ],
+      [
+        ".view_state",
+        "ViewState"
       ],
       [
         "..util.color",
         "Color"
       ],
       [
-        "..geometry.real_rectangle2_d",
-        "RealRectangle2D"
+        ".render_state",
+        "RenderState"
+      ],
+      [
+        "..geometry.affine_matrix2_d",
+        "AffineMatrix2D"
+      ],
+      [
+        ".font_metrics",
+        "FontMetrics"
+      ],
+      [
+        ".x_bitmap",
+        "XBitmap"
+      ],
+      [
+        ".x_graphic_device",
+        "XGraphicDevice"
       ]
     ],
     "quote": [
+      "XPolyPolygon2D",
       "Color",
+      "StringContext",
+      "ViewState",
+      "XCanvasFont",
+      "RealPoint2D",
+      "AffineMatrix2D",
+      "FontMetrics",
       "RealRectangle2D",
-      "object",
-      "AffineMatrix2D"
+      "XBitmap",
+      "XGraphicDevice",
+      "RenderState",
+      "XCanvas"
     ],
     "typings": [],
+    "requires_typing": true,
     "name": "XSimpleCanvas",
     "imports": [],
     "namespace": "com.sun.star.rendering",
@@ -63,7 +113,7 @@
           "args": [
             [
               "xBitmap",
-              "object",
+              "XBitmap",
               "in"
             ],
             [
@@ -118,7 +168,7 @@
           "args": [
             [
               "xPolyPolygon",
-              "object",
+              "XPolyPolygon2D",
               "in"
             ]
           ]
@@ -148,7 +198,7 @@
           "args": [
             [
               "aText",
-              "object",
+              "StringContext",
               "in"
             ],
             [
@@ -158,14 +208,14 @@
             ],
             [
               "nTextDirection",
-              "object",
+              "int",
               "in"
             ]
           ]
         },
         {
           "name": "getCanvas",
-          "returns": "object",
+          "returns": "XCanvas",
           "desc": [
             "Query the underlying XCanvas."
           ],
@@ -192,7 +242,7 @@
         },
         {
           "name": "getCurrentFont",
-          "returns": "object",
+          "returns": "XCanvasFont",
           "desc": [
             "Retrieve currently selected font."
           ],
@@ -210,7 +260,7 @@
         },
         {
           "name": "getCurrentRenderState",
-          "returns": "object",
+          "returns": "RenderState",
           "desc": [
             "Retrieve render state."
           ],
@@ -234,7 +284,7 @@
         },
         {
           "name": "getCurrentViewState",
-          "returns": "object",
+          "returns": "ViewState",
           "desc": [
             "Retrieve view state."
           ],
@@ -243,7 +293,7 @@
         },
         {
           "name": "getDevice",
-          "returns": "object",
+          "returns": "XGraphicDevice",
           "desc": [
             "Request the associated graphic device for this canvas.",
             "",
@@ -254,7 +304,7 @@
         },
         {
           "name": "getFontMetrics",
-          "returns": "object",
+          "returns": "FontMetrics",
           "desc": [
             "Request the font metrics of the current font."
           ],

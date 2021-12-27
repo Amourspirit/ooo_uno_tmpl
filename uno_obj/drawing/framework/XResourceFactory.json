@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:26+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:22+00:00",
   "name": "XResourceFactory",
   "type": "interface",
   "namespace": "com.sun.star.drawing.framework",
@@ -10,16 +10,44 @@
   },
   "writer_args": {},
   "data": {
-    "from_imports": [],
-    "from_imports_typing": [],
+    "from_imports": [
+      [
+        ".basic_tool_bar_factory",
+        "BasicToolBarFactory"
+      ],
+      [
+        ".basic_pane_factory",
+        "BasicPaneFactory"
+      ],
+      [
+        ".basic_view_factory",
+        "BasicViewFactory"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".x_resource",
+        "XResource"
+      ],
+      [
+        ".x_resource_id",
+        "XResourceId"
+      ]
+    ],
     "quote": [
-      "object"
+      "XResource",
+      "XResourceId"
     ],
     "typings": [],
+    "requires_typing": true,
     "name": "XResourceFactory",
     "imports": [],
     "namespace": "com.sun.star.drawing.framework",
-    "extends": [],
+    "extends": [
+      "com.sun.star.drawing.framework.BasicPaneFactory",
+      "com.sun.star.drawing.framework.BasicToolBarFactory",
+      "com.sun.star.drawing.framework.BasicViewFactory"
+    ],
     "desc": [
       "Factory and possibly cache for creating and releasing resources.",
       "",
@@ -32,7 +60,7 @@
       "methods": [
         {
           "name": "createResource",
-          "returns": "object",
+          "returns": "XResource",
           "desc": [
             "Create a resource for the given XResourceId object.",
             "",
@@ -41,12 +69,13 @@
             "."
           ],
           "raises": [
-            "com.sun.star.lang.IllegalArgumentException,"
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
             [
               "xResourceId",
-              "object",
+              "XResourceId",
               "in"
             ]
           ]
@@ -63,7 +92,7 @@
           "args": [
             [
               "xResource",
-              "object",
+              "XResource",
               "in"
             ]
           ]

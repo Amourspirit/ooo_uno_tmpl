@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:22+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:34+00:00",
   "name": "XTypeConverter",
   "type": "interface",
   "namespace": "com.sun.star.script",
@@ -16,9 +16,17 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
-    "quote": [],
+    "from_imports_typing": [
+      [
+        "..uno.type_class",
+        "TypeClass"
+      ]
+    ],
+    "quote": [
+      "TypeClass"
+    ],
     "typings": [],
+    "requires_typing": true,
     "name": "XTypeConverter",
     "imports": [],
     "namespace": "com.sun.star.script",
@@ -40,7 +48,8 @@
             "Throws a CannotConvertException if the conversion failed."
           ],
           "raises": [
-            "com.sun.star.lang.IllegalArgumentException,"
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.script.CannotConvertException"
           ],
           "args": [
             [
@@ -64,7 +73,8 @@
             "Throws a CannotConvertException if the conversion failed and a com.sun.star.lang.IllegalArgumentException if the destination com.sun.star.uno.TypeClass is not simple, e.g. not long or byte."
           ],
           "raises": [
-            "com.sun.star.lang.IllegalArgumentException,"
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.script.CannotConvertException"
           ],
           "args": [
             [

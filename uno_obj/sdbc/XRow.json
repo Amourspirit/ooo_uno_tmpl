@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:50+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:09+00:00",
   "name": "XRow",
   "type": "interface",
   "namespace": "com.sun.star.sdbc",
@@ -18,37 +18,58 @@
     ],
     "from_imports_typing": [
       [
-        "..util.date_time",
-        "DateTime"
+        "..util.date",
+        "Date"
       ],
       [
-        "..util.time",
-        "Time"
+        "..container.x_name_access",
+        "XNameAccess"
       ],
       [
         "..io.x_input_stream",
         "XInputStream"
       ],
       [
-        ".byte",
-        "byte"
+        "..util.date_time",
+        "DateTime"
       ],
       [
-        "..util.date",
-        "Date"
+        ".x_array",
+        "XArray"
+      ],
+      [
+        "..util.time",
+        "Time"
+      ],
+      [
+        ".x_ref",
+        "XRef"
+      ],
+      [
+        ".x_blob",
+        "XBlob"
+      ],
+      [
+        ".x_clob",
+        "XClob"
       ]
     ],
     "quote": [
+      "typing.List[int]",
+      "XBlob",
       "Date",
+      "XRef",
       "Time",
-      "object",
-      "typing.List[byte]",
-      "XInputStream",
-      "DateTime"
+      "XClob",
+      "DateTime",
+      "XArray",
+      "XNameAccess",
+      "XInputStream"
     ],
     "typings": [
-      "typing.List[byte]"
+      "typing.List[int]"
     ],
+    "requires_typing": true,
     "name": "XRow",
     "imports": [],
     "namespace": "com.sun.star.sdbc",
@@ -65,7 +86,7 @@
       "methods": [
         {
           "name": "getArray",
-          "returns": "object",
+          "returns": "XArray",
           "desc": [
             "gets a SQL ARRAY value from the current row of this ResultSet object."
           ],
@@ -103,7 +124,7 @@
         },
         {
           "name": "getBlob",
-          "returns": "object",
+          "returns": "XBlob",
           "desc": [
             "gets a BLOB value in the current row."
           ],
@@ -137,7 +158,7 @@
         },
         {
           "name": "getByte",
-          "returns": "object",
+          "returns": "int",
           "desc": [
             "get the value of a column in the current row as a byte."
           ],
@@ -154,7 +175,7 @@
         },
         {
           "name": "getBytes",
-          "returns": "typing.List[byte]",
+          "returns": "typing.List[int]",
           "desc": [
             "gets the value of a column in the current row as a byte array.",
             "",
@@ -194,7 +215,7 @@
         },
         {
           "name": "getClob",
-          "returns": "object",
+          "returns": "XClob",
           "desc": [
             "gets a CLOB value in the current row of this ResultSet object."
           ],
@@ -320,7 +341,7 @@
         },
         {
           "name": "getRef",
-          "returns": "object",
+          "returns": "XRef",
           "desc": [
             "gets a REF(&lt;structured-type&gt;) column value from the current row."
           ],

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:31+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:38+00:00",
   "name": "XStorageRawAccess",
   "type": "interface",
   "namespace": "com.sun.star.embed",
@@ -21,6 +21,7 @@
       "XInputStream"
     ],
     "typings": [],
+    "requires_typing": true,
     "name": "XStorageRawAccess",
     "imports": [],
     "namespace": "com.sun.star.embed",
@@ -40,7 +41,11 @@
             "This method returns a stream from the package as it is stored there, without any decompression/description and etc. This method can be helpful to check file consistency, for example by signing."
           ],
           "raises": [
-            "com.sun.star.embed.InvalidStorageException,"
+            "com.sun.star.embed.InvalidStorageException",
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.container.NoSuchElementException",
+            "com.sun.star.io.IOException",
+            "com.sun.star.embed.StorageWrappedTargetException"
           ],
           "args": [
             [
@@ -61,7 +66,12 @@
             "The difference of this method from the previous one is that it handles only encrypted streams. The contents of returned by these methods streams can differ for the same entry, since this method can add additional data into the stream to allow successful insertion."
           ],
           "raises": [
-            "com.sun.star.embed.InvalidStorageException,"
+            "com.sun.star.embed.InvalidStorageException",
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.packages.NoEncryptionException",
+            "com.sun.star.container.NoSuchElementException",
+            "com.sun.star.io.IOException",
+            "com.sun.star.embed.StorageWrappedTargetException"
           ],
           "args": [
             [
@@ -82,7 +92,12 @@
             "This method allows to transport encrypted streams without decryption. Mainly this method is introduced to allow to copy one encrypted storage stream to another without decryption. It is not recommended to use this method outside of storage implementation since different storages implementation could have different encryption format."
           ],
           "raises": [
-            "com.sun.star.embed.InvalidStorageException,"
+            "com.sun.star.embed.InvalidStorageException",
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.packages.NoRawFormatException",
+            "com.sun.star.container.ElementExistException",
+            "com.sun.star.io.IOException",
+            "com.sun.star.embed.StorageWrappedTargetException"
           ],
           "args": [
             [

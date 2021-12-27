@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:25+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:31+00:00",
   "name": "XHierarchicalPropertySet",
   "type": "interface",
   "namespace": "com.sun.star.beans",
@@ -26,6 +26,7 @@
       "XHierarchicalPropertySetInfo"
     ],
     "typings": [],
+    "requires_typing": true,
     "name": "XHierarchicalPropertySet",
     "imports": [],
     "namespace": "com.sun.star.beans",
@@ -60,7 +61,9 @@
           "returns": "object",
           "desc": [],
           "raises": [
-            "com.sun.star.beans.UnknownPropertyException,"
+            "com.sun.star.beans.UnknownPropertyException",
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
             [
@@ -77,7 +80,10 @@
             "sets the value of the property with the specified nested name."
           ],
           "raises": [
-            "com.sun.star.beans.UnknownPropertyException,"
+            "com.sun.star.beans.UnknownPropertyException",
+            "com.sun.star.beans.PropertyVetoException",
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
             [

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:46:03+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:32+00:00",
   "name": "XMap",
   "type": "interface",
   "namespace": "com.sun.star.container",
@@ -17,6 +17,9 @@
       ]
     ],
     "from_imports_typing": [],
+    "quote": [],
+    "typings": [],
+    "requires_typing": false,
     "name": "XMap",
     "imports": [],
     "namespace": "com.sun.star.container",
@@ -51,9 +54,16 @@
             "determines whether a mapping for he given key exists in the map"
           ],
           "raises": [
-            "com.sun.star.beans.IllegalTypeException,"
+            "com.sun.star.beans.IllegalTypeException",
+            "com.sun.star.lang.IllegalArgumentException"
           ],
-          "args": []
+          "args": [
+            [
+              "Key",
+              "object",
+              "in"
+            ]
+          ]
         },
         {
           "name": "containsValue",
@@ -62,9 +72,16 @@
             "determines whether the map contains a mapping to a given value."
           ],
           "raises": [
-            "com.sun.star.beans.IllegalTypeException,"
+            "com.sun.star.beans.IllegalTypeException",
+            "com.sun.star.lang.IllegalArgumentException"
           ],
-          "args": []
+          "args": [
+            [
+              "Value",
+              "object",
+              "in"
+            ]
+          ]
         },
         {
           "name": "get",
@@ -73,9 +90,17 @@
             "gets the value to which a given key maps."
           ],
           "raises": [
-            "com.sun.star.beans.IllegalTypeException,"
+            "com.sun.star.beans.IllegalTypeException",
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.container.NoSuchElementException"
           ],
-          "args": []
+          "args": [
+            [
+              "Key",
+              "object",
+              "in"
+            ]
+          ]
         },
         {
           "name": "put",
@@ -86,9 +111,22 @@
             "If the map already contains a mapping for the given key, then the old value is replaced by the given new value."
           ],
           "raises": [
-            "com.sun.star.lang.NoSupportException,"
+            "com.sun.star.lang.NoSupportException",
+            "com.sun.star.beans.IllegalTypeException",
+            "com.sun.star.lang.IllegalArgumentException"
           ],
-          "args": []
+          "args": [
+            [
+              "Key",
+              "object",
+              "in"
+            ],
+            [
+              "Value",
+              "object",
+              "in"
+            ]
+          ]
         },
         {
           "name": "remove",
@@ -97,9 +135,18 @@
             "removes a key-value mapping, given by key, from the map."
           ],
           "raises": [
-            "com.sun.star.lang.NoSupportException,"
+            "com.sun.star.lang.NoSupportException",
+            "com.sun.star.beans.IllegalTypeException",
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.container.NoSuchElementException"
           ],
-          "args": []
+          "args": [
+            [
+              "Key",
+              "object",
+              "in"
+            ]
+          ]
         }
       ],
       "properties": [

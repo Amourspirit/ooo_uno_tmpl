@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:31+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:38+00:00",
   "name": "XInplaceClient",
   "type": "interface",
   "namespace": "com.sun.star.embed",
@@ -18,12 +18,20 @@
     ],
     "from_imports_typing": [
       [
+        "..frame.x_dispatch_provider",
+        "XDispatchProvider"
+      ],
+      [
+        "..awt.size",
+        "Size"
+      ],
+      [
         "..awt.rectangle",
         "Rectangle"
       ],
       [
-        "..frame.x_dispatch_provider",
-        "XDispatchProvider"
+        "..awt.key_event",
+        "KeyEvent"
       ],
       [
         "..frame.x_layout_manager",
@@ -31,11 +39,16 @@
       ]
     ],
     "quote": [
-      "XDispatchProvider",
+      "XLayoutManager",
+      "Size",
       "Rectangle",
-      "XLayoutManager"
+      "XDispatchProvider",
+      "typing.List[KeyEvent]"
     ],
-    "typings": [],
+    "typings": [
+      "typing.List[KeyEvent]"
+    ],
+    "requires_typing": true,
     "name": "XInplaceClient",
     "imports": [],
     "namespace": "com.sun.star.embed",
@@ -86,7 +99,8 @@
             "notifies the container that the position of the object is changed."
           ],
           "raises": [
-            "com.sun.star.embed.WrongStateException,"
+            "com.sun.star.embed.WrongStateException",
+            "com.sun.star.uno.Exception"
           ],
           "args": [
             [

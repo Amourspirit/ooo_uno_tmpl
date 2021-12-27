@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:19+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:02+00:00",
   "name": "XDocumentBuilder",
   "type": "interface",
   "namespace": "com.sun.star.xml.dom",
@@ -16,11 +16,37 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..sax.x_entity_resolver",
+        "XEntityResolver"
+      ],
+      [
+        ".x_document",
+        "XDocument"
+      ],
+      [
+        "...io.x_input_stream",
+        "XInputStream"
+      ],
+      [
+        ".xdom_implementation",
+        "XDOMImplementation"
+      ],
+      [
+        "..sax.x_error_handler",
+        "XErrorHandler"
+      ]
+    ],
     "quote": [
-      "object"
+      "XDOMImplementation",
+      "XErrorHandler",
+      "XDocument",
+      "XEntityResolver",
+      "XInputStream"
     ],
     "typings": [],
+    "requires_typing": true,
     "name": "XDocumentBuilder",
     "imports": [],
     "namespace": "com.sun.star.xml.dom",
@@ -35,7 +61,7 @@
       "methods": [
         {
           "name": "getDOMImplementation",
-          "returns": "object",
+          "returns": "XDOMImplementation",
           "desc": [
             "Obtain an instance of a DOMImplementation object."
           ],
@@ -62,7 +88,7 @@
         },
         {
           "name": "newDocument",
-          "returns": "object",
+          "returns": "XDocument",
           "desc": [
             "Obtain a new instance of a DOM Document object to build a DOM tree with."
           ],
@@ -71,12 +97,13 @@
         },
         {
           "name": "parse",
-          "returns": "object",
+          "returns": "XDocument",
           "desc": [
             "Parse the content of the given InputStream as an XML document and return a new DOM Document object."
           ],
           "raises": [
-            "com.sun.star.xml.sax.SAXException,"
+            "com.sun.star.xml.sax.SAXException",
+            "com.sun.star.io.IOException"
           ],
           "args": [
             [
@@ -88,12 +115,13 @@
         },
         {
           "name": "parseURI",
-          "returns": "object",
+          "returns": "XDocument",
           "desc": [
             "Parse the content of the given URI as an XML document and return a new DOM Document object."
           ],
           "raises": [
-            "com.sun.star.xml.sax.SAXException,"
+            "com.sun.star.xml.sax.SAXException",
+            "com.sun.star.io.IOException"
           ],
           "args": [
             [

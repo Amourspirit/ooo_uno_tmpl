@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:05:00+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:27+00:00",
   "name": "XPackageRegistry",
   "type": "interface",
   "namespace": "com.sun.star.deployment",
@@ -15,15 +15,25 @@
       [
         ".x_package_type_info",
         "XPackageTypeInfo"
+      ],
+      [
+        ".x_package",
+        "XPackage"
+      ],
+      [
+        "..ucb.x_command_environment",
+        "XCommandEnvironment"
       ]
     ],
     "quote": [
-      "object",
-      "typing.List[XPackageTypeInfo]"
+      "XCommandEnvironment",
+      "typing.List[XPackageTypeInfo]",
+      "XPackage"
     ],
     "typings": [
       "typing.List[XPackageTypeInfo]"
     ],
+    "requires_typing": true,
     "name": "XPackageRegistry",
     "imports": [],
     "namespace": "com.sun.star.deployment",
@@ -40,7 +50,7 @@
       "methods": [
         {
           "name": "bindPackage",
-          "returns": "object",
+          "returns": "XPackage",
           "desc": [
             "binds a package URL to a XPackage handle.",
             "",
@@ -55,7 +65,10 @@
             "The identifier parameter must be provided when removed = true. If not, then an com.sun.star.lang.IllegalArgumentException will be thrown."
           ],
           "raises": [
-            "DeploymentException,"
+            "DeploymentException",
+            "InvalidRemovedParameterException",
+            "com.sun.star.ucb.CommandFailedException",
+            "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
             [
@@ -99,7 +112,8 @@
           "returns": "None",
           "desc": [],
           "raises": [
-            "DeploymentException,"
+            "DeploymentException",
+            "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
             [

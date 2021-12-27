@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 19:15:58+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:12+00:00",
   "name": "XSingleSelectQueryComposer",
   "type": "interface",
   "namespace": "com.sun.star.sdb",
@@ -16,7 +16,24 @@
         "XSingleSelectQueryAnalyzer"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..beans.property_value",
+        "PropertyValue"
+      ],
+      [
+        "..beans.x_property_set",
+        "XPropertySet"
+      ]
+    ],
+    "quote": [
+      "XPropertySet",
+      "typing.List[typing.List[PropertyValue]]"
+    ],
+    "typings": [
+      "typing.List[typing.List[PropertyValue]]"
+    ],
+    "requires_typing": true,
     "name": "XSingleSelectQueryComposer",
     "imports": [],
     "namespace": "com.sun.star.sdb",
@@ -40,7 +57,8 @@
             "The value property must be supported by the com.sun.star.sdb.DataColumn."
           ],
           "raises": [
-            "com.sun.star.sdbc.SQLException,"
+            "com.sun.star.sdbc.SQLException",
+            "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
             [
@@ -86,7 +104,8 @@
             "appends a new HAVING filter condition by a com.sun.star.sdb.DataColumn providing the name and the value for the filter."
           ],
           "raises": [
-            "com.sun.star.sdbc.SQLException,"
+            "com.sun.star.sdbc.SQLException",
+            "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
             [
@@ -205,12 +224,13 @@
             "appends a new set of filter criteria which is split into levels."
           ],
           "raises": [
-            "com.sun.star.sdbc.SQLException,"
+            "com.sun.star.sdbc.SQLException",
+            "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
             [
               "filter",
-              "'typing.List[typing.List[PropertyValue]]'",
+              "typing.List[typing.List[PropertyValue]]",
               "in"
             ]
           ]
@@ -227,7 +247,7 @@
           "args": [
             [
               "filter",
-              "'typing.List[typing.List[PropertyValue]]'",
+              "typing.List[typing.List[PropertyValue]]",
               "in"
             ]
           ]

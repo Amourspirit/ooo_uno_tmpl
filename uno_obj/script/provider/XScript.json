@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:52+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:17+00:00",
   "name": "XScript",
   "type": "interface",
   "namespace": "com.sun.star.script.provider",
@@ -17,8 +17,15 @@
       ]
     ],
     "from_imports_typing": [],
-    "quote": [],
-    "typings": [],
+    "quote": [
+      "typing.List[int]",
+      "typing.List[object]"
+    ],
+    "typings": [
+      "typing.List[int]",
+      "typing.List[object]"
+    ],
+    "requires_typing": true,
     "name": "XScript",
     "imports": [],
     "namespace": "com.sun.star.script.provider",
@@ -37,10 +44,15 @@
           "desc": [
             "invoke the script or function represented by the implementing object",
             "",
-            "For example, if the script had the signature\nlong foo( [inout] string a, [in] string b, [out] string c ) \n the call would look like\nbar.invoke( {\\\"foo\\\", \\\"foo2\\\", \\\"this-is-ignored\\\" }, aOutParamIndex, aOutParam); \n and after the call the out sequences would contain"
+            "For example, if the script had the signature",
+            "long foo( [inout] string a, [in] string b, [out] string c )",
+            "the call would look like",
+            "bar.invoke( {\\\"foo\\\", \\\"foo2\\\", \\\"this-is-ignored\\\" }, aOutParamIndex, aOutParam);",
+            "and after the call the out sequences would contain"
           ],
           "raises": [
-            ","
+            "",
+            "com.sun.star.reflection.InvocationTargetException"
           ],
           "args": [
             [

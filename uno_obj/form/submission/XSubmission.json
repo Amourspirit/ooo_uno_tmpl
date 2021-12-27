@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:57+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:22+00:00",
   "name": "XSubmission",
   "type": "interface",
   "namespace": "com.sun.star.form.submission",
@@ -16,9 +16,22 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
-    "quote": [],
+    "from_imports_typing": [
+      [
+        "...task.x_interaction_handler",
+        "XInteractionHandler"
+      ],
+      [
+        ".x_submission_veto_listener",
+        "XSubmissionVetoListener"
+      ]
+    ],
+    "quote": [
+      "XSubmissionVetoListener",
+      "XInteractionHandler"
+    ],
     "typings": [],
+    "requires_typing": true,
     "name": "XSubmission",
     "imports": [],
     "namespace": "com.sun.star.form.submission",
@@ -43,7 +56,7 @@
           "args": [
             [
               "listener",
-              "object",
+              "XSubmissionVetoListener",
               "in"
             ]
           ]
@@ -60,7 +73,7 @@
           "args": [
             [
               "listener",
-              "object",
+              "XSubmissionVetoListener",
               "in"
             ]
           ]
@@ -72,7 +85,8 @@
             "tells the component to submit data"
           ],
           "raises": [
-            "com.sun.star.util.VetoException,"
+            "com.sun.star.util.VetoException",
+            "com.sun.star.lang.WrappedTargetException"
           ],
           "args": []
         },
@@ -83,7 +97,8 @@
             "tells the component to submit data"
           ],
           "raises": [
-            "com.sun.star.util.VetoException,"
+            "com.sun.star.util.VetoException",
+            "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
             [

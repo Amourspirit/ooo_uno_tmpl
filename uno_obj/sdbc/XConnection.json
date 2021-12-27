@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:49+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:09+00:00",
   "name": "XConnection",
   "type": "interface",
   "namespace": "com.sun.star.sdbc",
@@ -20,13 +20,28 @@
       [
         "..container.x_name_access",
         "XNameAccess"
+      ],
+      [
+        ".x_prepared_statement",
+        "XPreparedStatement"
+      ],
+      [
+        ".x_database_meta_data",
+        "XDatabaseMetaData"
+      ],
+      [
+        ".x_statement",
+        "XStatement"
       ]
     ],
     "quote": [
-      "XNameAccess",
-      "object"
+      "XDatabaseMetaData",
+      "XStatement",
+      "XPreparedStatement",
+      "XNameAccess"
     ],
     "typings": [],
+    "requires_typing": true,
     "name": "XConnection",
     "imports": [],
     "namespace": "com.sun.star.sdbc",
@@ -58,7 +73,7 @@
         },
         {
           "name": "createStatement",
-          "returns": "object",
+          "returns": "XStatement",
           "desc": [
             "creates a new com.sun.star.sdbc.Statement object for sending SQL statements to the database.",
             "",
@@ -97,7 +112,7 @@
         },
         {
           "name": "getMetaData",
-          "returns": "object",
+          "returns": "XDatabaseMetaData",
           "desc": [
             "gets the metadata regarding this connection's database.",
             "",
@@ -179,13 +194,14 @@
         },
         {
           "name": "prepareCall",
-          "returns": "object",
+          "returns": "XPreparedStatement",
           "desc": [
             "creates a com.sun.star.sdbc.CallableStatement object for calling database stored procedures.",
             "",
             "The CallableStatement provides methods for setting up its IN and OUT parameters, and methods for executing the call to a stored procedure.",
             "",
-            "Note:  This method is optimized for handling stored procedure call statements. Some drivers may send the call statement to the database when the method prepareCall is done; \n others may wait until the CallableStatement is executed. This has no direct effect on users; however, it does affect which method throws certain SQLExceptions. Result sets created using the returned CallableStatement will have forward-only type and read-only concurrency, by default."
+            "Note:  This method is optimized for handling stored procedure call statements. Some drivers may send the call statement to the database when the method prepareCall is done;",
+            "others may wait until the CallableStatement is executed. This has no direct effect on users; however, it does affect which method throws certain SQLExceptions. Result sets created using the returned CallableStatement will have forward-only type and read-only concurrency, by default."
           ],
           "raises": [
             "SQLException"
@@ -200,7 +216,7 @@
         },
         {
           "name": "prepareStatement",
-          "returns": "object",
+          "returns": "XPreparedStatement",
           "desc": [
             "creates a com.sun.star.sdbc.PreparedStatement object for sending parameterized SQL statements to the database.",
             "",

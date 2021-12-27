@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:30+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:30+00:00",
   "name": "XMailService",
   "type": "interface",
   "namespace": "com.sun.star.mail",
@@ -18,17 +18,28 @@
     ],
     "from_imports_typing": [
       [
+        ".x_authenticator",
+        "XAuthenticator"
+      ],
+      [
         "..uno.x_current_context",
         "XCurrentContext"
+      ],
+      [
+        ".x_connection_listener",
+        "XConnectionListener"
       ]
     ],
     "quote": [
+      "XAuthenticator",
       "XCurrentContext",
+      "XConnectionListener",
       "typing.List[str]"
     ],
     "typings": [
       "typing.List[str]"
     ],
+    "requires_typing": true,
     "name": "XMailService",
     "imports": [],
     "namespace": "com.sun.star.mail",
@@ -55,7 +66,7 @@
           "args": [
             [
               "xListener",
-              "object",
+              "XConnectionListener",
               "in"
             ]
           ]
@@ -69,7 +80,13 @@
             "Only one connection to a mail service can be established at a time."
           ],
           "raises": [
-            "com.sun.star.lang.IllegalArgumentException,"
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.io.AlreadyConnectedException",
+            "com.sun.star.io.UnknownHostException",
+            "com.sun.star.io.NoRouteToHostException",
+            "com.sun.star.io.ConnectException",
+            "com.sun.star.auth.AuthenticationFailedException",
+            "com.sun.star.mail.MailException"
           ],
           "args": [
             [
@@ -79,7 +96,7 @@
             ],
             [
               "xAuthenticator",
-              "object",
+              "XAuthenticator",
               "in"
             ]
           ]
@@ -138,7 +155,7 @@
           "args": [
             [
               "xListener",
-              "object",
+              "XConnectionListener",
               "in"
             ]
           ]

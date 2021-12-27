@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:48+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:35+00:00",
   "name": "XLayoutManager",
   "type": "interface",
   "namespace": "com.sun.star.frame",
@@ -18,16 +18,20 @@
     ],
     "from_imports_typing": [
       [
-        "..awt.rectangle",
-        "Rectangle"
-      ],
-      [
         "..awt.size",
         "Size"
       ],
       [
-        "..ui.x_docking_area_acceptor",
-        "XDockingAreaAcceptor"
+        "..ui.docking_area",
+        "DockingArea"
+      ],
+      [
+        ".x_frame",
+        "XFrame"
+      ],
+      [
+        "..awt.rectangle",
+        "Rectangle"
       ],
       [
         "..ui.xui_element",
@@ -36,19 +40,26 @@
       [
         "..awt.point",
         "Point"
+      ],
+      [
+        "..ui.x_docking_area_acceptor",
+        "XDockingAreaAcceptor"
       ]
     ],
     "quote": [
-      "Point",
       "typing.List[XUIElement]",
+      "Point",
+      "Rectangle",
       "XDockingAreaAcceptor",
-      "Size",
       "XUIElement",
-      "Rectangle"
+      "Size",
+      "DockingArea",
+      "XFrame"
     ],
     "typings": [
       "typing.List[XUIElement]"
     ],
+    "requires_typing": true,
     "name": "XLayoutManager",
     "imports": [],
     "namespace": "com.sun.star.frame",
@@ -406,7 +417,8 @@
           "desc": [
             "sets a docking area acceptor that controls the border space of the frame's container window.",
             "",
-            "A docking area acceptor decides if the layout manager can use requested border space for docking windows. If the acceptor denies the requested space the layout manager automatically set all docked windows into floating state and will not use this space for docking.\n After setting a docking area acceptor the object is owned by the layout manager. It is not allowed to dispose this object, it will be destroyed on reference count!"
+            "A docking area acceptor decides if the layout manager can use requested border space for docking windows. If the acceptor denies the requested space the layout manager automatically set all docked windows into floating state and will not use this space for docking.",
+            "After setting a docking area acceptor the object is owned by the layout manager. It is not allowed to dispose this object, it will be destroyed on reference count!"
           ],
           "raises": [],
           "args": [

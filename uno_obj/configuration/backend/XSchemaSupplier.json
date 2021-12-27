@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:06+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:40+00:00",
   "name": "XSchemaSupplier",
   "type": "interface",
   "namespace": "com.sun.star.configuration.backend",
@@ -16,11 +16,17 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_schema",
+        "XSchema"
+      ]
+    ],
     "quote": [
-      "object"
+      "XSchema"
     ],
     "typings": [],
+    "requires_typing": true,
     "name": "XSchemaSupplier",
     "imports": [],
     "namespace": "com.sun.star.configuration.backend",
@@ -39,12 +45,13 @@
       "methods": [
         {
           "name": "getComponentSchema",
-          "returns": "object",
+          "returns": "XSchema",
           "desc": [
             "Returns the schema information (component + templates) for a particular component."
           ],
           "raises": [
-            "BackendAccessException,"
+            "BackendAccessException",
+            "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
             [

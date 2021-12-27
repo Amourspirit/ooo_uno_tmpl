@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:55+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:30+00:00",
   "name": "XUIConfigurationManager",
   "type": "interface",
   "namespace": "com.sun.star.ui",
@@ -18,32 +18,33 @@
     ],
     "from_imports_typing": [
       [
-        "..container.x_index_container",
-        "XIndexContainer"
-      ],
-      [
-        "..container.x_index_access",
-        "XIndexAccess"
-      ],
-      [
         "..beans.property_value",
         "PropertyValue"
       ],
       [
         ".x_accelerator_configuration",
         "XAcceleratorConfiguration"
+      ],
+      [
+        "..container.x_index_access",
+        "XIndexAccess"
+      ],
+      [
+        "..container.x_index_container",
+        "XIndexContainer"
       ]
     ],
     "quote": [
-      "XIndexContainer",
-      "XIndexAccess",
-      "XInterface",
       "XAcceleratorConfiguration",
-      "typing.List[typing.List[PropertyValue]]"
+      "XIndexAccess",
+      "typing.List[typing.List[PropertyValue]]",
+      "XInterface",
+      "XIndexContainer"
     ],
     "typings": [
       "typing.List[typing.List[PropertyValue]]"
     ],
+    "requires_typing": true,
     "name": "XUIConfigurationManager",
     "imports": [],
     "namespace": "com.sun.star.ui",
@@ -98,7 +99,8 @@
             "retrieves the settings of a user interface element."
           ],
           "raises": [
-            "com.sun.star.container.NoSuchElementException,"
+            "com.sun.star.container.NoSuchElementException",
+            "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
             [
@@ -169,7 +171,9 @@
             "If the settings data is already present a com.sun.star.container.ElementExistException is thrown. If the NewResourceURL is not valid or describes an unknown type a com.sun.star.lang.IllegalArgumentException is thrown. If the configuration manager is read-only a com.sun.star.lang.IllegalAccessException is thrown."
           ],
           "raises": [
-            "com.sun.star.container.ElementExistException,"
+            "com.sun.star.container.ElementExistException",
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.lang.IllegalAccessException"
           ],
           "args": [
             [
@@ -193,7 +197,9 @@
             "If the settings data cannot be found a com.sun.star.container.NoSuchElementException is thrown. If the ResourceURL is not valid or describes an unknown type a com.sun.star.lang.IllegalArgumentException is thrown. If the configuration manager is read-only a com.sun.star.lang.IllegalAccessException is thrown."
           ],
           "raises": [
-            "com.sun.star.container.NoSuchElementException,"
+            "com.sun.star.container.NoSuchElementException",
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.lang.IllegalAccessException"
           ],
           "args": [
             [
@@ -212,7 +218,9 @@
             "If the settings data cannot be found a com.sun.star.container.NoSuchElementException is thrown. If the ResourceURL is not valid or describes an unknown type a com.sun.star.lang.IllegalArgumentException is thrown. If the configuration manager is read-only a com.sun.star.lang.IllegalAccessException is thrown."
           ],
           "raises": [
-            "com.sun.star.container.NoSuchElementException,"
+            "com.sun.star.container.NoSuchElementException",
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.lang.IllegalAccessException"
           ],
           "args": [
             [

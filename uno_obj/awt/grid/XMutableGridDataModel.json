@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:05:01+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:17+00:00",
   "name": "XMutableGridDataModel",
   "type": "interface",
   "namespace": "com.sun.star.awt.grid",
@@ -16,9 +16,24 @@
         "XGridDataModel"
       ]
     ],
-    "from_imports_typing": [],
-    "quote": [],
-    "typings": [],
+    "from_imports_typing": [
+      [
+        ".x_grid_data_listener",
+        "XGridDataListener"
+      ]
+    ],
+    "quote": [
+      "typing.List[typing.List[object]]",
+      "typing.List[int]",
+      "typing.List[object]",
+      "XGridDataListener"
+    ],
+    "typings": [
+      "typing.List[typing.List[object]]",
+      "typing.List[int]",
+      "typing.List[object]"
+    ],
+    "requires_typing": true,
     "name": "XMutableGridDataModel",
     "imports": [],
     "namespace": "com.sun.star.awt.grid",
@@ -41,7 +56,7 @@
           "args": [
             [
               "Listener",
-              "object",
+              "XGridDataListener",
               "in"
             ]
           ]
@@ -122,7 +137,8 @@
             "inserts multiple rows of data into the model."
           ],
           "raises": [
-            ","
+            "",
+            "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
             [
@@ -161,7 +177,7 @@
           "args": [
             [
               "Listener",
-              "object",
+              "XGridDataListener",
               "in"
             ]
           ]
@@ -246,7 +262,8 @@
             "The change in the data model will be notified to registered listeners via XGridDataListener.dataChanged(). The GridDataEvent.FirstColumn and GridDataEvent.LastColumn will denote the smallest respectively largest column index from ColumnIndexes."
           ],
           "raises": [
-            ","
+            "",
+            "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
             [

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:38+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:33+00:00",
   "name": "XRepository",
   "type": "interface",
   "namespace": "com.sun.star.rdf",
@@ -22,22 +22,62 @@
     ],
     "from_imports_typing": [
       [
-        ".xuri",
-        "XURI"
+        ".x_blank_node",
+        "XBlankNode"
+      ],
+      [
+        ".x_query_select_result",
+        "XQuerySelectResult"
       ],
       [
         "..container.x_enumeration",
         "XEnumeration"
+      ],
+      [
+        ".x_named_graph",
+        "XNamedGraph"
+      ],
+      [
+        "..io.x_input_stream",
+        "XInputStream"
+      ],
+      [
+        ".xuri",
+        "XURI"
+      ],
+      [
+        "..io.x_output_stream",
+        "XOutputStream"
+      ],
+      [
+        ".x_resource",
+        "XResource"
+      ],
+      [
+        ".xuri",
+        "XURI"
+      ],
+      [
+        ".x_node",
+        "XNode"
       ]
     ],
     "quote": [
-      "object",
+      "XNamedGraph",
+      "XResource",
+      "XQuerySelectResult",
+      "XNode",
+      "XBlankNode",
+      "XURI",
       "typing.List[XURI]",
-      "XEnumeration"
+      "XEnumeration",
+      "XOutputStream",
+      "XInputStream"
     ],
     "typings": [
       "typing.List[XURI]"
     ],
+    "requires_typing": true,
     "name": "XRepository",
     "imports": [],
     "namespace": "com.sun.star.rdf",
@@ -61,7 +101,7 @@
       "methods": [
         {
           "name": "createBlankNode",
-          "returns": "object",
+          "returns": "XBlankNode",
           "desc": [
             "creates a fresh unique blank node."
           ],
@@ -70,19 +110,21 @@
         },
         {
           "name": "createGraph",
-          "returns": "object",
+          "returns": "XNamedGraph",
           "desc": [
             "creates a graph with the given name.",
             "",
             "The name must be unique within the repository."
           ],
           "raises": [
-            "com.sun.star.lang.IllegalArgumentException,"
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.container.ElementExistException",
+            "RepositoryException"
           ],
           "args": [
             [
               "GraphName",
-              "object",
+              "XURI",
               "in"
             ]
           ]
@@ -96,12 +138,14 @@
             "This invalidates any instances of XNamedGraph for the argument."
           ],
           "raises": [
-            "com.sun.star.lang.IllegalArgumentException,"
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.container.NoSuchElementException",
+            "RepositoryException"
           ],
           "args": [
             [
               "GraphName",
-              "object",
+              "XURI",
               "in"
             ]
           ]
@@ -115,7 +159,11 @@
             "Implementations must support RDF/XML format. Support for other RDF formats is optional. If the format is not supported by the implementation, an com.sun.star.datatransfer.UnsupportedFlavorException is raised."
           ],
           "raises": [
-            "com.sun.star.lang.IllegalArgumentException,"
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.datatransfer.UnsupportedFlavorException",
+            "com.sun.star.container.NoSuchElementException",
+            "RepositoryException",
+            "com.sun.star.io.IOException"
           ],
           "args": [
             [
@@ -130,29 +178,30 @@
             ],
             [
               "GraphName",
-              "object",
+              "XURI",
               "in"
             ],
             [
               "BaseURI",
-              "object",
+              "XURI",
               "in"
             ]
           ]
         },
         {
           "name": "getGraph",
-          "returns": "object",
+          "returns": "XNamedGraph",
           "desc": [
             "gets a graph by its name."
           ],
           "raises": [
-            "com.sun.star.lang.IllegalArgumentException,"
+            "com.sun.star.lang.IllegalArgumentException",
+            "RepositoryException"
           ],
           "args": [
             [
               "GraphName",
-              "object",
+              "XURI",
               "in"
             ]
           ]
@@ -182,31 +231,36 @@
           "args": [
             [
               "Subject",
-              "object",
+              "XResource",
               "in"
             ],
             [
               "Predicate",
-              "object",
+              "XURI",
               "in"
             ],
             [
               "Object",
-              "object",
+              "XNode",
               "in"
             ]
           ]
         },
         {
           "name": "importGraph",
-          "returns": "object",
+          "returns": "XNamedGraph",
           "desc": [
             "imports a named graph into the repository.",
             "",
             "Implementations must support RDF/XML format. Support for other RDF formats is optional. If the format is not supported by the implementation, an com.sun.star.datatransfer.UnsupportedFlavorException is raised. If the format requires use of a BaseURI, but none is given, an com.sun.star.lang.IllegalArgumentException is raised."
           ],
           "raises": [
-            "com.sun.star.lang.IllegalArgumentException,"
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.datatransfer.UnsupportedFlavorException",
+            "com.sun.star.container.ElementExistException",
+            "ParseException",
+            "RepositoryException",
+            "com.sun.star.io.IOException"
           ],
           "args": [
             [
@@ -221,12 +275,12 @@
             ],
             [
               "GraphName",
-              "object",
+              "XURI",
               "in"
             ],
             [
               "BaseURI",
-              "object",
+              "XURI",
               "in"
             ]
           ]
@@ -240,7 +294,8 @@
             "This method runs a SPARQL query that computes a boolean, i.e., a query beginning with \\\"ASK\\\"."
           ],
           "raises": [
-            "QueryException,"
+            "QueryException",
+            "RepositoryException"
           ],
           "args": [
             [
@@ -259,7 +314,8 @@
             "This method runs a SPARQL query that constructs a result graph, i.e., a query beginning with \\\"CONSTRUCT\\\"."
           ],
           "raises": [
-            "QueryException,"
+            "QueryException",
+            "RepositoryException"
           ],
           "args": [
             [
@@ -271,14 +327,15 @@
         },
         {
           "name": "querySelect",
-          "returns": "object",
+          "returns": "XQuerySelectResult",
           "desc": [
             "executes a SPARQL \\\"SELECT\\\" query.",
             "",
             "This method runs a SPARQL query that returns a list of variable bindings, i.e., a query beginning with \\\"SELECT\\\". The result is basically a (rectangular) table with labeled columns, where individual cells may be NULL."
           ],
           "raises": [
-            "QueryException,"
+            "QueryException",
+            "RepositoryException"
           ],
           "args": [
             [

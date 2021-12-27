@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:05:00+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:37+00:00",
   "name": "XElement",
   "type": "interface",
   "namespace": "com.sun.star.xml.input",
@@ -16,11 +16,22 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_attributes",
+        "XAttributes"
+      ],
+      [
+        ".x_element",
+        "XElement"
+      ]
+    ],
     "quote": [
-      "object"
+      "XElement",
+      "XAttributes"
     ],
     "typings": [],
+    "requires_typing": true,
     "name": "XElement",
     "imports": [],
     "namespace": "com.sun.star.xml.input",
@@ -63,7 +74,7 @@
         },
         {
           "name": "getAttributes",
-          "returns": "object",
+          "returns": "XAttributes",
           "desc": [
             "Gets the attributes of this element."
           ],
@@ -81,7 +92,7 @@
         },
         {
           "name": "getParent",
-          "returns": "object",
+          "returns": "XElement",
           "desc": [
             "Gets the parent context."
           ],
@@ -138,7 +149,7 @@
         },
         {
           "name": "startChildElement",
-          "returns": "object",
+          "returns": "XElement",
           "desc": [
             "Called upon each occurring child element."
           ],
@@ -158,7 +169,7 @@
             ],
             [
               "xAttributes",
-              "object",
+              "XAttributes",
               "in"
             ]
           ]

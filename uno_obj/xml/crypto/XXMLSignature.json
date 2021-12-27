@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:24+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:26+00:00",
   "name": "XXMLSignature",
   "type": "interface",
   "namespace": "com.sun.star.xml.crypto",
@@ -20,12 +20,23 @@
       [
         ".xxml_signature_template",
         "XXMLSignatureTemplate"
+      ],
+      [
+        ".x_security_environment",
+        "XSecurityEnvironment"
+      ],
+      [
+        ".xxml_security_context",
+        "XXMLSecurityContext"
       ]
     ],
     "quote": [
-      "XXMLSignatureTemplate"
+      "XXMLSignatureTemplate",
+      "XSecurityEnvironment",
+      "XXMLSecurityContext"
     ],
     "typings": [],
+    "requires_typing": true,
     "name": "XXMLSignature",
     "imports": [],
     "namespace": "com.sun.star.xml.crypto",
@@ -53,7 +64,8 @@
             "Perform signature in the environment of signature template and context."
           ],
           "raises": [
-            ","
+            "",
+            "com.sun.star.uno.SecurityException"
           ],
           "args": [
             [
@@ -75,7 +87,8 @@
             "Perform validation in the environment of signature template and context."
           ],
           "raises": [
-            ","
+            "",
+            "com.sun.star.uno.SecurityException"
           ],
           "args": [
             [

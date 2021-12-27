@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:42+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:27+00:00",
   "name": "XStringResourcePersistence",
   "type": "interface",
   "namespace": "com.sun.star.resource",
@@ -18,16 +18,23 @@
     ],
     "from_imports_typing": [
       [
-        ".byte",
-        "byte"
+        "..task.x_interaction_handler",
+        "XInteractionHandler"
+      ],
+      [
+        "..embed.x_storage",
+        "XStorage"
       ]
     ],
     "quote": [
-      "typing.List[byte]"
+      "XStorage",
+      "typing.List[int]",
+      "XInteractionHandler"
     ],
     "typings": [
-      "typing.List[byte]"
+      "typing.List[int]"
     ],
+    "requires_typing": true,
     "name": "XStringResourcePersistence",
     "imports": [],
     "namespace": "com.sun.star.resource",
@@ -42,7 +49,7 @@
       "methods": [
         {
           "name": "exportBinary",
-          "returns": "typing.List[byte]",
+          "returns": "typing.List[int]",
           "desc": [
             "Returns a sequence of byte representing the complete string resource in a binary format.",
             "",
@@ -73,7 +80,7 @@
           "args": [
             [
               "Data",
-              "typing.List[byte]",
+              "typing.List[int]",
               "in"
             ]
           ]
@@ -123,7 +130,8 @@
             "This method can throw all exceptions thrown by the methods of com.sun.star.embed.XStorage respectively a com.sun.star.ucb.CommandAbortedException in case of a StringResourceWithLocation for all exceptions that are not handled by a previously specified com.sun.star.task.XInteractionHandler. The handler to be used for the store operation can be specified during initialization of StringResourceWithLocation."
           ],
           "raises": [
-            "com.sun.star.lang.NoSupportException,"
+            "com.sun.star.lang.NoSupportException",
+            "com.sun.star.uno.Exception"
           ],
           "args": []
         },

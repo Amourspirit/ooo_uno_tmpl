@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:11+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:06+00:00",
   "name": "XTransliteration",
   "type": "interface",
   "namespace": "com.sun.star.i18n",
@@ -16,13 +16,33 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..transliteration_modules",
+        "TransliterationModules"
+      ],
+      [
+        ".transliteration_modules_new",
+        "TransliterationModulesNew"
+      ],
+      [
+        "..lang.locale",
+        "Locale"
+      ]
+    ],
     "quote": [
+      "typing.List[TransliterationModulesNew]",
+      "typing.List[int]",
+      "Locale",
+      "TransliterationModules",
       "typing.List[str]"
     ],
     "typings": [
+      "typing.List[TransliterationModulesNew]",
+      "typing.List[int]",
       "typing.List[str]"
     ],
+    "requires_typing": true,
     "name": "XTransliteration",
     "imports": [],
     "namespace": "com.sun.star.i18n",
@@ -117,7 +137,11 @@
             "",
             "This method can be called if the object has TransliterationType IGNORE attribute.",
             "",
-            "Returns the number of matched code points in any case, even if strings are not equal, for example: \n equals( \\\"a\\\", 0, 1, nMatch1, \\\"aaa\\\", 0, 3, nMatch2 ) \n returns FALSE and nMatch:=1 and nMatch2:=1 \n equals( \\\"aab\\\", 0, 3, nMatch1, \\\"aaa\\\", 0, 3, nMatch2 ) \n returns FALSE and nMatch:=2 and nMatch2:=2"
+            "Returns the number of matched code points in any case, even if strings are not equal, for example:",
+            "equals( \\\"a\\\", 0, 1, nMatch1, \\\"aaa\\\", 0, 3, nMatch2 )",
+            "returns FALSE and nMatch:=1 and nMatch2:=1",
+            "equals( \\\"aab\\\", 0, 3, nMatch1, \\\"aaa\\\", 0, 3, nMatch2 )",
+            "returns FALSE and nMatch:=2 and nMatch2:=2"
           ],
           "raises": [],
           "args": [
@@ -245,7 +269,7 @@
           "args": [
             [
               "eModType",
-              "object",
+              "TransliterationModules",
               "in"
             ],
             [

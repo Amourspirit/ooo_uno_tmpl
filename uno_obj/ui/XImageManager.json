@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:55+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:30+00:00",
   "name": "XImageManager",
   "type": "interface",
   "namespace": "com.sun.star.ui",
@@ -12,20 +12,20 @@
   "data": {
     "from_imports": [
       [
-        "..lang.x_initialization",
-        "XInitialization"
-      ],
-      [
-        "..lang.x_component",
-        "XComponent"
-      ],
-      [
         ".xui_configuration",
         "XUIConfiguration"
       ],
       [
         ".xui_configuration_persistence",
         "XUIConfigurationPersistence"
+      ],
+      [
+        "..lang.x_component",
+        "XComponent"
+      ],
+      [
+        "..lang.x_initialization",
+        "XInitialization"
       ]
     ],
     "from_imports_typing": [
@@ -42,6 +42,7 @@
       "typing.List[XGraphic]",
       "typing.List[str]"
     ],
+    "requires_typing": true,
     "name": "XImageManager",
     "imports": [],
     "namespace": "com.sun.star.ui",
@@ -127,7 +128,9 @@
             "If an association is already present it is replaced. If aCommandURLSequence contains an invalid command URL a com.sun.star.lang.IllegalArgumentException is thrown. If the configuration manager is read-only a com.sun.star.lang.IllegalAccessException is thrown."
           ],
           "raises": [
-            "com.sun.star.container.ElementExistException,"
+            "com.sun.star.container.ElementExistException",
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.lang.IllegalAccessException"
           ],
           "args": [
             [
@@ -156,7 +159,8 @@
             "If the aCommandURLSequence contains an invalid command URL a com.sun.star.lang.IllegalArgumentException is thrown. If the image manager is associated with a read-only configuration manager a com.sun.star.lang.IllegalAccessException is thrown."
           ],
           "raises": [
-            "com.sun.star.lang.IllegalArgumentException,"
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.lang.IllegalAccessException"
           ],
           "args": [
             [
@@ -180,7 +184,8 @@
             "If a command URL cannot be found the replace call will be omitted. If aCommandURLSequence contains an invalid command URL a com.sun.star.lang.IllegalArgumentException is thrown. If the image manager is associated with a read-only configuration manager a com.sun.star.lang.IllegalAccessException is thrown."
           ],
           "raises": [
-            "com.sun.star.lang.IllegalArgumentException,"
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.lang.IllegalAccessException"
           ],
           "args": [
             [
@@ -209,7 +214,8 @@
             "This means that all user images of the instance will be removed."
           ],
           "raises": [
-            "com.sun.star.lang.IllegalArgumentException,"
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.lang.IllegalAccessException"
           ],
           "args": []
         }

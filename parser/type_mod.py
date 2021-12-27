@@ -35,14 +35,126 @@ TYPE_MAP_PY_WRAPPER = {
     "list": "typing.List",
     "tuple": "typing.Tuple"
 }
-@dataclass
-class PythonType:
-    type: str = 'object'
-    requires_typing: bool = False
-    imports: Optional[str] = None
-    is_py_type: bool = True
-    children: List['PythonType'] = field(default_factory=list)
-    realtype: str = 'object'
+class PythonType(object):
+    # region Constructor
+    def __init__(
+        self, type: str = 'object',
+        requires_typing: bool = False,
+        imports: Optional[str] = None,
+        is_py_type: bool = True,
+        children: Optional[List['PythonType']] = None,
+        realtype: str = 'object'
+        ) -> None:
+        self._type = type
+        self._requires_typing = requires_typing
+        self._imports = imports
+        self._is_py_type = is_py_type
+        self._realtype = realtype
+        if children is None:
+            self._children = []
+        else:
+            self._children = children
+        
+    # endregion Constructor
+
+    # region Properties
+    @property
+    def type(self) -> str:
+        """Specifies type
+    
+            :getter: Gets type value.
+            :setter: Sets type value.
+        """
+        return self._type
+    
+    @type.setter
+    def type(self, value: str):
+        self._default_check()
+        self._type = value
+
+    @property
+    def requires_typing(self) -> bool:
+        """Specifies requires_typing
+    
+            :getter: Gets requires_typing value.
+            :setter: Sets requires_typing value.
+        """
+        return self._requires_typing
+    
+    @requires_typing.setter
+    def requires_typing(self, value: bool):
+        self._default_check()
+        self._requires_typing = value
+
+    @property
+    def imports(self) -> Union[str, None]:
+        """Specifies imports
+
+            :getter: Gets imports value.
+            :setter: Sets imports value.
+        """
+        return self._imports
+
+    @imports.setter
+    def imports(self, value: Union[str, None]):
+        self._default_check()
+        self._imports = value
+
+    @property
+    def is_py_type(self) -> bool:
+        """Specifies is_py_type
+    
+            :getter: Gets is_py_type value.
+            :setter: Sets is_py_type value.
+        """
+        return self._is_py_type
+    
+    @is_py_type.setter
+    def is_py_type(self, value: bool):
+        self._default_check()
+        self._is_py_type = value
+
+    @property
+    def children(self) -> List['PythonType']:
+        """Gets children value"""
+        return self._children
+
+    @property
+    def realtype(self) -> str:
+        """Specifies realtype
+
+            :getter: Gets realtype value.
+            :setter: Sets realtype value.
+        """
+        return self._realtype
+
+    @realtype.setter
+    def realtype(self, value: str):
+        self._default_check()
+        self._realtype = value
+    # endregion Properties
+
+    # region Methods
+    def _default_check(self):
+        if self.is_default():
+            raise Exception('PythonType Default instance is not allow to be modifiled. Perhaps create a copy first.')
+
+    def copy(self) -> 'PythonType':
+        """
+        Gets a copy of current instance
+
+        Returns:
+            [PythonType]: Copy
+        """
+        p_type = PythonType(
+            type=self.type,
+            requires_typing=self.requires_typing,
+            imports=self.imports,
+            is_py_type=self.is_py_type,
+            realtype=self.realtype
+        )
+        p_type.children.extend(self.children)
+        return p_type
 
     def get_all_imports(self) -> Set[str]:
         """
@@ -59,6 +171,18 @@ class PythonType:
         im: Set[str] = set()
         _get_imports(self, im)
         return im
+
+    def is_default(self) -> bool:
+        """
+        Gets if instance is is default instance
+
+        Returns:
+            bool: ``True`` if this instance is the same as the default instance; Otherwise, ``False``
+        """
+        return self is DEFAULT_PYTHON_TYPE
+    
+    # endregion Methods
+
 
 DEFAULT_PYTHON_TYPE = PythonType()
 class ITypeRule(ABC):
@@ -411,6 +535,8 @@ class RuleSeqLikeNonPrim(ITypeRule):
         # ruled it out.
         t_name = parts.pop()
         child = self._get_ptype(t_name)
+        if child.is_default():
+            child = child.copy()
         if child.type == 'object':
             # default, t_name will never be object
             child.type = t_name

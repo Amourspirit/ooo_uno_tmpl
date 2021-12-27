@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:31+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:38+00:00",
   "name": "XHierarchicalStorageAccess2",
   "type": "interface",
   "namespace": "com.sun.star.embed",
@@ -16,11 +16,24 @@
         "XHierarchicalStorageAccess"
       ]
     ],
-    "from_imports_typing": [],
-    "quote": [
-      "object"
+    "from_imports_typing": [
+      [
+        "..beans.named_value",
+        "NamedValue"
+      ],
+      [
+        ".x_extended_storage_stream",
+        "XExtendedStorageStream"
+      ]
     ],
-    "typings": [],
+    "quote": [
+      "typing.List[NamedValue]",
+      "XExtendedStorageStream"
+    ],
+    "typings": [
+      "typing.List[NamedValue]"
+    ],
+    "requires_typing": true,
     "name": "XHierarchicalStorageAccess2",
     "imports": [],
     "namespace": "com.sun.star.embed",
@@ -35,7 +48,7 @@
       "methods": [
         {
           "name": "openEncryptedStreamByHierarchicalName",
-          "returns": "object",
+          "returns": "XExtendedStorageStream",
           "desc": [
             "allows to get access to a child encrypted stream with encryption data using hierarchical path.",
             "",
@@ -44,7 +57,13 @@
             "In case the stream is open in readonly mode the com.sun.star.io.XStream.getOutputStream() method will return an empty reference."
           ],
           "raises": [
-            "com.sun.star.embed.InvalidStorageException,"
+            "com.sun.star.embed.InvalidStorageException",
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.packages.NoEncryptionException",
+            "com.sun.star.packages.WrongPasswordException",
+            "com.sun.star.container.NoSuchElementException",
+            "com.sun.star.io.IOException",
+            "com.sun.star.embed.StorageWrappedTargetException"
           ],
           "args": [
             [

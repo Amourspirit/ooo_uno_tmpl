@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:42+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:39+00:00",
   "name": "XBridgeFactory",
   "type": "interface",
   "namespace": "com.sun.star.bridge",
@@ -18,17 +18,32 @@
     ],
     "from_imports_typing": [
       [
+        ".x_instance_provider",
+        "XInstanceProvider"
+      ],
+      [
         ".x_bridge",
         "XBridge"
+      ],
+      [
+        ".x_bridge",
+        "XBridge"
+      ],
+      [
+        "..connection.x_connection",
+        "XConnection"
       ]
     ],
     "quote": [
-      "typing.List[XBridge]",
-      "object"
+      "XBridge",
+      "XInstanceProvider",
+      "XConnection",
+      "typing.List[XBridge]"
     ],
     "typings": [
       "typing.List[XBridge]"
     ],
+    "requires_typing": true,
     "name": "XBridgeFactory",
     "imports": [],
     "namespace": "com.sun.star.bridge",
@@ -43,14 +58,15 @@
       "methods": [
         {
           "name": "createBridge",
-          "returns": "object",
+          "returns": "XBridge",
           "desc": [
             "tries to create a UNO interprocess bridge.",
             "",
             "If empty, an anonymous bridge is created, which cannot be retrieved with getBridge(). No BridgeExistsException can be thrown in this case."
           ],
           "raises": [
-            ","
+            "",
+            "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
             [
@@ -70,14 +86,14 @@
             ],
             [
               "anInstanceProvider",
-              "object",
+              "XInstanceProvider",
               "in"
             ]
           ]
         },
         {
           "name": "getBridge",
-          "returns": "object",
+          "returns": "XBridge",
           "desc": [
             "tries to get a bridge by this name.",
             "",

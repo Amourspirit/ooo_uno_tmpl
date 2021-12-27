@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:46+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:41+00:00",
   "name": "XTextConvert",
   "type": "interface",
   "namespace": "com.sun.star.text",
@@ -18,19 +18,37 @@
     ],
     "from_imports_typing": [
       [
+        "..beans.property_values",
+        "PropertyValues"
+      ],
+      [
         ".x_text_content",
         "XTextContent"
       ],
       [
         ".x_text_table",
         "XTextTable"
+      ],
+      [
+        ".x_text_range",
+        "XTextRange"
       ]
     ],
     "quote": [
+      "XTextRange",
+      "typing.List[PropertyValues]",
+      "XTextTable",
       "XTextContent",
-      "XTextTable"
+      "PropertyValues",
+      "typing.List[typing.List[PropertyValues]]",
+      "typing.List[object]"
     ],
-    "typings": [],
+    "typings": [
+      "typing.List[PropertyValues]",
+      "typing.List[typing.List[PropertyValues]]",
+      "typing.List[object]"
+    ],
+    "requires_typing": true,
     "name": "XTextConvert",
     "imports": [],
     "namespace": "com.sun.star.text",
@@ -52,7 +70,8 @@
             "The inner sequence contains the start and end paragraphs of each table cell. The next sequence groups the cells to a row and the outer sequence groups the rows of the table."
           ],
           "raises": [
-            "com.sun.star.lang.IllegalArgumentException,"
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.beans.UnknownPropertyException"
           ],
           "args": [
             [
@@ -84,7 +103,9 @@
             "moves the paragraphs from Start to End into a text frame."
           ],
           "raises": [
-            "com.sun.star.lang.IllegalArgumentException,"
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.beans.UnknownPropertyException",
+            "com.sun.star.beans.PropertyVetoException"
           ],
           "args": [
             [

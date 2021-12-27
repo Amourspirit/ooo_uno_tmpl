@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:31+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:38+00:00",
   "name": "XStorage2",
   "type": "interface",
   "namespace": "com.sun.star.embed",
@@ -20,12 +20,20 @@
       [
         "..io.x_stream",
         "XStream"
+      ],
+      [
+        "..beans.named_value",
+        "NamedValue"
       ]
     ],
     "quote": [
+      "typing.List[NamedValue]",
       "XStream"
     ],
-    "typings": [],
+    "typings": [
+      "typing.List[NamedValue]"
+    ],
+    "requires_typing": true,
     "name": "XStorage2",
     "imports": [],
     "namespace": "com.sun.star.embed",
@@ -51,7 +59,12 @@
             "This method allows to specify encryption data for the child stream explicitly."
           ],
           "raises": [
-            "com.sun.star.embed.InvalidStorageException,"
+            "com.sun.star.embed.InvalidStorageException",
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.packages.NoEncryptionException",
+            "com.sun.star.packages.WrongPasswordException",
+            "com.sun.star.io.IOException",
+            "com.sun.star.embed.StorageWrappedTargetException"
           ],
           "args": [
             [
@@ -77,7 +90,12 @@
             "In case the stream is open in readonly mode the com.sun.star.io.XStream.getOutputStream() method will return an empty reference."
           ],
           "raises": [
-            "com.sun.star.embed.InvalidStorageException,"
+            "com.sun.star.embed.InvalidStorageException",
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.packages.NoEncryptionException",
+            "com.sun.star.packages.WrongPasswordException",
+            "com.sun.star.io.IOException",
+            "com.sun.star.embed.StorageWrappedTargetException"
           ],
           "args": [
             [

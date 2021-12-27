@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 18:43:37+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:02+00:00",
   "name": "XDatabaseDataProvider",
   "type": "interface",
   "namespace": "com.sun.star.chart2.data",
@@ -12,6 +12,14 @@
   "data": {
     "from_imports": [
       [
+        "...sdbc.x_parameters",
+        "XParameters"
+      ],
+      [
+        "...lang.x_initialization",
+        "XInitialization"
+      ],
+      [
         ".x_data_provider",
         "XDataProvider"
       ],
@@ -20,20 +28,12 @@
         "XComponent"
       ],
       [
-        "...lang.x_initialization",
-        "XInitialization"
-      ],
-      [
         "...sdbc.x_row_set",
         "XRowSet"
       ],
       [
         ".x_range_xml_conversion",
         "XRangeXMLConversion"
-      ],
-      [
-        "...sdbc.x_parameters",
-        "XParameters"
       ],
       [
         "...beans.x_property_set",
@@ -46,6 +46,11 @@
         "XConnection"
       ]
     ],
+    "quote": [
+      "XConnection"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XDatabaseDataProvider",
     "imports": [],
     "namespace": "com.sun.star.chart2.data",
@@ -88,7 +93,9 @@
           "desc": [
             "is the command which should be executed, the type of command depends on the CommandType.",
             "",
-            "In case of a CommandType of CommandType.COMMAND, means in case the Command specifies an SQL statement, the inherited com.sun.star.sdbc.RowSet.EscapeProcessing becomes relevant:\n It then can be to used to specify whether the SQL statement should be analyzed on the client side before sending it to the database server.\n The default value for com.sun.star.sdbc.RowSet.EscapeProcessing is TRUE. By switching it to FALSE, you can pass backend-specific SQL statements, which are not standard SQL, to your database."
+            "In case of a CommandType of CommandType.COMMAND, means in case the Command specifies an SQL statement, the inherited com.sun.star.sdbc.RowSet.EscapeProcessing becomes relevant:",
+            "It then can be to used to specify whether the SQL statement should be analyzed on the client side before sending it to the database server.",
+            "The default value for com.sun.star.sdbc.RowSet.EscapeProcessing is TRUE. By switching it to FALSE, you can pass backend-specific SQL statements, which are not standard SQL, to your database."
           ],
           "raises_get": "",
           "raises_set": ""

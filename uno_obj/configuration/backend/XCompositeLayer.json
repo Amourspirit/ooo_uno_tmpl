@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:06+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:39+00:00",
   "name": "XCompositeLayer",
   "type": "interface",
   "namespace": "com.sun.star.configuration.backend",
@@ -16,13 +16,20 @@
         "XLayer"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_layer_handler",
+        "XLayerHandler"
+      ]
+    ],
     "quote": [
+      "XLayerHandler",
       "typing.List[str]"
     ],
     "typings": [
       "typing.List[str]"
     ],
+    "requires_typing": true,
     "name": "XCompositeLayer",
     "imports": [],
     "namespace": "com.sun.star.configuration.backend",
@@ -59,12 +66,15 @@
             "Must be one the identifiers returned by XCompositeLayer.listSubLayerIds()"
           ],
           "raises": [
-            "com.sun.star.lang.NullPointerException,"
+            "com.sun.star.lang.NullPointerException",
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.lang.WrappedTargetException",
+            "MalformedDataException"
           ],
           "args": [
             [
               "aHandler",
-              "object",
+              "XLayerHandler",
               "in"
             ],
             [

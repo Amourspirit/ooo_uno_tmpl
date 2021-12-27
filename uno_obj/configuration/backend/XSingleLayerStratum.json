@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:06+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:40+00:00",
   "name": "XSingleLayerStratum",
   "type": "interface",
   "namespace": "com.sun.star.configuration.backend",
@@ -16,11 +16,22 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_updatable_layer",
+        "XUpdatableLayer"
+      ],
+      [
+        ".x_layer",
+        "XLayer"
+      ]
+    ],
     "quote": [
-      "object"
+      "XUpdatableLayer",
+      "XLayer"
     ],
     "typings": [],
+    "requires_typing": true,
     "name": "XSingleLayerStratum",
     "imports": [],
     "namespace": "com.sun.star.configuration.backend",
@@ -41,7 +52,7 @@
       "methods": [
         {
           "name": "getLayer",
-          "returns": "object",
+          "returns": "XLayer",
           "desc": [
             "retrieves the layer data for a component, if newer than indicated.",
             "",
@@ -52,7 +63,8 @@
             "The format and meaning of a timestamp depends on the implementation. Timestamps can be obtained using com.sun.star.util.XTimeStamped.getTimestamp()."
           ],
           "raises": [
-            "BackendAccessException,"
+            "BackendAccessException",
+            "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
             [
@@ -69,12 +81,14 @@
         },
         {
           "name": "getUpdatableLayer",
-          "returns": "object",
+          "returns": "XUpdatableLayer",
           "desc": [
             "retrieves a writable representation of the layer for a component."
           ],
           "raises": [
-            "BackendAccessException,"
+            "BackendAccessException",
+            "com.sun.star.lang.NoSupportException",
+            "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
             [

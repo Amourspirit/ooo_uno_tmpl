@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:45+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:02+00:00",
   "name": "XDataProvider",
   "type": "interface",
   "namespace": "com.sun.star.chart2.data",
@@ -18,22 +18,32 @@
     ],
     "from_imports_typing": [
       [
-        "...sheet.x_range_selection",
-        "XRangeSelection"
+        ".x_data_source",
+        "XDataSource"
       ],
       [
         "...beans.property_value",
         "PropertyValue"
+      ],
+      [
+        "...sheet.x_range_selection",
+        "XRangeSelection"
+      ],
+      [
+        ".x_data_sequence",
+        "XDataSequence"
       ]
     ],
     "quote": [
-      "typing.List[PropertyValue]",
       "XRangeSelection",
-      "object"
+      "typing.List[PropertyValue]",
+      "XDataSource",
+      "XDataSequence"
     ],
     "typings": [
       "typing.List[PropertyValue]"
     ],
+    "requires_typing": true,
     "name": "XDataProvider",
     "imports": [],
     "namespace": "com.sun.star.chart2.data",
@@ -48,7 +58,7 @@
       "methods": [
         {
           "name": "createDataSequenceByRangeRepresentation",
-          "returns": "object",
+          "returns": "XDataSequence",
           "desc": [
             "creates a single data sequence for the given data range."
           ],
@@ -82,7 +92,7 @@
         },
         {
           "name": "createDataSequenceByValueArray",
-          "returns": "object",
+          "returns": "XDataSequence",
           "desc": [],
           "raises": [
             "com.sun.star.lang.IllegalArgumentException"
@@ -102,7 +112,7 @@
         },
         {
           "name": "createDataSource",
-          "returns": "object",
+          "returns": "XDataSource",
           "desc": [
             "Creates a data source object that matches the given range representation string.",
             "",
@@ -152,7 +162,7 @@
           "args": [
             [
               "xDataSource",
-              "object",
+              "XDataSource",
               "in"
             ]
           ]

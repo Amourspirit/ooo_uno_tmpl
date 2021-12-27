@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:53:03+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:24+00:00",
   "name": "XReportControlFormat",
   "type": "interface",
   "namespace": "com.sun.star.report",
@@ -10,11 +10,28 @@
   },
   "writer_args": {},
   "data": {
-    "from_imports": [],
+    "from_imports": [
+      [
+        ".x_report_control_model",
+        "XReportControlModel"
+      ],
+      [
+        ".x_format_condition",
+        "XFormatCondition"
+      ],
+      [
+        ".report_control_format",
+        "ReportControlFormat"
+      ]
+    ],
     "from_imports_typing": [
       [
-        "..style.vertical_alignment",
-        "VerticalAlignment"
+        "..awt.font_descriptor",
+        "FontDescriptor"
+      ],
+      [
+        "..awt.font_slant",
+        "FontSlant"
       ],
       [
         "..util.color",
@@ -25,18 +42,27 @@
         "Locale"
       ],
       [
-        "..awt.font_descriptor",
-        "FontDescriptor"
-      ],
-      [
-        "..awt.font_slant",
-        "FontSlant"
+        "..style.vertical_alignment",
+        "VerticalAlignment"
       ]
     ],
+    "quote": [
+      "VerticalAlignment",
+      "Color",
+      "Locale",
+      "FontSlant",
+      "FontDescriptor"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XReportControlFormat",
     "imports": [],
     "namespace": "com.sun.star.report",
-    "extends": [],
+    "extends": [
+      "com.sun.star.report.XFormatCondition",
+      "com.sun.star.report.XReportControlModel",
+      "com.sun.star.report.ReportControlFormat"
+    ],
     "desc": [
       "specifies a format condition for a control.",
       "",
@@ -140,7 +166,7 @@
         },
         {
           "name": "CharEscapementHeight",
-          "returns": "object",
+          "returns": "int",
           "desc": [
             "This is the additional height used for subscript or superscript characters in units of percent.",
             "",

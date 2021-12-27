@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:40+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:04+00:00",
   "name": "XDocumentEventBroadcaster",
   "type": "interface",
   "namespace": "com.sun.star.document",
@@ -10,31 +10,27 @@
   },
   "writer_args": {},
   "data": {
-    "from_imports": [
+    "from_imports": [],
+    "from_imports_typing": [
       [
-        "..sdb.office_database_document",
-        "OfficeDatabaseDocument"
+        ".x_document_event_listener",
+        "XDocumentEventListener"
       ],
       [
-        ".office_document",
-        "OfficeDocument"
-      ],
-      [
-        "..frame.x_global_event_broadcaster",
-        "XGlobalEventBroadcaster"
+        "..frame.x_controller2",
+        "XController2"
       ]
     ],
-    "from_imports_typing": [],
-    "quote": [],
+    "quote": [
+      "XDocumentEventListener",
+      "XController2"
+    ],
     "typings": [],
+    "requires_typing": true,
     "name": "XDocumentEventBroadcaster",
     "imports": [],
     "namespace": "com.sun.star.document",
-    "extends": [
-      "com.sun.star.document.OfficeDocument",
-      "com.sun.star.frame.XGlobalEventBroadcaster",
-      "com.sun.star.sdb.OfficeDatabaseDocument"
-    ],
+    "extends": [],
     "desc": [
       "allows to be notified of events happening in an OfficeDocument, and to cause notification of such events.",
       "",
@@ -57,7 +53,7 @@
           "args": [
             [
               "Listener",
-              "object",
+              "XDocumentEventListener",
               "in"
             ]
           ]
@@ -75,7 +71,8 @@
             "Implementations might also decide to limit the list of allowed events (means event names) at their own discretion. Again, in this case they're encouraged to document this in their service contract."
           ],
           "raises": [
-            "com.sun.star.lang.IllegalArgumentException,"
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.lang.NoSupportException"
           ],
           "args": [
             [
@@ -105,7 +102,7 @@
           "args": [
             [
               "Listener",
-              "object",
+              "XDocumentEventListener",
               "in"
             ]
           ]

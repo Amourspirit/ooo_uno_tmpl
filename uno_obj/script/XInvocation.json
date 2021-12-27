@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:22+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:34+00:00",
   "name": "XInvocation",
   "type": "interface",
   "namespace": "com.sun.star.script",
@@ -23,9 +23,15 @@
       ]
     ],
     "quote": [
-      "XIntrospectionAccess"
+      "typing.List[int]",
+      "XIntrospectionAccess",
+      "typing.List[object]"
     ],
-    "typings": [],
+    "typings": [
+      "typing.List[int]",
+      "typing.List[object]"
+    ],
+    "requires_typing": true,
     "name": "XInvocation",
     "imports": [],
     "namespace": "com.sun.star.script",
@@ -107,7 +113,9 @@
             "Example: aOutParamIndex == { 1, 4 } means that aOutParam[0] contains the out value of the aParams[1] parameter and aOutParam[1] contains the out value of the aParams[4] parameter."
           ],
           "raises": [
-            "com.sun.star.lang.IllegalArgumentException,"
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.script.CannotConvertException",
+            "com.sun.star.reflection.InvocationTargetException"
           ],
           "args": [
             [
@@ -141,7 +149,9 @@
             "If the underlying object implements an com.sun.star.container.XNameContainer, then this method will insert the value if there is no such aPropertyName."
           ],
           "raises": [
-            "com.sun.star.beans.UnknownPropertyException,"
+            "com.sun.star.beans.UnknownPropertyException",
+            "com.sun.star.script.CannotConvertException",
+            "com.sun.star.reflection.InvocationTargetException"
           ],
           "args": [
             [

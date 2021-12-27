@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:54+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:16+00:00",
   "name": "XTextLayout",
   "type": "interface",
   "namespace": "com.sun.star.rendering",
@@ -18,26 +18,62 @@
     ],
     "from_imports_typing": [
       [
+        "..geometry.real_rectangle2_d",
+        "RealRectangle2D"
+      ],
+      [
+        ".string_context",
+        "StringContext"
+      ],
+      [
         ".x_poly_polygon2_d",
         "XPolyPolygon2D"
       ],
       [
-        "..geometry.real_rectangle2_d",
-        "RealRectangle2D"
+        ".x_poly_polygon2_d",
+        "XPolyPolygon2D"
+      ],
+      [
+        "..geometry.real_point2_d",
+        "RealPoint2D"
+      ],
+      [
+        ".text_hit",
+        "TextHit"
+      ],
+      [
+        ".x_canvas_font",
+        "XCanvasFont"
+      ],
+      [
+        ".x_text_layout",
+        "XTextLayout"
+      ],
+      [
+        ".caret",
+        "Caret"
       ]
     ],
     "quote": [
-      "typing.List[float]",
+      "TextHit",
+      "XPolyPolygon2D",
+      "StringContext",
+      "XCanvasFont",
+      "RealPoint2D",
       "typing.List[XPolyPolygon2D]",
-      "typing.List[RealRectangle2D]",
+      "typing.List[float]",
+      "Caret",
       "RealRectangle2D",
-      "object"
+      "typing.List[XTextLayout]",
+      "typing.List[RealRectangle2D]"
     ],
     "typings": [
+      "typing.List[XTextLayout]",
       "typing.List[float]",
       "typing.List[XPolyPolygon2D]",
       "typing.List[RealRectangle2D]"
     ],
+    "requires_typing": true,
     "name": "XTextLayout",
     "imports": [],
     "namespace": "com.sun.star.rendering",
@@ -114,7 +150,7 @@
         },
         {
           "name": "getCaret",
-          "returns": "object",
+          "returns": "Caret",
           "desc": [
             "This method converts an insertion index to a caret.",
             "",
@@ -138,7 +174,7 @@
         },
         {
           "name": "getFont",
-          "returns": "object",
+          "returns": "XCanvasFont",
           "desc": [
             "Request the associated font for this layout."
           ],
@@ -147,7 +183,7 @@
         },
         {
           "name": "getMainTextDirection",
-          "returns": "object",
+          "returns": "int",
           "desc": [
             "This method returns the main writing direction.",
             "",
@@ -187,7 +223,7 @@
         },
         {
           "name": "getText",
-          "returns": "object",
+          "returns": "StringContext",
           "desc": [
             "Request the text this layout contains."
           ],
@@ -196,7 +232,7 @@
         },
         {
           "name": "getTextHit",
-          "returns": "object",
+          "returns": "TextHit",
           "desc": [
             "This method determines the hit position in the text.",
             "",
@@ -258,7 +294,7 @@
         },
         {
           "name": "queryLogicalHighlighting",
-          "returns": "object",
+          "returns": "XPolyPolygon2D",
           "desc": [
             "This method generates a highlight polygon.",
             "",
@@ -315,7 +351,7 @@
         },
         {
           "name": "queryVisualHighlighting",
-          "returns": "object",
+          "returns": "XPolyPolygon2D",
           "desc": [
             "This method generates a highlight polygon.",
             "",

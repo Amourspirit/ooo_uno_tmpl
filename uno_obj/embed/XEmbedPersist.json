@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:30+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:38+00:00",
   "name": "XEmbedPersist",
   "type": "interface",
   "namespace": "com.sun.star.embed",
@@ -16,9 +16,24 @@
         "XCommonEmbedPersist"
       ]
     ],
-    "from_imports_typing": [],
-    "quote": [],
-    "typings": [],
+    "from_imports_typing": [
+      [
+        "..beans.property_value",
+        "PropertyValue"
+      ],
+      [
+        ".x_storage",
+        "XStorage"
+      ]
+    ],
+    "quote": [
+      "XStorage",
+      "typing.List[PropertyValue]"
+    ],
+    "typings": [
+      "typing.List[PropertyValue]"
+    ],
+    "requires_typing": true,
     "name": "XEmbedPersist",
     "imports": [],
     "namespace": "com.sun.star.embed",
@@ -62,7 +77,8 @@
             "specifies whether the object should use an old storage or a new one after \\\"save as\\\" operation."
           ],
           "raises": [
-            "com.sun.star.embed.WrongStateException,"
+            "com.sun.star.embed.WrongStateException",
+            "com.sun.star.uno.Exception"
           ],
           "args": [
             [
@@ -85,7 +101,10 @@
             "It is also possible to switch object persistent representation through this call. Actually this is the way, this call can be used by user ( since initialization is done by factory )."
           ],
           "raises": [
-            "com.sun.star.lang.IllegalArgumentException,"
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.embed.WrongStateException",
+            "com.sun.star.io.IOException",
+            "com.sun.star.uno.Exception"
           ],
           "args": [
             [
@@ -124,7 +143,10 @@
             "The object should be stored to the new entry, after that the entry should be remembered by the object. After the storing process is finished the XEmbedPersist.saveCompleted() method can be used to specify whether the object should use the new entry or the old one. The object persistence can not be used until XEmbedPersist.saveCompleted() is called. So this state can be treated as \\\"HandsOff\\\" state."
           ],
           "raises": [
-            "com.sun.star.lang.IllegalArgumentException,"
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.embed.WrongStateException",
+            "com.sun.star.io.IOException",
+            "com.sun.star.uno.Exception"
           ],
           "args": [
             [
@@ -156,7 +178,10 @@
             "lets the object store itself to an entry in destination storage, the own persistence entry is not changed."
           ],
           "raises": [
-            "com.sun.star.lang.IllegalArgumentException,"
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.embed.WrongStateException",
+            "com.sun.star.io.IOException",
+            "com.sun.star.uno.Exception"
           ],
           "args": [
             [

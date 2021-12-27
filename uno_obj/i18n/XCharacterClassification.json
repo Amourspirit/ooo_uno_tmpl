@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:11+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:05+00:00",
   "name": "XCharacterClassification",
   "type": "interface",
   "namespace": "com.sun.star.i18n",
@@ -16,11 +16,22 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..lang.locale",
+        "Locale"
+      ],
+      [
+        ".parse_result",
+        "ParseResult"
+      ]
+    ],
     "quote": [
-      "object"
+      "ParseResult",
+      "Locale"
     ],
     "typings": [],
+    "requires_typing": true,
     "name": "XCharacterClassification",
     "imports": [],
     "namespace": "com.sun.star.i18n",
@@ -150,7 +161,7 @@
         },
         {
           "name": "parseAnyToken",
-          "returns": "object",
+          "returns": "ParseResult",
           "desc": [
             "Parse a string for a token starting at position nPos.",
             "",
@@ -199,7 +210,7 @@
         },
         {
           "name": "parsePredefinedToken",
-          "returns": "object",
+          "returns": "ParseResult",
           "desc": [
             "Parse a string for a token of type nTokenType starting at position nPos.",
             "",

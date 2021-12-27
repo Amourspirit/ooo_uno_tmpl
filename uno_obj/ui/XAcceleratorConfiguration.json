@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:54+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:29+00:00",
   "name": "XAcceleratorConfiguration",
   "type": "interface",
   "namespace": "com.sun.star.ui",
@@ -16,12 +16,12 @@
         "XUIConfiguration"
       ],
       [
-        ".xui_configuration_storage",
-        "XUIConfigurationStorage"
-      ],
-      [
         ".xui_configuration_persistence",
         "XUIConfigurationPersistence"
+      ],
+      [
+        ".xui_configuration_storage",
+        "XUIConfigurationStorage"
       ]
     ],
     "from_imports_typing": [
@@ -31,13 +31,17 @@
       ]
     ],
     "quote": [
+      "typing.List[str]",
+      "typing.List[object]",
       "typing.List[KeyEvent]",
-      "typing.List[object]"
+      "KeyEvent"
     ],
     "typings": [
+      "typing.List[object]",
       "typing.List[KeyEvent]",
-      "typing.List[object]"
+      "typing.List[str]"
     ],
+    "requires_typing": true,
     "name": "XAcceleratorConfiguration",
     "imports": [],
     "namespace": "com.sun.star.ui",
@@ -51,7 +55,8 @@
       "",
       "Such configuration set base on:",
       "",
-      "Note further:\n All changes you made on this configuration access modify the configuration set inside memory only. You have to use the com.sun.star.util.XFlushable interface (which must be available at the same implementation object too), to make it persistent.",
+      "Note further:",
+      "All changes you made on this configuration access modify the configuration set inside memory only. You have to use the com.sun.star.util.XFlushable interface (which must be available at the same implementation object too), to make it persistent.",
       "",
       "**since**",
       "",
@@ -101,7 +106,8 @@
             "It can be used to implement collision handling, if more than one key event match to the same command. The returned list contains all possible key events - and the outside code can select a possible one. Of course - mostly this list will contain only one key event ..."
           ],
           "raises": [
-            ","
+            "",
+            "com.sun.star.container.NoSuchElementException"
           ],
           "args": [
             [
@@ -122,7 +128,8 @@
             "Instead to the method getKeyEventsForCommand() the returned list contains only one(!) key event bound to one(!) requested command. If more than one key event is bound to a command - a selection is done inside this method. This internal selection can't be influenced from outside."
           ],
           "raises": [
-            "com.sun.star.lang.IllegalArgumentException,"
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.container.NoSuchElementException"
           ],
           "args": [
             [
@@ -143,7 +150,8 @@
             "This is an optimized method, which can perform removing of commands from this configuration set. Because normally Commands are \\\"foreign keys\\\" and key identifier the \\\"primary keys\\\" - it needs some work to remove all commands outside this container ..."
           ],
           "raises": [
-            ","
+            "",
+            "com.sun.star.container.NoSuchElementException"
           ],
           "args": [
             [
@@ -183,7 +191,8 @@
             "Note: This method can't be used to remove entities from the configuration set. Empty parameters will result into an exception! Use the method removeKeyEvent() instead."
           ],
           "raises": [
-            "com.sun.star.lang.IllegalArgumentException,"
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.container.NoSuchElementException"
           ],
           "args": [
             [

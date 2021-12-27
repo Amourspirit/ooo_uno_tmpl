@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:49:14+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:06+00:00",
   "name": "XTableName",
   "type": "interface",
   "namespace": "com.sun.star.sdb.tools",
@@ -17,6 +17,11 @@
         "XPropertySet"
       ]
     ],
+    "quote": [
+      "XPropertySet"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XTableName",
     "imports": [],
     "namespace": "com.sun.star.sdb.tools",
@@ -28,7 +33,8 @@
       "",
       "The XTableName interface eases this and other, similar tasks around table names.",
       "",
-      "The component itself does not have life-time control mechanisms, i.e. you cannot explicitly dispose it (com.sun.star.lang.XComponent.dispose()), and you cannot be notified when it dies.\n However, if your try to access any of its methods or attributes, after the connection which was used to create it was closed, a com.sun.star.lang.DisposedException will be thrown.",
+      "The component itself does not have life-time control mechanisms, i.e. you cannot explicitly dispose it (com.sun.star.lang.XComponent.dispose()), and you cannot be notified when it dies.",
+      "However, if your try to access any of its methods or attributes, after the connection which was used to create it was closed, a com.sun.star.lang.DisposedException will be thrown.",
       "",
       "**since**",
       "",
@@ -46,7 +52,18 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException"
           ],
-          "args": []
+          "args": [
+            [
+              "Type",
+              "int",
+              "in"
+            ],
+            [
+              "Quote",
+              "bool",
+              "in"
+            ]
+          ]
         },
         {
           "name": "setComposedName",
@@ -55,7 +72,18 @@
             "sets a new composed table name"
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "ComposedName",
+              "str",
+              "in"
+            ],
+            [
+              "Type",
+              "int",
+              "in"
+            ]
+          ]
         }
       ],
       "properties": [

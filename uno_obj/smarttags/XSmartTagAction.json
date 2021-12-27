@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:49:09+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:08+00:00",
   "name": "XSmartTagAction",
   "type": "interface",
   "namespace": "com.sun.star.smarttags",
@@ -16,7 +16,32 @@
         "XInitialization"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..frame.x_controller",
+        "XController"
+      ],
+      [
+        "..container.x_string_key_map",
+        "XStringKeyMap"
+      ],
+      [
+        "..lang.locale",
+        "Locale"
+      ],
+      [
+        "..text.x_text_range",
+        "XTextRange"
+      ]
+    ],
+    "quote": [
+      "XStringKeyMap",
+      "XTextRange",
+      "XController",
+      "Locale"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XSmartTagAction",
     "imports": [],
     "namespace": "com.sun.star.smarttags",
@@ -42,7 +67,48 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException"
           ],
-          "args": []
+          "args": [
+            [
+              "nActionID",
+              "int",
+              "in"
+            ],
+            [
+              "aApplicationName",
+              "str",
+              "in"
+            ],
+            [
+              "aLocale",
+              "Locale",
+              "in"
+            ],
+            [
+              "xProperties",
+              "XStringKeyMap",
+              "in"
+            ],
+            [
+              "aText",
+              "str",
+              "in"
+            ],
+            [
+              "aXML",
+              "str",
+              "in"
+            ],
+            [
+              "xController",
+              "XController",
+              "in"
+            ],
+            [
+              "xTarget",
+              "XTextRange",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getActionCount",
@@ -51,7 +117,23 @@
             "obtains the number of actions provided for a specified smart tag type."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aSmartTagName",
+              "str",
+              "in"
+            ],
+            [
+              "xController",
+              "XController",
+              "in"
+            ],
+            [
+              "xProperties",
+              "XStringKeyMap",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getActionID",
@@ -62,7 +144,23 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException"
           ],
-          "args": []
+          "args": [
+            [
+              "aSmartTagName",
+              "str",
+              "in"
+            ],
+            [
+              "nActionIndex",
+              "int",
+              "in"
+            ],
+            [
+              "xController",
+              "XController",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getActionNameFromID",
@@ -73,7 +171,18 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException"
           ],
-          "args": []
+          "args": [
+            [
+              "nActionID",
+              "int",
+              "in"
+            ],
+            [
+              "xController",
+              "XController",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getDescription",
@@ -82,7 +191,13 @@
             "obtains a detailed description of this action component."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aLocale",
+              "Locale",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getName",
@@ -91,7 +206,13 @@
             "obtains a name that describes this action component."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "aLocale",
+              "Locale",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getSmartTagCaption",
@@ -102,7 +223,18 @@
           "raises": [
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
-          "args": []
+          "args": [
+            [
+              "nSmartTagIndex",
+              "int",
+              "in"
+            ],
+            [
+              "aLocale",
+              "Locale",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getSmartTagName",
@@ -113,7 +245,13 @@
           "raises": [
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
-          "args": []
+          "args": [
+            [
+              "nSmartTagIndex",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "invokeAction",
@@ -124,7 +262,48 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException"
           ],
-          "args": []
+          "args": [
+            [
+              "nActionID",
+              "int",
+              "in"
+            ],
+            [
+              "aApplicationName",
+              "str",
+              "in"
+            ],
+            [
+              "xController",
+              "XController",
+              "in"
+            ],
+            [
+              "xTarget",
+              "XTextRange",
+              "in"
+            ],
+            [
+              "xProperties",
+              "XStringKeyMap",
+              "in"
+            ],
+            [
+              "aText",
+              "str",
+              "in"
+            ],
+            [
+              "aXML",
+              "str",
+              "in"
+            ],
+            [
+              "aLocale",
+              "Locale",
+              "in"
+            ]
+          ]
         },
         {
           "name": "isCaptionDynamic",
@@ -135,7 +314,28 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException"
           ],
-          "args": []
+          "args": [
+            [
+              "nActionID",
+              "int",
+              "in"
+            ],
+            [
+              "aApplicationName",
+              "str",
+              "in"
+            ],
+            [
+              "xController",
+              "XController",
+              "in"
+            ],
+            [
+              "aLocale",
+              "Locale",
+              "in"
+            ]
+          ]
         },
         {
           "name": "isShowSmartTagIndicator",
@@ -146,7 +346,28 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException"
           ],
-          "args": []
+          "args": [
+            [
+              "nActionID",
+              "int",
+              "in"
+            ],
+            [
+              "aApplicationName",
+              "str",
+              "in"
+            ],
+            [
+              "xController",
+              "XController",
+              "in"
+            ],
+            [
+              "aLocale",
+              "Locale",
+              "in"
+            ]
+          ]
         }
       ],
       "properties": [

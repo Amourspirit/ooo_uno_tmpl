@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:46+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:40+00:00",
   "name": "XAutoTextGroup",
   "type": "interface",
   "namespace": "com.sun.star.text",
@@ -20,15 +20,21 @@
       [
         ".x_auto_text_entry",
         "XAutoTextEntry"
+      ],
+      [
+        ".x_text_range",
+        "XTextRange"
       ]
     ],
     "quote": [
+      "XTextRange",
       "XAutoTextEntry",
       "typing.List[str]"
     ],
     "typings": [
       "typing.List[str]"
     ],
+    "requires_typing": true,
     "name": "XAutoTextGroup",
     "imports": [],
     "namespace": "com.sun.star.text",
@@ -105,7 +111,9 @@
             "The position of the autotext entry is not changed."
           ],
           "raises": [
-            "com.sun.star.lang.IllegalArgumentException,"
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.container.ElementExistException",
+            "com.sun.star.io.IOException"
           ],
           "args": [
             [

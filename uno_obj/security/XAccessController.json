@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:29+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:28+00:00",
   "name": "XAccessController",
   "type": "interface",
   "namespace": "com.sun.star.security",
@@ -16,11 +16,22 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_access_control_context",
+        "XAccessControlContext"
+      ],
+      [
+        ".x_action",
+        "XAction"
+      ]
+    ],
     "quote": [
-      "object"
+      "XAccessControlContext",
+      "XAction"
     ],
     "typings": [],
+    "requires_typing": true,
     "name": "XAccessController",
     "imports": [],
     "namespace": "com.sun.star.security",
@@ -74,12 +85,12 @@
           "args": [
             [
               "action",
-              "object",
+              "XAction",
               "in"
             ],
             [
               "restriction",
-              "object",
+              "XAccessControlContext",
               "in"
             ]
           ]
@@ -100,19 +111,19 @@
           "args": [
             [
               "action",
-              "object",
+              "XAction",
               "in"
             ],
             [
               "restriction",
-              "object",
+              "XAccessControlContext",
               "in"
             ]
           ]
         },
         {
           "name": "getContext",
-          "returns": "object",
+          "returns": "XAccessControlContext",
           "desc": [
             "This method takes a \\\"snapshot\\\" of the current calling context and returns it.",
             "",

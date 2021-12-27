@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:32+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:13+00:00",
   "name": "XDataPilotFieldGrouping",
   "type": "interface",
   "namespace": "com.sun.star.sheet",
@@ -16,11 +16,25 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
-    "quote": [
-      "object"
+    "from_imports_typing": [
+      [
+        ".data_pilot_field_group_info",
+        "DataPilotFieldGroupInfo"
+      ],
+      [
+        ".x_data_pilot_field",
+        "XDataPilotField"
+      ]
     ],
-    "typings": [],
+    "quote": [
+      "DataPilotFieldGroupInfo",
+      "XDataPilotField",
+      "typing.List[str]"
+    ],
+    "typings": [
+      "typing.List[str]"
+    ],
+    "requires_typing": true,
     "name": "XDataPilotFieldGrouping",
     "imports": [],
     "namespace": "com.sun.star.sheet",
@@ -35,7 +49,7 @@
       "methods": [
         {
           "name": "createDateGroup",
-          "returns": "object",
+          "returns": "XDataPilotField",
           "desc": [
             "Groups the members of this field by dates, according to the passed settings.",
             "",
@@ -47,14 +61,14 @@
           "args": [
             [
               "aInfo",
-              "object",
+              "DataPilotFieldGroupInfo",
               "in"
             ]
           ]
         },
         {
           "name": "createNameGroup",
-          "returns": "object",
+          "returns": "XDataPilotField",
           "desc": [
             "Creates a new DataPilot field which contains a group containing the given DataPilot field items (members).",
             "",

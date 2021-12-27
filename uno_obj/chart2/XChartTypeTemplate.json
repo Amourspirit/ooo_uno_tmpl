@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:12+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:36+00:00",
   "name": "XChartTypeTemplate",
   "type": "interface",
   "namespace": "com.sun.star.chart2",
@@ -16,11 +16,50 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
-    "quote": [
-      "object"
+    "from_imports_typing": [
+      [
+        ".x_chart_type",
+        "XChartType"
+      ],
+      [
+        ".x_diagram",
+        "XDiagram"
+      ],
+      [
+        ".x_data_interpreter",
+        "XDataInterpreter"
+      ],
+      [
+        ".x_data_series",
+        "XDataSeries"
+      ],
+      [
+        ".data.x_data_source",
+        "XDataSource"
+      ],
+      [
+        "..beans.property_value",
+        "PropertyValue"
+      ],
+      [
+        ".x_chart_type",
+        "XChartType"
+      ]
     ],
-    "typings": [],
+    "quote": [
+      "XChartType",
+      "XDataInterpreter",
+      "typing.List[PropertyValue]",
+      "XDataSeries",
+      "XDiagram",
+      "XDataSource",
+      "typing.List[XChartType]"
+    ],
+    "typings": [
+      "typing.List[PropertyValue]",
+      "typing.List[XChartType]"
+    ],
+    "requires_typing": true,
     "name": "XChartTypeTemplate",
     "imports": [],
     "namespace": "com.sun.star.chart2",
@@ -43,7 +82,7 @@
           "args": [
             [
               "xSeries",
-              "object",
+              "XDataSeries",
               "in"
             ],
             [
@@ -75,7 +114,7 @@
           "args": [
             [
               "xDiagram",
-              "object",
+              "XDiagram",
               "in"
             ]
           ]
@@ -96,7 +135,7 @@
           "args": [
             [
               "xDiagram",
-              "object",
+              "XDiagram",
               "in"
             ],
             [
@@ -113,7 +152,7 @@
         },
         {
           "name": "createDiagramByDataSource",
-          "returns": "object",
+          "returns": "XDiagram",
           "desc": [
             "Creates a new diagram based upon the given data .",
             "",
@@ -135,7 +174,7 @@
         },
         {
           "name": "getChartTypeForNewSeries",
-          "returns": "object",
+          "returns": "XChartType",
           "desc": [
             "Provides a chart type object that can be used to create new series."
           ],
@@ -150,7 +189,7 @@
         },
         {
           "name": "getDataInterpreter",
-          "returns": "object",
+          "returns": "XDataInterpreter",
           "desc": [],
           "raises": [],
           "args": []
@@ -169,7 +208,7 @@
           "args": [
             [
               "xDiagram",
-              "object",
+              "XDiagram",
               "in"
             ],
             [
@@ -193,7 +232,7 @@
           "args": [
             [
               "xDiagram",
-              "object",
+              "XDiagram",
               "in"
             ]
           ]

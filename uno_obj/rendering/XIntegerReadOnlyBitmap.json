@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:53+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:15+00:00",
   "name": "XIntegerReadOnlyBitmap",
   "type": "interface",
   "namespace": "com.sun.star.rendering",
@@ -18,17 +18,28 @@
     ],
     "from_imports_typing": [
       [
-        ".byte",
-        "byte"
+        "..geometry.integer_rectangle2_d",
+        "IntegerRectangle2D"
+      ],
+      [
+        "..geometry.integer_point2_d",
+        "IntegerPoint2D"
+      ],
+      [
+        ".integer_bitmap_layout",
+        "IntegerBitmapLayout"
       ]
     ],
     "quote": [
-      "typing.List[byte]",
-      "object"
+      "IntegerPoint2D",
+      "typing.List[int]",
+      "IntegerBitmapLayout",
+      "IntegerRectangle2D"
     ],
     "typings": [
-      "typing.List[byte]"
+      "typing.List[int]"
     ],
+    "requires_typing": true,
     "name": "XIntegerReadOnlyBitmap",
     "imports": [],
     "namespace": "com.sun.star.rendering",
@@ -49,7 +60,7 @@
       "methods": [
         {
           "name": "getData",
-          "returns": "typing.List[byte]",
+          "returns": "typing.List[int]",
           "desc": [
             "Query the raw data of this bitmap.",
             "",
@@ -58,12 +69,13 @@
             "Note that the bitmap memory layout might change over time for volatile bitmaps."
           ],
           "raises": [
-            "com.sun.star.lang.IndexOutOfBoundsException,"
+            "com.sun.star.lang.IndexOutOfBoundsException",
+            "VolatileContentDestroyedException"
           ],
           "args": [
             [
               "bitmapLayout",
-              "object",
+              "IntegerBitmapLayout",
               "out"
             ],
             [
@@ -75,7 +87,7 @@
         },
         {
           "name": "getMemoryLayout",
-          "returns": "object",
+          "returns": "IntegerBitmapLayout",
           "desc": [
             "Query the memory layout for this bitmap.",
             "",
@@ -86,7 +98,7 @@
         },
         {
           "name": "getPixel",
-          "returns": "typing.List[byte]",
+          "returns": "typing.List[int]",
           "desc": [
             "Get a single pixel of the bitmap, returning its color value.",
             "",
@@ -95,12 +107,13 @@
             "Note that the bitmap memory layout might change for volatile bitmaps."
           ],
           "raises": [
-            "com.sun.star.lang.IndexOutOfBoundsException,"
+            "com.sun.star.lang.IndexOutOfBoundsException",
+            "VolatileContentDestroyedException"
           ],
           "args": [
             [
               "bitmapLayout",
-              "object",
+              "IntegerBitmapLayout",
               "out"
             ],
             [

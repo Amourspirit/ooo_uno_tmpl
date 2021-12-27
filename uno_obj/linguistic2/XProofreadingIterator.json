@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:41+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:32+00:00",
   "name": "XProofreadingIterator",
   "type": "interface",
   "namespace": "com.sun.star.linguistic2",
@@ -16,11 +16,33 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..text.x_flat_paragraph_iterator_provider",
+        "XFlatParagraphIteratorProvider"
+      ],
+      [
+        ".proofreading_result",
+        "ProofreadingResult"
+      ],
+      [
+        "..lang.locale",
+        "Locale"
+      ],
+      [
+        "..text.x_flat_paragraph",
+        "XFlatParagraph"
+      ]
+    ],
     "quote": [
-      "object"
+      "ProofreadingResult",
+      "Locale",
+      "XInterface",
+      "XFlatParagraphIteratorProvider",
+      "XFlatParagraph"
     ],
     "typings": [],
+    "requires_typing": true,
     "name": "XProofreadingIterator",
     "imports": [],
     "namespace": "com.sun.star.linguistic2",
@@ -39,7 +61,7 @@
       "methods": [
         {
           "name": "checkSentenceAtPosition",
-          "returns": "object",
+          "returns": "ProofreadingResult",
           "desc": [
             "start proofreading from a given position"
           ],

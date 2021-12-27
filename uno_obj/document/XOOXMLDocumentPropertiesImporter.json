@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:40+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:05+00:00",
   "name": "XOOXMLDocumentPropertiesImporter",
   "type": "interface",
   "namespace": "com.sun.star.document",
@@ -16,9 +16,22 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
-    "quote": [],
+    "from_imports_typing": [
+      [
+        ".x_document_properties",
+        "XDocumentProperties"
+      ],
+      [
+        "..embed.x_storage",
+        "XStorage"
+      ]
+    ],
+    "quote": [
+      "XStorage",
+      "XDocumentProperties"
+    ],
     "typings": [],
+    "requires_typing": true,
     "name": "XOOXMLDocumentPropertiesImporter",
     "imports": [],
     "namespace": "com.sun.star.document",
@@ -42,7 +55,9 @@
             "The storage must represent OOXML format and support com.sun.star.embed.XRelationshipAccess interface. Please see com.sun.star.embed.StorageFactory for details regarding creation of such a storage."
           ],
           "raises": [
-            "com.sun.star.lang.IllegalArgumentException,"
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.xml.sax.SAXException",
+            "com.sun.star.uno.Exception"
           ],
           "args": [
             [

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:52:24+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:13+00:00",
   "name": "XMutableTreeNode",
   "type": "interface",
   "namespace": "com.sun.star.awt.tree",
@@ -16,7 +16,17 @@
         "XTreeNode"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_mutable_tree_node",
+        "XMutableTreeNode"
+      ]
+    ],
+    "quote": [
+      "XMutableTreeNode"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XMutableTreeNode",
     "imports": [],
     "namespace": "com.sun.star.awt.tree",
@@ -38,7 +48,13 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException"
           ],
-          "args": []
+          "args": [
+            [
+              "ChildNode",
+              "XMutableTreeNode",
+              "in"
+            ]
+          ]
         },
         {
           "name": "insertChildByIndex",
@@ -47,9 +63,21 @@
             "inserts ChildNode to this instance at the given index."
           ],
           "raises": [
-            "com.sun.star.lang.IllegalArgumentException,"
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.lang.IndexOutOfBoundsException"
           ],
-          "args": []
+          "args": [
+            [
+              "Index",
+              "int",
+              "in"
+            ],
+            [
+              "ChildNode",
+              "XMutableTreeNode",
+              "in"
+            ]
+          ]
         },
         {
           "name": "removeChildByIndex",
@@ -60,7 +88,13 @@
           "raises": [
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
-          "args": []
+          "args": [
+            [
+              "Index",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "setCollapsedGraphicURL",
@@ -71,7 +105,13 @@
             "If URL is empty, XTreeControl.DefaultCollapsedGraphicURL is used."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "URL",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "setDisplayValue",
@@ -80,7 +120,13 @@
             "sets the display value of this node"
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "Value",
+              "object",
+              "in"
+            ]
+          ]
         },
         {
           "name": "setExpandedGraphicURL",
@@ -91,7 +137,13 @@
             "If URL is empty, XTreeControl.DefaultExpandedGraphicURL is used."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "URL",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "setHasChildrenOnDemand",
@@ -100,7 +152,13 @@
             "Changes if the children of this node are created on demand."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "ChildrenOnDemand",
+              "bool",
+              "in"
+            ]
+          ]
         },
         {
           "name": "setNodeGraphicURL",
@@ -111,7 +169,13 @@
             "If this URL is empty, no graphic is rendered."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "URL",
+              "str",
+              "in"
+            ]
+          ]
         }
       ],
       "properties": [

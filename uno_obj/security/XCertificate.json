@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 19:07:08+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:28+00:00",
   "name": "XCertificate",
   "type": "interface",
   "namespace": "com.sun.star.security",
@@ -18,14 +18,28 @@
     ],
     "from_imports_typing": [
       [
-        "..util.date_time",
-        "DateTime"
+        ".x_certificate_extension",
+        "XCertificateExtension"
       ],
       [
         ".certificate_kind",
         "CertificateKind"
+      ],
+      [
+        "..util.date_time",
+        "DateTime"
       ]
     ],
+    "quote": [
+      "typing.List[int]",
+      "XCertificateExtension",
+      "CertificateKind",
+      "DateTime"
+    ],
+    "typings": [
+      "typing.List[int]"
+    ],
+    "requires_typing": true,
     "name": "XCertificate",
     "imports": [],
     "namespace": "com.sun.star.security",
@@ -46,7 +60,7 @@
       "methods": [
         {
           "name": "findCertificateExtension",
-          "returns": "object",
+          "returns": "XCertificateExtension",
           "desc": [
             "Find an extension with an object identifier."
           ],
@@ -54,7 +68,7 @@
           "args": [
             [
               "oid",
-              "'typing.List[byte]'",
+              "typing.List[int]",
               "in"
             ]
           ]

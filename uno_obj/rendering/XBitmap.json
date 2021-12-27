@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:53+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:15+00:00",
   "name": "XBitmap",
   "type": "interface",
   "namespace": "com.sun.star.rendering",
@@ -20,13 +20,23 @@
       [
         "..geometry.integer_size2_d",
         "IntegerSize2D"
+      ],
+      [
+        "..geometry.real_size2_d",
+        "RealSize2D"
+      ],
+      [
+        ".x_bitmap",
+        "XBitmap"
       ]
     ],
     "quote": [
-      "object",
-      "IntegerSize2D"
+      "XBitmap",
+      "IntegerSize2D",
+      "RealSize2D"
     ],
     "typings": [],
+    "requires_typing": true,
     "name": "XBitmap",
     "imports": [],
     "namespace": "com.sun.star.rendering",
@@ -47,12 +57,13 @@
       "methods": [
         {
           "name": "getScaledBitmap",
-          "returns": "object",
+          "returns": "XBitmap",
           "desc": [
             "Query a scaled copy of the original bitmap."
           ],
           "raises": [
-            "com.sun.star.lang.IllegalArgumentException,"
+            "com.sun.star.lang.IllegalArgumentException",
+            "VolatileContentDestroyedException"
           ],
           "args": [
             [

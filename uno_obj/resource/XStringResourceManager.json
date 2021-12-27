@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:42+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:27+00:00",
   "name": "XStringResourceManager",
   "type": "interface",
   "namespace": "com.sun.star.resource",
@@ -16,9 +16,17 @@
         "XStringResourceResolver"
       ]
     ],
-    "from_imports_typing": [],
-    "quote": [],
+    "from_imports_typing": [
+      [
+        "..lang.locale",
+        "Locale"
+      ]
+    ],
+    "quote": [
+      "Locale"
+    ],
     "typings": [],
+    "requires_typing": true,
     "name": "XStringResourceManager",
     "imports": [],
     "namespace": "com.sun.star.resource",
@@ -72,7 +80,9 @@
             "For each existing ResourceID an empty string will be created. The first locale created will automatically be the first default locale. Otherwise strings for all already created IDs will be copied from the default locale."
           ],
           "raises": [
-            "com.sun.star.container.ElementExistException,"
+            "com.sun.star.container.ElementExistException",
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.lang.NoSupportException"
           ],
           "args": [
             [
@@ -89,7 +99,8 @@
             "Removes a Resource ID including the corresponding string for the current locale."
           ],
           "raises": [
-            "com.sun.star.resource.MissingResourceException,"
+            "com.sun.star.resource.MissingResourceException",
+            "com.sun.star.lang.NoSupportException"
           ],
           "args": [
             [
@@ -106,7 +117,8 @@
             "Removes a Resource ID including the corresponding string for s specific locale."
           ],
           "raises": [
-            "com.sun.star.resource.MissingResourceException,"
+            "com.sun.star.resource.MissingResourceException",
+            "com.sun.star.lang.NoSupportException"
           ],
           "args": [
             [
@@ -128,7 +140,8 @@
             "Removes a locale completely including the corresponding strings for each locale."
           ],
           "raises": [
-            "com.sun.star.lang.IllegalArgumentException,"
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.lang.NoSupportException"
           ],
           "args": [
             [
@@ -173,7 +186,8 @@
             "Sets the default locale to be used."
           ],
           "raises": [
-            "com.sun.star.lang.IllegalArgumentException,"
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.lang.NoSupportException"
           ],
           "args": [
             [

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:05:01+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:17+00:00",
   "name": "XGridColumnModel",
   "type": "interface",
   "namespace": "com.sun.star.awt.grid",
@@ -12,19 +12,23 @@
   "data": {
     "from_imports": [
       [
-        "...lang.x_component",
-        "XComponent"
+        "...container.x_container",
+        "XContainer"
       ],
       [
         "...util.x_cloneable",
         "XCloneable"
       ],
       [
-        "...container.x_container",
-        "XContainer"
+        "...lang.x_component",
+        "XComponent"
       ]
     ],
     "from_imports_typing": [
+      [
+        ".x_grid_column",
+        "XGridColumn"
+      ],
       [
         ".x_grid_column",
         "XGridColumn"
@@ -32,11 +36,12 @@
     ],
     "quote": [
       "typing.List[XGridColumn]",
-      "object"
+      "XGridColumn"
     ],
     "typings": [
       "typing.List[XGridColumn]"
     ],
+    "requires_typing": true,
     "name": "XGridColumnModel",
     "imports": [],
     "namespace": "com.sun.star.awt.grid",
@@ -73,14 +78,14 @@
           "args": [
             [
               "column",
-              "object",
+              "XGridColumn",
               "in"
             ]
           ]
         },
         {
           "name": "createColumn",
-          "returns": "object",
+          "returns": "XGridColumn",
           "desc": [
             "creates a new column for use with the column model.",
             "",
@@ -91,7 +96,7 @@
         },
         {
           "name": "getColumn",
-          "returns": "object",
+          "returns": "XGridColumn",
           "desc": [
             "Returns a specific column."
           ],

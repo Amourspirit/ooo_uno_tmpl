@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:12+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:36+00:00",
   "name": "XDiagram",
   "type": "interface",
   "namespace": "com.sun.star.chart2",
@@ -18,15 +18,37 @@
     ],
     "from_imports_typing": [
       [
+        ".x_color_scheme",
+        "XColorScheme"
+      ],
+      [
+        ".x_legend",
+        "XLegend"
+      ],
+      [
+        ".data.x_data_source",
+        "XDataSource"
+      ],
+      [
+        "..beans.property_value",
+        "PropertyValue"
+      ],
+      [
         "..beans.x_property_set",
         "XPropertySet"
       ]
     ],
     "quote": [
       "XPropertySet",
-      "object"
+      "XLegend",
+      "typing.List[PropertyValue]",
+      "XColorScheme",
+      "XDataSource"
     ],
-    "typings": [],
+    "typings": [
+      "typing.List[PropertyValue]"
+    ],
+    "requires_typing": true,
     "name": "XDiagram",
     "imports": [],
     "namespace": "com.sun.star.chart2",
@@ -39,7 +61,7 @@
       "methods": [
         {
           "name": "getDefaultColorScheme",
-          "returns": "object",
+          "returns": "XColorScheme",
           "desc": [
             "returns an XColorScheme that defines the default colors for data series (or data points) in the diagram."
           ],
@@ -59,7 +81,7 @@
         },
         {
           "name": "getLegend",
-          "returns": "object",
+          "returns": "XLegend",
           "desc": [
             "returns the legend, which may represent data series and other information about a diagram in a separate box."
           ],
@@ -87,7 +109,7 @@
           "args": [
             [
               "xColorScheme",
-              "object",
+              "XColorScheme",
               "in"
             ]
           ]
@@ -124,7 +146,7 @@
           "args": [
             [
               "xLegend",
-              "object",
+              "XLegend",
               "in"
             ]
           ]

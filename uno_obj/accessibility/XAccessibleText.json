@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:39+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:04+00:00",
   "name": "XAccessibleText",
   "type": "interface",
   "namespace": "com.sun.star.accessibility",
@@ -18,22 +18,39 @@
     ],
     "from_imports_typing": [
       [
+        "..accessible_scroll_type",
+        "AccessibleScrollType"
+      ],
+      [
         "..awt.rectangle",
         "Rectangle"
       ],
       [
         "..beans.property_value",
         "PropertyValue"
+      ],
+      [
+        "..awt.point",
+        "Point"
+      ],
+      [
+        ".text_segment",
+        "TextSegment"
       ]
     ],
     "quote": [
+      "TextSegment",
+      "Point",
+      "Rectangle",
       "typing.List[PropertyValue]",
-      "object",
-      "Rectangle"
+      "AccessibleScrollType",
+      "typing.List[str]"
     ],
     "typings": [
-      "typing.List[PropertyValue]"
+      "typing.List[PropertyValue]",
+      "typing.List[str]"
     ],
+    "requires_typing": true,
     "name": "XAccessibleText",
     "imports": [],
     "namespace": "com.sun.star.accessibility",
@@ -123,7 +140,8 @@
             "An empty sequence signals the callers interest in all the attributes. This is useful in two cases: a) Simply as a way to avoid passing a potentially large array to the called object or b) when the caller does not know what attributes the called objects supports but is interested in all of them nevertheless."
           ],
           "raises": [
-            "com.sun.star.lang.IndexOutOfBoundsException,"
+            "com.sun.star.lang.IndexOutOfBoundsException",
+            "com.sun.star.beans.UnknownPropertyException"
           ],
           "args": [
             [
@@ -146,7 +164,8 @@
             "",
             "Returns the bounding box of the indexed character.",
             "",
-            "The virtual character after the last character of the represented text, i.e. the one at position length is a special case. It represents the current input position and will therefore typically be queried by AT more often than other positions. Because it does not represent an existing character its bounding box is defined in relation to preceding characters. It should be roughly equivalent to the bounding box of some character when inserted at the end of the text. Its height typically being the maximal height of all the characters in the text or the height of the preceding character, its width being at least one pixel so that the bounding box is not degenerate.\n Note that the index \\\"length\\\" is not always valid. Whether it is or not is implementation dependent. It typically is when text is editable or otherwise when on the screen the caret can be placed behind the text. You can be sure that the index is valid after you have received an AccessibleEventId.CARET event for this index."
+            "The virtual character after the last character of the represented text, i.e. the one at position length is a special case. It represents the current input position and will therefore typically be queried by AT more often than other positions. Because it does not represent an existing character its bounding box is defined in relation to preceding characters. It should be roughly equivalent to the bounding box of some character when inserted at the end of the text. Its height typically being the maximal height of all the characters in the text or the height of the preceding character, its width being at least one pixel so that the bounding box is not degenerate.",
+            "Note that the index \\\"length\\\" is not always valid. Whether it is or not is implementation dependent. It typically is when text is editable or otherwise when on the screen the caret can be placed behind the text. You can be sure that the index is valid after you have received an AccessibleEventId.CARET event for this index."
           ],
           "raises": [
             "com.sun.star.lang.IndexOutOfBoundsException"
@@ -233,14 +252,15 @@
         },
         {
           "name": "getTextAtIndex",
-          "returns": "object",
+          "returns": "TextSegment",
           "desc": [
             "Get a text portion around the given position.",
             "",
             "Returns the substring of the specified text type that contains the character at the given index, if any. For example, given the text type AccessibleTextType.WORD, the word which contains the character at position nIndex is returned, or an empty string if no word is found at the that position."
           ],
           "raises": [
-            "com.sun.star.lang.IndexOutOfBoundsException,"
+            "com.sun.star.lang.IndexOutOfBoundsException",
+            "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
             [
@@ -257,7 +277,7 @@
         },
         {
           "name": "getTextBeforeIndex",
-          "returns": "object",
+          "returns": "TextSegment",
           "desc": [
             "Get a text portion before the given position.",
             "",
@@ -268,7 +288,8 @@
             "If the index is valid, but no suitable word (or other text type) is found, an empty text segment is returned."
           ],
           "raises": [
-            "com.sun.star.lang.IndexOutOfBoundsException,"
+            "com.sun.star.lang.IndexOutOfBoundsException",
+            "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
             [
@@ -285,7 +306,7 @@
         },
         {
           "name": "getTextBehindIndex",
-          "returns": "object",
+          "returns": "TextSegment",
           "desc": [
             "Get a text portion behind the given position.",
             "",
@@ -296,7 +317,8 @@
             "If the index is valid, but no suitable word (or other text type) is found, an empty string is returned."
           ],
           "raises": [
-            "com.sun.star.lang.IndexOutOfBoundsException,"
+            "com.sun.star.lang.IndexOutOfBoundsException",
+            "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
             [
@@ -365,7 +387,7 @@
             ],
             [
               "aScrollType",
-              "object",
+              "AccessibleScrollType",
               "in"
             ]
           ]

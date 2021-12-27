@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:50+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:10+00:00",
   "name": "XSQLOutput",
   "type": "interface",
   "namespace": "com.sun.star.sdbc",
@@ -16,9 +16,65 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
-    "quote": [],
-    "typings": [],
+    "from_imports_typing": [
+      [
+        ".x_array",
+        "XArray"
+      ],
+      [
+        "..util.date",
+        "Date"
+      ],
+      [
+        ".xsql_data",
+        "XSQLData"
+      ],
+      [
+        "..io.x_input_stream",
+        "XInputStream"
+      ],
+      [
+        ".x_struct",
+        "XStruct"
+      ],
+      [
+        "..util.date_time",
+        "DateTime"
+      ],
+      [
+        "..util.time",
+        "Time"
+      ],
+      [
+        ".x_clob",
+        "XClob"
+      ],
+      [
+        ".x_ref",
+        "XRef"
+      ],
+      [
+        ".x_blob",
+        "XBlob"
+      ]
+    ],
+    "quote": [
+      "typing.List[int]",
+      "Date",
+      "XRef",
+      "Time",
+      "XSQLData",
+      "XClob",
+      "DateTime",
+      "XArray",
+      "XBlob",
+      "XInputStream",
+      "XStruct"
+    ],
+    "typings": [
+      "typing.List[int]"
+    ],
+    "requires_typing": true,
     "name": "XSQLOutput",
     "imports": [],
     "namespace": "com.sun.star.sdbc",
@@ -30,7 +86,8 @@
       "",
       "This interface, used only for custom mapping, is used by the driver, and its methods are never directly invoked by a programmer.",
       "",
-      "When an object of a class implementing interface com.sun.star.sdbc.XSQLData is passed as an argument to a SQL statement, the JDBC driver calls com.sun.star.sdbc.SQLData.getSQLType() to determine the kind of SQL datum being passed to the database. \n The driver then creates an instance of XSQLOutput and passes it to the method com.sun.star.sdbc.XSQLData.writeSQL() . The method writeSQL in turn calls the appropriate XSQLOutput.writeXXX methods to write data from the com.sun.star.sdbc.XSQLData object to the XSQLOutput output stream as the representation of a SQL user-defined type."
+      "When an object of a class implementing interface com.sun.star.sdbc.XSQLData is passed as an argument to a SQL statement, the JDBC driver calls com.sun.star.sdbc.SQLData.getSQLType() to determine the kind of SQL datum being passed to the database.",
+      "The driver then creates an instance of XSQLOutput and passes it to the method com.sun.star.sdbc.XSQLData.writeSQL() . The method writeSQL in turn calls the appropriate XSQLOutput.writeXXX methods to write data from the com.sun.star.sdbc.XSQLData object to the XSQLOutput output stream as the representation of a SQL user-defined type."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1sdbc_1_1XSQLOutput.html",
     "items": {
@@ -47,7 +104,7 @@
           "args": [
             [
               "x",
-              "object",
+              "XArray",
               "in"
             ]
           ]
@@ -81,7 +138,7 @@
           "args": [
             [
               "x",
-              "object",
+              "XBlob",
               "in"
             ]
           ]
@@ -115,7 +172,7 @@
           "args": [
             [
               "x",
-              "object",
+              "int",
               "in"
             ]
           ]
@@ -132,7 +189,7 @@
           "args": [
             [
               "x",
-              "typing.List[byte]",
+              "typing.List[int]",
               "in"
             ]
           ]
@@ -166,7 +223,7 @@
           "args": [
             [
               "x",
-              "object",
+              "XClob",
               "in"
             ]
           ]
@@ -262,7 +319,8 @@
           "desc": [
             "writes to the stream the data contained in the given XSQLData object.",
             "",
-            "When the XSQLData object is NULL , this method writes an SQL NULL to the stream. Otherwise, it calls the com.sun.star.sdbc.XSQLData.writeSQL() method of the given object, which writes the object's attributes to the stream. The implementation of the method XSQLData.writeSQL() calls the appropriate XSQLOutput.writeXXX method(s) for writing each of the object's attributes in order. \n The attributes must be read from an com.sun.star.sdbc.XSQLInput input stream and written to an XSQLOutput output stream in the same order in which they were listed in the SQL definition of the user-defined type."
+            "When the XSQLData object is NULL , this method writes an SQL NULL to the stream. Otherwise, it calls the com.sun.star.sdbc.XSQLData.writeSQL() method of the given object, which writes the object's attributes to the stream. The implementation of the method XSQLData.writeSQL() calls the appropriate XSQLOutput.writeXXX method(s) for writing each of the object's attributes in order.",
+            "The attributes must be read from an com.sun.star.sdbc.XSQLInput input stream and written to an XSQLOutput output stream in the same order in which they were listed in the SQL definition of the user-defined type."
           ],
           "raises": [
             "SQLException"
@@ -270,7 +328,7 @@
           "args": [
             [
               "x",
-              "object",
+              "XSQLData",
               "in"
             ]
           ]
@@ -287,7 +345,7 @@
           "args": [
             [
               "x",
-              "object",
+              "XRef",
               "in"
             ]
           ]
@@ -338,7 +396,7 @@
           "args": [
             [
               "x",
-              "object",
+              "XStruct",
               "in"
             ]
           ]

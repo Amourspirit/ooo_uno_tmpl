@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:52:12+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:03+00:00",
   "name": "XRegistryKey",
   "type": "interface",
   "namespace": "com.sun.star.registry",
@@ -22,10 +22,6 @@
         "RegistryValueType"
       ],
       [
-        ".byte",
-        "byte"
-      ],
-      [
         ".registry_key_type",
         "RegistryKeyType"
       ],
@@ -34,6 +30,20 @@
         "XRegistryKey"
       ]
     ],
+    "quote": [
+      "XRegistryKey",
+      "typing.List[int]",
+      "RegistryKeyType",
+      "typing.List[XRegistryKey]",
+      "RegistryValueType",
+      "typing.List[str]"
+    ],
+    "typings": [
+      "typing.List[XRegistryKey]",
+      "typing.List[int]",
+      "typing.List[str]"
+    ],
+    "requires_typing": true,
     "name": "XRegistryKey",
     "imports": [],
     "namespace": "com.sun.star.registry",
@@ -70,7 +80,13 @@
           "raises": [
             "com.sun.star.registry.InvalidRegistryException"
           ],
-          "args": []
+          "args": [
+            [
+              "aKeyName",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "createLink",
@@ -81,7 +97,18 @@
           "raises": [
             "com.sun.star.registry.InvalidRegistryException"
           ],
-          "args": []
+          "args": [
+            [
+              "aLinkName",
+              "str",
+              "in"
+            ],
+            [
+              "aLinkTarget",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "deleteKey",
@@ -92,7 +119,13 @@
           "raises": [
             "com.sun.star.registry.InvalidRegistryException"
           ],
-          "args": []
+          "args": [
+            [
+              "rKeyName",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "deleteLink",
@@ -103,14 +136,21 @@
           "raises": [
             "com.sun.star.registry.InvalidRegistryException"
           ],
-          "args": []
+          "args": [
+            [
+              "rLinkName",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getAsciiListValue",
           "returns": "typing.List[str]",
           "desc": [],
           "raises": [
-            "com.sun.star.registry.InvalidRegistryException,"
+            "com.sun.star.registry.InvalidRegistryException",
+            "com.sun.star.registry.InvalidValueException"
           ],
           "args": []
         },
@@ -119,16 +159,18 @@
           "returns": "str",
           "desc": [],
           "raises": [
-            "com.sun.star.registry.InvalidRegistryException,"
+            "com.sun.star.registry.InvalidRegistryException",
+            "com.sun.star.registry.InvalidValueException"
           ],
           "args": []
         },
         {
           "name": "getBinaryValue",
-          "returns": "'typing.List[byte]'",
+          "returns": "typing.List[int]",
           "desc": [],
           "raises": [
-            "com.sun.star.registry.InvalidRegistryException,"
+            "com.sun.star.registry.InvalidRegistryException",
+            "com.sun.star.registry.InvalidValueException"
           ],
           "args": []
         },
@@ -148,7 +190,13 @@
           "raises": [
             "com.sun.star.registry.InvalidRegistryException"
           ],
-          "args": []
+          "args": [
+            [
+              "rKeyName",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getLinkTarget",
@@ -157,14 +205,21 @@
           "raises": [
             "com.sun.star.registry.InvalidRegistryException"
           ],
-          "args": []
+          "args": [
+            [
+              "rLinkName",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getLongListValue",
           "returns": "typing.List[int]",
           "desc": [],
           "raises": [
-            "com.sun.star.registry.InvalidRegistryException,"
+            "com.sun.star.registry.InvalidRegistryException",
+            "com.sun.star.registry.InvalidValueException"
           ],
           "args": []
         },
@@ -173,7 +228,8 @@
           "returns": "int",
           "desc": [],
           "raises": [
-            "com.sun.star.registry.InvalidRegistryException,"
+            "com.sun.star.registry.InvalidRegistryException",
+            "com.sun.star.registry.InvalidValueException"
           ],
           "args": []
         },
@@ -184,14 +240,21 @@
           "raises": [
             "com.sun.star.registry.InvalidRegistryException"
           ],
-          "args": []
+          "args": [
+            [
+              "aKeyName",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getStringListValue",
           "returns": "typing.List[str]",
           "desc": [],
           "raises": [
-            "com.sun.star.registry.InvalidRegistryException,"
+            "com.sun.star.registry.InvalidRegistryException",
+            "com.sun.star.registry.InvalidValueException"
           ],
           "args": []
         },
@@ -200,7 +263,8 @@
           "returns": "str",
           "desc": [],
           "raises": [
-            "com.sun.star.registry.InvalidRegistryException,"
+            "com.sun.star.registry.InvalidRegistryException",
+            "com.sun.star.registry.InvalidValueException"
           ],
           "args": []
         },
@@ -244,11 +308,17 @@
           "raises": [
             "com.sun.star.registry.InvalidRegistryException"
           ],
-          "args": []
+          "args": [
+            [
+              "aKeyName",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "openKeys",
-          "returns": "'typing.List[XRegistryKey]'",
+          "returns": "typing.List[XRegistryKey]",
           "desc": [
             "opens all subkeys of the key.",
             "",
@@ -270,7 +340,13 @@
           "raises": [
             "com.sun.star.registry.InvalidRegistryException"
           ],
-          "args": []
+          "args": [
+            [
+              "seqValue",
+              "typing.List[str]",
+              "in"
+            ]
+          ]
         },
         {
           "name": "setAsciiValue",
@@ -283,7 +359,13 @@
           "raises": [
             "com.sun.star.registry.InvalidRegistryException"
           ],
-          "args": []
+          "args": [
+            [
+              "value",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "setBinaryValue",
@@ -296,7 +378,13 @@
           "raises": [
             "com.sun.star.registry.InvalidRegistryException"
           ],
-          "args": []
+          "args": [
+            [
+              "value",
+              "typing.List[int]",
+              "in"
+            ]
+          ]
         },
         {
           "name": "setLongListValue",
@@ -309,7 +397,13 @@
           "raises": [
             "com.sun.star.registry.InvalidRegistryException"
           ],
-          "args": []
+          "args": [
+            [
+              "seqValue",
+              "typing.List[int]",
+              "in"
+            ]
+          ]
         },
         {
           "name": "setLongValue",
@@ -322,7 +416,13 @@
           "raises": [
             "com.sun.star.registry.InvalidRegistryException"
           ],
-          "args": []
+          "args": [
+            [
+              "value",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "setStringListValue",
@@ -335,7 +435,13 @@
           "raises": [
             "com.sun.star.registry.InvalidRegistryException"
           ],
-          "args": []
+          "args": [
+            [
+              "seqValue",
+              "typing.List[str]",
+              "in"
+            ]
+          ]
         },
         {
           "name": "setStringValue",
@@ -348,7 +454,13 @@
           "raises": [
             "com.sun.star.registry.InvalidRegistryException"
           ],
-          "args": []
+          "args": [
+            [
+              "value",
+              "str",
+              "in"
+            ]
+          ]
         }
       ],
       "properties": [

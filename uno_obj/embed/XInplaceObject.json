@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:31+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:38+00:00",
   "name": "XInplaceObject",
   "type": "interface",
   "namespace": "com.sun.star.embed",
@@ -16,9 +16,24 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
-    "quote": [],
-    "typings": [],
+    "from_imports_typing": [
+      [
+        "..awt.rectangle",
+        "Rectangle"
+      ],
+      [
+        "..awt.key_event",
+        "KeyEvent"
+      ]
+    ],
+    "quote": [
+      "typing.List[KeyEvent]",
+      "Rectangle"
+    ],
+    "typings": [
+      "typing.List[KeyEvent]"
+    ],
+    "requires_typing": true,
     "name": "XInplaceObject",
     "imports": [],
     "namespace": "com.sun.star.embed",
@@ -40,7 +55,8 @@
             "In case container wants to show a modal dialog it should disable modeless of embedded object dialogs with this call. Later the same call can be used to enable it."
           ],
           "raises": [
-            "com.sun.star.embed.WrongStateException,"
+            "com.sun.star.embed.WrongStateException",
+            "com.sun.star.uno.Exception"
           ],
           "args": [
             [
@@ -61,7 +77,8 @@
             "The method must activate object repainting."
           ],
           "raises": [
-            "com.sun.star.embed.WrongStateException,"
+            "com.sun.star.embed.WrongStateException",
+            "com.sun.star.uno.Exception"
           ],
           "args": [
             [

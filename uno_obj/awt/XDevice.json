@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:13+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:18+00:00",
   "name": "XDevice",
   "type": "interface",
   "namespace": "com.sun.star.awt",
@@ -18,27 +18,52 @@
     ],
     "from_imports_typing": [
       [
-        ".device_info",
-        "DeviceInfo"
+        ".x_device",
+        "XDevice"
       ],
       [
         ".font_descriptor",
         "FontDescriptor"
       ],
       [
+        ".x_graphics",
+        "XGraphics"
+      ],
+      [
         ".x_font",
         "XFont"
+      ],
+      [
+        ".x_bitmap",
+        "XBitmap"
+      ],
+      [
+        ".x_display_bitmap",
+        "XDisplayBitmap"
+      ],
+      [
+        ".device_info",
+        "DeviceInfo"
+      ],
+      [
+        ".font_descriptor",
+        "FontDescriptor"
       ]
     ],
     "quote": [
-      "typing.List[FontDescriptor]",
-      "object",
       "DeviceInfo",
-      "XFont"
+      "XGraphics",
+      "XDisplayBitmap",
+      "XDevice",
+      "typing.List[FontDescriptor]",
+      "XFont",
+      "XBitmap",
+      "FontDescriptor"
     ],
     "typings": [
       "typing.List[FontDescriptor]"
     ],
+    "requires_typing": true,
     "name": "XDevice",
     "imports": [],
     "namespace": "com.sun.star.awt",
@@ -53,7 +78,7 @@
       "methods": [
         {
           "name": "createBitmap",
-          "returns": "object",
+          "returns": "XBitmap",
           "desc": [
             "creates a bitmap with the current device depth.",
             "",
@@ -85,7 +110,7 @@
         },
         {
           "name": "createDevice",
-          "returns": "object",
+          "returns": "XDevice",
           "desc": [
             "creates a new device which is compatible with this one.",
             "",
@@ -107,7 +132,7 @@
         },
         {
           "name": "createDisplayBitmap",
-          "returns": "object",
+          "returns": "XDisplayBitmap",
           "desc": [
             "creates a device compatible bitmap.",
             "",
@@ -117,14 +142,14 @@
           "args": [
             [
               "Bitmap",
-              "object",
+              "XBitmap",
               "in"
             ]
           ]
         },
         {
           "name": "createGraphics",
-          "returns": "object",
+          "returns": "XGraphics",
           "desc": [
             "creates a new graphics whose output operation is directed to this device."
           ],
@@ -141,7 +166,7 @@
           "args": [
             [
               "aDescriptor",
-              "object",
+              "FontDescriptor",
               "in"
             ]
           ]

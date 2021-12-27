@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:30+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:38+00:00",
   "name": "XEmbedObjectCreator",
   "type": "interface",
   "namespace": "com.sun.star.embed",
@@ -16,11 +16,27 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
-    "quote": [
-      "XInterface"
+    "from_imports_typing": [
+      [
+        "..beans.property_value",
+        "PropertyValue"
+      ],
+      [
+        ".x_storage",
+        "XStorage"
+      ]
     ],
-    "typings": [],
+    "quote": [
+      "XInterface",
+      "XStorage",
+      "typing.List[int]",
+      "typing.List[PropertyValue]"
+    ],
+    "typings": [
+      "typing.List[PropertyValue]",
+      "typing.List[int]"
+    ],
+    "requires_typing": true,
     "name": "XEmbedObjectCreator",
     "imports": [],
     "namespace": "com.sun.star.embed",
@@ -44,7 +60,10 @@
             "The specified entry must exists and the object should be loaded from the entry. In case a persistent representation of a link is specified, the result object will be a link."
           ],
           "raises": [
-            "com.sun.star.lang.IllegalArgumentException,"
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.container.NoSuchElementException",
+            "com.sun.star.io.IOException",
+            "com.sun.star.uno.Exception"
           ],
           "args": [
             [
@@ -78,7 +97,9 @@
             "In case specified entry exists it's contents are ignored and will be overwritten on storing."
           ],
           "raises": [
-            "com.sun.star.lang.IllegalArgumentException,"
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.io.IOException",
+            "com.sun.star.uno.Exception"
           ],
           "args": [
             [
@@ -112,12 +133,14 @@
             "In case specified entry exists it's contents are ignored and will be overwritten on storing."
           ],
           "raises": [
-            "com.sun.star.lang.IllegalArgumentException,"
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.io.IOException",
+            "com.sun.star.uno.Exception"
           ],
           "args": [
             [
               "aClassID",
-              "typing.List[byte]",
+              "typing.List[int]",
               "in"
             ],
             [

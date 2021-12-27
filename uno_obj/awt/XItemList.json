@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:46:17+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:19+00:00",
   "name": "XItemList",
   "type": "interface",
   "namespace": "com.sun.star.awt",
@@ -10,12 +10,39 @@
   },
   "writer_args": {},
   "data": {
-    "from_imports": [],
-    "from_imports_typing": [],
+    "from_imports": [
+      [
+        ".uno_control_combo_box_model",
+        "UnoControlComboBoxModel"
+      ],
+      [
+        ".uno_control_list_box_model",
+        "UnoControlListBoxModel"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".x_item_list_listener",
+        "XItemListListener"
+      ]
+    ],
+    "quote": [
+      "XItemListListener",
+      "typing.List[typing.Tuple[str, str]]",
+      "typing.Tuple[str, str]"
+    ],
+    "typings": [
+      "typing.List[typing.Tuple[str, str]]",
+      "typing.Tuple[str, str]"
+    ],
+    "requires_typing": true,
     "name": "XItemList",
     "imports": [],
     "namespace": "com.sun.star.awt",
-    "extends": [],
+    "extends": [
+      "com.sun.star.awt.UnoControlComboBoxModel",
+      "com.sun.star.awt.UnoControlListBoxModel"
+    ],
     "desc": [
       "provides convenient access to the list of items in a list box"
     ],
@@ -29,7 +56,13 @@
             "registers a listener which is notified about changes in the item list."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "Listener",
+              "XItemListListener",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getAllItems",
@@ -49,7 +82,13 @@
           "raises": [
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
-          "args": []
+          "args": [
+            [
+              "Position",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getItemImage",
@@ -60,7 +99,13 @@
           "raises": [
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
-          "args": []
+          "args": [
+            [
+              "Position",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getItemText",
@@ -71,7 +116,13 @@
           "raises": [
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
-          "args": []
+          "args": [
+            [
+              "Position",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getItemTextAndImage",
@@ -82,7 +133,13 @@
           "raises": [
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
-          "args": []
+          "args": [
+            [
+              "Position",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "insertItem",
@@ -93,7 +150,23 @@
           "raises": [
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
-          "args": []
+          "args": [
+            [
+              "Position",
+              "int",
+              "in"
+            ],
+            [
+              "ItemText",
+              "str",
+              "in"
+            ],
+            [
+              "ItemImageURL",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "insertItemImage",
@@ -104,7 +177,18 @@
           "raises": [
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
-          "args": []
+          "args": [
+            [
+              "Position",
+              "int",
+              "in"
+            ],
+            [
+              "ItemImageURL",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "insertItemText",
@@ -115,7 +199,18 @@
           "raises": [
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
-          "args": []
+          "args": [
+            [
+              "Position",
+              "int",
+              "in"
+            ],
+            [
+              "ItemText",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "removeAllItems",
@@ -135,7 +230,13 @@
           "raises": [
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
-          "args": []
+          "args": [
+            [
+              "Position",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "removeItemListListener",
@@ -144,7 +245,13 @@
             "revokes a listener which is notified about changes in the item list."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "Listener",
+              "XItemListListener",
+              "in"
+            ]
+          ]
         },
         {
           "name": "setItemData",
@@ -157,7 +264,18 @@
           "raises": [
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
-          "args": []
+          "args": [
+            [
+              "Position",
+              "int",
+              "in"
+            ],
+            [
+              "ItemData",
+              "object",
+              "in"
+            ]
+          ]
         },
         {
           "name": "setItemImage",
@@ -168,7 +286,18 @@
           "raises": [
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
-          "args": []
+          "args": [
+            [
+              "Position",
+              "int",
+              "in"
+            ],
+            [
+              "ItemImageURL",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "setItemText",
@@ -179,7 +308,18 @@
           "raises": [
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
-          "args": []
+          "args": [
+            [
+              "Position",
+              "int",
+              "in"
+            ],
+            [
+              "ItemText",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "setItemTextAndImage",
@@ -190,7 +330,23 @@
           "raises": [
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
-          "args": []
+          "args": [
+            [
+              "Position",
+              "int",
+              "in"
+            ],
+            [
+              "ItemText",
+              "str",
+              "in"
+            ],
+            [
+              "ItemImageURL",
+              "str",
+              "in"
+            ]
+          ]
         }
       ],
       "properties": [

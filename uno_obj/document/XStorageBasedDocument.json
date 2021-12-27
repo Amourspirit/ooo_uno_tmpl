@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:40+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:05+00:00",
   "name": "XStorageBasedDocument",
   "type": "interface",
   "namespace": "com.sun.star.document",
@@ -18,14 +18,27 @@
     ],
     "from_imports_typing": [
       [
+        ".x_storage_change_listener",
+        "XStorageChangeListener"
+      ],
+      [
+        "..beans.property_value",
+        "PropertyValue"
+      ],
+      [
         "..embed.x_storage",
         "XStorage"
       ]
     ],
     "quote": [
-      "XStorage"
+      "XStorage",
+      "XStorageChangeListener",
+      "typing.List[PropertyValue]"
     ],
-    "typings": [],
+    "typings": [
+      "typing.List[PropertyValue]"
+    ],
+    "requires_typing": true,
     "name": "XStorageBasedDocument",
     "imports": [],
     "namespace": "com.sun.star.document",
@@ -48,7 +61,7 @@
           "args": [
             [
               "xListener",
-              "object",
+              "XStorageChangeListener",
               "in"
             ]
           ]
@@ -60,7 +73,8 @@
             "allows to get the storage the document is based on."
           ],
           "raises": [
-            "com.sun.star.io.IOException,"
+            "com.sun.star.io.IOException",
+            "com.sun.star.uno.Exception"
           ],
           "args": []
         },
@@ -71,7 +85,10 @@
             "lets the document load itself using provided storage."
           ],
           "raises": [
-            "com.sun.star.lang.IllegalArgumentException,"
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.frame.DoubleInitializationException",
+            "com.sun.star.io.IOException",
+            "com.sun.star.uno.Exception"
           ],
           "args": [
             [
@@ -96,7 +113,7 @@
           "args": [
             [
               "xListener",
-              "object",
+              "XStorageChangeListener",
               "in"
             ]
           ]
@@ -108,7 +125,9 @@
             "lets the document store itself to the provided storage."
           ],
           "raises": [
-            "com.sun.star.lang.IllegalArgumentException,"
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.io.IOException",
+            "com.sun.star.uno.Exception"
           ],
           "args": [
             [
@@ -130,7 +149,9 @@
             "allows to switch the document to the provided storage."
           ],
           "raises": [
-            "com.sun.star.lang.IllegalArgumentException,"
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.io.IOException",
+            "com.sun.star.uno.Exception"
           ],
           "args": [
             [

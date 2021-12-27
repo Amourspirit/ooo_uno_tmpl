@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:16+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:19+00:00",
   "name": "XSystemChildFactory",
   "type": "interface",
   "namespace": "com.sun.star.awt",
@@ -16,11 +16,20 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
-    "quote": [
-      "object"
+    "from_imports_typing": [
+      [
+        ".x_window_peer",
+        "XWindowPeer"
+      ]
     ],
-    "typings": [],
+    "quote": [
+      "XWindowPeer",
+      "typing.List[int]"
+    ],
+    "typings": [
+      "typing.List[int]"
+    ],
+    "requires_typing": true,
     "name": "XSystemChildFactory",
     "imports": [],
     "namespace": "com.sun.star.awt",
@@ -35,11 +44,13 @@
       "methods": [
         {
           "name": "createSystemChild",
-          "returns": "object",
+          "returns": "XWindowPeer",
           "desc": [
             "creates a system child window.",
             "",
-            "You must check the machine ID and the process ID.\n WIN32: HWND.\n WIN16: HWND.",
+            "You must check the machine ID and the process ID.",
+            "WIN32: HWND.",
+            "WIN16: HWND.",
             "",
             "JAVA: global reference to a java.awt.Component object provided from the JNI-API.",
             "",
@@ -54,7 +65,7 @@
             ],
             [
               "ProcessId",
-              "typing.List[byte]",
+              "typing.List[int]",
               "in"
             ],
             [

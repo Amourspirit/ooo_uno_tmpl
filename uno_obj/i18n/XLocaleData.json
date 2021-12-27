@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:11+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:06+00:00",
   "name": "XLocaleData",
   "type": "interface",
   "namespace": "com.sun.star.i18n",
@@ -18,43 +18,59 @@
     ],
     "from_imports_typing": [
       [
-        ".implementation",
-        "Implementation"
+        ".format_element",
+        "FormatElement"
+      ],
+      [
+        ".language_country_info",
+        "LanguageCountryInfo"
+      ],
+      [
+        ".locale_data_item",
+        "LocaleDataItem"
       ],
       [
         ".calendar",
         "Calendar"
       ],
       [
-        ".currency",
-        "Currency"
-      ],
-      [
         "..lang.locale",
         "Locale"
       ],
       [
-        ".format_element",
-        "FormatElement"
+        ".forbidden_characters",
+        "ForbiddenCharacters"
+      ],
+      [
+        ".implementation",
+        "Implementation"
+      ],
+      [
+        ".currency",
+        "Currency"
       ]
     ],
     "quote": [
       "typing.List[Calendar]",
-      "object",
-      "typing.List[Locale]",
       "typing.List[FormatElement]",
-      "typing.List[Currency]",
+      "ForbiddenCharacters",
+      "Locale",
+      "LanguageCountryInfo",
+      "typing.List[Locale]",
+      "LocaleDataItem",
+      "typing.List[str]",
       "typing.List[Implementation]",
-      "typing.List[str]"
+      "typing.List[Currency]"
     ],
     "typings": [
       "typing.List[Calendar]",
-      "typing.List[Locale]",
       "typing.List[FormatElement]",
-      "typing.List[Currency]",
+      "typing.List[Locale]",
       "typing.List[Implementation]",
+      "typing.List[Currency]",
       "typing.List[str]"
     ],
+    "requires_typing": true,
     "name": "XLocaleData",
     "imports": [],
     "namespace": "com.sun.star.i18n",
@@ -155,7 +171,7 @@
         },
         {
           "name": "getForbiddenCharacters",
-          "returns": "object",
+          "returns": "ForbiddenCharacters",
           "desc": [
             "returns all LC_MISC forbidden characters for a locale."
           ],
@@ -170,7 +186,7 @@
         },
         {
           "name": "getLanguageCountryInfo",
-          "returns": "object",
+          "returns": "LanguageCountryInfo",
           "desc": [
             "returns the LC_INFO locale information."
           ],
@@ -185,7 +201,7 @@
         },
         {
           "name": "getLocaleItem",
-          "returns": "object",
+          "returns": "LocaleDataItem",
           "desc": [
             "returns LC_CTYPE separators and markers."
           ],

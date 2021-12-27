@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:06+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:40+00:00",
   "name": "XMultiLayerStratum",
   "type": "interface",
   "namespace": "com.sun.star.configuration.backend",
@@ -18,19 +18,29 @@
     ],
     "from_imports_typing": [
       [
+        ".x_updatable_layer",
+        "XUpdatableLayer"
+      ],
+      [
+        ".x_layer",
+        "XLayer"
+      ],
+      [
         ".x_layer",
         "XLayer"
       ]
     ],
     "quote": [
       "typing.List[XLayer]",
-      "object",
+      "XUpdatableLayer",
+      "XLayer",
       "typing.List[str]"
     ],
     "typings": [
       "typing.List[XLayer]",
       "typing.List[str]"
     ],
+    "requires_typing": true,
     "name": "XMultiLayerStratum",
     "imports": [],
     "namespace": "com.sun.star.configuration.backend",
@@ -51,7 +61,7 @@
       "methods": [
         {
           "name": "getLayer",
-          "returns": "object",
+          "returns": "XLayer",
           "desc": [
             "retrieves a layer associated to a layer id, if newer than indicated.",
             "",
@@ -64,7 +74,8 @@
             "The format and meaning of a timestamp depends on the implementation. Timestamps can be obtained using com.sun.star.util.XTimeStamped.getTimestamp()."
           ],
           "raises": [
-            "BackendAccessException,"
+            "BackendAccessException",
+            "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
             [
@@ -98,7 +109,8 @@
             "For layers that are newer than indicated by the timestamp, the list contains a NULL element."
           ],
           "raises": [
-            "BackendAccessException,"
+            "BackendAccessException",
+            "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
             [
@@ -134,7 +146,8 @@
             "For layers that are newer than indicated by the corresponding timestamp, the list contains a NULL element."
           ],
           "raises": [
-            "BackendAccessException,"
+            "BackendAccessException",
+            "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
             [
@@ -151,14 +164,16 @@
         },
         {
           "name": "getUpdatableLayer",
-          "returns": "object",
+          "returns": "XUpdatableLayer",
           "desc": [
             "retrieves a writable representation of the layer associated to a layer id.",
             "",
             "A layer id for writing can be obtained from XMultiLayerStratum.getUpdateLayerId()."
           ],
           "raises": [
-            "BackendAccessException,"
+            "BackendAccessException",
+            "com.sun.star.lang.NoSupportException",
+            "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
             [
@@ -177,7 +192,9 @@
             "The layer id returned is one of the layer ids obtained from XMultiLayerStratum.listLayerIds() for the same component and entity."
           ],
           "raises": [
-            "BackendAccessException,"
+            "BackendAccessException",
+            "com.sun.star.lang.NoSupportException",
+            "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
             [
@@ -201,7 +218,8 @@
             "The list is ordered by priority. Typically the most general layers (global defaults, entire organization) are first, more specific layers (associated to specific groups or roles) are next and the entity's own data is last."
           ],
           "raises": [
-            "BackendAccessException,"
+            "BackendAccessException",
+            "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
             [

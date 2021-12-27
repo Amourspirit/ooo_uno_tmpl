@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:53+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:15+00:00",
   "name": "XIntegerBitmapColorSpace",
   "type": "interface",
   "namespace": "com.sun.star.rendering",
@@ -18,37 +18,37 @@
     ],
     "from_imports_typing": [
       [
-        ".byte",
-        "byte"
+        ".argb_color",
+        "ARGBColor"
       ],
       [
         ".color_component",
         "ColorComponent"
       ],
       [
-        ".argb_color",
-        "ARGBColor"
-      ],
-      [
         ".rgb_color",
         "RGBColor"
+      ],
+      [
+        ".x_integer_bitmap_color_space",
+        "XIntegerBitmapColorSpace"
       ]
     ],
     "quote": [
-      "typing.List[RGBColor]",
+      "XIntegerBitmapColorSpace",
+      "typing.List[int]",
       "typing.List[ColorComponent]",
-      "object",
+      "XColorSpace",
       "typing.List[ARGBColor]",
-      "typing.List[byte]",
-      "typing.List[int]"
+      "typing.List[RGBColor]"
     ],
     "typings": [
-      "typing.List[RGBColor]",
-      "typing.List[ColorComponent]",
       "typing.List[ARGBColor]",
-      "typing.List[byte]",
-      "typing.List[int]"
+      "typing.List[RGBColor]",
+      "typing.List[int]",
+      "typing.List[ColorComponent]"
     ],
+    "requires_typing": true,
     "name": "XIntegerBitmapColorSpace",
     "imports": [],
     "namespace": "com.sun.star.rendering",
@@ -77,19 +77,19 @@
           "args": [
             [
               "deviceColor",
-              "typing.List[byte]",
+              "typing.List[int]",
               "in"
             ],
             [
               "targetColorSpace",
-              "object",
+              "XColorSpace",
               "in"
             ]
           ]
         },
         {
           "name": "convertIntegerFromARGB",
-          "returns": "typing.List[byte]",
+          "returns": "typing.List[int]",
           "desc": [
             "Convert sRGB color with linear alpha into this color space.",
             "",
@@ -108,7 +108,7 @@
         },
         {
           "name": "convertIntegerFromPARGB",
-          "returns": "typing.List[byte]",
+          "returns": "typing.List[int]",
           "desc": [
             "Convert premultiplied sRGB color with linear alpha into this color space.",
             "",
@@ -127,7 +127,7 @@
         },
         {
           "name": "convertIntegerFromRGB",
-          "returns": "typing.List[byte]",
+          "returns": "typing.List[int]",
           "desc": [
             "Convert sRGB color to an integer representation in this color space.",
             "",
@@ -158,7 +158,7 @@
           "args": [
             [
               "deviceColor",
-              "typing.List[byte]",
+              "typing.List[int]",
               "in"
             ]
           ]
@@ -177,7 +177,7 @@
           "args": [
             [
               "deviceColor",
-              "typing.List[byte]",
+              "typing.List[int]",
               "in"
             ]
           ]
@@ -196,14 +196,14 @@
           "args": [
             [
               "deviceColor",
-              "typing.List[byte]",
+              "typing.List[int]",
               "in"
             ]
           ]
         },
         {
           "name": "convertToIntegerColorSpace",
-          "returns": "typing.List[byte]",
+          "returns": "typing.List[int]",
           "desc": [
             "Convert integer bitmap color to integer bitmap color of another integer bitmap color space.",
             "",
@@ -215,12 +215,12 @@
           "args": [
             [
               "deviceColor",
-              "typing.List[byte]",
+              "typing.List[int]",
               "in"
             ],
             [
               "targetColorSpace",
-              "object",
+              "XIntegerBitmapColorSpace",
               "in"
             ]
           ]
@@ -249,7 +249,7 @@
         },
         {
           "name": "getEndianness",
-          "returns": "object",
+          "returns": "int",
           "desc": [
             "Query whether color data bytes need to be swapped."
           ],

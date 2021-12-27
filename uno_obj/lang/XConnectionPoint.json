@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:45+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:06+00:00",
   "name": "XConnectionPoint",
   "type": "interface",
   "namespace": "com.sun.star.lang",
@@ -24,11 +24,13 @@
     ],
     "quote": [
       "XConnectionPointContainer",
-      "typing.List[XInterface]"
+      "typing.List[XInterface]",
+      "XInterface"
     ],
     "typings": [
       "typing.List[XInterface]"
     ],
+    "requires_typing": true,
     "name": "XConnectionPoint",
     "imports": [],
     "namespace": "com.sun.star.lang",
@@ -60,7 +62,8 @@
             "A few add...Listener methods need additional parameters to add listeners or throw exceptions. One of these methods is com.sun.star.beans.XPropertySet.addPropertyChangeListener(). We ignore the problem in this interface. A solution must be provided in an additional XConnectionPoint interface."
           ],
           "raises": [
-            "com.sun.star.lang.ListenerExistException,"
+            "com.sun.star.lang.ListenerExistException",
+            "com.sun.star.lang.InvalidListenerException"
           ],
           "args": [
             [

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:05:01+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:27+00:00",
   "name": "XTransferable",
   "type": "interface",
   "namespace": "com.sun.star.datatransfer",
@@ -20,14 +20,20 @@
       [
         ".data_flavor",
         "DataFlavor"
+      ],
+      [
+        ".data_flavor",
+        "DataFlavor"
       ]
     ],
     "quote": [
-      "typing.List[DataFlavor]"
+      "typing.List[DataFlavor]",
+      "DataFlavor"
     ],
     "typings": [
       "typing.List[DataFlavor]"
     ],
+    "requires_typing": true,
     "name": "XTransferable",
     "imports": [],
     "namespace": "com.sun.star.datatransfer",
@@ -47,12 +53,13 @@
             "Called by a data consumer to obtain data from the source in a specified format."
           ],
           "raises": [
-            "UnsupportedFlavorException,"
+            "UnsupportedFlavorException",
+            "com.sun.star.io.IOException"
           ],
           "args": [
             [
               "aFlavor",
-              "object",
+              "DataFlavor",
               "in"
             ]
           ]
@@ -80,7 +87,7 @@
           "args": [
             [
               "aFlavor",
-              "object",
+              "DataFlavor",
               "in"
             ]
           ]

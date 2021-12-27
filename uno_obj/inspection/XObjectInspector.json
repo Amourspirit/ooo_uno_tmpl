@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:46:35+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:27+00:00",
   "name": "XObjectInspector",
   "type": "interface",
   "namespace": "com.sun.star.inspection",
@@ -12,15 +12,37 @@
   "data": {
     "from_imports": [
       [
-        "..frame.x_dispatch_provider",
-        "XDispatchProvider"
-      ],
-      [
         "..frame.x_controller",
         "XController"
+      ],
+      [
+        "..frame.x_dispatch_provider",
+        "XDispatchProvider"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_object_inspector_model",
+        "XObjectInspectorModel"
+      ],
+      [
+        "..uno.x_interface",
+        "XInterface"
+      ],
+      [
+        ".x_object_inspector_ui",
+        "XObjectInspectorUI"
+      ]
+    ],
+    "quote": [
+      "typing.List[XInterface]",
+      "XObjectInspectorUI",
+      "XObjectInspectorModel"
+    ],
+    "typings": [
+      "typing.List[XInterface]"
+    ],
+    "requires_typing": true,
     "name": "XObjectInspector",
     "imports": [],
     "namespace": "com.sun.star.inspection",
@@ -51,13 +73,19 @@
           "raises": [
             "com.sun.star.util.VetoException"
           ],
-          "args": []
+          "args": [
+            [
+              "Objects",
+              "typing.List[XInterface]",
+              "in"
+            ]
+          ]
         }
       ],
       "properties": [
         {
           "name": "InspectorModel",
-          "returns": "object",
+          "returns": "XObjectInspectorModel",
           "desc": [
             "provides access to the current model of the inspector",
             "",
@@ -72,7 +100,7 @@
         },
         {
           "name": "InspectorUI",
-          "returns": "object",
+          "returns": "XObjectInspectorUI",
           "desc": [
             "provides access to the user interface of the object inspector.",
             "",

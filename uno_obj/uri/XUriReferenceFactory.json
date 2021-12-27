@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:05+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:21+00:00",
   "name": "XUriReferenceFactory",
   "type": "interface",
   "namespace": "com.sun.star.uri",
@@ -16,11 +16,22 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_uri_reference",
+        "XUriReference"
+      ],
+      [
+        "..relative_uri_excess_parent_segments",
+        "RelativeUriExcessParentSegments"
+      ]
+    ],
     "quote": [
-      "object"
+      "RelativeUriExcessParentSegments",
+      "XUriReference"
     ],
     "typings": [],
+    "requires_typing": true,
     "name": "XUriReferenceFactory",
     "imports": [],
     "namespace": "com.sun.star.uri",
@@ -41,7 +52,7 @@
       "methods": [
         {
           "name": "makeAbsolute",
-          "returns": "object",
+          "returns": "XUriReference",
           "desc": [
             "resolves a relative URI reference to absolute form."
           ],
@@ -49,12 +60,12 @@
           "args": [
             [
               "baseUriReference",
-              "object",
+              "XUriReference",
               "in"
             ],
             [
               "uriReference",
-              "object",
+              "XUriReference",
               "in"
             ],
             [
@@ -64,14 +75,14 @@
             ],
             [
               "excessParentSegments",
-              "object",
+              "RelativeUriExcessParentSegments",
               "in"
             ]
           ]
         },
         {
           "name": "makeRelative",
-          "returns": "object",
+          "returns": "XUriReference",
           "desc": [
             "changes an absolute URI reference to relative form."
           ],
@@ -79,12 +90,12 @@
           "args": [
             [
               "baseUriReference",
-              "object",
+              "XUriReference",
               "in"
             ],
             [
               "uriReference",
-              "object",
+              "XUriReference",
               "in"
             ],
             [
@@ -106,7 +117,7 @@
         },
         {
           "name": "parse",
-          "returns": "object",
+          "returns": "XUriReference",
           "desc": [
             "parses the textual representation of a URI reference."
           ],

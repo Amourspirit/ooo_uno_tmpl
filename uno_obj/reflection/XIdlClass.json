@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:52+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:33+00:00",
   "name": "XIdlClass",
   "type": "interface",
   "namespace": "com.sun.star.reflection",
@@ -22,35 +22,55 @@
         "XIdlMethod"
       ],
       [
-        "..uno.type_class",
-        "TypeClass"
-      ],
-      [
-        ".x_idl_field",
-        "XIdlField"
+        "..uno.uik",
+        "Uik"
       ],
       [
         ".x_idl_class",
         "XIdlClass"
       ],
       [
-        "..uno.uik",
-        "Uik"
+        ".x_idl_class",
+        "XIdlClass"
+      ],
+      [
+        ".x_idl_array",
+        "XIdlArray"
+      ],
+      [
+        ".x_idl_method",
+        "XIdlMethod"
+      ],
+      [
+        ".x_idl_field",
+        "XIdlField"
+      ],
+      [
+        ".x_idl_field",
+        "XIdlField"
+      ],
+      [
+        "..uno.type_class",
+        "TypeClass"
       ]
     ],
     "quote": [
-      "object",
+      "XIdlMethod",
+      "typing.List[XIdlMethod]",
       "TypeClass",
       "Uik",
-      "typing.List[XIdlMethod]",
       "typing.List[XIdlField]",
-      "typing.List[XIdlClass]"
+      "typing.List[XIdlClass]",
+      "XIdlField",
+      "XIdlArray",
+      "XIdlClass"
     ],
     "typings": [
-      "typing.List[XIdlMethod]",
+      "typing.List[XIdlField]",
       "typing.List[XIdlClass]",
-      "typing.List[XIdlField]"
+      "typing.List[XIdlMethod]"
     ],
+    "requires_typing": true,
     "name": "XIdlClass",
     "imports": [],
     "namespace": "com.sun.star.reflection",
@@ -88,14 +108,14 @@
           "args": [
             [
               "Type",
-              "object",
+              "XIdlClass",
               "in"
             ]
           ]
         },
         {
           "name": "getArray",
-          "returns": "object",
+          "returns": "XIdlArray",
           "desc": [
             "If the reflected type is an array, then you get a XIdlArray interface to modify instances of the array type.",
             "",
@@ -106,7 +126,7 @@
         },
         {
           "name": "getClass",
-          "returns": "object",
+          "returns": "XIdlClass",
           "desc": [
             "Deprecated.",
             "",
@@ -134,7 +154,7 @@
         },
         {
           "name": "getComponentType",
-          "returns": "object",
+          "returns": "XIdlClass",
           "desc": [
             "If the reflected type is an array or sequence, then this method returns a XIdlClass interface reflecting the element."
           ],
@@ -143,7 +163,7 @@
         },
         {
           "name": "getField",
-          "returns": "object",
+          "returns": "XIdlField",
           "desc": [
             "If the reflected type is an interface, struct or union, then you get a XIdlField interface reflecting the demanded field (/interface attribute) by name.",
             "",
@@ -164,7 +184,8 @@
           "desc": [
             "If the reflected type is an interface, struct or union, then you get a sequence of XIdlField interfaces reflecting all fields (/interface attributes).",
             "",
-            "This also includes all inherited fields (/interface attributes) of the interface, struct of union. \n If the reflected type is not an interface, struct or union or the interface, struct or union does not have any field (/interface attribute), then an empty sequence is returned."
+            "This also includes all inherited fields (/interface attributes) of the interface, struct of union.",
+            "If the reflected type is not an interface, struct or union or the interface, struct or union does not have any field (/interface attribute), then an empty sequence is returned."
           ],
           "raises": [],
           "args": []
@@ -182,7 +203,7 @@
         },
         {
           "name": "getMethod",
-          "returns": "object",
+          "returns": "XIdlMethod",
           "desc": [
             "If the reflected type is an interface, then you get a XIdlMethod interface reflecting the demanded method by name.",
             "",
@@ -203,7 +224,8 @@
           "desc": [
             "If the reflected type is an interface, then you get a sequence of XIdlMethod interfaces reflecting all methods of the interface.",
             "",
-            "This also includes the inherited methods of the interface. \n If the reflected type is not an interface or the interface does not have any methods, then a null-reference is returned."
+            "This also includes the inherited methods of the interface.",
+            "If the reflected type is not an interface or the interface does not have any methods, then a null-reference is returned."
           ],
           "raises": [],
           "args": []
@@ -258,7 +280,7 @@
           "args": [
             [
               "xType",
-              "object",
+              "XIdlClass",
               "in"
             ]
           ]

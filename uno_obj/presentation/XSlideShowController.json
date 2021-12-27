@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:50:59+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:29+00:00",
   "name": "XSlideShowController",
   "type": "interface",
   "namespace": "com.sun.star.presentation",
@@ -13,10 +13,25 @@
     "from_imports": [],
     "from_imports_typing": [
       [
+        ".x_slide_show",
+        "XSlideShow"
+      ],
+      [
+        ".x_slide_show_listener",
+        "XSlideShowListener"
+      ],
+      [
         "..drawing.x_draw_page",
         "XDrawPage"
       ]
     ],
+    "quote": [
+      "XSlideShowListener",
+      "XDrawPage",
+      "XSlideShow"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XSlideShowController",
     "imports": [],
     "namespace": "com.sun.star.presentation",
@@ -47,7 +62,13 @@
             "adds a listener that receives events while the slide show is running."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "Listener",
+              "XSlideShowListener",
+              "in"
+            ]
+          ]
         },
         {
           "name": "blankScreen",
@@ -58,7 +79,13 @@
             "Change attribute Pause to false to unpause the slide show."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "Color",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "deactivate",
@@ -109,7 +136,13 @@
           "raises": [
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
-          "args": []
+          "args": [
+            [
+              "Index",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getSlideCount",
@@ -120,7 +153,7 @@
         },
         {
           "name": "getSlideShow",
-          "returns": "object",
+          "returns": "XSlideShow",
           "desc": [
             "returns the actual XSlideShow instance that runs the slide show.",
             "",
@@ -136,7 +169,13 @@
             "goto the given textual bookmark"
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "Bookmark",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "gotoFirstSlide",
@@ -213,7 +252,13 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException"
           ],
-          "args": []
+          "args": [
+            [
+              "Page",
+              "XDrawPage",
+              "in"
+            ]
+          ]
         },
         {
           "name": "gotoSlideIndex",
@@ -222,7 +267,13 @@
             "jumps to the slide at the given index."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "Index",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "isActive",
@@ -291,7 +342,13 @@
             "removes a listener."
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "Listener",
+              "XSlideShowListener",
+              "in"
+            ]
+          ]
         },
         {
           "name": "resume",
@@ -313,7 +370,13 @@
             "    LibreOffice 7.2"
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "EraseAllInk",
+              "bool",
+              "in"
+            ]
+          ]
         },
         {
           "name": "stopSound",

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:50+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:09+00:00",
   "name": "XSQLInput",
   "type": "interface",
   "namespace": "com.sun.star.sdbc",
@@ -18,37 +18,53 @@
     ],
     "from_imports_typing": [
       [
-        "..util.date_time",
-        "DateTime"
-      ],
-      [
-        "..util.time",
-        "Time"
+        "..util.date",
+        "Date"
       ],
       [
         "..io.x_input_stream",
         "XInputStream"
       ],
       [
-        ".byte",
-        "byte"
+        "..util.date_time",
+        "DateTime"
       ],
       [
-        "..util.date",
-        "Date"
+        ".x_array",
+        "XArray"
+      ],
+      [
+        "..util.time",
+        "Time"
+      ],
+      [
+        ".x_ref",
+        "XRef"
+      ],
+      [
+        ".x_blob",
+        "XBlob"
+      ],
+      [
+        ".x_clob",
+        "XClob"
       ]
     ],
     "quote": [
+      "typing.List[int]",
       "Date",
+      "XRef",
       "Time",
-      "object",
-      "typing.List[byte]",
-      "XInputStream",
-      "DateTime"
+      "XClob",
+      "DateTime",
+      "XArray",
+      "XBlob",
+      "XInputStream"
     ],
     "typings": [
-      "typing.List[byte]"
+      "typing.List[int]"
     ],
+    "requires_typing": true,
     "name": "XSQLInput",
     "imports": [],
     "namespace": "com.sun.star.sdbc",
@@ -67,7 +83,7 @@
       "methods": [
         {
           "name": "readArray",
-          "returns": "object",
+          "returns": "XArray",
           "desc": [
             "reads an array from the stream."
           ],
@@ -89,7 +105,7 @@
         },
         {
           "name": "readBlob",
-          "returns": "object",
+          "returns": "XBlob",
           "desc": [
             "reads a BLOB from the stream."
           ],
@@ -111,7 +127,7 @@
         },
         {
           "name": "readByte",
-          "returns": "object",
+          "returns": "int",
           "desc": [
             "reads the next attribute in the stream as byte."
           ],
@@ -122,7 +138,7 @@
         },
         {
           "name": "readBytes",
-          "returns": "typing.List[byte]",
+          "returns": "typing.List[int]",
           "desc": [
             "reads the next attribute in the stream as sequence of bytes."
           ],
@@ -144,7 +160,7 @@
         },
         {
           "name": "readClob",
-          "returns": "object",
+          "returns": "XClob",
           "desc": [
             "reads a CLOB from the stream."
           ],
@@ -227,7 +243,7 @@
         },
         {
           "name": "readRef",
-          "returns": "object",
+          "returns": "XRef",
           "desc": [
             "reads a REF(&lt;structured-type&gt;) from the stream."
           ],

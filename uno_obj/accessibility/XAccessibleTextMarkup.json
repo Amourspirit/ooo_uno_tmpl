@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:38+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:04+00:00",
   "name": "XAccessibleTextMarkup",
   "type": "interface",
   "namespace": "com.sun.star.accessibility",
@@ -20,15 +20,20 @@
       [
         ".text_segment",
         "TextSegment"
+      ],
+      [
+        ".text_segment",
+        "TextSegment"
       ]
     ],
     "quote": [
-      "typing.List[TextSegment]",
-      "object"
+      "TextSegment",
+      "typing.List[TextSegment]"
     ],
     "typings": [
       "typing.List[TextSegment]"
     ],
+    "requires_typing": true,
     "name": "XAccessibleTextMarkup",
     "imports": [],
     "namespace": "com.sun.star.accessibility",
@@ -49,7 +54,7 @@
       "methods": [
         {
           "name": "getTextMarkup",
-          "returns": "object",
+          "returns": "TextSegment",
           "desc": [
             "Returns the text segment of the text markup of the given index and of the given text mark type.",
             "",
@@ -58,7 +63,8 @@
             "Throws IllegalArgumentException, if given text markup type is out of valid range."
           ],
           "raises": [
-            "com.sun.star.lang.IndexOutOfBoundsException,"
+            "com.sun.star.lang.IndexOutOfBoundsException",
+            "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
             [
@@ -84,7 +90,8 @@
             "Throws IllegalArgumentException, if given text markup type is out of valid range."
           ],
           "raises": [
-            "com.sun.star.lang.IndexOutOfBoundsException,"
+            "com.sun.star.lang.IndexOutOfBoundsException",
+            "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
             [

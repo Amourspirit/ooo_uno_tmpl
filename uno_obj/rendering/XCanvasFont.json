@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:53+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:15+00:00",
   "name": "XCanvasFont",
   "type": "interface",
   "namespace": "com.sun.star.rendering",
@@ -18,19 +18,39 @@
     ],
     "from_imports_typing": [
       [
+        ".font_request",
+        "FontRequest"
+      ],
+      [
+        ".string_context",
+        "StringContext"
+      ],
+      [
         "..beans.property_value",
         "PropertyValue"
+      ],
+      [
+        ".x_text_layout",
+        "XTextLayout"
+      ],
+      [
+        ".font_metrics",
+        "FontMetrics"
       ]
     ],
     "quote": [
+      "StringContext",
+      "XTextLayout",
       "typing.List[PropertyValue]",
       "typing.List[float]",
-      "object"
+      "FontMetrics",
+      "FontRequest"
     ],
     "typings": [
       "typing.List[PropertyValue]",
       "typing.List[float]"
     ],
+    "requires_typing": true,
     "name": "XCanvasFont",
     "imports": [],
     "namespace": "com.sun.star.rendering",
@@ -47,7 +67,7 @@
       "methods": [
         {
           "name": "createTextLayout",
-          "returns": "object",
+          "returns": "XTextLayout",
           "desc": [
             "Create a text layout interface.",
             "",
@@ -57,12 +77,12 @@
           "args": [
             [
               "aText",
-              "object",
+              "StringContext",
               "in"
             ],
             [
               "nDirection",
-              "object",
+              "int",
               "in"
             ],
             [
@@ -94,7 +114,7 @@
         },
         {
           "name": "getFontMetrics",
-          "returns": "object",
+          "returns": "FontMetrics",
           "desc": [
             "Query metric information about the font, that is generic to all its glyphs.",
             "",
@@ -105,7 +125,7 @@
         },
         {
           "name": "getFontRequest",
-          "returns": "object",
+          "returns": "FontRequest",
           "desc": [
             "Query the FontRequest that was used to generate this object."
           ],

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 18:43:42+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:33+00:00",
   "name": "XDatabaseDocumentUI",
   "type": "interface",
   "namespace": "com.sun.star.sdb.application",
@@ -12,6 +12,10 @@
   "data": {
     "from_imports": [],
     "from_imports_typing": [
+      [
+        "...beans.property_value",
+        "PropertyValue"
+      ],
       [
         "...lang.x_component",
         "XComponent"
@@ -29,6 +33,19 @@
         "XConnection"
       ]
     ],
+    "quote": [
+      "XComponent",
+      "typing.Tuple[int, str]",
+      "typing.List[PropertyValue]",
+      "XDataSource",
+      "XWindow",
+      "XConnection"
+    ],
+    "typings": [
+      "typing.List[PropertyValue]",
+      "typing.Tuple[int, str]"
+    ],
+    "requires_typing": true,
     "name": "XDatabaseDocumentUI",
     "imports": [],
     "namespace": "com.sun.star.sdb.application",
@@ -86,7 +103,8 @@
             "creates a new sub component of the given type"
           ],
           "raises": [
-            "com.sun.star.lang.IllegalArgumentException,"
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.sdbc.SQLException"
           ],
           "args": [
             [
@@ -110,7 +128,9 @@
             "In opposite to createComponent(), this method allows you to specify additional arguments which are passed to the to-be-loaded component."
           ],
           "raises": [
-            "com.sun.star.lang.IllegalArgumentException,"
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.container.NoSuchElementException",
+            "com.sun.star.sdbc.SQLException"
           ],
           "args": [
             [
@@ -120,7 +140,7 @@
             ],
             [
               "Arguments",
-              "'typing.List[PropertyValue]'",
+              "typing.List[PropertyValue]",
               "in"
             ],
             [
@@ -173,7 +193,9 @@
             "For the different object types, this means the following"
           ],
           "raises": [
-            "com.sun.star.lang.IllegalArgumentException,"
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.container.NoSuchElementException",
+            "com.sun.star.sdbc.SQLException"
           ],
           "args": [
             [
@@ -204,7 +226,9 @@
             "The meaning of the arguments is defined at the service which is effectively created. See the above table for a list of those services."
           ],
           "raises": [
-            "com.sun.star.lang.IllegalArgumentException,"
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.container.NoSuchElementException",
+            "com.sun.star.sdbc.SQLException"
           ],
           "args": [
             [
@@ -224,7 +248,7 @@
             ],
             [
               "Arguments",
-              "'typing.List[PropertyValue]'",
+              "typing.List[PropertyValue]",
               "in"
             ]
           ]

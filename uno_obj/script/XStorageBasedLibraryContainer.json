@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:45:40+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:34+00:00",
   "name": "XStorageBasedLibraryContainer",
   "type": "interface",
   "namespace": "com.sun.star.script",
@@ -22,6 +22,11 @@
         "XStorage"
       ]
     ],
+    "quote": [
+      "XStorage"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XStorageBasedLibraryContainer",
     "imports": [],
     "namespace": "com.sun.star.script",
@@ -49,9 +54,16 @@
             "Note that the library container is not automatically associated with the new root storage. Instead, you need to manually set the RootStorage attribute afterwards. This separation allows for Save-To as well Save-As operations."
           ],
           "raises": [
-            "com.sun.star.lang.IllegalArgumentException,"
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.lang.WrappedTargetException"
           ],
-          "args": []
+          "args": [
+            [
+              "RootStorage",
+              "XStorage",
+              "in"
+            ]
+          ]
         }
       ],
       "properties": [

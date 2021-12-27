@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:47:40+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:14+00:00",
   "name": "XExternalSheetCache",
   "type": "interface",
   "namespace": "com.sun.star.sheet",
@@ -10,12 +10,26 @@
   },
   "writer_args": {},
   "data": {
-    "from_imports": [],
+    "from_imports": [
+      [
+        ".external_sheet_cache",
+        "ExternalSheetCache"
+      ]
+    ],
     "from_imports_typing": [],
+    "quote": [
+      "typing.List[int]"
+    ],
+    "typings": [
+      "typing.List[int]"
+    ],
+    "requires_typing": true,
     "name": "XExternalSheetCache",
     "imports": [],
     "namespace": "com.sun.star.sheet",
-    "extends": [],
+    "extends": [
+      "com.sun.star.sheet.ExternalSheetCache"
+    ],
     "desc": [
       "Primary interface for the com.sun.star.sheet.ExternalSheetCache service.",
       "",
@@ -37,7 +51,13 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException"
           ],
-          "args": []
+          "args": [
+            [
+              "nRow",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "getAllRows",
@@ -61,7 +81,18 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException"
           ],
-          "args": []
+          "args": [
+            [
+              "nColumn",
+              "int",
+              "in"
+            ],
+            [
+              "nRow",
+              "int",
+              "in"
+            ]
+          ]
         },
         {
           "name": "setCellValue",
@@ -74,7 +105,23 @@
           "raises": [
             "com.sun.star.lang.IllegalArgumentException"
           ],
-          "args": []
+          "args": [
+            [
+              "nColumn",
+              "int",
+              "in"
+            ],
+            [
+              "nRow",
+              "int",
+              "in"
+            ],
+            [
+              "aValue",
+              "object",
+              "in"
+            ]
+          ]
         }
       ],
       "properties": [

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:47+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:35+00:00",
   "name": "XController",
   "type": "interface",
   "namespace": "com.sun.star.frame",
@@ -16,11 +16,22 @@
         "XComponent"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_frame",
+        "XFrame"
+      ],
+      [
+        ".x_model",
+        "XModel"
+      ]
+    ],
     "quote": [
-      "object"
+      "XModel",
+      "XFrame"
     ],
     "typings": [],
+    "requires_typing": true,
     "name": "XController",
     "imports": [],
     "namespace": "com.sun.star.frame",
@@ -43,7 +54,7 @@
           "args": [
             [
               "Frame",
-              "object",
+              "XFrame",
               "in"
             ]
           ]
@@ -58,14 +69,14 @@
           "args": [
             [
               "Model",
-              "object",
+              "XModel",
               "in"
             ]
           ]
         },
         {
           "name": "getFrame",
-          "returns": "object",
+          "returns": "XFrame",
           "desc": [
             "provides access to owner frame of this controller"
           ],
@@ -74,7 +85,7 @@
         },
         {
           "name": "getModel",
-          "returns": "object",
+          "returns": "XModel",
           "desc": [
             "provides access to currently attached model"
           ],

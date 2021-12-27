@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:20+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:22+00:00",
   "name": "XModel",
   "type": "interface",
   "namespace": "com.sun.star.xforms",
@@ -18,25 +18,40 @@
     ],
     "from_imports_typing": [
       [
-        "..beans.x_property_set",
-        "XPropertySet"
+        ".x_submission",
+        "XSubmission"
+      ],
+      [
+        "..task.x_interaction_handler",
+        "XInteractionHandler"
+      ],
+      [
+        "..container.x_set",
+        "XSet"
       ],
       [
         "..xml.dom.x_document",
         "XDocument"
       ],
       [
-        "..container.x_set",
-        "XSet"
+        ".x_data_type_repository",
+        "XDataTypeRepository"
+      ],
+      [
+        "..beans.x_property_set",
+        "XPropertySet"
       ]
     ],
     "quote": [
       "XPropertySet",
-      "object",
+      "XInteractionHandler",
       "XDocument",
-      "XSet"
+      "XSet",
+      "XDataTypeRepository",
+      "XSubmission"
     ],
     "typings": [],
+    "requires_typing": true,
     "name": "XModel",
     "imports": [],
     "namespace": "com.sun.star.xforms",
@@ -68,7 +83,7 @@
         },
         {
           "name": "cloneSubmission",
-          "returns": "object",
+          "returns": "XSubmission",
           "desc": [
             "clone an arbitrary submission element for this model",
             "",
@@ -96,7 +111,7 @@
         },
         {
           "name": "createSubmission",
-          "returns": "object",
+          "returns": "XSubmission",
           "desc": [
             "create a submission element for this model",
             "",
@@ -133,7 +148,7 @@
         },
         {
           "name": "getDataTypeRepository",
-          "returns": "object",
+          "returns": "XDataTypeRepository",
           "desc": [
             "provides management access to the XSD data types associated with the model"
           ],
@@ -186,7 +201,7 @@
         },
         {
           "name": "getSubmission",
-          "returns": "object",
+          "returns": "XSubmission",
           "desc": [
             "get a submission with a certain ID.",
             "",
@@ -279,7 +294,8 @@
             "This is a convenience method. Calling it is equivalent to calling getSubmission()( id ).submit()."
           ],
           "raises": [
-            "com.sun.star.util.VetoException,"
+            "com.sun.star.util.VetoException",
+            "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
             [
@@ -298,7 +314,8 @@
             "This is a convenience method. Calling it is equivalent to calling getSubmission()( id, handler ).submit()."
           ],
           "raises": [
-            "com.sun.star.util.VetoException,"
+            "com.sun.star.util.VetoException",
+            "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
             [

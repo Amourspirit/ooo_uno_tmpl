@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:11+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:05+00:00",
   "name": "XBreakIterator",
   "type": "interface",
   "namespace": "com.sun.star.i18n",
@@ -16,11 +16,37 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".line_break_hyphenation_options",
+        "LineBreakHyphenationOptions"
+      ],
+      [
+        ".line_break_user_options",
+        "LineBreakUserOptions"
+      ],
+      [
+        "..lang.locale",
+        "Locale"
+      ],
+      [
+        ".line_break_results",
+        "LineBreakResults"
+      ],
+      [
+        ".boundary",
+        "Boundary"
+      ]
+    ],
     "quote": [
-      "object"
+      "Locale",
+      "LineBreakResults",
+      "LineBreakUserOptions",
+      "LineBreakHyphenationOptions",
+      "Boundary"
     ],
     "typings": [],
+    "requires_typing": true,
     "name": "XBreakIterator",
     "imports": [],
     "namespace": "com.sun.star.i18n",
@@ -199,7 +225,7 @@
         },
         {
           "name": "getLineBreak",
-          "returns": "object",
+          "returns": "LineBreakResults",
           "desc": [
             "Calculate the line break position in the Text from the specified nStartPos."
           ],
@@ -227,12 +253,12 @@
             ],
             [
               "aHyphOptions",
-              "object",
+              "LineBreakHyphenationOptions",
               "in"
             ],
             [
               "aUserOptions",
-              "object",
+              "LineBreakUserOptions",
               "in"
             ]
           ]
@@ -259,7 +285,7 @@
         },
         {
           "name": "getWordBoundary",
-          "returns": "object",
+          "returns": "Boundary",
           "desc": [
             "Identifies StartPos and EndPos of current word.",
             "",
@@ -480,7 +506,7 @@
         },
         {
           "name": "nextWord",
-          "returns": "object",
+          "returns": "Boundary",
           "desc": [
             "Traverses one word in Text from nStartPos forwards."
           ],
@@ -607,7 +633,7 @@
         },
         {
           "name": "previousWord",
-          "returns": "object",
+          "returns": "Boundary",
           "desc": [
             "Traverses one word in Text from nStartPos backwards.",
             "",

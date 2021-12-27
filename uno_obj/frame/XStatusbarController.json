@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:48+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:36+00:00",
   "name": "XStatusbarController",
   "type": "interface",
   "namespace": "com.sun.star.frame",
@@ -12,10 +12,6 @@
   "data": {
     "from_imports": [
       [
-        "..lang.x_initialization",
-        "XInitialization"
-      ],
-      [
         ".x_status_listener",
         "XStatusListener"
       ],
@@ -24,13 +20,40 @@
         "XComponent"
       ],
       [
+        "..lang.x_initialization",
+        "XInitialization"
+      ],
+      [
         "..util.x_updatable",
         "XUpdatable"
       ]
     ],
-    "from_imports_typing": [],
-    "quote": [],
+    "from_imports_typing": [
+      [
+        "..awt.mouse_event",
+        "MouseEvent"
+      ],
+      [
+        "..awt.rectangle",
+        "Rectangle"
+      ],
+      [
+        "..awt.point",
+        "Point"
+      ],
+      [
+        "..awt.x_graphics",
+        "XGraphics"
+      ]
+    ],
+    "quote": [
+      "XGraphics",
+      "MouseEvent",
+      "Point",
+      "Rectangle"
+    ],
     "typings": [],
+    "requires_typing": true,
     "name": "XStatusbarController",
     "imports": [],
     "namespace": "com.sun.star.frame",
@@ -43,7 +66,8 @@
     "desc": [
       "interface to be implemented by a component offering a more complex user interface to users within a status bar.",
       "",
-      "A generic status bar field is represented as a simple text field. A status bar controller can be added to a Statusbar and provide information or functions with a more sophisticated user interface.\n A typical example for status bar controller is a zoom chooser. It shows the current zoom and provides general zoom levels on a pop-up menu that can be activated by a mouse action for context menus.",
+      "A generic status bar field is represented as a simple text field. A status bar controller can be added to a Statusbar and provide information or functions with a more sophisticated user interface.",
+      "A typical example for status bar controller is a zoom chooser. It shows the current zoom and provides general zoom levels on a pop-up menu that can be activated by a mouse action for context menus.",
       "",
       "**since**",
       "",

@@ -445,6 +445,13 @@ def main():
         dest='interface_all',
         default=False
     )
+    interface_parser.add_argument(
+        '-u', '--run-as-cmdline',
+        help='Run as command line suprocess. Default False',
+        action='store_true',
+        dest='cmd_line_process',
+        default=False
+    )
 
     # endregion interface args
 
@@ -504,7 +511,8 @@ def main():
             CompileStructLinks(config=config, use_subprocess=False)
     if args.command == 'interface':
         if args.interface_all:
-            CompileInterfaceLinks(config=config, use_subprocess=False)
+            CompileInterfaceLinks(
+                config=config, use_subprocess=args.cmd_line_process)
     logger.info('Finished!')
 
 

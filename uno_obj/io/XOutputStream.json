@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:42+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:17+00:00",
   "name": "XOutputStream",
   "type": "interface",
   "namespace": "com.sun.star.io",
@@ -17,8 +17,13 @@
       ]
     ],
     "from_imports_typing": [],
-    "quote": [],
-    "typings": [],
+    "quote": [
+      "typing.List[int]"
+    ],
+    "typings": [
+      "typing.List[int]"
+    ],
+    "requires_typing": true,
     "name": "XOutputStream",
     "imports": [],
     "namespace": "com.sun.star.io",
@@ -42,7 +47,9 @@
             "If this method has not yet been called, no attached XInputStream receives an EOF signal. No further bytes may be written after this method has been called."
           ],
           "raises": [
-            "com.sun.star.io.NotConnectedException,"
+            "com.sun.star.io.NotConnectedException",
+            "com.sun.star.io.BufferSizeExceededException",
+            "com.sun.star.io.IOException"
           ],
           "args": []
         },
@@ -55,7 +62,9 @@
             "The semantics of this method are rather vague. See com.sun.star.io.XAsyncOutputMonitor.waitForCompletion() for a similar method with very specific semantics, that is useful in certain scenarios."
           ],
           "raises": [
-            "com.sun.star.io.NotConnectedException,"
+            "com.sun.star.io.NotConnectedException",
+            "com.sun.star.io.BufferSizeExceededException",
+            "com.sun.star.io.IOException"
           ],
           "args": []
         },
@@ -68,12 +77,14 @@
             "(blocking call)"
           ],
           "raises": [
-            "com.sun.star.io.NotConnectedException,"
+            "com.sun.star.io.NotConnectedException",
+            "com.sun.star.io.BufferSizeExceededException",
+            "com.sun.star.io.IOException"
           ],
           "args": [
             [
               "aData",
-              "typing.List[byte]",
+              "typing.List[int]",
               "in"
             ]
           ]

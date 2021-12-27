@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:38+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:33+00:00",
   "name": "XNamedGraph",
   "type": "interface",
   "namespace": "com.sun.star.rdf",
@@ -18,15 +18,26 @@
     ],
     "from_imports_typing": [
       [
+        ".x_resource",
+        "XResource"
+      ],
+      [
         "..container.x_enumeration",
         "XEnumeration"
+      ],
+      [
+        ".x_node",
+        "XNode"
       ]
     ],
     "quote": [
-      "object",
-      "XEnumeration"
+      "XNode",
+      "XURI",
+      "XEnumeration",
+      "XResource"
     ],
     "typings": [],
+    "requires_typing": true,
     "name": "XNamedGraph",
     "imports": [],
     "namespace": "com.sun.star.rdf",
@@ -56,22 +67,24 @@
             "Note that the ODF elements that can have metadata attached all implement the interface XMetadatable, which inherits from XResource, meaning that you can simply pass them in as arguments here, and it will magically work."
           ],
           "raises": [
-            "com.sun.star.lang.IllegalArgumentException,"
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.container.NoSuchElementException",
+            "RepositoryException"
           ],
           "args": [
             [
               "Subject",
-              "object",
+              "XResource",
               "in"
             ],
             [
               "Predicate",
-              "object",
+              "XURI",
               "in"
             ],
             [
               "Object",
-              "object",
+              "XNode",
               "in"
             ]
           ]
@@ -83,13 +96,14 @@
             "removes all statements from the graph."
           ],
           "raises": [
-            "com.sun.star.container.NoSuchElementException,"
+            "com.sun.star.container.NoSuchElementException",
+            "RepositoryException"
           ],
           "args": []
         },
         {
           "name": "getName",
-          "returns": "object",
+          "returns": "XURI",
           "desc": [
             "returns the name of the graph.",
             "",
@@ -109,22 +123,23 @@
             "Any parameter may be NULL, which acts as a wildcard. For example, to get all statements about myURI: getStatements(myURI, null, null)"
           ],
           "raises": [
-            "com.sun.star.container.NoSuchElementException,"
+            "com.sun.star.container.NoSuchElementException",
+            "RepositoryException"
           ],
           "args": [
             [
               "Subject",
-              "object",
+              "XResource",
               "in"
             ],
             [
               "Predicate",
-              "object",
+              "XURI",
               "in"
             ],
             [
               "Object",
-              "object",
+              "XNode",
               "in"
             ]
           ]
@@ -140,22 +155,23 @@
             "Any parameter may be NULL, which acts as a wildcard. For example, to remove all statements about myURI: removeStatement(myURI, null, null)"
           ],
           "raises": [
-            "com.sun.star.container.NoSuchElementException,"
+            "com.sun.star.container.NoSuchElementException",
+            "RepositoryException"
           ],
           "args": [
             [
               "Subject",
-              "object",
+              "XResource",
               "in"
             ],
             [
               "Predicate",
-              "object",
+              "XURI",
               "in"
             ],
             [
               "Object",
-              "object",
+              "XNode",
               "in"
             ]
           ]

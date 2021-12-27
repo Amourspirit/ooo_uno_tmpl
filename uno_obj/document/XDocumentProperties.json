@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:49:26+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:05+00:00",
   "name": "XDocumentProperties",
   "type": "interface",
   "namespace": "com.sun.star.document",
@@ -17,14 +17,33 @@
         "XPropertyContainer"
       ],
       [
+        "..beans.property_value",
+        "PropertyValue"
+      ],
+      [
         "..util.date_time",
         "DateTime"
       ],
       [
         "..lang.locale",
         "Locale"
+      ],
+      [
+        "..embed.x_storage",
+        "XStorage"
       ]
     ],
+    "quote": [
+      "Locale",
+      "XStorage",
+      "XPropertyContainer",
+      "typing.List[PropertyValue]",
+      "DateTime"
+    ],
+    "typings": [
+      "typing.List[PropertyValue]"
+    ],
+    "requires_typing": true,
     "name": "XDocumentProperties",
     "imports": [],
     "namespace": "com.sun.star.document",
@@ -61,9 +80,22 @@
             "The URL could be part of the Medium parameter, but because often no other parameters except the URL are needed, providing it separately was added for convenience."
           ],
           "raises": [
-            "com.sun.star.io.WrongFormatException,"
+            "com.sun.star.io.WrongFormatException",
+            "com.sun.star.lang.WrappedTargetException",
+            "com.sun.star.io.IOException"
           ],
-          "args": []
+          "args": [
+            [
+              "URL",
+              "str",
+              "in"
+            ],
+            [
+              "Medium",
+              "typing.List[PropertyValue]",
+              "in"
+            ]
+          ]
         },
         {
           "name": "loadFromStorage",
@@ -76,9 +108,23 @@
             "This is unfortunately necessary in order to properly resolve relative URLs in the meta-data."
           ],
           "raises": [
-            "com.sun.star.lang.IllegalArgumentException,"
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.io.WrongFormatException",
+            "com.sun.star.lang.WrappedTargetException",
+            "com.sun.star.io.IOException"
           ],
-          "args": []
+          "args": [
+            [
+              "Storage",
+              "XStorage",
+              "in"
+            ],
+            [
+              "Medium",
+              "typing.List[PropertyValue]",
+              "in"
+            ]
+          ]
         },
         {
           "name": "resetUserData",
@@ -89,7 +135,13 @@
             "Clears the document properties, such that it appears the document has just been created. This is a convenience method which resets several attributes at once, as follows:"
           ],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "Author",
+              "str",
+              "in"
+            ]
+          ]
         },
         {
           "name": "storeToMedium",
@@ -100,9 +152,21 @@
             "The URL could be part of the Medium parameter, but because often no other parameters except the URL are needed, providing it separately was added for convenience."
           ],
           "raises": [
-            "com.sun.star.lang.WrappedTargetException,"
+            "com.sun.star.lang.WrappedTargetException",
+            "com.sun.star.io.IOException"
           ],
-          "args": []
+          "args": [
+            [
+              "URL",
+              "str",
+              "in"
+            ],
+            [
+              "Medium",
+              "typing.List[PropertyValue]",
+              "in"
+            ]
+          ]
         },
         {
           "name": "storeToStorage",
@@ -115,9 +179,22 @@
             "This is unfortunately necessary in order to properly resolve relative URLs in the meta-data."
           ],
           "raises": [
-            "com.sun.star.lang.IllegalArgumentException,"
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.lang.WrappedTargetException",
+            "com.sun.star.io.IOException"
           ],
-          "args": []
+          "args": [
+            [
+              "Storage",
+              "XStorage",
+              "in"
+            ],
+            [
+              "Medium",
+              "typing.List[PropertyValue]",
+              "in"
+            ]
+          ]
         }
       ],
       "properties": [

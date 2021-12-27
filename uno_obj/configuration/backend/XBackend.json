@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:06+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:39+00:00",
   "name": "XBackend",
   "type": "interface",
   "namespace": "com.sun.star.configuration.backend",
@@ -20,15 +20,20 @@
       [
         ".x_layer",
         "XLayer"
+      ],
+      [
+        ".x_update_handler",
+        "XUpdateHandler"
       ]
     ],
     "quote": [
-      "typing.List[XLayer]",
-      "object"
+      "XUpdateHandler",
+      "typing.List[XLayer]"
     ],
     "typings": [
       "typing.List[XLayer]"
     ],
+    "requires_typing": true,
     "name": "XBackend",
     "imports": [],
     "namespace": "com.sun.star.configuration.backend",
@@ -51,12 +56,14 @@
       "methods": [
         {
           "name": "getOwnUpdateHandler",
-          "returns": "object",
+          "returns": "XUpdateHandler",
           "desc": [
             "creates an update handler for the owner entity layer for a component."
           ],
           "raises": [
-            "BackendAccessException,"
+            "BackendAccessException",
+            "com.sun.star.lang.NoSupportException",
+            "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
             [
@@ -68,12 +75,14 @@
         },
         {
           "name": "getUpdateHandler",
-          "returns": "object",
+          "returns": "XUpdateHandler",
           "desc": [
             "creates an update handler on an entity's layer for a component."
           ],
           "raises": [
-            "BackendAccessException,"
+            "BackendAccessException",
+            "com.sun.star.lang.NoSupportException",
+            "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
             [
@@ -95,7 +104,8 @@
             "retrieves the layers associated to an entity for a component."
           ],
           "raises": [
-            "BackendAccessException,"
+            "BackendAccessException",
+            "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
             [
@@ -117,7 +127,8 @@
             "retrieves the layers associated to the owner entity for a component."
           ],
           "raises": [
-            "BackendAccessException,"
+            "BackendAccessException",
+            "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
             [

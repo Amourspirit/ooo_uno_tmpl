@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:46:36+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:27+00:00",
   "name": "XPropertyControl",
   "type": "interface",
   "namespace": "com.sun.star.inspection",
@@ -10,17 +10,44 @@
   },
   "writer_args": {},
   "data": {
-    "from_imports": [],
+    "from_imports": [
+      [
+        ".x_string_list_control",
+        "XStringListControl"
+      ],
+      [
+        ".x_hyperlink_control",
+        "XHyperlinkControl"
+      ],
+      [
+        ".x_numeric_control",
+        "XNumericControl"
+      ]
+    ],
     "from_imports_typing": [
       [
         "..awt.x_window",
         "XWindow"
+      ],
+      [
+        ".x_property_control_context",
+        "XPropertyControlContext"
       ]
     ],
+    "quote": [
+      "XPropertyControlContext",
+      "XWindow"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XPropertyControl",
     "imports": [],
     "namespace": "com.sun.star.inspection",
-    "extends": [],
+    "extends": [
+      "com.sun.star.inspection.XHyperlinkControl",
+      "com.sun.star.inspection.XNumericControl",
+      "com.sun.star.inspection.XStringListControl"
+    ],
     "desc": [
       "defines the interface for a single control in an ObjectInspector",
       "",
@@ -55,7 +82,7 @@
       "properties": [
         {
           "name": "ControlContext",
-          "returns": "object",
+          "returns": "XPropertyControlContext",
           "desc": [
             "specifies the context of the control within the ObjectInspector.",
             "",

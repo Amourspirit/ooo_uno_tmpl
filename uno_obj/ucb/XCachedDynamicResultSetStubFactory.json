@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:43+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:24+00:00",
   "name": "XCachedDynamicResultSetStubFactory",
   "type": "interface",
   "namespace": "com.sun.star.ucb",
@@ -18,14 +18,27 @@
     ],
     "from_imports_typing": [
       [
+        ".x_any_compare_factory",
+        "XAnyCompareFactory"
+      ],
+      [
         ".x_dynamic_result_set",
         "XDynamicResultSet"
+      ],
+      [
+        ".numbered_sorting_info",
+        "NumberedSortingInfo"
       ]
     ],
     "quote": [
+      "XAnyCompareFactory",
+      "typing.List[NumberedSortingInfo]",
       "XDynamicResultSet"
     ],
-    "typings": [],
+    "typings": [
+      "typing.List[NumberedSortingInfo]"
+    ],
+    "requires_typing": true,
     "name": "XCachedDynamicResultSetStubFactory",
     "imports": [],
     "namespace": "com.sun.star.ucb",
@@ -53,7 +66,8 @@
             "If you have instantiated a CachedDynamicResultSet on client side already, use this to connect your given Source on server side to the TargetCache."
           ],
           "raises": [
-            ","
+            "",
+            "com.sun.star.ucb.AlreadyInitializedException"
           ],
           "args": [
             [

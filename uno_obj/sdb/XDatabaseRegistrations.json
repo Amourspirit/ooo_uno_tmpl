@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:23+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:12+00:00",
   "name": "XDatabaseRegistrations",
   "type": "interface",
   "namespace": "com.sun.star.sdb",
@@ -16,13 +16,20 @@
         "XDatabaseContext"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_database_registrations_listener",
+        "XDatabaseRegistrationsListener"
+      ]
+    ],
     "quote": [
+      "XDatabaseRegistrationsListener",
       "typing.List[str]"
     ],
     "typings": [
       "typing.List[str]"
     ],
+    "requires_typing": true,
     "name": "XDatabaseRegistrations",
     "imports": [],
     "namespace": "com.sun.star.sdb",
@@ -51,7 +58,7 @@
           "args": [
             [
               "Listener",
-              "object",
+              "XDatabaseRegistrationsListener",
               "in"
             ]
           ]
@@ -63,7 +70,9 @@
             "changes the location of a given database registration"
           ],
           "raises": [
-            ","
+            "",
+            "",
+            "com.sun.star.lang.IllegalAccessException"
           ],
           "args": [
             [
@@ -85,7 +94,8 @@
             "returns the location of the database registered under the given name"
           ],
           "raises": [
-            ","
+            "",
+            "com.sun.star.container.NoSuchElementException"
           ],
           "args": [
             [
@@ -130,7 +140,8 @@
             "In this case, attempts to revoke this registration will fail."
           ],
           "raises": [
-            ","
+            "",
+            "com.sun.star.container.NoSuchElementException"
           ],
           "args": [
             [
@@ -147,7 +158,8 @@
             "registers a database, given by location, under a given name"
           ],
           "raises": [
-            ","
+            "",
+            "com.sun.star.container.ElementExistException"
           ],
           "args": [
             [
@@ -172,7 +184,7 @@
           "args": [
             [
               "Listener",
-              "object",
+              "XDatabaseRegistrationsListener",
               "in"
             ]
           ]
@@ -184,7 +196,9 @@
             "revokes the registration of a database, given by name"
           ],
           "raises": [
-            ","
+            "",
+            "",
+            "com.sun.star.lang.IllegalAccessException"
           ],
           "args": [
             [

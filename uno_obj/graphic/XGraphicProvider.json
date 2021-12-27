@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:10+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:16+00:00",
   "name": "XGraphicProvider",
   "type": "interface",
   "namespace": "com.sun.star.graphic",
@@ -18,15 +18,25 @@
     ],
     "from_imports_typing": [
       [
+        ".x_graphic",
+        "XGraphic"
+      ],
+      [
+        "..beans.property_values",
+        "PropertyValues"
+      ],
+      [
         "..beans.x_property_set",
         "XPropertySet"
       ]
     ],
     "quote": [
-      "XPropertySet",
-      "object"
+      "PropertyValues",
+      "XGraphic",
+      "XPropertySet"
     ],
     "typings": [],
+    "requires_typing": true,
     "name": "XGraphicProvider",
     "imports": [],
     "namespace": "com.sun.star.graphic",
@@ -43,12 +53,14 @@
       "methods": [
         {
           "name": "queryGraphic",
-          "returns": "object",
+          "returns": "XGraphic",
           "desc": [
             "Calling this method returns a XGraphic interface that holds the graphic content after loading the graphic."
           ],
           "raises": [
-            "com.sun.star.io.IOException,"
+            "com.sun.star.io.IOException",
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
             [
@@ -67,7 +79,9 @@
             "In most cases, this method will be used to query the mime type of the graphic and, in the case of pixel graphics, the resulting size after loading"
           ],
           "raises": [
-            "com.sun.star.io.IOException,"
+            "com.sun.star.io.IOException",
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
             [
@@ -84,7 +98,9 @@
             "Store the graphic content, represented through the XGraphic interface at the specified location."
           ],
           "raises": [
-            "com.sun.star.io.IOException,"
+            "com.sun.star.io.IOException",
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
             [

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:51:51+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:35+00:00",
   "name": "XFrame2",
   "type": "interface",
   "namespace": "com.sun.star.frame",
@@ -12,6 +12,10 @@
   "data": {
     "from_imports": [
       [
+        ".x_dispatch_provider",
+        "XDispatchProvider"
+      ],
+      [
         ".x_dispatch_provider_interception",
         "XDispatchProviderInterception"
       ],
@@ -20,28 +24,35 @@
         "XStatusIndicatorFactory"
       ],
       [
-        ".x_dispatch_information_provider",
-        "XDispatchInformationProvider"
-      ],
-      [
         ".x_frames_supplier",
         "XFramesSupplier"
       ],
       [
-        ".x_dispatch_provider",
-        "XDispatchProvider"
+        ".x_dispatch_information_provider",
+        "XDispatchInformationProvider"
       ]
     ],
     "from_imports_typing": [
+      [
+        "..container.x_name_container",
+        "XNameContainer"
+      ],
       [
         "..uno.x_interface",
         "XInterface"
       ],
       [
-        "..container.x_name_container",
-        "XNameContainer"
+        ".x_dispatch_recorder_supplier",
+        "XDispatchRecorderSupplier"
       ]
     ],
+    "quote": [
+      "XInterface",
+      "XDispatchRecorderSupplier",
+      "XNameContainer"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XFrame2",
     "imports": [],
     "namespace": "com.sun.star.frame",
@@ -63,13 +74,14 @@
       "properties": [
         {
           "name": "DispatchRecorderSupplier",
-          "returns": "object",
+          "returns": "XDispatchRecorderSupplier",
           "desc": [
             "provides access to the dispatch recorder of the frame",
             "",
             "Such recorder can be used to record dispatch requests. The supplier contains a dispatch recorder and provide the functionality to use it for any dispatch object from outside which supports the interface XDispatch. A supplier is available only, if recording was enabled. That means: if someone wishes to enable recoding on a frame he must set a supplier with a recorder object inside of it. Every user of dispatches has to check then if such supplier is available at this frame property. If value of this property is NULL he must call XDispatch.dispatch() on the original dispatch object. If it's a valid value he must use the supplier by calling his method XDispatchRecorderSupplier.dispatchAndRecord() with the original dispatch object as argument.",
             "",
-            "Note:\n It's not recommended to cache an already gotten supplier. Because there exist no possibility to check for enabled/disabled recording then.",
+            "Note:",
+            "It's not recommended to cache an already gotten supplier. Because there exist no possibility to check for enabled/disabled recording then.",
             "",
             "**since**",
             "",

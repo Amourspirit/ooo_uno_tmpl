@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:47+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:34+00:00",
   "name": "XComponentLoader",
   "type": "interface",
   "namespace": "com.sun.star.frame",
@@ -20,12 +20,20 @@
       [
         "..lang.x_component",
         "XComponent"
+      ],
+      [
+        "..beans.property_value",
+        "PropertyValue"
       ]
     ],
     "quote": [
+      "typing.List[PropertyValue]",
       "XComponent"
     ],
-    "typings": [],
+    "typings": [
+      "typing.List[PropertyValue]"
+    ],
+    "requires_typing": true,
     "name": "XComponentLoader",
     "imports": [],
     "namespace": "com.sun.star.frame",
@@ -55,7 +63,8 @@
             "This interface is a generic one and can be used to start further requests on loaded document or control the lifetime of it (means dispose() it after using). The real document service behind this interface can be one of follow three ones:"
           ],
           "raises": [
-            "com.sun.star.io.IOException,"
+            "com.sun.star.io.IOException",
+            "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
             [

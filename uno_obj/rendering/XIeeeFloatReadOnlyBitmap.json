@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:53+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:15+00:00",
   "name": "XIeeeFloatReadOnlyBitmap",
   "type": "interface",
   "namespace": "com.sun.star.rendering",
@@ -16,14 +16,30 @@
         "XBitmap"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".floating_point_bitmap_layout",
+        "FloatingPointBitmapLayout"
+      ],
+      [
+        "..geometry.integer_rectangle2_d",
+        "IntegerRectangle2D"
+      ],
+      [
+        "..geometry.integer_point2_d",
+        "IntegerPoint2D"
+      ]
+    ],
     "quote": [
+      "IntegerPoint2D",
+      "FloatingPointBitmapLayout",
       "typing.List[float]",
-      "object"
+      "IntegerRectangle2D"
     ],
     "typings": [
       "typing.List[float]"
     ],
+    "requires_typing": true,
     "name": "XIeeeFloatReadOnlyBitmap",
     "imports": [],
     "namespace": "com.sun.star.rendering",
@@ -53,12 +69,13 @@
             "Note that the bitmap memory layout might change for volatile bitmaps."
           ],
           "raises": [
-            "com.sun.star.lang.IndexOutOfBoundsException,"
+            "com.sun.star.lang.IndexOutOfBoundsException",
+            "VolatileContentDestroyedException"
           ],
           "args": [
             [
               "bitmapLayout",
-              "object",
+              "FloatingPointBitmapLayout",
               "out"
             ],
             [
@@ -70,7 +87,7 @@
         },
         {
           "name": "getMemoryLayout",
-          "returns": "object",
+          "returns": "FloatingPointBitmapLayout",
           "desc": [
             "Query the memory layout for this bitmap.",
             "",
@@ -88,12 +105,13 @@
             "Note that the bitmap memory layout might change for volatile bitmaps."
           ],
           "raises": [
-            "com.sun.star.lang.IndexOutOfBoundsException,"
+            "com.sun.star.lang.IndexOutOfBoundsException",
+            "VolatileContentDestroyedException"
           ],
           "args": [
             [
               "bitmapLayout",
-              "object",
+              "FloatingPointBitmapLayout",
               "out"
             ],
             [

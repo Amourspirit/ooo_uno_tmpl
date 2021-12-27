@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:53+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:34+00:00",
   "name": "XTypeDescriptionEnumerationAccess",
   "type": "interface",
   "namespace": "com.sun.star.reflection",
@@ -16,11 +16,29 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
-    "quote": [
-      "object"
+    "from_imports_typing": [
+      [
+        ".x_type_description_enumeration",
+        "XTypeDescriptionEnumeration"
+      ],
+      [
+        "..type_description_search_depth",
+        "TypeDescriptionSearchDepth"
+      ],
+      [
+        "..uno.type_class",
+        "TypeClass"
+      ]
     ],
-    "typings": [],
+    "quote": [
+      "typing.List[TypeClass]",
+      "XTypeDescriptionEnumeration",
+      "TypeDescriptionSearchDepth"
+    ],
+    "typings": [
+      "typing.List[TypeClass]"
+    ],
+    "requires_typing": true,
     "name": "XTypeDescriptionEnumerationAccess",
     "imports": [],
     "namespace": "com.sun.star.reflection",
@@ -39,7 +57,7 @@
       "methods": [
         {
           "name": "createTypeDescriptionEnumeration",
-          "returns": "object",
+          "returns": "XTypeDescriptionEnumeration",
           "desc": [
             "Creates an enumeration for type descriptions.",
             "",
@@ -50,7 +68,8 @@
             "The enumeration returns implementations of XTypeDescription. Following concrete UNOIDL parts represented by specialized interfaces derived from XTypeDescription can be returned by the enumerator:"
           ],
           "raises": [
-            "NoSuchTypeNameException,"
+            "NoSuchTypeNameException",
+            "InvalidTypeNameException"
           ],
           "args": [
             [
@@ -65,7 +84,7 @@
             ],
             [
               "depth",
-              "object",
+              "TypeDescriptionSearchDepth",
               "in"
             ]
           ]

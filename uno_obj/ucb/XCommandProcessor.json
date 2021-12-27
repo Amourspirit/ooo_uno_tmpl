@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:43+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:24+00:00",
   "name": "XCommandProcessor",
   "type": "interface",
   "namespace": "com.sun.star.ucb",
@@ -16,9 +16,22 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
-    "quote": [],
+    "from_imports_typing": [
+      [
+        ".command",
+        "Command"
+      ],
+      [
+        ".x_command_environment",
+        "XCommandEnvironment"
+      ]
+    ],
+    "quote": [
+      "Command",
+      "XCommandEnvironment"
+    ],
     "typings": [],
+    "requires_typing": true,
     "name": "XCommandProcessor",
     "imports": [],
     "namespace": "com.sun.star.ucb",
@@ -72,12 +85,13 @@
             "Common command definitions can be found in the specification of the service Content."
           ],
           "raises": [
-            "com.sun.star.uno.Exception,"
+            "com.sun.star.uno.Exception",
+            "CommandAbortedException"
           ],
           "args": [
             [
               "aCommand",
-              "object",
+              "Command",
               "in"
             ],
             [
@@ -87,7 +101,7 @@
             ],
             [
               "Environment",
-              "object",
+              "XCommandEnvironment",
               "in"
             ]
           ]

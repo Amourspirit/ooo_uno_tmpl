@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:53+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:15+00:00",
   "name": "XBitmapCanvas",
   "type": "interface",
   "namespace": "com.sun.star.rendering",
@@ -16,9 +16,32 @@
         "XCanvas"
       ]
     ],
-    "from_imports_typing": [],
-    "quote": [],
+    "from_imports_typing": [
+      [
+        "..geometry.real_rectangle2_d",
+        "RealRectangle2D"
+      ],
+      [
+        ".render_state",
+        "RenderState"
+      ],
+      [
+        ".view_state",
+        "ViewState"
+      ],
+      [
+        ".x_bitmap_canvas",
+        "XBitmapCanvas"
+      ]
+    ],
+    "quote": [
+      "RenderState",
+      "ViewState",
+      "RealRectangle2D",
+      "XBitmapCanvas"
+    ],
     "typings": [],
+    "requires_typing": true,
     "name": "XBitmapCanvas",
     "imports": [],
     "namespace": "com.sun.star.rendering",
@@ -46,12 +69,13 @@
             "This method copies a rectangular area from a place of one canvas to a place on another. Source and destination areas are permitted to overlap. If the source view or render state has a clipping set, the regions clipped away from the source rectangle are regarded fully transparent for the copy operation. The device color for both source and destination render state is ignored, the compositing mode only for the source render state."
           ],
           "raises": [
-            "com.sun.star.lang.IllegalArgumentException,"
+            "com.sun.star.lang.IllegalArgumentException",
+            "VolatileContentDestroyedException"
           ],
           "args": [
             [
               "sourceCanvas",
-              "object",
+              "XBitmapCanvas",
               "in"
             ],
             [
@@ -61,12 +85,12 @@
             ],
             [
               "sourceViewState",
-              "object",
+              "ViewState",
               "in"
             ],
             [
               "sourceRenderState",
-              "object",
+              "RenderState",
               "in"
             ],
             [
@@ -76,12 +100,12 @@
             ],
             [
               "destViewState",
-              "object",
+              "ViewState",
               "in"
             ],
             [
               "destRenderState",
-              "object",
+              "RenderState",
               "in"
             ]
           ]

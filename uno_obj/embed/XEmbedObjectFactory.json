@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:30+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:38+00:00",
   "name": "XEmbedObjectFactory",
   "type": "interface",
   "namespace": "com.sun.star.embed",
@@ -16,11 +16,27 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
-    "quote": [
-      "XInterface"
+    "from_imports_typing": [
+      [
+        "..beans.property_value",
+        "PropertyValue"
+      ],
+      [
+        ".x_storage",
+        "XStorage"
+      ]
     ],
-    "typings": [],
+    "quote": [
+      "XInterface",
+      "XStorage",
+      "typing.List[int]",
+      "typing.List[PropertyValue]"
+    ],
+    "typings": [
+      "typing.List[PropertyValue]",
+      "typing.List[int]"
+    ],
+    "requires_typing": true,
     "name": "XEmbedObjectFactory",
     "imports": [],
     "namespace": "com.sun.star.embed",
@@ -46,12 +62,14 @@
             "If the service implementation does not support XEmbedObjectCreator interface, it must accept the empty aClassID parameter in case of loading from existing entry."
           ],
           "raises": [
-            "com.sun.star.lang.IllegalArgumentException,"
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.io.IOException",
+            "com.sun.star.uno.Exception"
           ],
           "args": [
             [
               "aClassID",
-              "typing.List[byte]",
+              "typing.List[int]",
               "in"
             ],
             [

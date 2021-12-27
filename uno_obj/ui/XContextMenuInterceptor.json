@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:54+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:29+00:00",
   "name": "XContextMenuInterceptor",
   "type": "interface",
   "namespace": "com.sun.star.ui",
@@ -16,11 +16,22 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..context_menu_interceptor_action",
+        "ContextMenuInterceptorAction"
+      ],
+      [
+        ".context_menu_execute_event",
+        "ContextMenuExecuteEvent"
+      ]
+    ],
     "quote": [
-      "object"
+      "ContextMenuInterceptorAction",
+      "ContextMenuExecuteEvent"
     ],
     "typings": [],
+    "requires_typing": true,
     "name": "XContextMenuInterceptor",
     "imports": [],
     "namespace": "com.sun.star.ui",
@@ -35,7 +46,7 @@
       "methods": [
         {
           "name": "notifyContextMenuExecute",
-          "returns": "object",
+          "returns": "ContextMenuInterceptorAction",
           "desc": [
             "notifies the interceptor about the request to execute a ContextMenu.",
             "",
@@ -45,7 +56,7 @@
           "args": [
             [
               "aEvent",
-              "object",
+              "ContextMenuExecuteEvent",
               "in"
             ]
           ]

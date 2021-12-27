@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:30+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:06+00:00",
   "name": "XFunctionManager",
   "type": "interface",
   "namespace": "com.sun.star.report.meta",
@@ -20,11 +20,22 @@
         "XIndexAccess"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_function_category",
+        "XFunctionCategory"
+      ],
+      [
+        ".x_function_description",
+        "XFunctionDescription"
+      ]
+    ],
     "quote": [
-      "object"
+      "XFunctionDescription",
+      "XFunctionCategory"
     ],
     "typings": [],
+    "requires_typing": true,
     "name": "XFunctionManager",
     "imports": [],
     "namespace": "com.sun.star.report.meta",
@@ -40,12 +51,13 @@
       "methods": [
         {
           "name": "getCategory",
-          "returns": "object",
+          "returns": "XFunctionCategory",
           "desc": [
             "same as getByIndex."
           ],
           "raises": [
-            "com.sun.star.lang.IndexOutOfBoundsException,"
+            "com.sun.star.lang.IndexOutOfBoundsException",
+            "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
             [
@@ -57,7 +69,7 @@
         },
         {
           "name": "getFunctionByName",
-          "returns": "object",
+          "returns": "XFunctionDescription",
           "desc": [
             "get the function description by name"
           ],

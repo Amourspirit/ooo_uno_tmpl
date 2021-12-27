@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:53+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:15+00:00",
   "name": "XColorSpace",
   "type": "interface",
   "namespace": "com.sun.star.rendering",
@@ -18,41 +18,42 @@
     ],
     "from_imports_typing": [
       [
-        ".argb_color",
-        "ARGBColor"
+        ".x_color_space",
+        "XColorSpace"
       ],
       [
-        ".rgb_color",
-        "RGBColor"
-      ],
-      [
-        ".byte",
-        "byte"
+        ".color_component",
+        "ColorComponent"
       ],
       [
         "..beans.property_value",
         "PropertyValue"
       ],
       [
-        ".color_component",
-        "ColorComponent"
+        ".rgb_color",
+        "RGBColor"
+      ],
+      [
+        ".argb_color",
+        "ARGBColor"
       ]
     ],
     "quote": [
-      "typing.List[PropertyValue]",
-      "typing.List[RGBColor]",
+      "typing.List[int]",
       "typing.List[ColorComponent]",
-      "object",
+      "XColorSpace",
       "typing.List[ARGBColor]",
-      "typing.List[byte]"
+      "typing.List[PropertyValue]",
+      "typing.List[RGBColor]"
     ],
     "typings": [
-      "typing.List[PropertyValue]",
-      "typing.List[RGBColor]",
+      "typing.List[int]",
       "typing.List[ColorComponent]",
       "typing.List[ARGBColor]",
-      "typing.List[byte]"
+      "typing.List[PropertyValue]",
+      "typing.List[RGBColor]"
     ],
+    "requires_typing": true,
     "name": "XColorSpace",
     "imports": [],
     "namespace": "com.sun.star.rendering",
@@ -86,7 +87,7 @@
             ],
             [
               "targetColorSpace",
-              "object",
+              "XColorSpace",
               "in"
             ]
           ]
@@ -207,7 +208,7 @@
         },
         {
           "name": "getComponentTags",
-          "returns": "typing.List[byte]",
+          "returns": "typing.List[int]",
           "desc": [
             "Query the kind for each color component.",
             "",
@@ -231,7 +232,7 @@
         },
         {
           "name": "getRenderingIntent",
-          "returns": "object",
+          "returns": "int",
           "desc": [
             "Query rendering intent of this color space."
           ],
@@ -240,7 +241,7 @@
         },
         {
           "name": "getType",
-          "returns": "object",
+          "returns": "int",
           "desc": [
             "Query type of this color space."
           ],

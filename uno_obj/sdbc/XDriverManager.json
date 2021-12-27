@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:49+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:09+00:00",
   "name": "XDriverManager",
   "type": "interface",
   "namespace": "com.sun.star.sdbc",
@@ -16,11 +16,24 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
-    "quote": [
-      "object"
+    "from_imports_typing": [
+      [
+        "..beans.property_value",
+        "PropertyValue"
+      ],
+      [
+        ".x_connection",
+        "XConnection"
+      ]
     ],
-    "typings": [],
+    "quote": [
+      "typing.List[PropertyValue]",
+      "XConnection"
+    ],
+    "typings": [
+      "typing.List[PropertyValue]"
+    ],
+    "requires_typing": true,
     "name": "XDriverManager",
     "imports": [],
     "namespace": "com.sun.star.sdbc",
@@ -37,7 +50,7 @@
       "methods": [
         {
           "name": "getConnection",
-          "returns": "object",
+          "returns": "XConnection",
           "desc": [
             "attempts to establish a connection to the given database URL.",
             "",
@@ -56,7 +69,7 @@
         },
         {
           "name": "getConnectionWithInfo",
-          "returns": "object",
+          "returns": "XConnection",
           "desc": [
             "attempts to establish a connection to the given database URL.",
             "",

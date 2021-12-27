@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:24+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:26+00:00",
   "name": "XCipherContextSupplier",
   "type": "interface",
   "namespace": "com.sun.star.xml.crypto",
@@ -16,11 +16,26 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
-    "quote": [
-      "object"
+    "from_imports_typing": [
+      [
+        ".x_cipher_context",
+        "XCipherContext"
+      ],
+      [
+        "...beans.named_value",
+        "NamedValue"
+      ]
     ],
-    "typings": [],
+    "quote": [
+      "XCipherContext",
+      "typing.List[int]",
+      "typing.List[NamedValue]"
+    ],
+    "typings": [
+      "typing.List[int]",
+      "typing.List[NamedValue]"
+    ],
+    "requires_typing": true,
     "name": "XCipherContextSupplier",
     "imports": [],
     "namespace": "com.sun.star.xml.crypto",
@@ -39,7 +54,7 @@
       "methods": [
         {
           "name": "getCipherContext",
-          "returns": "object",
+          "returns": "XCipherContext",
           "desc": [
             "returns an object that allows to encrypt/decrypt data."
           ],
@@ -54,12 +69,12 @@
             ],
             [
               "aKey",
-              "typing.List[byte]",
+              "typing.List[int]",
               "in"
             ],
             [
               "aInitializationVector",
-              "typing.List[byte]",
+              "typing.List[int]",
               "in"
             ],
             [

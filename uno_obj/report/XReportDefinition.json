@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:53:04+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:24+00:00",
   "name": "XReportDefinition",
   "type": "interface",
   "namespace": "com.sun.star.report",
@@ -22,18 +22,29 @@
         "XGroups"
       ],
       [
-        ".x_section",
-        "XSection"
-      ],
-      [
         "..document.x_event_broadcaster",
         "XEventBroadcaster"
       ],
       [
         "..sdbc.x_connection",
         "XConnection"
+      ],
+      [
+        ".x_section",
+        "XSection"
       ]
     ],
+    "quote": [
+      "XEventBroadcaster",
+      "XSection",
+      "XGroups",
+      "XConnection",
+      "typing.List[str]"
+    ],
+    "typings": [
+      "typing.List[str]"
+    ],
+    "requires_typing": true,
     "name": "XReportDefinition",
     "imports": [],
     "namespace": "com.sun.star.report",
@@ -57,7 +68,8 @@
             "returns a sequence of the currently supported output formats."
           ],
           "raises": [
-            "com.sun.star.lang.DisposedException,"
+            "com.sun.star.lang.DisposedException",
+            "com.sun.star.uno.Exception"
           ],
           "args": []
         },
@@ -70,7 +82,8 @@
             "This is a workaround due to the fact that this interface can not be directly inherited from com.sun.star.document.XEventBroadcaster because the methods addEventListener and removeEventListener are already defined in com.sun.star.lang.XComponent. A queryInterface call is still supported to the com.sun.star.document.XEventBroadcaster interface."
           ],
           "raises": [
-            "com.sun.star.lang.DisposedException,"
+            "com.sun.star.lang.DisposedException",
+            "com.sun.star.uno.Exception"
           ],
           "args": []
         }
@@ -100,7 +113,9 @@
           "desc": [
             "is the command which should be executed, the type of command depends on the CommandType.",
             "",
-            "In case of a CommandType of CommandType.COMMAND, means in case the Command specifies an SQL statement, the inherited com.sun.star.sdbc.RowSet.EscapeProcessing becomes relevant:\n It then can be to used to specify whether the SQL statement should be analyzed on the client side before sending it to the database server.\n The default value for com.sun.star.sdbc.RowSet.EscapeProcessing is TRUE. By switching it to FALSE, you can pass backend-specific SQL statements, which are not standard SQL, to your database."
+            "In case of a CommandType of CommandType.COMMAND, means in case the Command specifies an SQL statement, the inherited com.sun.star.sdbc.RowSet.EscapeProcessing becomes relevant:",
+            "It then can be to used to specify whether the SQL statement should be analyzed on the client side before sending it to the database server.",
+            "The default value for com.sun.star.sdbc.RowSet.EscapeProcessing is TRUE. By switching it to FALSE, you can pass backend-specific SQL statements, which are not standard SQL, to your database."
           ],
           "raises_get": "",
           "raises_set": ""

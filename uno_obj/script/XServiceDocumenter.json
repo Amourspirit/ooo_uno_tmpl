@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:45:39+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:34+00:00",
   "name": "XServiceDocumenter",
   "type": "interface",
   "namespace": "com.sun.star.script",
@@ -10,12 +10,34 @@
   },
   "writer_args": {},
   "data": {
-    "from_imports": [],
-    "from_imports_typing": [],
+    "from_imports": [
+      [
+        ".the_service_documenter",
+        "theServiceDocumenter"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..lang.x_type_provider",
+        "XTypeProvider"
+      ],
+      [
+        "..lang.x_service_info",
+        "XServiceInfo"
+      ]
+    ],
+    "quote": [
+      "XServiceInfo",
+      "XTypeProvider"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XServiceDocumenter",
     "imports": [],
     "namespace": "com.sun.star.script",
-    "extends": [],
+    "extends": [
+      "com.sun.star.script.theServiceDocumenter"
+    ],
     "desc": [
       "provides documentation for UNO services",
       "",
@@ -31,21 +53,39 @@
           "returns": "None",
           "desc": [],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "xService",
+              "XServiceInfo",
+              "in"
+            ]
+          ]
         },
         {
           "name": "showInterfaceDocs",
           "returns": "None",
           "desc": [],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "xTypeProvider",
+              "XTypeProvider",
+              "in"
+            ]
+          ]
         },
         {
           "name": "showServiceDocs",
           "returns": "None",
           "desc": [],
           "raises": [],
-          "args": []
+          "args": [
+            [
+              "xService",
+              "XServiceInfo",
+              "in"
+            ]
+          ]
         }
       ],
       "properties": [

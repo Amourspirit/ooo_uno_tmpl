@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:55+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:30+00:00",
   "name": "XUIElementFactory",
   "type": "interface",
   "namespace": "com.sun.star.ui",
@@ -20,12 +20,20 @@
       [
         ".xui_element",
         "XUIElement"
+      ],
+      [
+        "..beans.property_value",
+        "PropertyValue"
       ]
     ],
     "quote": [
-      "XUIElement"
+      "XUIElement",
+      "typing.List[PropertyValue]"
     ],
-    "typings": [],
+    "typings": [
+      "typing.List[PropertyValue]"
+    ],
+    "requires_typing": true,
     "name": "XUIElementFactory",
     "imports": [],
     "namespace": "com.sun.star.ui",
@@ -55,7 +63,8 @@
             "An implementation is responsible to initialize every newly created user interface element if the necessary properties are provided. Especially it must connect a configurable user interface element to the correct user interface configuration manager. Without this connection the configurable user interface element cannot retrieve its structure data and changes to the user interface element structure won't be persistent. It is up to the implementation to throw an com.sun.star.lang.IllegalArgumentException if it cannot create a user interface element with the provided arguments."
           ],
           "raises": [
-            "com.sun.star.container.NoSuchElementException,"
+            "com.sun.star.container.NoSuchElementException",
+            "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
             [

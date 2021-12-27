@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 18:43:44+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:12+00:00",
   "name": "XLogHandler",
   "type": "interface",
   "namespace": "com.sun.star.logging",
@@ -10,12 +10,34 @@
   },
   "writer_args": {},
   "data": {
-    "from_imports": [],
-    "from_imports_typing": [],
+    "from_imports": [
+      [
+        "..lang.x_component",
+        "XComponent"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".x_log_formatter",
+        "XLogFormatter"
+      ],
+      [
+        ".log_record",
+        "LogRecord"
+      ]
+    ],
+    "quote": [
+      "LogRecord",
+      "XLogFormatter"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XLogHandler",
     "imports": [],
     "namespace": "com.sun.star.logging",
-    "extends": [],
+    "extends": [
+      "com.sun.star.lang.XComponent"
+    ],
     "desc": [
       "provides possibilities to send LogRecords to an arbitrary output channel.",
       "",
@@ -47,7 +69,7 @@
           "args": [
             [
               "Record",
-              "object",
+              "LogRecord",
               "in"
             ]
           ]
@@ -67,7 +89,7 @@
         },
         {
           "name": "Formatter",
-          "returns": "object",
+          "returns": "XLogFormatter",
           "desc": [
             "specifies the formatter to be used by this handler."
           ],

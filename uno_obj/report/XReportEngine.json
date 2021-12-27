@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 00:53:03+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:23+00:00",
   "name": "XReportEngine",
   "type": "interface",
   "namespace": "com.sun.star.report",
@@ -22,12 +22,20 @@
     ],
     "from_imports_typing": [
       [
-        "..frame.x_model",
-        "XModel"
+        ".x_report_definition",
+        "XReportDefinition"
+      ],
+      [
+        "..frame.x_frame",
+        "XFrame"
       ],
       [
         "..util.url",
         "URL"
+      ],
+      [
+        "..frame.x_model",
+        "XModel"
       ],
       [
         "..task.x_status_indicator",
@@ -38,6 +46,16 @@
         "XConnection"
       ]
     ],
+    "quote": [
+      "XReportDefinition",
+      "XStatusIndicator",
+      "URL",
+      "XModel",
+      "XFrame",
+      "XConnection"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XReportEngine",
     "imports": [],
     "namespace": "com.sun.star.report",
@@ -60,7 +78,9 @@
             "creates a report document."
           ],
           "raises": [
-            "com.sun.star.lang.DisposedException,"
+            "com.sun.star.lang.DisposedException",
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.uno.Exception"
           ],
           "args": []
         },
@@ -73,9 +93,17 @@
             "OJ: Has to be discussed if this method is useful."
           ],
           "raises": [
-            "com.sun.star.lang.DisposedException,"
+            "com.sun.star.lang.DisposedException",
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.uno.Exception"
           ],
-          "args": []
+          "args": [
+            [
+              "frame",
+              "XFrame",
+              "in"
+            ]
+          ]
         },
         {
           "name": "createDocumentModel",
@@ -84,7 +112,9 @@
             "creates a report document."
           ],
           "raises": [
-            "com.sun.star.lang.DisposedException,"
+            "com.sun.star.lang.DisposedException",
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.uno.Exception"
           ],
           "args": []
         },
@@ -95,7 +125,8 @@
             "allows to interrupt the creation process of the report document."
           ],
           "raises": [
-            "com.sun.star.lang.DisposedException,"
+            "com.sun.star.lang.DisposedException",
+            "com.sun.star.uno.Exception"
           ],
           "args": []
         }
@@ -116,14 +147,15 @@
           "desc": [
             "defines the maximum number of rows which should be fetched for the report.",
             "",
-            "If the limit is exceeded, the excess rows are silently dropped. \n There is no limitation, if set to zero."
+            "If the limit is exceeded, the excess rows are silently dropped.",
+            "There is no limitation, if set to zero."
           ],
           "raises_get": "",
           "raises_set": ""
         },
         {
           "name": "ReportDefinition",
-          "returns": "object",
+          "returns": "XReportDefinition",
           "desc": [
             "specifies the report definition object which is used to create the resulting report."
           ],

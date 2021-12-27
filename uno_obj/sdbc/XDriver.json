@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.6",
-  "timestamp": "2021-12-26 00:04:49+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 19:32:08+00:00",
   "name": "XDriver",
   "type": "interface",
   "namespace": "com.sun.star.sdbc",
@@ -20,15 +20,26 @@
       [
         ".driver_property_info",
         "DriverPropertyInfo"
+      ],
+      [
+        "..beans.property_value",
+        "PropertyValue"
+      ],
+      [
+        ".x_connection",
+        "XConnection"
       ]
     ],
     "quote": [
-      "typing.List[DriverPropertyInfo]",
-      "object"
-    ],
-    "typings": [
+      "typing.List[PropertyValue]",
+      "XConnection",
       "typing.List[DriverPropertyInfo]"
     ],
+    "typings": [
+      "typing.List[PropertyValue]",
+      "typing.List[DriverPropertyInfo]"
+    ],
+    "requires_typing": true,
     "name": "XDriver",
     "imports": [],
     "namespace": "com.sun.star.sdbc",
@@ -68,7 +79,7 @@
         },
         {
           "name": "connect",
-          "returns": "object",
+          "returns": "XConnection",
           "desc": [
             "attempts to make a database connection to the given URL.",
             "",
