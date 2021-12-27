@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
   "version": "0.1.8",
-  "timestamp": "2021-12-27 19:32:04+00:00",
+  "timestamp": "2021-12-27 22:15:10+00:00",
   "name": "XDocumentEventBroadcaster",
   "type": "interface",
   "namespace": "com.sun.star.document",
@@ -10,7 +10,20 @@
   },
   "writer_args": {},
   "data": {
-    "from_imports": [],
+    "from_imports": [
+      [
+        "..frame.x_global_event_broadcaster",
+        "XGlobalEventBroadcaster"
+      ],
+      [
+        "..sdb.office_database_document",
+        "OfficeDatabaseDocument"
+      ],
+      [
+        ".office_document",
+        "OfficeDocument"
+      ]
+    ],
     "from_imports_typing": [
       [
         ".x_document_event_listener",
@@ -30,7 +43,11 @@
     "name": "XDocumentEventBroadcaster",
     "imports": [],
     "namespace": "com.sun.star.document",
-    "extends": [],
+    "extends": [
+      "com.sun.star.document.OfficeDocument",
+      "com.sun.star.frame.XGlobalEventBroadcaster",
+      "com.sun.star.sdb.OfficeDatabaseDocument"
+    ],
     "desc": [
       "allows to be notified of events happening in an OfficeDocument, and to cause notification of such events.",
       "",
