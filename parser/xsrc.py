@@ -142,16 +142,7 @@ class ApiFnPramsInfo(base.BlockObj):
         a_name = a_tag.text.strip()
         if a_name != name:
             return None
-        href: str = a_tag.get('href', None)
-        if not href:
-            return None
-        parts = href.split('_1_1')
-        if len(parts) == 1:
-            return None
-        parts[0] = 'com'
-        parts.pop()
-        parts.append(name)
-        s = '.'.join(parts)
+        s = base.Util.get_ns_from_a_tag(a_tag=a_tag)
         logger.debug(
             'ApiFnPramsInfo._get_type_from_inner_link() found: %s', s)
         return s

@@ -39,10 +39,14 @@ _app_root = os.environ.get('project_root', str(Path(__file__).parent.parent))
 if not _app_root in sys.path:
     sys.path.insert(0, _app_root)
 from parser.type_mod import TypeRules, PythonType
-from config import read_config, AppConfig, read_config_default
+from config import AppConfig, read_config_default
 # endregion imports
 
 logger: logging.Logger  = None
+# region CONST
+URL_SPLIT = '_1_1'
+"""Default stirng for splitting url string into it parts"""
+# endregion CONST
 # region config
 APP_CONFIG: AppConfig = None
 def _load_config():
@@ -886,16 +890,7 @@ class ApiSummaries(BlockObj):
         a_name = a_tag.text.strip()
         if a_name != name:
             return None
-        href: str = a_tag.get('href', None)
-        if not href:
-            return None
-        parts = href.split('_1_1')
-        if len(parts) == 1:
-            return None
-        parts[0] = 'com'
-        parts.pop()
-        parts.append(name)
-        s = '.'.join(parts)
+        s = Util.get_ns_from_a_tag(a_tag=a_tag)
         logger.debug(
             'ApiSummaries._get_type_from_inner_link() found: %s', s)
         return s
@@ -1288,6 +1283,87 @@ class Util:
         """Distance between branches"""
         common_parts: List[str]
         """part that in_branch and comp_branch have in common"""
+
+    @staticmethod
+    def is_fragment_url(in_str: str) -> bool:
+        """
+        Gets if an input string contains ``#`` character
+
+        Args:
+            in_str (str): input to test
+
+        Returns:
+            bool: ``True`` if ``#`` is found; Otherwise, ``False``
+        """
+        if not in_str:
+            return False
+        i = in_str.find('#')
+        return i >= 0
+
+    @staticmethod
+    def get_ns_from_url(url: str, name: Optional[str] = None) -> str:
+        """
+        Gets full name form a realitive for full url string.
+
+        ``com.sun.star.awt`` from ``namespacecom_1_1sun_1_1star_1_1awt.html#ad249d76933bdf54c35f4eaf51a5b7965``.
+
+        ``com.sun.star.awt.XMessageBoxFactory`` from ``com_1_1sun_1_1star_1_1awt_1_1XMessageBoxFactory``.
+
+        Args:
+            url (str): full or realitve Url string
+            name (str, optional): Optional name that is use to replace the last part of namespace return when there is no fragment.
+                This option is provided as a way to ensure clear return value.
+                Some urls may have a unexpected ending such as ``structcom_1_1sun_1_1star_1_1beans_1_1Pair_3_01T_00_01U_01_4.html``.
+                Defaults to ``None``.
+
+        Returns:
+            str: namespace format sucha as ``com.sun.star.awt`` or ``com.sun.star.awt.XMessageBoxFactory``
+
+        Note:
+            ``name`` param is ignored with url contains a fragment ( # ).
+        """
+        parts = url.split(URL_SPLIT)
+        parts[0] = 'com'
+        if Util.is_fragment_url(url):
+            # fragment such as: namespacecom_1_1sun_1_1star_1_1awt.html#ad249d76933bdf54c35f4eaf51a5b7965
+            last = parts.pop() # awt.html#ad249d76933bdf54c35f4eaf51a5b7965
+            parts.append(last.split(sep='.', maxsplit=1)[0])
+        else:
+            # No fragment sucha as: interfacecom_1_1sun_1_1star_1_1awt_1_1XMessageBoxFactory.html
+            last = parts.pop() # XMessageBoxFactory.html
+            if name:
+                parts.append(name)
+            else:
+                # caution to be used with not providing a name.
+                # some url are not ending in a clean name such as
+                # urls for generic types Pair < U, T > ect...
+                parts.append(last.split(sep='.', maxsplit=1)[0])
+            
+    @staticmethod
+    def get_ns_from_a_tag(a_tag: Tag) -> Union[str, None]:
+        """
+        Gets a namespace from an anchor tag
+
+        Args:
+            a_tag (Tag): Anchor Tag
+
+        Returns:
+            Union[str, None]: Namesapce if Valid anchor tag. Otherwise ``None``
+
+        See also:
+            ``Util.get_ns_from_url()``
+        """
+        if not a_tag:
+            return None
+        href: str = a_tag.get('href', None)
+        if not href:
+            return None
+        text = a_tag.text.strip().replace('::', '.').rstrip('.')
+        name = None
+        if text:
+            parts = text.rsplit(sep='.', maxsplit=1)
+            name = parts.pop()
+        return Util.get_ns_from_url(url=href, name=name)
 
     @staticmethod
     def get_rel_info(in_branch: str, comp_branch: str, sep: str = '.') -> RealitiveInfo:
