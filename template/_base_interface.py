@@ -112,7 +112,7 @@ class BaseInterface(BaseJson):
         for arg in args:
             if len(arg) >= 3:
                 if self.is_out_arg(arg[2]):  # dir in or out
-                    results.append(arg[1])  # arg name
+                    results.append(arg[0])  # arg name, index 1 is type
         return results
 
     def _get_raises_list(self, d: dict, key: str) -> List[Tuple[str, str]]:
