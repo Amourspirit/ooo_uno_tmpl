@@ -428,7 +428,14 @@ class EnumWriter(base.WriteBase):
     def _get_json(self) -> str:
         if not self._json_str is None:
             return self._json_str
-        p_dict = self._parser.get_dict_data()
+        p_dict = {
+            "name": 'place holder',
+            "ns": 'place holder',
+            "url": 'place holder',
+            "quote": [],
+            "typings": []
+        }
+        p_dict.update(self._parser.get_dict_data())
         json_dict = {
             "id": JSON_ID,
             "version": __version__,
@@ -465,6 +472,8 @@ class EnumWriter(base.WriteBase):
         self._template = self._template.replace('{name}', self._p_name)
         self._template = self._template.replace('{link}', self._p_url)
         str_json_desc = base.Util.get_formated_dict_list_str(self._p_desc)
+        self._template = self._template.replace('{quote}', 'set()')
+        self._template = self._template.replace('{typings}','set()')
         self._template = self._template.replace('{desc}', str_json_desc)
         self._template = self._template.replace('{data}', self._p_data)
 
@@ -636,7 +645,7 @@ def parse(*args, **kwargs):
 def _main():
     # url = 'https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1awt.html#aa6b9d577a1700f29923f49f7b77d165f'
     # url = 'https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1chart2.html#aa17c0b28cca2adc2be9b3c5954111489'
-    url = 'https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1sheet.html#a75a9acd74effffae38daed55136b0980'
+    url = 'https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1awt.html#ad249d76933bdf54c35f4eaf51a5b7965'
     args = ('v', 'n')
     kwargs = {
         "u": url,
