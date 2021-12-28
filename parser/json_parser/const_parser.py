@@ -84,7 +84,7 @@ class ParserConst:
         key = 'version'
         if not key in data:
             return False
-        min_ver = Version(0, 1, 3)
+        min_ver = Version(0, 1, 8)
         json_ver = Version.parse(data[key])
         if json_ver < min_ver:
             return False
@@ -100,7 +100,7 @@ class ParserConst:
         if key in self._cache:
             return self._cache[key]
         url_base = self._json_data['url_base']
-        enum_links: List[dict] = self._json_data['data'].get('enums', [])
+        enum_links: List[dict] = self._json_data['data'].get('constants', [])
 
         result: List[urldata] = []
         for itm in enum_links:
@@ -119,10 +119,10 @@ class ParserConst:
         return self._app_root
 
 
-class WriterEnums:
-    def __init__(self, parser: ParserEnum) -> None:
-        self._parser: ParserEnum = parser
-        self._enm = Path(self._parser.app_root, 'parser', 'enm.py')
+class WriterConst:
+    def __init__(self, parser: ParserConst) -> None:
+        self._parser: ParserConst = parser
+        self._enm = Path(self._parser.app_root, 'parser', 'const.py')
 
     def _process_link(self, url_data: urldata) -> str:
         cmd_str = f"{self._enm} -t -j -u {url_data.href}"
@@ -146,7 +146,7 @@ class WriterEnums:
         kargs['url'] = url_data.href
         result = True
         try:
-            enm.parse(*flags, **kargs)
+            const.parse(*flags, **kargs)
         except Exception:
             result = False
         return result, url_data.name
@@ -243,8 +243,8 @@ def parse(*args, **kwargs):
             log_args['level'] = logging.DEBUG
         _set_loggers(get_logger(logger_name=Path(__file__).stem, **log_args))
 
-    p = ParserEnum(json_path=pkwargs['json_file'])
-    w = WriterEnums(parser=p)
+    p = ParserConst(json_path=pkwargs['json_file'])
+    w = WriterConst(parser=p)
     w.Write(*args, **kwargs)
 
 # endregion Parse method
@@ -290,8 +290,8 @@ def main():
         logger.info('Executing command: %s', sys.argv[1:])
     logger.info('Parsing File %s' % args.json_file)
 
-    p = ParserEnum(json_path=args.json_file)
-    w = WriterEnums(parser=p)
+    p = ParserConst(json_path=args.json_file)
+    w = WriterConst(parser=p)
     w.Write('t', 'j')
 
 
