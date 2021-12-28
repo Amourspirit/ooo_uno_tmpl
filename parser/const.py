@@ -693,7 +693,7 @@ def parse(*args, **kwargs):
 
 def _main():
     # for debugging
-    url = 'https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1accessibility_1_1AccessibleEventId.html'
+    url = 'https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1i18n_1_1KParseTokens.html'
     # sys.argv.extend(['--log-file', 'debug.log', '-v', '-n', '-u', url])
     # main()
     args = ('v', 'n')
@@ -828,4 +828,4 @@ def main():
     w.write()
  
 if __name__ == '__main__':
-    main()
+    _main()
