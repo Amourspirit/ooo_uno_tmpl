@@ -46,7 +46,7 @@ class EnumUrl(base.UrlObj):
         result = []
         try:
             ns_part = self._page_link.split('.')[0].lower()
-            s = ns_part.replace('_1_1', '.').lstrip('.')
+            s = ns_part.replace(base.URL_SPLIT, '.').lstrip('.')
             
             # in some cases such as generics the name can have _3_01 and or _01_4 in the last part of the name
             # best guess _3 is < and _4 is > and _01 is space.

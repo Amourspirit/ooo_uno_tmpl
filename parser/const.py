@@ -3,6 +3,7 @@
 """
 Process a link to a page that contains a constant
 """
+from dataclasses import dataclass
 import os
 import sys
 import re
@@ -17,6 +18,8 @@ from kwhelp.decorator import DecFuncEnum, RuleCheckAllKw, TypeCheckKw
 from kwhelp import rules
 from collections import namedtuple
 from pathlib import Path
+
+from parser.base import SummaryInfo
 try:
     import base
 except ModuleNotFoundError:
@@ -39,6 +42,169 @@ pattern_hex = re.compile(r"0x[0-9A-Fa-f]+")
 dataitem = namedtuple(
     'dataitem', ['value', 'raw_value', 'name', 'datatype', 'lines'])
 
+# region Dataclasses
+
+# endregion Dataclasses
+
+# region API classes
+class ApiConstBlock(base.ApiSummaryBlock):
+    def _get_match_name(self) -> str:
+        return 'var-members'
+
+class ApiNs(base.ApiNamespace):
+    """Get the Name object for the interface"""
+
+    def __init__(self, soup: base.SoupObj):
+        super().__init__(soup)
+        self._namespace_str = None
+        self._namespace = None
+
+    @property
+    def namespace(self) -> List[str]:
+        """Gets namespace value"""
+        if self._namespace is None:
+            self._namespace = self.get_obj()[:-1]
+        return self._namespace
+
+    @property
+    def namespace_str(self) -> str:
+        if self._namespace_str is None:
+            self._namespace_str = '.'.join(self.namespace)
+        return self._namespace_str
+
+class ApiSummaries(base.BlockObj):
+    def __init__(self, block: base.ApiSummaryRows) -> None:
+        self._block: base.ApiSummaryRows = block
+        super().__init__(self._block.soup)
+        self._requires_typing = False
+        self._imports: Set[str] = set()
+        self._data = None
+    
+    def get_obj(self) -> List[base.SummaryInfo]:
+        if not self._data is None:
+            return self._data
+        self._data: List[base.SummaryInfo] = []
+        # get all rows
+        tags: List[Tag] = self._block.get_obj()
+        if len(tags) == 0:
+            msg = f"{self.__class__.__name__}.get_obj() no table rows that can be used to parse const info."
+            msg += f" Url: {self.url_obj.url}"
+            logger.error(msg)
+            raise Exception(msg)
+        
+        for tag in tags:
+            # parse out type, name, id
+            sid = self._get_id(tag)
+            name = self._get_name(tag)
+            p_type = self._get_type(tag, name)
+            si = SummaryInfo(
+                id = sid,
+                name = name,
+                type = p_type.type,
+                p_type=p_type
+            )
+            if p_type.requires_typing:
+                self._requires_typing = True
+            self._imports.update(p_type.get_all_imports())
+            self._data.append(si)
+        return self._data
+
+    def _get_name(str, tr:Tag) -> str:
+        # name should be in first a tag.
+        tag: Tag = tr.findChild('td', class_='memItemRight')
+        if not tag:
+            msg = f"{self.__class__.__name__}._get_name() No data found to get name from. Url: {self.url_obj.url}"
+            logger.error(msg)
+            raise Exception(msg)
+        a_tag = tag.findChild('a')
+        if a_tag:
+            return a_tag.text.strip()
+        # for some reason a_tag not found. Let try straight text
+        text = tag.text.strip()
+        # text: ASC_UPALPHA = 0x00000001
+        parts = text.split(sep="=", maxsplit=1)
+        if len(parts) == 1:
+            msg = f"{self.__class__.__name__}._get_name() No valid name can be parsed. Url: {self.url_obj.url}"
+            logger.error(msg)
+            raise Exception(msg)
+        return parts[0]
+
+    def _get_type(self, tr: Tag, name: str) -> PythonType:
+        # select first cell
+        tag: Tag = tr.findChild('td', class_='memItemLeft')
+        # tag.text 'const long ' format
+        if not tag:
+            msg = f"{self.__class__.__name__}._get_type() {name}, No data found to get type for. Url: {self.url_obj.url}"
+            logger.error(msg)
+            raise Exception(msg)
+        text = tag.text.strip()
+        parts = text.split()
+        type_name = parts.pop()
+        p_type = base.Util.get_python_type(type_name)
+        logger.debug(
+            "%s._get_type(), found type: %s for name: %s",
+            self.__class__.__name__, p_type.type, name)
+        return p_type
+    
+    def _get_id(self, tr:Tag) -> str:
+        result = None
+        classes: List[str] = tr.get('class', [])
+        if len(classes) == 0:
+            msg = f"{self.__class__.__name__}._get_id() No valid class that can be parsed. Url: {self.url_obj.url}"
+            logger.error(msg)
+            raise Exception(msg)
+        
+        for c in classes:
+            if c.startswith('memitem:'):
+                result = base.Util.get_last_part(input=c, sep=":")
+                break
+        if result is None:
+            msg = f"{self.__class__.__name__}._get_id() Failed to get id. Url: {self.url_obj.url}"
+            logger.error(msg)
+            raise Exception(msg)
+        return result
+
+class ApiData(base.APIData):
+    def __init__(self, url_soup: Union[str, base.SoupObj], allow_cache: bool):
+        super().__init__(url_soup=url_soup, allow_cache=allow_cache)
+        self._ns: ApiNs = None
+        self._api_const_block: ApiConstBlock = None
+        self._api_const_summary_rows: base.ApiSummaryRows = None
+        self._api_summaries: ApiSummaries = None
+
+    # region Properties
+
+    @property
+    def ns(self) -> ApiNs:
+        """Gets the interface Description object"""
+        if self._ns is None:
+            self._ns = ApiNs(
+                self.soup_obj)
+        return self._ns
+
+    @property
+    def api_const_block(self):
+        """Get Block containd all const types, names and values"""
+        if self._api_const_block is None:
+            self._api_const_block = ApiConstBlock(self.public_members)
+        return self._api_const_block
+
+    @property
+    def api_summary_rows(self) -> base.ApiSummaryRows:
+        """Gets the summary rows for api_const_block"""
+        if self._api_const_summary_rows is None:
+            self._api_const_summary_rows = base.ApiSummaryRows(self.api_const_block)
+        return self._api_const_summary_rows
+    @property
+    def api_summaries(self) -> ApiSummaries:
+        """
+        Get the summaries. This classes get_object() returns a list of SummaryInfo
+        """
+        if self._api_summaries is None:
+            self._api_summaries = ApiSummaries(self.api_summary_rows)
+        return self._api_summaries
+    # endregion Properties
+# endregion API classes
 
 class Parser(base.ParserBase):
     

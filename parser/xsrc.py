@@ -320,6 +320,7 @@ class ApiNs(base.ApiNamespace):
 
 
 class ApiInterfaceData(base.APIData):
+    # region Constructor
     def __init__(self, url_soup: Union[str, base.SoupObj], allow_cache: bool):
         super().__init__(url_soup=url_soup, allow_cache=allow_cache)
         self._si_key = 'summeries'
@@ -340,6 +341,7 @@ class ApiInterfaceData(base.APIData):
             self._si_key: {},
             self._detail_block_key: {}
         }
+    # endregion Constructor
 
     # region Methods
     @AcceptedTypes(str, ftype=DecFuncEnum.METHOD)
