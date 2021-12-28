@@ -379,6 +379,8 @@ class ConstWriter(base.WriteBase):
             "name": 'place holder',
             "namespace": 'place holder',
             "url": 'place holder',
+            'flags': self._flags,
+            "base_class": self._get_const_base_class(),
             "quote": [],
             "typings": []
         }
@@ -410,16 +412,19 @@ class ConstWriter(base.WriteBase):
         self._cache[key] = str_jsn
         return self._cache[key]
 
-    def _get_from_imports(self) -> List[List[str]]:
-        key = '_get_from_imports'
-        if key in self._cache:
-            return self._cache[key]
+    def _get_const_base_class(self) -> str:
         if self._flags:
             const_base_cls = base.APP_CONFIG.base_const_int_flags
         else:
             const_base_cls = base.APP_CONFIG.base_const_int
+        return const_base_cls
+
+    def _get_from_imports(self) -> List[List[str]]:
+        key = '_get_from_imports'
+        if key in self._cache:
+            return self._cache[key]
         lst = [
-            [base.APP_CONFIG.base_const, const_base_cls]
+            [base.APP_CONFIG.base_const, self._get_const_base_class()]
         ]
         self._cache[key] = lst
         return self._cache[key]
@@ -457,6 +462,17 @@ class ConstWriter(base.WriteBase):
         self._template = self._template.replace('{name}', self._p_name)
         self._template = self._template.replace('{ns}', self._p_namespace)
         self._template = self._template.replace('{link}', self._p_url)
+        self._template = self._template.replace('{base_class}', self._get_const_base_class())
+        self._template = self._template.replace(
+            '{requires_typing}', str(self._p_requires_typing))
+        self._template = self._template.replace(
+            '{from_imports}',
+            base.Util.get_formated_dict_list_str(self._get_from_imports())
+            )
+        self._template = self._template.replace(
+            '{from_typing_imports}',
+            base.Util.get_formated_dict_list_str(self._get_from_imports_typing())
+        )
         indent = ' ' * self._indent_amt
         str_json_desc = base.Util.get_formated_dict_list_str(self._p_desc)
         self._template = self._template.replace('{desc}', str_json_desc)
