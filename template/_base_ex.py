@@ -50,7 +50,7 @@ class BaseEx(BaseJson):
 
         def sort_lst_dict(_key: str, sort_key: str) -> List[dict]:
             key_index: List[Tuple[str, int]] = []
-            lst = items[_key]  # methods
+            lst = items[_key]
             if len(lst) == 0:
                 return lst
             for i, itm in enumerate(lst):
@@ -63,6 +63,7 @@ class BaseEx(BaseJson):
         keys = items.keys()
         result = {}
         for k in keys:
+            # k, properties, list of dict
             result[k] = sort_lst_dict(k, 'name')
         return result
 

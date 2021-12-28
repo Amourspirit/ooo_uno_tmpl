@@ -219,9 +219,7 @@ class ParserEx(base.ParserBase):
         key = '_get_data_items'
         if key in self._cache:
             return self._cache[key]
-        attribs = {}
-        prop = self._get_properties_data()
-        attribs['properties'] = prop
+        attribs = self._get_properties_data()
         self._cache[key] = attribs
         return self._cache[key]
 

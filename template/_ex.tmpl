@@ -56,9 +56,9 @@ class ${name}($self.lst_to_str($inherits))$self.get_class_end()
 #set $properties = $attribs['properties']
 #for $property in $properties
 #set $p_name = $property['name']
-#set $p_type = $self.get_q_type($property['type'])
+#set $p_type = $property['returns']
 #set $p_desc = $property['desc']
-    ${p_name}: $p_type = ...
+    ${p_name}: $self.get_q_type($p_type) = ...
     #if $include_desc
     """
     #for $line in $self.line_gen($p_desc)
