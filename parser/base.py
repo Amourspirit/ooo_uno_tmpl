@@ -1765,9 +1765,9 @@ class Util:
         """
         return input.replace(de, restore)
 
-    @TypeCheckKw(arg_info={"typings": 0, "quote": 0}, types=[bool], ftype=DecFuncEnum.METHOD_STATIC)
-    @AcceptedTypes(str, opt_args_filter=DecArgEnum.NAMED_ARGS, ftype = DecFuncEnum.METHOD_STATIC)
     @deprecated(version='0.1.4', reason='Deprecated, use get_python_type() instead')
+    @AcceptedTypes(str, opt_args_filter=DecArgEnum.NAMED_ARGS, ftype = DecFuncEnum.METHOD_STATIC)
+    @TypeCheckKw(arg_info={"typings": 0, "quote": 0}, types=[bool], ftype=DecFuncEnum.METHOD_STATIC)
     @staticmethod
     def get_py_type(uno_type: str, **kwargs) -> str:
         """
