@@ -21,6 +21,7 @@ from parser.json_parser.struct_parser import parse as parse_struct
 from parser.json_parser.enum_parser import parse as parse_enm
 from parser.json_parser.exception_parser import parse as parse_ex
 from parser.json_parser.typedef_parser import parse as parse_typedef
+from parser.json_parser.const_parser import parse as parse_const
 logger = None
 
 os.environ['project_root'] = str(Path(__file__).parent)
@@ -75,7 +76,6 @@ class BaseCompile:
         """Gets json_parser_path value"""
         return self._json_parser_path
 
-
 class CompileEnumLinks(BaseCompile):
     def __init__(self, config: AppConfig, use_subprocess: bool) -> None:
         super().__init__(config=config)
@@ -100,6 +100,41 @@ class CompileEnumLinks(BaseCompile):
     def _process_direct(self, file: str):
         logger.info(
             "CompileEnumLinks: Processing interface in file: %s", file)
+        parse_enm('t', 'j', f=file)
+
+    def _process_files(self):
+        link_files = self.get_module_link_files()
+        for file in link_files:
+            if self._do_sub:
+                self._subprocess(file)
+            else:
+                self._process_direct(file)
+
+
+class CompileConstLinks(BaseCompile):
+    def __init__(self, config: AppConfig, use_subprocess: bool) -> None:
+        super().__init__(config=config)
+        self._do_sub = use_subprocess
+        if self._do_sub:
+            self._processer = str(
+                Path(self.json_parser_path, 'const_parser.py'))
+        else:
+            self._processer = ''
+        self._process_files()
+
+    def _subprocess(self, file: str):
+        cmd_str = f"{self._processer} -f {file}"
+        cmd = [sys.executable] + cmd_str.split()
+        logger.info("CompileConstLinks: Processing enums in file: %s", file)
+        res = subprocess.run(cmd)
+        if res.stdout:
+            logger.info(res.stdout)
+        if res.stderr:
+            logger.error(res.stderr)
+
+    def _process_direct(self, file: str):
+        logger.info(
+            "CompileConstLinks: Processing interface in file: %s", file)
         parse_enm('t', 'j', f=file)
 
     def _process_files(self):
@@ -441,6 +476,7 @@ def main():
     subparser = parser.add_subparsers(dest='command')
     ex_parser = subparser.add_parser(name='ex')
     enum_parser = subparser.add_parser(name='enum')
+    const_parser = subparser.add_parser(name='const')
     struct_parser = subparser.add_parser(name='struct')
     interface_parser = subparser.add_parser(name='interface')
     typedef_parser = subparser.add_parser(name='typedef')
@@ -477,6 +513,23 @@ def main():
         default=False
     )
     # endregion enum args
+
+    # region const args
+    const_parser.add_argument(
+        '-a', '--all',
+        help='Compile all constants recursivly',
+        action='store_true',
+        dest='const_all',
+        default=False
+    )
+    const_parser.add_argument(
+        '-u', '--run-as-cmdline',
+        help='Run as command line suprocess. Default False',
+        action='store_true',
+        dest='cmd_line_process',
+        default=False
+    )
+    # endregion const args
 
     # region struct args
     struct_parser.add_argument(
@@ -582,6 +635,10 @@ def main():
     if args.command == 'enum':
         if args.enum_all:
             CompileEnumLinks(
+                config=config, use_subprocess=args.cmd_line_process)
+    if args.command == 'const':
+        if args.const_all:
+            CompileConstLinks(
                 config=config, use_subprocess=args.cmd_line_process)
     if args.command == 'struct':
         if args.struct_all:
