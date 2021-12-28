@@ -8,7 +8,6 @@ import sys
 import re
 import logging
 import argparse
-import base
 import xerox # requires xclip - sudo apt-get install xclip
 import textwrap
 from typing import Dict, List, Set, Union
@@ -18,6 +17,10 @@ from kwhelp.decorator import DecFuncEnum, RuleCheckAllKw, TypeCheckKw
 from kwhelp import rules
 from collections import namedtuple
 from pathlib import Path
+try:
+    import base
+except ModuleNotFoundError:
+    import parser.base as base
 from logger.log_handle import get_logger
 from parser import __version__, JSON_ID
 from parser.type_mod import PythonType
