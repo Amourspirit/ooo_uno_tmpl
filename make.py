@@ -415,6 +415,13 @@ def main():
         dest='ex_all',
         default=False
     )
+    ex_parser.add_argument(
+        '-u', '--run-as-cmdline',
+        help='Run as command line suprocess. Default False',
+        action='store_true',
+        dest='cmd_line_process',
+        default=False
+    )
     # endregion ex args
 
     # region enum args
@@ -425,6 +432,13 @@ def main():
         dest='enum_all',
         default=False
     )
+    enum_parser.add_argument(
+        '-u', '--run-as-cmdline',
+        help='Run as command line suprocess. Default False',
+        action='store_true',
+        dest='cmd_line_process',
+        default=False
+    )
     # endregion enum args
 
     # region struct args
@@ -433,6 +447,13 @@ def main():
         help='Compile all struct recursivly',
         action='store_true',
         dest='struct_all',
+        default=False
+    )
+    struct_parser.add_argument(
+        '-u', '--run-as-cmdline',
+        help='Run as command line suprocess. Default False',
+        action='store_true',
+        dest='cmd_line_process',
         default=False
     )
     # endregion struct args
@@ -502,13 +523,15 @@ def main():
             logger.error(e)
     if args.command == 'ex':
         if args.ex_all:
-            CompileExLinks(config=config, use_subprocess=False)
+            CompileExLinks(config=config, use_subprocess=args.cmd_line_process)
     if args.command == 'enum':
         if args.enum_all:
-            CompileEnumLinks(config=config, use_subprocess=False)
+            CompileEnumLinks(
+                config=config, use_subprocess=args.cmd_line_process)
     if args.command == 'struct':
         if args.struct_all:
-            CompileStructLinks(config=config, use_subprocess=False)
+            CompileStructLinks(
+                config=config, use_subprocess=args.cmd_line_process)
     if args.command == 'interface':
         if args.interface_all:
             CompileInterfaceLinks(
