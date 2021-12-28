@@ -1,3 +1,10 @@
+============
+Readme Notes
+============
+
+General
+=======
+
 Files that start with _ are excluded from make.py
 
 Due to the difficulties with cheetah import of templates that are not in the same
@@ -17,10 +24,29 @@ python make.py --help
 output is copied into scratch folder with the same dir structure as uno_obj
 
 
-Links of intrest
-----------------
+Conda
+=====
 
-Contins Typedefs
+Set up env
+----------
+
+$ conda create --prefix ./env --file environment.yml
+
+Write env to Yaml
+-----------------
+
+conda env export > environment.yml
+
+active from command line
+------------------------
+
+$ conda activate $(pwd)/env
+
+Links of intrest
+================
+
+Contains Typedefs
+
 https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1beans.html
 
 Interface:
