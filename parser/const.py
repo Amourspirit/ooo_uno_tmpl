@@ -668,7 +668,7 @@ def parse(*args, **kwargs):
         if 'log_file' in pkwargs:
             log_args['log_file'] = pkwargs['log_file']
         else:
-            log_args['log_file'] = 'interface.log'
+            log_args['log_file'] = 'const.log'
         if pargs['verbose']:
             log_args['level'] = logging.DEBUG
         _set_loggers(get_logger(logger_name=Path(__file__).stem, **log_args))
