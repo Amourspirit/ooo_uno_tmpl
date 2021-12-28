@@ -11,7 +11,7 @@ import argparse
 import base
 import xerox # requires xclip - sudo apt-get install xclip
 import textwrap
-from typing import Dict, List, Union
+from typing import Dict, List, Set, Union
 from bs4 import BeautifulSoup
 from bs4.element import ResultSet, Tag
 from kwhelp.decorator import DecFuncEnum, RuleCheckAllKw, TypeCheckKw
@@ -20,6 +20,7 @@ from collections import namedtuple
 from pathlib import Path
 from logger.log_handle import get_logger
 from parser import __version__, JSON_ID
+from parser.type_mod import PythonType
 
 logger = None
 
@@ -42,7 +43,9 @@ class Parser(base.ParserBase):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self._soup = base.SoupObj(url=self.url, allow_cache=self.allow_cache)
-        self._cache = {}
+        self._cache = {
+            "python_types": []
+        }
 
     # endregion init
 
@@ -202,11 +205,16 @@ class Parser(base.ParserBase):
             return self._cache[key]
         result = []
         data = self.get_data()
+        p_names: Set[str] = set()
         try:
             for itm in data:
+                p_type = base.Util.get_python_type(itm.datatype)
+                if not p_type.type in p_names:
+                    self._cache['python_types'].append(p_type)
+                    p_names.add(p_type.type)
                 d_itm = {
                     "name": itm.name,
-                    "type": base.Util.get_python_type(itm.datatype).type,
+                    "type": p_type.type,
                     "value": itm.value,
                     "lines": itm.lines
                 }
@@ -268,6 +276,16 @@ class Parser(base.ParserBase):
         return tbl.find_all(check_row)
     # endregion Data
 
+    # region Properties
+    @property
+    def python_types(self) -> List[PythonType]:
+        """Gets a list of PythonTypes for this instance"""
+        if not '_get_data_items' in self._cache:
+            # raise Exception("Parser._get_data_items() must be called before python_types can be accessed.")
+            self._get_data_items()
+        return self._cache['python_types']
+    # endregion Properties
+
 
 class ConstWriter(base.WriteBase):
     # region Constructor
@@ -304,6 +322,7 @@ class ConstWriter(base.WriteBase):
         self._p_fullname = None
         self._p_url = None
         self._p_desc = None
+        self._p_requires_typing = False
         self._path_dir = Path(os.path.dirname(__file__))
         t_file = 'const'
         if not self._write_template_long:
@@ -354,7 +373,18 @@ class ConstWriter(base.WriteBase):
         key = '_get_json'
         if key in self._cache:
             return self._cache[key]
-        p_dict = self._parser.get_dict_data()
+        p_dict = {
+            "name": 'place holder',
+            "namespace": 'place holder',
+            "url": 'place holder',
+            "quote": [],
+            "typings": []
+        }
+        p_dict['quote'] = self._get_quote_flat()
+        p_dict['typings'] = self._get_typings()
+        p_dict['requires_typing'] = self._p_requires_typing
+        p_dict.update(self._parser.get_dict_data())
+        
         json_dict = {
             "id": JSON_ID,
             "version": __version__,
@@ -415,7 +445,37 @@ class ConstWriter(base.WriteBase):
         self._p_data = self._parser.get_formated_data()
         if self._write_file or self._write_json:
             self._file_full_path = self._get_uno_obj_path()
-        
+        # prime cache and set other params such as self._p_requires_typing
+        self._get_quote_flat()
+        self._get_typings()
+
+    # region quote/typings
+    def _get_quote_flat(self) -> List[str]:
+        key = '_get_quote_flat'
+        if key in self._cache:
+            return self._cache[key]
+        t_set: Set[str] = set()
+        p_lst = self._parser.python_types
+        for t in p_lst:
+            if t.requires_typing or t.is_py_type is False:
+                t_set.add(t.type)
+                self._p_requires_typing = True
+        self._cache[key] = list(t_set)
+        return self._cache[key]
+
+    def _get_typings(self) -> List[str]:
+        key = '_get_typings'
+        if key in self._cache:
+            return self._cache[key]
+        t_set: Set[str] = set()
+        p_lst = self._parser.python_types
+        for t in p_lst:
+            if t.requires_typing:
+                t_set.add(t.type)
+        self._cache[key] = list(t_set)
+        return self._cache[key]
+
+    # endregion quote/typing
 
     def _get_uno_obj_path(self) -> Path:
         key = '_get_uno_obj_path'
