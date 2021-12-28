@@ -350,6 +350,21 @@ class ParserMod:
                      len(type_def_links))
         return links
 
+    def _get_const_links(self) -> List[Dict[str, str]]:
+        const_links = self._api_data.api_constants_links.get_obj()
+        links = []
+        if const_links:
+            for link in const_links:
+                links.append(
+                    {
+                        "name": link.name,
+                        "href": link.href
+                    }
+                )
+        logger.debug("ParserMod.get_data() %d type_def links.",
+                     len(const_links))
+        return links
+
     def _get_class_links(self):
         class_links = self._api_data.api_class_links.get_obj()
         results = {}
@@ -373,6 +388,7 @@ class ParserMod:
         results = {
             "modules": self._get_module_links(),
             "enums": self._get_enum_links(),
+            "constants": self._get_const_links(),
             "typedef": self._get_type_def_links(),
             "classes": self._get_class_links()
         }
