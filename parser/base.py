@@ -1038,7 +1038,7 @@ class ApiDesc(BlockObj):
             self._data.append('')
             self._data.append('.. deprecated::')
             self._data.append('')
-            self._data.append('    Interface is deprecated.')
+            self._data.append('    Class is deprecated.')
         return self._data
 
 

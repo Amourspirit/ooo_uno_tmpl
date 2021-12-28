@@ -1,0 +1,69 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.8",
+  "timestamp": "2021-12-28 10:14:21+00:00",
+  "name": "AmbigousFilterRequest",
+  "type": "exception",
+  "namespace": "com.sun.star.document",
+  "parser_args": {
+    "sort": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "from_imports": [
+      [
+        "..uno.exception",
+        "Exception"
+      ]
+    ],
+    "from_imports_typing": [],
+    "quote": [],
+    "typings": [],
+    "requires_typing": false,
+    "name": "AmbigousFilterRequest",
+    "namespace": "com.sun.star.document",
+    "imports": [],
+    "extends": [
+      "com.sun.star.uno.Exception"
+    ],
+    "desc": [
+      "should be used for interaction to handle states of ambiguous filter detection",
+      "",
+      "This exception indicates, that generic filter detection can't decide which of two filters is the right one. In this case an interaction will be made. Given URL can be used to decide between given two filters. Decision can be made e.g. by a dialog, on which the user must select one of these filters. A possible continuation of type XInteractionFilterSelect transport this decision back to source of started interaction."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/exceptioncom_1_1sun_1_1star_1_1document_1_1AmbigousFilterRequest.html",
+    "items": {
+      "properties": [
+        {
+          "name": "DetectedFilter",
+          "returns": "str",
+          "desc": [
+            "transport the real detected filter, which stands in conflict to the pre selected one"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "SelectedFilter",
+          "returns": "str",
+          "desc": [
+            "transport the preselected filter"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "URL",
+          "returns": "str",
+          "desc": [
+            "transport URL which couldn't be detected right"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
+  }
+}
