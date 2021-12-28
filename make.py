@@ -20,6 +20,7 @@ from parser.json_parser.interface_parser import parse as parse_interface
 from parser.json_parser.struct_parser import parse as parse_struct
 from parser.json_parser.enum_parser import parse as parse_enm
 from parser.json_parser.exception_parser import parse as parse_ex
+from parser.json_parser.typedef_parser import parse as parse_typedef
 logger = None
 
 os.environ['project_root'] = str(Path(__file__).parent)
@@ -80,12 +81,13 @@ class CompileEnumLinks(BaseCompile):
         super().__init__(config=config)
         self._do_sub = use_subprocess
         if self._do_sub:
-            self._processer = str(Path(self.json_parser_path, 'enum_parser.py'))
+            self._processer = str(
+                Path(self.json_parser_path, 'enum_parser.py'))
         else:
             self._processer = ''
         self._process_files()
 
-    def _subprocess(self, file:str):
+    def _subprocess(self, file: str):
         cmd_str = f"{self._processer} -f {file}"
         cmd = [sys.executable] + cmd_str.split()
         logger.info("CompileEnumLinks: Processing enums in file: %s", file)
@@ -99,6 +101,40 @@ class CompileEnumLinks(BaseCompile):
         logger.info(
             "CompileEnumLinks: Processing interface in file: %s", file)
         parse_enm('t', 'j', f=file)
+
+    def _process_files(self):
+        link_files = self.get_module_link_files()
+        for file in link_files:
+            if self._do_sub:
+                self._subprocess(file)
+            else:
+                self._process_direct(file)
+
+
+class CompileTypeDefLinks(BaseCompile):
+    def __init__(self, config: AppConfig, use_subprocess: bool) -> None:
+        super().__init__(config=config)
+        self._do_sub = use_subprocess
+        if self._do_sub:
+            self._processer = str(Path(self.json_parser_path, 'typedef_parser.py'))
+        else:
+            self._processer = ''
+        self._process_files()
+
+    def _subprocess(self, file:str):
+        cmd_str = f"{self._processer} -f {file}"
+        cmd = [sys.executable] + cmd_str.split()
+        logger.info("CompileTypeDefLinks: Processing enums in file: %s", file)
+        res = subprocess.run(cmd)
+        if res.stdout:
+            logger.info(res.stdout)
+        if res.stderr:
+            logger.error(res.stderr)
+
+    def _process_direct(self, file: str):
+        logger.info(
+            "CompileTypeDefLinks: Processing interface in file: %s", file)
+        parse_typedef('t', 'j', f=file)
 
     def _process_files(self):
         link_files = self.get_module_link_files()
@@ -407,6 +443,7 @@ def main():
     enum_parser = subparser.add_parser(name='enum')
     struct_parser = subparser.add_parser(name='struct')
     interface_parser = subparser.add_parser(name='interface')
+    typedef_parser = subparser.add_parser(name='typedef')
     # region ex args
     ex_parser.add_argument(
         '-a', '--all',
@@ -476,6 +513,23 @@ def main():
 
     # endregion interface args
 
+    # region typedef args
+    typedef_parser.add_argument(
+        '-a', '--all',
+        help='Compile all struct recursivly',
+        action='store_true',
+        dest='typedef_all',
+        default=False
+    )
+    typedef_parser.add_argument(
+        '-u', '--run-as-cmdline',
+        help='Run as command line suprocess. Default False',
+        action='store_true',
+        dest='cmd_line_process',
+        default=False
+    )
+    # endregion typedef args
+
     make_parser = subparser.add_parser(name='make')
     # region make args
     make_parser.add_argument(
@@ -490,7 +544,8 @@ def main():
         action='store_true',
         dest='clean_scratch',
         default=False)
-    # region make args
+    # endregion make args
+
     parser.add_argument(
         '-v', '--verbose',
         help='verbose logging',
@@ -535,6 +590,10 @@ def main():
     if args.command == 'interface':
         if args.interface_all:
             CompileInterfaceLinks(
+                config=config, use_subprocess=args.cmd_line_process)
+    if args.command == 'typedef':
+        if args.typedef_all:
+            CompileTypeDefLinks(
                 config=config, use_subprocess=args.cmd_line_process)
     logger.info('Finished!')
 
