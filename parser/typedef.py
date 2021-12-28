@@ -566,6 +566,142 @@ class WriterTypeDef(base.WriteBase):
             logger.info("Created file: %s", jsn_p)
 # endregion Writer
 
+# region Parse method
+
+
+def _get_parsed_kwargs(**kwargs) -> Dict[str, str]:
+    required = ("url",)
+    lookups = {
+        "u": "url",
+        "url": "url",
+        "L": "log_file",
+        "log_file": "log_file"
+    }
+    result = {}
+    for k, v in kwargs.items():
+        if not isinstance(k, str):
+            continue
+        if k in lookups:
+            key = lookups[k]
+            result[key] = v
+    for k in required:
+        if not k in result:
+            # k is missing from kwargs
+            raise base.RequiredError(f"Missing required arg {k}.")
+    return result
+
+
+def _get_parsed_args(*args) -> Dict[str, bool]:
+    # key, value and value is a key into defaults
+    defaults = {
+        'no_sort': True,
+        "no_cache": True,
+        'no_desc': True,
+        "no_print_clear": True,
+        "long_template": False,
+        "print_json": False,
+        "print_template": False,
+        "write_template": False,
+        "write_json": False,
+        "verbose": False,
+    }
+    found = {
+        'no_sort': False,
+        "no_cache": False,
+        'no_desc': False,
+        "no_print_clear": False,
+        "long_template": True,
+        "print_json": True,
+        "print_template": True,
+        "write_template": True,
+        "write_json": True,
+        "verbose": True
+    }
+    lookups = {
+        "s": "no_sort",
+        "no_sort": "no_sort",
+        "x": "no_cache",
+        "no_cache": "no_cache",
+        "d": "no_desc",
+        "no_desc": "no_desc",
+        "p": "no_print_clear",
+        "no_print_clear": "no_print_clear",
+        "g": "long_template",
+        "long_template": "long_template",
+        "n": "print_json",
+        "print_json": "print_json",
+        "m": "print_template",
+        "print_template": "print_template",
+        "t": "write_template",
+        "write_template": "write_template",
+        "j": "write_json",
+        "write_json": "write_json",
+        "v": "verbose",
+        "verbose": "verbose"
+    }
+    result = {k: v for k, v in defaults.items()}
+    for arg in args:
+        if not isinstance(arg, str):
+            continue
+        if arg in lookups:
+            key = lookups[arg]
+            result[key] = found[key]
+    return result
+
+
+def parse(*args, **kwargs):
+    """
+    Parses data, alternative to running on command line.
+
+    Other Arguments:
+        'no_sort' (str, optional): Short form ``'s'``. No sorting of results. Default ``False``
+        'no_cache' (str, optional): Short form ``'x'``. No caching. Default ``False``
+        'no_desc' (str, optional): Short form ``'d'``. No desctiption will be outputed in template. Default ``False``.
+        'no_print_clear (str, optional): Short form ``'p'``. No clearing of terminal
+            when otuput to terminal. Default ``False``
+        'long_template' (str, optional): Short form ``'g'``. Writes a long format template.
+            Requires write_template is set. Default ``False``
+        'print_json' (str, optional): Short form ``'n'``. Print json to termainl. Default ``False``
+        'print_template' (str, optional): Short form ``'m'``. Print template to terminal. Default ``False``
+        'write_template' (str, optional): Short form ``'t'``. Write template file into obj_uno subfolder. Default ``False``
+        'write_json' (str, optional): Short form ``'j'``. Write json file into obj_uno subfolder. Default ``False``
+        'verbose' (str, optional): Short form ``'v'``. Verobose output.
+
+    Keyword Arguments:
+        url (str): Short form ``u``. url to parse
+        log_file (str, optional): Short form ``L``. Log File
+    """
+    global logger
+    pkwargs = _get_parsed_kwargs(**kwargs)
+    pargs = _get_parsed_args(*args)
+    if logger is None:
+        log_args = {}
+        if 'log_file' in pkwargs:
+            log_args['log_file'] = pkwargs['log_file']
+        else:
+            log_args['log_file'] = 'interface.log'
+        if pargs['verbose']:
+            log_args['level'] = logging.DEBUG
+        _set_loggers(get_logger(logger_name=Path(__file__).stem, **log_args))
+    p = ParserTypeDef(
+        url=pkwargs['url'],
+        sort=pargs['no_sort'],
+        cache=pargs['no_cache']
+    )
+    w = WriterTypeDef(
+        parser=p,
+        print_template=pargs['print_template'],
+        print_json=pargs['print_json'],
+        write_template=pargs['write_template'],
+        write_json=pargs['write_json'],
+        clear_on_print=(not pargs['no_print_clear']),
+        write_template_long=pargs['long_template'],
+        include_desc=pargs['no_desc']
+    )
+    w.write()
+
+# endregion Parse method
+
 def _main():
     global logger
 
@@ -577,13 +713,12 @@ def _main():
         _set_loggers(get_logger(logger_name=Path(__file__).stem, **log_args))
 
     url = 'https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1util.html'
-    try:
-        p = ParserTypeDef(url=url)
-        w = WriterTypeDef(parser=p)
-        w.write()
-        sys.exit()
-    except Exception:
-        sys.exit(1)
+    args = ('v', 'n')
+    kwargs = {
+        "u": url,
+        "log_file": "debug.log"
+    }
+    parse(*args, **kwargs)
 
 # region main
 
