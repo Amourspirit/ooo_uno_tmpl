@@ -146,12 +146,8 @@ class BaseStruct(BaseTpml):
             index = tpl[1]
             itm: Dict[str, object] = d_lst[index]
             name: str = itm['name']
-            is_py_type: bool = bool(itm.get('is_py_type', False))
-            t: str = itm['type']
-            if is_py_type:
-                s = f"{name}: {t}"
-            else:
-                s = f"{name}: '{t}'"
+            t: str = self.get_q_type(itm['type'])
+            s = f"{name}: {t}"
             c_str += s
             
         return c_str
@@ -172,11 +168,12 @@ class BaseStruct(BaseTpml):
     
     def get_attrib_for_prop(self, index: int) -> Dict[str, object]:
         d_lst: List[Dict[str, object]] = getattr(self, 'attribs', [])
-        lst = self.get_sorted_names()
+        _ = self.get_sorted_names()
         itm: Dict[str, object] = d_lst[index]
         result = {}
         result.update(itm)
-        is_py_type: bool = bool(result.get('is_py_type', False))
-        if not is_py_type:
-            result['type'] = "'" + result['type'] + "'"
+        result['type'] = self.get_q_type(result['type'])
+        # is_py_type: bool = bool(result.get('is_py_type', False))
+        # if not is_py_type:
+        #     result['type'] = "'" + result['type'] + "'"
         return result

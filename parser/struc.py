@@ -64,6 +64,9 @@ class Parser(base.ParserBase):
         self._data_items = None
         self._auto_imports = set()
         self._requires_typing = False
+        self._cache: Dict[str, object] = {
+            "python_types": []
+        }
 
     # endregion Constructor
 
@@ -180,7 +183,7 @@ class Parser(base.ParserBase):
             for itm in data:
                 s = '{\n'
                 s += self._indent + f'"name": "{itm.name}",\n'
-                s += self._indent + f'"is_py_type": "{itm.is_py_type}",\n'
+                # s += self._indent + f'"is_py_type": "{itm.is_py_type}",\n'
                 s += self._indent + f'"type": "{itm.datatype}",\n'
                 s += self._indent + f'"orig_type": "{itm.orig_type}",\n'
                 if len(itm.lines) > 0:
@@ -206,7 +209,7 @@ class Parser(base.ParserBase):
             for itm in data:
                 d_itm = {
                     "name": itm.name,
-                    "is_py_type": itm.is_py_type,
+                    # "is_py_type": itm.is_py_type,
                     "type": itm.datatype,
                     "orig_type": itm.orig_type,
                     "lines": itm.lines
@@ -219,7 +222,11 @@ class Parser(base.ParserBase):
         return self._data_items
 
     def _get_struct_details(self, memitetms: ResultSet) -> List[DataItem]:
+        key = '_get_struct_details'
+        if not key in self._cache:
+            self._cache[key] = True
         results = []
+        p_type_names: Set[str] = set()
         def get_doc_lines(item_tag:Tag) -> list:
             docs = item_tag.find('div', class_='memdoc')
             lines = []
@@ -238,12 +245,15 @@ class Parser(base.ParserBase):
             return lines
 
         def get_py_type(in_type: str) -> PythonType:
-            
+            nonlocal p_type_names
             p_type: PythonType = base.Util.get_python_type(in_type=in_type)
-            for im in p_type.imports:
-                self._auto_imports.add(im)
+            self._auto_imports.update(p_type.get_all_imports())
             if p_type.requires_typing:
                 self._requires_typing = True
+            # add p_type to cache. Later it will be need in writer
+            if not p_type.type in p_type_names:
+                self._cache['python_types'].append(p_type)
+                p_type_names.add(p_type.type)
             return p_type
 
         for itm in memitetms:
@@ -287,6 +297,14 @@ class Parser(base.ParserBase):
     def requires_typing(self) -> set:
         """Gets if import if typing is required"""
         return self._requires_typing
+    
+    @property
+    def python_types(self) -> List[PythonType]:
+        """Gets Instances of PythonType for this instance"""
+        key = '_get_struct_details'
+        if not key in self._cache:
+            raise Exception('Parser._get_struct_details() must be called before python_types is accessed')
+        return self._cache['python_types']
     # endregion Properties
 
 
@@ -320,7 +338,7 @@ class StructWriter(base.WriteBase):
         self._write_template_long: bool = kwargs.get(
             'write_template_long', False)
         self._indent_amt = 4
-        self._cache = {}
+        self._cache: Dict[str, object] = {}
         self._json_str = None
         self._file_full_path = None
         self._p_name = None
@@ -330,6 +348,7 @@ class StructWriter(base.WriteBase):
         self._p_desc = None
         self._p_extends: List[str] = None
         self._p_imports: Set[str] = set()
+        self._p_requires_typing = False
         
         self._path_dir = Path(os.path.dirname(__file__))
         t_file = 'struct'
@@ -378,8 +397,19 @@ class StructWriter(base.WriteBase):
     def _get_json(self) -> str:
         if not self._json_str is None:
             return self._json_str
-        p_dict = self._parser.get_dict_data()
+        p_dict = {
+            "name": 'place holder',
+            "namespace": 'place holder',
+            "url": 'place holder',
+            "quote": [],
+            "typings": []
+        }
+        p_dict.update(self._parser.get_dict_data())
         p_dict['from_imports'] = self._get_from_imports()
+        p_dict['quote'] = self._get_quote_flat()
+        p_dict['typings'] = self._get_typings()
+        p_dict['requires_typing'] = self._p_requires_typing
+        
         json_dict = {
             "id": JSON_ID,
             "version": __version__,
@@ -414,6 +444,34 @@ class StructWriter(base.WriteBase):
         return self._cache[key]
     # endregion get Imports
 
+    # region quote/typings
+    def _get_quote_flat(self) -> List[str]:
+        key = '_get_quote_flat'
+        if key in self._cache:
+            return self._cache[key]
+        t_set: Set[str] = set()
+        p_lst = self._parser.python_types
+        for t in p_lst:
+            if t.requires_typing or t.is_py_type is False:
+                t_set.add(t.type)
+                self._p_requires_typing = True
+        self._cache[key] = list(t_set)
+        return self._cache[key]
+
+    def _get_typings(self) -> List[str]:
+        key = '_get_typings'
+        if key in self._cache:
+            return self._cache[key]
+        t_set: Set[str] = set()
+        p_lst = self._parser.python_types
+        for t in p_lst:
+            if t.requires_typing:
+                t_set.add(t.type)
+        self._cache[key] = list(t_set)
+        return self._cache[key]
+
+    # endregion quote/typing
+
     def _set_template_data(self):
         if self._write_template_long is False:
             return
@@ -424,7 +482,7 @@ class StructWriter(base.WriteBase):
         self._template = self._template.replace('{ns}', self._p_namespace)
         self._template = self._template.replace('{link}', self._p_url)
         self._template = self._template.replace(
-            '{requires_typing}', str(self._parser.requires_typing))
+            '{requires_typing}', str(self._p_requires_typing))
         indent = ' ' * self._indent_amt
         str_json_desc = base.Util.get_formated_dict_list_str(self._p_desc)
         self._template = self._template.replace('{desc}', str_json_desc)
@@ -465,6 +523,9 @@ class StructWriter(base.WriteBase):
         self._p_extends = get_extends(data['extends'])
         if self._write_file or self._write_json:
             self._file_full_path = self._get_uno_obj_path()
+        # prime cache and set other params such as self._p_requires_typing
+        self._get_quote_flat()
+        self._get_typings()
         
 
     def _get_uno_obj_path(self) -> Path:
