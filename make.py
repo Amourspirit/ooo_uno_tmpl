@@ -135,7 +135,7 @@ class CompileConstLinks(BaseCompile):
     def _process_direct(self, file: str):
         logger.info(
             "CompileConstLinks: Processing interface in file: %s", file)
-        parse_enm('t', 'j', f=file)
+        parse_const('t', 'j', f=file)
 
     def _process_files(self):
         link_files = self.get_module_link_files()
