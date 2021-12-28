@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 20:56:27+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-28 11:31:01+00:00",
   "type": "struct",
   "name": "PropertyValue",
   "namespace": "com.sun.star.beans",
@@ -15,13 +15,19 @@
   },
   "data": {
     "name": "PropertyValue",
+    "namespace": "com.sun.star.beans",
+    "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1beans_1_1PropertyValue.html",
+    "quote": [
+      "PropertyState"
+    ],
+    "typings": [],
     "fullname": "com.sun.star.beans.PropertyValue",
     "desc": [
       "specifies a property value."
     ],
-    "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1beans_1_1PropertyValue.html",
-    "namespace": "com.sun.star.beans",
-    "extends": [],
+    "extends": [
+      "com.sun.star.ucb.PropertyValueInfo"
+    ],
     "imports": [],
     "auto_imports": [
       [
@@ -29,12 +35,16 @@
         "PropertyState"
       ]
     ],
-    "from_imports": [],
-    "requires_typing": false,
+    "from_imports": [
+      [
+        "..ucb.property_value_info",
+        "PropertyValueInfo"
+      ]
+    ],
+    "requires_typing": true,
     "items": [
       {
         "name": "Handle",
-        "is_py_type": true,
         "type": "int",
         "orig_type": "long",
         "lines": [
@@ -44,7 +54,6 @@
       },
       {
         "name": "Name",
-        "is_py_type": true,
         "type": "str",
         "orig_type": "string",
         "lines": [
@@ -54,7 +63,6 @@
       },
       {
         "name": "State",
-        "is_py_type": false,
         "type": "PropertyState",
         "orig_type": "com.sun.star.beans.PropertyState",
         "lines": [
@@ -63,7 +71,6 @@
       },
       {
         "name": "Value",
-        "is_py_type": true,
         "type": "object",
         "orig_type": "any",
         "lines": [

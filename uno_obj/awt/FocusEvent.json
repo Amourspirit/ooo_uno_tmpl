@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.5",
-  "timestamp": "2021-12-24 20:56:27+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-28 11:30:59+00:00",
   "type": "struct",
   "name": "FocusEvent",
   "namespace": "com.sun.star.awt",
@@ -15,14 +15,18 @@
   },
   "data": {
     "name": "FocusEvent",
+    "namespace": "com.sun.star.awt",
+    "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1awt_1_1FocusEvent.html",
+    "quote": [
+      "XInterface"
+    ],
+    "typings": [],
     "fullname": "com.sun.star.awt.FocusEvent",
     "desc": [
       "specifies a keyboard focus event.",
       "",
       "There are two levels of focus change events: permanent and temporary. Permanent focus change events occur when focus is directly moved from one component to another, such as through calls to requestFocus() or as the user uses the Tab key to traverse components. Temporary focus change events occur when focus is gained or lost for a component as the indirect result of another operation, such as window deactivation or a scrollbar drag. In this case, the original focus state will automatically be restored once that operation is finished, or for the case of window deactivation, when the window is reactivated. Both permanent and temporary focus events are delivered using the FOCUS_GAINED and FOCUS_LOST event ids; the levels may be distinguished in the event using the isTemporary() method."
     ],
-    "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1awt_1_1FocusEvent.html",
-    "namespace": "com.sun.star.awt",
     "extends": [
       "com.sun.star.lang.EventObject"
     ],
@@ -39,11 +43,10 @@
         "EventObject"
       ]
     ],
-    "requires_typing": false,
+    "requires_typing": true,
     "items": [
       {
         "name": "FocusFlags",
-        "is_py_type": true,
         "type": "int",
         "orig_type": "short",
         "lines": [
@@ -52,7 +55,6 @@
       },
       {
         "name": "NextFocus",
-        "is_py_type": false,
         "type": "XInterface",
         "orig_type": "com.sun.star.uno.XInterface",
         "lines": [
@@ -61,7 +63,6 @@
       },
       {
         "name": "Temporary",
-        "is_py_type": true,
         "type": "bool",
         "orig_type": "boolean",
         "lines": [
