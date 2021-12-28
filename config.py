@@ -24,6 +24,22 @@ class AppConfig:
     """
     Index color of component map images for NON-inherits.
     """
+    base_const: str
+    """
+    module path to const such as ``ooo_uno.base.const``
+    """
+    base_const_int: str
+    """
+    Base class for constants of int type such as ``ConstIntBase``
+    """
+    base_const_int_flags: str
+    """
+    Base class for constants of int flags type such as ``ConstIntFlagsBase``
+    """
+    env: str
+    """
+    module path to oenv suca as ``ooo_uno.oenv``
+    """
 
 def read_config(config_file: str) -> AppConfig:
     """

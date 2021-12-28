@@ -323,6 +323,8 @@ class ConstWriter(base.WriteBase):
         self._p_url = None
         self._p_desc = None
         self._p_requires_typing = False
+        self._p_from_imports = set()
+        self._p_typing_imports = set()
         self._path_dir = Path(os.path.dirname(__file__))
         t_file = 'const'
         if not self._write_template_long:
@@ -383,7 +385,11 @@ class ConstWriter(base.WriteBase):
         p_dict['quote'] = self._get_quote_flat()
         p_dict['typings'] = self._get_typings()
         p_dict['requires_typing'] = self._p_requires_typing
+        p_dict['from_imports'] = self._get_from_imports()
+        p_dict['from_imports_typing'] = self._get_from_imports_typing()
+        # ConstIntFlagsBase
         p_dict.update(self._parser.get_dict_data())
+        
         
         json_dict = {
             "id": JSON_ID,
@@ -402,6 +408,31 @@ class ConstWriter(base.WriteBase):
         }
         str_jsn = base.Util.get_formated_dict_list_str(obj=json_dict, indent=2)
         self._cache[key] = str_jsn
+        return self._cache[key]
+
+    def _get_from_imports(self) -> List[List[str]]:
+        key = '_get_from_imports'
+        if key in self._cache:
+            return self._cache[key]
+        if self._flags:
+            const_base_cls = base.APP_CONFIG.base_const_int_flags
+        else:
+            const_base_cls = base.APP_CONFIG.base_const_int
+        lst = [
+            [base.APP_CONFIG.base_const, const_base_cls]
+        ]
+        self._cache[key] = lst
+        return self._cache[key]
+
+    def _get_from_imports_typing(self) -> List[List[str]]:
+        key = '_get_from_imports_typing'
+        if key in self._cache:
+            return self._cache[key]
+        t_set: Set[str] = set()
+        p_lst = self._parser.python_types
+        for t in p_lst:
+            t_set.update(t.get_all_imports())
+        self._cache[key] = list(t_set)
         return self._cache[key]
 
     def _write_to_file(self):
