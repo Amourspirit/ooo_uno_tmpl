@@ -16,10 +16,13 @@ import os
 import sys
 import argparse
 import logging
-import base
 from typing import Dict, List, Set, Union
 from kwhelp.decorator import DecFuncEnum, TypeCheckKw
 from pathlib import Path
+try:
+    import base
+except ModuleNotFoundError:
+    import parser.base as base
 from logger.log_handle import get_logger
 from dataclasses import dataclass, field
 from parser import __version__, JSON_ID
