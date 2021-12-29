@@ -538,63 +538,34 @@ class RuleDetail(RuleBase):
                 f"{self.__class__.__name__}.get_val() Value is missing. Did you run get_is_match() before get_val()?")
         # text could be hex or int.
         val = self._get_from_int()
-        if Val:
+        if val:
             self._rules.set_cached(val)
             return val
         names = [s.strip() for s in self._text.split('|')]
+        # confirm name and return them.
+        
         if len(names) == 0:
             raise Exception(
                 f"{self.__class__.__name__}.get_val() There are no names found from details section!")
-        vals = []
         try:
-            for tag, si in self._gen_tags(names):
-                # search recursivly
-                val = self._rules.get_val(tag=tag)
-                if not val:
-                    raise Exception(
-                        f"{self.__class__.__name__}.get_val() Failed to find a match during recursive search for {si.name} with id: '{si.id}'")
-                vals.append(val)
+            self._validate_names(names=names)
         except Exception:
             self._set_defaults()
             raise
+        result = Val(identity=self.identity, is_flags=True, val_type=ValTypeEnum.STRING, values=names)
         
-        try:
-            result = self._get_val_from_vals(vals)
-        except Exception:
-            raise
-        finally:
-            self._set_defaults()
+        self._set_defaults()
         self._rules.set_cached(result)
         return result
 
 
-    def _gen_tags(self, names: List[str]):
-        summaries = self._get_summaries(names=names)
-        result = []
-        for si in summaries:
-            yield self._get_from_block(si), si
-
-    def _get_from_block(self, si: SummaryInfo) -> Tag:
-        _id = 'memitem:' + si.id
-        tag = self._rules.summary_block.get_obj()
-        if not tag:
-            raise Exception(
-                f"{self.__class__.__name__}._get_from_block() Summary block did not yield a result!")
-        tag_row = tag.find('tr', class_=_id)
-        if not tag_row:
-            raise Exception(
-                f"{self.__class__.__name__}._get_from_block() Summary block did not find a row with class matching: '{_id}'!")
-        return tag_row
-
-    def _get_summaries(self, names: List[str]) -> List[SummaryInfo]:
-        summaries = []
+    def _validate_names(self, names: List[str]) -> None:
         for name in names:
             si: SummaryInfo = self._rules.get_summary_by_name(name)
             if not si:
                 raise Exception(
                     f"{self.__class__.__name__}.get_val() Name '{name}' did not match any summary info!")
-            summaries.append(si)
-        return summaries
+        return None
 
     def _get_from_int(self) -> Union[Val, None]:
         """Convert text to int if possible"""
@@ -621,32 +592,26 @@ class RuleDetail(RuleBase):
         tag = block.get_obj()
         if not tag:
             raise Exception
-        tag.find('div', class_='fragment')
-        if not tag:
+        f_tag = tag.find('div', class_='fragment')
+        if not f_tag:
+            raise Exception
+        lines: ResultSet = f_tag.find_all('div', class_='line')
+        if not lines:
+            raise Exception
+        text: str = None
+        for i, line in enumerate(lines):
+            if i == 0:
+                text = ''
+            else:
+                text += ' '
+            text += line.text
+        if not text:
             raise Exception
         # replace \n with space
-        text = " ".join(tag.text.splitlines())
+        text = " ".join(text.splitlines())
         # remove extra whitespace
         return " ".join(text.split())
-    
-    def _get_val_from_vals(self, vals: List[Val]) -> Val:
-        if len(vals) == 0:
-            raise Exception(
-                f"{self.__class__.__name__}._get_val_from_vals() There are no values!")
 
-        flags: List[str] = []
-        for val in vals:
-            if val.val_type == ValTypeEnum.INTEGER:
-                flags.append(val.text)
-            else:
-                flags.extend(val.values)
-        result = Val(
-            identity=self.identity,
-            is_flags=True,
-            val_type=ValTypeEnum.STRING,
-            values=flags
-        )
-        return result
 # endregion Rule Engine
 
 # region API classes
