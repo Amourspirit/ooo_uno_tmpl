@@ -46,6 +46,8 @@ dataitem = namedtuple(
 class ValTypeEnum(IntEnum):
     STRING = auto()
     INTEGER = auto()
+
+
 @dataclass
 class Val:
     identity: str = ''
@@ -95,14 +97,12 @@ class IRules(ABC):
 
 
 class Rules(IRules):
-    def __init__(self, si_lst: List[base.SummaryInfo], summary_block: base.ApiSummaryBlock) -> None:
+    def __init__(self, si_dict: Dict[str, base.SummaryInfo], summary_block: base.ApiSummaryBlock) -> None:
         self._summary_block: base.ApiSummaryBlock = summary_block
-        self._summaries = {}
+        self._summaries = si_dict
         self._name_map = {}
-        for si in si_lst:
-            self._summaries[si.id] = si
+        for _, si in si_dict.items():
             self._name_map[si.name] = si.id
-
         self._rules: List[IRule] = []
         self._cache = {}
         self._register_known_rules()
@@ -467,10 +467,19 @@ class ApiSummaries(base.BlockObj):
         self._imports: Set[str] = set()
         self._data = None
     
-    def get_obj(self) -> List[base.SummaryInfo]:
+    def get_obj(self) -> Dict[str, SummaryInfo]:
+        """
+        Gets a dictionary of summary info. Key is ID.
+
+        Raises:
+            Exception: If error parsing info.
+
+        Returns:
+            Dict[str, base.SummaryInfo]: summary info dictionary.
+        """
         if not self._data is None:
             return self._data
-        self._data: List[base.SummaryInfo] = []
+        self._data: Dict[str, SummaryInfo] = []
         # get all rows
         tags: List[Tag] = self._block.get_obj()
         if len(tags) == 0:
@@ -493,7 +502,7 @@ class ApiSummaries(base.BlockObj):
             if p_type.requires_typing:
                 self._requires_typing = True
             self._imports.update(p_type.get_all_imports())
-            self._data.append(si)
+            self._data[si.id] = si
         return self._data
 
     def _get_name(self, tr:Tag) -> str:
@@ -550,6 +559,55 @@ class ApiSummaries(base.BlockObj):
             logger.error(msg)
             raise Exception(msg)
         return result
+
+class ApiValues(base.BlockObj):
+    def __init__(self, summary_block: base.ApiSummaryBlock, api_summaries: ApiSummaries) -> None:
+        self._summary_block: base.ApiSummaryBlock = summary_block
+        self._api_summaries: ApiSummaries = api_summaries
+        super().__init__(self._block.soup)
+        self._requires_typing = False
+        self._imports: Set[str] = set()
+        self._data = None
+
+    def _get_tag(self, si: SummaryInfo, block_tag: Tag) -> Tag:
+        _id = "memitem:" + si.id
+        tag: Tag = block_tag.find('tr', class_=_id)
+        if not tag:
+            msg = f"{self.__class__.__name__} Failed in finding data for {si.name} with class: '{_id}'. Url: {self.url_obj.url}"
+            raise Exception(msg)
+        return tag
+
+    def get_obj(self) -> Dict[str, Val]:
+        if not self._data is None:
+            return self._data
+        sum_block_tag = self._summary_block.get_obj()
+        if not sum_block_tag:
+            msg = f"{self.__class__.__name__} instance of ApiSummaryBlock failed to get any data. Url: {self.url_obj.url}"
+            logger.error(msg)
+            raise Exception(msg)
+        api_summaries: Dict[str, SummaryInfo] = self._api_summaries.get_obj()
+        keys = list(api_summaries.keys())
+        if len(keys) == 0:
+            msg = f"{self.__class__.__name__} instance of ApiSummaries failed to get any data. Url: {self.url_obj.url}"
+            logger.error(msg)
+            raise Exception(msg)
+        self._data = {}
+        rules = Rules(si_dict=api_summaries, summary_block=self._summary_block)
+        for k in keys:
+            si: SummaryInfo = api_summaries[k]
+            try:
+                t: Tag = self._get_tag(si=si, block_tag=sum_block_tag)
+                val = rules.get_val(t)
+                if not val:
+                    msg = f"{self.__class__.__name__} Failed to get data from rules engine for {si.name} with id of '{si.id}'."
+                    raise Exception(msg)
+                self._data[si.id] = val
+            except Exception as e:
+                msg = str(e) + '\nUrl: ' + self.url_obj.url
+                logger.exception(msg, exc_info=True)
+                raise Exception(msg) from e
+        return self._data
+
 
 class ApiData(base.APIData):
     def __init__(self, url_soup: Union[str, base.SoupObj], allow_cache: bool):
