@@ -15,7 +15,7 @@ from typing import Dict, List, Set, Union
 from dataclasses import dataclass, field
 from bs4 import BeautifulSoup
 from bs4.element import ResultSet, Tag
-from kwhelp.decorator import DecFuncEnum, TypeCheckKw
+from kwhelp.decorator import AcceptedTypes, DecFuncEnum, TypeCheckKw
 from collections import namedtuple
 from pathlib import Path
 from abc import ABC, abstractmethod, abstractproperty
@@ -41,6 +41,13 @@ pattern_hex = re.compile(r"0x[0-9A-Fa-f]+")
 
 dataitem = namedtuple(
     'dataitem', ['value', 'raw_value', 'name', 'datatype', 'lines'])
+
+@dataclass
+class DataItem:
+    name: str
+    value: str
+    type: str
+    lines: List[str] = field(default_factory=list)
 
 # region Rule Engine
 class ValTypeEnum(IntEnum):
@@ -565,8 +572,6 @@ class ApiValues(base.BlockObj):
         self._summary_block: base.ApiSummaryBlock = summary_block
         self._api_summaries: ApiSummaries = api_summaries
         super().__init__(self._block.soup)
-        self._requires_typing = False
-        self._imports: Set[str] = set()
         self._data = None
 
     def _get_tag(self, si: SummaryInfo, block_tag: Tag) -> Tag:
@@ -616,6 +621,38 @@ class ApiData(base.APIData):
         self._api_const_block: ApiConstBlock = None
         self._api_const_summary_rows: base.ApiSummaryRows = None
         self._api_summaries: ApiSummaries = None
+        self._api_values: ApiValues = None
+        self._cache: Dict[str, object] = {}
+
+    # region Methods  
+    def get_data_items(self) -> List[DataItem]:
+        key = 'get_data_items'
+        if key in self._cache:
+            return self._cache[key]
+        def build_val(val: Val) -> str:
+            if not val.is_flags:
+                return str(val.values[0])
+            return " | ".join([str(v) for v in val.values])
+        
+        summaries = self.api_summaries.get_obj()
+        values = self.api_values.get_obj()
+        keys = summaries.keys()
+        results: List[DataItem] = []
+        for k in keys:
+            si = summaries[k]
+            val =values[k]
+            desc = self.get_desc_detail(si.id).get_obj()
+            di = DataItem(
+                name=si.name,
+                value = build_val(val),
+                type=si.p_type.type,
+                lines=desc
+            )
+            results.append(di)
+        self._cache[key] = results
+        return self._cache[key]
+
+    # endregion Methods
 
     # region Properties
 
@@ -648,6 +685,12 @@ class ApiData(base.APIData):
         if self._api_summaries is None:
             self._api_summaries = ApiSummaries(self.api_summary_rows)
         return self._api_summaries
+
+    @property
+    def api_values(self) -> ApiValues:
+        if self._api_values is None:
+            self._api_values = ApiValues(self.api_const_block, self.api_summaries)
+        return self._api_values
     # endregion Properties
 # endregion API classes
 
