@@ -3,7 +3,7 @@
 """
 Process a link to a page that contains a constant
 """
-from dataclasses import dataclass
+from enum import IntEnum, auto
 import os
 import sys
 import re
@@ -12,13 +12,13 @@ import argparse
 import xerox # requires xclip - sudo apt-get install xclip
 import textwrap
 from typing import Dict, List, Set, Union
+from dataclasses import dataclass, field
 from bs4 import BeautifulSoup
 from bs4.element import ResultSet, Tag
-from kwhelp.decorator import DecFuncEnum, RuleCheckAllKw, TypeCheckKw
-from kwhelp import rules
+from kwhelp.decorator import DecFuncEnum, TypeCheckKw
 from collections import namedtuple
 from pathlib import Path
-
+from abc import ABC, abstractmethod, abstractproperty
 from parser.base import SummaryInfo
 try:
     import base
@@ -42,9 +42,396 @@ pattern_hex = re.compile(r"0x[0-9A-Fa-f]+")
 dataitem = namedtuple(
     'dataitem', ['value', 'raw_value', 'name', 'datatype', 'lines'])
 
-# region Dataclasses
+# region Rule Engine
+class ValTypeEnum(IntEnum):
+    STRING = auto()
+    INTEGER = auto()
+@dataclass
+class Val:
+    identity: str = ''
+    is_flags: bool = False
+    val_type: ValTypeEnum = ValTypeEnum.INTEGER
+    values: List[Union[int, str]] = field(default_factory=list)
 
-# endregion Dataclasses
+class IRule(ABC):
+    @abstractmethod
+    def __init__(self, rules: 'IRules') -> None:
+        """Constructor"""
+    @abstractmethod
+    def get_is_match(self, tag: Tag) -> bool:
+        """
+        Gets if rule is a match
+        
+        Args:
+            in_type (str): LibreOffice Api type such as Long.
+        """
+    @abstractmethod
+    def get_val(self) -> Val:
+        """Gets a Val if there is a rule match"""
+    @abstractproperty
+    def identity(self) -> str:
+        """Gets id"""
+
+class IRules(ABC):
+    @abstractmethod
+    def get_rule_instance(self, rule: IRule) -> IRule:
+        """Gets a rule instance"""
+
+    @abstractmethod
+    def get_val(self, tag: Tag) -> Union[Val, None]:
+        """Gets a Val if there is a rule match"""
+
+    @abstractmethod
+    def get_summary_by_name(self, name: str) -> Union[base.SummaryInfo, None]:
+        """Gets summary info by name"""
+
+    @abstractproperty
+    def summary_block(self) -> base.ApiSummaryBlock:
+        """Gets the block that contains summary info for all constants of the current html page."""
+
+    @abstractproperty
+    def summaries(self) -> Dict[str, base.SummaryInfo]:
+        """All the summaries for a html page"""
+
+
+class Rules(IRules):
+    def __init__(self, si_lst: List[base.SummaryInfo], summary_block: base.ApiSummaryBlock) -> None:
+        self._summary_block: base.ApiSummaryBlock = summary_block
+        self._summaries = {}
+        self._name_map = {}
+        for si in si_lst:
+            self._summaries[si.id] = si
+            self._name_map[si.name] = si.id
+
+        self._rules: List[IRule] = []
+        self._cache = {}
+        self._register_known_rules()
+    # region Methods
+    def register_rule(self, rule: IRule) -> None:
+
+        if not issubclass(rule, IRule):
+            msg = "Rules.register_rule(), rule arg must be child class of ITypeRule"
+            raise TypeError(msg)
+        if rule in self._rules:
+            msg = "Rules.register_rule() Rule is already registered"
+            self._log.warning(msg)
+            return
+        self._reg_rule(rule=rule)
+
+    def unregister_rule(self,  rule: IRule):
+        """
+        Unregister a rule
+
+        Args:
+            rule (IRule): Rule to unregister
+        """
+        try:
+            self._rules.remove(rule)
+        except ValueError as e:
+            msg = f"{self.__class__.__name__}.unregister_rule() Unable to unregister rule."
+            raise ValueError(msg) from e
+
+    def _reg_rule(self, rule: IRule):
+        self._rules.append(rule)
+
+    def _register_known_rules(self):
+        self._reg_rule(rule=RuleInt)
+        self._reg_rule(rule=RuleHex)
+        self._reg_rule(rule=RuleNamedFlags)
+
+    def _get_rule(self, tag: Tag) -> Union[IRule, None]:
+
+        match_inst = None
+        for rule in self._rules:
+            key = str(id(rule))
+            if key in self._cache:
+                inst = self._cache[key]
+            else:
+                inst: IRule = rule(self)
+                self._cache[key] = inst
+            if inst.get_is_match(tag):
+                match_inst = inst
+                break
+        return match_inst
+
+    def get_val(self, tag: Tag) -> Union[Val, None]:
+        match = self._get_rule(tag)
+        if match:
+            return match.get_is_match(tag)
+        return None
+
+    def get_rule_instance(self, rule: IRule) -> IRule:
+        if not issubclass(rule, IRule):
+            msg = "Rules.get_rule_instance(), rule arg must be child class of ITypeRule"
+            self._log.error(msg)
+            raise TypeError(msg)
+        key = str(id(rule))
+        if key in self._cache:
+            return self._cache[key]
+        else:
+            self._cache[key] = rule(self)
+        return self._cache[key]
+    
+    def get_summary_by_name(self, name: str) -> Union[base.SummaryInfo, None]:
+        """Gets summary info by name"""
+        _id = self._name_map.get(name, None)
+        if _id is None:
+            return None
+        return self._summaries[_id]
+    # endregion Methods
+
+    # region Properties
+    @property
+    def summary_block(self) -> base.ApiSummaryBlock:
+        """Gets the block that contains summary info for all constants of the current html page."""
+        return self._summary_block
+
+    @property
+    def summaries(self) -> Dict[str, base.SummaryInfo]:
+        """Gets summaries for a html page. Key is ID."""
+        return self._summaries
+    # endregion Properties
+class RuleBase(IRule):
+    def __init__(self, rules: IRules) -> None:
+        self._rules = rules
+        self._info_tag: Tag = None
+        self._info_text: str = None
+        self._id: str = None
+        self._tag: Tag = None
+        self._url = rules.summary_block.url_obj.url
+
+    def __set_defaults(self):
+        self._info_tag = None
+        self._info_text = None
+        self._id = None
+        self._tag = None
+
+    def get_is_match(self, tag: Tag) -> bool:
+        self.__set_defaults()
+        if not tag:
+            return False
+        if tag.name != 'tr':
+            return False
+        _class: List[str] = tag.get('class', [])
+        if len(_class) == 0:
+            return False
+        try:
+            self._id = _class[0].split(":")[1]
+        except Exception:
+            self.__set_defaults()
+            return False
+        info_tag = tag.findChild('td', class_='memItemRight')
+        if not info_tag:
+            return False
+        self._tag = tag
+        self._info_tag = info_tag
+        info_text = self._info_tag.text.strip()
+        # remove extra whitespaces
+        self._info_text = ' '.join(info_text.split())
+        return True
+
+    @property
+    def identity(self) -> str:
+        """
+        Gets id of current match. This will be the same id used in summary info.
+
+        Raises:
+            Exception: If there has not been a successful match then error is raised
+
+        Returns:
+            str: id string
+        """
+        if self._id is None:
+            raise Exception(
+                "Identity is None: Did you forget to call get_is_match? Identity is only available when there is a sucessfull match.")
+        return self._id
+
+class RuleInt(RuleBase):
+    def __init__(self, rules: IRules) -> None:
+        super().__init__(rules=rules)
+        self._val = None
+
+    def get_is_match(self, tag: Tag) -> bool:
+        self._val = None
+        if not super().get_is_match(tag):
+            return False
+        parts = self._info_text.split("=")
+        if len(parts) != 2:
+            return False
+        part = parts[1].strip()
+        is_match = False
+        try:
+            self._val = int(part)
+            is_match = True
+        except ValueError:
+            self._val = None
+            is_match = False
+        return is_match
+    
+    def get_val(self) -> Val:
+        """Gets a Val if there is a rule match"""
+        if self._val is None:
+            raise Exception(
+                f"{self.__class__.__name__}.get_val() Value is missing. Did you run get_is_match() before get_val()?")
+        if isinstance(self._val, int):
+            result = Val(identity=self.identity, is_flags=False,
+                         val_type=ValTypeEnum.INTEGER, values=[self._val])
+            self._val = None
+            return result
+        else:
+            raise Exception(
+                f"{self.__class__.__name__}.get_val() Something went wrong. expected val was int but got {type(self._val)}")
+
+
+class RuleHex(RuleBase):
+    def __init__(self, rules: IRules) -> None:
+        super().__init__(rules=rules)
+        self._val = None
+
+    def get_is_match(self, tag: Tag) -> bool:
+        self._val = None
+        if not super().get_is_match(tag):
+            return False
+        parts = self._info_text.split("=")
+        if len(parts) != 2:
+            return False
+        part = parts[1].strip()
+        is_match = False
+        try:
+            self._val = int(part, base=16)
+            is_match = True
+        except ValueError:
+            self._val = None
+            is_match = False
+        return is_match
+
+    def get_val(self) -> Val:
+        """Gets a Val if there is a rule match"""
+        if self._val is None:
+            raise Exception(
+                f"{self.__class__.__name__}.get_val() Value is missing. Did you run get_is_match() before get_val()?")
+        if isinstance(self._val, int):
+            result = Val(identity=self.identity, is_flags=False,
+                         val_type=ValTypeEnum.INTEGER, values=[self._val])
+            self._val = None
+            return result
+        else:
+            raise Exception(
+                f"{self.__class__.__name__}.get_val() Something went wrong. expected val was int but got {type(self._val)}")
+
+
+class RuleNamedFlags(RuleBase):
+    def __init__(self, rules: IRules) -> None:
+        super().__init__(rules=rules)
+        self._names = None
+        self._infos: List[SummaryInfo] = None
+        self._recursive_mode = False
+
+    def get_is_match(self, tag: Tag) -> bool:
+        if self._recursive_mode:
+            return False
+        self._set_defaults()
+        if not super().get_is_match(tag):
+            return False
+        if self._info_text.find('|') < 0:
+            # no 'or' found
+            return False
+        parts = self._info_text.split("=")
+        if len(parts) != 2:
+            return False
+        names: List[str] = parts[1].split('|')
+        self._names = [name.strip() for name in names]
+        self._infos: List[SummaryInfo] = []
+        for name in self._names:
+            si = self._rules.get_summary_by_name(name)
+            if not si:
+                self._set_defaults()
+                return False
+            self._infos.append(si)
+        return True
+
+    def get_val(self) -> Val:
+        """Gets a Val if there is a rule match"""
+        if not self._is_valid():
+            raise Exception(
+                f"{self.__class__.__name__}.get_val() Values are missing. Did you run get_is_match() before get_val()?: Url: {self._url}")
+        vals: List[Val] = []
+        for si in self._infos:
+            try:
+                tag = self._get_from_block(si)
+            except Exception:
+                self.__set_defaults()
+                raise
+
+            val = self._get_recursive_match(tag=tag)
+            if not val:
+                self.__set_defaults()
+                raise Exception(
+                    f"{self.__class__.__name__}.get_val() Fail to find a match during recursive search for {si.name} with id: '{si.id}' Url: {self._url}")
+            vals.append(val)
+        try:
+            result = self._get_val_from_vals(vals)
+        except Exception:
+            raise
+        finally:
+            self._set_defaults()
+        return result
+
+    # region Private Methods
+    def _set_defaults(self):
+        self._names = None
+        self._infos = None
+
+    def _is_valid(self) -> bool:
+        if self._names is None:
+            return False
+        if self._infos is None:
+            return False
+        return True
+
+    def _get_val_from_vals(self, vals: List[Val]) -> Val:
+        if len(vals) == 0:
+            raise Exception(
+                    f"{self.__class__.__name__}._get_val_from_vals() There are no values! Url: {self._url}")
+    
+        flags: List[str] = []
+        for val in vals:
+            if val.val_type != ValTypeEnum.INTEGER:
+                raise Exception(
+                    f"{self.__class__.__name__}._get_val_from_vals() Found a value that is not an integer! Url: {self._url}")
+            si = self._rules.summaries[val.identity]
+            flags.append(si.name)
+        result = Val(
+            identity=self.identity,
+            is_flags=True,
+            val_type=ValTypeEnum.STRING,
+            values=flags
+        )
+        return result
+
+    def _get_from_block(self, si: SummaryInfo) -> Tag:
+        _id = 'memitem:' + si.id
+        tag = self._rules.summary_block.get_obj()
+        if not tag:
+            raise Exception(
+                f"{self.__class__.__name__}._get_from_block() Summary block did not yield a result! Url: {self._url}")
+        tag_row = tag.find('tr', class_=_id)
+        if not tag_row:
+            raise Exception(
+                f"{self.__class__.__name__}._get_from_block() Summary block did not find a row with class matching: '{_id}'! Url: {self._url}")
+        return tag_row
+
+    def _get_recursive_match(self, tag: Tag) -> Union[Val, None]:
+        try:
+            self._recursive_mode = True
+            return self._rules.get_val(tag)
+        except:
+            raise
+        finally:
+            self._recursive_mode = False
+    # endregion Private Methods
+
+# endregion Rule Engine
 
 # region API classes
 class ApiConstBlock(base.ApiSummaryBlock):
@@ -109,7 +496,7 @@ class ApiSummaries(base.BlockObj):
             self._data.append(si)
         return self._data
 
-    def _get_name(str, tr:Tag) -> str:
+    def _get_name(self, tr:Tag) -> str:
         # name should be in first a tag.
         tag: Tag = tr.findChild('td', class_='memItemRight')
         if not tag:

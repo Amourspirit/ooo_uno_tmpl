@@ -4,7 +4,6 @@ Handles conversion of LibreOffice types to Python Types
 """
 import re
 from abc import ABC, abstractmethod
-from dataclasses import dataclass, field
 from typing import List, Match, Optional, Set, Union
 
 TYPE_MAP_PRIMITIVE = {
