@@ -335,7 +335,6 @@ class ApiInterfaceData(base.APIData):
         self._func_summaries: base.ApiSummaries = None
         self._property_summaries: base.ApiSummaries = None
         self._exported_summaries: base.ApiSummaries = None
-        self._desc: base.ApiDesc = None
         self._inherited: base.ApiInherited = None
         self._cache = {
             self._si_key: {},
@@ -524,13 +523,6 @@ class ApiInterfaceData(base.APIData):
             self._exported_summaries = base.ApiSummaries(
                 self.export_summary_rows)
         return self._exported_summaries
-
-    @property
-    def desc(self) -> base.ApiDesc:
-        """Gets the interface Description object"""
-        if self._desc is None:
-            self._desc = base.ApiDesc(self.soup_obj)
-        return self._desc
 
     @property
     def inherited(self) -> base.ApiInherited:

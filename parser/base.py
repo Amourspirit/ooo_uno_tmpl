@@ -1174,6 +1174,7 @@ class APIData:
             self._soup_obj.allow_cache = allow_cache
         self._api_data_public_members: ApiPublicMembers = None
         self._api_data_name: ApiName = None
+        self._desc: ApiDesc = None
     
     # region Methods
 
@@ -1230,7 +1231,14 @@ class APIData:
         if self._api_data_public_members is None:
             self._api_data_public_members = ApiPublicMembers(self._soup_obj)
         return self._api_data_public_members
-    
+
+    @property
+    def desc(self) -> ApiDesc:
+        """Gets the interface Description object"""
+        if self._desc is None:
+            self._desc = ApiDesc(self.soup_obj)
+        return self._desc
+
     @property
     def soup_obj(self) -> SoupObj:
         """Gets soup_obj value"""

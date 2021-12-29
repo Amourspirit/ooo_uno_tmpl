@@ -45,8 +45,9 @@ dataitem = namedtuple(
 @dataclass
 class DataItem:
     name: str
-    value: str
+    value: Union[str, int]
     type: str
+    val: 'Val'
     lines: List[str] = field(default_factory=list)
 
 # region Rule Engine
@@ -387,7 +388,6 @@ class RuleNamedFlags(RuleBase):
     def __init__(self, rules: IRules) -> None:
         super().__init__(rules=rules)
         self._names: List[str] = None
-        self._infos: List[SummaryInfo] = None
         self._recursive_mode = False
 
     def get_is_match(self, tag: Tag) -> bool:
@@ -405,13 +405,9 @@ class RuleNamedFlags(RuleBase):
         if len(parts) != 2:
             return False
         self._names = [s.strip() for s in parts[1].split('|')]
-        self._infos: List[SummaryInfo] = []
-        for name in self._names:
-            si = self._rules.get_summary_by_name(name)
-            if not si:
-                self._set_defaults()
-                return False
-            self._infos.append(si)
+        if len(self._names) == 0:
+            self._set_defaults()
+            return False
         return True
 
     def get_val(self) -> Val:
@@ -421,80 +417,37 @@ class RuleNamedFlags(RuleBase):
         if not self._is_valid():
             raise Exception(
                 f"{self.__class__.__name__}.get_val() Values are missing. Did you run get_is_match() before get_val()?: Url: {self._url}")
-        vals: List[Val] = []
-        for si in self._infos:
-            try:
-                tag = self._get_from_block(si)
-            except Exception:
-                self._set_defaults()
-                raise
-
-            val = self._get_recursive_match(tag=tag)
-            if not val:
-                self._set_defaults()
-                raise Exception(
-                    f"{self.__class__.__name__}.get_val() Fail to find a match during recursive search for {si.name} with id: '{si.id}' Url: {self._url}")
-            vals.append(val)
+        
         try:
-            result = self._get_val_from_vals(vals)
+            self._validate_names(names=self._names)
         except Exception:
-            raise
-        finally:
             self._set_defaults()
+            raise
+
+        result = Val(
+            text = " | ".join(self._names),
+            identity=self.identity, is_flags=True,
+                     val_type=ValTypeEnum.STRING, values=self._names)
+
         self._rules.set_cached(result)
         return result
 
     # region Private Methods
     def _set_defaults(self):
         self._names = None
-        self._infos = None
 
     def _is_valid(self) -> bool:
         if self._names is None:
             return False
-        if self._infos is None:
-            return False
         return True
 
-    def _get_val_from_vals(self, vals: List[Val]) -> Val:
-        if len(vals) == 0:
-            raise Exception(
-                    f"{self.__class__.__name__}._get_val_from_vals() There are no values! Url: {self._url}")
-    
-        flags: List[str] = []
-        for val in vals:
-            if val.val_type == ValTypeEnum.INTEGER:
-                flags.append(val.text)
-            else:
-                flags.extend(val.values)
-        result = Val(
-            identity=self.identity,
-            is_flags=True,
-            val_type=ValTypeEnum.STRING,
-            values=flags
-        )
-        return result
-
-    def _get_from_block(self, si: SummaryInfo) -> Tag:
-        _id = 'memitem:' + si.id
-        tag = self._rules.summary_block.get_obj()
-        if not tag:
-            raise Exception(
-                f"{self.__class__.__name__}._get_from_block() Summary block did not yield a result! Url: {self._url}")
-        tag_row = tag.find('tr', class_=_id)
-        if not tag_row:
-            raise Exception(
-                f"{self.__class__.__name__}._get_from_block() Summary block did not find a row with class matching: '{_id}'! Url: {self._url}")
-        return tag_row
-
-    def _get_recursive_match(self, tag: Tag) -> Union[Val, None]:
-        try:
-            self._recursive_mode = True
-            return self._rules.get_val(tag)
-        except:
-            raise
-        finally:
-            self._recursive_mode = False
+    def _validate_names(self, names: List[str]) -> None:
+        for name in names:
+            si: SummaryInfo = self._rules.get_summary_by_name(name)
+            if not si:
+                raise Exception(
+                    f"{self.__class__.__name__}.get_val() Name '{name}' did not match any summary info!")
+        return None
     # endregion Private Methods
 
 
@@ -552,7 +505,10 @@ class RuleDetail(RuleBase):
         except Exception:
             self._set_defaults()
             raise
-        result = Val(identity=self.identity, is_flags=True, val_type=ValTypeEnum.STRING, values=names)
+        result = Val(
+            text = " | ".join(names),
+            identity=self.identity, is_flags=True,
+            val_type=ValTypeEnum.STRING, values=names)
         
         self._set_defaults()
         self._rules.set_cached(result)
@@ -740,7 +696,18 @@ class ApiSummaries(base.BlockObj):
             logger.error(msg)
             raise Exception(msg)
         return result
-
+    # region Properties
+    @property
+    def requires_typing(self) -> bool:
+        """Gets requires_typing value"""
+        return self._requires_typing
+    
+    @property
+    def imports(self) -> Set[str]:
+        """Gets imports"""
+        return self._imports
+    
+    # endregion Properties
 class ApiValues(base.BlockObj):
     def __init__(self, summary_block: base.ApiSummaryBlock, api_summaries: ApiSummaries) -> None:
         self._summary_block: base.ApiSummaryBlock = summary_block
@@ -787,7 +754,6 @@ class ApiValues(base.BlockObj):
                 raise Exception(msg) from e
         return self._data
 
-
 class ApiData(base.APIData):
     def __init__(self, url_soup: Union[str, base.SoupObj], allow_cache: bool):
         super().__init__(url_soup=url_soup, allow_cache=allow_cache)
@@ -796,6 +762,7 @@ class ApiData(base.APIData):
         self._api_const_summary_rows: base.ApiSummaryRows = None
         self._api_summaries: ApiSummaries = None
         self._api_values: ApiValues = None
+        self._api_summary_dict: Dict[str, SummaryInfo] = None
         self._cache: Dict[str, object] = {}
 
     # region Methods  
@@ -803,10 +770,6 @@ class ApiData(base.APIData):
         key = 'get_data_items'
         if key in self._cache:
             return self._cache[key]
-        def build_val(val: Val) -> str:
-            if not val.is_flags:
-                return str(val.values[0])
-            return " | ".join([str(v) for v in val.values])
         
         summaries = self.api_summaries.get_obj()
         values = self.api_values.get_obj()
@@ -818,14 +781,34 @@ class ApiData(base.APIData):
             desc = self.get_desc_detail(si.id).get_obj()
             di = DataItem(
                 name=si.name,
-                value = build_val(val),
+                value = val.text,
+                val=val,
                 type=si.p_type.type,
                 lines=desc
             )
+            if val.is_flags is False:
+                di.value = val.values[0]
             results.append(di)
         self._cache[key] = results
         return self._cache[key]
 
+    def get_requires_typing(self) -> bool:
+        """Gets if typing is required"""
+        key = 'get_requires_typing'
+        if key in self._cache:
+            return self._cache[key]
+        self.api_summaries.get_obj()
+        self._cache[key] = self.api_summaries.requires_typing
+        return self._cache[key]
+    
+    def get_imports(self) -> List[str]:
+        """Gets if typing is required"""
+        key = 'get_imports'
+        if key in self._cache:
+            return self._cache[key]
+        self.api_summaries.get_obj()
+        self._cache[key] = list(self.api_summaries.imports)
+        return self._cache[key]
     # endregion Methods
 
     # region Properties
@@ -865,18 +848,26 @@ class ApiData(base.APIData):
         if self._api_values is None:
             self._api_values = ApiValues(self.api_const_block, self.api_summaries)
         return self._api_values
+    
+    @property
+    def api_summary_dict(self) -> Dict[str, SummaryInfo]:
+        if self._api_summary_dict is None:
+            self._api_summary_dict = self.api_summaries.get_obj()
+        return self._api_summary_dict
     # endregion Properties
+
 # endregion API classes
 
+# endregion API classes
 class Parser(base.ParserBase):
     
     # region init
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self._soup = base.SoupObj(url=self.url, allow_cache=self.allow_cache)
-        self._cache = {
-            "python_types": []
-        }
+        self._api_data: ApiData = ApiData(
+            url_soup=self.url, allow_cache=self.allow_cache)
+        self._soup = self._api_data.soup_obj
+        self._cache = {}
 
     # endregion init
 
@@ -901,17 +892,16 @@ class Parser(base.ParserBase):
         try:
             if not self._url:
                 raise ValueError('URL is not set')
-            soup = self._soup.soup
-            full_name = self._get_full_name(soup=soup)
-            name = self._get_name(soup=soup)
-            desc = self._get_desc(soup=soup)
-            ns = base.UrlObj(self.url)
+            name = self._api_data.name.get_obj()
+            desc = self._api_data.desc.get_obj()
+            ns = self._api_data.ns.namespace_str
+            full_name = ns + '.' + name
             info = {
                 "name": name,
                 "fullname": full_name,
                 "desc": desc,
                 "url": self.url,
-                "namespace": ns.namespace_str
+                "namespace": ns
             }
             self._cache[key].update(info)
         except Exception as e:
@@ -934,31 +924,18 @@ class Parser(base.ParserBase):
         return info
 
 
-    def get_data(self) -> List[dataitem]:
+    def get_data(self) -> List[DataItem]:
         """
         Gets constants data
 
         Returns:
-            List: list of tuple (value:number|str, raw_value:str, name:str, type:str, lines:[])
+            List: list of DataItem
 
         Raises:
             ValueError: If url is not set.
         """
-        key = 'get_data'
-        if key in self._cache:
-            return self._cache[key]
-        try:
-            if not self._url:
-                raise ValueError('URL is not set')
-            soup = BeautifulSoup(self.get_raw_html(), 'lxml')
+        return self._api_data.get_data_items()
 
-            items = self._get_memitems(soup=soup)
-            const_info = self._get_const_details(memitetms=items)
-            self._cache[key] = const_info
-        except Exception as e:
-            logger.error(e, exc_info=True)
-            raise e
-        return self._cache[key]
 
     def get_formated_data(self):
         key = 'get_formated_data'
@@ -966,20 +943,17 @@ class Parser(base.ParserBase):
             return self._cache[key]
         try:
             data = self.get_data()
-            lines = []
             for itm in data:
-                s = f'"{itm.name}": ["{itm.raw_value}"'
-                if len(itm.lines) > 0:
-                    s_ln = ', [\n'
-                    for j, line in enumerate(itm.lines):
-                        if j > 0:
-                            s_ln += ',\n    "",\n'
-                        s_ln += f'    "{self._clean_str(line)}"'
-                    s_ln += '\n]'
-                    s += s_ln
-                s += ']'
-                lines.append(s)
-            result = ',\n'.join(lines)
+                d = {
+                    "name": itm.name,
+                    "type": itm.type,
+                    "lines": itm.lines
+                }
+                if itm.val.is_flags:
+                    d['value'] = itm.val.values[0]
+                else:
+                    d['value'] = itm.value
+            result = base.Util.get_formated_dict_list_str(obj=d, indent=2)
             self._cache[key] = result
         except Exception as e:
             logger.error(e, exc_info=True)
@@ -998,10 +972,16 @@ class Parser(base.ParserBase):
         if key in self._cache:
             return self._cache[key]
         self._cache[key] = False
-        data = self.get_data()
+        items = self._api_data.get_data_items()
+        for itm in items:
+            if itm.val.is_flags:
+                self._cache[key] = True
+                break
+        if self._cache[key] == True:
+            return self._cache[key]
         nums = []
         try:
-            for itm in data:
+            for itm in items:
                 nums.append(int(itm.value))
         except:
             return self._cache[key]
@@ -1010,42 +990,17 @@ class Parser(base.ParserBase):
         self._cache[key] = base.Util.is_enum_nums(*nums)
         return self._cache[key]
 
-    def get_is_hex(self) -> bool:
-        """
-        Gets if the parsed data is in hex format of 0x12AB
-
-        Returns:
-            bool: ``True`` if hex is matched; Otherwise, ``False``
-        """
-        key = 'get_is_hex'
-        if key in self._cache:
-            return self._cache[key]
-        self._cache[key] = False
-        data = self.get_data()
-        if len(data) == 0:
-            return self._cache[key]
-        m = pattern_hex.match(data[0].raw_value)
-        if m:
-            self._cache[key] = True
-        return self._cache[key]
-        
-        
     def _get_data_items(self) -> List[dict]:
         key = '_get_data_items'
         if key in self._cache:
             return self._cache[key]
         result = []
-        data = self.get_data()
-        p_names: Set[str] = set()
+        data = self._api_data.get_data_items()
         try:
             for itm in data:
-                p_type = base.Util.get_python_type(itm.datatype)
-                if not p_type.type in p_names:
-                    self._cache['python_types'].append(p_type)
-                    p_names.add(p_type.type)
                 d_itm = {
                     "name": itm.name,
-                    "type": p_type.type,
+                    "type": itm.type,
                     "value": itm.value,
                     "lines": itm.lines
                 }
@@ -1056,65 +1011,28 @@ class Parser(base.ParserBase):
         self._cache[key] = result
         return self._cache[key]
 
-    def _get_const_details(self, memitetms: ResultSet) -> List[dataitem]:
-        results = []
-        def get_doc_lines(item_tag:Tag) -> list:
-            docs = item_tag.find('div', class_='memdoc')
-            lines = []
-            if docs:
-                doc_lines = docs.find_all('p')
-                if doc_lines:
-                    for ln in doc_lines:
-                        lines.append(ln.text)
-            return lines
-
-        for itm in memitetms:
-            text: str = itm.find("td", class_='memname',
-                                 recursive=True).text.replace(' ', ',').replace('=,', '').replace('=', '')
-            logger.debug("Parser._get_const_details() Processing: %s", text)
-            try:
-                parts = text.rsplit(',', maxsplit=3)
-                raw_value = parts.pop()
-                name = parts.pop() # parts[2]
-                _type = parts.pop() # parts[1]
-            except Exception as e:
-                logger.warning('Failed to process Line: %s', text)
-                continue
-            value = self._get_number(raw_value)
-            lines = get_doc_lines(itm)
-            di = dataitem(value=value, raw_value=raw_value, name=name,
-                          datatype=_type, lines=lines)
-            results.append(di)
-        if self.sort:
-            results.sort()
-        return results
-
-        
-
-    def _get_tbl(self, soup: BeautifulSoup) -> ResultSet:
-        return soup.find('table', class_='memberdecls')
-
-    def _get_rows_memitem(self, tbl: ResultSet) -> ResultSet:
-        def check_row(tag: Tag) -> bool:
-            if tag.has_attr('class'):
-                _class = tag['class']
-                if isinstance(_class, str):
-                    return _class.startswith('memitem')
-                else:
-                    return _class[0].startswith('memitem')
-            return False
-
-        return tbl.find_all(check_row)
     # endregion Data
 
     # region Properties
     @property
+    def api_data(self) -> ApiData:
+        """Get parser api data"""
+        return self._api_data
+    
+    @property
     def python_types(self) -> List[PythonType]:
-        """Gets a list of PythonTypes for this instance"""
-        if not '_get_data_items' in self._cache:
-            # raise Exception("Parser._get_data_items() must be called before python_types can be accessed.")
-            self._get_data_items()
-        return self._cache['python_types']
+        """Gets python types"""
+        key = 'python_types'
+        if key in self._cache:
+            return self._cache[key]
+        data = self._api_data.get_data_items()
+        types=[]
+        for itm in data:
+            _id = itm.val.identity
+            si = self._api_data.api_summary_dict[_id]
+            types.append(si.p_type)
+        self._cache[key] = types
+        return self._cache[key]
     # endregion Properties
 
 
@@ -1261,15 +1179,7 @@ class ConstWriter(base.WriteBase):
         return self._cache[key]
 
     def _get_from_imports_typing(self) -> List[List[str]]:
-        key = '_get_from_imports_typing'
-        if key in self._cache:
-            return self._cache[key]
-        t_set: Set[str] = set()
-        p_lst = self._parser.python_types
-        for t in p_lst:
-            t_set.update(t.get_all_imports())
-        self._cache[key] = list(t_set)
-        return self._cache[key]
+        return self._parser.api_data.get_imports()
 
     def _write_to_file(self):
         with open(self._file_full_path, 'w') as f:
@@ -1323,6 +1233,7 @@ class ConstWriter(base.WriteBase):
         self._p_data = self._parser.get_formated_data()
         if self._write_file or self._write_json:
             self._file_full_path = self._get_uno_obj_path()
+        self._p_requires_typing = self._parser.api_data.get_requires_typing()
         # prime cache and set other params such as self._p_requires_typing
         self._get_quote_flat()
         self._get_typings()
@@ -1337,7 +1248,6 @@ class ConstWriter(base.WriteBase):
         for t in p_lst:
             if t.requires_typing or t.is_py_type is False:
                 t_set.add(t.type)
-                self._p_requires_typing = True
         self._cache[key] = list(t_set)
         return self._cache[key]
 
@@ -1670,4 +1580,4 @@ def main():
     w.write()
  
 if __name__ == '__main__':
-    _api()
+    _main()
