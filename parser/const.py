@@ -19,11 +19,11 @@ from kwhelp.decorator import AcceptedTypes, DecFuncEnum, TypeCheckKw
 from collections import namedtuple
 from pathlib import Path
 from abc import ABC, abstractmethod, abstractproperty
-from parser.base import SummaryInfo
 try:
     import base
 except ModuleNotFoundError:
     import parser.base as base
+from parser.base import SoupObj, SummaryInfo
 from logger.log_handle import get_logger
 from parser import __version__, JSON_ID
 from parser.type_mod import PythonType
@@ -57,6 +57,7 @@ class ValTypeEnum(IntEnum):
 
 @dataclass
 class Val:
+    text: str = ''
     identity: str = ''
     is_flags: bool = False
     val_type: ValTypeEnum = ValTypeEnum.INTEGER
@@ -93,6 +94,17 @@ class IRules(ABC):
     @abstractmethod
     def get_summary_by_name(self, name: str) -> Union[base.SummaryInfo, None]:
         """Gets summary info by name"""
+    @abstractmethod
+    def is_cached(self, sid: str) -> bool:
+        """Gets is an id is in the cache"""
+
+    @abstractmethod
+    def get_cached(self, sid: str) -> Val:
+        """Gets a Val from cache"""
+
+    @abstractmethod
+    def set_cached(self, val:Val) -> None:
+        """set or updates cached"""
 
     @abstractproperty
     def summary_block(self) -> base.ApiSummaryBlock:
@@ -102,6 +114,9 @@ class IRules(ABC):
     def summaries(self) -> Dict[str, base.SummaryInfo]:
         """All the summaries for a html page"""
 
+    @abstractproperty
+    def soup(self) -> SoupObj:
+        """Gets the soup object for the page"""
 
 class Rules(IRules):
     def __init__(self, si_dict: Dict[str, base.SummaryInfo], summary_block: base.ApiSummaryBlock) -> None:
@@ -112,7 +127,9 @@ class Rules(IRules):
             self._name_map[si.name] = si.id
         self._rules: List[IRule] = []
         self._cache = {}
+        self. _cached_vals = {}
         self._register_known_rules()
+        
     # region Methods
     def register_rule(self, rule: IRule) -> None:
 
@@ -138,6 +155,20 @@ class Rules(IRules):
             msg = f"{self.__class__.__name__}.unregister_rule() Unable to unregister rule."
             raise ValueError(msg) from e
 
+    # region Cache
+    def is_cached(self, sid: str) -> bool:
+        """Gets is an id is in the cache"""
+        return sid in self. _cached_vals
+    
+    def get_cached(self, sid: str) -> Union[Val, None]:
+        """Gets a Val from cache"""
+        return self. _cached_vals.get(sid, None)
+    
+    def set_cached(self, val: Val) -> None:
+        """set or updates cached"""
+        self. _cached_vals[val.identity] = val
+    # endregion Cache
+
     def _reg_rule(self, rule: IRule):
         self._rules.append(rule)
 
@@ -145,6 +176,7 @@ class Rules(IRules):
         self._reg_rule(rule=RuleInt)
         self._reg_rule(rule=RuleHex)
         self._reg_rule(rule=RuleNamedFlags)
+        self._reg_rule(rule=RuleDetail)
 
     def _get_rule(self, tag: Tag) -> Union[IRule, None]:
 
@@ -164,7 +196,7 @@ class Rules(IRules):
     def get_val(self, tag: Tag) -> Union[Val, None]:
         match = self._get_rule(tag)
         if match:
-            return match.get_is_match(tag)
+            return match.get_val()
         return None
 
     def get_rule_instance(self, rule: IRule) -> IRule:
@@ -197,6 +229,11 @@ class Rules(IRules):
     def summaries(self) -> Dict[str, base.SummaryInfo]:
         """Gets summaries for a html page. Key is ID."""
         return self._summaries
+
+    @property
+    def soup(self) -> SoupObj:
+        """Gets the soup object for the page"""
+        return self._summary_block.soup
     # endregion Properties
 class RuleBase(IRule):
     def __init__(self, rules: IRules) -> None:
@@ -206,12 +243,14 @@ class RuleBase(IRule):
         self._id: str = None
         self._tag: Tag = None
         self._url = rules.summary_block.url_obj.url
+        self._cached: Val = None
 
     def __set_defaults(self):
         self._info_tag = None
         self._info_text = None
         self._id = None
         self._tag = None
+        self._cached = None
 
     def get_is_match(self, tag: Tag) -> bool:
         self.__set_defaults()
@@ -227,6 +266,9 @@ class RuleBase(IRule):
         except Exception:
             self.__set_defaults()
             return False
+        if self._rules.is_cached(self.identity):
+            self._cached = self._rules.get_cached(self.identity)
+            return True
         info_tag = tag.findChild('td', class_='memItemRight')
         if not info_tag:
             return False
@@ -262,6 +304,8 @@ class RuleInt(RuleBase):
         self._val = None
         if not super().get_is_match(tag):
             return False
+        if self._cached:
+            return True
         parts = self._info_text.split("=")
         if len(parts) != 2:
             return False
@@ -277,13 +321,18 @@ class RuleInt(RuleBase):
     
     def get_val(self) -> Val:
         """Gets a Val if there is a rule match"""
+        if self._cached:
+            return self._cached
         if self._val is None:
             raise Exception(
                 f"{self.__class__.__name__}.get_val() Value is missing. Did you run get_is_match() before get_val()?")
         if isinstance(self._val, int):
-            result = Val(identity=self.identity, is_flags=False,
+            si: SummaryInfo = self._rules.summaries[self.identity]
+            result = Val(text=si.name,
+                identity=self.identity, is_flags=False,
                          val_type=ValTypeEnum.INTEGER, values=[self._val])
             self._val = None
+            self._rules.set_cached(result)
             return result
         else:
             raise Exception(
@@ -299,6 +348,8 @@ class RuleHex(RuleBase):
         self._val = None
         if not super().get_is_match(tag):
             return False
+        if self._cached:
+            return True
         parts = self._info_text.split("=")
         if len(parts) != 2:
             return False
@@ -314,13 +365,18 @@ class RuleHex(RuleBase):
 
     def get_val(self) -> Val:
         """Gets a Val if there is a rule match"""
+        if self._cached:
+            return self._cached
         if self._val is None:
             raise Exception(
                 f"{self.__class__.__name__}.get_val() Value is missing. Did you run get_is_match() before get_val()?")
         if isinstance(self._val, int):
-            result = Val(identity=self.identity, is_flags=False,
+            si: SummaryInfo = self._rules.summaries[self.identity]
+            result = Val(text=si.name,
+                         identity=self.identity, is_flags=False,
                          val_type=ValTypeEnum.INTEGER, values=[self._val])
             self._val = None
+            self._rules.set_cached(result)
             return result
         else:
             raise Exception(
@@ -330,24 +386,25 @@ class RuleHex(RuleBase):
 class RuleNamedFlags(RuleBase):
     def __init__(self, rules: IRules) -> None:
         super().__init__(rules=rules)
-        self._names = None
+        self._names: List[str] = None
         self._infos: List[SummaryInfo] = None
         self._recursive_mode = False
 
     def get_is_match(self, tag: Tag) -> bool:
-        if self._recursive_mode:
-            return False
+        # if self._recursive_mode:
+        #     return False
         self._set_defaults()
         if not super().get_is_match(tag):
             return False
+        if self._cached:
+            return True
         if self._info_text.find('|') < 0:
             # no 'or' found
             return False
         parts = self._info_text.split("=")
         if len(parts) != 2:
             return False
-        names: List[str] = parts[1].split('|')
-        self._names = [name.strip() for name in names]
+        self._names = [s.strip() for s in parts[1].split('|')]
         self._infos: List[SummaryInfo] = []
         for name in self._names:
             si = self._rules.get_summary_by_name(name)
@@ -359,6 +416,8 @@ class RuleNamedFlags(RuleBase):
 
     def get_val(self) -> Val:
         """Gets a Val if there is a rule match"""
+        if self._cached:
+            return self._cached
         if not self._is_valid():
             raise Exception(
                 f"{self.__class__.__name__}.get_val() Values are missing. Did you run get_is_match() before get_val()?: Url: {self._url}")
@@ -367,12 +426,12 @@ class RuleNamedFlags(RuleBase):
             try:
                 tag = self._get_from_block(si)
             except Exception:
-                self.__set_defaults()
+                self._set_defaults()
                 raise
 
             val = self._get_recursive_match(tag=tag)
             if not val:
-                self.__set_defaults()
+                self._set_defaults()
                 raise Exception(
                     f"{self.__class__.__name__}.get_val() Fail to find a match during recursive search for {si.name} with id: '{si.id}' Url: {self._url}")
             vals.append(val)
@@ -382,6 +441,7 @@ class RuleNamedFlags(RuleBase):
             raise
         finally:
             self._set_defaults()
+        self._rules.set_cached(result)
         return result
 
     # region Private Methods
@@ -403,11 +463,10 @@ class RuleNamedFlags(RuleBase):
     
         flags: List[str] = []
         for val in vals:
-            if val.val_type != ValTypeEnum.INTEGER:
-                raise Exception(
-                    f"{self.__class__.__name__}._get_val_from_vals() Found a value that is not an integer! Url: {self._url}")
-            si = self._rules.summaries[val.identity]
-            flags.append(si.name)
+            if val.val_type == ValTypeEnum.INTEGER:
+                flags.append(val.text)
+            else:
+                flags.extend(val.values)
         result = Val(
             identity=self.identity,
             is_flags=True,
@@ -438,6 +497,156 @@ class RuleNamedFlags(RuleBase):
             self._recursive_mode = False
     # endregion Private Methods
 
+
+class RuleDetail(RuleBase):
+    """Gets value from details section"""
+    def __init__(self, rules: IRules) -> None:
+        super().__init__(rules=rules)
+        self._text: str = None
+
+    def _set_defaults(self) -> None:
+        self._text = None
+
+    def get_is_match(self, tag: Tag) -> bool:
+        self._set_defaults()
+        # ignore super is match but run to set id and cached
+        super().get_is_match(tag)
+        if self._cached:
+            return True
+        parts = self._info_text.split("=")
+        if len(parts) != 1:
+            return False
+        # single name only. Now have to get value from body.
+        try:
+            # = UNI_DIGIT | UNI_LETTER_NUMBER | UNI_OTHER_NUMBER
+            text = self._get_text()
+            parts = text.split(sep='=')
+            if len(parts) != 2:
+                return False
+            self._text = parts[1]
+        except Exception:
+            self._set_defaults()
+            return False
+        return True
+
+    def get_val(self) -> Val:
+        """Gets a Val if there is a rule match"""
+        if self._cached:
+            return self._cached
+        if self._text is None:
+            raise Exception(
+                f"{self.__class__.__name__}.get_val() Value is missing. Did you run get_is_match() before get_val()?")
+        # text could be hex or int.
+        val = self._get_from_int()
+        if Val:
+            self._rules.set_cached(val)
+            return val
+        names = [s.strip() for s in self._text.split('|')]
+        if len(names) == 0:
+            raise Exception(
+                f"{self.__class__.__name__}.get_val() There are no names found from details section!")
+        vals = []
+        try:
+            for tag, si in self._gen_tags(names):
+                # search recursivly
+                val = self._rules.get_val(tag=tag)
+                if not val:
+                    raise Exception(
+                        f"{self.__class__.__name__}.get_val() Failed to find a match during recursive search for {si.name} with id: '{si.id}'")
+                vals.append(val)
+        except Exception:
+            self._set_defaults()
+            raise
+        
+        try:
+            result = self._get_val_from_vals(vals)
+        except Exception:
+            raise
+        finally:
+            self._set_defaults()
+        self._rules.set_cached(result)
+        return result
+
+
+    def _gen_tags(self, names: List[str]):
+        summaries = self._get_summaries(names=names)
+        result = []
+        for si in summaries:
+            yield self._get_from_block(si), si
+
+    def _get_from_block(self, si: SummaryInfo) -> Tag:
+        _id = 'memitem:' + si.id
+        tag = self._rules.summary_block.get_obj()
+        if not tag:
+            raise Exception(
+                f"{self.__class__.__name__}._get_from_block() Summary block did not yield a result!")
+        tag_row = tag.find('tr', class_=_id)
+        if not tag_row:
+            raise Exception(
+                f"{self.__class__.__name__}._get_from_block() Summary block did not find a row with class matching: '{_id}'!")
+        return tag_row
+
+    def _get_summaries(self, names: List[str]) -> List[SummaryInfo]:
+        summaries = []
+        for name in names:
+            si: SummaryInfo = self._rules.get_summary_by_name(name)
+            if not si:
+                raise Exception(
+                    f"{self.__class__.__name__}.get_val() Name '{name}' did not match any summary info!")
+            summaries.append(si)
+        return summaries
+
+    def _get_from_int(self) -> Union[Val, None]:
+        """Convert text to int if possible"""
+        si: SummaryInfo = self._rules.summaries[self.identity]
+        try:
+            i = None
+            try:
+                i = int(self._text)
+            except ValueError:
+                i = None
+                pass
+            if i is None:
+                i = int(self._text, 16)
+            val = Val(text=si.name,identity=self.identity, is_flags=False,val_type=ValTypeEnum.INTEGER ,values=[i])
+            return val
+        except ValueError:
+            return None
+
+    def _get_details_block(self) -> base.ApiDescBlock:
+        return base.ApiDetailBlock(self._rules.soup, self.identity)
+    
+    def _get_text(self) -> str:
+        block = self._get_details_block()
+        tag = block.get_obj()
+        if not tag:
+            raise Exception
+        tag.find('div', class_='fragment')
+        if not tag:
+            raise Exception
+        # replace \n with space
+        text = " ".join(tag.text.splitlines())
+        # remove extra whitespace
+        return " ".join(text.split())
+    
+    def _get_val_from_vals(self, vals: List[Val]) -> Val:
+        if len(vals) == 0:
+            raise Exception(
+                f"{self.__class__.__name__}._get_val_from_vals() There are no values!")
+
+        flags: List[str] = []
+        for val in vals:
+            if val.val_type == ValTypeEnum.INTEGER:
+                flags.append(val.text)
+            else:
+                flags.extend(val.values)
+        result = Val(
+            identity=self.identity,
+            is_flags=True,
+            val_type=ValTypeEnum.STRING,
+            values=flags
+        )
+        return result
 # endregion Rule Engine
 
 # region API classes
@@ -486,7 +695,7 @@ class ApiSummaries(base.BlockObj):
         """
         if not self._data is None:
             return self._data
-        self._data: Dict[str, SummaryInfo] = []
+        self._data: Dict[str, SummaryInfo] = {}
         # get all rows
         tags: List[Tag] = self._block.get_obj()
         if len(tags) == 0:
@@ -571,7 +780,7 @@ class ApiValues(base.BlockObj):
     def __init__(self, summary_block: base.ApiSummaryBlock, api_summaries: ApiSummaries) -> None:
         self._summary_block: base.ApiSummaryBlock = summary_block
         self._api_summaries: ApiSummaries = api_summaries
-        super().__init__(self._block.soup)
+        super().__init__(self._summary_block.soup)
         self._data = None
 
     def _get_tag(self, si: SummaryInfo, block_tag: Tag) -> Tag:
@@ -1345,6 +1554,20 @@ def parse(*args, **kwargs):
     w.write()
 # endregion Parse method
 
+def _api():
+    global logger
+    if logger is None:
+        log_args = {
+            "log_file": "const_api.log",
+            "level": logging.DEBUG
+        }
+        _set_loggers(get_logger(logger_name=Path(__file__).stem, **log_args))
+    url = 'https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1i18n_1_1KParseTokens.html'
+    api = ApiData(url_soup=url, allow_cache=True)
+    data = api.get_data_items()
+    for itm in data:
+        print(itm)
+    
 def _main():
     # for debugging
     url = 'https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1i18n_1_1KParseTokens.html'
@@ -1482,4 +1705,4 @@ def main():
     w.write()
  
 if __name__ == '__main__':
-    _main()
+    _api()
