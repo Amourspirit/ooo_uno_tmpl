@@ -480,7 +480,7 @@ class TouchFiles(FilesBase):
                 touched += 1
 
         for file in link_files:
-            process(file, self)
+            process(file)
         logger.info('Touched %d Interface files', touched)
         self._touch_count += touched
     
