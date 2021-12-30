@@ -1,17 +1,16 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.8",
-  "timestamp": "2021-12-28 15:23:52+00:00",
+  "version": "0.1.9",
+  "timestamp": "2021-12-30 17:44:49+00:00",
   "name": "AccessibleEventId",
   "type": "const",
   "namespace": "com.sun.star.accessibility",
   "parser_args": {
-    "sort": true
+    "sort": false
   },
   "writer_args": {
     "hex": false,
-    "sort": true,
-    "flags": false
+    "flags": null
   },
   "data": {
     "name": "AccessibleEventId",
@@ -35,7 +34,7 @@
       "",
       "The AccessibleEventObject.OldValue and AccessibleEventObject.NewValue fields contain, where applicable and not otherwise stated, the old and new value of the property in question.",
       "",
-      "**Since**",
+      "**since**",
       "",
       "    OOo 1.1.2"
     ],
@@ -45,8 +44,9 @@
         "type": "int",
         "value": 1,
         "lines": [
-          "Use this event type to indicate a change of the name string of an accessible object. ",
-          "The AccessibleEventObject::OldValue and AccessibleEventObject::NewValue fields contain the name before and after the change. "
+          "Use this event type to indicate a change of the name string of an accessible object.",
+          "",
+          "The AccessibleEventObject.OldValue and AccessibleEventObject.NewValue fields contain the name before and after the change."
         ]
       },
       {
@@ -54,8 +54,9 @@
         "type": "int",
         "value": 2,
         "lines": [
-          "Use this event type to indicate a change of the description string of an accessible object. ",
-          "The AccessibleEventObject::OldValue and AccessibleEventObject::NewValue fields contain the description before and after the change. "
+          "Use this event type to indicate a change of the description string of an accessible object.",
+          "",
+          "The AccessibleEventObject.OldValue and AccessibleEventObject.NewValue fields contain the description before and after the change."
         ]
       },
       {
@@ -63,8 +64,9 @@
         "type": "int",
         "value": 3,
         "lines": [
-          "The change of the number or attributes of actions of an accessible object is signaled by events of this type. ",
-          "The AccessibleEventObject::OldValue and AccessibleEventObject::NewValue fields contain the old and new number of actions. "
+          "The change of the number or attributes of actions of an accessible object is signaled by events of this type.",
+          "",
+          "The AccessibleEventObject.OldValue and AccessibleEventObject.NewValue fields contain the old and new number of actions."
         ]
       },
       {
@@ -72,8 +74,9 @@
         "type": "int",
         "value": 4,
         "lines": [
-          "State changes are signaled with this event type. ",
-          "Use one event for every state that is set or reset. The AccessibleEventObject::OldValue and AccessibleEventObject::NewValue fields contain the old and new value respectively. To set a state put the state id into the AccessibleEventObject::NewValue field and leave AccessibleEventObject::OldValue empty. To reset a state put the state id into the AccessibleEventObject::OldValue field and leave AccessibleEventObject::NewValue empty. "
+          "State changes are signaled with this event type.",
+          "",
+          "Use one event for every state that is set or reset. The AccessibleEventObject.OldValue and AccessibleEventObject.NewValue fields contain the old and new value respectively. To set a state put the state id into the AccessibleEventObject.NewValue field and leave AccessibleEventObject.OldValue empty. To reset a state put the state id into the AccessibleEventObject.OldValue field and leave AccessibleEventObject.NewValue empty."
         ]
       },
       {
@@ -81,8 +84,9 @@
         "type": "int",
         "value": 5,
         "lines": [
-          "Constant used to determine when the active descendant of a component has changed. ",
-          "The active descendant is used in objects with transient children. The AccessibleEventObject::NewValue contains the now active object. The AccessibleEventObject::OldValue contains the previously active child. Empty references indicate that no child has been respectively is currently active. "
+          "Constant used to determine when the active descendant of a component has changed.",
+          "",
+          "The active descendant is used in objects with transient children. The AccessibleEventObject.NewValue contains the now active object. The AccessibleEventObject.OldValue contains the previously active child. Empty references indicate that no child has been respectively is currently active."
         ]
       },
       {
@@ -90,10 +94,13 @@
         "type": "int",
         "value": 6,
         "lines": [
-          "This event indicates a change of the bounding rectangle of an accessible object with respect only to its size or relative position. ",
+          "This event indicates a change of the bounding rectangle of an accessible object with respect only to its size or relative position.",
+          "",
           "If the absolute position changes but not the relative position then it is not necessary to send an event.",
+          "",
           "Use this event rather than the VISIBLE_DATA_EVENT when really only the (relative) bounding box of an accessible object has changed. It is much more specific than the later one and reduces the number of calls an AT-Tool has to make to retrieve all affected data.",
-          "The AccessibleEventObject::OldValue and AccessibleEventObject::NewValue remain empty. Use a call to the XAccessibleComponent::getBounds() method to determine the new bounding box."
+          "",
+          "The AccessibleEventObject.OldValue and AccessibleEventObject.NewValue remain empty. Use a call to the XAccessibleComponent.getBounds() method to determine the new bounding box."
         ]
       },
       {
@@ -101,11 +108,16 @@
         "type": "int",
         "value": 7,
         "lines": [
-          "A child event indicates the addition of a new or the removal of an existing child. ",
-          "The contents of the AccessibleEventObject::OldValue and AccessibleEventObject::NewValue fields determines which of both has taken place.",
-          "If a new child has been added then the AccessibleEventObject::NewValue contains a reference to this new object and AccessibleEventObject::OldValue remains empty.",
-          "If a child has been removed then the AccessibleEventObject::OldValue contains a reference to this object and AccessibleEventObject::NewValue remains empty.",
+          "A child event indicates the addition of a new or the removal of an existing child.",
+          "",
+          "The contents of the AccessibleEventObject.OldValue and AccessibleEventObject.NewValue fields determines which of both has taken place.",
+          "",
+          "If a new child has been added then the AccessibleEventObject.NewValue contains a reference to this new object and AccessibleEventObject.OldValue remains empty.",
+          "",
+          "If a child has been removed then the AccessibleEventObject.OldValue contains a reference to this object and AccessibleEventObject.NewValue remains empty.",
+          "",
           "If a child has been added and another one has been removed don't set both fields at the same. Send separate events instead.",
+          "",
           "Note that a child event is sent after a child has been added or removed. Especially in the case of a removal this means that the removed object does not have a parent anymore."
         ]
       },
@@ -114,8 +126,10 @@
         "type": "int",
         "value": 8,
         "lines": [
-          "Use this event to tell the listeners to re-retrieve the whole set of children. ",
+          "Use this event to tell the listeners to re-retrieve the whole set of children.",
+          "",
           "This should be used by a parent object which exchanges all or most of its children. It is a short form of first sending one CHILD event for every old child indicating that this child is about to be removed and then sending one CHILD for every new child indicating that this child has been added to the list of children.",
+          "",
           "When this API is used by Java or Gnome AT-Tools then a bridge can generate the events described above automatically."
         ]
       },
@@ -124,8 +138,9 @@
         "type": "int",
         "value": 9,
         "lines": [
-          "Events of this type indicate changes of the selection. ",
-          "The AccessibleEventObject::OldValue and AccessibleEventObject::NewValue fields remain empty. "
+          "Events of this type indicate changes of the selection.",
+          "",
+          "The AccessibleEventObject.OldValue and AccessibleEventObject.NewValue fields remain empty."
         ]
       },
       {
@@ -133,8 +148,9 @@
         "type": "int",
         "value": 10,
         "lines": [
-          "A visible data event indicates the change of the visual appearance of an accessible object. ",
-          "This includes for example most of the attributes available over the XAccessibleComponent and XAccessibleExtendedComponent interfaces. The AccessibleEventObject::OldValue and AccessibleEventObject::NewValue fields are left empty. "
+          "A visible data event indicates the change of the visual appearance of an accessible object.",
+          "",
+          "This includes for example most of the attributes available over the XAccessibleComponent and XAccessibleExtendedComponent interfaces. The AccessibleEventObject.OldValue and AccessibleEventObject.NewValue fields are left empty."
         ]
       },
       {
@@ -142,8 +158,9 @@
         "type": "int",
         "value": 11,
         "lines": [
-          "This constant indicates changes of the value of an XAccessibleValue interface. ",
-          "The AccessibleEventObject::OldValue and AccessibleEventObject::NewValue field contain the old and new value as a number. Its exact type is implementation dependent but has to be the same as is returned by the XAccessibleValue::getCurrentValue() function. "
+          "This constant indicates changes of the value of an XAccessibleValue interface.",
+          "",
+          "The AccessibleEventObject.OldValue and AccessibleEventObject.NewValue field contain the old and new value as a number. Its exact type is implementation dependent but has to be the same as is returned by the XAccessibleValue.getCurrentValue() function."
         ]
       },
       {
@@ -151,8 +168,9 @@
         "type": "int",
         "value": 12,
         "lines": [
-          "Identifies the change of a relation set: The content flow has changed. ",
-          "Not used: The AccessibleEventObject::OldValue and AccessibleEventObject::NewValue fields contain references to the old and new predecessor. Note that both references my be NULL to indicate that a flow to the sending object has not existed or does not exist anymore."
+          "Identifies the change of a relation set: The content flow has changed.",
+          "",
+          "Not used: The AccessibleEventObject.OldValue and AccessibleEventObject.NewValue fields contain references to the old and new predecessor. Note that both references my be NULL to indicate that a flow to the sending object has not existed or does not exist anymore."
         ]
       },
       {
@@ -160,8 +178,9 @@
         "type": "int",
         "value": 13,
         "lines": [
-          "Identifies the change of a relation set: The content flow has changed. ",
-          "Not used: The AccessibleEventObject::OldValue and AccessibleEventObject::NewValue fields contain references to the old and new successor. Note that both references my be NULL to indicate that a flow from the sending object has not existed or does not exist anymore."
+          "Identifies the change of a relation set: The content flow has changed.",
+          "",
+          "Not used: The AccessibleEventObject.OldValue and AccessibleEventObject.NewValue fields contain references to the old and new successor. Note that both references my be NULL to indicate that a flow from the sending object has not existed or does not exist anymore."
         ]
       },
       {
@@ -169,8 +188,9 @@
         "type": "int",
         "value": 14,
         "lines": [
-          "Identifies the change of a relation set: The target object that is doing the controlling has changed. ",
-          "The AccessibleEventObject::OldValue and AccessibleEventObject::NewValue fields contain the old and new controlling objects. "
+          "Identifies the change of a relation set: The target object that is doing the controlling has changed.",
+          "",
+          "The AccessibleEventObject.OldValue and AccessibleEventObject.NewValue fields contain the old and new controlling objects."
         ]
       },
       {
@@ -178,8 +198,9 @@
         "type": "int",
         "value": 15,
         "lines": [
-          "Identifies the change of a relation set: The controller for the target object has changed. ",
-          "The AccessibleEventObject::OldValue and AccessibleEventObject::NewValue fields contain the old and new number of controlled objects. "
+          "Identifies the change of a relation set: The controller for the target object has changed.",
+          "",
+          "The AccessibleEventObject.OldValue and AccessibleEventObject.NewValue fields contain the old and new number of controlled objects."
         ]
       },
       {
@@ -187,8 +208,9 @@
         "type": "int",
         "value": 16,
         "lines": [
-          "Identifies the change of a relation set: The target group for a label has changed. ",
-          "The AccessibleEventObject::OldValue and AccessibleEventObject::NewValue fields contain the old and new number labeled objects. "
+          "Identifies the change of a relation set: The target group for a label has changed.",
+          "",
+          "The AccessibleEventObject.OldValue and AccessibleEventObject.NewValue fields contain the old and new number labeled objects."
         ]
       },
       {
@@ -196,8 +218,9 @@
         "type": "int",
         "value": 17,
         "lines": [
-          "Identifies the change of a relation set: The objects that are doing the labeling have changed. ",
-          "The AccessibleEventObject::OldValue and AccessibleEventObject::NewValue fields contain the old and new accessible label. "
+          "Identifies the change of a relation set: The objects that are doing the labeling have changed.",
+          "",
+          "The AccessibleEventObject.OldValue and AccessibleEventObject.NewValue fields contain the old and new accessible label."
         ]
       },
       {
@@ -205,8 +228,9 @@
         "type": "int",
         "value": 18,
         "lines": [
-          "Identifies the change of a relation set: The group membership has changed. ",
-          "The AccessibleEventObject::OldValue and AccessibleEventObject::NewValue fields contain the old and new number of members. "
+          "Identifies the change of a relation set: The group membership has changed.",
+          "",
+          "The AccessibleEventObject.OldValue and AccessibleEventObject.NewValue fields contain the old and new number of members."
         ]
       },
       {
@@ -214,8 +238,9 @@
         "type": "int",
         "value": 19,
         "lines": [
-          "Identifies the change of a relation set: The sub-window-of relation has changed. ",
-          "The AccessibleEventObject::OldValue and AccessibleEventObject::NewValue fields contain the old and new accessible parent window objects. "
+          "Identifies the change of a relation set: The sub-window-of relation has changed.",
+          "",
+          "The AccessibleEventObject.OldValue and AccessibleEventObject.NewValue fields contain the old and new accessible parent window objects."
         ]
       },
       {
@@ -223,8 +248,9 @@
         "type": "int",
         "value": 20,
         "lines": [
-          "Events of this type are sent when the caret has moved to a new position. ",
-          "The old and new position can be found in the AccessibleEventObject::OldValue and AccessibleEventObject::NewValue fields. "
+          "Events of this type are sent when the caret has moved to a new position.",
+          "",
+          "The old and new position can be found in the AccessibleEventObject.OldValue and AccessibleEventObject.NewValue fields."
         ]
       },
       {
@@ -232,8 +258,9 @@
         "type": "int",
         "value": 21,
         "lines": [
-          "Events of this type signal changes of the selection. ",
-          "The old or new selection is not available through the event object. You have to query the XAccessibleText interface of the event source for this information. The type of content of the AccessibleEventObject::OldValue and AccessibleEventObject::NewValue fields is not specified at the moment. This may change in the future. "
+          "Events of this type signal changes of the selection.",
+          "",
+          "The old or new selection is not available through the event object. You have to query the XAccessibleText interface of the event source for this information. The type of content of the AccessibleEventObject.OldValue and AccessibleEventObject.NewValue fields is not specified at the moment. This may change in the future."
         ]
       },
       {
@@ -241,11 +268,16 @@
         "type": "int",
         "value": 22,
         "lines": [
-          "Use this id to indicate general text changes, i.e. ",
+          "Use this id to indicate general text changes, i.e.",
+          "",
           "changes to text that is exposed through the XAccessibleText and XAccessibleEditableText interfaces.",
-          "The affected text ranges are represented by com::sun::star::accessibility::TextSegment structures.",
-          "The content of the AccessibleEventObject::OldValue and AccessibleEventObject::NewValue expresses the type of text change: ",
+          "",
+          "The affected text ranges are represented by com.sun.star.accessibility.TextSegment structures.",
+          "",
+          "The content of the AccessibleEventObject.OldValue and AccessibleEventObject.NewValue expresses the type of text change:",
+          "",
           "When broadcasting an event always prefer the first three cases to the last one. Use it only as a last resort.",
+          "",
           "Text ranges should be as small as possible but, of course, include all the text that is involved in a modification. That means that when two or more discontinuous text ranges are inserted, deleted, or otherwise modified the two fields of the event have to cover all the affected text ranges as well as the text in between."
         ]
       },
@@ -254,8 +286,9 @@
         "type": "int",
         "value": 23,
         "lines": [
-          "This entry is reserved for future extension. ",
-          "Don't use it right now. "
+          "This entry is reserved for future extension.",
+          "",
+          "Don't use it right now."
         ]
       },
       {
@@ -263,8 +296,9 @@
         "type": "int",
         "value": 24,
         "lines": [
-          "Constant used to indicate that a hypertext element has received focus. ",
-          "The AccessibleEventObject::OldValue field contains the start index of previously focused element. The AccessibleEventObject::NewValue field holds the start index in the document of the current element that has focus. A value of -1 indicates that an element does not or did not have focus. "
+          "Constant used to indicate that a hypertext element has received focus.",
+          "",
+          "The AccessibleEventObject.OldValue field contains the start index of previously focused element. The AccessibleEventObject.NewValue field holds the start index in the document of the current element that has focus. A value of -1 indicates that an element does not or did not have focus."
         ]
       },
       {
@@ -272,8 +306,9 @@
         "type": "int",
         "value": 25,
         "lines": [
-          "Constant used to indicate that the table caption has changed. ",
-          "The AccessibleEventObject::OldValue and AccessibleEventObject::NewValue fields contain the old and new accessible objects representing the table caption. "
+          "Constant used to indicate that the table caption has changed.",
+          "",
+          "The AccessibleEventObject.OldValue and AccessibleEventObject.NewValue fields contain the old and new accessible objects representing the table caption."
         ]
       },
       {
@@ -281,8 +316,9 @@
         "type": "int",
         "value": 26,
         "lines": [
-          "Constant used to indicate that the column description has changed. ",
-          "The AccessibleEventObject::NewValue field contains the column index. The AccessibleEventObject::OldValue is left empty. "
+          "Constant used to indicate that the column description has changed.",
+          "",
+          "The AccessibleEventObject.NewValue field contains the column index. The AccessibleEventObject.OldValue is left empty."
         ]
       },
       {
@@ -290,8 +326,9 @@
         "type": "int",
         "value": 27,
         "lines": [
-          "Constant used to indicate that the column header has changed. ",
-          "The AccessibleEventObject::OldValue is empty, the AccessibleEventObject::NewValue field contains an AccessibleTableModelChange representing the header change. "
+          "Constant used to indicate that the column header has changed.",
+          "",
+          "The AccessibleEventObject.OldValue is empty, the AccessibleEventObject.NewValue field contains an AccessibleTableModelChange representing the header change."
         ]
       },
       {
@@ -299,8 +336,9 @@
         "type": "int",
         "value": 28,
         "lines": [
-          "Constant used to indicate that the table data has changed. ",
-          "The AccessibleEventObject::OldValue is empty, the AccessibleEventObject::NewValue field contains an AccessibleTableModelChange representing the data change. "
+          "Constant used to indicate that the table data has changed.",
+          "",
+          "The AccessibleEventObject.OldValue is empty, the AccessibleEventObject.NewValue field contains an AccessibleTableModelChange representing the data change."
         ]
       },
       {
@@ -308,8 +346,9 @@
         "type": "int",
         "value": 29,
         "lines": [
-          "Constant used to indicate that the row description has changed. ",
-          "The AccessibleEventObject::NewValue field contains the row index. The AccessibleEventObject::OldValue is left empty. "
+          "Constant used to indicate that the row description has changed.",
+          "",
+          "The AccessibleEventObject.NewValue field contains the row index. The AccessibleEventObject.OldValue is left empty."
         ]
       },
       {
@@ -317,8 +356,9 @@
         "type": "int",
         "value": 30,
         "lines": [
-          "Constant used to indicate that the row header has changed. ",
-          "The AccessibleEventObject::OldValue is empty, the AccessibleEventObject::NewValue field contains an AccessibleTableModelChange representing the header change. "
+          "Constant used to indicate that the row header has changed.",
+          "",
+          "The AccessibleEventObject.OldValue is empty, the AccessibleEventObject.NewValue field contains an AccessibleTableModelChange representing the header change."
         ]
       },
       {
@@ -326,8 +366,9 @@
         "type": "int",
         "value": 31,
         "lines": [
-          "Constant used to indicate that the table summary has changed. ",
-          "The AccessibleEventObject::OldValue and AccessibleEventObject::NewValue fields contain the old and new accessible objects representing the table summary. "
+          "Constant used to indicate that the table summary has changed.",
+          "",
+          "The AccessibleEventObject.OldValue and AccessibleEventObject.NewValue fields contain the old and new accessible objects representing the table summary."
         ]
       },
       {
@@ -335,8 +376,13 @@
         "type": "int",
         "value": 32,
         "lines": [
-          "Constant used to indicate that a list box entry has been expanded. ",
-          "AccessibleEventObject::OldValue is empty. AccessibleEventObject::NewValue contains the expanded list box entry."
+          "Constant used to indicate that a list box entry has been expanded.",
+          "",
+          "AccessibleEventObject.OldValue is empty. AccessibleEventObject.NewValue contains the expanded list box entry.",
+          "",
+          "**since**",
+          "",
+          "    OOo 3.2"
         ]
       },
       {
@@ -344,8 +390,13 @@
         "type": "int",
         "value": 33,
         "lines": [
-          "Constant used to indicate that a list box entry has been collapsed. ",
-          "AccessibleEventObject::OldValue is empty. AccessibleEventObject::NewValue contains the collapsed list box entry."
+          "Constant used to indicate that a list box entry has been collapsed.",
+          "",
+          "AccessibleEventObject.OldValue is empty. AccessibleEventObject.NewValue contains the collapsed list box entry.",
+          "",
+          "**since**",
+          "",
+          "    OOo 3.2"
         ]
       },
       {
@@ -353,10 +404,17 @@
         "type": "int",
         "value": 34,
         "lines": [
-          "Constant used to determine when the active descendant of a component has been removed but unlike ACTIVE_DESCENDANT_CHANGED the descendant that is to be removed does not have focus. ",
+          "Constant used to determine when the active descendant of a component has been removed but unlike ACTIVE_DESCENDANT_CHANGED the descendant that is to be removed does not have focus.",
+          "",
           "The active descendant is used in objects with transient children.",
-          "AccessibleEventObject::OldValue contains the item to be removed.",
-          "AccessibleEventObject::NewValue is empty."
+          "",
+          "AccessibleEventObject.OldValue contains the item to be removed.",
+          "",
+          "AccessibleEventObject.NewValue is empty.",
+          "",
+          "**since**",
+          "",
+          "    LibreOffice 4.3"
         ]
       },
       {
@@ -364,10 +422,17 @@
         "type": "int",
         "value": 35,
         "lines": [
-          "An item in a container has been added to an already present selection. ",
+          "An item in a container has been added to an already present selection.",
+          "",
           "Example: a second list item has been selected in a listbox.",
-          "AccessibleEventObject::OldValue is empty.",
-          "AccessibleEventObject::NewValue contains the item to be added."
+          "",
+          "AccessibleEventObject.OldValue is empty.",
+          "",
+          "AccessibleEventObject.NewValue contains the item to be added.",
+          "",
+          "**since**",
+          "",
+          "    LibreOffice 4.3"
         ]
       },
       {
@@ -375,9 +440,15 @@
         "type": "int",
         "value": 36,
         "lines": [
-          "An item in a container has been removed from the selection. ",
-          "AccessibleEventObject::OldValue contains the item to be removed.",
-          "AccessibleEventObject::NewValue is empty."
+          "An item in a container has been removed from the selection.",
+          "",
+          "AccessibleEventObject.OldValue contains the item to be removed.",
+          "",
+          "AccessibleEventObject.NewValue is empty.",
+          "",
+          "**since**",
+          "",
+          "    LibreOffice 4.3"
         ]
       },
       {
@@ -385,8 +456,13 @@
         "type": "int",
         "value": 37,
         "lines": [
-          "Multiple items in a container object have been added or removed from the selection. ",
-          "AccessibleEventObject::OldValue and AccessibleEventObject::NewValue is empty."
+          "Multiple items in a container object have been added or removed from the selection.",
+          "",
+          "AccessibleEventObject.OldValue and AccessibleEventObject.NewValue is empty.",
+          "",
+          "**since**",
+          "",
+          "    LibreOffice 4.3"
         ]
       },
       {
@@ -394,7 +470,11 @@
         "type": "int",
         "value": 38,
         "lines": [
-          "A change of page or slide. "
+          "A change of page or slide.",
+          "",
+          "**since**",
+          "",
+          "    LibreOffice 4.3"
         ]
       },
       {
@@ -402,7 +482,11 @@
         "type": "int",
         "value": 39,
         "lines": [
-          "The cursor has moved to/from a section. "
+          "The cursor has moved to/from a section.",
+          "",
+          "**since**",
+          "",
+          "    LibreOffice 4.3"
         ]
       },
       {
@@ -410,7 +494,11 @@
         "type": "int",
         "value": 40,
         "lines": [
-          "The cursor has moved to/from a section. "
+          "The cursor has moved to/from a section.",
+          "",
+          "**since**",
+          "",
+          "    LibreOffice 4.3"
         ]
       },
       {
@@ -418,7 +506,11 @@
         "type": "int",
         "value": 41,
         "lines": [
-          "Constant used to indicate that the role of an accessible object has changed. "
+          "Constant used to indicate that the role of an accessible object has changed.",
+          "",
+          "**since**",
+          "",
+          "    LibreOffice 4.3"
         ]
       }
     ]
