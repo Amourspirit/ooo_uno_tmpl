@@ -231,8 +231,10 @@ class BaseTpml(Template):
             # print(e)
             raise e
 
-    def get_q_type(self, in_type: str) -> str:
+    def get_q_type(self, in_type: object) -> object:
         """If in_type is in quote then it is quoted.  Otherwise in_type is retruned"""
+        if not isinstance(in_type, str):
+            return in_type
         if in_type in self.quote:
             return f"'{in_type}'"
         return in_type

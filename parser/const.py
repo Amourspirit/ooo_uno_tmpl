@@ -941,23 +941,9 @@ class Parser(base.ParserBase):
         key = 'get_formated_data'
         if key in self._cache:
             return self._cache[key]
-        try:
-            data = self.get_data()
-            for itm in data:
-                d = {
-                    "name": itm.name,
-                    "type": itm.type,
-                    "lines": itm.lines
-                }
-                if itm.val.is_flags:
-                    d['value'] = itm.val.values[0]
-                else:
-                    d['value'] = itm.value
-            result = base.Util.get_formated_dict_list_str(obj=d, indent=2)
-            self._cache[key] = result
-        except Exception as e:
-            logger.error(e, exc_info=True)
-            raise e
+        dlst = self._get_data_items()
+        result = base.Util.get_formated_dict_list_str(obj=dlst, indent=2)
+        self._cache[key] = result
         return self._cache[key]
     
     def get_is_flags(self) -> bool:
@@ -1217,11 +1203,9 @@ class ConstWriter(base.WriteBase):
         indent = ' ' * self._indent_amt
         str_json_desc = base.Util.get_formated_dict_list_str(self._p_desc)
         self._template = self._template.replace('{desc}', str_json_desc)
-        # indented = textwrap.indent(self._p_desc, indent).lstrip()
-        # self._template = self._template.replace('{desc}', indented)
         indented = textwrap.indent(self._p_data, indent)
         # indented = indented.lstrip()
-        self._template = self._template.replace('{data}', indented)
+        self._template = self._template.replace('{data}', indented.lstrip())
 
     def _set_info(self):
         data = self._parser.get_info()
@@ -1580,4 +1564,4 @@ def main():
     w.write()
  
 if __name__ == '__main__':
-    _main()
+    main()

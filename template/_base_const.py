@@ -1,6 +1,6 @@
 # coding: utf-8
 from typing import Dict, List
-from _base_json import BaseJson
+from _base_json import BaseJson, CancelEventArgs
 from verr import Version
 
 
@@ -18,7 +18,7 @@ class BaseConst(BaseJson):
             val = data.get(_key, None)
             if val:
                 setattr(self, attr_name, val)
-        # validation ensures min version of 0.1.1
+        # validation ensures min version
 
         set_data('name')
         set_data('namespace')
@@ -38,27 +38,11 @@ class BaseConst(BaseJson):
         self.typings.update(typings)
         # NameMapper.NotFound: cannot find 'keys' while searching for 'keys'
         # _dict = self._get_attribs(data=data, sort=self.sort)
-        def get_const_dict() -> Dict[str, list]:
-            # Format:
-            # "INVALID": ["0", [
-            #     "Invalid relation type.",
-            #     "",
-            #     "Indicates an invalid relation type. This is used to indicate that a retrieval method could not find a requested relation."
-            # ]]
-            items: List[Dict[str, list]] = data['items']
-            result = {}
-            for itm in items:
-                itm_lst = [
-                    itm['value'],
-                    itm['lines']
-                    ]
-                
-                result[itm['name']] = itm_lst
-            return result
+       
             
-        self.const_dict = get_const_dict()
+        self.attribs = data['items']
         if self.sort:
-            self.const_dict = self._sort_dict(d=self.const_dict)
+            self.attribs = self._sort_dicts(lst=self.attribs, sort_key='name')
 
 
     def _validate_data(self, data: dict) -> bool:
@@ -67,8 +51,13 @@ class BaseConst(BaseJson):
         if not data['type'] == 'const':
             raise Exception(
                 f"Invalid Data: Expected type to be 'const' got '{data['type']}'")
-        min_ver = Version(0, 1, 1)
+        min_ver = Version(0, 1, 9)
         ver = Version.parse(data.get('version', None))
         if ver < min_ver:
             raise Exception(
                 "Invalid Data: Expected version to be at least '{min_ver}' got {ver}")
+
+    def on_before_load_data(self, args: CancelEventArgs) -> None:
+        if not self.auto_load:
+            if self.sort:
+                self.attribs = self._sort_dicts(lst=self.attribs, sort_key='name')

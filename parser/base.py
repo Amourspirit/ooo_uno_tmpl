@@ -1602,7 +1602,7 @@ class Util:
         Get a formated dictionary or list
 
         Args:
-            obj (Union[dict, list]): Dict or list to get formates string for.
+            obj (Union[dict, list]): Dict or list to get formats string for.
             indent (int, optional): The number of spaces to indent string.. Defaults to ``2``.
 
         Returns:
