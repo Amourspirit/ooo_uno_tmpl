@@ -13,9 +13,8 @@ import xerox # requires xclip - sudo apt-get install xclip
 import textwrap
 from typing import Dict, List, Set, Union
 from dataclasses import dataclass, field
-from bs4 import BeautifulSoup
 from bs4.element import ResultSet, Tag
-from kwhelp.decorator import AcceptedTypes, DecFuncEnum, TypeCheckKw
+from kwhelp.decorator import DecFuncEnum, TypeCheckKw
 from collections import namedtuple
 from pathlib import Path
 from abc import ABC, abstractmethod, abstractproperty

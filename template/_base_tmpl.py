@@ -15,6 +15,16 @@ if _project_root:
         sys.path.insert(0, _project_root)
 
 py_name_pattern = re.compile('[\W_]+')
+
+RESERVER_WORDS = {
+    'and', 'as', 'assert', 'break', 'class',
+    'continue', 'def', 'del', 'elif', 'else',
+    'except', 'False', 'finally', 'for',
+    'from', 'global', 'if', 'import', 'in',
+    'is', 'lambda', 'None', 'nonlocal',
+    'not', 'or', 'pass', 'raise', 'return',
+    'True', 'try', 'while', 'with', 'yield'
+    }
 class BaseTpml(Template):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -231,10 +241,17 @@ class BaseTpml(Template):
             # print(e)
             raise e
 
+    def get_safe_word(self, in_str: object) -> object:
+        if not isinstance(in_str, str):
+            return in_str
+        if in_str in RESERVER_WORDS:
+            return in_str + '_'
+        return in_str
+
     def get_q_type(self, in_type: object) -> object:
-        """If in_type is in quote then it is quoted.  Otherwise in_type is retruned"""
+        """If in_type is in quote then it is quoted.  Otherwise in_type is returned"""
         if not isinstance(in_type, str):
             return in_type
         if in_type in self.quote:
-            return f"'{in_type}'"
-        return in_type
+            return f"'{self.get_safe_word(in_type)}'"
+        return self.get_safe_word(in_type)
