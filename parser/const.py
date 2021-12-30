@@ -1042,7 +1042,6 @@ class ConstWriter(base.WriteBase):
         super().__init__(**kwargs)
         self._parser = parser
         self._hex = kwargs.get('hex', False)
-        self._sort = kwargs.get('sort', True)
         self._flags = kwargs.get('flags', None)
         self._copy_clipboard = kwargs.get('copy_clipboard', False)
         self._print_template = kwargs.get('print_template', True)
@@ -1072,6 +1071,8 @@ class ConstWriter(base.WriteBase):
         self._template_file = _path
         self._template: str = self._get_template()
         self._cache = {}
+        # call _get_writer_args() to ensure it is cached before args get changed.
+        self._get_writer_args()
         self._set_flags()
     # endregion Constructor
     def _set_flags(self):
@@ -1137,17 +1138,26 @@ class ConstWriter(base.WriteBase):
             "type": "const",
             "namespace": p_dict['namespace'],
             "parser_args": self._parser.get_parser_args(),
-            "writer_args": {
-                "hex": self._hex,
-                "sort": self._sort,
-                "flags": self._flags
-            },
+            "writer_args": self._get_writer_args(),
             "data": p_dict
         }
         str_jsn = base.Util.get_formated_dict_list_str(obj=json_dict, indent=2)
         self._cache[key] = str_jsn
         return self._cache[key]
 
+    def _get_writer_args(self) -> Dict[str, object]:
+        # this method requires caching to ensure
+        # proper args are captured.
+        # methods such as _set_flags change values
+        key = '_get_writer_args'
+        if key in self._cache:
+            return self._cache[key]
+        self._cache[key] = {
+            "hex": self._hex,
+            "flags": self._flags
+        }
+        return self._cache[key]
+    
     def _get_const_base_class(self) -> str:
         if self._flags:
             const_base_cls = base.APP_CONFIG.base_const_int_flags
@@ -1185,7 +1195,6 @@ class ConstWriter(base.WriteBase):
         if self._write_template_long is False:
             return
         self._template = self._template.replace('{hex}', str(self._hex))
-        self._template = self._template.replace('{sort}', str(self._sort))
         self._template = self._template.replace('{flags}', str(self._flags))
         self._template = self._template.replace('{name}', self._p_name)
         self._template = self._template.replace('{ns}', self._p_namespace)
@@ -1308,7 +1317,7 @@ def _get_parsed_args(*args) -> Dict[str, bool]:
         "write_template": False,
         "write_json": False,
         "verbose": False,
-        "flags": False,
+        "flags": None,
         "hex": False
     }
     found = {
@@ -1425,7 +1434,7 @@ def _api():
     
 def _main():
     # for debugging
-    url = 'https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1i18n_1_1KParseTokens.html'
+    url = 'https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1security_1_1KeyUsage.html'
     # sys.argv.extend(['--log-file', 'debug.log', '-v', '-n', '-u', url])
     # main()
     args = ('v', 'n')
