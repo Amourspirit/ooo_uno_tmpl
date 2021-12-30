@@ -506,7 +506,8 @@ class WriterTypeDef(base.WriteBase):
         key = '_get_uno_obj_path_' + t_def.id
         if key in self._cache:
             return self._cache[key]
-        _p_name = base.Util.camel_to_snake(t_def.name)
+        # _p_name = base.Util.camel_to_snake(t_def.name)
+        _p_name = t_def.name
         uno_obj_path = Path(self._path_dir.parent,
                             base.APP_CONFIG.uno_base_dir)
         name_parts: List[str] = self._p_namespace.split('.')
