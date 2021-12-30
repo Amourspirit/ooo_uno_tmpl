@@ -162,7 +162,7 @@ class BaseStruct(BaseTpml):
                c_str += ', '
             index = tpl[1]
             itm: Dict[str, object] = d_lst[index]
-            c_str += "'" + itm['name'] + "'"
+            c_str += "'" + self.get_safe_word(itm['name']) + "'"
 
         return c_str
     

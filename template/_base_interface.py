@@ -96,7 +96,7 @@ class BaseInterface(BaseJson):
                 "Invalid Data: Expected version to be at least '{min_ver}' got {ver}")
 
     def _get_formated_arg(self, arg: Tuple[str]) -> str:
-        return f"{arg[0]}: {self.get_q_type(arg[1])}"
+        return f"{self.get_safe_word(arg[0])}: {self.get_q_type(arg[1])}"
 
     def get_args(self, args: List[Tuple[str]]) -> str:
         result = ''

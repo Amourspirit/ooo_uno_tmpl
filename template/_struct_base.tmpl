@@ -17,6 +17,7 @@ $self.init_data()#slurp
 #attr $attribs = []
 $self.load_data()#slurp
 ## Main Template
+#set $safe_name = $self.get_safe_word($name)
 #set $namespace = ''
 #set $sorted = $self.get_sorted_names()
 #set $str_inherits = "object"
@@ -47,7 +48,7 @@ if typing.TYPE_CHECKING:
 #end if
 
 
-class ${name}(${str_inherits}):
+class ${safe_name}(${str_inherits}):
     """
     #if isinstance($desc, str)
     $desc
@@ -73,14 +74,16 @@ class ${name}(${str_inherits}):
 #for $i, $tpl in enumerate($sorted)
 #set $index = tpl[1]
 #set $itm = $attribs[$index]
-        self._$self.camel_to_snake($itm.name) = $itm.name
+#set $itm_name = $self.get_safe_word($itm.name)
+        self._$self.camel_to_snake($itm_name) = $itm_name
 #end for
 #for $i, $tpl in enumerate($sorted)
 #set $index = tpl[1]
 #set $itm = $self.get_attrib_for_prop($index)
+#set $itm_name = $self.get_safe_word($itm.name)
 
     @property
-    def ${itm.name}(self) -> $itm.type:
+    def ${itm_name}(self) -> $itm.type:
     #if $itm.lines
         """
         #if isinstance($itm.lines, str):
@@ -90,29 +93,25 @@ class ${name}(${str_inherits}):
         $line
             #end for
         #end if
-        #if 'orig_type' in $itm
-
-        **Libre Office Type:** ``${itm['orig_type']}``
-        #end if
         """
     #end if
-        return self._$self.camel_to_snake($itm.name)
+        return self._$self.camel_to_snake($itm_name)
 #end for
 #if $dynamic_struct:
 
 def _dynamic_struct():
     # Dynamically create nametuple that is more efficient as stand in for struct
 
-    global $name
+    global $safe_name
     ignore = os.environ.get('ooouno_ignore_runtime', 'False')
     if ignore == 'True':
         return
     # if statment is to stop VS Code from reporting errors
     if not typing.TYPE_CHECKING:
-        ${name} = namedtuple('$name', [$self.get_nt_names_str()])
+        ${safe_name} = namedtuple('$safe_name', [$self.get_nt_names_str()])
 
 if not typing.TYPE_CHECKING:
     _dynamic_struct()
 #end if
 
-__all__ = ['$name']
+__all__ = ['$safe_name']
