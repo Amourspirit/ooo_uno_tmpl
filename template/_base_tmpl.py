@@ -253,5 +253,5 @@ class BaseTpml(Template):
         if not isinstance(in_type, str):
             return in_type
         if in_type in self.quote:
-            return f"'{self.get_safe_word(in_type)}'"
-        return self.get_safe_word(in_type)
+            return f"'{in_type}'"
+        return in_type
