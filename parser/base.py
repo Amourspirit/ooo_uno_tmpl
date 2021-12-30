@@ -1470,18 +1470,31 @@ class Util:
         Returns:
             bool: ``True`` if can be combined as flags; Otherwise ``False``
         """
-        nums = [*args]
-        nums.sort()
-        n = 0
-        for num in nums:
-            if num < 0:
-                return False
-            _n = n
-            _n = _n ^ num
-            if _n <= n:
-                return False
-            n = _n
-        return True
+        # get the biggest number and then find all its possible flags.
+        # if any smaller number is not a possible flag then return false
+        num_in = [*args]
+        if len(num_in) < 2:
+            return False
+        num_in.sort()
+        num = num_in.pop()
+        mod = num % 2
+        if mod != 0:
+            return False
+        nums = set()
+        shift_num = num
+        while shift_num > 0:
+            shift_num = shift_num >> 1
+            if shift_num > 0:
+                nums.add(shift_num)
+        is_flags = True
+        for i in num_in:
+            if i < 1:
+                is_flags = False
+                break
+            if not i in nums:
+                is_flags = False
+                break
+        return is_flags
 
     @AcceptedTypes(str, opt_all_args=True, ftype=DecFuncEnum.METHOD_STATIC)
     @staticmethod

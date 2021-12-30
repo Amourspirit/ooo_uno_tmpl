@@ -957,6 +957,7 @@ class Parser(base.ParserBase):
         key = 'get_is_flags'
         if key in self._cache:
             return self._cache[key]
+
         self._cache[key] = False
         items = self._api_data.get_data_items()
         for itm in items:
@@ -970,9 +971,9 @@ class Parser(base.ParserBase):
             for itm in items:
                 nums.append(int(itm.value))
         except:
+            self._cache[key] = False
             return self._cache[key]
-        if len(nums) == 0:
-            return self._cache[key]
+
         self._cache[key] = base.Util.is_enum_nums(*nums)
         return self._cache[key]
 
