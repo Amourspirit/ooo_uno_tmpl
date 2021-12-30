@@ -1473,9 +1473,27 @@ class Util:
         # get the biggest number and then find all its possible flags.
         # if any smaller number is not a possible flag then return false
         num_in = [*args]
-        if len(num_in) < 2:
-            return False
+        num_len = len(num_in)
         num_in.sort()
+        if num_len < 2:
+            return False
+        if num_len == 3:
+            tmp_lst = [0, 1, 2]
+            is_simple = True
+            for i, y in enumerate(tmp_lst):
+                is_simple = num_in[i] == y
+                if not is_simple:
+                    break
+            if is_simple:
+                return False
+            tmp_lst = [1, 2, 3]
+            is_simple = True
+            for i, y in enumerate(tmp_lst):
+                is_simple = num_in[i] == y
+                if not is_simple:
+                    break
+            if is_simple:
+                return False
         num = num_in.pop()
         mod = num % 2
         if mod != 0:
