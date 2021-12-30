@@ -214,7 +214,6 @@ def parse(*args, **kwargs):
     Parses data, alternative to running on command line.
 
     Other Arguments:
-        'no_sort' (str, optional): Short form ``'s'``. No sorting of results. Default ``False``
         'no_cache' (str, optional): Short form ``'x'``. No caching. Default ``False``
         'print_json' (str, optional): Short form ``'n'``. Print json to termainl. Default ``False``
         'print_template' (str, optional): Short form ``'m'``. Print template to terminal. Default ``False``

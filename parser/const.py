@@ -1299,7 +1299,6 @@ def _get_parsed_kwargs(**kwargs) -> Dict[str, str]:
 def _get_parsed_args(*args) -> Dict[str, bool]:
     # key, value and value is a key into defaults
     defaults = {
-        'no_sort': True,
         "no_cache": True,
         "long_template": False,
         "clipboard": False,
@@ -1312,7 +1311,6 @@ def _get_parsed_args(*args) -> Dict[str, bool]:
         "hex": False
     }
     found = {
-        'no_sort': False,
         "no_cache": False,
         "long_template": True,
         "clipboard": True,
@@ -1325,8 +1323,6 @@ def _get_parsed_args(*args) -> Dict[str, bool]:
         "hex": False
     }
     lookups = {
-        "s": "no_sort",
-        "no_sort": "no_sort",
         "x": "no_cache",
         "no_cache": "no_cache",
         "g": "long_template",
@@ -1363,7 +1359,6 @@ def parse(*args, **kwargs):
     Parses data, alternative to running on command line.
 
     Other Arguments:
-        'no_sort' (str, optional): Short form ``'s'``. No sorting of results. Default ``False``
         'no_cache' (str, optional): Short form ``'x'``. No caching. Default ``False``
         'no_print_clear (str, optional): Short form ``'p'``. No clearing of terminal
             when otuput to terminal. Default ``False``
@@ -1396,7 +1391,7 @@ def parse(*args, **kwargs):
         _set_loggers(get_logger(logger_name=Path(__file__).stem, **log_args))
     p = Parser(
         url=pkwargs['url'],
-        sort=pargs['no_sort'],
+        sort=False,
         cache=pargs['no_cache']
     )
     w = ConstWriter(
@@ -1448,12 +1443,6 @@ def main():
         help='Source Url',
         type=str,
         required=True)
-    parser.add_argument(
-        '-s', '--no-sort',
-        help='No sorting of results',
-        action='store_false',
-        dest='sort',
-        default=True)
     parser.add_argument(
         '-f', '--flags',
         help='Treat as flags',
@@ -1545,7 +1534,7 @@ def main():
 
     p = Parser(
         url=args.url,
-        sort=args.sort,
+        sort=False,
         cache=args.cache
     )
     if not args.print_json and not args.print_template:

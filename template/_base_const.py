@@ -29,7 +29,6 @@ class BaseConst(BaseJson):
         set_data('from_typing_imports')
         set_data('base_class')
         self.requires_typing = bool(data.get('requires_typing', False))
-        self.sort = bool(json_data['parser_args'].get('sort', False))
         self.hex = bool(json_data['writer_args'].get('hex', False))
         self.flags = bool(data.get('flags', False))
         quote: List[str] = data.get('quote', [])
@@ -39,10 +38,11 @@ class BaseConst(BaseJson):
         # NameMapper.NotFound: cannot find 'keys' while searching for 'keys'
         # _dict = self._get_attribs(data=data, sort=self.sort)
        
-            
+        # Note: attribs should never be sorted.
+        # Some const have flags and original order must be maintained.
+        # see: https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1i18n_1_1KParseTokens.html
         self.attribs = data['items']
-        if self.sort:
-            self.attribs = self._sort_dicts(lst=self.attribs, sort_key='name')
+  
 
 
     def _validate_data(self, data: dict) -> bool:
@@ -57,7 +57,3 @@ class BaseConst(BaseJson):
             raise Exception(
                 "Invalid Data: Expected version to be at least '{min_ver}' got {ver}")
 
-    def on_before_load_data(self, args: CancelEventArgs) -> None:
-        if not self.auto_load:
-            if self.sort:
-                self.attribs = self._sort_dicts(lst=self.attribs, sort_key='name')
