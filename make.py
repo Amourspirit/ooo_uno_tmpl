@@ -504,7 +504,7 @@ class TouchFiles(FilesBase):
 
         for file in link_files:
             process(file)
-        logger.info('Touched %d Interface files', touched)
+        logger.info('Touched %d TypeDef files', touched)
         self._touch_count += touched
 
 class Make(FilesBase):
