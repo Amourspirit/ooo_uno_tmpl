@@ -1484,11 +1484,10 @@ class Util:
         shift_num = num
         while shift_num > 0:
             shift_num = shift_num >> 1
-            if shift_num > 0:
-                nums.add(shift_num)
+            nums.add(shift_num)
         is_flags = True
         for i in num_in:
-            if i < 1:
+            if i < 0:
                 is_flags = False
                 break
             if not i in nums:
