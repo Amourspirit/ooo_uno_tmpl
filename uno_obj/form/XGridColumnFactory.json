@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:20:06+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:14+00:00",
   "name": "XGridColumnFactory",
   "type": "interface",
   "namespace": "com.sun.star.form",
@@ -16,7 +16,20 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..beans.x_property_set",
+        "XPropertySet"
+      ]
+    ],
+    "quote": [
+      "typing.List[str]",
+      "XPropertySet"
+    ],
+    "typings": [
+      "typing.List[str]"
+    ],
+    "requires_typing": true,
     "name": "XGridColumnFactory",
     "imports": [],
     "namespace": "com.sun.star.form",
@@ -26,13 +39,38 @@
     "desc": [
       "allows to create columns to be added into a grid control model.",
       "",
-      "Grid columns (more precise: models of grid columns) are direct children of the grid control model they belong to. Grid columns can't be created on a global service factory, instead, you need to create them on the grid, where you want to insert them later on.",
-      "",
-      "**See Also**",
-      "",
-      "    com.sun.star.form.component.GridControl"
+      "Grid columns (more precise: models of grid columns) are direct children of the grid control model they belong to. Grid columns can't be created on a global service factory, instead, you need to create them on the grid, where you want to insert them later on."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1form_1_1XGridColumnFactory.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "createColumn",
+          "returns": "XPropertySet",
+          "desc": [
+            "creates a new column object"
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "aColumnType",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getColumnTypes",
+          "returns": "typing.List[str]",
+          "desc": [
+            "returns a list of available column types."
+          ],
+          "raises": [],
+          "args": []
+        }
+      ]
+    }
   }
 }

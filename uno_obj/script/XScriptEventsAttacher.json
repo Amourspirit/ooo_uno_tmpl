@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:20:31+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:19+00:00",
   "name": "XScriptEventsAttacher",
   "type": "interface",
   "namespace": "com.sun.star.script",
@@ -16,7 +16,20 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_script_listener",
+        "XScriptListener"
+      ]
+    ],
+    "quote": [
+      "typing.List[XInterface]",
+      "XScriptListener"
+    ],
+    "typings": [
+      "typing.List[XInterface]"
+    ],
+    "requires_typing": true,
     "name": "XScriptEventsAttacher",
     "imports": [],
     "namespace": "com.sun.star.script",
@@ -27,6 +40,39 @@
       "This interface can be used to attach script events to a number of objects that give access to the definition of events that should be attached to them, e.g., by supporting XEventsSupplier."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1script_1_1XScriptEventsAttacher.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "attachEvents",
+          "returns": "None",
+          "desc": [
+            "Attaches the events defined by XScriptEventsSupplier to the corresponding object implementing XScriptEventsSupplier."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.beans.IntrospectionException",
+            "com.sun.star.script.CannotCreateAdapterException",
+            "com.sun.star.lang.ServiceNotRegisteredException"
+          ],
+          "args": [
+            [
+              "Objects",
+              "typing.List[XInterface]",
+              "in"
+            ],
+            [
+              "xListener",
+              "XScriptListener",
+              "in"
+            ],
+            [
+              "Helper",
+              "object",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

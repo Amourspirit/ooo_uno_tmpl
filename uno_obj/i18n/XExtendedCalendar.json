@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:20:40+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:20+00:00",
   "name": "XExtendedCalendar",
   "type": "interface",
   "namespace": "com.sun.star.i18n",
@@ -17,6 +17,9 @@
       ]
     ],
     "from_imports_typing": [],
+    "quote": [],
+    "typings": [],
+    "requires_typing": false,
     "name": "XExtendedCalendar",
     "imports": [],
     "namespace": "com.sun.star.i18n",
@@ -28,11 +31,36 @@
       "",
       "It is derived from com.sun.star.i18n.XCalendar and provides additional functionality to display parts of the date currently set at the calendar.",
       "",
-      "**See Also**",
+      "**since**",
       "",
       "    OOo 1.1.2"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1i18n_1_1XExtendedCalendar.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getDisplayString",
+          "returns": "str",
+          "desc": [
+            "Returns a string (number or name to display) matching the given code constant.",
+            "",
+            "Note that the string returned depends completely on the locale's calendar. It is not predictable if the string will be numeric or a name, or if in case it returns a numeric string how many digits that will have. For example, a short year display string will normally be two digits with a Gregorian calendar, but with a Jewish calendar it will have three digits."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "nCalendarDisplayCode",
+              "int",
+              "in"
+            ],
+            [
+              "nNativeNumberMode",
+              "int",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

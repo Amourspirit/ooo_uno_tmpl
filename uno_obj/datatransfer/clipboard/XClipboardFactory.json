@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:20:22+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:22+00:00",
   "name": "XClipboardFactory",
   "type": "interface",
   "namespace": "com.sun.star.datatransfer.clipboard",
@@ -16,7 +16,17 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_clipboard",
+        "XClipboard"
+      ]
+    ],
+    "quote": [
+      "XClipboard"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XClipboardFactory",
     "imports": [],
     "namespace": "com.sun.star.datatransfer.clipboard",
@@ -24,13 +34,29 @@
       "com.sun.star.uno.XInterface"
     ],
     "desc": [
-      "Should be implemented by a clipboard factory that simplifies the creation of multiple clipboard instances.",
-      "",
-      "**See Also**",
-      "",
-      "    com.sun.star.datatransfer.clipboard.XClipboard"
+      "Should be implemented by a clipboard factory that simplifies the creation of multiple clipboard instances."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1datatransfer_1_1clipboard_1_1XClipboardFactory.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "createClipboard",
+          "returns": "XClipboard",
+          "desc": [
+            "Creates a new named clipboard instance."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "aName",
+              "str",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

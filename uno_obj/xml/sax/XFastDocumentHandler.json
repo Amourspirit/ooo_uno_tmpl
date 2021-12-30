@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:18:28+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:01+00:00",
   "name": "XFastDocumentHandler",
   "type": "interface",
   "namespace": "com.sun.star.xml.sax",
@@ -12,21 +12,103 @@
   "data": {
     "from_imports": [
       [
-        ".......x_fast_context_handler",
+        ".x_fast_context_handler",
         "XFastContextHandler"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_locator",
+        "XLocator"
+      ]
+    ],
+    "quote": [
+      "XLocator"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XFastDocumentHandler",
     "imports": [],
     "namespace": "com.sun.star.xml.sax",
     "extends": [
-      "XFastContextHandler"
+      "com.sun.star.xml.sax.XFastContextHandler"
     ],
     "desc": [
-      "receives notification of sax document events from a XFastParser"
+      "receives notification of sax document events from a XFastParser",
+      "",
+      "**since**",
+      "",
+      "    LibreOffice 6.0"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1xml_1_1sax_1_1XFastDocumentHandler.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "endDocument",
+          "returns": "None",
+          "desc": [
+            "called by the parser after the last XML element of a stream is processed."
+          ],
+          "raises": [
+            "com.sun.star.xml.sax.SAXException"
+          ],
+          "args": []
+        },
+        {
+          "name": "processingInstruction",
+          "returns": "None",
+          "desc": [
+            "receives notification of a processing instruction.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 6.0"
+          ],
+          "raises": [
+            "com.sun.star.xml.sax.SAXException"
+          ],
+          "args": [
+            [
+              "aTarget",
+              "str",
+              "in"
+            ],
+            [
+              "aData",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setDocumentLocator",
+          "returns": "None",
+          "desc": [
+            "receives an object for locating the origin of SAX document events."
+          ],
+          "raises": [
+            "com.sun.star.xml.sax.SAXException"
+          ],
+          "args": [
+            [
+              "xLocator",
+              "XLocator",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "startDocument",
+          "returns": "None",
+          "desc": [
+            "called by the parser when parsing of an XML stream is started."
+          ],
+          "raises": [
+            "com.sun.star.xml.sax.SAXException"
+          ],
+          "args": []
+        }
+      ]
+    }
   }
 }

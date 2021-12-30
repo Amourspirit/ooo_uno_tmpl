@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:16:23+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:26+00:00",
   "name": "XImplementationRegistration2",
   "type": "interface",
   "namespace": "com.sun.star.registry",
@@ -16,7 +16,17 @@
         "XImplementationRegistration"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_simple_registry",
+        "XSimpleRegistry"
+      ]
+    ],
+    "quote": [
+      "XSimpleRegistry"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XImplementationRegistration2",
     "imports": [],
     "namespace": "com.sun.star.registry",
@@ -28,11 +38,46 @@
       "",
       "It can be useful to specify a complete Url to a component but register the components name only (library or jar name).",
       "",
-      "**See Also**",
+      "**since**",
       "",
       "    OOo 2.4"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1registry_1_1XImplementationRegistration2.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "registerImplementationWithLocation",
+          "returns": "None",
+          "desc": [
+            "registers a component which provides one or more implementations."
+          ],
+          "raises": [
+            "com.sun.star.registry.CannotRegisterImplementationException"
+          ],
+          "args": [
+            [
+              "aImplementationLoader",
+              "str",
+              "in"
+            ],
+            [
+              "aLocation",
+              "str",
+              "in"
+            ],
+            [
+              "aRegisteredLocation",
+              "str",
+              "in"
+            ],
+            [
+              "xReg",
+              "XSimpleRegistry",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

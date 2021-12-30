@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:19:09+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:25+00:00",
   "name": "XFlushable",
   "type": "interface",
   "namespace": "com.sun.star.util",
@@ -16,7 +16,17 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_flush_listener",
+        "XFlushListener"
+      ]
+    ],
+    "quote": [
+      "XFlushListener"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XFlushable",
     "imports": [],
     "namespace": "com.sun.star.util",
@@ -27,6 +37,48 @@
       "is supported by objects with data that can be flushed to a data source."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1util_1_1XFlushable.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "addFlushListener",
+          "returns": "None",
+          "desc": [
+            "adds the specified listener to receive event \\\"flushed.\\\""
+          ],
+          "raises": [],
+          "args": [
+            [
+              "l",
+              "XFlushListener",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "flush",
+          "returns": "None",
+          "desc": [
+            "flushes the data of the object to the connected data source."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "removeFlushListener",
+          "returns": "None",
+          "desc": [
+            "removes the specified listener."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "l",
+              "XFlushListener",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

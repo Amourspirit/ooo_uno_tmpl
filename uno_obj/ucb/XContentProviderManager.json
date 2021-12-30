@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:18:58+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:35+00:00",
   "name": "XContentProviderManager",
   "type": "interface",
   "namespace": "com.sun.star.ucb",
@@ -16,7 +16,24 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_content_provider",
+        "XContentProvider"
+      ],
+      [
+        ".content_provider_info",
+        "ContentProviderInfo"
+      ]
+    ],
+    "quote": [
+      "XContentProvider",
+      "typing.List[ContentProviderInfo]"
+    ],
+    "typings": [
+      "typing.List[ContentProviderInfo]"
+    ],
+    "requires_typing": true,
     "name": "XContentProviderManager",
     "imports": [],
     "namespace": "com.sun.star.ucb",
@@ -24,13 +41,91 @@
       "com.sun.star.uno.XInterface"
     ],
     "desc": [
-      "makes it possible to query/register/deregister content providers.",
-      "",
-      "**See Also**",
-      "",
-      "    1.0"
+      "makes it possible to query/register/deregister content providers."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1ucb_1_1XContentProviderManager.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "deregisterContentProvider",
+          "returns": "None",
+          "desc": [
+            "deregisters a content provider."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "Provider",
+              "XContentProvider",
+              "in"
+            ],
+            [
+              "Scheme",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "queryContentProvider",
+          "returns": "XContentProvider",
+          "desc": [
+            "returns the currently active content provider for a content identifier."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "Identifier",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "queryContentProviders",
+          "returns": "typing.List[ContentProviderInfo]",
+          "desc": [
+            "returns a list of information on all registered content providers."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "registerContentProvider",
+          "returns": "XContentProvider",
+          "desc": [
+            "registers a content provider for a specific URL template.",
+            "",
+            "This may be NULL, in which case a later XContentProvider.queryContent() with an XContentIdentifier that matches the Scheme will simply return NULL. These \\\"dummy\\\" content providers are useful in combination with other content providers that are registered on a wildcard URL template: For example, imagine that you want to route all http URLs to a HTTP content provider, but want to block all URLs for the server www.dont.go. One solution would be to register the HTTP content provider on the Scheme http, and to register a \\\"dummy\\\" (i.e., NULL) content provider on the Scheme \\\"http://www.dont.go\\\"([/?#].*)?.",
+            "",
+            "A URL template is a regular expression (represented as a string) that specifies a subset of the set of all possible URLs (this subset consists of exactly those URLs that match the regular expression). The language to denote the regular expressions is initially quite limited, but it may be extended in the future:",
+            "",
+            "A <scheme&gt: matches any URL of exactly the given scheme (ignoring case), keeping the extension from URL schemes to URL templates backwards compatible. The <simple&gt: regexps match any URL starting with a given string literal, followed by arbitrary characters (<simple-prefix&gt:), or by arbitrary characters that start with one of '/', '?', or '#', if any (<simple-authority&gt:), or by arbitrary characters not including any of '/', '?', or '#', followed by a given string literal, followed by arbitrary characters that start with one of '/', '?', or '#', if any. The comparison of string literals is done ignoring the case of ASCII letters. The <translation&gt: regexps match the same URLs as their <simple&gt: counterparts, but they also describe how a (local) URL is mapped to another (remote) URL. This mapping is only relevant for methods of the RemoteAccessContentProvider's XParameterizedContentProvider interface; in all other cases, <translation&gt: regexps have the same semantics as their <simple&gt: counterparts.",
+            "",
+            "FALSE: do not register, if another provider is already registered for the given URL template."
+          ],
+          "raises": [
+            "com.sun.star.ucb.DuplicateProviderException"
+          ],
+          "args": [
+            [
+              "Provider",
+              "XContentProvider",
+              "in"
+            ],
+            [
+              "Scheme",
+              "str",
+              "in"
+            ],
+            [
+              "ReplaceExisting",
+              "bool",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

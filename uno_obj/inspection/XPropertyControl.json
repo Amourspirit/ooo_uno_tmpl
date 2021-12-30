@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:16:15+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:09+00:00",
   "name": "XPropertyControl",
   "type": "interface",
   "namespace": "com.sun.star.inspection",
@@ -10,35 +10,108 @@
   },
   "writer_args": {},
   "data": {
-    "from_imports": [],
+    "from_imports": [
+      [
+        ".x_numeric_control",
+        "XNumericControl"
+      ],
+      [
+        ".x_string_list_control",
+        "XStringListControl"
+      ],
+      [
+        ".x_hyperlink_control",
+        "XHyperlinkControl"
+      ]
+    ],
     "from_imports_typing": [
-      "......x_property_control_context",
+      [
+        "..awt.x_window",
+        "XWindow"
+      ],
+      [
+        ".x_property_control_context",
+        "XPropertyControlContext"
+      ]
+    ],
+    "quote": [
+      "XWindow",
       "XPropertyControlContext"
     ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XPropertyControl",
     "imports": [],
     "namespace": "com.sun.star.inspection",
-    "extends": [],
+    "extends": [
+      "com.sun.star.inspection.XHyperlinkControl",
+      "com.sun.star.inspection.XNumericControl",
+      "com.sun.star.inspection.XStringListControl"
+    ],
     "desc": [
       "defines the interface for a single control in an ObjectInspector",
       "",
-      "**See Also**",
+      "**since**",
       "",
       "    OOo 2.0.3"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1inspection_1_1XPropertyControl.html",
     "items": {
+      "methods": [
+        {
+          "name": "isModified",
+          "returns": "bool",
+          "desc": [
+            "determines whether the control content is currently modified",
+            "",
+            "An XPropertyControl internally manages a flag indicating whether its content is modified. This flag is reset to FALSE every time our ControlContext is notified of our current value. Also, the control implementation must set this flag to TRUE if and only if the user changed the control content."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "notifyModifiedValue",
+          "returns": "None",
+          "desc": [
+            "notifies the context in which the control lives of the current control value, if this value is currently modified"
+          ],
+          "raises": [],
+          "args": []
+        }
+      ],
       "properties": [
         {
           "name": "ControlContext",
-          "returns": "'XPropertyControlContext'",
+          "returns": "XPropertyControlContext",
           "desc": [
             "specifies the context of the control within the ObjectInspector.",
             "",
             "The property control should actively notify its state changes to the context. In particular, changes in the focus and the value of the control must be notified."
           ],
-          "raises_get": [],
-          "raises_set": []
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ControlType",
+          "returns": "int",
+          "desc": [
+            "denotes the type of the control, as one of the PropertyControlType constants"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ControlWindow",
+          "returns": "XWindow",
+          "desc": [
+            "denotes the window which is the real UI representation of the property control.",
+            "",
+            "The ObjectInspector will automatically position and size this control as needed, care for its Z-order, and so on.",
+            "",
+            "This Window must not be NULL, else the whole control is not usable."
+          ],
+          "raises_get": "",
+          "raises_set": ""
         },
         {
           "name": "Value",
@@ -48,10 +121,17 @@
             "",
             "At every point in time, this value is either VOID, or of the type described by ValueType."
           ],
-          "raises_get": [],
-          "raises_set": [
-            "com.sun.star.beans.IllegalTypeException"
-          ]
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ValueType",
+          "returns": "object",
+          "desc": [
+            "denotes the value type of the control."
+          ],
+          "raises_get": "",
+          "raises_set": ""
         }
       ]
     }

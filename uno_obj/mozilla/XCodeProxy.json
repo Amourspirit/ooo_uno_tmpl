@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:17:30+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:11+00:00",
   "name": "XCodeProxy",
   "type": "interface",
   "namespace": "com.sun.star.mozilla",
@@ -16,7 +16,17 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".mozilla_product_type",
+        "MozillaProductType"
+      ]
+    ],
+    "quote": [
+      "MozillaProductType"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XCodeProxy",
     "imports": [],
     "namespace": "com.sun.star.mozilla",
@@ -24,13 +34,39 @@
       "com.sun.star.uno.XInterface"
     ],
     "desc": [
-      "is the interface to run Mozilla XPCOM code to run Mozilla XPCOM code in OOo,you should first implement this interface, then pass this object to xProxyRunner->Run",
-      "",
-      "**See Also**",
-      "",
-      "    XProxyRunner"
+      "is the interface to run Mozilla XPCOM code to run Mozilla XPCOM code in OOo,you should first implement this interface, then pass this object to xProxyRunner->Run"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1mozilla_1_1XCodeProxy.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getProductType",
+          "returns": "MozillaProductType",
+          "desc": [
+            "which Mozilla product this code is write for"
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getProfileName",
+          "returns": "str",
+          "desc": [
+            "which Mozilla profile this code will use"
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "run",
+          "returns": "int",
+          "desc": [
+            "all Mozilla XPCOM code must be called in run() or functions called by run()"
+          ],
+          "raises": [],
+          "args": []
+        }
+      ]
+    }
   }
 }

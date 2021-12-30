@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:18:35+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:33+00:00",
   "name": "XElementStackKeeper",
   "type": "interface",
   "namespace": "com.sun.star.xml.crypto.sax",
@@ -16,7 +16,17 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "...sax.x_document_handler",
+        "XDocumentHandler"
+      ]
+    ],
+    "quote": [
+      "XDocumentHandler"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XElementStackKeeper",
     "imports": [],
     "namespace": "com.sun.star.xml.crypto.sax",
@@ -27,6 +37,49 @@
       "Manipulate the \\\"key SAX events\\\" in a SAX event stream."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1xml_1_1crypto_1_1sax_1_1XElementStackKeeper.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "retrieve",
+          "returns": "None",
+          "desc": [
+            "Transfers the buffered key SAX events to a document handler.",
+            "",
+            "All transferred events are removed from the buffer."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "handler",
+              "XDocumentHandler",
+              "in"
+            ],
+            [
+              "includingTheLastEvent",
+              "bool",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "start",
+          "returns": "None",
+          "desc": [
+            "Starts to buffer key SAX events."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "stop",
+          "returns": "None",
+          "desc": [
+            "Stops buffering key SAX events."
+          ],
+          "raises": [],
+          "args": []
+        }
+      ]
+    }
   }
 }

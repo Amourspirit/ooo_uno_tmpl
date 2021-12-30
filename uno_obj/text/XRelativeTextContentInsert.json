@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:22:31+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:14:59+00:00",
   "name": "XRelativeTextContentInsert",
   "type": "interface",
   "namespace": "com.sun.star.text",
@@ -16,7 +16,17 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_text_content",
+        "XTextContent"
+      ]
+    ],
+    "quote": [
+      "XTextContent"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XRelativeTextContentInsert",
     "imports": [],
     "namespace": "com.sun.star.text",
@@ -24,9 +34,64 @@
       "com.sun.star.uno.XInterface"
     ],
     "desc": [
-      "makes it possible to insert new text contents before or after existing text contents."
+      "makes it possible to insert new text contents before or after existing text contents.",
+      "",
+      ".. deprecated::",
+      "",
+      "    Interface is deprecated."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1text_1_1XRelativeTextContentInsert.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "insertTextContentAfter",
+          "returns": "None",
+          "desc": [
+            "inserts text the new text content after the predecessor argument.",
+            "",
+            "This is helpful to insert paragraphs after text tables especially in headers, footers or text frames."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "xNewContent",
+              "XTextContent",
+              "in"
+            ],
+            [
+              "xPredecessor",
+              "XTextContent",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "insertTextContentBefore",
+          "returns": "None",
+          "desc": [
+            "inserts text the new text content before of the successor argument.",
+            "",
+            "This is helpful to insert paragraphs before of text tables."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "xNewContent",
+              "XTextContent",
+              "in"
+            ],
+            [
+              "xSuccessor",
+              "XTextContent",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

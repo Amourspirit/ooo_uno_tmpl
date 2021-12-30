@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:18:49+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:05+00:00",
   "name": "XHierarchicalStorageAccess2",
   "type": "interface",
   "namespace": "com.sun.star.embed",
@@ -12,21 +12,78 @@
   "data": {
     "from_imports": [
       [
-        "......x_hierarchical_storage_access",
+        ".x_hierarchical_storage_access",
         "XHierarchicalStorageAccess"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_extended_storage_stream",
+        "XExtendedStorageStream"
+      ],
+      [
+        "..beans.named_value",
+        "NamedValue"
+      ]
+    ],
+    "quote": [
+      "XExtendedStorageStream",
+      "typing.List[NamedValue]"
+    ],
+    "typings": [
+      "typing.List[NamedValue]"
+    ],
+    "requires_typing": true,
     "name": "XHierarchicalStorageAccess2",
     "imports": [],
     "namespace": "com.sun.star.embed",
     "extends": [
-      "XHierarchicalStorageAccess"
+      "com.sun.star.embed.XHierarchicalStorageAccess"
     ],
     "desc": [
       "This interface extends XHierarchicalStorageAccess interface."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1embed_1_1XHierarchicalStorageAccess2.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "openEncryptedStreamByHierarchicalName",
+          "returns": "XExtendedStorageStream",
+          "desc": [
+            "allows to get access to a child encrypted stream with encryption data using hierarchical path.",
+            "",
+            "If storage does not allow any encryption this method will always throw com.sun.star.packages.NoEncryptionException.",
+            "",
+            "In case the stream is open in readonly mode the com.sun.star.io.XStream.getOutputStream() method will return an empty reference."
+          ],
+          "raises": [
+            "com.sun.star.embed.InvalidStorageException",
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.packages.NoEncryptionException",
+            "com.sun.star.packages.WrongPasswordException",
+            "com.sun.star.container.NoSuchElementException",
+            "com.sun.star.io.IOException",
+            "com.sun.star.embed.StorageWrappedTargetException"
+          ],
+          "args": [
+            [
+              "sStreamName",
+              "str",
+              "in"
+            ],
+            [
+              "nOpenMode",
+              "int",
+              "in"
+            ],
+            [
+              "aEncryptionData",
+              "typing.List[NamedValue]",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:19:45+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:29+00:00",
   "name": "XRowSetListener",
   "type": "interface",
   "namespace": "com.sun.star.sdbc",
@@ -16,7 +16,17 @@
         "XEventListener"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..lang.event_object",
+        "EventObject"
+      ]
+    ],
+    "quote": [
+      "EventObject"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XRowSetListener",
     "imports": [],
     "namespace": "com.sun.star.sdbc",
@@ -24,13 +34,57 @@
       "com.sun.star.lang.XEventListener"
     ],
     "desc": [
-      "is used for receiving \\\"cursorMoved\\\", \\\"rowChanged\\\", and \\\"rowSetChanged\\\" events posted by, for example, a row set.",
-      "",
-      "**See Also**",
-      "",
-      "    Database - Events and Other Notifications"
+      "is used for receiving \\\"cursorMoved\\\", \\\"rowChanged\\\", and \\\"rowSetChanged\\\" events posted by, for example, a row set."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1sdbc_1_1XRowSetListener.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "cursorMoved",
+          "returns": "None",
+          "desc": [
+            "is called when a row set's cursor is moved."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "event",
+              "EventObject",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "rowChanged",
+          "returns": "None",
+          "desc": [
+            "is called when a row is inserted, updated, or deleted."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "event",
+              "EventObject",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "rowSetChanged",
+          "returns": "None",
+          "desc": [
+            "is called when the row set has changed, or in other words, when the row set has been reexecuted."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "event",
+              "EventObject",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

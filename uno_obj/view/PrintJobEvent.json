@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 18:24:41+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-28 11:31:00+00:00",
   "type": "struct",
   "name": "PrintJobEvent",
   "namespace": "com.sun.star.view",
@@ -10,10 +10,15 @@
   },
   "writer_args": {
     "sort": true,
-    "auto_import": true
+    "auto_import": true,
+    "dynamic_struct": false
   },
   "data": {
     "name": "PrintJobEvent",
+    "namespace": "com.sun.star.view",
+    "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1view_1_1PrintJobEvent.html",
+    "quote": [],
+    "typings": [],
     "fullname": "com.sun.star.view.PrintJobEvent",
     "desc": [
       "specifies the print progress of an XPrintJob.",
@@ -26,19 +31,22 @@
       "",
       "    OOo 1.1.2"
     ],
-    "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1view_1_1PrintJobEvent.html",
-    "namespace": "com.sun.star.view",
-    "auto_imports": [
-      [
-        ".printable_state",
-        "PrintableState"
-      ]
+    "extends": [
+      "com.sun.star.lang.EventObject"
     ],
     "imports": [],
+    "auto_imports": [],
+    "from_imports": [
+      [
+        "..lang.event_object",
+        "EventObject"
+      ]
+    ],
+    "requires_typing": false,
     "items": [
       {
         "name": "State",
-        "type": "'PrintableState'",
+        "type": "object",
         "orig_type": "PrintableState",
         "lines": [
           "contains the current state."

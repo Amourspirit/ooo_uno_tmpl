@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:19:08+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:25+00:00",
   "name": "XChangesSet",
   "type": "interface",
   "namespace": "com.sun.star.util",
@@ -16,7 +16,19 @@
         "XElementAccess"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".element_change",
+        "ElementChange"
+      ]
+    ],
+    "quote": [
+      "typing.List[ElementChange]"
+    ],
+    "typings": [
+      "typing.List[ElementChange]"
+    ],
+    "requires_typing": true,
     "name": "XChangesSet",
     "imports": [],
     "namespace": "com.sun.star.util",
@@ -26,13 +38,21 @@
     "desc": [
       "this interface enables inspecting a set of changes forming one batch transaction.",
       "",
-      "An object implementing this interface should implement more container interfaces to access individual changes as well.",
-      "",
-      "**See Also**",
-      "",
-      "    XChangesBatch"
+      "An object implementing this interface should implement more container interfaces to access individual changes as well."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1util_1_1XChangesSet.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getAllChanges",
+          "returns": "typing.List[ElementChange]",
+          "desc": [
+            "queries for all contained changes at once."
+          ],
+          "raises": [],
+          "args": []
+        }
+      ]
+    }
   }
 }

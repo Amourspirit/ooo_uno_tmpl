@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:16:32+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:23+00:00",
   "name": "XSection",
   "type": "interface",
   "namespace": "com.sun.star.report",
@@ -12,40 +12,53 @@
   "data": {
     "from_imports": [
       [
-        "..container.x_container",
-        "XContainer"
-      ],
-      [
         "..container.x_child",
         "XChild"
+      ],
+      [
+        "..drawing.x_shapes",
+        "XShapes"
       ],
       [
         "..beans.x_property_set",
         "XPropertySet"
       ],
       [
-        "..lang.x_component",
-        "XComponent"
+        "..container.x_container",
+        "XContainer"
       ],
       [
         "..container.x_enumeration_access",
         "XEnumerationAccess"
       ],
       [
-        "..drawing.x_shapes",
-        "XShapes"
+        "..lang.x_component",
+        "XComponent"
       ]
     ],
-    "from_imports_typing": [],
-    "name": "XSection",
-    "imports": [
-      "com.sun.star.container.XContainer",
-      "com.sun.star.container.XChild",
-      "com.sun.star.beans.XPropertySet",
-      "com.sun.star.lang.XComponent",
-      "com.sun.star.container.XEnumerationAccess",
-      "com.sun.star.drawing.XShapes"
+    "from_imports_typing": [
+      [
+        ".x_group",
+        "XGroup"
+      ],
+      [
+        "..util.color",
+        "Color"
+      ],
+      [
+        ".x_report_definition",
+        "XReportDefinition"
+      ]
     ],
+    "quote": [
+      "XReportDefinition",
+      "XGroup",
+      "Color"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "name": "XSection",
+    "imports": [],
     "namespace": "com.sun.star.report",
     "extends": [
       "com.sun.star.container.XChild",
@@ -58,13 +71,150 @@
     "desc": [
       "identifies a XSection inside a report.",
       "",
-      "A section acts like a container of report components. This generic construction allows the definition of hierarchies of reports and their dependent subreports.",
-      "",
-      "**See Also**",
-      "",
-      "    XReportDefinition"
+      "A section acts like a container of report components. This generic construction allows the definition of hierarchies of reports and their dependent subreports."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1report_1_1XSection.html",
-    "items": {}
+    "items": {
+      "properties": [
+        {
+          "name": "BackColor",
+          "returns": "Color",
+          "desc": [
+            "Defines the background color of the section."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "BackTransparent",
+          "returns": "bool",
+          "desc": [
+            "determines if the background color is set to transparent."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "CanGrow",
+          "returns": "bool",
+          "desc": [
+            "Specifies that elements with dynamic state will be expanded vertically when then content of the element is larger than it's container.",
+            "",
+            "If this property is disabled the content will be truncated when its size is larger than the container."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "CanShrink",
+          "returns": "bool",
+          "desc": [
+            "Represents ..."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ConditionalPrintExpression",
+          "returns": "str",
+          "desc": [
+            "Defines the expression which is executed before printing the section.",
+            "",
+            "If the return value of the expression is TRUE then the section will be printed."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ForceNewPage",
+          "returns": "int",
+          "desc": [
+            "Specifies whether the section is printed on a separate page.",
+            "",
+            "Not valid for page header or page footer."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Group",
+          "returns": "XGroup",
+          "desc": [
+            "Specifies the parent of the section if it is a group header or group footer."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Height",
+          "returns": "object",
+          "desc": [
+            "Defines the height of the section."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "KeepTogether",
+          "returns": "bool",
+          "desc": [
+            "Specifies that the section is printed on one page.",
+            "",
+            "Not valid for page header or page footer."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Name",
+          "returns": "str",
+          "desc": [
+            "Defines the name of the section."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "NewRowOrCol",
+          "returns": "int",
+          "desc": [
+            "Specifies whether the section is printed in a new row or column within a multi column report.",
+            "",
+            "Not valid for page header or page footer."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "RepeatSection",
+          "returns": "bool",
+          "desc": [
+            "Defines that the group header should be repeated on the next page when a group spans more than one page.",
+            "",
+            "It only applies to group headers."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ReportDefinition",
+          "returns": "XReportDefinition",
+          "desc": [
+            "Specifies the parent of the section if it is a page header or page footer."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Visible",
+          "returns": "bool",
+          "desc": [
+            "Defines if the section should be visible in report."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
   }
 }

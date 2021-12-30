@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:20:42+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:20+00:00",
   "name": "XLocaleData3",
   "type": "interface",
   "namespace": "com.sun.star.i18n",
@@ -16,7 +16,24 @@
         "XLocaleData2"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".calendar2",
+        "Calendar2"
+      ],
+      [
+        "..lang.locale",
+        "Locale"
+      ]
+    ],
+    "quote": [
+      "Locale",
+      "typing.List[Calendar2]"
+    ],
+    "typings": [
+      "typing.List[Calendar2]"
+    ],
+    "requires_typing": true,
     "name": "XLocaleData3",
     "imports": [],
     "namespace": "com.sun.star.i18n",
@@ -28,11 +45,29 @@
       "",
       "Derived from com.sun.star.i18n.XLocaleData2 this provides an additional method to return a sequence of all com.sun.star.i18n.Calendar2 elements available for that locale.",
       "",
-      "**See Also**",
+      "**since**",
       "",
       "    LibreOffice 3.5"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1i18n_1_1XLocaleData3.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getAllCalendars2",
+          "returns": "typing.List[Calendar2]",
+          "desc": [
+            "returns all LC_CALENDAR calendars for a locale."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aLocale",
+              "Locale",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

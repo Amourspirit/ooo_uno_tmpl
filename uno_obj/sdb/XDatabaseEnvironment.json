@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:16:39+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:15+00:00",
   "name": "XDatabaseEnvironment",
   "type": "interface",
   "namespace": "com.sun.star.sdb",
@@ -16,7 +16,17 @@
         "XDriverManager"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_database_access",
+        "XDatabaseAccess"
+      ]
+    ],
+    "quote": [
+      "XDatabaseAccess"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XDatabaseEnvironment",
     "imports": [],
     "namespace": "com.sun.star.sdb",
@@ -24,9 +34,51 @@
       "com.sun.star.sdbc.XDriverManager"
     ],
     "desc": [
-      "is not to be used anymore."
+      "is not to be used anymore.",
+      "",
+      ".. deprecated::",
+      "",
+      "    Interface is deprecated."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1sdb_1_1XDatabaseEnvironment.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "createDatabaseAccess",
+          "returns": "XDatabaseAccess",
+          "desc": [],
+          "raises": [
+            "com.sun.star.sdbc.SQLException"
+          ],
+          "args": [
+            [
+              "URL",
+              "str",
+              "in"
+            ],
+            [
+              "title",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getDatabaseAccess",
+          "returns": "XDatabaseAccess",
+          "desc": [],
+          "raises": [
+            "com.sun.star.sdbc.SQLException"
+          ],
+          "args": [
+            [
+              "URL",
+              "str",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

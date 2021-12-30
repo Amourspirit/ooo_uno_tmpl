@@ -5,8 +5,12 @@ $self.init_data()#slurp
 #attr $sort = True ## set is attribs is sorted
 #attr $ns = ""
 #attr $name = ""
-#attr $desc = "" ## str, list, tupple
+#attr $quote = set()
+#attr $typings = set()
 #attr $link = ""
+#attr $desc = "" ## str, list, tupple
+#attr $quote = set()
+#attr $typings = set()
 ## $enum_dict
 #*
 key: const name
@@ -15,6 +19,7 @@ value: string or list, tuple of strings
 #attr $enum_dict = {}
 $self.load_data()#slurp
 ## Main Template
+#set $safe_name = $self.get_safe_word($name)
 #set s_enum = ''
 #set $key_list = list($enum_dict.keys())
 #set $full_name = $ns + '.' + $name
@@ -24,13 +29,13 @@ $self.load_data()#slurp
 import os
 from typing import TYPE_CHECKING
 from enum import Enum
-from ...oenv import UNO_ENVIRONMENT
+from ooo_uno.oenv import UNO_ENVIRONMENT
 if (not TYPE_CHECKING) and UNO_ENVIRONMENT:
-    from ...helper.enum_helper import uno_enum_class_new
+    from ooo_uno.helper.enum_helper import uno_enum_class_new
     from $full_name import ($s_enum)
 
 
-class ${name}(Enum):
+class ${safe_name}(Enum):
     """
     #if isinstance($desc, str)
     $desc
@@ -47,7 +52,7 @@ class ${name}(Enum):
     """
     #for $key in $key_list
 #set $value = $enum_dict[$key]
-    $key = '$key'
+    $self.get_safe_word($key) = '$key'
     """
 #if isinstance($value, str):
     $value
@@ -62,7 +67,7 @@ class ${name}(Enum):
 def _dynamic_enum():
     # Dynamically create class that actually contains UNO enum instances
 
-    global $name
+    global $safe_name
     ignore = os.environ.get('ooouno_ignore_runtime', 'False')
     if ignore == 'True':
         return
@@ -71,15 +76,16 @@ def _dynamic_enum():
 
         _dict = {
 #for $key in $key_list
-            "$key": ${key},
+#set $safe_key = $self.get_safe_word($key)
+            "$safe_key": ${safe_key},
 #end for
         }
-        ${name} = type('$name', (object,), {
+        $safe_name = type('$safe_name', (object,), {
             '__doc__': 'class created dynamically. Class loosly mimics Enum',
             "__new__": uno_enum_class_new
         })
         for k, v in _dict.items():
-            setattr(${name}, k, v)
+            setattr($safe_name, k, v)
 
 if UNO_ENVIRONMENT:
     _dynamic_enum()

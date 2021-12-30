@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:21:53+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:38+00:00",
   "name": "XStatusbarController",
   "type": "interface",
   "namespace": "com.sun.star.frame",
@@ -16,26 +16,46 @@
         "XInitialization"
       ],
       [
+        ".x_status_listener",
+        "XStatusListener"
+      ],
+      [
         "..lang.x_component",
         "XComponent"
       ],
       [
         "..util.x_updatable",
         "XUpdatable"
-      ],
-      [
-        ".x_status_listener",
-        "XStatusListener"
       ]
     ],
-    "from_imports_typing": [],
-    "name": "XStatusbarController",
-    "imports": [
-      "com.sun.star.lang.XInitialization",
-      "com.sun.star.util.XUpdatable",
-      "com.sun.star.lang.XComponent",
-      "com.sun.star.frame.XStatusListener"
+    "from_imports_typing": [
+      [
+        "..awt.mouse_event",
+        "MouseEvent"
+      ],
+      [
+        "..awt.x_graphics",
+        "XGraphics"
+      ],
+      [
+        "..awt.rectangle",
+        "Rectangle"
+      ],
+      [
+        "..awt.point",
+        "Point"
+      ]
     ],
+    "quote": [
+      "Point",
+      "XGraphics",
+      "Rectangle",
+      "MouseEvent"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "name": "XStatusbarController",
+    "imports": [],
     "namespace": "com.sun.star.frame",
     "extends": [
       "com.sun.star.lang.XComponent",
@@ -46,13 +66,153 @@
     "desc": [
       "interface to be implemented by a component offering a more complex user interface to users within a status bar.",
       "",
-      "A generic status bar field is represented as a simple text field. A status bar controller can be added to a Statusbar and provide information or functions with a more sophisticated user interface.\n A typical example for status bar controller is a zoom chooser. It shows the current zoom and provides general zoom levels on a pop-up menu that can be activated by a mouse action for context menus.",
+      "A generic status bar field is represented as a simple text field. A status bar controller can be added to a Statusbar and provide information or functions with a more sophisticated user interface.",
+      "A typical example for status bar controller is a zoom chooser. It shows the current zoom and provides general zoom levels on a pop-up menu that can be activated by a mouse action for context menus.",
       "",
-      "**See Also**",
+      "**since**",
       "",
-      "    com.sun.star.frame.XDispatchProvider"
+      "    OOo 2.0"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1frame_1_1XStatusbarController.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "click",
+          "returns": "None",
+          "desc": [
+            "is called by a status bar if the user clicked with mouse into the field of the corresponding control."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aPos",
+              "Point",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "command",
+          "returns": "None",
+          "desc": [
+            "is called by a status bar if a command event is available for a controller."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aPos",
+              "Point",
+              "in"
+            ],
+            [
+              "nCommand",
+              "int",
+              "in"
+            ],
+            [
+              "bMouseEvent",
+              "bool",
+              "in"
+            ],
+            [
+              "aData",
+              "object",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "doubleClick",
+          "returns": "None",
+          "desc": [
+            "is called by a status bar if the user double-clicked with mouse into the field of the corresponding control."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aPos",
+              "Point",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "mouseButtonDown",
+          "returns": "bool",
+          "desc": [
+            "is called by a status bar if the mouse position is within the controller and a mouse button has been pressed.",
+            "",
+            "If the controller has captured the mouse input this function is also called when the mouse position is not within the controller."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aMouseEvent",
+              "MouseEvent",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "mouseButtonUp",
+          "returns": "bool",
+          "desc": [
+            "is called by a status bar if the mouse position is within the controller and a mouse button has been released.",
+            "",
+            "If the controller has captured the mouse input this function is also called when the mouse position is not within the controller."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aMouseEvent",
+              "MouseEvent",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "mouseMove",
+          "returns": "bool",
+          "desc": [
+            "is called by a status bar if the mouse position is within the controller and a mouse has been moved.",
+            "",
+            "If the controller has captured the mouse input this function is also called when the mouse position is not within the controller."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aMouseEvent",
+              "MouseEvent",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "paint",
+          "returns": "None",
+          "desc": [
+            "is called by a status bar if the controller has to update the visual representation."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xGraphics",
+              "XGraphics",
+              "in"
+            ],
+            [
+              "OutputRectangle",
+              "Rectangle",
+              "in"
+            ],
+            [
+              "nStyle",
+              "int",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

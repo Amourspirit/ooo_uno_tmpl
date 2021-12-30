@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:18:59+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:35+00:00",
   "name": "XFileIdentifierConverter",
   "type": "interface",
   "namespace": "com.sun.star.ucb",
@@ -17,6 +17,9 @@
       ]
     ],
     "from_imports_typing": [],
+    "quote": [],
+    "typings": [],
+    "requires_typing": false,
     "name": "XFileIdentifierConverter",
     "imports": [],
     "namespace": "com.sun.star.ucb",
@@ -24,13 +27,64 @@
       "com.sun.star.uno.XInterface"
     ],
     "desc": [
-      "specifies methods to convert between (file) URLs and file paths in system dependent notation.",
-      "",
-      "**See Also**",
-      "",
-      "    1.0"
+      "specifies methods to convert between (file) URLs and file paths in system dependent notation."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1ucb_1_1XFileIdentifierConverter.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getFileProviderLocality",
+          "returns": "int",
+          "desc": [
+            "Get information about the \\\"locality\\\" of a file content provider.",
+            "",
+            "The returned information can be used to chose the \\\"best\\\" among a number of file content providers implementing this interface."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "BaseURL",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getFileURLFromSystemPath",
+          "returns": "str",
+          "desc": [
+            "converts a file path in system dependent notation to a (file) URL."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "BaseURL",
+              "str",
+              "in"
+            ],
+            [
+              "SystemPath",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getSystemPathFromFileURL",
+          "returns": "str",
+          "desc": [
+            "converts a (file) URL to a file path in system dependent notation."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "URL",
+              "str",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:22:41+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:07+00:00",
   "name": "XGraphicRasterizer",
   "type": "interface",
   "namespace": "com.sun.star.graphic",
@@ -16,7 +16,32 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..awt.size",
+        "Size"
+      ],
+      [
+        "..io.x_input_stream",
+        "XInputStream"
+      ],
+      [
+        "..beans.property_values",
+        "PropertyValues"
+      ],
+      [
+        ".x_graphic",
+        "XGraphic"
+      ]
+    ],
+    "quote": [
+      "Size",
+      "XGraphic",
+      "PropertyValues",
+      "XInputStream"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XGraphicRasterizer",
     "imports": [],
     "namespace": "com.sun.star.graphic",
@@ -27,6 +52,95 @@
       "This interfaces exposes the initialize and a rasterize method to rasterize a given data stream to a pixel graphic."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1graphic_1_1XGraphicRasterizer.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "initializeData",
+          "returns": "bool",
+          "desc": [
+            "Initializing the rasterizer.",
+            "",
+            "This method could also be used to determine, if the provided data is able to be rasterized by the implementation. The implementation should take care of this feature as well as setting the default image size in pixel within the given output parameter.",
+            "",
+            "0",
+            "",
+            "is given, a horizontal default resolution of 72 DPI is used.",
+            "",
+            "0",
+            "",
+            "is given, a vertical default resolution of 72 DPI is used.",
+            "",
+            "In case no default size can be determined during initialization, a default pixel size of 0,0 is returned. In this case, the caller needs to assume a default pixel size, appropriate for the calling context."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "DataStream",
+              "XInputStream",
+              "in"
+            ],
+            [
+              "DPIX",
+              "object",
+              "in"
+            ],
+            [
+              "DPIY",
+              "object",
+              "in"
+            ],
+            [
+              "DefaultSizePixel",
+              "Size",
+              "out"
+            ]
+          ]
+        },
+        {
+          "name": "rasterize",
+          "returns": "XGraphic",
+          "desc": [
+            "Rasterizing the initialized data into a XGraphic container.",
+            "",
+            "The XGraphic container will contain a pixel type graphic after a successful rasterization process",
+            "",
+            "In case of any fault during the rasterization process, the XGraphic container will be empty afterwards and the method will return false"
+          ],
+          "raises": [],
+          "args": [
+            [
+              "Width",
+              "object",
+              "in"
+            ],
+            [
+              "Height",
+              "object",
+              "in"
+            ],
+            [
+              "RotateAngle",
+              "float",
+              "in"
+            ],
+            [
+              "ShearAngleX",
+              "float",
+              "in"
+            ],
+            [
+              "ShearAngleY",
+              "float",
+              "in"
+            ],
+            [
+              "RasterizeProperties",
+              "PropertyValues",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

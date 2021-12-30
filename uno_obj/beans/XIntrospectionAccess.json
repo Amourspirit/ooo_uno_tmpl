@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:19:26+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:04+00:00",
   "name": "XIntrospectionAccess",
   "type": "interface",
   "namespace": "com.sun.star.beans",
@@ -16,7 +16,30 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..reflection.x_idl_method",
+        "XIdlMethod"
+      ],
+      [
+        ".property",
+        "Property"
+      ]
+    ],
+    "quote": [
+      "XIdlMethod",
+      "Property",
+      "typing.List[Property]",
+      "typing.List[object]",
+      "typing.List[XIdlMethod]",
+      "XInterface"
+    ],
+    "typings": [
+      "typing.List[object]",
+      "typing.List[XIdlMethod]",
+      "typing.List[Property]"
+    ],
+    "requires_typing": true,
     "name": "XIntrospectionAccess",
     "imports": [],
     "namespace": "com.sun.star.beans",
@@ -33,6 +56,189 @@
       "The XMaterialHolder interface has to be supported to give access to the inspected object."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1beans_1_1XIntrospectionAccess.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getMethod",
+          "returns": "XIdlMethod",
+          "desc": [
+            "returns information about a method if a method with the demanded name exists and if it accords to one of the demanded MethodConcepts.",
+            "",
+            "The information is provided as com.sun.star.reflection.XIdlMethod."
+          ],
+          "raises": [
+            "com.sun.star.lang.NoSuchMethodException"
+          ],
+          "args": [
+            [
+              "aName",
+              "str",
+              "in"
+            ],
+            [
+              "nMethodConcepts",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getMethods",
+          "returns": "typing.List[XIdlMethod]",
+          "desc": [
+            "returns a sequence of methods of the introspected object."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "nMethodConcepts",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getProperties",
+          "returns": "typing.List[Property]",
+          "desc": [
+            "returns a sequence of properties of the introspected object"
+          ],
+          "raises": [],
+          "args": [
+            [
+              "nPropertyConcepts",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getProperty",
+          "returns": "Property",
+          "desc": [
+            "returns information about a property if a property with the demanded name exists and if it accords to one of the demanded PropertyConcepts.",
+            "",
+            "The information is provided as Property struct."
+          ],
+          "raises": [
+            "com.sun.star.container.NoSuchElementException"
+          ],
+          "args": [
+            [
+              "aName",
+              "str",
+              "in"
+            ],
+            [
+              "nPropertyConcepts",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getSuppliedMethodConcepts",
+          "returns": "int",
+          "desc": [
+            "returns information about which method concepts described in the MethodConcept constants group are supported by this XIntrospectionAccess implementation.",
+            "",
+            "The minimum supported concepts should be:"
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getSuppliedPropertyConcepts",
+          "returns": "int",
+          "desc": [
+            "returns information about which property concepts described in the PropertyConcept constants group are supported by this XIntrospectionAccess implementation.",
+            "",
+            "The minimum supported concepts should be:"
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getSupportedListeners",
+          "returns": "typing.List[object]",
+          "desc": [
+            "returns the listener types supported by the introspected object.",
+            "",
+            "If the introspected object has the methods addFooListener( XFooListener xFoo ) and removeFooListener( XFooListener xFoo ) the type of XFooListener will be one of the elements in the returned sequence."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "hasMethod",
+          "returns": "bool",
+          "desc": [
+            "allows to ask if a method with the demanded name exists and if it accords to one of the demanded MethodConcept."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aName",
+              "str",
+              "in"
+            ],
+            [
+              "nMethodConcepts",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "hasProperty",
+          "returns": "bool",
+          "desc": [
+            "allows to ask if a property with the demanded name exists and if it accords to one of the demanded PropertyConcept."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aName",
+              "str",
+              "in"
+            ],
+            [
+              "nPropertyConcepts",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "queryAdapter",
+          "returns": "XInterface",
+          "desc": [
+            "creates an adapter that implements an interface with the specified type.",
+            "",
+            "To access properties, query for the XPropertySet interface. If the XPropertySet can be queried, the XFastPropertySet interface must be supported too.",
+            "",
+            "If the introspected object implements a name container, the introspection should return the com.sun.star.container.XNameAccess and com.sun.star.container.XNameContainer interfaces.",
+            "",
+            "If the introspected object implements an index container, the introspection should return the com.sun.star.container.XIndexAccess and com.sun.star.container.XIndexContainer interfaces.",
+            "",
+            "If the introspected object implements an enumeration container, the introspection should return the com.sun.star.container.XEnumerationAccess interface.",
+            "",
+            "If the introspected object implements the com.sun.star.reflection.XIdlArray interface, the introspection should return this.",
+            "",
+            "To implement inaccurate name access, at all objects, which implement the com.sun.star.container.XNameAccess or XPropertySet interface, the XExactName interface has to be supported."
+          ],
+          "raises": [
+            "com.sun.star.beans.IllegalTypeException"
+          ],
+          "args": [
+            [
+              "aInterfaceType",
+              "object",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

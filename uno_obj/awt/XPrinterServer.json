@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:17:56+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:03+00:00",
   "name": "XPrinterServer",
   "type": "interface",
   "namespace": "com.sun.star.awt",
@@ -16,7 +16,25 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_info_printer",
+        "XInfoPrinter"
+      ],
+      [
+        ".x_printer",
+        "XPrinter"
+      ]
+    ],
+    "quote": [
+      "XInfoPrinter",
+      "typing.List[str]",
+      "XPrinter"
+    ],
+    "typings": [
+      "typing.List[str]"
+    ],
+    "requires_typing": true,
     "name": "XPrinterServer",
     "imports": [],
     "namespace": "com.sun.star.awt",
@@ -27,6 +45,52 @@
       "manages several printers on one machine."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XPrinterServer.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "createInfoPrinter",
+          "returns": "XInfoPrinter",
+          "desc": [
+            "creates a new information printer.",
+            "",
+            "You can get all information from this printer, but the printer cannot really print."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "printerName",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "createPrinter",
+          "returns": "XPrinter",
+          "desc": [
+            "creates a new virtual printer.",
+            "",
+            "You must call com.sun.star.awt.XPrinter.start() to put the job into the printer spooler."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "printerName",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getPrinterNames",
+          "returns": "typing.List[str]",
+          "desc": [
+            "returns a list of all available printer names."
+          ],
+          "raises": [],
+          "args": []
+        }
+      ]
+    }
   }
 }

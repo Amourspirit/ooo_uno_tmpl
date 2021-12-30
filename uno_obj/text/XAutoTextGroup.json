@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:22:24+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:14:59+00:00",
   "name": "XAutoTextGroup",
   "type": "interface",
   "namespace": "com.sun.star.text",
@@ -16,7 +16,25 @@
         "XNameAccess"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_text_range",
+        "XTextRange"
+      ],
+      [
+        ".x_auto_text_entry",
+        "XAutoTextEntry"
+      ]
+    ],
+    "quote": [
+      "typing.List[str]",
+      "XAutoTextEntry",
+      "XTextRange"
+    ],
+    "typings": [
+      "typing.List[str]"
+    ],
+    "requires_typing": true,
     "name": "XAutoTextGroup",
     "imports": [],
     "namespace": "com.sun.star.text",
@@ -27,6 +45,95 @@
       "The interface provide methods to insert, rename and delete autotext entries from the current autotext group."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1text_1_1XAutoTextGroup.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getTitles",
+          "returns": "typing.List[str]",
+          "desc": [
+            "returns the titles of all autotext entries.",
+            "",
+            "The order of the entries corresponds to the output of the function getElementNames()."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "insertNewByName",
+          "returns": "XAutoTextEntry",
+          "desc": [
+            "creates a new AutoTextEntry entry."
+          ],
+          "raises": [
+            "com.sun.star.container.ElementExistException"
+          ],
+          "args": [
+            [
+              "aName",
+              "str",
+              "in"
+            ],
+            [
+              "aTitle",
+              "str",
+              "in"
+            ],
+            [
+              "xTextRange",
+              "XTextRange",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "removeByName",
+          "returns": "None",
+          "desc": [
+            "removes the specified autotext entry."
+          ],
+          "raises": [
+            "com.sun.star.container.NoSuchElementException"
+          ],
+          "args": [
+            [
+              "aEntryName",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "renameByName",
+          "returns": "None",
+          "desc": [
+            "renames an entry in the autotext group.",
+            "",
+            "The position of the autotext entry is not changed."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.container.ElementExistException",
+            "com.sun.star.io.IOException"
+          ],
+          "args": [
+            [
+              "aElementName",
+              "str",
+              "in"
+            ],
+            [
+              "aNewElementName",
+              "str",
+              "in"
+            ],
+            [
+              "aNewElementTitle",
+              "str",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

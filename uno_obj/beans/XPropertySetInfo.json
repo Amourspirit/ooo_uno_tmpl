@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:19:28+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:04+00:00",
   "name": "XPropertySetInfo",
   "type": "interface",
   "namespace": "com.sun.star.beans",
@@ -16,7 +16,20 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".property",
+        "Property"
+      ]
+    ],
+    "quote": [
+      "Property",
+      "typing.List[Property]"
+    ],
+    "typings": [
+      "typing.List[Property]"
+    ],
+    "requires_typing": true,
     "name": "XPropertySetInfo",
     "imports": [],
     "namespace": "com.sun.star.beans",
@@ -28,13 +41,47 @@
       "",
       "There are three kinds of properties:",
       "",
-      "The specification only describes the properties, it does not contain any values.",
-      "",
-      "**See Also**",
-      "",
-      "    ProUNO - Properties"
+      "The specification only describes the properties, it does not contain any values."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1beans_1_1XPropertySetInfo.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getProperties",
+          "returns": "typing.List[Property]",
+          "desc": [],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getPropertyByName",
+          "returns": "Property",
+          "desc": [],
+          "raises": [
+            "com.sun.star.beans.UnknownPropertyException"
+          ],
+          "args": [
+            [
+              "aName",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "hasPropertyByName",
+          "returns": "bool",
+          "desc": [],
+          "raises": [],
+          "args": [
+            [
+              "Name",
+              "str",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

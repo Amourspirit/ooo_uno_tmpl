@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:18:29+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:01+00:00",
   "name": "XWriter",
   "type": "interface",
   "namespace": "com.sun.star.xml.sax",
@@ -12,20 +12,24 @@
   "data": {
     "from_imports": [
       [
-        ".x_extended_document_handler",
-        "XExtendedDocumentHandler"
-      ],
-      [
         "...io.x_active_data_source",
         "XActiveDataSource"
+      ],
+      [
+        ".x_extended_document_handler",
+        "XExtendedDocumentHandler"
       ]
     ],
     "from_imports_typing": [],
-    "name": "XWriter",
-    "imports": [
-      "com.sun.star.xml.sax.XExtendedDocumentHandler",
-      "com.sun.star.io.XActiveDataSource"
+    "quote": [
+      "typing.List[typing.Tuple[str, str]]"
     ],
+    "typings": [
+      "typing.List[typing.Tuple[str, str]]"
+    ],
+    "requires_typing": true,
+    "name": "XWriter",
+    "imports": [],
     "namespace": "com.sun.star.xml.sax",
     "extends": [
       "com.sun.star.io.XActiveDataSource",
@@ -34,11 +38,33 @@
     "desc": [
       "Provides a unified interface for the new-style Writer service to implement.",
       "",
-      "**See Also**",
+      "**since**",
       "",
       "    LibreOffice 4.0"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1xml_1_1sax_1_1XWriter.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "setCustomEntityNames",
+          "returns": "None",
+          "desc": [
+            "Adds support for custom entity names list.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 7.2"
+          ],
+          "raises": [],
+          "args": [
+            [
+              "replacements",
+              "typing.List[typing.Tuple[str, str]]",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

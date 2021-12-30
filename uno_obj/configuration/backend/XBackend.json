@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:17:08+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:06+00:00",
   "name": "XBackend",
   "type": "interface",
   "namespace": "com.sun.star.configuration.backend",
@@ -16,7 +16,24 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_update_handler",
+        "XUpdateHandler"
+      ],
+      [
+        ".x_layer",
+        "XLayer"
+      ]
+    ],
+    "quote": [
+      "typing.List[XLayer]",
+      "XUpdateHandler"
+    ],
+    "typings": [
+      "typing.List[XLayer]"
+    ],
+    "requires_typing": true,
     "name": "XBackend",
     "imports": [],
     "namespace": "com.sun.star.configuration.backend",
@@ -30,11 +47,98 @@
       "",
       "There is an implied owner entity associated to the object when it is created. This entity should be used for normal data access. For administrative operations data of other entities can be accessed.",
       "",
-      "**See Also**",
+      "**since**",
       "",
-      "    com.sun.star.configuration.backend.XBackendEntities"
+      "    OOo 1.1.2"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1configuration_1_1backend_1_1XBackend.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getOwnUpdateHandler",
+          "returns": "XUpdateHandler",
+          "desc": [
+            "creates an update handler for the owner entity layer for a component."
+          ],
+          "raises": [
+            "BackendAccessException",
+            "com.sun.star.lang.NoSupportException",
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "aComponent",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getUpdateHandler",
+          "returns": "XUpdateHandler",
+          "desc": [
+            "creates an update handler on an entity's layer for a component."
+          ],
+          "raises": [
+            "BackendAccessException",
+            "com.sun.star.lang.NoSupportException",
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "aComponent",
+              "str",
+              "in"
+            ],
+            [
+              "aEntity",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "listLayers",
+          "returns": "typing.List[XLayer]",
+          "desc": [
+            "retrieves the layers associated to an entity for a component."
+          ],
+          "raises": [
+            "BackendAccessException",
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "aComponent",
+              "str",
+              "in"
+            ],
+            [
+              "aEntity",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "listOwnLayers",
+          "returns": "typing.List[XLayer]",
+          "desc": [
+            "retrieves the layers associated to the owner entity for a component."
+          ],
+          "raises": [
+            "BackendAccessException",
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "aComponent",
+              "str",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:16:56+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:08+00:00",
   "name": "XSpellAlternatives",
   "type": "interface",
   "namespace": "com.sun.star.linguistic2",
@@ -16,7 +16,20 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..lang.locale",
+        "Locale"
+      ]
+    ],
+    "quote": [
+      "typing.List[str]",
+      "Locale"
+    ],
+    "typings": [
+      "typing.List[str]"
+    ],
+    "requires_typing": true,
     "name": "XSpellAlternatives",
     "imports": [],
     "namespace": "com.sun.star.linguistic2",
@@ -26,13 +39,47 @@
     "desc": [
       "Gives access to the results of failed spell checking attempts and may provide spelling alternatives.",
       "",
-      "This is used by the com.sun.star.linguistic2.XSpellChecker.spell() function when the word was not found to be correct. Suggestions for other words to be used may be provided along with a failure-type that may specify why the word was not correct.",
-      "",
-      "**See Also**",
-      "",
-      "    com.sun.star.linguistic2.SpellFailure"
+      "This is used by the com.sun.star.linguistic2.XSpellChecker.spell() function when the word was not found to be correct. Suggestions for other words to be used may be provided along with a failure-type that may specify why the word was not correct."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1linguistic2_1_1XSpellAlternatives.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getAlternatives",
+          "returns": "typing.List[str]",
+          "desc": [],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getAlternativesCount",
+          "returns": "int",
+          "desc": [],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getFailureType",
+          "returns": "int",
+          "desc": [],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getLocale",
+          "returns": "Locale",
+          "desc": [],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getWord",
+          "returns": "str",
+          "desc": [],
+          "raises": [],
+          "args": []
+        }
+      ]
+    }
   }
 }

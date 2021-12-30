@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:18:56+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:35+00:00",
   "name": "XContentAccess",
   "type": "interface",
   "namespace": "com.sun.star.ucb",
@@ -16,7 +16,22 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_content_identifier",
+        "XContentIdentifier"
+      ],
+      [
+        ".x_content",
+        "XContent"
+      ]
+    ],
+    "quote": [
+      "XContent",
+      "XContentIdentifier"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XContentAccess",
     "imports": [],
     "namespace": "com.sun.star.ucb",
@@ -26,13 +41,41 @@
     "desc": [
       "specifies methods for obtaining information on a content in different levels.",
       "",
-      "For example, if there is a cursor which points to XContents, this interface could be used to give the user access to the content under the cursor. If the client only needs the identifier string of the content, there is no need to first create the content object, then to obtain the string from it and after that to release the content.",
-      "",
-      "**See Also**",
-      "",
-      "    1.0"
+      "For example, if there is a cursor which points to XContents, this interface could be used to give the user access to the content under the cursor. If the client only needs the identifier string of the content, there is no need to first create the content object, then to obtain the string from it and after that to release the content."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1ucb_1_1XContentAccess.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "queryContent",
+          "returns": "XContent",
+          "desc": [
+            "returns the content ( \\\"most expensive method\\\" )."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "queryContentIdentifier",
+          "returns": "XContentIdentifier",
+          "desc": [
+            "returns the identifier object of the content."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "queryContentIdentifierString",
+          "returns": "str",
+          "desc": [
+            "returns the identifier string of the content ( \\\"cheap method\\\" ).",
+            "",
+            "Note that this string can be used later to recreate the content."
+          ],
+          "raises": [],
+          "args": []
+        }
+      ]
+    }
   }
 }

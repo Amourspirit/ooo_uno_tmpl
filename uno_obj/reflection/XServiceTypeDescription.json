@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:17:17+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:32+00:00",
   "name": "XServiceTypeDescription",
   "type": "interface",
   "namespace": "com.sun.star.reflection",
@@ -16,7 +16,31 @@
         "XTypeDescription"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_interface_type_description",
+        "XInterfaceTypeDescription"
+      ],
+      [
+        ".x_property_type_description",
+        "XPropertyTypeDescription"
+      ],
+      [
+        ".x_service_type_description",
+        "XServiceTypeDescription"
+      ]
+    ],
+    "quote": [
+      "typing.List[XPropertyTypeDescription]",
+      "typing.List[XServiceTypeDescription]",
+      "typing.List[XInterfaceTypeDescription]"
+    ],
+    "typings": [
+      "typing.List[XPropertyTypeDescription]",
+      "typing.List[XServiceTypeDescription]",
+      "typing.List[XInterfaceTypeDescription]"
+    ],
+    "requires_typing": true,
     "name": "XServiceTypeDescription",
     "imports": [],
     "namespace": "com.sun.star.reflection",
@@ -30,11 +54,59 @@
       "",
       "The type class of this type is com.sun.star.uno.TypeClass.SERVICE.",
       "",
-      "**See Also**",
+      "**since**",
       "",
       "    OOo 1.1.2"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1reflection_1_1XServiceTypeDescription.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getMandatoryInterfaces",
+          "returns": "typing.List[XInterfaceTypeDescription]",
+          "desc": [
+            "Returns the type descriptions of the mandatory interfaces defined for this service."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getMandatoryServices",
+          "returns": "typing.List[XServiceTypeDescription]",
+          "desc": [
+            "Returns the type descriptions of the mandatory services defined for this service."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getOptionalInterfaces",
+          "returns": "typing.List[XInterfaceTypeDescription]",
+          "desc": [
+            "Returns the type descriptions of the optional interface defined for this service."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getOptionalServices",
+          "returns": "typing.List[XServiceTypeDescription]",
+          "desc": [
+            "Returns the type descriptions of the optional services defined for this service."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getProperties",
+          "returns": "typing.List[XPropertyTypeDescription]",
+          "desc": [
+            "Returns the properties defined for this service."
+          ],
+          "raises": [],
+          "args": []
+        }
+      ]
+    }
   }
 }

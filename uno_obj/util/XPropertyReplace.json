@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:19:14+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:25+00:00",
   "name": "XPropertyReplace",
   "type": "interface",
   "namespace": "com.sun.star.util",
@@ -16,7 +16,19 @@
         "XReplaceDescriptor"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..beans.property_value",
+        "PropertyValue"
+      ]
+    ],
+    "quote": [
+      "typing.List[PropertyValue]"
+    ],
+    "typings": [
+      "typing.List[PropertyValue]"
+    ],
+    "requires_typing": true,
     "name": "XPropertyReplace",
     "imports": [],
     "namespace": "com.sun.star.util",
@@ -27,6 +39,83 @@
       "makes it possible to search and replace properties."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1util_1_1XPropertyReplace.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getReplaceAttributes",
+          "returns": "typing.List[PropertyValue]",
+          "desc": [],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getSearchAttributes",
+          "returns": "typing.List[PropertyValue]",
+          "desc": [],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getValueSearch",
+          "returns": "bool",
+          "desc": [
+            "provides the information if specific property values are searched, or just the existence of the specified properties."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "setReplaceAttributes",
+          "returns": "None",
+          "desc": [
+            "sets the properties to replace the found occurrences."
+          ],
+          "raises": [
+            "com.sun.star.beans.UnknownPropertyException",
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "aSearchAttribs",
+              "typing.List[PropertyValue]",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setSearchAttributes",
+          "returns": "None",
+          "desc": [
+            "sets the properties to search for."
+          ],
+          "raises": [
+            "com.sun.star.beans.UnknownPropertyException",
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "aSearchAttribs",
+              "typing.List[PropertyValue]",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setValueSearch",
+          "returns": "None",
+          "desc": [
+            "specifies if specific property values are searched, or just the existence of the specified properties."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "bValueSearch",
+              "bool",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

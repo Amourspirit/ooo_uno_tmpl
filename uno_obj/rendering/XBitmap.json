@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:17:32+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:18+00:00",
   "name": "XBitmap",
   "type": "interface",
   "namespace": "com.sun.star.rendering",
@@ -16,7 +16,27 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..geometry.integer_size2_d",
+        "IntegerSize2D"
+      ],
+      [
+        "..geometry.real_size2_d",
+        "RealSize2D"
+      ],
+      [
+        ".x_bitmap",
+        "XBitmap"
+      ]
+    ],
+    "quote": [
+      "IntegerSize2D",
+      "XBitmap",
+      "RealSize2D"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XBitmap",
     "imports": [],
     "namespace": "com.sun.star.rendering",
@@ -28,11 +48,59 @@
       "",
       "This interface contains the generic functionality to be used on every XCanvas bitmap object. More format-specific methods can be found at the XIntegerBitmap, XIeeeDoubleBitmap, XIeeeFloatBitmap and XHalfFloatBitmap interfaces.",
       "",
-      "**See Also**",
+      "**since**",
       "",
       "    OOo 2.0"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1rendering_1_1XBitmap.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getScaledBitmap",
+          "returns": "XBitmap",
+          "desc": [
+            "Query a scaled copy of the original bitmap."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException",
+            "VolatileContentDestroyedException"
+          ],
+          "args": [
+            [
+              "newSize",
+              "RealSize2D",
+              "in"
+            ],
+            [
+              "beFast",
+              "bool",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getSize",
+          "returns": "IntegerSize2D",
+          "desc": [
+            "Query the size of the bitmap.",
+            "",
+            "This method queries the bitmap size in pixel."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "hasAlpha",
+          "returns": "bool",
+          "desc": [
+            "Query transparency status of the bitmap.",
+            "",
+            "The method checks, whether the bitmap contains any alpha information. The same information is also available at the XColorSpace associated with this bitmap, though much easier to access here (the color space then has a component flagged ColorComponentTag.ALPHA)."
+          ],
+          "raises": [],
+          "args": []
+        }
+      ]
+    }
   }
 }

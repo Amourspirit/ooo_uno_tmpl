@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:16:46+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:07+00:00",
   "name": "XTableName",
   "type": "interface",
   "namespace": "com.sun.star.sdb.tools",
@@ -12,9 +12,16 @@
   "data": {
     "from_imports": [],
     "from_imports_typing": [
-      ".......x_property_set",
+      [
+        "...beans.x_property_set",
+        "XPropertySet"
+      ]
+    ],
+    "quote": [
       "XPropertySet"
     ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XTableName",
     "imports": [],
     "namespace": "com.sun.star.sdb.tools",
@@ -26,14 +33,59 @@
       "",
       "The XTableName interface eases this and other, similar tasks around table names.",
       "",
-      "The component itself does not have life-time control mechanisms, i.e. you cannot explicitly dispose it (com.sun.star.lang.XComponent.dispose()), and you cannot be notified when it dies.\n However, if your try to access any of its methods or attributes, after the connection which was used to create it was closed, a com.sun.star.lang.DisposedException will be thrown.",
+      "The component itself does not have life-time control mechanisms, i.e. you cannot explicitly dispose it (com.sun.star.lang.XComponent.dispose()), and you cannot be notified when it dies.",
+      "However, if your try to access any of its methods or attributes, after the connection which was used to create it was closed, a com.sun.star.lang.DisposedException will be thrown.",
       "",
-      "**See Also**",
+      "**since**",
       "",
-      "    XConnectionTools"
+      "    OOo 2.0.4"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1sdb_1_1tools_1_1XTableName.html",
     "items": {
+      "methods": [
+        {
+          "name": "getComposedName",
+          "returns": "str",
+          "desc": [
+            "returns the composed table name, including the catalog and schema name, respecting the database's quoting requirements, plus"
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "Type",
+              "int",
+              "in"
+            ],
+            [
+              "Quote",
+              "bool",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setComposedName",
+          "returns": "None",
+          "desc": [
+            "sets a new composed table name"
+          ],
+          "raises": [],
+          "args": [
+            [
+              "ComposedName",
+              "str",
+              "in"
+            ],
+            [
+              "Type",
+              "int",
+              "in"
+            ]
+          ]
+        }
+      ],
       "properties": [
         {
           "name": "CatalogName",
@@ -41,8 +93,19 @@
           "desc": [
             "denotes the name of the catalog which the table is a part of"
           ],
-          "raises_get": [],
-          "raises_set": []
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "NameForSelect",
+          "returns": "str",
+          "desc": [
+            "represents the table name in a form to be used in a SELECT statement.",
+            "",
+            "On a per-data-source basis, OpenOffice.org allows to override database meta data information in that you can specify to not use catalog and or schema names in SELECT statements. Using this attribute, you can generate a table name which respects those settings."
+          ],
+          "raises_get": "",
+          "raises_set": ""
         },
         {
           "name": "SchemaName",
@@ -50,21 +113,19 @@
           "desc": [
             "denotes the name of the schema which the table is a part of"
           ],
-          "raises_get": [],
-          "raises_set": []
+          "raises_get": "",
+          "raises_set": ""
         },
         {
           "name": "Table",
-          "returns": "'XPropertySet'",
+          "returns": "XPropertySet",
           "desc": [
             "is the com.sun.star.sdb.Table object specified by the current name.",
             "",
             "Retrieving this attribute is equivalent to obtaining the tables container from the connection (via com.sun.star.sdbcx.XTablesSupplier), and calling its com.sun.star.container.XNameAccess.getByName() method with the ComposedName."
           ],
-          "raises_get": [],
-          "raises_set": [
-            "com.sun.star.container.NoSuchElementException"
-          ]
+          "raises_get": "",
+          "raises_set": ""
         },
         {
           "name": "TableName",
@@ -72,8 +133,8 @@
           "desc": [
             "denotes the mere, unqualified table name, excluding any catalog and schema."
           ],
-          "raises_get": [],
-          "raises_set": []
+          "raises_get": "",
+          "raises_set": ""
         }
       ]
     }

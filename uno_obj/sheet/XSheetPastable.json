@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:21:18+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:17+00:00",
   "name": "XSheetPastable",
   "type": "interface",
   "namespace": "com.sun.star.sheet",
@@ -16,7 +16,32 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..table.cell_range_address",
+        "CellRangeAddress"
+      ],
+      [
+        ".paste_operation",
+        "PasteOperation"
+      ],
+      [
+        "..table.cell_address",
+        "CellAddress"
+      ],
+      [
+        ".cell_insert_mode",
+        "CellInsertMode"
+      ]
+    ],
+    "quote": [
+      "CellAddress",
+      "CellRangeAddress",
+      "CellInsertMode",
+      "PasteOperation"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XSheetPastable",
     "imports": [],
     "namespace": "com.sun.star.sheet",
@@ -24,9 +49,98 @@
       "com.sun.star.uno.XInterface"
     ],
     "desc": [
-      "represents a sheet into which contents of the clipboard can be pasted."
+      "represents a sheet into which contents of the clipboard can be pasted.",
+      "",
+      ".. deprecated::",
+      "",
+      "    Interface is deprecated."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1sheet_1_1XSheetPastable.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "paste",
+          "returns": "None",
+          "desc": [
+            "pastes the contents of the clipboard at the specified position on the sheet."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aDestination",
+              "CellAddress",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "pasteCellRange",
+          "returns": "None",
+          "desc": [
+            "pastes clipboard data from a cell range into another cell range.",
+            "",
+            "The contents of the clipboard must be from a cell range."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aDestination",
+              "CellRangeAddress",
+              "in"
+            ],
+            [
+              "nOperation",
+              "PasteOperation",
+              "in"
+            ],
+            [
+              "nContents",
+              "int",
+              "in"
+            ],
+            [
+              "bSkipEmpty",
+              "bool",
+              "in"
+            ],
+            [
+              "bTranspose",
+              "bool",
+              "in"
+            ],
+            [
+              "bAsLink",
+              "bool",
+              "in"
+            ],
+            [
+              "nInsert",
+              "CellInsertMode",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "pasteFormat",
+          "returns": "None",
+          "desc": [
+            "pastes the contents of the clipboard at the specified position on the sheet, using the specified format."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aDestination",
+              "CellAddress",
+              "in"
+            ],
+            [
+              "aFormat",
+              "str",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

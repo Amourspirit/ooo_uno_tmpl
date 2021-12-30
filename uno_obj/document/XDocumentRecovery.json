@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:22:00+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:10+00:00",
   "name": "XDocumentRecovery",
   "type": "interface",
   "namespace": "com.sun.star.document",
@@ -11,7 +11,19 @@
   "writer_args": {},
   "data": {
     "from_imports": [],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..beans.property_value",
+        "PropertyValue"
+      ]
+    ],
+    "quote": [
+      "typing.List[PropertyValue]"
+    ],
+    "typings": [
+      "typing.List[PropertyValue]"
+    ],
+    "requires_typing": true,
     "name": "XDocumentRecovery",
     "imports": [],
     "namespace": "com.sun.star.document",
@@ -20,6 +32,85 @@
       "is the interface to be implemented by documents who wish to participate in the document emergency-save / recovery process."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1document_1_1XDocumentRecovery.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "recoverFromFile",
+          "returns": "None",
+          "desc": [
+            "recovers the document after a previous emergency or session save.",
+            "",
+            "The document itself has previously been created, but not loaded (via com.sun.star.frame.XLoadable.load()) or initialized (via com.sun.star.frame.XLoadable.initNew()).",
+            "",
+            "Upon successful return, the document must be fully initialized. In particular, the caller is not responsible for calling com.sun.star.frame.XModel.attachResource(). Instead, the implementation is responsible to do so, if required.",
+            "",
+            "A default implementation of this method could simply delegate this call to com.sun.star.frame.XLoadable.load(), followed by com.sun.star.frame.XModel.attachResource()."
+          ],
+          "raises": [
+            "com.sun.star.io.IOException",
+            "com.sun.star.lang.WrappedTargetException"
+          ],
+          "args": [
+            [
+              "SourceLocation",
+              "str",
+              "in"
+            ],
+            [
+              "SalvagedFile",
+              "str",
+              "in"
+            ],
+            [
+              "MediaDescriptor",
+              "typing.List[PropertyValue]",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "storeToRecoveryFile",
+          "returns": "None",
+          "desc": [
+            "does an emergency save of the document",
+            "",
+            "A default implementation of this method could simply delegate this call to com.sun.star.frame.XStorable.storeToURL()."
+          ],
+          "raises": [
+            "com.sun.star.io.IOException",
+            "com.sun.star.lang.WrappedTargetException"
+          ],
+          "args": [
+            [
+              "TargetLocation",
+              "str",
+              "in"
+            ],
+            [
+              "MediaDescriptor",
+              "typing.List[PropertyValue]",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "wasModifiedSinceLastSave",
+          "returns": "bool",
+          "desc": [
+            "determines whether the document has been modified since the last call to storeToRecoveryFile().",
+            "",
+            "If storeToRecoveryFile has not been called before, this method returns whether the document has been modified since it has been loaded respectively created.",
+            "",
+            "When saving a session, either in case of an emergency (when OpenOffice.org crashed), or during a periodic session save as configured by the user, storeToRecoveryFile() is called for every document where wasModifiedSinceLastSave returns TRUE.",
+            "",
+            "It's allowed to implement this method sloppy, by returning TRUE in cases where it is not sure whether the document actually has been modified. So, the most simple implementation could simply delegate this call to com.sun.star.util.XModifiable.isModified(). (Well, actually that's the second simple implementation, the most simple one would, still legitimately, always return TRUE.)",
+            "",
+            "However, in such a case, the document might be saved more often than needed. In particular during the periodic session save, this might become a problem when saving is expensive, for a single document or the sum of all open documents."
+          ],
+          "raises": [],
+          "args": []
+        }
+      ]
+    }
   }
 }

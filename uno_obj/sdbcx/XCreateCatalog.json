@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:19:32+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:33+00:00",
   "name": "XCreateCatalog",
   "type": "interface",
   "namespace": "com.sun.star.sdbcx",
@@ -16,7 +16,19 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..beans.property_value",
+        "PropertyValue"
+      ]
+    ],
+    "quote": [
+      "typing.List[PropertyValue]"
+    ],
+    "typings": [
+      "typing.List[PropertyValue]"
+    ],
+    "requires_typing": true,
     "name": "XCreateCatalog",
     "imports": [],
     "namespace": "com.sun.star.sdbcx",
@@ -27,6 +39,29 @@
       "may be implemented to hide the complexity of creating a database catalog."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1sdbcx_1_1XCreateCatalog.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "createCatalog",
+          "returns": "None",
+          "desc": [
+            "creates the catalog by using a sequence of property values.",
+            "",
+            "The kind of properties depends on the provider."
+          ],
+          "raises": [
+            "com.sun.star.sdbc.SQLException",
+            "com.sun.star.container.ElementExistException"
+          ],
+          "args": [
+            [
+              "info",
+              "typing.List[PropertyValue]",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

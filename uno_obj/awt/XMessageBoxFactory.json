@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:17:53+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:03+00:00",
   "name": "XMessageBoxFactory",
   "type": "interface",
   "namespace": "com.sun.star.awt",
@@ -16,7 +16,27 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_window_peer",
+        "XWindowPeer"
+      ],
+      [
+        ".x_message_box",
+        "XMessageBox"
+      ],
+      [
+        ".message_box_type",
+        "MessageBoxType"
+      ]
+    ],
+    "quote": [
+      "MessageBoxType",
+      "XMessageBox",
+      "XWindowPeer"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XMessageBoxFactory",
     "imports": [],
     "namespace": "com.sun.star.awt",
@@ -27,6 +47,50 @@
       "specifies a factory interface for creating message boxes."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XMessageBoxFactory.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "createMessageBox",
+          "returns": "XMessageBox",
+          "desc": [
+            "creates a message box.",
+            "",
+            "This parameter must not be null.",
+            "",
+            "A combination of com.sun.star.awt.MessageBoxButtons",
+            "",
+            "A com.sun.star.awt.MessageBoxType.INFOBOX ignores this parameter, instead it uses a com.sun.star.awt.MessageBoxButtons.BUTTONS_OK."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aParent",
+              "XWindowPeer",
+              "in"
+            ],
+            [
+              "eType",
+              "MessageBoxType",
+              "in"
+            ],
+            [
+              "nButtons",
+              "int",
+              "in"
+            ],
+            [
+              "sTitle",
+              "str",
+              "in"
+            ],
+            [
+              "sMessage",
+              "str",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

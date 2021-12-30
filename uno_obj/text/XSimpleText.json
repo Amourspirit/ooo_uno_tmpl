@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:22:32+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:14:59+00:00",
   "name": "XSimpleText",
   "type": "interface",
   "namespace": "com.sun.star.text",
@@ -16,7 +16,18 @@
         "XTextRange"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_text_cursor",
+        "XTextCursor"
+      ]
+    ],
+    "quote": [
+      "XTextRange",
+      "XTextCursor"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XSimpleText",
     "imports": [],
     "namespace": "com.sun.star.text",
@@ -26,13 +37,90 @@
     "desc": [
       "is the main interface for a distinct text unit, i.e.",
       "",
-      "the main text of a document, the text for headers and footers or for single cells of a table.",
-      "",
-      "**See Also**",
-      "",
-      "    XText"
+      "the main text of a document, the text for headers and footers or for single cells of a table."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1text_1_1XSimpleText.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "createTextCursor",
+          "returns": "XTextCursor",
+          "desc": [],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "createTextCursorByRange",
+          "returns": "XTextCursor",
+          "desc": [
+            "The initial position is set to aTextPosition."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aTextPosition",
+              "XTextRange",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "insertControlCharacter",
+          "returns": "None",
+          "desc": [
+            "inserts a control character (like a paragraph break or a hard space) into the text."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "xRange",
+              "XTextRange",
+              "in"
+            ],
+            [
+              "nControlCharacter",
+              "int",
+              "in"
+            ],
+            [
+              "bAbsorb",
+              "bool",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "insertString",
+          "returns": "None",
+          "desc": [
+            "inserts a string of characters into the text.",
+            "",
+            "The string may contain the following white spaces:",
+            "",
+            "If the parameter bAbsorb() was TRUE the text range will contain the new inserted string, otherwise the range (and it's text) will remain unchanged."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xRange",
+              "XTextRange",
+              "in"
+            ],
+            [
+              "aString",
+              "str",
+              "in"
+            ],
+            [
+              "bAbsorb",
+              "bool",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

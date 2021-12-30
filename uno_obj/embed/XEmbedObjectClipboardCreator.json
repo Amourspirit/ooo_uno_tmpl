@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:18:46+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:05+00:00",
   "name": "XEmbedObjectClipboardCreator",
   "type": "interface",
   "namespace": "com.sun.star.embed",
@@ -16,7 +16,29 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".inserted_object_info",
+        "InsertedObjectInfo"
+      ],
+      [
+        ".x_storage",
+        "XStorage"
+      ],
+      [
+        "..beans.property_value",
+        "PropertyValue"
+      ]
+    ],
+    "quote": [
+      "InsertedObjectInfo",
+      "typing.List[PropertyValue]",
+      "XStorage"
+    ],
+    "typings": [
+      "typing.List[PropertyValue]"
+    ],
+    "requires_typing": true,
     "name": "XEmbedObjectClipboardCreator",
     "imports": [],
     "namespace": "com.sun.star.embed",
@@ -29,6 +51,42 @@
       "This interface contains methods that can help to create and initialize an embedded object based on system clipboard."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1embed_1_1XEmbedObjectClipboardCreator.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "createInstanceInitFromClipboard",
+          "returns": "InsertedObjectInfo",
+          "desc": [
+            "creates a new object and initializes it from the system clipboard.",
+            "",
+            "In case specified entry exists it's contents are ignored and will be overwritten on storing.",
+            "",
+            "The clipboard can provide a number of choices that are container related. This information will be returned in the InsertedObjectInfo object."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.io.IOException",
+            "com.sun.star.uno.Exception"
+          ],
+          "args": [
+            [
+              "xStorage",
+              "XStorage",
+              "in"
+            ],
+            [
+              "sEntryName",
+              "str",
+              "in"
+            ],
+            [
+              "aObjectArgs",
+              "typing.List[PropertyValue]",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

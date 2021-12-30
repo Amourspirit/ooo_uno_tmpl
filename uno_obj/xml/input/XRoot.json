@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:18:25+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:05+00:00",
   "name": "XRoot",
   "type": "interface",
   "namespace": "com.sun.star.xml.input",
@@ -16,7 +16,32 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_element",
+        "XElement"
+      ],
+      [
+        "..sax.x_locator",
+        "XLocator"
+      ],
+      [
+        ".x_namespace_mapping",
+        "XNamespaceMapping"
+      ],
+      [
+        ".x_attributes",
+        "XAttributes"
+      ]
+    ],
+    "quote": [
+      "XNamespaceMapping",
+      "XElement",
+      "XLocator",
+      "XAttributes"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XRoot",
     "imports": [],
     "namespace": "com.sun.star.xml.input",
@@ -27,6 +52,103 @@
       "Root interface being passed to SaxDocumentHandler service upon instantiation."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1xml_1_1input_1_1XRoot.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "endDocument",
+          "returns": "None",
+          "desc": [
+            "Receives notification of the end of a document."
+          ],
+          "raises": [
+            "com.sun.star.xml.sax.SAXException"
+          ],
+          "args": []
+        },
+        {
+          "name": "processingInstruction",
+          "returns": "None",
+          "desc": [
+            "Receives notification of a processing instruction."
+          ],
+          "raises": [
+            "com.sun.star.xml.sax.SAXException"
+          ],
+          "args": [
+            [
+              "target",
+              "str",
+              "in"
+            ],
+            [
+              "data",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setDocumentLocator",
+          "returns": "None",
+          "desc": [
+            "Receives an object for locating the origin of SAX document events."
+          ],
+          "raises": [
+            "com.sun.star.xml.sax.SAXException"
+          ],
+          "args": [
+            [
+              "locator",
+              "XLocator",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "startDocument",
+          "returns": "None",
+          "desc": [
+            "Receives notification of the beginning of a document."
+          ],
+          "raises": [
+            "com.sun.star.xml.sax.SAXException"
+          ],
+          "args": [
+            [
+              "xMapping",
+              "XNamespaceMapping",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "startRootElement",
+          "returns": "XElement",
+          "desc": [
+            "Called upon root element."
+          ],
+          "raises": [
+            "com.sun.star.xml.sax.SAXException"
+          ],
+          "args": [
+            [
+              "uid",
+              "int",
+              "in"
+            ],
+            [
+              "localName",
+              "str",
+              "in"
+            ],
+            [
+              "xAttributes",
+              "XAttributes",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

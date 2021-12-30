@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:20:29+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:19+00:00",
   "name": "XEventAttacher",
   "type": "interface",
   "namespace": "com.sun.star.script",
@@ -16,7 +16,23 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_all_listener",
+        "XAllListener"
+      ],
+      [
+        "..lang.x_event_listener",
+        "XEventListener"
+      ]
+    ],
+    "quote": [
+      "XAllListener",
+      "XInterface",
+      "XEventListener"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XEventAttacher",
     "imports": [],
     "namespace": "com.sun.star.script",
@@ -27,6 +43,131 @@
       "makes it possible to attach script events given by a sequence of ScriptEventDescriptor structures to a given interface."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1script_1_1XEventAttacher.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "attachListener",
+          "returns": "XEventListener",
+          "desc": [
+            "registers the given \\\"AllListener\\\" object as a listener at the given interface by creating a suitable listener adapter and calling the \\\"addListener\\\" method corresponding to the \\\"ListenerType\\\"."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.beans.IntrospectionException",
+            "com.sun.star.script.CannotCreateAdapterException",
+            "com.sun.star.lang.ServiceNotRegisteredException"
+          ],
+          "args": [
+            [
+              "xTarget",
+              "XInterface",
+              "in"
+            ],
+            [
+              "xAllListener",
+              "XAllListener",
+              "in"
+            ],
+            [
+              "aHelper",
+              "object",
+              "in"
+            ],
+            [
+              "aListenerType",
+              "str",
+              "in"
+            ],
+            [
+              "aAddListenerParam",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "attachSingleEventListener",
+          "returns": "XEventListener",
+          "desc": [
+            "registers an object as a listener at the given interface by creating a suitable listener adapter and calling the method which corresponds to the listener type.",
+            "",
+            "Only the event corresponding to the given event method will be delegated to xAllListener."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.beans.IntrospectionException",
+            "com.sun.star.script.CannotCreateAdapterException",
+            "com.sun.star.lang.ServiceNotRegisteredException"
+          ],
+          "args": [
+            [
+              "xTarget",
+              "XInterface",
+              "in"
+            ],
+            [
+              "xAllListener",
+              "XAllListener",
+              "in"
+            ],
+            [
+              "aHelper",
+              "object",
+              "in"
+            ],
+            [
+              "aListenerType",
+              "str",
+              "in"
+            ],
+            [
+              "aAddListenerParam",
+              "str",
+              "in"
+            ],
+            [
+              "aEventMethod",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "removeListener",
+          "returns": "None",
+          "desc": [
+            "removes a listener object as a listener from the given interface.",
+            "",
+            "This method can and should be used as a contrary method to the two attach methods."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.beans.IntrospectionException"
+          ],
+          "args": [
+            [
+              "xTarget",
+              "XInterface",
+              "in"
+            ],
+            [
+              "aListenerType",
+              "str",
+              "in"
+            ],
+            [
+              "aRemoveListenerParam",
+              "str",
+              "in"
+            ],
+            [
+              "xToRemoveListener",
+              "XEventListener",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

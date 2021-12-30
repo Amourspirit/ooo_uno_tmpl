@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:21:49+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:38+00:00",
   "name": "XLayoutManagerListener",
   "type": "interface",
   "namespace": "com.sun.star.frame",
@@ -16,7 +16,17 @@
         "XEventListener"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..lang.event_object",
+        "EventObject"
+      ]
+    ],
+    "quote": [
+      "EventObject"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XLayoutManagerListener",
     "imports": [],
     "namespace": "com.sun.star.frame",
@@ -28,11 +38,39 @@
       "",
       "Events are provided only for notification purposes only. All operations are handled internally by the layout manager component, so that GUI layout works properly regardless of whether a component registers such a listener or not.",
       "",
-      "**See Also**",
+      "**since**",
       "",
-      "    com.sun.star.frame.LayoutManager"
+      "    OOo 2.0"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1frame_1_1XLayoutManagerListener.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "layoutEvent",
+          "returns": "None",
+          "desc": [
+            "is invoked when a layout manager has made a certain operation."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aSource",
+              "EventObject",
+              "in"
+            ],
+            [
+              "eLayoutEvent",
+              "int",
+              "in"
+            ],
+            [
+              "aInfo",
+              "object",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

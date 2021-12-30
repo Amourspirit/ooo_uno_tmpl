@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:20:41+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:20+00:00",
   "name": "XForbiddenCharacters",
   "type": "interface",
   "namespace": "com.sun.star.i18n",
@@ -16,7 +16,22 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".forbidden_characters",
+        "ForbiddenCharacters"
+      ],
+      [
+        "..lang.locale",
+        "Locale"
+      ]
+    ],
+    "quote": [
+      "Locale",
+      "ForbiddenCharacters"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XForbiddenCharacters",
     "imports": [],
     "namespace": "com.sun.star.i18n",
@@ -29,6 +44,76 @@
       "In some languages, particular characters are not allowed to be placed at the beginning or at the end of a text line."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1i18n_1_1XForbiddenCharacters.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getForbiddenCharacters",
+          "returns": "ForbiddenCharacters",
+          "desc": [
+            "returns the forbidden characters for a given locale."
+          ],
+          "raises": [
+            "com.sun.star.container.NoSuchElementException"
+          ],
+          "args": [
+            [
+              "aLocale",
+              "Locale",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "hasForbiddenCharacters",
+          "returns": "bool",
+          "desc": [
+            "determines if forbidden characters are set for a given locale."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aLocale",
+              "Locale",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "removeForbiddenCharacters",
+          "returns": "None",
+          "desc": [
+            "removes the setting of forbidden characters for a given locale."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aLocale",
+              "Locale",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setForbiddenCharacters",
+          "returns": "None",
+          "desc": [
+            "sets the forbidden characters for a given Locale."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aLocale",
+              "Locale",
+              "in"
+            ],
+            [
+              "aForbiddenCharacters",
+              "ForbiddenCharacters",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

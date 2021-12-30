@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:16:49+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:26+00:00",
   "name": "XAcceptor",
   "type": "interface",
   "namespace": "com.sun.star.connection",
@@ -16,7 +16,17 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_connection",
+        "XConnection"
+      ]
+    ],
+    "quote": [
+      "XConnection"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XAcceptor",
     "imports": [],
     "namespace": "com.sun.star.connection",
@@ -26,13 +36,44 @@
     "desc": [
       "allows to passively accept connection attempts from other processes.",
       "",
-      "This is the counterpart to the XConnector interface.",
-      "",
-      "**See Also**",
-      "",
-      "    ProUNO - Opening a Connection"
+      "This is the counterpart to the XConnector interface."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1connection_1_1XAcceptor.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "accept",
+          "returns": "XConnection",
+          "desc": [
+            "accepts an interprocess connection.",
+            "",
+            "Waits until someone connects to the resource.",
+            "",
+            "After a successful return, the method may be called again to accept further connections, but the parameter string MUST be left unchanged."
+          ],
+          "raises": [
+            "AlreadyAcceptingException",
+            "ConnectionSetupException",
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "sConnectionDescription",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "stopAccepting",
+          "returns": "None",
+          "desc": [
+            "pushes acceptor out of the accept-call."
+          ],
+          "raises": [],
+          "args": []
+        }
+      ]
+    }
   }
 }

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:20:09+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:14+00:00",
   "name": "XSubmit",
   "type": "interface",
   "namespace": "com.sun.star.form",
@@ -16,7 +16,27 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_submit_listener",
+        "XSubmitListener"
+      ],
+      [
+        "..awt.x_control",
+        "XControl"
+      ],
+      [
+        "..awt.mouse_event",
+        "MouseEvent"
+      ]
+    ],
+    "quote": [
+      "XSubmitListener",
+      "XControl",
+      "MouseEvent"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XSubmit",
     "imports": [],
     "namespace": "com.sun.star.form",
@@ -31,6 +51,59 @@
       "See the HTML specification to learn about submitting forms."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1form_1_1XSubmit.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "addSubmitListener",
+          "returns": "None",
+          "desc": [
+            "adds the specified listener to receive the \\\"approveSubmit\\\" event."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aListener",
+              "XSubmitListener",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "removeSubmitListener",
+          "returns": "None",
+          "desc": [
+            "removes the specified listener."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aListener",
+              "XSubmitListener",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "submit",
+          "returns": "None",
+          "desc": [
+            "submits the component's data to a specified target."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aControl",
+              "XControl",
+              "in"
+            ],
+            [
+              "aMouseEvt",
+              "MouseEvent",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

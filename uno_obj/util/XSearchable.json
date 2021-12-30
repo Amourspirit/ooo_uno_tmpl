@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:19:16+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:25+00:00",
   "name": "XSearchable",
   "type": "interface",
   "namespace": "com.sun.star.util",
@@ -16,7 +16,23 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_search_descriptor",
+        "XSearchDescriptor"
+      ],
+      [
+        "..container.x_index_access",
+        "XIndexAccess"
+      ]
+    ],
+    "quote": [
+      "XIndexAccess",
+      "XSearchDescriptor",
+      "XInterface"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XSearchable",
     "imports": [],
     "namespace": "com.sun.star.util",
@@ -26,13 +42,71 @@
     "desc": [
       "enables the object to look for specified contents of the object (in particular, for a text range which contains a specific string pattern).",
       "",
-      "Example: in a com.sun.star.text.TextDocument: set all \\\"search for\\\" to bold using findFirst()/findNext():",
-      "",
-      "**See Also**",
-      "",
-      "    Text - Navigating - Search and Replace"
+      "Example: in a com.sun.star.text.TextDocument: set all \\\"search for\\\" to bold using findFirst()/findNext():"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1util_1_1XSearchable.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "createSearchDescriptor",
+          "returns": "XSearchDescriptor",
+          "desc": [
+            "creates a SearchDescriptor which contains properties that specify a search in this container."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "findAll",
+          "returns": "XIndexAccess",
+          "desc": [
+            "searches the contained texts for all occurrences of whatever is specified."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xDesc",
+              "XSearchDescriptor",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "findFirst",
+          "returns": "XInterface",
+          "desc": [
+            "searches the contained texts for the next occurrence of whatever is specified."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xDesc",
+              "XSearchDescriptor",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "findNext",
+          "returns": "XInterface",
+          "desc": [
+            "searches the contained texts for the next occurrence of whatever is specified."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xStartAt",
+              "XInterface",
+              "in"
+            ],
+            [
+              "xDesc",
+              "XSearchDescriptor",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

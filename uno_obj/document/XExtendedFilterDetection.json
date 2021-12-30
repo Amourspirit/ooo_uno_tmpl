@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:22:02+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:10+00:00",
   "name": "XExtendedFilterDetection",
   "type": "interface",
   "namespace": "com.sun.star.document",
@@ -14,17 +14,14 @@
       [
         "..uno.x_interface",
         "XInterface"
-      ],
-      [
-        "......x_extended_filter_detection",
-        "XExtendedFilterDetection"
       ]
     ],
     "from_imports_typing": [],
+    "quote": [],
+    "typings": [],
+    "requires_typing": false,
     "name": "XExtendedFilterDetection",
-    "imports": [
-      "XExtendedFilterDetection"
-    ],
+    "imports": [],
     "namespace": "com.sun.star.document",
     "extends": [
       "com.sun.star.uno.XInterface"
@@ -32,13 +29,29 @@
     "desc": [
       "provides a \\\"deep\\\" filter detection",
       "",
-      "A \\\"deep\\\" filter detection means looking into the document stream to detect the format of it. Services of type ExtendedTypeDetection must support this interface to be called from generic load mechanism of the office for that.",
-      "",
-      "**See Also**",
-      "",
-      "    DetectService"
+      "A \\\"deep\\\" filter detection means looking into the document stream to detect the format of it. Services of type ExtendedTypeDetection must support this interface to be called from generic load mechanism of the office for that."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1document_1_1XExtendedFilterDetection.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "detect",
+          "returns": "str",
+          "desc": [
+            "controls agreement of a \\\"flat\\\" TypeDetection with given URL or arguments",
+            "",
+            "Registered services in configuration, which support this interface for different mime types, will be called automatically to look into the document stream and decide which format it represent. Add the collected information about detected documents in given MediaDescriptor Descriptor. The decision must be returned as any valid type name (which specifies the detected format) or an empty value for unknown formats."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "Descriptor",
+              "object",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

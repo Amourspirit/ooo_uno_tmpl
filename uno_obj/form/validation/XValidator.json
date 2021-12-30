@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:20:12+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:16+00:00",
   "name": "XValidator",
   "type": "interface",
   "namespace": "com.sun.star.form.validation",
@@ -16,7 +16,17 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_validity_constraint_listener",
+        "XValidityConstraintListener"
+      ]
+    ],
+    "quote": [
+      "XValidityConstraintListener"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XValidator",
     "imports": [],
     "namespace": "com.sun.star.form.validation",
@@ -28,13 +38,81 @@
       "",
       "Validators support simple validity checks and retrieving justifications for invalidity.",
       "",
-      "Validators may additionally support dynamic validity constraints. In such a case, the validity of a given value may change, without the value changing itself.\n To be notified about this, interested components should register as XValidityConstraintListener.",
-      "",
-      "**See Also**",
-      "",
-      "    XValidatable"
+      "Validators may additionally support dynamic validity constraints. In such a case, the validity of a given value may change, without the value changing itself.",
+      "To be notified about this, interested components should register as XValidityConstraintListener."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1form_1_1validation_1_1XValidator.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "addValidityConstraintListener",
+          "returns": "None",
+          "desc": [
+            "registers the given validity listener.",
+            "",
+            "Usually, an XValidatable instance will also add itself as validity listener, as soon as the validator is introduced to it.",
+            "",
+            "Implementations which do not support dynamic validity constraints should simply ignore this call."
+          ],
+          "raises": [
+            "com.sun.star.lang.NullPointerException"
+          ],
+          "args": [
+            [
+              "Listener",
+              "XValidityConstraintListener",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "explainInvalid",
+          "returns": "str",
+          "desc": [
+            "retrieves a justification for the invalidity of the given value"
+          ],
+          "raises": [],
+          "args": [
+            [
+              "Value",
+              "object",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "isValid",
+          "returns": "bool",
+          "desc": [
+            "determines whether the given value is valid"
+          ],
+          "raises": [],
+          "args": [
+            [
+              "Value",
+              "object",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "removeValidityConstraintListener",
+          "returns": "None",
+          "desc": [
+            "revokes the given validity listener"
+          ],
+          "raises": [
+            "com.sun.star.lang.NullPointerException"
+          ],
+          "args": [
+            [
+              "Listener",
+              "XValidityConstraintListener",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

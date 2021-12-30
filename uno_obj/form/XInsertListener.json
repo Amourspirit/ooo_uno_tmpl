@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:20:07+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:14+00:00",
   "name": "XInsertListener",
   "type": "interface",
   "namespace": "com.sun.star.form",
@@ -16,7 +16,17 @@
         "XEventListener"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..lang.event_object",
+        "EventObject"
+      ]
+    ],
+    "quote": [
+      "EventObject"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XInsertListener",
     "imports": [],
     "namespace": "com.sun.star.form",
@@ -26,9 +36,46 @@
     "desc": [
       "allows to receive notifications about insertions into a database form.",
       "",
-      "Please do not use anymore, this interface is deprecated, and superseded by functionality from the com.sun.star.form.component.DataForm service, as well as the com.sun.star.sdbc.XRowSetListener and com.sun.star.sdb.XRowSetApproveListener interfaces."
+      "Please do not use anymore, this interface is deprecated, and superseded by functionality from the com.sun.star.form.component.DataForm service, as well as the com.sun.star.sdbc.XRowSetListener and com.sun.star.sdb.XRowSetApproveListener interfaces.",
+      "",
+      ".. deprecated::",
+      "",
+      "    Interface is deprecated."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1form_1_1XInsertListener.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "inserted",
+          "returns": "None",
+          "desc": [
+            "is invoked after a database form has inserted a record to a data source."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aEvent",
+              "EventObject",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "inserting",
+          "returns": "None",
+          "desc": [
+            "is invoked when a database form starts inserting a record."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aEvent",
+              "EventObject",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

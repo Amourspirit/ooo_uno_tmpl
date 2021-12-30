@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:18:05+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:04+00:00",
   "name": "XWindowListener",
   "type": "interface",
   "namespace": "com.sun.star.awt",
@@ -16,7 +16,22 @@
         "XEventListener"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..lang.event_object",
+        "EventObject"
+      ],
+      [
+        ".window_event",
+        "WindowEvent"
+      ]
+    ],
+    "quote": [
+      "WindowEvent",
+      "EventObject"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XWindowListener",
     "imports": [],
     "namespace": "com.sun.star.awt",
@@ -29,6 +44,69 @@
       "Component events are provided only for notification purposes. Moves and resizes will be handled internally by the window component, so that GUI layout works properly regardless of whether a program registers such a listener or not."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XWindowListener.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "windowHidden",
+          "returns": "None",
+          "desc": [
+            "is invoked when the window has been hidden."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "e",
+              "EventObject",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "windowMoved",
+          "returns": "None",
+          "desc": [
+            "is invoked when the window has been moved."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "e",
+              "WindowEvent",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "windowResized",
+          "returns": "None",
+          "desc": [
+            "is invoked when the window has been resized."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "e",
+              "WindowEvent",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "windowShown",
+          "returns": "None",
+          "desc": [
+            "is invoked when the window has been shown."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "e",
+              "EventObject",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:17:25+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:35+00:00",
   "name": "XRegressionCurveCalculator",
   "type": "interface",
   "namespace": "com.sun.star.chart2",
@@ -10,14 +10,235 @@
   },
   "writer_args": {},
   "data": {
-    "from_imports": [],
-    "from_imports_typing": [],
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".x_scaling",
+        "XScaling"
+      ],
+      [
+        "..geometry.real_point2_d",
+        "RealPoint2D"
+      ],
+      [
+        "..util.x_number_formats_supplier",
+        "XNumberFormatsSupplier"
+      ]
+    ],
+    "quote": [
+      "typing.List[float]",
+      "XScaling",
+      "XNumberFormatsSupplier",
+      "typing.List[RealPoint2D]"
+    ],
+    "typings": [
+      "typing.List[float]",
+      "typing.List[RealPoint2D]"
+    ],
+    "requires_typing": true,
     "name": "XRegressionCurveCalculator",
     "imports": [],
     "namespace": "com.sun.star.chart2",
-    "extends": [],
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
     "desc": [],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1chart2_1_1XRegressionCurveCalculator.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getCorrelationCoefficient",
+          "returns": "float",
+          "desc": [
+            "Returns the value of the correlation coefficient for the given regression.",
+            "",
+            "This value is often denoted as r or R.",
+            "",
+            "The value of r is signed. Often r2 is used instead of r to denote a regression curve's accuracy."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getCurveValue",
+          "returns": "float",
+          "desc": [
+            "calculates the value of the regression curve for x."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "x",
+              "float",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getCurveValues",
+          "returns": "typing.List[RealPoint2D]",
+          "desc": [
+            "calculate multiple points of a regression curve at once.",
+            "",
+            "Note that this method may optimize the output by returning less points, e.g. for a line you may get only two resulting points instead of nPointCount() points. This is only allowed if the parameter bMaySkipPointsInCalculation() is set to TRUE.",
+            "",
+            "It is important that a renderer takes the scalings into account. When one of these parameters is unknown, no optimization must be done."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "min",
+              "float",
+              "in"
+            ],
+            [
+              "max",
+              "float",
+              "in"
+            ],
+            [
+              "nPointCount",
+              "int",
+              "in"
+            ],
+            [
+              "xScalingX",
+              "XScaling",
+              "in"
+            ],
+            [
+              "xScalingY",
+              "XScaling",
+              "in"
+            ],
+            [
+              "bMaySkipPointsInCalculation",
+              "bool",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getFormattedRepresentation",
+          "returns": "str",
+          "desc": [
+            "Returns a representation using the given number format for formatting all numbers contained in the formula.",
+            "",
+            "Wrap equation to fit in nFormulaLength characters"
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xNumFmtSupplier",
+              "XNumberFormatsSupplier",
+              "in"
+            ],
+            [
+              "nNumberFormatKey",
+              "int",
+              "in"
+            ],
+            [
+              "nFormulaLength",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getRepresentation",
+          "returns": "str",
+          "desc": [
+            "Retrieve a string showing the regression curve's function with calculated parameters."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "recalculateRegression",
+          "returns": "None",
+          "desc": [
+            "recalculates the parameters of the internal regression curve according to the x- and y-values given."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aXValues",
+              "typing.List[float]",
+              "in"
+            ],
+            [
+              "aYValues",
+              "typing.List[float]",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setRegressionProperties",
+          "returns": "None",
+          "desc": [
+            "set calculation properties for curve calculation."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "degree",
+              "int",
+              "in"
+            ],
+            [
+              "forceIntercept",
+              "bool",
+              "in"
+            ],
+            [
+              "interceptValue",
+              "float",
+              "in"
+            ],
+            [
+              "period",
+              "int",
+              "in"
+            ],
+            [
+              "movingType",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setXYNames",
+          "returns": "None",
+          "desc": [
+            "Set the names of X and Y variables of the equation to replace \\\"x\\\" and \\\"f(x)\\\" in representation."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aXName",
+              "str",
+              "in"
+            ],
+            [
+              "aYName",
+              "str",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

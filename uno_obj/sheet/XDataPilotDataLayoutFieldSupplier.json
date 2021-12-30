@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:21:03+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:16+00:00",
   "name": "XDataPilotDataLayoutFieldSupplier",
   "type": "interface",
   "namespace": "com.sun.star.sheet",
@@ -10,22 +10,49 @@
   },
   "writer_args": {},
   "data": {
-    "from_imports": [],
-    "from_imports_typing": [],
+    "from_imports": [
+      [
+        ".data_pilot_descriptor",
+        "DataPilotDescriptor"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".x_data_pilot_field",
+        "XDataPilotField"
+      ]
+    ],
+    "quote": [
+      "XDataPilotField"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XDataPilotDataLayoutFieldSupplier",
     "imports": [],
     "namespace": "com.sun.star.sheet",
-    "extends": [],
+    "extends": [
+      "com.sun.star.sheet.DataPilotDescriptor"
+    ],
     "desc": [
       "Provides access to the DataPilotField used to layout multiple data fields.",
       "",
-      "This data field can be inserted into the rows dimension or columns dimension by changing its DataPilotField.Orientation property. This interface can be used to access the data layout field before multiple data fields are inserted into the DataPilot table. It remains invisible as long as the DataPilot table contains at most one data field.",
-      "",
-      "**See Also**",
-      "",
-      "    com.sun.star.sheet.DataPilotDescriptor"
+      "This data field can be inserted into the rows dimension or columns dimension by changing its DataPilotField.Orientation property. This interface can be used to access the data layout field before multiple data fields are inserted into the DataPilot table. It remains invisible as long as the DataPilot table contains at most one data field."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1sheet_1_1XDataPilotDataLayoutFieldSupplier.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getDataLayoutField",
+          "returns": "XDataPilotField",
+          "desc": [
+            "Returns the DataPilotField used to layout multiple data fields.",
+            "",
+            "If the field does not exist yet, it will be created. It is possible to insert this field into the rows or columns dimension by changing its DataPilotField.Orientation property."
+          ],
+          "raises": [],
+          "args": []
+        }
+      ]
+    }
   }
 }

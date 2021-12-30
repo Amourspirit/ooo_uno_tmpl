@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:20:52+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:12+00:00",
   "name": "XChartDataArray",
   "type": "interface",
   "namespace": "com.sun.star.chart",
@@ -12,29 +12,109 @@
   "data": {
     "from_imports": [
       [
-        "......x_chart_data",
+        ".x_chart_data",
         "XChartData"
       ]
     ],
     "from_imports_typing": [],
+    "quote": [
+      "typing.List[str]",
+      "typing.List[typing.List[float]]"
+    ],
+    "typings": [
+      "typing.List[str]",
+      "typing.List[typing.List[float]]"
+    ],
+    "requires_typing": true,
     "name": "XChartDataArray",
     "imports": [],
     "namespace": "com.sun.star.chart",
     "extends": [
-      "XChartData"
+      "com.sun.star.chart.XChartData"
     ],
     "desc": [
       "gives access to data represented as an array of rows.",
       "",
       "Can be obtained from interface XChartDocument via method getData().",
       "",
-      "If used for an XYDiagram, the row number 0 represents the x-values.",
-      "",
-      "**See Also**",
-      "",
-      "    Charts - Data Access"
+      "If used for an XYDiagram, the row number 0 represents the x-values."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1chart_1_1XChartDataArray.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getColumnDescriptions",
+          "returns": "typing.List[str]",
+          "desc": [
+            "retrieves the description texts for all columns."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getData",
+          "returns": "typing.List[typing.List[float]]",
+          "desc": [
+            "retrieves the numerical data as a nested sequence of values."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getRowDescriptions",
+          "returns": "typing.List[str]",
+          "desc": [
+            "retrieves the description texts for all rows."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "setColumnDescriptions",
+          "returns": "None",
+          "desc": [
+            "sets the description texts for all columns."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aColumnDescriptions",
+              "typing.List[str]",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setData",
+          "returns": "None",
+          "desc": [
+            "sets the chart data as an array of numbers."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aData",
+              "typing.List[typing.List[float]]",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setRowDescriptions",
+          "returns": "None",
+          "desc": [
+            "sets the description texts for all rows."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aRowDescriptions",
+              "typing.List[str]",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

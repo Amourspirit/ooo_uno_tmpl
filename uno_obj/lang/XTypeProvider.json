@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:22:10+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:24+00:00",
   "name": "XTypeProvider",
   "type": "interface",
   "namespace": "com.sun.star.lang",
@@ -17,6 +17,15 @@
       ]
     ],
     "from_imports_typing": [],
+    "quote": [
+      "typing.List[object]",
+      "typing.List[int]"
+    ],
+    "typings": [
+      "typing.List[object]",
+      "typing.List[int]"
+    ],
+    "requires_typing": true,
     "name": "XTypeProvider",
     "imports": [],
     "namespace": "com.sun.star.lang",
@@ -24,13 +33,32 @@
       "com.sun.star.uno.XInterface"
     ],
     "desc": [
-      "interface to get information about the types (usually interface types) supported by an object.",
-      "",
-      "**See Also**",
-      "",
-      "    WritingUNO - Core Interfaces to Implement AdvUNO - UNO Reflection API WritingUNO - XTypeProvider"
+      "interface to get information about the types (usually interface types) supported by an object."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1lang_1_1XTypeProvider.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getImplementationId",
+          "returns": "typing.List[int]",
+          "desc": [
+            "Obsolete unique identifier.",
+            "",
+            "Originally returned a sequence of bytes which, when non-empty, was used as an ID to distinguish unambiguously between two sets of types, for example to realise hashing functionality when the object is introspected. Two objects that returned the same non-empty ID had to return the same set of types in getTypes(). (If a unique ID could not be provided, this method was always allowed to return an empty sequence, though)."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getTypes",
+          "returns": "typing.List[object]",
+          "desc": [
+            "returns a sequence of all types (usually interface types) provided by the object."
+          ],
+          "raises": [],
+          "args": []
+        }
+      ]
+    }
   }
 }

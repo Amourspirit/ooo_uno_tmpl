@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:17:47+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:02+00:00",
   "name": "XDockableWindowListener",
   "type": "interface",
   "namespace": "com.sun.star.awt",
@@ -16,7 +16,37 @@
         "XEventListener"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".end_docking_event",
+        "EndDockingEvent"
+      ],
+      [
+        ".docking_data",
+        "DockingData"
+      ],
+      [
+        ".docking_event",
+        "DockingEvent"
+      ],
+      [
+        ".end_popup_mode_event",
+        "EndPopupModeEvent"
+      ],
+      [
+        "..lang.event_object",
+        "EventObject"
+      ]
+    ],
+    "quote": [
+      "EndDockingEvent",
+      "EventObject",
+      "EndPopupModeEvent",
+      "DockingEvent",
+      "DockingData"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XDockableWindowListener",
     "imports": [],
     "namespace": "com.sun.star.awt",
@@ -27,6 +57,122 @@
       "makes it possible to receive docking events."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XDockableWindowListener.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "closed",
+          "returns": "None",
+          "desc": [
+            "is invoked when the window was actively closed"
+          ],
+          "raises": [],
+          "args": [
+            [
+              "e",
+              "EventObject",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "docking",
+          "returns": "DockingData",
+          "desc": [
+            "is invoked during the docking procedure when the window has been moved.",
+            "",
+            "on return the DockingData must contain either the old tracking rectangle or a changed rectangle if required, additionally it must indicate if the window should be docked or floating",
+            "",
+            "Note: the tracking rectangle indicates to the user where the window would be placed if he releases the mouse."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "e",
+              "DockingEvent",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "endDocking",
+          "returns": "None",
+          "desc": [
+            "is invoked when the docking procedure ends.",
+            "",
+            "aWindowRect contains the new position and size of the window"
+          ],
+          "raises": [],
+          "args": [
+            [
+              "e",
+              "EndDockingEvent",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "endPopupMode",
+          "returns": "None",
+          "desc": [
+            "is invoked when the window currently is in pop-up mode and wants to be undocked or closed"
+          ],
+          "raises": [],
+          "args": [
+            [
+              "e",
+              "EndPopupModeEvent",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "prepareToggleFloatingMode",
+          "returns": "bool",
+          "desc": [
+            "is invoked when the floating mode is about to be changed between floating and docked or vice versa",
+            "",
+            "if returned FALSE the floating mode will not be changed"
+          ],
+          "raises": [],
+          "args": [
+            [
+              "e",
+              "EventObject",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "startDocking",
+          "returns": "None",
+          "desc": [
+            "is invoked when the docking procedure starts."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "e",
+              "DockingEvent",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "toggleFloatingMode",
+          "returns": "None",
+          "desc": [
+            "is invoked when the floating mode is changed between floating and docked or vice versa"
+          ],
+          "raises": [],
+          "args": [
+            [
+              "e",
+              "EventObject",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

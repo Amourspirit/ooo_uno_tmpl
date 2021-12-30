@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:21:24+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:07+00:00",
   "name": "XPrintJob",
   "type": "interface",
   "namespace": "com.sun.star.view",
@@ -16,7 +16,24 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_printable",
+        "XPrintable"
+      ],
+      [
+        "..beans.property_value",
+        "PropertyValue"
+      ]
+    ],
+    "quote": [
+      "XPrintable",
+      "typing.List[PropertyValue]"
+    ],
+    "typings": [
+      "typing.List[PropertyValue]"
+    ],
+    "requires_typing": true,
     "name": "XPrintJob",
     "imports": [],
     "namespace": "com.sun.star.view",
@@ -28,11 +45,48 @@
       "",
       "XPrintJob is implemented by print jobs that are created by classes that implement XPrintable. It gives information about the context of the print job.",
       "",
-      "**See Also**",
+      "**since**",
       "",
-      "    XPrintJobListener"
+      "    OOo 1.1.2"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1view_1_1XPrintJob.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "cancelJob",
+          "returns": "None",
+          "desc": [],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getPrintOptions",
+          "returns": "typing.List[PropertyValue]",
+          "desc": [
+            "returns the PrintOptions used for the print job"
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getPrintable",
+          "returns": "XPrintable",
+          "desc": [
+            "returns the printed object used for the print job"
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getPrinter",
+          "returns": "typing.List[PropertyValue]",
+          "desc": [
+            "returns the Printer used for the print job"
+          ],
+          "raises": [],
+          "args": []
+        }
+      ]
+    }
   }
 }

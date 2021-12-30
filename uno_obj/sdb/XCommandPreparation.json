@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:16:38+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:15+00:00",
   "name": "XCommandPreparation",
   "type": "interface",
   "namespace": "com.sun.star.sdb",
@@ -12,27 +12,60 @@
   "data": {
     "from_imports": [
       [
-        "......x_prepared_statement",
+        "..uno.x_interface",
+        "XInterface"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..sdbc.x_prepared_statement",
         "XPreparedStatement"
       ]
     ],
-    "from_imports_typing": [],
-    "name": "XCommandPreparation",
-    "imports": [
+    "quote": [
       "XPreparedStatement"
     ],
+    "typings": [],
+    "requires_typing": true,
+    "name": "XCommandPreparation",
+    "imports": [],
     "namespace": "com.sun.star.sdb",
-    "extends": [],
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
     "desc": [
       "is used for preparation of commands.",
       "",
-      "A command could be a table, query, or any kind of SQL statement prepared by the user.",
-      "",
-      "**See Also**",
-      "",
-      "    Database - PreparedStatement From DataSource Queries"
+      "A command could be a table, query, or any kind of SQL statement prepared by the user."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1sdb_1_1XCommandPreparation.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "prepareCommand",
+          "returns": "XPreparedStatement",
+          "desc": [
+            "creates a com.sun.star.sdbc.PreparedStatement object for sending parameterized SQL statements to the database.",
+            "",
+            "A SQL statement with or without IN parameters can be pre-compiled and stored in a PreparedStatement object. This object can then be used to efficiently execute this statement multiple times."
+          ],
+          "raises": [
+            "com.sun.star.sdbc.SQLException"
+          ],
+          "args": [
+            [
+              "command",
+              "str",
+              "in"
+            ],
+            [
+              "commandType",
+              "int",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

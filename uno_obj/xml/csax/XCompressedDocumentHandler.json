@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:18:39+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:31+00:00",
   "name": "XCompressedDocumentHandler",
   "type": "interface",
   "namespace": "com.sun.star.xml.csax",
@@ -16,7 +16,19 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".xml_attribute",
+        "XMLAttribute"
+      ]
+    ],
+    "quote": [
+      "typing.List[XMLAttribute]"
+    ],
+    "typings": [
+      "typing.List[XMLAttribute]"
+    ],
+    "requires_typing": true,
     "name": "XCompressedDocumentHandler",
     "imports": [],
     "namespace": "com.sun.star.xml.csax",
@@ -31,6 +43,142 @@
       "Because there is no interface parameter in these methods, so using this interface to transfer SAX event is thought to have better performance than using the XDocumentHandler interface, in case of when UNO C++/Java bridge is involved."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1xml_1_1csax_1_1XCompressedDocumentHandler.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "compressedCharacters",
+          "returns": "None",
+          "desc": [],
+          "raises": [
+            "com.sun.star.xml.sax.SAXException"
+          ],
+          "args": [
+            [
+              "aChars",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "compressedEndDocument",
+          "returns": "None",
+          "desc": [],
+          "raises": [
+            "com.sun.star.xml.sax.SAXException"
+          ],
+          "args": []
+        },
+        {
+          "name": "compressedEndElement",
+          "returns": "None",
+          "desc": [],
+          "raises": [
+            "com.sun.star.xml.sax.SAXException"
+          ],
+          "args": [
+            [
+              "aName",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "compressedIgnorableWhitespace",
+          "returns": "None",
+          "desc": [],
+          "raises": [
+            "com.sun.star.xml.sax.SAXException"
+          ],
+          "args": [
+            [
+              "aWhitespaces",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "compressedProcessingInstruction",
+          "returns": "None",
+          "desc": [],
+          "raises": [
+            "com.sun.star.xml.sax.SAXException"
+          ],
+          "args": [
+            [
+              "aTarget",
+              "str",
+              "in"
+            ],
+            [
+              "aData",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "compressedSetDocumentLocator",
+          "returns": "None",
+          "desc": [],
+          "raises": [
+            "com.sun.star.xml.sax.SAXException"
+          ],
+          "args": [
+            [
+              "columnNumber",
+              "int",
+              "in"
+            ],
+            [
+              "lineNumber",
+              "int",
+              "in"
+            ],
+            [
+              "publicId",
+              "str",
+              "in"
+            ],
+            [
+              "systemId",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "compressedStartDocument",
+          "returns": "None",
+          "desc": [],
+          "raises": [
+            "com.sun.star.xml.sax.SAXException"
+          ],
+          "args": []
+        },
+        {
+          "name": "compressedStartElement",
+          "returns": "None",
+          "desc": [],
+          "raises": [
+            "com.sun.star.xml.sax.SAXException"
+          ],
+          "args": [
+            [
+              "aName",
+              "str",
+              "in"
+            ],
+            [
+              "aAttributes",
+              "typing.List[XMLAttribute]",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

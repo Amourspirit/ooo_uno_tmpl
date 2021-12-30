@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:18:46+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:05+00:00",
   "name": "XEmbedObjectCreator",
   "type": "interface",
   "namespace": "com.sun.star.embed",
@@ -16,7 +16,27 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_storage",
+        "XStorage"
+      ],
+      [
+        "..beans.property_value",
+        "PropertyValue"
+      ]
+    ],
+    "quote": [
+      "XStorage",
+      "typing.List[PropertyValue]",
+      "XInterface",
+      "typing.List[int]"
+    ],
+    "typings": [
+      "typing.List[PropertyValue]",
+      "typing.List[int]"
+    ],
+    "requires_typing": true,
     "name": "XEmbedObjectCreator",
     "imports": [],
     "namespace": "com.sun.star.embed",
@@ -29,6 +49,123 @@
       "This interface contains methods that can help to create and initialize an embedded object."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1embed_1_1XEmbedObjectCreator.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "createInstanceInitFromEntry",
+          "returns": "XInterface",
+          "desc": [
+            "creates a new object that should be based on specified storage entry.",
+            "",
+            "The specified entry must exists and the object should be loaded from the entry. In case a persistent representation of a link is specified, the result object will be a link."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.container.NoSuchElementException",
+            "com.sun.star.io.IOException",
+            "com.sun.star.uno.Exception"
+          ],
+          "args": [
+            [
+              "xStorage",
+              "XStorage",
+              "in"
+            ],
+            [
+              "sEntryName",
+              "str",
+              "in"
+            ],
+            [
+              "aMediaDescriptor",
+              "typing.List[PropertyValue]",
+              "in"
+            ],
+            [
+              "aObjectArgs",
+              "typing.List[PropertyValue]",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "createInstanceInitFromMediaDescriptor",
+          "returns": "XInterface",
+          "desc": [
+            "creates a new object and initializes it based on com.sun.star.document.MediaDescriptor.",
+            "",
+            "In case specified entry exists it's contents are ignored and will be overwritten on storing."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.io.IOException",
+            "com.sun.star.uno.Exception"
+          ],
+          "args": [
+            [
+              "xStorage",
+              "XStorage",
+              "in"
+            ],
+            [
+              "sEntryName",
+              "str",
+              "in"
+            ],
+            [
+              "aMediaDescriptor",
+              "typing.List[PropertyValue]",
+              "in"
+            ],
+            [
+              "aObjectArgs",
+              "typing.List[PropertyValue]",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "createInstanceInitNew",
+          "returns": "XInterface",
+          "desc": [
+            "creates a new object and initializes it as a new one.",
+            "",
+            "In case specified entry exists it's contents are ignored and will be overwritten on storing."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.io.IOException",
+            "com.sun.star.uno.Exception"
+          ],
+          "args": [
+            [
+              "aClassID",
+              "typing.List[int]",
+              "in"
+            ],
+            [
+              "sClassName",
+              "str",
+              "in"
+            ],
+            [
+              "xStorage",
+              "XStorage",
+              "in"
+            ],
+            [
+              "sEntryName",
+              "str",
+              "in"
+            ],
+            [
+              "aObjectArgs",
+              "typing.List[PropertyValue]",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:21:33+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:14+00:00",
   "name": "XShapeGrouper",
   "type": "interface",
   "namespace": "com.sun.star.drawing",
@@ -16,7 +16,22 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_shapes",
+        "XShapes"
+      ],
+      [
+        ".x_shape_group",
+        "XShapeGroup"
+      ]
+    ],
+    "quote": [
+      "XShapeGroup",
+      "XShapes"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XShapeGrouper",
     "imports": [],
     "namespace": "com.sun.star.drawing",
@@ -24,13 +39,44 @@
       "com.sun.star.uno.XInterface"
     ],
     "desc": [
-      "specifies the group/ungroup functionality.",
-      "",
-      "**See Also**",
-      "",
-      "    Drawings - Grouping, Combining and Binding"
+      "specifies the group/ungroup functionality."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1drawing_1_1XShapeGrouper.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "group",
+          "returns": "XShapeGroup",
+          "desc": [
+            "groups the Shapes inside a collection.",
+            "",
+            "Grouping of objects in text documents works only if none of the objects has an anchor of type com.sun.star.text.TextContentAnchorType.AS_CHARACTER ."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xShapes",
+              "XShapes",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "ungroup",
+          "returns": "None",
+          "desc": [
+            "ungroups a given GroupShape."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aGroup",
+              "XShapeGroup",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

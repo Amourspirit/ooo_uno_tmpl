@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:22:02+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:10+00:00",
   "name": "XExporter",
   "type": "interface",
   "namespace": "com.sun.star.document",
@@ -16,7 +16,17 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..lang.x_component",
+        "XComponent"
+      ]
+    ],
+    "quote": [
+      "XComponent"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XExporter",
     "imports": [],
     "namespace": "com.sun.star.document",
@@ -26,13 +36,29 @@
     "desc": [
       "makes it possible to connect a document with an ExportFilter",
       "",
-      "An ExportFilter must know the source of his filter operation. To set this on a filter is part of this interface. Same mechanism exist for import too.",
-      "",
-      "**See Also**",
-      "",
-      "    ExportFilter"
+      "An ExportFilter must know the source of his filter operation. To set this on a filter is part of this interface. Same mechanism exist for import too."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1document_1_1XExporter.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "setSourceDocument",
+          "returns": "None",
+          "desc": [
+            "sets the source document for the exporter"
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "Document",
+              "XComponent",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

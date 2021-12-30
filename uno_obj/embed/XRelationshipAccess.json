@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:18:51+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:05+00:00",
   "name": "XRelationshipAccess",
   "type": "interface",
   "namespace": "com.sun.star.embed",
@@ -16,7 +16,21 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..beans.string_pair",
+        "StringPair"
+      ]
+    ],
+    "quote": [
+      "typing.List[typing.List[StringPair]]",
+      "typing.List[StringPair]"
+    ],
+    "typings": [
+      "typing.List[typing.List[StringPair]]",
+      "typing.List[StringPair]"
+    ],
+    "requires_typing": true,
     "name": "XRelationshipAccess",
     "imports": [],
     "namespace": "com.sun.star.embed",
@@ -29,6 +43,192 @@
       "The relationship data is organized as a set of entries. Each of entry is represented by a set of tags, where each tag has unique for this entry name and a string value. An entry must contain at least one tag named \\\"ID\\\", the value of this tag must be unique for the whole set of entries, this tag is used as a unique identifier of an entry."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1embed_1_1XRelationshipAccess.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "clearRelationships",
+          "returns": "None",
+          "desc": [
+            "allows to clear the set of entries."
+          ],
+          "raises": [
+            "com.sun.star.io.IOException"
+          ],
+          "args": []
+        },
+        {
+          "name": "getAllRelationships",
+          "returns": "typing.List[typing.List[StringPair]]",
+          "desc": [
+            "retrieves the sequence containing all the entries controlled by the object."
+          ],
+          "raises": [
+            "com.sun.star.io.IOException"
+          ],
+          "args": []
+        },
+        {
+          "name": "getRelationshipByID",
+          "returns": "typing.List[StringPair]",
+          "desc": [
+            "retrieves the sequence containing all the tags from the entry with specified value of \\\"ID\\\" tag."
+          ],
+          "raises": [
+            "com.sun.star.container.NoSuchElementException",
+            "com.sun.star.io.IOException"
+          ],
+          "args": [
+            [
+              "sID",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getRelationshipsByType",
+          "returns": "typing.List[typing.List[StringPair]]",
+          "desc": [
+            "retrieves the sequence containing all the entries which \\\"Type\\\" tag takes the specified value."
+          ],
+          "raises": [
+            "com.sun.star.io.IOException"
+          ],
+          "args": [
+            [
+              "sType",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getTargetByID",
+          "returns": "str",
+          "desc": [
+            "retrieves the value of \\\"Target\\\" tag from the entry with specified \\\"ID\\\" tag.",
+            "",
+            "If the entry has no \\\"Target\\\" tag an empty string is returned."
+          ],
+          "raises": [
+            "com.sun.star.container.NoSuchElementException",
+            "com.sun.star.io.IOException"
+          ],
+          "args": [
+            [
+              "sID",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getTypeByID",
+          "returns": "str",
+          "desc": [
+            "retrieves the value of \\\"Type\\\" tag from the entry with specified \\\"ID\\\" tag.",
+            "",
+            "If the entry has no \\\"Type\\\" tag an empty string is returned."
+          ],
+          "raises": [
+            "com.sun.star.container.NoSuchElementException",
+            "com.sun.star.io.IOException"
+          ],
+          "args": [
+            [
+              "sID",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "hasByID",
+          "returns": "bool",
+          "desc": [
+            "allows to detect whether there is an entry with specified value of \\\"ID\\\" tag."
+          ],
+          "raises": [
+            "com.sun.star.io.IOException"
+          ],
+          "args": [
+            [
+              "sID",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "insertRelationshipByID",
+          "returns": "None",
+          "desc": [
+            "allows to insert an entry."
+          ],
+          "raises": [
+            "com.sun.star.container.ElementExistException",
+            "com.sun.star.io.IOException"
+          ],
+          "args": [
+            [
+              "sID",
+              "str",
+              "in"
+            ],
+            [
+              "aEntry",
+              "typing.List[StringPair]",
+              "in"
+            ],
+            [
+              "bReplace",
+              "bool",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "insertRelationships",
+          "returns": "None",
+          "desc": [
+            "allows to insert a set of entries"
+          ],
+          "raises": [
+            "com.sun.star.container.ElementExistException",
+            "com.sun.star.io.IOException"
+          ],
+          "args": [
+            [
+              "aEntries",
+              "typing.List[typing.List[StringPair]]",
+              "in"
+            ],
+            [
+              "bReplace",
+              "bool",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "removeRelationshipByID",
+          "returns": "None",
+          "desc": [
+            "allows to remove an entry."
+          ],
+          "raises": [
+            "com.sun.star.container.NoSuchElementException",
+            "com.sun.star.io.IOException"
+          ],
+          "args": [
+            [
+              "sID",
+              "str",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

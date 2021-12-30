@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:21:12+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:17+00:00",
   "name": "XRangeSelectionListener",
   "type": "interface",
   "namespace": "com.sun.star.sheet",
@@ -16,7 +16,17 @@
         "XEventListener"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".range_selection_event",
+        "RangeSelectionEvent"
+      ]
+    ],
+    "quote": [
+      "RangeSelectionEvent"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XRangeSelectionListener",
     "imports": [],
     "namespace": "com.sun.star.sheet",
@@ -24,13 +34,42 @@
       "com.sun.star.lang.XEventListener"
     ],
     "desc": [
-      "allows notification when range selection is completed or aborted.",
-      "",
-      "**See Also**",
-      "",
-      "    com.sun.star.sheet.XRangeSelection"
+      "allows notification when range selection is completed or aborted."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1sheet_1_1XRangeSelectionListener.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "aborted",
+          "returns": "None",
+          "desc": [
+            "is called when range selection is aborted."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aEvent",
+              "RangeSelectionEvent",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "done",
+          "returns": "None",
+          "desc": [
+            "is called when range selection is completed."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aEvent",
+              "RangeSelectionEvent",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

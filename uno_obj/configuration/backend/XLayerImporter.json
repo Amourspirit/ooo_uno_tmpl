@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:17:10+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:06+00:00",
   "name": "XLayerImporter",
   "type": "interface",
   "namespace": "com.sun.star.configuration.backend",
@@ -16,7 +16,22 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_layer",
+        "XLayer"
+      ],
+      [
+        ".x_backend",
+        "XBackend"
+      ]
+    ],
+    "quote": [
+      "XBackend",
+      "XLayer"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XLayerImporter",
     "imports": [],
     "namespace": "com.sun.star.configuration.backend",
@@ -26,11 +41,89 @@
     "desc": [
       "allows importing a layer into a Backend",
       "",
-      "**See Also**",
+      "**since**",
       "",
       "    OOo 1.1.2"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1configuration_1_1backend_1_1XLayerImporter.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getTargetBackend",
+          "returns": "XBackend",
+          "desc": [
+            "gets the target backend for importing."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "importLayer",
+          "returns": "None",
+          "desc": [
+            "Imports the layer given into the backend.",
+            "",
+            "This method imports data for the current entity of the backend."
+          ],
+          "raises": [
+            "MalformedDataException",
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.lang.NullPointerException",
+            "com.sun.star.lang.WrappedTargetException"
+          ],
+          "args": [
+            [
+              "aLayer",
+              "XLayer",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "importLayerForEntity",
+          "returns": "None",
+          "desc": [
+            "Imports the layer given into the backend for a given entity.",
+            "",
+            "This method imports data for the current entity of the backend."
+          ],
+          "raises": [
+            "MalformedDataException",
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.lang.NullPointerException",
+            "com.sun.star.lang.WrappedTargetException"
+          ],
+          "args": [
+            [
+              "aLayer",
+              "XLayer",
+              "in"
+            ],
+            [
+              "aEntity",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setTargetBackend",
+          "returns": "None",
+          "desc": [
+            "sets the target backend for importing."
+          ],
+          "raises": [
+            "com.sun.star.lang.NullPointerException"
+          ],
+          "args": [
+            [
+              "aBackend",
+              "XBackend",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

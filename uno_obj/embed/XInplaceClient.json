@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:18:49+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:05+00:00",
   "name": "XInplaceClient",
   "type": "interface",
   "namespace": "com.sun.star.embed",
@@ -16,7 +16,39 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..frame.x_dispatch_provider",
+        "XDispatchProvider"
+      ],
+      [
+        "..awt.rectangle",
+        "Rectangle"
+      ],
+      [
+        "..frame.x_layout_manager",
+        "XLayoutManager"
+      ],
+      [
+        "..awt.size",
+        "Size"
+      ],
+      [
+        "..awt.key_event",
+        "KeyEvent"
+      ]
+    ],
+    "quote": [
+      "XDispatchProvider",
+      "Rectangle",
+      "typing.List[KeyEvent]",
+      "Size",
+      "XLayoutManager"
+    ],
+    "typings": [
+      "typing.List[KeyEvent]"
+    ],
+    "requires_typing": true,
     "name": "XInplaceClient",
     "imports": [],
     "namespace": "com.sun.star.embed",
@@ -27,6 +59,164 @@
       "represents common functionality for inplace clients."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1embed_1_1XInplaceClient.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "activatingInplace",
+          "returns": "None",
+          "desc": [
+            "notifies container through the client that the object is to be inplace activated."
+          ],
+          "raises": [
+            "com.sun.star.embed.WrongStateException"
+          ],
+          "args": []
+        },
+        {
+          "name": "activatingUI",
+          "returns": "None",
+          "desc": [
+            "notifies container through the client that the object is to be UI-activated."
+          ],
+          "raises": [
+            "com.sun.star.embed.WrongStateException"
+          ],
+          "args": []
+        },
+        {
+          "name": "canInplaceActivate",
+          "returns": "bool",
+          "desc": [
+            "checks if the container can activate the object inplace."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "changedPlacement",
+          "returns": "None",
+          "desc": [
+            "notifies the container that the position of the object is changed."
+          ],
+          "raises": [
+            "com.sun.star.embed.WrongStateException",
+            "com.sun.star.uno.Exception"
+          ],
+          "args": [
+            [
+              "aPosRect",
+              "Rectangle",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "deactivatedInplace",
+          "returns": "None",
+          "desc": [
+            "notifies container through the client that the object is deactivated."
+          ],
+          "raises": [
+            "com.sun.star.embed.WrongStateException"
+          ],
+          "args": []
+        },
+        {
+          "name": "deactivatedUI",
+          "returns": "None",
+          "desc": [
+            "notifies container through the client that the object is UI-deactivated.",
+            "",
+            "After this notification the container can restore its own UI and take focus."
+          ],
+          "raises": [
+            "com.sun.star.embed.WrongStateException"
+          ],
+          "args": []
+        },
+        {
+          "name": "getClipRectangle",
+          "returns": "Rectangle",
+          "desc": [
+            "gets the inplace object clip rectangle.",
+            "",
+            "The rectangle is provided in object's parent window coordinates in pixels. The intersection of position and clip rectangles specifies the visible part of the object."
+          ],
+          "raises": [
+            "com.sun.star.embed.WrongStateException"
+          ],
+          "args": []
+        },
+        {
+          "name": "getInplaceDispatchProvider",
+          "returns": "XDispatchProvider",
+          "desc": [
+            "allows to retrieve the container's dispatch provider."
+          ],
+          "raises": [
+            "com.sun.star.embed.WrongStateException"
+          ],
+          "args": []
+        },
+        {
+          "name": "getLayoutManager",
+          "returns": "XLayoutManager",
+          "desc": [
+            "allows to retrieve the com.sun.star.frame.LayoutManager of the container."
+          ],
+          "raises": [
+            "com.sun.star.embed.WrongStateException"
+          ],
+          "args": []
+        },
+        {
+          "name": "getPlacement",
+          "returns": "Rectangle",
+          "desc": [
+            "gets the inplace object position rectangle.",
+            "",
+            "The rectangle is provided in object's parent window coordinates in pixels. The intersection of position and clip rectangles specifies the visible part of the object. In case the position window has a size that is bigger than object's size, the object should either scale or deactivate."
+          ],
+          "raises": [
+            "com.sun.star.embed.WrongStateException"
+          ],
+          "args": []
+        },
+        {
+          "name": "scrollObject",
+          "returns": "None",
+          "desc": [
+            "scrolls the object."
+          ],
+          "raises": [
+            "com.sun.star.embed.WrongStateException"
+          ],
+          "args": [
+            [
+              "aOffset",
+              "Size",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "translateAccelerators",
+          "returns": "None",
+          "desc": [
+            "provides accelerator table the object wants to use while it is inplace active."
+          ],
+          "raises": [
+            "com.sun.star.embed.WrongStateException"
+          ],
+          "args": [
+            [
+              "aKeys",
+              "typing.List[KeyEvent]",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

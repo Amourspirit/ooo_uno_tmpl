@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:16:30+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:23+00:00",
   "name": "XGroup",
   "type": "interface",
   "namespace": "com.sun.star.report",
@@ -10,22 +10,168 @@
   },
   "writer_args": {},
   "data": {
-    "from_imports": [],
-    "from_imports_typing": [],
+    "from_imports": [
+      [
+        "..beans.x_property_set",
+        "XPropertySet"
+      ],
+      [
+        "..container.x_child",
+        "XChild"
+      ],
+      [
+        ".x_functions_supplier",
+        "XFunctionsSupplier"
+      ],
+      [
+        "..lang.x_component",
+        "XComponent"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".x_section",
+        "XSection"
+      ],
+      [
+        ".x_groups",
+        "XGroups"
+      ]
+    ],
+    "quote": [
+      "XSection",
+      "XGroups"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XGroup",
     "imports": [],
     "namespace": "com.sun.star.report",
-    "extends": [],
+    "extends": [
+      "com.sun.star.container.XChild",
+      "com.sun.star.beans.XPropertySet",
+      "com.sun.star.lang.XComponent",
+      "com.sun.star.report.XFunctionsSupplier"
+    ],
     "desc": [
       "identifies a XGroup.",
       "",
-      "A group is always a child of the groups collection in the report.",
-      "",
-      "**See Also**",
-      "",
-      "    XReportDefinition"
+      "A group is always a child of the groups collection in the report."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1report_1_1XGroup.html",
-    "items": {}
+    "items": {
+      "properties": [
+        {
+          "name": "Expression",
+          "returns": "str",
+          "desc": [
+            "Defines either a column name or an expression."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Footer",
+          "returns": "XSection",
+          "desc": [
+            "returns the group footer."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "FooterOn",
+          "returns": "bool",
+          "desc": [
+            "Defines if a group has a footer."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "GroupInterval",
+          "returns": "int",
+          "desc": [
+            "Defines an interval value that rows are grouped by."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "GroupOn",
+          "returns": "int",
+          "desc": [
+            "Specifies how to group data."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Groups",
+          "returns": "XGroups",
+          "desc": [
+            "Specifies the parent of the group."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Header",
+          "returns": "XSection",
+          "desc": [
+            "returns the group header."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "HeaderOn",
+          "returns": "bool",
+          "desc": [
+            "Defines if a group has a header."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "KeepTogether",
+          "returns": "int",
+          "desc": [
+            "Specifies if a group header, detail, and footer section is printed on the same page."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ResetPageNumber",
+          "returns": "bool",
+          "desc": [
+            "Specifies that the group header should always be printed on a new page and the reset of the page number to zero."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "SortAscending",
+          "returns": "bool",
+          "desc": [
+            "Defines if the group is sorted ascending or descending.",
+            "",
+            "The default is TRUE."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "StartNewColumn",
+          "returns": "bool",
+          "desc": [
+            "Specifies that the group header should always be printed on a new column."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
   }
 }

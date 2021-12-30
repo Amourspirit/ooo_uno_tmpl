@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:20:29+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:19+00:00",
   "name": "XEngineListener",
   "type": "interface",
   "namespace": "com.sun.star.script",
@@ -16,7 +16,27 @@
         "XEventListener"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".interrupt_engine_event",
+        "InterruptEngineEvent"
+      ],
+      [
+        "..lang.event_object",
+        "EventObject"
+      ],
+      [
+        ".finish_engine_event",
+        "FinishEngineEvent"
+      ]
+    ],
+    "quote": [
+      "InterruptEngineEvent",
+      "EventObject",
+      "FinishEngineEvent"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XEngineListener",
     "imports": [],
     "namespace": "com.sun.star.script",
@@ -24,9 +44,63 @@
       "com.sun.star.lang.XEventListener"
     ],
     "desc": [
-      "makes it possible to receive events from a scripting engine."
+      "makes it possible to receive events from a scripting engine.",
+      "",
+      ".. deprecated::",
+      "",
+      "    Interface is deprecated."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1script_1_1XEngineListener.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "finished",
+          "returns": "None",
+          "desc": [
+            "gets fired when the script execution has finished."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "Evt",
+              "FinishEngineEvent",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "interrupt",
+          "returns": "None",
+          "desc": [
+            "gets fired when an interrupt occurs during the script execution.",
+            "",
+            "If you call the method, the execution stops. So in this situation, the stack and variable values are still available by using the appropriate XDebugging methods."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "Evt",
+              "InterruptEngineEvent",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "running",
+          "returns": "None",
+          "desc": [
+            "gets fired when the script gets into execution state."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "Evt",
+              "EventObject",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

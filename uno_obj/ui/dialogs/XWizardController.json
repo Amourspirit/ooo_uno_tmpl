@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:19:58+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:33+00:00",
   "name": "XWizardController",
   "type": "interface",
   "namespace": "com.sun.star.ui.dialogs",
@@ -11,7 +11,22 @@
   "writer_args": {},
   "data": {
     "from_imports": [],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "...awt.x_window",
+        "XWindow"
+      ],
+      [
+        ".x_wizard_page",
+        "XWizardPage"
+      ]
+    ],
+    "quote": [
+      "XWindow",
+      "XWizardPage"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XWizardController",
     "imports": [],
     "namespace": "com.sun.star.ui.dialogs",
@@ -19,11 +34,101 @@
     "desc": [
       "is the interface of a client-provided controller of a custom Wizard.",
       "",
-      "**See Also**",
+      "**since**",
       "",
       "    OOo 3.3"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1ui_1_1dialogs_1_1XWizardController.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "canAdvance",
+          "returns": "bool",
+          "desc": [],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "confirmFinish",
+          "returns": "bool",
+          "desc": [
+            "called when the wizard is about to be finished.",
+            "",
+            "This method allows the controller to do any final checks, and ultimately veto finishing the wizard."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "createPage",
+          "returns": "XWizardPage",
+          "desc": [
+            "creates a page",
+            "",
+            "Wizard pages are created on demand, when the respective page is reached during traveling through the wizard. Effectively, this means the method is called at most once for each possible page ID."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "ParentWindow",
+              "XWindow",
+              "in"
+            ],
+            [
+              "PageId",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getPageTitle",
+          "returns": "str",
+          "desc": [
+            "provides the title of a page given by ID",
+            "",
+            "The page titles are displayed in the wizard's roadmap."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "PageId",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "onActivatePage",
+          "returns": "None",
+          "desc": [
+            "called when a new page in the wizard is being activated"
+          ],
+          "raises": [],
+          "args": [
+            [
+              "PageId",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "onDeactivatePage",
+          "returns": "None",
+          "desc": [
+            "called when a page in the wizard is being deactivated"
+          ],
+          "raises": [],
+          "args": [
+            [
+              "PageId",
+              "int",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

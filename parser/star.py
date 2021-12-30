@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 """
-Process link to star namesapec that contains links to modules
+Process link to star namespace that contains links to modules. Output links to json (star.json)
 """
 # region Imports
 from dataclasses import dataclass
@@ -237,6 +237,7 @@ class WriteStar:
             "namespace": self._parser.api_data.url_obj.namespace_str,
             "type": "namespace_url",
             "url_base": self._parser.api_data.url_obj.url_base,
+            "url": self._parser.api_data.url_obj.url,
             "data": self._parser.get_data()
         }
         str_jsn = base.Util.get_formated_dict_list_str(obj=json_dict, indent=2)
@@ -350,8 +351,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-# body > div.contents > table > tbody > tr.memitem\:namespacecom_1_1sun_1_1star_1_1accessibility > td.memItemRight > a
-
-# modules can contain other modules such as with chart2: https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1chart2.html
-

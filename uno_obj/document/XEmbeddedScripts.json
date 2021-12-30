@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:22:01+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:10+00:00",
   "name": "XEmbeddedScripts",
   "type": "interface",
   "namespace": "com.sun.star.document",
@@ -10,20 +10,74 @@
   },
   "writer_args": {},
   "data": {
-    "from_imports": [],
-    "from_imports_typing": [],
+    "from_imports": [
+      [
+        "..sdb.office_database_document",
+        "OfficeDatabaseDocument"
+      ],
+      [
+        ".office_document",
+        "OfficeDocument"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..script.x_storage_based_library_container",
+        "XStorageBasedLibraryContainer"
+      ]
+    ],
+    "quote": [
+      "XStorageBasedLibraryContainer"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XEmbeddedScripts",
     "imports": [],
     "namespace": "com.sun.star.document",
-    "extends": [],
+    "extends": [
+      "com.sun.star.document.OfficeDocument",
+      "com.sun.star.sdb.OfficeDatabaseDocument"
+    ],
     "desc": [
       "is supported by OfficeDocuments which allow to embed scripts",
       "",
-      "**See Also**",
+      "**since**",
       "",
       "    OOo 2.4"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1document_1_1XEmbeddedScripts.html",
-    "items": {}
+    "items": {
+      "properties": [
+        {
+          "name": "AllowMacroExecution",
+          "returns": "bool",
+          "desc": [
+            "determines whether executing macros from this document is allowed.",
+            "",
+            "Effectively, this attribute is an evaluation of the document's MacroExecMode against possibly applicable configuration settings, the document location in relation to the trusted location, and the like."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "BasicLibraries",
+          "returns": "XStorageBasedLibraryContainer",
+          "desc": [
+            "is the container of StarBasic macro libraries contained in the document"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "DialogLibraries",
+          "returns": "XStorageBasedLibraryContainer",
+          "desc": [
+            "is the container of dialogs libraries contained in the document"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
   }
 }

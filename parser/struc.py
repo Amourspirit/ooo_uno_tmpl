@@ -7,7 +7,7 @@ import os
 import sys
 import logging
 import argparse
-import base
+from dataclasses import dataclass, field
 from typing import Dict, List, Set, Tuple, Union
 from bs4 import BeautifulSoup
 from bs4.element import ResultSet, Tag
@@ -17,8 +17,15 @@ from collections import namedtuple
 from pathlib import Path
 import textwrap
 import xerox # requires xclip - sudo apt-get install xclip
+try:
+    import base
+except ModuleNotFoundError:
+    import parser.base as base
+try:
+    from type_mod import PythonType
+except ModuleNotFoundError:
+    from parser.type_mod import PythonType
 from logger.log_handle import get_logger
-
 from parser import __version__, JSON_ID
 
 logger = None
@@ -30,9 +37,19 @@ def _set_loggers(l: Union[logging.Logger, None]):
 
 _set_loggers(None)
 
-dataitem = namedtuple(
-    'dataitem', ['name', 'datatype', 'orig_type', 'lines'])
+# dataitem = namedtuple(
+#     'dataitem', ['name', 'datatype', 'orig_type', 'lines'])
+@dataclass
+class DataItem:
+    name: str
+    is_py_type: bool
+    datatype: str
+    orig_type: str
+    lines: List[str] = field(default_factory=list)
 
+    def __lt__(self, other: 'DataItem'):
+        return self.name < other.name
+    
 
 class Parser(base.ParserBase):
     # region Constructor
@@ -46,6 +63,10 @@ class Parser(base.ParserBase):
         self._data_info = None
         self._data_items = None
         self._auto_imports = set()
+        self._requires_typing = False
+        self._cache: Dict[str, object] = {
+            "python_types": []
+        }
 
     # endregion Constructor
 
@@ -54,8 +75,10 @@ class Parser(base.ParserBase):
         info = self.get_info()
         items = self._get_data_items()
         # set to list for json
-        info["auto_imports"] = self._get_auto_imports(ns=info['namespace'])
         info["imports"] = []
+        info["auto_imports"] = self._get_auto_imports(ns=info['namespace'])
+        info["from_imports"] = [] # placeholder. picked up in writer
+        info["requires_typing"] = self.requires_typing
         info['items'] = items
         return info
 
@@ -81,15 +104,19 @@ class Parser(base.ParserBase):
                 "fullname": "full name such as com.sun.star.awt.Command"
                 "desc": "(List[str]), description of constant",
                 "url": "Url to LibreOffice of constant",
-                "namespace: "namespace"
+                "namespace": "namespace",
+                "extends": "(List[str]), inherits"
             }
         """
         if not  self._data_info is None:
             return self._data_info
         try:
-            if not self._url:
-                raise ValueError('URL is not set')
-            soup = BeautifulSoup(self.get_raw_html(), 'lxml')
+            soup_obj = base.SoupObj(self.url, allow_cache=True)
+            soup =soup_obj.soup
+            inherits = base.ApiInherited(soup=soup_obj, raise_error=False)
+            ex = []
+            for el in inherits.get_obj():
+                ex.append(el.fullns)
             full_name = self._get_full_name(soup=soup)
             name = self._get_name(soup=soup)
             desc = self._get_desc(soup=soup)
@@ -99,7 +126,8 @@ class Parser(base.ParserBase):
                 "fullname": full_name,
                 "desc": desc,
                 "url": self.url,
-                "namespace": ns.namespace_str
+                "namespace": ns.namespace_str,
+                "extends": ex
             }
             self._data_info = info
             return self._data_info
@@ -116,7 +144,7 @@ class Parser(base.ParserBase):
     # endregion Info
 
     # region Data
-    def get_data(self) -> List[dataitem]:
+    def get_data(self) -> List[DataItem]:
         if not self._data is None:
             return self._data
         try:
@@ -155,6 +183,7 @@ class Parser(base.ParserBase):
             for itm in data:
                 s = '{\n'
                 s += self._indent + f'"name": "{itm.name}",\n'
+                # s += self._indent + f'"is_py_type": "{itm.is_py_type}",\n'
                 s += self._indent + f'"type": "{itm.datatype}",\n'
                 s += self._indent + f'"orig_type": "{itm.orig_type}",\n'
                 if len(itm.lines) > 0:
@@ -180,6 +209,7 @@ class Parser(base.ParserBase):
             for itm in data:
                 d_itm = {
                     "name": itm.name,
+                    # "is_py_type": itm.is_py_type,
                     "type": itm.datatype,
                     "orig_type": itm.orig_type,
                     "lines": itm.lines
@@ -191,8 +221,12 @@ class Parser(base.ParserBase):
         self._data_items = result
         return self._data_items
 
-    def _get_struct_details(self, memitetms: ResultSet) -> List[dataitem]:
+    def _get_struct_details(self, memitetms: ResultSet) -> List[DataItem]:
+        key = '_get_struct_details'
+        if not key in self._cache:
+            self._cache[key] = True
         results = []
+        p_type_names: Set[str] = set()
         def get_doc_lines(item_tag:Tag) -> list:
             docs = item_tag.find('div', class_='memdoc')
             lines = []
@@ -210,33 +244,17 @@ class Parser(base.ParserBase):
                         # lines.append(ln.text)
             return lines
 
-        def get_py_type(in_type: str) -> str:
-            cb_data = None
-            def cb(data:dict):
-                nonlocal cb_data
-                cb_data = data
-
-            n_type = base.TYPE_MAP.get(in_type, None)
-            if n_type:
-                return n_type
-            n_type = base.Util.get_py_type(uno_type=in_type, cb=cb)
-            auto_import = False
-            is_wrapper = cb_data['is_wrapper']
-            is_py = cb_data['is_py_type']
-            _result = n_type
-            if is_wrapper:
-                # wrapper such as typings.List[XInterface]
-                wdata: dict = cb_data['wdata']
-                if not wdata['py_type_inner']:
-                    auto_import = True
-            else:
-                if is_py is False:
-                    auto_import = True
-            if auto_import:
-                self._auto_imports.add(cb_data['long_type'])
-                logger.debug("Parser: Adding autoimport %s",
-                             cb_data['long_type'])
-            return _result
+        def get_py_type(in_type: str) -> PythonType:
+            nonlocal p_type_names
+            p_type: PythonType = base.Util.get_python_type(in_type=in_type)
+            self._auto_imports.update(p_type.get_all_imports())
+            if p_type.requires_typing:
+                self._requires_typing = True
+            # add p_type to cache. Later it will be need in writer
+            if not p_type.type in p_type_names:
+                self._cache['python_types'].append(p_type)
+                p_type_names.add(p_type.type)
+            return p_type
 
         for itm in memitetms:
             # text in format of com::sun::star::awt::AdjustmentType Type
@@ -256,10 +274,13 @@ class Parser(base.ParserBase):
             name = base.Util.get_clean_classname(parts.pop())
             lines = get_doc_lines(itm)
             logger.debug("Detils: Name: %s, Type: %s, Orig: %s", name, py_type, _type)
-            di = dataitem(name=name,
-                          datatype=py_type,
-                          orig_type=_type,
-                          lines=lines)
+            di = DataItem(
+                name=name,
+                is_py_type=py_type.is_py_type,
+                datatype=py_type.type,
+                orig_type=_type,
+                lines=lines
+            )
             results.append(di)
         if self._sort:
             results.sort()
@@ -271,6 +292,19 @@ class Parser(base.ParserBase):
     def auto_imports(self) -> set:
         """Specifies auto_imports"""
         return self._auto_imports
+
+    @property
+    def requires_typing(self) -> set:
+        """Gets if import if typing is required"""
+        return self._requires_typing
+    
+    @property
+    def python_types(self) -> List[PythonType]:
+        """Gets Instances of PythonType for this instance"""
+        key = '_get_struct_details'
+        if not key in self._cache:
+            raise Exception('Parser._get_struct_details() must be called before python_types is accessed')
+        return self._cache['python_types']
     # endregion Properties
 
 
@@ -285,7 +319,8 @@ class StructWriter(base.WriteBase):
         "write_file": 0,
         "write_json": 0,
         "auto_import": 0,
-        "write_template_long": 0
+        "write_template_long": 0,
+        "_dynamic_struct": 0
         },
         types=[bool],
         ftype=DecFuncEnum.METHOD)
@@ -299,10 +334,11 @@ class StructWriter(base.WriteBase):
         self._write_file = kwargs.get('write_template', False)
         self._print_json = kwargs.get('print_json', True)
         self._write_json = kwargs.get('write_json', False)
+        self._dynamic_struct = kwargs.get('dynamic_struct', False)
         self._write_template_long: bool = kwargs.get(
             'write_template_long', False)
         self._indent_amt = 4
-        self._cache = {}
+        self._cache: Dict[str, object] = {}
         self._json_str = None
         self._file_full_path = None
         self._p_name = None
@@ -310,6 +346,9 @@ class StructWriter(base.WriteBase):
         self._p_fullname = None
         self._p_url = None
         self._p_desc = None
+        self._p_extends: List[str] = None
+        self._p_imports: Set[str] = set()
+        self._p_requires_typing = False
         
         self._path_dir = Path(os.path.dirname(__file__))
         t_file = 'struct'
@@ -358,7 +397,19 @@ class StructWriter(base.WriteBase):
     def _get_json(self) -> str:
         if not self._json_str is None:
             return self._json_str
-        p_dict = self._parser.get_dict_data()
+        p_dict = {
+            "name": 'place holder',
+            "namespace": 'place holder',
+            "url": 'place holder',
+            "quote": [],
+            "typings": []
+        }
+        p_dict.update(self._parser.get_dict_data())
+        p_dict['from_imports'] = self._get_from_imports()
+        p_dict['quote'] = self._get_quote_flat()
+        p_dict['typings'] = self._get_typings()
+        p_dict['requires_typing'] = self._p_requires_typing
+        
         json_dict = {
             "id": JSON_ID,
             "version": __version__,
@@ -369,7 +420,8 @@ class StructWriter(base.WriteBase):
             "parser_args": self._parser.get_parser_args(),
             "writer_args": {
                 "sort": self._sort,
-                "auto_import": self._auto_import
+                "auto_import": self._auto_import,
+                "dynamic_struct": self._dynamic_struct
             },
             "data": p_dict
         }
@@ -377,19 +429,72 @@ class StructWriter(base.WriteBase):
         self._json_str = str_jsn
         return self._json_str
 
+    # region get Imports
+    def _get_from_imports(self) -> List[List[str]]:
+        key = '_get_from_imports'
+        if key in self._cache:
+            return self._cache[key]
+        lst = []
+        for ns in self._p_imports:
+            f, n = base.Util.get_rel_import(
+                i_str=ns, ns=self._p_namespace
+            )
+            lst.append([f, n])
+        self._cache[key] = lst
+        return self._cache[key]
+    # endregion get Imports
+
+    # region quote/typings
+    def _get_quote_flat(self) -> List[str]:
+        key = '_get_quote_flat'
+        if key in self._cache:
+            return self._cache[key]
+        t_set: Set[str] = set()
+        p_lst = self._parser.python_types
+        for t in p_lst:
+            if t.requires_typing or t.is_py_type is False:
+                t_set.add(t.type)
+                self._p_requires_typing = True
+        self._cache[key] = list(t_set)
+        return self._cache[key]
+
+    def _get_typings(self) -> List[str]:
+        key = '_get_typings'
+        if key in self._cache:
+            return self._cache[key]
+        t_set: Set[str] = set()
+        p_lst = self._parser.python_types
+        for t in p_lst:
+            if t.requires_typing:
+                t_set.add(t.type)
+        self._cache[key] = list(t_set)
+        return self._cache[key]
+
+    # endregion quote/typing
+
     def _set_template_data(self):
         if self._write_template_long is False:
             return
+        self._template = self._template.replace(
+            '{dynamic_struct}', str(self._dynamic_struct))
         self._template = self._template.replace('{sort}', str(self._sort))
         self._template = self._template.replace('{name}', self._p_name)
         self._template = self._template.replace('{ns}', self._p_namespace)
         self._template = self._template.replace('{link}', self._p_url)
+        self._template = self._template.replace(
+            '{requires_typing}', str(self._p_requires_typing))
         indent = ' ' * self._indent_amt
         str_json_desc = base.Util.get_formated_dict_list_str(self._p_desc)
         self._template = self._template.replace('{desc}', str_json_desc)
         indented = textwrap.indent(self._p_data, indent)
         self._template = self._template.replace('{data}', indented)
         self._template = self._template.replace('{auto_import}', str(self._auto_imports()))
+        self._template = self._template.replace(
+            '{from_imports}',
+            base.Util.get_formated_dict_list_str(self._get_from_imports())
+        )
+        self._template = self._template.replace(
+            '{inherits}', base.Util.get_string_list(lines=self._p_extends))
 
     def _write_to_file(self):
         with open(self._file_full_path, 'w') as f:
@@ -405,6 +510,8 @@ class StructWriter(base.WriteBase):
         logger.info("Created file: %s", jsn_p)
 
     def _set_info(self):
+        def get_extends(lst: List[str]) -> List[str]:
+            return [base.Util.get_last_part(s) for s in lst]
         data = self._parser.get_info()
         self._p_name = data['name']
         self._p_desc = data['desc']
@@ -412,15 +519,21 @@ class StructWriter(base.WriteBase):
         self._p_fullname = data['fullname']
         self._p_data = self._parser.get_formated_data()
         self._p_namespace = data['namespace']
+        self._p_imports.update(data['extends'])
+        self._p_extends = get_extends(data['extends'])
         if self._write_file or self._write_json:
             self._file_full_path = self._get_uno_obj_path()
+        # prime cache and set other params such as self._p_requires_typing
+        self._get_quote_flat()
+        self._get_typings()
         
 
     def _get_uno_obj_path(self) -> Path:
         key = '_get_uno_obj_path'
         if key in self._cache:
             return self._cache[key]
-        uno_obj_path = Path(self._path_dir.parent, 'uno_obj')
+        uno_obj_path = Path(self._path_dir.parent,
+                            base.APP_CONFIG.uno_base_dir)
         name_parts = self._p_fullname.split('.')
         # ignore com, sun, star
         path_parts = name_parts[3:]
@@ -451,12 +564,168 @@ class StructWriter(base.WriteBase):
             im = base.Util.get_rel_import(i_str=name, ns=local_ns_str)
             results.append(im)
         return results
-        
+
+# region Parse method
+
+
+def _get_parsed_kwargs(**kwargs) -> Dict[str, str]:
+    required = ("url",)
+    lookups = {
+        "u": "url",
+        "url": "url",
+        "L": "log_file",
+        "log_file": "log_file"
+    }
+    result = {}
+    for k, v in kwargs.items():
+        if not isinstance(k, str):
+            continue
+        if k in lookups:
+            key = lookups[k]
+            result[key] = v
+    for k in required:
+        if not k in result:
+            # k is missing from kwargs
+            raise base.RequiredError(f"Missing required arg {k}.")
+    return result
+
+
+def _get_parsed_args(*args) -> Dict[str, bool]:
+    # key, value and value is a key into defaults
+    defaults = {
+        'no_sort': True,
+        "no_cache": True,
+        "no_print_clear": True,
+        "long_template": False,
+        "clipboard": False,
+        "print_json": False,
+        "print_template": False,
+        "write_template": False,
+        "write_json": False,
+        "verbose": False,
+        "dynamic_struct": False,
+        "no_auto_import": True
+    }
+    found = {
+        'no_sort': False,
+        "no_cache": False,
+        "no_print_clear": False,
+        "long_template": True,
+        "clipboard": True,
+        "print_json": True,
+        "print_template": True,
+        "write_template": True,
+        "write_json": True,
+        "verbose": True,
+        "dynamic_struct": True,
+        "no_auto_import": False
+    }
+    lookups = {
+        "s": "no_sort",
+        "no_sort": "no_sort",
+        "x": "no_cache",
+        "no_cache": "no_cache",
+        "p": "no_print_clear",
+        "no_print_clear": "no_print_clear",
+        "g": "long_template",
+        "long_template": "long_template",
+        "c": "clipboard",
+        "clipboard": "clipboard",
+        "n": "print_json",
+        "print_json": "print_json",
+        "m": "print_template",
+        "print_template": "print_template",
+        "t": "write_template",
+        "write_template": "write_template",
+        "j": "write_json",
+        "write_json": "write_json",
+        "v": "verbose",
+        "verbose": "verbose",
+        "d": "dynamic_struct",
+        "dynamic_struct": "dynamic_struct",
+        "a": "no_auto_import",
+        "no_auto_import": "no_auto_import"
+    }
+    result = {k: v for k, v in defaults.items()}
+    for arg in args:
+        if not isinstance(arg, str):
+            continue
+        if arg in lookups:
+            key = lookups[arg]
+            result[key] = found[key]
+    return result
+
+
+def parse(*args, **kwargs):
+    """
+    Parses data, alternative to running on command line.
+
+    Other Arguments:
+        'no_sort' (str, optional): Short form ``'s'``. No sorting of results. Default ``False``
+        'no_cache' (str, optional): Short form ``'x'``. No caching. Default ``False``
+        'no_print_clear (str, optional): Short form ``'p'``. No clearing of terminal
+            when otuput to terminal. Default ``False``
+        'no_auto_import' (str, optional): Short form ``'a'``. Auto import types that are not python types. Default ``True``
+        'dynamic_struct' (str, optional): Short form ``'d'``. Template will generate dynameic struct conten. Default ``False``
+        'print_json' (str, optional): Short form ``'n'``. Print json to termainl. Default ``False``
+        'print_template' (str, optional): Short form ``'m'``. Print template to terminal. Default ``False``
+        'write_template' (str, optional): Short form ``'t'``. Write template file into obj_uno subfolder. Default ``False``
+        'long_template' (str, optional): Short form ``'g'``. Writes a long format template.
+            Requires write_template is set. Default ``False``
+        'clipboard' (str, optional): Short form ``'c'``. Copy to clipboard. Default ``False``
+        'write_json' (str, optional): Short form ``'j'``. Write json file into obj_uno subfolder. Default ``False``
+        'verbose' (str, optional): Short form ``'v'``. Verobose output.
+
+    Keyword Arguments:
+        url (str): Short form ``u``. url to parse
+        log_file (str, optional): Short form ``L``. Log File
+    """
+    global logger
+    pkwargs = _get_parsed_kwargs(**kwargs)
+    pargs = _get_parsed_args(*args)
+    if logger is None:
+        log_args = {}
+        if 'log_file' in pkwargs:
+            log_args['log_file'] = pkwargs['log_file']
+        else:
+            log_args['log_file'] = 'struct.log'
+        if pargs['verbose']:
+            log_args['level'] = logging.DEBUG
+        _set_loggers(get_logger(logger_name=Path(__file__).stem, **log_args))
+
+    p = Parser(
+        url=pkwargs['url'],
+        sort=pargs['no_sort'],
+        cache=pargs['no_cache']
+    )
+    w = StructWriter(
+        parser=p,
+        copy_clipboard=pargs['clipboard'],
+        print_template=pargs['print_template'],
+        print_json=pargs['print_json'],
+        auto_import=pargs['no_auto_import'],
+        write_template=pargs['write_template'],
+        write_json=pargs['write_json'],
+        write_template_long=pargs['long_template'],
+        clear_on_print=(not pargs['no_print_clear']),
+        dynamic_struct=pargs['dynamic_struct']
+    )
+    w.write()
+# endregion Parse method
         
 def _main():
-    url = 'https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1beans_1_1Ambiguous_3_01T_01_4.html'
-    sys.argv.extend(['--log-file', 'debug.log', '-v', '-n', '-u', url])
-    main()
+    # url = 'https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1beans_1_1Ambiguous_3_01T_01_4.html'
+    # url = 'https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1beans_1_1GetPropertyTolerantResult.html'
+    url = 'https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1text_1_1TextMarkupDescriptor.html'
+    args = ('v', 'n')
+    kwargs = {
+        "u": url,
+        "log_file": "debug.log"
+    }
+    parse(*args, **kwargs)
+    # sys.argv.extend(['--log-file', 'debug.log', '-v', '-n', '-u', url])
+    # main()
+
 def main():
     global logger
 
@@ -486,11 +755,11 @@ def main():
         dest='sort',
         default=True)
     parser.add_argument(
-        '-d', '--no-dual',
-        help='Do NOT replace :: with .',
-        action='store_false',
-        dest='dual_colon',
-        default=True)
+        '-d', '--dynamic-struct',
+        help='Template will generate dynamic struct content',
+        action='store_true',
+        dest='dynamic_struct',
+        default=False)
     parser.add_argument(
         '-c', '--clipboard',
         help='Copy to clipboard',
@@ -565,7 +834,6 @@ def main():
     p = Parser(
         url=args.url,
         sort=args.sort,
-        replace_dual_colon=args.dual_colon,
         cache=args.cache
         )
     if args.print_template is False and args.print_json is False:
@@ -578,7 +846,8 @@ def main():
         auto_import=args.auto_import,
         write_template=args.write_template,
         write_json=args.write_json,
-        write_template_long=args.long_format
+        write_template_long=args.long_format,
+        dynamic_struct=args.dynamic_struct
         )
     w.write()
     

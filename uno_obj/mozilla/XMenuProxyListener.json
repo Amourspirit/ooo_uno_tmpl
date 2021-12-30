@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:17:30+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:11+00:00",
   "name": "XMenuProxyListener",
   "type": "interface",
   "namespace": "com.sun.star.mozilla",
@@ -16,7 +16,25 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".menu_single_change",
+        "MenuSingleChange"
+      ],
+      [
+        ".menu_multiple_change",
+        "MenuMultipleChange"
+      ]
+    ],
+    "quote": [
+      "typing.List[MenuSingleChange]",
+      "typing.List[MenuMultipleChange]"
+    ],
+    "typings": [
+      "typing.List[MenuSingleChange]",
+      "typing.List[MenuMultipleChange]"
+    ],
+    "requires_typing": true,
     "name": "XMenuProxyListener",
     "imports": [],
     "namespace": "com.sun.star.mozilla",
@@ -27,6 +45,54 @@
       "Listens for changes in menu items."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1mozilla_1_1XMenuProxyListener.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "menuChangedMultiple",
+          "returns": "None",
+          "desc": [
+            "is called, if the content or graphical representation/state of the menu changes completely, for one or more menu items"
+          ],
+          "raises": [],
+          "args": [
+            [
+              "MenuMultipleChanges",
+              "typing.List[MenuMultipleChange]",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "menuChangedSingle",
+          "returns": "None",
+          "desc": [
+            "is called, if the content or graphical representation/state of the menu changes, by one property for one or more menu items"
+          ],
+          "raises": [],
+          "args": [
+            [
+              "MenuSingleChanges",
+              "typing.List[MenuSingleChange]",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "menuItemDeleted",
+          "returns": "None",
+          "desc": [
+            "is called, if one menu item designated by the ID, is deleted."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "ID",
+              "int",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

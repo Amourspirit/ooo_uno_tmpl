@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:16:26+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:23+00:00",
   "name": "XNamedGraph",
   "type": "interface",
   "namespace": "com.sun.star.rdf",
@@ -12,16 +12,37 @@
   "data": {
     "from_imports": [
       [
-        "......xuri",
+        ".xuri",
         "XURI"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..container.x_enumeration",
+        "XEnumeration"
+      ],
+      [
+        ".x_node",
+        "XNode"
+      ],
+      [
+        ".x_resource",
+        "XResource"
+      ]
+    ],
+    "quote": [
+      "XNode",
+      "XURI",
+      "XEnumeration",
+      "XResource"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XNamedGraph",
     "imports": [],
     "namespace": "com.sun.star.rdf",
     "extends": [
-      "XURI"
+      "com.sun.star.rdf.XURI"
     ],
     "desc": [
       "represents an RDF named graph that is stored in an RDF Repository.",
@@ -30,11 +51,132 @@
       "",
       "Note that instances may be destroyed via XRepository.destroyGraph(). If a graph is destroyed, subsequent calls to addStatement(), removeStatements() will fail with an com.sun.star.container.NoSuchElementException.",
       "",
-      "**See Also**",
+      "**since**",
       "",
       "    OOo 3.2"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1rdf_1_1XNamedGraph.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "addStatement",
+          "returns": "None",
+          "desc": [
+            "adds a RDF statement to the graph.",
+            "",
+            "Note that the ODF elements that can have metadata attached all implement the interface XMetadatable, which inherits from XResource, meaning that you can simply pass them in as arguments here, and it will magically work."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.container.NoSuchElementException",
+            "RepositoryException"
+          ],
+          "args": [
+            [
+              "Subject",
+              "XResource",
+              "in"
+            ],
+            [
+              "Predicate",
+              "XURI",
+              "in"
+            ],
+            [
+              "Object",
+              "XNode",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "clear",
+          "returns": "None",
+          "desc": [
+            "removes all statements from the graph."
+          ],
+          "raises": [
+            "com.sun.star.container.NoSuchElementException",
+            "RepositoryException"
+          ],
+          "args": []
+        },
+        {
+          "name": "getName",
+          "returns": "XURI",
+          "desc": [
+            "returns the name of the graph.",
+            "",
+            "The name is unique within the repository."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getStatements",
+          "returns": "XEnumeration",
+          "desc": [
+            "gets matching RDF statements from a graph.",
+            "",
+            "Note that the ODF elements that can have metadata attached all implement the interface XMetadatable, which inherits from XResource, meaning that you can simply pass them in as arguments here, and it will magically work.",
+            "",
+            "Any parameter may be NULL, which acts as a wildcard. For example, to get all statements about myURI: getStatements(myURI, null, null)"
+          ],
+          "raises": [
+            "com.sun.star.container.NoSuchElementException",
+            "RepositoryException"
+          ],
+          "args": [
+            [
+              "Subject",
+              "XResource",
+              "in"
+            ],
+            [
+              "Predicate",
+              "XURI",
+              "in"
+            ],
+            [
+              "Object",
+              "XNode",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "removeStatements",
+          "returns": "None",
+          "desc": [
+            "removes matching RDF statements from the graph.",
+            "",
+            "Note that the ODF elements that can have metadata attached all implement the interface XMetadatable, which inherits from XResource, meaning that you can simply pass them in as arguments here, and it will magically work.",
+            "",
+            "Any parameter may be NULL, which acts as a wildcard. For example, to remove all statements about myURI: removeStatement(myURI, null, null)"
+          ],
+          "raises": [
+            "com.sun.star.container.NoSuchElementException",
+            "RepositoryException"
+          ],
+          "args": [
+            [
+              "Subject",
+              "XResource",
+              "in"
+            ],
+            [
+              "Predicate",
+              "XURI",
+              "in"
+            ],
+            [
+              "Object",
+              "XNode",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

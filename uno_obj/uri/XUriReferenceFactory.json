@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:21:39+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:15+00:00",
   "name": "XUriReferenceFactory",
   "type": "interface",
   "namespace": "com.sun.star.uri",
@@ -16,7 +16,22 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_uri_reference",
+        "XUriReference"
+      ],
+      [
+        ".relative_uri_excess_parent_segments",
+        "RelativeUriExcessParentSegments"
+      ]
+    ],
+    "quote": [
+      "XUriReference",
+      "RelativeUriExcessParentSegments"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XUriReferenceFactory",
     "imports": [],
     "namespace": "com.sun.star.uri",
@@ -28,11 +43,94 @@
       "",
       "See RFC\u00a03986 for a description of URI references and related terms.",
       "",
-      "**See Also**",
+      "**since**",
       "",
       "    OOo 2.0"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1uri_1_1XUriReferenceFactory.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "makeAbsolute",
+          "returns": "XUriReference",
+          "desc": [
+            "resolves a relative URI reference to absolute form."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "baseUriReference",
+              "XUriReference",
+              "in"
+            ],
+            [
+              "uriReference",
+              "XUriReference",
+              "in"
+            ],
+            [
+              "processAdditionalSpecialSegments",
+              "bool",
+              "in"
+            ],
+            [
+              "excessParentSegments",
+              "RelativeUriExcessParentSegments",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "makeRelative",
+          "returns": "XUriReference",
+          "desc": [
+            "changes an absolute URI reference to relative form."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "baseUriReference",
+              "XUriReference",
+              "in"
+            ],
+            [
+              "uriReference",
+              "XUriReference",
+              "in"
+            ],
+            [
+              "preferAuthorityOverRelativePath",
+              "bool",
+              "in"
+            ],
+            [
+              "preferAbsoluteOverRelativePath",
+              "bool",
+              "in"
+            ],
+            [
+              "encodeRetainedSpecialSegments",
+              "bool",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "parse",
+          "returns": "XUriReference",
+          "desc": [
+            "parses the textual representation of a URI reference."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "uriReference",
+              "str",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

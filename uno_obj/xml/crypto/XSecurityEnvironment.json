@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:18:32+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:21+00:00",
   "name": "XSecurityEnvironment",
   "type": "interface",
   "namespace": "com.sun.star.xml.crypto",
@@ -16,7 +16,22 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "...security.x_certificate",
+        "XCertificate"
+      ]
+    ],
+    "quote": [
+      "typing.List[XCertificate]",
+      "XCertificate",
+      "typing.List[int]"
+    ],
+    "typings": [
+      "typing.List[XCertificate]",
+      "typing.List[int]"
+    ],
+    "requires_typing": true,
     "name": "XSecurityEnvironment",
     "imports": [],
     "namespace": "com.sun.star.xml.crypto",
@@ -24,9 +39,169 @@
       "com.sun.star.uno.XInterface"
     ],
     "desc": [
-      "Interface of Security Environment."
+      "Interface of Security Environment.",
+      "",
+      "**since**",
+      "",
+      "    LibreOffice 6.0"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1xml_1_1crypto_1_1XSecurityEnvironment.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "buildCertificatePath",
+          "returns": "typing.List[XCertificate]",
+          "desc": [
+            "Build certificate path from a certain certificate."
+          ],
+          "raises": [
+            "com.sun.star.uno.SecurityException"
+          ],
+          "args": [
+            [
+              "beginCert",
+              "XCertificate",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "createCertificateFromAscii",
+          "returns": "XCertificate",
+          "desc": [
+            "Create certificate interface from a Base64 encoded certificate."
+          ],
+          "raises": [
+            "com.sun.star.uno.SecurityException"
+          ],
+          "args": [
+            [
+              "asciiCertificate",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "createCertificateFromRaw",
+          "returns": "XCertificate",
+          "desc": [
+            "Create certificate interface from raw DER encoded certificate."
+          ],
+          "raises": [
+            "com.sun.star.uno.SecurityException"
+          ],
+          "args": [
+            [
+              "rawCertificate",
+              "typing.List[int]",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getAllCertificates",
+          "returns": "typing.List[XCertificate]",
+          "desc": [
+            "List all certificates, private (as returned by getPersonalCertificates) as well as those of other people/orgas.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 6.0"
+          ],
+          "raises": [
+            "com.sun.star.uno.SecurityException"
+          ],
+          "args": []
+        },
+        {
+          "name": "getCertificate",
+          "returns": "XCertificate",
+          "desc": [
+            "Get certificate from the environment by issuer name and serial number."
+          ],
+          "raises": [
+            "com.sun.star.uno.SecurityException"
+          ],
+          "args": [
+            [
+              "issuerName",
+              "str",
+              "in"
+            ],
+            [
+              "serialNumber",
+              "typing.List[int]",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getCertificateCharacters",
+          "returns": "int",
+          "desc": [
+            "Get a certificate characters.",
+            "",
+            "The method provides a way to get certificate characters like:",
+            "",
+            "The certificate characters is defined as bit-wise long, please refer to CertificateCharacters definition."
+          ],
+          "raises": [
+            "com.sun.star.uno.SecurityException"
+          ],
+          "args": [
+            [
+              "xCertificate",
+              "XCertificate",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getPersonalCertificates",
+          "returns": "typing.List[XCertificate]",
+          "desc": [
+            "Get personal certificates from the environment."
+          ],
+          "raises": [
+            "com.sun.star.uno.SecurityException"
+          ],
+          "args": []
+        },
+        {
+          "name": "getSecurityEnvironmentInformation",
+          "returns": "str",
+          "desc": [
+            "Get the Environment detail information."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "verifyCertificate",
+          "returns": "int",
+          "desc": [
+            "Verify a certificate.",
+            "",
+            "The method provides a way to verify a certificate."
+          ],
+          "raises": [
+            "com.sun.star.uno.SecurityException"
+          ],
+          "args": [
+            [
+              "xEECertificate",
+              "XCertificate",
+              "in"
+            ],
+            [
+              "intermediateCertificates",
+              "typing.List[XCertificate]",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

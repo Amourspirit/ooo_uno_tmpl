@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:18:50+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:05+00:00",
   "name": "XLinkFactory",
   "type": "interface",
   "namespace": "com.sun.star.embed",
@@ -16,7 +16,27 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_storage",
+        "XStorage"
+      ],
+      [
+        "..beans.property_value",
+        "PropertyValue"
+      ]
+    ],
+    "quote": [
+      "XStorage",
+      "typing.List[PropertyValue]",
+      "XInterface",
+      "typing.List[int]"
+    ],
+    "typings": [
+      "typing.List[PropertyValue]",
+      "typing.List[int]"
+    ],
+    "requires_typing": true,
     "name": "XLinkFactory",
     "imports": [],
     "namespace": "com.sun.star.embed",
@@ -27,6 +47,55 @@
       "allows to create and initialize a new link of specified type."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1embed_1_1XLinkFactory.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "createInstanceLinkUserInit",
+          "returns": "XInterface",
+          "desc": [
+            "creates a new link and transport parameters for persistent initialization.",
+            "",
+            "This method can be used to have a full control over persistence initialization of a link."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.io.IOException",
+            "com.sun.star.uno.Exception"
+          ],
+          "args": [
+            [
+              "aClassID",
+              "typing.List[int]",
+              "in"
+            ],
+            [
+              "ClassName",
+              "str",
+              "in"
+            ],
+            [
+              "xStorage",
+              "XStorage",
+              "in"
+            ],
+            [
+              "sEntryName",
+              "str",
+              "in"
+            ],
+            [
+              "aArgs",
+              "typing.List[PropertyValue]",
+              "in"
+            ],
+            [
+              "aObjectArgs",
+              "typing.List[PropertyValue]",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

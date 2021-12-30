@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:20:39+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:20+00:00",
   "name": "XCalendar",
   "type": "interface",
   "namespace": "com.sun.star.i18n",
@@ -16,7 +16,31 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".calendar_item",
+        "CalendarItem"
+      ],
+      [
+        ".calendar",
+        "Calendar"
+      ],
+      [
+        "..lang.locale",
+        "Locale"
+      ]
+    ],
+    "quote": [
+      "typing.List[str]",
+      "Locale",
+      "Calendar",
+      "typing.List[CalendarItem]"
+    ],
+    "typings": [
+      "typing.List[str]",
+      "typing.List[CalendarItem]"
+    ],
+    "requires_typing": true,
     "name": "XCalendar",
     "imports": [],
     "namespace": "com.sun.star.i18n",
@@ -26,11 +50,293 @@
     "desc": [
       "Access to locale specific calendar systems.",
       "",
-      "**See Also**",
+      "**since**",
       "",
-      "    OfficeDev - Implementing a New Locale - XCalendar OfficeDev - Overview and Using the API - XCalendar"
+      "    LibreOffice 3.5"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1i18n_1_1XCalendar.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "addValue",
+          "returns": "None",
+          "desc": [
+            "Add an amount to a field."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "nCalendarFieldIndex",
+              "int",
+              "in"
+            ],
+            [
+              "nAmount",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getAllCalendars",
+          "returns": "typing.List[str]",
+          "desc": [
+            "Returns all available calendars for the given locale."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "rLocale",
+              "Locale",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getDateTime",
+          "returns": "float",
+          "desc": [
+            "Get the UTC date/time as an offset to the start of the calendar at 1-Jan-1970 00:00.",
+            "",
+            "The integer part represents the number of days passed since start date. The fractional part represents fractions of a day, thus 0.5 means 12 hours."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getDays",
+          "returns": "typing.List[CalendarItem]",
+          "desc": [
+            "returns a sequence of CalendarItem describing the day names."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getDisplayName",
+          "returns": "str",
+          "desc": [
+            "Returns a string (name to display) matching the given parameters.",
+            "",
+            "The value should be obtained by a previous call to XCalendar.getValue() with an appropriate CalendarFieldIndex argument.",
+            "",
+            "This parameter is not used if the nCalendarDisplayIndex argument equals CalendarDisplayIndex.AM_PM",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 3.5"
+          ],
+          "raises": [],
+          "args": [
+            [
+              "nCalendarDisplayIndex",
+              "int",
+              "in"
+            ],
+            [
+              "nIdx",
+              "int",
+              "in"
+            ],
+            [
+              "nNameType",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getFirstDayOfWeek",
+          "returns": "int",
+          "desc": [
+            "returns the first day of a week, one of Weekdays values."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getLoadedCalendar",
+          "returns": "Calendar",
+          "desc": [
+            "Get the currently loaded Calendar."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getMinimumNumberOfDaysForFirstWeek",
+          "returns": "int",
+          "desc": [
+            "returns how many days of a week must reside in the first week of a year."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getMonths",
+          "returns": "typing.List[CalendarItem]",
+          "desc": [
+            "returns a sequence of CalendarItem describing the month names."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getNumberOfDaysInWeek",
+          "returns": "int",
+          "desc": [
+            "returns the number of days in a week, e.g. 7"
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getNumberOfMonthsInYear",
+          "returns": "int",
+          "desc": [
+            "returns the number of months in a year, e.g. 12"
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getUniqueID",
+          "returns": "str",
+          "desc": [
+            "Returns the ID string of the loaded calendar, for example, \\\"Gregorian\\\""
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getValue",
+          "returns": "int",
+          "desc": [
+            "Get the value of a field."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "nCalendarFieldIndex",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "isValid",
+          "returns": "bool",
+          "desc": [
+            "Verify if the date fields set by a combination of XCalendar.setValue() calls is valid.",
+            "",
+            "It has a side-effect because it will internally calculate the final value for the date fields"
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "loadCalendar",
+          "returns": "None",
+          "desc": [
+            "Load a specific calendar for the given locale."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "uniqueID",
+              "str",
+              "in"
+            ],
+            [
+              "rLocale",
+              "Locale",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "loadDefaultCalendar",
+          "returns": "None",
+          "desc": [
+            "Load the default calendar for the given locale."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "rLocale",
+              "Locale",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setDateTime",
+          "returns": "None",
+          "desc": [
+            "Set the UTC date/time as an offset to the start of the calendar at 1-Jan-1970 00:00.",
+            "",
+            "The integer part represents the number of days passed since start date. The fractional part represents fractions of a day, thus 0.5 means 12 hours."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "nTimeInDays",
+              "float",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setFirstDayOfWeek",
+          "returns": "None",
+          "desc": [
+            "Set the first day of a week, one of Weekdays values."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "nDay",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setMinimumNumberOfDaysForFirstWeek",
+          "returns": "None",
+          "desc": [
+            "Set how many days of a week must reside in the first week of a year."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "nDays",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setValue",
+          "returns": "None",
+          "desc": [
+            "Set the value of a field."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "nCalendarFieldIndex",
+              "int",
+              "in"
+            ],
+            [
+              "nValue",
+              "int",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

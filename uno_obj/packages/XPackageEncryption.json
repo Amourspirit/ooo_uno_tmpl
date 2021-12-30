@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:19:23+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:18+00:00",
   "name": "XPackageEncryption",
   "type": "interface",
   "namespace": "com.sun.star.packages",
@@ -16,7 +16,29 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..io.x_input_stream",
+        "XInputStream"
+      ],
+      [
+        "..io.x_output_stream",
+        "XOutputStream"
+      ],
+      [
+        "..beans.named_value",
+        "NamedValue"
+      ]
+    ],
+    "quote": [
+      "typing.List[NamedValue]",
+      "XOutputStream",
+      "XInputStream"
+    ],
+    "typings": [
+      "typing.List[NamedValue]"
+    ],
+    "requires_typing": true,
     "name": "XPackageEncryption",
     "imports": [],
     "namespace": "com.sun.star.packages",
@@ -26,11 +48,128 @@
     "desc": [
       "Allows to transparently plug-in crypto for PackageStreams.",
       "",
-      "**See Also**",
+      "**since**",
       "",
       "    LibreOffice 7.0"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1packages_1_1XPackageEncryption.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "checkDataIntegrity",
+          "returns": "bool",
+          "desc": [
+            "Check if decryption meta data is valid.",
+            "",
+            "Some implementations might for example check HMAC values here. Call this before trusting encrypted data."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "createEncryptionData",
+          "returns": "typing.List[NamedValue]",
+          "desc": [
+            "Create key-value list of encryption meta data.",
+            "",
+            "After generateEncryptionKey() succeeded in setting up crypto, use this method to create requisite meta data. Depending on underlying crypto, this can be a salt, init vector, or other algorithm-specific information that needs to be stored alongside an encrypted document"
+          ],
+          "raises": [],
+          "args": [
+            [
+              "rPassword",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "decrypt",
+          "returns": "bool",
+          "desc": [
+            "Decrypt document content.",
+            "",
+            "After crypto setup via readEncryptionInfo(), pipe package bits through encryption engine."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "rxInputStream",
+              "XInputStream",
+              "in"
+            ],
+            [
+              "rxOutputStream",
+              "XOutputStream",
+              "out"
+            ]
+          ]
+        },
+        {
+          "name": "encrypt",
+          "returns": "typing.List[NamedValue]",
+          "desc": [
+            "Encrypt given stream.",
+            "",
+            "After setting up crypto via setupEncryption(), use this method to encrypt content."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "rxInputStream",
+              "XInputStream",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "generateEncryptionKey",
+          "returns": "bool",
+          "desc": [
+            "Set or refresh encryption key."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "rPassword",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "readEncryptionInfo",
+          "returns": "bool",
+          "desc": [
+            "Read package crypto information."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "rStreams",
+              "typing.List[NamedValue]",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setupEncryption",
+          "returns": "bool",
+          "desc": [
+            "Set key-value list of encryption meta data.",
+            "",
+            "Use this method to setup requisite encryption meta data. Depending on the underlying crypto, this can be a salt, init vector, or other algorithm-specific information that needs to be stored alongside an encrypted document"
+          ],
+          "raises": [],
+          "args": [
+            [
+              "rMediaEncData",
+              "typing.List[NamedValue]",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:21:24+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:07+00:00",
   "name": "XPrintableListener",
   "type": "interface",
   "namespace": "com.sun.star.view",
@@ -16,7 +16,17 @@
         "XEventListener"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".printable_state_event",
+        "PrintableStateEvent"
+      ]
+    ],
+    "quote": [
+      "PrintableStateEvent"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XPrintableListener",
     "imports": [],
     "namespace": "com.sun.star.view",
@@ -26,13 +36,27 @@
     "desc": [
       "receives events about print job progress.",
       "",
-      "XPrintableListener can be registered to XPrintableBroadcaster. Then, the client object will receive events about print progress.",
-      "",
-      "**See Also**",
-      "",
-      "    XPrintableBroadcaster"
+      "XPrintableListener can be registered to XPrintableBroadcaster. Then, the client object will receive events about print progress."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1view_1_1XPrintableListener.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "stateChanged",
+          "returns": "None",
+          "desc": [
+            "informs the user of the new state in print progress."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "Event",
+              "PrintableStateEvent",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

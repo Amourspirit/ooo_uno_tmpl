@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:21:40+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:15+00:00",
   "name": "XVndSunStarScriptUrl",
   "type": "interface",
   "namespace": "com.sun.star.uri",
@@ -17,6 +17,9 @@
       ]
     ],
     "from_imports_typing": [],
+    "quote": [],
+    "typings": [],
+    "requires_typing": false,
     "name": "XVndSunStarScriptUrl",
     "imports": [],
     "namespace": "com.sun.star.uri",
@@ -26,15 +29,111 @@
     "desc": [
       "represents absolute \u201cvnd.sun.star.script\u201d URLs.",
       "",
-      "These URLs are of the form\n \u00a0\u00a0\u00a0vnd-sun-star-script-url = \\\"VND.SUN.STAR.SCRIPT:\\\" name [\\\"?\\\" parameter *(\\\"&\\\" parameter)]\n \u00a0\u00a0\u00a0name = 1*schar\n \u00a0\u00a0\u00a0parameter = key \\\"=\\\" value\n \u00a0\u00a0\u00a0key = 1*schar\n \u00a0\u00a0\u00a0value = *schar\n \u00a0\u00a0\u00a0schar = unreserved / escaped / \\\"$\\\" / \\\"+\\\" / \\\",\\\" / \\\":\\\" / \\\";\\\" / \\\"@\\\" / \\\"[\\\" / \\\"]\\\"\n See RFC\u00a03986 RFC\u00a02234 for details.",
+      "These URLs are of the form",
+      "vnd-sun-star-script-url = \\\"VND.SUN.STAR.SCRIPT:\\\" name [\\\"?\\\" parameter *(\\\"&\\\" parameter)]",
+      "name = 1*schar",
+      "parameter = key \\\"=\\\" value",
+      "key = 1*schar",
+      "value = *schar",
+      "schar = unreserved / escaped / \\\"$\\\" / \\\"+\\\" / \\\",\\\" / \\\":\\\" / \\\";\\\" / \\\"@\\\" / \\\"[\\\" / \\\"]\\\"",
+      "See RFC\u00a03986 RFC\u00a02234 for details.",
       "",
       "The names, keys, and values are arbitrary Unicode strings (non-empty Unicode strings in the case of names and keys), encoded as UTF-8 byte sequences. It is an error if any of them does not represent a valid UTF-8 byte sequence. Keys are compared for equality character-by-character, without considering case folding or normalization. There may be multiple parameters with equal keys.",
       "",
-      "**See Also**",
+      "**since**",
       "",
       "    OOo 2.0"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1uri_1_1XVndSunStarScriptUrl.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getName",
+          "returns": "str",
+          "desc": [
+            "returns the name part of this URL."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getParameter",
+          "returns": "str",
+          "desc": [
+            "returns the value of a parameter with a given key."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "key",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "hasParameter",
+          "returns": "bool",
+          "desc": [
+            "returns whether this URL has a parameter with a given key."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "key",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setName",
+          "returns": "None",
+          "desc": [
+            "sets the name part of this URL.",
+            "",
+            "**since**",
+            "",
+            "    OOo 3.0"
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "name",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setParameter",
+          "returns": "None",
+          "desc": [
+            "sets the value of a parameter with a given key.",
+            "",
+            "**since**",
+            "",
+            "    OOo 3.0"
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "key",
+              "str",
+              "in"
+            ],
+            [
+              "value",
+              "str",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

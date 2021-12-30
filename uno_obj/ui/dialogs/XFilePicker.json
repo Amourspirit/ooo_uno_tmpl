@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:19:56+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:32+00:00",
   "name": "XFilePicker",
   "type": "interface",
   "namespace": "com.sun.star.ui.dialogs",
@@ -17,6 +17,13 @@
       ]
     ],
     "from_imports_typing": [],
+    "quote": [
+      "typing.List[str]"
+    ],
+    "typings": [
+      "typing.List[str]"
+    ],
+    "requires_typing": true,
     "name": "XFilePicker",
     "imports": [],
     "namespace": "com.sun.star.ui.dialogs",
@@ -27,6 +34,94 @@
       "Specifies an interface for a FilePicker."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1ui_1_1dialogs_1_1XFilePicker.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getDisplayDirectory",
+          "returns": "str",
+          "desc": [
+            "Returns the directory that the file dialog is currently showing or was last showing before closing the dialog with Ok.",
+            "",
+            "If the user did cancel the dialog, the returned value is undefined."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getFiles",
+          "returns": "typing.List[str]",
+          "desc": [
+            "Returns a sequence of the selected files including path information in URL format, conforming to Rfc1738.",
+            "",
+            "If the user closed the dialog with cancel an empty sequence will be returned.",
+            "",
+            "If the dialog is in execution mode and a single file is selected the complete URL of this file will be returned.",
+            "",
+            "If the dialog is in execution mode and the selected file name is false or any other error occurs an empty sequence will be returned.",
+            "",
+            "The complete path of the file or directory currently selected in URL format. This always returns only the first entry of the sequence.",
+            "",
+            "Notes for the implementation of a FileSave dialog:If there exists a checkbox \\\"Automatic File Extension\\\" which is checked and a valid filter is currently selected the dialog may automatically add an extension to the selected file name."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "setDefaultName",
+          "returns": "None",
+          "desc": [
+            "Sets the default string that appears in the file name box of a FilePicker.",
+            "",
+            "Specifies the default file name, displayed when the FilePicker is shown. The implementation may accept any string, and does not have to check for a valid file name or if the file really exists."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aName",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setDisplayDirectory",
+          "returns": "None",
+          "desc": [
+            "Sets the directory that the file dialog initially displays."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "aDirectory",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setMultiSelectionMode",
+          "returns": "None",
+          "desc": [
+            "Enable/disable multi-selection mode.",
+            "",
+            "If the multi-selection mode is enabled, multiple files may be selected by the user else only one file selection at a time is possible",
+            "",
+            "A value of TRUE enables the multi-selection mode.",
+            "",
+            "A value of FALSE disables the multi-selection mode, this is the default."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "bMode",
+              "bool",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

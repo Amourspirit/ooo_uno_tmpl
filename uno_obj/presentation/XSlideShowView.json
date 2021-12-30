@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:20:18+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:20+00:00",
   "name": "XSlideShowView",
   "type": "interface",
   "namespace": "com.sun.star.presentation",
@@ -16,7 +16,52 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..awt.x_mouse_motion_listener",
+        "XMouseMotionListener"
+      ],
+      [
+        "..geometry.integer_size2_d",
+        "IntegerSize2D"
+      ],
+      [
+        "..geometry.affine_matrix2_d",
+        "AffineMatrix2D"
+      ],
+      [
+        "..util.x_modify_listener",
+        "XModifyListener"
+      ],
+      [
+        "..awt.x_paint_listener",
+        "XPaintListener"
+      ],
+      [
+        "..awt.rectangle",
+        "Rectangle"
+      ],
+      [
+        "..awt.x_mouse_listener",
+        "XMouseListener"
+      ],
+      [
+        "..rendering.x_sprite_canvas",
+        "XSpriteCanvas"
+      ]
+    ],
+    "quote": [
+      "Rectangle",
+      "XPaintListener",
+      "AffineMatrix2D",
+      "XMouseListener",
+      "IntegerSize2D",
+      "XMouseMotionListener",
+      "XSpriteCanvas",
+      "XModifyListener"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XSlideShowView",
     "imports": [],
     "namespace": "com.sun.star.presentation",
@@ -28,11 +73,212 @@
       "",
       "This interface provides the necessary methods to enable an XSlideShow interface to display a presentation. The slide show can be displayed simultaneously on multiple views",
       "",
-      "**See Also**",
+      "**since**",
       "",
       "    OOo 2.4"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1presentation_1_1XSlideShowView.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "addMouseListener",
+          "returns": "None",
+          "desc": [
+            "Add a mouse listener to the view.",
+            "",
+            "This method registers a listener with the view, which will get called every time the mouse is clicked on the view."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xListener",
+              "XMouseListener",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "addMouseMotionListener",
+          "returns": "None",
+          "desc": [
+            "Add a mouse motion listener to the view.",
+            "",
+            "This method registers a listener with the view, which will get called every time the mouse is moved on the view."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xListener",
+              "XMouseMotionListener",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "addPaintListener",
+          "returns": "None",
+          "desc": [
+            "Add a listener to get notified when this view needs a repaint.",
+            "",
+            "This method registers a listener with the view, which will get called every time the view needs an update of their screen representation."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xListener",
+              "XPaintListener",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "addTransformationChangedListener",
+          "returns": "None",
+          "desc": [
+            "Add a listener to get notified when the transformation matrix changes.",
+            "",
+            "This method registers a listener with the view, which will get called every time the transformation matrix changes."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xListener",
+              "XModifyListener",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "clear",
+          "returns": "None",
+          "desc": [
+            "This method clears the whole view area.",
+            "",
+            "The slide show uses this method to fully erase the view content. Since the slide show has no notion of view size, this is the only reliable way to wholly clear the view."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getCanvas",
+          "returns": "XSpriteCanvas",
+          "desc": [
+            "Get view canvas.",
+            "",
+            "This method gets the underlying XCanvas to display on this view."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getCanvasArea",
+          "returns": "Rectangle",
+          "desc": [
+            "Get rectangle defining area inside of canvas device which this slide show view uses."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getTransformation",
+          "returns": "AffineMatrix2D",
+          "desc": [
+            "Query the current transformation matrix for this view.",
+            "",
+            "This method returns the transformation matrix of the view. When notified via the transformation change listener, the show will be displayed using the new transformation."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getTranslationOffset",
+          "returns": "IntegerSize2D",
+          "desc": [
+            "Query the current translation offset used to fill the physical screen while keeping aspect ratio.",
+            "",
+            "This method returns the translation offset of the view of the view."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "removeMouseListener",
+          "returns": "None",
+          "desc": [
+            "Revoke a previously registered mouse listener."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xListener",
+              "XMouseListener",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "removeMouseMotionListener",
+          "returns": "None",
+          "desc": [
+            "Revoke a previously registered mouse move listener."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xListener",
+              "XMouseMotionListener",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "removePaintListener",
+          "returns": "None",
+          "desc": [
+            "Revoke a previously registered paint listener."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xListener",
+              "XPaintListener",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "removeTransformationChangedListener",
+          "returns": "None",
+          "desc": [
+            "Revoke a previously registered transformation matrix change listener."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xListener",
+              "XModifyListener",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setMouseCursor",
+          "returns": "None",
+          "desc": [
+            "Change the mouse cursor currently in effect.",
+            "",
+            "This method changes the mouse cursor currently in effect, for this view."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "nPointerShape",
+              "int",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

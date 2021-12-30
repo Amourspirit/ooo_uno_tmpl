@@ -1,0 +1,76 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.8",
+  "timestamp": "2021-12-28 10:14:22+00:00",
+  "name": "ParametersRequest",
+  "type": "exception",
+  "namespace": "com.sun.star.sdb",
+  "parser_args": {
+    "sort": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "from_imports": [
+      [
+        "..task.classified_interaction_request",
+        "ClassifiedInteractionRequest"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..container.x_index_access",
+        "XIndexAccess"
+      ],
+      [
+        "..sdbc.x_connection",
+        "XConnection"
+      ]
+    ],
+    "quote": [
+      "XIndexAccess",
+      "XConnection"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "name": "ParametersRequest",
+    "namespace": "com.sun.star.sdb",
+    "imports": [],
+    "extends": [
+      "com.sun.star.task.ClassifiedInteractionRequest"
+    ],
+    "desc": [
+      "an error specifying the lack of parameters values",
+      "",
+      "Usually thrown if someone tries to execute an SQL statement containing parameters which can't be filled by the executing instance."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/exceptioncom_1_1sun_1_1star_1_1sdb_1_1ParametersRequest.html",
+    "items": {
+      "properties": [
+        {
+          "name": "Connection",
+          "returns": "XConnection",
+          "desc": [
+            "specifies the connection on which the statement is to be executed.",
+            "",
+            "Somebody handling the request could, e.g., use the connection for determining the identifier quote string, etc."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Parameters",
+          "returns": "XIndexAccess",
+          "desc": [
+            "is the list of parameters requested.",
+            "",
+            "The objects returned by the com.sun.star.container.XIndexAccess have to be property sets describing the respective parameter. For this, the objects have to support the service com.sun.star.sdbcx.Column."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
+  }
+}

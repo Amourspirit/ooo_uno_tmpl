@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:20:37+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:33+00:00",
   "name": "XVBAMacroResolver",
   "type": "interface",
   "namespace": "com.sun.star.script.vba",
@@ -12,6 +12,9 @@
   "data": {
     "from_imports": [],
     "from_imports_typing": [],
+    "quote": [],
+    "typings": [],
+    "requires_typing": false,
     "name": "XVBAMacroResolver",
     "imports": [],
     "namespace": "com.sun.star.script.vba",
@@ -20,6 +23,43 @@
       "Converts VBA macro names to script URLs and vice versa."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1script_1_1vba_1_1XVBAMacroResolver.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "resolveScriptURLtoVBAMacro",
+          "returns": "str",
+          "desc": [
+            "Returns the VBA macro name for a macro with the passed script URL."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "aScriptURL",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "resolveVBAMacroToScriptURL",
+          "returns": "str",
+          "desc": [
+            "Returns the script URL representing the passed VBA macro name."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "aVBAMacroName",
+              "str",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

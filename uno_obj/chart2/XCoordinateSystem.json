@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:17:22+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:34+00:00",
   "name": "XCoordinateSystem",
   "type": "interface",
   "namespace": "com.sun.star.chart2",
@@ -10,14 +10,135 @@
   },
   "writer_args": {},
   "data": {
-    "from_imports": [],
-    "from_imports_typing": [],
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".x_axis",
+        "XAxis"
+      ]
+    ],
+    "quote": [
+      "XAxis"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XCoordinateSystem",
     "imports": [],
     "namespace": "com.sun.star.chart2",
-    "extends": [],
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
     "desc": [],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1chart2_1_1XCoordinateSystem.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getAxisByDimension",
+          "returns": "XAxis",
+          "desc": [
+            "The dimension says whether it is a x, y or z axis.",
+            "",
+            "The index indicates whether it is a primary or a secondary axis or maybe more in future. Use nIndex == 0 for a primary axis. An empty Reference will be returned if the given nDimension and nIndex are in the valid range but no axis is set for those values. An IndexOutOfBoundsException will be thrown if nDimension is lower than 0 or greater than the value returned by getDimension() and/or if nIndex is lower 0 or greater than the value returned by getMaxAxisIndexByDimension(nDimension)."
+          ],
+          "raises": [
+            "com.sun.star.lang.IndexOutOfBoundsException"
+          ],
+          "args": [
+            [
+              "nDimension",
+              "int",
+              "in"
+            ],
+            [
+              "nIndex",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getCoordinateSystemType",
+          "returns": "str",
+          "desc": [
+            "identifies the type of coordinate system (e.g.",
+            "",
+            "Cartesian, polar ...)"
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getDimension",
+          "returns": "int",
+          "desc": [
+            "the dimension of the coordinate-system."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getMaximumAxisIndexByDimension",
+          "returns": "int",
+          "desc": [
+            "In one dimension there could be several axes to enable main and secondary axis and maybe more in future.",
+            "",
+            "This method returns the maximum index at which an axis exists for the given dimension. It is allowed that some indexes in between do not have an axis."
+          ],
+          "raises": [
+            "com.sun.star.lang.IndexOutOfBoundsException"
+          ],
+          "args": [
+            [
+              "nDimension",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getViewServiceName",
+          "returns": "str",
+          "desc": [
+            "return a service name from which the view component for this coordinate system can be created"
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "setAxisByDimension",
+          "returns": "None",
+          "desc": [
+            "The dimension says whether it is a x, y or z axis.",
+            "",
+            "The index says whether it is a primary or a secondary axis. Use nIndex == 0 for a primary axis."
+          ],
+          "raises": [
+            "com.sun.star.lang.IndexOutOfBoundsException"
+          ],
+          "args": [
+            [
+              "nDimension",
+              "int",
+              "in"
+            ],
+            [
+              "xAxis",
+              "XAxis",
+              "in"
+            ],
+            [
+              "nIndex",
+              "int",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

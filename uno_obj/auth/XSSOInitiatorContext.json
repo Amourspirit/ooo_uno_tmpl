@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:17:19+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:22+00:00",
   "name": "XSSOInitiatorContext",
   "type": "interface",
   "namespace": "com.sun.star.auth",
@@ -17,6 +17,13 @@
       ]
     ],
     "from_imports_typing": [],
+    "quote": [
+      "typing.List[int]"
+    ],
+    "typings": [
+      "typing.List[int]"
+    ],
+    "requires_typing": true,
     "name": "XSSOInitiatorContext",
     "imports": [],
     "namespace": "com.sun.star.auth",
@@ -28,11 +35,36 @@
       "",
       "This context may be used to initialize authentication tokens to send to an acceptor and to authenticate any token sent back in response.",
       "",
-      "**See Also**",
+      "**since**",
       "",
       "    OOo 1.1.2"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1auth_1_1XSSOInitiatorContext.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "init",
+          "returns": "typing.List[int]",
+          "desc": [
+            "initializes an SSO Token to send to the acceptor side and authenticates an SSO Token returned by the acceptor if the context supports mutual authentication.",
+            "",
+            "init should be called only once for contexts which don't support mutual authentication and at most twice for contexts which do support mutual authentication. Additional calls produce undefined results."
+          ],
+          "raises": [
+            "InvalidArgumentException",
+            "InvalidCredentialException",
+            "InvalidContextException",
+            "AuthenticationFailedException"
+          ],
+          "args": [
+            [
+              "Token",
+              "typing.List[int]",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

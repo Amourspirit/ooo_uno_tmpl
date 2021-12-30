@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:21:11+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:17+00:00",
   "name": "XNamedRange",
   "type": "interface",
   "namespace": "com.sun.star.sheet",
@@ -16,7 +16,17 @@
         "XNamed"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..table.cell_address",
+        "CellAddress"
+      ]
+    ],
+    "quote": [
+      "CellAddress"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XNamedRange",
     "imports": [],
     "namespace": "com.sun.star.sheet",
@@ -24,13 +34,90 @@
       "com.sun.star.container.XNamed"
     ],
     "desc": [
-      "provides access to the settings of a named range in a spreadsheet document.",
-      "",
-      "**See Also**",
-      "",
-      "    com.sun.star.sheet.NamedRange"
+      "provides access to the settings of a named range in a spreadsheet document."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1sheet_1_1XNamedRange.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getContent",
+          "returns": "str",
+          "desc": [
+            "returns the content of the named range.",
+            "",
+            "The content can be a reference to a cell or cell range or any formula expression."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getReferencePosition",
+          "returns": "CellAddress",
+          "desc": [
+            "returns the position in the document which is used as a base for relative references in the content."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getType",
+          "returns": "int",
+          "desc": [
+            "returns the type of the named range.",
+            "",
+            "This is a combination of flags as defined in NamedRangeFlag."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "setContent",
+          "returns": "None",
+          "desc": [
+            "sets the content of the named range.",
+            "",
+            "The content can be a reference to a cell or cell range or any formula expression."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aContent",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setReferencePosition",
+          "returns": "None",
+          "desc": [
+            "sets the position in the document which is used as a base for relative references in the content."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aReferencePosition",
+              "CellAddress",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setType",
+          "returns": "None",
+          "desc": [
+            "sets the type of the named range."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "nType",
+              "int",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

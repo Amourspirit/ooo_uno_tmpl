@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:21:44+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:37+00:00",
   "name": "XDispatchProvider",
   "type": "interface",
   "namespace": "com.sun.star.frame",
@@ -16,7 +16,35 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_dispatch",
+        "XDispatch"
+      ],
+      [
+        ".x_dispatch",
+        "XDispatch"
+      ],
+      [
+        "..util.url",
+        "URL"
+      ],
+      [
+        ".dispatch_descriptor",
+        "DispatchDescriptor"
+      ]
+    ],
+    "quote": [
+      "typing.List[DispatchDescriptor]",
+      "typing.List[XDispatch]",
+      "XDispatch",
+      "URL"
+    ],
+    "typings": [
+      "typing.List[DispatchDescriptor]",
+      "typing.List[XDispatch]"
+    ],
+    "requires_typing": true,
     "name": "XDispatchProvider",
     "imports": [],
     "namespace": "com.sun.star.frame",
@@ -24,13 +52,54 @@
       "com.sun.star.uno.XInterface"
     ],
     "desc": [
-      "provides XDispatch interfaces for certain functions which are useful at the UI.",
-      "",
-      "**See Also**",
-      "",
-      "    XDispatch"
+      "provides XDispatch interfaces for certain functions which are useful at the UI."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1frame_1_1XDispatchProvider.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "queryDispatch",
+          "returns": "XDispatch",
+          "desc": [
+            "searches for an XDispatch for the specified URL within the specified target frame."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "URL",
+              "URL",
+              "in"
+            ],
+            [
+              "TargetFrameName",
+              "str",
+              "in"
+            ],
+            [
+              "SearchFlags",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "queryDispatches",
+          "returns": "typing.List[XDispatch]",
+          "desc": [
+            "actually this method is redundant to XDispatchProvider.queryDispatch() to avoid multiple remote calls.",
+            "",
+            "It's not allowed to pack it - because every request must match to its real result. Means: don't delete NULL entries inside this list."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "Requests",
+              "typing.List[DispatchDescriptor]",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

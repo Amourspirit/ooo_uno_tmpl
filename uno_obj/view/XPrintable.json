@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:21:24+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:07+00:00",
   "name": "XPrintable",
   "type": "interface",
   "namespace": "com.sun.star.view",
@@ -16,7 +16,19 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..beans.property_value",
+        "PropertyValue"
+      ]
+    ],
+    "quote": [
+      "typing.List[PropertyValue]"
+    ],
+    "typings": [
+      "typing.List[PropertyValue]"
+    ],
+    "requires_typing": true,
     "name": "XPrintable",
     "imports": [],
     "namespace": "com.sun.star.view",
@@ -24,13 +36,57 @@
       "com.sun.star.uno.XInterface"
     ],
     "desc": [
-      "offers printing functionality.",
-      "",
-      "**See Also**",
-      "",
-      "    Drawings - Printing Drawing Documents - Printer and Print Job Settings Text - Printing Text Documents - Printer and Print Job Settings OfficeDev - Storing Documents - Printing Documents Spreadsheets - Printing Spreadsheet Documents - Printer and Print Job Settings"
+      "offers printing functionality."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1view_1_1XPrintable.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getPrinter",
+          "returns": "typing.List[PropertyValue]",
+          "desc": [
+            "The attributes of the current printer are used for formatting."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "print",
+          "returns": "None",
+          "desc": [
+            "prints the object."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "xOptions",
+              "typing.List[PropertyValue]",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setPrinter",
+          "returns": "None",
+          "desc": [
+            "assigns a new printer to the object.",
+            "",
+            "Setting a new printer will cause reformatting."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "aPrinter",
+              "typing.List[PropertyValue]",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

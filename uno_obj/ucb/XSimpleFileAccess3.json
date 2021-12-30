@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:19:04+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:36+00:00",
   "name": "XSimpleFileAccess3",
   "type": "interface",
   "namespace": "com.sun.star.ucb",
@@ -17,6 +17,9 @@
       ]
     ],
     "from_imports_typing": [],
+    "quote": [],
+    "typings": [],
+    "requires_typing": false,
     "name": "XSimpleFileAccess3",
     "imports": [],
     "namespace": "com.sun.star.ucb",
@@ -26,11 +29,55 @@
     "desc": [
       "This is an extension to the interface XSimpleFileAccess2.",
       "",
-      "**See Also**",
+      "**since**",
       "",
       "    OOo 1.1.2"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1ucb_1_1XSimpleFileAccess3.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "isHidden",
+          "returns": "bool",
+          "desc": [
+            "Checks if a file is \\\"hidden\\\"."
+          ],
+          "raises": [
+            "com.sun.star.ucb.CommandAbortedException",
+            "com.sun.star.uno.Exception"
+          ],
+          "args": [
+            [
+              "FileURL",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setHidden",
+          "returns": "None",
+          "desc": [
+            "Sets the \\\"hidden\\\" of a file according to the boolean parameter, if the actual process has the right to do so and the used operation system supports this operation."
+          ],
+          "raises": [
+            "com.sun.star.ucb.CommandAbortedException",
+            "com.sun.star.uno.Exception"
+          ],
+          "args": [
+            [
+              "FileURL",
+              "str",
+              "in"
+            ],
+            [
+              "bHidden",
+              "bool",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

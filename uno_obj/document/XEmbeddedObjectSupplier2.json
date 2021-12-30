@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:22:01+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:10+00:00",
   "name": "XEmbeddedObjectSupplier2",
   "type": "interface",
   "namespace": "com.sun.star.document",
@@ -17,9 +17,21 @@
       ]
     ],
     "from_imports_typing": [
-      "......hyper",
-      "hyper"
+      [
+        "..embed.x_embedded_object",
+        "XEmbeddedObject"
+      ],
+      [
+        "..graphic.x_graphic",
+        "XGraphic"
+      ]
     ],
+    "quote": [
+      "XGraphic",
+      "XEmbeddedObject"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XEmbeddedObjectSupplier2",
     "imports": [],
     "namespace": "com.sun.star.document",
@@ -31,15 +43,37 @@
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1document_1_1XEmbeddedObjectSupplier2.html",
     "items": {
+      "methods": [
+        {
+          "name": "getExtendedControlOverEmbeddedObject",
+          "returns": "XEmbeddedObject",
+          "desc": [
+            "returns the object which is embedded into this object.",
+            "",
+            "This method does not return the model that is controlled by the embedded object, but the embedded object itself."
+          ],
+          "raises": [],
+          "args": []
+        }
+      ],
       "properties": [
         {
           "name": "Aspect",
-          "returns": "'hyper'",
+          "returns": "object",
           "desc": [
             "allows to control the aspect of the object."
           ],
-          "raises_get": [],
-          "raises_set": []
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ReplacementGraphic",
+          "returns": "XGraphic",
+          "desc": [
+            "allows to get the replacement image of the object."
+          ],
+          "raises_get": "",
+          "raises_set": ""
         }
       ]
     }

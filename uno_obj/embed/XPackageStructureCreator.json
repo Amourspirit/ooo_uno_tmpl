@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:18:51+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:05+00:00",
   "name": "XPackageStructureCreator",
   "type": "interface",
   "namespace": "com.sun.star.embed",
@@ -16,7 +16,17 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..io.x_output_stream",
+        "XOutputStream"
+      ]
+    ],
+    "quote": [
+      "XOutputStream"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XPackageStructureCreator",
     "imports": [],
     "namespace": "com.sun.star.embed",
@@ -27,6 +37,31 @@
       "allows to convert filesystem folder tree into a package."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1embed_1_1XPackageStructureCreator.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "convertToPackage",
+          "returns": "None",
+          "desc": [
+            "converts filesystem folder tree into a package."
+          ],
+          "raises": [
+            "com.sun.star.io.IOException"
+          ],
+          "args": [
+            [
+              "sFolderURL",
+              "str",
+              "in"
+            ],
+            [
+              "xTargetStream",
+              "XOutputStream",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

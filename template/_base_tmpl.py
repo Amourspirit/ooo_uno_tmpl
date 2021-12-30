@@ -15,6 +15,16 @@ if _project_root:
         sys.path.insert(0, _project_root)
 
 py_name_pattern = re.compile('[\W_]+')
+
+RESERVER_WORDS = {
+    'and', 'as', 'assert', 'break', 'class',
+    'continue', 'def', 'del', 'elif', 'else',
+    'except', 'False', 'finally', 'for',
+    'from', 'global', 'if', 'import', 'in',
+    'is', 'lambda', 'None', 'nonlocal',
+    'not', 'or', 'pass', 'raise', 'return',
+    'True', 'try', 'while', 'with', 'yield'
+    }
 class BaseTpml(Template):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -61,7 +71,18 @@ class BaseTpml(Template):
         self._log_to_logger(logging.ERROR, msg, *args, **kwargs)
     # endregion Logger
 
-    """Base class for all templtes"""
+    def camel_to_snake(self, input: str) -> str:
+        """
+        Converts Camel case to snake clase
+
+        Args:
+            name (str): Camel name
+
+        Returns:
+            str: snake case
+        """
+        _input = re.sub('(.)([A-Z][a-z]+)', r'\1_\2', input)
+        return re.sub('([a-z0-9])([A-Z])', r'\1_\2', _input).lower()
     
     def get_clean_name(self, input: str) -> str:
         """
@@ -219,3 +240,18 @@ class BaseTpml(Template):
         except Exception as e:
             # print(e)
             raise e
+
+    def get_safe_word(self, in_str: object) -> object:
+        if not isinstance(in_str, str):
+            return in_str
+        if in_str in RESERVER_WORDS:
+            return in_str + '_'
+        return in_str
+
+    def get_q_type(self, in_type: object) -> object:
+        """If in_type is in quote then it is quoted.  Otherwise in_type is returned"""
+        if not isinstance(in_type, str):
+            return in_type
+        if in_type in self.quote:
+            return f"'{self.get_safe_word(in_type)}'"
+        return self.get_safe_word(in_type)

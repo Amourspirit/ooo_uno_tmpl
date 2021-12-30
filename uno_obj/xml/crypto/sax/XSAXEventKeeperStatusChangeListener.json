@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:18:37+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:33+00:00",
   "name": "XSAXEventKeeperStatusChangeListener",
   "type": "interface",
   "namespace": "com.sun.star.xml.crypto.sax",
@@ -17,6 +17,9 @@
       ]
     ],
     "from_imports_typing": [],
+    "quote": [],
+    "typings": [],
+    "requires_typing": false,
     "name": "XSAXEventKeeperStatusChangeListener",
     "imports": [],
     "namespace": "com.sun.star.xml.crypto.sax",
@@ -29,6 +32,54 @@
       "This interface is used to receive the SAXEventKeeper status change notification."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1xml_1_1crypto_1_1sax_1_1XSAXEventKeeperStatusChangeListener.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "blockingStatusChanged",
+          "returns": "None",
+          "desc": [
+            "Notifies the SAXEventKeeper is entering/leaving blocking state."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "isBlocking",
+              "bool",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "bufferStatusChanged",
+          "returns": "None",
+          "desc": [
+            "Notifies the SAXEventKeeper's buffer is empty/not empty."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "isBufferEmpty",
+              "bool",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "collectionStatusChanged",
+          "returns": "None",
+          "desc": [
+            "Notifies the SAXEventKeeper is entering/leaving collecting state."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "isInsideCollectedElement",
+              "bool",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

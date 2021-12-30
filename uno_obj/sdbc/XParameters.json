@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:19:43+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:29+00:00",
   "name": "XParameters",
   "type": "interface",
   "namespace": "com.sun.star.sdbc",
@@ -12,29 +12,641 @@
   "data": {
     "from_imports": [
       [
-        "......x_input_stream",
-        "XInputStream"
+        "..uno.x_interface",
+        "XInterface"
       ]
     ],
-    "from_imports_typing": [],
-    "name": "XParameters",
-    "imports": [
-      "XInputStream"
+    "from_imports_typing": [
+      [
+        ".x_ref",
+        "XRef"
+      ],
+      [
+        "..io.x_input_stream",
+        "XInputStream"
+      ],
+      [
+        "..util.date",
+        "Date"
+      ],
+      [
+        ".x_clob",
+        "XClob"
+      ],
+      [
+        "..util.time",
+        "Time"
+      ],
+      [
+        ".x_blob",
+        "XBlob"
+      ],
+      [
+        "..util.date_time",
+        "DateTime"
+      ],
+      [
+        ".x_array",
+        "XArray"
+      ]
     ],
+    "quote": [
+      "XRef",
+      "XInputStream",
+      "XArray",
+      "DateTime",
+      "Time",
+      "XBlob",
+      "Date",
+      "XClob",
+      "typing.List[int]"
+    ],
+    "typings": [
+      "typing.List[int]"
+    ],
+    "requires_typing": true,
+    "name": "XParameters",
+    "imports": [],
     "namespace": "com.sun.star.sdbc",
-    "extends": [],
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
     "desc": [
       "is used for parameter setting, commonly implemented in conjunction with PreparedStatements.",
       "",
       "Note: The setXXX methods for setting IN parameter values must specify types that are compatible with the defined SQL type of the input parameter. For instance, if the IN parameter has SQL type Integer, then the method com.sun.star.sdbc.XParameters.setInt() should be used.",
       "",
-      "If arbitrary parameter type conversions are required, the method com.sun.star.sdbc.XParameters.setObject() should be used with a target SQL type. \n\n Example of setting a parameter; con is an active connection.",
+      "If arbitrary parameter type conversions are required, the method com.sun.star.sdbc.XParameters.setObject() should be used with a target SQL type.",
       "",
-      "**See Also**",
-      "",
-      "    com.sun.star.sdbc.XPreparedStatement"
+      "Example of setting a parameter; con is an active connection."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1sdbc_1_1XParameters.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "clearParameters",
+          "returns": "None",
+          "desc": [
+            "clears the current parameter values immediately.",
+            "",
+            "In general, parameter values remain in force for repeated use of a Statement. Setting a parameter value automatically clears its previous value. However, in some cases it is useful to immediately release the resources used by the current parameter values; this can be done by calling clearParameters."
+          ],
+          "raises": [
+            "SQLException"
+          ],
+          "args": []
+        },
+        {
+          "name": "setArray",
+          "returns": "None",
+          "desc": [
+            "sets an Array parameter."
+          ],
+          "raises": [
+            "SQLException"
+          ],
+          "args": [
+            [
+              "parameterIndex",
+              "int",
+              "in"
+            ],
+            [
+              "x",
+              "XArray",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setBinaryStream",
+          "returns": "None",
+          "desc": [
+            "sets the designated parameter to the given input stream, which will have the specified number of bytes.",
+            "",
+            "When a very large binary value is input to a LONGVARBINARY or LONGVARCHAR parameter, it may be more practical to send it via an com.sun.star.io.XInputStream . SDBC will read the data from the stream as needed, until it reaches end-of-file."
+          ],
+          "raises": [
+            "SQLException"
+          ],
+          "args": [
+            [
+              "parameterIndex",
+              "int",
+              "in"
+            ],
+            [
+              "x",
+              "XInputStream",
+              "in"
+            ],
+            [
+              "length",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setBlob",
+          "returns": "None",
+          "desc": [
+            "sets a BLOB parameter."
+          ],
+          "raises": [
+            "SQLException"
+          ],
+          "args": [
+            [
+              "parameterIndex",
+              "int",
+              "in"
+            ],
+            [
+              "x",
+              "XBlob",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setBoolean",
+          "returns": "None",
+          "desc": [
+            "sets the designated parameter to a boolean value.",
+            "",
+            "The driver converts this to a SQL BIT value when it sends it to the database."
+          ],
+          "raises": [
+            "SQLException"
+          ],
+          "args": [
+            [
+              "parameterIndex",
+              "int",
+              "in"
+            ],
+            [
+              "x",
+              "bool",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setByte",
+          "returns": "None",
+          "desc": [
+            "sets the designated parameter to a byte value.",
+            "",
+            "The driver converts this to a SQL TINYINT value when it sends it to the database."
+          ],
+          "raises": [
+            "SQLException"
+          ],
+          "args": [
+            [
+              "parameterIndex",
+              "int",
+              "in"
+            ],
+            [
+              "x",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setBytes",
+          "returns": "None",
+          "desc": [
+            "sets the designated parameter to a sequence of bytes.",
+            "",
+            "The driver converts this to a SQL VARBINARY or LONGVARBINARY (depending on the argument's size relative to the driver's limits on VARBINARYs) when it sends it to the database."
+          ],
+          "raises": [
+            "SQLException"
+          ],
+          "args": [
+            [
+              "parameterIndex",
+              "int",
+              "in"
+            ],
+            [
+              "x",
+              "typing.List[int]",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setCharacterStream",
+          "returns": "None",
+          "desc": [
+            "sets the designated parameter to the given input stream, which will have the specified number of bytes.",
+            "",
+            "When a very large binary value is input to a LONGVARCHAR parameter, it may be more practical to send it via a com.sun.star.io.XInputStream . SDBC will read the data from the stream as needed, until it reaches end-of-file."
+          ],
+          "raises": [
+            "SQLException"
+          ],
+          "args": [
+            [
+              "parameterIndex",
+              "int",
+              "in"
+            ],
+            [
+              "x",
+              "XInputStream",
+              "in"
+            ],
+            [
+              "length",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setClob",
+          "returns": "None",
+          "desc": [
+            "sets a CLOB parameter."
+          ],
+          "raises": [
+            "SQLException"
+          ],
+          "args": [
+            [
+              "parameterIndex",
+              "int",
+              "in"
+            ],
+            [
+              "x",
+              "XClob",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setDate",
+          "returns": "None",
+          "desc": [
+            "sets the designated parameter to a date value.",
+            "",
+            "The driver converts this to a SQL DATE value when it sends it to the database."
+          ],
+          "raises": [
+            "SQLException"
+          ],
+          "args": [
+            [
+              "parameterIndex",
+              "int",
+              "in"
+            ],
+            [
+              "x",
+              "Date",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setDouble",
+          "returns": "None",
+          "desc": [
+            "sets the designated parameter to a double value.",
+            "",
+            "The driver converts this to a SQL DOUBLE value when it sends it to the database."
+          ],
+          "raises": [
+            "SQLException"
+          ],
+          "args": [
+            [
+              "parameterIndex",
+              "int",
+              "in"
+            ],
+            [
+              "x",
+              "float",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setFloat",
+          "returns": "None",
+          "desc": [
+            "sets the designated parameter to a float value.",
+            "",
+            "The driver converts this to a SQL FLOAT value when it sends it to the database."
+          ],
+          "raises": [
+            "SQLException"
+          ],
+          "args": [
+            [
+              "parameterIndex",
+              "int",
+              "in"
+            ],
+            [
+              "x",
+              "float",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setInt",
+          "returns": "None",
+          "desc": [
+            "sets the designated parameter to a long value.",
+            "",
+            "The driver converts this to a SQL INTEGER value when it sends it to the database."
+          ],
+          "raises": [
+            "SQLException"
+          ],
+          "args": [
+            [
+              "parameterIndex",
+              "int",
+              "in"
+            ],
+            [
+              "x",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setLong",
+          "returns": "None",
+          "desc": [
+            "sets the designated parameter to a hyper value.",
+            "",
+            "The driver converts this to a SQL BIGINT value when it sends it to the database."
+          ],
+          "raises": [
+            "SQLException"
+          ],
+          "args": [
+            [
+              "parameterIndex",
+              "int",
+              "in"
+            ],
+            [
+              "x",
+              "object",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setNull",
+          "returns": "None",
+          "desc": [
+            "sets the designated parameter to SQL NULL."
+          ],
+          "raises": [
+            "SQLException"
+          ],
+          "args": [
+            [
+              "parameterIndex",
+              "int",
+              "in"
+            ],
+            [
+              "sqlType",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setObject",
+          "returns": "None",
+          "desc": [
+            "sets the value of a parameter using an any.",
+            "",
+            "The given object will be converted to the targetSqlType before being sent to the database. If the object has a custom mapping (is of a class implementing SQLData), the SDBC driver should call its method writeSQL to write it to the SQL data stream. If, on the other hand, the object is of a service implementing Ref, Blob, Clob, Struct, or Array, the driver should pass it to the database as a value of the corresponding SQL type.",
+            "",
+            "Note that this method may be used to pass database-specific abstract data types."
+          ],
+          "raises": [
+            "SQLException"
+          ],
+          "args": [
+            [
+              "parameterIndex",
+              "int",
+              "in"
+            ],
+            [
+              "x",
+              "object",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setObjectNull",
+          "returns": "None",
+          "desc": [
+            "sets the designated parameter to SQL NULL.",
+            "",
+            "This version of setNull should be used for user-named types and REF type parameters. Examples of user-named types include: STRUCT, DISTINCT, OBJECT, and named array types.",
+            "",
+            "Note: To be portable, applications must give the SQL type code and the fully-qualified SQL type name when specifying a NULL user-defined or REF parameter. In the case of a user-named type the name is the type name of the parameter itself. For a REF parameter the name is the type name of the referenced type. If a SDBC driver does not need the type code or type name information, it may ignore it.",
+            "Although it is intended for user-named and Ref parameters, this method may be used to set a null parameter of any JDBC type. If the parameter does not have a user-named or REF type, the given typeName is ignored."
+          ],
+          "raises": [
+            "SQLException"
+          ],
+          "args": [
+            [
+              "parameterIndex",
+              "int",
+              "in"
+            ],
+            [
+              "sqlType",
+              "int",
+              "in"
+            ],
+            [
+              "typeName",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setObjectWithInfo",
+          "returns": "None",
+          "desc": [
+            "set a value from the Datatype ANY for a parameter.",
+            "",
+            "The given object will be converted to the targetSqlType before being sent to the database. If the object has a custom mapping (is of a class implementing SQLData), the SDBC driver should call its method writeSQL to write it to the SQL data stream. If, on the other hand, the object is of a service implementing Ref, Blob, Clob, Struct, or Array, the driver should pass it to the database as a value of the corresponding SQL type.",
+            "",
+            "Note that this method may be used to pass database-specific abstract data types."
+          ],
+          "raises": [
+            "SQLException"
+          ],
+          "args": [
+            [
+              "parameterIndex",
+              "int",
+              "in"
+            ],
+            [
+              "x",
+              "object",
+              "in"
+            ],
+            [
+              "targetSqlType",
+              "int",
+              "in"
+            ],
+            [
+              "scale",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setRef",
+          "returns": "None",
+          "desc": [
+            "sets a REF(&lt;structured-type&gt;) parameter."
+          ],
+          "raises": [
+            "SQLException"
+          ],
+          "args": [
+            [
+              "parameterIndex",
+              "int",
+              "in"
+            ],
+            [
+              "x",
+              "XRef",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setShort",
+          "returns": "None",
+          "desc": [
+            "sets the designated parameter to a short value.",
+            "",
+            "The driver converts this to a SQL SMALLINT value when it sends it to the database."
+          ],
+          "raises": [
+            "SQLException"
+          ],
+          "args": [
+            [
+              "parameterIndex",
+              "int",
+              "in"
+            ],
+            [
+              "x",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setString",
+          "returns": "None",
+          "desc": [
+            "sets the designated parameter to a string value.",
+            "",
+            "The driver converts this to a SQL VARCHAR or LONGVARCHAR value (depending on the argument's size relative to the driver's limits on VARCHARs) when it sends it to the database."
+          ],
+          "raises": [
+            "SQLException"
+          ],
+          "args": [
+            [
+              "parameterIndex",
+              "int",
+              "in"
+            ],
+            [
+              "x",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setTime",
+          "returns": "None",
+          "desc": [
+            "sets the designated parameter to a time value.",
+            "",
+            "The driver converts this to a SQL TIME value when it sends it to the database."
+          ],
+          "raises": [
+            "SQLException"
+          ],
+          "args": [
+            [
+              "parameterIndex",
+              "int",
+              "in"
+            ],
+            [
+              "x",
+              "Time",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setTimestamp",
+          "returns": "None",
+          "desc": [
+            "sets the designated parameter to a datetime value.",
+            "",
+            "The driver converts this to a SQL TIMESTAMP value when it sends it to the database."
+          ],
+          "raises": [
+            "SQLException"
+          ],
+          "args": [
+            [
+              "parameterIndex",
+              "int",
+              "in"
+            ],
+            [
+              "x",
+              "DateTime",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

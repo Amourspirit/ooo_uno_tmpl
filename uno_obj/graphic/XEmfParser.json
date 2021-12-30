@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:22:40+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:07+00:00",
   "name": "XEmfParser",
   "type": "interface",
   "namespace": "com.sun.star.graphic",
@@ -16,7 +16,29 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..beans.property_values",
+        "PropertyValues"
+      ],
+      [
+        ".x_primitive2_d",
+        "XPrimitive2D"
+      ],
+      [
+        "..geometry.real_point2_d",
+        "RealPoint2D"
+      ]
+    ],
+    "quote": [
+      "PropertyValues",
+      "typing.List[XPrimitive2D]",
+      "RealPoint2D"
+    ],
+    "typings": [
+      "typing.List[XPrimitive2D]"
+    ],
+    "requires_typing": true,
     "name": "XEmfParser",
     "imports": [],
     "namespace": "com.sun.star.graphic",
@@ -28,11 +50,58 @@
       "",
       "This interface allows to parse a WMF/EMF/EMF+ stream in form of a sequence of bytes to be parsed into a sequence of XPrimitive2Ds",
       "",
-      "**See Also**",
+      "**since**",
       "",
       "    LibreOffice 6.0"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1graphic_1_1XEmfParser.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getDecomposition",
+          "returns": "typing.List[XPrimitive2D]",
+          "desc": [
+            "Retrieve decomposed list of simpler primitives."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xEmfStream",
+              "object",
+              "in"
+            ],
+            [
+              "aAbsolutePath",
+              "str",
+              "in"
+            ],
+            [
+              "Properties",
+              "PropertyValues",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setSizeHint",
+          "returns": "None",
+          "desc": [
+            "Sets a size hint on this object.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 7.1"
+          ],
+          "raises": [],
+          "args": [
+            [
+              "Size",
+              "RealPoint2D",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:19:51+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:21+00:00",
   "name": "XUIConfigurationListener",
   "type": "interface",
   "namespace": "com.sun.star.ui",
@@ -16,7 +16,17 @@
         "XEventListener"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".configuration_event",
+        "ConfigurationEvent"
+      ]
+    ],
+    "quote": [
+      "ConfigurationEvent"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XUIConfigurationListener",
     "imports": [],
     "namespace": "com.sun.star.ui",
@@ -26,11 +36,59 @@
     "desc": [
       "supplies information about changes of a user interface configuration manager.",
       "",
-      "**See Also**",
+      "**since**",
       "",
       "    OOo 2.0"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1ui_1_1XUIConfigurationListener.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "elementInserted",
+          "returns": "None",
+          "desc": [
+            "is invoked when a configuration has inserted an user interface element."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "Event",
+              "ConfigurationEvent",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "elementRemoved",
+          "returns": "None",
+          "desc": [
+            "is invoked when a configuration has removed an user interface element."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "Event",
+              "ConfigurationEvent",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "elementReplaced",
+          "returns": "None",
+          "desc": [
+            "is invoked when a configuration has replaced an user interface element."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "Event",
+              "ConfigurationEvent",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

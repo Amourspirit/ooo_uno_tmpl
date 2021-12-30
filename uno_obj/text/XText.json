@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:22:32+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:14:59+00:00",
   "name": "XText",
   "type": "interface",
   "namespace": "com.sun.star.text",
@@ -16,7 +16,22 @@
         "XSimpleText"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_text_range",
+        "XTextRange"
+      ],
+      [
+        ".x_text_content",
+        "XTextContent"
+      ]
+    ],
+    "quote": [
+      "XTextContent",
+      "XTextRange"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XText",
     "imports": [],
     "namespace": "com.sun.star.text",
@@ -24,13 +39,58 @@
       "com.sun.star.text.XSimpleText"
     ],
     "desc": [
-      "extends a XSimpleText by the capability of inserting XTextContents.",
-      "",
-      "**See Also**",
-      "",
-      "    Text - Editing Text - Text Contents Other Than Strings Text - Editing Text"
+      "extends a XSimpleText by the capability of inserting XTextContents."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1text_1_1XText.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "insertTextContent",
+          "returns": "None",
+          "desc": [
+            "inserts a content, such as a text table, text frame or text field.",
+            "",
+            "Which contents are accepted is implementation-specific. Some implementations may only accept contents which were created by the factory that supplied the same text or the document which contains the text."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "xRange",
+              "XTextRange",
+              "in"
+            ],
+            [
+              "xContent",
+              "XTextContent",
+              "in"
+            ],
+            [
+              "bAbsorb",
+              "bool",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "removeTextContent",
+          "returns": "None",
+          "desc": [
+            "removes the specified content from the text object."
+          ],
+          "raises": [
+            "com.sun.star.container.NoSuchElementException"
+          ],
+          "args": [
+            [
+              "xContent",
+              "XTextContent",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

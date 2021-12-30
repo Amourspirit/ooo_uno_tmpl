@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:20:26+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:26+00:00",
   "name": "XDropTargetListener",
   "type": "interface",
   "namespace": "com.sun.star.datatransfer.dnd",
@@ -16,7 +16,32 @@
         "XEventListener"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".drop_target_drag_event",
+        "DropTargetDragEvent"
+      ],
+      [
+        ".drop_target_drag_enter_event",
+        "DropTargetDragEnterEvent"
+      ],
+      [
+        ".drop_target_drop_event",
+        "DropTargetDropEvent"
+      ],
+      [
+        ".drop_target_event",
+        "DropTargetEvent"
+      ]
+    ],
+    "quote": [
+      "DropTargetDropEvent",
+      "DropTargetDragEvent",
+      "DropTargetDragEnterEvent",
+      "DropTargetEvent"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XDropTargetListener",
     "imports": [],
     "namespace": "com.sun.star.datatransfer.dnd",
@@ -29,6 +54,86 @@
       "Methods of this interface may be implemented to provide \\\"drag under\\\" visual feedback to the user throughout the Drag and Drop operation."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1datatransfer_1_1dnd_1_1XDropTargetListener.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "dragEnter",
+          "returns": "None",
+          "desc": [
+            "Called when a drag operation has encountered the drop target."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "dtdee",
+              "DropTargetDragEnterEvent",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "dragExit",
+          "returns": "None",
+          "desc": [
+            "The drag operation has departed the drop target without dropping."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "dte",
+              "DropTargetEvent",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "dragOver",
+          "returns": "None",
+          "desc": [
+            "Called when a drag operation is ongoing on the drop target."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "dtde",
+              "DropTargetDragEvent",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "drop",
+          "returns": "None",
+          "desc": [
+            "The drag operation has terminated with a drop on this drop target.",
+            "",
+            "NOTE: The implementation has to wait until the method XDropTargetDropContext.dropComplete() is called before releasing the data for the drop operation. This should occur before returning from drop in a normal flow of operation. Also, the implementor of XDropTargetListener should not assume the DropTargetDropEvent to be meaningful after returning from the XDropTargetListener.drop() method."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "dtde",
+              "DropTargetDropEvent",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "dropActionChanged",
+          "returns": "None",
+          "desc": [
+            "Called when the user has modified the drop gesture."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "dtde",
+              "DropTargetDragEvent",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:16:55+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:08+00:00",
   "name": "XProofreadingIterator",
   "type": "interface",
   "namespace": "com.sun.star.linguistic2",
@@ -16,7 +16,33 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".proofreading_result",
+        "ProofreadingResult"
+      ],
+      [
+        "..text.x_flat_paragraph",
+        "XFlatParagraph"
+      ],
+      [
+        "..text.x_flat_paragraph_iterator_provider",
+        "XFlatParagraphIteratorProvider"
+      ],
+      [
+        "..lang.locale",
+        "Locale"
+      ]
+    ],
+    "quote": [
+      "XFlatParagraphIteratorProvider",
+      "ProofreadingResult",
+      "XInterface",
+      "XFlatParagraph",
+      "Locale"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XProofreadingIterator",
     "imports": [],
     "namespace": "com.sun.star.linguistic2",
@@ -26,11 +52,107 @@
     "desc": [
       "API for the proofreading iterator that mediates between the document and the proofreader.",
       "",
-      "**See Also**",
+      "**since**",
       "",
       "    OOo 3.0.1"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1linguistic2_1_1XProofreadingIterator.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "checkSentenceAtPosition",
+          "returns": "ProofreadingResult",
+          "desc": [
+            "start proofreading from a given position"
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "xDocument",
+              "XInterface",
+              "in"
+            ],
+            [
+              "xFlatParagraph",
+              "XFlatParagraph",
+              "in"
+            ],
+            [
+              "aText",
+              "str",
+              "in"
+            ],
+            [
+              "aLocale",
+              "Locale",
+              "in"
+            ],
+            [
+              "nStartOfSentencePosition",
+              "int",
+              "in"
+            ],
+            [
+              "nSuggestedBehindEndOfSentencePosition",
+              "int",
+              "in"
+            ],
+            [
+              "nErrorPositionInParagraph",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "isProofreading",
+          "returns": "bool",
+          "desc": [
+            "checks if the given document is currently being checked"
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xDocument",
+              "XInterface",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "resetIgnoreRules",
+          "returns": "None",
+          "desc": [
+            "clears the list of ignored rules for each proofreader"
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "startProofreading",
+          "returns": "None",
+          "desc": [
+            "start proofreading and automatically process the whole text"
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "xDocument",
+              "XInterface",
+              "in"
+            ],
+            [
+              "xIteratorProvider",
+              "XFlatParagraphIteratorProvider",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

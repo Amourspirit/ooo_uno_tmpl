@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:22:09+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:24+00:00",
   "name": "XMultiComponentFactory",
   "type": "interface",
   "namespace": "com.sun.star.lang",
@@ -16,7 +16,23 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..uno.x_component_context",
+        "XComponentContext"
+      ]
+    ],
+    "quote": [
+      "typing.List[str]",
+      "typing.List[object]",
+      "XComponentContext",
+      "XInterface"
+    ],
+    "typings": [
+      "typing.List[str]",
+      "typing.List[object]"
+    ],
+    "requires_typing": true,
     "name": "XMultiComponentFactory",
     "imports": [],
     "namespace": "com.sun.star.lang",
@@ -24,13 +40,70 @@
       "com.sun.star.uno.XInterface"
     ],
     "desc": [
-      "Factory interface for creating component instances giving a context from which to retrieve deployment values.",
-      "",
-      "**See Also**",
-      "",
-      "    XInitialization"
+      "Factory interface for creating component instances giving a context from which to retrieve deployment values."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1lang_1_1XMultiComponentFactory.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "createInstanceWithArgumentsAndContext",
+          "returns": "XInterface",
+          "desc": [
+            "Creates an instance of a component which supports the services specified by the factory, and initializes the new instance with the given arguments and context."
+          ],
+          "raises": [
+            "com.sun.star.uno.Exception"
+          ],
+          "args": [
+            [
+              "ServiceSpecifier",
+              "str",
+              "in"
+            ],
+            [
+              "Arguments",
+              "typing.List[object]",
+              "in"
+            ],
+            [
+              "Context",
+              "XComponentContext",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "createInstanceWithContext",
+          "returns": "XInterface",
+          "desc": [
+            "Creates an instance of a component which supports the services specified by the factory."
+          ],
+          "raises": [
+            "com.sun.star.uno.Exception"
+          ],
+          "args": [
+            [
+              "aServiceSpecifier",
+              "str",
+              "in"
+            ],
+            [
+              "Context",
+              "XComponentContext",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getAvailableServiceNames",
+          "returns": "typing.List[str]",
+          "desc": [
+            "Gets the names of all supported services."
+          ],
+          "raises": [],
+          "args": []
+        }
+      ]
+    }
   }
 }

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 18:23:12+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-28 11:31:06+00:00",
   "type": "struct",
   "name": "CopyTableRowEvent",
   "namespace": "com.sun.star.sdb.application",
@@ -10,25 +10,40 @@
   },
   "writer_args": {
     "sort": true,
-    "auto_import": true
+    "auto_import": true,
+    "dynamic_struct": false
   },
   "data": {
     "name": "CopyTableRowEvent",
+    "namespace": "com.sun.star.sdb.application",
+    "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1sdb_1_1application_1_1CopyTableRowEvent.html",
+    "quote": [
+      "XResultSet"
+    ],
+    "typings": [],
     "fullname": "com.sun.star.sdb.application.CopyTableRowEvent",
     "desc": [
       "specifies an event happening while copying table data between databases.",
       "",
       "Whenever this event is fired to an XCopyTableListener, com.sun.star.lang.EventObject.Source contains the wizard instance which actually does the copying."
     ],
-    "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1sdb_1_1application_1_1CopyTableRowEvent.html",
-    "namespace": "com.sun.star.sdb.application",
+    "extends": [
+      "com.sun.star.lang.EventObject"
+    ],
+    "imports": [],
     "auto_imports": [
       [
-        ".......com.sun.star.sdbc.x_result_set",
+        "...sdbc.x_result_set",
         "XResultSet"
       ]
     ],
-    "imports": [],
+    "from_imports": [
+      [
+        "...lang.event_object",
+        "EventObject"
+      ]
+    ],
+    "requires_typing": true,
     "items": [
       {
         "name": "Error",
@@ -41,7 +56,7 @@
       },
       {
         "name": "SourceData",
-        "type": "'XResultSet'",
+        "type": "XResultSet",
         "orig_type": ".com.sun.star.sdbc.XResultSet",
         "lines": [
           "contains the result set which is being copied by the wizard currently."

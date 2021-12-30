@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:18:08+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:12+00:00",
   "name": "XGridColumnModel",
   "type": "interface",
   "namespace": "com.sun.star.awt.grid",
@@ -12,25 +12,38 @@
   "data": {
     "from_imports": [
       [
-        "...lang.x_component",
-        "XComponent"
-      ],
-      [
         "...container.x_container",
         "XContainer"
       ],
       [
         "...util.x_cloneable",
         "XCloneable"
+      ],
+      [
+        "...lang.x_component",
+        "XComponent"
       ]
     ],
-    "from_imports_typing": [],
-    "name": "XGridColumnModel",
-    "imports": [
-      "com.sun.star.lang.XComponent",
-      "com.sun.star.container.XContainer",
-      "com.sun.star.util.XCloneable"
+    "from_imports_typing": [
+      [
+        ".x_grid_column",
+        "XGridColumn"
+      ],
+      [
+        ".x_grid_column",
+        "XGridColumn"
+      ]
     ],
+    "quote": [
+      "typing.List[XGridColumn]",
+      "XGridColumn"
+    ],
+    "typings": [
+      "typing.List[XGridColumn]"
+    ],
+    "requires_typing": true,
+    "name": "XGridColumnModel",
+    "imports": [],
     "namespace": "com.sun.star.awt.grid",
     "extends": [
       "com.sun.star.lang.XComponent",
@@ -42,11 +55,117 @@
       "",
       "If you do not need your own model implementation, you can also use the DefaultGridColumnModel.",
       "",
-      "**See Also**",
+      "**since**",
       "",
       "    OOo 3.3"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1grid_1_1XGridColumnModel.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "addColumn",
+          "returns": "int",
+          "desc": [
+            "Adds a column to the model.",
+            "",
+            "You should use the createColumn() member to create a new column. This gives implementations of the XGridColumnModel interface the possibility to provide own column implementations which extend the basic GridColumn type.",
+            "",
+            "As soon as the column has been inserted into the model, the model takes ownership of it. This means when the column is removed, or when the column model is disposed, the grid column is disposed as well."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "column",
+              "XGridColumn",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "createColumn",
+          "returns": "XGridColumn",
+          "desc": [
+            "creates a new column for use with the column model.",
+            "",
+            "The newly created column is not yet inserted into the column container, you need to call addColumn() after you initialized the column object."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getColumn",
+          "returns": "XGridColumn",
+          "desc": [
+            "Returns a specific column."
+          ],
+          "raises": [
+            "com.sun.star.lang.IndexOutOfBoundsException"
+          ],
+          "args": [
+            [
+              "index",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getColumnCount",
+          "returns": "int",
+          "desc": [
+            "Returns the number of columns."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getColumns",
+          "returns": "typing.List[XGridColumn]",
+          "desc": [
+            "Returns all columns of the model."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "removeColumn",
+          "returns": "None",
+          "desc": [
+            "removes a column from the model",
+            "",
+            "The column object will be disposed upon removal."
+          ],
+          "raises": [
+            "com.sun.star.lang.IndexOutOfBoundsException"
+          ],
+          "args": [
+            [
+              "ColumnIndex",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setDefaultColumns",
+          "returns": "None",
+          "desc": [
+            "Fills the model with the given number of default columns.",
+            "",
+            "Existing columns will be removed before adding new columns. Listeners at the column model will be notified one com.sun.star.container.XContainerListener.elementRemoved() event for each removed column, and one com.sun.star.container.XContainerListener.elementInserted() event for each insertion."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "elements",
+              "int",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

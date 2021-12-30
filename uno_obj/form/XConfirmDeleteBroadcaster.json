@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:20:03+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:13+00:00",
   "name": "XConfirmDeleteBroadcaster",
   "type": "interface",
   "namespace": "com.sun.star.form",
@@ -16,7 +16,17 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_confirm_delete_listener",
+        "XConfirmDeleteListener"
+      ]
+    ],
+    "quote": [
+      "XConfirmDeleteListener"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XConfirmDeleteBroadcaster",
     "imports": [],
     "namespace": "com.sun.star.form",
@@ -24,13 +34,44 @@
       "com.sun.star.uno.XInterface"
     ],
     "desc": [
-      "provides the possibility of receiving an event for confirming deletions of rows in a com.sun.star.form.component.DataForm.",
-      "",
-      "**See Also**",
-      "",
-      "    XConfirmDeleteListener"
+      "provides the possibility of receiving an event for confirming deletions of rows in a com.sun.star.form.component.DataForm."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1form_1_1XConfirmDeleteBroadcaster.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "addConfirmDeleteListener",
+          "returns": "None",
+          "desc": [
+            "remembers the specified listener to receive an event for confirming deletions",
+            "",
+            "XConfirmDeleteListener.confirmDelete() is called before a deletion is performed. You may use the event to write your own confirmation messages."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aListener",
+              "XConfirmDeleteListener",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "removeConfirmDeleteListener",
+          "returns": "None",
+          "desc": [
+            "removes the specified listener."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aListener",
+              "XConfirmDeleteListener",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

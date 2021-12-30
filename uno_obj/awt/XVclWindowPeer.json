@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:18:04+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:04+00:00",
   "name": "XVclWindowPeer",
   "type": "interface",
   "namespace": "com.sun.star.awt",
@@ -16,7 +16,23 @@
         "XWindowPeer"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".font_descriptor",
+        "FontDescriptor"
+      ],
+      [
+        "..util.color",
+        "Color"
+      ]
+    ],
+    "quote": [
+      "FontDescriptor",
+      "Color",
+      "XWindowPeer"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XVclWindowPeer",
     "imports": [],
     "namespace": "com.sun.star.awt",
@@ -24,9 +40,165 @@
       "com.sun.star.awt.XWindowPeer"
     ],
     "desc": [
-      "gives access to the VCL window implementation."
+      "gives access to the VCL window implementation.",
+      "",
+      ".. deprecated::",
+      "",
+      "    Interface is deprecated."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XVclWindowPeer.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "enableClipSiblings",
+          "returns": "None",
+          "desc": [
+            "enables clipping of sibling windows."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "bClip",
+              "bool",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getProperty",
+          "returns": "object",
+          "desc": [
+            "returns the value of the property with the specified name."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "PropertyName",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getStyles",
+          "returns": "None",
+          "desc": [
+            "returns the font, foreground and background color for the specified type."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "nType",
+              "int",
+              "in"
+            ],
+            [
+              "Font",
+              "FontDescriptor",
+              "out"
+            ],
+            [
+              "ForegroundColor",
+              "Color",
+              "out"
+            ],
+            [
+              "BackgroundColor",
+              "Color",
+              "out"
+            ]
+          ]
+        },
+        {
+          "name": "isChild",
+          "returns": "bool",
+          "desc": [
+            "returns TRUE if the window peer is a child, FALSE otherwise."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "Peer",
+              "XWindowPeer",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "isDesignMode",
+          "returns": "bool",
+          "desc": [
+            "returns TRUE if the window peer is in design mode, FALSE otherwise."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "setControlFont",
+          "returns": "None",
+          "desc": [
+            "sets the control font."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aFont",
+              "FontDescriptor",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setDesignMode",
+          "returns": "None",
+          "desc": [
+            "sets the design mode for use in a design editor."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "bOn",
+              "bool",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setForeground",
+          "returns": "None",
+          "desc": [
+            "sets the foreground color."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "Color",
+              "Color",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setProperty",
+          "returns": "None",
+          "desc": [
+            "sets the value of the property with the specified name."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "PropertyName",
+              "str",
+              "in"
+            ],
+            [
+              "Value",
+              "object",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

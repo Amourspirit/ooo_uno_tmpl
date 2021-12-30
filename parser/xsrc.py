@@ -3,6 +3,8 @@
 """
 Process a link to a page that contains an interface
 """
+
+# region Imports
 import os
 import sys
 import argparse
@@ -10,15 +12,19 @@ import logging
 import textwrap
 import xerox  # requires xclip - sudo apt-get install xclip
 import re
-import base
-from typing import Dict, List, Set, Union
-from bs4.element import PageElement, ResultSet, Tag
-from kwhelp.decorator import DecFuncEnum, TypeCheckKw
+from typing import Dict, List, Optional, Set, Union
+from bs4.element import ResultSet, Tag
+from kwhelp.decorator import AcceptedTypes, DecFuncEnum, TypeCheckKw
 from pathlib import Path
-from logger.log_handle import get_logger
-from parser.enm import main
 from dataclasses import dataclass
+try:
+    import base
+except ModuleNotFoundError:
+    import parser.base as base
+from logger.log_handle import get_logger
+from parser.type_mod import PythonType
 from parser import __version__, JSON_ID
+# endregion Imports
 
 logger = None
 
@@ -45,1377 +51,508 @@ re_method_pattern = re.compile(
 re_raises_pattern = re.compile(r"\s*(raises\s*\(.*\))")
 
 re_interface_pattern = re.compile(r"interface\s*([a-zA-Z0-9.]*)\s*;")
-re_property_pattern = re.compile(r"(?:\[attribute[ ,a-z]*\])(?:[ ]+)([a-zA-Z0-9. {}()]*);")
+re_property_pattern = re.compile(
+    r"(?:\[attribute[ ,a-z]*\])(?:[ ]+)([a-zA-Z0-9. {}()]*);")
 re_comment_start_pattern = re.compile(r"(?:(\/\*)|(?:\*)\s)")
+re_dir_pattern = re.compile(r"\[((?:in)|(?:out))\]", re.IGNORECASE)
 # endregion SDK API Reference
+
+# region Data Classes
 
 
 @dataclass
 class ParamInfo:
-    direction: str
-    name: str
-    type: str
+    direction: str = ''
+    name: str = ''
+    type: str = ''
+    p_type: Optional[PythonType] = None
 
-# region Exceptions
+# endregion Data Classes
 
-
-class MethodInvalidError(Exception):
-    pass
-# endregion Exceptions
-
-# region SDK API Reference
+# region API Interface classes
 
 
-class SdkCodeText(base.BlockObj):
-    """Responsible for getting code from url"""
+class ApiFunctionsBlock(base.ApiSummaryBlock):
+    def _get_match_name(self) -> str:
+        return 'pub-methods'
 
-    def __init__(self, soup: base.SoupObj):
-        super().__init__(soup=soup)
+
+class ApiPropertiesBlock(base.ApiSummaryBlock):
+    def _get_match_name(self) -> str:
+        return 'pub-attribs'
+
+
+class ApiInterfacesBlock(base.ApiSummaryBlock):
+    """Gets Block object for Exported Interfaces"""
+
+    def _get_match_name(self) -> str:
+        return 'interfaces'
+
+class ApiFnPramsInfo(base.BlockObj):
+    """Gets List of Parameter information for a funciton"""
+
+    def __init__(self, block: base.ApiProtoBlock) -> None:
+        self._block: base.ApiProtoBlock = block
+        super().__init__(self._block.soup)
+        self._requires_typing = False
+        self._imports: Set[str] = set()
         self._data = None
 
-    def get_obj(self) -> str:
-        if self._data:
-            return self._data
-
-        def clean_lines(text: str) -> str:
-            lns = text.splitlines()
-            new_lines = []
-            for l in lns:
-                ln = l.strip()
-                if ln == '':
-                    continue
-                if ln.startswith('#'):
-                    continue
-                new_lines.append(ln)
-            return "\n".join(new_lines)
-
-        def comment_remover(text):
-
-            def replacer(match):
-                s = match.group(0)
-                if s.startswith('/'):
-                    return " "  # note: a space and not an empty string
-                else:
-                    return s
-            pattern = re.compile(
-                r'//.*?$|/\*.*?\*/|\'(?:\\.|[^\\\'])*\'|"(?:\\.|[^\\"])*"',
-                re.DOTALL | re.MULTILINE
-            )
-            return re.sub(pattern, replacer, text)
-        rows = self._soup.soup.find_all('div', class_='line')
-        lines = []
-        for row in rows:
-            r_text = self._get_row_text(row)
-            if r_text:
-                lines.append(r_text)
-        result = '\n'.join(lines)
-        # xerox.copy(result)
-        # some methods are are written on several lines. Replace to remove line breaks
-        # result = re.sub(r'((?:[a-zA-Z0-9]*)\( .*?\);)',
-        #                 repl, result, flags=re.DOTALL)
-        self._data = comment_remover(result)
-        self._data = clean_lines(self._data)
-        # logger.debug('SdkCodeText.get_ojb() data:\n%s', self._data)
-        return self._data
-
-    def _get_row_text(self, row: Tag) -> str:
-        # removes line numbers and leading whitespace
-        row_text: str = row.text
-        ls: str = re.sub(re_ln_pattern, '', row_text)
-        return ls
-    
-class SdkComponentText:
-    """
-    gets the text of the Component area
-
-    Example:
-        published interface XWindow: com::sun::star::lang::XComponent
-        {
-        void setPosSize( [in] long X,
-                [in] long Y,
-                [in] long Width,
-                [in] long Height,
-                [in] short Flags );
-        com::sun::star::awt::Rectangle getPosSize();
-        void setVisible( [in] boolean Visible );
-        void setEnable( [in] boolean Enable );
-        }
-    """
-
-    def __init__(self, c_text: SdkCodeText):
-        self._code_text = c_text
-        self._data = None
-        self._init = False
-
-    def get_text(self) -> str:
-        if self._init:
-            return self._data
-        self._init = True
-        text = self._code_text.get_obj()
-        # it is possible that SDK file has more than one interface
-        # See: https://api.libreoffice.org/docs/idl/ref/XComponentContext_8idl_source.html
-        # for this reason will narrow text untill the last match is found.
-        self._data = self._get_text_aggresive(text)
-        # logger.debug('Component text:\n%s', self._data)
-        
-        return self._data
-
-    def _get_text_aggresive(self, text:str) -> str:
-        def single_line_ns(input: str) -> str:
-            _regex = r"(module[{ \na-z-A-Z0-9]+)interface"
-            def cb(match) -> str:
-                return str(match.group(1)).replace('\n', ' ') + '\ninterface'
-            return re.sub(pattern=_regex, repl=cb, string=input, flags=re.DOTALL)
-        def clean_curly(input: str) -> str:
-            _regex = r"^(}[ ;}]+)"
-            def cb(match) -> str:
-                return base.Util.clean_curly_brace_close(match.group(1))
-            return re.sub(pattern=_regex, repl=cb, string=input, flags=re.MULTILINE)
-        def remove_single_line_comments(input: str) -> str:
-            return re.sub(r"(//[ a-z-A-Z0-9]+\n)",'', input, re.DOTALL)
-        # remove all spaces between } and ;
-        _text = single_line_ns(text)
-        _text = remove_single_line_comments(_text)
-        _text = clean_curly(_text)
-
-        regex_start = r"module (com \{.*)\{"
-        regex_end = r"^(};){3,5}"
-        matches_start = re.search(regex_start, _text)
-        matches_end = re.search(pattern=regex_end, string=_text, flags=re.MULTILINE)
-        if not matches_end:
-            regex_end = r"(\};){2,4}(\}[;])+\n"
-            matches_end = re.search(pattern=regex_end, string=_text, flags=re.DOTALL)
-        result = ''
-        if matches_start and matches_end:
-            start = matches_start.span()[1]
-            end = matches_end.span()[0]
-            result = _text[start:end]
-            matches_start = re.search(regex_start, result)
-        while matches_start:
-            start = matches_start.span()[1]
-            result = result[start:]
-            matches_start = re.search(regex_start, result)
-        return result.strip()
-
-        
-    @property
-    def code_text(self) -> SdkCodeText:
-        """Gets code_text value"""
-        return self._code_text
-
-class SdkComponentStart:
-    """
-    Responsible for getting first line of component such as:
-    interface XAccessibleHyperlink : ::com::sun::star::accessibility::XAccessibleAction
-    """
-    def __init__(self, c_text: SdkComponentText):
-        self._component: SdkComponentText = c_text
-        self._data = None
-    
-    def get_obj(self) -> str:
+    def get_obj(self) -> List[ParamInfo]:
         if not self._data is None:
             return self._data
-        self._data = ''
+        self._data = []
+        proto = self._block.get_obj()
+        if not proto:
+            return self._data
+        p_type_tag = proto.find_all('td', class_='paramtype')
+        p_name_tag = proto.find_all('td', class_='paramname')
+        if not p_type_tag and not p_name_tag:
+            if logger.level <= logging.DEBUG:
+                logger.debug(
+                    'ApiInterfacePramsInfoget_obj() No Parmas for %s', self._block.summary_info.name)
+            return self._data
+
         try:
-            text = self._component.get_text()
-            # regex = r"(interface.*){"
-            matches = re.search(
-                r"(interface[ ]+[a-zA-Z0-9]+[^;][a-z-A-Z0-9_: ]+)\n{", text)
-            if not matches:
-                matches = re_component_start.search(text)
-            if not matches:
-                matches = re.search(r"interface[a-zA-Z0-9_ :]+\n{", text)
-            if matches:
-                g = matches.groups()
-                self._data = " ".join(g[0].replace("{","").rstrip().split())
-            else:
-                if logger.level <= logging.DEBUG:
-                    logger.debug("SdkComponentStart.get_obj() unable to match first line. Returning text. URL: %s",
-                                 self._component.code_text.url_obj.url)
-                    self._data = text
-                # raise Exception("SdkComponentStart: Unable to match regex for first line")
+            if len(p_type_tag) != len(p_name_tag):
+                if len(p_type_tag) == 0 and len(p_name_tag) == 1:
+                    # no params. p_name_tag will usually be 1
+                    # when there are not paramters.
+                    return self._data
+                raise Exception
         except Exception as e:
-            url = self._component.code_text.url_obj.url
-            logger.error("SdkComponentStart: Processing first line. Url: %s", url)
-            raise e
+            msg = "ApiFnPramsInfo.get_obj(), Parameter Name and Parameter Types do not have the same length. Function Summary: %s Url: %s" % (str(
+                self._block.summary_info), self.url_obj.url)
+            logger.error(msg)
+            raise Exception(msg)
+        p_info = zip(p_name_tag, p_type_tag)
+        self._data = self._process_params(params=p_info)
         return self._data
 
-    @property
-    def component_text(self) -> str:
-        """Gets component_text value"""
-        return self._component
+    def _process_name_tag(self, name_tag: Tag, pinfo: ParamInfo):
+        name = name_tag.text
+        pinfo.name = base.Util.get_clean_name(name)
 
-class SdkComponentLines:
-    """
-    Responsible for getting all lines of Component.
-    Lines have a simple cleaning that replace :: with .
-    """
+    def _get_type_from_inner_link(self, paramtype: Tag, name: str) -> Union[str, None]:
+        logger.debug(
+            'ApiFnPramsInfo._get_type_from_inner_link() Searching for %s link.', name)
+        if not paramtype:
+            return None
+        a_tag = paramtype.findChild('a')
+        if not a_tag:
+            return None
+        a_name = a_tag.text.strip()
+        if a_name != name:
+            return None
+        s = base.Util.get_ns_from_a_tag(a_tag=a_tag)
+        logger.debug(
+            'ApiFnPramsInfo._get_type_from_inner_link() found: %s', s)
+        return s
 
-    def __init__(self, f_text: SdkComponentText):
-        self._component = f_text
-        self._data = None
-        self._init = False
-
-    def get_obj(self) -> List[str]:
-        if self._init:
-            return self._data
-        self._init = True
-        text = self._component.get_text()
-        # text includes name and {} such as interface XHierarchicalPropertySet: com::sun::star::uno::XInterface\n{...\n}
-        # remove the outter text
-        inner_re = r"\{(.*)\}"
-        matches = re.search(inner_re, text, flags=re.DOTALL)
-        if matches:
-            g = matches.groups()
-            text = g[0]
-        text = self._get_proper_lines(input=text)
-        lines = self._remove_empty(text)
-        self._data = self._clean_lines(lines=lines)
-        if logger.level <= logging.DEBUG:
-            for line in self._data:
-                logger.debug("SdkComponentLines.get_obj() found: %s", line)
-        return self._data
-
-    def _get_proper_lines(self, input: str) -> str:
-        if not input:
-            return ''
-        # methods may be split across multiple lines.
-        # start by collapsing all lines into a single line
-        lines  = input.splitlines()
-        new_lines = list[str]()
-        for line in lines:
-            s = line.strip().lstrip(':')
-            m = re_comment_start_pattern.match(s)
-            if m:
-                logger.debug(
-                    'SdkComponentLines: Skipping comment line: %s', line)
-                continue
-            new_lines.append(s)
-        single_line = " ".join(new_lines)
-        # logger.debug('single Line\n%s', single_line)
-        # bit of a hack here but best fix I can find so far
-        # fixes parsing issue when interface such as:
-        # https://api.libreoffice.org/docs/idl/ref/XAnimatedImages_8idl_source.html
-        single_line = base.Util.encode_char(single_line, '); }')
-
-        # now split all lines by ; and put on new lines again
-        new_lines = ";\n".join(single_line.split(';'))
-        return base.Util.decode_char(new_lines, '); }')
-        # return new_lines
-
-    def _remove_empty(self, input: str) -> List[str]:
-        lines = input.splitlines(keepends=False)
-        return [line.strip() for line in lines if line.strip() != '']
-
-    def _clean_lines(self, lines: List[str]) -> List[str]:
-        result = []
-        for line in lines:
-            result.append(line.replace('::', '.'))
-        return result
-
-    @property
-    def component(self) -> SdkComponentText:
-        """Gets component value"""
-        return self._component
-
-class SdkMethodLines:
-    def __init__(self, c_lines: SdkComponentLines) -> None:
-        self._c_lines = c_lines
-        self._data = None
-    
-    def get_obj(self) -> List[str]:
-        if self._data:
-            return self._data
-        results: List[str] = []
-        lines = self._c_lines.get_obj()
-        for line in lines:
-            logger.debug("SdkMethodLines.get_obj() Processing Line: %s", line)
-            match = re.match(re_interface_pattern, line)
-            if match:
-                logger.debug("SdkMethodLines.get_obj() Line Matched Interface. continuing...")
-                continue
-            match = re.match(re_property_pattern, line)
-            if match:
-                logger.debug(
-                    "SdkMethodLines.get_obj() Line Matched Property. continuing...")
-                continue
-            match = re.match(re_method_pattern, line)
-            if match:
-                logger.debug("SdkMethodLines.get_obj() Line Matched")
-                results.append(line)
-            else: 
-                logger.debug("SdkMethodLines.get_obj() No Match")
-        self._data = results
-        # if logger.level <= logging.DEBUG:
-        #     logger.debug("SdkMethodLines.get_obj() data:\n%s", "\n".join(self._data))
-        return self._data
-    
-    @property
-    def component_lines(self) -> SdkComponentLines:
-        """Gets component_lines value"""
-        return self._c_lines
-
-
-class SdkPropertyLines:
-    def __init__(self, c_lines: SdkComponentLines) -> None:
-        self._c_lines = c_lines
-        self._data = None
-
-    def get_obj(self) -> List[str]:
-        if self._data:
-            return self._data
-        results: List[str] = []
-        lines = self._c_lines.get_obj()
-        for line in lines:
-            logger.debug(
-                "SdkPropertyLines.get_obj() Processing Line: %s", line)
-            match = re.match(re_property_pattern, line)
-            if match:
-                results.append(line)
-                logger.debug("SdkPropertyLines.get_obj() Line Matched")
-            else:
-                logger.debug("SdkPropertyLines.get_obj() No Match")
-        self._data = results
-        # if logger.level <= logging.DEBUG:
-        #     logger.debug("SdkMethodLines.get_obj() data:\n%s",
-        #                  "\n".join(self._data))
-        return self._data
-
-    @property
-    def component_lines(self) -> SdkComponentLines:
-        """Gets component_lines value"""
-        return self._c_lines
-
-class SdkMethodData:
-    """Gets the info for a single method"""
-
-    def __init__(self, parm: str):
-        self._param = parm
-        self._p_name = ''
-        self._p_return = ''
-        self._p_args: List[ParamInfo] = []
-        self._p_raises: List[str] = []
-        self._imports: Set[str] = set()
-        self._requires_typing = False
-        self._set_data()
-
-    def _set_data(self):
-        is_py_type = True
-
-        text = self._param
-        logger.debug('SdkMethodData._set_data() Processing: %s', text)
-        matches = re.search(re_interface_pattern, text)
-        if matches:
-            logger.debug("SdkMethodData._set_data() data matched interface. Raising error")
-            raise MethodInvalidError(f"'{text}' matches interface")
-        matches = re.search(re_property_pattern, text)
-        if matches:
-            logger.debug("SdkMethodData._set_data() data matched property. Raising error")
-            raise MethodInvalidError(f"'{text}' matches property")
-
-        seq_regex = r"([a-zA-Z]*)< *([a-zA-A0-9]*) *>"
-        m = re.match(seq_regex, text)
+    def _process_type_tag(self, type_tag: Tag, pinfo: ParamInfo):
+        pinfo.direction = 'in'
+        # dir_tag: NavigableString = type_tag.find(text=True, recursive=False)
+        # dir_str could be in format of: [in] sequence< ::
+        dir_str: str = type_tag.text.strip()
+        m = re_dir_pattern.match(dir_str)
         if m:
-            # replace sequence< string > with sequence<string>
-            # this is necessary to prevent following steps from parsing incorectly
-            replacement = f'{m.group(1)}<{m.group(2)}>'
-            text = re.sub(seq_regex, replacement, text, 1)
-            logger.debug("SdkMethodData._set_data() replaced < spaces >. Now: %s", text)
-        # check if method include raises...
-        matches = re.search(re_raises_pattern, text)
-        if matches:
-            logger.debug('SdkMethodData._set_data() found raises for method.')
-            g = matches.groups()
-            self._process_raises(g[0])
-            # remove raises text section
-            text = re.sub(re_raises_pattern, '', text)
-            logger.debug('SdkMethodData._set_data() remove raise match: %s', text)
-        else:
-            logger.debug('SdkMethodData._set_data() did not find raises for method.')
-        
-        # imports are handled in _get_py_type that is called in this method and in _process_args
-        # self._process_imports(text)
-        matches = re.search(re_method_pattern, text)
-        # when there are parameters
-        #   group 0 return type eg: com.sun.star.awt.Rectangle
-        #   group 1 method name eg: getPosSize
-        #   group 2 string of all params eg: '[in] long X, [in] long Y, [in] long Width, [in] long Height, [in] short Flags '
-        #   group 3 None
-        #   group 4 None
-        # when there are no parameters
-        #   group 0 None
-        #   group 1 None
-        #   group 2 None
-        #   group 3 return type eg: void
-        #   group 4 method name eg: setFoucs
-        # if matches:
-        #     groups = matches.groups()
-        #     if len(groups)
-        if matches:
-            g = matches.groups()
-            logger.debug("SdkMethodData._set_data() Matches for method Params: %s", str(g))
-            if g[0] is None:
-                # no params
-                self._p_name = g[4]
-                # result = Util.get_py_type(g[3], cb=cb)
-                result = self._get_py_type(g[3])
-                self._p_return = result
-            else:
-                self._p_name = g[1]
-                # result = Util.get_py_type(g[0], cb=cb)
-                result = self._get_py_type(g[0])
-                self._p_return = result
-                self._process_args(g[2])
-        else:
+            g_dir = m.group(1).lower()
+            pinfo.direction = g_dir  # in or out
+            dir_str = dir_str.split(maxsplit=1)[1]
+        _type = dir_str.replace("::", '.').lstrip('.')
+        t_info: base.PythonType = base.Util.get_python_type(in_type=_type)
+        if t_info.is_default():
             logger.debug(
-                "SdkMethodData._set_data() No method found in: %s", text)
-        return matches
-
-    def _process_imports(self, text: str):
-        regex = r"(com.sun[\w.]+)"
-        matches = re.finditer(regex, text)
-        for matchNum, match in enumerate(matches, start=1):
-            logger.debug("SdkMethodData._process_imports() Match {matchNum} was found at {start}-{end}: {match}".format(
-                matchNum=matchNum, start=match.start(), end=match.end(), match=match.group()))
-            for groupNum in range(0, len(match.groups())):
-                groupNum = groupNum + 1
-                ns = match.group(groupNum)
-                logger.debug("SdkMethodData._process_imports() Group {groupNum} found at {start}-{end}: {group}".format(groupNum=groupNum,
-                    start=match.start(groupNum), end=match.end(groupNum), group=ns))
-                self._imports.add(match.group(groupNum))
-                logger.debug("SdkMethodData._process_imports() added import: %s", ns)
-                self._requires_typing = True
-                
-    def _process_raises(self, text: str):
-        # raises( com::sun::star::beans::UnknownPropertyException, com::sun::star::lang::IllegalArgumentException, com::sun::star::lang::WrappedTargetException )
-        s = text.replace('(', '|').replace(')', '|').split('|')
-        if len(s) <= 1:
-            logger.debug('SdkMethodData._process_raises() Invalid raises text: %s', text)
-            return
-        ex_parts = s[1].replace("::",".").split(',')
-        new_parts = list[str]()
-        for part in ex_parts:
-            new_parts.append(base.Util.get_clean_ns(input=part, ltrim=True))
-        # ex = s[1].strip().replace('::', ".").replace(' ', '').replace('.com.', 'com.').split(',')
-        self._p_raises.extend(new_parts)
-        if logger.level <= logging.DEBUG:
-            logger.debug('SdkMethodData._process_raises() added raise: %s', str(new_parts))
-
-    def _process_interface(self, text: str):
-        # interface com::sun::star::beans::XPropertySet
-        parts = text.strip().replace("::", '.').rsplit(
-            '.', 1)  # 'com.sun.star.beans', 'XPropertySet'
+                'ApiFnPramsInfo._process_type_tag() %s type is Default. Looking for %s', pinfo.name, _type)
+            t2_type = self._get_type_from_inner_link(type_tag, _type)
+            if t2_type:
+                t2_info = base.Util.get_python_type(t2_type)
+                if not t2_info.is_default():
+                    t_info = t2_info
+        logger.debug(
+            "ApiFnPramsInfo._process_type_tag() param '%s' type '%s' converted to '%s'", pinfo.name, _type, t_info.type)
+        pinfo.type = t_info.type
+        pinfo.p_type = t_info
+        if t_info.requires_typing:
+            self._requires_typing = True
+        self._imports.update(t_info.get_all_imports())
         return
 
-    def _get_py_type(self, in_type: str) -> str:
-        cb_data = None
-
-        def cb(data: dict):
-            nonlocal cb_data
-            cb_data = data
-
-        n_type = base.TYPE_MAP.get(in_type, None)
-        if n_type:
-            logger.debug(
-                "SdkMethodData._get_py_type() Found python type: %s", n_type)
-            return n_type
-        n_type = base.Util.get_py_type(uno_type=in_type, cb=cb)
-        is_wrapper = cb_data['is_wrapper']
-        is_py = cb_data['is_py_type']
-        _result = n_type
-        if is_wrapper:
-            self._requires_typing = True
-            logger.debug("SdkMethodData._get_py_type() wrapper arg %s", in_type)
-            logger.debug("SdkMethodData._get_py_type() wrapper arg Typing is Required.")
-            wdata: dict = cb_data['wdata']
-            if not wdata['py_type_inner']:
-                logger.debug(
-                    "SdkMethodData._get_py_type() wrapper inner requires typing arg %s", in_type)
-                self._imports.add(cb_data['long_type'])
-                logger.debug(
-                    "SdkMethodData._get_py_type() added import %s", cb_data['long_type'])
-        else:
-            if is_py is False:
-                logger.debug(
-                    "SdkMethodData._get_py_type() requires typing arg %s", in_type)
-                self._requires_typing = True
-                self._imports.add(cb_data['long_type'])
-                logger.debug(
-                    "SdkMethodData._get_py_type() added import %s", cb_data['long_type'])
-        return _result
-
-    def _process_args(self, args: str):      
-        a = args.replace(' ', '').strip()
-        logger.debug('SdkMethodData._process_args() parsing args: %s', a)
-        arg_lst = a.split(',')
-        for arg in arg_lst:
-            matches = re.search(re_args_pattern, arg)
-            if not matches:
-                continue
-            logger.debug('SdkMethodData_process_args() parsing arg: %s', arg)
-            g = matches.groups()
-            _dir = 'in' if g[0] is None else g[0].lower()
-            stype = self._get_py_type(g[1])
-            info = ParamInfo(
-                direction=_dir, name=g[2], type=stype)
-            logger.debug(
-                'SdkMethodData_process_args() ParamInfo DIRECTION: %s, NAME: %s, TYPE: %s'
-                , arg)
-            self._p_args.append(info)
-
-    # region Properties
-    @property
-    def args(self) -> List[ParamInfo]:
-        """Gets Method Args"""
-        return self._p_args
+    def _process_params(self, params: zip) -> List[ParamInfo]:
+        results = []
+        for p_name_tag, p_type_tag in params:
+            p_info = ParamInfo()
+            self._process_name_tag(name_tag=p_name_tag, pinfo=p_info)
+            if not p_info.name:
+                msg = f"ApiFnPramsInfo: unable to find parameter name for method {self.summary_info.name!r}. Url: {self.url_obj.url}"
+                logger.error(msg)
+                raise Exception(msg)
+            self._process_type_tag(type_tag=p_type_tag, pinfo=p_info)
+            if not p_info.type:
+                msg = f"ApiFnPramsInfo: unable to find parameter type for method {self.summary_info.name!r} with param name of {p_info.name!r}. Url: {self.url_obj.url}"
+                logger.error(msg)
+                raise Exception(msg)
+            results.append(p_info)
+        return results
 
     @property
-    def name(self) -> str:
-        """Gets Method Name"""
-        return self._p_name
+    def requires_typing(self) -> bool:
+        """Gets require_typing value"""
+        return self._requires_typing
 
     @property
-    def return_type(self) -> str:
-        """Gets method Return Type"""
-        return self._p_return
+    def imports(self) -> Set[str]:
+        """Gets imports value"""
+        return self._imports
 
     @property
-    def raises(self) -> List[str]:
-        """Gets raises value"""
-        return self._p_raises
+    def summary_info(self) -> base.SummaryInfo:
+        """Gets summary_info value"""
+        return self._block.summary_info
+
+
+class ApiMethodException(base.BlockObj):
+    """Gets errors for a funciton"""
+    # have not found an example with more than one exception so assuming
+    # singular excpetion
+    # returning as a list of str for future consideration
+
+    def __init__(self, block: base.ApiProtoBlock) -> None:
+        self._block: base.ApiProtoBlock = block
+        super().__init__(self._block.soup)
+        self._data = False
+
     
-    @property
-    def imports(self) -> Set[str]:
-        """Gets imports value"""
-        return self._imports
 
-    @property
-    def requires_typing(self) -> bool:
-        """Gets requires_typing value"""
-        return self._requires_typing
-    # endregion Properties
-class SdkProperyData:
-    """Gets the info for a single method"""
-
-    def __init__(self, parm: str):
-        self._param = parm
-        self._p_name = ''
-        self._p_return = ''
-        self._p_set_raises: List[str] = []
-        self._p_get_raises: List[str] = []
-        self._imports: Set[str] = set()
-        self._requires_typing = False
-        self._set_data()
-
-    def _set_data(self):
-        text = self._param
-        # remove [attribute] from start of string
-        text = base.Util.clean_sq_braces(text).lstrip()
-        
-        # check if method include raises...
-        matches = re.search(re_raises_pattern, text)
-        if matches:
-            g = matches.groups()
-            self._process_raises(g[0])
-            # remove raises text section
-            text = re.sub(re_raises_pattern, '', text)
-        parts = text.split(maxsplit=2)
-        # result = base.Util.get_py_type(parts[0], cb=cb)
-        ns_clean = base.Util.get_clean_ns(input=parts[0], ltrim=True)
-        result = self._get_py_type(in_type=ns_clean)
-        self._p_return = result
-        self._p_name = base.Util.get_clean_name(parts[1])
-
-    def _get_py_type(self, in_type: str) -> str:
-        cb_data = None
-
-        def cb(data: dict):
-            nonlocal cb_data
-            cb_data = data
-
-        n_type = base.TYPE_MAP.get(in_type, None)
-        if n_type:
-            logger.debug(
-                "SdkProperyData._get_py_type() Found python type: %s", n_type)
-            return n_type
-        n_type = base.Util.get_py_type(uno_type=in_type, cb=cb)
-        is_wrapper = cb_data['is_wrapper']
-        is_py = cb_data['is_py_type']
-        _result = n_type
-        if is_wrapper:
-            self._requires_typing = True
-            logger.debug(
-                "SdkProperyData._get_py_type() wrapper arg %s", in_type)
-            logger.debug(
-                "SdkProperyData._get_py_type() wrapper arg Typing is Required.")
-            wdata: dict = cb_data['wdata']
-            if not wdata['py_type_inner']:
-                logger.debug(
-                    "SdkProperyData._get_py_type() wrapper inner requires typing arg %s", in_type)
-                self._imports.add(cb_data['long_type'])
-                logger.debug(
-                    "SdkProperyData._get_py_type() added import %s", cb_data['long_type'])
-        else:
-            if is_py is False:
-                logger.debug(
-                    "SdkProperyData._get_py_type() requires typing arg %s", in_type)
-                self._requires_typing = True
-                self._imports.add(cb_data['long_type'])
-                logger.debug(
-                    "SdkProperyData._get_py_type() added import %s", cb_data['long_type'])
-        return _result
-
-
-    def _process_raises(self, text: str):
-        # { set raises (::com::sun::star::lang::IllegalArgumentException, com::sun::star::beans::UnknownPropertyException); };
-        s = text.replace('::', '.').replace('{', '').replace('}', '').strip()
-        s = s.replace('.com.', 'com.')
-        # set raises (com.sun.star.lang.IllegalArgumentException, com.sun.star.beans.UnknownPropertyException);
-        parts = s.replace('(', '|').replace(')', '|').rsplit('|', 2)
-        if len(parts) <= 1:
-            return
-        
-        ex = parts[1].strip().replace(' ', '').split(',')
-        if parts[0].split()[0] == 'get':
-            self._p_get_raises.extend(ex)
-        else:
-            self._p_set_raises.extend(ex)
-
-    # region Properties
-
-    @property
-    def name(self) -> str:
-        """Gets Method Name"""
-        return self._p_name
-
-    @property
-    def return_type(self) -> str:
-        """Gets method Return Type"""
-        return self._p_return
-
-    @property
-    def raises_get(self) -> List[str]:
-        """Gets raises values for property get"""
-        return self._p_get_raises
-
-    @property
-    def raises_set(self) -> List[str]:
-        """Gets raises values for property set"""
-        return self._p_set_raises
-
-    @property
-    def imports(self) -> Set[str]:
-        """Gets imports value"""
-        return self._imports
-    @property
-    def requires_typing(self) -> bool:
-        """Gets requires_typing value"""
-        return self._requires_typing
-    # endregion Properties
-
-class SdkInterfaceData:
-    def __init__(self, text: SdkComponentLines):
-        self._text = text
-        self._data = None
-
-    def get_obj(self) -> List[str]:
-        if self._data:
-            return self._data
-        self._data = []
-        lines = self._text.get_obj()
-        for line in lines:
-            matches = re.search(re_interface_pattern, line)
-            if matches:
-                g = matches.groups()
-                self._data.append(g[0].strip())
-        return self._data
-
-
-class SdkMethods:
-    """Iterable class that iterates through Methods and returns info"""
-
-    def __init__(self, url_soup: Union[str, base.SoupObj]):
-        if isinstance(url_soup, str):
-            self._soup = base.SoupObj(url_soup)
-        else:
-            self._soup = url_soup
-        self._c_text = SdkCodeText(soup=self._soup)
-        self._component = SdkComponentText(c_text=self._c_text)
-        self._mt = SdkComponentLines(f_text=self._component)
-        self._method_lines = SdkMethodLines(c_lines=self._mt)
-        self._index = 0
-        self._len = 0
-        self._init = False
-        self._data: List[str] = None
-
-    def _get_next(self) -> SdkMethodData:
-        if self._index >= self._len:
-            self._index = 0
-            raise StopIteration
-        ln = self._data[self._index]
-        self._index += 1
-        try:
-            md = SdkMethodData(ln)
-        except MethodInvalidError:
-            md = self._get_next()
-        return md
-
-    def __iter__(self):
-        return self
-
-    def __next__(self) -> SdkMethodData:
-        if not self._init:
-            self._data: List[str] = self._method_lines.get_obj()
-            self._len = len(self._data)
-            self._init = True
-        return self._get_next()
-
-    @property
-    def soup(self) -> base.SoupObj:
-        """Gets soup value"""
-        return self._soup
-
-    @property
-    def component(self) -> SdkComponentText:
-        """Gets component value"""
-        return self._component
-
-    @property
-    def code_text(self) -> SdkCodeText:
-        """Gets component value"""
-        return self._c_text
-
-    @property
-    def component_lines(self) -> SdkComponentLines:
-        return self._mt
-class SdkProperties:
-    """Iterable class that iterates through Properties and returns info"""
-
-    def __init__(self, c_lines: SdkComponentLines):
-        self._c_lines = c_lines
-        self._property_lines: SdkPropertyLines = SdkPropertyLines(c_lines=self._c_lines)
-        self._index = 0
-        self._len = 0
-        self._init = False
-        self._data: List[str] = None
-
-    def _get_next(self) -> SdkProperyData:
-        if self._index >= self._len:
-            self._index = 0
-            raise StopIteration
-        ln = self._data[self._index]
-        self._index += 1
-        return SdkProperyData(ln)
-
-    def __iter__(self):
-        return self
-
-    def __next__(self) -> SdkProperyData:
-        if not self._init:
-            self._data: List[str] = self._property_lines.get_obj()
-            self._len = len(self._data)
-            self._init = True
-        return self._get_next()
-
-    @property
-    def component_lines(self) -> SdkComponentLines:
-        return self._c_lines
-
-
-class SdkExtends:
-    def __init__(self, c_text: SdkComponentStart, m_text: SdkComponentLines):
-        self._c_start: SdkComponentStart = c_text
-        self._m_text: SdkComponentLines = m_text
-        self._ex_lst: List[str] = []
-        self._i_data: SdkInterfaceData = SdkInterfaceData(text=m_text)
-        self._init()
-
-    def _init(self):
-        s = self._c_start.get_obj()
-        logger.debug("SdkExtends._init() First Line: %s", s)
-        # published interface XFont: com::sun::star::uno::XInterface
-        s = s.replace('::', ".")
-        logger.debug("SdkExtends._init() Replaced :: %s", s)
-        parts = s.rsplit(sep=':', maxsplit=1)
-        if len(parts) > 1:
-            logger.debug("SdkExtends._init() ':' seperator found extends on first line.")
-            s = parts[1]
-            logger.debug("SdkExtends._init() Processing: '%s'", s)
-            s = base.Util.get_clean_ns(s).lstrip('.')
-            self._ex_lst.append(s)
-            logger.debug("SdkExtends._init() Added Extends: '%s'", s)
-
-        logger.debug("SdkExtends._init() Processing lines for interfaces.")
-        lines = self._m_text.get_obj()
-        for line in lines:
-            logger.debug("SdkExtends._init() Processing line: %s", line)
-            if re_interface_pattern.match(line):
-                logger.debug("SdkExtends._init() Found interface Match")
-                # interface .com.sun.star.container.XContainer;
-                s = line.rsplit(maxsplit=1)[1].lstrip('.')
-                s = base.Util.get_clean_ns(s)
-                self._ex_lst.append(s)
-                logger.debug("SdkExtends._init() Added Extends: '%s'", s)
-
-    # region Properties
-    @property
-    def ex_lst(self) -> List[str]:
-        """Gets ex_lst value"""
-        return self._ex_lst
-
-    @property
-    def component(self) -> SdkComponentText:
-        """Gets component object"""
-        return self._c_text
-
-    @property
-    def method_text(self) -> SdkComponentLines:
-        """Gets CodeText value"""
-        return self._m_text
-    # endregion Properties
-
-
-class SdkImports:
-    """
-    Gets imports for interface/class etc
-    Fromat: ``com.sun.star.awt.Rectangle``
-    """
-
-    def __init__(self, c_lines: SdkComponentLines):
-        self._c_lines = c_lines
-        self._imports: Set[str] = None
-
-    def get_obj(self) -> Set[str]:
-        """
-        Gets the imports as a list of strings
-        Fromat: ``com.sun.star.awt.Rectangle``
-
-        Returns:
-            List[str]: list
-        """
-        if self._imports:
-            return self._imports
-        self._imports = set()
-        # interface ::com::sun::star::container::XContainer;
-        regex = r"interface +([a-zA-Z0-9\.]*)"
-        # group ::com::sun::star::container::XContainer
-        lines = self._c_lines.get_obj()
-        for line in lines:
-            logger.debug("SdkImports.get_obj() Processing Line: %s", line)
-            matches = re.search(regex, line)
-            if matches:
-                g = matches.groups()
-                logger.debug(
-                    'SdkImports.get_obj() Found Interface Line. Groups info: %s', str(g))
-                logger.debug('SdkImports.get_obj() Found Interface Line: %s', g[0])
-                s = base.Util.get_clean_ns(input=g[0], ltrim=True)
-                logger.debug(
-                    "SdkImports.get_obj() adding Import: '%s'", s)
-                self._imports.add(s)
-            else:
-                logger.debug("SdkImports.get_obj() No Match")
-        return self._imports
-
-    def _process_match(self, match: str):
-        # com/sun/star/lang/XComponent
-        s = match.strip()
-        parts = s.split('/')
-        ns = '.'.join(parts)
-        self._imports.append(ns)
-    # region Properties
-
-    @property
-    def code_text(self) -> SdkCodeText:
-        """Gets CodeText value"""
-        return self._c_text
-
-    # endregion Properties
-
-
-class SdkNameInfo:
-    """Gets Name of interface/class etc"""
-
-    def __init__(self, c_start: SdkComponentStart):
-        self._name = ''
-        self._start_info = c_start
-        self._init()
-
-    def _init(self):
-        # https://regex101.com/r/aNblTo/1/
-        # https://regex101.com/r/aNblTo/2/
-        # https://regex101.com/r/aNblTo/3/
-        # more generic so can work with struct, interface etc
-        s = self._start_info.get_obj()
-        try:
-            # regex_start = r"(interface)\s*[a-zA-Z0-9]+[ :]+"
-
-            matches = re_name_info_start.search(s)
-            if matches:
-                # find the index of interface and drop anything before
-                start = matches.span(1)[0]
-                if start > 0:
-                    s = s[start:]
-            # regex = r"interface\s*(?P<NAME>[a-zA-Z0-9_]+)"
-            m = re_name_info_name.match(s)
-            if m:
-                s = m.group('NAME')
-            else:
-                raise Exception(
-                    "SdkNameInfo: Unable to find name in %s" % s)
-            self._name = s
-        except Exception as e:
-            logger.error("SdkNameInfo: Error Processing: %s", s)
-            raise e
-        logger.debug('SdkNameInfo.name: %s', self._name)
-        
-
-    @property
-    def name(self) -> str:
-        """Gets name value"""
-        return self._name
-
-    @property
-    def component_start(self) -> SdkComponentStart:
-        """Gets component object"""
-        return self._start_info
-    # endregion Properties
-
-# endregion SDK API Reference
-
-# region Main Page Parsing
-
-
-@dataclass
-class MethodBlockInfo:
-    tag_id: Tag
-    tag_title: Tag
-    tag_main: Tag
-
-
-class ApiMethodBlock:
-    def __init__(self, block: Tag, blocks: 'ApiMethodBlocks'):
-        self._block: Tag = block
-        self._blocks: ApiMethodBlocks = blocks
-        self._data = None
-
-    def _get_next_sibling(self, el: PageElement) -> PageElement:
-        # get the next sibling recursivly because
-        # BeautifulSoup will also find whitesapce on next_sibling
-        if not isinstance(el, PageElement):
+    def _get_raises_lst(self) -> List[str]:
+        # rows for raise a bit messy.
+        # see: https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1animations_1_1XTimeContainer.html
+        # first row of raise will contain only the first exception.
+        # if there is another exception then the row text should end with a comma
+        row: Tag = None 
+        def ex_gen():
+            nonlocal row
+            while row:
+                if row is None:
+                    break
+                text = self._get_raises_text(row)
+                s = text
+                if text.endswith(","):
+                    row = row.find_next_sibling('tr')
+                    s = s.rstrip(',')
+                else:
+                    row = None
+                yield s
+    
+        results = []
+        row = self._get_raises_row()
+        if not row:
+            return results
+        # errs = ex()
+        for err in ex_gen():
+            results.append(err)
+        return results
             
-            raise TypeError(
-                f"MethodBlock._get_next_sibling() el is not a PageElement Url: {self._blocks.url_obj.url}")
-        next = el.next_sibling
-        # https://stackoverflow.com/questions/10711116/strip-spaces-tabs-newlines-python
-        # use split join to remove whitespace and new line
-        s = ''.join(str(next).split())
-        if s == '':
-            next = self._get_next_sibling(next)
-            # if next is None:
-            #     print(None)
-        return next
-
-    def get_obj(self) -> MethodBlockInfo:
-        # BeautifulSoup will also find whitesapce on next_sibling
-        # https://stackoverflow.com/questions/5690686/using-nextsibling-from-beautifulsoup-outputs-nothing
-        if self._data:
-            return self._data
-        tag = self._block  # a tag with id
-        try:
-            title: PageElement = self._get_next_sibling(tag)
-            main = self._get_next_sibling(title)
-            mi = MethodBlockInfo(
-                tag_id=tag,
-                tag_title=title,
-                tag_main=main
-            )
-        except Exception as e:
-            logger.error(e, exc_info=True)
-            raise e
-        self._data = mi
-        return self._data
-
-    def is_valid(self) -> bool:
-        if not self._block:
-            return False
-        tag = self._block
-        _id = tag.attrs.get('id', None)
-        if not _id:
-            return False
-        if str(_id).lower() == 'details':
-            return False
-        return True
-
-    @property
-    def blocks(self) -> 'ApiMethodBlocks':
-        """
-        Gets MethodBlocks instance that generated this instance.
-        """
-        return self._blocks
-
-
-class ApiMethodBlocks(base.BlockObj):
-    """Get all methods"""
-
-    def __init__(self, url_soup: Union[str, base.SoupObj]):
-        if isinstance(url_soup, str):
-            self._soup_obj = base.SoupObj(url_soup)
-        else:
-            self._soup_obj = url_soup
-        soup = self._soup_obj
-        super().__init__(soup=soup)
-        self._obj_data: ResultSet = None
-        self._index = 0
-        self._len = 0
-
-    def get_obj(self) -> ResultSet:
-        """
-        Gets all items, methods etc
-
-        Returns:
-            ResultSet: List of items
-        """
-        if self._obj_data:
-            return self._obj_data
-        # _cls = 'memitem'
-        # self._obj_data = self._soup.soup.select("a[id]")
-        self._obj_data = self._soup.soup.find_all("a", id=base.pattern_id)
-
-        return self._obj_data
-
-    def _get_next(self) -> ApiMethodBlock:
-        if self._index >= self._len:
-            self._index = 0
-            self._cur_obj = None
-            raise StopIteration
-        itm = self._obj_data[self._index]
-        self._index += 1
-        try:
-            mb = ApiMethodBlock(block=itm, blocks=self)
-            if not mb.is_valid():
-                mb = self._get_next()
-        except Exception as e:
-            # probally nothing to worrie about. could simple be a bad match
-            logger.warning("")
-            mb = self._get_next("ApiMethodBlocks.Next() No method data block for '%s' Url: %s", str(itm), self.url_obj.url)
-        return mb
-
-    def __iter__(self):
-        return self
-
-    def __next__(self) -> ApiMethodBlock:
-        if not self._obj_data:
-            self.get_obj()
-            self._len = len(self._obj_data)
-        return self._get_next()
-
-
-class ApiMethodName:
-    def __init__(self, block: ApiMethodBlock):
-        self._block: ApiMethodBlock = block
-
-    def get_obj(self) -> str:
-        info = self._block.get_obj()
-        name: str = info.tag_title.contents[1]
-        name = name.replace('(', '').replace(')', '').strip()
-        return name
-
-
-class ApiMethodDesc:
-    """Gets Method Description"""
-
-    def __init__(self, block: ApiMethodBlock):
-        self._block = block
-        self._cls = 'memdoc'
-        self._el = 'div'
-
-    def get_data(self) -> List[str]:
-        info = self._block.get_obj()
-        tag = info.tag_main.find(self._el, class_=self._cls)
-        lines_found: ResultSet = tag.select(f'{self._el}.{self._cls} > p')
-        p_obj = base.TagsStrObj(tags=lines_found)
-        return p_obj.get_lines()
-
-
-class ApiSdkLink:
-    """Manages getting SDK Link from API page"""
-    def __init__(self, soup: base.SoupObj):
-        self._soup = soup
-
-    def get_obj(self) -> str:
-        """
-        Gets url of SDK link from API page
-
-        Raises:
-            Excepton: If unable to parse page link
-
-        Returns:
-            str: Url of SDK
-        """
-        try:
-            a = self._soup.soup.select_one("body > div.contents > ul > li > a")
-            url = self._soup.url
-            parts = url.rsplit('/', 1)
-            href = parts[0] + '/' + a['href']
-            logger.debug("ApiSdkLink.get_obj() Link: %s", href)
-            return href
-        except Exception as e:
-            logger.error("ApiSdk Failed to get Link: Are you sure you inputing correct url?")
-            raise e
-    @property
-    def soup(self) -> base.SoupObj:
-        """Gets SoupObj instance for this instance"""
-        return self._soup
-
-
-
-class ApiDesc:
-    """Gets the description"""
-
-    def __init__(self, soup: base.SoupObj):
-        self._soup = soup
-        self._data = None
-
-    def get_obj(self) -> List[str]:
-        """
-        Gets description as list of str
-
-        Returns:
-            List[str]: description lines
-        """
-        if self._data:
-            return self._data
-        lines_found: ResultSet = self._soup.soup.select(
-            'body > div.contents > div.textblock > p')
-        p_obj = base.TagsStrObj(tags=lines_found)
-        self._data = p_obj.get_lines()
-        see_obj = ApiDescSeeAlso(self._soup)
-        see = see_obj.get_obj()
-        if see:
-            self._data.append('')
-            self._data.append('**See Also**')
-            self._data.append('')
-            self._data.append(f"    {see}")
-        return self._data
-    @property
-    def soup(self) -> base.SoupObj:
-        """Gets soup value"""
-        return self._soup
-
-class ApiDescSeeAlso:
-    """Gets the description"""
-
-    def __init__(self, soup: base.SoupObj):
-        self._soup = soup
-        self._data = None
-        self._init = False
-
-    def get_obj(self) -> str:
-        """
-        Gets See alos of Interface
-
-        Returns:
-            str: See also. if it exist; Otherwise empty string.
-        """
-        if self._init:
-            return self._data
-        self._init = True
-        tag = self._soup.soup.select_one(
-            'body > div.contents > div.textblock > dl > dd')
-        if not tag:
-            self._data = ''
-            return self._data
-        self._data = base.str_clean(" ".join(tag.text.split()))
-        return self._data
-    
-    @property
-    def soup(self) -> base.SoupObj:
-        """Gets soup value"""
-        return self._soup
-class ApiInfo:
-    def __init__(self,  url_soup: Union[str, base.SoupObj]):
-        if isinstance(url_soup, str):
-            self._url = url_soup
-            self._soup_obj = base.SoupObj(url_soup)
-        else:
-            self._url = url_soup.url
-            self._soup_obj = url_soup
-        self._sdk_link = None
-        self._dict = None
-        self._mb = ApiMethodBlocks(self._soup_obj)
-        self._api_sdk_link = None
         
-    @property
-    def desc_dict(self) -> Dict[str, List[str]]:
-        """Dictionary that contains descriptions. Key is method name"""
-        if not self._dict is None:
-            return self._dict
-        self._dict = {}
-        for block in self._mb:
-            name = ApiMethodName(block=block)
-            desc = ApiMethodDesc(block=block)
-            self._dict[name.get_obj()] = desc.get_data()
-        return self._dict
+    def _get_raises_row(self) -> Union[Tag, None]:
+        proto = self._block.get_obj()
+        rows: ResultSet = proto.find_all('tr')
+        result = None
+        for row in rows:
+            td: Tag = row.select_one('td')
+            if td.text.strip().lower() == 'raises':
+                result = row
+                break
+        return result
 
-    @property
-    def sdk_link(self) -> str:
-        """Gets sdk_link value"""
-        if not self._sdk_link is None:
-            return self._sdk_link
-        self._sdk_link = self.api_sdk_link.get_obj()
-        return self._sdk_link
+    def _get_raises_text(self, row: Tag):
+        if not row:
+            return None
+        parts = row.text.rsplit(maxsplit=1) # in case starts with raises
+        s: str = parts.pop()
+        s = s.replace('(', '').replace(')', '').replace(
+            '::', '.').strip().lstrip('.')
+        return s
 
-    @property
-    def soup(self) -> base.SoupObj:
-        """Gets SoupObj instance for this instance"""
-        return self._mb.soup
-
-    @property
-    def method_blocks(self) -> ApiMethodBlocks:
-        """Gets method_blocks value"""
-        return self._mb
-    
-    @property
-    def api_sdk_link(self) -> ApiSdkLink:
-        if not self._api_sdk_link is None:
-            return self._api_sdk_link
-        self._api_sdk_link = ApiSdkLink(soup=self.soup)
-        return self._api_sdk_link
-# endregion Main Page Parsing
-
-
-class SdkData():
-    """Sdk Data bring together most Sdk object in one easy to upse place"""
-    def __init__(self, url: str, allow_cache: bool = True):
+    def get_obj(self) -> Union[List[str], None]:
         """
-        Constructor
+        Get name of error that is raises
+
+        Returns:
+            Union[str, None]: String containing type of error if it exist; Otherwise, ``None``
+        """
+        if not self._data is False:
+            return self._data
+        self._data = None
+        # row = self._get_raises_row()
+        # if not row:
+        #     return self._data
+        # self._data = [self._get_raises_text(row)]
+        self._data = self._get_raises_lst()
+        return self._data
+
+    @property
+    def summary_info(self) -> base.SummaryInfo:
+        """Gets summary_info value"""
+        return self._block.summary_info
+
+
+class ApiNs(base.ApiNamespace):
+    """Get the Name object for the interface"""
+
+    def __init__(self, soup: base.SoupObj):
+        super().__init__(soup)
+        self._namespace_str = None
+        self._namespace = None
+
+    @property
+    def namespace(self) -> List[str]:
+        """Gets namespace value"""
+        if self._namespace is None:
+            self._namespace = self.get_obj()[:-1]
+        return self._namespace
+
+    @property
+    def namespace_str(self) -> str:
+        if self._namespace_str is None:
+            self._namespace_str = '.'.join(self.namespace)
+        return self._namespace_str
+
+
+class ApiInterfaceData(base.APIData):
+    # region Constructor
+    def __init__(self, url_soup: Union[str, base.SoupObj], allow_cache: bool):
+        super().__init__(url_soup=url_soup, allow_cache=allow_cache)
+        self._si_key = 'summeries'
+        self._detail_block_key = 'detail_block'
+        self._ns: ApiNs = None
+        self._properties_block: ApiPropertiesBlock = None
+        self._func_block: ApiFunctionsBlock = None
+        self._interfaces_block: ApiInterfacesBlock = None
+        self._func_summary_rows: base.ApiSummaryRows = None
+        self._property_summary_rows: base.ApiSummaryRows = None
+        self._export_summary_rows: base.ApiSummaryRows = None
+        self._func_summaries: base.ApiSummaries = None
+        self._property_summaries: base.ApiSummaries = None
+        self._exported_summaries: base.ApiSummaries = None
+        self._inherited: base.ApiInherited = None
+        self._cache = {
+            self._si_key: {},
+            self._detail_block_key: {}
+        }
+    # endregion Constructor
+
+    # region Methods
+    @AcceptedTypes(str, ftype=DecFuncEnum.METHOD)
+    def get_detail_block(self, a_id: str) -> base.ApiDetailBlock:
+        """
+        Gets detail block of a function.
+        Gets the 
 
         Args:
-            url (str): Url to Api Main Page
-            allow_cache (bool, optional): determins if file caching is used
-                on response data. Default ``True``
+            si (SummaryInfo): Function summary Info to get the details block for.
+
+        Returns:
+            ApiDetailBlock: object
         """
-        self._url = url
-        self._api_sdk_link = ApiSdkLink(base.SoupObj(url=self._url, allow_cache=allow_cache))
-        self._soup_obj = None
-        self._code_text = None
-        self._componnet_text = None
-        self._component_start = None
-        self._component_lines = None
-        self._method_lines = None
-        self._property_lines = None
-        self._properties = None
-        self._extends = None
-        self._imports = None
-        self._name_info = None
-        self._url_obj = None
-    
-    @property
-    def url_obj(self) -> base.UrlObj:
-        """Url Object for Api main page"""
-        if self._url_obj is None:
-            self._url_obj = base.UrlObj(self._url)
-        return self._url_obj
-    
-    @property
-    def code_text(self) -> SdkCodeText:
-        """Gets sdk_code_text value"""
-        if self._code_text is None:
-            self._code_text = SdkCodeText(self.sdk_soup_obj)
-        return self._code_text
+        key = f"get_detail_block_{a_id}"
+        if key in self._cache:
+            return self._cache[key]
+        result = super().get_detail_block(a_id=a_id)
+        self._cache[key] = result
+        return result
+
+    @AcceptedTypes(str, ftype=DecFuncEnum.METHOD)
+    def get_proto_block(self, a_id: str) -> base.ApiProtoBlock:
+        """Gets the block for a method information"""
+        key = f"get_proto_block_{a_id}"
+        if key in self._cache:
+            return self._cache[key]
+        result = super().get_proto_block(a_id=a_id)
+        self._cache[key] = result
+        return self._cache[key]
+
+    @AcceptedTypes(str, ftype=DecFuncEnum.METHOD)
+    def get_prams_info(self, a_id: str) -> ApiFnPramsInfo:
+        """Gets parameter info for all parameters of a a method"""
+        block = self.get_proto_block(a_id=a_id)
+        result = ApiFnPramsInfo(block=block)
+        return result
+
+    @AcceptedTypes(str, ftype=DecFuncEnum.METHOD)
+    def get_method_ex(self, a_id: str) -> ApiMethodException:
+        """Gets raises info for method"""
+        block = self.get_proto_block(a_id=a_id)
+        result = ApiMethodException(block=block)
+        return result
+
+    @AcceptedTypes(str, ftype=DecFuncEnum.METHOD)
+    def get_desc_detail(self, a_id: str) -> base.ApiDescDetail:
+        """Gets Description obj for method or property"""
+        key = f"get_desc_detail_{a_id}"
+        if key in self._cache:
+            return self._cache[key]
+        self._cache[key] = super().get_desc_detail(a_id=a_id)
+        return self._cache[key]
+
+    @AcceptedTypes(str, ftype=DecFuncEnum.METHOD)
+    def get_import_info_method(self, a_id: str) -> base.ImportInfo:
+        """
+        Gets imports for method params and return type
+
+        Args:
+            si_id (str): Function summary Info
+
+        Returns:
+            base.ImportInfo: Import info
+        """
+        key = 'get_import_info_method_' + a_id
+        if key in self._cache:
+            return self._cache[key]
+        info = base.ImportInfo()
+        params_info = self.get_prams_info(a_id=a_id)
+        fn_info = self.func_summaries
+        # ensure data is primed
+        fn_info.get_obj()
+        params_info.get_obj()
+
+        info.requires_typing = params_info.requires_typing or fn_info.requires_typing
+        info.imports.update(params_info.imports)
+        info.imports.update(fn_info.imports)
+        self._cache[key] = info
+        return self._cache[key]
+
+    def get_import_info_property(self) -> base.ImportInfo:
+        """
+        Gets imports for properties
+
+        Args:
+            si_id (str): Property summary Info
+
+        Returns:
+            base.ImportInfo: Import info
+        """
+        info = base.ImportInfo()
+        p_info = self.property_summaries
+        # ensure data is primed
+        p_info.get_obj()
+        info.requires_typing = p_info.requires_typing
+        info.imports.update(p_info.imports)
+        return info
+    # endregion Methods
+
+    # region Properties
+
 
     @property
-    def componnet_text(self) -> SdkComponentText:
-        """Gets componnet value"""
-        if self._componnet_text is None:
-            self._componnet_text = SdkComponentText(self.code_text)
-        return self._componnet_text
+    def ns(self) -> ApiNs:
+        """Gets the interface Description object"""
+        if self._ns is None:
+            self._ns = ApiNs(
+                self.soup_obj)
+        return self._ns
 
     @property
-    def component_start(self) -> SdkComponentStart:
-        """Gets component_start value"""
-        if self._component_start is None:
-            self._component_start = SdkComponentStart(self.componnet_text)
-        return self._component_start
-    
-    @property
-    def component_lines(self) -> SdkComponentLines:
-        """Gets component_lines value"""
-        if self._component_lines is None:
-            self._component_lines = SdkComponentLines(self.componnet_text)
-        return self._component_lines
-    
-    @property
-    def method_lines(self) -> SdkMethodLines:
-        """Gets method_lines value"""
-        if self._method_lines is None:
-            self._method_lines = SdkMethodLines(self.component_lines)
-        return self._method_lines
-    
-    @property
-    def property_lines(self) -> SdkPropertyLines:
-        """Gets property_lines value"""
-        if self._property_lines is None:
-            self._property_lines = SdkPropertyLines(self.component_lines)
-        return self._property_lines
-    
-    @property
-    def properties(self) -> SdkProperties:
-        """Get properites value"""
-        if self._properties is None:
-            self._properties = SdkProperties(self.component_lines)
-    @property
-    def extends(self) -> SdkExtends:
-        """Gets extends value"""
-        if self._extends is None:
-            self._extends = SdkExtends(self.component_start, self.component_lines)
-        return self._extends
-    
-    @property
-    def imports(self) -> SdkImports:
-        """Gets imports value"""
-        if self._imports is None:
-            self._imports = SdkImports(self.component_lines)
-        return self._imports
-    
-    @property
-    def name_info(self) -> SdkNameInfo:
-        """Gets name_info value"""
-        if self._name_info is None:
-            self._name_info = SdkNameInfo(self.component_start)
-        return self._name_info
-    @property
-    def api_sdk_link(self) -> ApiSdkLink:
-        """Gets api_sdk_link value"""
-        return self._api_sdk_link
-    
-    @property
-    def sdk_soup_obj(self) -> base.SoupObj:
-        """Gets the Soup object reated to SDK page"""
-        if self._soup_obj is None:
-            self._soup_obj = base.SoupObj(self.api_sdk_link.get_obj())
-        return self._soup_obj
+    def func_block(self) -> ApiFunctionsBlock:
+        """Gets Summary Functions block"""
+        if self._func_block is None:
+            self._func_block = ApiFunctionsBlock(
+                self.public_members)
+        return self._func_block
 
     @property
-    def api_soup_obj(self) -> base.SoupObj:
-        """Gets the Soup object reated to Api page"""
-        return self.api_sdk_link.soup
+    def properties_block(self) -> ApiPropertiesBlock:
+        """Gets Summary Properties block"""
+        if self._properties_block is None:
+            self._properties_block = ApiPropertiesBlock(
+                self.public_members)
+        return self._properties_block
+
+    @property
+    def interfaces_block(self) -> ApiInterfacesBlock:
+        """Gets Summary Exported Interfaces block"""
+        if self._interfaces_block is None:
+            self._interfaces_block = ApiInterfacesBlock(
+                self.public_members)
+        return self._interfaces_block
+
+    @property
+    def func_summary_rows(self) -> base.ApiSummaryRows:
+        """Get Summary rows for functions"""
+        if self._func_summary_rows is None:
+            self._func_summary_rows = base.ApiSummaryRows(
+                self.func_block)
+        return self._func_summary_rows
+
+    @property
+    def property_summary_rows(self) -> base.ApiSummaryRows:
+        """Get Summary rows for Properties"""
+        if self._property_summary_rows is None:
+            self._property_summary_rows = base.ApiSummaryRows(
+                self.properties_block)
+        return self._property_summary_rows
+
+    @property
+    def export_summary_rows(self) -> base.ApiSummaryRows:
+        """Get Summary rows for Exported Interfaces"""
+        if self._export_summary_rows is None:
+            self._export_summary_rows = base.ApiSummaryRows(
+                self.interfaces_block)
+        return self._export_summary_rows
+
+    @property
+    def func_summaries(self) -> base.ApiSummaries:
+        """Get Summary info list for functions"""
+        if self._func_summaries is None:
+            self._func_summaries = base.ApiSummaries(
+                self.func_summary_rows)
+        return self._func_summaries
+
+    @property
+    def property_summaries(self) -> base.ApiSummaries:
+        """Get Summary info list for Properties"""
+        if self._property_summaries is None:
+            self._property_summaries = base.ApiSummaries(
+                self.property_summary_rows)
+        return self._property_summaries
+
+    @property
+    def exported_summaries(self) -> base.ApiSummaries:
+        """Get Summary info list for Exported Interfaces"""
+        if self._exported_summaries is None:
+            self._exported_summaries = base.ApiSummaries(
+                self.export_summary_rows)
+        return self._exported_summaries
+
+    @property
+    def inherited(self) -> base.ApiInherited:
+        """Gets class that get all inherited value"""
+        if self._inherited is None:
+            self._inherited = base.ApiInherited(
+                soup=self.soup_obj, raise_error=False)
+        return self._inherited
+
+    # endregion Properties
+# endregion API Interface classes
+
 # region Parse
+
+
 class ParserInterface(base.ParserBase):
 
     # region Constructor
+    @TypeCheckKw(
+        arg_info={"allow_cache": bool},
+        ftype=DecFuncEnum.METHOD
+    )
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self._sdk_data = SdkData(self.url, allow_cache=self.allow_cache)
-        soup = self._sdk_data.api_sdk_link.soup
-        self._api_info = ApiInfo(soup)
-        self._sdk_method_info = SdkMethods(soup)
-        self._sdk_property_info = SdkProperties(self._sdk_data.component_lines)
-        self._info = None
+        self._allow_caching = kwargs.get('allow_cache', True)
+        self._api_data = ApiInterfaceData(
+            url_soup=self.url, allow_cache=self._allow_cache)
         self._requires_typing = False
         self._imports: Set[str] = set()
-        self._formated_data = None
-        self._data_items = None
+        self._cache = {}
     # endregion Constructor
 
     def get_dict_data(self) -> dict:
@@ -1423,13 +560,13 @@ class ParserInterface(base.ParserBase):
         items = self._get_data_items()
         info['items'] = items
         return info
-    
+
     def get_parser_args(self) -> dict:
         args = {
             "sort": self.sort
         }
         return args
-        
+
     def get_info(self) -> Dict[str, object]:
         """
         Gets info
@@ -1444,42 +581,43 @@ class ParserInterface(base.ParserBase):
                 "url": "str, api url"
             }
         """
-        if self._info is not None:
-            return self._info
-        # ns = SdkNamesSpaceInfo(self._sdk_method_info.component)
-        ns = base.UrlObj(self._url)
-        
-        # ni = self._sdk_data.name_info
-        ex = self._sdk_data.extends
-        # im = self._sdk_data.imports
-        desc = ApiDesc(soup=self._api_info.soup)
+        key = 'get_info'
+        if key in self._cache:
+            return self._cache[key]
+        ex = []
+        for el in self._api_data.inherited.get_obj():
+            ex.append(el.fullns)
+
         result = {
             # 'name': ni.name,
-            'name': ns.name,
+            'name': self._api_data.name.get_obj(),
             # convert set to list for json
             # 'imports': list(im.get_obj()),
             'imports': [],
-            'namespace': ns.namespace_str,
-            'extends': ex.ex_lst,
-            'desc': desc.get_obj(),
-            "url": self._api_info.soup.url
+            'namespace': self._api_data.ns.namespace_str,
+            'extends': ex,
+            'desc': self._api_data.desc.get_obj(),
+            "url": self._api_data.url_obj.url,
         }
-        logger.debug('ParserInterface.get_info() name: %s', ns.name)
-        logger.debug('ParserInterface.get_info() namespace: %s', ns.namespace_str)
-        self._info = result
-        return self._info
-    
+        logger.debug('ParserInterface.get_info() name: %s', result['name'])
+        logger.debug('ParserInterface.get_info() namespace: %s',
+                     result['namespace'])
+        self._cache[key] = result
+        return self._cache[key]
+
     def get_formated_data(self) -> str:
-        if self._formated_data:
-            return self._formated_data
+        key = 'get_formated_data'
+        if key in self._cache:
+            return self._cache[key]
         attribs = self._get_data_items()
         str_lst = base.Util.get_formated_dict_list_str(obj=attribs, indent=4)
-        self._formated_data = str_lst
-        return self._formated_data
+        self._cache[key] = str_lst
+        return self._cache[key]
 
     def _get_data_items(self) -> dict:
-        if not self._data_items is None:
-            return self._data_items
+        key = '_get_data_items'
+        if key in self._cache:
+            return self._cache[key]
         attribs = {}
         methods = self._get_methods_data()
         prop = self._get_properties_data()
@@ -1487,57 +625,94 @@ class ParserInterface(base.ParserBase):
             attribs.update(methods)
         if 'properties' in prop:
             attribs.update(prop)
-        self._data_items = attribs
-        return self._data_items
-        
+        self._cache[key] = attribs
+        return self._cache[key]
+
     def _get_methods_data(self):
         attribs = {}
-        for i, m in enumerate(self._sdk_method_info):
+        si_lst = self._api_data.func_summaries.get_obj()
+        for i, si in enumerate(si_lst):
+            if logger.level <= logging.DEBUG:
+                logger.debug(
+                    "%s._get_methods_data() Processing: %s, %s",
+                    self.__class__.__name__, si.name, si.id )
+            import_info = self._api_data.get_import_info_method(si.id)
+            params_info = self._api_data.get_prams_info(si.id)
+            lst_info = params_info.get_obj()
             if i == 0:
                 attribs['methods'] = []
-            if not m.name:
-                continue
-            if m.requires_typing:
+            if import_info.requires_typing:
+                logger.debug(
+                    "%s._get_methods_data() Imports require typing for: %s, %s",
+                    self.__class__.__name__, si.name, si.id)
                 self._requires_typing = True
-            self._imports.update(m.imports)
-            attrib = {
-                "name": m.name,
-                "returns": m.return_type,
-                "desc": self._api_info.desc_dict.get(m.name, []),
-                "raises": m.raises
-            }
+            self._imports.update(import_info.imports)
+            if params_info.requires_typing:
+                logger.debug(
+                    "%s._get_methods_data() Params require typing for: %s, %s",
+                    self.__class__.__name__, si.name, si.id)
+                self._requires_typing = True
+            self._imports.update(params_info.imports)
+            if si.p_type.requires_typing:
+                logger.debug(
+                    "%s._get_methods_data() Return '%s' type require typing for: %s, %s",
+                    self.__class__.__name__, si.p_type.type, si.name, si.id)
+                self._requires_typing = True
             args = []
-            for pi in m.args:
-                args.append([pi.name, pi.type, pi.direction])
+            attrib = {
+                "name": si.name,
+                "returns": si.p_type.type,
+                "desc": self._api_data.get_desc_detail(si.id).get_obj(),
+                "raises": self._api_data.get_method_ex(si.id).get_obj() or []
+            }
+            for pi in lst_info:
+                if logger.level <= logging.DEBUG:
+                    logger.debug(
+                        f"{self.__class__.__name__}._get_methods_data() {si.name} param, Name: {pi.name}, Type: {pi.type}, Direction: {pi.direction}")
+                args.append((pi.name, pi.type, pi.direction))
             attrib['args'] = args
             attribs['methods'].append(attrib)
+
         if self.sort:
             if 'methods' in attribs:
                 newlist = sorted(attribs['methods'], key=lambda d: d['name'])
                 attribs['methods'] = newlist
         return attribs
-    
+
     def _get_properties_data(self):
         attribs = {}
-        for i, m in enumerate(self._sdk_property_info):
+        si_lst = self._api_data.property_summaries.get_obj()
+        for i, si in enumerate(si_lst):
+            if logger.level <= logging.DEBUG:
+                logger.debug(
+                    "%s._get_properties_data() Processing: %s, %s",
+                    self.__class__.__name__, si.name, si.id)
             if i == 0:
                 attribs['properties'] = []
-            if not m.name:
+            if not si.name:
                 continue
-            if m.requires_typing:
-                self._requires_typing = True
-            self._imports.update(m.imports)
             attrib = {
-                "name": m.name,
-                "returns": m.return_type,
-                "desc": self._api_info.desc_dict.get(m.name, []),
-                "raises_get": m.raises_get,
-                "raises_set": m.raises_set
+                "name": si.name,
+                "returns": si.p_type.type,
+                "desc": self._api_data.get_desc_detail(si.id).get_obj(),
+                "raises_get": '',
+                "raises_set": ''
             }
             attribs['properties'].append(attrib)
+            if si.p_type.requires_typing:
+                logger.debug(
+                    "%s._get_properties_data() Return '%s' type require typing for: %s, %s",
+                    self.__class__.__name__, si.p_type.type, si.name, si.id)
+                self._requires_typing = True
+        import_info = self._api_data.get_import_info_property()
+        if import_info.requires_typing:
+            self._requires_typing = True
+        self._imports.update(import_info.imports)
+
         if self.sort:
             if 'properties' in attribs:
-                newlist = sorted(attribs['properties'], key=lambda d: d['name'])
+                newlist = sorted(attribs['properties'],
+                                 key=lambda d: d['name'])
                 attribs['properties'] = newlist
         return attribs
 
@@ -1545,24 +720,31 @@ class ParserInterface(base.ParserBase):
     def imports(self) -> Set[str]:
         """Gets imports value"""
         try:
-            if not self._formated_data:
+            key = 'get_formated_data'
+            if not key in self._cache:
                 msg = "ParserInterface.get_formated_data() method must be called before accessing imports"
                 raise Exception(msg)
         except Exception as e:
             logger.error(e, exc_info=True)
             raise e
         return self._imports
+
     @property
     def requires_typing(self) -> bool:
         """Gets requires typing value"""
         try:
-            if not self._formated_data:
+            key = 'get_formated_data'
+            if not key in self._cache:
                 msg = "ParserInterface.get_formated_data() method must be called before accessing requires_typing"
                 raise Exception(msg)
         except Exception as e:
             logger.error(e, exc_info=True)
             raise e
         return self._requires_typing
+
+    @property
+    def api_data(self) -> ApiInterfaceData:
+        return self._api_data
 # endregion Parse
 
 # region Writer
@@ -1575,7 +757,7 @@ class InterfaceWriter(base.WriteBase):
         "copy_clipboard": 0, "print_template": 0,
         "print_json": 0, "clear_on_print": 0,
         "write_template_long": 0
-        },
+    },
         types=[bool],
         ftype=DecFuncEnum.METHOD)
     def __init__(self, parser: ParserInterface, **kwargs):
@@ -1587,7 +769,8 @@ class InterfaceWriter(base.WriteBase):
         self._print_json: bool = kwargs.get('print_json', True)
         self._write_json: bool = kwargs.get('write_json', False)
         self._clear_on_print: bool = kwargs.get('clear_on_print', True)
-        self._write_template_long: bool = kwargs.get('write_template_long', False)
+        self._write_template_long: bool = kwargs.get(
+            'write_template_long', False)
         self._indent_amt = 4
         self._json_str = None
         self._p_name: str = None
@@ -1601,7 +784,7 @@ class InterfaceWriter(base.WriteBase):
         self._p_requires_typing = False
         self._path_dir = Path(__file__).parent
         self._cache: Dict[str, object] = {}
-        
+
         t_file = 'interface'
         if not self._write_template_long:
             t_file += '_stub'
@@ -1609,7 +792,8 @@ class InterfaceWriter(base.WriteBase):
         _path = Path(self._path_dir, 'template', t_file)
         try:
             if not _path.exists():
-                raise FileNotFoundError(f"unable to find templae file '{_path}'")
+                raise FileNotFoundError(
+                    f"unable to find templae file '{_path}'")
         except Exception as e:
             logger.error(e, exc_info=True)
             raise e
@@ -1638,15 +822,18 @@ class InterfaceWriter(base.WriteBase):
                 self._write_to_json()
         except Exception as e:
             logger.exception(e)
-    
+
     def _get_json(self) -> str:
         if not self._json_str is None:
             return self._json_str
         p_dict = {}
         p_dict['from_imports'] = self._get_from_imports()
         p_dict['from_imports_typing'] = self._get_from_imports_typing()
+        p_dict['quote'] = self._get_quote_flat()
+        p_dict['typings'] = self._get_typings()
+        p_dict['requires_typing'] = self._p_requires_typing
         p_dict.update(self._parser.get_dict_data())
-        
+
         json_dict = {
             "id": JSON_ID,
             "version": __version__,
@@ -1661,7 +848,7 @@ class InterfaceWriter(base.WriteBase):
         str_jsn = base.Util.get_formated_dict_list_str(obj=json_dict, indent=2)
         self._json_str = str_jsn
         return self._json_str
-    
+
     def _get_template(self):
         with open(self._template_file) as f:
             contents = f.read()
@@ -1695,14 +882,88 @@ class InterfaceWriter(base.WriteBase):
             lst.append([f, n])
         self._cache[key] = lst
         return self._cache[key]
-    # endregion get Imports
     
+    def _get_quote_flat(self) -> List[str]:
+        key = '_get_quote_flat'
+        if key in self._cache:
+            return self._cache[key]
+        
+        t_set: Set[str] = set()
+        # grab all the methods that need quotes
+        si_lst = self._parser.api_data.func_summaries.get_obj()
+        for si in si_lst:
+            t = si.p_type
+            if t.requires_typing or t.is_py_type is False:
+                t_set.add(t.type)
+            # process method params
+            params_info = self._parser.api_data.get_prams_info(si.id)
+            p_lst = params_info.get_obj()
+            for pinfo in p_lst:
+                if pinfo.p_type:
+                    if pinfo.p_type.requires_typing or pinfo.p_type.is_py_type is False:
+                        t_set.add(pinfo.p_type.type)
+
+        # grab all the properties that need quotes
+        si_lst = self._parser.api_data.property_summaries.get_obj()
+        for si in si_lst:
+            t = si.p_type
+            if t.requires_typing or t.is_py_type is False:
+                t_set.add(t.type)
+
+        # grab all export summaries
+        si_lst = self._parser.api_data.exported_summaries.get_obj()
+        for si in si_lst:
+            t = si.p_type
+            if t.requires_typing or t.is_py_type is False:
+                t_set.add(t.type)
+        self._cache[key] = list(t_set)
+        return self._cache[key]
+
+    def _get_typings(self) -> List[str]:
+        key = '_get_typings'
+        if key in self._cache:
+            return self._cache[key]
+        t_set: Set[str] = set()
+        si_lst = self._parser.api_data.func_summaries.get_obj()
+        for si in si_lst:
+            t = si.p_type
+            if t.requires_typing:
+                t_set.add(t.type)
+            # process method params
+            params_info = self._parser.api_data.get_prams_info(si.id)
+            p_lst = params_info.get_obj()
+            for pinfo in p_lst:
+                if pinfo.p_type:
+                    if pinfo.p_type.requires_typing:
+                        t_set.add(pinfo.p_type.type)
+        si_lst = self._parser.api_data.property_summaries.get_obj()
+        for si in si_lst:
+            t = si.p_type
+            if t.requires_typing:
+                t_set.add(t.type)
+        si_lst = self._parser.api_data.exported_summaries.get_obj()
+        for si in si_lst:
+            t = si.p_type
+            if t.requires_typing:
+                t_set.add(t.type)
+        self._cache[key] = list(t_set)
+        return self._cache[key]
+    # endregion get Imports
+
     def _set_template_data(self):
         if self._write_template_long is False:
             return
         self._template = self._template.replace('{name}', self._p_name)
         self._template = self._template.replace('{ns}', str(self._p_namespace))
         self._template = self._template.replace('{link}', self._p_url)
+        
+        self._template = self._template.replace(
+            '{quote}',
+            str(set(self._get_quote_flat())))
+        self._template = self._template.replace(
+            '{typings}',
+            str(set(self._get_typings())))
+        
         self._template = self._template.replace(
             '{requires_typing}', str(self._p_requires_typing))
         self._template = self._template.replace(
@@ -1731,7 +992,10 @@ class InterfaceWriter(base.WriteBase):
         self._template = self._template.replace('{data}', indented)
 
     def _set_info(self):
-        def get_extends(lst:List[str]) -> List[str]:
+        key = '_set_info'
+        if key in self._cache:
+            return
+        def get_extends(lst: List[str]) -> List[str]:
             return [base.Util.get_last_part(s) for s in lst]
             # return [s.rsplit('.', 1)[1] for s in lst]
         data = self._parser.get_info()
@@ -1741,18 +1005,25 @@ class InterfaceWriter(base.WriteBase):
         self._p_desc = data['desc']
         self._p_url = data['url']
         self._p_data = self._parser.get_formated_data()
+        self._p_requires_typing = False
         self._validate_p_info()
         _imports = data['imports']
         self._p_imports.update(_imports)
         self._p_imports.update(data['extends'])
         self._p_imports_typing.update(self._parser.imports)
+        # in some cases such as XIntrospectionAccess
+        # https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1beans_1_1XIntrospectionAccess.html
+        # class is a subclass of XInterface and has a method the has return type XInterface.
+        # remove any overlap in _p_imports_typing
+        self._p_imports_typing = self._p_imports_typing - self._p_imports
         if len(self._p_imports_typing) > 0:
             self._p_requires_typing = True
         if not self._p_requires_typing:
             self._p_requires_typing = self._parser.requires_typing
         if self._write_file or self._write_json:
             self._file_full_path = self._get_uno_obj_path()
-    
+        self._cache[key] = True
+
     def _validate_p_info(self):
         try:
             if not self._p_name:
@@ -1767,19 +1038,21 @@ class InterfaceWriter(base.WriteBase):
         except Exception as e:
             logger.error(e)
             raise e
-    
+
     def _get_uno_obj_path(self) -> Path:
         key = '_get_uno_obj_path'
         if key in self._cache:
             return self._cache[key]
         if not self._p_name:
             try:
-                raise Exception("InterfaceWriter._get_uno_obj_path() Parser provided a name that is an empty string.")
+                raise Exception(
+                    "InterfaceWriter._get_uno_obj_path() Parser provided a name that is an empty string.")
             except Exception as e:
                 logger.error(e, exc_info=True)
                 raise e
-            
-        uno_obj_path = Path(self._path_dir.parent, 'uno_obj')
+
+        uno_obj_path = Path(self._path_dir.parent,
+                            base.APP_CONFIG.uno_base_dir)
         name_parts: List[str] = self._p_namespace.split('.')
         # ignore com, sun, star
         path_parts = name_parts[3:]
@@ -1793,7 +1066,7 @@ class InterfaceWriter(base.WriteBase):
         with open(self._file_full_path, 'w') as f:
             f.write(self._template)
         logger.info("Created file: %s", self._file_full_path)
-    
+
     def _write_to_json(self):
         p = self._file_full_path.parent
         jsn_p = p / (str(self._file_full_path.stem) + '.json')
@@ -1804,12 +1077,154 @@ class InterfaceWriter(base.WriteBase):
 # endregion Writer
 
 
+# region Parse method
+def _get_parsed_kwargs(**kwargs) -> Dict[str, str]:
+    required = ("url",)
+    lookups = {
+        "u": "url",
+        "url": "url",
+        "L": "log_file",
+        "log_file": "log_file"
+    }
+    result = {}
+    for k, v in kwargs.items():
+        if not isinstance(k, str):
+            continue
+        if k in lookups:
+            key = lookups[k]
+            result[key] = v
+    for k in required:
+        if not k in result:
+            # k is missing from kwargs
+            raise base.RequiredError(f"Missing required arg {k}.")
+    return result
+
+def _get_parsed_args(*args) -> Dict[str, bool]:
+    # key, value and value is a key into defaults
+    defaults = {
+        'no_sort': True,
+        "no_cache": True,
+        "no_print_clear": True,
+        "long_template": False,
+        "clipboard": False,
+        "print_json": False,
+        "print_template": False,
+        "write_template": False,
+        "write_json": False,
+        "verbose": False
+    }
+    found = {
+        'no_sort': False,
+        "no_cache": False,
+        "no_print_clear": False,
+        "long_template": True,
+        "clipboard": True,
+        "print_json": True,
+        "print_template": True,
+        "write_template": True,
+        "write_json": True,
+        "verbose": True
+    }
+    lookups = {
+        "s": "no_sort",
+        "no_sort": "no_sort",
+        "x": "no_cache",
+        "no_cache": "no_cache",
+        "p": "no_print_clear",
+        "no_print_clear": "no_print_clear",
+        "g": "long_template",
+        "long_template": "long_template",
+        "c": "clipboard",
+        "clipboard": "clipboard",
+        "n": "print_json",
+        "print_json": "print_json",
+        "m": "print_template",
+        "print_template": "print_template",
+        "t": "write_template",
+        "write_template": "write_template",
+        "j": "write_json",
+        "write_json": "write_json",
+        "v": "verbose",
+        "verbose": "verbose"
+    }
+    result = {k:v for k, v in defaults.items()}
+    for arg in args:
+        if not isinstance(arg, str):
+            continue
+        if arg in lookups:
+            key = lookups[arg]
+            result[key] = found[key]
+    return result
+
+
+def parse(*args, **kwargs):
+    """
+    Parses data, alternative to running on command line.
+
+    Other Arguments:
+        'no_sort' (str, optional): Short form ``'s'``. No sorting of results. Default ``False``
+        'no_cache' (str, optional): Short form ``'x'``. No caching. Default ``False``
+        'no_print_clear (str, optional): Short form ``'p'``. No clearing of terminal
+            when otuput to terminal. Default ``False``
+        'long_template' (str, optional): Short form ``'g'``. Writes a long format template.
+            Requires write_template is set. Default ``False``
+        'clipboard' (str, optional): Short form ``'c'``. Copy to clipboard. Default ``False``
+        'print_json' (str, optional): Short form ``'n'``. Print json to termainl. Default ``False``
+        'print_template' (str, optional): Short form ``'m'``. Print template to terminal. Default ``False``
+        'write_template' (str, optional): Short form ``'t'``. Write template file into obj_uno subfolder. Default ``False``
+        'write_json' (str, optional): Short form ``'j'``. Write json file into obj_uno subfolder. Default ``False``
+        'verbose' (str, optional): Short form ``'v'``. Verobose output.
+
+    Keyword Arguments:
+        url (str): Short form ``u``. url to parse
+        log_file (str, optional): Short form ``L``. Log File
+    """
+    global logger
+    pkwargs = _get_parsed_kwargs(**kwargs)
+    pargs = _get_parsed_args(*args)
+    p = ParserInterface(
+        url=pkwargs['url'],
+        sort=pargs['no_sort'],
+        cache=pargs['no_cache']
+    )
+    w = InterfaceWriter(
+        parser=p,
+        print_template=pargs['print_template'],
+        print_json=pargs['print_json'],
+        copy_clipboard=pargs['clipboard'],
+        write_template=pargs['write_template'],
+        write_json=pargs['write_json'],
+        clear_on_print=(not pargs['no_print_clear']),
+        write_template_long=pargs['long_template']
+    )
+    if logger is None:
+        log_args = {}
+        if 'log_file' in pkwargs:
+            log_args['log_file'] = pkwargs['log_file']
+        else:
+            log_args['log_file'] = 'interface.log'
+        if pargs['verbose']:
+            log_args['level'] = logging.DEBUG
+        _set_loggers(get_logger(logger_name=Path(__file__).stem, **log_args))
+    w.write()
+# endregion Parse method
+
 def _main():
-   
-    # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1graphic_1_1XSvgParser.html'
-    url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1office_1_1XAnnotation.html'
-    sys.argv.extend(['--log-file', 'debug.log', '-v', '-n', '-u', url])
-    main()
+    os.system('cls' if os.name == 'nt' else 'clear')
+    # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1beans_1_1XHierarchicalPropertySet.html'
+    # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1beans_1_1XIntrospectionAccess.html' # has a sequence
+    # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1accessibility_1_1XAccessibleTextSelection.html'
+    # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XStyleSettings.html'
+    url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XMessageBoxFactory.html'
+    args = ('v', 'n')
+    kwargs = {
+        "u": url,
+        "log_file": "debug.log"
+    }
+    # sys.argv.extend(['--log-file', 'debug.log', '-v', '-n', '-u', url])
+    # main()
+    parse(*args, **kwargs)
+
 
 def main():
     global logger
@@ -1901,7 +1316,7 @@ def main():
         os.system('cls' if os.name == 'nt' else 'clear')
     logger.info('Executing command: %s', sys.argv[1:])
     logger.info('Parsing Url %s' % args.url)
-    
+
     p = ParserInterface(
         url=args.url,
         sort=args.sort,
@@ -1916,10 +1331,11 @@ def main():
         write_json=args.write_json,
         clear_on_print=(not args.no_print_clear),
         write_template_long=args.long_format
-        )
+    )
     if args.print_template is False and args.print_json is False:
         print('')
     w.write()
+
 
 if __name__ == '__main__':
     main()

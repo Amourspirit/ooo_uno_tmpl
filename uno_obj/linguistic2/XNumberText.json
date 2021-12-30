@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:16:54+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:08+00:00",
   "name": "XNumberText",
   "type": "interface",
   "namespace": "com.sun.star.linguistic2",
@@ -10,22 +10,80 @@
   },
   "writer_args": {},
   "data": {
-    "from_imports": [],
-    "from_imports_typing": [],
+    "from_imports": [
+      [
+        ".number_text",
+        "NumberText"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..lang.locale",
+        "Locale"
+      ]
+    ],
+    "quote": [
+      "Locale",
+      "typing.List[Locale]"
+    ],
+    "typings": [
+      "typing.List[Locale]"
+    ],
+    "requires_typing": true,
     "name": "XNumberText",
     "imports": [],
     "namespace": "com.sun.star.linguistic2",
-    "extends": [],
+    "extends": [
+      "com.sun.star.linguistic2.NumberText"
+    ],
     "desc": [
       "This interface allows to spell out numbers and money amounts.",
       "",
       "The current set of supported languages is:",
       "",
-      "**See Also**",
+      "**since**",
       "",
       "    LibreOffice 6.1"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1linguistic2_1_1XNumberText.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getAvailableLanguages",
+          "returns": "typing.List[Locale]",
+          "desc": [
+            "returns a list of all supported languages."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getNumberText",
+          "returns": "str",
+          "desc": [
+            "spell out numbers and money amounts",
+            "",
+            "Please note that text argument can contain prefixes separated by space, for example \\\"ordinal\\\" for ordinal numbers, \\\"ordinal-number\\\" for ordinal indicators and ISO 4217 currency codes.",
+            "",
+            "Language modules list the supported prefixes by the input text \\\"help\\\"."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "aText",
+              "str",
+              "in"
+            ],
+            [
+              "aLocale",
+              "Locale",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

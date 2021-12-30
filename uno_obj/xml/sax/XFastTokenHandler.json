@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:18:29+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:01+00:00",
   "name": "XFastTokenHandler",
   "type": "interface",
   "namespace": "com.sun.star.xml.sax",
@@ -17,6 +17,13 @@
       ]
     ],
     "from_imports_typing": [],
+    "quote": [
+      "typing.List[int]"
+    ],
+    "typings": [
+      "typing.List[int]"
+    ],
+    "requires_typing": true,
     "name": "XFastTokenHandler",
     "imports": [],
     "namespace": "com.sun.star.xml.sax",
@@ -31,6 +38,39 @@
       "A token value must be greater or equal to zero and less than FastToken.NAMESPACE. If a string identifier is not known to this instance, FastToken.DONTKNOW is returned."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1xml_1_1sax_1_1XFastTokenHandler.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getTokenFromUTF8",
+          "returns": "int",
+          "desc": [
+            "returns an integer token for the given string"
+          ],
+          "raises": [],
+          "args": [
+            [
+              "Identifier",
+              "typing.List[int]",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getUTF8Identifier",
+          "returns": "typing.List[int]",
+          "desc": [
+            "returns an identifier for the given integer token as a byte sequence encoded in UTF-8."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "Token",
+              "int",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

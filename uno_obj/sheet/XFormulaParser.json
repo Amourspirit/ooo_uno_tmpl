@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:21:08+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:17+00:00",
   "name": "XFormulaParser",
   "type": "interface",
   "namespace": "com.sun.star.sheet",
@@ -10,16 +10,93 @@
   },
   "writer_args": {},
   "data": {
-    "from_imports": [],
-    "from_imports_typing": [],
+    "from_imports": [
+      [
+        "..report.meta.x_formula_parser",
+        "XFormulaParser"
+      ],
+      [
+        ".x_filter_formula_parser",
+        "XFilterFormulaParser"
+      ],
+      [
+        ".formula_parser",
+        "FormulaParser"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..table.cell_address",
+        "CellAddress"
+      ],
+      [
+        ".formula_token",
+        "FormulaToken"
+      ]
+    ],
+    "quote": [
+      "CellAddress",
+      "typing.List[FormulaToken]"
+    ],
+    "typings": [
+      "typing.List[FormulaToken]"
+    ],
+    "requires_typing": true,
     "name": "XFormulaParser",
     "imports": [],
     "namespace": "com.sun.star.sheet",
-    "extends": [],
+    "extends": [
+      "com.sun.star.report.meta.XFormulaParser",
+      "com.sun.star.sheet.FormulaParser",
+      "com.sun.star.sheet.XFilterFormulaParser"
+    ],
     "desc": [
       "converts between text and token representations of formulas."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1sheet_1_1XFormulaParser.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "parseFormula",
+          "returns": "typing.List[FormulaToken]",
+          "desc": [
+            "parses a formula into a sequence of tokens."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aFormula",
+              "str",
+              "in"
+            ],
+            [
+              "aReferencePos",
+              "CellAddress",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "printFormula",
+          "returns": "str",
+          "desc": [
+            "converts a formula into a string."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aTokens",
+              "typing.List[FormulaToken]",
+              "in"
+            ],
+            [
+              "aReferencePos",
+              "CellAddress",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

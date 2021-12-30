@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 18:24:25+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-28 11:30:59+00:00",
   "type": "struct",
   "name": "InvocationInfo",
   "namespace": "com.sun.star.script",
@@ -10,27 +10,35 @@
   },
   "writer_args": {
     "sort": true,
-    "auto_import": true
+    "auto_import": true,
+    "dynamic_struct": false
   },
   "data": {
     "name": "InvocationInfo",
+    "namespace": "com.sun.star.script",
+    "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1script_1_1InvocationInfo.html",
+    "quote": [
+      "typing.List[object]",
+      "typing.List[ParamMode]"
+    ],
+    "typings": [
+      "typing.List[object]",
+      "typing.List[ParamMode]"
+    ],
     "fullname": "com.sun.star.script.InvocationInfo",
     "desc": [
       "This struct is used to specify information about object members (methods or properties) accessed via XInvocation, such as names, types, or parameters."
     ],
-    "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1script_1_1InvocationInfo.html",
-    "namespace": "com.sun.star.script",
+    "extends": [],
+    "imports": [],
     "auto_imports": [
       [
         "..reflection.param_mode",
         "ParamMode"
-      ],
-      [
-        ".member_type",
-        "MemberType"
       ]
     ],
-    "imports": [],
+    "from_imports": [],
+    "requires_typing": true,
     "items": [
       {
         "name": "PropertyAttribute",
@@ -52,7 +60,7 @@
       },
       {
         "name": "aParamModes",
-        "type": "'typing.List[ParamMode]'",
+        "type": "typing.List[ParamMode]",
         "orig_type": "sequence< com.sun.star.reflection.ParamMode >",
         "lines": [
           "Mode of method parameters (IN, OUT, INOUT), for properties this sequence is empty."
@@ -76,7 +84,7 @@
       },
       {
         "name": "eMemberType",
-        "type": "'MemberType'",
+        "type": "object",
         "orig_type": "MemberType",
         "lines": [
           "Kind of the member (method or property)."

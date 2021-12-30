@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:21:00+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:16+00:00",
   "name": "XCellRangeMovement",
   "type": "interface",
   "namespace": "com.sun.star.sheet",
@@ -16,7 +16,32 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..table.cell_range_address",
+        "CellRangeAddress"
+      ],
+      [
+        ".cell_delete_mode",
+        "CellDeleteMode"
+      ],
+      [
+        ".cell_insert_mode",
+        "CellInsertMode"
+      ],
+      [
+        "..table.cell_address",
+        "CellAddress"
+      ]
+    ],
+    "quote": [
+      "CellDeleteMode",
+      "CellAddress",
+      "CellRangeAddress",
+      "CellInsertMode"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XCellRangeMovement",
     "imports": [],
     "namespace": "com.sun.star.sheet",
@@ -27,6 +52,95 @@
       "provides methods for moving ranges of cells in a sheet."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1sheet_1_1XCellRangeMovement.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "copyRange",
+          "returns": "None",
+          "desc": [
+            "copies a cell range to another position in the document.",
+            "",
+            "The source cell range keeps unchanged."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aDestination",
+              "CellAddress",
+              "in"
+            ],
+            [
+              "aSource",
+              "CellRangeAddress",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "insertCells",
+          "returns": "None",
+          "desc": [
+            "inserts cells, moving other cells down or right.",
+            "",
+            "Non-empty cells cannot be moved off the sheet."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aRange",
+              "CellRangeAddress",
+              "in"
+            ],
+            [
+              "nMode",
+              "CellInsertMode",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "moveRange",
+          "returns": "None",
+          "desc": [
+            "moves a cell range to another position in the document.",
+            "",
+            "After copying the contents of the cell range, all cells will be cleared."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aDestination",
+              "CellAddress",
+              "in"
+            ],
+            [
+              "aSource",
+              "CellRangeAddress",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "removeRange",
+          "returns": "None",
+          "desc": [
+            "deletes cells, moving other cells up or left."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aRange",
+              "CellRangeAddress",
+              "in"
+            ],
+            [
+              "nMode",
+              "CellDeleteMode",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:18:04+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:04+00:00",
   "name": "XView",
   "type": "interface",
   "namespace": "com.sun.star.awt",
@@ -16,7 +16,22 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".size",
+        "Size"
+      ],
+      [
+        ".x_graphics",
+        "XGraphics"
+      ]
+    ],
+    "quote": [
+      "XGraphics",
+      "Size"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XView",
     "imports": [],
     "namespace": "com.sun.star.awt",
@@ -29,6 +44,88 @@
       "This kind of object is called view-object."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XView.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "draw",
+          "returns": "None",
+          "desc": [
+            "draws the object at the specified position.",
+            "",
+            "If the output should be clipped, the caller has to set the clipping region."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "nX",
+              "int",
+              "in"
+            ],
+            [
+              "nY",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getGraphics",
+          "returns": "XGraphics",
+          "desc": [
+            "returns the output device which was set using the method XView.setGraphics()."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getSize",
+          "returns": "Size",
+          "desc": [
+            "returns the size of the object in device units.",
+            "",
+            "A device must be set before."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "setGraphics",
+          "returns": "bool",
+          "desc": [
+            "sets the output device."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aDevice",
+              "XGraphics",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setZoom",
+          "returns": "None",
+          "desc": [
+            "sets the zoom factor.",
+            "",
+            "The zoom factor only affects the content of the view, not the size."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "fZoomX",
+              "float",
+              "in"
+            ],
+            [
+              "fZoomY",
+              "float",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

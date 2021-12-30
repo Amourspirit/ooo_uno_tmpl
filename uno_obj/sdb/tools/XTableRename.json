@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:16:47+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:07+00:00",
   "name": "XTableRename",
   "type": "interface",
   "namespace": "com.sun.star.sdb.tools",
@@ -12,27 +12,60 @@
   "data": {
     "from_imports": [
       [
-        ".......x_connection_supplier",
+        ".x_connection_supplier",
         "XConnectionSupplier"
       ]
     ],
-    "from_imports_typing": [],
-    "name": "XTableRename",
-    "imports": [
-      "XConnectionSupplier"
+    "from_imports_typing": [
+      [
+        "...beans.x_property_set",
+        "XPropertySet"
+      ]
     ],
+    "quote": [
+      "XPropertySet"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "name": "XTableRename",
+    "imports": [],
     "namespace": "com.sun.star.sdb.tools",
     "extends": [
-      "XConnectionSupplier"
+      "com.sun.star.sdb.tools.XConnectionSupplier"
     ],
     "desc": [
       "allows to rename table.",
       "",
-      "**See Also**",
+      "**since**",
       "",
-      "    com.sun.star.sdb.DataSource.Settings"
+      "    OOo 3.3"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1sdb_1_1tools_1_1XTableRename.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "rename",
+          "returns": "None",
+          "desc": [
+            "rename the given table to the new name"
+          ],
+          "raises": [
+            "com.sun.star.sdbc.SQLException"
+          ],
+          "args": [
+            [
+              "table",
+              "XPropertySet",
+              "in"
+            ],
+            [
+              "newName",
+              "str",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

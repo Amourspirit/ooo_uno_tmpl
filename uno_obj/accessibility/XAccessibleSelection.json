@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:20:48+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:27+00:00",
   "name": "XAccessibleSelection",
   "type": "interface",
   "namespace": "com.sun.star.accessibility",
@@ -16,7 +16,17 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_accessible",
+        "XAccessible"
+      ]
+    ],
+    "quote": [
+      "XAccessible"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XAccessibleSelection",
     "imports": [],
     "namespace": "com.sun.star.accessibility",
@@ -32,11 +42,117 @@
       "",
       "It depends on the class implementing this interface, whether it supports single or multi selection.",
       "",
-      "**See Also**",
+      "**since**",
       "",
       "    OOo 1.1.2"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1accessibility_1_1XAccessibleSelection.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "clearAccessibleSelection",
+          "returns": "None",
+          "desc": [
+            "Clears the selection, so that no children of the object are selected."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "deselectAccessibleChild",
+          "returns": "None",
+          "desc": [
+            "Removes the specified child from the set of this object's selected children.",
+            "",
+            "Note that not all applications support deselection: calls to this method may be silently ignored."
+          ],
+          "raises": [
+            "com.sun.star.lang.IndexOutOfBoundsException"
+          ],
+          "args": [
+            [
+              "nChildIndex",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getSelectedAccessibleChild",
+          "returns": "XAccessible",
+          "desc": [
+            "Returns the specified selected Accessible child."
+          ],
+          "raises": [
+            "com.sun.star.lang.IndexOutOfBoundsException"
+          ],
+          "args": [
+            [
+              "nSelectedChildIndex",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getSelectedAccessibleChildCount",
+          "returns": "int",
+          "desc": [
+            "Returns the number of Accessible children that are currently selected.",
+            "",
+            "This number specifies the valid interval of indices that can be used as arguments for the methods XAccessibleSelection.getSelectedChild() and XAccessibleSelection.deselectSelectedChild()."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "isAccessibleChildSelected",
+          "returns": "bool",
+          "desc": [
+            "Determines if the specified child of this object is selected."
+          ],
+          "raises": [
+            "com.sun.star.lang.IndexOutOfBoundsException"
+          ],
+          "args": [
+            [
+              "nChildIndex",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "selectAccessibleChild",
+          "returns": "None",
+          "desc": [
+            "Selects the specified Accessible child of the object.",
+            "",
+            "Depending on the implementing class the child is added to the current set a selected children (multi selection) or a previously selected child is deselected first (single selection)."
+          ],
+          "raises": [
+            "com.sun.star.lang.IndexOutOfBoundsException"
+          ],
+          "args": [
+            [
+              "nChildIndex",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "selectAllAccessibleChildren",
+          "returns": "None",
+          "desc": [
+            "Select all children.",
+            "",
+            "Causes every child of the object to be selected if the object supports multiple selections. If multiple selection is not supported then the first child, if it exists, is selected and all other children are deselected."
+          ],
+          "raises": [],
+          "args": []
+        }
+      ]
+    }
   }
 }

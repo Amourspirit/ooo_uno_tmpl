@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:21:42+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:37+00:00",
   "name": "XController",
   "type": "interface",
   "namespace": "com.sun.star.frame",
@@ -16,7 +16,22 @@
         "XComponent"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_frame",
+        "XFrame"
+      ],
+      [
+        ".x_model",
+        "XModel"
+      ]
+    ],
+    "quote": [
+      "XFrame",
+      "XModel"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XController",
     "imports": [],
     "namespace": "com.sun.star.frame",
@@ -24,13 +39,99 @@
       "com.sun.star.lang.XComponent"
     ],
     "desc": [
-      "With this interface, components viewed in a Frame can serve events (by supplying dispatches).",
-      "",
-      "**See Also**",
-      "",
-      "    XFrame"
+      "With this interface, components viewed in a Frame can serve events (by supplying dispatches)."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1frame_1_1XController.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "attachFrame",
+          "returns": "None",
+          "desc": [
+            "is called to attach the controller with its managing frame."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "Frame",
+              "XFrame",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "attachModel",
+          "returns": "bool",
+          "desc": [
+            "is called to attach the controller to a new model."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "Model",
+              "XModel",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getFrame",
+          "returns": "XFrame",
+          "desc": [
+            "provides access to owner frame of this controller"
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getModel",
+          "returns": "XModel",
+          "desc": [
+            "provides access to currently attached model"
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getViewData",
+          "returns": "object",
+          "desc": [
+            "provides access to current view status"
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "restoreViewData",
+          "returns": "None",
+          "desc": [
+            "restores the view status using the data gotten from a previous call to XController.getViewData()."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "Data",
+              "object",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "suspend",
+          "returns": "bool",
+          "desc": [
+            "is called to prepare the controller for closing the view"
+          ],
+          "raises": [],
+          "args": [
+            [
+              "Suspend",
+              "bool",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

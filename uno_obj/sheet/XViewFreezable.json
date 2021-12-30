@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:21:20+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:18+00:00",
   "name": "XViewFreezable",
   "type": "interface",
   "namespace": "com.sun.star.sheet",
@@ -17,6 +17,9 @@
       ]
     ],
     "from_imports_typing": [],
+    "quote": [],
+    "typings": [],
+    "requires_typing": false,
     "name": "XViewFreezable",
     "imports": [],
     "namespace": "com.sun.star.sheet",
@@ -27,6 +30,42 @@
       "enables a SpreadsheetView to freeze columns and rows of the view."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1sheet_1_1XViewFreezable.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "freezeAtPosition",
+          "returns": "None",
+          "desc": [
+            "freezes panes with the specified number of columns and rows.",
+            "",
+            "To freeze only horizontally, specify nRows as 0. To freeze only vertically, specify nColumns as 0."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "nColumns",
+              "int",
+              "in"
+            ],
+            [
+              "nRows",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "hasFrozenPanes",
+          "returns": "bool",
+          "desc": [
+            "returns TRUE if the view has frozen panes.",
+            "",
+            "Only one of XViewSplitable.getIsWindowSplit() and XViewFreezable.hasFrozenPanes() can be TRUE."
+          ],
+          "raises": [],
+          "args": []
+        }
+      ]
+    }
   }
 }

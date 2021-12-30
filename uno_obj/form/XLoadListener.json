@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:20:08+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:14+00:00",
   "name": "XLoadListener",
   "type": "interface",
   "namespace": "com.sun.star.form",
@@ -16,7 +16,17 @@
         "XEventListener"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..lang.event_object",
+        "EventObject"
+      ]
+    ],
+    "quote": [
+      "EventObject"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XLoadListener",
     "imports": [],
     "namespace": "com.sun.star.form",
@@ -26,13 +36,91 @@
     "desc": [
       "receives load-related events from a loadable object.",
       "",
-      "The interface is typically implemented by data-bound components, which want to listen to the data source that contains their database form.",
-      "",
-      "**See Also**",
-      "",
-      "    com.sun.star.form.XLoadable"
+      "The interface is typically implemented by data-bound components, which want to listen to the data source that contains their database form."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1form_1_1XLoadListener.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "loaded",
+          "returns": "None",
+          "desc": [
+            "is invoked when the object has successfully connected to a datasource."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aEvent",
+              "EventObject",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "reloaded",
+          "returns": "None",
+          "desc": [
+            "is invoked when the object has been reloaded."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aEvent",
+              "EventObject",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "reloading",
+          "returns": "None",
+          "desc": [
+            "is invoked when the object is about to be reloaded.",
+            "",
+            "Components may use this to stop any other event processing related to the event source until they get the reloaded event."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aEvent",
+              "EventObject",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "unloaded",
+          "returns": "None",
+          "desc": [
+            "is invoked after the object has disconnected from a datasource."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aEvent",
+              "EventObject",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "unloading",
+          "returns": "None",
+          "desc": [
+            "is invoked when the object is about to be unloaded.",
+            "",
+            "Components may use this to stop any other event processing related to the event source before the object is unloaded."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aEvent",
+              "EventObject",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

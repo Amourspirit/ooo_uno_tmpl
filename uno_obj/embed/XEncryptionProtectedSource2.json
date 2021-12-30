@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:18:47+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:05+00:00",
   "name": "XEncryptionProtectedSource2",
   "type": "interface",
   "namespace": "com.sun.star.embed",
@@ -12,25 +12,66 @@
   "data": {
     "from_imports": [
       [
-        "......x_encryption_protected_source",
+        ".x_encryption_protected_source",
         "XEncryptionProtectedSource"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..beans.named_value",
+        "NamedValue"
+      ]
+    ],
+    "quote": [
+      "typing.List[NamedValue]"
+    ],
+    "typings": [
+      "typing.List[NamedValue]"
+    ],
+    "requires_typing": true,
     "name": "XEncryptionProtectedSource2",
     "imports": [],
     "namespace": "com.sun.star.embed",
     "extends": [
-      "XEncryptionProtectedSource"
+      "com.sun.star.embed.XEncryptionProtectedSource"
     ],
     "desc": [
       "This interface allows to set a password for an object.",
       "",
-      "**See Also**",
+      "**since**",
       "",
       "    OOo 3.4"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1embed_1_1XEncryptionProtectedSource2.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "hasEncryptionData",
+          "returns": "bool",
+          "desc": [
+            "determine if an encryption data is set for this object."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "setEncryptionData",
+          "returns": "None",
+          "desc": [
+            "sets an encryption data for the object."
+          ],
+          "raises": [
+            "com.sun.star.io.IOException"
+          ],
+          "args": [
+            [
+              "aEncryptionData",
+              "typing.List[NamedValue]",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

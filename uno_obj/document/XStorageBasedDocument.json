@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:22:05+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:11+00:00",
   "name": "XStorageBasedDocument",
   "type": "interface",
   "namespace": "com.sun.star.document",
@@ -16,7 +16,29 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_storage_change_listener",
+        "XStorageChangeListener"
+      ],
+      [
+        "..embed.x_storage",
+        "XStorage"
+      ],
+      [
+        "..beans.property_value",
+        "PropertyValue"
+      ]
+    ],
+    "quote": [
+      "XStorageChangeListener",
+      "typing.List[PropertyValue]",
+      "XStorage"
+    ],
+    "typings": [
+      "typing.List[PropertyValue]"
+    ],
+    "requires_typing": true,
     "name": "XStorageBasedDocument",
     "imports": [],
     "namespace": "com.sun.star.document",
@@ -27,6 +49,119 @@
       "allows to initialize document with a storage, to store document to a storage, and to set document to be based on provided storage."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1document_1_1XStorageBasedDocument.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "addStorageChangeListener",
+          "returns": "None",
+          "desc": [
+            "allows to register a listener that will be notified when another storage is set to the document."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xListener",
+              "XStorageChangeListener",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getDocumentStorage",
+          "returns": "XStorage",
+          "desc": [
+            "allows to get the storage the document is based on."
+          ],
+          "raises": [
+            "com.sun.star.io.IOException",
+            "com.sun.star.uno.Exception"
+          ],
+          "args": []
+        },
+        {
+          "name": "loadFromStorage",
+          "returns": "None",
+          "desc": [
+            "lets the document load itself using provided storage."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.frame.DoubleInitializationException",
+            "com.sun.star.io.IOException",
+            "com.sun.star.uno.Exception"
+          ],
+          "args": [
+            [
+              "xStorage",
+              "XStorage",
+              "in"
+            ],
+            [
+              "aMediaDescriptor",
+              "typing.List[PropertyValue]",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "removeStorageChangeListener",
+          "returns": "None",
+          "desc": [
+            "allows to deregister the listener."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xListener",
+              "XStorageChangeListener",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "storeToStorage",
+          "returns": "None",
+          "desc": [
+            "lets the document store itself to the provided storage."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.io.IOException",
+            "com.sun.star.uno.Exception"
+          ],
+          "args": [
+            [
+              "xStorage",
+              "XStorage",
+              "in"
+            ],
+            [
+              "aMediaDescriptor",
+              "typing.List[PropertyValue]",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "switchToStorage",
+          "returns": "None",
+          "desc": [
+            "allows to switch the document to the provided storage."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.io.IOException",
+            "com.sun.star.uno.Exception"
+          ],
+          "args": [
+            [
+              "xStorage",
+              "XStorage",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

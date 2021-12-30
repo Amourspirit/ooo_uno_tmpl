@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:20:21+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:31+00:00",
   "name": "XTransferable2",
   "type": "interface",
   "namespace": "com.sun.star.datatransfer",
@@ -16,15 +16,69 @@
         "XTransferable"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".data_flavor",
+        "DataFlavor"
+      ]
+    ],
+    "quote": [
+      "DataFlavor"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XTransferable2",
     "imports": [],
     "namespace": "com.sun.star.datatransfer",
     "extends": [
       "com.sun.star.datatransfer.XTransferable"
     ],
-    "desc": [],
+    "desc": [
+      "",
+      "**since**",
+      "",
+      "    LibreOffice 6.4"
+    ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1datatransfer_1_1XTransferable2.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getTransferData2",
+          "returns": "object",
+          "desc": [
+            "This is equivalent of getTransferData of XTransferable, but takes an additional parameter that specifies the destination document type."
+          ],
+          "raises": [
+            "UnsupportedFlavorException",
+            "com.sun.star.io.IOException"
+          ],
+          "args": [
+            [
+              "aFlavor",
+              "DataFlavor",
+              "in"
+            ],
+            [
+              "aDestShellID",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "isComplex",
+          "returns": "bool",
+          "desc": [
+            "Returns true if the selection contains embedded objects or is a large text blob.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 6.4"
+          ],
+          "raises": [],
+          "args": []
+        }
+      ]
+    }
   }
 }

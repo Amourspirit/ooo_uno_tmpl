@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:18:03+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:04+00:00",
   "name": "XUserInputInterception",
   "type": "interface",
   "namespace": "com.sun.star.awt",
@@ -16,7 +16,22 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_mouse_click_handler",
+        "XMouseClickHandler"
+      ],
+      [
+        ".x_key_handler",
+        "XKeyHandler"
+      ]
+    ],
+    "quote": [
+      "XKeyHandler",
+      "XMouseClickHandler"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XUserInputInterception",
     "imports": [],
     "namespace": "com.sun.star.awt",
@@ -28,11 +43,78 @@
       "",
       "A handler is not a passive listener, it can even consume the event.",
       "",
-      "**See Also**",
+      "**since**",
       "",
       "    OOo 1.1.2"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XUserInputInterception.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "addKeyHandler",
+          "returns": "None",
+          "desc": [
+            "Add a new listener that is called on com.sun.star.awt.KeyEvent.",
+            "",
+            "Every listener is given the opportunity to consume the event, i.e. prevent the not yet called listeners from being called."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xHandler",
+              "XKeyHandler",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "addMouseClickHandler",
+          "returns": "None",
+          "desc": [
+            "Add a new listener that is called on com.sun.star.awt.MouseEvent.",
+            "",
+            "Every listener is given the opportunity to consume the event, i.e. prevent the not yet called listeners from being called."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xHandler",
+              "XMouseClickHandler",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "removeKeyHandler",
+          "returns": "None",
+          "desc": [
+            "Remove the specified listener from the list of listeners."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xHandler",
+              "XKeyHandler",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "removeMouseClickHandler",
+          "returns": "None",
+          "desc": [
+            "Remove the specified listener from the list of listeners."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xHandler",
+              "XMouseClickHandler",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

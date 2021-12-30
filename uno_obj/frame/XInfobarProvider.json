@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:21:48+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:38+00:00",
   "name": "XInfobarProvider",
   "type": "interface",
   "namespace": "com.sun.star.frame",
@@ -12,27 +12,154 @@
   "data": {
     "from_imports": [
       [
-        ".uno.x_interface",
-        "uno.XInterface"
+        "..uno.x_interface",
+        "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..beans.string_pair",
+        "StringPair"
+      ]
+    ],
+    "quote": [
+      "typing.List[StringPair]"
+    ],
+    "typings": [
+      "typing.List[StringPair]"
+    ],
+    "requires_typing": true,
     "name": "XInfobarProvider",
     "imports": [],
     "namespace": "com.sun.star.frame",
     "extends": [
-      "uno.XInterface"
+      "com.sun.star.uno.XInterface"
     ],
     "desc": [
       "Allows to add Infobars to a frame.",
       "",
       "This interface can be obtained via com.sun.star.frame.XController.",
       "",
-      "**See Also**",
+      "**since**",
       "",
       "    LibreOffice 6.4"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1frame_1_1XInfobarProvider.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "appendInfobar",
+          "returns": "None",
+          "desc": [
+            "Creates and displays a new Infobar."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "id",
+              "str",
+              "in"
+            ],
+            [
+              "primaryMessage",
+              "str",
+              "in"
+            ],
+            [
+              "secondaryMessage",
+              "str",
+              "in"
+            ],
+            [
+              "infobarType",
+              "int",
+              "in"
+            ],
+            [
+              "actionButtons",
+              "typing.List[StringPair]",
+              "in"
+            ],
+            [
+              "showCloseButton",
+              "bool",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "hasInfobar",
+          "returns": "bool",
+          "desc": [
+            "Check if Infobar exists.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 7.0"
+          ],
+          "raises": [],
+          "args": [
+            [
+              "id",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "removeInfobar",
+          "returns": "None",
+          "desc": [
+            "Removes an existing Infobar."
+          ],
+          "raises": [
+            "com.sun.star.container.NoSuchElementException"
+          ],
+          "args": [
+            [
+              "id",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "updateInfobar",
+          "returns": "None",
+          "desc": [
+            "Updates an existing Infobar.",
+            "",
+            "Use if you want to update only small parts of the Infobar."
+          ],
+          "raises": [
+            "com.sun.star.container.NoSuchElementException"
+          ],
+          "args": [
+            [
+              "id",
+              "str",
+              "in"
+            ],
+            [
+              "primaryMessage",
+              "str",
+              "in"
+            ],
+            [
+              "secondaryMessage",
+              "str",
+              "in"
+            ],
+            [
+              "infobarType",
+              "int",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

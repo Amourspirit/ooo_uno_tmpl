@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:19:21+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:36+00:00",
   "name": "XTableChart",
   "type": "interface",
   "namespace": "com.sun.star.table",
@@ -16,7 +16,19 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".cell_range_address",
+        "CellRangeAddress"
+      ]
+    ],
+    "quote": [
+      "typing.List[CellRangeAddress]"
+    ],
+    "typings": [
+      "typing.List[CellRangeAddress]"
+    ],
+    "requires_typing": true,
     "name": "XTableChart",
     "imports": [],
     "namespace": "com.sun.star.table",
@@ -24,13 +36,84 @@
       "com.sun.star.uno.XInterface"
     ],
     "desc": [
-      "provides access to the settings of a chart object in a table or spreadsheet.",
-      "",
-      "**See Also**",
-      "",
-      "    com.sun.star.table.TableChart"
+      "provides access to the settings of a chart object in a table or spreadsheet."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1table_1_1XTableChart.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getHasColumnHeaders",
+          "returns": "bool",
+          "desc": [
+            "returns, whether the cells of the topmost row of the source data are interpreted as column headers."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getHasRowHeaders",
+          "returns": "bool",
+          "desc": [
+            "returns, whether the cells of the leftmost column of the source data are interpreted as row headers."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getRanges",
+          "returns": "typing.List[CellRangeAddress]",
+          "desc": [
+            "returns the cell ranges that contain the data for the chart."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "setHasColumnHeaders",
+          "returns": "None",
+          "desc": [
+            "specifies whether the cells of the topmost row of the source data are interpreted as column headers."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "bHasColumnHeaders",
+              "bool",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setHasRowHeaders",
+          "returns": "None",
+          "desc": [
+            "specifies whether the cells of the leftmost column of the source data are interpreted as row headers."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "bHasRowHeaders",
+              "bool",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setRanges",
+          "returns": "None",
+          "desc": [
+            "sets the cell ranges that contain the data for the chart."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aRanges",
+              "typing.List[CellRangeAddress]",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

@@ -27,8 +27,10 @@ class BaseService(BaseJson):
         _inherits = self.convert_lst_last(data.get('extends', []))
         setattr(self, 'inherits', _inherits)
         self.include_desc = bool(json_data['writer_args'].get('include_desc', True))
-            
-        
+        quote: List[str] = data.get('quote', [])
+        self.quote.update(quote)
+        typings: List[str] = data.get('typings', [])
+        self.typings.update(typings)
 
     def _validate_data(self, data: dict) -> bool:
         super()._validate_data(data=data)

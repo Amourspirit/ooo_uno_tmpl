@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:18:51+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:05+00:00",
   "name": "XStateChangeListener",
   "type": "interface",
   "namespace": "com.sun.star.embed",
@@ -16,7 +16,17 @@
         "XEventListener"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..lang.event_object",
+        "EventObject"
+      ]
+    ],
+    "quote": [
+      "EventObject"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XStateChangeListener",
     "imports": [],
     "namespace": "com.sun.star.embed",
@@ -27,6 +37,63 @@
       "makes it possible to receive events when an embedded object changes it's state."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1embed_1_1XStateChangeListener.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "changingState",
+          "returns": "None",
+          "desc": [
+            "is called just before the object changes state.",
+            "",
+            "Actually the listener can try to complain about state changing, but it is up to object to decide whether the state change can be prevented. Anyway the possibility to complain must be used very carefully."
+          ],
+          "raises": [
+            "com.sun.star.embed.WrongStateException"
+          ],
+          "args": [
+            [
+              "aEvent",
+              "EventObject",
+              "in"
+            ],
+            [
+              "nOldState",
+              "int",
+              "in"
+            ],
+            [
+              "nNewState",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "stateChanged",
+          "returns": "None",
+          "desc": [
+            "is called after the object has changed state."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aEvent",
+              "EventObject",
+              "in"
+            ],
+            [
+              "nOldState",
+              "int",
+              "in"
+            ],
+            [
+              "nNewState",
+              "int",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

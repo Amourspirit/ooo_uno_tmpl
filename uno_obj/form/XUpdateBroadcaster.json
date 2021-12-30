@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:20:09+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:14+00:00",
   "name": "XUpdateBroadcaster",
   "type": "interface",
   "namespace": "com.sun.star.form",
@@ -16,7 +16,17 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_update_listener",
+        "XUpdateListener"
+      ]
+    ],
+    "quote": [
+      "XUpdateListener"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XUpdateBroadcaster",
     "imports": [],
     "namespace": "com.sun.star.form",
@@ -26,13 +36,42 @@
     "desc": [
       "is the broadcaster interface for sending \\\"approveUpdate\\\" and \\\"updated\\\" events.",
       "",
-      "The component supporting this interface must do approval calls (XUpdateListener.approveUpdate()) immediately before the data is updated, and notification calls (XUpdateListener.updated()) immediately afterwards.",
-      "",
-      "**See Also**",
-      "",
-      "    XUpdateListener"
+      "The component supporting this interface must do approval calls (XUpdateListener.approveUpdate()) immediately before the data is updated, and notification calls (XUpdateListener.updated()) immediately afterwards."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1form_1_1XUpdateBroadcaster.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "addUpdateListener",
+          "returns": "None",
+          "desc": [
+            "adds the specified listener to receive the events \\\"approveUpdate\\\" and \\\"updated\\\"."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aListener",
+              "XUpdateListener",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "removeUpdateListener",
+          "returns": "None",
+          "desc": [
+            "removes the specified listener."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aListener",
+              "XUpdateListener",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

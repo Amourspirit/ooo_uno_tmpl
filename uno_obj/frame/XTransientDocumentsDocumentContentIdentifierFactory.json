@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:21:56+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:38+00:00",
   "name": "XTransientDocumentsDocumentContentIdentifierFactory",
   "type": "interface",
   "namespace": "com.sun.star.frame",
@@ -16,7 +16,22 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..ucb.x_content_identifier",
+        "XContentIdentifier"
+      ],
+      [
+        ".x_model",
+        "XModel"
+      ]
+    ],
+    "quote": [
+      "XContentIdentifier",
+      "XModel"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XTransientDocumentsDocumentContentIdentifierFactory",
     "imports": [],
     "namespace": "com.sun.star.frame",
@@ -26,11 +41,31 @@
     "desc": [
       "a factory for identifiers of com.sun.star.ucb.TransientDocumentsDocumentContents.",
       "",
-      "**See Also**",
+      "**since**",
       "",
-      "    com.sun.star.document.OfficeDocument"
+      "    LibreOffice 6.3"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1frame_1_1XTransientDocumentsDocumentContentIdentifierFactory.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "createDocumentContentIdentifier",
+          "returns": "XContentIdentifier",
+          "desc": [
+            "creates a com.sun.star.ucb.XContentIdentifier based on a given com.sun.star.document.OfficeDocument."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "Model",
+              "XModel",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

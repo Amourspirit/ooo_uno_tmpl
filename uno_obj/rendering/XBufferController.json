@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:17:33+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:18+00:00",
   "name": "XBufferController",
   "type": "interface",
   "namespace": "com.sun.star.rendering",
@@ -17,6 +17,9 @@
       ]
     ],
     "from_imports_typing": [],
+    "quote": [],
+    "typings": [],
+    "requires_typing": false,
     "name": "XBufferController",
     "imports": [],
     "namespace": "com.sun.star.rendering",
@@ -28,11 +31,80 @@
       "",
       "This interface provides methods to enable and control double/multi-buffering facilities on screen devices.",
       "",
-      "**See Also**",
+      "**since**",
       "",
       "    OOo 2.0"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1rendering_1_1XBufferController.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "createBuffers",
+          "returns": "int",
+          "desc": [
+            "Create the given number of background buffers.",
+            "",
+            "There's one buffer implicitly available, which is the canvas surface itself. Thus, calling createBuffers(1) creates a double-buffered object."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "nBuffers",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "destroyBuffers",
+          "returns": "None",
+          "desc": [
+            "Destroy all buffers generated via this object."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "showBuffer",
+          "returns": "bool",
+          "desc": [
+            "Switch the display to show the specified buffer.",
+            "",
+            "The method returns, when the switch is performed and the selected buffer is shown on screen, or immediately when an error occurs. If the switch was successful, subsequent render operations will be directed to the new backbuffer.",
+            "",
+            "Use this method if you need your screen display to be in sync with other things, e.g. sound playback."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "bUpdateAll",
+              "bool",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "switchBuffer",
+          "returns": "bool",
+          "desc": [
+            "Schedule the display of the specified buffer.",
+            "",
+            "The method returns, when the switching of the buffer is successfully scheduled, or immediately when an error occurs. If the switch was successful, subsequent render operations will be directed to the new backbuffer. Note that, if the buffer switching is exceedingly slow, or the frequency of switchBuffer() is exceedingly high, the buffer scheduled for display here might become the current render target before it is fully displayed on screen. In this case, any rendering operation to this buffer will block, until it is safe to perform the operation without visible cluttering.",
+            "",
+            "Use this method if you favor maximal render speed, but don't necessarily require your screen display to be in sync with other things, e.g. sound playback."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "bUpdateAll",
+              "bool",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

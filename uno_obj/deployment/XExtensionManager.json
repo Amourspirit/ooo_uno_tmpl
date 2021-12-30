@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:18:40+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:37+00:00",
   "name": "XExtensionManager",
   "type": "interface",
   "namespace": "com.sun.star.deployment",
@@ -12,20 +12,58 @@
   "data": {
     "from_imports": [
       [
-        "..lang.x_component",
-        "XComponent"
-      ],
-      [
         "..util.x_modify_broadcaster",
         "XModifyBroadcaster"
+      ],
+      [
+        "..lang.x_component",
+        "XComponent"
       ]
     ],
-    "from_imports_typing": [],
-    "name": "XExtensionManager",
-    "imports": [
-      "com.sun.star.lang.XComponent",
-      "com.sun.star.util.XModifyBroadcaster"
+    "from_imports_typing": [
+      [
+        "..beans.named_value",
+        "NamedValue"
+      ],
+      [
+        "..ucb.x_command_environment",
+        "XCommandEnvironment"
+      ],
+      [
+        "..task.x_abort_channel",
+        "XAbortChannel"
+      ],
+      [
+        ".x_package_type_info",
+        "XPackageTypeInfo"
+      ],
+      [
+        ".x_package",
+        "XPackage"
+      ],
+      [
+        ".x_package",
+        "XPackage"
+      ]
     ],
+    "quote": [
+      "XCommandEnvironment",
+      "typing.List[typing.List[XPackage]]",
+      "typing.List[XPackageTypeInfo]",
+      "typing.List[XPackage]",
+      "typing.List[NamedValue]",
+      "XPackage",
+      "XAbortChannel"
+    ],
+    "typings": [
+      "typing.List[XPackage]",
+      "typing.List[XPackageTypeInfo]",
+      "typing.List[NamedValue]",
+      "typing.List[typing.List[XPackage]]"
+    ],
+    "requires_typing": true,
+    "name": "XExtensionManager",
+    "imports": [],
     "namespace": "com.sun.star.deployment",
     "extends": [
       "com.sun.star.lang.XComponent",
@@ -34,11 +72,440 @@
     "desc": [
       "The XExtensionManager interface is used to manage extensions in the user, shared and bundled repository.",
       "",
-      "**See Also**",
+      "**since**",
       "",
-      "    ExtensionManager"
+      "    OOo 3.3"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1deployment_1_1XExtensionManager.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "addExtension",
+          "returns": "XPackage",
+          "desc": [
+            "adds an extension.",
+            "",
+            "The properties argument is currently only used to suppress the license information for shared extensions."
+          ],
+          "raises": [
+            "DeploymentException",
+            "com.sun.star.ucb.CommandFailedException",
+            "com.sun.star.ucb.CommandAbortedException",
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "url",
+              "str",
+              "in"
+            ],
+            [
+              "properties",
+              "typing.List[NamedValue]",
+              "in"
+            ],
+            [
+              "repository",
+              "str",
+              "in"
+            ],
+            [
+              "xAbortChannel",
+              "XAbortChannel",
+              "in"
+            ],
+            [
+              "xCmdEnv",
+              "XCommandEnvironment",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "checkPrerequisitesAndEnable",
+          "returns": "int",
+          "desc": [
+            "check if all prerequisites for the extension are fulfilled and activates it, if possible."
+          ],
+          "raises": [
+            "DeploymentException",
+            "com.sun.star.ucb.CommandFailedException",
+            "com.sun.star.ucb.CommandAbortedException",
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "extension",
+              "XPackage",
+              "in"
+            ],
+            [
+              "xAbortChannel",
+              "XAbortChannel",
+              "in"
+            ],
+            [
+              "xCmdEnv",
+              "XCommandEnvironment",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "createAbortChannel",
+          "returns": "XAbortChannel",
+          "desc": [
+            "creates a command channel to be used to asynchronously abort a command."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "disableExtension",
+          "returns": "None",
+          "desc": [
+            "disable an extension.",
+            "",
+            "If the extension is not from the user repository then an IllegalArgumentException is thrown."
+          ],
+          "raises": [
+            "DeploymentException",
+            "com.sun.star.ucb.CommandFailedException",
+            "com.sun.star.ucb.CommandAbortedException",
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "extension",
+              "XPackage",
+              "in"
+            ],
+            [
+              "xAbortChannel",
+              "XAbortChannel",
+              "in"
+            ],
+            [
+              "xCmdEnv",
+              "XCommandEnvironment",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "enableExtension",
+          "returns": "None",
+          "desc": [
+            "enable an extension.",
+            "",
+            "If the extension is not from the user repository then an IllegalArgumentException is thrown."
+          ],
+          "raises": [
+            "DeploymentException",
+            "com.sun.star.ucb.CommandFailedException",
+            "com.sun.star.ucb.CommandAbortedException",
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "extension",
+              "XPackage",
+              "in"
+            ],
+            [
+              "xAbortChannel",
+              "XAbortChannel",
+              "in"
+            ],
+            [
+              "xCmdEnv",
+              "XCommandEnvironment",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getAllExtensions",
+          "returns": "typing.List[typing.List[XPackage]]",
+          "desc": [
+            "returns a sequence containing all installed extensions.",
+            "",
+            "The members of the returned sequence correspond to an extension with a particular extension identifier. The members are also sequences which contain as many elements as there are repositories. Those are ordered according to the priority of the repository. That is, the first member is the extension from the user repository, the second is from the shared repository and the last is from the bundled repository."
+          ],
+          "raises": [
+            "DeploymentException",
+            "com.sun.star.ucb.CommandFailedException",
+            "com.sun.star.ucb.CommandAbortedException",
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "xAbortChannel",
+              "XAbortChannel",
+              "in"
+            ],
+            [
+              "xCmdEnv",
+              "XCommandEnvironment",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getDeployedExtension",
+          "returns": "XPackage",
+          "desc": [
+            "gets an installed extensions."
+          ],
+          "raises": [
+            "DeploymentException",
+            "com.sun.star.ucb.CommandFailedException",
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "repository",
+              "str",
+              "in"
+            ],
+            [
+              "identifier",
+              "str",
+              "in"
+            ],
+            [
+              "fileName",
+              "str",
+              "in"
+            ],
+            [
+              "xCmdEnv",
+              "XCommandEnvironment",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getDeployedExtensions",
+          "returns": "typing.List[XPackage]",
+          "desc": [
+            "gets all currently installed extensions, including disabled user extensions."
+          ],
+          "raises": [
+            "DeploymentException",
+            "com.sun.star.ucb.CommandFailedException",
+            "com.sun.star.ucb.CommandAbortedException",
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "repository",
+              "str",
+              "in"
+            ],
+            [
+              "xAbortChannel",
+              "XAbortChannel",
+              "in"
+            ],
+            [
+              "xCmdEnv",
+              "XCommandEnvironment",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getExtensionsWithSameIdentifier",
+          "returns": "typing.List[XPackage]",
+          "desc": [
+            "gets all extensions with the same identifier from all repositories.",
+            "",
+            "The extension at the first position in the returned sequence represents the extension from the user repository. The next element is from the shared and the last one is from the bundled repository. If one repository does not contain this extension, then the respective element is a null reference."
+          ],
+          "raises": [
+            "DeploymentException",
+            "com.sun.star.ucb.CommandFailedException",
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "identifier",
+              "str",
+              "in"
+            ],
+            [
+              "fileName",
+              "str",
+              "in"
+            ],
+            [
+              "xCmdEnv",
+              "XCommandEnvironment",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getExtensionsWithUnacceptedLicenses",
+          "returns": "typing.List[XPackage]",
+          "desc": [
+            "returns all extensions which are currently not in use because the user did not accept the license.",
+            "",
+            "The function will not return any object for the user repository, because a user extension will not be kept in the user repository if its license is declined. Only extensions which are registered at start-up of OOo, that is, shared and bundled extensions, can be returned.",
+            "",
+            "Extensions which allow the license to be suppressed, that is, it does not need to be displayed, and which are installed with the corresponding option, are also not returned.",
+            "",
+            "Extensions returned by these functions are not returned by XExtensionManager.getDeployedExtension() XExtensionManager.getDeployedExtensions() XExtensionManager.getAllExtensions() XExtensionManager.getExtensionsWithSameIdentifier()"
+          ],
+          "raises": [
+            "DeploymentException",
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "repository",
+              "str",
+              "in"
+            ],
+            [
+              "xCmdEnv",
+              "XCommandEnvironment",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getSupportedPackageTypes",
+          "returns": "typing.List[XPackageTypeInfo]",
+          "desc": [
+            "gets the supported XPackageTypeInfos."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "isReadOnlyRepository",
+          "returns": "bool",
+          "desc": [
+            "determines if the current user has write access to the extensions folder of the repository."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "repository",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "reinstallDeployedExtensions",
+          "returns": "None",
+          "desc": [
+            "Expert feature: erases the underlying registry cache and reinstalls all previously added extensions.",
+            "",
+            "Please keep in mind that all registration status get lost.",
+            "",
+            "Please use this in case of suspected cache inconsistencies only."
+          ],
+          "raises": [
+            "DeploymentException",
+            "com.sun.star.ucb.CommandFailedException",
+            "com.sun.star.ucb.CommandAbortedException",
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "force",
+              "bool",
+              "in"
+            ],
+            [
+              "repository",
+              "str",
+              "in"
+            ],
+            [
+              "xAbortChannel",
+              "XAbortChannel",
+              "in"
+            ],
+            [
+              "xCmdEnv",
+              "XCommandEnvironment",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "removeExtension",
+          "returns": "None",
+          "desc": [
+            "removes an extension."
+          ],
+          "raises": [
+            "DeploymentException",
+            "com.sun.star.ucb.CommandFailedException",
+            "com.sun.star.ucb.CommandAbortedException",
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "identifier",
+              "str",
+              "in"
+            ],
+            [
+              "fileName",
+              "str",
+              "in"
+            ],
+            [
+              "repository",
+              "str",
+              "in"
+            ],
+            [
+              "xAbortChannel",
+              "XAbortChannel",
+              "in"
+            ],
+            [
+              "xCmdEnv",
+              "XCommandEnvironment",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "synchronize",
+          "returns": "bool",
+          "desc": [
+            "synchronizes the extension database with the contents of the extensions folder of shared and bundled extensions.",
+            "",
+            "Added extensions will be added to the database and removed extensions will be removed from the database. The active extensions are determined. That is, shared or bundled extensions are not necessarily registered (XPackage.registerPackage())."
+          ],
+          "raises": [
+            "DeploymentException",
+            "com.sun.star.ucb.CommandFailedException",
+            "com.sun.star.ucb.CommandAbortedException",
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "xAbortChannel",
+              "XAbortChannel",
+              "in"
+            ],
+            [
+              "xCmdEnv",
+              "XCommandEnvironment",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

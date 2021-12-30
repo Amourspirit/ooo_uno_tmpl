@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:19:18+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:25+00:00",
   "name": "XURLTransformer",
   "type": "interface",
   "namespace": "com.sun.star.util",
@@ -16,7 +16,17 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".url",
+        "URL"
+      ]
+    ],
+    "quote": [
+      "URL"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XURLTransformer",
     "imports": [],
     "namespace": "com.sun.star.util",
@@ -24,13 +34,88 @@
       "com.sun.star.uno.XInterface"
     ],
     "desc": [
-      "supports parsing and assembling of URLs",
-      "",
-      "**See Also**",
-      "",
-      "    URL"
+      "supports parsing and assembling of URLs"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1util_1_1XURLTransformer.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "assemble",
+          "returns": "bool",
+          "desc": [
+            "assembles the parts of the URL specified by aURL and stores it into URL.Complete"
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aURL",
+              "object",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getPresentation",
+          "returns": "str",
+          "desc": [
+            "returns a representation of the URL for UI purposes only",
+            "",
+            "Sometimes it can be useful to show a URL on an user interface in a more \\\"human readable\\\" form. Such URL can't be used on any API call, but make it easier for the user to understand it."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aURL",
+              "URL",
+              "in"
+            ],
+            [
+              "bWithPassword",
+              "bool",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "parseSmart",
+          "returns": "bool",
+          "desc": [
+            "parses the string in URL.Complete, which may contain a syntactically complete URL or is specified by the provided protocol",
+            "",
+            "The implementation can use smart functions to correct or interpret URL.Complete if it is not a syntactically complete URL. The parts of the URL are stored in the other fields of aURL."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aURL",
+              "object",
+              "in"
+            ],
+            [
+              "sSmartProtocol",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "parseStrict",
+          "returns": "bool",
+          "desc": [
+            "parses the string in URL.Complete which should contain a syntactically complete URL.",
+            "",
+            "The implementation is allowed to correct minor failures in URL.Complete if the meaning of the URL remain unchanged. Parts of the URL are stored in the other fields of aURL."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aURL",
+              "object",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

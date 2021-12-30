@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:21:24+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:07+00:00",
   "name": "XPrintJobBroadcaster",
   "type": "interface",
   "namespace": "com.sun.star.view",
@@ -16,7 +16,17 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_print_job_listener",
+        "XPrintJobListener"
+      ]
+    ],
+    "quote": [
+      "XPrintJobListener"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XPrintJobBroadcaster",
     "imports": [],
     "namespace": "com.sun.star.view",
@@ -28,11 +38,44 @@
       "",
       "XPrintJobBroadcaster can be implemented by classes which implement XPrintable. It allows a XPrintJobListener to be registered, thus a client object will learn about the print progress.",
       "",
-      "**See Also**",
+      "**since**",
       "",
-      "    XPrintJobListener"
+      "    OOo 1.1.2"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1view_1_1XPrintJobBroadcaster.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "addPrintJobListener",
+          "returns": "None",
+          "desc": [
+            "adds an XPrintJobListener to be notified about print progress."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xListener",
+              "XPrintJobListener",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "removePrintJobListener",
+          "returns": "None",
+          "desc": [
+            "removes an XPrintJobListener."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xListener",
+              "XPrintJobListener",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:18:26+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:00+00:00",
   "name": "XDTDHandler",
   "type": "interface",
   "namespace": "com.sun.star.xml.sax",
@@ -17,6 +17,9 @@
       ]
     ],
     "from_imports_typing": [],
+    "quote": [],
+    "typings": [],
+    "requires_typing": false,
     "name": "XDTDHandler",
     "imports": [],
     "namespace": "com.sun.star.xml.sax",
@@ -29,6 +32,64 @@
       "The SAX parser may report these events in any order, regardless of the order in which the notations and unparsed entities were declared; however, all DTD events must be reported after the document handler's startDocument event, and before the first startElement event. It is up to the application to store the information for future use (perhaps in a hash table or object tree). If the application encounters attributes of type \\\"NOTATION\\\", \\\"ENTITY\\\", or \\\"ENTITIES\\\", it can use the information that it obtained through this interface to find the entity and/or notation that corresponds with the attribute value."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1xml_1_1sax_1_1XDTDHandler.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "notationDecl",
+          "returns": "None",
+          "desc": [
+            "receives notification of a notation declaration event."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "sName",
+              "str",
+              "in"
+            ],
+            [
+              "sPublicId",
+              "str",
+              "in"
+            ],
+            [
+              "sSystemId",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "unparsedEntityDecl",
+          "returns": "None",
+          "desc": [
+            "receives notification of an unparsed entity declaration event."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "sName",
+              "str",
+              "in"
+            ],
+            [
+              "sPublicId",
+              "str",
+              "in"
+            ],
+            [
+              "sSystemId",
+              "str",
+              "in"
+            ],
+            [
+              "sNotationName",
+              "str",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

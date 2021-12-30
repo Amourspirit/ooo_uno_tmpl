@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:20:03+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:13+00:00",
   "name": "XConfirmDeleteListener",
   "type": "interface",
   "namespace": "com.sun.star.form",
@@ -16,7 +16,17 @@
         "XEventListener"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..sdb.row_change_event",
+        "RowChangeEvent"
+      ]
+    ],
+    "quote": [
+      "RowChangeEvent"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XConfirmDeleteListener",
     "imports": [],
     "namespace": "com.sun.star.form",
@@ -24,13 +34,27 @@
       "com.sun.star.lang.XEventListener"
     ],
     "desc": [
-      "allows to register a component for confirming deletions of rows in a com.sun.star.form.component.DataForm.",
-      "",
-      "**See Also**",
-      "",
-      "    XConfirmDeleteBroadcaster"
+      "allows to register a component for confirming deletions of rows in a com.sun.star.form.component.DataForm."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1form_1_1XConfirmDeleteListener.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "confirmDelete",
+          "returns": "bool",
+          "desc": [
+            "is invoked when the current record of a database form will be deleted."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aEvent",
+              "RowChangeEvent",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

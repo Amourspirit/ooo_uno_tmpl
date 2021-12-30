@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:18:29+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:01+00:00",
   "name": "XParser",
   "type": "interface",
   "namespace": "com.sun.star.xml.sax",
@@ -16,7 +16,42 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_entity_resolver",
+        "XEntityResolver"
+      ],
+      [
+        ".x_error_handler",
+        "XErrorHandler"
+      ],
+      [
+        "...lang.locale",
+        "Locale"
+      ],
+      [
+        ".input_source",
+        "InputSource"
+      ],
+      [
+        ".x_document_handler",
+        "XDocumentHandler"
+      ],
+      [
+        ".xdtd_handler",
+        "XDTDHandler"
+      ]
+    ],
+    "quote": [
+      "XDocumentHandler",
+      "XDTDHandler",
+      "XEntityResolver",
+      "InputSource",
+      "XErrorHandler",
+      "Locale"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XParser",
     "imports": [],
     "namespace": "com.sun.star.xml.sax",
@@ -29,6 +64,108 @@
       "This interface is an IDL version of the Java interface org.xml.sax.Parser with some minor adaptations."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1xml_1_1sax_1_1XParser.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "parseStream",
+          "returns": "None",
+          "desc": [
+            "parses an XML document from a stream.",
+            "",
+            "Set the desired handlers before calling this method."
+          ],
+          "raises": [
+            "com.sun.star.xml.sax.SAXException",
+            "com.sun.star.io.IOException"
+          ],
+          "args": [
+            [
+              "aInputSource",
+              "InputSource",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setDTDHandler",
+          "returns": "None",
+          "desc": [
+            "allows an application to register a DTD-Handler."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xHandler",
+              "XDTDHandler",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setDocumentHandler",
+          "returns": "None",
+          "desc": [
+            "allows an application to register a document event handler."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xHandler",
+              "XDocumentHandler",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setEntityResolver",
+          "returns": "None",
+          "desc": [
+            "allows an application to register a DTD-Handler."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xResolver",
+              "XEntityResolver",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setErrorHandler",
+          "returns": "None",
+          "desc": [
+            "allows an application to register an error event handler.",
+            "",
+            "Note that the error handler can throw an exception when an error or warning occurs. Note that an exception is thrown by the parser when an unrecoverable (fatal) error occurs."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xHandler",
+              "XErrorHandler",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setLocale",
+          "returns": "None",
+          "desc": [
+            "sets a locale specified for localization of warnings and error messages.",
+            "",
+            "Set the language of the error messages. Useful when the parsing errors will be presented to the user."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "locale",
+              "Locale",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

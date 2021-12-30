@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:20:58+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:16+00:00",
   "name": "XAddIn",
   "type": "interface",
   "namespace": "com.sun.star.sheet",
@@ -17,6 +17,9 @@
       ]
     ],
     "from_imports_typing": [],
+    "quote": [],
+    "typings": [],
+    "requires_typing": false,
     "name": "XAddIn",
     "imports": [],
     "namespace": "com.sun.star.sheet",
@@ -27,6 +30,140 @@
       "gives access to function descriptions and user-visible names."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1sheet_1_1XAddIn.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getArgumentDescription",
+          "returns": "str",
+          "desc": [
+            "returns the description of the specified argument.",
+            "",
+            "The argument description is shown to the user when prompting for arguments. It may be translated to the current language of the AddIn."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aProgrammaticFunctionName",
+              "str",
+              "in"
+            ],
+            [
+              "nArgument",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getDisplayArgumentName",
+          "returns": "str",
+          "desc": [
+            "returns the user-visible name of the specified argument.",
+            "",
+            "The argument name is shown to the user when prompting for arguments. It should be a single word and may be translated to the current language of the AddIn."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aProgrammaticFunctionName",
+              "str",
+              "in"
+            ],
+            [
+              "nArgument",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getDisplayCategoryName",
+          "returns": "str",
+          "desc": [
+            "returns the user-visible name of the category the function belongs to.",
+            "",
+            "This is used when category names are shown to the user."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aProgrammaticFunctionName",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getDisplayFunctionName",
+          "returns": "str",
+          "desc": [
+            "returns the user-visible function name for an internal name.",
+            "",
+            "The user-visible name of a function is the name shown to the user. It may be translated to the current language of the AddIn, so it is never stored in files. It should be a single word and is used when entering or displaying formulas."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aProgrammaticName",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getFunctionDescription",
+          "returns": "str",
+          "desc": [
+            "returns the description of a function.",
+            "",
+            "The description is shown to the user when selecting functions. It may be translated to the current language of the AddIn."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aProgrammaticName",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getProgrammaticCategoryName",
+          "returns": "str",
+          "desc": [
+            "returns the programmatic name of the category the function belongs to.",
+            "",
+            "The category name is used to group similar functions together. The programmatic category name should always be in English, it is never shown to the user. It should be one of the following names if the function falls into the corresponding category."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aProgrammaticFunctionName",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getProgrammaticFuntionName",
+          "returns": "str",
+          "desc": [
+            "returns the internal function name for an user-visible name.",
+            "",
+            "The user-visible name of a function is the name shown to the user. It may be translated to the current language of the AddIn, so it is never stored in files. It should be a single word and is used when entering or displaying formulas.",
+            "",
+            "Attention: The method name contains a spelling error. Due to compatibility reasons the name cannot be changed."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aDisplayName",
+              "str",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

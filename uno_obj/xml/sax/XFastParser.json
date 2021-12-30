@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:18:28+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:01+00:00",
   "name": "XFastParser",
   "type": "interface",
   "namespace": "com.sun.star.xml.sax",
@@ -16,7 +16,50 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_fast_namespace_handler",
+        "XFastNamespaceHandler"
+      ],
+      [
+        ".x_entity_resolver",
+        "XEntityResolver"
+      ],
+      [
+        ".x_error_handler",
+        "XErrorHandler"
+      ],
+      [
+        "...lang.locale",
+        "Locale"
+      ],
+      [
+        ".x_fast_document_handler",
+        "XFastDocumentHandler"
+      ],
+      [
+        ".x_fast_token_handler",
+        "XFastTokenHandler"
+      ],
+      [
+        ".input_source",
+        "InputSource"
+      ]
+    ],
+    "quote": [
+      "XFastDocumentHandler",
+      "XFastTokenHandler",
+      "typing.List[typing.Tuple[str, str]]",
+      "XFastNamespaceHandler",
+      "XEntityResolver",
+      "InputSource",
+      "XErrorHandler",
+      "Locale"
+    ],
+    "typings": [
+      "typing.List[typing.Tuple[str, str]]"
+    ],
+    "requires_typing": true,
     "name": "XFastParser",
     "imports": [],
     "namespace": "com.sun.star.xml.sax",
@@ -40,7 +83,8 @@
       "",
       "Setting a XFastTokenHandler with setTokenHandler() is optional, but without a XFastTokenHandler you will only get unknown sax events. This can be useful if you are only interested in the namespace handling and/or the context feature.",
       "",
-      "For each element the parser sends a create child element event to the elements parent context by calling XFastContextHandler.createFastChildContext() for known elements or XFastContextHandler.createUnknownChildContext() for unknown elements. \nThe parent context for the root element is the XFastDocumentHandler itself.",
+      "For each element the parser sends a create child element event to the elements parent context by calling XFastContextHandler.createFastChildContext() for known elements or XFastContextHandler.createUnknownChildContext() for unknown elements.",
+      "The parent context for the root element is the XFastDocumentHandler itself.",
       "",
       "If the parent context returns an empty reference, no further events for the element and all of its children are created.",
       "",
@@ -52,11 +96,186 @@
       "",
       "After the last element is processed the parser generates an end document event at the XFastDocumentHandler by calling XFastDocumentHandler.endDocument().",
       "",
-      "**See Also**",
+      "**since**",
       "",
-      "    http://wiki.openoffice.org/wiki/FastParser"
+      "    LibreOffice 7.1"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1xml_1_1sax_1_1XFastParser.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getNamespaceURL",
+          "returns": "str",
+          "desc": [
+            "Gets the namespace url string."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "prefix",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "parseStream",
+          "returns": "None",
+          "desc": [
+            "parses an XML document from a stream.",
+            "",
+            "Set the desired handlers before calling this method."
+          ],
+          "raises": [
+            "SAXException",
+            "com.sun.star.io.IOException"
+          ],
+          "args": [
+            [
+              "aInputSource",
+              "InputSource",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "registerNamespace",
+          "returns": "None",
+          "desc": [
+            "registers a known namespace url with the given integer token."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "NamespaceURL",
+              "str",
+              "in"
+            ],
+            [
+              "NamespaceToken",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setCustomEntityNames",
+          "returns": "None",
+          "desc": [
+            "Simulate a DTD file.",
+            "",
+            "Will allow to use customized entity references like \u221e .",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 7.1"
+          ],
+          "raises": [],
+          "args": [
+            [
+              "replacements",
+              "typing.List[typing.Tuple[str, str]]",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setEntityResolver",
+          "returns": "None",
+          "desc": [
+            "allows an application to register a DTD-Handler."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "Resolver",
+              "XEntityResolver",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setErrorHandler",
+          "returns": "None",
+          "desc": [
+            "allows an application to register an error event handler.",
+            "",
+            "Note that the error handler can throw an exception when an error or warning occurs. Note that an exception is thrown by the parser when an unrecoverable (fatal) error occurs."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "Handler",
+              "XErrorHandler",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setFastDocumentHandler",
+          "returns": "None",
+          "desc": [
+            "Application must register a document event handler to get sax events for the parsed stream."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "Handler",
+              "XFastDocumentHandler",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setLocale",
+          "returns": "None",
+          "desc": [
+            "sets a locale specified for localization of warnings and error messages.",
+            "",
+            "Set the language of the error messages. Useful when the parsing errors will be presented to the user."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "locale",
+              "Locale",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setNamespaceHandler",
+          "returns": "None",
+          "desc": [],
+          "raises": [],
+          "args": [
+            [
+              "Handler",
+              "XFastNamespaceHandler",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setTokenHandler",
+          "returns": "None",
+          "desc": [
+            "must be registered to translate known XML names to integer tokens."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "Handler",
+              "XFastTokenHandler",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

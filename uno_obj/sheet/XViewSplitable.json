@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:21:21+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:18+00:00",
   "name": "XViewSplitable",
   "type": "interface",
   "namespace": "com.sun.star.sheet",
@@ -17,6 +17,9 @@
       ]
     ],
     "from_imports_typing": [],
+    "quote": [],
+    "typings": [],
+    "requires_typing": false,
     "name": "XViewSplitable",
     "imports": [],
     "namespace": "com.sun.star.sheet",
@@ -24,9 +27,85 @@
       "com.sun.star.uno.XInterface"
     ],
     "desc": [
-      "enables a SpreadsheetView to split the view."
+      "enables a SpreadsheetView to split the view.",
+      "",
+      ".. deprecated::",
+      "",
+      "    Interface is deprecated."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1sheet_1_1XViewSplitable.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getIsWindowSplit",
+          "returns": "bool",
+          "desc": [
+            "returns TRUE if the view is split into individual panes.",
+            "",
+            "Only one of XViewSplitable.getIsWindowSplit() and XViewFreezable.hasFrozenPanes() can be TRUE."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getSplitColumn",
+          "returns": "int",
+          "desc": [
+            "returns the column before which the view is split."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getSplitHorizontal",
+          "returns": "int",
+          "desc": [
+            "returns the horizontal position in pixels where the view is split."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getSplitRow",
+          "returns": "int",
+          "desc": [
+            "returns the row before which the view is split."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getSplitVertical",
+          "returns": "int",
+          "desc": [
+            "returns the vertical position in pixels where the view is split."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "splitAtPosition",
+          "returns": "None",
+          "desc": [
+            "splits the view at the specified position.",
+            "",
+            "To split only horizontally, specify nPixelY as 0. To split only vertically, specify nPixelX as 0."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "nPixelX",
+              "int",
+              "in"
+            ],
+            [
+              "nPixelY",
+              "int",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

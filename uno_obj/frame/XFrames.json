@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:21:47+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:38+00:00",
   "name": "XFrames",
   "type": "interface",
   "namespace": "com.sun.star.frame",
@@ -16,7 +16,24 @@
         "XIndexAccess"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_frame",
+        "XFrame"
+      ],
+      [
+        ".x_frame",
+        "XFrame"
+      ]
+    ],
+    "quote": [
+      "XFrame",
+      "typing.List[XFrame]"
+    ],
+    "typings": [
+      "typing.List[XFrame]"
+    ],
+    "requires_typing": true,
     "name": "XFrames",
     "imports": [],
     "namespace": "com.sun.star.frame",
@@ -26,13 +43,59 @@
     "desc": [
       "manages and creates frames.",
       "",
-      "Frames may contain other frames (by implementing an XFrames interface) and may be contained in other frames.",
-      "",
-      "**See Also**",
-      "",
-      "    XFrame"
+      "Frames may contain other frames (by implementing an XFrames interface) and may be contained in other frames."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1frame_1_1XFrames.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "append",
+          "returns": "None",
+          "desc": [
+            "appends the specified Frame to the list of sub-frames."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xFrame",
+              "XFrame",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "queryFrames",
+          "returns": "typing.List[XFrame]",
+          "desc": [
+            "provides access to the list of all currently existing frames inside this container and her sub frames"
+          ],
+          "raises": [],
+          "args": [
+            [
+              "nSearchFlags",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "remove",
+          "returns": "None",
+          "desc": [
+            "removes the frame from its container.",
+            "",
+            "Note:"
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xFrame",
+              "XFrame",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

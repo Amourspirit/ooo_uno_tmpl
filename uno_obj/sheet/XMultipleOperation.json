@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:21:11+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:17+00:00",
   "name": "XMultipleOperation",
   "type": "interface",
   "namespace": "com.sun.star.sheet",
@@ -16,7 +16,27 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..table.cell_range_address",
+        "CellRangeAddress"
+      ],
+      [
+        ".table_operation_mode",
+        "TableOperationMode"
+      ],
+      [
+        "..table.cell_address",
+        "CellAddress"
+      ]
+    ],
+    "quote": [
+      "CellAddress",
+      "CellRangeAddress",
+      "TableOperationMode"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XMultipleOperation",
     "imports": [],
     "namespace": "com.sun.star.sheet",
@@ -24,13 +44,44 @@
       "com.sun.star.uno.XInterface"
     ],
     "desc": [
-      "provides a method to apply a Multiple Operations Table to the cell range.",
-      "",
-      "**See Also**",
-      "",
-      "    Spreadsheets - Multiple Operations"
+      "provides a method to apply a Multiple Operations Table to the cell range."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1sheet_1_1XMultipleOperation.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "setTableOperation",
+          "returns": "None",
+          "desc": [
+            "creates a table of formulas (a \\\"Multiple Operations Table\\\").",
+            "",
+            "The specified formulas are repeated, with references to the specified cells replaced by references to values in the first column and/or row of the range."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aFormulaRange",
+              "CellRangeAddress",
+              "in"
+            ],
+            [
+              "nMode",
+              "TableOperationMode",
+              "in"
+            ],
+            [
+              "aColumnCell",
+              "CellAddress",
+              "in"
+            ],
+            [
+              "aRowCell",
+              "CellAddress",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

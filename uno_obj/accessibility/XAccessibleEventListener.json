@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:20:46+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:27+00:00",
   "name": "XAccessibleEventListener",
   "type": "interface",
   "namespace": "com.sun.star.accessibility",
@@ -16,7 +16,17 @@
         "XEventListener"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".accessible_event_object",
+        "AccessibleEventObject"
+      ]
+    ],
+    "quote": [
+      "AccessibleEventObject"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XAccessibleEventListener",
     "imports": [],
     "namespace": "com.sun.star.accessibility",
@@ -26,11 +36,29 @@
     "desc": [
       "makes it possible to register a component as a listener, which is called whenever an accessibility event occurs.",
       "",
-      "**See Also**",
+      "**since**",
       "",
-      "    XAccessibleEventBroadcaster"
+      "    OOo 1.1.2"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1accessibility_1_1XAccessibleEventListener.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "notifyEvent",
+          "returns": "None",
+          "desc": [
+            "is called whenever an accessible event (see AccessibleEventObject) occurs."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aEvent",
+              "AccessibleEventObject",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

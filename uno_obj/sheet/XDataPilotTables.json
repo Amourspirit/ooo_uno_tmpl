@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:21:04+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:16+00:00",
   "name": "XDataPilotTables",
   "type": "interface",
   "namespace": "com.sun.star.sheet",
@@ -16,7 +16,22 @@
         "XNameAccess"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..table.cell_address",
+        "CellAddress"
+      ],
+      [
+        ".x_data_pilot_descriptor",
+        "XDataPilotDescriptor"
+      ]
+    ],
+    "quote": [
+      "CellAddress",
+      "XDataPilotDescriptor"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XDataPilotTables",
     "imports": [],
     "namespace": "com.sun.star.sheet",
@@ -26,13 +41,63 @@
     "desc": [
       "provides access to the data pilot tables via name and inserting and removing data pilot tables.",
       "",
-      "This interface extends the interface com.sun.star.container.XNameAccess which provides access to existing data pilot tables in the collection.",
-      "",
-      "**See Also**",
-      "",
-      "    com.sun.star.sheet.DataPilotTables"
+      "This interface extends the interface com.sun.star.container.XNameAccess which provides access to existing data pilot tables in the collection."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1sheet_1_1XDataPilotTables.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "createDataPilotDescriptor",
+          "returns": "XDataPilotDescriptor",
+          "desc": [
+            "creates a data pilot descriptor.",
+            "",
+            "This descriptor can be used with XDataPilotTables.addTable()."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "insertNewByName",
+          "returns": "None",
+          "desc": [
+            "creates a new data pilot table and adds it to the collection."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aName",
+              "str",
+              "in"
+            ],
+            [
+              "OutputAddress",
+              "CellAddress",
+              "in"
+            ],
+            [
+              "xDescriptor",
+              "XDataPilotDescriptor",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "removeByName",
+          "returns": "None",
+          "desc": [
+            "deletes a data pilot table from the collection."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aName",
+              "str",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

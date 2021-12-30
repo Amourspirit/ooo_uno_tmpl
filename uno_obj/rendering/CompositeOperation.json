@@ -1,0 +1,188 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.9",
+  "timestamp": "2021-12-30 17:45:03+00:00",
+  "name": "CompositeOperation",
+  "type": "const",
+  "namespace": "com.sun.star.rendering",
+  "parser_args": {
+    "sort": false
+  },
+  "writer_args": {
+    "hex": false,
+    "flags": null
+  },
+  "data": {
+    "name": "CompositeOperation",
+    "namespace": "com.sun.star.rendering",
+    "url": "https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1rendering_1_1CompositeOperation.html",
+    "flags": false,
+    "base_class": "ConstIntBase",
+    "quote": [],
+    "typings": [],
+    "requires_typing": false,
+    "from_imports": [
+      [
+        "ooo_uno.base.const",
+        "ConstIntBase"
+      ]
+    ],
+    "from_imports_typing": [],
+    "fullname": "com.sun.star.rendering.CompositeOperation",
+    "desc": [
+      "These constants determine how the primitive color is combined with the background.",
+      "",
+      "When performing these calculations, it is assumed that all color values are premultiplied with the corresponding alpha values (if no alpha is specified, 1.0 is assumed). Then, the following general compositing operation is performed:",
+      "",
+      "C = Ca * Fa + Cb * Fb",
+      "",
+      "where C is the result color, Ca and Cb are the input colors, premultiplied with alpha, and Fa and Fb are described for the different composite modes (wherein Aa and Ab denote source and destination alpha, respectively).",
+      "",
+      "**since**",
+      "",
+      "    OOo 2.0"
+    ],
+    "items": [
+      {
+        "name": "CLEAR",
+        "type": "int",
+        "value": 0,
+        "lines": [
+          "Clear the destination.",
+          "",
+          "Clear the destination area. The function values are: Fa = Fb = 0."
+        ]
+      },
+      {
+        "name": "SOURCE",
+        "type": "int",
+        "value": 1,
+        "lines": [
+          "Copy source as-is to the destination.",
+          "",
+          "Copy source as-is to the destination. The function values are: Fa = 1, Fb = 0."
+        ]
+      },
+      {
+        "name": "DESTINATION",
+        "type": "int",
+        "value": 2,
+        "lines": [
+          "Leave the destination as-is.",
+          "",
+          "Leave the destination as-is. The function values are: Fa = 0, Fb = 1."
+        ]
+      },
+      {
+        "name": "OVER",
+        "type": "int",
+        "value": 3,
+        "lines": [
+          "Copy the source over the destination.",
+          "",
+          "Copy the source over the destination. The function values are: Fa = 1, Fb = 1-Aa."
+        ]
+      },
+      {
+        "name": "UNDER",
+        "type": "int",
+        "value": 4,
+        "lines": [
+          "Copy the source under the destination.",
+          "",
+          "Copy the source under the destination. The function values are: Fa = 1-Ab, Fb = 1."
+        ]
+      },
+      {
+        "name": "INSIDE",
+        "type": "int",
+        "value": 5,
+        "lines": [
+          "Copy the source to the destination.",
+          "",
+          "Copy the source to the destination, but limited to where the destination is. The function values are: Fa = Ab, Fb = 0."
+        ]
+      },
+      {
+        "name": "INSIDE_REVERSE",
+        "type": "int",
+        "value": 6,
+        "lines": [
+          "Leave the destination as is.",
+          "",
+          "Leave the destination as is, but only where the source was. The function values are: Fa = 0, Fb = Aa."
+        ]
+      },
+      {
+        "name": "OUTSIDE",
+        "type": "int",
+        "value": 7,
+        "lines": [
+          "Copy the source to the destination.",
+          "",
+          "Copy the source to the destination, but limited to where the destination is not. The function values are: Fa = 1-Ab, Fb = 0."
+        ]
+      },
+      {
+        "name": "OUTSIDE_REVERSE",
+        "type": "int",
+        "value": 8,
+        "lines": [
+          "Leave the destination as is.",
+          "",
+          "Leave the destination as is, but only where the source has not been. The function values are: Fa = 0, Fb = 1-Aa."
+        ]
+      },
+      {
+        "name": "ATOP",
+        "type": "int",
+        "value": 9,
+        "lines": [
+          "Copy the source over the destination.",
+          "",
+          "Copy the source over the destination, but only where the destination is. Keep the destination. The function values are: Fa = Ab, Fb = 1-Aa."
+        ]
+      },
+      {
+        "name": "ATOP_REVERSE",
+        "type": "int",
+        "value": 10,
+        "lines": [
+          "Copy the destination over the source.",
+          "",
+          "Copy the destination over the source, but only where the source is. Keep the source. The function values are: Fa = 1-Ab, Fb = Aa."
+        ]
+      },
+      {
+        "name": "XOR",
+        "type": "int",
+        "value": 11,
+        "lines": [
+          "Combine source and destination by exclusive or.",
+          "",
+          "Take only the parts where either source or destination, but not both visible. The function values are: Fa = 1-Ab, Fb = 1-Aa."
+        ]
+      },
+      {
+        "name": "ADD",
+        "type": "int",
+        "value": 12,
+        "lines": [
+          "Add source and destination values.",
+          "",
+          "Simply add contributions of both source and destination. The resulting color values are limited to the permissible color range, and clipped to the maximal value, if exceeded. The function values are: Fa = 1, Fb = 1."
+        ]
+      },
+      {
+        "name": "SATURATE",
+        "type": "int",
+        "value": 13,
+        "lines": [
+          "Saturate source and destination.",
+          "",
+          "Saturate destination with source values. The function values are: Fa = min(1,(1-Ab)/Aa), Fb = 1"
+        ]
+      }
+    ]
+  }
+}

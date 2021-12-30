@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:19:55+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:32+00:00",
   "name": "XControlInformation",
   "type": "interface",
   "namespace": "com.sun.star.ui.dialogs",
@@ -17,6 +17,13 @@
       ]
     ],
     "from_imports_typing": [],
+    "quote": [
+      "typing.List[str]"
+    ],
+    "typings": [
+      "typing.List[str]"
+    ],
+    "requires_typing": true,
     "name": "XControlInformation",
     "imports": [],
     "namespace": "com.sun.star.ui.dialogs",
@@ -26,11 +33,77 @@
     "desc": [
       "Interface to query for controls and control properties supported by the implementing instance.",
       "",
-      "**See Also**",
+      "**since**",
       "",
       "    OOo 1.1.2"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1ui_1_1dialogs_1_1XControlInformation.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getSupportedControlProperties",
+          "returns": "typing.List[str]",
+          "desc": [
+            "Returns a sequence with properties supported by the specified control."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "aControlName",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getSupportedControls",
+          "returns": "typing.List[str]",
+          "desc": [
+            "Query for the supported controls of a service instance."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "isControlPropertySupported",
+          "returns": "bool",
+          "desc": [
+            "Returns whether control property is supported by a control."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "aControlName",
+              "str",
+              "in"
+            ],
+            [
+              "aControlProperty",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "isControlSupported",
+          "returns": "bool",
+          "desc": [
+            "Returns whether the specified control is supported or not."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aControlName",
+              "str",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

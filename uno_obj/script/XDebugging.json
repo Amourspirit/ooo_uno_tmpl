@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:20:27+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:19+00:00",
   "name": "XDebugging",
   "type": "interface",
   "namespace": "com.sun.star.script",
@@ -16,7 +16,20 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".context_information",
+        "ContextInformation"
+      ]
+    ],
+    "quote": [
+      "typing.List[str]",
+      "ContextInformation"
+    ],
+    "typings": [
+      "typing.List[str]"
+    ],
+    "requires_typing": true,
     "name": "XDebugging",
     "imports": [],
     "namespace": "com.sun.star.script",
@@ -24,9 +37,218 @@
       "com.sun.star.uno.XInterface"
     ],
     "desc": [
-      "makes it possible to set breakpoints in an interpreter."
+      "makes it possible to set breakpoints in an interpreter.",
+      "",
+      ".. deprecated::",
+      "",
+      "    Interface is deprecated."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1script_1_1XDebugging.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "clearAllBreakPoints",
+          "returns": "None",
+          "desc": [
+            "clears all breakpoints in the module set by \\\"setBreakPoint\\\"."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aModuleName",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "doContinue",
+          "returns": "None",
+          "desc": [
+            "continues the program execution."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "dumpVariable",
+          "returns": "str",
+          "desc": [
+            "returns the value of the variable at the given stack position."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aVariableName",
+              "str",
+              "in"
+            ],
+            [
+              "nCallStackPos",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "eval",
+          "returns": "str",
+          "desc": [
+            "Evaluates an expression."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aSourceCode",
+              "str",
+              "in"
+            ],
+            [
+              "nCallStackPos",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getContextInformation",
+          "returns": "ContextInformation",
+          "desc": [
+            "returns more detailed information about a specified stack frame."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "nCallStackPos",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getStackTrace",
+          "returns": "typing.List[str]",
+          "desc": [
+            "Returns the engine's stack trace of the current execute position.",
+            "",
+            "Line break is the delimiter."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "isVariable",
+          "returns": "bool",
+          "desc": [
+            "returns whether the given variable exists within the specified stack frame."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aVariableName",
+              "str",
+              "in"
+            ],
+            [
+              "nCallStackPos",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setBreakPoint",
+          "returns": "int",
+          "desc": [
+            "returns the source code line where the breakpoint was set."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aModuleName",
+              "str",
+              "in"
+            ],
+            [
+              "nSourceCodeLine",
+              "int",
+              "in"
+            ],
+            [
+              "bOn",
+              "bool",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setVariable",
+          "returns": "None",
+          "desc": [
+            "sets the value of the specified variable within the specified stack frame."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aVariableName",
+              "str",
+              "in"
+            ],
+            [
+              "aValue",
+              "str",
+              "in"
+            ],
+            [
+              "nCallStackPos",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "stepIn",
+          "returns": "None",
+          "desc": [
+            "executes the next and only the next statement.",
+            "",
+            "If the next statement is a function call, only the function entered."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "stepOut",
+          "returns": "None",
+          "desc": [
+            "executes the program until the next return from this stack frame."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "stepOver",
+          "returns": "None",
+          "desc": [
+            "executes the next and only the next statement.",
+            "",
+            "If the next statement is a function call, the function is executed completely."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "stop",
+          "returns": "None",
+          "desc": [
+            "stops the execution of the interpreter.",
+            "",
+            "To continue with the execution, call XDebugging.doContinue()."
+          ],
+          "raises": [],
+          "args": []
+        }
+      ]
+    }
   }
 }

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:17:15+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:32+00:00",
   "name": "XInterfaceTypeDescription",
   "type": "interface",
   "namespace": "com.sun.star.reflection",
@@ -16,7 +16,25 @@
         "XTypeDescription"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_interface_member_type_description",
+        "XInterfaceMemberTypeDescription"
+      ],
+      [
+        "..uno.uik",
+        "Uik"
+      ]
+    ],
+    "quote": [
+      "typing.List[XInterfaceMemberTypeDescription]",
+      "XTypeDescription",
+      "Uik"
+    ],
+    "typings": [
+      "typing.List[XInterfaceMemberTypeDescription]"
+    ],
+    "requires_typing": true,
     "name": "XInterfaceTypeDescription",
     "imports": [],
     "namespace": "com.sun.star.reflection",
@@ -26,13 +44,46 @@
     "desc": [
       "Reflects an interface type.",
       "",
-      "This type is superseded by XInterfaceTypeDescription2, which supports multiple inheritance.",
-      "",
-      "**See Also**",
-      "",
-      "    XInterfaceMemberTypeDescription"
+      "This type is superseded by XInterfaceTypeDescription2, which supports multiple inheritance."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1reflection_1_1XInterfaceTypeDescription.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getBaseType",
+          "returns": "XTypeDescription",
+          "desc": [
+            "Returns the base interface or null, if the reflected interface is not inherited from another.",
+            "",
+            "This method is deprecated, as it only supports single inheritance. See XInterfaceTypeDescription2 for a replacement that supports multiple inheritance."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getMembers",
+          "returns": "typing.List[XInterfaceMemberTypeDescription]",
+          "desc": [
+            "Returns the members of the interfaces, i.e.",
+            "",
+            "attributes and methods."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getUik",
+          "returns": "Uik",
+          "desc": [
+            "Deprecated.",
+            "",
+            "UIK are not used anymore, a type is uniquely identified by its name.",
+            "Returns the UIK, i.e. the unique identifier of the interface."
+          ],
+          "raises": [],
+          "args": []
+        }
+      ]
+    }
   }
 }

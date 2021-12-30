@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:21:18+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:17+00:00",
   "name": "XSheetPageBreak",
   "type": "interface",
   "namespace": "com.sun.star.sheet",
@@ -16,7 +16,19 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".table_page_break_data",
+        "TablePageBreakData"
+      ]
+    ],
+    "quote": [
+      "typing.List[TablePageBreakData]"
+    ],
+    "typings": [
+      "typing.List[TablePageBreakData]"
+    ],
+    "requires_typing": true,
     "name": "XSheetPageBreak",
     "imports": [],
     "namespace": "com.sun.star.sheet",
@@ -24,9 +36,47 @@
       "com.sun.star.uno.XInterface"
     ],
     "desc": [
-      "provides access to page breaks in a sheet."
+      "provides access to page breaks in a sheet.",
+      "",
+      ".. deprecated::",
+      "",
+      "    Interface is deprecated."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1sheet_1_1XSheetPageBreak.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getColumnPageBreaks",
+          "returns": "typing.List[TablePageBreakData]",
+          "desc": [
+            "returns a sequence of descriptions of all horizontal page breaks on the sheet.",
+            "",
+            "This includes manual and automatic page breaks. To add or remove manual breaks, use the com.sun.star.table.TableColumn.IsStartOfNewPage property of the column."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getRowPageBreaks",
+          "returns": "typing.List[TablePageBreakData]",
+          "desc": [
+            "returns a sequence of descriptions of all vertical page breaks on the sheet.",
+            "",
+            "This includes manual and automatic page breaks. To add or remove manual breaks, use the com.sun.star.table.TableRow.IsStartOfNewPage property of the row."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "removeAllManualPageBreaks",
+          "returns": "None",
+          "desc": [
+            "removes all manual page breaks on the sheet."
+          ],
+          "raises": [],
+          "args": []
+        }
+      ]
+    }
   }
 }

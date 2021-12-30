@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:21:19+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:17+00:00",
   "name": "XSpreadsheets2",
   "type": "interface",
   "namespace": "com.sun.star.sheet",
@@ -16,7 +16,17 @@
         "XSpreadsheets"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_spreadsheet_document",
+        "XSpreadsheetDocument"
+      ]
+    ],
+    "quote": [
+      "XSpreadsheetDocument"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XSpreadsheets2",
     "imports": [],
     "namespace": "com.sun.star.sheet",
@@ -26,11 +36,46 @@
     "desc": [
       "extends XSpreadsheets interface to import external sheets.",
       "",
-      "**See Also**",
+      "**since**",
       "",
-      "    com.sun.star.sheet.Spreadsheets"
+      "    LibreOffice 3.5"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1sheet_1_1XSpreadsheets2.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "importSheet",
+          "returns": "int",
+          "desc": [
+            "copies a sheet from a source document.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 3.5"
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.lang.IndexOutOfBoundsException"
+          ],
+          "args": [
+            [
+              "srcDoc",
+              "XSpreadsheetDocument",
+              "in"
+            ],
+            [
+              "srcName",
+              "str",
+              "in"
+            ],
+            [
+              "nDestPosition",
+              "int",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

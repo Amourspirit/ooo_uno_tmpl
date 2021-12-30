@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:17:03+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:10+00:00",
   "name": "XObjectOutputStream",
   "type": "interface",
   "namespace": "com.sun.star.io",
@@ -12,27 +12,53 @@
   "data": {
     "from_imports": [
       [
-        "......x_data_output_stream",
+        ".x_data_output_stream",
         "XDataOutputStream"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_persist_object",
+        "XPersistObject"
+      ]
+    ],
+    "quote": [
+      "XPersistObject"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XObjectOutputStream",
     "imports": [],
     "namespace": "com.sun.star.io",
     "extends": [
-      "XDataOutputStream"
+      "com.sun.star.io.XDataOutputStream"
     ],
     "desc": [
       "stores XPersistObject implementations into the stream",
       "",
-      "An implementation of the type XPersistObject uses this interface to write its internal state into a stream. Have a look there for the explanation of the concept.",
-      "",
-      "**See Also**",
-      "",
-      "    com.sun.star.io.XPersistObject"
+      "An implementation of the type XPersistObject uses this interface to write its internal state into a stream. Have a look there for the explanation of the concept."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1io_1_1XObjectOutputStream.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "writeObject",
+          "returns": "None",
+          "desc": [
+            "writes an object to the stream."
+          ],
+          "raises": [
+            "IOException"
+          ],
+          "args": [
+            [
+              "Object",
+              "XPersistObject",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

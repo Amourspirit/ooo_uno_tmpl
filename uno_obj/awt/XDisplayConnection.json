@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:17:47+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:02+00:00",
   "name": "XDisplayConnection",
   "type": "interface",
   "namespace": "com.sun.star.awt",
@@ -16,7 +16,17 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_event_handler",
+        "XEventHandler"
+      ]
+    ],
+    "quote": [
+      "XEventHandler"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XDisplayConnection",
     "imports": [],
     "namespace": "com.sun.star.awt",
@@ -27,6 +37,93 @@
       "This interface should be implemented by toolkits that want to give access to their internal message handling loop."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XDisplayConnection.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "addErrorHandler",
+          "returns": "None",
+          "desc": [
+            "register an error handler for toolkit specific errors."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "errorHandler",
+              "XEventHandler",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "addEventHandler",
+          "returns": "None",
+          "desc": [
+            "registers an event handler."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "window",
+              "object",
+              "in"
+            ],
+            [
+              "eventHandler",
+              "XEventHandler",
+              "in"
+            ],
+            [
+              "eventMask",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getIdentifier",
+          "returns": "object",
+          "desc": [
+            "returns an identifier."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "removeErrorHandler",
+          "returns": "None",
+          "desc": [
+            "remover an error handler from the handler list."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "errorHandler",
+              "XEventHandler",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "removeEventHandler",
+          "returns": "None",
+          "desc": [
+            "removes an eventHandler from the handler list."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "window",
+              "object",
+              "in"
+            ],
+            [
+              "eventHandler",
+              "XEventHandler",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

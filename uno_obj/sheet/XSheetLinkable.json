@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:21:17+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:17+00:00",
   "name": "XSheetLinkable",
   "type": "interface",
   "namespace": "com.sun.star.sheet",
@@ -16,7 +16,17 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".sheet_link_mode",
+        "SheetLinkMode"
+      ]
+    ],
+    "quote": [
+      "SheetLinkMode"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XSheetLinkable",
     "imports": [],
     "namespace": "com.sun.star.sheet",
@@ -28,11 +38,131 @@
       "",
       "To insert a sheet link, the sheet used as linked sheet has to exist already. The method XSheetLinkable.link() creates a SheetLink object in the document's SheetLinks collection and links the sheet to the specified external sheet.",
       "",
-      "**See Also**",
+      ".. deprecated::",
       "",
-      "    com.sun.star.sheet.SheetLinks"
+      "    Interface is deprecated."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1sheet_1_1XSheetLinkable.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getLinkMode",
+          "returns": "SheetLinkMode",
+          "desc": [
+            "returns the link mode of the spreadsheet.",
+            "",
+            "If the returned value is SheetLinkMode.NORMAL, formulas are copied. With SheetLinkMode.VALUE, only results of formulas are used."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getLinkSheetName",
+          "returns": "str",
+          "desc": [
+            "returns the sheet name of the sheet in the source document."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getLinkUrl",
+          "returns": "str",
+          "desc": [
+            "returns the target URL of the link."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "link",
+          "returns": "None",
+          "desc": [
+            "links the sheet to another sheet in another document.",
+            "",
+            "A SheetLink object is created if it does not exist, and the link mode, the URL of the linked document and the linked sheet name are set."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aUrl",
+              "str",
+              "in"
+            ],
+            [
+              "aSheetName",
+              "str",
+              "in"
+            ],
+            [
+              "aFilterName",
+              "str",
+              "in"
+            ],
+            [
+              "aFilterOptions",
+              "str",
+              "in"
+            ],
+            [
+              "nMode",
+              "SheetLinkMode",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setLinkMode",
+          "returns": "None",
+          "desc": [
+            "enables the linking of the sheet and controls whether formulas are copied.",
+            "",
+            "If the value is SheetLinkMode.NORMAL, formulas are copied. With SheetLinkMode.VALUE, only results of formulas are used."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "nLinkMode",
+              "SheetLinkMode",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setLinkSheetName",
+          "returns": "None",
+          "desc": [
+            "sets the name of the linked sheet in the source document.",
+            "",
+            "This method sets the sheet name in the SheetLink object, it does not modify the sheet name in the source document."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aLinkSheetName",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setLinkUrl",
+          "returns": "None",
+          "desc": [
+            "sets the target URL of the link.",
+            "",
+            "A SheetLink object with the same file name must exist already or the link will not work."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aLinkUrl",
+              "str",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

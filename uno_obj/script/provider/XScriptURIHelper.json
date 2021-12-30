@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:20:35+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:01+00:00",
   "name": "XScriptURIHelper",
   "type": "interface",
   "namespace": "com.sun.star.script.provider",
@@ -17,6 +17,9 @@
       ]
     ],
     "from_imports_typing": [],
+    "quote": [],
+    "typings": [],
+    "requires_typing": false,
     "name": "XScriptURIHelper",
     "imports": [],
     "namespace": "com.sun.star.script.provider",
@@ -27,6 +30,54 @@
       "This interface is used to help transform Scripting Framework storage locations to Scripting Framework script URIs and vice versa."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1script_1_1provider_1_1XScriptURIHelper.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getRootStorageURI",
+          "returns": "str",
+          "desc": [
+            "Obtain the root storage URI for this ScriptURIHelper.",
+            "",
+            "The resulting string can be used to access the storage for this using the Universal Content Broker"
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getScriptURI",
+          "returns": "str",
+          "desc": [
+            "Obtain the Scripting Framework script URI for a specific UCB URI."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "storageURI",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getStorageURI",
+          "returns": "str",
+          "desc": [
+            "Obtain the storage URI for a specific Scripting Framework script URI."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "scriptURI",
+              "str",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

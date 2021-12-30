@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:16:37+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:15+00:00",
   "name": "XColumnUpdate",
   "type": "interface",
   "namespace": "com.sun.star.sdb",
@@ -12,21 +12,350 @@
   "data": {
     "from_imports": [
       [
-        "......x_input_stream",
-        "XInputStream"
+        "..uno.x_interface",
+        "XInterface"
       ]
     ],
-    "from_imports_typing": [],
-    "name": "XColumnUpdate",
-    "imports": [
-      "XInputStream"
+    "from_imports_typing": [
+      [
+        "..io.x_input_stream",
+        "XInputStream"
+      ],
+      [
+        "..util.date_time",
+        "DateTime"
+      ],
+      [
+        "..util.date",
+        "Date"
+      ],
+      [
+        "..util.time",
+        "Time"
+      ]
     ],
+    "quote": [
+      "XInputStream",
+      "DateTime",
+      "Time",
+      "Date",
+      "typing.List[int]"
+    ],
+    "typings": [
+      "typing.List[int]"
+    ],
+    "requires_typing": true,
+    "name": "XColumnUpdate",
+    "imports": [],
     "namespace": "com.sun.star.sdb",
-    "extends": [],
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
     "desc": [
       "is used to update data which is collected in a row."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1sdb_1_1XColumnUpdate.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "updateBinaryStream",
+          "returns": "None",
+          "desc": [
+            "updates a column with a stream value."
+          ],
+          "raises": [
+            "com.sun.star.sdbc.SQLException"
+          ],
+          "args": [
+            [
+              "x",
+              "XInputStream",
+              "in"
+            ],
+            [
+              "length",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "updateBoolean",
+          "returns": "None",
+          "desc": [
+            "updates a column with a boolean value."
+          ],
+          "raises": [
+            "com.sun.star.sdbc.SQLException"
+          ],
+          "args": [
+            [
+              "x",
+              "bool",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "updateByte",
+          "returns": "None",
+          "desc": [
+            "updates a column with a byte value."
+          ],
+          "raises": [
+            "com.sun.star.sdbc.SQLException"
+          ],
+          "args": [
+            [
+              "x",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "updateBytes",
+          "returns": "None",
+          "desc": [
+            "updates a column with a byte array value."
+          ],
+          "raises": [
+            "com.sun.star.sdbc.SQLException"
+          ],
+          "args": [
+            [
+              "x",
+              "typing.List[int]",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "updateCharacterStream",
+          "returns": "None",
+          "desc": [
+            "updates a column with a stream value."
+          ],
+          "raises": [
+            "com.sun.star.sdbc.SQLException"
+          ],
+          "args": [
+            [
+              "x",
+              "XInputStream",
+              "in"
+            ],
+            [
+              "length",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "updateDate",
+          "returns": "None",
+          "desc": [
+            "updates a column with a Date value."
+          ],
+          "raises": [
+            "com.sun.star.sdbc.SQLException"
+          ],
+          "args": [
+            [
+              "x",
+              "Date",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "updateDouble",
+          "returns": "None",
+          "desc": [
+            "updates a column with a double value."
+          ],
+          "raises": [
+            "com.sun.star.sdbc.SQLException"
+          ],
+          "args": [
+            [
+              "x",
+              "float",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "updateFloat",
+          "returns": "None",
+          "desc": [
+            "updates a column with a float value."
+          ],
+          "raises": [
+            "com.sun.star.sdbc.SQLException"
+          ],
+          "args": [
+            [
+              "x",
+              "float",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "updateInt",
+          "returns": "None",
+          "desc": [
+            "updates a column with a long value."
+          ],
+          "raises": [
+            "com.sun.star.sdbc.SQLException"
+          ],
+          "args": [
+            [
+              "x",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "updateLong",
+          "returns": "None",
+          "desc": [
+            "updates a column with a hyper value."
+          ],
+          "raises": [
+            "com.sun.star.sdbc.SQLException"
+          ],
+          "args": [
+            [
+              "x",
+              "object",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "updateNull",
+          "returns": "None",
+          "desc": [
+            "gives a nullable column a null value."
+          ],
+          "raises": [
+            "com.sun.star.sdbc.SQLException"
+          ],
+          "args": []
+        },
+        {
+          "name": "updateNumericObject",
+          "returns": "None",
+          "desc": [
+            "updates a column with an Object value."
+          ],
+          "raises": [
+            "com.sun.star.sdbc.SQLException"
+          ],
+          "args": [
+            [
+              "x",
+              "object",
+              "in"
+            ],
+            [
+              "scale",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "updateObject",
+          "returns": "None",
+          "desc": [
+            "updates a column with an Object value."
+          ],
+          "raises": [
+            "com.sun.star.sdbc.SQLException"
+          ],
+          "args": [
+            [
+              "x",
+              "object",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "updateShort",
+          "returns": "None",
+          "desc": [
+            "updates a column with a short value."
+          ],
+          "raises": [
+            "com.sun.star.sdbc.SQLException"
+          ],
+          "args": [
+            [
+              "x",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "updateString",
+          "returns": "None",
+          "desc": [
+            "updates a column with a string value."
+          ],
+          "raises": [
+            "com.sun.star.sdbc.SQLException"
+          ],
+          "args": [
+            [
+              "x",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "updateTime",
+          "returns": "None",
+          "desc": [
+            "updates a column with a Time value."
+          ],
+          "raises": [
+            "com.sun.star.sdbc.SQLException"
+          ],
+          "args": [
+            [
+              "x",
+              "Time",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "updateTimestamp",
+          "returns": "None",
+          "desc": [
+            "updates a column with a Timestamp value."
+          ],
+          "raises": [
+            "com.sun.star.sdbc.SQLException"
+          ],
+          "args": [
+            [
+              "x",
+              "DateTime",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

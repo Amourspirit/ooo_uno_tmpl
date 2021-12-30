@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:21:56+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:38+00:00",
   "name": "XUIControllerRegistration",
   "type": "interface",
   "namespace": "com.sun.star.frame",
@@ -17,6 +17,9 @@
       ]
     ],
     "from_imports_typing": [],
+    "quote": [],
+    "typings": [],
+    "requires_typing": false,
     "name": "XUIControllerRegistration",
     "imports": [],
     "namespace": "com.sun.star.frame",
@@ -28,11 +31,79 @@
       "",
       "A user interface controller can be registered for a command URL. A certain user interface controller will be created when a user interface element contains a registered command URL.",
       "",
-      "**See Also**",
+      "**since**",
       "",
-      "    PopupMenuControllerFactory"
+      "    OOo 2.0"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1frame_1_1XUIControllerRegistration.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "deregisterController",
+          "returns": "None",
+          "desc": [
+            "function to remove a previously defined association between a user interface controller implementation and a command URL and optional module."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aCommandURL",
+              "str",
+              "in"
+            ],
+            [
+              "aModelName",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "hasController",
+          "returns": "bool",
+          "desc": [
+            "function to check if an user interface controller is registered for a command URL and optional module."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aCommandURL",
+              "str",
+              "in"
+            ],
+            [
+              "aModelName",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "registerController",
+          "returns": "None",
+          "desc": [
+            "function to create an association between a user interface controller implementation and a command URL and optional module."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aCommandURL",
+              "str",
+              "in"
+            ],
+            [
+              "aModelName",
+              "str",
+              "in"
+            ],
+            [
+              "aControllerImplementationName",
+              "str",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:21:35+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:28+00:00",
   "name": "XConfigurationController",
   "type": "interface",
   "namespace": "com.sun.star.drawing.framework",
@@ -12,30 +12,51 @@
   "data": {
     "from_imports": [
       [
-        ".......x_configuration_controller_request_queue",
+        ".x_configuration_controller_request_queue",
         "XConfigurationControllerRequestQueue"
       ],
       [
-        ".......x_resource_factory_manager",
-        "XResourceFactoryManager"
+        ".x_configuration_controller_broadcaster",
+        "XConfigurationControllerBroadcaster"
       ],
       [
-        ".......x_configuration_controller_broadcaster",
-        "XConfigurationControllerBroadcaster"
+        ".x_resource_factory_manager",
+        "XResourceFactoryManager"
       ]
     ],
-    "from_imports_typing": [],
-    "name": "XConfigurationController",
-    "imports": [
-      "XConfigurationControllerBroadcaster",
-      "XResourceFactoryManager",
-      "XConfigurationControllerRequestQueue"
+    "from_imports_typing": [
+      [
+        ".resource_activation_mode",
+        "ResourceActivationMode"
+      ],
+      [
+        ".x_configuration",
+        "XConfiguration"
+      ],
+      [
+        ".x_resource_id",
+        "XResourceId"
+      ],
+      [
+        ".x_resource",
+        "XResource"
+      ]
     ],
+    "quote": [
+      "XConfiguration",
+      "XResource",
+      "ResourceActivationMode",
+      "XResourceId"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "name": "XConfigurationController",
+    "imports": [],
     "namespace": "com.sun.star.drawing.framework",
     "extends": [
-      "XConfigurationControllerRequestQueue",
-      "XConfigurationControllerBroadcaster",
-      "XResourceFactoryManager"
+      "com.sun.star.drawing.framework.XConfigurationControllerRequestQueue",
+      "com.sun.star.drawing.framework.XConfigurationControllerBroadcaster",
+      "com.sun.star.drawing.framework.XResourceFactoryManager"
     ],
     "desc": [
       "The configuration controller is responsible for the management of the set of active resources.",
@@ -49,6 +70,147 @@
       "The configuration controller sends the following events:"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1drawing_1_1framework_1_1XConfigurationController.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getCurrentConfiguration",
+          "returns": "XConfiguration",
+          "desc": [
+            "Return a copy of the current configuration.",
+            "",
+            "Modifications to the returned configuration have no effect on the drawing framework."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getRequestedConfiguration",
+          "returns": "XConfiguration",
+          "desc": [
+            "Return a copy of the requested configuration.",
+            "",
+            "Modifications to the returned configuration have no effect on the drawing framework."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getResource",
+          "returns": "XResource",
+          "desc": [
+            "Return the active resource specified by the given resource id."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xResourceId",
+              "XResourceId",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "lock",
+          "returns": "None",
+          "desc": [
+            "Lock the processing of configuration change requests.",
+            "",
+            "This is only necessary when more than one change request is being made in a row. It prevents an update being made (with all the visible UI changes) before all change requests are being made.",
+            "",
+            "Recursive lock() calls are recognized: the configuration controller is locked while lock() was called more often than unlock()."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "requestResourceActivation",
+          "returns": "None",
+          "desc": [
+            "Request the activation of a resource.",
+            "",
+            "The request is processed asynchronously. Notifications about configuration changes are sent after this call returns.",
+            "",
+            "When eMode is REPLACE then, before adding the resource activation to the request queue, similar resources linked to the same anchor are removed. This makes it easier to switch between resources whose activation is mutually exclusive. For example, there can only be one view per pane, so before activating a new view the old one has to be deactivated.",
+            "",
+            "When eMode is ADD then the resource is requested without further changes."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xResourceId",
+              "XResourceId",
+              "in"
+            ],
+            [
+              "eMode",
+              "ResourceActivationMode",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "requestResourceDeactivation",
+          "returns": "None",
+          "desc": [
+            "Request the deactivation of a resource.",
+            "",
+            "The request is processed asynchronously. Notifications about configuration changes are sent after this call returns.",
+            "",
+            "Requesting the deactivation of a resource that is not active is not an error."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xResourceId",
+              "XResourceId",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "restoreConfiguration",
+          "returns": "None",
+          "desc": [
+            "Replace the requested configuration with the given configuration and schedule an update of the current configuration.",
+            "",
+            "Together with the getCurrentConfiguration() and getRequestedConfiguration() methods this allows the saving and restoring of configurations. However, the given configuration can have other origins then these methods.",
+            "",
+            "The given configuration is transformed into a list of change requests so that the resulting requested configuration equals the given configuration. This has the advantage that not only the resource activations and deactivations but all configuration changes are properly broadcasted.",
+            "",
+            "Note that because of the configuration change notifications listeners can make more configuration change requests, so that the resulting requested configuration can be different from the given configuration."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xConfiguration",
+              "XConfiguration",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "unlock",
+          "returns": "None",
+          "desc": [
+            "Unlock the processing of configuration change requests.",
+            "",
+            "When unlock() is called as many times as lock() and the queue of configuration change requests is not empty the configuration controller continues the processing of the change requests. An update of the current configuration will eventually being made."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "update",
+          "returns": "None",
+          "desc": [
+            "Explicitly request an update of the current configuration.",
+            "",
+            "Call it when a resource is activated or deactivated without the control and knowledge of the drawing framework. Calling this method (from outside the drawing framework) should hardly every be necessary."
+          ],
+          "raises": [],
+          "args": []
+        }
+      ]
+    }
   }
 }

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:19:25+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:39+00:00",
   "name": "XManifestReader",
   "type": "interface",
   "namespace": "com.sun.star.packages.manifest",
@@ -16,7 +16,24 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "...io.x_input_stream",
+        "XInputStream"
+      ],
+      [
+        "...beans.property_value",
+        "PropertyValue"
+      ]
+    ],
+    "quote": [
+      "typing.List[typing.List[PropertyValue]]",
+      "XInputStream"
+    ],
+    "typings": [
+      "typing.List[typing.List[PropertyValue]]"
+    ],
+    "requires_typing": true,
     "name": "XManifestReader",
     "imports": [],
     "namespace": "com.sun.star.packages.manifest",
@@ -29,6 +46,24 @@
       "The user must supply an XInputStream when calling readManifestSequence() to receive a sequence of manifest entries. Each manifest entry is represented by a sequence of PropertyValues."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1packages_1_1manifest_1_1XManifestReader.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "readManifestSequence",
+          "returns": "typing.List[typing.List[PropertyValue]]",
+          "desc": [
+            "Supplies the XManifestReader with an XInputStream to read from, reads the data and returns it to the caller."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "rStream",
+              "XInputStream",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

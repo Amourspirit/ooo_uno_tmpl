@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:21:56+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:38+00:00",
   "name": "XTransientDocumentsDocumentContentFactory",
   "type": "interface",
   "namespace": "com.sun.star.frame",
@@ -16,7 +16,22 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_model",
+        "XModel"
+      ],
+      [
+        "..ucb.x_content",
+        "XContent"
+      ]
+    ],
+    "quote": [
+      "XContent",
+      "XModel"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XTransientDocumentsDocumentContentFactory",
     "imports": [],
     "namespace": "com.sun.star.frame",
@@ -26,11 +41,31 @@
     "desc": [
       "specifies a factory for com.sun.star.ucb.TransientDocumentsDocumentContents.",
       "",
-      "**See Also**",
+      "**since**",
       "",
-      "    1.0"
+      "    OOo 2.0"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1frame_1_1XTransientDocumentsDocumentContentFactory.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "createDocumentContent",
+          "returns": "XContent",
+          "desc": [
+            "creates a com.sun.star.ucb.TransientDocumentsDocumentContent based on a given com.sun.star.document.OfficeDocument."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "Model",
+              "XModel",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:20:35+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:01+00:00",
   "name": "XScriptContext",
   "type": "interface",
   "namespace": "com.sun.star.script.provider",
@@ -12,25 +12,101 @@
   "data": {
     "from_imports": [
       [
-        ".......x_script_invocation_context",
-        "XScriptInvocationContext"
+        "...uno.x_interface",
+        "XInterface"
       ]
     ],
-    "from_imports_typing": [],
-    "name": "XScriptContext",
-    "imports": [
-      "XScriptInvocationContext"
+    "from_imports_typing": [
+      [
+        "...frame.x_desktop",
+        "XDesktop"
+      ],
+      [
+        "...uno.x_component_context",
+        "XComponentContext"
+      ],
+      [
+        "...document.x_script_invocation_context",
+        "XScriptInvocationContext"
+      ],
+      [
+        "...frame.x_model",
+        "XModel"
+      ]
     ],
+    "quote": [
+      "XScriptInvocationContext",
+      "XDesktop",
+      "XComponentContext",
+      "XModel"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "name": "XScriptContext",
+    "imports": [],
     "namespace": "com.sun.star.script.provider",
     "extends": [
-      "XScriptInvocationContext"
+      "com.sun.star.uno.XInterface"
     ],
     "desc": [
       "This interface is provided to scripts, and provides a means of access to the various interfaces which they might need to perform some action on a document.",
       "",
-      "It is required to be passed as the first argument for any Java scripts."
+      "It is required to be passed as the first argument for any Java scripts.",
+      "",
+      "**since**",
+      "",
+      "    OOo 3.0"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1script_1_1provider_1_1XScriptContext.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getComponentContext",
+          "returns": "XComponentContext",
+          "desc": [
+            "Obtain the component context which the script can use to create other uno components."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getDesktop",
+          "returns": "XDesktop",
+          "desc": [
+            "Obtain the desktop reference on which the script can operate."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getDocument",
+          "returns": "XModel",
+          "desc": [
+            "Obtain the document reference on which the script can operate."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getInvocationContext",
+          "returns": "XScriptInvocationContext",
+          "desc": [
+            "provides access to the context where the script was invoked",
+            "",
+            "In some cases, it is possible that scripts, embedded in a document, are executed from within a context which is not the document itself. In this case, the getInvocationContext member allows to access this context.",
+            "",
+            "Note that the returned context is allowed to be NULL, in this case, the document as returned by getDocument is the invocation context.",
+            "",
+            "If the returned context is not NULL, its ScriptContainer attribute equals the document as returned by XScriptContext.getDocument.",
+            "",
+            "**since**",
+            "",
+            "    OOo 3.0"
+          ],
+          "raises": [],
+          "args": []
+        }
+      ]
+    }
   }
 }

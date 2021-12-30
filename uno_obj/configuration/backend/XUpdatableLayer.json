@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:17:11+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:06+00:00",
   "name": "XUpdatableLayer",
   "type": "interface",
   "namespace": "com.sun.star.configuration.backend",
@@ -12,25 +12,54 @@
   "data": {
     "from_imports": [
       [
-        ".......x_layer",
+        ".x_layer",
         "XLayer"
       ]
     ],
     "from_imports_typing": [],
+    "quote": [
+      "XLayer"
+    ],
+    "typings": [],
+    "requires_typing": false,
     "name": "XUpdatableLayer",
     "imports": [],
     "namespace": "com.sun.star.configuration.backend",
     "extends": [
-      "XLayer"
+      "com.sun.star.configuration.backend.XLayer"
     ],
     "desc": [
       "Provides access to a read-write layer of configuration data for a given component and entity.",
       "",
-      "**See Also**",
+      "**since**",
       "",
       "    OOo 1.1.2"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1configuration_1_1backend_1_1XUpdatableLayer.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "replaceWith",
+          "returns": "None",
+          "desc": [
+            "Replaces the current layer with the layer given as input parameter.",
+            "",
+            "After the replacement has been performed, reading the layer will return the new content. Some implementations may not support this, so after an update XLayer.readData() may fail."
+          ],
+          "raises": [
+            "com.sun.star.lang.NullPointerException",
+            "com.sun.star.lang.WrappedTargetException",
+            "MalformedDataException"
+          ],
+          "args": [
+            [
+              "aNewLayer",
+              "XLayer",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

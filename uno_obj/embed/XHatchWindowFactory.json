@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:18:48+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:05+00:00",
   "name": "XHatchWindowFactory",
   "type": "interface",
   "namespace": "com.sun.star.embed",
@@ -16,7 +16,32 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..awt.x_window_peer",
+        "XWindowPeer"
+      ],
+      [
+        "..awt.size",
+        "Size"
+      ],
+      [
+        "..awt.rectangle",
+        "Rectangle"
+      ],
+      [
+        ".x_hatch_window",
+        "XHatchWindow"
+      ]
+    ],
+    "quote": [
+      "XHatchWindow",
+      "Size",
+      "Rectangle",
+      "XWindowPeer"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XHatchWindowFactory",
     "imports": [],
     "namespace": "com.sun.star.embed",
@@ -27,6 +52,36 @@
       "creates a hatch window implementation."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1embed_1_1XHatchWindowFactory.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "createHatchWindowInstance",
+          "returns": "XHatchWindow",
+          "desc": [
+            "creates a new hatch window instance."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "xParent",
+              "XWindowPeer",
+              "in"
+            ],
+            [
+              "aBounds",
+              "Rectangle",
+              "in"
+            ],
+            [
+              "aSize",
+              "Size",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

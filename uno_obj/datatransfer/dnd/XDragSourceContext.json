@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:20:25+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:26+00:00",
   "name": "XDragSourceContext",
   "type": "interface",
   "namespace": "com.sun.star.datatransfer.dnd",
@@ -17,6 +17,9 @@
       ]
     ],
     "from_imports_typing": [],
+    "quote": [],
+    "typings": [],
+    "requires_typing": false,
     "name": "XDragSourceContext",
     "imports": [],
     "namespace": "com.sun.star.datatransfer.dnd",
@@ -28,13 +31,64 @@
       "",
       "In particular, it is responsible for managing event notifications to the DragSourceListener and providing the Transferable state to enable the data transfer.",
       "",
-      "An instance of this class is created as a result of the method XDragSource.startDrag() being successfully invoked. This instance is responsible for tracking the state of the operation on behalf of the drag source and dispatching state changes to the drag source listener.",
-      "",
-      "**See Also**",
-      "",
-      "    com.sun.star.datatransfer.dnd.XDragSourceContext"
+      "An instance of this class is created as a result of the method XDragSource.startDrag() being successfully invoked. This instance is responsible for tracking the state of the operation on behalf of the drag source and dispatching state changes to the drag source listener."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1datatransfer_1_1dnd_1_1XDragSourceContext.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getCurrentCursor",
+          "returns": "int",
+          "desc": [
+            "Get the identifier of the currently used cursor."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "setCursor",
+          "returns": "None",
+          "desc": [
+            "This method sets the current drag cursor.",
+            "",
+            "This method should only be called to set another cursor than the default one for drag action currently selected by the user.",
+            "",
+            "Invalid cursor identifiers will be ignored."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "cursorId",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setImage",
+          "returns": "None",
+          "desc": [
+            "This method sets the current drag image."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "imageId",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "transferablesFlavorsChanged",
+          "returns": "None",
+          "desc": [
+            "This method notifies the context that the com.sun.star.datatransfer.DataFlavor types of the transferable object have changed."
+          ],
+          "raises": [],
+          "args": []
+        }
+      ]
+    }
   }
 }

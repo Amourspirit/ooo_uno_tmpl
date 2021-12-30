@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:20:52+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:12+00:00",
   "name": "XChartData",
   "type": "interface",
   "namespace": "com.sun.star.chart",
@@ -16,7 +16,17 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_chart_data_change_event_listener",
+        "XChartDataChangeEventListener"
+      ]
+    ],
+    "quote": [
+      "XChartDataChangeEventListener"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XChartData",
     "imports": [],
     "namespace": "com.sun.star.chart",
@@ -24,13 +34,72 @@
       "com.sun.star.uno.XInterface"
     ],
     "desc": [
-      "manages the data of the chart.",
-      "",
-      "**See Also**",
-      "",
-      "    XChartDocument"
+      "manages the data of the chart."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1chart_1_1XChartData.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "addChartDataChangeEventListener",
+          "returns": "None",
+          "desc": [
+            "allows a component supporting the XChartDataChangeEventListener interface to register as listener.",
+            "",
+            "The component will be notified with a ChartDataChangeEvent every time the chart's data changes."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aListener",
+              "XChartDataChangeEventListener",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getNotANumber",
+          "returns": "float",
+          "desc": [
+            "In IEEE arithmetic format it is one of the NaN values, so there are no conflicts with existing numeric values."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "isNotANumber",
+          "returns": "bool",
+          "desc": [
+            "checks whether the value given is equal to the indicator value for a missing value.",
+            "",
+            "In IEEE arithmetic format it is one of the NaN values, so there are no conflicts with existing numeric values.",
+            "",
+            "Always use this method to check, if a value is not a number. If you compare the value returned by XChartData.getNotANumber() to another double value using the = operator, you may not get the desired result!"
+          ],
+          "raises": [],
+          "args": [
+            [
+              "nNumber",
+              "float",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "removeChartDataChangeEventListener",
+          "returns": "None",
+          "desc": [
+            "removes a previously registered listener."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aListener",
+              "XChartDataChangeEventListener",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

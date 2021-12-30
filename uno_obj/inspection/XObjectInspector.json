@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:16:14+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:08+00:00",
   "name": "XObjectInspector",
   "type": "interface",
   "namespace": "com.sun.star.inspection",
@@ -12,23 +12,39 @@
   "data": {
     "from_imports": [
       [
-        "..frame.x_controller",
-        "XController"
-      ],
-      [
         "..frame.x_dispatch_provider",
         "XDispatchProvider"
+      ],
+      [
+        "..frame.x_controller",
+        "XController"
       ]
     ],
     "from_imports_typing": [
-      "......x_object_inspector_model",
+      [
+        ".x_object_inspector_ui",
+        "XObjectInspectorUI"
+      ],
+      [
+        ".x_object_inspector_model",
+        "XObjectInspectorModel"
+      ],
+      [
+        "..uno.x_interface",
+        "XInterface"
+      ]
+    ],
+    "quote": [
+      "typing.List[XInterface]",
+      "XObjectInspectorUI",
       "XObjectInspectorModel"
     ],
-    "name": "XObjectInspector",
-    "imports": [
-      "com.sun.star.frame.XController",
-      "com.sun.star.frame.XDispatchProvider"
+    "typings": [
+      "typing.List[XInterface]"
     ],
+    "requires_typing": true,
+    "name": "XObjectInspector",
+    "imports": [],
     "namespace": "com.sun.star.inspection",
     "extends": [
       "com.sun.star.frame.XController",
@@ -37,16 +53,39 @@
     "desc": [
       "describes the main interface of an ObjectInspector.",
       "",
-      "**See Also**",
+      "**since**",
       "",
-      "    ObjectInspector"
+      "    OOo 2.0.3"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1inspection_1_1XObjectInspector.html",
     "items": {
+      "methods": [
+        {
+          "name": "inspect",
+          "returns": "None",
+          "desc": [
+            "inspects a new collection of one or more objects.",
+            "",
+            "If the sequence is empty, the UI of the ObjectInspector will be cleared.",
+            "",
+            "If the sequence contains more than one object, the XObjectInspector will create a complete set of property handlers (as indicated by XObjectInspectorModel.HandlerFactories) for every of the objects, and compose their output."
+          ],
+          "raises": [
+            "com.sun.star.util.VetoException"
+          ],
+          "args": [
+            [
+              "Objects",
+              "typing.List[XInterface]",
+              "in"
+            ]
+          ]
+        }
+      ],
       "properties": [
         {
           "name": "InspectorModel",
-          "returns": "'XObjectInspectorModel'",
+          "returns": "XObjectInspectorModel",
           "desc": [
             "provides access to the current model of the inspector",
             "",
@@ -56,8 +95,23 @@
             "",
             "If a new model is set at the inspector, the complete UI will be rebuilt to reflect the change, using the new property handlers provided by the new model."
           ],
-          "raises_get": [],
-          "raises_set": []
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "InspectorUI",
+          "returns": "XObjectInspectorUI",
+          "desc": [
+            "provides access to the user interface of the object inspector.",
+            "",
+            "This interface can be used to access and manipulate various aspects of the user interface. For instance, you can enable and disable certain property controls (or parts thereof), or register observers for all property controls.",
+            "",
+            "**since**",
+            "",
+            "    OOo 2.2"
+          ],
+          "raises_get": "",
+          "raises_set": ""
         }
       ]
     }

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:22:35+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:14:59+00:00",
   "name": "XTextMarkup",
   "type": "interface",
   "namespace": "com.sun.star.text",
@@ -10,20 +10,117 @@
   },
   "writer_args": {},
   "data": {
-    "from_imports": [],
-    "from_imports_typing": [],
+    "from_imports": [
+      [
+        ".x_flat_paragraph",
+        "XFlatParagraph"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".x_text_range",
+        "XTextRange"
+      ],
+      [
+        "..container.x_string_key_map",
+        "XStringKeyMap"
+      ]
+    ],
+    "quote": [
+      "XStringKeyMap",
+      "XTextRange"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XTextMarkup",
     "imports": [],
     "namespace": "com.sun.star.text",
-    "extends": [],
+    "extends": [
+      "com.sun.star.text.XFlatParagraph"
+    ],
     "desc": [
       "provides functionality to markup text.",
       "",
-      "**See Also**",
+      "**since**",
       "",
       "    OOo 2.3"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1text_1_1XTextMarkup.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "commitStringMarkup",
+          "returns": "None",
+          "desc": [
+            "submits a new markup range."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "nType",
+              "int",
+              "in"
+            ],
+            [
+              "aIdentifier",
+              "str",
+              "in"
+            ],
+            [
+              "nStart",
+              "int",
+              "in"
+            ],
+            [
+              "nLength",
+              "int",
+              "in"
+            ],
+            [
+              "xMarkupInfoContainer",
+              "XStringKeyMap",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "commitTextRangeMarkup",
+          "returns": "None",
+          "desc": [],
+          "raises": [],
+          "args": [
+            [
+              "nType",
+              "int",
+              "in"
+            ],
+            [
+              "aIdentifier",
+              "str",
+              "in"
+            ],
+            [
+              "xRange",
+              "XTextRange",
+              "in"
+            ],
+            [
+              "xMarkupInfoContainer",
+              "XStringKeyMap",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getMarkupInfoContainer",
+          "returns": "XStringKeyMap",
+          "desc": [
+            "obtains a container to store additional user defined text markup information."
+          ],
+          "raises": [],
+          "args": []
+        }
+      ]
+    }
   }
 }

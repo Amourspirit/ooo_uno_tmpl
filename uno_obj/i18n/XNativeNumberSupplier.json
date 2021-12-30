@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:20:42+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:21+00:00",
   "name": "XNativeNumberSupplier",
   "type": "interface",
   "namespace": "com.sun.star.i18n",
@@ -16,7 +16,22 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".native_number_xml_attributes",
+        "NativeNumberXmlAttributes"
+      ],
+      [
+        "..lang.locale",
+        "Locale"
+      ]
+    ],
+    "quote": [
+      "NativeNumberXmlAttributes",
+      "Locale"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XNativeNumberSupplier",
     "imports": [],
     "namespace": "com.sun.star.i18n",
@@ -26,11 +41,94 @@
     "desc": [
       "Methods to convert between strings of ASCII Arabic digits and native numeral strings.",
       "",
-      "**See Also**",
+      "**since**",
       "",
       "    OOo 1.1.2"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1i18n_1_1XNativeNumberSupplier.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "convertFromXmlAttributes",
+          "returns": "int",
+          "desc": [
+            "Convert XML attributes to a NatNum value."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aAttr",
+              "NativeNumberXmlAttributes",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "convertToXmlAttributes",
+          "returns": "NativeNumberXmlAttributes",
+          "desc": [
+            "Convert a specific NatNum/Locale combination to attributes used in the XML file format."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aLocale",
+              "Locale",
+              "in"
+            ],
+            [
+              "nNativeNumberMode",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getNativeNumberString",
+          "returns": "str",
+          "desc": [
+            "Returns native number string for given number string."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aNumberString",
+              "str",
+              "in"
+            ],
+            [
+              "aLocale",
+              "Locale",
+              "in"
+            ],
+            [
+              "nNativeNumberMode",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "isValidNatNum",
+          "returns": "bool",
+          "desc": [
+            "Check if the NatNum is valid for the given locale."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aLocale",
+              "Locale",
+              "in"
+            ],
+            [
+              "nNativeNumberMode",
+              "int",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

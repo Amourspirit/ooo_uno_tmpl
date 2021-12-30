@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:22:15+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:36+00:00",
   "name": "XStyleLoader2",
   "type": "interface",
   "namespace": "com.sun.star.style",
@@ -16,7 +16,24 @@
         "XStyleLoader"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..lang.x_component",
+        "XComponent"
+      ],
+      [
+        "..beans.property_value",
+        "PropertyValue"
+      ]
+    ],
+    "quote": [
+      "XComponent",
+      "typing.List[PropertyValue]"
+    ],
+    "typings": [
+      "typing.List[PropertyValue]"
+    ],
+    "requires_typing": true,
     "name": "XStyleLoader2",
     "imports": [],
     "namespace": "com.sun.star.style",
@@ -26,11 +43,38 @@
     "desc": [
       "extends XStyleLoader interface to import styles from an already opened component.",
       "",
-      "**See Also**",
+      "**since**",
       "",
-      "    com.sun.star.style.XStyleLoader"
+      "    LibreOffice 4.4"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1style_1_1XStyleLoader2.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "loadStylesFromDocument",
+          "returns": "None",
+          "desc": [
+            "loads styles from a given document",
+            "",
+            "As the default, all supported style families are loaded and existing styles are overwritten."
+          ],
+          "raises": [
+            "com.sun.star.io.IOException"
+          ],
+          "args": [
+            [
+              "aSourceComponent",
+              "XComponent",
+              "in"
+            ],
+            [
+              "aOptions",
+              "typing.List[PropertyValue]",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

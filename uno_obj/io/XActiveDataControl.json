@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:17:00+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:09+00:00",
   "name": "XActiveDataControl",
   "type": "interface",
   "namespace": "com.sun.star.io",
@@ -16,7 +16,17 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_stream_listener",
+        "XStreamListener"
+      ]
+    ],
+    "quote": [
+      "XStreamListener"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XActiveDataControl",
     "imports": [],
     "namespace": "com.sun.star.io",
@@ -29,6 +39,67 @@
       "This interface should be supported by objects which implement XActiveDataSource or XActiveDataSink."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1io_1_1XActiveDataControl.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "addListener",
+          "returns": "None",
+          "desc": [
+            "registers an object to receive events from this data source.",
+            "",
+            "It is suggested to allow multiple registration of the same listener, thus for each time a listener is added, it has to be removed."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aListener",
+              "XStreamListener",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "removeListener",
+          "returns": "None",
+          "desc": [
+            "unregisters an object to receive events from this data source.",
+            "",
+            "It is suggested to allow multiple registration of the same listener, thus for each time a listener is added, it has to be removed."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aListener",
+              "XStreamListener",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "start",
+          "returns": "None",
+          "desc": [
+            "starts I/O.",
+            "",
+            "Either XActiveDataControl.setInputStream() or XActiveDataControl.setOutputStream() must be called beforehand.",
+            "",
+            "This method does not block the thread, so reading is generally not finished when the method returns."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "terminate",
+          "returns": "None",
+          "desc": [
+            "does a weak abort.",
+            "",
+            "It closes all connected resources and calls XInputStream.close() or XOutputStream.close() and fires the XStreamListener.terminated()-event."
+          ],
+          "raises": [],
+          "args": []
+        }
+      ]
+    }
   }
 }

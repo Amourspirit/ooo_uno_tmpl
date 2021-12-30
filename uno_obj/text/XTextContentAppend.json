@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:22:33+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:14:59+00:00",
   "name": "XTextContentAppend",
   "type": "interface",
   "namespace": "com.sun.star.text",
@@ -16,7 +16,27 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_text_range",
+        "XTextRange"
+      ],
+      [
+        "..beans.property_values",
+        "PropertyValues"
+      ],
+      [
+        ".x_text_content",
+        "XTextContent"
+      ]
+    ],
+    "quote": [
+      "XTextContent",
+      "PropertyValues",
+      "XTextRange"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XTextContentAppend",
     "imports": [],
     "namespace": "com.sun.star.text",
@@ -24,9 +44,71 @@
       "com.sun.star.uno.XInterface"
     ],
     "desc": [
-      "allows inserting and appending text content."
+      "allows inserting and appending text content.",
+      "",
+      "**since**",
+      "",
+      "    LibreOffice 4.0"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1text_1_1XTextContentAppend.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "appendTextContent",
+          "returns": "XTextRange",
+          "desc": [
+            "appends a text content at the end of the text."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.beans.UnknownPropertyException"
+          ],
+          "args": [
+            [
+              "TextContent",
+              "XTextContent",
+              "in"
+            ],
+            [
+              "CharacterAndParagraphProperties",
+              "PropertyValues",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "insertTextContentWithProperties",
+          "returns": "XTextRange",
+          "desc": [
+            "inserts a text content at the given position.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 4.0"
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.beans.UnknownPropertyException"
+          ],
+          "args": [
+            [
+              "TextContent",
+              "XTextContent",
+              "in"
+            ],
+            [
+              "CharacterAndParagraphProperties",
+              "PropertyValues",
+              "in"
+            ],
+            [
+              "TextRange",
+              "XTextRange",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

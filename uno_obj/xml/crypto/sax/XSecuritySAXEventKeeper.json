@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:18:37+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:33+00:00",
   "name": "XSecuritySAXEventKeeper",
   "type": "interface",
   "namespace": "com.sun.star.xml.crypto.sax",
@@ -12,16 +12,26 @@
   "data": {
     "from_imports": [
       [
-        "........xsax_event_keeper",
+        ".xsax_event_keeper",
         "XSAXEventKeeper"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".element_mark_priority",
+        "ElementMarkPriority"
+      ]
+    ],
+    "quote": [
+      "ElementMarkPriority"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XSecuritySAXEventKeeper",
     "imports": [],
     "namespace": "com.sun.star.xml.crypto.sax",
     "extends": [
-      "XSAXEventKeeper"
+      "com.sun.star.xml.crypto.sax.XSAXEventKeeper"
     ],
     "desc": [
       "Interface of Security SAX Event Keeper.",
@@ -29,6 +39,49 @@
       "This interface is an extension of the XSAXEventKeeper interface, some security related features are added."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1xml_1_1crypto_1_1sax_1_1XSecuritySAXEventKeeper.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "addSecurityElementCollector",
+          "returns": "int",
+          "desc": [
+            "Adds a new element collector on the next element in the SAX event stream."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "priority",
+              "ElementMarkPriority",
+              "in"
+            ],
+            [
+              "modifyElement",
+              "bool",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setSecurityId",
+          "returns": "None",
+          "desc": [
+            "Sets security id for an element mark."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "id",
+              "int",
+              "in"
+            ],
+            [
+              "securityId",
+              "int",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

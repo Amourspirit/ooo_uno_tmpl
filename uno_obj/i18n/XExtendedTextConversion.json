@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:20:40+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:20+00:00",
   "name": "XExtendedTextConversion",
   "type": "interface",
   "namespace": "com.sun.star.i18n",
@@ -16,7 +16,20 @@
         "XTextConversion"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..lang.locale",
+        "Locale"
+      ]
+    ],
+    "quote": [
+      "Locale",
+      "typing.List[int]"
+    ],
+    "typings": [
+      "typing.List[int]"
+    ],
+    "requires_typing": true,
     "name": "XExtendedTextConversion",
     "imports": [],
     "namespace": "com.sun.star.i18n",
@@ -28,11 +41,62 @@
       "",
       "It is derived from com.sun.star.i18n.XTextConversion and provides a new conversion function containing position map (offset) between original and converted string.",
       "",
-      "**See Also**",
+      "**since**",
       "",
       "    OOo 2.0"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1i18n_1_1XExtendedTextConversion.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getConversionWithOffset",
+          "returns": "str",
+          "desc": [
+            "The functionality of this method is same as com.sun.star.i18n.XTextConversion.getConversion(), except an additional output parameter rOffset."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.lang.NoSupportException"
+          ],
+          "args": [
+            [
+              "aText",
+              "str",
+              "in"
+            ],
+            [
+              "nStartPos",
+              "int",
+              "in"
+            ],
+            [
+              "nLength",
+              "int",
+              "in"
+            ],
+            [
+              "aLocale",
+              "Locale",
+              "in"
+            ],
+            [
+              "nTextConversionType",
+              "int",
+              "in"
+            ],
+            [
+              "nTextConversionOptions",
+              "int",
+              "in"
+            ],
+            [
+              "rOffset",
+              "typing.List[int]",
+              "out"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

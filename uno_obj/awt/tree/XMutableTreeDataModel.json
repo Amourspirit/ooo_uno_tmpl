@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:18:11+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:33+00:00",
   "name": "XMutableTreeDataModel",
   "type": "interface",
   "namespace": "com.sun.star.awt.tree",
@@ -12,16 +12,26 @@
   "data": {
     "from_imports": [
       [
-        ".......x_tree_data_model",
+        ".x_tree_data_model",
         "XTreeDataModel"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_mutable_tree_node",
+        "XMutableTreeNode"
+      ]
+    ],
+    "quote": [
+      "XMutableTreeNode"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XMutableTreeDataModel",
     "imports": [],
     "namespace": "com.sun.star.awt.tree",
     "extends": [
-      "XTreeDataModel"
+      "com.sun.star.awt.tree.XTreeDataModel"
     ],
     "desc": [
       "This is the editable version of the XTreeDataModel.",
@@ -29,6 +39,46 @@
       "Note that only XTreeNode created from the same instance with createNode() are valid nodes for this instance."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1tree_1_1XMutableTreeDataModel.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "createNode",
+          "returns": "XMutableTreeNode",
+          "desc": [
+            "creates a new tree node with the given value and given settings."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "DisplayValue",
+              "object",
+              "in"
+            ],
+            [
+              "ChildrenOnDemand",
+              "bool",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setRoot",
+          "returns": "None",
+          "desc": [
+            "changes the root node of this model to RootNode."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "RootNode",
+              "XMutableTreeNode",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

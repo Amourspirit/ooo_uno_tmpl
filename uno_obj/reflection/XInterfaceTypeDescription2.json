@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:17:15+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:32+00:00",
   "name": "XInterfaceTypeDescription2",
   "type": "interface",
   "namespace": "com.sun.star.reflection",
@@ -12,27 +12,60 @@
   "data": {
     "from_imports": [
       [
-        "......x_interface_type_description",
+        ".x_interface_type_description",
         "XInterfaceTypeDescription"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_type_description",
+        "XTypeDescription"
+      ]
+    ],
+    "quote": [
+      "typing.List[XTypeDescription]"
+    ],
+    "typings": [
+      "typing.List[XTypeDescription]"
+    ],
+    "requires_typing": true,
     "name": "XInterfaceTypeDescription2",
     "imports": [],
     "namespace": "com.sun.star.reflection",
     "extends": [
-      "XInterfaceTypeDescription"
+      "com.sun.star.reflection.XInterfaceTypeDescription"
     ],
     "desc": [
       "Reflects an interface type, supporting multiple inheritance.",
       "",
       "This type supersedes XInterfaceTypeDescription, which only supported single inheritance.",
       "",
-      "**See Also**",
+      "**since**",
       "",
       "    OOo 2.0"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1reflection_1_1XInterfaceTypeDescription2.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getBaseTypes",
+          "returns": "typing.List[XTypeDescription]",
+          "desc": [
+            "Returns a sequence of all directly inherited (mandatory) base interface types."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getOptionalBaseTypes",
+          "returns": "typing.List[XTypeDescription]",
+          "desc": [
+            "Returns a sequence of all directly inherited optional base interface types."
+          ],
+          "raises": [],
+          "args": []
+        }
+      ]
+    }
   }
 }

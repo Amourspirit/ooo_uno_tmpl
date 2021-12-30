@@ -1,8 +1,11 @@
 # coding: utf-8
 """
-Base classes and helper functions of various types that are used with different parsers
+Base classes and helper functions of various types that are used with different parsers.
+Module logger must be set before calling any class or function.
+eg: import base
+    base.logger = mylogger
 """
-from dataclasses import dataclass
+# region imports
 import os
 import sys
 import re
@@ -16,38 +19,59 @@ import calendar
 import hashlib
 import inspect
 import importlib
+import shutil  # to save it locally
+import numpy as np
+from dataclasses import dataclass, field
+from deprecated import deprecated
+from PIL import Image
 from types import ModuleType
 from abc import ABC, abstractmethod
 from bs4 import BeautifulSoup
 from bs4.element import ResultSet, Tag
 from glob import glob
-from kwhelp.decorator import AcceptedTypes, DecArgEnum, DecFuncEnum, RequireArgs, RuleCheckAll, RuleCheckAllKw, TypeCheck, TypeCheckKw
+from kwhelp.decorator import AcceptedTypes, DecArgEnum, DecFuncEnum, RequireArgs, RuleCheckAllKw, TypeCheck, TypeCheckKw
 from kwhelp import rules
 from pathlib import Path
-from typing import Iterable, List, Set, Tuple, Union
+from typing import Any, Dict, Iterable, List, Optional, Set, Tuple, Union
 from datetime import datetime, timezone
 
-# this is for VS code debuging
 _app_root = os.environ.get('project_root', str(Path(__file__).parent.parent))
 if not _app_root in sys.path:
     sys.path.insert(0, _app_root)
-# print(sys.path)
-# this is for command line
-# sys.path.insert(0, os.path.abspath('..'))
+from parser.type_mod import TypeRules, PythonType
+from config import AppConfig, read_config_default
+# endregion imports
 
 logger: logging.Logger  = None
+# region CONST
+URL_SPLIT = '_1_1'
+"""Default stirng for splitting url string into it parts"""
+# endregion CONST
+# region config
+APP_CONFIG: AppConfig = None
+def _load_config():
+    global APP_CONFIG
+    APP_CONFIG = read_config_default()
+    
+_load_config()
+# endregion config
 
+# region regex
 #  \W = [^a-zA-Z0-9_]
 py_name_pattern = re.compile('[\W_]+')
 py_ns_pattern = re.compile(r'[^a-zA-Z0-9\._]+')
 curly_brace_close_pattern = re.compile(r'[^};]')
-RESPONSE_CACHE: 'FileCache' = None
+TEXT_CACHE: 'TextCache' = None
+"""TextCache object for caching response data"""
 pattern_sq_braket = re.compile(r"\[.*\]")
 pattern_http = re.compile(r"^https?:\/\/")
 pattern_id = re.compile(r'[a-z0-9]{28,38}')
 pattern_generic_name = re.compile(r"([a-zA-Z0-9_]+)(<[A-Z, ]+>)")
 
-"""FileCache object for caching response data"""
+# endregion regex
+
+# region Type Map
+# TYPE_MAP and TYPE_MAP_EX are only used with deprecated method get_py_type
 
 TYPE_MAP = {
     "any": "object",
@@ -65,30 +89,77 @@ TYPE_MAP = {
     'T': 'object',
     'U': 'object'
 }
+TYPE_MAP_EX = {
+    "com.sun.star.beans.Pair": {
+        "replace": "typing.Tuple[{0}, {1}]",
+        "regex": r".*<[ ]*([a-zA-Z]+),[ ]*([a-zA-Z]+)",
+        "is_typing": True,
+        "is_wrapper": False,
+        "is_py_type": True
+    }
+}
+# endregion Type Map
+
+# region image process const
+IMG_CACHE: 'ImageCache' = None
+RESPONSE_IMG: 'ResponseImg' = None
+# endregion image process const
+
+# region Exceptions
+class RequiredError(Exception):
+    """Error for required"""
+# endregion Exceptions
+
+# region Data Classes
 
 
-def str_clean(input: str, **kwargs) -> str:
-    """
-    Cleans and encodes string for template replacemnt
+@dataclass
+class ImportInfo:
+    requires_typing: bool = False
+    imports: Set[str] = field(default_factory=set)
 
-    Keyword Arguments:
-        replace_dual (bool, optional): Replace ``::`` with ``.`` Default ``True``
-    """
-    _replace_dual = bool(kwargs.get('replace_dual', True))
-    result = input
-    if _replace_dual:
-        result = result.replace("::", ".")
-    result = result.replace('\\n', '\\\\\\\\n').replace('\\r', '\\\\\\\\r')
-    result = result.replace('"', '\\"')
-    return result.strip()
+# @dataclass
+# class PythonType(ImportInfo):
+#     type: str = ''
 
-class FileCache:
+
+@dataclass(frozen=True)
+class Area:
+    name: str
+    href: str
+    x1: int
+    y1: int
+    x2: int
+    y2: int
+    title: str = ''
+
+
+@dataclass(frozen=True)
+class Ns:
+    name: str
+    namespace: str
+
+    @property
+    def fullns(self):
+        return self.namespace + '.' + self.name
+
+
+@dataclass(frozen=True)
+class SummaryInfo:
+    id: str
+    name: str
+    type: str
+    p_type: PythonType
+# endregion Data Classes
+
+# region Cache
+class CacheBase(ABC):
     """
     Caches files and retreives cached files.
     Cached file are in a subfolder of system tmp dir.
     """
-    
-    def __init__(self, tmp_dir='ooo_uno_tmpl', lifetime: float = 60.0) -> None:
+
+    def __init__(self, tmp_dir: str, lifetime: Optional[float] = None) -> None:
         """
         Constructor
 
@@ -96,10 +167,60 @@ class FileCache:
             tmp_dir (str, optional): Dir name to create in tmp folder. Defaults to 'ooo_uno_tmpl'.
             lifetime (float, optional): Time in seconds that cache is good for. Defaults to 60 seconds.
         """
-        t_path =Path(tempfile.gettempdir())
+        t_path = Path(tempfile.gettempdir())
         self._cache_path = t_path / tmp_dir
         Util.mkdirp(self._cache_path)
-        self._lifetime = lifetime   
+        self._lifetime = lifetime or APP_CONFIG.cache_duration
+
+    @abstractmethod
+    def fetch_from_cache(self, filename: Union[str, Path]):
+        """
+        Fetches file contents from cache if it exist and is not expired
+
+        Args:
+            filename (Union[str, Path]): File to retrieve
+
+        Returns:
+            Union[str, None]: File contents if retrieved; Otherwise, ``None``
+        """
+
+    @abstractmethod
+    def save_in_cache(self, filename: Union[str, Path], content):
+        """
+        Saves file contents into cache
+
+        Args:
+            filename (Union[str, Path]): filename to write.
+            content (any): Contents to write into file.
+        """
+
+    def del_from_cache(self,  filename: Union[str, Path]) -> None:
+        """
+        Deletes a file from cache if it exist
+
+        Args:
+            filename (Union[str, Path]): file to delete.
+        """
+        f = Path(self.path, filename)
+        if os.path.exists(f):
+            os.remove(f)
+
+    @property
+    def seconds(self) -> float:
+        """Gets cache time in seconds"""
+        return self._lifetime
+    
+    @property
+    def path(self) -> Path:
+        """Gets cache path"""
+        return self._cache_path
+
+
+class TextCache(CacheBase):
+    """
+    Caches files and retreives cached files.
+    Cached file are in a subfolder of system tmp dir.
+    """
 
     def fetch_from_cache(self, filename: Union[str, Path]) -> Union[str, None]:
         """
@@ -111,15 +232,23 @@ class FileCache:
         Returns:
             Union[str, None]: File contents if retrieved; Otherwise, ``None``
         """
-        f = Path(self._cache_path, filename)
+        f = Path(self.path, filename)
         if not f.exists():
             return None
 
-        if self._lifetime > 0:
+        if self.seconds > 0:
             f_stat = f.stat()
+            if f_stat.st_size == 0:
+                # shoud not be zero byte file.
+                try:
+                    self.del_from_cache(f)
+                except Exception as e:
+                    logger.warning(
+                        'Not able to delete 0 byte file: %s, error: %s', filename, str(e))
+                return None
             ti_m = f_stat.st_mtime
             age = time.time() - ti_m
-            if age >= self._lifetime:
+            if age >= self.seconds:
                 return None
         try:
             # Check if we have this file locally
@@ -139,22 +268,25 @@ class FileCache:
             filename (Union[str, Path]): filename to write.
             content (str): Contents to write into file.
         """
-        f = Path(self._cache_path, filename)
+        f = Path(self.path, filename)
         # print('Saving a copy of {} in the cache'.format(filename))
         with open(f, 'w') as cached_file:
             cached_file.write(content)
 
+# endregion Cache
 
-class ResponseObj:
+# region Response
+class ResponseBase(ABC):
     """Gets response data"""
     @RuleCheckAllKw(
         arg_info={
             "url": rules.RuleStrNotNullEmptyWs,
-            "cache_seconds": rules.RuleNumber
+            "cache_seconds": rules.RuleNumber,
+            "file_ext": rules.RuleStr
         },
         ftype=DecFuncEnum.METHOD
     )
-    def __init__(self, url: str, cache_seconds:float = 604800.0, **kwargs):
+    def __init__(self, url: str, cache_seconds: float, **kwargs):
         """
         Constructor
 
@@ -169,54 +301,34 @@ class ResponseObj:
             has_name (bool, optional): If ``True`` name is extracted from
                 url and namespace excludes name. Default ``True``.
                 This applies to ``url_obj`` property
+            file_ext (str, optional): Extension if file. Default is read from url.
+                Format must prepend ``.`` such as ``.png``
         """
         self._url = url
         self._url_obj = UrlObj(url=self._url, **kwargs)
         self._lifetime = cache_seconds
-        if self._lifetime > 0:
-            self._url_hash = hashlib.md5(self._url_obj.url_only.encode('utf-8')).hexdigest()
-        else:
-            self._url_hash = ''
-        self._text = None
+        self._url_hash = hashlib.md5(
+            self._url_obj.url_only.encode('utf-8')).hexdigest()
 
-    # cache for one week - 604800.0 seconds
-    def _get_request_text(self) -> str:
-        global RESPONSE_CACHE
-        allow_cache = self._lifetime > 0
-        if allow_cache:
-            if not RESPONSE_CACHE:
-                RESPONSE_CACHE = FileCache(lifetime=self._lifetime)
-            html_text = RESPONSE_CACHE.fetch_from_cache(self._url_hash)
-            if html_text:
-                logger.debug("ResponseObj._get_request_text() retreived data from Cache")
-                return html_text
-        response = requests.get(url=self._url)
-        if response.status_code != 200:
-            raise Exception('bad response code:' + str(response.status_code))
-        html_text = response.text
-        if allow_cache:
-            RESPONSE_CACHE.save_in_cache(self._url_hash, html_text)
-            logger.debug("ResponseObj._get_request_text() Saving to cache as: %s", self._url_hash)
-        return html_text
+        self._file_ext = kwargs.get('file_ext', None)
+        if self._file_ext is None:
+            self._file_ext = self._url_obj.ext
 
     @property
     def url(self) -> str:
         """Specifies url"""
         return self._url
-    
+
     @property
     def url_obj(self) -> 'UrlObj':
         """Gets url_obj value"""
         return self._url_obj
 
     @property
-    def raw_html(self) -> str:
-        """
-        Gets raw html of url
-        """
-        if self._text is None:
-            self._text = self._get_request_text()
-        return self._text
+    def url_hash(self) -> str:
+        """Gets url_hash value"""
+        return self._url_hash
+
     @property
     def cache_seconds(self) -> float:
         """Specifies allow_cache
@@ -225,13 +337,82 @@ class ResponseObj:
             :setter: Sets cache_seconds value.
         """
         return self._lifetime
-    
+
     @cache_seconds.setter
     def cache_seconds(self, value: float):
         self._lifetime = value
-        logger.debug('ResponseObj: caching is set to: %d', value)
+        logger.debug('ResponseBase: caching is set to: %d', value)
 
 
+class ResponseObj(ResponseBase):
+    """Gets response data"""
+
+    def __init__(self, url: str, cache_seconds: Optional[float] = None, **kwargs):
+        """
+        Constructor
+
+        Args:
+            url (str): Url to retrieve html
+            allow_cache (bool, optional): Determins if caching is used.
+                If ``True`` html will be written to cache. Defaults to True.
+            cache_seconds (float, optional): The number of seconds that html
+                contents will be cached for. Default is ``604800.0`` ( one week )
+
+        Keyword Arguments:
+            has_name (bool, optional): If ``True`` name is extracted from
+                url and namespace excludes name. Default ``True``.
+                This applies to ``url_obj`` property
+            file_ext (str, optional): Extension if file. Default is empty ``.html``.
+                Format must prepend ``.`` such as ``.png``
+        """
+        if cache_seconds is None:
+            cache_seconds = APP_CONFIG.cache_duration
+        super().__init__(url=url, cache_seconds=cache_seconds, **kwargs)
+        self._text = None
+        if not 'file_ext' in kwargs:
+            self._file_ext = '.html'
+
+    # cache for one week - 604800.0 seconds
+    def _get_request_text(self) -> str:
+        global TEXT_CACHE
+        allow_cache = self.cache_seconds > 0
+        filename = self._url_hash + self._file_ext
+        if allow_cache:
+            if not TEXT_CACHE:
+                TEXT_CACHE = TextCache(
+                    tmp_dir=APP_CONFIG.cache_dir, lifetime=self.cache_seconds)
+            html_text = TEXT_CACHE.fetch_from_cache(filename=filename)
+            if html_text:
+                logger.debug(
+                    "ResponseObj._get_request_text() retreived data from Cache")
+                return html_text
+        response = requests.get(url=self.url)
+        if response.status_code != 200:
+            raise Exception('bad response code:' + str(response.status_code))
+        html_text = response.text
+        if allow_cache:
+            TEXT_CACHE.save_in_cache(filename=filename, content=html_text)
+            logger.debug(
+                "ResponseObj._get_request_text() Saving to cache as: %s", Path(TEXT_CACHE.path, filename))
+        return html_text
+
+    @property
+    def raw_html(self) -> str:
+        """
+        Gets raw html of url
+        """
+        if self._text is None:
+            try:
+                self._text = self._get_request_text()
+            except Exception as e:
+                logger.error(e)
+                raise e
+        return self._text
+
+
+# endregion Response
+
+# region Soup Related:
 class SoupObj:
     """Wrapper for BeautifulSoup"""
     @RuleCheckAllKw(
@@ -276,7 +457,7 @@ class SoupObj:
     def url(self) -> str:
         """Specifies url"""
         return self._response.url
-    
+
     @property
     def url_obj(self) -> 'UrlObj':
         """Specifies url"""
@@ -290,13 +471,807 @@ class SoupObj:
             :setter: Sets allow_cache value.
         """
         return self._response.allow_cache
-    
+
     @allow_cache.setter
     def allow_cache(self, value: bool):
         self._response.allow_cache = value
 
+# endregion Soup Related:
+
+# region Url
+class UrlObj:
+    """Properties of url"""
+    @RuleCheckAllKw(
+        arg_info={
+            "url": rules.RuleStrNotNullEmptyWs,
+            "has_name": rules.RuleBool
+        },
+        ftype=DecFuncEnum.METHOD
+    )
+    def __init__(self, url: str, **kwargs):
+        """
+        Constructor
+
+        Args:
+            url (str): Url
+
+        Keyword Arguments:
+            has_name (bool, optional): If ``True`` name is extracted from
+                url and namespace excludes name. Default ``True``
+        """
+        self._url = url
+        self._has_name = kwargs.get('has_name', True)
+        u_parts = self._url.rsplit('/', 1)
+        # similar to: namespacecom_1_1sun_1_1star_1_1style.html#a3ae28cb49c180ec160a0984600b2b925
+        self._page_link = u_parts[1]
+        self._url_base = u_parts[0]
+        f_parts = self._url.split(sep='#', maxsplit=1)
+        if len(f_parts) > 1:
+            self._url_only = f_parts[0]
+            self._fragment = f_parts[1]
+            self._is_frag = True
+        else:
+            self._url_only = self._url
+            self._fragment = ''
+            self._is_frag = False
+        self._name = None if self._has_name else ''
+
+        self._ns = None
+        self._ns_str = None
+        self._ext = None
+
+    def get_split_ns(self) -> List[str]:
+        result = []
+        try:
+            ns_part = self._page_link.split('.')[0]
+            s = ns_part.replace(URL_SPLIT, '.').lstrip('.')
+
+            # in some cases such as generics the name can have _3_01 and or _01_4 in the last part of the name
+            # best guess _3 is < and _4 is > and _01 is space.
+            # just split _3 dropping the end
+            s = s.rsplit(sep='_3', maxsplit=1)[0]
+
+            # https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1beans_1_1Pair_3_01T_00_01U_01_4.html
+            # the frist part on the str usually is prefixed with namespace, interface or whatever.
+            # namespace always start with com so just drop the first part to clean it up.
+            s = 'com.' + s.split('.', maxsplit=1)[1]
+            result = s.split('.')
+        except Exception as e:
+            logger.error(e)
+            logger.info('UrlObj._get_ns() returning empty list.')
+        return result
+
+    def _get_ns(self) -> List[str]:
+        try:
+            result = self.get_split_ns()
+
+            # get that last item
+            self._name = result[-1:][0]
+            # Drop the component from the result
+            if self._has_name:
+                self._ns = result[:-1]
+            else:
+                self._ns = result
+        except Exception as e:
+            logger.error(e)
+            logger.info('UrlObj._get_ns() returning empty list.')
+        return result
+
+    @property
+    def page_link(self) -> str:
+        """
+        Gets page link similar to ``namespacecom_1_1sun_1_1star_1_1style.html#a3ae28cb49c180ec160a0984600b2b925``
+        """
+        return self._page_link
+
+    @property
+    def fragment(self) -> str:
+        """
+        Gets fragment simalar to a3ae28cb49c180ec160a0984600b2b925
+        """
+        return self._fragment
+
+    @property
+    def name(self) -> str:
+        """
+        Get name portion of html link such as SpinningProgressControlModel
+        """
+        if self._name is None:
+            self._get_ns()
+        return self._name
+
+    @property
+    def is_fragment(self) -> bool:
+        """
+        Gets if there is a fragment
+        """
+        return self._is_frag
+
+    @property
+    def namespace(self) -> List[str]:
+        """
+        Gets Namespace in format of ['com', 'sun', 'star', 'style']
+        """
+        if self._ns is None:
+            self._get_ns()
+        return self._ns
+
+    @property
+    def namespace_str(self) -> str:
+        """
+        Gets namespace in format of 'com.sun.star.style'
+        """
+        if not self._ns_str:
+            self._ns_str = '.'.join(self.namespace)
+        return self._ns_str
+
+    @property
+    def url(self) -> str:
+        """Gets url value"""
+        return self._url
+
+    @property
+    def url_base(self) -> str:
+        """
+        Gets url base value such as:
+        ``https://api.libreoffice.org/docs/idl/ref``
+        """
+        return self._url_base
+
+    @property
+    def url_only(self) -> str:
+        """
+        Gets full url without fragment
+        """
+        return self._url_only
+
+    @property
+    def ext(self) -> str:
+        """Gets ext value such as ``.html`` or ``.png``"""
+        if self._ext is None:
+            parts = self.url_only.rsplit(sep='.', maxsplit=1)
+            self._ext = '' if len(parts) == 1 else ('.' + parts[1])
+        return self._ext
+
+# endregion Url
+
+# region block and api classes
+
+class TagsStrObj:
+    """Class that converts list of tags to string"""
+
+    def __init__(self, tags: Iterable[Tag], **kwargs):
+        """
+        Constructor
+
+        Args:
+            tags (Iterable[Tag]): List of tags
+
+        Keyword Arguments:
+            clean (bool, optional): If ``True`` then data will be cleaned
+                using ``str_clean`` method. Default ``True``
+            empty (bool, optional): If ``True`` empty lines will be added
+                between other lines. Default ``True``
+            indent (int, optional): The number of spaces to indent for 
+                methods that return a string. Default ``0``
+        """
+        self._tags = tags
+        self._clean = bool(kwargs.get('clean', True))
+        self._empty_lines = bool(kwargs.get('empty', True))
+        self._indent_amt = int(kwargs.get('indent', 0))
+
+    def get_lines(self) -> List[str]:
+        """Gets lines for this instance"""
+        lines: List[str] = []
+        i = 0
+        for ln in self._tags:
+            s = ln.text.strip().replace("::", '.')
+            if not s:
+                continue
+            if self._clean:
+                s = str_clean(input=s)
+            if i > 0 and self._empty_lines:
+                lines.append("")
+            lines.extend(s.splitlines())
+            i += 1
+        return [line.strip() for line in lines]
+
+    def get_data(self) -> List[str]:
+        """Gets Lines as string for this instance"""
+        return self.get_lines()
+
+    def get_string_list(self) -> str:
+        # lines = self._encode_list(self.get_lines())
+        # c_lines = self._decode_list(str(lines).split(','))
+        # s = ',\n'.join(c_lines)
+        s = Util.get_string_list(self.get_lines())
+        if self._indent_amt > 0:
+            s = Util.indent(text=s, indent_amt=self._indent_amt)
+        return s
+
+
+class BlockObj(ABC):
+    """
+    Abstract Class.
+
+    Represents a Html Block.
+    """
+
+    def __init__(self, soup: SoupObj):
+        """
+        Constructor
+
+        Args:
+            soup (SoupObj): soup for this instance
+        """
+        self._soup = soup
+        self._url = soup.url
+        self._urlobj = self._get_url_obj()
+
+    def _get_url_obj(self):
+        return UrlObj(self._url)
+
+
+    @abstractmethod
+    def get_obj(self) -> Tag:
+        """Get object"""
+
+    @property
+    def url(self) -> str:
+        """Gets Url"""
+        return self._url
+
+    @property
+    def soup(self) -> SoupObj:
+        """Gets SoupObj instance for this instance"""
+        return self._soup
+
+    @property
+    def url_obj(self) -> UrlObj:
+        """Gets UrlObj instance for this instance"""
+        return self._urlobj
+
+
+class ApiName(BlockObj):
+    """Get the Name object for the interface"""
+
+    def __init__(self, soup: SoupObj):
+        super().__init__(soup)
+        self._data = None
+
+    def get_obj(self) -> str:
+        if not self._data is None:
+            return self._data
+        soup = self.soup.soup
+        try:
+            tag_div_nav: Tag = soup.select_one('div#nav-path')
+            name = tag_div_nav.find_all(
+                'li', class_='navelem')[-1].text.strip()
+            self._data = name
+            return self._data
+        except Exception as e:
+            logger.error(
+                "ApiName.get_obj() Error getting name.", exc_info=True)
+            raise e
+
+
+class ApiNamespace(BlockObj):
+    """Get the Namespace object for component"""
+
+    def __init__(self, soup: SoupObj):
+        super().__init__(soup)
+        self._data = None
+
+    def get_obj(self) -> List[str]:
+        if not self._data is None:
+            return self._data
+        soup = self.soup.soup
+        self._data = []
+        try:
+            tag_div_nav: Tag = soup.select_one('div#nav-path')
+            names = tag_div_nav.find_all('li', class_='navelem')
+            for name in names:
+                self._data.append(name.text.strip())
+            return self._data
+        except Exception as e:
+            logger.error(
+                "ApiNamespace.get_obj() Error getting Namespace.", exc_info=True)
+            raise e
+
+
+class ApiPublicMembers(BlockObj):
+    """Gets all blocks with condensed info such as Public Member Functions"""
+    @TypeCheck(SoupObj, ftype=DecFuncEnum.METHOD)
+    def __init__(self, soup: SoupObj):
+        self._soup = soup
+        super().__init__(soup)
+        self._data = False
+
+    def get_obj(self) -> Union[ResultSet, None]:
+        if not self._data is False:
+            return self._data
+        self._data = None
+        soup = self.soup.soup
+        rs = soup.find_all('table', class_='memberdecls')
+        self._data = rs
+        return self._data
+
+
+class ApiSummaryBlock(BlockObj):
+    """
+    Abstract class for getting sumary block form ApiPublicMembers
+    """
+    def __init__(self, block: ApiPublicMembers):
+        self._block: ApiPublicMembers = block
+        super().__init__(self._block.soup)
+        self._data = False
+
+    @abstractmethod
+    def _get_match_name(self) -> str:
+        """
+        Name of a sction to match
+
+        Returns:
+            str: section heading name such as ``interfaces``
+        """
+
+    def get_obj(self) -> Union[Tag, None]:
+        if not self._data is False:
+            return self._data
+        self._data = None
+        rs = self._block.get_obj()
+        if not rs:
+            return self._data
+        match_name = self._get_match_name()
+        for tag in rs:
+            # tag is a table
+            # body > div.contents > table > tbody > tr.heading > td > h2 > a
+            t: Tag = tag
+            a_lnk = t.select_one('tr.heading > td > h2 > a')
+            if a_lnk:
+                name = a_lnk.get('name', None)
+                if name == match_name:
+                    self._data = tag
+                    break
+        if self._data is None and logger.level <= logging.WARNING:
+            logger.warning(
+                "ApiSummaryBlock.get_obj() No summary block found for '%s'", match_name)
+        return self._data
+
+
+class ApiSummaryRows(BlockObj):
+    """Gets the rows that contain short details and desc for a Function/properyty block"""
+
+    def __init__(self, block: ApiSummaryBlock):
+        self._block: ApiSummaryBlock = block
+        super().__init__(self._block.soup)
+        self._data = None
+
+    def get_obj(self) -> List[Tag]:
+        if not self._data is None:
+            return self._data
+        self._data = []
+        tbl_tag: Tag = self._block.get_obj()
+        if not tbl_tag:
+            return self._data
+        rs_rows: ResultSet = tbl_tag.find_all('tr')
+        if not rs_rows:
+            return self._data
+        for row in rs_rows:
+            r: Tag = row
+            _class = r.get('class', [])
+            if len(_class) == 0:
+                continue
+            class_str = _class[0]
+            if class_str == 'inherit_header':
+                # Public Member Functions inherited from ...
+                break
+            if class_str.startswith('memitem:'):
+                self._data.append(row)
+        return self._data
+
+class ApiSummaries(BlockObj):
+    """Gets summary information for a public member block"""
+
+    def __init__(self, block: ApiSummaryRows) -> None:
+        self._block: ApiSummaryRows = block
+        super().__init__(self._block.soup)
+        self._requires_typing = False
+        self._imports: Set[str] = set()
+        self._data = None
+    
+    def _get_type_from_inner_link(self, mem_item_left: Tag, name:str) -> Union[str, None]:
+        logger.debug('ApiSummaries._get_type_from_inner_link() Searching for %s link.', name)
+        if not mem_item_left:
+            return None
+        a_tag = mem_item_left.findChild('a')
+        if not a_tag:
+            return None
+        a_name = a_tag.text.strip()
+        if a_name != name:
+            return None
+        s = Util.get_ns_from_a_tag(a_tag=a_tag)
+        logger.debug(
+            'ApiSummaries._get_type_from_inner_link() found: %s', s)
+        return s
+
+    def get_obj(self) -> List[SummaryInfo]:
+        if not self._data is None:
+            return self._data
+        self._data = []
+        rows = self._block.get_obj()
+        for row in rows:
+            cls_name = row.get('class')[0]
+            id_str = cls_name.rsplit(sep=':', maxsplit=1)[1]
+            itm_lft = row.find('td', class_='memItemLeft')
+            r_type = ''
+            name = ''
+            if itm_lft:
+                r_type = itm_lft.text.strip().replace('::', '.').lstrip('.')
+            itm_rgt = row.find('td', class_='memItemRight')
+            if itm_rgt:
+                itm_name = itm_rgt.select_one('a')
+                if itm_name:
+                    name = itm_name.text.strip()
+                    name = Util.get_clean_method_name(name)
+            # logger.debug('ApiSummaries.get_obj() r_type in: %s', r_type)
+            p_type = Util.get_python_type(in_type=r_type)
+            # logger.debug('ApiSummaries.get_obj() p_type in: %s', p_type.type)
+            if p_type.is_default():
+                logger.debug(
+                    'ApiSummaries.get_obj() %s: p_type is Default. Looking for %s', name, r_type)
+                # defaulted to object.
+                # this could be an object in the same namespace.
+                # test for link and namespace and try again.
+                r2_type = self._get_type_from_inner_link(itm_lft, r_type)
+                if r2_type:
+                    p2_type = Util.get_python_type(r2_type)
+                    if not p2_type.is_default():
+                        p_type = p2_type
+                        logger.debug(
+                            'ApiSummaries.get_obj() %s: p_type is now %s', name, r_type)
+            else:
+                logger.debug(
+                    'ApiSummaries.get_obj() %s: p_type is %s for %s', name, p_type.type, r_type)
+            si = SummaryInfo(id=id_str, name=name, type=p_type.type, p_type=p_type)
+            if p_type.requires_typing:
+                self._requires_typing = True
+            im = p_type.get_all_imports()
+            self._imports.update(im)
+            self._data.append(si)
+        return self._data
+
+    @property
+    def requires_typing(self) -> bool:
+        """Gets requires_typing value"""
+        return self._requires_typing
+
+    @property
+    def imports(self) -> Set[str]:
+        """Gets imports value"""
+        return self._imports
+
+class ApiDescDetailSince(BlockObj):
+    """Gets the Since part if it exist of a detailed block section"""
+    def __init__(self, block: BlockObj) -> None:
+        self._block: BlockObj = block
+        super().__init__(self._block.soup)
+        self._data = False
+
+    def get_obj(self) -> Union[str, None]:
+        if not self._data is False:
+            return self._data
+        self._data = None
+        tag: Tag = self._block.get_obj()
+        if not tag:
+            return self._data
+        dl_tag = tag.select_one('dl.section.since')
+        if not dl_tag:
+            return self._data
+        dd_tag = dl_tag.find('dd')
+        if not dd_tag:
+            return self._data
+        self._data = dd_tag.text.strip()
+        return self._data
+class ApiDescDetail(BlockObj):
+    """Gets description of a detail block section"""
+    def __init__(self, block: BlockObj) -> None:
+        self._block: BlockObj = block
+        super().__init__(self._block.soup)
+        self._data = None
+        self._cls = 'memdoc'
+        self._el = 'div'
+
+    def get_obj(self) -> List[str]:
+        if not self._data is None:
+            return self._data
+        self._data = []
+        tag = self._block.get_obj()
+        if not tag:
+            return self._data
+        lines_found: ResultSet = tag.select(f'{self._el}.{self._cls} > p')
+        if not lines_found:
+            return self._data
+        p_obj = TagsStrObj(tags=lines_found)
+        self._data = p_obj.get_lines()
+        since_obj = ApiDescDetailSince(self._block)
+        since = since_obj.get_obj()
+        if since:
+            self._data.append('')
+            self._data.append('**since**')
+            self._data.append('')
+            self._data.append(f"    {since}")
+        return self._data
+
+
+class ApiDesc(BlockObj):
+    """Gets the description"""
+
+    def __init__(self, soup: SoupObj):
+        super().__init__(soup)
+        self._data = None
+
+    def get_obj(self) -> List[str]:
+        """
+        Gets description as list of str
+
+        Returns:
+            List[str]: description lines
+        """
+        if self._data:
+            return self._data
+        lines_found: ResultSet = self.soup.soup.select(
+            'body > div.contents > div.textblock > p')
+        p_obj = TagsStrObj(tags=lines_found)
+        self._data = p_obj.get_lines()
+        since_obj = ApiDescSince(self.soup)
+        since = since_obj.get_obj()
+        if since:
+            self._data.append('')
+            self._data.append('**since**')
+            self._data.append('')
+            self._data.append(f"    {since}")
+        #.. deprecated::
+        dep_obj = ApiDepreciated(self.soup)
+        dep = dep_obj.get_obj()
+        if dep:
+            self._data.append('')
+            self._data.append('.. deprecated::')
+            self._data.append('')
+            self._data.append('    Class is deprecated.')
+        return self._data
+
+
+class ApiDescSince(BlockObj):
+    """Gets the Since if it exist"""
+
+    def __init__(self, soup: SoupObj):
+        super().__init__(soup)
+        self._data = False
+
+    def get_obj(self) -> Union[str, None]:
+        """
+        Gets See alos of Interface
+
+        Returns:
+            str: See also. if it exist; Otherwise empty string.
+        """
+        if not self._data is False:
+            return self._data
+        self._data = None
+        dl_tag = self._soup.soup.select_one('dl.section.since')
+        if not dl_tag:
+            return self._data
+        dd_tag = dl_tag.find('dd')
+        if not dd_tag:
+            return self._data
+        self._data = dd_tag.text.strip()
+        return self._data
+
+
+class ApiDepreciated(BlockObj):
+    """Gets if block is deprecated"""
+    # eg: https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XVclContainerPeer.html
+
+    def __init__(self, soup: SoupObj):
+        super().__init__(soup)
+        self._data = None
+
+    def get_obj(self) -> bool:
+        """
+        Gets See alos of Interface
+
+        Returns:
+            str: See also. if it exist; Otherwise empty string.
+        """
+        if not self._data is None:
+            return self._data
+        soup = self.soup.soup
+        tag = soup.select_one('div.textblock > dl.deprecated')
+        if tag:
+            self._data = True
+        else:
+            self._data = False
+        return self._data
+
+
+class ApiDetailBlock(BlockObj):
+    """Get Details block from block id"""
+
+    def __init__(self, soup: SoupObj, a_id: str) -> None:
+        """
+        ApiDetailBlock Constructor
+
+        Args:
+            soup (base.SoupObj): Soup Obj
+            a_id (str): id of block such as ``aa1d747451151fbd244196e6305348dbc``
+        """
+        super().__init__(soup)
+        self._a_d = a_id
+        self._data = False
+
+    def get_obj(self) -> Union[Tag, None]:
+        if not self._data is False:
+            return self._data
+        self._data = None
+        soup = self.soup.soup
+        a_tag: Tag = soup.find('a', id=self._a_d)
+        if not a_tag:
+            return self._data
+        self._data = a_tag.find_next('div', class_='memitem')
+        return self._data
+
+
+class ApiProtoBlock(BlockObj):
+    """Gets Detailed data block"""
+
+    def __init__(self, block: ApiDetailBlock) -> None:
+        self._block: ApiDetailBlock = block
+        super().__init__(self._block.soup)
+        self._data = False
+
+    def get_obj(self) -> Union[Tag, None]:
+        if not self._data is False:
+            return self._data
+        self._data = None
+        tag = self._block.get_obj()
+        if not tag:
+            return self._data
+        proto = tag.findChild('div', class_='memproto')
+        self._data = proto
+        self._data
+
+
+class ApiDescBlock(BlockObj):
+    """Gets Detailed description block of method or component"""
+
+    def __init__(self, block: ApiDetailBlock) -> None:
+        self._block: ApiDetailBlock = block
+        super().__init__(self._block.soup)
+        self._data = False
+
+    def get_obj(self) -> Union[Tag, None]:
+        if not self._data is False:
+            return self._data
+        self._data = None
+        tag = self._block.get_obj()
+        if not tag:
+            return self._data
+        desc = tag.findChild('div', class_='memdoc')
+        self._data = desc
+        return self._data
+
+
+class APIData:
+    def __init__(self, url_soup: Union[str, SoupObj], allow_cache: bool):
+        if isinstance(url_soup, str):
+            self._url = url_soup
+            self._soup_obj = SoupObj(
+                url=url_soup, allow_cache=allow_cache)
+        else:
+            self._url = url_soup.url
+            self._soup_obj = url_soup
+            self._soup_obj.allow_cache = allow_cache
+        self._api_data_public_members: ApiPublicMembers = None
+        self._api_data_name: ApiName = None
+        self._desc: ApiDesc = None
+    
+    # region Methods
+
+    @AcceptedTypes(str, ftype=DecFuncEnum.METHOD)
+    def get_detail_block(self, a_id: str) -> ApiDetailBlock:
+        """
+        Gets detail block of a function.
+        Gets the 
+
+        Args:
+            si (SummaryInfo): Function summary Info to get the details block for.
+
+        Returns:
+            ApiDetailBlock: object
+        """
+        return ApiDetailBlock(soup=self.soup_obj, a_id=a_id)
+
+    @AcceptedTypes(str, ftype=DecFuncEnum.METHOD)
+    def get_desc_detail(self, a_id: str) -> ApiDescDetail:
+        """Gets Description obj for method or property"""
+        block = self.get_desc_block(a_id=a_id)
+        return ApiDescDetail(block=block)
+
+    @AcceptedTypes(str, ftype=DecFuncEnum.METHOD)
+    def get_proto_block(self, a_id: str) -> ApiProtoBlock:
+        """Gets the block for a method information"""
+
+        detail_block = self.get_detail_block(a_id=a_id)
+        return ApiProtoBlock(block=detail_block)
+
+    @AcceptedTypes(str, ftype=DecFuncEnum.METHOD)
+    def get_desc_block(self, a_id: str) -> ApiDescBlock:
+        """Gets the block for a method description"""
+        detail_block = self.get_detail_block(a_id=a_id)
+        return ApiDescBlock(block=detail_block)
+
+    @AcceptedTypes(str, ftype=DecFuncEnum.METHOD)
+    def get_desc_detail(self, a_id: str) -> ApiDescDetail:
+        """Gets Description obj for method or property"""
+        block = self.get_desc_block(a_id=a_id)
+        return ApiDescDetail(block=block)
+    # endregion Methods
+
+    # region Properties
+    @property
+    def name(self) -> ApiName:
+        if self._api_data_name is None:
+            self._api_data_name = ApiName(
+                self._soup_obj)
+        return self._api_data_name
+
+    @property
+    def public_members(self) -> ApiPublicMembers:
+        if self._api_data_public_members is None:
+            self._api_data_public_members = ApiPublicMembers(self._soup_obj)
+        return self._api_data_public_members
+
+    @property
+    def desc(self) -> ApiDesc:
+        """Gets the interface Description object"""
+        if self._desc is None:
+            self._desc = ApiDesc(self.soup_obj)
+        return self._desc
+
+    @property
+    def soup_obj(self) -> SoupObj:
+        """Gets soup_obj value"""
+        return self._soup_obj
+
+    @property
+    def url_obj(self) -> UrlObj:
+        return self._soup_obj.url_obj
+    # endregion Properties
+
+# endregion block and api classes
+
+# region util
+
+
+def str_clean(input: str, **kwargs) -> str:
+    """
+    Cleans and encodes string for template replacemnt
+
+    Keyword Arguments:
+        replace_dual (bool, optional): Replace ``::`` with ``.`` Default ``True``
+    """
+    _replace_dual = bool(kwargs.get('replace_dual', True))
+    result = input
+    if _replace_dual:
+        result = result.replace("::", ".")
+    result = result.replace('\\n', '\\\\\\\\n').replace('\\r', '\\\\\\\\r')
+    result = result.replace('"', '\\"')
+    return result.strip()
 class Util:
     """Utility class of static methods for operations"""
+    
+    TYPE_RULES: TypeRules = None
     @dataclass
     class RealitiveInfo:
         """
@@ -316,6 +1291,90 @@ class Util:
         """Distance between branches"""
         common_parts: List[str]
         """part that in_branch and comp_branch have in common"""
+
+    @staticmethod
+    def is_fragment_url(in_str: str) -> bool:
+        """
+        Gets if an input string contains ``#`` character
+
+        Args:
+            in_str (str): input to test
+
+        Returns:
+            bool: ``True`` if ``#`` is found; Otherwise, ``False``
+        """
+        if not in_str:
+            return False
+        i = in_str.find('#')
+        return i >= 0
+
+    @staticmethod
+    def get_ns_from_url(url: str, name: Optional[str] = None) -> str:
+        """
+        Gets full name form a realitive for full url string.
+
+        ``com.sun.star.awt`` from ``namespacecom_1_1sun_1_1star_1_1awt.html#ad249d76933bdf54c35f4eaf51a5b7965``.
+
+        ``com.sun.star.awt.XMessageBoxFactory`` from ``com_1_1sun_1_1star_1_1awt_1_1XMessageBoxFactory``.
+
+        Args:
+            url (str): full or realitve Url string
+            name (str, optional): Optional name that is use to replace or appnd to namespace return.
+                Some urls may have a unexpected ending such as ``structcom_1_1sun_1_1star_1_1beans_1_1Pair_3_01T_00_01U_01_4.html``.
+                Defaults to ``None``.
+
+        Returns:
+            str: namespace format sucha as ``com.sun.star.awt`` or ``com.sun.star.awt.XMessageBoxFactory``
+
+        Note:
+            ``name`` param is appended with urls that contain a fragment ( # ).
+            ``name`` param replaces name part of urls that do not have a fragment.
+        """
+        parts = url.split(URL_SPLIT)
+        parts[0] = 'com'
+        if Util.is_fragment_url(url):
+            # fragment such as: namespacecom_1_1sun_1_1star_1_1awt.html#ad249d76933bdf54c35f4eaf51a5b7965
+            last = parts.pop() # awt.html#ad249d76933bdf54c35f4eaf51a5b7965
+            parts.append(last.split(sep='.', maxsplit=1)[0])
+            if name:
+                parts.append(name)
+        else:
+            # No fragment sucha as: interfacecom_1_1sun_1_1star_1_1awt_1_1XMessageBoxFactory.html
+            last = parts.pop() # XMessageBoxFactory.html
+            if name:
+                parts.append(name)
+            else:
+                # caution to be used with not providing a name.
+                # some url are not ending in a clean name such as
+                # urls for generic types Pair < U, T > ect...
+                parts.append(last.split(sep='.', maxsplit=1)[0])
+        return ".".join(parts)
+
+    @staticmethod
+    def get_ns_from_a_tag(a_tag: Tag) -> Union[str, None]:
+        """
+        Gets a namespace from an anchor tag
+
+        Args:
+            a_tag (Tag): Anchor Tag
+
+        Returns:
+            Union[str, None]: Namesapce if Valid anchor tag. Otherwise ``None``
+
+        See also:
+            ``Util.get_ns_from_url()``
+        """
+        if not a_tag:
+            return None
+        href: str = a_tag.get('href', None)
+        if not href:
+            return None
+        text = a_tag.text.strip().replace('::', '.').rstrip('.')
+        name = None
+        if text:
+            parts = text.rsplit(sep='.', maxsplit=1)
+            name = parts.pop()
+        return Util.get_ns_from_url(url=href, name=name)
 
     @staticmethod
     def get_rel_info(in_branch: str, comp_branch: str, sep: str = '.') -> RealitiveInfo:
@@ -411,18 +1470,48 @@ class Util:
         Returns:
             bool: ``True`` if can be combined as flags; Otherwise ``False``
         """
-        nums = [*args]
-        nums.sort()
-        n = 0
-        for num in nums:
-            if num < 0:
+        # get the biggest number and then find all its possible flags.
+        # if any smaller number is not a possible flag then return false
+        num_in = [*args]
+        num_len = len(num_in)
+        num_in.sort()
+        if num_len < 2:
+            return False
+        if num_len == 3:
+            tmp_lst = [0, 1, 2]
+            is_simple = True
+            for i, y in enumerate(tmp_lst):
+                is_simple = num_in[i] == y
+                if not is_simple:
+                    break
+            if is_simple:
                 return False
-            _n = n
-            _n = _n ^ num
-            if _n <= n:
+            tmp_lst = [1, 2, 3]
+            is_simple = True
+            for i, y in enumerate(tmp_lst):
+                is_simple = num_in[i] == y
+                if not is_simple:
+                    break
+            if is_simple:
                 return False
-            n = _n
-        return True
+        num = num_in.pop()
+        mod = num % 2
+        if mod != 0:
+            return False
+        nums = set()
+        shift_num = num
+        while shift_num > 0:
+            shift_num = shift_num >> 1
+            nums.add(shift_num)
+        is_flags = True
+        for i in num_in:
+            if i < 0:
+                is_flags = False
+                break
+            if not i in nums:
+                is_flags = False
+                break
+        return is_flags
 
     @AcceptedTypes(str, opt_all_args=True, ftype=DecFuncEnum.METHOD_STATIC)
     @staticmethod
@@ -442,15 +1531,28 @@ class Util:
         return py_name_pattern.sub(sub, input)
     
     @AcceptedTypes(str, ftype=DecFuncEnum.METHOD_STATIC)
-    def get_clean_classname(input: str) -> str:
+    def get_clean_method_name(input: str) -> str:
         """
-        Clean a file name and changes name suah as ``Pair< T, U >`` to ``Pair``
+        Clean a methpd/property name and changes name suah as ``Pair< T, U >`` to ``Pair``
 
         Args:
-            input (str): filename
+            input (str): name
 
         Returns:
-            str: cleaned file name
+            str: cleaned name
+        """
+        return Util.get_clean_classname(input=input)
+    
+    @AcceptedTypes(str, ftype=DecFuncEnum.METHOD_STATIC)
+    def get_clean_classname(input: str) -> str:
+        """
+        Clean a class name and changes name suah as ``Pair< T, U >`` to ``Pair``
+
+        Args:
+            input (str): name
+
+        Returns:
+            str: cleaned name
         """
         # convert 'Pair< T, U >' to 'Pair'
         s = pattern_generic_name.sub(r'\g<1>', input)
@@ -530,7 +1632,7 @@ class Util:
         Get a formated dictionary or list
 
         Args:
-            obj (Union[dict, list]): Dict or list to get formates string for.
+            obj (Union[dict, list]): Dict or list to get formats string for.
             indent (int, optional): The number of spaces to indent string.. Defaults to ``2``.
 
         Returns:
@@ -701,8 +1803,9 @@ class Util:
         """
         return input.replace(de, restore)
 
-    @TypeCheckKw(arg_info={"typings": 0, "quote": 0}, types=[bool], ftype=DecFuncEnum.METHOD_STATIC)
+    @deprecated(version='0.1.4', reason='Deprecated, use get_python_type() instead')
     @AcceptedTypes(str, opt_args_filter=DecArgEnum.NAMED_ARGS, ftype = DecFuncEnum.METHOD_STATIC)
+    @TypeCheckKw(arg_info={"typings": 0, "quote": 0}, types=[bool], ftype=DecFuncEnum.METHOD_STATIC)
     @staticmethod
     def get_py_type(uno_type: str, **kwargs) -> str:
         """
@@ -753,8 +1856,35 @@ class Util:
                             during callback then the value of returns will be returned from method.
             }
         """
+        logger.warning(
+            'Util.get_py_type is deprecated, use get_python_type() instead')
+
         if not uno_type:
             return ''
+        def ex_type(in_parts: List[str]) -> Union[dict, None]:
+            start = in_parts[0].rstrip()
+            if not start in TYPE_MAP_EX:
+                return None
+            params: dict = TYPE_MAP_EX[start]
+            _results = {
+                "is_typing": params.get("is_typing", False),
+                "is_py_type": params.get("is_py_type", True)
+            }
+            full = '<'.join(in_parts)
+            _regx = params.get('regex', None)
+            _replace: str = params['replace']
+            if _regx:
+                m = re.match(_regx, full)
+                if m:
+                    groups = m.groups()
+                    replacements = []
+                    for t in groups:
+                        replacements.append(TYPE_MAP.get(t, 'object'))
+                    _replace = _replace.format(*replacements)
+            _results['type'] = _replace
+            _results['long_type'] = params.get('long_type', _replace)
+            return _results
+
         def do_cb(_cb:callable, data):
             if not _cb:
                 return
@@ -769,12 +1899,28 @@ class Util:
             "is_wrapper": False,
             "is_typing": False,
             "returns": None,
-            "wdata": {}
+            "wdata": {
+                "is_wrapper": False,
+                "is_py_type": False,
+                "wdata": {
+                    "prefix": "",
+                    "wrapper": "",
+                    "py_type_inner": False
+                }
+            }
         }
-        _u_type = uno_type.strip().lstrip(':').lstrip().replace("::", ".")
+        _u_type = uno_type.strip().lstrip().replace("::", ".").lstrip('.')
         # check for # sequence< string >
         parts = _u_type.split(sep='<', maxsplit=1)
         if len(parts) > 1:
+            ex_info = ex_type(parts)
+            if ex_info:
+                cb_data['is_wrapper'] = ex_info.get('is_wrapper', False)
+                cb_data['is_typing'] = ex_info.get('is_typing', False)
+                cb_data['long_type'] = ex_info['long_type']
+                cb_data['is_py_type'] = ex_info['is_py_type']
+                do_cb(cb, cb_data)
+                return ex_info['type']
             is_pytype = True
             cb_data['is_wrapper'] = True
             clean_wrapper = Util.get_last_part(Util.get_clean_name(parts[0]))
@@ -835,6 +1981,26 @@ class Util:
             return f"'{_u_type_clean}'"
         return _u_type_clean
 
+    @staticmethod
+    def get_python_type(in_type: str) -> PythonType:
+        """
+        Gets Python Type info including an required imports.
+        This method simplifies ``get_py_type`` when a callback is needed.
+
+        Args:
+            in_type (str): uno type
+
+        Returns:
+            PythonType: class that contains type, requires typing and imporst info.
+        """
+        if Util.TYPE_RULES is None:
+            Util.TYPE_RULES = TypeRules()
+        try:
+            return Util.TYPE_RULES.get_python_type(in_type)
+        except Exception as e:
+            logger.error(e, exc_info=True)
+            raise e
+
     @AcceptedTypes((str, Path), ftype=DecFuncEnum.METHOD_STATIC)
     @staticmethod
     def mkdirp(dest_dir: Union[str, Path]):
@@ -866,6 +2032,8 @@ class Util:
             s = Util.decode_char(el, ',')
             results.append(s)
         return results
+
+# endregion util
 
 # region Import check
 
@@ -996,248 +2164,7 @@ class ImportCheck:
 
 # endregion Import check
 
-class UrlObj:
-    """Properties of url"""
-    @RuleCheckAllKw(
-        arg_info={
-            "url": rules.RuleStrNotNullEmptyWs,
-            "has_name": rules.RuleBool
-        },
-        ftype=DecFuncEnum.METHOD
-    )
-    def __init__(self, url: str, **kwargs):
-        """
-        Constructor
-
-        Args:
-            url (str): Url
-
-        Keyword Arguments:
-            has_name (bool, optional): If ``True`` name is extracted from
-                url and namespace excludes name. Default ``True``
-        """
-        self._url = url
-        self._has_name = kwargs.get('has_name', True)
-        u_parts = self._url.rsplit('/', 1)
-        # similar to: namespacecom_1_1sun_1_1star_1_1style.html#a3ae28cb49c180ec160a0984600b2b925
-        self._page_link = u_parts[1]
-        self._url_base = u_parts[0]
-        f_parts = self._url.split(sep='#', maxsplit=1)
-        if len(f_parts) > 1:
-            self._url_only = f_parts[0]
-            self._fragment = f_parts[1]
-            self._is_frag = True
-        else:
-            self._url_only = self._url
-            self._fragment = ''
-            self._is_frag = False
-        self._name = None if self._has_name else ''
-        
-        self._ns = None
-        self._ns_str = None
-        
-
-    def get_split_ns(self) -> List[str]:
-        result = []
-        try:
-            ns_part = self._page_link.split('.')[0]
-            s = ns_part.replace('_1_1', '.').lstrip('.')
-            
-            # in some cases such as generics the name can have _3_01 and or _01_4 in the last part of the name
-            # best guess _3 is < and _4 is > and _01 is space.
-            # just split _3 dropping the end
-            s = s.rsplit(sep='_3', maxsplit=1)[0]
-            
-            # https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1beans_1_1Pair_3_01T_00_01U_01_4.html
-            # the frist part on the str usually is prefixed with namespace, interface or whatever.
-            # namespace always start with com so just drop the first part to clean it up.
-            s = 'com.' + s.split('.', maxsplit=1)[1]
-            result = s.split('.')
-        except Exception as e:
-            logger.error(e)
-            logger.info('UrlObj._get_ns() returning empty list.')
-        return result
-    
-    def _get_ns(self) -> List[str]:
-        try:
-            result = self.get_split_ns()
-        
-            # get that last item
-            self._name = result[-1:][0]
-            # Drop the component from the result
-            if self._has_name:
-                self._ns = result[:-1]
-            else:
-                self._ns = result
-        except Exception as e:
-            logger.error(e)
-            logger.info('UrlObj._get_ns() returning empty list.')
-        return result
-
-
-
-    @property
-    def page_link(self) -> str:
-        """
-        Gets page link similar to ``namespacecom_1_1sun_1_1star_1_1style.html#a3ae28cb49c180ec160a0984600b2b925``
-        """
-        return self._page_link
-
-    @property
-    def fragment(self) -> str:
-        """
-        Gets fragment simalar to a3ae28cb49c180ec160a0984600b2b925
-        """
-        return self._fragment
-
-    @property
-    def name(self) -> str:
-        """
-        Get name portion of html link such as SpinningProgressControlModel
-        """
-        if self._name is None:
-            self._get_ns()
-        return self._name
-
-    @property
-    def is_fragment(self) -> bool:
-        """
-        Gets if there is a fragment
-        """
-        return self._is_frag
-
-    @property
-    def namespace(self) -> List[str]:
-        """
-        Gets Namespace in format of ['com', 'sun', 'star', 'style']
-        """
-        if self._ns is None:
-            self._get_ns()
-        return self._ns
-
-    @property
-    def namespace_str(self) -> str:
-        """
-        Gets namespace in format of 'com.sun.star.style'
-        """
-        if not self._ns_str:
-            self._ns_str = '.'.join(self.namespace)
-        return self._ns_str
-
-    @property
-    def url(self) -> str:
-        """Gets url value"""
-        return self._url
-
-    @property
-    def url_base(self) -> str:
-        """
-        Gets url base value such as:
-        ``https://api.libreoffice.org/docs/idl/ref``
-        """
-        return self._url_base
-    
-    @property
-    def url_only(self) -> str:
-        """
-        Gets full url without fragment
-        """
-        return self._url_only
-
-class BlockObj(ABC):
-    """
-    Abstract Class.
-
-    Represents a Html Block.
-    """
-
-    def __init__(self, soup: SoupObj):
-        """
-        Constructor
-
-        Args:
-            soup (SoupObj): soup for this instance
-        """
-        self._soup = soup
-        self._url = soup.url
-        self._urlobj = self._get_url_obj()
-
-    def _get_url_obj(self):
-        return UrlObj(self._url)
-
-    @abstractmethod
-    def get_obj(self) -> Tag:
-        """Get object"""
-
-    @property
-    def url(self) -> str:
-        """Gets Url"""
-        return self._url
-
-    @property
-    def soup(self) -> SoupObj:
-        """Gets SoupObj instance for this instance"""
-        return self._soup
-
-    @property
-    def url_obj(self) -> UrlObj:
-        """Gets UrlObj instance for this instance"""
-        return self._urlobj
-
-
-class TagsStrObj:
-    """Class that converts list of tags to string"""
-
-    def __init__(self, tags: Iterable[Tag], **kwargs):
-        """
-        Constructor
-
-        Args:
-            tags (Iterable[Tag]): List of tags
-
-        Keyword Arguments:
-            clean (bool, optional): If ``True`` then data will be cleaned
-                using ``str_clean`` method. Default ``True``
-            empty (bool, optional): If ``True`` empty lines will be added
-                between other lines. Default ``True``
-            indent (int, optional): The number of spaces to indent for 
-                methods that return a string. Default ``0``
-        """
-        self._tags = tags
-        self._clean = bool(kwargs.get('clean', True))
-        self._empty_lines = bool(kwargs.get('empty', True))
-        self._indent_amt = int(kwargs.get('indent', 0))
-
-    def get_lines(self) -> List[str]:
-        """Gets lines for this instance"""
-        lines = []
-        i = 0
-        for ln in self._tags:
-            s = ln.text.strip().replace("::", '.')
-            if not s:
-                continue
-            if self._clean:
-                s = str_clean(input=s)
-            if i > 0 and self._empty_lines:
-                lines.append("")
-            lines.append(s)
-            i += 1
-        return lines
-
-    def get_data(self) -> List[str]:
-        """Gets Lines as string for this instance"""
-        return self.get_lines()
-
-    def get_string_list(self) -> str:
-        # lines = self._encode_list(self.get_lines())
-        # c_lines = self._decode_list(str(lines).split(','))
-        # s = ',\n'.join(c_lines)
-        s = Util.get_string_list(self.get_lines())
-        if self._indent_amt > 0:
-            s = Util.indent(text=s, indent_amt=self._indent_amt)
-        return s
-
-
+# region Writer/parser base
 class WriteBase(object):
     def __init__(self, **kwargs):
         pass
@@ -1444,3 +2371,505 @@ class ParserBase(object):
     def allow_cache(self, value: bool):
         self._allow_cache = value 
     # endregion Properties
+
+# endregion Writer/parser base
+
+# region Image Process
+
+# region Cache
+
+
+class ImageCache(CacheBase):
+    """
+    Caches files and retreives cached files.
+    Cached file are in a subfolder of system tmp dir.
+    """
+
+    def fetch_from_cache(self, filename: Union[str, Path]) -> Union[Image.Image, None]:
+        """
+        Fetches file contents from cache if it exist and is not expired
+
+        Args:
+            filename (Union[str, Path]): File to retrieve
+
+        Returns:
+            Union[str, None]: File contents if retrieved; Otherwise, ``None``
+        """
+        f = Path(self.path, filename)
+        if not f.exists():
+            return None
+
+        if self.seconds > 0:
+            f_stat = f.stat()
+            if f_stat.st_size == 0:
+                # shoud not be zero byte file.
+                try:
+                    self.del_from_cache(f)
+                except Exception as e:
+                    logger.warning(
+                        'Not able to delete 0 byte file: %s, error: %s', filename, str(e))
+                return None
+            ti_m = f_stat.st_mtime
+            age = time.time() - ti_m
+            if age >= self.seconds:
+                return None
+        try:
+            # Check if we have this file locally
+            with Image.open(f) as img:
+                img.load()
+                return img
+        except IOError:
+            return None
+
+    def save_in_cache(self, filename: Union[str, Path], content: Any):
+        """
+        Saves file contents into cache
+
+        Args:
+            filename (Union[str, Path]): filename to write.
+            content (str): Contents to write into file.
+        """
+        f = Path(self.path, filename)
+        # print('Saving a copy of {} in the cache'.format(filename))
+        with open(f, 'wb') as file:
+            shutil.copyfileobj(content, file)
+
+# endregion Cache
+
+# region Response
+
+
+class ResponseImg(ResponseBase):
+    """Gets response data for an image"""
+
+    def __init__(self, url: str, cache_seconds: Optional[float] = None, **kwargs):
+        """
+        Constructor
+
+        Args:
+            url (str): Url to retrieve html
+            allow_cache (bool, optional): Determins if caching is used.
+                If ``True`` html will be written to cache. Defaults to True.
+            cache_seconds (float, optional): The number of seconds that html
+                contents will be cached for. Default is ``604800.0`` ( one week )
+
+        Keyword Arguments:
+            has_name (bool, optional): If ``True`` name is extracted from
+                url and namespace excludes name. Default ``True``.
+                This applies to ``url_obj`` property
+            file_ext (str, optional): Extension if file. Default ext of url.
+                Format must prepend ``.`` such as ``.png``
+        """
+        if cache_seconds is None:
+            cache_seconds = APP_CONFIG.cache_duration
+        super().__init__(url=url, cache_seconds=cache_seconds, **kwargs)
+        self._img: Image.Image = None
+
+    # cache for one week - 604800.0 seconds
+    def _get_request_data(self) -> Image.Image:
+        global IMG_CACHE
+        allow_cache = self.cache_seconds > 0
+        filename = self._url_hash + self._file_ext
+        if not IMG_CACHE:
+            IMG_CACHE = ImageCache(
+                tmp_dir=APP_CONFIG.cache_dir, lifetime=self.cache_seconds)
+        if allow_cache:
+            img = IMG_CACHE.fetch_from_cache(filename=filename)
+            if img:
+                logger.debug(
+                    "ResponseImg._get_request_data() retreived data from Cache")
+                return img
+        response = requests.get(url=self.url, stream=True)
+        if response.status_code != 200:
+            raise Exception('bad response code:' + str(response.status_code))
+        response.raw.decode_content = True
+        IMG_CACHE.save_in_cache(
+            filename=filename, content=response.raw)
+        img = IMG_CACHE.fetch_from_cache(filename=filename)
+        if allow_cache:
+            logger.debug(
+                "ResponseImg._get_request_data() Saving to cache as: %s", Path(IMG_CACHE.path, filename))
+        else:
+            IMG_CACHE.del_from_cache(filename=filename)
+        return img
+
+    @property
+    def img(self) -> Image.Image:
+        """
+        Gets image
+        """
+        if self._img is None:
+            try:
+                self._img = self._get_request_data()
+            except Exception as e:
+                logger.error(e)
+                raise e
+        return self._img
+# endregion Response
+
+class ImageInfo:
+    """Gets various image data like is inherited and pixel data"""
+    @staticmethod
+    def get_image_pixels_by_mode(image: Image.Image, dtype='int8'):
+        """Get a numpy array of an image so that one can access values[x][y]."""
+        # https://stackoverflow.com/questions/138250/how-to-read-the-rgb-value-of-a-given-pixel-in-python
+        width, height = image.size
+        if image.mode == "RGB":
+            channels = 3
+        elif image.mode == "L":
+            channels = 1
+        elif image.mode == "P":
+            channels = 1
+        else:
+            print("Unknown mode: %s" % image.mode)
+            return None
+        pixel_values = np.array(image.getdata(), dtype=dtype).reshape(
+            (height, width, channels))
+        # pixel_values = numpy.array(pixel_values).reshape((width, height))
+        return pixel_values
+
+    @staticmethod
+    def get_image_pixels(image: Image.Image, dtype='int8'):
+        """Get a numpy array of an image so that one can access values[x][y]."""
+        width, height = image.size
+        # lst = list(image.getdata())
+        # pixel_values = numpy.array(lst, dtype=dtype).reshape((height, width))
+        pixel_values = np.array(
+            image.getdata(), dtype=dtype).reshape((height, width))
+        return pixel_values
+
+    @staticmethod
+    def is_inherit_img(url: str) -> bool:
+        global RESPONSE_IMG, TEXT_CACHE
+        if RESPONSE_IMG is None:
+            # no reason to cache image. caching result instead
+            RESPONSE_IMG = ResponseImg(url=url, cache_seconds=0)
+        if TEXT_CACHE is None:
+            TEXT_CACHE = TextCache(tmp_dir=APP_CONFIG.cache_dir)
+        try:
+            filename = RESPONSE_IMG.url_hash + '.txt'
+            result = -1
+            txt = TEXT_CACHE.fetch_from_cache(filename=filename)
+            if txt:
+                result = int(txt)
+                return result == APP_CONFIG.pixel_inherit
+            im = RESPONSE_IMG.img
+            pix = ImageInfo.get_image_pixels(im)
+            row = pix[0, :]  # row 0
+            # images are expected to be indexed png files
+            # find the first pixel that does not have index of 0
+            # if first pixes is 1 then not inherited, if 3 inherited
+            for px in row:
+                if px != 0:
+                    result = px
+                    break
+            if result == -1:
+                msg = f"Failed to find colored pixel in first row of image pixels. Url: {url}"
+                raise Exception(msg)
+            content = str(result)
+            TEXT_CACHE.save_in_cache(filename=filename, content=content)
+            return result == APP_CONFIG.pixel_inherit
+        except Exception as e:
+            logger.error(e)
+            raise e
+
+# endregion Image Process
+
+# region Area Process
+
+
+class ApiDyContent(BlockObj):
+    """Gets dyncontent block that contains area data and image data"""
+
+    def __init__(self, soup: SoupObj):
+        """
+        Constructor
+
+        Args:
+            block (BlockObj): Block obj containing full page html
+        """
+        super().__init__(soup)
+        self._data = False
+
+    def _log_missing(self):
+        logger.warning(
+            "ApiDyContent.get_obj() Failed to get find data. Url: %s", self.url_obj.url)
+
+    def get_obj(self) -> Union[Tag, None]:
+        """Gets dyncontent block that contains area data and image data"""
+        if not self._data is False:
+            return self._data
+        soup = self.soup.soup
+        tag_dyn = soup.find('div', class_='dyncontent')
+        if not tag_dyn:
+            self._log_missing()
+            return self._data
+        self._data = tag_dyn
+        return self._data
+
+
+class ApiAreaBlock(BlockObj):
+    def __init__(self, block: ApiDyContent):
+        self._block: ApiDyContent = block
+        super().__init__(self._block.soup)
+        self._data = False
+
+    def _log_missing(self):
+        logger.warning(
+            "ApiAreaBlock.get_obj() Failed to get find data. Url: %s", self.url_obj.url)
+
+    def get_obj(self) -> Union[Tag, None]:
+        if not self._data is False:
+            return self._data
+        self._data = None
+        tag: Tag = self._block.get_obj()
+        if not tag:
+            self._log_missing()
+            return self._data
+        tag_map = tag.find('map')
+        if not tag_map:
+            self._log_missing()
+            return self._data
+        self._data = tag_map
+        return self._data
+
+
+class ApiImage(BlockObj):
+    """Gets url of image that represents map"""
+
+    def __init__(self, block: ApiDyContent):
+        self._block: ApiDyContent = block
+        super().__init__(self._block.soup)
+        self._data = False
+
+    def _log_missing(self, for_str: Optional[str] = None):
+        if for_str:
+            f_str = f" for {for_str}"
+        else:
+            f_str = ''
+        logger.warning(
+            "ApiImage.get_obj() Failed to get find data%s. Url: %s", f_str, self.url_obj.url)
+
+    def get_obj(self) -> Union[str, None]:
+        """Gets url of image that represents map"""
+        if not self._data is False:
+            return self._data
+        self._data = None
+        tag: Tag = self._block.get_obj()
+        if not tag:
+            self._log_missing()
+            return self._data
+        tag_img = tag.find('img')
+        if not tag_img:
+            self._log_missing()
+            return self._data
+        src = tag.img.get('src', None)
+        if src is None:
+            self._log_missing('image src')
+            return self._data
+        m = pattern_http.match(src)
+        if m:
+            self._data = src
+        else:
+            self._data = self.url_obj.url_base + '/' + src
+        return self._data
+
+
+class ApiArea(BlockObj):
+    """List of area items"""
+
+    def __init__(self, block: ApiAreaBlock):
+        self._block: ApiAreaBlock = block
+        super().__init__(self._block.soup)
+        self._data = None
+
+    def _log_missing(self, for_str: Optional[str] = None):
+        if for_str:
+            f_str = f" for {for_str}"
+        else:
+            f_str = ''
+        logger.warning(
+            "ApiArea.get_obj() Failed to get find data%s. Url: %s", f_str, self.url_obj.url)
+
+    def get_obj(self) -> List[Area]:
+        """List of area items"""
+        if not self._data is None:
+            return self._data
+        self._data = []
+        tag = self._block.get_obj()
+        if not tag:
+            self._log_missing('ApiAreaBlock instance')
+            return self._data
+        rs = tag.select('area')
+        if not rs:
+            self._log_missing('area tags')
+            return self._data
+        for el in rs:
+            href = el.get('href', None)
+            if not href:
+                self._log_missing('area href')
+                continue
+            name = el.get('alt', None)
+            if not name:
+                self._log_missing('area alt')
+                continue
+            coords = el.get('coords', None)
+            if not coords:
+                self._log_missing('area cords')
+                continue
+            title = el.get('title', '')
+            a_coords = coords.split(',')
+            if len(a_coords) != 4:
+                logger.warning(
+                    "ApiArea.get_obj() Bad Coords for %s. Url: %s", name, self.url_obj.url)
+                continue
+            x1 = int(a_coords[0].strip())
+            y1 = int(a_coords[1].strip())
+            x2 = int(a_coords[2].strip())
+            y2 = int(a_coords[3].strip())
+            m = pattern_http.match(href)
+            if not m:
+                href = self.url_obj.url_base + '/' + href
+            area = Area(name=name, href=href, x1=x1,
+                        y1=y1, x2=x2, y2=y2, title=title)
+            self._data.append(area)
+        return self._data
+
+class AreaFilter:
+    def __init__(self, alst: List[Area], is_inherited: bool) -> None:
+        self._lst = alst
+        self._is_inherited = is_inherited
+        self._first: Area = None if len(self._lst) == 0 else self._lst[0]
+        self._inherited = self._get_inherited()
+
+    def _get_inherited(self) -> List[Area]:
+        if self._is_inherited is False:
+            return []
+        if self._first is None:
+            return []
+        d_lst = self._list_dict(lst=self._lst)
+        match_lst = d_lst[self._first.y1]
+        in_lst = [area for area in match_lst]  # make a copy
+        # remove first first group
+        # del d_lst[self._first.y1]
+
+        # get a list of all other upper area items.
+        upper: List[Area] = []
+        keys = list(d_lst.keys())  # list of y1
+        for k in keys:
+            if k < self._first.y1:
+                upper.extend(d_lst[k])
+        if len(upper) == 0:
+            return match_lst
+        # search for name in upper that are in inherited.
+        # if found then remove from inherited.
+        unique_names: Set[str] = set()
+        for area in upper:
+            unique_names.add(area.name)
+        remove_indexes: List[int] = []
+        for i, area in enumerate(match_lst):
+            if area.name in unique_names:
+                remove_indexes.append(i)
+        if len(remove_indexes) == 0:
+            return match_lst
+        remove_indexes.sort(reverse=True)
+        for i in remove_indexes:
+            match_lst.pop(i)
+        return match_lst
+
+    def _list_dict(self, lst: List[Area]) -> Dict[int, List[Area]]:
+        d = {}
+        for area in lst:
+            if not area.y1 in d:
+                d[area.y1] = []
+            d[area.y1].append(area)
+        return d
+
+    def _get_group_by(self, lst: List[Area]) -> List[List[Area]]:
+        # use y1 as key to get all items that are on same row level
+        d = self._list_dict(lst)
+        result: List[List[Area]] = []
+        for _, v in d.items():
+            result.append(v)
+        return result
+
+    def get_as_ns(self) -> List[Ns]:
+        """
+        Gets the current inherited list of Area as a list of ``Ns``
+
+        Returns:
+            List[Ns]: List if inherited Namespaces
+        """
+        def get_ns(area: Area) -> Ns:
+            href_parts = area.href.rsplit(sep='/', maxsplit=1)
+            if len(href_parts) == 1:
+                href = href_parts[0]
+            else:
+                href = href_parts[1]
+            # interfacecom_1_1sun_1_1star_1_1accessibility_1_1XAccessibleContext.html
+            parts = href.split(URL_SPLIT)
+            parts[0] = 'com'
+            parts.pop()
+            # parts.append(area.name)
+            _ns = '.'.join(parts)
+            ns = Ns(area.name, namespace=_ns)
+            return ns
+        results = []
+        for el in self.inherited:
+            results.append(get_ns(area=el))
+        return results
+
+    @property
+    def inherited(self) -> List[Area]:
+        """Gets inherited value"""
+        return self._inherited
+
+class ApiInherited(BlockObj):
+
+    def __init__(self, soup: SoupObj,**kwargs) -> None:
+        """
+        Constructor
+
+        Args:
+            soup (SoupObj): Soup object
+
+        Keyword Arguments:
+            raise_error (bool, optional): Determines if errors will be raised when they occur: Default ``False``
+        """
+        super().__init__(soup)
+        self._api_dy_content: ApiDyContent = ApiDyContent(self.soup)
+        self._data = None
+        self._raise_errors = bool(kwargs.get('raise_error', False))
+
+    def _log_missing(self, for_str: Optional[str] = None, raise_error: bool = False):
+        if for_str:
+            f_str = f" for {for_str}"
+        else:
+            f_str = ''
+        msg = f"ApiInherited.get_obj() Failed to get find data{f_str}. Url: {self.url_obj.url}"
+        if raise_error:
+            logger.error(msg)
+            raise Exception(msg)
+        logger.warning(msg)
+
+    def get_obj(self) -> List[Ns]:
+        if not self._data is None:
+            return self._data
+        self._data = []
+        ai = ApiImage(self._api_dy_content)
+        image_url = ai.get_obj()
+        if not image_url:
+            self._log_missing(for_str='image url',
+                              raise_error=self._raise_errors)
+            return self._data
+        is_inherited = ImageInfo.is_inherit_img(url=image_url)
+        ab: ApiAreaBlock = ApiAreaBlock(self._api_dy_content)
+        api_area: ApiArea = ApiArea(ab)
+        lst = api_area.get_obj()
+        filter = AreaFilter(lst, is_inherited=is_inherited)
+        extends = filter.get_as_ns()
+        if not extends:
+            return self._data
+        self._data = extends
+        return self._data
+# endregion Area Process

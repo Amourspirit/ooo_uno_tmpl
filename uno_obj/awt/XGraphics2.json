@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:17:49+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:02+00:00",
   "name": "XGraphics2",
   "type": "interface",
   "namespace": "com.sun.star.awt",
@@ -16,7 +16,22 @@
         "XGraphics"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".rectangle",
+        "Rectangle"
+      ],
+      [
+        "..graphic.x_graphic",
+        "XGraphic"
+      ]
+    ],
+    "quote": [
+      "XGraphic",
+      "Rectangle"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XGraphics2",
     "imports": [],
     "namespace": "com.sun.star.awt",
@@ -24,9 +39,81 @@
       "com.sun.star.awt.XGraphics"
     ],
     "desc": [
-      "provides the basic output operation of a device."
+      "provides the basic output operation of a device.",
+      "",
+      "**since**",
+      "",
+      "    LibreOffice 4.1"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XGraphics2.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "clear",
+          "returns": "None",
+          "desc": [
+            "clears the given rectangle on the device",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 4.1"
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aRect",
+              "Rectangle",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "drawImage",
+          "returns": "None",
+          "desc": [
+            "draws a com.sun.star.graphic.XGraphic in the output device.",
+            "",
+            "Note that some devices may not support this operation.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 4.1"
+          ],
+          "raises": [],
+          "args": [
+            [
+              "nX",
+              "int",
+              "in"
+            ],
+            [
+              "nY",
+              "int",
+              "in"
+            ],
+            [
+              "nWidth",
+              "int",
+              "in"
+            ],
+            [
+              "nHeight",
+              "int",
+              "in"
+            ],
+            [
+              "nStyle",
+              "int",
+              "in"
+            ],
+            [
+              "aGraphic",
+              "XGraphic",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:21:25+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:07+00:00",
   "name": "XPrintJobListener",
   "type": "interface",
   "namespace": "com.sun.star.view",
@@ -16,7 +16,17 @@
         "XEventListener"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".print_job_event",
+        "PrintJobEvent"
+      ]
+    ],
+    "quote": [
+      "PrintJobEvent"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XPrintJobListener",
     "imports": [],
     "namespace": "com.sun.star.view",
@@ -28,11 +38,29 @@
       "",
       "XPrintJobListener can be registered to XPrintJobBroadcaster. Then, the client object will be notified when a new print job starts or its state changes.",
       "",
-      "**See Also**",
+      "**since**",
       "",
-      "    XPrintJobBroadcaster"
+      "    OOo 1.1.2"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1view_1_1XPrintJobListener.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "printJobEvent",
+          "returns": "None",
+          "desc": [
+            "informs the user about the creation or the progress of a PrintJob"
+          ],
+          "raises": [],
+          "args": [
+            [
+              "Event",
+              "PrintJobEvent",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

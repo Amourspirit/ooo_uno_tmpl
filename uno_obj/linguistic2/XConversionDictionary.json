@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:16:51+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:07+00:00",
   "name": "XConversionDictionary",
   "type": "interface",
   "namespace": "com.sun.star.linguistic2",
@@ -16,7 +16,25 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".conversion_direction",
+        "ConversionDirection"
+      ],
+      [
+        "..lang.locale",
+        "Locale"
+      ]
+    ],
+    "quote": [
+      "typing.List[str]",
+      "Locale",
+      "ConversionDirection"
+    ],
+    "typings": [
+      "typing.List[str]"
+    ],
+    "requires_typing": true,
     "name": "XConversionDictionary",
     "imports": [],
     "namespace": "com.sun.star.linguistic2",
@@ -30,11 +48,178 @@
       "",
       "Restrictions to what has to be the left and right text are usually given by specific services implementing this interface.",
       "",
-      "**See Also**",
+      "**since**",
       "",
-      "    com.sun.star.linguistic2.ConversionDictionary"
+      "    OOo 1.1.2"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1linguistic2_1_1XConversionDictionary.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "addEntry",
+          "returns": "None",
+          "desc": [
+            "is used to add a conversion pair to the dictionary."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.container.ElementExistException"
+          ],
+          "args": [
+            [
+              "aLeftText",
+              "str",
+              "in"
+            ],
+            [
+              "aRightText",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "clear",
+          "returns": "None",
+          "desc": [
+            "removes all entries from the dictionary."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getConversionEntries",
+          "returns": "typing.List[str]",
+          "desc": [],
+          "raises": [],
+          "args": [
+            [
+              "eDirection",
+              "ConversionDirection",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getConversionType",
+          "returns": "int",
+          "desc": [],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getConversions",
+          "returns": "typing.List[str]",
+          "desc": [
+            "searches for entries or conversions that match the given text.",
+            "",
+            "The exact string to be looked for is the substring from the aText parameter that starts at position nStartPos and has the length nLength."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "aText",
+              "str",
+              "in"
+            ],
+            [
+              "nStartPos",
+              "int",
+              "in"
+            ],
+            [
+              "nLength",
+              "int",
+              "in"
+            ],
+            [
+              "eDirection",
+              "ConversionDirection",
+              "in"
+            ],
+            [
+              "nTextConversionOptions",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getLocale",
+          "returns": "Locale",
+          "desc": [],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getMaxCharCount",
+          "returns": "int",
+          "desc": [
+            "returns the maximum number of characters used as left or right text in entries."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "eDirection",
+              "ConversionDirection",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getName",
+          "returns": "str",
+          "desc": [],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "isActive",
+          "returns": "bool",
+          "desc": [],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "removeEntry",
+          "returns": "None",
+          "desc": [
+            "removes a conversion pair from the dictionary."
+          ],
+          "raises": [
+            "com.sun.star.container.NoSuchElementException"
+          ],
+          "args": [
+            [
+              "aLeftText",
+              "str",
+              "in"
+            ],
+            [
+              "aRightText",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setActive",
+          "returns": "None",
+          "desc": [
+            "specifies whether the dictionary should be used or not ."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "bActivate",
+              "bool",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

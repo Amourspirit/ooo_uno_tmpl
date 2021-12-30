@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:18:31+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:21+00:00",
   "name": "XDigestContext",
   "type": "interface",
   "namespace": "com.sun.star.xml.crypto",
@@ -17,6 +17,13 @@
       ]
     ],
     "from_imports_typing": [],
+    "quote": [
+      "typing.List[int]"
+    ],
+    "typings": [
+      "typing.List[int]"
+    ],
+    "requires_typing": true,
     "name": "XDigestContext",
     "imports": [],
     "namespace": "com.sun.star.xml.crypto",
@@ -28,11 +35,42 @@
       "",
       "The algorithm to generate the digest is specified on object creation.",
       "",
-      "**See Also**",
+      "**since**",
       "",
-      "    XDigestContextSupplier"
+      "    OOo 3.4"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1xml_1_1crypto_1_1XDigestContext.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "finalizeDigestAndDispose",
+          "returns": "typing.List[int]",
+          "desc": [
+            "finalizes digest and disposes context."
+          ],
+          "raises": [
+            "com.sun.star.lang.DisposedException"
+          ],
+          "args": []
+        },
+        {
+          "name": "updateDigest",
+          "returns": "None",
+          "desc": [
+            "update the digest with the given data."
+          ],
+          "raises": [
+            "com.sun.star.lang.DisposedException"
+          ],
+          "args": [
+            [
+              "aData",
+              "typing.List[int]",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

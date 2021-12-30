@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:17:09+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:06+00:00",
   "name": "XLayer",
   "type": "interface",
   "namespace": "com.sun.star.configuration.backend",
@@ -16,7 +16,17 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_layer_handler",
+        "XLayerHandler"
+      ]
+    ],
+    "quote": [
+      "XLayerHandler"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XLayer",
     "imports": [],
     "namespace": "com.sun.star.configuration.backend",
@@ -26,11 +36,33 @@
     "desc": [
       "provides read access to the data contained in a layer.",
       "",
-      "**See Also**",
+      "**since**",
       "",
       "    OOo 1.1.2"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1configuration_1_1backend_1_1XLayer.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "readData",
+          "returns": "None",
+          "desc": [
+            "describes the contents of the layer to an XLayerHandler."
+          ],
+          "raises": [
+            "com.sun.star.lang.NullPointerException",
+            "com.sun.star.lang.WrappedTargetException",
+            "MalformedDataException"
+          ],
+          "args": [
+            [
+              "aHandler",
+              "XLayerHandler",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

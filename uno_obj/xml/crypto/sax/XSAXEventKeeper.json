@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:18:36+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:33+00:00",
   "name": "XSAXEventKeeper",
   "type": "interface",
   "namespace": "com.sun.star.xml.crypto.sax",
@@ -16,7 +16,22 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "...sax.x_document_handler",
+        "XDocumentHandler"
+      ],
+      [
+        "...wrapper.xxml_element_wrapper",
+        "XXMLElementWrapper"
+      ]
+    ],
+    "quote": [
+      "XXMLElementWrapper",
+      "XDocumentHandler"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XSAXEventKeeper",
     "imports": [],
     "namespace": "com.sun.star.xml.crypto.sax",
@@ -31,6 +46,142 @@
       "There are two kinds of element mark, one is element collector, which is used to collect a particular element from the SAX event stream; the other is blocker, which is used to block the SAX event stream."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1xml_1_1crypto_1_1sax_1_1XSAXEventKeeper.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "addBlocker",
+          "returns": "int",
+          "desc": [
+            "Adds a new blocker on the next element in the SAX event stream.",
+            "",
+            "No SAX event starting from the next element will be forwarded until this blocker is removed."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "addElementCollector",
+          "returns": "int",
+          "desc": [
+            "Adds a new element collector on the next element in the SAX event stream."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getCurrentBlockingNode",
+          "returns": "XXMLElementWrapper",
+          "desc": [
+            "Gets the element which current blocking happens.",
+            "",
+            "This element is the working element of the first blocker in tree order."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getElement",
+          "returns": "XXMLElementWrapper",
+          "desc": [
+            "Gets the element of an element mark."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "id",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "isBlocking",
+          "returns": "bool",
+          "desc": [
+            "Checks whether the SAX event stream is blocking."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "printBufferNodeTree",
+          "returns": "str",
+          "desc": [
+            "Prints information about all buffered elements."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "removeBlocker",
+          "returns": "None",
+          "desc": [
+            "Removes a blocker."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "id",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "removeElementCollector",
+          "returns": "None",
+          "desc": [
+            "Removes an element collector."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "id",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setElement",
+          "returns": "None",
+          "desc": [
+            "Sets the element of an element mark.",
+            "",
+            "When an element is replaced outside of this interface, then uses this method can restore the link between an element mark and its working element."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "id",
+              "int",
+              "in"
+            ],
+            [
+              "aElement",
+              "XXMLElementWrapper",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setNextHandler",
+          "returns": "XDocumentHandler",
+          "desc": [
+            "Sets the next document handler in the SAX chain.",
+            "",
+            "This handler will receive SAX events forwarded by the SAXEventKeeper."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "nextHandler",
+              "XDocumentHandler",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

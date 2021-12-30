@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:18:37+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:33+00:00",
   "name": "XSAXEventKeeperStatusChangeBroadcaster",
   "type": "interface",
   "namespace": "com.sun.star.xml.crypto.sax",
@@ -16,7 +16,17 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".xsax_event_keeper_status_change_listener",
+        "XSAXEventKeeperStatusChangeListener"
+      ]
+    ],
+    "quote": [
+      "XSAXEventKeeperStatusChangeListener"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XSAXEventKeeperStatusChangeBroadcaster",
     "imports": [],
     "namespace": "com.sun.star.xml.crypto.sax",
@@ -29,6 +39,43 @@
       "This interface is used to manipulate SAXEventKeeper status change listener."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1xml_1_1crypto_1_1sax_1_1XSAXEventKeeperStatusChangeBroadcaster.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "addSAXEventKeeperStatusChangeListener",
+          "returns": "None",
+          "desc": [
+            "Adds a new status change listener.",
+            "",
+            "When the SAXEventKeeper's status changes, the listener will receive a notification."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "listener",
+              "XSAXEventKeeperStatusChangeListener",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "removeSAXEventKeeperStatusChangeListener",
+          "returns": "None",
+          "desc": [
+            "Removes a status change listener.",
+            "",
+            "After a listener is removed, no status change notification will be sent to it."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "listener",
+              "XSAXEventKeeperStatusChangeListener",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

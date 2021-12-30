@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:17:18+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:32+00:00",
   "name": "XTypeDescriptionEnumerationAccess",
   "type": "interface",
   "namespace": "com.sun.star.reflection",
@@ -16,7 +16,29 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".type_description_search_depth",
+        "TypeDescriptionSearchDepth"
+      ],
+      [
+        "..uno.type_class",
+        "TypeClass"
+      ],
+      [
+        ".x_type_description_enumeration",
+        "XTypeDescriptionEnumeration"
+      ]
+    ],
+    "quote": [
+      "XTypeDescriptionEnumeration",
+      "typing.List[TypeClass]",
+      "TypeDescriptionSearchDepth"
+    ],
+    "typings": [
+      "typing.List[TypeClass]"
+    ],
+    "requires_typing": true,
     "name": "XTypeDescriptionEnumerationAccess",
     "imports": [],
     "namespace": "com.sun.star.reflection",
@@ -26,11 +48,48 @@
     "desc": [
       "Defines an interface for creating enumerations for type descriptions.",
       "",
-      "**See Also**",
+      "**since**",
       "",
       "    OOo 1.1.2"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1reflection_1_1XTypeDescriptionEnumerationAccess.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "createTypeDescriptionEnumeration",
+          "returns": "XTypeDescriptionEnumeration",
+          "desc": [
+            "Creates an enumeration for type descriptions.",
+            "",
+            "An enumeration is always created for a UNOIDL module. The enumeration contents can be restricted by specifying type classes. Only types that match one of the supplied type classes will be part of the collection. Additionally, it is possible to specify the depth for the search within the underlying type description tree.",
+            "",
+            "Valid types classes are:",
+            "",
+            "The enumeration returns implementations of XTypeDescription. Following concrete UNOIDL parts represented by specialized interfaces derived from XTypeDescription can be returned by the enumerator:"
+          ],
+          "raises": [
+            "NoSuchTypeNameException",
+            "InvalidTypeNameException"
+          ],
+          "args": [
+            [
+              "moduleName",
+              "str",
+              "in"
+            ],
+            [
+              "types",
+              "typing.List[TypeClass]",
+              "in"
+            ],
+            [
+              "depth",
+              "TypeDescriptionSearchDepth",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

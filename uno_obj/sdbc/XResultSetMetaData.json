@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:19:44+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:29+00:00",
   "name": "XResultSetMetaData",
   "type": "interface",
   "namespace": "com.sun.star.sdbc",
@@ -17,6 +17,9 @@
       ]
     ],
     "from_imports_typing": [],
+    "quote": [],
+    "typings": [],
+    "requires_typing": false,
     "name": "XResultSetMetaData",
     "imports": [],
     "namespace": "com.sun.star.sdbc",
@@ -24,13 +27,363 @@
       "com.sun.star.uno.XInterface"
     ],
     "desc": [
-      "can be used to find out about the types and properties of the columns in a ResultSet.",
-      "",
-      "**See Also**",
-      "",
-      "    Database - ResultSetMetaData"
+      "can be used to find out about the types and properties of the columns in a ResultSet."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1sdbc_1_1XResultSetMetaData.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getCatalogName",
+          "returns": "str",
+          "desc": [
+            "gets a column's table's catalog name."
+          ],
+          "raises": [
+            "SQLException"
+          ],
+          "args": [
+            [
+              "column",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getColumnCount",
+          "returns": "int",
+          "desc": [
+            "returns the number of columns in this ResultSet."
+          ],
+          "raises": [
+            "SQLException"
+          ],
+          "args": []
+        },
+        {
+          "name": "getColumnDisplaySize",
+          "returns": "int",
+          "desc": [
+            "indicates the column's normal max width in chars."
+          ],
+          "raises": [
+            "SQLException"
+          ],
+          "args": [
+            [
+              "column",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getColumnLabel",
+          "returns": "str",
+          "desc": [
+            "gets the suggested column title for use in printouts and displays."
+          ],
+          "raises": [
+            "SQLException"
+          ],
+          "args": [
+            [
+              "column",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getColumnName",
+          "returns": "str",
+          "desc": [
+            "gets a column's name."
+          ],
+          "raises": [
+            "SQLException"
+          ],
+          "args": [
+            [
+              "column",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getColumnServiceName",
+          "returns": "str",
+          "desc": [
+            "returns the fully-qualified name of the service whose instances are manufactured if the method com.sun.star.sdbc.XResultSet..getObject() is called to retrieve a value from the column."
+          ],
+          "raises": [
+            "SQLException"
+          ],
+          "args": [
+            [
+              "column",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getColumnType",
+          "returns": "int",
+          "desc": [
+            "retrieves a column's SQL type."
+          ],
+          "raises": [
+            "SQLException"
+          ],
+          "args": [
+            [
+              "column",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getColumnTypeName",
+          "returns": "str",
+          "desc": [
+            "retrieves a column's database-specific type name."
+          ],
+          "raises": [
+            "SQLException"
+          ],
+          "args": [
+            [
+              "column",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getPrecision",
+          "returns": "int",
+          "desc": [
+            "gets a column's number of decimal digits."
+          ],
+          "raises": [
+            "SQLException"
+          ],
+          "args": [
+            [
+              "column",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getScale",
+          "returns": "int",
+          "desc": [
+            "gets a column's number of digits to right of the decimal point."
+          ],
+          "raises": [
+            "SQLException"
+          ],
+          "args": [
+            [
+              "column",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getSchemaName",
+          "returns": "str",
+          "desc": [
+            "gets a column's table's schema."
+          ],
+          "raises": [
+            "SQLException"
+          ],
+          "args": [
+            [
+              "column",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getTableName",
+          "returns": "str",
+          "desc": [
+            "gets a column's table name."
+          ],
+          "raises": [
+            "SQLException"
+          ],
+          "args": [
+            [
+              "column",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "isAutoIncrement",
+          "returns": "bool",
+          "desc": [
+            "indicates whether the column is automatically numbered, thus read-only."
+          ],
+          "raises": [
+            "SQLException"
+          ],
+          "args": [
+            [
+              "column",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "isCaseSensitive",
+          "returns": "bool",
+          "desc": [
+            "indicates whether a column's case matters."
+          ],
+          "raises": [
+            "SQLException"
+          ],
+          "args": [
+            [
+              "column",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "isCurrency",
+          "returns": "bool",
+          "desc": [
+            "indicates whether the column is a cash value."
+          ],
+          "raises": [
+            "SQLException"
+          ],
+          "args": [
+            [
+              "column",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "isDefinitelyWritable",
+          "returns": "bool",
+          "desc": [
+            "indicates whether a write on the column will definitely succeed."
+          ],
+          "raises": [
+            "SQLException"
+          ],
+          "args": [
+            [
+              "column",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "isNullable",
+          "returns": "int",
+          "desc": [
+            "indicates the nullability of values in the designated column."
+          ],
+          "raises": [
+            "SQLException"
+          ],
+          "args": [
+            [
+              "column",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "isReadOnly",
+          "returns": "bool",
+          "desc": [
+            "indicates whether a column is definitely not writable."
+          ],
+          "raises": [
+            "SQLException"
+          ],
+          "args": [
+            [
+              "column",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "isSearchable",
+          "returns": "bool",
+          "desc": [
+            "indicates whether the column can be used in a where clause."
+          ],
+          "raises": [
+            "SQLException"
+          ],
+          "args": [
+            [
+              "column",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "isSigned",
+          "returns": "bool",
+          "desc": [
+            "indicates whether values in the column are signed numbers."
+          ],
+          "raises": [
+            "SQLException"
+          ],
+          "args": [
+            [
+              "column",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "isWritable",
+          "returns": "bool",
+          "desc": [
+            "indicates whether it is possible for a write on the column to succeed."
+          ],
+          "raises": [
+            "SQLException"
+          ],
+          "args": [
+            [
+              "column",
+              "int",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

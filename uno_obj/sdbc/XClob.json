@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:19:39+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:28+00:00",
   "name": "XClob",
   "type": "interface",
   "namespace": "com.sun.star.sdbc",
@@ -12,17 +12,32 @@
   "data": {
     "from_imports": [
       [
-        "......x_input_stream",
-        "XInputStream"
+        "..uno.x_interface",
+        "XInterface"
       ]
     ],
-    "from_imports_typing": [],
-    "name": "XClob",
-    "imports": [
+    "from_imports_typing": [
+      [
+        "..io.x_input_stream",
+        "XInputStream"
+      ],
+      [
+        ".x_clob",
+        "XClob"
+      ]
+    ],
+    "quote": [
+      "XClob",
       "XInputStream"
     ],
+    "typings": [],
+    "requires_typing": true,
+    "name": "XClob",
+    "imports": [],
     "namespace": "com.sun.star.sdbc",
-    "extends": [],
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
     "desc": [
       "is the mapping for the SQL CLOB type.",
       "",
@@ -33,6 +48,103 @@
       "Methods in the interfaces com.sun.star.sdbc.XResultSet , and com.sun.star.sdbc.XPreparedStatement , such as getClob and setClob allow a programmer to access the SQL CLOB."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1sdbc_1_1XClob.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getCharacterStream",
+          "returns": "XInputStream",
+          "desc": [
+            "gets the Clob contents as a stream."
+          ],
+          "raises": [
+            "SQLException"
+          ],
+          "args": []
+        },
+        {
+          "name": "getSubString",
+          "returns": "str",
+          "desc": [
+            "returns a copy of the specified substring in the Clob value designated by this Clob object.",
+            "",
+            "The substring begins at position pos and has up to length consecutive characters."
+          ],
+          "raises": [
+            "SQLException"
+          ],
+          "args": [
+            [
+              "pos",
+              "object",
+              "in"
+            ],
+            [
+              "length",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "length",
+          "returns": "object",
+          "desc": [
+            "returns the number of characters in the CLOB value designated by this Clob object."
+          ],
+          "raises": [
+            "SQLException"
+          ],
+          "args": []
+        },
+        {
+          "name": "position",
+          "returns": "object",
+          "desc": [
+            "determines the character position at which the specified substring searchstr appears in the Clob.",
+            "",
+            "The search begins at position start."
+          ],
+          "raises": [
+            "SQLException"
+          ],
+          "args": [
+            [
+              "searchstr",
+              "str",
+              "in"
+            ],
+            [
+              "start",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "positionOfClob",
+          "returns": "object",
+          "desc": [
+            "determines the position at which the specified Clob object pattern appears in this Clob object.",
+            "",
+            "The search begins at position start."
+          ],
+          "raises": [
+            "SQLException"
+          ],
+          "args": [
+            [
+              "pattern",
+              "XClob",
+              "in"
+            ],
+            [
+              "start",
+              "object",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:18:19+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:13+00:00",
   "name": "XElement",
   "type": "interface",
   "namespace": "com.sun.star.xml.dom",
@@ -12,19 +12,339 @@
   "data": {
     "from_imports": [
       [
-        ".......x_node",
+        ".x_node",
         "XNode"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_attr",
+        "XAttr"
+      ],
+      [
+        ".x_node_list",
+        "XNodeList"
+      ]
+    ],
+    "quote": [
+      "XAttr",
+      "XNodeList"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XElement",
     "imports": [],
     "namespace": "com.sun.star.xml.dom",
     "extends": [
-      "XNode"
+      "com.sun.star.xml.dom.XNode"
     ],
     "desc": [],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1xml_1_1dom_1_1XElement.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getAttribute",
+          "returns": "str",
+          "desc": [
+            "Retrieves an attribute value by name."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "name",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getAttributeNS",
+          "returns": "str",
+          "desc": [
+            "Retrieves an attribute value by local name and namespace URI."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "namespaceURI",
+              "str",
+              "in"
+            ],
+            [
+              "localName",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getAttributeNode",
+          "returns": "XAttr",
+          "desc": [
+            "Retrieves an attribute node by name."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "name",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getAttributeNodeNS",
+          "returns": "XAttr",
+          "desc": [
+            "Retrieves an Attr node by local name and namespace URI."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "namespaceURI",
+              "str",
+              "in"
+            ],
+            [
+              "localName",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getElementsByTagName",
+          "returns": "XNodeList",
+          "desc": [
+            "Returns a NodeList of all descendant Elements with a given tag name, in the order in which they are encountered in a preorder traversal of this Element tree."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "name",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getElementsByTagNameNS",
+          "returns": "XNodeList",
+          "desc": [
+            "Returns a NodeList of all the descendant Elements with a given local name and namespace URI in the order in which they are encountered in a preorder traversal of this Element tree."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "namespaceURI",
+              "str",
+              "in"
+            ],
+            [
+              "localName",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getTagName",
+          "returns": "str",
+          "desc": [
+            "The name of the element."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "hasAttribute",
+          "returns": "bool",
+          "desc": [
+            "Returns true when an attribute with a given name is specified on this element or has a default value, false otherwise."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "name",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "hasAttributeNS",
+          "returns": "bool",
+          "desc": [
+            "Returns true when an attribute with a given local name and namespace URI is specified on this element or has a default value, false otherwise."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "namespaceURI",
+              "str",
+              "in"
+            ],
+            [
+              "localName",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "removeAttribute",
+          "returns": "None",
+          "desc": [
+            "Removes an attribute by name.",
+            "",
+            "Throws: DOMException - NO_MODIFICATION_ALLOWED_ERR: Raised if this node is readonly."
+          ],
+          "raises": [
+            "DOMException"
+          ],
+          "args": [
+            [
+              "name",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "removeAttributeNS",
+          "returns": "None",
+          "desc": [
+            "Removes an attribute by local name and namespace URI.",
+            "",
+            "Throws: DOMException - NO_MODIFICATION_ALLOWED_ERR: Raised if this node is readonly."
+          ],
+          "raises": [
+            "DOMException"
+          ],
+          "args": [
+            [
+              "namespaceURI",
+              "str",
+              "in"
+            ],
+            [
+              "localName",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "removeAttributeNode",
+          "returns": "XAttr",
+          "desc": [
+            "Removes the specified attribute node.",
+            "",
+            "Throws: DOMException - NO_MODIFICATION_ALLOWED_ERR: Raised if this node is readonly. NOT_FOUND_ERR: Raised if oldAttr is not an attribute of the element."
+          ],
+          "raises": [
+            "DOMException"
+          ],
+          "args": [
+            [
+              "oldAttr",
+              "XAttr",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setAttribute",
+          "returns": "None",
+          "desc": [
+            "Adds a new attribute.",
+            "",
+            "Throws: DOMException - INVALID_CHARACTER_ERR: Raised if the specified name contains an illegal character. NO_MODIFICATION_ALLOWED_ERR: Raised if this node is readonly."
+          ],
+          "raises": [
+            "DOMException"
+          ],
+          "args": [
+            [
+              "name",
+              "str",
+              "in"
+            ],
+            [
+              "value",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setAttributeNS",
+          "returns": "None",
+          "desc": [
+            "Adds a new attribute.",
+            "",
+            "Throws: DOMException - INVALID_CHARACTER_ERR: Raised if the specified qualified name contains an illegal character, per the XML 1.0 specification . NO_MODIFICATION_ALLOWED_ERR: Raised if this node is readonly. NAMESPACE_ERR: Raised if the qualifiedName is malformed per the Namespaces in XML specification, if the qualifiedName has a prefix and the namespaceURI is null, if the qualifiedName has a prefix that is \\\"xml\\\" and the namespaceURI is different from \\\" http://www.w3.org/XML/1998/namespace\\\", or if the qualifiedName, or its prefix, is \\\"xmlns\\\" and the namespaceURI is different from \\\" http://www.w3.org/2000/xmlns/\\\". NOT_SUPPORTED_ERR: Always thrown if the current document does not support the \\\"XML\\\" feature, since namespaces were defined by XML."
+          ],
+          "raises": [
+            "DOMException"
+          ],
+          "args": [
+            [
+              "namespaceURI",
+              "str",
+              "in"
+            ],
+            [
+              "qualifiedName",
+              "str",
+              "in"
+            ],
+            [
+              "value",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setAttributeNode",
+          "returns": "XAttr",
+          "desc": [
+            "Adds a new attribute node.",
+            "",
+            "Throws: DOMException - WRONG_DOCUMENT_ERR: Raised if newAttr was created from a different document than the one that created the element. NO_MODIFICATION_ALLOWED_ERR: Raised if this node is readonly. INUSE_ATTRIBUTE_ERR: Raised if newAttr is already an attribute of another Element object. The DOM user must explicitly clone Attr nodes to re-use them in other elements."
+          ],
+          "raises": [
+            "DOMException"
+          ],
+          "args": [
+            [
+              "newAttr",
+              "XAttr",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setAttributeNodeNS",
+          "returns": "XAttr",
+          "desc": [
+            "Adds a new attribute.",
+            "",
+            "Throws: DOMException - WRONG_DOCUMENT_ERR: Raised if newAttr was created from a different document than the one that created the element. NO_MODIFICATION_ALLOWED_ERR: Raised if this node is readonly. INUSE_ATTRIBUTE_ERR: Raised if newAttr is already an attribute of another Element object. The DOM user must explicitly clone Attr nodes to re-use them in other elements. NOT_SUPPORTED_ERR: Always thrown if the current document does not support the \\\"XML\\\" feature, since namespaces were defined by XML."
+          ],
+          "raises": [
+            "DOMException"
+          ],
+          "args": [
+            [
+              "newAttr",
+              "XAttr",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

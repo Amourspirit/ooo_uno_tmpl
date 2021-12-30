@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:16:41+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:15+00:00",
   "name": "XOfficeDatabaseDocument",
   "type": "interface",
   "namespace": "com.sun.star.sdb",
@@ -12,25 +12,31 @@
   "data": {
     "from_imports": [
       [
+        ".x_report_documents_supplier",
+        "XReportDocumentsSupplier"
+      ],
+      [
         "..document.x_document_sub_storage_supplier",
         "XDocumentSubStorageSupplier"
       ],
       [
         ".x_form_documents_supplier",
         "XFormDocumentsSupplier"
-      ],
-      [
-        ".x_report_documents_supplier",
-        "XReportDocumentsSupplier"
       ]
     ],
-    "from_imports_typing": [],
-    "name": "XOfficeDatabaseDocument",
-    "imports": [
-      "com.sun.star.document.XDocumentSubStorageSupplier",
-      "com.sun.star.sdb.XFormDocumentsSupplier",
-      "com.sun.star.sdb.XReportDocumentsSupplier"
+    "from_imports_typing": [
+      [
+        "..sdbc.x_data_source",
+        "XDataSource"
+      ]
     ],
+    "quote": [
+      "XDataSource"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "name": "XOfficeDatabaseDocument",
+    "imports": [],
     "namespace": "com.sun.star.sdb",
     "extends": [
       "com.sun.star.sdb.XFormDocumentsSupplier",
@@ -41,6 +47,18 @@
       "simplifies the accessing of data sources, and it's corresponding database document and forms, and reports."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1sdb_1_1XOfficeDatabaseDocument.html",
-    "items": {}
+    "items": {
+      "properties": [
+        {
+          "name": "DataSource",
+          "returns": "XDataSource",
+          "desc": [
+            "provides access to the one and only DataSource associated with this document"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
   }
 }

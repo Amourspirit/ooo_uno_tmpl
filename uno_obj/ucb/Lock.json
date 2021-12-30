@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 18:23:53+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-28 11:31:05+00:00",
   "type": "struct",
   "name": "Lock",
   "namespace": "com.sun.star.ucb",
@@ -10,31 +10,39 @@
   },
   "writer_args": {
     "sort": true,
-    "auto_import": true
+    "auto_import": true,
+    "dynamic_struct": false
   },
   "data": {
     "name": "Lock",
+    "namespace": "com.sun.star.ucb",
+    "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1ucb_1_1Lock.html",
+    "quote": [
+      "typing.List[str]"
+    ],
+    "typings": [
+      "typing.List[str]"
+    ],
     "fullname": "com.sun.star.ucb.Lock",
     "desc": [
       "defines a lock."
     ],
-    "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1ucb_1_1Lock.html",
-    "namespace": "com.sun.star.ucb",
-    "auto_imports": [
-      [
-        ".hyper",
-        "hyper"
-      ],
-      [
-        ".lock_depth",
-        "LockDepth"
-      ]
+    "extends": [
+      "com.sun.star.ucb.LockEntry"
     ],
     "imports": [],
+    "auto_imports": [],
+    "from_imports": [
+      [
+        ".lock_entry",
+        "LockEntry"
+      ]
+    ],
+    "requires_typing": true,
     "items": [
       {
         "name": "Depth",
-        "type": "'LockDepth'",
+        "type": "object",
         "orig_type": "LockDepth",
         "lines": [
           "defines the lock's depth."
@@ -60,7 +68,7 @@
       },
       {
         "name": "Timeout",
-        "type": "'hyper'",
+        "type": "object",
         "orig_type": "hyper",
         "lines": [
           "a timeout value for the lock.",

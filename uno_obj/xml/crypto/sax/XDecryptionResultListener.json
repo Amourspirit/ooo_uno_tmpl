@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:18:35+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:33+00:00",
   "name": "XDecryptionResultListener",
   "type": "interface",
   "namespace": "com.sun.star.xml.crypto.sax",
@@ -16,7 +16,17 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..security_operation_status",
+        "SecurityOperationStatus"
+      ]
+    ],
+    "quote": [
+      "SecurityOperationStatus"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XDecryptionResultListener",
     "imports": [],
     "namespace": "com.sun.star.xml.crypto.sax",
@@ -29,6 +39,29 @@
       "This interface is used to receive the result information of a decryption operation."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1xml_1_1crypto_1_1sax_1_1XDecryptionResultListener.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "decrypted",
+          "returns": "None",
+          "desc": [
+            "Notifies the decryption result."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "securityId",
+              "int",
+              "in"
+            ],
+            [
+              "decryptionResult",
+              "SecurityOperationStatus",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

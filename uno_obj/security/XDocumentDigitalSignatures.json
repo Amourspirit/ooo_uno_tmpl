@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:16:59+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:11+00:00",
   "name": "XDocumentDigitalSignatures",
   "type": "interface",
   "namespace": "com.sun.star.security",
@@ -16,7 +16,62 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".certificate_kind",
+        "CertificateKind"
+      ],
+      [
+        "..io.x_input_stream",
+        "XInputStream"
+      ],
+      [
+        "..graphic.x_graphic",
+        "XGraphic"
+      ],
+      [
+        ".document_signature_information",
+        "DocumentSignatureInformation"
+      ],
+      [
+        "..awt.x_window",
+        "XWindow"
+      ],
+      [
+        ".x_certificate",
+        "XCertificate"
+      ],
+      [
+        "..embed.x_storage",
+        "XStorage"
+      ],
+      [
+        "..io.x_stream",
+        "XStream"
+      ],
+      [
+        "..beans.property_value",
+        "PropertyValue"
+      ]
+    ],
+    "quote": [
+      "XGraphic",
+      "typing.List[PropertyValue]",
+      "XInputStream",
+      "typing.List[XCertificate]",
+      "XWindow",
+      "XStream",
+      "typing.List[DocumentSignatureInformation]",
+      "CertificateKind",
+      "XCertificate",
+      "XStorage"
+    ],
+    "typings": [
+      "typing.List[XCertificate]",
+      "typing.List[DocumentSignatureInformation]",
+      "typing.List[PropertyValue]"
+    ],
+    "requires_typing": true,
     "name": "XDocumentDigitalSignatures",
     "imports": [],
     "namespace": "com.sun.star.security",
@@ -26,9 +81,585 @@
     "desc": [
       "Interface for signing and verifying digital signatures in office documents.",
       "",
-      "This interface can be used to digitally sign different content in an office document. It can also be used to verify digital signatures."
+      "This interface can be used to digitally sign different content in an office document. It can also be used to verify digital signatures.",
+      "",
+      "**since**",
+      "",
+      "    LibreOffice 5.3"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1security_1_1XDocumentDigitalSignatures.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "addAuthorToTrustedSources",
+          "returns": "None",
+          "desc": [],
+          "raises": [],
+          "args": [
+            [
+              "Author",
+              "XCertificate",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "addLocationToTrustedSources",
+          "returns": "None",
+          "desc": [],
+          "raises": [],
+          "args": [
+            [
+              "Location",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "chooseCertificate",
+          "returns": "XCertificate",
+          "desc": [
+            "This method shows the CertificateChooser dialog, used by document and PDF signing Shows only private certificates.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 5.3"
+          ],
+          "raises": [],
+          "args": [
+            [
+              "Description",
+              "str",
+              "out"
+            ]
+          ]
+        },
+        {
+          "name": "chooseCertificateWithProps",
+          "returns": "XCertificate",
+          "desc": [
+            "This method shows the CertificateChooser dialog, used by document and PDF signing Shows only private certificates and returns usage string in addition to description.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 6.0"
+          ],
+          "raises": [],
+          "args": [
+            [
+              "Properties",
+              "typing.List[PropertyValue]",
+              "out"
+            ]
+          ]
+        },
+        {
+          "name": "chooseEncryptionCertificate",
+          "returns": "typing.List[XCertificate]",
+          "desc": [
+            "This method shows the CertificateChooser dialog with all certificates, private and other people's.",
+            "",
+            "Useful when choosing certificate/key for encryption",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 6.0"
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "chooseSigningCertificate",
+          "returns": "XCertificate",
+          "desc": [
+            "This is an alias for 'chooseCertificate', shows the CertificateChooser dialog with private certificates.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 6.0"
+          ],
+          "raises": [],
+          "args": [
+            [
+              "Description",
+              "str",
+              "out"
+            ]
+          ]
+        },
+        {
+          "name": "getDocumentContentSignatureDefaultStreamName",
+          "returns": "str",
+          "desc": [
+            "allows to get the default stream name for storing of the signature of the document content."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getPackageSignatureDefaultStreamName",
+          "returns": "str",
+          "desc": [
+            "allows to get the default stream name for storing of the signature of the package."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getScriptingContentSignatureDefaultStreamName",
+          "returns": "str",
+          "desc": [
+            "allows to get the default stream name for storing of the signature of the scripting content."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "isAuthorTrusted",
+          "returns": "bool",
+          "desc": [],
+          "raises": [],
+          "args": [
+            [
+              "Author",
+              "XCertificate",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "isLocationTrusted",
+          "returns": "bool",
+          "desc": [],
+          "raises": [],
+          "args": [
+            [
+              "Location",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "manageTrustedSources",
+          "returns": "None",
+          "desc": [
+            "manages trusted sources (Authors and paths )"
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "selectSigningCertificate",
+          "returns": "XCertificate",
+          "desc": [
+            "This shows the certificate selection dialog and allows to only select the certificate without actually signing the document.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 6.1"
+          ],
+          "raises": [],
+          "args": [
+            [
+              "Description",
+              "str",
+              "out"
+            ]
+          ]
+        },
+        {
+          "name": "selectSigningCertificateWithType",
+          "returns": "XCertificate",
+          "desc": [
+            "This shows the certificate selection dialog and allows to only select the certificate without actually signing the document.",
+            "",
+            "Only certificates of the given type will be shown.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 6.2"
+          ],
+          "raises": [],
+          "args": [
+            [
+              "certificateKind",
+              "CertificateKind",
+              "in"
+            ],
+            [
+              "Description",
+              "str",
+              "out"
+            ]
+          ]
+        },
+        {
+          "name": "setParentWindow",
+          "returns": "None",
+          "desc": [
+            "Set parent window to use when showing dialogs.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 6.3"
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xParentWindow",
+              "XWindow",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "showCertificate",
+          "returns": "None",
+          "desc": [],
+          "raises": [],
+          "args": [
+            [
+              "Certificate",
+              "XCertificate",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "showDocumentContentSignatures",
+          "returns": "None",
+          "desc": [
+            "shows the digital signatures of the document content"
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xStorage",
+              "XStorage",
+              "in"
+            ],
+            [
+              "xSignInStream",
+              "XInputStream",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "showPackageSignatures",
+          "returns": "None",
+          "desc": [
+            "shows the digital signatures of the package"
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xStorage",
+              "XStorage",
+              "in"
+            ],
+            [
+              "xSignInStream",
+              "XInputStream",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "showScriptingContentSignatures",
+          "returns": "None",
+          "desc": [
+            "shows the digital signatures of the scripting content"
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xStorage",
+              "XStorage",
+              "in"
+            ],
+            [
+              "xSignInStream",
+              "XInputStream",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "signDocumentContent",
+          "returns": "bool",
+          "desc": [
+            "signs the content of the document including text and pictures.",
+            "",
+            "Macros will not be signed."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xStorage",
+              "XStorage",
+              "in"
+            ],
+            [
+              "xSignStream",
+              "XStream",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "signDocumentWithCertificate",
+          "returns": "bool",
+          "desc": [
+            "Signs the content of the document with the provided certificate.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 6.2"
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xCertificate",
+              "XCertificate",
+              "in"
+            ],
+            [
+              "xStorage",
+              "XStorage",
+              "in"
+            ],
+            [
+              "xStream",
+              "XStream",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "signPackage",
+          "returns": "bool",
+          "desc": [
+            "signs the full Package, which means everything in the storage except the content of META-INF"
+          ],
+          "raises": [],
+          "args": [
+            [
+              "Storage",
+              "XStorage",
+              "in"
+            ],
+            [
+              "xSignStream",
+              "XStream",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "signPackageWithCertificate",
+          "returns": "bool",
+          "desc": [
+            "signs the full Package, which means everything in the storage except the content of META-INF with the provided certificate.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 7.0"
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xCertificate",
+              "XCertificate",
+              "in"
+            ],
+            [
+              "xStorage",
+              "XStorage",
+              "in"
+            ],
+            [
+              "xStream",
+              "XStream",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "signScriptingContent",
+          "returns": "bool",
+          "desc": [
+            "signs the content of the Scripting including macros and basic dialogs",
+            "",
+            "The rest of document content will not be signed."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xStorage",
+              "XStorage",
+              "in"
+            ],
+            [
+              "xSignStream",
+              "XStream",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "signScriptingContentWithCertificate",
+          "returns": "bool",
+          "desc": [
+            "signs the content of the Scripting including macros and basic dialogs with the provided certificate.",
+            "",
+            "The rest of document content will not be signed.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 7.0"
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xCertificate",
+              "XCertificate",
+              "in"
+            ],
+            [
+              "xStorage",
+              "XStorage",
+              "in"
+            ],
+            [
+              "xStream",
+              "XStream",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "signSignatureLine",
+          "returns": "bool",
+          "desc": [
+            "Signs the content of the document including text and pictures using the given XCertificate.",
+            "",
+            "Also adds the given Signature Line Id and the signed and unsigned graphics to the signature.",
+            "",
+            "Macros will not be signed.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 6.1"
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xStorage",
+              "XStorage",
+              "in"
+            ],
+            [
+              "xSignStream",
+              "XStream",
+              "in"
+            ],
+            [
+              "signatureLineId",
+              "str",
+              "in"
+            ],
+            [
+              "xCertificate",
+              "XCertificate",
+              "in"
+            ],
+            [
+              "xValidGraphic",
+              "XGraphic",
+              "in"
+            ],
+            [
+              "xInvalidGraphic",
+              "XGraphic",
+              "in"
+            ],
+            [
+              "comment",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "verifyDocumentContentSignatures",
+          "returns": "typing.List[DocumentSignatureInformation]",
+          "desc": [
+            "checks for digital signatures and their status.",
+            "",
+            "Only document content will be checked."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xStorage",
+              "XStorage",
+              "in"
+            ],
+            [
+              "xSignInStream",
+              "XInputStream",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "verifyPackageSignatures",
+          "returns": "typing.List[DocumentSignatureInformation]",
+          "desc": [
+            "checks for digital signatures and their status.",
+            "",
+            "Only Package content will be checked."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "Storage",
+              "XStorage",
+              "in"
+            ],
+            [
+              "xSignInStream",
+              "XInputStream",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "verifyScriptingContentSignatures",
+          "returns": "typing.List[DocumentSignatureInformation]",
+          "desc": [
+            "checks for digital signatures and their status.",
+            "",
+            "Only Scripting content will be checked."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xStorage",
+              "XStorage",
+              "in"
+            ],
+            [
+              "xSignInStream",
+              "XInputStream",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

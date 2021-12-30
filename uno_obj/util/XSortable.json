@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:19:16+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:25+00:00",
   "name": "XSortable",
   "type": "interface",
   "namespace": "com.sun.star.util",
@@ -16,7 +16,19 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..beans.property_value",
+        "PropertyValue"
+      ]
+    ],
+    "quote": [
+      "typing.List[PropertyValue]"
+    ],
+    "typings": [
+      "typing.List[PropertyValue]"
+    ],
+    "requires_typing": true,
     "name": "XSortable",
     "imports": [],
     "namespace": "com.sun.star.util",
@@ -32,13 +44,38 @@
       "",
       "And a new set of sort descriptors:",
       "",
-      "Both types may be implemented by the same object. When calling the sort method however properties from different descriptors must not be mixed.",
-      "",
-      "**See Also**",
-      "",
-      "    Text - Sorting Text"
+      "Both types may be implemented by the same object. When calling the sort method however properties from different descriptors must not be mixed."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1util_1_1XSortable.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "createSortDescriptor",
+          "returns": "typing.List[PropertyValue]",
+          "desc": [
+            "The set of properties is specific to the type of object that implements this interface. Therefore they can usually be used only for objects of that same type."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "sort",
+          "returns": "None",
+          "desc": [
+            "sorts the contents of the object according to the specified properties.",
+            "",
+            "The specified properties are usually the same or a subset of those obtained by calling createSortDescriptor() on the same type of object."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xDescriptor",
+              "typing.List[PropertyValue]",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

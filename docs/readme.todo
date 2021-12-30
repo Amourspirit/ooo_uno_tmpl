@@ -1,0 +1,95 @@
+☐ Add Include Desc to all parsers. Let the template choose when the include desc is false.
+    ☐ Add include Desc to const
+    ☐ Add include desc to enm
+    ☐ Add include desc to ex
+    ☐ Add include desc to service
+    ☐ Add include desc to struct
+    ☐ Add include desc to typedef
+    ☐ Add include desc to Interface
+
+☐ @critical Fix for const when using flags or flag like values
+    See: https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1i18n_1_1KParseTokens.html
+
+☐ Check Singleton Types
+    See: DataAccessDescriptorFactory: https://api.libreoffice.org/docs/idl/ref/singletoncom_1_1sun_1_1star_1_1sdb_1_1DataAccessDescriptorFactory.html
+    
+☐ Template adjustments
+    ☐ Enums leave extra space in enum description if there is no description available.
+        See: scratch/uno_obj/text/note_print_mode.py
+    ✔ Properties not indenting descriptions properly @done(21-12-26 14:24)
+        see: scratch/uno_obj/animations/x_iterate_container.py
+
+✔ import for xsrc are somtimes not importing with correct realitive path @done(21-12-28 06:28)
+    This is the case when importing enums from the same namespace.
+    Correctiion will most likely be checking if import url is a fragment and not droping name if has fragment.
+
+✔ xsrc methods properties not importing types. @done(21-12-27 15:12)
+    see: scratch/uno_obj/awt/x_style_settings.py
+    see: https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XStyleSettings.html
+
+✔ xsrc property return types missing some types. Types such as 'FontDescriptor' are being ignored. @done(21-12-26 16:08)
+    see: scratch/uno_obj/awt/x_style_settings.py
+    see: https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XStyleSettings.html
+
+✔ xsrc property retturn type not marking properties return types a quotes @done(21-12-26 15:18)
+    see: scratch/uno_obj/awt/x_style_settings.py
+    see: https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XStyleSettings.html
+
+✔ Confirm that Interface only have functions and not Properties as well. @done(21-12-26 14:12)
+    Confirmed False: https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1animations_1_1XIterateContainer.html
+    See: scratch/uno_obj/animations/x_iterate_container.py
+
+✔ Fix issue with xsrc only importing single raises when there is more than one. @done(21-12-26 13:59)
+    see: scratch/uno_obj/animations/x_time_container.py
+    see: https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1animations_1_1XTimeContainer.html
+
+✔ Fix issue where return types that require typeing such as 'typing.List[int]' are not actually importing typeing. @done(21-12-26 12:30)
+        Ths is noticed in interface. Could alos be happening elsewhere.
+        see: scratch/uno_obj/accessibility/x_accessible_table.py
+        see: https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1accessibility_1_1XAccessibleTable.html
+
+✔ Remove quotes From type rules. @done(21-12-26 10:42)
+    ✔ Add is_wrapper to rules ( consider this anyways, Perhaps requires typing is enough.) @done(21-12-26 08:32)
+    ✔ Fix object is being wrapped @done(21-12-26 10:42)
+
+✔ @critical Fix imports being ignored such as Point ( struct ) @done(21-12-26 10:12)
+    see: scratch/uno_obj/accessibility/x_accessible_text_selection.py
+    see: https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1accessibility_1_1XAccessibleTextSelection.html
+
+
+✔ @high Fix interface template adding extra quotes to types @done(21-12-26 10:13)
+    see: scratch/uno_obj/accessibility/accessible_relation.py
+
+✔  @critical Fix args not being read for interface methods. @done(21-12-24 09:34)
+    see: uno_obj/accessibility/XMSAAService.json
+    see: https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1accessibility_1_1XMSAAService.html
+
+✔ Handle special string such as sequence< ::com::sun::star::beans::Pair< string, string > > @done(21-12-22 13:27)
+    See: https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XItemList.html#a293097f8d0b2a089554cc047ddd822a5
+
+✔ Fix struct imports for wrapping not primitive types in quotes @done(21-12-23 19:29)
+    see: /home/paul/Documents/Projects/Python/Cheeta3/ooo_uno_tmpl/scratch/uno_obj/text/text_markup_descriptor.py
+    See: https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1text_1_1TextMarkupDescriptor.html
+
+✔ Fix struct not importing typing for python types such as typing.List[int] @done(21-12-23 17:34)
+    See: scratch/uno_obj/util/search_result.py
+    see: https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1util_1_1SearchResult.html
+
+✔ Fix Interface raises issue. Strings raise is being treated like an array @done(21-12-23 17:11)
+    see: /home/paul/Documents/Projects/Python/Cheeta3/ooo_uno_tmpl/scratch/uno_obj/accessibility/x_accessible_action.py
+    see: https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1accessibility_1_1XAccessibleAction.html
+
+
+
+✔ Update module links: @done(21-12-23 08:15)
+    ✔ Add Singleton @done(21-12-23 08:14)
+    ✔ Add TypeDef @done(21-12-23 08:14)
+
+✔ Implement typeDef: @done(21-12-23 16:46)
+    Classes suchs as /scratch/uno_obj/accessibility/x_accessible_component.py are importing typeDef as classes.
+    Eithor convert typeDef to object or import typeDef as pyi files.
+    
+    One posibility is to look up from module_links.json and see if type is a typedef.
+    If it is then do not import and write as object
+
+✔ Some cache file are being written 0 bytes. Ensure files of 0 bytes are being ignored. @done(21-12-23 19:41)

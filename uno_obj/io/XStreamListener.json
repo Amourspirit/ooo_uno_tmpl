@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:17:04+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:10+00:00",
   "name": "XStreamListener",
   "type": "interface",
   "namespace": "com.sun.star.io",
@@ -17,6 +17,9 @@
       ]
     ],
     "from_imports_typing": [],
+    "quote": [],
+    "typings": [],
+    "requires_typing": false,
     "name": "XStreamListener",
     "imports": [],
     "namespace": "com.sun.star.io",
@@ -27,6 +30,55 @@
       "makes it possible to receive events from an active data control."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1io_1_1XStreamListener.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "closed",
+          "returns": "None",
+          "desc": [
+            "gets called when data transfer terminates normally or when data transfer is terminated from outside.",
+            "",
+            "The termination could be done using the method XActiveDataControl.terminate()."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "error",
+          "returns": "None",
+          "desc": [
+            "gets called when an internal error in source or sink has occurred.",
+            "",
+            "After the method is called, the close is called on the connected streams."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aException",
+              "object",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "started",
+          "returns": "None",
+          "desc": [
+            "gets called as soon as data transfer has started."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "terminated",
+          "returns": "None",
+          "desc": [
+            "gets called when XActiveDataControl.terminate() is called."
+          ],
+          "raises": [],
+          "args": []
+        }
+      ]
+    }
   }
 }

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:17:57+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:03+00:00",
   "name": "XRegion",
   "type": "interface",
   "namespace": "com.sun.star.awt",
@@ -16,7 +16,29 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".rectangle",
+        "Rectangle"
+      ],
+      [
+        ".x_region",
+        "XRegion"
+      ],
+      [
+        ".rectangle",
+        "Rectangle"
+      ]
+    ],
+    "quote": [
+      "typing.List[Rectangle]",
+      "XRegion",
+      "Rectangle"
+    ],
+    "typings": [
+      "typing.List[Rectangle]"
+    ],
+    "requires_typing": true,
     "name": "XRegion",
     "imports": [],
     "namespace": "com.sun.star.awt",
@@ -27,6 +49,176 @@
       "manages multiple rectangles which make up a region."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XRegion.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "clear",
+          "returns": "None",
+          "desc": [
+            "makes this region an empty region."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "excludeRectangle",
+          "returns": "None",
+          "desc": [
+            "removes the area of the specified rectangle from this region."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "Rect",
+              "Rectangle",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "excludeRegion",
+          "returns": "None",
+          "desc": [
+            "removes the area of the specified region from this region."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "Region",
+              "XRegion",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getBounds",
+          "returns": "Rectangle",
+          "desc": [
+            "returns the bounding box of the shape."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getRectangles",
+          "returns": "typing.List[Rectangle]",
+          "desc": [
+            "returns all rectangles which are making up this region."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "intersectRectangle",
+          "returns": "None",
+          "desc": [
+            "intersects the specified rectangle with the current region."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "Region",
+              "Rectangle",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "intersectRegion",
+          "returns": "None",
+          "desc": [
+            "intersects the specified region with the current region."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "Region",
+              "XRegion",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "move",
+          "returns": "None",
+          "desc": [
+            "moves this region by the specified horizontal and vertical delta."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "nHorzMove",
+              "int",
+              "in"
+            ],
+            [
+              "nVertMove",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "unionRectangle",
+          "returns": "None",
+          "desc": [
+            "adds the specified rectangle to this region."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "Rect",
+              "Rectangle",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "unionRegion",
+          "returns": "None",
+          "desc": [
+            "adds the specified region to this region."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "Region",
+              "XRegion",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "xOrRectangle",
+          "returns": "None",
+          "desc": [
+            "applies an exclusive-or operation with the specified rectangle to this region."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "Rect",
+              "Rectangle",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "xOrRegion",
+          "returns": "None",
+          "desc": [
+            "applies an exclusive-or operation with the specified region to this region."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "Region",
+              "XRegion",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

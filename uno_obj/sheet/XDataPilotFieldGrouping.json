@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:21:04+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:16+00:00",
   "name": "XDataPilotFieldGrouping",
   "type": "interface",
   "namespace": "com.sun.star.sheet",
@@ -16,7 +16,25 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_data_pilot_field",
+        "XDataPilotField"
+      ],
+      [
+        ".data_pilot_field_group_info",
+        "DataPilotFieldGroupInfo"
+      ]
+    ],
+    "quote": [
+      "typing.List[str]",
+      "DataPilotFieldGroupInfo",
+      "XDataPilotField"
+    ],
+    "typings": [
+      "typing.List[str]"
+    ],
+    "requires_typing": true,
     "name": "XDataPilotFieldGrouping",
     "imports": [],
     "namespace": "com.sun.star.sheet",
@@ -24,13 +42,52 @@
       "com.sun.star.uno.XInterface"
     ],
     "desc": [
-      "Provides methods to create new DataPilot fields where some or all items of this DataPilot field are grouped in some way.",
-      "",
-      "**See Also**",
-      "",
-      "    DataPilotField"
+      "Provides methods to create new DataPilot fields where some or all items of this DataPilot field are grouped in some way."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1sheet_1_1XDataPilotFieldGrouping.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "createDateGroup",
+          "returns": "XDataPilotField",
+          "desc": [
+            "Groups the members of this field by dates, according to the passed settings.",
+            "",
+            "If this field is already grouped by dates, a new DataPilot field will be created and returned. If this field is not grouped at all, the date grouping is performed inside of this field (no new field will be created). There must not be any other grouping (by member names or by numeric ranges), otherwise an exception is thrown."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "aInfo",
+              "DataPilotFieldGroupInfo",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "createNameGroup",
+          "returns": "XDataPilotField",
+          "desc": [
+            "Creates a new DataPilot field which contains a group containing the given DataPilot field items (members).",
+            "",
+            "It is possible to create multiple groups by calling this method several times at the same DataPilot field. On subsequent calls, the DataPilot field created at the first call is used to insert the new groups.",
+            "",
+            "The collection of groups can be accessed via the DataPilotField.GroupInfo property. The returned struct contains the sequence of groups in its member DataPilotFieldGroupInfo.Groups."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "aItems",
+              "typing.List[str]",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

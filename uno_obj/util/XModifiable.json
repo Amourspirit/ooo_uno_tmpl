@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:19:11+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:25+00:00",
   "name": "XModifiable",
   "type": "interface",
   "namespace": "com.sun.star.util",
@@ -17,6 +17,9 @@
       ]
     ],
     "from_imports_typing": [],
+    "quote": [],
+    "typings": [],
+    "requires_typing": false,
     "name": "XModifiable",
     "imports": [],
     "namespace": "com.sun.star.util",
@@ -26,13 +29,38 @@
     "desc": [
       "makes the modify state of the object accessible.",
       "",
-      "Additionally, it makes it possible to register listener objects, which get notification whenever the status or content of the object changes.",
-      "",
-      "**See Also**",
-      "",
-      "    OfficeDev - Component - Models - XModifiable"
+      "Additionally, it makes it possible to register listener objects, which get notification whenever the status or content of the object changes."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1util_1_1XModifiable.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "isModified",
+          "returns": "bool",
+          "desc": [
+            "The modification is always in relation to a certain state (i.e., the initial, loaded, or last stored version)."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "setModified",
+          "returns": "None",
+          "desc": [
+            "sets the status of the modified-flag from outside of the object."
+          ],
+          "raises": [
+            "com.sun.star.beans.PropertyVetoException"
+          ],
+          "args": [
+            [
+              "bModified",
+              "bool",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

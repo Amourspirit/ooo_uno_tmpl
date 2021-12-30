@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:18:36+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:33+00:00",
   "name": "XReferenceResolvedBroadcaster",
   "type": "interface",
   "namespace": "com.sun.star.xml.crypto.sax",
@@ -16,7 +16,17 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_reference_resolved_listener",
+        "XReferenceResolvedListener"
+      ]
+    ],
+    "quote": [
+      "XReferenceResolvedListener"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XReferenceResolvedBroadcaster",
     "imports": [],
     "namespace": "com.sun.star.xml.crypto.sax",
@@ -29,6 +39,53 @@
       "This interface is used to manipulate reference resolved listener."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1xml_1_1crypto_1_1sax_1_1XReferenceResolvedBroadcaster.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "addReferenceResolvedListener",
+          "returns": "None",
+          "desc": [
+            "Adds a new reference resolved listener for an element collector.",
+            "",
+            "When the element collector has completely collected that element, this listener will receive a notification."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "referenceId",
+              "int",
+              "in"
+            ],
+            [
+              "listener",
+              "XReferenceResolvedListener",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "removeReferenceResolvedListener",
+          "returns": "None",
+          "desc": [
+            "Removes a listener from an element collector.",
+            "",
+            "When a listener is removed, it will not receive notification when collection completes."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "referenceId",
+              "int",
+              "in"
+            ],
+            [
+              "listener",
+              "XReferenceResolvedListener",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:18:03+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:04+00:00",
   "name": "XUnitConversion",
   "type": "interface",
   "namespace": "com.sun.star.awt",
@@ -16,7 +16,22 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".size",
+        "Size"
+      ],
+      [
+        ".point",
+        "Point"
+      ]
+    ],
+    "quote": [
+      "Point",
+      "Size"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XUnitConversion",
     "imports": [],
     "namespace": "com.sun.star.awt",
@@ -26,11 +41,102 @@
     "desc": [
       "allows converting between different measurement units",
       "",
-      "**See Also**",
+      "**since**",
       "",
       "    OOo 3.0"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XUnitConversion.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "convertPointToLogic",
+          "returns": "Point",
+          "desc": [
+            "converts the given Point, which is specified in pixels, into the given logical unit"
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "Point",
+              "Point",
+              "in"
+            ],
+            [
+              "TargetUnit",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "convertPointToPixel",
+          "returns": "Point",
+          "desc": [
+            "converts the given Point, which is specified in the given logical unit, into pixels"
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "Point",
+              "Point",
+              "in"
+            ],
+            [
+              "SourceUnit",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "convertSizeToLogic",
+          "returns": "Size",
+          "desc": [
+            "converts the given Size, which is specified in pixels, into the given logical unit"
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "Size",
+              "Size",
+              "in"
+            ],
+            [
+              "TargetUnit",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "convertSizeToPixel",
+          "returns": "Size",
+          "desc": [
+            "converts the given Size, which is specified in the given logical unit, into pixels"
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "Size",
+              "Size",
+              "in"
+            ],
+            [
+              "SourceUnit",
+              "int",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

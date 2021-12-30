@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:19:20+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:36+00:00",
   "name": "XCellRange",
   "type": "interface",
   "namespace": "com.sun.star.table",
@@ -16,7 +16,22 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_cell_range",
+        "XCellRange"
+      ],
+      [
+        ".x_cell",
+        "XCell"
+      ]
+    ],
+    "quote": [
+      "XCell",
+      "XCellRange"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XCellRange",
     "imports": [],
     "namespace": "com.sun.star.table",
@@ -24,13 +39,83 @@
       "com.sun.star.uno.XInterface"
     ],
     "desc": [
-      "provides access to the cells or to sub-ranges of a cell range.",
-      "",
-      "**See Also**",
-      "",
-      "    com.sun.star.table.CellRange"
+      "provides access to the cells or to sub-ranges of a cell range."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1table_1_1XCellRange.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getCellByPosition",
+          "returns": "XCell",
+          "desc": [
+            "Returns a single cell within the range."
+          ],
+          "raises": [
+            "com.sun.star.lang.IndexOutOfBoundsException"
+          ],
+          "args": [
+            [
+              "nColumn",
+              "int",
+              "in"
+            ],
+            [
+              "nRow",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getCellRangeByName",
+          "returns": "XCellRange",
+          "desc": [
+            "Returns a sub-range of cells within the range.",
+            "",
+            "The sub-range is specified by its name. The format of the range name is dependent of the context of the table. In spreadsheets valid names may be \\\"A1:C5\\\" or \\\"$B$2\\\" or even defined names for cell ranges such as \\\"MySpecialCell\\\"."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aRange",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getCellRangeByPosition",
+          "returns": "XCellRange",
+          "desc": [
+            "Returns a sub-range of cells within the range."
+          ],
+          "raises": [
+            "com.sun.star.lang.IndexOutOfBoundsException"
+          ],
+          "args": [
+            [
+              "nLeft",
+              "int",
+              "in"
+            ],
+            [
+              "nTop",
+              "int",
+              "in"
+            ],
+            [
+              "nRight",
+              "int",
+              "in"
+            ],
+            [
+              "nBottom",
+              "int",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

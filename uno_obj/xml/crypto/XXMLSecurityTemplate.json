@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:18:33+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:21+00:00",
   "name": "XXMLSecurityTemplate",
   "type": "interface",
   "namespace": "com.sun.star.xml.crypto",
@@ -16,7 +16,22 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".security_operation_status",
+        "SecurityOperationStatus"
+      ],
+      [
+        "..wrapper.xxml_element_wrapper",
+        "XXMLElementWrapper"
+      ]
+    ],
+    "quote": [
+      "XXMLElementWrapper",
+      "SecurityOperationStatus"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XXMLSecurityTemplate",
     "imports": [],
     "namespace": "com.sun.star.xml.crypto",
@@ -29,6 +44,80 @@
       "This interface represents a security template, which is the super interface of the XXMLSignatureTemplate interface and the XXMLEncryptionTemplate interface."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1xml_1_1crypto_1_1XXMLSecurityTemplate.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getStatus",
+          "returns": "SecurityOperationStatus",
+          "desc": [
+            "Get the template status."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getTemplate",
+          "returns": "XXMLElementWrapper",
+          "desc": [
+            "Get the XML signature element that represents the signature template."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "setStatus",
+          "returns": "None",
+          "desc": [
+            "Set the template status."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "status",
+              "SecurityOperationStatus",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setTarget",
+          "returns": "None",
+          "desc": [
+            "Load the target XML element, i.e.",
+            "",
+            "the element to be signed"
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "aXmlElement",
+              "XXMLElementWrapper",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setTemplate",
+          "returns": "None",
+          "desc": [
+            "Load a XML signature template from XML signature element."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "aXmlElement",
+              "XXMLElementWrapper",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

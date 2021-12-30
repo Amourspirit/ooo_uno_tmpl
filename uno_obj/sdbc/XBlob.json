@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:19:39+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:28+00:00",
   "name": "XBlob",
   "type": "interface",
   "namespace": "com.sun.star.sdbc",
@@ -12,25 +12,142 @@
   "data": {
     "from_imports": [
       [
-        "......x_input_stream",
-        "XInputStream"
+        "..uno.x_interface",
+        "XInterface"
       ]
     ],
-    "from_imports_typing": [],
-    "name": "XBlob",
-    "imports": [
-      "XInputStream"
+    "from_imports_typing": [
+      [
+        "..io.x_input_stream",
+        "XInputStream"
+      ],
+      [
+        ".x_blob",
+        "XBlob"
+      ]
     ],
+    "quote": [
+      "XBlob",
+      "XInputStream",
+      "typing.List[int]"
+    ],
+    "typings": [
+      "typing.List[int]"
+    ],
+    "requires_typing": true,
+    "name": "XBlob",
+    "imports": [],
     "namespace": "com.sun.star.sdbc",
-    "extends": [],
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
     "desc": [
       "is the representation (mapping) of an SQL BLOB.",
       "",
-      "A SQL  BLOB  is a built-in type that stores a Binary Large Object as a column value in a row of a database table. The driver implements  BLOB  using a SQL locator(BLOB) , which means that a Blob object contains a logical pointer to the SQL  BLOB  data rather than the data itself. \n A Blob object is valid for the duration of the transaction in which is was created.",
+      "A SQL  BLOB  is a built-in type that stores a Binary Large Object as a column value in a row of a database table. The driver implements  BLOB  using a SQL locator(BLOB) , which means that a Blob object contains a logical pointer to the SQL  BLOB  data rather than the data itself.",
+      "A Blob object is valid for the duration of the transaction in which is was created.",
       "",
-      "Methods in the interfaces com.sun.star.sdbc.XResultSet , and com.sun.star.sdbc.XPreparedStatement , such as getBlob and setBlob allow a programmer to access the SQL BLOB. \n The Blob interface provides methods for getting the length of a SQL  BLOB  (Binary Large Object) value, for materializing a  BLOB  value on the client and for determining the position of a pattern of bytes within a  BLOB  value."
+      "Methods in the interfaces com.sun.star.sdbc.XResultSet , and com.sun.star.sdbc.XPreparedStatement , such as getBlob and setBlob allow a programmer to access the SQL BLOB.",
+      "The Blob interface provides methods for getting the length of a SQL  BLOB  (Binary Large Object) value, for materializing a  BLOB  value on the client and for determining the position of a pattern of bytes within a  BLOB  value."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1sdbc_1_1XBlob.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getBinaryStream",
+          "returns": "XInputStream",
+          "desc": [
+            "retrieves the  BLOB  designated by this Blob instance as a stream."
+          ],
+          "raises": [
+            "SQLException"
+          ],
+          "args": []
+        },
+        {
+          "name": "getBytes",
+          "returns": "typing.List[int]",
+          "desc": [
+            "returns as an array of bytes part or all of the  BLOB  value that this Blob object designates.",
+            "",
+            "The byte array contains up to length consecutive bytes starting at position pos."
+          ],
+          "raises": [
+            "SQLException"
+          ],
+          "args": [
+            [
+              "pos",
+              "object",
+              "in"
+            ],
+            [
+              "length",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "length",
+          "returns": "object",
+          "desc": [
+            "returns the number of bytes in the  BLOB  value designated by this Blob object."
+          ],
+          "raises": [
+            "SQLException"
+          ],
+          "args": []
+        },
+        {
+          "name": "position",
+          "returns": "object",
+          "desc": [
+            "determines the byte position at which the specified byte pattern begins within the  BLOB  value that this Blob object represents.",
+            "",
+            "The search for pattern begins at position start."
+          ],
+          "raises": [
+            "SQLException"
+          ],
+          "args": [
+            [
+              "pattern",
+              "typing.List[int]",
+              "in"
+            ],
+            [
+              "start",
+              "object",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "positionOfBlob",
+          "returns": "object",
+          "desc": [
+            "determines the byte position in the  BLOB  value designated by this Blob object at which pattern begins.",
+            "",
+            "The search begins at position start."
+          ],
+          "raises": [
+            "SQLException"
+          ],
+          "args": [
+            [
+              "pattern",
+              "XBlob",
+              "in"
+            ],
+            [
+              "start",
+              "object",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

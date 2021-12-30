@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:19:59+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:33+00:00",
   "name": "XWizardPage",
   "type": "interface",
   "namespace": "com.sun.star.ui.dialogs",
@@ -16,7 +16,17 @@
         "XComponent"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "...awt.x_window",
+        "XWindow"
+      ]
+    ],
+    "quote": [
+      "XWindow"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XWizardPage",
     "imports": [],
     "namespace": "com.sun.star.ui.dialogs",
@@ -26,11 +36,75 @@
     "desc": [
       "is a single page of a Wizard",
       "",
-      "**See Also**",
+      "**since**",
       "",
       "    OOo 3.3"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1ui_1_1dialogs_1_1XWizardPage.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "activatePage",
+          "returns": "None",
+          "desc": [
+            "called when the page is activated"
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "canAdvance",
+          "returns": "bool",
+          "desc": [
+            "determines whether it is allowed to travel to a later page in the wizard",
+            "",
+            "You should base this decision on the state of the page only, not on a global state of the wizard. Usually, you return FALSE here if and only if not all necessary input on the page has been provided by the user, or the provided input is not valid.",
+            "",
+            "If checked for validity is expensive, or if you prefer giving your user more detailed feedback on validity than a disabled Next button in the wizard, then move your checks to the commitPage() method."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "commitPage",
+          "returns": "bool",
+          "desc": [
+            "is called when the page is about to be left",
+            "",
+            "An implementation can veto the leave by returning FALSE here. Usually, the decision about this depends on the current state of the page."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "Reason",
+              "int",
+              "in"
+            ]
+          ]
+        }
+      ],
+      "properties": [
+        {
+          "name": "PageId",
+          "returns": "int",
+          "desc": [
+            "denotes the ID of the page.",
+            "",
+            "Within a wizard, no two pages are allowed to have the same ID."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Window",
+          "returns": "XWindow",
+          "desc": [
+            "provides read-only access to the window of the page"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
   }
 }

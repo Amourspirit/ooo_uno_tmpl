@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:20:41+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:20+00:00",
   "name": "XIndexEntrySupplier",
   "type": "interface",
   "namespace": "com.sun.star.i18n",
@@ -16,7 +16,17 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..lang.locale",
+        "Locale"
+      ]
+    ],
+    "quote": [
+      "Locale"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XIndexEntrySupplier",
     "imports": [],
     "namespace": "com.sun.star.i18n",
@@ -24,13 +34,64 @@
       "com.sun.star.uno.XInterface"
     ],
     "desc": [
-      "supplies information on index entries to generate a \\\"table of\nalphabetical index\\\" for a given locale.",
-      "",
-      "**See Also**",
-      "",
-      "    OfficeDev - Overview and Using the API - XIndexEntrySupplier OfficeDev - Implementing a New Locale - XIndexEntrySupplier"
+      "supplies information on index entries to generate a \\\"table of",
+      "alphabetical index\\\" for a given locale."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1i18n_1_1XIndexEntrySupplier.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getIndexCharacter",
+          "returns": "str",
+          "desc": [
+            "returns the capital index key for sorting a table of indexes, to a given index entry, to a given com.sun.star.lang.Locale and to a given sort algorithm.",
+            "",
+            "For example, in English locale it returns \\\"K\\\" for \\\"keyboard\\\""
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aIndexEntry",
+              "str",
+              "in"
+            ],
+            [
+              "aLocale",
+              "Locale",
+              "in"
+            ],
+            [
+              "aSortAlgorithm",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getIndexFollowPageWord",
+          "returns": "str",
+          "desc": [
+            "returns the page number word of an index entry, where one page or more pages are combined to one page number entry, for a given com.sun.star.lang.Locale.",
+            "",
+            "For example, in English locale it returns",
+            "\\\"p.\\\" for bMorePages == FALSE",
+            "\\\"pp.\\\" for bMorePages == TRUE"
+          ],
+          "raises": [],
+          "args": [
+            [
+              "bMorePages",
+              "bool",
+              "in"
+            ],
+            [
+              "aLocale",
+              "Locale",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

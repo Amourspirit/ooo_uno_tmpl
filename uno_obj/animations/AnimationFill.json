@@ -1,0 +1,104 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.9",
+  "timestamp": "2021-12-30 17:44:52+00:00",
+  "name": "AnimationFill",
+  "type": "const",
+  "namespace": "com.sun.star.animations",
+  "parser_args": {
+    "sort": false
+  },
+  "writer_args": {
+    "hex": false,
+    "flags": null
+  },
+  "data": {
+    "name": "AnimationFill",
+    "namespace": "com.sun.star.animations",
+    "url": "https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1animations_1_1AnimationFill.html",
+    "flags": false,
+    "base_class": "ConstIntBase",
+    "quote": [],
+    "typings": [],
+    "requires_typing": false,
+    "from_imports": [
+      [
+        "ooo_uno.base.const",
+        "ConstIntBase"
+      ]
+    ],
+    "from_imports_typing": [],
+    "fullname": "com.sun.star.animations.AnimationFill",
+    "desc": [
+      "This constants are used for the members fill() and fillDefault() of the an XTimeContainer."
+    ],
+    "items": [
+      {
+        "name": "DEFAULT",
+        "type": "int",
+        "value": 0,
+        "lines": [
+          "The fill behavior for the element is determined by the value of the XTiming.FillDefault attribute.",
+          "",
+          "This is the default value for the XTiming.Fill... If the application of fillDefault to an element would result in the element having a value of fill that is not allowed on that element, the element will instead have a fill value of AnimationFill.AUTO."
+        ]
+      },
+      {
+        "name": "INHERIT",
+        "type": "int",
+        "value": 0,
+        "lines": [
+          "Specifies that the value of this attribute (and of the fill behavior) are inherited from the XTiming.FillDefault value of the parent element.",
+          "",
+          "If there is no parent element, the value is AnimationFill.AUTO. This is the default value for the XTiming.FillDefault."
+        ]
+      },
+      {
+        "name": "REMOVE",
+        "type": "int",
+        "value": 1,
+        "lines": [
+          "Specifies that the element will not extend past the end of the last instance of the simple duration."
+        ]
+      },
+      {
+        "name": "FREEZE",
+        "type": "int",
+        "value": 2,
+        "lines": [
+          "Specifies that the element will extend past the end of the last instance of the simple duration by \\\"freezing\\\" the element state at that point.",
+          "",
+          "The parent time container of the element determines how long the element is frozen (as described immediately below)."
+        ]
+      },
+      {
+        "name": "HOLD",
+        "type": "int",
+        "value": 3,
+        "lines": [
+          "Setting this to \\\"hold\\\" has the same effect as setting to \\\"freeze\\\", except that the element is always frozen to extend to the end of the simple duration of the parent time container of the element (independent of the type of time container).",
+          "",
+          "For profiles that support a layered layout model (e.g., SMIL 2.0 Language Profile), held elements (elements with fill=\\\"hold\\\") will refresh their display area when a layer is added on top then later removed."
+        ]
+      },
+      {
+        "name": "TRANSITION",
+        "type": "int",
+        "value": 4,
+        "lines": [
+          "Setting this to \\\"transition\\\" has the same effect as setting to \\\"freeze\\\", except that the element is removed at the end of the transition.",
+          "",
+          "This value is only allowed on elements with media directly associated with them. If specified on any other element (e.g. a time container element in the SMIL language profile), the attribute is ignored. See the SMIL Transitions module."
+        ]
+      },
+      {
+        "name": "AUTO",
+        "type": "int",
+        "value": 5,
+        "lines": [
+          "The fill behavior for this element depends on whether the element specifies any of the attributes that define the simple or active duration:"
+        ]
+      }
+    ]
+  }
+}

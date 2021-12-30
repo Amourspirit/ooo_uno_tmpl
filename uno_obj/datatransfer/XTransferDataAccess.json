@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:20:21+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:31+00:00",
   "name": "XTransferDataAccess",
   "type": "interface",
   "namespace": "com.sun.star.datatransfer",
@@ -16,7 +16,21 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".data_flavor",
+        "DataFlavor"
+      ]
+    ],
+    "quote": [
+      "typing.List[DataFlavor]",
+      "typing.List[object]"
+    ],
+    "typings": [
+      "typing.List[DataFlavor]",
+      "typing.List[object]"
+    ],
+    "requires_typing": true,
     "name": "XTransferDataAccess",
     "imports": [],
     "namespace": "com.sun.star.datatransfer",
@@ -26,13 +40,48 @@
     "desc": [
       "This interface provides direct access to the data in all data flavors.",
       "",
-      "It can be used by the clipboard implementation to optimize data transport on flush operations.",
-      "",
-      "**See Also**",
-      "",
-      "    com.sun.star.datatransfer.XTransferable"
+      "It can be used by the clipboard implementation to optimize data transport on flush operations."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1datatransfer_1_1XTransferDataAccess.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getData",
+          "returns": "typing.List[object]",
+          "desc": [
+            "To get all the data of a sequence of DataFlavor.",
+            "",
+            "An unsupported DataFlavor will be ignored.",
+            "",
+            "For unsupported DataFlavor an empty any will be returned."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aFlavorList",
+              "typing.List[DataFlavor]",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "queryDataSize",
+          "returns": "object",
+          "desc": [
+            "To query for the summarized data size in bytes of a sequence of DataFlavor.",
+            "",
+            "An unsupported DataFlavor will be ignored."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aFlavorList",
+              "typing.List[DataFlavor]",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

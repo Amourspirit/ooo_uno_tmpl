@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:21:10+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:17+00:00",
   "name": "XLabelRanges",
   "type": "interface",
   "namespace": "com.sun.star.sheet",
@@ -16,7 +16,17 @@
         "XIndexAccess"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..table.cell_range_address",
+        "CellRangeAddress"
+      ]
+    ],
+    "quote": [
+      "CellRangeAddress"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XLabelRanges",
     "imports": [],
     "namespace": "com.sun.star.sheet",
@@ -24,13 +34,47 @@
       "com.sun.star.container.XIndexAccess"
     ],
     "desc": [
-      "provides methods to access the members of a label range collection and to insert and remove them.",
-      "",
-      "**See Also**",
-      "",
-      "    com.sun.star.sheet.LabelRanges"
+      "provides methods to access the members of a label range collection and to insert and remove them."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1sheet_1_1XLabelRanges.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "addNew",
+          "returns": "None",
+          "desc": [
+            "adds a new label range to the collection."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aLabelArea",
+              "CellRangeAddress",
+              "in"
+            ],
+            [
+              "aDataArea",
+              "CellRangeAddress",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "removeByIndex",
+          "returns": "None",
+          "desc": [
+            "removes a label range from the collection."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "nIndex",
+              "int",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

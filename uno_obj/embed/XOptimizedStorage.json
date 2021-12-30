@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:18:50+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:05+00:00",
   "name": "XOptimizedStorage",
   "type": "interface",
   "namespace": "com.sun.star.embed",
@@ -11,7 +11,34 @@
   "writer_args": {},
   "data": {
     "from_imports": [],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..io.x_stream",
+        "XStream"
+      ],
+      [
+        "..io.x_input_stream",
+        "XInputStream"
+      ],
+      [
+        ".x_optimized_storage",
+        "XOptimizedStorage"
+      ],
+      [
+        "..beans.property_value",
+        "PropertyValue"
+      ]
+    ],
+    "quote": [
+      "XStream",
+      "XOptimizedStorage",
+      "typing.List[PropertyValue]",
+      "XInputStream"
+    ],
+    "typings": [
+      "typing.List[PropertyValue]"
+    ],
+    "requires_typing": true,
     "name": "XOptimizedStorage",
     "imports": [],
     "namespace": "com.sun.star.embed",
@@ -22,6 +49,206 @@
       "PLEASE DO NOT USE IT, it might change in any time and will be deprecated soon! Another solution will be introduced as final one."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1embed_1_1XOptimizedStorage.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "attachToURL",
+          "returns": "None",
+          "desc": [
+            "allows to switch storage persistence to the provided URL.",
+            "",
+            "The caller is responsible to be sure that the file referenced by the URL contains the same contents as the stream the storage is based currently. Thus using of this method is very dangerous and should be avoided when possible. It is applicable only for root storages."
+          ],
+          "raises": [
+            "com.sun.star.embed.InvalidStorageException",
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.io.IOException",
+            "com.sun.star.embed.StorageWrappedTargetException"
+          ],
+          "args": [
+            [
+              "sURL",
+              "str",
+              "in"
+            ],
+            [
+              "bReadOnly",
+              "bool",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "copyElementDirectlyTo",
+          "returns": "None",
+          "desc": [
+            "allows to copy storage element directly, not guaranteed to work."
+          ],
+          "raises": [
+            "com.sun.star.embed.InvalidStorageException",
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.container.NoSuchElementException",
+            "com.sun.star.container.ElementExistException",
+            "com.sun.star.io.IOException",
+            "com.sun.star.embed.StorageWrappedTargetException"
+          ],
+          "args": [
+            [
+              "sSourceName",
+              "str",
+              "in"
+            ],
+            [
+              "xTargetStorage",
+              "XOptimizedStorage",
+              "in"
+            ],
+            [
+              "sTargetName",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "copyStreamElementData",
+          "returns": "None",
+          "desc": [
+            "fills the provided stream with the last flushed version of data from the child stream of the storage."
+          ],
+          "raises": [
+            "com.sun.star.embed.InvalidStorageException",
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.packages.WrongPasswordException",
+            "com.sun.star.io.IOException",
+            "com.sun.star.embed.StorageWrappedTargetException"
+          ],
+          "args": [
+            [
+              "sStreamName",
+              "str",
+              "in"
+            ],
+            [
+              "xTargetStream",
+              "XStream",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getElementPropertyValue",
+          "returns": "object",
+          "desc": [
+            "allows to get property of the child element with the specified name.",
+            "",
+            "The implementation of the method might allow to access only subset of the supported by element properties."
+          ],
+          "raises": [
+            "com.sun.star.embed.InvalidStorageException",
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.container.NoSuchElementException",
+            "com.sun.star.io.IOException",
+            "com.sun.star.beans.UnknownPropertyException",
+            "com.sun.star.beans.PropertyVetoException",
+            "com.sun.star.embed.StorageWrappedTargetException"
+          ],
+          "args": [
+            [
+              "sElementName",
+              "str",
+              "in"
+            ],
+            [
+              "sPropertyName",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "insertRawNonEncrStreamElementDirect",
+          "returns": "None",
+          "desc": [
+            "allows to insert a raw stream representing non-encrypted stream with header."
+          ],
+          "raises": [
+            "com.sun.star.embed.InvalidStorageException",
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.packages.NoRawFormatException",
+            "com.sun.star.container.ElementExistException",
+            "com.sun.star.io.IOException",
+            "com.sun.star.embed.StorageWrappedTargetException"
+          ],
+          "args": [
+            [
+              "sStreamName",
+              "str",
+              "in"
+            ],
+            [
+              "xInStream",
+              "XInputStream",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "insertStreamElementDirect",
+          "returns": "None",
+          "desc": [
+            "allows to insert a stream to the storage directly.",
+            "",
+            "The stream must stay alive till the storage is committed."
+          ],
+          "raises": [
+            "com.sun.star.embed.InvalidStorageException",
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.container.ElementExistException",
+            "com.sun.star.io.IOException",
+            "com.sun.star.embed.StorageWrappedTargetException"
+          ],
+          "args": [
+            [
+              "sStreamName",
+              "str",
+              "in"
+            ],
+            [
+              "xInStream",
+              "XInputStream",
+              "in"
+            ],
+            [
+              "aProperties",
+              "typing.List[PropertyValue]",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "writeAndAttachToStream",
+          "returns": "None",
+          "desc": [
+            "allows to switch storage persistence to the provided stream.",
+            "",
+            "The stream will be filled by the storage. If an empty reference is provided, the storage will create a temporary stream to switch to itself. It is applicable only for root storages."
+          ],
+          "raises": [
+            "com.sun.star.embed.InvalidStorageException",
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.io.IOException",
+            "com.sun.star.embed.StorageWrappedTargetException"
+          ],
+          "args": [
+            [
+              "xStream",
+              "XStream",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

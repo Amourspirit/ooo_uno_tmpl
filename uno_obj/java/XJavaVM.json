@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:16:22+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:15+00:00",
   "name": "XJavaVM",
   "type": "interface",
   "namespace": "com.sun.star.java",
@@ -17,6 +17,13 @@
       ]
     ],
     "from_imports_typing": [],
+    "quote": [
+      "typing.List[int]"
+    ],
+    "typings": [
+      "typing.List[int]"
+    ],
+    "requires_typing": true,
     "name": "XJavaVM",
     "imports": [],
     "namespace": "com.sun.star.java",
@@ -26,11 +33,59 @@
     "desc": [
       "must be implemented by the user of the XJavaVM.",
       "",
-      "**See Also**",
+      ".. deprecated::",
       "",
-      "    A UNO interface seems to be at the wrong abstraction level for this functionality (also, the C++ classes jvmaccess.VirtualMachine and jvmaccess.UnoVirtualMachine used by com.sun.star.java.XJavaVM.getJavaVM() are not part of the public C++ UNO runtime API). This should probably be replaced by an appropriate C/C++ API."
+      "    Interface is deprecated."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1java_1_1XJavaVM.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getJavaVM",
+          "returns": "object",
+          "desc": [
+            "returns the address of the Java Virtual Machine.",
+            "",
+            "If the VM is not already instantiated, it will be now.",
+            "",
+            "If the processID is a normal 16-byte ID, the returned any contains a JNI JavaVM pointer as a long or hyper integer (depending on the platform). If the processID does not match the current process, or if the VM cannot be instantiated for whatever reason, a VOID any is returned.",
+            "",
+            "If the processID has an additional 17th byte of value\u00a00, the returned any contains a non\u2013reference-counted pointer to a (reference-counted) instance of the C++ jvmaccess.VirtualMachine class, always represented as a hyper integer. The pointer is guaranteed to be valid as long as the reference to this com.sun.star.java.XJavaVM is valid (but the pointer should be converted into a reference-counted reference as soon as possible). Again, if the first 16 bytes of the processID do not match the current process, or if the VM cannot be instantiated for whatever reason, a VOID any is returned.",
+            "",
+            "If the processID has an additional 17th byte of value\u00a01, the returned any contains a non\u2013reference-counted pointer to a (reference-counted) instance of the C++ jvmaccess.UnoVirtualMachine class, always represented as a hyper integer. The pointer is guaranteed to be valid as long as the reference to this com.sun.star.java.XJavaVM is valid. Again, if the first 16 bytes of the processID do not match the current process, or if the VM cannot be instantiated for whatever reason, a VOID any is returned.",
+            "",
+            "The first form (returning a JNI JavaVM pointer) is mainly for backwards compatibility, new code should use the second form (returning a pointer to a jvmaccess.VirtualMachine) if it does not want to use the Java UNO environment, and it should use the third form (returning a pointer to a jvmaccess.UnoVirtualMachine) if it wants to use the Java UNO environment. For example, one advantage of using jvmaccess.VirtualMachine instead of the raw JavaVM pointer is that whenever you attach a native thread to the Java virtual machine, that thread's context ClassLoader (see java.lang.Thread.getContextClassLoader) will automatically be set to a meaningful value."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "processID",
+              "typing.List[int]",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "isVMEnabled",
+          "returns": "bool",
+          "desc": [
+            "Returns TRUE if the VM is enabled.",
+            "",
+            "It is only possible to get the VM, if this method return 0."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "isVMStarted",
+          "returns": "bool",
+          "desc": [
+            "returns TRUE if the VM is started successfully, otherwise FALSE."
+          ],
+          "raises": [],
+          "args": []
+        }
+      ]
+    }
   }
 }

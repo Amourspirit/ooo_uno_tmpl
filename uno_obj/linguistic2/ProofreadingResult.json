@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 18:23:14+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-28 11:30:58+00:00",
   "type": "struct",
   "name": "ProofreadingResult",
   "namespace": "com.sun.star.linguistic2",
@@ -10,10 +10,24 @@
   },
   "writer_args": {
     "sort": true,
-    "auto_import": true
+    "auto_import": true,
+    "dynamic_struct": false
   },
   "data": {
     "name": "ProofreadingResult",
+    "namespace": "com.sun.star.linguistic2",
+    "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1linguistic2_1_1ProofreadingResult.html",
+    "quote": [
+      "typing.List[PropertyValue]",
+      "typing.List[SingleProofreadingError]",
+      "Locale",
+      "XProofreader",
+      "XFlatParagraph"
+    ],
+    "typings": [
+      "typing.List[PropertyValue]",
+      "typing.List[SingleProofreadingError]"
+    ],
     "fullname": "com.sun.star.linguistic2.ProofreadingResult",
     "desc": [
       "holds the results from proofreading a sentence.",
@@ -22,31 +36,32 @@
       "",
       "    OOo 3.0.1"
     ],
-    "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1linguistic2_1_1ProofreadingResult.html",
-    "namespace": "com.sun.star.linguistic2",
+    "extends": [],
+    "imports": [],
     "auto_imports": [
       [
         "..beans.property_value",
         "PropertyValue"
       ],
       [
-        "..text.x_flat_paragraph",
-        "XFlatParagraph"
+        ".single_proofreading_error",
+        "SingleProofreadingError"
       ],
       [
-        "..lang.locale",
-        "Locale"
+        "..text.x_flat_paragraph",
+        "XFlatParagraph"
       ],
       [
         ".x_proofreader",
         "XProofreader"
       ],
       [
-        ".single_proofreading_error",
-        "SingleProofreadingError"
+        "..lang.locale",
+        "Locale"
       ]
     ],
-    "imports": [],
+    "from_imports": [],
+    "requires_typing": true,
     "items": [
       {
         "name": "aDocumentIdentifier",
@@ -56,19 +71,19 @@
       },
       {
         "name": "aErrors",
-        "type": "'typing.List[SingleProofreadingError]'",
+        "type": "typing.List[SingleProofreadingError]",
         "orig_type": "sequence< com.sun.star.linguistic2.SingleProofreadingError >",
         "lines": []
       },
       {
         "name": "aLocale",
-        "type": "'Locale'",
+        "type": "Locale",
         "orig_type": "com.sun.star.lang.Locale",
         "lines": []
       },
       {
         "name": "aProperties",
-        "type": "'typing.List[PropertyValue]'",
+        "type": "typing.List[PropertyValue]",
         "orig_type": "sequence< com.sun.star.beans.PropertyValue >",
         "lines": []
       },
@@ -98,13 +113,13 @@
       },
       {
         "name": "xFlatParagraph",
-        "type": "'XFlatParagraph'",
+        "type": "XFlatParagraph",
         "orig_type": "com.sun.star.text.XFlatParagraph",
         "lines": []
       },
       {
         "name": "xProofreader",
-        "type": "'XProofreader'",
+        "type": "XProofreader",
         "orig_type": "com.sun.star.linguistic2.XProofreader",
         "lines": []
       }

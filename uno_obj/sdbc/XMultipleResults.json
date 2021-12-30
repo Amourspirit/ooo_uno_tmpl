@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:19:42+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:28+00:00",
   "name": "XMultipleResults",
   "type": "interface",
   "namespace": "com.sun.star.sdbc",
@@ -16,7 +16,17 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_result_set",
+        "XResultSet"
+      ]
+    ],
+    "quote": [
+      "XResultSet"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XMultipleResults",
     "imports": [],
     "namespace": "com.sun.star.sdbc",
@@ -26,13 +36,53 @@
     "desc": [
       "is used for inspecting multiple results produced by the execution of a SQL statement.",
       "",
-      "Under some (uncommon) situations a single SQL statement may return multiple result sets and/or update counts. Normally you can ignore this unless you are (1) executing a stored procedure that you know may return multiple results or (2) you are dynamically executing an unknown SQL string. The methods com.sun.star.sdbc.XMultipleResults.getMoreResults() , com.sun.star.sdbc.XMultipleResults.getResultSet() and com.sun.star.sdbc.XMultipleResults.getUpdateCount() let you navigate through multiple results.",
-      "",
-      "**See Also**",
-      "",
-      "    com.sun.star.sdbc.XStatement"
+      "Under some (uncommon) situations a single SQL statement may return multiple result sets and/or update counts. Normally you can ignore this unless you are (1) executing a stored procedure that you know may return multiple results or (2) you are dynamically executing an unknown SQL string. The methods com.sun.star.sdbc.XMultipleResults.getMoreResults() , com.sun.star.sdbc.XMultipleResults.getResultSet() and com.sun.star.sdbc.XMultipleResults.getUpdateCount() let you navigate through multiple results."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1sdbc_1_1XMultipleResults.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getMoreResults",
+          "returns": "bool",
+          "desc": [
+            "moves to a Statement's next result.",
+            "",
+            "It returns TRUE if this result is a ResultSet. This method also implicitly closes any current ResultSet obtained with getResultSet.",
+            "",
+            "There are no more results when (!getMoreResults() &amp;&amp; getUpdateCount() == -1)."
+          ],
+          "raises": [
+            "SQLException"
+          ],
+          "args": []
+        },
+        {
+          "name": "getResultSet",
+          "returns": "XResultSet",
+          "desc": [
+            "returns the current result as a com.sun.star.sdbc.ResultSet object.",
+            "",
+            "This method should be called only once per result."
+          ],
+          "raises": [
+            "SQLException"
+          ],
+          "args": []
+        },
+        {
+          "name": "getUpdateCount",
+          "returns": "int",
+          "desc": [
+            "returns the current result as an update count.",
+            "",
+            "If the result is a ResultSet or there are no more results, -1 is returned. This method should be called only once per result."
+          ],
+          "raises": [
+            "SQLException"
+          ],
+          "args": []
+        }
+      ]
+    }
   }
 }

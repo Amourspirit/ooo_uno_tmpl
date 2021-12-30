@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:21:34+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:15+00:00",
   "name": "XSlidePreviewCache",
   "type": "interface",
   "namespace": "com.sun.star.drawing",
@@ -11,7 +11,42 @@
   "writer_args": {},
   "data": {
     "from_imports": [],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..geometry.integer_size2_d",
+        "IntegerSize2D"
+      ],
+      [
+        "..rendering.x_bitmap",
+        "XBitmap"
+      ],
+      [
+        "..rendering.x_canvas",
+        "XCanvas"
+      ],
+      [
+        ".x_slide_preview_cache_listener",
+        "XSlidePreviewCacheListener"
+      ],
+      [
+        "..uno.x_interface",
+        "XInterface"
+      ],
+      [
+        "..container.x_index_access",
+        "XIndexAccess"
+      ]
+    ],
+    "quote": [
+      "XIndexAccess",
+      "IntegerSize2D",
+      "XCanvas",
+      "XInterface",
+      "XBitmap",
+      "XSlidePreviewCacheListener"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XSlidePreviewCache",
     "imports": [],
     "namespace": "com.sun.star.drawing",
@@ -24,6 +59,144 @@
       "Slides are referenced via their index in an XIndexAccess container in order to allow multiple references to a single slide (custom presentations)."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1drawing_1_1XSlidePreviewCache.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "addPreviewCreationNotifyListener",
+          "returns": "None",
+          "desc": [
+            "Register a listener that is called when a preview has been created asynchronously."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xListener",
+              "XSlidePreviewCacheListener",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getSlidePreview",
+          "returns": "XBitmap",
+          "desc": [
+            "Return a preview for the given slide index.",
+            "",
+            "The returned bitmap may be the requested preview, a preview of the preview, i.e. a scaled up or down version, or an empty reference when the preview is not yet present.",
+            "",
+            "This call may lead to the asynchronous creation of the requested preview. In that case all registered listeners are notified when the preview has been created."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "nSlideIndex",
+              "int",
+              "in"
+            ],
+            [
+              "xCanvas",
+              "XCanvas",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "pause",
+          "returns": "None",
+          "desc": [
+            "Stop the asynchronous creation of previews temporarily.",
+            "",
+            "Call resume() to restart it."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "removePreviewCreationNotifyListener",
+          "returns": "None",
+          "desc": [
+            "Remove a previously registered listener for preview creations."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xListener",
+              "XSlidePreviewCacheListener",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "resume",
+          "returns": "None",
+          "desc": [
+            "Resume the asynchronous creation of slide previews."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "setDocumentSlides",
+          "returns": "None",
+          "desc": [
+            "Set the set of slides for which the cache will provide the previews.",
+            "",
+            "All slides in the given XIndexAccess are required to come from the given model."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xSlides",
+              "XIndexAccess",
+              "in"
+            ],
+            [
+              "xDocument",
+              "XInterface",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setPreviewSize",
+          "returns": "None",
+          "desc": [
+            "Define the size of the previews that are managed by the called cache."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aSize",
+              "IntegerSize2D",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setVisibleRange",
+          "returns": "None",
+          "desc": [
+            "Define which slides are currently visible on the screen and which are not.",
+            "",
+            "This information is used for give preview creation for visible slides a higher priority than for those slides that are not visible."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "nFirstVisibleSlideIndex",
+              "int",
+              "in"
+            ],
+            [
+              "nLastVisibleSlideIndex",
+              "int",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

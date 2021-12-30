@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:20:17+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:20+00:00",
   "name": "XPresentation2",
   "type": "interface",
   "namespace": "com.sun.star.presentation",
@@ -12,33 +12,85 @@
   "data": {
     "from_imports": [
       [
-        "......x_presentation",
-        "XPresentation"
-      ],
-      [
         "..beans.x_property_set",
         "XPropertySet"
+      ],
+      [
+        ".x_presentation",
+        "XPresentation"
       ]
     ],
-    "from_imports_typing": [],
-    "name": "XPresentation2",
-    "imports": [
-      "XPresentation",
-      "com.sun.star.beans.XPropertySet"
+    "from_imports_typing": [
+      [
+        ".x_slide_show_controller",
+        "XSlideShowController"
+      ],
+      [
+        "..beans.property_value",
+        "PropertyValue"
+      ]
     ],
+    "quote": [
+      "typing.List[PropertyValue]",
+      "XSlideShowController"
+    ],
+    "typings": [
+      "typing.List[PropertyValue]"
+    ],
+    "requires_typing": true,
+    "name": "XPresentation2",
+    "imports": [],
     "namespace": "com.sun.star.presentation",
     "extends": [
-      "XPresentation",
+      "com.sun.star.presentation.XPresentation",
       "com.sun.star.beans.XPropertySet"
     ],
     "desc": [
       "enhances the XPresentation interface to give access to a XSlideShowController and to start a presentation with arguments.",
       "",
-      "**See Also**",
+      "**since**",
       "",
       "    OOo 3.0"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1presentation_1_1XPresentation2.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getController",
+          "returns": "XSlideShowController",
+          "desc": [
+            "if the slide show is running, this returns a controller object to control the running slide show."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "isRunning",
+          "returns": "bool",
+          "desc": [
+            "returns true if the slide show is currently running"
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "startWithArguments",
+          "returns": "None",
+          "desc": [
+            "start the slide show with the given arguments.",
+            "",
+            "All arguments override the values from Presentation."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "Arguments",
+              "typing.List[PropertyValue]",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

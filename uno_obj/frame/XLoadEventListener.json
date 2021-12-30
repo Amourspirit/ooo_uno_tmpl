@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:21:50+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:38+00:00",
   "name": "XLoadEventListener",
   "type": "interface",
   "namespace": "com.sun.star.frame",
@@ -16,7 +16,17 @@
         "XEventListener"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_frame_loader",
+        "XFrameLoader"
+      ]
+    ],
+    "quote": [
+      "XFrameLoader"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XLoadEventListener",
     "imports": [],
     "namespace": "com.sun.star.frame",
@@ -24,13 +34,42 @@
       "com.sun.star.lang.XEventListener"
     ],
     "desc": [
-      "is used to receive callbacks from an asynchronous frame loader.",
-      "",
-      "**See Also**",
-      "",
-      "    XFrameLoader"
+      "is used to receive callbacks from an asynchronous frame loader."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1frame_1_1XLoadEventListener.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "loadCancelled",
+          "returns": "None",
+          "desc": [
+            "is called when a frame load is canceled or failed."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "Loader",
+              "XFrameLoader",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "loadFinished",
+          "returns": "None",
+          "desc": [
+            "is called when a new component is loaded into a frame successfully."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "Loader",
+              "XFrameLoader",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

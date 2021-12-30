@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:20:18+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:20+00:00",
   "name": "XSlideShowListener",
   "type": "interface",
   "namespace": "com.sun.star.presentation",
@@ -17,6 +17,9 @@
       ]
     ],
     "from_imports_typing": [],
+    "quote": [],
+    "typings": [],
+    "requires_typing": false,
     "name": "XSlideShowListener",
     "imports": [],
     "namespace": "com.sun.star.presentation",
@@ -26,11 +29,91 @@
     "desc": [
       "Listener interface to receive global slide show events.",
       "",
-      "**See Also**",
+      "**since**",
       "",
-      "    XShapeEventListener"
+      "    OOo 3.0"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1presentation_1_1XSlideShowListener.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "hyperLinkClicked",
+          "returns": "None",
+          "desc": [
+            "Notifies that a hyperlink has been clicked."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "hyperLink",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "paused",
+          "returns": "None",
+          "desc": [
+            "Notify that the slide show is paused."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "resumed",
+          "returns": "None",
+          "desc": [
+            "Notify that the slide show is resumed from a paused state."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "slideAnimationsEnded",
+          "returns": "None",
+          "desc": [
+            "Notify that the last animation from the main sequence of the current slide has ended."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "slideEnded",
+          "returns": "None",
+          "desc": [
+            "Notify that the current slide has ended, e.g.",
+            "",
+            "the user has clicked on the slide. Calling displaySlide() twice will not issue this event."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "reverse",
+              "bool",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "slideTransitionEnded",
+          "returns": "None",
+          "desc": [
+            "Notify that the slide transition of the current slide ended."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "slideTransitionStarted",
+          "returns": "None",
+          "desc": [
+            "Notify that a new slide starts to become visible."
+          ],
+          "raises": [],
+          "args": []
+        }
+      ]
+    }
   }
 }

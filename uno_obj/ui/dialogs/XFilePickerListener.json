@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:19:57+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:32+00:00",
   "name": "XFilePickerListener",
   "type": "interface",
   "namespace": "com.sun.star.ui.dialogs",
@@ -16,7 +16,17 @@
         "XEventListener"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".file_picker_event",
+        "FilePickerEvent"
+      ]
+    ],
+    "quote": [
+      "FilePickerEvent"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XFilePickerListener",
     "imports": [],
     "namespace": "com.sun.star.ui.dialogs",
@@ -29,6 +39,80 @@
       "The XFilePickerListener interface must be implemented by the clients of the FilePicker service which need to be informed about events while the FilePicker service is displayed."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1ui_1_1dialogs_1_1XFilePickerListener.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "controlStateChanged",
+          "returns": "None",
+          "desc": [
+            "A client receives this event if the state of a control within the FilePicker service dialog changes."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aEvent",
+              "FilePickerEvent",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "dialogSizeChanged",
+          "returns": "None",
+          "desc": [
+            "A client receives this event if the size of the FilePicker dialog has changed.",
+            "",
+            "If the FilePicker dialog contains a preview the client may ask for the new dimension of the preview area."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "directoryChanged",
+          "returns": "None",
+          "desc": [
+            "A client receives this event if the directory selection within the FilePicker dialog changes."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aEvent",
+              "FilePickerEvent",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "fileSelectionChanged",
+          "returns": "None",
+          "desc": [
+            "A client receives this event if the file selection within the FilePicker service dialog changes."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aEvent",
+              "FilePickerEvent",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "helpRequested",
+          "returns": "str",
+          "desc": [
+            "A client receives this event if the F1 key or the help button was pressed."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aEvent",
+              "FilePickerEvent",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

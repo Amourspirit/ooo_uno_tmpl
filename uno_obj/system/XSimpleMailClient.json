@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:16:35+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:09+00:00",
   "name": "XSimpleMailClient",
   "type": "interface",
   "namespace": "com.sun.star.system",
@@ -16,7 +16,17 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_simple_mail_message",
+        "XSimpleMailMessage"
+      ]
+    ],
+    "quote": [
+      "XSimpleMailMessage"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XSimpleMailClient",
     "imports": [],
     "namespace": "com.sun.star.system",
@@ -27,6 +37,43 @@
       "Specifies an interface for creating and sending email messages."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1system_1_1XSimpleMailClient.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "createSimpleMailMessage",
+          "returns": "XSimpleMailMessage",
+          "desc": [
+            "Create a simple mail message object that implements the interface XSimpleMailMessage."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "sendSimpleMailMessage",
+          "returns": "None",
+          "desc": [
+            "Sends a given simple mail message object that implements the interface XSimpleMailMessage.",
+            "",
+            "The Message member of the exception may contain an error description."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.uno.Exception"
+          ],
+          "args": [
+            [
+              "xSimpleMailMessage",
+              "XSimpleMailMessage",
+              "in"
+            ],
+            [
+              "aFlag",
+              "int",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

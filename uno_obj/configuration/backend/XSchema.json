@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:17:10+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:06+00:00",
   "name": "XSchema",
   "type": "interface",
   "namespace": "com.sun.star.configuration.backend",
@@ -16,7 +16,17 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_schema_handler",
+        "XSchemaHandler"
+      ]
+    ],
+    "quote": [
+      "XSchemaHandler"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XSchema",
     "imports": [],
     "namespace": "com.sun.star.configuration.backend",
@@ -26,11 +36,71 @@
     "desc": [
       "Handles access to the elements of a component schema, i.e its templates and its component definition.",
       "",
-      "**See Also**",
+      "**since**",
       "",
       "    OOo 1.1.2"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1configuration_1_1backend_1_1XSchema.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "readComponent",
+          "returns": "None",
+          "desc": [
+            "Describes only the component definition to a XSchemaHandler."
+          ],
+          "raises": [
+            "com.sun.star.lang.NullPointerException",
+            "com.sun.star.lang.WrappedTargetException",
+            "MalformedDataException"
+          ],
+          "args": [
+            [
+              "aHandler",
+              "XSchemaHandler",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "readSchema",
+          "returns": "None",
+          "desc": [
+            "Describes the full schema (templates + component) to a XSchemaHandler."
+          ],
+          "raises": [
+            "com.sun.star.lang.NullPointerException",
+            "com.sun.star.lang.WrappedTargetException",
+            "MalformedDataException"
+          ],
+          "args": [
+            [
+              "aHandler",
+              "XSchemaHandler",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "readTemplates",
+          "returns": "None",
+          "desc": [
+            "Describes the component templates to a XSchemaHandler."
+          ],
+          "raises": [
+            "com.sun.star.lang.NullPointerException",
+            "com.sun.star.lang.WrappedTargetException",
+            "MalformedDataException"
+          ],
+          "args": [
+            [
+              "aHandler",
+              "XSchemaHandler",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

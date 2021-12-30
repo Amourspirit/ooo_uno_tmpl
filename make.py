@@ -15,7 +15,13 @@ from enum import IntEnum
 from pathlib import Path
 from logger.log_handle import get_logger
 from parser import __version__, JSON_ID
-from verr import Version
+from config import AppConfig, read_config
+from parser.json_parser.interface_parser import parse as parse_interface
+from parser.json_parser.struct_parser import parse as parse_struct
+from parser.json_parser.enum_parser import parse as parse_enm
+from parser.json_parser.exception_parser import parse as parse_ex
+from parser.json_parser.typedef_parser import parse as parse_typedef
+from parser.json_parser.const_parser import parse as parse_const
 logger = None
 
 os.environ['project_root'] = str(Path(__file__).parent)
@@ -41,18 +47,24 @@ class CompareFile:
         return CompareEnum.Equal
 
 class BaseCompile:
-    def __init__(self) -> None:
+    def __init__(self, config:AppConfig) -> None:
         self._root_dir = Path(__file__).parent
         self._json_parser_path = Path(self._root_dir, 'parser', 'json_parser')
+        self._config = config
     
-    def get_module_link_files(self) -> List[str]:
-        dirname = str(self._root_dir / 'uno_obj')
+    def get_module_link_files(self) -> Set[str]:
+        dirname = str(self._root_dir / self._config.uno_base_dir)
         # https://stackoverflow.com/questions/20638040/glob-exclude-pattern
-        # exclude files that start with _
-        pattern = dirname + '/**/module_links.json'
-        files = glob.glob(pattern, recursive=True)
-        # print('files', files)
-        return files
+        # root module_links.json needs to be remove from listing.
+        # it will not need any processing here.
+        # using sets and deduct seem the simplist way.
+        pattern = dirname + f'/**/{self._config.module_links_file}'
+        root_json = Path(dirname, self._config.module_links_file)
+        files = set(glob.glob(pattern, recursive=True))
+        ex_files = set()
+        ex_files.add(str(root_json))
+        # deduct sets:
+        return files - ex_files
     
     @property
     def root_dir(self) -> Path:
@@ -64,14 +76,18 @@ class BaseCompile:
         """Gets json_parser_path value"""
         return self._json_parser_path
 
-
 class CompileEnumLinks(BaseCompile):
-    def __init__(self) -> None:
-        super().__init__()
-        self._processer = str(Path(self.json_parser_path, 'enum_parser.py'))
+    def __init__(self, config: AppConfig, use_subprocess: bool) -> None:
+        super().__init__(config=config)
+        self._do_sub = use_subprocess
+        if self._do_sub:
+            self._processer = str(
+                Path(self.json_parser_path, 'enum_parser.py'))
+        else:
+            self._processer = ''
         self._process_files()
 
-    def _subprocess(self, file:str):
+    def _subprocess(self, file: str):
         cmd_str = f"{self._processer} -f {file}"
         cmd = [sys.executable] + cmd_str.split()
         logger.info("CompileEnumLinks: Processing enums in file: %s", file)
@@ -81,16 +97,97 @@ class CompileEnumLinks(BaseCompile):
         if res.stderr:
             logger.error(res.stderr)
 
+    def _process_direct(self, file: str):
+        logger.info(
+            "CompileEnumLinks: Processing interface in file: %s", file)
+        parse_enm('t', 'j', f=file)
+
     def _process_files(self):
         link_files = self.get_module_link_files()
         for file in link_files:
-            self._subprocess(file)
+            if self._do_sub:
+                self._subprocess(file)
+            else:
+                self._process_direct(file)
+
+
+class CompileConstLinks(BaseCompile):
+    def __init__(self, config: AppConfig, use_subprocess: bool) -> None:
+        super().__init__(config=config)
+        self._do_sub = use_subprocess
+        if self._do_sub:
+            self._processer = str(
+                Path(self.json_parser_path, 'const_parser.py'))
+        else:
+            self._processer = ''
+        self._process_files()
+
+    def _subprocess(self, file: str):
+        cmd_str = f"{self._processer} -f {file}"
+        cmd = [sys.executable] + cmd_str.split()
+        logger.info("CompileConstLinks: Processing enums in file: %s", file)
+        res = subprocess.run(cmd)
+        if res.stdout:
+            logger.info(res.stdout)
+        if res.stderr:
+            logger.error(res.stderr)
+
+    def _process_direct(self, file: str):
+        logger.info(
+            "CompileConstLinks: Processing interface in file: %s", file)
+        parse_const('t', 'j', f=file)
+
+    def _process_files(self):
+        link_files = self.get_module_link_files()
+        for file in link_files:
+            if self._do_sub:
+                self._subprocess(file)
+            else:
+                self._process_direct(file)
+
+
+class CompileTypeDefLinks(BaseCompile):
+    def __init__(self, config: AppConfig, use_subprocess: bool) -> None:
+        super().__init__(config=config)
+        self._do_sub = use_subprocess
+        if self._do_sub:
+            self._processer = str(Path(self.json_parser_path, 'typedef_parser.py'))
+        else:
+            self._processer = ''
+        self._process_files()
+
+    def _subprocess(self, file:str):
+        cmd_str = f"{self._processer} -f {file}"
+        cmd = [sys.executable] + cmd_str.split()
+        logger.info("CompileTypeDefLinks: Processing enums in file: %s", file)
+        res = subprocess.run(cmd)
+        if res.stdout:
+            logger.info(res.stdout)
+        if res.stderr:
+            logger.error(res.stderr)
+
+    def _process_direct(self, file: str):
+        logger.info(
+            "CompileTypeDefLinks: Processing interface in file: %s", file)
+        parse_typedef('t', 'j', f=file)
+
+    def _process_files(self):
+        link_files = self.get_module_link_files()
+        for file in link_files:
+            if self._do_sub:
+                self._subprocess(file)
+            else:
+                self._process_direct(file)
 
 
 class CompileStructLinks(BaseCompile):
-    def __init__(self) -> None:
-        super().__init__()
-        self._processer = str(Path(self.json_parser_path, 'struct_parser.py'))
+    def __init__(self, config: AppConfig, use_subprocess: bool) -> None:
+        super().__init__(config=config)
+        self._do_sub = use_subprocess
+        if self._do_sub:
+            self._processer = str(Path(self.json_parser_path, 'struct_parser.py'))
+        else:
+            self._processer = ''
         self._process_files()
 
     def _subprocess(self, file: str):
@@ -103,34 +200,88 @@ class CompileStructLinks(BaseCompile):
         if res.stderr:
             logger.error(res.stderr)
 
+    def _process_direct(self, file: str):
+        logger.info(
+            "CompileInterfaceLinks: Processing interface in file: %s", file)
+        parse_struct('t', 'j', f=file)
+
     def _process_files(self):
         link_files = self.get_module_link_files()
         for file in link_files:
-            self._subprocess(file)
+            if self._do_sub:
+                self._subprocess(file)
+            else:
+                self._process_direct(file)
 
 class CompileInterfaceLinks(BaseCompile):
 
-    def __init__(self) -> None:
-        super().__init__()
-        self._processer = str(Path(self.json_parser_path, 'interface_parser.py'))
+    def __init__(self, config: AppConfig, use_subprocess: bool) -> None:
+        super().__init__(config=config)
+        self._do_sub = use_subprocess
+        if self._do_sub:
+            self._processer = str(Path(self.json_parser_path, 'interface_parser.py'))
+        else:
+            self._processer = ''
         self._process_files()
 
     def _subprocess(self, file: str):
         cmd_str = f"{self._processer} -f {file}"
         cmd = [sys.executable] + cmd_str.split()
-        logger.info("CompileStructLinks: Processing interface in file: %s", file)
+        logger.info(
+            "CompileInterfaceLinks: Processing interface in file: %s", file)
         res = subprocess.run(cmd)
         if res.stdout:
             logger.info(res.stdout)
         if res.stderr:
             logger.error(res.stderr)
 
+    def _process_direct(self, file: str):
+        logger.info(
+            "CompileInterfaceLinks: Processing interface in file: %s", file)
+        parse_interface('t', 'j', f=file)
+
     def _process_files(self):
         link_files = self.get_module_link_files()
         for file in link_files:
-            self._subprocess(file)
+            if self._do_sub:
+                self._subprocess(file)
+            else:
+                self._process_direct(file)
 
+class CompileExLinks(BaseCompile):
+    def __init__(self, config: AppConfig, use_subprocess: bool) -> None:
+        super().__init__(config=config)
+        self._do_sub = use_subprocess
+        if self._do_sub:
+            self._processer = str(
+                Path(self.json_parser_path, 'exception_parser.py'))
+        else:
+            self._processer = ''
+        self._process_files()
 
+    def _subprocess(self, file: str):
+        cmd_str = f"{self._processer} -f {file}"
+        cmd = [sys.executable] + cmd_str.split()
+        logger.info(
+            "CompileExLinks: Processing interface in file: %s", file)
+        res = subprocess.run(cmd)
+        if res.stdout:
+            logger.info(res.stdout)
+        if res.stderr:
+            logger.error(res.stderr)
+
+    def _process_direct(self, file: str):
+        logger.info(
+            "CompileExLinks: Processing interface in file: %s", file)
+        parse_ex('t', 'j', f=file)
+
+    def _process_files(self):
+        link_files = self.get_module_link_files()
+        for file in link_files:
+            if self._do_sub:
+                self._subprocess(file)
+            else:
+                self._process_direct(file)
 class Make:
     def __init__(self, **kwargs) -> None:
         self._clean = bool(kwargs.get('clean', False))
@@ -320,12 +471,33 @@ def _main():
 
 def main():
     global logger
-
+    config = read_config('./config.json')
     parser = argparse.ArgumentParser(description='make')
     subparser = parser.add_subparsers(dest='command')
+    ex_parser = subparser.add_parser(name='ex')
     enum_parser = subparser.add_parser(name='enum')
+    const_parser = subparser.add_parser(name='const')
     struct_parser = subparser.add_parser(name='struct')
     interface_parser = subparser.add_parser(name='interface')
+    typedef_parser = subparser.add_parser(name='typedef')
+    # region ex args
+    ex_parser.add_argument(
+        '-a', '--all',
+        help='Compile all exceptions recursivly',
+        action='store_true',
+        dest='ex_all',
+        default=False
+    )
+    ex_parser.add_argument(
+        '-u', '--run-as-cmdline',
+        help='Run as command line suprocess. Default False',
+        action='store_true',
+        dest='cmd_line_process',
+        default=False
+    )
+    # endregion ex args
+
+    # region enum args
     enum_parser.add_argument(
         '-a', '--all',
         help='Compile all enums recursivly',
@@ -333,6 +505,33 @@ def main():
         dest='enum_all',
         default=False
     )
+    enum_parser.add_argument(
+        '-u', '--run-as-cmdline',
+        help='Run as command line suprocess. Default False',
+        action='store_true',
+        dest='cmd_line_process',
+        default=False
+    )
+    # endregion enum args
+
+    # region const args
+    const_parser.add_argument(
+        '-a', '--all',
+        help='Compile all constants recursivly',
+        action='store_true',
+        dest='const_all',
+        default=False
+    )
+    const_parser.add_argument(
+        '-u', '--run-as-cmdline',
+        help='Run as command line suprocess. Default False',
+        action='store_true',
+        dest='cmd_line_process',
+        default=False
+    )
+    # endregion const args
+
+    # region struct args
     struct_parser.add_argument(
         '-a', '--all',
         help='Compile all struct recursivly',
@@ -340,6 +539,16 @@ def main():
         dest='struct_all',
         default=False
     )
+    struct_parser.add_argument(
+        '-u', '--run-as-cmdline',
+        help='Run as command line suprocess. Default False',
+        action='store_true',
+        dest='cmd_line_process',
+        default=False
+    )
+    # endregion struct args
+
+    # region interface args
     interface_parser.add_argument(
         '-a', '--all',
         help='Compile all interface recursivly',
@@ -347,7 +556,35 @@ def main():
         dest='interface_all',
         default=False
     )
+    interface_parser.add_argument(
+        '-u', '--run-as-cmdline',
+        help='Run as command line suprocess. Default False',
+        action='store_true',
+        dest='cmd_line_process',
+        default=False
+    )
+
+    # endregion interface args
+
+    # region typedef args
+    typedef_parser.add_argument(
+        '-a', '--all',
+        help='Compile all struct recursivly',
+        action='store_true',
+        dest='typedef_all',
+        default=False
+    )
+    typedef_parser.add_argument(
+        '-u', '--run-as-cmdline',
+        help='Run as command line suprocess. Default False',
+        action='store_true',
+        dest='cmd_line_process',
+        default=False
+    )
+    # endregion typedef args
+
     make_parser = subparser.add_parser(name='make')
+    # region make args
     make_parser.add_argument(
         '-f', '--force-compile',
         help='Force Compile of templates',
@@ -360,7 +597,8 @@ def main():
         action='store_true',
         dest='clean_scratch',
         default=False)
-    # region Dummy Args for Logging
+    # endregion make args
+
     parser.add_argument(
         '-v', '--verbose',
         help='verbose logging',
@@ -374,7 +612,6 @@ def main():
         dest='log_file',
         type=str,
         default=None)
-    # endregion Dummy Args for Logging
     args = parser.parse_args()
     if logger is None:
         log_args = {}
@@ -392,15 +629,29 @@ def main():
             make = Make(force_compile=args.force_compile, clean=args.clean_scratch)
         except Exception as e:
             logger.error(e)
+    if args.command == 'ex':
+        if args.ex_all:
+            CompileExLinks(config=config, use_subprocess=args.cmd_line_process)
     if args.command == 'enum':
         if args.enum_all:
-            CompileEnumLinks()
+            CompileEnumLinks(
+                config=config, use_subprocess=args.cmd_line_process)
+    if args.command == 'const':
+        if args.const_all:
+            CompileConstLinks(
+                config=config, use_subprocess=args.cmd_line_process)
     if args.command == 'struct':
         if args.struct_all:
-            CompileStructLinks()
+            CompileStructLinks(
+                config=config, use_subprocess=args.cmd_line_process)
     if args.command == 'interface':
         if args.interface_all:
-            CompileInterfaceLinks()
+            CompileInterfaceLinks(
+                config=config, use_subprocess=args.cmd_line_process)
+    if args.command == 'typedef':
+        if args.typedef_all:
+            CompileTypeDefLinks(
+                config=config, use_subprocess=args.cmd_line_process)
     logger.info('Finished!')
 
 

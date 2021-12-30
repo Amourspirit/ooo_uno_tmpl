@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 18:23:27+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-28 11:31:02+00:00",
   "type": "struct",
   "name": "RenderState",
   "namespace": "com.sun.star.rendering",
@@ -10,10 +10,20 @@
   },
   "writer_args": {
     "sort": true,
-    "auto_import": true
+    "auto_import": true,
+    "dynamic_struct": false
   },
   "data": {
     "name": "RenderState",
+    "namespace": "com.sun.star.rendering",
+    "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1rendering_1_1RenderState.html",
+    "quote": [
+      "typing.List[ColorComponent]",
+      "AffineMatrix2D"
+    ],
+    "typings": [
+      "typing.List[ColorComponent]"
+    ],
     "fullname": "com.sun.star.rendering.RenderState",
     "desc": [
       "This structure contains information passed to each XCanvas render operation.",
@@ -24,31 +34,24 @@
       "",
       "    OOo 2.0"
     ],
-    "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1rendering_1_1RenderState.html",
-    "namespace": "com.sun.star.rendering",
+    "extends": [],
+    "imports": [],
     "auto_imports": [
       [
-        ".x_poly_polygon2_d",
-        "XPolyPolygon2D"
+        "..geometry.affine_matrix2_d",
+        "AffineMatrix2D"
       ],
       [
         ".color_component",
         "ColorComponent"
-      ],
-      [
-        "......com.sun.star.geometry.affine_matrix2_d",
-        "AffineMatrix2D"
-      ],
-      [
-        ".byte",
-        "byte"
       ]
     ],
-    "imports": [],
+    "from_imports": [],
+    "requires_typing": true,
     "items": [
       {
         "name": "AffineTransform",
-        "type": "'AffineMatrix2D'",
+        "type": "AffineMatrix2D",
         "orig_type": ".com.sun.star.geometry.AffineMatrix2D",
         "lines": [
           "The affine transform associated with this render operation.",
@@ -57,7 +60,7 @@
       },
       {
         "name": "Clip",
-        "type": "'XPolyPolygon2D'",
+        "type": "object",
         "orig_type": "XPolyPolygon2D",
         "lines": [
           "The clipping area associated with this render operation.",
@@ -67,7 +70,7 @@
       },
       {
         "name": "CompositeOperation",
-        "type": "'byte'",
+        "type": "int",
         "orig_type": "byte",
         "lines": [
           "The composition mode associated with this render operation.",
@@ -76,7 +79,7 @@
       },
       {
         "name": "DeviceColor",
-        "type": "'typing.List[ColorComponent]'",
+        "type": "typing.List[ColorComponent]",
         "orig_type": "sequence<ColorComponent>",
         "lines": [
           "The device color associated with this render operation.",

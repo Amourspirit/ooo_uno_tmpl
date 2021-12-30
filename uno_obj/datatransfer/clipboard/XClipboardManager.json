@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:20:23+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:22+00:00",
   "name": "XClipboardManager",
   "type": "interface",
   "namespace": "com.sun.star.datatransfer.clipboard",
@@ -16,7 +16,20 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_clipboard",
+        "XClipboard"
+      ]
+    ],
+    "quote": [
+      "typing.List[str]",
+      "XClipboard"
+    ],
+    "typings": [
+      "typing.List[str]"
+    ],
+    "requires_typing": true,
     "name": "XClipboardManager",
     "imports": [],
     "namespace": "com.sun.star.datatransfer.clipboard",
@@ -24,13 +37,71 @@
       "com.sun.star.uno.XInterface"
     ],
     "desc": [
-      "This interface is used to retrieve, add, or remove clipboard instances.",
-      "",
-      "**See Also**",
-      "",
-      "    com.sun.star.datatransfer.clipboard.XClipboard"
+      "This interface is used to retrieve, add, or remove clipboard instances."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1datatransfer_1_1clipboard_1_1XClipboardManager.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "addClipboard",
+          "returns": "None",
+          "desc": [
+            "Add a clipboard instance to the manager's list."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.container.ElementExistException"
+          ],
+          "args": [
+            [
+              "xClipboard",
+              "XClipboard",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getClipboard",
+          "returns": "XClipboard",
+          "desc": [
+            "Get a clipboard instance by name."
+          ],
+          "raises": [
+            "com.sun.star.container.NoSuchElementException"
+          ],
+          "args": [
+            [
+              "aName",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "listClipboardNames",
+          "returns": "typing.List[str]",
+          "desc": [
+            "Get a list of a managed clipboards."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "removeClipboard",
+          "returns": "None",
+          "desc": [
+            "Removes the clipboard with the specified name from the list."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aName",
+              "str",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

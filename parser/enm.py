@@ -7,13 +7,16 @@ import os
 import sys
 import logging
 import argparse
-import base
 from typing import Dict, List, Union
 from bs4.element import ResultSet, Tag
 from kwhelp.decorator import DecFuncEnum, TypeCheckKw
 from collections import namedtuple
 from pathlib import Path
 import xerox # requires xclip - sudo apt-get install xclip
+try:
+    import base
+except ModuleNotFoundError:
+    import parser.base as base
 from logger.log_handle import get_logger
 from parser import __version__, JSON_ID
 
@@ -43,7 +46,7 @@ class EnumUrl(base.UrlObj):
         result = []
         try:
             ns_part = self._page_link.split('.')[0].lower()
-            s = ns_part.replace('_1_1', '.').lstrip('.')
+            s = ns_part.replace(base.URL_SPLIT, '.').lstrip('.')
             
             # in some cases such as generics the name can have _3_01 and or _01_4 in the last part of the name
             # best guess _3 is < and _4 is > and _01 is space.
@@ -425,7 +428,14 @@ class EnumWriter(base.WriteBase):
     def _get_json(self) -> str:
         if not self._json_str is None:
             return self._json_str
-        p_dict = self._parser.get_dict_data()
+        p_dict = {
+            "name": 'place holder',
+            "ns": 'place holder',
+            "url": 'place holder',
+            "quote": [],
+            "typings": []
+        }
+        p_dict.update(self._parser.get_dict_data())
         json_dict = {
             "id": JSON_ID,
             "version": __version__,
@@ -462,6 +472,8 @@ class EnumWriter(base.WriteBase):
         self._template = self._template.replace('{name}', self._p_name)
         self._template = self._template.replace('{link}', self._p_url)
         str_json_desc = base.Util.get_formated_dict_list_str(self._p_desc)
+        self._template = self._template.replace('{quote}', 'set()')
+        self._template = self._template.replace('{typings}','set()')
         self._template = self._template.replace('{desc}', str_json_desc)
         self._template = self._template.replace('{data}', self._p_data)
 
@@ -487,7 +499,8 @@ class EnumWriter(base.WriteBase):
             except Exception as e:
                 logger.error(e, exc_info=True)
                 raise e
-        uno_obj_path = Path(self._path_dir.parent, 'uno_obj')
+        uno_obj_path = Path(self._path_dir.parent,
+                            base.APP_CONFIG.uno_base_dir)
         name_parts:List[str] = self._p_namespace.split('.')
         # ignore com, sun, star
         path_parts = name_parts[3:]
@@ -497,13 +510,150 @@ class EnumWriter(base.WriteBase):
         self._cache[key] = obj_path
         return self._cache[key]
 
+# region Parse method
+
+
+def _get_parsed_kwargs(**kwargs) -> Dict[str, str]:
+    required = ("url",)
+    lookups = {
+        "u": "url",
+        "url": "url",
+        "L": "log_file",
+        "log_file": "log_file"
+    }
+    result = {}
+    for k, v in kwargs.items():
+        if not isinstance(k, str):
+            continue
+        if k in lookups:
+            key = lookups[k]
+            result[key] = v
+    for k in required:
+        if not k in result:
+            # k is missing from kwargs
+            raise base.RequiredError(f"Missing required arg {k}.")
+    return result
+
+
+def _get_parsed_args(*args) -> Dict[str, bool]:
+    # key, value and value is a key into defaults
+    defaults = {
+        'no_sort': True,
+        "no_cache": True,
+        "long_template": False,
+        "clipboard": False,
+        "print_json": False,
+        "print_template": False,
+        "write_template": False,
+        "write_json": False,
+        "verbose": False
+    }
+    found = {
+        'no_sort': False,
+        "no_cache": False,
+        "long_template": True,
+        "clipboard": True,
+        "print_json": True,
+        "print_template": True,
+        "write_template": True,
+        "write_json": True,
+        "verbose": True
+    }
+    lookups = {
+        "s": "no_sort",
+        "no_sort": "no_sort",
+        "x": "no_cache",
+        "no_cache": "no_cache",
+        "g": "long_template",
+        "long_template": "long_template",
+        "c": "clipboard",
+        "clipboard": "clipboard",
+        "n": "print_json",
+        "print_json": "print_json",
+        "m": "print_template",
+        "print_template": "print_template",
+        "t": "write_template",
+        "write_template": "write_template",
+        "j": "write_json",
+        "write_json": "write_json",
+        "v": "verbose",
+        "verbose": "verbose",
+    }
+    result = {k: v for k, v in defaults.items()}
+    for arg in args:
+        if not isinstance(arg, str):
+            continue
+        if arg in lookups:
+            key = lookups[arg]
+            result[key] = found[key]
+    return result
+
+
+def parse(*args, **kwargs):
+    """
+    Parses data, alternative to running on command line.
+
+    Other Arguments:
+        'no_sort' (str, optional): Short form ``'s'``. No sorting of results. Default ``False``
+        'no_cache' (str, optional): Short form ``'x'``. No caching. Default ``False``
+        'print_json' (str, optional): Short form ``'n'``. Print json to termainl. Default ``False``
+        'print_template' (str, optional): Short form ``'m'``. Print template to terminal. Default ``False``
+        'write_template' (str, optional): Short form ``'t'``. Write template file into obj_uno subfolder. Default ``False``
+        'long_template' (str, optional): Short form ``'g'``. Writes a long format template.
+            Requires write_template is set. Default ``False``
+        'clipboard' (str, optional): Short form ``'c'``. Copy to clipboard. Default ``False``
+        'write_json' (str, optional): Short form ``'j'``. Write json file into obj_uno subfolder. Default ``False``
+        'verbose' (str, optional): Short form ``'v'``. Verobose output.
+
+    Keyword Arguments:
+        url (str): Short form ``u``. url to parse
+        log_file (str, optional): Short form ``L``. Log File
+    """
+    global logger
+    pkwargs = _get_parsed_kwargs(**kwargs)
+    pargs = _get_parsed_args(*args)
+    if logger is None:
+        log_args = {}
+        if 'log_file' in pkwargs:
+            log_args['log_file'] = pkwargs['log_file']
+        else:
+            log_args['log_file'] = 'enum.log'
+        if pargs['verbose']:
+            log_args['level'] = logging.DEBUG
+        _set_loggers(get_logger(logger_name=Path(__file__).stem, **log_args))
+
+
+    p = ParserEnum(
+        url=pkwargs['url'],
+        sort=pargs['no_sort'],
+        replace_dual_colon=True,
+        cache=pargs['no_cache']
+    )
+    w = EnumWriter(
+        parser=p,
+        print_template=pargs['print_template'],
+        print_json=pargs['print_json'],
+        copy_clipboard=pargs['clipboard'],
+        write_template=pargs['write_template'],
+        write_json=pargs['write_json'],
+        write_template_long=pargs['long_template'],
+    )
+    w.write()
+# endregion Parse method
+
 
 def _main():
     # url = 'https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1awt.html#aa6b9d577a1700f29923f49f7b77d165f'
     # url = 'https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1chart2.html#aa17c0b28cca2adc2be9b3c5954111489'
-    url = 'https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1sheet.html#a75a9acd74effffae38daed55136b0980'
-    sys.argv.extend(['--log-file', 'debug.log', '-v', '-n', '-u', url])
-    main()
+    url = 'https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1awt.html#ad249d76933bdf54c35f4eaf51a5b7965'
+    args = ('v', 'n')
+    kwargs = {
+        "u": url,
+        "log_file": "debug.log"
+    }
+    parse(*args, **kwargs)
+    # sys.argv.extend(['--log-file', 'debug.log', '-v', '-n', '-u', url])
+    # main()
 
 def main():
     global logger

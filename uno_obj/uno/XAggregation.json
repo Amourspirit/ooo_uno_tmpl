@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:18:42+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:14+00:00",
   "name": "XAggregation",
   "type": "interface",
   "namespace": "com.sun.star.uno",
@@ -17,6 +17,11 @@
       ]
     ],
     "from_imports_typing": [],
+    "quote": [
+      "XInterface"
+    ],
+    "typings": [],
+    "requires_typing": false,
     "name": "XAggregation",
     "imports": [],
     "namespace": "com.sun.star.uno",
@@ -30,11 +35,46 @@
       "",
       "The following rules are to be observed:",
       "",
-      "**See Also**",
+      ".. deprecated::",
       "",
-      "    Aggregation will no longer be supported as a high-level concept of UNO. You may still have the option to implement a UNO object consisting of several single objects in your specific programming language, though this depends on your programming language."
+      "    Interface is deprecated."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1uno_1_1XAggregation.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "queryAggregation",
+          "returns": "object",
+          "desc": [
+            "is similar to XInterface.queryInterface(), but it is to be processed directly without being forwarded to the delegator.",
+            "",
+            "This method is only called from within an implementation of XInterface.queryInterface() or XAggregation.queryAggregation(). This method is to be called by the delegator if it does not implement the interface itself. An object which got aggregated cannot depend on getting its own interface when it calls the method XInterface.queryInterface()."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aType",
+              "object",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setDelegator",
+          "returns": "None",
+          "desc": [
+            "sets the object to which all calls to the method XInterface.queryInterface() have to be forwarded."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "pDelegator",
+              "XInterface",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

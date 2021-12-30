@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:18:49+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:05+00:00",
   "name": "XInplaceObject",
   "type": "interface",
   "namespace": "com.sun.star.embed",
@@ -16,7 +16,24 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..awt.rectangle",
+        "Rectangle"
+      ],
+      [
+        "..awt.key_event",
+        "KeyEvent"
+      ]
+    ],
+    "quote": [
+      "typing.List[KeyEvent]",
+      "Rectangle"
+    ],
+    "typings": [
+      "typing.List[KeyEvent]"
+    ],
+    "requires_typing": true,
     "name": "XInplaceObject",
     "imports": [],
     "namespace": "com.sun.star.embed",
@@ -27,6 +44,73 @@
       "represents common functionality for inplace embedded objects."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1embed_1_1XInplaceObject.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "enableModeless",
+          "returns": "None",
+          "desc": [
+            "enables or disables modeless dialogs of the object.",
+            "",
+            "In case container wants to show a modal dialog it should disable modeless of embedded object dialogs with this call. Later the same call can be used to enable it."
+          ],
+          "raises": [
+            "com.sun.star.embed.WrongStateException",
+            "com.sun.star.uno.Exception"
+          ],
+          "args": [
+            [
+              "bEnable",
+              "bool",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setObjectRectangles",
+          "returns": "None",
+          "desc": [
+            "sets the visible part of the inplace object.",
+            "",
+            "Both rectangles are provided in object's parent window coordinates in pixels. The intersection of rectangles specifies the visible part of the object. In case the position window has a size that is different from object's visual area size, the object should either scale or deactivate.",
+            "",
+            "The method must activate object repainting."
+          ],
+          "raises": [
+            "com.sun.star.embed.WrongStateException",
+            "com.sun.star.uno.Exception"
+          ],
+          "args": [
+            [
+              "aPosRect",
+              "Rectangle",
+              "in"
+            ],
+            [
+              "aClipRect",
+              "Rectangle",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "translateAccelerators",
+          "returns": "None",
+          "desc": [
+            "provides accelerator table the container wants to use during inplace editing."
+          ],
+          "raises": [
+            "com.sun.star.embed.WrongStateException"
+          ],
+          "args": [
+            [
+              "aKeys",
+              "typing.List[KeyEvent]",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

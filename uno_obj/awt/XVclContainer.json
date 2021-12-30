@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:18:03+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:04+00:00",
   "name": "XVclContainer",
   "type": "interface",
   "namespace": "com.sun.star.awt",
@@ -16,7 +16,24 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_vcl_container_listener",
+        "XVclContainerListener"
+      ],
+      [
+        ".x_window",
+        "XWindow"
+      ]
+    ],
+    "quote": [
+      "typing.List[XWindow]",
+      "XVclContainerListener"
+    ],
+    "typings": [
+      "typing.List[XWindow]"
+    ],
+    "requires_typing": true,
     "name": "XVclContainer",
     "imports": [],
     "namespace": "com.sun.star.awt",
@@ -24,9 +41,55 @@
       "com.sun.star.uno.XInterface"
     ],
     "desc": [
-      "represents a VCL container window."
+      "represents a VCL container window.",
+      "",
+      ".. deprecated::",
+      "",
+      "    Interface is deprecated."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XVclContainer.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "addVclContainerListener",
+          "returns": "None",
+          "desc": [
+            "adds the specified container listener to receive container events from this container."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "l",
+              "XVclContainerListener",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getWindows",
+          "returns": "typing.List[XWindow]",
+          "desc": [
+            "returns all windows."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "removeVclContainerListener",
+          "returns": "None",
+          "desc": [
+            "removes the specified container listener so that it no longer receives container events from this container."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "l",
+              "XVclContainerListener",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

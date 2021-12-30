@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:22:17+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:39+00:00",
   "name": "XContainerQuery",
   "type": "interface",
   "namespace": "com.sun.star.container",
@@ -16,7 +16,24 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_enumeration",
+        "XEnumeration"
+      ],
+      [
+        "..beans.named_value",
+        "NamedValue"
+      ]
+    ],
+    "quote": [
+      "typing.List[NamedValue]",
+      "XEnumeration"
+    ],
+    "typings": [
+      "typing.List[NamedValue]"
+    ],
+    "requires_typing": true,
     "name": "XContainerQuery",
     "imports": [],
     "namespace": "com.sun.star.container",
@@ -29,6 +46,43 @@
       "This interface makes it possible to create sub sets of container items which serve specified search criterion."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1container_1_1XContainerQuery.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "createSubSetEnumerationByProperties",
+          "returns": "XEnumeration",
+          "desc": [
+            "creates a sub set of container items which supports searched properties as minimum",
+            "",
+            "It's not possible to use special commands or search specific parameters here. You can match by properties only. Enumerated elements must provide queried properties as minimum. Not specified properties will not be used for searching."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "Properties",
+              "typing.List[NamedValue]",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "createSubSetEnumerationByQuery",
+          "returns": "XEnumeration",
+          "desc": [
+            "creates a sub set of container items which match given query command",
+            "",
+            "Items of this sub set must match used query string. Format of query depends from real implementation. Using of \\\"param=value\\\" pairs isn't necessary. So it's possible to combine different parameters as one simple command string."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "Query",
+              "str",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

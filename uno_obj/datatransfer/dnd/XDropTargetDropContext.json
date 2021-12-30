@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:20:26+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:26+00:00",
   "name": "XDropTargetDropContext",
   "type": "interface",
   "namespace": "com.sun.star.datatransfer.dnd",
@@ -17,6 +17,9 @@
       ]
     ],
     "from_imports_typing": [],
+    "quote": [],
+    "typings": [],
+    "requires_typing": false,
     "name": "XDropTargetDropContext",
     "imports": [],
     "namespace": "com.sun.star.datatransfer.dnd",
@@ -31,6 +34,52 @@
       "The drop target context provides the mechanism for a potential receiver of a drop operation to provide the end user with the appropriate drag under feedback and to effect the subsequent data transfer, if appropriate."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1datatransfer_1_1dnd_1_1XDropTargetDropContext.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "acceptDrop",
+          "returns": "None",
+          "desc": [
+            "Accept the Drop.",
+            "",
+            "This method should be called from the com.sun.star.datatransfer.dnd.XDropTargetListener.drop() method if the implementation wishes to accept the drop operation with the specified action."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "dragOperation",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "dropComplete",
+          "returns": "None",
+          "desc": [
+            "Signals that the drop is completed and if it was successful or not.",
+            "",
+            "A value of FALSE means the drop completed unsuccessfully."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "success",
+              "bool",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "rejectDrop",
+          "returns": "None",
+          "desc": [
+            "Reject the drop as a result of examining the available com.sun.star.datatransfer.DataFlavor types received in the XDropTargetListener.dragEnter() method."
+          ],
+          "raises": [],
+          "args": []
+        }
+      ]
+    }
   }
 }

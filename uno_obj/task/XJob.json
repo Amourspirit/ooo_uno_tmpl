@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:16:19+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:00+00:00",
   "name": "XJob",
   "type": "interface",
   "namespace": "com.sun.star.task",
@@ -16,7 +16,19 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..beans.named_value",
+        "NamedValue"
+      ]
+    ],
+    "quote": [
+      "typing.List[NamedValue]"
+    ],
+    "typings": [
+      "typing.List[NamedValue]"
+    ],
+    "requires_typing": true,
     "name": "XJob",
     "imports": [],
     "namespace": "com.sun.star.task",
@@ -26,13 +38,30 @@
     "desc": [
       "specifies a job which is to be executed synchronously",
       "",
-      "Instead of XAsyncJob the implementation of this interface will be executed synchronously every time. That means: they can be sure that the current stack context will be blocked till this job finish it's work.",
-      "",
-      "**See Also**",
-      "",
-      "    XAsyncJob"
+      "Instead of XAsyncJob the implementation of this interface will be executed synchronously every time. That means: they can be sure that the current stack context will be blocked till this job finish it's work."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1task_1_1XJob.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "execute",
+          "returns": "object",
+          "desc": [
+            "executes the job synchronously"
+          ],
+          "raises": [
+            "",
+            "com.sun.star.uno.Exception"
+          ],
+          "args": [
+            [
+              "Arguments",
+              "typing.List[NamedValue]",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:20:49+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:27+00:00",
   "name": "XAccessibleStateSet",
   "type": "interface",
   "namespace": "com.sun.star.accessibility",
@@ -17,6 +17,13 @@
       ]
     ],
     "from_imports_typing": [],
+    "quote": [
+      "typing.List[int]"
+    ],
+    "typings": [
+      "typing.List[int]"
+    ],
+    "requires_typing": true,
     "name": "XAccessibleStateSet",
     "imports": [],
     "namespace": "com.sun.star.accessibility",
@@ -28,11 +35,64 @@
       "",
       "The interface XAccessibleStateSet represents a set of states of an accessible object. It can hold any combination of states defined by the constants collection AccessibleStateType.",
       "",
-      "**See Also**",
+      "**since**",
       "",
       "    OOo 1.1.2"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1accessibility_1_1XAccessibleStateSet.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "contains",
+          "returns": "bool",
+          "desc": [
+            "Checks if the given state is a member of the state set of the called object."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aState",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "containsAll",
+          "returns": "bool",
+          "desc": [
+            "Checks if all of the given states are in the state set of the called object."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aStateSet",
+              "typing.List[int]",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getStates",
+          "returns": "typing.List[int]",
+          "desc": [
+            "Get all currently set states as a sequence of state ids.",
+            "",
+            "The purpose of this function is to reduce the communication between accessibility objects and AT. Without this function an AT-Tool had to call contains() for every state type. Now a single call is sufficient."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "isEmpty",
+          "returns": "bool",
+          "desc": [
+            "Checks whether the current state set is empty."
+          ],
+          "raises": [],
+          "args": []
+        }
+      ]
+    }
   }
 }

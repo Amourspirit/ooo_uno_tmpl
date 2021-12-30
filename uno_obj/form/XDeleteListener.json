@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:20:04+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:13+00:00",
   "name": "XDeleteListener",
   "type": "interface",
   "namespace": "com.sun.star.form",
@@ -16,7 +16,17 @@
         "XEventListener"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..lang.event_object",
+        "EventObject"
+      ]
+    ],
+    "quote": [
+      "EventObject"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XDeleteListener",
     "imports": [],
     "namespace": "com.sun.star.form",
@@ -28,9 +38,46 @@
       "",
       "\\\"approveDelete\\\" may be used to abort a deletion of the current data record.",
       "",
-      "Please do not use anymore, this interface is superseded by com.sun.star.form.XConfirmDeleteListener."
+      "Please do not use anymore, this interface is superseded by com.sun.star.form.XConfirmDeleteListener.",
+      "",
+      ".. deprecated::",
+      "",
+      "    Interface is deprecated."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1form_1_1XDeleteListener.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "approveDelete",
+          "returns": "bool",
+          "desc": [
+            "is invoked when the current record of the database form will be deleted."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aEvent",
+              "EventObject",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "deleted",
+          "returns": "None",
+          "desc": [
+            "is invoked when a database form has finished the delete processing and the data has been successfully deleted from the datasource."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aEvent",
+              "EventObject",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

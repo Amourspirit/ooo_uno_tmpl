@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:20:50+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:27+00:00",
   "name": "XAccessibleValue",
   "type": "interface",
   "namespace": "com.sun.star.accessibility",
@@ -17,6 +17,9 @@
       ]
     ],
     "from_imports_typing": [],
+    "quote": [],
+    "typings": [],
+    "requires_typing": false,
     "name": "XAccessibleValue",
     "imports": [],
     "namespace": "com.sun.star.accessibility",
@@ -28,11 +31,64 @@
       "",
       "The XAccessibleValue interface represents a single numerical value and should be implemented by any class that supports numerical value like scroll bars and spin boxes. This interface lets you access the value and its upper and lower bounds.",
       "",
-      "**See Also**",
+      "**since**",
       "",
       "    OOo 1.1.2"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1accessibility_1_1XAccessibleValue.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getCurrentValue",
+          "returns": "object",
+          "desc": [
+            "Returns the value of this object as a number.",
+            "",
+            "The exact return type is implementation dependent. Typical types are long and double."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getMaximumValue",
+          "returns": "object",
+          "desc": [
+            "Returns the maximal value that can be represented by this object.",
+            "",
+            "The type of the returned value is implementation dependent. It does not have to be the same type as that returned by getCurrentAccessibleValue()."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getMinimumValue",
+          "returns": "object",
+          "desc": [
+            "Returns the minimal value that can be represented by this object.",
+            "",
+            "The type of the returned value is implementation dependent. It does not have to be the same type as that returned by getCurrentAccessibleValue()."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "setCurrentValue",
+          "returns": "bool",
+          "desc": [
+            "Sets the value of this object to the given number.",
+            "",
+            "The argument is clipped to the valid interval whose upper and lower bounds are returned by the methods getMaximumAccessibleValue() and getMinimumAccessibleValue(), i.e. if it is lower than the minimum value the new value will be the minimum and if it is greater than the maximum then the new value will be the maximum."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aNumber",
+              "object",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

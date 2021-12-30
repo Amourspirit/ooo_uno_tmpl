@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:21:20+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:17+00:00",
   "name": "XUniqueCellFormatRangesSupplier",
   "type": "interface",
   "namespace": "com.sun.star.sheet",
@@ -16,7 +16,17 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..container.x_index_access",
+        "XIndexAccess"
+      ]
+    ],
+    "quote": [
+      "XIndexAccess"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XUniqueCellFormatRangesSupplier",
     "imports": [],
     "namespace": "com.sun.star.sheet",
@@ -24,13 +34,25 @@
       "com.sun.star.uno.XInterface"
     ],
     "desc": [
-      "provides access to a collection of collections of equal-formatted cell ranges.",
-      "",
-      "**See Also**",
-      "",
-      "    com.sun.star.sheet.SheetCellRange"
+      "provides access to a collection of collections of equal-formatted cell ranges."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1sheet_1_1XUniqueCellFormatRangesSupplier.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getUniqueCellFormatRanges",
+          "returns": "XIndexAccess",
+          "desc": [
+            "returns a collection of equal-formatted cell range collections.",
+            "",
+            "Each cell of the original range is contained in one of the ranges (even unformatted cells). If there is a non-rectangular equal-formatted cell area, it will be split into several rectangular ranges.",
+            "",
+            "All equal-formatted ranges are consolidated into one collection. These collections are the members contained in a UniqueCellFormatRanges collection."
+          ],
+          "raises": [],
+          "args": []
+        }
+      ]
+    }
   }
 }

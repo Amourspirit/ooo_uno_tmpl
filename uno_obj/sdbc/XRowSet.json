@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:19:45+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:29+00:00",
   "name": "XRowSet",
   "type": "interface",
   "namespace": "com.sun.star.sdbc",
@@ -12,16 +12,26 @@
   "data": {
     "from_imports": [
       [
-        "......x_result_set",
+        ".x_result_set",
         "XResultSet"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_row_set_listener",
+        "XRowSetListener"
+      ]
+    ],
+    "quote": [
+      "XRowSetListener"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XRowSet",
     "imports": [],
     "namespace": "com.sun.star.sdbc",
     "extends": [
-      "XResultSet"
+      "com.sun.star.sdbc.XResultSet"
     ],
     "desc": [
       "enhances the functionality of a result set.",
@@ -31,6 +41,52 @@
       "The XRowSet interface is unique in that it is intended to be a software layer on top of an SDBC driver. Implementations of the RowSet interface can be provided by anyone."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1sdbc_1_1XRowSet.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "addRowSetListener",
+          "returns": "None",
+          "desc": [
+            "adds the specified listener to receive the events \\\"cursorMoved\\\", \\\"rowChanged\\\", and \\\"rowSetChanged\\\"."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "listener",
+              "XRowSetListener",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "execute",
+          "returns": "None",
+          "desc": [
+            "populates a row set with data.",
+            "",
+            "The description of the data source and other important information for filling the row set with data."
+          ],
+          "raises": [
+            "SQLException"
+          ],
+          "args": []
+        },
+        {
+          "name": "removeRowSetListener",
+          "returns": "None",
+          "desc": [
+            "removes the specified listener."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "listener",
+              "XRowSetListener",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

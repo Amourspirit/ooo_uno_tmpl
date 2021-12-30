@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:21:15+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:17+00:00",
   "name": "XSheetCellRangeContainer",
   "type": "interface",
   "namespace": "com.sun.star.sheet",
@@ -16,7 +16,20 @@
         "XSheetCellRanges"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..table.cell_range_address",
+        "CellRangeAddress"
+      ]
+    ],
+    "quote": [
+      "CellRangeAddress",
+      "typing.List[CellRangeAddress]"
+    ],
+    "typings": [
+      "typing.List[CellRangeAddress]"
+    ],
+    "requires_typing": true,
     "name": "XSheetCellRangeContainer",
     "imports": [],
     "namespace": "com.sun.star.sheet",
@@ -24,13 +37,90 @@
       "com.sun.star.sheet.XSheetCellRanges"
     ],
     "desc": [
-      "provides methods to access cell ranges in a collection via index and to add and remove cell ranges.",
-      "",
-      "**See Also**",
-      "",
-      "    com.sun.star.sheet.SheetCellRanges"
+      "provides methods to access cell ranges in a collection via index and to add and remove cell ranges."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1sheet_1_1XSheetCellRangeContainer.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "addRangeAddress",
+          "returns": "None",
+          "desc": [
+            "adds the given range to the collection of cell ranges."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aCellRangeAddress",
+              "CellRangeAddress",
+              "in"
+            ],
+            [
+              "bMergeRanges",
+              "bool",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "addRangeAddresses",
+          "returns": "None",
+          "desc": [
+            "adds the given ranges to the collection of cell ranges."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aCellRangeAddresses",
+              "typing.List[CellRangeAddress]",
+              "in"
+            ],
+            [
+              "bMergeRanges",
+              "bool",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "removeRangeAddress",
+          "returns": "None",
+          "desc": [
+            "removes the given range from the collection of cell ranges.",
+            "",
+            "The specified range must fit exactly to an element of the collection. The method does not try to shorten a range."
+          ],
+          "raises": [
+            "com.sun.star.container.NoSuchElementException"
+          ],
+          "args": [
+            [
+              "aCellRangeAddress",
+              "CellRangeAddress",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "removeRangeAddresses",
+          "returns": "None",
+          "desc": [
+            "removes the given ranges from the collection of cell ranges.",
+            "",
+            "All specified ranges must fit exactly to elements of the collection. The method does not try to shorten ranges."
+          ],
+          "raises": [
+            "com.sun.star.container.NoSuchElementException"
+          ],
+          "args": [
+            [
+              "aCellRangeAddresses",
+              "typing.List[CellRangeAddress]",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

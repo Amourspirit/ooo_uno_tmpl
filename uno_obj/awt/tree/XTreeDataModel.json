@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:18:11+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:33+00:00",
   "name": "XTreeDataModel",
   "type": "interface",
   "namespace": "com.sun.star.awt.tree",
@@ -16,7 +16,22 @@
         "XComponent"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_tree_data_model_listener",
+        "XTreeDataModelListener"
+      ],
+      [
+        ".x_tree_node",
+        "XTreeNode"
+      ]
+    ],
+    "quote": [
+      "XTreeNode",
+      "XTreeDataModelListener"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XTreeDataModel",
     "imports": [],
     "namespace": "com.sun.star.awt.tree",
@@ -31,6 +46,50 @@
       "If you do not need your own model implementation, you can also use the MutableTreeDataModel."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1tree_1_1XTreeDataModel.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "addTreeDataModelListener",
+          "returns": "None",
+          "desc": [
+            "Adds a listener for the TreeDataModelEvent posted after the tree changes."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "Listener",
+              "XTreeDataModelListener",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getRoot",
+          "returns": "XTreeNode",
+          "desc": [
+            "Returns the root of the tree.",
+            "",
+            "Returns null only if the tree has no nodes."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "removeTreeDataModelListener",
+          "returns": "None",
+          "desc": [
+            "Removes a listener previously added with addTreeDataModelListener()."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "Listener",
+              "XTreeDataModelListener",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

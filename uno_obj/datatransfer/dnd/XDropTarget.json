@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:20:25+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:26+00:00",
   "name": "XDropTarget",
   "type": "interface",
   "namespace": "com.sun.star.datatransfer.dnd",
@@ -16,7 +16,17 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_drop_target_listener",
+        "XDropTargetListener"
+      ]
+    ],
+    "quote": [
+      "XDropTargetListener"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XDropTarget",
     "imports": [],
     "namespace": "com.sun.star.datatransfer.dnd",
@@ -29,6 +39,97 @@
       "Differently to Java, the association between view and interface is fixed and cannot be changed. Otherwise, the AWT messaging would have to be implemented for any window supporting Drag and Drop operations, which would be a performance issue."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1datatransfer_1_1dnd_1_1XDropTarget.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "addDropTargetListener",
+          "returns": "None",
+          "desc": [
+            "Add a DropTargetListener.",
+            "",
+            "The listener will be queried for the XAutoscroll interface to see if it supports autoscrolling."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "dtl",
+              "XDropTargetListener",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getDefaultActions",
+          "returns": "int",
+          "desc": [
+            "Determine the actions supported by a drop target.",
+            "",
+            "By default this will include all drag and drop actions."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "isActive",
+          "returns": "bool",
+          "desc": [
+            "Indicates either a drop target object is active or not."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "removeDropTargetListener",
+          "returns": "None",
+          "desc": [
+            "Remove a drop target listener."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "dtl",
+              "XDropTargetListener",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setActive",
+          "returns": "None",
+          "desc": [
+            "Sets the drop target object active or inactive.",
+            "",
+            "A value of FALSE sets the drop target object inactive."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "active",
+              "bool",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setDefaultActions",
+          "returns": "None",
+          "desc": [
+            "Sets the default acceptable actions for this drop target.",
+            "",
+            "This method is a way to reduce the number of Drag and Drop events by blocking events for actions not supported by this target.",
+            "",
+            "By default the listener will receive notifications for all actions."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "actions",
+              "int",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

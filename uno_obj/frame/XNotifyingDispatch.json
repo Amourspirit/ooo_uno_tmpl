@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:21:51+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:38+00:00",
   "name": "XNotifyingDispatch",
   "type": "interface",
   "namespace": "com.sun.star.frame",
@@ -12,25 +12,73 @@
   "data": {
     "from_imports": [
       [
-        "......x_dispatch",
+        ".x_dispatch",
         "XDispatch"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_dispatch_result_listener",
+        "XDispatchResultListener"
+      ],
+      [
+        "..util.url",
+        "URL"
+      ],
+      [
+        "..beans.property_value",
+        "PropertyValue"
+      ]
+    ],
+    "quote": [
+      "XDispatchResultListener",
+      "typing.List[PropertyValue]",
+      "URL"
+    ],
+    "typings": [
+      "typing.List[PropertyValue]"
+    ],
+    "requires_typing": true,
     "name": "XNotifyingDispatch",
     "imports": [],
     "namespace": "com.sun.star.frame",
     "extends": [
-      "XDispatch"
+      "com.sun.star.frame.XDispatch"
     ],
     "desc": [
-      "dispatch with guaranteed notify (instead of XDispatch)",
-      "",
-      "**See Also**",
-      "",
-      "    XDispatch"
+      "dispatch with guaranteed notify (instead of XDispatch)"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1frame_1_1XNotifyingDispatch.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "dispatchWithNotification",
+          "returns": "None",
+          "desc": [
+            "Do the same like XDispatch.dispatch() but notifies listener in every case.",
+            "",
+            "Should be used if result must be known."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "URL",
+              "URL",
+              "in"
+            ],
+            [
+              "Arguments",
+              "typing.List[PropertyValue]",
+              "in"
+            ],
+            [
+              "Listener",
+              "XDispatchResultListener",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

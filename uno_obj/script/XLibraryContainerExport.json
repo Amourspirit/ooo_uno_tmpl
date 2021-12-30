@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:20:32+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:19+00:00",
   "name": "XLibraryContainerExport",
   "type": "interface",
   "namespace": "com.sun.star.script",
@@ -16,7 +16,17 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..task.x_interaction_handler",
+        "XInteractionHandler"
+      ]
+    ],
+    "quote": [
+      "XInteractionHandler"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XLibraryContainerExport",
     "imports": [],
     "namespace": "com.sun.star.script",
@@ -27,6 +37,41 @@
       "Extension of XLibraryContainer to provide functionality to store a library to a location represented by a URL."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1script_1_1XLibraryContainerExport.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "exportLibrary",
+          "returns": "None",
+          "desc": [
+            "Exports a library specified by Name to the location specified by the passed URL string.",
+            "",
+            "An interaction handler can be passed to be used for internal ucb operations. Exceptions not processed by this handler will be passed as com.sun.star.uno.Exception. If this parameter is null this applies to all exceptions thrown by ucb.",
+            "",
+            "If a library with the this name doesn't exist a com.sun.star.container.NoSuchElementException is thrown."
+          ],
+          "raises": [
+            "com.sun.star.uno.Exception",
+            "com.sun.star.container.NoSuchElementException"
+          ],
+          "args": [
+            [
+              "Name",
+              "str",
+              "in"
+            ],
+            [
+              "URL",
+              "str",
+              "in"
+            ],
+            [
+              "Handler",
+              "XInteractionHandler",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:20:57+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:01+00:00",
   "name": "XStringResourceWithLocation",
   "type": "interface",
   "namespace": "com.sun.star.resource",
@@ -17,6 +17,9 @@
       ]
     ],
     "from_imports_typing": [],
+    "quote": [],
+    "typings": [],
+    "requires_typing": false,
     "name": "XStringResourceWithLocation",
     "imports": [],
     "namespace": "com.sun.star.resource",
@@ -24,13 +27,51 @@
       "com.sun.star.resource.XStringResourcePersistence"
     ],
     "desc": [
-      "Extends XStringResourcePersistence by methods to handle an associated location.",
-      "",
-      "**See Also**",
-      "",
-      "    XStringResourcePersistence."
+      "Extends XStringResourcePersistence by methods to handle an associated location."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1resource_1_1XStringResourceWithLocation.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "setURL",
+          "returns": "None",
+          "desc": [
+            "Associates a location to the StringResourceWithStorage instance which is used on subsequent calls of store().",
+            "",
+            "This call has to be used carefully as it removes the location previously connected to the StringResourceWithStorage. It may force the implementation to reload data from the previous location before releasing it. The StringResourceManager will be modified after calling this method as the data isn't stored to the new location yet. storeAsURL() should be preferred as it directly stores the data to the new location and afterwards this location is in sync with the resource data."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.lang.NoSupportException"
+          ],
+          "args": [
+            [
+              "URL",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "storeAsURL",
+          "returns": "None",
+          "desc": [
+            "Stores all string table data to a location and associates this location to this instance as if setLocation() was called with this location.",
+            "",
+            "The modified state will be unmodified after the call."
+          ],
+          "raises": [
+            "com.sun.star.uno.Exception"
+          ],
+          "args": [
+            [
+              "URL",
+              "str",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

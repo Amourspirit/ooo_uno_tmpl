@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:18:26+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:00+00:00",
   "name": "XEntityResolver",
   "type": "interface",
   "namespace": "com.sun.star.xml.sax",
@@ -16,7 +16,17 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".input_source",
+        "InputSource"
+      ]
+    ],
+    "quote": [
+      "InputSource"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XEntityResolver",
     "imports": [],
     "namespace": "com.sun.star.xml.sax",
@@ -29,6 +39,29 @@
       "Usually, the parser has a default behavior of resolving external references (See documentation of the parser implementation). Use this interface to modify or reimplement this behavior."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1xml_1_1sax_1_1XEntityResolver.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "resolveEntity",
+          "returns": "InputSource",
+          "desc": [
+            "If aInputStream is a valid reference to an input stream, the parser uses this InputSource. Otherwise the parser seeks for the entity using its default behavior."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "sPublicId",
+              "str",
+              "in"
+            ],
+            [
+              "sSystemId",
+              "str",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

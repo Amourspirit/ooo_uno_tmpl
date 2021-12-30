@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:17:47+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:02+00:00",
   "name": "XDockableWindow",
   "type": "interface",
   "namespace": "com.sun.star.awt",
@@ -16,7 +16,22 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_dockable_window_listener",
+        "XDockableWindowListener"
+      ],
+      [
+        ".rectangle",
+        "Rectangle"
+      ]
+    ],
+    "quote": [
+      "XDockableWindowListener",
+      "Rectangle"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XDockableWindow",
     "imports": [],
     "namespace": "com.sun.star.awt",
@@ -29,6 +44,133 @@
       "A window can either be docked where it resides as a child window in an application frame window or it can be floating where it will reside in its own decorated top level window."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XDockableWindow.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "addDockableWindowListener",
+          "returns": "None",
+          "desc": [
+            "adds a docking listener to the object.",
+            "",
+            "only a single listener may be registered at any time."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xListener",
+              "XDockableWindowListener",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "enableDocking",
+          "returns": "None",
+          "desc": [
+            "enable or disable docking, docking is disabled by default"
+          ],
+          "raises": [],
+          "args": [
+            [
+              "bEnable",
+              "bool",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "isFloating",
+          "returns": "bool",
+          "desc": [
+            "queries the current window state"
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "isInPopupMode",
+          "returns": "bool",
+          "desc": [
+            "queries the current pop-up mode"
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "isLocked",
+          "returns": "bool",
+          "desc": [
+            "queries the current locking state"
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "lock",
+          "returns": "None",
+          "desc": [
+            "prevents the window from being undocked this has no effect if the window is floating"
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "removeDockableWindowListener",
+          "returns": "None",
+          "desc": [
+            "removes the specified docking listener from the object."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xListener",
+              "XDockableWindowListener",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setFloatingMode",
+          "returns": "None",
+          "desc": [
+            "toggle between floating and docked state"
+          ],
+          "raises": [],
+          "args": [
+            [
+              "bFloating",
+              "bool",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "startPopupMode",
+          "returns": "None",
+          "desc": [
+            "shows the window in a menu like style, i.e.",
+            "",
+            "without decoration a special indicator will allow for tearing off the window see com.sun.star.awt.XDockableWindowListener for the corresponding events"
+          ],
+          "raises": [],
+          "args": [
+            [
+              "WindowRect",
+              "Rectangle",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "unlock",
+          "returns": "None",
+          "desc": [
+            "enables undocking this has no effect if the window is floating"
+          ],
+          "raises": [],
+          "args": []
+        }
+      ]
+    }
   }
 }

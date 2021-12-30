@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:19:01+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:36+00:00",
   "name": "XProgressHandler",
   "type": "interface",
   "namespace": "com.sun.star.ucb",
@@ -17,6 +17,9 @@
       ]
     ],
     "from_imports_typing": [],
+    "quote": [],
+    "typings": [],
+    "requires_typing": false,
     "name": "XProgressHandler",
     "imports": [],
     "namespace": "com.sun.star.ucb",
@@ -27,6 +30,48 @@
       "Handle a tasks notification that it has made some progress."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1ucb_1_1XProgressHandler.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "pop",
+          "returns": "None",
+          "desc": [
+            "The task notifies the handler that it has finished its current activity."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "push",
+          "returns": "None",
+          "desc": [
+            "The task notifies the handler that it has started some new activity (possibly a sub-activity of another activity already making progress; therefore, these notifications behave in a stack-like manner)."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "Status",
+              "object",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "update",
+          "returns": "None",
+          "desc": [
+            "The task notifies the handler that its current activity is making progress."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "Status",
+              "object",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

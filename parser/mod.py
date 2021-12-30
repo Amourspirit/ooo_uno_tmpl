@@ -13,14 +13,13 @@ import re
 import logging
 from dataclasses import dataclass
 from abc import abstractmethod
-from typing import Dict, List, Tuple, Union
+from typing import Dict, List,  Union
 from bs4.element import ResultSet, Tag
 from kwhelp.decorator import DecFuncEnum, RequireArgs, RuleCheckAllKw, TypeCheckKw, TypeCheck
 from kwhelp import rules
 from pathlib import Path
 from logger.log_handle import get_logger
 from parser import __version__, JSON_ID
-from parser.service import WriterService
 # endregion Imports
 
 # region Logging
@@ -321,6 +320,7 @@ class ParserMod:
         logger.debug("ParserMod.get_data() %d moduled links.",
                      len(module_links))
         return links
+
     def _get_enum_links(self) -> List[Dict[str, str]]:
         enum_links = self._api_data.api_enum_links.get_obj()
         links = []
@@ -349,6 +349,22 @@ class ParserMod:
         logger.debug("ParserMod.get_data() %d type_def links.",
                      len(type_def_links))
         return links
+
+    def _get_const_links(self) -> List[Dict[str, str]]:
+        const_links = self._api_data.api_constants_links.get_obj()
+        links = []
+        if const_links:
+            for link in const_links:
+                links.append(
+                    {
+                        "name": link.name,
+                        "href": link.href
+                    }
+                )
+        logger.debug("ParserMod.get_data() %d type_def links.",
+                     len(const_links))
+        return links
+
     def _get_class_links(self):
         class_links = self._api_data.api_class_links.get_obj()
         results = {}
@@ -372,11 +388,13 @@ class ParserMod:
         results = {
             "modules": self._get_module_links(),
             "enums": self._get_enum_links(),
+            "constants": self._get_const_links(),
             "typedef": self._get_type_def_links(),
             "classes": self._get_class_links()
         }
         self._cache[key] = results
         return self._cache[key]
+
     @property
     def api_data(self) -> ApiData:
         """Gets api_data value"""
@@ -448,7 +466,8 @@ class WriterMod():
         key = '_get_uno_obj_path'
         if key in self._cache:
             return self._cache[key]
-        uno_obj_path = Path(self._path_dir.parent, 'uno_obj')     
+        uno_obj_path = Path(self._path_dir.parent,
+                            base.APP_CONFIG.uno_base_dir)
         name_parts: List[str] = self._parser.api_data.url_obj.namespace
         # ignore com, sun, star
         path_parts = name_parts[3:]
@@ -477,7 +496,8 @@ def work(url: str, **kwargs):
                 work(url=_url, **kwargs)
 
 def _main():
-    url = 'https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1awt.html'
+    # url = 'https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1awt.html'
+    url = 'https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star.html'
     sys.argv.extend(['--log-file', 'debug.log', '-v', '-n', '-u', url])
     main()
 

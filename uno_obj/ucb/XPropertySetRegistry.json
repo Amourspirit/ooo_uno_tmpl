@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:19:01+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:36+00:00",
   "name": "XPropertySetRegistry",
   "type": "interface",
   "namespace": "com.sun.star.ucb",
@@ -16,7 +16,17 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_persistent_property_set",
+        "XPersistentPropertySet"
+      ]
+    ],
+    "quote": [
+      "XPersistentPropertySet"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XPropertySetRegistry",
     "imports": [],
     "namespace": "com.sun.star.ucb",
@@ -24,13 +34,47 @@
       "com.sun.star.uno.XInterface"
     ],
     "desc": [
-      "A registry (storage medium) for persistent property sets.",
-      "",
-      "**See Also**",
-      "",
-      "    1.0"
+      "A registry (storage medium) for persistent property sets."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1ucb_1_1XPropertySetRegistry.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "openPropertySet",
+          "returns": "XPersistentPropertySet",
+          "desc": [
+            "creates a new or opens an existing property set in the registry."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "key",
+              "str",
+              "in"
+            ],
+            [
+              "create",
+              "bool",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "removePropertySet",
+          "returns": "None",
+          "desc": [
+            "removes a property set from the registry."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "key",
+              "str",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

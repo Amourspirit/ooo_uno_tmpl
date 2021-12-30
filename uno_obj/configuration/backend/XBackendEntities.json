@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:17:08+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:06+00:00",
   "name": "XBackendEntities",
   "type": "interface",
   "namespace": "com.sun.star.configuration.backend",
@@ -17,6 +17,9 @@
       ]
     ],
     "from_imports_typing": [],
+    "quote": [],
+    "typings": [],
+    "requires_typing": false,
     "name": "XBackendEntities",
     "imports": [],
     "namespace": "com.sun.star.configuration.backend",
@@ -26,11 +29,76 @@
     "desc": [
       "Provides functionality relating to common and supported entities for a configuration data backend.",
       "",
-      "**See Also**",
+      "**since**",
       "",
-      "    com.sun.star.configuration.backend.XBackend"
+      "    OOo 1.1.2"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1configuration_1_1backend_1_1XBackendEntities.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getAdminEntity",
+          "returns": "str",
+          "desc": [
+            "provides the entity id of an entity for general administrative access.",
+            "",
+            "The admin entity is an entity that should be used to read and manage configuration data that applies to all entities within the backend."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getOwnerEntity",
+          "returns": "str",
+          "desc": [
+            "provides the entity id of the owner entity of the backend.",
+            "",
+            "The owner entity is the default entity for the backend. For normal configuration data access the owner entity should always be used."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "isEqualEntity",
+          "returns": "bool",
+          "desc": [
+            "determines, if two given entity ids denote the same entity."
+          ],
+          "raises": [
+            "BackendAccessException",
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "aEntity",
+              "str",
+              "in"
+            ],
+            [
+              "aOtherEntity",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "supportsEntity",
+          "returns": "bool",
+          "desc": [
+            "determines, if a given entity id exists in this backend."
+          ],
+          "raises": [
+            "BackendAccessException"
+          ],
+          "args": [
+            [
+              "aEntity",
+              "str",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

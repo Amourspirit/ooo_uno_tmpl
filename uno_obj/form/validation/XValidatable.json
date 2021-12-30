@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:20:12+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:16+00:00",
   "name": "XValidatable",
   "type": "interface",
   "namespace": "com.sun.star.form.validation",
@@ -16,7 +16,17 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_validator",
+        "XValidator"
+      ]
+    ],
+    "quote": [
+      "XValidator"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XValidatable",
     "imports": [],
     "namespace": "com.sun.star.form.validation",
@@ -24,13 +34,40 @@
       "com.sun.star.uno.XInterface"
     ],
     "desc": [
-      "specifies support for validating a component",
-      "",
-      "**See Also**",
-      "",
-      "    XValidator"
+      "specifies support for validating a component"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1form_1_1validation_1_1XValidatable.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getValidator",
+          "returns": "XValidator",
+          "desc": [
+            "retrieves the external instance which is currently used to validate the component"
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "setValidator",
+          "returns": "None",
+          "desc": [
+            "sets an external instance which is able to validate the component",
+            "",
+            "Any previously active validator will be revoked - there can be only one!"
+          ],
+          "raises": [
+            "com.sun.star.util.VetoException"
+          ],
+          "args": [
+            [
+              "Validator",
+              "XValidator",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

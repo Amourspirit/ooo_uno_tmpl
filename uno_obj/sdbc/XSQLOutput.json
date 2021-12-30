@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:19:46+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:29+00:00",
   "name": "XSQLOutput",
   "type": "interface",
   "namespace": "com.sun.star.sdbc",
@@ -12,25 +12,430 @@
   "data": {
     "from_imports": [
       [
-        "......x_input_stream",
-        "XInputStream"
+        "..uno.x_interface",
+        "XInterface"
       ]
     ],
-    "from_imports_typing": [],
-    "name": "XSQLOutput",
-    "imports": [
-      "XInputStream"
+    "from_imports_typing": [
+      [
+        ".x_ref",
+        "XRef"
+      ],
+      [
+        "..io.x_input_stream",
+        "XInputStream"
+      ],
+      [
+        "..util.date",
+        "Date"
+      ],
+      [
+        ".xsql_data",
+        "XSQLData"
+      ],
+      [
+        ".x_clob",
+        "XClob"
+      ],
+      [
+        ".x_struct",
+        "XStruct"
+      ],
+      [
+        "..util.time",
+        "Time"
+      ],
+      [
+        ".x_blob",
+        "XBlob"
+      ],
+      [
+        "..util.date_time",
+        "DateTime"
+      ],
+      [
+        ".x_array",
+        "XArray"
+      ]
     ],
+    "quote": [
+      "XRef",
+      "XSQLData",
+      "XInputStream",
+      "XArray",
+      "DateTime",
+      "Time",
+      "XBlob",
+      "Date",
+      "XClob",
+      "XStruct",
+      "typing.List[int]"
+    ],
+    "typings": [
+      "typing.List[int]"
+    ],
+    "requires_typing": true,
+    "name": "XSQLOutput",
+    "imports": [],
     "namespace": "com.sun.star.sdbc",
-    "extends": [],
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
     "desc": [
       "is used as an output stream for writing the attributes of a user-defined type back to the database.",
       "",
       "This interface, used only for custom mapping, is used by the driver, and its methods are never directly invoked by a programmer.",
       "",
-      "When an object of a class implementing interface com.sun.star.sdbc.XSQLData is passed as an argument to a SQL statement, the JDBC driver calls com.sun.star.sdbc.SQLData.getSQLType() to determine the kind of SQL datum being passed to the database. \n The driver then creates an instance of XSQLOutput and passes it to the method com.sun.star.sdbc.XSQLData.writeSQL() . The method writeSQL in turn calls the appropriate XSQLOutput.writeXXX methods to write data from the com.sun.star.sdbc.XSQLData object to the XSQLOutput output stream as the representation of a SQL user-defined type."
+      "When an object of a class implementing interface com.sun.star.sdbc.XSQLData is passed as an argument to a SQL statement, the JDBC driver calls com.sun.star.sdbc.SQLData.getSQLType() to determine the kind of SQL datum being passed to the database.",
+      "The driver then creates an instance of XSQLOutput and passes it to the method com.sun.star.sdbc.XSQLData.writeSQL() . The method writeSQL in turn calls the appropriate XSQLOutput.writeXXX methods to write data from the com.sun.star.sdbc.XSQLData object to the XSQLOutput output stream as the representation of a SQL user-defined type."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1sdbc_1_1XSQLOutput.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "writeArray",
+          "returns": "None",
+          "desc": [
+            "writes an array to the stream."
+          ],
+          "raises": [
+            "SQLException"
+          ],
+          "args": [
+            [
+              "x",
+              "XArray",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "writeBinaryStream",
+          "returns": "None",
+          "desc": [
+            "writes the next attribute to the stream as a stream of uninterpreted bytes."
+          ],
+          "raises": [
+            "SQLException"
+          ],
+          "args": [
+            [
+              "x",
+              "XInputStream",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "writeBlob",
+          "returns": "None",
+          "desc": [
+            "writes a BLOB to the stream."
+          ],
+          "raises": [
+            "SQLException"
+          ],
+          "args": [
+            [
+              "x",
+              "XBlob",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "writeBoolean",
+          "returns": "None",
+          "desc": [
+            "writes the next attribute to the stream as boolean."
+          ],
+          "raises": [
+            "SQLException"
+          ],
+          "args": [
+            [
+              "x",
+              "bool",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "writeByte",
+          "returns": "None",
+          "desc": [
+            "writes the next attribute to the stream as byte."
+          ],
+          "raises": [
+            "SQLException"
+          ],
+          "args": [
+            [
+              "x",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "writeBytes",
+          "returns": "None",
+          "desc": [
+            "writes the next attribute to the stream as byte sequence."
+          ],
+          "raises": [
+            "SQLException"
+          ],
+          "args": [
+            [
+              "x",
+              "typing.List[int]",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "writeCharacterStream",
+          "returns": "None",
+          "desc": [
+            "writes the next attribute to the stream as a stream of Unicode string."
+          ],
+          "raises": [
+            "SQLException"
+          ],
+          "args": [
+            [
+              "x",
+              "XInputStream",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "writeClob",
+          "returns": "None",
+          "desc": [
+            "writes a CLOB to the stream."
+          ],
+          "raises": [
+            "SQLException"
+          ],
+          "args": [
+            [
+              "x",
+              "XClob",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "writeDate",
+          "returns": "None",
+          "desc": [
+            "writes the next attribute to the stream as a date."
+          ],
+          "raises": [
+            "SQLException"
+          ],
+          "args": [
+            [
+              "x",
+              "Date",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "writeDouble",
+          "returns": "None",
+          "desc": [
+            "writes the next attribute to the stream as double."
+          ],
+          "raises": [
+            "SQLException"
+          ],
+          "args": [
+            [
+              "x",
+              "float",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "writeFloat",
+          "returns": "None",
+          "desc": [
+            "writes the next attribute to the stream as float."
+          ],
+          "raises": [
+            "SQLException"
+          ],
+          "args": [
+            [
+              "x",
+              "float",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "writeInt",
+          "returns": "None",
+          "desc": [
+            "writes the next attribute to the stream as long."
+          ],
+          "raises": [
+            "SQLException"
+          ],
+          "args": [
+            [
+              "x",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "writeLong",
+          "returns": "None",
+          "desc": [
+            "writes the next attribute to the stream as hyper."
+          ],
+          "raises": [
+            "SQLException"
+          ],
+          "args": [
+            [
+              "x",
+              "object",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "writeObject",
+          "returns": "None",
+          "desc": [
+            "writes to the stream the data contained in the given XSQLData object.",
+            "",
+            "When the XSQLData object is NULL , this method writes an SQL NULL to the stream. Otherwise, it calls the com.sun.star.sdbc.XSQLData.writeSQL() method of the given object, which writes the object's attributes to the stream. The implementation of the method XSQLData.writeSQL() calls the appropriate XSQLOutput.writeXXX method(s) for writing each of the object's attributes in order.",
+            "The attributes must be read from an com.sun.star.sdbc.XSQLInput input stream and written to an XSQLOutput output stream in the same order in which they were listed in the SQL definition of the user-defined type."
+          ],
+          "raises": [
+            "SQLException"
+          ],
+          "args": [
+            [
+              "x",
+              "XSQLData",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "writeRef",
+          "returns": "None",
+          "desc": [
+            "writes a REF(&lt;structured-type&gt;) to the stream."
+          ],
+          "raises": [
+            "SQLException"
+          ],
+          "args": [
+            [
+              "x",
+              "XRef",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "writeShort",
+          "returns": "None",
+          "desc": [
+            "writes the next attribute to the stream as short."
+          ],
+          "raises": [
+            "SQLException"
+          ],
+          "args": [
+            [
+              "x",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "writeString",
+          "returns": "None",
+          "desc": [
+            "writes the next attribute to the stream as a string."
+          ],
+          "raises": [
+            "SQLException"
+          ],
+          "args": [
+            [
+              "x",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "writeStruct",
+          "returns": "None",
+          "desc": [
+            "writes a structured-type to the stream."
+          ],
+          "raises": [
+            "SQLException"
+          ],
+          "args": [
+            [
+              "x",
+              "XStruct",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "writeTime",
+          "returns": "None",
+          "desc": [
+            "writes the next attribute to the stream as a time."
+          ],
+          "raises": [
+            "SQLException"
+          ],
+          "args": [
+            [
+              "x",
+              "Time",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "writeTimestamp",
+          "returns": "None",
+          "desc": [
+            "writes the next attribute to the stream as a datetime."
+          ],
+          "raises": [
+            "SQLException"
+          ],
+          "args": [
+            [
+              "x",
+              "DateTime",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

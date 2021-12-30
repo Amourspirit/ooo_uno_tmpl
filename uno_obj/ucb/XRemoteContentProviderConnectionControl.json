@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:19:03+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:36+00:00",
   "name": "XRemoteContentProviderConnectionControl",
   "type": "interface",
   "namespace": "com.sun.star.ucb",
@@ -12,27 +12,59 @@
   "data": {
     "from_imports": [
       [
-        "......x_remote_content_provider_acceptor",
+        "..uno.x_interface",
+        "XInterface"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".x_remote_content_provider_acceptor",
         "XRemoteContentProviderAcceptor"
       ]
     ],
-    "from_imports_typing": [],
-    "name": "XRemoteContentProviderConnectionControl",
-    "imports": [
+    "quote": [
+      "XInterface",
       "XRemoteContentProviderAcceptor"
     ],
+    "typings": [],
+    "requires_typing": true,
+    "name": "XRemoteContentProviderConnectionControl",
+    "imports": [],
     "namespace": "com.sun.star.ucb",
-    "extends": [],
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
     "desc": [
       "A simple mechanism to find out if the connection between a remote content provider distributor and acceptor gets lost.",
       "",
-      "This interface should be supported by the DoneListener parameter of XRemoteContentProviderAcceptor.addRemoteContentProvider().",
-      "",
-      "**See Also**",
-      "",
-      "    1.0"
+      "This interface should be supported by the DoneListener parameter of XRemoteContentProviderAcceptor.addRemoteContentProvider()."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1ucb_1_1XRemoteContentProviderConnectionControl.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "enableConnectionControl",
+          "returns": "None",
+          "desc": [
+            "Enable connection control, using as a token some object implemented on the remote content provider acceptor's side.",
+            "",
+            "The implementation of this interface must hold a reference to the supplied token. If the connection gets lost, the reference count of the token will drop, which the remote content provider acceptor can observe."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "Acceptor",
+              "XRemoteContentProviderAcceptor",
+              "in"
+            ],
+            [
+              "Token",
+              "XInterface",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

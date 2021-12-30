@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:17:46+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:02+00:00",
   "name": "XDevice",
   "type": "interface",
   "namespace": "com.sun.star.awt",
@@ -16,7 +16,54 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_bitmap",
+        "XBitmap"
+      ],
+      [
+        ".x_font",
+        "XFont"
+      ],
+      [
+        ".font_descriptor",
+        "FontDescriptor"
+      ],
+      [
+        ".x_device",
+        "XDevice"
+      ],
+      [
+        ".font_descriptor",
+        "FontDescriptor"
+      ],
+      [
+        ".x_graphics",
+        "XGraphics"
+      ],
+      [
+        ".device_info",
+        "DeviceInfo"
+      ],
+      [
+        ".x_display_bitmap",
+        "XDisplayBitmap"
+      ]
+    ],
+    "quote": [
+      "XDevice",
+      "XDisplayBitmap",
+      "typing.List[FontDescriptor]",
+      "XGraphics",
+      "XFont",
+      "DeviceInfo",
+      "FontDescriptor",
+      "XBitmap"
+    ],
+    "typings": [
+      "typing.List[FontDescriptor]"
+    ],
+    "requires_typing": true,
     "name": "XDevice",
     "imports": [],
     "namespace": "com.sun.star.awt",
@@ -27,6 +74,122 @@
       "provides information about a graphical output device and offers a factory for the graphics which provides write operations on the device."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XDevice.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "createBitmap",
+          "returns": "XBitmap",
+          "desc": [
+            "creates a bitmap with the current device depth.",
+            "",
+            "If the specified area does not lie entirely in the device, the bits outside are not specified."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "nX",
+              "int",
+              "in"
+            ],
+            [
+              "nY",
+              "int",
+              "in"
+            ],
+            [
+              "nWidth",
+              "int",
+              "in"
+            ],
+            [
+              "nHeight",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "createDevice",
+          "returns": "XDevice",
+          "desc": [
+            "creates a new device which is compatible with this one.",
+            "",
+            "If the device does not support the GETBITS device capability, this method returns NULL."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "nWidth",
+              "int",
+              "in"
+            ],
+            [
+              "nHeight",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "createDisplayBitmap",
+          "returns": "XDisplayBitmap",
+          "desc": [
+            "creates a device compatible bitmap.",
+            "",
+            "The data of the bitmap is in process memory instead of in the device, so that the output operation is fast."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "Bitmap",
+              "XBitmap",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "createGraphics",
+          "returns": "XGraphics",
+          "desc": [
+            "creates a new graphics whose output operation is directed to this device."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getFont",
+          "returns": "XFont",
+          "desc": [
+            "returns information about a font offered by this device."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aDescriptor",
+              "FontDescriptor",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getFontDescriptors",
+          "returns": "typing.List[FontDescriptor]",
+          "desc": [
+            "returns the list of available font descriptors."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getInfo",
+          "returns": "DeviceInfo",
+          "desc": [
+            "returns information about the device."
+          ],
+          "raises": [],
+          "args": []
+        }
+      ]
+    }
   }
 }

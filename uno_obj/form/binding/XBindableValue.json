@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:20:15+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:00+00:00",
   "name": "XBindableValue",
   "type": "interface",
   "namespace": "com.sun.star.form.binding",
@@ -16,7 +16,17 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_value_binding",
+        "XValueBinding"
+      ]
+    ],
+    "quote": [
+      "XValueBinding"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XBindableValue",
     "imports": [],
     "namespace": "com.sun.star.form.binding",
@@ -24,13 +34,40 @@
       "com.sun.star.uno.XInterface"
     ],
     "desc": [
-      "specifies support for being bound to an external value",
-      "",
-      "**See Also**",
-      "",
-      "    XValueBinding"
+      "specifies support for being bound to an external value"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1form_1_1binding_1_1XBindableValue.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getValueBinding",
+          "returns": "XValueBinding",
+          "desc": [
+            "retrieves the external instance which currently controls the value of the component"
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "setValueBinding",
+          "returns": "None",
+          "desc": [
+            "sets an external instance which controls the value of the component",
+            "",
+            "Any previously active binding will be revoked. There can be only one!"
+          ],
+          "raises": [
+            "IncompatibleTypesException"
+          ],
+          "args": [
+            [
+              "aBinding",
+              "XValueBinding",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

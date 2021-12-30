@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:17:09+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:06+00:00",
   "name": "XCompositeLayer",
   "type": "interface",
   "namespace": "com.sun.star.configuration.backend",
@@ -12,25 +12,79 @@
   "data": {
     "from_imports": [
       [
-        ".......x_layer",
+        ".x_layer",
         "XLayer"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_layer_handler",
+        "XLayerHandler"
+      ]
+    ],
+    "quote": [
+      "typing.List[str]",
+      "XLayerHandler"
+    ],
+    "typings": [
+      "typing.List[str]"
+    ],
+    "requires_typing": true,
     "name": "XCompositeLayer",
     "imports": [],
     "namespace": "com.sun.star.configuration.backend",
     "extends": [
-      "XLayer"
+      "com.sun.star.configuration.backend.XLayer"
     ],
     "desc": [
       "provides read access to layers that contain sublayers accessible through an additional criterion (for instance the locale they contain data for).",
       "",
-      "**See Also**",
+      "**since**",
       "",
       "    OOo 1.1.2"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1configuration_1_1backend_1_1XCompositeLayer.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "listSubLayerIds",
+          "returns": "typing.List[str]",
+          "desc": [
+            "Returns a list of the criteria that can be used to access the sublayers."
+          ],
+          "raises": [
+            "com.sun.star.lang.WrappedTargetException"
+          ],
+          "args": []
+        },
+        {
+          "name": "readSubLayerData",
+          "returns": "None",
+          "desc": [
+            "Describes the content of a particular sublayer to an XLayerHandler.",
+            "",
+            "Must be one the identifiers returned by XCompositeLayer.listSubLayerIds()"
+          ],
+          "raises": [
+            "com.sun.star.lang.NullPointerException",
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.lang.WrappedTargetException",
+            "MalformedDataException"
+          ],
+          "args": [
+            [
+              "aHandler",
+              "XLayerHandler",
+              "in"
+            ],
+            [
+              "aSubLayerId",
+              "str",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

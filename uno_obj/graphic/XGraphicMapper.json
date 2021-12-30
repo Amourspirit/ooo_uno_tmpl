@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:22:40+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:07+00:00",
   "name": "XGraphicMapper",
   "type": "interface",
   "namespace": "com.sun.star.graphic",
@@ -11,7 +11,17 @@
   "writer_args": {},
   "data": {
     "from_imports": [],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_graphic",
+        "XGraphic"
+      ]
+    ],
+    "quote": [
+      "XGraphic"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XGraphicMapper",
     "imports": [],
     "namespace": "com.sun.star.graphic",
@@ -19,11 +29,49 @@
     "desc": [
       "This interface allows mapping of XGraphics for a certain string key.",
       "",
-      "**See Also**",
+      "**since**",
       "",
       "    LibreOffice 7.1"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1graphic_1_1XGraphicMapper.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "findGraphic",
+          "returns": "XGraphic",
+          "desc": [
+            "Find if we have the XGraphic for the certain key."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "Id",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "putGraphic",
+          "returns": "None",
+          "desc": [
+            "Insert a new entry to map an id/key to the XGraphic."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "Id",
+              "str",
+              "in"
+            ],
+            [
+              "Graphic",
+              "XGraphic",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

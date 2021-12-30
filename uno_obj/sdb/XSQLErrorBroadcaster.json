@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:16:43+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:15+00:00",
   "name": "XSQLErrorBroadcaster",
   "type": "interface",
   "namespace": "com.sun.star.sdb",
@@ -16,7 +16,17 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".xsql_error_listener",
+        "XSQLErrorListener"
+      ]
+    ],
+    "quote": [
+      "XSQLErrorListener"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XSQLErrorBroadcaster",
     "imports": [],
     "namespace": "com.sun.star.sdb",
@@ -27,6 +37,39 @@
       "interface for notifying potential listeners of com.sun.star.sdbc.SQLException s posted by any database object."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1sdb_1_1XSQLErrorBroadcaster.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "addSQLErrorListener",
+          "returns": "None",
+          "desc": [
+            "adds the specified listener to receive the event \\\"errorOccurred\\\""
+          ],
+          "raises": [],
+          "args": [
+            [
+              "Listener",
+              "XSQLErrorListener",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "removeSQLErrorListener",
+          "returns": "None",
+          "desc": [
+            "removes the specified listener."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "Listener",
+              "XSQLErrorListener",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

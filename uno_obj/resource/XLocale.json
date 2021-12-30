@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:20:56+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:01+00:00",
   "name": "XLocale",
   "type": "interface",
   "namespace": "com.sun.star.resource",
@@ -16,7 +16,22 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..lang.locale",
+        "Locale"
+      ]
+    ],
+    "quote": [
+      "typing.List[str]",
+      "Locale",
+      "typing.List[Locale]"
+    ],
+    "typings": [
+      "typing.List[str]",
+      "typing.List[Locale]"
+    ],
+    "requires_typing": true,
     "name": "XLocale",
     "imports": [],
     "namespace": "com.sun.star.resource",
@@ -24,13 +39,281 @@
       "com.sun.star.uno.XInterface"
     ],
     "desc": [
-      "offers some operations on com.sun.star.lang.Locale structures.",
-      "",
-      "**See Also**",
-      "",
-      "    Locale"
+      "offers some operations on com.sun.star.lang.Locale structures."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1resource_1_1XLocale.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "create",
+          "returns": "Locale",
+          "desc": [
+            "creates a locale from language, country, and variant.",
+            "",
+            "NOTE: ISO 639 is not a stable standard; some of the language codes it defines (specifically iw, ji, and in) have changed. This constructor accepts both the old codes (iw, ji, and in) and the new codes (he, yi, and id), but all other API on XLocale will return only the NEW codes.",
+            "",
+            "Note: The Java class Locale returns the old codes."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aLanguage",
+              "str",
+              "in"
+            ],
+            [
+              "aCountry",
+              "str",
+              "in"
+            ],
+            [
+              "aVariant",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "equals",
+          "returns": "bool",
+          "desc": [
+            "A locale is deemed equal to another locale with identical language, country, and variant, and unequal to all other objects."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "l1",
+              "Locale",
+              "in"
+            ],
+            [
+              "l2",
+              "Locale",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getAvailableLocales",
+          "returns": "typing.List[Locale]",
+          "desc": [],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getDefault",
+          "returns": "Locale",
+          "desc": [
+            "the common method of getting the current default locale.",
+            "",
+            "It is used for the presentation (for menus, dialogs, etc.). It is, generally, set once when your applet or application is initialized, then never reset. (If you do reset the default locale, you probably want to reload your GUI, so that the change is reflected in your interface.)",
+            "",
+            "More advanced programs allow users to use different locales for different fields, for example, in a spreadsheet.",
+            "",
+            "Note that the initial setting will match the host system."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getDisplayCountry",
+          "returns": "str",
+          "desc": [],
+          "raises": [],
+          "args": [
+            [
+              "locale",
+              "Locale",
+              "in"
+            ],
+            [
+              "inLocale",
+              "Locale",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getDisplayCountry_Default",
+          "returns": "str",
+          "desc": [],
+          "raises": [],
+          "args": [
+            [
+              "locale",
+              "Locale",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getDisplayLanguage",
+          "returns": "str",
+          "desc": [],
+          "raises": [],
+          "args": [
+            [
+              "locale",
+              "Locale",
+              "in"
+            ],
+            [
+              "inLocale",
+              "Locale",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getDisplayLanguage_Default",
+          "returns": "str",
+          "desc": [],
+          "raises": [],
+          "args": [
+            [
+              "locale",
+              "Locale",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getDisplayName",
+          "returns": "str",
+          "desc": [],
+          "raises": [],
+          "args": [
+            [
+              "locale",
+              "Locale",
+              "in"
+            ],
+            [
+              "inLocale",
+              "Locale",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getDisplayName_Default",
+          "returns": "str",
+          "desc": [],
+          "raises": [],
+          "args": [
+            [
+              "locale",
+              "Locale",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getDisplayVariant",
+          "returns": "str",
+          "desc": [],
+          "raises": [],
+          "args": [
+            [
+              "locale",
+              "Locale",
+              "in"
+            ],
+            [
+              "inLocale",
+              "Locale",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getDisplayVariant_Default",
+          "returns": "str",
+          "desc": [],
+          "raises": [],
+          "args": [
+            [
+              "locale",
+              "Locale",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getISO3Country",
+          "returns": "str",
+          "desc": [],
+          "raises": [
+            "com.sun.star.resource.MissingResourceException"
+          ],
+          "args": [
+            [
+              "locale",
+              "Locale",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getISO3Language",
+          "returns": "str",
+          "desc": [],
+          "raises": [
+            "com.sun.star.resource.MissingResourceException"
+          ],
+          "args": [
+            [
+              "locale",
+              "Locale",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getISOCountries",
+          "returns": "typing.List[str]",
+          "desc": [],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getISOLanguages",
+          "returns": "typing.List[str]",
+          "desc": [],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getLanguagesForCountry",
+          "returns": "typing.List[str]",
+          "desc": [],
+          "raises": [],
+          "args": [
+            [
+              "country",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setDefault",
+          "returns": "None",
+          "desc": [
+            "sets the default locale for the whole environment.",
+            "",
+            "It is normally set once at the beginning of an application, then never reset. setDefault does not reset the host locale."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "newLocale",
+              "Locale",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

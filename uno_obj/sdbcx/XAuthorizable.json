@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:19:32+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:33+00:00",
   "name": "XAuthorizable",
   "type": "interface",
   "namespace": "com.sun.star.sdbcx",
@@ -17,6 +17,9 @@
       ]
     ],
     "from_imports_typing": [],
+    "quote": [],
+    "typings": [],
+    "requires_typing": false,
     "name": "XAuthorizable",
     "imports": [],
     "namespace": "com.sun.star.sdbcx",
@@ -24,13 +27,110 @@
       "com.sun.star.uno.XInterface"
     ],
     "desc": [
-      "is used for accessing and setting the permissions of a user for a database object.",
-      "",
-      "**See Also**",
-      "",
-      "    com.sun.star.sdbcx.PrivilegeObject"
+      "is used for accessing and setting the permissions of a user for a database object."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1sdbcx_1_1XAuthorizable.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getGrantablePrivileges",
+          "returns": "int",
+          "desc": [
+            "retrieves the permissions for a specific object, which could be granted to other users and groups."
+          ],
+          "raises": [
+            "com.sun.star.sdbc.SQLException"
+          ],
+          "args": [
+            [
+              "objName",
+              "str",
+              "in"
+            ],
+            [
+              "objType",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getPrivileges",
+          "returns": "int",
+          "desc": [
+            "retrieves the permissions for a specific object."
+          ],
+          "raises": [
+            "com.sun.star.sdbc.SQLException"
+          ],
+          "args": [
+            [
+              "objName",
+              "str",
+              "in"
+            ],
+            [
+              "objType",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "grantPrivileges",
+          "returns": "None",
+          "desc": [
+            "adds additional permissions for a specific object."
+          ],
+          "raises": [
+            "com.sun.star.sdbc.SQLException"
+          ],
+          "args": [
+            [
+              "objName",
+              "str",
+              "in"
+            ],
+            [
+              "objType",
+              "int",
+              "in"
+            ],
+            [
+              "objPrivileges",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "revokePrivileges",
+          "returns": "None",
+          "desc": [
+            "removes permissions for a specific object from a group or user."
+          ],
+          "raises": [
+            "com.sun.star.sdbc.SQLException"
+          ],
+          "args": [
+            [
+              "objName",
+              "str",
+              "in"
+            ],
+            [
+              "objType",
+              "int",
+              "in"
+            ],
+            [
+              "objPrivileges",
+              "int",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

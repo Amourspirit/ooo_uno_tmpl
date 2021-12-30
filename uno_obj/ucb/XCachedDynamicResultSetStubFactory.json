@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:18:55+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:35+00:00",
   "name": "XCachedDynamicResultSetStubFactory",
   "type": "interface",
   "namespace": "com.sun.star.ucb",
@@ -16,7 +16,29 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_dynamic_result_set",
+        "XDynamicResultSet"
+      ],
+      [
+        ".numbered_sorting_info",
+        "NumberedSortingInfo"
+      ],
+      [
+        ".x_any_compare_factory",
+        "XAnyCompareFactory"
+      ]
+    ],
+    "quote": [
+      "typing.List[NumberedSortingInfo]",
+      "XDynamicResultSet",
+      "XAnyCompareFactory"
+    ],
+    "typings": [
+      "typing.List[NumberedSortingInfo]"
+    ],
+    "requires_typing": true,
     "name": "XCachedDynamicResultSetStubFactory",
     "imports": [],
     "namespace": "com.sun.star.ucb",
@@ -35,6 +57,57 @@
       "The needed cache on server side you can create using XCachedDynamicResultSetFactory."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1ucb_1_1XCachedDynamicResultSetStubFactory.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "connectToCache",
+          "returns": "None",
+          "desc": [
+            "If you have instantiated a CachedDynamicResultSet on client side already, use this to connect your given Source on server side to the TargetCache."
+          ],
+          "raises": [
+            "",
+            "com.sun.star.ucb.AlreadyInitializedException"
+          ],
+          "args": [
+            [
+              "Source",
+              "XDynamicResultSet",
+              "in"
+            ],
+            [
+              "TargetCache",
+              "XDynamicResultSet",
+              "in"
+            ],
+            [
+              "SortingInfo",
+              "typing.List[NumberedSortingInfo]",
+              "in"
+            ],
+            [
+              "CompareFactory",
+              "XAnyCompareFactory",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "createCachedDynamicResultSetStub",
+          "returns": "XDynamicResultSet",
+          "desc": [
+            "creates a remote optimizes XDynamicResultSet."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "Source",
+              "XDynamicResultSet",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

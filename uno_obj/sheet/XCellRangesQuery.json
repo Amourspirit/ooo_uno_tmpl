@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:21:01+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:16+00:00",
   "name": "XCellRangesQuery",
   "type": "interface",
   "namespace": "com.sun.star.sheet",
@@ -16,7 +16,27 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..table.cell_range_address",
+        "CellRangeAddress"
+      ],
+      [
+        ".x_sheet_cell_ranges",
+        "XSheetCellRanges"
+      ],
+      [
+        "..table.cell_address",
+        "CellAddress"
+      ]
+    ],
+    "quote": [
+      "XSheetCellRanges",
+      "CellAddress",
+      "CellRangeAddress"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XCellRangesQuery",
     "imports": [],
     "namespace": "com.sun.star.sheet",
@@ -26,13 +46,113 @@
     "desc": [
       "provides methods to query for cell ranges with specific contents.",
       "",
-      "All methods return a collection of cell ranges.",
-      "",
-      "**See Also**",
-      "",
-      "    com.sun.star.sheet.SheetRangesQuery"
+      "All methods return a collection of cell ranges."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1sheet_1_1XCellRangesQuery.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "queryColumnDifferences",
+          "returns": "XSheetCellRanges",
+          "desc": [
+            "queries all cells with different values in a specified row.",
+            "",
+            "This method takes each column of the current cell range(s) and compares all cells with the cell in the specified row. All cells which are different to this comparison cell will be returned."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aCompare",
+              "CellAddress",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "queryContentCells",
+          "returns": "XSheetCellRanges",
+          "desc": [
+            "queries all cells with the specified content type(s).",
+            "",
+            "Attention: Despite the CellFlags flags are long values, this method expects a short parameter.",
+            "",
+            "Attention: Empty cells in the range may be skipped depending on the content flag used. For instance, when querying for STYLES, the returned ranges may not include empty cells even if styles are applied to those cells."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "nContentFlags",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "queryEmptyCells",
+          "returns": "XSheetCellRanges",
+          "desc": [
+            "queries all empty cells."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "queryFormulaCells",
+          "returns": "XSheetCellRanges",
+          "desc": [
+            "queries all formula cells with the specified result type."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "nResultFlags",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "queryIntersection",
+          "returns": "XSheetCellRanges",
+          "desc": [
+            "intersects the current cell range(s) with the specified cell range."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aRange",
+              "CellRangeAddress",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "queryRowDifferences",
+          "returns": "XSheetCellRanges",
+          "desc": [
+            "queries all cells with different values in a specified column.",
+            "",
+            "This method takes each row of the current cell range(s) and compares all cells with the cell in the specified column. All cells which are different to this comparison cell will be returned."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aCompare",
+              "CellAddress",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "queryVisibleCells",
+          "returns": "XSheetCellRanges",
+          "desc": [
+            "queries all visible cells."
+          ],
+          "raises": [],
+          "args": []
+        }
+      ]
+    }
   }
 }

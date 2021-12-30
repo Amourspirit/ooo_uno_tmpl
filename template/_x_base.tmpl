@@ -6,6 +6,8 @@
 $self.init_data()#slurp
 #attr $name = ""
 #attr $desc = []
+#attr $quote = set()
+#attr $typings = set()
 #attr $link = ""
 #attr $requires_typing = False
 #attr $inherits = []
@@ -91,7 +93,7 @@ class ${name}($self.lst_to_str($inherits)):
 #set $properties = $attribs['properties']
 #for $property in $properties
 #set $p_name = $property['name']
-#set $p_return = $property['returns']
+#set $p_return = $self.get_q_type($property['returns'])
 #set $p_desc = $property['desc']
     @abstractproperty
     def ${p_name}(self) -> $p_return:

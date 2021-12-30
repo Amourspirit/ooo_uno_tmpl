@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:19:13+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:25+00:00",
   "name": "XNumberFormatter",
   "type": "interface",
   "namespace": "com.sun.star.util",
@@ -16,7 +16,22 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".color",
+        "Color"
+      ],
+      [
+        ".x_number_formats_supplier",
+        "XNumberFormatsSupplier"
+      ]
+    ],
+    "quote": [
+      "Color",
+      "XNumberFormatsSupplier"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XNumberFormatter",
     "imports": [],
     "namespace": "com.sun.star.util",
@@ -24,13 +39,190 @@
       "com.sun.star.uno.XInterface"
     ],
     "desc": [
-      "represents a number formatter.",
-      "",
-      "**See Also**",
-      "",
-      "    OfficeDev - Number Formats"
+      "represents a number formatter."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1util_1_1XNumberFormatter.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "attachNumberFormatsSupplier",
+          "returns": "None",
+          "desc": [
+            "attaches an XNumberFormatsSupplier to this NumberFormatter.",
+            "",
+            "This NumberFormatter will only use the NumberFormats specified in the attached XNumberFormatsSupplier. Without an attached XNumberFormatsSupplier, no formatting is possible."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xSupplier",
+              "XNumberFormatsSupplier",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "convertNumberToString",
+          "returns": "str",
+          "desc": [
+            "converts a number into a string."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "nKey",
+              "int",
+              "in"
+            ],
+            [
+              "fValue",
+              "float",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "convertStringToNumber",
+          "returns": "float",
+          "desc": [
+            "converts a string which contains a formatted number into a number.",
+            "",
+            "If this is a text format, the string will not be converted."
+          ],
+          "raises": [
+            "com.sun.star.util.NotNumericException"
+          ],
+          "args": [
+            [
+              "nKey",
+              "int",
+              "in"
+            ],
+            [
+              "aString",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "detectNumberFormat",
+          "returns": "int",
+          "desc": [
+            "detects the number format in a string which contains a formatted number."
+          ],
+          "raises": [
+            "com.sun.star.util.NotNumericException"
+          ],
+          "args": [
+            [
+              "nKey",
+              "int",
+              "in"
+            ],
+            [
+              "aString",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "formatString",
+          "returns": "str",
+          "desc": [
+            "converts a string into another string."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "nKey",
+              "int",
+              "in"
+            ],
+            [
+              "aString",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getInputString",
+          "returns": "str",
+          "desc": [
+            "converts a number into a string with the specified format.",
+            "",
+            "This string can always be converted back to a number using the same format."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "nKey",
+              "int",
+              "in"
+            ],
+            [
+              "fValue",
+              "float",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getNumberFormatsSupplier",
+          "returns": "XNumberFormatsSupplier",
+          "desc": [],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "queryColorForNumber",
+          "returns": "Color",
+          "desc": [],
+          "raises": [],
+          "args": [
+            [
+              "nKey",
+              "int",
+              "in"
+            ],
+            [
+              "fValue",
+              "float",
+              "in"
+            ],
+            [
+              "aDefaultColor",
+              "Color",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "queryColorForString",
+          "returns": "Color",
+          "desc": [],
+          "raises": [],
+          "args": [
+            [
+              "nKey",
+              "int",
+              "in"
+            ],
+            [
+              "aString",
+              "str",
+              "in"
+            ],
+            [
+              "aDefaultColor",
+              "Color",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

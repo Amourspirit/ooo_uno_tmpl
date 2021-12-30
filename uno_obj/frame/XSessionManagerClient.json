@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:21:52+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:38+00:00",
   "name": "XSessionManagerClient",
   "type": "interface",
   "namespace": "com.sun.star.frame",
@@ -16,7 +16,17 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_session_manager_listener",
+        "XSessionManagerListener"
+      ]
+    ],
+    "quote": [
+      "XSessionManagerListener"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XSessionManagerClient",
     "imports": [],
     "namespace": "com.sun.star.frame",
@@ -27,6 +37,93 @@
       "Connect to a session manager to get information about pending desktop shutdown."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1frame_1_1XSessionManagerClient.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "addSessionManagerListener",
+          "returns": "None",
+          "desc": [
+            "addSessionManagerListener registers a listener for session management events"
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xListener",
+              "XSessionManagerListener",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "cancelShutdown",
+          "returns": "bool",
+          "desc": [
+            "Call cancelShutdown to try to cancel a desktop shutdown in progress."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "interactionDone",
+          "returns": "None",
+          "desc": [
+            "interactionDone is called when a listener has finished user interaction"
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xListener",
+              "XSessionManagerListener",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "queryInteraction",
+          "returns": "None",
+          "desc": [
+            "queryInteraction issues a request for a user interaction slot from the session manager"
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xListener",
+              "XSessionManagerListener",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "removeSessionManagerListener",
+          "returns": "None",
+          "desc": [
+            "removeSessionManagerListener deregisters a listener for session events"
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xListener",
+              "XSessionManagerListener",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "saveDone",
+          "returns": "None",
+          "desc": [
+            "saveDone signals that a listener has processed a save request"
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xListener",
+              "XSessionManagerListener",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

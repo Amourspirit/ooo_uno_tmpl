@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:18:25+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:05+00:00",
   "name": "XElement",
   "type": "interface",
   "namespace": "com.sun.star.xml.input",
@@ -16,7 +16,22 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_element",
+        "XElement"
+      ],
+      [
+        ".x_attributes",
+        "XAttributes"
+      ]
+    ],
+    "quote": [
+      "XAttributes",
+      "XElement"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XElement",
     "imports": [],
     "namespace": "com.sun.star.xml.input",
@@ -27,6 +42,139 @@
       "Capsule around an XML element."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1xml_1_1input_1_1XElement.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "characters",
+          "returns": "None",
+          "desc": [
+            "Called upon retrieval of characters."
+          ],
+          "raises": [
+            "com.sun.star.xml.sax.SAXException"
+          ],
+          "args": [
+            [
+              "chars",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "endElement",
+          "returns": "None",
+          "desc": [
+            "Receives notification of element closing."
+          ],
+          "raises": [
+            "com.sun.star.xml.sax.SAXException"
+          ],
+          "args": []
+        },
+        {
+          "name": "getAttributes",
+          "returns": "XAttributes",
+          "desc": [
+            "Gets the attributes of this element."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getLocalName",
+          "returns": "str",
+          "desc": [
+            "Gets the local name of this element."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getParent",
+          "returns": "XElement",
+          "desc": [
+            "Gets the parent context."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getUid",
+          "returns": "int",
+          "desc": [
+            "Gets the namespace uid of this element."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "ignorableWhitespace",
+          "returns": "None",
+          "desc": [
+            "Receives notification of white space that can be ignored."
+          ],
+          "raises": [
+            "com.sun.star.xml.sax.SAXException"
+          ],
+          "args": [
+            [
+              "whitespace",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "processingInstruction",
+          "returns": "None",
+          "desc": [
+            "Receives notification of a processing instruction."
+          ],
+          "raises": [
+            "com.sun.star.xml.sax.SAXException"
+          ],
+          "args": [
+            [
+              "target",
+              "str",
+              "in"
+            ],
+            [
+              "data",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "startChildElement",
+          "returns": "XElement",
+          "desc": [
+            "Called upon each occurring child element."
+          ],
+          "raises": [
+            "com.sun.star.xml.sax.SAXException"
+          ],
+          "args": [
+            [
+              "uid",
+              "int",
+              "in"
+            ],
+            [
+              "localName",
+              "str",
+              "in"
+            ],
+            [
+              "xAttributes",
+              "XAttributes",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

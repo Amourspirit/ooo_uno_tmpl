@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:21:01+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:16+00:00",
   "name": "XCompatibilityNames",
   "type": "interface",
   "namespace": "com.sun.star.sheet",
@@ -16,7 +16,19 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".localized_name",
+        "LocalizedName"
+      ]
+    ],
+    "quote": [
+      "typing.List[LocalizedName]"
+    ],
+    "typings": [
+      "typing.List[LocalizedName]"
+    ],
+    "requires_typing": true,
     "name": "XCompatibilityNames",
     "imports": [],
     "namespace": "com.sun.star.sheet",
@@ -24,13 +36,35 @@
       "com.sun.star.uno.XInterface"
     ],
     "desc": [
-      "gives access to the sequence of compatibility names for an Addin function.",
-      "",
-      "**See Also**",
-      "",
-      "    Spreadsheets - Compatibility Names"
+      "gives access to the sequence of compatibility names for an Addin function."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1sheet_1_1XCompatibilityNames.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getCompatibilityNames",
+          "returns": "typing.List[LocalizedName]",
+          "desc": [
+            "returns the compatibility names of the specified function.",
+            "",
+            "Compatibility names are localized names of AddIn functions that are used to import files from other applications.",
+            "",
+            "If on import a localized function name is read, this list of compatibility names is used to find the internal name of the function. The current locale may differ from the locale used in the imported file, so the method XAddIn.getProgrammaticFuntionName() cannot be used here.",
+            "",
+            "The order inside the sequence of compatibility names is used to prioritize the names. Initially the first compatibility name of each function is compared to the imported name (each function may provide a sequence of compatibility names - the first entry of all sequences is used). If no entry is equal, the second entry of each sequence is used and so on.",
+            "",
+            "If a locale is not present in the sequence of compatibility names, the first entry of the sequence is used. So the method should return a sequence which contains first the entry representing the current locale.TRUE"
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aProgrammaticName",
+              "str",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:19:04+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:36+00:00",
   "name": "XSortedDynamicResultSetFactory",
   "type": "interface",
   "namespace": "com.sun.star.ucb",
@@ -16,7 +16,29 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_dynamic_result_set",
+        "XDynamicResultSet"
+      ],
+      [
+        ".numbered_sorting_info",
+        "NumberedSortingInfo"
+      ],
+      [
+        ".x_any_compare_factory",
+        "XAnyCompareFactory"
+      ]
+    ],
+    "quote": [
+      "typing.List[NumberedSortingInfo]",
+      "XDynamicResultSet",
+      "XAnyCompareFactory"
+    ],
+    "typings": [
+      "typing.List[NumberedSortingInfo]"
+    ],
+    "requires_typing": true,
     "name": "XSortedDynamicResultSetFactory",
     "imports": [],
     "namespace": "com.sun.star.ucb",
@@ -27,6 +49,34 @@
       "Provides a method to create an XDynamicResultSet which will be sorted according to the given sorting options."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1ucb_1_1XSortedDynamicResultSetFactory.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "createSortedDynamicResultSet",
+          "returns": "XDynamicResultSet",
+          "desc": [
+            "creates a sorted XDynamicResultSet depending on internal data, an (unsorted) XDynamicResultSet and the sorting info."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "Source",
+              "XDynamicResultSet",
+              "in"
+            ],
+            [
+              "Info",
+              "typing.List[NumberedSortingInfo]",
+              "in"
+            ],
+            [
+              "CompareFactory",
+              "XAnyCompareFactory",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

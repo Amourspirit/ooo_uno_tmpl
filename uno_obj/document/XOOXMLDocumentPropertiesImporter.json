@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:22:04+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:10+00:00",
   "name": "XOOXMLDocumentPropertiesImporter",
   "type": "interface",
   "namespace": "com.sun.star.document",
@@ -16,7 +16,22 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_document_properties",
+        "XDocumentProperties"
+      ],
+      [
+        "..embed.x_storage",
+        "XStorage"
+      ]
+    ],
+    "quote": [
+      "XDocumentProperties",
+      "XStorage"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XOOXMLDocumentPropertiesImporter",
     "imports": [],
     "namespace": "com.sun.star.document",
@@ -27,6 +42,37 @@
       "allows to import the document properties from OOXML format"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1document_1_1XOOXMLDocumentPropertiesImporter.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "importProperties",
+          "returns": "None",
+          "desc": [
+            "allows to import the document properties from OOXML format",
+            "",
+            "The implementation should parse the document properties from OOXML format storage and set them to the target XDocumentProperties implementation.",
+            "",
+            "The storage must represent OOXML format and support com.sun.star.embed.XRelationshipAccess interface. Please see com.sun.star.embed.StorageFactory for details regarding creation of such a storage."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.xml.sax.SAXException",
+            "com.sun.star.uno.Exception"
+          ],
+          "args": [
+            [
+              "xSource",
+              "XStorage",
+              "in"
+            ],
+            [
+              "xDocumentProperties",
+              "XDocumentProperties",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:20:51+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:12+00:00",
   "name": "X3DDisplay",
   "type": "interface",
   "namespace": "com.sun.star.chart",
@@ -16,7 +16,17 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..beans.x_property_set",
+        "XPropertySet"
+      ]
+    ],
+    "quote": [
+      "XPropertySet"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "X3DDisplay",
     "imports": [],
     "namespace": "com.sun.star.chart",
@@ -24,13 +34,32 @@
       "com.sun.star.uno.XInterface"
     ],
     "desc": [
-      "gives access to 3D elements of a three-dimensional chart.",
-      "",
-      "**See Also**",
-      "",
-      "    Dim3DDiagram"
+      "gives access to 3D elements of a three-dimensional chart."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1chart_1_1X3DDisplay.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getFloor",
+          "returns": "XPropertySet",
+          "desc": [
+            "This is only valid for three-dimensional diagrams."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getWall",
+          "returns": "XPropertySet",
+          "desc": [
+            "This specifies the properties of the two side walls of the chart scene.",
+            "",
+            "Note that this property is also valid for two-dimensional diagrams. There the properties returned here affect the background rectangle of the diagram."
+          ],
+          "raises": [],
+          "args": []
+        }
+      ]
+    }
   }
 }

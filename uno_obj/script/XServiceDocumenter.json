@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:20:33+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:20+00:00",
   "name": "XServiceDocumenter",
   "type": "interface",
   "namespace": "com.sun.star.script",
@@ -10,35 +10,98 @@
   },
   "writer_args": {},
   "data": {
-    "from_imports": [],
-    "from_imports_typing": [],
+    "from_imports": [
+      [
+        ".the_service_documenter",
+        "theServiceDocumenter"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..lang.x_type_provider",
+        "XTypeProvider"
+      ],
+      [
+        "..lang.x_service_info",
+        "XServiceInfo"
+      ]
+    ],
+    "quote": [
+      "XTypeProvider",
+      "XServiceInfo"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XServiceDocumenter",
     "imports": [],
     "namespace": "com.sun.star.script",
-    "extends": [],
+    "extends": [
+      "com.sun.star.script.theServiceDocumenter"
+    ],
     "desc": [
       "provides documentation for UNO services",
       "",
-      "**See Also**",
+      "**since**",
       "",
       "    LibreOffice 5.1"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1script_1_1XServiceDocumenter.html",
     "items": {
+      "methods": [
+        {
+          "name": "showCoreDocs",
+          "returns": "None",
+          "desc": [],
+          "raises": [],
+          "args": [
+            [
+              "xService",
+              "XServiceInfo",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "showInterfaceDocs",
+          "returns": "None",
+          "desc": [],
+          "raises": [],
+          "args": [
+            [
+              "xTypeProvider",
+              "XTypeProvider",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "showServiceDocs",
+          "returns": "None",
+          "desc": [],
+          "raises": [],
+          "args": [
+            [
+              "xService",
+              "XServiceInfo",
+              "in"
+            ]
+          ]
+        }
+      ],
       "properties": [
         {
           "name": "CoreBaseUrl",
           "returns": "str",
           "desc": [],
-          "raises_get": [],
-          "raises_set": []
+          "raises_get": "",
+          "raises_set": ""
         },
         {
           "name": "ServiceBaseUrl",
           "returns": "str",
           "desc": [],
-          "raises_get": [],
-          "raises_set": []
+          "raises_get": "",
+          "raises_set": ""
         }
       ]
     }

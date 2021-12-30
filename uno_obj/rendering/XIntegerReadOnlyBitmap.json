@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:17:36+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:19+00:00",
   "name": "XIntegerReadOnlyBitmap",
   "type": "interface",
   "namespace": "com.sun.star.rendering",
@@ -12,16 +12,39 @@
   "data": {
     "from_imports": [
       [
-        "......x_bitmap",
+        ".x_bitmap",
         "XBitmap"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..geometry.integer_point2_d",
+        "IntegerPoint2D"
+      ],
+      [
+        "..geometry.integer_rectangle2_d",
+        "IntegerRectangle2D"
+      ],
+      [
+        ".integer_bitmap_layout",
+        "IntegerBitmapLayout"
+      ]
+    ],
+    "quote": [
+      "IntegerPoint2D",
+      "IntegerRectangle2D",
+      "IntegerBitmapLayout",
+      "typing.List[int]"
+    ],
+    "typings": [
+      "typing.List[int]"
+    ],
+    "requires_typing": true,
     "name": "XIntegerReadOnlyBitmap",
     "imports": [],
     "namespace": "com.sun.star.rendering",
     "extends": [
-      "XBitmap"
+      "com.sun.star.rendering.XBitmap"
     ],
     "desc": [
       "This is a specialized interface for bitmaps having integer color channels.",
@@ -33,6 +56,74 @@
       "If you get passed an instance of XIntegerReadOnlyBitmap that also supports the XVolatileBitmap interface, things become a bit more complicated. When reading data, one has to check for both VolatileContentDestroyedException and mismatching IntegerBitmapLayout return values. If either of them occurs, the whole bitmap read operation should be repeated, if you need consistent information."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1rendering_1_1XIntegerReadOnlyBitmap.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getData",
+          "returns": "typing.List[int]",
+          "desc": [
+            "Query the raw data of this bitmap.",
+            "",
+            "Query the raw data of this bitmap, in the format as defined by getMemoryLayout(). With the given rectangle, a subset of the whole bitmap can be queried. If the internal data format's pixel are not integer multiples of bytes (i.e. if one pixel occupies less than a byte), the leftover content of the bytes at the right of each scanline is filled with zeros. The details of the scanline padding are to be retrieved from the passed bitmap layout.",
+            "",
+            "Note that the bitmap memory layout might change over time for volatile bitmaps."
+          ],
+          "raises": [
+            "com.sun.star.lang.IndexOutOfBoundsException",
+            "VolatileContentDestroyedException"
+          ],
+          "args": [
+            [
+              "bitmapLayout",
+              "IntegerBitmapLayout",
+              "out"
+            ],
+            [
+              "rect",
+              "IntegerRectangle2D",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getMemoryLayout",
+          "returns": "IntegerBitmapLayout",
+          "desc": [
+            "Query the memory layout for this bitmap.",
+            "",
+            "Please note that for volatile bitmaps, the memory layout might change between subsequent calls."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getPixel",
+          "returns": "typing.List[int]",
+          "desc": [
+            "Get a single pixel of the bitmap, returning its color value.",
+            "",
+            "If the internal data format's pixel are not integer multiples of bytes (i.e. if one pixel occupies less than a byte - the case of more than one byte per pixel is not specified), the color value is returned in the least significant bits of the single byte returned as the color. The details of the returned pixel data are to be retrieved from the passed bitmap layout.",
+            "",
+            "Note that the bitmap memory layout might change for volatile bitmaps."
+          ],
+          "raises": [
+            "com.sun.star.lang.IndexOutOfBoundsException",
+            "VolatileContentDestroyedException"
+          ],
+          "args": [
+            [
+              "bitmapLayout",
+              "IntegerBitmapLayout",
+              "out"
+            ],
+            [
+              "pos",
+              "IntegerPoint2D",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:17:39+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:32+00:00",
   "name": "XGalleryThemeProvider",
   "type": "interface",
   "namespace": "com.sun.star.gallery",
@@ -16,7 +16,17 @@
         "XNameAccess"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_gallery_theme",
+        "XGalleryTheme"
+      ]
+    ],
+    "quote": [
+      "XGalleryTheme"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XGalleryThemeProvider",
     "imports": [],
     "namespace": "com.sun.star.gallery",
@@ -28,13 +38,46 @@
       "",
       "It also allows inserting and removing of Gallery themes by name.",
       "",
-      "This interface extends the interface com.sun.star.container.XNameAccess which provides access to existing Gallery themes collection.",
-      "",
-      "**See Also**",
-      "",
-      "    com.sun.star.container.XNameAccess"
+      "This interface extends the interface com.sun.star.container.XNameAccess which provides access to existing Gallery themes collection."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1gallery_1_1XGalleryThemeProvider.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "insertNewByName",
+          "returns": "XGalleryTheme",
+          "desc": [
+            "creates a new Gallery theme and adds it to the collection."
+          ],
+          "raises": [
+            "com.sun.star.container.ElementExistException"
+          ],
+          "args": [
+            [
+              "ThemeName",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "removeByName",
+          "returns": "None",
+          "desc": [
+            "deletes a Gallery theme from the collection."
+          ],
+          "raises": [
+            "com.sun.star.container.NoSuchElementException"
+          ],
+          "args": [
+            [
+              "ThemeName",
+              "str",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

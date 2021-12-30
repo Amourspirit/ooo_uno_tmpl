@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:16:57+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:11+00:00",
   "name": "XPolicy",
   "type": "interface",
   "namespace": "com.sun.star.security",
@@ -17,6 +17,13 @@
       ]
     ],
     "from_imports_typing": [],
+    "quote": [
+      "typing.List[object]"
+    ],
+    "typings": [
+      "typing.List[object]"
+    ],
+    "requires_typing": true,
     "name": "XPolicy",
     "imports": [],
     "namespace": "com.sun.star.security",
@@ -26,11 +33,47 @@
     "desc": [
       "Interface for getting sets of permissions of a specified user or the default permissions if no user is given.",
       "",
-      "**See Also**",
+      "**since**",
       "",
-      "    com.sun.star.security.Policy"
+      "    OOo 1.1.2"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1security_1_1XPolicy.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getDefaultPermissions",
+          "returns": "typing.List[object]",
+          "desc": [
+            "Gets the default permissions granted to all users."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getPermissions",
+          "returns": "typing.List[object]",
+          "desc": [
+            "Gets the permissions of the specified user excluding the default permissions granted to all users."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "userId",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "refresh",
+          "returns": "None",
+          "desc": [
+            "Refreshes the policy configuration."
+          ],
+          "raises": [],
+          "args": []
+        }
+      ]
+    }
   }
 }

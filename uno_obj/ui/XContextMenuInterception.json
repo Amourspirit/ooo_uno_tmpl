@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:19:48+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:21+00:00",
   "name": "XContextMenuInterception",
   "type": "interface",
   "namespace": "com.sun.star.ui",
@@ -16,7 +16,17 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_context_menu_interceptor",
+        "XContextMenuInterceptor"
+      ]
+    ],
+    "quote": [
+      "XContextMenuInterceptor"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XContextMenuInterception",
     "imports": [],
     "namespace": "com.sun.star.ui",
@@ -24,13 +34,44 @@
       "com.sun.star.uno.XInterface"
     ],
     "desc": [
-      "This interface enables an object to get interceptors registered that change context menus or prevent them from being executed.",
-      "",
-      "**See Also**",
-      "",
-      "    WritingUNO - Intercepting Context Menus"
+      "This interface enables an object to get interceptors registered that change context menus or prevent them from being executed."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1ui_1_1XContextMenuInterception.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "registerContextMenuInterceptor",
+          "returns": "None",
+          "desc": [
+            "registers an XContextMenuInterceptor, which will become the first interceptor in the chain of registered interceptors."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "Interceptor",
+              "XContextMenuInterceptor",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "releaseContextMenuInterceptor",
+          "returns": "None",
+          "desc": [
+            "removes an XContextMenuInterceptor which was previously registered using XContextMenuInterception.registerContextMenuInterceptor().",
+            "",
+            "The order of removals is arbitrary. It is not necessary to remove the last registered interceptor first."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "Interceptor",
+              "XContextMenuInterceptor",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

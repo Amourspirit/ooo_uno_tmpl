@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:21:23+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:07+00:00",
   "name": "XMultiSelectionSupplier",
   "type": "interface",
   "namespace": "com.sun.star.view",
@@ -12,16 +12,26 @@
   "data": {
     "from_imports": [
       [
-        "......x_selection_supplier",
+        ".x_selection_supplier",
         "XSelectionSupplier"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..container.x_enumeration",
+        "XEnumeration"
+      ]
+    ],
+    "quote": [
+      "XEnumeration"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XMultiSelectionSupplier",
     "imports": [],
     "namespace": "com.sun.star.view",
     "extends": [
-      "XSelectionSupplier"
+      "com.sun.star.view.XSelectionSupplier"
     ],
     "desc": [
       "makes it possible to append and remove objects from a selection.",
@@ -31,6 +41,79 @@
       "Adding an object more than once to a selection should not toggle the selection for that object but only select it once"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1view_1_1XMultiSelectionSupplier.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "addSelection",
+          "returns": "bool",
+          "desc": [
+            "adds the object or the objects represented by Selection to the selection of this XMultiSelectionSupplier.",
+            "",
+            "Adding an object to the selection that is already part of the selection should not raise this exception"
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "Selection",
+              "object",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "clearSelection",
+          "returns": "None",
+          "desc": [
+            "clears the selection of this XMultiSelectionSupplier."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "createReverseSelectionEnumeration",
+          "returns": "XEnumeration",
+          "desc": [],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "createSelectionEnumeration",
+          "returns": "XEnumeration",
+          "desc": [],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getSelectionCount",
+          "returns": "int",
+          "desc": [
+            "returns the number of selected objects of this XMultiSelectionSupplier."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "removeSelection",
+          "returns": "None",
+          "desc": [
+            "remove the object or objects represented by Selection from the selection of this XMultiSelectionSupplier.",
+            "",
+            "Removing an object from the selection that is not part of the selection should not raise this exception"
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "Selection",
+              "object",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

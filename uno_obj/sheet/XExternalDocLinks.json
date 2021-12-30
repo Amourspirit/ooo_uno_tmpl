@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:21:06+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:16+00:00",
   "name": "XExternalDocLinks",
   "type": "interface",
   "namespace": "com.sun.star.sheet",
@@ -16,21 +16,27 @@
         "XEnumerationAccess"
       ],
       [
-        "..container.x_index_access",
-        "XIndexAccess"
-      ],
-      [
         "..container.x_name_access",
         "XNameAccess"
+      ],
+      [
+        "..container.x_index_access",
+        "XIndexAccess"
       ]
     ],
-    "from_imports_typing": [],
-    "name": "XExternalDocLinks",
-    "imports": [
-      "com.sun.star.container.XEnumerationAccess",
-      "com.sun.star.container.XIndexAccess",
-      "com.sun.star.container.XNameAccess"
+    "from_imports_typing": [
+      [
+        ".x_external_doc_link",
+        "XExternalDocLink"
+      ]
     ],
+    "quote": [
+      "XExternalDocLink"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "name": "XExternalDocLinks",
+    "imports": [],
     "namespace": "com.sun.star.sheet",
     "extends": [
       "com.sun.star.container.XNameAccess",
@@ -40,11 +46,31 @@
     "desc": [
       "Primary interface for the com.sun.star.sheet.ExternalDocLinks service.",
       "",
-      "**See Also**",
+      "**since**",
       "",
-      "    com.sun.star.sheet.ExternalDocLinks"
+      "    OOo 3.1"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1sheet_1_1XExternalDocLinks.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "addDocLink",
+          "returns": "XExternalDocLink",
+          "desc": [
+            "This method adds a new external document link by its URL, and returns its instance.",
+            "",
+            "If a document instance already exists for the specified URL, then that instance gets returned instead of creating a new one."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aDocName",
+              "str",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:18:56+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:35+00:00",
   "name": "XContentIdentifier",
   "type": "interface",
   "namespace": "com.sun.star.ucb",
@@ -17,6 +17,9 @@
       ]
     ],
     "from_imports_typing": [],
+    "quote": [],
+    "typings": [],
+    "requires_typing": false,
     "name": "XContentIdentifier",
     "imports": [],
     "namespace": "com.sun.star.ucb",
@@ -24,13 +27,32 @@
       "com.sun.star.uno.XInterface"
     ],
     "desc": [
-      "An identifier for contents.",
-      "",
-      "**See Also**",
-      "",
-      "    1.0"
+      "An identifier for contents."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1ucb_1_1XContentIdentifier.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getContentIdentifier",
+          "returns": "str",
+          "desc": [
+            "returns the content identifier string."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getContentProviderScheme",
+          "returns": "str",
+          "desc": [
+            "returns the content provider scheme string.",
+            "",
+            "This string will be calculated from the content identifier string and must be lower-cased(!). It is the \\\"scheme\\\" the content provider is registered for. In example, a provider for FTP contents will use ftp-URLs as content identifiers. The content provider scheme for all contents provided by that provider will be \\\"ftp\\\"."
+          ],
+          "raises": [],
+          "args": []
+        }
+      ]
+    }
   }
 }

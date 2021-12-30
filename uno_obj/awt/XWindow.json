@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:18:05+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:04+00:00",
   "name": "XWindow",
   "type": "interface",
   "namespace": "com.sun.star.awt",
@@ -16,7 +16,47 @@
         "XComponent"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_mouse_motion_listener",
+        "XMouseMotionListener"
+      ],
+      [
+        ".x_paint_listener",
+        "XPaintListener"
+      ],
+      [
+        ".x_key_listener",
+        "XKeyListener"
+      ],
+      [
+        ".x_focus_listener",
+        "XFocusListener"
+      ],
+      [
+        ".rectangle",
+        "Rectangle"
+      ],
+      [
+        ".x_window_listener",
+        "XWindowListener"
+      ],
+      [
+        ".x_mouse_listener",
+        "XMouseListener"
+      ]
+    ],
+    "quote": [
+      "Rectangle",
+      "XKeyListener",
+      "XPaintListener",
+      "XWindowListener",
+      "XMouseListener",
+      "XFocusListener",
+      "XMouseMotionListener"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XWindow",
     "imports": [],
     "namespace": "com.sun.star.awt",
@@ -26,13 +66,275 @@
     "desc": [
       "specifies the basic operations for a window component.",
       "",
-      "A window is a rectangular region on an output device with its own position, size, and internal coordinate system. A window is used for displaying data. In addition, the window receives events from the user.",
-      "",
-      "**See Also**",
-      "",
-      "    OfficeDev - Component - Window Interfaces OfficeDev - Frames - Linking Components and Windows OfficeDev - Windows"
+      "A window is a rectangular region on an output device with its own position, size, and internal coordinate system. A window is used for displaying data. In addition, the window receives events from the user."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XWindow.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "addFocusListener",
+          "returns": "None",
+          "desc": [
+            "adds a focus listener to the object."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xListener",
+              "XFocusListener",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "addKeyListener",
+          "returns": "None",
+          "desc": [
+            "adds a key listener to the object."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xListener",
+              "XKeyListener",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "addMouseListener",
+          "returns": "None",
+          "desc": [
+            "adds a mouse listener to the object."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xListener",
+              "XMouseListener",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "addMouseMotionListener",
+          "returns": "None",
+          "desc": [
+            "adds a mouse motion listener to the object."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xListener",
+              "XMouseMotionListener",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "addPaintListener",
+          "returns": "None",
+          "desc": [
+            "adds a paint listener to the object."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xListener",
+              "XPaintListener",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "addWindowListener",
+          "returns": "None",
+          "desc": [
+            "adds a window listener to the object."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xListener",
+              "XWindowListener",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getPosSize",
+          "returns": "Rectangle",
+          "desc": [
+            "returns the outer bounds of the window."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "removeFocusListener",
+          "returns": "None",
+          "desc": [
+            "removes the specified focus listener from the listener list."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xListener",
+              "XFocusListener",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "removeKeyListener",
+          "returns": "None",
+          "desc": [
+            "removes the specified key listener from the listener list."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xListener",
+              "XKeyListener",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "removeMouseListener",
+          "returns": "None",
+          "desc": [
+            "removes the specified mouse listener from the listener list."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xListener",
+              "XMouseListener",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "removeMouseMotionListener",
+          "returns": "None",
+          "desc": [
+            "removes the specified mouse motion listener from the listener list."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xListener",
+              "XMouseMotionListener",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "removePaintListener",
+          "returns": "None",
+          "desc": [
+            "removes the specified paint listener from the listener list."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xListener",
+              "XPaintListener",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "removeWindowListener",
+          "returns": "None",
+          "desc": [
+            "removes the specified window listener from the listener list."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xListener",
+              "XWindowListener",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setEnable",
+          "returns": "None",
+          "desc": [
+            "enables or disables the window depending on the parameter."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "Enable",
+              "bool",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setFocus",
+          "returns": "None",
+          "desc": [
+            "sets the focus to the window."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "setPosSize",
+          "returns": "None",
+          "desc": [
+            "sets the outer bounds of the window."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "X",
+              "int",
+              "in"
+            ],
+            [
+              "Y",
+              "int",
+              "in"
+            ],
+            [
+              "Width",
+              "int",
+              "in"
+            ],
+            [
+              "Height",
+              "int",
+              "in"
+            ],
+            [
+              "Flags",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setVisible",
+          "returns": "None",
+          "desc": [
+            "shows or hides the window depending on the parameter."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "Visible",
+              "bool",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

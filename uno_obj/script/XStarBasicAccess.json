@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:20:32+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:19+00:00",
   "name": "XStarBasicAccess",
   "type": "interface",
   "namespace": "com.sun.star.script",
@@ -16,7 +16,20 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..container.x_name_container",
+        "XNameContainer"
+      ]
+    ],
+    "quote": [
+      "XNameContainer",
+      "typing.List[int]"
+    ],
+    "typings": [
+      "typing.List[int]"
+    ],
+    "requires_typing": true,
     "name": "XStarBasicAccess",
     "imports": [],
     "namespace": "com.sun.star.script",
@@ -24,9 +37,122 @@
       "com.sun.star.uno.XInterface"
     ],
     "desc": [
-      "Interface representing a library and provides access to its modules."
+      "Interface representing a library and provides access to its modules.",
+      "",
+      ".. deprecated::",
+      "",
+      "    Interface is deprecated."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1script_1_1XStarBasicAccess.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "addDialog",
+          "returns": "None",
+          "desc": [
+            "Adds an old style basic dialog (SI controls) to an existing (e.g., created by createLibrary) library.",
+            "",
+            "By using this method together with createLibrary the caller does not have to implement XStarBasicLibraryInfo and XStarBasicDialogInfo"
+          ],
+          "raises": [
+            "com.sun.star.container.NoSuchElementException"
+          ],
+          "args": [
+            [
+              "LibraryName",
+              "str",
+              "in"
+            ],
+            [
+              "DialogName",
+              "str",
+              "in"
+            ],
+            [
+              "Data",
+              "typing.List[int]",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "addModule",
+          "returns": "None",
+          "desc": [
+            "Adds a module to an existing (e.g., created by createLibrary) library.",
+            "",
+            "By using this method together with createLibrary the caller does not have to implement XStarBasicLibraryInfo and XModuleInfo."
+          ],
+          "raises": [
+            "com.sun.star.container.NoSuchElementException"
+          ],
+          "args": [
+            [
+              "LibraryName",
+              "str",
+              "in"
+            ],
+            [
+              "ModuleName",
+              "str",
+              "in"
+            ],
+            [
+              "Language",
+              "str",
+              "in"
+            ],
+            [
+              "Source",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "createLibrary",
+          "returns": "None",
+          "desc": [
+            "Creates an empty library.",
+            "",
+            "This method can be called alternatively to accessing directly the NameContainer returned by getLibraryContainer. By using this method together with addModule and addStarBasicDialog the caller does not have to implement XStarBasicLibraryInfo, XModuleInfo, and XStarBasicDialogInfo"
+          ],
+          "raises": [
+            "com.sun.star.container.ElementExistException"
+          ],
+          "args": [
+            [
+              "LibName",
+              "str",
+              "in"
+            ],
+            [
+              "Password",
+              "str",
+              "in"
+            ],
+            [
+              "ExternalSourceURL",
+              "str",
+              "in"
+            ],
+            [
+              "LinkTargetURL",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getLibraryContainer",
+          "returns": "XNameContainer",
+          "desc": [
+            "returns the library container giving access to the libraries stored in a document or basic library file."
+          ],
+          "raises": [],
+          "args": []
+        }
+      ]
+    }
   }
 }

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:17:34+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:19+00:00",
   "name": "XCanvas",
   "type": "interface",
   "namespace": "com.sun.star.rendering",
@@ -12,18 +12,120 @@
   "data": {
     "from_imports": [
       [
-        "......x_mapping2_d",
-        "XMapping2D"
+        "..uno.x_interface",
+        "XInterface"
       ]
     ],
-    "from_imports_typing": [],
-    "name": "XCanvas",
-    "imports": [
+    "from_imports_typing": [
+      [
+        ".font_request",
+        "FontRequest"
+      ],
+      [
+        ".texture",
+        "Texture"
+      ],
+      [
+        "..geometry.real_bezier_segment2_d",
+        "RealBezierSegment2D"
+      ],
+      [
+        ".x_cached_primitive",
+        "XCachedPrimitive"
+      ],
+      [
+        ".font_info",
+        "FontInfo"
+      ],
+      [
+        ".x_poly_polygon2_d",
+        "XPolyPolygon2D"
+      ],
+      [
+        ".view_state",
+        "ViewState"
+      ],
+      [
+        ".string_context",
+        "StringContext"
+      ],
+      [
+        "..geometry.matrix2_d",
+        "Matrix2D"
+      ],
+      [
+        "..beans.property_value",
+        "PropertyValue"
+      ],
+      [
+        ".x_graphic_device",
+        "XGraphicDevice"
+      ],
+      [
+        "..geometry.real_point2_d",
+        "RealPoint2D"
+      ],
+      [
+        ".x_bitmap",
+        "XBitmap"
+      ],
+      [
+        ".font_info",
+        "FontInfo"
+      ],
+      [
+        "..geometry.x_mapping2_d",
+        "XMapping2D"
+      ],
+      [
+        ".x_text_layout",
+        "XTextLayout"
+      ],
+      [
+        ".stroke_attributes",
+        "StrokeAttributes"
+      ],
+      [
+        ".render_state",
+        "RenderState"
+      ],
+      [
+        ".x_canvas_font",
+        "XCanvasFont"
+      ]
+    ],
+    "quote": [
+      "typing.List[FontInfo]",
+      "XCanvasFont",
+      "XGraphicDevice",
+      "typing.List[PropertyValue]",
+      "typing.List[Texture]",
+      "StringContext",
+      "ViewState",
+      "XPolyPolygon2D",
+      "RealPoint2D",
+      "XTextLayout",
+      "FontRequest",
+      "Matrix2D",
+      "RealBezierSegment2D",
+      "XCachedPrimitive",
+      "FontInfo",
+      "XBitmap",
+      "RenderState",
+      "StrokeAttributes",
       "XMapping2D"
     ],
+    "typings": [
+      "typing.List[Texture]",
+      "typing.List[FontInfo]",
+      "typing.List[PropertyValue]"
+    ],
+    "requires_typing": true,
+    "name": "XCanvas",
+    "imports": [],
     "namespace": "com.sun.star.rendering",
     "extends": [
-      "XMapping2D"
+      "com.sun.star.uno.XInterface"
     ],
     "desc": [
       "Central interface for rendering.",
@@ -38,11 +140,594 @@
       "",
       "Things that need more than a small, fixed amount of data are encapsulated in own interfaces, e.g. polygons and bitmaps. You can, in principle, roll your own implementations of these interfaces, wrap it around your internal representation of polygons and bitmaps, and render them. It might just not be overly fast, because the XCanvas would need to convert for each render call. It is therefore recommended to create such objects via the XGraphicDevice factory (to be retrieved from every canvas object via the getDevice() call) - they will then internally optimize to the underlying graphics subsystem.",
       "",
-      "**See Also**",
+      "**since**",
       "",
       "    OOo 2.0"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1rendering_1_1XCanvas.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "clear",
+          "returns": "None",
+          "desc": [
+            "Clear the whole canvas area.",
+            "",
+            "This method clears the whole canvas area to the device default color (e.g. white for a printer, transparent for an XCustomSprite)."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "createFont",
+          "returns": "XCanvasFont",
+          "desc": [
+            "Create a suitable font for the specified font description."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "aFontRequest",
+              "FontRequest",
+              "in"
+            ],
+            [
+              "aExtraFontProperties",
+              "typing.List[PropertyValue]",
+              "in"
+            ],
+            [
+              "aFontMatrix",
+              "Matrix2D",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "drawBezier",
+          "returns": "None",
+          "desc": [
+            "Draw a cubic Bezier curve in device resolution width (i.e.",
+            "",
+            "one device pixel wide)."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "aBezierSegment",
+              "RealBezierSegment2D",
+              "in"
+            ],
+            [
+              "aEndPoint",
+              "RealPoint2D",
+              "in"
+            ],
+            [
+              "aViewState",
+              "ViewState",
+              "in"
+            ],
+            [
+              "aRenderState",
+              "RenderState",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "drawBitmap",
+          "returns": "XCachedPrimitive",
+          "desc": [
+            "Render the given bitmap.",
+            "",
+            "This method renders the bitmap, at a position and shape as specified by the combined view and render transformations. For fast render speed, the bitmap should be created by the corresponding XGraphicDevice's XGraphicDevice.createCompatibleBitmap() method."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException",
+            "VolatileContentDestroyedException"
+          ],
+          "args": [
+            [
+              "xBitmap",
+              "XBitmap",
+              "in"
+            ],
+            [
+              "aViewState",
+              "ViewState",
+              "in"
+            ],
+            [
+              "aRenderState",
+              "RenderState",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "drawBitmapModulated",
+          "returns": "XCachedPrimitive",
+          "desc": [
+            "Render the given bitmap, with a global color modulation.",
+            "",
+            "This method renders the bitmap, at a position and shape as specified by the combined view and render transformations. For fast render speed, the bitmap should be created by the corresponding XGraphicDevice's XGraphicDevice.createCompatibleBitmap() method. The bitmap's color channel values are multiplied with the device color values as specified in the render state."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException",
+            "VolatileContentDestroyedException"
+          ],
+          "args": [
+            [
+              "xBitmap",
+              "XBitmap",
+              "in"
+            ],
+            [
+              "aViewState",
+              "ViewState",
+              "in"
+            ],
+            [
+              "aRenderState",
+              "RenderState",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "drawLine",
+          "returns": "None",
+          "desc": [
+            "Draw a line in device resolution width (i.e.",
+            "",
+            "one device pixel wide)."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "aStartPoint",
+              "RealPoint2D",
+              "in"
+            ],
+            [
+              "aEndPoint",
+              "RealPoint2D",
+              "in"
+            ],
+            [
+              "aViewState",
+              "ViewState",
+              "in"
+            ],
+            [
+              "aRenderState",
+              "RenderState",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "drawPoint",
+          "returns": "None",
+          "desc": [
+            "Draw a point in device resolution on the device."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "aPoint",
+              "RealPoint2D",
+              "in"
+            ],
+            [
+              "aViewState",
+              "ViewState",
+              "in"
+            ],
+            [
+              "aRenderState",
+              "RenderState",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "drawPolyPolygon",
+          "returns": "XCachedPrimitive",
+          "desc": [
+            "Draw a poly-polygon in device resolution line width (i.e.",
+            "",
+            "the lines are one device pixel wide)."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "xPolyPolygon",
+              "XPolyPolygon2D",
+              "in"
+            ],
+            [
+              "aViewState",
+              "ViewState",
+              "in"
+            ],
+            [
+              "aRenderState",
+              "RenderState",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "drawText",
+          "returns": "XCachedPrimitive",
+          "desc": [
+            "Draw the text given by the substring of the specified string with the given font.",
+            "",
+            "The local origin of this output operation is either the left end of the text baseline, for textDirection equal LEFT_TO_RIGHT, or the right end of the baseline, for textDirection equal to RIGHT_TO_LEFT, respectively."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "aText",
+              "StringContext",
+              "in"
+            ],
+            [
+              "xFont",
+              "XCanvasFont",
+              "in"
+            ],
+            [
+              "aViewState",
+              "ViewState",
+              "in"
+            ],
+            [
+              "aRenderState",
+              "RenderState",
+              "in"
+            ],
+            [
+              "nTextDirection",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "drawTextLayout",
+          "returns": "XCachedPrimitive",
+          "desc": [
+            "Draw the formatted text given by the text layout.",
+            "",
+            "The glyphs as represented by the text layout are always output with the reference position being the leftmost edge of the layout object's baseline. If the layout contains more than one baseline, the baseline of the first strong character in logical order is used here (strong in this context means that the character can be unambiguously assigned to a Unicode script)."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "xLayoutetText",
+              "XTextLayout",
+              "in"
+            ],
+            [
+              "aViewState",
+              "ViewState",
+              "in"
+            ],
+            [
+              "aRenderState",
+              "RenderState",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "fillPolyPolygon",
+          "returns": "XCachedPrimitive",
+          "desc": [
+            "Fill the given poly-polygon.",
+            "",
+            "This method fills the given poly-polygon according to the RenderState's color and the poly-polygon's fill rule."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "xPolyPolygon",
+              "XPolyPolygon2D",
+              "in"
+            ],
+            [
+              "aViewState",
+              "ViewState",
+              "in"
+            ],
+            [
+              "aRenderState",
+              "RenderState",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "fillTextureMappedPolyPolygon",
+          "returns": "XCachedPrimitive",
+          "desc": [
+            "Fill the given poly-polygon with a mapped texture.",
+            "",
+            "This method fills the given poly-polygon according to the RenderState's color, the given textures and poly-polygon's fill rule. The texture is mapped to the poly-polygon's interior via the given texture mapping."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException",
+            "VolatileContentDestroyedException"
+          ],
+          "args": [
+            [
+              "xPolyPolygon",
+              "XPolyPolygon2D",
+              "in"
+            ],
+            [
+              "aViewState",
+              "ViewState",
+              "in"
+            ],
+            [
+              "aRenderState",
+              "RenderState",
+              "in"
+            ],
+            [
+              "xTextures",
+              "typing.List[Texture]",
+              "in"
+            ],
+            [
+              "xMapping",
+              "XMapping2D",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "fillTexturedPolyPolygon",
+          "returns": "XCachedPrimitive",
+          "desc": [
+            "Fill the given poly-polygon with a texture.",
+            "",
+            "This method fills the given poly-polygon according to the RenderState's color, the given textures and poly-polygon's fill rule."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException",
+            "VolatileContentDestroyedException"
+          ],
+          "args": [
+            [
+              "xPolyPolygon",
+              "XPolyPolygon2D",
+              "in"
+            ],
+            [
+              "aViewState",
+              "ViewState",
+              "in"
+            ],
+            [
+              "aRenderState",
+              "RenderState",
+              "in"
+            ],
+            [
+              "xTextures",
+              "typing.List[Texture]",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getDevice",
+          "returns": "XGraphicDevice",
+          "desc": [
+            "Request the associated graphic device for this canvas.",
+            "",
+            "A graphic device provides methods specific to the underlying output device capabilities, which are common for all canvases rendering to such a device. This includes device resolution, color space, or bitmap formats."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "queryAvailableFonts",
+          "returns": "typing.List[FontInfo]",
+          "desc": [
+            "Query font information, specific to this canvas."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "aFilter",
+              "FontInfo",
+              "in"
+            ],
+            [
+              "aFontProperties",
+              "typing.List[PropertyValue]",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "queryStrokeShapes",
+          "returns": "XPolyPolygon2D",
+          "desc": [
+            "Query the polygonal representation of the stroke outlines, as it would be generated by the strokePolyPolygon methods.",
+            "",
+            "This method can be used to e.g. set a clipping which covers the same area as a stroke."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "xPolyPolygon",
+              "XPolyPolygon2D",
+              "in"
+            ],
+            [
+              "aViewState",
+              "ViewState",
+              "in"
+            ],
+            [
+              "aRenderState",
+              "RenderState",
+              "in"
+            ],
+            [
+              "aStrokeAttributes",
+              "StrokeAttributes",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "strokePolyPolygon",
+          "returns": "XCachedPrimitive",
+          "desc": [
+            "Stroke each polygon of the provided poly-polygon with the specified stroke attributes.",
+            "",
+            "This method considers the stroking of all polygons as an atomic operation in relation to the RenderState's CompositeOperationy operation. That means, overlapping strokes from distinct polygons will look exactly as overlapping segments of the same polygon, even with transparency."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "xPolyPolygon",
+              "XPolyPolygon2D",
+              "in"
+            ],
+            [
+              "aViewState",
+              "ViewState",
+              "in"
+            ],
+            [
+              "aRenderState",
+              "RenderState",
+              "in"
+            ],
+            [
+              "aStrokeAttributes",
+              "StrokeAttributes",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "strokeTextureMappedPolyPolygon",
+          "returns": "XCachedPrimitive",
+          "desc": [
+            "Stroke each polygon of the provided poly-polygon with the specified stroke attributes, fill the stroked outline with the specified texture graphics, map the texture to the outline via the specified texture mapping.",
+            "",
+            "This method considers the stroking of all polygons as an atomic operation in relation to the RenderState's CompositeOp operation. That means, overlapping strokes from distinct polygons will look exactly as overlapping segments of the same polygon, even with transparency."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException",
+            "VolatileContentDestroyedException"
+          ],
+          "args": [
+            [
+              "xPolyPolygon",
+              "XPolyPolygon2D",
+              "in"
+            ],
+            [
+              "aViewState",
+              "ViewState",
+              "in"
+            ],
+            [
+              "aRenderState",
+              "RenderState",
+              "in"
+            ],
+            [
+              "aTextures",
+              "typing.List[Texture]",
+              "in"
+            ],
+            [
+              "xMapping",
+              "XMapping2D",
+              "in"
+            ],
+            [
+              "aStrokeAttributes",
+              "StrokeAttributes",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "strokeTexturedPolyPolygon",
+          "returns": "XCachedPrimitive",
+          "desc": [
+            "Stroke each polygon of the provided poly-polygon with the specified stroke attributes, fill the stroked outline with the specified texture graphics.",
+            "",
+            "This method considers the stroking of all polygons as an atomic operation in relation to the RenderState's CompositeOp operation. That means, overlapping strokes from distinct polygons will look exactly as overlapping segments of the same polygon, even with transparency."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException",
+            "VolatileContentDestroyedException"
+          ],
+          "args": [
+            [
+              "xPolyPolygon",
+              "XPolyPolygon2D",
+              "in"
+            ],
+            [
+              "aViewState",
+              "ViewState",
+              "in"
+            ],
+            [
+              "aRenderState",
+              "RenderState",
+              "in"
+            ],
+            [
+              "aTextures",
+              "typing.List[Texture]",
+              "in"
+            ],
+            [
+              "aStrokeAttributes",
+              "StrokeAttributes",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:16:14+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:08+00:00",
   "name": "XObjectInspectorModel",
   "type": "interface",
   "namespace": "com.sun.star.inspection",
@@ -11,7 +11,19 @@
   "writer_args": {},
   "data": {
     "from_imports": [],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".property_category_descriptor",
+        "PropertyCategoryDescriptor"
+      ]
+    ],
+    "quote": [
+      "typing.List[PropertyCategoryDescriptor]"
+    ],
+    "typings": [
+      "typing.List[PropertyCategoryDescriptor]"
+    ],
+    "requires_typing": true,
     "name": "XObjectInspectorModel",
     "imports": [],
     "namespace": "com.sun.star.inspection",
@@ -19,11 +31,113 @@
     "desc": [
       "describes the model of an ObjectInspector",
       "",
-      "**See Also**",
+      "**since**",
       "",
-      "    ObjectInspector"
+      "    OOo 2.0.3"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1inspection_1_1XObjectInspectorModel.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "describeCategories",
+          "returns": "typing.List[PropertyCategoryDescriptor]",
+          "desc": [
+            "describes the property categories used by the property handlers.",
+            "",
+            "Properties can be sorted into different categories, described by the LineDescriptor.Category attribute, which is filled in XPropertyHandler.describePropertyLine() method of your property handler.",
+            "Those names provided by the handlers are programmatic names. All other information about categories is part of the PropertyCategoryDescriptor, and describeCategories() assembles information about all categories which all property handlers provided by the model use."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getPropertyOrderIndex",
+          "returns": "int",
+          "desc": [
+            "retrieves an index in a global property ordering, for a given property name",
+            "",
+            "In the user interface of an ObjectInspector, single properties are represented by single lines, and those lines are displayed successively. To determine an order of the property lines, the inspector model can associate an \\\"order index\\\" with each property. The ObjectInspector will then sort the property lines in a way that they have the same relative ordering as the \\\"order indexes\\\" of their properties.",
+            "",
+            "Note that the concrete value the model returns for a given property does not matter. All what matters is that if you want a certain property Foo to be displayed after another property Bar, then the order index of Foo should be greater than the order index of Bar.",
+            "",
+            "If for two different properties the same order index is returned, the ObjectInspector will assume the order in which those properties were provided by the respective property handler (XPropertyHandler.getSupportedProperties()).",
+            "If two such properties originate from different handlers, they will be ordered according to the order of the handlers, as provided in the HandlerFactories attribute."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "PropertyName",
+              "str",
+              "in"
+            ]
+          ]
+        }
+      ],
+      "properties": [
+        {
+          "name": "HasHelpSection",
+          "returns": "bool",
+          "desc": [
+            "indicates that the object inspector should have a help section.",
+            "",
+            "The object inspector displays lines of property/values, optionally grouped into categories, as described by the property handlers.",
+            "Additionally, the inspector can optionally display a section dedicated to help texts. Clients could use this section to display context-sensitive help, for instance short texts explaining the currently selected property.",
+            "",
+            "**since**",
+            "",
+            "    OOo 2.2"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "IsReadOnly",
+          "returns": "bool",
+          "desc": [
+            "determines whether the object inspector's UI should be read-only.",
+            "",
+            "In this case, the user is able to browse through all properties, but cannot change any of them.",
+            "",
+            "In a read-only object inspector, the property controls are readonly or disabled themselves, and the primary and secondary buttons of a property line are both disabled."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "MaxHelpTextLines",
+          "returns": "int",
+          "desc": [
+            "denotes the maximum number of lines of text to be reserved for the help section.",
+            "",
+            "This property is ignored by the ObjectInspector if HasHelpSection is FALSE.",
+            "",
+            "The layout of the ObjectInspector is undefined if MaxHelpTextLines is smaller than MinHelpTextLines.",
+            "",
+            "**since**",
+            "",
+            "    OOo 2.2"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "MinHelpTextLines",
+          "returns": "int",
+          "desc": [
+            "denotes the minimum number of lines of text to be reserved for the help section.",
+            "",
+            "This property is ignored by the ObjectInspector if HasHelpSection is FALSE.",
+            "",
+            "The layout of the ObjectInspector is undefined if MinHelpTextLines is larger than MaxHelpTextLines.",
+            "",
+            "**since**",
+            "",
+            "    OOo 2.2"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
   }
 }

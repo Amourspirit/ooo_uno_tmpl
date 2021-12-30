@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:16:38+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:15+00:00",
   "name": "XDatabaseAccess",
   "type": "interface",
   "namespace": "com.sun.star.sdb",
@@ -12,21 +12,105 @@
   "data": {
     "from_imports": [
       [
-        "......x_interaction_handler",
-        "XInteractionHandler"
+        "..sdbc.x_data_source",
+        "XDataSource"
       ]
     ],
-    "from_imports_typing": [],
-    "name": "XDatabaseAccess",
-    "imports": [
-      "XInteractionHandler"
+    "from_imports_typing": [
+      [
+        ".x_database_access_listener",
+        "XDatabaseAccessListener"
+      ],
+      [
+        "..sdbc.x_connection",
+        "XConnection"
+      ]
     ],
+    "quote": [
+      "XConnection",
+      "XDatabaseAccessListener"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "name": "XDatabaseAccess",
+    "imports": [],
     "namespace": "com.sun.star.sdb",
-    "extends": [],
+    "extends": [
+      "com.sun.star.sdbc.XDataSource"
+    ],
     "desc": [
-      "is not to be used anymore"
+      "is not to be used anymore",
+      "",
+      ".. deprecated::",
+      "",
+      "    Interface is deprecated."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1sdb_1_1XDatabaseAccess.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "addDatabaseAccessListener",
+          "returns": "None",
+          "desc": [],
+          "raises": [],
+          "args": [
+            [
+              "listener",
+              "XDatabaseAccessListener",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getIsolatedConnection",
+          "returns": "XConnection",
+          "desc": [],
+          "raises": [
+            "com.sun.star.sdbc.SQLException"
+          ],
+          "args": [
+            [
+              "user",
+              "str",
+              "in"
+            ],
+            [
+              "password",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "hasConnections",
+          "returns": "bool",
+          "desc": [],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "removeDatabaseAccessListener",
+          "returns": "None",
+          "desc": [],
+          "raises": [],
+          "args": [
+            [
+              "listener",
+              "XDatabaseAccessListener",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "suspendConnections",
+          "returns": "bool",
+          "desc": [],
+          "raises": [
+            "com.sun.star.sdbc.SQLException"
+          ],
+          "args": []
+        }
+      ]
+    }
   }
 }

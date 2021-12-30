@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:16:38+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:15+00:00",
   "name": "XDataAccessDescriptorFactory",
   "type": "interface",
   "namespace": "com.sun.star.sdb",
@@ -10,18 +10,48 @@
   },
   "writer_args": {},
   "data": {
-    "from_imports": [],
-    "from_imports_typing": [],
+    "from_imports": [
+      [
+        ".data_access_descriptor_factory",
+        "DataAccessDescriptorFactory"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..beans.x_property_set",
+        "XPropertySet"
+      ]
+    ],
+    "quote": [
+      "XPropertySet"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XDataAccessDescriptorFactory",
     "imports": [],
     "namespace": "com.sun.star.sdb",
-    "extends": [],
+    "extends": [
+      "com.sun.star.sdb.DataAccessDescriptorFactory"
+    ],
     "desc": [
       "allows creating instances of the DataAccessDescriptor service.",
       "",
-      "Data access descriptors are finally only bags of properties with a defined semantics. Depending on the context in which you use them, certain of their properties are needed or unneeded.\n The descriptor factory allows you to create instances which offer all properties potentially needed at a descriptor."
+      "Data access descriptors are finally only bags of properties with a defined semantics. Depending on the context in which you use them, certain of their properties are needed or unneeded.",
+      "The descriptor factory allows you to create instances which offer all properties potentially needed at a descriptor."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1sdb_1_1XDataAccessDescriptorFactory.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "createDataAccessDescriptor",
+          "returns": "XPropertySet",
+          "desc": [
+            "creates a DataAccessDescriptor which supports all properties defined for this service, even if they're normally optional only."
+          ],
+          "raises": [],
+          "args": []
+        }
+      ]
+    }
   }
 }

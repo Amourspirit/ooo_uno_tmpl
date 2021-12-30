@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:18:52+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:05+00:00",
   "name": "XStorageRawAccess",
   "type": "interface",
   "namespace": "com.sun.star.embed",
@@ -11,7 +11,17 @@
   "writer_args": {},
   "data": {
     "from_imports": [],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..io.x_input_stream",
+        "XInputStream"
+      ]
+    ],
+    "quote": [
+      "XInputStream"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XStorageRawAccess",
     "imports": [],
     "namespace": "com.sun.star.embed",
@@ -20,6 +30,89 @@
       "This interface represents main storage functionality."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1embed_1_1XStorageRawAccess.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getPlainRawStreamElement",
+          "returns": "XInputStream",
+          "desc": [
+            "allows to get a plain raw stream representing a package stream.",
+            "",
+            "This method returns a stream from the package as it is stored there, without any decompression/description and etc. This method can be helpful to check file consistency, for example by signing."
+          ],
+          "raises": [
+            "com.sun.star.embed.InvalidStorageException",
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.container.NoSuchElementException",
+            "com.sun.star.io.IOException",
+            "com.sun.star.embed.StorageWrappedTargetException"
+          ],
+          "args": [
+            [
+              "sStreamName",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getRawEncrStreamElement",
+          "returns": "XInputStream",
+          "desc": [
+            "allows to get a raw stream representing encrypted stream with header.",
+            "",
+            "This method allows to transport encrypted streams without decryption. Mainly this method is introduced to allow to copy one encrypted storage stream to another without decryption. It is not recommended to use this method outside of storage implementation since different storages implementation could have different encryption format. If the method is used outside of storage implementation the user code is responsible to get sure that the raw format of source and target storages is the same.",
+            "",
+            "The difference of this method from the previous one is that it handles only encrypted streams. The contents of returned by these methods streams can differ for the same entry, since this method can add additional data into the stream to allow successful insertion."
+          ],
+          "raises": [
+            "com.sun.star.embed.InvalidStorageException",
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.packages.NoEncryptionException",
+            "com.sun.star.container.NoSuchElementException",
+            "com.sun.star.io.IOException",
+            "com.sun.star.embed.StorageWrappedTargetException"
+          ],
+          "args": [
+            [
+              "sStreamName",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "insertRawEncrStreamElement",
+          "returns": "None",
+          "desc": [
+            "allows to insert a raw stream representing encrypted stream with header.",
+            "",
+            "This method allows to insert a stream retrieved by XStorageRawAccess.getRawEncrStreamElement() into a storage.",
+            "",
+            "This method allows to transport encrypted streams without decryption. Mainly this method is introduced to allow to copy one encrypted storage stream to another without decryption. It is not recommended to use this method outside of storage implementation since different storages implementation could have different encryption format."
+          ],
+          "raises": [
+            "com.sun.star.embed.InvalidStorageException",
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.packages.NoRawFormatException",
+            "com.sun.star.container.ElementExistException",
+            "com.sun.star.io.IOException",
+            "com.sun.star.embed.StorageWrappedTargetException"
+          ],
+          "args": [
+            [
+              "sStreamName",
+              "str",
+              "in"
+            ],
+            [
+              "xInStream",
+              "XInputStream",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

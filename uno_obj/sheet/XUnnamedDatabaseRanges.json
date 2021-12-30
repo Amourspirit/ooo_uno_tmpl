@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:21:20+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:18+00:00",
   "name": "XUnnamedDatabaseRanges",
   "type": "interface",
   "namespace": "com.sun.star.sheet",
@@ -16,7 +16,17 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..table.cell_range_address",
+        "CellRangeAddress"
+      ]
+    ],
+    "quote": [
+      "CellRangeAddress"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XUnnamedDatabaseRanges",
     "imports": [],
     "namespace": "com.sun.star.sheet",
@@ -26,11 +36,60 @@
     "desc": [
       "provides functions to manage the sheet local databases",
       "",
-      "**See Also**",
+      "**since**",
       "",
       "    LibreOffice 3.5"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1sheet_1_1XUnnamedDatabaseRanges.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getByTable",
+          "returns": "object",
+          "desc": [],
+          "raises": [
+            "com.sun.star.container.NoSuchElementException",
+            "com.sun.star.lang.IndexOutOfBoundsException"
+          ],
+          "args": [
+            [
+              "nTab",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "hasByTable",
+          "returns": "bool",
+          "desc": [],
+          "raises": [
+            "com.sun.star.lang.IndexOutOfBoundsException"
+          ],
+          "args": [
+            [
+              "nTab",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setByTable",
+          "returns": "None",
+          "desc": [],
+          "raises": [
+            "com.sun.star.lang.IndexOutOfBoundsException"
+          ],
+          "args": [
+            [
+              "aRange",
+              "CellRangeAddress",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

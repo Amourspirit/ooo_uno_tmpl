@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:22:33+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:14:59+00:00",
   "name": "XTextContent",
   "type": "interface",
   "namespace": "com.sun.star.text",
@@ -16,7 +16,17 @@
         "XComponent"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_text_range",
+        "XTextRange"
+      ]
+    ],
+    "quote": [
+      "XTextRange"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XTextContent",
     "imports": [],
     "namespace": "com.sun.star.text",
@@ -24,13 +34,44 @@
       "com.sun.star.lang.XComponent"
     ],
     "desc": [
-      "enables objects to be inserted into a text and to provide their location in a text once they are inserted into it.",
-      "",
-      "**See Also**",
-      "",
-      "    Text - Navigating - Locating Text Contents"
+      "enables objects to be inserted into a text and to provide their location in a text once they are inserted into it."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1text_1_1XTextContent.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "attach",
+          "returns": "None",
+          "desc": [
+            "is called when this object gets embedded in a text.",
+            "",
+            "This acts like a multi-phase construction, thus the object may be invalid until it is attached to a text position. Usually this method is called from within XText.insertTextContent().",
+            "",
+            "Both text objects and text content objects may only be connected to each other if they are created by the same component. When implementing new components, this behavior is deprecated."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "xTextRange",
+              "XTextRange",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getAnchor",
+          "returns": "XTextRange",
+          "desc": [
+            "Note: The anchor of the actual implementation for text tables does not have a position in the text. Thus that anchor can not be used for some operation like attach() for example or com.sun.star.text.insertTextContent or other function that require the object to have a position in the text.",
+            "",
+            "The reason why a text table still needs an anchor is that for example tables should be insertable via com.sun.star.text.insertTextContent and that interface uses a parameter of that type."
+          ],
+          "raises": [],
+          "args": []
+        }
+      ]
+    }
   }
 }

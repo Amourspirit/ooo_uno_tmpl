@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:21:50+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:38+00:00",
   "name": "XModel",
   "type": "interface",
   "namespace": "com.sun.star.frame",
@@ -16,7 +16,29 @@
         "XComponent"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_controller",
+        "XController"
+      ],
+      [
+        "..uno.x_interface",
+        "XInterface"
+      ],
+      [
+        "..beans.property_value",
+        "PropertyValue"
+      ]
+    ],
+    "quote": [
+      "typing.List[PropertyValue]",
+      "XInterface",
+      "XController"
+    ],
+    "typings": [
+      "typing.List[PropertyValue]"
+    ],
+    "requires_typing": true,
     "name": "XModel",
     "imports": [],
     "namespace": "com.sun.star.frame",
@@ -30,13 +52,152 @@
       "",
       "Models can be controlled by controller components, which are usually views of the model. (see Controller for further details)",
       "",
-      "If there is at least one controller, there is by definition a current controller. And if that controller supports the interface com.sun.star.view.XSelectionSupplier, it has a current selection too.",
-      "",
-      "**See Also**",
-      "",
-      "    com.sun.star.document.MediaDescriptor"
+      "If there is at least one controller, there is by definition a current controller. And if that controller supports the interface com.sun.star.view.XSelectionSupplier, it has a current selection too."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1frame_1_1XModel.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "attachResource",
+          "returns": "bool",
+          "desc": [
+            "informs a model about its resource description."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "URL",
+              "str",
+              "in"
+            ],
+            [
+              "Arguments",
+              "typing.List[PropertyValue]",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "connectController",
+          "returns": "None",
+          "desc": [
+            "is called whenever a new controller is created for this model.",
+            "",
+            "The com.sun.star.lang.XComponent interface of the controller must be used to recognize when it is deleted."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "Controller",
+              "XController",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "disconnectController",
+          "returns": "None",
+          "desc": [
+            "is called whenever an existing controller should be deregistered at this model.",
+            "",
+            "The com.sun.star.lang.XComponent interface of the controller must be used to recognize when it is deleted."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "Controller",
+              "XController",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getArgs",
+          "returns": "typing.List[PropertyValue]",
+          "desc": [
+            "provides read access on currently representation of the com.sun.star.document.MediaDescriptor of this model which describes the model and its state"
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getCurrentController",
+          "returns": "XController",
+          "desc": [
+            "provides access to the controller which currently controls this model"
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getCurrentSelection",
+          "returns": "XInterface",
+          "desc": [
+            "provides read access on current selection on controller"
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getURL",
+          "returns": "str",
+          "desc": [
+            "provides information about the location of this model"
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "hasControllersLocked",
+          "returns": "bool",
+          "desc": [
+            "determines if there is at least one lock remaining.",
+            "",
+            "While there is at least one lock remaining, some notifications for display updates are not broadcasted to the controllers."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "lockControllers",
+          "returns": "None",
+          "desc": [
+            "suspends some notifications to the controllers which are used for display updates.",
+            "",
+            "The calls to XModel.lockControllers() and XModel.unlockControllers() may be nested and even overlapping, but they must be in pairs. While there is at least one lock remaining, some notifications for display updates are not broadcasted."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "setCurrentController",
+          "returns": "None",
+          "desc": [
+            "sets a registered controller as the current controller."
+          ],
+          "raises": [
+            "com.sun.star.container.NoSuchElementException"
+          ],
+          "args": [
+            [
+              "Controller",
+              "XController",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "unlockControllers",
+          "returns": "None",
+          "desc": [
+            "resumes the notifications which were suspended by XModel.lockControllers().",
+            "",
+            "The calls to XModel.lockControllers() and XModel.unlockControllers() may be nested and even overlapping, but they must be in pairs. While there is at least one lock remaining, some notifications for display updates are not broadcasted."
+          ],
+          "raises": [],
+          "args": []
+        }
+      ]
+    }
   }
 }

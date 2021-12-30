@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:20:43+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:21+00:00",
   "name": "XNumberFormatCode",
   "type": "interface",
   "namespace": "com.sun.star.i18n",
@@ -16,7 +16,29 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".number_format_code",
+        "NumberFormatCode"
+      ],
+      [
+        ".number_format_code",
+        "NumberFormatCode"
+      ],
+      [
+        "..lang.locale",
+        "Locale"
+      ]
+    ],
+    "quote": [
+      "typing.List[NumberFormatCode]",
+      "NumberFormatCode",
+      "Locale"
+    ],
+    "typings": [
+      "typing.List[NumberFormatCode]"
+    ],
+    "requires_typing": true,
     "name": "XNumberFormatCode",
     "imports": [],
     "namespace": "com.sun.star.i18n",
@@ -24,13 +46,92 @@
       "com.sun.star.uno.XInterface"
     ],
     "desc": [
-      "Access number format codes defined in locale data.",
-      "",
-      "**See Also**",
-      "",
-      "    OfficeDev - Overview and Using the API - XNumberFormatCode"
+      "Access number format codes defined in locale data."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1i18n_1_1XNumberFormatCode.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getAllFormatCode",
+          "returns": "typing.List[NumberFormatCode]",
+          "desc": [
+            "returns all format codes for a given nFormatUsage and locale."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "nFormatUsage",
+              "int",
+              "in"
+            ],
+            [
+              "rLocale",
+              "Locale",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getAllFormatCodes",
+          "returns": "typing.List[NumberFormatCode]",
+          "desc": [
+            "returns all format codes for a given locale."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "rLocale",
+              "Locale",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getDefault",
+          "returns": "NumberFormatCode",
+          "desc": [
+            "returns the default number format code of a specific category (usage group) for a given locale and format length type."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "nFormatType",
+              "int",
+              "in"
+            ],
+            [
+              "nFormatUsage",
+              "int",
+              "in"
+            ],
+            [
+              "rLocale",
+              "Locale",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getFormatCode",
+          "returns": "NumberFormatCode",
+          "desc": [
+            "returns the number format pointed to by nFormatIndex for a given locale."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "nFormatIndex",
+              "int",
+              "in"
+            ],
+            [
+              "rLocale",
+              "Locale",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

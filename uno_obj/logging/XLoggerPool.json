@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:22:12+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:08+00:00",
   "name": "XLoggerPool",
   "type": "interface",
   "namespace": "com.sun.star.logging",
@@ -10,20 +10,70 @@
   },
   "writer_args": {},
   "data": {
-    "from_imports": [],
-    "from_imports_typing": [],
+    "from_imports": [
+      [
+        ".logger_pool",
+        "LoggerPool"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".x_logger",
+        "XLogger"
+      ]
+    ],
+    "quote": [
+      "XLogger"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XLoggerPool",
     "imports": [],
     "namespace": "com.sun.star.logging",
-    "extends": [],
+    "extends": [
+      "com.sun.star.logging.LoggerPool"
+    ],
     "desc": [
       "implements a pool for named XLogger instances",
       "",
-      "**See Also**",
+      "**since**",
       "",
       "    OOo 2.3"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1logging_1_1XLoggerPool.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getDefaultLogger",
+          "returns": "XLogger",
+          "desc": [
+            "retrieves a logger with the default name \\\"org.openoffice.logging.DefaultLogger\\\".",
+            "",
+            "Calling this method is equivalent to calling getNamedLogger( \\\"org.openoffice.logging.DefaultLogger\\\" )."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getNamedLogger",
+          "returns": "XLogger",
+          "desc": [
+            "retrieves a logger with the given name",
+            "",
+            "Multiple attempts to retrieve a logger with the same name will return the same instance.",
+            "",
+            "Newly created logger instances are initialized via configuration. See the configuration module /org.openoffice.Office.Logging for an explanation of the initialization pattern."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "Name",
+              "str",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

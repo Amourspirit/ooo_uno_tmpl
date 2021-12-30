@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:19:20+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:36+00:00",
   "name": "XCell",
   "type": "interface",
   "namespace": "com.sun.star.table",
@@ -16,7 +16,17 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".cell_content_type",
+        "CellContentType"
+      ]
+    ],
+    "quote": [
+      "CellContentType"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XCell",
     "imports": [],
     "namespace": "com.sun.star.table",
@@ -24,13 +34,88 @@
       "com.sun.star.uno.XInterface"
     ],
     "desc": [
-      "provides methods to access the contents of a cell in a table.",
-      "",
-      "**See Also**",
-      "",
-      "    com.sun.star.table.Cell"
+      "provides methods to access the contents of a cell in a table."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1table_1_1XCell.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getError",
+          "returns": "int",
+          "desc": [
+            "returns the error value of the cell.",
+            "",
+            "If the cell does not contain a formula, the error is always zero."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getFormula",
+          "returns": "str",
+          "desc": [
+            "returns the formula string of a cell.",
+            "",
+            "Even if the cell does not contain a formula, an assignment of this attribute's value to another cell's formula attribute would create the same cell content. This is because this attribute contains the original text value of a string cell. The value of a value cell will be formatted using the number format's default format or the formula string, including \\\"=\\\", of a formula cell."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getType",
+          "returns": "CellContentType",
+          "desc": [
+            "returns the type of the cell."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getValue",
+          "returns": "float",
+          "desc": [
+            "returns the floating point value of the cell.",
+            "",
+            "For a value cell the value is returned, for a string cell zero is returned and for a formula cell the result value of a formula is returned."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "setFormula",
+          "returns": "None",
+          "desc": [
+            "sets a formula into the cell.",
+            "",
+            "When assigned, the string will be interpreted and a value, text or formula cell is created, depending on the text and the number format."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aFormula",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setValue",
+          "returns": "None",
+          "desc": [
+            "sets a floating point value into the cell.",
+            "",
+            "After a call to this method the type of the cell is CellContentType.VALUE."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "nValue",
+              "float",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

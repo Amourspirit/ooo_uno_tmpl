@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:21:35+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:27+00:00",
   "name": "XConfiguration",
   "type": "interface",
   "namespace": "com.sun.star.drawing.framework",
@@ -16,7 +16,29 @@
         "XCloneable"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".anchor_binding_mode",
+        "AnchorBindingMode"
+      ],
+      [
+        ".x_resource_id",
+        "XResourceId"
+      ],
+      [
+        ".x_resource_id",
+        "XResourceId"
+      ]
+    ],
+    "quote": [
+      "typing.List[XResourceId]",
+      "AnchorBindingMode",
+      "XResourceId"
+    ],
+    "typings": [
+      "typing.List[XResourceId]"
+    ],
+    "requires_typing": true,
     "name": "XConfiguration",
     "imports": [],
     "namespace": "com.sun.star.drawing.framework",
@@ -28,13 +50,92 @@
       "",
       "Resources are specified by ResourceId structures rather than references so that not only the current configuration but also a requested configuration can be represented.",
       "",
-      "Direct manipulation of a configuration object is not advised with the exception of the ConfigurationController and objects that implement the XConfigurationChangeRequest interface.",
-      "",
-      "**See Also**",
-      "",
-      "    XConfigurationController"
+      "Direct manipulation of a configuration object is not advised with the exception of the ConfigurationController and objects that implement the XConfigurationChangeRequest interface."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1drawing_1_1framework_1_1XConfiguration.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "addResource",
+          "returns": "None",
+          "desc": [
+            "Add a resource to the configuration.",
+            "",
+            "This method should be used only by objects that implement the XConfigurationRequest interface or by the configuration controller."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xResourceId",
+              "XResourceId",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getResources",
+          "returns": "typing.List[XResourceId]",
+          "desc": [
+            "Returns the list of resources that are bound directly and/or indirectly to the given anchor.",
+            "",
+            "A URL filter can reduce the set of returned resource ids.",
+            "",
+            "Use an empty string to prevent filtering out resource ids."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xAnchorId",
+              "XResourceId",
+              "in"
+            ],
+            [
+              "sTargetURLPrefix",
+              "str",
+              "in"
+            ],
+            [
+              "eSearchMode",
+              "AnchorBindingMode",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "hasResource",
+          "returns": "bool",
+          "desc": [
+            "Returns whether the specified resource is part of the configuration.",
+            "",
+            "This is independent of whether the resource does really exist and is active, i.e. has a visible representation in the GUI."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xResourceId",
+              "XResourceId",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "removeResource",
+          "returns": "None",
+          "desc": [
+            "Remove a resource from the configuration.",
+            "",
+            "This method should be used only by objects that implement the XConfigurationRequest interface or by the configuration controller."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xResourceId",
+              "XResourceId",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

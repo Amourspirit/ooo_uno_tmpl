@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:17:27+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:26+00:00",
   "name": "XDataReceiver",
   "type": "interface",
   "namespace": "com.sun.star.chart2.data",
@@ -10,14 +10,163 @@
   },
   "writer_args": {},
   "data": {
-    "from_imports": [],
-    "from_imports_typing": [],
+    "from_imports": [
+      [
+        "...uno.x_interface",
+        "XInterface"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "...awt.x_request_callback",
+        "XRequestCallback"
+      ],
+      [
+        ".x_range_highlighter",
+        "XRangeHighlighter"
+      ],
+      [
+        ".x_data_source",
+        "XDataSource"
+      ],
+      [
+        "...util.x_number_formats_supplier",
+        "XNumberFormatsSupplier"
+      ],
+      [
+        ".x_data_provider",
+        "XDataProvider"
+      ],
+      [
+        "...beans.property_value",
+        "PropertyValue"
+      ]
+    ],
+    "quote": [
+      "XRequestCallback",
+      "typing.List[PropertyValue]",
+      "XNumberFormatsSupplier",
+      "XDataProvider",
+      "typing.List[str]",
+      "XRangeHighlighter",
+      "XDataSource"
+    ],
+    "typings": [
+      "typing.List[str]",
+      "typing.List[PropertyValue]"
+    ],
+    "requires_typing": true,
     "name": "XDataReceiver",
     "imports": [],
     "namespace": "com.sun.star.chart2.data",
-    "extends": [],
-    "desc": [],
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "",
+      "**since**",
+      "",
+      "    LibreOffice 5.4"
+    ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1chart2_1_1data_1_1XDataReceiver.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "attachDataProvider",
+          "returns": "None",
+          "desc": [
+            "attaches a component that provides data for the document.",
+            "",
+            "The previously set data provider will be released."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xProvider",
+              "XDataProvider",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "attachNumberFormatsSupplier",
+          "returns": "None",
+          "desc": [
+            "attaches an XNumberFormatsSupplier to this XDataReceiver.",
+            "",
+            "The given number formats will be used for display purposes."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xSupplier",
+              "XNumberFormatsSupplier",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getPopupRequest",
+          "returns": "XRequestCallback",
+          "desc": [
+            "A callback object to execute a foreign popup menu window.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 5.4"
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getRangeHighlighter",
+          "returns": "XRangeHighlighter",
+          "desc": [
+            "Returns a component at which a view representing the data of the attached data provider may listen for highlighting the data ranges used by the currently selected objects in the data receiver component.",
+            "",
+            "This is typically used by a spreadsheet to highlight the ranges used by the currently selected object in a chart.",
+            "",
+            "The range highlighter is optional, i.e., this method may return an empty object."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getUsedData",
+          "returns": "XDataSource",
+          "desc": [
+            "Returns the data requested by the most recently attached data provider, that is still used."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getUsedRangeRepresentations",
+          "returns": "typing.List[str]",
+          "desc": [
+            "returns a list of all range strings for which data has been requested by the most recently attached data provider, and which is still used.",
+            "",
+            "This list may be used by the data provider to swap charts out of memory, but still get informed by changes of ranges while the chart is not loaded."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "setArguments",
+          "returns": "None",
+          "desc": [],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "aArguments",
+              "typing.List[PropertyValue]",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

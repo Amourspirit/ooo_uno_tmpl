@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:21:15+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:17+00:00",
   "name": "XSheetCondition",
   "type": "interface",
   "namespace": "com.sun.star.sheet",
@@ -16,7 +16,22 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".condition_operator",
+        "ConditionOperator"
+      ],
+      [
+        "..table.cell_address",
+        "CellAddress"
+      ]
+    ],
+    "quote": [
+      "CellAddress",
+      "ConditionOperator"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XSheetCondition",
     "imports": [],
     "namespace": "com.sun.star.sheet",
@@ -24,13 +39,108 @@
       "com.sun.star.uno.XInterface"
     ],
     "desc": [
-      "provides methods to access the settings of a condition in a conditional format or data validation.",
-      "",
-      "**See Also**",
-      "",
-      "    com.sun.star.sheet.TableConditionalEntry"
+      "provides methods to access the settings of a condition in a conditional format or data validation."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1sheet_1_1XSheetCondition.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "getFormula1",
+          "returns": "str",
+          "desc": [
+            "returns either the comparison value, which is used in the condition, or the first value if two values are needed for the operator."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getFormula2",
+          "returns": "str",
+          "desc": [
+            "if two values are needed for the operator, this method returns the second one."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getOperator",
+          "returns": "ConditionOperator",
+          "desc": [
+            "returns the operator in the condition."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getSourcePosition",
+          "returns": "CellAddress",
+          "desc": [
+            "returns the position in the document which is used as a base for relative references in the formulas."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "setFormula1",
+          "returns": "None",
+          "desc": [
+            "sets either the comparison value, which is used in the condition, or the first value if two values are needed for the operator."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aFormula1",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setFormula2",
+          "returns": "None",
+          "desc": [
+            "if two values are needed for the operator, this method sets the second one."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aFormula2",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setOperator",
+          "returns": "None",
+          "desc": [
+            "sets the operator in the condition."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "nOperator",
+              "ConditionOperator",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setSourcePosition",
+          "returns": "None",
+          "desc": [
+            "sets the position in the document which is used as a base for relative references in the formulas."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aSourcePosition",
+              "CellAddress",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

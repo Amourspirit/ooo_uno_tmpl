@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:17:55+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:03+00:00",
   "name": "XPopupMenu",
   "type": "interface",
   "namespace": "com.sun.star.awt",
@@ -12,21 +12,249 @@
   "data": {
     "from_imports": [
       [
-        "......x_menu",
+        ".x_menu",
         "XMenu"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_window_peer",
+        "XWindowPeer"
+      ],
+      [
+        ".rectangle",
+        "Rectangle"
+      ],
+      [
+        "..graphic.x_graphic",
+        "XGraphic"
+      ],
+      [
+        ".key_event",
+        "KeyEvent"
+      ]
+    ],
+    "quote": [
+      "XGraphic",
+      "Rectangle",
+      "XWindowPeer",
+      "KeyEvent"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XPopupMenu",
     "imports": [],
     "namespace": "com.sun.star.awt",
     "extends": [
-      "XMenu"
+      "com.sun.star.awt.XMenu"
     ],
     "desc": [
       "controls a pop-up menu."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XPopupMenu.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "checkItem",
+          "returns": "None",
+          "desc": [
+            "sets the state of the item to be checked or unchecked."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "nItemId",
+              "int",
+              "in"
+            ],
+            [
+              "bCheck",
+              "bool",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "endExecute",
+          "returns": "None",
+          "desc": [
+            "ends the execution of the PopupMenu.",
+            "",
+            "com.sun.star.awt.XPopupMenu.execute() will then return 0."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "execute",
+          "returns": "int",
+          "desc": [
+            "executes the popup menu and returns the selected item or 0, if cancelled."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "Parent",
+              "XWindowPeer",
+              "in"
+            ],
+            [
+              "Position",
+              "Rectangle",
+              "in"
+            ],
+            [
+              "Direction",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getAcceleratorKeyEvent",
+          "returns": "KeyEvent",
+          "desc": [
+            "retrieves the KeyEvent for the menu item.",
+            "",
+            "The KeyEvent is only used as a container to transport the shortcut information, so that in this case com.sun.star.lang.EventObject.Source is NULL."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "nItemId",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getDefaultItem",
+          "returns": "int",
+          "desc": [
+            "returns the menu default item."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getItemImage",
+          "returns": "XGraphic",
+          "desc": [
+            "retrieves the image for the menu item."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "nItemId",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "insertSeparator",
+          "returns": "None",
+          "desc": [
+            "inserts a separator at the specified position."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "nItemPos",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "isInExecute",
+          "returns": "bool",
+          "desc": [
+            "queries if the PopupMenu is being.",
+            "",
+            "Returns TRUE only if the PopupMenu is being executed as a result of invoking XPopupMenu.execute(); that is, for a PopupMenu activated by a MenuBar item, this methods returns FALSE."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "isItemChecked",
+          "returns": "bool",
+          "desc": [
+            "returns whether the item is checked or unchecked."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "nItemId",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setAcceleratorKeyEvent",
+          "returns": "None",
+          "desc": [
+            "sets the KeyEvent for the menu item.",
+            "",
+            "The KeyEvent is only used as a container to transport the shortcut information, this methods only draws the text corresponding to this keyboard shortcut. The client code is responsible for listening to keyboard events (typically done via XUserInputInterception), and dispatch the respective command."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "nItemId",
+              "int",
+              "in"
+            ],
+            [
+              "aKeyEvent",
+              "KeyEvent",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setDefaultItem",
+          "returns": "None",
+          "desc": [
+            "sets the menu default item."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "nItemId",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setItemImage",
+          "returns": "None",
+          "desc": [
+            "sets the image for the menu item."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "nItemId",
+              "int",
+              "in"
+            ],
+            [
+              "xGraphic",
+              "XGraphic",
+              "in"
+            ],
+            [
+              "bScale",
+              "bool",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

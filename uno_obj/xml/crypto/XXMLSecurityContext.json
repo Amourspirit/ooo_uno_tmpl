@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:18:33+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:21+00:00",
   "name": "XXMLSecurityContext",
   "type": "interface",
   "namespace": "com.sun.star.xml.crypto",
@@ -16,7 +16,17 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_security_environment",
+        "XSecurityEnvironment"
+      ]
+    ],
+    "quote": [
+      "XSecurityEnvironment"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XXMLSecurityContext",
     "imports": [],
     "namespace": "com.sun.star.xml.crypto",
@@ -29,6 +39,85 @@
       "This interface specifies a certain signature context. By signature context, the signer or verifier retrieves key specification."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1xml_1_1crypto_1_1XXMLSecurityContext.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "addSecurityEnvironment",
+          "returns": "int",
+          "desc": [
+            "Add personal security environment , and return the index of the added environment."
+          ],
+          "raises": [
+            "com.sun.star.security.SecurityInfrastructureException"
+          ],
+          "args": [
+            [
+              "aSecurityEnvironment",
+              "XSecurityEnvironment",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getDefaultSecurityEnvironmentIndex",
+          "returns": "int",
+          "desc": [
+            "Get the ID of the internal security environment."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getSecurityEnvironment",
+          "returns": "XSecurityEnvironment",
+          "desc": [
+            "An handy method to get the first personal security environment.",
+            "",
+            "In XMLSec/NSS, the first personal security environment should be the \\\"internal slot\\\""
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getSecurityEnvironmentByIndex",
+          "returns": "XSecurityEnvironment",
+          "desc": [
+            "Get personal security environment."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "index",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getSecurityEnvironmentNumber",
+          "returns": "int",
+          "desc": [
+            "Get the number of security environments."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "setDefaultSecurityEnvironmentIndex",
+          "returns": "None",
+          "desc": [
+            "set the ID of the internal security environment"
+          ],
+          "raises": [],
+          "args": [
+            [
+              "index",
+              "int",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

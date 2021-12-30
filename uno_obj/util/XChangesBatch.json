@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-17 11:19:07+00:00",
+  "version": "0.1.8",
+  "timestamp": "2021-12-27 22:15:25+00:00",
   "name": "XChangesBatch",
   "type": "interface",
   "namespace": "com.sun.star.util",
@@ -16,7 +16,17 @@
         "XInterface"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".changes_set",
+        "ChangesSet"
+      ]
+    ],
+    "quote": [
+      "ChangesSet"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "XChangesBatch",
     "imports": [],
     "namespace": "com.sun.star.util",
@@ -28,13 +38,43 @@
       "",
       "An object implementing this interface allows other interfaces to change its state locally. It will keep a list of pending changes until such changes are committed or canceled.",
       "",
-      "Only when they are explicitly committed will these changes take effect persistently or globally.",
-      "",
-      "**See Also**",
-      "",
-      "    XChangesNotifier"
+      "Only when they are explicitly committed will these changes take effect persistently or globally."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1util_1_1XChangesBatch.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "commitChanges",
+          "returns": "None",
+          "desc": [
+            "commits any pending changes.",
+            "",
+            "The exact action depends on the concrete service."
+          ],
+          "raises": [
+            "com.sun.star.lang.WrappedTargetException"
+          ],
+          "args": []
+        },
+        {
+          "name": "getPendingChanges",
+          "returns": "ChangesSet",
+          "desc": [
+            "queries for any pending changes that can be committed."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "hasPendingChanges",
+          "returns": "bool",
+          "desc": [
+            "checks whether this object has any pending changes that can be committed."
+          ],
+          "raises": [],
+          "args": []
+        }
+      ]
+    }
   }
 }
