@@ -412,7 +412,7 @@ class TouchFiles(FilesBase):
                 touched += 1
 
         for file in link_files:
-            process(file, self)
+            process(file)
         logger.info('Touched %d Const files', touched)
         self._touch_count += touched
 
@@ -434,7 +434,7 @@ class TouchFiles(FilesBase):
                 touched += 1
 
         for file in link_files:
-            process(file, self)
+            process(file)
         logger.info('Touched %d Enum files', touched)
         self._touch_count += touched
     
@@ -457,7 +457,7 @@ class TouchFiles(FilesBase):
                 touched += 1
 
         for file in link_files:
-            process(file, self)
+            process(file)
         logger.info('Touched %d Exception files', touched)
         self._touch_count += touched
 
@@ -503,7 +503,7 @@ class TouchFiles(FilesBase):
                 touched += 1
 
         for file in link_files:
-            process(file, self)
+            process(file)
         logger.info('Touched %d Interface files', touched)
         self._touch_count += touched
 
