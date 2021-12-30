@@ -16,12 +16,12 @@ from pathlib import Path
 from logger.log_handle import get_logger
 from parser import __version__, JSON_ID
 from config import AppConfig, read_config
-from parser.json_parser.interface_parser import parse as parse_interface
-from parser.json_parser.struct_parser import parse as parse_struct
-from parser.json_parser.enum_parser import parse as parse_enm
-from parser.json_parser.exception_parser import parse as parse_ex
-from parser.json_parser.typedef_parser import parse as parse_typedef
-from parser.json_parser.const_parser import parse as parse_const
+from parser.json_parser.interface_parser import parse as parse_interface, ParserInterface
+from parser.json_parser.struct_parser import parse as parse_struct, ParserStruct
+from parser.json_parser.enum_parser import parse as parse_enm, ParserEnum
+from parser.json_parser.exception_parser import parse as parse_ex, ParserException
+from parser.json_parser.typedef_parser import parse as parse_typedef, ParserTypeDef
+from parser.json_parser.const_parser import parse as parse_const, ParserConst
 logger = None
 
 os.environ['project_root'] = str(Path(__file__).parent)
@@ -46,12 +46,42 @@ class CompareFile:
             return CompareEnum.After
         return CompareEnum.Equal
 
-class BaseCompile:
-    def __init__(self, config:AppConfig) -> None:
+
+class FilesBase:
+    def __init__(self, config: AppConfig) -> None:
+        self._config: AppConfig = config
         self._root_dir = Path(__file__).parent
-        self._json_parser_path = Path(self._root_dir, 'parser', 'json_parser')
-        self._config = config
+
     
+
+    def _mkdirp(self, dest_dir):
+        # Python ≥ 3.5
+        if isinstance(dest_dir, Path):
+            dest_dir.mkdir(parents=True, exist_ok=True)
+        else:
+            Path(dest_dir).mkdir(parents=True, exist_ok=True)
+
+    def _get_template_files(self):
+        dirname = str(self._root_dir / self._config.uno_obj_dir)
+        # https://stackoverflow.com/questions/20638040/glob-exclude-pattern
+        # exclude files that start with _
+        pattern = dirname + '/**/[!_]*.tmpl'
+        files = glob.glob(pattern, recursive=True)
+        # print('files', files)
+        return files
+
+    def _get_template_tppi_files(self):
+        dirname = str(self._root_dir / self._config.uno_obj_dir)
+        pattern = dirname + '/**/*.tppi'
+        files = glob.glob(pattern, recursive=True)
+        # print('files', files)
+        return files
+
+    def _get_py_path(self, tmpl_file) -> Path:
+        t_file = Path(tmpl_file)
+        p_file = Path(t_file.parent, str(t_file.stem) + '.py')
+        return p_file
+
     def get_module_link_files(self) -> Set[str]:
         dirname = str(self._root_dir / self._config.uno_base_dir)
         # https://stackoverflow.com/questions/20638040/glob-exclude-pattern
@@ -65,11 +95,24 @@ class BaseCompile:
         ex_files.add(str(root_json))
         # deduct sets:
         return files - ex_files
-    
+
+    def camel_to_snake(self, name: str) -> str:
+        _name = re.sub('(.)([A-Z][a-z]+)', r'\1_\2', name)
+        return re.sub('([a-z0-9])([A-Z])', r'\1_\2', _name).lower()
+
+    # region Properties
     @property
     def root_dir(self) -> Path:
         """Gets root_dir value"""
         return self._root_dir
+    # endregion Properties
+
+
+class BaseCompile(FilesBase):
+    def __init__(self, config:AppConfig) -> None:
+        super().__init__(config=config)
+        self._json_parser_path = Path(self._root_dir, 'parser', 'json_parser')
+
     
     @property
     def json_parser_path(self) -> Path:
@@ -282,11 +325,194 @@ class CompileExLinks(BaseCompile):
                 self._subprocess(file)
             else:
                 self._process_direct(file)
-class Make:
-    def __init__(self, **kwargs) -> None:
+
+
+class TouchFiles(FilesBase):
+    def __init__(self,config: AppConfig, **kwargs) -> None:
+        super().__init__(config=config)
+        self._check_exist: bool = bool(kwargs.get('check_exist', True))
+        self._touch_struct: bool =bool(kwargs.get('touch_struct', False))
+        self._touch_const: bool =bool(kwargs.get('touch_const', False))
+        self._touch_enum: bool =bool(kwargs.get('touch_enum', False))
+        self._touch_ex: bool =bool(kwargs.get('touch_ex', False))
+        self._touch_interface: bool =bool(kwargs.get('touch_interface', False))
+        self._touch_typedef: bool =bool(kwargs.get('touch_typedef', False))
+        self._touch_count = 0
+        self._cache = {}
+        if self._touch_struct:
+            self._touch_struct_files()
+        if self._touch_const:
+            self._touch_const_files()
+        if self._touch_enum:
+            self._touch_enum_files()
+        if self._touch_ex:
+            self._touch_exception_files()
+        if self._touch_interface:
+            self._touch_interface_files()
+        if self._touch_typedef:
+            self._touch_typedef_files()
+        logger.info('Touched a total of %d files.', self._touch_count)
+
+    def _touch_tmpl(self):
+        files = self._get_template_files()
+        for file in files:
+            p_file = Path(file)
+            p_file.touch(exist_ok=True)
+    
+    def _touch_tppi(self):
+        files = self._get_template_tppi_files()
+        for file in files:
+            p_file = Path(file)
+            p_file.touch(exist_ok=True)
+    
+    def _get_module_links(self) -> List[str]:
+        key = '_get_module_links'
+        if key in self._cache:
+            return self._cache[key]
+        self._cache[key] = self.get_module_link_files()
+        return self._cache[key]
+        
+    def _touch_struct_files(self):
+        link_files = self._get_module_links()
+        touched = 0
+        def process(f: str):
+            nonlocal touched
+            p: ParserStruct = ParserStruct(json_path=f)
+            links = p.get_links()
+            f_path = Path(f).parent
+            for link in links:
+                name = link.name + self._config.template_struct_ext
+                t_path = Path(f_path, name)
+                if self._check_exist:
+                    if not t_path.exists():
+                        continue
+                t_path.touch(exist_ok=True)
+                touched += 1
+
+        for file in link_files:
+            process(file, self)
+        logger.info('Touched %d Struct files', touched)
+        self._touch_count += touched
+    
+    def _touch_const_files(self):
+        link_files = self._get_module_links()
+        touched = 0
+        def process(f: str):
+            nonlocal touched
+            p: ParserConst = ParserConst(json_path=f)
+            links = p.get_links()
+            f_path = Path(f).parent
+            for link in links:
+                name = link.name + self._config.template_const_ext
+                t_path = Path(f_path, name)
+                if self._check_exist:
+                    if not t_path.exists():
+                        continue
+                t_path.touch(exist_ok=True)
+                touched += 1
+
+        for file in link_files:
+            process(file, self)
+        logger.info('Touched %d Const files', touched)
+        self._touch_count += touched
+
+    def _touch_enum_files(self):
+        link_files = self._get_module_links()
+        touched = 0
+        def process(f: str):
+            nonlocal touched
+            p: ParserEnum = ParserEnum(json_path=f)
+            links = p.get_links()
+            f_path = Path(f).parent
+            for link in links:
+                name = link.name + self._config.template_enum_ext
+                t_path = Path(f_path, name)
+                if self._check_exist:
+                    if not t_path.exists():
+                        continue
+                t_path.touch(exist_ok=True)
+                touched += 1
+
+        for file in link_files:
+            process(file, self)
+        logger.info('Touched %d Enum files', touched)
+        self._touch_count += touched
+    
+    def _touch_exception_files(self):
+        link_files = self._get_module_links()
+        touched = 0
+
+        def process(f: str):
+            nonlocal touched
+            p: ParserException = ParserException(json_path=f)
+            links = p.get_links()
+            f_path = Path(f).parent
+            for link in links:
+                name = link.name + self._config.template_exception_ext
+                t_path = Path(f_path, name)
+                if self._check_exist:
+                    if not t_path.exists():
+                        continue
+                t_path.touch(exist_ok=True)
+                touched += 1
+
+        for file in link_files:
+            process(file, self)
+        logger.info('Touched %d Exception files', touched)
+        self._touch_count += touched
+
+    def _touch_interface_files(self):
+        link_files = self._get_module_links()
+        touched = 0
+
+        def process(f: str):
+            nonlocal touched
+            p: ParserInterface = ParserInterface(json_path=f)
+            links = p.get_links()
+            f_path = Path(f).parent
+            for link in links:
+                name = link.name + self._config.template_interface_ext
+                t_path = Path(f_path, name)
+                if self._check_exist:
+                    if not t_path.exists():
+                        continue
+                t_path.touch(exist_ok=True)
+                touched += 1
+
+        for file in link_files:
+            process(file, self)
+        logger.info('Touched %d Interface files', touched)
+        self._touch_count += touched
+    
+    def _touch_typedef_files(self):
+        link_files = self._get_module_links()
+        touched = 0
+
+        def process(f: str):
+            nonlocal touched
+            p: ParserTypeDef = ParserTypeDef(json_path=f)
+            links = p.get_links()
+            f_path = Path(f).parent
+            for link in links:
+                name = link.name + self._config.template_typedef_ext
+                t_path = Path(f_path, name)
+                if self._check_exist:
+                    if not t_path.exists():
+                        continue
+                t_path.touch(exist_ok=True)
+                touched += 1
+
+        for file in link_files:
+            process(file, self)
+        logger.info('Touched %d Interface files', touched)
+        self._touch_count += touched
+
+class Make(FilesBase):
+    def __init__(self, config: AppConfig, **kwargs) -> None:
+        super().__init__(config=config)
         self._clean = bool(kwargs.get('clean', False))
         self._root_dir = Path(__file__).parent
-        self._scratch = self._root_dir / 'scratch'
+        self._scratch = self._root_dir / self._config.builld_dir
         self._force_compile = bool(kwargs.get('force_compile', False))
         self._processed_dirs: Set[str] = set()
         # exclude files that start with _
@@ -365,28 +591,7 @@ class Make:
             except Exception as e:
                 logger.error(e)
 
-    def _mkdirp(self, dest_dir):
-        # Python ≥ 3.5
-        if isinstance(dest_dir, Path):
-            dest_dir.mkdir(parents=True, exist_ok=True)
-        else:
-            Path(dest_dir).mkdir(parents=True, exist_ok=True)
-
-    def _get_template_files(self):
-        dirname = str(self._root_dir / 'uno_obj')
-        # https://stackoverflow.com/questions/20638040/glob-exclude-pattern
-        # exclude files that start with _
-        pattern = dirname + '/**/[!_]*.tmpl'
-        files = glob.glob(pattern, recursive=True)
-        # print('files', files)
-        return files
-    
-    def _get_template_tppi_files(self):
-        dirname = str(self._root_dir / 'uno_obj')
-        pattern = dirname + '/**/*.tppi'
-        files = glob.glob(pattern, recursive=True)
-        # print('files', files)
-        return files
+   
 
     def _is_skip_compile(self, tmpl_file) -> bool:
         if self._force_compile:
@@ -433,17 +638,9 @@ class Make:
         p_scratch_dir = Path(self._scratch, p_rel)
         self._mkdirp(p_scratch_dir)
         p_scratch = Path(
-            p_scratch_dir, self._camel_to_snake(str(p_file.stem)) + ext)
+            p_scratch_dir, self.camel_to_snake(str(p_file.stem)) + ext)
         return p_scratch
 
-    def _get_py_path(self, tmpl_file) -> Path:
-        t_file = Path(tmpl_file)
-        p_file = Path(t_file.parent, str(t_file.stem) + '.py')
-        return p_file
-
-    def _camel_to_snake(self, name: str) -> str:
-        _name = re.sub('(.)([A-Z][a-z]+)', r'\1_\2', name)
-        return re.sub('([a-z0-9])([A-Z])', r'\1_\2', _name).lower()
 
     def _ensure_init(self, path:Path):
         init_file = Path(path, '__init__.py')
@@ -469,6 +666,19 @@ def _main():
     sys.argv.extend(['-v', '--log-file', 'make.log'])
     main()
 
+def _touch():
+    global logger
+
+    if logger is None:
+        log_args = {
+            "log_file": "debug.log",
+            "level": logging.DEBUG
+        }
+        logger = get_logger(logger_name=Path(__file__).stem, **log_args)
+    config = read_config('./config.json')
+    t = TouchFiles(config=config)
+    t._touch_struct()
+
 def main():
     global logger
     config = read_config('./config.json')
@@ -480,6 +690,7 @@ def main():
     struct_parser = subparser.add_parser(name='struct')
     interface_parser = subparser.add_parser(name='interface')
     typedef_parser = subparser.add_parser(name='typedef')
+    touch = subparser.add_parser(name='touch')
     # region ex args
     ex_parser.add_argument(
         '-a', '--all',
@@ -583,6 +794,51 @@ def main():
     )
     # endregion typedef args
 
+    # region Touch
+    touch.add_argument(
+        '-s', '--struct',
+        help='Touch all struct files',
+        action='store_true',
+        dest='struct_all',
+        default=False
+    )
+    touch.add_argument(
+        '-c', '--const',
+        help='Touch all const files',
+        action='store_true',
+        dest='const_all',
+        default=False
+    )
+    touch.add_argument(
+        '-e', '--enum',
+        help='Touch all enum files',
+        action='store_true',
+        dest='enum_all',
+        default=False
+    )
+    touch.add_argument(
+        '-x', '--exception',
+        help='Touch all enum files',
+        action='store_true',
+        dest='ex_all',
+        default=False
+    )
+    touch.add_argument(
+        '-i', '--interface',
+        help='Touch all interface files',
+        action='store_true',
+        dest='interface_all',
+        default=False
+    )
+    touch.add_argument(
+        '-t', '--typedef',
+        help='Touch all interface files',
+        action='store_true',
+        dest='typedef_all',
+        default=False
+    )
+    # endregion Touch
+
     make_parser = subparser.add_parser(name='make')
     # region make args
     make_parser.add_argument(
@@ -626,7 +882,8 @@ def main():
         logger.info('Running with no args.')
     if args.command == 'make':
         try:
-            make = Make(force_compile=args.force_compile, clean=args.clean_scratch)
+            make = Make(config=config, force_compile=args.force_compile,
+                        clean=args.clean_scratch)
         except Exception as e:
             logger.error(e)
     if args.command == 'ex':
@@ -652,8 +909,19 @@ def main():
         if args.typedef_all:
             CompileTypeDefLinks(
                 config=config, use_subprocess=args.cmd_line_process)
+    if args.command == 'touch':
+        TouchFiles(
+            config=config,
+            touch_struct=args.struct_all,
+            touch_const=args.const_all,
+            touch_enum=args.enum_all,
+            touch_ex=args.ex_all,
+            touch_interface=args.interface_all,
+            touch_typedef=args.typedef_all
+        )
     logger.info('Finished!')
 
 
 if __name__ == '__main__':
+    # _touch()
     main()

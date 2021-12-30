@@ -9,6 +9,10 @@ class AppConfig:
     """Json file name for module links such as module_links.json"""
     cache_dir: str
     """The cache directory to use. This is generally used in creating a cache directory is system temp dir."""
+    uno_obj_dir: str
+    """Uno obj dir such as uno_obj. This is the directory that templates and json data file are written to."""
+    builld_dir: str
+    """Output build dir such as scratch"""
     cache_duration: float
     """
     The amount of time in seconds to keep files in cache.
@@ -40,6 +44,20 @@ class AppConfig:
     """
     module path to oenv suca as ``ooo_uno.oenv``
     """
+    template_struct_ext: str
+    """Extension for struct files such as .tmpl"""
+    template_const_ext: str
+    """Extension for const files such as .tmpl"""
+    template_interface_ext: str
+    """Extension for interface files such as .tmpl"""
+    template_enum_ext: str
+    """Extension for enum files such as .tmpl"""
+    template_exception_ext: str
+    """Extension for exception files such as .tppi"""
+    template_typedef_ext: str
+    """Extension for typedef files such as .tppi"""
+    template_service_ext: str
+    """Extension for service files such as .tppi"""
 
 def read_config(config_file: str) -> AppConfig:
     """

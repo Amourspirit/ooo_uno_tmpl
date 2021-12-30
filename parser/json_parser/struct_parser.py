@@ -156,7 +156,7 @@ class WriterStruct:
             result = False
         return result, url_data.name
 
-    def Write(self, *args, **kwargs):
+    def write(self, *args, **kwargs):
         links = self._parser.get_links()
         with concurrent.futures.ProcessPoolExecutor() as executor:
             results = [executor.submit(self._process_direct, link, *args, **kwargs)
@@ -167,6 +167,8 @@ class WriterStruct:
                     logger.info(f"Success processing: {name}")
                 else:
                     logger.error(f"Failed processing: {name}")
+
+
 
 # region Parse method
 def _get_parsed_kwargs(**kwargs) -> Dict[str, str]:
@@ -253,7 +255,7 @@ def parse(*args, **kwargs):
 
     p = ParserStruct(json_path=pkwargs['json_file'])
     w = WriterStruct(parser=p)
-    w.Write(*args, **kwargs)
+    w.write(*args, **kwargs)
 
 # endregion Parse method
 
@@ -299,7 +301,7 @@ def main():
 
     p = ParserStruct(json_path=args.json_file)
     w = WriterStruct(parser=p)
-    w.Write('t', 'j')
+    w.write('t', 'j')
 
 
 if __name__ == "__main__":
