@@ -18,6 +18,7 @@ from parser import __version__, JSON_ID
 from config import AppConfig, read_config
 from parser.json_parser.interface_parser import parse as parse_interface, Parser as ParserInterface
 from parser.json_parser.singleton_parser import parse as parse_singleton, Parser as ParserSingleton
+from parser.json_parser.service_parser import parse as parse_service, Parser as ParserService
 from parser.json_parser.struct_parser import parse as parse_struct, ParserStruct
 from parser.json_parser.enum_parser import parse as parse_enm, ParserEnum
 from parser.json_parser.exception_parser import parse as parse_ex, ParserException
@@ -378,6 +379,8 @@ class TouchFiles(FilesBase):
             kwargs.get('touch_interface', False))
         self._touch_singleton: bool = bool(
             kwargs.get('touch_singleton', False))
+        self._touch_service: bool = bool(
+            kwargs.get('touch_service', False))
         self._touch_count = 0
         self._cache = {}
         if self._touch_struct:
@@ -392,6 +395,8 @@ class TouchFiles(FilesBase):
             self._touch_interface_files()
         if self._touch_singleton:
             self._touch_singleton_files()
+        if self._touch_service:
+            self._touch_service_files()
         if self._touch_typedef:
             self._touch_typedef_files()
         logger.info('Touched a total of %d files.', self._touch_count)
@@ -542,6 +547,30 @@ class TouchFiles(FilesBase):
         for file in link_files:
             process(file)
         logger.info('Touched %d Singleton files', touched)
+        self._touch_count += touched
+    
+    def _touch_service_files(self):
+        link_files = self._get_module_links()
+        touched = 0
+
+        def process(f: str):
+            nonlocal touched
+            p: ParserService = ParserService(json_path=f)
+            links = p.get_links()
+            f_path = Path(f).parent
+            for link in links:
+                name = link.name + self._config.template_service_ext
+                t_path = Path(f_path, name)
+                if self._check_exist:
+                    if not t_path.exists():
+                        continue
+                t_path.touch(exist_ok=True)
+                touched += 1
+                logger.debug('Touched Service file: %s', t_path)
+
+        for file in link_files:
+            process(file)
+        logger.info('Touched %d Service files', touched)
         self._touch_count += touched
     
     def _touch_typedef_files(self):
@@ -890,6 +919,13 @@ def main():
         default=False
     )
     touch.add_argument(
+        '-r', '--service',
+        help='Touch all service files',
+        action='store_true',
+        dest='service_all',
+        default=False
+    )
+    touch.add_argument(
         '-c', '--const',
         help='Touch all const files',
         action='store_true',
@@ -1009,7 +1045,8 @@ def main():
             touch_ex=args.ex_all,
             touch_interface=args.interface_all,
             touch_typedef=args.typedef_all,
-            touch_singleton=args.singleton_all
+            touch_singleton=args.singleton_all,
+            touch_service=args.service_all
         )
     logger.info('Finished!')
 
