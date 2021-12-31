@@ -23,7 +23,8 @@ import typing
 from $frm import $imp
 #end for
 
-${safe_name}: typing.TypeAlias = $self.get_q_type($type)
+## type should not get quotes in this case. If type is wrapped affects how it is read and can be seen as a literal string.
+${safe_name}: typing.TypeAlias = $type
 #if $include_desc
 """
 #for $line in $self.line_gen($desc)
