@@ -85,40 +85,55 @@ class Parser(IParser):
             raise FileNotFoundError(msg)
         with open(j_p) as j_file:
             json_data = json.load(j_file)
-        if not self._is_valid_json(json_data):
-            msg = "ParserLinks: Json data failed validation"
-            logger.error(msg)
-            raise Exception(msg)
+        self._validite_json(json_data)
         self._json_data = json_data
 
-
-    def _is_valid_json(self, data: dict) -> bool:
+    def _validite_json(self, data: dict) -> bool:
+        msg = f"{self.__class__.__name__}._validite_json() {self.get_section_name()}:"
+        
         key = 'id'
         if not key in data:
-            return False
+            _msg = f"{msg} Json missing id field. File: {self._json_path}"
+            logger.error(_msg)
+            raise Exception(_msg)
         if data[key] != JSON_ID:
-            return False
+            _msg = f"{msg} Json data bad id field. Expected: {JSON_ID}, Got: {data[key]}. File: {self._json_path}"
+            logger.error(_msg)
+            raise Exception(_msg)
         key = 'type'
         if not key in data:
-            return False
+            _msg = f"{msg} Json missing type field. File: {self._json_path}"
+            logger.error(_msg)
+            raise Exception(_msg)
         if data[key] != 'module_links':
-            return False
+            _msg = f"{msg} Json data bad id field. Expected: module_links, Got: {data[key]}. File: {self._json_path}"
+            logger.error(_msg)
+            raise Exception(_msg)
         key = 'url_base'
         if not key in data:
-            return False
+            _msg = f"{msg} Json missing url_base field. File: {self._json_path}"
+            logger.error(_msg)
+            raise Exception(_msg)
         key = 'version'
         if not key in data:
-            return False
+            _msg = f"{msg} Json missing version field. File: {self._json_path}"
+            logger.error(_msg)
+            raise Exception(_msg)
         min_ver = self.get_min_version()
         json_ver = Version.parse(data[key])
         if json_ver < min_ver:
-            return False
+            _msg = f"{msg} Version fail Expect a min version of '{min_ver}', got '{json_ver}'. File: {self._json_path}"
+            logger.error(_msg)
+            raise Exception(_msg)
         key = 'data'
         if not key in data:
-            return False
+            _msg = f"{msg} Json missing data field. File: {self._json_path}"
+            logger.error(_msg)
+            raise Exception(_msg)
         if not isinstance(data[key], dict):
-            return False
-        return True
+            _msg = f"{msg} Json data field is not a dictionary. File: {self._json_path}"
+            logger.error(_msg)
+            raise Exception(_msg)
 
 
     def get_is_classes_data(self) -> bool:

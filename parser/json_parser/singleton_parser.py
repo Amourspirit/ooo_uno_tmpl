@@ -44,7 +44,7 @@ class Parser(bp.Parser):
         super().__init__(json_path=json_path)
 
     def get_min_version(self) -> Version:
-        return Version(0, 1, 9)
+        return Version(0, 1, 8)
 
     def get_section_name(self) -> str:
         return 'singleton'
