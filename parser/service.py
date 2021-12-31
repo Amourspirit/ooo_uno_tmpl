@@ -11,11 +11,14 @@ import argparse
 import logging
 import textwrap
 import xerox  # requires xclip - sudo apt-get install xclip
-import base
 from typing import Dict, List, NamedTuple, Set, Tuple, Union
 from bs4.element import ResultSet, Tag
 from kwhelp.decorator import DecFuncEnum, SubClass, TypeCheck, TypeCheckKw
 from pathlib import Path
+try:
+    import base
+except ModuleNotFoundError:
+    import parser.base as base
 from logger.log_handle import get_logger
 from parser.enm import main
 from parser import __version__, JSON_ID
@@ -26,9 +29,9 @@ logger = None
 
 
 def _set_loggers(l: Union[logging.Logger, None]):
-    global logger, base
+    global logger
     logger = l
-    base.logger = l
+    base._set_loggers(l)
 
 _set_loggers(None)
 # endregion Logger
@@ -623,6 +626,149 @@ class WriterService(base.WriteBase):
     # endregion Write
 # endregion Writer
 
+# region Parse method
+
+
+def _get_parsed_kwargs(**kwargs) -> Dict[str, str]:
+    required = ("url",)
+    lookups = {
+        "u": "url",
+        "url": "url",
+        "L": "log_file",
+        "log_file": "log_file"
+    }
+    result = {}
+    for k, v in kwargs.items():
+        if not isinstance(k, str):
+            continue
+        if k in lookups:
+            key = lookups[k]
+            result[key] = v
+    for k in required:
+        if not k in result:
+            # k is missing from kwargs
+            raise base.RequiredError(f"Missing required arg {k}.")
+    return result
+
+
+def _get_parsed_args(*args) -> Dict[str, bool]:
+    # key, value and value is a key into defaults
+    defaults = {
+        'no_sort': True,
+        "no_cache": True,
+        "no_desc": True,
+        "no_print_clear": True,
+        "long_template": False,
+        "clipboard": False,
+        "print_json": False,
+        "print_template": False,
+        "write_template": False,
+        "write_json": False,
+        "verbose": False
+    }
+    found = {
+        'no_sort': False,
+        "no_cache": False,
+        "no_desc": False,
+        "no_print_clear": False,
+        "long_template": True,
+        "clipboard": True,
+        "print_json": True,
+        "print_template": True,
+        "write_template": True,
+        "write_json": True,
+        "verbose": True,
+    }
+    lookups = {
+        "s": "no_sort",
+        "no_sort": "no_sort",
+        "x": "no_cache",
+        "no_cache": "no_cache",
+        "p": "no_print_clear",
+        "d": "no_desc",
+        "no_desc": "no_desc",
+        "no_print_clear": "no_print_clear",
+        "g": "long_template",
+        "long_template": "long_template",
+        "c": "clipboard",
+        "clipboard": "clipboard",
+        "n": "print_json",
+        "print_json": "print_json",
+        "m": "print_template",
+        "print_template": "print_template",
+        "t": "write_template",
+        "write_template": "write_template",
+        "j": "write_json",
+        "write_json": "write_json",
+        "v": "verbose",
+        "verbose": "verbose"
+    }
+    result = {k: v for k, v in defaults.items()}
+    for arg in args:
+        if not isinstance(arg, str):
+            continue
+        if arg in lookups:
+            key = lookups[arg]
+            result[key] = found[key]
+    return result
+
+
+def parse(*args, **kwargs):
+    """
+    Parses data, alternative to running on command line.
+
+    Other Arguments:
+        'no_sort' (str, optional): Short form ``'s'``. No sorting of results. Default ``False``
+        'no_cache' (str, optional): Short form ``'x'``. No caching. Default ``False``
+        'no_desc' (str, optional): Short form ``'d'``. No description will be outputed in template, Defalut ``False``
+        'no_print_clear (str, optional): Short form ``'p'``. No clearing of terminal
+            when otuput to terminal. Default ``False``
+        'print_json' (str, optional): Short form ``'n'``. Print json to termainl. Default ``False``
+        'print_template' (str, optional): Short form ``'m'``. Print template to terminal. Default ``False``
+        'write_template' (str, optional): Short form ``'t'``. Write template file into obj_uno subfolder. Default ``False``
+        'long_template' (str, optional): Short form ``'g'``. Writes a long format template.
+            Requires write_template is set. Default ``False``
+        'clipboard' (str, optional): Short form ``'c'``. Copy to clipboard. Default ``False``
+        'write_json' (str, optional): Short form ``'j'``. Write json file into obj_uno subfolder. Default ``False``
+        'verbose' (str, optional): Short form ``'v'``. Verobose output.
+
+    Keyword Arguments:
+        url (str): Short form ``u``. url to parse
+        log_file (str, optional): Short form ``L``. Log File
+    """
+    global logger
+    pkwargs = _get_parsed_kwargs(**kwargs)
+    pargs = _get_parsed_args(*args)
+    if logger is None:
+        log_args = {}
+        if 'log_file' in pkwargs:
+            log_args['log_file'] = pkwargs['log_file']
+        else:
+            log_args['log_file'] = 'service.log'
+        if pargs['verbose']:
+            log_args['level'] = logging.DEBUG
+        _set_loggers(get_logger(logger_name=Path(__file__).stem, **log_args))
+
+    p = ParserService(
+        url=pkwargs['url'],
+        sort=pargs['no_sort'],
+        cache=pargs['no_cache']
+    )
+    w = WriterService(
+        parser=p,
+        print_template=pargs['print_template'],
+        print_json=pargs['print_json'],
+        copy_clipboard=pargs['clipboard'],
+        write_template=pargs['write_template'],
+        write_json=pargs['write_json'],
+        clear_on_print=(not pargs['no_print_clear']),
+        write_template_long=pargs['long_template'],
+        include_desc=pargs['no_desc']
+    )
+    w.write()
+# endregion Parse method
+
+
 # region Main
 def _main():
     # ic = ImportCheck()
@@ -633,20 +779,28 @@ def _main():
     # url = "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1awt_1_1SpinningProgressControlModel.html"
     # url = "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1awt_1_1AccessibleCheckBox.html"
     url = "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1awt_1_1AsyncCallback.html"
-    sys.argv.extend(['-n', '-v', '-L', 'service.log', '-u', url])
-    main()
+    # sys.argv.extend(['-n', '-v', '-L', 'service.log', '-u', url])
+    # main()
+    args = ('v', 'n')
+    kwargs = {
+        "u": url,
+        "log_file": "debug.log"
+    }
+    parse(*args, **kwargs)
 
-
-def main():
-    global logger
-
-    # region Parser
-    parser = argparse.ArgumentParser(description='interface')
+def get_cmd_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(description='service')
     parser.add_argument(
         '-u', '--url',
         help='Source Url',
         type=str,
         required=True)
+    parser.add_argument(
+        '-d', '--no-desc',
+        help='No description will be outputed in template',
+        action='store_false',
+        dest='desc',
+        default=True)
     parser.add_argument(
         '-s', '--no-sort',
         help='No sorting of results',
@@ -658,12 +812,6 @@ def main():
         help='No caching',
         action='store_false',
         dest='cache',
-        default=True)
-    parser.add_argument(
-        '-d', '--no-desc',
-        help='No description will be outputed in template',
-        action='store_false',
-        dest='desc',
         default=True)
     parser.add_argument(
         '-p', '--no-print-clear',
@@ -707,7 +855,6 @@ def main():
         action='store_true',
         dest='write_json',
         default=False)
-    # region Dummy Args for Logging
     parser.add_argument(
         '-v', '--verbose',
         help='verbose logging',
@@ -719,8 +866,14 @@ def main():
         help='Log file to use. Defaults to service.log',
         type=str,
         required=False)
-    # endregion Dummy Args for Logging
     args = parser.parse_args()
+    return args
+
+
+def main():
+    global logger
+
+    args = get_cmd_args()
     if logger is None:
         log_args = {}
         if args.log_file:
@@ -730,7 +883,6 @@ def main():
         if args.verbose:
             log_args['level'] = logging.DEBUG
         _set_loggers(get_logger(logger_name=Path(__file__).stem, **log_args))
-    # endregion Parser
     if not args.no_print_clear:
         os.system('cls' if os.name == 'nt' else 'clear')
     logger.info('Executing command: %s', sys.argv[1:])
@@ -758,4 +910,4 @@ def main():
 # endregion Main
 
 if __name__ == '__main__':
-   main()
+   _main()
