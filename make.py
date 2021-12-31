@@ -395,18 +395,6 @@ class TouchFiles(FilesBase):
         if self._touch_typedef:
             self._touch_typedef_files()
         logger.info('Touched a total of %d files.', self._touch_count)
-
-    def _touch_tmpl(self):
-        files = self._get_template_files()
-        for file in files:
-            p_file = Path(file)
-            p_file.touch(exist_ok=True)
-    
-    def _touch_tppi(self):
-        files = self._get_template_tppi_files()
-        for file in files:
-            p_file = Path(file)
-            p_file.touch(exist_ok=True)
     
     def _get_module_links(self) -> List[str]:
         key = '_get_module_links'
@@ -431,6 +419,7 @@ class TouchFiles(FilesBase):
                         continue
                 t_path.touch(exist_ok=True)
                 touched += 1
+                logger.debug('Touched Struct file: %s', t_path)
 
         for file in link_files:
             process(file)
@@ -453,6 +442,7 @@ class TouchFiles(FilesBase):
                         continue
                 t_path.touch(exist_ok=True)
                 touched += 1
+                logger.debug('Touched Const file: %s', t_path)
 
         for file in link_files:
             process(file)
@@ -475,6 +465,7 @@ class TouchFiles(FilesBase):
                         continue
                 t_path.touch(exist_ok=True)
                 touched += 1
+                logger.debug('Touched Enum file: %s', t_path)
 
         for file in link_files:
             process(file)
@@ -498,6 +489,7 @@ class TouchFiles(FilesBase):
                         continue
                 t_path.touch(exist_ok=True)
                 touched += 1
+                logger.debug('Touched Exception file: %s', t_path)
 
         for file in link_files:
             process(file)
@@ -521,6 +513,7 @@ class TouchFiles(FilesBase):
                         continue
                 t_path.touch(exist_ok=True)
                 touched += 1
+                logger.debug('Touched Interface file: %s', t_path)
 
         for file in link_files:
             process(file)
@@ -544,6 +537,7 @@ class TouchFiles(FilesBase):
                         continue
                 t_path.touch(exist_ok=True)
                 touched += 1
+                logger.debug('Touched Singleton file: %s', t_path)
 
         for file in link_files:
             process(file)
@@ -567,6 +561,7 @@ class TouchFiles(FilesBase):
                         continue
                 t_path.touch(exist_ok=True)
                 touched += 1
+                logger.debug('Touched TypeDef file: %s', t_path)
 
         for file in link_files:
             process(file)
