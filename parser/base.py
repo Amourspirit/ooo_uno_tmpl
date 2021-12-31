@@ -2755,7 +2755,12 @@ class AreaFilter:
             return []
         d_lst = self._list_dict(lst=self._lst)
         match_lst = d_lst[self._first.y1]
-        in_lst = [area for area in match_lst]  # make a copy
+        # if only one classe is being inherted then return early.
+        # in some cases the class being inherited can also be inherited elsewhere.
+        # this can result in inhertiance being removed that should stay.
+        # see: https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1report_1_1Shape.html
+        if len(match_lst) == 1:
+            return match_lst
         # remove first first group
         # del d_lst[self._first.y1]
 
