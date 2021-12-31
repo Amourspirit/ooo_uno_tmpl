@@ -17,7 +17,7 @@ from typing import Callable, Dict, List, Tuple, Union
 from pathlib import Path
 from verr import Version
 from abc import ABC, abstractmethod, abstractproperty
-from kwhelp.decorator import RequireArgs, SubClasskKw
+from kwhelp.decorator import RequireArgs, SubClasskKw, TypeCheckKw
 import parser.base as base
 from logger.log_handle import get_logger
 from parser import __version__, JSON_ID
@@ -273,10 +273,6 @@ def _get_parsed_args(*args) -> Dict[str, bool]:
     return result
 
 @RequireArgs('iparser','iwriter')
-@SubClasskKw(arg_info={
-    "iparser": IParser,
-    "iwriter": IWriter
-})
 def parse(*args, **kwargs):
     """
     Parses data, alternative to running on command line.
