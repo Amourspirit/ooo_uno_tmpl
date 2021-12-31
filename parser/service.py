@@ -256,18 +256,32 @@ class ApiDesc:
             self._data.extend(since)
         return self._data
 
+class ApiNs(base.ApiNamespace):
+    """Get the Name object for the interface"""
 
-class ApiData:
+    def __init__(self, soup: base.SoupObj):
+        super().__init__(soup)
+        self._namespace_str = None
+        self._namespace = None
+
+    @property
+    def namespace(self) -> List[str]:
+        """Gets namespace value"""
+        if self._namespace is None:
+            self._namespace = self.get_obj()[:-1]
+        return self._namespace
+
+    @property
+    def namespace_str(self) -> str:
+        if self._namespace_str is None:
+            self._namespace_str = '.'.join(self.namespace)
+        return self._namespace_str
+
+class ApiData(base.APIData):
     @TypeCheck((str, base.SoupObj), bool, ftype=DecFuncEnum.METHOD)
     def __init__(self, url_soup: Union[str, base.SoupObj], allow_cache: bool):
-        if isinstance(url_soup, str):
-            self._url = url_soup
-            self._soup_obj = base.SoupObj(
-                url=url_soup, allow_cache=allow_cache)
-        else:
-            self._url = url_soup.url
-            self._soup_obj = url_soup
-            self._soup_obj.allow_cache = allow_cache
+        super().__init__(url_soup=url_soup, allow_cache=allow_cache)
+        self._ns: ApiNs = None
         self._api_tables: ApiTables = None
         self._api_included_services_block: ApiIncludedServicesBlock = None
         self._api_exported_interfaces_block: ApiExportedInterfacesBlock = None
@@ -279,9 +293,13 @@ class ApiData:
 
     # region Properties
     @property
-    def soup(self) -> base.SoupObj:
-        """Gets soup value"""
-        return self._soup_obj
+    def ns(self) -> ApiNs:
+        """Gets the service Description object"""
+        if self._ns is None:
+            self._ns = ApiNs(
+                self.soup_obj)
+        return self._ns
+
 
     @property
     def api_tables(self) -> ApiTables:
@@ -314,7 +332,7 @@ class ApiData:
     @property
     def api_desc_block(self) -> ApiDescBlock:
         if self._api_desc_block is None:
-            self._api_desc_block = ApiDescBlock(self.soup)
+            self._api_desc_block = ApiDescBlock(self.soup_obj)
         return self._api_desc_block
     
     @property
@@ -336,14 +354,6 @@ class ApiData:
             self._inherited = base.ApiInherited(self.soup_obj)
         return self._inherited
 
-    @property
-    def soup_obj(self) -> base.SoupObj:
-        """Gets soup_obj value"""
-        return self._soup_obj
-
-    @property
-    def url_obj(self) -> base.UrlObj:
-        return self._soup_obj.url_obj
     # endregion Properties
 
 # endregion API Classes
@@ -385,19 +395,22 @@ class ParserService(base.ParserBase):
         key = 'get_info'
         if key in self._cache:
             return self._cache[key]
-        ns = self._api_data.soup.url_obj
         desc = self._api_data.api_desc.get_obj()
-        
+        # prime data
+        self._api_data.ns.get_obj()
         result = {
-            'name': ns.name,
-            'namespace': ns.namespace_str,
+            'name': self._api_data.name.get_obj(),
+            'namespace': self._api_data.ns.namespace_str,
             'extends': self._get_extends(),
-            'url': ns.url,
+            'url': self._api_data.url_obj.url,
             'desc': desc
         }
         self._cache[key] = result
         return self._cache[key]
 
+    @property
+    def api_data(self) -> ApiData:
+        return self._api_data
 # endregion Parser
 
 
