@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# region Imports
 import logging
 import os
 import sys
@@ -24,11 +25,17 @@ from parser.json_parser.enum_parser import parse as parse_enm, ParserEnum
 from parser.json_parser.exception_parser import parse as parse_ex, ParserException
 from parser.json_parser.typedef_parser import parse as parse_typedef, ParserTypeDef
 from parser.json_parser.const_parser import parse as parse_const, ParserConst
+# endregion Imports
+
+# region Logger / Env
 logger = None
 
 os.environ['project_root'] = str(Path(__file__).parent)
 # logger/log_handle.py
 
+# endregion Logger / Env
+
+# region Compare
 class CompareEnum(IntEnum):
     Before = -1
     Equal = 0
@@ -48,6 +55,9 @@ class CompareFile:
             return CompareEnum.After
         return CompareEnum.Equal
 
+# endregion Compare
+
+# region FilesBase
 
 class FilesBase:
     def __init__(self, config: AppConfig) -> None:
@@ -109,7 +119,9 @@ class FilesBase:
         return self._root_dir
     # endregion Properties
 
+# endregion FilesBase
 
+# region Compile Links
 class BaseCompile(FilesBase):
     def __init__(self, config:AppConfig) -> None:
         super().__init__(config=config)
@@ -310,7 +322,7 @@ class CompileSingletonLinks(BaseCompile):
         cmd_str = f"{self._processer} -f {file}"
         cmd = [sys.executable] + cmd_str.split()
         logger.info(
-            "CompileSingletonLinks: Processing interface in file: %s", file)
+            "CompileSingletonLinks: Processing singleton in file: %s", file)
         res = subprocess.run(cmd)
         if res.stdout:
             logger.info(res.stdout)
@@ -319,8 +331,45 @@ class CompileSingletonLinks(BaseCompile):
 
     def _process_direct(self, file: str):
         logger.info(
-            "CompileSingletonLinks: Processing interface in file: %s", file)
+            "CompileSingletonLinks: Processing singleton in file: %s", file)
         parse_singleton('t', 'j', f=file)
+
+    def _process_files(self):
+        link_files = self.get_module_link_files()
+        for file in link_files:
+            if self._do_sub:
+                self._subprocess(file)
+            else:
+                self._process_direct(file)
+
+
+class CompileServiceLinks(BaseCompile):
+
+    def __init__(self, config: AppConfig, use_subprocess: bool) -> None:
+        super().__init__(config=config)
+        self._do_sub = use_subprocess
+        if self._do_sub:
+            self._processer = str(
+                Path(self.json_parser_path, 'service_parser.py'))
+        else:
+            self._processer = ''
+        self._process_files()
+
+    def _subprocess(self, file: str):
+        cmd_str = f"{self._processer} -f {file}"
+        cmd = [sys.executable] + cmd_str.split()
+        logger.info(
+            "CompileServiceLinks: Processing service in file: %s", file)
+        res = subprocess.run(cmd)
+        if res.stdout:
+            logger.info(res.stdout)
+        if res.stderr:
+            logger.error(res.stderr)
+
+    def _process_direct(self, file: str):
+        logger.info(
+            "CompileServiceLinks: Processing service in file: %s", file)
+        parse_service('t', 'j', f=file)
 
     def _process_files(self):
         link_files = self.get_module_link_files()
@@ -365,7 +414,9 @@ class CompileExLinks(BaseCompile):
             else:
                 self._process_direct(file)
 
+# endregion Compile Links
 
+# region Touch Files
 class TouchFiles(FilesBase):
     def __init__(self,config: AppConfig, **kwargs) -> None:
         super().__init__(config=config)
@@ -596,7 +647,9 @@ class TouchFiles(FilesBase):
             process(file)
         logger.info('Touched %d TypeDef files', touched)
         self._touch_count += touched
+# endregion Touch Files
 
+# region Make
 class Make(FilesBase):
     def __init__(self, config: AppConfig, **kwargs) -> None:
         super().__init__(config=config)
@@ -751,7 +804,9 @@ class Make(FilesBase):
             subprocess.run([sys.executable, py_file], stdout=outfile)
             logger.info('Wrote file: %s', str(p_out))
 
+# endregion Make
 
+# region Main
 def _main():
     sys.argv.extend(['-v', '--log-file', 'make.log'])
     main()
@@ -780,6 +835,7 @@ def main():
     struct_parser = subparser.add_parser(name='struct')
     interface_parser = subparser.add_parser(name='interface')
     singleton_parser = subparser.add_parser(name='singleton')
+    service_parser = subparser.add_parser(name='service')
     typedef_parser = subparser.add_parser(name='typedef')
     touch = subparser.add_parser(name='touch')
     # region ex args
@@ -884,7 +940,25 @@ def main():
         default=False
     )
 
-    # endregion singleton args
+    # endregion service args
+
+    # region singleton args
+    service_parser.add_argument(
+        '-a', '--all',
+        help='Compile all service recursivly',
+        action='store_true',
+        dest='service_all',
+        default=False
+    )
+    service_parser.add_argument(
+        '-u', '--run-as-cmdline',
+        help='Run as command line suprocess. Default False',
+        action='store_true',
+        dest='cmd_line_process',
+        default=False
+    )
+
+    # endregion service args
 
     # region typedef args
     typedef_parser.add_argument(
@@ -1032,6 +1106,10 @@ def main():
         if args.singleton_all:
             CompileSingletonLinks(
                 config=config, use_subprocess=args.cmd_line_process)
+    if args.command == 'service':
+        if args.service_all:
+            CompileServiceLinks(
+                config=config, use_subprocess=args.cmd_line_process)
     if args.command == 'typedef':
         if args.typedef_all:
             CompileTypeDefLinks(
@@ -1054,3 +1132,5 @@ def main():
 if __name__ == '__main__':
     # _touch()
     main()
+
+# endregion Main
