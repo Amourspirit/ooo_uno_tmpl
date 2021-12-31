@@ -12,9 +12,9 @@ import logging
 import textwrap
 import xerox  # requires xclip - sudo apt-get install xclip
 import re
-from typing import Dict, List, Optional, Set, Union
+from typing import Callable, Dict, List, Optional, Set, Union
 from bs4.element import ResultSet, Tag
-from kwhelp.decorator import AcceptedTypes, DecFuncEnum, TypeCheckKw
+from kwhelp.decorator import AcceptedTypes, DecFuncEnum, RequireArgs, TypeCheckKw
 from pathlib import Path
 from dataclasses import dataclass
 try:
@@ -30,9 +30,9 @@ logger = None
 
 
 def _set_loggers(l: Union[logging.Logger, None]):
-    global logger, base
+    global logger
     logger = l
-    base.logger = l
+    base._set_loggers(l)
 
 
 _set_loggers(None)
@@ -538,7 +538,7 @@ class ApiInterfaceData(base.APIData):
 # region Parse
 
 
-class ParserInterface(base.ParserBase):
+class Parser(base.ParserBase):
 
     # region Constructor
     @TypeCheckKw(
@@ -599,8 +599,8 @@ class ParserInterface(base.ParserBase):
             'desc': self._api_data.desc.get_obj(),
             "url": self._api_data.url_obj.url,
         }
-        logger.debug('ParserInterface.get_info() name: %s', result['name'])
-        logger.debug('ParserInterface.get_info() namespace: %s',
+        logger.debug('Parser.get_info() name: %s', result['name'])
+        logger.debug('Parser.get_info() namespace: %s',
                      result['namespace'])
         self._cache[key] = result
         return self._cache[key]
@@ -722,7 +722,7 @@ class ParserInterface(base.ParserBase):
         try:
             key = 'get_formated_data'
             if not key in self._cache:
-                msg = "ParserInterface.get_formated_data() method must be called before accessing imports"
+                msg = "Parser.get_formated_data() method must be called before accessing imports"
                 raise Exception(msg)
         except Exception as e:
             logger.error(e, exc_info=True)
@@ -735,7 +735,7 @@ class ParserInterface(base.ParserBase):
         try:
             key = 'get_formated_data'
             if not key in self._cache:
-                msg = "ParserInterface.get_formated_data() method must be called before accessing requires_typing"
+                msg = "Parser.get_formated_data() method must be called before accessing requires_typing"
                 raise Exception(msg)
         except Exception as e:
             logger.error(e, exc_info=True)
@@ -750,25 +750,27 @@ class ParserInterface(base.ParserBase):
 # region Writer
 
 
-class InterfaceWriter(base.WriteBase):
+class Writer(base.WriteBase):
     # region Constructor
     @TypeCheckKw(arg_info={
         "write_file": 0, "write_json": 0,
         "copy_clipboard": 0, "print_template": 0,
         "print_json": 0, "clear_on_print": 0,
-        "write_template_long": 0
+        "write_template_long": 0,
+        "include_desc": 0
     },
         types=[bool],
         ftype=DecFuncEnum.METHOD)
-    def __init__(self, parser: ParserInterface, **kwargs):
+    def __init__(self, parser: Parser, **kwargs):
         super().__init__(**kwargs)
-        self._parser: ParserInterface = parser
+        self._parser: Parser = parser
         self._copy_clipboard: bool = kwargs.get('copy_clipboard', False)
         self._print_template: bool = kwargs.get('print_template', False)
         self._write_file: bool = kwargs.get('write_template', False)
         self._print_json: bool = kwargs.get('print_json', True)
         self._write_json: bool = kwargs.get('write_json', False)
         self._clear_on_print: bool = kwargs.get('clear_on_print', True)
+        self._include_desc: bool = kwargs.get('include_desc', True)
         self._write_template_long: bool = kwargs.get(
             'write_template_long', False)
         self._indent_amt = 4
@@ -785,7 +787,7 @@ class InterfaceWriter(base.WriteBase):
         self._path_dir = Path(__file__).parent
         self._cache: Dict[str, object] = {}
 
-        t_file = 'interface'
+        t_file = self._get_template_name()
         if not self._write_template_long:
             t_file += '_stub'
         t_file += '.tmpl'
@@ -800,6 +802,15 @@ class InterfaceWriter(base.WriteBase):
         self._template_file = _path
         self._template: str = self._get_template()
     # endregion Constructor
+
+    def _get_template_name(self) -> str:
+        """
+        Gets the template name without extension or appended __stub
+
+        Returns:
+            str: interface
+        """
+        return 'interface'
 
     def write(self):
         self._set_info()
@@ -823,6 +834,9 @@ class InterfaceWriter(base.WriteBase):
         except Exception as e:
             logger.exception(e)
 
+    def _get_json_type(sefl) -> str:
+        return "interface"
+
     def _get_json(self) -> str:
         if not self._json_str is None:
             return self._json_str
@@ -839,10 +853,12 @@ class InterfaceWriter(base.WriteBase):
             "version": __version__,
             "timestamp": str(base.Util.get_timestamp_utc()),
             "name": p_dict['name'],
-            "type": "interface",
+            "type": self._get_json_type(),
             "namespace": p_dict['namespace'],
             "parser_args": self._parser.get_parser_args(),
-            "writer_args": {},
+            "writer_args": {
+                "include_desc": self._include_desc
+                },
             "data": p_dict
         }
         str_jsn = base.Util.get_formated_dict_list_str(obj=json_dict, indent=2)
@@ -967,6 +983,8 @@ class InterfaceWriter(base.WriteBase):
         self._template = self._template.replace(
             '{requires_typing}', str(self._p_requires_typing))
         self._template = self._template.replace(
+            '{include_desc}', str(self._include_desc))
+        self._template = self._template.replace(
             '{inherits}', base.Util.get_string_list(lines=self._p_extends))
         self._template = self._template.replace(
             '{imports}', "[]")
@@ -1028,16 +1046,20 @@ class InterfaceWriter(base.WriteBase):
         try:
             if not self._p_name:
                 raise Exception(
-                    "InterfaceWriter: validation fail: name is an empty string.")
+                    "Writer: validation fail: name is an empty string.")
             if not self._p_url:
                 raise Exception(
-                    "InterfaceWriter: validation fail: url is an empty string.")
+                    "Writer: validation fail: url is an empty string.")
             if not self._p_namespace:
                 raise Exception(
-                    "InterfaceWriter: validation fail: namespace is an empty string.")
+                    "Writer: validation fail: namespace is an empty string.")
         except Exception as e:
             logger.error(e)
             raise e
+
+    def _get_template_ext(self) -> str:
+        """Gets Template extension. Can be overriden"""
+        return base.APP_CONFIG.template_interface_ext
 
     def _get_uno_obj_path(self) -> Path:
         key = '_get_uno_obj_path'
@@ -1046,7 +1068,7 @@ class InterfaceWriter(base.WriteBase):
         if not self._p_name:
             try:
                 raise Exception(
-                    "InterfaceWriter._get_uno_obj_path() Parser provided a name that is an empty string.")
+                    "Writer._get_uno_obj_path() Parser provided a name that is an empty string.")
             except Exception as e:
                 logger.error(e, exc_info=True)
                 raise e
@@ -1056,7 +1078,7 @@ class InterfaceWriter(base.WriteBase):
         name_parts: List[str] = self._p_namespace.split('.')
         # ignore com, sun, star
         path_parts = name_parts[3:]
-        path_parts.append(self._p_name + '.tmpl')
+        path_parts.append(self._p_name + self._get_template_ext())
         obj_path = uno_obj_path.joinpath(*path_parts)
         self._mkdirp(obj_path.parent)
         self._cache[key] = obj_path
@@ -1104,6 +1126,7 @@ def _get_parsed_args(*args) -> Dict[str, bool]:
     defaults = {
         'no_sort': True,
         "no_cache": True,
+        "no_desc": True,
         "no_print_clear": True,
         "long_template": False,
         "clipboard": False,
@@ -1116,6 +1139,7 @@ def _get_parsed_args(*args) -> Dict[str, bool]:
     found = {
         'no_sort': False,
         "no_cache": False,
+        "no_desc": False,
         "no_print_clear": False,
         "long_template": True,
         "clipboard": True,
@@ -1130,6 +1154,8 @@ def _get_parsed_args(*args) -> Dict[str, bool]:
         "no_sort": "no_sort",
         "x": "no_cache",
         "no_cache": "no_cache",
+        "d": "do_desc",
+        "no_desc": "no_desc",
         "p": "no_print_clear",
         "no_print_clear": "no_print_clear",
         "g": "long_template",
@@ -1157,6 +1183,64 @@ def _get_parsed_args(*args) -> Dict[str, bool]:
     return result
 
 
+class Processer:
+    """Processes parsing and writing"""
+    @RequireArgs('url', ftype=DecFuncEnum.METHOD)
+    def __init__(self, p:type[Parser], w:type[Writer], **kwargs):
+        """
+        Constructor
+
+        Args:
+            p (type[Parser]): Parser class
+            w (type[Writer]): Writer class
+        
+        Other Arguments:
+            url (str): url to parse
+            sort (bool, optional): No sorting of results. Default ``True``
+            cache (bool, optional): caching. Default ``False``
+            clear_on_print (bool, optional): No clearing of terminal when otuput to terminal. Default ``False``
+            write_template_long (bool, optional): Writes a long format template. Requires write_template is set. Default ``False``
+            copy_clipboard (bool, optional): Copy to clipboard. Default ``False``
+            print_json (bool, optional):Print json to termainl. Default ``False``
+            print_template (bool, optional): Print template to terminal. Default ``False``
+            write_template (bool, optional): Write template file into obj_uno subfolder. Default ``False``
+            write_json (bool, optional): Write json file into obj_uno subfolder. Default ``False``
+            verbose (bool, optional): Verobose output. Default ``False``
+        """
+        self._parser = p
+        self._writer = w
+        self._url = str(kwargs['url'])
+        self._sort = bool(kwargs.get('sort', True))
+        self._cache = bool(kwargs.get('cache', False))
+        self._print_clear = bool(kwargs.get('clear_on_print', False))
+        self._long_template = bool(kwargs.get('write_template_long', False))
+        self._clipboard = bool(kwargs.get('copy_clipboard', False))
+        self._print_json = bool(kwargs.get('print_json', False))
+        self._print_template = bool(kwargs.get('print_template', False))
+        self._write_template = bool(kwargs.get('write_template', False))
+        self._write_json = bool(kwargs.get('write_json', bool))
+        self._verbose = bool(kwargs.get('verbose', False))
+        self._include_desc = bool(kwargs.get('include_desc', True))
+
+    def process(self) -> None:
+        parser = self._parser(
+            url=self._url,
+            sort=self._sort,
+            cache=self._cache
+        )
+        w = self._writer(
+            parser=parser,
+            print_template=self._print_template,
+            print_json=self._print_json,
+            copy_clipboard=self._clipboard,
+            write_template=self._write_template,
+            write_json=self._write_json,
+            clear_on_print=self._print_clear,
+            write_template_long=self._long_template,
+            include_desc=self._include_desc
+        )
+        w.write()
+
 def parse(*args, **kwargs):
     """
     Parses data, alternative to running on command line.
@@ -1166,6 +1250,7 @@ def parse(*args, **kwargs):
         'no_cache' (str, optional): Short form ``'x'``. No caching. Default ``False``
         'no_print_clear (str, optional): Short form ``'p'``. No clearing of terminal
             when otuput to terminal. Default ``False``
+        'no_desc' (str, optional): Short from ``'d'``. No description will be outputed in template. Default ``False``
         'long_template' (str, optional): Short form ``'g'``. Writes a long format template.
             Requires write_template is set. Default ``False``
         'clipboard' (str, optional): Short form ``'c'``. Copy to clipboard. Default ``False``
@@ -1182,21 +1267,6 @@ def parse(*args, **kwargs):
     global logger
     pkwargs = _get_parsed_kwargs(**kwargs)
     pargs = _get_parsed_args(*args)
-    p = ParserInterface(
-        url=pkwargs['url'],
-        sort=pargs['no_sort'],
-        cache=pargs['no_cache']
-    )
-    w = InterfaceWriter(
-        parser=p,
-        print_template=pargs['print_template'],
-        print_json=pargs['print_json'],
-        copy_clipboard=pargs['clipboard'],
-        write_template=pargs['write_template'],
-        write_json=pargs['write_json'],
-        clear_on_print=(not pargs['no_print_clear']),
-        write_template_long=pargs['long_template']
-    )
     if logger is None:
         log_args = {}
         if 'log_file' in pkwargs:
@@ -1206,7 +1276,25 @@ def parse(*args, **kwargs):
         if pargs['verbose']:
             log_args['level'] = logging.DEBUG
         _set_loggers(get_logger(logger_name=Path(__file__).stem, **log_args))
-    w.write()
+    parser: Parser = kwargs.get('class_parser', Parser)
+    writer: Writer = kwargs.get('class_writer', Writer)
+    proc = Processer(
+        p=parser,
+        w=writer,
+        url=pkwargs['url'],
+        sort=pargs['no_sort'],
+        cache=pargs['no_cache'],
+        print_template=pargs['print_template'],
+        print_json=pargs['print_json'],
+        copy_clipboard=pargs['clipboard'],
+        write_template=pargs['write_template'],
+        write_json=pargs['write_json'],
+        clear_on_print=(not pargs['no_print_clear']),
+        write_template_long=pargs['long_template'],
+        include_desc=pargs['no_desc']
+    )
+    proc.process()
+   
 # endregion Parse method
 
 def _main():
@@ -1215,7 +1303,8 @@ def _main():
     # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1beans_1_1XIntrospectionAccess.html' # has a sequence
     # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1accessibility_1_1XAccessibleTextSelection.html'
     # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XStyleSettings.html'
-    url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XMessageBoxFactory.html'
+    # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XMessageBoxFactory.html'
+    url = 'https://api.libreoffice.org/docs/idl/ref/singletoncom_1_1sun_1_1star_1_1sdb_1_1DataAccessDescriptorFactory.html' #singleton
     args = ('v', 'n')
     kwargs = {
         "u": url,
@@ -1225,9 +1314,7 @@ def _main():
     # main()
     parse(*args, **kwargs)
 
-
-def main():
-    global logger
+def get_cmd_args() -> argparse.Namespace:
     # region Parser
     parser = argparse.ArgumentParser(description='interface')
     parser.add_argument(
@@ -1235,6 +1322,12 @@ def main():
         help='Source Url',
         type=str,
         required=True)
+    parser.add_argument(
+        '-d', '--no-desc',
+        help='No description will be outputed in template',
+        action='store_false',
+        dest='desc',
+        default=True)
     parser.add_argument(
         '-s', '--no-sort',
         help='No sorting of results',
@@ -1300,8 +1393,13 @@ def main():
         help='Log file to use. Defaults to interface.log',
         type=str,
         required=False)
-
+    # endregion Parser
     args = parser.parse_args()
+    return args
+
+def main():
+    global logger
+    args = get_cmd_args()
     if logger is None:
         log_args = {}
         if args.log_file:
@@ -1311,30 +1409,29 @@ def main():
         if args.verbose:
             log_args['level'] = logging.DEBUG
         _set_loggers(get_logger(logger_name=Path(__file__).stem, **log_args))
-    # endregion Parser
+    
     if not args.no_print_clear:
         os.system('cls' if os.name == 'nt' else 'clear')
     logger.info('Executing command: %s', sys.argv[1:])
     logger.info('Parsing Url %s' % args.url)
 
-    p = ParserInterface(
+    proc = Processer(
+        p=Parser,
+        w=Writer,
         url=args.url,
         sort=args.sort,
-        cache=args.cache
-    )
-    w = InterfaceWriter(
-        parser=p,
         print_template=args.print_template,
         print_json=args.print_json,
         copy_clipboard=args.clipboard,
         write_template=args.write_template,
         write_json=args.write_json,
         clear_on_print=(not args.no_print_clear),
-        write_template_long=args.long_format
+        write_template_long=args.long_format,
+        include_desc=args.desc
     )
     if args.print_template is False and args.print_json is False:
         print('')
-    w.write()
+    proc.process()
 
 
 if __name__ == '__main__':

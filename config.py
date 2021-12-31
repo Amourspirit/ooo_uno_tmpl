@@ -50,6 +50,8 @@ class AppConfig:
     """Extension for const files such as .tmpl"""
     template_interface_ext: str
     """Extension for interface files such as .tmpl"""
+    template_singleton_ext: str
+    """Extension for singleton files such as .tmpl"""
     template_enum_ext: str
     """Extension for enum files such as .tmpl"""
     template_exception_ext: str

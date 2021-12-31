@@ -16,7 +16,7 @@ _app_root = os.environ.get('project_root', str(
 if not _app_root in sys.path:
     sys.path.insert(0, _app_root)
 import parser.base as base
-import parser.xsrc as xsrc
+import parser.singleton as singleton
 from parser.json_parser import base_parser as bp
 from logger.log_handle import get_logger
 
@@ -30,7 +30,7 @@ def _set_loggers(l: Union[logging.Logger, None]):
     global logger
     logger = l
     bp._set_loggers(l)
-    xsrc._set_loggers(l)
+    singleton._set_loggers(l)
 
 
 _set_loggers(None)
@@ -44,10 +44,10 @@ class Parser(bp.Parser):
         super().__init__(json_path=json_path)
 
     def get_min_version(self) -> Version:
-        return Version(0, 1, 3)
+        return Version(0, 1, 9)
 
     def get_section_name(self) -> str:
-        return 'interface'
+        return 'singleton'
 
     def get_is_classes_data(self) -> bool:
         return True
@@ -63,10 +63,10 @@ class Writer(bp.Writer):
        super().__init__(parser=parser)
 
     def get_parser_name(self) -> str:
-        return 'xsrc.py'
+        return 'singleton.py'
 
     def get_parse_fn(seff) -> Callable:
-        return xsrc.parse
+        return singleton.parse
 
 
 # endregion IWriter class

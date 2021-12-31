@@ -5,7 +5,7 @@ from _base_json import BaseJson
 from verr import Version
 
 
-class BaseInterface(BaseJson):
+class BaseSingleton(BaseJson):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
@@ -26,41 +26,28 @@ class BaseInterface(BaseJson):
         set_data('imports')
         set_data('namespace')
         sort = bool(json_data['parser_args'].get('sort', False))
+        self.include_desc = bool(
+            json_data['writer_args'].get('include_desc', True))
         self.attribs = self._get_attribs(json_data=json_data, sort=sort)
         setattr(self, 'requires_typing', data.get('requires_typing', False))
-        ver_0_1_1 = Version(0, 1, 1)
-        if self.json_version == ver_0_1_1:
-            self._load_0_1_1(json_data=json_data)
-        else:
-            setattr(self, 'from_imports', [])
-            setattr(self, 'from_imports_typing', [])
-            set_data('from_imports')
-            set_data('from_imports_typing')
-            # self.requires_typing = False if len(
-            #     self.from_imports_typing) == 0 else True
-            quote: List[str] = data.get('quote', [])
-            self.quote.update(quote)
-            typings: List[str] = data.get('typings', [])
-            self.typings.update(typings)
-
-    def _load_0_1_1(self, json_data: dict):
-        def set_j_data(_key: str):
-            val = json_data.get(_key, None)
-            if val:
-                setattr(self, _key, val)
-        set_j_data('from_imports')
-        set_j_data('from_imports_typing')
-        from_imports_typing = json_data.get('from_imports_typing', [])
-        if len(from_imports_typing) == 0:
-            setattr(self, 'requires_typing', False)
-        else:
-            setattr(self, 'requires_typing', True)
+        setattr(self, 'from_imports', [])
+        setattr(self, 'from_imports_typing', [])
+        set_data('from_imports')
+        set_data('from_imports_typing')
+        # self.requires_typing = False if len(
+        #     self.from_imports_typing) == 0 else True
+        quote: List[str] = data.get('quote', [])
+        self.quote.update(quote)
+        typings: List[str] = data.get('typings', [])
+        self.typings.update(typings)
 
     def _get_attribs(self, json_data: dict, sort: bool) -> dict:
-        items: dict = json_data['data']['items']
+        items: dict = json_data['data'].get('items', {})
         if not sort:
             return items
-
+        keys = list(items.keys())
+        if len(keys) == 0:
+            return items
         def sort_lst_dict(_key: str, sort_key: str) -> List[dict]:
             key_index: List[Tuple[str, int]] = []
             lst = items[_key]  # methods
@@ -73,7 +60,6 @@ class BaseInterface(BaseJson):
             for k_i in key_index:
                 sorted_lst.append(lst[k_i[1]])
             return sorted_lst
-        keys = items.keys()
         result = {}
         for k in keys:
             result[k] = sort_lst_dict(k, 'name')
@@ -82,13 +68,13 @@ class BaseInterface(BaseJson):
     def _validate_data(self, data: dict) -> bool:
         super()._validate_data(data=data)
 
-        if not data['type'] == 'interface':
+        if not data['type'] == 'singleton':
             raise Exception(
-                f"Invalid Data: Expected type to be 'interface' got '{data['type']}'")
+                f"Invalid Data: Expected type to be 'singleton' got '{data['type']}'")
 
         if not data['name']:
             raise Exception('Invalid Data: name attribute is not valid')
-        min_ver = Version(0, 1, 1)
+        min_ver = Version(0, 1, 9)
         ver = Version.parse(data.get('version', None))
         if ver < min_ver:
             raise Exception(
@@ -185,3 +171,16 @@ class BaseInterface(BaseJson):
                 result += f" -> {self.get_q_type(ret)}"
         result += ':'
         return result
+
+
+    def _is_properties(self) -> bool:
+        key = 'properties'
+        if not key in self.attribs:
+            return False
+        return len(self.attribs[key]) > 0
+
+    def get_class_end(self):
+        end = ':'
+        if not self.include_desc and not self._is_properties():
+            end += ' ...'
+        return end

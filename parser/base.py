@@ -43,6 +43,12 @@ from config import AppConfig, read_config_default
 # endregion imports
 
 logger: logging.Logger  = None
+
+def _set_loggers(l: Union[logging.Logger, None]):
+    global logger
+    logger = l
+    
+
 # region CONST
 URL_SPLIT = '_1_1'
 """Default stirng for splitting url string into it parts"""

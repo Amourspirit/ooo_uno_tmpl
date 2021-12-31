@@ -74,8 +74,9 @@ class BaseJson(BaseTpml):
         try:
             self._validate_data(json_data)
         except Exception as e:
-            self._lerr('load_data() Validation Failed: %s', str(e))
-            return
+            msg = f"{self.__class__.__name__}.load_data() data validation failed. {e}"
+            self._lerr(msg)
+            raise e
         try:
             cd_args = CancelDataEventArgs(source=self,data=json_data)
             self.on_before_hydrate_data(args=cd_args)

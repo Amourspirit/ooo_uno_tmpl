@@ -388,7 +388,8 @@ class WriterEx(base.WriteBase):
             "namespace": p_dict['namespace'],
             "parser_args": self._parser.get_parser_args(),
             "writer_args": {
-                "include_desc": self._include_desc},
+                "include_desc": self._include_desc
+                },
             "data": p_dict
         }
         str_jsn = base.Util.get_formated_dict_list_str(obj=json_dict, indent=2)

@@ -16,7 +16,8 @@ from pathlib import Path
 from logger.log_handle import get_logger
 from parser import __version__, JSON_ID
 from config import AppConfig, read_config
-from parser.json_parser.interface_parser import parse as parse_interface, ParserInterface
+from parser.json_parser.interface_parser import parse as parse_interface, Parser as ParserInterface
+from parser.json_parser.singleton_parser import parse as parse_singleton, Parser as ParserSingleton
 from parser.json_parser.struct_parser import parse as parse_struct, ParserStruct
 from parser.json_parser.enum_parser import parse as parse_enm, ParserEnum
 from parser.json_parser.exception_parser import parse as parse_ex, ParserException
@@ -291,6 +292,43 @@ class CompileInterfaceLinks(BaseCompile):
             else:
                 self._process_direct(file)
 
+
+class CompileSingletonLinks(BaseCompile):
+
+    def __init__(self, config: AppConfig, use_subprocess: bool) -> None:
+        super().__init__(config=config)
+        self._do_sub = use_subprocess
+        if self._do_sub:
+            self._processer = str(
+                Path(self.json_parser_path, 'singleton_parser.py'))
+        else:
+            self._processer = ''
+        self._process_files()
+
+    def _subprocess(self, file: str):
+        cmd_str = f"{self._processer} -f {file}"
+        cmd = [sys.executable] + cmd_str.split()
+        logger.info(
+            "CompileSingletonLinks: Processing interface in file: %s", file)
+        res = subprocess.run(cmd)
+        if res.stdout:
+            logger.info(res.stdout)
+        if res.stderr:
+            logger.error(res.stderr)
+
+    def _process_direct(self, file: str):
+        logger.info(
+            "CompileSingletonLinks: Processing interface in file: %s", file)
+        parse_singleton('t', 'j', f=file)
+
+    def _process_files(self):
+        link_files = self.get_module_link_files()
+        for file in link_files:
+            if self._do_sub:
+                self._subprocess(file)
+            else:
+                self._process_direct(file)
+
 class CompileExLinks(BaseCompile):
     def __init__(self, config: AppConfig, use_subprocess: bool) -> None:
         super().__init__(config=config)
@@ -331,12 +369,15 @@ class TouchFiles(FilesBase):
     def __init__(self,config: AppConfig, **kwargs) -> None:
         super().__init__(config=config)
         self._check_exist: bool = bool(kwargs.get('check_exist', True))
-        self._touch_struct: bool =bool(kwargs.get('touch_struct', False))
-        self._touch_const: bool =bool(kwargs.get('touch_const', False))
-        self._touch_enum: bool =bool(kwargs.get('touch_enum', False))
-        self._touch_ex: bool =bool(kwargs.get('touch_ex', False))
-        self._touch_interface: bool =bool(kwargs.get('touch_interface', False))
-        self._touch_typedef: bool =bool(kwargs.get('touch_typedef', False))
+        self._touch_struct: bool = bool(kwargs.get('touch_struct', False))
+        self._touch_const: bool = bool(kwargs.get('touch_const', False))
+        self._touch_enum: bool = bool(kwargs.get('touch_enum', False))
+        self._touch_ex: bool = bool(kwargs.get('touch_ex', False))
+        self._touch_typedef: bool = bool(kwargs.get('touch_typedef', False))
+        self._touch_interface: bool = bool(
+            kwargs.get('touch_interface', False))
+        self._touch_singleton: bool = bool(
+            kwargs.get('touch_singleton', False))
         self._touch_count = 0
         self._cache = {}
         if self._touch_struct:
@@ -349,6 +390,8 @@ class TouchFiles(FilesBase):
             self._touch_exception_files()
         if self._touch_interface:
             self._touch_interface_files()
+        if self._touch_singleton:
+            self._touch_singleton_files()
         if self._touch_typedef:
             self._touch_typedef_files()
         logger.info('Touched a total of %d files.', self._touch_count)
@@ -482,6 +525,29 @@ class TouchFiles(FilesBase):
         for file in link_files:
             process(file)
         logger.info('Touched %d Interface files', touched)
+        self._touch_count += touched
+
+    def _touch_singleton_files(self):
+        link_files = self._get_module_links()
+        touched = 0
+
+        def process(f: str):
+            nonlocal touched
+            p: ParserSingleton = ParserSingleton(json_path=f)
+            links = p.get_links()
+            f_path = Path(f).parent
+            for link in links:
+                name = link.name + self._config.template_singleton_ext
+                t_path = Path(f_path, name)
+                if self._check_exist:
+                    if not t_path.exists():
+                        continue
+                t_path.touch(exist_ok=True)
+                touched += 1
+
+        for file in link_files:
+            process(file)
+        logger.info('Touched %d Singleton files', touched)
         self._touch_count += touched
     
     def _touch_typedef_files(self):
@@ -689,6 +755,7 @@ def main():
     const_parser = subparser.add_parser(name='const')
     struct_parser = subparser.add_parser(name='struct')
     interface_parser = subparser.add_parser(name='interface')
+    singleton_parser = subparser.add_parser(name='singleton')
     typedef_parser = subparser.add_parser(name='typedef')
     touch = subparser.add_parser(name='touch')
     # region ex args
@@ -776,6 +843,24 @@ def main():
     )
 
     # endregion interface args
+    
+    # region singleton args
+    singleton_parser.add_argument(
+        '-a', '--all',
+        help='Compile all singleton recursivly',
+        action='store_true',
+        dest='singleton_all',
+        default=False
+    )
+    singleton_parser.add_argument(
+        '-u', '--run-as-cmdline',
+        help='Run as command line suprocess. Default False',
+        action='store_true',
+        dest='cmd_line_process',
+        default=False
+    )
+
+    # endregion singleton args
 
     # region typedef args
     typedef_parser.add_argument(
@@ -800,6 +885,13 @@ def main():
         help='Touch all struct files',
         action='store_true',
         dest='struct_all',
+        default=False
+    )
+    touch.add_argument(
+        '-g', '--singleton',
+        help='Touch all singleton files',
+        action='store_true',
+        dest='singleton_all',
         default=False
     )
     touch.add_argument(
@@ -905,6 +997,10 @@ def main():
         if args.interface_all:
             CompileInterfaceLinks(
                 config=config, use_subprocess=args.cmd_line_process)
+    if args.command == 'singleton':
+        if args.singleton_all:
+            CompileSingletonLinks(
+                config=config, use_subprocess=args.cmd_line_process)
     if args.command == 'typedef':
         if args.typedef_all:
             CompileTypeDefLinks(
@@ -917,7 +1013,8 @@ def main():
             touch_enum=args.enum_all,
             touch_ex=args.ex_all,
             touch_interface=args.interface_all,
-            touch_typedef=args.typedef_all
+            touch_typedef=args.typedef_all,
+            touch_singleton=args.singleton_all
         )
     logger.info('Finished!')
 
