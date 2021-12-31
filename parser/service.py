@@ -472,6 +472,9 @@ class WriterService(base.WriteBase):
             return self._cache[key]
         p_dict = {}
         p_dict['from_imports'] = self._get_from_imports()
+        p_dict['quote'] = []
+        p_dict['typings'] = []
+        p_dict['requires_typing'] = False
         p_dict.update(self._parser.get_dict_data())
    
         json_dict = {
@@ -593,6 +596,10 @@ class WriterService(base.WriteBase):
         self._template = self._template.replace('{name}', self._p_name)
         self._template = self._template.replace('{ns}', str(self._p_namespace))
         self._template = self._template.replace('{link}', self._p_url)
+        self._template = self._template.replace(
+            '{requires_typing}', 'False')
+        self._template = self._template.replace('{quote}', 'set()')
+        self._template = self._template.replace('{typings}', 'set()')
         self._template = self._template.replace(
             '{include_desc}', str(self._include_desc))
         self._template = self._template.replace(
@@ -794,7 +801,7 @@ def _main():
     url = "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1awt_1_1AsyncCallback.html"
     # sys.argv.extend(['-n', '-v', '-L', 'service.log', '-u', url])
     # main()
-    args = ('v', 'n')
+    args = ('v', 'm', 'g')
     kwargs = {
         "u": url,
         "log_file": "debug.log"
@@ -923,4 +930,4 @@ def main():
 # endregion Main
 
 if __name__ == '__main__':
-   _main()
+   main()
