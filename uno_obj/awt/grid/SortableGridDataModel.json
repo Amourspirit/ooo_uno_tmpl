@@ -1,0 +1,46 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.10",
+  "timestamp": "2021-12-31 22:13:37+00:00",
+  "name": "SortableGridDataModel",
+  "type": "service",
+  "namespace": "com.sun.star.awt.grid",
+  "parser_args": {
+    "sort": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "from_imports": [
+      [
+        ".x_sortable_mutable_grid_data_model",
+        "XSortableMutableGridDataModel"
+      ]
+    ],
+    "quote": [],
+    "typings": [],
+    "requires_typing": false,
+    "name": "SortableGridDataModel",
+    "namespace": "com.sun.star.awt.grid",
+    "extends": [
+      "com.sun.star.awt.grid.XSortableMutableGridDataModel"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1awt_1_1grid_1_1SortableGridDataModel.html",
+    "desc": [
+      "provides a default implementation of a XSortableGridData.",
+      "",
+      "This service must be created with a secondary grid data model, which all actual data requests are delegated to. But before providing this data to the service's own clients, it is sorted, according to the sort order defined via the XSortableGridData interface.",
+      "",
+      "The service implementation is able to compare the default scalar types, plus strings.",
+      "",
+      "For determining the data type of a column which the data should be sorted by, the first non-VOID data encountered in this column is taken into account. Further read requests to this column will assume that all non-VOID data is of the same type.",
+      "",
+      "Consequently, you cannot use this service with data sets containing heterogeneous data in a given column.",
+      "",
+      "All requests made via the XMutableGridDataModel are delegated to the XMutableGridDataModel instance passed in the service constructor.",
+      "",
+      "Note that changing the data might result in the sort order being destroyed. If you want to ensure that the data represented by the model is still sorted after your modifications, you should call XSortableGridData.sortByColumn(), again."
+    ]
+  }
+}

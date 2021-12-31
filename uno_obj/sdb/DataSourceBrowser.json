@@ -1,0 +1,73 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.10",
+  "timestamp": "2021-12-31 22:17:01+00:00",
+  "name": "DataSourceBrowser",
+  "type": "service",
+  "namespace": "com.sun.star.sdb",
+  "parser_args": {
+    "sort": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "from_imports": [
+      [
+        "..ui.x_context_menu_interception",
+        "XContextMenuInterception"
+      ],
+      [
+        "..frame.x_controller",
+        "XController"
+      ],
+      [
+        "..frame.x_dispatch_provider",
+        "XDispatchProvider"
+      ],
+      [
+        "..lang.x_initialization",
+        "XInitialization"
+      ],
+      [
+        "..form.form_controller",
+        "FormController"
+      ]
+    ],
+    "quote": [],
+    "typings": [],
+    "requires_typing": false,
+    "name": "DataSourceBrowser",
+    "namespace": "com.sun.star.sdb",
+    "extends": [
+      "com.sun.star.ui.XContextMenuInterception",
+      "com.sun.star.frame.XController",
+      "com.sun.star.frame.XDispatchProvider",
+      "com.sun.star.lang.XInitialization",
+      "com.sun.star.form.FormController"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1sdb_1_1DataSourceBrowser.html",
+    "desc": [
+      "implements a component which allows browsing the data sources registered on the system.",
+      "",
+      "This service implements a user interface for browsing data sources registered on the com.sun.star.sdb.DatabaseContext instance of the system.",
+      "",
+      "It is possible to navigate through all the data sources, it's queries and it's tables. The queries/tables can be displayed in a grid-like view, where functionality for searching, sorting, filtering, and such is provided.",
+      "",
+      "Usually, you won't instantiate this service directly, instead you use the dispatch mechanisms of the application framework to load the URL .component:DB/DataSourceBrowser into an arbitrary frame. This should involve a com.sun.star.sdb.ContentLoader service, which creates and initializes the browser.",
+      "",
+      "Some aspects of the browser can be controlled from outside, e.g., it is possible to dispatch a sort or filter request, if a table or query is being displayed.",
+      "",
+      "The communication between the browser and external instances works in two ways.",
+      "The way in is provided by the com.sun.star.frame.XDispatchProvider interface the service exports (Please see below for more details on this).",
+      "The way out works in another way. There are several URLs which an external instance can provide dispatches for (usually by implementing a com.sun.star.frame.XDispatchProviderInterceptor for the parent frame of the browser), thus indicating that the browser should provide special functionality.",
+      "In this case, the browser displays and maintains some additional slots (to be more concrete: toolbox items), which, upon triggering, call the com.sun.star.frame.XDispatch.dispatch() method of the object provided by the external instance.",
+      "",
+      "In particular, the supported URLs for communicating to an external instance are:",
+      "",
+      "For all kinds of URLs, the parameters supplied during dispatching build up a DataAccessDescriptor, where the following properties are present:",
+      "",
+      "The default for DataAccessDescriptor.Selection is to contain bookmarks, if not specified otherwise by DataAccessDescriptor.BookmarkSelection."
+    ]
+  }
+}

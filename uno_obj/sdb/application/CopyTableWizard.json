@@ -1,0 +1,44 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.10",
+  "timestamp": "2021-12-31 22:20:06+00:00",
+  "name": "CopyTableWizard",
+  "type": "service",
+  "namespace": "com.sun.star.sdb.application",
+  "parser_args": {
+    "sort": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "from_imports": [
+      [
+        ".x_copy_table_wizard",
+        "XCopyTableWizard"
+      ]
+    ],
+    "quote": [],
+    "typings": [],
+    "requires_typing": false,
+    "name": "CopyTableWizard",
+    "namespace": "com.sun.star.sdb.application",
+    "extends": [
+      "com.sun.star.sdb.application.XCopyTableWizard"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1sdb_1_1application_1_1CopyTableWizard.html",
+    "desc": [
+      "describes a wizard which can be used to copy table like data from one database to another.",
+      "",
+      "There are various cases where the wizard needs to interact with the user (except of course the obvious case to display and operate the wizard dialog itself). For those cases, an interaction handler is needed, which is used for",
+      "",
+      "When you do not specify an interaction handler by using the createWithInteractionHandler() constructor, the wizard will use the interaction handler associated with the copy target, i.e. the interaction handler specified when loading the document which the copy target refers to. If the copy target cannot be associated with a database document (e.g. because it is a mere ConnectionResource, or a connection not obtained from a data source), or if the copy target's database document cannot provide an interaction handler, a newly-created instance of an interaction handler is used.",
+      "",
+      "There's one exception to the above, however: Upon creating the copy table wizard, the copy source and the copy target descriptors are used to create a Connection. For any interaction during this phase - including, for instance, necessary authentication -, the interaction handler of the respective data source is used, no matter what you specified in createWithInteractionHandler(). Only if there is no such interaction handler, the processing described above, to find another handler, is applied.",
+      "",
+      "**Since**",
+      "",
+      "    OOo 2.4"
+    ]
+  }
+}

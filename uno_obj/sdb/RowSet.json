@@ -1,0 +1,69 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.10",
+  "timestamp": "2021-12-31 22:17:06+00:00",
+  "name": "RowSet",
+  "type": "service",
+  "namespace": "com.sun.star.sdb",
+  "parser_args": {
+    "sort": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "from_imports": [
+      [
+        ".x_parameters_supplier",
+        "XParametersSupplier"
+      ]
+    ],
+    "quote": [],
+    "typings": [],
+    "requires_typing": false,
+    "name": "RowSet",
+    "namespace": "com.sun.star.sdb",
+    "extends": [
+      "com.sun.star.sdb.XParametersSupplier"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1sdb_1_1RowSet.html",
+    "desc": [
+      "is a client side RowSet, which use retrieves is data based on a database table, a query or a SQL command or by a row set reader, who mustn't support SQL.",
+      "",
+      "The connection of the row set is typically a named DataSource or a DataAccess component or a previous instantiated connection.",
+      "",
+      "Depending on the com.sun.star.sdbc.ResultSetConcurrency , the RowSet caches all data or uses an optimized way for retrieving the data, such as, refetching rows by their keys or if provided, by their bookmarks.",
+      "",
+      "In addition, it provides events for RowSet navigation and RowSet modifications to approve the actions and to react on them.",
+      "",
+      "A row set is able to be operated in various ways, and additionally it notifies various changes in its state. Clients of this service can rely on a fixed order of notifications, depending on how they operate on the component.",
+      "The following describes the general order of all possible notifications which you can encounter when working with a row set:",
+      "",
+      "The following matrix shows the notifications which apply to the different operations:",
+      "",
+      "IsRowCountFinal",
+      "",
+      "X",
+      "",
+      "X",
+      "",
+      "Via com.sun.star.sdbc.XResultSetUpdate.deleteRow(), you can delete the current row of a RowSet. This deleted row then doesn't vanish immediately, but is still present, and subsequent calls to com.sun.star.sdbc.XResultSet.rowDeleted() will return TRUE. The deleted row \\\"vanishes\\\" from the RowSet as soon as the cursor is moved away from it.",
+      "As a consequence, the behavior of several other methods is affected:",
+      "",
+      "returns the position of the cursor, which has not been changed by the deletion.",
+      "",
+      "will let the deleted row vanish from the result set. As a consequence, the RowCount will decrease when you do such a move operation after deleting a row.",
+      "A special case to note is the next call: When you delete row, say, 15, followed by next, then your RowSet afterwards still is on row 15, since the deleted row vanished with the move operation.",
+      "",
+      "will throw an exception when the cursor is on a deleted row.",
+      "",
+      "will return an empty value when the cursor is on a deleted row.",
+      "",
+      "will throw an exception when the cursor is on a deleted row.",
+      "",
+      "will throw an exception when the cursor is on a deleted row.",
+      "",
+      "will throw an exception when the cursor is on a deleted row."
+    ]
+  }
+}

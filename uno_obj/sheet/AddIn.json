@@ -1,0 +1,72 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.10",
+  "timestamp": "2021-12-31 22:14:57+00:00",
+  "name": "AddIn",
+  "type": "service",
+  "namespace": "com.sun.star.sheet",
+  "parser_args": {
+    "sort": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "from_imports": [
+      [
+        ".x_add_in",
+        "XAddIn"
+      ],
+      [
+        ".x_compatibility_names",
+        "XCompatibilityNames"
+      ],
+      [
+        "..lang.x_service_name",
+        "XServiceName"
+      ]
+    ],
+    "quote": [],
+    "typings": [],
+    "requires_typing": false,
+    "name": "AddIn",
+    "namespace": "com.sun.star.sheet",
+    "extends": [
+      "com.sun.star.sheet.XAddIn",
+      "com.sun.star.sheet.XCompatibilityNames",
+      "com.sun.star.lang.XServiceName"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1sheet_1_1AddIn.html",
+    "desc": [
+      "is the base for AddIn services that supply functions which can be called by other components.",
+      "",
+      "Any AddIn implementation must implement a service describing its specific set of functions. That service must contain the AddIn service, and the functions that are implemented, in one or more interfaces. The com.sun.star.lang.XServiceName interface must describe that service, and the XAddIn interface must describe the individual functions.",
+      "",
+      "Each AddIn function can take parameters of the following types:",
+      "",
+      "for integer values.",
+      "",
+      "for floating point values.",
+      "",
+      "for text strings.",
+      "",
+      "for (two-dimensional) arrays of integer values.",
+      "",
+      "for (two-dimensional) arrays of floating point values.",
+      "",
+      "for (two-dimensional) arrays of text strings.",
+      "",
+      "for (two-dimensional) arrays of mixed contents. Each any will contain a double or a string, depending on the data.",
+      "",
+      "Depending on the data, a double, a string, or an any[][] will be passed. If no argument is specified in the function call, VOID will be passed. This allows for optional parameters.",
+      "",
+      "for a com.sun.star.table.XCellRange interface to the source data.",
+      "",
+      "for a com.sun.star.beans.XPropertySet interface to the SpreadsheetDocument making the function call. Only one parameter of this type is allowed in each function. It can be used to query document settings like SpreadsheetDocumentSettings.NullDate.",
+      "",
+      "Each AddIn function must have one of the following return types:",
+      "",
+      "The sequences must contain arrays as described above for the parameter types. An XVolatileResult return value must contain an object implementing the VolatileResult service, that contains a volatile result. Subsequent calls with the same parameters must return the same object. An any return value can contain any of the other types."
+    ]
+  }
+}

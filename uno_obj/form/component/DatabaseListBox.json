@@ -1,0 +1,50 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.10",
+  "timestamp": "2021-12-31 22:16:15+00:00",
+  "name": "DatabaseListBox",
+  "type": "service",
+  "namespace": "com.sun.star.form.component",
+  "parser_args": {
+    "sort": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "from_imports": [
+      [
+        ".list_box",
+        "ListBox"
+      ],
+      [
+        "..data_aware_control_model",
+        "DataAwareControlModel"
+      ]
+    ],
+    "quote": [],
+    "typings": [],
+    "requires_typing": false,
+    "name": "DatabaseListBox",
+    "namespace": "com.sun.star.form.component",
+    "extends": [
+      "com.sun.star.form.component.ListBox",
+      "com.sun.star.form.DataAwareControlModel"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1form_1_1component_1_1DatabaseListBox.html",
+    "desc": [
+      "This service specifies a data-aware list box control model.",
+      "",
+      "The base service for list boxes (ListBox) offers only one possibility to specify the list entries: The display strings in the com.sun.star.awt.UnoControlListBoxModel.StringItemList property and the corresponding values in the ListBox.ListSource property.",
+      "",
+      "This service here extends this mimic. It allows to fill the list from a data source. This means that a second result set is opened, which works on the same connection as the form which the list box belongs to, but can be based on an arbitrary table or SQL statement.",
+      "",
+      "For instance, you may have a form which is bound to a table invoice, and you use it to enter invoices for your customers. Probably, you will have a second table (say customer), which (among other data) contains a unique key for identifying customers. In your invoice table, you will have a foreign key referring to these customers.",
+      "Now, besides the result set the form is based on (all your invoices), the list box can be instructed to open a second result set, this time for the customer table, and fill its list with entries from this result set.",
+      "Additionally, it allows to model the relation between the two tables: When the user selects a customer from the list, this customer has the unique id we just talked about (which is not necessarily visible to the user in any way). The list box then automatically transfers this id into the foreign key column of invoice, thus allowing the user to transparently work with human-readable strings instead of pure numbers.",
+      "Let's call this result set the list is filled from the list result set here ...",
+      "",
+      "The display strings are always taken from the first column of that result set, and the corresponding value as per the BoundColumn property."
+    ]
+  }
+}
