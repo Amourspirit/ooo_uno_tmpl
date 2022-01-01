@@ -8,7 +8,7 @@ This module then parses each link and calls the correct module to process each l
 import os
 import sys
 import logging
-from typing import Callable, Dict, List, Tuple, Union
+from typing import Callable, Dict, Union
 from pathlib import Path
 from verr import Version
 _app_root = os.environ.get('project_root', str(
@@ -44,7 +44,7 @@ class Parser(bp.Parser):
         super().__init__(json_path=json_path)
 
     def get_min_version(self) -> Version:
-        return Version(0, 1, 3)
+        return Version(0, 1, 8)
 
     def get_section_name(self) -> str:
         return 'interface'
@@ -181,7 +181,7 @@ def main():
 
     p = Parser(json_path=args.json_file)
     w = Writer(parser=p)
-    w.Write('t', 'j')
+    w.write('t', 'j')
 
 
 if __name__ == "__main__":
