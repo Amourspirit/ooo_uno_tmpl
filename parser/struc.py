@@ -680,6 +680,7 @@ def _get_parsed_args(*args) -> Dict[str, bool]:
     defaults = {
         'no_sort': True,
         "no_cache": True,
+        "no_desc": True,
         "no_print_clear": True,
         "long_template": False,
         "clipboard": False,
@@ -694,6 +695,7 @@ def _get_parsed_args(*args) -> Dict[str, bool]:
     found = {
         'no_sort': False,
         "no_cache": False,
+        "no_desc": False,
         "no_print_clear": False,
         "long_template": True,
         "clipboard": True,
@@ -710,6 +712,8 @@ def _get_parsed_args(*args) -> Dict[str, bool]:
         "no_sort": "no_sort",
         "x": "no_cache",
         "no_cache": "no_cache",
+        "d": "do_desc",
+        "no_desc": "no_desc",
         "p": "no_print_clear",
         "no_print_clear": "no_print_clear",
         "g": "long_template",
@@ -726,7 +730,7 @@ def _get_parsed_args(*args) -> Dict[str, bool]:
         "write_json": "write_json",
         "v": "verbose",
         "verbose": "verbose",
-        "d": "dynamic_struct",
+        "y": "dynamic_struct",
         "dynamic_struct": "dynamic_struct",
         "a": "no_auto_import",
         "no_auto_import": "no_auto_import"
@@ -750,7 +754,7 @@ def parse(*args, **kwargs):
         'no_cache' (str, optional): Short form ``'x'``. No caching. Default ``False``
         'no_print_clear (str, optional): Short form ``'p'``. No clearing of terminal
             when otuput to terminal. Default ``False``
-        'no_auto_import' (str, optional): Short form ``'a'``. Auto import types that are not python types. Default ``True``
+        'no_desc' (str, optional): Short from ``'d'``. No description will be outputed in template. Default ``False``
         'dynamic_struct' (str, optional): Short form ``'d'``. Template will generate dynameic struct conten. Default ``False``
         'print_json' (str, optional): Short form ``'n'``. Print json to termainl. Default ``False``
         'print_template' (str, optional): Short form ``'m'``. Print template to terminal. Default ``False``
@@ -841,23 +845,23 @@ def main():
         dest='sort',
         default=True)
     parser.add_argument(
-        '-d', '--dynamic-struct',
+        '-y', '--dynamic-struct',
         help='Template will generate dynamic struct content',
         action='store_true',
         dest='dynamic_struct',
         default=False)
+    parser.add_argument(
+        '-d', '--no-desc',
+        help='No description will be outputed in template',
+        action='store_false',
+        dest='desc',
+        default=True)
     parser.add_argument(
         '-c', '--clipboard',
         help='Copy to clipboard',
         action='store_true',
         dest='clipboard',
         default=False)
-    parser.add_argument(
-        '-a', '--no-auto-import',
-        action='store_false',
-        dest='auto_import',
-        help='Auto import types that are not python types',
-        default=True)
     parser.add_argument(
         '-g', '--long-template',
         help='Writes a long format template. Requires --write-template is set. No Autoload',
@@ -938,4 +942,4 @@ def main():
     w.write()
     
 if __name__ == '__main__':
-    _main()
+    main()
