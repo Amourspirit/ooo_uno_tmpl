@@ -256,6 +256,7 @@ class TypeRules(ITypeRules):
         self._reg_rule(rule=RuleKnownPrimative)
         self._reg_rule(rule=RuleKnownItterType)
         self._reg_rule(rule=RuleComType)
+        self._reg_rule(rule=RuleTypeDef)
         self._reg_rule(rule=RuleSeqLikePrimative)
         self._reg_rule(rule=RuleSeqLikeNonPrim)
         self._reg_rule(rule=RuleTuple2Like)
@@ -389,6 +390,33 @@ class RuleKnownItterType(ITypeRule):
             realtype = s
         )
 
+
+class RuleTypeDef(ITypeRule):
+    """Matches types that start with typedef"""
+    # https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1sdb_1_1RowsChangeEvent.html
+
+    def __init__(self, rules: ITypeRules) -> None:
+        self._rules = rules
+        self._recursive_state = False
+        
+    def _get_ptype(self, in_type: str) -> PythonType:
+        try:
+            self._recursive_state = True
+            result = self._rules.get_python_type(in_type)
+            return result
+        finally:
+            self._recursive_state = False
+    
+    def get_is_match(self, in_type: str) -> bool:
+        if self._recursive_state:
+            return False
+        if in_type.startswith('typedef '): # space on purpose
+            return True
+        return False
+    
+    def get_python_type(self, in_type: str) -> PythonType:
+        s = in_type.split(maxsplit=1)[1]
+        return self._get_ptype(s)
 class RuleSeqLikePrimative(ITypeRule):
     """Matches single sequence or simalar, such as aDXArray, that does have primitive inner type"""
 
