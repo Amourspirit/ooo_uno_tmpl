@@ -257,6 +257,7 @@ class TypeRules(ITypeRules):
         self._reg_rule(rule=RuleKnownItterType)
         self._reg_rule(rule=RuleComType)
         self._reg_rule(rule=RuleTypeDef)
+        self._reg_rule(rule=RuleUnSigned)
         self._reg_rule(rule=RuleSeqLikePrimative)
         self._reg_rule(rule=RuleSeqLikeNonPrim)
         self._reg_rule(rule=RuleTuple2Like)
@@ -391,14 +392,14 @@ class RuleKnownItterType(ITypeRule):
         )
 
 
-class RuleTypeDef(ITypeRule):
-    """Matches types that start with typedef"""
+class RuleBaseWord(ITypeRule):
+    """Abstrace Class: Matches types that start with a word"""
     # https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1sdb_1_1RowsChangeEvent.html
 
     def __init__(self, rules: ITypeRules) -> None:
         self._rules = rules
         self._recursive_state = False
-        
+
     def _get_ptype(self, in_type: str) -> PythonType:
         try:
             self._recursive_state = True
@@ -406,17 +407,37 @@ class RuleTypeDef(ITypeRule):
             return result
         finally:
             self._recursive_state = False
-    
+
     def get_is_match(self, in_type: str) -> bool:
         if self._recursive_state:
             return False
-        if in_type.startswith('typedef '): # space on purpose
+        if in_type.startswith(self._get_word()):
             return True
         return False
-    
+
     def get_python_type(self, in_type: str) -> PythonType:
         s = in_type.split(maxsplit=1)[1]
         return self._get_ptype(s)
+
+    @abstractmethod
+    def _get_word(self) -> str:
+        """Word to match"""
+
+
+class RuleTypeDef(RuleBaseWord):
+    """Matches types that start with typedef"""
+    # https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1sdb_1_1RowsChangeEvent.html
+
+    def _get_word(self) -> str:
+        return 'typedef ' # space on purpose
+
+
+class RuleUnSigned(RuleBaseWord):
+    """Matches types that start with typedef"""
+    # https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1sdb_1_1RowsChangeEvent.html
+
+    def _get_word(self) -> str:
+        return 'unsigned '  # space on purpose
 class RuleSeqLikePrimative(ITypeRule):
     """Matches single sequence or simalar, such as aDXArray, that does have primitive inner type"""
 

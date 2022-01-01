@@ -285,3 +285,14 @@ def test_typedef():
     assert p_type.is_py_type == True
     im = p_type.get_all_imports()
     assert len(im) == 0
+
+
+def test_unsigned():
+    tester = tm.TypeRules()
+    seq = 'unsigned long'
+    p_type = tester.get_python_type(seq)
+    assert p_type.type == "int"
+    assert p_type.requires_typing == False
+    assert p_type.is_py_type == True
+    im = p_type.get_all_imports()
+    assert len(im) == 0
