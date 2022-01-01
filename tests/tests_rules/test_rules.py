@@ -287,6 +287,15 @@ def test_typedef():
     assert len(im) == 0
 
 
+def test_signed():
+    tester = tm.TypeRules()
+    seq = 'signed char'
+    p_type = tester.get_python_type(seq)
+    assert p_type.type == "str"
+    assert p_type.requires_typing == False
+    assert p_type.is_py_type == True
+
+
 def test_unsigned():
     tester = tm.TypeRules()
     seq = 'unsigned long'
@@ -294,5 +303,45 @@ def test_unsigned():
     assert p_type.type == "int"
     assert p_type.requires_typing == False
     assert p_type.is_py_type == True
-    im = p_type.get_all_imports()
-    assert len(im) == 0
+
+
+def test_long():
+    tester = tm.TypeRules()
+    seq = 'long long'
+    p_type = tester.get_python_type(seq)
+    assert p_type.type == "int"
+    assert p_type.requires_typing == False
+    assert p_type.is_py_type == True
+
+
+def test_short():
+    tester = tm.TypeRules()
+    seq = 'short short'
+    p_type = tester.get_python_type(seq)
+    assert p_type.type == "int"
+    assert p_type.requires_typing == False
+    assert p_type.is_py_type == True
+
+
+def test_unsigned_short():
+    # there is no specific rule for unsigned short int
+    # rules are matched recurivly for rules based upon RuleBaseWord
+    # there is a rule for unsigned (RuleWordUnSigned) and a rule for short ( RuleWordShort )
+    tester = tm.TypeRules()
+    seq = 'unsigned short int'
+    p_type = tester.get_python_type(seq)
+    assert p_type.type == "int"
+    assert p_type.requires_typing == False
+    assert p_type.is_py_type == True
+
+
+def test_long_long_int_short():
+    # there is no specific rule for unsigned short int
+    # rules are matched recurivly for rules based upon RuleBaseWord
+    # there is a rule for long (RuleWordLong)
+    tester = tm.TypeRules()
+    seq = 'long long int'
+    p_type = tester.get_python_type(seq)
+    assert p_type.type == "int"
+    assert p_type.requires_typing == False
+    assert p_type.is_py_type == True

@@ -10,6 +10,7 @@ TYPE_MAP_PRIMITIVE = {
     "any": "object",
     "byte": "int",
     "short": "int",
+    "int": "int",
     "long": "int",
     "float": "float",
     "double": "float",
@@ -257,7 +258,10 @@ class TypeRules(ITypeRules):
         self._reg_rule(rule=RuleKnownItterType)
         self._reg_rule(rule=RuleComType)
         self._reg_rule(rule=RuleTypeDef)
-        self._reg_rule(rule=RuleUnSigned)
+        self._reg_rule(rule=RuleWordSigned)
+        self._reg_rule(rule=RuleWordUnSigned)
+        self._reg_rule(rule=RuleWordShort)
+        self._reg_rule(rule=RuleWordLong)
         self._reg_rule(rule=RuleSeqLikePrimative)
         self._reg_rule(rule=RuleSeqLikeNonPrim)
         self._reg_rule(rule=RuleTuple2Like)
@@ -398,21 +402,16 @@ class RuleBaseWord(ITypeRule):
 
     def __init__(self, rules: ITypeRules) -> None:
         self._rules = rules
-        self._recursive_state = False
 
     def _get_ptype(self, in_type: str) -> PythonType:
-        try:
-            self._recursive_state = True
-            result = self._rules.get_python_type(in_type)
-            return result
-        finally:
-            self._recursive_state = False
+            return self._rules.get_python_type(in_type)
 
     def get_is_match(self, in_type: str) -> bool:
-        if self._recursive_state:
-            return False
-        if in_type.startswith(self._get_word()):
-            return True
+        word = self._get_word()
+        if in_type.startswith(word):
+            parts = in_type.split()
+            if len(parts) > 1:
+                return True
         return False
 
     def get_python_type(self, in_type: str) -> PythonType:
@@ -432,9 +431,26 @@ class RuleTypeDef(RuleBaseWord):
         return 'typedef ' # space on purpose
 
 
-class RuleUnSigned(RuleBaseWord):
-    """Matches types that start with typedef"""
-    # https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1sdb_1_1RowsChangeEvent.html
+class RuleWordLong(RuleBaseWord):
+    """Matches types that start with long and have more then one word"""
+
+    def _get_word(self) -> str:
+        return 'long '  # space on purpose
+
+
+class RuleWordShort(RuleBaseWord):
+    """Matches types that start with short and have more then one word"""
+
+    def _get_word(self) -> str:
+        return 'short '  # space on purpose
+class RuleWordSigned(RuleBaseWord):
+    """Matches types that start with signed"""
+
+    def _get_word(self) -> str:
+        return 'signed '  # space on purpose
+
+class RuleWordUnSigned(RuleBaseWord):
+    """Matches types that start with unsigned"""
 
     def _get_word(self) -> str:
         return 'unsigned '  # space on purpose
