@@ -4,6 +4,9 @@ import sys
 import re
 import importlib
 import logging
+import time
+import calendar
+from datetime import datetime, timezone
 from types import ModuleType
 from typing import Dict, Tuple, List
 from Cheetah.Template import Template
@@ -255,3 +258,14 @@ class BaseTpml(Template):
         if in_type in self.quote:
             return f"'{in_type}'"
         return in_type
+
+    def get_timestamp_utc(self) -> str:
+        """
+        Gets utc timestamp in format of ``2021-12-16 11:37:50+00:00``
+
+        Returns:
+            datetime: utc timestamp
+        """
+        current_GMT = time.gmtime()
+        ts = calendar.timegm(current_GMT)
+        return str(datetime.fromtimestamp(ts, tz=timezone.utc))

@@ -2874,6 +2874,8 @@ class ApiInherited(BlockObj):
                               raise_error=self._raise_errors)
             return self._data
         is_inherited = ImageInfo.is_inherit_img(url=image_url)
+        if not is_inherited:
+            return self._data
         ab: ApiAreaBlock = ApiAreaBlock(self._api_dy_content)
         api_area: ApiArea = ApiArea(ab)
         lst = api_area.get_obj()

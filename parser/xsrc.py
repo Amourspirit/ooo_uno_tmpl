@@ -1304,8 +1304,9 @@ def _main():
     # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1accessibility_1_1XAccessibleTextSelection.html'
     # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XStyleSettings.html'
     # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XMessageBoxFactory.html'
-    url = 'https://api.libreoffice.org/docs/idl/ref/singletoncom_1_1sun_1_1star_1_1sdb_1_1DataAccessDescriptorFactory.html' #singleton
-    args = ('v', 'n')
+    # url = 'https://api.libreoffice.org/docs/idl/ref/singletoncom_1_1sun_1_1star_1_1sdb_1_1DataAccessDescriptorFactory.html' #singleton
+    url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1inspection_1_1XPropertyControl.html'  # no import
+    args = ('v', 'n', 'x')
     kwargs = {
         "u": url,
         "log_file": "debug.log"
