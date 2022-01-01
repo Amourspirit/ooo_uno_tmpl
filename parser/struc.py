@@ -57,6 +57,10 @@ class ApiPropertiesBlock(base.ApiSummaryBlock):
         return 'pub-attribs'
 
 
+class ApiTypesBlock(base.ApiSummaryBlock):
+    def _get_match_name(self) -> str:
+        return 'pub-types'
+
 class ApiNs(base.ApiNamespace):
     """Get the Name object for the interface"""
 
@@ -91,6 +95,10 @@ class ApiData(base.APIData):
         self._properties_block: ApiPropertiesBlock = None
         self._property_summaries: base.ApiSummaries = None
         self._property_summary_rows: base.ApiSummaryRows = None
+        
+        self._types_block: ApiTypesBlock = None
+        self._type_summaries: base.ApiSummaries = None
+        self._type_summary_rows: base.ApiSummaryRows = None
     # endregion constructor
 
     # region methods
@@ -107,6 +115,24 @@ class ApiData(base.APIData):
         """
         info = base.ImportInfo()
         p_info = self.property_summaries
+        # ensure data is primed
+        p_info.get_obj()
+        info.requires_typing = p_info.requires_typing
+        info.imports.update(p_info.imports)
+        return info
+
+    def get_import_info_type(self) -> base.ImportInfo:
+        """
+        Gets imports for typedefs
+
+        Args:
+            si_id (str): Types summary Info
+
+        Returns:
+            base.ImportInfo: Import info
+        """
+        info = base.ImportInfo()
+        p_info = self.types_summaries
         # ensure data is primed
         p_info.get_obj()
         info.requires_typing = p_info.requires_typing
@@ -161,6 +187,30 @@ class ApiData(base.APIData):
             self._property_summaries = base.ApiSummaries(
                 self.property_summary_rows)
         return self._property_summaries
+
+    @property
+    def types_block(self) -> ApiTypesBlock:
+        """Gets Summary Properties block"""
+        if self._types_block is None:
+            self._types_block = ApiTypesBlock(
+                self.public_members)
+        return self._types_block
+
+    @property
+    def types_summary_rows(self) -> base.ApiSummaryRows:
+        """Get Summary rows for Properties"""
+        if self._type_summary_rows is None:
+            self._type_summary_rows = base.ApiSummaryRows(
+                self.types_block)
+        return self._type_summary_rows
+
+    @property
+    def types_summaries(self) -> base.ApiSummaries:
+        """Get Summary info list for Properties"""
+        if self._type_summaries is None:
+            self._type_summaries = base.ApiSummaries(
+                self.types_summary_rows)
+        return self._type_summaries
     # endregion Properties
 # endregion API
 
@@ -255,11 +305,13 @@ class Parser(base.ParserBase):
         key = '_get_data_items'
         if key in self._cache:
             return self._cache[key]
-        data = self._get_properties_data()
-        if 'properties' in data:
-            self._cache[key] = data['properties']
-        else:
-            self._cache[key] = []
+        p_data = self._get_properties_data()
+        self._cache[key] = []
+        if 'properties' in p_data:
+            self._cache[key].append(p_data['properties'])
+        t_data = self._get_types_data()
+        if 'types' in t_data:
+            self._cache[key].append(t_data['types'])
         return self._cache[key]
 
     def _get_properties_data(self):
@@ -295,6 +347,41 @@ class Parser(base.ParserBase):
                 newlist = sorted(attribs['properties'],
                                  key=lambda d: d['name'])
                 attribs['properties'] = newlist
+        return attribs
+    
+    def _get_types_data(self):
+        attribs = {}
+        si_lst = self._api_data.types_summaries.get_obj()
+        for i, si in enumerate(si_lst):
+            if logger.level <= logging.DEBUG:
+                logger.debug(
+                    "%s._get_types_data() Processing: %s, %s",
+                    self.__class__.__name__, si.name, si.id)
+            if i == 0:
+                attribs['types'] = []
+            if not si.name:
+                continue
+            attrib = {
+                "name": si.name,
+                "type": si.p_type.type,
+                "lines": self._api_data.get_desc_detail(si.id).get_obj()
+            }
+            attribs['types'].append(attrib)
+            if si.p_type.requires_typing:
+                logger.debug(
+                    "%s._get_types_data() Return '%s' type require typing for: %s, %s",
+                    self.__class__.__name__, si.p_type.type, si.name, si.id)
+                self._requires_typing = True
+        import_info = self._api_data.get_import_info_type()
+        if import_info.requires_typing:
+            self._requires_typing = True
+        self._imports.update(import_info.imports)
+
+        if self.sort:
+            if 'types' in attribs:
+                newlist = sorted(attribs['types'],
+                                 key=lambda d: d['name'])
+                attribs['types'] = newlist
         return attribs
 
     # endregion Data
@@ -806,7 +893,7 @@ def _main():
     # url = 'https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1beans_1_1Ambiguous_3_01T_01_4.html'
     # url = 'https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1beans_1_1GetPropertyTolerantResult.html'
     # url = 'https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1text_1_1TextMarkupDescriptor.html'
-    url = 'https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1rdf_1_1Statement.html'
+    url = 'https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1sdb_1_1RowsChangeEvent.html'
     args = ('v', 'n')
     kwargs = {
         "u": url,
