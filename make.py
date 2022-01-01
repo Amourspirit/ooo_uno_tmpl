@@ -426,6 +426,7 @@ class TouchFiles(FilesBase):
         self._touch_enum: bool = bool(kwargs.get('touch_enum', False))
         self._touch_ex: bool = bool(kwargs.get('touch_ex', False))
         self._touch_typedef: bool = bool(kwargs.get('touch_typedef', False))
+        self._touch_py_files: bool = bool(kwargs.get('touch_py_files', False))
         self._touch_interface: bool = bool(
             kwargs.get('touch_interface', False))
         self._touch_singleton: bool = bool(
@@ -468,7 +469,11 @@ class TouchFiles(FilesBase):
             links = p.get_links()
             f_path = Path(f).parent
             for link in links:
-                name = link.name + self._config.template_struct_ext
+                name = link.name
+                if self._touch_py_files:
+                    name += '.py'
+                else:
+                    name += self._config.template_struct_ext
                 t_path = Path(f_path, name)
                 if self._check_exist:
                     if not t_path.exists():
@@ -491,7 +496,11 @@ class TouchFiles(FilesBase):
             links = p.get_links()
             f_path = Path(f).parent
             for link in links:
-                name = link.name + self._config.template_const_ext
+                name = link.name
+                if self._touch_py_files:
+                    name += '.py'
+                else:
+                    name += self._config.template_const_ext
                 t_path = Path(f_path, name)
                 if self._check_exist:
                     if not t_path.exists():
@@ -514,7 +523,11 @@ class TouchFiles(FilesBase):
             links = p.get_links()
             f_path = Path(f).parent
             for link in links:
-                name = link.name + self._config.template_enum_ext
+                name = link.name
+                if self._touch_py_files:
+                    name += '.py'
+                else:
+                    name += self._config.template_enum_ext
                 t_path = Path(f_path, name)
                 if self._check_exist:
                     if not t_path.exists():
@@ -538,7 +551,11 @@ class TouchFiles(FilesBase):
             links = p.get_links()
             f_path = Path(f).parent
             for link in links:
-                name = link.name + self._config.template_exception_ext
+                name = link.name
+                if self._touch_py_files:
+                    name += '.py'
+                else:
+                    name += self._config.template_exception_ext
                 t_path = Path(f_path, name)
                 if self._check_exist:
                     if not t_path.exists():
@@ -562,7 +579,11 @@ class TouchFiles(FilesBase):
             links = p.get_links()
             f_path = Path(f).parent
             for link in links:
-                name = link.name + self._config.template_interface_ext
+                name = link.name
+                if self._touch_py_files:
+                    name += '.py'
+                else:
+                    name += self._config.template_interface_ext
                 t_path = Path(f_path, name)
                 if self._check_exist:
                     if not t_path.exists():
@@ -586,7 +607,11 @@ class TouchFiles(FilesBase):
             links = p.get_links()
             f_path = Path(f).parent
             for link in links:
-                name = link.name + self._config.template_singleton_ext
+                name = link.name
+                if self._touch_py_files:
+                    name += '.py'
+                else:
+                    name += self._config.template_singleton_ext
                 t_path = Path(f_path, name)
                 if self._check_exist:
                     if not t_path.exists():
@@ -610,7 +635,11 @@ class TouchFiles(FilesBase):
             links = p.get_links()
             f_path = Path(f).parent
             for link in links:
-                name = link.name + self._config.template_service_ext
+                name = link.name
+                if self._touch_py_files:
+                    name += '.py'
+                else:
+                    name += self._config.template_service_ext
                 t_path = Path(f_path, name)
                 if self._check_exist:
                     if not t_path.exists():
@@ -634,7 +663,11 @@ class TouchFiles(FilesBase):
             links = p.get_links()
             f_path = Path(f).parent
             for link in links:
-                name = link.name + self._config.template_typedef_ext
+                name = link.name
+                if self._touch_py_files:
+                    name += '.py'
+                else:
+                    name += self._config.template_typedef_ext
                 t_path = Path(f_path, name)
                 if self._check_exist:
                     if not t_path.exists():
@@ -1034,6 +1067,13 @@ def main():
         dest='typedef_all',
         default=False
     )
+    touch.add_argument(
+        '-p', '--python',
+        help='Touch python files instead of template files',
+        action='store_true',
+        dest='python_files',
+        default=False
+    )
     # endregion Touch
 
     make_parser = subparser.add_parser(name='make')
@@ -1124,7 +1164,8 @@ def main():
             touch_interface=args.interface_all,
             touch_typedef=args.typedef_all,
             touch_singleton=args.singleton_all,
-            touch_service=args.service_all
+            touch_service=args.service_all,
+            touch_py_files=args.python_files
         )
     logger.info('Finished!')
 
