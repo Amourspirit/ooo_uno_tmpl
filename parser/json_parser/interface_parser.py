@@ -163,6 +163,12 @@ def parse(*args, **kwargs):
 
 # endregion Parse method
 
+def _main():
+    file = "uno_obj/inspection/module_links.json"
+    log = 'debug.log'
+    parse('n', 'v', log_file=log, json_file=file)
+
+
 def main():
     global logger
     args = bp.get_cmd_args()

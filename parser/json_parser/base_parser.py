@@ -227,6 +227,9 @@ class Writer(IWriter):
     def write(self, *args, **kwargs):
         links = self._parser.get_links()
         fn = self.get_parse_fn()
+        # for link in links:
+        #     self._process_direct(link, fn, *args, **kwargs)
+        # return
         with concurrent.futures.ProcessPoolExecutor() as executor:
             results = [executor.submit(self._process_direct, link, fn, *args, **kwargs)
                        for link in links]

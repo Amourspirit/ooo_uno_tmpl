@@ -108,7 +108,7 @@ TYPE_MAP_EX = {
 
 # region image process const
 IMG_CACHE: 'ImageCache' = None
-RESPONSE_IMG: 'ResponseImg' = None
+# RESPONSE_IMG: 'ResponseImg' = None
 # endregion image process const
 
 # region Exceptions
@@ -2546,20 +2546,18 @@ class ImageInfo:
 
     @staticmethod
     def is_inherit_img(url: str) -> bool:
-        global RESPONSE_IMG, TEXT_CACHE
-        if RESPONSE_IMG is None:
-            # no reason to cache image. caching result instead
-            RESPONSE_IMG = ResponseImg(url=url, cache_seconds=0)
+        global TEXT_CACHE
+        r_img = ResponseImg(url=url, cache_seconds=0)
         if TEXT_CACHE is None:
             TEXT_CACHE = TextCache(tmp_dir=APP_CONFIG.cache_dir)
         try:
-            filename = RESPONSE_IMG.url_hash + '.txt'
+            filename = r_img.url_hash + '.txt'
             result = -1
             txt = TEXT_CACHE.fetch_from_cache(filename=filename)
             if txt:
                 result = int(txt)
                 return result == APP_CONFIG.pixel_inherit
-            im = RESPONSE_IMG.img
+            im = r_img.img
             pix = ImageInfo.get_image_pixels(im)
             row = pix[0, :]  # row 0
             # images are expected to be indexed png files
