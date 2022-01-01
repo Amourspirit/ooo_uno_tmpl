@@ -308,10 +308,10 @@ class Parser(base.ParserBase):
         p_data = self._get_properties_data()
         self._cache[key] = []
         if 'properties' in p_data:
-            self._cache[key].append(p_data['properties'])
+            self._cache[key].extend(p_data['properties'])
         t_data = self._get_types_data()
         if 'types' in t_data:
-            self._cache[key].append(t_data['types'])
+            self._cache[key].extend(t_data['types'])
         return self._cache[key]
 
     def _get_properties_data(self):
@@ -879,7 +879,6 @@ def parse(*args, **kwargs):
         copy_clipboard=pargs['clipboard'],
         print_template=pargs['print_template'],
         print_json=pargs['print_json'],
-        auto_import=pargs['no_auto_import'],
         write_template=pargs['write_template'],
         write_json=pargs['write_json'],
         write_template_long=pargs['long_template'],
@@ -1020,7 +1019,6 @@ def main():
         copy_clipboard=args.clipboard,
         print_template=args.print_template,
         print_json=args.print_json,
-        auto_import=args.auto_import,
         write_template=args.write_template,
         write_json=args.write_json,
         write_template_long=args.long_format,
