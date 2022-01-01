@@ -345,3 +345,21 @@ def test_long_long_int_short():
     assert p_type.type == "int"
     assert p_type.requires_typing == False
     assert p_type.is_py_type == True
+
+
+def test_hyper():
+    # there is no specific rule for unsigned short int
+    # rules are matched recurivly for rules based upon RuleBaseWord
+    # there is a rule for long (RuleWordLong)
+    tester = tm.TypeRules()
+    seq = 'hyper'
+    p_type = tester.get_python_type(seq)
+    assert p_type.type == "int"
+    assert p_type.requires_typing == False
+    assert p_type.is_py_type == True
+
+    seq = 'hyper long'
+    p_type = tester.get_python_type(seq)
+    assert p_type.type == "int"
+    assert p_type.requires_typing == False
+    assert p_type.is_py_type == True

@@ -6,12 +6,15 @@ import re
 from abc import ABC, abstractmethod
 from typing import List, Match, Optional, Set, Union
 
+# hyper is 64 bit int, singed or unsinged. https://ask.libreoffice.org/t/basic-hyper-and-unsigned-hyper/22510
+
 TYPE_MAP_PRIMITIVE = {
     "any": "object",
     "byte": "int",
     "short": "int",
     "int": "int",
     "long": "int",
+    "hyper": "int",
     "float": "float",
     "double": "float",
     "string": "str",
@@ -262,6 +265,7 @@ class TypeRules(ITypeRules):
         self._reg_rule(rule=RuleWordUnSigned)
         self._reg_rule(rule=RuleWordShort)
         self._reg_rule(rule=RuleWordLong)
+        self._reg_rule(rule=RuleWordHyper)
         self._reg_rule(rule=RuleSeqLikePrimative)
         self._reg_rule(rule=RuleSeqLikeNonPrim)
         self._reg_rule(rule=RuleTuple2Like)
@@ -437,6 +441,12 @@ class RuleWordLong(RuleBaseWord):
     def _get_word(self) -> str:
         return 'long '  # space on purpose
 
+
+class RuleWordHyper(RuleBaseWord):
+    """Matches types that start with hyper and have more then one word"""
+
+    def _get_word(self) -> str:
+        return 'hyper '  # space on purpose
 
 class RuleWordShort(RuleBaseWord):
     """Matches types that start with short and have more then one word"""
