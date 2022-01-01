@@ -183,12 +183,12 @@ class ParserEx(base.ParserBase):
         Returns:
             Dict[str, object]: {
                 "name": "str, class name",
-                "imports": "List[str], imports",
-                "typing_imports": "List[str], imports that require typing",
                 "namespace": "str, Namespace",
-                "extends": "List[str], class extends",
                 "desc": "List[str], class description",
                 "url": "str, api url"
+                "imports": "List[str], imports",
+                "typing_imports": "List[str], imports that require typing",
+                "extends": "List[str], class extends",
             }
         """
         key = 'get_info'
@@ -481,14 +481,13 @@ class WriterEx(base.WriteBase):
         data = self._parser.get_info()
         self._p_name = data['name']
         self._p_namespace = data['namespace']
-        self._p_extends = get_extends(data['extends'])
         self._p_desc = data['desc']
         self._p_url = data['url']
         self._p_data = self._parser.get_formated_data()
         self._p_requires_typing = False
+        self._p_extends = get_extends(data['extends'])
         self._validate_p_info()
-        _imports = data['imports']
-        self._p_imports.update(_imports)
+        self._p_imports.update(data['imports'])
         self._p_imports.update(data['extends'])
         self._p_imports_typing.update(self._parser.imports)
         # in some cases such as XIntrospectionAccess

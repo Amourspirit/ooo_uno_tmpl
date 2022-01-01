@@ -11,9 +11,8 @@ from dataclasses import dataclass, field
 from typing import Dict, List, Set, Tuple, Union
 from bs4 import BeautifulSoup
 from bs4.element import ResultSet, Tag
-from kwhelp.decorator import DecFuncEnum, RuleCheckAllKw, TypeCheckKw
+from kwhelp.decorator import DecFuncEnum, RuleCheckAllKw, TypeCheck, TypeCheckKw
 from kwhelp import rules
-from collections import namedtuple
 from pathlib import Path
 import textwrap
 import xerox # requires xclip - sudo apt-get install xclip
@@ -49,7 +48,121 @@ class DataItem:
 
     def __lt__(self, other: 'DataItem'):
         return self.name < other.name
-    
+
+# region API
+
+
+class ApiPropertiesBlock(base.ApiSummaryBlock):
+    def _get_match_name(self) -> str:
+        return 'pub-attribs'
+
+
+class ApiNs(base.ApiNamespace):
+    """Get the Name object for the interface"""
+
+    def __init__(self, soup: base.SoupObj):
+        super().__init__(soup)
+        self._namespace_str = None
+        self._namespace = None
+
+    @property
+    def namespace(self) -> List[str]:
+        """Gets namespace value"""
+        if self._namespace is None:
+            self._namespace = self.get_obj()[:-1]
+        return self._namespace
+
+    @property
+    def namespace_str(self) -> str:
+        if self._namespace_str is None:
+            self._namespace_str = '.'.join(self.namespace)
+        return self._namespace_str
+
+
+class ApiData(base.APIData):
+    # region constructor
+    @TypeCheck((str, base.SoupObj), bool, ftype=DecFuncEnum.METHOD)
+    def __init__(self, url_soup: Union[str, base.SoupObj], allow_cache: bool):
+        super().__init__(url_soup=url_soup, allow_cache=allow_cache)
+
+        self._ns: ApiNs = None
+        self._desc: base.ApiDesc = None
+        self._inherited: base.ApiInherited = None
+        self._properties_block: ApiPropertiesBlock = None
+        self._property_summaries: base.ApiSummaries = None
+        self._property_summary_rows: base.ApiSummaryRows = None
+    # endregion constructor
+
+    # region methods
+
+    def get_import_info_property(self) -> base.ImportInfo:
+        """
+        Gets imports for properties
+
+        Args:
+            si_id (str): Property summary Info
+
+        Returns:
+            base.ImportInfo: Import info
+        """
+        info = base.ImportInfo()
+        p_info = self.property_summaries
+        # ensure data is primed
+        p_info.get_obj()
+        info.requires_typing = p_info.requires_typing
+        info.imports.update(p_info.imports)
+        return info
+    # endregion methods
+
+    # region Properties
+    @property
+    def ns(self) -> ApiNs:
+        """Gets the interface Description object"""
+        if self._ns is None:
+            self._ns = ApiNs(
+                self.soup_obj)
+        return self._ns
+
+    @property
+    def desc(self) -> base.ApiDesc:
+        """Gets the interface Description object"""
+        if self._desc is None:
+            self._desc = base.ApiDesc(self.soup_obj)
+        return self._desc
+
+    @property
+    def inherited(self) -> base.ApiInherited:
+        """Gets class that get all inherited value"""
+        if self._inherited is None:
+            self._inherited = base.ApiInherited(
+                soup=self.soup_obj, raise_error=False)
+        return self._inherited
+
+    @property
+    def properties_block(self) -> ApiPropertiesBlock:
+        """Gets Summary Properties block"""
+        if self._properties_block is None:
+            self._properties_block = ApiPropertiesBlock(
+                self.public_members)
+        return self._properties_block
+
+    @property
+    def property_summary_rows(self) -> base.ApiSummaryRows:
+        """Get Summary rows for Properties"""
+        if self._property_summary_rows is None:
+            self._property_summary_rows = base.ApiSummaryRows(
+                self.properties_block)
+        return self._property_summary_rows
+
+    @property
+    def property_summaries(self) -> base.ApiSummaries:
+        """Get Summary info list for Properties"""
+        if self._property_summaries is None:
+            self._property_summaries = base.ApiSummaries(
+                self.property_summary_rows)
+        return self._property_summaries
+    # endregion Properties
+# endregion API
 
 class Parser(base.ParserBase):
     # region Constructor
@@ -58,11 +171,11 @@ class Parser(base.ParserBase):
                     ftype=DecFuncEnum.METHOD)
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
+        self._allow_caching = kwargs.get('allow_cache', True)
+        self._api_data: ApiData = ApiData(
+            url_soup=self.url, allow_cache=self._allow_cache)
         self._data = None
-        self._data_formated = None
-        self._data_info = None
-        self._data_items = None
-        self._auto_imports = set()
+        self._imports: Set[str] = set()
         self._requires_typing = False
         self._cache: Dict[str, object] = {
             "python_types": []
@@ -74,24 +187,8 @@ class Parser(base.ParserBase):
     def get_dict_data(self) -> dict:
         info = self.get_info()
         items = self._get_data_items()
-        # set to list for json
-        info["imports"] = []
-        info["auto_imports"] = self._get_auto_imports(ns=info['namespace'])
-        info["from_imports"] = [] # placeholder. picked up in writer
-        info["requires_typing"] = self.requires_typing
         info['items'] = items
         return info
-
-    def _get_auto_imports(self, ns:str) -> List[Tuple[str, str]]:
-        results = []
-        if not self.auto_imports:
-            return results
-        auto: Set[str] = self.auto_imports
-        if len(auto) == 0:
-            return results
-        for name in auto:
-            results.append(base.Util.get_rel_import(i_str=name, ns=ns))
-        return results
     # endregion Data
     # region Info
     def get_info(self) -> Dict[str, str]:
@@ -105,32 +202,31 @@ class Parser(base.ParserBase):
                 "desc": "(List[str]), description of constant",
                 "url": "Url to LibreOffice of constant",
                 "namespace": "namespace",
+                "imports": "List[str], imports",
                 "extends": "(List[str]), inherits"
             }
         """
-        if not  self._data_info is None:
-            return self._data_info
+        key = 'get_info'
+        if key in self._cache:
+            return self._cache[key]
         try:
-            soup_obj = base.SoupObj(self.url, allow_cache=True)
-            soup =soup_obj.soup
-            inherits = base.ApiInherited(soup=soup_obj, raise_error=False)
             ex = []
-            for el in inherits.get_obj():
+            for el in self._api_data.inherited.get_obj():
                 ex.append(el.fullns)
-            full_name = self._get_full_name(soup=soup)
-            name = self._get_name(soup=soup)
-            desc = self._get_desc(soup=soup)
-            ns = base.UrlObj(self.url)
+            name = self._api_data.name.get_obj()
+            ns = self._api_data.ns.namespace_str
+            full_name = ns + '.' + name
             info = {
                 "name": name,
                 "fullname": full_name,
-                "desc": desc,
+                "desc": self._api_data.desc.get_obj(),
                 "url": self.url,
-                "namespace": ns.namespace_str,
+                "namespace": ns,
+                'imports': [],
                 "extends": ex
             }
-            self._data_info = info
-            return self._data_info
+            self._cache[key] = info
+            return self._cache[key]
         except Exception as e:
             logger.error(e, exc_info=True)
             raise e
@@ -144,167 +240,87 @@ class Parser(base.ParserBase):
     # endregion Info
 
     # region Data
-    def get_data(self) -> List[DataItem]:
-        if not self._data is None:
-            return self._data
-        try:
-            if not self._url:
-                raise ValueError('URL is not set')
-            soup = BeautifulSoup(self.get_raw_html(), 'lxml')
-            items = self._get_memitems(soup=soup)
-            struct_info = self._get_struct_details(memitetms=items)
-            self._data = struct_info
-            return self._data
-        except Exception as e:
-            logger.error(e, exc_info=True)
 
-    def get_formated_data(self) -> str:
-        if not self._data_formated is None:
-            return self._data_formated
-        def get_lines(lines:List[str]) -> str:
-            line_indent = self._indent * 2
-            line_len = len(lines)
-            if line_len == 1:
-                return f'"{self._clean_str(lines[0])}"'
-            s_ln = '['
-            for j, line in enumerate(itm.lines):
-                if j > 0:
-                    s_ln += f',\n{line_indent}"",\n'
-                    s_ln += f'{line_indent}"{self._clean_str(line)}"'
-                else:
-                    s_ln += f'"{self._clean_str(line)}"'
-            s_ln += ']'
-            return s_ln
-
-        data = self.get_data()
-        try:
-            lines = []
-            
-            for itm in data:
-                s = '{\n'
-                s += self._indent + f'"name": "{itm.name}",\n'
-                # s += self._indent + f'"is_py_type": "{itm.is_py_type}",\n'
-                s += self._indent + f'"type": "{itm.datatype}",\n'
-                s += self._indent + f'"orig_type": "{itm.orig_type}",\n'
-                if len(itm.lines) > 0:
-                    ln_str = get_lines(itm.lines)
-                    s += self._indent + f'"lines": {ln_str}'
-                else:
-                    s += self._indent + '"lines": ""'
-                s += '\n}'
-                lines.append(s)
-            result = ',\n'.join(lines)
-            self._data_formated = result
-            return self._data_formated
-        except Exception as e:
-            logger.error(e, exc_info=True)
-            raise e
+    def get_formated_data(self, indent=4) -> str:
+        key = 'get_formated_data'
+        if key in self._cache:
+            return self._cache[key]
+        items = self._get_data_items()
+        str_lst = base.Util.get_formated_dict_list_str(
+            obj=items, indent=indent)
+        self._cache[key] = str_lst
+        return self._cache[key]
     
     def _get_data_items(self) -> List[dict]:
-        if not self._data_items is None:
-            return self._data_items
-        result = []
-        data = self.get_data()
-        try:
-            for itm in data:
-                d_itm = {
-                    "name": itm.name,
-                    # "is_py_type": itm.is_py_type,
-                    "type": itm.datatype,
-                    "orig_type": itm.orig_type,
-                    "lines": itm.lines
-                }
-                result.append(d_itm)
-        except Exception as e:
-            logger.error(e, exc_info=True)
-            raise e
-        self._data_items = result
-        return self._data_items
+        key = '_get_data_items'
+        if key in self._cache:
+            return self._cache[key]
+        data = self._get_properties_data()
+        if 'properties' in data:
+            self._cache[key] = data['properties']
+        else:
+            self._cache[key] = []
+        return self._cache[key]
 
-    def _get_struct_details(self, memitetms: ResultSet) -> List[DataItem]:
-        key = '_get_struct_details'
-        if not key in self._cache:
-            self._cache[key] = True
-        results = []
-        p_type_names: Set[str] = set()
-        def get_doc_lines(item_tag:Tag) -> list:
-            docs = item_tag.find('div', class_='memdoc')
-            lines = []
-            if docs:
-                doc_lines = docs.find_all('p')
-                if doc_lines:
-                    for ln in doc_lines:
-                        _line = str(ln.text)
-                        _lines = _line.splitlines()
-                        for i, _nl in enumerate(_lines):
-                            # if i > 0:
-                            #     lines.append("")
-                            _ln = _nl.replace('::', '.').strip()
-                            lines.append(_ln)
-                        # lines.append(ln.text)
-            return lines
-
-        def get_py_type(in_type: str) -> PythonType:
-            nonlocal p_type_names
-            p_type: PythonType = base.Util.get_python_type(in_type=in_type)
-            self._auto_imports.update(p_type.get_all_imports())
-            if p_type.requires_typing:
+    def _get_properties_data(self):
+        attribs = {}
+        si_lst = self._api_data.property_summaries.get_obj()
+        for i, si in enumerate(si_lst):
+            if logger.level <= logging.DEBUG:
+                logger.debug(
+                    "%s._get_properties_data() Processing: %s, %s",
+                    self.__class__.__name__, si.name, si.id)
+            if i == 0:
+                attribs['properties'] = []
+            if not si.name:
+                continue
+            attrib = {
+                "name": si.name,
+                "type": si.p_type.type,
+                "lines": self._api_data.get_desc_detail(si.id).get_obj()
+            }
+            attribs['properties'].append(attrib)
+            if si.p_type.requires_typing:
+                logger.debug(
+                    "%s._get_properties_data() Return '%s' type require typing for: %s, %s",
+                    self.__class__.__name__, si.p_type.type, si.name, si.id)
                 self._requires_typing = True
-            # add p_type to cache. Later it will be need in writer
-            if not p_type.type in p_type_names:
-                self._cache['python_types'].append(p_type)
-                p_type_names.add(p_type.type)
-            return p_type
+        import_info = self._api_data.get_import_info_property()
+        if import_info.requires_typing:
+            self._requires_typing = True
+        self._imports.update(import_info.imports)
 
-        for itm in memitetms:
-            # text in format of com::sun::star::awt::AdjustmentType Type
-            # or sequence< ::com::sun::star::uno::XInterface> TargetSet
-            text: str = itm.find("td", class_='memname',
-                                 recursive=True).text.strip().replace('::', '.')
-            logger.debug("Processing line: %s", text)
-            # parts = text.split()
-            # if text.find('<') >= 0:
-                # likely sequence< > such as sequence< ::com::sun::star::uno::XInterface> TargetSet
-            parts = text.rsplit(maxsplit=1)
-            # some unsigned short Data > ['some unsigned', 'short', 'Data3']
-            # short Data > ['short', 'Data3']
-            _type = parts[0] if len(parts) == 2 else parts[1]
-            # _type = _type.strip('.').replace('>','').strip()
-            py_type = get_py_type(_type)
-            name = base.Util.get_clean_classname(parts.pop())
-            lines = get_doc_lines(itm)
-            logger.debug("Detils: Name: %s, Type: %s, Orig: %s", name, py_type, _type)
-            di = DataItem(
-                name=name,
-                is_py_type=py_type.is_py_type,
-                datatype=py_type.type,
-                orig_type=_type,
-                lines=lines
-            )
-            results.append(di)
-        if self._sort:
-            results.sort()
-        return results
+        if self.sort:
+            if 'properties' in attribs:
+                newlist = sorted(attribs['properties'],
+                                 key=lambda d: d['name'])
+                attribs['properties'] = newlist
+        return attribs
+
     # endregion Data
 
     # region Properties
     @property
-    def auto_imports(self) -> set:
-        """Specifies auto_imports"""
-        return self._auto_imports
+    def imports(self) -> Set[str]:
+        """Gets imports value"""
+        key = '_get_data_items'
+        try:
+            if not key in self._cache:
+                msg = "ParserEx._get_data_items() method must be called before accessing imports"
+                raise Exception(msg)
+        except Exception as e:
+            logger.error(e, exc_info=True)
+            raise e
+        return self._imports
 
     @property
     def requires_typing(self) -> set:
         """Gets if import if typing is required"""
         return self._requires_typing
-    
+
     @property
-    def python_types(self) -> List[PythonType]:
-        """Gets Instances of PythonType for this instance"""
-        key = '_get_struct_details'
-        if not key in self._cache:
-            raise Exception('Parser._get_struct_details() must be called before python_types is accessed')
-        return self._cache['python_types']
+    def api_data(self) -> ApiData:
+        return self._api_data
     # endregion Properties
 
 
@@ -335,6 +351,7 @@ class StructWriter(base.WriteBase):
         self._print_json = kwargs.get('print_json', True)
         self._write_json = kwargs.get('write_json', False)
         self._dynamic_struct = kwargs.get('dynamic_struct', False)
+        self._include_desc: bool = kwargs.get('include_desc', True)
         self._write_template_long: bool = kwargs.get(
             'write_template_long', False)
         self._indent_amt = 4
@@ -348,6 +365,7 @@ class StructWriter(base.WriteBase):
         self._p_desc = None
         self._p_extends: List[str] = None
         self._p_imports: Set[str] = set()
+        self._p_imports_typing: Set[str] = set()
         self._p_requires_typing = False
         
         self._path_dir = Path(os.path.dirname(__file__))
@@ -400,16 +418,17 @@ class StructWriter(base.WriteBase):
         p_dict = {
             "name": 'place holder',
             "namespace": 'place holder',
-            "url": 'place holder',
-            "quote": [],
-            "typings": []
+            "url": 'place holder'
         }
-        p_dict.update(self._parser.get_dict_data())
         p_dict['from_imports'] = self._get_from_imports()
+        p_dict['from_imports_typing'] = self._get_from_imports_typing()
         p_dict['quote'] = self._get_quote_flat()
         p_dict['typings'] = self._get_typings()
         p_dict['requires_typing'] = self._p_requires_typing
-        
+        p_dict.update(self._parser.get_dict_data())
+        if 'typing_imports' in p_dict:
+            del p_dict['typing_imports']
+
         json_dict = {
             "id": JSON_ID,
             "version": __version__,
@@ -420,8 +439,8 @@ class StructWriter(base.WriteBase):
             "parser_args": self._parser.get_parser_args(),
             "writer_args": {
                 "sort": self._sort,
-                "auto_import": self._auto_import,
-                "dynamic_struct": self._dynamic_struct
+                "dynamic_struct": self._dynamic_struct,
+                "include_desc": self._include_desc
             },
             "data": p_dict
         }
@@ -442,6 +461,19 @@ class StructWriter(base.WriteBase):
             lst.append([f, n])
         self._cache[key] = lst
         return self._cache[key]
+    
+    def _get_from_imports_typing(self) -> List[List[str]]:
+        key = '_get_from_imports_typing'
+        if key in self._cache:
+            return self._cache[key]
+        lst = []
+        for ns in self._p_imports_typing:
+            f, n = base.Util.get_rel_import(
+                i_str=ns, ns=self._p_namespace
+            )
+            lst.append([f, n])
+        self._cache[key] = lst
+        return self._cache[key]
     # endregion get Imports
 
     # region quote/typings
@@ -449,12 +481,14 @@ class StructWriter(base.WriteBase):
         key = '_get_quote_flat'
         if key in self._cache:
             return self._cache[key]
+
         t_set: Set[str] = set()
-        p_lst = self._parser.python_types
-        for t in p_lst:
+        # grab all the properties that need quotes
+        si_lst = self._parser.api_data.property_summaries.get_obj()
+        for si in si_lst:
+            t = si.p_type
             if t.requires_typing or t.is_py_type is False:
                 t_set.add(t.type)
-                self._p_requires_typing = True
         self._cache[key] = list(t_set)
         return self._cache[key]
 
@@ -463,8 +497,9 @@ class StructWriter(base.WriteBase):
         if key in self._cache:
             return self._cache[key]
         t_set: Set[str] = set()
-        p_lst = self._parser.python_types
-        for t in p_lst:
+        si_lst = self._parser.api_data.property_summaries.get_obj()
+        for si in si_lst:
+            t = si.p_type
             if t.requires_typing:
                 t_set.add(t.type)
         self._cache[key] = list(t_set)
@@ -478,23 +513,46 @@ class StructWriter(base.WriteBase):
         self._template = self._template.replace(
             '{dynamic_struct}', str(self._dynamic_struct))
         self._template = self._template.replace('{sort}', str(self._sort))
+
+
         self._template = self._template.replace('{name}', self._p_name)
-        self._template = self._template.replace('{ns}', self._p_namespace)
+        self._template = self._template.replace('{ns}', str(self._p_namespace))
         self._template = self._template.replace('{link}', self._p_url)
         self._template = self._template.replace(
+            '{quote}',
+            str(set(self._get_quote_flat())))
+        self._template = self._template.replace(
+            '{typings}',
+            str(set(self._get_typings())))
+        self._template = self._template.replace(
             '{requires_typing}', str(self._p_requires_typing))
-        indent = ' ' * self._indent_amt
-        str_json_desc = base.Util.get_formated_dict_list_str(self._p_desc)
-        self._template = self._template.replace('{desc}', str_json_desc)
-        indented = textwrap.indent(self._p_data, indent)
-        self._template = self._template.replace('{data}', indented)
-        self._template = self._template.replace('{auto_import}', str(self._auto_imports()))
+        self._template = self._template.replace(
+            '{include_desc}', str(self._include_desc))
+        self._template = self._template.replace(
+            '{inherits}', base.Util.get_string_list(lines=self._p_extends))
+        self._template = self._template.replace(
+            '{imports}', "[]")
         self._template = self._template.replace(
             '{from_imports}',
             base.Util.get_formated_dict_list_str(self._get_from_imports())
         )
         self._template = self._template.replace(
-            '{inherits}', base.Util.get_string_list(lines=self._p_extends))
+            '{from_imports_typing}',
+            base.Util.get_formated_dict_list_str(
+                self._get_from_imports_typing())
+        )
+        if len(self._p_desc) > 0:
+            desc = base.Util.get_formated_dict_list_str(self._p_desc, indent=4)
+        else:
+            desc = "[]"
+        self._template = self._template.replace('{desc}', desc)
+        if self._indent_amt > 0:
+            indent = ' ' * self._indent_amt
+            indented = textwrap.indent(self._p_data, indent).lstrip()
+        else:
+            indented = self._p_data.lstrip()
+        self._template = self._template.replace('{data}', indented)
+
 
     def _write_to_file(self):
         with open(self._file_full_path, 'w') as f:
@@ -519,14 +577,41 @@ class StructWriter(base.WriteBase):
         self._p_fullname = data['fullname']
         self._p_data = self._parser.get_formated_data()
         self._p_namespace = data['namespace']
-        self._p_imports.update(data['extends'])
         self._p_extends = get_extends(data['extends'])
+        self._validate_p_info()
+        self._p_imports.update(data['imports'])
+        self._p_imports.update(data['extends'])
+        self._p_imports_typing.update(self._parser.imports)
+
+        self._p_imports_typing = self._p_imports_typing - self._p_imports
+        if len(self._p_imports_typing) > 0:
+            self._p_requires_typing = True
+        if not self._p_requires_typing:
+            self._p_requires_typing = self._parser.requires_typing
+
         if self._write_file or self._write_json:
             self._file_full_path = self._get_uno_obj_path()
+
         # prime cache and set other params such as self._p_requires_typing
         self._get_quote_flat()
         self._get_typings()
-        
+
+    # region validation
+    def _validate_p_info(self):
+        try:
+            if not self._p_name:
+                raise Exception(
+                    "StructWriter: validation fail: name is an empty string.")
+            if not self._p_url:
+                raise Exception(
+                    "StructWriter: validation fail: url is an empty string.")
+            if not self._p_namespace:
+                raise Exception(
+                    "StructWriter: validation fail: namespace is an empty string.")
+        except Exception as e:
+            logger.error(e)
+            raise e
+    # endregion validation
 
     def _get_uno_obj_path(self) -> Path:
         key = '_get_uno_obj_path'
@@ -716,7 +801,8 @@ def parse(*args, **kwargs):
 def _main():
     # url = 'https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1beans_1_1Ambiguous_3_01T_01_4.html'
     # url = 'https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1beans_1_1GetPropertyTolerantResult.html'
-    url = 'https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1text_1_1TextMarkupDescriptor.html'
+    # url = 'https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1text_1_1TextMarkupDescriptor.html'
+    url = 'https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1rdf_1_1Statement.html'
     args = ('v', 'n')
     kwargs = {
         "u": url,
@@ -852,4 +938,4 @@ def main():
     w.write()
     
 if __name__ == '__main__':
-    main()
+    _main()
