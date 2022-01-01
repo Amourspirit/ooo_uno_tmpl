@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.10",
-  "timestamp": "2022-01-01 17:10:44+00:00",
+  "version": "0.1.12",
+  "timestamp": "2022-01-01 22:59:04+00:00",
   "type": "struct",
   "name": "TimeWithTimezone",
   "namespace": "com.sun.star.util",
@@ -10,33 +10,39 @@
   },
   "writer_args": {
     "sort": true,
-    "auto_import": true,
-    "dynamic_struct": false
+    "dynamic_struct": false,
+    "include_desc": true
   },
   "data": {
     "name": "TimeWithTimezone",
     "namespace": "com.sun.star.util",
     "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1util_1_1TimeWithTimezone.html",
-    "quote": [],
+    "from_imports": [],
+    "from_imports_typing": [
+      [
+        ".time",
+        "Time"
+      ]
+    ],
+    "quote": [
+      "Time"
+    ],
     "typings": [],
+    "requires_typing": true,
     "fullname": "com.sun.star.util.TimeWithTimezone",
     "desc": [
       "represents a combined time value with time zone.",
       "",
-      "**Since**",
+      "**since**",
       "",
       "    LibreOffice 4.1"
     ],
-    "extends": [],
     "imports": [],
-    "auto_imports": [],
-    "from_imports": [],
-    "requires_typing": false,
+    "extends": [],
     "items": [
       {
         "name": "TimeInTZ",
-        "type": "object",
-        "orig_type": "Time",
+        "type": "Time",
         "lines": [
           "the time (in TimeZone)"
         ]
@@ -44,9 +50,9 @@
       {
         "name": "Timezone",
         "type": "int",
-        "orig_type": "short",
         "lines": [
           "contains the time zone, as signed offset in minutes from UTC, that is east of UTC, that is the amount of minutes that should be added to UTC time to obtain the time in that timezone.",
+          "",
           "To obtain UTC time from TimeInTZ, you need to subtract TimeZone minutes."
         ]
       }

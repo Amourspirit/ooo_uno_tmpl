@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.10",
-  "timestamp": "2022-01-01 17:10:46+00:00",
+  "version": "0.1.12",
+  "timestamp": "2022-01-01 22:58:55+00:00",
   "type": "struct",
   "name": "RenderState",
   "namespace": "com.sun.star.rendering",
@@ -10,33 +10,15 @@
   },
   "writer_args": {
     "sort": true,
-    "auto_import": true,
-    "dynamic_struct": false
+    "dynamic_struct": false,
+    "include_desc": true
   },
   "data": {
     "name": "RenderState",
     "namespace": "com.sun.star.rendering",
     "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1rendering_1_1RenderState.html",
-    "quote": [
-      "AffineMatrix2D",
-      "typing.List[ColorComponent]"
-    ],
-    "typings": [
-      "typing.List[ColorComponent]"
-    ],
-    "fullname": "com.sun.star.rendering.RenderState",
-    "desc": [
-      "This structure contains information passed to each XCanvas render operation.",
-      "",
-      "This structure contains information considered as the render state, i.e. the common setup required to render each individual XCanvas primitive.",
-      "",
-      "**Since**",
-      "",
-      "    OOo 2.0"
-    ],
-    "extends": [],
-    "imports": [],
-    "auto_imports": [
+    "from_imports": [],
+    "from_imports_typing": [
       [
         "..geometry.affine_matrix2_d",
         "AffineMatrix2D"
@@ -44,45 +26,66 @@
       [
         ".color_component",
         "ColorComponent"
+      ],
+      [
+        ".x_poly_polygon2_d",
+        "XPolyPolygon2D"
       ]
     ],
-    "from_imports": [],
+    "quote": [
+      "AffineMatrix2D",
+      "XPolyPolygon2D"
+    ],
+    "typings": [],
     "requires_typing": true,
+    "fullname": "com.sun.star.rendering.RenderState",
+    "desc": [
+      "This structure contains information passed to each XCanvas render operation.",
+      "",
+      "This structure contains information considered as the render state, i.e. the common setup required to render each individual XCanvas primitive.",
+      "",
+      "**since**",
+      "",
+      "    OOo 2.0"
+    ],
+    "imports": [],
+    "extends": [],
     "items": [
       {
         "name": "AffineTransform",
         "type": "AffineMatrix2D",
-        "orig_type": ".com.sun.star.geometry.AffineMatrix2D",
         "lines": [
           "The affine transform associated with this render operation.",
+          "",
           "This is used to transform coordinates of canvas primitives from user space to view space (from which they are subsequently transformed to device space by the view transform)."
         ]
       },
       {
         "name": "Clip",
-        "type": "object",
-        "orig_type": "XPolyPolygon2D",
+        "type": "XPolyPolygon2D",
         "lines": [
           "The clipping area associated with this render operation.",
+          "",
           "This clipping is interpreted in the user coordinate system, i.e. subject to the render state transform followed by the view transform before mapped to device coordinate space.",
+          "",
           "Specifying an empty interface denotes no clipping, i.e. everything rendered to the canvas will be visible (subject to device-dependent constraints, of course). Specifying an empty XPolyPolygon2D, i.e. a poly-polygon containing zero polygons, or an XPolyPolygon2D with any number of empty sub-polygons, denotes the NULL clip. That means, nothing rendered to the canvas will be visible."
         ]
       },
       {
         "name": "CompositeOperation",
         "type": "int",
-        "orig_type": "byte",
         "lines": [
           "The composition mode associated with this render operation.",
+          "",
           "The composite mode determines in which way the primitive and possibly existing background is combined. The permissible values must be one out of the CompositeOperation constants."
         ]
       },
       {
         "name": "DeviceColor",
         "type": "typing.List[ColorComponent]",
-        "orig_type": "sequence<ColorComponent>",
         "lines": [
           "The device color associated with this render operation.",
+          "",
           "Note that this need not be RGB here, but depends on the active device color space."
         ]
       }

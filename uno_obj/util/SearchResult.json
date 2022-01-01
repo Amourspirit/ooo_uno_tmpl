@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.10",
-  "timestamp": "2022-01-01 17:10:44+00:00",
+  "version": "0.1.12",
+  "timestamp": "2022-01-01 22:59:04+00:00",
   "type": "struct",
   "name": "SearchResult",
   "namespace": "com.sun.star.util",
@@ -10,50 +10,47 @@
   },
   "writer_args": {
     "sort": true,
-    "auto_import": true,
-    "dynamic_struct": false
+    "dynamic_struct": false,
+    "include_desc": true
   },
   "data": {
     "name": "SearchResult",
     "namespace": "com.sun.star.util",
     "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1util_1_1SearchResult.html",
-    "quote": [
-      "typing.List[int]"
-    ],
-    "typings": [
-      "typing.List[int]"
-    ],
+    "from_imports": [],
+    "from_imports_typing": [],
+    "quote": [],
+    "typings": [],
+    "requires_typing": true,
     "fullname": "com.sun.star.util.SearchResult",
     "desc": [],
-    "extends": [],
     "imports": [],
-    "auto_imports": [],
-    "from_imports": [],
-    "requires_typing": true,
+    "extends": [],
     "items": [
+      {
+        "name": "subRegExpressions",
+        "type": "int",
+        "lines": [
+          "Number of subexpressions.",
+          "",
+          "If it is 0, then no match found; this value is 1 for ABSOLUTE and APPROXIMATE match. The start and endOffset are always dependent on the search direction.",
+          "",
+          "For example, if you search \\\"X\\\" in the text \\\"-X-\\\" the offsets are:",
+          "",
+          "Forward, the startOffset is inclusive, the endOffset exclusive. Backward, the startOffset is exclusive, the endOffset inclusive.",
+          "",
+          "For regular expressions it can be greater than 1. If the value is 1, startoffset[0] and endoffset[0] points to the matching sub string if value is > 1, still startoffset[0] and endoffset[0] points to the matching substring for whole regular expression startoffset[i] and endoffset[i] points to the matching substring of i th matching substring."
+        ]
+      },
       {
         "name": "endOffset",
         "type": "typing.List[int]",
-        "orig_type": "sequence<long>",
         "lines": []
       },
       {
         "name": "startOffset",
         "type": "typing.List[int]",
-        "orig_type": "sequence<long>",
         "lines": []
-      },
-      {
-        "name": "subRegExpressions",
-        "type": "int",
-        "orig_type": "long",
-        "lines": [
-          "Number of subexpressions.",
-          "If it is 0, then no match found; this value is 1 for ABSOLUTE and APPROXIMATE match. The start and endOffset are always dependent on the search direction.",
-          "For example, if you search \"X\" in the text \"-X-\" the offsets are:",
-          "Forward, the startOffset is inclusive, the endOffset exclusive. Backward, the startOffset is exclusive, the endOffset inclusive.",
-          "For regular expressions it can be greater than 1. If the value is 1, startoffset[0] and endoffset[0] points to the matching sub string if value is > 1, still startoffset[0] and endoffset[0] points to the matching substring for whole regular expression startoffset[i] and endoffset[i] points to the matching substring of i th matching substring."
-        ]
       }
     ]
   }

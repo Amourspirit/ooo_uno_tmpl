@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.10",
-  "timestamp": "2022-01-01 17:10:44+00:00",
+  "version": "0.1.12",
+  "timestamp": "2022-01-01 22:58:59+00:00",
   "type": "struct",
   "name": "FrameActionEvent",
   "namespace": "com.sun.star.frame",
@@ -10,44 +10,54 @@
   },
   "writer_args": {
     "sort": true,
-    "auto_import": true,
-    "dynamic_struct": false
+    "dynamic_struct": false,
+    "include_desc": true
   },
   "data": {
     "name": "FrameActionEvent",
     "namespace": "com.sun.star.frame",
     "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1frame_1_1FrameActionEvent.html",
-    "quote": [],
-    "typings": [],
-    "fullname": "com.sun.star.frame.FrameActionEvent",
-    "desc": [
-      "this event struct is broadcast for actions which can happen to components within frames"
-    ],
-    "extends": [
-      "com.sun.star.lang.EventObject"
-    ],
-    "imports": [],
-    "auto_imports": [],
     "from_imports": [
       [
         "..lang.event_object",
         "EventObject"
       ]
     ],
-    "requires_typing": false,
+    "from_imports_typing": [
+      [
+        ".x_frame",
+        "XFrame"
+      ],
+      [
+        ".frame_action",
+        "FrameAction"
+      ]
+    ],
+    "quote": [
+      "XFrame",
+      "FrameAction"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "fullname": "com.sun.star.frame.FrameActionEvent",
+    "desc": [
+      "this event struct is broadcast for actions which can happen to components within frames"
+    ],
+    "imports": [],
+    "extends": [
+      "com.sun.star.lang.EventObject"
+    ],
     "items": [
       {
         "name": "Action",
-        "type": "object",
-        "orig_type": "FrameAction",
+        "type": "FrameAction",
         "lines": [
           "specifies the concrete event"
         ]
       },
       {
         "name": "Frame",
-        "type": "object",
-        "orig_type": "XFrame",
+        "type": "XFrame",
         "lines": [
           "contains the frame in which the event occurred"
         ]

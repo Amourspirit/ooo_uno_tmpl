@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.10",
-  "timestamp": "2022-01-01 17:10:44+00:00",
+  "version": "0.1.12",
+  "timestamp": "2022-01-01 22:59:00+00:00",
   "type": "struct",
   "name": "DragSourceEvent",
   "namespace": "com.sun.star.datatransfer.dnd",
@@ -10,46 +10,56 @@
   },
   "writer_args": {
     "sort": true,
-    "auto_import": true,
-    "dynamic_struct": false
+    "dynamic_struct": false,
+    "include_desc": true
   },
   "data": {
     "name": "DragSourceEvent",
     "namespace": "com.sun.star.datatransfer.dnd",
     "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1datatransfer_1_1dnd_1_1DragSourceEvent.html",
-    "quote": [],
-    "typings": [],
-    "fullname": "com.sun.star.datatransfer.dnd.DragSourceEvent",
-    "desc": [
-      "This class is the base class for DragSourceDragEvent and DragSourceDropEvent.",
-      "",
-      "To access the XDragSource that originated this event, use the com.sun.star.lang.EventObject.Source member of this object."
-    ],
-    "extends": [
-      "com.sun.star.lang.EventObject"
-    ],
-    "imports": [],
-    "auto_imports": [],
     "from_imports": [
       [
         "...lang.event_object",
         "EventObject"
       ]
     ],
-    "requires_typing": false,
+    "from_imports_typing": [
+      [
+        ".x_drag_source_context",
+        "XDragSourceContext"
+      ],
+      [
+        ".x_drag_source",
+        "XDragSource"
+      ]
+    ],
+    "quote": [
+      "XDragSource",
+      "XDragSourceContext"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "fullname": "com.sun.star.datatransfer.dnd.DragSourceEvent",
+    "desc": [
+      "This class is the base class for DragSourceDragEvent and DragSourceDropEvent.",
+      "",
+      "To access the XDragSource that originated this event, use the com.sun.star.lang.EventObject.Source member of this object."
+    ],
+    "imports": [],
+    "extends": [
+      "com.sun.star.lang.EventObject"
+    ],
     "items": [
       {
         "name": "DragSource",
-        "type": "object",
-        "orig_type": "XDragSource",
+        "type": "XDragSource",
         "lines": [
           "The drag source on which the Drag and Drop operation was initiated."
         ]
       },
       {
         "name": "DragSourceContext",
-        "type": "object",
-        "orig_type": "XDragSourceContext",
+        "type": "XDragSourceContext",
         "lines": [
           "The drag source context of the current drag operation."
         ]

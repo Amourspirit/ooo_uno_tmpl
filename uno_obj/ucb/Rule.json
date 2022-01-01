@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.10",
-  "timestamp": "2022-01-01 17:10:48+00:00",
+  "version": "0.1.12",
+  "timestamp": "2022-01-01 22:58:58+00:00",
   "type": "struct",
   "name": "Rule",
   "namespace": "com.sun.star.ucb",
@@ -10,49 +10,44 @@
   },
   "writer_args": {
     "sort": true,
-    "auto_import": true,
-    "dynamic_struct": false
+    "dynamic_struct": false,
+    "include_desc": true
   },
   "data": {
     "name": "Rule",
     "namespace": "com.sun.star.ucb",
     "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1ucb_1_1Rule.html",
-    "quote": [
-      "typing.List[RuleTerm]"
+    "from_imports": [],
+    "from_imports_typing": [
+      [
+        ".rule_term",
+        "RuleTerm"
+      ]
     ],
-    "typings": [
-      "typing.List[RuleTerm]"
-    ],
+    "quote": [],
+    "typings": [],
+    "requires_typing": true,
     "fullname": "com.sun.star.ucb.Rule",
     "desc": [
       "describes a rule that can be applies to a number of objects.",
       "",
       "A rule consists of a sequence of RuleTerms describing the objects to which the rule should be applied, the RuleAction which should be used on the matching objects, and a parameter."
     ],
-    "extends": [],
     "imports": [],
-    "auto_imports": [
-      [
-        ".rule_term",
-        "RuleTerm"
-      ]
-    ],
-    "from_imports": [],
-    "requires_typing": true,
+    "extends": [],
     "items": [
       {
         "name": "Action",
         "type": "int",
-        "orig_type": "short",
         "lines": [
           "the action to perform on the matching objects.",
+          "",
           "The value can be one of the RuleAction constants."
         ]
       },
       {
         "name": "Parameter",
         "type": "str",
-        "orig_type": "string",
         "lines": [
           "Some RuleActions require a parameter."
         ]
@@ -60,7 +55,6 @@
       {
         "name": "Terms",
         "type": "typing.List[RuleTerm]",
-        "orig_type": "sequence<com.sun.star.ucb.RuleTerm>",
         "lines": [
           "the rule terms describing the objects to which the rule should be applied."
         ]

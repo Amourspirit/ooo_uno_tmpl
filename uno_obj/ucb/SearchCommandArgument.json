@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.10",
-  "timestamp": "2022-01-01 17:10:48+00:00",
+  "version": "0.1.12",
+  "timestamp": "2022-01-01 22:58:58+00:00",
   "type": "struct",
   "name": "SearchCommandArgument",
   "namespace": "com.sun.star.ucb",
@@ -10,38 +10,39 @@
   },
   "writer_args": {
     "sort": true,
-    "auto_import": true,
-    "dynamic_struct": false
+    "dynamic_struct": false,
+    "include_desc": true
   },
   "data": {
     "name": "SearchCommandArgument",
     "namespace": "com.sun.star.ucb",
     "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1ucb_1_1SearchCommandArgument.html",
-    "quote": [
-      "typing.List[Property]"
-    ],
-    "typings": [
-      "typing.List[Property]"
-    ],
-    "fullname": "com.sun.star.ucb.SearchCommandArgument",
-    "desc": [
-      "The argument for the command \"search\"."
-    ],
-    "extends": [],
-    "imports": [],
-    "auto_imports": [
+    "from_imports": [],
+    "from_imports_typing": [
+      [
+        ".search_info",
+        "SearchInfo"
+      ],
       [
         "..beans.property",
         "Property"
       ]
     ],
-    "from_imports": [],
+    "quote": [
+      "SearchInfo"
+    ],
+    "typings": [],
     "requires_typing": true,
+    "fullname": "com.sun.star.ucb.SearchCommandArgument",
+    "desc": [
+      "The argument for the command \\\"search\\\"."
+    ],
+    "imports": [],
+    "extends": [],
     "items": [
       {
         "name": "Info",
-        "type": "object",
-        "orig_type": "SearchInfo",
+        "type": "SearchInfo",
         "lines": [
           "the search criteria."
         ]
@@ -49,7 +50,6 @@
       {
         "name": "Properties",
         "type": "typing.List[Property]",
-        "orig_type": "sequence< com.sun.star.beans.Property >",
         "lines": [
           "the properties for which values shall be provided through the ContentResultSet returned by the search command."
         ]

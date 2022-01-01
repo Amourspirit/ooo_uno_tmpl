@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.10",
-  "timestamp": "2022-01-01 17:10:48+00:00",
+  "version": "0.1.12",
+  "timestamp": "2022-01-01 22:58:57+00:00",
   "type": "struct",
   "name": "ContentEvent",
   "namespace": "com.sun.star.ucb",
@@ -10,56 +10,68 @@
   },
   "writer_args": {
     "sort": true,
-    "auto_import": true,
-    "dynamic_struct": false
+    "dynamic_struct": false,
+    "include_desc": true
   },
   "data": {
     "name": "ContentEvent",
     "namespace": "com.sun.star.ucb",
     "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1ucb_1_1ContentEvent.html",
-    "quote": [],
-    "typings": [],
-    "fullname": "com.sun.star.ucb.ContentEvent",
-    "desc": [
-      "A structure for content events."
-    ],
-    "extends": [
-      "com.sun.star.lang.EventObject"
-    ],
-    "imports": [],
-    "auto_imports": [],
     "from_imports": [
       [
         "..lang.event_object",
         "EventObject"
       ]
     ],
-    "requires_typing": false,
+    "from_imports_typing": [
+      [
+        ".x_content",
+        "XContent"
+      ],
+      [
+        ".x_content_identifier",
+        "XContentIdentifier"
+      ]
+    ],
+    "quote": [
+      "XContent",
+      "XContentIdentifier"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "fullname": "com.sun.star.ucb.ContentEvent",
+    "desc": [
+      "A structure for content events."
+    ],
+    "imports": [],
+    "extends": [
+      "com.sun.star.lang.EventObject"
+    ],
     "items": [
       {
         "name": "Action",
         "type": "int",
-        "orig_type": "long",
         "lines": [
           "The action.",
+          "",
           "The value can be one of the ContentAction constants."
         ]
       },
       {
         "name": "Content",
-        "type": "object",
-        "orig_type": "XContent",
+        "type": "XContent",
         "lines": [
           "The content to that the action is related (e.g., the content that was just physically destroyed, the content that was just inserted into a folder content).",
+          "",
           "This member must be filled as follows:"
         ]
       },
       {
         "name": "Id",
-        "type": "object",
-        "orig_type": "XContentIdentifier",
+        "type": "XContentIdentifier",
         "lines": [
           "A content identifier, which must be filled according to the action notified (e.g., the id of the folder content into which another content was inserted).",
+          "",
           "This member must be filled as follows:"
         ]
       }

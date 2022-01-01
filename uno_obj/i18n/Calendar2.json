@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.10",
-  "timestamp": "2022-01-01 17:10:51+00:00",
+  "version": "0.1.12",
+  "timestamp": "2022-01-01 22:59:02+00:00",
   "type": "struct",
   "name": "Calendar2",
   "namespace": "com.sun.star.i18n",
@@ -10,19 +10,23 @@
   },
   "writer_args": {
     "sort": true,
-    "auto_import": true,
-    "dynamic_struct": false
+    "dynamic_struct": false,
+    "include_desc": true
   },
   "data": {
     "name": "Calendar2",
     "namespace": "com.sun.star.i18n",
     "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1i18n_1_1Calendar2.html",
-    "quote": [
-      "typing.List[CalendarItem2]"
+    "from_imports": [],
+    "from_imports_typing": [
+      [
+        ".calendar_item2",
+        "CalendarItem2"
+      ]
     ],
-    "typings": [
-      "typing.List[CalendarItem2]"
-    ],
+    "quote": [],
+    "typings": [],
+    "requires_typing": true,
     "fullname": "com.sun.star.i18n.Calendar2",
     "desc": [
       "Calendar items as returned in a sequence by XLocaleData3.getAllCalendars2().",
@@ -31,41 +35,51 @@
       "",
       "The sequences are of type com.sun.star.i18n.CalendarItem2 instead of com.sun.star.i18n.CalendarItem, with the additional NarrowName member.",
       "",
-      "**Since**",
+      "**since**",
       "",
       "    LibreOffice 3.5"
     ],
-    "extends": [],
     "imports": [],
-    "auto_imports": [
-      [
-        ".calendar_item2",
-        "CalendarItem2"
-      ]
-    ],
-    "from_imports": [],
-    "requires_typing": true,
+    "extends": [],
     "items": [
-      {
-        "name": "Days",
-        "type": "typing.List[CalendarItem2]",
-        "orig_type": "sequence< CalendarItem2 >",
-        "lines": [
-          "The days of the week."
-        ]
-      },
       {
         "name": "Default",
         "type": "bool",
-        "orig_type": "boolean",
         "lines": [
           "If this is the default calendar for a given locale."
         ]
       },
       {
+        "name": "MinimumNumberOfDaysForFirstWeek",
+        "type": "int",
+        "lines": [
+          "How many days must reside in the first week of a year."
+        ]
+      },
+      {
+        "name": "Name",
+        "type": "str",
+        "lines": [
+          "The name of the calendar, for example, Gregorian."
+        ]
+      },
+      {
+        "name": "StartOfWeek",
+        "type": "str",
+        "lines": [
+          "The ID of the day with which the week begins."
+        ]
+      },
+      {
+        "name": "Days",
+        "type": "typing.List[CalendarItem2]",
+        "lines": [
+          "The days of the week."
+        ]
+      },
+      {
         "name": "Eras",
         "type": "typing.List[CalendarItem2]",
-        "orig_type": "sequence< CalendarItem2 >",
         "lines": [
           "The possible eras."
         ]
@@ -73,49 +87,22 @@
       {
         "name": "GenitiveMonths",
         "type": "typing.List[CalendarItem2]",
-        "orig_type": "sequence< CalendarItem2 >",
         "lines": [
           "The months of the year in possessive genitive case."
         ]
       },
       {
-        "name": "MinimumNumberOfDaysForFirstWeek",
-        "type": "int",
-        "orig_type": "short",
-        "lines": [
-          "How many days must reside in the first week of a year."
-        ]
-      },
-      {
         "name": "Months",
         "type": "typing.List[CalendarItem2]",
-        "orig_type": "sequence< CalendarItem2 >",
         "lines": [
           "The months of the year."
         ]
       },
       {
-        "name": "Name",
-        "type": "str",
-        "orig_type": "string",
-        "lines": [
-          "The name of the calendar, for example, Gregorian."
-        ]
-      },
-      {
         "name": "PartitiveMonths",
         "type": "typing.List[CalendarItem2]",
-        "orig_type": "sequence< CalendarItem2 >",
         "lines": [
           "The months of the year in partitive case."
-        ]
-      },
-      {
-        "name": "StartOfWeek",
-        "type": "str",
-        "orig_type": "string",
-        "lines": [
-          "The ID of the day with which the week begins."
         ]
       }
     ]

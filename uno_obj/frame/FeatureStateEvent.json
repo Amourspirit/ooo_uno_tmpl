@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.10",
-  "timestamp": "2022-01-01 17:10:44+00:00",
+  "version": "0.1.12",
+  "timestamp": "2022-01-01 22:58:59+00:00",
   "type": "struct",
   "name": "FeatureStateEvent",
   "namespace": "com.sun.star.frame",
@@ -10,43 +10,42 @@
   },
   "writer_args": {
     "sort": true,
-    "auto_import": true,
-    "dynamic_struct": false
+    "dynamic_struct": false,
+    "include_desc": true
   },
   "data": {
     "name": "FeatureStateEvent",
     "namespace": "com.sun.star.frame",
     "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1frame_1_1FeatureStateEvent.html",
-    "quote": [
-      "URL"
-    ],
-    "typings": [],
-    "fullname": "com.sun.star.frame.FeatureStateEvent",
-    "desc": [
-      "This event is broadcast by a Controller whenever the state of the feature changes."
-    ],
-    "extends": [
-      "com.sun.star.lang.EventObject"
-    ],
-    "imports": [],
-    "auto_imports": [
-      [
-        "..util.url",
-        "URL"
-      ]
-    ],
     "from_imports": [
       [
         "..lang.event_object",
         "EventObject"
       ]
     ],
+    "from_imports_typing": [
+      [
+        "..util.url",
+        "URL"
+      ]
+    ],
+    "quote": [
+      "URL"
+    ],
+    "typings": [],
     "requires_typing": true,
+    "fullname": "com.sun.star.frame.FeatureStateEvent",
+    "desc": [
+      "This event is broadcast by a Controller whenever the state of the feature changes."
+    ],
+    "imports": [],
+    "extends": [
+      "com.sun.star.lang.EventObject"
+    ],
     "items": [
       {
         "name": "FeatureDescriptor",
         "type": "str",
-        "orig_type": "string",
         "lines": [
           "contains a descriptor of the feature for the user interface."
         ]
@@ -54,7 +53,6 @@
       {
         "name": "FeatureURL",
         "type": "URL",
-        "orig_type": "com.sun.star.util.URL",
         "lines": [
           "contains the URL of the feature."
         ]
@@ -62,7 +60,6 @@
       {
         "name": "IsEnabled",
         "type": "bool",
-        "orig_type": "boolean",
         "lines": [
           "specifies whether the feature is currently enabled or disabled."
         ]
@@ -70,18 +67,18 @@
       {
         "name": "Requery",
         "type": "bool",
-        "orig_type": "boolean",
         "lines": [
           "specifies whether the XDispatch has to be required.",
+          "",
           "Interest code should listen for FrameActionEvent too, to update own feature states and dispatch listener on FrameAction.CONTEXT_CHANGED."
         ]
       },
       {
         "name": "State",
         "type": "object",
-        "orig_type": "any",
         "lines": [
           "contains the state of the feature in this dispatch.",
+          "",
           "This can be, for example, simply TRUE for a boolean feature like underline on/off. Some simple types like string or boolean are useful here for generic UI elements, like a checkmark in a menu."
         ]
       }

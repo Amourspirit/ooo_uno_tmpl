@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.10",
-  "timestamp": "2022-01-01 17:10:52+00:00",
+  "version": "0.1.12",
+  "timestamp": "2022-01-01 22:59:06+00:00",
   "type": "struct",
   "name": "AccessibleRelation",
   "namespace": "com.sun.star.accessibility",
@@ -10,55 +10,51 @@
   },
   "writer_args": {
     "sort": true,
-    "auto_import": true,
-    "dynamic_struct": false
+    "dynamic_struct": false,
+    "include_desc": true
   },
   "data": {
     "name": "AccessibleRelation",
     "namespace": "com.sun.star.accessibility",
     "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1accessibility_1_1AccessibleRelation.html",
-    "quote": [
-      "typing.List[XInterface]"
+    "from_imports": [],
+    "from_imports_typing": [
+      [
+        "..uno.x_interface",
+        "XInterface"
+      ]
     ],
-    "typings": [
-      "typing.List[XInterface]"
-    ],
+    "quote": [],
+    "typings": [],
+    "requires_typing": true,
     "fullname": "com.sun.star.accessibility.AccessibleRelation",
     "desc": [
       "An AccessibleRelation object defines a one-to-many relation.",
       "",
       "The represented relation points from the implementing object to a set of target objects.",
       "",
-      "**Since**",
+      "**since**",
       "",
       "    OOo 1.1.2"
     ],
-    "extends": [],
     "imports": [],
-    "auto_imports": [
-      [
-        "..uno.x_interface",
-        "XInterface"
-      ]
-    ],
-    "from_imports": [],
-    "requires_typing": true,
+    "extends": [],
     "items": [
       {
         "name": "RelationType",
         "type": "int",
-        "orig_type": "short",
         "lines": [
           "Type of the relation.",
+          "",
           "Its value has to be one of the constants defined by AccessibleRelationType. If that value is INVALID then the whole relation is regarded as invalid. The content of the TargetSet is then undefined."
         ]
       },
       {
         "name": "TargetSet",
         "type": "typing.List[XInterface]",
-        "orig_type": "sequence< .com.sun.star.uno.XInterface>",
         "lines": [
           "Set of objects that are the relation's targets.",
+          "",
           "The content of this set is undefined if the relation's type is INVALID. The set must not contain references to one object more than once."
         ]
       }

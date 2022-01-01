@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.10",
-  "timestamp": "2022-01-01 17:10:48+00:00",
+  "version": "0.1.12",
+  "timestamp": "2022-01-01 22:58:58+00:00",
   "type": "struct",
   "name": "Lock",
   "namespace": "com.sun.star.ucb",
@@ -10,69 +10,71 @@
   },
   "writer_args": {
     "sort": true,
-    "auto_import": true,
-    "dynamic_struct": false
+    "dynamic_struct": false,
+    "include_desc": true
   },
   "data": {
     "name": "Lock",
     "namespace": "com.sun.star.ucb",
     "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1ucb_1_1Lock.html",
-    "quote": [
-      "typing.List[str]"
-    ],
-    "typings": [
-      "typing.List[str]"
-    ],
-    "fullname": "com.sun.star.ucb.Lock",
-    "desc": [
-      "defines a lock."
-    ],
-    "extends": [
-      "com.sun.star.ucb.LockEntry"
-    ],
-    "imports": [],
-    "auto_imports": [],
     "from_imports": [
       [
         ".lock_entry",
         "LockEntry"
       ]
     ],
+    "from_imports_typing": [
+      [
+        ".lock_depth",
+        "LockDepth"
+      ]
+    ],
+    "quote": [
+      "LockDepth"
+    ],
+    "typings": [],
     "requires_typing": true,
+    "fullname": "com.sun.star.ucb.Lock",
+    "desc": [
+      "defines a lock."
+    ],
+    "imports": [],
+    "extends": [
+      "com.sun.star.ucb.LockEntry"
+    ],
     "items": [
       {
         "name": "Depth",
-        "type": "object",
-        "orig_type": "LockDepth",
+        "type": "LockDepth",
         "lines": [
           "defines the lock's depth."
         ]
       },
       {
-        "name": "LockTokens",
-        "type": "typing.List[str]",
-        "orig_type": "sequence< string >",
-        "lines": [
-          "the lock tokens.",
-          "Each lock token is a URI."
-        ]
-      },
-      {
         "name": "Owner",
         "type": "object",
-        "orig_type": "any",
         "lines": [
           "the owner of the lock.",
+          "",
           "This element provides information sufficient for either directly contacting a principal (such as a telephone number or email URI), or for discovering the principal (such as the URL of a homepage) who owns the lock."
         ]
       },
       {
         "name": "Timeout",
-        "type": "object",
-        "orig_type": "hyper",
+        "type": "int",
         "lines": [
           "a timeout value for the lock.",
+          "",
           "This element specifies the number of seconds between granting of the lock and the automatic removal of that lock. The value must not be greater than 2^32-1. A value of -1 stands for an infinite lock, that will never be removed automatically."
+        ]
+      },
+      {
+        "name": "LockTokens",
+        "type": "typing.List[str]",
+        "lines": [
+          "the lock tokens.",
+          "",
+          "Each lock token is a URI."
         ]
       }
     ]

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.10",
-  "timestamp": "2022-01-01 17:10:52+00:00",
+  "version": "0.1.12",
+  "timestamp": "2022-01-01 22:59:00+00:00",
   "type": "struct",
   "name": "ScaleData",
   "namespace": "com.sun.star.chart2",
@@ -10,39 +10,53 @@
   },
   "writer_args": {
     "sort": true,
-    "auto_import": true,
-    "dynamic_struct": false
+    "dynamic_struct": false,
+    "include_desc": true
   },
   "data": {
     "name": "ScaleData",
     "namespace": "com.sun.star.chart2",
     "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1chart2_1_1ScaleData.html",
-    "quote": [
-      "XLabeledDataSequence",
-      "TimeIncrement"
-    ],
-    "typings": [],
-    "fullname": "com.sun.star.chart2.ScaleData",
-    "desc": [],
-    "extends": [],
-    "imports": [],
-    "auto_imports": [
+    "from_imports": [],
+    "from_imports_typing": [
       [
         "..chart.time_increment",
         "TimeIncrement"
       ],
       [
+        ".axis_orientation",
+        "AxisOrientation"
+      ],
+      [
         ".data.x_labeled_data_sequence",
         "XLabeledDataSequence"
+      ],
+      [
+        ".x_scaling",
+        "XScaling"
+      ],
+      [
+        ".increment_data",
+        "IncrementData"
       ]
     ],
-    "from_imports": [],
+    "quote": [
+      "TimeIncrement",
+      "AxisOrientation",
+      "IncrementData",
+      "XScaling",
+      "XLabeledDataSequence"
+    ],
+    "typings": [],
     "requires_typing": true,
+    "fullname": "com.sun.star.chart2.ScaleData",
+    "desc": [],
+    "imports": [],
+    "extends": [],
     "items": [
       {
         "name": "AutoDateAxis",
         "type": "bool",
-        "orig_type": "boolean",
         "lines": [
           "if true an AxisType CATEGORY is interpreted as DATE if the underlying data given in Categories are dates"
         ]
@@ -50,22 +64,20 @@
       {
         "name": "AxisType",
         "type": "int",
-        "orig_type": "long",
         "lines": [
           "describes the type of the axis.",
+          "",
           "It can be a real number axis or a category axis or something else. AxisType is one value out of the constant group AxisType."
         ]
       },
       {
         "name": "Categories",
         "type": "XLabeledDataSequence",
-        "orig_type": "com.sun.star.chart2.data.XLabeledDataSequence",
         "lines": []
       },
       {
         "name": "IncrementData",
-        "type": "object",
-        "orig_type": "IncrementData",
+        "type": "IncrementData",
         "lines": [
           "increment data to be used for not date-time axis"
         ]
@@ -73,52 +85,53 @@
       {
         "name": "Maximum",
         "type": "object",
-        "orig_type": "any",
         "lines": [
           "if the any contains a double value this is used as a fixed minimum.",
+          "",
           "Otherwise, if the any is empty or contains an incompatible type, the minimum is automatic.",
+          "",
           "If the minimum is automatic, this means, each view that represents the model containing this scale, has to calculate a minimum by its own means."
         ]
       },
       {
         "name": "Minimum",
         "type": "object",
-        "orig_type": "any",
         "lines": [
           "if the any contains a double value this is used as a fixed maximum.",
+          "",
           "Otherwise, if the any is empty or contains an incompatible type, the maximum is automatic.",
+          "",
           "If the maximum is automatic, this means, each view that represents the model containing this scale, has to calculate a maximum by its own means."
         ]
       },
       {
         "name": "Orientation",
-        "type": "object",
-        "orig_type": "AxisOrientation",
+        "type": "AxisOrientation",
         "lines": [
           "Axis orientation (standard or reversed).",
+          "",
           "If used at the Y axis in pie charts or doughnut charts, specifies the rotation direction of the pie. The value AxisOrientation.MATHEMATICAL rotates the pie counterclockwise, the value AxisOrientation.REVERSE rotates the pie clockwise.",
+          "",
           "Note: Is this a good place for the axis orientation? Two axes may use the same scale, but point into two different directions."
         ]
       },
       {
         "name": "Origin",
         "type": "object",
-        "orig_type": "any",
         "lines": [
           "The Origin indicates where other axes cross this axis.",
+          "",
           "If the any contains a double value that value is used. Otherwise an appropriate value has to be calculated by that instances using Origin."
         ]
       },
       {
         "name": "Scaling",
-        "type": "object",
-        "orig_type": "XScaling",
+        "type": "XScaling",
         "lines": []
       },
       {
         "name": "ShiftedCategoryPosition",
         "type": "bool",
-        "orig_type": "boolean",
         "lines": [
           "describes whether data points on category or date axis are placed between tickmarks or not if true the maximum on the scale will be expanded for one interval"
         ]
@@ -126,7 +139,6 @@
       {
         "name": "TimeIncrement",
         "type": "TimeIncrement",
-        "orig_type": ".com.sun.star.chart.TimeIncrement",
         "lines": [
           "increment data to be used in case of date-time axis"
         ]

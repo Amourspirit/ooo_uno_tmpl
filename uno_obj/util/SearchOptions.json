@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.10",
-  "timestamp": "2022-01-01 17:10:44+00:00",
+  "version": "0.1.12",
+  "timestamp": "2022-01-01 22:59:04+00:00",
   "type": "struct",
   "name": "SearchOptions",
   "namespace": "com.sun.star.util",
@@ -10,42 +10,45 @@
   },
   "writer_args": {
     "sort": true,
-    "auto_import": true,
-    "dynamic_struct": false
+    "dynamic_struct": false,
+    "include_desc": true
   },
   "data": {
     "name": "SearchOptions",
     "namespace": "com.sun.star.util",
     "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1util_1_1SearchOptions.html",
-    "quote": [
-      "Locale"
-    ],
-    "typings": [],
-    "fullname": "com.sun.star.util.SearchOptions",
-    "desc": [],
-    "extends": [],
-    "imports": [],
-    "auto_imports": [
+    "from_imports": [],
+    "from_imports_typing": [
       [
         "..lang.locale",
         "Locale"
+      ],
+      [
+        ".search_algorithms",
+        "SearchAlgorithms"
       ]
     ],
-    "from_imports": [],
+    "quote": [
+      "Locale",
+      "SearchAlgorithms"
+    ],
+    "typings": [],
     "requires_typing": true,
+    "fullname": "com.sun.star.util.SearchOptions",
+    "desc": [],
+    "imports": [],
+    "extends": [],
     "items": [
       {
         "name": "Locale",
         "type": "Locale",
-        "orig_type": ".com.sun.star.lang.Locale",
         "lines": [
           "The locale for case insensitive search."
         ]
       },
       {
         "name": "algorithmType",
-        "type": "object",
-        "orig_type": "SearchAlgorithms",
+        "type": "SearchAlgorithms",
         "lines": [
           "search type"
         ]
@@ -53,32 +56,28 @@
       {
         "name": "changedChars",
         "type": "int",
-        "orig_type": "long",
         "lines": [
-          "This many characters can be different (as a replacement) between the found word and the search pattern in a \"Weighted Levenshtein",
-          "Distance\" search."
+          "This many characters can be different (as a replacement) between the found word and the search pattern in a \\\"Weighted Levenshtein",
+          "Distance\\\" search."
         ]
       },
       {
         "name": "deletedChars",
         "type": "int",
-        "orig_type": "long",
         "lines": [
-          "This many characters can be missing in the found word in a \"Weighted Levenshtein Distance\" search."
+          "This many characters can be missing in the found word in a \\\"Weighted Levenshtein Distance\\\" search."
         ]
       },
       {
         "name": "insertedChars",
         "type": "int",
-        "orig_type": "long",
         "lines": [
-          "This many characters can be additional in the found word in a \"Weighted Levenshtein Distance\" search."
+          "This many characters can be additional in the found word in a \\\"Weighted Levenshtein Distance\\\" search."
         ]
       },
       {
         "name": "replaceString",
         "type": "str",
-        "orig_type": "string",
         "lines": [
           "The replacement text (is for optional replacing - SearchOption is only the data container for it)"
         ]
@@ -86,7 +85,6 @@
       {
         "name": "searchFlag",
         "type": "int",
-        "orig_type": "long",
         "lines": [
           "some flags - can be mixed"
         ]
@@ -94,7 +92,6 @@
       {
         "name": "searchString",
         "type": "str",
-        "orig_type": "string",
         "lines": [
           "The text or pattern to be searched."
         ]
@@ -102,9 +99,9 @@
       {
         "name": "transliterateFlags",
         "type": "int",
-        "orig_type": "long",
         "lines": [
           "Flags for the transliteration.",
+          "",
           "Same meaning as the enum of com.sun.star.i18n.TransliterationModules"
         ]
       }

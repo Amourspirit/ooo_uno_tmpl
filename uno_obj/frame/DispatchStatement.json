@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.10",
-  "timestamp": "2022-01-01 17:10:44+00:00",
+  "version": "0.1.12",
+  "timestamp": "2022-01-01 22:58:59+00:00",
   "type": "struct",
   "name": "DispatchStatement",
   "namespace": "com.sun.star.frame",
@@ -10,69 +10,55 @@
   },
   "writer_args": {
     "sort": true,
-    "auto_import": true,
-    "dynamic_struct": false
+    "dynamic_struct": false,
+    "include_desc": true
   },
   "data": {
     "name": "DispatchStatement",
     "namespace": "com.sun.star.frame",
     "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1frame_1_1DispatchStatement.html",
-    "quote": [
-      "typing.List[PropertyValue]"
-    ],
-    "typings": [
-      "typing.List[PropertyValue]"
-    ],
-    "fullname": "com.sun.star.frame.DispatchStatement",
-    "desc": [
-      "represents a dispatch statement from a recorded macro",
-      "",
-      "**Since**",
-      "",
-      "    OOo 1.1.2"
-    ],
-    "extends": [],
-    "imports": [],
-    "auto_imports": [
+    "from_imports": [],
+    "from_imports_typing": [
       [
         "..beans.property_value",
         "PropertyValue"
       ]
     ],
-    "from_imports": [],
+    "quote": [],
+    "typings": [],
     "requires_typing": true,
+    "fullname": "com.sun.star.frame.DispatchStatement",
+    "desc": [
+      "represents a dispatch statement from a recorded macro",
+      "",
+      "**since**",
+      "",
+      "    OOo 1.1.2"
+    ],
+    "imports": [],
+    "extends": [],
     "items": [
-      {
-        "name": "aArgs",
-        "type": "typing.List[PropertyValue]",
-        "orig_type": "sequence< com.sun.star.beans.PropertyValue >",
-        "lines": [
-          "specifies the dispatch command arguments",
-          "That means the Arguments parameter of a corresponding XDispatch.dispatch() request."
-        ]
-      },
       {
         "name": "aCommand",
         "type": "str",
-        "orig_type": "string",
         "lines": [
           "specifies the dispatch command",
+          "",
           "That means the URL parameter of a corresponding XDispatchProvider.queryDispatch() request."
         ]
       },
       {
         "name": "aTarget",
         "type": "str",
-        "orig_type": "string",
         "lines": [
           "specifies the frame target",
+          "",
           "That means the TargetFrameName parameter of a corresponding XDispatchProvider.queryDispatch() request."
         ]
       },
       {
         "name": "bIsComment",
         "type": "bool",
-        "orig_type": "boolean",
         "lines": [
           "specifies if this statement should be recorded as commented out or not"
         ]
@@ -80,10 +66,19 @@
       {
         "name": "nFlags",
         "type": "int",
-        "orig_type": "long",
         "lines": [
           "specifies the optional search flags",
+          "",
           "That means the SearchFlags parameter of a corresponding XDispatchProvider.queryDispatch() request."
+        ]
+      },
+      {
+        "name": "aArgs",
+        "type": "typing.List[PropertyValue]",
+        "lines": [
+          "specifies the dispatch command arguments",
+          "",
+          "That means the Arguments parameter of a corresponding XDispatch.dispatch() request."
         ]
       }
     ]

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.10",
-  "timestamp": "2022-01-01 17:10:42+00:00",
+  "version": "0.1.12",
+  "timestamp": "2022-01-01 22:58:58+00:00",
   "type": "struct",
   "name": "DDELinkInfo",
   "namespace": "com.sun.star.sheet",
@@ -10,55 +10,41 @@
   },
   "writer_args": {
     "sort": true,
-    "auto_import": true,
-    "dynamic_struct": false
+    "dynamic_struct": false,
+    "include_desc": true
   },
   "data": {
     "name": "DDELinkInfo",
     "namespace": "com.sun.star.sheet",
     "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1sheet_1_1DDELinkInfo.html",
-    "quote": [
-      "typing.List[DDEItemInfo]"
+    "from_imports": [],
+    "from_imports_typing": [
+      [
+        ".dde_item_info",
+        "DDEItemInfo"
+      ]
     ],
-    "typings": [
-      "typing.List[DDEItemInfo]"
-    ],
+    "quote": [],
+    "typings": [],
+    "requires_typing": true,
     "fullname": "com.sun.star.sheet.DDELinkInfo",
     "desc": [
       "describes all items of a DDE connection used in formulas.",
       "",
       "A DDE connection consists of the DDE service name, the DDE topic and a list of DDE items which may contain results cached from the last update.",
       "",
-      "The formula that would need this information for example would contain =[1]!'R1C1' or =[2]!'Sheet1.A1' where [1] is an external link with DDE service name \"excel\" and the topic \"X:\\PATH\\[FILE.XLSX]Sheet1\", and [2] contains service \"soffice\" and topic \"file:///X:/PATH/FILE.ODS\". The service name is stored in DDELinkInfo.Service, the topic is stored in DDELinkInfo.Topic. Note that if the DDE item contains single quotes they are escaped by doubling them, as usual, for example =[2]!'''Sheet name''.A1' in a \"soffice\" service.",
+      "The formula that would need this information for example would contain =[1]!'R1C1' or =[2]!'Sheet1.A1' where [1] is an external link with DDE service name \\\"excel\\\" and the topic \\\"X:\\PATH\\[FILE.XLSX]Sheet1\\\", and [2] contains service \\\"soffice\\\" and topic \\\"file:///X:/PATH/FILE.ODS\\\". The service name is stored in DDELinkInfo.Service, the topic is stored in DDELinkInfo.Topic. Note that if the DDE item contains single quotes they are escaped by doubling them, as usual, for example =[2]!'''Sheet name''.A1' in a \\\"soffice\\\" service.",
       "",
-      "**Since**",
+      "**since**",
       "",
       "    OOo 3.1"
     ],
-    "extends": [],
     "imports": [],
-    "auto_imports": [
-      [
-        ".dde_item_info",
-        "DDEItemInfo"
-      ]
-    ],
-    "from_imports": [],
-    "requires_typing": true,
+    "extends": [],
     "items": [
-      {
-        "name": "Items",
-        "type": "typing.List[DDEItemInfo]",
-        "orig_type": "sequence< DDEItemInfo >",
-        "lines": [
-          "A list of DDE items.",
-          "Each item may contain its results from the last update."
-        ]
-      },
       {
         "name": "Service",
         "type": "str",
-        "orig_type": "string",
         "lines": [
           "The DDE service name."
         ]
@@ -66,9 +52,17 @@
       {
         "name": "Topic",
         "type": "str",
-        "orig_type": "string",
         "lines": [
           "The DDE topic."
+        ]
+      },
+      {
+        "name": "Items",
+        "type": "typing.List[DDEItemInfo]",
+        "lines": [
+          "A list of DDE items.",
+          "",
+          "Each item may contain its results from the last update."
         ]
       }
     ]

@@ -1,40 +1,39 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.10",
-  "timestamp": "2022-01-01 17:10:50+00:00",
+  "version": "0.1.12",
+  "timestamp": "2022-01-01 22:59:06+00:00",
   "type": "struct",
-  "name": "Defaulted",
+  "name": "Defaulted< T >",
   "namespace": "com.sun.star.beans",
   "parser_args": {
     "sort": true
   },
   "writer_args": {
     "sort": true,
-    "auto_import": true,
-    "dynamic_struct": false
+    "dynamic_struct": false,
+    "include_desc": true
   },
   "data": {
-    "name": "Defaulted",
+    "name": "Defaulted< T >",
     "namespace": "com.sun.star.beans",
     "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1beans_1_1Defaulted_3_01T_01_4.html",
+    "from_imports": [],
+    "from_imports_typing": [],
     "quote": [],
     "typings": [],
-    "fullname": "com.sun.star.beans.Defaulted",
+    "requires_typing": false,
+    "fullname": "com.sun.star.beans.Defaulted< T >",
     "desc": [
       "A value of a given type that can be defaulted.",
       "",
       "This structure is used as the type of interface attributes corresponding to instances of com.sun.star.beans.Property that have the com.sun.star.beans.PropertyAttribute.MAYBEDEFAULT."
     ],
-    "extends": [],
     "imports": [],
-    "auto_imports": [],
-    "from_imports": [],
-    "requires_typing": false,
+    "extends": [],
     "items": [
       {
         "name": "IsDefaulted",
         "type": "bool",
-        "orig_type": "boolean",
         "lines": [
           "Marks this structure instance as defaulted."
         ]
@@ -42,9 +41,9 @@
       {
         "name": "Value",
         "type": "object",
-        "orig_type": "T",
         "lines": [
           "The underlying value of this structure instance.",
+          "",
           "Even if this structure instance is defaulted, this member should contain a useful value. If there is no useful value for a defaulted structure instance, com.sun.star.beans.Optional can be used as the type of this member."
         ]
       }

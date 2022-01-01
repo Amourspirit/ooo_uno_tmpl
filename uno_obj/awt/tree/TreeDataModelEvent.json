@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.10",
-  "timestamp": "2022-01-01 17:10:47+00:00",
+  "version": "0.1.12",
+  "timestamp": "2022-01-01 22:59:00+00:00",
   "type": "struct",
   "name": "TreeDataModelEvent",
   "namespace": "com.sun.star.awt.tree",
@@ -10,59 +10,61 @@
   },
   "writer_args": {
     "sort": true,
-    "auto_import": true,
-    "dynamic_struct": false
+    "dynamic_struct": false,
+    "include_desc": true
   },
   "data": {
     "name": "TreeDataModelEvent",
     "namespace": "com.sun.star.awt.tree",
     "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1awt_1_1tree_1_1TreeDataModelEvent.html",
-    "quote": [
-      "typing.List[XTreeNode]"
-    ],
-    "typings": [
-      "typing.List[XTreeNode]"
-    ],
-    "fullname": "com.sun.star.awt.tree.TreeDataModelEvent",
-    "desc": [
-      "An event used by a XTreeDataModel to notify changes in the data model to the XTreeControl.",
-      "",
-      "You usually need to fill this event only if you implement the XTreeDataModel yourself."
-    ],
-    "extends": [
-      "com.sun.star.lang.EventObject"
-    ],
-    "imports": [],
-    "auto_imports": [
-      [
-        ".x_tree_node",
-        "XTreeNode"
-      ]
-    ],
     "from_imports": [
       [
         "...lang.event_object",
         "EventObject"
       ]
     ],
+    "from_imports_typing": [
+      [
+        ".x_tree_node",
+        "XTreeNode"
+      ],
+      [
+        ".x_tree_node",
+        "XTreeNode"
+      ]
+    ],
+    "quote": [
+      "XTreeNode"
+    ],
+    "typings": [],
     "requires_typing": true,
+    "fullname": "com.sun.star.awt.tree.TreeDataModelEvent",
+    "desc": [
+      "An event used by a XTreeDataModel to notify changes in the data model to the XTreeControl.",
+      "",
+      "You usually need to fill this event only if you implement the XTreeDataModel yourself."
+    ],
+    "imports": [],
+    "extends": [
+      "com.sun.star.lang.EventObject"
+    ],
     "items": [
       {
-        "name": "Nodes",
-        "type": "typing.List[XTreeNode]",
-        "orig_type": "sequence< XTreeNode >",
+        "name": "ParentNode",
+        "type": "XTreeNode",
         "lines": [
-          "contains the changed, added or removed nodes.",
-          "All nodes must have ParentNode as parent."
+          "holds the parent node for changed, added or removed nodes.",
+          "",
+          "If this is null, Nodes must contain only the root node"
         ]
       },
       {
-        "name": "ParentNode",
-        "type": "object",
-        "orig_type": "XTreeNode",
+        "name": "Nodes",
+        "type": "typing.List[XTreeNode]",
         "lines": [
-          "holds the parent node for changed, added or removed nodes.",
-          "If this is null, Nodes must contain only the root node"
+          "contains the changed, added or removed nodes.",
+          "",
+          "All nodes must have ParentNode as parent."
         ]
       }
     ]

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.10",
-  "timestamp": "2022-01-01 17:10:50+00:00",
+  "version": "0.1.12",
+  "timestamp": "2022-01-01 22:59:06+00:00",
   "type": "struct",
   "name": "PropertyStateChangeEvent",
   "namespace": "com.sun.star.beans",
@@ -10,20 +10,33 @@
   },
   "writer_args": {
     "sort": true,
-    "auto_import": true,
-    "dynamic_struct": false
+    "dynamic_struct": false,
+    "include_desc": true
   },
   "data": {
     "name": "PropertyStateChangeEvent",
     "namespace": "com.sun.star.beans",
     "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1beans_1_1PropertyStateChangeEvent.html",
+    "from_imports": [
+      [
+        "..lang.event_object",
+        "EventObject"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".property_state",
+        "PropertyState"
+      ]
+    ],
     "quote": [
       "PropertyState"
     ],
     "typings": [],
+    "requires_typing": true,
     "fullname": "com.sun.star.beans.PropertyStateChangeEvent",
     "desc": [
-      "is delivered whenever the state of a \"bound\" property is changed.",
+      "is delivered whenever the state of a \\\"bound\\\" property is changed.",
       "",
       "It is sent as an argument to the method of XPropertyStateChangeListener.",
       "",
@@ -31,28 +44,14 @@
       "",
       "Void values may be provided for the old and new values if their true values are not known."
     ],
+    "imports": [],
     "extends": [
       "com.sun.star.lang.EventObject"
     ],
-    "imports": [],
-    "auto_imports": [
-      [
-        ".property_state",
-        "PropertyState"
-      ]
-    ],
-    "from_imports": [
-      [
-        "..lang.event_object",
-        "EventObject"
-      ]
-    ],
-    "requires_typing": true,
     "items": [
       {
         "name": "NewValue",
         "type": "PropertyState",
-        "orig_type": "com.sun.star.beans.PropertyState",
         "lines": [
           "contains the new value of the property."
         ]
@@ -60,7 +59,6 @@
       {
         "name": "OldValue",
         "type": "PropertyState",
-        "orig_type": "com.sun.star.beans.PropertyState",
         "lines": [
           "contains the old value of the property."
         ]
@@ -68,18 +66,18 @@
       {
         "name": "PropertyHandle",
         "type": "int",
-        "orig_type": "long",
         "lines": [
           "contains the implementation handle for the property.",
+          "",
           "It may be -1 if the implementation has no handle. You can use this handle to get values from the XFastPropertySet interface."
         ]
       },
       {
         "name": "PropertyName",
         "type": "str",
-        "orig_type": "string",
         "lines": [
           "specifies the name of the property which changes its value.",
+          "",
           "This name identifies the property uniquely within an XPropertySet. Upper and lower case are distinguished."
         ]
       }

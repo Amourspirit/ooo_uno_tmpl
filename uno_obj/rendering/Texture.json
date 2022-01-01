@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.10",
-  "timestamp": "2022-01-01 17:10:46+00:00",
+  "version": "0.1.12",
+  "timestamp": "2022-01-01 22:58:55+00:00",
   "type": "struct",
   "name": "Texture",
   "namespace": "com.sun.star.rendering",
@@ -10,17 +10,40 @@
   },
   "writer_args": {
     "sort": true,
-    "auto_import": true,
-    "dynamic_struct": false
+    "dynamic_struct": false,
+    "include_desc": true
   },
   "data": {
     "name": "Texture",
     "namespace": "com.sun.star.rendering",
     "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1rendering_1_1Texture.html",
+    "from_imports": [],
+    "from_imports_typing": [
+      [
+        ".stroke_attributes",
+        "StrokeAttributes"
+      ],
+      [
+        ".x_bitmap",
+        "XBitmap"
+      ],
+      [
+        "..geometry.affine_matrix2_d",
+        "AffineMatrix2D"
+      ],
+      [
+        ".x_parametric_poly_polygon2_d",
+        "XParametricPolyPolygon2D"
+      ]
+    ],
     "quote": [
-      "AffineMatrix2D"
+      "StrokeAttributes",
+      "XParametricPolyPolygon2D",
+      "AffineMatrix2D",
+      "XBitmap"
     ],
     "typings": [],
+    "requires_typing": true,
     "fullname": "com.sun.star.rendering.Texture",
     "desc": [
       "Contains all information needed to define a texture.",
@@ -29,100 +52,93 @@
       "",
       "To achieve uniformity, if this texture has a bitmap set, it is scaled in such a way that it will cover the same [0,1]x[0,1] box as the hatch and the gradient. The transformation member can then be used to scale the complete texture as it fits suit.",
       "",
-      "**Since**",
+      "**since**",
       "",
       "    OOo 2.0"
     ],
-    "extends": [],
     "imports": [],
-    "auto_imports": [
-      [
-        "..geometry.affine_matrix2_d",
-        "AffineMatrix2D"
-      ]
-    ],
-    "from_imports": [],
-    "requires_typing": true,
+    "extends": [],
     "items": [
       {
         "name": "AffineTransform",
         "type": "AffineMatrix2D",
-        "orig_type": ".com.sun.star.geometry.AffineMatrix2D",
         "lines": [
           "Texture transformation from texture to primitive space.",
+          "",
           "This member allows arbitrary transformations of the texture, relative to the textured primitive. Thus, the total transformation from the [0,1]x[0,1] texture space to the device coordinate space is the concatenation of texture, render state, and view state transformation (with only render state and view state transformation being applied to the textured primitive)."
         ]
       },
       {
         "name": "Alpha",
         "type": "float",
-        "orig_type": "double",
         "lines": [
           "Overall transparency of the texturing.",
+          "",
           "The valid range for this value is [0,1], where 0 denotes complete transparency, and 1 denotes fully opaque."
         ]
       },
       {
         "name": "Bitmap",
-        "type": "object",
-        "orig_type": "XBitmap",
+        "type": "XBitmap",
         "lines": [
           "Texture bitmap.",
+          "",
           "This member can be used together with gradient and hatching.",
+          "",
           "The bitmap is scaled to a one-by-one rectangle, to cover the same area as both the gradient and the hatching."
         ]
       },
       {
         "name": "Gradient",
-        "type": "object",
-        "orig_type": "XParametricPolyPolygon2D",
+        "type": "XParametricPolyPolygon2D",
         "lines": [
           "Texture gradient.",
+          "",
           "This member can be used together with bitmap and hatching. The parametric polygons color value is used to fill the returned polygonal outlines."
         ]
       },
       {
         "name": "HatchAttributes",
-        "type": "object",
-        "orig_type": "StrokeAttributes",
+        "type": "StrokeAttributes",
         "lines": [
           "Specifies the stroke attributes used for hatching.",
+          "",
           "Use 0.0 as the strokeWidth here to indicate hair lines."
         ]
       },
       {
         "name": "Hatching",
-        "type": "object",
-        "orig_type": "XParametricPolyPolygon2D",
+        "type": "XParametricPolyPolygon2D",
         "lines": [
           "Texture hatching.",
+          "",
           "This member can be used together with bitmap and gradient. The parametric polygons color value is used to stroke the returned polygonal outlines."
         ]
       },
       {
         "name": "NumberOfHatchPolygons",
         "type": "int",
-        "orig_type": "long",
         "lines": [
           "Specifies the number of parameterized polygons used for the texture.",
+          "",
           "This member specifies the number of polygons the parametric polygon interface is queried. The continuous range [0,1] of the XParametricPolyPolygon.getOutline() method is divided up into numberOfHatchPolygons equal parts, and for everyone of these parts, the start of the interval is plugged into the getOutline method. For example, if numberOfHatchPolygons is 2, then getOutline is called twice, once with 0.0 and once with 0.5. Use this parameter to control the density of the hatching."
         ]
       },
       {
         "name": "RepeatModeX",
         "type": "int",
-        "orig_type": "byte",
         "lines": [
           "Repeat mode of the texture, x direction.",
+          "",
           "The repeat mode is separated into x and y direction, this is the x direction part. Permissible values are from the TexturingMode constants."
         ]
       },
       {
         "name": "RepeatModeY",
         "type": "int",
-        "orig_type": "byte",
         "lines": [
           "Repeat mode of the texture, y direction.",
+          "",
           "The repeat mode is separated into x and y direction, this is the y direction part. Permissible values are from the TexturingMode constants."
         ]
       }

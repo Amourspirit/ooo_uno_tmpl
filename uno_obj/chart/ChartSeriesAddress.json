@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.10",
-  "timestamp": "2022-01-01 17:10:43+00:00",
+  "version": "0.1.12",
+  "timestamp": "2022-01-01 22:59:03+00:00",
   "type": "struct",
   "name": "ChartSeriesAddress",
   "namespace": "com.sun.star.chart",
@@ -10,55 +10,50 @@
   },
   "writer_args": {
     "sort": true,
-    "auto_import": true,
-    "dynamic_struct": false
+    "dynamic_struct": false,
+    "include_desc": true
   },
   "data": {
     "name": "ChartSeriesAddress",
     "namespace": "com.sun.star.chart",
     "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1chart_1_1ChartSeriesAddress.html",
-    "quote": [
-      "typing.List[str]"
-    ],
-    "typings": [
-      "typing.List[str]"
-    ],
+    "from_imports": [],
+    "from_imports_typing": [],
+    "quote": [],
+    "typings": [],
+    "requires_typing": true,
     "fullname": "com.sun.star.chart.ChartSeriesAddress",
     "desc": [
       "This structure describes a single data row, specified by its name and a sequence of data points.",
       "",
       "The cell addresses are in the format of the application that contains this chart."
     ],
-    "extends": [],
     "imports": [],
-    "auto_imports": [],
-    "from_imports": [],
-    "requires_typing": true,
+    "extends": [],
     "items": [
       {
         "name": "DataRangeAddress",
         "type": "str",
-        "orig_type": "string",
         "lines": [
           "contains the cell range address of the data for this series."
         ]
       },
       {
-        "name": "DomainRangeAddresses",
-        "type": "typing.List[str]",
-        "orig_type": "sequence< string >",
+        "name": "LabelAddress",
+        "type": "str",
         "lines": [
-          "contains cell addresses for each domain of this series.",
-          "For XY (scatter) diagrams at least one series has a domain. Most of the other chart types use an empty sequence here."
+          "contains the cell address of label (i.e.",
+          "",
+          "name) of this series."
         ]
       },
       {
-        "name": "LabelAddress",
-        "type": "str",
-        "orig_type": "string",
+        "name": "DomainRangeAddresses",
+        "type": "typing.List[str]",
         "lines": [
-          "contains the cell address of label (i.e.",
-          "name) of this series."
+          "contains cell addresses for each domain of this series.",
+          "",
+          "For XY (scatter) diagrams at least one series has a domain. Most of the other chart types use an empty sequence here."
         ]
       }
     ]

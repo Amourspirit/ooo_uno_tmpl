@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.10",
-  "timestamp": "2022-01-01 17:10:49+00:00",
+  "version": "0.1.12",
+  "timestamp": "2022-01-01 22:59:05+00:00",
   "type": "struct",
   "name": "GluePoint2",
   "namespace": "com.sun.star.drawing",
@@ -10,57 +10,56 @@
   },
   "writer_args": {
     "sort": true,
-    "auto_import": true,
-    "dynamic_struct": false
+    "dynamic_struct": false,
+    "include_desc": true
   },
   "data": {
     "name": "GluePoint2",
     "namespace": "com.sun.star.drawing",
     "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1drawing_1_1GluePoint2.html",
+    "from_imports": [],
+    "from_imports_typing": [
+      [
+        ".alignment",
+        "Alignment"
+      ],
+      [
+        ".escape_direction",
+        "EscapeDirection"
+      ],
+      [
+        "..awt.point",
+        "Point"
+      ]
+    ],
     "quote": [
-      "Alignment",
+      "EscapeDirection",
       "Point",
-      "EscapeDirection"
+      "Alignment"
     ],
     "typings": [],
+    "requires_typing": true,
     "fullname": "com.sun.star.drawing.GluePoint2",
     "desc": [
       "This struct defines the attributes of a glue point.",
       "",
       "A glue point is a position inside a drawing shape where an edge of a connector shape can be connected."
     ],
-    "extends": [],
     "imports": [],
-    "auto_imports": [
-      [
-        ".alignment",
-        "Alignment"
-      ],
-      [
-        "..awt.point",
-        "Point"
-      ],
-      [
-        ".escape_direction",
-        "EscapeDirection"
-      ]
-    ],
-    "from_imports": [],
-    "requires_typing": true,
+    "extends": [],
     "items": [
       {
         "name": "Escape",
         "type": "EscapeDirection",
-        "orig_type": "com.sun.star.drawing.EscapeDirection",
         "lines": [
           "this member specifies the escape direction for a glue point.",
+          "",
           "The escape direction is the direction the connecting line escapes the shape."
         ]
       },
       {
         "name": "IsRelative",
         "type": "bool",
-        "orig_type": "boolean",
         "lines": [
           "if this flag is set to true, the position of this glue point is given in 1/100% values instead of 1/100cm."
         ]
@@ -68,27 +67,27 @@
       {
         "name": "IsUserDefined",
         "type": "bool",
-        "orig_type": "boolean",
         "lines": [
           "if this flag is set to false, this is a default glue point.",
+          "",
           "Some shapes may have default glue points attached to them which cannot be altered or removed."
         ]
       },
       {
         "name": "Position",
         "type": "Point",
-        "orig_type": "com.sun.star.awt.Point",
         "lines": [
           "This is the position of this glue point.",
+          "",
           "Depending on the flag IsRelative, this is either in 1/100cm or in 1/100%."
         ]
       },
       {
         "name": "PositionAlignment",
         "type": "Alignment",
-        "orig_type": "com.sun.star.drawing.Alignment",
         "lines": [
           "if this glue points position is not relative, this enum specifies the vertical and horizontal alignment of this point.",
+          "",
           "The alignment specifies how the glue point is moved if the shape is resized."
         ]
       }

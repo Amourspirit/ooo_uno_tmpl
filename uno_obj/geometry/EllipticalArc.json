@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.10",
-  "timestamp": "2022-01-01 17:10:45+00:00",
+  "version": "0.1.12",
+  "timestamp": "2022-01-01 22:59:01+00:00",
   "type": "struct",
   "name": "EllipticalArc",
   "namespace": "com.sun.star.geometry",
@@ -10,15 +10,25 @@
   },
   "writer_args": {
     "sort": true,
-    "auto_import": true,
-    "dynamic_struct": false
+    "dynamic_struct": false,
+    "include_desc": true
   },
   "data": {
     "name": "EllipticalArc",
     "namespace": "com.sun.star.geometry",
     "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1geometry_1_1EllipticalArc.html",
-    "quote": [],
+    "from_imports": [],
+    "from_imports_typing": [
+      [
+        ".real_point2_d",
+        "RealPoint2D"
+      ]
+    ],
+    "quote": [
+      "RealPoint2D"
+    ],
     "typings": [],
+    "requires_typing": true,
     "fullname": "com.sun.star.geometry.EllipticalArc",
     "desc": [
       "This structure specifies an arbitrary elliptical arc.",
@@ -27,20 +37,16 @@
       "",
       "As with the parameters below, there are mostly four different ellipses arcs (two different ellipses, on which four different arcs connect start and end point) which satisfy the given set of constrains. Thus, there are two flags indicating which one of those ellipses should be taken.",
       "",
-      "**Since**",
+      "**since**",
       "",
       "    OOo 2.0"
     ],
-    "extends": [],
     "imports": [],
-    "auto_imports": [],
-    "from_imports": [],
-    "requires_typing": false,
+    "extends": [],
     "items": [
       {
         "name": "EndPosition",
-        "type": "object",
-        "orig_type": "RealPoint2D",
+        "type": "RealPoint2D",
         "lines": [
           "End point of the arc."
         ]
@@ -48,7 +54,6 @@
       {
         "name": "IsClockwiseSweep",
         "type": "bool",
-        "orig_type": "boolean",
         "lines": [
           "If TRUE, and there's a choice, take the arc that goes clock-wise from start to end point."
         ]
@@ -56,7 +61,6 @@
       {
         "name": "IsLargeArc",
         "type": "bool",
-        "orig_type": "boolean",
         "lines": [
           "If TRUE, and there's a choice, take the longer one of two arcs connecting start and end point."
         ]
@@ -64,7 +68,6 @@
       {
         "name": "RadiusX",
         "type": "float",
-        "orig_type": "double",
         "lines": [
           "Main radius in x direction of the ellipse this arc is part of."
         ]
@@ -72,15 +75,13 @@
       {
         "name": "RadiusY",
         "type": "float",
-        "orig_type": "double",
         "lines": [
           "Main radius in y direction of the ellipse this arc is part of."
         ]
       },
       {
         "name": "StartPosition",
-        "type": "object",
-        "orig_type": "RealPoint2D",
+        "type": "RealPoint2D",
         "lines": [
           "Start point of the arc."
         ]
@@ -88,7 +89,6 @@
       {
         "name": "XAxisRotation",
         "type": "float",
-        "orig_type": "double",
         "lines": [
           "Rotation angle of the x axis of the ellipse relative to the x axis of the reference coordinate system."
         ]
