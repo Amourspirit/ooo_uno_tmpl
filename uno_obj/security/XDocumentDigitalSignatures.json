@@ -1,14 +1,16 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.8",
-  "timestamp": "2021-12-27 22:15:11+00:00",
+  "version": "0.1.10",
+  "timestamp": "2022-01-01 16:42:55+00:00",
   "name": "XDocumentDigitalSignatures",
   "type": "interface",
   "namespace": "com.sun.star.security",
   "parser_args": {
     "sort": true
   },
-  "writer_args": {},
+  "writer_args": {
+    "include_desc": true
+  },
   "data": {
     "from_imports": [
       [
@@ -18,12 +20,28 @@
     ],
     "from_imports_typing": [
       [
-        ".certificate_kind",
-        "CertificateKind"
+        "..embed.x_storage",
+        "XStorage"
       ],
       [
         "..io.x_input_stream",
         "XInputStream"
+      ],
+      [
+        "..awt.x_window",
+        "XWindow"
+      ],
+      [
+        "..io.x_stream",
+        "XStream"
+      ],
+      [
+        ".certificate_kind",
+        "CertificateKind"
+      ],
+      [
+        "..beans.property_value",
+        "PropertyValue"
       ],
       [
         "..graphic.x_graphic",
@@ -34,42 +52,26 @@
         "DocumentSignatureInformation"
       ],
       [
-        "..awt.x_window",
-        "XWindow"
-      ],
-      [
         ".x_certificate",
         "XCertificate"
-      ],
-      [
-        "..embed.x_storage",
-        "XStorage"
-      ],
-      [
-        "..io.x_stream",
-        "XStream"
-      ],
-      [
-        "..beans.property_value",
-        "PropertyValue"
       ]
     ],
     "quote": [
-      "XGraphic",
+      "XCertificate",
       "typing.List[PropertyValue]",
-      "XInputStream",
-      "typing.List[XCertificate]",
+      "XStorage",
       "XWindow",
+      "CertificateKind",
       "XStream",
       "typing.List[DocumentSignatureInformation]",
-      "CertificateKind",
-      "XCertificate",
-      "XStorage"
+      "typing.List[XCertificate]",
+      "XInputStream",
+      "XGraphic"
     ],
     "typings": [
-      "typing.List[XCertificate]",
+      "typing.List[PropertyValue]",
       "typing.List[DocumentSignatureInformation]",
-      "typing.List[PropertyValue]"
+      "typing.List[XCertificate]"
     ],
     "requires_typing": true,
     "name": "XDocumentDigitalSignatures",

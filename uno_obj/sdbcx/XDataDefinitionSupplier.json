@@ -1,17 +1,28 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.8",
-  "timestamp": "2021-12-27 22:15:33+00:00",
+  "version": "0.1.10",
+  "timestamp": "2022-01-01 16:42:34+00:00",
   "name": "XDataDefinitionSupplier",
   "type": "interface",
   "namespace": "com.sun.star.sdbcx",
   "parser_args": {
     "sort": true
   },
-  "writer_args": {},
+  "writer_args": {
+    "include_desc": true
+  },
   "data": {
-    "from_imports": [],
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface"
+      ]
+    ],
     "from_imports_typing": [
+      [
+        "..sdbc.x_connection",
+        "XConnection"
+      ],
       [
         ".x_tables_supplier",
         "XTablesSupplier"
@@ -19,15 +30,11 @@
       [
         "..beans.property_value",
         "PropertyValue"
-      ],
-      [
-        "..sdbc.x_connection",
-        "XConnection"
       ]
     ],
     "quote": [
-      "XConnection",
       "typing.List[PropertyValue]",
+      "XConnection",
       "XTablesSupplier"
     ],
     "typings": [
@@ -37,7 +44,9 @@
     "name": "XDataDefinitionSupplier",
     "imports": [],
     "namespace": "com.sun.star.sdbcx",
-    "extends": [],
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
     "desc": [
       "provides the access to data definition beans from a connected database."
     ],

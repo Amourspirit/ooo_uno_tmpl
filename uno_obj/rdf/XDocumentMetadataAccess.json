@@ -1,14 +1,16 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.8",
-  "timestamp": "2021-12-27 22:15:23+00:00",
+  "version": "0.1.10",
+  "timestamp": "2022-01-01 16:42:48+00:00",
   "name": "XDocumentMetadataAccess",
   "type": "interface",
   "namespace": "com.sun.star.rdf",
   "parser_args": {
     "sort": true
   },
-  "writer_args": {},
+  "writer_args": {
+    "include_desc": true
+  },
   "data": {
     "from_imports": [
       [
@@ -22,6 +24,18 @@
     ],
     "from_imports_typing": [
       [
+        "..beans.string_pair",
+        "StringPair"
+      ],
+      [
+        "..embed.x_storage",
+        "XStorage"
+      ],
+      [
+        ".x_metadatable",
+        "XMetadatable"
+      ],
+      [
         "..io.x_input_stream",
         "XInputStream"
       ],
@@ -30,20 +44,8 @@
         "XInteractionHandler"
       ],
       [
-        ".x_metadatable",
-        "XMetadatable"
-      ],
-      [
         ".xuri",
         "XURI"
-      ],
-      [
-        "..embed.x_storage",
-        "XStorage"
-      ],
-      [
-        "..beans.string_pair",
-        "StringPair"
       ],
       [
         "..beans.property_value",
@@ -51,18 +53,18 @@
       ]
     ],
     "quote": [
-      "XStorage",
-      "typing.List[PropertyValue]",
-      "XInputStream",
-      "XMetadatable",
       "XInteractionHandler",
-      "XURI",
       "typing.List[XURI]",
-      "StringPair"
+      "typing.List[PropertyValue]",
+      "XStorage",
+      "StringPair",
+      "XURI",
+      "XMetadatable",
+      "XInputStream"
     ],
     "typings": [
-      "typing.List[XURI]",
-      "typing.List[PropertyValue]"
+      "typing.List[PropertyValue]",
+      "typing.List[XURI]"
     ],
     "requires_typing": true,
     "name": "XDocumentMetadataAccess",

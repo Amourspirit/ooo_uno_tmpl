@@ -1,14 +1,16 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.8",
-  "timestamp": "2021-12-27 22:15:13+00:00",
+  "version": "0.1.10",
+  "timestamp": "2022-01-01 16:43:09+00:00",
   "name": "XDocumentBuilder",
   "type": "interface",
   "namespace": "com.sun.star.xml.dom",
   "parser_args": {
     "sort": true
   },
-  "writer_args": {},
+  "writer_args": {
+    "include_desc": true
+  },
   "data": {
     "from_imports": [
       [
@@ -18,8 +20,16 @@
     ],
     "from_imports_typing": [
       [
+        "..sax.x_error_handler",
+        "XErrorHandler"
+      ],
+      [
         "...io.x_input_stream",
         "XInputStream"
+      ],
+      [
+        ".x_document",
+        "XDocument"
       ],
       [
         "..sax.x_entity_resolver",
@@ -28,22 +38,14 @@
       [
         ".xdom_implementation",
         "XDOMImplementation"
-      ],
-      [
-        "..sax.x_error_handler",
-        "XErrorHandler"
-      ],
-      [
-        ".x_document",
-        "XDocument"
       ]
     ],
     "quote": [
-      "XDocument",
+      "XErrorHandler",
+      "XEntityResolver",
       "XInputStream",
       "XDOMImplementation",
-      "XEntityResolver",
-      "XErrorHandler"
+      "XDocument"
     ],
     "typings": [],
     "requires_typing": true,

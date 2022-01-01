@@ -1,14 +1,16 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.8",
-  "timestamp": "2021-12-27 22:15:34+00:00",
+  "version": "0.1.10",
+  "timestamp": "2022-01-01 16:42:36+00:00",
   "name": "XChartTypeTemplate",
   "type": "interface",
   "namespace": "com.sun.star.chart2",
   "parser_args": {
     "sort": true
   },
-  "writer_args": {},
+  "writer_args": {
+    "include_desc": true
+  },
   "data": {
     "from_imports": [
       [
@@ -18,12 +20,12 @@
     ],
     "from_imports_typing": [
       [
-        ".x_data_interpreter",
-        "XDataInterpreter"
+        ".data.x_data_source",
+        "XDataSource"
       ],
       [
-        ".x_chart_type",
-        "XChartType"
+        ".x_data_interpreter",
+        "XDataInterpreter"
       ],
       [
         ".x_diagram",
@@ -34,30 +36,30 @@
         "XChartType"
       ],
       [
-        ".data.x_data_source",
-        "XDataSource"
-      ],
-      [
         ".x_data_series",
         "XDataSeries"
       ],
       [
         "..beans.property_value",
         "PropertyValue"
+      ],
+      [
+        ".x_chart_type",
+        "XChartType"
       ]
     ],
     "quote": [
-      "XChartType",
+      "XDataSeries",
+      "XDataSource",
       "XDiagram",
       "typing.List[PropertyValue]",
       "typing.List[XChartType]",
       "XDataInterpreter",
-      "XDataSeries",
-      "XDataSource"
+      "XChartType"
     ],
     "typings": [
-      "typing.List[XChartType]",
-      "typing.List[PropertyValue]"
+      "typing.List[PropertyValue]",
+      "typing.List[XChartType]"
     ],
     "requires_typing": true,
     "name": "XChartTypeTemplate",
