@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.10",
-  "timestamp": "2022-01-01 16:42:41+00:00",
+  "version": "0.1.12",
+  "timestamp": "2022-01-01 23:13:02+00:00",
   "name": "XEmbeddedObject",
   "type": "interface",
   "namespace": "com.sun.star.embed",
@@ -14,6 +14,10 @@
   "data": {
     "from_imports": [
       [
+        ".x_visual_object",
+        "XVisualObject"
+      ],
+      [
         ".x_state_change_broadcaster",
         "XStateChangeBroadcaster"
       ],
@@ -22,20 +26,16 @@
         "XEventBroadcaster"
       ],
       [
+        "..util.x_closeable",
+        "XCloseable"
+      ],
+      [
         ".x_component_supplier",
         "XComponentSupplier"
       ],
       [
-        ".x_visual_object",
-        "XVisualObject"
-      ],
-      [
         ".x_classified_object",
         "XClassifiedObject"
-      ],
-      [
-        "..util.x_closeable",
-        "XCloseable"
       ]
     ],
     "from_imports_typing": [
@@ -49,8 +49,8 @@
       ]
     ],
     "quote": [
-      "typing.List[int]",
       "XEmbeddedClient",
+      "typing.List[int]",
       "typing.List[VerbDescriptor]"
     ],
     "typings": [
@@ -150,7 +150,7 @@
         },
         {
           "name": "getStatus",
-          "returns": "object",
+          "returns": "int",
           "desc": [
             "retrieves the status of the object."
           ],
@@ -160,7 +160,7 @@
           "args": [
             [
               "nAspect",
-              "object",
+              "int",
               "in"
             ]
           ]
