@@ -42,17 +42,20 @@ from parser.type_mod import TypeRules, PythonType
 from config import AppConfig, read_config_default
 # endregion imports
 
+# region Logger
 logger: logging.Logger  = None
 
 def _set_loggers(l: Union[logging.Logger, None]):
     global logger
     logger = l
-    
+
+# endregion Logger
 
 # region CONST
 URL_SPLIT = '_1_1'
 """Default stirng for splitting url string into it parts"""
 # endregion CONST
+
 # region config
 APP_CONFIG: AppConfig = None
 def _load_config():
@@ -157,6 +160,15 @@ class SummaryInfo:
     """Type from page summary"""
     p_type: PythonType
     """Python Type obtaind usually from Util.get_python_type()"""
+    extra_data: object = None
+    """Extra data that can be set in rules or otherwise"""
+
+@dataclass
+class NameInfo:
+    name: str
+    "Name to use in code gen"
+    orig_name: str
+    """Origin name found from html"""
     extra_data: object = None
     """Extra data that can be set in rules or otherwise"""
 # endregion Data Classes
@@ -744,11 +756,12 @@ class BlockObj(ABC):
 class ApiName(BlockObj):
     """Get the Name object for the interface"""
 
-    def __init__(self, soup: SoupObj):
+    def __init__(self, soup: SoupObj, rules_engine: 'IRulesName' = None):
         super().__init__(soup)
         self._data = None
+        self._rules_engine = rules_engine
 
-    def get_obj(self) -> str:
+    def get_obj(self) -> NameInfo:
         if not self._data is None:
             return self._data
         soup = self.soup.soup
@@ -1337,10 +1350,10 @@ class RulesSummaryInfo(IRulesSummaryInfo):
     def register_rule(self, rule: type[IRuleSummaryInfo]) -> None:
 
         if not issubclass(rule, IRuleSummaryInfo):
-            msg = "TypeRules.register_rule(), rule arg must be child class of ITypeRule"
+            msg = f"{self.__class__.__name__}.register_rule(), rule arg must be child class of ITypeRule"
             raise TypeError(msg)
         if rule in self._rules:
-            msg = "TypeRules.register_rule() Rule is already registered"
+            msg = f"{self.__class__.__name__}.register_rule() Rule is already registered"
             self._log.warning(msg)
             return
         self._reg_rule(rule=rule)
@@ -1397,7 +1410,7 @@ class RulesSummaryInfo(IRulesSummaryInfo):
 
     def get_rule_instance(self, rule: IRuleSummaryInfo) -> IRuleSummaryInfo:
         if not issubclass(rule, IRuleSummaryInfo):
-            msg = "TypeRules.get_rule_instance(), rule arg must be child class of IRuleSummaryInfo"
+            msg = f"{self.__class__.__name__}.get_rule_instance(), rule arg must be child class of IRuleSummaryInfo"
             self._log.error(msg)
             raise TypeError(msg)
         key = str(id(rule))
@@ -1418,31 +1431,36 @@ class IRuleName(ABC):
         """Constructor"""
 
     @abstractmethod
-    def get_is_match(self, name: str) -> bool:
+    def get_is_match(self, ni: NameInfo) -> bool:
         """
         Gets if rule is a match
         
         Args:
-            name (str): name str
+            ni (NameInfo): name info
         """
 
     @abstractmethod
-    def get_name(self, name: str) -> str:
+    def process_name(self, ni: NameInfo) -> None:
         """
-        Gets new name upon rule match
+        Changes name info based upon rules match
 
         Args:
-            name (str): name str
+            ni (NameInfo): name info
         """
 
 
 class IRulesName(ABC):
     @abstractmethod
-    def get_name(self, name: str) -> str:
-        """Gets new name upon rule match"""
+    def process_name(self, ni: NameInfo) -> None:
+        """
+        Changes name info based upon rules match
+
+        Args:
+            ni (NameInfo): name info
+        """
 
     @abstractmethod
-    def get_rule_instance(self, rule: IRuleSummaryInfo) -> IRuleSummaryInfo:
+    def get_rule_instance(self, rule: IRuleName) -> IRuleName:
         """Gets a rule instance"""
 
 
@@ -1456,39 +1474,52 @@ class IRuleNameCleanClass(IRulesName):
         clean_name = Util.get_clean_classname(name)
         return name != clean_name
 
-    def get_name(self, name: str) -> str:
+    def process_name(self, ni: NameInfo) -> None:
         """
-        Gets new name upon rule match
+        Cleans ni.name to remove any non class name chars
 
         Args:
-            name (str): name str
+            ni (NameInfo): name info
         """
-        return Util.get_clean_classname(name)
+        ni.name = Util.get_clean_classname(ni.name)
+
 
 
 class RulesName(IRulesName):
+    """Manages rules for NameInfo"""
     def __init__(self) -> None:
         self._rules: List[type[IRuleName]] = []
         self._cache = {}
         self._register_known_rules()
 
     def register_rule(self, rule: type[IRuleName]) -> None:
+        """
+        Register rule
 
+        Args:
+            rule (type[IRuleName]): Rule to register
+
+        Raises:
+            TypeError: If rules is not inherited form IRuleName
+        """
         if not issubclass(rule, IRuleName):
-            msg = "TypeRules.register_rule(), rule arg must be child class of ITypeRule"
+            msg = f"{self.__class__.__name__}.register_rule(), rule arg must be child class of ITypeRule"
             raise TypeError(msg)
         if rule in self._rules:
-            msg = "TypeRules.register_rule() Rule is already registered"
+            msg = f"{self.__class__.__name__}.register_rule() Rule is already registered"
             self._log.warning(msg)
             return
         self._reg_rule(rule=rule)
 
     def unregister_rule(self,  rule: type[IRuleName]):
         """
-        Unregister a rule
+        [summary]
 
         Args:
-            rule (ITypeRule): Rule to unregister
+            rule (type[IRuleName]): Rule to unregister
+
+        Raises:
+            ValueError: If rule is not present
         """
         try:
             key = str(id(rule))
@@ -1505,7 +1536,7 @@ class RulesName(IRulesName):
     def _register_known_rules(self):
         pass
 
-    def _get_rule(self, name: str) -> Union[IRuleName, None]:
+    def _get_rule(self, ni: NameInfo) -> Union[IRuleName, None]:
 
         match_inst = None
         for rule in self._rules:
@@ -1515,21 +1546,20 @@ class RulesName(IRulesName):
             else:
                 inst: IRuleName = rule(self)
                 self._cache[key] = inst
-            if inst.get_is_match(name):
+            if inst.get_is_match(ni):
                 match_inst = inst
                 break
         return match_inst
 
-    def get_name(self, name: str) -> str:
-        match = self._get_rule(name)
+    def process_name(self, ni: NameInfo) -> None:
+        match = self._get_rule(ni)
         if match:
-            return match.get_name(name)
-        return name
+            match.process_name(ni)
 
 
     def get_rule_instance(self, rule: IRuleName) -> IRuleName:
         if not issubclass(rule, IRuleName):
-            msg = "RulesName.get_rule_instance(), rule arg must be child class of IRuleName"
+            msg = f"{self.__class__.__name__}.get_rule_instance(), rule arg must be child class of IRuleName"
             self._log.error(msg)
             raise TypeError(msg)
         key = str(id(rule))
