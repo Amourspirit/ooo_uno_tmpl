@@ -3,6 +3,7 @@
 """
 Process a link to a page that contains a structure
 """
+# region Imports
 import os
 import sys
 import logging
@@ -26,6 +27,9 @@ except ModuleNotFoundError:
     from parser.type_mod import PythonType
 from logger.log_handle import get_logger
 from parser import __version__, JSON_ID
+# endregion Imports
+
+# region Logger
 
 logger = None
 
@@ -35,9 +39,9 @@ def _set_loggers(l: Union[logging.Logger, None]):
     base.logger = l
 
 _set_loggers(None)
+# endregion Logger
 
-# dataitem = namedtuple(
-#     'dataitem', ['name', 'datatype', 'orig_type', 'lines'])
+# region Data Class
 @dataclass
 class DataItem:
     name: str
@@ -48,6 +52,8 @@ class DataItem:
 
     def __lt__(self, other: 'DataItem'):
         return self.name < other.name
+
+# endregion Data Class
 
 # region API
 
@@ -213,6 +219,8 @@ class ApiData(base.APIData):
         return self._type_summaries
     # endregion Properties
 # endregion API
+
+# region Parser
 
 class Parser(base.ParserBase):
     # region Constructor
@@ -410,7 +418,9 @@ class Parser(base.ParserBase):
         return self._api_data
     # endregion Properties
 
+# endregion Parser
 
+# region Writer
 class StructWriter(base.WriteBase):
 
     # region Constructor
@@ -737,6 +747,8 @@ class StructWriter(base.WriteBase):
             results.append(im)
         return results
 
+# endregion Writer
+
 # region Parse method
 
 
@@ -887,7 +899,8 @@ def parse(*args, **kwargs):
     )
     w.write()
 # endregion Parse method
-        
+
+# region Main
 def _main():
     # url = 'https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1beans_1_1Ambiguous_3_01T_01_4.html'
     # url = 'https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1beans_1_1GetPropertyTolerantResult.html'
@@ -1028,3 +1041,4 @@ def main():
     
 if __name__ == '__main__':
     _main()
+# endregion Main
