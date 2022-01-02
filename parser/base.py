@@ -169,7 +169,7 @@ class NameInfo:
     "Name to use in code gen"
     orig_name: str
     """Origin name found from html"""
-    extra_data: object = None
+    extra_data: Optional[object] = None
     """Extra data that can be set in rules or otherwise"""
 # endregion Data Classes
 

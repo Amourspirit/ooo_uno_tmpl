@@ -197,17 +197,16 @@ class ParserEx(base.ParserBase):
         ex = []
         for el in self._api_data.inherited.get_obj():
             ex.append(el.fullns)
+        ni = self._api_data.name.get_obj()
         result = {
-            'name': self._api_data.name.get_obj(),
+            'name': ni.name,
             'namespace': self._api_data.ns.namespace_str,
             'imports': [],
             'extends': ex,
             'desc': self._api_data.desc.get_obj(),
             "url": self._api_data.url_obj.url
         }
-        # if ni.name == 'Exception':
-        #     # make special exception for root exception:
-        #     result['extends'] = ['XInterface']
+
 
         logger.debug('ParserEx.get_info() name: %s', result['name'])
         logger.debug('ParserEx.get_info() namespace: %s',

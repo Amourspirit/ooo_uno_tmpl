@@ -587,10 +587,10 @@ class Parser(base.ParserBase):
         ex = []
         for el in self._api_data.inherited.get_obj():
             ex.append(el.fullns)
-
+        ni = self._api_data.name.get_obj()
         result = {
             # 'name': ni.name,
-            'name': self._api_data.name.get_obj(),
+            'name': ni.name,
             # convert set to list for json
             # 'imports': list(im.get_obj()),
             'imports': [],

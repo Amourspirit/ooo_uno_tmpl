@@ -398,8 +398,9 @@ class ParserService(base.ParserBase):
         desc = self._api_data.api_desc.get_obj()
         # prime data
         self._api_data.ns.get_obj()
+        ni = self._api_data.name.get_obj()
         result = {
-            'name': self._api_data.name.get_obj(),
+            'name': ni.name,
             'namespace': self._api_data.ns.namespace_str,
             'extends': self._get_extends(),
             'url': self._api_data.url_obj.url,

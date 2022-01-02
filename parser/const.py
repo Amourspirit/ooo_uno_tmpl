@@ -891,12 +891,12 @@ class Parser(base.ParserBase):
         try:
             if not self._url:
                 raise ValueError('URL is not set')
-            name = self._api_data.name.get_obj()
+            ni = self._api_data.name.get_obj()
             desc = self._api_data.desc.get_obj()
             ns = self._api_data.ns.namespace_str
-            full_name = ns + '.' + name
+            full_name = ns + '.' + ni.name
             info = {
-                "name": name,
+                "name": ni.name,
                 "fullname": full_name,
                 "desc": desc,
                 "url": self.url,
