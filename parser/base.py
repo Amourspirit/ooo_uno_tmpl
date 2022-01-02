@@ -124,9 +124,6 @@ class ImportInfo:
     requires_typing: bool = False
     imports: Set[str] = field(default_factory=set)
 
-# @dataclass
-# class PythonType(ImportInfo):
-#     type: str = ''
 
 
 @dataclass(frozen=True)
@@ -150,12 +147,18 @@ class Ns:
         return self.namespace + '.' + self.name
 
 
-@dataclass(frozen=True)
+@dataclass
 class SummaryInfo:
     id: str
+    """Summary Info ID obtained from web page"""
     name: str
+    """Name from page summary"""
     type: str
+    """Type from page summary"""
     p_type: PythonType
+    """Python Type obtaind usually from Util.get_python_type()"""
+    extra_data: object = None
+    """Extra data that can be set in rules or otherwise"""
 # endregion Data Classes
 
 # region Cache
@@ -879,11 +882,19 @@ class ApiSummaryRows(BlockObj):
 class ApiSummaries(BlockObj):
     """Gets summary information for a public member block"""
 
-    def __init__(self, block: ApiSummaryRows) -> None:
+    def __init__(self, block: ApiSummaryRows, rule_engine: 'IRulesSummaryInfo' = None) -> None:
+        """
+        [summary]
+
+        Args:
+            block (ApiSummaryRows): Block of html that contains summary rows.
+            rule_engine (IRulesSummaryInfo, optional): Rules engine to process each found Summary Info. Defaults to None.
+        """
         self._block: ApiSummaryRows = block
         super().__init__(self._block.soup)
         self._requires_typing = False
         self._imports: Set[str] = set()
+        self._rule_engine = rule_engine
         self._data = None
     
     def _get_type_from_inner_link(self, mem_item_left: Tag, name:str) -> Union[str, None]:
@@ -902,6 +913,15 @@ class ApiSummaries(BlockObj):
         return s
 
     def get_obj(self) -> List[SummaryInfo]:
+        """
+        Get list of Summary Info from html page.
+
+        Returns:
+            List[SummaryInfo]: summary info.
+
+        Note:
+            If a rules engine is present then each summary info will have any relevant rules applied.
+        """
         if not self._data is None:
             return self._data
         self._data = []
@@ -945,6 +965,10 @@ class ApiSummaries(BlockObj):
             im = p_type.get_all_imports()
             self._imports.update(im)
             self._data.append(si)
+
+        if self._rule_engine:
+            for si in self._rule_engine:
+                self._rule_engine.process_summary_info(si)
         return self._data
 
     @property
