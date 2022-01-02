@@ -223,11 +223,11 @@ class ITypeRules(ABC):
 
 class TypeRules(ITypeRules):
     def __init__(self) -> None:
-        self._rules: List[ITypeRule] = []
+        self._rules: List[type[ITypeRule]] = []
         self._cache = {}
         self._register_known_rules()
     
-    def register_rule(self, rule: ITypeRule) -> None:
+    def register_rule(self, rule: type[ITypeRule]) -> None:
 
         if not issubclass(rule, ITypeRule):
             msg = "TypeRules.register_rule(), rule arg must be child class of ITypeRule"
@@ -238,7 +238,7 @@ class TypeRules(ITypeRules):
             return
         self._reg_rule(rule=rule)
 
-    def unregister_rule(self,  rule: ITypeRule):
+    def unregister_rule(self,  rule: type[ITypeRule]):
         """
         Unregister a rule
 
@@ -246,13 +246,16 @@ class TypeRules(ITypeRules):
             rule (ITypeRule): Rule to unregister
         """
         try:
+            key = str(id(rule))
+            if key in self._cache:
+                del self._cache[key]
             self._rules.remove(rule)
         except ValueError as e:
             msg = f"{self.__class__.__name__}.unregister_rule() Unable to unregister rule."
             raise ValueError(msg) from e
 
 
-    def _reg_rule(self, rule: ITypeRule):
+    def _reg_rule(self, rule: type[ITypeRule]):
         self._rules.append(rule)
 
     def _register_known_rules(self):
