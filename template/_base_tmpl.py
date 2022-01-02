@@ -1,4 +1,5 @@
 # coding: utf-8
+import enum
 import os
 import sys
 import re
@@ -8,7 +9,7 @@ import time
 import calendar
 from datetime import datetime, timezone
 from types import ModuleType
-from typing import Dict, Tuple, List
+from typing import Dict, Tuple, List, Union
 from Cheetah.Template import Template
 
 # set up path for importing modules from main app
@@ -269,3 +270,66 @@ class BaseTpml(Template):
         current_GMT = time.gmtime()
         ts = calendar.timegm(current_GMT)
         return str(datetime.fromtimestamp(ts, tz=timezone.utc))
+
+    # region Class inherits and From Imports
+
+    def get_from_import(self, class_name: str, im_data: List[str]) -> str:
+        """
+        Get a from string such as 'from ..sdbcx.table_descriptor import DataSettings`
+
+        Args:
+            class_name (str): Name if the class then is using the import or is extended by import
+            im_data (List[str]): List of str expected to be a length of two.
+
+        Returns:
+            str: string formated for a from statement
+        """
+        if len(im_data) < 2:
+            raise Exception(f"{self.__class__.__name__}.get_from_import() Expected im_data param to have a min length of two!")
+        im = im_data[0]  # .sdbcx.table_descriptor
+        name = im_data[1]  # DataSettings
+        if name == class_name:
+            # can not extend a class with the same name.
+            # Change the from import and elsewhere change the extends name to match
+            im_parts = im.rsplit(sep='.', maxsplit=1)
+            # because there is a standerd through all templates for snake case name and name,
+            # such table_descriptor, TableDescriptor
+            # it means we can rely on this standerd to adjust import
+            im_last = im_parts.pop()
+            im = '.'.join(im_parts)
+            return f"from {im} import {im_last}.{name}"
+        return f"from {im} import {name}"
+            
+    def get_class_inherits(self, class_name: str, imports: Union[str, List[str]]) -> str:
+        """
+        Gets class inherits taking into accout if an inherit is the same name as the class.
+
+        Args:
+            class_name (str): Name of the class inheriting
+            imports (Union[str, List[str]]): string or list of strings of class inherits
+
+        Returns:
+            str: comma sep string of inherits.
+        """
+        # imports should only be a list of names without namespace prepended.
+        # in case will process anyways
+        def get_import(name: str) -> str:
+            _name = self.get_last_part(input=name)
+            if class_name == _name:
+                return f"{self.camel_to_snake(_name)}.{_name}"
+            else:
+                return name
+        if isinstance(imports, str):
+            return get_import(imports)
+        im_lst: List[str] = []
+        for s in imports:
+            im_lst.append(get_import(s))
+        s = 'object'
+        for i, im in enumerate(im_lst):
+            if i == 0:
+                s = ''
+            if i > 0:
+                s += ', '
+            s += im
+        return s
+    # endregion Class inherits and From Imports
