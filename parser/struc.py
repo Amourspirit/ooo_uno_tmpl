@@ -586,6 +586,11 @@ class StructWriter(base.WriteBase):
             t = si.p_type
             if t.requires_typing or t.is_py_type is False:
                 t_set.add(t.type)
+        si_lst = self._parser.api_data.types_summaries.get_obj()
+        for si in si_lst:
+            t = si.p_type
+            if t.requires_typing or t.is_py_type is False:
+                t_set.add(t.type)
         self._cache[key] = list(t_set)
         return self._cache[key]
 
@@ -595,6 +600,11 @@ class StructWriter(base.WriteBase):
             return self._cache[key]
         t_set: Set[str] = set()
         si_lst = self._parser.api_data.property_summaries.get_obj()
+        for si in si_lst:
+            t = si.p_type
+            if t.requires_typing:
+                t_set.add(t.type)
+        si_lst = self._parser.api_data.types_summaries.get_obj()
         for si in si_lst:
             t = si.p_type
             if t.requires_typing:
