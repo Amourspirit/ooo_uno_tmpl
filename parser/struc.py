@@ -892,7 +892,7 @@ def _main():
     # url = 'https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1beans_1_1Ambiguous_3_01T_01_4.html'
     # url = 'https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1beans_1_1GetPropertyTolerantResult.html'
     # url = 'https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1text_1_1TextMarkupDescriptor.html'
-    url = 'https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1sdb_1_1RowsChangeEvent.html'
+    url = 'https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1beans_1_1Pair_3_01T_00_01U_01_4.html' # generics
     args = ('v', 'n')
     kwargs = {
         "u": url,
@@ -1027,4 +1027,4 @@ def main():
     w.write()
     
 if __name__ == '__main__':
-    main()
+    _main()

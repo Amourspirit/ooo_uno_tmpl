@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.10",
-  "timestamp": "2022-01-01 17:01:11+00:00",
+  "version": "0.1.12",
+  "timestamp": "2022-01-01 23:31:22+00:00",
   "name": "DocumentContainer",
   "type": "service",
   "namespace": "com.sun.star.sdb",
@@ -14,12 +14,16 @@
   "data": {
     "from_imports": [
       [
+        "..container.x_hierarchical_name_container",
+        "XHierarchicalNameContainer"
+      ],
+      [
         "..frame.x_component_loader",
         "XComponentLoader"
       ],
       [
-        "..container.x_hierarchical_name_container",
-        "XHierarchicalNameContainer"
+        "..lang.x_multi_service_factory",
+        "XMultiServiceFactory"
       ],
       [
         ".definition_container",
@@ -28,10 +32,6 @@
       [
         ".definition_content",
         "DefinitionContent"
-      ],
-      [
-        "..lang.x_multi_service_factory",
-        "XMultiServiceFactory"
       ]
     ],
     "quote": [],
@@ -40,11 +40,11 @@
     "name": "DocumentContainer",
     "namespace": "com.sun.star.sdb",
     "extends": [
-      "com.sun.star.frame.XComponentLoader",
       "com.sun.star.container.XHierarchicalNameContainer",
+      "com.sun.star.frame.XComponentLoader",
+      "com.sun.star.lang.XMultiServiceFactory",
       "com.sun.star.sdb.DefinitionContainer",
-      "com.sun.star.sdb.DefinitionContent",
-      "com.sun.star.lang.XMultiServiceFactory"
+      "com.sun.star.sdb.DefinitionContent"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1sdb_1_1DocumentContainer.html",
     "desc": [
