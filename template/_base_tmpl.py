@@ -297,7 +297,7 @@ class BaseTpml(Template):
             # it means we can rely on this standerd to adjust import
             im_last = im_parts.pop()
             im = '.'.join(im_parts)
-            return f"from {im} import {im_last}.{name}"
+            return f"from {im} import {im_last}"
         return f"from {im} import {name}"
             
     def get_class_inherits(self, class_name: str, imports: Union[str, List[str]]) -> str:
