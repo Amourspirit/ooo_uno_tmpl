@@ -1397,7 +1397,7 @@ class RulesSummaryInfo(IRulesSummaryInfo):
 
     def get_rule_instance(self, rule: IRuleSummaryInfo) -> IRuleSummaryInfo:
         if not issubclass(rule, IRuleSummaryInfo):
-            msg = "TypeRules.get_rule_instance(), rule arg must be child class of ITypeRule"
+            msg = "TypeRules.get_rule_instance(), rule arg must be child class of IRuleSummaryInfo"
             self._log.error(msg)
             raise TypeError(msg)
         key = str(id(rule))
@@ -1408,6 +1408,138 @@ class RulesSummaryInfo(IRulesSummaryInfo):
         return self._cache[key]
 
 # endregion SummaryInfo Rules
+
+# region Name Rules
+
+
+class IRuleName(ABC):
+    @abstractmethod
+    def __init__(self, rules: 'IRulesName') -> None:
+        """Constructor"""
+
+    @abstractmethod
+    def get_is_match(self, name: str) -> bool:
+        """
+        Gets if rule is a match
+        
+        Args:
+            name (str): name str
+        """
+
+    @abstractmethod
+    def get_name(self, name: str) -> str:
+        """
+        Gets new name upon rule match
+
+        Args:
+            name (str): name str
+        """
+
+
+class IRulesName(ABC):
+    @abstractmethod
+    def get_name(self, name: str) -> str:
+        """Gets new name upon rule match"""
+
+    @abstractmethod
+    def get_rule_instance(self, rule: IRuleSummaryInfo) -> IRuleSummaryInfo:
+        """Gets a rule instance"""
+
+
+class IRuleNameCleanClass(IRulesName):
+    """Cleans name to remove any non class name chars"""
+    def __init__(self, rules: IRulesName) -> None:
+        self._rules = rules
+
+    def get_is_match(self, name: str) -> bool:
+        """Gets if name is a match"""
+        clean_name = Util.get_clean_classname(name)
+        return name != clean_name
+
+    def get_name(self, name: str) -> str:
+        """
+        Gets new name upon rule match
+
+        Args:
+            name (str): name str
+        """
+        return Util.get_clean_classname(name)
+
+
+class RulesName(IRulesName):
+    def __init__(self) -> None:
+        self._rules: List[type[IRuleName]] = []
+        self._cache = {}
+        self._register_known_rules()
+
+    def register_rule(self, rule: type[IRuleName]) -> None:
+
+        if not issubclass(rule, IRuleName):
+            msg = "TypeRules.register_rule(), rule arg must be child class of ITypeRule"
+            raise TypeError(msg)
+        if rule in self._rules:
+            msg = "TypeRules.register_rule() Rule is already registered"
+            self._log.warning(msg)
+            return
+        self._reg_rule(rule=rule)
+
+    def unregister_rule(self,  rule: type[IRuleName]):
+        """
+        Unregister a rule
+
+        Args:
+            rule (ITypeRule): Rule to unregister
+        """
+        try:
+            key = str(id(rule))
+            if key in self._cache:
+                del self._cache[key]
+            self._rules.remove(rule)
+        except ValueError as e:
+            msg = f"{self.__class__.__name__}.unregister_rule() Unable to unregister rule."
+            raise ValueError(msg) from e
+
+    def _reg_rule(self, rule: type[IRuleName]):
+        self._rules.append(rule)
+
+    def _register_known_rules(self):
+        pass
+
+    def _get_rule(self, name: str) -> Union[IRuleName, None]:
+
+        match_inst = None
+        for rule in self._rules:
+            key = str(id(rule))
+            if key in self._cache:
+                inst = self._cache[key]
+            else:
+                inst: IRuleName = rule(self)
+                self._cache[key] = inst
+            if inst.get_is_match(name):
+                match_inst = inst
+                break
+        return match_inst
+
+    def get_name(self, name: str) -> str:
+        match = self._get_rule(name)
+        if match:
+            return match.get_name(name)
+        return name
+
+
+    def get_rule_instance(self, rule: IRuleName) -> IRuleName:
+        if not issubclass(rule, IRuleName):
+            msg = "RulesName.get_rule_instance(), rule arg must be child class of IRuleName"
+            self._log.error(msg)
+            raise TypeError(msg)
+        key = str(id(rule))
+        if key in self._cache:
+            return self._cache[key]
+        else:
+            self._cache[key] = rule(self)
+        return self._cache[key]
+
+# endregion Name Rules
 
 # region util
 
