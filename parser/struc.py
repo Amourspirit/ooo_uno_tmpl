@@ -105,7 +105,23 @@ class ApiData(base.APIData):
         self._types_block: ApiTypesBlock = None
         self._type_summaries: base.ApiSummaries = None
         self._type_summary_rows: base.ApiSummaryRows = None
+        self._name_rules_engine = base.RulesName()
+        self._set_name_rules()
     # endregion constructor
+
+    # region Name Rules
+    def _set_name_rules(self) -> None:
+        self._name_rules_engine.register_rule(base.RuleNameNoGenerics)
+    
+    def _get_name_rules_engine(self) -> Union[base.IRulesName, None]:
+        """
+        Gets Name Rules Engine. Overrides parent class
+
+        Returns:
+            base.IRulesName: base.RulesName() instance
+        """
+        return self._name_rules_engine
+    # endregion Name Rules
 
     # region methods
 
@@ -271,11 +287,11 @@ class Parser(base.ParserBase):
             ex = []
             for el in self._api_data.inherited.get_obj():
                 ex.append(el.fullns)
-            name = self._api_data.name.get_obj()
+            ni = self._api_data.name.get_obj()
             ns = self._api_data.ns.namespace_str
-            full_name = ns + '.' + name
+            full_name = ns + '.' + ni.name
             info = {
-                "name": name,
+                "name": ni.name,
                 "fullname": full_name,
                 "desc": self._api_data.desc.get_obj(),
                 "url": self.url,

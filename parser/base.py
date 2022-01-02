@@ -769,7 +769,11 @@ class ApiName(BlockObj):
             tag_div_nav: Tag = soup.select_one('div#nav-path')
             name = tag_div_nav.find_all(
                 'li', class_='navelem')[-1].text.strip()
-            self._data = name
+            ni = NameInfo(name=name, orig_name=name)
+            if self._rules_engine:
+                self._rules_engine.process_name(ni)
+
+            self._data = ni
             return self._data
         except Exception as e:
             logger.error(
@@ -1220,6 +1224,15 @@ class APIData:
         self._desc: ApiDesc = None
     
     # region Methods
+    def _get_name_rules_engine(self) -> Union['IRulesName', None]:
+        """
+        Gets name rules engine instance or None.
+        Can be overrides in subclasses.
+
+        Returns:
+            [type]: None
+        """
+        return None
 
     @AcceptedTypes(str, ftype=DecFuncEnum.METHOD)
     def get_detail_block(self, a_id: str) -> ApiDetailBlock:
@@ -1266,7 +1279,9 @@ class APIData:
     def name(self) -> ApiName:
         if self._api_data_name is None:
             self._api_data_name = ApiName(
-                self._soup_obj)
+                soup=self._soup_obj,
+                rules_engine=self._get_name_rules_engine()
+                )
         return self._api_data_name
 
     @property
@@ -1328,7 +1343,8 @@ class IRulesSummaryInfo(ABC):
     def get_rule_instance(self, rule: IRuleSummaryInfo) -> IRuleSummaryInfo:
         """Gets a rule instance"""
 
-class IRuleSummaryInfo(IRuleSummaryInfo):
+class RuleSummaryInfoCleanName(IRuleSummaryInfo):
+    """Cleans name to remove any non class name chars"""
     def __init__(self, rules: 'IRulesSummaryInfo') -> None:
         self._rules = rules
     
@@ -1338,6 +1354,12 @@ class IRuleSummaryInfo(IRuleSummaryInfo):
         return name != clean_name
     
     def process_summary_info(self, si: SummaryInfo) -> None:
+        """
+        Cleans si.name to remove any non class name chars
+
+        Args:
+            si (SummaryInfo): Summary Info
+        """
         si.name = Util.get_clean_classname(si.name)
 
 
@@ -1424,7 +1446,7 @@ class RulesSummaryInfo(IRulesSummaryInfo):
 
 # region Name Rules
 
-
+# region     Name Rules Interfaces
 class IRuleName(ABC):
     @abstractmethod
     def __init__(self, rules: 'IRulesName') -> None:
@@ -1463,16 +1485,18 @@ class IRulesName(ABC):
     def get_rule_instance(self, rule: IRuleName) -> IRuleName:
         """Gets a rule instance"""
 
+# endregion     Name Rules Interfaces
 
-class IRuleNameCleanClass(IRulesName):
+# region     IRuleName rules
+class RuleNameCleanClass(IRulesName):
     """Cleans name to remove any non class name chars"""
     def __init__(self, rules: IRulesName) -> None:
         self._rules = rules
 
-    def get_is_match(self, name: str) -> bool:
+    def get_is_match(self, ni: NameInfo) -> bool:
         """Gets if name is a match"""
-        clean_name = Util.get_clean_classname(name)
-        return name != clean_name
+        clean_name = Util.get_clean_classname(ni.name)
+        return ni.name != clean_name
 
     def process_name(self, ni: NameInfo) -> None:
         """
@@ -1484,6 +1508,30 @@ class IRuleNameCleanClass(IRulesName):
         ni.name = Util.get_clean_classname(ni.name)
 
 
+class RuleNameNoGenerics(IRuleName):
+    """Cleans name to remove any Generic < U, T > like strings"""
+
+    def __init__(self, rules: IRulesName) -> None:
+        self._rules = rules
+
+    def get_is_match(self, ni: NameInfo) -> bool:
+        """Gets if name is a match"""
+        parts = ni.name.split(sep='<', maxsplit=1)
+        if len(parts) == 1:
+            return False
+        return True
+
+    def process_name(self, ni: NameInfo) -> None:
+        """
+        Cleans ni.name to remove any Generic < U, T > like strings
+
+        Args:
+            ni (NameInfo): name info
+        """
+        ni.name = Util.get_clean_classname(ni.name)
+# endregion IRuleName rules
+
+# region     IRulesName Engine
 
 class RulesName(IRulesName):
     """Manages rules for NameInfo"""
@@ -1568,6 +1616,8 @@ class RulesName(IRulesName):
         else:
             self._cache[key] = rule(self)
         return self._cache[key]
+
+# endregion IRulesName Engine
 
 # endregion Name Rules
 
