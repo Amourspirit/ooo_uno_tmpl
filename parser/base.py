@@ -76,7 +76,7 @@ pattern_sq_braket = re.compile(r"\[.*\]")
 pattern_http = re.compile(r"^https?:\/\/")
 pattern_id = re.compile(r'[a-z0-9]{28,38}')
 pattern_generic_name = re.compile(r"([a-zA-Z0-9_]+)(<[A-Z, ]+>)")
-
+re_dir_pattern = re.compile(r"\[((?:in)|(?:out))\]", re.IGNORECASE)
 # endregion regex
 
 # region Type Map
@@ -171,6 +171,14 @@ class NameInfo:
     """Origin name found from html"""
     extra_data: Optional[object] = None
     """Extra data that can be set in rules or otherwise"""
+
+
+@dataclass
+class ParamInfo:
+    direction: str = ''
+    name: str = ''
+    type: str = ''
+    p_type: Optional[PythonType] = None
 # endregion Data Classes
 
 # region Cache
@@ -1208,6 +1216,243 @@ class ApiDescBlock(BlockObj):
         self._data = desc
         return self._data
 
+# region        API Summary Blocks
+
+
+class ApiFunctionsBlock(ApiSummaryBlock):
+    def _get_match_name(self) -> str:
+        return 'pub-methods'
+
+
+class ApiTypesBlock(ApiSummaryBlock):
+    def _get_match_name(self) -> str:
+        return 'pub-types'
+
+
+class ApiPropertiesBlock(ApiSummaryBlock):
+    def _get_match_name(self) -> str:
+        return 'pub-attribs'
+
+
+class ApiInterfacesBlock(ApiSummaryBlock):
+    """Gets Block object for Exported Interfaces"""
+
+    def _get_match_name(self) -> str:
+        return 'interfaces'
+
+# endregion     API Summary Blocks
+
+# region        Method Api
+
+
+class ApiMethodPramsInfo(BlockObj):
+    """Gets List of Parameter information for a funciton"""
+
+    def __init__(self, block: ApiProtoBlock) -> None:
+        self._block: ApiProtoBlock = block
+        super().__init__(self._block.soup)
+        self._requires_typing = False
+        self._imports: Set[str] = set()
+        self._data = None
+
+    def get_obj(self) -> List[ParamInfo]:
+        if not self._data is None:
+            return self._data
+        self._data = []
+        proto = self._block.get_obj()
+        if not proto:
+            return self._data
+        p_type_tag = proto.find_all('td', class_='paramtype')
+        p_name_tag = proto.find_all('td', class_='paramname')
+        if not p_type_tag and not p_name_tag:
+            if logger.level <= logging.DEBUG:
+                logger.debug(
+                    'ApiInterfacePramsInfoget_obj() No Parmas for %s', self._block.summary_info.name)
+            return self._data
+
+        try:
+            if len(p_type_tag) != len(p_name_tag):
+                if len(p_type_tag) == 0 and len(p_name_tag) == 1:
+                    # no params. p_name_tag will usually be 1
+                    # when there are not paramters.
+                    return self._data
+                raise Exception
+        except Exception as e:
+            msg = "ApiFnPramsInfo.get_obj(), Parameter Name and Parameter Types do not have the same length. Function Summary: %s Url: %s" % (str(
+                self._block.summary_info), self.url_obj.url)
+            logger.error(msg)
+            raise Exception(msg)
+        p_info = zip(p_name_tag, p_type_tag)
+        self._data = self._process_params(params=p_info)
+        return self._data
+
+    def _process_name_tag(self, name_tag: Tag, pinfo: ParamInfo):
+        name = name_tag.text
+        pinfo.name = Util.get_clean_name(name)
+
+    def _get_type_from_inner_link(self, paramtype: Tag, name: str) -> Union[str, None]:
+        logger.debug(
+            'ApiFnPramsInfo._get_type_from_inner_link() Searching for %s link.', name)
+        if not paramtype:
+            return None
+        a_tag = paramtype.findChild('a')
+        if not a_tag:
+            return None
+        a_name = a_tag.text.strip()
+        if a_name != name:
+            return None
+        s = Util.get_ns_from_a_tag(a_tag=a_tag)
+        logger.debug(
+            'ApiFnPramsInfo._get_type_from_inner_link() found: %s', s)
+        return s
+
+    def _process_type_tag(self, type_tag: Tag, pinfo: ParamInfo):
+        pinfo.direction = 'in'
+        # dir_tag: NavigableString = type_tag.find(text=True, recursive=False)
+        # dir_str could be in format of: [in] sequence< ::
+        dir_str: str = type_tag.text.strip()
+        m = re_dir_pattern.match(dir_str)
+        if m:
+            g_dir = m.group(1).lower()
+            pinfo.direction = g_dir  # in or out
+            dir_str = dir_str.split(maxsplit=1)[1]
+        _type = dir_str.replace("::", '.').lstrip('.')
+        t_info: PythonType = Util.get_python_type(in_type=_type)
+        if t_info.is_default():
+            logger.debug(
+                'ApiFnPramsInfo._process_type_tag() %s type is Default. Looking for %s', pinfo.name, _type)
+            t2_type = self._get_type_from_inner_link(type_tag, _type)
+            if t2_type:
+                t2_info = Util.get_python_type(t2_type)
+                if not t2_info.is_default():
+                    t_info = t2_info
+        logger.debug(
+            "ApiFnPramsInfo._process_type_tag() param '%s' type '%s' converted to '%s'", pinfo.name, _type, t_info.type)
+        pinfo.type = t_info.type
+        pinfo.p_type = t_info
+        if t_info.requires_typing:
+            self._requires_typing = True
+        self._imports.update(t_info.get_all_imports())
+        return
+
+    def _process_params(self, params: zip) -> List[ParamInfo]:
+        results = []
+        for p_name_tag, p_type_tag in params:
+            p_info = ParamInfo()
+            self._process_name_tag(name_tag=p_name_tag, pinfo=p_info)
+            if not p_info.name:
+                msg = f"ApiFnPramsInfo: unable to find parameter name for method {self.summary_info.name!r}. Url: {self.url_obj.url}"
+                logger.error(msg)
+                raise Exception(msg)
+            self._process_type_tag(type_tag=p_type_tag, pinfo=p_info)
+            if not p_info.type:
+                msg = f"ApiFnPramsInfo: unable to find parameter type for method {self.summary_info.name!r} with param name of {p_info.name!r}. Url: {self.url_obj.url}"
+                logger.error(msg)
+                raise Exception(msg)
+            results.append(p_info)
+        return results
+
+    @property
+    def requires_typing(self) -> bool:
+        """Gets require_typing value"""
+        return self._requires_typing
+
+    @property
+    def imports(self) -> Set[str]:
+        """Gets imports value"""
+        return self._imports
+
+    @property
+    def summary_info(self) -> SummaryInfo:
+        """Gets summary_info value"""
+        return self._block.summary_info
+
+
+class ApiMethodException(BlockObj):
+    """Gets errors for a funciton"""
+    # have not found an example with more than one exception so assuming
+    # singular excpetion
+    # returning as a list of str for future consideration
+
+    def __init__(self, block: ApiProtoBlock) -> None:
+        self._block: ApiProtoBlock = block
+        super().__init__(self._block.soup)
+        self._data = False
+
+    def _get_raises_lst(self) -> List[str]:
+        # rows for raise a bit messy.
+        # see: https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1animations_1_1XTimeContainer.html
+        # first row of raise will contain only the first exception.
+        # if there is another exception then the row text should end with a comma
+        row: Tag = None
+
+        def ex_gen():
+            nonlocal row
+            while row:
+                if row is None:
+                    break
+                text = self._get_raises_text(row)
+                s = text
+                if text.endswith(","):
+                    row = row.find_next_sibling('tr')
+                    s = s.rstrip(',')
+                else:
+                    row = None
+                yield s
+
+        results = []
+        row = self._get_raises_row()
+        if not row:
+            return results
+        # errs = ex()
+        for err in ex_gen():
+            results.append(err)
+        return results
+
+    def _get_raises_row(self) -> Union[Tag, None]:
+        proto = self._block.get_obj()
+        rows: ResultSet = proto.find_all('tr')
+        result = None
+        for row in rows:
+            td: Tag = row.select_one('td')
+            if td.text.strip().lower() == 'raises':
+                result = row
+                break
+        return result
+
+    def _get_raises_text(self, row: Tag):
+        if not row:
+            return None
+        parts = row.text.rsplit(maxsplit=1)  # in case starts with raises
+        s: str = parts.pop()
+        s = s.replace('(', '').replace(')', '').replace(
+            '::', '.').strip().lstrip('.')
+        return s
+
+    def get_obj(self) -> Union[List[str], None]:
+        """
+        Get name of error that is raises
+
+        Returns:
+            Union[str, None]: String containing type of error if it exist; Otherwise, ``None``
+        """
+        if not self._data is False:
+            return self._data
+        self._data = None
+        # row = self._get_raises_row()
+        # if not row:
+        #     return self._data
+        # self._data = [self._get_raises_text(row)]
+        self._data = self._get_raises_lst()
+        return self._data
+
+    @property
+    def summary_info(self) -> SummaryInfo:
+        """Gets summary_info value"""
+        return self._block.summary_info
+
+
+# endregion     Method Api
 
 class APIData:
     def __init__(self, url_soup: Union[str, SoupObj], allow_cache: bool):
@@ -1222,7 +1467,19 @@ class APIData:
         self._api_data_public_members: ApiPublicMembers = None
         self._api_data_name: ApiName = None
         self._desc: ApiDesc = None
-    
+        self._properties_block: ApiPropertiesBlock = None
+        self._func_block: ApiFunctionsBlock = None
+        self._interfaces_block: ApiInterfacesBlock = None
+        self._types_block: ApiTypesBlock = None
+        self._func_summary_rows: ApiSummaryRows = None
+        self._property_summary_rows: ApiSummaryRows = None
+        self._export_summary_rows: ApiSummaryRows = None
+        self._func_summaries: ApiSummaries = None
+        self._property_summaries: ApiSummaries = None
+        self._exported_summaries: ApiSummaries = None
+        self._type_summaries: ApiSummaries = None
+        self._type_summary_rows: ApiSummaryRows = None
+        self._inherited: ApiInherited = None
     # region Methods
     def _get_name_rules_engine(self) -> Union['IRulesName', None]:
         """
@@ -1233,6 +1490,48 @@ class APIData:
             [type]: None
         """
         return None
+
+    @AcceptedTypes(str, ftype=DecFuncEnum.METHOD)
+    def get_import_info_method(self, a_id: str) -> ImportInfo:
+        """
+        Gets imports for method params and return type
+
+        Args:
+            si_id (str): Function summary Info
+
+        Returns:
+            base.ImportInfo: Import info
+        """
+        key = 'get_import_info_method_' + a_id
+        info = ImportInfo()
+        params_info = self.get_prams_info(a_id=a_id)
+        fn_info = self.func_summaries
+        # ensure data is primed
+        fn_info.get_obj()
+        params_info.get_obj()
+
+        info.requires_typing = params_info.requires_typing or fn_info.requires_typing
+        info.imports.update(params_info.imports)
+        info.imports.update(fn_info.imports)
+        return info
+
+    def get_import_info_property(self) -> ImportInfo:
+        """
+        Gets imports for properties
+
+        Args:
+            si_id (str): Property summary Info
+
+        Returns:
+            base.ImportInfo: Import info
+        """
+        info = ImportInfo()
+        p_info = self.property_summaries
+        # ensure data is primed
+        p_info.get_obj()
+        info.requires_typing = p_info.requires_typing
+        info.imports.update(p_info.imports)
+        return info
 
     @AcceptedTypes(str, ftype=DecFuncEnum.METHOD)
     def get_detail_block(self, a_id: str) -> ApiDetailBlock:
@@ -1253,6 +1552,20 @@ class APIData:
         """Gets Description obj for method or property"""
         block = self.get_desc_block(a_id=a_id)
         return ApiDescDetail(block=block)
+
+    @AcceptedTypes(str, ftype=DecFuncEnum.METHOD)
+    def get_prams_info(self, a_id: str) -> ApiMethodPramsInfo:
+        """Gets parameter info for all parameters of a a method"""
+        block = self.get_proto_block(a_id=a_id)
+        result = ApiMethodPramsInfo(block=block)
+        return result
+
+    @AcceptedTypes(str, ftype=DecFuncEnum.METHOD)
+    def get_method_ex(self, a_id: str) -> ApiMethodException:
+        """Gets raises info for method"""
+        block = self.get_proto_block(a_id=a_id)
+        result = ApiMethodException(block=block)
+        return result
 
     @AcceptedTypes(str, ftype=DecFuncEnum.METHOD)
     def get_proto_block(self, a_id: str) -> ApiProtoBlock:
@@ -1287,8 +1600,112 @@ class APIData:
     @property
     def public_members(self) -> ApiPublicMembers:
         if self._api_data_public_members is None:
-            self._api_data_public_members = ApiPublicMembers(self._soup_obj)
+            self._api_data_public_members = ApiPublicMembers(self.soup_obj)
         return self._api_data_public_members
+
+    @property
+    def func_block(self) -> ApiFunctionsBlock:
+        """Gets Summary Functions block"""
+        if self._func_block is None:
+            self._func_block = ApiFunctionsBlock(
+                self.public_members)
+        return self._func_block
+
+    @property
+    def properties_block(self) -> ApiPropertiesBlock:
+        """Gets Summary Properties block"""
+        if self._properties_block is None:
+            self._properties_block = ApiPropertiesBlock(
+                self.public_members)
+        return self._properties_block
+
+    @property
+    def interfaces_block(self) -> ApiInterfacesBlock:
+        """Gets Summary Exported Interfaces block"""
+        if self._interfaces_block is None:
+            self._interfaces_block = ApiInterfacesBlock(
+                self.public_members)
+        return self._interfaces_block
+
+    @property
+    def types_block(self) -> ApiTypesBlock:
+        """Gets Summary Properties block"""
+        if self._types_block is None:
+            self._types_block = ApiTypesBlock(
+                self.public_members)
+        return self._types_block
+
+    @property
+    def func_summary_rows(self) -> ApiSummaryRows:
+        """Get Summary rows for functions"""
+        if self._func_summary_rows is None:
+            self._func_summary_rows = ApiSummaryRows(
+                self.func_block)
+        return self._func_summary_rows
+
+    @property
+    def property_summary_rows(self) -> ApiSummaryRows:
+        """Get Summary rows for Properties"""
+        if self._property_summary_rows is None:
+            self._property_summary_rows = ApiSummaryRows(
+                self.properties_block)
+        return self._property_summary_rows
+
+    @property
+    def export_summary_rows(self) -> ApiSummaryRows:
+        """Get Summary rows for Exported Interfaces"""
+        if self._export_summary_rows is None:
+            self._export_summary_rows = ApiSummaryRows(
+                self.interfaces_block)
+        return self._export_summary_rows
+
+    @property
+    def func_summaries(self) -> ApiSummaries:
+        """Get Summary info list for functions"""
+        if self._func_summaries is None:
+            self._func_summaries = ApiSummaries(
+                self.func_summary_rows)
+        return self._func_summaries
+
+    @property
+    def property_summaries(self) -> ApiSummaries:
+        """Get Summary info list for Properties"""
+        if self._property_summaries is None:
+            self._property_summaries = ApiSummaries(
+                self.property_summary_rows)
+        return self._property_summaries
+
+    @property
+    def exported_summaries(self) -> ApiSummaries:
+        """Get Summary info list for Exported Interfaces"""
+        if self._exported_summaries is None:
+            self._exported_summaries = ApiSummaries(
+                self.export_summary_rows)
+        return self._exported_summaries
+
+    @property
+    def inherited(self) -> 'ApiInherited':
+        """Gets class that get all inherited value"""
+        if self._inherited is None:
+            self._inherited = ApiInherited(
+                soup=self.soup_obj, raise_error=False)
+        return self._inherited
+
+    @property
+    def types_summary_rows(self) -> ApiSummaryRows:
+        """Get Summary rows for Properties"""
+        if self._type_summary_rows is None:
+            self._type_summary_rows = ApiSummaryRows(
+                self.types_block)
+        return self._type_summary_rows
+
+    @property
+    def types_summaries(self) -> ApiSummaries:
+        """Get Summary info list for Properties"""
+        if self._type_summaries is None:
+            self._type_summaries = ApiSummaries(
+                self.types_summary_rows)
+        return self._type_summaries
 
     @property
     def desc(self) -> ApiDesc:

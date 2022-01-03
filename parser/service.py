@@ -11,7 +11,7 @@ import argparse
 import logging
 import textwrap
 import xerox  # requires xclip - sudo apt-get install xclip
-from typing import Dict, List, NamedTuple, Set, Tuple, Union
+from typing import Dict, List, Set, Union
 from bs4.element import ResultSet, Tag
 from kwhelp.decorator import DecFuncEnum, SubClass, TypeCheck, TypeCheckKw
 from pathlib import Path
@@ -276,6 +276,7 @@ class ApiNs(base.ApiNamespace):
         if self._namespace_str is None:
             self._namespace_str = '.'.join(self.namespace)
         return self._namespace_str
+
 
 class ApiData(base.APIData):
     @TypeCheck((str, base.SoupObj), bool, ftype=DecFuncEnum.METHOD)
