@@ -20,7 +20,6 @@ try:
 except ModuleNotFoundError:
     import parser.base as base
 from logger.log_handle import get_logger
-from parser.enm import main
 from parser import __version__, JSON_ID
 # endregion imports
 
@@ -109,17 +108,6 @@ class ApiIncludedServicesBlock(ApiTableFindBase):
         return 'services'
 
 
-class ApiExportedInterfacesBlock(ApiTableFindBase):
-
-    def _get_a_name(self) -> str:
-        return 'interfaces'
-
-
-class ApiInheritedBlock(ApiTableFindBase):
-
-    def _get_a_name(self) -> str:
-        return 'inherited'
-
 
 class ApiComponentExtends:
     @SubClass(ApiTableFindBase, ftype=DecFuncEnum.METHOD)
@@ -166,95 +154,8 @@ class ApiComponentExtends:
         return self._data
 
 
-class ApiDescBlock(base.BlockObj):
-    """Gets block that contains description for service"""
-    @TypeCheck(base.SoupObj, ftype=DecFuncEnum.METHOD)
-    def __init__(self, soup: base.SoupObj):
-        self._soup = soup
-        super().__init__(soup)
-        self._data = None
-        self._has_data = None
-
-    def get_obj(self) -> Union[Tag, None]:
-        """
-        Get the descripton block
-
-        Returns:
-            Union[Tag, None]: Description block if found; Otherwise, ``None``
-        """
-        if not self._data is None:
-            return self._data
-        if self._has_data == False:
-            return None
-        soup = self.soup.soup
-        self._data = soup.select_one('body > div.contents > div.textblock')
-        self._has_data = not self._data is None
-        return self._data
 
 
-class ApiSince:
-    """Gets Component Since information"""
-    @TypeCheck(ApiDescBlock, ftype=DecFuncEnum.METHOD)
-    def __init__(self, block: ApiDescBlock):
-        self._block = block
-        self._data = None
-
-    def get_obj(self) -> List[str]:
-        """
-        Gets component since info
-
-        Returns:
-            List[str]: List of since infor or empyt list if since data is not found.
-        """
-        if not self._data is None:
-            return self._data
-        tag = self._block.get_obj()
-        self._data = []
-        if not tag:
-            return self._data
-        t_since = tag.find('dl', class_='since')
-        if not t_since:
-            return self._data
-        dd = t_since.select_one('dd')
-        if not dd:
-            return self._data
-        self._data.append('**Since**')
-        self._data.append('')
-        self._data.append('    ' + dd.text.strip())
-        return self._data
-
-class ApiDesc:
-    """Gets Component description"""
-    @TypeCheck(ApiDescBlock, ftype=DecFuncEnum.METHOD)
-    def __init__(self, block: ApiDescBlock):
-        self._block = block
-        self._data = None
-
-    def _get_since(self) -> List[str]:
-        since = ApiSince(self._block)
-        return since.get_obj()
-
-    def get_obj(self) -> List[str]:
-        """
-        Gets description of the component. Includes Since data if available.
-
-        Returns:
-            List[str]: Description a a list of str.
-        """
-        if not self._data is None:
-            return self._data
-        tag = self._block.get_obj()
-        self._data = []
-        if not tag:
-            return self._data
-        lines_found = tag.select('p')
-        p_obj = base.TagsStrObj(tags=lines_found)
-        self._data.extend(p_obj.get_data())
-        since = self._get_since()
-        if since:
-            self._data.append('')
-            self._data.extend(since)
-        return self._data
 
 class ApiNs(base.ApiNamespace):
     """Get the Name object for the interface"""
@@ -285,12 +186,6 @@ class ApiData(base.APIData):
         self._ns: ApiNs = None
         self._api_tables: ApiTables = None
         self._api_included_services_block: ApiIncludedServicesBlock = None
-        self._api_exported_interfaces_block: ApiExportedInterfacesBlock = None
-        self._api_inherited_block: ApiInheritedBlock = None
-        self._api_desc_block: ApiDescBlock = None
-        self._api_desc: ApiDesc = None
-        self._api_since: ApiSince = None
-        self._inherited: base.ApiInherited = None
 
     # region Properties
     @property
@@ -306,7 +201,7 @@ class ApiData(base.APIData):
     def api_tables(self) -> ApiTables:
         """Gets api_tables value"""
         if self._api_tables is None:
-            self._api_tables = ApiTables(self._soup_obj)
+            self._api_tables = ApiTables(self.soup_obj)
         return self._api_tables
     
     @property
@@ -316,44 +211,6 @@ class ApiData(base.APIData):
             self._api_included_services_block = ApiIncludedServicesBlock(self.api_tables)
         return self._api_included_services_block
 
-    @property
-    def api_exported_interfaces_block(self) -> ApiExportedInterfacesBlock:
-        """Gets api_tables value"""
-        if self._api_exported_interfaces_block is None:
-            self._api_exported_interfaces_block = ApiExportedInterfacesBlock(
-                self.api_tables)
-        return self._api_exported_interfaces_block
-
-    @property
-    def api_inherited_block(self) -> ApiInheritedBlock:
-        if self._api_inherited_block is None:
-            self._api_inherited_block = ApiInheritedBlock(self.api_tables)
-        return self._api_inherited_block
-    
-    @property
-    def api_desc_block(self) -> ApiDescBlock:
-        if self._api_desc_block is None:
-            self._api_desc_block = ApiDescBlock(self.soup_obj)
-        return self._api_desc_block
-    
-    @property
-    def api_desc(self) -> ApiDesc:
-        if self._api_desc is None:
-            self._api_desc = ApiDesc(self.api_desc_block)
-        return self._api_desc
-    
-    @property
-    def api_since(self) -> ApiSince:
-        if self._api_since is None:
-            self._api_since = ApiSince(self.api_desc_block)
-        return self._api_since
-    
-    @property
-    def inherited(self) -> base.ApiInherited:
-        """Gets class that get all inherited value"""
-        if self._inherited is None:
-            self._inherited = base.ApiInherited(self.soup_obj)
-        return self._inherited
 
     # endregion Properties
 
@@ -396,8 +253,7 @@ class ParserService(base.ParserBase):
         key = 'get_info'
         if key in self._cache:
             return self._cache[key]
-        desc = self._api_data.api_desc.get_obj()
-        # prime data
+        desc = self._api_data.desc.get_obj()        # prime data
         self._api_data.ns.get_obj()
         ni = self._api_data.name.get_obj()
         result = {
