@@ -132,6 +132,7 @@ class ImportInfo:
 @dataclass(frozen=True)
 class Area:
     name: str
+    ns: str
     href: str
     x1: int
     y1: int
@@ -1481,6 +1482,7 @@ class APIData:
         self._type_summaries: ApiSummaries = None
         self._type_summary_rows: ApiSummaryRows = None
         self._inherited: ApiInherited = None
+        self._area_filter_rules_engine: IRulesArea = None
 
     # endregion Constructor
 
@@ -1494,6 +1496,18 @@ class APIData:
             [type]: None
         """
         return None
+    
+    def _set_area_filter_rules_engine_rules(self, rules_engine: 'IRulesArea') -> None:
+        """
+        Registers rules for Area Filter Rules Engine.
+        Can be overriden in subclasses.
+
+        Args:
+            rules_engine (IRulesArea): Area Rules Engine
+        """
+        rules_engine.register_rule(rule=RuleAreaSingle)
+        rules_engine.register_rule(rule=RuleAreaMulti)
+        rules_engine.register_rule(rule=RuleAreaVertical)
 
     @AcceptedTypes(str, ftype=DecFuncEnum.METHOD)
     def get_import_info_method(self, a_id: str) -> ImportInfo:
@@ -1726,6 +1740,15 @@ class APIData:
     @property
     def url_obj(self) -> UrlObj:
         return self._soup_obj.url_obj
+    
+    @property
+    def area_filter_rules_engine(self) -> 'IRulesArea':
+        if self.__area_filter_rules_engine is None:
+            self._area_filter_rules_engine = RulesArea()
+            self._set_area_filter_rules_engine_rules(
+                rules_engine=self._area_filter_rules_engine
+            )
+        return self._area_filter_rules_engine
     # endregion Properties
 
 # endregion block and api classes
@@ -3479,6 +3502,13 @@ class ApiArea(BlockObj):
             f_str = ''
         logger.warning(
             "ApiArea.get_obj() Failed to get find data%s. Url: %s", f_str, self.url_obj.url)
+    
+    def _get_ns(self,name: str, href: str) -> str:
+        parts = href.split(sep=URL_SPLIT)
+        parts[0] = 'com' # rename interfacecom etc...
+        parts.pop() # drop XShapeDescriptor.html etc...
+        parts.append(name)
+        return ".".join(parts)
 
     def get_obj(self) -> List[Area]:
         """List of area items"""
@@ -3512,6 +3542,7 @@ class ApiArea(BlockObj):
                 logger.warning(
                     "ApiArea.get_obj() Bad Coords for %s. Url: %s", name, self.url_obj.url)
                 continue
+            ns = self._get_ns(name=name, href=href)
             x1 = int(a_coords[0].strip())
             y1 = int(a_coords[1].strip())
             x2 = int(a_coords[2].strip())
@@ -3519,17 +3550,29 @@ class ApiArea(BlockObj):
             m = pattern_http.match(href)
             if not m:
                 href = self.url_obj.url_base + '/' + href
-            area = Area(name=name, href=href, x1=x1,
+            area = Area(name=name, ns=ns, href=href, x1=x1,
                         y1=y1, x2=x2, y2=y2, title=title)
             self._data.append(area)
         return self._data
 
 class AreaFilter:
-    def __init__(self, alst: List[Area], is_inherited: bool) -> None:
+    def __init__(self, alst: List[Area], is_inherited: bool, rules_engine: 'IRulesArea') -> None:
         self._lst = alst
         self._is_inherited = is_inherited
+        self._rules_engine: IRulesArea = rules_engine
         self._first: Area = None if len(self._lst) == 0 else self._lst[0]
-        self._inherited = self._get_inherited()
+        # self._inherited = self._get_inherited()
+        self._inherited = self._get_from_rules()
+
+    def _get_from_rules(self) -> List[Area]:
+        if len(self._rules_engine) == 0:
+            msg = f"{self.__class__.__name__}._get_from_rules() Rules must not contain rules to process."
+            logger.error(msg)
+            raise Exception(msg)
+
+        area_lst = self._rules_engine.get_area(self._lst)
+        return area_lst or []
+
 
     def _get_inherited(self) -> List[Area]:
         if self._is_inherited is False:
@@ -3594,33 +3637,360 @@ class AreaFilter:
         Returns:
             List[Ns]: List if inherited Namespaces
         """
-        def get_ns(area: Area) -> Ns:
-            href_parts = area.href.rsplit(sep='/', maxsplit=1)
-            if len(href_parts) == 1:
-                href = href_parts[0]
-            else:
-                href = href_parts[1]
-            # interfacecom_1_1sun_1_1star_1_1accessibility_1_1XAccessibleContext.html
-            parts = href.split(URL_SPLIT)
-            parts[0] = 'com'
-            parts.pop()
-            # parts.append(area.name)
-            _ns = '.'.join(parts)
-            ns = Ns(area.name, namespace=_ns)
-            return ns
-        results = []
-        for el in self.inherited:
-            results.append(get_ns(area=el))
-        return results
+        return [el.ns for el in self._inherited]
 
     @property
     def inherited(self) -> List[Area]:
         """Gets inherited value"""
         return self._inherited
 
+# region        Area Rules
+
+# region            Rule Area Interfaces
+class IRuleArea(ABC):
+    @abstractmethod
+    def __init__(self, rules: 'IRulesArea') -> None:
+        """Constructor"""
+
+    @abstractmethod
+    def get_is_match(self, alst: List[Area]) -> bool:
+        """
+        Gets if rule is a match
+        
+        Args:
+            alst (List[Area]): Areas to match
+        """
+
+    @abstractmethod
+    def get_area(self, alst: List[Area]) -> List[Area]:
+        """
+        Gets filtered Area list
+
+        Args:
+            alst (List[Area]): Areas to filter
+
+         Returns:
+            List[Area]: Filtered Area List
+        """
+
+
+class IRulesArea(ABC):
+    @abstractmethod
+    def get_area(self, alst: List[Area]) -> List[Area]:
+        """
+        Gets filtered Area list
+
+        Args:
+            alst (List[Area]): Areas to filter
+
+         Returns:
+            List[Area]: Filtered Area List
+        """
+
+    @abstractmethod
+    def get_rule_instance(self, rule: IRuleName) -> IRuleName:
+        """Gets a rule instance"""
+
+    @abstractmethod
+    def __len__(self) -> int:
+        """Gets the length of rules"""
+
+# endregion         Rule Area Interfaces
+
+# region            Area Rules
+class RuleAreaBase(IRuleArea):
+    """Matches when there is a single parent"""
+    # region Constructor
+
+    def __init__(self, rules: 'IRulesArea') -> None:
+        self._rules = rules
+    # endregion Constructor
+
+      # region Private Methods
+    def _list_dict(self, lst: List[Area]) -> Dict[int, List[Area]]:
+        """groups lst into area y1"""
+        d = {}
+        for area in lst:
+            if not area.y1 in d:
+                d[area.y1] = []
+            d[area.y1].append(area)
+        return d
+
+    def _get_upper(self, first: Area, d_lst: Dict[int, List[Area]]) -> List[Area]:
+        """
+        Get a list of all areas that have a y1 value less then first.y1
+
+        In area map lower y1 values are higer in inheritance.
+        """
+        lst: List[Area] = []
+        for k, v in d_lst:
+            if k < first.y1:
+                lst.extend(v)
+        return lst
+
+    def _remove_duplicates(self, clean_lst: List[Area], filter_lst: List[Area]) -> bool:
+        """
+        Removes any duplicates base upon namesapce.
+
+        Args:
+            clean_lst (List[Area]): List to remove duplicates from
+            filter_lst (List[Area]): List used as filter
+
+        Returns:
+            bool: True if any duplicates were found; Otherwise False.
+        """
+        unique_names: Set[str] = set()
+        for area in filter_lst:
+            unique_names.add(area.ns)
+        remove_indexes: List[int] = []
+        for i, area in enumerate(clean_lst):
+            if area.ns in unique_names:
+                remove_indexes.append(i)
+        if len(remove_indexes) == 0:
+            return False
+        remove_indexes.sort(reverse=True)
+        for i in remove_indexes:
+            clean_lst.pop(i)
+        return True
+
+    # endregion Privae Methods
+
+
+class RuleAreaSingle(RuleAreaBase):
+    """Matches when there is a single parent"""
+    # region Constructor
+    def __init__(self, rules: 'IRulesArea') -> None:
+       super().__init__(rules=rules)
+    # endregion Constructor
+
+    # region IRuleArea Methods
+    @abstractmethod
+    def get_is_match(self, alst: List[Area]) -> bool:
+        """
+        Gets if rule is a match
+        
+        Args:
+            alst (List[Area]): Areas to match
+        """
+        if len(alst) == 0:
+            return False
+        d_lst = self._list_dict(lst=alst)
+        match_lst = d_lst[alst[0].y1]
+        return len(match_lst) == 1
+
+    @abstractmethod
+    def get_area(self, alst: List[Area]) -> List[Area]:
+        """
+        Gets filtered Area list
+
+        Args:
+            alst (List[Area]): Areas to filter
+
+         Returns:
+            List[Area]: Filtered Area List
+        """
+        d_lst = self._list_dict(lst=alst)
+        return d_lst[alst[0].y1]
+    # endregion IRuleArea Methods
+
+
+class RuleAreaMulti(RuleAreaBase):
+    """Matches when there is a multiple adjacent parents"""
+    # region Constructor
+
+    def __init__(self, rules: 'IRulesArea') -> None:
+       super().__init__(rules=rules)
+    # endregion Constructor
+
+    # region IRuleArea Methods
+    @abstractmethod
+    def get_is_match(self, alst: List[Area]) -> bool:
+        """
+        Gets if rule is a match
+        
+        Args:
+            alst (List[Area]): Areas to match
+        """
+        if len(alst) == 0:
+            return False
+        d_lst = self._list_dict(lst=alst)
+        match_lst = d_lst[alst[0].y1]
+        return len(match_lst) > 1
+
+    @abstractmethod
+    def get_area(self, alst: List[Area]) -> List[Area]:
+        """
+        Gets filtered Area list
+
+        Args:
+            alst (List[Area]): Areas to filter
+
+         Returns:
+            List[Area]: Filtered Area List
+        """
+        first = alst[0]
+        d_lst: Dict[int, List[Area]] = self._list_dict(lst=alst) # grouped by y1
+        match_lst: List[Area] = d_lst[self._first.y1] # list of y1 matches
+        
+        upper: List[Area] = self._get_upper(first, d_lst)
+        if len(upper) == 0:
+            return match_lst
+        self._remove_duplicates(clean_lst=match_lst, filter_lst=upper)
+        return match_lst
+    # endregion IRuleArea Methods
+
+class RuleAreaVertical(RuleAreaBase):
+    """Matches when there is a vertical parent"""
+    # region Constructor
+
+    def __init__(self, rules: 'IRulesArea') -> None:
+       super().__init__(rules=rules)
+    # endregion Constructor
+
+    # region IRuleArea Methods
+    @abstractmethod
+    def get_is_match(self, alst: List[Area]) -> bool:
+        """
+        Gets if rule is a match
+        
+        Args:
+            alst (List[Area]): Areas to match
+        """
+        # vertical matches are when all areas have the sam x1 value:
+        # see: https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1ucb_1_1ContentResultSet.html
+        if len(alst) < 2:
+            return False
+        is_vert = True
+        first = alst[0]
+        for area in alst:
+            if area.x1 != first.x1:
+                is_vert = False
+                break
+        return is_vert
+
+    @abstractmethod
+    def get_area(self, alst: List[Area]) -> List[Area]:
+        """
+        Gets filtered Area list
+
+        Args:
+            alst (List[Area]): Areas to filter
+
+         Returns:
+            List[Area]: Filtered Area List
+        """       
+        # remove any duplicates and return list.
+        # is it unlikely there would ever be duplicates, but just in case.
+        upper: List[Area] = [a for a in alst] # copy alst
+        self._remove_duplicates(clean_lst=upper, filter_lst=alst)
+        return upper
+    # endregion IRuleArea Methods
+# endregion         Area Rules
+
+# region            Rules Area Engine
+
+
+class RulesArea(IRulesArea):
+    """Manages rules for NameInfo"""
+
+    def __init__(self) -> None:
+        self._rules: List[type[IRuleArea]] = []
+        self._cache = {}
+        self._register_known_rules()
+
+    def __len__(self) -> int:
+        return len(self._rules)
+
+    def register_rule(self, rule: type[IRuleArea]) -> None:
+        """
+        Register rule
+
+        Args:
+            rule (type[IRuleArea]): Rule to register
+
+        Raises:
+            TypeError: If rules is not inherited form IRuleArea
+        """
+        if not issubclass(rule, IRuleArea):
+            msg = f"{self.__class__.__name__}.register_rule(), rule arg must be child class of ITypeRule"
+            raise TypeError(msg)
+        if rule in self._rules:
+            msg = f"{self.__class__.__name__}.register_rule() Rule is already registered"
+            self._log.warning(msg)
+            return
+        self._reg_rule(rule=rule)
+
+    def unregister_rule(self,  rule: type[IRuleArea]):
+        """
+        [summary]
+
+        Args:
+            rule (type[IRuleArea]): Rule to unregister
+
+        Raises:
+            ValueError: If rule is not present
+        """
+        try:
+            key = str(id(rule))
+            if key in self._cache:
+                del self._cache[key]
+            self._rules.remove(rule)
+        except ValueError as e:
+            msg = f"{self.__class__.__name__}.unregister_rule() Unable to unregister rule."
+            raise ValueError(msg) from e
+
+    def _reg_rule(self, rule: type[IRuleArea]):
+        self._rules.append(rule)
+
+    def _register_known_rules(self):
+        pass
+
+    def _get_rule(self, alst: List[Area]) -> Union[IRuleArea, None]:
+
+        match_inst = None
+        for rule in self._rules:
+            key = str(id(rule))
+            if key in self._cache:
+                inst = self._cache[key]
+            else:
+                inst: IRuleArea = rule(self)
+                self._cache[key] = inst
+            if inst.get_is_match(alst):
+                match_inst = inst
+                break
+        return match_inst
+
+    def get_area(self, alst: List[Area]) -> Union[List[Area], None]:
+        """
+        Gets filtered Area list
+
+        Args:
+            alst (List[Area]): Areas to filter
+
+         Returns:
+            List[Area]: Filtered Area List
+        """
+        match = self._get_rule(alst)
+        if match:
+            return match.get_area(alst)
+        return None
+
+    def get_rule_instance(self, rule: IRuleArea) -> IRuleArea:
+        if not issubclass(rule, IRuleArea):
+            msg = f"{self.__class__.__name__}.get_rule_instance(), rule arg must be child class of IRuleArea"
+            self._log.error(msg)
+            raise TypeError(msg)
+        key = str(id(rule))
+        if key in self._cache:
+            return self._cache[key]
+        else:
+            self._cache[key] = rule(self)
+        return self._cache[key]
+# endregion         Rules Area Engine
+# endregion     Area Rules
 class ApiInherited(BlockObj):
 
-    def __init__(self, soup: SoupObj,**kwargs) -> None:
+    def __init__(self, soup: SoupObj, area_filter_rules_engine: IRulesArea, **kwargs) -> None:
         """
         Constructor
 
@@ -3634,6 +4004,7 @@ class ApiInherited(BlockObj):
         self._api_dy_content: ApiDyContent = ApiDyContent(self.soup)
         self._data = None
         self._raise_errors = bool(kwargs.get('raise_error', False))
+        self._area_fileter_rules_engine = area_filter_rules_engine
 
     def _log_missing(self, for_str: Optional[str] = None, raise_error: bool = False):
         if for_str:
@@ -3662,7 +4033,7 @@ class ApiInherited(BlockObj):
         ab: ApiAreaBlock = ApiAreaBlock(self._api_dy_content)
         api_area: ApiArea = ApiArea(ab)
         lst = api_area.get_obj()
-        filter = AreaFilter(lst, is_inherited=is_inherited)
+        filter = AreaFilter(lst, is_inherited=is_inherited, rules_engine=self._area_fileter_rules_engine)
         extends = filter.get_as_ns()
         if not extends:
             return self._data
