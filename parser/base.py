@@ -130,18 +130,6 @@ class ImportInfo:
 
 
 @dataclass(frozen=True)
-class Area:
-    name: str
-    ns: str
-    href: str
-    x1: int
-    y1: int
-    x2: int
-    y2: int
-    title: str = ''
-
-
-@dataclass(frozen=True)
 class Ns:
     name: str
     namespace: str
@@ -149,6 +137,18 @@ class Ns:
     @property
     def fullns(self):
         return self.namespace + '.' + self.name
+
+
+@dataclass(frozen=True)
+class Area:
+    name: str
+    ns: Ns
+    href: str
+    x1: int
+    y1: int
+    x2: int
+    y2: int
+    title: str = ''
 
 
 @dataclass
@@ -1505,9 +1505,11 @@ class APIData:
         Args:
             rules_engine (IRulesArea): Area Rules Engine
         """
-        rules_engine.register_rule(rule=RuleAreaSingle)
+        # order of rules matter here.
+        # RuleAreaSingle would also match if it were RuleAreaVertical
         rules_engine.register_rule(rule=RuleAreaMulti)
         rules_engine.register_rule(rule=RuleAreaVertical)
+        rules_engine.register_rule(rule=RuleAreaSingle)
 
     @AcceptedTypes(str, ftype=DecFuncEnum.METHOD)
     def get_import_info_method(self, a_id: str) -> ImportInfo:
@@ -1706,7 +1708,7 @@ class APIData:
         """Gets class that get all inherited value"""
         if self._inherited is None:
             self._inherited = ApiInherited(
-                soup=self.soup_obj, raise_error=False)
+                soup=self.soup_obj, area_filter_rules_engine=self.area_filter_rules_engine, raise_error=False)
         return self._inherited
 
     @property
@@ -1743,7 +1745,7 @@ class APIData:
     
     @property
     def area_filter_rules_engine(self) -> 'IRulesArea':
-        if self.__area_filter_rules_engine is None:
+        if self._area_filter_rules_engine is None:
             self._area_filter_rules_engine = RulesArea()
             self._set_area_filter_rules_engine_rules(
                 rules_engine=self._area_filter_rules_engine
@@ -1820,7 +1822,7 @@ class RulesSummaryInfo(IRulesSummaryInfo):
             raise TypeError(msg)
         if rule in self._rules:
             msg = f"{self.__class__.__name__}.register_rule() Rule is already registered"
-            self._log.warning(msg)
+            logger.warning(msg)
             return
         self._reg_rule(rule=rule)
 
@@ -1877,7 +1879,7 @@ class RulesSummaryInfo(IRulesSummaryInfo):
     def get_rule_instance(self, rule: IRuleSummaryInfo) -> IRuleSummaryInfo:
         if not issubclass(rule, IRuleSummaryInfo):
             msg = f"{self.__class__.__name__}.get_rule_instance(), rule arg must be child class of IRuleSummaryInfo"
-            self._log.error(msg)
+            logger.error(msg)
             raise TypeError(msg)
         key = str(id(rule))
         if key in self._cache:
@@ -1999,7 +2001,7 @@ class RulesName(IRulesName):
             raise TypeError(msg)
         if rule in self._rules:
             msg = f"{self.__class__.__name__}.register_rule() Rule is already registered"
-            self._log.warning(msg)
+            logger.warning(msg)
             return
         self._reg_rule(rule=rule)
 
@@ -2052,7 +2054,7 @@ class RulesName(IRulesName):
     def get_rule_instance(self, rule: IRuleName) -> IRuleName:
         if not issubclass(rule, IRuleName):
             msg = f"{self.__class__.__name__}.get_rule_instance(), rule arg must be child class of IRuleName"
-            self._log.error(msg)
+            logger.error(msg)
             raise TypeError(msg)
         key = str(id(rule))
         if key in self._cache:
@@ -3503,12 +3505,12 @@ class ApiArea(BlockObj):
         logger.warning(
             "ApiArea.get_obj() Failed to get find data%s. Url: %s", f_str, self.url_obj.url)
     
-    def _get_ns(self,name: str, href: str) -> str:
+    def _get_ns(self,name: str, href: str) -> Ns:
         parts = href.split(sep=URL_SPLIT)
         parts[0] = 'com' # rename interfacecom etc...
         parts.pop() # drop XShapeDescriptor.html etc...
-        parts.append(name)
-        return ".".join(parts)
+        ns = ".".join(parts)
+        return Ns(name=name, namespace=ns)
 
     def get_obj(self) -> List[Area]:
         """List of area items"""
@@ -3648,9 +3650,6 @@ class AreaFilter:
 
 # region            Rule Area Interfaces
 class IRuleArea(ABC):
-    @abstractmethod
-    def __init__(self, rules: 'IRulesArea') -> None:
-        """Constructor"""
 
     @abstractmethod
     def get_is_match(self, alst: List[Area]) -> bool:
@@ -3688,10 +3687,6 @@ class IRulesArea(ABC):
         """
 
     @abstractmethod
-    def get_rule_instance(self, rule: IRuleName) -> IRuleName:
-        """Gets a rule instance"""
-
-    @abstractmethod
     def __len__(self) -> int:
         """Gets the length of rules"""
 
@@ -3700,20 +3695,24 @@ class IRulesArea(ABC):
 # region            Area Rules
 class RuleAreaBase(IRuleArea):
     """Matches when there is a single parent"""
-    # region Constructor
-
-    def __init__(self, rules: 'IRulesArea') -> None:
-        self._rules = rules
-    # endregion Constructor
 
       # region Private Methods
-    def _list_dict(self, lst: List[Area]) -> Dict[int, List[Area]]:
+    def _list_dict_y1(self, lst: List[Area]) -> Dict[int, List[Area]]:
         """groups lst into area y1"""
         d = {}
         for area in lst:
             if not area.y1 in d:
                 d[area.y1] = []
             d[area.y1].append(area)
+        return d
+    
+    def _list_dict_x1(self, lst: List[Area]) -> Dict[int, List[Area]]:
+        """groups lst into area x1"""
+        d = {}
+        for area in lst:
+            if not area.x1 in d:
+                d[area.x1] = []
+            d[area.x1].append(area)
         return d
 
     def _get_upper(self, first: Area, d_lst: Dict[int, List[Area]]) -> List[Area]:
@@ -3741,10 +3740,10 @@ class RuleAreaBase(IRuleArea):
         """
         unique_names: Set[str] = set()
         for area in filter_lst:
-            unique_names.add(area.ns)
+            unique_names.add(area.ns.fullns)
         remove_indexes: List[int] = []
         for i, area in enumerate(clean_lst):
-            if area.ns in unique_names:
+            if area.ns.fullns in unique_names:
                 remove_indexes.append(i)
         if len(remove_indexes) == 0:
             return False
@@ -3753,18 +3752,38 @@ class RuleAreaBase(IRuleArea):
             clean_lst.pop(i)
         return True
 
+    def _remove_duplicates_lst(self, lst: List[Area]) -> bool:
+        """
+        Removes any duplicates base upon namesapce.
+
+        Args:
+            clean_lst (List[Area]): List to remove duplicates from
+            filter_lst (List[Area]): List used as filter
+
+        Returns:
+            bool: True if any duplicates were found; Otherwise False.
+        """
+        unique_names: Set[str] = set()
+        remove_indexes: List[int] = []
+        for i, area in enumerate(lst):
+            if area.ns.fullns in unique_names:
+                remove_indexes.append(i)
+            else:
+                unique_names.add(area.ns.fullns)
+        if len(remove_indexes) == 0:
+            return False
+        remove_indexes.sort(reverse=True)
+        for i in remove_indexes:
+            lst.pop(i)
+        return True
+
     # endregion Privae Methods
 
 
 class RuleAreaSingle(RuleAreaBase):
     """Matches when there is a single parent"""
-    # region Constructor
-    def __init__(self, rules: 'IRulesArea') -> None:
-       super().__init__(rules=rules)
-    # endregion Constructor
 
     # region IRuleArea Methods
-    @abstractmethod
     def get_is_match(self, alst: List[Area]) -> bool:
         """
         Gets if rule is a match
@@ -3774,11 +3793,10 @@ class RuleAreaSingle(RuleAreaBase):
         """
         if len(alst) == 0:
             return False
-        d_lst = self._list_dict(lst=alst)
+        d_lst = self._list_dict_x1(lst=alst)
         match_lst = d_lst[alst[0].y1]
         return len(match_lst) == 1
 
-    @abstractmethod
     def get_area(self, alst: List[Area]) -> List[Area]:
         """
         Gets filtered Area list
@@ -3789,21 +3807,15 @@ class RuleAreaSingle(RuleAreaBase):
          Returns:
             List[Area]: Filtered Area List
         """
-        d_lst = self._list_dict(lst=alst)
+        d_lst = self._list_dict_x1(lst=alst)
         return d_lst[alst[0].y1]
     # endregion IRuleArea Methods
 
 
 class RuleAreaMulti(RuleAreaBase):
     """Matches when there is a multiple adjacent parents"""
-    # region Constructor
-
-    def __init__(self, rules: 'IRulesArea') -> None:
-       super().__init__(rules=rules)
-    # endregion Constructor
 
     # region IRuleArea Methods
-    @abstractmethod
     def get_is_match(self, alst: List[Area]) -> bool:
         """
         Gets if rule is a match
@@ -3813,11 +3825,10 @@ class RuleAreaMulti(RuleAreaBase):
         """
         if len(alst) == 0:
             return False
-        d_lst = self._list_dict(lst=alst)
+        d_lst = self._list_dict_y1(lst=alst)
         match_lst = d_lst[alst[0].y1]
         return len(match_lst) > 1
 
-    @abstractmethod
     def get_area(self, alst: List[Area]) -> List[Area]:
         """
         Gets filtered Area list
@@ -3829,26 +3840,20 @@ class RuleAreaMulti(RuleAreaBase):
             List[Area]: Filtered Area List
         """
         first = alst[0]
-        d_lst: Dict[int, List[Area]] = self._list_dict(lst=alst) # grouped by y1
+        d_lst: Dict[int, List[Area]] = self._list_dict_y1(lst=alst) # grouped by y1
         match_lst: List[Area] = d_lst[self._first.y1] # list of y1 matches
         
         upper: List[Area] = self._get_upper(first, d_lst)
         if len(upper) == 0:
             return match_lst
-        self._remove_duplicates(clean_lst=match_lst, filter_lst=upper)
+        self._remove_duplicates(match_lst, upper)
         return match_lst
     # endregion IRuleArea Methods
 
 class RuleAreaVertical(RuleAreaBase):
     """Matches when there is a vertical parent"""
-    # region Constructor
-
-    def __init__(self, rules: 'IRulesArea') -> None:
-       super().__init__(rules=rules)
-    # endregion Constructor
 
     # region IRuleArea Methods
-    @abstractmethod
     def get_is_match(self, alst: List[Area]) -> bool:
         """
         Gets if rule is a match
@@ -3862,13 +3867,14 @@ class RuleAreaVertical(RuleAreaBase):
             return False
         is_vert = True
         first = alst[0]
-        for area in alst:
+        d_lst: Dict[int, List[Area]] = self._list_dict_x1(
+            lst=alst)  # grouped by y1
+        for area in d_lst[first.x1]:
             if area.x1 != first.x1:
                 is_vert = False
                 break
         return is_vert
 
-    @abstractmethod
     def get_area(self, alst: List[Area]) -> List[Area]:
         """
         Gets filtered Area list
@@ -3881,8 +3887,11 @@ class RuleAreaVertical(RuleAreaBase):
         """       
         # remove any duplicates and return list.
         # is it unlikely there would ever be duplicates, but just in case.
-        upper: List[Area] = [a for a in alst] # copy alst
-        self._remove_duplicates(clean_lst=upper, filter_lst=alst)
+        first = alst[0]
+        d_lst: Dict[int, List[Area]] = self._list_dict_x1(
+            lst=alst)  # grouped by y1
+        upper: List[Area] = d_lst[first.x1]
+        self._remove_duplicates_lst(upper)
         return upper
     # endregion IRuleArea Methods
 # endregion         Area Rules
@@ -3916,7 +3925,7 @@ class RulesArea(IRulesArea):
             raise TypeError(msg)
         if rule in self._rules:
             msg = f"{self.__class__.__name__}.register_rule() Rule is already registered"
-            self._log.warning(msg)
+            logger.warning(msg)
             return
         self._reg_rule(rule=rule)
 
@@ -3953,7 +3962,7 @@ class RulesArea(IRulesArea):
             if key in self._cache:
                 inst = self._cache[key]
             else:
-                inst: IRuleArea = rule(self)
+                inst: IRuleArea = rule()
                 self._cache[key] = inst
             if inst.get_is_match(alst):
                 match_inst = inst
@@ -3975,17 +3984,6 @@ class RulesArea(IRulesArea):
             return match.get_area(alst)
         return None
 
-    def get_rule_instance(self, rule: IRuleArea) -> IRuleArea:
-        if not issubclass(rule, IRuleArea):
-            msg = f"{self.__class__.__name__}.get_rule_instance(), rule arg must be child class of IRuleArea"
-            self._log.error(msg)
-            raise TypeError(msg)
-        key = str(id(rule))
-        if key in self._cache:
-            return self._cache[key]
-        else:
-            self._cache[key] = rule(self)
-        return self._cache[key]
 # endregion         Rules Area Engine
 # endregion     Area Rules
 class ApiInherited(BlockObj):
