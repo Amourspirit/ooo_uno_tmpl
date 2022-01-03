@@ -17,6 +17,8 @@ from bs4.element import ResultSet, Tag
 from kwhelp.decorator import AcceptedTypes, DecFuncEnum, RequireArgs, TypeCheckKw
 from pathlib import Path
 from dataclasses import dataclass
+
+from parser.base import SummaryInfo
 try:
     import base
 except ModuleNotFoundError:
@@ -26,6 +28,7 @@ from parser.type_mod import PythonType
 from parser import __version__, JSON_ID
 # endregion Imports
 
+# region Logger
 logger = None
 
 
@@ -36,10 +39,14 @@ def _set_loggers(l: Union[logging.Logger, None]):
 
 
 _set_loggers(None)
+# endregion Logger
 
+# region Regex
 re_component_start = re.compile(r"(interface.*){", re.DOTALL)
 re_name_info_start = re.compile(r"(interface)\s*[a-zA-Z0-9]+[ :]+")
 re_name_info_name = re.compile(r"interface\s*(?P<NAME>[a-zA-Z0-9_]+)")
+# endregion Regex
+
 # region SDK API Reference
 re_ln_pattern = re.compile(r"\A\s*(:?[0-9]*)\s*")
 # https://regex101.com/r/xAqRAU/1/
@@ -77,6 +84,11 @@ class ApiFunctionsBlock(base.ApiSummaryBlock):
         return 'pub-methods'
 
 
+class ApiTypesBlock(base.ApiSummaryBlock):
+    def _get_match_name(self) -> str:
+        return 'pub-types'
+
+
 class ApiPropertiesBlock(base.ApiSummaryBlock):
     def _get_match_name(self) -> str:
         return 'pub-attribs'
@@ -87,6 +99,7 @@ class ApiInterfacesBlock(base.ApiSummaryBlock):
 
     def _get_match_name(self) -> str:
         return 'interfaces'
+
 
 class ApiFnPramsInfo(base.BlockObj):
     """Gets List of Parameter information for a funciton"""
@@ -222,14 +235,13 @@ class ApiMethodException(base.BlockObj):
         super().__init__(self._block.soup)
         self._data = False
 
-    
-
     def _get_raises_lst(self) -> List[str]:
         # rows for raise a bit messy.
         # see: https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1animations_1_1XTimeContainer.html
         # first row of raise will contain only the first exception.
         # if there is another exception then the row text should end with a comma
-        row: Tag = None 
+        row: Tag = None
+
         def ex_gen():
             nonlocal row
             while row:
@@ -243,7 +255,7 @@ class ApiMethodException(base.BlockObj):
                 else:
                     row = None
                 yield s
-    
+
         results = []
         row = self._get_raises_row()
         if not row:
@@ -252,8 +264,7 @@ class ApiMethodException(base.BlockObj):
         for err in ex_gen():
             results.append(err)
         return results
-            
-        
+
     def _get_raises_row(self) -> Union[Tag, None]:
         proto = self._block.get_obj()
         rows: ResultSet = proto.find_all('tr')
@@ -268,7 +279,7 @@ class ApiMethodException(base.BlockObj):
     def _get_raises_text(self, row: Tag):
         if not row:
             return None
-        parts = row.text.rsplit(maxsplit=1) # in case starts with raises
+        parts = row.text.rsplit(maxsplit=1)  # in case starts with raises
         s: str = parts.pop()
         s = s.replace('(', '').replace(')', '').replace(
             '::', '.').strip().lstrip('.')
@@ -335,6 +346,9 @@ class ApiInterfaceData(base.APIData):
         self._func_summaries: base.ApiSummaries = None
         self._property_summaries: base.ApiSummaries = None
         self._exported_summaries: base.ApiSummaries = None
+        self._types_block: ApiTypesBlock = None
+        self._type_summaries: base.ApiSummaries = None
+        self._type_summary_rows: base.ApiSummaryRows = None
         self._inherited: base.ApiInherited = None
         self._cache = {
             self._si_key: {},
@@ -443,7 +457,6 @@ class ApiInterfaceData(base.APIData):
 
     # region Properties
 
-
     @property
     def ns(self) -> ApiNs:
         """Gets the interface Description object"""
@@ -531,6 +544,30 @@ class ApiInterfaceData(base.APIData):
             self._inherited = base.ApiInherited(
                 soup=self.soup_obj, raise_error=False)
         return self._inherited
+
+    @property
+    def types_block(self) -> ApiTypesBlock:
+        """Gets Summary Properties block"""
+        if self._types_block is None:
+            self._types_block = ApiTypesBlock(
+                self.public_members)
+        return self._types_block
+
+    @property
+    def types_summary_rows(self) -> base.ApiSummaryRows:
+        """Get Summary rows for Properties"""
+        if self._type_summary_rows is None:
+            self._type_summary_rows = base.ApiSummaryRows(
+                self.types_block)
+        return self._type_summary_rows
+
+    @property
+    def types_summaries(self) -> base.ApiSummaries:
+        """Get Summary info list for Properties"""
+        if self._type_summaries is None:
+            self._type_summaries = base.ApiSummaries(
+                self.types_summary_rows)
+        return self._type_summaries
 
     # endregion Properties
 # endregion API Interface classes
@@ -621,74 +658,25 @@ class Parser(base.ParserBase):
         attribs = {}
         methods = self._get_methods_data()
         prop = self._get_properties_data()
+        types = self._get_types_data
         if 'methods' in methods:
             attribs.update(methods)
+        if 'types' in types:
+            attribs.update(types)
         if 'properties' in prop:
             attribs.update(prop)
         self._cache[key] = attribs
         return self._cache[key]
 
-    def _get_methods_data(self):
+    def _get_summary_data(self, si_lst: List[SummaryInfo], key: str) -> dict:
         attribs = {}
-        si_lst = self._api_data.func_summaries.get_obj()
         for i, si in enumerate(si_lst):
             if logger.level <= logging.DEBUG:
                 logger.debug(
-                    "%s._get_methods_data() Processing: %s, %s",
-                    self.__class__.__name__, si.name, si.id )
-            import_info = self._api_data.get_import_info_method(si.id)
-            params_info = self._api_data.get_prams_info(si.id)
-            lst_info = params_info.get_obj()
-            if i == 0:
-                attribs['methods'] = []
-            if import_info.requires_typing:
-                logger.debug(
-                    "%s._get_methods_data() Imports require typing for: %s, %s",
-                    self.__class__.__name__, si.name, si.id)
-                self._requires_typing = True
-            self._imports.update(import_info.imports)
-            if params_info.requires_typing:
-                logger.debug(
-                    "%s._get_methods_data() Params require typing for: %s, %s",
-                    self.__class__.__name__, si.name, si.id)
-                self._requires_typing = True
-            self._imports.update(params_info.imports)
-            if si.p_type.requires_typing:
-                logger.debug(
-                    "%s._get_methods_data() Return '%s' type require typing for: %s, %s",
-                    self.__class__.__name__, si.p_type.type, si.name, si.id)
-                self._requires_typing = True
-            args = []
-            attrib = {
-                "name": si.name,
-                "returns": si.p_type.type,
-                "desc": self._api_data.get_desc_detail(si.id).get_obj(),
-                "raises": self._api_data.get_method_ex(si.id).get_obj() or []
-            }
-            for pi in lst_info:
-                if logger.level <= logging.DEBUG:
-                    logger.debug(
-                        f"{self.__class__.__name__}._get_methods_data() {si.name} param, Name: {pi.name}, Type: {pi.type}, Direction: {pi.direction}")
-                args.append((pi.name, pi.type, pi.direction))
-            attrib['args'] = args
-            attribs['methods'].append(attrib)
-
-        if self.sort:
-            if 'methods' in attribs:
-                newlist = sorted(attribs['methods'], key=lambda d: d['name'])
-                attribs['methods'] = newlist
-        return attribs
-
-    def _get_properties_data(self):
-        attribs = {}
-        si_lst = self._api_data.property_summaries.get_obj()
-        for i, si in enumerate(si_lst):
-            if logger.level <= logging.DEBUG:
-                logger.debug(
-                    "%s._get_properties_data() Processing: %s, %s",
+                    "%s._get_summary_data() Processing: %s, %s",
                     self.__class__.__name__, si.name, si.id)
             if i == 0:
-                attribs['properties'] = []
+                attribs[key] = []
             if not si.name:
                 continue
             attrib = {
@@ -698,10 +686,10 @@ class Parser(base.ParserBase):
                 "raises_get": '',
                 "raises_set": ''
             }
-            attribs['properties'].append(attrib)
+            attribs[key].append(attrib)
             if si.p_type.requires_typing:
                 logger.debug(
-                    "%s._get_properties_data() Return '%s' type require typing for: %s, %s",
+                    "%s._get_summary_data() Return '%s' type require typing for: %s, %s",
                     self.__class__.__name__, si.p_type.type, si.name, si.id)
                 self._requires_typing = True
         import_info = self._api_data.get_import_info_property()
@@ -710,11 +698,28 @@ class Parser(base.ParserBase):
         self._imports.update(import_info.imports)
 
         if self.sort:
-            if 'properties' in attribs:
-                newlist = sorted(attribs['properties'],
+            if key in attribs:
+                newlist = sorted(attribs[key],
                                  key=lambda d: d['name'])
-                attribs['properties'] = newlist
+                attribs[key] = newlist
         return attribs
+
+    def _get_methods_data(self):
+        attribs = {}
+        key = 'methods'
+        si_lst = self._api_data.func_summaries.get_obj()
+        return self._get_summary_data(si_lst=si_lst, key=key)
+
+    def _get_properties_data(self):
+        si_lst = self._api_data.property_summaries.get_obj()
+        key = 'properties'
+        return self._get_summary_data(si_lst=si_lst, key=key)
+
+    def _get_types_data(self):
+        # treat typedef as property
+        si_lst = self._api_data.types_summaries.get_obj()
+        key = 'types'
+        return self._get_summary_data(si_lst=si_lst, key=key)
 
     @property
     def imports(self) -> Set[str]:
@@ -858,7 +863,7 @@ class Writer(base.WriteBase):
             "parser_args": self._parser.get_parser_args(),
             "writer_args": {
                 "include_desc": self._include_desc
-                },
+            },
             "data": p_dict
         }
         str_jsn = base.Util.get_formated_dict_list_str(obj=json_dict, indent=2)
@@ -898,12 +903,12 @@ class Writer(base.WriteBase):
             lst.append([f, n])
         self._cache[key] = lst
         return self._cache[key]
-    
+
     def _get_quote_flat(self) -> List[str]:
         key = '_get_quote_flat'
         if key in self._cache:
             return self._cache[key]
-        
+
         t_set: Set[str] = set()
         # grab all the methods that need quotes
         si_lst = self._parser.api_data.func_summaries.get_obj()
@@ -926,12 +931,20 @@ class Writer(base.WriteBase):
             if t.requires_typing or t.is_py_type is False:
                 t_set.add(t.type)
 
+        # grab all types summaries
+        si_lst = self._parser.api_data.types_summaries.get_obj()
+        for si in si_lst:
+            t = si.p_type
+            if t.requires_typing or t.is_py_type is False:
+                t_set.add(t.type)
+
         # grab all export summaries
         si_lst = self._parser.api_data.exported_summaries.get_obj()
         for si in si_lst:
             t = si.p_type
             if t.requires_typing or t.is_py_type is False:
                 t_set.add(t.type)
+
         self._cache[key] = list(t_set)
         return self._cache[key]
 
@@ -957,6 +970,11 @@ class Writer(base.WriteBase):
             t = si.p_type
             if t.requires_typing:
                 t_set.add(t.type)
+        si_lst = self._parser.api_data.types_summaries.get_obj()
+        for si in si_lst:
+            t = si.p_type
+            if t.requires_typing:
+                t_set.add(t.type)
         si_lst = self._parser.api_data.exported_summaries.get_obj()
         for si in si_lst:
             t = si.p_type
@@ -972,14 +990,14 @@ class Writer(base.WriteBase):
         self._template = self._template.replace('{name}', self._p_name)
         self._template = self._template.replace('{ns}', str(self._p_namespace))
         self._template = self._template.replace('{link}', self._p_url)
-        
+
         self._template = self._template.replace(
             '{quote}',
             str(set(self._get_quote_flat())))
         self._template = self._template.replace(
             '{typings}',
             str(set(self._get_typings())))
-        
+
         self._template = self._template.replace(
             '{requires_typing}', str(self._p_requires_typing))
         self._template = self._template.replace(
@@ -1013,6 +1031,7 @@ class Writer(base.WriteBase):
         key = '_set_info'
         if key in self._cache:
             return
+
         def get_extends(lst: List[str]) -> List[str]:
             return [base.Util.get_last_part(s) for s in lst]
             # return [s.rsplit('.', 1)[1] for s in lst]
@@ -1098,7 +1117,6 @@ class Writer(base.WriteBase):
         logger.info("Created file: %s", jsn_p)
 # endregion Writer
 
-
 # region Parse method
 def _get_parsed_kwargs(**kwargs) -> Dict[str, str]:
     required = ("url",)
@@ -1120,6 +1138,7 @@ def _get_parsed_kwargs(**kwargs) -> Dict[str, str]:
             # k is missing from kwargs
             raise base.RequiredError(f"Missing required arg {k}.")
     return result
+
 
 def _get_parsed_args(*args) -> Dict[str, bool]:
     # key, value and value is a key into defaults
@@ -1173,7 +1192,7 @@ def _get_parsed_args(*args) -> Dict[str, bool]:
         "v": "verbose",
         "verbose": "verbose"
     }
-    result = {k:v for k, v in defaults.items()}
+    result = {k: v for k, v in defaults.items()}
     for arg in args:
         if not isinstance(arg, str):
             continue
@@ -1186,14 +1205,14 @@ def _get_parsed_args(*args) -> Dict[str, bool]:
 class Processer:
     """Processes parsing and writing"""
     @RequireArgs('url', ftype=DecFuncEnum.METHOD)
-    def __init__(self, p:type[Parser], w:type[Writer], **kwargs):
+    def __init__(self, p: type[Parser], w: type[Writer], **kwargs):
         """
         Constructor
 
         Args:
             p (type[Parser]): Parser class
             w (type[Writer]): Writer class
-        
+
         Other Arguments:
             url (str): url to parse
             sort (bool, optional): No sorting of results. Default ``True``
@@ -1240,6 +1259,7 @@ class Processer:
             include_desc=self._include_desc
         )
         w.write()
+
 
 def parse(*args, **kwargs):
     """
@@ -1294,9 +1314,10 @@ def parse(*args, **kwargs):
         include_desc=pargs['no_desc']
     )
     proc.process()
-   
+
 # endregion Parse method
 
+# region Main
 def _main():
     os.system('cls' if os.name == 'nt' else 'clear')
     # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1beans_1_1XHierarchicalPropertySet.html'
@@ -1313,6 +1334,7 @@ def _main():
     # sys.argv.extend(['--log-file', 'debug.log', '-v', '-n', '-u', url])
     # main()
     parse(*args, **kwargs)
+
 
 def get_cmd_args() -> argparse.Namespace:
     # region Parser
@@ -1397,6 +1419,7 @@ def get_cmd_args() -> argparse.Namespace:
     args = parser.parse_args()
     return args
 
+
 def main():
     global logger
     args = get_cmd_args()
@@ -1409,7 +1432,7 @@ def main():
         if args.verbose:
             log_args['level'] = logging.DEBUG
         _set_loggers(get_logger(logger_name=Path(__file__).stem, **log_args))
-    
+
     if not args.no_print_clear:
         os.system('cls' if os.name == 'nt' else 'clear')
     logger.info('Executing command: %s', sys.argv[1:])
@@ -1436,3 +1459,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+# endregion Main

@@ -338,16 +338,15 @@ class Parser(base.ParserBase):
             self._cache[key].extend(t_data['types'])
         return self._cache[key]
 
-    def _get_properties_data(self):
+    def _get_summary_data(self, si_lst: List[base.SummaryInfo], key: str) -> dict:
         attribs = {}
-        si_lst = self._api_data.property_summaries.get_obj()
         for i, si in enumerate(si_lst):
             if logger.level <= logging.DEBUG:
                 logger.debug(
-                    "%s._get_properties_data() Processing: %s, %s",
+                    "%s._get_summary_data() Processing: %s, %s",
                     self.__class__.__name__, si.name, si.id)
             if i == 0:
-                attribs['properties'] = []
+                attribs[key] = []
             if not si.name:
                 continue
             attrib = {
@@ -355,10 +354,10 @@ class Parser(base.ParserBase):
                 "type": si.p_type.type,
                 "lines": self._api_data.get_desc_detail(si.id).get_obj()
             }
-            attribs['properties'].append(attrib)
+            attribs[key].append(attrib)
             if si.p_type.requires_typing:
                 logger.debug(
-                    "%s._get_properties_data() Return '%s' type require typing for: %s, %s",
+                    "%s._get_summary_data() Return '%s' type require typing for: %s, %s",
                     self.__class__.__name__, si.p_type.type, si.name, si.id)
                 self._requires_typing = True
         import_info = self._api_data.get_import_info_property()
@@ -367,46 +366,21 @@ class Parser(base.ParserBase):
         self._imports.update(import_info.imports)
 
         if self.sort:
-            if 'properties' in attribs:
-                newlist = sorted(attribs['properties'],
+            if key in attribs:
+                newlist = sorted(attribs[key],
                                  key=lambda d: d['name'])
-                attribs['properties'] = newlist
+                attribs[key] = newlist
         return attribs
+
+    def _get_properties_data(self):
+        si_lst = self._api_data.property_summaries.get_obj()
+        key = 'properties'
+        return self._get_summary_data(si_lst=si_lst, key=key)
     
     def _get_types_data(self):
-        attribs = {}
         si_lst = self._api_data.types_summaries.get_obj()
-        for i, si in enumerate(si_lst):
-            if logger.level <= logging.DEBUG:
-                logger.debug(
-                    "%s._get_types_data() Processing: %s, %s",
-                    self.__class__.__name__, si.name, si.id)
-            if i == 0:
-                attribs['types'] = []
-            if not si.name:
-                continue
-            attrib = {
-                "name": si.name,
-                "type": si.p_type.type,
-                "lines": self._api_data.get_desc_detail(si.id).get_obj()
-            }
-            attribs['types'].append(attrib)
-            if si.p_type.requires_typing:
-                logger.debug(
-                    "%s._get_types_data() Return '%s' type require typing for: %s, %s",
-                    self.__class__.__name__, si.p_type.type, si.name, si.id)
-                self._requires_typing = True
-        import_info = self._api_data.get_import_info_type()
-        if import_info.requires_typing:
-            self._requires_typing = True
-        self._imports.update(import_info.imports)
-
-        if self.sort:
-            if 'types' in attribs:
-                newlist = sorted(attribs['types'],
-                                 key=lambda d: d['name'])
-                attribs['types'] = newlist
-        return attribs
+        key = 'types'
+        return self._get_summary_data(si_lst=si_lst, key=key)
 
     # endregion Data
 

@@ -799,7 +799,7 @@ def _main():
     # url = "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1awt_1_1AnimatedImagesControlModel.html"
     # url = "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1awt_1_1SpinningProgressControlModel.html"
     # url = "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1awt_1_1AccessibleCheckBox.html"
-    url = "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1report_1_1Shape.html"
+    url = "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1document_1_1MediaDescriptor.html"
     # sys.argv.extend(['-n', '-v', '-L', 'service.log', '-u', url])
     # main()
     args = ('v', 'n' )
