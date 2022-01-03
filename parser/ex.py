@@ -65,33 +65,8 @@ class ApiExData(base.APIData):
         super().__init__(url_soup=url_soup, allow_cache=allow_cache)
 
         self._ns: ApiNs = None
-        self._desc: base.ApiDesc = None
-        self._inherited: base.ApiInherited = None
-        self._properties_block: ApiPropertiesBlock = None
-        self._property_summaries: base.ApiSummaries = None
-        self._property_summary_rows: base.ApiSummaryRows = None
     # endregion constructor
 
-    # region methods
-
-    def get_import_info_property(self) -> base.ImportInfo:
-        """
-        Gets imports for properties
-
-        Args:
-            si_id (str): Property summary Info
-
-        Returns:
-            base.ImportInfo: Import info
-        """
-        info = base.ImportInfo()
-        p_info = self.property_summaries
-        # ensure data is primed
-        p_info.get_obj()
-        info.requires_typing = p_info.requires_typing
-        info.imports.update(p_info.imports)
-        return info
-    # endregion methods
 
     # region Properties
     @property
@@ -102,44 +77,6 @@ class ApiExData(base.APIData):
                 self.soup_obj)
         return self._ns
 
-    @property
-    def desc(self) -> base.ApiDesc:
-        """Gets the interface Description object"""
-        if self._desc is None:
-            self._desc = base.ApiDesc(self.soup_obj)
-        return self._desc
-
-    @property
-    def inherited(self) -> base.ApiInherited:
-        """Gets class that get all inherited value"""
-        if self._inherited is None:
-            self._inherited = base.ApiInherited(
-                soup=self.soup_obj, raise_error=False)
-        return self._inherited
-
-    @property
-    def properties_block(self) -> ApiPropertiesBlock:
-        """Gets Summary Properties block"""
-        if self._properties_block is None:
-            self._properties_block = ApiPropertiesBlock(
-                self.public_members)
-        return self._properties_block
-    
-    @property
-    def property_summary_rows(self) -> base.ApiSummaryRows:
-        """Get Summary rows for Properties"""
-        if self._property_summary_rows is None:
-            self._property_summary_rows = base.ApiSummaryRows(
-                self.properties_block)
-        return self._property_summary_rows
-    
-    @property
-    def property_summaries(self) -> base.ApiSummaries:
-        """Get Summary info list for Properties"""
-        if self._property_summaries is None:
-            self._property_summaries = base.ApiSummaries(
-                self.property_summary_rows)
-        return self._property_summaries
     # endregion Properties
 
 # endregion API Ex

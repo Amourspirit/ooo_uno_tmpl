@@ -1455,6 +1455,7 @@ class ApiMethodException(BlockObj):
 # endregion     Method Api
 
 class APIData:
+    # region Constructor
     def __init__(self, url_soup: Union[str, SoupObj], allow_cache: bool):
         if isinstance(url_soup, str):
             self._url = url_soup
@@ -1480,6 +1481,9 @@ class APIData:
         self._type_summaries: ApiSummaries = None
         self._type_summary_rows: ApiSummaryRows = None
         self._inherited: ApiInherited = None
+
+    # endregion Constructor
+
     # region Methods
     def _get_name_rules_engine(self) -> Union['IRulesName', None]:
         """
