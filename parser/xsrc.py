@@ -17,13 +17,12 @@ from bs4.element import ResultSet, Tag
 from kwhelp.decorator import AcceptedTypes, DecFuncEnum, RequireArgs, TypeCheckKw
 from pathlib import Path
 from dataclasses import dataclass
-
-from parser.base import SummaryInfo
 try:
     import base
 except ModuleNotFoundError:
     import parser.base as base
 from logger.log_handle import get_logger
+from parser.base import SummaryInfo
 from parser.type_mod import PythonType
 from parser import __version__, JSON_ID
 # endregion Imports
@@ -642,6 +641,8 @@ class Parser(base.ParserBase):
         self._cache[key] = result
         return self._cache[key]
 
+    # region get data
+
     def get_formated_data(self) -> str:
         key = 'get_formated_data'
         if key in self._cache:
@@ -658,7 +659,7 @@ class Parser(base.ParserBase):
         attribs = {}
         methods = self._get_methods_data()
         prop = self._get_properties_data()
-        types = self._get_types_data
+        types = self._get_types_data()
         if 'methods' in methods:
             attribs.update(methods)
         if 'types' in types:
@@ -667,6 +668,57 @@ class Parser(base.ParserBase):
             attribs.update(prop)
         self._cache[key] = attribs
         return self._cache[key]
+
+    def _get_methods_data(self):
+        attribs = {}
+        si_lst = self._api_data.func_summaries.get_obj()
+        for i, si in enumerate(si_lst):
+            if logger.level <= logging.DEBUG:
+                logger.debug(
+                    "%s._get_methods_data() Processing: %s, %s",
+                    self.__class__.__name__, si.name, si.id)
+            import_info = self._api_data.get_import_info_method(si.id)
+            params_info = self._api_data.get_prams_info(si.id)
+            lst_info = params_info.get_obj()
+            if i == 0:
+                attribs['methods'] = []
+            if import_info.requires_typing:
+                logger.debug(
+                    "%s._get_methods_data() Imports require typing for: %s, %s",
+                    self.__class__.__name__, si.name, si.id)
+                self._requires_typing = True
+            self._imports.update(import_info.imports)
+            if params_info.requires_typing:
+                logger.debug(
+                    "%s._get_methods_data() Params require typing for: %s, %s",
+                    self.__class__.__name__, si.name, si.id)
+                self._requires_typing = True
+            self._imports.update(params_info.imports)
+            if si.p_type.requires_typing:
+                logger.debug(
+                    "%s._get_methods_data() Return '%s' type require typing for: %s, %s",
+                    self.__class__.__name__, si.p_type.type, si.name, si.id)
+                self._requires_typing = True
+            args = []
+            attrib = {
+                "name": si.name,
+                "returns": si.p_type.type,
+                "desc": self._api_data.get_desc_detail(si.id).get_obj(),
+                "raises": self._api_data.get_method_ex(si.id).get_obj() or []
+            }
+            for pi in lst_info:
+                if logger.level <= logging.DEBUG:
+                    logger.debug(
+                        f"{self.__class__.__name__}._get_methods_data() {si.name} param, Name: {pi.name}, Type: {pi.type}, Direction: {pi.direction}")
+                args.append((pi.name, pi.type, pi.direction))
+            attrib['args'] = args
+            attribs['methods'].append(attrib)
+
+        if self.sort:
+            if 'methods' in attribs:
+                newlist = sorted(attribs['methods'], key=lambda d: d['name'])
+                attribs['methods'] = newlist
+        return attribs
 
     def _get_summary_data(self, si_lst: List[SummaryInfo], key: str) -> dict:
         attribs = {}
@@ -704,11 +756,6 @@ class Parser(base.ParserBase):
                 attribs[key] = newlist
         return attribs
 
-    def _get_methods_data(self):
-        attribs = {}
-        key = 'methods'
-        si_lst = self._api_data.func_summaries.get_obj()
-        return self._get_summary_data(si_lst=si_lst, key=key)
 
     def _get_properties_data(self):
         si_lst = self._api_data.property_summaries.get_obj()
@@ -721,6 +768,9 @@ class Parser(base.ParserBase):
         key = 'types'
         return self._get_summary_data(si_lst=si_lst, key=key)
 
+    # endregion get data
+
+    # region Properties
     @property
     def imports(self) -> Set[str]:
         """Gets imports value"""
@@ -750,6 +800,8 @@ class Parser(base.ParserBase):
     @property
     def api_data(self) -> ApiInterfaceData:
         return self._api_data
+
+    # endregion Properties
 # endregion Parse
 
 # region Writer
