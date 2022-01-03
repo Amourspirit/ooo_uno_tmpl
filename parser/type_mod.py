@@ -259,6 +259,7 @@ class TypeRules(ITypeRules):
         self._rules.append(rule)
 
     def _register_known_rules(self):
+        self._reg_rule(rule=RuleNone)
         self._reg_rule(rule=RulePrimative)
         self._reg_rule(rule=RuleKnownPrimative)
         self._reg_rule(rule=RuleKnownItterType)
@@ -308,6 +309,22 @@ class TypeRules(ITypeRules):
             self._cache[key] = rule(self)
         return self._cache[key]
     
+
+class RuleNone(ITypeRule):
+    def __init__(self, rules: ITypeRules) -> None:
+        self._rules = rules
+
+    def get_is_match(self, in_type: str) -> bool:
+        return in_type == ''
+
+    def get_python_type(self, in_type: str) -> PythonType:
+        return PythonType(
+            type="None",
+            requires_typing=False,
+            is_py_type=True,
+            realtype=None
+        )
+
 class RulePrimative(ITypeRule):
     def __init__(self, rules: ITypeRules) -> None:
         self._rules =rules
