@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
   "version": "0.1.12",
-  "timestamp": "2022-01-01 23:31:34+00:00",
+  "timestamp": "2022-01-03 04:03:23+00:00",
   "name": "MediaProperties",
   "type": "service",
   "namespace": "com.sun.star.graphic",
@@ -13,15 +13,95 @@
   },
   "data": {
     "from_imports": [],
-    "quote": [],
+    "from_imports_typing": [
+      [
+        "..io.x_stream",
+        "XStream"
+      ],
+      [
+        "..beans.property_values",
+        "PropertyValues"
+      ],
+      [
+        "..io.x_input_stream",
+        "XInputStream"
+      ]
+    ],
+    "quote": [
+      "PropertyValues",
+      "XStream",
+      "XInputStream"
+    ],
     "typings": [],
-    "requires_typing": false,
+    "requires_typing": true,
     "name": "MediaProperties",
+    "imports": [],
     "namespace": "com.sun.star.graphic",
     "extends": [],
-    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1graphic_1_1MediaProperties.html",
     "desc": [
       "This service describes the properties that are used when using the XGraphicProvider interface methods."
-    ]
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1graphic_1_1MediaProperties.html",
+    "items": {
+      "properties": [
+        {
+          "name": "FilterData",
+          "returns": "PropertyValues",
+          "desc": [
+            "Additional properties that will be passed to the appropriate filter module."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "InputStream",
+          "returns": "XInputStream",
+          "desc": [
+            "This property is only used for loading graphics or querying graphic descriptors.",
+            "",
+            "A InputStream can be used instead of the URL property"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "MimeType",
+          "returns": "str",
+          "desc": [
+            "This property is only used for storing graphics and describes the format into which the graphic is to be converted.",
+            "",
+            "At the moment, the following mime types are supported for storing graphics:"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "OutputStream",
+          "returns": "XStream",
+          "desc": [
+            "This property is only used for storing graphics.",
+            "",
+            "A OutputStream can be used instead of the URL property"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "URL",
+          "returns": "str",
+          "desc": [
+            "Property that describes the location of the source or target of the graphic as URL.",
+            "",
+            "A URL can be used instead of the InputStream or OutputStream property",
+            "",
+            "In addition to the normal protocols like file:// or http:// you can use private URLs as follows to get access to graphics lying inside the graphicrepository system within an Office context:",
+            "",
+            "Note: As of LibreOffice 6.1 GraphicObject scheme URLs are not supported anymore. For example:"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
   }
 }

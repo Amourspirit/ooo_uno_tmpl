@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
   "version": "0.1.12",
-  "timestamp": "2022-01-01 23:31:53+00:00",
+  "timestamp": "2022-01-03 04:02:57+00:00",
   "name": "GenericDrawPage",
   "type": "service",
   "namespace": "com.sun.star.drawing",
@@ -18,6 +18,14 @@
         "XShapeBinder"
       ],
       [
+        ".x_shape_combiner",
+        "XShapeCombiner"
+      ],
+      [
+        "..container.x_named",
+        "XNamed"
+      ],
+      [
         ".x_shapes",
         "XShapes"
       ],
@@ -28,34 +36,171 @@
       [
         "..beans.x_property_set",
         "XPropertySet"
-      ],
-      [
-        ".x_shape_combiner",
-        "XShapeCombiner"
-      ],
-      [
-        "..container.x_named",
-        "XNamed"
       ]
     ],
-    "quote": [],
+    "from_imports_typing": [
+      [
+        "..container.x_index_access",
+        "XIndexAccess"
+      ],
+      [
+        "..container.x_name_container",
+        "XNameContainer"
+      ],
+      [
+        "..view.paper_orientation",
+        "PaperOrientation"
+      ]
+    ],
+    "quote": [
+      "XNameContainer",
+      "XIndexAccess",
+      "PaperOrientation"
+    ],
     "typings": [],
-    "requires_typing": false,
+    "requires_typing": true,
     "name": "GenericDrawPage",
+    "imports": [],
     "namespace": "com.sun.star.drawing",
     "extends": [
-      "com.sun.star.drawing.XShapeBinder",
       "com.sun.star.drawing.XShapes",
       "com.sun.star.drawing.XShapeGrouper",
-      "com.sun.star.beans.XPropertySet",
       "com.sun.star.drawing.XShapeCombiner",
-      "com.sun.star.container.XNamed"
+      "com.sun.star.drawing.XShapeBinder",
+      "com.sun.star.container.XNamed",
+      "com.sun.star.beans.XPropertySet"
     ],
-    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1drawing_1_1GenericDrawPage.html",
     "desc": [
       "This abstract service is implemented by every page of a DrawingDocument.",
       "",
-      "Example to create and insert a couple of LineShapes:"
-    ]
+      "Example to create and insert a couple of LineShapes:",
+      "",
+      "**since**",
+      "",
+      "    LibreOffice 7.2"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1drawing_1_1GenericDrawPage.html",
+    "items": {
+      "properties": [
+        {
+          "name": "BackgroundFullSize",
+          "returns": "bool",
+          "desc": [
+            "does the background cover the full page or only inside the margins?",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 7.2"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "BorderBottom",
+          "returns": "int",
+          "desc": [
+            "This is the border at the bottom."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "BorderLeft",
+          "returns": "int",
+          "desc": [
+            "This is the border at the left."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "BorderRight",
+          "returns": "int",
+          "desc": [
+            "This is the border at the right."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "BorderTop",
+          "returns": "int",
+          "desc": [
+            "This is the border at the top."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Height",
+          "returns": "int",
+          "desc": [
+            "This is the height."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "IsBackgroundDark",
+          "returns": "bool",
+          "desc": [
+            "this property is true if the averaged background filling colors luminance is below an application specified threshold value.",
+            "",
+            "This can be used to determine the actual value of an auto color."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "NavigationOrder",
+          "returns": "XIndexAccess",
+          "desc": [
+            "this index access defines a navigation order for the top level shapes inside this page.",
+            "",
+            "By default this is equal to the index access of the slide itself, making the z-order the default navigation order for top level shapes."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Number",
+          "returns": "int",
+          "desc": [
+            "This is the number of this page, starting with 1."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Orientation",
+          "returns": "PaperOrientation",
+          "desc": [
+            "This is the orientation of this page."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "UserDefinedAttributes",
+          "returns": "XNameContainer",
+          "desc": [
+            "this property stores xml attributes.",
+            "",
+            "They will be saved to and restored from automatic styles inside xml files."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Width",
+          "returns": "int",
+          "desc": [
+            "This is the width."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
   }
 }

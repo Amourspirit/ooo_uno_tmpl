@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
   "version": "0.1.12",
-  "timestamp": "2022-01-01 23:31:22+00:00",
+  "timestamp": "2022-01-03 04:03:21+00:00",
   "name": "DataSource",
   "type": "service",
   "namespace": "com.sun.star.sdb",
@@ -14,12 +14,8 @@
   "data": {
     "from_imports": [
       [
-        ".x_bookmarks_supplier",
-        "XBookmarksSupplier"
-      ],
-      [
-        ".x_query_definitions_supplier",
-        "XQueryDefinitionsSupplier"
+        "..util.x_flushable",
+        "XFlushable"
       ],
       [
         "..sdbc.x_data_source",
@@ -30,6 +26,10 @@
         "XIsolatedConnection"
       ],
       [
+        ".x_bookmarks_supplier",
+        "XBookmarksSupplier"
+      ],
+      [
         ".x_completed_connection",
         "XCompletedConnection"
       ],
@@ -38,29 +38,201 @@
         "XPropertySet"
       ],
       [
-        "..util.x_flushable",
-        "XFlushable"
+        ".x_query_definitions_supplier",
+        "XQueryDefinitionsSupplier"
       ]
     ],
-    "quote": [],
-    "typings": [],
-    "requires_typing": false,
+    "from_imports_typing": [
+      [
+        "..util.x_number_formats_supplier",
+        "XNumberFormatsSupplier"
+      ],
+      [
+        "..beans.property_value",
+        "PropertyValue"
+      ]
+    ],
+    "quote": [
+      "typing.List[str]",
+      "XNumberFormatsSupplier",
+      "XPropertySet",
+      "typing.List[PropertyValue]"
+    ],
+    "typings": [
+      "typing.List[str]",
+      "typing.List[PropertyValue]"
+    ],
+    "requires_typing": true,
     "name": "DataSource",
+    "imports": [],
     "namespace": "com.sun.star.sdb",
     "extends": [
-      "com.sun.star.sdb.XBookmarksSupplier",
+      "com.sun.star.beans.XPropertySet",
+      "com.sun.star.sdb.XCompletedConnection",
+      "com.sun.star.sdbc.XIsolatedConnection",
+      "com.sun.star.util.XFlushable",
       "com.sun.star.sdb.XQueryDefinitionsSupplier",
       "com.sun.star.sdbc.XDataSource",
-      "com.sun.star.sdbc.XIsolatedConnection",
-      "com.sun.star.sdb.XCompletedConnection",
-      "com.sun.star.beans.XPropertySet",
-      "com.sun.star.util.XFlushable"
+      "com.sun.star.sdb.XBookmarksSupplier"
     ],
-    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1sdb_1_1DataSource.html",
     "desc": [
       "is a factory to establish database connections.",
       "",
-      "It should be registered at a com.sun.star.uno.NamingService."
-    ]
+      "It should be registered at a com.sun.star.uno.NamingService.",
+      "",
+      "**since**",
+      "",
+      "    OOo 1.1.2"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1sdb_1_1DataSource.html",
+    "items": {
+      "types": [
+        {
+          "name": "Info",
+          "returns": "typing.List[PropertyValue]",
+          "desc": [
+            "is a list of arbitrary string tag/value pairs as connection arguments",
+            "",
+            "The DataSource itself does not attempt to interpret any of those values.",
+            "",
+            "Instead, the values in this property have two use cases:"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "TableFilter",
+          "returns": "typing.List[str]",
+          "desc": [
+            "defines a list of tables, on which the DataSource should have it's focus.",
+            "",
+            "If empty, all tables are rejected."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "TableTypeFilter",
+          "returns": "typing.List[str]",
+          "desc": [
+            "defines a list of table types, on which the DataSource should have it's focus.",
+            "",
+            "If empty, all table types are rejected."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ],
+      "properties": [
+        {
+          "name": "IsPasswordRequired",
+          "returns": "bool",
+          "desc": [
+            "indicates that a password is always necessary."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "IsReadOnly",
+          "returns": "bool",
+          "desc": [
+            "determines whether modifications on the data source are allowed or not."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Name",
+          "returns": "str",
+          "desc": [
+            "is the name of the data source.",
+            "",
+            "If the data source is registered at the database context, then the Name property denotes the registration name. Otherwise, the name property contains the URL of the file which the database document associated with the data source is based on.",
+            "",
+            "If the same data source is registered under different names, the value of the Name property is not defined."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "NumberFormatsSupplier",
+          "returns": "XNumberFormatsSupplier",
+          "desc": [
+            "provides an object for formatting numbers."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Password",
+          "returns": "str",
+          "desc": [
+            "determines a users password.",
+            "",
+            "The password is not persistent."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Settings",
+          "returns": "XPropertySet",
+          "desc": [
+            "is a convenience wrapper around the Info property.",
+            "",
+            "Since fiddling around with a sequence of property values is somewhat uncomfortable in all known UNO language bindings (especially for tasks like simply changing the value of an existing value), the Settings property wraps the Info property for easier single-value access.",
+            "",
+            "You should use the Settings property if you need to access a few properties only, and the Info property if you need access to all existent settings at once.",
+            "",
+            "The object represented by this property supports the com.sun.star.beans.PropertyBag service. That is, you can at runtime add arbitrary new properties to the bag.",
+            "",
+            "Additionally, the property bag supports default values of properties, and thus the com.sun.star.beans.XPropertyState interface. If you add an own property to the bag using com.sun.star.beans.XPropertyContainer.addProperty(), you need to specify an initial value, which is also used as default value (exceptions see below).",
+            "",
+            "Effectively, the property bag represented by Settings contains two classes of properties: Pre-defined ones and user-defined ones.",
+            "",
+            "Pre-defined properties are properties which are potentially used by the data source, the application UI for the data source, or a particular backend driver employed by the data source. There's a large set of such properties, no all of them are effectively used for a concrete data source, nonetheless, they're all present in the Settings.",
+            "Such properties are not removable from the bag, that is, their com.sun.star.beans.PropertyAttribute.REMOVABLE attribute is not set.",
+            "Usually, you'll find that all of this properties have the com.sun.star.beans.PropertyState.PropertyState_DEFAULT_VALUE state.",
+            "",
+            "User-defined properties are the ones which are added at runtime by any instance. They might or might not be removable, this depends on whether or not the code adding them specifies the com.sun.star.beans.PropertyAttribute.REMOVABLE attribute. Also, they might or might not have a default value, determined by the com.sun.star.beans.PropertyAttribute.MAYBEDEFAULT attribute at the time they're added to the bag.",
+            "",
+            "When a data source is made persistent, then properties which are not removable (which are assumed to be the pre-defined properties) are ignored when they are in DEFAULT state. All other properties are always made persistent, except when an explicit com.sun.star.beans.PropertyAttribute.TRANSIENT attribute prohibits this.",
+            "",
+            "Similar, when you obtain the Info property of a DataSource, the Settings bag is asked for all its property values, and the ones which are removable and in state default are stripped, and not returned in the Info sequence."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "SuppressVersionColumns",
+          "returns": "bool",
+          "desc": [
+            "indicates that components displaying data obtained from this data source should suppress columns used for versioning."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "URL",
+          "returns": "str",
+          "desc": [
+            "indicates a database url of the form",
+            "jdbc:subprotocol:subname or sdbc:subprotocol:subname"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "User",
+          "returns": "str",
+          "desc": [
+            "determines a users login name."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
   }
 }

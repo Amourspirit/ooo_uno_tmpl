@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
   "version": "0.1.12",
-  "timestamp": "2022-01-01 23:31:32+00:00",
+  "timestamp": "2022-01-03 04:03:27+00:00",
   "name": "TextTable",
   "type": "service",
   "namespace": "com.sun.star.text",
@@ -18,15 +18,61 @@
         "XCellRangeData"
       ]
     ],
-    "quote": [],
-    "typings": [],
-    "requires_typing": false,
+    "from_imports_typing": [
+      [
+        "..graphic.x_graphic",
+        "XGraphic"
+      ],
+      [
+        "..table.shadow_format",
+        "ShadowFormat"
+      ],
+      [
+        "..util.color",
+        "Color"
+      ],
+      [
+        "..style.graphic_location",
+        "GraphicLocation"
+      ],
+      [
+        "..style.break_type",
+        "BreakType"
+      ],
+      [
+        "..beans.property_value",
+        "PropertyValue"
+      ],
+      [
+        "..table.table_border",
+        "TableBorder"
+      ],
+      [
+        ".table_column_separator",
+        "TableColumnSeparator"
+      ]
+    ],
+    "quote": [
+      "XGraphic",
+      "typing.List[TableColumnSeparator]",
+      "GraphicLocation",
+      "Color",
+      "TableBorder",
+      "typing.List[PropertyValue]",
+      "ShadowFormat",
+      "BreakType"
+    ],
+    "typings": [
+      "typing.List[TableColumnSeparator]",
+      "typing.List[PropertyValue]"
+    ],
+    "requires_typing": true,
     "name": "TextTable",
+    "imports": [],
     "namespace": "com.sun.star.text",
     "extends": [
       "com.sun.star.sheet.XCellRangeData"
     ],
-    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1text_1_1TextTable.html",
     "desc": [
       "is a table of text cells which is anchored to a surrounding text.",
       "",
@@ -34,7 +80,306 @@
       "",
       "The reason why a text table still needs an anchor is that for example tables should be insertable via XText.insertTextContent() and that interface uses a parameter of that type.",
       "",
-      "Example: Create and insert a TextTable:"
-    ]
+      "Example: Create and insert a TextTable:",
+      "",
+      "**since**",
+      "",
+      "    LibreOffice 4.3"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1text_1_1TextTable.html",
+    "items": {
+      "types": [
+        {
+          "name": "TableColumnSeparators",
+          "returns": "typing.List[TableColumnSeparator]",
+          "desc": [
+            "contains the column description of the table."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "TableInteropGrabBag",
+          "returns": "typing.List[PropertyValue]",
+          "desc": [
+            "Grab bag of table properties, used as a string-any map for interim interop purposes.",
+            "",
+            "This property is intentionally not handled by the ODF filter. Any member that should be handled there should be first moved out from this grab bag to a separate property.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 4.3"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ],
+      "properties": [
+        {
+          "name": "BackColor",
+          "returns": "Color",
+          "desc": [
+            "contains the color of the background."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "BackGraphic",
+          "returns": "XGraphic",
+          "desc": [
+            "contains the graphic for the background.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 6.1"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "BackGraphicFilter",
+          "returns": "str",
+          "desc": [
+            "contains the name of the file filter for the background graphic."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "BackGraphicLocation",
+          "returns": "GraphicLocation",
+          "desc": [
+            "determines the position of the background graphic."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "BackGraphicURL",
+          "returns": "str",
+          "desc": [
+            "contains the URL for the background graphic.",
+            "",
+            "Note the new behaviour since it this was deprecated: This property can only be set and only external URLs are supported (no more vnd.sun.star.GraphicObject scheme). When an URL is set, then it will load the graphic and set the BackGraphic property."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "BackTransparent",
+          "returns": "bool",
+          "desc": [
+            "determines if the background color is transparent."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "BottomMargin",
+          "returns": "int",
+          "desc": [
+            "determines the bottom margin."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "BreakType",
+          "returns": "BreakType",
+          "desc": [
+            "determines the type of break that is applied at the beginning of the table."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ChartColumnAsLabel",
+          "returns": "bool",
+          "desc": [
+            "determines if the first column of the table should be treated as axis labels when a chart is to be created."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ChartRowAsLabel",
+          "returns": "bool",
+          "desc": [
+            "determines if the first row of the table should be treated as axis labels when a chart is to be created."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "CollapsingBorders",
+          "returns": "bool",
+          "desc": [
+            "determines whether borders of neighboring table cells are collapsed into one"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "HeaderRowCount",
+          "returns": "int",
+          "desc": [
+            "determines the number of rows of the table repeated on every new page."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "HoriOrient",
+          "returns": "int",
+          "desc": [
+            "contains the horizontal orientation."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "IsWidthRelative",
+          "returns": "bool",
+          "desc": [
+            "determines if the value of the relative width is valid."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "KeepTogether",
+          "returns": "bool",
+          "desc": [
+            "Setting this property to TRUE prevents page or column breaks between this table and the following paragraph or text table."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "LeftMargin",
+          "returns": "int",
+          "desc": [
+            "contains the left margin of the table."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "PageDescName",
+          "returns": "str",
+          "desc": [
+            "If this property is set, it creates a page break before the table and assigns the value as the name of the new page style sheet to use."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "PageNumberOffset",
+          "returns": "int",
+          "desc": [
+            "If a page break property is set at the table, this property contains the new value for the page number."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "RelativeWidth",
+          "returns": "int",
+          "desc": [
+            "determines the width of the table relative to its environment."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "RepeatHeadline",
+          "returns": "bool",
+          "desc": [
+            "determines if the first row of the table is repeated on every new page."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "RightMargin",
+          "returns": "int",
+          "desc": [
+            "contains the right margin of the table."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ShadowFormat",
+          "returns": "ShadowFormat",
+          "desc": [
+            "determines the type, color and size of the shadow."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Split",
+          "returns": "bool",
+          "desc": [
+            "Setting this property to FALSE prevents the table from getting spread on two pages."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "TableBorder",
+          "returns": "TableBorder",
+          "desc": [
+            "contains the description of the table borders."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "TableColumnRelativeSum",
+          "returns": "int",
+          "desc": [
+            "contains the sum of the column width values used in TableColumnSeparators."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "TableTemplateName",
+          "returns": "str",
+          "desc": [
+            "contains the name of table style used by the table.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 5.3"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "TopMargin",
+          "returns": "int",
+          "desc": [
+            "determines the top margin."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Width",
+          "returns": "int",
+          "desc": [
+            "contains the absolute table width.",
+            "",
+            "As this is only a describing property the value of the actual table may vary depending on the environment the table is located in and the settings of LeftMargin, RightMargin and HoriOrient."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
   }
 }

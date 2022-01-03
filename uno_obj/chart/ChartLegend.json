@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
   "version": "0.1.12",
-  "timestamp": "2022-01-01 23:31:51+00:00",
+  "timestamp": "2022-01-03 04:03:09+00:00",
   "name": "ChartLegend",
   "type": "service",
   "namespace": "com.sun.star.chart",
@@ -14,33 +14,70 @@
   "data": {
     "from_imports": [
       [
+        "..style.character_properties",
+        "CharacterProperties"
+      ],
+      [
         "..xml.user_defined_attributes_supplier",
         "UserDefinedAttributesSupplier"
       ],
       [
         "..drawing.shape",
         "Shape"
-      ],
-      [
-        "..style.character_properties",
-        "CharacterProperties"
       ]
     ],
-    "quote": [],
+    "from_imports_typing": [
+      [
+        ".chart_legend_position",
+        "ChartLegendPosition"
+      ]
+    ],
+    "quote": [
+      "ChartLegendPosition"
+    ],
     "typings": [],
-    "requires_typing": false,
+    "requires_typing": true,
     "name": "ChartLegend",
+    "imports": [],
     "namespace": "com.sun.star.chart",
     "extends": [
-      "com.sun.star.xml.UserDefinedAttributesSupplier",
       "com.sun.star.drawing.Shape",
-      "com.sun.star.style.CharacterProperties"
+      "com.sun.star.style.CharacterProperties",
+      "com.sun.star.xml.UserDefinedAttributesSupplier"
     ],
-    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1chart_1_1ChartLegend.html",
     "desc": [
       "specifies the legend of a chart.",
       "",
-      "The text/font properties which are specified in the service com.sun.star.drawing.Shape correlate to all text objects inside the legend."
-    ]
+      "The text/font properties which are specified in the service com.sun.star.drawing.Shape correlate to all text objects inside the legend.",
+      "",
+      "**since**",
+      "",
+      "    OOo 1.1.2"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1chart_1_1ChartLegend.html",
+    "items": {
+      "properties": [
+        {
+          "name": "Alignment",
+          "returns": "ChartLegendPosition",
+          "desc": [
+            "determines the alignment of the legend relative to the diagram."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "AutomaticPosition",
+          "returns": "bool",
+          "desc": [
+            "If this property is TRUE the position is calculated by the application automatically.",
+            "",
+            "Setting this property to false will have no effect. Instead use the interface com.sun.star.drawing.XShape to set a concrete position."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
   }
 }

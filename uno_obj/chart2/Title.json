@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
   "version": "0.1.12",
-  "timestamp": "2022-01-01 23:31:37+00:00",
+  "timestamp": "2022-01-03 04:03:36+00:00",
   "name": "Title",
   "type": "service",
   "namespace": "com.sun.star.chart2",
@@ -18,10 +18,6 @@
         "ParagraphProperties"
       ],
       [
-        ".x_title",
-        "XTitle"
-      ],
-      [
         "..drawing.line_properties",
         "LineProperties"
       ],
@@ -30,23 +26,87 @@
         "PropertySet"
       ],
       [
+        ".x_title",
+        "XTitle"
+      ],
+      [
         "..drawing.fill_properties",
         "FillProperties"
       ]
     ],
-    "quote": [],
+    "from_imports_typing": [
+      [
+        "..awt.size",
+        "Size"
+      ],
+      [
+        ".relative_position",
+        "RelativePosition"
+      ]
+    ],
+    "quote": [
+      "Size",
+      "RelativePosition"
+    ],
     "typings": [],
-    "requires_typing": false,
+    "requires_typing": true,
     "name": "Title",
+    "imports": [],
     "namespace": "com.sun.star.chart2",
     "extends": [
       "com.sun.star.style.ParagraphProperties",
-      "com.sun.star.chart2.XTitle",
+      "com.sun.star.drawing.FillProperties",
       "com.sun.star.drawing.LineProperties",
       "com.sun.star.beans.PropertySet",
-      "com.sun.star.drawing.FillProperties"
+      "com.sun.star.chart2.XTitle"
     ],
+    "desc": [],
     "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1chart2_1_1Title.html",
-    "desc": []
+    "items": {
+      "properties": [
+        {
+          "name": "ReferencePageSize",
+          "returns": "Size",
+          "desc": [
+            "contains the size of the page at the time when properties were set (e.g.",
+            "",
+            "the CharHeight).",
+            "",
+            "This way it is possible to resize objects (like text) in the view without modifying the model."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "RelativePosition",
+          "returns": "RelativePosition",
+          "desc": [
+            "The position is a relative position on the page.",
+            "",
+            "If a relative position is given the title is not automatically placed, but instead is placed relative on the page."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "StackCharacters",
+          "returns": "bool",
+          "desc": [
+            "writes the characters of the title on top of each other if set to TRUE."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "TextRotation",
+          "returns": "float",
+          "desc": [
+            "the rotation of the title's text in degrees in the range [0,360)."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
   }
 }

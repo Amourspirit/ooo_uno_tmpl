@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
   "version": "0.1.12",
-  "timestamp": "2022-01-01 23:31:47+00:00",
+  "timestamp": "2022-01-03 04:03:12+00:00",
   "name": "GridControl",
   "type": "service",
   "namespace": "com.sun.star.form.component",
@@ -18,35 +18,48 @@
         "FormComponents"
       ],
       [
-        "...view.x_selection_supplier",
-        "XSelectionSupplier"
-      ],
-      [
         "..x_grid_column_factory",
         "XGridColumnFactory"
+      ],
+      [
+        "..form_control_model",
+        "FormControlModel"
       ],
       [
         "..x_reset",
         "XReset"
       ],
       [
-        "..form_control_model",
-        "FormControlModel"
+        "...view.x_selection_supplier",
+        "XSelectionSupplier"
       ]
     ],
-    "quote": [],
+    "from_imports_typing": [
+      [
+        "...awt.font_descriptor",
+        "FontDescriptor"
+      ],
+      [
+        "...util.color",
+        "Color"
+      ]
+    ],
+    "quote": [
+      "FontDescriptor",
+      "Color"
+    ],
     "typings": [],
-    "requires_typing": false,
+    "requires_typing": true,
     "name": "GridControl",
+    "imports": [],
     "namespace": "com.sun.star.form.component",
     "extends": [
+      "com.sun.star.form.FormControlModel",
       "com.sun.star.form.FormComponents",
-      "com.sun.star.view.XSelectionSupplier",
       "com.sun.star.form.XGridColumnFactory",
-      "com.sun.star.form.XReset",
-      "com.sun.star.form.FormControlModel"
+      "com.sun.star.view.XSelectionSupplier",
+      "com.sun.star.form.XReset"
     ],
-    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1form_1_1component_1_1GridControl.html",
     "desc": [
       "specifies a model for a control which can display form data in a table-like way.",
       "",
@@ -54,7 +67,87 @@
       "",
       "The table rows in a grid control correspond to the rows in the DataForm the control belongs to, and the columns correspond to single columns of the form's row set.",
       "",
-      "Columns of a grid control are modeled by own objects, too. They are very similar to usual com.sun.star.form.DataAwareControlModels modeling other \\\"single-value\\\" controls, but they are not described as own services. Instead, they need to be created using the com.sun.star.form.XGridColumnFactory interface."
-    ]
+      "Columns of a grid control are modeled by own objects, too. They are very similar to usual com.sun.star.form.DataAwareControlModels modeling other \\\"single-value\\\" controls, but they are not described as own services. Instead, they need to be created using the com.sun.star.form.XGridColumnFactory interface.",
+      "",
+      "**since**",
+      "",
+      "    OOo 2.0"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1form_1_1component_1_1GridControl.html",
+    "items": {
+      "properties": [
+        {
+          "name": "Border",
+          "returns": "int",
+          "desc": [
+            "returns the border style of the control."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "BorderColor",
+          "returns": "int",
+          "desc": [
+            "specifies the color of the border, if present",
+            "",
+            "Not every border style (see Border) may support coloring. For instance, usually a border with 3D effect will ignore the BorderColor setting.",
+            "",
+            "**since**",
+            "",
+            "    OOo 2.0"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Enabled",
+          "returns": "bool",
+          "desc": [
+            "determines whether the control is enabled or disabled."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "FontDescriptor",
+          "returns": "FontDescriptor",
+          "desc": [
+            "contains the font attributes of the text in the control."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "RowHeight",
+          "returns": "int",
+          "desc": [
+            "specifies the height of a row of the grid.",
+            "",
+            "If the value is set to NULL, the height is determined automatically according to the current font used."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Tabstop",
+          "returns": "bool",
+          "desc": [
+            "determines whether the control can be reached by the tabulator key."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "TextColor",
+          "returns": "Color",
+          "desc": [
+            "specifies the text color (RGB) of the control."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
   }
 }

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
   "version": "0.1.12",
-  "timestamp": "2022-01-01 23:31:27+00:00",
+  "timestamp": "2022-01-03 04:03:33+00:00",
   "name": "SheetCellRanges",
   "type": "service",
   "namespace": "com.sun.star.sheet",
@@ -18,17 +18,90 @@
         "XNameContainer"
       ]
     ],
-    "quote": [],
+    "from_imports_typing": [
+      [
+        "..beans.x_property_set",
+        "XPropertySet"
+      ],
+      [
+        ".x_sheet_conditional_entries",
+        "XSheetConditionalEntries"
+      ]
+    ],
+    "quote": [
+      "XSheetConditionalEntries",
+      "XPropertySet"
+    ],
     "typings": [],
-    "requires_typing": false,
+    "requires_typing": true,
     "name": "SheetCellRanges",
+    "imports": [],
     "namespace": "com.sun.star.sheet",
     "extends": [
       "com.sun.star.container.XNameContainer"
     ],
-    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1sheet_1_1SheetCellRanges.html",
     "desc": [
       "represents a collection of cell ranges in a spreadsheet document."
-    ]
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1sheet_1_1SheetCellRanges.html",
+    "items": {
+      "properties": [
+        {
+          "name": "AbsoluteName",
+          "returns": "str",
+          "desc": [
+            "Returns the absolute address of the ranges as string, e.g.",
+            "",
+            "\\\"$Sheet1.$B$2:$D$5\\\"."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ConditionalFormat",
+          "returns": "XSheetConditionalEntries",
+          "desc": [
+            "contains the conditional formatting settings for this cell.",
+            "",
+            "After a conditional format has been changed it has to be reinserted into the property set."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ConditionalFormatLocal",
+          "returns": "XSheetConditionalEntries",
+          "desc": [
+            "contains the conditional formatting settings for this cell, using localized formulas.",
+            "",
+            "After a conditional format has been changed it has to be reinserted into the property set."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Validation",
+          "returns": "XPropertySet",
+          "desc": [
+            "contains the data validation settings for this cell.",
+            "",
+            "After the data validation settings have been changed the validation has to be reinserted into the property set."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ValidationLocal",
+          "returns": "XPropertySet",
+          "desc": [
+            "contains the data validation settings for this cell, using localized formulas.",
+            "",
+            "After the data validation settings have been changed the validation has to be reinserted into the property set."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
   }
 }

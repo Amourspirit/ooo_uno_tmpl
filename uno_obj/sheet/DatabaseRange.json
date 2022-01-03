@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
   "version": "0.1.12",
-  "timestamp": "2022-01-01 23:31:26+00:00",
+  "timestamp": "2022-01-03 04:03:32+00:00",
   "name": "DatabaseRange",
   "type": "service",
   "namespace": "com.sun.star.sheet",
@@ -14,43 +14,195 @@
   "data": {
     "from_imports": [
       [
-        "..beans.x_property_set",
-        "XPropertySet"
-      ],
-      [
         ".x_cell_range_referrer",
         "XCellRangeReferrer"
-      ],
-      [
-        "..util.x_refreshable",
-        "XRefreshable"
       ],
       [
         ".x_database_range",
         "XDatabaseRange"
       ],
       [
+        "..util.x_refreshable",
+        "XRefreshable"
+      ],
+      [
         "..container.x_named",
         "XNamed"
+      ],
+      [
+        "..beans.x_property_set",
+        "XPropertySet"
       ]
     ],
-    "quote": [],
+    "from_imports_typing": [
+      [
+        "..table.cell_range_address",
+        "CellRangeAddress"
+      ]
+    ],
+    "quote": [
+      "CellRangeAddress"
+    ],
     "typings": [],
-    "requires_typing": false,
+    "requires_typing": true,
     "name": "DatabaseRange",
+    "imports": [],
     "namespace": "com.sun.star.sheet",
     "extends": [
-      "com.sun.star.beans.XPropertySet",
-      "com.sun.star.sheet.XCellRangeReferrer",
-      "com.sun.star.util.XRefreshable",
       "com.sun.star.sheet.XDatabaseRange",
-      "com.sun.star.container.XNamed"
+      "com.sun.star.sheet.XCellRangeReferrer",
+      "com.sun.star.beans.XPropertySet",
+      "com.sun.star.container.XNamed",
+      "com.sun.star.util.XRefreshable"
     ],
-    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1sheet_1_1DatabaseRange.html",
     "desc": [
       "represents a database range in a spreadsheet document.",
       "",
-      "A database range is a name for a cell range that also stores filtering, sorting, subtotal and data import settings and options."
-    ]
+      "A database range is a name for a cell range that also stores filtering, sorting, subtotal and data import settings and options.",
+      "",
+      "**since**",
+      "",
+      "    OOo 1.1.2"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1sheet_1_1DatabaseRange.html",
+    "items": {
+      "properties": [
+        {
+          "name": "AutoFilter",
+          "returns": "bool",
+          "desc": [
+            "specifies whether the AutoFilter is enabled or not.",
+            "",
+            "**since**",
+            "",
+            "    OOo 1.1.2"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ContainsHeader",
+          "returns": "bool",
+          "desc": [
+            "specifies whether this range includes a top row of headers.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 5.0"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "FilterCriteriaSource",
+          "returns": "CellRangeAddress",
+          "desc": [
+            "specifies the range where the filter can find the filter criteria.",
+            "",
+            "This is only used if SheetFilterDescriptor.UseFilterCriteriaSource is TRUE.",
+            "",
+            "**since**",
+            "",
+            "    OOo 1.1.2"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "FromSelection",
+          "returns": "bool",
+          "desc": [
+            "specifies whether the imported data is only a selection of the database.",
+            "",
+            "**since**",
+            "",
+            "    OOo 2.0"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "KeepFormats",
+          "returns": "bool",
+          "desc": [
+            "if this property is set, cell formats are extended when the size of the range is changed by an update operation."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "MoveCells",
+          "returns": "bool",
+          "desc": [
+            "if this property is set, columns or rows are inserted or deleted when the size of the range is changed by an update operation."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "RefreshPeriod",
+          "returns": "int",
+          "desc": [
+            "specifies the time between two refresh actions in seconds.",
+            "",
+            "**since**",
+            "",
+            "    OOo 2.0"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "StripData",
+          "returns": "bool",
+          "desc": [
+            "if this property is set, the cell contents within the database range are left out when the document is saved."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "TokenIndex",
+          "returns": "int",
+          "desc": [
+            "returns the index used to refer to this range in token arrays.",
+            "",
+            "A token describing a database range shall contain the op-code obtained from the FormulaMapGroupSpecialOffset.DB_AREA and this index as data part.",
+            "",
+            "**since**",
+            "",
+            "    OOo 3.0"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "TotalsRow",
+          "returns": "bool",
+          "desc": [
+            "specifies whether this range includes a bottom row of totals.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 5.0"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "UseFilterCriteriaSource",
+          "returns": "bool",
+          "desc": [
+            "specifies whether the filter criteria should be taken from a CellRange.",
+            "",
+            "**since**",
+            "",
+            "    OOo 1.1.2"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
   }
 }

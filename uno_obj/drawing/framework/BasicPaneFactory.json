@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
   "version": "0.1.12",
-  "timestamp": "2022-01-01 23:31:49+00:00",
+  "timestamp": "2022-01-03 04:03:04+00:00",
   "name": "BasicPaneFactory",
   "type": "service",
   "namespace": "com.sun.star.drawing.framework",
@@ -18,21 +18,49 @@
         "XResourceFactory"
       ]
     ],
-    "quote": [],
+    "from_imports_typing": [
+      [
+        "...frame.x_controller",
+        "XController"
+      ]
+    ],
+    "quote": [
+      "XController"
+    ],
     "typings": [],
-    "requires_typing": false,
+    "requires_typing": true,
     "name": "BasicPaneFactory",
+    "imports": [],
     "namespace": "com.sun.star.drawing.framework",
     "extends": [
       "com.sun.star.drawing.framework.XResourceFactory"
     ],
-    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1drawing_1_1framework_1_1BasicPaneFactory.html",
     "desc": [
       "The BasicPaneFactory is a resource factory that provides the panes used by the Draw and Impress applications.",
       "",
       "This factory provides the center, left, and right pane. For the left pane there are two URLS, private:resource/floater/LeftImpressPane and private:resource/floater/LeftDrawPane, one for Impress, the other for Draw. The center pane and the right pane have the URLs private:resource/floater/CenterPane and private:resource/floater/RightPane respectively.",
       "",
       "This factory is typically created indirectly by registering it in the configuration and have the XModuleController create it on demand."
-    ]
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1drawing_1_1framework_1_1BasicPaneFactory.html",
+    "items": {
+      "methods": [
+        {
+          "name": "create",
+          "returns": "None",
+          "desc": [
+            "Give the controller to new instances so that they have access to the drawing framework controllers."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xController",
+              "XController",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

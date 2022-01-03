@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
   "version": "0.1.12",
-  "timestamp": "2022-01-01 23:31:53+00:00",
+  "timestamp": "2022-01-03 04:02:57+00:00",
   "name": "EnhancedCustomShapeGeometry",
   "type": "service",
   "namespace": "com.sun.star.drawing",
@@ -13,15 +13,154 @@
   },
   "data": {
     "from_imports": [],
-    "quote": [],
-    "typings": [],
-    "requires_typing": false,
+    "from_imports_typing": [
+      [
+        "..beans.property_value",
+        "PropertyValue"
+      ],
+      [
+        "..beans.property_values",
+        "PropertyValues"
+      ],
+      [
+        ".enhanced_custom_shape_adjustment_value",
+        "EnhancedCustomShapeAdjustmentValue"
+      ],
+      [
+        "..awt.rectangle",
+        "Rectangle"
+      ]
+    ],
+    "quote": [
+      "Rectangle",
+      "typing.List[EnhancedCustomShapeAdjustmentValue]",
+      "typing.List[PropertyValue]",
+      "typing.List[str]",
+      "typing.List[PropertyValues]"
+    ],
+    "typings": [
+      "typing.List[str]",
+      "typing.List[PropertyValues]",
+      "typing.List[PropertyValue]",
+      "typing.List[EnhancedCustomShapeAdjustmentValue]"
+    ],
+    "requires_typing": true,
     "name": "EnhancedCustomShapeGeometry",
+    "imports": [],
     "namespace": "com.sun.star.drawing",
     "extends": [],
-    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1drawing_1_1EnhancedCustomShapeGeometry.html",
     "desc": [
       "This service may be represented by a com.sun.star.beans.PropertyValue []."
-    ]
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1drawing_1_1EnhancedCustomShapeGeometry.html",
+    "items": {
+      "types": [
+        {
+          "name": "AdjustmentValues",
+          "returns": "typing.List[EnhancedCustomShapeAdjustmentValue]",
+          "desc": [
+            "This property specifies a sequence of Adjustment values."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Equations",
+          "returns": "typing.List[str]",
+          "desc": [
+            "This property is describing the equations that are used, each equation can be referenced by com.sun.star.drawing.EnhancedCustomShapeParameter which are often used in Path, Extrusion and or Handle descriptions."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Extrusion",
+          "returns": "typing.List[PropertyValue]",
+          "desc": [
+            "This property sequence is including the extrusion description, the properties are as same as specified in the service com.sun.star:drawing.EnhancedCustomShapeExtrusion."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Handles",
+          "returns": "typing.List[PropertyValues]",
+          "desc": [
+            "This property is describing the interaction handles that are used, each inner property sequence is having the same properties as they are specified in the service com.sun.star:drawing.EnhancedCustomShapeHandle."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Path",
+          "returns": "typing.List[PropertyValue]",
+          "desc": [
+            "This property sequence is including the path description, the properties are as same as specified in the service com.sun.star:drawing.EnhancedCustomShapePath."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "TextPath",
+          "returns": "typing.List[PropertyValue]",
+          "desc": [
+            "This property sequence is including the text path description, the properties are as same as specified in the service com.sun.star:drawing.EnhancedCustomShapeTextPath."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ],
+      "properties": [
+        {
+          "name": "MirroredX",
+          "returns": "bool",
+          "desc": [
+            "This property specifies if the orientation of the shape is horizontal mirrored."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "MirroredY",
+          "returns": "bool",
+          "desc": [
+            "This property specifies if the orientation of the shape is vertical mirrored."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "TextRotateAngle",
+          "returns": "float",
+          "desc": [
+            "This property specifies the text rotation angle in degrees.",
+            "",
+            "The text rotation is added to the shape geometry rotation."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Type",
+          "returns": "str",
+          "desc": [
+            "The Type attribute contains the name of a shape type.",
+            "",
+            "This name can be used to offer specialized user interfaces for certain classes of shapes, like for arrows, smileys, etc. The shape type is rendering engine dependent and does not influence the geometry of the shape. If the value of the draw:type attribute is non-primitive, then no shape type is available."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ViewBox",
+          "returns": "Rectangle",
+          "desc": [
+            "This property describes the user space of the shape in its canonical form."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
   }
 }

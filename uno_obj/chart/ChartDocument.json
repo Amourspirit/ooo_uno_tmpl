@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
   "version": "0.1.12",
-  "timestamp": "2022-01-01 23:31:51+00:00",
+  "timestamp": "2022-01-03 04:03:09+00:00",
   "name": "ChartDocument",
   "type": "service",
   "namespace": "com.sun.star.chart",
@@ -14,38 +14,75 @@
   "data": {
     "from_imports": [
       [
-        "..xml.user_defined_attributes_supplier",
-        "UserDefinedAttributesSupplier"
+        "..beans.x_property_set",
+        "XPropertySet"
       ],
       [
         "..drawing.x_draw_page_supplier",
         "XDrawPageSupplier"
       ],
       [
-        "..beans.x_property_set",
-        "XPropertySet"
-      ],
-      [
         ".x_chart_document",
         "XChartDocument"
+      ],
+      [
+        "..xml.user_defined_attributes_supplier",
+        "UserDefinedAttributesSupplier"
       ]
     ],
+    "from_imports_typing": [],
     "quote": [],
     "typings": [],
     "requires_typing": false,
     "name": "ChartDocument",
+    "imports": [],
     "namespace": "com.sun.star.chart",
     "extends": [
-      "com.sun.star.drawing.XDrawPageSupplier",
       "com.sun.star.xml.UserDefinedAttributesSupplier",
+      "com.sun.star.chart.XChartDocument",
       "com.sun.star.beans.XPropertySet",
-      "com.sun.star.chart.XChartDocument"
+      "com.sun.star.drawing.XDrawPageSupplier"
     ],
-    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1chart_1_1ChartDocument.html",
     "desc": [
       "is the service for a chart document.",
       "",
-      "A chart document consists of a reference to the data source, the diagram and some additional elements like a main title, a sub-title or a legend."
-    ]
+      "A chart document consists of a reference to the data source, the diagram and some additional elements like a main title, a sub-title or a legend.",
+      "",
+      "**since**",
+      "",
+      "    OOo 1.1.2"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1chart_1_1ChartDocument.html",
+    "items": {
+      "properties": [
+        {
+          "name": "HasLegend",
+          "returns": "bool",
+          "desc": [
+            "determines if the legend is shown or hidden."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "HasMainTitle",
+          "returns": "bool",
+          "desc": [
+            "determines if the main title is shown or hidden."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "HasSubTitle",
+          "returns": "bool",
+          "desc": [
+            "determines if the subtitle is shown or hidden."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
   }
 }

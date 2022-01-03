@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
   "version": "0.1.12",
-  "timestamp": "2022-01-01 23:31:38+00:00",
+  "timestamp": "2022-01-03 04:03:29+00:00",
   "name": "TextUserDefinedAttributesSupplier",
   "type": "service",
   "namespace": "com.sun.star.xml",
@@ -13,19 +13,45 @@
   },
   "data": {
     "from_imports": [],
-    "quote": [],
+    "from_imports_typing": [
+      [
+        "..container.x_name_container",
+        "XNameContainer"
+      ]
+    ],
+    "quote": [
+      "XNameContainer"
+    ],
     "typings": [],
-    "requires_typing": false,
+    "requires_typing": true,
     "name": "TextUserDefinedAttributesSupplier",
+    "imports": [],
     "namespace": "com.sun.star.xml",
     "extends": [],
-    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1xml_1_1TextUserDefinedAttributesSupplier.html",
     "desc": [
       "A component that supports this service preserves XML attributes, unknown by its parser, that belong to the XML element representing it (the component).",
       "",
-      "**Since**",
+      "**since**",
       "",
       "    OOo 2.0.4"
-    ]
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1xml_1_1TextUserDefinedAttributesSupplier.html",
+    "items": {
+      "properties": [
+        {
+          "name": "TextUserDefinedAttributes",
+          "returns": "XNameContainer",
+          "desc": [
+            "This container holds the AttributeData elements that represent uninterpreted XML attributes of a text.",
+            "",
+            "The idea behind this property is that a parser can stow away all attributes that it cannot handle by itself on reading an XML file. When the file is stored again, the unknown attributes can be written back without loss.",
+            "",
+            "The com.sun.star.container.XNameContainer supports the service AttributeContainer."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
   }
 }

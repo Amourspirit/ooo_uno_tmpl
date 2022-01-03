@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
   "version": "0.1.12",
-  "timestamp": "2022-01-01 23:31:47+00:00",
+  "timestamp": "2022-01-03 04:03:12+00:00",
   "name": "ImageButton",
   "type": "service",
   "namespace": "com.sun.star.form.component",
@@ -18,29 +18,75 @@
         "UnoControlImageControlModel"
       ],
       [
-        "..x_image_producer_supplier",
-        "XImageProducerSupplier"
-      ],
-      [
         "..form_control_model",
         "FormControlModel"
+      ],
+      [
+        "..x_image_producer_supplier",
+        "XImageProducerSupplier"
       ]
     ],
-    "quote": [],
+    "from_imports_typing": [
+      [
+        "..form_button_type",
+        "FormButtonType"
+      ]
+    ],
+    "quote": [
+      "FormButtonType"
+    ],
     "typings": [],
-    "requires_typing": false,
+    "requires_typing": true,
     "name": "ImageButton",
+    "imports": [],
     "namespace": "com.sun.star.form.component",
     "extends": [
       "com.sun.star.awt.UnoControlImageControlModel",
-      "com.sun.star.form.XImageProducerSupplier",
-      "com.sun.star.form.FormControlModel"
+      "com.sun.star.form.FormControlModel",
+      "com.sun.star.form.XImageProducerSupplier"
     ],
-    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1form_1_1component_1_1ImageButton.html",
     "desc": [
       "This service specifies the control model for a clickable button which is represented by an image.",
       "",
       "The image to be displayed is determined by com.sun.star.awt.UnoControlImageControlModel.ImageURL property specifies the URL of an image to be displayed."
-    ]
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1form_1_1component_1_1ImageButton.html",
+    "items": {
+      "properties": [
+        {
+          "name": "ButtonType",
+          "returns": "FormButtonType",
+          "desc": [
+            "describes the action to be executed by the button when pressed."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "TargetFrame",
+          "returns": "str",
+          "desc": [
+            "describes the frame, where to open the document specified by the TargetURL.",
+            "",
+            "This property is evaluated if the button is of type URL.",
+            "",
+            "As always, there is a number of target names which have a special meaning, and force a special com.sun.star.frame.Frame to be used."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "TargetURL",
+          "returns": "str",
+          "desc": [
+            "specifies the URL, which should be opened if the button was clicked.",
+            "",
+            "This property is evaluated if the button is of type URL."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
   }
 }

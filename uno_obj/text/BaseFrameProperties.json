@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
   "version": "0.1.12",
-  "timestamp": "2022-01-01 23:31:30+00:00",
+  "timestamp": "2022-01-03 04:03:24+00:00",
   "name": "BaseFrameProperties",
   "type": "service",
   "namespace": "com.sun.star.text",
@@ -18,17 +18,707 @@
         "UserDefinedAttributesSupplier"
       ]
     ],
-    "quote": [],
-    "typings": [],
-    "requires_typing": false,
+    "from_imports_typing": [
+      [
+        "..awt.gradient",
+        "Gradient"
+      ],
+      [
+        "..table.shadow_format",
+        "ShadowFormat"
+      ],
+      [
+        ".wrap_text_mode",
+        "WrapTextMode"
+      ],
+      [
+        "..graphic.x_graphic",
+        "XGraphic"
+      ],
+      [
+        "..drawing.fill_style",
+        "FillStyle"
+      ],
+      [
+        "..table.border_line",
+        "BorderLine"
+      ],
+      [
+        "..util.color",
+        "Color"
+      ],
+      [
+        "..awt.size",
+        "Size"
+      ],
+      [
+        "..style.graphic_location",
+        "GraphicLocation"
+      ],
+      [
+        "..beans.property_value",
+        "PropertyValue"
+      ],
+      [
+        ".x_text_frame",
+        "XTextFrame"
+      ]
+    ],
+    "quote": [
+      "XGraphic",
+      "GraphicLocation",
+      "FillStyle",
+      "BorderLine",
+      "Color",
+      "typing.List[PropertyValue]",
+      "Size",
+      "XTextFrame",
+      "WrapTextMode",
+      "ShadowFormat",
+      "Gradient"
+    ],
+    "typings": [
+      "typing.List[PropertyValue]"
+    ],
+    "requires_typing": true,
     "name": "BaseFrameProperties",
+    "imports": [],
     "namespace": "com.sun.star.text",
     "extends": [
       "com.sun.star.xml.UserDefinedAttributesSupplier"
     ],
-    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1text_1_1BaseFrameProperties.html",
     "desc": [
-      "specifies the properties that are provided by all text frames, graphic objects, embedded objects and frame styles."
-    ]
+      "specifies the properties that are provided by all text frames, graphic objects, embedded objects and frame styles.",
+      "",
+      "**since**",
+      "",
+      "    LibreOffice 4.2"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1text_1_1BaseFrameProperties.html",
+    "items": {
+      "types": [
+        {
+          "name": "FrameInteropGrabBag",
+          "returns": "typing.List[PropertyValue]",
+          "desc": [
+            "Grab bag of frame properties, used as a string-any map for interim interop purposes.",
+            "",
+            "This property is intentionally not handled by the ODF filter. Any member that should be handled there should be first moved out from this grab bag to a separate property.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 4.2"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ],
+      "properties": [
+        {
+          "name": "AllowOverlap",
+          "returns": "bool",
+          "desc": [
+            "This defines if the frame is allowed to overlap with other anchored objects.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 6.4"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "AnchorFrame",
+          "returns": "XTextFrame",
+          "desc": [
+            "contains the text frame the current frame is anchored to.",
+            "",
+            "The value is valid only if the AnchorType is TextContentAnchorType.AT_FRAME."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "AnchorPageNo",
+          "returns": "int",
+          "desc": [
+            "contains the number of the page where the objects are anchored.",
+            "",
+            "The value is valid only if the AnchorType is TextContentAnchorType.AT_PAGE."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "BackColor",
+          "returns": "Color",
+          "desc": [
+            "contains the color of the background of the object."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "BackGraphic",
+          "returns": "XGraphic",
+          "desc": [
+            "contains the graphic for the background.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 6.1"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "BackGraphicFilter",
+          "returns": "str",
+          "desc": [
+            "contains the name of the file filter for the background graphic."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "BackGraphicLocation",
+          "returns": "GraphicLocation",
+          "desc": [
+            "determines the position of the background graphic."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "BackGraphicURL",
+          "returns": "str",
+          "desc": [
+            "contains the URL for the background graphic.",
+            "",
+            "Note the new behaviour since it this was deprecated: This property can only be set and only external URLs are supported (no more vnd.sun.star.GraphicObject scheme). When an URL is set, then it will load the graphic and set the BackGraphic property."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "BackTransparent",
+          "returns": "bool",
+          "desc": [
+            "If TRUE, the \\\"BackColor\\\" is ignored."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "BorderDistance",
+          "returns": "int",
+          "desc": [
+            "contains the distance from the border to the object."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "BottomBorder",
+          "returns": "BorderLine",
+          "desc": [
+            "contains the bottom border of the object."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "BottomBorderDistance",
+          "returns": "int",
+          "desc": [
+            "contains the distance from the bottom border to the object."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "BottomMargin",
+          "returns": "int",
+          "desc": [
+            "contains the bottom margin of the object."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ContentProtected",
+          "returns": "bool",
+          "desc": [
+            "determines if the content is protected."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Description",
+          "returns": "str",
+          "desc": [
+            "contains description for the object",
+            "",
+            "The long description text can be entered to describe an object in more detail to users with screen reader software. The description is visible as an alternative tag for accessibility tools.",
+            "",
+            "**since**",
+            "",
+            "    OOo 3.2"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "FillGradient",
+          "returns": "Gradient",
+          "desc": [
+            "If the property FillStyle is set to FillStyle.GRADIENT, this describes the gradient used.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 4.1"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "FillGradientName",
+          "returns": "str",
+          "desc": [
+            "If the property FillStyle is set to FillStyle.GRADIENT, this is the name of the gradient used.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 4.1"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "FillStyle",
+          "returns": "FillStyle",
+          "desc": [
+            "This enumeration selects the style the area will be filled with.",
+            "",
+            "Currently only set for gradients.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 4.1"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Height",
+          "returns": "int",
+          "desc": [
+            "contains the height of the object (1/100 mm).",
+            "",
+            "It is only valid if TextEmbeddedObject.RelativeHeight is zero."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "HoriOrient",
+          "returns": "int",
+          "desc": [
+            "determines the horizontal orientation of the object."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "HoriOrientPosition",
+          "returns": "int",
+          "desc": [
+            "contains the horizontal position of the object (1/100 mm).",
+            "",
+            "It is only valid if \\\"HoriOrient\\\" is HoriOrientation_NONE."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "HoriOrientRelation",
+          "returns": "int",
+          "desc": [
+            "determines the environment of the object to which the orientation is related."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "HyperLinkName",
+          "returns": "str",
+          "desc": [
+            "contains the name of the hyperlink that is set at the object."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "HyperLinkTarget",
+          "returns": "str",
+          "desc": [
+            "contains the name of the target for a hyperlink that is set at the object."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "HyperLinkURL",
+          "returns": "str",
+          "desc": [
+            "contains the URL of a hyperlink that is set at the object."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "IsSyncHeightToWidth",
+          "returns": "bool",
+          "desc": [
+            "determines whether the height follows the width."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "IsSyncWidthToHeight",
+          "returns": "bool",
+          "desc": [
+            "determines whether the width follows the height."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "LayoutSize",
+          "returns": "Size",
+          "desc": [
+            "returns the actual size of the object.",
+            "",
+            "Since to obtain the correct actual size of the object not only the layouting for the frame needs to be finished but the whole document needs to be formatted as well. Thus if that was not done previously it may take some while to retrieve this value.",
+            "",
+            "**since**",
+            "",
+            "    OOo 2.0.4"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "LeftBorder",
+          "returns": "BorderLine",
+          "desc": [
+            "contains the left border of the object."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "LeftBorderDistance",
+          "returns": "int",
+          "desc": [
+            "contains the distance from the left border to the object."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "LeftMargin",
+          "returns": "int",
+          "desc": [
+            "contains the left margin of the object."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Opaque",
+          "returns": "bool",
+          "desc": [
+            "determines if the object is opaque or transparent for text."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "PageToggle",
+          "returns": "bool",
+          "desc": [
+            "determines if the object is mirrored on even pages."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "PositionProtected",
+          "returns": "bool",
+          "desc": [
+            "determines if the position is protected."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Print",
+          "returns": "bool",
+          "desc": [
+            "determines if the object is included in printing."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "RelativeHeight",
+          "returns": "int",
+          "desc": [
+            "contains the relative height of the object.",
+            "",
+            "It is only valid if it is greater than zero."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "RelativeHeightRelation",
+          "returns": "int",
+          "desc": [
+            "contains the relation of the relative height of the object.",
+            "",
+            "It is only valid if RelativeHeight is greater than zero.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 4.3"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "RelativeWidth",
+          "returns": "int",
+          "desc": [
+            "contains the relative width of the object.",
+            "",
+            "It is only valid if it is greater than zero."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "RelativeWidthRelation",
+          "returns": "int",
+          "desc": [
+            "contains the relation of the relative width of the object.",
+            "",
+            "It is only valid if RelativeWidth is greater than zero.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 4.3"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "RightBorder",
+          "returns": "BorderLine",
+          "desc": [
+            "contains the right border of the object."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "RightBorderDistance",
+          "returns": "int",
+          "desc": [
+            "contains the distance from the right border to the object."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "RightMargin",
+          "returns": "int",
+          "desc": [
+            "contains the right margin of the object."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ServerMap",
+          "returns": "bool",
+          "desc": [
+            "determines if the object gets an image map from a server."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ShadowFormat",
+          "returns": "ShadowFormat",
+          "desc": [
+            "contains the type of the shadow of the object."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ShadowTransparence",
+          "returns": "int",
+          "desc": [
+            "This defines the degree of transparence of the shadow in percent.",
+            "",
+            "This is the same as setting the Color member of the ShadowFormat property to an ARGB color.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 4.2"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Size",
+          "returns": "Size",
+          "desc": [
+            "contains the size of the object."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "SizeProtected",
+          "returns": "bool",
+          "desc": [
+            "determines if the size is protected."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Surround",
+          "returns": "WrapTextMode",
+          "desc": [
+            "determines the type of the surrounding text."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "SurroundAnchorOnly",
+          "returns": "bool",
+          "desc": [
+            "determines if the text of the paragraph in which the object is anchored, wraps around the object."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Title",
+          "returns": "str",
+          "desc": [
+            "contains short title for the object",
+            "",
+            "This short title is visible as an alternative tag in HTML format. Accessibility tools can read this text.",
+            "",
+            "**since**",
+            "",
+            "    OOo 3.2"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "TopBorder",
+          "returns": "BorderLine",
+          "desc": [
+            "contains the top border of the object."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "TopBorderDistance",
+          "returns": "int",
+          "desc": [
+            "contains the distance from the top border to the object."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "TopMargin",
+          "returns": "int",
+          "desc": [
+            "contains the top margin of the object."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "VertOrient",
+          "returns": "int",
+          "desc": [
+            "determines the vertical orientation of the object."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "VertOrientPosition",
+          "returns": "int",
+          "desc": [
+            "contains the vertical position of the object (1/100 mm).",
+            "",
+            "It is only valid if TextEmbeddedObject.VertOrient is VertOrientation.NONE."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "VertOrientRelation",
+          "returns": "int",
+          "desc": [
+            "determines the environment of the object to which the orientation is related."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Width",
+          "returns": "int",
+          "desc": [
+            "contains the width of the object (1/100 mm).",
+            "",
+            "It is only valid if TextEmbeddedObject.RelativeWidth is zero."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "WrapInfluenceOnPosition",
+          "returns": "int",
+          "desc": [
+            "determines the influence of the text wrap on the positioning of the shape",
+            "",
+            "The value of this property is only evaluated for the positioning of the shape, if the text document setting ConsiderTextWrapOnObjPos is TRUE. Valid values are given by WrapInfluenceOnPosition",
+            "",
+            "**since**",
+            "",
+            "    OOo 2.0"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
   }
 }

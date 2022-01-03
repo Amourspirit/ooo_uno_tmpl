@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
   "version": "0.1.12",
-  "timestamp": "2022-01-01 23:31:27+00:00",
+  "timestamp": "2022-01-03 04:03:33+00:00",
   "name": "FunctionAccess",
   "type": "service",
   "namespace": "com.sun.star.sheet",
@@ -14,26 +14,55 @@
   "data": {
     "from_imports": [
       [
-        ".x_function_access",
-        "XFunctionAccess"
-      ],
-      [
         ".spreadsheet_document_settings",
         "SpreadsheetDocumentSettings"
+      ],
+      [
+        ".x_function_access",
+        "XFunctionAccess"
       ]
     ],
+    "from_imports_typing": [],
     "quote": [],
     "typings": [],
     "requires_typing": false,
     "name": "FunctionAccess",
+    "imports": [],
     "namespace": "com.sun.star.sheet",
     "extends": [
-      "com.sun.star.sheet.XFunctionAccess",
-      "com.sun.star.sheet.SpreadsheetDocumentSettings"
+      "com.sun.star.sheet.SpreadsheetDocumentSettings",
+      "com.sun.star.sheet.XFunctionAccess"
+    ],
+    "desc": [
+      "allows generic access to all spreadsheet functions.",
+      "",
+      "**since**",
+      "",
+      "    OOo 3.3"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1sheet_1_1FunctionAccess.html",
-    "desc": [
-      "allows generic access to all spreadsheet functions."
-    ]
+    "items": {
+      "properties": [
+        {
+          "name": "IsArrayFunction",
+          "returns": "bool",
+          "desc": [
+            "specifies whether the function call is performed as array function call.",
+            "",
+            "If set to TRUE, the result of the function call will be calculated similar to array formulas in a spreadsheet document. The return value of the function call will usually be a sequence of sequences containing the values of the resulting array. Example: If the function ABS is called for a 3x2 cell range, the result will be a 3x2 array containing the absolute values of the numbers contained in the specified cell range.",
+            "",
+            "If set to FALSE, the result of the function call will be calculated similar to simple cell formulas in a spreadsheet document. The return value of the function call will usually be a single value. Of course, some functions always return an array, for example the MUNIT function.",
+            "",
+            "For compatibility with older versions, the default value of this property is TRUE.",
+            "",
+            "**since**",
+            "",
+            "    OOo 3.3"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
   }
 }

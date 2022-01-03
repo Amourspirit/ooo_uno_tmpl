@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
   "version": "0.1.12",
-  "timestamp": "2022-01-01 23:31:31+00:00",
+  "timestamp": "2022-01-03 04:03:25+00:00",
   "name": "TextDocumentView",
   "type": "service",
   "namespace": "com.sun.star.text",
@@ -14,31 +14,99 @@
   "data": {
     "from_imports": [
       [
-        "..view.office_document_view",
-        "OfficeDocumentView"
-      ],
-      [
         "..beans.x_property_set",
         "XPropertySet"
+      ],
+      [
+        "..view.office_document_view",
+        "OfficeDocumentView"
       ],
       [
         ".x_text_view_cursor_supplier",
         "XTextViewCursorSupplier"
       ]
     ],
+    "from_imports_typing": [],
     "quote": [],
     "typings": [],
     "requires_typing": false,
     "name": "TextDocumentView",
+    "imports": [],
     "namespace": "com.sun.star.text",
     "extends": [
-      "com.sun.star.beans.XPropertySet",
+      "com.sun.star.view.OfficeDocumentView",
       "com.sun.star.text.XTextViewCursorSupplier",
-      "com.sun.star.view.OfficeDocumentView"
+      "com.sun.star.beans.XPropertySet"
+    ],
+    "desc": [
+      "specifies the view of a TextDocument.",
+      "",
+      "**since**",
+      "",
+      "    OOo 2.0"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1text_1_1TextDocumentView.html",
-    "desc": [
-      "specifies the view of a TextDocument."
-    ]
+    "items": {
+      "properties": [
+        {
+          "name": "IsConstantSpellcheck",
+          "returns": "bool",
+          "desc": [
+            "specifies if spell checking should be done while typing.",
+            "",
+            "**since**",
+            "",
+            "    OOo 2.0"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "IsHideSpellMarks",
+          "returns": "bool",
+          "desc": [
+            "specifies if the marks for misspelled text should be displayed.",
+            "",
+            "**since**",
+            "",
+            "    OOo 2.0"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "LineCount",
+          "returns": "int",
+          "desc": [
+            "returns the number of lines in the document",
+            "",
+            "Since the document needs to be formatted to get the result obtaining this value may take some time.",
+            "",
+            "Empty paragraphs are not counted.",
+            "",
+            "**since**",
+            "",
+            "    OOo 2.0"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "PageCount",
+          "returns": "int",
+          "desc": [
+            "returns the number of pages in the document",
+            "",
+            "Since the document needs to be formatted to get the result obtaining this value may take some time.",
+            "",
+            "**since**",
+            "",
+            "    OOo 2.0"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
   }
 }

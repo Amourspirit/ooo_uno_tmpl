@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
   "version": "0.1.12",
-  "timestamp": "2022-01-01 23:31:28+00:00",
+  "timestamp": "2022-01-03 04:02:55+00:00",
   "name": "GalleryItem",
   "type": "service",
   "namespace": "com.sun.star.gallery",
@@ -22,18 +22,98 @@
         "XGalleryItem"
       ]
     ],
-    "quote": [],
+    "from_imports_typing": [
+      [
+        "..graphic.x_graphic",
+        "XGraphic"
+      ],
+      [
+        "..lang.x_component",
+        "XComponent"
+      ]
+    ],
+    "quote": [
+      "XGraphic",
+      "XComponent"
+    ],
     "typings": [],
-    "requires_typing": false,
+    "requires_typing": true,
     "name": "GalleryItem",
+    "imports": [],
     "namespace": "com.sun.star.gallery",
     "extends": [
-      "com.sun.star.beans.XPropertySet",
-      "com.sun.star.gallery.XGalleryItem"
+      "com.sun.star.gallery.XGalleryItem",
+      "com.sun.star.beans.XPropertySet"
     ],
-    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1gallery_1_1GalleryItem.html",
     "desc": [
       "service to get access to the properties of a single Gallery item"
-    ]
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1gallery_1_1GalleryItem.html",
+    "items": {
+      "properties": [
+        {
+          "name": "Drawing",
+          "returns": "XComponent",
+          "desc": [
+            "the drawing content of the Gallery item",
+            "",
+            "This is an optional property and may not available for every item"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "GalleryItemType",
+          "returns": "int",
+          "desc": [
+            "The type of the Gallery item."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Graphic",
+          "returns": "XGraphic",
+          "desc": [
+            "the graphic content of the Gallery item",
+            "",
+            "This is an optional property and may not available for every item"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Thumbnail",
+          "returns": "XGraphic",
+          "desc": [
+            "the thumbnail of the Gallery item",
+            "",
+            "The thumbnail may be either a pixel or a vector graphic"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Title",
+          "returns": "str",
+          "desc": [
+            "the title of the Gallery item"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "URL",
+          "returns": "str",
+          "desc": [
+            "the URL of the Gallery item",
+            "",
+            "The interpretation of the URL depends on the type of the Gallery item. In case of graphic and media items, the URL is a \\\"real\\\" URL, in case of drawings it is a private URL"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
   }
 }

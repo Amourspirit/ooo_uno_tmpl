@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
   "version": "0.1.12",
-  "timestamp": "2022-01-01 23:31:34+00:00",
+  "timestamp": "2022-01-03 04:03:23+00:00",
   "name": "GraphicRendererVCL",
   "type": "service",
   "namespace": "com.sun.star.graphic",
@@ -14,28 +14,70 @@
   "data": {
     "from_imports": [
       [
-        "..beans.x_property_set",
-        "XPropertySet"
-      ],
-      [
         ".x_graphic_renderer",
         "XGraphicRenderer"
+      ],
+      [
+        "..beans.x_property_set",
+        "XPropertySet"
       ]
     ],
-    "quote": [],
+    "from_imports_typing": [
+      [
+        "..awt.rectangle",
+        "Rectangle"
+      ]
+    ],
+    "quote": [
+      "Rectangle"
+    ],
     "typings": [],
-    "requires_typing": false,
+    "requires_typing": true,
     "name": "GraphicRendererVCL",
+    "imports": [],
     "namespace": "com.sun.star.graphic",
     "extends": [
-      "com.sun.star.beans.XPropertySet",
-      "com.sun.star.graphic.XGraphicRenderer"
+      "com.sun.star.graphic.XGraphicRenderer",
+      "com.sun.star.beans.XPropertySet"
     ],
-    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1graphic_1_1GraphicRendererVCL.html",
     "desc": [
       "Service that describes the necessary interfaces and properties to render a graphic container of XGraphic type.",
       "",
       "To render a XGraphic container, just create an instance of this service, set the appropriate properties and use the XGraphicRenderer interface to initiate the rendering process itself"
-    ]
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1graphic_1_1GraphicRendererVCL.html",
+    "items": {
+      "properties": [
+        {
+          "name": "DestinationRect",
+          "returns": "Rectangle",
+          "desc": [
+            "Specifies the destination rectangle, into which the graphic content is to be rendered onto the device."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Device",
+          "returns": "object",
+          "desc": [
+            "Holds the device onto which the XGraphic container should be rendered.",
+            "",
+            "In case of using VCL Devices, this property should hold a com.sun.star.awt.XDevice interface"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "RenderData",
+          "returns": "object",
+          "desc": [
+            "Additional properties for rendering, unspecified at the moment."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
   }
 }

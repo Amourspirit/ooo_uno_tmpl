@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
   "version": "0.1.12",
-  "timestamp": "2022-01-01 23:31:48+00:00",
+  "timestamp": "2022-01-03 04:03:38+00:00",
   "name": "TableDescriptor",
   "type": "service",
   "namespace": "com.sun.star.sdbcx",
@@ -14,35 +14,68 @@
   "data": {
     "from_imports": [
       [
-        ".descriptor",
-        "Descriptor"
+        ".x_keys_supplier",
+        "XKeysSupplier"
       ],
       [
         ".x_columns_supplier",
         "XColumnsSupplier"
       ],
       [
-        ".x_keys_supplier",
-        "XKeysSupplier"
+        ".descriptor",
+        "Descriptor"
       ]
     ],
+    "from_imports_typing": [],
     "quote": [],
     "typings": [],
     "requires_typing": false,
     "name": "TableDescriptor",
+    "imports": [],
     "namespace": "com.sun.star.sdbcx",
     "extends": [
-      "com.sun.star.sdbcx.Descriptor",
       "com.sun.star.sdbcx.XColumnsSupplier",
-      "com.sun.star.sdbcx.XKeysSupplier"
+      "com.sun.star.sdbcx.XKeysSupplier",
+      "com.sun.star.sdbcx.Descriptor"
     ],
-    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1sdbcx_1_1TableDescriptor.html",
     "desc": [
       "is used to define a table of a database.",
       "",
       "A table is described by its name and one or more columns and the keys for semantic rules.",
       "",
       "In addition, it may contain keys, and to define semantic rules for the table.  Note:  Indexes can only be appended when the table is already appended at the database."
-    ]
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1sdbcx_1_1TableDescriptor.html",
+    "items": {
+      "properties": [
+        {
+          "name": "CatalogName",
+          "returns": "str",
+          "desc": [
+            "is the name of the table catalog."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Description",
+          "returns": "str",
+          "desc": [
+            "supplies a comment on the table, Could be empty if not supported by the driver."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "SchemaName",
+          "returns": "str",
+          "desc": [
+            "is the name of the table schema."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
   }
 }

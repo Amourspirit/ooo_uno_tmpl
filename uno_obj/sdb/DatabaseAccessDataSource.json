@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
   "version": "0.1.12",
-  "timestamp": "2022-01-01 23:31:21+00:00",
+  "timestamp": "2022-01-03 04:03:21+00:00",
   "name": "DatabaseAccessDataSource",
   "type": "service",
   "namespace": "com.sun.star.sdb",
@@ -14,33 +14,68 @@
   "data": {
     "from_imports": [
       [
-        ".x_completed_connection",
-        "XCompletedConnection"
-      ],
-      [
         "..beans.x_property_set",
         "XPropertySet"
       ],
       [
         "..sdbc.x_data_source",
         "XDataSource"
+      ],
+      [
+        ".x_completed_connection",
+        "XCompletedConnection"
       ]
     ],
-    "quote": [],
+    "from_imports_typing": [
+      [
+        "..ucb.remember_authentication",
+        "RememberAuthentication"
+      ]
+    ],
+    "quote": [
+      "RememberAuthentication"
+    ],
     "typings": [],
-    "requires_typing": false,
+    "requires_typing": true,
     "name": "DatabaseAccessDataSource",
+    "imports": [],
     "namespace": "com.sun.star.sdb",
     "extends": [
-      "com.sun.star.sdb.XCompletedConnection",
       "com.sun.star.beans.XPropertySet",
-      "com.sun.star.sdbc.XDataSource"
+      "com.sun.star.sdbc.XDataSource",
+      "com.sun.star.sdb.XCompletedConnection"
     ],
-    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1sdb_1_1DatabaseAccessDataSource.html",
     "desc": [
       "is a factory to create data access beans.",
       "",
-      "Data access beans are shared among components, so if an already existing bean is requested, the existing one is returned."
-    ]
+      "Data access beans are shared among components, so if an already existing bean is requested, the existing one is returned.",
+      "",
+      ".. deprecated::",
+      "",
+      "    Class is deprecated."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1sdb_1_1DatabaseAccessDataSource.html",
+    "items": {
+      "properties": [
+        {
+          "name": "PasswordMode",
+          "returns": "RememberAuthentication",
+          "desc": [
+            "determines the password handling."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "URL",
+          "returns": "str",
+          "desc": [
+            "locates the database access bean."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
   }
 }

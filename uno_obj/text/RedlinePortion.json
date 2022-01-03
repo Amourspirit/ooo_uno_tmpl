@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
   "version": "0.1.12",
-  "timestamp": "2022-01-01 23:31:31+00:00",
+  "timestamp": "2022-01-03 04:03:25+00:00",
   "name": "RedlinePortion",
   "type": "service",
   "namespace": "com.sun.star.text",
@@ -18,17 +18,131 @@
         "TextPortion"
       ]
     ],
-    "quote": [],
+    "from_imports_typing": [
+      [
+        ".x_text",
+        "XText"
+      ],
+      [
+        "..beans.property_values",
+        "PropertyValues"
+      ],
+      [
+        "..util.date_time",
+        "DateTime"
+      ]
+    ],
+    "quote": [
+      "PropertyValues",
+      "XText",
+      "DateTime"
+    ],
     "typings": [],
-    "requires_typing": false,
+    "requires_typing": true,
     "name": "RedlinePortion",
+    "imports": [],
     "namespace": "com.sun.star.text",
     "extends": [
       "com.sun.star.text.TextPortion"
     ],
-    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1text_1_1RedlinePortion.html",
     "desc": [
       "A RedlinePortion is a TextPortion that marks a change that has been recorded by the change tracking."
-    ]
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1text_1_1RedlinePortion.html",
+    "items": {
+      "properties": [
+        {
+          "name": "IsInHeaderFooter",
+          "returns": "bool",
+          "desc": [
+            "determines whether the portion is member of a header or footer text."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "MergeLastPara",
+          "returns": "bool",
+          "desc": [
+            "determines whether the last paragraph of a redline text has to be merged with a possible following text content (i.e.",
+            "",
+            "a text table)"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "RedlineAuthor",
+          "returns": "str",
+          "desc": [
+            "contains the name of the author of the change."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "RedlineComment",
+          "returns": "str",
+          "desc": [
+            "contains a comment for the change."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "RedlineDateTime",
+          "returns": "DateTime",
+          "desc": [
+            "contains the date and time of the change."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "RedlineIdentifier",
+          "returns": "str",
+          "desc": [
+            "contains a unique identifier for the redline.",
+            "",
+            "This is necessary for file export filters to able to recognize redline portions that point to the same redline."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "RedlineSuccessorData",
+          "returns": "PropertyValues",
+          "desc": [
+            "contains the data of a second level redline data",
+            "",
+            "The elements of the sequence are:"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "RedlineText",
+          "returns": "XText",
+          "desc": [
+            "provides access to the text of the redline.",
+            "",
+            "This interface is only provided if the change is not visible. The visibility depends on the redline display options that are set at the documents property set (RedlineDisplayType)."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "RedlineType",
+          "returns": "str",
+          "desc": [
+            "contains the type of the change",
+            "",
+            "Valid type names are:"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
   }
 }

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
   "version": "0.1.12",
-  "timestamp": "2022-01-01 23:31:51+00:00",
+  "timestamp": "2022-01-03 04:03:10+00:00",
   "name": "Diagram",
   "type": "service",
   "namespace": "com.sun.star.chart",
@@ -22,10 +22,6 @@
         "XSecondAxisTitleSupplier"
       ],
       [
-        "..beans.x_property_set",
-        "XPropertySet"
-      ],
-      [
         ".x_diagram",
         "XDiagram"
       ],
@@ -36,28 +32,98 @@
       [
         "..xml.user_defined_attributes_supplier",
         "UserDefinedAttributesSupplier"
+      ],
+      [
+        "..beans.x_property_set",
+        "XPropertySet"
       ]
     ],
-    "quote": [],
+    "from_imports_typing": [
+      [
+        ".chart_data_row_source",
+        "ChartDataRowSource"
+      ]
+    ],
+    "quote": [
+      "ChartDataRowSource"
+    ],
     "typings": [],
-    "requires_typing": false,
+    "requires_typing": true,
     "name": "Diagram",
+    "imports": [],
     "namespace": "com.sun.star.chart",
     "extends": [
+      "com.sun.star.chart.XDiagram",
       "com.sun.star.chart.XAxisSupplier",
       "com.sun.star.chart.XSecondAxisTitleSupplier",
-      "com.sun.star.beans.XPropertySet",
-      "com.sun.star.chart.XDiagram",
       "com.sun.star.chart.XDiagramPositioning",
+      "com.sun.star.beans.XPropertySet",
       "com.sun.star.xml.UserDefinedAttributesSupplier"
     ],
-    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1chart_1_1Diagram.html",
     "desc": [
       "the base service for the diagram of the chart document.",
       "",
       "The diagram is the object that contains the actual plot.",
       "",
-      "Different Diagram Types, e.g., PieDiagram or LineDiagram, can be instantiated by the com.sun.star.lang.XMultiServiceFactory of the XChartDocument."
-    ]
+      "Different Diagram Types, e.g., PieDiagram or LineDiagram, can be instantiated by the com.sun.star.lang.XMultiServiceFactory of the XChartDocument.",
+      "",
+      "**since**",
+      "",
+      "    OOo 1.1.2"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1chart_1_1Diagram.html",
+    "items": {
+      "properties": [
+        {
+          "name": "AutomaticPosition",
+          "returns": "bool",
+          "desc": [
+            "If this property is TRUE the position is calculated by the application automatically.",
+            "",
+            "Setting this property to false will have no effect. Instead use the interface com.sun.star.drawing.XShape to set a concrete position (note com.sun.star.chart.XDiagram is derived from com.sun.star.drawing.XShape)."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "AutomaticSize",
+          "returns": "bool",
+          "desc": [
+            "If this property is TRUE the size is calculated by the application automatically.",
+            "",
+            "Setting this property to false will have no effect. Instead use the interface com.sun.star.drawing.XShape to set a concrete size (note com.sun.star.chart.XDiagram is derived from com.sun.star.drawing.XShape)."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "DataCaption",
+          "returns": "int",
+          "desc": [
+            "specifies how the caption of data points is displayed."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "DataRowSource",
+          "returns": "ChartDataRowSource",
+          "desc": [
+            "determines if the data for a data row is contained in the columns or in the rows of the data array."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "MissingValueTreatment",
+          "returns": "int",
+          "desc": [
+            "specifies how empty or invalid cells in the provided data should be handled when displayed"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
   }
 }

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
   "version": "0.1.12",
-  "timestamp": "2022-01-01 23:31:42+00:00",
+  "timestamp": "2022-01-03 04:03:16+00:00",
   "name": "FormComponent",
   "type": "service",
   "namespace": "com.sun.star.form",
@@ -14,12 +14,16 @@
   "data": {
     "from_imports": [
       [
-        ".x_form_component",
-        "XFormComponent"
+        "..container.x_named",
+        "XNamed"
       ],
       [
         "..beans.x_property_bag",
         "XPropertyBag"
+      ],
+      [
+        ".x_form_component",
+        "XFormComponent"
       ],
       [
         "..io.x_persist_object",
@@ -28,27 +32,44 @@
       [
         "..lang.x_component",
         "XComponent"
-      ],
-      [
-        "..container.x_named",
-        "XNamed"
       ]
     ],
+    "from_imports_typing": [],
     "quote": [],
     "typings": [],
     "requires_typing": false,
     "name": "FormComponent",
+    "imports": [],
     "namespace": "com.sun.star.form",
     "extends": [
       "com.sun.star.form.XFormComponent",
-      "com.sun.star.beans.XPropertyBag",
-      "com.sun.star.io.XPersistObject",
       "com.sun.star.lang.XComponent",
-      "com.sun.star.container.XNamed"
+      "com.sun.star.container.XNamed",
+      "com.sun.star.io.XPersistObject",
+      "com.sun.star.beans.XPropertyBag"
+    ],
+    "desc": [
+      "specifies a component which can be part of a form.",
+      "",
+      "**since**",
+      "",
+      "    OOo 2.3"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1form_1_1FormComponent.html",
-    "desc": [
-      "specifies a component which can be part of a form."
-    ]
+    "items": {
+      "properties": [
+        {
+          "name": "Name",
+          "returns": "str",
+          "desc": [
+            "the name of the component.",
+            "",
+            "Note that the name accessed here is the same as when using the com.sun.star.container.XNamed interface."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
   }
 }

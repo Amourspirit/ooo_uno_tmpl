@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
   "version": "0.1.12",
-  "timestamp": "2022-01-01 23:31:51+00:00",
+  "timestamp": "2022-01-03 04:03:10+00:00",
   "name": "StockDiagram",
   "type": "service",
   "namespace": "com.sun.star.chart",
@@ -14,39 +14,40 @@
   "data": {
     "from_imports": [
       [
-        ".diagram",
-        "Diagram"
-      ],
-      [
         ".chart_axis_x_supplier",
         "ChartAxisXSupplier"
       ],
       [
-        ".x_statistic_display",
-        "XStatisticDisplay"
+        ".chart_statistics",
+        "ChartStatistics"
       ],
       [
         ".chart_two_axis_y_supplier",
         "ChartTwoAxisYSupplier"
       ],
       [
-        ".chart_statistics",
-        "ChartStatistics"
+        ".x_statistic_display",
+        "XStatisticDisplay"
+      ],
+      [
+        ".diagram",
+        "Diagram"
       ]
     ],
+    "from_imports_typing": [],
     "quote": [],
     "typings": [],
     "requires_typing": false,
     "name": "StockDiagram",
+    "imports": [],
     "namespace": "com.sun.star.chart",
     "extends": [
+      "com.sun.star.chart.XStatisticDisplay",
+      "com.sun.star.chart.ChartStatistics",
       "com.sun.star.chart.Diagram",
       "com.sun.star.chart.ChartAxisXSupplier",
-      "com.sun.star.chart.ChartTwoAxisYSupplier",
-      "com.sun.star.chart.XStatisticDisplay",
-      "com.sun.star.chart.ChartStatistics"
+      "com.sun.star.chart.ChartTwoAxisYSupplier"
     ],
-    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1chart_1_1StockDiagram.html",
     "desc": [
       "specifies a diagram which can be used for presenting stock quotes.",
       "",
@@ -63,6 +64,39 @@
       "",
       "StockDiagram.Volume is TRUE",
       "StockDiagram.UpDown is TRUE"
-    ]
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1chart_1_1StockDiagram.html",
+    "items": {
+      "properties": [
+        {
+          "name": "UpDown",
+          "returns": "bool",
+          "desc": [
+            "indicates if a stock chart contains data representing the value of stocks on the opening and closing date.",
+            "",
+            "The difference will be indicated by bars. The color of the bar will be significant for positive or negative differences between open and closed data.",
+            "",
+            "If this property is FALSE, the values of the first series (or second if StockDiagram.Volume is TRUE) of the chart data are interpreted as the day's lowest value. The next series is interpreted as the day's highest value, and the last series is interpreted as the closing value.",
+            "",
+            "If this property is set to TRUE, one additional series is needed with the opening value of the stocks. It is assumed as the series before the series with the day's lowest value."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Volume",
+          "returns": "bool",
+          "desc": [
+            "indicates if a stock chart contains data representing the volume of stocks.",
+            "",
+            "The values of the volume are represented as columns like those of a BarDiagram.",
+            "",
+            "If this property is set to TRUE, the values of the first series of the chart data are interpreted as volume."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
   }
 }

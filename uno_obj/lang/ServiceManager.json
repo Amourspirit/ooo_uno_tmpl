@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
   "version": "0.1.12",
-  "timestamp": "2022-01-01 23:31:30+00:00",
+  "timestamp": "2022-01-03 04:03:20+00:00",
   "name": "ServiceManager",
   "type": "service",
   "namespace": "com.sun.star.lang",
@@ -18,10 +18,6 @@
         "XSet"
       ],
       [
-        ".multi_service_factory",
-        "MultiServiceFactory"
-      ],
-      [
         "..beans.x_property_set",
         "XPropertySet"
       ],
@@ -30,23 +26,35 @@
         "XContentEnumerationAccess"
       ],
       [
+        ".multi_service_factory",
+        "MultiServiceFactory"
+      ],
+      [
         ".x_component",
         "XComponent"
       ]
     ],
-    "quote": [],
+    "from_imports_typing": [
+      [
+        "..uno.x_component_context",
+        "XComponentContext"
+      ]
+    ],
+    "quote": [
+      "XComponentContext"
+    ],
     "typings": [],
-    "requires_typing": false,
+    "requires_typing": true,
     "name": "ServiceManager",
+    "imports": [],
     "namespace": "com.sun.star.lang",
     "extends": [
-      "com.sun.star.container.XSet",
       "com.sun.star.lang.MultiServiceFactory",
-      "com.sun.star.beans.XPropertySet",
+      "com.sun.star.lang.XComponent",
+      "com.sun.star.container.XSet",
       "com.sun.star.container.XContentEnumerationAccess",
-      "com.sun.star.lang.XComponent"
+      "com.sun.star.beans.XPropertySet"
     ],
-    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1lang_1_1ServiceManager.html",
     "desc": [
       "Provides a collection of implementations for services.",
       "",
@@ -56,11 +64,21 @@
       "",
       "Service factories added via com.sun.star.container.XSet should support the following interfaces:",
       "",
-      "supported interfaces/ implementation name",
-      "",
-      "is used to create instances of the implementation.",
-      "",
       "Since LibreOffice 3.6, in addition to instances of XServiceInfo et al, the com.sun.star.container.XSet of at least the default C++ service manager implementation now also supports sequences of com.sun.star.beans.NamedValue in insert and remove. The sequence elements must each have a Name of uri and a string Value that is the URI of a service rdb. It is legal for there to be no such uri elements. For insert, there can additionally be an optional element with a Name of component-context and a value that is a non-null reference of type com.sun.star.uno.XComponentContext that shall be used instead of this service manager's default component context when loading the corresponding implementations."
-    ]
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1lang_1_1ServiceManager.html",
+    "items": {
+      "properties": [
+        {
+          "name": "DefaultContext",
+          "returns": "XComponentContext",
+          "desc": [
+            "specifies the default component context to be used, if instantiating services via XMultiServiceFactory"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
   }
 }

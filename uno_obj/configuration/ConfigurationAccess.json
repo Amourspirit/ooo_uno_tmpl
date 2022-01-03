@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
   "version": "0.1.12",
-  "timestamp": "2022-01-01 23:31:54+00:00",
+  "timestamp": "2022-01-03 04:03:37+00:00",
   "name": "ConfigurationAccess",
   "type": "service",
   "namespace": "com.sun.star.configuration",
@@ -14,39 +14,40 @@
   "data": {
     "from_imports": [
       [
-        ".access_root_element",
-        "AccessRootElement"
-      ],
-      [
-        ".group_element",
-        "GroupElement"
-      ],
-      [
-        ".group_access",
-        "GroupAccess"
+        ".set_access",
+        "SetAccess"
       ],
       [
         ".set_element",
         "SetElement"
       ],
       [
-        ".set_access",
-        "SetAccess"
+        ".access_root_element",
+        "AccessRootElement"
+      ],
+      [
+        ".group_access",
+        "GroupAccess"
+      ],
+      [
+        ".group_element",
+        "GroupElement"
       ]
     ],
+    "from_imports_typing": [],
     "quote": [],
     "typings": [],
     "requires_typing": false,
     "name": "ConfigurationAccess",
+    "imports": [],
     "namespace": "com.sun.star.configuration",
     "extends": [
-      "com.sun.star.configuration.AccessRootElement",
-      "com.sun.star.configuration.GroupElement",
+      "com.sun.star.configuration.SetAccess",
       "com.sun.star.configuration.GroupAccess",
+      "com.sun.star.configuration.AccessRootElement",
       "com.sun.star.configuration.SetElement",
-      "com.sun.star.configuration.SetAccess"
+      "com.sun.star.configuration.GroupElement"
     ],
-    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1configuration_1_1ConfigurationAccess.html",
     "desc": [
       "provides read access to a fragment of the configuration hierarchy.",
       "",
@@ -58,61 +59,17 @@
       "",
       "Two different kinds of structural elements are used in the configuration hierarchy:",
       "",
-      "are dynamic containers of homogeneous elements. Which elements a set contains can vary. Their names are defined by the clients that insert them. On the other hand, the type of the elements is the same for all elements. In the case of elements that are themselves hierarchy objects, the type includes the structure of the hierarchy fragment they contain. Such types are defined in the configuration schema as templates.",
-      "",
       "Objects in the configuration hierarchy, for example, implementations of this service, can thus be classified in the following ways:",
       "",
       "Several types of simple values can be used in the configuration. In addition to the basic (scalar) types, sequences of the basic types are supported. The basic types are:",
-      "",
-      "string can hold a human-readable text.",
-      "",
-      "Values are represented as string.",
-      "",
-      "Sequences are represented as string[].",
-      "",
-      "\\\"<em>human-readable</em>\\\" here excludes non-printing characters except for CR, LF and TAB [Unicode code points 9,10,13]. For binary data, use type binary instead.",
-      "",
-      "boolean can hold the values TRUE or FALSE.",
-      "",
-      "Values are represented as boolean.",
-      "",
-      "Sequences are represented as boolean[].",
-      "",
-      "short can hold a 16-bit signed integer.",
-      "",
-      "Values are represented as short.",
-      "",
-      "Sequences are represented as short[].",
-      "",
-      "int can hold a 32-bit signed integer.",
-      "",
-      "Values are represented as long.",
-      "",
-      "Sequences are represented as long[].",
-      "",
-      "long can hold a 64-bit signed integer.",
-      "",
-      "Values are represented as hyper.",
-      "",
-      "Sequences are represented as hyper[].",
-      "",
-      "double can hold a floating point number.",
-      "",
-      "Values are represented as double.",
-      "",
-      "Sequences are represented as double[].",
-      "",
-      "binary can hold a sequence of octets.",
-      "",
-      "Values are represented as byte[].",
-      "",
-      "Sequences are represented as byte[][].",
       "",
       "Within templates an additional type any can occur. When such a template is used to create a new SetElement, the type of the element is initially reported as any (having no value). When the value of such an element is first set, it will assume the type used.",
       "",
       "If the schema marks a value as nullable (which is indicated by attribute com.sun.star.beans.PropertyAttribute.MAYBEVOID ), its contents may be NULL.",
       "",
       "The configuration should support explicit access to default values (implementing com.sun.star.beans.XPropertyState and com.sun.star.beans.XPropertyWithState)."
-    ]
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1configuration_1_1ConfigurationAccess.html",
+    "items": {}
   }
 }

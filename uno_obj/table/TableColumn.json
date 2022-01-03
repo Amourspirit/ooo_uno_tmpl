@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
   "version": "0.1.12",
-  "timestamp": "2022-01-01 23:31:41+00:00",
+  "timestamp": "2022-01-03 04:03:05+00:00",
   "name": "TableColumn",
   "type": "service",
   "namespace": "com.sun.star.table",
@@ -14,31 +14,75 @@
   "data": {
     "from_imports": [
       [
+        ".x_cell_range",
+        "XCellRange"
+      ],
+      [
         "..beans.x_property_set",
         "XPropertySet"
       ],
       [
         "..container.x_named",
         "XNamed"
-      ],
-      [
-        ".x_cell_range",
-        "XCellRange"
       ]
     ],
+    "from_imports_typing": [],
     "quote": [],
     "typings": [],
     "requires_typing": false,
     "name": "TableColumn",
+    "imports": [],
     "namespace": "com.sun.star.table",
     "extends": [
+      "com.sun.star.table.XCellRange",
       "com.sun.star.beans.XPropertySet",
-      "com.sun.star.container.XNamed",
-      "com.sun.star.table.XCellRange"
+      "com.sun.star.container.XNamed"
     ],
-    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1table_1_1TableColumn.html",
     "desc": [
       "represents a special cell range containing all cells of a single specific column in a table or spreadsheet."
-    ]
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1table_1_1TableColumn.html",
+    "items": {
+      "properties": [
+        {
+          "name": "IsStartOfNewPage",
+          "returns": "bool",
+          "desc": [
+            "is TRUE, if there is a manual horizontal page break attached to the column."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "IsVisible",
+          "returns": "bool",
+          "desc": [
+            "is TRUE, if the column is visible."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "OptimalWidth",
+          "returns": "bool",
+          "desc": [
+            "is TRUE, if the column always keeps its optimal width."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Width",
+          "returns": "int",
+          "desc": [
+            "contains the width of the column (in 1/100th mm).",
+            "",
+            "When hidden, it returns the width which the column would have, if it were visible."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
   }
 }

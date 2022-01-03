@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
   "version": "0.1.12",
-  "timestamp": "2022-01-01 23:31:53+00:00",
+  "timestamp": "2022-01-03 04:02:58+00:00",
   "name": "MeasureShape",
   "type": "service",
   "namespace": "com.sun.star.drawing",
@@ -14,12 +14,12 @@
   "data": {
     "from_imports": [
       [
-        ".shape",
-        "Shape"
+        ".line_properties",
+        "LineProperties"
       ],
       [
-        ".text",
-        "Text"
+        ".rotation_descriptor",
+        "RotationDescriptor"
       ],
       [
         ".measure_properties",
@@ -30,30 +30,61 @@
         "ShadowProperties"
       ],
       [
-        ".line_properties",
-        "LineProperties"
+        ".text",
+        "Text"
       ],
       [
-        ".rotation_descriptor",
-        "RotationDescriptor"
+        ".shape",
+        "Shape"
       ]
     ],
-    "quote": [],
+    "from_imports_typing": [
+      [
+        "..awt.point",
+        "Point"
+      ]
+    ],
+    "quote": [
+      "Point"
+    ],
     "typings": [],
-    "requires_typing": false,
+    "requires_typing": true,
     "name": "MeasureShape",
+    "imports": [],
     "namespace": "com.sun.star.drawing",
     "extends": [
       "com.sun.star.drawing.Shape",
-      "com.sun.star.drawing.Text",
       "com.sun.star.drawing.MeasureProperties",
-      "com.sun.star.drawing.ShadowProperties",
       "com.sun.star.drawing.LineProperties",
+      "com.sun.star.drawing.Text",
+      "com.sun.star.drawing.ShadowProperties",
       "com.sun.star.drawing.RotationDescriptor"
     ],
-    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1drawing_1_1MeasureShape.html",
     "desc": [
       "This service is for a dimensioning shape."
-    ]
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1drawing_1_1MeasureShape.html",
+    "items": {
+      "properties": [
+        {
+          "name": "EndPosition",
+          "returns": "Point",
+          "desc": [
+            "this point is the end of the measured distance"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "StartPosition",
+          "returns": "Point",
+          "desc": [
+            "this point is the start of the measured distance"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
   }
 }

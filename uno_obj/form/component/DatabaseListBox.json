@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
   "version": "0.1.12",
-  "timestamp": "2022-01-01 23:31:47+00:00",
+  "timestamp": "2022-01-03 04:03:11+00:00",
   "name": "DatabaseListBox",
   "type": "service",
   "namespace": "com.sun.star.form.component",
@@ -14,24 +14,35 @@
   "data": {
     "from_imports": [
       [
-        ".list_box",
-        "ListBox"
-      ],
-      [
         "..data_aware_control_model",
         "DataAwareControlModel"
+      ],
+      [
+        ".list_box",
+        "ListBox"
       ]
     ],
-    "quote": [],
-    "typings": [],
-    "requires_typing": false,
+    "from_imports_typing": [
+      [
+        "..list_source_type",
+        "ListSourceType"
+      ]
+    ],
+    "quote": [
+      "ListSourceType",
+      "typing.List[object]"
+    ],
+    "typings": [
+      "typing.List[object]"
+    ],
+    "requires_typing": true,
     "name": "DatabaseListBox",
+    "imports": [],
     "namespace": "com.sun.star.form.component",
     "extends": [
       "com.sun.star.form.component.ListBox",
       "com.sun.star.form.DataAwareControlModel"
     ],
-    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1form_1_1component_1_1DatabaseListBox.html",
     "desc": [
       "This service specifies a data-aware list box control model.",
       "",
@@ -45,6 +56,55 @@
       "Let's call this result set the list is filled from the list result set here ...",
       "",
       "The display strings are always taken from the first column of that result set, and the corresponding value as per the BoundColumn property."
-    ]
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1form_1_1component_1_1DatabaseListBox.html",
+    "items": {
+      "types": [
+        {
+          "name": "SelectedValues",
+          "returns": "typing.List[object]",
+          "desc": [
+            "The selected values."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ],
+      "properties": [
+        {
+          "name": "BoundColumn",
+          "returns": "int",
+          "desc": [
+            "specifies which column of the list result set should be used for data exchange.",
+            "",
+            "When you make a selection from a list box, the \\\"BoundColumn\\\" property reflects which column value of a result set should be used as the value of the component. If the control is bound to a database field, the column value is stored in the database field identified by the property com.sun.star.form.DataAwareControlModel.DataField.",
+            "",
+            "The bound column property is only used if a list source is defined and the list source matches with the types com.sun.star.form.ListSourceType.TABLE, com.sun.star.form.ListSourceType.QUERY, com.sun.star.form.ListSourceType.SQL or com.sun.star.form.ListSourceType.SQLPASSTHROUGH. Otherwise the property is ignored, as there is no result set from which to get the column values."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ListSourceType",
+          "returns": "ListSourceType",
+          "desc": [
+            "describes the kind of list source used.",
+            "",
+            "Depending on the value of this property, the way the value of ListBox.ListSource is evaluated varies."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "SelectedValue",
+          "returns": "object",
+          "desc": [
+            "The selected value, if there is at most one."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
   }
 }

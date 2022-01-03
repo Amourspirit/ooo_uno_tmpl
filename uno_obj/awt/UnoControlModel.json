@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
   "version": "0.1.12",
-  "timestamp": "2022-01-01 23:31:41+00:00",
+  "timestamp": "2022-01-03 04:03:15+00:00",
   "name": "UnoControlModel",
   "type": "service",
   "namespace": "com.sun.star.awt",
@@ -14,12 +14,8 @@
   "data": {
     "from_imports": [
       [
-        ".x_control_model",
-        "XControlModel"
-      ],
-      [
-        "..beans.x_property_set",
-        "XPropertySet"
+        ".uno_control_dialog_element",
+        "UnoControlDialogElement"
       ],
       [
         "..util.x_cloneable",
@@ -30,37 +26,56 @@
         "XMultiPropertySet"
       ],
       [
-        "..io.x_persist_object",
-        "XPersistObject"
+        "..beans.x_property_set",
+        "XPropertySet"
       ],
       [
-        ".uno_control_dialog_element",
-        "UnoControlDialogElement"
+        ".x_control_model",
+        "XControlModel"
+      ],
+      [
+        "..io.x_persist_object",
+        "XPersistObject"
       ],
       [
         "..lang.x_component",
         "XComponent"
       ]
     ],
+    "from_imports_typing": [],
     "quote": [],
     "typings": [],
     "requires_typing": false,
     "name": "UnoControlModel",
+    "imports": [],
     "namespace": "com.sun.star.awt",
     "extends": [
+      "com.sun.star.awt.UnoControlDialogElement",
       "com.sun.star.awt.XControlModel",
+      "com.sun.star.lang.XComponent",
       "com.sun.star.beans.XPropertySet",
-      "com.sun.star.util.XCloneable",
       "com.sun.star.beans.XMultiPropertySet",
       "com.sun.star.io.XPersistObject",
-      "com.sun.star.awt.UnoControlDialogElement",
-      "com.sun.star.lang.XComponent"
+      "com.sun.star.util.XCloneable"
     ],
-    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1awt_1_1UnoControlModel.html",
     "desc": [
       "specifies the standard model of a UnoControl in the Smalltalk model view controller design.",
       "",
       "The interfaces com.sun.star.beans.XPropertySet and com.sun.star.beans.XMultiPropertySet need access to the model data from the embedding environment. The control and the model can specify additional interfaces to exchange data or export more functionality from the model."
-    ]
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1awt_1_1UnoControlModel.html",
+    "items": {
+      "properties": [
+        {
+          "name": "DefaultControl",
+          "returns": "str",
+          "desc": [
+            "specifies the service name of the default control for this model."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
   }
 }

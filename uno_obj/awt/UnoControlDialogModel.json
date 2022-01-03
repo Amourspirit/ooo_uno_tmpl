@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
   "version": "0.1.12",
-  "timestamp": "2022-01-01 23:31:40+00:00",
+  "timestamp": "2022-01-03 04:03:15+00:00",
   "name": "UnoControlDialogModel",
   "type": "service",
   "namespace": "com.sun.star.awt",
@@ -14,36 +14,299 @@
   "data": {
     "from_imports": [
       [
-        ".uno_control_model",
-        "UnoControlModel"
-      ],
-      [
-        "..lang.x_multi_service_factory",
-        "XMultiServiceFactory"
+        "..container.x_container",
+        "XContainer"
       ],
       [
         "..container.x_name_container",
         "XNameContainer"
       ],
       [
-        "..container.x_container",
-        "XContainer"
+        ".uno_control_model",
+        "UnoControlModel"
+      ],
+      [
+        "..lang.x_multi_service_factory",
+        "XMultiServiceFactory"
       ]
     ],
-    "quote": [],
+    "from_imports_typing": [
+      [
+        ".font_descriptor",
+        "FontDescriptor"
+      ],
+      [
+        "..util.color",
+        "Color"
+      ],
+      [
+        "..graphic.x_graphic",
+        "XGraphic"
+      ]
+    ],
+    "quote": [
+      "XGraphic",
+      "FontDescriptor",
+      "Color"
+    ],
     "typings": [],
-    "requires_typing": false,
+    "requires_typing": true,
     "name": "UnoControlDialogModel",
+    "imports": [],
     "namespace": "com.sun.star.awt",
     "extends": [
-      "com.sun.star.container.XNameContainer",
-      "com.sun.star.lang.XMultiServiceFactory",
       "com.sun.star.awt.UnoControlModel",
-      "com.sun.star.container.XContainer"
+      "com.sun.star.lang.XMultiServiceFactory",
+      "com.sun.star.container.XContainer",
+      "com.sun.star.container.XNameContainer"
+    ],
+    "desc": [
+      "specifies the standard model of a UnoControlDialog.",
+      "",
+      "**since**",
+      "",
+      "    OOo 2.3"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1awt_1_1UnoControlDialogModel.html",
-    "desc": [
-      "specifies the standard model of a UnoControlDialog."
-    ]
+    "items": {
+      "properties": [
+        {
+          "name": "BackgroundColor",
+          "returns": "Color",
+          "desc": [
+            "specifies the background color (RGB) of the dialog."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Closeable",
+          "returns": "bool",
+          "desc": [
+            "specifies if the dialog is closeable."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "DesktopAsParent",
+          "returns": "bool",
+          "desc": [
+            "If set to true the dialog will have the desktop as parent.",
+            "",
+            "**since**",
+            "",
+            "    OOo 2.3"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Enabled",
+          "returns": "bool",
+          "desc": [
+            "determines whether a dialog is enabled or disabled."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "FontDescriptor",
+          "returns": "FontDescriptor",
+          "desc": [
+            "specifies the font attributes of the text in the caption bar of the dialog."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "FontEmphasisMark",
+          "returns": "int",
+          "desc": [
+            "specifies the com.sun.star.text.FontEmphasis value of the text in the caption bar of the dialog."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "FontRelief",
+          "returns": "int",
+          "desc": [
+            "specifies the com.sun.star.text.FontRelief value of the text in the caption bar of the dialog."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Graphic",
+          "returns": "XGraphic",
+          "desc": [
+            "specifies a graphic to be displayed as a background image",
+            "",
+            "If this property is present, it interacts with the ImageURL in the following way:",
+            "",
+            "**since**",
+            "",
+            "    OOo 2.4"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "HScroll",
+          "returns": "bool",
+          "desc": [
+            "specifies that a horizontal scrollbar should be added to the dialog",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 4.0"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "HelpText",
+          "returns": "str",
+          "desc": [
+            "specifies the help text of the dialog."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "HelpURL",
+          "returns": "str",
+          "desc": [
+            "specifies the help URL of the dialog."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ImageURL",
+          "returns": "str",
+          "desc": [
+            "specifies a URL that references a graphic that should be used as a background image.",
+            "",
+            "**since**",
+            "",
+            "    OOo 2.4"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Moveable",
+          "returns": "bool",
+          "desc": [
+            "specifies if the dialog is moveable."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ScrollHeight",
+          "returns": "int",
+          "desc": [
+            "specifies the total height of the scrollable dialog content",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 4.0"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ScrollLeft",
+          "returns": "int",
+          "desc": [
+            "specifies the horizontal position of the scrolled dialog content",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 4.0"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ScrollTop",
+          "returns": "int",
+          "desc": [
+            "specifies the vertical position of the scrolled dialog content",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 4.0"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ScrollWidth",
+          "returns": "int",
+          "desc": [
+            "specifies the total width of the scrollable dialog content",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 4.0"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Sizeable",
+          "returns": "bool",
+          "desc": [
+            "specifies if the dialog is sizeable."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "TextColor",
+          "returns": "Color",
+          "desc": [
+            "specifies the text color (RGB) of the dialog."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "TextLineColor",
+          "returns": "Color",
+          "desc": [
+            "specifies the text line color (RGB) of the dialog."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Title",
+          "returns": "str",
+          "desc": [
+            "specifies the text that is displayed in the caption bar of the dialog."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "VScroll",
+          "returns": "bool",
+          "desc": [
+            "specifies that a vertical scrollbar should be added to the dialog",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 4.0"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
   }
 }

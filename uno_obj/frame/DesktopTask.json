@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
   "version": "0.1.12",
-  "timestamp": "2022-01-01 23:31:20+00:00",
+  "timestamp": "2022-01-03 04:03:29+00:00",
   "name": "DesktopTask",
   "type": "service",
   "namespace": "com.sun.star.frame",
@@ -14,36 +14,115 @@
   "data": {
     "from_imports": [
       [
-        ".x_frames_supplier",
-        "XFramesSupplier"
+        "..beans.x_property_set",
+        "XPropertySet"
       ],
       [
         ".x_desktop_task",
         "XDesktopTask"
       ],
       [
-        ".x_window_arranger",
-        "XWindowArranger"
+        ".x_frames_supplier",
+        "XFramesSupplier"
       ],
       [
-        "..beans.x_property_set",
-        "XPropertySet"
+        ".x_window_arranger",
+        "XWindowArranger"
       ]
     ],
-    "quote": [],
+    "from_imports_typing": [
+      [
+        "..awt.size",
+        "Size"
+      ],
+      [
+        "..awt.point",
+        "Point"
+      ]
+    ],
+    "quote": [
+      "Point",
+      "Size"
+    ],
     "typings": [],
-    "requires_typing": false,
+    "requires_typing": true,
     "name": "DesktopTask",
+    "imports": [],
     "namespace": "com.sun.star.frame",
     "extends": [
-      "com.sun.star.frame.XFramesSupplier",
       "com.sun.star.frame.XDesktopTask",
+      "com.sun.star.beans.XPropertySet",
       "com.sun.star.frame.XWindowArranger",
-      "com.sun.star.beans.XPropertySet"
+      "com.sun.star.frame.XFramesSupplier"
+    ],
+    "desc": [
+      "use the Frame service instead of this",
+      "",
+      ".. deprecated::",
+      "",
+      "    Class is deprecated."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1frame_1_1DesktopTask.html",
-    "desc": [
-      "use the Frame service instead of this"
-    ]
+    "items": {
+      "properties": [
+        {
+          "name": "IsAlwaysVisible",
+          "returns": "bool",
+          "desc": [],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "IsDesktop",
+          "returns": "bool",
+          "desc": [],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "IsFloating",
+          "returns": "bool",
+          "desc": [],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "IsVisible",
+          "returns": "bool",
+          "desc": [
+            "use th visible state of the frame container window instead of this"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Position",
+          "returns": "Point",
+          "desc": [
+            "use the position of the frame container window instead of this"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Size",
+          "returns": "Size",
+          "desc": [
+            "use the size of the frame container window instead of this"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Title",
+          "returns": "str",
+          "desc": [
+            "use property Frame.Title instead of that"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
   }
 }

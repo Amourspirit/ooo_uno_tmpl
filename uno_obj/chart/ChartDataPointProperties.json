@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
   "version": "0.1.12",
-  "timestamp": "2022-01-01 23:31:51+00:00",
+  "timestamp": "2022-01-03 04:03:09+00:00",
   "name": "ChartDataPointProperties",
   "type": "service",
   "namespace": "com.sun.star.chart",
@@ -14,16 +14,8 @@
   "data": {
     "from_imports": [
       [
-        ".chart3_d_bar_properties",
-        "Chart3DBarProperties"
-      ],
-      [
         "..drawing.line_properties",
         "LineProperties"
-      ],
-      [
-        "..style.character_properties",
-        "CharacterProperties"
       ],
       [
         "..xml.user_defined_attributes_supplier",
@@ -32,25 +24,156 @@
       [
         "..drawing.fill_properties",
         "FillProperties"
+      ],
+      [
+        "..style.character_properties",
+        "CharacterProperties"
+      ],
+      [
+        ".chart3_d_bar_properties",
+        "Chart3DBarProperties"
       ]
     ],
-    "quote": [],
+    "from_imports_typing": [
+      [
+        "..graphic.x_graphic",
+        "XGraphic"
+      ]
+    ],
+    "quote": [
+      "XGraphic"
+    ],
     "typings": [],
-    "requires_typing": false,
+    "requires_typing": true,
     "name": "ChartDataPointProperties",
+    "imports": [],
     "namespace": "com.sun.star.chart",
     "extends": [
-      "com.sun.star.chart.Chart3DBarProperties",
+      "com.sun.star.drawing.FillProperties",
       "com.sun.star.drawing.LineProperties",
       "com.sun.star.style.CharacterProperties",
       "com.sun.star.xml.UserDefinedAttributesSupplier",
-      "com.sun.star.drawing.FillProperties"
+      "com.sun.star.chart.Chart3DBarProperties"
     ],
-    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1chart_1_1ChartDataPointProperties.html",
     "desc": [
       "specifies all the properties for the graphic object of a data point (e.g., a single bar in a bar chart).",
       "",
-      "Text properties correlate to the data description of the data point. There is a similar service for a group of graphic elements called ChartDataRowProperties for the properties of whole data rows."
-    ]
+      "Text properties correlate to the data description of the data point. There is a similar service for a group of graphic elements called ChartDataRowProperties for the properties of whole data rows.",
+      "",
+      "**since**",
+      "",
+      "    OOo 1.1.2"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1chart_1_1ChartDataPointProperties.html",
+    "items": {
+      "properties": [
+        {
+          "name": "DataCaption",
+          "returns": "int",
+          "desc": [
+            "specifies how the captions of data points are displayed."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "LabelPlacement",
+          "returns": "int",
+          "desc": [
+            "specifies a relative position for the data label"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "LabelSeparator",
+          "returns": "str",
+          "desc": [
+            "specifies a string that is used to separate the parts of a data label (caption)"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "NumberFormat",
+          "returns": "int",
+          "desc": [
+            "specifies a number format for the display of the value in the data label"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "PercentageNumberFormat",
+          "returns": "int",
+          "desc": [
+            "specifies a number format for the display of the percentage value in the data label"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "SegmentOffset",
+          "returns": "int",
+          "desc": [
+            "the offset by which pie segments in a PieDiagram are dragged outside from the center.",
+            "",
+            "This value is given in percent of the radius."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "SymbolBitmap",
+          "returns": "XGraphic",
+          "desc": [
+            "In charts that support symbols, you can set this property to a graphic object.",
+            "",
+            "This graphic is then used as symbol for each data point.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 6.1"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "SymbolBitmapURL",
+          "returns": "str",
+          "desc": [
+            "In charts that support symbols, you can set this property to any valid URL that points to a graphic file.",
+            "",
+            "This graphic is then used as symbol for each data point.",
+            "",
+            "When you query this value you get an internal URL of the embedded graphic."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "SymbolType",
+          "returns": "int",
+          "desc": [
+            "specifies the type of symbols if the current chart type supports the usage of symbols."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "TextWordWrap",
+          "returns": "bool",
+          "desc": [
+            "specifies if the text of a data label (caption) must be wrapped",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 5.1"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
   }
 }

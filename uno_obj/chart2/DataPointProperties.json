@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
   "version": "0.1.12",
-  "timestamp": "2022-01-01 23:31:37+00:00",
+  "timestamp": "2022-01-03 04:03:36+00:00",
   "name": "DataPointProperties",
   "type": "service",
   "namespace": "com.sun.star.chart2",
@@ -22,16 +22,546 @@
         "PropertySet"
       ]
     ],
-    "quote": [],
-    "typings": [],
-    "requires_typing": false,
+    "from_imports_typing": [
+      [
+        "..awt.gradient",
+        "Gradient"
+      ],
+      [
+        ".x_data_point_custom_label_field",
+        "XDataPointCustomLabelField"
+      ],
+      [
+        ".relative_position",
+        "RelativePosition"
+      ],
+      [
+        "..drawing.fill_style",
+        "FillStyle"
+      ],
+      [
+        "..drawing.line_style",
+        "LineStyle"
+      ],
+      [
+        "..drawing.line_dash",
+        "LineDash"
+      ],
+      [
+        ".symbol",
+        "Symbol"
+      ],
+      [
+        "..awt.size",
+        "Size"
+      ],
+      [
+        "..drawing.hatch",
+        "Hatch"
+      ],
+      [
+        ".data_point_label",
+        "DataPointLabel"
+      ],
+      [
+        "..beans.x_property_set",
+        "XPropertySet"
+      ],
+      [
+        "..drawing.rectangle_point",
+        "RectanglePoint"
+      ],
+      [
+        "..drawing.bitmap_mode",
+        "BitmapMode"
+      ]
+    ],
+    "quote": [
+      "BitmapMode",
+      "RectanglePoint",
+      "XPropertySet",
+      "FillStyle",
+      "typing.List[XDataPointCustomLabelField]",
+      "LineStyle",
+      "RelativePosition",
+      "LineDash",
+      "Size",
+      "Hatch",
+      "DataPointLabel",
+      "Symbol",
+      "Gradient"
+    ],
+    "typings": [
+      "typing.List[XDataPointCustomLabelField]"
+    ],
+    "requires_typing": true,
     "name": "DataPointProperties",
+    "imports": [],
     "namespace": "com.sun.star.chart2",
     "extends": [
-      "com.sun.star.drawing.FillProperties",
-      "com.sun.star.beans.PropertySet"
+      "com.sun.star.beans.PropertySet",
+      "com.sun.star.drawing.FillProperties"
+    ],
+    "desc": [
+      "",
+      "**since**",
+      "",
+      "    LibreOffice 6.1"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1chart2_1_1DataPointProperties.html",
-    "desc": []
+    "items": {
+      "types": [
+        {
+          "name": "CustomLabelFields",
+          "returns": "typing.List[XDataPointCustomLabelField]",
+          "desc": [
+            "specifies a text with possible fields that is used as a data point label, if set then Label property is ignored",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 6.1"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ],
+      "properties": [
+        {
+          "name": "BorderColor",
+          "returns": "int",
+          "desc": [
+            "Is used for borders around filled objects.",
+            "",
+            "See LineColor."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "BorderDash",
+          "returns": "LineDash",
+          "desc": [
+            "Is used for borders around filled objects.",
+            "",
+            "See LineDash."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "BorderDashName",
+          "returns": "str",
+          "desc": [
+            "The name of a dash that can be found in the com.sun.star.container.XNameContainer \\\"com.sun.star.drawing.LineDashTable\\\", that can be created via the com.sun.star.uno.XMultiServiceFactory of the ChartDocument."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "BorderStyle",
+          "returns": "LineStyle",
+          "desc": [
+            "Is used for borders around filled objects.",
+            "",
+            "See LineStyle."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "BorderTransparency",
+          "returns": "int",
+          "desc": [
+            "Is used for borders around filled objects.",
+            "",
+            "See LineTransparence."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "BorderWidth",
+          "returns": "int",
+          "desc": [
+            "Is used for borders around filled objects.",
+            "",
+            "See LineWidth."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Color",
+          "returns": "int",
+          "desc": [
+            "points to a style that also supports this service (but not this property) that is used as default, if the PropertyState of a property is DEFAULT_VALUE.",
+            "",
+            "This is the main color of a data point.",
+            "",
+            "For charts with filled areas, like bar-charts, this should map to the FillColor of the objects. For line-charts this should map to the LineColor property."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "CustomLabelPosition",
+          "returns": "RelativePosition",
+          "desc": [
+            "Custom position on the page associated to the CUSTOM label placement.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 7.0"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ErrorBarX",
+          "returns": "XPropertySet",
+          "desc": [
+            "If void, no error bars are shown for the data point in x-direction.",
+            "",
+            "The com.sun.star.beans.XPropertySet must support the service ErrorBar."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ErrorBarY",
+          "returns": "XPropertySet",
+          "desc": [
+            "If void, no error bars are shown for the data point in y-direction.",
+            "",
+            "The com.sun.star.beans.XPropertySet must support the service ErrorBar."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "FillBackground",
+          "returns": "bool",
+          "desc": [
+            "If TRUE, fills the background of a hatch with the color given in the Color property."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "FillBitmapLogicalSize",
+          "returns": "bool",
+          "desc": [
+            "specifies if the size is given in percentage or as an absolute value.",
+            "",
+            "If this is TRUE, the properties FillBitmapSizeX and FillBitmapSizeY contain the size of the tile in percent of the size of the original bitmap. If this is FALSE, the size of the tile is specified with 1/100th mm."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "FillBitmapMode",
+          "returns": "BitmapMode",
+          "desc": [
+            "this enum selects how an area is filled with a single bitmap."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "FillBitmapName",
+          "returns": "str",
+          "desc": [],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "FillBitmapOffsetX",
+          "returns": "int",
+          "desc": [
+            "This is the horizontal offset where the tile starts.",
+            "",
+            "It is given in percent in relation to the width of the bitmap."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "FillBitmapOffsetY",
+          "returns": "int",
+          "desc": [
+            "This is the vertical offset where the tile starts.",
+            "",
+            "It is given in percent in relation to the width of the bitmap."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "FillBitmapPositionOffsetX",
+          "returns": "int",
+          "desc": [
+            "Every second line of tiles is moved the given percent of the width of the bitmap."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "FillBitmapPositionOffsetY",
+          "returns": "int",
+          "desc": [
+            "Every second row of tiles is moved the given percent of the width of the bitmap."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "FillBitmapRectanglePoint",
+          "returns": "RectanglePoint",
+          "desc": [
+            "The RectanglePoint specifies the position inside of the bitmap to use as the top left position for rendering."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "FillBitmapSizeX",
+          "returns": "int",
+          "desc": [
+            "This is the width of the tile for filling.",
+            "",
+            "Depending on the property FillBitmapLogicalSize, this is either relative or absolute."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "FillBitmapSizeY",
+          "returns": "int",
+          "desc": [
+            "This is the height of the tile for filling.",
+            "",
+            "Depending on the property FillBitmapLogicalSize, this is either relative or absolute."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "FillStyle",
+          "returns": "FillStyle",
+          "desc": [
+            "This enumeration selects the style with which the area will be filled."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Geometry3D",
+          "returns": "int",
+          "desc": [
+            "describes the geometry of a 3 dimensional data point.",
+            "",
+            "Number is one of constant group DataPointGeometry3D.",
+            "",
+            "This is especially used for 3D bar-charts.",
+            "",
+            "CUBOID==0 CYLINDER==1 CONE==2 PYRAMID==3 CUBOID==else"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Gradient",
+          "returns": "Gradient",
+          "desc": [],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "GradientName",
+          "returns": "str",
+          "desc": [],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Hatch",
+          "returns": "Hatch",
+          "desc": [],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "HatchName",
+          "returns": "str",
+          "desc": [],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Label",
+          "returns": "DataPointLabel",
+          "desc": [],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "LabelPlacement",
+          "returns": "int",
+          "desc": [
+            "specifies a relative position for the data label"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "LabelSeparator",
+          "returns": "str",
+          "desc": [
+            "specifies a string that is used to separate the parts of a data label (caption)"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "LineDash",
+          "returns": "LineDash",
+          "desc": [
+            "Is only used for line-chart types."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "LineDashName",
+          "returns": "str",
+          "desc": [
+            "The name of a dash that can be found in the com.sun.star.container.XNameContainer \\\"com.sun.star.drawing.LineDashTable\\\", that can be created via the com.sun.star.uno.XMultiServiceFactory of the ChartDocument."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "LineStyle",
+          "returns": "LineStyle",
+          "desc": [],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "LineWidth",
+          "returns": "int",
+          "desc": [
+            "Is only used for line-chart types."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "NumberFormat",
+          "returns": "int",
+          "desc": [
+            "specifies a number format for the display of the value in the data label"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Offset",
+          "returns": "float",
+          "desc": [
+            "describes a value by which a data point is moved from its default position in percent of the maximum allowed distance.",
+            "",
+            "This is especially useful for the explosion of pie-chart segments."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "PercentDiagonal",
+          "returns": "int",
+          "desc": [
+            "A value between 0 and 100 indicating the percentage how round an edge should be."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "PercentageNumberFormat",
+          "returns": "int",
+          "desc": [
+            "specifies a number format for the display of the percentage value in the data label"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ReferencePageSize",
+          "returns": "Size",
+          "desc": [
+            "The size of the page at the moment when the font size for data labels was set.",
+            "",
+            "This size is used to resize text in the view when the size of the page has changed since the font sizes were set (automatic text scaling)."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ShowErrorBox",
+          "returns": "bool",
+          "desc": [
+            "In case ErrorBarX and ErrorBarY both are set, and error bars are shown, a box spanning all error-indicators is rendered."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Symbol",
+          "returns": "Symbol",
+          "desc": [],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "TextWordWrap",
+          "returns": "bool",
+          "desc": [
+            "specifies if the text of a data label (caption) must be wrapped",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 5.1"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Transparency",
+          "returns": "int",
+          "desc": [
+            "This is the main transparency value of a data point.",
+            "",
+            "For charts with filled areas, like bar-charts, this should map to the FillTransparence of the objects. For line-charts this should map to the LineTransparence property."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "TransparencyGradient",
+          "returns": "Gradient",
+          "desc": [
+            "This describes the transparency of the fill area as a gradient."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "TransparencyGradientName",
+          "returns": "str",
+          "desc": [],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
   }
 }

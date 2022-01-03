@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
   "version": "0.1.12",
-  "timestamp": "2022-01-01 23:31:28+00:00",
+  "timestamp": "2022-01-03 04:03:22+00:00",
   "name": "PackageManagerDialog",
   "type": "service",
   "namespace": "com.sun.star.deployment.ui",
@@ -18,21 +18,80 @@
         "XAsynchronousExecutableDialog"
       ]
     ],
-    "quote": [],
+    "from_imports_typing": [
+      [
+        "...awt.x_window",
+        "XWindow"
+      ]
+    ],
+    "quote": [
+      "XWindow"
+    ],
     "typings": [],
-    "requires_typing": false,
+    "requires_typing": true,
     "name": "PackageManagerDialog",
+    "imports": [],
     "namespace": "com.sun.star.deployment.ui",
     "extends": [
       "com.sun.star.ui.dialogs.XAsynchronousExecutableDialog"
     ],
-    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1deployment_1_1ui_1_1PackageManagerDialog.html",
     "desc": [
       "The PackageManagerDialog is used to visually manage installed packages of the user and shared installation as well as currently open documents.",
       "",
-      "**Since**",
+      "**since**",
       "",
       "    OOo 2.0"
-    ]
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1deployment_1_1ui_1_1PackageManagerDialog.html",
+    "items": {
+      "methods": [
+        {
+          "name": "create",
+          "returns": "None",
+          "desc": [
+            "Create a GUI using the specific parent window and focus on the given context."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xParent",
+              "XWindow",
+              "in"
+            ],
+            [
+              "focusedContext",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "createAndInstall",
+          "returns": "None",
+          "desc": [
+            "Create a GUI and pass the URL of the extension which shall be installed right away.",
+            "",
+            "This constructor is intended for the case when unopkg is run as result of clicking an extension in a file browser, etc. The extensions will always be installed for the current user."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "extensionURL",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "createDefault",
+          "returns": "None",
+          "desc": [
+            "Create a default GUI."
+          ],
+          "raises": [],
+          "args": []
+        }
+      ]
+    }
   }
 }

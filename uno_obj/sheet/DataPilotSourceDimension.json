@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
   "version": "0.1.12",
-  "timestamp": "2022-01-01 23:31:26+00:00",
+  "timestamp": "2022-01-03 04:03:32+00:00",
   "name": "DataPilotSourceDimension",
   "type": "service",
   "namespace": "com.sun.star.sheet",
@@ -14,34 +14,55 @@
   "data": {
     "from_imports": [
       [
-        "..util.x_cloneable",
-        "XCloneable"
+        "..beans.x_property_set",
+        "XPropertySet"
       ],
       [
         ".x_hierarchies_supplier",
         "XHierarchiesSupplier"
       ],
       [
-        "..container.x_named",
-        "XNamed"
+        "..util.x_cloneable",
+        "XCloneable"
       ],
       [
-        "..beans.x_property_set",
-        "XPropertySet"
+        "..container.x_named",
+        "XNamed"
       ]
     ],
-    "quote": [],
-    "typings": [],
-    "requires_typing": false,
+    "from_imports_typing": [
+      [
+        ".general_function",
+        "GeneralFunction"
+      ],
+      [
+        ".data_pilot_field_orientation",
+        "DataPilotFieldOrientation"
+      ],
+      [
+        ".table_filter_field",
+        "TableFilterField"
+      ]
+    ],
+    "quote": [
+      "DataPilotFieldOrientation",
+      "typing.List[TableFilterField]",
+      "GeneralFunction",
+      "XNamed"
+    ],
+    "typings": [
+      "typing.List[TableFilterField]"
+    ],
+    "requires_typing": true,
     "name": "DataPilotSourceDimension",
+    "imports": [],
     "namespace": "com.sun.star.sheet",
     "extends": [
-      "com.sun.star.sheet.XHierarchiesSupplier",
       "com.sun.star.container.XNamed",
+      "com.sun.star.sheet.XHierarchiesSupplier",
       "com.sun.star.util.XCloneable",
       "com.sun.star.beans.XPropertySet"
     ],
-    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1sheet_1_1DataPilotSourceDimension.html",
     "desc": [
       "represents a dimension in a data pilot source.",
       "",
@@ -49,7 +70,103 @@
       "",
       "In more complex data sources, a dimension may contain several hierarchies, which consolidate items of a complex data type, called levels.",
       "",
-      "Example: In a database, a column contains date values. This column will be a dimension of the data pilot source. One hierarchy may contain the 3 levels year, month, day. Another hierarchy may contain the 2 levels year and week number."
-    ]
+      "Example: In a database, a column contains date values. This column will be a dimension of the data pilot source. One hierarchy may contain the 3 levels year, month, day. Another hierarchy may contain the 2 levels year and week number.",
+      "",
+      "**since**",
+      "",
+      "    LibreOffice 5.3"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1sheet_1_1DataPilotSourceDimension.html",
+    "items": {
+      "types": [
+        {
+          "name": "Filter",
+          "returns": "typing.List[TableFilterField]",
+          "desc": [
+            "specifies which values are used."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ],
+      "properties": [
+        {
+          "name": "Flags",
+          "returns": "int",
+          "desc": [
+            "contains flags that control the usage of the dimension."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Function",
+          "returns": "GeneralFunction",
+          "desc": [
+            "specifies how data are aggregated."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Function2",
+          "returns": "int",
+          "desc": [
+            "specifies how data are aggregated.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 5.3"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "IsDataLayoutDimension",
+          "returns": "bool",
+          "desc": [
+            "contains TRUE if this is the dimension used to layout the different data dimensions."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Orientation",
+          "returns": "DataPilotFieldOrientation",
+          "desc": [
+            "specifies where the dimension is used."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Original",
+          "returns": "XNamed",
+          "desc": [
+            "returns the name of the dimension from which this dimension was cloned, or NULL if it was not cloned."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Position",
+          "returns": "int",
+          "desc": [
+            "specifies the position of the dimension within its orientation."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "UsedHierarchy",
+          "returns": "int",
+          "desc": [
+            "specifies which hierarchy of the dimension is used."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
   }
 }

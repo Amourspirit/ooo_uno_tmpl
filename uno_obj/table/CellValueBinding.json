@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
   "version": "0.1.12",
-  "timestamp": "2022-01-01 23:31:41+00:00",
+  "timestamp": "2022-01-03 04:03:05+00:00",
   "name": "CellValueBinding",
   "type": "service",
   "namespace": "com.sun.star.table",
@@ -22,16 +22,24 @@
         "XInitialization"
       ]
     ],
-    "quote": [],
+    "from_imports_typing": [
+      [
+        ".cell_address",
+        "CellAddress"
+      ]
+    ],
+    "quote": [
+      "CellAddress"
+    ],
     "typings": [],
-    "requires_typing": false,
+    "requires_typing": true,
     "name": "CellValueBinding",
+    "imports": [],
     "namespace": "com.sun.star.table",
     "extends": [
-      "com.sun.star.lang.XInitialization",
-      "com.sun.star.form.binding.ValueBinding"
+      "com.sun.star.form.binding.ValueBinding",
+      "com.sun.star.lang.XInitialization"
     ],
-    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1table_1_1CellValueBinding.html",
     "desc": [
       "defines the binding to a single cell in a table document",
       "",
@@ -40,6 +48,20 @@
       "The binding supports exchanging double values, string values.",
       "",
       "The component cannot be instantiated at a global service factory, instead it's usually provided by a document instance."
-    ]
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1table_1_1CellValueBinding.html",
+    "items": {
+      "properties": [
+        {
+          "name": "BoundCell",
+          "returns": "CellAddress",
+          "desc": [
+            "specifies the cell within a document whose value is reflected by the binding."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
   }
 }

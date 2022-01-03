@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
   "version": "0.1.12",
-  "timestamp": "2022-01-01 23:31:32+00:00",
+  "timestamp": "2022-01-03 04:03:26+00:00",
   "name": "TextPortion",
   "type": "service",
   "namespace": "com.sun.star.text",
@@ -22,20 +22,147 @@
         "XTolerantMultiPropertySet"
       ]
     ],
-    "quote": [],
+    "from_imports_typing": [
+      [
+        ".x_text_content",
+        "XTextContent"
+      ],
+      [
+        ".x_footnote",
+        "XFootnote"
+      ],
+      [
+        ".x_text_field",
+        "XTextField"
+      ]
+    ],
+    "quote": [
+      "XTextField",
+      "XTextContent",
+      "XFootnote"
+    ],
     "typings": [],
-    "requires_typing": false,
+    "requires_typing": true,
     "name": "TextPortion",
+    "imports": [],
     "namespace": "com.sun.star.text",
     "extends": [
       "com.sun.star.text.TextRange",
       "com.sun.star.beans.XTolerantMultiPropertySet"
     ],
-    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1text_1_1TextPortion.html",
     "desc": [
       "A TextPortion is a piece of text within a paragraph that does not contain changes of its attributes inside.",
       "",
-      "It is created by an enumeration implemented in a paragraph service. It may be used to export the content of the paragraph to an external document format."
-    ]
+      "It is created by an enumeration implemented in a paragraph service. It may be used to export the content of the paragraph to an external document format.",
+      "",
+      "**since**",
+      "",
+      "    OOo 2.0"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1text_1_1TextPortion.html",
+    "items": {
+      "properties": [
+        {
+          "name": "Bookmark",
+          "returns": "XTextContent",
+          "desc": [
+            "contains the bookmark of a text portion of type Bookmark."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ControlCharacter",
+          "returns": "int",
+          "desc": [
+            "contains the control character of a text portion of type ControlCharacter."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "DocumentIndexMark",
+          "returns": "XTextContent",
+          "desc": [
+            "contains the document index mark of a text portion of type DocumentIndexMark."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Footnote",
+          "returns": "XFootnote",
+          "desc": [
+            "contains the footnote of a text portion of type Footnote."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "InContentMetadata",
+          "returns": "XTextContent",
+          "desc": [
+            "contains the text range of a text portion of type InContentMetadata.",
+            "",
+            "**since**",
+            "",
+            "    OOo 3.2"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "IsCollapsed",
+          "returns": "bool",
+          "desc": [
+            "contains whether the portion is a point only."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "IsStart",
+          "returns": "bool",
+          "desc": [
+            "contains whether the portion is the start of the portion.",
+            "",
+            "This is used for portions which are represented by 2 TextPortion objects (e.g., DocmentIndexMark)."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ReferenceMark",
+          "returns": "XTextContent",
+          "desc": [
+            "contains the bookmark of a text portion of type ReferenceMark."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "TextField",
+          "returns": "XTextField",
+          "desc": [
+            "contains the text field of a text portion of type TextField."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "TextPortionType",
+          "returns": "str",
+          "desc": [
+            "contains the type of the text portion.",
+            "",
+            "Valid content type names are:",
+            "",
+            "For Reference marks, document index marks, etc., 2 text portions will be generated, one for the start position and one for the end position."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
   }
 }

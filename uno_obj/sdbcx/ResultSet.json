@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
   "version": "0.1.12",
-  "timestamp": "2022-01-01 23:31:48+00:00",
+  "timestamp": "2022-01-03 04:03:38+00:00",
   "name": "ResultSet",
   "type": "service",
   "namespace": "com.sun.star.sdbcx",
@@ -14,6 +14,10 @@
   "data": {
     "from_imports": [
       [
+        "..sdbc.result_set",
+        "ResultSet"
+      ],
+      [
         ".x_row_locate",
         "XRowLocate"
       ],
@@ -22,28 +26,50 @@
         "XCancellable"
       ],
       [
-        "..sdbc.result_set",
-        "ResultSet"
-      ],
-      [
         ".x_delete_rows",
         "XDeleteRows"
       ]
     ],
+    "from_imports_typing": [],
     "quote": [],
     "typings": [],
     "requires_typing": false,
     "name": "ResultSet",
+    "imports": [],
     "namespace": "com.sun.star.sdbcx",
     "extends": [
-      "com.sun.star.sdbcx.XRowLocate",
-      "com.sun.star.util.XCancellable",
       "com.sun.star.sdbc.ResultSet",
+      "com.sun.star.util.XCancellable",
+      "com.sun.star.sdbcx.XRowLocate",
       "com.sun.star.sdbcx.XDeleteRows"
     ],
-    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1sdbcx_1_1ResultSet.html",
     "desc": [
       "extends the SDBC ResultSet by the possibility of bookmark positioning, canceling the positioning, and updating of rows."
-    ]
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1sdbcx_1_1ResultSet.html",
+    "items": {
+      "properties": [
+        {
+          "name": "CanUpdateInsertedRows",
+          "returns": "bool",
+          "desc": [
+            "returns whether the result set supports updating of newly inserted rows.",
+            "",
+            "This may not work, as the result set may contain automatic generated data which is used as key information."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "IsBookmarkable",
+          "returns": "bool",
+          "desc": [
+            "returns if the result set supports bookmark navigation."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
   }
 }

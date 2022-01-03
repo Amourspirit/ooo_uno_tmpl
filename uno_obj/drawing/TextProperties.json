@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
   "version": "0.1.12",
-  "timestamp": "2022-01-01 23:31:54+00:00",
+  "timestamp": "2022-01-03 04:03:00+00:00",
   "name": "TextProperties",
   "type": "service",
   "namespace": "com.sun.star.drawing",
@@ -14,46 +14,347 @@
   "data": {
     "from_imports": [
       [
-        "..style.paragraph_properties_asian",
-        "ParagraphPropertiesAsian"
-      ],
-      [
-        "..style.character_properties_asian",
-        "CharacterPropertiesAsian"
+        "..style.character_properties_complex",
+        "CharacterPropertiesComplex"
       ],
       [
         "..style.paragraph_properties",
         "ParagraphProperties"
       ],
       [
-        "..style.character_properties_complex",
-        "CharacterPropertiesComplex"
+        "..style.paragraph_properties_asian",
+        "ParagraphPropertiesAsian"
       ],
       [
         "..style.paragraph_properties_complex",
         "ParagraphPropertiesComplex"
       ],
       [
+        "..style.character_properties_asian",
+        "CharacterPropertiesAsian"
+      ],
+      [
         "..style.character_properties",
         "CharacterProperties"
       ]
     ],
-    "quote": [],
+    "from_imports_typing": [
+      [
+        ".text_vertical_adjust",
+        "TextVerticalAdjust"
+      ],
+      [
+        ".text_horizontal_adjust",
+        "TextHorizontalAdjust"
+      ],
+      [
+        "..container.x_index_replace",
+        "XIndexReplace"
+      ],
+      [
+        ".text_animation_kind",
+        "TextAnimationKind"
+      ],
+      [
+        "..text.writing_mode",
+        "WritingMode"
+      ],
+      [
+        "..text.x_text_columns",
+        "XTextColumns"
+      ],
+      [
+        ".text_fit_to_size_type",
+        "TextFitToSizeType"
+      ],
+      [
+        ".text_animation_direction",
+        "TextAnimationDirection"
+      ]
+    ],
+    "quote": [
+      "TextHorizontalAdjust",
+      "TextFitToSizeType",
+      "XTextColumns",
+      "WritingMode",
+      "TextAnimationDirection",
+      "XIndexReplace",
+      "TextAnimationKind",
+      "TextVerticalAdjust"
+    ],
     "typings": [],
-    "requires_typing": false,
+    "requires_typing": true,
     "name": "TextProperties",
+    "imports": [],
     "namespace": "com.sun.star.drawing",
     "extends": [
+      "com.sun.star.style.CharacterProperties",
       "com.sun.star.style.CharacterPropertiesAsian",
+      "com.sun.star.style.CharacterPropertiesComplex",
       "com.sun.star.style.ParagraphProperties",
       "com.sun.star.style.ParagraphPropertiesAsian",
-      "com.sun.star.style.CharacterPropertiesComplex",
-      "com.sun.star.style.ParagraphPropertiesComplex",
-      "com.sun.star.style.CharacterProperties"
+      "com.sun.star.style.ParagraphPropertiesComplex"
+    ],
+    "desc": [
+      "This is a set of properties to describe the style for rendering the text area inside a shape.",
+      "",
+      "**since**",
+      "",
+      "    LibreOffice 7.2"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1drawing_1_1TextProperties.html",
-    "desc": [
-      "This is a set of properties to describe the style for rendering the text area inside a shape."
-    ]
+    "items": {
+      "properties": [
+        {
+          "name": "IsNumbering",
+          "returns": "bool",
+          "desc": [
+            "If this is TRUE, numbering is ON for the text of this Shape."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "NumberingRules",
+          "returns": "XIndexReplace",
+          "desc": [
+            "describes the numbering levels.",
+            "",
+            "The different rules accessible with this com.sun.star.container.XIndexReplace interface are sequences of property values as described in the service com.sun.star.style.NumberingRule."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "TextAnimationAmount",
+          "returns": "int",
+          "desc": [
+            "This is the number of pixels the text is moved in each animation step."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "TextAnimationCount",
+          "returns": "int",
+          "desc": [
+            "This number defines how many times the text animation is repeated.",
+            "",
+            "If this is set to zero, the repeat is endless."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "TextAnimationDelay",
+          "returns": "int",
+          "desc": [
+            "This is the delay in thousandths of a second between each of the animation steps."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "TextAnimationDirection",
+          "returns": "TextAnimationDirection",
+          "desc": [
+            "This enumeration defines the direction in which the text moves."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "TextAnimationKind",
+          "returns": "TextAnimationKind",
+          "desc": [
+            "This value defines the type of animation."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "TextAnimationStartInside",
+          "returns": "bool",
+          "desc": [
+            "If this value is TRUE, the text is visible at the start of the animation."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "TextAnimationStopInside",
+          "returns": "bool",
+          "desc": [
+            "If this value is TRUE, the text is visible at the end of the animation."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "TextAutoGrowHeight",
+          "returns": "bool",
+          "desc": [
+            "If this value is TRUE, the height of the Shape is automatically expanded/shrunk when text is added to or removed from the Shape."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "TextAutoGrowWidth",
+          "returns": "bool",
+          "desc": [
+            "If this value is TRUE, the width of the Shape is automatically expanded/shrunk when text is added to or removed from the Shape."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "TextColumns",
+          "returns": "XTextColumns",
+          "desc": [
+            "Column layout properties for the text.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 7.2"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "TextContourFrame",
+          "returns": "bool",
+          "desc": [
+            "If this value is TRUE, the left edge of every line of text is aligned with the left edge of this Shape."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "TextFitToSize",
+          "returns": "TextFitToSizeType",
+          "desc": [
+            "With this set to a value other than NONE, the text inside of the Shape is stretched or scaled to fit into the Shape."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "TextHorizontalAdjust",
+          "returns": "TextHorizontalAdjust",
+          "desc": [
+            "adjusts the horizontal position of the text inside of the Shape."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "TextLeftDistance",
+          "returns": "int",
+          "desc": [
+            "This is the distance from the left edge of the Shape to the left edge of the text.",
+            "",
+            "This is only useful if Text.TextHorizontalAdjust is BLOCK or STRETCH or if Text.TextFitSize is TRUE."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "TextLowerDistance",
+          "returns": "int",
+          "desc": [
+            "This is the distance from the lower edge of the Shape to the lower edge of the text.",
+            "",
+            "This is only useful if Text.TextVerticalAdjust is BLOCK or if Text.TextFitSize is TRUE."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "TextMaximumFrameHeight",
+          "returns": "int",
+          "desc": [
+            "with this property you can set the maximum height for a shape with text.",
+            "",
+            "On edit, the auto grow feature will not grow the object higher than the value of this property."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "TextMaximumFrameWidth",
+          "returns": "int",
+          "desc": [
+            "with this property you can set the maximum width for a shape with text.",
+            "",
+            "On edit, the auto grow feature will not grow the objects wider than the value of this property."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "TextMinimumFrameHeight",
+          "returns": "int",
+          "desc": [
+            "with this property you can set the minimum height for a shape with text.",
+            "",
+            "On edit, the auto grow feature will not shrink the objects height smaller than the value of this property."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "TextMinimumFrameWidth",
+          "returns": "int",
+          "desc": [
+            "with this property you can set the minimum width for a shape with text.",
+            "",
+            "On edit, the auto grow feature will not shrink the object width smaller than the value of this property."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "TextRightDistance",
+          "returns": "int",
+          "desc": [
+            "This is the distance from the right edge of the Shape to the right edge of the text.",
+            "",
+            "This is only useful if Text.TextHorizontalAdjust is BLOCK or STRETCH or if Text.TextFitSize is TRUE."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "TextUpperDistance",
+          "returns": "int",
+          "desc": [
+            "This is the distance from the upper edge of the Shape to the upper edge of the text.",
+            "",
+            "This is only useful if Text.TextVerticalAdjust is BLOCK or if Text.TextFitSize is TRUE."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "TextVerticalAdjust",
+          "returns": "TextVerticalAdjust",
+          "desc": [
+            "adjusts the vertical position of the text inside of the Shape."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "TextWritingMode",
+          "returns": "WritingMode",
+          "desc": [
+            "This value selects the writing mode for the text."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
   }
 }

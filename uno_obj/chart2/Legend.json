@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
   "version": "0.1.12",
-  "timestamp": "2022-01-01 23:31:37+00:00",
+  "timestamp": "2022-01-03 04:03:36+00:00",
   "name": "Legend",
   "type": "service",
   "namespace": "com.sun.star.chart2",
@@ -14,10 +14,6 @@
   "data": {
     "from_imports": [
       [
-        "..drawing.line_properties",
-        "LineProperties"
-      ],
-      [
         "..drawing.fill_properties",
         "FillProperties"
       ],
@@ -28,22 +24,126 @@
       [
         "..beans.property_set",
         "PropertySet"
+      ],
+      [
+        "..drawing.line_properties",
+        "LineProperties"
       ]
     ],
-    "quote": [],
+    "from_imports_typing": [
+      [
+        ".legend_position",
+        "LegendPosition"
+      ],
+      [
+        "..awt.size",
+        "Size"
+      ],
+      [
+        "..chart.chart_legend_expansion",
+        "ChartLegendExpansion"
+      ],
+      [
+        ".relative_position",
+        "RelativePosition"
+      ]
+    ],
+    "quote": [
+      "RelativePosition",
+      "Size",
+      "ChartLegendExpansion",
+      "LegendPosition"
+    ],
     "typings": [],
-    "requires_typing": false,
+    "requires_typing": true,
     "name": "Legend",
+    "imports": [],
     "namespace": "com.sun.star.chart2",
     "extends": [
-      "com.sun.star.drawing.LineProperties",
       "com.sun.star.drawing.FillProperties",
-      "com.sun.star.chart2.XLegend",
-      "com.sun.star.beans.PropertySet"
+      "com.sun.star.drawing.LineProperties",
+      "com.sun.star.beans.PropertySet",
+      "com.sun.star.chart2.XLegend"
+    ],
+    "desc": [
+      "Describes a legend for a Diagram.",
+      "",
+      "**since**",
+      "",
+      "    LibreOffice 7.0"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1chart2_1_1Legend.html",
-    "desc": [
-      "Describes a legend for a Diagram."
-    ]
+    "items": {
+      "properties": [
+        {
+          "name": "AnchorPosition",
+          "returns": "LegendPosition",
+          "desc": [
+            "Provides an automated position."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Expansion",
+          "returns": "ChartLegendExpansion",
+          "desc": [
+            "Determines how the aspect ratio of the legend should roughly be.",
+            "",
+            "Set the Expansion to com.sun.star.chart.HIGH for a legend that is positioned on the right or left hand side. Use com.sun.star.chart.WIDE for a legend that is positioned on top or the bottom."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Overlay",
+          "returns": "bool",
+          "desc": [
+            "Determines, whether the legend should overlay the chart.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 7.0"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ReferencePageSize",
+          "returns": "Size",
+          "desc": [
+            "contains the size of the page at the time when properties were set (e.g.",
+            "",
+            "the CharHeight).",
+            "",
+            "This way it is possible to resize objects (like text) in the view without modifying the model."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "RelativePosition",
+          "returns": "RelativePosition",
+          "desc": [
+            "The position is as a relative position on the page.",
+            "",
+            "If a relative position is given the legend is not automatically placed, but instead is placed relative on the page.",
+            "",
+            "If VOID, the legend position is solely determined by the AnchorPosition."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Show",
+          "returns": "bool",
+          "desc": [
+            "Determines, whether the legend should be rendered by the view."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
   }
 }

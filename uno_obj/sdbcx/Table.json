@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
   "version": "0.1.12",
-  "timestamp": "2022-01-01 23:31:48+00:00",
+  "timestamp": "2022-01-03 04:03:38+00:00",
   "name": "Table",
   "type": "service",
   "namespace": "com.sun.star.sdbcx",
@@ -14,12 +14,20 @@
   "data": {
     "from_imports": [
       [
-        ".x_data_descriptor_factory",
-        "XDataDescriptorFactory"
+        ".x_alter_table",
+        "XAlterTable"
+      ],
+      [
+        ".x_columns_supplier",
+        "XColumnsSupplier"
       ],
       [
         ".x_indexes_supplier",
         "XIndexesSupplier"
+      ],
+      [
+        ".x_rename",
+        "XRename"
       ],
       [
         "..beans.x_property_set",
@@ -30,33 +38,26 @@
         "XKeysSupplier"
       ],
       [
-        ".x_rename",
-        "XRename"
-      ],
-      [
-        ".x_columns_supplier",
-        "XColumnsSupplier"
-      ],
-      [
-        ".x_alter_table",
-        "XAlterTable"
+        ".x_data_descriptor_factory",
+        "XDataDescriptorFactory"
       ]
     ],
+    "from_imports_typing": [],
     "quote": [],
     "typings": [],
     "requires_typing": false,
     "name": "Table",
+    "imports": [],
     "namespace": "com.sun.star.sdbcx",
     "extends": [
       "com.sun.star.sdbcx.XDataDescriptorFactory",
+      "com.sun.star.sdbcx.XColumnsSupplier",
       "com.sun.star.sdbcx.XIndexesSupplier",
-      "com.sun.star.beans.XPropertySet",
       "com.sun.star.sdbcx.XKeysSupplier",
       "com.sun.star.sdbcx.XRename",
-      "com.sun.star.sdbcx.XColumnsSupplier",
-      "com.sun.star.sdbcx.XAlterTable"
+      "com.sun.star.sdbcx.XAlterTable",
+      "com.sun.star.beans.XPropertySet"
     ],
-    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1sdbcx_1_1Table.html",
     "desc": [
       "used to specify a table in a database.",
       "",
@@ -65,6 +66,60 @@
       "In addition, it may contain indexes to improve the performance in the retrieval of the table's data and keys, and to define semantic rules for the table.",
       "",
       "Note:  All properties and columns of a table could by modified before it is appended to a database. In that case, the service is in fact a descriptor. On existing tables, a user might alter columns, add or delete columns, indexes, and keys depending on the capabilities of the database and on the user's privileges."
-    ]
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1sdbcx_1_1Table.html",
+    "items": {
+      "properties": [
+        {
+          "name": "CatalogName",
+          "returns": "str",
+          "desc": [
+            "is the name of the table catalog."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Description",
+          "returns": "str",
+          "desc": [
+            "supplies a comment on the table.",
+            "",
+            "Could be empty, if not supported by the driver."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Name",
+          "returns": "str",
+          "desc": [
+            "is the name of the table."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "SchemaName",
+          "returns": "str",
+          "desc": [
+            "is the name of the table schema."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Type",
+          "returns": "str",
+          "desc": [
+            "indicates the type of the table like (TABLE, VIEW, SYSTEM TABLE).",
+            "",
+            "Could be empty, if not supported by the driver."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
   }
 }

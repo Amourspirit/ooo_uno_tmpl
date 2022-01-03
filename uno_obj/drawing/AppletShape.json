@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
   "version": "0.1.12",
-  "timestamp": "2022-01-01 23:31:52+00:00",
+  "timestamp": "2022-01-03 04:02:56+00:00",
   "name": "AppletShape",
   "type": "service",
   "namespace": "com.sun.star.drawing",
@@ -18,19 +18,86 @@
         "Shape"
       ]
     ],
-    "quote": [],
-    "typings": [],
-    "requires_typing": false,
+    "from_imports_typing": [
+      [
+        "..beans.property_value",
+        "PropertyValue"
+      ]
+    ],
+    "quote": [
+      "typing.List[PropertyValue]"
+    ],
+    "typings": [
+      "typing.List[PropertyValue]"
+    ],
+    "requires_typing": true,
     "name": "AppletShape",
+    "imports": [],
     "namespace": "com.sun.star.drawing",
     "extends": [
       "com.sun.star.drawing.Shape"
     ],
-    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1drawing_1_1AppletShape.html",
     "desc": [
       "This Shape encapsulates an applet.",
       "",
       "An applet is a small Java-based program that is executed and rendered embedded in a document."
-    ]
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1drawing_1_1AppletShape.html",
+    "items": {
+      "types": [
+        {
+          "name": "AppletCommands",
+          "returns": "typing.List[PropertyValue]",
+          "desc": [
+            "This sequence contains parameters that are passed to the applet when it is initialized."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ],
+      "properties": [
+        {
+          "name": "AppletCode",
+          "returns": "str",
+          "desc": [
+            "This property specifies one of the following:",
+            "The name of the class file that contains the compiled applet subclass.",
+            "",
+            "The path to the class, including the class file itself."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "AppletCodeBase",
+          "returns": "str",
+          "desc": [
+            "This property specifies the base URI for the applet.",
+            "",
+            "If this property is empty, then it defaults the same base URI as for the current document."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "AppletIsScript",
+          "returns": "bool",
+          "desc": [
+            "This property specifies whether or not the applet can be scripted."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "AppletName",
+          "returns": "str",
+          "desc": [
+            "this is an optional name for the applet."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
   }
 }

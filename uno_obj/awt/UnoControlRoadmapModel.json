@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
   "version": "0.1.12",
-  "timestamp": "2022-01-01 23:31:41+00:00",
+  "timestamp": "2022-01-03 04:03:16+00:00",
   "name": "UnoControlRoadmapModel",
   "type": "service",
   "namespace": "com.sun.star.awt",
@@ -22,18 +22,150 @@
         "UnoControlModel"
       ]
     ],
-    "quote": [],
+    "from_imports_typing": [
+      [
+        "..graphic.x_graphic",
+        "XGraphic"
+      ]
+    ],
+    "quote": [
+      "XGraphic"
+    ],
     "typings": [],
-    "requires_typing": false,
+    "requires_typing": true,
     "name": "UnoControlRoadmapModel",
+    "imports": [],
     "namespace": "com.sun.star.awt",
     "extends": [
-      "com.sun.star.container.XIndexContainer",
-      "com.sun.star.awt.UnoControlModel"
+      "com.sun.star.awt.UnoControlModel",
+      "com.sun.star.container.XIndexContainer"
+    ],
+    "desc": [
+      "specifies the standard model of a UnoControlContainer.",
+      "",
+      "**since**",
+      "",
+      "    OOo 2.1"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1awt_1_1UnoControlRoadmapModel.html",
-    "desc": [
-      "specifies the standard model of a UnoControlContainer."
-    ]
+    "items": {
+      "properties": [
+        {
+          "name": "BackgroundColor",
+          "returns": "int",
+          "desc": [
+            "specifies the background color (RGB) of the control.",
+            "",
+            "The Default value is white"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Border",
+          "returns": "int",
+          "desc": [
+            "specifies the border style of the control."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Complete",
+          "returns": "bool",
+          "desc": [
+            "determines whether the control container is complete or not.",
+            "",
+            "If it is false than a non - interactive RoadmapItem is appended"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "CurrentItemID",
+          "returns": "int",
+          "desc": [
+            "refers to the ID of the currently selected item.",
+            "",
+            "Initially this property is set to \\\"-1\\\" which is equal to \\\"undefined\\\" If the Roadmap Item that the CurrentItemID refers to is removed the property \\\"CurrentItemID\\\" is set to -1"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Graphic",
+          "returns": "XGraphic",
+          "desc": [
+            "specifies a graphic to be displayed on the control",
+            "",
+            "If this property is present, it interacts with the ImageURL in the following way:",
+            "",
+            "**since**",
+            "",
+            "    OOo 2.1"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "HelpText",
+          "returns": "str",
+          "desc": [
+            "specifies the help text of the control."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "HelpURL",
+          "returns": "str",
+          "desc": [
+            "specifies the help URL of the control."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ImageURL",
+          "returns": "str",
+          "desc": [
+            "specifies a URL to an image to use for the control.",
+            "",
+            "The image is placed in the lower right corner of the control"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Interactive",
+          "returns": "bool",
+          "desc": [
+            "determines whether the control is interactive or not.",
+            "",
+            "A roadmap control which is interactive allows selecting its items out-of-order, by simply clicking them."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Printable",
+          "returns": "bool",
+          "desc": [
+            "specifies whether the control will be printed with the document."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Text",
+          "returns": "str",
+          "desc": [
+            "specifies the text displayed in the control."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
   }
 }

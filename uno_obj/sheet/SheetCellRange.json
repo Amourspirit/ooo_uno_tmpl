@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
   "version": "0.1.12",
-  "timestamp": "2022-01-01 23:31:27+00:00",
+  "timestamp": "2022-01-03 04:03:34+00:00",
   "name": "SheetCellRange",
   "type": "service",
   "namespace": "com.sun.star.sheet",
@@ -18,19 +18,126 @@
         "XModifyBroadcaster"
       ]
     ],
-    "quote": [],
+    "from_imports_typing": [
+      [
+        "..beans.x_property_set",
+        "XPropertySet"
+      ],
+      [
+        ".x_sheet_conditional_entries",
+        "XSheetConditionalEntries"
+      ],
+      [
+        "..awt.size",
+        "Size"
+      ],
+      [
+        "..awt.point",
+        "Point"
+      ]
+    ],
+    "quote": [
+      "Point",
+      "XPropertySet",
+      "Size",
+      "XSheetConditionalEntries"
+    ],
     "typings": [],
-    "requires_typing": false,
+    "requires_typing": true,
     "name": "SheetCellRange",
+    "imports": [],
     "namespace": "com.sun.star.sheet",
     "extends": [
       "com.sun.star.util.XModifyBroadcaster"
     ],
-    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1sheet_1_1SheetCellRange.html",
     "desc": [
       "represents a rectangular range of cells in a spreadsheet document.",
       "",
-      "This service is an extension of the CellRange service for use in spreadsheet documents."
-    ]
+      "This service is an extension of the CellRange service for use in spreadsheet documents.",
+      "",
+      "**since**",
+      "",
+      "    OOo 1.1.2"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1sheet_1_1SheetCellRange.html",
+    "items": {
+      "properties": [
+        {
+          "name": "AbsoluteName",
+          "returns": "str",
+          "desc": [
+            "Returns the absolute address of the range as string, e.g.",
+            "",
+            "\\\"$Sheet1.$B$2:$D$5\\\"."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ConditionalFormat",
+          "returns": "XSheetConditionalEntries",
+          "desc": [
+            "contains the conditional formatting settings for this cell.",
+            "",
+            "After a conditional format has been changed it has to be reinserted into the property set."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ConditionalFormatLocal",
+          "returns": "XSheetConditionalEntries",
+          "desc": [
+            "contains the conditional formatting settings for this cell, using localized formulas.",
+            "",
+            "After a conditional format has been changed it has to be reinserted into the property set."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Position",
+          "returns": "Point",
+          "desc": [
+            "contains the position of the top left cell of this range in the sheet (in 1/100 mm).",
+            "",
+            "This property contains the absolute position in the whole sheet, not the position in the visible area."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Size",
+          "returns": "Size",
+          "desc": [
+            "contains the size of this range (in 1/100 mm)."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Validation",
+          "returns": "XPropertySet",
+          "desc": [
+            "contains the data validation settings for this cell.",
+            "",
+            "After the data validation settings have been changed the validation has to be reinserted into the property set."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ValidationLocal",
+          "returns": "XPropertySet",
+          "desc": [
+            "contains the data validation settings for this cell, using localized formulas.",
+            "",
+            "After the data validation settings have been changed the validation has to be reinserted into the property set."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
   }
 }

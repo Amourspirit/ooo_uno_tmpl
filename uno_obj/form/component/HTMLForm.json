@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
   "version": "0.1.12",
-  "timestamp": "2022-01-01 23:31:47+00:00",
+  "timestamp": "2022-01-03 04:03:12+00:00",
   "name": "HTMLForm",
   "type": "service",
   "namespace": "com.sun.star.form.component",
@@ -14,33 +14,87 @@
   "data": {
     "from_imports": [
       [
-        "..x_reset",
-        "XReset"
-      ],
-      [
         ".form",
         "Form"
       ],
       [
         "..x_submit",
         "XSubmit"
+      ],
+      [
+        "..x_reset",
+        "XReset"
       ]
     ],
-    "quote": [],
+    "from_imports_typing": [
+      [
+        "..form_submit_encoding",
+        "FormSubmitEncoding"
+      ],
+      [
+        "..form_submit_method",
+        "FormSubmitMethod"
+      ]
+    ],
+    "quote": [
+      "FormSubmitMethod",
+      "FormSubmitEncoding"
+    ],
     "typings": [],
-    "requires_typing": false,
+    "requires_typing": true,
     "name": "HTMLForm",
+    "imports": [],
     "namespace": "com.sun.star.form.component",
     "extends": [
-      "com.sun.star.form.XReset",
       "com.sun.star.form.component.Form",
+      "com.sun.star.form.XReset",
       "com.sun.star.form.XSubmit"
     ],
-    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1form_1_1component_1_1HTMLForm.html",
     "desc": [
       "This service specifies the special kind of Forms for HTML documents.",
       "",
       "An HTMLForm fulfills the specification of forms in HTML. It supplies the possibility of submitting or resetting the contents of a form. For more information on HTML forms, please see the documentation of HTML."
-    ]
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1form_1_1component_1_1HTMLForm.html",
+    "items": {
+      "properties": [
+        {
+          "name": "SubmitEncoding",
+          "returns": "FormSubmitEncoding",
+          "desc": [
+            "specifies the kind of encoding for submission."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "SubmitMethod",
+          "returns": "FormSubmitMethod",
+          "desc": [
+            "specifies the kind of submission."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "TargetFrame",
+          "returns": "str",
+          "desc": [
+            "describes the frame, where to open the document specified by the TargetURL."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "TargetURL",
+          "returns": "str",
+          "desc": [
+            "specifies the URL, which should be used for submission."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
   }
 }

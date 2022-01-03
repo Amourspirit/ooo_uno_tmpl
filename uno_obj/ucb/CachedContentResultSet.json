@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
   "version": "0.1.12",
-  "timestamp": "2022-01-01 23:31:48+00:00",
+  "timestamp": "2022-01-03 04:03:20+00:00",
   "name": "CachedContentResultSet",
   "type": "service",
   "namespace": "com.sun.star.ucb",
@@ -18,21 +18,55 @@
         "ContentResultSet"
       ]
     ],
+    "from_imports_typing": [],
     "quote": [],
     "typings": [],
     "requires_typing": false,
     "name": "CachedContentResultSet",
+    "imports": [],
     "namespace": "com.sun.star.ucb",
     "extends": [
       "com.sun.star.ucb.ContentResultSet"
     ],
-    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1ucb_1_1CachedContentResultSet.html",
     "desc": [
       "is used on client side to access a ContentResultSet remote optimized.",
       "",
       "The CachedContentResultSet will not load every single property or even row just in that moment you ask for it, but load the data for some rows beforehand.",
       "",
       "Every time when a new package of data is loaded, the so far loaded data will be released, so the cash will not grow and grow and grow."
-    ]
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1ucb_1_1CachedContentResultSet.html",
+    "items": {
+      "properties": [
+        {
+          "name": "FetchDirection",
+          "returns": "int",
+          "desc": [
+            "contains the direction for fetching rows from an underlying database.",
+            "",
+            "The value can be one of the com.sun.star.sdbc.FetchDirection constants group.",
+            "",
+            "The default value is implementation specific.",
+            "",
+            "If you set the value to com.sun.star.sdbc.FetchDirection.UNKNOWN an implementation specific direction will be used."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "FetchSize",
+          "returns": "int",
+          "desc": [
+            "contains the number of result set rows that should be fetched from an underlying database.",
+            "",
+            "The default fetch size is implementation specific.",
+            "",
+            "Every negative value for parameter FetchSize will force an implementation specific value to be set."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
   }
 }

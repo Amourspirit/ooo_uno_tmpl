@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
   "version": "0.1.12",
-  "timestamp": "2022-01-01 23:31:31+00:00",
+  "timestamp": "2022-01-03 04:03:25+00:00",
   "name": "TextColumns",
   "type": "service",
   "namespace": "com.sun.star.text",
@@ -18,17 +18,111 @@
         "XTextColumns"
       ]
     ],
-    "quote": [],
+    "from_imports_typing": [
+      [
+        "..style.vertical_alignment",
+        "VerticalAlignment"
+      ],
+      [
+        "..util.color",
+        "Color"
+      ]
+    ],
+    "quote": [
+      "VerticalAlignment",
+      "Color"
+    ],
     "typings": [],
-    "requires_typing": false,
+    "requires_typing": true,
     "name": "TextColumns",
+    "imports": [],
     "namespace": "com.sun.star.text",
     "extends": [
       "com.sun.star.text.XTextColumns"
     ],
-    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1text_1_1TextColumns.html",
     "desc": [
       "provides access to columns in text (e.g., in TextFrames )."
-    ]
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1text_1_1TextColumns.html",
+    "items": {
+      "properties": [
+        {
+          "name": "AutomaticDistance",
+          "returns": "int",
+          "desc": [
+            "contains the distance between the columns.",
+            "",
+            "It is valid if the property IsAutomatic is set. Half of this distance is set to the left and right margins of all columns, except for the left margin of the first column, and the right margin of the last column."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "IsAutomatic",
+          "returns": "bool",
+          "desc": [
+            "determines whether the columns all have equal width.",
+            "",
+            "This flag is set if XTextColumns.setColumnCount() is called and it is reset if XTextColumns.setColumns() is called."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "SeparatorLineColor",
+          "returns": "Color",
+          "desc": [
+            "determines the color of the separator lines between the columns."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "SeparatorLineIsOn",
+          "returns": "bool",
+          "desc": [
+            "determines whether separator lines are on."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "SeparatorLineRelativeHeight",
+          "returns": "int",
+          "desc": [
+            "determines the relative height of the separator lines between the columns."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "SeparatorLineStyle",
+          "returns": "int",
+          "desc": [
+            "determines the style of the separator lines between the columns."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "SeparatorLineVerticalAlignment",
+          "returns": "VerticalAlignment",
+          "desc": [
+            "determines the vertical alignment of the separator lines between the columns."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "SeparatorLineWidth",
+          "returns": "int",
+          "desc": [
+            "determines the width of the separator lines between the columns."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
   }
 }

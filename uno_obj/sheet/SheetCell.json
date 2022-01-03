@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
   "version": "0.1.12",
-  "timestamp": "2022-01-01 23:31:27+00:00",
+  "timestamp": "2022-01-03 04:03:33+00:00",
   "name": "SheetCell",
   "type": "service",
   "namespace": "com.sun.star.sheet",
@@ -18,17 +18,177 @@
         "XModifyBroadcaster"
       ]
     ],
-    "quote": [],
+    "from_imports_typing": [
+      [
+        ".x_sheet_conditional_entries",
+        "XSheetConditionalEntries"
+      ],
+      [
+        "..awt.point",
+        "Point"
+      ],
+      [
+        "..awt.size",
+        "Size"
+      ],
+      [
+        "..table.cell_content_type",
+        "CellContentType"
+      ],
+      [
+        "..beans.x_property_set",
+        "XPropertySet"
+      ]
+    ],
+    "quote": [
+      "Point",
+      "XPropertySet",
+      "CellContentType",
+      "Size",
+      "XSheetConditionalEntries"
+    ],
     "typings": [],
-    "requires_typing": false,
+    "requires_typing": true,
     "name": "SheetCell",
+    "imports": [],
     "namespace": "com.sun.star.sheet",
     "extends": [
       "com.sun.star.util.XModifyBroadcaster"
     ],
-    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1sheet_1_1SheetCell.html",
     "desc": [
-      "represents a single addressable cell in a spreadsheet document."
-    ]
+      "represents a single addressable cell in a spreadsheet document.",
+      "",
+      "**since**",
+      "",
+      "    OOo 2.0"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1sheet_1_1SheetCell.html",
+    "items": {
+      "properties": [
+        {
+          "name": "AbsoluteName",
+          "returns": "str",
+          "desc": [
+            "Returns the absolute address of the range as string, e.g.",
+            "",
+            "\\\"$Sheet1.$B$2\\\"."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "CellContentType",
+          "returns": "CellContentType",
+          "desc": [
+            "contains the content type of the cell.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 6.1"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ConditionalFormat",
+          "returns": "XSheetConditionalEntries",
+          "desc": [
+            "contains the conditional formatting settings for this cell.",
+            "",
+            "After a conditional format has been changed it has to be reinserted into the property set."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ConditionalFormatLocal",
+          "returns": "XSheetConditionalEntries",
+          "desc": [
+            "contains the conditional formatting settings for this cell, using localized formulas.",
+            "",
+            "After a conditional format has been changed it has to be reinserted into the property set."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "FormulaLocal",
+          "returns": "str",
+          "desc": [
+            "contains the formula string with localized function names.",
+            "",
+            "This property can also be used to set a new localized formula."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "FormulaResultType",
+          "returns": "int",
+          "desc": [
+            "contains the content type of the cell.",
+            "",
+            "This property returns not com.sun.star.sheet.FormulaResult but instead com.sun.star.table.CellContentType. Use FormulaResult2 if the correct property is needed."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "FormulaResultType2",
+          "returns": "int",
+          "desc": [
+            "contains the result type of a formula.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 6.1"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Position",
+          "returns": "Point",
+          "desc": [
+            "contains the position of this cell in the sheet (in 1/100 mm).",
+            "",
+            "This property contains the absolute position in the whole sheet, not the position in the visible area."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Size",
+          "returns": "Size",
+          "desc": [
+            "contains the size of this cell (in 1/100 mm)."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Validation",
+          "returns": "XPropertySet",
+          "desc": [
+            "contains the data validation settings for this cell.",
+            "",
+            "After the data validation settings have been changed the validation has to be reinserted into the property set."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ValidationLocal",
+          "returns": "XPropertySet",
+          "desc": [
+            "contains the data validation settings for this cell, using localized formulas.",
+            "",
+            "After the data validation settings have been changed the validation has to be reinserted into the property set."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
   }
 }

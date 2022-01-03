@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
   "version": "0.1.12",
-  "timestamp": "2022-01-01 23:31:43+00:00",
+  "timestamp": "2022-01-03 04:03:08+00:00",
   "name": "CopyTableWizard",
   "type": "service",
   "namespace": "com.sun.star.sdb.application",
@@ -18,27 +18,114 @@
         "XCopyTableWizard"
       ]
     ],
-    "quote": [],
+    "from_imports_typing": [
+      [
+        "...beans.x_property_set",
+        "XPropertySet"
+      ],
+      [
+        "...task.x_interaction_handler",
+        "XInteractionHandler"
+      ]
+    ],
+    "quote": [
+      "XPropertySet",
+      "XInteractionHandler"
+    ],
     "typings": [],
-    "requires_typing": false,
+    "requires_typing": true,
     "name": "CopyTableWizard",
+    "imports": [],
     "namespace": "com.sun.star.sdb.application",
     "extends": [
       "com.sun.star.sdb.application.XCopyTableWizard"
     ],
-    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1sdb_1_1application_1_1CopyTableWizard.html",
     "desc": [
       "describes a wizard which can be used to copy table like data from one database to another.",
       "",
-      "There are various cases where the wizard needs to interact with the user (except of course the obvious case to display and operate the wizard dialog itself). For those cases, an interaction handler is needed, which is used for",
-      "",
-      "When you do not specify an interaction handler by using the createWithInteractionHandler() constructor, the wizard will use the interaction handler associated with the copy target, i.e. the interaction handler specified when loading the document which the copy target refers to. If the copy target cannot be associated with a database document (e.g. because it is a mere ConnectionResource, or a connection not obtained from a data source), or if the copy target's database document cannot provide an interaction handler, a newly-created instance of an interaction handler is used.",
-      "",
-      "There's one exception to the above, however: Upon creating the copy table wizard, the copy source and the copy target descriptors are used to create a Connection. For any interaction during this phase - including, for instance, necessary authentication -, the interaction handler of the respective data source is used, no matter what you specified in createWithInteractionHandler(). Only if there is no such interaction handler, the processing described above, to find another handler, is applied.",
-      "",
-      "**Since**",
+      "**since**",
       "",
       "    OOo 2.4"
-    ]
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1sdb_1_1application_1_1CopyTableWizard.html",
+    "items": {
+      "methods": [
+        {
+          "name": "create",
+          "returns": "None",
+          "desc": [
+            "creates an executable wizard dialog, which is to guide the user through copying a table from one database to another.",
+            "",
+            "At creation time, an attempt will be made to obtain the connections described by Source resp. Dest. Failing to do so will result in an exception.",
+            "",
+            "If the connection has been newly created by the wizard (e.g. because the data access descriptor specified a DataSource instead of an ActiveConnection), then this connection will be disposed upon disposal of the wizard.",
+            "",
+            "The following members of the DataAccessDescriptor are supported, and evaluated in the given order:",
+            "",
+            "The first 5 items are used to obtain the connection, the last two to determine which of the connection's objects is to be copied. Note that Command and CommandType are required.",
+            "",
+            "Additionally to the obvious restrictions (such as that creating a view is not possible if the copy source and the copy destination denote different databases), the following restrictions apply to the settings, and possible combinations:",
+            "",
+            "Violating any of the above restrictions will result in an error at creation time.",
+            "",
+            "Only DataSourceName, DatabaseLocation, ActiveConnection are supported, effectively describing the target connection to copy the data to. They're evaluated in the order mentioned here, so if multiple of the are present, only the first one is evaluated.",
+            "",
+            "Also, at the moment the connection which is implied by either of the settings above must support the com.sun.star.sdb.Connection service. In particular, it is not sufficient to pass an SDBC-level connection.",
+            "",
+            "Note that creating a view (see CopyTableOperation.CreateAsView) is not supported if the target connection is an SDBC-level connection only."
+          ],
+          "raises": [
+            "",
+            "",
+            "com.sun.star.lang.WrappedTargetException"
+          ],
+          "args": [
+            [
+              "Source",
+              "XPropertySet",
+              "in"
+            ],
+            [
+              "Destination",
+              "XPropertySet",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "createWithInteractionHandler",
+          "returns": "None",
+          "desc": [
+            "creates an executable wizard dialog, which is to guide the user through copying a table from one database to another.",
+            "",
+            "The only difference to the create() constructor is that createWithInteractionHandler takes an additional argument, which can be used to intercept interactions (such as error messages) during the wizard run.",
+            "",
+            "When specifying this parameter, you should use an implementation supporting the com.sun.star.sdb.InteractionHandler, since the general-purpose com.sun.star.task.InteractionHandler cannot handle all requests described above."
+          ],
+          "raises": [
+            "",
+            "",
+            "com.sun.star.lang.WrappedTargetException"
+          ],
+          "args": [
+            [
+              "Source",
+              "XPropertySet",
+              "in"
+            ],
+            [
+              "Destination",
+              "XPropertySet",
+              "in"
+            ],
+            [
+              "InteractionHandler",
+              "XInteractionHandler",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

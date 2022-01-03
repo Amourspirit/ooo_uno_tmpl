@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
   "version": "0.1.12",
-  "timestamp": "2022-01-01 23:31:31+00:00",
+  "timestamp": "2022-01-03 04:03:25+00:00",
   "name": "TextEmbeddedObject",
   "type": "service",
   "namespace": "com.sun.star.text",
@@ -14,26 +14,71 @@
   "data": {
     "from_imports": [
       [
-        ".base_frame",
-        "BaseFrame"
-      ],
-      [
         "..document.x_embedded_object_supplier",
         "XEmbeddedObjectSupplier"
+      ],
+      [
+        ".base_frame",
+        "BaseFrame"
       ]
     ],
-    "quote": [],
+    "from_imports_typing": [
+      [
+        "..frame.x_model",
+        "XModel"
+      ],
+      [
+        "..lang.x_component",
+        "XComponent"
+      ]
+    ],
+    "quote": [
+      "XComponent",
+      "XModel"
+    ],
     "typings": [],
-    "requires_typing": false,
+    "requires_typing": true,
     "name": "TextEmbeddedObject",
+    "imports": [],
     "namespace": "com.sun.star.text",
     "extends": [
       "com.sun.star.text.BaseFrame",
       "com.sun.star.document.XEmbeddedObjectSupplier"
     ],
-    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1text_1_1TextEmbeddedObject.html",
     "desc": [
       "provides access to the properties and methods of an embedded object."
-    ]
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1text_1_1TextEmbeddedObject.html",
+    "items": {
+      "properties": [
+        {
+          "name": "CLSID",
+          "returns": "str",
+          "desc": [],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Component",
+          "returns": "XComponent",
+          "desc": [
+            "This is the component for the OLE2 object."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Model",
+          "returns": "XModel",
+          "desc": [
+            "This is the model for the OLE2 object.",
+            "",
+            "This property if void if the OLE2 is not an Office component."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
   }
 }

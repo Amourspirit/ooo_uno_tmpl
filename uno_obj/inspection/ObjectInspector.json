@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
   "version": "0.1.12",
-  "timestamp": "2022-01-01 23:31:38+00:00",
+  "timestamp": "2022-01-03 04:03:19+00:00",
   "name": "ObjectInspector",
   "type": "service",
   "namespace": "com.sun.star.inspection",
@@ -18,15 +18,23 @@
         "XObjectInspector"
       ]
     ],
-    "quote": [],
+    "from_imports_typing": [
+      [
+        ".x_object_inspector_model",
+        "XObjectInspectorModel"
+      ]
+    ],
+    "quote": [
+      "XObjectInspectorModel"
+    ],
     "typings": [],
-    "requires_typing": false,
+    "requires_typing": true,
     "name": "ObjectInspector",
+    "imports": [],
     "namespace": "com.sun.star.inspection",
     "extends": [
       "com.sun.star.inspection.XObjectInspector"
     ],
-    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1inspection_1_1ObjectInspector.html",
     "desc": [
       "describes a com.sun.star.frame.Controller which can be used to browse and modify properties of components.",
       "",
@@ -46,9 +54,48 @@
       "Since property handlers might have the need to raise UI, they will be created with a context value named \\\"DialogParentWindow\\\", which contains an XWindow which should be used as parent of any windows to raise.",
       "If the com.sun.star.uno.XComponentContext in which the ObjectInspector was created already contains such a value, it is not overwritten. Only if it doesn't, the inspector will add an own value - which contains the inspector's main window - to the context when creating handlers.",
       "",
-      "**Since**",
+      "**since**",
       "",
       "    OOo 2.0.3"
-    ]
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1inspection_1_1ObjectInspector.html",
+    "items": {
+      "methods": [
+        {
+          "name": "createDefault",
+          "returns": "None",
+          "desc": [
+            "creates a default instance of the ObjectInspector",
+            "",
+            "**since**",
+            "",
+            "    OOo 2.2"
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "createWithModel",
+          "returns": "None",
+          "desc": [
+            "creates an instance of the ObjectInspector, using a given ObjectInspectorModel",
+            "",
+            "**since**",
+            "",
+            "    OOo 2.2"
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "Model",
+              "XObjectInspectorModel",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
   "version": "0.1.12",
-  "timestamp": "2022-01-01 23:31:21+00:00",
+  "timestamp": "2022-01-03 04:02:56+00:00",
   "name": "FileHandler",
   "type": "service",
   "namespace": "com.sun.star.logging",
@@ -18,23 +18,76 @@
         "XLogHandler"
       ]
     ],
-    "quote": [],
-    "typings": [],
-    "requires_typing": false,
+    "from_imports_typing": [
+      [
+        "..beans.named_value",
+        "NamedValue"
+      ]
+    ],
+    "quote": [
+      "typing.List[NamedValue]"
+    ],
+    "typings": [
+      "typing.List[NamedValue]"
+    ],
+    "requires_typing": true,
     "name": "FileHandler",
+    "imports": [],
     "namespace": "com.sun.star.logging",
     "extends": [
       "com.sun.star.logging.XLogHandler"
     ],
-    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1logging_1_1FileHandler.html",
     "desc": [
       "specifies a component implementing a log handler whose output channel is a file.",
       "",
       "The handler will use the Encoding attribute of XLogHandler to determine how to encode strings before actually writing them to the output file.",
       "",
-      "**Since**",
+      "**since**",
       "",
       "    OOo 2.3"
-    ]
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1logging_1_1FileHandler.html",
+    "items": {
+      "methods": [
+        {
+          "name": "create",
+          "returns": "None",
+          "desc": [
+            "creates a log handler whose output is directed to a file given by URL."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "FileURL",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "createWithSettings",
+          "returns": "None",
+          "desc": [
+            "creates an instance of the log handler, using generic settings",
+            "",
+            "The following settings are recognized and supported:",
+            "",
+            "Additionally, a setting name FileURL is recognized. It must be of type string, and denotes the file URL to which the handler's output should be directed.",
+            "",
+            "At least the URL argument must be present in the settings."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "Settings",
+              "typing.List[NamedValue]",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
   "version": "0.1.12",
-  "timestamp": "2022-01-01 23:31:33+00:00",
+  "timestamp": "2022-01-03 04:03:27+00:00",
   "name": "Wizard",
   "type": "service",
   "namespace": "com.sun.star.ui.dialogs",
@@ -18,21 +18,83 @@
         "XWizard"
       ]
     ],
-    "quote": [],
-    "typings": [],
-    "requires_typing": false,
+    "from_imports_typing": [
+      [
+        ".x_wizard_controller",
+        "XWizardController"
+      ]
+    ],
+    "quote": [
+      "XWizardController",
+      "typing.List[int]",
+      "typing.List[typing.List[int]]"
+    ],
+    "typings": [
+      "typing.List[int]",
+      "typing.List[typing.List[int]]"
+    ],
+    "requires_typing": true,
     "name": "Wizard",
+    "imports": [],
     "namespace": "com.sun.star.ui.dialogs",
     "extends": [
       "com.sun.star.ui.dialogs.XWizard"
     ],
-    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1ui_1_1dialogs_1_1Wizard.html",
     "desc": [
       "provides a framework for implementing a wizard dialog.",
       "",
-      "**Since**",
+      "**since**",
       "",
       "    OOo 3.3"
-    ]
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1ui_1_1dialogs_1_1Wizard.html",
+    "items": {
+      "methods": [
+        {
+          "name": "createMultiplePathsWizard",
+          "returns": "None",
+          "desc": [
+            "creates a wizard with a multiple possible execution paths"
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "PageIds",
+              "typing.List[typing.List[int]]",
+              "in"
+            ],
+            [
+              "Controller",
+              "XWizardController",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "createSinglePathWizard",
+          "returns": "None",
+          "desc": [
+            "creates a wizard with a single execution path"
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "PageIds",
+              "typing.List[int]",
+              "in"
+            ],
+            [
+              "Controller",
+              "XWizardController",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
   }
 }

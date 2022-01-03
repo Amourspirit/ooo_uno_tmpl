@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
   "version": "0.1.12",
-  "timestamp": "2022-01-01 23:31:21+00:00",
+  "timestamp": "2022-01-03 04:03:21+00:00",
   "name": "DataAccessDescriptor",
   "type": "service",
   "namespace": "com.sun.star.sdb",
@@ -13,13 +13,40 @@
   },
   "data": {
     "from_imports": [],
-    "quote": [],
-    "typings": [],
-    "requires_typing": false,
+    "from_imports_typing": [
+      [
+        "..beans.x_property_set",
+        "XPropertySet"
+      ],
+      [
+        "..beans.property_value",
+        "PropertyValue"
+      ],
+      [
+        "..sdbc.x_result_set",
+        "XResultSet"
+      ],
+      [
+        "..sdbc.x_connection",
+        "XConnection"
+      ]
+    ],
+    "quote": [
+      "XResultSet",
+      "XPropertySet",
+      "typing.List[PropertyValue]",
+      "XConnection",
+      "typing.List[object]"
+    ],
+    "typings": [
+      "typing.List[object]",
+      "typing.List[PropertyValue]"
+    ],
+    "requires_typing": true,
     "name": "DataAccessDescriptor",
+    "imports": [],
     "namespace": "com.sun.star.sdb",
     "extends": [],
-    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1sdb_1_1DataAccessDescriptor.html",
     "desc": [
       "descriptor for accessing basic data access objects.",
       "",
@@ -29,9 +56,229 @@
       "",
       "Every component providing or requiring a DataAccessDescriptor for some functionality is urged to specify which properties are mandatory, and which ones optional. Additionally, it's free to specify any additional requirements about the relations of properties.",
       "",
-      "**Since**",
+      "**since**",
       "",
       "    OOo 1.1.2"
-    ]
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1sdb_1_1DataAccessDescriptor.html",
+    "items": {
+      "types": [
+        {
+          "name": "ConnectionInfo",
+          "returns": "typing.List[PropertyValue]",
+          "desc": [
+            "specifies additional info to use when creating a connection from a ConnectionResource",
+            "",
+            "This member is evaluated only when ConnectionResource is used: In this case, com.sun.star.sdbc.XDriverManager.getConnectionWithInfo() is used to create a connection for the given connection resource, instead of com.sun.star.sdbc.XDriverManager.getConnection().",
+            "",
+            "If the sequence is empty, it is ignored."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Selection",
+          "returns": "typing.List[object]",
+          "desc": [
+            "specifies a selection to confine the records in a result set.",
+            "",
+            "When you specify a result set either implicitly (DataSourceName, Command, CommandType) or explicitly (ResultSet), the set of results can be additionally refined with this property.",
+            "",
+            "The single elements of the Selection are either record numbers (see com.sun.star.sdbc.XResultSet.getRow()), or bookmarks (see com.sun.star.sdbcx.XRowLocate.getBookmark()).",
+            "It is up to the component which provides or requires a DataAccessDescriptor to specify which of the two alternatives it expects. If it does not specify this, then the property BookmarkSelection becomes mandatory.",
+            "",
+            "If the elements specify bookmarks, and a ResultSet has been specified, then this result set is required to support the com.sun.star.sdbcx.XRowLocate interface."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ],
+      "properties": [
+        {
+          "name": "ActiveConnection",
+          "returns": "XConnection",
+          "desc": [
+            "is a connection to use.",
+            "",
+            "This object is guaranteed to be a com.sun.star.sdbc.Connection, but usually it will be a Connection from the module com.sun.star.sdb.",
+            "Especially in the case where no DataSourceName is given, but CommandType is CommandType.QUERY, the ActiveConnection needs to fully support the Connection service, to actually retrieve the query specified by Command",
+            "",
+            "If no ActiveConnection is given, then a DataSourceName is required."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "BookmarkSelection",
+          "returns": "bool",
+          "desc": [
+            "specifies how to interpret Selection",
+            "",
+            "If present, BookmarkSelection specifies the semantics of Selection. If not present, it's up to the implementing component to specify this semantics.",
+            "",
+            "If TRUE, then the single elements of the array specified by Selection are bookmarks relative to the result set, if FALSE, they're record numbers."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Column",
+          "returns": "XPropertySet",
+          "desc": [
+            "specifies a column object",
+            "",
+            "For reasons of performance and saving resources, a supplier of an DataAccessDescriptor which is used to describe a column object can pass this object directly, instead of specifying it only implicitly with the ColumnName property.",
+            "",
+            "The object will at least support the com.sun.star.sdbcx.Column service, but more often it will even be a Column from the com.sun.star.sdb module."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ColumnName",
+          "returns": "str",
+          "desc": [
+            "specifies a column name.",
+            "",
+            "This property is usually used together with the Command and CommandType properties."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Command",
+          "returns": "str",
+          "desc": [
+            "specifies the command to execute to retrieve a result set.",
+            "",
+            "This property is only meaningful together with the CommandType property, thus either both or none of them are present."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "CommandType",
+          "returns": "int",
+          "desc": [
+            "specifies the type of the command to be executed to retrieve a result set.",
+            "",
+            "Command needs to be interpreted depending on the value of this property.",
+            "",
+            "This property is only meaningful together with the Command property, thus either both or none of them are present."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ConnectionResource",
+          "returns": "str",
+          "desc": [
+            "specifies the database URL which locates a database driver.",
+            "",
+            "This database URL is usually used to create a Connection. If no ConnectionResource is given, then an ActiveConnection is required."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "DataSourceName",
+          "returns": "str",
+          "desc": [
+            "specifies the name of the datasource to access.",
+            "",
+            "This data source is usually used to create a Connection. If no DataSourceName is given and the DatabaseLocation and the ConnectionResource are empty, then an ActiveConnection is required."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "DatabaseLocation",
+          "returns": "str",
+          "desc": [
+            "specifies the URL of the database file.",
+            "",
+            "This database location is usually used to create a Connection. If no DatabaseLocation is given and the ConnectionResource is empty, then an ActiveConnection is required."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "EscapeProcessing",
+          "returns": "bool",
+          "desc": [
+            "specifies if the Command should be analyzed on the client side before sending it to the database server.",
+            "",
+            "The default value of this property is TRUE. By switching it to FALSE, you can pass backend-specific SQL statements, which are not standard SQL, to your database.",
+            "",
+            "This property is usually present together with the Command and CommandType properties, and is evaluated if and only if CommandType equals CommandType.COMMAND."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Filter",
+          "returns": "str",
+          "desc": [
+            "specifies an additional filter to optionally use.",
+            "",
+            "The Filter string has to form a WHERE-clause, without the WHERE-string itself.",
+            "",
+            "If a DataSourceName, Command and CommandType are specified, a RowSet can be created with this information. If the results provided by the row set are to be additionally filtered, the Filter property can be used.",
+            "",
+            "Note that the Filter property does not make sense if a ResultSet has been specified in the DataAccessDescriptor."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "GroupBy",
+          "returns": "str",
+          "desc": [
+            "specifies an additional GROUP BY clause which should be applied on top of the given Command.",
+            "",
+            "The keyword GROUP BY itself is not part of this property."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "HavingClause",
+          "returns": "str",
+          "desc": [
+            "specifies an additional HAVING clause which should be applied on top of the given Command.",
+            "",
+            "The keyword HAVING itself is not part of this property."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Order",
+          "returns": "str",
+          "desc": [
+            "specifies an additional ORDER BY clause which should be applied on top of the given Command.",
+            "",
+            "The keyword ORDER BY itself is not part of this property."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ResultSet",
+          "returns": "XResultSet",
+          "desc": [
+            "specifies an already existent result set to use.",
+            "",
+            "Usually, you use the properties DataSourceName (alternatively ActiveConnection), Command and CommandType to specify how to obtain a result set. However, in scenarios where the provider of a DataAccessDescriptor has access to an already existent result set, it can pass it along for reusage. This is encouraged to increase performance.",
+            "",
+            "The object will at least support the com.sun.star.sdbc.ResultSet service.",
+            "",
+            "Note that any superservices of com.sun.star.sdbc.ResultSet are also allowed. Especially, this member can denote an instance of the com.sun.star.sdb.RowSet, or an instance obtained by calling com.sun.star.sdb.XResultSetAccess.createResultSet() on such a com.sun.star.sdb.RowSet. This becomes important in conjunction with the Selection property."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
   }
 }

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
   "version": "0.1.12",
-  "timestamp": "2022-01-01 23:31:31+00:00",
+  "timestamp": "2022-01-03 04:03:25+00:00",
   "name": "TextFieldMaster",
   "type": "service",
   "namespace": "com.sun.star.text",
@@ -18,17 +18,63 @@
         "XPropertySet"
       ]
     ],
-    "quote": [],
-    "typings": [],
-    "requires_typing": false,
+    "from_imports_typing": [
+      [
+        ".x_dependent_text_field",
+        "XDependentTextField"
+      ]
+    ],
+    "quote": [
+      "typing.List[XDependentTextField]"
+    ],
+    "typings": [
+      "typing.List[XDependentTextField]"
+    ],
+    "requires_typing": true,
     "name": "TextFieldMaster",
+    "imports": [],
     "namespace": "com.sun.star.text",
     "extends": [
       "com.sun.star.beans.XPropertySet"
     ],
-    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1text_1_1TextFieldMaster.html",
     "desc": [
       "A TextFieldMaster specifies important data for its DependentTextFields."
-    ]
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1text_1_1TextFieldMaster.html",
+    "items": {
+      "types": [
+        {
+          "name": "DependentTextFields",
+          "returns": "typing.List[XDependentTextField]",
+          "desc": [
+            "contains a sequence of all fields that depend on this master."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ],
+      "properties": [
+        {
+          "name": "InstanceName",
+          "returns": "str",
+          "desc": [
+            "contains the instance name as it is used in the com.sun.star.text.XTextFieldsSupplier."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Name",
+          "returns": "str",
+          "desc": [
+            "determines the name of the field master.",
+            "",
+            "The name is void as long as the instance is not member of the document structure. When the value is being set the instance is inserted into the document and the name cannot be changed afterwards. That does not apply to the Database text field master."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
   }
 }

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
   "version": "0.1.12",
-  "timestamp": "2022-01-01 23:31:47+00:00",
+  "timestamp": "2022-01-03 04:03:12+00:00",
   "name": "ListBox",
   "type": "service",
   "namespace": "com.sun.star.form.component",
@@ -14,31 +14,63 @@
   "data": {
     "from_imports": [
       [
-        "...awt.uno_control_list_box_model",
-        "UnoControlListBoxModel"
+        "..form_control_model",
+        "FormControlModel"
       ],
       [
         "..x_reset",
         "XReset"
       ],
       [
-        "..form_control_model",
-        "FormControlModel"
+        "...awt.uno_control_list_box_model",
+        "UnoControlListBoxModel"
       ]
     ],
-    "quote": [],
-    "typings": [],
-    "requires_typing": false,
+    "from_imports_typing": [],
+    "quote": [
+      "typing.List[str]",
+      "typing.List[int]"
+    ],
+    "typings": [
+      "typing.List[str]",
+      "typing.List[int]"
+    ],
+    "requires_typing": true,
     "name": "ListBox",
+    "imports": [],
     "namespace": "com.sun.star.form.component",
     "extends": [
-      "com.sun.star.form.XReset",
+      "com.sun.star.awt.UnoControlListBoxModel",
       "com.sun.star.form.FormControlModel",
-      "com.sun.star.awt.UnoControlListBoxModel"
+      "com.sun.star.form.XReset"
     ],
-    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1form_1_1component_1_1ListBox.html",
     "desc": [
       "specifies a model for a control which allows to choose in a list of alternative values."
-    ]
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1form_1_1component_1_1ListBox.html",
+    "items": {
+      "types": [
+        {
+          "name": "DefaultSelection",
+          "returns": "typing.List[int]",
+          "desc": [
+            "contains the indexes of entries of the listbox, which should selected by default.",
+            "",
+            "This selection is used initially or for a reset."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ListSource",
+          "returns": "typing.List[str]",
+          "desc": [
+            "contains the values associated to the strings to be displayed (which are specified by com.sun.star.awt.UnoControlListBoxModel.StringItemList)"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
   }
 }

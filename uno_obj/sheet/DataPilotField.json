@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
   "version": "0.1.12",
-  "timestamp": "2022-01-01 23:31:26+00:00",
+  "timestamp": "2022-01-03 04:03:32+00:00",
   "name": "DataPilotField",
   "type": "service",
   "namespace": "com.sun.star.sheet",
@@ -22,30 +22,287 @@
         "XDataPilotFieldGrouping"
       ],
       [
-        "..container.x_named",
-        "XNamed"
-      ],
-      [
         ".x_data_pilot_field",
         "XDataPilotField"
+      ],
+      [
+        "..container.x_named",
+        "XNamed"
       ]
     ],
-    "quote": [],
-    "typings": [],
-    "requires_typing": false,
+    "from_imports_typing": [
+      [
+        ".general_function",
+        "GeneralFunction"
+      ],
+      [
+        ".data_pilot_field_reference",
+        "DataPilotFieldReference"
+      ],
+      [
+        ".data_pilot_field_auto_show_info",
+        "DataPilotFieldAutoShowInfo"
+      ],
+      [
+        ".general_function",
+        "GeneralFunction"
+      ],
+      [
+        ".data_pilot_field_group_info",
+        "DataPilotFieldGroupInfo"
+      ],
+      [
+        ".data_pilot_field_sort_info",
+        "DataPilotFieldSortInfo"
+      ],
+      [
+        ".data_pilot_field_layout_info",
+        "DataPilotFieldLayoutInfo"
+      ],
+      [
+        ".data_pilot_field_orientation",
+        "DataPilotFieldOrientation"
+      ]
+    ],
+    "quote": [
+      "GeneralFunction",
+      "DataPilotFieldReference",
+      "DataPilotFieldLayoutInfo",
+      "typing.List[int]",
+      "typing.List[GeneralFunction]",
+      "DataPilotFieldGroupInfo",
+      "DataPilotFieldAutoShowInfo",
+      "DataPilotFieldOrientation",
+      "DataPilotFieldSortInfo"
+    ],
+    "typings": [
+      "typing.List[int]",
+      "typing.List[GeneralFunction]"
+    ],
+    "requires_typing": true,
     "name": "DataPilotField",
+    "imports": [],
     "namespace": "com.sun.star.sheet",
     "extends": [
-      "com.sun.star.sheet.XDataPilotField",
-      "com.sun.star.sheet.XDataPilotFieldGrouping",
       "com.sun.star.container.XNamed",
-      "com.sun.star.beans.XPropertySet"
+      "com.sun.star.beans.XPropertySet",
+      "com.sun.star.sheet.XDataPilotField",
+      "com.sun.star.sheet.XDataPilotFieldGrouping"
     ],
-    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1sheet_1_1DataPilotField.html",
     "desc": [
       "represents a single field in a data pilot table.",
       "",
-      "If the data pilot table is based on a spreadsheet cell range, a field is represented by a column of the range and is named using the topmost cell of the column."
-    ]
+      "If the data pilot table is based on a spreadsheet cell range, a field is represented by a column of the range and is named using the topmost cell of the column.",
+      "",
+      "**since**",
+      "",
+      "    LibreOffice 5.3"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1sheet_1_1DataPilotField.html",
+    "items": {
+      "types": [
+        {
+          "name": "Subtotals",
+          "returns": "typing.List[GeneralFunction]",
+          "desc": [
+            "specifies the functions used to calculate subtotals for this field.",
+            "",
+            "This property is supported by column and row fields only.",
+            "",
+            "An empty sequence means no subtotals. The same effect can be achieved by setting the property Function to the value GeneralFunction.NONE. If the length of the sequence is greater than 1, then the sequence MUST NOT contain one of the values GeneralFunction.NONE or GeneralFunction.AUTO.",
+            "",
+            "The order of the functions in this sequence is reflected in the DataPilot table. Multiple entries of the same function are ignored when setting the property."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Subtotals2",
+          "returns": "typing.List[int]",
+          "desc": [
+            "specifies the functions used to calculate subtotals for this field.",
+            "",
+            "This property is supported by column and row fields only.",
+            "",
+            "An empty sequence means no subtotals. The same effect can be achieved by setting the property Function2 to the value GeneralFunction.NONE. If the length of the sequence is greater than 1, then the sequence MUST NOT contain one of the values GeneralFunction2.NONE or GeneralFunction2.AUTO.",
+            "",
+            "The order of the functions in this sequence is reflected in the DataPilot table. Multiple entries of the same function are ignored when setting the property.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 5.3"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ],
+      "properties": [
+        {
+          "name": "AutoShowInfo",
+          "returns": "DataPilotFieldAutoShowInfo",
+          "desc": [
+            "enables the automatic inclusion of only a number of items with the highest or lowest result values."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Function",
+          "returns": "GeneralFunction",
+          "desc": [
+            "specifies the function used to calculate results for this field.",
+            "",
+            "For column and row fields, this is the function for subtotals (GeneralFunction.NONE means no subtotals). For data fields, this is the function shown in the data pilot table."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Function2",
+          "returns": "int",
+          "desc": [
+            "specifies the function used to calculate results for this field.",
+            "",
+            "For column and row fields, this is the function for subtotals (GeneralFunction2.NONE means no subtotals). For data fields, this is the function shown in the data pilot table.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 5.3"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "GroupInfo",
+          "returns": "DataPilotFieldGroupInfo",
+          "desc": [
+            "contains the grouping information of the DataPilot field.",
+            "",
+            "By changing the value of this property it is possible to modify the grouping settings of this field."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "HasAutoShowInfo",
+          "returns": "bool",
+          "desc": [
+            "specifies whether this field has auto show information."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "HasLayoutInfo",
+          "returns": "bool",
+          "desc": [
+            "specifies whether this field has layout information."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "HasReference",
+          "returns": "bool",
+          "desc": [
+            "specifies whether this field has a reference."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "HasSortInfo",
+          "returns": "bool",
+          "desc": [
+            "specifies whether this field has sorting information."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "IsGroupField",
+          "returns": "bool",
+          "desc": [
+            "specifies whether this field is a group field."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "LayoutInfo",
+          "returns": "DataPilotFieldLayoutInfo",
+          "desc": [
+            "controls how the field's items are laid out in the result table."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Orientation",
+          "returns": "DataPilotFieldOrientation",
+          "desc": [
+            "specifies the orientation of the field.",
+            "",
+            "If the orientation of a field has been changed using this property, the field will be moved to the last position in the collection of all fields with the specified orientation."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Reference",
+          "returns": "DataPilotFieldReference",
+          "desc": [
+            "controls how the results are shown in relation to a selected reference result."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "SelectedPage",
+          "returns": "str",
+          "desc": [
+            "specifies the selected page which is used to filter the data pilot."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ShowEmpty",
+          "returns": "bool",
+          "desc": [
+            "specifies whether to show this field also if it is empty or not."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "SortInfo",
+          "returns": "DataPilotFieldSortInfo",
+          "desc": [
+            "controls how the field's items are sorted."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "UseSelectedPage",
+          "returns": "bool",
+          "desc": [
+            "specifies whether to use the selected page to filter the data pilot or show all."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "UsedHierarchy",
+          "returns": "str",
+          "desc": [
+            "specifies which hierarchy of the dimension is used."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
   }
 }

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
   "version": "0.1.12",
-  "timestamp": "2022-01-01 23:31:24+00:00",
+  "timestamp": "2022-01-03 04:03:19+00:00",
   "name": "PreviewView",
   "type": "service",
   "namespace": "com.sun.star.presentation",
@@ -14,6 +14,10 @@
   "data": {
     "from_imports": [
       [
+        "..frame.controller",
+        "Controller"
+      ],
+      [
         "..awt.x_window",
         "XWindow"
       ],
@@ -24,30 +28,62 @@
       [
         "..beans.x_property_set",
         "XPropertySet"
-      ],
-      [
-        "..frame.controller",
-        "Controller"
       ]
     ],
-    "quote": [],
+    "from_imports_typing": [
+      [
+        "..drawing.x_draw_page",
+        "XDrawPage"
+      ],
+      [
+        "..awt.rectangle",
+        "Rectangle"
+      ]
+    ],
+    "quote": [
+      "Rectangle",
+      "XDrawPage"
+    ],
     "typings": [],
-    "requires_typing": false,
+    "requires_typing": true,
     "name": "PreviewView",
+    "imports": [],
     "namespace": "com.sun.star.presentation",
     "extends": [
-      "com.sun.star.beans.XPropertySet",
-      "com.sun.star.drawing.XDrawView",
+      "com.sun.star.frame.Controller",
       "com.sun.star.awt.XWindow",
-      "com.sun.star.frame.Controller"
+      "com.sun.star.drawing.XDrawView",
+      "com.sun.star.beans.XPropertySet"
     ],
-    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1presentation_1_1PreviewView.html",
     "desc": [
       "This component integrates a preview view to a slide show of a presentation document into the desktop.",
       "",
-      "**Since**",
+      "**since**",
       "",
       "    OOo 1.1.2"
-    ]
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1presentation_1_1PreviewView.html",
+    "items": {
+      "properties": [
+        {
+          "name": "CurrentPage",
+          "returns": "XDrawPage",
+          "desc": [
+            "This is the drawing page that is currently visible."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "VisibleArea",
+          "returns": "Rectangle",
+          "desc": [
+            "This is the area that is currently visible."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
   }
 }
