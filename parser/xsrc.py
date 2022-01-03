@@ -12,18 +12,15 @@ import logging
 import textwrap
 import xerox  # requires xclip - sudo apt-get install xclip
 import re
-from typing import Dict, List, Optional, Set, Union
-from bs4.element import ResultSet, Tag
+from typing import Dict, List, Set, Union
 from kwhelp.decorator import AcceptedTypes, DecFuncEnum, RequireArgs, TypeCheckKw
 from pathlib import Path
-from dataclasses import dataclass
 try:
     import base
 except ModuleNotFoundError:
     import parser.base as base
 from logger.log_handle import get_logger
 from parser.base import SummaryInfo
-from parser.type_mod import PythonType
 from parser import __version__, JSON_ID
 # endregion Imports
 
