@@ -369,9 +369,10 @@ class Parser(base.ParserBase):
         # treat typedef as property
         si_lst = self._api_data.types_summaries.get_obj()
         key = 'types'
-        self._imports.update(self._api_data.types_summaries.imports)
-        if self._api_data.types_summaries.requires_typing:
+        import_info = self._api_data.get_import_info_type()
+        if import_info.requires_typing:
             self._requires_typing = True
+        self._imports.update(import_info.imports)
         return self._get_summary_data(si_lst=si_lst, key=key)
 
     # endregion get data
@@ -380,14 +381,17 @@ class Parser(base.ParserBase):
     @property
     def imports(self) -> Set[str]:
         """Gets imports value"""
-        try:
-            key = 'get_formated_data'
-            if not key in self._cache:
-                msg = "Parser.get_formated_data() method must be called before accessing imports"
-                raise Exception(msg)
-        except Exception as e:
-            logger.error(e, exc_info=True)
-            raise e
+        key = 'get_formated_data'
+        if not key in self._cache:
+            self.get_formated_data()
+
+        key = 'imports_clean'
+        if not key in self._cache:
+            if len(self._imports) > 0:
+                info = self.get_info()
+                ns = info['namespace']
+                self._imports = base.Util.get_clean_imports(ns=ns, imports=self._imports)
+            self._cache[key] = True
         return self._imports
 
     @property

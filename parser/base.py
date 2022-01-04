@@ -2648,6 +2648,28 @@ class Util:
         _input = re.sub('(.)([A-Z][a-z]+)', r'\1_\2', input)
         return re.sub('([a-z0-9])([A-Z])', r'\1_\2', _input).lower()
 
+    @staticmethod
+    def get_clean_imports(ns: str, imports: Iterable[str]) -> Set[str]:
+        """
+        Gets a set of unique imports.
+
+        Args:
+            ns (str): namespace to append if any item in imports is misssing ns part
+            imports (Iterable[str]): Imports list, set, tuple, etc
+
+        Returns:
+            Set[str]: Set of imports. Each import is guaranteed to be full ns object.
+        """
+        sep = '.'
+        results: Set[str] = set()
+        for im in imports:
+            if im.find(sep) < 0:
+                s = ns + sep + im
+            else:
+                s = im
+            results.add(s)
+        return results
+
     @AcceptedTypes(str, opt_all_args=True, ftype=DecFuncEnum.METHOD_STATIC)
     @staticmethod
     def get_rel_import(i_str: str, ns: str, sep: str = '.') -> Tuple[str, str]:

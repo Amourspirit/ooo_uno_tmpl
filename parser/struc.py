@@ -346,14 +346,18 @@ class Parser(base.ParserBase):
     @property
     def imports(self) -> Set[str]:
         """Gets imports value"""
-        key = '_get_data_items'
-        try:
-            if not key in self._cache:
-                msg = "ParserEx._get_data_items() method must be called before accessing imports"
-                raise Exception(msg)
-        except Exception as e:
-            logger.error(e, exc_info=True)
-            raise e
+        key = 'get_formated_data'
+        if not key in self._cache:
+            self.get_formated_data()
+
+        key = 'imports_clean'
+        if not key in self._cache:
+            if len(self._imports) > 0:
+                info = self.get_info()
+                ns = info['namespace']
+                self._imports = base.Util.get_clean_imports(
+                    ns=ns, imports=self._imports)
+            self._cache[key] = True
         return self._imports
 
     @property
