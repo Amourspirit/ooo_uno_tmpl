@@ -3727,79 +3727,25 @@ class ApiArea(BlockObj):
         return self._data
 
 class AreaFilter:
-    def __init__(self, alst: List[Area], is_inherited: bool, rules_engine: 'IRulesArea') -> None:
+    def __init__(self, alst: List[Area], area_info: AreaInfo, rules_engine: 'IRulesArea') -> None:
         self._lst = alst
-        self._is_inherited = is_inherited
+        self._ai = area_info
         self._rules_engine: IRulesArea = rules_engine
         self._first: Area = None if len(self._lst) == 0 else self._lst[0]
         # self._inherited = self._get_inherited()
         self._inherited = self._get_from_rules()
 
     def _get_from_rules(self) -> List[Area]:
+        if self._ai.is_inherited is False:
+            return []
         if len(self._rules_engine) == 0:
             msg = f"{self.__class__.__name__}._get_from_rules() Rules must not contain rules to process."
             logger.error(msg)
             raise Exception(msg)
 
-        area_lst = self._rules_engine.get_area(self._lst)
+        area_lst = self._rules_engine.get_area(ai=self._ai, alst=self._lst)
         return area_lst or []
 
-
-    def _get_inherited(self) -> List[Area]:
-        if self._is_inherited is False:
-            return []
-        if self._first is None:
-            return []
-        d_lst = self._list_dict(lst=self._lst)
-        match_lst = d_lst[self._first.y1]
-        # if only one classe is being inherted then return early.
-        # in some cases the class being inherited can also be inherited elsewhere.
-        # this can result in inhertiance being removed that should stay.
-        # see: https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1report_1_1Shape.html
-        if len(match_lst) == 1:
-            return match_lst
-        # remove first first group
-        # del d_lst[self._first.y1]
-
-        # get a list of all other upper area items.
-        upper: List[Area] = []
-        keys = list(d_lst.keys())  # list of y1
-        for k in keys:
-            if k < self._first.y1:
-                upper.extend(d_lst[k])
-        if len(upper) == 0:
-            return match_lst
-        # search for name in upper that are in inherited.
-        # if found then remove from inherited.
-        unique_names: Set[str] = set()
-        for area in upper:
-            unique_names.add(area.name)
-        remove_indexes: List[int] = []
-        for i, area in enumerate(match_lst):
-            if area.name in unique_names:
-                remove_indexes.append(i)
-        if len(remove_indexes) == 0:
-            return match_lst
-        remove_indexes.sort(reverse=True)
-        for i in remove_indexes:
-            match_lst.pop(i)
-        return match_lst
-
-    def _list_dict(self, lst: List[Area]) -> Dict[int, List[Area]]:
-        d = {}
-        for area in lst:
-            if not area.y1 in d:
-                d[area.y1] = []
-            d[area.y1].append(area)
-        return d
-
-    def _get_group_by(self, lst: List[Area]) -> List[List[Area]]:
-        # use y1 as key to get all items that are on same row level
-        d = self._list_dict(lst)
-        result: List[List[Area]] = []
-        for _, v in d.items():
-            result.append(v)
-        return result
 
     def get_as_ns(self) -> List[Ns]:
         """
@@ -3813,7 +3759,12 @@ class AreaFilter:
     @property
     def inherited(self) -> List[Area]:
         """Gets inherited value"""
-        return self._inherited
+        return self._ai.is_inherited
+    
+    @property
+    def area_info(self) -> AreaInfo:
+        """Gets the area info containing inherited and cordinates info."""
+        return self._ai
 
 # region        Area Rules
 
@@ -3821,7 +3772,7 @@ class AreaFilter:
 class IRuleArea(ABC):
 
     @abstractmethod
-    def get_is_match(self, alst: List[Area]) -> bool:
+    def get_is_match(self, ai: AreaInfo, alst: List[Area]) -> bool:
         """
         Gets if rule is a match
         
@@ -3830,7 +3781,7 @@ class IRuleArea(ABC):
         """
 
     @abstractmethod
-    def get_area(self, alst: List[Area]) -> List[Area]:
+    def get_area(self, ai: AreaInfo,  alst: List[Area]) -> List[Area]:
         """
         Gets filtered Area list
 
@@ -3844,7 +3795,7 @@ class IRuleArea(ABC):
 
 class IRulesArea(ABC):
     @abstractmethod
-    def get_area(self, alst: List[Area]) -> List[Area]:
+    def get_area(self,  ai: AreaInfo, alst: List[Area]) -> List[Area]:
         """
         Gets filtered Area list
 
@@ -3953,7 +3904,7 @@ class RuleAreaSingle(RuleAreaBase):
     """Matches when there is a single parent"""
 
     # region IRuleArea Methods
-    def get_is_match(self, alst: List[Area]) -> bool:
+    def get_is_match(self, ai: AreaInfo, alst: List[Area]) -> bool:
         """
         Gets if rule is a match
         
@@ -3964,9 +3915,15 @@ class RuleAreaSingle(RuleAreaBase):
             return False
         d_lst = self._list_dict_x1(lst=alst)
         match_lst = d_lst[alst[0].y1]
-        return len(match_lst) == 1
+        if len(match_lst) != 1:
+            return False
+        if ai.shape:
+            m = match_lst[0]
+            if m.x1 != ai.shape.x1:
+                return False
+        return True
 
-    def get_area(self, alst: List[Area]) -> List[Area]:
+    def get_area(self, ai: AreaInfo, alst: List[Area]) -> List[Area]:
         """
         Gets filtered Area list
 
@@ -3985,7 +3942,7 @@ class RuleAreaMulti(RuleAreaBase):
     """Matches when there is a multiple adjacent parents"""
 
     # region IRuleArea Methods
-    def get_is_match(self, alst: List[Area]) -> bool:
+    def get_is_match(self, ai: AreaInfo, alst: List[Area]) -> bool:
         """
         Gets if rule is a match
         
@@ -3996,9 +3953,15 @@ class RuleAreaMulti(RuleAreaBase):
             return False
         d_lst = self._list_dict_y1(lst=alst)
         match_lst = d_lst[alst[0].y1]
+        if ai.shape:
+            m = match_lst[0]
+            # multi are ofset left or right on x1, Usually right
+            # more likley this is a single
+            if m.x1 == ai.shape.x1:
+                return False
         return len(match_lst) > 1
 
-    def get_area(self, alst: List[Area]) -> List[Area]:
+    def get_area(self, ai: AreaInfo, alst: List[Area]) -> List[Area]:
         """
         Gets filtered Area list
 
@@ -4023,7 +3986,7 @@ class RuleAreaVertical(RuleAreaBase):
     """Matches when there is a vertical parent"""
 
     # region IRuleArea Methods
-    def get_is_match(self, alst: List[Area]) -> bool:
+    def get_is_match(self, ai: AreaInfo, alst: List[Area]) -> bool:
         """
         Gets if rule is a match
         
@@ -4044,7 +4007,7 @@ class RuleAreaVertical(RuleAreaBase):
                 break
         return is_vert
 
-    def get_area(self, alst: List[Area]) -> List[Area]:
+    def get_area(self, ai: AreaInfo, alst: List[Area]) -> List[Area]:
         """
         Gets filtered Area list
 
@@ -4138,7 +4101,7 @@ class RulesArea(IRulesArea):
                 break
         return match_inst
 
-    def get_area(self, alst: List[Area]) -> Union[List[Area], None]:
+    def get_area(self, ai: AreaInfo, alst: List[Area]) -> Union[List[Area], None]:
         """
         Gets filtered Area list
 
@@ -4150,7 +4113,7 @@ class RulesArea(IRulesArea):
         """
         match = self._get_rule(alst)
         if match:
-            return match.get_area(alst)
+            return match.get_area(ai=ai, alst=alst)
         return None
 
 # endregion         Rules Area Engine
@@ -4172,6 +4135,7 @@ class ApiInherited(BlockObj):
         self._data = None
         self._raise_errors = bool(kwargs.get('raise_error', False))
         self._area_fileter_rules_engine = area_filter_rules_engine
+        self._ai: AreaInfo = None
 
     def _log_missing(self, for_str: Optional[str] = None, raise_error: bool = False):
         if for_str:
@@ -4194,16 +4158,23 @@ class ApiInherited(BlockObj):
             self._log_missing(for_str='image url',
                               raise_error=self._raise_errors)
             return self._data
-        is_inherited = ImageInfo.is_inherit_img(url=image_url)
-        if not is_inherited:
+        self._ai = ImageInfo.get_area_info(url=image_url)
+        if not self._ai.is_inherited:
             return self._data
         ab: ApiAreaBlock = ApiAreaBlock(self._api_dy_content)
         api_area: ApiArea = ApiArea(ab)
         lst = api_area.get_obj()
-        filter = AreaFilter(lst, is_inherited=is_inherited, rules_engine=self._area_fileter_rules_engine)
+        filter = AreaFilter(lst, area_info=self._ai, rules_engine=self._area_fileter_rules_engine)
         extends = filter.get_as_ns()
         if not extends:
             return self._data
         self._data = extends
         return self._data
+    
+    @property
+    def area_info(self) -> AreaInfo:
+        """Gets the area info containing inherited and cordinates info."""
+        if self._ai is None:
+            raise Exception('ApiInherited.area_info can not be called before get_obj()')
+        return self._ai
 # endregion Area Process
