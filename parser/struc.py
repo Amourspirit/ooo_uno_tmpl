@@ -122,45 +122,6 @@ class ApiData(base.APIData):
         return self._name_rules_engine
     # endregion Name Rules
 
-    # region methods
-
-    def get_import_info_property(self) -> base.ImportInfo:
-        """
-        Gets imports for properties
-
-        Args:
-            si_id (str): Property summary Info
-
-        Returns:
-            base.ImportInfo: Import info
-        """
-        info = base.ImportInfo()
-        p_info = self.property_summaries
-        # ensure data is primed
-        p_info.get_obj()
-        info.requires_typing = p_info.requires_typing
-        info.imports.update(p_info.imports)
-        return info
-
-    def get_import_info_type(self) -> base.ImportInfo:
-        """
-        Gets imports for typedefs
-
-        Args:
-            si_id (str): Types summary Info
-
-        Returns:
-            base.ImportInfo: Import info
-        """
-        info = base.ImportInfo()
-        p_info = self.types_summaries
-        # ensure data is primed
-        p_info.get_obj()
-        info.requires_typing = p_info.requires_typing
-        info.imports.update(p_info.imports)
-        return info
-    # endregion methods
-
     # region Properties
     @property
     def ns(self) -> ApiNs:
