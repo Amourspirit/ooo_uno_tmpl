@@ -351,10 +351,6 @@ class Parser(base.ParserBase):
                     "%s._get_summary_data() Return '%s' type require typing for: %s, %s",
                     self.__class__.__name__, si.p_type.type, si.name, si.id)
                 self._requires_typing = True
-        import_info = self._api_data.get_import_info_property()
-        if import_info.requires_typing:
-            self._requires_typing = True
-        self._imports.update(import_info.imports)
 
         if self.sort:
             if key in attribs:
@@ -364,11 +360,21 @@ class Parser(base.ParserBase):
         return attribs
 
     def _get_properties_data(self):
+        import_info = self._api_data.get_import_info_property()
+        if import_info.requires_typing:
+            self._requires_typing = True
+        self._imports.update(import_info.imports)
+
         si_lst = self._api_data.property_summaries.get_obj()
         key = 'properties'
         return self._get_summary_data(si_lst=si_lst, key=key)
     
     def _get_types_data(self):
+        import_info = self._api_data.get_import_info_type()
+        if import_info.requires_typing:
+            self._requires_typing = True
+        self._imports.update(import_info.imports)
+
         si_lst = self._api_data.types_summaries.get_obj()
         key = 'types'
         return self._get_summary_data(si_lst=si_lst, key=key)
