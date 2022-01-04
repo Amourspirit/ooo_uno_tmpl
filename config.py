@@ -28,6 +28,17 @@ class AppConfig:
     """
     Index color of component map images for NON-inherits.
     """
+    pixel_map_no_link: int
+    """
+    Image maps have indexed colors. All shapes that have a link have one border coloer.
+    Shape that has no link has another border color. This is the no link border color.
+    Used for finding shape within an image.
+    """
+    pixel_map_min_shape_width:int
+    """
+    Min number of pixels to match for a shape in an image.
+    See Also: ``pixel_map_no_link``
+    """
     base_const: str
     """
     module path to const such as ``ooo_uno.base.const``

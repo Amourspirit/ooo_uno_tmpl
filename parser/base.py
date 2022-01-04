@@ -121,6 +121,19 @@ class RequiredError(Exception):
 
 # region Data Classes
 
+@dataclass
+class Shape:
+    x1: int
+    y1: int
+    x2: int
+    y2: int
+
+@dataclass
+class AreaInfo:
+    is_inherited: bool
+    shape: Optional[Shape] = None
+
+
 
 @dataclass
 class ImportInfo:
@@ -3345,14 +3358,119 @@ class ImageInfo:
         return pixel_values
 
     @staticmethod
-    def get_image_pixels(image: Image.Image, dtype='int8'):
+    def get_image_pixels(image: Image.Image, dtype='int8', reshape=True):
         """Get a numpy array of an image so that one can access values[x][y]."""
-        width, height = image.size
-        # lst = list(image.getdata())
-        # pixel_values = numpy.array(lst, dtype=dtype).reshape((height, width))
-        pixel_values = np.array(
-            image.getdata(), dtype=dtype).reshape((height, width))
+        if reshape:
+            width, height = image.size
+            pixel_values = np.array(
+                image.getdata(), dtype=dtype).reshape((height, width))
+        else:
+            pixel_values = np.array(
+                image.getdata(), dtype=dtype)
         return pixel_values
+
+    @staticmethod
+    def get_area_info(url: str) -> AreaInfo:
+        global TEXT_CACHE
+
+        def get_cord(px: np.ndarray, color_index: int) -> Union[Shape, None]:
+            # Tested this method against images in GNU. Result are perfect on images viewed.
+            # Cordinates are exact. Borders are 1 px in size
+            def zero_runs(a):
+                # https://coderedirect.com/questions/302557/find-indexes-of-repeated-elements-in-an-array-python-numpy
+                iszero = np.concatenate(
+                    ([0], np.equal(a, 0).view(np.int8), [0]))
+                absdiff = np.abs(np.diff(iszero))
+                ranges = np.where(absdiff == 1)[0].reshape(-1, 2)
+                return ranges
+            # to find a actual block must match several pixels in a row on the horizontal plane.
+            # words have the same index color as non shape we are looking for.
+            i_rows = px.shape[0]
+            cords = None
+            x1_y1 = None
+            x2_y2 = None
+            r1 = None
+            r2 = None
+            for y in range(0, i_rows):
+                row = px[y,:]
+                # start_seq = search_sequence_numpy(row, seq)
+                runs = zero_runs(np.diff(row))
+                # runs of 7 or more, to illustrate filter
+                f_runs = runs[runs[:, 1]-runs[:, 0] > APP_CONFIG.pixel_map_min_shape_width]
+                if not x1_y1 is None:
+                    for r in f_runs:
+                        index = int(r[-1]) # last element
+                        v = row[index]
+                        if v == color_index:
+                            x2_y2 = index, int(y),
+                            r2 = r
+                            break
+                if x1_y1 is None:
+                    for r in f_runs:
+                        index = int(r[0])
+                        v = row[index]
+                        if v == color_index:
+                            x1_y1 = index,  int(y)
+                            r1 = r
+                            break
+                if x1_y1 and x2_y2:
+                    # compare top border pixel length with bottom border
+                    # the number should match or something is wrong
+                    if (r1==r2).all():
+                        cords = x1_y1 + x2_y2
+                    else:
+                        msg = f"ImageInfo.get_area_info(). Image to and bottom borders did not mathc! Url: {url}"
+                        logger.warning(msg)
+                if not cords is None:
+                    break
+            if cords is None:
+                return None
+            return Shape(x1=cords[0], y1=cords[1], x2=cords[2], y2=cords[3])
+    
+        r_img = ResponseImg(url=url, cache_seconds=0)
+        if TEXT_CACHE is None:
+            TEXT_CACHE = TextCache(tmp_dir=APP_CONFIG.cache_dir)
+    
+        try:
+            # filename = r_img.url_hash + '_info.txt'
+            # is_inherited = False
+            # txt = TEXT_CACHE.fetch_from_cache(filename=filename)
+            # if txt:
+            #     txt_parts = txt.split(',')
+            #     is_inherited = int(txt_parts[0]) == APP_CONFIG.pixel_inherit
+            #     if not is_inherited:
+            #         return AreaInfo(is_inherited=is_inherited)
+            
+            im = r_img.img
+            width, height = im.size
+            pix = ImageInfo.get_image_pixels(im)
+            
+    
+            
+            row = pix[0, :]  # row 0
+            found_px = -1
+            # images are expected to be indexed png files
+            # find the first pixel that does not have index of 0
+            # if first pixes is 1 then not inherited, if 3 inherited
+            for px in row:
+                if px != 0:
+                    found_px = px
+                    break
+            if found_px == -1:
+                msg = f"Failed to find colored pixel in first row of image pixels. Url: {url}"
+                raise Exception(msg)
+            
+            # create a sequence of pixels to match that is big enoug not to be texe characters
+            match_seq = np.array([APP_CONFIG.pixel_noinherit for _ in range(100)])
+            # flatten array to find cord
+            result = get_cord(pix, APP_CONFIG.pixel_map_no_link)
+            return result
+            
+            # TEXT_CACHE.save_in_cache(filename=filename, content=content)
+            # return result == APP_CONFIG.pixel_inherit
+        except Exception as e:
+            logger.error(e)
+            raise e
 
     @staticmethod
     def is_inherit_img(url: str) -> bool:
