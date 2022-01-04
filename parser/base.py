@@ -252,8 +252,12 @@ class CacheBase(ABC):
 
     @property
     def seconds(self) -> float:
-        """Gets cache time in seconds"""
+        """Gets/Sets cache time in seconds"""
         return self._lifetime
+    
+    @seconds.setter
+    def seconds(self, value: float) -> None:
+        self._lifetime = float(value)
     
     @property
     def path(self) -> Path:
@@ -295,6 +299,8 @@ class TextCache(CacheBase):
             age = time.time() - ti_m
             if age >= self.seconds:
                 return None
+        else:
+            return None
         try:
             # Check if we have this file locally
             
@@ -353,6 +359,8 @@ class PickleCache(CacheBase):
             age = time.time() - ti_m
             if age >= self.seconds:
                 return None
+        else:
+            return None
         try:
             # Open the file in binary mode
             with open(f, 'rb') as file:
@@ -1537,6 +1545,7 @@ class APIData:
             self._url = url_soup.url
             self._soup_obj = url_soup
             self._soup_obj.allow_cache = allow_cache
+        self._allow_cache = allow_cache
         self._api_data_public_members: ApiPublicMembers = None
         self._api_data_name: ApiName = None
         self._desc: ApiDesc = None
@@ -1779,7 +1788,11 @@ class APIData:
         """Gets class that get all inherited value"""
         if self._inherited is None:
             self._inherited = ApiInherited(
-                soup=self.soup_obj, area_filter_rules_engine=self.area_filter_rules_engine, raise_error=False)
+                soup=self.soup_obj,
+                area_filter_rules_engine=self.area_filter_rules_engine,
+                raise_error=False,
+                allow_cache = self.allow_cache
+                )
         return self._inherited
 
     @property
@@ -1822,6 +1835,19 @@ class APIData:
                 rules_engine=self._area_filter_rules_engine
             )
         return self._area_filter_rules_engine
+
+    @property
+    def allow_cache(self) -> bool:
+        """Specifies allow_cache
+    
+            :getter: Gets allow_cache value.
+            :setter: Sets allow_cache value.
+        """
+        return self._allow_cache
+    
+    @allow_cache.setter
+    def allow_cache(self, value: bool):
+        self._allow_cache = value
     # endregion Properties
 
 # endregion block and api classes
@@ -3300,6 +3326,8 @@ class ImageCache(CacheBase):
             age = time.time() - ti_m
             if age >= self.seconds:
                 return None
+        else:
+            return None
         try:
             # Check if we have this file locally
             with Image.open(f) as img:
@@ -3428,9 +3456,25 @@ class ImageInfo:
         return pixel_values
 
     @staticmethod
-    def get_area_info(url: str) -> AreaInfo:
-        global PICKLE_CACHE
+    def get_area_info(url: str, **kwargs) -> AreaInfo:
+        """
+        Gets Area info and shape if shape is available
 
+        Args:
+            url (str): Url of image
+
+        Keyword Arguments:
+            allow_cache (bool, optional) If ``False`` caching is ignored. Default ``True``
+
+        Raises:
+            Exception: [description]
+            e: [description]
+
+        Returns:
+            AreaInfo: Area Info with optionl shape.
+        """
+        global PICKLE_CACHE
+        allow_cache = bool(kwargs.get('allow_cache', True))
         def get_cord(px: np.ndarray, color_index: int) -> Union[Shape, None]:
             # Tested this method against images in GNU. Result are perfect on images viewed.
             # Cordinates are exact. Borders are 1 px in size
@@ -3488,7 +3532,9 @@ class ImageInfo:
         r_img = ResponseImg(url=url, cache_seconds=0)
         if PICKLE_CACHE is None:
             PICKLE_CACHE = PickleCache(tmp_dir=APP_CONFIG.cache_dir)
-    
+        seconds = PICKLE_CACHE.seconds
+        if allow_cache is False:
+            PICKLE_CACHE.seconds = 0.0
         try:
             filename = r_img.url_hash + '_ai.pkl'
             obj: AreaInfo = PICKLE_CACHE.fetch_from_cache(filename=filename)
@@ -3522,6 +3568,9 @@ class ImageInfo:
         except Exception as e:
             logger.error(e)
             raise e
+        finally:
+            # resotore cache time
+            PICKLE_CACHE.seconds = seconds
 
     @staticmethod
     def is_inherit_img(url: str) -> bool:
@@ -4126,6 +4175,7 @@ class ApiInherited(BlockObj):
         self._raise_errors = bool(kwargs.get('raise_error', False))
         self._area_fileter_rules_engine = area_filter_rules_engine
         self._ai: AreaInfo = None
+        self._allow_cache = bool(kwargs.get('allow_cache', True))
 
     def _log_missing(self, for_str: Optional[str] = None, raise_error: bool = False):
         if for_str:
@@ -4148,7 +4198,7 @@ class ApiInherited(BlockObj):
             self._log_missing(for_str='image url',
                               raise_error=self._raise_errors)
             return self._data
-        self._ai = ImageInfo.get_area_info(url=image_url)
+        self._ai = ImageInfo.get_area_info(url=image_url, allow_cache=self._allow_cache)
         if not self._ai.is_inherited:
             return self._data
         ab: ApiAreaBlock = ApiAreaBlock(self._api_dy_content)
@@ -4167,4 +4217,17 @@ class ApiInherited(BlockObj):
         if self._ai is None:
             raise Exception('ApiInherited.area_info can not be called before get_obj()')
         return self._ai
+    
+    @property
+    def allow_cache(self) -> bool:
+        """Specifies allow_cache
+    
+            :getter: Gets allow_cache value.
+            :setter: Sets allow_cache value.
+        """
+        return self._allow_cache
+
+    @allow_cache.setter
+    def allow_cache(self, value: bool):
+        self._allow_cache = value
 # endregion Area Process
