@@ -3837,7 +3837,7 @@ class RuleAreaBase(IRuleArea):
 
     def _get_upper(self, first: Area, d_lst: Dict[int, List[Area]]) -> List[Area]:
         """
-        Get a list of all areas that have a y1 value less then first.y1
+        Get a list of all areas that have a y1 value equal then first.y1
 
         In area map lower y1 values are higer in inheritance.
         """
@@ -3846,31 +3846,6 @@ class RuleAreaBase(IRuleArea):
             if k < first.y1:
                 lst.extend(v)
         return lst
-
-    def _remove_duplicates(self, clean_lst: List[Area], filter_lst: List[Area]) -> bool:
-        """
-        Removes any duplicates base upon namesapce.
-
-        Args:
-            clean_lst (List[Area]): List to remove duplicates from
-            filter_lst (List[Area]): List used as filter
-
-        Returns:
-            bool: True if any duplicates were found; Otherwise False.
-        """
-        unique_names: Set[str] = set()
-        for area in filter_lst:
-            unique_names.add(area.ns.fullns)
-        remove_indexes: List[int] = []
-        for i, area in enumerate(clean_lst):
-            if area.ns.fullns in unique_names:
-                remove_indexes.append(i)
-        if len(remove_indexes) == 0:
-            return False
-        remove_indexes.sort(reverse=True)
-        for i in remove_indexes:
-            clean_lst.pop(i)
-        return True
 
     def _remove_duplicates_lst(self, lst: List[Area]) -> bool:
         """
@@ -3970,15 +3945,6 @@ class RuleAreaMulti(RuleAreaBase):
         match_lst = d_lst[first.y1]
         if len(match_lst) <= 1:
             return False
-
-        if ai.shape:
-            all_match = True
-            for area in match_lst:
-                if area.y1 != ai.shape.y1:
-                    all_match = False
-                    break
-            if all_match is True:
-                return False
         return True
 
     def get_area(self, ai: AreaInfo, alst: List[Area]) -> List[Area]:
@@ -3994,11 +3960,9 @@ class RuleAreaMulti(RuleAreaBase):
         first = self._get_first_y1(ai=ai, alst=alst)
         d_lst: Dict[int, List[Area]] = self._list_dict_y1(lst=alst) # grouped by y1
         match_lst: List[Area] = d_lst[first.y1] # list of y1 matches
-        
-        upper: List[Area] = self._get_upper(first, d_lst)
-        if len(upper) == 0:
+        if len(match_lst) == 0:
             return match_lst
-        self._remove_duplicates(match_lst, upper)
+        self._remove_duplicates_lst(match_lst)
         return match_lst
     # endregion IRuleArea Methods
 
