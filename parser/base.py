@@ -21,6 +21,7 @@ import inspect
 import importlib
 import shutil  # to save it locally
 import numpy as np
+import pickle
 from dataclasses import dataclass, field
 from deprecated import deprecated
 from PIL import Image
@@ -54,6 +55,8 @@ def _set_loggers(l: Union[logging.Logger, None]):
 # region CONST
 URL_SPLIT = '_1_1'
 """Default stirng for splitting url string into it parts"""
+TEXT_CACHE: 'TextCache' = None
+PICKLE_CACHE: 'PickleCache' = None
 # endregion CONST
 
 # region config
@@ -70,7 +73,6 @@ _load_config()
 py_name_pattern = re.compile('[\W_]+')
 py_ns_pattern = re.compile(r'[^a-zA-Z0-9\._]+')
 curly_brace_close_pattern = re.compile(r'[^};]')
-TEXT_CACHE: 'TextCache' = None
 """TextCache object for caching response data"""
 pattern_sq_braket = re.compile(r"\[.*\]")
 pattern_http = re.compile(r"^https?:\/\/")
@@ -315,6 +317,62 @@ class TextCache(CacheBase):
         # print('Saving a copy of {} in the cache'.format(filename))
         with open(f, 'w') as cached_file:
             cached_file.write(content)
+
+
+class PickleCache(CacheBase):
+    """
+    Caches files and retreives cached files.
+    Cached file are in a subfolder of system tmp dir.
+    """
+
+    def fetch_from_cache(self, filename: Union[str, Path]) -> Union[object, None]:
+        """
+        Fetches file contents from cache if it exist and is not expired
+
+        Args:
+            filename (Union[str, Path]): File to retrieve
+
+        Returns:
+            Union[object, None]: File contents if retrieved; Otherwise, ``None``
+        """
+        f = Path(self.path, filename)
+        if not f.exists():
+            return None
+
+        if self.seconds > 0:
+            f_stat = f.stat()
+            if f_stat.st_size == 0:
+                # shoud not be zero byte file.
+                try:
+                    self.del_from_cache(f)
+                except Exception as e:
+                    logger.warning(
+                        'Not able to delete 0 byte file: %s, error: %s', filename, str(e))
+                return None
+            ti_m = f_stat.st_mtime
+            age = time.time() - ti_m
+            if age >= self.seconds:
+                return None
+        try:
+            # Open the file in binary mode
+            with open(f, 'rb') as file:
+                # Call load method to deserialze
+                content = pickle.load(file)
+            return content
+        except IOError:
+            return None
+
+    def save_in_cache(self, filename: Union[str, Path], content: object):
+        """
+        Saves file contents into cache
+
+        Args:
+            filename (Union[str, Path]): filename to write.
+            content (object): Contents to write into file.
+        """
+        f = Path(self.path, filename)
+        with open(f, 'wb') as file:
+            pickle.dump(content, file)
 
 # endregion Cache
 
@@ -3371,7 +3429,7 @@ class ImageInfo:
 
     @staticmethod
     def get_area_info(url: str) -> AreaInfo:
-        global TEXT_CACHE
+        global PICKLE_CACHE
 
         def get_cord(px: np.ndarray, color_index: int) -> Union[Shape, None]:
             # Tested this method against images in GNU. Result are perfect on images viewed.
@@ -3428,25 +3486,17 @@ class ImageInfo:
             return Shape(x1=cords[0], y1=cords[1], x2=cords[2], y2=cords[3])
     
         r_img = ResponseImg(url=url, cache_seconds=0)
-        if TEXT_CACHE is None:
-            TEXT_CACHE = TextCache(tmp_dir=APP_CONFIG.cache_dir)
+        if PICKLE_CACHE is None:
+            PICKLE_CACHE = PickleCache(tmp_dir=APP_CONFIG.cache_dir)
     
         try:
-            # filename = r_img.url_hash + '_info.txt'
-            # is_inherited = False
-            # txt = TEXT_CACHE.fetch_from_cache(filename=filename)
-            # if txt:
-            #     txt_parts = txt.split(',')
-            #     is_inherited = int(txt_parts[0]) == APP_CONFIG.pixel_inherit
-            #     if not is_inherited:
-            #         return AreaInfo(is_inherited=is_inherited)
+            filename = r_img.url_hash + '_ai.pkl'
+            obj: AreaInfo = PICKLE_CACHE.fetch_from_cache(filename=filename)
+            if obj:
+                return obj
             
             im = r_img.img
-            width, height = im.size
             pix = ImageInfo.get_image_pixels(im)
-            
-    
-            
             row = pix[0, :]  # row 0
             found_px = -1
             # images are expected to be indexed png files
@@ -3460,14 +3510,15 @@ class ImageInfo:
                 msg = f"Failed to find colored pixel in first row of image pixels. Url: {url}"
                 raise Exception(msg)
             
-            # create a sequence of pixels to match that is big enoug not to be texe characters
-            match_seq = np.array([APP_CONFIG.pixel_noinherit for _ in range(100)])
-            # flatten array to find cord
-            result = get_cord(pix, APP_CONFIG.pixel_map_no_link)
-            return result
+
+            cord = get_cord(pix, APP_CONFIG.pixel_map_no_link)
+            ai = AreaInfo(
+                is_inherited=found_px > 0,
+                shape=cord
+                )
             
-            # TEXT_CACHE.save_in_cache(filename=filename, content=content)
-            # return result == APP_CONFIG.pixel_inherit
+            PICKLE_CACHE.save_in_cache(filename=filename, content=ai)
+            return ai
         except Exception as e:
             logger.error(e)
             raise e
