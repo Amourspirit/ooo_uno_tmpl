@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
   "version": "0.1.12",
-  "timestamp": "2022-01-03 04:03:28+00:00",
+  "timestamp": "2022-01-04 03:34:01+00:00",
   "name": "DefaultBackend",
   "type": "service",
   "namespace": "com.sun.star.configuration.backend",
@@ -14,8 +14,16 @@
   "data": {
     "from_imports": [
       [
+        ".x_backend",
+        "XBackend"
+      ],
+      [
         ".backend",
         "Backend"
+      ],
+      [
+        "...uno.x_interface",
+        "XInterface"
       ]
     ],
     "from_imports_typing": [],
@@ -26,7 +34,9 @@
     "imports": [],
     "namespace": "com.sun.star.configuration.backend",
     "extends": [
-      "com.sun.star.configuration.backend.Backend"
+      "com.sun.star.configuration.backend.Backend",
+      "com.sun.star.configuration.backend.XBackend",
+      "com.sun.star.uno.XInterface"
     ],
     "desc": [
       "is a DefaultBackend, that is the default DefaultBackend for its com.sun.star.uno.XComponentContext.",

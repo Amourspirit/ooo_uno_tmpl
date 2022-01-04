@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
   "version": "0.1.12",
-  "timestamp": "2022-01-03 04:03:28+00:00",
+  "timestamp": "2022-01-04 03:34:06+00:00",
   "name": "OnlineBackend",
   "type": "service",
   "namespace": "com.sun.star.configuration.backend",
@@ -16,6 +16,14 @@
       [
         ".backend_adapter",
         "BackendAdapter"
+      ],
+      [
+        "...uno.x_interface",
+        "XInterface"
+      ],
+      [
+        ".x_backend_entities",
+        "XBackendEntities"
       ]
     ],
     "from_imports_typing": [],
@@ -26,7 +34,9 @@
     "imports": [],
     "namespace": "com.sun.star.configuration.backend",
     "extends": [
-      "com.sun.star.configuration.backend.BackendAdapter"
+      "com.sun.star.configuration.backend.BackendAdapter",
+      "com.sun.star.configuration.backend.XBackendEntities",
+      "com.sun.star.uno.XInterface"
     ],
     "desc": [
       "implements a BackendAdapter that requires that the SingleBackend holding the data is continuously accessible.",

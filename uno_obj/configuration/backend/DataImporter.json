@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
   "version": "0.1.12",
-  "timestamp": "2022-01-03 04:03:28+00:00",
+  "timestamp": "2022-01-04 03:33:59+00:00",
   "name": "DataImporter",
   "type": "service",
   "namespace": "com.sun.star.configuration.backend",
@@ -14,8 +14,16 @@
   "data": {
     "from_imports": [
       [
+        ".local_data_importer",
+        "LocalDataImporter"
+      ],
+      [
         "...task.x_job",
         "XJob"
+      ],
+      [
+        "...uno.x_interface",
+        "XInterface"
       ]
     ],
     "from_imports_typing": [],
@@ -26,7 +34,9 @@
     "imports": [],
     "namespace": "com.sun.star.configuration.backend",
     "extends": [
-      "com.sun.star.task.XJob"
+      "com.sun.star.task.XJob",
+      "com.sun.star.uno.XInterface",
+      "com.sun.star.configuration.backend.LocalDataImporter"
     ],
     "desc": [
       "allows importing data from one configuration repository into another.",
