@@ -724,20 +724,6 @@ class StructWriter(base.WriteBase):
         self._cache[key] = obj_path
         return self._cache[key]
 
-    def _auto_imports(self) -> List[Tuple[str, str]]:
-        results = []
-        if not self._auto_import:
-            return results
-        auto: Set[str] = self._parser.auto_imports
-        if len(auto) == 0:
-            return results
-        local_ns_str = self._p_fullname.rsplit('.', 1)[0]
-        for name in auto:
-            
-            im = base.Util.get_rel_import(i_str=name, ns=local_ns_str)
-            results.append(im)
-        return results
-
 # endregion Writer
 
 # region Parse method
@@ -896,7 +882,8 @@ def _main():
     # url = 'https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1beans_1_1Ambiguous_3_01T_01_4.html'
     # url = 'https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1beans_1_1GetPropertyTolerantResult.html'
     # url = 'https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1text_1_1TextMarkupDescriptor.html'
-    url = 'https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1beans_1_1Pair_3_01T_00_01U_01_4.html' # generics
+    # url = 'https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1beans_1_1Pair_3_01T_00_01U_01_4.html' # generics
+    url = 'https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1accessibility_1_1AccessibleRelation.html'
     args = ('v', 'n')
     kwargs = {
         "u": url,
