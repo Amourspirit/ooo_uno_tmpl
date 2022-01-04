@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
   "version": "0.1.12",
-  "timestamp": "2022-01-01 23:12:48+00:00",
+  "timestamp": "2022-01-04 05:02:14+00:00",
   "name": "XMultipleOperation",
   "type": "interface",
   "namespace": "com.sun.star.sheet",
@@ -16,9 +16,17 @@
       [
         "..uno.x_interface",
         "XInterface"
+      ],
+      [
+        ".sheet_cell_range",
+        "SheetCellRange"
       ]
     ],
     "from_imports_typing": [
+      [
+        "..table.cell_address",
+        "CellAddress"
+      ],
       [
         "..table.cell_range_address",
         "CellRangeAddress"
@@ -26,16 +34,12 @@
       [
         ".table_operation_mode",
         "TableOperationMode"
-      ],
-      [
-        "..table.cell_address",
-        "CellAddress"
       ]
     ],
     "quote": [
-      "TableOperationMode",
       "CellRangeAddress",
-      "CellAddress"
+      "CellAddress",
+      "TableOperationMode"
     ],
     "typings": [],
     "requires_typing": true,
@@ -43,7 +47,8 @@
     "imports": [],
     "namespace": "com.sun.star.sheet",
     "extends": [
-      "com.sun.star.uno.XInterface"
+      "com.sun.star.uno.XInterface",
+      "com.sun.star.sheet.SheetCellRange"
     ],
     "desc": [
       "provides a method to apply a Multiple Operations Table to the cell range."

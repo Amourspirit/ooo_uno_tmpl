@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
   "version": "0.1.12",
-  "timestamp": "2022-01-01 23:12:34+00:00",
+  "timestamp": "2022-01-04 04:59:19+00:00",
   "name": "XDocumentProperties",
   "type": "interface",
   "namespace": "com.sun.star.document",
@@ -15,34 +15,42 @@
     "from_imports": [],
     "from_imports_typing": [
       [
-        "..beans.x_property_container",
-        "XPropertyContainer"
-      ],
-      [
-        "..lang.locale",
-        "Locale"
-      ],
-      [
-        "..util.date_time",
-        "DateTime"
+        "..beans.named_value",
+        "NamedValue"
       ],
       [
         "..embed.x_storage",
         "XStorage"
       ],
       [
+        "..beans.x_property_container",
+        "XPropertyContainer"
+      ],
+      [
+        "..util.date_time",
+        "DateTime"
+      ],
+      [
         "..beans.property_value",
         "PropertyValue"
+      ],
+      [
+        "..lang.locale",
+        "Locale"
       ]
     ],
     "quote": [
-      "Locale",
+      "XStorage",
       "XPropertyContainer",
-      "DateTime",
+      "typing.List[str]",
+      "typing.List[NamedValue]",
       "typing.List[PropertyValue]",
-      "XStorage"
+      "DateTime",
+      "Locale"
     ],
     "typings": [
+      "typing.List[NamedValue]",
+      "typing.List[str]",
       "typing.List[PropertyValue]"
     ],
     "requires_typing": true,
@@ -197,6 +205,28 @@
               "in"
             ]
           ]
+        }
+      ],
+      "types": [
+        {
+          "name": "DocumentStatistics",
+          "returns": "typing.List[NamedValue]",
+          "desc": [
+            "contains some statistics about the document.",
+            "",
+            "The contained statistics may be specific to the type of the document."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Keywords",
+          "returns": "typing.List[str]",
+          "desc": [
+            "contains a list of keywords for the document."
+          ],
+          "raises_get": "",
+          "raises_set": ""
         }
       ],
       "properties": [

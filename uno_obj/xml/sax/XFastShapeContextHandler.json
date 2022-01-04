@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
   "version": "0.1.12",
-  "timestamp": "2022-01-01 23:13:00+00:00",
+  "timestamp": "2022-01-04 05:02:51+00:00",
   "name": "XFastShapeContextHandler",
   "type": "interface",
   "namespace": "com.sun.star.xml.sax",
@@ -20,8 +20,20 @@
     ],
     "from_imports_typing": [
       [
-        "...drawing.x_shape",
-        "XShape"
+        "...document.x_document_properties",
+        "XDocumentProperties"
+      ],
+      [
+        "...beans.property_value",
+        "PropertyValue"
+      ],
+      [
+        "...drawing.x_draw_page",
+        "XDrawPage"
+      ],
+      [
+        "...awt.point",
+        "Point"
       ],
       [
         "...frame.x_model",
@@ -32,27 +44,22 @@
         "XGraphicMapper"
       ],
       [
-        "...document.x_document_properties",
-        "XDocumentProperties"
-      ],
-      [
-        "...awt.point",
-        "Point"
-      ],
-      [
-        "...drawing.x_draw_page",
-        "XDrawPage"
+        "...drawing.x_shape",
+        "XShape"
       ]
     ],
     "quote": [
-      "XModel",
-      "XGraphicMapper",
+      "XShape",
       "XDocumentProperties",
+      "XModel",
+      "typing.List[PropertyValue]",
+      "XGraphicMapper",
       "XDrawPage",
-      "Point",
-      "XShape"
+      "Point"
     ],
-    "typings": [],
+    "typings": [
+      "typing.List[PropertyValue]"
+    ],
     "requires_typing": true,
     "name": "XFastShapeContextHandler",
     "imports": [],
@@ -90,6 +97,15 @@
               "in"
             ]
           ]
+        }
+      ],
+      "types": [
+        {
+          "name": "MediaDescriptor",
+          "returns": "typing.List[PropertyValue]",
+          "desc": [],
+          "raises_get": "",
+          "raises_set": ""
         }
       ],
       "properties": [

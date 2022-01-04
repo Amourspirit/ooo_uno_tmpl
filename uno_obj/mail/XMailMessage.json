@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
   "version": "0.1.12",
-  "timestamp": "2022-01-01 23:12:27+00:00",
+  "timestamp": "2022-01-04 04:56:28+00:00",
   "name": "XMailMessage",
   "type": "interface",
   "namespace": "com.sun.star.mail",
@@ -14,11 +14,19 @@
   "data": {
     "from_imports": [
       [
+        ".mail_message",
+        "MailMessage"
+      ],
+      [
         "..uno.x_interface",
         "XInterface"
       ]
     ],
     "from_imports_typing": [
+      [
+        ".mail_attachment",
+        "MailAttachment"
+      ],
       [
         "..datatransfer.x_transferable",
         "XTransferable"
@@ -26,15 +34,11 @@
       [
         ".mail_attachment",
         "MailAttachment"
-      ],
-      [
-        ".mail_attachment",
-        "MailAttachment"
       ]
     ],
     "quote": [
-      "XTransferable",
       "typing.List[MailAttachment]",
+      "XTransferable",
       "typing.List[str]",
       "MailAttachment"
     ],
@@ -47,7 +51,8 @@
     "imports": [],
     "namespace": "com.sun.star.mail",
     "extends": [
-      "com.sun.star.uno.XInterface"
+      "com.sun.star.uno.XInterface",
+      "com.sun.star.mail.MailMessage"
     ],
     "desc": [
       "Represents a mail message.",

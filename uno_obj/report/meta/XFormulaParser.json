@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
   "version": "0.1.12",
-  "timestamp": "2022-01-01 23:12:22+00:00",
+  "timestamp": "2022-01-04 04:54:30+00:00",
   "name": "XFormulaParser",
   "type": "interface",
   "namespace": "com.sun.star.report.meta",
@@ -14,28 +14,35 @@
   "data": {
     "from_imports": [
       [
-        "...sheet.x_formula_parser",
-        "XFormulaParser"
+        "...beans.x_property_set",
+        "XPropertySet"
       ],
       [
         "...lang.x_component",
         "XComponent"
       ],
       [
-        "...beans.x_property_set",
-        "XPropertySet"
+        "...sheet.x_formula_parser",
+        "XFormulaParser"
       ]
     ],
     "from_imports_typing": [
+      [
+        "...sheet.formula_op_code_map_entry",
+        "FormulaOpCodeMapEntry"
+      ],
       [
         "...sheet.x_formula_op_code_mapper",
         "XFormulaOpCodeMapper"
       ]
     ],
     "quote": [
+      "typing.List[FormulaOpCodeMapEntry]",
       "XFormulaOpCodeMapper"
     ],
-    "typings": [],
+    "typings": [
+      "typing.List[FormulaOpCodeMapEntry]"
+    ],
     "requires_typing": true,
     "name": "XFormulaParser",
     "imports": [],
@@ -50,6 +57,19 @@
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1report_1_1meta_1_1XFormulaParser.html",
     "items": {
+      "types": [
+        {
+          "name": "OpCodeMap",
+          "returns": "typing.List[FormulaOpCodeMapEntry]",
+          "desc": [
+            "The complete mapping of Names to OpCodes.",
+            "",
+            "Names and symbols not defined here lead to a parser/print error."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ],
       "properties": [
         {
           "name": "FormulaOpCodeMapper",

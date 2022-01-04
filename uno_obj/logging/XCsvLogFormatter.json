@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
   "version": "0.1.12",
-  "timestamp": "2022-01-01 23:12:43+00:00",
+  "timestamp": "2022-01-04 05:00:44+00:00",
   "name": "XCsvLogFormatter",
   "type": "interface",
   "namespace": "com.sun.star.logging",
@@ -16,6 +16,10 @@
       [
         ".x_log_formatter",
         "XLogFormatter"
+      ],
+      [
+        ".csv_log_formatter",
+        "CsvLogFormatter"
       ]
     ],
     "from_imports_typing": [],
@@ -30,7 +34,8 @@
     "imports": [],
     "namespace": "com.sun.star.logging",
     "extends": [
-      "com.sun.star.logging.XLogFormatter"
+      "com.sun.star.logging.XLogFormatter",
+      "com.sun.star.logging.CsvLogFormatter"
     ],
     "desc": [
       "specifies the interface used for formatting log records for RFC4180 CSV output",
@@ -60,6 +65,19 @@
               "in"
             ]
           ]
+        }
+      ],
+      "types": [
+        {
+          "name": "Columnnames",
+          "returns": "typing.List[str]",
+          "desc": [
+            "Defines the names of the additional columns this defaults to only one row titled \\\"message\\\".",
+            "",
+            "if this is set to more than one column, the messages need to be preformatted using formatMultiColumn"
+          ],
+          "raises_get": "",
+          "raises_set": ""
         }
       ],
       "properties": [

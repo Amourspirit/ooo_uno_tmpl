@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
   "version": "0.1.12",
-  "timestamp": "2022-01-01 23:12:42+00:00",
+  "timestamp": "2022-01-04 04:57:31+00:00",
   "name": "XFrameLoader",
   "type": "interface",
   "namespace": "com.sun.star.frame",
@@ -14,11 +14,23 @@
   "data": {
     "from_imports": [
       [
+        "..sdb.content_loader",
+        "ContentLoader"
+      ],
+      [
         "..uno.x_interface",
         "XInterface"
+      ],
+      [
+        ".frame_loader",
+        "FrameLoader"
       ]
     ],
     "from_imports_typing": [
+      [
+        ".x_frame",
+        "XFrame"
+      ],
       [
         ".x_load_event_listener",
         "XLoadEventListener"
@@ -26,16 +38,12 @@
       [
         "..beans.property_value",
         "PropertyValue"
-      ],
-      [
-        ".x_frame",
-        "XFrame"
       ]
     ],
     "quote": [
-      "XFrame",
+      "XLoadEventListener",
       "typing.List[PropertyValue]",
-      "XLoadEventListener"
+      "XFrame"
     ],
     "typings": [
       "typing.List[PropertyValue]"
@@ -45,7 +53,9 @@
     "imports": [],
     "namespace": "com.sun.star.frame",
     "extends": [
-      "com.sun.star.uno.XInterface"
+      "com.sun.star.uno.XInterface",
+      "com.sun.star.frame.FrameLoader",
+      "com.sun.star.sdb.ContentLoader"
     ],
     "desc": [
       "load components into a frame",

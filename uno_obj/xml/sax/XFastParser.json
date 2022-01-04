@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
   "version": "0.1.12",
-  "timestamp": "2022-01-01 23:13:00+00:00",
+  "timestamp": "2022-01-04 05:02:51+00:00",
   "name": "XFastParser",
   "type": "interface",
   "namespace": "com.sun.star.xml.sax",
@@ -16,16 +16,28 @@
       [
         "...uno.x_interface",
         "XInterface"
+      ],
+      [
+        ".fast_parser",
+        "FastParser"
       ]
     ],
     "from_imports_typing": [
+      [
+        ".x_fast_namespace_handler",
+        "XFastNamespaceHandler"
+      ],
+      [
+        ".x_fast_token_handler",
+        "XFastTokenHandler"
+      ],
       [
         ".x_fast_document_handler",
         "XFastDocumentHandler"
       ],
       [
-        ".x_fast_token_handler",
-        "XFastTokenHandler"
+        ".x_entity_resolver",
+        "XEntityResolver"
       ],
       [
         "...lang.locale",
@@ -36,26 +48,18 @@
         "InputSource"
       ],
       [
-        ".x_entity_resolver",
-        "XEntityResolver"
-      ],
-      [
         ".x_error_handler",
         "XErrorHandler"
-      ],
-      [
-        ".x_fast_namespace_handler",
-        "XFastNamespaceHandler"
       ]
     ],
     "quote": [
-      "XErrorHandler",
-      "Locale",
-      "XFastTokenHandler",
-      "typing.List[typing.Tuple[str, str]]",
-      "XFastNamespaceHandler",
-      "XFastDocumentHandler",
       "InputSource",
+      "XFastNamespaceHandler",
+      "XErrorHandler",
+      "XFastDocumentHandler",
+      "XFastTokenHandler",
+      "Locale",
+      "typing.List[typing.Tuple[str, str]]",
       "XEntityResolver"
     ],
     "typings": [
@@ -66,7 +70,8 @@
     "imports": [],
     "namespace": "com.sun.star.xml.sax",
     "extends": [
-      "com.sun.star.uno.XInterface"
+      "com.sun.star.uno.XInterface",
+      "com.sun.star.xml.sax.FastParser"
     ],
     "desc": [
       "specifies a SAX parser that uses integer values for known XML names (elements, attributes and attribute values).",

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
   "version": "0.1.12",
-  "timestamp": "2022-01-01 23:12:16+00:00",
+  "timestamp": "2022-01-04 04:56:43+00:00",
   "name": "XCertificate",
   "type": "interface",
   "namespace": "com.sun.star.security",
@@ -24,22 +24,28 @@
         "XCertificateExtension"
       ],
       [
+        "..util.date_time",
+        "DateTime"
+      ],
+      [
         ".certificate_kind",
         "CertificateKind"
       ],
       [
-        "..util.date_time",
-        "DateTime"
+        ".x_certificate_extension",
+        "XCertificateExtension"
       ]
     ],
     "quote": [
-      "CertificateKind",
       "typing.List[int]",
-      "XCertificateExtension",
-      "DateTime"
+      "typing.List[XCertificateExtension]",
+      "CertificateKind",
+      "DateTime",
+      "XCertificateExtension"
     ],
     "typings": [
-      "typing.List[int]"
+      "typing.List[int]",
+      "typing.List[XCertificateExtension]"
     ],
     "requires_typing": true,
     "name": "XCertificate",
@@ -85,6 +91,80 @@
           ],
           "raises": [],
           "args": []
+        }
+      ],
+      "types": [
+        {
+          "name": "Encoded",
+          "returns": "typing.List[int]",
+          "desc": [
+            "the DER encoded form of the certificate"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Extensions",
+          "returns": "typing.List[XCertificateExtension]",
+          "desc": [
+            "all extensions of a certificate."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "IssuerUniqueID",
+          "returns": "typing.List[int]",
+          "desc": [
+            "the issuer unique ID attribute of the certificate."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "MD5Thumbprint",
+          "returns": "typing.List[int]",
+          "desc": [
+            "the MD5 thumbprint"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "SHA1Thumbprint",
+          "returns": "typing.List[int]",
+          "desc": [
+            "the SHA-1 thumbprint"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "SerialNumber",
+          "returns": "typing.List[int]",
+          "desc": [
+            "the serial number attribute of the certificate."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "SubjectPublicKeyValue",
+          "returns": "typing.List[int]",
+          "desc": [
+            "the value of the subject public key"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "SubjectUniqueID",
+          "returns": "typing.List[int]",
+          "desc": [
+            "the subject unique ID attribute of the certificate."
+          ],
+          "raises_get": "",
+          "raises_set": ""
         }
       ],
       "properties": [

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
   "version": "0.1.12",
-  "timestamp": "2022-01-01 23:12:27+00:00",
+  "timestamp": "2022-01-04 04:56:27+00:00",
   "name": "XMailService",
   "type": "interface",
   "namespace": "com.sun.star.mail",
@@ -16,27 +16,31 @@
       [
         "..uno.x_interface",
         "XInterface"
+      ],
+      [
+        ".x_smtp_service",
+        "XSmtpService"
       ]
     ],
     "from_imports_typing": [
       [
-        "..uno.x_current_context",
-        "XCurrentContext"
+        ".x_authenticator",
+        "XAuthenticator"
       ],
       [
         ".x_connection_listener",
         "XConnectionListener"
       ],
       [
-        ".x_authenticator",
-        "XAuthenticator"
+        "..uno.x_current_context",
+        "XCurrentContext"
       ]
     ],
     "quote": [
       "XConnectionListener",
-      "XCurrentContext",
+      "XAuthenticator",
       "typing.List[str]",
-      "XAuthenticator"
+      "XCurrentContext"
     ],
     "typings": [
       "typing.List[str]"
@@ -46,7 +50,8 @@
     "imports": [],
     "namespace": "com.sun.star.mail",
     "extends": [
-      "com.sun.star.uno.XInterface"
+      "com.sun.star.uno.XInterface",
+      "com.sun.star.mail.XSmtpService"
     ],
     "desc": [
       "Represents a mail server abstraction.",
