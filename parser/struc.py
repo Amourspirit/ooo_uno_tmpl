@@ -97,7 +97,6 @@ class ApiData(base.APIData):
 
         self._ns: ApiNs = None
         self._desc: base.ApiDesc = None
-        self._inherited: base.ApiInherited = None
         self._properties_block: ApiPropertiesBlock = None
         self._property_summaries: base.ApiSummaries = None
         self._property_summary_rows: base.ApiSummaryRows = None
@@ -177,14 +176,6 @@ class ApiData(base.APIData):
         if self._desc is None:
             self._desc = base.ApiDesc(self.soup_obj)
         return self._desc
-
-    @property
-    def inherited(self) -> base.ApiInherited:
-        """Gets class that get all inherited value"""
-        if self._inherited is None:
-            self._inherited = base.ApiInherited(
-                soup=self.soup_obj, raise_error=False)
-        return self._inherited
 
     @property
     def properties_block(self) -> ApiPropertiesBlock:

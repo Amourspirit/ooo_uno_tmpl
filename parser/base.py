@@ -3842,7 +3842,7 @@ class RuleAreaBase(IRuleArea):
         In area map lower y1 values are higer in inheritance.
         """
         lst: List[Area] = []
-        for k, v in d_lst:
+        for k, v in d_lst.items():
             if k < first.y1:
                 lst.extend(v)
         return lst
@@ -3897,6 +3897,20 @@ class RuleAreaBase(IRuleArea):
             lst.pop(i)
         return True
 
+    def _get_first_y1(self, ai: AreaInfo, alst: List[Area]) -> Area:
+        if not ai.shape:
+            return alst[0] # go with first it should always work. However order is scraped form html
+        first = None
+        lst_y = [(a.y1, i) for i, a in enumerate(alst)]
+        lst_y.sort(reverse=True)
+        for y in lst_y:
+            if y[0] < ai.shape.y1:
+                first = alst[y[1]]
+                break
+        if first:
+            return first
+        return alst[0]
+
     # endregion Privae Methods
 
 
@@ -3913,7 +3927,7 @@ class RuleAreaSingle(RuleAreaBase):
         """
         if len(alst) == 0:
             return False
-        d_lst = self._list_dict_x1(lst=alst)
+        d_lst = self._list_dict_y1(lst=alst)
         match_lst = d_lst[alst[0].y1]
         if len(match_lst) != 1:
             return False
@@ -3933,7 +3947,7 @@ class RuleAreaSingle(RuleAreaBase):
          Returns:
             List[Area]: Filtered Area List
         """
-        d_lst = self._list_dict_x1(lst=alst)
+        d_lst = self._list_dict_y1(lst=alst)
         return d_lst[alst[0].y1]
     # endregion IRuleArea Methods
 
@@ -3952,14 +3966,20 @@ class RuleAreaMulti(RuleAreaBase):
         if len(alst) == 0:
             return False
         d_lst = self._list_dict_y1(lst=alst)
-        match_lst = d_lst[alst[0].y1]
+        first = self._get_first_y1(ai=ai, alst=alst)
+        match_lst = d_lst[first.y1]
+        if len(match_lst) <= 1:
+            return False
+
         if ai.shape:
-            m = match_lst[0]
-            # multi are ofset left or right on x1, Usually right
-            # more likley this is a single
-            if m.x1 == ai.shape.x1:
+            all_match = True
+            for area in match_lst:
+                if area.y1 != ai.shape.y1:
+                    all_match = False
+                    break
+            if all_match is True:
                 return False
-        return len(match_lst) > 1
+        return True
 
     def get_area(self, ai: AreaInfo, alst: List[Area]) -> List[Area]:
         """
@@ -3971,9 +3991,9 @@ class RuleAreaMulti(RuleAreaBase):
          Returns:
             List[Area]: Filtered Area List
         """
-        first = alst[0]
+        first = self._get_first_y1(ai=ai, alst=alst)
         d_lst: Dict[int, List[Area]] = self._list_dict_y1(lst=alst) # grouped by y1
-        match_lst: List[Area] = d_lst[self._first.y1] # list of y1 matches
+        match_lst: List[Area] = d_lst[first.y1] # list of y1 matches
         
         upper: List[Area] = self._get_upper(first, d_lst)
         if len(upper) == 0:
@@ -3997,14 +4017,20 @@ class RuleAreaVertical(RuleAreaBase):
         # see: https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1ucb_1_1ContentResultSet.html
         if len(alst) < 2:
             return False
+        first = self._get_first_y1(ai=ai, alst=alst)
+        if ai.shape:
+            # vertical are ofset left or right on x1, Usually right
+            # more likley this is a single
+            if first.x1 == ai.shape.x1:
+                return False
         is_vert = True
-        first = alst[0]
         d_lst: Dict[int, List[Area]] = self._list_dict_x1(
             lst=alst)  # grouped by y1
         for area in d_lst[first.x1]:
             if area.x1 != first.x1:
                 is_vert = False
                 break
+        
         return is_vert
 
     def get_area(self, ai: AreaInfo, alst: List[Area]) -> List[Area]:
@@ -4019,7 +4045,7 @@ class RuleAreaVertical(RuleAreaBase):
         """       
         # remove any duplicates and return list.
         # is it unlikely there would ever be duplicates, but just in case.
-        first = alst[0]
+        first = self._get_first_y1(ai=ai, alst=alst)
         d_lst: Dict[int, List[Area]] = self._list_dict_x1(
             lst=alst)  # grouped by y1
         upper: List[Area] = d_lst[first.x1]
@@ -4086,7 +4112,7 @@ class RulesArea(IRulesArea):
     def _register_known_rules(self):
         pass
 
-    def _get_rule(self, alst: List[Area]) -> Union[IRuleArea, None]:
+    def _get_rule(self, ai: AreaInfo, alst: List[Area]) -> Union[IRuleArea, None]:
 
         match_inst = None
         for rule in self._rules:
@@ -4096,7 +4122,7 @@ class RulesArea(IRulesArea):
             else:
                 inst: IRuleArea = rule()
                 self._cache[key] = inst
-            if inst.get_is_match(alst):
+            if inst.get_is_match(ai=ai, alst=alst):
                 match_inst = inst
                 break
         return match_inst
@@ -4111,7 +4137,7 @@ class RulesArea(IRulesArea):
          Returns:
             List[Area]: Filtered Area List
         """
-        match = self._get_rule(alst)
+        match = self._get_rule(ai=ai, alst=alst)
         if match:
             return match.get_area(ai=ai, alst=alst)
         return None
