@@ -259,7 +259,7 @@ class CompileStructLinks(BaseCompile):
 
     def _process_direct(self, file: str):
         logger.info(
-            "CompileInterfaceLinks: Processing interface in file: %s", file)
+            "CompileStructLinks: Processing interface in file: %s", file)
         parse_struct('t', 'j', f=file)
 
     def _process_files(self):
