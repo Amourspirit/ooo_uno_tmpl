@@ -3513,7 +3513,7 @@ class ImageInfo:
 
             cord = get_cord(pix, APP_CONFIG.pixel_map_no_link)
             ai = AreaInfo(
-                is_inherited=found_px > 0,
+                is_inherited=found_px == APP_CONFIG.pixel_inherit,
                 shape=cord
                 )
             
