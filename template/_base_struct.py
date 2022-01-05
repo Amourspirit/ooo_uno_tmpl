@@ -32,6 +32,8 @@ class BaseStruct(BaseJson):
         set_data('namespace')
         set_data('from_imports')
         set_data('from_imports_typing')
+        # get lo ver if it exist. Defaut to False
+        self.libre_office_ver = json_data.get('libre_office_ver', False)
         quote: List[str] = data.get('quote', [])
         self.quote.update(quote)
         typings: List[str] = data.get('typings', [])

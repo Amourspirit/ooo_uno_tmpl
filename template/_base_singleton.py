@@ -25,6 +25,8 @@ class BaseSingleton(BaseJson):
         setattr(self, 'inherits', _inherits)
         set_data('imports')
         set_data('namespace')
+        # get lo ver if it exist. Defaut to False
+        self.libre_office_ver = json_data.get('libre_office_ver', False)
         sort = bool(json_data['parser_args'].get('sort', False))
         self.include_desc = bool(
             json_data['writer_args'].get('include_desc', True))

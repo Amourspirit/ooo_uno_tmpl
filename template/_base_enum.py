@@ -23,6 +23,8 @@ class BaseEnum(BaseJson):
         set_data('ns')
         set_data('desc')
         set_data('url', 'link')
+        # get lo ver if it exist. Defaut to False
+        self.libre_office_ver = json_data.get('libre_office_ver', False)
         self.sort = bool(json_data['parser_args'].get('sort', False))
         quote: List[str] = data.get('quote', [])
         self.quote.update(quote)

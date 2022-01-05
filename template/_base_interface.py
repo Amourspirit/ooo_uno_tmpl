@@ -25,6 +25,8 @@ class BaseInterface(BaseJson):
         setattr(self, 'inherits', _inherits)
         set_data('imports')
         set_data('namespace')
+        # get lo ver if it exist. Defaut to False
+        self.libre_office_ver = json_data.get('libre_office_ver', False)
         sort = bool(json_data['parser_args'].get('sort', False))
         self.attribs = self._get_attribs(json_data=json_data, sort=sort)
         setattr(self, 'requires_typing', data.get('requires_typing', False))

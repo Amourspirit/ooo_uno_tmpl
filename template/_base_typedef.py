@@ -25,6 +25,8 @@ class BaseTypeDef(BaseJson):
         set_data('desc')
         set_data('url', 'link')
         set_data('from_imports')
+        # get lo ver if it exist. Defaut to False
+        self.libre_office_ver = json_data.get('libre_office_ver', False)
         self.include_desc = bool(
             json_data['writer_args'].get('include_desc', True))
         quote: List[str] = data.get('quote', [])
