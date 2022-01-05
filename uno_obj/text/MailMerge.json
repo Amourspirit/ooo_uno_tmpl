@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.12",
-  "timestamp": "2022-01-04 17:30:14+00:00",
+  "version": "0.1.14",
+  "libre_office_ver": "7.2",
   "name": "MailMerge",
   "type": "service",
   "namespace": "com.sun.star.text",
@@ -14,6 +14,14 @@
   "data": {
     "from_imports": [
       [
+        "..sdb.data_access_descriptor",
+        "DataAccessDescriptor"
+      ],
+      [
+        ".x_mail_merge_broadcaster",
+        "XMailMergeBroadcaster"
+      ],
+      [
         "..util.x_cancellable",
         "XCancellable"
       ],
@@ -22,19 +30,15 @@
         "XPropertySet"
       ],
       [
-        ".x_mail_merge_broadcaster",
-        "XMailMergeBroadcaster"
-      ],
-      [
-        "..sdb.data_access_descriptor",
-        "DataAccessDescriptor"
-      ],
-      [
         "..task.x_job",
         "XJob"
       ]
     ],
     "from_imports_typing": [
+      [
+        "..sdbc.x_connection",
+        "XConnection"
+      ],
       [
         "..frame.x_model",
         "XModel"
@@ -46,19 +50,15 @@
       [
         "..sdbc.x_result_set",
         "XResultSet"
-      ],
-      [
-        "..sdbc.x_connection",
-        "XConnection"
       ]
     ],
     "quote": [
-      "typing.List[object]",
-      "XResultSet",
-      "XModel",
-      "XConnection",
       "typing.List[PropertyValue]",
-      "typing.List[str]"
+      "XResultSet",
+      "typing.List[str]",
+      "typing.List[object]",
+      "XConnection",
+      "XModel"
     ],
     "typings": [
       "typing.List[PropertyValue]",
