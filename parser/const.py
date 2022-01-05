@@ -60,6 +60,8 @@ class ValTypeEnum(IntEnum):
     """Const is a another value in the same constant class with a + int value"""
     CONST_MINUS_INT = auto()
     """Const is a another value in the same constant class with a - int value"""
+    IMPORT = auto()
+    """Value is a import"""
     def __str__(self) -> str:
         return self._name_
 
@@ -70,6 +72,7 @@ class Val:
     is_flags: bool = False
     val_type: ValTypeEnum = ValTypeEnum.INTEGER
     values: List[Union[int, str]] = field(default_factory=list)
+    p_type: Union[PythonType, None] = None
 
 class IRule(ABC):
     @abstractmethod
@@ -208,6 +211,7 @@ class Rules(IRules):
         self._reg_rule(rule=RuleNamedFlags)
         self._reg_rule(rule=RulePreviousName)
         self._reg_rule(rule=RulePreviousNamePlusMinusInt)
+        self._reg_rule(rule=RuleImport)
         self._reg_rule(rule=RuleDetail)
 
     def _get_rule(self, tag: Tag) -> Union[IRule, None]:
@@ -624,6 +628,47 @@ class RulePreviousNamePlusMinusInt(RuleBase):
             raise Exception(
                 f"{self.__class__.__name__}.get_val() Something went wrong. expected val was int but got {type(self._val)}")
 
+
+class RuleImport(RuleBase):
+    def __init__(self, rules: IRules) -> None:
+        super().__init__(rules=rules)
+        self._val = None
+
+    def get_is_match(self, tag: Tag) -> bool:
+        self._val = None
+        if not super().get_is_match(tag):
+            return False
+        if self._cached:
+            return True
+        parts = self._info_text.split("=")
+        if len(parts) != 2:
+            return False
+        part = parts[1]
+        if part.find('::') < 0:
+            return False
+        self._val = part.replace('::', '.').strip().lstrip('.')
+        return True
+
+    def get_val(self) -> Val:
+        """Gets a Val if there is a rule match"""
+        if self._cached:
+            return self._cached
+        if self._val is None:
+            raise Exception(
+                f"{self.__class__.__name__}.get_val() Value is missing. Did you run get_is_match() before get_val()?")
+        if isinstance(self._val, str):
+            si: SummaryInfo = self._rules.summaries[self.identity]
+            p_type = base.Util.get_python_type(self._val)
+            result = Val(text=si.name,
+                         identity=self.identity, is_flags=False,
+                         val_type=ValTypeEnum.IMPORT, values=[p_type.type],
+                         p_type=p_type)
+            self._val = None
+            self._rules.set_cached(result)
+            return result
+        else:
+            raise Exception(
+                f"{self.__class__.__name__}.get_val() Something went wrong. expected val was int but got {type(self._val)}")
 class RuleDetail(RuleBase):
     """Gets value from details section"""
     def __init__(self, rules: IRules) -> None:
@@ -1053,6 +1098,7 @@ class Parser(base.ParserBase):
         self._api_data: ApiData = ApiData(
             url_soup=self.url, allow_cache=self.allow_cache)
         self._soup = self._api_data.soup_obj
+        self._requires_typing: bool = False
         self._cache = {}
 
     # endregion init
@@ -1204,8 +1250,39 @@ class Parser(base.ParserBase):
         for itm in data:
             _id = itm.val.identity
             si = self._api_data.api_summary_dict[_id]
+            if si.p_type.requires_typing:
+                self._requires_typing = True
             types.append(si.p_type)
         self._cache[key] = types
+        return self._cache[key]
+    
+    @property
+    def imports(self) -> Set[str]:
+        key = 'imports'
+        if key in self._cache:
+            return self._cache[key]
+        info = self.get_info()
+        ns = info['namespace']
+        data = self._api_data.get_data_items()
+        im: Set[str] = set()
+        for itm in data:
+            if itm.val.p_type:
+                if itm.val.p_type.requires_typing:
+                    self._requires_typing = True
+                im.update(itm.val.p_type.get_all_imports())
+        self._cache[key] = base.Util.get_clean_imports(ns=ns, imports=im)
+        return self._cache[key]
+    
+    @property
+    def requires_typing(self) -> bool:
+        """Gets requires typing value"""
+        key = 'requires_typing'
+        if key in self._cache:
+            return self._cache[key]
+        # call the properties that determine requires typing
+        _ = self.python_types
+        _ = self.imports
+        self._cache[key] = self._requires_typing
         return self._cache[key]
     # endregion Properties
 
@@ -1239,11 +1316,11 @@ class ConstWriter(base.WriteBase):
             'write_template_long', False)
         self._indent_amt = 4
         self._file_full_path = None
-        self._p_name = None
-        self._p_namespace = None
-        self._p_fullname = None
-        self._p_url = None
-        self._p_desc = None
+        self._p_name: str = None
+        self._p_namespace: str = None
+        self._p_fullname: str = None
+        self._p_url: str = None
+        self._p_desc: str = None
         self._p_requires_typing = False
         self._p_from_imports = set()
         self._p_typing_imports = set()
@@ -1357,9 +1434,13 @@ class ConstWriter(base.WriteBase):
         key = '_get_from_imports'
         if key in self._cache:
             return self._cache[key]
-        lst = [
-            [base.APP_CONFIG.base_const, self._get_const_base_class()]
-        ]
+        lst = []
+        for ns in self._p_from_imports:
+            f, n = base.Util.get_rel_import(
+                i_str=ns, ns=self._p_namespace
+            )
+            lst.append([f, n])
+        lst.append([base.APP_CONFIG.base_const, self._get_const_base_class()])
         self._cache[key] = lst
         return self._cache[key]
 
@@ -1417,7 +1498,8 @@ class ConstWriter(base.WriteBase):
         self._p_data = self._parser.get_formated_data()
         if self._write_file or self._write_json:
             self._file_full_path = self._get_uno_obj_path()
-        self._p_requires_typing = self._parser.api_data.get_requires_typing()
+        self._p_requires_typing = self._parser.requires_typing
+        self._p_from_imports.update(self._parser.imports)
         # prime cache and set other params such as self._p_requires_typing
         self._get_quote_flat()
         self._get_typings()
@@ -1444,6 +1526,12 @@ class ConstWriter(base.WriteBase):
         for t in p_lst:
             if t.requires_typing:
                 t_set.add(t.type)
+        # get any typings that are added by sepecial rules
+        p_data = self._parser.get_data()
+        for itm in p_data:
+            if itm.val.p_type:
+                if itm.val.p_type.requires_typing:
+                    t_set.add(itm.val.p_type.type)
         self._cache[key] = list(t_set)
         return self._cache[key]
 
@@ -1626,7 +1714,8 @@ def _main():
     # for debugging
     # url = 'https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1security_1_1KeyUsage.html'
     # url = 'https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1awt_1_1FontWeight.html'
-    url = 'https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1i18n_1_1NumberFormatIndex.html'
+    # url = 'https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1i18n_1_1NumberFormatIndex.html'
+    url = 'https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1sdb_1_1application_1_1DatabaseObject.html'
     # sys.argv.extend(['--log-file', 'debug.log', '-v', '-n', '-u', url])
     # main()
     args = ('v', 'n')
