@@ -54,6 +54,10 @@ class ValTypeEnum(IntEnum):
     STRING = auto()
     INTEGER = auto()
     FLOAT = auto()
+    CONST = auto()
+    """Const is a another value in the same constant class"""
+    CONST_PLUS_INT = auto()
+    """Const is a another value in the same constant class with a + int value"""
 
 
 @dataclass
@@ -100,8 +104,16 @@ class IRules(ABC):
         """Gets is an id is in the cache"""
 
     @abstractmethod
+    def is_cached_by_name(self, name: str) -> bool:
+        """Gets is an name is in the cache"""
+
+    @abstractmethod
     def get_cached(self, sid: str) -> Val:
         """Gets a Val from cache"""
+
+    @abstractmethod
+    def get_cached_by_name(self, name: str) -> Union[Val, None]:
+        """Gets a Val from cache by name"""
 
     @abstractmethod
     def set_cached(self, val:Val) -> None:
@@ -129,6 +141,7 @@ class Rules(IRules):
         self._rules: List[IRule] = []
         self._cache = {}
         self. _cached_vals = {}
+        self._cached_names = {}
         self._register_known_rules()
         
     # region Methods
@@ -160,14 +173,26 @@ class Rules(IRules):
     def is_cached(self, sid: str) -> bool:
         """Gets is an id is in the cache"""
         return sid in self. _cached_vals
+
+    def is_cached_by_name(self, name: str) -> bool:
+        """Gets is an id is in the cache"""
+        return name in self._cached_names
     
     def get_cached(self, sid: str) -> Union[Val, None]:
         """Gets a Val from cache"""
         return self. _cached_vals.get(sid, None)
     
+    def get_cached_by_name(self, name: str) -> Union[Val, None]:
+        """Gets a Val from cache by name"""
+        if name in self._cached_names:
+            sid = self._cached_names[name]
+            return self.get_cached(sid=sid)
+        return None
+    
     def set_cached(self, val: Val) -> None:
         """set or updates cached"""
         self. _cached_vals[val.identity] = val
+        self._cached_names[val.text] = val.identity
     # endregion Cache
 
     def _reg_rule(self, rule: IRule):
@@ -178,6 +203,8 @@ class Rules(IRules):
         self._reg_rule(rule=RuleFloat)
         self._reg_rule(rule=RuleHex)
         self._reg_rule(rule=RuleNamedFlags)
+        self._reg_rule(rule=RulePreviousName)
+        self._reg_rule(rule=RulePreviousNamePlusMinusInt)
         self._reg_rule(rule=RuleDetail)
 
     def _get_rule(self, tag: Tag) -> Union[IRule, None]:
@@ -431,6 +458,7 @@ class RuleHex(RuleBase):
 
 
 class RuleNamedFlags(RuleBase):
+    "Get Flags matches suca as First | Second | Third"
     def __init__(self, rules: IRules) -> None:
         super().__init__(rules=rules)
         self._names: List[str] = None
@@ -496,6 +524,99 @@ class RuleNamedFlags(RuleBase):
         return None
     # endregion Private Methods
 
+
+class RulePreviousName(RuleBase):
+    def __init__(self, rules: IRules) -> None:
+        super().__init__(rules=rules)
+        self._val = None
+
+    def get_is_match(self, tag: Tag) -> bool:
+        self._val = None
+        if not super().get_is_match(tag):
+            return False
+        if self._cached:
+            return True
+        parts = self._info_text.split("=")
+        if len(parts) != 2:
+            return False
+        name: str = parts[1].strip()
+        if self._rules.is_cached_by_name(name):
+            self._val = name
+            return True
+        return False
+
+    def get_val(self) -> Val:
+        """Gets a Val if there is a rule match"""
+        if self._cached:
+            return self._cached
+        if self._val is None:
+            raise Exception(
+                f"{self.__class__.__name__}.get_val() Value is missing. Did you run get_is_match() before get_val()?")
+        if isinstance(self._val, str):
+            si: SummaryInfo = self._rules.summaries[self.identity]
+            result = Val(text=si.name,
+                         identity=self.identity, is_flags=False,
+                         val_type=ValTypeEnum.CONST, values=[self._val])
+            self._val = None
+            self._rules.set_cached(result)
+            return result
+        else:
+            raise Exception(
+                f"{self.__class__.__name__}.get_val() Something went wrong. expected val was int but got {type(self._val)}")
+
+
+class RulePreviousNamePlusMinusInt(RuleBase):
+    def __init__(self, rules: IRules) -> None:
+        super().__init__(rules=rules)
+        self._val = None
+
+    def get_is_match(self, tag: Tag) -> bool:
+        self._val = None
+        if not super().get_is_match(tag):
+            return False
+        if self._cached:
+            return True
+        parts = self._info_text.split("=")
+        if len(parts) != 2:
+            return False
+        name_plus: str = parts[1].strip()
+        # looking for format of TIME_START+4 or TIME_START + 4
+        sep = '+'
+        parts = name_plus.split(sep)
+        if len(parts) != 2:
+            sep = '-'
+            parts = name_plus.split(sep)
+            if len(parts) != 2:
+                return False
+        name = parts[0].strip()
+        if not self._rules.is_cached_by_name(name):
+            return False
+        i = 0
+        try:
+            i = int(parts[1].strip())
+        except:
+            return False
+        self._val = name + ' ' + sep + ' ' + str(i)
+        return True
+
+    def get_val(self) -> Val:
+        """Gets a Val if there is a rule match"""
+        if self._cached:
+            return self._cached
+        if self._val is None:
+            raise Exception(
+                f"{self.__class__.__name__}.get_val() Value is missing. Did you run get_is_match() before get_val()?")
+        if isinstance(self._val, str):
+            si: SummaryInfo = self._rules.summaries[self.identity]
+            result = Val(text=si.name,
+                         identity=self.identity, is_flags=False,
+                         val_type=ValTypeEnum.CONST_PLUS_INT, values=[self._val])
+            self._val = None
+            self._rules.set_cached(result)
+            return result
+        else:
+            raise Exception(
+                f"{self.__class__.__name__}.get_val() Something went wrong. expected val was int but got {type(self._val)}")
 
 class RuleDetail(RuleBase):
     """Gets value from details section"""
@@ -918,7 +1039,6 @@ class ApiData(base.APIData):
 
 # endregion API classes
 
-# endregion API classes
 class Parser(base.ParserBase):
     
     # region init
@@ -1495,7 +1615,8 @@ def _api():
 def _main():
     # for debugging
     # url = 'https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1security_1_1KeyUsage.html'
-    url = 'https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1awt_1_1FontWeight.html'
+    # url = 'https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1awt_1_1FontWeight.html'
+    url = 'https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1i18n_1_1NumberFormatIndex.html'
     # sys.argv.extend(['--log-file', 'debug.log', '-v', '-n', '-u', url])
     # main()
     args = ('v', 'n')
