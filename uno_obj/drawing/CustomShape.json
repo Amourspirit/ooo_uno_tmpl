@@ -1,0 +1,116 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.14",
+  "libre_office_ver": "7.2",
+  "name": "CustomShape",
+  "type": "service",
+  "namespace": "com.sun.star.drawing",
+  "parser_args": {
+    "sort": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "from_imports": [
+      [
+        ".text",
+        "Text"
+      ],
+      [
+        ".fill_properties",
+        "FillProperties"
+      ],
+      [
+        ".shape",
+        "Shape"
+      ],
+      [
+        ".shadow_properties",
+        "ShadowProperties"
+      ],
+      [
+        ".rotation_descriptor",
+        "RotationDescriptor"
+      ],
+      [
+        ".line_properties",
+        "LineProperties"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..beans.property_value",
+        "PropertyValue"
+      ]
+    ],
+    "quote": [
+      "typing.List[PropertyValue]"
+    ],
+    "typings": [
+      "typing.List[PropertyValue]"
+    ],
+    "requires_typing": true,
+    "name": "CustomShape",
+    "imports": [],
+    "namespace": "com.sun.star.drawing",
+    "extends": [
+      "com.sun.star.drawing.Shape",
+      "com.sun.star.drawing.FillProperties",
+      "com.sun.star.drawing.LineProperties",
+      "com.sun.star.drawing.ShadowProperties",
+      "com.sun.star.drawing.Text",
+      "com.sun.star.drawing.RotationDescriptor"
+    ],
+    "desc": [
+      "This service is for a CustomShape."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1drawing_1_1CustomShape.html",
+    "items": {
+      "types": [
+        {
+          "name": "CustomShapeGeometry",
+          "returns": "typing.List[PropertyValue]",
+          "desc": [
+            "This property describes the geometry of the CustomShape.",
+            "",
+            "The CustomShapeEngine that is used should be able to get on with the content of this property.",
+            "",
+            "If the CustomShapeEngine property is \\\"com.sun.star.drawing.EnhancedCustomShapeEngine\\\", then this property is containing properties as they are specified in the service com.sun.star.drawing.EnhancedCustomShapeGeometry"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ],
+      "properties": [
+        {
+          "name": "CustomShapeData",
+          "returns": "str",
+          "desc": [
+            "This property can be used to store data that the CustomShapeEngine may use for rendering."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "CustomShapeEngine",
+          "returns": "str",
+          "desc": [
+            "This property contains the CustomShapeEngine service name that has to be used for rendering."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "CustomShapeReplacementURL",
+          "returns": "str",
+          "desc": [
+            "This property describes the URL to a replacement graphic that could be displayed if the CustomShape engine is not available."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
+  }
+}

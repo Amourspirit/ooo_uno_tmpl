@@ -35,7 +35,7 @@ $ conda create --prefix ./env --file environment.yml
 Write env to Yaml
 -----------------
 
-conda env export > environment.yml
+$ conda env export > environment.yml
 
 active from command line
 ------------------------

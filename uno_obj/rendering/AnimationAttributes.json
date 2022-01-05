@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.8",
-  "timestamp": "2021-12-28 11:31:02+00:00",
+  "version": "0.1.14",
+  "libre_office_ver": "7.2",
   "type": "struct",
   "name": "AnimationAttributes",
   "namespace": "com.sun.star.rendering",
@@ -10,40 +10,39 @@
   },
   "writer_args": {
     "sort": true,
-    "auto_import": true,
-    "dynamic_struct": false
+    "dynamic_struct": false,
+    "include_desc": true
   },
   "data": {
     "name": "AnimationAttributes",
     "namespace": "com.sun.star.rendering",
     "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1rendering_1_1AnimationAttributes.html",
-    "quote": [
-      "RealSize2D"
-    ],
-    "typings": [],
-    "fullname": "com.sun.star.rendering.AnimationAttributes",
-    "desc": [
-      "This structure contains attributes needed to run an animation.",
-      "",
-      "**Since**",
-      "",
-      "    OOo 2.0"
-    ],
-    "extends": [],
-    "imports": [],
-    "auto_imports": [
+    "from_imports": [],
+    "from_imports_typing": [
       [
         "..geometry.real_size2_d",
         "RealSize2D"
       ]
     ],
-    "from_imports": [],
+    "quote": [
+      "RealSize2D"
+    ],
+    "typings": [],
     "requires_typing": true,
+    "fullname": "com.sun.star.rendering.AnimationAttributes",
+    "desc": [
+      "This structure contains attributes needed to run an animation.",
+      "",
+      "**since**",
+      "",
+      "    OOo 2.0"
+    ],
+    "imports": [],
+    "extends": [],
     "items": [
       {
         "name": "Duration",
         "type": "float",
-        "orig_type": "double",
         "lines": [
           "Preferred duration of the animation sequence in seconds."
         ]
@@ -51,18 +50,18 @@
       {
         "name": "RepeatMode",
         "type": "int",
-        "orig_type": "byte",
         "lines": [
           "Repeat mode of the animation sequence.",
+          "",
           "This value determines how the [0,1] parameter space of the animation should be swept through. Permissible values are given in AnimationRepeat."
         ]
       },
       {
         "name": "UntransformedSize",
         "type": "RealSize2D",
-        "orig_type": ".com.sun.star.geometry.RealSize2D",
         "lines": [
           "Size of the untransformed animation sequence.",
+          "",
           "This value specifies the size of the animation when rendered with the identity view transform. This permits e.g. XSprite implementations to cache rendered animation content in finite-sized bitmaps."
         ]
       }

@@ -1,0 +1,66 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.14",
+  "libre_office_ver": "7.2",
+  "name": "DefaultHelpProvider",
+  "type": "service",
+  "namespace": "com.sun.star.inspection",
+  "parser_args": {
+    "sort": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".x_object_inspector_ui",
+        "XObjectInspectorUI"
+      ]
+    ],
+    "quote": [
+      "XObjectInspectorUI"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "name": "DefaultHelpProvider",
+    "imports": [],
+    "namespace": "com.sun.star.inspection",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "implements a component which can default-fill the help section of an ObjectInspector.",
+      "",
+      "The component registers a XPropertyControlObserver at an XObjectInspectoryUI interface. Whenever it then is notified of a XPropertyControl getting the focus, it will try to deduce the extended help text of this control's window, and set this help text at the object inspector's help section."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1inspection_1_1DefaultHelpProvider.html",
+    "items": {
+      "methods": [
+        {
+          "name": "create",
+          "returns": "None",
+          "desc": [
+            "creates a help provider instance"
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "InspectorUI",
+              "XObjectInspectorUI",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

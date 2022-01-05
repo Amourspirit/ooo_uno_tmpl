@@ -1,0 +1,109 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.14",
+  "libre_office_ver": "7.2",
+  "name": "InstanceLocker",
+  "type": "service",
+  "namespace": "com.sun.star.embed",
+  "parser_args": {
+    "sort": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "from_imports": [
+      [
+        "..lang.x_component",
+        "XComponent"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".x_actions_approval",
+        "XActionsApproval"
+      ],
+      [
+        "..uno.x_interface",
+        "XInterface"
+      ]
+    ],
+    "quote": [
+      "XInterface",
+      "XActionsApproval"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "name": "InstanceLocker",
+    "imports": [],
+    "namespace": "com.sun.star.embed",
+    "extends": [
+      "com.sun.star.lang.XComponent"
+    ],
+    "desc": [
+      "The main task of this service is to prevent closing, terminating and/or etc.",
+      "",
+      "of controlled object.",
+      "",
+      "After creation the service adds a listener of requested type ( close, terminate and/or etc. ) to the controlled object and let the listener throw related veto exception until the service is disposed."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1embed_1_1InstanceLocker.html",
+    "items": {
+      "methods": [
+        {
+          "name": "InstanceLockerCtor1",
+          "returns": "None",
+          "desc": [
+            "is used to initialize the object on it's creation."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.frame.DoubleInitializationException",
+            "com.sun.star.uno.Exception"
+          ],
+          "args": [
+            [
+              "xInstance",
+              "XInterface",
+              "in"
+            ],
+            [
+              "nActions",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "InstanceLockerCtor2",
+          "returns": "None",
+          "desc": [
+            "is used to initialize the object on it's creation."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.frame.DoubleInitializationException",
+            "com.sun.star.uno.Exception"
+          ],
+          "args": [
+            [
+              "xInstance",
+              "XInterface",
+              "in"
+            ],
+            [
+              "nActions",
+              "int",
+              "in"
+            ],
+            [
+              "xApprove",
+              "XActionsApproval",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,123 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.14",
+  "libre_office_ver": "7.2",
+  "name": "DataAwareControlModel",
+  "type": "service",
+  "namespace": "com.sun.star.form",
+  "parser_args": {
+    "sort": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "from_imports": [
+      [
+        ".form_control_model",
+        "FormControlModel"
+      ],
+      [
+        ".x_load_listener",
+        "XLoadListener"
+      ],
+      [
+        ".x_bound_component",
+        "XBoundComponent"
+      ],
+      [
+        ".x_reset",
+        "XReset"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..beans.x_property_set",
+        "XPropertySet"
+      ]
+    ],
+    "quote": [
+      "XPropertySet"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "name": "DataAwareControlModel",
+    "imports": [],
+    "namespace": "com.sun.star.form",
+    "extends": [
+      "com.sun.star.form.FormControlModel",
+      "com.sun.star.form.XBoundComponent",
+      "com.sun.star.form.XLoadListener",
+      "com.sun.star.form.XReset"
+    ],
+    "desc": [
+      "is an abstract service for specialized FormControlModels which are data aware and thus can be bound to a data source.",
+      "",
+      "The connection between a data-aware control model and a form whose data the control should display is made by parentship relations. The parent of a data-aware control model (see com.sun.star.container.XChild, inherited via the FormControlModel and FormComponent services) has always to be a com.sun.star.form.component.DataForm.",
+      "",
+      "**since**",
+      "",
+      "    OOo 3.1"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1form_1_1DataAwareControlModel.html",
+    "items": {
+      "properties": [
+        {
+          "name": "BoundField",
+          "returns": "XPropertySet",
+          "desc": [
+            "references to the cursor field to which the control is bound.",
+            "",
+            "Applies only if the form the control model belongs to is loaded and the control is valid bound. The referenced field supports the com.sun.star.sdb.Column service."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "DataField",
+          "returns": "str",
+          "desc": [
+            "specifies the name of the bound database field.",
+            "",
+            "This property makes sense in the context of the control model only. Normally, a control model is a child of a com.sun.star.form.component.DataForm, which is bound to a higher level object such as a table or query - more general, a result set.",
+            "This member here describes the column of this result set which the control should act for.",
+            "",
+            "Not every control model can be bound to every database column. Usually, super services of the DataAwareControlModel restrict the column types they can be used with."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "InputRequired",
+          "returns": "bool",
+          "desc": [
+            "determines whether or not input into this field is required, when it is actually bound to a database field.",
+            "",
+            "If this property is set to FALSE, then the form runtime will not check the control/model for NULL values before submitting data to the database. Usually, if a control model is bound to a database field which cannot be NULL, and the model itself does not have a value, then the database update is prevented, showing an error message to the user. To disable this behavior on a per-control basis, use the InputRequired property.",
+            "",
+            "**since**",
+            "",
+            "    OOo 3.1"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "LabelControl",
+          "returns": "XPropertySet",
+          "desc": [
+            "references to a control model within the same document which should be used as a label.",
+            "",
+            "Any user interface action which needs to refer to the control is assumed to use this property.",
+            "A very common design method for forms is to group a data aware control with a label control, with the latter describing the content of the former. For instance, you may have a com.sun.star.form.component.TextField, which is bound to the e-mail column of your data source. Then you will probably add a com.sun.star.form.component.FixedText whose label is \\\"E-Mail\\\", and associate it with the TextField by setting it as LabelControl.",
+            "Now if you imagine a component offering data search in a form, this component will examine the LabelControl property, find the com.sun.star.form.component.FixedText, examine it's label, and use this label to refer to the com.sun.star.form.component.TextField.",
+            "",
+            "When setting the property, a number of constraints apply:"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
+  }
+}

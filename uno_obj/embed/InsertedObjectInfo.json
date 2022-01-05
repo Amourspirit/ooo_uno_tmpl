@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.8",
-  "timestamp": "2021-12-28 11:30:57+00:00",
+  "version": "0.1.14",
+  "libre_office_ver": "7.2",
   "type": "struct",
   "name": "InsertedObjectInfo",
   "namespace": "com.sun.star.embed",
@@ -10,38 +10,42 @@
   },
   "writer_args": {
     "sort": true,
-    "auto_import": true,
-    "dynamic_struct": false
+    "dynamic_struct": false,
+    "include_desc": true
   },
   "data": {
     "name": "InsertedObjectInfo",
     "namespace": "com.sun.star.embed",
     "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1embed_1_1InsertedObjectInfo.html",
-    "quote": [
-      "typing.List[NamedValue]"
-    ],
-    "typings": [
-      "typing.List[NamedValue]"
-    ],
-    "fullname": "com.sun.star.embed.InsertedObjectInfo",
-    "desc": [
-      "is intended to provide result of creation of an embedded object by dialog."
-    ],
-    "extends": [],
-    "imports": [],
-    "auto_imports": [
+    "from_imports": [],
+    "from_imports_typing": [
+      [
+        ".x_embedded_object",
+        "XEmbeddedObject"
+      ],
       [
         "..beans.named_value",
         "NamedValue"
       ]
     ],
-    "from_imports": [],
+    "quote": [
+      "XEmbeddedObject",
+      "typing.List[NamedValue]"
+    ],
+    "typings": [
+      "typing.List[NamedValue]"
+    ],
     "requires_typing": true,
+    "fullname": "com.sun.star.embed.InsertedObjectInfo",
+    "desc": [
+      "is intended to provide result of creation of an embedded object by dialog."
+    ],
+    "imports": [],
+    "extends": [],
     "items": [
       {
         "name": "Object",
-        "type": "object",
-        "orig_type": "XEmbeddedObject",
+        "type": "XEmbeddedObject",
         "lines": [
           "The new created embedded object."
         ]
@@ -49,9 +53,9 @@
       {
         "name": "Options",
         "type": "typing.List[NamedValue]",
-        "orig_type": "sequence< .com.sun.star.beans.NamedValue >",
         "lines": [
           "Container related options selected by user.",
+          "",
           "A dialog related to embedded object creation usually allows user to make some choices that can be container related. This information can be provided by this member."
         ]
       }

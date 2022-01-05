@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-16 19:01:50+00:00",
+  "version": "0.1.14",
+  "libre_office_ver": "7.2",
   "name": "UnoControlButtonModel",
   "type": "service",
   "namespace": "com.sun.star.awt",
@@ -14,53 +14,334 @@
   "data": {
     "from_imports": [
       [
-        ".uno_control_dialog_element",
-        "UnoControlDialogElement"
-      ],
-      [
-        "..util.x_cloneable",
-        "XCloneable"
-      ],
-      [
-        "..io.x_persist_object",
-        "XPersistObject"
-      ],
-      [
-        "..beans.x_property_set",
-        "XPropertySet"
-      ],
-      [
-        "..lang.x_component",
-        "XComponent"
-      ],
-      [
         ".uno_control_model",
         "UnoControlModel"
-      ],
-      [
-        "..beans.x_multi_property_set",
-        "XMultiPropertySet"
-      ],
-      [
-        "..uno.x_interface",
-        "XInterface"
       ]
     ],
+    "from_imports_typing": [
+      [
+        "..style.vertical_alignment",
+        "VerticalAlignment"
+      ],
+      [
+        "..util.color",
+        "Color"
+      ],
+      [
+        "..graphic.x_graphic",
+        "XGraphic"
+      ],
+      [
+        ".font_descriptor",
+        "FontDescriptor"
+      ]
+    ],
+    "quote": [
+      "Color",
+      "VerticalAlignment",
+      "XGraphic",
+      "FontDescriptor"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "UnoControlButtonModel",
+    "imports": [],
     "namespace": "com.sun.star.awt",
     "extends": [
-      "com.sun.star.awt.UnoControlDialogElement",
-      "com.sun.star.util.XCloneable",
-      "com.sun.star.io.XPersistObject",
-      "com.sun.star.beans.XPropertySet",
-      "com.sun.star.uno.XInterface",
-      "com.sun.star.awt.UnoControlModel",
-      "com.sun.star.beans.XMultiPropertySet",
-      "com.sun.star.lang.XComponent"
+      "com.sun.star.awt.UnoControlModel"
+    ],
+    "desc": [
+      "specifies the standard model of a UnoControlButton.",
+      "",
+      "**since**",
+      "",
+      "    OOo 2.0"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1awt_1_1UnoControlButtonModel.html",
-    "desc": [
-      "specifies the standard model of a UnoControlButton."
-    ]
+    "items": {
+      "properties": [
+        {
+          "name": "Align",
+          "returns": "int",
+          "desc": [
+            "specifies the horizontal alignment of the text in the control."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "BackgroundColor",
+          "returns": "Color",
+          "desc": [
+            "specifies the background color (RGB) of the control."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "DefaultButton",
+          "returns": "bool",
+          "desc": [
+            "specifies that the button is the default button on the document."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Enabled",
+          "returns": "bool",
+          "desc": [
+            "determines whether the control is enabled or disabled."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "FocusOnClick",
+          "returns": "bool",
+          "desc": [
+            "specifies whether the button control should grab the focus when clicked.",
+            "",
+            "If set to TRUE (which is the default), the button control automatically grabs the focus when the user clicks onto it with the mouse.",
+            "If set to FALSE, the focus is preserved when the user operates the button control with the mouse.",
+            "",
+            "**since**",
+            "",
+            "    OOo 2.0"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "FontDescriptor",
+          "returns": "FontDescriptor",
+          "desc": [
+            "specifies the font attributes of the text in the control."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "FontEmphasisMark",
+          "returns": "int",
+          "desc": [
+            "specifies the com.sun.star.text.FontEmphasis value of the text in the control."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "FontRelief",
+          "returns": "int",
+          "desc": [
+            "specifies the com.sun.star.text.FontRelief value of the text in the control."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Graphic",
+          "returns": "XGraphic",
+          "desc": [
+            "specifies a graphic to be displayed at the button",
+            "",
+            "If this property is present, it interacts with the ImageURL in the following way:",
+            "",
+            "**since**",
+            "",
+            "    OOo 2.1"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "HelpText",
+          "returns": "str",
+          "desc": [
+            "specifies the help text of the control."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "HelpURL",
+          "returns": "str",
+          "desc": [
+            "specifies the help URL of the control."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ImageAlign",
+          "returns": "int",
+          "desc": [
+            "specifies the alignment of the image inside the button as ImageAlign value."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ImagePosition",
+          "returns": "int",
+          "desc": [
+            "specifies the position of the image, if any, relative to the text, if any",
+            "",
+            "Valid values of this property are specified with ImagePosition.",
+            "",
+            "If this property is present, it supersedes the ImageAlign property - setting one of both properties sets the other one to the best possible match."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ImageURL",
+          "returns": "str",
+          "desc": [
+            "specifies a URL to an image to use for the button."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Label",
+          "returns": "str",
+          "desc": [
+            "specifies the label of the control."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "MultiLine",
+          "returns": "bool",
+          "desc": [
+            "specifies that the text may be displayed on more than one line.",
+            "",
+            "**since**",
+            "",
+            "    OOo 2.0"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Printable",
+          "returns": "bool",
+          "desc": [
+            "specifies that the control will be printed with the document."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "PushButtonType",
+          "returns": "int",
+          "desc": [
+            "specifies the default action of the button as PushButtonType value."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Repeat",
+          "returns": "bool",
+          "desc": [
+            "specifies whether the control should show repeating behavior.",
+            "",
+            "Normally, when you click a button with the mouse, you need to release the mouse button, and press it again. With this property set to TRUE, the button is repeatedly pressed while you hold down the mouse button.",
+            "",
+            "**since**",
+            "",
+            "    OOo 2.0"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "RepeatDelay",
+          "returns": "int",
+          "desc": [
+            "specifies the mouse repeat delay, in milliseconds.",
+            "",
+            "When the user presses a mouse in a control area where this triggers an action (such as pressing the button), then usual control implementations allow to repeatedly trigger this action, without the need to release the mouse button and to press it again. The delay between two such triggers is specified with this property.",
+            "",
+            "**since**",
+            "",
+            "    OOo 2.0"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "State",
+          "returns": "int",
+          "desc": [
+            "specifies the state of the control.",
+            "",
+            "If Toggle property is set to TRUE, the pressed state is enabled and its pressed state can be obtained with this property."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Tabstop",
+          "returns": "bool",
+          "desc": [
+            "specifies that the control can be reached with the TAB key."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "TextColor",
+          "returns": "Color",
+          "desc": [
+            "specifies the text color (RGB) of the control."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "TextLineColor",
+          "returns": "Color",
+          "desc": [
+            "specifies the text line color (RGB) of the control."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Toggle",
+          "returns": "bool",
+          "desc": [
+            "specifies whether the button should toggle on a single operation.",
+            "",
+            "If this property is set to TRUE, a single operation of the button control (pressing space while it is focused, or clicking onto it) toggles it between a pressed and a not pressed state.",
+            "",
+            "The default for this property is FALSE, which means the button behaves like a usual push button.",
+            "",
+            "**since**",
+            "",
+            "    OOo 2.0"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "VerticalAlign",
+          "returns": "VerticalAlignment",
+          "desc": [
+            "specifies the vertical alignment of the text in the control.",
+            "",
+            "**since**",
+            "",
+            "    OOo 2.0"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
   }
 }

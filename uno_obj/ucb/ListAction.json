@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.8",
-  "timestamp": "2021-12-28 11:31:05+00:00",
+  "version": "0.1.14",
+  "libre_office_ver": "7.2",
   "type": "struct",
   "name": "ListAction",
   "namespace": "com.sun.star.ucb",
@@ -10,29 +10,28 @@
   },
   "writer_args": {
     "sort": true,
-    "auto_import": true,
-    "dynamic_struct": false
+    "dynamic_struct": false,
+    "include_desc": true
   },
   "data": {
     "name": "ListAction",
     "namespace": "com.sun.star.ucb",
     "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1ucb_1_1ListAction.html",
+    "from_imports": [],
+    "from_imports_typing": [],
     "quote": [],
     "typings": [],
+    "requires_typing": false,
     "fullname": "com.sun.star.ucb.ListAction",
     "desc": [
       "This struct contains information needed in the notifications of a XDynamicResultSet."
     ],
-    "extends": [],
     "imports": [],
-    "auto_imports": [],
-    "from_imports": [],
-    "requires_typing": false,
+    "extends": [],
     "items": [
       {
         "name": "ActionInfo",
         "type": "object",
-        "orig_type": "any",
         "lines": [
           "depending on the content of ListAction.ListActionType the ListAction.ActionInfo could contain additional information about the changes happened (see table above)."
         ]
@@ -40,7 +39,6 @@
       {
         "name": "Count",
         "type": "int",
-        "orig_type": "long",
         "lines": [
           "The count of involved rows."
         ]
@@ -48,26 +46,18 @@
       {
         "name": "ListActionType",
         "type": "int",
-        "orig_type": "long",
         "lines": [
           "specifies the kind of modification happened to all assigned rows.",
-          "The value of the other members of this struct depend on the value of this member:",
-          "ActionInfo",
-          "WelcomeDynamicResultSetStruct required",
-          "n/a",
-          "allowed but not required...",
-          "n/a",
-          "type long required",
-          "allowed but not required...",
-          "The value for this member can be one of the ListActionType constants group."
+          "",
+          "The value of the other members of this struct depend on the value of this member:"
         ]
       },
       {
         "name": "Position",
         "type": "int",
-        "orig_type": "long",
         "lines": [
           "The position where something has happened (index begins with 1 as usual with JDBC ).",
+          "",
           "Its value does not necessary indicate the new position in the new com.sun.star.sdbc.XResultSet, but a position while doing the changes step by step beginning with the old com.sun.star.sdbc.XResultSet."
         ]
       }

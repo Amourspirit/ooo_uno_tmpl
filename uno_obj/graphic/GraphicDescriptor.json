@@ -1,0 +1,165 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.14",
+  "libre_office_ver": "7.2",
+  "name": "GraphicDescriptor",
+  "type": "service",
+  "namespace": "com.sun.star.graphic",
+  "parser_args": {
+    "sort": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "from_imports": [
+      [
+        "..beans.x_property_set",
+        "XPropertySet"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..awt.size",
+        "Size"
+      ]
+    ],
+    "quote": [
+      "Size"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "name": "GraphicDescriptor",
+    "imports": [],
+    "namespace": "com.sun.star.graphic",
+    "extends": [
+      "com.sun.star.beans.XPropertySet"
+    ],
+    "desc": [
+      "This service describes all graphic properties that are available via the com.sun.star.beans.XPropertySet interface.",
+      "",
+      "**since**",
+      "",
+      "    LibreOffice 6.1"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1graphic_1_1GraphicDescriptor.html",
+    "items": {
+      "properties": [
+        {
+          "name": "Alpha",
+          "returns": "bool",
+          "desc": [
+            "Indicates that it is a pixel graphic with an alpha channel.",
+            "",
+            "The status of this flag is not always clear if the graphic was not loaded at all, e.g. in case of just querying for the GraphicDescriptor"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Animated",
+          "returns": "bool",
+          "desc": [
+            "Indicates that it is a graphic that consists of several frames that can be played as an animation.",
+            "",
+            "The status of this flag is not always clear if the graphic was not loaded at all, e.g. in case of just querying for the GraphicDescriptor"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "BitsPerPixel",
+          "returns": "int",
+          "desc": [
+            "The number of bits per pixel used for the pixel graphic.",
+            "",
+            "This property is not available for vector graphics and may not be available for some kinds of pixel graphics"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "GraphicType",
+          "returns": "int",
+          "desc": [
+            "The type of the graphic."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Linked",
+          "returns": "bool",
+          "desc": [
+            "Indicates that the graphic is an external linked graphic.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 6.1"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "MimeType",
+          "returns": "str",
+          "desc": [
+            "The MimeType of the loaded graphic.",
+            "",
+            "The mime can be the original mime type of the graphic source the graphic container was constructed from or it can be the internal mime type image/x-vclgraphic, in which case the original mime type is not available anymore",
+            "",
+            "Currently, the following mime types are supported for loaded graphics:"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "OriginURL",
+          "returns": "str",
+          "desc": [
+            "The URL of the location from where the graphic was loaded from.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 6.1"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Size100thMM",
+          "returns": "Size",
+          "desc": [
+            "The Size of the graphic in 100th mm.",
+            "",
+            "This property may not be available in case of pixel graphics or if the logical size can not be determined correctly for some formats without loading the whole graphic"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "SizePixel",
+          "returns": "Size",
+          "desc": [
+            "The Size of the graphic in pixel.",
+            "",
+            "This property may not be available in case of vector graphics or if the pixel size can not be determined correctly for some formats without loading the whole graphic"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Transparent",
+          "returns": "bool",
+          "desc": [
+            "Indicates that it is a transparent graphic.",
+            "",
+            "This property is always TRUE for vector graphics. The status of this flag is not always clear if the graphic was not loaded at all, e.g. in case of just querying for the GraphicDescriptor."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
+  }
+}

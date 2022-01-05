@@ -1,0 +1,81 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.14",
+  "libre_office_ver": "7.2",
+  "name": "DatabaseAccessDataSource",
+  "type": "service",
+  "namespace": "com.sun.star.sdb",
+  "parser_args": {
+    "sort": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "from_imports": [
+      [
+        ".x_completed_connection",
+        "XCompletedConnection"
+      ],
+      [
+        "..beans.x_property_set",
+        "XPropertySet"
+      ],
+      [
+        "..sdbc.x_data_source",
+        "XDataSource"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..ucb.remember_authentication",
+        "RememberAuthentication"
+      ]
+    ],
+    "quote": [
+      "RememberAuthentication"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "name": "DatabaseAccessDataSource",
+    "imports": [],
+    "namespace": "com.sun.star.sdb",
+    "extends": [
+      "com.sun.star.beans.XPropertySet",
+      "com.sun.star.sdbc.XDataSource",
+      "com.sun.star.sdb.XCompletedConnection"
+    ],
+    "desc": [
+      "is a factory to create data access beans.",
+      "",
+      "Data access beans are shared among components, so if an already existing bean is requested, the existing one is returned.",
+      "",
+      ".. deprecated::",
+      "",
+      "    Class is deprecated."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1sdb_1_1DatabaseAccessDataSource.html",
+    "items": {
+      "properties": [
+        {
+          "name": "PasswordMode",
+          "returns": "RememberAuthentication",
+          "desc": [
+            "determines the password handling."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "URL",
+          "returns": "str",
+          "desc": [
+            "locates the database access bean."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
+  }
+}

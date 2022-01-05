@@ -1,0 +1,174 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.14",
+  "libre_office_ver": "7.2",
+  "name": "LineDiagram",
+  "type": "service",
+  "namespace": "com.sun.star.chart",
+  "parser_args": {
+    "sort": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "from_imports": [
+      [
+        ".chart_axis_x_supplier",
+        "ChartAxisXSupplier"
+      ],
+      [
+        ".chart_two_axis_y_supplier",
+        "ChartTwoAxisYSupplier"
+      ],
+      [
+        ".chart_statistics",
+        "ChartStatistics"
+      ],
+      [
+        ".dim3_d_diagram",
+        "Dim3DDiagram"
+      ],
+      [
+        ".diagram",
+        "Diagram"
+      ],
+      [
+        ".stackable_diagram",
+        "StackableDiagram"
+      ],
+      [
+        ".chart_axis_z_supplier",
+        "ChartAxisZSupplier"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..awt.size",
+        "Size"
+      ],
+      [
+        "..graphic.x_graphic",
+        "XGraphic"
+      ]
+    ],
+    "quote": [
+      "XGraphic",
+      "Size"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "name": "LineDiagram",
+    "imports": [],
+    "namespace": "com.sun.star.chart",
+    "extends": [
+      "com.sun.star.chart.Diagram",
+      "com.sun.star.chart.ChartStatistics",
+      "com.sun.star.chart.ChartAxisXSupplier",
+      "com.sun.star.chart.ChartTwoAxisYSupplier",
+      "com.sun.star.chart.ChartAxisZSupplier",
+      "com.sun.star.chart.Dim3DDiagram",
+      "com.sun.star.chart.StackableDiagram"
+    ],
+    "desc": [
+      "specifies line, spline and symbol diagrams.",
+      "",
+      "**since**",
+      "",
+      "    LibreOffice 6.1"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1chart_1_1LineDiagram.html",
+    "items": {
+      "properties": [
+        {
+          "name": "Lines",
+          "returns": "bool",
+          "desc": [
+            "determines if the chart type has lines connecting the data points or contains just symbols."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "SplineOrder",
+          "returns": "int",
+          "desc": [
+            "specifies the power of the polynomials used for spline calculation",
+            "",
+            "This property is only valid for B-splines"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "SplineResolution",
+          "returns": "int",
+          "desc": [
+            "determines the number of sampling points of a spline"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "SplineType",
+          "returns": "int",
+          "desc": [
+            "determines if the chart is a spline-chart type and specifies the type of splines.",
+            "",
+            "You can set the following values:"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "SymbolBitmap",
+          "returns": "XGraphic",
+          "desc": [
+            "Set this property to a graphic object which is then used as symbol for all series.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 6.1"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "SymbolBitmapURL",
+          "returns": "str",
+          "desc": [
+            "Set this property to any valid URL that points to a graphic file.",
+            "",
+            "This graphic is then used as symbol for all series.",
+            "",
+            "When you query this value you get an internal URL of the embedded graphic."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "SymbolSize",
+          "returns": "Size",
+          "desc": [
+            "specifies the size of symbols in 1/100th of a millimeter."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "SymbolType",
+          "returns": "int",
+          "desc": [
+            "determines which type of symbols are displayed.",
+            "",
+            "In this interface, only the two values ChartSymbolType.NONE and ChartSymbolType.AUTO are supported. Later versions may support the selection of the symbols shape.",
+            "",
+            "If you set this property to ChartSymbolType.AUTO, you can change the symbol shape for objects supporting the service ChartDataPointProperties or ChartDataRowProperties."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
+  }
+}

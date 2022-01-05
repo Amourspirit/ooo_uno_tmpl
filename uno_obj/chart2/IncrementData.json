@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.8",
-  "timestamp": "2021-12-28 11:31:03+00:00",
+  "version": "0.1.14",
+  "libre_office_ver": "7.2",
   "type": "struct",
   "name": "IncrementData",
   "namespace": "com.sun.star.chart2",
@@ -10,67 +10,67 @@
   },
   "writer_args": {
     "sort": true,
-    "auto_import": true,
-    "dynamic_struct": false
+    "dynamic_struct": false,
+    "include_desc": true
   },
   "data": {
     "name": "IncrementData",
     "namespace": "com.sun.star.chart2",
     "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1chart2_1_1IncrementData.html",
+    "from_imports": [],
+    "from_imports_typing": [
+      [
+        ".sub_increment",
+        "SubIncrement"
+      ]
+    ],
     "quote": [
       "typing.List[SubIncrement]"
     ],
     "typings": [
       "typing.List[SubIncrement]"
     ],
+    "requires_typing": true,
     "fullname": "com.sun.star.chart2.IncrementData",
     "desc": [
       "An IncrementData describes how tickmarks are positioned on the scale of an axis."
     ],
-    "extends": [],
     "imports": [],
-    "auto_imports": [
-      [
-        ".sub_increment",
-        "SubIncrement"
-      ]
-    ],
-    "from_imports": [],
-    "requires_typing": true,
+    "extends": [],
     "items": [
       {
         "name": "BaseValue",
         "type": "object",
-        "orig_type": "any",
         "lines": [
           "if the any contains a double value this is used as a fixed BaseValue.",
+          "",
           "Otherwise, if the any is empty or contains an incompatible type, the BaseValue is meant to be calculated automatically by the view component representing the model containing this increment."
         ]
       },
       {
         "name": "Distance",
         "type": "object",
-        "orig_type": "any",
         "lines": [
           "if the any contains a double value this is used as a fixed Distance value.",
+          "",
           "Otherwise, if the any is empty or contains an incompatible type, the Distance is meant to be calculated automatically by the view component representing the model containing this increment."
         ]
       },
       {
         "name": "PostEquidistant",
         "type": "object",
-        "orig_type": "any",
         "lines": [
           "PostEquidistant rules whether the member Distance describes a distance before or after the scaling is applied.",
+          "",
           "If PostEquidistant equals TRUE Distance is given in values after XScaling is applied, thus resulting main tickmarks will always look equidistant on the screen. If PostEquidistant equals FALSE Distance is given in values before XScaling is applied."
         ]
       },
       {
         "name": "SubIncrements",
         "type": "typing.List[SubIncrement]",
-        "orig_type": "sequence< SubIncrement >",
         "lines": [
           "SubIncrements describes the positioning of further sub tickmarks on the scale of an axis.",
+          "",
           "The first SubIncrement in this sequence determines how the distance between two neighboring main tickmarks is divided for positioning of further sub tickmarks. Every following SubIncrement determines the positions of subsequent tickmarks in relation to their parent tickmarks given by the preceding SubIncrement."
         ]
       }

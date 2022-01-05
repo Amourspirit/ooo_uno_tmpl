@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.8",
-  "timestamp": "2021-12-28 11:30:58+00:00",
+  "version": "0.1.14",
+  "libre_office_ver": "7.2",
   "type": "struct",
   "name": "ChangesEvent",
   "namespace": "com.sun.star.util",
@@ -10,45 +10,51 @@
   },
   "writer_args": {
     "sort": true,
-    "auto_import": true,
-    "dynamic_struct": false
+    "dynamic_struct": false,
+    "include_desc": true
   },
   "data": {
     "name": "ChangesEvent",
     "namespace": "com.sun.star.util",
     "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1util_1_1ChangesEvent.html",
-    "quote": [],
-    "typings": [],
-    "fullname": "com.sun.star.util.ChangesEvent",
-    "desc": [
-      "This event is fired when a set of changes becomes effective on the source of the event."
-    ],
-    "extends": [
-      "com.sun.star.lang.EventObject"
-    ],
-    "imports": [],
-    "auto_imports": [],
     "from_imports": [
       [
         "..lang.event_object",
         "EventObject"
       ]
     ],
-    "requires_typing": false,
+    "from_imports_typing": [
+      [
+        ".changes_set",
+        "ChangesSet"
+      ]
+    ],
+    "quote": [
+      "ChangesSet"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "fullname": "com.sun.star.util.ChangesEvent",
+    "desc": [
+      "This event is fired when a set of changes becomes effective on the source of the event."
+    ],
+    "imports": [],
+    "extends": [
+      "com.sun.star.lang.EventObject"
+    ],
     "items": [
       {
         "name": "Base",
         "type": "object",
-        "orig_type": "any",
         "lines": [
           "contains the accessor to the common root of the changed elements.",
+          "",
           "Type and value of the accessor depend on the service."
         ]
       },
       {
         "name": "Changes",
-        "type": "object",
-        "orig_type": "ChangesSet",
+        "type": "ChangesSet",
         "lines": [
           "contains the changes which occurred."
         ]

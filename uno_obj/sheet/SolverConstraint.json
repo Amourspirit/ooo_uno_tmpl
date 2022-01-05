@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.8",
-  "timestamp": "2021-12-28 11:31:01+00:00",
+  "version": "0.1.14",
+  "libre_office_ver": "7.2",
   "type": "struct",
   "name": "SolverConstraint",
   "namespace": "com.sun.star.sheet",
@@ -10,44 +10,47 @@
   },
   "writer_args": {
     "sort": true,
-    "auto_import": true,
-    "dynamic_struct": false
+    "dynamic_struct": false,
+    "include_desc": true
   },
   "data": {
     "name": "SolverConstraint",
     "namespace": "com.sun.star.sheet",
     "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1sheet_1_1SolverConstraint.html",
+    "from_imports": [],
+    "from_imports_typing": [
+      [
+        "..table.cell_address",
+        "CellAddress"
+      ],
+      [
+        ".solver_constraint_operator",
+        "SolverConstraintOperator"
+      ]
+    ],
     "quote": [
-      "CellAddress"
+      "CellAddress",
+      "SolverConstraintOperator"
     ],
     "typings": [],
+    "requires_typing": true,
     "fullname": "com.sun.star.sheet.SolverConstraint",
     "desc": [
       "is used to specify a constraint for a solver model."
     ],
-    "extends": [],
     "imports": [],
-    "auto_imports": [
-      [
-        "..table.cell_address",
-        "CellAddress"
-      ]
-    ],
-    "from_imports": [],
-    "requires_typing": true,
+    "extends": [],
     "items": [
       {
         "name": "Left",
         "type": "CellAddress",
-        "orig_type": "com.sun.star.table.CellAddress",
         "lines": [
           "The address of the cell that is constrained."
         ]
       },
       {
         "name": "Operator",
-        "type": "object",
-        "orig_type": "SolverConstraintOperator",
+        "type": "SolverConstraintOperator",
         "lines": [
           "The type of the constraint."
         ]
@@ -55,7 +58,6 @@
       {
         "name": "Right",
         "type": "object",
-        "orig_type": "any",
         "lines": [
           "The comparison value, of type double or com.sun.star.table.CellAddress."
         ]

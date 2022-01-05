@@ -1,0 +1,78 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.14",
+  "libre_office_ver": "7.2",
+  "name": "ConfigurableUIElement",
+  "type": "service",
+  "namespace": "com.sun.star.ui",
+  "parser_args": {
+    "sort": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "from_imports": [
+      [
+        ".ui_element",
+        "UIElement"
+      ],
+      [
+        ".xui_element_settings",
+        "XUIElementSettings"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".xui_configuration_manager",
+        "XUIConfigurationManager"
+      ]
+    ],
+    "quote": [
+      "XUIConfigurationManager"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "name": "ConfigurableUIElement",
+    "imports": [],
+    "namespace": "com.sun.star.ui",
+    "extends": [
+      "com.sun.star.ui.UIElement",
+      "com.sun.star.ui.XUIElementSettings"
+    ],
+    "desc": [
+      "specifies a configurable user interface element that supports persistence.",
+      "",
+      "Configurable user interface elements are:",
+      "",
+      "**since**",
+      "",
+      "    OOo 2.0"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1ui_1_1ConfigurableUIElement.html",
+    "items": {
+      "properties": [
+        {
+          "name": "ConfigurationSource",
+          "returns": "XUIConfigurationManager",
+          "desc": [
+            "specifies the configuration source of this user interface element.",
+            "",
+            "If the property Persistent is TRUE changes on the structure of the user interface element are written back to configuration source. When this property is changed, afterwards XUIElementSettings.updateSettings() must be called so the user interface element tries to retrieve its settings from the new user interface configuration manager."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Persistent",
+          "returns": "bool",
+          "desc": [
+            "specifies if the user interface element stores changes of its structure to its creator source defined by the property ConfigurationSource."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
+  }
+}

@@ -1,16 +1,22 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.8",
-  "timestamp": "2021-12-27 22:15:02+00:00",
+  "version": "0.1.12",
+  "timestamp": "2022-01-04 18:11:38+00:00",
   "name": "XFont",
   "type": "interface",
   "namespace": "com.sun.star.awt",
   "parser_args": {
     "sort": true
   },
-  "writer_args": {},
+  "writer_args": {
+    "include_desc": true
+  },
   "data": {
     "from_imports": [
+      [
+        ".x_font2",
+        "XFont2"
+      ],
       [
         "..uno.x_interface",
         "XInterface"
@@ -18,17 +24,17 @@
     ],
     "from_imports_typing": [
       [
-        ".font_descriptor",
-        "FontDescriptor"
-      ],
-      [
         ".simple_font_metric",
         "SimpleFontMetric"
+      ],
+      [
+        ".font_descriptor",
+        "FontDescriptor"
       ]
     ],
     "quote": [
-      "FontDescriptor",
       "typing.List[str]",
+      "FontDescriptor",
       "SimpleFontMetric",
       "typing.List[int]"
     ],
@@ -41,7 +47,8 @@
     "imports": [],
     "namespace": "com.sun.star.awt",
     "extends": [
-      "com.sun.star.uno.XInterface"
+      "com.sun.star.uno.XInterface",
+      "com.sun.star.awt.XFont2"
     ],
     "desc": [
       "describes a font on a specific device.",

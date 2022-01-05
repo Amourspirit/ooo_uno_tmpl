@@ -393,7 +393,8 @@ class WriterTypeDef(base.WriteBase):
         json_dict = {
             "id": JSON_ID,
             "version": __version__,
-            "timestamp": str(base.Util.get_timestamp_utc()),
+            # "timestamp": str(base.Util.get_timestamp_utc()),
+            "libre_office_ver": base.APP_CONFIG.libre_office_ver,
             "name": t_def.name,
             "type": "typedef",
             "namespace": p_dict['namespace'],
@@ -454,8 +455,7 @@ class WriterTypeDef(base.WriteBase):
         if self._write_template_long is False:
             return self._template
         t = self._template
-        
-        
+        t = t.replace('{libre_office_ver}', base.APP_CONFIG.libre_office_ver)
         t = t.replace('{name}', t_def.name)
         t = t.replace('{ns}', str(self._p_namespace))
         t = t.replace('{link}', self._p_url)
@@ -506,7 +506,8 @@ class WriterTypeDef(base.WriteBase):
         key = '_get_uno_obj_path_' + t_def.id
         if key in self._cache:
             return self._cache[key]
-        _p_name = base.Util.camel_to_snake(t_def.name)
+        # _p_name = base.Util.camel_to_snake(t_def.name)
+        _p_name = t_def.name
         uno_obj_path = Path(self._path_dir.parent,
                             base.APP_CONFIG.uno_base_dir)
         name_parts: List[str] = self._p_namespace.split('.')

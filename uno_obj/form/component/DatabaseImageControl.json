@@ -1,0 +1,68 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.14",
+  "libre_office_ver": "7.2",
+  "name": "DatabaseImageControl",
+  "type": "service",
+  "namespace": "com.sun.star.form.component",
+  "parser_args": {
+    "sort": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "from_imports": [
+      [
+        "..data_aware_control_model",
+        "DataAwareControlModel"
+      ],
+      [
+        "..x_image_producer_supplier",
+        "XImageProducerSupplier"
+      ],
+      [
+        "...awt.uno_control_image_control_model",
+        "UnoControlImageControlModel"
+      ]
+    ],
+    "from_imports_typing": [],
+    "quote": [],
+    "typings": [],
+    "requires_typing": false,
+    "name": "DatabaseImageControl",
+    "imports": [],
+    "namespace": "com.sun.star.form.component",
+    "extends": [
+      "com.sun.star.awt.UnoControlImageControlModel",
+      "com.sun.star.form.DataAwareControlModel",
+      "com.sun.star.form.XImageProducerSupplier"
+    ],
+    "desc": [
+      "specifies the model of a control used for displaying images stored in a database.",
+      "",
+      "As every com.sun.star.form.DataAwareControlModel, an image control can be bound to a database field. This means that for instance with every record change, the content of the database field is taken, interpreted as image, and displayed in the control.",
+      "Unlike other more text-based controls, it does not interpret the content of the field as text or double, but as binary stream (see com.sun.star.sdb.XColumn.getBinaryStream()).",
+      "",
+      "Usually, an image control model can be bound to binary columns only, namely com.sun.star.sdbc.DataType.BINARY, com.sun.star.sdbc.DataType.VARBINARY, com.sun.star.sdbc.DataType.LONGVARBINARY, com.sun.star.sdbc.DataType.OTHER, com.sun.star.sdbc.DataType.LONGVARCHAR",
+      "",
+      "Note that besides taking the image to be displayed from the bound field, there is another option. The com.sun.star.awt.UnoControlImageControlModel.ImageURL property specifies the URL of an image to be displayed. If this property is changed from outside, the respective file is loaded and set as image source.",
+      "",
+      "In a usual data form, the scenario will be as follows:"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1form_1_1component_1_1DatabaseImageControl.html",
+    "items": {
+      "properties": [
+        {
+          "name": "ReadOnly",
+          "returns": "bool",
+          "desc": [
+            "indicates if it is possible to change the image being displayed."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
+  }
+}

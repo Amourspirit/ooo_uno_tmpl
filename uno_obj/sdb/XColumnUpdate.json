@@ -1,14 +1,16 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.8",
-  "timestamp": "2021-12-27 22:15:15+00:00",
+  "version": "0.1.12",
+  "timestamp": "2022-01-04 18:09:51+00:00",
   "name": "XColumnUpdate",
   "type": "interface",
   "namespace": "com.sun.star.sdb",
   "parser_args": {
     "sort": true
   },
-  "writer_args": {},
+  "writer_args": {
+    "include_desc": true
+  },
   "data": {
     "from_imports": [
       [
@@ -18,27 +20,27 @@
     ],
     "from_imports_typing": [
       [
-        "..io.x_input_stream",
-        "XInputStream"
+        "..util.date",
+        "Date"
       ],
       [
         "..util.date_time",
         "DateTime"
       ],
       [
-        "..util.date",
-        "Date"
-      ],
-      [
         "..util.time",
         "Time"
+      ],
+      [
+        "..io.x_input_stream",
+        "XInputStream"
       ]
     ],
     "quote": [
-      "XInputStream",
       "DateTime",
-      "Time",
       "Date",
+      "Time",
+      "XInputStream",
       "typing.List[int]"
     ],
     "typings": [
@@ -232,7 +234,7 @@
           "args": [
             [
               "x",
-              "object",
+              "int",
               "in"
             ]
           ]

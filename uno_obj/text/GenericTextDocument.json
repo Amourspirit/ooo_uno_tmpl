@@ -1,0 +1,262 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.14",
+  "libre_office_ver": "7.2",
+  "name": "GenericTextDocument",
+  "type": "service",
+  "namespace": "com.sun.star.text",
+  "parser_args": {
+    "sort": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "from_imports": [
+      [
+        ".x_footnotes_supplier",
+        "XFootnotesSupplier"
+      ],
+      [
+        "..util.x_refreshable",
+        "XRefreshable"
+      ],
+      [
+        "..beans.x_property_set",
+        "XPropertySet"
+      ],
+      [
+        "..util.x_searchable",
+        "XSearchable"
+      ],
+      [
+        ".x_chapter_numbering_supplier",
+        "XChapterNumberingSupplier"
+      ],
+      [
+        "..util.x_number_formats_supplier",
+        "XNumberFormatsSupplier"
+      ],
+      [
+        ".x_text_tables_supplier",
+        "XTextTablesSupplier"
+      ],
+      [
+        "..util.x_replaceable",
+        "XReplaceable"
+      ],
+      [
+        ".x_text_sections_supplier",
+        "XTextSectionsSupplier"
+      ],
+      [
+        "..tiledrendering.x_tiled_renderable",
+        "XTiledRenderable"
+      ],
+      [
+        ".x_bookmarks_supplier",
+        "XBookmarksSupplier"
+      ],
+      [
+        ".x_reference_marks_supplier",
+        "XReferenceMarksSupplier"
+      ],
+      [
+        ".x_text_document",
+        "XTextDocument"
+      ],
+      [
+        "..document.office_document",
+        "OfficeDocument"
+      ],
+      [
+        ".x_text_embedded_objects_supplier",
+        "XTextEmbeddedObjectsSupplier"
+      ],
+      [
+        ".x_document_indexes_supplier",
+        "XDocumentIndexesSupplier"
+      ],
+      [
+        "..style.x_style_families_supplier",
+        "XStyleFamiliesSupplier"
+      ],
+      [
+        ".x_text_fields_supplier",
+        "XTextFieldsSupplier"
+      ],
+      [
+        ".x_text_frames_supplier",
+        "XTextFramesSupplier"
+      ],
+      [
+        "..lang.x_multi_service_factory",
+        "XMultiServiceFactory"
+      ],
+      [
+        ".x_page_printable",
+        "XPagePrintable"
+      ],
+      [
+        ".x_endnotes_supplier",
+        "XEndnotesSupplier"
+      ],
+      [
+        ".x_text_graphic_objects_supplier",
+        "XTextGraphicObjectsSupplier"
+      ],
+      [
+        ".web_document",
+        "WebDocument"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..lang.locale",
+        "Locale"
+      ]
+    ],
+    "quote": [
+      "Locale"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "name": "GenericTextDocument",
+    "imports": [],
+    "namespace": "com.sun.star.text",
+    "extends": [
+      "com.sun.star.util.XNumberFormatsSupplier",
+      "com.sun.star.text.XTextSectionsSupplier",
+      "com.sun.star.text.XTextFramesSupplier",
+      "com.sun.star.text.XTextFieldsSupplier",
+      "com.sun.star.text.XDocumentIndexesSupplier",
+      "com.sun.star.text.XBookmarksSupplier",
+      "com.sun.star.style.XStyleFamiliesSupplier",
+      "com.sun.star.text.XTextTablesSupplier",
+      "com.sun.star.text.XTextEmbeddedObjectsSupplier",
+      "com.sun.star.text.XTextGraphicObjectsSupplier",
+      "com.sun.star.beans.XPropertySet",
+      "com.sun.star.text.XChapterNumberingSupplier",
+      "com.sun.star.text.XReferenceMarksSupplier",
+      "com.sun.star.text.XPagePrintable",
+      "com.sun.star.util.XReplaceable",
+      "com.sun.star.text.XEndnotesSupplier",
+      "com.sun.star.text.XFootnotesSupplier",
+      "com.sun.star.tiledrendering.XTiledRenderable",
+      "com.sun.star.util.XRefreshable",
+      "com.sun.star.util.XSearchable",
+      "com.sun.star.text.XTextDocument",
+      "com.sun.star.lang.XMultiServiceFactory",
+      "com.sun.star.document.OfficeDocument",
+      "com.sun.star.text.WebDocument"
+    ],
+    "desc": [
+      "A text document is a model component which contains text structured by paragraphs.",
+      "",
+      "Each paragraph and each portion of text can be fitted with some attributes (technically properties).",
+      "",
+      "It's declared as generic text document, because its function is needed by different derived services (TextDocument/WebDocument/GlobalDocument).",
+      "",
+      "In addition, all text objects can be searched.",
+      "",
+      "**since**",
+      "",
+      "    OOo 1.1.2"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1text_1_1GenericTextDocument.html",
+    "items": {
+      "properties": [
+        {
+          "name": "CharLocale",
+          "returns": "Locale",
+          "desc": [
+            "contains the identifier of the default locale of the document."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "CharacterCount",
+          "returns": "int",
+          "desc": [
+            "contains the count of all characters in the document."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "IndexAutoMarkFileURL",
+          "returns": "str",
+          "desc": [
+            "specifies the concordance file taken into account when creating an index.",
+            "",
+            "When no concordance file should be used the string is empty. Used for text documents only.",
+            "",
+            "**since**",
+            "",
+            "    OOo 1.1.2"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ParagraphCount",
+          "returns": "int",
+          "desc": [
+            "contains the count of all paragraphs in the document."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "RecordChanges",
+          "returns": "bool",
+          "desc": [
+            "specifies if change recording is active.",
+            "",
+            "**since**",
+            "",
+            "    OOo 1.1.2"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "TwoDigitYear",
+          "returns": "int",
+          "desc": [
+            "specifies the first 4 digit year to be used when years are given in 2 digits.",
+            "",
+            "Example: if set to 1930 Oct-12-29 will be interpreted as Oct-12-2029 Oct-12-30 will be interpreted as Oct-12-1930 Oct-12-02 will be interpreted as Oct-12-2002",
+            "",
+            "**since**",
+            "",
+            "    OOo 1.1.2"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "WordCount",
+          "returns": "int",
+          "desc": [
+            "contains the count of all words in the document."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "WordSeparator",
+          "returns": "str",
+          "desc": [
+            "contains a string that consists of characters that mark the separation of words in counting the words in a document.",
+            "",
+            "I.e. slash and backslash. Whitespace (tab stop, space, paragraph break, line break) always separate words."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
+  }
+}

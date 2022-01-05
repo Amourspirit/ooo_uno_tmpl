@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.3",
-  "timestamp": "2021-12-16 19:02:00+00:00",
+  "version": "0.1.14",
+  "libre_office_ver": "7.2",
   "name": "UnoControlTimeFieldModel",
   "type": "service",
   "namespace": "com.sun.star.awt",
@@ -14,53 +14,334 @@
   "data": {
     "from_imports": [
       [
-        "..beans.x_multi_property_set",
-        "XMultiPropertySet"
-      ],
-      [
-        "..lang.x_component",
-        "XComponent"
-      ],
-      [
-        "..util.x_cloneable",
-        "XCloneable"
-      ],
-      [
-        ".uno_control_dialog_element",
-        "UnoControlDialogElement"
-      ],
-      [
-        "..beans.x_property_set",
-        "XPropertySet"
-      ],
-      [
-        "..uno.x_interface",
-        "XInterface"
-      ],
-      [
         ".uno_control_model",
         "UnoControlModel"
-      ],
-      [
-        "..io.x_persist_object",
-        "XPersistObject"
       ]
     ],
+    "from_imports_typing": [
+      [
+        "..util.time",
+        "Time"
+      ],
+      [
+        "..util.color",
+        "Color"
+      ],
+      [
+        ".font_descriptor",
+        "FontDescriptor"
+      ],
+      [
+        "..style.vertical_alignment",
+        "VerticalAlignment"
+      ]
+    ],
+    "quote": [
+      "Color",
+      "VerticalAlignment",
+      "Time",
+      "FontDescriptor"
+    ],
+    "typings": [],
+    "requires_typing": true,
     "name": "UnoControlTimeFieldModel",
+    "imports": [],
     "namespace": "com.sun.star.awt",
     "extends": [
-      "com.sun.star.beans.XMultiPropertySet",
-      "com.sun.star.lang.XComponent",
-      "com.sun.star.util.XCloneable",
-      "com.sun.star.awt.UnoControlDialogElement",
-      "com.sun.star.beans.XPropertySet",
-      "com.sun.star.uno.XInterface",
-      "com.sun.star.awt.UnoControlModel",
-      "com.sun.star.io.XPersistObject"
+      "com.sun.star.awt.UnoControlModel"
+    ],
+    "desc": [
+      "specifies the standard model of a UnoControlTimeField.",
+      "",
+      "**since**",
+      "",
+      "    OOo 2.0"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1awt_1_1UnoControlTimeFieldModel.html",
-    "desc": [
-      "specifies the standard model of a UnoControlTimeField."
-    ]
+    "items": {
+      "properties": [
+        {
+          "name": "BackgroundColor",
+          "returns": "Color",
+          "desc": [
+            "specifies the background color (RGB) of the control."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Border",
+          "returns": "int",
+          "desc": [
+            "specifies the border style of the control."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "BorderColor",
+          "returns": "int",
+          "desc": [
+            "specifies the color of the border, if present",
+            "",
+            "Not every border style (see Border) may support coloring. For instance, usually a border with 3D effect will ignore the BorderColor setting.",
+            "",
+            "**since**",
+            "",
+            "    OOo 2.0"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Enabled",
+          "returns": "bool",
+          "desc": [
+            "determines whether the control is enabled or disabled."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "FontDescriptor",
+          "returns": "FontDescriptor",
+          "desc": [
+            "specifies the font attributes of the text in the control."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "FontEmphasisMark",
+          "returns": "int",
+          "desc": [
+            "specifies the com.sun.star.text.FontEmphasis value of the text in the control."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "FontRelief",
+          "returns": "int",
+          "desc": [
+            "specifies the com.sun.star.text.FontRelief value of the text in the control."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "HelpText",
+          "returns": "str",
+          "desc": [
+            "specifies the help text of the control."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "HelpURL",
+          "returns": "str",
+          "desc": [
+            "specifies the help URL of the control."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "HideInactiveSelection",
+          "returns": "bool",
+          "desc": [
+            "specifies whether the selection in the control should be hidden when the control is not active (focused).",
+            "",
+            "**since**",
+            "",
+            "    OOo 2.0"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "MouseWheelBehavior",
+          "returns": "int",
+          "desc": [
+            "defines how the mouse wheel can be used to scroll through the control's content.",
+            "",
+            "Usually, the mouse wheel spins the numeric value displayed in the control. Using this property, and one of the MouseWheelBehavior constants, you can control under which circumstances this is possible."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Printable",
+          "returns": "bool",
+          "desc": [
+            "specifies that the control will be printed with the document."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ReadOnly",
+          "returns": "bool",
+          "desc": [
+            "specifies that the content of the control cannot be modified by the user."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Repeat",
+          "returns": "bool",
+          "desc": [
+            "specifies whether the mouse should show repeating behavior, i.e.",
+            "",
+            "repeatedly trigger an action when keeping pressed.",
+            "",
+            "**since**",
+            "",
+            "    OOo 2.0"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "RepeatDelay",
+          "returns": "int",
+          "desc": [
+            "specifies the mouse repeat delay, in milliseconds.",
+            "",
+            "When the user presses a mouse in a control area where this triggers an action (such as spinning the value), then usual control implementations allow to repeatedly trigger this action, without the need to release the mouse button and to press it again. The delay between two such triggers is specified with this property.",
+            "",
+            "**since**",
+            "",
+            "    OOo 2.0"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Spin",
+          "returns": "bool",
+          "desc": [
+            "specifies that the control has a spin button."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "StrictFormat",
+          "returns": "bool",
+          "desc": [
+            "specifies that the date is checked during the user input."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Tabstop",
+          "returns": "bool",
+          "desc": [
+            "specifies that the control can be reached with the TAB key."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Text",
+          "returns": "str",
+          "desc": [
+            "specifies the text displayed in the control.",
+            "",
+            "**since**",
+            "",
+            "    OOo 2.0"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "TextColor",
+          "returns": "Color",
+          "desc": [
+            "specifies the text color (RGB) of the control."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "TextLineColor",
+          "returns": "Color",
+          "desc": [
+            "specifies the text line color (RGB) of the control."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Time",
+          "returns": "Time",
+          "desc": [
+            "specifies the time displayed in the control."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "TimeFormat",
+          "returns": "int",
+          "desc": [
+            "specifies the format of the displayed time."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "TimeMax",
+          "returns": "Time",
+          "desc": [
+            "specifies the maximum time that can be entered."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "TimeMin",
+          "returns": "Time",
+          "desc": [
+            "specifies the minimum time that can be entered."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "VerticalAlign",
+          "returns": "VerticalAlignment",
+          "desc": [
+            "specifies the vertical alignment of the text in the control.",
+            "",
+            "**since**",
+            "",
+            "    OOo 3.3"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "WritingMode",
+          "returns": "int",
+          "desc": [
+            "denotes the writing mode used in the control, as specified in the com.sun.star.text.WritingMode2 constants group.",
+            "",
+            "Only com.sun.star.text.WritingMode2.LR_TB and com.sun.star.text.WritingMode2.RL_TB are supported at the moment.",
+            "",
+            "**since**",
+            "",
+            "    OOo 3.1"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
   }
 }

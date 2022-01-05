@@ -53,7 +53,17 @@ class DataItem:
 class ValTypeEnum(IntEnum):
     STRING = auto()
     INTEGER = auto()
-
+    FLOAT = auto()
+    CONST = auto()
+    """Const is a another value in the same constant class"""
+    CONST_PLUS_INT = auto()
+    """Const is a another value in the same constant class with a + int value"""
+    CONST_MINUS_INT = auto()
+    """Const is a another value in the same constant class with a - int value"""
+    IMPORT = auto()
+    """Value is a import"""
+    def __str__(self) -> str:
+        return self._name_
 
 @dataclass
 class Val:
@@ -62,6 +72,7 @@ class Val:
     is_flags: bool = False
     val_type: ValTypeEnum = ValTypeEnum.INTEGER
     values: List[Union[int, str]] = field(default_factory=list)
+    p_type: Union[PythonType, None] = None
 
 class IRule(ABC):
     @abstractmethod
@@ -99,12 +110,24 @@ class IRules(ABC):
         """Gets is an id is in the cache"""
 
     @abstractmethod
+    def is_cached_by_name(self, name: str) -> bool:
+        """Gets is an name is in the cache"""
+
+    @abstractmethod
     def get_cached(self, sid: str) -> Val:
         """Gets a Val from cache"""
 
     @abstractmethod
+    def get_cached_by_name(self, name: str) -> Union[Val, None]:
+        """Gets a Val from cache by name"""
+
+    @abstractmethod
     def set_cached(self, val:Val) -> None:
         """set or updates cached"""
+
+    @abstractproperty
+    def api_ns(self) -> 'ApiNs':
+        """Gets api_ns value"""
 
     @abstractproperty
     def summary_block(self) -> base.ApiSummaryBlock:
@@ -119,7 +142,7 @@ class IRules(ABC):
         """Gets the soup object for the page"""
 
 class Rules(IRules):
-    def __init__(self, si_dict: Dict[str, base.SummaryInfo], summary_block: base.ApiSummaryBlock) -> None:
+    def __init__(self, si_dict: Dict[str, base.SummaryInfo], summary_block: base.ApiSummaryBlock, api_ns: 'ApiNs') -> None:
         self._summary_block: base.ApiSummaryBlock = summary_block
         self._summaries = si_dict
         self._name_map = {}
@@ -128,6 +151,8 @@ class Rules(IRules):
         self._rules: List[IRule] = []
         self._cache = {}
         self. _cached_vals = {}
+        self._cached_names = {}
+        self._api_ns = api_ns
         self._register_known_rules()
         
     # region Methods
@@ -159,14 +184,26 @@ class Rules(IRules):
     def is_cached(self, sid: str) -> bool:
         """Gets is an id is in the cache"""
         return sid in self. _cached_vals
+
+    def is_cached_by_name(self, name: str) -> bool:
+        """Gets is an id is in the cache"""
+        return name in self._cached_names
     
     def get_cached(self, sid: str) -> Union[Val, None]:
         """Gets a Val from cache"""
         return self. _cached_vals.get(sid, None)
     
+    def get_cached_by_name(self, name: str) -> Union[Val, None]:
+        """Gets a Val from cache by name"""
+        if name in self._cached_names:
+            sid = self._cached_names[name]
+            return self.get_cached(sid=sid)
+        return None
+    
     def set_cached(self, val: Val) -> None:
         """set or updates cached"""
         self. _cached_vals[val.identity] = val
+        self._cached_names[val.text] = val.identity
     # endregion Cache
 
     def _reg_rule(self, rule: IRule):
@@ -174,8 +211,12 @@ class Rules(IRules):
 
     def _register_known_rules(self):
         self._reg_rule(rule=RuleInt)
+        self._reg_rule(rule=RuleFloat)
         self._reg_rule(rule=RuleHex)
         self._reg_rule(rule=RuleNamedFlags)
+        self._reg_rule(rule=RulePreviousName)
+        self._reg_rule(rule=RulePreviousNamePlusMinusInt)
+        self._reg_rule(rule=RuleImport)
         self._reg_rule(rule=RuleDetail)
 
     def _get_rule(self, tag: Tag) -> Union[IRule, None]:
@@ -220,6 +261,10 @@ class Rules(IRules):
     # endregion Methods
 
     # region Properties
+    @property
+    def api_ns(self) -> 'ApiNs':
+        """Gets api_ns value"""
+        return self._api_ns
     @property
     def summary_block(self) -> base.ApiSummaryBlock:
         """Gets the block that contains summary info for all constants of the current html page."""
@@ -339,6 +384,51 @@ class RuleInt(RuleBase):
                 f"{self.__class__.__name__}.get_val() Something went wrong. expected val was int but got {type(self._val)}")
 
 
+class RuleFloat(RuleBase):
+    def __init__(self, rules: IRules) -> None:
+        super().__init__(rules=rules)
+        self._val = None
+
+    def get_is_match(self, tag: Tag) -> bool:
+        self._val = None
+        if not super().get_is_match(tag):
+            return False
+        if self._cached:
+            return True
+        parts = self._info_text.split("=")
+        if len(parts) != 2:
+            return False
+        part: str = parts[1].strip()
+        if part.find('.') < 0:
+            return False
+        is_match = False
+        try:
+            self._val = float(part)
+            is_match = True
+        except ValueError:
+            self._val = None
+            is_match = False
+        return is_match
+
+    def get_val(self) -> Val:
+        """Gets a Val if there is a rule match"""
+        if self._cached:
+            return self._cached
+        if self._val is None:
+            raise Exception(
+                f"{self.__class__.__name__}.get_val() Value is missing. Did you run get_is_match() before get_val()?")
+        if isinstance(self._val, float):
+            si: SummaryInfo = self._rules.summaries[self.identity]
+            result = Val(text=si.name,
+                         identity=self.identity, is_flags=False,
+                         val_type=ValTypeEnum.FLOAT, values=[self._val])
+            self._val = None
+            self._rules.set_cached(result)
+            return result
+        else:
+            raise Exception(
+                f"{self.__class__.__name__}.get_val() Something went wrong. expected val was int but got {type(self._val)}")
+
 class RuleHex(RuleBase):
     def __init__(self, rules: IRules) -> None:
         super().__init__(rules=rules)
@@ -384,6 +474,7 @@ class RuleHex(RuleBase):
 
 
 class RuleNamedFlags(RuleBase):
+    "Get Flags matches suca as First | Second | Third"
     def __init__(self, rules: IRules) -> None:
         super().__init__(rules=rules)
         self._names: List[str] = None
@@ -450,6 +541,151 @@ class RuleNamedFlags(RuleBase):
     # endregion Private Methods
 
 
+class RulePreviousName(RuleBase):
+    def __init__(self, rules: IRules) -> None:
+        super().__init__(rules=rules)
+        self._val = None
+
+    def get_is_match(self, tag: Tag) -> bool:
+        self._val = None
+        if not super().get_is_match(tag):
+            return False
+        if self._cached:
+            return True
+        parts = self._info_text.split("=")
+        if len(parts) != 2:
+            return False
+        name: str = parts[1].strip()
+        if self._rules.is_cached_by_name(name):
+            self._val = name
+            return True
+        return False
+
+    def get_val(self) -> Val:
+        """Gets a Val if there is a rule match"""
+        if self._cached:
+            return self._cached
+        if self._val is None:
+            raise Exception(
+                f"{self.__class__.__name__}.get_val() Value is missing. Did you run get_is_match() before get_val()?")
+        if isinstance(self._val, str):
+            si: SummaryInfo = self._rules.summaries[self.identity]
+            result = Val(text=si.name,
+                         identity=self.identity, is_flags=False,
+                         val_type=ValTypeEnum.CONST, values=[self._val])
+            self._val = None
+            self._rules.set_cached(result)
+            return result
+        else:
+            raise Exception(
+                f"{self.__class__.__name__}.get_val() Something went wrong. expected val was int but got {type(self._val)}")
+
+
+class RulePreviousNamePlusMinusInt(RuleBase):
+    def __init__(self, rules: IRules) -> None:
+        super().__init__(rules=rules)
+        self._val = None
+        self._sep = None
+
+    def get_is_match(self, tag: Tag) -> bool:
+        self._val = None
+        if not super().get_is_match(tag):
+            return False
+        if self._cached:
+            return True
+        parts = self._info_text.split("=")
+        if len(parts) != 2:
+            return False
+        name_plus: str = parts[1].strip()
+        # looking for format of TIME_START+4 or TIME_START + 4
+        self._sep = '+'
+        parts = name_plus.split(self._sep)
+        if len(parts) != 2:
+            self._sep = '-'
+            parts = name_plus.split(self._sep)
+            if len(parts) != 2:
+                return False
+        name = parts[0].strip()
+        if not self._rules.is_cached_by_name(name):
+            return False
+        i = 0
+        try:
+            i = int(parts[1].strip())
+        except:
+            return False
+        self._val = name + ' ' + self._sep + ' ' + str(i)
+        return True
+
+    def get_val(self) -> Val:
+        """Gets a Val if there is a rule match"""
+        if self._cached:
+            return self._cached
+        if self._val is None:
+            raise Exception(
+                f"{self.__class__.__name__}.get_val() Value is missing. Did you run get_is_match() before get_val()?")
+        if isinstance(self._val, str):
+            si: SummaryInfo = self._rules.summaries[self.identity]
+            result = Val(text=si.name,
+                         identity=self.identity, is_flags=False,
+                         val_type=ValTypeEnum.CONST_PLUS_INT, values=[self._val])
+            if self._sep == '-':
+                result.val_type = ValTypeEnum.CONST_MINUS_INT
+            self._val = None
+            self._rules.set_cached(result)
+            return result
+        else:
+            raise Exception(
+                f"{self.__class__.__name__}.get_val() Something went wrong. expected val was int but got {type(self._val)}")
+
+
+class RuleImport(RuleBase):
+    def __init__(self, rules: IRules) -> None:
+        super().__init__(rules=rules)
+        self._val = None
+
+    def get_is_match(self, tag: Tag) -> bool:
+        self._val = None
+        if not super().get_is_match(tag):
+            return False
+        if self._cached:
+            return True
+        parts = self._info_text.split("=")
+        if len(parts) != 2:
+            return False
+        part = parts[1]
+        if part.find('::') < 0:
+            return False
+        self._val = part.replace('::', '.').strip().lstrip('.')
+        return True
+
+    def get_val(self) -> Val:
+        """Gets a Val if there is a rule match"""
+        if self._cached:
+            return self._cached
+        if self._val is None:
+            raise Exception(
+                f"{self.__class__.__name__}.get_val() Value is missing. Did you run get_is_match() before get_val()?")
+        if isinstance(self._val, str):
+            si: SummaryInfo = self._rules.summaries[self.identity]
+            ns = self._rules.api_ns
+            parts = self._val.rsplit(sep='.', maxsplit=1)
+            name = parts.pop()
+            im = ".".join(parts)
+            p_type = base.Util.get_python_type(im)
+
+            rel = base.Util.get_rel_import_full(p_type.imports, ns.namespace_str)
+            
+            val = f"{rel[1]}.{p_type.type}.{name}"
+            result = Val(text=si.name,
+                         identity=self.identity, is_flags=False,
+                         val_type=ValTypeEnum.IMPORT, values=[val],
+                         p_type=p_type)
+            self._val = None
+            self._rules.set_cached(result)
+            return result
+        else:
+            raise Exception(
+                f"{self.__class__.__name__}.get_val() Something went wrong. expected val was int but got {type(self._val)}")
 class RuleDetail(RuleBase):
     """Gets value from details section"""
     def __init__(self, rules: IRules) -> None:
@@ -490,6 +726,10 @@ class RuleDetail(RuleBase):
                 f"{self.__class__.__name__}.get_val() Value is missing. Did you run get_is_match() before get_val()?")
         # text could be hex or int.
         val = self._get_from_int()
+        if val:
+            self._rules.set_cached(val)
+            return val
+        val = self._get_from_float()
         if val:
             self._rules.set_cached(val)
             return val
@@ -535,6 +775,16 @@ class RuleDetail(RuleBase):
             if i is None:
                 i = int(self._text, 16)
             val = Val(text=si.name,identity=self.identity, is_flags=False,val_type=ValTypeEnum.INTEGER ,values=[i])
+            return val
+        except ValueError:
+            return None
+    
+    def _get_from_float(self) -> Union[Val, None]:
+        """Convert text to int if possible"""
+        si: SummaryInfo = self._rules.summaries[self.identity]
+        try:
+            i = float(self._text)
+            val = Val(text=si.name,identity=self.identity, is_flags=False,val_type=ValTypeEnum.FLOAT ,values=[i])
             return val
         except ValueError:
             return None
@@ -708,9 +958,10 @@ class ApiSummaries(base.BlockObj):
     
     # endregion Properties
 class ApiValues(base.BlockObj):
-    def __init__(self, summary_block: base.ApiSummaryBlock, api_summaries: ApiSummaries) -> None:
+    def __init__(self, summary_block: base.ApiSummaryBlock, api_summaries: ApiSummaries, api_ns: ApiNs) -> None:
         self._summary_block: base.ApiSummaryBlock = summary_block
         self._api_summaries: ApiSummaries = api_summaries
+        self._api_ns: ApiNs = api_ns
         super().__init__(self._summary_block.soup)
         self._data = None
 
@@ -737,7 +988,7 @@ class ApiValues(base.BlockObj):
             logger.error(msg)
             raise Exception(msg)
         self._data = {}
-        rules = Rules(si_dict=api_summaries, summary_block=self._summary_block)
+        rules = Rules(si_dict=api_summaries, summary_block=self._summary_block, api_ns=self._api_ns)
         for k in keys:
             si: SummaryInfo = api_summaries[k]
             try:
@@ -845,7 +1096,7 @@ class ApiData(base.APIData):
     @property
     def api_values(self) -> ApiValues:
         if self._api_values is None:
-            self._api_values = ApiValues(self.api_const_block, self.api_summaries)
+            self._api_values = ApiValues(self.api_const_block, self.api_summaries, self.ns)
         return self._api_values
     
     @property
@@ -857,7 +1108,6 @@ class ApiData(base.APIData):
 
 # endregion API classes
 
-# endregion API classes
 class Parser(base.ParserBase):
     
     # region init
@@ -866,6 +1116,7 @@ class Parser(base.ParserBase):
         self._api_data: ApiData = ApiData(
             url_soup=self.url, allow_cache=self.allow_cache)
         self._soup = self._api_data.soup_obj
+        self._requires_typing: bool = False
         self._cache = {}
 
     # endregion init
@@ -891,12 +1142,12 @@ class Parser(base.ParserBase):
         try:
             if not self._url:
                 raise ValueError('URL is not set')
-            name = self._api_data.name.get_obj()
+            ni = self._api_data.name.get_obj()
             desc = self._api_data.desc.get_obj()
             ns = self._api_data.ns.namespace_str
-            full_name = ns + '.' + name
+            full_name = ns + '.' + ni.name
             info = {
-                "name": name,
+                "name": ni.name,
                 "fullname": full_name,
                 "desc": desc,
                 "url": self.url,
@@ -987,6 +1238,7 @@ class Parser(base.ParserBase):
                 d_itm = {
                     "name": itm.name,
                     "type": itm.type,
+                    "value_type": str(itm.val.val_type),
                     "value": itm.value,
                     "lines": itm.lines
                 }
@@ -1016,8 +1268,39 @@ class Parser(base.ParserBase):
         for itm in data:
             _id = itm.val.identity
             si = self._api_data.api_summary_dict[_id]
+            if si.p_type.requires_typing:
+                self._requires_typing = True
             types.append(si.p_type)
         self._cache[key] = types
+        return self._cache[key]
+    
+    @property
+    def imports(self) -> Set[str]:
+        key = 'imports'
+        if key in self._cache:
+            return self._cache[key]
+        info = self.get_info()
+        ns = info['namespace']
+        data = self._api_data.get_data_items()
+        im: Set[str] = set()
+        for itm in data:
+            if itm.val.p_type:
+                if itm.val.p_type.requires_typing:
+                    self._requires_typing = True
+                im.update(itm.val.p_type.get_all_imports())
+        self._cache[key] = base.Util.get_clean_imports(ns=ns, imports=im)
+        return self._cache[key]
+    
+    @property
+    def requires_typing(self) -> bool:
+        """Gets requires typing value"""
+        key = 'requires_typing'
+        if key in self._cache:
+            return self._cache[key]
+        # call the properties that determine requires typing
+        _ = self.python_types
+        _ = self.imports
+        self._cache[key] = self._requires_typing
         return self._cache[key]
     # endregion Properties
 
@@ -1051,11 +1334,11 @@ class ConstWriter(base.WriteBase):
             'write_template_long', False)
         self._indent_amt = 4
         self._file_full_path = None
-        self._p_name = None
-        self._p_namespace = None
-        self._p_fullname = None
-        self._p_url = None
-        self._p_desc = None
+        self._p_name: str = None
+        self._p_namespace: str = None
+        self._p_fullname: str = None
+        self._p_url: str = None
+        self._p_desc: str = None
         self._p_requires_typing = False
         self._p_from_imports = set()
         self._p_typing_imports = set()
@@ -1132,7 +1415,8 @@ class ConstWriter(base.WriteBase):
         json_dict = {
             "id": JSON_ID,
             "version": __version__,
-            "timestamp": str(base.Util.get_timestamp_utc()),
+            # "timestamp": str(base.Util.get_timestamp_utc()),
+            "libre_office_ver": base.APP_CONFIG.libre_office_ver,
             "name": p_dict['name'],
             "type": "const",
             "namespace": p_dict['namespace'],
@@ -1168,9 +1452,13 @@ class ConstWriter(base.WriteBase):
         key = '_get_from_imports'
         if key in self._cache:
             return self._cache[key]
-        lst = [
-            [base.APP_CONFIG.base_const, self._get_const_base_class()]
-        ]
+        lst = []
+        for ns in self._p_from_imports:
+            f, n = base.Util.get_rel_import_full(
+                i_str=ns, ns=self._p_namespace
+            )
+            lst.append([f, n])
+        lst.append([base.APP_CONFIG.base_const, self._get_const_base_class()])
         self._cache[key] = lst
         return self._cache[key]
 
@@ -1193,6 +1481,8 @@ class ConstWriter(base.WriteBase):
     def _set_template_data(self):
         if self._write_template_long is False:
             return
+        self._template = self._template.replace(
+            '{libre_office_ver}', base.APP_CONFIG.libre_office_ver)
         self._template = self._template.replace('{hex}', str(self._hex))
         self._template = self._template.replace('{flags}', str(self._flags))
         self._template = self._template.replace('{name}', self._p_name)
@@ -1226,7 +1516,8 @@ class ConstWriter(base.WriteBase):
         self._p_data = self._parser.get_formated_data()
         if self._write_file or self._write_json:
             self._file_full_path = self._get_uno_obj_path()
-        self._p_requires_typing = self._parser.api_data.get_requires_typing()
+        self._p_requires_typing = self._parser.requires_typing
+        self._p_from_imports.update(self._parser.imports)
         # prime cache and set other params such as self._p_requires_typing
         self._get_quote_flat()
         self._get_typings()
@@ -1253,6 +1544,12 @@ class ConstWriter(base.WriteBase):
         for t in p_lst:
             if t.requires_typing:
                 t_set.add(t.type)
+        # get any typings that are added by sepecial rules
+        p_data = self._parser.get_data()
+        for itm in p_data:
+            if itm.val.p_type:
+                if itm.val.p_type.requires_typing:
+                    t_set.add(itm.val.p_type.type)
         self._cache[key] = list(t_set)
         return self._cache[key]
 
@@ -1433,7 +1730,10 @@ def _api():
     
 def _main():
     # for debugging
-    url = 'https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1security_1_1KeyUsage.html'
+    # url = 'https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1security_1_1KeyUsage.html'
+    # url = 'https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1awt_1_1FontWeight.html'
+    # url = 'https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1i18n_1_1NumberFormatIndex.html'
+    url = 'https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1sdb_1_1application_1_1DatabaseObject.html'
     # sys.argv.extend(['--log-file', 'debug.log', '-v', '-n', '-u', url])
     # main()
     args = ('v', 'n')

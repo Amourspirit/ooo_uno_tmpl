@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.8",
-  "timestamp": "2021-12-28 11:31:06+00:00",
+  "version": "0.1.14",
+  "libre_office_ver": "7.2",
   "type": "struct",
   "name": "DriverPropertyInfo",
   "namespace": "com.sun.star.sdbc",
@@ -10,43 +10,34 @@
   },
   "writer_args": {
     "sort": true,
-    "auto_import": true,
-    "dynamic_struct": false
+    "dynamic_struct": false,
+    "include_desc": true
   },
   "data": {
     "name": "DriverPropertyInfo",
     "namespace": "com.sun.star.sdbc",
     "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1sdbc_1_1DriverPropertyInfo.html",
+    "from_imports": [],
+    "from_imports_typing": [],
     "quote": [
       "typing.List[str]"
     ],
     "typings": [
       "typing.List[str]"
     ],
+    "requires_typing": true,
     "fullname": "com.sun.star.sdbc.DriverPropertyInfo",
     "desc": [
       "describes the driver properties for making a connection.",
       "",
       "The DriverPropertyInfo is of interest only to advanced programmers who need to interact with a driver to discover and supply properties for connections."
     ],
-    "extends": [],
     "imports": [],
-    "auto_imports": [],
-    "from_imports": [],
-    "requires_typing": true,
+    "extends": [],
     "items": [
-      {
-        "name": "Choices",
-        "type": "typing.List[str]",
-        "orig_type": "sequence<string>",
-        "lines": [
-          "contains a sequence of possible values if the value for the field DriverPropertyInfo.value may be selected from a particular set of values; otherwise empty."
-        ]
-      },
       {
         "name": "Description",
         "type": "str",
-        "orig_type": "string",
         "lines": [
           "is a brief description of the property, which may be null."
         ]
@@ -54,7 +45,6 @@
       {
         "name": "IsRequired",
         "type": "bool",
-        "orig_type": "boolean",
         "lines": [
           "is TRUE if a value must be supplied for this property during Driver.connect and FALSE otherwise."
         ]
@@ -62,7 +52,6 @@
       {
         "name": "Name",
         "type": "str",
-        "orig_type": "string",
         "lines": [
           "is the name of the property."
         ]
@@ -70,10 +59,17 @@
       {
         "name": "Value",
         "type": "str",
-        "orig_type": "string",
         "lines": [
           "specifies the current value of the property, based on the driver-supplied default values.",
+          "",
           "This field may be empty if no value is known."
+        ]
+      },
+      {
+        "name": "Choices",
+        "type": "typing.List[str]",
+        "lines": [
+          "contains a sequence of possible values if the value for the field DriverPropertyInfo.value may be selected from a particular set of values; otherwise empty."
         ]
       }
     ]

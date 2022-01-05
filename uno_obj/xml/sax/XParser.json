@@ -1,16 +1,22 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.8",
-  "timestamp": "2021-12-27 22:15:01+00:00",
+  "version": "0.1.12",
+  "timestamp": "2022-01-04 18:10:20+00:00",
   "name": "XParser",
   "type": "interface",
   "namespace": "com.sun.star.xml.sax",
   "parser_args": {
     "sort": true
   },
-  "writer_args": {},
+  "writer_args": {
+    "include_desc": true
+  },
   "data": {
     "from_imports": [
+      [
+        ".parser",
+        "Parser"
+      ],
       [
         "...uno.x_interface",
         "XInterface"
@@ -18,20 +24,20 @@
     ],
     "from_imports_typing": [
       [
-        ".x_entity_resolver",
-        "XEntityResolver"
+        "...lang.locale",
+        "Locale"
       ],
       [
         ".x_error_handler",
         "XErrorHandler"
       ],
       [
-        "...lang.locale",
-        "Locale"
-      ],
-      [
         ".input_source",
         "InputSource"
+      ],
+      [
+        ".x_entity_resolver",
+        "XEntityResolver"
       ],
       [
         ".x_document_handler",
@@ -43,12 +49,12 @@
       ]
     ],
     "quote": [
-      "XDocumentHandler",
-      "XDTDHandler",
       "XEntityResolver",
+      "Locale",
+      "XDocumentHandler",
       "InputSource",
-      "XErrorHandler",
-      "Locale"
+      "XDTDHandler",
+      "XErrorHandler"
     ],
     "typings": [],
     "requires_typing": true,
@@ -56,7 +62,8 @@
     "imports": [],
     "namespace": "com.sun.star.xml.sax",
     "extends": [
-      "com.sun.star.uno.XInterface"
+      "com.sun.star.uno.XInterface",
+      "com.sun.star.xml.sax.Parser"
     ],
     "desc": [
       "specifies a SAX parser.",

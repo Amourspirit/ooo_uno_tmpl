@@ -1,14 +1,16 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.8",
-  "timestamp": "2021-12-27 22:15:11+00:00",
+  "version": "0.1.12",
+  "timestamp": "2022-01-04 18:07:22+00:00",
   "name": "XSanExtension",
   "type": "interface",
   "namespace": "com.sun.star.security",
   "parser_args": {
     "sort": true
   },
-  "writer_args": {},
+  "writer_args": {
+    "include_desc": true
+  },
   "data": {
     "from_imports": [
       [
@@ -16,10 +18,19 @@
         "XCertificateExtension"
       ]
     ],
-    "from_imports_typing": [],
-    "quote": [],
-    "typings": [],
-    "requires_typing": false,
+    "from_imports_typing": [
+      [
+        ".cert_alt_name_entry",
+        "CertAltNameEntry"
+      ]
+    ],
+    "quote": [
+      "typing.List[CertAltNameEntry]"
+    ],
+    "typings": [
+      "typing.List[CertAltNameEntry]"
+    ],
+    "requires_typing": true,
     "name": "XSanExtension",
     "imports": [],
     "namespace": "com.sun.star.security",
@@ -32,6 +43,18 @@
       "This interface represents a x509 certificate extension."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1security_1_1XSanExtension.html",
-    "items": {}
+    "items": {
+      "types": [
+        {
+          "name": "AlternativeNames",
+          "returns": "typing.List[CertAltNameEntry]",
+          "desc": [
+            "Contains the alternative names of a certificate."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
   }
 }

@@ -1,14 +1,16 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.8",
-  "timestamp": "2021-12-27 22:15:08+00:00",
+  "version": "0.1.12",
+  "timestamp": "2022-01-04 18:08:21+00:00",
   "name": "XCsvLogFormatter",
   "type": "interface",
   "namespace": "com.sun.star.logging",
   "parser_args": {
     "sort": true
   },
-  "writer_args": {},
+  "writer_args": {
+    "include_desc": true
+  },
   "data": {
     "from_imports": [
       [
@@ -58,6 +60,19 @@
               "in"
             ]
           ]
+        }
+      ],
+      "types": [
+        {
+          "name": "Columnnames",
+          "returns": "typing.List[str]",
+          "desc": [
+            "Defines the names of the additional columns this defaults to only one row titled \\\"message\\\".",
+            "",
+            "if this is set to more than one column, the messages need to be preformatted using formatMultiColumn"
+          ],
+          "raises_get": "",
+          "raises_set": ""
         }
       ],
       "properties": [

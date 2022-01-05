@@ -1,0 +1,178 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.14",
+  "libre_office_ver": "7.2",
+  "name": "DataSeries",
+  "type": "service",
+  "namespace": "com.sun.star.chart2",
+  "parser_args": {
+    "sort": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "from_imports": [
+      [
+        ".data_point_properties",
+        "DataPointProperties"
+      ],
+      [
+        "..beans.property_set",
+        "PropertySet"
+      ],
+      [
+        ".data.x_data_source",
+        "XDataSource"
+      ],
+      [
+        ".data.x_data_sink",
+        "XDataSink"
+      ],
+      [
+        ".x_data_series",
+        "XDataSeries"
+      ],
+      [
+        ".x_regression_curve_container",
+        "XRegressionCurveContainer"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".stacking_direction",
+        "StackingDirection"
+      ]
+    ],
+    "quote": [
+      "typing.List[int]",
+      "StackingDirection"
+    ],
+    "typings": [
+      "typing.List[int]"
+    ],
+    "requires_typing": true,
+    "name": "DataSeries",
+    "imports": [],
+    "namespace": "com.sun.star.chart2",
+    "extends": [
+      "com.sun.star.beans.PropertySet",
+      "com.sun.star.chart2.DataPointProperties",
+      "com.sun.star.chart2.XDataSeries",
+      "com.sun.star.chart2.data.XDataSink",
+      "com.sun.star.chart2.data.XDataSource",
+      "com.sun.star.chart2.XRegressionCurveContainer"
+    ],
+    "desc": [
+      "reflects the model data of the object that has all the information for a DataRenderer to create a visible data series in a chart.",
+      "",
+      "It combines one or more DataSequences which are interpreted by evaluating their role-string.",
+      "",
+      "**since**",
+      "",
+      "    LibreOffice 7.0"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1chart2_1_1DataSeries.html",
+    "items": {
+      "types": [
+        {
+          "name": "AttributedDataPoints",
+          "returns": "typing.List[int]",
+          "desc": [
+            "This service will be used to render this data series.",
+            "",
+            "This service name can be used to determine which DataSeries are of the same type.",
+            "",
+            "The result of the DataSeries.DataSequenceRoles depends on the renderer service set here.",
+            "",
+            "a sequence of indexes denoting which data points have set properties that differ from the default.",
+            "",
+            "The default values are determined by the properties set at the DataPointProperties of the data series.",
+            "",
+            "If the sequence is empty, that means that all data points look alike. They are formatted using the property values set in the data series.",
+            "",
+            "The indexes in this sequence match the indexes used by the XIndexContainer.",
+            "",
+            "This property is especially useful for large data series with only some formatted data points, because you do not have to iterate over all elements."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "DeletedLegendEntries",
+          "returns": "typing.List[int]",
+          "desc": [
+            "A sequence of indexes denoting which data points shouldn't be shown in the legend.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 7.0"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ],
+      "properties": [
+        {
+          "name": "AttachedAxisIndex",
+          "returns": "int",
+          "desc": [
+            "This property describes whether the series should be shown at the main value axis or at the secondary value axis.",
+            "",
+            "Having this property not set or setting it to 0 means that this data series will be scaled at the primary y-axis ( of the coordinate system in which this series is hosted ).",
+            "",
+            "Setting this property to 1 means that this series should be scaled at the secondary y-axis. If there is no secondary axis the main axis should be used for scaling instead.",
+            "",
+            "If you want to scale a series at a different x or z axis you need to create an additional coordinate system and host this series there."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ShowCustomLeaderLines",
+          "returns": "bool",
+          "desc": [
+            "This property describes whether the data point and the data label are connected with a leader line.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 7.1"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ShowLegendEntry",
+          "returns": "bool",
+          "desc": [
+            "This property describes whether the legend entry for the the data series should be shown.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 6.3"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "StackingDirection",
+          "returns": "StackingDirection",
+          "desc": [
+            "indicates whether this series should be stacked with respect to the previous series."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "VaryColorsByPoint",
+          "returns": "bool",
+          "desc": [
+            "If TRUE, the data points of this series get different colors by default, like in a pie chart."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
+  }
+}

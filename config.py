@@ -3,12 +3,18 @@ from dataclasses import dataclass
 from pathlib import Path
 @dataclass
 class AppConfig:
+    libre_office_ver: str
+    """Version of Libre Office that is being built such as 7.2"""
     uno_base_dir: str
     """Base Directory for Uno such as uno_obj"""
     module_links_file: str
     """Json file name for module links such as module_links.json"""
     cache_dir: str
     """The cache directory to use. This is generally used in creating a cache directory is system temp dir."""
+    uno_obj_dir: str
+    """Uno obj dir such as uno_obj. This is the directory that templates and json data file are written to."""
+    builld_dir: str
+    """Output build dir such as scratch"""
     cache_duration: float
     """
     The amount of time in seconds to keep files in cache.
@@ -23,6 +29,17 @@ class AppConfig:
     pixel_noinherit: int
     """
     Index color of component map images for NON-inherits.
+    """
+    pixel_map_no_link: int
+    """
+    Image maps have indexed colors. All shapes that have a link have one border coloer.
+    Shape that has no link has another border color. This is the no link border color.
+    Used for finding shape within an image.
+    """
+    pixel_map_min_shape_width:int
+    """
+    Min number of pixels to match for a shape in an image.
+    See Also: ``pixel_map_no_link``
     """
     base_const: str
     """
@@ -40,6 +57,22 @@ class AppConfig:
     """
     module path to oenv suca as ``ooo_uno.oenv``
     """
+    template_struct_ext: str
+    """Extension for struct files such as .tmpl"""
+    template_const_ext: str
+    """Extension for const files such as .tmpl"""
+    template_interface_ext: str
+    """Extension for interface files such as .tmpl"""
+    template_singleton_ext: str
+    """Extension for singleton files such as .tmpl"""
+    template_enum_ext: str
+    """Extension for enum files such as .tmpl"""
+    template_exception_ext: str
+    """Extension for exception files such as .tppi"""
+    template_typedef_ext: str
+    """Extension for typedef files such as .tppi"""
+    template_service_ext: str
+    """Extension for service files such as .tppi"""
 
 def read_config(config_file: str) -> AppConfig:
     """

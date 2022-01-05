@@ -12,34 +12,37 @@ import logging
 import textwrap
 import xerox  # requires xclip - sudo apt-get install xclip
 import re
-from typing import Dict, List, Optional, Set, Union
-from bs4.element import ResultSet, Tag
-from kwhelp.decorator import AcceptedTypes, DecFuncEnum, TypeCheckKw
+from typing import Dict, List, Set, Union
+from kwhelp.decorator import AcceptedTypes, DecFuncEnum, RequireArgs, TypeCheckKw
 from pathlib import Path
-from dataclasses import dataclass
 try:
     import base
 except ModuleNotFoundError:
     import parser.base as base
 from logger.log_handle import get_logger
-from parser.type_mod import PythonType
+from parser.base import SummaryInfo
 from parser import __version__, JSON_ID
 # endregion Imports
 
+# region Logger
 logger = None
 
 
 def _set_loggers(l: Union[logging.Logger, None]):
-    global logger, base
+    global logger
     logger = l
-    base.logger = l
+    base._set_loggers(l)
 
 
 _set_loggers(None)
+# endregion Logger
 
+# region Regex
 re_component_start = re.compile(r"(interface.*){", re.DOTALL)
 re_name_info_start = re.compile(r"(interface)\s*[a-zA-Z0-9]+[ :]+")
 re_name_info_name = re.compile(r"interface\s*(?P<NAME>[a-zA-Z0-9_]+)")
+# endregion Regex
+
 # region SDK API Reference
 re_ln_pattern = re.compile(r"\A\s*(:?[0-9]*)\s*")
 # https://regex101.com/r/xAqRAU/1/
@@ -54,247 +57,10 @@ re_interface_pattern = re.compile(r"interface\s*([a-zA-Z0-9.]*)\s*;")
 re_property_pattern = re.compile(
     r"(?:\[attribute[ ,a-z]*\])(?:[ ]+)([a-zA-Z0-9. {}()]*);")
 re_comment_start_pattern = re.compile(r"(?:(\/\*)|(?:\*)\s)")
-re_dir_pattern = re.compile(r"\[((?:in)|(?:out))\]", re.IGNORECASE)
 # endregion SDK API Reference
 
-# region Data Classes
-
-
-@dataclass
-class ParamInfo:
-    direction: str = ''
-    name: str = ''
-    type: str = ''
-    p_type: Optional[PythonType] = None
-
-# endregion Data Classes
 
 # region API Interface classes
-
-
-class ApiFunctionsBlock(base.ApiSummaryBlock):
-    def _get_match_name(self) -> str:
-        return 'pub-methods'
-
-
-class ApiPropertiesBlock(base.ApiSummaryBlock):
-    def _get_match_name(self) -> str:
-        return 'pub-attribs'
-
-
-class ApiInterfacesBlock(base.ApiSummaryBlock):
-    """Gets Block object for Exported Interfaces"""
-
-    def _get_match_name(self) -> str:
-        return 'interfaces'
-
-class ApiFnPramsInfo(base.BlockObj):
-    """Gets List of Parameter information for a funciton"""
-
-    def __init__(self, block: base.ApiProtoBlock) -> None:
-        self._block: base.ApiProtoBlock = block
-        super().__init__(self._block.soup)
-        self._requires_typing = False
-        self._imports: Set[str] = set()
-        self._data = None
-
-    def get_obj(self) -> List[ParamInfo]:
-        if not self._data is None:
-            return self._data
-        self._data = []
-        proto = self._block.get_obj()
-        if not proto:
-            return self._data
-        p_type_tag = proto.find_all('td', class_='paramtype')
-        p_name_tag = proto.find_all('td', class_='paramname')
-        if not p_type_tag and not p_name_tag:
-            if logger.level <= logging.DEBUG:
-                logger.debug(
-                    'ApiInterfacePramsInfoget_obj() No Parmas for %s', self._block.summary_info.name)
-            return self._data
-
-        try:
-            if len(p_type_tag) != len(p_name_tag):
-                if len(p_type_tag) == 0 and len(p_name_tag) == 1:
-                    # no params. p_name_tag will usually be 1
-                    # when there are not paramters.
-                    return self._data
-                raise Exception
-        except Exception as e:
-            msg = "ApiFnPramsInfo.get_obj(), Parameter Name and Parameter Types do not have the same length. Function Summary: %s Url: %s" % (str(
-                self._block.summary_info), self.url_obj.url)
-            logger.error(msg)
-            raise Exception(msg)
-        p_info = zip(p_name_tag, p_type_tag)
-        self._data = self._process_params(params=p_info)
-        return self._data
-
-    def _process_name_tag(self, name_tag: Tag, pinfo: ParamInfo):
-        name = name_tag.text
-        pinfo.name = base.Util.get_clean_name(name)
-
-    def _get_type_from_inner_link(self, paramtype: Tag, name: str) -> Union[str, None]:
-        logger.debug(
-            'ApiFnPramsInfo._get_type_from_inner_link() Searching for %s link.', name)
-        if not paramtype:
-            return None
-        a_tag = paramtype.findChild('a')
-        if not a_tag:
-            return None
-        a_name = a_tag.text.strip()
-        if a_name != name:
-            return None
-        s = base.Util.get_ns_from_a_tag(a_tag=a_tag)
-        logger.debug(
-            'ApiFnPramsInfo._get_type_from_inner_link() found: %s', s)
-        return s
-
-    def _process_type_tag(self, type_tag: Tag, pinfo: ParamInfo):
-        pinfo.direction = 'in'
-        # dir_tag: NavigableString = type_tag.find(text=True, recursive=False)
-        # dir_str could be in format of: [in] sequence< ::
-        dir_str: str = type_tag.text.strip()
-        m = re_dir_pattern.match(dir_str)
-        if m:
-            g_dir = m.group(1).lower()
-            pinfo.direction = g_dir  # in or out
-            dir_str = dir_str.split(maxsplit=1)[1]
-        _type = dir_str.replace("::", '.').lstrip('.')
-        t_info: base.PythonType = base.Util.get_python_type(in_type=_type)
-        if t_info.is_default():
-            logger.debug(
-                'ApiFnPramsInfo._process_type_tag() %s type is Default. Looking for %s', pinfo.name, _type)
-            t2_type = self._get_type_from_inner_link(type_tag, _type)
-            if t2_type:
-                t2_info = base.Util.get_python_type(t2_type)
-                if not t2_info.is_default():
-                    t_info = t2_info
-        logger.debug(
-            "ApiFnPramsInfo._process_type_tag() param '%s' type '%s' converted to '%s'", pinfo.name, _type, t_info.type)
-        pinfo.type = t_info.type
-        pinfo.p_type = t_info
-        if t_info.requires_typing:
-            self._requires_typing = True
-        self._imports.update(t_info.get_all_imports())
-        return
-
-    def _process_params(self, params: zip) -> List[ParamInfo]:
-        results = []
-        for p_name_tag, p_type_tag in params:
-            p_info = ParamInfo()
-            self._process_name_tag(name_tag=p_name_tag, pinfo=p_info)
-            if not p_info.name:
-                msg = f"ApiFnPramsInfo: unable to find parameter name for method {self.summary_info.name!r}. Url: {self.url_obj.url}"
-                logger.error(msg)
-                raise Exception(msg)
-            self._process_type_tag(type_tag=p_type_tag, pinfo=p_info)
-            if not p_info.type:
-                msg = f"ApiFnPramsInfo: unable to find parameter type for method {self.summary_info.name!r} with param name of {p_info.name!r}. Url: {self.url_obj.url}"
-                logger.error(msg)
-                raise Exception(msg)
-            results.append(p_info)
-        return results
-
-    @property
-    def requires_typing(self) -> bool:
-        """Gets require_typing value"""
-        return self._requires_typing
-
-    @property
-    def imports(self) -> Set[str]:
-        """Gets imports value"""
-        return self._imports
-
-    @property
-    def summary_info(self) -> base.SummaryInfo:
-        """Gets summary_info value"""
-        return self._block.summary_info
-
-
-class ApiMethodException(base.BlockObj):
-    """Gets errors for a funciton"""
-    # have not found an example with more than one exception so assuming
-    # singular excpetion
-    # returning as a list of str for future consideration
-
-    def __init__(self, block: base.ApiProtoBlock) -> None:
-        self._block: base.ApiProtoBlock = block
-        super().__init__(self._block.soup)
-        self._data = False
-
-    
-
-    def _get_raises_lst(self) -> List[str]:
-        # rows for raise a bit messy.
-        # see: https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1animations_1_1XTimeContainer.html
-        # first row of raise will contain only the first exception.
-        # if there is another exception then the row text should end with a comma
-        row: Tag = None 
-        def ex_gen():
-            nonlocal row
-            while row:
-                if row is None:
-                    break
-                text = self._get_raises_text(row)
-                s = text
-                if text.endswith(","):
-                    row = row.find_next_sibling('tr')
-                    s = s.rstrip(',')
-                else:
-                    row = None
-                yield s
-    
-        results = []
-        row = self._get_raises_row()
-        if not row:
-            return results
-        # errs = ex()
-        for err in ex_gen():
-            results.append(err)
-        return results
-            
-        
-    def _get_raises_row(self) -> Union[Tag, None]:
-        proto = self._block.get_obj()
-        rows: ResultSet = proto.find_all('tr')
-        result = None
-        for row in rows:
-            td: Tag = row.select_one('td')
-            if td.text.strip().lower() == 'raises':
-                result = row
-                break
-        return result
-
-    def _get_raises_text(self, row: Tag):
-        if not row:
-            return None
-        parts = row.text.rsplit(maxsplit=1) # in case starts with raises
-        s: str = parts.pop()
-        s = s.replace('(', '').replace(')', '').replace(
-            '::', '.').strip().lstrip('.')
-        return s
-
-    def get_obj(self) -> Union[List[str], None]:
-        """
-        Get name of error that is raises
-
-        Returns:
-            Union[str, None]: String containing type of error if it exist; Otherwise, ``None``
-        """
-        if not self._data is False:
-            return self._data
-        self._data = None
-        # row = self._get_raises_row()
-        # if not row:
-        #     return self._data
-        # self._data = [self._get_raises_text(row)]
-        self._data = self._get_raises_lst()
-        return self._data
-
-    @property
-    def summary_info(self) -> base.SummaryInfo:
-        """Gets summary_info value"""
-        return self._block.summary_info
 
 
 class ApiNs(base.ApiNamespace):
@@ -326,16 +92,6 @@ class ApiInterfaceData(base.APIData):
         self._si_key = 'summeries'
         self._detail_block_key = 'detail_block'
         self._ns: ApiNs = None
-        self._properties_block: ApiPropertiesBlock = None
-        self._func_block: ApiFunctionsBlock = None
-        self._interfaces_block: ApiInterfacesBlock = None
-        self._func_summary_rows: base.ApiSummaryRows = None
-        self._property_summary_rows: base.ApiSummaryRows = None
-        self._export_summary_rows: base.ApiSummaryRows = None
-        self._func_summaries: base.ApiSummaries = None
-        self._property_summaries: base.ApiSummaries = None
-        self._exported_summaries: base.ApiSummaries = None
-        self._inherited: base.ApiInherited = None
         self._cache = {
             self._si_key: {},
             self._detail_block_key: {}
@@ -372,19 +128,6 @@ class ApiInterfaceData(base.APIData):
         self._cache[key] = result
         return self._cache[key]
 
-    @AcceptedTypes(str, ftype=DecFuncEnum.METHOD)
-    def get_prams_info(self, a_id: str) -> ApiFnPramsInfo:
-        """Gets parameter info for all parameters of a a method"""
-        block = self.get_proto_block(a_id=a_id)
-        result = ApiFnPramsInfo(block=block)
-        return result
-
-    @AcceptedTypes(str, ftype=DecFuncEnum.METHOD)
-    def get_method_ex(self, a_id: str) -> ApiMethodException:
-        """Gets raises info for method"""
-        block = self.get_proto_block(a_id=a_id)
-        result = ApiMethodException(block=block)
-        return result
 
     @AcceptedTypes(str, ftype=DecFuncEnum.METHOD)
     def get_desc_detail(self, a_id: str) -> base.ApiDescDetail:
@@ -409,40 +152,13 @@ class ApiInterfaceData(base.APIData):
         key = 'get_import_info_method_' + a_id
         if key in self._cache:
             return self._cache[key]
-        info = base.ImportInfo()
-        params_info = self.get_prams_info(a_id=a_id)
-        fn_info = self.func_summaries
-        # ensure data is primed
-        fn_info.get_obj()
-        params_info.get_obj()
-
-        info.requires_typing = params_info.requires_typing or fn_info.requires_typing
-        info.imports.update(params_info.imports)
-        info.imports.update(fn_info.imports)
-        self._cache[key] = info
+        self._cache[key] = super().get_import_info_method(a_id=a_id)
         return self._cache[key]
 
-    def get_import_info_property(self) -> base.ImportInfo:
-        """
-        Gets imports for properties
-
-        Args:
-            si_id (str): Property summary Info
-
-        Returns:
-            base.ImportInfo: Import info
-        """
-        info = base.ImportInfo()
-        p_info = self.property_summaries
-        # ensure data is primed
-        p_info.get_obj()
-        info.requires_typing = p_info.requires_typing
-        info.imports.update(p_info.imports)
-        return info
+    
     # endregion Methods
 
     # region Properties
-
 
     @property
     def ns(self) -> ApiNs:
@@ -452,85 +168,7 @@ class ApiInterfaceData(base.APIData):
                 self.soup_obj)
         return self._ns
 
-    @property
-    def func_block(self) -> ApiFunctionsBlock:
-        """Gets Summary Functions block"""
-        if self._func_block is None:
-            self._func_block = ApiFunctionsBlock(
-                self.public_members)
-        return self._func_block
-
-    @property
-    def properties_block(self) -> ApiPropertiesBlock:
-        """Gets Summary Properties block"""
-        if self._properties_block is None:
-            self._properties_block = ApiPropertiesBlock(
-                self.public_members)
-        return self._properties_block
-
-    @property
-    def interfaces_block(self) -> ApiInterfacesBlock:
-        """Gets Summary Exported Interfaces block"""
-        if self._interfaces_block is None:
-            self._interfaces_block = ApiInterfacesBlock(
-                self.public_members)
-        return self._interfaces_block
-
-    @property
-    def func_summary_rows(self) -> base.ApiSummaryRows:
-        """Get Summary rows for functions"""
-        if self._func_summary_rows is None:
-            self._func_summary_rows = base.ApiSummaryRows(
-                self.func_block)
-        return self._func_summary_rows
-
-    @property
-    def property_summary_rows(self) -> base.ApiSummaryRows:
-        """Get Summary rows for Properties"""
-        if self._property_summary_rows is None:
-            self._property_summary_rows = base.ApiSummaryRows(
-                self.properties_block)
-        return self._property_summary_rows
-
-    @property
-    def export_summary_rows(self) -> base.ApiSummaryRows:
-        """Get Summary rows for Exported Interfaces"""
-        if self._export_summary_rows is None:
-            self._export_summary_rows = base.ApiSummaryRows(
-                self.interfaces_block)
-        return self._export_summary_rows
-
-    @property
-    def func_summaries(self) -> base.ApiSummaries:
-        """Get Summary info list for functions"""
-        if self._func_summaries is None:
-            self._func_summaries = base.ApiSummaries(
-                self.func_summary_rows)
-        return self._func_summaries
-
-    @property
-    def property_summaries(self) -> base.ApiSummaries:
-        """Get Summary info list for Properties"""
-        if self._property_summaries is None:
-            self._property_summaries = base.ApiSummaries(
-                self.property_summary_rows)
-        return self._property_summaries
-
-    @property
-    def exported_summaries(self) -> base.ApiSummaries:
-        """Get Summary info list for Exported Interfaces"""
-        if self._exported_summaries is None:
-            self._exported_summaries = base.ApiSummaries(
-                self.export_summary_rows)
-        return self._exported_summaries
-
-    @property
-    def inherited(self) -> base.ApiInherited:
-        """Gets class that get all inherited value"""
-        if self._inherited is None:
-            self._inherited = base.ApiInherited(
-                soup=self.soup_obj, raise_error=False)
-        return self._inherited
+    
 
     # endregion Properties
 # endregion API Interface classes
@@ -538,7 +176,7 @@ class ApiInterfaceData(base.APIData):
 # region Parse
 
 
-class ParserInterface(base.ParserBase):
+class Parser(base.ParserBase):
 
     # region Constructor
     @TypeCheckKw(
@@ -587,10 +225,10 @@ class ParserInterface(base.ParserBase):
         ex = []
         for el in self._api_data.inherited.get_obj():
             ex.append(el.fullns)
-
+        ni = self._api_data.name.get_obj()
         result = {
             # 'name': ni.name,
-            'name': self._api_data.name.get_obj(),
+            'name': ni.name,
             # convert set to list for json
             # 'imports': list(im.get_obj()),
             'imports': [],
@@ -599,11 +237,13 @@ class ParserInterface(base.ParserBase):
             'desc': self._api_data.desc.get_obj(),
             "url": self._api_data.url_obj.url,
         }
-        logger.debug('ParserInterface.get_info() name: %s', result['name'])
-        logger.debug('ParserInterface.get_info() namespace: %s',
+        logger.debug('Parser.get_info() name: %s', result['name'])
+        logger.debug('Parser.get_info() namespace: %s',
                      result['namespace'])
         self._cache[key] = result
         return self._cache[key]
+
+    # region get data
 
     def get_formated_data(self) -> str:
         key = 'get_formated_data'
@@ -621,8 +261,11 @@ class ParserInterface(base.ParserBase):
         attribs = {}
         methods = self._get_methods_data()
         prop = self._get_properties_data()
+        types = self._get_types_data()
         if 'methods' in methods:
             attribs.update(methods)
+        if 'types' in types:
+            attribs.update(types)
         if 'properties' in prop:
             attribs.update(prop)
         self._cache[key] = attribs
@@ -635,7 +278,7 @@ class ParserInterface(base.ParserBase):
             if logger.level <= logging.DEBUG:
                 logger.debug(
                     "%s._get_methods_data() Processing: %s, %s",
-                    self.__class__.__name__, si.name, si.id )
+                    self.__class__.__name__, si.name, si.id)
             import_info = self._api_data.get_import_info_method(si.id)
             params_info = self._api_data.get_prams_info(si.id)
             lst_info = params_info.get_obj()
@@ -679,16 +322,15 @@ class ParserInterface(base.ParserBase):
                 attribs['methods'] = newlist
         return attribs
 
-    def _get_properties_data(self):
+    def _get_summary_data(self, si_lst: List[SummaryInfo], key: str) -> dict:
         attribs = {}
-        si_lst = self._api_data.property_summaries.get_obj()
         for i, si in enumerate(si_lst):
             if logger.level <= logging.DEBUG:
                 logger.debug(
-                    "%s._get_properties_data() Processing: %s, %s",
+                    "%s._get_summary_data() Processing: %s, %s",
                     self.__class__.__name__, si.name, si.id)
             if i == 0:
-                attribs['properties'] = []
+                attribs[key] = []
             if not si.name:
                 continue
             attrib = {
@@ -698,35 +340,58 @@ class ParserInterface(base.ParserBase):
                 "raises_get": '',
                 "raises_set": ''
             }
-            attribs['properties'].append(attrib)
+            attribs[key].append(attrib)
             if si.p_type.requires_typing:
                 logger.debug(
-                    "%s._get_properties_data() Return '%s' type require typing for: %s, %s",
+                    "%s._get_summary_data() Return '%s' type require typing for: %s, %s",
                     self.__class__.__name__, si.p_type.type, si.name, si.id)
                 self._requires_typing = True
+        
+
+        if self.sort:
+            if key in attribs:
+                newlist = sorted(attribs[key],
+                                 key=lambda d: d['name'])
+                attribs[key] = newlist
+        return attribs
+
+
+    def _get_properties_data(self):
+        si_lst = self._api_data.property_summaries.get_obj()
+        key = 'properties'
         import_info = self._api_data.get_import_info_property()
         if import_info.requires_typing:
             self._requires_typing = True
         self._imports.update(import_info.imports)
+        return self._get_summary_data(si_lst=si_lst, key=key)
 
-        if self.sort:
-            if 'properties' in attribs:
-                newlist = sorted(attribs['properties'],
-                                 key=lambda d: d['name'])
-                attribs['properties'] = newlist
-        return attribs
+    def _get_types_data(self):
+        # treat typedef as property
+        si_lst = self._api_data.types_summaries.get_obj()
+        key = 'types'
+        import_info = self._api_data.get_import_info_type()
+        if import_info.requires_typing:
+            self._requires_typing = True
+        self._imports.update(import_info.imports)
+        return self._get_summary_data(si_lst=si_lst, key=key)
 
+    # endregion get data
+
+    # region Properties
     @property
     def imports(self) -> Set[str]:
         """Gets imports value"""
-        try:
-            key = 'get_formated_data'
-            if not key in self._cache:
-                msg = "ParserInterface.get_formated_data() method must be called before accessing imports"
-                raise Exception(msg)
-        except Exception as e:
-            logger.error(e, exc_info=True)
-            raise e
+        key = 'get_formated_data'
+        if not key in self._cache:
+            self.get_formated_data()
+
+        key = 'imports_clean'
+        if not key in self._cache:
+            if len(self._imports) > 0:
+                info = self.get_info()
+                ns = info['namespace']
+                self._imports = base.Util.get_clean_imports(ns=ns, imports=self._imports)
+            self._cache[key] = True
         return self._imports
 
     @property
@@ -735,7 +400,7 @@ class ParserInterface(base.ParserBase):
         try:
             key = 'get_formated_data'
             if not key in self._cache:
-                msg = "ParserInterface.get_formated_data() method must be called before accessing requires_typing"
+                msg = "Parser.get_formated_data() method must be called before accessing requires_typing"
                 raise Exception(msg)
         except Exception as e:
             logger.error(e, exc_info=True)
@@ -745,30 +410,34 @@ class ParserInterface(base.ParserBase):
     @property
     def api_data(self) -> ApiInterfaceData:
         return self._api_data
+
+    # endregion Properties
 # endregion Parse
 
 # region Writer
 
 
-class InterfaceWriter(base.WriteBase):
+class Writer(base.WriteBase):
     # region Constructor
     @TypeCheckKw(arg_info={
         "write_file": 0, "write_json": 0,
         "copy_clipboard": 0, "print_template": 0,
         "print_json": 0, "clear_on_print": 0,
-        "write_template_long": 0
+        "write_template_long": 0,
+        "include_desc": 0
     },
         types=[bool],
         ftype=DecFuncEnum.METHOD)
-    def __init__(self, parser: ParserInterface, **kwargs):
+    def __init__(self, parser: Parser, **kwargs):
         super().__init__(**kwargs)
-        self._parser: ParserInterface = parser
+        self._parser: Parser = parser
         self._copy_clipboard: bool = kwargs.get('copy_clipboard', False)
         self._print_template: bool = kwargs.get('print_template', False)
         self._write_file: bool = kwargs.get('write_template', False)
         self._print_json: bool = kwargs.get('print_json', True)
         self._write_json: bool = kwargs.get('write_json', False)
         self._clear_on_print: bool = kwargs.get('clear_on_print', True)
+        self._include_desc: bool = kwargs.get('include_desc', True)
         self._write_template_long: bool = kwargs.get(
             'write_template_long', False)
         self._indent_amt = 4
@@ -785,7 +454,7 @@ class InterfaceWriter(base.WriteBase):
         self._path_dir = Path(__file__).parent
         self._cache: Dict[str, object] = {}
 
-        t_file = 'interface'
+        t_file = self._get_template_name()
         if not self._write_template_long:
             t_file += '_stub'
         t_file += '.tmpl'
@@ -800,6 +469,15 @@ class InterfaceWriter(base.WriteBase):
         self._template_file = _path
         self._template: str = self._get_template()
     # endregion Constructor
+
+    def _get_template_name(self) -> str:
+        """
+        Gets the template name without extension or appended __stub
+
+        Returns:
+            str: interface
+        """
+        return 'interface'
 
     def write(self):
         self._set_info()
@@ -823,6 +501,9 @@ class InterfaceWriter(base.WriteBase):
         except Exception as e:
             logger.exception(e)
 
+    def _get_json_type(sefl) -> str:
+        return "interface"
+
     def _get_json(self) -> str:
         if not self._json_str is None:
             return self._json_str
@@ -837,12 +518,15 @@ class InterfaceWriter(base.WriteBase):
         json_dict = {
             "id": JSON_ID,
             "version": __version__,
-            "timestamp": str(base.Util.get_timestamp_utc()),
+            # "timestamp": str(base.Util.get_timestamp_utc()),
+            "libre_office_ver": base.APP_CONFIG.libre_office_ver,
             "name": p_dict['name'],
-            "type": "interface",
+            "type": self._get_json_type(),
             "namespace": p_dict['namespace'],
             "parser_args": self._parser.get_parser_args(),
-            "writer_args": {},
+            "writer_args": {
+                "include_desc": self._include_desc
+            },
             "data": p_dict
         }
         str_jsn = base.Util.get_formated_dict_list_str(obj=json_dict, indent=2)
@@ -882,12 +566,12 @@ class InterfaceWriter(base.WriteBase):
             lst.append([f, n])
         self._cache[key] = lst
         return self._cache[key]
-    
+
     def _get_quote_flat(self) -> List[str]:
         key = '_get_quote_flat'
         if key in self._cache:
             return self._cache[key]
-        
+
         t_set: Set[str] = set()
         # grab all the methods that need quotes
         si_lst = self._parser.api_data.func_summaries.get_obj()
@@ -910,12 +594,20 @@ class InterfaceWriter(base.WriteBase):
             if t.requires_typing or t.is_py_type is False:
                 t_set.add(t.type)
 
+        # grab all types summaries
+        si_lst = self._parser.api_data.types_summaries.get_obj()
+        for si in si_lst:
+            t = si.p_type
+            if t.requires_typing or t.is_py_type is False:
+                t_set.add(t.type)
+
         # grab all export summaries
         si_lst = self._parser.api_data.exported_summaries.get_obj()
         for si in si_lst:
             t = si.p_type
             if t.requires_typing or t.is_py_type is False:
                 t_set.add(t.type)
+
         self._cache[key] = list(t_set)
         return self._cache[key]
 
@@ -941,6 +633,11 @@ class InterfaceWriter(base.WriteBase):
             t = si.p_type
             if t.requires_typing:
                 t_set.add(t.type)
+        si_lst = self._parser.api_data.types_summaries.get_obj()
+        for si in si_lst:
+            t = si.p_type
+            if t.requires_typing:
+                t_set.add(t.type)
         si_lst = self._parser.api_data.exported_summaries.get_obj()
         for si in si_lst:
             t = si.p_type
@@ -956,16 +653,18 @@ class InterfaceWriter(base.WriteBase):
         self._template = self._template.replace('{name}', self._p_name)
         self._template = self._template.replace('{ns}', str(self._p_namespace))
         self._template = self._template.replace('{link}', self._p_url)
-        
+
         self._template = self._template.replace(
             '{quote}',
             str(set(self._get_quote_flat())))
         self._template = self._template.replace(
             '{typings}',
             str(set(self._get_typings())))
-        
+
         self._template = self._template.replace(
             '{requires_typing}', str(self._p_requires_typing))
+        self._template = self._template.replace(
+            '{include_desc}', str(self._include_desc))
         self._template = self._template.replace(
             '{inherits}', base.Util.get_string_list(lines=self._p_extends))
         self._template = self._template.replace(
@@ -995,6 +694,7 @@ class InterfaceWriter(base.WriteBase):
         key = '_set_info'
         if key in self._cache:
             return
+
         def get_extends(lst: List[str]) -> List[str]:
             return [base.Util.get_last_part(s) for s in lst]
             # return [s.rsplit('.', 1)[1] for s in lst]
@@ -1028,16 +728,20 @@ class InterfaceWriter(base.WriteBase):
         try:
             if not self._p_name:
                 raise Exception(
-                    "InterfaceWriter: validation fail: name is an empty string.")
+                    "Writer: validation fail: name is an empty string.")
             if not self._p_url:
                 raise Exception(
-                    "InterfaceWriter: validation fail: url is an empty string.")
+                    "Writer: validation fail: url is an empty string.")
             if not self._p_namespace:
                 raise Exception(
-                    "InterfaceWriter: validation fail: namespace is an empty string.")
+                    "Writer: validation fail: namespace is an empty string.")
         except Exception as e:
             logger.error(e)
             raise e
+
+    def _get_template_ext(self) -> str:
+        """Gets Template extension. Can be overriden"""
+        return base.APP_CONFIG.template_interface_ext
 
     def _get_uno_obj_path(self) -> Path:
         key = '_get_uno_obj_path'
@@ -1046,7 +750,7 @@ class InterfaceWriter(base.WriteBase):
         if not self._p_name:
             try:
                 raise Exception(
-                    "InterfaceWriter._get_uno_obj_path() Parser provided a name that is an empty string.")
+                    "Writer._get_uno_obj_path() Parser provided a name that is an empty string.")
             except Exception as e:
                 logger.error(e, exc_info=True)
                 raise e
@@ -1056,7 +760,7 @@ class InterfaceWriter(base.WriteBase):
         name_parts: List[str] = self._p_namespace.split('.')
         # ignore com, sun, star
         path_parts = name_parts[3:]
-        path_parts.append(self._p_name + '.tmpl')
+        path_parts.append(self._p_name + self._get_template_ext())
         obj_path = uno_obj_path.joinpath(*path_parts)
         self._mkdirp(obj_path.parent)
         self._cache[key] = obj_path
@@ -1075,7 +779,6 @@ class InterfaceWriter(base.WriteBase):
             f.write(jsn_str)
         logger.info("Created file: %s", jsn_p)
 # endregion Writer
-
 
 # region Parse method
 def _get_parsed_kwargs(**kwargs) -> Dict[str, str]:
@@ -1099,11 +802,13 @@ def _get_parsed_kwargs(**kwargs) -> Dict[str, str]:
             raise base.RequiredError(f"Missing required arg {k}.")
     return result
 
+
 def _get_parsed_args(*args) -> Dict[str, bool]:
     # key, value and value is a key into defaults
     defaults = {
         'no_sort': True,
         "no_cache": True,
+        "no_desc": True,
         "no_print_clear": True,
         "long_template": False,
         "clipboard": False,
@@ -1116,6 +821,7 @@ def _get_parsed_args(*args) -> Dict[str, bool]:
     found = {
         'no_sort': False,
         "no_cache": False,
+        "no_desc": False,
         "no_print_clear": False,
         "long_template": True,
         "clipboard": True,
@@ -1130,6 +836,8 @@ def _get_parsed_args(*args) -> Dict[str, bool]:
         "no_sort": "no_sort",
         "x": "no_cache",
         "no_cache": "no_cache",
+        "d": "do_desc",
+        "no_desc": "no_desc",
         "p": "no_print_clear",
         "no_print_clear": "no_print_clear",
         "g": "long_template",
@@ -1147,7 +855,7 @@ def _get_parsed_args(*args) -> Dict[str, bool]:
         "v": "verbose",
         "verbose": "verbose"
     }
-    result = {k:v for k, v in defaults.items()}
+    result = {k: v for k, v in defaults.items()}
     for arg in args:
         if not isinstance(arg, str):
             continue
@@ -1155,6 +863,65 @@ def _get_parsed_args(*args) -> Dict[str, bool]:
             key = lookups[arg]
             result[key] = found[key]
     return result
+
+
+class Processer:
+    """Processes parsing and writing"""
+    @RequireArgs('url', ftype=DecFuncEnum.METHOD)
+    def __init__(self, p: type[Parser], w: type[Writer], **kwargs):
+        """
+        Constructor
+
+        Args:
+            p (type[Parser]): Parser class
+            w (type[Writer]): Writer class
+
+        Other Arguments:
+            url (str): url to parse
+            sort (bool, optional): No sorting of results. Default ``True``
+            cache (bool, optional): caching. Default ``False``
+            clear_on_print (bool, optional): No clearing of terminal when otuput to terminal. Default ``False``
+            write_template_long (bool, optional): Writes a long format template. Requires write_template is set. Default ``False``
+            copy_clipboard (bool, optional): Copy to clipboard. Default ``False``
+            print_json (bool, optional):Print json to termainl. Default ``False``
+            print_template (bool, optional): Print template to terminal. Default ``False``
+            write_template (bool, optional): Write template file into obj_uno subfolder. Default ``False``
+            write_json (bool, optional): Write json file into obj_uno subfolder. Default ``False``
+            verbose (bool, optional): Verobose output. Default ``False``
+        """
+        self._parser = p
+        self._writer = w
+        self._url = str(kwargs['url'])
+        self._sort = bool(kwargs.get('sort', True))
+        self._cache = bool(kwargs.get('cache', False))
+        self._print_clear = bool(kwargs.get('clear_on_print', False))
+        self._long_template = bool(kwargs.get('write_template_long', False))
+        self._clipboard = bool(kwargs.get('copy_clipboard', False))
+        self._print_json = bool(kwargs.get('print_json', False))
+        self._print_template = bool(kwargs.get('print_template', False))
+        self._write_template = bool(kwargs.get('write_template', False))
+        self._write_json = bool(kwargs.get('write_json', bool))
+        self._verbose = bool(kwargs.get('verbose', False))
+        self._include_desc = bool(kwargs.get('include_desc', True))
+
+    def process(self) -> None:
+        parser = self._parser(
+            url=self._url,
+            sort=self._sort,
+            cache=self._cache
+        )
+        w = self._writer(
+            parser=parser,
+            print_template=self._print_template,
+            print_json=self._print_json,
+            copy_clipboard=self._clipboard,
+            write_template=self._write_template,
+            write_json=self._write_json,
+            clear_on_print=self._print_clear,
+            write_template_long=self._long_template,
+            include_desc=self._include_desc
+        )
+        w.write()
 
 
 def parse(*args, **kwargs):
@@ -1166,6 +933,7 @@ def parse(*args, **kwargs):
         'no_cache' (str, optional): Short form ``'x'``. No caching. Default ``False``
         'no_print_clear (str, optional): Short form ``'p'``. No clearing of terminal
             when otuput to terminal. Default ``False``
+        'no_desc' (str, optional): Short from ``'d'``. No description will be outputed in template. Default ``False``
         'long_template' (str, optional): Short form ``'g'``. Writes a long format template.
             Requires write_template is set. Default ``False``
         'clipboard' (str, optional): Short form ``'c'``. Copy to clipboard. Default ``False``
@@ -1182,21 +950,6 @@ def parse(*args, **kwargs):
     global logger
     pkwargs = _get_parsed_kwargs(**kwargs)
     pargs = _get_parsed_args(*args)
-    p = ParserInterface(
-        url=pkwargs['url'],
-        sort=pargs['no_sort'],
-        cache=pargs['no_cache']
-    )
-    w = InterfaceWriter(
-        parser=p,
-        print_template=pargs['print_template'],
-        print_json=pargs['print_json'],
-        copy_clipboard=pargs['clipboard'],
-        write_template=pargs['write_template'],
-        write_json=pargs['write_json'],
-        clear_on_print=(not pargs['no_print_clear']),
-        write_template_long=pargs['long_template']
-    )
     if logger is None:
         log_args = {}
         if 'log_file' in pkwargs:
@@ -1206,16 +959,38 @@ def parse(*args, **kwargs):
         if pargs['verbose']:
             log_args['level'] = logging.DEBUG
         _set_loggers(get_logger(logger_name=Path(__file__).stem, **log_args))
-    w.write()
+    parser: Parser = kwargs.get('class_parser', Parser)
+    writer: Writer = kwargs.get('class_writer', Writer)
+    proc = Processer(
+        p=parser,
+        w=writer,
+        url=pkwargs['url'],
+        sort=pargs['no_sort'],
+        cache=pargs['no_cache'],
+        print_template=pargs['print_template'],
+        print_json=pargs['print_json'],
+        copy_clipboard=pargs['clipboard'],
+        write_template=pargs['write_template'],
+        write_json=pargs['write_json'],
+        clear_on_print=(not pargs['no_print_clear']),
+        write_template_long=pargs['long_template'],
+        include_desc=pargs['no_desc']
+    )
+    proc.process()
+
 # endregion Parse method
 
+# region Main
 def _main():
     os.system('cls' if os.name == 'nt' else 'clear')
     # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1beans_1_1XHierarchicalPropertySet.html'
     # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1beans_1_1XIntrospectionAccess.html' # has a sequence
     # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1accessibility_1_1XAccessibleTextSelection.html'
     # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XStyleSettings.html'
-    url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XMessageBoxFactory.html'
+    # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1inspection_1_1XPropertyControl.html'  # no import
+    # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XMessageBoxFactory.html'
+    url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1report_1_1XReportControlModel.html'
+    url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1grid_1_1XGridColumnModel.html'
     args = ('v', 'n')
     kwargs = {
         "u": url,
@@ -1226,8 +1001,7 @@ def _main():
     parse(*args, **kwargs)
 
 
-def main():
-    global logger
+def get_cmd_args() -> argparse.Namespace:
     # region Parser
     parser = argparse.ArgumentParser(description='interface')
     parser.add_argument(
@@ -1235,6 +1009,12 @@ def main():
         help='Source Url',
         type=str,
         required=True)
+    parser.add_argument(
+        '-d', '--no-desc',
+        help='No description will be outputed in template',
+        action='store_false',
+        dest='desc',
+        default=True)
     parser.add_argument(
         '-s', '--no-sort',
         help='No sorting of results',
@@ -1300,8 +1080,14 @@ def main():
         help='Log file to use. Defaults to interface.log',
         type=str,
         required=False)
-
+    # endregion Parser
     args = parser.parse_args()
+    return args
+
+
+def main():
+    global logger
+    args = get_cmd_args()
     if logger is None:
         log_args = {}
         if args.log_file:
@@ -1311,31 +1097,31 @@ def main():
         if args.verbose:
             log_args['level'] = logging.DEBUG
         _set_loggers(get_logger(logger_name=Path(__file__).stem, **log_args))
-    # endregion Parser
+
     if not args.no_print_clear:
         os.system('cls' if os.name == 'nt' else 'clear')
     logger.info('Executing command: %s', sys.argv[1:])
     logger.info('Parsing Url %s' % args.url)
 
-    p = ParserInterface(
+    proc = Processer(
+        p=Parser,
+        w=Writer,
         url=args.url,
         sort=args.sort,
-        cache=args.cache
-    )
-    w = InterfaceWriter(
-        parser=p,
         print_template=args.print_template,
         print_json=args.print_json,
         copy_clipboard=args.clipboard,
         write_template=args.write_template,
         write_json=args.write_json,
         clear_on_print=(not args.no_print_clear),
-        write_template_long=args.long_format
+        write_template_long=args.long_format,
+        include_desc=args.desc
     )
     if args.print_template is False and args.print_json is False:
         print('')
-    w.write()
+    proc.process()
 
 
 if __name__ == '__main__':
-    main()
+    _main()
+# endregion Main

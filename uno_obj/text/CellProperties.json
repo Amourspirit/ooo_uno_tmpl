@@ -1,0 +1,273 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.14",
+  "libre_office_ver": "7.2",
+  "name": "CellProperties",
+  "type": "service",
+  "namespace": "com.sun.star.text",
+  "parser_args": {
+    "sort": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "from_imports": [
+      [
+        "..xml.user_defined_attributes_supplier",
+        "UserDefinedAttributesSupplier"
+      ],
+      [
+        "..beans.x_property_set",
+        "XPropertySet"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..table.border_line",
+        "BorderLine"
+      ],
+      [
+        ".x_text",
+        "XText"
+      ],
+      [
+        "..style.graphic_location",
+        "GraphicLocation"
+      ],
+      [
+        "..graphic.x_graphic",
+        "XGraphic"
+      ],
+      [
+        "..util.color",
+        "Color"
+      ],
+      [
+        ".x_text_section",
+        "XTextSection"
+      ]
+    ],
+    "quote": [
+      "BorderLine",
+      "XText",
+      "XTextSection",
+      "XGraphic",
+      "Color",
+      "GraphicLocation"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "name": "CellProperties",
+    "imports": [],
+    "namespace": "com.sun.star.text",
+    "extends": [
+      "com.sun.star.xml.UserDefinedAttributesSupplier",
+      "com.sun.star.beans.XPropertySet"
+    ],
+    "desc": [
+      "service that holds all cell properties of a text table cell in a text document.",
+      "",
+      "**since**",
+      "",
+      "    LibreOffice 6.1"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1text_1_1CellProperties.html",
+    "items": {
+      "properties": [
+        {
+          "name": "BackColor",
+          "returns": "Color",
+          "desc": [
+            "contains the background color."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "BackGraphic",
+          "returns": "XGraphic",
+          "desc": [
+            "contains the graphic object that is displayed as background graphic.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 6.1"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "BackGraphicFilter",
+          "returns": "str",
+          "desc": [
+            "contains the name of the graphic filter of the background graphic."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "BackGraphicLocation",
+          "returns": "GraphicLocation",
+          "desc": [
+            "determines the position of the background graphic."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "BackGraphicURL",
+          "returns": "str",
+          "desc": [
+            "contains the URL to the background graphic.",
+            "",
+            "Note the new behaviour since it this was deprecated: This property can only be set and only external URLs are supported (no more vnd.sun.star.GraphicObject scheme). When an URL is set, then it will load the graphic and set the BackGraphic property."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "BackTransparent",
+          "returns": "bool",
+          "desc": [
+            "determines whether the background is transparent."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "BottomBorder",
+          "returns": "BorderLine",
+          "desc": [
+            "contains the bottom border line."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "BottomBorderDistance",
+          "returns": "int",
+          "desc": [
+            "contains the distance of the bottom border."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "CellName",
+          "returns": "str",
+          "desc": [
+            "contains the cell name, see SwXTextTable.getCellByName for more information"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "IsProtected",
+          "returns": "bool",
+          "desc": [
+            "determines whether the cell is write protected or not."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "LeftBorder",
+          "returns": "BorderLine",
+          "desc": [
+            "contains the left border line."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "LeftBorderDistance",
+          "returns": "int",
+          "desc": [
+            "contains the distance of the left border."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "NumberFormat",
+          "returns": "int",
+          "desc": [
+            "contains the number format."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ParentText",
+          "returns": "XText",
+          "desc": [
+            "Parent text of this table cell.",
+            "",
+            "This might be a header text, body text, parent cell, etc.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 6.3"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "RightBorder",
+          "returns": "BorderLine",
+          "desc": [
+            "contains the right border line."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "RightBorderDistance",
+          "returns": "int",
+          "desc": [
+            "contains the distance of the right border."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "TextSection",
+          "returns": "XTextSection",
+          "desc": [
+            "contains the text section the text table is contained in if there is any."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "TopBorder",
+          "returns": "BorderLine",
+          "desc": [
+            "contains the top border line."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "TopBorderDistance",
+          "returns": "int",
+          "desc": [
+            "contains the distance of the top border."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "VertOrient",
+          "returns": "int",
+          "desc": [
+            "the vertical orientation of the text inside of the table cells in this row."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
+  }
+}

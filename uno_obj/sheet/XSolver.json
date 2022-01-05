@@ -1,16 +1,22 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.8",
-  "timestamp": "2021-12-27 22:15:17+00:00",
+  "version": "0.1.12",
+  "timestamp": "2022-01-04 18:09:14+00:00",
   "name": "XSolver",
   "type": "interface",
   "namespace": "com.sun.star.sheet",
   "parser_args": {
     "sort": true
   },
-  "writer_args": {},
+  "writer_args": {
+    "include_desc": true
+  },
   "data": {
     "from_imports": [
+      [
+        ".solver",
+        "Solver"
+      ],
       [
         "..uno.x_interface",
         "XInterface"
@@ -18,25 +24,37 @@
     ],
     "from_imports_typing": [
       [
+        ".x_spreadsheet_document",
+        "XSpreadsheetDocument"
+      ],
+      [
         "..table.cell_address",
         "CellAddress"
       ],
       [
-        ".x_spreadsheet_document",
-        "XSpreadsheetDocument"
+        ".solver_constraint",
+        "SolverConstraint"
       ]
     ],
     "quote": [
+      "typing.List[CellAddress]",
+      "typing.List[float]",
       "CellAddress",
+      "typing.List[SolverConstraint]",
       "XSpreadsheetDocument"
     ],
-    "typings": [],
+    "typings": [
+      "typing.List[SolverConstraint]",
+      "typing.List[CellAddress]",
+      "typing.List[float]"
+    ],
     "requires_typing": true,
     "name": "XSolver",
     "imports": [],
     "namespace": "com.sun.star.sheet",
     "extends": [
-      "com.sun.star.uno.XInterface"
+      "com.sun.star.uno.XInterface",
+      "com.sun.star.sheet.Solver"
     ],
     "desc": [
       "allows to call a solver for a model that is defined by spreadsheet cells."
@@ -52,6 +70,35 @@
           ],
           "raises": [],
           "args": []
+        }
+      ],
+      "types": [
+        {
+          "name": "Constraints",
+          "returns": "typing.List[SolverConstraint]",
+          "desc": [
+            "The constraints of the model."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Solution",
+          "returns": "typing.List[float]",
+          "desc": [
+            "contains the solution's value for each of the variables, if a solution was found."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Variables",
+          "returns": "typing.List[CellAddress]",
+          "desc": [
+            "The addresses of the cells that contain the variables."
+          ],
+          "raises_get": "",
+          "raises_set": ""
         }
       ],
       "properties": [

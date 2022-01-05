@@ -1,0 +1,149 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.14",
+  "libre_office_ver": "7.2",
+  "name": "Legend",
+  "type": "service",
+  "namespace": "com.sun.star.chart2",
+  "parser_args": {
+    "sort": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "from_imports": [
+      [
+        "..beans.property_set",
+        "PropertySet"
+      ],
+      [
+        ".x_legend",
+        "XLegend"
+      ],
+      [
+        "..drawing.line_properties",
+        "LineProperties"
+      ],
+      [
+        "..drawing.fill_properties",
+        "FillProperties"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..awt.size",
+        "Size"
+      ],
+      [
+        "..chart.chart_legend_expansion",
+        "ChartLegendExpansion"
+      ],
+      [
+        ".relative_position",
+        "RelativePosition"
+      ],
+      [
+        ".legend_position",
+        "LegendPosition"
+      ]
+    ],
+    "quote": [
+      "LegendPosition",
+      "RelativePosition",
+      "ChartLegendExpansion",
+      "Size"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "name": "Legend",
+    "imports": [],
+    "namespace": "com.sun.star.chart2",
+    "extends": [
+      "com.sun.star.drawing.FillProperties",
+      "com.sun.star.drawing.LineProperties",
+      "com.sun.star.beans.PropertySet",
+      "com.sun.star.chart2.XLegend"
+    ],
+    "desc": [
+      "Describes a legend for a Diagram.",
+      "",
+      "**since**",
+      "",
+      "    LibreOffice 7.0"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1chart2_1_1Legend.html",
+    "items": {
+      "properties": [
+        {
+          "name": "AnchorPosition",
+          "returns": "LegendPosition",
+          "desc": [
+            "Provides an automated position."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Expansion",
+          "returns": "ChartLegendExpansion",
+          "desc": [
+            "Determines how the aspect ratio of the legend should roughly be.",
+            "",
+            "Set the Expansion to com.sun.star.chart.HIGH for a legend that is positioned on the right or left hand side. Use com.sun.star.chart.WIDE for a legend that is positioned on top or the bottom."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Overlay",
+          "returns": "bool",
+          "desc": [
+            "Determines, whether the legend should overlay the chart.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 7.0"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ReferencePageSize",
+          "returns": "Size",
+          "desc": [
+            "contains the size of the page at the time when properties were set (e.g.",
+            "",
+            "the CharHeight).",
+            "",
+            "This way it is possible to resize objects (like text) in the view without modifying the model."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "RelativePosition",
+          "returns": "RelativePosition",
+          "desc": [
+            "The position is as a relative position on the page.",
+            "",
+            "If a relative position is given the legend is not automatically placed, but instead is placed relative on the page.",
+            "",
+            "If VOID, the legend position is solely determined by the AnchorPosition."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Show",
+          "returns": "bool",
+          "desc": [
+            "Determines, whether the legend should be rendered by the view."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
+  }
+}

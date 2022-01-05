@@ -1,14 +1,16 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.8",
-  "timestamp": "2021-12-27 22:15:34+00:00",
+  "version": "0.1.12",
+  "timestamp": "2022-01-04 18:10:07+00:00",
   "name": "XAnimate",
   "type": "interface",
   "namespace": "com.sun.star.animations",
   "parser_args": {
     "sort": true
   },
-  "writer_args": {},
+  "writer_args": {
+    "include_desc": true
+  },
   "data": {
     "from_imports": [
       [
@@ -16,10 +18,23 @@
         "XAnimationNode"
       ]
     ],
-    "from_imports_typing": [],
-    "quote": [],
-    "typings": [],
-    "requires_typing": false,
+    "from_imports_typing": [
+      [
+        ".time_filter_pair",
+        "TimeFilterPair"
+      ]
+    ],
+    "quote": [
+      "typing.List[object]",
+      "typing.List[TimeFilterPair]",
+      "typing.List[float]"
+    ],
+    "typings": [
+      "typing.List[object]",
+      "typing.List[TimeFilterPair]",
+      "typing.List[float]"
+    ],
+    "requires_typing": true,
     "name": "XAnimate",
     "imports": [],
     "namespace": "com.sun.star.animations",
@@ -31,6 +46,33 @@
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1animations_1_1XAnimate.html",
     "items": {
+      "types": [
+        {
+          "name": "KeyTimes",
+          "returns": "typing.List[float]",
+          "desc": [],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "TimeFilter",
+          "returns": "typing.List[TimeFilterPair]",
+          "desc": [
+            "todo: timeFilter=\\\"0,0; 0.14,0.36; 0.43,0.73; 0.71,0.91; 1.0,1.0\\\" ?"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Values",
+          "returns": "typing.List[object]",
+          "desc": [
+            "A sequence of one or more values, each of which must be a legal value for the specified attribute."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ],
       "properties": [
         {
           "name": "Accumulate",

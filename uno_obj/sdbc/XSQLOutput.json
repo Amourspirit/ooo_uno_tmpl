@@ -1,14 +1,16 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.8",
-  "timestamp": "2021-12-27 22:15:29+00:00",
+  "version": "0.1.12",
+  "timestamp": "2022-01-04 18:09:47+00:00",
   "name": "XSQLOutput",
   "type": "interface",
   "namespace": "com.sun.star.sdbc",
   "parser_args": {
     "sort": true
   },
-  "writer_args": {},
+  "writer_args": {
+    "include_desc": true
+  },
   "data": {
     "from_imports": [
       [
@@ -17,6 +19,34 @@
       ]
     ],
     "from_imports_typing": [
+      [
+        "..util.date_time",
+        "DateTime"
+      ],
+      [
+        "..util.time",
+        "Time"
+      ],
+      [
+        ".x_clob",
+        "XClob"
+      ],
+      [
+        ".x_blob",
+        "XBlob"
+      ],
+      [
+        ".x_struct",
+        "XStruct"
+      ],
+      [
+        ".x_array",
+        "XArray"
+      ],
+      [
+        ".xsql_data",
+        "XSQLData"
+      ],
       [
         ".x_ref",
         "XRef"
@@ -28,47 +58,19 @@
       [
         "..util.date",
         "Date"
-      ],
-      [
-        ".xsql_data",
-        "XSQLData"
-      ],
-      [
-        ".x_clob",
-        "XClob"
-      ],
-      [
-        ".x_struct",
-        "XStruct"
-      ],
-      [
-        "..util.time",
-        "Time"
-      ],
-      [
-        ".x_blob",
-        "XBlob"
-      ],
-      [
-        "..util.date_time",
-        "DateTime"
-      ],
-      [
-        ".x_array",
-        "XArray"
       ]
     ],
     "quote": [
       "XRef",
-      "XSQLData",
-      "XInputStream",
+      "XClob",
       "XArray",
       "DateTime",
-      "Time",
-      "XBlob",
-      "Date",
-      "XClob",
       "XStruct",
+      "XSQLData",
+      "Date",
+      "XBlob",
+      "Time",
+      "XInputStream",
       "typing.List[int]"
     ],
     "typings": [
@@ -308,7 +310,7 @@
           "args": [
             [
               "x",
-              "object",
+              "int",
               "in"
             ]
           ]

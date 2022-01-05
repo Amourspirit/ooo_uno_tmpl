@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.8",
-  "timestamp": "2021-12-28 11:31:05+00:00",
+  "version": "0.1.14",
+  "libre_office_ver": "7.2",
   "type": "struct",
   "name": "OpenCommandArgument2",
   "namespace": "com.sun.star.ucb",
@@ -10,42 +10,49 @@
   },
   "writer_args": {
     "sort": true,
-    "auto_import": true,
-    "dynamic_struct": false
+    "dynamic_struct": false,
+    "include_desc": true
   },
   "data": {
     "name": "OpenCommandArgument2",
     "namespace": "com.sun.star.ucb",
     "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1ucb_1_1OpenCommandArgument2.html",
+    "from_imports": [
+      [
+        ".open_command_argument",
+        "OpenCommandArgument"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".numbered_sorting_info",
+        "NumberedSortingInfo"
+      ]
+    ],
     "quote": [
       "typing.List[NumberedSortingInfo]"
     ],
     "typings": [
       "typing.List[NumberedSortingInfo]"
     ],
+    "requires_typing": true,
     "fullname": "com.sun.star.ucb.OpenCommandArgument2",
     "desc": [
-      "The argument for commands like \"open\", \"update\", and \"synchronize\".",
+      "The argument for commands like \\\"open\\\", \\\"update\\\", and \\\"synchronize\\\".",
       "",
       "This struct extends the original OpenCommandArgument, which must not be changed for compatibility reasons."
     ],
-    "extends": [],
     "imports": [],
-    "auto_imports": [
-      [
-        ".numbered_sorting_info",
-        "NumberedSortingInfo"
-      ]
+    "extends": [
+      "com.sun.star.ucb.OpenCommandArgument"
     ],
-    "from_imports": [],
-    "requires_typing": true,
     "items": [
       {
         "name": "SortingInfo",
         "type": "typing.List[NumberedSortingInfo]",
-        "orig_type": "sequence< com.sun.star.ucb.NumberedSortingInfo >",
         "lines": [
           "The sort criteria for the rows of the returned ContentResultSet.",
+          "",
           "The result set implementation may ignore this parameter, if it cannot sort the data by the given criteria in an efficient way (i.e. directly using the underlying data source -> SQL-database -> ORDER BY)."
         ]
       }

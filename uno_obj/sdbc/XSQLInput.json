@@ -1,14 +1,16 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.8",
-  "timestamp": "2021-12-27 22:15:29+00:00",
+  "version": "0.1.12",
+  "timestamp": "2022-01-04 18:09:47+00:00",
   "name": "XSQLInput",
   "type": "interface",
   "namespace": "com.sun.star.sdbc",
   "parser_args": {
     "sort": true
   },
-  "writer_args": {},
+  "writer_args": {
+    "include_desc": true
+  },
   "data": {
     "from_imports": [
       [
@@ -17,6 +19,26 @@
       ]
     ],
     "from_imports_typing": [
+      [
+        "..util.date_time",
+        "DateTime"
+      ],
+      [
+        "..util.time",
+        "Time"
+      ],
+      [
+        ".x_array",
+        "XArray"
+      ],
+      [
+        ".x_clob",
+        "XClob"
+      ],
+      [
+        ".x_blob",
+        "XBlob"
+      ],
       [
         ".x_ref",
         "XRef"
@@ -28,37 +50,17 @@
       [
         "..util.date",
         "Date"
-      ],
-      [
-        ".x_clob",
-        "XClob"
-      ],
-      [
-        "..util.time",
-        "Time"
-      ],
-      [
-        ".x_blob",
-        "XBlob"
-      ],
-      [
-        "..util.date_time",
-        "DateTime"
-      ],
-      [
-        ".x_array",
-        "XArray"
       ]
     ],
     "quote": [
       "XRef",
-      "XInputStream",
+      "XClob",
       "XArray",
       "DateTime",
-      "Time",
-      "XBlob",
       "Date",
-      "XClob",
+      "XBlob",
+      "Time",
+      "XInputStream",
       "typing.List[int]"
     ],
     "typings": [
@@ -215,7 +217,7 @@
         },
         {
           "name": "readLong",
-          "returns": "object",
+          "returns": "int",
           "desc": [
             "reads the next attribute in the stream as hyper."
           ],

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.8",
-  "timestamp": "2021-12-28 11:30:59+00:00",
+  "version": "0.1.14",
+  "libre_office_ver": "7.2",
   "type": "struct",
   "name": "InvocationInfo",
   "namespace": "com.sun.star.script",
@@ -10,58 +10,76 @@
   },
   "writer_args": {
     "sort": true,
-    "auto_import": true,
-    "dynamic_struct": false
+    "dynamic_struct": false,
+    "include_desc": true
   },
   "data": {
     "name": "InvocationInfo",
     "namespace": "com.sun.star.script",
     "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1script_1_1InvocationInfo.html",
+    "from_imports": [],
+    "from_imports_typing": [
+      [
+        "..reflection.param_mode",
+        "ParamMode"
+      ],
+      [
+        ".member_type",
+        "MemberType"
+      ]
+    ],
     "quote": [
-      "typing.List[object]",
-      "typing.List[ParamMode]"
+      "typing.List[ParamMode]",
+      "MemberType",
+      "typing.List[object]"
     ],
     "typings": [
-      "typing.List[object]",
-      "typing.List[ParamMode]"
+      "typing.List[ParamMode]",
+      "typing.List[object]"
     ],
+    "requires_typing": true,
     "fullname": "com.sun.star.script.InvocationInfo",
     "desc": [
       "This struct is used to specify information about object members (methods or properties) accessed via XInvocation, such as names, types, or parameters."
     ],
-    "extends": [],
     "imports": [],
-    "auto_imports": [
-      [
-        "..reflection.param_mode",
-        "ParamMode"
-      ]
-    ],
-    "from_imports": [],
-    "requires_typing": true,
+    "extends": [],
     "items": [
       {
         "name": "PropertyAttribute",
         "type": "int",
-        "orig_type": "short",
         "lines": [
           "Only for property members: This field may contain zero or more constants of the com.sun.star.beans.PropertyAttribute constants group.",
+          "",
           "It is not guaranteed that all necessary constants are set to describe the property completely, but a flag will only be set, if the corresponding charac- teristic really exists. Example: If the READONLY flag is set, the property is readonly. If it isn't set, the property nevertheless can be readonly.",
+          "",
           "For methods this field is irrelevant and is set to 0."
         ]
       },
       {
         "name": "aName",
         "type": "str",
-        "orig_type": "string",
         "lines": [
           "Name of the method or property."
         ]
       },
       {
+        "name": "aType",
+        "type": "object",
+        "lines": [
+          "Type of the member, for methods the return type."
+        ]
+      },
+      {
+        "name": "eMemberType",
+        "type": "MemberType",
+        "lines": [
+          "Kind of the member (method or property)."
+        ]
+      },
+      {
         "name": "aParamModes",
         "type": "typing.List[ParamMode]",
-        "orig_type": "sequence< com.sun.star.reflection.ParamMode >",
         "lines": [
           "Mode of method parameters (IN, OUT, INOUT), for properties this sequence is empty."
         ]
@@ -69,25 +87,8 @@
       {
         "name": "aParamTypes",
         "type": "typing.List[object]",
-        "orig_type": "sequence< type >",
         "lines": [
           "Types method parameters, for properties this sequence is empty."
-        ]
-      },
-      {
-        "name": "aType",
-        "type": "object",
-        "orig_type": "type",
-        "lines": [
-          "Type of the member, for methods the return type."
-        ]
-      },
-      {
-        "name": "eMemberType",
-        "type": "object",
-        "orig_type": "MemberType",
-        "lines": [
-          "Kind of the member (method or property)."
         ]
       }
     ]

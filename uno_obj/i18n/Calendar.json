@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.8",
-  "timestamp": "2021-12-28 11:31:04+00:00",
+  "version": "0.1.14",
+  "libre_office_ver": "7.2",
   "type": "struct",
   "name": "Calendar",
   "namespace": "com.sun.star.i18n",
@@ -10,78 +10,51 @@
   },
   "writer_args": {
     "sort": true,
-    "auto_import": true,
-    "dynamic_struct": false
+    "dynamic_struct": false,
+    "include_desc": true
   },
   "data": {
     "name": "Calendar",
     "namespace": "com.sun.star.i18n",
     "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1i18n_1_1Calendar.html",
+    "from_imports": [],
+    "from_imports_typing": [
+      [
+        ".calendar_item",
+        "CalendarItem"
+      ]
+    ],
     "quote": [
       "typing.List[CalendarItem]"
     ],
     "typings": [
       "typing.List[CalendarItem]"
     ],
+    "requires_typing": true,
     "fullname": "com.sun.star.i18n.Calendar",
     "desc": [
       "A calendar as returned in a sequence by XLocaleData.getAllCalendars()."
     ],
-    "extends": [],
     "imports": [],
-    "auto_imports": [
-      [
-        ".calendar_item",
-        "CalendarItem"
-      ]
-    ],
-    "from_imports": [],
-    "requires_typing": true,
+    "extends": [],
     "items": [
-      {
-        "name": "Days",
-        "type": "typing.List[CalendarItem]",
-        "orig_type": "sequence< CalendarItem >",
-        "lines": [
-          "the days of the week, see also CalendarItem."
-        ]
-      },
       {
         "name": "Default",
         "type": "bool",
-        "orig_type": "boolean",
         "lines": [
           "if this is the default calendar for a given locale."
         ]
       },
       {
-        "name": "Eras",
-        "type": "typing.List[CalendarItem]",
-        "orig_type": "sequence< CalendarItem >",
-        "lines": [
-          "the possible eras, see also CalendarItem."
-        ]
-      },
-      {
         "name": "MinimumNumberOfDaysForFirstWeek",
         "type": "int",
-        "orig_type": "short",
         "lines": [
           "how many days must reside in the first week of a year."
         ]
       },
       {
-        "name": "Months",
-        "type": "typing.List[CalendarItem]",
-        "orig_type": "sequence< CalendarItem >",
-        "lines": [
-          "the months of the year, see also CalendarItem."
-        ]
-      },
-      {
         "name": "Name",
         "type": "str",
-        "orig_type": "string",
         "lines": [
           "the name of the calendar, for example, Gregorian."
         ]
@@ -89,9 +62,29 @@
       {
         "name": "StartOfWeek",
         "type": "str",
-        "orig_type": "string",
         "lines": [
           "the ID of the day with which the week begins."
+        ]
+      },
+      {
+        "name": "Days",
+        "type": "typing.List[CalendarItem]",
+        "lines": [
+          "the days of the week, see also CalendarItem."
+        ]
+      },
+      {
+        "name": "Eras",
+        "type": "typing.List[CalendarItem]",
+        "lines": [
+          "the possible eras, see also CalendarItem."
+        ]
+      },
+      {
+        "name": "Months",
+        "type": "typing.List[CalendarItem]",
+        "lines": [
+          "the months of the year, see also CalendarItem."
         ]
       }
     ]

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.8",
-  "timestamp": "2021-12-28 11:31:02+00:00",
+  "version": "0.1.14",
+  "libre_office_ver": "7.2",
   "type": "struct",
   "name": "LineDescriptor",
   "namespace": "com.sun.star.inspection",
@@ -10,52 +10,57 @@
   },
   "writer_args": {
     "sort": true,
-    "auto_import": true,
-    "dynamic_struct": false
+    "dynamic_struct": false,
+    "include_desc": true
   },
   "data": {
     "name": "LineDescriptor",
     "namespace": "com.sun.star.inspection",
     "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1inspection_1_1LineDescriptor.html",
+    "from_imports": [],
+    "from_imports_typing": [
+      [
+        ".x_property_control",
+        "XPropertyControl"
+      ],
+      [
+        "..graphic.x_graphic",
+        "XGraphic"
+      ]
+    ],
     "quote": [
-      "XGraphic"
+      "XGraphic",
+      "XPropertyControl"
     ],
     "typings": [],
+    "requires_typing": true,
     "fullname": "com.sun.star.inspection.LineDescriptor",
     "desc": [
       "describes the appearance of a line representing a single property in an ObjectInspector.",
       "",
       "Such a line consists of",
       "",
-      "**Since**",
+      "**since**",
       "",
       "    OOo 2.0.3"
     ],
-    "extends": [],
     "imports": [],
-    "auto_imports": [
-      [
-        "..graphic.x_graphic",
-        "XGraphic"
-      ]
-    ],
-    "from_imports": [],
-    "requires_typing": true,
+    "extends": [],
     "items": [
       {
         "name": "Category",
         "type": "str",
-        "orig_type": "string",
         "lines": [
           "describes the category into which the property should be sorted by the ObjectInspector.",
+          "",
           "An ObjectInspector can visually group properties which semantically belong together (for instance using tab pages). The decision which properties actually belong together is made using this Category attribute.",
+          "",
           "For your implementation of XPropertyHandler, it's recommended that you document the programmatic names used for property categories. This way, your handler might be re-used in different contexts, where only the XObjectInspectorModel needs to provide consistent UI names for the categories."
         ]
       },
       {
         "name": "Control",
-        "type": "object",
-        "orig_type": "XPropertyControl",
+        "type": "XPropertyControl",
         "lines": [
           "denotes the control which should be used to represent the property at the UI."
         ]
@@ -63,7 +68,6 @@
       {
         "name": "DisplayName",
         "type": "str",
-        "orig_type": "string",
         "lines": [
           "denotes the human-readable display name used to present a property to the user"
         ]
@@ -71,25 +75,24 @@
       {
         "name": "HasPrimaryButton",
         "type": "bool",
-        "orig_type": "boolean",
         "lines": [
           "determines whether a button exists which can be used for a more complex, interactive property value input.",
+          "",
           "If no image for the primary button is specified, but a primary button is present, the three dots will be displayed on the button."
         ]
       },
       {
         "name": "HasSecondaryButton",
         "type": "bool",
-        "orig_type": "boolean",
         "lines": [
           "determines whether a secondary button exists which can be used for a more complex, interactive property value input.",
+          "",
           "A secondary button subordinated to the primary button. If no primary button exists (HasPrimaryButton), this member is ignored."
         ]
       },
       {
         "name": "HelpURL",
         "type": "str",
-        "orig_type": "string",
         "lines": [
           "specifies the URL to the help topic to be associated with the property"
         ]
@@ -97,69 +100,75 @@
       {
         "name": "IndentLevel",
         "type": "int",
-        "orig_type": "short",
         "lines": [
           "describes the indent level for the property",
+          "",
           "If a given property semantically depends on another one, the indent level can be used to visually represent this fact. For this, the dependent property's indent level would be one larger than the indent level of the other property.",
+          "",
           "Normally, XPropertyHandlers will set this to 0 when describing the UI for a normal property."
         ]
       },
       {
         "name": "PrimaryButtonId",
         "type": "str",
-        "orig_type": "string",
         "lines": [
           "describes a unique id to associate with the primary button",
-          "In OpenOffice.org, UI elements sometimes require a so-called UniqueID, which can be used to uniquely (within the whole application) identify this UI element. For instance, automating the OpenOffice.org UI via a dedicated separate application (\"TestTool\") requires such IDs.",
+          "",
+          "In OpenOffice.org, UI elements sometimes require a so-called UniqueID, which can be used to uniquely (within the whole application) identify this UI element. For instance, automating the OpenOffice.org UI via a dedicated separate application (\\\"TestTool\\\") requires such IDs.",
+          "",
           "If a primary button exists for a property's UI representation (HasPrimaryButton), it gets the ID specified herein."
         ]
       },
       {
         "name": "PrimaryButtonImage",
         "type": "XGraphic",
-        "orig_type": "com.sun.star.graphic.XGraphic",
         "lines": [
           "describes a graphics to display at the primary button, if any.",
+          "",
           "The property will be ignored if HasPrimaryButton is FALSE, or if PrimaryButtonImageURL is a non-empty string."
         ]
       },
       {
         "name": "PrimaryButtonImageURL",
         "type": "str",
-        "orig_type": "string",
         "lines": [
           "describes the URL of an image to display on the primary button, if any.",
+          "",
           "This URL will be used to obtain an actual com.sun.star.graphic.XGraphic object from a com.sun.star.graphic.GraphicProvider.",
+          "",
           "The property will be ignored if HasPrimaryButton is FALSE.",
+          "",
           "If you need to specify a graphic which does not have a URL, but is available as com.sun.star.graphic.XGraphic only, then you must leave PrimaryButtonImageURL empty, and use the PrimaryButtonImage property."
         ]
       },
       {
         "name": "SecondaryButtonId",
         "type": "str",
-        "orig_type": "string",
         "lines": [
           "describes a unique id to associate with the primary button",
+          "",
           "If a secondary button exists for a property's UI representation (HasSecondaryButton), it gets the ID specified herein."
         ]
       },
       {
         "name": "SecondaryButtonImage",
         "type": "XGraphic",
-        "orig_type": "com.sun.star.graphic.XGraphic",
         "lines": [
           "describes a graphics to display at the secondary button, if any.",
+          "",
           "The property will be ignored if HasSecondaryButton is FALSE, or if SecondaryButtonImageURL is a non-empty string."
         ]
       },
       {
         "name": "SecondaryButtonImageURL",
         "type": "str",
-        "orig_type": "string",
         "lines": [
           "describes the URL of an image to display on the secondary button, if any.",
+          "",
           "This URL will be used to obtain an actual com.sun.star.graphic.XGraphic object from a com.sun.star.graphic.GraphicProvider.",
+          "",
           "The property will be ignored if HasSecondaryButton is FALSE.",
+          "",
           "If you need to specify a graphic which does not have a URL, but is available as com.sun.star.graphic.XGraphic only, then you must leave SecondaryButtonImageURL empty, and use the SecondaryButtonImage property."
         ]
       }

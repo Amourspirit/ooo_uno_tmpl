@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.8",
-  "timestamp": "2021-12-28 11:30:59+00:00",
+  "version": "0.1.14",
+  "libre_office_ver": "7.2",
   "type": "struct",
   "name": "FocusEvent",
   "namespace": "com.sun.star.awt",
@@ -10,45 +10,44 @@
   },
   "writer_args": {
     "sort": true,
-    "auto_import": true,
-    "dynamic_struct": false
+    "dynamic_struct": false,
+    "include_desc": true
   },
   "data": {
     "name": "FocusEvent",
     "namespace": "com.sun.star.awt",
     "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1awt_1_1FocusEvent.html",
-    "quote": [
-      "XInterface"
-    ],
-    "typings": [],
-    "fullname": "com.sun.star.awt.FocusEvent",
-    "desc": [
-      "specifies a keyboard focus event.",
-      "",
-      "There are two levels of focus change events: permanent and temporary. Permanent focus change events occur when focus is directly moved from one component to another, such as through calls to requestFocus() or as the user uses the Tab key to traverse components. Temporary focus change events occur when focus is gained or lost for a component as the indirect result of another operation, such as window deactivation or a scrollbar drag. In this case, the original focus state will automatically be restored once that operation is finished, or for the case of window deactivation, when the window is reactivated. Both permanent and temporary focus events are delivered using the FOCUS_GAINED and FOCUS_LOST event ids; the levels may be distinguished in the event using the isTemporary() method."
-    ],
-    "extends": [
-      "com.sun.star.lang.EventObject"
-    ],
-    "imports": [],
-    "auto_imports": [
-      [
-        "..uno.x_interface",
-        "XInterface"
-      ]
-    ],
     "from_imports": [
       [
         "..lang.event_object",
         "EventObject"
       ]
     ],
+    "from_imports_typing": [
+      [
+        "..uno.x_interface",
+        "XInterface"
+      ]
+    ],
+    "quote": [
+      "XInterface"
+    ],
+    "typings": [],
     "requires_typing": true,
+    "fullname": "com.sun.star.awt.FocusEvent",
+    "desc": [
+      "specifies a keyboard focus event.",
+      "",
+      "There are two levels of focus change events: permanent and temporary. Permanent focus change events occur when focus is directly moved from one component to another, such as through calls to requestFocus() or as the user uses the Tab key to traverse components. Temporary focus change events occur when focus is gained or lost for a component as the indirect result of another operation, such as window deactivation or a scrollbar drag. In this case, the original focus state will automatically be restored once that operation is finished, or for the case of window deactivation, when the window is reactivated. Both permanent and temporary focus events are delivered using the FOCUS_GAINED and FOCUS_LOST event ids; the levels may be distinguished in the event using the isTemporary() method."
+    ],
+    "imports": [],
+    "extends": [
+      "com.sun.star.lang.EventObject"
+    ],
     "items": [
       {
         "name": "FocusFlags",
         "type": "int",
-        "orig_type": "short",
         "lines": [
           "specifies the reason for the focus change as an arithmetic-or combination of FocusChangeReason."
         ]
@@ -56,7 +55,6 @@
       {
         "name": "NextFocus",
         "type": "XInterface",
-        "orig_type": "com.sun.star.uno.XInterface",
         "lines": [
           "contains the window which gets the focus on a lose focus event."
         ]
@@ -64,7 +62,6 @@
       {
         "name": "Temporary",
         "type": "bool",
-        "orig_type": "boolean",
         "lines": [
           "specifies if this focus change event is a temporary change."
         ]

@@ -1,33 +1,79 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.8",
-  "timestamp": "2021-12-27 22:15:24+00:00",
+  "version": "0.1.12",
+  "timestamp": "2022-01-04 18:08:01+00:00",
   "name": "XReportDefinition",
   "type": "interface",
   "namespace": "com.sun.star.report",
   "parser_args": {
     "sort": true
   },
-  "writer_args": {},
+  "writer_args": {
+    "include_desc": true
+  },
   "data": {
     "from_imports": [
       [
+        "..util.x_modifiable2",
+        "XModifiable2"
+      ],
+      [
+        ".x_report_component",
+        "XReportComponent"
+      ],
+      [
+        "..style.x_style_families_supplier",
+        "XStyleFamiliesSupplier"
+      ],
+      [
+        "..frame.x_loadable",
+        "XLoadable"
+      ],
+      [
+        "..document.x_storage_based_document",
+        "XStorageBasedDocument"
+      ],
+      [
+        "..util.x_closeable",
+        "XCloseable"
+      ],
+      [
+        "..document.x_document_sub_storage_supplier",
+        "XDocumentSubStorageSupplier"
+      ],
+      [
+        "..ui.xui_configuration_manager_supplier",
+        "XUIConfigurationManagerSupplier"
+      ],
+      [
+        "..frame.x_model",
+        "XModel"
+      ],
+      [
         ".x_functions_supplier",
         "XFunctionsSupplier"
+      ],
+      [
+        "..document.x_view_data_supplier",
+        "XViewDataSupplier"
+      ],
+      [
+        "..embed.x_visual_object",
+        "XVisualObject"
       ]
     ],
     "from_imports_typing": [
       [
-        ".x_groups",
-        "XGroups"
+        "..sdbc.x_connection",
+        "XConnection"
       ],
       [
         ".x_section",
         "XSection"
       ],
       [
-        "..sdbc.x_connection",
-        "XConnection"
+        ".x_groups",
+        "XGroups"
       ],
       [
         "..document.x_event_broadcaster",
@@ -35,11 +81,11 @@
       ]
     ],
     "quote": [
-      "XSection",
-      "XEventBroadcaster",
-      "XConnection",
       "typing.List[str]",
-      "XGroups"
+      "XConnection",
+      "XGroups",
+      "XEventBroadcaster",
+      "XSection"
     ],
     "typings": [
       "typing.List[str]"
@@ -49,7 +95,18 @@
     "imports": [],
     "namespace": "com.sun.star.report",
     "extends": [
-      "com.sun.star.report.XFunctionsSupplier"
+      "com.sun.star.report.XFunctionsSupplier",
+      "com.sun.star.report.XReportComponent",
+      "com.sun.star.util.XModifiable2",
+      "com.sun.star.style.XStyleFamiliesSupplier",
+      "com.sun.star.document.XDocumentSubStorageSupplier",
+      "com.sun.star.ui.XUIConfigurationManagerSupplier",
+      "com.sun.star.util.XCloseable",
+      "com.sun.star.document.XViewDataSupplier",
+      "com.sun.star.document.XStorageBasedDocument",
+      "com.sun.star.embed.XVisualObject",
+      "com.sun.star.frame.XLoadable",
+      "com.sun.star.frame.XModel"
     ],
     "desc": [
       "identifies a XReportComponent as being a (sub-) report.",

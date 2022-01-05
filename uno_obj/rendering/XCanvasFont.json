@@ -1,14 +1,16 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.8",
-  "timestamp": "2021-12-27 22:15:18+00:00",
+  "version": "0.1.12",
+  "timestamp": "2022-01-04 18:11:30+00:00",
   "name": "XCanvasFont",
   "type": "interface",
   "namespace": "com.sun.star.rendering",
   "parser_args": {
     "sort": true
   },
-  "writer_args": {},
+  "writer_args": {
+    "include_desc": true
+  },
   "data": {
     "from_imports": [
       [
@@ -18,14 +20,6 @@
     ],
     "from_imports_typing": [
       [
-        ".font_request",
-        "FontRequest"
-      ],
-      [
-        ".font_metrics",
-        "FontMetrics"
-      ],
-      [
         ".x_text_layout",
         "XTextLayout"
       ],
@@ -34,21 +28,29 @@
         "StringContext"
       ],
       [
+        ".font_request",
+        "FontRequest"
+      ],
+      [
+        ".font_metrics",
+        "FontMetrics"
+      ],
+      [
         "..beans.property_value",
         "PropertyValue"
       ]
     ],
     "quote": [
       "XTextLayout",
-      "typing.List[PropertyValue]",
       "FontRequest",
-      "StringContext",
+      "typing.List[float]",
       "FontMetrics",
-      "typing.List[float]"
+      "typing.List[PropertyValue]",
+      "StringContext"
     ],
     "typings": [
-      "typing.List[float]",
-      "typing.List[PropertyValue]"
+      "typing.List[PropertyValue]",
+      "typing.List[float]"
     ],
     "requires_typing": true,
     "name": "XCanvasFont",
@@ -87,7 +89,7 @@
             ],
             [
               "nRandomSeed",
-              "object",
+              "int",
               "in"
             ]
           ]

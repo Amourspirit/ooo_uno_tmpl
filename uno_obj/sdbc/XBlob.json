@@ -1,14 +1,16 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.8",
-  "timestamp": "2021-12-27 22:15:28+00:00",
+  "version": "0.1.12",
+  "timestamp": "2022-01-04 18:09:41+00:00",
   "name": "XBlob",
   "type": "interface",
   "namespace": "com.sun.star.sdbc",
   "parser_args": {
     "sort": true
   },
-  "writer_args": {},
+  "writer_args": {
+    "include_desc": true
+  },
   "data": {
     "from_imports": [
       [
@@ -18,12 +20,12 @@
     ],
     "from_imports_typing": [
       [
-        "..io.x_input_stream",
-        "XInputStream"
-      ],
-      [
         ".x_blob",
         "XBlob"
+      ],
+      [
+        "..io.x_input_stream",
+        "XInputStream"
       ]
     ],
     "quote": [
@@ -78,7 +80,7 @@
           "args": [
             [
               "pos",
-              "object",
+              "int",
               "in"
             ],
             [
@@ -90,7 +92,7 @@
         },
         {
           "name": "length",
-          "returns": "object",
+          "returns": "int",
           "desc": [
             "returns the number of bytes in the  BLOB  value designated by this Blob object."
           ],
@@ -101,7 +103,7 @@
         },
         {
           "name": "position",
-          "returns": "object",
+          "returns": "int",
           "desc": [
             "determines the byte position at which the specified byte pattern begins within the  BLOB  value that this Blob object represents.",
             "",
@@ -118,14 +120,14 @@
             ],
             [
               "start",
-              "object",
+              "int",
               "in"
             ]
           ]
         },
         {
           "name": "positionOfBlob",
-          "returns": "object",
+          "returns": "int",
           "desc": [
             "determines the byte position in the  BLOB  value designated by this Blob object at which pattern begins.",
             "",
@@ -142,7 +144,7 @@
             ],
             [
               "start",
-              "object",
+              "int",
               "in"
             ]
           ]

@@ -1,0 +1,347 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.14",
+  "libre_office_ver": "7.2",
+  "name": "Shape",
+  "type": "service",
+  "namespace": "com.sun.star.text",
+  "parser_args": {
+    "sort": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "from_imports": [
+      [
+        "..drawing.shape",
+        "Shape"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".x_text_frame",
+        "XTextFrame"
+      ],
+      [
+        ".x_text_range",
+        "XTextRange"
+      ],
+      [
+        ".text_content_anchor_type",
+        "TextContentAnchorType"
+      ],
+      [
+        ".wrap_text_mode",
+        "WrapTextMode"
+      ],
+      [
+        "..drawing.homogen_matrix3",
+        "HomogenMatrix3"
+      ],
+      [
+        "..awt.point",
+        "Point"
+      ]
+    ],
+    "quote": [
+      "TextContentAnchorType",
+      "XTextFrame",
+      "Point",
+      "HomogenMatrix3",
+      "WrapTextMode",
+      "XTextRange"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "name": "Shape",
+    "imports": [],
+    "namespace": "com.sun.star.text",
+    "extends": [
+      "com.sun.star.drawing.Shape"
+    ],
+    "desc": [
+      "specifies the service of shapes in a text document",
+      "",
+      "**since**",
+      "",
+      "    LibreOffice 6.4"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1text_1_1Shape.html",
+    "items": {
+      "properties": [
+        {
+          "name": "AllowOverlap",
+          "returns": "bool",
+          "desc": [
+            "This defines if the shape is allowed to overlap with other anchored objects.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 6.4"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "AnchorFrame",
+          "returns": "XTextFrame",
+          "desc": [
+            "contains the text frame the current frame is anchored to.",
+            "",
+            "The value is valid only if the AnchorType is TextContentAnchorType.AT_FRAME."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "AnchorPageNo",
+          "returns": "int",
+          "desc": [
+            "contains the number of the page where the objects are anchored.",
+            "",
+            "The value is valid only if the AnchorType is TextContentAnchorType.AT_PAGE."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "AnchorType",
+          "returns": "TextContentAnchorType",
+          "desc": [
+            "specifies how the text content is attached to its surrounding Text."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "BottomMargin",
+          "returns": "int",
+          "desc": [
+            "contains the bottom margin of the object."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ContourOutside",
+          "returns": "bool",
+          "desc": [
+            "the text flows only around the contour of the object."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "EndPositionInHoriL2R",
+          "returns": "Point",
+          "desc": [
+            "determines the end position of the shape in horizontal left-to-right layout",
+            "",
+            "This property is needed for the export of the OASIS Open Office file format to the OpenOffice.org file format. It provides the end position property of the included service com.sun.star.drawing.Shape converted to the horizontal left-to-right layout.",
+            "",
+            "**since**",
+            "",
+            "    OOo 2.0"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "HoriOrient",
+          "returns": "int",
+          "desc": [
+            "determines the horizontal orientation of the object."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "HoriOrientPosition",
+          "returns": "int",
+          "desc": [
+            "contains the horizontal position of the object (1/100 mm).",
+            "",
+            "It is only valid if \\\"HoriOrient\\\" is HoriOrientation_NONE."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "HoriOrientRelation",
+          "returns": "int",
+          "desc": [
+            "determines the environment of the object to which the orientation is related."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "LeftMargin",
+          "returns": "int",
+          "desc": [
+            "contains the left margin of the object."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Opaque",
+          "returns": "bool",
+          "desc": [
+            "determines if the object is opaque or transparent for text."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "PositionLayoutDir",
+          "returns": "int",
+          "desc": [
+            "determines layout direction the position attributes of the shape is given",
+            "",
+            "Valid values are given by PositionLayoutDir",
+            "",
+            "**since**",
+            "",
+            "    OOo 2.0"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "RightMargin",
+          "returns": "int",
+          "desc": [
+            "contains the right margin of the object."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "StartPositionInHoriL2R",
+          "returns": "Point",
+          "desc": [
+            "determines the start position of the shape in horizontal left-to-right layout",
+            "",
+            "This property is needed for the export of the OASIS Open Office file format to the OpenOffice.org file format. It provides the start position property of the included service com.sun.star.drawing.Shape converted to the horizontal left-to-right layout.",
+            "",
+            "**since**",
+            "",
+            "    OOo 2.0"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Surround",
+          "returns": "WrapTextMode",
+          "desc": [
+            "determines the type of the surrounding text."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "SurroundAnchorOnly",
+          "returns": "bool",
+          "desc": [
+            "determines if the text of the paragraph in which the object is anchored, wraps around the object."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "SurroundContour",
+          "returns": "bool",
+          "desc": [
+            "determines if the text wraps around the contour of the object."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "TextRange",
+          "returns": "XTextRange",
+          "desc": [
+            "contains a text range where the shape should be anchored to.",
+            "",
+            "There are two different ways to get newly created shapes into the text document. One of them is to use the insertTextContent() method of the com.sun.star.text.XSimpleText. The other is to call the add() method of the com.sun.star.drawing.XShapes interface. To be able to determine an anchor position for shape that are anchored at a certain text position the property TextRange is used.",
+            "",
+            "This property is used when the shape gets inserted/added and becomes invalid after that."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "TopMargin",
+          "returns": "int",
+          "desc": [
+            "contains the top margin of the object."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "TransformationInHoriL2R",
+          "returns": "HomogenMatrix3",
+          "desc": [
+            "determines the transformation of the shape in horizontal left-to-right layout",
+            "",
+            "This property is needed for the export of the OASIS Open Office file format to the OpenOffice.org file format. It provides the transformation property of the included service com.sun.star.drawing.Shape converted to the horizontal left-to-right layout.",
+            "",
+            "**since**",
+            "",
+            "    OOo 2.0"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "VertOrient",
+          "returns": "int",
+          "desc": [
+            "determines the vertical orientation of the object."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "VertOrientPosition",
+          "returns": "int",
+          "desc": [
+            "contains the vertical position of the object (1/100 mm).",
+            "",
+            "It is only valid if TextEmbeddedObject.VertOrient is VertOrientation.NONE."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "VertOrientRelation",
+          "returns": "int",
+          "desc": [
+            "determines the environment of the object to which the orientation is related."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "WrapInfluenceOnPosition",
+          "returns": "int",
+          "desc": [
+            "determines the influence of the text wrap on the positioning of the shape",
+            "",
+            "The value of this property is only evaluated for the positioning of the shape, if the text document setting ConsiderTextWrapOnObjPos is TRUE. Valid values are given by WrapInfluenceOnPosition",
+            "",
+            "**since**",
+            "",
+            "    OOo 2.0"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
+  }
+}

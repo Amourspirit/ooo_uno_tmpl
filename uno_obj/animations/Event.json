@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.8",
-  "timestamp": "2021-12-28 11:31:00+00:00",
+  "version": "0.1.14",
+  "libre_office_ver": "7.2",
   "type": "struct",
   "name": "Event",
   "namespace": "com.sun.star.animations",
@@ -10,47 +10,46 @@
   },
   "writer_args": {
     "sort": true,
-    "auto_import": true,
-    "dynamic_struct": false
+    "dynamic_struct": false,
+    "include_desc": true
   },
   "data": {
     "name": "Event",
     "namespace": "com.sun.star.animations",
     "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1animations_1_1Event.html",
+    "from_imports": [],
+    "from_imports_typing": [],
     "quote": [],
     "typings": [],
+    "requires_typing": false,
     "fullname": "com.sun.star.animations.Event",
     "desc": [
       "an event has a source that causes an event to be fired and a trigger that defines under which condition an event should be raised and an offset if the event should be raised a defined amount of time after the event is triggered."
     ],
-    "extends": [],
     "imports": [],
-    "auto_imports": [],
-    "from_imports": [],
-    "requires_typing": false,
+    "extends": [],
     "items": [
       {
         "name": "Offset",
         "type": "object",
-        "orig_type": "any",
         "lines": [
           "an optional offset in seconds or Timing.INDEFINITE.",
+          "",
           "This is the timespan between the triggering of the event and actually raising the event"
         ]
       },
       {
         "name": "Repeat",
-        "type": "object",
-        "orig_type": "unsigned short",
+        "type": "int",
         "lines": [
           "an option repeat value.",
+          "",
           "If the Trigger is EventTrigger, this is the number of repeats after which the event is initially raised."
         ]
       },
       {
         "name": "Source",
         "type": "object",
-        "orig_type": "any",
         "lines": [
           "this is the source for this event."
         ]
@@ -58,7 +57,6 @@
       {
         "name": "Trigger",
         "type": "int",
-        "orig_type": "short",
         "lines": [
           "this is the trigger that fires this event."
         ]

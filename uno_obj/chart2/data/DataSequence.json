@@ -1,0 +1,117 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.14",
+  "libre_office_ver": "7.2",
+  "name": "DataSequence",
+  "type": "service",
+  "namespace": "com.sun.star.chart2.data",
+  "parser_args": {
+    "sort": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "from_imports": [
+      [
+        "...util.x_modify_broadcaster",
+        "XModifyBroadcaster"
+      ],
+      [
+        "...util.x_cloneable",
+        "XCloneable"
+      ],
+      [
+        "...container.x_index_replace",
+        "XIndexReplace"
+      ],
+      [
+        ".x_textual_data_sequence",
+        "XTextualDataSequence"
+      ],
+      [
+        ".x_numerical_data_sequence",
+        "XNumericalDataSequence"
+      ],
+      [
+        ".x_data_sequence",
+        "XDataSequence"
+      ],
+      [
+        "...beans.x_property_set",
+        "XPropertySet"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".data_sequence_role",
+        "DataSequenceRole"
+      ]
+    ],
+    "quote": [
+      "DataSequenceRole",
+      "typing.List[int]"
+    ],
+    "typings": [
+      "typing.List[int]"
+    ],
+    "requires_typing": true,
+    "name": "DataSequence",
+    "imports": [],
+    "namespace": "com.sun.star.chart2.data",
+    "extends": [
+      "com.sun.star.chart2.data.XDataSequence",
+      "com.sun.star.chart2.data.XNumericalDataSequence",
+      "com.sun.star.chart2.data.XTextualDataSequence",
+      "com.sun.star.container.XIndexReplace",
+      "com.sun.star.util.XCloneable",
+      "com.sun.star.util.XModifyBroadcaster",
+      "com.sun.star.beans.XPropertySet"
+    ],
+    "desc": [
+      "describes a container for a sequence of values.",
+      "",
+      "With the interface XDataSequence it is possible to transfer a complete sequence of values.",
+      "",
+      "With the optional com.sun.star.container.XIndexReplace it is possible to modify single elements, if the corresponding DataProvider supports modification of its values."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1chart2_1_1data_1_1DataSequence.html",
+    "items": {
+      "types": [
+        {
+          "name": "HiddenValues",
+          "returns": "typing.List[int]",
+          "desc": [
+            "a sequence of indexes that identify values that are hidden in the underlying data provider."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ],
+      "properties": [
+        {
+          "name": "IncludeHiddenCells",
+          "returns": "bool",
+          "desc": [
+            "If set to false FALSE, values from hidden cells are not returned."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Role",
+          "returns": "DataSequenceRole",
+          "desc": [
+            "The key (index) of the number format that this sequence should be formatted with.",
+            "",
+            "The key identifies a number format in an com.sun.star.util.XNumberFormats object. This object can be retrieved by the com.sun.star.util.XNumberFormatsSupplier interface supported by com.sun.star.chart.ChartDocument.",
+            "",
+            "The role of the series inside a data series. This may be any string. However some strings are predefined and should always be used in the same way."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
+  }
+}

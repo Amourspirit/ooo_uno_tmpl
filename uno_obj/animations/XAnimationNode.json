@@ -1,14 +1,16 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.8",
-  "timestamp": "2021-12-27 22:15:34+00:00",
+  "version": "0.1.12",
+  "timestamp": "2022-01-04 18:10:08+00:00",
   "name": "XAnimationNode",
   "type": "interface",
   "namespace": "com.sun.star.animations",
   "parser_args": {
     "sort": true
   },
-  "writer_args": {},
+  "writer_args": {
+    "include_desc": true
+  },
   "data": {
     "from_imports": [
       [
@@ -16,10 +18,19 @@
         "XChild"
       ]
     ],
-    "from_imports_typing": [],
-    "quote": [],
-    "typings": [],
-    "requires_typing": false,
+    "from_imports_typing": [
+      [
+        "..beans.named_value",
+        "NamedValue"
+      ]
+    ],
+    "quote": [
+      "typing.List[NamedValue]"
+    ],
+    "typings": [
+      "typing.List[NamedValue]"
+    ],
+    "requires_typing": true,
     "name": "XAnimationNode",
     "imports": [],
     "namespace": "com.sun.star.animations",
@@ -29,6 +40,15 @@
     "desc": [],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1animations_1_1XAnimationNode.html",
     "items": {
+      "types": [
+        {
+          "name": "UserData",
+          "returns": "typing.List[NamedValue]",
+          "desc": [],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ],
       "properties": [
         {
           "name": "Acceleration",

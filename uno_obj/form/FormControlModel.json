@@ -1,0 +1,92 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.14",
+  "libre_office_ver": "7.2",
+  "name": "FormControlModel",
+  "type": "service",
+  "namespace": "com.sun.star.form",
+  "parser_args": {
+    "sort": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "from_imports": [
+      [
+        "..awt.uno_control_model",
+        "UnoControlModel"
+      ],
+      [
+        "..beans.x_property_state",
+        "XPropertyState"
+      ],
+      [
+        ".form_component",
+        "FormComponent"
+      ],
+      [
+        "..beans.x_fast_property_set",
+        "XFastPropertySet"
+      ]
+    ],
+    "from_imports_typing": [],
+    "quote": [],
+    "typings": [],
+    "requires_typing": false,
+    "name": "FormControlModel",
+    "imports": [],
+    "namespace": "com.sun.star.form",
+    "extends": [
+      "com.sun.star.awt.UnoControlModel",
+      "com.sun.star.form.FormComponent",
+      "com.sun.star.beans.XFastPropertySet",
+      "com.sun.star.beans.XPropertyState"
+    ],
+    "desc": [
+      "specifies a control model within a form.",
+      "",
+      "Note that the model-view-paradigm is used for form controls, too."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1form_1_1FormControlModel.html",
+    "items": {
+      "properties": [
+        {
+          "name": "ClassId",
+          "returns": "int",
+          "desc": [
+            "specifies the ID for classification of the component."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "TabIndex",
+          "returns": "int",
+          "desc": [
+            "determines the relative taborder of the control associated with the model.",
+            "",
+            "The default -1 is used to indicate that the tab-order of this control should be determined automatically.",
+            "",
+            "Each component which supports a tabstop must provide a FormControlModel.TabIndex property.",
+            "",
+            "Normally, a FormController instance is evaluating this property."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Tag",
+          "returns": "str",
+          "desc": [
+            "used for additional information.",
+            "",
+            "No semantics is given for this property, it will usually be used by the creator of a document containing form controls."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
+  }
+}

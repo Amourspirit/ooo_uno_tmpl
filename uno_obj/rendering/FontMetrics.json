@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.8",
-  "timestamp": "2021-12-28 11:31:02+00:00",
+  "version": "0.1.14",
+  "libre_office_ver": "7.2",
   "type": "struct",
   "name": "FontMetrics",
   "namespace": "com.sun.star.rendering",
@@ -10,15 +10,18 @@
   },
   "writer_args": {
     "sort": true,
-    "auto_import": true,
-    "dynamic_struct": false
+    "dynamic_struct": false,
+    "include_desc": true
   },
   "data": {
     "name": "FontMetrics",
     "namespace": "com.sun.star.rendering",
     "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1rendering_1_1FontMetrics.html",
+    "from_imports": [],
+    "from_imports_typing": [],
     "quote": [],
     "typings": [],
+    "requires_typing": false,
     "fullname": "com.sun.star.rendering.FontMetrics",
     "desc": [
       "Metrics global to the font, i.e.",
@@ -27,20 +30,16 @@
       "",
       "Please note that when querying FontMetrics from an XCanvasFont interface, all values here are given relative to the font cell size. That means, the referenceCharWidth and/or ascent+descent+internalLeading will approximately (rounded to integer device resolution, or exactly, if fractional font rendering is enabled) match the referenceAdvancement/cellSize members of the FontRequest for which the XCanvasFont was queried. Please be aware that the values returned in this structure only map one-to-one to device pixel, if the combined rendering transformation for text output equals the identity transformation. Otherwise, the text output (and thus the resulting metrics) will be subject to that transformation. Depending on the underlying font technology, actual device output might be off by up to one device pixel from the transformed metrics.",
       "",
-      "**Since**",
+      "**since**",
       "",
       "    OOo 2.0"
     ],
-    "extends": [],
     "imports": [],
-    "auto_imports": [],
-    "from_imports": [],
-    "requires_typing": false,
+    "extends": [],
     "items": [
       {
         "name": "Ascent",
         "type": "float",
-        "orig_type": "double",
         "lines": [
           "Ascent (above the baseline) part of the font."
         ]
@@ -48,7 +47,6 @@
       {
         "name": "Descent",
         "type": "float",
-        "orig_type": "double",
         "lines": [
           "Descent (below the baseline) part of the font."
         ]
@@ -56,16 +54,15 @@
       {
         "name": "ExternalLeading",
         "type": "float",
-        "orig_type": "double",
         "lines": [
           "Extra space outside the font cells.",
+          "",
           "It should not contain ink marks and is typically used by the font designer to modify the line distance."
         ]
       },
       {
         "name": "InternalLeading",
         "type": "float",
-        "orig_type": "double",
         "lines": [
           "Extra space above ascent."
         ]
@@ -73,16 +70,15 @@
       {
         "name": "ReferenceCharSize",
         "type": "float",
-        "orig_type": "double",
         "lines": [
           "This value specifies the reference character width of the font.",
+          "",
           "It's roughly equivalent to the average width of all characters, and if one needs a font with double character width, the referenceCharSize should be doubled."
         ]
       },
       {
         "name": "StrikeThroughOffset",
         "type": "float",
-        "orig_type": "double",
         "lines": [
           "Specifies the offset to be added to the baseline when striking through the text."
         ]
@@ -90,7 +86,6 @@
       {
         "name": "UnderlineOffset",
         "type": "float",
-        "orig_type": "double",
         "lines": [
           "Specifies the offset to be added to the baseline when drawing underlined text."
         ]

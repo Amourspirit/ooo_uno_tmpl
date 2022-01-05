@@ -1,16 +1,26 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.8",
-  "timestamp": "2021-12-27 22:15:28+00:00",
+  "version": "0.1.12",
+  "timestamp": "2022-01-04 18:09:43+00:00",
   "name": "XDriver",
   "type": "interface",
   "namespace": "com.sun.star.sdbc",
   "parser_args": {
     "sort": true
   },
-  "writer_args": {},
+  "writer_args": {
+    "include_desc": true
+  },
   "data": {
     "from_imports": [
+      [
+        "..sdbcx.driver",
+        "Driver"
+      ],
+      [
+        ".driver",
+        "Driver"
+      ],
       [
         "..uno.x_interface",
         "XInterface"
@@ -18,33 +28,35 @@
     ],
     "from_imports_typing": [
       [
-        "..beans.property_value",
-        "PropertyValue"
+        ".x_connection",
+        "XConnection"
       ],
       [
         ".driver_property_info",
         "DriverPropertyInfo"
       ],
       [
-        ".x_connection",
-        "XConnection"
+        "..beans.property_value",
+        "PropertyValue"
       ]
     ],
     "quote": [
+      "typing.List[DriverPropertyInfo]",
       "XConnection",
-      "typing.List[PropertyValue]",
-      "typing.List[DriverPropertyInfo]"
+      "typing.List[PropertyValue]"
     ],
     "typings": [
-      "typing.List[PropertyValue]",
-      "typing.List[DriverPropertyInfo]"
+      "typing.List[DriverPropertyInfo]",
+      "typing.List[PropertyValue]"
     ],
     "requires_typing": true,
     "name": "XDriver",
     "imports": [],
     "namespace": "com.sun.star.sdbc",
     "extends": [
-      "com.sun.star.uno.XInterface"
+      "com.sun.star.uno.XInterface",
+      "com.sun.star.sdbc.Driver",
+      "com.sun.star.sdbcx.Driver"
     ],
     "desc": [
       "is the interface that every driver class must implement.",

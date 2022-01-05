@@ -1,0 +1,733 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.14",
+  "libre_office_ver": "7.2",
+  "name": "ParagraphProperties",
+  "type": "service",
+  "namespace": "com.sun.star.style",
+  "parser_args": {
+    "sort": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "from_imports": [],
+    "from_imports_typing": [
+      [
+        "..table.border_line",
+        "BorderLine"
+      ],
+      [
+        ".paragraph_adjust",
+        "ParagraphAdjust"
+      ],
+      [
+        "..table.shadow_format",
+        "ShadowFormat"
+      ],
+      [
+        "..container.x_index_replace",
+        "XIndexReplace"
+      ],
+      [
+        ".line_spacing",
+        "LineSpacing"
+      ],
+      [
+        "..container.x_name_container",
+        "XNameContainer"
+      ],
+      [
+        "..beans.property_value",
+        "PropertyValue"
+      ],
+      [
+        ".graphic_location",
+        "GraphicLocation"
+      ],
+      [
+        ".break_type",
+        "BreakType"
+      ],
+      [
+        "..graphic.x_graphic",
+        "XGraphic"
+      ],
+      [
+        "..util.color",
+        "Color"
+      ],
+      [
+        ".tab_stop",
+        "TabStop"
+      ],
+      [
+        ".drop_cap_format",
+        "DropCapFormat"
+      ]
+    ],
+    "quote": [
+      "BreakType",
+      "XNameContainer",
+      "BorderLine",
+      "typing.List[TabStop]",
+      "XGraphic",
+      "XIndexReplace",
+      "LineSpacing",
+      "ParagraphAdjust",
+      "DropCapFormat",
+      "ShadowFormat",
+      "Color",
+      "typing.List[PropertyValue]",
+      "GraphicLocation"
+    ],
+    "typings": [
+      "typing.List[PropertyValue]",
+      "typing.List[TabStop]"
+    ],
+    "requires_typing": true,
+    "name": "ParagraphProperties",
+    "imports": [],
+    "namespace": "com.sun.star.style",
+    "extends": [],
+    "desc": [
+      "describes the style of paragraphs.",
+      "",
+      "**since**",
+      "",
+      "    LibreOffice 4.2"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1style_1_1ParagraphProperties.html",
+    "items": {
+      "types": [
+        {
+          "name": "ParaInteropGrabBag",
+          "returns": "typing.List[PropertyValue]",
+          "desc": [
+            "Grab bag of paragraph properties, used as a string-any map for interim interop purposes.",
+            "",
+            "This property is intentionally not handled by the ODF filter. Any member that should be handled there should be first moved out from this grab bag to a separate property.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 4.2"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ParaTabStops",
+          "returns": "typing.List[TabStop]",
+          "desc": [
+            "specifies the positions and kinds of the tab stops within this paragraph."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ],
+      "properties": [
+        {
+          "name": "BorderDistance",
+          "returns": "int",
+          "desc": [
+            "contains the distance from the border to the object."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "BottomBorder",
+          "returns": "BorderLine",
+          "desc": [
+            "contains the bottom border of the object."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "BottomBorderDistance",
+          "returns": "int",
+          "desc": [
+            "contains the distance from the bottom border to the object."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "BreakType",
+          "returns": "BreakType",
+          "desc": [
+            "determines the type of break that is applied at the beginning of the table."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ContinueingPreviousSubTree",
+          "returns": "bool",
+          "desc": [
+            "specifies that a child node of a parent node that is not counted is continuing the numbering of parent's previous node's sub tree.",
+            "",
+            "**since**",
+            "",
+            "    OOo 3.0.1"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "DropCapCharStyleName",
+          "returns": "str",
+          "desc": [
+            "specifies the character style name for drop caps."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "DropCapFormat",
+          "returns": "DropCapFormat",
+          "desc": [
+            "specifies whether the first characters of the paragraph are displayed in capital letters and how they are formatted."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "DropCapWholeWord",
+          "returns": "bool",
+          "desc": [
+            "specifies if the property DropCapFormat is applied to the whole first word."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "LeftBorder",
+          "returns": "BorderLine",
+          "desc": [
+            "contains the left border of the object."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "LeftBorderDistance",
+          "returns": "int",
+          "desc": [
+            "contains the distance from the left border to the object."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ListId",
+          "returns": "str",
+          "desc": [
+            "specifies the id of the list to which the paragraph belongs"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ListLabelString",
+          "returns": "str",
+          "desc": [
+            "allows reading the generated numbering list label.",
+            "",
+            "**since**",
+            "",
+            "    OOo 3.0.1"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "NumberingIsNumber",
+          "returns": "bool",
+          "desc": [
+            "returns FALSE if the paragraph is part of a numbering, but has no numbering label.",
+            "",
+            "A paragraph is part of a numbering, if a style for a numbering is set - see NumberingStyleName.",
+            "",
+            "If the paragraph is not part of a numbering the property is void."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "NumberingLevel",
+          "returns": "int",
+          "desc": [
+            "specifies the numbering level of the paragraph."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "NumberingRules",
+          "returns": "XIndexReplace",
+          "desc": [
+            "contains the numbering rules applied to this paragraph."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "NumberingStartValue",
+          "returns": "int",
+          "desc": [
+            "specifies the start value for numbering if a new numbering starts at this paragraph."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "NumberingStyleName",
+          "returns": "str",
+          "desc": [
+            "specifies the name of the style for the numbering.",
+            "",
+            "The name must be one of the names which are available via XStyleFamiliesSupplier."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "OutlineLevel",
+          "returns": "int",
+          "desc": [
+            "specifies the outline level to which the paragraph belongs",
+            "",
+            "Value 0 indicates that the paragraph belongs to the body text.",
+            "",
+            "Values [1..10] indicates that the paragraph belongs to the corresponding outline level.",
+            "",
+            "**since**",
+            "",
+            "    OOo 3.1"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "PageDescName",
+          "returns": "str",
+          "desc": [
+            "If this property is set, it creates a page break before the paragraph it belongs to and assigns the value as the name of the new page style sheet to use."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "PageNumberOffset",
+          "returns": "int",
+          "desc": [
+            "If a page break property is set at a paragraph, this property contains the new value for the page number."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "PageStyleName",
+          "returns": "str",
+          "desc": [
+            "contains the name of the current page style."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ParaAdjust",
+          "returns": "ParagraphAdjust",
+          "desc": [
+            "determines the adjustment of a paragraph."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ParaBackColor",
+          "returns": "Color",
+          "desc": [
+            "contains the paragraph background color."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ParaBackGraphic",
+          "returns": "XGraphic",
+          "desc": [
+            "contains the graphic for the background of a paragraph.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 6.1"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ParaBackGraphicFilter",
+          "returns": "str",
+          "desc": [
+            "contains the name of the graphic filter for the background graphic of a paragraph."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ParaBackGraphicLocation",
+          "returns": "GraphicLocation",
+          "desc": [
+            "contains the value for the position of a background graphic."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ParaBackGraphicURL",
+          "returns": "str",
+          "desc": [
+            "contains the value of a link for the background graphic of a paragraph.",
+            "",
+            "Note the new behaviour since it this was deprecated: This property can only be set and only external URLs are supported (no more vnd.sun.star.GraphicObject scheme). When an URL is set, then it will load the graphic and set the ParaBackGraphic property."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ParaBackTransparent",
+          "returns": "bool",
+          "desc": [
+            "This value is TRUE if the paragraph background color is set to transparent."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ParaBottomMargin",
+          "returns": "int",
+          "desc": [
+            "determines the bottom margin of the paragraph in 100th mm.",
+            "",
+            "The distance between two paragraphs is specified by:",
+            "",
+            "The greater one is chosen."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ParaContextMargin",
+          "returns": "bool",
+          "desc": [
+            "determines if contextual spacing is used.",
+            "",
+            "If true, the top and bottom margins of the paragraph should not be applied when the previous and next paragraphs have the same style.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 3.6"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ParaExpandSingleWord",
+          "returns": "bool",
+          "desc": [
+            "determines if single words are stretched.",
+            "",
+            "It is only valid if ParagraphProperties.ParaAdjust and ParagraphProperties.ParaLastLineAdjust are also valid."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ParaFirstLineIndent",
+          "returns": "int",
+          "desc": [
+            "specifies the indent for the first line."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ParaHyphenationMaxHyphens",
+          "returns": "int",
+          "desc": [
+            "specifies the maximum number of consecutive hyphens."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ParaHyphenationMaxLeadingChars",
+          "returns": "int",
+          "desc": [
+            "specifies the minimum number of characters to remain before the hyphen character (when hyphenation is applied)."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ParaHyphenationMaxTrailingChars",
+          "returns": "int",
+          "desc": [
+            "specifies the minimum number of characters to remain after the hyphen character (when hyphenation is applied)."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ParaHyphenationNoCaps",
+          "returns": "bool",
+          "desc": [
+            "Specifies whether words written in CAPS will be hyphenated.",
+            "",
+            "Setting to true will disable hyphenation of words written in CAPS for this paragraph.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 6.4"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ParaIsAutoFirstLineIndent",
+          "returns": "bool",
+          "desc": [
+            "determines if the first line should be indented automatically."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ParaIsConnectBorder",
+          "returns": "bool",
+          "desc": [
+            "the property determines if borders set at a paragraph are merged with the next paragraph.",
+            "",
+            "Borders are only merged if they are identical."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ParaIsHyphenation",
+          "returns": "bool",
+          "desc": [
+            "specifies if automatic hyphenation is applied."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ParaIsNumberingRestart",
+          "returns": "bool",
+          "desc": [
+            "determines if the numbering rules restart, counting at the current paragraph."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ParaKeepTogether",
+          "returns": "bool",
+          "desc": [
+            "Setting this property to TRUE prevents page or column breaks between this and the following paragraph.",
+            "",
+            "This feature is useful for preventing title paragraphs to be the last line on a page or column."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ParaLastLineAdjust",
+          "returns": "int",
+          "desc": [
+            "determines the adjustment of the last line.",
+            "",
+            "It is only valid if ParagraphProperties.ParaAdjust is set to ParagraphAdjust.BLOCK."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ParaLeftMargin",
+          "returns": "int",
+          "desc": [
+            "determines the left margin of the paragraph in 100th mm."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ParaLineNumberCount",
+          "returns": "bool",
+          "desc": [
+            "determines if the paragraph is included in the line numbering."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ParaLineNumberStartValue",
+          "returns": "int",
+          "desc": [
+            "contains the start value for the line numbering."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ParaLineSpacing",
+          "returns": "LineSpacing",
+          "desc": [
+            "contains the type of the line spacing of a paragraph."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ParaOrphans",
+          "returns": "int",
+          "desc": [
+            "specifies the minimum number of lines of the paragraph that have to be at bottom of a page if the paragraph is spread over more than one page."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ParaRegisterModeActive",
+          "returns": "bool",
+          "desc": [
+            "determines if the register mode is applied to a paragraph.",
+            "",
+            "Remark: Register mode is only used if the register mode property of the page style is switched on."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ParaRightMargin",
+          "returns": "int",
+          "desc": [
+            "determines the right margin of the paragraph in 100th mm."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ParaShadowFormat",
+          "returns": "ShadowFormat",
+          "desc": [
+            "determines the type, color, and size of the shadow."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ParaSplit",
+          "returns": "bool",
+          "desc": [
+            "Setting this property to FALSE prevents the paragraph from getting split into two pages or columns."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ParaStyleName",
+          "returns": "str",
+          "desc": [
+            "contains the name of the current paragraph style."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ParaTopMargin",
+          "returns": "int",
+          "desc": [
+            "determines the top margin of the paragraph in 100th mm.",
+            "",
+            "The distance between two paragraphs is specified by:",
+            "",
+            "The greater one is chosen."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ParaUserDefinedAttributes",
+          "returns": "XNameContainer",
+          "desc": [
+            "this property stores xml attributes.",
+            "",
+            "They will be saved to and restored from automatic styles inside xml files."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ParaVertAlignment",
+          "returns": "int",
+          "desc": [
+            "specifies the vertical alignment of a paragraph."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ParaWidows",
+          "returns": "int",
+          "desc": [
+            "specifies the minimum number of lines of the paragraph that have to be at top of a page if the paragraph is spread over more than one page."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "RightBorder",
+          "returns": "BorderLine",
+          "desc": [
+            "contains the right border of the object."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "RightBorderDistance",
+          "returns": "int",
+          "desc": [
+            "contains the distance from the right border to the object."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "TopBorder",
+          "returns": "BorderLine",
+          "desc": [
+            "contains the top border of the object."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "TopBorderDistance",
+          "returns": "int",
+          "desc": [
+            "contains the distance from the top border to the object."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
+  }
+}

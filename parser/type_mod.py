@@ -6,11 +6,15 @@ import re
 from abc import ABC, abstractmethod
 from typing import List, Match, Optional, Set, Union
 
+# hyper is 64 bit int, singed or unsinged. https://ask.libreoffice.org/t/basic-hyper-and-unsigned-hyper/22510
+
 TYPE_MAP_PRIMITIVE = {
     "any": "object",
     "byte": "int",
     "short": "int",
+    "int": "int",
     "long": "int",
+    "hyper": "int",
     "float": "float",
     "double": "float",
     "string": "str",
@@ -219,11 +223,11 @@ class ITypeRules(ABC):
 
 class TypeRules(ITypeRules):
     def __init__(self) -> None:
-        self._rules: List[ITypeRule] = []
+        self._rules: List[type[ITypeRule]] = []
         self._cache = {}
         self._register_known_rules()
     
-    def register_rule(self, rule: ITypeRule) -> None:
+    def register_rule(self, rule: type[ITypeRule]) -> None:
 
         if not issubclass(rule, ITypeRule):
             msg = "TypeRules.register_rule(), rule arg must be child class of ITypeRule"
@@ -234,7 +238,7 @@ class TypeRules(ITypeRules):
             return
         self._reg_rule(rule=rule)
 
-    def unregister_rule(self,  rule: ITypeRule):
+    def unregister_rule(self,  rule: type[ITypeRule]):
         """
         Unregister a rule
 
@@ -242,20 +246,30 @@ class TypeRules(ITypeRules):
             rule (ITypeRule): Rule to unregister
         """
         try:
+            key = str(id(rule))
+            if key in self._cache:
+                del self._cache[key]
             self._rules.remove(rule)
         except ValueError as e:
             msg = f"{self.__class__.__name__}.unregister_rule() Unable to unregister rule."
             raise ValueError(msg) from e
 
 
-    def _reg_rule(self, rule: ITypeRule):
+    def _reg_rule(self, rule: type[ITypeRule]):
         self._rules.append(rule)
 
     def _register_known_rules(self):
+        self._reg_rule(rule=RuleNone)
         self._reg_rule(rule=RulePrimative)
         self._reg_rule(rule=RuleKnownPrimative)
         self._reg_rule(rule=RuleKnownItterType)
         self._reg_rule(rule=RuleComType)
+        self._reg_rule(rule=RuleTypeDef)
+        self._reg_rule(rule=RuleWordSigned)
+        self._reg_rule(rule=RuleWordUnSigned)
+        self._reg_rule(rule=RuleWordShort)
+        self._reg_rule(rule=RuleWordLong)
+        self._reg_rule(rule=RuleWordHyper)
         self._reg_rule(rule=RuleSeqLikePrimative)
         self._reg_rule(rule=RuleSeqLikeNonPrim)
         self._reg_rule(rule=RuleTuple2Like)
@@ -295,6 +309,22 @@ class TypeRules(ITypeRules):
             self._cache[key] = rule(self)
         return self._cache[key]
     
+
+class RuleNone(ITypeRule):
+    def __init__(self, rules: ITypeRules) -> None:
+        self._rules = rules
+
+    def get_is_match(self, in_type: str) -> bool:
+        return in_type == ''
+
+    def get_python_type(self, in_type: str) -> PythonType:
+        return PythonType(
+            type="None",
+            requires_typing=False,
+            is_py_type=True,
+            realtype=None
+        )
+
 class RulePrimative(ITypeRule):
     def __init__(self, rules: ITypeRules) -> None:
         self._rules =rules
@@ -389,6 +419,71 @@ class RuleKnownItterType(ITypeRule):
             realtype = s
         )
 
+
+class RuleBaseWord(ITypeRule):
+    """Abstrace Class: Matches types that start with a word"""
+    # https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1sdb_1_1RowsChangeEvent.html
+
+    def __init__(self, rules: ITypeRules) -> None:
+        self._rules = rules
+
+    def _get_ptype(self, in_type: str) -> PythonType:
+            return self._rules.get_python_type(in_type)
+
+    def get_is_match(self, in_type: str) -> bool:
+        word = self._get_word()
+        if in_type.startswith(word):
+            parts = in_type.split()
+            if len(parts) > 1:
+                return True
+        return False
+
+    def get_python_type(self, in_type: str) -> PythonType:
+        s = in_type.split(maxsplit=1)[1]
+        return self._get_ptype(s)
+
+    @abstractmethod
+    def _get_word(self) -> str:
+        """Word to match"""
+
+
+class RuleTypeDef(RuleBaseWord):
+    """Matches types that start with typedef"""
+    # https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1sdb_1_1RowsChangeEvent.html
+
+    def _get_word(self) -> str:
+        return 'typedef ' # space on purpose
+
+
+class RuleWordLong(RuleBaseWord):
+    """Matches types that start with long and have more then one word"""
+
+    def _get_word(self) -> str:
+        return 'long '  # space on purpose
+
+
+class RuleWordHyper(RuleBaseWord):
+    """Matches types that start with hyper and have more then one word"""
+
+    def _get_word(self) -> str:
+        return 'hyper '  # space on purpose
+
+class RuleWordShort(RuleBaseWord):
+    """Matches types that start with short and have more then one word"""
+
+    def _get_word(self) -> str:
+        return 'short '  # space on purpose
+class RuleWordSigned(RuleBaseWord):
+    """Matches types that start with signed"""
+
+    def _get_word(self) -> str:
+        return 'signed '  # space on purpose
+
+class RuleWordUnSigned(RuleBaseWord):
+    """Matches types that start with unsigned"""
+
+    def _get_word(self) -> str:
+        return 'unsigned '  # space on purpose
 class RuleSeqLikePrimative(ITypeRule):
     """Matches single sequence or simalar, such as aDXArray, that does have primitive inner type"""
 

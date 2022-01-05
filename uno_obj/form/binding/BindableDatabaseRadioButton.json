@@ -1,0 +1,60 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.14",
+  "libre_office_ver": "7.2",
+  "name": "BindableDatabaseRadioButton",
+  "type": "service",
+  "namespace": "com.sun.star.form.binding",
+  "parser_args": {
+    "sort": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "from_imports": [
+      [
+        ".bindable_data_aware_control_model",
+        "BindableDataAwareControlModel"
+      ],
+      [
+        "..component.database_radio_button",
+        "DatabaseRadioButton"
+      ]
+    ],
+    "from_imports_typing": [],
+    "quote": [],
+    "typings": [],
+    "requires_typing": false,
+    "name": "BindableDatabaseRadioButton",
+    "imports": [],
+    "namespace": "com.sun.star.form.binding",
+    "extends": [
+      "com.sun.star.form.component.DatabaseRadioButton",
+      "com.sun.star.form.binding.BindableDataAwareControlModel"
+    ],
+    "desc": [
+      "This service specifies a radio button which is data-aware and thus can be bound to a database field, and additionally supports binding to arbitrary external values.",
+      "",
+      "The com.sun.star.form.binding.XValueBinding instance which can be associated with a BindableDatabaseRadioButton must support exchanging boolean values. The following mapping between external values and control states apply:",
+      "",
+      "If the value binding associated with a BindableDatabaseRadioButton supports exchanging string values, and the com.sun.star.form.component.RadioButton.RefValue is not empty, then the radio button will exchange its value as string:"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1form_1_1binding_1_1BindableDatabaseRadioButton.html",
+    "items": {
+      "properties": [
+        {
+          "name": "SecondaryRefValue",
+          "returns": "str",
+          "desc": [
+            "specifies a value which is to be associated with the control when it's not selected.",
+            "",
+            "com.sun.star.form.component.RadioButton.RefValue is transferred to possible external value bindings as soon as the radio button is selected. With the member SecondaryRefValue, clients of the radio button can also associate a value with the not selected state of the control."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
+  }
+}

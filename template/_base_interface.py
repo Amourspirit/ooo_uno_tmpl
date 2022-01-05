@@ -17,8 +17,7 @@ class BaseInterface(BaseJson):
             val = data.get(_key, None)
             if val:
                 setattr(self, attr_name, val)
-        # validation ensures min version of 0.1.1
-
+    
         set_data('name')
         set_data('desc')
         set_data('url', 'link')
@@ -26,6 +25,8 @@ class BaseInterface(BaseJson):
         setattr(self, 'inherits', _inherits)
         set_data('imports')
         set_data('namespace')
+        # get lo ver if it exist. Defaut to False
+        self.libre_office_ver = json_data.get('libre_office_ver', False)
         sort = bool(json_data['parser_args'].get('sort', False))
         self.attribs = self._get_attribs(json_data=json_data, sort=sort)
         setattr(self, 'requires_typing', data.get('requires_typing', False))
@@ -96,7 +97,7 @@ class BaseInterface(BaseJson):
                 "Invalid Data: Expected version to be at least '{min_ver}' got {ver}")
 
     def _get_formated_arg(self, arg: Tuple[str]) -> str:
-        return f"{arg[0]}: {self.get_q_type(arg[1])}"
+        return f"{self.get_safe_word(arg[0])}: {self.get_q_type(arg[1])}"
 
     def get_args(self, args: List[Tuple[str]]) -> str:
         result = ''

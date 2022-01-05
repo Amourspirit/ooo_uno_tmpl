@@ -1,16 +1,22 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.8",
-  "timestamp": "2021-12-27 22:15:34+00:00",
+  "version": "0.1.12",
+  "timestamp": "2022-01-04 18:08:30+00:00",
   "name": "XDiagram",
   "type": "interface",
   "namespace": "com.sun.star.chart2",
   "parser_args": {
     "sort": true
   },
-  "writer_args": {},
+  "writer_args": {
+    "include_desc": true
+  },
   "data": {
     "from_imports": [
+      [
+        ".diagram",
+        "Diagram"
+      ],
       [
         "..uno.x_interface",
         "XInterface"
@@ -18,20 +24,20 @@
     ],
     "from_imports_typing": [
       [
-        ".x_legend",
-        "XLegend"
-      ],
-      [
-        "..beans.x_property_set",
-        "XPropertySet"
-      ],
-      [
         ".data.x_data_source",
         "XDataSource"
       ],
       [
+        ".x_legend",
+        "XLegend"
+      ],
+      [
         ".x_color_scheme",
         "XColorScheme"
+      ],
+      [
+        "..beans.x_property_set",
+        "XPropertySet"
       ],
       [
         "..beans.property_value",
@@ -39,11 +45,11 @@
       ]
     ],
     "quote": [
-      "XColorScheme",
-      "typing.List[PropertyValue]",
-      "XLegend",
       "XPropertySet",
-      "XDataSource"
+      "XLegend",
+      "typing.List[PropertyValue]",
+      "XDataSource",
+      "XColorScheme"
     ],
     "typings": [
       "typing.List[PropertyValue]"
@@ -53,7 +59,8 @@
     "imports": [],
     "namespace": "com.sun.star.chart2",
     "extends": [
-      "com.sun.star.uno.XInterface"
+      "com.sun.star.uno.XInterface",
+      "com.sun.star.chart2.Diagram"
     ],
     "desc": [],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1chart2_1_1XDiagram.html",

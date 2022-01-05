@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.8",
-  "timestamp": "2021-12-28 11:31:03+00:00",
+  "version": "0.1.14",
+  "libre_office_ver": "7.2",
   "type": "struct",
   "name": "DropTargetDragEvent",
   "namespace": "com.sun.star.datatransfer.dnd",
@@ -10,38 +10,44 @@
   },
   "writer_args": {
     "sort": true,
-    "auto_import": true,
-    "dynamic_struct": false
+    "dynamic_struct": false,
+    "include_desc": true
   },
   "data": {
     "name": "DropTargetDragEvent",
     "namespace": "com.sun.star.datatransfer.dnd",
     "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1datatransfer_1_1dnd_1_1DropTargetDragEvent.html",
-    "quote": [],
-    "typings": [],
-    "fullname": "com.sun.star.datatransfer.dnd.DropTargetDragEvent",
-    "desc": [
-      "The DropTargetDragEvent is delivered from the drop target to the currently registered drop target listener.",
-      "",
-      "It contains information regarding the current state of the operation to enable the operations initiator to provide the end user with the appropriate drag over feedback."
-    ],
-    "extends": [
-      "com.sun.star.datatransfer.dnd.DropTargetEvent"
-    ],
-    "imports": [],
-    "auto_imports": [],
     "from_imports": [
       [
         ".drop_target_event",
         "DropTargetEvent"
       ]
     ],
-    "requires_typing": false,
+    "from_imports_typing": [
+      [
+        ".x_drop_target_drag_context",
+        "XDropTargetDragContext"
+      ]
+    ],
+    "quote": [
+      "XDropTargetDragContext"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "fullname": "com.sun.star.datatransfer.dnd.DropTargetDragEvent",
+    "desc": [
+      "The DropTargetDragEvent is delivered from the drop target to the currently registered drop target listener.",
+      "",
+      "It contains information regarding the current state of the operation to enable the operations initiator to provide the end user with the appropriate drag over feedback."
+    ],
+    "imports": [],
+    "extends": [
+      "com.sun.star.datatransfer.dnd.DropTargetEvent"
+    ],
     "items": [
       {
         "name": "Context",
-        "type": "object",
-        "orig_type": "XDropTargetDragContext",
+        "type": "XDropTargetDragContext",
         "lines": [
           "The drop target context of the current drag operation."
         ]
@@ -49,7 +55,6 @@
       {
         "name": "DropAction",
         "type": "int",
-        "orig_type": "byte",
         "lines": [
           "This value represents the currently selected drop action."
         ]
@@ -57,7 +62,6 @@
       {
         "name": "LocationX",
         "type": "int",
-        "orig_type": "long",
         "lines": [
           "The cursor's current x location within the window's coordinates."
         ]
@@ -65,7 +69,6 @@
       {
         "name": "LocationY",
         "type": "int",
-        "orig_type": "long",
         "lines": [
           "The cursor's current y location within the window's coordinates."
         ]
@@ -73,10 +76,11 @@
       {
         "name": "SourceActions",
         "type": "int",
-        "orig_type": "byte",
         "lines": [
           "This value represents the action or actions supported by the source.",
+          "",
           "This may be a combination of arbitrary source actions except ACTION_DEFAULT.",
+          "",
           "To combine different actions use a logical OR."
         ]
       }

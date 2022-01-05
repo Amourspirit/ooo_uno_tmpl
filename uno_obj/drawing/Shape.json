@@ -1,0 +1,295 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.14",
+  "libre_office_ver": "7.2",
+  "name": "Shape",
+  "type": "service",
+  "namespace": "com.sun.star.drawing",
+  "parser_args": {
+    "sort": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "from_imports": [
+      [
+        ".x_glue_points_supplier",
+        "XGluePointsSupplier"
+      ],
+      [
+        "..beans.x_property_set",
+        "XPropertySet"
+      ],
+      [
+        "..beans.x_tolerant_multi_property_set",
+        "XTolerantMultiPropertySet"
+      ],
+      [
+        "..lang.x_component",
+        "XComponent"
+      ],
+      [
+        ".x_shape",
+        "XShape"
+      ],
+      [
+        ".x_shape_descriptor",
+        "XShapeDescriptor"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..style.x_style",
+        "XStyle"
+      ],
+      [
+        ".homogen_matrix3",
+        "HomogenMatrix3"
+      ],
+      [
+        "..container.x_name_container",
+        "XNameContainer"
+      ],
+      [
+        "..beans.property_value",
+        "PropertyValue"
+      ]
+    ],
+    "quote": [
+      "XStyle",
+      "HomogenMatrix3",
+      "typing.List[PropertyValue]",
+      "XNameContainer"
+    ],
+    "typings": [
+      "typing.List[PropertyValue]"
+    ],
+    "requires_typing": true,
+    "name": "Shape",
+    "imports": [],
+    "namespace": "com.sun.star.drawing",
+    "extends": [
+      "com.sun.star.beans.XPropertySet",
+      "com.sun.star.drawing.XShape",
+      "com.sun.star.lang.XComponent",
+      "com.sun.star.drawing.XShapeDescriptor",
+      "com.sun.star.drawing.XGluePointsSupplier",
+      "com.sun.star.beans.XTolerantMultiPropertySet"
+    ],
+    "desc": [
+      "This abstract service specifies the general characteristics of all Shapes.",
+      "",
+      "**since**",
+      "",
+      "    LibreOffice 4.2"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1drawing_1_1Shape.html",
+    "items": {
+      "types": [
+        {
+          "name": "InteropGrabBag",
+          "returns": "typing.List[PropertyValue]",
+          "desc": [
+            "Grab bag of shape properties, used as a string-any map for interim interop purposes.",
+            "",
+            "This property is intentionally not handled by the ODF filter. Any member that should be handled there should be first moved out from this grab bag to a separate property.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 4.2"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ],
+      "properties": [
+        {
+          "name": "Hyperlink",
+          "returns": "str",
+          "desc": [
+            "this property lets you get and set a hyperlink for this shape."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "LayerID",
+          "returns": "int",
+          "desc": [
+            "This is the ID of the Layer to which this Shape is attached."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "LayerName",
+          "returns": "str",
+          "desc": [
+            "This is the name of the Layer to which this Shape is attached."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "MoveProtect",
+          "returns": "bool",
+          "desc": [
+            "With this set to TRUE, this Shape cannot be moved interactively in the user interface."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Name",
+          "returns": "str",
+          "desc": [
+            "This is the name of this Shape."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "NavigationOrder",
+          "returns": "int",
+          "desc": [
+            "this property stores the navigation order of this shape.",
+            "",
+            "If this value is negative, the navigation order for this shapes page is equal to the z-order."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Printable",
+          "returns": "bool",
+          "desc": [
+            "If this is FALSE, the Shape is not visible on printer outputs."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "RelativeHeight",
+          "returns": "int",
+          "desc": [
+            "contains the relative height of the object.",
+            "",
+            "It is only valid if it is greater than zero.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 4.3"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "RelativeHeightRelation",
+          "returns": "int",
+          "desc": [
+            "contains the relation of the relative height of the object.",
+            "",
+            "It is only valid if RelativeHeight is greater than zero.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 4.3"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "RelativeWidth",
+          "returns": "int",
+          "desc": [
+            "contains the relative width of the object.",
+            "",
+            "It is only valid if it is greater than zero.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 4.3"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "RelativeWidthRelation",
+          "returns": "int",
+          "desc": [
+            "contains the relation of the relative width of the object.",
+            "",
+            "It is only valid if RelativeWidth is greater than zero.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 4.3"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ShapeUserDefinedAttributes",
+          "returns": "XNameContainer",
+          "desc": [
+            "this property stores xml attributes.",
+            "",
+            "They will be saved to and restored from automatic styles inside xml files."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "SizeProtect",
+          "returns": "bool",
+          "desc": [
+            "With this set to TRUE, this Shape may not be sized interactively in the user interface."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Style",
+          "returns": "XStyle",
+          "desc": [
+            "this property lets you get and set a style for this shape."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Transformation",
+          "returns": "HomogenMatrix3",
+          "desc": [
+            "this property lets you get and set the transformation matrix for this shape.",
+            "",
+            "The transformation is a 3x3 homogeneous matrix and can contain translation, rotation, shearing and scaling."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Visible",
+          "returns": "bool",
+          "desc": [
+            "If this is FALSE, the Shape is not visible on screen outputs.",
+            "",
+            "Please note that the Shape may still be visible when printed, see Printable."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ZOrder",
+          "returns": "int",
+          "desc": [
+            "is used to query or change the ZOrder of this Shape."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
+  }
+}

@@ -65,33 +65,8 @@ class ApiExData(base.APIData):
         super().__init__(url_soup=url_soup, allow_cache=allow_cache)
 
         self._ns: ApiNs = None
-        self._desc: base.ApiDesc = None
-        self._inherited: base.ApiInherited = None
-        self._properties_block: ApiPropertiesBlock = None
-        self._property_summaries: base.ApiSummaries = None
-        self._property_summary_rows: base.ApiSummaryRows = None
     # endregion constructor
 
-    # region methods
-
-    def get_import_info_property(self) -> base.ImportInfo:
-        """
-        Gets imports for properties
-
-        Args:
-            si_id (str): Property summary Info
-
-        Returns:
-            base.ImportInfo: Import info
-        """
-        info = base.ImportInfo()
-        p_info = self.property_summaries
-        # ensure data is primed
-        p_info.get_obj()
-        info.requires_typing = p_info.requires_typing
-        info.imports.update(p_info.imports)
-        return info
-    # endregion methods
 
     # region Properties
     @property
@@ -102,44 +77,6 @@ class ApiExData(base.APIData):
                 self.soup_obj)
         return self._ns
 
-    @property
-    def desc(self) -> base.ApiDesc:
-        """Gets the interface Description object"""
-        if self._desc is None:
-            self._desc = base.ApiDesc(self.soup_obj)
-        return self._desc
-
-    @property
-    def inherited(self) -> base.ApiInherited:
-        """Gets class that get all inherited value"""
-        if self._inherited is None:
-            self._inherited = base.ApiInherited(
-                soup=self.soup_obj, raise_error=False)
-        return self._inherited
-
-    @property
-    def properties_block(self) -> ApiPropertiesBlock:
-        """Gets Summary Properties block"""
-        if self._properties_block is None:
-            self._properties_block = ApiPropertiesBlock(
-                self.public_members)
-        return self._properties_block
-    
-    @property
-    def property_summary_rows(self) -> base.ApiSummaryRows:
-        """Get Summary rows for Properties"""
-        if self._property_summary_rows is None:
-            self._property_summary_rows = base.ApiSummaryRows(
-                self.properties_block)
-        return self._property_summary_rows
-    
-    @property
-    def property_summaries(self) -> base.ApiSummaries:
-        """Get Summary info list for Properties"""
-        if self._property_summaries is None:
-            self._property_summaries = base.ApiSummaries(
-                self.property_summary_rows)
-        return self._property_summaries
     # endregion Properties
 
 # endregion API Ex
@@ -183,12 +120,12 @@ class ParserEx(base.ParserBase):
         Returns:
             Dict[str, object]: {
                 "name": "str, class name",
-                "imports": "List[str], imports",
-                "typing_imports": "List[str], imports that require typing",
                 "namespace": "str, Namespace",
-                "extends": "List[str], class extends",
                 "desc": "List[str], class description",
                 "url": "str, api url"
+                "imports": "List[str], imports",
+                "typing_imports": "List[str], imports that require typing",
+                "extends": "List[str], class extends",
             }
         """
         key = 'get_info'
@@ -197,17 +134,16 @@ class ParserEx(base.ParserBase):
         ex = []
         for el in self._api_data.inherited.get_obj():
             ex.append(el.fullns)
+        ni = self._api_data.name.get_obj()
         result = {
-            'name': self._api_data.name.get_obj(),
+            'name': ni.name,
             'namespace': self._api_data.ns.namespace_str,
             'imports': [],
             'extends': ex,
             'desc': self._api_data.desc.get_obj(),
             "url": self._api_data.url_obj.url
         }
-        # if ni.name == 'Exception':
-        #     # make special exception for root exception:
-        #     result['extends'] = ['XInterface']
+
 
         logger.debug('ParserEx.get_info() name: %s', result['name'])
         logger.debug('ParserEx.get_info() namespace: %s',
@@ -263,27 +199,26 @@ class ParserEx(base.ParserBase):
     @property
     def imports(self) -> Set[str]:
         """Gets imports value"""
-        key = '_get_data_items'
-        try:
-            if not key in self._cache:
-                msg = "ParserEx._get_data_items() method must be called before accessing imports"
-                raise Exception(msg)
-        except Exception as e:
-            logger.error(e, exc_info=True)
-            raise e
+        key = 'get_formated_data'
+        if not key in self._cache:
+            self.get_formated_data()
+
+        key = 'imports_clean'
+        if not key in self._cache:
+            if len(self._imports) > 0:
+                info = self.get_info()
+                ns = info['namespace']
+                self._imports = base.Util.get_clean_imports(
+                    ns=ns, imports=self._imports)
+            self._cache[key] = True
         return self._imports
 
     @property
     def requires_typing(self) -> bool:
         """Gets requires typing value"""
-        key = '_get_data_items'
-        try:
-            if not key in self._cache:
-                msg = "ParserEx._get_data_items() method must be called before accessing requires_typing"
-                raise Exception(msg)
-        except Exception as e:
-            logger.error(e, exc_info=True)
-            raise e
+        key = 'get_formated_data'
+        if not key in self._cache:
+            self.get_formated_data()
         return self._requires_typing
 
     @property
@@ -382,13 +317,15 @@ class WriterEx(base.WriteBase):
         json_dict = {
             "id": JSON_ID,
             "version": __version__,
-            "timestamp": str(base.Util.get_timestamp_utc()),
+            # "timestamp": str(base.Util.get_timestamp_utc()),
+            "libre_office_ver": base.APP_CONFIG.libre_office_ver,
             "name": p_dict['name'],
             "type": "exception",
             "namespace": p_dict['namespace'],
             "parser_args": self._parser.get_parser_args(),
             "writer_args": {
-                "include_desc": self._include_desc},
+                "include_desc": self._include_desc
+                },
             "data": p_dict
         }
         str_jsn = base.Util.get_formated_dict_list_str(obj=json_dict, indent=2)
@@ -404,6 +341,8 @@ class WriterEx(base.WriteBase):
     def _set_template_data(self):
         if self._write_template_long is False:
             return
+        self._template = self._template.replace(
+            '{libre_office_ver}', base.APP_CONFIG.libre_office_ver)
         self._template = self._template.replace('{name}', self._p_name)
         self._template = self._template.replace('{ns}', str(self._p_namespace))
         self._template = self._template.replace('{link}', self._p_url)
@@ -480,14 +419,13 @@ class WriterEx(base.WriteBase):
         data = self._parser.get_info()
         self._p_name = data['name']
         self._p_namespace = data['namespace']
-        self._p_extends = get_extends(data['extends'])
         self._p_desc = data['desc']
         self._p_url = data['url']
         self._p_data = self._parser.get_formated_data()
         self._p_requires_typing = False
+        self._p_extends = get_extends(data['extends'])
         self._validate_p_info()
-        _imports = data['imports']
-        self._p_imports.update(_imports)
+        self._p_imports.update(data['imports'])
         self._p_imports.update(data['extends'])
         self._p_imports_typing.update(self._parser.imports)
         # in some cases such as XIntrospectionAccess

@@ -1,0 +1,345 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.14",
+  "libre_office_ver": "7.2",
+  "name": "SpreadsheetDocumentSettings",
+  "type": "service",
+  "namespace": "com.sun.star.sheet",
+  "parser_args": {
+    "sort": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "from_imports": [
+      [
+        "..beans.x_property_set",
+        "XPropertySet"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..i18n.x_forbidden_characters",
+        "XForbiddenCharacters"
+      ],
+      [
+        "..util.date",
+        "Date"
+      ],
+      [
+        "..lang.locale",
+        "Locale"
+      ],
+      [
+        "..awt.x_device",
+        "XDevice"
+      ]
+    ],
+    "quote": [
+      "XDevice",
+      "XForbiddenCharacters",
+      "Date",
+      "Locale"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "name": "SpreadsheetDocumentSettings",
+    "imports": [],
+    "namespace": "com.sun.star.sheet",
+    "extends": [
+      "com.sun.star.beans.XPropertySet"
+    ],
+    "desc": [
+      "contributes properties to control the configuration which is global for all views of a spreadsheet document.",
+      "",
+      "**since**",
+      "",
+      "    OOo 3.0",
+      "",
+      ".. deprecated::",
+      "",
+      "    Class is deprecated."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1sheet_1_1SpreadsheetDocumentSettings.html",
+    "items": {
+      "properties": [
+        {
+          "name": "CalcAsShown",
+          "returns": "bool",
+          "desc": [
+            "specifies whether calculations are performed with the rounded values displayed in cells (set to TRUE) instead of the internal values (set to FALSE)."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "CharLocale",
+          "returns": "Locale",
+          "desc": [
+            "contains the standard document language for Western text."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "CharLocaleAsian",
+          "returns": "Locale",
+          "desc": [
+            "contains the standard document language for Asian text."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "CharLocaleComplex",
+          "returns": "Locale",
+          "desc": [
+            "contains the standard document language for Complex text."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "DefaultTabStop",
+          "returns": "int",
+          "desc": [
+            "specifies the width of default tabulators."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ForbiddenCharacters",
+          "returns": "XForbiddenCharacters",
+          "desc": [
+            "contains the interface XForbiddenCharacters."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "HasDrawPages",
+          "returns": "bool",
+          "desc": [
+            "If this property is set the document has DrawPages.",
+            "",
+            "Use this property to find out, whether the document has DrawPages or not, because the getDrawPage method on the XDrawPageSupplier and the getDrawPages method on the XDrawPagesSupplier always creates the DrawPages if there are none; and this is very slow and needs more memory."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "IgnoreCase",
+          "returns": "bool",
+          "desc": [
+            "specifies whether upper and lower cases are treated as equal when comparing cells."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "IsAdjustHeightEnabled",
+          "returns": "bool",
+          "desc": [
+            "specifies whether the automatic adjustment of the row height is enabled.",
+            "",
+            "This boolean is actually a counter internally, of the number of times something has locked the height, so setting it to false will only perform one unlock operation, and might leave it still locked",
+            "",
+            "**since**",
+            "",
+            "    OOo 3.0"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "IsExecuteLinkEnabled",
+          "returns": "bool",
+          "desc": [
+            "specifies whether the automatic execution of links is enabled.",
+            "",
+            "**since**",
+            "",
+            "    OOo 3.0"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "IsIterationEnabled",
+          "returns": "bool",
+          "desc": [
+            "enables iterated calculation of circular references."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "IsLoaded",
+          "returns": "bool",
+          "desc": [
+            "specifies whether the document data are already loaded.",
+            "",
+            "**since**",
+            "",
+            "    OOo 3.0"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "IsRecordChangesProtected",
+          "returns": "bool",
+          "desc": [
+            "specifies whether changes record is protected.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 5.0"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "IsUndoEnabled",
+          "returns": "bool",
+          "desc": [
+            "specifies whether the undo command is enabled.",
+            "",
+            "**since**",
+            "",
+            "    OOo 3.0"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "IterationCount",
+          "returns": "int",
+          "desc": [
+            "specifies how many iterations are carried out.",
+            "",
+            "This setting is only used, if iteration is enabled using SpreadsheetDocumentSettings.IsIterationEnabled."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "IterationEpsilon",
+          "returns": "float",
+          "desc": [
+            "specifies the point at which a change in results will stop the iteration.",
+            "",
+            "More exactly it specifies a difference in the change of the result between two iterations. If the result difference is less than or equal to this epsilon-value, the iteration is stopped.",
+            "",
+            "This setting is only used, if iteration is enabled using SpreadsheetDocumentSettings.IsIterationEnabled."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "LookUpLabels",
+          "returns": "bool",
+          "desc": [
+            "specifies whether column or row labels are looked up from anywhere on the sheet.",
+            "",
+            "Explicitly defined label ranges are used even if this property is set to FALSE."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "MatchWholeCell",
+          "returns": "bool",
+          "desc": [
+            "specifies whether filter criteria must match entire cell contents."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "NullDate",
+          "returns": "Date",
+          "desc": [
+            "specifies the date that is represented by the value zero."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "RecordChanges",
+          "returns": "bool",
+          "desc": [
+            "specifies whether changes record is enabled.",
+            "",
+            "No modification applied if the record changes protection is activated information given by SpreadsheetDocumentSettings.IsRecordChangesProtected",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 5.0"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ReferenceDevice",
+          "returns": "XDevice",
+          "desc": [
+            "contains the reference device used for formatting the document.",
+            "",
+            "**since**",
+            "",
+            "    OOo 3.0"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "RegularExpressions",
+          "returns": "bool",
+          "desc": [
+            "specifies whether regular expressions in formulas are enabled, e.g., for functions which look up spreadsheet contents.",
+            "",
+            "RegularExpressions and Wildcards are mutually exclusive, only one can have the value TRUE. If both are set to TRUE via API calls then the last one set takes precedence."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "SpellOnline",
+          "returns": "bool",
+          "desc": [
+            "enables online spell checking."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "StandardDecimals",
+          "returns": "int",
+          "desc": [
+            "specifies the number of decimals in the default number format."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Wildcards",
+          "returns": "bool",
+          "desc": [
+            "specifies whether wildcards in formulas are enabled, e.g., for functions which look up spreadsheet contents.",
+            "",
+            "Wildcards and RegularExpressions are mutually exclusive, only one can have the value TRUE. If both are set to TRUE via API calls then the last one set takes precedence.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 5.2"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
+  }
+}

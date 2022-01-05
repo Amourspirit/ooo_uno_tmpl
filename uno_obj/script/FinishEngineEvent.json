@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.8",
-  "timestamp": "2021-12-28 11:30:59+00:00",
+  "version": "0.1.14",
+  "libre_office_ver": "7.2",
   "type": "struct",
   "name": "FinishEngineEvent",
   "namespace": "com.sun.star.script",
@@ -10,52 +10,55 @@
   },
   "writer_args": {
     "sort": true,
-    "auto_import": true,
-    "dynamic_struct": false
+    "dynamic_struct": false,
+    "include_desc": true
   },
   "data": {
     "name": "FinishEngineEvent",
     "namespace": "com.sun.star.script",
     "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1script_1_1FinishEngineEvent.html",
-    "quote": [
-      "FinishReason"
-    ],
-    "typings": [],
-    "fullname": "com.sun.star.script.FinishEngineEvent",
-    "desc": [
-      "event contains the reasons and the data for the XEngineListener.finished() method."
-    ],
-    "extends": [
-      "com.sun.star.lang.EventObject"
-    ],
-    "imports": [],
-    "auto_imports": [
-      [
-        ".finish_reason",
-        "FinishReason"
-      ]
-    ],
     "from_imports": [
       [
         "..lang.event_object",
         "EventObject"
       ]
     ],
+    "from_imports_typing": [
+      [
+        ".finish_reason",
+        "FinishReason"
+      ]
+    ],
+    "quote": [
+      "FinishReason"
+    ],
+    "typings": [],
     "requires_typing": true,
+    "fullname": "com.sun.star.script.FinishEngineEvent",
+    "desc": [
+      "event contains the reasons and the data for the XEngineListener.finished() method.",
+      "",
+      ".. deprecated::",
+      "",
+      "    Class is deprecated."
+    ],
+    "imports": [],
+    "extends": [
+      "com.sun.star.lang.EventObject"
+    ],
     "items": [
       {
         "name": "ErrorMessage",
         "type": "str",
-        "orig_type": "string",
         "lines": [
           "error message.",
+          "",
           "Only valid if Reason is RuntimeError or CompileError."
         ]
       },
       {
         "name": "Finish",
         "type": "FinishReason",
-        "orig_type": "com.sun.star.script.FinishReason",
         "lines": [
           "specifies why the script terminates."
         ]
@@ -63,9 +66,9 @@
       {
         "name": "Return",
         "type": "object",
-        "orig_type": "any",
         "lines": [
           "contains the return value.",
+          "",
           "This field is only valid if FinishEngineEvent.Finish is FinishReason.OK."
         ]
       }

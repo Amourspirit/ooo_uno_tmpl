@@ -1,37 +1,38 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.8",
-  "timestamp": "2021-12-27 22:15:10+00:00",
+  "version": "0.1.12",
+  "timestamp": "2022-01-04 18:07:24+00:00",
   "name": "XDocumentProperties",
   "type": "interface",
   "namespace": "com.sun.star.document",
   "parser_args": {
     "sort": true
   },
-  "writer_args": {},
+  "writer_args": {
+    "include_desc": true
+  },
   "data": {
-    "from_imports": [
-      [
-        ".document_properties",
-        "DocumentProperties"
-      ]
-    ],
+    "from_imports": [],
     "from_imports_typing": [
       [
         "..beans.x_property_container",
         "XPropertyContainer"
       ],
       [
+        "..beans.named_value",
+        "NamedValue"
+      ],
+      [
         "..lang.locale",
         "Locale"
       ],
       [
-        "..embed.x_storage",
-        "XStorage"
-      ],
-      [
         "..util.date_time",
         "DateTime"
+      ],
+      [
+        "..embed.x_storage",
+        "XStorage"
       ],
       [
         "..beans.property_value",
@@ -40,21 +41,23 @@
     ],
     "quote": [
       "XPropertyContainer",
-      "typing.List[PropertyValue]",
       "DateTime",
+      "typing.List[str]",
       "Locale",
+      "typing.List[PropertyValue]",
+      "typing.List[NamedValue]",
       "XStorage"
     ],
     "typings": [
+      "typing.List[str]",
+      "typing.List[NamedValue]",
       "typing.List[PropertyValue]"
     ],
     "requires_typing": true,
     "name": "XDocumentProperties",
     "imports": [],
     "namespace": "com.sun.star.document",
-    "extends": [
-      "com.sun.star.document.DocumentProperties"
-    ],
+    "extends": [],
     "desc": [
       "provides document-specific information such as the author, creation date, and user-defined fields.",
       "",
@@ -202,6 +205,28 @@
               "in"
             ]
           ]
+        }
+      ],
+      "types": [
+        {
+          "name": "DocumentStatistics",
+          "returns": "typing.List[NamedValue]",
+          "desc": [
+            "contains some statistics about the document.",
+            "",
+            "The contained statistics may be specific to the type of the document."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Keywords",
+          "returns": "typing.List[str]",
+          "desc": [
+            "contains a list of keywords for the document."
+          ],
+          "raises_get": "",
+          "raises_set": ""
         }
       ],
       "properties": [

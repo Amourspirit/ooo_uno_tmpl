@@ -1,26 +1,51 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.8",
-  "timestamp": "2021-12-27 22:15:23+00:00",
+  "version": "0.1.12",
+  "timestamp": "2022-01-04 18:07:13+00:00",
   "name": "XRepository",
   "type": "interface",
   "namespace": "com.sun.star.rdf",
   "parser_args": {
     "sort": true
   },
-  "writer_args": {},
+  "writer_args": {
+    "include_desc": true
+  },
   "data": {
-    "from_imports": [
+    "from_imports": [],
+    "from_imports_typing": [
       [
-        ".x_document_repository",
-        "XDocumentRepository"
+        ".xuri",
+        "XURI"
       ],
       [
-        ".repository",
-        "Repository"
-      ]
-    ],
-    "from_imports_typing": [
+        ".x_blank_node",
+        "XBlankNode"
+      ],
+      [
+        "..container.x_enumeration",
+        "XEnumeration"
+      ],
+      [
+        ".xuri",
+        "XURI"
+      ],
+      [
+        ".x_resource",
+        "XResource"
+      ],
+      [
+        ".x_query_select_result",
+        "XQuerySelectResult"
+      ],
+      [
+        ".x_node",
+        "XNode"
+      ],
+      [
+        ".x_named_graph",
+        "XNamedGraph"
+      ],
       [
         "..io.x_output_stream",
         "XOutputStream"
@@ -28,51 +53,19 @@
       [
         "..io.x_input_stream",
         "XInputStream"
-      ],
-      [
-        ".x_resource",
-        "XResource"
-      ],
-      [
-        ".x_named_graph",
-        "XNamedGraph"
-      ],
-      [
-        "..container.x_enumeration",
-        "XEnumeration"
-      ],
-      [
-        ".x_query_select_result",
-        "XQuerySelectResult"
-      ],
-      [
-        ".xuri",
-        "XURI"
-      ],
-      [
-        ".xuri",
-        "XURI"
-      ],
-      [
-        ".x_node",
-        "XNode"
-      ],
-      [
-        ".x_blank_node",
-        "XBlankNode"
       ]
     ],
     "quote": [
-      "XInputStream",
-      "XResource",
+      "typing.List[XURI]",
       "XURI",
+      "XEnumeration",
       "XNamedGraph",
       "XBlankNode",
+      "XNode",
       "XQuerySelectResult",
+      "XResource",
       "XOutputStream",
-      "XEnumeration",
-      "typing.List[XURI]",
-      "XNode"
+      "XInputStream"
     ],
     "typings": [
       "typing.List[XURI]"
@@ -81,10 +74,7 @@
     "name": "XRepository",
     "imports": [],
     "namespace": "com.sun.star.rdf",
-    "extends": [
-      "com.sun.star.rdf.Repository",
-      "com.sun.star.rdf.XDocumentRepository"
-    ],
+    "extends": [],
     "desc": [
       "provides access to a set of named RDF graphs.",
       "",

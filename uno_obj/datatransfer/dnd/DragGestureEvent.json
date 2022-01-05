@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.8",
-  "timestamp": "2021-12-28 11:31:03+00:00",
+  "version": "0.1.14",
+  "libre_office_ver": "7.2",
   "type": "struct",
   "name": "DragGestureEvent",
   "namespace": "com.sun.star.datatransfer.dnd",
@@ -10,46 +10,53 @@
   },
   "writer_args": {
     "sort": true,
-    "auto_import": true,
-    "dynamic_struct": false
+    "dynamic_struct": false,
+    "include_desc": true
   },
   "data": {
     "name": "DragGestureEvent",
     "namespace": "com.sun.star.datatransfer.dnd",
     "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1datatransfer_1_1dnd_1_1DragGestureEvent.html",
-    "quote": [],
-    "typings": [],
-    "fullname": "com.sun.star.datatransfer.dnd.DragGestureEvent",
-    "desc": [
-      "A DragGestureEvent is passed to the method XDragGestureListener.dragGestureRecognized() when a particular XDragGestureRecognizer detects that a platform dependent drag initiating gesture has occurred on the component that it is tracking."
-    ],
-    "extends": [
-      "com.sun.star.lang.EventObject"
-    ],
-    "imports": [],
-    "auto_imports": [],
     "from_imports": [
       [
         "...lang.event_object",
         "EventObject"
       ]
     ],
-    "requires_typing": false,
+    "from_imports_typing": [
+      [
+        ".x_drag_source",
+        "XDragSource"
+      ]
+    ],
+    "quote": [
+      "XDragSource"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "fullname": "com.sun.star.datatransfer.dnd.DragGestureEvent",
+    "desc": [
+      "A DragGestureEvent is passed to the method XDragGestureListener.dragGestureRecognized() when a particular XDragGestureRecognizer detects that a platform dependent drag initiating gesture has occurred on the component that it is tracking."
+    ],
+    "imports": [],
+    "extends": [
+      "com.sun.star.lang.EventObject"
+    ],
     "items": [
       {
         "name": "DragAction",
         "type": "int",
-        "orig_type": "byte",
         "lines": [
           "The action selected by the user.",
+          "",
           "Different constants may be combined using a logical OR.",
+          "",
           "It's further possible to combine the ACTION_DEFAULT with one of the other actions defined in com.sun.star.datatransfer.dnd.DNDConstants. This means the user did not press any key during the Drag and Drop operation and the action that was combined with ACTION_DEFAULT is the system default action."
         ]
       },
       {
         "name": "DragOriginX",
         "type": "int",
-        "orig_type": "long",
         "lines": [
           "The x coordinate where the drag originated in component coordinates."
         ]
@@ -57,15 +64,13 @@
       {
         "name": "DragOriginY",
         "type": "int",
-        "orig_type": "long",
         "lines": [
           "The y coordinate where the drag originated in component coordinates."
         ]
       },
       {
         "name": "DragSource",
-        "type": "object",
-        "orig_type": "XDragSource",
+        "type": "XDragSource",
         "lines": [
           "The DragSource associated with this drag action."
         ]
@@ -73,9 +78,9 @@
       {
         "name": "Event",
         "type": "object",
-        "orig_type": "any",
         "lines": [
           "The last event comprising the gesture.",
+          "",
           "The initial trigger event will presumably be a com.sun.star.awt.MouseEvent event. If it is not, the implementation should either react accordingly or presume that the left mouse button was clicked."
         ]
       }

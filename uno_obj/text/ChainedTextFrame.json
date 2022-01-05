@@ -1,0 +1,64 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.14",
+  "libre_office_ver": "7.2",
+  "name": "ChainedTextFrame",
+  "type": "service",
+  "namespace": "com.sun.star.text",
+  "parser_args": {
+    "sort": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "from_imports": [
+      [
+        ".text_frame",
+        "TextFrame"
+      ]
+    ],
+    "from_imports_typing": [],
+    "quote": [],
+    "typings": [],
+    "requires_typing": false,
+    "name": "ChainedTextFrame",
+    "imports": [],
+    "namespace": "com.sun.star.text",
+    "extends": [
+      "com.sun.star.text.TextFrame"
+    ],
+    "desc": [
+      "extends a TextFrame which shares the same Text with other ChainedTextFrame instances that will make the text flow through the chained frames.",
+      "",
+      "The text flows in the next frame if there is no space left in the current frame."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1text_1_1ChainedTextFrame.html",
+    "items": {
+      "properties": [
+        {
+          "name": "ChainNextName",
+          "returns": "str",
+          "desc": [
+            "name of the previous frame in the chain",
+            "",
+            "An empty string indicates that there is no previous frame."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ChainPrevName",
+          "returns": "str",
+          "desc": [
+            "name of the next frame in the chain",
+            "",
+            "An empty string indicates that there is no next frame."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
+  }
+}

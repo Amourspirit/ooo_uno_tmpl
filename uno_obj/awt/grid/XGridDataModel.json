@@ -1,16 +1,27 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.8",
-  "timestamp": "2021-12-27 22:15:12+00:00",
+  "version": "0.1.12",
+  "timestamp": "2022-01-04 18:10:40+00:00",
   "name": "XGridDataModel",
   "type": "interface",
   "namespace": "com.sun.star.awt.grid",
   "parser_args": {
     "sort": true
   },
-  "writer_args": {},
+  "writer_args": {
+    "include_desc": true
+  },
   "data": {
-    "from_imports": [],
+    "from_imports": [
+      [
+        "...util.x_cloneable",
+        "XCloneable"
+      ],
+      [
+        "...lang.x_component",
+        "XComponent"
+      ]
+    ],
     "from_imports_typing": [],
     "quote": [
       "typing.List[object]"
@@ -22,7 +33,10 @@
     "name": "XGridDataModel",
     "imports": [],
     "namespace": "com.sun.star.awt.grid",
-    "extends": [],
+    "extends": [
+      "com.sun.star.lang.XComponent",
+      "com.sun.star.util.XCloneable"
+    ],
     "desc": [
       "An instance of this interface is used by the UnoControlGrid to retrieve the content data that is displayed in the actual control.",
       "",

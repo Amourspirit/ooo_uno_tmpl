@@ -156,7 +156,7 @@ class WriterStruct:
             result = False
         return result, url_data.name
 
-    def Write(self, *args, **kwargs):
+    def write(self, *args, **kwargs):
         links = self._parser.get_links()
         with concurrent.futures.ProcessPoolExecutor() as executor:
             results = [executor.submit(self._process_direct, link, *args, **kwargs)
@@ -167,6 +167,8 @@ class WriterStruct:
                     logger.info(f"Success processing: {name}")
                 else:
                     logger.error(f"Failed processing: {name}")
+
+
 
 # region Parse method
 def _get_parsed_kwargs(**kwargs) -> Dict[str, str]:
@@ -222,7 +224,7 @@ def parse(*args, **kwargs):
         'no_cache' (str, optional): Short form ``'x'``. No caching. Default ``False``
         'no_print_clear (str, optional): Short form ``'p'``. No clearing of terminal
             when otuput to terminal. Default ``False``
-        'no_auto_import' (str, optional): Short form ``'a'``. Auto import types that are not python types. Default ``True``
+        'no_desc' (str, optional): Short from ``'d'``. No description will be outputed in template. Default ``False``
         'dynamic_struct' (str, optional): Short form ``'d'``. Template will generate dynameic struct conten. Default ``False``
         'print_json' (str, optional): Short form ``'n'``. Print json to termainl. Default ``False``
         'print_template' (str, optional): Short form ``'m'``. Print template to terminal. Default ``False``
@@ -253,7 +255,7 @@ def parse(*args, **kwargs):
 
     p = ParserStruct(json_path=pkwargs['json_file'])
     w = WriterStruct(parser=p)
-    w.Write(*args, **kwargs)
+    w.write(*args, **kwargs)
 
 # endregion Parse method
 
@@ -299,7 +301,7 @@ def main():
 
     p = ParserStruct(json_path=args.json_file)
     w = WriterStruct(parser=p)
-    w.Write('t', 'j')
+    w.write('t', 'j')
 
 
 if __name__ == "__main__":

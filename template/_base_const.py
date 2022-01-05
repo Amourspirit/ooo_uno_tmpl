@@ -28,6 +28,8 @@ class BaseConst(BaseJson):
         set_data('from_imports')
         set_data('from_typing_imports')
         set_data('base_class')
+        # get lo ver if it exist. Defaut to False
+        self.libre_office_ver = json_data.get('libre_office_ver', False)
         self.requires_typing = bool(data.get('requires_typing', False))
         self.hex = bool(json_data['writer_args'].get('hex', False))
         self.flags = bool(data.get('flags', False))

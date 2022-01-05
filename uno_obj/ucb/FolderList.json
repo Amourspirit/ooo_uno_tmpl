@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.8",
-  "timestamp": "2021-12-28 11:31:05+00:00",
+  "version": "0.1.14",
+  "libre_office_ver": "7.2",
   "type": "struct",
   "name": "FolderList",
   "namespace": "com.sun.star.ucb",
@@ -10,38 +10,42 @@
   },
   "writer_args": {
     "sort": true,
-    "auto_import": true,
-    "dynamic_struct": false
+    "dynamic_struct": false,
+    "include_desc": true
   },
   "data": {
     "name": "FolderList",
     "namespace": "com.sun.star.ucb",
     "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1ucb_1_1FolderList.html",
-    "quote": [
-      "typing.List[FolderListEntry]"
-    ],
-    "typings": [
-      "typing.List[FolderListEntry]"
-    ],
-    "fullname": "com.sun.star.ucb.FolderList",
-    "desc": [
-      "A list of folders."
-    ],
-    "extends": [],
-    "imports": [],
-    "auto_imports": [
+    "from_imports": [],
+    "from_imports_typing": [
+      [
+        ".folder_list_command",
+        "FolderListCommand"
+      ],
       [
         ".folder_list_entry",
         "FolderListEntry"
       ]
     ],
-    "from_imports": [],
+    "quote": [
+      "FolderListCommand",
+      "typing.List[FolderListEntry]"
+    ],
+    "typings": [
+      "typing.List[FolderListEntry]"
+    ],
     "requires_typing": true,
+    "fullname": "com.sun.star.ucb.FolderList",
+    "desc": [
+      "A list of folders."
+    ],
+    "imports": [],
+    "extends": [],
     "items": [
       {
         "name": "Command",
-        "type": "object",
-        "orig_type": "FolderListCommand",
+        "type": "FolderListCommand",
         "lines": [
           "The command to process on this list of folders."
         ]
@@ -49,7 +53,6 @@
       {
         "name": "List",
         "type": "typing.List[FolderListEntry]",
-        "orig_type": "sequence<FolderListEntry>",
         "lines": [
           "The list of folders (only used in conjunction with FolderListCommand.SET)."
         ]

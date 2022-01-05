@@ -1,14 +1,16 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.8",
-  "timestamp": "2021-12-27 22:15:08+00:00",
+  "version": "0.1.12",
+  "timestamp": "2022-01-04 18:09:29+00:00",
   "name": "XObjectInspectorModel",
   "type": "interface",
   "namespace": "com.sun.star.inspection",
   "parser_args": {
     "sort": true
   },
-  "writer_args": {},
+  "writer_args": {
+    "include_desc": true
+  },
   "data": {
     "from_imports": [],
     "from_imports_typing": [
@@ -18,10 +20,12 @@
       ]
     ],
     "quote": [
-      "typing.List[PropertyCategoryDescriptor]"
+      "typing.List[PropertyCategoryDescriptor]",
+      "typing.List[object]"
     ],
     "typings": [
-      "typing.List[PropertyCategoryDescriptor]"
+      "typing.List[PropertyCategoryDescriptor]",
+      "typing.List[object]"
     ],
     "requires_typing": true,
     "name": "XObjectInspectorModel",
@@ -71,6 +75,23 @@
               "in"
             ]
           ]
+        }
+      ],
+      "types": [
+        {
+          "name": "HandlerFactories",
+          "returns": "typing.List[object]",
+          "desc": [
+            "describes a set of factories for creating XPropertyHandlers",
+            "",
+            "Every element of the sequence must contain information to create a XPropertyHandler instance. Two ways are currently supported:",
+            "",
+            "This attribute is usually only evaluated by the ObjectInspector instance which the model is currently bound to.",
+            "",
+            "The order of factories is important: If two property handlers declare themselves responsible for the same property, the one whose factory is listed last wins. Also, if a handler B wants to supersede a property of another handler A, A's factory must precede the factory of B."
+          ],
+          "raises_get": "",
+          "raises_set": ""
         }
       ],
       "properties": [

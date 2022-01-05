@@ -21,6 +21,7 @@ import inspect
 import importlib
 import shutil  # to save it locally
 import numpy as np
+import pickle
 from dataclasses import dataclass, field
 from deprecated import deprecated
 from PIL import Image
@@ -42,11 +43,22 @@ from parser.type_mod import TypeRules, PythonType
 from config import AppConfig, read_config_default
 # endregion imports
 
+# region Logger
 logger: logging.Logger  = None
+
+def _set_loggers(l: Union[logging.Logger, None]):
+    global logger
+    logger = l
+
+# endregion Logger
+
 # region CONST
 URL_SPLIT = '_1_1'
 """Default stirng for splitting url string into it parts"""
+TEXT_CACHE: 'TextCache' = None
+PICKLE_CACHE: 'PickleCache' = None
 # endregion CONST
+
 # region config
 APP_CONFIG: AppConfig = None
 def _load_config():
@@ -61,13 +73,12 @@ _load_config()
 py_name_pattern = re.compile('[\W_]+')
 py_ns_pattern = re.compile(r'[^a-zA-Z0-9\._]+')
 curly_brace_close_pattern = re.compile(r'[^};]')
-TEXT_CACHE: 'TextCache' = None
 """TextCache object for caching response data"""
 pattern_sq_braket = re.compile(r"\[.*\]")
 pattern_http = re.compile(r"^https?:\/\/")
 pattern_id = re.compile(r'[a-z0-9]{28,38}')
 pattern_generic_name = re.compile(r"([a-zA-Z0-9_]+)(<[A-Z, ]+>)")
-
+re_dir_pattern = re.compile(r"\[((?:in)|(?:out))\]", re.IGNORECASE)
 # endregion regex
 
 # region Type Map
@@ -102,7 +113,7 @@ TYPE_MAP_EX = {
 
 # region image process const
 IMG_CACHE: 'ImageCache' = None
-RESPONSE_IMG: 'ResponseImg' = None
+# RESPONSE_IMG: 'ResponseImg' = None
 # endregion image process const
 
 # region Exceptions
@@ -112,26 +123,25 @@ class RequiredError(Exception):
 
 # region Data Classes
 
+@dataclass
+class Shape:
+    x1: int
+    y1: int
+    x2: int
+    y2: int
+
+@dataclass
+class AreaInfo:
+    is_inherited: bool
+    shape: Optional[Shape] = None
+
+
 
 @dataclass
 class ImportInfo:
     requires_typing: bool = False
     imports: Set[str] = field(default_factory=set)
 
-# @dataclass
-# class PythonType(ImportInfo):
-#     type: str = ''
-
-
-@dataclass(frozen=True)
-class Area:
-    name: str
-    href: str
-    x1: int
-    y1: int
-    x2: int
-    y2: int
-    title: str = ''
 
 
 @dataclass(frozen=True)
@@ -145,11 +155,46 @@ class Ns:
 
 
 @dataclass(frozen=True)
+class Area:
+    name: str
+    ns: Ns
+    href: str
+    x1: int
+    y1: int
+    x2: int
+    y2: int
+    title: str = ''
+
+
+@dataclass
 class SummaryInfo:
     id: str
+    """Summary Info ID obtained from web page"""
     name: str
+    """Name from page summary"""
     type: str
+    """Type from page summary"""
     p_type: PythonType
+    """Python Type obtaind usually from Util.get_python_type()"""
+    extra_data: object = None
+    """Extra data that can be set in rules or otherwise"""
+
+@dataclass
+class NameInfo:
+    name: str
+    "Name to use in code gen"
+    orig_name: str
+    """Origin name found from html"""
+    extra_data: Optional[object] = None
+    """Extra data that can be set in rules or otherwise"""
+
+
+@dataclass
+class ParamInfo:
+    direction: str = ''
+    name: str = ''
+    type: str = ''
+    p_type: Optional[PythonType] = None
 # endregion Data Classes
 
 # region Cache
@@ -207,8 +252,12 @@ class CacheBase(ABC):
 
     @property
     def seconds(self) -> float:
-        """Gets cache time in seconds"""
+        """Gets/Sets cache time in seconds"""
         return self._lifetime
+    
+    @seconds.setter
+    def seconds(self, value: float) -> None:
+        self._lifetime = float(value)
     
     @property
     def path(self) -> Path:
@@ -250,6 +299,8 @@ class TextCache(CacheBase):
             age = time.time() - ti_m
             if age >= self.seconds:
                 return None
+        else:
+            return None
         try:
             # Check if we have this file locally
             
@@ -272,6 +323,64 @@ class TextCache(CacheBase):
         # print('Saving a copy of {} in the cache'.format(filename))
         with open(f, 'w') as cached_file:
             cached_file.write(content)
+
+
+class PickleCache(CacheBase):
+    """
+    Caches files and retreives cached files.
+    Cached file are in a subfolder of system tmp dir.
+    """
+
+    def fetch_from_cache(self, filename: Union[str, Path]) -> Union[object, None]:
+        """
+        Fetches file contents from cache if it exist and is not expired
+
+        Args:
+            filename (Union[str, Path]): File to retrieve
+
+        Returns:
+            Union[object, None]: File contents if retrieved; Otherwise, ``None``
+        """
+        f = Path(self.path, filename)
+        if not f.exists():
+            return None
+
+        if self.seconds > 0:
+            f_stat = f.stat()
+            if f_stat.st_size == 0:
+                # shoud not be zero byte file.
+                try:
+                    self.del_from_cache(f)
+                except Exception as e:
+                    logger.warning(
+                        'Not able to delete 0 byte file: %s, error: %s', filename, str(e))
+                return None
+            ti_m = f_stat.st_mtime
+            age = time.time() - ti_m
+            if age >= self.seconds:
+                return None
+        else:
+            return None
+        try:
+            # Open the file in binary mode
+            with open(f, 'rb') as file:
+                # Call load method to deserialze
+                content = pickle.load(file)
+            return content
+        except IOError:
+            return None
+
+    def save_in_cache(self, filename: Union[str, Path], content: object):
+        """
+        Saves file contents into cache
+
+        Args:
+            filename (Union[str, Path]): filename to write.
+            content (object): Contents to write into file.
+        """
+        f = Path(self.path, filename)
+        with open(f, 'wb') as file:
+            pickle.dump(content, file)
 
 # endregion Cache
 
@@ -735,11 +844,12 @@ class BlockObj(ABC):
 class ApiName(BlockObj):
     """Get the Name object for the interface"""
 
-    def __init__(self, soup: SoupObj):
+    def __init__(self, soup: SoupObj, rules_engine: 'IRulesName' = None):
         super().__init__(soup)
         self._data = None
+        self._rules_engine = rules_engine
 
-    def get_obj(self) -> str:
+    def get_obj(self) -> NameInfo:
         if not self._data is None:
             return self._data
         soup = self.soup.soup
@@ -747,7 +857,11 @@ class ApiName(BlockObj):
             tag_div_nav: Tag = soup.select_one('div#nav-path')
             name = tag_div_nav.find_all(
                 'li', class_='navelem')[-1].text.strip()
-            self._data = name
+            ni = NameInfo(name=name, orig_name=name)
+            if self._rules_engine:
+                self._rules_engine.process_name(ni)
+
+            self._data = ni
             return self._data
         except Exception as e:
             logger.error(
@@ -873,11 +987,19 @@ class ApiSummaryRows(BlockObj):
 class ApiSummaries(BlockObj):
     """Gets summary information for a public member block"""
 
-    def __init__(self, block: ApiSummaryRows) -> None:
+    def __init__(self, block: ApiSummaryRows, rule_engine: 'IRulesSummaryInfo' = None) -> None:
+        """
+        [summary]
+
+        Args:
+            block (ApiSummaryRows): Block of html that contains summary rows.
+            rule_engine (IRulesSummaryInfo, optional): Rules engine to process each found Summary Info. Defaults to None.
+        """
         self._block: ApiSummaryRows = block
         super().__init__(self._block.soup)
         self._requires_typing = False
         self._imports: Set[str] = set()
+        self._rule_engine = rule_engine
         self._data = None
     
     def _get_type_from_inner_link(self, mem_item_left: Tag, name:str) -> Union[str, None]:
@@ -896,6 +1018,15 @@ class ApiSummaries(BlockObj):
         return s
 
     def get_obj(self) -> List[SummaryInfo]:
+        """
+        Get list of Summary Info from html page.
+
+        Returns:
+            List[SummaryInfo]: summary info.
+
+        Note:
+            If a rules engine is present then each summary info will have any relevant rules applied.
+        """
         if not self._data is None:
             return self._data
         self._data = []
@@ -939,6 +1070,10 @@ class ApiSummaries(BlockObj):
             im = p_type.get_all_imports()
             self._imports.update(im)
             self._data.append(si)
+
+        if self._rule_engine:
+            for si in self._rule_engine:
+                self._rule_engine.process_summary_info(si)
         return self._data
 
     @property
@@ -1161,8 +1296,246 @@ class ApiDescBlock(BlockObj):
         self._data = desc
         return self._data
 
+# region        API Summary Blocks
+
+
+class ApiFunctionsBlock(ApiSummaryBlock):
+    def _get_match_name(self) -> str:
+        return 'pub-methods'
+
+
+class ApiTypesBlock(ApiSummaryBlock):
+    def _get_match_name(self) -> str:
+        return 'pub-types'
+
+
+class ApiPropertiesBlock(ApiSummaryBlock):
+    def _get_match_name(self) -> str:
+        return 'pub-attribs'
+
+
+class ApiInterfacesBlock(ApiSummaryBlock):
+    """Gets Block object for Exported Interfaces"""
+
+    def _get_match_name(self) -> str:
+        return 'interfaces'
+
+# endregion     API Summary Blocks
+
+# region        Method Api
+
+
+class ApiMethodPramsInfo(BlockObj):
+    """Gets List of Parameter information for a funciton"""
+
+    def __init__(self, block: ApiProtoBlock) -> None:
+        self._block: ApiProtoBlock = block
+        super().__init__(self._block.soup)
+        self._requires_typing = False
+        self._imports: Set[str] = set()
+        self._data = None
+
+    def get_obj(self) -> List[ParamInfo]:
+        if not self._data is None:
+            return self._data
+        self._data = []
+        proto = self._block.get_obj()
+        if not proto:
+            return self._data
+        p_type_tag = proto.find_all('td', class_='paramtype')
+        p_name_tag = proto.find_all('td', class_='paramname')
+        if not p_type_tag and not p_name_tag:
+            if logger.level <= logging.DEBUG:
+                logger.debug(
+                    'ApiInterfacePramsInfoget_obj() No Parmas for %s', self._block.summary_info.name)
+            return self._data
+
+        try:
+            if len(p_type_tag) != len(p_name_tag):
+                if len(p_type_tag) == 0 and len(p_name_tag) == 1:
+                    # no params. p_name_tag will usually be 1
+                    # when there are not paramters.
+                    return self._data
+                raise Exception
+        except Exception as e:
+            msg = "ApiFnPramsInfo.get_obj(), Parameter Name and Parameter Types do not have the same length. Function Summary: %s Url: %s" % (str(
+                self._block.summary_info), self.url_obj.url)
+            logger.error(msg)
+            raise Exception(msg)
+        p_info = zip(p_name_tag, p_type_tag)
+        self._data = self._process_params(params=p_info)
+        return self._data
+
+    def _process_name_tag(self, name_tag: Tag, pinfo: ParamInfo):
+        name = name_tag.text
+        pinfo.name = Util.get_clean_name(name)
+
+    def _get_type_from_inner_link(self, paramtype: Tag, name: str) -> Union[str, None]:
+        logger.debug(
+            'ApiFnPramsInfo._get_type_from_inner_link() Searching for %s link.', name)
+        if not paramtype:
+            return None
+        a_tag = paramtype.findChild('a')
+        if not a_tag:
+            return None
+        a_name = a_tag.text.strip()
+        if a_name != name:
+            return None
+        s = Util.get_ns_from_a_tag(a_tag=a_tag)
+        logger.debug(
+            'ApiFnPramsInfo._get_type_from_inner_link() found: %s', s)
+        return s
+
+    def _process_type_tag(self, type_tag: Tag, pinfo: ParamInfo):
+        pinfo.direction = 'in'
+        # dir_tag: NavigableString = type_tag.find(text=True, recursive=False)
+        # dir_str could be in format of: [in] sequence< ::
+        dir_str: str = type_tag.text.strip()
+        m = re_dir_pattern.match(dir_str)
+        if m:
+            g_dir = m.group(1).lower()
+            pinfo.direction = g_dir  # in or out
+            dir_str = dir_str.split(maxsplit=1)[1]
+        _type = dir_str.replace("::", '.').lstrip('.')
+        t_info: PythonType = Util.get_python_type(in_type=_type)
+        if t_info.is_default():
+            logger.debug(
+                'ApiFnPramsInfo._process_type_tag() %s type is Default. Looking for %s', pinfo.name, _type)
+            t2_type = self._get_type_from_inner_link(type_tag, _type)
+            if t2_type:
+                t2_info = Util.get_python_type(t2_type)
+                if not t2_info.is_default():
+                    t_info = t2_info
+        logger.debug(
+            "ApiFnPramsInfo._process_type_tag() param '%s' type '%s' converted to '%s'", pinfo.name, _type, t_info.type)
+        pinfo.type = t_info.type
+        pinfo.p_type = t_info
+        if t_info.requires_typing:
+            self._requires_typing = True
+        self._imports.update(t_info.get_all_imports())
+        return
+
+    def _process_params(self, params: zip) -> List[ParamInfo]:
+        results = []
+        for p_name_tag, p_type_tag in params:
+            p_info = ParamInfo()
+            self._process_name_tag(name_tag=p_name_tag, pinfo=p_info)
+            if not p_info.name:
+                msg = f"ApiFnPramsInfo: unable to find parameter name for method {self.summary_info.name!r}. Url: {self.url_obj.url}"
+                logger.error(msg)
+                raise Exception(msg)
+            self._process_type_tag(type_tag=p_type_tag, pinfo=p_info)
+            if not p_info.type:
+                msg = f"ApiFnPramsInfo: unable to find parameter type for method {self.summary_info.name!r} with param name of {p_info.name!r}. Url: {self.url_obj.url}"
+                logger.error(msg)
+                raise Exception(msg)
+            results.append(p_info)
+        return results
+
+    @property
+    def requires_typing(self) -> bool:
+        """Gets require_typing value"""
+        return self._requires_typing
+
+    @property
+    def imports(self) -> Set[str]:
+        """Gets imports value"""
+        return self._imports
+
+    @property
+    def summary_info(self) -> SummaryInfo:
+        """Gets summary_info value"""
+        return self._block.summary_info
+
+
+class ApiMethodException(BlockObj):
+    """Gets errors for a funciton"""
+    # have not found an example with more than one exception so assuming
+    # singular excpetion
+    # returning as a list of str for future consideration
+
+    def __init__(self, block: ApiProtoBlock) -> None:
+        self._block: ApiProtoBlock = block
+        super().__init__(self._block.soup)
+        self._data = False
+
+    def _get_raises_lst(self) -> List[str]:
+        # rows for raise a bit messy.
+        # see: https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1animations_1_1XTimeContainer.html
+        # first row of raise will contain only the first exception.
+        # if there is another exception then the row text should end with a comma
+        row: Tag = None
+
+        def ex_gen():
+            nonlocal row
+            while row:
+                if row is None:
+                    break
+                text = self._get_raises_text(row)
+                s = text
+                if text.endswith(","):
+                    row = row.find_next_sibling('tr')
+                    s = s.rstrip(',')
+                else:
+                    row = None
+                yield s
+
+        results = []
+        row = self._get_raises_row()
+        if not row:
+            return results
+        # errs = ex()
+        for err in ex_gen():
+            results.append(err)
+        return results
+
+    def _get_raises_row(self) -> Union[Tag, None]:
+        proto = self._block.get_obj()
+        rows: ResultSet = proto.find_all('tr')
+        result = None
+        for row in rows:
+            td: Tag = row.select_one('td')
+            if td.text.strip().lower() == 'raises':
+                result = row
+                break
+        return result
+
+    def _get_raises_text(self, row: Tag):
+        if not row:
+            return None
+        parts = row.text.rsplit(maxsplit=1)  # in case starts with raises
+        s: str = parts.pop()
+        s = s.replace('(', '').replace(')', '').replace(
+            '::', '.').strip().lstrip('.')
+        return s
+
+    def get_obj(self) -> Union[List[str], None]:
+        """
+        Get name of error that is raises
+
+        Returns:
+            Union[str, None]: String containing type of error if it exist; Otherwise, ``None``
+        """
+        if not self._data is False:
+            return self._data
+        self._data = None
+        # row = self._get_raises_row()
+        # if not row:
+        #     return self._data
+        # self._data = [self._get_raises_text(row)]
+        self._data = self._get_raises_lst()
+        return self._data
+
+    @property
+    def summary_info(self) -> SummaryInfo:
+        """Gets summary_info value"""
+        return self._block.summary_info
+
+
+# endregion     Method Api
 
 class APIData:
+    # region Constructor
     def __init__(self, url_soup: Union[str, SoupObj], allow_cache: bool):
         if isinstance(url_soup, str):
             self._url = url_soup
@@ -1172,11 +1545,111 @@ class APIData:
             self._url = url_soup.url
             self._soup_obj = url_soup
             self._soup_obj.allow_cache = allow_cache
+        self._allow_cache = allow_cache
         self._api_data_public_members: ApiPublicMembers = None
         self._api_data_name: ApiName = None
         self._desc: ApiDesc = None
-    
+        self._properties_block: ApiPropertiesBlock = None
+        self._func_block: ApiFunctionsBlock = None
+        self._interfaces_block: ApiInterfacesBlock = None
+        self._types_block: ApiTypesBlock = None
+        self._func_summary_rows: ApiSummaryRows = None
+        self._property_summary_rows: ApiSummaryRows = None
+        self._export_summary_rows: ApiSummaryRows = None
+        self._func_summaries: ApiSummaries = None
+        self._property_summaries: ApiSummaries = None
+        self._exported_summaries: ApiSummaries = None
+        self._type_summaries: ApiSummaries = None
+        self._type_summary_rows: ApiSummaryRows = None
+        self._inherited: ApiInherited = None
+        self._area_filter_rules_engine: IRulesArea = None
+
+    # endregion Constructor
+
     # region Methods
+    def _get_name_rules_engine(self) -> Union['IRulesName', None]:
+        """
+        Gets name rules engine instance or None.
+        Can be overrides in subclasses.
+
+        Returns:
+            [type]: None
+        """
+        return None
+    
+    def _set_area_filter_rules_engine_rules(self, rules_engine: 'IRulesArea') -> None:
+        """
+        Registers rules for Area Filter Rules Engine.
+        Can be overriden in subclasses.
+
+        Args:
+            rules_engine (IRulesArea): Area Rules Engine
+        """
+        # order of rules matter here.
+        # RuleAreaSingle would also match if it were RuleAreaVertical
+        rules_engine.register_rule(rule=RuleAreaMulti)
+        rules_engine.register_rule(rule=RuleAreaVertical)
+        rules_engine.register_rule(rule=RuleAreaSingle)
+
+    @AcceptedTypes(str, ftype=DecFuncEnum.METHOD)
+    def get_import_info_method(self, a_id: str) -> ImportInfo:
+        """
+        Gets imports for method params and return type
+
+        Args:
+            si_id (str): Function summary Info
+
+        Returns:
+            base.ImportInfo: Import info
+        """
+        key = 'get_import_info_method_' + a_id
+        info = ImportInfo()
+        params_info = self.get_prams_info(a_id=a_id)
+        fn_info = self.func_summaries
+        # ensure data is primed
+        fn_info.get_obj()
+        params_info.get_obj()
+
+        info.requires_typing = params_info.requires_typing or fn_info.requires_typing
+        info.imports.update(params_info.imports)
+        info.imports.update(fn_info.imports)
+        return info
+
+    def get_import_info_property(self) -> ImportInfo:
+        """
+        Gets imports for properties
+
+        Args:
+            si_id (str): Property summary Info
+
+        Returns:
+            base.ImportInfo: Import info
+        """
+        info = ImportInfo()
+        p_info = self.property_summaries
+        # ensure data is primed
+        p_info.get_obj()
+        info.requires_typing = p_info.requires_typing
+        info.imports.update(p_info.imports)
+        return info
+
+    def get_import_info_type(self) -> ImportInfo:
+        """
+        Gets imports for typedefs
+
+        Args:
+            si_id (str): Types summary Info
+
+        Returns:
+            base.ImportInfo: Import info
+        """
+        info = ImportInfo()
+        p_info = self.types_summaries
+        # ensure data is primed
+        p_info.get_obj()
+        info.requires_typing = p_info.requires_typing
+        info.imports.update(p_info.imports)
+        return info
 
     @AcceptedTypes(str, ftype=DecFuncEnum.METHOD)
     def get_detail_block(self, a_id: str) -> ApiDetailBlock:
@@ -1197,6 +1670,20 @@ class APIData:
         """Gets Description obj for method or property"""
         block = self.get_desc_block(a_id=a_id)
         return ApiDescDetail(block=block)
+
+    @AcceptedTypes(str, ftype=DecFuncEnum.METHOD)
+    def get_prams_info(self, a_id: str) -> ApiMethodPramsInfo:
+        """Gets parameter info for all parameters of a a method"""
+        block = self.get_proto_block(a_id=a_id)
+        result = ApiMethodPramsInfo(block=block)
+        return result
+
+    @AcceptedTypes(str, ftype=DecFuncEnum.METHOD)
+    def get_method_ex(self, a_id: str) -> ApiMethodException:
+        """Gets raises info for method"""
+        block = self.get_proto_block(a_id=a_id)
+        result = ApiMethodException(block=block)
+        return result
 
     @AcceptedTypes(str, ftype=DecFuncEnum.METHOD)
     def get_proto_block(self, a_id: str) -> ApiProtoBlock:
@@ -1223,14 +1710,124 @@ class APIData:
     def name(self) -> ApiName:
         if self._api_data_name is None:
             self._api_data_name = ApiName(
-                self._soup_obj)
+                soup=self._soup_obj,
+                rules_engine=self._get_name_rules_engine()
+                )
         return self._api_data_name
 
     @property
     def public_members(self) -> ApiPublicMembers:
         if self._api_data_public_members is None:
-            self._api_data_public_members = ApiPublicMembers(self._soup_obj)
+            self._api_data_public_members = ApiPublicMembers(self.soup_obj)
         return self._api_data_public_members
+
+    @property
+    def func_block(self) -> ApiFunctionsBlock:
+        """Gets Summary Functions block"""
+        if self._func_block is None:
+            self._func_block = ApiFunctionsBlock(
+                self.public_members)
+        return self._func_block
+
+    @property
+    def properties_block(self) -> ApiPropertiesBlock:
+        """Gets Summary Properties block"""
+        if self._properties_block is None:
+            self._properties_block = ApiPropertiesBlock(
+                self.public_members)
+        return self._properties_block
+
+    @property
+    def interfaces_block(self) -> ApiInterfacesBlock:
+        """Gets Summary Exported Interfaces block"""
+        if self._interfaces_block is None:
+            self._interfaces_block = ApiInterfacesBlock(
+                self.public_members)
+        return self._interfaces_block
+
+    @property
+    def types_block(self) -> ApiTypesBlock:
+        """Gets Summary Properties block"""
+        if self._types_block is None:
+            self._types_block = ApiTypesBlock(
+                self.public_members)
+        return self._types_block
+
+    @property
+    def func_summary_rows(self) -> ApiSummaryRows:
+        """Get Summary rows for functions"""
+        if self._func_summary_rows is None:
+            self._func_summary_rows = ApiSummaryRows(
+                self.func_block)
+        return self._func_summary_rows
+
+    @property
+    def property_summary_rows(self) -> ApiSummaryRows:
+        """Get Summary rows for Properties"""
+        if self._property_summary_rows is None:
+            self._property_summary_rows = ApiSummaryRows(
+                self.properties_block)
+        return self._property_summary_rows
+
+    @property
+    def export_summary_rows(self) -> ApiSummaryRows:
+        """Get Summary rows for Exported Interfaces"""
+        if self._export_summary_rows is None:
+            self._export_summary_rows = ApiSummaryRows(
+                self.interfaces_block)
+        return self._export_summary_rows
+
+    @property
+    def func_summaries(self) -> ApiSummaries:
+        """Get Summary info list for functions"""
+        if self._func_summaries is None:
+            self._func_summaries = ApiSummaries(
+                self.func_summary_rows)
+        return self._func_summaries
+
+    @property
+    def property_summaries(self) -> ApiSummaries:
+        """Get Summary info list for Properties"""
+        if self._property_summaries is None:
+            self._property_summaries = ApiSummaries(
+                self.property_summary_rows)
+        return self._property_summaries
+
+    @property
+    def exported_summaries(self) -> ApiSummaries:
+        """Get Summary info list for Exported Interfaces"""
+        if self._exported_summaries is None:
+            self._exported_summaries = ApiSummaries(
+                self.export_summary_rows)
+        return self._exported_summaries
+
+    @property
+    def inherited(self) -> 'ApiInherited':
+        """Gets class that get all inherited value"""
+        if self._inherited is None:
+            self._inherited = ApiInherited(
+                soup=self.soup_obj,
+                area_filter_rules_engine=self.area_filter_rules_engine,
+                raise_error=False,
+                allow_cache = self.allow_cache
+                )
+        return self._inherited
+
+    @property
+    def types_summary_rows(self) -> ApiSummaryRows:
+        """Get Summary rows for Properties"""
+        if self._type_summary_rows is None:
+            self._type_summary_rows = ApiSummaryRows(
+                self.types_block)
+        return self._type_summary_rows
+
+    @property
+    def types_summaries(self) -> ApiSummaries:
+        """Get Summary info list for Properties"""
+        if self._type_summaries is None:
+            self._type_summaries = ApiSummaries(
+                self.types_summary_rows)
+        return self._type_summaries
 
     @property
     def desc(self) -> ApiDesc:
@@ -1247,9 +1844,343 @@ class APIData:
     @property
     def url_obj(self) -> UrlObj:
         return self._soup_obj.url_obj
+    
+    @property
+    def area_filter_rules_engine(self) -> 'IRulesArea':
+        if self._area_filter_rules_engine is None:
+            self._area_filter_rules_engine = RulesArea()
+            self._set_area_filter_rules_engine_rules(
+                rules_engine=self._area_filter_rules_engine
+            )
+        return self._area_filter_rules_engine
+
+    @property
+    def allow_cache(self) -> bool:
+        """Specifies allow_cache
+    
+            :getter: Gets allow_cache value.
+            :setter: Sets allow_cache value.
+        """
+        return self._allow_cache
+    
+    @allow_cache.setter
+    def allow_cache(self, value: bool):
+        self._allow_cache = value
     # endregion Properties
 
 # endregion block and api classes
+
+# region SummaryInfo Rules
+class IRuleSummaryInfo(ABC):
+    @abstractmethod
+    def __init__(self, rules: 'IRulesSummaryInfo') -> None:
+        """Constructor"""
+
+    @abstractmethod
+    def get_is_match(self, si: SummaryInfo) -> bool:
+        """
+        Gets if rule is a match
+        
+        Args:
+            si (SummaryInfo): Summary Info
+        """
+
+    @abstractmethod
+    def process_summary_info(self, si: SummaryInfo) -> None:
+        """
+        Makes changes to si based upon rule
+
+        Args:
+            si (SummaryInfo): Summary Info
+        """
+
+
+class IRulesSummaryInfo(ABC):
+    @abstractmethod
+    def process_summary_info(self, si: SummaryInfo) -> None:
+        """Process Summary Info making changes to si by rules"""
+
+    @abstractmethod
+    def get_rule_instance(self, rule: IRuleSummaryInfo) -> IRuleSummaryInfo:
+        """Gets a rule instance"""
+
+class RuleSummaryInfoCleanName(IRuleSummaryInfo):
+    """Cleans name to remove any non class name chars"""
+    def __init__(self, rules: 'IRulesSummaryInfo') -> None:
+        self._rules = rules
+    
+    def get_is_match(self, si: SummaryInfo) -> bool:
+        name = si.name
+        clean_name = Util.get_clean_classname(name)
+        return name != clean_name
+    
+    def process_summary_info(self, si: SummaryInfo) -> None:
+        """
+        Cleans si.name to remove any non class name chars
+
+        Args:
+            si (SummaryInfo): Summary Info
+        """
+        si.name = Util.get_clean_classname(si.name)
+
+
+class RulesSummaryInfo(IRulesSummaryInfo):
+    def __init__(self) -> None:
+        self._rules: List[type[IRuleSummaryInfo]] = []
+        self._cache = {}
+        self._register_known_rules()
+
+    def register_rule(self, rule: type[IRuleSummaryInfo]) -> None:
+
+        if not issubclass(rule, IRuleSummaryInfo):
+            msg = f"{self.__class__.__name__}.register_rule(), rule arg must be child class of ITypeRule"
+            raise TypeError(msg)
+        if rule in self._rules:
+            msg = f"{self.__class__.__name__}.register_rule() Rule is already registered"
+            logger.warning(msg)
+            return
+        self._reg_rule(rule=rule)
+
+    def unregister_rule(self,  rule: type[IRuleSummaryInfo]):
+        """
+        Unregister a rule
+
+        Args:
+            rule (ITypeRule): Rule to unregister
+        """
+        try:
+            key = str(id(rule))
+            if key in self._cache:
+                del self._cache[key]
+            self._rules.remove(rule)
+        except ValueError as e:
+            msg = f"{self.__class__.__name__}.unregister_rule() Unable to unregister rule."
+            raise ValueError(msg) from e
+
+    def _reg_rule(self, rule: type[IRuleSummaryInfo]):
+        self._rules.append(rule)
+
+    def _register_known_rules(self):
+        pass
+
+    def _get_rule(self, si: SummaryInfo) -> Union[IRuleSummaryInfo, None]:
+
+        match_inst = None
+        for rule in self._rules:
+            key = str(id(rule))
+            if key in self._cache:
+                inst = self._cache[key]
+            else:
+                inst: IRuleSummaryInfo = rule(self)
+                self._cache[key] = inst
+            if inst.get_is_match(si):
+                match_inst = inst
+                break
+        return match_inst
+
+
+    def process_summary_info(self, si: SummaryInfo) -> None:
+        """
+        Process Summary info. Making changes base upon first match if a rule match is found.
+
+        Args:
+            si (SummaryInfo): [description]
+        """
+        match = self._get_rule(si)
+        if match:
+            match.process_summary_info(si)
+        
+
+    def get_rule_instance(self, rule: IRuleSummaryInfo) -> IRuleSummaryInfo:
+        if not issubclass(rule, IRuleSummaryInfo):
+            msg = f"{self.__class__.__name__}.get_rule_instance(), rule arg must be child class of IRuleSummaryInfo"
+            logger.error(msg)
+            raise TypeError(msg)
+        key = str(id(rule))
+        if key in self._cache:
+            return self._cache[key]
+        else:
+            self._cache[key] = rule(self)
+        return self._cache[key]
+
+# endregion SummaryInfo Rules
+
+# region Name Rules
+
+# region     Name Rules Interfaces
+class IRuleName(ABC):
+    @abstractmethod
+    def __init__(self, rules: 'IRulesName') -> None:
+        """Constructor"""
+
+    @abstractmethod
+    def get_is_match(self, ni: NameInfo) -> bool:
+        """
+        Gets if rule is a match
+        
+        Args:
+            ni (NameInfo): name info
+        """
+
+    @abstractmethod
+    def process_name(self, ni: NameInfo) -> None:
+        """
+        Changes name info based upon rules match
+
+        Args:
+            ni (NameInfo): name info
+        """
+
+
+class IRulesName(ABC):
+    @abstractmethod
+    def process_name(self, ni: NameInfo) -> None:
+        """
+        Changes name info based upon rules match
+
+        Args:
+            ni (NameInfo): name info
+        """
+
+    @abstractmethod
+    def get_rule_instance(self, rule: IRuleName) -> IRuleName:
+        """Gets a rule instance"""
+
+# endregion     Name Rules Interfaces
+
+# region     IRuleName rules
+class RuleNameCleanClass(IRulesName):
+    """Cleans name to remove any non class name chars"""
+    def __init__(self, rules: IRulesName) -> None:
+        self._rules = rules
+
+    def get_is_match(self, ni: NameInfo) -> bool:
+        """Gets if name is a match"""
+        clean_name = Util.get_clean_classname(ni.name)
+        return ni.name != clean_name
+
+    def process_name(self, ni: NameInfo) -> None:
+        """
+        Cleans ni.name to remove any non class name chars
+
+        Args:
+            ni (NameInfo): name info
+        """
+        ni.name = Util.get_clean_classname(ni.name)
+
+
+class RuleNameNoGenerics(IRuleName):
+    """Cleans name to remove any Generic < U, T > like strings"""
+
+    def __init__(self, rules: IRulesName) -> None:
+        self._rules = rules
+
+    def get_is_match(self, ni: NameInfo) -> bool:
+        """Gets if name is a match"""
+        parts = ni.name.split(sep='<', maxsplit=1)
+        if len(parts) == 1:
+            return False
+        return True
+
+    def process_name(self, ni: NameInfo) -> None:
+        """
+        Cleans ni.name to remove any Generic < U, T > like strings
+
+        Args:
+            ni (NameInfo): name info
+        """
+        ni.name = Util.get_clean_classname(ni.name)
+# endregion IRuleName rules
+
+# region     IRulesName Engine
+
+class RulesName(IRulesName):
+    """Manages rules for NameInfo"""
+    def __init__(self) -> None:
+        self._rules: List[type[IRuleName]] = []
+        self._cache = {}
+        self._register_known_rules()
+
+    def register_rule(self, rule: type[IRuleName]) -> None:
+        """
+        Register rule
+
+        Args:
+            rule (type[IRuleName]): Rule to register
+
+        Raises:
+            TypeError: If rules is not inherited form IRuleName
+        """
+        if not issubclass(rule, IRuleName):
+            msg = f"{self.__class__.__name__}.register_rule(), rule arg must be child class of ITypeRule"
+            raise TypeError(msg)
+        if rule in self._rules:
+            msg = f"{self.__class__.__name__}.register_rule() Rule is already registered"
+            logger.warning(msg)
+            return
+        self._reg_rule(rule=rule)
+
+    def unregister_rule(self,  rule: type[IRuleName]):
+        """
+        [summary]
+
+        Args:
+            rule (type[IRuleName]): Rule to unregister
+
+        Raises:
+            ValueError: If rule is not present
+        """
+        try:
+            key = str(id(rule))
+            if key in self._cache:
+                del self._cache[key]
+            self._rules.remove(rule)
+        except ValueError as e:
+            msg = f"{self.__class__.__name__}.unregister_rule() Unable to unregister rule."
+            raise ValueError(msg) from e
+
+    def _reg_rule(self, rule: type[IRuleName]):
+        self._rules.append(rule)
+
+    def _register_known_rules(self):
+        pass
+
+    def _get_rule(self, ni: NameInfo) -> Union[IRuleName, None]:
+
+        match_inst = None
+        for rule in self._rules:
+            key = str(id(rule))
+            if key in self._cache:
+                inst = self._cache[key]
+            else:
+                inst: IRuleName = rule(self)
+                self._cache[key] = inst
+            if inst.get_is_match(ni):
+                match_inst = inst
+                break
+        return match_inst
+
+    def process_name(self, ni: NameInfo) -> None:
+        match = self._get_rule(ni)
+        if match:
+            match.process_name(ni)
+
+
+    def get_rule_instance(self, rule: IRuleName) -> IRuleName:
+        if not issubclass(rule, IRuleName):
+            msg = f"{self.__class__.__name__}.get_rule_instance(), rule arg must be child class of IRuleName"
+            logger.error(msg)
+            raise TypeError(msg)
+        key = str(id(rule))
+        if key in self._cache:
+            return self._cache[key]
+        else:
+            self._cache[key] = rule(self)
+        return self._cache[key]
+
+# endregion IRulesName Engine
+
+# endregion Name Rules
 
 # region util
 
@@ -1717,6 +2648,29 @@ class Util:
         _input = re.sub('(.)([A-Z][a-z]+)', r'\1_\2', input)
         return re.sub('([a-z0-9])([A-Z])', r'\1_\2', _input).lower()
 
+    @staticmethod
+    def get_clean_imports(ns: str, imports: Iterable[str]) -> Set[str]:
+        """
+        Gets a set of unique imports.
+
+        Args:
+            ns (str): namespace to append if any item in imports is misssing ns part
+            imports (Iterable[str]): Imports list, set, tuple, etc
+
+        Returns:
+            Set[str]: Set of imports. Each import is guaranteed to be full ns object.
+        """
+        sep = '.'
+        results: Set[str] = set()
+        for im in imports:
+            if im.find(sep) < 0:
+                s = ns + sep + im
+            else:
+                s = im
+            results.add(s)
+        return results
+
+
     @AcceptedTypes(str, opt_all_args=True, ftype=DecFuncEnum.METHOD_STATIC)
     @staticmethod
     def get_rel_import(i_str: str, ns: str, sep: str = '.') -> Tuple[str, str]:
@@ -1767,6 +2721,59 @@ class Util:
         short = ns2.replace('com.sun.star.', '')
         logger.warn(
             f"get_rel_import(): Last ditch effort. Returning: (ooo_uno.uno_obj.{short}.{camel_name}', {name})")
+        return (f'ooo_uno.uno_obj.{short}.{camel_name}', f'{name}')
+    
+    @AcceptedTypes(str, opt_all_args=True, ftype=DecFuncEnum.METHOD_STATIC)
+    @staticmethod
+    def get_rel_import_full(i_str: str, ns: str, sep: str = '.') -> Tuple[str, str]:
+        """
+        Gets realitive import Tuple
+
+        Args:
+            i_str (str): Namespace and object such as ``com.sun.star.uno.Exception``
+            ns (str): Namespace used to get realitive postion such as ``com.sun.star.awt``
+            sep (str, optional): Namespace seperator. Defaults to ``.``
+
+        Returns:
+            Tuple[str, str]: realitive import info such as ``('..uno.exception', 'Exception')``
+        """
+        # i_str = com.sun.star.uno.Exception
+        # ns = com.sun.star.configuration
+        # ("..uno.exception", "Exception")
+        # compare ns to ns so drop last name of i_str
+        name_parts = i_str.split(sep)
+        name = name_parts.pop()
+        camel_name = Util.camel_to_snake(name)
+        if len(name_parts) == 0:
+            # this is a single word such as XInterface
+            # assume it is in the same namespace as this import
+            logger.debug(
+                "get_rel_import_full(): '%s', single word. Converting to from import and returning", name)
+            return (f'{sep}', f'{camel_name}{sep}{name}')
+        ns2 = sep.join(name_parts)
+        if ns2 == ns:
+            logger.debug("get_rel_import_full(): Names are equal: '%s'", ns)
+            logger.debug(
+                f"get_rel_import_full(): Returning (.{camel_name}', '{name})")
+            return (f'{sep}', f'{camel_name}{sep}{name}')
+        if len(name_parts) == 1:
+            # this is a single word
+            # assume it is in the same namespace as this import
+            logger.debug(
+                "get_rel_import_full(): '%s', single word. Converting to from import and returning", i_str)
+            return (f'{sep}', f'{Util.camel_to_snake(i_str)}{sep}{i_str}')
+        try:
+            info = Util.get_rel_info(in_branch=ns, comp_branch=ns2, sep=sep)
+            prefix = sep * (info.distance + 1)
+            result_parts = info.comp_branch_rel + [camel_name]
+            im_str = sep.join(result_parts)
+            # im_str = f"{im_str}{sep}{name}"
+            return (prefix, im_str)
+        except Exception as e:
+            logger.error(e, exc_info=True)
+        short = ns2.replace('com.sun.star.', '')
+        logger.warn(
+            f"get_rel_import_full(): Last ditch effort. Returning: (ooo_uno.uno_obj.{short}.{camel_name}', {name})")
         return (f'ooo_uno.uno_obj.{short}.{camel_name}', f'{name}')
 
     @AcceptedTypes(str, opt_all_args=True, ftype=DecFuncEnum.METHOD_STATIC)
@@ -2413,6 +3420,8 @@ class ImageCache(CacheBase):
             age = time.time() - ti_m
             if age >= self.seconds:
                 return None
+        else:
+            return None
         try:
             # Check if we have this file locally
             with Image.open(f) as img:
@@ -2529,31 +3538,148 @@ class ImageInfo:
         return pixel_values
 
     @staticmethod
-    def get_image_pixels(image: Image.Image, dtype='int8'):
+    def get_image_pixels(image: Image.Image, dtype='int8', reshape=True):
         """Get a numpy array of an image so that one can access values[x][y]."""
-        width, height = image.size
-        # lst = list(image.getdata())
-        # pixel_values = numpy.array(lst, dtype=dtype).reshape((height, width))
-        pixel_values = np.array(
-            image.getdata(), dtype=dtype).reshape((height, width))
+        if reshape:
+            width, height = image.size
+            pixel_values = np.array(
+                image.getdata(), dtype=dtype).reshape((height, width))
+        else:
+            pixel_values = np.array(
+                image.getdata(), dtype=dtype)
         return pixel_values
 
     @staticmethod
+    def get_area_info(url: str, **kwargs) -> AreaInfo:
+        """
+        Gets Area info and shape if shape is available
+
+        Args:
+            url (str): Url of image
+
+        Keyword Arguments:
+            allow_cache (bool, optional) If ``False`` caching is ignored. Default ``True``
+
+        Raises:
+            Exception: [description]
+            e: [description]
+
+        Returns:
+            AreaInfo: Area Info with optionl shape.
+        """
+        global PICKLE_CACHE
+        allow_cache = bool(kwargs.get('allow_cache', True))
+        def get_cord(px: np.ndarray, color_index: int) -> Union[Shape, None]:
+            # Tested this method against images in GNU. Result are perfect on images viewed.
+            # Cordinates are exact. Borders are 1 px in size
+            def zero_runs(a):
+                # https://coderedirect.com/questions/302557/find-indexes-of-repeated-elements-in-an-array-python-numpy
+                iszero = np.concatenate(
+                    ([0], np.equal(a, 0).view(np.int8), [0]))
+                absdiff = np.abs(np.diff(iszero))
+                ranges = np.where(absdiff == 1)[0].reshape(-1, 2)
+                return ranges
+            # to find a actual block must match several pixels in a row on the horizontal plane.
+            # words have the same index color as non shape we are looking for.
+            i_rows = px.shape[0]
+            cords = None
+            x1_y1 = None
+            x2_y2 = None
+            r1 = None
+            r2 = None
+            for y in range(0, i_rows):
+                row = px[y,:]
+                # start_seq = search_sequence_numpy(row, seq)
+                runs = zero_runs(np.diff(row))
+                # runs of 7 or more, to illustrate filter
+                f_runs = runs[runs[:, 1]-runs[:, 0] > APP_CONFIG.pixel_map_min_shape_width]
+                if not x1_y1 is None:
+                    for r in f_runs:
+                        index = int(r[-1]) # last element
+                        v = row[index]
+                        if v == color_index:
+                            x2_y2 = index, int(y),
+                            r2 = r
+                            break
+                if x1_y1 is None:
+                    for r in f_runs:
+                        index = int(r[0])
+                        v = row[index]
+                        if v == color_index:
+                            x1_y1 = index,  int(y)
+                            r1 = r
+                            break
+                if x1_y1 and x2_y2:
+                    # compare top border pixel length with bottom border
+                    # the number should match or something is wrong
+                    if (r1==r2).all():
+                        cords = x1_y1 + x2_y2
+                    else:
+                        msg = f"ImageInfo.get_area_info(). Image to and bottom borders did not mathc! Url: {url}"
+                        logger.warning(msg)
+                if not cords is None:
+                    break
+            if cords is None:
+                return None
+            return Shape(x1=cords[0], y1=cords[1], x2=cords[2], y2=cords[3])
+    
+        r_img = ResponseImg(url=url, cache_seconds=0)
+        if PICKLE_CACHE is None:
+            PICKLE_CACHE = PickleCache(tmp_dir=APP_CONFIG.cache_dir)
+        seconds = PICKLE_CACHE.seconds
+        if allow_cache is False:
+            PICKLE_CACHE.seconds = 0.0
+        try:
+            filename = r_img.url_hash + '_ai.pkl'
+            obj: AreaInfo = PICKLE_CACHE.fetch_from_cache(filename=filename)
+            if obj:
+                return obj
+            
+            im = r_img.img
+            pix = ImageInfo.get_image_pixels(im)
+            row = pix[0, :]  # row 0
+            found_px = -1
+            # images are expected to be indexed png files
+            # find the first pixel that does not have index of 0
+            # if first pixes is 1 then not inherited, if 3 inherited
+            for px in row:
+                if px != 0:
+                    found_px = px
+                    break
+            if found_px == -1:
+                msg = f"Failed to find colored pixel in first row of image pixels. Url: {url}"
+                raise Exception(msg)
+            
+
+            cord = get_cord(pix, APP_CONFIG.pixel_map_no_link)
+            ai = AreaInfo(
+                is_inherited=found_px == APP_CONFIG.pixel_inherit,
+                shape=cord
+                )
+            
+            PICKLE_CACHE.save_in_cache(filename=filename, content=ai)
+            return ai
+        except Exception as e:
+            logger.error(e)
+            raise e
+        finally:
+            # resotore cache time
+            PICKLE_CACHE.seconds = seconds
+
+    @staticmethod
     def is_inherit_img(url: str) -> bool:
-        global RESPONSE_IMG, TEXT_CACHE
-        if RESPONSE_IMG is None:
-            # no reason to cache image. caching result instead
-            RESPONSE_IMG = ResponseImg(url=url, cache_seconds=0)
+        global TEXT_CACHE
+        r_img = ResponseImg(url=url, cache_seconds=0)
         if TEXT_CACHE is None:
             TEXT_CACHE = TextCache(tmp_dir=APP_CONFIG.cache_dir)
         try:
-            filename = RESPONSE_IMG.url_hash + '.txt'
+            filename = r_img.url_hash + '.txt'
             result = -1
             txt = TEXT_CACHE.fetch_from_cache(filename=filename)
             if txt:
                 result = int(txt)
                 return result == APP_CONFIG.pixel_inherit
-            im = RESPONSE_IMG.img
+            im = r_img.img
             pix = ImageInfo.get_image_pixels(im)
             row = pix[0, :]  # row 0
             # images are expected to be indexed png files
@@ -2690,6 +3816,13 @@ class ApiArea(BlockObj):
             f_str = ''
         logger.warning(
             "ApiArea.get_obj() Failed to get find data%s. Url: %s", f_str, self.url_obj.url)
+    
+    def _get_ns(self,name: str, href: str) -> Ns:
+        parts = href.split(sep=URL_SPLIT)
+        parts[0] = 'com' # rename interfacecom etc...
+        parts.pop() # drop XShapeDescriptor.html etc...
+        ns = ".".join(parts)
+        return Ns(name=name, namespace=ns)
 
     def get_obj(self) -> List[Area]:
         """List of area items"""
@@ -2723,6 +3856,7 @@ class ApiArea(BlockObj):
                 logger.warning(
                     "ApiArea.get_obj() Bad Coords for %s. Url: %s", name, self.url_obj.url)
                 continue
+            ns = self._get_ns(name=name, href=href)
             x1 = int(a_coords[0].strip())
             y1 = int(a_coords[1].strip())
             x2 = int(a_coords[2].strip())
@@ -2730,68 +3864,31 @@ class ApiArea(BlockObj):
             m = pattern_http.match(href)
             if not m:
                 href = self.url_obj.url_base + '/' + href
-            area = Area(name=name, href=href, x1=x1,
+            area = Area(name=name, ns=ns, href=href, x1=x1,
                         y1=y1, x2=x2, y2=y2, title=title)
             self._data.append(area)
         return self._data
 
 class AreaFilter:
-    def __init__(self, alst: List[Area], is_inherited: bool) -> None:
+    def __init__(self, alst: List[Area], area_info: AreaInfo, rules_engine: 'IRulesArea') -> None:
         self._lst = alst
-        self._is_inherited = is_inherited
+        self._ai = area_info
+        self._rules_engine: IRulesArea = rules_engine
         self._first: Area = None if len(self._lst) == 0 else self._lst[0]
-        self._inherited = self._get_inherited()
+        # self._inherited = self._get_inherited()
+        self._inherited = self._get_from_rules()
 
-    def _get_inherited(self) -> List[Area]:
-        if self._is_inherited is False:
+    def _get_from_rules(self) -> List[Area]:
+        if self._ai.is_inherited is False:
             return []
-        if self._first is None:
-            return []
-        d_lst = self._list_dict(lst=self._lst)
-        match_lst = d_lst[self._first.y1]
-        in_lst = [area for area in match_lst]  # make a copy
-        # remove first first group
-        # del d_lst[self._first.y1]
+        if len(self._rules_engine) == 0:
+            msg = f"{self.__class__.__name__}._get_from_rules() Rules must not contain rules to process."
+            logger.error(msg)
+            raise Exception(msg)
 
-        # get a list of all other upper area items.
-        upper: List[Area] = []
-        keys = list(d_lst.keys())  # list of y1
-        for k in keys:
-            if k < self._first.y1:
-                upper.extend(d_lst[k])
-        if len(upper) == 0:
-            return match_lst
-        # search for name in upper that are in inherited.
-        # if found then remove from inherited.
-        unique_names: Set[str] = set()
-        for area in upper:
-            unique_names.add(area.name)
-        remove_indexes: List[int] = []
-        for i, area in enumerate(match_lst):
-            if area.name in unique_names:
-                remove_indexes.append(i)
-        if len(remove_indexes) == 0:
-            return match_lst
-        remove_indexes.sort(reverse=True)
-        for i in remove_indexes:
-            match_lst.pop(i)
-        return match_lst
+        area_lst = self._rules_engine.get_area(ai=self._ai, alst=self._lst)
+        return area_lst or []
 
-    def _list_dict(self, lst: List[Area]) -> Dict[int, List[Area]]:
-        d = {}
-        for area in lst:
-            if not area.y1 in d:
-                d[area.y1] = []
-            d[area.y1].append(area)
-        return d
-
-    def _get_group_by(self, lst: List[Area]) -> List[List[Area]]:
-        # use y1 as key to get all items that are on same row level
-        d = self._list_dict(lst)
-        result: List[List[Area]] = []
-        for _, v in d.items():
-            result.append(v)
-        return result
 
     def get_as_ns(self) -> List[Ns]:
         """
@@ -2800,33 +3897,363 @@ class AreaFilter:
         Returns:
             List[Ns]: List if inherited Namespaces
         """
-        def get_ns(area: Area) -> Ns:
-            href_parts = area.href.rsplit(sep='/', maxsplit=1)
-            if len(href_parts) == 1:
-                href = href_parts[0]
-            else:
-                href = href_parts[1]
-            # interfacecom_1_1sun_1_1star_1_1accessibility_1_1XAccessibleContext.html
-            parts = href.split(URL_SPLIT)
-            parts[0] = 'com'
-            parts.pop()
-            # parts.append(area.name)
-            _ns = '.'.join(parts)
-            ns = Ns(area.name, namespace=_ns)
-            return ns
-        results = []
-        for el in self.inherited:
-            results.append(get_ns(area=el))
-        return results
+        return [el.ns for el in self._inherited]
 
     @property
     def inherited(self) -> List[Area]:
         """Gets inherited value"""
-        return self._inherited
+        return self._ai.is_inherited
+    
+    @property
+    def area_info(self) -> AreaInfo:
+        """Gets the area info containing inherited and cordinates info."""
+        return self._ai
 
+# region        Area Rules
+
+# region            Rule Area Interfaces
+class IRuleArea(ABC):
+
+    @abstractmethod
+    def get_is_match(self, ai: AreaInfo, alst: List[Area]) -> bool:
+        """
+        Gets if rule is a match
+        
+        Args:
+            alst (List[Area]): Areas to match
+        """
+
+    @abstractmethod
+    def get_area(self, ai: AreaInfo,  alst: List[Area]) -> List[Area]:
+        """
+        Gets filtered Area list
+
+        Args:
+            alst (List[Area]): Areas to filter
+
+         Returns:
+            List[Area]: Filtered Area List
+        """
+
+
+class IRulesArea(ABC):
+    @abstractmethod
+    def get_area(self,  ai: AreaInfo, alst: List[Area]) -> List[Area]:
+        """
+        Gets filtered Area list
+
+        Args:
+            alst (List[Area]): Areas to filter
+
+         Returns:
+            List[Area]: Filtered Area List
+        """
+
+    @abstractmethod
+    def __len__(self) -> int:
+        """Gets the length of rules"""
+
+# endregion         Rule Area Interfaces
+
+# region            Area Rules
+class RuleAreaBase(IRuleArea):
+    """Matches when there is a single parent"""
+
+      # region Private Methods
+    def _list_dict_y1(self, lst: List[Area]) -> Dict[int, List[Area]]:
+        """groups lst into area y1"""
+        d = {}
+        for area in lst:
+            if not area.y1 in d:
+                d[area.y1] = []
+            d[area.y1].append(area)
+        return d
+    
+    def _list_dict_x1(self, lst: List[Area]) -> Dict[int, List[Area]]:
+        """groups lst into area x1"""
+        d = {}
+        for area in lst:
+            if not area.x1 in d:
+                d[area.x1] = []
+            d[area.x1].append(area)
+        return d
+
+    def _get_upper(self, first: Area, d_lst: Dict[int, List[Area]]) -> List[Area]:
+        """
+        Get a list of all areas that have a y1 value equal then first.y1
+
+        In area map lower y1 values are higer in inheritance.
+        """
+        lst: List[Area] = []
+        for k, v in d_lst.items():
+            if k < first.y1:
+                lst.extend(v)
+        return lst
+
+    def _remove_duplicates_lst(self, lst: List[Area]) -> bool:
+        """
+        Removes any duplicates base upon namesapce.
+
+        Args:
+            clean_lst (List[Area]): List to remove duplicates from
+            filter_lst (List[Area]): List used as filter
+
+        Returns:
+            bool: True if any duplicates were found; Otherwise False.
+        """
+        unique_names: Set[str] = set()
+        remove_indexes: List[int] = []
+        for i, area in enumerate(lst):
+            if area.ns.fullns in unique_names:
+                remove_indexes.append(i)
+            else:
+                unique_names.add(area.ns.fullns)
+        if len(remove_indexes) == 0:
+            return False
+        remove_indexes.sort(reverse=True)
+        for i in remove_indexes:
+            lst.pop(i)
+        return True
+
+    def _get_first_y1(self, ai: AreaInfo, alst: List[Area]) -> Area:
+        if not ai.shape:
+            return alst[0] # go with first it should always work. However order is scraped form html
+        first = None
+        lst_y = [(a.y1, i) for i, a in enumerate(alst)]
+        lst_y.sort(reverse=True)
+        for y in lst_y:
+            if y[0] < ai.shape.y1:
+                first = alst[y[1]]
+                break
+        if first:
+            return first
+        return alst[0]
+
+    # endregion Privae Methods
+
+
+class RuleAreaSingle(RuleAreaBase):
+    """Matches when there is a single parent"""
+
+    # region IRuleArea Methods
+    def get_is_match(self, ai: AreaInfo, alst: List[Area]) -> bool:
+        """
+        Gets if rule is a match
+        
+        Args:
+            alst (List[Area]): Areas to match
+        """
+        if len(alst) == 0:
+            return False
+        d_lst = self._list_dict_y1(lst=alst)
+        match_lst = d_lst[alst[0].y1]
+        if len(match_lst) != 1:
+            return False
+        if ai.shape:
+            m = match_lst[0]
+            if m.x1 != ai.shape.x1:
+                return False
+        return True
+
+    def get_area(self, ai: AreaInfo, alst: List[Area]) -> List[Area]:
+        """
+        Gets filtered Area list
+
+        Args:
+            alst (List[Area]): Areas to filter
+
+         Returns:
+            List[Area]: Filtered Area List
+        """
+        d_lst = self._list_dict_y1(lst=alst)
+        return d_lst[alst[0].y1]
+    # endregion IRuleArea Methods
+
+
+class RuleAreaMulti(RuleAreaBase):
+    """Matches when there is a multiple adjacent parents"""
+
+    # region IRuleArea Methods
+    def get_is_match(self, ai: AreaInfo, alst: List[Area]) -> bool:
+        """
+        Gets if rule is a match
+        
+        Args:
+            alst (List[Area]): Areas to match
+        """
+        if len(alst) == 0:
+            return False
+        d_lst = self._list_dict_y1(lst=alst)
+        first = self._get_first_y1(ai=ai, alst=alst)
+        match_lst = d_lst[first.y1]
+        if len(match_lst) <= 1:
+            return False
+        return True
+
+    def get_area(self, ai: AreaInfo, alst: List[Area]) -> List[Area]:
+        """
+        Gets filtered Area list
+
+        Args:
+            alst (List[Area]): Areas to filter
+
+         Returns:
+            List[Area]: Filtered Area List
+        """
+        first = self._get_first_y1(ai=ai, alst=alst)
+        d_lst: Dict[int, List[Area]] = self._list_dict_y1(lst=alst) # grouped by y1
+        match_lst: List[Area] = d_lst[first.y1] # list of y1 matches
+        if len(match_lst) == 0:
+            return match_lst
+        self._remove_duplicates_lst(match_lst)
+        return match_lst
+    # endregion IRuleArea Methods
+
+class RuleAreaVertical(RuleAreaBase):
+    """Matches when there is a vertical parent"""
+
+    # region IRuleArea Methods
+    def get_is_match(self, ai: AreaInfo, alst: List[Area]) -> bool:
+        """
+        Gets if rule is a match
+        
+        Args:
+            alst (List[Area]): Areas to match
+        """
+        # vertical matches are when all areas have the sam x1 value:
+        # see: https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1ucb_1_1ContentResultSet.html
+        if len(alst) < 2:
+            return False
+        first = self._get_first_y1(ai=ai, alst=alst)
+        if ai.shape:
+            # vertical are ofset left or right on x1, Usually right
+            # more likley this is a single
+            if first.x1 == ai.shape.x1:
+                return False
+        is_vert = True
+        d_lst: Dict[int, List[Area]] = self._list_dict_x1(
+            lst=alst)  # grouped by y1
+        for area in d_lst[first.x1]:
+            if area.x1 != first.x1:
+                is_vert = False
+                break
+        
+        return is_vert
+
+    def get_area(self, ai: AreaInfo, alst: List[Area]) -> List[Area]:
+        """
+        Gets filtered Area list
+
+        Args:
+            alst (List[Area]): Areas to filter
+
+         Returns:
+            List[Area]: Filtered Area List
+        """       
+        # remove any duplicates and return list.
+        # is it unlikely there would ever be duplicates, but just in case.
+        first = self._get_first_y1(ai=ai, alst=alst)
+        d_lst: Dict[int, List[Area]] = self._list_dict_x1(
+            lst=alst)  # grouped by y1
+        upper: List[Area] = d_lst[first.x1]
+        self._remove_duplicates_lst(upper)
+        return upper
+    # endregion IRuleArea Methods
+# endregion         Area Rules
+
+# region            Rules Area Engine
+
+
+class RulesArea(IRulesArea):
+    """Manages rules for NameInfo"""
+
+    def __init__(self) -> None:
+        self._rules: List[type[IRuleArea]] = []
+        self._cache = {}
+        self._register_known_rules()
+
+    def __len__(self) -> int:
+        return len(self._rules)
+
+    def register_rule(self, rule: type[IRuleArea]) -> None:
+        """
+        Register rule
+
+        Args:
+            rule (type[IRuleArea]): Rule to register
+
+        Raises:
+            TypeError: If rules is not inherited form IRuleArea
+        """
+        if not issubclass(rule, IRuleArea):
+            msg = f"{self.__class__.__name__}.register_rule(), rule arg must be child class of ITypeRule"
+            raise TypeError(msg)
+        if rule in self._rules:
+            msg = f"{self.__class__.__name__}.register_rule() Rule is already registered"
+            logger.warning(msg)
+            return
+        self._reg_rule(rule=rule)
+
+    def unregister_rule(self,  rule: type[IRuleArea]):
+        """
+        [summary]
+
+        Args:
+            rule (type[IRuleArea]): Rule to unregister
+
+        Raises:
+            ValueError: If rule is not present
+        """
+        try:
+            key = str(id(rule))
+            if key in self._cache:
+                del self._cache[key]
+            self._rules.remove(rule)
+        except ValueError as e:
+            msg = f"{self.__class__.__name__}.unregister_rule() Unable to unregister rule."
+            raise ValueError(msg) from e
+
+    def _reg_rule(self, rule: type[IRuleArea]):
+        self._rules.append(rule)
+
+    def _register_known_rules(self):
+        pass
+
+    def _get_rule(self, ai: AreaInfo, alst: List[Area]) -> Union[IRuleArea, None]:
+
+        match_inst = None
+        for rule in self._rules:
+            key = str(id(rule))
+            if key in self._cache:
+                inst = self._cache[key]
+            else:
+                inst: IRuleArea = rule()
+                self._cache[key] = inst
+            if inst.get_is_match(ai=ai, alst=alst):
+                match_inst = inst
+                break
+        return match_inst
+
+    def get_area(self, ai: AreaInfo, alst: List[Area]) -> Union[List[Area], None]:
+        """
+        Gets filtered Area list
+
+        Args:
+            alst (List[Area]): Areas to filter
+
+         Returns:
+            List[Area]: Filtered Area List
+        """
+        match = self._get_rule(ai=ai, alst=alst)
+        if match:
+            return match.get_area(ai=ai, alst=alst)
+        return None
+
+# endregion         Rules Area Engine
+# endregion     Area Rules
 class ApiInherited(BlockObj):
 
-    def __init__(self, soup: SoupObj,**kwargs) -> None:
+    def __init__(self, soup: SoupObj, area_filter_rules_engine: IRulesArea, **kwargs) -> None:
         """
         Constructor
 
@@ -2840,6 +4267,9 @@ class ApiInherited(BlockObj):
         self._api_dy_content: ApiDyContent = ApiDyContent(self.soup)
         self._data = None
         self._raise_errors = bool(kwargs.get('raise_error', False))
+        self._area_fileter_rules_engine = area_filter_rules_engine
+        self._ai: AreaInfo = None
+        self._allow_cache = bool(kwargs.get('allow_cache', True))
 
     def _log_missing(self, for_str: Optional[str] = None, raise_error: bool = False):
         if for_str:
@@ -2862,14 +4292,36 @@ class ApiInherited(BlockObj):
             self._log_missing(for_str='image url',
                               raise_error=self._raise_errors)
             return self._data
-        is_inherited = ImageInfo.is_inherit_img(url=image_url)
+        self._ai = ImageInfo.get_area_info(url=image_url, allow_cache=self._allow_cache)
+        if not self._ai.is_inherited:
+            return self._data
         ab: ApiAreaBlock = ApiAreaBlock(self._api_dy_content)
         api_area: ApiArea = ApiArea(ab)
         lst = api_area.get_obj()
-        filter = AreaFilter(lst, is_inherited=is_inherited)
+        filter = AreaFilter(lst, area_info=self._ai, rules_engine=self._area_fileter_rules_engine)
         extends = filter.get_as_ns()
         if not extends:
             return self._data
         self._data = extends
         return self._data
+    
+    @property
+    def area_info(self) -> AreaInfo:
+        """Gets the area info containing inherited and cordinates info."""
+        if self._ai is None:
+            raise Exception('ApiInherited.area_info can not be called before get_obj()')
+        return self._ai
+    
+    @property
+    def allow_cache(self) -> bool:
+        """Specifies allow_cache
+    
+            :getter: Gets allow_cache value.
+            :setter: Sets allow_cache value.
+        """
+        return self._allow_cache
+
+    @allow_cache.setter
+    def allow_cache(self, value: bool):
+        self._allow_cache = value
 # endregion Area Process

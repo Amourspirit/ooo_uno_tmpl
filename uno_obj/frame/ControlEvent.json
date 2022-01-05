@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.8",
-  "timestamp": "2021-12-28 11:31:07+00:00",
+  "version": "0.1.14",
+  "libre_office_ver": "7.2",
   "type": "struct",
   "name": "ControlEvent",
   "namespace": "com.sun.star.frame",
@@ -10,31 +10,15 @@
   },
   "writer_args": {
     "sort": true,
-    "auto_import": true,
-    "dynamic_struct": false
+    "dynamic_struct": false,
+    "include_desc": true
   },
   "data": {
     "name": "ControlEvent",
     "namespace": "com.sun.star.frame",
     "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1frame_1_1ControlEvent.html",
-    "quote": [
-      "URL",
-      "typing.List[NamedValue]"
-    ],
-    "typings": [
-      "typing.List[NamedValue]"
-    ],
-    "fullname": "com.sun.star.frame.ControlEvent",
-    "desc": [
-      "describes a control event sent by extended user interface controls.",
-      "",
-      "**Since**",
-      "",
-      "    OOo 2.0.3"
-    ],
-    "extends": [],
-    "imports": [],
-    "auto_imports": [
+    "from_imports": [],
+    "from_imports_typing": [
       [
         "..beans.named_value",
         "NamedValue"
@@ -44,32 +28,46 @@
         "URL"
       ]
     ],
-    "from_imports": [],
+    "quote": [
+      "URL",
+      "typing.List[NamedValue]"
+    ],
+    "typings": [
+      "typing.List[NamedValue]"
+    ],
     "requires_typing": true,
+    "fullname": "com.sun.star.frame.ControlEvent",
+    "desc": [
+      "describes a control event sent by extended user interface controls.",
+      "",
+      "**since**",
+      "",
+      "    OOo 2.0.3"
+    ],
+    "imports": [],
+    "extends": [],
     "items": [
       {
         "name": "Event",
         "type": "str",
-        "orig_type": "string",
         "lines": [
           "specifies the event which has occurred."
         ]
       },
       {
-        "name": "aInformation",
-        "type": "typing.List[NamedValue]",
-        "orig_type": "sequence< com.sun.star.beans.NamedValue >",
+        "name": "aURL",
+        "type": "URL",
         "lines": [
-          "specifies a sequence of named values which are used as additional values for the event.",
-          "The number and types of named values depend on the event."
+          "fully parsed URL describing the control that sends this notification."
         ]
       },
       {
-        "name": "aURL",
-        "type": "URL",
-        "orig_type": ".com.sun.star.util.URL",
+        "name": "aInformation",
+        "type": "typing.List[NamedValue]",
         "lines": [
-          "fully parsed URL describing the control that sends this notification."
+          "specifies a sequence of named values which are used as additional values for the event.",
+          "",
+          "The number and types of named values depend on the event."
         ]
       }
     ]

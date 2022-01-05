@@ -1,0 +1,100 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.14",
+  "libre_office_ver": "7.2",
+  "name": "InteractionHandler",
+  "type": "service",
+  "namespace": "com.sun.star.task",
+  "parser_args": {
+    "sort": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "from_imports": [
+      [
+        ".x_interaction_handler2",
+        "XInteractionHandler2"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..awt.x_window",
+        "XWindow"
+      ]
+    ],
+    "quote": [
+      "XWindow"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "name": "InteractionHandler",
+    "imports": [],
+    "namespace": "com.sun.star.task",
+    "extends": [
+      "com.sun.star.task.XInteractionHandler2"
+    ],
+    "desc": [
+      "An interaction request handler that lets the user handle requests via GUI dialogs.",
+      "",
+      "The interaction handler service has a number of built-in handlers, responsible for a lot of well known interactions. Additionally, there's a configuration module which allows to configure additional handlers, responsible for arbitrary requests.",
+      "",
+      "The following well-known requests can be dealt with by the built-in handlers:",
+      "",
+      "The requests marked with an asterisk are only handled if (a) their continuations match certain restrictions (see below), and (b) the necessary resource strings are available (this can be exploited by applications that carry only a subset of all resource files with them).",
+      "",
+      "The continuation restrictions are as follows: Let C be the subset of the provided continuations that are of type com.sun.star.task.XInteractionApprove, com.sun.star.task.XInteractionDisapprove, com.sun.star.task.XInteractionRetry, or com.sun.star.task.XInteractionAbort (or of a derived type). All other continuations are ignored for these requests. The request is only handled if the set C is any of the following:",
+      "",
+      "An com.sun.star.ucb.InteractiveAugmentedIOException carries with it a sequence of arguments, which should be com.sun.star.beans.PropertyValues. The following details which properties are interpreted by the interaction handler, depending on the request's com.sun.star.ucb.IOErrorCode:",
+      "",
+      "It is possible to configure additional interaction handlers, to which certain requests can be delegated. The configuration node /org.openoffice.Interaction/InteractionHandlers is evaluated and respected by the InteractionHandler implementation.",
+      "",
+      "A custom interaction handler can declare itself responsible for an arbitrary number of UNO types, specified by full-qualified type name. Also, for each type, it can specify whether it is responsible for only this particular type, or all possibly existent derived types.",
+      "",
+      "Whenever the InteractionHandler encounters a request it cannot fulfill itself, it will examine the configuration, to find a handler implementation for the request, and delegate it to the first matching handler.",
+      "",
+      "If multiple custom interaction handlers declare themselves responsible for the same request type, it is not defined which handler will actually be invoked. Thus, when deploying a custom interaction handler, ensure that the types you specify are general enough to cover all requests you want to handle, but also specific enough to not cover requests which other handlers might be interested in."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1task_1_1InteractionHandler.html",
+    "items": {
+      "methods": [
+        {
+          "name": "createWithParent",
+          "returns": "None",
+          "desc": [
+            "Creates an instance."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "parent",
+              "XWindow",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "createWithParentAndContext",
+          "returns": "None",
+          "desc": [
+            "Creates an instance with an additional context."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "parent",
+              "XWindow",
+              "in"
+            ],
+            [
+              "context",
+              "str",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

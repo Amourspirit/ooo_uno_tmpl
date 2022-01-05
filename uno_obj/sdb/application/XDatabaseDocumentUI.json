@@ -1,24 +1,22 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.8",
-  "timestamp": "2021-12-27 22:15:39+00:00",
+  "version": "0.1.12",
+  "timestamp": "2022-01-04 18:10:38+00:00",
   "name": "XDatabaseDocumentUI",
   "type": "interface",
   "namespace": "com.sun.star.sdb.application",
   "parser_args": {
     "sort": true
   },
-  "writer_args": {},
+  "writer_args": {
+    "include_desc": true
+  },
   "data": {
     "from_imports": [],
     "from_imports_typing": [
       [
-        "...beans.property_value",
-        "PropertyValue"
-      ],
-      [
-        "...sdbc.x_data_source",
-        "XDataSource"
+        "...sdbc.x_connection",
+        "XConnection"
       ],
       [
         "...awt.x_window",
@@ -29,19 +27,25 @@
         "XComponent"
       ],
       [
-        "...sdbc.x_connection",
-        "XConnection"
+        "...sdbc.x_data_source",
+        "XDataSource"
+      ],
+      [
+        "...beans.property_value",
+        "PropertyValue"
       ]
     ],
     "quote": [
       "XComponent",
-      "typing.List[PropertyValue]",
-      "XWindow",
       "XConnection",
       "typing.Tuple[int, str]",
-      "XDataSource"
+      "typing.List[PropertyValue]",
+      "typing.List[XComponent]",
+      "XDataSource",
+      "XWindow"
     ],
     "typings": [
+      "typing.List[XComponent]",
       "typing.Tuple[int, str]",
       "typing.List[PropertyValue]"
     ],
@@ -252,6 +256,25 @@
               "in"
             ]
           ]
+        }
+      ],
+      "types": [
+        {
+          "name": "SubComponents",
+          "returns": "typing.List[XComponent]",
+          "desc": [
+            "contains all sub components of the database document",
+            "",
+            "During working with the database, the user might open different sub components: forms, reports, tables, queries. Those components are tracked by the application, and provided in this attribute.",
+            "",
+            "The components here might either be documents (com.sun.star.frame.XModel), controllers (com.sun.star.frame.XController), or frames (com.sun.star.frame.XFrame).",
+            "",
+            "**since**",
+            "",
+            "    OOo 3.0"
+          ],
+          "raises_get": "",
+          "raises_set": ""
         }
       ],
       "properties": [

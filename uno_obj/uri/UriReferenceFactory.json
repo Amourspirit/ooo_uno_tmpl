@@ -1,0 +1,47 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.14",
+  "libre_office_ver": "7.2",
+  "name": "UriReferenceFactory",
+  "type": "service",
+  "namespace": "com.sun.star.uri",
+  "parser_args": {
+    "sort": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "from_imports": [
+      [
+        ".x_uri_reference_factory",
+        "XUriReferenceFactory"
+      ]
+    ],
+    "from_imports_typing": [],
+    "quote": [],
+    "typings": [],
+    "requires_typing": false,
+    "name": "UriReferenceFactory",
+    "imports": [],
+    "namespace": "com.sun.star.uri",
+    "extends": [
+      "com.sun.star.uri.XUriReferenceFactory"
+    ],
+    "desc": [
+      "creates URI references.",
+      "",
+      "See RFC\u00a03986 for a description of URI references and related terms.",
+      "",
+      "For parsing absolute URI references, this service tries to use a scheme-specific parser. Such a scheme-specific parser will typically enforce additional restrictions during parsing, and will typically return objects that support extra, scheme-specific interfaces in addition to com.sun.star.uri.XUriReference. If no such parser is found, and for relative URI references, a generic parser is used, which returns objects that only support com.sun.star.uri.XUriReference.",
+      "",
+      "Locating a scheme-specific parser works as follows: A scheme consists of Latin capital letters \u201cA\u201d\u2013\u201cZ\u201d, Latin small letters \u201ca\u201d\u2013\u201cz\u201d, digits \u201c0\u201d\u2013\u201c9\u201d, \u201c+\u201d, \u201c-\u201d, and \u201c.\u201d. A scheme\u00a0s is transformed into a string\u00a0s\u2032 character-by-character, by translating Latin capital letters to their small counterparts, translating \u201c+\u201d to \u201cPLUS\u201d, \u201c-\u201d to \u201cHYPHEN\u201d, \u201c.\u201d to \u201cDOT\u201d, and copying Latin small letters and digits unchanged. If the component context used while creating this UriReferenceFactory instance offers a service manager, and there is a service available at that service manager whose name is the concatenation of \u201ccom.sun.star.uri.UriSchemeParser_\u201d and s\u2032, then that service is used. It is an error if that service does not support com.sun.star.uri.XUriSchemeParser.",
+      "",
+      "**since**",
+      "",
+      "    OOo 2.0"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1uri_1_1UriReferenceFactory.html",
+    "items": {}
+  }
+}

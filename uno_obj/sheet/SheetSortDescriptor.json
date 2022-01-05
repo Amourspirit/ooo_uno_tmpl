@@ -1,0 +1,98 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.14",
+  "libre_office_ver": "7.2",
+  "name": "SheetSortDescriptor",
+  "type": "service",
+  "namespace": "com.sun.star.sheet",
+  "parser_args": {
+    "sort": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "from_imports": [
+      [
+        "..table.table_sort_descriptor",
+        "TableSortDescriptor"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..table.cell_address",
+        "CellAddress"
+      ]
+    ],
+    "quote": [
+      "CellAddress"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "name": "SheetSortDescriptor",
+    "imports": [],
+    "namespace": "com.sun.star.sheet",
+    "extends": [
+      "com.sun.star.table.TableSortDescriptor"
+    ],
+    "desc": [
+      "a description of how a cell range is to be sorted.",
+      "",
+      "This service extends the com.sun.star.table.TableSortDescriptor service with spreadsheet specific properties."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1sheet_1_1SheetSortDescriptor.html",
+    "items": {
+      "properties": [
+        {
+          "name": "BindFormatsToContent",
+          "returns": "bool",
+          "desc": [
+            "specifies if cell formats are moved with the contents they belong to."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "CopyOutputData",
+          "returns": "bool",
+          "desc": [
+            "specifies if the sorted data should be copied to another position in the document."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "IsUserListEnabled",
+          "returns": "bool",
+          "desc": [
+            "specifies if a user defined sorting list is used."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "OutputPosition",
+          "returns": "CellAddress",
+          "desc": [
+            "specifies the position where sorted data are to be copied.",
+            "",
+            "This property is only used, if SheetSortDescriptor.CopyOutputData is TRUE."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "UserListIndex",
+          "returns": "int",
+          "desc": [
+            "specifies which user defined sorting list is used.",
+            "",
+            "This property is only used, if SheetSortDescriptor.IsUserListEnabled is TRUE."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
+  }
+}

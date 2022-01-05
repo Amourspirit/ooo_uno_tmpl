@@ -1,0 +1,125 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.14",
+  "libre_office_ver": "7.2",
+  "name": "FormulaParser",
+  "type": "service",
+  "namespace": "com.sun.star.sheet",
+  "parser_args": {
+    "sort": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "from_imports": [
+      [
+        "..beans.property_set",
+        "PropertySet"
+      ],
+      [
+        ".x_formula_parser",
+        "XFormulaParser"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".formula_op_code_map_entry",
+        "FormulaOpCodeMapEntry"
+      ],
+      [
+        ".external_link_info",
+        "ExternalLinkInfo"
+      ]
+    ],
+    "quote": [
+      "typing.List[ExternalLinkInfo]",
+      "typing.List[FormulaOpCodeMapEntry]"
+    ],
+    "typings": [
+      "typing.List[ExternalLinkInfo]",
+      "typing.List[FormulaOpCodeMapEntry]"
+    ],
+    "requires_typing": true,
+    "name": "FormulaParser",
+    "imports": [],
+    "namespace": "com.sun.star.sheet",
+    "extends": [
+      "com.sun.star.beans.PropertySet",
+      "com.sun.star.sheet.XFormulaParser"
+    ],
+    "desc": [
+      "",
+      "**since**",
+      "",
+      "    OOo 3.1"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1sheet_1_1FormulaParser.html",
+    "items": {
+      "types": [
+        {
+          "name": "ExternalLinks",
+          "returns": "typing.List[ExternalLinkInfo]",
+          "desc": [
+            "contains a list of external links referenced in formulas.",
+            "",
+            "Use of this property depends on the FormulaConvention in use. It is relevant only for AddressConvention.XL_OOX to map indices to external documents. The sequence must be in the order of indices used. Note that indices are 1-based, the sequence must start with an empty element.",
+            "",
+            "**since**",
+            "",
+            "    OOo 3.1"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "OpCodeMap",
+          "returns": "typing.List[FormulaOpCodeMapEntry]",
+          "desc": [
+            "contains the complete mapping of names to op-codes.",
+            "",
+            "Names and symbols not defined here lead to a parser/print error."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ],
+      "properties": [
+        {
+          "name": "CompileEnglish",
+          "returns": "bool",
+          "desc": [
+            "specifies whether to use English parser and formatter.",
+            "",
+            "Note: When changing this, an already existing OpCodeMap needs to be recreated internally, so for performance reasons set this before setting the OpCodeMap."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "FormulaConvention",
+          "returns": "int",
+          "desc": [
+            "specifies which address reference style convention to use when parsing a formula string."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "IgnoreLeadingSpaces",
+          "returns": "bool",
+          "desc": [],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ParameterSeparator",
+          "returns": "str",
+          "desc": [],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
+  }
+}

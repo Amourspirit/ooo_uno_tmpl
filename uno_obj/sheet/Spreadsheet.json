@@ -1,0 +1,204 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.14",
+  "libre_office_ver": "7.2",
+  "name": "Spreadsheet",
+  "type": "service",
+  "namespace": "com.sun.star.sheet",
+  "parser_args": {
+    "sort": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "from_imports": [
+      [
+        ".x_sheet_page_break",
+        "XSheetPageBreak"
+      ],
+      [
+        ".x_external_sheet_name",
+        "XExternalSheetName"
+      ],
+      [
+        "..drawing.x_draw_page_supplier",
+        "XDrawPageSupplier"
+      ],
+      [
+        ".sheet_cell_range",
+        "SheetCellRange"
+      ],
+      [
+        ".x_sheet_linkable",
+        "XSheetLinkable"
+      ],
+      [
+        ".x_sheet_annotations_supplier",
+        "XSheetAnnotationsSupplier"
+      ],
+      [
+        ".x_data_pilot_tables_supplier",
+        "XDataPilotTablesSupplier"
+      ],
+      [
+        ".x_scenarios_supplier",
+        "XScenariosSupplier"
+      ],
+      [
+        ".scenario",
+        "Scenario"
+      ],
+      [
+        ".x_sheet_outline",
+        "XSheetOutline"
+      ],
+      [
+        "..table.x_table_charts_supplier",
+        "XTableChartsSupplier"
+      ],
+      [
+        "..util.x_protectable",
+        "XProtectable"
+      ],
+      [
+        ".x_cell_range_movement",
+        "XCellRangeMovement"
+      ],
+      [
+        ".x_spreadsheet",
+        "XSpreadsheet"
+      ],
+      [
+        "..container.x_named",
+        "XNamed"
+      ],
+      [
+        ".x_print_areas",
+        "XPrintAreas"
+      ],
+      [
+        ".x_sheet_auditing",
+        "XSheetAuditing"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..util.color",
+        "Color"
+      ],
+      [
+        ".x_conditional_formats",
+        "XConditionalFormats"
+      ]
+    ],
+    "quote": [
+      "Color",
+      "XConditionalFormats"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "name": "Spreadsheet",
+    "imports": [],
+    "namespace": "com.sun.star.sheet",
+    "extends": [
+      "com.sun.star.sheet.XExternalSheetName",
+      "com.sun.star.sheet.XSheetLinkable",
+      "com.sun.star.sheet.XSheetAuditing",
+      "com.sun.star.sheet.XSheetOutline",
+      "com.sun.star.sheet.XSheetPageBreak",
+      "com.sun.star.sheet.XPrintAreas",
+      "com.sun.star.sheet.XCellRangeMovement",
+      "com.sun.star.table.XTableChartsSupplier",
+      "com.sun.star.drawing.XDrawPageSupplier",
+      "com.sun.star.sheet.XSheetAnnotationsSupplier",
+      "com.sun.star.sheet.XScenariosSupplier",
+      "com.sun.star.sheet.XDataPilotTablesSupplier",
+      "com.sun.star.util.XProtectable",
+      "com.sun.star.container.XNamed",
+      "com.sun.star.sheet.XSpreadsheet",
+      "com.sun.star.sheet.Scenario",
+      "com.sun.star.sheet.SheetCellRange"
+    ],
+    "desc": [
+      "represents a complete spreadsheet in a spreadsheet document.",
+      "",
+      "This service extents the service SheetCellRange. A spreadsheet is nothing else than a cell range with extended functionality.",
+      "",
+      "**since**",
+      "",
+      "    OOo 3.0"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1sheet_1_1Spreadsheet.html",
+    "items": {
+      "properties": [
+        {
+          "name": "AutomaticPrintArea",
+          "returns": "bool",
+          "desc": [
+            "specifies whether the sheet has an automatic print area.",
+            "",
+            "The automatic print area is used to print a sheet without explicit print areas, also if other sheets have print areas.",
+            "",
+            "If the property is true, and there are print areas on other sheets, the used area of this sheet is also printed.",
+            "",
+            "If the property is false, and there are print areas on other sheets, only these specified print areas are printed.",
+            "",
+            "If there are no print areas on the other sheets it does not matter whether property is true or false.",
+            "",
+            "This property can only be true, if there are no print areas given on this sheet. If the property is set to true the print areas of this sheet will be removed."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ConditionalFormats",
+          "returns": "XConditionalFormats",
+          "desc": [
+            "specifies all conditional formats of that sheet"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "IsVisible",
+          "returns": "bool",
+          "desc": [
+            "specifies if the sheet is visible."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "PageStyle",
+          "returns": "str",
+          "desc": [
+            "specifies the page style of the sheet."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "TabColor",
+          "returns": "Color",
+          "desc": [
+            "specifies the color of the sheet tab, if any."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "TableLayout",
+          "returns": "int",
+          "desc": [
+            "specifies the direction of the columns in the spreadsheet.",
+            "",
+            "Possible values are com.sun.star.text.WritingMode2.LR_TB to order the columns from left to right, and com.sun.star.text.WritingMode2.RL_TB to order the columns from right to left."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
+  }
+}

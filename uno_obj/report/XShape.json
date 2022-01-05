@@ -1,14 +1,16 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.8",
-  "timestamp": "2021-12-27 22:15:24+00:00",
+  "version": "0.1.12",
+  "timestamp": "2022-01-04 18:08:02+00:00",
   "name": "XShape",
   "type": "interface",
   "namespace": "com.sun.star.report",
   "parser_args": {
     "sort": true
   },
-  "writer_args": {},
+  "writer_args": {
+    "include_desc": true
+  },
   "data": {
     "from_imports": [
       [
@@ -20,12 +22,19 @@
       [
         "..drawing.homogen_matrix3",
         "HomogenMatrix3"
+      ],
+      [
+        "..beans.property_value",
+        "PropertyValue"
       ]
     ],
     "quote": [
-      "HomogenMatrix3"
+      "HomogenMatrix3",
+      "typing.List[PropertyValue]"
     ],
-    "typings": [],
+    "typings": [
+      "typing.List[PropertyValue]"
+    ],
     "requires_typing": true,
     "name": "XShape",
     "imports": [],
@@ -36,6 +45,21 @@
     "desc": [],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1report_1_1XShape.html",
     "items": {
+      "types": [
+        {
+          "name": "CustomShapeGeometry",
+          "returns": "typing.List[PropertyValue]",
+          "desc": [
+            "This property describes the geometry of the CustomShape.",
+            "",
+            "The CustomShapeEngine that is used should be able to get on with the content of this property.",
+            "",
+            "If the CustomShapeEngine property is \\\"com.sun.star.drawing.EnhancedCustomShapeEngine\\\", then this property is containing properties as they are specified in the service com.sun.star.drawing.EnhancedCustomShapeGeometry"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ],
       "properties": [
         {
           "name": "CustomShapeData",

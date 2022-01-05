@@ -10,9 +10,8 @@ class BaseEx(BaseJson):
         # self._linfo('hello')
 
     def _hydrate_data(self, json_data: dict):
-        # print('# _hydrate_data()')
+        self._validate_data(json_data)
         data: Dict[str, object] = json_data['data']
-
         def set_data(_key: str, a_name=None):
             attr_name = _key if not a_name else a_name
             val = data.get(_key, None)
@@ -28,6 +27,8 @@ class BaseEx(BaseJson):
         set_data('imports')
         set_data('namespace')
         self.sort = bool(json_data['parser_args'].get('sort', False))
+        # get lo ver if it exist. Defaut to False
+        self.libre_office_ver = json_data.get('libre_office_ver', False)
         self.include_desc = bool(
             json_data['writer_args'].get('include_desc', True))
         self.attribs = self._get_attribs(json_data=json_data, sort=self.sort)
@@ -67,15 +68,14 @@ class BaseEx(BaseJson):
             result[k] = sort_lst_dict(k, 'name')
         return result
 
-    def _validate_data(self, data: dict) -> bool:
+    def _validate_data(self, data: dict):
         super()._validate_data(data=data)
 
         if not data['type'] == 'exception':
             raise Exception(
                 f"Invalid Data: Expected type to be 'exception' got '{data['type']}'")
         min_ver = Version(0, 1, 2)
-        ver = Version.parse(data.get('version', None))
-        if ver < min_ver:
+        if self.json_version < min_ver:
             raise Exception(
                 "Invalid Data: Expected version to be at least '{min_ver}' got {ver}")
 

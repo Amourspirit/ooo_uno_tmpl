@@ -439,7 +439,8 @@ class EnumWriter(base.WriteBase):
         json_dict = {
             "id": JSON_ID,
             "version": __version__,
-            "timestamp": str(base.Util.get_timestamp_utc()),
+            # "timestamp": str(base.Util.get_timestamp_utc()),
+            "libre_office_ver": base.APP_CONFIG.libre_office_ver,
             "name": p_dict['name'],
             "type": "enum",
             "namespace": p_dict['ns'],
@@ -467,6 +468,8 @@ class EnumWriter(base.WriteBase):
     def _set_template_data(self):
         if self._write_template_long is False:
             return
+        self._template = self._template.replace(
+            '{libre_office_ver}', base.APP_CONFIG.libre_office_ver)
         self._template = self._template.replace('{sort}', str(self._sort))
         self._template = self._template.replace('{ns}', str(self._p_namespace))
         self._template = self._template.replace('{name}', self._p_name)

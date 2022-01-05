@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.8",
-  "timestamp": "2021-12-28 11:31:01+00:00",
+  "version": "0.1.14",
+  "libre_office_ver": "7.2",
   "type": "struct",
   "name": "TableFilterField",
   "namespace": "com.sun.star.sheet",
@@ -10,29 +10,40 @@
   },
   "writer_args": {
     "sort": true,
-    "auto_import": true,
-    "dynamic_struct": false
+    "dynamic_struct": false,
+    "include_desc": true
   },
   "data": {
     "name": "TableFilterField",
     "namespace": "com.sun.star.sheet",
     "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1sheet_1_1TableFilterField.html",
-    "quote": [],
+    "from_imports": [],
+    "from_imports_typing": [
+      [
+        ".filter_connection",
+        "FilterConnection"
+      ],
+      [
+        ".filter_operator",
+        "FilterOperator"
+      ]
+    ],
+    "quote": [
+      "FilterConnection",
+      "FilterOperator"
+    ],
     "typings": [],
+    "requires_typing": true,
     "fullname": "com.sun.star.sheet.TableFilterField",
     "desc": [
       "describes a single condition in a filter descriptor."
     ],
-    "extends": [],
     "imports": [],
-    "auto_imports": [],
-    "from_imports": [],
-    "requires_typing": false,
+    "extends": [],
     "items": [
       {
         "name": "Connection",
-        "type": "object",
-        "orig_type": "FilterConnection",
+        "type": "FilterConnection",
         "lines": [
           "specifies how the condition is connected to the previous condition."
         ]
@@ -40,7 +51,6 @@
       {
         "name": "Field",
         "type": "int",
-        "orig_type": "long",
         "lines": [
           "specifies which field (column) is used for the condition."
         ]
@@ -48,7 +58,6 @@
       {
         "name": "IsNumeric",
         "type": "bool",
-        "orig_type": "boolean",
         "lines": [
           "selects whether the TableFilterField.NumericValue or the TableFilterField.StringValue is used."
         ]
@@ -56,15 +65,13 @@
       {
         "name": "NumericValue",
         "type": "float",
-        "orig_type": "double",
         "lines": [
           "specifies a numeric value for the condition."
         ]
       },
       {
         "name": "Operator",
-        "type": "object",
-        "orig_type": "FilterOperator",
+        "type": "FilterOperator",
         "lines": [
           "specifies the type of the condition."
         ]
@@ -72,7 +79,6 @@
       {
         "name": "StringValue",
         "type": "str",
-        "orig_type": "string",
         "lines": [
           "specifies a string value for the condition."
         ]

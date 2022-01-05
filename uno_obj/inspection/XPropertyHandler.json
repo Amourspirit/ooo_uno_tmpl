@@ -1,60 +1,67 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.8",
-  "timestamp": "2021-12-27 22:15:09+00:00",
+  "version": "0.1.12",
+  "timestamp": "2022-01-04 18:09:30+00:00",
   "name": "XPropertyHandler",
   "type": "interface",
   "namespace": "com.sun.star.inspection",
   "parser_args": {
     "sort": true
   },
-  "writer_args": {},
+  "writer_args": {
+    "include_desc": true
+  },
   "data": {
-    "from_imports": [],
+    "from_imports": [
+      [
+        "..lang.x_component",
+        "XComponent"
+      ]
+    ],
     "from_imports_typing": [
       [
-        ".interactive_selection_result",
-        "InteractiveSelectionResult"
-      ],
-      [
-        "..beans.property",
-        "Property"
-      ],
-      [
-        ".x_property_control_factory",
-        "XPropertyControlFactory"
-      ],
-      [
-        ".line_descriptor",
-        "LineDescriptor"
+        "..beans.x_property_change_listener",
+        "XPropertyChangeListener"
       ],
       [
         "..beans.property_state",
         "PropertyState"
       ],
       [
-        "..uno.x_interface",
-        "XInterface"
+        ".interactive_selection_result",
+        "InteractiveSelectionResult"
       ],
       [
-        "..beans.x_property_change_listener",
-        "XPropertyChangeListener"
+        ".x_property_control_factory",
+        "XPropertyControlFactory"
+      ],
+      [
+        "..beans.property",
+        "Property"
       ],
       [
         ".x_object_inspector_ui",
         "XObjectInspectorUI"
+      ],
+      [
+        ".line_descriptor",
+        "LineDescriptor"
+      ],
+      [
+        "..uno.x_interface",
+        "XInterface"
       ]
     ],
     "quote": [
-      "XPropertyChangeListener",
-      "typing.List[Property]",
-      "XObjectInspectorUI",
-      "XInterface",
       "InteractiveSelectionResult",
-      "typing.List[str]",
       "PropertyState",
-      "LineDescriptor",
-      "XPropertyControlFactory"
+      "XInterface",
+      "XPropertyControlFactory",
+      "typing.List[str]",
+      "XPropertyChangeListener",
+      "XObjectInspectorUI",
+      "typing.List[Property]",
+      "LineDescriptor"
     ],
     "typings": [
       "typing.List[str]",
@@ -64,7 +71,9 @@
     "name": "XPropertyHandler",
     "imports": [],
     "namespace": "com.sun.star.inspection",
-    "extends": [],
+    "extends": [
+      "com.sun.star.lang.XComponent"
+    ],
     "desc": [
       "is the basic interface for object inspection.",
       "",

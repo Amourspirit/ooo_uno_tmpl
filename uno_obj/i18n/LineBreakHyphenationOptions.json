@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.8",
-  "timestamp": "2021-12-28 11:31:04+00:00",
+  "version": "0.1.14",
+  "libre_office_ver": "7.2",
   "type": "struct",
   "name": "LineBreakHyphenationOptions",
   "namespace": "com.sun.star.i18n",
@@ -10,41 +10,40 @@
   },
   "writer_args": {
     "sort": true,
-    "auto_import": true,
-    "dynamic_struct": false
+    "dynamic_struct": false,
+    "include_desc": true
   },
   "data": {
     "name": "LineBreakHyphenationOptions",
     "namespace": "com.sun.star.i18n",
     "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1i18n_1_1LineBreakHyphenationOptions.html",
+    "from_imports": [],
+    "from_imports_typing": [
+      [
+        "..linguistic2.x_hyphenator",
+        "XHyphenator"
+      ],
+      [
+        "..beans.property_values",
+        "PropertyValues"
+      ]
+    ],
     "quote": [
-      "PropertyValues",
-      "XHyphenator"
+      "XHyphenator",
+      "PropertyValues"
     ],
     "typings": [],
+    "requires_typing": true,
     "fullname": "com.sun.star.i18n.LineBreakHyphenationOptions",
     "desc": [
       "Hyphenation options passed in calls to XBreakIterator.getLineBreak()."
     ],
-    "extends": [],
     "imports": [],
-    "auto_imports": [
-      [
-        "..beans.property_values",
-        "PropertyValues"
-      ],
-      [
-        "..linguistic2.x_hyphenator",
-        "XHyphenator"
-      ]
-    ],
-    "from_imports": [],
-    "requires_typing": true,
+    "extends": [],
     "items": [
       {
         "name": "aHyphenationOptions",
         "type": "PropertyValues",
-        "orig_type": ".com.sun.star.beans.PropertyValues",
         "lines": [
           "Sequence of property values to be used by the hyphenator - can be empty if the default values (from the property set) should be used."
         ]
@@ -52,15 +51,13 @@
       {
         "name": "hyphenIndex",
         "type": "int",
-        "orig_type": "long",
         "lines": [
-          "The first character not fitting to the current line, considering an additional \"-\" for hyphenation."
+          "The first character not fitting to the current line, considering an additional \\\"-\\\" for hyphenation."
         ]
       },
       {
         "name": "rHyphenator",
         "type": "XHyphenator",
-        "orig_type": ".com.sun.star.linguistic2.XHyphenator",
         "lines": [
           "Reference to the specific hyphenator - can be zero."
         ]

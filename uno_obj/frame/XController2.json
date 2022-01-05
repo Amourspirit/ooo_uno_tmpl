@@ -1,14 +1,16 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.8",
-  "timestamp": "2021-12-27 22:15:37+00:00",
+  "version": "0.1.12",
+  "timestamp": "2022-01-04 18:08:41+00:00",
   "name": "XController2",
   "type": "interface",
   "namespace": "com.sun.star.frame",
   "parser_args": {
     "sort": true
   },
-  "writer_args": {},
+  "writer_args": {
+    "include_desc": true
+  },
   "data": {
     "from_imports": [
       [
@@ -18,19 +20,26 @@
     ],
     "from_imports_typing": [
       [
+        "..ui.x_sidebar_provider",
+        "XSidebarProvider"
+      ],
+      [
         "..awt.x_window",
         "XWindow"
       ],
       [
-        "..ui.x_sidebar_provider",
-        "XSidebarProvider"
+        "..beans.property_value",
+        "PropertyValue"
       ]
     ],
     "quote": [
       "XSidebarProvider",
+      "typing.List[PropertyValue]",
       "XWindow"
     ],
-    "typings": [],
+    "typings": [
+      "typing.List[PropertyValue]"
+    ],
     "requires_typing": true,
     "name": "XController2",
     "imports": [],
@@ -60,6 +69,19 @@
           ],
           "raises": [],
           "args": []
+        }
+      ],
+      "types": [
+        {
+          "name": "CreationArguments",
+          "returns": "typing.List[PropertyValue]",
+          "desc": [
+            "denotes the arguments used to create the instance.",
+            "",
+            "Usually, controllers are created via XModel2.createViewController(), where the caller can pass not only a controller name, but also arguments parameterizing the to-be-created instance. Those arguments used at creation time can subsequently be retrieved using the CreationArguments member."
+          ],
+          "raises_get": "",
+          "raises_set": ""
         }
       ],
       "properties": [

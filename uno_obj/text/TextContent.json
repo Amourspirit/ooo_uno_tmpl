@@ -1,0 +1,88 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.14",
+  "libre_office_ver": "7.2",
+  "name": "TextContent",
+  "type": "service",
+  "namespace": "com.sun.star.text",
+  "parser_args": {
+    "sort": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "from_imports": [
+      [
+        ".x_text_content",
+        "XTextContent"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".wrap_text_mode",
+        "WrapTextMode"
+      ],
+      [
+        ".text_content_anchor_type",
+        "TextContentAnchorType"
+      ]
+    ],
+    "quote": [
+      "typing.List[TextContentAnchorType]",
+      "WrapTextMode",
+      "TextContentAnchorType"
+    ],
+    "typings": [
+      "typing.List[TextContentAnchorType]"
+    ],
+    "requires_typing": true,
+    "name": "TextContent",
+    "imports": [],
+    "namespace": "com.sun.star.text",
+    "extends": [
+      "com.sun.star.text.XTextContent"
+    ],
+    "desc": [
+      "is an object which can be anchored in a text, like instances of TextFrame or TextField.",
+      "",
+      "If the concrete TextContent has a textual representation which fades into the surrounding text, then XTextField is used.",
+      "",
+      "If the concrete TextContent has a \\\"floating\\\" object, like a graphic, com.sun.star.drawing.XShape is used."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1text_1_1TextContent.html",
+    "items": {
+      "types": [
+        {
+          "name": "AnchorTypes",
+          "returns": "typing.List[TextContentAnchorType]",
+          "desc": [
+            "contains the anchor type of the text content."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ],
+      "properties": [
+        {
+          "name": "AnchorType",
+          "returns": "TextContentAnchorType",
+          "desc": [
+            "specifies how the text content is attached to its surrounding Text."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "TextWrap",
+          "returns": "WrapTextMode",
+          "desc": [
+            "specifies if the text content is a shape and how the text is wrapped around the shape."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
+  }
+}

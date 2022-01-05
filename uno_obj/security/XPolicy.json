@@ -1,16 +1,22 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.8",
-  "timestamp": "2021-12-27 22:15:11+00:00",
+  "version": "0.1.12",
+  "timestamp": "2022-01-04 18:07:21+00:00",
   "name": "XPolicy",
   "type": "interface",
   "namespace": "com.sun.star.security",
   "parser_args": {
     "sort": true
   },
-  "writer_args": {},
+  "writer_args": {
+    "include_desc": true
+  },
   "data": {
     "from_imports": [
+      [
+        ".policy",
+        "Policy"
+      ],
       [
         "..uno.x_interface",
         "XInterface"
@@ -28,7 +34,8 @@
     "imports": [],
     "namespace": "com.sun.star.security",
     "extends": [
-      "com.sun.star.uno.XInterface"
+      "com.sun.star.uno.XInterface",
+      "com.sun.star.security.Policy"
     ],
     "desc": [
       "Interface for getting sets of permissions of a specified user or the default permissions if no user is given.",

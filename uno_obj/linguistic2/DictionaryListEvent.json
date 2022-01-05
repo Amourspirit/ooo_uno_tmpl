@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.8",
-  "timestamp": "2021-12-28 11:30:58+00:00",
+  "version": "0.1.14",
+  "libre_office_ver": "7.2",
   "type": "struct",
   "name": "DictionaryListEvent",
   "namespace": "com.sun.star.linguistic2",
@@ -10,59 +10,59 @@
   },
   "writer_args": {
     "sort": true,
-    "auto_import": true,
-    "dynamic_struct": false
+    "dynamic_struct": false,
+    "include_desc": true
   },
   "data": {
     "name": "DictionaryListEvent",
     "namespace": "com.sun.star.linguistic2",
     "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1linguistic2_1_1DictionaryListEvent.html",
-    "quote": [
-      "typing.List[DictionaryEvent]"
-    ],
-    "typings": [
-      "typing.List[DictionaryEvent]"
-    ],
-    "fullname": "com.sun.star.linguistic2.DictionaryListEvent",
-    "desc": [
-      "structure representing a dictionary-list event.",
-      "",
-      "This structure is used by the dictionary-list to inform its listeners about certain events. Since the dictionary-list is able to collect several single events before broadcasting them to its listeners the integer argument may be a combination (logical or) of several event types. If more specific information about the events is requested by a listener, a sequence of all dictionary-list events since the last broadcasting will be supplied. Otherwise, that list will be empty."
-    ],
-    "extends": [
-      "com.sun.star.lang.EventObject"
-    ],
-    "imports": [],
-    "auto_imports": [
-      [
-        ".dictionary_event",
-        "DictionaryEvent"
-      ]
-    ],
     "from_imports": [
       [
         "..lang.event_object",
         "EventObject"
       ]
     ],
+    "from_imports_typing": [
+      [
+        ".dictionary_event",
+        "DictionaryEvent"
+      ]
+    ],
+    "quote": [
+      "typing.List[DictionaryEvent]"
+    ],
+    "typings": [
+      "typing.List[DictionaryEvent]"
+    ],
     "requires_typing": true,
+    "fullname": "com.sun.star.linguistic2.DictionaryListEvent",
+    "desc": [
+      "structure representing a dictionary-list event.",
+      "",
+      "This structure is used by the dictionary-list to inform its listeners about certain events. Since the dictionary-list is able to collect several single events before broadcasting them to its listeners the integer argument may be a combination (logical or) of several event types. If more specific information about the events is requested by a listener, a sequence of all dictionary-list events since the last broadcasting will be supplied. Otherwise, that list will be empty."
+    ],
+    "imports": [],
+    "extends": [
+      "com.sun.star.lang.EventObject"
+    ],
     "items": [
-      {
-        "name": "aDictionaryEvents",
-        "type": "typing.List[DictionaryEvent]",
-        "orig_type": "sequence< com.sun.star.linguistic2.DictionaryEvent >",
-        "lines": [
-          "list of accumulated dictionary events.",
-          "It will be empty if all com.sun.star.linguistic2.XDictionaryListEventListener are satisfied with the condensed representation of the com.sun.star.linguistic2.DictionaryListEvent.nCondensedEvent()."
-        ]
-      },
       {
         "name": "nCondensedEvent",
         "type": "int",
-        "orig_type": "short",
         "lines": [
           "the combined type of the accumulated events.",
+          "",
           "The value can be the combination of multiple com.sun.star.linguistic2.DictionaryListEventFlags by applying the logical OR to them."
+        ]
+      },
+      {
+        "name": "aDictionaryEvents",
+        "type": "typing.List[DictionaryEvent]",
+        "lines": [
+          "list of accumulated dictionary events.",
+          "",
+          "It will be empty if all com.sun.star.linguistic2.XDictionaryListEventListener are satisfied with the condensed representation of the com.sun.star.linguistic2.DictionaryListEvent.nCondensedEvent()."
         ]
       }
     ]

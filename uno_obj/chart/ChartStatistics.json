@@ -1,0 +1,178 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.14",
+  "libre_office_ver": "7.2",
+  "name": "ChartStatistics",
+  "type": "service",
+  "namespace": "com.sun.star.chart",
+  "parser_args": {
+    "sort": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "from_imports": [
+      [
+        "..beans.x_property_set",
+        "XPropertySet"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".chart_error_category",
+        "ChartErrorCategory"
+      ],
+      [
+        ".chart_regression_curve_type",
+        "ChartRegressionCurveType"
+      ],
+      [
+        ".chart_error_indicator_type",
+        "ChartErrorIndicatorType"
+      ]
+    ],
+    "quote": [
+      "ChartErrorIndicatorType",
+      "ChartErrorCategory",
+      "ChartRegressionCurveType"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "name": "ChartStatistics",
+    "imports": [],
+    "namespace": "com.sun.star.chart",
+    "extends": [
+      "com.sun.star.beans.XPropertySet"
+    ],
+    "desc": [
+      "offers statistical properties for the data in the chart.",
+      "",
+      "It is available for a single data row and for the whole diagram."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1chart_1_1ChartStatistics.html",
+    "items": {
+      "properties": [
+        {
+          "name": "ConstantErrorHigh",
+          "returns": "float",
+          "desc": [
+            "specifies the upper limit of the error range of a data row.",
+            "",
+            "this setting is effective if the ChartStatistics.ErrorCategory is set to ChartErrorCategory.CONSTANT_VALUE."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ConstantErrorLow",
+          "returns": "float",
+          "desc": [
+            "specifies the lower limit of the error range of a data row.",
+            "",
+            "this setting is effective if the ChartStatistics.ErrorCategory is set to ChartErrorCategory.CONSTANT_VALUE."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ErrorBarRangeNegative",
+          "returns": "str",
+          "desc": [
+            "contains a cell range string for negative error bars.",
+            "",
+            "This property is used when the ErrorBarCategory is set to ErrorBarCategory.FROM_DATA."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ErrorBarRangePositive",
+          "returns": "str",
+          "desc": [
+            "contains a cell range string for positive error bars.",
+            "",
+            "This property is used when the ErrorBarCategory is set to ErrorBarCategory.FROM_DATA."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ErrorBarStyle",
+          "returns": "int",
+          "desc": [
+            "determines the style of the error bars.",
+            "",
+            "Use this instead of ErrorCategory"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ErrorCategory",
+          "returns": "ChartErrorCategory",
+          "desc": [
+            "determines the type of error to indicate."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ErrorIndicator",
+          "returns": "ChartErrorIndicatorType",
+          "desc": [
+            "determines how the error is indicated.",
+            "",
+            "You can enable indicators pointing up, down or both."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ErrorMargin",
+          "returns": "float",
+          "desc": [
+            "specifies the percentage for the margin of errors.",
+            "",
+            "The length of the error indicators is calculated by taking the percentage given of the largest data point value.",
+            "",
+            "this setting is effective if the ChartStatistics.ErrorCategory is set to ChartErrorCategory.ERROR_MARGIN."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "MeanValue",
+          "returns": "bool",
+          "desc": [
+            "determines if the mean value for a data row is displayed as a line."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "PercentageError",
+          "returns": "float",
+          "desc": [
+            "specifies the percentage that is used to display error bars.",
+            "",
+            "The length of the error indicators is calculated for each data point by taking the given percentage of its value.",
+            "",
+            "this setting is effective if the ChartStatistics.ErrorCategory is set to ChartErrorCategory.PERCENT."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "RegressionCurves",
+          "returns": "ChartRegressionCurveType",
+          "desc": [
+            "determines a type of regression for the data row values."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
+  }
+}
