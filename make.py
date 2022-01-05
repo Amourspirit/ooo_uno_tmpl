@@ -36,7 +36,6 @@ class WriteInfo:
     file: str
     py_file: str
     scratch_path: Path
-    ext: Optional[str] = None
 # endregion Data Class
 
 # region Logger / Env
@@ -771,6 +770,7 @@ class Make(FilesBase):
                     
                     
                     py_file = self._get_py_path(tmpl_file=file)
+                   
                     w_info = WriteInfo(
                         file = file,
                         py_file=py_file,
@@ -809,11 +809,13 @@ class Make(FilesBase):
                         self._processed_dirs.add(f_dir)
                         self._create_sys_links(f_dir)
                     py_file = self._get_py_path(tmpl_file=file)
+                    _tmp = Path(file)
+                    _file = _tmp.parent
+                    _file = _file.joinpath(_tmp.stem + '.pyi')
                     w_info = WriteInfo(
                         file=file,
                         py_file=py_file,
-                        scratch_path=self._get_scratch_path(tmpl_file=py_file),
-                        ext='.pyi'
+                        scratch_path=self._get_scratch_path(tmpl_file=_file)
                     )
                     c_lst.append(w_info)
             except Exception as e:
@@ -859,12 +861,6 @@ class Make(FilesBase):
             if not init_file.exists():
                 init_file.touch()
                 logger.info('Created File: %s', str(init_file))
-        _file = w_info.file
-        if w_info.ext:
-            _tmp = Path(_file)
-            _file = _tmp.parent
-            _file = _file.joinpath(_tmp.stem + w_info.ext)
-
         ensure_init(w_info.scratch_path.parent)
         with open(w_info.scratch_path, "w") as outfile:
             subprocess.run([sys.executable, w_info.py_file], stdout=outfile)
