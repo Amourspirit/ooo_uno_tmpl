@@ -703,6 +703,7 @@ class Make(FilesBase):
         self._scratch = self._root_dir / self._config.builld_dir
         self._force_compile = bool(kwargs.get('force_compile', False))
         self._processed_dirs: Set[str] = set()
+        self._processes = int(kwargs.get('processes', 4))
         # exclude files that start with _
         pattern = str(self._root_dir.joinpath('template'))  + '/[_]*.py'
         self._template_py_files=glob.glob(pattern)
@@ -741,21 +742,22 @@ class Make(FilesBase):
 
     def _make(self):
         self._make_tmpl()
-        # self._make_tppi()
-    
-    def _make_tmpl(self):
-        def compile(w_info:WriteInfo):
-            cmd_str = f"cheetah compile --nobackup {w_info.file}"
-            logger.info('Running subprocess: %s', cmd_str)
-            p = subprocess.run(
-                cmd_str.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-            exit_status = p.returncode
-            std_out = p.stdout.decode()
-            if std_out:
-                logger.info("Cheetah output: %s", std_out)
-            if exit_status != 0:
-                logger.warning("Cheeta error Outuput: %s", p.stderr.decode())
+        self._make_tppi()
 
+    def _compile_tmpl(self, w_info:WriteInfo):
+        logger.debug('Compiling file: %s', w_info.file)
+        cmd_str = f"cheetah compile --nobackup {w_info.file}"
+        logger.info('Running subprocess: %s', cmd_str)
+        p = subprocess.run(
+            cmd_str.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        exit_status = p.returncode
+        std_out = p.stdout.decode()
+        if std_out:
+            logger.info("Cheetah output: %s", std_out)
+        if exit_status != 0:
+            logger.warning("Cheeta error Outuput: %s", p.stderr.decode())
+
+    def _make_tmpl(self):
         files = self._get_template_files()
         c_lst: List[WriteInfo] = []
         for file in files:
@@ -766,8 +768,7 @@ class Make(FilesBase):
                         self._processed_dirs.add(f_dir)
                         # logger.debug("_make() current dir: %s", f_dir)
                         self._create_sys_links(f_dir)
-                    logger.debug('Compiling file: %s', file)
-                    compile(tmpl_file=file)
+                    
                     
                     py_file = self._get_py_path(tmpl_file=file)
                     w_info = WriteInfo(
@@ -779,36 +780,49 @@ class Make(FilesBase):
             except Exception as e:
                 logger.error(e)
         # run two pools. First to compile. Second to write
-        with Pool(processes=4) as pool:
-            pool.map(compile, c_lst)
-        with Pool(processes=4) as pool:
+        with Pool(processes=self._processes) as pool:
+            pool.map(self._compile_tmpl, c_lst)
+        with Pool(processes=self._processes) as pool:
             pool.map(self._write_multi, c_lst)
 
+    def _compile_tppi(self, w_info: WriteInfo):
+        logger.debug('Compiling file: %s', w_info.file)
+        cmd_str = f"cheetah compile --nobackup --iext=.tppi {w_info.file}"
+        logger.info('Running subprocess: %s', cmd_str)
+        p = subprocess.run(
+            cmd_str.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        exit_status = p.returncode
+        std_out = p.stdout.decode()
+        if std_out:
+            logger.info("Cheetah output: %s", std_out)
+        if exit_status != 0:
+            logger.warning("Cheeta error Outuput: %s", p.stderr.decode())
+
     def _make_tppi(self):
-        def compile(tmpl_file):
-            cmd_str = f"cheetah compile --nobackup --iext=.tppi {tmpl_file}"
-            logger.info('Running subprocess: %s', cmd_str)
-            res = subprocess.run(cmd_str.split())
-            if res.stdout:
-                logger.info(res.stdout)
-            if res.stderr:
-                logger.error(res.stderr)
         files = self._get_template_tppi_files()
+        c_lst: List[WriteInfo] = []
         for file in files:
             try:
                 if not self._is_skip_compile(tmpl_file=file):
                     f_dir = Path(file).parent
                     if not f_dir in self._processed_dirs:
                         self._processed_dirs.add(f_dir)
-                        # logger.debug("_make() current dir: %s", f_dir)
                         self._create_sys_links(f_dir)
-                    logger.debug('Compiling file: %s', file)
-                    compile(tmpl_file=file)
-                    
                     py_file = self._get_py_path(tmpl_file=file)
-                    self._write(py_file, '.pyi')
+                    w_info = WriteInfo(
+                        file=file,
+                        py_file=py_file,
+                        scratch_path=self._get_scratch_path(tmpl_file=py_file),
+                        ext='.pyi'
+                    )
+                    c_lst.append(w_info)
             except Exception as e:
                 logger.error(e)
+        # run two pools. First to compile. Second to write
+        with Pool(processes=self._processes) as pool:
+            pool.map(self._compile_tppi, c_lst)
+        with Pool(processes=self._processes) as pool:
+            pool.map(self._write_multi, c_lst)
 
     def _is_skip_compile(self, tmpl_file) -> bool:
         if self._force_compile:
@@ -856,29 +870,12 @@ class Make(FilesBase):
             subprocess.run([sys.executable, w_info.py_file], stdout=outfile)
             logger.info('Wrote file: %s', str(w_info.scratch_path))
 
-    def _write(self, py_file, ext:str =''):
-        def ensure_init(path: Path):
-            init_file = Path(path, '__init__.py')
-            if not init_file.exists():
-                init_file.touch()
-                logger.info('Created File: %s', str(init_file))
-        _file = py_file
-        if ext:
-            _tmp = Path(_file)
-            _file = _tmp.parent
-            _file = _file.joinpath(_tmp.stem + ext)
-            
-        p_out = self._get_scratch_path(tmpl_file=_file)
-        ensure_init(p_out.parent)
-        with open(p_out, "w") as outfile:
-            subprocess.run([sys.executable, py_file], stdout=outfile)
-            logger.info('Wrote file: %s', str(p_out))
 
 # endregion Make
 
 # region Main
 def _main():
-    sys.argv.extend(['-v', '--log-file', 'make.log'])
+    sys.argv.extend(['-v', '--log-file', 'make.log', 'make'])
     main()
 
 def _touch():
@@ -1127,6 +1124,13 @@ def main():
         action='store_true',
         dest='clean_scratch',
         default=False)
+    make_parser.add_argument(
+        '-p', '--processes',
+        help='Number of Process to us for make.',
+        action='store',
+        dest='processes',
+        type=int,
+        default=4)
     # endregion make args
 
     parser.add_argument(
@@ -1142,6 +1146,7 @@ def main():
         dest='log_file',
         type=str,
         default=None)
+    
     args = parser.parse_args()
     if logger is None:
         log_args = {}
@@ -1157,7 +1162,7 @@ def main():
     if args.command == 'make':
         try:
             make = Make(config=config, force_compile=args.force_compile,
-                        clean=args.clean_scratch)
+                        clean=args.clean_scratch, processes=args.processes)
         except Exception as e:
             logger.error(e)
     if args.command == 'ex':
