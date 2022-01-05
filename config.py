@@ -3,6 +3,8 @@ from dataclasses import dataclass
 from pathlib import Path
 @dataclass
 class AppConfig:
+    libre_office_ver: str
+    """Version of Libre Office that is being built such as 7.2"""
     uno_base_dir: str
     """Base Directory for Uno such as uno_obj"""
     module_links_file: str
