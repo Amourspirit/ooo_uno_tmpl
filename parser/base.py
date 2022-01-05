@@ -2670,6 +2670,7 @@ class Util:
             results.add(s)
         return results
 
+
     @AcceptedTypes(str, opt_all_args=True, ftype=DecFuncEnum.METHOD_STATIC)
     @staticmethod
     def get_rel_import(i_str: str, ns: str, sep: str = '.') -> Tuple[str, str]:
@@ -2720,6 +2721,59 @@ class Util:
         short = ns2.replace('com.sun.star.', '')
         logger.warn(
             f"get_rel_import(): Last ditch effort. Returning: (ooo_uno.uno_obj.{short}.{camel_name}', {name})")
+        return (f'ooo_uno.uno_obj.{short}.{camel_name}', f'{name}')
+    
+    @AcceptedTypes(str, opt_all_args=True, ftype=DecFuncEnum.METHOD_STATIC)
+    @staticmethod
+    def get_rel_import_full(i_str: str, ns: str, sep: str = '.') -> Tuple[str, str]:
+        """
+        Gets realitive import Tuple
+
+        Args:
+            i_str (str): Namespace and object such as ``com.sun.star.uno.Exception``
+            ns (str): Namespace used to get realitive postion such as ``com.sun.star.awt``
+            sep (str, optional): Namespace seperator. Defaults to ``.``
+
+        Returns:
+            Tuple[str, str]: realitive import info such as ``('..uno.exception', 'Exception')``
+        """
+        # i_str = com.sun.star.uno.Exception
+        # ns = com.sun.star.configuration
+        # ("..uno.exception", "Exception")
+        # compare ns to ns so drop last name of i_str
+        name_parts = i_str.split(sep)
+        name = name_parts.pop()
+        camel_name = Util.camel_to_snake(name)
+        if len(name_parts) == 0:
+            # this is a single word such as XInterface
+            # assume it is in the same namespace as this import
+            logger.debug(
+                "get_rel_import_full(): '%s', single word. Converting to from import and returning", name)
+            return (f'{sep}', f'{camel_name}{sep}{name}')
+        ns2 = sep.join(name_parts)
+        if ns2 == ns:
+            logger.debug("get_rel_import_full(): Names are equal: '%s'", ns)
+            logger.debug(
+                f"get_rel_import_full(): Returning (.{camel_name}', '{name})")
+            return (f'{sep}', f'{camel_name}{sep}{name}')
+        if len(name_parts) == 1:
+            # this is a single word
+            # assume it is in the same namespace as this import
+            logger.debug(
+                "get_rel_import_full(): '%s', single word. Converting to from import and returning", i_str)
+            return (f'{sep}', f'{Util.camel_to_snake(i_str)}{sep}{i_str}')
+        try:
+            info = Util.get_rel_info(in_branch=ns, comp_branch=ns2, sep=sep)
+            prefix = sep * (info.distance + 1)
+            result_parts = info.comp_branch_rel + [camel_name]
+            im_str = sep.join(result_parts)
+            # im_str = f"{im_str}{sep}{name}"
+            return (prefix, im_str)
+        except Exception as e:
+            logger.error(e, exc_info=True)
+        short = ns2.replace('com.sun.star.', '')
+        logger.warn(
+            f"get_rel_import_full(): Last ditch effort. Returning: (ooo_uno.uno_obj.{short}.{camel_name}', {name})")
         return (f'ooo_uno.uno_obj.{short}.{camel_name}', f'{name}')
 
     @AcceptedTypes(str, opt_all_args=True, ftype=DecFuncEnum.METHOD_STATIC)

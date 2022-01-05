@@ -126,6 +126,10 @@ class IRules(ABC):
         """set or updates cached"""
 
     @abstractproperty
+    def api_ns(self) -> 'ApiNs':
+        """Gets api_ns value"""
+
+    @abstractproperty
     def summary_block(self) -> base.ApiSummaryBlock:
         """Gets the block that contains summary info for all constants of the current html page."""
 
@@ -138,7 +142,7 @@ class IRules(ABC):
         """Gets the soup object for the page"""
 
 class Rules(IRules):
-    def __init__(self, si_dict: Dict[str, base.SummaryInfo], summary_block: base.ApiSummaryBlock) -> None:
+    def __init__(self, si_dict: Dict[str, base.SummaryInfo], summary_block: base.ApiSummaryBlock, api_ns: 'ApiNs') -> None:
         self._summary_block: base.ApiSummaryBlock = summary_block
         self._summaries = si_dict
         self._name_map = {}
@@ -148,6 +152,7 @@ class Rules(IRules):
         self._cache = {}
         self. _cached_vals = {}
         self._cached_names = {}
+        self._api_ns = api_ns
         self._register_known_rules()
         
     # region Methods
@@ -256,6 +261,10 @@ class Rules(IRules):
     # endregion Methods
 
     # region Properties
+    @property
+    def api_ns(self) -> 'ApiNs':
+        """Gets api_ns value"""
+        return self._api_ns
     @property
     def summary_block(self) -> base.ApiSummaryBlock:
         """Gets the block that contains summary info for all constants of the current html page."""
@@ -658,10 +667,18 @@ class RuleImport(RuleBase):
                 f"{self.__class__.__name__}.get_val() Value is missing. Did you run get_is_match() before get_val()?")
         if isinstance(self._val, str):
             si: SummaryInfo = self._rules.summaries[self.identity]
-            p_type = base.Util.get_python_type(self._val)
+            ns = self._rules.api_ns
+            parts = self._val.rsplit(sep='.', maxsplit=1)
+            name = parts.pop()
+            im = ".".join(parts)
+            p_type = base.Util.get_python_type(im)
+
+            rel = base.Util.get_rel_import_full(p_type.imports, ns.namespace_str)
+            
+            val = f"{rel[1]}.{p_type.type}.{name}"
             result = Val(text=si.name,
                          identity=self.identity, is_flags=False,
-                         val_type=ValTypeEnum.IMPORT, values=[p_type.type],
+                         val_type=ValTypeEnum.IMPORT, values=[val],
                          p_type=p_type)
             self._val = None
             self._rules.set_cached(result)
@@ -941,9 +958,10 @@ class ApiSummaries(base.BlockObj):
     
     # endregion Properties
 class ApiValues(base.BlockObj):
-    def __init__(self, summary_block: base.ApiSummaryBlock, api_summaries: ApiSummaries) -> None:
+    def __init__(self, summary_block: base.ApiSummaryBlock, api_summaries: ApiSummaries, api_ns: ApiNs) -> None:
         self._summary_block: base.ApiSummaryBlock = summary_block
         self._api_summaries: ApiSummaries = api_summaries
+        self._api_ns: ApiNs = api_ns
         super().__init__(self._summary_block.soup)
         self._data = None
 
@@ -970,7 +988,7 @@ class ApiValues(base.BlockObj):
             logger.error(msg)
             raise Exception(msg)
         self._data = {}
-        rules = Rules(si_dict=api_summaries, summary_block=self._summary_block)
+        rules = Rules(si_dict=api_summaries, summary_block=self._summary_block, api_ns=self._api_ns)
         for k in keys:
             si: SummaryInfo = api_summaries[k]
             try:
@@ -1078,7 +1096,7 @@ class ApiData(base.APIData):
     @property
     def api_values(self) -> ApiValues:
         if self._api_values is None:
-            self._api_values = ApiValues(self.api_const_block, self.api_summaries)
+            self._api_values = ApiValues(self.api_const_block, self.api_summaries, self.ns)
         return self._api_values
     
     @property
@@ -1436,7 +1454,7 @@ class ConstWriter(base.WriteBase):
             return self._cache[key]
         lst = []
         for ns in self._p_from_imports:
-            f, n = base.Util.get_rel_import(
+            f, n = base.Util.get_rel_import_full(
                 i_str=ns, ns=self._p_namespace
             )
             lst.append([f, n])
@@ -1844,4 +1862,4 @@ def main():
     w.write()
  
 if __name__ == '__main__':
-    _main()
+    main()
