@@ -53,6 +53,7 @@ class DataItem:
 class ValTypeEnum(IntEnum):
     STRING = auto()
     INTEGER = auto()
+    FLOAT = auto()
 
 
 @dataclass
@@ -174,6 +175,7 @@ class Rules(IRules):
 
     def _register_known_rules(self):
         self._reg_rule(rule=RuleInt)
+        self._reg_rule(rule=RuleFloat)
         self._reg_rule(rule=RuleHex)
         self._reg_rule(rule=RuleNamedFlags)
         self._reg_rule(rule=RuleDetail)
@@ -339,6 +341,51 @@ class RuleInt(RuleBase):
                 f"{self.__class__.__name__}.get_val() Something went wrong. expected val was int but got {type(self._val)}")
 
 
+class RuleFloat(RuleBase):
+    def __init__(self, rules: IRules) -> None:
+        super().__init__(rules=rules)
+        self._val = None
+
+    def get_is_match(self, tag: Tag) -> bool:
+        self._val = None
+        if not super().get_is_match(tag):
+            return False
+        if self._cached:
+            return True
+        parts = self._info_text.split("=")
+        if len(parts) != 2:
+            return False
+        part: str = parts[1].strip()
+        if part.find('.') < 0:
+            return False
+        is_match = False
+        try:
+            self._val = float(part)
+            is_match = True
+        except ValueError:
+            self._val = None
+            is_match = False
+        return is_match
+
+    def get_val(self) -> Val:
+        """Gets a Val if there is a rule match"""
+        if self._cached:
+            return self._cached
+        if self._val is None:
+            raise Exception(
+                f"{self.__class__.__name__}.get_val() Value is missing. Did you run get_is_match() before get_val()?")
+        if isinstance(self._val, float):
+            si: SummaryInfo = self._rules.summaries[self.identity]
+            result = Val(text=si.name,
+                         identity=self.identity, is_flags=False,
+                         val_type=ValTypeEnum.FLOAT, values=[self._val])
+            self._val = None
+            self._rules.set_cached(result)
+            return result
+        else:
+            raise Exception(
+                f"{self.__class__.__name__}.get_val() Something went wrong. expected val was int but got {type(self._val)}")
+
 class RuleHex(RuleBase):
     def __init__(self, rules: IRules) -> None:
         super().__init__(rules=rules)
@@ -493,6 +540,10 @@ class RuleDetail(RuleBase):
         if val:
             self._rules.set_cached(val)
             return val
+        val = self._get_from_float()
+        if val:
+            self._rules.set_cached(val)
+            return val
         names = [s.strip() for s in self._text.split('|')]
         # confirm name and return them.
         
@@ -535,6 +586,16 @@ class RuleDetail(RuleBase):
             if i is None:
                 i = int(self._text, 16)
             val = Val(text=si.name,identity=self.identity, is_flags=False,val_type=ValTypeEnum.INTEGER ,values=[i])
+            return val
+        except ValueError:
+            return None
+    
+    def _get_from_float(self) -> Union[Val, None]:
+        """Convert text to int if possible"""
+        si: SummaryInfo = self._rules.summaries[self.identity]
+        try:
+            i = float(self._text)
+            val = Val(text=si.name,identity=self.identity, is_flags=False,val_type=ValTypeEnum.FLOAT ,values=[i])
             return val
         except ValueError:
             return None
@@ -1433,7 +1494,8 @@ def _api():
     
 def _main():
     # for debugging
-    url = 'https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1security_1_1KeyUsage.html'
+    # url = 'https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1security_1_1KeyUsage.html'
+    url = 'https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1awt_1_1FontWeight.html'
     # sys.argv.extend(['--log-file', 'debug.log', '-v', '-n', '-u', url])
     # main()
     args = ('v', 'n')
