@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.12",
-  "timestamp": "2022-01-05 01:31:10+00:00",
+  "version": "0.1.14",
+  "libre_office_ver": "7.2",
   "name": "NumberFormatIndex",
   "type": "const",
   "namespace": "com.sun.star.i18n",
@@ -52,6 +52,7 @@
       {
         "name": "NUMBER_START",
         "type": "int",
+        "value_type": "INTEGER",
         "value": 0,
         "lines": [
           "Start of simple numerical formats (first format)"
@@ -60,6 +61,7 @@
       {
         "name": "NUMBER_STANDARD",
         "type": "int",
+        "value_type": "CONST",
         "value": "NUMBER_START",
         "lines": [
           "The \\\"General\\\" standard format",
@@ -69,6 +71,7 @@
       {
         "name": "NUMBER_INT",
         "type": "int",
+        "value_type": "CONST_PLUS_INT",
         "value": "NUMBER_START + 1",
         "lines": [
           "0",
@@ -79,6 +82,7 @@
       {
         "name": "NUMBER_DEC2",
         "type": "int",
+        "value_type": "CONST_PLUS_INT",
         "value": "NUMBER_START + 2",
         "lines": [
           "0.00",
@@ -89,6 +93,7 @@
       {
         "name": "NUMBER_1000INT",
         "type": "int",
+        "value_type": "CONST_PLUS_INT",
         "value": "NUMBER_START + 3",
         "lines": [
           "#,##0",
@@ -99,6 +104,7 @@
       {
         "name": "NUMBER_1000DEC2",
         "type": "int",
+        "value_type": "CONST_PLUS_INT",
         "value": "NUMBER_START + 4",
         "lines": [
           "#,##0.00",
@@ -109,6 +115,7 @@
       {
         "name": "NUMBER_SYSTEM",
         "type": "int",
+        "value_type": "CONST_PLUS_INT",
         "value": "NUMBER_START + 5",
         "lines": [
           "#,##0.00",
@@ -119,6 +126,7 @@
       {
         "name": "NUMBER_END",
         "type": "int",
+        "value_type": "CONST",
         "value": "NUMBER_SYSTEM",
         "lines": [
           "End of simple numerical formats (last format)"
@@ -127,6 +135,7 @@
       {
         "name": "SCIENTIFIC_START",
         "type": "int",
+        "value_type": "CONST_PLUS_INT",
         "value": "NUMBER_END + 1",
         "lines": [
           "Start of Scientific formats (first format)"
@@ -135,6 +144,7 @@
       {
         "name": "SCIENTIFIC_000E000",
         "type": "int",
+        "value_type": "CONST",
         "value": "SCIENTIFIC_START",
         "lines": [
           "0.00E+000",
@@ -145,6 +155,7 @@
       {
         "name": "SCIENTIFIC_000E00",
         "type": "int",
+        "value_type": "CONST_PLUS_INT",
         "value": "SCIENTIFIC_START + 1",
         "lines": [
           "0.00E+00",
@@ -155,6 +166,7 @@
       {
         "name": "SCIENTIFIC_END",
         "type": "int",
+        "value_type": "CONST",
         "value": "SCIENTIFIC_000E00",
         "lines": [
           "End of Scientific formats (last format)"
@@ -163,6 +175,7 @@
       {
         "name": "PERCENT_START",
         "type": "int",
+        "value_type": "CONST_PLUS_INT",
         "value": "SCIENTIFIC_END + 1",
         "lines": [
           "Start of Percent formats (first format)"
@@ -171,6 +184,7 @@
       {
         "name": "PERCENT_INT",
         "type": "int",
+        "value_type": "CONST",
         "value": "PERCENT_START",
         "lines": [
           "0%",
@@ -181,6 +195,7 @@
       {
         "name": "PERCENT_DEC2",
         "type": "int",
+        "value_type": "CONST_PLUS_INT",
         "value": "PERCENT_START + 1",
         "lines": [
           "0.00%",
@@ -191,6 +206,7 @@
       {
         "name": "PERCENT_END",
         "type": "int",
+        "value_type": "CONST",
         "value": "PERCENT_DEC2",
         "lines": [
           "End of Percent formats (last format)"
@@ -199,6 +215,7 @@
       {
         "name": "FRACTION_START",
         "type": "int",
+        "value_type": "CONST_PLUS_INT",
         "value": "PERCENT_END + 1",
         "lines": [
           "Start of Fraction formats (first format)"
@@ -207,18 +224,21 @@
       {
         "name": "FRACTION_1",
         "type": "int",
+        "value_type": "CONST",
         "value": "FRACTION_START",
         "lines": []
       },
       {
         "name": "FRACTION_2",
         "type": "int",
+        "value_type": "CONST_PLUS_INT",
         "value": "FRACTION_START + 1",
         "lines": []
       },
       {
         "name": "FRACTION_END",
         "type": "int",
+        "value_type": "CONST",
         "value": "FRACTION_2",
         "lines": [
           "End of Fraction formats (last format)"
@@ -227,6 +247,7 @@
       {
         "name": "CURRENCY_START",
         "type": "int",
+        "value_type": "CONST_PLUS_INT",
         "value": "FRACTION_END + 1",
         "lines": [
           "Start of Currency formats (first format)"
@@ -235,6 +256,7 @@
       {
         "name": "CURRENCY_1000INT",
         "type": "int",
+        "value_type": "CONST",
         "value": "CURRENCY_START",
         "lines": [
           "#,##0 DM",
@@ -245,6 +267,7 @@
       {
         "name": "CURRENCY_1000DEC2",
         "type": "int",
+        "value_type": "CONST_PLUS_INT",
         "value": "CURRENCY_START + 1",
         "lines": [
           "#,##0.00 DM",
@@ -255,6 +278,7 @@
       {
         "name": "CURRENCY_1000INT_RED",
         "type": "int",
+        "value_type": "CONST_PLUS_INT",
         "value": "CURRENCY_START + 2",
         "lines": [
           "#,##0 DM",
@@ -265,6 +289,7 @@
       {
         "name": "CURRENCY_1000DEC2_RED",
         "type": "int",
+        "value_type": "CONST_PLUS_INT",
         "value": "CURRENCY_START + 3",
         "lines": [
           "#,##0.00 DM",
@@ -275,6 +300,7 @@
       {
         "name": "CURRENCY_1000DEC2_CCC",
         "type": "int",
+        "value_type": "CONST_PLUS_INT",
         "value": "CURRENCY_START + 4",
         "lines": [
           "#,##0.00 DEM",
@@ -285,6 +311,7 @@
       {
         "name": "CURRENCY_1000DEC2_DASHED",
         "type": "int",
+        "value_type": "CONST_PLUS_INT",
         "value": "CURRENCY_START + 5",
         "lines": [
           "#,##0.\u2013 DM",
@@ -295,6 +322,7 @@
       {
         "name": "CURRENCY_END",
         "type": "int",
+        "value_type": "CONST",
         "value": "CURRENCY_1000DEC2_DASHED",
         "lines": [
           "End of Currency formats (last format)"
@@ -303,6 +331,7 @@
       {
         "name": "DATE_START",
         "type": "int",
+        "value_type": "CONST_PLUS_INT",
         "value": "CURRENCY_END + 1",
         "lines": [
           "Start of Date formats (first format)"
@@ -311,6 +340,7 @@
       {
         "name": "DATE_SYSTEM_SHORT",
         "type": "int",
+        "value_type": "CONST",
         "value": "DATE_START",
         "lines": [
           "08.10.97",
@@ -321,6 +351,7 @@
       {
         "name": "DATE_SYSTEM_LONG",
         "type": "int",
+        "value_type": "CONST_PLUS_INT",
         "value": "DATE_START + 1",
         "lines": [
           "Wednesday, 8.",
@@ -333,6 +364,7 @@
       {
         "name": "DATE_SYS_DDMMYY",
         "type": "int",
+        "value_type": "CONST_PLUS_INT",
         "value": "DATE_START + 2",
         "lines": [
           "08.10.97",
@@ -343,6 +375,7 @@
       {
         "name": "DATE_SYS_DDMMYYYY",
         "type": "int",
+        "value_type": "CONST_PLUS_INT",
         "value": "DATE_START + 3",
         "lines": [
           "08.10.1997",
@@ -356,36 +389,42 @@
       {
         "name": "DATE_SYS_DMMMYY",
         "type": "int",
+        "value_type": "CONST_PLUS_INT",
         "value": "DATE_START + 4",
         "lines": []
       },
       {
         "name": "DATE_SYS_DMMMYYYY",
         "type": "int",
+        "value_type": "CONST_PLUS_INT",
         "value": "DATE_START + 5",
         "lines": []
       },
       {
         "name": "DATE_DIN_DMMMYYYY",
         "type": "int",
+        "value_type": "CONST_PLUS_INT",
         "value": "DATE_START + 6",
         "lines": []
       },
       {
         "name": "DATE_SYS_DMMMMYYYY",
         "type": "int",
+        "value_type": "CONST_PLUS_INT",
         "value": "DATE_START + 7",
         "lines": []
       },
       {
         "name": "DATE_DIN_DMMMMYYYY",
         "type": "int",
+        "value_type": "CONST_PLUS_INT",
         "value": "DATE_START + 8",
         "lines": []
       },
       {
         "name": "DATE_SYS_NNDMMMYY",
         "type": "int",
+        "value_type": "CONST_PLUS_INT",
         "value": "DATE_START + 9",
         "lines": [
           "Wed, 8. Oct 97",
@@ -396,6 +435,7 @@
       {
         "name": "DATE_DEF_NNDDMMMYY",
         "type": "int",
+        "value_type": "CONST_PLUS_INT",
         "value": "DATE_START + 10",
         "lines": [
           "Wed 08.Oct 97",
@@ -406,6 +446,7 @@
       {
         "name": "DATE_SYS_NNDMMMMYYYY",
         "type": "int",
+        "value_type": "CONST_PLUS_INT",
         "value": "DATE_START + 11",
         "lines": [
           "Wed, 8. October 1997",
@@ -416,6 +457,7 @@
       {
         "name": "DATE_SYS_NNNNDMMMMYYYY",
         "type": "int",
+        "value_type": "CONST_PLUS_INT",
         "value": "DATE_START + 12",
         "lines": [
           "Wednesday, 8. October 1997",
@@ -425,6 +467,7 @@
       {
         "name": "DATE_DIN_MMDD",
         "type": "int",
+        "value_type": "CONST_PLUS_INT",
         "value": "DATE_START + 13",
         "lines": [
           "10-08",
@@ -435,6 +478,7 @@
       {
         "name": "DATE_DIN_YYMMDD",
         "type": "int",
+        "value_type": "CONST_PLUS_INT",
         "value": "DATE_START + 14",
         "lines": [
           "97-10-08",
@@ -445,6 +489,7 @@
       {
         "name": "DATE_DIN_YYYYMMDD",
         "type": "int",
+        "value_type": "CONST_PLUS_INT",
         "value": "DATE_START + 15",
         "lines": [
           "1997-10-08",
@@ -455,6 +500,7 @@
       {
         "name": "DATE_SYS_MMYY",
         "type": "int",
+        "value_type": "CONST_PLUS_INT",
         "value": "DATE_START + 16",
         "lines": [
           "10.97",
@@ -465,6 +511,7 @@
       {
         "name": "DATE_SYS_DDMMM",
         "type": "int",
+        "value_type": "CONST_PLUS_INT",
         "value": "DATE_START + 17",
         "lines": [
           "08.Oct",
@@ -475,6 +522,7 @@
       {
         "name": "DATE_MMMM",
         "type": "int",
+        "value_type": "CONST_PLUS_INT",
         "value": "DATE_START + 18",
         "lines": [
           "October",
@@ -484,6 +532,7 @@
       {
         "name": "DATE_QQJJ",
         "type": "int",
+        "value_type": "CONST_PLUS_INT",
         "value": "DATE_START + 19",
         "lines": [
           "4th quarter 97",
@@ -493,6 +542,7 @@
       {
         "name": "DATE_WW",
         "type": "int",
+        "value_type": "CONST_PLUS_INT",
         "value": "DATE_START + 20",
         "lines": [
           "week of year",
@@ -502,6 +552,7 @@
       {
         "name": "DATE_END",
         "type": "int",
+        "value_type": "CONST",
         "value": "DATE_WW",
         "lines": [
           "End of Date formats (last format)"
@@ -510,6 +561,7 @@
       {
         "name": "TIME_START",
         "type": "int",
+        "value_type": "CONST_PLUS_INT",
         "value": "DATE_END + 1",
         "lines": [
           "Start of Time formats (first format)"
@@ -518,6 +570,7 @@
       {
         "name": "TIME_HHMM",
         "type": "int",
+        "value_type": "CONST",
         "value": "TIME_START",
         "lines": [
           "HH:MM",
@@ -528,6 +581,7 @@
       {
         "name": "TIME_HHMMSS",
         "type": "int",
+        "value_type": "CONST_PLUS_INT",
         "value": "TIME_START + 1",
         "lines": [
           "HH:MM:SS",
@@ -538,6 +592,7 @@
       {
         "name": "TIME_HHMMAMPM",
         "type": "int",
+        "value_type": "CONST_PLUS_INT",
         "value": "TIME_START + 2",
         "lines": [
           "HH:MM AM/PM",
@@ -548,6 +603,7 @@
       {
         "name": "TIME_HHMMSSAMPM",
         "type": "int",
+        "value_type": "CONST_PLUS_INT",
         "value": "TIME_START + 3",
         "lines": [
           "HH:MM:SS AM/PM",
@@ -558,6 +614,7 @@
       {
         "name": "TIME_HH_MMSS",
         "type": "int",
+        "value_type": "CONST_PLUS_INT",
         "value": "TIME_START + 4",
         "lines": [
           "[HH]:MM:SS",
@@ -568,6 +625,7 @@
       {
         "name": "TIME_MMSS00",
         "type": "int",
+        "value_type": "CONST_PLUS_INT",
         "value": "TIME_START + 5",
         "lines": [
           "MM:SS,00",
@@ -578,6 +636,7 @@
       {
         "name": "TIME_HH_MMSS00",
         "type": "int",
+        "value_type": "CONST_PLUS_INT",
         "value": "TIME_START + 6",
         "lines": [
           "[HH]:MM:SS,00",
@@ -588,6 +647,7 @@
       {
         "name": "TIME_END",
         "type": "int",
+        "value_type": "CONST",
         "value": "TIME_HH_MMSS00",
         "lines": [
           "End of Time formats (last format)"
@@ -596,6 +656,7 @@
       {
         "name": "DATETIME_START",
         "type": "int",
+        "value_type": "CONST_PLUS_INT",
         "value": "TIME_END + 1",
         "lines": [
           "Start of DateTime formats (first format)"
@@ -604,6 +665,7 @@
       {
         "name": "DATETIME_SYSTEM_SHORT_HHMM",
         "type": "int",
+        "value_type": "CONST",
         "value": "DATETIME_START",
         "lines": [
           "08.10.97 01:23 Date/time format",
@@ -613,6 +675,7 @@
       {
         "name": "DATETIME_SYS_DDMMYYYY_HHMMSS",
         "type": "int",
+        "value_type": "CONST_PLUS_INT",
         "value": "DATETIME_START + 1",
         "lines": [
           "08.10.1997 01:23:45 Date/time format with second",
@@ -624,6 +687,7 @@
       {
         "name": "DATETIME_END",
         "type": "int",
+        "value_type": "CONST",
         "value": "DATETIME_SYS_DDMMYYYY_HHMMSS",
         "lines": [
           "End of DateTime formats (last format)"
@@ -632,6 +696,7 @@
       {
         "name": "BOOLEAN",
         "type": "int",
+        "value_type": "CONST_PLUS_INT",
         "value": "DATETIME_END + 1",
         "lines": [
           "BOOLEAN format."
@@ -640,6 +705,7 @@
       {
         "name": "TEXT",
         "type": "int",
+        "value_type": "CONST_PLUS_INT",
         "value": "BOOLEAN + 1",
         "lines": [
           "Text format."
@@ -648,6 +714,7 @@
       {
         "name": "INDEX_TABLE_ENTRIES",
         "type": "int",
+        "value_type": "CONST_PLUS_INT",
         "value": "TEXT + 1",
         "lines": [
           "count of built-in format codes."
