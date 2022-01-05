@@ -455,8 +455,7 @@ class WriterTypeDef(base.WriteBase):
         if self._write_template_long is False:
             return self._template
         t = self._template
-        
-        
+        t = t.replace('{libre_office_ver}', base.APP_CONFIG.libre_office_ver)
         t = t.replace('{name}', t_def.name)
         t = t.replace('{ns}', str(self._p_namespace))
         t = t.replace('{link}', self._p_url)

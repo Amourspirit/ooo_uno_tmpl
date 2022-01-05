@@ -1382,6 +1382,8 @@ class ConstWriter(base.WriteBase):
     def _set_template_data(self):
         if self._write_template_long is False:
             return
+        self._template = self._template.replace(
+            '{libre_office_ver}', base.APP_CONFIG.libre_office_ver)
         self._template = self._template.replace('{hex}', str(self._hex))
         self._template = self._template.replace('{flags}', str(self._flags))
         self._template = self._template.replace('{name}', self._p_name)

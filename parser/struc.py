@@ -571,6 +571,8 @@ class StructWriter(base.WriteBase):
         if self._write_template_long is False:
             return
         self._template = self._template.replace(
+            '{libre_office_ver}', base.APP_CONFIG.libre_office_ver)
+        self._template = self._template.replace(
             '{dynamic_struct}', str(self._dynamic_struct))
         self._template = self._template.replace('{sort}', str(self._sort))
 

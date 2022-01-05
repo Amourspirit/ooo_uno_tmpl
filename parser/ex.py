@@ -341,6 +341,8 @@ class WriterEx(base.WriteBase):
     def _set_template_data(self):
         if self._write_template_long is False:
             return
+        self._template = self._template.replace(
+            '{libre_office_ver}', base.APP_CONFIG.libre_office_ver)
         self._template = self._template.replace('{name}', self._p_name)
         self._template = self._template.replace('{ns}', str(self._p_namespace))
         self._template = self._template.replace('{link}', self._p_url)
