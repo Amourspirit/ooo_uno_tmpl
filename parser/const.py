@@ -58,7 +58,10 @@ class ValTypeEnum(IntEnum):
     """Const is a another value in the same constant class"""
     CONST_PLUS_INT = auto()
     """Const is a another value in the same constant class with a + int value"""
-
+    CONST_MINUS_INT = auto()
+    """Const is a another value in the same constant class with a - int value"""
+    def __str__(self) -> str:
+        return self._name_
 
 @dataclass
 class Val:
@@ -569,6 +572,7 @@ class RulePreviousNamePlusMinusInt(RuleBase):
     def __init__(self, rules: IRules) -> None:
         super().__init__(rules=rules)
         self._val = None
+        self._sep = None
 
     def get_is_match(self, tag: Tag) -> bool:
         self._val = None
@@ -581,11 +585,11 @@ class RulePreviousNamePlusMinusInt(RuleBase):
             return False
         name_plus: str = parts[1].strip()
         # looking for format of TIME_START+4 or TIME_START + 4
-        sep = '+'
-        parts = name_plus.split(sep)
+        self._sep = '+'
+        parts = name_plus.split(self._sep)
         if len(parts) != 2:
-            sep = '-'
-            parts = name_plus.split(sep)
+            self._sep = '-'
+            parts = name_plus.split(self._sep)
             if len(parts) != 2:
                 return False
         name = parts[0].strip()
@@ -596,7 +600,7 @@ class RulePreviousNamePlusMinusInt(RuleBase):
             i = int(parts[1].strip())
         except:
             return False
-        self._val = name + ' ' + sep + ' ' + str(i)
+        self._val = name + ' ' + self._sep + ' ' + str(i)
         return True
 
     def get_val(self) -> Val:
@@ -611,6 +615,8 @@ class RulePreviousNamePlusMinusInt(RuleBase):
             result = Val(text=si.name,
                          identity=self.identity, is_flags=False,
                          val_type=ValTypeEnum.CONST_PLUS_INT, values=[self._val])
+            if self._sep == '-':
+                result.val_type = ValTypeEnum.CONST_MINUS_INT
             self._val = None
             self._rules.set_cached(result)
             return result
@@ -1168,6 +1174,7 @@ class Parser(base.ParserBase):
                 d_itm = {
                     "name": itm.name,
                     "type": itm.type,
+                    "value_type": str(itm.val.val_type),
                     "value": itm.value,
                     "lines": itm.lines
                 }
@@ -1745,4 +1752,4 @@ def main():
     w.write()
  
 if __name__ == '__main__':
-    main()
+    _main()
