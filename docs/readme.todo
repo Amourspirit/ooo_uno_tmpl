@@ -7,7 +7,18 @@
     ☐ Add include desc to typedef
     ☐ Add include desc to Interface
 
-☐ @critical Fix issue when inherited name is the samme as the class name
+☐ @high Fix issue that classes are being used as inherits when they are already inherited by a parent class.
+    This wasd fix so I thought.
+    Most likely have to do comparsion on full namespace names.
+    See: https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1awt_1_1AccessibleButton.html
+    
+☐ Template adjustments
+    ☐ Enums leave extra space in enum description if there is no description available.
+        See: scratch/uno_obj/text/note_print_mode.py
+    ✔ Properties not indenting descriptions properly @done(21-12-26 14:24)
+        see: scratch/uno_obj/animations/x_iterate_container.py
+
+✔ @critical Fix issue when inherited name is the samme as the class name @done(22-01-05 18:54)
     See: https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1sdb_1_1TableDescriptor.html
     See: https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1sdb_1_1Table.html
     Perhash modify to have an import as option such as from ..sdbcx.table_descriptor import TableDescriptor as TableDescriptor_
@@ -18,12 +29,6 @@
 
 ✔ Check Singleton Types @done(22-01-01 17:54)
     See: DataAccessDescriptorFactory: https://api.libreoffice.org/docs/idl/ref/singletoncom_1_1sun_1_1star_1_1sdb_1_1DataAccessDescriptorFactory.html
-    
-☐ Template adjustments
-    ☐ Enums leave extra space in enum description if there is no description available.
-        See: scratch/uno_obj/text/note_print_mode.py
-    ✔ Properties not indenting descriptions properly @done(21-12-26 14:24)
-        see: scratch/uno_obj/animations/x_iterate_container.py
 
 ✔ import for xsrc are somtimes not importing with correct realitive path @done(21-12-28 06:28)
     This is the case when importing enums from the same namespace.
