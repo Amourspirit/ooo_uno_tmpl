@@ -165,20 +165,28 @@ class PythonType(object):
         p_type.children.extend(self.children)
         return p_type
 
-    def get_all_imports(self) -> Set[str]:
+    def get_all_imports(self, ns: Optional[str] = None) -> Set[str]:
         """
         Get import for inststance and allof children recursivly
 
         Returns:
             Set[str]: Set containing all imports
         """
-        def _get_imports(p_type: PythonType, imports: Set[str]) -> None:
+
+        def get_full_ns(namespace: Union[str, None], name: str) -> str:
+            if not namespace:
+                return name
+            if name.find('.') < 0:
+                return f"{namespace}.{name}"
+            return name
+
+        def get_imports(p_type: PythonType, imports: Set[str], ns_fn:callable) -> None:
             if p_type.imports:
-                imports.add(p_type.imports)
+                imports.add(ns_fn(ns, p_type.imports))
             for child in p_type.children:
-                _get_imports(child, imports)
+                get_imports(child, imports)
         im: Set[str] = set()
-        _get_imports(self, im)
+        get_imports(self, im, get_full_ns)
         return im
 
     def is_default(self) -> bool:
