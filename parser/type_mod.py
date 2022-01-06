@@ -169,6 +169,10 @@ class PythonType(object):
         """
         Get import for inststance and allof children recursivly
 
+        Args:
+            ns (str, optional): Optional namespace. When present all namesapces
+                that do not contain a ``.`` will be prepended with this value.
+
         Returns:
             Set[str]: Set containing all imports
         """
@@ -248,6 +252,8 @@ class TypeRules(ITypeRules):
     def __init__(self, ns: Optional[str] = None) -> None:
         self._rules: List[type[ITypeRule]] = []
         self._ns = ns
+        if self._ns:
+            self._ns = self._ns.replace('com.sun.star.', '')
         self._cache = {}
         self._register_known_rules()
 
@@ -334,7 +340,11 @@ class TypeRules(ITypeRules):
 
     @property
     def namespace(self) -> Union[str, None]:
-        """Gets optional namespace value"""
+        """
+        Gets optional namespace value
+        
+        This property will not start with 'com.sun.star'
+        """
         return self._ns
 
 # endregion Rules Engine
@@ -363,7 +373,7 @@ class BaseRule(ITypeRule):
             return name
         if name.find('.') < 0:
             return f"{self._rules.namespace}.{name}"
-        return name
+        return name.replace('com.sun.star.', '')
 
     def _get_clean_type(self, in_type: str) -> str:
         """
@@ -469,7 +479,7 @@ class RuleComType(BaseRule):
         g = self._match.groups()
         s_type: str = self._get_clean_type(g[0])  # like com.sun.star.beans.Pair
         if self.rules.namespace:
-            s = s_type
+            s = self._get_full_ns(s_type)
         else:
             parts = s_type.rsplit(sep='.', maxsplit=1)
             s = parts.pop()
@@ -700,7 +710,7 @@ class RuleSeqLikeNonPrim(BaseRule):
             realtype=realtype
         )
         if not is_py_type:
-            p_type.imports = self._get_full_ns(inner_str)
+            p_type.imports = inner_str
         return p_type
 
 
