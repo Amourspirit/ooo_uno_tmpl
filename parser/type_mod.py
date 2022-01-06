@@ -184,7 +184,7 @@ class PythonType(object):
             if p_type.imports:
                 imports.add(ns_fn(ns, p_type.imports))
             for child in p_type.children:
-                get_imports(child, imports)
+                get_imports(child, imports, ns_fn)
         im: Set[str] = set()
         get_imports(self, im, get_full_ns)
         return im
