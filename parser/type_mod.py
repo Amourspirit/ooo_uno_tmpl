@@ -2,12 +2,14 @@
 """
 Handles conversion of LibreOffice types to Python Types
 """
+# region Imports
 import re
-from abc import ABC, abstractmethod
+from abc import ABC, abstractmethod, abstractproperty
 from typing import List, Match, Optional, Set, Union
+# endregion Imports
 
+# region Maps
 # hyper is 64 bit int, singed or unsinged. https://ask.libreoffice.org/t/basic-hyper-and-unsigned-hyper/22510
-
 TYPE_MAP_PRIMITIVE = {
     "any": "object",
     "byte": "int",
@@ -38,6 +40,9 @@ TYPE_MAP_PY_WRAPPER = {
     "list": "typing.List",
     "tuple": "typing.Tuple"
 }
+# endregion Maps
+
+# region PythonType
 class PythonType(object):
     # region Constructor
     def __init__(
@@ -47,7 +52,7 @@ class PythonType(object):
         is_py_type: bool = True,
         children: Optional[List['PythonType']] = None,
         realtype: str = 'object'
-        ) -> None:
+    ) -> None:
         self._type = type
         self._requires_typing = requires_typing
         self._imports = imports
@@ -57,19 +62,19 @@ class PythonType(object):
             self._children = []
         else:
             self._children = children
-        
+
     # endregion Constructor
 
     # region Properties
     @property
     def type(self) -> str:
         """Specifies type
-    
+
             :getter: Gets type value.
             :setter: Sets type value.
         """
         return self._type
-    
+
     @type.setter
     def type(self, value: str):
         self._default_check()
@@ -78,12 +83,12 @@ class PythonType(object):
     @property
     def requires_typing(self) -> bool:
         """Specifies requires_typing
-    
+
             :getter: Gets requires_typing value.
             :setter: Sets requires_typing value.
         """
         return self._requires_typing
-    
+
     @requires_typing.setter
     def requires_typing(self, value: bool):
         self._default_check()
@@ -106,12 +111,12 @@ class PythonType(object):
     @property
     def is_py_type(self) -> bool:
         """Specifies is_py_type
-    
+
             :getter: Gets is_py_type value.
             :setter: Sets is_py_type value.
         """
         return self._is_py_type
-    
+
     @is_py_type.setter
     def is_py_type(self, value: bool):
         self._default_check()
@@ -140,7 +145,8 @@ class PythonType(object):
     # region Methods
     def _default_check(self):
         if self.is_default():
-            raise Exception('PythonType Default instance is not allow to be modifiled. Perhaps create a copy first.')
+            raise Exception(
+                'PythonType Default instance is not allow to be modifiled. Perhaps create a copy first.')
 
     def copy(self) -> 'PythonType':
         """
@@ -183,24 +189,28 @@ class PythonType(object):
             bool: ``True`` if this instance is the same as the default instance; Otherwise, ``False``
         """
         return self is DEFAULT_PYTHON_TYPE
-    
+
     # endregion Methods
 
 
 DEFAULT_PYTHON_TYPE = PythonType()
+# endregion PythonType
+
+# region Interfaces
+
 class ITypeRule(ABC):
     @abstractmethod
     def __init__(self, rules: 'ITypeRules') -> None:
         """Constructor"""
     @abstractmethod
-    def get_is_match(self, in_type:str) -> bool:
+    def get_is_match(self, in_type: str) -> bool:
         """
         Gets if rule is a match
-        
+
         Args:
             in_type (str): LibreOffice Api type such as Long.
         """
-    
+
     @abstractmethod
     def get_python_type(self, in_type: str) -> PythonType:
         """
@@ -220,13 +230,19 @@ class ITypeRules(ABC):
     def get_rule_instance(self, rule: ITypeRule) -> ITypeRule:
         """Gets a rule instance"""
 
+    @abstractproperty
+    def namespace(self) -> Union[str, None]:
+        """Gets optional namespace value"""
+# endregion Interfaces
 
+# region Rules Engine
 class TypeRules(ITypeRules):
-    def __init__(self) -> None:
+    def __init__(self, ns: Optional[str] = None) -> None:
         self._rules: List[type[ITypeRule]] = []
+        self._ns = ns
         self._cache = {}
         self._register_known_rules()
-    
+
     def register_rule(self, rule: type[ITypeRule]) -> None:
 
         if not issubclass(rule, ITypeRule):
@@ -254,7 +270,6 @@ class TypeRules(ITypeRules):
             msg = f"{self.__class__.__name__}.unregister_rule() Unable to unregister rule."
             raise ValueError(msg) from e
 
-
     def _reg_rule(self, rule: type[ITypeRule]):
         self._rules.append(rule)
 
@@ -275,8 +290,8 @@ class TypeRules(ITypeRules):
         self._reg_rule(rule=RuleTuple2Like)
         self._reg_rule(rule=RuleSeqLikePair)
 
-    def _get_rule(self, in_type:str) -> Union[ITypeRule, None]:
-        
+    def _get_rule(self, in_type: str) -> Union[ITypeRule, None]:
+
         match_inst = None
         for rule in self._rules:
             key = str(id(rule))
@@ -296,7 +311,7 @@ class TypeRules(ITypeRules):
         if match:
             return match.get_python_type(_in)
         return DEFAULT_PYTHON_TYPE
-    
+
     def get_rule_instance(self, rule: ITypeRule) -> ITypeRule:
         if not issubclass(rule, ITypeRule):
             msg = "TypeRules.get_rule_instance(), rule arg must be child class of ITypeRule"
@@ -304,12 +319,66 @@ class TypeRules(ITypeRules):
             raise TypeError(msg)
         key = str(id(rule))
         if key in self._cache:
-                return self._cache[key]
+            return self._cache[key]
         else:
             self._cache[key] = rule(self)
         return self._cache[key]
-    
 
+    @property
+    def namespace(self) -> Union[str, None]:
+        """Gets optional namespace value"""
+        return self._ns
+
+# endregion Rules Engine
+
+# region Rules
+# region    Base Class
+class BaseRule(ITypeRule):
+    def __init__(self, rules: ITypeRules) -> None:
+        self._rules = rules
+
+    # region Methods
+    def _get_full_ns(self, name: str) -> str:
+        """
+        Gets name with namespace prepended if namespace is available.
+
+        If ``name`` has ``.`` then ``name`` is returnd verbatium.
+        Otherwise, namespace is prepended if available
+
+        Args:
+            name (str): [description]
+
+        Returns:
+            str: [description]
+        """
+        if not self._rules.namespace:
+            return name
+        if name.find('.') < 0:
+            return f"{self._rules.namespace}.{name}"
+        return name
+
+    def _get_clean_type(self, in_type: str) -> str:
+        """
+        Gets a cleaned type string. Leading ``.`` and spaces are removed.
+
+        Args:
+            in_type (str): String to clean
+
+        Returns:
+            str: cleaned result
+        """
+        s = in_type.lstrip(".").strip()
+        return s
+    # endregion Methods
+
+    # region Properties
+    @property
+    def rules(self) -> ITypeRules:
+        """Gets rules value"""
+        return self._rules
+    # endregion Properties
+
+# endregion Base Class
 class RuleNone(ITypeRule):
     def __init__(self, rules: ITypeRules) -> None:
         self._rules = rules
@@ -325,13 +394,14 @@ class RuleNone(ITypeRule):
             realtype=None
         )
 
+
 class RulePrimative(ITypeRule):
     def __init__(self, rules: ITypeRules) -> None:
-        self._rules =rules
+        self._rules = rules
 
     def get_is_match(self, in_type: str) -> bool:
         return in_type in TYPE_MAP_PRIMITIVE
-    
+
     def get_python_type(self, in_type: str) -> PythonType:
         s = TYPE_MAP_PRIMITIVE[in_type]
         return PythonType(
@@ -359,11 +429,11 @@ class RuleKnownPrimative(ITypeRule):
         )
 
 
-class RuleComType(ITypeRule):
+class RuleComType(BaseRule):
     """Matches types that start wihh com.sun.star. such as com.sun.star.uno.XInterface"""
 
     def __init__(self, rules: ITypeRules) -> None:
-        self._rules = rules
+        super().__init__(rules=rules)
         self._rx = re.compile(r"[.]*(com\.sun\.star\.[a-zA-Z0-9_.]+)$")
         self._match: Union[Match[str], None] = False
 
@@ -371,10 +441,10 @@ class RuleComType(ITypeRule):
         if not self._match is False:
             return
         self._match = self._rx.match(in_type)
-    
+
     def _set_default(self):
         self._match = False
-    
+
     def get_is_match(self, in_type: str) -> bool:
         self._set_default()
         self._set_match(in_type)
@@ -389,107 +459,46 @@ class RuleComType(ITypeRule):
             msg += "Did you forget to call get_is_match()?"
             raise Exception(msg)
         g = self._match.groups()
-        s_type: str = g[0]  # like com.sun.star.beans.Pair
-        parts = s_type.rsplit(sep='.', maxsplit=1)
-        s = parts.pop()
+        s_type: str = self._get_clean_type(g[0])  # like com.sun.star.beans.Pair
+        if self.rules.namespace:
+            s = s_type
+        else:
+            parts = s_type.rsplit(sep='.', maxsplit=1)
+            s = parts.pop()
         return PythonType(
-            type = s,
-            requires_typing = False,
-            imports = s_type,
-            is_py_type = False,
+            type=s,
+            requires_typing=False,
+            imports=s_type,
+            is_py_type=False,
             realtype=s
         )
 
 
-class RuleKnownItterType(ITypeRule):
+class RuleKnownItterType(BaseRule):
     """Rule for Known itter uno types such as sequence"""
 
     def __init__(self, rules: ITypeRules) -> None:
-        self._rules = rules
-    
+        super().__init__(rules=rules)
+
     def get_is_match(self, in_type: str) -> bool:
         return in_type in TYPE_MAP_KNOWN_ITTER
 
     def get_python_type(self, in_type: str) -> PythonType:
         s = TYPE_MAP_KNOWN_ITTER[in_type]
         return PythonType(
-            type = s,
-            requires_typing = False,
-            is_py_type = True,
-            realtype = s
+            type=s,
+            requires_typing=False,
+            is_py_type=True,
+            realtype=s
         )
 
 
-class RuleBaseWord(ITypeRule):
-    """Abstrace Class: Matches types that start with a word"""
-    # https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1sdb_1_1RowsChangeEvent.html
-
-    def __init__(self, rules: ITypeRules) -> None:
-        self._rules = rules
-
-    def _get_ptype(self, in_type: str) -> PythonType:
-            return self._rules.get_python_type(in_type)
-
-    def get_is_match(self, in_type: str) -> bool:
-        word = self._get_word()
-        if in_type.startswith(word):
-            parts = in_type.split()
-            if len(parts) > 1:
-                return True
-        return False
-
-    def get_python_type(self, in_type: str) -> PythonType:
-        s = in_type.split(maxsplit=1)[1]
-        return self._get_ptype(s)
-
-    @abstractmethod
-    def _get_word(self) -> str:
-        """Word to match"""
-
-
-class RuleTypeDef(RuleBaseWord):
-    """Matches types that start with typedef"""
-    # https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1sdb_1_1RowsChangeEvent.html
-
-    def _get_word(self) -> str:
-        return 'typedef ' # space on purpose
-
-
-class RuleWordLong(RuleBaseWord):
-    """Matches types that start with long and have more then one word"""
-
-    def _get_word(self) -> str:
-        return 'long '  # space on purpose
-
-
-class RuleWordHyper(RuleBaseWord):
-    """Matches types that start with hyper and have more then one word"""
-
-    def _get_word(self) -> str:
-        return 'hyper '  # space on purpose
-
-class RuleWordShort(RuleBaseWord):
-    """Matches types that start with short and have more then one word"""
-
-    def _get_word(self) -> str:
-        return 'short '  # space on purpose
-class RuleWordSigned(RuleBaseWord):
-    """Matches types that start with signed"""
-
-    def _get_word(self) -> str:
-        return 'signed '  # space on purpose
-
-class RuleWordUnSigned(RuleBaseWord):
-    """Matches types that start with unsigned"""
-
-    def _get_word(self) -> str:
-        return 'unsigned '  # space on purpose
-class RuleSeqLikePrimative(ITypeRule):
+class RuleSeqLikePrimative(BaseRule):
     """Matches single sequence or simalar, such as aDXArray, that does have primitive inner type"""
 
     def __init__(self, rules: ITypeRules) -> None:
-        self._rules = rules
-        self._prim: RulePrimative = self._rules.get_rule_instance(
+        super().__init__(rules=rules)
+        self._prim: RulePrimative = self.rules.get_rule_instance(
             RulePrimative)
         self._rx = re.compile(r"([a-zA-Z]+)<[ ]*([a-zA-Z]+)[ ]*>")
         self._match: Union[Match[str], None] = False
@@ -499,7 +508,7 @@ class RuleSeqLikePrimative(ITypeRule):
         # do not match
         # sequence< com.sun.star.beans.Pair< string, string > >
 
-    def _set_match(self, in_type: str)-> None:
+    def _set_match(self, in_type: str) -> None:
         if not self._match is False:
             return
         self._match = self._rx.match(in_type)
@@ -508,7 +517,7 @@ class RuleSeqLikePrimative(ITypeRule):
         if self._wrapper_type:
             return self._wrapper_type
         self._recursive_state = True
-        self._wrapper_type = self._rules.get_python_type(in_type=in_type)
+        self._wrapper_type = self.rules.get_python_type(in_type=in_type)
         self._recursive_state = False
 
     def _set_default(self):
@@ -534,7 +543,7 @@ class RuleSeqLikePrimative(ITypeRule):
         if self._wrapper_type.requires_typing:
             return False
         return True
-        
+
     def get_python_type(self, in_type: str) -> PythonType:
         self._set_match(in_type)
         if not self._match:
@@ -553,20 +562,25 @@ class RuleSeqLikePrimative(ITypeRule):
             w = f"typing.List[{p_type.type}]"
             realtype = 'list'
         result = PythonType(
-            type = w,
+            type=w,
             requires_typing=True,
             is_py_type=p_type.is_py_type,
-            realtype = realtype
+            realtype=realtype
         )
         result.children.append(p_type)
         return result
 
-class RuleSeqLikeNonPrim(ITypeRule):
-    """Matches single sequence or simalar, such as aDXArray, that does not have primitive inner type"""
+
+class RuleSeqLikeNonPrim(BaseRule):
+    """
+    Matches single sequence or simalar, such as aDXArray or sequence, that does not have primitive inner type.
+
+    Will not match types that are not started with a single word such as ``com.sun.star.beans.Pair<...>``.
+    """
 
     def __init__(self, rules: ITypeRules) -> None:
-        self._rules = rules
-        self._seq_prim = self._rules.get_rule_instance(RuleSeqLikePrimative)
+        super().__init__(rules=rules)
+        self._seq_prim = self.rules.get_rule_instance(RuleSeqLikePrimative)
         self._rx = re.compile(r"([a-zA-Z]+)<[ ]*([a-zA-Z0-9._]+)[ ]*>")
         self._match: Union[Match[str], None] = False
         self._wrapper_type: PythonType = None
@@ -580,9 +594,14 @@ class RuleSeqLikeNonPrim(ITypeRule):
     def _set_wrapper(self, in_type: str):
         if self._wrapper_type:
             return self._wrapper_type
-        self._recursive_state = True
-        self._wrapper_type = self._rules.get_python_type(in_type=in_type)
-        self._recursive_state = False
+        try:
+            self._recursive_state = True
+            self._wrapper_type = self.rules.get_python_type(in_type=in_type)
+        except Exception as e:
+            raise Exception(
+                f"{self.__class__.__name__}._set_wrapper() error") from e
+        finally:
+            self._recursive_state = False
 
     def _set_default(self):
         self._match = False
@@ -591,8 +610,11 @@ class RuleSeqLikeNonPrim(ITypeRule):
     def _get_ptype(self, in_type: str) -> PythonType:
         try:
             self._recursive_state = True
-            result = self._rules.get_python_type(in_type)
+            result = self.rules.get_python_type(in_type)
             return result
+        except Exception as e:
+            raise Exception(
+                f"{self.__class__.__name__}._get_ptype() error") from e
         finally:
             self._recursive_state = False
 
@@ -622,31 +644,37 @@ class RuleSeqLikeNonPrim(ITypeRule):
             raise Exception(msg)
         is_py_type = False
         wrapper_str: str = self._match.groups()[0]
-        inner_str: str = self._match.groups()[1]
-        inner_str = inner_str.lstrip(".").lstrip()
+        inner_str = self._get_clean_type(self._match.groups()[1])
         parts = inner_str.split('.')
+        t_name = parts.pop()
         # t_name can not be a primative because primative sequence rule has
         # ruled it out.
-        t_name = parts.pop()
+
+        # if rules namespace is available then assume full namespace for type
+        if self._rules.namespace:
+            t_name_full = self._get_full_ns(inner_str)
+        else:
+            t_name_full = t_name
+
         child = self._get_ptype(t_name)
         if child.is_default():
             child = child.copy()
         if child.type == 'object':
             # default, t_name will never be object
-            child.type = t_name
-            child.realtype = t_name
+            child.type = t_name_full
+            child.realtype = t_name_full
             child.is_py_type = False
             child.requires_typing = True
         if t_name in TYPE_MAP_KNOWN_PRIMITAVE:
-            t_name = TYPE_MAP_KNOWN_PRIMITAVE[t_name]
+            t_name_full = TYPE_MAP_KNOWN_PRIMITAVE[t_name]
             is_py_type = True
             child.is_py_type = True
             child.children.clear()
             child.imports = None
             child.is_py_type = True
             child.requires_typing = False
-            child.type = t_name
-            child.realtype = t_name
+            child.type = t_name_full
+            child.realtype = t_name_full
         self._set_wrapper(wrapper_str)
         if self._wrapper_type.type in TYPE_MAP_PY_WRAPPER:
             realtype = self._wrapper_type.type
@@ -657,22 +685,27 @@ class RuleSeqLikeNonPrim(ITypeRule):
             w = f"typing.List[{child.type}]"
 
         p_type = PythonType(
-            type = w,
-            requires_typing = True,
-            is_py_type = is_py_type,
-            children = [child],
-            realtype = realtype
+            type=w,
+            requires_typing=True,
+            is_py_type=is_py_type,
+            children=[child],
+            realtype=realtype
         )
         if not is_py_type:
-            p_type.imports = inner_str
+            p_type.imports = self._get_full_ns(inner_str)
         return p_type
 
-class RuleSeqLikePair(ITypeRule):
-    """Matches single sequence with embeded pair such as sequence< com.sun.star.beans.Pair< string, string > >"""
+
+class RuleSeqLikePair(BaseRule):
+    """
+    Matches single sequence with embeded pair such as ``sequence< com.sun.star.beans.Pair< string, string > >``
+
+    Will not match types that are not started with a single word such as ``com.sun.star.beans.Pair<<...>>``.
+    """
 
     def __init__(self, rules: ITypeRules) -> None:
-        self._rules = rules
-        self._seq_prim = self._rules.get_rule_instance(RuleSeqLikePrimative)
+        super().__init__(rules=rules)
+        self._seq_prim = self.rules.get_rule_instance(RuleSeqLikePrimative)
         # https://regex101.com/r/yd32Z6/1
         self._rx = re.compile(r"([a-zA-Z]+)<[ ]*([a-zA-Z0-9._]+[ ]*<.*>)[ ]*>")
         self._match: Union[Match[str], None] = False
@@ -687,9 +720,14 @@ class RuleSeqLikePair(ITypeRule):
     def _set_wrapper(self, in_type: str):
         if self._wrapper_type:
             return self._wrapper_type
-        self._recursive_state = True
-        self._wrapper_type = self._rules.get_python_type(in_type=in_type)
-        self._recursive_state = False
+        try:
+            self._recursive_state = True
+            self._wrapper_type = self.rules.get_python_type(in_type=in_type)
+        except Exception as e:
+            raise Exception(
+                f"{self.__class__.__name__}._set_wrapper() error") from e
+        finally:
+            self._recursive_state = False
 
     def _set_default(self):
         self._match = False
@@ -707,12 +745,14 @@ class RuleSeqLikePair(ITypeRule):
     def _get_ptype(self, in_type: str) -> PythonType:
         try:
             self._recursive_state = True
-            result = self._rules.get_python_type(in_type)
+            result = self.rules.get_python_type(in_type)
             return result
+        except Exception as e:
+            raise Exception(
+                f"{self.__class__.__name__}._get_ptype() error") from e
         finally:
             self._recursive_state = False
-        
-    
+
     def get_python_type(self, in_type: str) -> PythonType:
         self._set_match(in_type)
         if not self._match:
@@ -720,7 +760,7 @@ class RuleSeqLikePair(ITypeRule):
             msg += "Did you forget to call get_is_match()?"
             raise Exception(msg)
 
-        #sequence
+        # sequence
         wrapper_str: str = self._match.groups()[0]
 
         # com.sun.star.beans.Pair< string, string >
@@ -736,24 +776,21 @@ class RuleSeqLikePair(ITypeRule):
         else:
             realtype = 'list'
             w = f"typing.List[{p_inner.type}]"
-        # if len(p_inner.imports) > 0:
-        #     w = "'" + w + "'"
         p_type = PythonType(
-            type = w,
-            requires_typing = True,
-            is_py_type = p_inner.is_py_type,
-            realtype = realtype
+            type=w,
+            requires_typing=True,
+            is_py_type=p_inner.is_py_type,
+            realtype=realtype
         )
         p_type.children.append(p_inner)
-        # p_type.imports.update(p_inner.imports)
         return p_type
 
 
-class RuleTuple2Like(ITypeRule):
+class RuleTuple2Like(BaseRule):
     """Matches items that can be converted to tuple such as com.sun.star.beans.Pair< string, string >"""
 
     def __init__(self, rules: ITypeRules) -> None:
-        self._rules = rules
+        super().__init__(rules=rules)
         self._seq_prim = self._rules.get_rule_instance(RuleSeqLikePrimative)
         # https://regex101.com/r/aOHaCG/1
         self._rx = re.compile(
@@ -778,15 +815,14 @@ class RuleTuple2Like(ITypeRule):
             return False
         return True
 
-    def _get_clean_type(self, in_type: str) -> str:
-        s = in_type.lstrip(".").lstrip()
-        return s
-
     def _get_ptype(self, in_type: str) -> PythonType:
         try:
             self._recursive_state = True
-            result = self._rules.get_python_type(in_type)
+            result = self.rules.get_python_type(in_type)
             return result
+        except Exception as e:
+            raise Exception(
+                f"{self.__class__.__name__}._get_ptype() error") from e
         finally:
             self._recursive_state = False
 
@@ -797,9 +833,10 @@ class RuleTuple2Like(ITypeRule):
             msg += "Did you forget to call get_is_match()?"
             raise Exception(msg)
         g = self._match.groups()
-        s_type: str = self._get_clean_type(g[0])  # like com.sun.star.beans.Pair
-        s_one: str = self._get_clean_type(g[1])
-        s_two: str = self._get_clean_type(g[2])
+        s_type: str = self._get_clean_type(
+            g[0])  # like com.sun.star.beans.Pair
+        s_one: str = self._get_clean_type(g[1])   # first of pair
+        s_two: str = self._get_clean_type(g[2])   # second of pair
         if s_type in TYPE_MAP_KNOWN_ITTER:
             p_type = PythonType(
                 type=TYPE_MAP_KNOWN_ITTER[s_type],
@@ -818,11 +855,89 @@ class RuleTuple2Like(ITypeRule):
         else:
             realtype = 'tuple'
             f_str = f"typing.Tuple[{p_type_one.type}, {p_type_two.type}]"
-        # if len(p_type_one.imports) > 0 or len(p_type_two.imports) > 0:
-        #     f_str = f"'{f_str}'"
-        r_type = PythonType(type=f_str, realtype=realtype, requires_typing=True)
-        r_type.imports = p_type.imports
+        r_type = PythonType(type=f_str, realtype=realtype,
+                            requires_typing=True)
+        # r_type will be of type from TYPE_MAP_PY_WRAPPER or tuple
+        # eithor way r_type will not have import but children may
+        # r_type.imports = p_type.imports
         r_type.is_py_type = p_type.is_py_type and p_type_one.is_py_type and p_type_two.is_py_type
         r_type.children.append(p_type_one)
         r_type.children.append(p_type_two)
         return r_type
+
+# region    Word based rules
+
+
+class RuleBaseWord(BaseRule):
+    """Abstrace Class: Matches types that start with a word such as ``typedef``"""
+    # https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1sdb_1_1RowsChangeEvent.html
+
+    def __init__(self, rules: ITypeRules) -> None:
+        super().__init__(rules=rules)
+
+    def _get_ptype(self, in_type: str) -> PythonType:
+        # allow recursion for all subclasses by default. There may be more than word in a row such as 'long long ...'
+        return self.rules.get_python_type(in_type)
+
+    def get_is_match(self, in_type: str) -> bool:
+        word = self._get_word()
+        if in_type.startswith(word):
+            parts = in_type.split()
+            if len(parts) > 1:
+                return True
+        return False
+
+    def get_python_type(self, in_type: str) -> PythonType:
+        # drop the first word
+        s = in_type.split(maxsplit=1)[1]
+        return self._get_ptype(s)
+
+    @abstractmethod
+    def _get_word(self) -> str:
+        """Word to match"""
+
+
+class RuleTypeDef(RuleBaseWord):
+    """Matches types that start with typedef"""
+    # https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1sdb_1_1RowsChangeEvent.html
+
+    def _get_word(self) -> str:
+        return 'typedef '  # space on purpose
+
+
+class RuleWordLong(RuleBaseWord):
+    """Matches types that start with long and have more then one word"""
+
+    def _get_word(self) -> str:
+        return 'long '  # space on purpose
+
+
+class RuleWordHyper(RuleBaseWord):
+    """Matches types that start with hyper and have more then one word"""
+
+    def _get_word(self) -> str:
+        return 'hyper '  # space on purpose
+
+
+class RuleWordShort(RuleBaseWord):
+    """Matches types that start with short and have more then one word"""
+
+    def _get_word(self) -> str:
+        return 'short '  # space on purpose
+
+
+class RuleWordSigned(RuleBaseWord):
+    """Matches types that start with signed"""
+
+    def _get_word(self) -> str:
+        return 'signed '  # space on purpose
+
+
+class RuleWordUnSigned(RuleBaseWord):
+    """Matches types that start with unsigned"""
+
+    def _get_word(self) -> str:
+        return 'unsigned '  # space on purpose
+
+# endregion Word based rules
+# endregion Rules
