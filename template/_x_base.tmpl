@@ -50,8 +50,8 @@ $self.get_from_import($name, $imp)
 #end for
 #if len($from_imports_typing) > 0
 if typing.TYPE_CHECKING:
-#for $frm, $imp in $from_imports_typing
-    from $frm import $imp
+#for $imp in $from_imports_typing
+    $self.get_from_import($name, $imp)
 #end for
 #end if
 

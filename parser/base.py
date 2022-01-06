@@ -39,7 +39,8 @@ from datetime import datetime, timezone
 _app_root = os.environ.get('project_root', str(Path(__file__).parent.parent))
 if not _app_root in sys.path:
     sys.path.insert(0, _app_root)
-from parser.type_mod import TypeRules, PythonType
+from parser.mod_type import TypeRules, PythonType
+from parser import mod_rel as RelInfo
 from config import AppConfig, read_config_default
 # endregion imports
 
@@ -875,6 +876,8 @@ class ApiNamespace(BlockObj):
     def __init__(self, soup: SoupObj):
         super().__init__(soup)
         self._data = None
+        self.__namespace_str = None
+        self.__namespace = None
 
     def get_obj(self) -> List[str]:
         if not self._data is None:
@@ -892,6 +895,18 @@ class ApiNamespace(BlockObj):
                 "ApiNamespace.get_obj() Error getting Namespace.", exc_info=True)
             raise e
 
+    @property
+    def namespace(self) -> List[str]:
+        """Gets namespace value"""
+        if self.__namespace is None:
+            self.__namespace = self.get_obj()
+        return self.__namespace
+
+    @property
+    def namespace_str(self) -> str:
+        if self.__namespace_str is None:
+            self.__namespace_str = '.'.join(self.namespace)
+        return self.__namespace_str
 
 class ApiPublicMembers(BlockObj):
     """Gets all blocks with condensed info such as Public Member Functions"""
@@ -987,7 +1002,9 @@ class ApiSummaryRows(BlockObj):
 class ApiSummaries(BlockObj):
     """Gets summary information for a public member block"""
 
-    def __init__(self, block: ApiSummaryRows, rule_engine: 'IRulesSummaryInfo' = None) -> None:
+    def __init__(self, block: ApiSummaryRows
+                 ,rule_engine: Optional['IRulesSummaryInfo'] = None
+                 ,ns: Optional[str] = None) -> None:
         """
         [summary]
 
@@ -1000,6 +1017,7 @@ class ApiSummaries(BlockObj):
         self._requires_typing = False
         self._imports: Set[str] = set()
         self._rule_engine = rule_engine
+        self._ns = ns
         self._data = None
     
     def _get_type_from_inner_link(self, mem_item_left: Tag, name:str) -> Union[str, None]:
@@ -1046,7 +1064,7 @@ class ApiSummaries(BlockObj):
                     name = itm_name.text.strip()
                     name = Util.get_clean_method_name(name)
             # logger.debug('ApiSummaries.get_obj() r_type in: %s', r_type)
-            p_type = Util.get_python_type(in_type=r_type)
+            p_type = Util.get_python_type(in_type=r_type, ns=self._ns)
             # logger.debug('ApiSummaries.get_obj() p_type in: %s', p_type.type)
             if p_type.is_default():
                 logger.debug(
@@ -1056,7 +1074,7 @@ class ApiSummaries(BlockObj):
                 # test for link and namespace and try again.
                 r2_type = self._get_type_from_inner_link(itm_lft, r_type)
                 if r2_type:
-                    p2_type = Util.get_python_type(r2_type)
+                    p2_type = Util.get_python_type(r2_type, ns=self._ns)
                     if not p2_type.is_default():
                         p_type = p2_type
                         logger.debug(
@@ -1328,11 +1346,12 @@ class ApiInterfacesBlock(ApiSummaryBlock):
 class ApiMethodPramsInfo(BlockObj):
     """Gets List of Parameter information for a funciton"""
 
-    def __init__(self, block: ApiProtoBlock) -> None:
+    def __init__(self, block: ApiProtoBlock, ns: Optional[str] = None) -> None:
         self._block: ApiProtoBlock = block
         super().__init__(self._block.soup)
         self._requires_typing = False
         self._imports: Set[str] = set()
+        self._ns = ns
         self._data = None
 
     def get_obj(self) -> List[ParamInfo]:
@@ -1397,13 +1416,13 @@ class ApiMethodPramsInfo(BlockObj):
             pinfo.direction = g_dir  # in or out
             dir_str = dir_str.split(maxsplit=1)[1]
         _type = dir_str.replace("::", '.').lstrip('.')
-        t_info: PythonType = Util.get_python_type(in_type=_type)
+        t_info: PythonType = Util.get_python_type(in_type=_type, ns=self._ns)
         if t_info.is_default():
             logger.debug(
                 'ApiFnPramsInfo._process_type_tag() %s type is Default. Looking for %s', pinfo.name, _type)
             t2_type = self._get_type_from_inner_link(type_tag, _type)
             if t2_type:
-                t2_info = Util.get_python_type(t2_type)
+                t2_info = Util.get_python_type(t2_type, ns=self._ns)
                 if not t2_info.is_default():
                     t_info = t2_info
         logger.debug(
@@ -1535,8 +1554,19 @@ class ApiMethodException(BlockObj):
 # endregion     Method Api
 
 class APIData:
+    """Class the brings together parts for scraping API Html pages"""
     # region Constructor
-    def __init__(self, url_soup: Union[str, SoupObj], allow_cache: bool):
+    def __init__(self, url_soup: Union[str, SoupObj], allow_cache: bool, long_names: bool = False):
+        """
+        Constructor
+
+        Args:
+            url_soup (Union[str, SoupObj]): Soup Object
+            allow_cache (bool): Determines if cache is used
+            long_names (bool, optional): Determsin if name are short or long in various components.
+                Short name may look like ``XInterface`` whereas a long name might look like
+                ``uno.XInterface``. Defaults to ``False``.
+        """
         if isinstance(url_soup, str):
             self._url = url_soup
             self._soup_obj = SoupObj(
@@ -1546,6 +1576,8 @@ class APIData:
             self._soup_obj = url_soup
             self._soup_obj.allow_cache = allow_cache
         self._allow_cache = allow_cache
+        self.__ns: ApiNamespace = None
+        self._long_names = long_names
         self._api_data_public_members: ApiPublicMembers = None
         self._api_data_name: ApiName = None
         self._desc: ApiDesc = None
@@ -1674,8 +1706,12 @@ class APIData:
     @AcceptedTypes(str, ftype=DecFuncEnum.METHOD)
     def get_prams_info(self, a_id: str) -> ApiMethodPramsInfo:
         """Gets parameter info for all parameters of a a method"""
+        if self._long_names:
+            ns = self.ns.namespace_str
+        else:
+            ns = None
         block = self.get_proto_block(a_id=a_id)
-        result = ApiMethodPramsInfo(block=block)
+        result = ApiMethodPramsInfo(block=block, ns=ns)
         return result
 
     @AcceptedTypes(str, ftype=DecFuncEnum.METHOD)
@@ -1781,24 +1817,39 @@ class APIData:
     def func_summaries(self) -> ApiSummaries:
         """Get Summary info list for functions"""
         if self._func_summaries is None:
+            if self._long_names:
+                ns = self.ns.namespace_str
+            else:
+                ns = None
             self._func_summaries = ApiSummaries(
-                self.func_summary_rows)
+                block=self.func_summary_rows,
+                ns=ns)
         return self._func_summaries
 
     @property
     def property_summaries(self) -> ApiSummaries:
         """Get Summary info list for Properties"""
         if self._property_summaries is None:
+            if self._long_names:
+                ns = self.ns.namespace_str
+            else:
+                ns = None
             self._property_summaries = ApiSummaries(
-                self.property_summary_rows)
+                block=self.property_summary_rows,
+                ns=ns)
         return self._property_summaries
 
     @property
     def exported_summaries(self) -> ApiSummaries:
         """Get Summary info list for Exported Interfaces"""
         if self._exported_summaries is None:
+            if self._long_names:
+                ns = self.ns.namespace_str
+            else:
+                ns = None
             self._exported_summaries = ApiSummaries(
-                self.export_summary_rows)
+                block=self.export_summary_rows,
+                ns=ns)
         return self._exported_summaries
 
     @property
@@ -1825,8 +1876,13 @@ class APIData:
     def types_summaries(self) -> ApiSummaries:
         """Get Summary info list for Properties"""
         if self._type_summaries is None:
+            if self._long_names:
+                ns = self.ns.namespace_str
+            else:
+                ns = None
             self._type_summaries = ApiSummaries(
-                self.types_summary_rows)
+                block=self.types_summary_rows,
+                ns=ns)
         return self._type_summaries
 
     @property
@@ -1835,6 +1891,15 @@ class APIData:
         if self._desc is None:
             self._desc = ApiDesc(self.soup_obj)
         return self._desc
+
+    @property
+    def ns(self) -> ApiNamespace:
+        """Gets the interface Description object"""
+        if self.__ns is None:
+            self.__ns = ApiNamespace(
+                self.soup_obj)
+        return self.__ns
+
 
     @property
     def soup_obj(self) -> SoupObj:
@@ -2203,25 +2268,6 @@ class Util:
     """Utility class of static methods for operations"""
     
     TYPE_RULES: TypeRules = None
-    @dataclass
-    class RealitiveInfo:
-        """
-        Realitive info
-        """
-        in_branch: str
-        """Original input branch"""
-        comp_branch: str
-        """Original branch to compare to in_branch"""
-        sep: str
-        """Seperator"""
-        in_branch_rel: List[str]
-        """Compare result relative part of in_branch"""
-        comp_branch_rel: List[str]
-        """Compare result relative part of comp_branch"""
-        distance: int
-        """Distance between branches"""
-        common_parts: List[str]
-        """part that in_branch and comp_branch have in common"""
 
     @staticmethod
     def is_fragment_url(in_str: str) -> bool:
@@ -2307,54 +2353,6 @@ class Util:
             name = parts.pop()
         return Util.get_ns_from_url(url=href, name=name)
 
-    @staticmethod
-    def get_rel_info(in_branch: str, comp_branch: str, sep: str = '.') -> RealitiveInfo:
-        """
-        Gets realitive info between branches such as ``com.sun.star.configuration``
-        and ``com.sun.star.uno``
-
-        Args:
-            in_branch (str): branch to compare
-            comp_branch (str): branch to get realitive information from compared to ``in_branch``
-            sep (str, optional): Branch seperator. Defaults to ``.``
-
-        Returns:
-            RealitiveInfo: Class instance containing realitive info.
-        """
-        in_branch_parts = in_branch.split(sep)
-        comp_branch_parts = comp_branch.split(sep)
-        rel_len = len(comp_branch_parts)
-        common_roots = 0
-        for i, b in enumerate(in_branch_parts):
-            if i > rel_len:
-                break
-            try:
-                if b == comp_branch_parts[i]:
-                    common_roots += 1
-                    continue
-            except IndexError:
-                break
-            break
-        # comp_branch_rel = in_branch_parts[common_roots:]
-        comp_branch_rel = comp_branch_parts[common_roots:]
-        in_branch_rel = in_branch_parts[common_roots:]
-        diff = len(in_branch_rel)
-        distance = diff
-        common_parts = in_branch_parts[:common_roots]
-        # result = ((diff + 1), sep.join(comp_branch_rel))
-        result = Util.RealitiveInfo(
-            in_branch=in_branch,
-            comp_branch=comp_branch,
-            sep=sep,
-            in_branch_rel=in_branch_rel,
-            comp_branch_rel=comp_branch_rel,
-            distance=distance,
-            common_parts=common_parts
-        )
-        # sep_str = sep * (diff + 1)
-        logger.debug("Util.get_rel_info(): %s", str(result))
-        return result
-    
     @staticmethod
     def encode_file_name(name: Union[Path, str]) -> str:
         _name = str(name)
@@ -2645,8 +2643,7 @@ class Util:
         Returns:
             str: snake case
         """
-        _input = re.sub('(.)([A-Z][a-z]+)', r'\1_\2', input)
-        return re.sub('([a-z0-9])([A-Z])', r'\1_\2', _input).lower()
+        return RelInfo.camel_to_snake(input=input)
 
     @staticmethod
     def get_clean_imports(ns: str, imports: Iterable[str]) -> Set[str]:
@@ -2671,7 +2668,6 @@ class Util:
         return results
 
 
-    @AcceptedTypes(str, opt_all_args=True, ftype=DecFuncEnum.METHOD_STATIC)
     @staticmethod
     def get_rel_import(i_str: str, ns: str, sep: str = '.') -> Tuple[str, str]:
         """
@@ -2685,45 +2681,23 @@ class Util:
         Returns:
             Tuple[str, str]: realitive import info such as ``('..uno.exception', 'Exception')``
         """
-        # i_str = com.sun.star.uno.Exception
-        # ns = com.sun.star.configuration
-        # ("..uno.exception", "Exception")
-        # compare ns to ns so drop last name of i_str
-        name_parts = i_str.split(sep)
-        name = name_parts.pop()
-        camel_name = Util.camel_to_snake(name)
-        if len(name_parts) == 0:
-            # this is a single word such as XInterface
-            # assume it is in the same namespace as this import
-            logger.debug(
-                "get_rel_import(): '%s', single word. Converting to from import and returning", name)
-            return (f'.{camel_name}', f'{name}')
-        ns2 = sep.join(name_parts)
-        if ns2 == ns:
-            logger.debug("get_rel_import(): Names are equal: '%s'", ns)
-            logger.debug(f"get_rel_import(): Returning (.{camel_name}', '{name})")
-            return (f'.{camel_name}', f'{name}')
-        if len(name_parts) == 1:
-            # this is a single word
-            # assume it is in the same namespace as this import
-            logger.debug(
-                "get_rel_import(): '%s', single word. Converting to from import and returning", i_str)
-            return (f'.{Util.camel_to_snake(i_str)}', f'{i_str}')
-        try:
-            info = Util.get_rel_info(in_branch=ns, comp_branch=ns2, sep=sep)
-            prefix = sep * (info.distance + 1)
-            result_parts = info.comp_branch_rel + [camel_name]
-            from_str = prefix
-            from_str = from_str + sep.join(result_parts)
-            return (from_str, name)
-        except Exception as e:
-            logger.error(e, exc_info=True)
-        short = ns2.replace('com.sun.star.', '')
-        logger.warn(
-            f"get_rel_import(): Last ditch effort. Returning: (ooo_uno.uno_obj.{short}.{camel_name}', {name})")
-        return (f'ooo_uno.uno_obj.{short}.{camel_name}', f'{name}')
+        return RelInfo.get_rel_import(in_str=i_str,ns=ns, sep=sep)
     
-    @AcceptedTypes(str, opt_all_args=True, ftype=DecFuncEnum.METHOD_STATIC)
+    @staticmethod
+    def get_rel_import_long(i_str: str, ns: str, sep: str = '.') -> Tuple[str, str, str]:
+        """
+        Gets realitive import Tuple
+
+        Args:
+            i_str (str): Namespace and object such as ``com.sun.star.uno.Exception``
+            ns (str): Namespace used to get realitive postion such as ``com.sun.star.awt``
+            sep (str, optional): Namespace seperator. Defaults to ``.``
+
+        Returns:
+            Tuple[str, str]: realitive import info such as ``('..uno.exception', 'Exception')``
+        """
+        return RelInfo.get_rel_import_long(in_str=i_str,ns=ns, sep=sep)
+
     @staticmethod
     def get_rel_import_full(i_str: str, ns: str, sep: str = '.') -> Tuple[str, str]:
         """
@@ -2737,44 +2711,7 @@ class Util:
         Returns:
             Tuple[str, str]: realitive import info such as ``('..uno.exception', 'Exception')``
         """
-        # i_str = com.sun.star.uno.Exception
-        # ns = com.sun.star.configuration
-        # ("..uno.exception", "Exception")
-        # compare ns to ns so drop last name of i_str
-        name_parts = i_str.split(sep)
-        name = name_parts.pop()
-        camel_name = Util.camel_to_snake(name)
-        if len(name_parts) == 0:
-            # this is a single word such as XInterface
-            # assume it is in the same namespace as this import
-            logger.debug(
-                "get_rel_import_full(): '%s', single word. Converting to from import and returning", name)
-            return (f'{sep}', f'{camel_name}{sep}{name}')
-        ns2 = sep.join(name_parts)
-        if ns2 == ns:
-            logger.debug("get_rel_import_full(): Names are equal: '%s'", ns)
-            logger.debug(
-                f"get_rel_import_full(): Returning (.{camel_name}', '{name})")
-            return (f'{sep}', f'{camel_name}{sep}{name}')
-        if len(name_parts) == 1:
-            # this is a single word
-            # assume it is in the same namespace as this import
-            logger.debug(
-                "get_rel_import_full(): '%s', single word. Converting to from import and returning", i_str)
-            return (f'{sep}', f'{Util.camel_to_snake(i_str)}{sep}{i_str}')
-        try:
-            info = Util.get_rel_info(in_branch=ns, comp_branch=ns2, sep=sep)
-            prefix = sep * (info.distance + 1)
-            result_parts = info.comp_branch_rel + [camel_name]
-            im_str = sep.join(result_parts)
-            # im_str = f"{im_str}{sep}{name}"
-            return (prefix, im_str)
-        except Exception as e:
-            logger.error(e, exc_info=True)
-        short = ns2.replace('com.sun.star.', '')
-        logger.warn(
-            f"get_rel_import_full(): Last ditch effort. Returning: (ooo_uno.uno_obj.{short}.{camel_name}', {name})")
-        return (f'ooo_uno.uno_obj.{short}.{camel_name}', f'{name}')
+        return RelInfo.get_rel_import_full(in_str=i_str,ns=ns, sep=sep)
 
     @AcceptedTypes(str, opt_all_args=True, ftype=DecFuncEnum.METHOD_STATIC)
     @staticmethod
@@ -2989,7 +2926,8 @@ class Util:
         return _u_type_clean
 
     @staticmethod
-    def get_python_type(in_type: str) -> PythonType:
+    @TypeCheckKw(arg_info={"in_type": 0, "ns": 1}, types=[str, (str, type(None))], ftype=DecFuncEnum.METHOD_STATIC)
+    def get_python_type(in_type: str, ns: Optional[str] = None) -> PythonType:
         """
         Gets Python Type info including an required imports.
         This method simplifies ``get_py_type`` when a callback is needed.
@@ -3002,14 +2940,15 @@ class Util:
         """
         if Util.TYPE_RULES is None:
             Util.TYPE_RULES = TypeRules()
+        Util.TYPE_RULES.namespace = ns
         try:
             return Util.TYPE_RULES.get_python_type(in_type)
         except Exception as e:
             logger.error(e, exc_info=True)
             raise e
 
-    @AcceptedTypes((str, Path), ftype=DecFuncEnum.METHOD_STATIC)
     @staticmethod
+    @AcceptedTypes((str, Path), ftype=DecFuncEnum.METHOD_STATIC)
     def mkdirp(dest_dir: Union[str, Path]):
         """
         Creates directory and all child directories if needed

@@ -249,13 +249,23 @@ class ITypeRules(ABC):
 
 # region Rules Engine
 class TypeRules(ITypeRules):
+    """Type Rules Engine Class"""
+    # region Constructor
     def __init__(self, ns: Optional[str] = None) -> None:
+        """
+        Constructor
+
+        Args:
+            ns (Optional[str], optional): Sets Namesapce Property for Instance. Defaults to ``None``.
+        """
         self._rules: List[type[ITypeRule]] = []
-        self._ns = ns
-        if self._ns:
-            self._ns = self._ns.replace('com.sun.star.', '')
+        self._ns = None
+        self.ns = ns
         self._cache = {}
         self._register_known_rules()
+    # endregion Constructor
+
+    # region Methods
 
     def register_rule(self, rule: type[ITypeRule]) -> None:
 
@@ -337,16 +347,26 @@ class TypeRules(ITypeRules):
         else:
             self._cache[key] = rule(self)
         return self._cache[key]
+    # endregion Methods
 
+    # region Properties
     @property
     def namespace(self) -> Union[str, None]:
         """
-        Gets optional namespace value
+        Gets/set optional namespace value
         
         This property will not start with 'com.sun.star'
         """
         return self._ns
 
+    @namespace.setter
+    def namespace(self, value: Union[str, None]) -> None:
+        if value is None:
+            self._ns = None
+            return
+        self._ns = str(value)
+        self._ns = self._ns.replace('com.sun.star.', '')
+    # endregion Properties
 # endregion Rules Engine
 
 # region Rules

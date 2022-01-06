@@ -22,9 +22,9 @@ try:
 except ModuleNotFoundError:
     import parser.base as base
 try:
-    from type_mod import PythonType
+    from mod_type import PythonType
 except ModuleNotFoundError:
-    from parser.type_mod import PythonType
+    from parser.mod_type import PythonType
 from logger.log_handle import get_logger
 from parser import __version__, JSON_ID
 # endregion Imports

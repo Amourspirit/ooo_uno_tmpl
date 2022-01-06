@@ -83,8 +83,9 @@ def _main():
     # url = 'https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1document_1_1MediaDescriptor.html'
     # url = 'https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1ucb_1_1ContentResultSet.html'
     # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1drawing_1_1XShape.html'
-    url = 'https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1rdf_1_1URI.html'
-    args = ('v', 'n', 'x')
+    # url = 'https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1rdf_1_1URI.html'
+    url = 'https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1awt_1_1AccessibleButton.html'
+    args = ('v', 'n', 'l')
     kwargs = {
         "u": url,
         "log_file": "debug.log"
@@ -123,7 +124,8 @@ def main():
         write_json=args.write_json,
         clear_on_print=(not args.no_print_clear),
         write_template_long=args.long_format,
-        include_desc=args.desc
+        include_desc=args.desc,
+        long_names=True
     )
 
     if args.print_template is False and args.print_json is False:
@@ -132,4 +134,4 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    _main()

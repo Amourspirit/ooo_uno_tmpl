@@ -87,8 +87,8 @@ class ApiNs(base.ApiNamespace):
 
 class ApiInterfaceData(base.APIData):
     # region Constructor
-    def __init__(self, url_soup: Union[str, base.SoupObj], allow_cache: bool):
-        super().__init__(url_soup=url_soup, allow_cache=allow_cache)
+    def __init__(self, url_soup: Union[str, base.SoupObj], allow_cache: bool, long_names: bool = False):
+        super().__init__(url_soup=url_soup, allow_cache=allow_cache, long_names=long_names)
         self._si_key = 'summeries'
         self._detail_block_key = 'detail_block'
         self._ns: ApiNs = None
@@ -161,14 +161,12 @@ class ApiInterfaceData(base.APIData):
     # region Properties
 
     @property
-    def ns(self) -> ApiNs:
+    def ns(self) -> base.ApiNamespace:
         """Gets the interface Description object"""
         if self._ns is None:
             self._ns = ApiNs(
                 self.soup_obj)
         return self._ns
-
-    
 
     # endregion Properties
 # endregion API Interface classes
@@ -186,8 +184,12 @@ class Parser(base.ParserBase):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self._allow_caching = kwargs.get('allow_cache', True)
+        self._long_names: bool = bool(kwargs.get('long_names', False))
         self._api_data = ApiInterfaceData(
-            url_soup=self.url, allow_cache=self._allow_cache)
+            url_soup=self.url,
+            allow_cache=self._allow_cache,
+            long_names=self._long_names
+            )
         self._requires_typing = False
         self._imports: Set[str] = set()
         self._cache = {}
@@ -225,15 +227,15 @@ class Parser(base.ParserBase):
         ex = []
         for el in self._api_data.inherited.get_obj():
             ex.append(el.fullns)
+        ns = self._api_data.ns
+        ex_s = base.Util.get_clean_imports(ns=ns.namespace_str, imports=ex)
         ni = self._api_data.name.get_obj()
         result = {
             # 'name': ni.name,
             'name': ni.name,
-            # convert set to list for json
-            # 'imports': list(im.get_obj()),
             'imports': [],
             'namespace': self._api_data.ns.namespace_str,
-            'extends': ex,
+            'extends': list(ex_s),
             'desc': self._api_data.desc.get_obj(),
             "url": self._api_data.url_obj.url,
         }
@@ -411,6 +413,11 @@ class Parser(base.ParserBase):
     def api_data(self) -> ApiInterfaceData:
         return self._api_data
 
+
+    @property
+    def long_names(self) -> bool:
+        """Gets long_names value"""
+        return self._long_names
     # endregion Properties
 # endregion Parse
 
@@ -544,11 +551,14 @@ class Writer(base.WriteBase):
         if key in self._cache:
             return self._cache[key]
         lst = []
+        if self._parser.long_names:
+            rel_fn = base.Util.get_rel_import_long
+        else:
+            rel_fn = base.Util.get_rel_import
         for ns in self._p_imports:
-            f, n = base.Util.get_rel_import(
-                i_str=ns, ns=self._p_namespace
-            )
-            lst.append([f, n])
+            # f, n = rel_fn(ns, self._p_namespace)
+            # lst.append([f, n])
+            lst.append([*rel_fn(ns, self._p_namespace)])
         self._cache[key] = lst
         return self._cache[key]
 
@@ -557,13 +567,14 @@ class Writer(base.WriteBase):
         if key in self._cache:
             return self._cache[key]
         lst = []
+        if self._parser.long_names:
+            rel_fn = base.Util.get_rel_import_long
+        else:
+            rel_fn = base.Util.get_rel_import
         for ns in self._p_imports_typing:
-            f, n = base.Util.get_rel_import(
-                i_str=ns, ns=self._p_namespace
-            )
-            # lst.append(f)
-            # lst.append(n)
-            lst.append([f, n])
+            # f, n = rel_fn(ns, self._p_namespace)
+            # lst.append([f, n])
+            lst.append([*rel_fn(ns, self._p_namespace)])
         self._cache[key] = lst
         return self._cache[key]
 
@@ -811,6 +822,7 @@ def _get_parsed_args(*args) -> Dict[str, bool]:
         "no_desc": True,
         "no_print_clear": True,
         "long_template": False,
+        "long_names": False,
         "clipboard": False,
         "print_json": False,
         "print_template": False,
@@ -824,6 +836,7 @@ def _get_parsed_args(*args) -> Dict[str, bool]:
         "no_desc": False,
         "no_print_clear": False,
         "long_template": True,
+        "long_names": True,
         "clipboard": True,
         "print_json": True,
         "print_template": True,
@@ -832,6 +845,8 @@ def _get_parsed_args(*args) -> Dict[str, bool]:
         "verbose": True
     }
     lookups = {
+        "l": "long_names",
+        "long_name": "long_names",
         "s": "no_sort",
         "no_sort": "no_sort",
         "x": "no_cache",
@@ -903,12 +918,14 @@ class Processer:
         self._write_json = bool(kwargs.get('write_json', bool))
         self._verbose = bool(kwargs.get('verbose', False))
         self._include_desc = bool(kwargs.get('include_desc', True))
+        self._long_names = bool(kwargs.get('long_names', False))
 
     def process(self) -> None:
         parser = self._parser(
             url=self._url,
             sort=self._sort,
-            cache=self._cache
+            cache=self._cache,
+            long_names=self._long_names
         )
         w = self._writer(
             parser=parser,
@@ -974,7 +991,8 @@ def parse(*args, **kwargs):
         write_json=pargs['write_json'],
         clear_on_print=(not pargs['no_print_clear']),
         write_template_long=pargs['long_template'],
-        include_desc=pargs['no_desc']
+        include_desc=pargs['no_desc'],
+        long_names=pargs['long_names']
     )
     proc.process()
 
@@ -990,9 +1008,9 @@ def _main():
     # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1inspection_1_1XPropertyControl.html'  # no import
     # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XMessageBoxFactory.html'
     # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1report_1_1XReportControlModel.html'
-    # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1grid_1_1XGridColumnModel.html'
-    url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1security_1_1XPolicy.html'
-    args = ('v', 'n', 'x')
+    url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1grid_1_1XGridColumnModel.html'
+    # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1security_1_1XPolicy.html'
+    args = ('v', 'n', 'l')
     kwargs = {
         "u": url,
         "log_file": "debug.log"
@@ -1116,7 +1134,8 @@ def main():
         write_json=args.write_json,
         clear_on_print=(not args.no_print_clear),
         write_template_long=args.long_format,
-        include_desc=args.desc
+        include_desc=args.desc,
+        long_names=True
     )
     if args.print_template is False and args.print_json is False:
         print('')

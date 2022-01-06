@@ -9,7 +9,7 @@ import time
 import calendar
 from datetime import datetime, timezone
 from types import ModuleType
-from typing import Dict, Tuple, List, Union
+from typing import Dict, Iterable, Tuple, List, Union
 from Cheetah.Template import Template
 
 # set up path for importing modules from main app
@@ -273,7 +273,7 @@ class BaseTpml(Template):
 
     # region Class inherits and From Imports
 
-    def get_from_import(self, class_name: str, im_data: List[str]) -> str:
+    def get_from_import(self, class_name: str, im_data: Iterable[str]) -> str:
         """
         Get a from string such as 'from ..sdbcx.table_descriptor import DataSettings`
 
@@ -284,10 +284,14 @@ class BaseTpml(Template):
         Returns:
             str: string formated for a from statement
         """
-        if len(im_data) < 2:
+        im_len = len(im_data)
+        if im_len < 2:
             raise Exception(f"{self.__class__.__name__}.get_from_import() Expected im_data param to have a min length of two!")
         im = im_data[0]  # .sdbcx.table_descriptor
         name = im_data[1]  # DataSettings
+        if im_len == 3:
+            s_as = im_data[2]
+            return f"from {im} import {name} as {s_as}"
         if name == class_name:
             # can not extend a class with the same name.
             # Change the from import and elsewhere change the extends name to match

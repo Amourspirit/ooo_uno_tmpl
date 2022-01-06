@@ -70,7 +70,7 @@ class ApiExData(base.APIData):
 
     # region Properties
     @property
-    def ns(self) -> ApiNs:
+    def ns(self) -> base.ApiNamespace:
         """Gets the interface Description object"""
         if self._ns is None:
             self._ns = ApiNs(

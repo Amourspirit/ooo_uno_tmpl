@@ -26,7 +26,7 @@ except ModuleNotFoundError:
 from logger.log_handle import get_logger
 from dataclasses import dataclass, field
 from parser import __version__, JSON_ID
-from parser.type_mod import PythonType
+from parser.mod_type import PythonType
 
 logger = None
 
