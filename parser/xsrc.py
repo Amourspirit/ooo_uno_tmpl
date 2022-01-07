@@ -59,7 +59,6 @@ re_property_pattern = re.compile(
 re_comment_start_pattern = re.compile(r"(?:(\/\*)|(?:\*)\s)")
 # endregion SDK API Reference
 
-
 # region API Interface classes
 
 

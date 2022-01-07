@@ -58,15 +58,6 @@ class DataItem:
 # region API
 
 
-class ApiPropertiesBlock(base.ApiSummaryBlock):
-    def _get_match_name(self) -> str:
-        return 'pub-attribs'
-
-
-class ApiTypesBlock(base.ApiSummaryBlock):
-    def _get_match_name(self) -> str:
-        return 'pub-types'
-
 class ApiNs(base.ApiNamespace):
     """Get the Name object for the interface"""
 
@@ -91,19 +82,12 @@ class ApiNs(base.ApiNamespace):
 
 class ApiData(base.APIData):
     # region constructor
-    @TypeCheck((str, base.SoupObj), bool, ftype=DecFuncEnum.METHOD)
-    def __init__(self, url_soup: Union[str, base.SoupObj], allow_cache: bool):
-        super().__init__(url_soup=url_soup, allow_cache=allow_cache)
+    @TypeCheck((str, base.SoupObj), bool, bool, ftype=DecFuncEnum.METHOD)
+    def __init__(self, url_soup: Union[str, base.SoupObj], allow_cache: bool, long_names: bool=False):
+        super().__init__(url_soup=url_soup, allow_cache=allow_cache, long_names=long_names)
 
         self._ns: ApiNs = None
-        self._desc: base.ApiDesc = None
-        self._properties_block: ApiPropertiesBlock = None
-        self._property_summaries: base.ApiSummaries = None
-        self._property_summary_rows: base.ApiSummaryRows = None
-        
-        self._types_block: ApiTypesBlock = None
-        self._type_summaries: base.ApiSummaries = None
-        self._type_summary_rows: base.ApiSummaryRows = None
+       
         self._name_rules_engine = base.RulesName()
         self._set_name_rules()
     # endregion constructor
@@ -131,60 +115,6 @@ class ApiData(base.APIData):
                 self.soup_obj)
         return self._ns
 
-    @property
-    def desc(self) -> base.ApiDesc:
-        """Gets the interface Description object"""
-        if self._desc is None:
-            self._desc = base.ApiDesc(self.soup_obj)
-        return self._desc
-
-    @property
-    def properties_block(self) -> ApiPropertiesBlock:
-        """Gets Summary Properties block"""
-        if self._properties_block is None:
-            self._properties_block = ApiPropertiesBlock(
-                self.public_members)
-        return self._properties_block
-
-    @property
-    def property_summary_rows(self) -> base.ApiSummaryRows:
-        """Get Summary rows for Properties"""
-        if self._property_summary_rows is None:
-            self._property_summary_rows = base.ApiSummaryRows(
-                self.properties_block)
-        return self._property_summary_rows
-
-    @property
-    def property_summaries(self) -> base.ApiSummaries:
-        """Get Summary info list for Properties"""
-        if self._property_summaries is None:
-            self._property_summaries = base.ApiSummaries(
-                self.property_summary_rows)
-        return self._property_summaries
-
-    @property
-    def types_block(self) -> ApiTypesBlock:
-        """Gets Summary Properties block"""
-        if self._types_block is None:
-            self._types_block = ApiTypesBlock(
-                self.public_members)
-        return self._types_block
-
-    @property
-    def types_summary_rows(self) -> base.ApiSummaryRows:
-        """Get Summary rows for Properties"""
-        if self._type_summary_rows is None:
-            self._type_summary_rows = base.ApiSummaryRows(
-                self.types_block)
-        return self._type_summary_rows
-
-    @property
-    def types_summaries(self) -> base.ApiSummaries:
-        """Get Summary info list for Properties"""
-        if self._type_summaries is None:
-            self._type_summaries = base.ApiSummaries(
-                self.types_summary_rows)
-        return self._type_summaries
     # endregion Properties
 # endregion API
 
