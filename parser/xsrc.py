@@ -681,7 +681,8 @@ class Writer(base.WriteBase):
 
         self._template = self._template.replace(
             '{extends_map}', base.Util.get_formated_dict_list_str(self._get_imports_map()))
-
+        self._template = self._template.replace(
+            '{libre_office_ver}', base.APP_CONFIG.libre_office_ver)
         self._template = self._template.replace(
             '{quote}',
             str(set(self._get_quote_flat())))
