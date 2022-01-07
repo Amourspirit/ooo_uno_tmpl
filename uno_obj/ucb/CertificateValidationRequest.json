@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "CertificateValidationRequest",
   "type": "exception",
   "namespace": "com.sun.star.ucb",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,7 +16,8 @@
     "from_imports": [
       [
         "..task.classified_interaction_request",
-        "ClassifiedInteractionRequest"
+        "ClassifiedInteractionRequest",
+        "task_classified_interaction_request_i"
       ]
     ],
     "from_imports_typing": [
@@ -24,8 +26,11 @@
         "XCertificate"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.task.ClassifiedInteractionRequest": "task_classified_interaction_request_i"
+    },
     "quote": [
-      "XCertificate"
+      "security_x_certificate_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -43,7 +48,7 @@
       "properties": [
         {
           "name": "Certificate",
-          "returns": "XCertificate",
+          "returns": "security_x_certificate_i",
           "desc": [
             "The certificate himself."
           ],

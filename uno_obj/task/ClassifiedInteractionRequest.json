@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "ClassifiedInteractionRequest",
   "type": "exception",
   "namespace": "com.sun.star.task",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,7 +16,8 @@
     "from_imports": [
       [
         "..uno.exception",
-        "Exception"
+        "Exception",
+        "uno_exception_i"
       ]
     ],
     "from_imports_typing": [
@@ -24,8 +26,11 @@
         "InteractionClassification"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.Exception": "uno_exception_i"
+    },
     "quote": [
-      "InteractionClassification"
+      "interaction_classification_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -43,7 +48,7 @@
       "properties": [
         {
           "name": "Classification",
-          "returns": "InteractionClassification",
+          "returns": "interaction_classification_i",
           "desc": [
             "The classification of the request."
           ],

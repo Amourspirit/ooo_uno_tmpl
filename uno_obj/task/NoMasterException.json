@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "NoMasterException",
   "type": "exception",
   "namespace": "com.sun.star.task",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,7 +16,8 @@
     "from_imports": [
       [
         "..uno.runtime_exception",
-        "RuntimeException"
+        "RuntimeException",
+        "uno_runtime_exception_i"
       ]
     ],
     "from_imports_typing": [
@@ -24,8 +26,11 @@
         "PasswordRequestMode"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.RuntimeException": "uno_runtime_exception_i"
+    },
     "quote": [
-      "PasswordRequestMode"
+      "password_request_mode_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -43,7 +48,7 @@
       "properties": [
         {
           "name": "Mode",
-          "returns": "PasswordRequestMode",
+          "returns": "password_request_mode_i",
           "desc": [
             "specifies the mode in which password should be queried."
           ],

@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "InvalidProtocolChangeException",
   "type": "exception",
   "namespace": "com.sun.star.bridge",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,7 +16,8 @@
     "from_imports": [
       [
         "..uno.exception",
-        "Exception"
+        "Exception",
+        "uno_exception_i"
       ]
     ],
     "from_imports_typing": [
@@ -24,8 +26,11 @@
         "ProtocolProperty"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.Exception": "uno_exception_i"
+    },
     "quote": [
-      "ProtocolProperty"
+      "protocol_property_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -43,7 +48,7 @@
       "properties": [
         {
           "name": "invalidProperty",
-          "returns": "ProtocolProperty",
+          "returns": "protocol_property_i",
           "desc": [
             "The first invalid property."
           ],

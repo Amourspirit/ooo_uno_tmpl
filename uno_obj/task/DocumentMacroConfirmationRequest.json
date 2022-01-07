@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "DocumentMacroConfirmationRequest",
   "type": "exception",
   "namespace": "com.sun.star.task",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,7 +16,8 @@
     "from_imports": [
       [
         ".classified_interaction_request",
-        "ClassifiedInteractionRequest"
+        "ClassifiedInteractionRequest",
+        "classified_interaction_request_i"
       ]
     ],
     "from_imports_typing": [
@@ -24,8 +26,11 @@
         "XStorage"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.task.ClassifiedInteractionRequest": "classified_interaction_request_i"
+    },
     "quote": [
-      "XStorage"
+      "embed_x_storage_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -43,7 +48,7 @@
       "properties": [
         {
           "name": "DocumentStorage",
-          "returns": "XStorage",
+          "returns": "embed_x_storage_i",
           "desc": [
             "refers to the storage related to the last committed version of the document.",
             "",

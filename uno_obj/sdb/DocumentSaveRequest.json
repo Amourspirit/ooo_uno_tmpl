@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "DocumentSaveRequest",
   "type": "exception",
   "namespace": "com.sun.star.sdb",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,7 +16,8 @@
     "from_imports": [
       [
         "..task.classified_interaction_request",
-        "ClassifiedInteractionRequest"
+        "ClassifiedInteractionRequest",
+        "task_classified_interaction_request_i"
       ]
     ],
     "from_imports_typing": [
@@ -24,8 +26,11 @@
         "XContent"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.task.ClassifiedInteractionRequest": "task_classified_interaction_request_i"
+    },
     "quote": [
-      "XContent"
+      "ucb_x_content_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -49,7 +54,7 @@
       "properties": [
         {
           "name": "Content",
-          "returns": "XContent",
+          "returns": "ucb_x_content_i",
           "desc": [
             "specifies the content where the document should save inside.",
             "",

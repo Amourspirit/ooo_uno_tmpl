@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "SQLContext",
   "type": "exception",
   "namespace": "com.sun.star.sdb",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,10 +16,14 @@
     "from_imports": [
       [
         "..sdbc.sql_warning",
-        "SQLWarning"
+        "SQLWarning",
+        "sdbc_sql_warning_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.sdbc.SQLWarning": "sdbc_sql_warning_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
