@@ -43,13 +43,12 @@ class BaseStruct(BaseJson):
         self.include_desc = bool(
             json_data['writer_args'].get('include_desc', True))
         self.attribs = self._get_attribs(json_data=json_data, sort=self.sort)
-
-
-        # self.requires_typing = data.get('requires_typing', False)
-        _inherits = self.convert_lst_last(data.get('extends', []))
-        setattr(self, 'inherits', _inherits)
+        setattr(self, 'inherits', data.get('extends', []))
         self.dynamic_struct = bool(
             json_data['writer_args'].get('dynamic_struct', False))
+        extends_map = data.get('extends_map', None)
+        if extends_map:
+            self.extends_map.update(extends_map)
 
     def _get_attribs(self, json_data: dict, sort: bool) -> dict:
         items: List[dict] = json_data['data']['items']

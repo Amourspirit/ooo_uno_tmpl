@@ -122,14 +122,19 @@ class ApiData(base.APIData):
 
 class Parser(base.ParserBase):
     # region Constructor
-    @RuleCheckAllKw(arg_info={"url": 0, "sort": 1, "replace_dual_colon": 1},
-                    rules=[rules.RuleStrNotNullEmptyWs, rules.RuleBool],
-                    ftype=DecFuncEnum.METHOD)
+    @TypeCheckKw(
+        arg_info={"allow_cache": bool, "long_names": bool},
+        ftype=DecFuncEnum.METHOD
+    )
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self._allow_caching = kwargs.get('allow_cache', True)
+        self._allow_caching: bool = kwargs.get('allow_cache', True)
+        self._long_names: bool = kwargs.get('long_names', False)
         self._api_data: ApiData = ApiData(
-            url_soup=self.url, allow_cache=self._allow_cache)
+            url_soup=self.url,
+            allow_cache=self._allow_cache,
+            long_names=self._long_names
+            )
         self._data = None
         self._imports: Set[str] = set()
         self._requires_typing = False
@@ -189,7 +194,8 @@ class Parser(base.ParserBase):
 
     def get_parser_args(self) -> dict:
         args = {
-            "sort": self._sort
+            "sort": self._sort,
+            "long_names": self.long_names
         }
         return args
 
@@ -298,6 +304,11 @@ class Parser(base.ParserBase):
     @property
     def api_data(self) -> ApiData:
         return self._api_data
+
+    @property
+    def long_names(self) -> bool:
+        """Gets long_names value"""
+        return self._long_names
     # endregion Properties
 
 # endregion Parser
@@ -401,6 +412,7 @@ class StructWriter(base.WriteBase):
         }
         p_dict['from_imports'] = self._get_from_imports()
         p_dict['from_imports_typing'] = self._get_from_imports_typing()
+        p_dict['extends_map'] = self._get_imports_map()
         p_dict['quote'] = self._get_quote_flat()
         p_dict['typings'] = self._get_typings()
         p_dict['requires_typing'] = self._p_requires_typing
@@ -434,11 +446,12 @@ class StructWriter(base.WriteBase):
         if key in self._cache:
             return self._cache[key]
         lst = []
+        if self._parser.long_names:
+            rel_fn = base.Util.get_rel_import_long
+        else:
+            rel_fn = base.Util.get_rel_import
         for ns in self._p_imports:
-            f, n = base.Util.get_rel_import(
-                i_str=ns, ns=self._p_namespace
-            )
-            lst.append([f, n])
+            lst.append([*rel_fn(ns, self._p_namespace)])
         self._cache[key] = lst
         return self._cache[key]
     
@@ -447,12 +460,26 @@ class StructWriter(base.WriteBase):
         if key in self._cache:
             return self._cache[key]
         lst = []
+        if self._parser.long_names:
+            rel_fn = base.Util.get_rel_import_long
+        else:
+            rel_fn = base.Util.get_rel_import
         for ns in self._p_imports_typing:
-            f, n = base.Util.get_rel_import(
-                i_str=ns, ns=self._p_namespace
-            )
-            lst.append([f, n])
+            lst.append([*rel_fn(ns, self._p_namespace)])
         self._cache[key] = lst
+        return self._cache[key]
+    
+    def _get_imports_map(self) -> Dict[str, str]:
+        key = '_get_imports_map'
+        if key in self._cache:
+            return self._cache[key]
+        results = {}
+        if self._parser.long_names is False:
+            return results
+        for im in self._p_imports:
+            results[im] = base.Util.get_rel_import_long_name(
+                im, ns=self._p_namespace)
+        self._cache[key] = results
         return self._cache[key]
     # endregion get Imports
 
@@ -505,7 +532,8 @@ class StructWriter(base.WriteBase):
         self._template = self._template.replace(
             '{dynamic_struct}', str(self._dynamic_struct))
         self._template = self._template.replace('{sort}', str(self._sort))
-
+        self._template = self._template.replace(
+            '{extends_map}', base.Util.get_formated_dict_list_str(self._get_imports_map()))
 
         self._template = self._template.replace('{name}', self._p_name)
         self._template = self._template.replace('{ns}', str(self._p_namespace))
@@ -574,7 +602,14 @@ class StructWriter(base.WriteBase):
         self._p_imports.update(data['imports'])
         self._p_imports.update(data['extends'])
         self._p_imports_typing.update(self._parser.imports)
-
+        self._p_imports = base.Util.get_clean_imports(
+            ns=self._p_namespace,
+            imports=self._p_imports
+        )
+        self._p_imports_typing = base.Util.get_clean_imports(
+            ns=self._p_namespace,
+            imports=self._p_imports_typing
+        )
         self._p_imports_typing = self._p_imports_typing - self._p_imports
         if len(self._p_imports_typing) > 0:
             self._p_requires_typing = True
@@ -662,6 +697,7 @@ def _get_parsed_args(*args) -> Dict[str, bool]:
         "no_cache": True,
         "no_desc": True,
         "no_print_clear": True,
+        "no_long_names": True,
         "long_template": False,
         "clipboard": False,
         "print_json": False,
@@ -677,6 +713,7 @@ def _get_parsed_args(*args) -> Dict[str, bool]:
         "no_cache": False,
         "no_desc": False,
         "no_print_clear": False,
+        "no_long_names": False,
         "long_template": True,
         "clipboard": True,
         "print_json": True,
@@ -688,6 +725,8 @@ def _get_parsed_args(*args) -> Dict[str, bool]:
         "no_auto_import": False
     }
     lookups = {
+        "l": "no_long_names",
+        "no_long_names": "no_long_names",
         "s": "no_sort",
         "no_sort": "no_sort",
         "x": "no_cache",
@@ -735,6 +774,7 @@ def parse(*args, **kwargs):
         'no_print_clear (str, optional): Short form ``'p'``. No clearing of terminal
             when otuput to terminal. Default ``False``
         'no_desc' (str, optional): Short from ``'d'``. No description will be outputed in template. Default ``False``
+        'no_long_names' (str, optional): Short form ``'l'``. No long names. Default ``False``
         'dynamic_struct' (str, optional): Short form ``'d'``. Template will generate dynameic struct conten. Default ``False``
         'print_json' (str, optional): Short form ``'n'``. Print json to termainl. Default ``False``
         'print_template' (str, optional): Short form ``'m'``. Print template to terminal. Default ``False``
@@ -765,7 +805,8 @@ def parse(*args, **kwargs):
     p = Parser(
         url=pkwargs['url'],
         sort=pargs['no_sort'],
-        cache=pargs['no_cache']
+        cache=pargs['no_cache'],
+        long_names=pargs['no_long_names']
     )
     w = StructWriter(
         parser=p,
@@ -838,6 +879,12 @@ def main():
         dest='desc',
         default=True)
     parser.add_argument(
+        '-l', '--no-long-names',
+        help='Short Names such as XInterface will be generated instead of uno_x_interface',
+        action='store_false',
+        dest='long_names',
+        default=True)
+    parser.add_argument(
         '-c', '--clipboard',
         help='Copy to clipboard',
         action='store_true',
@@ -905,7 +952,8 @@ def main():
     p = Parser(
         url=args.url,
         sort=args.sort,
-        cache=args.cache
+        cache=args.cache,
+        long_names=args.long_names
         )
     if args.print_template is False and args.print_json is False:
         print('')

@@ -740,9 +740,9 @@ class Writer(base.WriteBase):
         self._p_imports.update(data['extends'])
         self._p_imports_typing.update(self._parser.imports)
         self._p_imports = base.Util.get_clean_imports(
-                            ns=self._p_namespace,
-                            imports=self._p_imports
-                        )
+            ns=self._p_namespace,
+            imports=self._p_imports
+        )
         self._p_imports_typing = base.Util.get_clean_imports(
             ns=self._p_namespace,
             imports=self._p_imports_typing
