@@ -142,12 +142,12 @@ def get_rel_import_long(in_str: str, ns: str, sep: str = '.') -> Tuple[str, str,
     Gets realitive import Tuple
 
     Args:
-        i_str (str): Namespace and object such as ``com.sun.star.uno.Exception``
+        in_str (str): Namespace and object such as ``com.sun.star.uno.Exception``
         ns (str): Namespace used to get realitive postion such as ``com.sun.star.awt``
         sep (str, optional): Namespace seperator. Defaults to ``.``
 
     Returns:
-        Tuple[str, str]: realitive import info such as ``('..uno.exception', 'Exception')``
+        Tuple[str, str]: realitive import info such as ``('..uno.exception', 'Exception', 'uno_exception')``
     """
     frm, imp = get_rel_import(in_str=in_str, ns=ns, sep=sep)
     score = '_'
@@ -159,12 +159,28 @@ def get_rel_import_long(in_str: str, ns: str, sep: str = '.') -> Tuple[str, str,
 
 
 @AcceptedTypes(str, opt_all_args=True)
+def get_rel_import_long_name(in_str: str, ns: str, sep: str = '.') -> str:
+    """
+    Geta a long Name. Same as getting last part of ```get_rel_import_long()```
+
+    Args:
+        in_str (str): Namespace and object such as ``com.sun.star.uno.Exception``
+        ns (str): Namespace used to get realitive postion such as ``com.sun.star.awt``
+        sep (str, optional): Namespace seperator. Defaults to ``.``
+
+    Returns:
+        str: Long name such as ``uno_exception``
+    """
+    _, _, sas = get_rel_import_long(in_str=in_str, ns=ns, sep=sep)
+    return sas
+
+@AcceptedTypes(str, opt_all_args=True)
 def get_rel_import_full(in_str: str, ns: str, sep: str = '.') -> Tuple[str, str]:
     """
     Gets realitive import Tuple
 
     Args:
-        i_str (str): Namespace and object such as ``com.sun.star.uno.Exception``
+        in_str (str): Namespace and object such as ``com.sun.star.uno.Exception``
         ns (str): Namespace used to get realitive postion such as ``com.sun.star.awt``
         sep (str, optional): Namespace seperator. Defaults to ``.``
 

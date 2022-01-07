@@ -1004,7 +1004,7 @@ class ApiSummaries(BlockObj):
 
     def __init__(self, block: ApiSummaryRows
                  ,rule_engine: Optional['IRulesSummaryInfo'] = None
-                 ,ns: Optional[str] = None) -> None:
+                 ,ns: Optional[str] = None, long_names:bool = False) -> None:
         """
         [summary]
 
@@ -1018,6 +1018,7 @@ class ApiSummaries(BlockObj):
         self._imports: Set[str] = set()
         self._rule_engine = rule_engine
         self._ns = ns
+        self._long_names = long_names
         self._data = None
     
     def _get_type_from_inner_link(self, mem_item_left: Tag, name:str) -> Union[str, None]:
@@ -1064,7 +1065,7 @@ class ApiSummaries(BlockObj):
                     name = itm_name.text.strip()
                     name = Util.get_clean_method_name(name)
             # logger.debug('ApiSummaries.get_obj() r_type in: %s', r_type)
-            p_type = Util.get_python_type(in_type=r_type, ns=self._ns)
+            p_type = Util.get_python_type(in_type=r_type, ns=self._ns, long_names=self._long_names)
             # logger.debug('ApiSummaries.get_obj() p_type in: %s', p_type.type)
             if p_type.is_default():
                 logger.debug(
@@ -1074,7 +1075,7 @@ class ApiSummaries(BlockObj):
                 # test for link and namespace and try again.
                 r2_type = self._get_type_from_inner_link(itm_lft, r_type)
                 if r2_type:
-                    p2_type = Util.get_python_type(r2_type, ns=self._ns)
+                    p2_type = Util.get_python_type(r2_type, ns=self._ns, long_names=self._long_names)
                     if not p2_type.is_default():
                         p_type = p2_type
                         logger.debug(
@@ -1346,12 +1347,13 @@ class ApiInterfacesBlock(ApiSummaryBlock):
 class ApiMethodPramsInfo(BlockObj):
     """Gets List of Parameter information for a funciton"""
 
-    def __init__(self, block: ApiProtoBlock, ns: Optional[str] = None) -> None:
+    def __init__(self, block: ApiProtoBlock, ns: Optional[str] = None, long_names: bool = False) -> None:
         self._block: ApiProtoBlock = block
         super().__init__(self._block.soup)
         self._requires_typing = False
         self._imports: Set[str] = set()
         self._ns = ns
+        self._long_names = long_names
         self._data = None
 
     def get_obj(self) -> List[ParamInfo]:
@@ -1416,13 +1418,14 @@ class ApiMethodPramsInfo(BlockObj):
             pinfo.direction = g_dir  # in or out
             dir_str = dir_str.split(maxsplit=1)[1]
         _type = dir_str.replace("::", '.').lstrip('.')
-        t_info: PythonType = Util.get_python_type(in_type=_type, ns=self._ns)
+        t_info: PythonType = Util.get_python_type(in_type=_type, ns=self._ns, long_names=self._long_names)
         if t_info.is_default():
             logger.debug(
                 'ApiFnPramsInfo._process_type_tag() %s type is Default. Looking for %s', pinfo.name, _type)
             t2_type = self._get_type_from_inner_link(type_tag, _type)
             if t2_type:
-                t2_info = Util.get_python_type(t2_type, ns=self._ns)
+                t2_info = Util.get_python_type(
+                    t2_type, ns=self._ns, long_names=self._long_names)
                 if not t2_info.is_default():
                     t_info = t2_info
         logger.debug(
@@ -1711,7 +1714,7 @@ class APIData:
         else:
             ns = None
         block = self.get_proto_block(a_id=a_id)
-        result = ApiMethodPramsInfo(block=block, ns=ns)
+        result = ApiMethodPramsInfo(block=block, ns=ns, long_names=self._long_names)
         return result
 
     @AcceptedTypes(str, ftype=DecFuncEnum.METHOD)
@@ -1823,7 +1826,8 @@ class APIData:
                 ns = None
             self._func_summaries = ApiSummaries(
                 block=self.func_summary_rows,
-                ns=ns)
+                ns=ns,
+                long_names=self._long_names)
         return self._func_summaries
 
     @property
@@ -1836,7 +1840,8 @@ class APIData:
                 ns = None
             self._property_summaries = ApiSummaries(
                 block=self.property_summary_rows,
-                ns=ns)
+                ns=ns,
+                long_names=self._long_names)
         return self._property_summaries
 
     @property
@@ -1849,7 +1854,8 @@ class APIData:
                 ns = None
             self._exported_summaries = ApiSummaries(
                 block=self.export_summary_rows,
-                ns=ns)
+                ns=ns,
+                long_names=self._long_names)
         return self._exported_summaries
 
     @property
@@ -1882,7 +1888,8 @@ class APIData:
                 ns = None
             self._type_summaries = ApiSummaries(
                 block=self.types_summary_rows,
-                ns=ns)
+                ns=ns,
+                long_names=self._long_names)
         return self._type_summaries
 
     @property
@@ -2927,7 +2934,7 @@ class Util:
 
     @staticmethod
     @TypeCheckKw(arg_info={"in_type": 0, "ns": 1}, types=[str, (str, type(None))], ftype=DecFuncEnum.METHOD_STATIC)
-    def get_python_type(in_type: str, ns: Optional[str] = None) -> PythonType:
+    def get_python_type(in_type: str, ns: Optional[str] = None, long_names: bool = False) -> PythonType:
         """
         Gets Python Type info including an required imports.
         This method simplifies ``get_py_type`` when a callback is needed.
@@ -2941,6 +2948,7 @@ class Util:
         if Util.TYPE_RULES is None:
             Util.TYPE_RULES = TypeRules()
         Util.TYPE_RULES.namespace = ns
+        Util.TYPE_RULES.long_names = long_names
         try:
             return Util.TYPE_RULES.get_python_type(in_type)
         except Exception as e:

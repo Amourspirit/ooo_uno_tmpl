@@ -6,6 +6,7 @@ Handles conversion of LibreOffice types to Python Types
 import re
 from abc import ABC, abstractmethod, abstractproperty
 from typing import List, Match, Optional, Set, Union
+from parser import mod_rel as RelInfo
 # endregion Imports
 
 # region Maps
@@ -245,13 +246,17 @@ class ITypeRules(ABC):
     @abstractproperty
     def namespace(self) -> Union[str, None]:
         """Gets optional namespace value"""
+    
+    @abstractproperty
+    def long_names(self) -> bool:
+        """Gets/set long names property"""
 # endregion Interfaces
 
 # region Rules Engine
 class TypeRules(ITypeRules):
     """Type Rules Engine Class"""
     # region Constructor
-    def __init__(self, ns: Optional[str] = None) -> None:
+    def __init__(self, ns: Optional[str] = None, long_names: bool = False) -> None:
         """
         Constructor
 
@@ -261,6 +266,7 @@ class TypeRules(ITypeRules):
         self._rules: List[type[ITypeRule]] = []
         self._ns = None
         self.ns = ns
+        self._long_names = False
         self._cache = {}
         self._register_known_rules()
     # endregion Constructor
@@ -355,7 +361,6 @@ class TypeRules(ITypeRules):
         """
         Gets/set optional namespace value
         
-        This property will not start with 'com.sun.star'
         """
         return self._ns
 
@@ -365,7 +370,20 @@ class TypeRules(ITypeRules):
             self._ns = None
             return
         self._ns = str(value)
-        self._ns = self._ns.replace('com.sun.star.', '')
+        # self._ns = self._ns.replace('com.sun.star.', '')
+
+    @property
+    def long_names(self) -> bool:
+        """Specifies long_names
+
+            :getter: Gets long_names value.
+            :setter: Sets long_names value.
+        """
+        return self._long_names
+
+    @long_names.setter
+    def long_names(self, value: bool):
+        self._long_names = bool(value)
     # endregion Properties
 # endregion Rules Engine
 
@@ -378,22 +396,38 @@ class BaseRule(ITypeRule):
     # region Methods
     def _get_full_ns(self, name: str) -> str:
         """
-        Gets name with namespace prepended if namespace is available.
+        Gets name with namespace prepended if namespace is available or
+        get name with long name that is generated realitve to namespace if
+        ``ITypeRules.long_names`` is ``True``
+        
+        If ``ITypeRules.namespace`` is ``None`` then ``ITypeRules.long_names`` has No effect
+        and ``name`` is returned verbatim
 
-        If ``name`` has ``.`` then ``name`` is returnd verbatium.
-        Otherwise, namespace is prepended if available
+        If ``ITypeRules.long_names`` is ``False`` and ``ITypeRules.namespace`` is present.
+            If ``name`` has ``.`` then ``name`` is returnd verbatium
+            Otherwise, return has ``ITypeRules.namespace`` prepended to ``name``.
+        
+        If ``ITypeRules.long_names`` is ``True`` and ``ITypeRules.namespace`` is present
+        then a long_name such as ``uno_exception`` is generated and returned
+
 
         Args:
-            name (str): [description]
+            name (str): name
 
         Returns:
-            str: [description]
+            str: name or modified name
         """
         if not self._rules.namespace:
+            # without namespace there can be no long names
             return name
-        if name.find('.') < 0:
-            return f"{self._rules.namespace}.{name}"
-        return name.replace('com.sun.star.', '')
+        if self._rules.long_names is False:
+            if name.find('.') < 0:
+                return f"{self._rules.namespace}.{name}"
+            return name
+        return RelInfo.get_rel_import_long_name(
+            in_str=name,
+            ns=self._rules.namespace
+        )
 
     def _get_clean_type(self, in_type: str) -> str:
         """
