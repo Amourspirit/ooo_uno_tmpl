@@ -247,9 +247,13 @@ class CacheBase(ABC):
         Args:
             filename (Union[str, Path]): file to delete.
         """
-        f = Path(self.path, filename)
-        if os.path.exists(f):
-            os.remove(f)
+        try:
+            f = Path(self.path, filename)
+            if os.path.exists(f):
+                os.remove(f)
+        except Exception as e:
+            logger.warning(
+                'Not able to delete file: %s, error: %s', filename, str(e))
 
     @property
     def seconds(self) -> float:
@@ -282,26 +286,26 @@ class TextCache(CacheBase):
         Returns:
             Union[str, None]: File contents if retrieved; Otherwise, ``None``
         """
+        if self.seconds <= 0:
+            return None
         f = Path(self.path, filename)
         if not f.exists():
             return None
 
-        if self.seconds > 0:
-            f_stat = f.stat()
-            if f_stat.st_size == 0:
-                # shoud not be zero byte file.
-                try:
-                    self.del_from_cache(f)
-                except Exception as e:
-                    logger.warning(
-                        'Not able to delete 0 byte file: %s, error: %s', filename, str(e))
-                return None
-            ti_m = f_stat.st_mtime
-            age = time.time() - ti_m
-            if age >= self.seconds:
-                return None
-        else:
+        f_stat = f.stat()
+        if f_stat.st_size == 0:
+            # shoud not be zero byte file.
+            try:
+                self.del_from_cache(f)
+            except Exception as e:
+                logger.warning(
+                    'Not able to delete 0 byte file: %s, error: %s', filename, str(e))
             return None
+        ti_m = f_stat.st_mtime
+        age = time.time() - ti_m
+        if age >= self.seconds:
+            return None
+
         try:
             # Check if we have this file locally
             
@@ -342,26 +346,26 @@ class PickleCache(CacheBase):
         Returns:
             Union[object, None]: File contents if retrieved; Otherwise, ``None``
         """
+        if self.seconds <= 0:
+            return None
         f = Path(self.path, filename)
         if not f.exists():
             return None
 
-        if self.seconds > 0:
-            f_stat = f.stat()
-            if f_stat.st_size == 0:
-                # shoud not be zero byte file.
-                try:
-                    self.del_from_cache(f)
-                except Exception as e:
-                    logger.warning(
-                        'Not able to delete 0 byte file: %s, error: %s', filename, str(e))
-                return None
-            ti_m = f_stat.st_mtime
-            age = time.time() - ti_m
-            if age >= self.seconds:
-                return None
-        else:
+        f_stat = f.stat()
+        if f_stat.st_size == 0:
+            # shoud not be zero byte file.
+            try:
+                self.del_from_cache(f)
+            except Exception as e:
+                logger.warning(
+                    'Not able to delete 0 byte file: %s, error: %s', filename, str(e))
             return None
+        ti_m = f_stat.st_mtime
+        age = time.time() - ti_m
+        if age >= self.seconds:
+            return None
+
         try:
             # Open the file in binary mode
             with open(f, 'rb') as file:
@@ -2720,6 +2724,24 @@ class Util:
         """
         return RelInfo.get_rel_import_full(in_str=i_str,ns=ns, sep=sep)
 
+    def get_rel_import_long_name(i_str: str, ns: str, sep: str = '.') -> str:
+        """
+        Geta a long Name. Same as getting last part of ```get_rel_import_long()```
+
+        Args:
+            in_str (str): Namespace and object such as ``com.sun.star.uno.Exception``
+            ns (str): Namespace used to get realitive postion such as ``com.sun.star.awt``
+            sep (str, optional): Namespace seperator. Defaults to ``.``
+
+        Returns:
+            str: Long name such as ``uno_exception``
+        """
+        return RelInfo.get_rel_import_long_name(
+            in_str=i_str,
+            ns=ns,
+            sep=sep
+        )
+
     @AcceptedTypes(str, opt_all_args=True, ftype=DecFuncEnum.METHOD_STATIC)
     @staticmethod
     def encode_char(input:str, replace:str, en:str = '\xff') -> str:
@@ -3349,26 +3371,26 @@ class ImageCache(CacheBase):
         Returns:
             Union[str, None]: File contents if retrieved; Otherwise, ``None``
         """
+        if self.seconds <= 0:
+            return None
         f = Path(self.path, filename)
         if not f.exists():
             return None
 
-        if self.seconds > 0:
-            f_stat = f.stat()
-            if f_stat.st_size == 0:
-                # shoud not be zero byte file.
-                try:
-                    self.del_from_cache(f)
-                except Exception as e:
-                    logger.warning(
-                        'Not able to delete 0 byte file: %s, error: %s', filename, str(e))
-                return None
-            ti_m = f_stat.st_mtime
-            age = time.time() - ti_m
-            if age >= self.seconds:
-                return None
-        else:
+        f_stat = f.stat()
+        if f_stat.st_size == 0:
+            # shoud not be zero byte file.
+            try:
+                self.del_from_cache(f)
+            except Exception as e:
+                logger.warning(
+                    'Not able to delete 0 byte file: %s, error: %s', filename, str(e))
             return None
+        ti_m = f_stat.st_mtime
+        age = time.time() - ti_m
+        if age >= self.seconds:
+            return None
+
         try:
             # Check if we have this file locally
             with Image.open(f) as img:

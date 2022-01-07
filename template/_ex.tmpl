@@ -13,6 +13,7 @@ $self.init_data()#slurp
 #attr $quote = set()
 #attr $typings = set()
 #attr $inherits = []
+#attr $extends_map = {}
 #attr $imports = []
 #attr $from_imports = []
 #attr $from_imports_typing = []
@@ -33,18 +34,18 @@ import typing
 #for $imp in $imports
 import $imp
 #end for
-#for $frm, $imp in $from_imports
-from $frm import $imp
+#for $imp in $from_imports
+$self.get_from_import($name, $imp)
 #end for
 #if len($from_imports_typing) > 0
 if typing.TYPE_CHECKING:
-#for $frm, $imp in $from_imports_typing
-    from $frm import $imp
+#for $imp in $from_imports_typing
+    $self.get_from_import($name, $imp)
 #end for
 #end if
 
 
-class ${safe_name}($self.lst_to_str($inherits))$self.get_class_end()
+class ${safe_name}($self.get_class_inherits($name, $inherits))$self.get_class_end()
 #if $include_desc
     """
     #for $line in $self.line_gen($desc)

@@ -60,9 +60,9 @@ class ApiNs(base.ApiNamespace):
 
 class ApiExData(base.APIData):
     # region constructor
-    @TypeCheck((str, base.SoupObj), bool, ftype=DecFuncEnum.METHOD)
-    def __init__(self, url_soup: Union[str, base.SoupObj], allow_cache: bool):
-        super().__init__(url_soup=url_soup, allow_cache=allow_cache)
+    @TypeCheck((str, base.SoupObj), bool, bool, ftype=DecFuncEnum.METHOD)
+    def __init__(self, url_soup: Union[str, base.SoupObj], allow_cache: bool, long_names: bool = False):
+        super().__init__(url_soup=url_soup, allow_cache=allow_cache,long_names=long_names)
 
         self._ns: ApiNs = None
     # endregion constructor
@@ -82,10 +82,19 @@ class ApiExData(base.APIData):
 # endregion API Ex
 class ParserEx(base.ParserBase):
     # region Constructor
+    @TypeCheckKw(
+        arg_info={"allow_cache": bool, "long_names": bool},
+        ftype=DecFuncEnum.METHOD
+    )
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self._allow_caching = kwargs.get('allow_cache', True)
-        self._api_data = ApiExData(url_soup=self.url, allow_cache=self._allow_cache)
+        self._allow_caching: bool = kwargs.get('allow_cache', True)
+        self._long_names: bool = kwargs.get('long_names', False)
+        self._api_data = ApiExData(
+            url_soup=self.url,
+            allow_cache=self._allow_cache,
+            long_names=self._long_names
+        )
         self._imports: Set[str] = set()
         self._requires_typing = False
         self._cache = {}
@@ -93,7 +102,8 @@ class ParserEx(base.ParserBase):
 
     def get_parser_args(self) -> dict:
         args = {
-            "sort": self.sort
+            "sort": self.sort,
+            "long_names": self.long_names
         }
         return args
 
@@ -224,6 +234,11 @@ class ParserEx(base.ParserBase):
     @property
     def api_data(self) -> ApiExData:
         return self._api_data
+    
+    @property
+    def long_names(self) -> bool:
+        """Gets long_names value"""
+        return self._long_names
 class WriterEx(base.WriteBase):
     # region Constructor
     @TypeCheckKw(arg_info={
@@ -307,6 +322,7 @@ class WriterEx(base.WriteBase):
         p_dict = {}
         p_dict['from_imports'] = self._get_from_imports()
         p_dict['from_imports_typing'] = self._get_from_imports_typing()
+        p_dict['extends_map'] = self._get_imports_map()
         p_dict['quote'] = self._get_quote_flat()
         p_dict['typings'] = self._get_typings()
         p_dict['requires_typing'] = self._p_requires_typing
@@ -346,6 +362,8 @@ class WriterEx(base.WriteBase):
         self._template = self._template.replace('{name}', self._p_name)
         self._template = self._template.replace('{ns}', str(self._p_namespace))
         self._template = self._template.replace('{link}', self._p_url)
+        self._template = self._template.replace(
+            '{extends_map}', base.Util.get_formated_dict_list_str(self._get_imports_map()))
         self._template = self._template.replace(
             '{quote}',
             str(set(self._get_quote_flat())))
@@ -388,11 +406,12 @@ class WriterEx(base.WriteBase):
         if key in self._cache:
             return self._cache[key]
         lst = []
+        if self._parser.long_names:
+            rel_fn = base.Util.get_rel_import_long
+        else:
+            rel_fn = base.Util.get_rel_import
         for ns in self._p_imports:
-            f, n = base.Util.get_rel_import(
-                i_str=ns, ns=self._p_namespace
-            )
-            lst.append([f, n])
+           lst.append([*rel_fn(ns, self._p_namespace)])
         self._cache[key] = lst
         return self._cache[key]
 
@@ -409,7 +428,19 @@ class WriterEx(base.WriteBase):
         self._cache[key] = lst
         return self._cache[key]
      
-     # endregion get Imports
+    def _get_imports_map(self) -> Dict[str, str]:
+        key = '_get_imports_map'
+        if key in self._cache:
+            return self._cache[key]
+        results = {}
+        if self._parser.long_names is False:
+            return results
+        for im in self._p_imports:
+            results[im] = base.Util.get_rel_import_long_name(
+                im, ns=self._p_namespace)
+        self._cache[key] = results
+        return self._cache[key]
+    # endregion get Imports
 
     # region set data
     def _set_info(self):
@@ -557,6 +588,7 @@ def _get_parsed_args(*args) -> Dict[str, bool]:
         "no_desc": True,
         "no_print_clear": True,
         'no_sort': True,
+        "no_long_names": True,
         "long_template": False,
         "clipboard": False,
         "print_json": False,
@@ -570,6 +602,7 @@ def _get_parsed_args(*args) -> Dict[str, bool]:
         "no_desc": False,
         "no_print_clear": False,
         'no_sort': False,
+        "no_long_names": False,
         "long_template": True,
         "clipboard": True,
         "print_json": True,
@@ -579,6 +612,8 @@ def _get_parsed_args(*args) -> Dict[str, bool]:
         "verbose": True
     }
     lookups = {
+        "l": "no_long_names",
+        "no_long_names": "no_long_names",
         "x": "no_cache",
         "no_cache": "no_cache",
         "d": "do_desc",
@@ -622,6 +657,7 @@ def parse(*args, **kwargs):
         'no_print_clear (str, optional): Short form ``'p'``. No clearing of terminal
             when otuput to terminal. Default ``False``
         'no_desc' (str, optional): Short from ``'d'``. No description will be outputed in template. Default ``False``
+        'no_long_names' (str, optional): Short form ``'l'``. No long names. Default ``False``
         'print_json' (str, optional): Short form ``'n'``. Print json to termainl. Default ``False``
         'print_template' (str, optional): Short form ``'m'``. Print template to terminal. Default ``False``
         'write_template' (str, optional): Short form ``'t'``. Write template file into obj_uno subfolder. Default ``False``
@@ -651,7 +687,8 @@ def parse(*args, **kwargs):
     p = ParserEx(
         url=pkwargs['url'],
         sort=pargs['no_sort'],
-        cache=pargs['no_cache']
+        cache=pargs['no_cache'],
+        long_names=pargs['no_long_names']
     )
     w = WriterEx(
         parser=p,
@@ -670,9 +707,9 @@ def parse(*args, **kwargs):
 
 def _main():
     # url = 'https://api.libreoffice.org/docs/idl/ref/exceptioncom_1_1sun_1_1star_1_1configuration_1_1CannotLoadConfigurationException.html'
-    url = 'https://api.libreoffice.org/docs/idl/ref/exceptioncom_1_1sun_1_1star_1_1uno_1_1Exception.html'
+    # url = 'https://api.libreoffice.org/docs/idl/ref/exceptioncom_1_1sun_1_1star_1_1uno_1_1Exception.html'
     # url = 'https://api.libreoffice.org/docs/idl/ref/exceptioncom_1_1sun_1_1star_1_1accessibility_1_1IllegalAccessibleComponentStateException.html'
-    # url = 'https://api.libreoffice.org/docs/idl/ref/exceptioncom_1_1sun_1_1star_1_1beans_1_1IntrospectionException.html'
+    url = 'https://api.libreoffice.org/docs/idl/ref/exceptioncom_1_1sun_1_1star_1_1beans_1_1IntrospectionException.html'
     args = ('v', 'n')
     kwargs = {
         "u": url,
@@ -709,6 +746,12 @@ def main():
         help='No description will be outputed in template',
         action='store_false',
         dest='desc',
+        default=True)
+    parser.add_argument(
+        '-l', '--no-long-names',
+        help='Short Names such as XInterface will be generated instead of uno_x_interface',
+        action='store_false',
+        dest='long_names',
         default=True)
     parser.add_argument(
         '-p', '--no-print-clear',
@@ -784,7 +827,8 @@ def main():
     p = ParserEx(
         url=args.url,
         sort=args.sort,
-        cache=args.cache
+        cache=args.cache,
+        long_names=args.long_names
     )
     w = WriterEx(
         parser=p,

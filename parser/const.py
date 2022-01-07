@@ -3,6 +3,7 @@
 """
 Process a link to a page that contains a constant
 """
+# region Imports
 from enum import IntEnum, auto
 import os
 import sys
@@ -26,7 +27,9 @@ from parser.base import SoupObj, SummaryInfo
 from logger.log_handle import get_logger
 from parser import __version__, JSON_ID
 from parser.mod_type import PythonType
+# endregion Imports
 
+# region Logger
 logger = None
 
 def _set_loggers(l: Union[logging.Logger, None]):
@@ -35,9 +38,13 @@ def _set_loggers(l: Union[logging.Logger, None]):
     base.logger = l
 
 _set_loggers(None)
+# endregion Logger
 
+# region Regex
 pattern_hex = re.compile(r"0x[0-9A-Fa-f]+")
+# endregion Regex
 
+# region DataClass
 dataitem = namedtuple(
     'dataitem', ['value', 'raw_value', 'name', 'datatype', 'lines'])
 
@@ -48,6 +55,8 @@ class DataItem:
     type: str
     val: 'Val'
     lines: List[str] = field(default_factory=list)
+
+# endregion DataClass
 
 # region Rule Engine
 class ValTypeEnum(IntEnum):
@@ -1108,6 +1117,7 @@ class ApiData(base.APIData):
 
 # endregion API classes
 
+# region Parser
 class Parser(base.ParserBase):
     
     # region init
@@ -1304,7 +1314,9 @@ class Parser(base.ParserBase):
         return self._cache[key]
     # endregion Properties
 
+# endregion Parser
 
+# region Writer
 class ConstWriter(base.WriteBase):
     # region Constructor
     @TypeCheckKw(arg_info={
@@ -1577,6 +1589,8 @@ class ConstWriter(base.WriteBase):
         self._cache[key] = obj_path
         return self._cache[key]
 
+# endregion Writer
+
 # region Parse method
 
 
@@ -1713,6 +1727,8 @@ def parse(*args, **kwargs):
     )
     w.write()
 # endregion Parse method
+
+# region Main
 
 def _api():
     global logger
@@ -1863,3 +1879,4 @@ def main():
  
 if __name__ == '__main__':
     main()
+# endregion Main

@@ -35,6 +35,7 @@ class BaseTpml(Template):
         self._is_class_init = True
         self._is_class_data = False
         self._logger = None
+        self.extends_map = {}
         get_logger = None
         self._logger: logging.Logger = None
         try:
@@ -170,8 +171,8 @@ class BaseTpml(Template):
         """
         if not input:
             return ''
-        _parts = input.rsplit(sep, 1)
-        return _parts[0] if len(_parts) == 1 else _parts[1]
+        _parts = input.rsplit(sep=sep, maxsplit=1)
+        return _parts.pop()
 
     def convert_lst_last(self, lst: List[str], sep='.') -> List[str]:
         """
@@ -315,14 +316,18 @@ class BaseTpml(Template):
         Returns:
             str: comma sep string of inherits.
         """
-        # imports should only be a list of names without namespace prepended.
-        # in case will process anyways
         def get_import(name: str) -> str:
+            def is_mapped(name: str) -> bool:
+                return name in self.extends_map
+            def get_mapped(name: str) -> bool:
+                return self.extends_map[name]
+            if is_mapped(name):
+                return get_mapped(name)
             _name = self.get_last_part(input=name)
             if class_name == _name:
                 return f"{self.camel_to_snake(_name)}.{_name}"
             else:
-                return name
+                return _name
         if isinstance(imports, str):
             return get_import(imports)
         im_lst: List[str] = []

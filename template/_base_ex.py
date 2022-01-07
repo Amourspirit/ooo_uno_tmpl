@@ -22,8 +22,7 @@ class BaseEx(BaseJson):
         set_data('namespace')
         set_data('desc')
         set_data('url', 'link')
-        _inherits = self.convert_lst_last(data.get('extends', []))
-        setattr(self, 'inherits', _inherits)
+        setattr(self, 'inherits', data.get('extends', []))
         set_data('imports')
         set_data('namespace')
         self.sort = bool(json_data['parser_args'].get('sort', False))
@@ -37,6 +36,9 @@ class BaseEx(BaseJson):
         self.requires_typing = bool(data.get('requires_typing', False))
         set_data('from_imports')
         set_data('from_imports_typing')
+        extends_map = data.get('extends_map', None)
+        if extends_map:
+            self.extends_map.update(extends_map)
         # self.requires_typing = False if len(
         #     self.from_imports_typing) == 0 else True
         quote: List[str] = data.get('quote', [])

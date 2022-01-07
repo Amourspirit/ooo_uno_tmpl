@@ -13,14 +13,14 @@ import textwrap
 import xerox  # requires xclip - sudo apt-get install xclip
 import re
 from typing import Dict, List, Set, Union
-from kwhelp.decorator import AcceptedTypes, DecFuncEnum, RequireArgs, TypeCheckKw
+from kwhelp.decorator import AcceptedTypes, DecFuncEnum, RequireArgs, TypeCheck, TypeCheckKw
 from pathlib import Path
 try:
     import base
 except ModuleNotFoundError:
     import parser.base as base
 from logger.log_handle import get_logger
-from parser.base import SummaryInfo
+from parser.base import SummaryInfo, Util
 from parser import __version__, JSON_ID
 # endregion Imports
 
@@ -87,6 +87,7 @@ class ApiNs(base.ApiNamespace):
 
 class ApiInterfaceData(base.APIData):
     # region Constructor
+    @TypeCheck((str, base.SoupObj), bool, bool, ftype=DecFuncEnum.METHOD)
     def __init__(self, url_soup: Union[str, base.SoupObj], allow_cache: bool, long_names: bool = False):
         super().__init__(url_soup=url_soup, allow_cache=allow_cache, long_names=long_names)
         self._si_key = 'summeries'
@@ -178,13 +179,13 @@ class Parser(base.ParserBase):
 
     # region Constructor
     @TypeCheckKw(
-        arg_info={"allow_cache": bool},
+        arg_info={"allow_cache": bool, "long_names": bool},
         ftype=DecFuncEnum.METHOD
     )
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self._allow_caching = kwargs.get('allow_cache', True)
-        self._long_names: bool = bool(kwargs.get('long_names', False))
+        self._allow_caching: bool = kwargs.get('allow_cache', True)
+        self._long_names: bool = kwargs.get('long_names', False)
         self._api_data = ApiInterfaceData(
             url_soup=self.url,
             allow_cache=self._allow_cache,
@@ -203,7 +204,8 @@ class Parser(base.ParserBase):
 
     def get_parser_args(self) -> dict:
         args = {
-            "sort": self.sort
+            "sort": self.sort,
+            "long_names": self.long_names
         }
         return args
 
@@ -517,6 +519,7 @@ class Writer(base.WriteBase):
         p_dict = {}
         p_dict['from_imports'] = self._get_from_imports()
         p_dict['from_imports_typing'] = self._get_from_imports_typing()
+        p_dict['extends_map'] = self._get_imports_map()
         p_dict['quote'] = self._get_quote_flat()
         p_dict['typings'] = self._get_typings()
         p_dict['requires_typing'] = self._p_requires_typing
@@ -576,6 +579,18 @@ class Writer(base.WriteBase):
             # lst.append([f, n])
             lst.append([*rel_fn(ns, self._p_namespace)])
         self._cache[key] = lst
+        return self._cache[key]
+
+    def _get_imports_map(self) -> Dict[str, str]:
+        key = '_get_imports_map'
+        if key in self._cache:
+            return self._cache[key]
+        results = {}
+        if self._parser.long_names is False:
+            return results
+        for im in self._p_imports:
+            results[im] = base.Util.get_rel_import_long_name(im, ns=self._p_namespace)
+        self._cache[key] = results
         return self._cache[key]
 
     def _get_quote_flat(self) -> List[str]:
@@ -666,6 +681,9 @@ class Writer(base.WriteBase):
         self._template = self._template.replace('{link}', self._p_url)
 
         self._template = self._template.replace(
+            '{extends_map}', base.Util.get_formated_dict_list_str(self._get_imports_map()))
+
+        self._template = self._template.replace(
             '{quote}',
             str(set(self._get_quote_flat())))
         self._template = self._template.replace(
@@ -722,6 +740,14 @@ class Writer(base.WriteBase):
         self._p_imports.update(_imports)
         self._p_imports.update(data['extends'])
         self._p_imports_typing.update(self._parser.imports)
+        self._p_imports = base.Util.get_clean_imports(
+                            ns=self._p_namespace,
+                            imports=self._p_imports
+                        )
+        self._p_imports_typing = base.Util.get_clean_imports(
+            ns=self._p_namespace,
+            imports=self._p_imports_typing
+        )
         # in some cases such as XIntrospectionAccess
         # https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1beans_1_1XIntrospectionAccess.html
         # class is a subclass of XInterface and has a method the has return type XInterface.
@@ -821,8 +847,8 @@ def _get_parsed_args(*args) -> Dict[str, bool]:
         "no_cache": True,
         "no_desc": True,
         "no_print_clear": True,
-        "long_template": False,
-        "long_names": False,
+        "no_long_names": True,
+        "long_template": True,
         "clipboard": False,
         "print_json": False,
         "print_template": False,
@@ -835,8 +861,8 @@ def _get_parsed_args(*args) -> Dict[str, bool]:
         "no_cache": False,
         "no_desc": False,
         "no_print_clear": False,
-        "long_template": True,
-        "long_names": True,
+        "no_long_names": False,
+        "long_template": False,
         "clipboard": True,
         "print_json": True,
         "print_template": True,
@@ -845,8 +871,8 @@ def _get_parsed_args(*args) -> Dict[str, bool]:
         "verbose": True
     }
     lookups = {
-        "l": "long_names",
-        "long_name": "long_names",
+        "l": "no_long_names",
+        "no_long_names": "no_long_names",
         "s": "no_sort",
         "no_sort": "no_sort",
         "x": "no_cache",
@@ -894,6 +920,7 @@ class Processer:
         Other Arguments:
             url (str): url to parse
             sort (bool, optional): No sorting of results. Default ``True``
+            long_names (bool, optional): No Long Names: Default ``False``
             cache (bool, optional): caching. Default ``False``
             clear_on_print (bool, optional): No clearing of terminal when otuput to terminal. Default ``False``
             write_template_long (bool, optional): Writes a long format template. Requires write_template is set. Default ``False``
@@ -951,6 +978,7 @@ def parse(*args, **kwargs):
         'no_print_clear (str, optional): Short form ``'p'``. No clearing of terminal
             when otuput to terminal. Default ``False``
         'no_desc' (str, optional): Short from ``'d'``. No description will be outputed in template. Default ``False``
+        'no_long_names' (str, optional): Short form ``'l'``. No long names. Default ``False``
         'long_template' (str, optional): Short form ``'g'``. Writes a long format template.
             Requires write_template is set. Default ``False``
         'clipboard' (str, optional): Short form ``'c'``. Copy to clipboard. Default ``False``
@@ -1033,6 +1061,12 @@ def get_cmd_args() -> argparse.Namespace:
         help='No description will be outputed in template',
         action='store_false',
         dest='desc',
+        default=True)
+    parser.add_argument(
+        '-l', '--no-long-names',
+        help='Short Names such as XInterface will be generated instead of uno_x_interface',
+        action='store_false',
+        dest='long_names',
         default=True)
     parser.add_argument(
         '-s', '--no-sort',
@@ -1135,7 +1169,7 @@ def main():
         clear_on_print=(not args.no_print_clear),
         write_template_long=args.long_format,
         include_desc=args.desc,
-        long_names=True
+        long_names=args.long_names
     )
     if args.print_template is False and args.print_json is False:
         print('')
@@ -1143,5 +1177,5 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    _main()
 # endregion Main
