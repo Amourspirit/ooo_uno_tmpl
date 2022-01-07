@@ -128,6 +128,7 @@ def parse(*args, **kwargs):
         'no_sort' (str, optional): Short form ``'s'``. No sorting of results. Default ``False``
         'no_cache' (str, optional): Short form ``'x'``. No caching. Default ``False``
         'no_desc' (str, optional): Short form ``'d'``. No description will be outputed in template, Defalut ``False``
+        'no_long_names' (str, optional): Short form ``'l'``. No long names. Default ``False``
         'no_print_clear (str, optional): Short form ``'p'``. No clearing of terminal
             when otuput to terminal. Default ``False``
         'print_json' (str, optional): Short form ``'n'``. Print json to termainl. Default ``False``

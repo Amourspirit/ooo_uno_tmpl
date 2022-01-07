@@ -30,13 +30,16 @@ RESERVER_WORDS = {
     'True', 'try', 'while', 'with', 'yield'
     }
 class BaseTpml(Template):
+
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self._is_class_init = True
         self._is_class_data = False
         self._logger = None
-        self.extends_map = {}
         get_logger = None
+        if not hasattr(self, "extends_map"):
+            setattr(self, 'extends_map', {})
         self._logger: logging.Logger = None
         try:
             _, get_logger = self.dynamic_imp(

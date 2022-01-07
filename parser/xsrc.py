@@ -724,13 +724,10 @@ class Writer(base.WriteBase):
         if key in self._cache:
             return
 
-        def get_extends(lst: List[str]) -> List[str]:
-            return [base.Util.get_last_part(s) for s in lst]
-            # return [s.rsplit('.', 1)[1] for s in lst]
         data = self._parser.get_info()
         self._p_name = data['name']
         self._p_namespace = data['namespace']
-        self._p_extends = get_extends(data['extends'])
+        self._p_extends = data['extends']
         self._p_desc = data['desc']
         self._p_url = data['url']
         self._p_data = self._parser.get_formated_data()
@@ -848,7 +845,7 @@ def _get_parsed_args(*args) -> Dict[str, bool]:
         "no_desc": True,
         "no_print_clear": True,
         "no_long_names": True,
-        "long_template": True,
+        "long_template": False,
         "clipboard": False,
         "print_json": False,
         "print_template": False,
@@ -862,7 +859,7 @@ def _get_parsed_args(*args) -> Dict[str, bool]:
         "no_desc": False,
         "no_print_clear": False,
         "no_long_names": False,
-        "long_template": False,
+        "long_template": True,
         "clipboard": True,
         "print_json": True,
         "print_template": True,
