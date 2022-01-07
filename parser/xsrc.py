@@ -1020,7 +1020,7 @@ def parse(*args, **kwargs):
         clear_on_print=(not pargs['no_print_clear']),
         write_template_long=pargs['long_template'],
         include_desc=pargs['no_desc'],
-        long_names=pargs['long_names']
+        long_names=pargs['no_long_names']
     )
     proc.process()
 

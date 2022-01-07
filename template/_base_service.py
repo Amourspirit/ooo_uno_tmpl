@@ -29,6 +29,9 @@ class BaseService(BaseJson):
         sort = bool(json_data['parser_args'].get('sort', False))
         self.attribs = self._get_attribs(json_data=json_data, sort=sort)
         setattr(self, 'requires_typing', data.get('requires_typing', False))
+        extends_map = data.get('extends_map', None)
+        if extends_map:
+            self.extends_map.update(extends_map)
         ver_0_1_1 = Version(0, 1, 1)
         if self.json_version == ver_0_1_1:
             self._load_0_1_1(json_data=json_data)
