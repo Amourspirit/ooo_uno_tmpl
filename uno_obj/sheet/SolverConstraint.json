@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "SolverConstraint",
   "namespace": "com.sun.star.sheet",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "sort": true,
@@ -21,16 +22,19 @@
     "from_imports_typing": [
       [
         "..table.cell_address",
-        "CellAddress"
+        "CellAddress",
+        "table_cell_address_i"
       ],
       [
         ".solver_constraint_operator",
-        "SolverConstraintOperator"
+        "SolverConstraintOperator",
+        "solver_constraint_operator_i"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "CellAddress",
-      "SolverConstraintOperator"
+      "solver_constraint_operator_i",
+      "table_cell_address_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -43,14 +47,14 @@
     "items": [
       {
         "name": "Left",
-        "type": "CellAddress",
+        "type": "table_cell_address_i",
         "lines": [
           "The address of the cell that is constrained."
         ]
       },
       {
         "name": "Operator",
-        "type": "SolverConstraintOperator",
+        "type": "solver_constraint_operator_i",
         "lines": [
           "The type of the constraint."
         ]

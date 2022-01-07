@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "DragSourceEvent",
   "namespace": "com.sun.star.datatransfer.dnd",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "sort": true,
@@ -20,22 +21,28 @@
     "from_imports": [
       [
         "...lang.event_object",
-        "EventObject"
+        "EventObject",
+        "lang_event_object_i"
       ]
     ],
     "from_imports_typing": [
       [
-        ".x_drag_source",
-        "XDragSource"
+        ".x_drag_source_context",
+        "XDragSourceContext",
+        "x_drag_source_context_i"
       ],
       [
-        ".x_drag_source_context",
-        "XDragSourceContext"
+        ".x_drag_source",
+        "XDragSource",
+        "x_drag_source_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.lang.EventObject": "lang_event_object_i"
+    },
     "quote": [
-      "XDragSourceContext",
-      "XDragSource"
+      "x_drag_source_i",
+      "x_drag_source_context_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -52,14 +59,14 @@
     "items": [
       {
         "name": "DragSource",
-        "type": "XDragSource",
+        "type": "x_drag_source_i",
         "lines": [
           "The drag source on which the Drag and Drop operation was initiated."
         ]
       },
       {
         "name": "DragSourceContext",
-        "type": "XDragSourceContext",
+        "type": "x_drag_source_context_i",
         "lines": [
           "The drag source context of the current drag operation."
         ]

@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "DataPilotTableResultData",
   "namespace": "com.sun.star.sheet",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "sort": true,
@@ -21,19 +22,22 @@
     "from_imports_typing": [
       [
         ".data_result",
-        "DataResult"
+        "DataResult",
+        "data_result_i"
       ],
       [
         ".data_pilot_field_filter",
-        "DataPilotFieldFilter"
+        "DataPilotFieldFilter",
+        "data_pilot_field_filter_i"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "DataResult",
-      "typing.List[DataPilotFieldFilter]"
+      "typing.List[data_pilot_field_filter_i]",
+      "data_result_i"
     ],
     "typings": [
-      "typing.List[DataPilotFieldFilter]"
+      "typing.List[data_pilot_field_filter_i]"
     ],
     "requires_typing": true,
     "fullname": "com.sun.star.sheet.DataPilotTableResultData",
@@ -58,14 +62,14 @@
       },
       {
         "name": "Result",
-        "type": "DataResult",
+        "type": "data_result_i",
         "lines": [
           "more information about the result contained in the DataResult type."
         ]
       },
       {
         "name": "FieldFilters",
-        "type": "typing.List[DataPilotFieldFilter]",
+        "type": "typing.List[data_pilot_field_filter_i]",
         "lines": [
           "This is a set of filter criteria that can be used to re-create those data rows that contribute to the value shown in the cell."
         ]

@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "TableFilterField2",
   "namespace": "com.sun.star.sheet",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "sort": true,
@@ -21,11 +22,13 @@
     "from_imports_typing": [
       [
         ".filter_connection",
-        "FilterConnection"
+        "FilterConnection",
+        "filter_connection_i"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "FilterConnection"
+      "filter_connection_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -44,7 +47,7 @@
     "items": [
       {
         "name": "Connection",
-        "type": "FilterConnection",
+        "type": "filter_connection_i",
         "lines": [
           "specifies how the condition is connected to the previous condition."
         ]

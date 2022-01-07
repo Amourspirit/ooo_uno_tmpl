@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "ChartDataRow",
   "namespace": "com.sun.star.chart",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "sort": true,
@@ -21,14 +22,16 @@
     "from_imports_typing": [
       [
         ".chart_data_value",
-        "ChartDataValue"
+        "ChartDataValue",
+        "chart_data_value_i"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "typing.List[typing.List[ChartDataValue]]"
+      "typing.List[typing.List[chart_data_value_i]]"
     ],
     "typings": [
-      "typing.List[typing.List[ChartDataValue]]"
+      "typing.List[typing.List[chart_data_value_i]]"
     ],
     "requires_typing": true,
     "fullname": "com.sun.star.chart.ChartDataRow",
@@ -53,7 +56,7 @@
       },
       {
         "name": "Points",
-        "type": "typing.List[typing.List[ChartDataValue]]",
+        "type": "typing.List[typing.List[chart_data_value_i]]",
         "lines": [
           "The points contained in this data row."
         ]

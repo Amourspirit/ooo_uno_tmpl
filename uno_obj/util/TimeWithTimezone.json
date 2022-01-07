@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "TimeWithTimezone",
   "namespace": "com.sun.star.util",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "sort": true,
@@ -21,11 +22,13 @@
     "from_imports_typing": [
       [
         ".time",
-        "Time"
+        "Time",
+        "time_i"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "Time"
+      "time_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -42,7 +45,7 @@
     "items": [
       {
         "name": "TimeInTZ",
-        "type": "Time",
+        "type": "time_i",
         "lines": [
           "the time (in TimeZone)"
         ]

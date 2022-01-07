@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "SearchOptions",
   "namespace": "com.sun.star.util",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "sort": true,
@@ -20,17 +21,20 @@
     "from_imports": [],
     "from_imports_typing": [
       [
-        "..lang.locale",
-        "Locale"
+        ".search_algorithms",
+        "SearchAlgorithms",
+        "search_algorithms_i"
       ],
       [
-        ".search_algorithms",
-        "SearchAlgorithms"
+        "..lang.locale",
+        "Locale",
+        "lang_locale_i"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "Locale",
-      "SearchAlgorithms"
+      "lang_locale_i",
+      "search_algorithms_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -41,14 +45,14 @@
     "items": [
       {
         "name": "Locale",
-        "type": "Locale",
+        "type": "lang_locale_i",
         "lines": [
           "The locale for case insensitive search."
         ]
       },
       {
         "name": "algorithmType",
-        "type": "SearchAlgorithms",
+        "type": "search_algorithms_i",
         "lines": [
           "search type"
         ]

@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "Lock",
   "namespace": "com.sun.star.ucb",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "sort": true,
@@ -20,17 +21,22 @@
     "from_imports": [
       [
         ".lock_entry",
-        "LockEntry"
+        "LockEntry",
+        "lock_entry_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".lock_depth",
-        "LockDepth"
+        "LockDepth",
+        "lock_depth_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.ucb.LockEntry": "lock_entry_i"
+    },
     "quote": [
-      "LockDepth",
+      "lock_depth_i",
       "typing.List[str]"
     ],
     "typings": [
@@ -48,7 +54,7 @@
     "items": [
       {
         "name": "Depth",
-        "type": "LockDepth",
+        "type": "lock_depth_i",
         "lines": [
           "defines the lock's depth."
         ]

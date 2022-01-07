@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "PostCommandArgument",
   "namespace": "com.sun.star.ucb",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "sort": true,
@@ -20,17 +21,20 @@
     "from_imports": [],
     "from_imports_typing": [
       [
-        "..io.x_input_stream",
-        "XInputStream"
+        "..uno.x_interface",
+        "XInterface",
+        "uno_x_interface_i"
       ],
       [
-        "..uno.x_interface",
-        "XInterface"
+        "..io.x_input_stream",
+        "XInputStream",
+        "io_x_input_stream_i"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "XInputStream",
-      "XInterface"
+      "uno_x_interface_i",
+      "io_x_input_stream_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -43,14 +47,14 @@
     "items": [
       {
         "name": "Sink",
-        "type": "XInterface",
+        "type": "uno_x_interface_i",
         "lines": [
           "The data sink receiving the returned contents (supporting either com.sun.star.io.XActiveDataSink or com.sun.star.io.XOutputStream)."
         ]
       },
       {
         "name": "Source",
-        "type": "XInputStream",
+        "type": "io_x_input_stream_i",
         "lines": [
           "The data source containing the data to post."
         ]

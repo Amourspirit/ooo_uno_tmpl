@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "ExportStreamInfo",
   "namespace": "com.sun.star.ucb",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "sort": true,
@@ -21,11 +22,13 @@
     "from_imports_typing": [
       [
         "..io.x_output_stream",
-        "XOutputStream"
+        "XOutputStream",
+        "io_x_output_stream_i"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "XOutputStream"
+      "io_x_output_stream_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -45,7 +48,7 @@
       },
       {
         "name": "Target",
-        "type": "XOutputStream",
+        "type": "io_x_output_stream_i",
         "lines": [
           "the output stream to export into."
         ]

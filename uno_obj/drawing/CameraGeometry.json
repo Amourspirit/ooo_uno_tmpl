@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "CameraGeometry",
   "namespace": "com.sun.star.drawing",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "sort": true,
@@ -21,16 +22,19 @@
     "from_imports_typing": [
       [
         ".position3_d",
-        "Position3D"
+        "Position3D",
+        "position3_d_i"
       ],
       [
         ".direction3_d",
-        "Direction3D"
+        "Direction3D",
+        "direction3_d_i"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "Position3D",
-      "Direction3D"
+      "direction3_d_i",
+      "position3_d_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -43,21 +47,21 @@
     "items": [
       {
         "name": "vpn",
-        "type": "Direction3D",
+        "type": "direction3_d_i",
         "lines": [
           "is the camera view direction"
         ]
       },
       {
         "name": "vrp",
-        "type": "Position3D",
+        "type": "position3_d_i",
         "lines": [
           "is the camera position"
         ]
       },
       {
         "name": "vup",
-        "type": "Direction3D",
+        "type": "direction3_d_i",
         "lines": [
           "is the camera up direction"
         ]

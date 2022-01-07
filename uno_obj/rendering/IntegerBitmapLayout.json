@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "IntegerBitmapLayout",
   "namespace": "com.sun.star.rendering",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "sort": true,
@@ -20,17 +21,20 @@
     "from_imports": [],
     "from_imports_typing": [
       [
-        ".x_bitmap_palette",
-        "XBitmapPalette"
+        ".x_integer_bitmap_color_space",
+        "XIntegerBitmapColorSpace",
+        "x_integer_bitmap_color_space_i"
       ],
       [
-        ".x_integer_bitmap_color_space",
-        "XIntegerBitmapColorSpace"
+        ".x_bitmap_palette",
+        "XBitmapPalette",
+        "x_bitmap_palette_i"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "XBitmapPalette",
-      "XIntegerBitmapColorSpace"
+      "x_bitmap_palette_i",
+      "x_integer_bitmap_color_space_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -49,7 +53,7 @@
     "items": [
       {
         "name": "ColorSpace",
-        "type": "XIntegerBitmapColorSpace",
+        "type": "x_integer_bitmap_color_space_i",
         "lines": [
           "Color space the bitmap colors shall be interpreted within.",
           "",
@@ -69,7 +73,7 @@
       },
       {
         "name": "Palette",
-        "type": "XBitmapPalette",
+        "type": "x_bitmap_palette_i",
         "lines": [
           "This member determines whether the bitmap data are actually indices into a color map.",
           "",

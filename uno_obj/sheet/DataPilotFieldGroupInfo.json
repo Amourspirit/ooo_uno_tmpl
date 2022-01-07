@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "DataPilotFieldGroupInfo",
   "namespace": "com.sun.star.sheet",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "sort": true,
@@ -20,17 +21,20 @@
     "from_imports": [],
     "from_imports_typing": [
       [
-        "..container.x_name_access",
-        "XNameAccess"
+        ".x_data_pilot_field",
+        "XDataPilotField",
+        "x_data_pilot_field_i"
       ],
       [
-        ".x_data_pilot_field",
-        "XDataPilotField"
+        "..container.x_name_access",
+        "XNameAccess",
+        "container_x_name_access_i"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "XNameAccess",
-      "XDataPilotField"
+      "container_x_name_access_i",
+      "x_data_pilot_field_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -57,7 +61,7 @@
       },
       {
         "name": "Groups",
-        "type": "XNameAccess",
+        "type": "container_x_name_access_i",
         "lines": [
           "specifies the named groups in this field if there are some.",
           "",
@@ -87,7 +91,7 @@
       },
       {
         "name": "SourceField",
-        "type": "XDataPilotField",
+        "type": "x_data_pilot_field_i",
         "lines": [
           "contains the source DataPilot field grouping is based on.",
           "",

@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "ConfigurationChangeEvent",
   "namespace": "com.sun.star.drawing.framework",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "sort": true,
@@ -20,27 +21,34 @@
     "from_imports": [
       [
         "...lang.event_object",
-        "EventObject"
+        "EventObject",
+        "lang_event_object_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_resource_id",
-        "XResourceId"
-      ],
-      [
-        ".x_configuration",
-        "XConfiguration"
+        "XResourceId",
+        "x_resource_id_i"
       ],
       [
         "...uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
+      ],
+      [
+        ".x_configuration",
+        "XConfiguration",
+        "x_configuration_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.lang.EventObject": "lang_event_object_i"
+    },
     "quote": [
-      "XResourceId",
-      "XInterface",
-      "XConfiguration"
+      "uno_x_interface_i",
+      "x_configuration_i",
+      "x_resource_id_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -59,7 +67,7 @@
     "items": [
       {
         "name": "Configuration",
-        "type": "XConfiguration",
+        "type": "x_configuration_i",
         "lines": [
           "The current configuration, depending on the event type, either before or after the change.",
           "",
@@ -68,14 +76,14 @@
       },
       {
         "name": "ResourceId",
-        "type": "XResourceId",
+        "type": "x_resource_id_i",
         "lines": [
           "The resource id that is part of the configuration change."
         ]
       },
       {
         "name": "ResourceObject",
-        "type": "XInterface",
+        "type": "uno_x_interface_i",
         "lines": [
           "The resource object that corresponds to the ResourceId.",
           "",

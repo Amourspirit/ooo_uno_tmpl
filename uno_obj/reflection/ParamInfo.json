@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "ParamInfo",
   "namespace": "com.sun.star.reflection",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "sort": true,
@@ -20,17 +21,20 @@
     "from_imports": [],
     "from_imports_typing": [
       [
-        ".param_mode",
-        "ParamMode"
+        ".x_idl_class",
+        "XIdlClass",
+        "x_idl_class_i"
       ],
       [
-        ".x_idl_class",
-        "XIdlClass"
+        ".param_mode",
+        "ParamMode",
+        "param_mode_i"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "ParamMode",
-      "XIdlClass"
+      "x_idl_class_i",
+      "param_mode_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -43,7 +47,7 @@
     "items": [
       {
         "name": "aMode",
-        "type": "ParamMode",
+        "type": "param_mode_i",
         "lines": [
           "parameter mode: in, out, inout"
         ]
@@ -57,7 +61,7 @@
       },
       {
         "name": "aType",
-        "type": "XIdlClass",
+        "type": "x_idl_class_i",
         "lines": [
           "formal type of the parameter"
         ]

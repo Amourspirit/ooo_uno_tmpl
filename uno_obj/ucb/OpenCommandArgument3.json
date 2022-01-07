@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "OpenCommandArgument3",
   "namespace": "com.sun.star.ucb",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "sort": true,
@@ -20,20 +21,25 @@
     "from_imports": [
       [
         ".open_command_argument2",
-        "OpenCommandArgument2"
+        "OpenCommandArgument2",
+        "open_command_argument2_i"
       ]
     ],
     "from_imports_typing": [
       [
         "..beans.named_value",
-        "NamedValue"
+        "NamedValue",
+        "beans_named_value_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.ucb.OpenCommandArgument2": "open_command_argument2_i"
+    },
     "quote": [
-      "typing.List[NamedValue]"
+      "typing.List[beans_named_value_i]"
     ],
     "typings": [
-      "typing.List[NamedValue]"
+      "typing.List[beans_named_value_i]"
     ],
     "requires_typing": true,
     "fullname": "com.sun.star.ucb.OpenCommandArgument3",
@@ -49,7 +55,7 @@
     "items": [
       {
         "name": "OpeningFlags",
-        "type": "typing.List[NamedValue]",
+        "type": "typing.List[beans_named_value_i]",
         "lines": [
           "Flags to use for opening.",
           "",

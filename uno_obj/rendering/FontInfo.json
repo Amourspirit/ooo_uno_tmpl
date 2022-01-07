@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "FontInfo",
   "namespace": "com.sun.star.rendering",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "sort": true,
@@ -20,17 +21,20 @@
     "from_imports": [],
     "from_imports_typing": [
       [
-        ".panose",
-        "Panose"
+        "..util.tri_state",
+        "TriState",
+        "util_tri_state_i"
       ],
       [
-        "..util.tri_state",
-        "TriState"
+        ".panose",
+        "Panose",
+        "panose_i"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "Panose",
-      "TriState"
+      "panose_i",
+      "util_tri_state_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -58,7 +62,7 @@
       },
       {
         "name": "FontDescription",
-        "type": "Panose",
+        "type": "panose_i",
         "lines": [
           "The PANOSE font classification.",
           "",
@@ -67,7 +71,7 @@
       },
       {
         "name": "IsSymbolFont",
-        "type": "TriState",
+        "type": "util_tri_state_i",
         "lines": [
           "Specifies whether the font is a symbol font.",
           "",
@@ -76,7 +80,7 @@
       },
       {
         "name": "IsVertical",
-        "type": "TriState",
+        "type": "util_tri_state_i",
         "lines": [
           "Set to true, if the font is usable for vertical text output.",
           "",

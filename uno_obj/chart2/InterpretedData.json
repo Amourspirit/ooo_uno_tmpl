@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "InterpretedData",
   "namespace": "com.sun.star.chart2",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "sort": true,
@@ -20,20 +21,23 @@
     "from_imports": [],
     "from_imports_typing": [
       [
-        ".x_data_series",
-        "XDataSeries"
+        ".data.x_labeled_data_sequence",
+        "XLabeledDataSequence",
+        "data_x_labeled_data_sequence_i"
       ],
       [
-        ".data.x_labeled_data_sequence",
-        "XLabeledDataSequence"
+        ".x_data_series",
+        "XDataSeries",
+        "x_data_series_i"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "typing.List[typing.List[XDataSeries]]",
-      "XLabeledDataSequence"
+      "typing.List[typing.List[x_data_series_i]]",
+      "data_x_labeled_data_sequence_i"
     ],
     "typings": [
-      "typing.List[typing.List[XDataSeries]]"
+      "typing.List[typing.List[x_data_series_i]]"
     ],
     "requires_typing": true,
     "fullname": "com.sun.star.chart2.InterpretedData",
@@ -45,12 +49,12 @@
     "items": [
       {
         "name": "Categories",
-        "type": "XLabeledDataSequence",
+        "type": "data_x_labeled_data_sequence_i",
         "lines": []
       },
       {
         "name": "Series",
-        "type": "typing.List[typing.List[XDataSeries]]",
+        "type": "typing.List[typing.List[x_data_series_i]]",
         "lines": []
       }
     ]

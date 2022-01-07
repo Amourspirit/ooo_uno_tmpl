@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "TextConversionResult",
   "namespace": "com.sun.star.i18n",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "sort": true,
@@ -21,12 +22,14 @@
     "from_imports_typing": [
       [
         ".boundary",
-        "Boundary"
+        "Boundary",
+        "boundary_i"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "typing.List[str]",
-      "Boundary"
+      "boundary_i",
+      "typing.List[str]"
     ],
     "typings": [
       "typing.List[str]"
@@ -45,7 +48,7 @@
     "items": [
       {
         "name": "Boundary",
-        "type": "Boundary",
+        "type": "boundary_i",
         "lines": [
           "The boundary of the first convertible word in the given text.",
           "",

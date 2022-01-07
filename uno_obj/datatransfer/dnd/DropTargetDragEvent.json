@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "DropTargetDragEvent",
   "namespace": "com.sun.star.datatransfer.dnd",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "sort": true,
@@ -20,17 +21,22 @@
     "from_imports": [
       [
         ".drop_target_event",
-        "DropTargetEvent"
+        "DropTargetEvent",
+        "drop_target_event_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_drop_target_drag_context",
-        "XDropTargetDragContext"
+        "XDropTargetDragContext",
+        "x_drop_target_drag_context_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.datatransfer.dnd.DropTargetEvent": "drop_target_event_i"
+    },
     "quote": [
-      "XDropTargetDragContext"
+      "x_drop_target_drag_context_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -47,7 +53,7 @@
     "items": [
       {
         "name": "Context",
-        "type": "XDropTargetDragContext",
+        "type": "x_drop_target_drag_context_i",
         "lines": [
           "The drop target context of the current drag operation."
         ]

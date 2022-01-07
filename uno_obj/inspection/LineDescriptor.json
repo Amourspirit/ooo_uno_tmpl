@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "LineDescriptor",
   "namespace": "com.sun.star.inspection",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "sort": true,
@@ -21,16 +22,19 @@
     "from_imports_typing": [
       [
         ".x_property_control",
-        "XPropertyControl"
+        "XPropertyControl",
+        "x_property_control_i"
       ],
       [
         "..graphic.x_graphic",
-        "XGraphic"
+        "XGraphic",
+        "graphic_x_graphic_i"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "XGraphic",
-      "XPropertyControl"
+      "x_property_control_i",
+      "graphic_x_graphic_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -60,7 +64,7 @@
       },
       {
         "name": "Control",
-        "type": "XPropertyControl",
+        "type": "x_property_control_i",
         "lines": [
           "denotes the control which should be used to represent the property at the UI."
         ]
@@ -121,7 +125,7 @@
       },
       {
         "name": "PrimaryButtonImage",
-        "type": "XGraphic",
+        "type": "graphic_x_graphic_i",
         "lines": [
           "describes a graphics to display at the primary button, if any.",
           "",
@@ -152,7 +156,7 @@
       },
       {
         "name": "SecondaryButtonImage",
-        "type": "XGraphic",
+        "type": "graphic_x_graphic_i",
         "lines": [
           "describes a graphics to display at the secondary button, if any.",
           "",

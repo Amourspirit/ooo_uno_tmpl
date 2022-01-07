@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "ControlCommand",
   "namespace": "com.sun.star.frame",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "sort": true,
@@ -21,14 +22,16 @@
     "from_imports_typing": [
       [
         "..beans.named_value",
-        "NamedValue"
+        "NamedValue",
+        "beans_named_value_i"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "typing.List[NamedValue]"
+      "typing.List[beans_named_value_i]"
     ],
     "typings": [
-      "typing.List[NamedValue]"
+      "typing.List[beans_named_value_i]"
     ],
     "requires_typing": true,
     "fullname": "com.sun.star.frame.ControlCommand",
@@ -51,7 +54,7 @@
       },
       {
         "name": "Arguments",
-        "type": "typing.List[NamedValue]",
+        "type": "typing.List[beans_named_value_i]",
         "lines": [
           "specifies a sequence of named values which are used as argument for the command.",
           "",

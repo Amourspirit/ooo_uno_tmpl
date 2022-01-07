@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "ProofreadingResult",
   "namespace": "com.sun.star.linguistic2",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "sort": true,
@@ -20,36 +21,42 @@
     "from_imports": [],
     "from_imports_typing": [
       [
-        "..text.x_flat_paragraph",
-        "XFlatParagraph"
+        "..lang.locale",
+        "Locale",
+        "lang_locale_i"
       ],
       [
-        ".single_proofreading_error",
-        "SingleProofreadingError"
+        "..text.x_flat_paragraph",
+        "XFlatParagraph",
+        "text_x_flat_paragraph_i"
       ],
       [
         ".x_proofreader",
-        "XProofreader"
-      ],
-      [
-        "..lang.locale",
-        "Locale"
+        "XProofreader",
+        "x_proofreader_i"
       ],
       [
         "..beans.property_value",
-        "PropertyValue"
+        "PropertyValue",
+        "beans_property_value_i"
+      ],
+      [
+        ".single_proofreading_error",
+        "SingleProofreadingError",
+        "single_proofreading_error_i"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "XProofreader",
-      "typing.List[SingleProofreadingError]",
-      "typing.List[PropertyValue]",
-      "Locale",
-      "XFlatParagraph"
+      "typing.List[single_proofreading_error_i]",
+      "typing.List[beans_property_value_i]",
+      "text_x_flat_paragraph_i",
+      "x_proofreader_i",
+      "lang_locale_i"
     ],
     "typings": [
-      "typing.List[PropertyValue]",
-      "typing.List[SingleProofreadingError]"
+      "typing.List[single_proofreading_error_i]",
+      "typing.List[beans_property_value_i]"
     ],
     "requires_typing": true,
     "fullname": "com.sun.star.linguistic2.ProofreadingResult",
@@ -70,7 +77,7 @@
       },
       {
         "name": "aLocale",
-        "type": "Locale",
+        "type": "lang_locale_i",
         "lines": []
       },
       {
@@ -95,22 +102,22 @@
       },
       {
         "name": "xFlatParagraph",
-        "type": "XFlatParagraph",
+        "type": "text_x_flat_paragraph_i",
         "lines": []
       },
       {
         "name": "xProofreader",
-        "type": "XProofreader",
+        "type": "x_proofreader_i",
         "lines": []
       },
       {
         "name": "aErrors",
-        "type": "typing.List[SingleProofreadingError]",
+        "type": "typing.List[single_proofreading_error_i]",
         "lines": []
       },
       {
         "name": "aProperties",
-        "type": "typing.List[PropertyValue]",
+        "type": "typing.List[beans_property_value_i]",
         "lines": []
       }
     ]

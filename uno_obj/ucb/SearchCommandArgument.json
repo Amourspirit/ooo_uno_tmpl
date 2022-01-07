@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "SearchCommandArgument",
   "namespace": "com.sun.star.ucb",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "sort": true,
@@ -21,19 +22,22 @@
     "from_imports_typing": [
       [
         "..beans.property",
-        "Property"
+        "Property",
+        "beans_property_i"
       ],
       [
         ".search_info",
-        "SearchInfo"
+        "SearchInfo",
+        "search_info_i"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "typing.List[Property]",
-      "SearchInfo"
+      "search_info_i",
+      "typing.List[beans_property_i]"
     ],
     "typings": [
-      "typing.List[Property]"
+      "typing.List[beans_property_i]"
     ],
     "requires_typing": true,
     "fullname": "com.sun.star.ucb.SearchCommandArgument",
@@ -45,14 +49,14 @@
     "items": [
       {
         "name": "Info",
-        "type": "SearchInfo",
+        "type": "search_info_i",
         "lines": [
           "the search criteria."
         ]
       },
       {
         "name": "Properties",
-        "type": "typing.List[Property]",
+        "type": "typing.List[beans_property_i]",
         "lines": [
           "the properties for which values shall be provided through the ContentResultSet returned by the search command."
         ]

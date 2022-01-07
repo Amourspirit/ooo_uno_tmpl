@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "SearchInfo",
   "namespace": "com.sun.star.ucb",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "sort": true,
@@ -21,19 +22,22 @@
     "from_imports_typing": [
       [
         ".search_criterium",
-        "SearchCriterium"
+        "SearchCriterium",
+        "search_criterium_i"
       ],
       [
         ".search_recursion",
-        "SearchRecursion"
+        "SearchRecursion",
+        "search_recursion_i"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "typing.List[SearchCriterium]",
-      "SearchRecursion"
+      "typing.List[search_criterium_i]",
+      "search_recursion_i"
     ],
     "typings": [
-      "typing.List[SearchCriterium]"
+      "typing.List[search_criterium_i]"
     ],
     "requires_typing": true,
     "fullname": "com.sun.star.ucb.SearchInfo",
@@ -59,7 +63,7 @@
       },
       {
         "name": "Recursion",
-        "type": "SearchRecursion",
+        "type": "search_recursion_i",
         "lines": [
           "the mode of recursion to use."
         ]
@@ -80,7 +84,7 @@
       },
       {
         "name": "Criteria",
-        "type": "typing.List[SearchCriterium]",
+        "type": "typing.List[search_criterium_i]",
         "lines": [
           "the search criteria."
         ]

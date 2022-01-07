@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "Symbol",
   "namespace": "com.sun.star.chart2",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "sort": true,
@@ -20,27 +21,32 @@
     "from_imports": [],
     "from_imports_typing": [
       [
-        "..graphic.x_graphic",
-        "XGraphic"
-      ],
-      [
-        ".symbol_style",
-        "SymbolStyle"
-      ],
-      [
         "..awt.size",
-        "Size"
+        "Size",
+        "awt_size_i"
       ],
       [
         "..drawing.poly_polygon_bezier_coords",
-        "PolyPolygonBezierCoords"
+        "PolyPolygonBezierCoords",
+        "drawing_poly_polygon_bezier_coords_i"
+      ],
+      [
+        ".symbol_style",
+        "SymbolStyle",
+        "symbol_style_i"
+      ],
+      [
+        "..graphic.x_graphic",
+        "XGraphic",
+        "graphic_x_graphic_i"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "Size",
-      "XGraphic",
-      "SymbolStyle",
-      "PolyPolygonBezierCoords"
+      "symbol_style_i",
+      "drawing_poly_polygon_bezier_coords_i",
+      "awt_size_i",
+      "graphic_x_graphic_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -71,21 +77,21 @@
       },
       {
         "name": "Graphic",
-        "type": "XGraphic",
+        "type": "graphic_x_graphic_i",
         "lines": [
           "use this graphic as symbol"
         ]
       },
       {
         "name": "PolygonCoords",
-        "type": "PolyPolygonBezierCoords",
+        "type": "drawing_poly_polygon_bezier_coords_i",
         "lines": [
           "The given polygon is used as symbol."
         ]
       },
       {
         "name": "Size",
-        "type": "Size",
+        "type": "awt_size_i",
         "lines": [
           "The size of the symbol in 100th of a mm."
         ]
@@ -103,7 +109,7 @@
       },
       {
         "name": "Style",
-        "type": "SymbolStyle",
+        "type": "symbol_style_i",
         "lines": [
           "determines which of the following members determines the appearance of the symbol."
         ]

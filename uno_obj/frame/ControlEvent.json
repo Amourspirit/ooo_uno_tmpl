@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "ControlEvent",
   "namespace": "com.sun.star.frame",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "sort": true,
@@ -20,20 +21,23 @@
     "from_imports": [],
     "from_imports_typing": [
       [
-        "..beans.named_value",
-        "NamedValue"
+        "..util.url",
+        "URL",
+        "util_url_i"
       ],
       [
-        "..util.url",
-        "URL"
+        "..beans.named_value",
+        "NamedValue",
+        "beans_named_value_i"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "URL",
-      "typing.List[NamedValue]"
+      "util_url_i",
+      "typing.List[beans_named_value_i]"
     ],
     "typings": [
-      "typing.List[NamedValue]"
+      "typing.List[beans_named_value_i]"
     ],
     "requires_typing": true,
     "fullname": "com.sun.star.frame.ControlEvent",
@@ -56,14 +60,14 @@
       },
       {
         "name": "aURL",
-        "type": "URL",
+        "type": "util_url_i",
         "lines": [
           "fully parsed URL describing the control that sends this notification."
         ]
       },
       {
         "name": "aInformation",
-        "type": "typing.List[NamedValue]",
+        "type": "typing.List[beans_named_value_i]",
         "lines": [
           "specifies a sequence of named values which are used as additional values for the event.",
           "",

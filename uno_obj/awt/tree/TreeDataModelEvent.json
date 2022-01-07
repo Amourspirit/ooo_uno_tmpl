@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "TreeDataModelEvent",
   "namespace": "com.sun.star.awt.tree",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "sort": true,
@@ -20,21 +21,26 @@
     "from_imports": [
       [
         "...lang.event_object",
-        "EventObject"
+        "EventObject",
+        "lang_event_object_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_tree_node",
-        "XTreeNode"
+        "XTreeNode",
+        "x_tree_node_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.lang.EventObject": "lang_event_object_i"
+    },
     "quote": [
-      "typing.List[XTreeNode]",
-      "XTreeNode"
+      "x_tree_node_i",
+      "typing.List[x_tree_node_i]"
     ],
     "typings": [
-      "typing.List[XTreeNode]"
+      "typing.List[x_tree_node_i]"
     ],
     "requires_typing": true,
     "fullname": "com.sun.star.awt.tree.TreeDataModelEvent",
@@ -50,7 +56,7 @@
     "items": [
       {
         "name": "ParentNode",
-        "type": "XTreeNode",
+        "type": "x_tree_node_i",
         "lines": [
           "holds the parent node for changed, added or removed nodes.",
           "",
@@ -59,7 +65,7 @@
       },
       {
         "name": "Nodes",
-        "type": "typing.List[XTreeNode]",
+        "type": "typing.List[x_tree_node_i]",
         "lines": [
           "contains the changed, added or removed nodes.",
           "",

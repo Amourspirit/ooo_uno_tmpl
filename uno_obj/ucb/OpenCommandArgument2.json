@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "OpenCommandArgument2",
   "namespace": "com.sun.star.ucb",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "sort": true,
@@ -20,20 +21,25 @@
     "from_imports": [
       [
         ".open_command_argument",
-        "OpenCommandArgument"
+        "OpenCommandArgument",
+        "open_command_argument_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".numbered_sorting_info",
-        "NumberedSortingInfo"
+        "NumberedSortingInfo",
+        "numbered_sorting_info_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.ucb.OpenCommandArgument": "open_command_argument_i"
+    },
     "quote": [
-      "typing.List[NumberedSortingInfo]"
+      "typing.List[numbered_sorting_info_i]"
     ],
     "typings": [
-      "typing.List[NumberedSortingInfo]"
+      "typing.List[numbered_sorting_info_i]"
     ],
     "requires_typing": true,
     "fullname": "com.sun.star.ucb.OpenCommandArgument2",
@@ -49,7 +55,7 @@
     "items": [
       {
         "name": "SortingInfo",
-        "type": "typing.List[NumberedSortingInfo]",
+        "type": "typing.List[numbered_sorting_info_i]",
         "lines": [
           "The sort criteria for the rows of the returned ContentResultSet.",
           "",

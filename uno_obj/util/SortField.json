@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "SortField",
   "namespace": "com.sun.star.util",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "sort": true,
@@ -21,11 +22,13 @@
     "from_imports_typing": [
       [
         ".sort_field_type",
-        "SortFieldType"
+        "SortFieldType",
+        "sort_field_type_i"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "SortFieldType"
+      "sort_field_type_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -49,7 +52,7 @@
       },
       {
         "name": "FieldType",
-        "type": "SortFieldType",
+        "type": "sort_field_type_i",
         "lines": [
           "type of contents in the field."
         ]

@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "ContentEvent",
   "namespace": "com.sun.star.ucb",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "sort": true,
@@ -20,22 +21,28 @@
     "from_imports": [
       [
         "..lang.event_object",
-        "EventObject"
+        "EventObject",
+        "lang_event_object_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_content_identifier",
-        "XContentIdentifier"
+        "XContentIdentifier",
+        "x_content_identifier_i"
       ],
       [
         ".x_content",
-        "XContent"
+        "XContent",
+        "x_content_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.lang.EventObject": "lang_event_object_i"
+    },
     "quote": [
-      "XContent",
-      "XContentIdentifier"
+      "x_content_identifier_i",
+      "x_content_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -59,7 +66,7 @@
       },
       {
         "name": "Content",
-        "type": "XContent",
+        "type": "x_content_i",
         "lines": [
           "The content to that the action is related (e.g., the content that was just physically destroyed, the content that was just inserted into a folder content).",
           "",
@@ -68,7 +75,7 @@
       },
       {
         "name": "Id",
-        "type": "XContentIdentifier",
+        "type": "x_content_identifier_i",
         "lines": [
           "A content identifier, which must be filled according to the action notified (e.g., the id of the folder content into which another content was inserted).",
           "",

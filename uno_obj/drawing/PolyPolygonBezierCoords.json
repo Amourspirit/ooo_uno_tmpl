@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "PolyPolygonBezierCoords",
   "namespace": "com.sun.star.drawing",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "sort": true,
@@ -20,17 +21,20 @@
     "from_imports": [],
     "from_imports_typing": [
       [
-        ".flag_sequence_sequence",
-        "FlagSequenceSequence"
+        ".point_sequence_sequence",
+        "PointSequenceSequence",
+        "point_sequence_sequence_i"
       ],
       [
-        ".point_sequence_sequence",
-        "PointSequenceSequence"
+        ".flag_sequence_sequence",
+        "FlagSequenceSequence",
+        "flag_sequence_sequence_i"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "PointSequenceSequence",
-      "FlagSequenceSequence"
+      "point_sequence_sequence_i",
+      "flag_sequence_sequence_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -43,12 +47,12 @@
     "items": [
       {
         "name": "Coordinates",
-        "type": "PointSequenceSequence",
+        "type": "point_sequence_sequence_i",
         "lines": []
       },
       {
         "name": "Flags",
-        "type": "FlagSequenceSequence",
+        "type": "flag_sequence_sequence_i",
         "lines": []
       }
     ]

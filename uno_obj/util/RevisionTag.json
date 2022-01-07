@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "RevisionTag",
   "namespace": "com.sun.star.util",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "sort": true,
@@ -21,11 +22,13 @@
     "from_imports_typing": [
       [
         ".date_time",
-        "DateTime"
+        "DateTime",
+        "date_time_i"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "DateTime"
+      "date_time_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -61,7 +64,7 @@
       },
       {
         "name": "TimeStamp",
-        "type": "DateTime",
+        "type": "date_time_i",
         "lines": [
           "contains the time when the revision was created ( can be invalid )"
         ]

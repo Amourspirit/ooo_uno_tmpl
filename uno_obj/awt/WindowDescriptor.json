@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "WindowDescriptor",
   "namespace": "com.sun.star.awt",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "sort": true,
@@ -21,21 +22,25 @@
     "from_imports_typing": [
       [
         ".rectangle",
-        "Rectangle"
-      ],
-      [
-        ".window_class",
-        "WindowClass"
+        "Rectangle",
+        "rectangle_i"
       ],
       [
         ".x_window_peer",
-        "XWindowPeer"
+        "XWindowPeer",
+        "x_window_peer_i"
+      ],
+      [
+        ".window_class",
+        "WindowClass",
+        "window_class_i"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "Rectangle",
-      "XWindowPeer",
-      "WindowClass"
+      "x_window_peer_i",
+      "rectangle_i",
+      "window_class_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -48,7 +53,7 @@
     "items": [
       {
         "name": "Bounds",
-        "type": "Rectangle",
+        "type": "rectangle_i",
         "lines": [
           "specifies the position and size of the window.",
           "",
@@ -57,7 +62,7 @@
       },
       {
         "name": "Parent",
-        "type": "XWindowPeer",
+        "type": "x_window_peer_i",
         "lines": [
           "specifies the parent of the component.",
           "",
@@ -75,7 +80,7 @@
       },
       {
         "name": "Type",
-        "type": "WindowClass",
+        "type": "window_class_i",
         "lines": [
           "specifies the type of window."
         ]

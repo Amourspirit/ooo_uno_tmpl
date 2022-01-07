@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "Texture",
   "namespace": "com.sun.star.rendering",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "sort": true,
@@ -21,26 +22,31 @@
     "from_imports_typing": [
       [
         ".x_bitmap",
-        "XBitmap"
-      ],
-      [
-        ".x_parametric_poly_polygon2_d",
-        "XParametricPolyPolygon2D"
-      ],
-      [
-        "..geometry.affine_matrix2_d",
-        "AffineMatrix2D"
+        "XBitmap",
+        "x_bitmap_i"
       ],
       [
         ".stroke_attributes",
-        "StrokeAttributes"
+        "StrokeAttributes",
+        "stroke_attributes_i"
+      ],
+      [
+        ".x_parametric_poly_polygon2_d",
+        "XParametricPolyPolygon2D",
+        "x_parametric_poly_polygon2_d_i"
+      ],
+      [
+        "..geometry.affine_matrix2_d",
+        "AffineMatrix2D",
+        "geometry_affine_matrix2_d_i"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "XParametricPolyPolygon2D",
-      "AffineMatrix2D",
-      "StrokeAttributes",
-      "XBitmap"
+      "geometry_affine_matrix2_d_i",
+      "x_bitmap_i",
+      "x_parametric_poly_polygon2_d_i",
+      "stroke_attributes_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -61,7 +67,7 @@
     "items": [
       {
         "name": "AffineTransform",
-        "type": "AffineMatrix2D",
+        "type": "geometry_affine_matrix2_d_i",
         "lines": [
           "Texture transformation from texture to primitive space.",
           "",
@@ -79,7 +85,7 @@
       },
       {
         "name": "Bitmap",
-        "type": "XBitmap",
+        "type": "x_bitmap_i",
         "lines": [
           "Texture bitmap.",
           "",
@@ -90,7 +96,7 @@
       },
       {
         "name": "Gradient",
-        "type": "XParametricPolyPolygon2D",
+        "type": "x_parametric_poly_polygon2_d_i",
         "lines": [
           "Texture gradient.",
           "",
@@ -99,7 +105,7 @@
       },
       {
         "name": "HatchAttributes",
-        "type": "StrokeAttributes",
+        "type": "stroke_attributes_i",
         "lines": [
           "Specifies the stroke attributes used for hatching.",
           "",
@@ -108,7 +114,7 @@
       },
       {
         "name": "Hatching",
-        "type": "XParametricPolyPolygon2D",
+        "type": "x_parametric_poly_polygon2_d_i",
         "lines": [
           "Texture hatching.",
           "",

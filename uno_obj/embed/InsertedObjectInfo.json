@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "InsertedObjectInfo",
   "namespace": "com.sun.star.embed",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "sort": true,
@@ -21,19 +22,22 @@
     "from_imports_typing": [
       [
         ".x_embedded_object",
-        "XEmbeddedObject"
+        "XEmbeddedObject",
+        "x_embedded_object_i"
       ],
       [
         "..beans.named_value",
-        "NamedValue"
+        "NamedValue",
+        "beans_named_value_i"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "XEmbeddedObject",
-      "typing.List[NamedValue]"
+      "x_embedded_object_i",
+      "typing.List[beans_named_value_i]"
     ],
     "typings": [
-      "typing.List[NamedValue]"
+      "typing.List[beans_named_value_i]"
     ],
     "requires_typing": true,
     "fullname": "com.sun.star.embed.InsertedObjectInfo",
@@ -45,14 +49,14 @@
     "items": [
       {
         "name": "Object",
-        "type": "XEmbeddedObject",
+        "type": "x_embedded_object_i",
         "lines": [
           "The new created embedded object."
         ]
       },
       {
         "name": "Options",
-        "type": "typing.List[NamedValue]",
+        "type": "typing.List[beans_named_value_i]",
         "lines": [
           "Container related options selected by user.",
           "",

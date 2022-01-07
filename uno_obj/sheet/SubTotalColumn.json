@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "SubTotalColumn",
   "namespace": "com.sun.star.sheet",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "sort": true,
@@ -21,11 +22,13 @@
     "from_imports_typing": [
       [
         ".general_function",
-        "GeneralFunction"
+        "GeneralFunction",
+        "general_function_i"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "GeneralFunction"
+      "general_function_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -45,7 +48,7 @@
       },
       {
         "name": "Function",
-        "type": "GeneralFunction",
+        "type": "general_function_i",
         "lines": [
           "specifies what kind of subtotals are calculated."
         ]

@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "LineBreakHyphenationOptions",
   "namespace": "com.sun.star.i18n",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "sort": true,
@@ -21,16 +22,19 @@
     "from_imports_typing": [
       [
         "..linguistic2.x_hyphenator",
-        "XHyphenator"
+        "XHyphenator",
+        "linguistic2_x_hyphenator_i"
       ],
       [
         "..beans.property_values",
-        "PropertyValues"
+        "PropertyValues",
+        "beans_property_values_i"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "XHyphenator",
-      "PropertyValues"
+      "linguistic2_x_hyphenator_i",
+      "beans_property_values_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -43,7 +47,7 @@
     "items": [
       {
         "name": "aHyphenationOptions",
-        "type": "PropertyValues",
+        "type": "beans_property_values_i",
         "lines": [
           "Sequence of property values to be used by the hyphenator - can be empty if the default values (from the property set) should be used."
         ]
@@ -57,7 +61,7 @@
       },
       {
         "name": "rHyphenator",
-        "type": "XHyphenator",
+        "type": "linguistic2_x_hyphenator_i",
         "lines": [
           "Reference to the specific hyphenator - can be zero."
         ]

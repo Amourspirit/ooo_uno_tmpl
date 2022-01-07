@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "FolderList",
   "namespace": "com.sun.star.ucb",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "sort": true,
@@ -20,20 +21,23 @@
     "from_imports": [],
     "from_imports_typing": [
       [
-        ".folder_list_command",
-        "FolderListCommand"
+        ".folder_list_entry",
+        "FolderListEntry",
+        "folder_list_entry_i"
       ],
       [
-        ".folder_list_entry",
-        "FolderListEntry"
+        ".folder_list_command",
+        "FolderListCommand",
+        "folder_list_command_i"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "FolderListCommand",
-      "typing.List[FolderListEntry]"
+      "folder_list_command_i",
+      "typing.List[folder_list_entry_i]"
     ],
     "typings": [
-      "typing.List[FolderListEntry]"
+      "typing.List[folder_list_entry_i]"
     ],
     "requires_typing": true,
     "fullname": "com.sun.star.ucb.FolderList",
@@ -45,14 +49,14 @@
     "items": [
       {
         "name": "Command",
-        "type": "FolderListCommand",
+        "type": "folder_list_command_i",
         "lines": [
           "The command to process on this list of folders."
         ]
       },
       {
         "name": "List",
-        "type": "typing.List[FolderListEntry]",
+        "type": "typing.List[folder_list_entry_i]",
         "lines": [
           "The list of folders (only used in conjunction with FolderListCommand.SET)."
         ]

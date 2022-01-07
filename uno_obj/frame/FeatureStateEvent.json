@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "FeatureStateEvent",
   "namespace": "com.sun.star.frame",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "sort": true,
@@ -20,17 +21,22 @@
     "from_imports": [
       [
         "..lang.event_object",
-        "EventObject"
+        "EventObject",
+        "lang_event_object_i"
       ]
     ],
     "from_imports_typing": [
       [
         "..util.url",
-        "URL"
+        "URL",
+        "util_url_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.lang.EventObject": "lang_event_object_i"
+    },
     "quote": [
-      "URL"
+      "util_url_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -52,7 +58,7 @@
       },
       {
         "name": "FeatureURL",
-        "type": "URL",
+        "type": "util_url_i",
         "lines": [
           "contains the URL of the feature."
         ]

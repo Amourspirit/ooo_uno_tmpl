@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "OpenCommandArgument",
   "namespace": "com.sun.star.ucb",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "sort": true,
@@ -21,19 +22,22 @@
     "from_imports_typing": [
       [
         "..beans.property",
-        "Property"
+        "Property",
+        "beans_property_i"
       ],
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "typing.List[Property]",
-      "XInterface"
+      "uno_x_interface_i",
+      "typing.List[beans_property_i]"
     ],
     "typings": [
-      "typing.List[Property]"
+      "typing.List[beans_property_i]"
     ],
     "requires_typing": true,
     "fullname": "com.sun.star.ucb.OpenCommandArgument",
@@ -61,7 +65,7 @@
       },
       {
         "name": "Sink",
-        "type": "XInterface",
+        "type": "uno_x_interface_i",
         "lines": [
           "The data sink to write the contents into (supporting either com.sun.star.io.XActiveDataSink, com.sun.star.io.XOutputStream or com.sun.star.io.XActiveDataStreamer).",
           "",
@@ -72,7 +76,7 @@
       },
       {
         "name": "Properties",
-        "type": "typing.List[Property]",
+        "type": "typing.List[beans_property_i]",
         "lines": [
           "The properties, for that the values shall be provided by the DynamicResultSet returned by the command)."
         ]

@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "DropTargetDragEnterEvent",
   "namespace": "com.sun.star.datatransfer.dnd",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "sort": true,
@@ -20,20 +21,25 @@
     "from_imports": [
       [
         ".drop_target_drag_event",
-        "DropTargetDragEvent"
+        "DropTargetDragEvent",
+        "drop_target_drag_event_i"
       ]
     ],
     "from_imports_typing": [
       [
         "..data_flavor",
-        "DataFlavor"
+        "DataFlavor",
+        "data_flavor_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.datatransfer.dnd.DropTargetDragEvent": "drop_target_drag_event_i"
+    },
     "quote": [
-      "typing.List[DataFlavor]"
+      "typing.List[data_flavor_i]"
     ],
     "typings": [
-      "typing.List[DataFlavor]"
+      "typing.List[data_flavor_i]"
     ],
     "requires_typing": true,
     "fullname": "com.sun.star.datatransfer.dnd.DropTargetDragEnterEvent",
@@ -49,7 +55,7 @@
     "items": [
       {
         "name": "SupportedDataFlavors",
-        "type": "typing.List[DataFlavor]",
+        "type": "typing.List[data_flavor_i]",
         "lines": [
           "A sequence of supported com.sun.star.datatransfer.DataFlavor types."
         ]

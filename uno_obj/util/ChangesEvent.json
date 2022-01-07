@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "ChangesEvent",
   "namespace": "com.sun.star.util",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "sort": true,
@@ -20,17 +21,22 @@
     "from_imports": [
       [
         "..lang.event_object",
-        "EventObject"
+        "EventObject",
+        "lang_event_object_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".changes_set",
-        "ChangesSet"
+        "ChangesSet",
+        "changes_set_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.lang.EventObject": "lang_event_object_i"
+    },
     "quote": [
-      "ChangesSet"
+      "changes_set_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -54,7 +60,7 @@
       },
       {
         "name": "Changes",
-        "type": "ChangesSet",
+        "type": "changes_set_i",
         "lines": [
           "contains the changes which occurred."
         ]

@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "TableSortField",
   "namespace": "com.sun.star.table",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "sort": true,
@@ -20,17 +21,20 @@
     "from_imports": [],
     "from_imports_typing": [
       [
-        "..lang.locale",
-        "Locale"
+        ".table_sort_field_type",
+        "TableSortFieldType",
+        "table_sort_field_type_i"
       ],
       [
-        ".table_sort_field_type",
-        "TableSortFieldType"
+        "..lang.locale",
+        "Locale",
+        "lang_locale_i"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "Locale",
-      "TableSortFieldType"
+      "lang_locale_i",
+      "table_sort_field_type_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -56,7 +60,7 @@
       },
       {
         "name": "CollatorLocale",
-        "type": "Locale",
+        "type": "lang_locale_i",
         "lines": [
           "the locale used by the collator when comparing/sorting text.",
           "",
@@ -72,7 +76,7 @@
       },
       {
         "name": "FieldType",
-        "type": "TableSortFieldType",
+        "type": "table_sort_field_type_i",
         "lines": [
           "type of contents in the field.",
           "",

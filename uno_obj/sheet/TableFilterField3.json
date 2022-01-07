@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "TableFilterField3",
   "namespace": "com.sun.star.sheet",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "sort": true,
@@ -20,20 +21,23 @@
     "from_imports": [],
     "from_imports_typing": [
       [
-        ".filter_connection",
-        "FilterConnection"
+        ".filter_field_value",
+        "FilterFieldValue",
+        "filter_field_value_i"
       ],
       [
-        ".filter_field_value",
-        "FilterFieldValue"
+        ".filter_connection",
+        "FilterConnection",
+        "filter_connection_i"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "FilterConnection",
-      "typing.List[FilterFieldValue]"
+      "filter_connection_i",
+      "typing.List[filter_field_value_i]"
     ],
     "typings": [
-      "typing.List[FilterFieldValue]"
+      "typing.List[filter_field_value_i]"
     ],
     "requires_typing": true,
     "fullname": "com.sun.star.sheet.TableFilterField3",
@@ -48,7 +52,7 @@
     "items": [
       {
         "name": "Connection",
-        "type": "FilterConnection",
+        "type": "filter_connection_i",
         "lines": [
           "specifies how the condition is connected to the previous condition."
         ]
@@ -69,7 +73,7 @@
       },
       {
         "name": "Values",
-        "type": "typing.List[FilterFieldValue]",
+        "type": "typing.List[filter_field_value_i]",
         "lines": [
           "specifies values to match against.",
           "",

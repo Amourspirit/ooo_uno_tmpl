@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "ShadowFormat",
   "namespace": "com.sun.star.table",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "sort": true,
@@ -20,17 +21,20 @@
     "from_imports": [],
     "from_imports_typing": [
       [
-        "..util.color",
-        "Color"
+        ".shadow_location",
+        "ShadowLocation",
+        "shadow_location_i"
       ],
       [
-        ".shadow_location",
-        "ShadowLocation"
+        "..util.color",
+        "Color",
+        "util_color_i"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "Color",
-      "ShadowLocation"
+      "shadow_location_i",
+      "util_color_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -43,7 +47,7 @@
     "items": [
       {
         "name": "Color",
-        "type": "Color",
+        "type": "util_color_i",
         "lines": [
           "contains the color value of the shadow."
         ]
@@ -57,7 +61,7 @@
       },
       {
         "name": "Location",
-        "type": "ShadowLocation",
+        "type": "shadow_location_i",
         "lines": [
           "contains the location of the shadow."
         ]

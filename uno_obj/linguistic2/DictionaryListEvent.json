@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "DictionaryListEvent",
   "namespace": "com.sun.star.linguistic2",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "sort": true,
@@ -20,20 +21,25 @@
     "from_imports": [
       [
         "..lang.event_object",
-        "EventObject"
+        "EventObject",
+        "lang_event_object_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".dictionary_event",
-        "DictionaryEvent"
+        "DictionaryEvent",
+        "dictionary_event_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.lang.EventObject": "lang_event_object_i"
+    },
     "quote": [
-      "typing.List[DictionaryEvent]"
+      "typing.List[dictionary_event_i]"
     ],
     "typings": [
-      "typing.List[DictionaryEvent]"
+      "typing.List[dictionary_event_i]"
     ],
     "requires_typing": true,
     "fullname": "com.sun.star.linguistic2.DictionaryListEvent",
@@ -58,7 +64,7 @@
       },
       {
         "name": "aDictionaryEvents",
-        "type": "typing.List[DictionaryEvent]",
+        "type": "typing.List[dictionary_event_i]",
         "lines": [
           "list of accumulated dictionary events.",
           "",

@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "DocumentSignatureInformation",
   "namespace": "com.sun.star.security",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "sort": true,
@@ -20,17 +21,20 @@
     "from_imports": [],
     "from_imports_typing": [
       [
-        "..graphic.x_graphic",
-        "XGraphic"
+        ".x_certificate",
+        "XCertificate",
+        "x_certificate_i"
       ],
       [
-        ".x_certificate",
-        "XCertificate"
+        "..graphic.x_graphic",
+        "XGraphic",
+        "graphic_x_graphic_i"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "XGraphic",
-      "XCertificate"
+      "x_certificate_i",
+      "graphic_x_graphic_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -58,7 +62,7 @@
       },
       {
         "name": "InvalidSignatureLineImage",
-        "type": "XGraphic",
+        "type": "graphic_x_graphic_i",
         "lines": [
           "The Signature Line Image which is shown when the signature is invalid.",
           "",
@@ -108,12 +112,12 @@
       },
       {
         "name": "Signer",
-        "type": "XCertificate",
+        "type": "x_certificate_i",
         "lines": []
       },
       {
         "name": "ValidSignatureLineImage",
-        "type": "XGraphic",
+        "type": "graphic_x_graphic_i",
         "lines": [
           "The Signature Line Image which is shown when the signature is valid.",
           "",
