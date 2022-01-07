@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XGroups",
   "type": "interface",
   "namespace": "com.sun.star.report",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,35 +15,47 @@
   "data": {
     "from_imports": [
       [
-        "..lang.x_component",
-        "XComponent"
-      ],
-      [
-        "..container.x_child",
-        "XChild"
+        "..container.x_index_container",
+        "XIndexContainer",
+        "container_x_index_container_i"
       ],
       [
         "..container.x_container",
-        "XContainer"
+        "XContainer",
+        "container_x_container_i"
       ],
       [
-        "..container.x_index_container",
-        "XIndexContainer"
+        "..lang.x_component",
+        "XComponent",
+        "lang_x_component_i"
+      ],
+      [
+        "..container.x_child",
+        "XChild",
+        "container_x_child_i"
       ]
     ],
     "from_imports_typing": [
       [
-        ".x_report_definition",
-        "XReportDefinition"
+        ".x_group",
+        "XGroup",
+        "x_group_i"
       ],
       [
-        ".x_group",
-        "XGroup"
+        ".x_report_definition",
+        "XReportDefinition",
+        "x_report_definition_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.container.XIndexContainer": "container_x_index_container_i",
+      "com.sun.star.container.XContainer": "container_x_container_i",
+      "com.sun.star.lang.XComponent": "lang_x_component_i",
+      "com.sun.star.container.XChild": "container_x_child_i"
+    },
     "quote": [
-      "XGroup",
-      "XReportDefinition"
+      "x_group_i",
+      "x_report_definition_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -50,10 +63,10 @@
     "imports": [],
     "namespace": "com.sun.star.report",
     "extends": [
-      "com.sun.star.container.XContainer",
       "com.sun.star.container.XIndexContainer",
-      "com.sun.star.container.XChild",
-      "com.sun.star.lang.XComponent"
+      "com.sun.star.container.XContainer",
+      "com.sun.star.lang.XComponent",
+      "com.sun.star.container.XChild"
     ],
     "desc": [
       "This interface specifies the groups collections of the report definition."
@@ -63,7 +76,7 @@
       "methods": [
         {
           "name": "createGroup",
-          "returns": "XGroup",
+          "returns": "x_group_i",
           "desc": [
             "factory method for XGroup."
           ],
@@ -74,7 +87,7 @@
       "properties": [
         {
           "name": "ReportDefinition",
-          "returns": "XReportDefinition",
+          "returns": "x_report_definition_i",
           "desc": [],
           "raises_get": "",
           "raises_set": ""

@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XDocumentEventBroadcaster",
   "type": "interface",
   "namespace": "com.sun.star.document",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,17 +16,20 @@
     "from_imports": [],
     "from_imports_typing": [
       [
-        ".x_document_event_listener",
-        "XDocumentEventListener"
+        "..frame.x_controller2",
+        "XController2",
+        "frame_x_controller2_i"
       ],
       [
-        "..frame.x_controller2",
-        "XController2"
+        ".x_document_event_listener",
+        "XDocumentEventListener",
+        "x_document_event_listener_i"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "XController2",
-      "XDocumentEventListener"
+      "frame_x_controller2_i",
+      "x_document_event_listener_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -55,7 +59,7 @@
           "args": [
             [
               "Listener",
-              "XDocumentEventListener",
+              "x_document_event_listener_i",
               "in"
             ]
           ]
@@ -84,7 +88,7 @@
             ],
             [
               "ViewController",
-              "XController2",
+              "frame_x_controller2_i",
               "in"
             ],
             [
@@ -104,7 +108,7 @@
           "args": [
             [
               "Listener",
-              "XDocumentEventListener",
+              "x_document_event_listener_i",
               "in"
             ]
           ]

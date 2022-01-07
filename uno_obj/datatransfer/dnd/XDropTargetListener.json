@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XDropTargetListener",
   "type": "interface",
   "namespace": "com.sun.star.datatransfer.dnd",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,32 +16,40 @@
     "from_imports": [
       [
         "...lang.x_event_listener",
-        "XEventListener"
+        "XEventListener",
+        "lang_x_event_listener_i"
       ]
     ],
     "from_imports_typing": [
       [
-        ".drop_target_event",
-        "DropTargetEvent"
+        ".drop_target_drag_event",
+        "DropTargetDragEvent",
+        "drop_target_drag_event_i"
       ],
       [
-        ".drop_target_drag_event",
-        "DropTargetDragEvent"
+        ".drop_target_event",
+        "DropTargetEvent",
+        "drop_target_event_i"
       ],
       [
         ".drop_target_drop_event",
-        "DropTargetDropEvent"
+        "DropTargetDropEvent",
+        "drop_target_drop_event_i"
       ],
       [
         ".drop_target_drag_enter_event",
-        "DropTargetDragEnterEvent"
+        "DropTargetDragEnterEvent",
+        "drop_target_drag_enter_event_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.lang.XEventListener": "lang_x_event_listener_i"
+    },
     "quote": [
-      "DropTargetDropEvent",
-      "DropTargetDragEvent",
-      "DropTargetEvent",
-      "DropTargetDragEnterEvent"
+      "drop_target_drag_enter_event_i",
+      "drop_target_event_i",
+      "drop_target_drag_event_i",
+      "drop_target_drop_event_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -68,7 +77,7 @@
           "args": [
             [
               "dtdee",
-              "DropTargetDragEnterEvent",
+              "drop_target_drag_enter_event_i",
               "in"
             ]
           ]
@@ -83,7 +92,7 @@
           "args": [
             [
               "dte",
-              "DropTargetEvent",
+              "drop_target_event_i",
               "in"
             ]
           ]
@@ -98,7 +107,7 @@
           "args": [
             [
               "dtde",
-              "DropTargetDragEvent",
+              "drop_target_drag_event_i",
               "in"
             ]
           ]
@@ -115,7 +124,7 @@
           "args": [
             [
               "dtde",
-              "DropTargetDropEvent",
+              "drop_target_drop_event_i",
               "in"
             ]
           ]
@@ -130,7 +139,7 @@
           "args": [
             [
               "dtde",
-              "DropTargetDragEvent",
+              "drop_target_drag_event_i",
               "in"
             ]
           ]

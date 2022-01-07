@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XDesktop",
   "type": "interface",
   "namespace": "com.sun.star.frame",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,32 +16,40 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
-        "..lang.x_component",
-        "XComponent"
-      ],
-      [
-        ".x_terminate_listener",
-        "XTerminateListener"
-      ],
-      [
         ".x_frame",
-        "XFrame"
+        "XFrame",
+        "x_frame_i"
       ],
       [
         "..container.x_enumeration_access",
-        "XEnumerationAccess"
+        "XEnumerationAccess",
+        "container_x_enumeration_access_i"
+      ],
+      [
+        ".x_terminate_listener",
+        "XTerminateListener",
+        "x_terminate_listener_i"
+      ],
+      [
+        "..lang.x_component",
+        "XComponent",
+        "lang_x_component_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "XEnumerationAccess",
-      "XTerminateListener",
-      "XComponent",
-      "XFrame"
+      "container_x_enumeration_access_i",
+      "x_frame_i",
+      "lang_x_component_i",
+      "x_terminate_listener_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -68,14 +77,14 @@
           "args": [
             [
               "Listener",
-              "XTerminateListener",
+              "x_terminate_listener_i",
               "in"
             ]
           ]
         },
         {
           "name": "getComponents",
-          "returns": "XEnumerationAccess",
+          "returns": "container_x_enumeration_access_i",
           "desc": [
             "provides read access to collection of all currently loaded components inside the frame tree",
             "",
@@ -86,7 +95,7 @@
         },
         {
           "name": "getCurrentComponent",
-          "returns": "XComponent",
+          "returns": "lang_x_component_i",
           "desc": [
             "provides read access to the component inside the tree which has the UI focus",
             "",
@@ -97,7 +106,7 @@
         },
         {
           "name": "getCurrentFrame",
-          "returns": "XFrame",
+          "returns": "x_frame_i",
           "desc": [
             "provides read access to the frame which contains the current component"
           ],
@@ -114,7 +123,7 @@
           "args": [
             [
               "Listener",
-              "XTerminateListener",
+              "x_terminate_listener_i",
               "in"
             ]
           ]

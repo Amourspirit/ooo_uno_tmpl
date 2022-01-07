@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XSearchableDictionaryList",
   "type": "interface",
   "namespace": "com.sun.star.linguistic2",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,22 +16,28 @@
     "from_imports": [
       [
         ".x_dictionary_list",
-        "XDictionaryList"
+        "XDictionaryList",
+        "x_dictionary_list_i"
       ]
     ],
     "from_imports_typing": [
       [
-        ".x_dictionary_entry",
-        "XDictionaryEntry"
+        "..lang.locale",
+        "Locale",
+        "lang_locale_i"
       ],
       [
-        "..lang.locale",
-        "Locale"
+        ".x_dictionary_entry",
+        "XDictionaryEntry",
+        "x_dictionary_entry_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.linguistic2.XDictionaryList": "x_dictionary_list_i"
+    },
     "quote": [
-      "XDictionaryEntry",
-      "Locale"
+      "x_dictionary_entry_i",
+      "lang_locale_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -50,7 +57,7 @@
       "methods": [
         {
           "name": "queryDictionaryEntry",
-          "returns": "XDictionaryEntry",
+          "returns": "x_dictionary_entry_i",
           "desc": [
             "looks for an entry for a given word in the list of dictionaries."
           ],
@@ -63,7 +70,7 @@
             ],
             [
               "aLocale",
-              "Locale",
+              "lang_locale_i",
               "in"
             ],
             [

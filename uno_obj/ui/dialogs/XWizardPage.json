@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XWizardPage",
   "type": "interface",
   "namespace": "com.sun.star.ui.dialogs",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,17 +16,22 @@
     "from_imports": [
       [
         "...lang.x_component",
-        "XComponent"
+        "XComponent",
+        "lang_x_component_i"
       ]
     ],
     "from_imports_typing": [
       [
         "...awt.x_window",
-        "XWindow"
+        "XWindow",
+        "awt_x_window_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.lang.XComponent": "lang_x_component_i"
+    },
     "quote": [
-      "XWindow"
+      "awt_x_window_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -99,7 +105,7 @@
         },
         {
           "name": "Window",
-          "returns": "XWindow",
+          "returns": "awt_x_window_i",
           "desc": [
             "provides read-only access to the window of the page"
           ],

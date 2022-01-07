@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XTimeContainer",
   "type": "interface",
   "namespace": "com.sun.star.animations",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,12 +16,16 @@
     "from_imports": [
       [
         ".x_animation_node",
-        "XAnimationNode"
+        "XAnimationNode",
+        "x_animation_node_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.animations.XAnimationNode": "x_animation_node_i"
+    },
     "quote": [
-      "XAnimationNode"
+      "x_animation_node_i"
     ],
     "typings": [],
     "requires_typing": false,
@@ -38,7 +43,7 @@
       "methods": [
         {
           "name": "appendChild",
-          "returns": "XAnimationNode",
+          "returns": "x_animation_node_i",
           "desc": [],
           "raises": [
             "com.sun.star.lang.IllegalArgumentException",
@@ -48,14 +53,14 @@
           "args": [
             [
               "newChild",
-              "XAnimationNode",
+              "x_animation_node_i",
               "in"
             ]
           ]
         },
         {
           "name": "insertAfter",
-          "returns": "XAnimationNode",
+          "returns": "x_animation_node_i",
           "desc": [],
           "raises": [
             "com.sun.star.lang.IllegalArgumentException",
@@ -66,19 +71,19 @@
           "args": [
             [
               "newChild",
-              "XAnimationNode",
+              "x_animation_node_i",
               "in"
             ],
             [
               "refChild",
-              "XAnimationNode",
+              "x_animation_node_i",
               "in"
             ]
           ]
         },
         {
           "name": "insertBefore",
-          "returns": "XAnimationNode",
+          "returns": "x_animation_node_i",
           "desc": [],
           "raises": [
             "com.sun.star.lang.IllegalArgumentException",
@@ -89,19 +94,19 @@
           "args": [
             [
               "newChild",
-              "XAnimationNode",
+              "x_animation_node_i",
               "in"
             ],
             [
               "refChild",
-              "XAnimationNode",
+              "x_animation_node_i",
               "in"
             ]
           ]
         },
         {
           "name": "removeChild",
-          "returns": "XAnimationNode",
+          "returns": "x_animation_node_i",
           "desc": [],
           "raises": [
             "com.sun.star.lang.IllegalArgumentException",
@@ -111,14 +116,14 @@
           "args": [
             [
               "oldChild",
-              "XAnimationNode",
+              "x_animation_node_i",
               "in"
             ]
           ]
         },
         {
           "name": "replaceChild",
-          "returns": "XAnimationNode",
+          "returns": "x_animation_node_i",
           "desc": [],
           "raises": [
             "com.sun.star.lang.IllegalArgumentException",
@@ -129,12 +134,12 @@
           "args": [
             [
               "newChild",
-              "XAnimationNode",
+              "x_animation_node_i",
               "in"
             ],
             [
               "oldChild",
-              "XAnimationNode",
+              "x_animation_node_i",
               "in"
             ]
           ]

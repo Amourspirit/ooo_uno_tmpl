@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XWriter",
   "type": "interface",
   "namespace": "com.sun.star.xml.sax",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,15 +15,21 @@
   "data": {
     "from_imports": [
       [
-        "...io.x_active_data_source",
-        "XActiveDataSource"
+        ".x_extended_document_handler",
+        "XExtendedDocumentHandler",
+        "x_extended_document_handler_i"
       ],
       [
-        ".x_extended_document_handler",
-        "XExtendedDocumentHandler"
+        "...io.x_active_data_source",
+        "XActiveDataSource",
+        "io_x_active_data_source_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.xml.sax.XExtendedDocumentHandler": "x_extended_document_handler_i",
+      "com.sun.star.io.XActiveDataSource": "io_x_active_data_source_i"
+    },
     "quote": [
       "typing.List[typing.Tuple[str, str]]"
     ],
@@ -34,8 +41,8 @@
     "imports": [],
     "namespace": "com.sun.star.xml.sax",
     "extends": [
-      "com.sun.star.io.XActiveDataSource",
-      "com.sun.star.xml.sax.XExtendedDocumentHandler"
+      "com.sun.star.xml.sax.XExtendedDocumentHandler",
+      "com.sun.star.io.XActiveDataSource"
     ],
     "desc": [
       "Provides a unified interface for the new-style Writer service to implement.",

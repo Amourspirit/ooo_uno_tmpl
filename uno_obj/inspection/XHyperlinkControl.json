@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XHyperlinkControl",
   "type": "interface",
   "namespace": "com.sun.star.inspection",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,17 +16,22 @@
     "from_imports": [
       [
         ".x_property_control",
-        "XPropertyControl"
+        "XPropertyControl",
+        "x_property_control_i"
       ]
     ],
     "from_imports_typing": [
       [
         "..awt.x_action_listener",
-        "XActionListener"
+        "XActionListener",
+        "awt_x_action_listener_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.inspection.XPropertyControl": "x_property_control_i"
+    },
     "quote": [
-      "XActionListener"
+      "awt_x_action_listener_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -57,7 +63,7 @@
           "args": [
             [
               "listener",
-              "XActionListener",
+              "awt_x_action_listener_i",
               "in"
             ]
           ]
@@ -72,7 +78,7 @@
           "args": [
             [
               "listener",
-              "XActionListener",
+              "awt_x_action_listener_i",
               "in"
             ]
           ]

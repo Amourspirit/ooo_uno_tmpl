@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XNamedNodeMap",
   "type": "interface",
   "namespace": "com.sun.star.xml.dom",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,17 +16,22 @@
     "from_imports": [
       [
         "...uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_node",
-        "XNode"
+        "XNode",
+        "x_node_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "XNode"
+      "x_node_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -50,7 +56,7 @@
         },
         {
           "name": "getNamedItem",
-          "returns": "XNode",
+          "returns": "x_node_i",
           "desc": [
             "Retrieves a node specified by local name."
           ],
@@ -65,7 +71,7 @@
         },
         {
           "name": "getNamedItemNS",
-          "returns": "XNode",
+          "returns": "x_node_i",
           "desc": [
             "Retrieves a node specified by local name and namespace URI."
           ],
@@ -85,7 +91,7 @@
         },
         {
           "name": "item",
-          "returns": "XNode",
+          "returns": "x_node_i",
           "desc": [
             "Returns a node specified by index."
           ],
@@ -100,7 +106,7 @@
         },
         {
           "name": "removeNamedItem",
-          "returns": "XNode",
+          "returns": "x_node_i",
           "desc": [
             "Removes a node specified by name.",
             "",
@@ -119,7 +125,7 @@
         },
         {
           "name": "removeNamedItemNS",
-          "returns": "XNode",
+          "returns": "x_node_i",
           "desc": [
             "Removes a node specified by local name and namespace URI.",
             "",
@@ -143,7 +149,7 @@
         },
         {
           "name": "setNamedItem",
-          "returns": "XNode",
+          "returns": "x_node_i",
           "desc": [
             "Adds a node using its nodeName attribute.",
             "",
@@ -155,14 +161,14 @@
           "args": [
             [
               "arg",
-              "XNode",
+              "x_node_i",
               "in"
             ]
           ]
         },
         {
           "name": "setNamedItemNS",
-          "returns": "XNode",
+          "returns": "x_node_i",
           "desc": [
             "Adds a node using its namespaceURI and localName.",
             "",
@@ -174,7 +180,7 @@
           "args": [
             [
               "arg",
-              "XNode",
+              "x_node_i",
               "in"
             ]
           ]

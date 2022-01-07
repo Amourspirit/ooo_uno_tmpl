@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XContent",
   "type": "interface",
   "namespace": "com.sun.star.ucb",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,22 +16,28 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
-        ".x_content_identifier",
-        "XContentIdentifier"
+        ".x_content_event_listener",
+        "XContentEventListener",
+        "x_content_event_listener_i"
       ],
       [
-        ".x_content_event_listener",
-        "XContentEventListener"
+        ".x_content_identifier",
+        "XContentIdentifier",
+        "x_content_identifier_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "XContentEventListener",
-      "XContentIdentifier"
+      "x_content_event_listener_i",
+      "x_content_identifier_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -56,7 +63,7 @@
           "args": [
             [
               "Listener",
-              "XContentEventListener",
+              "x_content_event_listener_i",
               "in"
             ]
           ]
@@ -74,7 +81,7 @@
         },
         {
           "name": "getIdentifier",
-          "returns": "XContentIdentifier",
+          "returns": "x_content_identifier_i",
           "desc": [
             "returns the identifier of the content."
           ],
@@ -91,7 +98,7 @@
           "args": [
             [
               "Listener",
-              "XContentEventListener",
+              "x_content_event_listener_i",
               "in"
             ]
           ]

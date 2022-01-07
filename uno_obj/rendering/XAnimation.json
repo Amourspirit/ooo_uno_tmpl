@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XAnimation",
   "type": "interface",
   "namespace": "com.sun.star.rendering",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,27 +16,34 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
-        ".x_canvas",
-        "XCanvas"
+        ".view_state",
+        "ViewState",
+        "view_state_i"
       ],
       [
         ".animation_attributes",
-        "AnimationAttributes"
+        "AnimationAttributes",
+        "animation_attributes_i"
       ],
       [
-        ".view_state",
-        "ViewState"
+        ".x_canvas",
+        "XCanvas",
+        "x_canvas_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "AnimationAttributes",
-      "ViewState",
-      "XCanvas"
+      "view_state_i",
+      "animation_attributes_i",
+      "x_canvas_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -59,7 +67,7 @@
       "methods": [
         {
           "name": "getAnimationAttributes",
-          "returns": "AnimationAttributes",
+          "returns": "animation_attributes_i",
           "desc": [
             "Request the attribute information for this animation.",
             "",
@@ -84,12 +92,12 @@
           "args": [
             [
               "canvas",
-              "XCanvas",
+              "x_canvas_i",
               "in"
             ],
             [
               "viewState",
-              "ViewState",
+              "view_state_i",
               "in"
             ],
             [

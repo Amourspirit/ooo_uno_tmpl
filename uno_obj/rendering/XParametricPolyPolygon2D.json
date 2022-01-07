@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XParametricPolyPolygon2D",
   "type": "interface",
   "namespace": "com.sun.star.rendering",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,35 +16,43 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
-        "..geometry.real_point2_d",
-        "RealPoint2D"
-      ],
-      [
-        ".color_component",
-        "ColorComponent"
+        ".x_color_space",
+        "XColorSpace",
+        "x_color_space_i"
       ],
       [
         ".x_poly_polygon2_d",
-        "XPolyPolygon2D"
+        "XPolyPolygon2D",
+        "x_poly_polygon2_d_i"
       ],
       [
-        ".x_color_space",
-        "XColorSpace"
+        "..geometry.real_point2_d",
+        "RealPoint2D",
+        "geometry_real_point2_d_i"
+      ],
+      [
+        ".color_component",
+        "ColorComponent",
+        "color_component_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "typing.List[ColorComponent]",
-      "XColorSpace",
-      "XPolyPolygon2D",
-      "RealPoint2D"
+      "x_color_space_i",
+      "typing.List[color_component_i]",
+      "geometry_real_point2_d_i",
+      "x_poly_polygon2_d_i"
     ],
     "typings": [
-      "typing.List[ColorComponent]"
+      "typing.List[color_component_i]"
     ],
     "requires_typing": true,
     "name": "XParametricPolyPolygon2D",
@@ -62,7 +71,7 @@
       "methods": [
         {
           "name": "getColor",
-          "returns": "typing.List[ColorComponent]",
+          "returns": "typing.List[color_component_i]",
           "desc": [
             "Query the color value for the polygonal area at the specified parameter value."
           ],
@@ -79,7 +88,7 @@
         },
         {
           "name": "getColorSpace",
-          "returns": "XColorSpace",
+          "returns": "x_color_space_i",
           "desc": [
             "Query the color space employed by this object."
           ],
@@ -88,7 +97,7 @@
         },
         {
           "name": "getOutline",
-          "returns": "XPolyPolygon2D",
+          "returns": "x_poly_polygon2_d_i",
           "desc": [
             "Query the polygonal outline at the specified value.",
             "",
@@ -107,7 +116,7 @@
         },
         {
           "name": "getPointColor",
-          "returns": "typing.List[ColorComponent]",
+          "returns": "typing.List[color_component_i]",
           "desc": [
             "Query the color for a dedicated point in the plane."
           ],
@@ -117,7 +126,7 @@
           "args": [
             [
               "point",
-              "RealPoint2D",
+              "geometry_real_point2_d_i",
               "in"
             ]
           ]

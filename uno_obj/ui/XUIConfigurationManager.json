@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XUIConfigurationManager",
   "type": "interface",
   "namespace": "com.sun.star.ui",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,36 +16,44 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
-        "..container.x_index_access",
-        "XIndexAccess"
-      ],
-      [
-        "..beans.property_value",
-        "PropertyValue"
-      ],
-      [
         ".x_accelerator_configuration",
-        "XAcceleratorConfiguration"
+        "XAcceleratorConfiguration",
+        "x_accelerator_configuration_i"
+      ],
+      [
+        "..container.x_index_access",
+        "XIndexAccess",
+        "container_x_index_access_i"
       ],
       [
         "..container.x_index_container",
-        "XIndexContainer"
+        "XIndexContainer",
+        "container_x_index_container_i"
+      ],
+      [
+        "..beans.property_value",
+        "PropertyValue",
+        "beans_property_value_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "typing.List[typing.List[PropertyValue]]",
-      "XIndexAccess",
-      "XIndexContainer",
-      "XInterface",
-      "XAcceleratorConfiguration"
+      "container_x_index_container_i",
+      "x_accelerator_configuration_i",
+      "typing.List[typing.List[beans_property_value_i]]",
+      "uno_x_interface_i",
+      "container_x_index_access_i"
     ],
     "typings": [
-      "typing.List[typing.List[PropertyValue]]"
+      "typing.List[typing.List[beans_property_value_i]]"
     ],
     "requires_typing": true,
     "name": "XUIConfigurationManager",
@@ -65,7 +74,7 @@
       "methods": [
         {
           "name": "createSettings",
-          "returns": "XIndexContainer",
+          "returns": "container_x_index_container_i",
           "desc": [
             "creates an empty settings data container."
           ],
@@ -74,7 +83,7 @@
         },
         {
           "name": "getEventsManager",
-          "returns": "XInterface",
+          "returns": "uno_x_interface_i",
           "desc": [
             "retrieves the events manager from the user interface configuration manager.",
             "",
@@ -85,7 +94,7 @@
         },
         {
           "name": "getImageManager",
-          "returns": "XInterface",
+          "returns": "uno_x_interface_i",
           "desc": [
             "retrieves the image manager from the user interface configuration manager.",
             "",
@@ -96,7 +105,7 @@
         },
         {
           "name": "getSettings",
-          "returns": "XIndexAccess",
+          "returns": "container_x_index_access_i",
           "desc": [
             "retrieves the settings of a user interface element."
           ],
@@ -119,7 +128,7 @@
         },
         {
           "name": "getShortCutManager",
-          "returns": "XAcceleratorConfiguration",
+          "returns": "x_accelerator_configuration_i",
           "desc": [
             "retrieves the keyboard short cut manager from the user interface configuration manager.",
             "",
@@ -130,7 +139,7 @@
         },
         {
           "name": "getUIElementsInfo",
-          "returns": "typing.List[typing.List[PropertyValue]]",
+          "returns": "typing.List[typing.List[beans_property_value_i]]",
           "desc": [
             "retrieves information about all user interface elements within the user interface configuration manager.",
             "",
@@ -185,7 +194,7 @@
             ],
             [
               "aNewData",
-              "XIndexAccess",
+              "container_x_index_access_i",
               "in"
             ]
           ]
@@ -232,7 +241,7 @@
             ],
             [
               "aNewData",
-              "XIndexAccess",
+              "container_x_index_access_i",
               "in"
             ]
           ]

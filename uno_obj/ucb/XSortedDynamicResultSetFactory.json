@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XSortedDynamicResultSetFactory",
   "type": "interface",
   "namespace": "com.sun.star.ucb",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,30 +16,37 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
-        ".x_dynamic_result_set",
-        "XDynamicResultSet"
-      ],
-      [
         ".x_any_compare_factory",
-        "XAnyCompareFactory"
+        "XAnyCompareFactory",
+        "x_any_compare_factory_i"
       ],
       [
         ".numbered_sorting_info",
-        "NumberedSortingInfo"
+        "NumberedSortingInfo",
+        "numbered_sorting_info_i"
+      ],
+      [
+        ".x_dynamic_result_set",
+        "XDynamicResultSet",
+        "x_dynamic_result_set_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "typing.List[NumberedSortingInfo]",
-      "XAnyCompareFactory",
-      "XDynamicResultSet"
+      "x_any_compare_factory_i",
+      "x_dynamic_result_set_i",
+      "typing.List[numbered_sorting_info_i]"
     ],
     "typings": [
-      "typing.List[NumberedSortingInfo]"
+      "typing.List[numbered_sorting_info_i]"
     ],
     "requires_typing": true,
     "name": "XSortedDynamicResultSetFactory",
@@ -55,7 +63,7 @@
       "methods": [
         {
           "name": "createSortedDynamicResultSet",
-          "returns": "XDynamicResultSet",
+          "returns": "x_dynamic_result_set_i",
           "desc": [
             "creates a sorted XDynamicResultSet depending on internal data, an (unsorted) XDynamicResultSet and the sorting info."
           ],
@@ -63,17 +71,17 @@
           "args": [
             [
               "Source",
-              "XDynamicResultSet",
+              "x_dynamic_result_set_i",
               "in"
             ],
             [
               "Info",
-              "typing.List[NumberedSortingInfo]",
+              "typing.List[numbered_sorting_info_i]",
               "in"
             ],
             [
               "CompareFactory",
-              "XAnyCompareFactory",
+              "x_any_compare_factory_i",
               "in"
             ]
           ]

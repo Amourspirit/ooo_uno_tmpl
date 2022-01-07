@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XConnectionSupplier",
   "type": "interface",
   "namespace": "com.sun.star.sdb.tools",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,17 +16,22 @@
     "from_imports": [
       [
         "...lang.x_initialization",
-        "XInitialization"
+        "XInitialization",
+        "lang_x_initialization_i"
       ]
     ],
     "from_imports_typing": [
       [
         "...sdbc.x_connection",
-        "XConnection"
+        "XConnection",
+        "sdbc_x_connection_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.lang.XInitialization": "lang_x_initialization_i"
+    },
     "quote": [
-      "XConnection"
+      "sdbc_x_connection_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -47,7 +53,7 @@
       "properties": [
         {
           "name": "ActiveConnection",
-          "returns": "XConnection",
+          "returns": "sdbc_x_connection_i",
           "desc": [
             "returns the source connection."
           ],

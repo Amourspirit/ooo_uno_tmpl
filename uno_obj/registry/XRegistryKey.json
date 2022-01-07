@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XRegistryKey",
   "type": "interface",
   "namespace": "com.sun.star.registry",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,35 +16,42 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
-        ".x_registry_key",
-        "XRegistryKey"
-      ],
-      [
         ".registry_key_type",
-        "RegistryKeyType"
+        "RegistryKeyType",
+        "registry_key_type_i"
       ],
       [
         ".registry_value_type",
-        "RegistryValueType"
+        "RegistryValueType",
+        "registry_value_type_i"
+      ],
+      [
+        ".x_registry_key",
+        "XRegistryKey",
+        "x_registry_key_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "typing.List[str]",
-      "RegistryKeyType",
-      "typing.List[XRegistryKey]",
+      "registry_key_type_i",
+      "typing.List[x_registry_key_i]",
       "typing.List[int]",
-      "RegistryValueType",
-      "XRegistryKey"
+      "x_registry_key_i",
+      "registry_value_type_i",
+      "typing.List[str]"
     ],
     "typings": [
       "typing.List[int]",
       "typing.List[str]",
-      "typing.List[XRegistryKey]"
+      "typing.List[x_registry_key_i]"
     ],
     "requires_typing": true,
     "name": "XRegistryKey",
@@ -73,7 +81,7 @@
         },
         {
           "name": "createKey",
-          "returns": "XRegistryKey",
+          "returns": "x_registry_key_i",
           "desc": [
             "creates a new key in the registry.",
             "",
@@ -187,7 +195,7 @@
         },
         {
           "name": "getKeyType",
-          "returns": "RegistryKeyType",
+          "returns": "registry_key_type_i",
           "desc": [],
           "raises": [
             "com.sun.star.registry.InvalidRegistryException"
@@ -272,7 +280,7 @@
         },
         {
           "name": "getValueType",
-          "returns": "RegistryValueType",
+          "returns": "registry_value_type_i",
           "desc": [],
           "raises": [
             "com.sun.star.registry.InvalidRegistryException"
@@ -301,7 +309,7 @@
         },
         {
           "name": "openKey",
-          "returns": "XRegistryKey",
+          "returns": "x_registry_key_i",
           "desc": [
             "opens a sub key of the key.",
             "",
@@ -320,7 +328,7 @@
         },
         {
           "name": "openKeys",
-          "returns": "typing.List[XRegistryKey]",
+          "returns": "typing.List[x_registry_key_i]",
           "desc": [
             "opens all subkeys of the key.",
             "",

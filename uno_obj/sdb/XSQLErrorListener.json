@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XSQLErrorListener",
   "type": "interface",
   "namespace": "com.sun.star.sdb",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,17 +16,22 @@
     "from_imports": [
       [
         "..lang.x_event_listener",
-        "XEventListener"
+        "XEventListener",
+        "lang_x_event_listener_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".sql_error_event",
-        "SQLErrorEvent"
+        "SQLErrorEvent",
+        "sql_error_event_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.lang.XEventListener": "lang_x_event_listener_i"
+    },
     "quote": [
-      "SQLErrorEvent"
+      "sql_error_event_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -51,7 +57,7 @@
           "args": [
             [
               "aEvent",
-              "SQLErrorEvent",
+              "sql_error_event_i",
               "in"
             ]
           ]

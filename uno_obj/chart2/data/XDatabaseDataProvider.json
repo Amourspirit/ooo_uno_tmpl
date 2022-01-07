@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XDatabaseDataProvider",
   "type": "interface",
   "namespace": "com.sun.star.chart2.data",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,43 +15,60 @@
   "data": {
     "from_imports": [
       [
-        "...sdbc.x_parameters",
-        "XParameters"
+        ".x_data_provider",
+        "XDataProvider",
+        "x_data_provider_i"
       ],
       [
-        "...lang.x_component",
-        "XComponent"
+        "...sdbc.x_parameters",
+        "XParameters",
+        "sdbc_x_parameters_i"
       ],
       [
         ".x_range_xml_conversion",
-        "XRangeXMLConversion"
-      ],
-      [
-        ".x_data_provider",
-        "XDataProvider"
+        "XRangeXMLConversion",
+        "x_range_xml_conversion_i"
       ],
       [
         "...beans.x_property_set",
-        "XPropertySet"
+        "XPropertySet",
+        "beans_x_property_set_i"
       ],
       [
         "...sdbc.x_row_set",
-        "XRowSet"
+        "XRowSet",
+        "sdbc_x_row_set_i"
       ],
       [
         "...lang.x_initialization",
-        "XInitialization"
+        "XInitialization",
+        "lang_x_initialization_i"
+      ],
+      [
+        "...lang.x_component",
+        "XComponent",
+        "lang_x_component_i"
       ]
     ],
     "from_imports_typing": [
       [
         "...sdbc.x_connection",
-        "XConnection"
+        "XConnection",
+        "sdbc_x_connection_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.chart2.data.XDataProvider": "x_data_provider_i",
+      "com.sun.star.sdbc.XParameters": "sdbc_x_parameters_i",
+      "com.sun.star.chart2.data.XRangeXMLConversion": "x_range_xml_conversion_i",
+      "com.sun.star.beans.XPropertySet": "beans_x_property_set_i",
+      "com.sun.star.sdbc.XRowSet": "sdbc_x_row_set_i",
+      "com.sun.star.lang.XInitialization": "lang_x_initialization_i",
+      "com.sun.star.lang.XComponent": "lang_x_component_i"
+    },
     "quote": [
-      "typing.List[str]",
-      "XConnection"
+      "sdbc_x_connection_i",
+      "typing.List[str]"
     ],
     "typings": [
       "typing.List[str]"
@@ -61,12 +79,12 @@
     "namespace": "com.sun.star.chart2.data",
     "extends": [
       "com.sun.star.chart2.data.XDataProvider",
-      "com.sun.star.chart2.data.XRangeXMLConversion",
-      "com.sun.star.lang.XInitialization",
-      "com.sun.star.lang.XComponent",
-      "com.sun.star.beans.XPropertySet",
       "com.sun.star.sdbc.XParameters",
-      "com.sun.star.sdbc.XRowSet"
+      "com.sun.star.chart2.data.XRangeXMLConversion",
+      "com.sun.star.beans.XPropertySet",
+      "com.sun.star.sdbc.XRowSet",
+      "com.sun.star.lang.XInitialization",
+      "com.sun.star.lang.XComponent"
     ],
     "desc": [
       "identifies a XDataProvider for result sets."
@@ -109,7 +127,7 @@
       "properties": [
         {
           "name": "ActiveConnection",
-          "returns": "XConnection",
+          "returns": "sdbc_x_connection_i",
           "desc": [
             "specifies the active connection which is used to create the resulting report."
           ],

@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XNode",
   "type": "interface",
   "namespace": "com.sun.star.xml.dom",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,37 +16,46 @@
     "from_imports": [
       [
         "...uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
-        ".x_document",
-        "XDocument"
-      ],
-      [
-        ".x_node",
-        "XNode"
-      ],
-      [
         ".node_type",
-        "NodeType"
+        "NodeType",
+        "node_type_i"
       ],
       [
         ".x_named_node_map",
-        "XNamedNodeMap"
+        "XNamedNodeMap",
+        "x_named_node_map_i"
+      ],
+      [
+        ".x_document",
+        "XDocument",
+        "x_document_i"
       ],
       [
         ".x_node_list",
-        "XNodeList"
+        "XNodeList",
+        "x_node_list_i"
+      ],
+      [
+        ".x_node",
+        "XNode",
+        "x_node_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "XNamedNodeMap",
-      "XDocument",
-      "XNodeList",
-      "NodeType",
-      "XNode"
+      "x_document_i",
+      "x_node_list_i",
+      "x_named_node_map_i",
+      "x_node_i",
+      "node_type_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -73,7 +83,7 @@
       "methods": [
         {
           "name": "appendChild",
-          "returns": "XNode",
+          "returns": "x_node_i",
           "desc": [
             "Adds the node newChild to the end of the list of children of this node.",
             "",
@@ -89,14 +99,14 @@
           "args": [
             [
               "newChild",
-              "XNode",
+              "x_node_i",
               "in"
             ]
           ]
         },
         {
           "name": "cloneNode",
-          "returns": "XNode",
+          "returns": "x_node_i",
           "desc": [
             "Returns a duplicate of this node, i.e., serves as a generic copy constructor for nodes."
           ],
@@ -111,7 +121,7 @@
         },
         {
           "name": "getAttributes",
-          "returns": "XNamedNodeMap",
+          "returns": "x_named_node_map_i",
           "desc": [
             "A NamedNodeMap containing the attributes of this node (if it is an Element) or null otherwise."
           ],
@@ -120,7 +130,7 @@
         },
         {
           "name": "getChildNodes",
-          "returns": "XNodeList",
+          "returns": "x_node_list_i",
           "desc": [
             "A NodeList that contains all children of this node."
           ],
@@ -129,7 +139,7 @@
         },
         {
           "name": "getFirstChild",
-          "returns": "XNode",
+          "returns": "x_node_i",
           "desc": [
             "The first child of this node."
           ],
@@ -138,7 +148,7 @@
         },
         {
           "name": "getLastChild",
-          "returns": "XNode",
+          "returns": "x_node_i",
           "desc": [
             "The last child of this node."
           ],
@@ -165,7 +175,7 @@
         },
         {
           "name": "getNextSibling",
-          "returns": "XNode",
+          "returns": "x_node_i",
           "desc": [
             "The node immediately following this node."
           ],
@@ -183,7 +193,7 @@
         },
         {
           "name": "getNodeType",
-          "returns": "NodeType",
+          "returns": "node_type_i",
           "desc": [
             "A code representing the type of the underlying object, as defined above."
           ],
@@ -205,7 +215,7 @@
         },
         {
           "name": "getOwnerDocument",
-          "returns": "XDocument",
+          "returns": "x_document_i",
           "desc": [
             "The Document object associated with this node."
           ],
@@ -214,7 +224,7 @@
         },
         {
           "name": "getParentNode",
-          "returns": "XNode",
+          "returns": "x_node_i",
           "desc": [
             "The parent of this node."
           ],
@@ -232,7 +242,7 @@
         },
         {
           "name": "getPreviousSibling",
-          "returns": "XNode",
+          "returns": "x_node_i",
           "desc": [
             "The node immediately preceding this node."
           ],
@@ -259,7 +269,7 @@
         },
         {
           "name": "insertBefore",
-          "returns": "XNode",
+          "returns": "x_node_i",
           "desc": [
             "Inserts the node newChild before the existing child node refChild.",
             "",
@@ -277,12 +287,12 @@
           "args": [
             [
               "newChild",
-              "XNode",
+              "x_node_i",
               "in"
             ],
             [
               "refChild",
-              "XNode",
+              "x_node_i",
               "in"
             ]
           ]
@@ -318,7 +328,7 @@
         },
         {
           "name": "removeChild",
-          "returns": "XNode",
+          "returns": "x_node_i",
           "desc": [
             "Removes the child node indicated by oldChild from the list of children, and returns it.",
             "",
@@ -332,14 +342,14 @@
           "args": [
             [
               "oldChild",
-              "XNode",
+              "x_node_i",
               "in"
             ]
           ]
         },
         {
           "name": "replaceChild",
-          "returns": "XNode",
+          "returns": "x_node_i",
           "desc": [
             "Replaces the child node oldChild with newChild in the list of children, and returns the oldChild node.",
             "",
@@ -357,12 +367,12 @@
           "args": [
             [
               "newChild",
-              "XNode",
+              "x_node_i",
               "in"
             ],
             [
               "oldChild",
-              "XNode",
+              "x_node_i",
               "in"
             ]
           ]

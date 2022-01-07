@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XSystemClipboard",
   "type": "interface",
   "namespace": "com.sun.star.datatransfer.clipboard",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,23 +15,33 @@
   "data": {
     "from_imports": [
       [
-        "...lang.x_component",
-        "XComponent"
-      ],
-      [
         ".x_clipboard_notifier",
-        "XClipboardNotifier"
-      ],
-      [
-        ".x_flushable_clipboard",
-        "XFlushableClipboard"
+        "XClipboardNotifier",
+        "x_clipboard_notifier_i"
       ],
       [
         ".x_clipboard_ex",
-        "XClipboardEx"
+        "XClipboardEx",
+        "x_clipboard_ex_i"
+      ],
+      [
+        ".x_flushable_clipboard",
+        "XFlushableClipboard",
+        "x_flushable_clipboard_i"
+      ],
+      [
+        "...lang.x_component",
+        "XComponent",
+        "lang_x_component_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.datatransfer.clipboard.XClipboardNotifier": "x_clipboard_notifier_i",
+      "com.sun.star.datatransfer.clipboard.XClipboardEx": "x_clipboard_ex_i",
+      "com.sun.star.datatransfer.clipboard.XFlushableClipboard": "x_flushable_clipboard_i",
+      "com.sun.star.lang.XComponent": "lang_x_component_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -38,10 +49,10 @@
     "imports": [],
     "namespace": "com.sun.star.datatransfer.clipboard",
     "extends": [
-      "com.sun.star.datatransfer.clipboard.XClipboardEx",
       "com.sun.star.datatransfer.clipboard.XClipboardNotifier",
-      "com.sun.star.datatransfer.clipboard.XFlushableClipboard",
-      "com.sun.star.lang.XComponent"
+      "com.sun.star.datatransfer.clipboard.XClipboardEx",
+      "com.sun.star.lang.XComponent",
+      "com.sun.star.datatransfer.clipboard.XFlushableClipboard"
     ],
     "desc": [
       "Provides a unified interface for new-style service SystemClipboard.",

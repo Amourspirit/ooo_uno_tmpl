@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XManifestWriter",
   "type": "interface",
   "namespace": "com.sun.star.packages.manifest",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,25 +16,31 @@
     "from_imports": [
       [
         "...uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
-        "...io.x_output_stream",
-        "XOutputStream"
+        "...beans.property_value",
+        "PropertyValue",
+        "beans_property_value_i"
       ],
       [
-        "...beans.property_value",
-        "PropertyValue"
+        "...io.x_output_stream",
+        "XOutputStream",
+        "io_x_output_stream_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "typing.List[typing.List[PropertyValue]]",
-      "XOutputStream"
+      "typing.List[typing.List[beans_property_value_i]]",
+      "io_x_output_stream_i"
     ],
     "typings": [
-      "typing.List[typing.List[PropertyValue]]"
+      "typing.List[typing.List[beans_property_value_i]]"
     ],
     "requires_typing": true,
     "name": "XManifestWriter",
@@ -60,12 +67,12 @@
           "args": [
             [
               "rStream",
-              "XOutputStream",
+              "io_x_output_stream_i",
               "in"
             ],
             [
               "rSequence",
-              "typing.List[typing.List[PropertyValue]]",
+              "typing.List[typing.List[beans_property_value_i]]",
               "in"
             ]
           ]

@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XShapeEventListener",
   "type": "interface",
   "namespace": "com.sun.star.presentation",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,22 +16,28 @@
     "from_imports": [
       [
         "..lang.x_event_listener",
-        "XEventListener"
+        "XEventListener",
+        "lang_x_event_listener_i"
       ]
     ],
     "from_imports_typing": [
       [
-        "..awt.mouse_event",
-        "MouseEvent"
+        "..drawing.x_shape",
+        "XShape",
+        "drawing_x_shape_i"
       ],
       [
-        "..drawing.x_shape",
-        "XShape"
+        "..awt.mouse_event",
+        "MouseEvent",
+        "awt_mouse_event_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.lang.XEventListener": "lang_x_event_listener_i"
+    },
     "quote": [
-      "MouseEvent",
-      "XShape"
+      "awt_mouse_event_i",
+      "drawing_x_shape_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -62,12 +69,12 @@
           "args": [
             [
               "xShape",
-              "XShape",
+              "drawing_x_shape_i",
               "in"
             ],
             [
               "aOriginalEvent",
-              "MouseEvent",
+              "awt_mouse_event_i",
               "in"
             ]
           ]

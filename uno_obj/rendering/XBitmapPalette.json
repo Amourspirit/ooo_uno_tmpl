@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XBitmapPalette",
   "type": "interface",
   "namespace": "com.sun.star.rendering",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,25 +16,31 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
-        ".color_component",
-        "ColorComponent"
+        ".x_color_space",
+        "XColorSpace",
+        "x_color_space_i"
       ],
       [
-        ".x_color_space",
-        "XColorSpace"
+        ".color_component",
+        "ColorComponent",
+        "color_component_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "typing.List[ColorComponent]",
-      "XColorSpace"
+      "x_color_space_i",
+      "typing.List[color_component_i]"
     ],
     "typings": [
-      "typing.List[ColorComponent]"
+      "typing.List[color_component_i]"
     ],
     "requires_typing": true,
     "name": "XBitmapPalette",
@@ -54,7 +61,7 @@
       "methods": [
         {
           "name": "getColorSpace",
-          "returns": "XColorSpace",
+          "returns": "x_color_space_i",
           "desc": [
             "Query associated color space."
           ],
@@ -73,7 +80,7 @@
           "args": [
             [
               "entry",
-              "typing.List[ColorComponent]",
+              "typing.List[color_component_i]",
               "out"
             ],
             [
@@ -105,7 +112,7 @@
           "args": [
             [
               "color",
-              "typing.List[ColorComponent]",
+              "typing.List[color_component_i]",
               "in"
             ],
             [

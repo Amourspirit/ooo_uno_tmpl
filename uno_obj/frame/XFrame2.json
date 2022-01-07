@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XFrame2",
   "type": "interface",
   "namespace": "com.sun.star.frame",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,44 +15,59 @@
   "data": {
     "from_imports": [
       [
+        ".x_dispatch_provider_interception",
+        "XDispatchProviderInterception",
+        "x_dispatch_provider_interception_i"
+      ],
+      [
         ".x_dispatch_information_provider",
-        "XDispatchInformationProvider"
+        "XDispatchInformationProvider",
+        "x_dispatch_information_provider_i"
       ],
       [
         ".x_frames_supplier",
-        "XFramesSupplier"
+        "XFramesSupplier",
+        "x_frames_supplier_i"
       ],
       [
         "..task.x_status_indicator_factory",
-        "XStatusIndicatorFactory"
+        "XStatusIndicatorFactory",
+        "task_x_status_indicator_factory_i"
       ],
       [
         ".x_dispatch_provider",
-        "XDispatchProvider"
-      ],
-      [
-        ".x_dispatch_provider_interception",
-        "XDispatchProviderInterception"
+        "XDispatchProvider",
+        "x_dispatch_provider_i"
       ]
     ],
     "from_imports_typing": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ],
       [
         "..container.x_name_container",
-        "XNameContainer"
+        "XNameContainer",
+        "container_x_name_container_i"
       ],
       [
         ".x_dispatch_recorder_supplier",
-        "XDispatchRecorderSupplier"
+        "XDispatchRecorderSupplier",
+        "x_dispatch_recorder_supplier_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.frame.XDispatchProviderInterception": "x_dispatch_provider_interception_i",
+      "com.sun.star.frame.XDispatchInformationProvider": "x_dispatch_information_provider_i",
+      "com.sun.star.frame.XFramesSupplier": "x_frames_supplier_i",
+      "com.sun.star.task.XStatusIndicatorFactory": "task_x_status_indicator_factory_i",
+      "com.sun.star.frame.XDispatchProvider": "x_dispatch_provider_i"
+    },
     "quote": [
-      "XNameContainer",
-      "XInterface",
-      "XDispatchRecorderSupplier"
+      "container_x_name_container_i",
+      "uno_x_interface_i",
+      "x_dispatch_recorder_supplier_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -59,11 +75,11 @@
     "imports": [],
     "namespace": "com.sun.star.frame",
     "extends": [
-      "com.sun.star.frame.XDispatchProvider",
-      "com.sun.star.frame.XDispatchInformationProvider",
       "com.sun.star.frame.XDispatchProviderInterception",
+      "com.sun.star.frame.XDispatchInformationProvider",
       "com.sun.star.frame.XFramesSupplier",
-      "com.sun.star.task.XStatusIndicatorFactory"
+      "com.sun.star.task.XStatusIndicatorFactory",
+      "com.sun.star.frame.XDispatchProvider"
     ],
     "desc": [
       "",
@@ -76,7 +92,7 @@
       "properties": [
         {
           "name": "DispatchRecorderSupplier",
-          "returns": "XDispatchRecorderSupplier",
+          "returns": "x_dispatch_recorder_supplier_i",
           "desc": [
             "provides access to the dispatch recorder of the frame",
             "",
@@ -94,7 +110,7 @@
         },
         {
           "name": "LayoutManager",
-          "returns": "XInterface",
+          "returns": "uno_x_interface_i",
           "desc": [
             "Provides access to the LayoutManager of the frame.",
             "",
@@ -116,7 +132,7 @@
         },
         {
           "name": "UserDefinedAttributes",
-          "returns": "XNameContainer",
+          "returns": "container_x_name_container_i",
           "desc": [
             "contains user defined attributes."
           ],

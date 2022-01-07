@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XAdapter",
   "type": "interface",
   "namespace": "com.sun.star.uno",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,18 +16,23 @@
     "from_imports": [
       [
         ".x_interface",
-        "XInterface"
+        "XInterface",
+        "x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_reference",
-        "XReference"
+        "XReference",
+        "x_reference_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "x_interface_i"
+    },
     "quote": [
-      "XInterface",
-      "XReference"
+      "x_reference_i",
+      "x_interface_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -56,14 +62,14 @@
           "args": [
             [
               "xRef",
-              "XReference",
+              "x_reference_i",
               "in"
             ]
           ]
         },
         {
           "name": "queryAdapted",
-          "returns": "XInterface",
+          "returns": "x_interface_i",
           "desc": [
             "queries the adapted object if it is alive."
           ],
@@ -80,7 +86,7 @@
           "args": [
             [
               "xRef",
-              "XReference",
+              "x_reference_i",
               "in"
             ]
           ]

@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XGraphics2",
   "type": "interface",
   "namespace": "com.sun.star.awt",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,22 +16,28 @@
     "from_imports": [
       [
         ".x_graphics",
-        "XGraphics"
+        "XGraphics",
+        "x_graphics_i"
       ]
     ],
     "from_imports_typing": [
       [
         "..graphic.x_graphic",
-        "XGraphic"
+        "XGraphic",
+        "graphic_x_graphic_i"
       ],
       [
         ".rectangle",
-        "Rectangle"
+        "Rectangle",
+        "rectangle_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.awt.XGraphics": "x_graphics_i"
+    },
     "quote": [
-      "Rectangle",
-      "XGraphic"
+      "graphic_x_graphic_i",
+      "rectangle_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -64,7 +71,7 @@
           "args": [
             [
               "aRect",
-              "Rectangle",
+              "rectangle_i",
               "in"
             ]
           ]
@@ -110,7 +117,7 @@
             ],
             [
               "aGraphic",
-              "XGraphic",
+              "graphic_x_graphic_i",
               "in"
             ]
           ]

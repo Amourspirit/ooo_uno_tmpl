@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XRegressionCurve",
   "type": "interface",
   "namespace": "com.sun.star.chart2",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,22 +16,28 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
         "..beans.x_property_set",
-        "XPropertySet"
+        "XPropertySet",
+        "beans_x_property_set_i"
       ],
       [
         ".x_regression_curve_calculator",
-        "XRegressionCurveCalculator"
+        "XRegressionCurveCalculator",
+        "x_regression_curve_calculator_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "XPropertySet",
-      "XRegressionCurveCalculator"
+      "beans_x_property_set_i",
+      "x_regression_curve_calculator_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -46,14 +53,14 @@
       "methods": [
         {
           "name": "getCalculator",
-          "returns": "XRegressionCurveCalculator",
+          "returns": "x_regression_curve_calculator_i",
           "desc": [],
           "raises": [],
           "args": []
         },
         {
           "name": "getEquationProperties",
-          "returns": "XPropertySet",
+          "returns": "beans_x_property_set_i",
           "desc": [],
           "raises": [],
           "args": []
@@ -66,7 +73,7 @@
           "args": [
             [
               "xEquationProperties",
-              "XPropertySet",
+              "beans_x_property_set_i",
               "in"
             ]
           ]

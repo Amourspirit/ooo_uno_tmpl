@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XSlideRenderer",
   "type": "interface",
   "namespace": "com.sun.star.drawing",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,31 +16,38 @@
     "from_imports": [],
     "from_imports_typing": [
       [
-        "..rendering.x_canvas",
-        "XCanvas"
-      ],
-      [
-        "..awt.x_bitmap",
-        "XBitmap"
+        "..awt.size",
+        "Size",
+        "awt_size_i"
       ],
       [
         "..rendering.x_bitmap",
-        "XBitmap"
+        "XBitmap",
+        "rendering_x_bitmap_i"
+      ],
+      [
+        "..rendering.x_canvas",
+        "XCanvas",
+        "rendering_x_canvas_i"
       ],
       [
         ".x_draw_page",
-        "XDrawPage"
+        "XDrawPage",
+        "x_draw_page_i"
       ],
       [
-        "..awt.size",
-        "Size"
+        "..awt.x_bitmap",
+        "XBitmap",
+        "awt_x_bitmap_i"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "XBitmap",
-      "Size",
-      "XDrawPage",
-      "XCanvas"
+      "awt_x_bitmap_i",
+      "rendering_x_bitmap_i",
+      "x_draw_page_i",
+      "awt_size_i",
+      "rendering_x_canvas_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -55,7 +63,7 @@
       "methods": [
         {
           "name": "calculatePreviewSize",
-          "returns": "Size",
+          "returns": "awt_size_i",
           "desc": [
             "Return a size that has the given aspect ratio and shares either the width or the height with the given maximum size."
           ],
@@ -68,14 +76,14 @@
             ],
             [
               "aMaximumPreviewPixelSize",
-              "Size",
+              "awt_size_i",
               "in"
             ]
           ]
         },
         {
           "name": "createPreview",
-          "returns": "XBitmap",
+          "returns": "awt_x_bitmap_i",
           "desc": [
             "Create a preview for the given slide that has the same aspect ratio as the page and is as large as possible but not larger than the specified size.",
             "",
@@ -85,12 +93,12 @@
           "args": [
             [
               "xSlide",
-              "XDrawPage",
+              "x_draw_page_i",
               "in"
             ],
             [
               "aMaximumPreviewPixelSize",
-              "Size",
+              "awt_size_i",
               "in"
             ],
             [
@@ -102,7 +110,7 @@
         },
         {
           "name": "createPreviewForCanvas",
-          "returns": "XBitmap",
+          "returns": "rendering_x_bitmap_i",
           "desc": [
             "Exactly the same functionality as createPreview(), only a different return type: com.sun.star.rendering.XBitmap instead of com.sun.star.awt.XBitmap."
           ],
@@ -110,12 +118,12 @@
           "args": [
             [
               "xSlide",
-              "XDrawPage",
+              "x_draw_page_i",
               "in"
             ],
             [
               "aMaximumPreviewPixelSize",
-              "Size",
+              "awt_size_i",
               "in"
             ],
             [
@@ -125,7 +133,7 @@
             ],
             [
               "xCanvas",
-              "XCanvas",
+              "rendering_x_canvas_i",
               "in"
             ]
           ]

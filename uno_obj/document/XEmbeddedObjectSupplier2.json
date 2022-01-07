@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XEmbeddedObjectSupplier2",
   "type": "interface",
   "namespace": "com.sun.star.document",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,22 +16,28 @@
     "from_imports": [
       [
         ".x_embedded_object_supplier",
-        "XEmbeddedObjectSupplier"
+        "XEmbeddedObjectSupplier",
+        "x_embedded_object_supplier_i"
       ]
     ],
     "from_imports_typing": [
       [
-        "..graphic.x_graphic",
-        "XGraphic"
+        "..embed.x_embedded_object",
+        "XEmbeddedObject",
+        "embed_x_embedded_object_i"
       ],
       [
-        "..embed.x_embedded_object",
-        "XEmbeddedObject"
+        "..graphic.x_graphic",
+        "XGraphic",
+        "graphic_x_graphic_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.document.XEmbeddedObjectSupplier": "x_embedded_object_supplier_i"
+    },
     "quote": [
-      "XGraphic",
-      "XEmbeddedObject"
+      "embed_x_embedded_object_i",
+      "graphic_x_graphic_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -48,7 +55,7 @@
       "methods": [
         {
           "name": "getExtendedControlOverEmbeddedObject",
-          "returns": "XEmbeddedObject",
+          "returns": "embed_x_embedded_object_i",
           "desc": [
             "returns the object which is embedded into this object.",
             "",
@@ -70,7 +77,7 @@
         },
         {
           "name": "ReplacementGraphic",
-          "returns": "XGraphic",
+          "returns": "graphic_x_graphic_i",
           "desc": [
             "allows to get the replacement image of the object."
           ],

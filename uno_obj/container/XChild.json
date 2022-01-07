@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XChild",
   "type": "interface",
   "namespace": "com.sun.star.container",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,12 +16,16 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "XInterface"
+      "uno_x_interface_i"
     ],
     "typings": [],
     "requires_typing": false,
@@ -40,7 +45,7 @@
       "methods": [
         {
           "name": "getParent",
-          "returns": "XInterface",
+          "returns": "uno_x_interface_i",
           "desc": [
             "grants access to the object containing this content."
           ],
@@ -59,7 +64,7 @@
           "args": [
             [
               "Parent",
-              "XInterface",
+              "uno_x_interface_i",
               "in"
             ]
           ]

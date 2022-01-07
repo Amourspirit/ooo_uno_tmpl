@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XSAXEventKeeper",
   "type": "interface",
   "namespace": "com.sun.star.xml.crypto.sax",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,22 +16,28 @@
     "from_imports": [
       [
         "....uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
-        "...wrapper.xxml_element_wrapper",
-        "XXMLElementWrapper"
+        "...sax.x_document_handler",
+        "XDocumentHandler",
+        "sax_x_document_handler_i"
       ],
       [
-        "...sax.x_document_handler",
-        "XDocumentHandler"
+        "...wrapper.xxml_element_wrapper",
+        "XXMLElementWrapper",
+        "wrapper_xxml_element_wrapper_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "XDocumentHandler",
-      "XXMLElementWrapper"
+      "sax_x_document_handler_i",
+      "wrapper_xxml_element_wrapper_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -72,7 +79,7 @@
         },
         {
           "name": "getCurrentBlockingNode",
-          "returns": "XXMLElementWrapper",
+          "returns": "wrapper_xxml_element_wrapper_i",
           "desc": [
             "Gets the element which current blocking happens.",
             "",
@@ -83,7 +90,7 @@
         },
         {
           "name": "getElement",
-          "returns": "XXMLElementWrapper",
+          "returns": "wrapper_xxml_element_wrapper_i",
           "desc": [
             "Gets the element of an element mark."
           ],
@@ -161,14 +168,14 @@
             ],
             [
               "aElement",
-              "XXMLElementWrapper",
+              "wrapper_xxml_element_wrapper_i",
               "in"
             ]
           ]
         },
         {
           "name": "setNextHandler",
-          "returns": "XDocumentHandler",
+          "returns": "sax_x_document_handler_i",
           "desc": [
             "Sets the next document handler in the SAX chain.",
             "",
@@ -178,7 +185,7 @@
           "args": [
             [
               "nextHandler",
-              "XDocumentHandler",
+              "sax_x_document_handler_i",
               "in"
             ]
           ]

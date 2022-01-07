@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XLiteral",
   "type": "interface",
   "namespace": "com.sun.star.rdf",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,21 +16,28 @@
     "from_imports": [
       [
         ".literal",
-        "Literal"
+        "Literal",
+        "literal_i"
       ],
       [
         ".x_node",
-        "XNode"
+        "XNode",
+        "x_node_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".xuri",
-        "XURI"
+        "XURI",
+        "xuri_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.rdf.Literal": "literal_i",
+      "com.sun.star.rdf.XNode": "x_node_i"
+    },
     "quote": [
-      "XURI"
+      "xuri_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -37,8 +45,8 @@
     "imports": [],
     "namespace": "com.sun.star.rdf",
     "extends": [
-      "com.sun.star.rdf.XNode",
-      "com.sun.star.rdf.Literal"
+      "com.sun.star.rdf.Literal",
+      "com.sun.star.rdf.XNode"
     ],
     "desc": [
       "represents a literal that may occur in a RDF graph.",
@@ -56,7 +64,7 @@
       "properties": [
         {
           "name": "Datatype",
-          "returns": "XURI",
+          "returns": "xuri_i",
           "desc": [
             "the data type of the literal; may be NULL"
           ],

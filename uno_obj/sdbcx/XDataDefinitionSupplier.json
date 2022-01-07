@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XDataDefinitionSupplier",
   "type": "interface",
   "namespace": "com.sun.star.sdbcx",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,30 +16,37 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_tables_supplier",
-        "XTablesSupplier"
-      ],
-      [
-        "..sdbc.x_connection",
-        "XConnection"
+        "XTablesSupplier",
+        "x_tables_supplier_i"
       ],
       [
         "..beans.property_value",
-        "PropertyValue"
+        "PropertyValue",
+        "beans_property_value_i"
+      ],
+      [
+        "..sdbc.x_connection",
+        "XConnection",
+        "sdbc_x_connection_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "XConnection",
-      "XTablesSupplier",
-      "typing.List[PropertyValue]"
+      "sdbc_x_connection_i",
+      "x_tables_supplier_i",
+      "typing.List[beans_property_value_i]"
     ],
     "typings": [
-      "typing.List[PropertyValue]"
+      "typing.List[beans_property_value_i]"
     ],
     "requires_typing": true,
     "name": "XDataDefinitionSupplier",
@@ -55,7 +63,7 @@
       "methods": [
         {
           "name": "getDataDefinitionByConnection",
-          "returns": "XTablesSupplier",
+          "returns": "x_tables_supplier_i",
           "desc": [
             "returns at least the container of tables related to the given connection."
           ],
@@ -65,14 +73,14 @@
           "args": [
             [
               "connection",
-              "XConnection",
+              "sdbc_x_connection_i",
               "in"
             ]
           ]
         },
         {
           "name": "getDataDefinitionByURL",
-          "returns": "XTablesSupplier",
+          "returns": "x_tables_supplier_i",
           "desc": [
             "returns at least the container of tables related to the given Database URL."
           ],
@@ -87,7 +95,7 @@
             ],
             [
               "info",
-              "typing.List[PropertyValue]",
+              "typing.List[beans_property_value_i]",
               "in"
             ]
           ]

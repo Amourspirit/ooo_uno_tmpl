@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XDragSourceListener",
   "type": "interface",
   "namespace": "com.sun.star.datatransfer.dnd",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,27 +16,34 @@
     "from_imports": [
       [
         "...lang.x_event_listener",
-        "XEventListener"
+        "XEventListener",
+        "lang_x_event_listener_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".drag_source_drop_event",
-        "DragSourceDropEvent"
-      ],
-      [
-        ".drag_source_event",
-        "DragSourceEvent"
+        "DragSourceDropEvent",
+        "drag_source_drop_event_i"
       ],
       [
         ".drag_source_drag_event",
-        "DragSourceDragEvent"
+        "DragSourceDragEvent",
+        "drag_source_drag_event_i"
+      ],
+      [
+        ".drag_source_event",
+        "DragSourceEvent",
+        "drag_source_event_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.lang.XEventListener": "lang_x_event_listener_i"
+    },
     "quote": [
-      "DragSourceDragEvent",
-      "DragSourceDropEvent",
-      "DragSourceEvent"
+      "drag_source_drop_event_i",
+      "drag_source_event_i",
+      "drag_source_drag_event_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -61,7 +69,7 @@
           "args": [
             [
               "dsde",
-              "DragSourceDropEvent",
+              "drag_source_drop_event_i",
               "in"
             ]
           ]
@@ -78,7 +86,7 @@
           "args": [
             [
               "dsde",
-              "DragSourceDragEvent",
+              "drag_source_drag_event_i",
               "in"
             ]
           ]
@@ -95,7 +103,7 @@
           "args": [
             [
               "dse",
-              "DragSourceEvent",
+              "drag_source_event_i",
               "in"
             ]
           ]
@@ -110,7 +118,7 @@
           "args": [
             [
               "dsde",
-              "DragSourceDragEvent",
+              "drag_source_drag_event_i",
               "in"
             ]
           ]
@@ -125,7 +133,7 @@
           "args": [
             [
               "dsde",
-              "DragSourceDragEvent",
+              "drag_source_drag_event_i",
               "in"
             ]
           ]

@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XColorSpace",
   "type": "interface",
   "namespace": "com.sun.star.rendering",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,40 +16,46 @@
     "from_imports": [],
     "from_imports_typing": [
       [
-        ".argb_color",
-        "ARGBColor"
-      ],
-      [
-        ".color_component",
-        "ColorComponent"
-      ],
-      [
         ".x_color_space",
-        "XColorSpace"
+        "XColorSpace",
+        "x_color_space_i"
       ],
       [
-        "..beans.property_value",
-        "PropertyValue"
+        ".argb_color",
+        "ARGBColor",
+        "argb_color_i"
       ],
       [
         ".rgb_color",
-        "RGBColor"
+        "RGBColor",
+        "rgb_color_i"
+      ],
+      [
+        "..beans.property_value",
+        "PropertyValue",
+        "beans_property_value_i"
+      ],
+      [
+        ".color_component",
+        "ColorComponent",
+        "color_component_i"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "typing.List[PropertyValue]",
-      "XColorSpace",
-      "typing.List[RGBColor]",
+      "x_color_space_i",
+      "typing.List[rgb_color_i]",
+      "typing.List[argb_color_i]",
       "typing.List[int]",
-      "typing.List[ColorComponent]",
-      "typing.List[ARGBColor]"
+      "typing.List[beans_property_value_i]",
+      "typing.List[color_component_i]"
     ],
     "typings": [
-      "typing.List[PropertyValue]",
-      "typing.List[RGBColor]",
+      "typing.List[argb_color_i]",
+      "typing.List[rgb_color_i]",
       "typing.List[int]",
-      "typing.List[ColorComponent]",
-      "typing.List[ARGBColor]"
+      "typing.List[beans_property_value_i]",
+      "typing.List[color_component_i]"
     ],
     "requires_typing": true,
     "name": "XColorSpace",
@@ -67,7 +74,7 @@
       "methods": [
         {
           "name": "convertColorSpace",
-          "returns": "typing.List[ColorComponent]",
+          "returns": "typing.List[color_component_i]",
           "desc": [
             "Convert to color of another color space."
           ],
@@ -77,19 +84,19 @@
           "args": [
             [
               "deviceColor",
-              "typing.List[ColorComponent]",
+              "typing.List[color_component_i]",
               "in"
             ],
             [
               "targetColorSpace",
-              "XColorSpace",
+              "x_color_space_i",
               "in"
             ]
           ]
         },
         {
           "name": "convertFromARGB",
-          "returns": "typing.List[ColorComponent]",
+          "returns": "typing.List[color_component_i]",
           "desc": [
             "Convert sRGB color with linear alpha into this color space.",
             "",
@@ -101,14 +108,14 @@
           "args": [
             [
               "rgbColor",
-              "typing.List[ARGBColor]",
+              "typing.List[argb_color_i]",
               "in"
             ]
           ]
         },
         {
           "name": "convertFromPARGB",
-          "returns": "typing.List[ColorComponent]",
+          "returns": "typing.List[color_component_i]",
           "desc": [
             "Convert premultiplied sRGB color with linear alpha into this color space.",
             "",
@@ -120,14 +127,14 @@
           "args": [
             [
               "rgbColor",
-              "typing.List[ARGBColor]",
+              "typing.List[argb_color_i]",
               "in"
             ]
           ]
         },
         {
           "name": "convertFromRGB",
-          "returns": "typing.List[ColorComponent]",
+          "returns": "typing.List[color_component_i]",
           "desc": [
             "Convert sRGB color to a representation in this color space.",
             "",
@@ -139,14 +146,14 @@
           "args": [
             [
               "rgbColor",
-              "typing.List[RGBColor]",
+              "typing.List[rgb_color_i]",
               "in"
             ]
           ]
         },
         {
           "name": "convertToARGB",
-          "returns": "typing.List[ARGBColor]",
+          "returns": "typing.List[argb_color_i]",
           "desc": [
             "Convert color value in this color space to sRGB color values, with linear alpha.",
             "",
@@ -158,14 +165,14 @@
           "args": [
             [
               "deviceColor",
-              "typing.List[ColorComponent]",
+              "typing.List[color_component_i]",
               "in"
             ]
           ]
         },
         {
           "name": "convertToPARGB",
-          "returns": "typing.List[ARGBColor]",
+          "returns": "typing.List[argb_color_i]",
           "desc": [
             "Convert color value in this color space to premultiplied sRGB color values, with linear alpha.",
             "",
@@ -177,14 +184,14 @@
           "args": [
             [
               "deviceColor",
-              "typing.List[ColorComponent]",
+              "typing.List[color_component_i]",
               "in"
             ]
           ]
         },
         {
           "name": "convertToRGB",
-          "returns": "typing.List[RGBColor]",
+          "returns": "typing.List[rgb_color_i]",
           "desc": [
             "Convert color value in this color space to sRGB color values.",
             "",
@@ -196,7 +203,7 @@
           "args": [
             [
               "deviceColor",
-              "typing.List[ColorComponent]",
+              "typing.List[color_component_i]",
               "in"
             ]
           ]
@@ -216,7 +223,7 @@
         },
         {
           "name": "getProperties",
-          "returns": "typing.List[PropertyValue]",
+          "returns": "typing.List[beans_property_value_i]",
           "desc": [
             "Query various optional properties from the color space.",
             "",

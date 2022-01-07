@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XNamedRange",
   "type": "interface",
   "namespace": "com.sun.star.sheet",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,17 +16,22 @@
     "from_imports": [
       [
         "..container.x_named",
-        "XNamed"
+        "XNamed",
+        "container_x_named_i"
       ]
     ],
     "from_imports_typing": [
       [
         "..table.cell_address",
-        "CellAddress"
+        "CellAddress",
+        "table_cell_address_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.container.XNamed": "container_x_named_i"
+    },
     "quote": [
-      "CellAddress"
+      "table_cell_address_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -54,7 +60,7 @@
         },
         {
           "name": "getReferencePosition",
-          "returns": "CellAddress",
+          "returns": "table_cell_address_i",
           "desc": [
             "returns the position in the document which is used as a base for relative references in the content."
           ],
@@ -99,7 +105,7 @@
           "args": [
             [
               "aReferencePosition",
-              "CellAddress",
+              "table_cell_address_i",
               "in"
             ]
           ]

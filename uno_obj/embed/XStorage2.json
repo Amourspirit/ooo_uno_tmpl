@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XStorage2",
   "type": "interface",
   "namespace": "com.sun.star.embed",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,25 +16,31 @@
     "from_imports": [
       [
         ".x_storage",
-        "XStorage"
+        "XStorage",
+        "x_storage_i"
       ]
     ],
     "from_imports_typing": [
       [
         "..beans.named_value",
-        "NamedValue"
+        "NamedValue",
+        "beans_named_value_i"
       ],
       [
         "..io.x_stream",
-        "XStream"
+        "XStream",
+        "io_x_stream_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.embed.XStorage": "x_storage_i"
+    },
     "quote": [
-      "XStream",
-      "typing.List[NamedValue]"
+      "io_x_stream_i",
+      "typing.List[beans_named_value_i]"
     ],
     "typings": [
-      "typing.List[NamedValue]"
+      "typing.List[beans_named_value_i]"
     ],
     "requires_typing": true,
     "name": "XStorage2",
@@ -50,7 +57,7 @@
       "methods": [
         {
           "name": "cloneEncryptedStream",
-          "returns": "XStream",
+          "returns": "io_x_stream_i",
           "desc": [
             "allows to get readonly copy of a child encrypted stream with encryption data.",
             "",
@@ -76,14 +83,14 @@
             ],
             [
               "aEncryptionData",
-              "typing.List[NamedValue]",
+              "typing.List[beans_named_value_i]",
               "in"
             ]
           ]
         },
         {
           "name": "openEncryptedStream",
-          "returns": "XStream",
+          "returns": "io_x_stream_i",
           "desc": [
             "allows to get access to a child encrypted stream with EncryptionData.",
             "",
@@ -112,7 +119,7 @@
             ],
             [
               "aEncryptionData",
-              "typing.List[NamedValue]",
+              "typing.List[beans_named_value_i]",
               "in"
             ]
           ]

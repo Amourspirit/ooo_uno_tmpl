@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XDispatchProvider",
   "type": "interface",
   "namespace": "com.sun.star.frame",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,32 +16,39 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
+        ".x_dispatch",
+        "XDispatch",
+        "x_dispatch_i"
+      ],
+      [
         "..util.url",
-        "URL"
+        "URL",
+        "util_url_i"
       ],
       [
         ".dispatch_descriptor",
-        "DispatchDescriptor"
-      ],
-      [
-        ".x_dispatch",
-        "XDispatch"
+        "DispatchDescriptor",
+        "dispatch_descriptor_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "URL",
-      "typing.List[DispatchDescriptor]",
-      "XDispatch",
-      "typing.List[XDispatch]"
+      "util_url_i",
+      "typing.List[dispatch_descriptor_i]",
+      "x_dispatch_i",
+      "typing.List[x_dispatch_i]"
     ],
     "typings": [
-      "typing.List[XDispatch]",
-      "typing.List[DispatchDescriptor]"
+      "typing.List[dispatch_descriptor_i]",
+      "typing.List[x_dispatch_i]"
     ],
     "requires_typing": true,
     "name": "XDispatchProvider",
@@ -57,7 +65,7 @@
       "methods": [
         {
           "name": "queryDispatch",
-          "returns": "XDispatch",
+          "returns": "x_dispatch_i",
           "desc": [
             "searches for an XDispatch for the specified URL within the specified target frame."
           ],
@@ -65,7 +73,7 @@
           "args": [
             [
               "URL",
-              "URL",
+              "util_url_i",
               "in"
             ],
             [
@@ -82,7 +90,7 @@
         },
         {
           "name": "queryDispatches",
-          "returns": "typing.List[XDispatch]",
+          "returns": "typing.List[x_dispatch_i]",
           "desc": [
             "actually this method is redundant to XDispatchProvider.queryDispatch() to avoid multiple remote calls.",
             "",
@@ -92,7 +100,7 @@
           "args": [
             [
               "Requests",
-              "typing.List[DispatchDescriptor]",
+              "typing.List[dispatch_descriptor_i]",
               "in"
             ]
           ]

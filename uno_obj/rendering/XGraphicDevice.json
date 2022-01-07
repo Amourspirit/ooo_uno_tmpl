@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XGraphicDevice",
   "type": "interface",
   "namespace": "com.sun.star.rendering",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,71 +16,86 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
-        "..geometry.real_point2_d",
-        "RealPoint2D"
-      ],
-      [
         "..geometry.real_size2_d",
-        "RealSize2D"
+        "RealSize2D",
+        "geometry_real_size2_d_i"
       ],
       [
         "..lang.x_multi_service_factory",
-        "XMultiServiceFactory"
+        "XMultiServiceFactory",
+        "lang_x_multi_service_factory_i"
       ],
       [
-        ".x_bezier_poly_polygon2_d",
-        "XBezierPolyPolygon2D"
-      ],
-      [
-        "..geometry.real_bezier_segment2_d",
-        "RealBezierSegment2D"
-      ],
-      [
-        ".x_bitmap",
-        "XBitmap"
+        "..geometry.real_point2_d",
+        "RealPoint2D",
+        "geometry_real_point2_d_i"
       ],
       [
         ".x_volatile_bitmap",
-        "XVolatileBitmap"
-      ],
-      [
-        ".x_color_space",
-        "XColorSpace"
-      ],
-      [
-        ".x_buffer_controller",
-        "XBufferController"
+        "XVolatileBitmap",
+        "x_volatile_bitmap_i"
       ],
       [
         ".x_line_poly_polygon2_d",
-        "XLinePolyPolygon2D"
+        "XLinePolyPolygon2D",
+        "x_line_poly_polygon2_d_i"
       ],
       [
         "..geometry.integer_size2_d",
-        "IntegerSize2D"
+        "IntegerSize2D",
+        "geometry_integer_size2_d_i"
+      ],
+      [
+        ".x_bezier_poly_polygon2_d",
+        "XBezierPolyPolygon2D",
+        "x_bezier_poly_polygon2_d_i"
+      ],
+      [
+        ".x_bitmap",
+        "XBitmap",
+        "x_bitmap_i"
+      ],
+      [
+        ".x_buffer_controller",
+        "XBufferController",
+        "x_buffer_controller_i"
+      ],
+      [
+        "..geometry.real_bezier_segment2_d",
+        "RealBezierSegment2D",
+        "geometry_real_bezier_segment2_d_i"
+      ],
+      [
+        ".x_color_space",
+        "XColorSpace",
+        "x_color_space_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "RealSize2D",
-      "typing.List[typing.List[RealPoint2D]]",
-      "XVolatileBitmap",
-      "XBufferController",
-      "XBitmap",
-      "IntegerSize2D",
-      "XColorSpace",
-      "XMultiServiceFactory",
-      "XLinePolyPolygon2D",
-      "XBezierPolyPolygon2D",
-      "typing.List[typing.List[RealBezierSegment2D]]"
+      "x_color_space_i",
+      "x_bezier_poly_polygon2_d_i",
+      "typing.List[typing.List[geometry_real_point2_d_i]]",
+      "x_line_poly_polygon2_d_i",
+      "x_volatile_bitmap_i",
+      "lang_x_multi_service_factory_i",
+      "geometry_real_size2_d_i",
+      "geometry_integer_size2_d_i",
+      "x_bitmap_i",
+      "x_buffer_controller_i",
+      "typing.List[typing.List[geometry_real_bezier_segment2_d_i]]"
     ],
     "typings": [
-      "typing.List[typing.List[RealPoint2D]]",
-      "typing.List[typing.List[RealBezierSegment2D]]"
+      "typing.List[typing.List[geometry_real_point2_d_i]]",
+      "typing.List[typing.List[geometry_real_bezier_segment2_d_i]]"
     ],
     "requires_typing": true,
     "name": "XGraphicDevice",
@@ -100,7 +116,7 @@
       "methods": [
         {
           "name": "createCompatibleAlphaBitmap",
-          "returns": "XBitmap",
+          "returns": "x_bitmap_i",
           "desc": [
             "Create a bitmap with alpha channel whose memory layout and sample model is compatible to the graphic device."
           ],
@@ -110,14 +126,14 @@
           "args": [
             [
               "size",
-              "IntegerSize2D",
+              "geometry_integer_size2_d_i",
               "in"
             ]
           ]
         },
         {
           "name": "createCompatibleBezierPolyPolygon",
-          "returns": "XBezierPolyPolygon2D",
+          "returns": "x_bezier_poly_polygon2_d_i",
           "desc": [
             "Create a Bezier poly-polygon which can internally use device-optimized representations already."
           ],
@@ -125,14 +141,14 @@
           "args": [
             [
               "points",
-              "typing.List[typing.List[RealBezierSegment2D]]",
+              "typing.List[typing.List[geometry_real_bezier_segment2_d_i]]",
               "in"
             ]
           ]
         },
         {
           "name": "createCompatibleBitmap",
-          "returns": "XBitmap",
+          "returns": "x_bitmap_i",
           "desc": [
             "Create a bitmap whose memory layout and sample model is compatible to the graphic device."
           ],
@@ -142,14 +158,14 @@
           "args": [
             [
               "size",
-              "IntegerSize2D",
+              "geometry_integer_size2_d_i",
               "in"
             ]
           ]
         },
         {
           "name": "createCompatibleLinePolyPolygon",
-          "returns": "XLinePolyPolygon2D",
+          "returns": "x_line_poly_polygon2_d_i",
           "desc": [
             "Create a line poly-polygon which can internally use device-optimized representations already."
           ],
@@ -157,14 +173,14 @@
           "args": [
             [
               "points",
-              "typing.List[typing.List[RealPoint2D]]",
+              "typing.List[typing.List[geometry_real_point2_d_i]]",
               "in"
             ]
           ]
         },
         {
           "name": "createVolatileAlphaBitmap",
-          "returns": "XVolatileBitmap",
+          "returns": "x_volatile_bitmap_i",
           "desc": [
             "Create a volatile bitmap with alpha channel that is usable with this graphic device.",
             "",
@@ -176,14 +192,14 @@
           "args": [
             [
               "size",
-              "IntegerSize2D",
+              "geometry_integer_size2_d_i",
               "in"
             ]
           ]
         },
         {
           "name": "createVolatileBitmap",
-          "returns": "XVolatileBitmap",
+          "returns": "x_volatile_bitmap_i",
           "desc": [
             "Create a volatile bitmap that is usable with this graphic device.",
             "",
@@ -195,7 +211,7 @@
           "args": [
             [
               "size",
-              "IntegerSize2D",
+              "geometry_integer_size2_d_i",
               "in"
             ]
           ]
@@ -219,7 +235,7 @@
         },
         {
           "name": "getBufferController",
-          "returns": "XBufferController",
+          "returns": "x_buffer_controller_i",
           "desc": [
             "Query the controller for multi buffering functionality on this graphic device.",
             "",
@@ -230,7 +246,7 @@
         },
         {
           "name": "getDeviceColorSpace",
-          "returns": "XColorSpace",
+          "returns": "x_color_space_i",
           "desc": [
             "Query the color space interface for this graphic device.",
             "",
@@ -241,7 +257,7 @@
         },
         {
           "name": "getParametricPolyPolygonFactory",
-          "returns": "XMultiServiceFactory",
+          "returns": "lang_x_multi_service_factory_i",
           "desc": [
             "Get a reference to this device's parametric polygon factory.",
             "",
@@ -252,7 +268,7 @@
         },
         {
           "name": "getPhysicalResolution",
-          "returns": "RealSize2D",
+          "returns": "geometry_real_size2_d_i",
           "desc": [
             "Query the physical resolution of the device in pixel per millimeter.",
             "",
@@ -263,7 +279,7 @@
         },
         {
           "name": "getPhysicalSize",
-          "returns": "RealSize2D",
+          "returns": "geometry_real_size2_d_i",
           "desc": [
             "Query the physical dimensions of the device in millimeter.",
             "",

@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XWindowListener",
   "type": "interface",
   "namespace": "com.sun.star.awt",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,22 +16,28 @@
     "from_imports": [
       [
         "..lang.x_event_listener",
-        "XEventListener"
+        "XEventListener",
+        "lang_x_event_listener_i"
       ]
     ],
     "from_imports_typing": [
       [
-        ".window_event",
-        "WindowEvent"
+        "..lang.event_object",
+        "EventObject",
+        "lang_event_object_i"
       ],
       [
-        "..lang.event_object",
-        "EventObject"
+        ".window_event",
+        "WindowEvent",
+        "window_event_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.lang.XEventListener": "lang_x_event_listener_i"
+    },
     "quote": [
-      "EventObject",
-      "WindowEvent"
+      "window_event_i",
+      "lang_event_object_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -58,7 +65,7 @@
           "args": [
             [
               "e",
-              "EventObject",
+              "lang_event_object_i",
               "in"
             ]
           ]
@@ -73,7 +80,7 @@
           "args": [
             [
               "e",
-              "WindowEvent",
+              "window_event_i",
               "in"
             ]
           ]
@@ -88,7 +95,7 @@
           "args": [
             [
               "e",
-              "WindowEvent",
+              "window_event_i",
               "in"
             ]
           ]
@@ -103,7 +110,7 @@
           "args": [
             [
               "e",
-              "EventObject",
+              "lang_event_object_i",
               "in"
             ]
           ]

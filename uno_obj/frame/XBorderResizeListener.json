@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XBorderResizeListener",
   "type": "interface",
   "namespace": "com.sun.star.frame",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,22 +16,28 @@
     "from_imports": [
       [
         "..lang.x_event_listener",
-        "XEventListener"
+        "XEventListener",
+        "lang_x_event_listener_i"
       ]
     ],
     "from_imports_typing": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ],
       [
         ".border_widths",
-        "BorderWidths"
+        "BorderWidths",
+        "border_widths_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.lang.XEventListener": "lang_x_event_listener_i"
+    },
     "quote": [
-      "XInterface",
-      "BorderWidths"
+      "uno_x_interface_i",
+      "border_widths_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -56,12 +63,12 @@
           "args": [
             [
               "Object",
-              "XInterface",
+              "uno_x_interface_i",
               "in"
             ],
             [
               "NewSize",
-              "BorderWidths",
+              "border_widths_i",
               "in"
             ]
           ]

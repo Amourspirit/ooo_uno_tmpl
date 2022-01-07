@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XLocaleData2",
   "type": "interface",
   "namespace": "com.sun.star.i18n",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,25 +16,31 @@
     "from_imports": [
       [
         ".x_locale_data",
-        "XLocaleData"
+        "XLocaleData",
+        "x_locale_data_i"
       ]
     ],
     "from_imports_typing": [
       [
-        ".currency2",
-        "Currency2"
+        "..lang.locale",
+        "Locale",
+        "lang_locale_i"
       ],
       [
-        "..lang.locale",
-        "Locale"
+        ".currency2",
+        "Currency2",
+        "currency2_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.i18n.XLocaleData": "x_locale_data_i"
+    },
     "quote": [
-      "Locale",
-      "typing.List[Currency2]"
+      "lang_locale_i",
+      "typing.List[currency2_i]"
     ],
     "typings": [
-      "typing.List[Currency2]"
+      "typing.List[currency2_i]"
     ],
     "requires_typing": true,
     "name": "XLocaleData2",
@@ -56,7 +63,7 @@
       "methods": [
         {
           "name": "getAllCurrencies2",
-          "returns": "typing.List[Currency2]",
+          "returns": "typing.List[currency2_i]",
           "desc": [
             "returns all LC_CURRENCY currencies for a locale."
           ],
@@ -64,7 +71,7 @@
           "args": [
             [
               "aLocale",
-              "Locale",
+              "lang_locale_i",
               "in"
             ]
           ]

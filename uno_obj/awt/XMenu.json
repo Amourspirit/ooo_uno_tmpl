@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XMenu",
   "type": "interface",
   "namespace": "com.sun.star.awt",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,27 +16,34 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
-        ".x_popup_menu",
-        "XPopupMenu"
+        ".x_menu_listener",
+        "XMenuListener",
+        "x_menu_listener_i"
       ],
       [
-        ".x_menu_listener",
-        "XMenuListener"
+        ".x_popup_menu",
+        "XPopupMenu",
+        "x_popup_menu_i"
       ],
       [
         ".menu_item_type",
-        "MenuItemType"
+        "MenuItemType",
+        "menu_item_type_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "MenuItemType",
-      "XPopupMenu",
-      "XMenuListener"
+      "x_menu_listener_i",
+      "x_popup_menu_i",
+      "menu_item_type_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -61,7 +69,7 @@
           "args": [
             [
               "xListener",
-              "XMenuListener",
+              "x_menu_listener_i",
               "in"
             ]
           ]
@@ -211,7 +219,7 @@
         },
         {
           "name": "getItemType",
-          "returns": "MenuItemType",
+          "returns": "menu_item_type_i",
           "desc": [
             "retrieves the type of the menu item."
           ],
@@ -226,7 +234,7 @@
         },
         {
           "name": "getPopupMenu",
-          "returns": "XPopupMenu",
+          "returns": "x_popup_menu_i",
           "desc": [
             "returns the popup menu from the menu item."
           ],
@@ -355,7 +363,7 @@
           "args": [
             [
               "xListener",
-              "XMenuListener",
+              "x_menu_listener_i",
               "in"
             ]
           ]
@@ -455,7 +463,7 @@
             ],
             [
               "aPopupMenu",
-              "XPopupMenu",
+              "x_popup_menu_i",
               "in"
             ]
           ]

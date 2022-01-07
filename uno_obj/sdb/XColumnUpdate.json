@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XColumnUpdate",
   "type": "interface",
   "namespace": "com.sun.star.sdb",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,33 +16,41 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
-        "..util.time",
-        "Time"
-      ],
-      [
-        "..util.date_time",
-        "DateTime"
+        "..io.x_input_stream",
+        "XInputStream",
+        "io_x_input_stream_i"
       ],
       [
         "..util.date",
-        "Date"
+        "Date",
+        "util_date_i"
       ],
       [
-        "..io.x_input_stream",
-        "XInputStream"
+        "..util.time",
+        "Time",
+        "util_time_i"
+      ],
+      [
+        "..util.date_time",
+        "DateTime",
+        "util_date_time_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "Time",
-      "Date",
-      "XInputStream",
+      "util_date_time_i",
+      "util_date_i",
       "typing.List[int]",
-      "DateTime"
+      "io_x_input_stream_i",
+      "util_time_i"
     ],
     "typings": [
       "typing.List[int]"
@@ -71,7 +80,7 @@
           "args": [
             [
               "x",
-              "XInputStream",
+              "io_x_input_stream_i",
               "in"
             ],
             [
@@ -144,7 +153,7 @@
           "args": [
             [
               "x",
-              "XInputStream",
+              "io_x_input_stream_i",
               "in"
             ],
             [
@@ -166,7 +175,7 @@
           "args": [
             [
               "x",
-              "Date",
+              "util_date_i",
               "in"
             ]
           ]
@@ -335,7 +344,7 @@
           "args": [
             [
               "x",
-              "Time",
+              "util_time_i",
               "in"
             ]
           ]
@@ -352,7 +361,7 @@
           "args": [
             [
               "x",
-              "DateTime",
+              "util_date_time_i",
               "in"
             ]
           ]

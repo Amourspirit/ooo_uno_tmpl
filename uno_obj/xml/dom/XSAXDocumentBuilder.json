@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XSAXDocumentBuilder",
   "type": "interface",
   "namespace": "com.sun.star.xml.dom",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,27 +16,34 @@
     "from_imports": [
       [
         "...uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
+        ".x_document",
+        "XDocument",
+        "x_document_i"
+      ],
+      [
         ".sax_document_builder_state",
-        "SAXDocumentBuilderState"
+        "SAXDocumentBuilderState",
+        "sax_document_builder_state_i"
       ],
       [
         ".x_document_fragment",
-        "XDocumentFragment"
-      ],
-      [
-        ".x_document",
-        "XDocument"
+        "XDocumentFragment",
+        "x_document_fragment_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "XDocumentFragment",
-      "SAXDocumentBuilderState",
-      "XDocument"
+      "x_document_i",
+      "sax_document_builder_state_i",
+      "x_document_fragment_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -60,21 +68,21 @@
         },
         {
           "name": "getDocument",
-          "returns": "XDocument",
+          "returns": "x_document_i",
           "desc": [],
           "raises": [],
           "args": []
         },
         {
           "name": "getDocumentFragment",
-          "returns": "XDocumentFragment",
+          "returns": "x_document_fragment_i",
           "desc": [],
           "raises": [],
           "args": []
         },
         {
           "name": "getState",
-          "returns": "SAXDocumentBuilderState",
+          "returns": "sax_document_builder_state_i",
           "desc": [],
           "raises": [],
           "args": []
@@ -94,7 +102,7 @@
           "args": [
             [
               "ownerDoc",
-              "XDocument",
+              "x_document_i",
               "in"
             ]
           ]

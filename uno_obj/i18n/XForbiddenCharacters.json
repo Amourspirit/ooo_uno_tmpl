@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XForbiddenCharacters",
   "type": "interface",
   "namespace": "com.sun.star.i18n",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,22 +16,28 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
-        ".forbidden_characters",
-        "ForbiddenCharacters"
+        "..lang.locale",
+        "Locale",
+        "lang_locale_i"
       ],
       [
-        "..lang.locale",
-        "Locale"
+        ".forbidden_characters",
+        "ForbiddenCharacters",
+        "forbidden_characters_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "ForbiddenCharacters",
-      "Locale"
+      "lang_locale_i",
+      "forbidden_characters_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -50,7 +57,7 @@
       "methods": [
         {
           "name": "getForbiddenCharacters",
-          "returns": "ForbiddenCharacters",
+          "returns": "forbidden_characters_i",
           "desc": [
             "returns the forbidden characters for a given locale."
           ],
@@ -60,7 +67,7 @@
           "args": [
             [
               "aLocale",
-              "Locale",
+              "lang_locale_i",
               "in"
             ]
           ]
@@ -75,7 +82,7 @@
           "args": [
             [
               "aLocale",
-              "Locale",
+              "lang_locale_i",
               "in"
             ]
           ]
@@ -90,7 +97,7 @@
           "args": [
             [
               "aLocale",
-              "Locale",
+              "lang_locale_i",
               "in"
             ]
           ]
@@ -105,12 +112,12 @@
           "args": [
             [
               "aLocale",
-              "Locale",
+              "lang_locale_i",
               "in"
             ],
             [
               "aForbiddenCharacters",
-              "ForbiddenCharacters",
+              "forbidden_characters_i",
               "in"
             ]
           ]

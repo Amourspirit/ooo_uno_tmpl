@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XNamedRanges",
   "type": "interface",
   "namespace": "com.sun.star.sheet",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,27 +16,34 @@
     "from_imports": [
       [
         "..container.x_name_access",
-        "XNameAccess"
+        "XNameAccess",
+        "container_x_name_access_i"
       ]
     ],
     "from_imports_typing": [
       [
-        ".border",
-        "Border"
+        "..table.cell_address",
+        "CellAddress",
+        "table_cell_address_i"
       ],
       [
-        "..table.cell_address",
-        "CellAddress"
+        ".border",
+        "Border",
+        "border_i"
       ],
       [
         "..table.cell_range_address",
-        "CellRangeAddress"
+        "CellRangeAddress",
+        "table_cell_range_address_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.container.XNameAccess": "container_x_name_access_i"
+    },
     "quote": [
-      "CellAddress",
-      "CellRangeAddress",
-      "Border"
+      "table_cell_address_i",
+      "border_i",
+      "table_cell_range_address_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -75,7 +83,7 @@
             ],
             [
               "aPosition",
-              "CellAddress",
+              "table_cell_address_i",
               "in"
             ],
             [
@@ -99,12 +107,12 @@
           "args": [
             [
               "aSource",
-              "CellRangeAddress",
+              "table_cell_range_address_i",
               "in"
             ],
             [
               "aBorder",
-              "Border",
+              "border_i",
               "in"
             ]
           ]
@@ -121,7 +129,7 @@
           "args": [
             [
               "aOutputPosition",
-              "CellAddress",
+              "table_cell_address_i",
               "in"
             ]
           ]

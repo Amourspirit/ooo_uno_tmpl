@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XInterfaceAttributeTypeDescription2",
   "type": "interface",
   "namespace": "com.sun.star.reflection",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,20 +16,25 @@
     "from_imports": [
       [
         ".x_interface_attribute_type_description",
-        "XInterfaceAttributeTypeDescription"
+        "XInterfaceAttributeTypeDescription",
+        "x_interface_attribute_type_description_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_compound_type_description",
-        "XCompoundTypeDescription"
+        "XCompoundTypeDescription",
+        "x_compound_type_description_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.reflection.XInterfaceAttributeTypeDescription": "x_interface_attribute_type_description_i"
+    },
     "quote": [
-      "typing.List[XCompoundTypeDescription]"
+      "typing.List[x_compound_type_description_i]"
     ],
     "typings": [
-      "typing.List[XCompoundTypeDescription]"
+      "typing.List[x_compound_type_description_i]"
     ],
     "requires_typing": true,
     "name": "XInterfaceAttributeTypeDescription2",
@@ -51,7 +57,7 @@
       "methods": [
         {
           "name": "getGetExceptions",
-          "returns": "typing.List[XCompoundTypeDescription]",
+          "returns": "typing.List[x_compound_type_description_i]",
           "desc": [
             "Returns the exceptions that can be raised by the attribute's getter."
           ],
@@ -60,7 +66,7 @@
         },
         {
           "name": "getSetExceptions",
-          "returns": "typing.List[XCompoundTypeDescription]",
+          "returns": "typing.List[x_compound_type_description_i]",
           "desc": [
             "Returns the exceptions that can be raised by the attribute's setter."
           ],

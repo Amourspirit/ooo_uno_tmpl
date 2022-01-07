@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XAutoTextContainer",
   "type": "interface",
   "namespace": "com.sun.star.text",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,17 +16,22 @@
     "from_imports": [
       [
         "..container.x_name_access",
-        "XNameAccess"
+        "XNameAccess",
+        "container_x_name_access_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_auto_text_group",
-        "XAutoTextGroup"
+        "XAutoTextGroup",
+        "x_auto_text_group_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.container.XNameAccess": "container_x_name_access_i"
+    },
     "quote": [
-      "XAutoTextGroup"
+      "x_auto_text_group_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -43,7 +49,7 @@
       "methods": [
         {
           "name": "insertNewByName",
-          "returns": "XAutoTextGroup",
+          "returns": "x_auto_text_group_i",
           "desc": [
             "creates a new AutoText group.",
             "",

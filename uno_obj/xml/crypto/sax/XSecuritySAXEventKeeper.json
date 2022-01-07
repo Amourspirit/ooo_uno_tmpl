@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XSecuritySAXEventKeeper",
   "type": "interface",
   "namespace": "com.sun.star.xml.crypto.sax",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,17 +16,22 @@
     "from_imports": [
       [
         ".xsax_event_keeper",
-        "XSAXEventKeeper"
+        "XSAXEventKeeper",
+        "xsax_event_keeper_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".element_mark_priority",
-        "ElementMarkPriority"
+        "ElementMarkPriority",
+        "element_mark_priority_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.xml.crypto.sax.XSAXEventKeeper": "xsax_event_keeper_i"
+    },
     "quote": [
-      "ElementMarkPriority"
+      "element_mark_priority_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -53,7 +59,7 @@
           "args": [
             [
               "priority",
-              "ElementMarkPriority",
+              "element_mark_priority_i",
               "in"
             ],
             [

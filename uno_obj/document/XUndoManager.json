@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XUndoManager",
   "type": "interface",
   "namespace": "com.sun.star.document",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,28 +15,36 @@
   "data": {
     "from_imports": [
       [
-        "..container.x_child",
-        "XChild"
+        "..util.x_lockable",
+        "XLockable",
+        "util_x_lockable_i"
       ],
       [
-        "..util.x_lockable",
-        "XLockable"
+        "..container.x_child",
+        "XChild",
+        "container_x_child_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_undo_manager_listener",
-        "XUndoManagerListener"
+        "XUndoManagerListener",
+        "x_undo_manager_listener_i"
       ],
       [
         ".x_undo_action",
-        "XUndoAction"
+        "XUndoAction",
+        "x_undo_action_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.util.XLockable": "util_x_lockable_i",
+      "com.sun.star.container.XChild": "container_x_child_i"
+    },
     "quote": [
-      "typing.List[str]",
-      "XUndoManagerListener",
-      "XUndoAction"
+      "x_undo_action_i",
+      "x_undo_manager_listener_i",
+      "typing.List[str]"
     ],
     "typings": [
       "typing.List[str]"
@@ -88,7 +97,7 @@
           "args": [
             [
               "iAction",
-              "XUndoAction",
+              "x_undo_action_i",
               "in"
             ]
           ]
@@ -103,7 +112,7 @@
           "args": [
             [
               "iListener",
-              "XUndoManagerListener",
+              "x_undo_manager_listener_i",
               "in"
             ]
           ]
@@ -272,7 +281,7 @@
           "args": [
             [
               "iListener",
-              "XUndoManagerListener",
+              "x_undo_manager_listener_i",
               "in"
             ]
           ]

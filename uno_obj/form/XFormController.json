@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XFormController",
   "type": "interface",
   "namespace": "com.sun.star.form",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,22 +16,28 @@
     "from_imports": [
       [
         "..awt.x_tab_controller",
-        "XTabController"
+        "XTabController",
+        "awt_x_tab_controller_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_form_controller_listener",
-        "XFormControllerListener"
+        "XFormControllerListener",
+        "x_form_controller_listener_i"
       ],
       [
         "..awt.x_control",
-        "XControl"
+        "XControl",
+        "awt_x_control_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.awt.XTabController": "awt_x_tab_controller_i"
+    },
     "quote": [
-      "XControl",
-      "XFormControllerListener"
+      "awt_x_control_i",
+      "x_form_controller_listener_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -58,14 +65,14 @@
           "args": [
             [
               "l",
-              "XFormControllerListener",
+              "x_form_controller_listener_i",
               "in"
             ]
           ]
         },
         {
           "name": "getCurrentControl",
-          "returns": "XControl",
+          "returns": "awt_x_control_i",
           "desc": [],
           "raises": [],
           "args": []
@@ -78,7 +85,7 @@
           "args": [
             [
               "l",
-              "XFormControllerListener",
+              "x_form_controller_listener_i",
               "in"
             ]
           ]

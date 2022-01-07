@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XDispatchProviderInterceptor",
   "type": "interface",
   "namespace": "com.sun.star.frame",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,12 +16,16 @@
     "from_imports": [
       [
         ".x_dispatch_provider",
-        "XDispatchProvider"
+        "XDispatchProvider",
+        "x_dispatch_provider_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.frame.XDispatchProvider": "x_dispatch_provider_i"
+    },
     "quote": [
-      "XDispatchProvider"
+      "x_dispatch_provider_i"
     ],
     "typings": [],
     "requires_typing": false,
@@ -40,7 +45,7 @@
       "methods": [
         {
           "name": "getMasterDispatchProvider",
-          "returns": "XDispatchProvider",
+          "returns": "x_dispatch_provider_i",
           "desc": [
             "access to the master XDispatchProvider of this interceptor"
           ],
@@ -49,7 +54,7 @@
         },
         {
           "name": "getSlaveDispatchProvider",
-          "returns": "XDispatchProvider",
+          "returns": "x_dispatch_provider_i",
           "desc": [
             "access to the slave XDispatchProvider of this interceptor"
           ],
@@ -66,7 +71,7 @@
           "args": [
             [
               "NewSupplier",
-              "XDispatchProvider",
+              "x_dispatch_provider_i",
               "in"
             ]
           ]
@@ -81,7 +86,7 @@
           "args": [
             [
               "NewDispatchProvider",
-              "XDispatchProvider",
+              "x_dispatch_provider_i",
               "in"
             ]
           ]

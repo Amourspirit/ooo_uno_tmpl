@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XBreakIterator",
   "type": "interface",
   "namespace": "com.sun.star.i18n",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,37 +16,46 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
-        "..lang.locale",
-        "Locale"
+        ".line_break_hyphenation_options",
+        "LineBreakHyphenationOptions",
+        "line_break_hyphenation_options_i"
       ],
       [
         ".line_break_results",
-        "LineBreakResults"
-      ],
-      [
-        ".line_break_hyphenation_options",
-        "LineBreakHyphenationOptions"
+        "LineBreakResults",
+        "line_break_results_i"
       ],
       [
         ".boundary",
-        "Boundary"
+        "Boundary",
+        "boundary_i"
       ],
       [
         ".line_break_user_options",
-        "LineBreakUserOptions"
+        "LineBreakUserOptions",
+        "line_break_user_options_i"
+      ],
+      [
+        "..lang.locale",
+        "Locale",
+        "lang_locale_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "LineBreakUserOptions",
-      "LineBreakResults",
-      "Boundary",
-      "Locale",
-      "LineBreakHyphenationOptions"
+      "line_break_hyphenation_options_i",
+      "line_break_results_i",
+      "line_break_user_options_i",
+      "boundary_i",
+      "lang_locale_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -85,7 +95,7 @@
             ],
             [
               "aLocale",
-              "Locale",
+              "lang_locale_i",
               "in"
             ],
             [
@@ -140,7 +150,7 @@
             ],
             [
               "aLocale",
-              "Locale",
+              "lang_locale_i",
               "in"
             ]
           ]
@@ -165,7 +175,7 @@
             ],
             [
               "aLocale",
-              "Locale",
+              "lang_locale_i",
               "in"
             ],
             [
@@ -220,14 +230,14 @@
             ],
             [
               "aLocale",
-              "Locale",
+              "lang_locale_i",
               "in"
             ]
           ]
         },
         {
           "name": "getLineBreak",
-          "returns": "LineBreakResults",
+          "returns": "line_break_results_i",
           "desc": [
             "Calculate the line break position in the Text from the specified nStartPos."
           ],
@@ -245,7 +255,7 @@
             ],
             [
               "aLocale",
-              "Locale",
+              "lang_locale_i",
               "in"
             ],
             [
@@ -255,12 +265,12 @@
             ],
             [
               "aHyphOptions",
-              "LineBreakHyphenationOptions",
+              "line_break_hyphenation_options_i",
               "in"
             ],
             [
               "aUserOptions",
-              "LineBreakUserOptions",
+              "line_break_user_options_i",
               "in"
             ]
           ]
@@ -287,7 +297,7 @@
         },
         {
           "name": "getWordBoundary",
-          "returns": "Boundary",
+          "returns": "boundary_i",
           "desc": [
             "Identifies StartPos and EndPos of current word.",
             "",
@@ -307,7 +317,7 @@
             ],
             [
               "aLocale",
-              "Locale",
+              "lang_locale_i",
               "in"
             ],
             [
@@ -342,7 +352,7 @@
             ],
             [
               "aLocale",
-              "Locale",
+              "lang_locale_i",
               "in"
             ]
           ]
@@ -369,7 +379,7 @@
             ],
             [
               "aLocale",
-              "Locale",
+              "lang_locale_i",
               "in"
             ],
             [
@@ -399,7 +409,7 @@
             ],
             [
               "aLocale",
-              "Locale",
+              "lang_locale_i",
               "in"
             ],
             [
@@ -429,7 +439,7 @@
             ],
             [
               "aLocale",
-              "Locale",
+              "lang_locale_i",
               "in"
             ],
             [
@@ -461,7 +471,7 @@
             ],
             [
               "aLocale",
-              "Locale",
+              "lang_locale_i",
               "in"
             ],
             [
@@ -508,7 +518,7 @@
         },
         {
           "name": "nextWord",
-          "returns": "Boundary",
+          "returns": "boundary_i",
           "desc": [
             "Traverses one word in Text from nStartPos forwards."
           ],
@@ -526,7 +536,7 @@
             ],
             [
               "aLocale",
-              "Locale",
+              "lang_locale_i",
               "in"
             ],
             [
@@ -556,7 +566,7 @@
             ],
             [
               "aLocale",
-              "Locale",
+              "lang_locale_i",
               "in"
             ],
             [
@@ -588,7 +598,7 @@
             ],
             [
               "aLocale",
-              "Locale",
+              "lang_locale_i",
               "in"
             ],
             [
@@ -635,7 +645,7 @@
         },
         {
           "name": "previousWord",
-          "returns": "Boundary",
+          "returns": "boundary_i",
           "desc": [
             "Traverses one word in Text from nStartPos backwards.",
             "",
@@ -657,7 +667,7 @@
             ],
             [
               "aLocale",
-              "Locale",
+              "lang_locale_i",
               "in"
             ],
             [

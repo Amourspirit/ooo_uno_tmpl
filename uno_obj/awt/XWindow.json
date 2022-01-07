@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XWindow",
   "type": "interface",
   "namespace": "com.sun.star.awt",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,47 +16,58 @@
     "from_imports": [
       [
         "..lang.x_component",
-        "XComponent"
+        "XComponent",
+        "lang_x_component_i"
       ]
     ],
     "from_imports_typing": [
       [
-        ".rectangle",
-        "Rectangle"
-      ],
-      [
         ".x_key_listener",
-        "XKeyListener"
-      ],
-      [
-        ".x_focus_listener",
-        "XFocusListener"
-      ],
-      [
-        ".x_mouse_motion_listener",
-        "XMouseMotionListener"
+        "XKeyListener",
+        "x_key_listener_i"
       ],
       [
         ".x_mouse_listener",
-        "XMouseListener"
-      ],
-      [
-        ".x_paint_listener",
-        "XPaintListener"
+        "XMouseListener",
+        "x_mouse_listener_i"
       ],
       [
         ".x_window_listener",
-        "XWindowListener"
+        "XWindowListener",
+        "x_window_listener_i"
+      ],
+      [
+        ".x_focus_listener",
+        "XFocusListener",
+        "x_focus_listener_i"
+      ],
+      [
+        ".x_paint_listener",
+        "XPaintListener",
+        "x_paint_listener_i"
+      ],
+      [
+        ".x_mouse_motion_listener",
+        "XMouseMotionListener",
+        "x_mouse_motion_listener_i"
+      ],
+      [
+        ".rectangle",
+        "Rectangle",
+        "rectangle_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.lang.XComponent": "lang_x_component_i"
+    },
     "quote": [
-      "Rectangle",
-      "XWindowListener",
-      "XMouseListener",
-      "XFocusListener",
-      "XPaintListener",
-      "XMouseMotionListener",
-      "XKeyListener"
+      "x_mouse_motion_listener_i",
+      "x_focus_listener_i",
+      "x_key_listener_i",
+      "rectangle_i",
+      "x_window_listener_i",
+      "x_paint_listener_i",
+      "x_mouse_listener_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -83,7 +95,7 @@
           "args": [
             [
               "xListener",
-              "XFocusListener",
+              "x_focus_listener_i",
               "in"
             ]
           ]
@@ -98,7 +110,7 @@
           "args": [
             [
               "xListener",
-              "XKeyListener",
+              "x_key_listener_i",
               "in"
             ]
           ]
@@ -113,7 +125,7 @@
           "args": [
             [
               "xListener",
-              "XMouseListener",
+              "x_mouse_listener_i",
               "in"
             ]
           ]
@@ -128,7 +140,7 @@
           "args": [
             [
               "xListener",
-              "XMouseMotionListener",
+              "x_mouse_motion_listener_i",
               "in"
             ]
           ]
@@ -143,7 +155,7 @@
           "args": [
             [
               "xListener",
-              "XPaintListener",
+              "x_paint_listener_i",
               "in"
             ]
           ]
@@ -158,14 +170,14 @@
           "args": [
             [
               "xListener",
-              "XWindowListener",
+              "x_window_listener_i",
               "in"
             ]
           ]
         },
         {
           "name": "getPosSize",
-          "returns": "Rectangle",
+          "returns": "rectangle_i",
           "desc": [
             "returns the outer bounds of the window."
           ],
@@ -182,7 +194,7 @@
           "args": [
             [
               "xListener",
-              "XFocusListener",
+              "x_focus_listener_i",
               "in"
             ]
           ]
@@ -197,7 +209,7 @@
           "args": [
             [
               "xListener",
-              "XKeyListener",
+              "x_key_listener_i",
               "in"
             ]
           ]
@@ -212,7 +224,7 @@
           "args": [
             [
               "xListener",
-              "XMouseListener",
+              "x_mouse_listener_i",
               "in"
             ]
           ]
@@ -227,7 +239,7 @@
           "args": [
             [
               "xListener",
-              "XMouseMotionListener",
+              "x_mouse_motion_listener_i",
               "in"
             ]
           ]
@@ -242,7 +254,7 @@
           "args": [
             [
               "xListener",
-              "XPaintListener",
+              "x_paint_listener_i",
               "in"
             ]
           ]
@@ -257,7 +269,7 @@
           "args": [
             [
               "xListener",
-              "XWindowListener",
+              "x_window_listener_i",
               "in"
             ]
           ]

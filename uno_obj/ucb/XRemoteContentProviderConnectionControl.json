@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XRemoteContentProviderConnectionControl",
   "type": "interface",
   "namespace": "com.sun.star.ucb",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,18 +16,23 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_remote_content_provider_acceptor",
-        "XRemoteContentProviderAcceptor"
+        "XRemoteContentProviderAcceptor",
+        "x_remote_content_provider_acceptor_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "XInterface",
-      "XRemoteContentProviderAcceptor"
+      "uno_x_interface_i",
+      "x_remote_content_provider_acceptor_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -56,12 +62,12 @@
           "args": [
             [
               "Acceptor",
-              "XRemoteContentProviderAcceptor",
+              "x_remote_content_provider_acceptor_i",
               "in"
             ],
             [
               "Token",
-              "XInterface",
+              "uno_x_interface_i",
               "in"
             ]
           ]

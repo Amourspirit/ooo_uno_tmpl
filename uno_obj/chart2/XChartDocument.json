@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XChartDocument",
   "type": "interface",
   "namespace": "com.sun.star.chart2",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,32 +16,40 @@
     "from_imports": [
       [
         "..frame.x_model",
-        "XModel"
+        "XModel",
+        "frame_x_model_i"
       ]
     ],
     "from_imports_typing": [
       [
-        ".x_diagram",
-        "XDiagram"
-      ],
-      [
         "..beans.x_property_set",
-        "XPropertySet"
-      ],
-      [
-        ".data.x_data_provider",
-        "XDataProvider"
+        "XPropertySet",
+        "beans_x_property_set_i"
       ],
       [
         ".x_chart_type_manager",
-        "XChartTypeManager"
+        "XChartTypeManager",
+        "x_chart_type_manager_i"
+      ],
+      [
+        ".x_diagram",
+        "XDiagram",
+        "x_diagram_i"
+      ],
+      [
+        ".data.x_data_provider",
+        "XDataProvider",
+        "data_x_data_provider_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.frame.XModel": "frame_x_model_i"
+    },
     "quote": [
-      "XChartTypeManager",
-      "XDiagram",
-      "XDataProvider",
-      "XPropertySet"
+      "x_diagram_i",
+      "data_x_data_provider_i",
+      "x_chart_type_manager_i",
+      "beans_x_property_set_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -84,7 +93,7 @@
         },
         {
           "name": "getChartTypeManager",
-          "returns": "XChartTypeManager",
+          "returns": "x_chart_type_manager_i",
           "desc": [
             "retrieves the component that is able to create different chart type templates (components of type ChartTypeTemplate)"
           ],
@@ -93,7 +102,7 @@
         },
         {
           "name": "getDataProvider",
-          "returns": "XDataProvider",
+          "returns": "data_x_data_provider_i",
           "desc": [
             "Returns the currently set data provider.",
             "",
@@ -104,7 +113,7 @@
         },
         {
           "name": "getFirstDiagram",
-          "returns": "XDiagram",
+          "returns": "x_diagram_i",
           "desc": [
             "Notes: this is preliminary, we need an API that supports more than one diagram. The method name getDiagram exists in the css.chart API, so there is would be no way to chose either this or the other method from Basic (it would chose one or the other by random)."
           ],
@@ -113,7 +122,7 @@
         },
         {
           "name": "getPageBackground",
-          "returns": "XPropertySet",
+          "returns": "beans_x_property_set_i",
           "desc": [
             "Gives access to the page background appearance.",
             "",
@@ -141,7 +150,7 @@
           "args": [
             [
               "xNewManager",
-              "XChartTypeManager",
+              "x_chart_type_manager_i",
               "in"
             ]
           ]
@@ -156,7 +165,7 @@
           "args": [
             [
               "xDiagram",
-              "XDiagram",
+              "x_diagram_i",
               "in"
             ]
           ]

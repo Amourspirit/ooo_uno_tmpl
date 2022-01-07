@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XRangeHighlighter",
   "type": "interface",
   "namespace": "com.sun.star.chart2.data",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,25 +16,31 @@
     "from_imports": [
       [
         "...uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
-        "...view.x_selection_change_listener",
-        "XSelectionChangeListener"
+        ".highlighted_range",
+        "HighlightedRange",
+        "highlighted_range_i"
       ],
       [
-        ".highlighted_range",
-        "HighlightedRange"
+        "...view.x_selection_change_listener",
+        "XSelectionChangeListener",
+        "view_x_selection_change_listener_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "typing.List[HighlightedRange]",
-      "XSelectionChangeListener"
+      "typing.List[highlighted_range_i]",
+      "view_x_selection_change_listener_i"
     ],
     "typings": [
-      "typing.List[HighlightedRange]"
+      "typing.List[highlighted_range_i]"
     ],
     "requires_typing": true,
     "name": "XRangeHighlighter",
@@ -56,14 +63,14 @@
           "args": [
             [
               "xListener",
-              "XSelectionChangeListener",
+              "view_x_selection_change_listener_i",
               "in"
             ]
           ]
         },
         {
           "name": "getSelectedRanges",
-          "returns": "typing.List[HighlightedRange]",
+          "returns": "typing.List[highlighted_range_i]",
           "desc": [
             "Returns a list of ranges that are used by objects that are currently selected."
           ],
@@ -80,7 +87,7 @@
           "args": [
             [
               "xListener",
-              "XSelectionChangeListener",
+              "view_x_selection_change_listener_i",
               "in"
             ]
           ]

@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XProofreader",
   "type": "interface",
   "namespace": "com.sun.star.linguistic2",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,30 +16,37 @@
     "from_imports": [
       [
         ".x_supported_locales",
-        "XSupportedLocales"
+        "XSupportedLocales",
+        "x_supported_locales_i"
       ]
     ],
     "from_imports_typing": [
       [
         "..lang.locale",
-        "Locale"
+        "Locale",
+        "lang_locale_i"
       ],
       [
         "..beans.property_value",
-        "PropertyValue"
+        "PropertyValue",
+        "beans_property_value_i"
       ],
       [
         ".proofreading_result",
-        "ProofreadingResult"
+        "ProofreadingResult",
+        "proofreading_result_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.linguistic2.XSupportedLocales": "x_supported_locales_i"
+    },
     "quote": [
-      "ProofreadingResult",
-      "Locale",
-      "typing.List[PropertyValue]"
+      "proofreading_result_i",
+      "lang_locale_i",
+      "typing.List[beans_property_value_i]"
     ],
     "typings": [
-      "typing.List[PropertyValue]"
+      "typing.List[beans_property_value_i]"
     ],
     "requires_typing": true,
     "name": "XProofreader",
@@ -59,7 +67,7 @@
       "methods": [
         {
           "name": "doProofreading",
-          "returns": "ProofreadingResult",
+          "returns": "proofreading_result_i",
           "desc": [
             "start checking",
             "",
@@ -81,7 +89,7 @@
             ],
             [
               "aLocale",
-              "Locale",
+              "lang_locale_i",
               "in"
             ],
             [
@@ -96,7 +104,7 @@
             ],
             [
               "aProperties",
-              "typing.List[PropertyValue]",
+              "typing.List[beans_property_value_i]",
               "in"
             ]
           ]
@@ -120,7 +128,7 @@
             ],
             [
               "aLocale",
-              "Locale",
+              "lang_locale_i",
               "in"
             ]
           ]

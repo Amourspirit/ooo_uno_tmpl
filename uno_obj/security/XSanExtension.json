@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XSanExtension",
   "type": "interface",
   "namespace": "com.sun.star.security",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,20 +16,25 @@
     "from_imports": [
       [
         ".x_certificate_extension",
-        "XCertificateExtension"
+        "XCertificateExtension",
+        "x_certificate_extension_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".cert_alt_name_entry",
-        "CertAltNameEntry"
+        "CertAltNameEntry",
+        "cert_alt_name_entry_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.security.XCertificateExtension": "x_certificate_extension_i"
+    },
     "quote": [
-      "typing.List[CertAltNameEntry]"
+      "typing.List[cert_alt_name_entry_i]"
     ],
     "typings": [
-      "typing.List[CertAltNameEntry]"
+      "typing.List[cert_alt_name_entry_i]"
     ],
     "requires_typing": true,
     "name": "XSanExtension",
@@ -47,7 +53,7 @@
       "types": [
         {
           "name": "AlternativeNames",
-          "returns": "typing.List[CertAltNameEntry]",
+          "returns": "typing.List[cert_alt_name_entry_i]",
           "desc": [
             "Contains the alternative names of a certificate."
           ],

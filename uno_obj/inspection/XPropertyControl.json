@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XPropertyControl",
   "type": "interface",
   "namespace": "com.sun.star.inspection",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,17 +16,20 @@
     "from_imports": [],
     "from_imports_typing": [
       [
-        "..awt.x_window",
-        "XWindow"
+        ".x_property_control_context",
+        "XPropertyControlContext",
+        "x_property_control_context_i"
       ],
       [
-        ".x_property_control_context",
-        "XPropertyControlContext"
+        "..awt.x_window",
+        "XWindow",
+        "awt_x_window_i"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "XWindow",
-      "XPropertyControlContext"
+      "awt_x_window_i",
+      "x_property_control_context_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -67,7 +71,7 @@
       "properties": [
         {
           "name": "ControlContext",
-          "returns": "XPropertyControlContext",
+          "returns": "x_property_control_context_i",
           "desc": [
             "specifies the context of the control within the ObjectInspector.",
             "",
@@ -87,7 +91,7 @@
         },
         {
           "name": "ControlWindow",
-          "returns": "XWindow",
+          "returns": "awt_x_window_i",
           "desc": [
             "denotes the window which is the real UI representation of the property control.",
             "",

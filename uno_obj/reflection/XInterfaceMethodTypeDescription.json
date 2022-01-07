@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XInterfaceMethodTypeDescription",
   "type": "interface",
   "namespace": "com.sun.star.reflection",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,27 +16,33 @@
     "from_imports": [
       [
         ".x_interface_member_type_description",
-        "XInterfaceMemberTypeDescription"
+        "XInterfaceMemberTypeDescription",
+        "x_interface_member_type_description_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_method_parameter",
-        "XMethodParameter"
+        "XMethodParameter",
+        "x_method_parameter_i"
       ],
       [
         ".x_type_description",
-        "XTypeDescription"
+        "XTypeDescription",
+        "x_type_description_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.reflection.XInterfaceMemberTypeDescription": "x_interface_member_type_description_i"
+    },
     "quote": [
-      "XTypeDescription",
-      "typing.List[XMethodParameter]",
-      "typing.List[XTypeDescription]"
+      "x_type_description_i",
+      "typing.List[x_method_parameter_i]",
+      "typing.List[x_type_description_i]"
     ],
     "typings": [
-      "typing.List[XMethodParameter]",
-      "typing.List[XTypeDescription]"
+      "typing.List[x_method_parameter_i]",
+      "typing.List[x_type_description_i]"
     ],
     "requires_typing": true,
     "name": "XInterfaceMethodTypeDescription",
@@ -54,7 +61,7 @@
       "methods": [
         {
           "name": "getExceptions",
-          "returns": "typing.List[XTypeDescription]",
+          "returns": "typing.List[x_type_description_i]",
           "desc": [
             "Returns declared exceptions that may occur upon invocations of the method."
           ],
@@ -63,7 +70,7 @@
         },
         {
           "name": "getParameters",
-          "returns": "typing.List[XMethodParameter]",
+          "returns": "typing.List[x_method_parameter_i]",
           "desc": [
             "Returns all parameters of the method in order of IDL declaration."
           ],
@@ -72,7 +79,7 @@
         },
         {
           "name": "getReturnType",
-          "returns": "XTypeDescription",
+          "returns": "x_type_description_i",
           "desc": [
             "Returns the method's return type."
           ],

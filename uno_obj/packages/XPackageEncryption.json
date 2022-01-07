@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XPackageEncryption",
   "type": "interface",
   "namespace": "com.sun.star.packages",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,30 +16,37 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
-        "..beans.named_value",
-        "NamedValue"
+        "..io.x_input_stream",
+        "XInputStream",
+        "io_x_input_stream_i"
       ],
       [
-        "..io.x_input_stream",
-        "XInputStream"
+        "..beans.named_value",
+        "NamedValue",
+        "beans_named_value_i"
       ],
       [
         "..io.x_output_stream",
-        "XOutputStream"
+        "XOutputStream",
+        "io_x_output_stream_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "XInputStream",
-      "typing.List[NamedValue]",
-      "XOutputStream"
+      "io_x_output_stream_i",
+      "typing.List[beans_named_value_i]",
+      "io_x_input_stream_i"
     ],
     "typings": [
-      "typing.List[NamedValue]"
+      "typing.List[beans_named_value_i]"
     ],
     "requires_typing": true,
     "name": "XPackageEncryption",
@@ -70,7 +78,7 @@
         },
         {
           "name": "createEncryptionData",
-          "returns": "typing.List[NamedValue]",
+          "returns": "typing.List[beans_named_value_i]",
           "desc": [
             "Create key-value list of encryption meta data.",
             "",
@@ -97,19 +105,19 @@
           "args": [
             [
               "rxInputStream",
-              "XInputStream",
+              "io_x_input_stream_i",
               "in"
             ],
             [
               "rxOutputStream",
-              "XOutputStream",
+              "io_x_output_stream_i",
               "out"
             ]
           ]
         },
         {
           "name": "encrypt",
-          "returns": "typing.List[NamedValue]",
+          "returns": "typing.List[beans_named_value_i]",
           "desc": [
             "Encrypt given stream.",
             "",
@@ -119,7 +127,7 @@
           "args": [
             [
               "rxInputStream",
-              "XInputStream",
+              "io_x_input_stream_i",
               "in"
             ]
           ]
@@ -149,7 +157,7 @@
           "args": [
             [
               "rStreams",
-              "typing.List[NamedValue]",
+              "typing.List[beans_named_value_i]",
               "in"
             ]
           ]
@@ -166,7 +174,7 @@
           "args": [
             [
               "rMediaEncData",
-              "typing.List[NamedValue]",
+              "typing.List[beans_named_value_i]",
               "in"
             ]
           ]

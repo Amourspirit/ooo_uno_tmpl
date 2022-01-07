@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XXMLSecurityTemplate",
   "type": "interface",
   "namespace": "com.sun.star.xml.crypto",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,22 +16,28 @@
     "from_imports": [
       [
         "...uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
-        "..wrapper.xxml_element_wrapper",
-        "XXMLElementWrapper"
+        ".security_operation_status",
+        "SecurityOperationStatus",
+        "security_operation_status_i"
       ],
       [
-        ".security_operation_status",
-        "SecurityOperationStatus"
+        "..wrapper.xxml_element_wrapper",
+        "XXMLElementWrapper",
+        "wrapper_xxml_element_wrapper_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "SecurityOperationStatus",
-      "XXMLElementWrapper"
+      "security_operation_status_i",
+      "wrapper_xxml_element_wrapper_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -50,7 +57,7 @@
       "methods": [
         {
           "name": "getStatus",
-          "returns": "SecurityOperationStatus",
+          "returns": "security_operation_status_i",
           "desc": [
             "Get the template status."
           ],
@@ -59,7 +66,7 @@
         },
         {
           "name": "getTemplate",
-          "returns": "XXMLElementWrapper",
+          "returns": "wrapper_xxml_element_wrapper_i",
           "desc": [
             "Get the XML signature element that represents the signature template."
           ],
@@ -78,7 +85,7 @@
           "args": [
             [
               "status",
-              "SecurityOperationStatus",
+              "security_operation_status_i",
               "in"
             ]
           ]
@@ -97,7 +104,7 @@
           "args": [
             [
               "aXmlElement",
-              "XXMLElementWrapper",
+              "wrapper_xxml_element_wrapper_i",
               "in"
             ]
           ]
@@ -114,7 +121,7 @@
           "args": [
             [
               "aXmlElement",
-              "XXMLElementWrapper",
+              "wrapper_xxml_element_wrapper_i",
               "in"
             ]
           ]

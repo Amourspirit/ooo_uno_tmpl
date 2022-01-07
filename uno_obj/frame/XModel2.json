@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XModel2",
   "type": "interface",
   "namespace": "com.sun.star.frame",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,37 +16,45 @@
     "from_imports": [
       [
         ".x_model",
-        "XModel"
+        "XModel",
+        "x_model_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_controller2",
-        "XController2"
+        "XController2",
+        "x_controller2_i"
       ],
       [
         "..container.x_enumeration",
-        "XEnumeration"
-      ],
-      [
-        ".x_frame",
-        "XFrame"
+        "XEnumeration",
+        "container_x_enumeration_i"
       ],
       [
         "..beans.property_value",
-        "PropertyValue"
+        "PropertyValue",
+        "beans_property_value_i"
+      ],
+      [
+        ".x_frame",
+        "XFrame",
+        "x_frame_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.frame.XModel": "x_model_i"
+    },
     "quote": [
+      "x_frame_i",
+      "x_controller2_i",
+      "typing.List[beans_property_value_i]",
       "typing.List[str]",
-      "XEnumeration",
-      "XFrame",
-      "typing.List[PropertyValue]",
-      "XController2"
+      "container_x_enumeration_i"
     ],
     "typings": [
       "typing.List[str]",
-      "typing.List[PropertyValue]"
+      "typing.List[beans_property_value_i]"
     ],
     "requires_typing": true,
     "name": "XModel2",
@@ -68,7 +77,7 @@
       "methods": [
         {
           "name": "createDefaultViewController",
-          "returns": "XController2",
+          "returns": "x_controller2_i",
           "desc": [
             "creates the default view instance for this model.",
             "",
@@ -81,14 +90,14 @@
           "args": [
             [
               "Frame",
-              "XFrame",
+              "x_frame_i",
               "in"
             ]
           ]
         },
         {
           "name": "createViewController",
-          "returns": "XController2",
+          "returns": "x_controller2_i",
           "desc": [
             "creates a new view instance classified by the specified name and arguments.",
             "",
@@ -106,12 +115,12 @@
             ],
             [
               "Arguments",
-              "typing.List[PropertyValue]",
+              "typing.List[beans_property_value_i]",
               "in"
             ],
             [
               "Frame",
-              "XFrame",
+              "x_frame_i",
               "in"
             ]
           ]
@@ -131,7 +140,7 @@
         },
         {
           "name": "getControllers",
-          "returns": "XEnumeration",
+          "returns": "container_x_enumeration_i",
           "desc": [
             "provides list of all currently connected controller objects.",
             "",
@@ -157,7 +166,7 @@
           "args": [
             [
               "Arguments",
-              "typing.List[PropertyValue]",
+              "typing.List[beans_property_value_i]",
               "in"
             ]
           ]

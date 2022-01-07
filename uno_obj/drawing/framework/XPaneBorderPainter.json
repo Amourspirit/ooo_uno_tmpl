@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XPaneBorderPainter",
   "type": "interface",
   "namespace": "com.sun.star.drawing.framework",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -16,26 +17,31 @@
     "from_imports_typing": [
       [
         "...rendering.x_canvas",
-        "XCanvas"
+        "XCanvas",
+        "rendering_x_canvas_i"
       ],
       [
         "...awt.point",
-        "Point"
+        "Point",
+        "awt_point_i"
       ],
       [
         ".border_type",
-        "BorderType"
+        "BorderType",
+        "border_type_i"
       ],
       [
         "...awt.rectangle",
-        "Rectangle"
+        "Rectangle",
+        "awt_rectangle_i"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "Rectangle",
-      "Point",
-      "XCanvas",
-      "BorderType"
+      "border_type_i",
+      "rendering_x_canvas_i",
+      "awt_point_i",
+      "awt_rectangle_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -53,7 +59,7 @@
       "methods": [
         {
           "name": "addBorder",
-          "returns": "Rectangle",
+          "returns": "awt_rectangle_i",
           "desc": [
             "Enlarge the given rectangle by the size of the specified part of the border.",
             "",
@@ -68,19 +74,19 @@
             ],
             [
               "aRectangle",
-              "Rectangle",
+              "awt_rectangle_i",
               "in"
             ],
             [
               "eBorderType",
-              "BorderType",
+              "border_type_i",
               "in"
             ]
           ]
         },
         {
           "name": "getCalloutOffset",
-          "returns": "Point",
+          "returns": "awt_point_i",
           "desc": [
             "Return the offset of a call out anchor with respect to the outer border.",
             "",
@@ -110,17 +116,17 @@
             ],
             [
               "xCanvas",
-              "XCanvas",
+              "rendering_x_canvas_i",
               "in"
             ],
             [
               "aOuterBorderRectangle",
-              "Rectangle",
+              "awt_rectangle_i",
               "in"
             ],
             [
               "aRepaintArea",
-              "Rectangle",
+              "awt_rectangle_i",
               "in"
             ],
             [
@@ -147,17 +153,17 @@
             ],
             [
               "xCanvas",
-              "XCanvas",
+              "rendering_x_canvas_i",
               "in"
             ],
             [
               "aOuterBorderRectangle",
-              "Rectangle",
+              "awt_rectangle_i",
               "in"
             ],
             [
               "aRepaintArea",
-              "Rectangle",
+              "awt_rectangle_i",
               "in"
             ],
             [
@@ -167,14 +173,14 @@
             ],
             [
               "aCalloutAnchor",
-              "Point",
+              "awt_point_i",
               "in"
             ]
           ]
         },
         {
           "name": "removeBorder",
-          "returns": "Rectangle",
+          "returns": "awt_rectangle_i",
           "desc": [
             "Shrink the given rectangle by the size of the specified part of the border.",
             "",
@@ -189,12 +195,12 @@
             ],
             [
               "aRectangle",
-              "Rectangle",
+              "awt_rectangle_i",
               "in"
             ],
             [
               "eBorderType",
-              "BorderType",
+              "border_type_i",
               "in"
             ]
           ]

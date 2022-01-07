@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XRow",
   "type": "interface",
   "namespace": "com.sun.star.sdbc",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,58 +16,71 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
-        "..container.x_name_access",
-        "XNameAccess"
-      ],
-      [
-        ".x_clob",
-        "XClob"
-      ],
-      [
-        "..io.x_input_stream",
-        "XInputStream"
-      ],
-      [
-        "..util.date_time",
-        "DateTime"
-      ],
-      [
         ".x_array",
-        "XArray"
-      ],
-      [
-        ".x_blob",
-        "XBlob"
-      ],
-      [
-        ".x_ref",
-        "XRef"
+        "XArray",
+        "x_array_i"
       ],
       [
         "..util.time",
-        "Time"
+        "Time",
+        "util_time_i"
+      ],
+      [
+        "..util.date_time",
+        "DateTime",
+        "util_date_time_i"
+      ],
+      [
+        ".x_blob",
+        "XBlob",
+        "x_blob_i"
+      ],
+      [
+        ".x_ref",
+        "XRef",
+        "x_ref_i"
       ],
       [
         "..util.date",
-        "Date"
+        "Date",
+        "util_date_i"
+      ],
+      [
+        "..container.x_name_access",
+        "XNameAccess",
+        "container_x_name_access_i"
+      ],
+      [
+        "..io.x_input_stream",
+        "XInputStream",
+        "io_x_input_stream_i"
+      ],
+      [
+        ".x_clob",
+        "XClob",
+        "x_clob_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "XArray",
-      "Time",
-      "XClob",
-      "XNameAccess",
-      "Date",
-      "XRef",
-      "XBlob",
-      "XInputStream",
+      "x_clob_i",
+      "util_date_time_i",
+      "x_blob_i",
+      "x_array_i",
+      "util_date_i",
+      "x_ref_i",
       "typing.List[int]",
-      "DateTime"
+      "io_x_input_stream_i",
+      "container_x_name_access_i",
+      "util_time_i"
     ],
     "typings": [
       "typing.List[int]"
@@ -88,7 +102,7 @@
       "methods": [
         {
           "name": "getArray",
-          "returns": "XArray",
+          "returns": "x_array_i",
           "desc": [
             "gets a SQL ARRAY value from the current row of this ResultSet object."
           ],
@@ -105,7 +119,7 @@
         },
         {
           "name": "getBinaryStream",
-          "returns": "XInputStream",
+          "returns": "io_x_input_stream_i",
           "desc": [
             "gets the value of a column in the current row as a stream of uninterpreted bytes.",
             "",
@@ -126,7 +140,7 @@
         },
         {
           "name": "getBlob",
-          "returns": "XBlob",
+          "returns": "x_blob_i",
           "desc": [
             "gets a BLOB value in the current row."
           ],
@@ -196,7 +210,7 @@
         },
         {
           "name": "getCharacterStream",
-          "returns": "XInputStream",
+          "returns": "io_x_input_stream_i",
           "desc": [
             "gets the value of a column in the current row as a stream of uninterpreted bytes.",
             "",
@@ -217,7 +231,7 @@
         },
         {
           "name": "getClob",
-          "returns": "XClob",
+          "returns": "x_clob_i",
           "desc": [
             "gets a CLOB value in the current row of this ResultSet object."
           ],
@@ -234,7 +248,7 @@
         },
         {
           "name": "getDate",
-          "returns": "Date",
+          "returns": "util_date_i",
           "desc": [
             "gets the value of a column in the current row as a date object."
           ],
@@ -336,14 +350,14 @@
             ],
             [
               "typeMap",
-              "XNameAccess",
+              "container_x_name_access_i",
               "in"
             ]
           ]
         },
         {
           "name": "getRef",
-          "returns": "XRef",
+          "returns": "x_ref_i",
           "desc": [
             "gets a REF(&lt;structured-type&gt;) column value from the current row."
           ],
@@ -394,7 +408,7 @@
         },
         {
           "name": "getTime",
-          "returns": "Time",
+          "returns": "util_time_i",
           "desc": [
             "gets the value of a column in the current row as a time object."
           ],
@@ -411,7 +425,7 @@
         },
         {
           "name": "getTimestamp",
-          "returns": "DateTime",
+          "returns": "util_date_time_i",
           "desc": [
             "gets the value of a column in the current row as a datetime object."
           ],

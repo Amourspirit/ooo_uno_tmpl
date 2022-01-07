@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XDrawPages",
   "type": "interface",
   "namespace": "com.sun.star.drawing",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,17 +16,22 @@
     "from_imports": [
       [
         "..container.x_index_access",
-        "XIndexAccess"
+        "XIndexAccess",
+        "container_x_index_access_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_draw_page",
-        "XDrawPage"
+        "XDrawPage",
+        "x_draw_page_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.container.XIndexAccess": "container_x_index_access_i"
+    },
     "quote": [
-      "XDrawPage"
+      "x_draw_page_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -47,7 +53,7 @@
       "methods": [
         {
           "name": "insertNewByIndex",
-          "returns": "XDrawPage",
+          "returns": "x_draw_page_i",
           "desc": [
             "creates and inserts a new DrawPage or MasterPage into this container"
           ],
@@ -70,7 +76,7 @@
           "args": [
             [
               "xPage",
-              "XDrawPage",
+              "x_draw_page_i",
               "in"
             ]
           ]

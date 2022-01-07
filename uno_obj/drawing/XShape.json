@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XShape",
   "type": "interface",
   "namespace": "com.sun.star.drawing",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,22 +16,28 @@
     "from_imports": [
       [
         ".x_shape_descriptor",
-        "XShapeDescriptor"
+        "XShapeDescriptor",
+        "x_shape_descriptor_i"
       ]
     ],
     "from_imports_typing": [
       [
-        "..awt.point",
-        "Point"
+        "..awt.size",
+        "Size",
+        "awt_size_i"
       ],
       [
-        "..awt.size",
-        "Size"
+        "..awt.point",
+        "Point",
+        "awt_point_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.drawing.XShapeDescriptor": "x_shape_descriptor_i"
+    },
     "quote": [
-      "Point",
-      "Size"
+      "awt_size_i",
+      "awt_point_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -48,7 +55,7 @@
       "methods": [
         {
           "name": "getPosition",
-          "returns": "Point",
+          "returns": "awt_point_i",
           "desc": [
             "gets the current position of this object."
           ],
@@ -57,7 +64,7 @@
         },
         {
           "name": "getSize",
-          "returns": "Size",
+          "returns": "awt_size_i",
           "desc": [
             "gets the size of this object."
           ],
@@ -74,7 +81,7 @@
           "args": [
             [
               "aPosition",
-              "Point",
+              "awt_point_i",
               "in"
             ]
           ]
@@ -91,7 +98,7 @@
           "args": [
             [
               "aSize",
-              "Size",
+              "awt_size_i",
               "in"
             ]
           ]

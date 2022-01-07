@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XScannerManager",
   "type": "interface",
   "namespace": "com.sun.star.scanner",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,36 +16,44 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
-        "..awt.x_bitmap",
-        "XBitmap"
+        "..lang.x_event_listener",
+        "XEventListener",
+        "lang_x_event_listener_i"
       ],
       [
-        ".scanner_context",
-        "ScannerContext"
+        "..awt.x_bitmap",
+        "XBitmap",
+        "awt_x_bitmap_i"
       ],
       [
         ".scan_error",
-        "ScanError"
+        "ScanError",
+        "scan_error_i"
       ],
       [
-        "..lang.x_event_listener",
-        "XEventListener"
+        ".scanner_context",
+        "ScannerContext",
+        "scanner_context_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "XBitmap",
-      "XEventListener",
-      "typing.List[ScannerContext]",
-      "ScannerContext",
-      "ScanError"
+      "scanner_context_i",
+      "scan_error_i",
+      "typing.List[scanner_context_i]",
+      "awt_x_bitmap_i",
+      "lang_x_event_listener_i"
     ],
     "typings": [
-      "typing.List[ScannerContext]"
+      "typing.List[scanner_context_i]"
     ],
     "requires_typing": true,
     "name": "XScannerManager",
@@ -76,7 +85,7 @@
         },
         {
           "name": "getAvailableScanners",
-          "returns": "typing.List[ScannerContext]",
+          "returns": "typing.List[scanner_context_i]",
           "desc": [
             "returns all available scanner devices"
           ],
@@ -85,7 +94,7 @@
         },
         {
           "name": "getBitmap",
-          "returns": "XBitmap",
+          "returns": "awt_x_bitmap_i",
           "desc": [
             "get the image after completion of scan"
           ],
@@ -95,14 +104,14 @@
           "args": [
             [
               "scannerContext",
-              "ScannerContext",
+              "scanner_context_i",
               "in"
             ]
           ]
         },
         {
           "name": "getError",
-          "returns": "ScanError",
+          "returns": "scan_error_i",
           "desc": [
             "get the state of scanning after completion of scan"
           ],
@@ -112,7 +121,7 @@
           "args": [
             [
               "scannerContext",
-              "ScannerContext",
+              "scanner_context_i",
               "in"
             ]
           ]
@@ -129,12 +138,12 @@
           "args": [
             [
               "scannerContext",
-              "ScannerContext",
+              "scanner_context_i",
               "in"
             ],
             [
               "listener",
-              "XEventListener",
+              "lang_x_event_listener_i",
               "in"
             ]
           ]

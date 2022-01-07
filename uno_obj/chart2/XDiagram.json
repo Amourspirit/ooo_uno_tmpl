@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XDiagram",
   "type": "interface",
   "namespace": "com.sun.star.chart2",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,40 +16,49 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
-        ".data.x_data_source",
-        "XDataSource"
-      ],
-      [
-        ".x_color_scheme",
-        "XColorScheme"
-      ],
-      [
         ".x_legend",
-        "XLegend"
+        "XLegend",
+        "x_legend_i"
       ],
       [
         "..beans.x_property_set",
-        "XPropertySet"
+        "XPropertySet",
+        "beans_x_property_set_i"
+      ],
+      [
+        ".data.x_data_source",
+        "XDataSource",
+        "data_x_data_source_i"
       ],
       [
         "..beans.property_value",
-        "PropertyValue"
+        "PropertyValue",
+        "beans_property_value_i"
+      ],
+      [
+        ".x_color_scheme",
+        "XColorScheme",
+        "x_color_scheme_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "typing.List[PropertyValue]",
-      "XPropertySet",
-      "XColorScheme",
-      "XLegend",
-      "XDataSource"
+      "x_color_scheme_i",
+      "beans_x_property_set_i",
+      "data_x_data_source_i",
+      "x_legend_i",
+      "typing.List[beans_property_value_i]"
     ],
     "typings": [
-      "typing.List[PropertyValue]"
+      "typing.List[beans_property_value_i]"
     ],
     "requires_typing": true,
     "name": "XDiagram",
@@ -63,7 +73,7 @@
       "methods": [
         {
           "name": "getDefaultColorScheme",
-          "returns": "XColorScheme",
+          "returns": "x_color_scheme_i",
           "desc": [
             "returns an XColorScheme that defines the default colors for data series (or data points) in the diagram."
           ],
@@ -72,7 +82,7 @@
         },
         {
           "name": "getFloor",
-          "returns": "XPropertySet",
+          "returns": "beans_x_property_set_i",
           "desc": [
             "returns the property set that determines the visual appearance of the floor if any.",
             "",
@@ -83,7 +93,7 @@
         },
         {
           "name": "getLegend",
-          "returns": "XLegend",
+          "returns": "x_legend_i",
           "desc": [
             "returns the legend, which may represent data series and other information about a diagram in a separate box."
           ],
@@ -92,7 +102,7 @@
         },
         {
           "name": "getWall",
-          "returns": "XPropertySet",
+          "returns": "beans_x_property_set_i",
           "desc": [
             "returns the property set that determines the visual appearance of the wall.",
             "",
@@ -111,7 +121,7 @@
           "args": [
             [
               "xColorScheme",
-              "XColorScheme",
+              "x_color_scheme_i",
               "in"
             ]
           ]
@@ -128,12 +138,12 @@
           "args": [
             [
               "xDataSource",
-              "XDataSource",
+              "data_x_data_source_i",
               "in"
             ],
             [
               "aArguments",
-              "typing.List[PropertyValue]",
+              "typing.List[beans_property_value_i]",
               "in"
             ]
           ]
@@ -148,7 +158,7 @@
           "args": [
             [
               "xLegend",
-              "XLegend",
+              "x_legend_i",
               "in"
             ]
           ]

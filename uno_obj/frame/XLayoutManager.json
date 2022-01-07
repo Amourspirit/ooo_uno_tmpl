@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XLayoutManager",
   "type": "interface",
   "namespace": "com.sun.star.frame",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,51 +16,62 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
-        "..awt.point",
-        "Point"
-      ],
-      [
-        "..awt.rectangle",
-        "Rectangle"
+        "..awt.size",
+        "Size",
+        "awt_size_i"
       ],
       [
         ".x_frame",
-        "XFrame"
-      ],
-      [
-        "..awt.size",
-        "Size"
+        "XFrame",
+        "x_frame_i"
       ],
       [
         "..ui.x_docking_area_acceptor",
-        "XDockingAreaAcceptor"
-      ],
-      [
-        "..ui.xui_element",
-        "XUIElement"
+        "XDockingAreaAcceptor",
+        "ui_x_docking_area_acceptor_i"
       ],
       [
         "..ui.docking_area",
-        "DockingArea"
+        "DockingArea",
+        "ui_docking_area_i"
+      ],
+      [
+        "..ui.xui_element",
+        "XUIElement",
+        "ui_xui_element_i"
+      ],
+      [
+        "..awt.point",
+        "Point",
+        "awt_point_i"
+      ],
+      [
+        "..awt.rectangle",
+        "Rectangle",
+        "awt_rectangle_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "Rectangle",
-      "DockingArea",
-      "XFrame",
-      "Point",
-      "XUIElement",
-      "typing.List[XUIElement]",
-      "XDockingAreaAcceptor",
-      "Size"
+      "x_frame_i",
+      "ui_docking_area_i",
+      "awt_point_i",
+      "awt_rectangle_i",
+      "ui_x_docking_area_acceptor_i",
+      "typing.List[ui_xui_element_i]",
+      "awt_size_i",
+      "ui_xui_element_i"
     ],
     "typings": [
-      "typing.List[XUIElement]"
+      "typing.List[ui_xui_element_i]"
     ],
     "requires_typing": true,
     "name": "XLayoutManager",
@@ -96,7 +108,7 @@
           "args": [
             [
               "Frame",
-              "XFrame",
+              "x_frame_i",
               "in"
             ]
           ]
@@ -170,12 +182,12 @@
             ],
             [
               "DockingArea",
-              "DockingArea",
+              "ui_docking_area_i",
               "in"
             ],
             [
               "Pos",
-              "Point",
+              "awt_point_i",
               "in"
             ]
           ]
@@ -197,7 +209,7 @@
         },
         {
           "name": "getCurrentDockingArea",
-          "returns": "Rectangle",
+          "returns": "awt_rectangle_i",
           "desc": [
             "provides the current docking area size of the layout manager."
           ],
@@ -206,7 +218,7 @@
         },
         {
           "name": "getDockingAreaAcceptor",
-          "returns": "XDockingAreaAcceptor",
+          "returns": "ui_x_docking_area_acceptor_i",
           "desc": [
             "retrieves the current docking area acceptor that controls the border space of the frame's container window.",
             "",
@@ -217,7 +229,7 @@
         },
         {
           "name": "getElement",
-          "returns": "XUIElement",
+          "returns": "ui_xui_element_i",
           "desc": [
             "retrieves a user interface element which has been created before.",
             "",
@@ -234,7 +246,7 @@
         },
         {
           "name": "getElementPos",
-          "returns": "Point",
+          "returns": "awt_point_i",
           "desc": [
             "retrieves the current pixel position of a window based user interface element."
           ],
@@ -249,7 +261,7 @@
         },
         {
           "name": "getElementSize",
-          "returns": "Size",
+          "returns": "awt_size_i",
           "desc": [
             "retrieves the current size of a window based user interface element."
           ],
@@ -264,7 +276,7 @@
         },
         {
           "name": "getElements",
-          "returns": "typing.List[XUIElement]",
+          "returns": "typing.List[ui_xui_element_i]",
           "desc": [
             "retrieves all user interface elements which are currently instantiated.",
             "",
@@ -426,7 +438,7 @@
           "args": [
             [
               "xDockingAreaAcceptor",
-              "XDockingAreaAcceptor",
+              "ui_x_docking_area_acceptor_i",
               "in"
             ]
           ]
@@ -448,7 +460,7 @@
             ],
             [
               "Pos",
-              "Point",
+              "awt_point_i",
               "in"
             ]
           ]
@@ -470,12 +482,12 @@
             ],
             [
               "Pos",
-              "Point",
+              "awt_point_i",
               "in"
             ],
             [
               "Size",
-              "Size",
+              "awt_size_i",
               "in"
             ]
           ]
@@ -497,7 +509,7 @@
             ],
             [
               "Size",
-              "Size",
+              "awt_size_i",
               "in"
             ]
           ]

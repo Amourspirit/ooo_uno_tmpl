@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XPrimitiveFactory2D",
   "type": "interface",
   "namespace": "com.sun.star.graphic",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,36 +16,44 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
-        "..drawing.x_draw_page",
-        "XDrawPage"
+        "..drawing.x_shape",
+        "XShape",
+        "drawing_x_shape_i"
       ],
       [
         ".x_primitive2_d",
-        "XPrimitive2D"
+        "XPrimitive2D",
+        "x_primitive2_d_i"
       ],
       [
         "..beans.property_value",
-        "PropertyValue"
+        "PropertyValue",
+        "beans_property_value_i"
       ],
       [
-        "..drawing.x_shape",
-        "XShape"
+        "..drawing.x_draw_page",
+        "XDrawPage",
+        "drawing_x_draw_page_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "typing.List[XPrimitive2D]",
-      "XShape",
-      "XDrawPage",
-      "typing.List[PropertyValue]"
+      "drawing_x_draw_page_i",
+      "typing.List[x_primitive2_d_i]",
+      "drawing_x_shape_i",
+      "typing.List[beans_property_value_i]"
     ],
     "typings": [
-      "typing.List[XPrimitive2D]",
-      "typing.List[PropertyValue]"
+      "typing.List[x_primitive2_d_i]",
+      "typing.List[beans_property_value_i]"
     ],
     "requires_typing": true,
     "name": "XPrimitiveFactory2D",
@@ -63,7 +72,7 @@
       "methods": [
         {
           "name": "createPrimitivesFromXDrawPage",
-          "returns": "typing.List[XPrimitive2D]",
+          "returns": "typing.List[x_primitive2_d_i]",
           "desc": [
             "Create primitives from com.sun.star.drawing.XDrawPage."
           ],
@@ -71,19 +80,19 @@
           "args": [
             [
               "xDrawPage",
-              "XDrawPage",
+              "drawing_x_draw_page_i",
               "in"
             ],
             [
               "aParms",
-              "typing.List[PropertyValue]",
+              "typing.List[beans_property_value_i]",
               "in"
             ]
           ]
         },
         {
           "name": "createPrimitivesFromXShape",
-          "returns": "typing.List[XPrimitive2D]",
+          "returns": "typing.List[x_primitive2_d_i]",
           "desc": [
             "Create primitives from com.sun.star.drawing.XShape."
           ],
@@ -91,12 +100,12 @@
           "args": [
             [
               "xShape",
-              "XShape",
+              "drawing_x_shape_i",
               "in"
             ],
             [
               "aParms",
-              "typing.List[PropertyValue]",
+              "typing.List[beans_property_value_i]",
               "in"
             ]
           ]

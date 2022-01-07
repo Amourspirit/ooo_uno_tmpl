@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XMultiServiceFactory",
   "type": "interface",
   "namespace": "com.sun.star.lang",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,18 +16,22 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "typing.List[str]",
       "typing.List[object]",
-      "XInterface"
+      "uno_x_interface_i",
+      "typing.List[str]"
     ],
     "typings": [
-      "typing.List[str]",
-      "typing.List[object]"
+      "typing.List[object]",
+      "typing.List[str]"
     ],
     "requires_typing": true,
     "name": "XMultiServiceFactory",
@@ -43,7 +48,7 @@
       "methods": [
         {
           "name": "createInstance",
-          "returns": "XInterface",
+          "returns": "uno_x_interface_i",
           "desc": [
             "Creates an instance classified by the specified name."
           ],
@@ -60,7 +65,7 @@
         },
         {
           "name": "createInstanceWithArguments",
-          "returns": "XInterface",
+          "returns": "uno_x_interface_i",
           "desc": [
             "Creates an instance classified by the specified name and passes the arguments to that instance."
           ],

@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XCertificate",
   "type": "interface",
   "namespace": "com.sun.star.security",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,33 +16,40 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".certificate_kind",
-        "CertificateKind"
+        "CertificateKind",
+        "certificate_kind_i"
       ],
       [
         "..util.date_time",
-        "DateTime"
+        "DateTime",
+        "util_date_time_i"
       ],
       [
         ".x_certificate_extension",
-        "XCertificateExtension"
+        "XCertificateExtension",
+        "x_certificate_extension_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "CertificateKind",
+      "x_certificate_extension_i",
+      "util_date_time_i",
       "typing.List[int]",
-      "typing.List[XCertificateExtension]",
-      "XCertificateExtension",
-      "DateTime"
+      "certificate_kind_i",
+      "typing.List[x_certificate_extension_i]"
     ],
     "typings": [
-      "typing.List[int]",
-      "typing.List[XCertificateExtension]"
+      "typing.List[x_certificate_extension_i]",
+      "typing.List[int]"
     ],
     "requires_typing": true,
     "name": "XCertificate",
@@ -64,7 +72,7 @@
       "methods": [
         {
           "name": "findCertificateExtension",
-          "returns": "XCertificateExtension",
+          "returns": "x_certificate_extension_i",
           "desc": [
             "Find an extension with an object identifier."
           ],
@@ -101,7 +109,7 @@
         },
         {
           "name": "Extensions",
-          "returns": "typing.List[XCertificateExtension]",
+          "returns": "typing.List[x_certificate_extension_i]",
           "desc": [
             "all extensions of a certificate."
           ],
@@ -166,7 +174,7 @@
       "properties": [
         {
           "name": "CertificateKind",
-          "returns": "CertificateKind",
+          "returns": "certificate_kind_i",
           "desc": [
             "the kind of certificate, X.509 or OpenPGP",
             "",
@@ -188,7 +196,7 @@
         },
         {
           "name": "NotValidAfter",
-          "returns": "DateTime",
+          "returns": "util_date_time_i",
           "desc": [
             "the validity NotAfter date attribute of the certificate."
           ],
@@ -197,7 +205,7 @@
         },
         {
           "name": "NotValidBefore",
-          "returns": "DateTime",
+          "returns": "util_date_time_i",
           "desc": [
             "the validity NotBefore date attribute of the certificate."
           ],

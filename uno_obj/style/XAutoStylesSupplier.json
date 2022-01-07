@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XAutoStylesSupplier",
   "type": "interface",
   "namespace": "com.sun.star.style",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,17 +16,22 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_auto_styles",
-        "XAutoStyles"
+        "XAutoStyles",
+        "x_auto_styles_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "XAutoStyles"
+      "x_auto_styles_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -43,7 +49,7 @@
       "methods": [
         {
           "name": "getAutoStyles",
-          "returns": "XAutoStyles",
+          "returns": "x_auto_styles_i",
           "desc": [
             "This method returns the collection of automatic style families available in the container document."
           ],

@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XColumnRowRange",
   "type": "interface",
   "namespace": "com.sun.star.table",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,22 +16,28 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_table_rows",
-        "XTableRows"
+        "XTableRows",
+        "x_table_rows_i"
       ],
       [
         ".x_table_columns",
-        "XTableColumns"
+        "XTableColumns",
+        "x_table_columns_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "XTableRows",
-      "XTableColumns"
+      "x_table_columns_i",
+      "x_table_rows_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -48,7 +55,7 @@
       "methods": [
         {
           "name": "getColumns",
-          "returns": "XTableColumns",
+          "returns": "x_table_columns_i",
           "desc": [
             "returns the collection of columns in the range."
           ],
@@ -57,7 +64,7 @@
         },
         {
           "name": "getRows",
-          "returns": "XTableRows",
+          "returns": "x_table_rows_i",
           "desc": [
             "returns the collection of rows in the range."
           ],

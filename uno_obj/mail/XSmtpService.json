@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XSmtpService",
   "type": "interface",
   "namespace": "com.sun.star.mail",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,17 +16,22 @@
     "from_imports": [
       [
         ".x_mail_service",
-        "XMailService"
+        "XMailService",
+        "x_mail_service_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_mail_message",
-        "XMailMessage"
+        "XMailMessage",
+        "x_mail_message_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.mail.XMailService": "x_mail_service_i"
+    },
     "quote": [
-      "XMailMessage"
+      "x_mail_message_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -60,7 +66,7 @@
           "args": [
             [
               "xMailMessage",
-              "XMailMessage",
+              "x_mail_message_i",
               "in"
             ]
           ]

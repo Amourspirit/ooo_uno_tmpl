@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XFastContextHandler",
   "type": "interface",
   "namespace": "com.sun.star.xml.sax",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,22 +16,28 @@
     "from_imports": [
       [
         "...uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
-        ".x_fast_context_handler",
-        "XFastContextHandler"
+        ".x_fast_attribute_list",
+        "XFastAttributeList",
+        "x_fast_attribute_list_i"
       ],
       [
-        ".x_fast_attribute_list",
-        "XFastAttributeList"
+        ".x_fast_context_handler",
+        "XFastContextHandler",
+        "x_fast_context_handler_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "XFastContextHandler",
-      "XFastAttributeList"
+      "x_fast_context_handler_i",
+      "x_fast_attribute_list_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -65,7 +72,7 @@
         },
         {
           "name": "createFastChildContext",
-          "returns": "XFastContextHandler",
+          "returns": "x_fast_context_handler_i",
           "desc": [
             "receives notification of the beginning of a known child element.",
             "",
@@ -82,14 +89,14 @@
             ],
             [
               "Attribs",
-              "XFastAttributeList",
+              "x_fast_attribute_list_i",
               "in"
             ]
           ]
         },
         {
           "name": "createUnknownChildContext",
-          "returns": "XFastContextHandler",
+          "returns": "x_fast_context_handler_i",
           "desc": [
             "receives notification of the beginning of an unknown child element ."
           ],
@@ -109,7 +116,7 @@
             ],
             [
               "Attribs",
-              "XFastAttributeList",
+              "x_fast_attribute_list_i",
               "in"
             ]
           ]
@@ -172,7 +179,7 @@
             ],
             [
               "Attribs",
-              "XFastAttributeList",
+              "x_fast_attribute_list_i",
               "in"
             ]
           ]
@@ -199,7 +206,7 @@
             ],
             [
               "Attribs",
-              "XFastAttributeList",
+              "x_fast_attribute_list_i",
               "in"
             ]
           ]

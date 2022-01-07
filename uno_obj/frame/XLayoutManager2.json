@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XLayoutManager2",
   "type": "interface",
   "namespace": "com.sun.star.frame",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,27 +15,39 @@
   "data": {
     "from_imports": [
       [
-        ".x_layout_manager_event_broadcaster",
-        "XLayoutManagerEventBroadcaster"
+        ".x_menu_bar_merging_acceptor",
+        "XMenuBarMergingAcceptor",
+        "x_menu_bar_merging_acceptor_i"
       ],
       [
         "..ui.xui_configuration_listener",
-        "XUIConfigurationListener"
+        "XUIConfigurationListener",
+        "ui_xui_configuration_listener_i"
       ],
       [
-        ".x_layout_manager",
-        "XLayoutManager"
+        ".x_layout_manager_event_broadcaster",
+        "XLayoutManagerEventBroadcaster",
+        "x_layout_manager_event_broadcaster_i"
       ],
       [
         ".x_frame_action_listener",
-        "XFrameActionListener"
+        "XFrameActionListener",
+        "x_frame_action_listener_i"
       ],
       [
-        ".x_menu_bar_merging_acceptor",
-        "XMenuBarMergingAcceptor"
+        ".x_layout_manager",
+        "XLayoutManager",
+        "x_layout_manager_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.frame.XMenuBarMergingAcceptor": "x_menu_bar_merging_acceptor_i",
+      "com.sun.star.ui.XUIConfigurationListener": "ui_xui_configuration_listener_i",
+      "com.sun.star.frame.XLayoutManagerEventBroadcaster": "x_layout_manager_event_broadcaster_i",
+      "com.sun.star.frame.XFrameActionListener": "x_frame_action_listener_i",
+      "com.sun.star.frame.XLayoutManager": "x_layout_manager_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -42,11 +55,11 @@
     "imports": [],
     "namespace": "com.sun.star.frame",
     "extends": [
-      "com.sun.star.frame.XLayoutManager",
-      "com.sun.star.frame.XFrameActionListener",
-      "com.sun.star.ui.XUIConfigurationListener",
       "com.sun.star.frame.XMenuBarMergingAcceptor",
-      "com.sun.star.frame.XLayoutManagerEventBroadcaster"
+      "com.sun.star.ui.XUIConfigurationListener",
+      "com.sun.star.frame.XLayoutManagerEventBroadcaster",
+      "com.sun.star.frame.XFrameActionListener",
+      "com.sun.star.frame.XLayoutManager"
     ],
     "desc": [
       "Unified interface for LayoutManager service.",

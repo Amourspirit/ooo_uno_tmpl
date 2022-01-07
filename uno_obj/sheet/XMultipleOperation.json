@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XMultipleOperation",
   "type": "interface",
   "namespace": "com.sun.star.sheet",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,27 +16,34 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
-        "..table.cell_range_address",
-        "CellRangeAddress"
-      ],
-      [
         "..table.cell_address",
-        "CellAddress"
+        "CellAddress",
+        "table_cell_address_i"
       ],
       [
         ".table_operation_mode",
-        "TableOperationMode"
+        "TableOperationMode",
+        "table_operation_mode_i"
+      ],
+      [
+        "..table.cell_range_address",
+        "CellRangeAddress",
+        "table_cell_range_address_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "CellAddress",
-      "CellRangeAddress",
-      "TableOperationMode"
+      "table_cell_address_i",
+      "table_operation_mode_i",
+      "table_cell_range_address_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -63,22 +71,22 @@
           "args": [
             [
               "aFormulaRange",
-              "CellRangeAddress",
+              "table_cell_range_address_i",
               "in"
             ],
             [
               "nMode",
-              "TableOperationMode",
+              "table_operation_mode_i",
               "in"
             ],
             [
               "aColumnCell",
-              "CellAddress",
+              "table_cell_address_i",
               "in"
             ],
             [
               "aRowCell",
-              "CellAddress",
+              "table_cell_address_i",
               "in"
             ]
           ]

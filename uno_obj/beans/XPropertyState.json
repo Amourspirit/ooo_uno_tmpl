@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XPropertyState",
   "type": "interface",
   "namespace": "com.sun.star.beans",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,23 +16,28 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".property_state",
-        "PropertyState"
+        "PropertyState",
+        "property_state_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
+      "typing.List[property_state_i]",
       "typing.List[str]",
-      "PropertyState",
-      "typing.List[PropertyState]"
+      "property_state_i"
     ],
     "typings": [
       "typing.List[str]",
-      "typing.List[PropertyState]"
+      "typing.List[property_state_i]"
     ],
     "requires_typing": true,
     "name": "XPropertyState",
@@ -68,7 +74,7 @@
         },
         {
           "name": "getPropertyState",
-          "returns": "PropertyState",
+          "returns": "property_state_i",
           "desc": [],
           "raises": [
             "com.sun.star.beans.UnknownPropertyException"
@@ -83,7 +89,7 @@
         },
         {
           "name": "getPropertyStates",
-          "returns": "typing.List[PropertyState]",
+          "returns": "typing.List[property_state_i]",
           "desc": [
             "The order of the states is correlating to the order of the given property names."
           ],

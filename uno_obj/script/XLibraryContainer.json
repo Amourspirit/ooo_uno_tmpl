@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XLibraryContainer",
   "type": "interface",
   "namespace": "com.sun.star.script",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,18 +16,23 @@
     "from_imports": [
       [
         "..container.x_name_access",
-        "XNameAccess"
+        "XNameAccess",
+        "container_x_name_access_i"
       ]
     ],
     "from_imports_typing": [
       [
         "..container.x_name_container",
-        "XNameContainer"
+        "XNameContainer",
+        "container_x_name_container_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.container.XNameAccess": "container_x_name_access_i"
+    },
     "quote": [
-      "XNameAccess",
-      "XNameContainer"
+      "container_x_name_access_i",
+      "container_x_name_container_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -44,7 +50,7 @@
       "methods": [
         {
           "name": "createLibrary",
-          "returns": "XNameContainer",
+          "returns": "container_x_name_container_i",
           "desc": [
             "Creates a new library."
           ],
@@ -62,7 +68,7 @@
         },
         {
           "name": "createLibraryLink",
-          "returns": "XNameAccess",
+          "returns": "container_x_name_access_i",
           "desc": [
             "Creates a link to an \\\"external\\\" library that then can be accessed using this library manager.",
             "",

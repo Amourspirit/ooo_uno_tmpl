@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XDatabaseMetaData2",
   "type": "interface",
   "namespace": "com.sun.star.sdbc",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,20 +16,25 @@
     "from_imports": [
       [
         ".x_database_meta_data",
-        "XDatabaseMetaData"
+        "XDatabaseMetaData",
+        "x_database_meta_data_i"
       ]
     ],
     "from_imports_typing": [
       [
         "..beans.property_value",
-        "PropertyValue"
+        "PropertyValue",
+        "beans_property_value_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.sdbc.XDatabaseMetaData": "x_database_meta_data_i"
+    },
     "quote": [
-      "typing.List[PropertyValue]"
+      "typing.List[beans_property_value_i]"
     ],
     "typings": [
-      "typing.List[PropertyValue]"
+      "typing.List[beans_property_value_i]"
     ],
     "requires_typing": true,
     "name": "XDatabaseMetaData2",
@@ -45,7 +51,7 @@
       "methods": [
         {
           "name": "getConnectionInfo",
-          "returns": "typing.List[PropertyValue]",
+          "returns": "typing.List[beans_property_value_i]",
           "desc": [
             "complements XDatabaseMetaData.getURL by returning the settings which, upon construction of the connection, have been used besides the connection URL."
           ],

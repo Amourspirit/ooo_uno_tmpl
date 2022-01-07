@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XValidatable",
   "type": "interface",
   "namespace": "com.sun.star.form.validation",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,17 +16,22 @@
     "from_imports": [
       [
         "...uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_validator",
-        "XValidator"
+        "XValidator",
+        "x_validator_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "XValidator"
+      "x_validator_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -43,7 +49,7 @@
       "methods": [
         {
           "name": "getValidator",
-          "returns": "XValidator",
+          "returns": "x_validator_i",
           "desc": [
             "retrieves the external instance which is currently used to validate the component"
           ],
@@ -64,7 +70,7 @@
           "args": [
             [
               "Validator",
-              "XValidator",
+              "x_validator_i",
               "in"
             ]
           ]

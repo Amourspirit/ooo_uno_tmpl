@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XThesaurus",
   "type": "interface",
   "namespace": "com.sun.star.linguistic2",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,30 +16,37 @@
     "from_imports": [
       [
         ".x_supported_locales",
-        "XSupportedLocales"
+        "XSupportedLocales",
+        "x_supported_locales_i"
       ]
     ],
     "from_imports_typing": [
       [
-        "..beans.property_values",
-        "PropertyValues"
+        ".x_meaning",
+        "XMeaning",
+        "x_meaning_i"
       ],
       [
-        ".x_meaning",
-        "XMeaning"
+        "..beans.property_values",
+        "PropertyValues",
+        "beans_property_values_i"
       ],
       [
         "..lang.locale",
-        "Locale"
+        "Locale",
+        "lang_locale_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.linguistic2.XSupportedLocales": "x_supported_locales_i"
+    },
     "quote": [
-      "PropertyValues",
-      "typing.List[XMeaning]",
-      "Locale"
+      "typing.List[x_meaning_i]",
+      "lang_locale_i",
+      "beans_property_values_i"
     ],
     "typings": [
-      "typing.List[XMeaning]"
+      "typing.List[x_meaning_i]"
     ],
     "requires_typing": true,
     "name": "XThesaurus",
@@ -57,7 +65,7 @@
       "methods": [
         {
           "name": "queryMeanings",
-          "returns": "typing.List[XMeaning]",
+          "returns": "typing.List[x_meaning_i]",
           "desc": [
             "If the language is not supported, an com.sun.star.lang.IllegalArgumentException exception is raised."
           ],
@@ -72,12 +80,12 @@
             ],
             [
               "aLocale",
-              "Locale",
+              "lang_locale_i",
               "in"
             ],
             [
               "aProperties",
-              "PropertyValues",
+              "beans_property_values_i",
               "in"
             ]
           ]

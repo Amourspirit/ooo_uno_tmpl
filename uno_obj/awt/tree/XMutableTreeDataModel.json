@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XMutableTreeDataModel",
   "type": "interface",
   "namespace": "com.sun.star.awt.tree",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,17 +16,22 @@
     "from_imports": [
       [
         ".x_tree_data_model",
-        "XTreeDataModel"
+        "XTreeDataModel",
+        "x_tree_data_model_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_mutable_tree_node",
-        "XMutableTreeNode"
+        "XMutableTreeNode",
+        "x_mutable_tree_node_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.awt.tree.XTreeDataModel": "x_tree_data_model_i"
+    },
     "quote": [
-      "XMutableTreeNode"
+      "x_mutable_tree_node_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -45,7 +51,7 @@
       "methods": [
         {
           "name": "createNode",
-          "returns": "XMutableTreeNode",
+          "returns": "x_mutable_tree_node_i",
           "desc": [
             "creates a new tree node with the given value and given settings."
           ],
@@ -75,7 +81,7 @@
           "args": [
             [
               "RootNode",
-              "XMutableTreeNode",
+              "x_mutable_tree_node_i",
               "in"
             ]
           ]

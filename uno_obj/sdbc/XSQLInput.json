@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XSQLInput",
   "type": "interface",
   "namespace": "com.sun.star.sdbc",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,53 +16,65 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
-        ".x_clob",
-        "XClob"
-      ],
-      [
-        "..io.x_input_stream",
-        "XInputStream"
-      ],
-      [
-        "..util.date_time",
-        "DateTime"
-      ],
-      [
         ".x_array",
-        "XArray"
-      ],
-      [
-        ".x_blob",
-        "XBlob"
-      ],
-      [
-        ".x_ref",
-        "XRef"
+        "XArray",
+        "x_array_i"
       ],
       [
         "..util.time",
-        "Time"
+        "Time",
+        "util_time_i"
+      ],
+      [
+        "..util.date_time",
+        "DateTime",
+        "util_date_time_i"
+      ],
+      [
+        ".x_blob",
+        "XBlob",
+        "x_blob_i"
+      ],
+      [
+        ".x_ref",
+        "XRef",
+        "x_ref_i"
       ],
       [
         "..util.date",
-        "Date"
+        "Date",
+        "util_date_i"
+      ],
+      [
+        "..io.x_input_stream",
+        "XInputStream",
+        "io_x_input_stream_i"
+      ],
+      [
+        ".x_clob",
+        "XClob",
+        "x_clob_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "XArray",
-      "Time",
-      "XClob",
-      "Date",
-      "XRef",
-      "XBlob",
-      "XInputStream",
+      "x_clob_i",
+      "util_date_time_i",
+      "x_blob_i",
+      "x_array_i",
+      "util_date_i",
       "typing.List[int]",
-      "DateTime"
+      "io_x_input_stream_i",
+      "x_ref_i",
+      "util_time_i"
     ],
     "typings": [
       "typing.List[int]"
@@ -85,7 +98,7 @@
       "methods": [
         {
           "name": "readArray",
-          "returns": "XArray",
+          "returns": "x_array_i",
           "desc": [
             "reads an array from the stream."
           ],
@@ -96,7 +109,7 @@
         },
         {
           "name": "readBinaryStream",
-          "returns": "XInputStream",
+          "returns": "io_x_input_stream_i",
           "desc": [
             "reads the next attribute in the stream as sequence of bytes."
           ],
@@ -107,7 +120,7 @@
         },
         {
           "name": "readBlob",
-          "returns": "XBlob",
+          "returns": "x_blob_i",
           "desc": [
             "reads a BLOB from the stream."
           ],
@@ -151,7 +164,7 @@
         },
         {
           "name": "readCharacterStream",
-          "returns": "XInputStream",
+          "returns": "io_x_input_stream_i",
           "desc": [
             "reads the next attribute in the stream as a Unicode string."
           ],
@@ -162,7 +175,7 @@
         },
         {
           "name": "readClob",
-          "returns": "XClob",
+          "returns": "x_clob_i",
           "desc": [
             "reads a CLOB from the stream."
           ],
@@ -173,7 +186,7 @@
         },
         {
           "name": "readDate",
-          "returns": "Date",
+          "returns": "util_date_i",
           "desc": [
             "reads the next attribute in the stream as date."
           ],
@@ -245,7 +258,7 @@
         },
         {
           "name": "readRef",
-          "returns": "XRef",
+          "returns": "x_ref_i",
           "desc": [
             "reads a REF(&lt;structured-type&gt;) from the stream."
           ],
@@ -278,7 +291,7 @@
         },
         {
           "name": "readTime",
-          "returns": "Time",
+          "returns": "util_time_i",
           "desc": [
             "reads the next attribute in the stream as time."
           ],
@@ -289,7 +302,7 @@
         },
         {
           "name": "readTimestamp",
-          "returns": "DateTime",
+          "returns": "util_date_time_i",
           "desc": [
             "reads the next attribute in the stream as datetime."
           ],

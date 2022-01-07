@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XXMLEncryption",
   "type": "interface",
   "namespace": "com.sun.star.xml.crypto",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,27 +16,34 @@
     "from_imports": [
       [
         "...uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
+        ".xxml_security_context",
+        "XXMLSecurityContext",
+        "xxml_security_context_i"
+      ],
+      [
         ".xxml_encryption_template",
-        "XXMLEncryptionTemplate"
+        "XXMLEncryptionTemplate",
+        "xxml_encryption_template_i"
       ],
       [
         ".x_security_environment",
-        "XSecurityEnvironment"
-      ],
-      [
-        ".xxml_security_context",
-        "XXMLSecurityContext"
+        "XSecurityEnvironment",
+        "x_security_environment_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "XXMLSecurityContext",
-      "XXMLEncryptionTemplate",
-      "XSecurityEnvironment"
+      "xxml_security_context_i",
+      "xxml_encryption_template_i",
+      "x_security_environment_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -61,7 +69,7 @@
       "methods": [
         {
           "name": "decrypt",
-          "returns": "XXMLEncryptionTemplate",
+          "returns": "xxml_encryption_template_i",
           "desc": [
             "Perform decryption in the environment of encryption template and context."
           ],
@@ -72,19 +80,19 @@
           "args": [
             [
               "aTemplate",
-              "XXMLEncryptionTemplate",
+              "xxml_encryption_template_i",
               "in"
             ],
             [
               "aContext",
-              "XXMLSecurityContext",
+              "xxml_security_context_i",
               "in"
             ]
           ]
         },
         {
           "name": "encrypt",
-          "returns": "XXMLEncryptionTemplate",
+          "returns": "xxml_encryption_template_i",
           "desc": [
             "Perform encryption in the environment of encryption template and context."
           ],
@@ -95,12 +103,12 @@
           "args": [
             [
               "aTemplate",
-              "XXMLEncryptionTemplate",
+              "xxml_encryption_template_i",
               "in"
             ],
             [
               "aEnvironment",
-              "XSecurityEnvironment",
+              "x_security_environment_i",
               "in"
             ]
           ]

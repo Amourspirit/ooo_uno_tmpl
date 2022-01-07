@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XFunctionManager",
   "type": "interface",
   "namespace": "com.sun.star.report.meta",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,27 +15,35 @@
   "data": {
     "from_imports": [
       [
-        "...lang.x_component",
-        "XComponent"
+        "...container.x_index_access",
+        "XIndexAccess",
+        "container_x_index_access_i"
       ],
       [
-        "...container.x_index_access",
-        "XIndexAccess"
+        "...lang.x_component",
+        "XComponent",
+        "lang_x_component_i"
       ]
     ],
     "from_imports_typing": [
       [
-        ".x_function_category",
-        "XFunctionCategory"
+        ".x_function_description",
+        "XFunctionDescription",
+        "x_function_description_i"
       ],
       [
-        ".x_function_description",
-        "XFunctionDescription"
+        ".x_function_category",
+        "XFunctionCategory",
+        "x_function_category_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.container.XIndexAccess": "container_x_index_access_i",
+      "com.sun.star.lang.XComponent": "lang_x_component_i"
+    },
     "quote": [
-      "XFunctionCategory",
-      "XFunctionDescription"
+      "x_function_category_i",
+      "x_function_description_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -42,8 +51,8 @@
     "imports": [],
     "namespace": "com.sun.star.report.meta",
     "extends": [
-      "com.sun.star.lang.XComponent",
-      "com.sun.star.container.XIndexAccess"
+      "com.sun.star.container.XIndexAccess",
+      "com.sun.star.lang.XComponent"
     ],
     "desc": [
       "identifies a XFunctionManager which allows to retrieve the meta data of all supported functions."
@@ -53,7 +62,7 @@
       "methods": [
         {
           "name": "getCategory",
-          "returns": "XFunctionCategory",
+          "returns": "x_function_category_i",
           "desc": [
             "same as getByIndex."
           ],
@@ -71,7 +80,7 @@
         },
         {
           "name": "getFunctionByName",
-          "returns": "XFunctionDescription",
+          "returns": "x_function_description_i",
           "desc": [
             "get the function description by name"
           ],

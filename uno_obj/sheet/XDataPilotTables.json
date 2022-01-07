@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XDataPilotTables",
   "type": "interface",
   "namespace": "com.sun.star.sheet",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,22 +16,28 @@
     "from_imports": [
       [
         "..container.x_name_access",
-        "XNameAccess"
+        "XNameAccess",
+        "container_x_name_access_i"
       ]
     ],
     "from_imports_typing": [
       [
-        ".x_data_pilot_descriptor",
-        "XDataPilotDescriptor"
+        "..table.cell_address",
+        "CellAddress",
+        "table_cell_address_i"
       ],
       [
-        "..table.cell_address",
-        "CellAddress"
+        ".x_data_pilot_descriptor",
+        "XDataPilotDescriptor",
+        "x_data_pilot_descriptor_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.container.XNameAccess": "container_x_name_access_i"
+    },
     "quote": [
-      "XDataPilotDescriptor",
-      "CellAddress"
+      "table_cell_address_i",
+      "x_data_pilot_descriptor_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -50,7 +57,7 @@
       "methods": [
         {
           "name": "createDataPilotDescriptor",
-          "returns": "XDataPilotDescriptor",
+          "returns": "x_data_pilot_descriptor_i",
           "desc": [
             "creates a data pilot descriptor.",
             "",
@@ -74,12 +81,12 @@
             ],
             [
               "OutputAddress",
-              "CellAddress",
+              "table_cell_address_i",
               "in"
             ],
             [
               "xDescriptor",
-              "XDataPilotDescriptor",
+              "x_data_pilot_descriptor_i",
               "in"
             ]
           ]

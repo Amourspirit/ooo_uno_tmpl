@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XMutableGridDataModel",
   "type": "interface",
   "namespace": "com.sun.star.awt.grid",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,25 +16,30 @@
     "from_imports": [
       [
         ".x_grid_data_model",
-        "XGridDataModel"
+        "XGridDataModel",
+        "x_grid_data_model_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_grid_data_listener",
-        "XGridDataListener"
+        "XGridDataListener",
+        "x_grid_data_listener_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.awt.grid.XGridDataModel": "x_grid_data_model_i"
+    },
     "quote": [
       "typing.List[int]",
-      "typing.List[object]",
       "typing.List[typing.List[object]]",
-      "XGridDataListener"
+      "typing.List[object]",
+      "x_grid_data_listener_i"
     ],
     "typings": [
       "typing.List[int]",
-      "typing.List[object]",
-      "typing.List[typing.List[object]]"
+      "typing.List[typing.List[object]]",
+      "typing.List[object]"
     ],
     "requires_typing": true,
     "name": "XMutableGridDataModel",
@@ -58,7 +64,7 @@
           "args": [
             [
               "Listener",
-              "XGridDataListener",
+              "x_grid_data_listener_i",
               "in"
             ]
           ]
@@ -179,7 +185,7 @@
           "args": [
             [
               "Listener",
-              "XGridDataListener",
+              "x_grid_data_listener_i",
               "in"
             ]
           ]

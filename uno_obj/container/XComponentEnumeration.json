@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XComponentEnumeration",
   "type": "interface",
   "namespace": "com.sun.star.container",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,17 +16,22 @@
     "from_imports": [
       [
         ".x_enumeration",
-        "XEnumeration"
+        "XEnumeration",
+        "x_enumeration_i"
       ]
     ],
     "from_imports_typing": [
       [
         "..lang.x_component",
-        "XComponent"
+        "XComponent",
+        "lang_x_component_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.container.XEnumeration": "x_enumeration_i"
+    },
     "quote": [
-      "XComponent"
+      "lang_x_component_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -43,7 +49,7 @@
       "methods": [
         {
           "name": "nextComponent",
-          "returns": "XComponent",
+          "returns": "lang_x_component_i",
           "desc": [],
           "raises": [
             "com.sun.star.container.NoSuchElementException"

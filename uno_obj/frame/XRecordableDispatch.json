@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XRecordableDispatch",
   "type": "interface",
   "namespace": "com.sun.star.frame",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,30 +16,37 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
         "..util.url",
-        "URL"
-      ],
-      [
-        ".x_dispatch_recorder",
-        "XDispatchRecorder"
+        "URL",
+        "util_url_i"
       ],
       [
         "..beans.property_value",
-        "PropertyValue"
+        "PropertyValue",
+        "beans_property_value_i"
+      ],
+      [
+        ".x_dispatch_recorder",
+        "XDispatchRecorder",
+        "x_dispatch_recorder_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "URL",
-      "XDispatchRecorder",
-      "typing.List[PropertyValue]"
+      "util_url_i",
+      "x_dispatch_recorder_i",
+      "typing.List[beans_property_value_i]"
     ],
     "typings": [
-      "typing.List[PropertyValue]"
+      "typing.List[beans_property_value_i]"
     ],
     "requires_typing": true,
     "name": "XRecordableDispatch",
@@ -71,17 +79,17 @@
           "args": [
             [
               "URL",
-              "URL",
+              "util_url_i",
               "in"
             ],
             [
               "Arguments",
-              "typing.List[PropertyValue]",
+              "typing.List[beans_property_value_i]",
               "in"
             ],
             [
               "Recorder",
-              "XDispatchRecorder",
+              "x_dispatch_recorder_i",
               "in"
             ]
           ]

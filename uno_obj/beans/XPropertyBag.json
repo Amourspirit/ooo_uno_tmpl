@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XPropertyBag",
   "type": "interface",
   "namespace": "com.sun.star.beans",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,19 +15,27 @@
   "data": {
     "from_imports": [
       [
+        ".x_property_access",
+        "XPropertyAccess",
+        "x_property_access_i"
+      ],
+      [
         ".x_property_set",
-        "XPropertySet"
+        "XPropertySet",
+        "x_property_set_i"
       ],
       [
         ".x_property_container",
-        "XPropertyContainer"
-      ],
-      [
-        ".x_property_access",
-        "XPropertyAccess"
+        "XPropertyContainer",
+        "x_property_container_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.beans.XPropertyAccess": "x_property_access_i",
+      "com.sun.star.beans.XPropertySet": "x_property_set_i",
+      "com.sun.star.beans.XPropertyContainer": "x_property_container_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -34,9 +43,9 @@
     "imports": [],
     "namespace": "com.sun.star.beans",
     "extends": [
+      "com.sun.star.beans.XPropertyAccess",
       "com.sun.star.beans.XPropertySet",
-      "com.sun.star.beans.XPropertyContainer",
-      "com.sun.star.beans.XPropertyAccess"
+      "com.sun.star.beans.XPropertyContainer"
     ],
     "desc": [
       "",

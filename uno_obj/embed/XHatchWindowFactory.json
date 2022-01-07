@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XHatchWindowFactory",
   "type": "interface",
   "namespace": "com.sun.star.embed",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,32 +16,40 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
-        "..awt.x_window_peer",
-        "XWindowPeer"
+        "..awt.size",
+        "Size",
+        "awt_size_i"
       ],
       [
-        "..awt.size",
-        "Size"
+        "..awt.x_window_peer",
+        "XWindowPeer",
+        "awt_x_window_peer_i"
       ],
       [
         ".x_hatch_window",
-        "XHatchWindow"
+        "XHatchWindow",
+        "x_hatch_window_i"
       ],
       [
         "..awt.rectangle",
-        "Rectangle"
+        "Rectangle",
+        "awt_rectangle_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "XHatchWindow",
-      "Rectangle",
-      "Size",
-      "XWindowPeer"
+      "awt_size_i",
+      "awt_x_window_peer_i",
+      "awt_rectangle_i",
+      "x_hatch_window_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -58,7 +67,7 @@
       "methods": [
         {
           "name": "createHatchWindowInstance",
-          "returns": "XHatchWindow",
+          "returns": "x_hatch_window_i",
           "desc": [
             "creates a new hatch window instance."
           ],
@@ -68,17 +77,17 @@
           "args": [
             [
               "xParent",
-              "XWindowPeer",
+              "awt_x_window_peer_i",
               "in"
             ],
             [
               "aBounds",
-              "Rectangle",
+              "awt_rectangle_i",
               "in"
             ],
             [
               "aSize",
-              "Size",
+              "awt_size_i",
               "in"
             ]
           ]

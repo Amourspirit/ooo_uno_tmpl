@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XItemList",
   "type": "interface",
   "namespace": "com.sun.star.awt",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -16,17 +17,19 @@
     "from_imports_typing": [
       [
         ".x_item_list_listener",
-        "XItemListListener"
+        "XItemListListener",
+        "x_item_list_listener_i"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "XItemListListener",
+      "typing.Tuple[str, str]",
       "typing.List[typing.Tuple[str, str]]",
-      "typing.Tuple[str, str]"
+      "x_item_list_listener_i"
     ],
     "typings": [
-      "typing.List[typing.Tuple[str, str]]",
-      "typing.Tuple[str, str]"
+      "typing.Tuple[str, str]",
+      "typing.List[typing.Tuple[str, str]]"
     ],
     "requires_typing": true,
     "name": "XItemList",
@@ -49,7 +52,7 @@
           "args": [
             [
               "Listener",
-              "XItemListListener",
+              "x_item_list_listener_i",
               "in"
             ]
           ]
@@ -238,7 +241,7 @@
           "args": [
             [
               "Listener",
-              "XItemListListener",
+              "x_item_list_listener_i",
               "in"
             ]
           ]

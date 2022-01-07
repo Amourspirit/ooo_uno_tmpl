@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XDragSource",
   "type": "interface",
   "namespace": "com.sun.star.datatransfer.dnd",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,27 +16,34 @@
     "from_imports": [
       [
         "...uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
-        ".x_drag_source_listener",
-        "XDragSourceListener"
-      ],
-      [
         ".drag_gesture_event",
-        "DragGestureEvent"
+        "DragGestureEvent",
+        "drag_gesture_event_i"
       ],
       [
         "..x_transferable",
-        "XTransferable"
+        "XTransferable",
+        "x_transferable_i"
+      ],
+      [
+        ".x_drag_source_listener",
+        "XDragSourceListener",
+        "x_drag_source_listener_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "XTransferable",
-      "DragGestureEvent",
-      "XDragSourceListener"
+      "x_drag_source_listener_i",
+      "x_transferable_i",
+      "drag_gesture_event_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -93,7 +101,7 @@
           "args": [
             [
               "trigger",
-              "DragGestureEvent",
+              "drag_gesture_event_i",
               "in"
             ],
             [
@@ -113,12 +121,12 @@
             ],
             [
               "trans",
-              "XTransferable",
+              "x_transferable_i",
               "in"
             ],
             [
               "listener",
-              "XDragSourceListener",
+              "x_drag_source_listener_i",
               "in"
             ]
           ]

@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XDiagramPositioning",
   "type": "interface",
   "namespace": "com.sun.star.chart",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,17 +16,22 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
         "..awt.rectangle",
-        "Rectangle"
+        "Rectangle",
+        "awt_rectangle_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "Rectangle"
+      "awt_rectangle_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -43,21 +49,21 @@
       "methods": [
         {
           "name": "calculateDiagramPositionExcludingAxes",
-          "returns": "Rectangle",
+          "returns": "awt_rectangle_i",
           "desc": [],
           "raises": [],
           "args": []
         },
         {
           "name": "calculateDiagramPositionIncludingAxes",
-          "returns": "Rectangle",
+          "returns": "awt_rectangle_i",
           "desc": [],
           "raises": [],
           "args": []
         },
         {
           "name": "calculateDiagramPositionIncludingAxesAndAxisTitles",
-          "returns": "Rectangle",
+          "returns": "awt_rectangle_i",
           "desc": [],
           "raises": [],
           "args": []
@@ -95,7 +101,7 @@
           "args": [
             [
               "PositionRect",
-              "Rectangle",
+              "awt_rectangle_i",
               "in"
             ]
           ]
@@ -110,7 +116,7 @@
           "args": [
             [
               "PositionRect",
-              "Rectangle",
+              "awt_rectangle_i",
               "in"
             ]
           ]
@@ -127,7 +133,7 @@
           "args": [
             [
               "PositionRect",
-              "Rectangle",
+              "awt_rectangle_i",
               "in"
             ]
           ]

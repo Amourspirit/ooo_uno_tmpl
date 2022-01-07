@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XConnectionTools",
   "type": "interface",
   "namespace": "com.sun.star.sdb.tools",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -16,36 +17,43 @@
     "from_imports_typing": [
       [
         "...container.x_name_access",
-        "XNameAccess"
-      ],
-      [
-        ".x_data_source_meta_data",
-        "XDataSourceMetaData"
-      ],
-      [
-        "..x_single_select_query_composer",
-        "XSingleSelectQueryComposer"
-      ],
-      [
-        "...lang.x_component",
-        "XComponent"
-      ],
-      [
-        ".x_table_name",
-        "XTableName"
+        "XNameAccess",
+        "container_x_name_access_i"
       ],
       [
         ".x_object_names",
-        "XObjectNames"
+        "XObjectNames",
+        "x_object_names_i"
+      ],
+      [
+        ".x_data_source_meta_data",
+        "XDataSourceMetaData",
+        "x_data_source_meta_data_i"
+      ],
+      [
+        "..x_single_select_query_composer",
+        "XSingleSelectQueryComposer",
+        "x_single_select_query_composer_i"
+      ],
+      [
+        "...lang.x_component",
+        "XComponent",
+        "lang_x_component_i"
+      ],
+      [
+        ".x_table_name",
+        "XTableName",
+        "x_table_name_i"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "XComponent",
-      "XNameAccess",
-      "XObjectNames",
-      "XSingleSelectQueryComposer",
-      "XTableName",
-      "XDataSourceMetaData"
+      "x_data_source_meta_data_i",
+      "x_table_name_i",
+      "x_single_select_query_composer_i",
+      "lang_x_component_i",
+      "x_object_names_i",
+      "container_x_name_access_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -69,7 +77,7 @@
       "methods": [
         {
           "name": "createTableName",
-          "returns": "XTableName",
+          "returns": "x_table_name_i",
           "desc": [
             "creates an instance supporting the XTableName interface, which can be used to manipulate table names for various purposes.",
             "",
@@ -80,7 +88,7 @@
         },
         {
           "name": "getComposer",
-          "returns": "XSingleSelectQueryComposer",
+          "returns": "x_single_select_query_composer_i",
           "desc": [
             "get the composer initialized with a command and command type."
           ],
@@ -100,7 +108,7 @@
         },
         {
           "name": "getDataSourceMetaData",
-          "returns": "XDataSourceMetaData",
+          "returns": "x_data_source_meta_data_i",
           "desc": [
             "provides access to the application-level data source meta data"
           ],
@@ -109,7 +117,7 @@
         },
         {
           "name": "getFieldsByCommandDescriptor",
-          "returns": "XNameAccess",
+          "returns": "container_x_name_access_i",
           "desc": [
             "get fields for a result set given by a \\\"command descriptor\\\"",
             "",
@@ -131,14 +139,14 @@
             ],
             [
               "keepFieldsAlive",
-              "XComponent",
+              "lang_x_component_i",
               "out"
             ]
           ]
         },
         {
           "name": "getObjectNames",
-          "returns": "XObjectNames",
+          "returns": "x_object_names_i",
           "desc": [
             "returns an instance supporting the XObjectNames interface, which provides access to functionality around table and query names.",
             "",

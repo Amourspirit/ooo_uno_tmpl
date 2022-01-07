@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XRangeBasedSmartTagRecognizer",
   "type": "interface",
   "namespace": "com.sun.star.smarttags",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,32 +16,40 @@
     "from_imports": [
       [
         "..lang.x_initialization",
-        "XInitialization"
+        "XInitialization",
+        "lang_x_initialization_i"
       ]
     ],
     "from_imports_typing": [
       [
-        ".smart_tag_recognizer_mode",
-        "SmartTagRecognizerMode"
+        "..text.x_text_range",
+        "XTextRange",
+        "text_x_text_range_i"
       ],
       [
         "..frame.x_controller",
-        "XController"
+        "XController",
+        "frame_x_controller_i"
       ],
       [
-        "..text.x_text_range",
-        "XTextRange"
+        ".smart_tag_recognizer_mode",
+        "SmartTagRecognizerMode",
+        "smart_tag_recognizer_mode_i"
       ],
       [
         "..text.x_text_markup",
-        "XTextMarkup"
+        "XTextMarkup",
+        "text_x_text_markup_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.lang.XInitialization": "lang_x_initialization_i"
+    },
     "quote": [
-      "SmartTagRecognizerMode",
-      "XController",
-      "XTextMarkup",
-      "XTextRange"
+      "text_x_text_markup_i",
+      "smart_tag_recognizer_mode_i",
+      "frame_x_controller_i",
+      "text_x_text_range_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -66,17 +75,17 @@
           "args": [
             [
               "xRange",
-              "XTextRange",
+              "text_x_text_range_i",
               "in"
             ],
             [
               "eDataType",
-              "SmartTagRecognizerMode",
+              "smart_tag_recognizer_mode_i",
               "in"
             ],
             [
               "xTextMarkup",
-              "XTextMarkup",
+              "text_x_text_markup_i",
               "in"
             ],
             [
@@ -86,7 +95,7 @@
             ],
             [
               "xController",
-              "XController",
+              "frame_x_controller_i",
               "in"
             ]
           ]

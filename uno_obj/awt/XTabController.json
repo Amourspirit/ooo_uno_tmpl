@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XTabController",
   "type": "interface",
   "namespace": "com.sun.star.awt",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,30 +16,37 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
-        ".x_control_container",
-        "XControlContainer"
+        ".x_control",
+        "XControl",
+        "x_control_i"
       ],
       [
-        ".x_control",
-        "XControl"
+        ".x_control_container",
+        "XControlContainer",
+        "x_control_container_i"
       ],
       [
         ".x_tab_controller_model",
-        "XTabControllerModel"
+        "XTabControllerModel",
+        "x_tab_controller_model_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "XTabControllerModel",
-      "XControlContainer",
-      "typing.List[XControl]"
+      "typing.List[x_control_i]",
+      "x_tab_controller_model_i",
+      "x_control_container_i"
     ],
     "typings": [
-      "typing.List[XControl]"
+      "typing.List[x_control_i]"
     ],
     "requires_typing": true,
     "name": "XTabController",
@@ -91,7 +99,7 @@
         },
         {
           "name": "getContainer",
-          "returns": "XControlContainer",
+          "returns": "x_control_container_i",
           "desc": [
             "returns the control container."
           ],
@@ -100,7 +108,7 @@
         },
         {
           "name": "getControls",
-          "returns": "typing.List[XControl]",
+          "returns": "typing.List[x_control_i]",
           "desc": [
             "returns all controls of the control container."
           ],
@@ -109,7 +117,7 @@
         },
         {
           "name": "getModel",
-          "returns": "XTabControllerModel",
+          "returns": "x_tab_controller_model_i",
           "desc": [
             "returns the tab controller model."
           ],
@@ -126,7 +134,7 @@
           "args": [
             [
               "Container",
-              "XControlContainer",
+              "x_control_container_i",
               "in"
             ]
           ]
@@ -141,7 +149,7 @@
           "args": [
             [
               "Model",
-              "XTabControllerModel",
+              "x_tab_controller_model_i",
               "in"
             ]
           ]

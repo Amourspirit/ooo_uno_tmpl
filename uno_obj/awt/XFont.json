@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XFont",
   "type": "interface",
   "namespace": "com.sun.star.awt",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,23 +16,29 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".simple_font_metric",
-        "SimpleFontMetric"
+        "SimpleFontMetric",
+        "simple_font_metric_i"
       ],
       [
         ".font_descriptor",
-        "FontDescriptor"
+        "FontDescriptor",
+        "font_descriptor_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
+      "simple_font_metric_i",
       "typing.List[int]",
-      "FontDescriptor",
-      "SimpleFontMetric",
+      "font_descriptor_i",
       "typing.List[str]"
     ],
     "typings": [
@@ -90,7 +97,7 @@
         },
         {
           "name": "getFontDescriptor",
-          "returns": "FontDescriptor",
+          "returns": "font_descriptor_i",
           "desc": [
             "returns the description of the font.",
             "",
@@ -101,7 +108,7 @@
         },
         {
           "name": "getFontMetric",
-          "returns": "SimpleFontMetric",
+          "returns": "simple_font_metric_i",
           "desc": [
             "returns additional information about the font."
           ],

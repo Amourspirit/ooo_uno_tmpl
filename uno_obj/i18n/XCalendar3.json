@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XCalendar3",
   "type": "interface",
   "namespace": "com.sun.star.i18n",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,25 +16,31 @@
     "from_imports": [
       [
         ".x_extended_calendar",
-        "XExtendedCalendar"
+        "XExtendedCalendar",
+        "x_extended_calendar_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".calendar2",
-        "Calendar2"
+        "Calendar2",
+        "calendar2_i"
       ],
       [
         ".calendar_item2",
-        "CalendarItem2"
+        "CalendarItem2",
+        "calendar_item2_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.i18n.XExtendedCalendar": "x_extended_calendar_i"
+    },
     "quote": [
-      "Calendar2",
-      "typing.List[CalendarItem2]"
+      "typing.List[calendar_item2_i]",
+      "calendar2_i"
     ],
     "typings": [
-      "typing.List[CalendarItem2]"
+      "typing.List[calendar_item2_i]"
     ],
     "requires_typing": true,
     "name": "XCalendar3",
@@ -56,7 +63,7 @@
       "methods": [
         {
           "name": "getDays2",
-          "returns": "typing.List[CalendarItem2]",
+          "returns": "typing.List[calendar_item2_i]",
           "desc": [
             "returns a sequence of CalendarItem2 describing the day names."
           ],
@@ -65,7 +72,7 @@
         },
         {
           "name": "getGenitiveMonths2",
-          "returns": "typing.List[CalendarItem2]",
+          "returns": "typing.List[calendar_item2_i]",
           "desc": [
             "returns a sequence of CalendarItem2 describing the genitive case month names."
           ],
@@ -74,7 +81,7 @@
         },
         {
           "name": "getLoadedCalendar2",
-          "returns": "Calendar2",
+          "returns": "calendar2_i",
           "desc": [
             "Get the currently loaded Calendar2."
           ],
@@ -83,7 +90,7 @@
         },
         {
           "name": "getMonths2",
-          "returns": "typing.List[CalendarItem2]",
+          "returns": "typing.List[calendar_item2_i]",
           "desc": [
             "returns a sequence of CalendarItem2 describing the month names."
           ],
@@ -92,7 +99,7 @@
         },
         {
           "name": "getPartitiveMonths2",
-          "returns": "typing.List[CalendarItem2]",
+          "returns": "typing.List[calendar_item2_i]",
           "desc": [
             "returns a sequence of CalendarItem2 describing the partitive case month names."
           ],

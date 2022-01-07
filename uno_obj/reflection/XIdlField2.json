@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XIdlField2",
   "type": "interface",
   "namespace": "com.sun.star.reflection",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,22 +16,28 @@
     "from_imports": [
       [
         ".x_idl_member",
-        "XIdlMember"
+        "XIdlMember",
+        "x_idl_member_i"
       ]
     ],
     "from_imports_typing": [
       [
-        ".field_access_mode",
-        "FieldAccessMode"
+        ".x_idl_class",
+        "XIdlClass",
+        "x_idl_class_i"
       ],
       [
-        ".x_idl_class",
-        "XIdlClass"
+        ".field_access_mode",
+        "FieldAccessMode",
+        "field_access_mode_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.reflection.XIdlMember": "x_idl_member_i"
+    },
     "quote": [
-      "XIdlClass",
-      "FieldAccessMode"
+      "field_access_mode_i",
+      "x_idl_class_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -71,7 +78,7 @@
         },
         {
           "name": "getAccessMode",
-          "returns": "FieldAccessMode",
+          "returns": "field_access_mode_i",
           "desc": [
             "Returns the access mode of the field, i.e.",
             "",
@@ -82,7 +89,7 @@
         },
         {
           "name": "getType",
-          "returns": "XIdlClass",
+          "returns": "x_idl_class_i",
           "desc": [
             "Returns the type of the field."
           ],

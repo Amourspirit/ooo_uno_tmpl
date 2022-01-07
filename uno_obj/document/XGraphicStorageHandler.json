@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XGraphicStorageHandler",
   "type": "interface",
   "namespace": "com.sun.star.document",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,27 +16,34 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
-        "..graphic.x_graphic",
-        "XGraphic"
-      ],
-      [
         "..io.x_input_stream",
-        "XInputStream"
+        "XInputStream",
+        "io_x_input_stream_i"
       ],
       [
         "..io.x_output_stream",
-        "XOutputStream"
+        "XOutputStream",
+        "io_x_output_stream_i"
+      ],
+      [
+        "..graphic.x_graphic",
+        "XGraphic",
+        "graphic_x_graphic_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "XGraphic",
-      "XInputStream",
-      "XOutputStream"
+      "io_x_input_stream_i",
+      "graphic_x_graphic_i",
+      "io_x_output_stream_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -57,7 +65,7 @@
       "methods": [
         {
           "name": "createInputStream",
-          "returns": "XInputStream",
+          "returns": "io_x_input_stream_i",
           "desc": [
             "create an input stream from the input graphic"
           ],
@@ -65,14 +73,14 @@
           "args": [
             [
               "xGraphic",
-              "XGraphic",
+              "graphic_x_graphic_i",
               "in"
             ]
           ]
         },
         {
           "name": "loadGraphic",
-          "returns": "XGraphic",
+          "returns": "graphic_x_graphic_i",
           "desc": [
             "load a graphic defined by the URL from the storage"
           ],
@@ -87,7 +95,7 @@
         },
         {
           "name": "loadGraphicFromOutputStream",
-          "returns": "XGraphic",
+          "returns": "graphic_x_graphic_i",
           "desc": [
             "load a graphic from the output stream"
           ],
@@ -95,7 +103,7 @@
           "args": [
             [
               "xOutputStream",
-              "XOutputStream",
+              "io_x_output_stream_i",
               "in"
             ]
           ]
@@ -110,7 +118,7 @@
           "args": [
             [
               "xGraphic",
-              "XGraphic",
+              "graphic_x_graphic_i",
               "in"
             ]
           ]
@@ -125,7 +133,7 @@
           "args": [
             [
               "xGraphic",
-              "XGraphic",
+              "graphic_x_graphic_i",
               "in"
             ],
             [

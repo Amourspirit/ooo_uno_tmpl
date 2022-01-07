@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XDocumentRevisionListPersistence",
   "type": "interface",
   "namespace": "com.sun.star.document",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,25 +16,31 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
-        "..embed.x_storage",
-        "XStorage"
+        "..util.revision_tag",
+        "RevisionTag",
+        "util_revision_tag_i"
       ],
       [
-        "..util.revision_tag",
-        "RevisionTag"
+        "..embed.x_storage",
+        "XStorage",
+        "embed_x_storage_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "typing.List[RevisionTag]",
-      "XStorage"
+      "typing.List[util_revision_tag_i]",
+      "embed_x_storage_i"
     ],
     "typings": [
-      "typing.List[RevisionTag]"
+      "typing.List[util_revision_tag_i]"
     ],
     "requires_typing": true,
     "name": "XDocumentRevisionListPersistence",
@@ -50,7 +57,7 @@
       "methods": [
         {
           "name": "load",
-          "returns": "typing.List[RevisionTag]",
+          "returns": "typing.List[util_revision_tag_i]",
           "desc": [
             "Loads a list of available revisions from a storage.",
             "",
@@ -64,7 +71,7 @@
           "args": [
             [
               "Storage",
-              "XStorage",
+              "embed_x_storage_i",
               "in"
             ]
           ]
@@ -84,12 +91,12 @@
           "args": [
             [
               "Storage",
-              "XStorage",
+              "embed_x_storage_i",
               "in"
             ],
             [
               "List",
-              "typing.List[RevisionTag]",
+              "typing.List[util_revision_tag_i]",
               "in"
             ]
           ]

@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XFilterController",
   "type": "interface",
   "namespace": "com.sun.star.form.runtime",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -16,17 +17,20 @@
     "from_imports_typing": [
       [
         "...awt.x_control",
-        "XControl"
+        "XControl",
+        "awt_x_control_i"
       ],
       [
         ".x_filter_controller_listener",
-        "XFilterControllerListener"
+        "XFilterControllerListener",
+        "x_filter_controller_listener_i"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "XFilterControllerListener",
       "typing.List[typing.List[str]]",
-      "XControl"
+      "x_filter_controller_listener_i",
+      "awt_x_control_i"
     ],
     "typings": [
       "typing.List[typing.List[str]]"
@@ -68,7 +72,7 @@
           "args": [
             [
               "Listener",
-              "XFilterControllerListener",
+              "x_filter_controller_listener_i",
               "in"
             ]
           ]
@@ -84,7 +88,7 @@
         },
         {
           "name": "getFilterComponent",
-          "returns": "XControl",
+          "returns": "awt_x_control_i",
           "desc": [
             "retrieves the filter component with the given index.",
             "",
@@ -139,7 +143,7 @@
           "args": [
             [
               "Listener",
-              "XFilterControllerListener",
+              "x_filter_controller_listener_i",
               "in"
             ]
           ]

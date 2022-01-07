@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XLinguServiceManager",
   "type": "interface",
   "namespace": "com.sun.star.linguistic2",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,38 +16,47 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
-        "..lang.locale",
-        "Locale"
-      ],
-      [
         ".x_hyphenator",
-        "XHyphenator"
-      ],
-      [
-        ".x_thesaurus",
-        "XThesaurus"
-      ],
-      [
-        ".x_spell_checker",
-        "XSpellChecker"
+        "XHyphenator",
+        "x_hyphenator_i"
       ],
       [
         "..lang.x_event_listener",
-        "XEventListener"
+        "XEventListener",
+        "lang_x_event_listener_i"
+      ],
+      [
+        ".x_thesaurus",
+        "XThesaurus",
+        "x_thesaurus_i"
+      ],
+      [
+        ".x_spell_checker",
+        "XSpellChecker",
+        "x_spell_checker_i"
+      ],
+      [
+        "..lang.locale",
+        "Locale",
+        "lang_locale_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "typing.List[str]",
-      "XHyphenator",
-      "XSpellChecker",
-      "XEventListener",
-      "Locale",
-      "XThesaurus"
+      "x_spell_checker_i",
+      "x_hyphenator_i",
+      "x_thesaurus_i",
+      "lang_x_event_listener_i",
+      "lang_locale_i",
+      "typing.List[str]"
     ],
     "typings": [
       "typing.List[str]"
@@ -82,7 +92,7 @@
           "args": [
             [
               "xListener",
-              "XEventListener",
+              "lang_x_event_listener_i",
               "in"
             ]
           ]
@@ -100,7 +110,7 @@
             ],
             [
               "aLocale",
-              "Locale",
+              "lang_locale_i",
               "in"
             ]
           ]
@@ -120,28 +130,28 @@
             ],
             [
               "aLocale",
-              "Locale",
+              "lang_locale_i",
               "in"
             ]
           ]
         },
         {
           "name": "getHyphenator",
-          "returns": "XHyphenator",
+          "returns": "x_hyphenator_i",
           "desc": [],
           "raises": [],
           "args": []
         },
         {
           "name": "getSpellChecker",
-          "returns": "XSpellChecker",
+          "returns": "x_spell_checker_i",
           "desc": [],
           "raises": [],
           "args": []
         },
         {
           "name": "getThesaurus",
-          "returns": "XThesaurus",
+          "returns": "x_thesaurus_i",
           "desc": [],
           "raises": [],
           "args": []
@@ -156,7 +166,7 @@
           "args": [
             [
               "xListener",
-              "XEventListener",
+              "lang_x_event_listener_i",
               "in"
             ]
           ]
@@ -176,7 +186,7 @@
             ],
             [
               "aLocale",
-              "Locale",
+              "lang_locale_i",
               "in"
             ],
             [

@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XFrame",
   "type": "interface",
   "namespace": "com.sun.star.frame",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,37 +16,46 @@
     "from_imports": [
       [
         "..lang.x_component",
-        "XComponent"
+        "XComponent",
+        "lang_x_component_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_frame",
-        "XFrame"
+        "XFrame",
+        "x_frame_i"
       ],
       [
         ".x_frames_supplier",
-        "XFramesSupplier"
+        "XFramesSupplier",
+        "x_frames_supplier_i"
       ],
       [
         "..awt.x_window",
-        "XWindow"
+        "XWindow",
+        "awt_x_window_i"
       ],
       [
         ".x_frame_action_listener",
-        "XFrameActionListener"
+        "XFrameActionListener",
+        "x_frame_action_listener_i"
       ],
       [
         ".x_controller",
-        "XController"
+        "XController",
+        "x_controller_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.lang.XComponent": "lang_x_component_i"
+    },
     "quote": [
-      "XFramesSupplier",
-      "XFrame",
-      "XFrameActionListener",
-      "XWindow",
-      "XController"
+      "x_frame_i",
+      "x_controller_i",
+      "x_frames_supplier_i",
+      "awt_x_window_i",
+      "x_frame_action_listener_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -88,7 +98,7 @@
           "args": [
             [
               "xListener",
-              "XFrameActionListener",
+              "x_frame_action_listener_i",
               "in"
             ]
           ]
@@ -119,7 +129,7 @@
         },
         {
           "name": "findFrame",
-          "returns": "XFrame",
+          "returns": "x_frame_i",
           "desc": [
             "searches for a frame with the specified name.",
             "",
@@ -145,7 +155,7 @@
         },
         {
           "name": "getComponentWindow",
-          "returns": "XWindow",
+          "returns": "awt_x_window_i",
           "desc": [
             "provides access to the component window",
             "",
@@ -156,7 +166,7 @@
         },
         {
           "name": "getContainerWindow",
-          "returns": "XWindow",
+          "returns": "awt_x_window_i",
           "desc": [
             "provides access to the container window of the frame.",
             "",
@@ -167,7 +177,7 @@
         },
         {
           "name": "getController",
-          "returns": "XController",
+          "returns": "x_controller_i",
           "desc": [
             "provides access to the controller",
             "",
@@ -178,7 +188,7 @@
         },
         {
           "name": "getCreator",
-          "returns": "XFramesSupplier",
+          "returns": "x_frames_supplier_i",
           "desc": [
             "provides access to the creator (parent) of this frame"
           ],
@@ -208,7 +218,7 @@
           "args": [
             [
               "xWindow",
-              "XWindow",
+              "awt_x_window_i",
               "in"
             ]
           ]
@@ -243,7 +253,7 @@
           "args": [
             [
               "xListener",
-              "XFrameActionListener",
+              "x_frame_action_listener_i",
               "in"
             ]
           ]
@@ -262,12 +272,12 @@
           "args": [
             [
               "xComponentWindow",
-              "XWindow",
+              "awt_x_window_i",
               "in"
             ],
             [
               "xController",
-              "XController",
+              "x_controller_i",
               "in"
             ]
           ]
@@ -284,7 +294,7 @@
           "args": [
             [
               "Creator",
-              "XFramesSupplier",
+              "x_frames_supplier_i",
               "in"
             ]
           ]

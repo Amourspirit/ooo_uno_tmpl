@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XTimeField",
   "type": "interface",
   "namespace": "com.sun.star.awt",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,17 +16,22 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
         "..util.time",
-        "Time"
+        "Time",
+        "util_time_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "Time"
+      "util_time_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -43,7 +49,7 @@
       "methods": [
         {
           "name": "getFirst",
-          "returns": "Time",
+          "returns": "util_time_i",
           "desc": [
             "returns the currently set first value which is set on POS1 key."
           ],
@@ -52,7 +58,7 @@
         },
         {
           "name": "getLast",
-          "returns": "Time",
+          "returns": "util_time_i",
           "desc": [
             "returns the currently set last value which is set on END key."
           ],
@@ -61,7 +67,7 @@
         },
         {
           "name": "getMax",
-          "returns": "Time",
+          "returns": "util_time_i",
           "desc": [
             "returns the currently set maximum time value that can be entered by the user."
           ],
@@ -70,7 +76,7 @@
         },
         {
           "name": "getMin",
-          "returns": "Time",
+          "returns": "util_time_i",
           "desc": [
             "returns the currently set minimum time value that can be entered by the user."
           ],
@@ -79,7 +85,7 @@
         },
         {
           "name": "getTime",
-          "returns": "Time",
+          "returns": "util_time_i",
           "desc": [
             "returns the time value which is currently displayed in the time field."
           ],
@@ -123,7 +129,7 @@
           "args": [
             [
               "Time",
-              "Time",
+              "util_time_i",
               "in"
             ]
           ]
@@ -138,7 +144,7 @@
           "args": [
             [
               "Time",
-              "Time",
+              "util_time_i",
               "in"
             ]
           ]
@@ -153,7 +159,7 @@
           "args": [
             [
               "Time",
-              "Time",
+              "util_time_i",
               "in"
             ]
           ]
@@ -168,7 +174,7 @@
           "args": [
             [
               "Time",
-              "Time",
+              "util_time_i",
               "in"
             ]
           ]
@@ -198,7 +204,7 @@
           "args": [
             [
               "Time",
-              "Time",
+              "util_time_i",
               "in"
             ]
           ]

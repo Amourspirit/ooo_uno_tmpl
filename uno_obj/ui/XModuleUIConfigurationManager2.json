@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XModuleUIConfigurationManager2",
   "type": "interface",
   "namespace": "com.sun.star.ui",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,23 +15,33 @@
   "data": {
     "from_imports": [
       [
-        ".xui_configuration_persistence",
-        "XUIConfigurationPersistence"
+        ".xui_configuration_manager",
+        "XUIConfigurationManager",
+        "xui_configuration_manager_i"
       ],
       [
         ".x_module_ui_configuration_manager",
-        "XModuleUIConfigurationManager"
+        "XModuleUIConfigurationManager",
+        "x_module_ui_configuration_manager_i"
+      ],
+      [
+        ".xui_configuration_persistence",
+        "XUIConfigurationPersistence",
+        "xui_configuration_persistence_i"
       ],
       [
         ".xui_configuration",
-        "XUIConfiguration"
-      ],
-      [
-        ".xui_configuration_manager",
-        "XUIConfigurationManager"
+        "XUIConfiguration",
+        "xui_configuration_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.ui.XUIConfigurationManager": "xui_configuration_manager_i",
+      "com.sun.star.ui.XModuleUIConfigurationManager": "x_module_ui_configuration_manager_i",
+      "com.sun.star.ui.XUIConfigurationPersistence": "xui_configuration_persistence_i",
+      "com.sun.star.ui.XUIConfiguration": "xui_configuration_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -38,9 +49,9 @@
     "imports": [],
     "namespace": "com.sun.star.ui",
     "extends": [
-      "com.sun.star.ui.XUIConfigurationPersistence",
       "com.sun.star.ui.XUIConfigurationManager",
       "com.sun.star.ui.XModuleUIConfigurationManager",
+      "com.sun.star.ui.XUIConfigurationPersistence",
       "com.sun.star.ui.XUIConfiguration"
     ],
     "desc": [

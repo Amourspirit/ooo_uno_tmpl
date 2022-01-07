@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XCellSeries",
   "type": "interface",
   "namespace": "com.sun.star.sheet",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,27 +16,34 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".fill_mode",
-        "FillMode"
+        "FillMode",
+        "fill_mode_i"
       ],
       [
         ".fill_date_mode",
-        "FillDateMode"
+        "FillDateMode",
+        "fill_date_mode_i"
       ],
       [
         ".fill_direction",
-        "FillDirection"
+        "FillDirection",
+        "fill_direction_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "FillDateMode",
-      "FillDirection",
-      "FillMode"
+      "fill_direction_i",
+      "fill_mode_i",
+      "fill_date_mode_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -61,7 +69,7 @@
           "args": [
             [
               "nFillDirection",
-              "FillDirection",
+              "fill_direction_i",
               "in"
             ],
             [
@@ -81,17 +89,17 @@
           "args": [
             [
               "nFillDirection",
-              "FillDirection",
+              "fill_direction_i",
               "in"
             ],
             [
               "nFillMode",
-              "FillMode",
+              "fill_mode_i",
               "in"
             ],
             [
               "nFillDateMode",
-              "FillDateMode",
+              "fill_date_mode_i",
               "in"
             ],
             [

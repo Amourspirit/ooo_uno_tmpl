@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XObjectInspectorModel",
   "type": "interface",
   "namespace": "com.sun.star.inspection",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -16,16 +17,18 @@
     "from_imports_typing": [
       [
         ".property_category_descriptor",
-        "PropertyCategoryDescriptor"
+        "PropertyCategoryDescriptor",
+        "property_category_descriptor_i"
       ]
     ],
+    "extends_map": {},
     "quote": [
       "typing.List[object]",
-      "typing.List[PropertyCategoryDescriptor]"
+      "typing.List[property_category_descriptor_i]"
     ],
     "typings": [
       "typing.List[object]",
-      "typing.List[PropertyCategoryDescriptor]"
+      "typing.List[property_category_descriptor_i]"
     ],
     "requires_typing": true,
     "name": "XObjectInspectorModel",
@@ -44,7 +47,7 @@
       "methods": [
         {
           "name": "describeCategories",
-          "returns": "typing.List[PropertyCategoryDescriptor]",
+          "returns": "typing.List[property_category_descriptor_i]",
           "desc": [
             "describes the property categories used by the property handlers.",
             "",

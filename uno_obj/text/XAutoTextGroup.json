@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XAutoTextGroup",
   "type": "interface",
   "namespace": "com.sun.star.text",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,23 +16,29 @@
     "from_imports": [
       [
         "..container.x_name_access",
-        "XNameAccess"
+        "XNameAccess",
+        "container_x_name_access_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_text_range",
-        "XTextRange"
+        "XTextRange",
+        "x_text_range_i"
       ],
       [
         ".x_auto_text_entry",
-        "XAutoTextEntry"
+        "XAutoTextEntry",
+        "x_auto_text_entry_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.container.XNameAccess": "container_x_name_access_i"
+    },
     "quote": [
+      "x_auto_text_entry_i",
       "typing.List[str]",
-      "XAutoTextEntry",
-      "XTextRange"
+      "x_text_range_i"
     ],
     "typings": [
       "typing.List[str]"
@@ -62,7 +69,7 @@
         },
         {
           "name": "insertNewByName",
-          "returns": "XAutoTextEntry",
+          "returns": "x_auto_text_entry_i",
           "desc": [
             "creates a new AutoTextEntry entry."
           ],
@@ -82,7 +89,7 @@
             ],
             [
               "xTextRange",
-              "XTextRange",
+              "x_text_range_i",
               "in"
             ]
           ]

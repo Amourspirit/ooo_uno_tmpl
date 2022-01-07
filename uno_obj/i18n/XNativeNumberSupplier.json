@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XNativeNumberSupplier",
   "type": "interface",
   "namespace": "com.sun.star.i18n",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,22 +16,28 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
-        ".native_number_xml_attributes",
-        "NativeNumberXmlAttributes"
+        "..lang.locale",
+        "Locale",
+        "lang_locale_i"
       ],
       [
-        "..lang.locale",
-        "Locale"
+        ".native_number_xml_attributes",
+        "NativeNumberXmlAttributes",
+        "native_number_xml_attributes_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "NativeNumberXmlAttributes",
-      "Locale"
+      "native_number_xml_attributes_i",
+      "lang_locale_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -60,14 +67,14 @@
           "args": [
             [
               "aAttr",
-              "NativeNumberXmlAttributes",
+              "native_number_xml_attributes_i",
               "in"
             ]
           ]
         },
         {
           "name": "convertToXmlAttributes",
-          "returns": "NativeNumberXmlAttributes",
+          "returns": "native_number_xml_attributes_i",
           "desc": [
             "Convert a specific NatNum/Locale combination to attributes used in the XML file format."
           ],
@@ -75,7 +82,7 @@
           "args": [
             [
               "aLocale",
-              "Locale",
+              "lang_locale_i",
               "in"
             ],
             [
@@ -100,7 +107,7 @@
             ],
             [
               "aLocale",
-              "Locale",
+              "lang_locale_i",
               "in"
             ],
             [
@@ -120,7 +127,7 @@
           "args": [
             [
               "aLocale",
-              "Locale",
+              "lang_locale_i",
               "in"
             ],
             [

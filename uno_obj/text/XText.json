@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XText",
   "type": "interface",
   "namespace": "com.sun.star.text",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,22 +16,28 @@
     "from_imports": [
       [
         ".x_simple_text",
-        "XSimpleText"
+        "XSimpleText",
+        "x_simple_text_i"
       ]
     ],
     "from_imports_typing": [
       [
-        ".x_text_content",
-        "XTextContent"
+        ".x_text_range",
+        "XTextRange",
+        "x_text_range_i"
       ],
       [
-        ".x_text_range",
-        "XTextRange"
+        ".x_text_content",
+        "XTextContent",
+        "x_text_content_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.text.XSimpleText": "x_simple_text_i"
+    },
     "quote": [
-      "XTextContent",
-      "XTextRange"
+      "x_text_range_i",
+      "x_text_content_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -60,12 +67,12 @@
           "args": [
             [
               "xRange",
-              "XTextRange",
+              "x_text_range_i",
               "in"
             ],
             [
               "xContent",
-              "XTextContent",
+              "x_text_content_i",
               "in"
             ],
             [
@@ -87,7 +94,7 @@
           "args": [
             [
               "xContent",
-              "XTextContent",
+              "x_text_content_i",
               "in"
             ]
           ]

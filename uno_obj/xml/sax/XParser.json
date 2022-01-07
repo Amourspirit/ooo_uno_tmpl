@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XParser",
   "type": "interface",
   "namespace": "com.sun.star.xml.sax",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,42 +16,52 @@
     "from_imports": [
       [
         "...uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
-        "...lang.locale",
-        "Locale"
-      ],
-      [
-        ".input_source",
-        "InputSource"
-      ],
-      [
-        ".x_document_handler",
-        "XDocumentHandler"
+        ".x_error_handler",
+        "XErrorHandler",
+        "x_error_handler_i"
       ],
       [
         ".x_entity_resolver",
-        "XEntityResolver"
+        "XEntityResolver",
+        "x_entity_resolver_i"
+      ],
+      [
+        ".input_source",
+        "InputSource",
+        "input_source_i"
+      ],
+      [
+        ".x_document_handler",
+        "XDocumentHandler",
+        "x_document_handler_i"
       ],
       [
         ".xdtd_handler",
-        "XDTDHandler"
+        "XDTDHandler",
+        "xdtd_handler_i"
       ],
       [
-        ".x_error_handler",
-        "XErrorHandler"
+        "...lang.locale",
+        "Locale",
+        "lang_locale_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "XDocumentHandler",
-      "XEntityResolver",
-      "XDTDHandler",
-      "Locale",
-      "XErrorHandler",
-      "InputSource"
+      "xdtd_handler_i",
+      "x_error_handler_i",
+      "x_document_handler_i",
+      "x_entity_resolver_i",
+      "input_source_i",
+      "lang_locale_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -83,7 +94,7 @@
           "args": [
             [
               "aInputSource",
-              "InputSource",
+              "input_source_i",
               "in"
             ]
           ]
@@ -98,7 +109,7 @@
           "args": [
             [
               "xHandler",
-              "XDTDHandler",
+              "xdtd_handler_i",
               "in"
             ]
           ]
@@ -113,7 +124,7 @@
           "args": [
             [
               "xHandler",
-              "XDocumentHandler",
+              "x_document_handler_i",
               "in"
             ]
           ]
@@ -128,7 +139,7 @@
           "args": [
             [
               "xResolver",
-              "XEntityResolver",
+              "x_entity_resolver_i",
               "in"
             ]
           ]
@@ -145,7 +156,7 @@
           "args": [
             [
               "xHandler",
-              "XErrorHandler",
+              "x_error_handler_i",
               "in"
             ]
           ]
@@ -162,7 +173,7 @@
           "args": [
             [
               "locale",
-              "Locale",
+              "lang_locale_i",
               "in"
             ]
           ]

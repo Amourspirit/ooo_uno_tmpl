@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XBridgeFactory",
   "type": "interface",
   "namespace": "com.sun.star.bridge",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,31 +16,38 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
-        "..connection.x_connection",
-        "XConnection"
-      ],
-      [
         ".x_instance_provider",
-        "XInstanceProvider"
+        "XInstanceProvider",
+        "x_instance_provider_i"
       ],
       [
         ".x_bridge",
-        "XBridge"
+        "XBridge",
+        "x_bridge_i"
+      ],
+      [
+        "..connection.x_connection",
+        "XConnection",
+        "connection_x_connection_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "XConnection",
-      "XBridge",
-      "XInstanceProvider",
-      "typing.List[XBridge]"
+      "typing.List[x_bridge_i]",
+      "connection_x_connection_i",
+      "x_instance_provider_i",
+      "x_bridge_i"
     ],
     "typings": [
-      "typing.List[XBridge]"
+      "typing.List[x_bridge_i]"
     ],
     "requires_typing": true,
     "name": "XBridgeFactory",
@@ -56,7 +64,7 @@
       "methods": [
         {
           "name": "createBridge",
-          "returns": "XBridge",
+          "returns": "x_bridge_i",
           "desc": [
             "tries to create a UNO interprocess bridge.",
             "",
@@ -79,19 +87,19 @@
             ],
             [
               "aConnection",
-              "XConnection",
+              "connection_x_connection_i",
               "in"
             ],
             [
               "anInstanceProvider",
-              "XInstanceProvider",
+              "x_instance_provider_i",
               "in"
             ]
           ]
         },
         {
           "name": "getBridge",
-          "returns": "XBridge",
+          "returns": "x_bridge_i",
           "desc": [
             "tries to get a bridge by this name.",
             "",
@@ -108,7 +116,7 @@
         },
         {
           "name": "getExistingBridges",
-          "returns": "typing.List[XBridge]",
+          "returns": "typing.List[x_bridge_i]",
           "desc": [
             "returns the sequence of all named and unnamed UNO interprocess bridges that are instantiated at the time the call is made."
           ],

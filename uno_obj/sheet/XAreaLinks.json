@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XAreaLinks",
   "type": "interface",
   "namespace": "com.sun.star.sheet",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,17 +16,22 @@
     "from_imports": [
       [
         "..container.x_index_access",
-        "XIndexAccess"
+        "XIndexAccess",
+        "container_x_index_access_i"
       ]
     ],
     "from_imports_typing": [
       [
         "..table.cell_address",
-        "CellAddress"
+        "CellAddress",
+        "table_cell_address_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.container.XIndexAccess": "container_x_index_access_i"
+    },
     "quote": [
-      "CellAddress"
+      "table_cell_address_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -53,7 +59,7 @@
           "args": [
             [
               "aDestPos",
-              "CellAddress",
+              "table_cell_address_i",
               "in"
             ],
             [

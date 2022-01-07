@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XAnnotation",
   "type": "interface",
   "namespace": "com.sun.star.office",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,37 +15,47 @@
   "data": {
     "from_imports": [
       [
-        "..lang.x_component",
-        "XComponent"
+        "..beans.x_property_set",
+        "XPropertySet",
+        "beans_x_property_set_i"
       ],
       [
-        "..beans.x_property_set",
-        "XPropertySet"
+        "..lang.x_component",
+        "XComponent",
+        "lang_x_component_i"
       ]
     ],
     "from_imports_typing": [
       [
-        "..geometry.real_point2_d",
-        "RealPoint2D"
+        "..geometry.real_size2_d",
+        "RealSize2D",
+        "geometry_real_size2_d_i"
       ],
       [
         "..util.date_time",
-        "DateTime"
+        "DateTime",
+        "util_date_time_i"
+      ],
+      [
+        "..geometry.real_point2_d",
+        "RealPoint2D",
+        "geometry_real_point2_d_i"
       ],
       [
         "..text.x_text",
-        "XText"
-      ],
-      [
-        "..geometry.real_size2_d",
-        "RealSize2D"
+        "XText",
+        "text_x_text_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.beans.XPropertySet": "beans_x_property_set_i",
+      "com.sun.star.lang.XComponent": "lang_x_component_i"
+    },
     "quote": [
-      "RealSize2D",
-      "DateTime",
-      "XText",
-      "RealPoint2D"
+      "geometry_real_size2_d_i",
+      "util_date_time_i",
+      "text_x_text_i",
+      "geometry_real_point2_d_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -81,7 +92,7 @@
         },
         {
           "name": "DateTime",
-          "returns": "DateTime",
+          "returns": "util_date_time_i",
           "desc": [
             "stores the date and time this annotation was last edited."
           ],
@@ -99,7 +110,7 @@
         },
         {
           "name": "Position",
-          "returns": "RealPoint2D",
+          "returns": "geometry_real_point2_d_i",
           "desc": [
             "this is an optional position that gives the user interface a hint where the annotation should be rendered.",
             "",
@@ -110,7 +121,7 @@
         },
         {
           "name": "Size",
-          "returns": "RealSize2D",
+          "returns": "geometry_real_size2_d_i",
           "desc": [
             "this is an optional size that gives the user interface a hint how large the annotation should be rendered."
           ],
@@ -119,7 +130,7 @@
         },
         {
           "name": "TextRange",
-          "returns": "XText",
+          "returns": "text_x_text_i",
           "desc": [
             "gives access to the annotations text."
           ],

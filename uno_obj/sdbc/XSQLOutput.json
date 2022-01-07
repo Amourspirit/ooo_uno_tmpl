@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XSQLOutput",
   "type": "interface",
   "namespace": "com.sun.star.sdbc",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,63 +16,77 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
-        ".x_struct",
-        "XStruct"
-      ],
-      [
-        ".x_clob",
-        "XClob"
-      ],
-      [
-        "..io.x_input_stream",
-        "XInputStream"
-      ],
-      [
-        "..util.date_time",
-        "DateTime"
-      ],
-      [
         ".x_array",
-        "XArray"
-      ],
-      [
-        ".x_blob",
-        "XBlob"
-      ],
-      [
-        ".x_ref",
-        "XRef"
-      ],
-      [
-        ".xsql_data",
-        "XSQLData"
+        "XArray",
+        "x_array_i"
       ],
       [
         "..util.time",
-        "Time"
+        "Time",
+        "util_time_i"
+      ],
+      [
+        "..util.date_time",
+        "DateTime",
+        "util_date_time_i"
+      ],
+      [
+        ".x_blob",
+        "XBlob",
+        "x_blob_i"
+      ],
+      [
+        ".x_ref",
+        "XRef",
+        "x_ref_i"
       ],
       [
         "..util.date",
-        "Date"
+        "Date",
+        "util_date_i"
+      ],
+      [
+        ".xsql_data",
+        "XSQLData",
+        "xsql_data_i"
+      ],
+      [
+        "..io.x_input_stream",
+        "XInputStream",
+        "io_x_input_stream_i"
+      ],
+      [
+        ".x_clob",
+        "XClob",
+        "x_clob_i"
+      ],
+      [
+        ".x_struct",
+        "XStruct",
+        "x_struct_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "XSQLData",
-      "XArray",
-      "Time",
-      "XClob",
-      "XStruct",
-      "Date",
-      "XRef",
-      "XBlob",
-      "XInputStream",
+      "x_clob_i",
+      "util_date_time_i",
+      "x_blob_i",
+      "x_array_i",
+      "util_date_i",
+      "x_struct_i",
       "typing.List[int]",
-      "DateTime"
+      "xsql_data_i",
+      "io_x_input_stream_i",
+      "x_ref_i",
+      "util_time_i"
     ],
     "typings": [
       "typing.List[int]"
@@ -106,7 +121,7 @@
           "args": [
             [
               "x",
-              "XArray",
+              "x_array_i",
               "in"
             ]
           ]
@@ -123,7 +138,7 @@
           "args": [
             [
               "x",
-              "XInputStream",
+              "io_x_input_stream_i",
               "in"
             ]
           ]
@@ -140,7 +155,7 @@
           "args": [
             [
               "x",
-              "XBlob",
+              "x_blob_i",
               "in"
             ]
           ]
@@ -208,7 +223,7 @@
           "args": [
             [
               "x",
-              "XInputStream",
+              "io_x_input_stream_i",
               "in"
             ]
           ]
@@ -225,7 +240,7 @@
           "args": [
             [
               "x",
-              "XClob",
+              "x_clob_i",
               "in"
             ]
           ]
@@ -242,7 +257,7 @@
           "args": [
             [
               "x",
-              "Date",
+              "util_date_i",
               "in"
             ]
           ]
@@ -330,7 +345,7 @@
           "args": [
             [
               "x",
-              "XSQLData",
+              "xsql_data_i",
               "in"
             ]
           ]
@@ -347,7 +362,7 @@
           "args": [
             [
               "x",
-              "XRef",
+              "x_ref_i",
               "in"
             ]
           ]
@@ -398,7 +413,7 @@
           "args": [
             [
               "x",
-              "XStruct",
+              "x_struct_i",
               "in"
             ]
           ]
@@ -415,7 +430,7 @@
           "args": [
             [
               "x",
-              "Time",
+              "util_time_i",
               "in"
             ]
           ]
@@ -432,7 +447,7 @@
           "args": [
             [
               "x",
-              "DateTime",
+              "util_date_time_i",
               "in"
             ]
           ]

@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XExternalDocLink",
   "type": "interface",
   "namespace": "com.sun.star.sheet",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,25 +16,34 @@
     "from_imports": [
       [
         "..container.x_index_access",
-        "XIndexAccess"
-      ],
-      [
-        "..container.x_name_access",
-        "XNameAccess"
+        "XIndexAccess",
+        "container_x_index_access_i"
       ],
       [
         "..container.x_enumeration_access",
-        "XEnumerationAccess"
+        "XEnumerationAccess",
+        "container_x_enumeration_access_i"
+      ],
+      [
+        "..container.x_name_access",
+        "XNameAccess",
+        "container_x_name_access_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_external_sheet_cache",
-        "XExternalSheetCache"
+        "XExternalSheetCache",
+        "x_external_sheet_cache_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.container.XIndexAccess": "container_x_index_access_i",
+      "com.sun.star.container.XEnumerationAccess": "container_x_enumeration_access_i",
+      "com.sun.star.container.XNameAccess": "container_x_name_access_i"
+    },
     "quote": [
-      "XExternalSheetCache"
+      "x_external_sheet_cache_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -41,9 +51,9 @@
     "imports": [],
     "namespace": "com.sun.star.sheet",
     "extends": [
-      "com.sun.star.container.XNameAccess",
       "com.sun.star.container.XIndexAccess",
-      "com.sun.star.container.XEnumerationAccess"
+      "com.sun.star.container.XEnumerationAccess",
+      "com.sun.star.container.XNameAccess"
     ],
     "desc": [
       "Primary interface for the com.sun.star.sheet.ExternalDocLink service.",
@@ -57,7 +67,7 @@
       "methods": [
         {
           "name": "addSheetCache",
-          "returns": "XExternalSheetCache",
+          "returns": "x_external_sheet_cache_i",
           "desc": [
             "This method adds a new sheet cache instance to the external document link for a specified sheet name. If a sheet cache instance already exists for the specified name, then the existing instance is returned.",
             "",

@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XIeeeFloatReadOnlyBitmap",
   "type": "interface",
   "namespace": "com.sun.star.rendering",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,28 +16,35 @@
     "from_imports": [
       [
         ".x_bitmap",
-        "XBitmap"
+        "XBitmap",
+        "x_bitmap_i"
       ]
     ],
     "from_imports_typing": [
       [
+        ".floating_point_bitmap_layout",
+        "FloatingPointBitmapLayout",
+        "floating_point_bitmap_layout_i"
+      ],
+      [
         "..geometry.integer_rectangle2_d",
-        "IntegerRectangle2D"
+        "IntegerRectangle2D",
+        "geometry_integer_rectangle2_d_i"
       ],
       [
         "..geometry.integer_point2_d",
-        "IntegerPoint2D"
-      ],
-      [
-        ".floating_point_bitmap_layout",
-        "FloatingPointBitmapLayout"
+        "IntegerPoint2D",
+        "geometry_integer_point2_d_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.rendering.XBitmap": "x_bitmap_i"
+    },
     "quote": [
-      "FloatingPointBitmapLayout",
-      "IntegerPoint2D",
+      "geometry_integer_point2_d_i",
       "typing.List[float]",
-      "IntegerRectangle2D"
+      "floating_point_bitmap_layout_i",
+      "geometry_integer_rectangle2_d_i"
     ],
     "typings": [
       "typing.List[float]"
@@ -77,19 +85,19 @@
           "args": [
             [
               "bitmapLayout",
-              "FloatingPointBitmapLayout",
+              "floating_point_bitmap_layout_i",
               "out"
             ],
             [
               "rect",
-              "IntegerRectangle2D",
+              "geometry_integer_rectangle2_d_i",
               "in"
             ]
           ]
         },
         {
           "name": "getMemoryLayout",
-          "returns": "FloatingPointBitmapLayout",
+          "returns": "floating_point_bitmap_layout_i",
           "desc": [
             "Query the memory layout for this bitmap.",
             "",
@@ -113,12 +121,12 @@
           "args": [
             [
               "bitmapLayout",
-              "FloatingPointBitmapLayout",
+              "floating_point_bitmap_layout_i",
               "out"
             ],
             [
               "pos",
-              "IntegerPoint2D",
+              "geometry_integer_point2_d_i",
               "in"
             ]
           ]

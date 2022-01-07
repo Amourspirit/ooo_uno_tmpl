@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XReportControlModel",
   "type": "interface",
   "namespace": "com.sun.star.report",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,30 +15,41 @@
   "data": {
     "from_imports": [
       [
-        ".x_report_control_format",
-        "XReportControlFormat"
+        "..container.x_index_container",
+        "XIndexContainer",
+        "container_x_index_container_i"
       ],
       [
         "..container.x_container",
-        "XContainer"
-      ],
-      [
-        "..container.x_index_container",
-        "XIndexContainer"
+        "XContainer",
+        "container_x_container_i"
       ],
       [
         ".x_report_component",
-        "XReportComponent"
+        "XReportComponent",
+        "x_report_component_i"
+      ],
+      [
+        ".x_report_control_format",
+        "XReportControlFormat",
+        "x_report_control_format_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_format_condition",
-        "XFormatCondition"
+        "XFormatCondition",
+        "x_format_condition_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.container.XIndexContainer": "container_x_index_container_i",
+      "com.sun.star.container.XContainer": "container_x_container_i",
+      "com.sun.star.report.XReportComponent": "x_report_component_i",
+      "com.sun.star.report.XReportControlFormat": "x_report_control_format_i"
+    },
     "quote": [
-      "XFormatCondition"
+      "x_format_condition_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -45,10 +57,10 @@
     "imports": [],
     "namespace": "com.sun.star.report",
     "extends": [
-      "com.sun.star.report.XReportComponent",
-      "com.sun.star.report.XReportControlFormat",
+      "com.sun.star.container.XIndexContainer",
       "com.sun.star.container.XContainer",
-      "com.sun.star.container.XIndexContainer"
+      "com.sun.star.report.XReportComponent",
+      "com.sun.star.report.XReportControlFormat"
     ],
     "desc": [],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1report_1_1XReportControlModel.html",
@@ -56,7 +68,7 @@
       "methods": [
         {
           "name": "createFormatCondition",
-          "returns": "XFormatCondition",
+          "returns": "x_format_condition_i",
           "desc": [
             "Creates a format condition."
           ],

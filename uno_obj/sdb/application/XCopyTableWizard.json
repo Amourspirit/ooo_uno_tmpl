@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XCopyTableWizard",
   "type": "interface",
   "namespace": "com.sun.star.sdb.application",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,17 +16,22 @@
     "from_imports": [
       [
         "...ui.dialogs.x_executable_dialog",
-        "XExecutableDialog"
+        "XExecutableDialog",
+        "ui_dialogs_x_executable_dialog_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_copy_table_listener",
-        "XCopyTableListener"
+        "XCopyTableListener",
+        "x_copy_table_listener_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.ui.dialogs.XExecutableDialog": "ui_dialogs_x_executable_dialog_i"
+    },
     "quote": [
-      "XCopyTableListener"
+      "x_copy_table_listener_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -59,7 +65,7 @@
           "args": [
             [
               "Listener",
-              "XCopyTableListener",
+              "x_copy_table_listener_i",
               "in"
             ]
           ]
@@ -74,7 +80,7 @@
           "args": [
             [
               "Listener",
-              "XCopyTableListener",
+              "x_copy_table_listener_i",
               "in"
             ]
           ]

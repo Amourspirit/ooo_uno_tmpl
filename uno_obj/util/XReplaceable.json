@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XReplaceable",
   "type": "interface",
   "namespace": "com.sun.star.util",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,22 +16,28 @@
     "from_imports": [
       [
         ".x_searchable",
-        "XSearchable"
+        "XSearchable",
+        "x_searchable_i"
       ]
     ],
     "from_imports_typing": [
       [
-        ".x_search_descriptor",
-        "XSearchDescriptor"
+        ".x_replace_descriptor",
+        "XReplaceDescriptor",
+        "x_replace_descriptor_i"
       ],
       [
-        ".x_replace_descriptor",
-        "XReplaceDescriptor"
+        ".x_search_descriptor",
+        "XSearchDescriptor",
+        "x_search_descriptor_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.util.XSearchable": "x_searchable_i"
+    },
     "quote": [
-      "XReplaceDescriptor",
-      "XSearchDescriptor"
+      "x_replace_descriptor_i",
+      "x_search_descriptor_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -50,7 +57,7 @@
       "methods": [
         {
           "name": "createReplaceDescriptor",
-          "returns": "XReplaceDescriptor",
+          "returns": "x_replace_descriptor_i",
           "desc": [
             "creates a descriptor which contains properties that specify a search in this container."
           ],
@@ -67,7 +74,7 @@
           "args": [
             [
               "xDesc",
-              "XSearchDescriptor",
+              "x_search_descriptor_i",
               "in"
             ]
           ]

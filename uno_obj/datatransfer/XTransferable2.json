@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XTransferable2",
   "type": "interface",
   "namespace": "com.sun.star.datatransfer",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,17 +16,22 @@
     "from_imports": [
       [
         ".x_transferable",
-        "XTransferable"
+        "XTransferable",
+        "x_transferable_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".data_flavor",
-        "DataFlavor"
+        "DataFlavor",
+        "data_flavor_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.datatransfer.XTransferable": "x_transferable_i"
+    },
     "quote": [
-      "DataFlavor"
+      "data_flavor_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -57,7 +63,7 @@
           "args": [
             [
               "aFlavor",
-              "DataFlavor",
+              "data_flavor_i",
               "in"
             ],
             [

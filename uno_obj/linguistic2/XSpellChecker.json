@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XSpellChecker",
   "type": "interface",
   "namespace": "com.sun.star.linguistic2",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,27 +16,34 @@
     "from_imports": [
       [
         ".x_supported_locales",
-        "XSupportedLocales"
+        "XSupportedLocales",
+        "x_supported_locales_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_spell_alternatives",
-        "XSpellAlternatives"
+        "XSpellAlternatives",
+        "x_spell_alternatives_i"
       ],
       [
         "..beans.property_values",
-        "PropertyValues"
+        "PropertyValues",
+        "beans_property_values_i"
       ],
       [
         "..lang.locale",
-        "Locale"
+        "Locale",
+        "lang_locale_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.linguistic2.XSupportedLocales": "x_supported_locales_i"
+    },
     "quote": [
-      "PropertyValues",
-      "Locale",
-      "XSpellAlternatives"
+      "beans_property_values_i",
+      "lang_locale_i",
+      "x_spell_alternatives_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -72,19 +80,19 @@
             ],
             [
               "aLocale",
-              "Locale",
+              "lang_locale_i",
               "in"
             ],
             [
               "aProperties",
-              "PropertyValues",
+              "beans_property_values_i",
               "in"
             ]
           ]
         },
         {
           "name": "spell",
-          "returns": "XSpellAlternatives",
+          "returns": "x_spell_alternatives_i",
           "desc": [
             "This method checks if a word is spelled correctly in a given language.",
             "",
@@ -101,12 +109,12 @@
             ],
             [
               "aLocale",
-              "Locale",
+              "lang_locale_i",
               "in"
             ],
             [
               "aProperties",
-              "PropertyValues",
+              "beans_property_values_i",
               "in"
             ]
           ]

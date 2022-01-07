@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XConfigurationController",
   "type": "interface",
   "namespace": "com.sun.star.drawing.framework",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,41 +15,53 @@
   "data": {
     "from_imports": [
       [
+        ".x_configuration_controller_request_queue",
+        "XConfigurationControllerRequestQueue",
+        "x_configuration_controller_request_queue_i"
+      ],
+      [
         ".x_resource_factory_manager",
-        "XResourceFactoryManager"
+        "XResourceFactoryManager",
+        "x_resource_factory_manager_i"
       ],
       [
         ".x_configuration_controller_broadcaster",
-        "XConfigurationControllerBroadcaster"
-      ],
-      [
-        ".x_configuration_controller_request_queue",
-        "XConfigurationControllerRequestQueue"
+        "XConfigurationControllerBroadcaster",
+        "x_configuration_controller_broadcaster_i"
       ]
     ],
     "from_imports_typing": [
       [
-        ".x_resource",
-        "XResource"
-      ],
-      [
         ".x_resource_id",
-        "XResourceId"
+        "XResourceId",
+        "x_resource_id_i"
       ],
       [
         ".resource_activation_mode",
-        "ResourceActivationMode"
+        "ResourceActivationMode",
+        "resource_activation_mode_i"
+      ],
+      [
+        ".x_resource",
+        "XResource",
+        "x_resource_i"
       ],
       [
         ".x_configuration",
-        "XConfiguration"
+        "XConfiguration",
+        "x_configuration_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.drawing.framework.XConfigurationControllerRequestQueue": "x_configuration_controller_request_queue_i",
+      "com.sun.star.drawing.framework.XResourceFactoryManager": "x_resource_factory_manager_i",
+      "com.sun.star.drawing.framework.XConfigurationControllerBroadcaster": "x_configuration_controller_broadcaster_i"
+    },
     "quote": [
-      "XResourceId",
-      "ResourceActivationMode",
-      "XResource",
-      "XConfiguration"
+      "resource_activation_mode_i",
+      "x_resource_i",
+      "x_resource_id_i",
+      "x_configuration_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -57,8 +70,8 @@
     "namespace": "com.sun.star.drawing.framework",
     "extends": [
       "com.sun.star.drawing.framework.XConfigurationControllerRequestQueue",
-      "com.sun.star.drawing.framework.XConfigurationControllerBroadcaster",
-      "com.sun.star.drawing.framework.XResourceFactoryManager"
+      "com.sun.star.drawing.framework.XResourceFactoryManager",
+      "com.sun.star.drawing.framework.XConfigurationControllerBroadcaster"
     ],
     "desc": [
       "The configuration controller is responsible for the management of the set of active resources.",
@@ -76,7 +89,7 @@
       "methods": [
         {
           "name": "getCurrentConfiguration",
-          "returns": "XConfiguration",
+          "returns": "x_configuration_i",
           "desc": [
             "Return a copy of the current configuration.",
             "",
@@ -87,7 +100,7 @@
         },
         {
           "name": "getRequestedConfiguration",
-          "returns": "XConfiguration",
+          "returns": "x_configuration_i",
           "desc": [
             "Return a copy of the requested configuration.",
             "",
@@ -98,7 +111,7 @@
         },
         {
           "name": "getResource",
-          "returns": "XResource",
+          "returns": "x_resource_i",
           "desc": [
             "Return the active resource specified by the given resource id."
           ],
@@ -106,7 +119,7 @@
           "args": [
             [
               "xResourceId",
-              "XResourceId",
+              "x_resource_id_i",
               "in"
             ]
           ]
@@ -140,12 +153,12 @@
           "args": [
             [
               "xResourceId",
-              "XResourceId",
+              "x_resource_id_i",
               "in"
             ],
             [
               "eMode",
-              "ResourceActivationMode",
+              "resource_activation_mode_i",
               "in"
             ]
           ]
@@ -164,7 +177,7 @@
           "args": [
             [
               "xResourceId",
-              "XResourceId",
+              "x_resource_id_i",
               "in"
             ]
           ]
@@ -185,7 +198,7 @@
           "args": [
             [
               "xConfiguration",
-              "XConfiguration",
+              "x_configuration_i",
               "in"
             ]
           ]

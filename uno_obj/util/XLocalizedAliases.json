@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XLocalizedAliases",
   "type": "interface",
   "namespace": "com.sun.star.util",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,25 +16,31 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
-        ".alias_programmatic_pair",
-        "AliasProgrammaticPair"
+        "..lang.locale",
+        "Locale",
+        "lang_locale_i"
       ],
       [
-        "..lang.locale",
-        "Locale"
+        ".alias_programmatic_pair",
+        "AliasProgrammaticPair",
+        "alias_programmatic_pair_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "typing.List[AliasProgrammaticPair]",
-      "Locale"
+      "lang_locale_i",
+      "typing.List[alias_programmatic_pair_i]"
     ],
     "typings": [
-      "typing.List[AliasProgrammaticPair]"
+      "typing.List[alias_programmatic_pair_i]"
     ],
     "requires_typing": true,
     "name": "XLocalizedAliases",
@@ -67,7 +74,7 @@
             ],
             [
               "locale",
-              "Locale",
+              "lang_locale_i",
               "in"
             ],
             [
@@ -79,7 +86,7 @@
         },
         {
           "name": "listAliases",
-          "returns": "typing.List[AliasProgrammaticPair]",
+          "returns": "typing.List[alias_programmatic_pair_i]",
           "desc": [
             "retrieves a list of all registered aliases for a certain language."
           ],
@@ -87,7 +94,7 @@
           "args": [
             [
               "locale",
-              "Locale",
+              "lang_locale_i",
               "in"
             ]
           ]
@@ -104,7 +111,7 @@
           "args": [
             [
               "locale",
-              "Locale",
+              "lang_locale_i",
               "in"
             ],
             [
@@ -126,7 +133,7 @@
           "args": [
             [
               "locale",
-              "Locale",
+              "lang_locale_i",
               "in"
             ],
             [
@@ -172,7 +179,7 @@
           "args": [
             [
               "locale",
-              "Locale",
+              "lang_locale_i",
               "in"
             ],
             [
@@ -199,7 +206,7 @@
           "args": [
             [
               "locale",
-              "Locale",
+              "lang_locale_i",
               "in"
             ],
             [

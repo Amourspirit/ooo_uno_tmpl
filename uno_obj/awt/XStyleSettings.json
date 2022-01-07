@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XStyleSettings",
   "type": "interface",
   "namespace": "com.sun.star.awt",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -16,21 +17,25 @@
     "from_imports_typing": [
       [
         ".x_style_change_listener",
-        "XStyleChangeListener"
+        "XStyleChangeListener",
+        "x_style_change_listener_i"
       ],
       [
         ".font_descriptor",
-        "FontDescriptor"
+        "FontDescriptor",
+        "font_descriptor_i"
       ],
       [
         "..util.color",
-        "Color"
+        "Color",
+        "util_color_i"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "FontDescriptor",
-      "XStyleChangeListener",
-      "Color"
+      "font_descriptor_i",
+      "x_style_change_listener_i",
+      "util_color_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -58,7 +63,7 @@
           "args": [
             [
               "Listener",
-              "XStyleChangeListener",
+              "x_style_change_listener_i",
               "in"
             ]
           ]
@@ -73,7 +78,7 @@
           "args": [
             [
               "Listener",
-              "XStyleChangeListener",
+              "x_style_change_listener_i",
               "in"
             ]
           ]
@@ -82,7 +87,7 @@
       "properties": [
         {
           "name": "ActiveBorderColor",
-          "returns": "Color",
+          "returns": "util_color_i",
           "desc": [
             "specifies the color of the border of active windows"
           ],
@@ -91,14 +96,14 @@
         },
         {
           "name": "ActiveColor",
-          "returns": "Color",
+          "returns": "util_color_i",
           "desc": [],
           "raises_get": "",
           "raises_set": ""
         },
         {
           "name": "ActiveTabColor",
-          "returns": "Color",
+          "returns": "util_color_i",
           "desc": [
             "specifies the color of the active tab of a tab control"
           ],
@@ -107,7 +112,7 @@
         },
         {
           "name": "ActiveTextColor",
-          "returns": "Color",
+          "returns": "util_color_i",
           "desc": [
             "specifies the text color for active UI components"
           ],
@@ -116,7 +121,7 @@
         },
         {
           "name": "ApplicationFont",
-          "returns": "FontDescriptor",
+          "returns": "font_descriptor_i",
           "desc": [
             "specifies the application font"
           ],
@@ -125,7 +130,7 @@
         },
         {
           "name": "ButtonRolloverTextColor",
-          "returns": "Color",
+          "returns": "util_color_i",
           "desc": [
             "specifies the color to use for text on buttons which are hovered with the mouse"
           ],
@@ -134,7 +139,7 @@
         },
         {
           "name": "ButtonTextColor",
-          "returns": "Color",
+          "returns": "util_color_i",
           "desc": [
             "specifies the color to use for text on buttons"
           ],
@@ -143,14 +148,14 @@
         },
         {
           "name": "CheckedColor",
-          "returns": "Color",
+          "returns": "util_color_i",
           "desc": [],
           "raises_get": "",
           "raises_set": ""
         },
         {
           "name": "DarkShadowColor",
-          "returns": "Color",
+          "returns": "util_color_i",
           "desc": [
             "specifies the dark portion of the shadow to use for UI elements"
           ],
@@ -159,7 +164,7 @@
         },
         {
           "name": "DeactiveBorderColor",
-          "returns": "Color",
+          "returns": "util_color_i",
           "desc": [
             "specifies the color of the border of inactive windows"
           ],
@@ -168,14 +173,14 @@
         },
         {
           "name": "DeactiveColor",
-          "returns": "Color",
+          "returns": "util_color_i",
           "desc": [],
           "raises_get": "",
           "raises_set": ""
         },
         {
           "name": "DeactiveTextColor",
-          "returns": "Color",
+          "returns": "util_color_i",
           "desc": [
             "specifies the text color for inactive UI components"
           ],
@@ -184,7 +189,7 @@
         },
         {
           "name": "DialogColor",
-          "returns": "Color",
+          "returns": "util_color_i",
           "desc": [
             "specifies the background color of dialogs"
           ],
@@ -193,7 +198,7 @@
         },
         {
           "name": "DialogTextColor",
-          "returns": "Color",
+          "returns": "util_color_i",
           "desc": [
             "specifies the text color of dialogs"
           ],
@@ -202,7 +207,7 @@
         },
         {
           "name": "DisableColor",
-          "returns": "Color",
+          "returns": "util_color_i",
           "desc": [
             "specifies the text color for disabled UI elements"
           ],
@@ -211,21 +216,21 @@
         },
         {
           "name": "FaceColor",
-          "returns": "Color",
+          "returns": "util_color_i",
           "desc": [],
           "raises_get": "",
           "raises_set": ""
         },
         {
           "name": "FaceGradientColor",
-          "returns": "Color",
+          "returns": "util_color_i",
           "desc": [],
           "raises_get": "",
           "raises_set": ""
         },
         {
           "name": "FieldColor",
-          "returns": "Color",
+          "returns": "util_color_i",
           "desc": [
             "specifies the background color for dialog input controls"
           ],
@@ -234,7 +239,7 @@
         },
         {
           "name": "FieldFont",
-          "returns": "FontDescriptor",
+          "returns": "font_descriptor_i",
           "desc": [
             "specifies the font for dialog input controls"
           ],
@@ -243,7 +248,7 @@
         },
         {
           "name": "FieldRolloverTextColor",
-          "returns": "Color",
+          "returns": "util_color_i",
           "desc": [
             "specifies the text color for dialog input controls which are hovered with the mouse"
           ],
@@ -252,7 +257,7 @@
         },
         {
           "name": "FieldTextColor",
-          "returns": "Color",
+          "returns": "util_color_i",
           "desc": [
             "specifies the text color for dialog input controls"
           ],
@@ -261,7 +266,7 @@
         },
         {
           "name": "FloatTitleFont",
-          "returns": "FontDescriptor",
+          "returns": "font_descriptor_i",
           "desc": [
             "specifies the font to use the title of floating windows"
           ],
@@ -270,7 +275,7 @@
         },
         {
           "name": "GroupFont",
-          "returns": "FontDescriptor",
+          "returns": "font_descriptor_i",
           "desc": [
             "specifies the font for dialog elements used for grouping other elements"
           ],
@@ -279,7 +284,7 @@
         },
         {
           "name": "GroupTextColor",
-          "returns": "Color",
+          "returns": "util_color_i",
           "desc": [
             "specifies the text color for dialog elements used for grouping other elements"
           ],
@@ -288,7 +293,7 @@
         },
         {
           "name": "HelpColor",
-          "returns": "Color",
+          "returns": "util_color_i",
           "desc": [
             "specifies the background color for dialog elements displaying help content"
           ],
@@ -297,7 +302,7 @@
         },
         {
           "name": "HelpFont",
-          "returns": "FontDescriptor",
+          "returns": "font_descriptor_i",
           "desc": [
             "specifies the help font"
           ],
@@ -306,7 +311,7 @@
         },
         {
           "name": "HelpTextColor",
-          "returns": "Color",
+          "returns": "util_color_i",
           "desc": [
             "specifies the text color for dialog elements displaying help content"
           ],
@@ -324,7 +329,7 @@
         },
         {
           "name": "HighlightColor",
-          "returns": "Color",
+          "returns": "util_color_i",
           "desc": [
             "specifies the background color for UI elements which are highlighted"
           ],
@@ -333,7 +338,7 @@
         },
         {
           "name": "HighlightTextColor",
-          "returns": "Color",
+          "returns": "util_color_i",
           "desc": [
             "specifies the text color for UI elements which are highlighted"
           ],
@@ -342,7 +347,7 @@
         },
         {
           "name": "InactiveTabColor",
-          "returns": "Color",
+          "returns": "util_color_i",
           "desc": [
             "specifies the color of inactive tabs of a tab control"
           ],
@@ -351,7 +356,7 @@
         },
         {
           "name": "LabelFont",
-          "returns": "FontDescriptor",
+          "returns": "font_descriptor_i",
           "desc": [
             "specifies the font for label controls"
           ],
@@ -360,7 +365,7 @@
         },
         {
           "name": "LabelTextColor",
-          "returns": "Color",
+          "returns": "util_color_i",
           "desc": [
             "specifies the text color of label elements in dialogs"
           ],
@@ -369,14 +374,14 @@
         },
         {
           "name": "LightColor",
-          "returns": "Color",
+          "returns": "util_color_i",
           "desc": [],
           "raises_get": "",
           "raises_set": ""
         },
         {
           "name": "MenuBarColor",
-          "returns": "Color",
+          "returns": "util_color_i",
           "desc": [
             "specifies the background color of menu bars"
           ],
@@ -385,7 +390,7 @@
         },
         {
           "name": "MenuBarTextColor",
-          "returns": "Color",
+          "returns": "util_color_i",
           "desc": [
             "specifies the text color of menu bars"
           ],
@@ -394,7 +399,7 @@
         },
         {
           "name": "MenuBorderColor",
-          "returns": "Color",
+          "returns": "util_color_i",
           "desc": [
             "specifies the border color of menus"
           ],
@@ -403,14 +408,14 @@
         },
         {
           "name": "MenuColor",
-          "returns": "Color",
+          "returns": "util_color_i",
           "desc": [],
           "raises_get": "",
           "raises_set": ""
         },
         {
           "name": "MenuFont",
-          "returns": "FontDescriptor",
+          "returns": "font_descriptor_i",
           "desc": [
             "specifies the font to use for menus"
           ],
@@ -419,7 +424,7 @@
         },
         {
           "name": "MenuHighlightColor",
-          "returns": "Color",
+          "returns": "util_color_i",
           "desc": [
             "specifies the background color of highlighted menu items"
           ],
@@ -428,7 +433,7 @@
         },
         {
           "name": "MenuHighlightTextColor",
-          "returns": "Color",
+          "returns": "util_color_i",
           "desc": [
             "specifies the text color of highlighted menu items"
           ],
@@ -437,14 +442,14 @@
         },
         {
           "name": "MenuTextColor",
-          "returns": "Color",
+          "returns": "util_color_i",
           "desc": [],
           "raises_get": "",
           "raises_set": ""
         },
         {
           "name": "MonoColor",
-          "returns": "Color",
+          "returns": "util_color_i",
           "desc": [
             "specifies the color to use for monochrome control elements such as flat borders of controls"
           ],
@@ -453,7 +458,7 @@
         },
         {
           "name": "PushButtonFont",
-          "returns": "FontDescriptor",
+          "returns": "font_descriptor_i",
           "desc": [
             "specifies the font of push buttons"
           ],
@@ -462,7 +467,7 @@
         },
         {
           "name": "RadioCheckFont",
-          "returns": "FontDescriptor",
+          "returns": "font_descriptor_i",
           "desc": [
             "specifies the font of radio buttons and check boxes"
           ],
@@ -471,7 +476,7 @@
         },
         {
           "name": "RadioCheckTextColor",
-          "returns": "Color",
+          "returns": "util_color_i",
           "desc": [
             "specifies the text color of radio buttons and check boxes"
           ],
@@ -480,7 +485,7 @@
         },
         {
           "name": "SeparatorColor",
-          "returns": "Color",
+          "returns": "util_color_i",
           "desc": [
             "specifies the color of separators between UI elements"
           ],
@@ -489,7 +494,7 @@
         },
         {
           "name": "ShadowColor",
-          "returns": "Color",
+          "returns": "util_color_i",
           "desc": [
             "specifies the color to use for UI elements"
           ],
@@ -498,7 +503,7 @@
         },
         {
           "name": "TitleFont",
-          "returns": "FontDescriptor",
+          "returns": "font_descriptor_i",
           "desc": [
             "specifies the font to use for window titles"
           ],
@@ -507,7 +512,7 @@
         },
         {
           "name": "ToolFont",
-          "returns": "FontDescriptor",
+          "returns": "font_descriptor_i",
           "desc": [
             "specifies the font to use for tool elements"
           ],
@@ -516,7 +521,7 @@
         },
         {
           "name": "WindowColor",
-          "returns": "Color",
+          "returns": "util_color_i",
           "desc": [
             "specifies the background color to use for non-dialog windows"
           ],
@@ -525,7 +530,7 @@
         },
         {
           "name": "WindowTextColor",
-          "returns": "Color",
+          "returns": "util_color_i",
           "desc": [
             "specifies the text color to use for non-dialog windows"
           ],
@@ -534,7 +539,7 @@
         },
         {
           "name": "WorkspaceColor",
-          "returns": "Color",
+          "returns": "util_color_i",
           "desc": [
             "specifies the background color to use for document workspaces"
           ],

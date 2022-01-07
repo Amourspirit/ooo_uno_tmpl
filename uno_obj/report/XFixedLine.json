@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XFixedLine",
   "type": "interface",
   "namespace": "com.sun.star.report",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,27 +16,34 @@
     "from_imports": [
       [
         ".x_report_control_model",
-        "XReportControlModel"
+        "XReportControlModel",
+        "x_report_control_model_i"
       ]
     ],
     "from_imports_typing": [
       [
+        "..drawing.line_style",
+        "LineStyle",
+        "drawing_line_style_i"
+      ],
+      [
         "..drawing.line_dash",
-        "LineDash"
+        "LineDash",
+        "drawing_line_dash_i"
       ],
       [
         "..util.color",
-        "Color"
-      ],
-      [
-        "..drawing.line_style",
-        "LineStyle"
+        "Color",
+        "util_color_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.report.XReportControlModel": "x_report_control_model_i"
+    },
     "quote": [
-      "LineDash",
-      "LineStyle",
-      "Color"
+      "drawing_line_dash_i",
+      "util_color_i",
+      "drawing_line_style_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -51,7 +59,7 @@
       "properties": [
         {
           "name": "LineColor",
-          "returns": "Color",
+          "returns": "util_color_i",
           "desc": [
             "This property contains the line color."
           ],
@@ -60,7 +68,7 @@
         },
         {
           "name": "LineDash",
-          "returns": "LineDash",
+          "returns": "drawing_line_dash_i",
           "desc": [
             "This property contains the dash of the line."
           ],
@@ -69,7 +77,7 @@
         },
         {
           "name": "LineStyle",
-          "returns": "LineStyle",
+          "returns": "drawing_line_style_i",
           "desc": [
             "This property contains the type of the line."
           ],

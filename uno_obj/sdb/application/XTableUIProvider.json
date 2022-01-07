@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XTableUIProvider",
   "type": "interface",
   "namespace": "com.sun.star.sdb.application",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -16,21 +17,25 @@
     "from_imports_typing": [
       [
         "...graphic.x_graphic",
-        "XGraphic"
-      ],
-      [
-        ".x_database_document_ui",
-        "XDatabaseDocumentUI"
+        "XGraphic",
+        "graphic_x_graphic_i"
       ],
       [
         "...uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
+      ],
+      [
+        ".x_database_document_ui",
+        "XDatabaseDocumentUI",
+        "x_database_document_ui_i"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "XGraphic",
-      "XDatabaseDocumentUI",
-      "XInterface"
+      "x_database_document_ui_i",
+      "uno_x_interface_i",
+      "graphic_x_graphic_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -50,7 +55,7 @@
       "methods": [
         {
           "name": "getTableEditor",
-          "returns": "XInterface",
+          "returns": "uno_x_interface_i",
           "desc": [
             "returns a component which can be used to edit the definition of an existing table."
           ],
@@ -61,7 +66,7 @@
           "args": [
             [
               "DocumentUI",
-              "XDatabaseDocumentUI",
+              "x_database_document_ui_i",
               "in"
             ],
             [
@@ -73,7 +78,7 @@
         },
         {
           "name": "getTableIcon",
-          "returns": "XGraphic",
+          "returns": "graphic_x_graphic_i",
           "desc": [
             "provides the icon which should be used to represent the table in the database application window.",
             "",

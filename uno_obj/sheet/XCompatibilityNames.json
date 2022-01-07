@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XCompatibilityNames",
   "type": "interface",
   "namespace": "com.sun.star.sheet",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,20 +16,25 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".localized_name",
-        "LocalizedName"
+        "LocalizedName",
+        "localized_name_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "typing.List[LocalizedName]"
+      "typing.List[localized_name_i]"
     ],
     "typings": [
-      "typing.List[LocalizedName]"
+      "typing.List[localized_name_i]"
     ],
     "requires_typing": true,
     "name": "XCompatibilityNames",
@@ -45,7 +51,7 @@
       "methods": [
         {
           "name": "getCompatibilityNames",
-          "returns": "typing.List[LocalizedName]",
+          "returns": "typing.List[localized_name_i]",
           "desc": [
             "returns the compatibility names of the specified function.",
             "",

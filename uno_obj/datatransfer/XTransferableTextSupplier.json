@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XTransferableTextSupplier",
   "type": "interface",
   "namespace": "com.sun.star.datatransfer",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,17 +16,20 @@
     "from_imports": [],
     "from_imports_typing": [
       [
-        "..text.x_text_range",
-        "XTextRange"
+        ".x_transferable",
+        "XTransferable",
+        "x_transferable_i"
       ],
       [
-        ".x_transferable",
-        "XTransferable"
+        "..text.x_text_range",
+        "XTextRange",
+        "text_x_text_range_i"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "XTransferable",
-      "XTextRange"
+      "x_transferable_i",
+      "text_x_text_range_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -44,7 +48,7 @@
       "methods": [
         {
           "name": "getTransferableForTextRange",
-          "returns": "XTransferable",
+          "returns": "x_transferable_i",
           "desc": [
             "Provide access to a transferable representation of a given text range."
           ],
@@ -52,7 +56,7 @@
           "args": [
             [
               "xRange",
-              "XTextRange",
+              "text_x_text_range_i",
               "in"
             ]
           ]

@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XConnectionPoint",
   "type": "interface",
   "namespace": "com.sun.star.lang",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,22 +16,27 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_connection_point_container",
-        "XConnectionPointContainer"
+        "XConnectionPointContainer",
+        "x_connection_point_container_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "XInterface",
-      "typing.List[XInterface]",
-      "XConnectionPointContainer"
+      "uno_x_interface_i",
+      "typing.List[uno_x_interface_i]",
+      "x_connection_point_container_i"
     ],
     "typings": [
-      "typing.List[XInterface]"
+      "typing.List[uno_x_interface_i]"
     ],
     "requires_typing": true,
     "name": "XConnectionPoint",
@@ -70,14 +76,14 @@
           "args": [
             [
               "xListener",
-              "XInterface",
+              "uno_x_interface_i",
               "in"
             ]
           ]
         },
         {
           "name": "getConnectionPointContainer",
-          "returns": "XConnectionPointContainer",
+          "returns": "x_connection_point_container_i",
           "desc": [],
           "raises": [],
           "args": []
@@ -93,7 +99,7 @@
         },
         {
           "name": "getConnections",
-          "returns": "typing.List[XInterface]",
+          "returns": "typing.List[uno_x_interface_i]",
           "desc": [],
           "raises": [],
           "args": []
@@ -110,7 +116,7 @@
           "args": [
             [
               "xListener",
-              "XInterface",
+              "uno_x_interface_i",
               "in"
             ]
           ]

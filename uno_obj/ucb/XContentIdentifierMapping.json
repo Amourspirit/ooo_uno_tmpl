@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XContentIdentifierMapping",
   "type": "interface",
   "namespace": "com.sun.star.ucb",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,22 +16,28 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
-        ".x_content_identifier",
-        "XContentIdentifier"
+        ".x_content",
+        "XContent",
+        "x_content_i"
       ],
       [
-        ".x_content",
-        "XContent"
+        ".x_content_identifier",
+        "XContentIdentifier",
+        "x_content_identifier_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "XContentIdentifier",
-      "XContent"
+      "x_content_i",
+      "x_content_identifier_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -52,7 +59,7 @@
       "methods": [
         {
           "name": "mapContent",
-          "returns": "XContent",
+          "returns": "x_content_i",
           "desc": [
             "Map the XContent identified by an XContentIdentifier."
           ],
@@ -60,14 +67,14 @@
           "args": [
             [
               "Source",
-              "XContent",
+              "x_content_i",
               "in"
             ]
           ]
         },
         {
           "name": "mapContentIdentifier",
-          "returns": "XContentIdentifier",
+          "returns": "x_content_identifier_i",
           "desc": [
             "Map an XContentIdentifier."
           ],
@@ -75,7 +82,7 @@
           "args": [
             [
               "Source",
-              "XContentIdentifier",
+              "x_content_identifier_i",
               "in"
             ]
           ]

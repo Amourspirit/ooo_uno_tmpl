@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XStorage",
   "type": "interface",
   "namespace": "com.sun.star.embed",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,27 +15,35 @@
   "data": {
     "from_imports": [
       [
-        "..lang.x_component",
-        "XComponent"
+        "..container.x_name_access",
+        "XNameAccess",
+        "container_x_name_access_i"
       ],
       [
-        "..container.x_name_access",
-        "XNameAccess"
+        "..lang.x_component",
+        "XComponent",
+        "lang_x_component_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_storage",
-        "XStorage"
+        "XStorage",
+        "x_storage_i"
       ],
       [
         "..io.x_stream",
-        "XStream"
+        "XStream",
+        "io_x_stream_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.container.XNameAccess": "container_x_name_access_i",
+      "com.sun.star.lang.XComponent": "lang_x_component_i"
+    },
     "quote": [
-      "XStorage",
-      "XStream"
+      "io_x_stream_i",
+      "x_storage_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -53,7 +62,7 @@
       "methods": [
         {
           "name": "cloneEncryptedStreamElement",
-          "returns": "XStream",
+          "returns": "io_x_stream_i",
           "desc": [
             "allows to get readonly copy of a child encrypted stream with password.",
             "",
@@ -86,7 +95,7 @@
         },
         {
           "name": "cloneStreamElement",
-          "returns": "XStream",
+          "returns": "io_x_stream_i",
           "desc": [
             "allows to get readonly copy of a child stream of the storage.",
             "",
@@ -131,7 +140,7 @@
             ],
             [
               "xDest",
-              "XStorage",
+              "x_storage_i",
               "in"
             ],
             [
@@ -158,7 +167,7 @@
           "args": [
             [
               "xTargetStorage",
-              "XStorage",
+              "x_storage_i",
               "in"
             ]
           ]
@@ -185,7 +194,7 @@
             ],
             [
               "xTargetStorage",
-              "XStorage",
+              "x_storage_i",
               "in"
             ]
           ]
@@ -207,7 +216,7 @@
           "args": [
             [
               "xDest",
-              "XStorage",
+              "x_storage_i",
               "in"
             ]
           ]
@@ -278,7 +287,7 @@
             ],
             [
               "xDest",
-              "XStorage",
+              "x_storage_i",
               "in"
             ],
             [
@@ -290,7 +299,7 @@
         },
         {
           "name": "openEncryptedStreamElement",
-          "returns": "XStream",
+          "returns": "io_x_stream_i",
           "desc": [
             "allows to get access to a child encrypted stream with password.",
             "",
@@ -326,7 +335,7 @@
         },
         {
           "name": "openStorageElement",
-          "returns": "XStorage",
+          "returns": "x_storage_i",
           "desc": [
             "allows to get access to a child storage.",
             "",
@@ -353,7 +362,7 @@
         },
         {
           "name": "openStreamElement",
-          "returns": "XStream",
+          "returns": "io_x_stream_i",
           "desc": [
             "allows to get access to a child stream of the storage.",
             "",

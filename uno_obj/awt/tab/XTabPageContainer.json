@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XTabPageContainer",
   "type": "interface",
   "namespace": "com.sun.star.awt.tab",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -16,16 +17,19 @@
     "from_imports_typing": [
       [
         ".x_tab_page",
-        "XTabPage"
+        "XTabPage",
+        "x_tab_page_i"
       ],
       [
         ".x_tab_page_container_listener",
-        "XTabPageContainerListener"
+        "XTabPageContainerListener",
+        "x_tab_page_container_listener_i"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "XTabPageContainerListener",
-      "XTabPage"
+      "x_tab_page_container_listener_i",
+      "x_tab_page_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -53,14 +57,14 @@
           "args": [
             [
               "listener",
-              "XTabPageContainerListener",
+              "x_tab_page_container_listener_i",
               "in"
             ]
           ]
         },
         {
           "name": "getTabPage",
-          "returns": "XTabPage",
+          "returns": "x_tab_page_i",
           "desc": [
             "Returns tab page for the given index."
           ],
@@ -75,7 +79,7 @@
         },
         {
           "name": "getTabPageByID",
-          "returns": "XTabPage",
+          "returns": "x_tab_page_i",
           "desc": [
             "Returns tab page for the given ID."
           ],
@@ -122,7 +126,7 @@
           "args": [
             [
               "listener",
-              "XTabPageContainerListener",
+              "x_tab_page_container_listener_i",
               "in"
             ]
           ]

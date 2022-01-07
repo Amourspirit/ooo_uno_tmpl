@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XAnimate",
   "type": "interface",
   "namespace": "com.sun.star.animations",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,22 +16,27 @@
     "from_imports": [
       [
         ".x_animation_node",
-        "XAnimationNode"
+        "XAnimationNode",
+        "x_animation_node_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".time_filter_pair",
-        "TimeFilterPair"
+        "TimeFilterPair",
+        "time_filter_pair_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.animations.XAnimationNode": "x_animation_node_i"
+    },
     "quote": [
-      "typing.List[TimeFilterPair]",
+      "typing.List[time_filter_pair_i]",
       "typing.List[object]",
       "typing.List[float]"
     ],
     "typings": [
-      "typing.List[TimeFilterPair]",
+      "typing.List[time_filter_pair_i]",
       "typing.List[object]",
       "typing.List[float]"
     ],
@@ -56,7 +62,7 @@
         },
         {
           "name": "TimeFilter",
-          "returns": "typing.List[TimeFilterPair]",
+          "returns": "typing.List[time_filter_pair_i]",
           "desc": [
             "todo: timeFilter=\\\"0,0; 0.14,0.36; 0.43,0.73; 0.71,0.91; 1.0,1.0\\\" ?"
           ],

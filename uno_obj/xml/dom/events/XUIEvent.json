@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XUIEvent",
   "type": "interface",
   "namespace": "com.sun.star.xml.dom.events",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,17 +16,22 @@
     "from_imports": [
       [
         ".x_event",
-        "XEvent"
+        "XEvent",
+        "x_event_i"
       ]
     ],
     "from_imports_typing": [
       [
         "..views.x_abstract_view",
-        "XAbstractView"
+        "XAbstractView",
+        "views_x_abstract_view_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.xml.dom.events.XEvent": "x_event_i"
+    },
     "quote": [
-      "XAbstractView"
+      "views_x_abstract_view_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -48,7 +54,7 @@
         },
         {
           "name": "getView",
-          "returns": "XAbstractView",
+          "returns": "views_x_abstract_view_i",
           "desc": [],
           "raises": [],
           "args": []
@@ -76,7 +82,7 @@
             ],
             [
               "viewArg",
-              "XAbstractView",
+              "views_x_abstract_view_i",
               "in"
             ],
             [

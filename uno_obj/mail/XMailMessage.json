@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XMailMessage",
   "type": "interface",
   "namespace": "com.sun.star.mail",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,28 +16,34 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
-        ".mail_attachment",
-        "MailAttachment"
+        "..datatransfer.x_transferable",
+        "XTransferable",
+        "datatransfer_x_transferable_i"
       ],
       [
-        "..datatransfer.x_transferable",
-        "XTransferable"
+        ".mail_attachment",
+        "MailAttachment",
+        "mail_attachment_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "typing.List[str]",
-      "MailAttachment",
-      "XTransferable",
-      "typing.List[MailAttachment]"
+      "mail_attachment_i",
+      "datatransfer_x_transferable_i",
+      "typing.List[mail_attachment_i]",
+      "typing.List[str]"
     ],
     "typings": [
-      "typing.List[str]",
-      "typing.List[MailAttachment]"
+      "typing.List[mail_attachment_i]",
+      "typing.List[str]"
     ],
     "requires_typing": true,
     "name": "XMailMessage",
@@ -67,7 +74,7 @@
           "args": [
             [
               "aMailAttachment",
-              "MailAttachment",
+              "mail_attachment_i",
               "in"
             ]
           ]
@@ -125,7 +132,7 @@
         },
         {
           "name": "getAttachments",
-          "returns": "typing.List[MailAttachment]",
+          "returns": "typing.List[mail_attachment_i]",
           "desc": [
             "Return a sequence of MailAttachment's that will be attached to this mail message."
           ],
@@ -163,7 +170,7 @@
       "properties": [
         {
           "name": "Body",
-          "returns": "XTransferable",
+          "returns": "datatransfer_x_transferable_i",
           "desc": [
             "The body of the mail message.",
             "",

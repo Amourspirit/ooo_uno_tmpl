@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XTableCharts",
   "type": "interface",
   "namespace": "com.sun.star.table",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,25 +16,31 @@
     "from_imports": [
       [
         "..container.x_name_access",
-        "XNameAccess"
+        "XNameAccess",
+        "container_x_name_access_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".cell_range_address",
-        "CellRangeAddress"
+        "CellRangeAddress",
+        "cell_range_address_i"
       ],
       [
         "..awt.rectangle",
-        "Rectangle"
+        "Rectangle",
+        "awt_rectangle_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.container.XNameAccess": "container_x_name_access_i"
+    },
     "quote": [
-      "Rectangle",
-      "typing.List[CellRangeAddress]"
+      "awt_rectangle_i",
+      "typing.List[cell_range_address_i]"
     ],
     "typings": [
-      "typing.List[CellRangeAddress]"
+      "typing.List[cell_range_address_i]"
     ],
     "requires_typing": true,
     "name": "XTableCharts",
@@ -63,12 +70,12 @@
             ],
             [
               "aRect",
-              "Rectangle",
+              "awt_rectangle_i",
               "in"
             ],
             [
               "aRanges",
-              "typing.List[CellRangeAddress]",
+              "typing.List[cell_range_address_i]",
               "in"
             ],
             [

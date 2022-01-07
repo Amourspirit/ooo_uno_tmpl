@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XSheetCellRange",
   "type": "interface",
   "namespace": "com.sun.star.sheet",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,17 +16,22 @@
     "from_imports": [
       [
         "..table.x_cell_range",
-        "XCellRange"
+        "XCellRange",
+        "table_x_cell_range_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_spreadsheet",
-        "XSpreadsheet"
+        "XSpreadsheet",
+        "x_spreadsheet_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.table.XCellRange": "table_x_cell_range_i"
+    },
     "quote": [
-      "XSpreadsheet"
+      "x_spreadsheet_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -43,7 +49,7 @@
       "methods": [
         {
           "name": "getSpreadsheet",
-          "returns": "XSpreadsheet",
+          "returns": "x_spreadsheet_i",
           "desc": [
             "returns the spreadsheet interface which contains the cell range."
           ],

@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XAccessibleTable",
   "type": "interface",
   "namespace": "com.sun.star.accessibility",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,23 +16,29 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_accessible_table",
-        "XAccessibleTable"
+        "XAccessibleTable",
+        "x_accessible_table_i"
       ],
       [
         ".x_accessible",
-        "XAccessible"
+        "XAccessible",
+        "x_accessible_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
       "typing.List[int]",
-      "XAccessible",
-      "XAccessibleTable"
+      "x_accessible_table_i",
+      "x_accessible_i"
     ],
     "typings": [
       "typing.List[int]"
@@ -61,7 +68,7 @@
       "methods": [
         {
           "name": "getAccessibleCaption",
-          "returns": "XAccessible",
+          "returns": "x_accessible_i",
           "desc": [
             "Returns the caption for the table."
           ],
@@ -70,7 +77,7 @@
         },
         {
           "name": "getAccessibleCellAt",
-          "returns": "XAccessible",
+          "returns": "x_accessible_i",
           "desc": [
             "Returns the XAccessible object at the specified row and column in the table.",
             "",
@@ -163,7 +170,7 @@
         },
         {
           "name": "getAccessibleColumnHeaders",
-          "returns": "XAccessibleTable",
+          "returns": "x_accessible_table_i",
           "desc": [
             "Returns the column headers as an XAccessibleTable object.",
             "",
@@ -267,7 +274,7 @@
         },
         {
           "name": "getAccessibleRowHeaders",
-          "returns": "XAccessibleTable",
+          "returns": "x_accessible_table_i",
           "desc": [
             "Returns the row headers as an XAccessibleTable object.",
             "",
@@ -278,7 +285,7 @@
         },
         {
           "name": "getAccessibleSummary",
-          "returns": "XAccessible",
+          "returns": "x_accessible_i",
           "desc": [
             "Returns the summary description of the table."
           ],

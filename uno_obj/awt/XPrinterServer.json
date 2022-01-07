@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XPrinterServer",
   "type": "interface",
   "namespace": "com.sun.star.awt",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,23 +16,29 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_printer",
-        "XPrinter"
+        "XPrinter",
+        "x_printer_i"
       ],
       [
         ".x_info_printer",
-        "XInfoPrinter"
+        "XInfoPrinter",
+        "x_info_printer_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "typing.List[str]",
-      "XInfoPrinter",
-      "XPrinter"
+      "x_info_printer_i",
+      "x_printer_i",
+      "typing.List[str]"
     ],
     "typings": [
       "typing.List[str]"
@@ -51,7 +58,7 @@
       "methods": [
         {
           "name": "createInfoPrinter",
-          "returns": "XInfoPrinter",
+          "returns": "x_info_printer_i",
           "desc": [
             "creates a new information printer.",
             "",
@@ -68,7 +75,7 @@
         },
         {
           "name": "createPrinter",
-          "returns": "XPrinter",
+          "returns": "x_printer_i",
           "desc": [
             "creates a new virtual printer.",
             "",

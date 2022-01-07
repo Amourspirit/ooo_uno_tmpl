@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XDatabaseAccess",
   "type": "interface",
   "namespace": "com.sun.star.sdb",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,22 +16,28 @@
     "from_imports": [
       [
         "..sdbc.x_data_source",
-        "XDataSource"
+        "XDataSource",
+        "sdbc_x_data_source_i"
       ]
     ],
     "from_imports_typing": [
       [
         "..sdbc.x_connection",
-        "XConnection"
+        "XConnection",
+        "sdbc_x_connection_i"
       ],
       [
         ".x_database_access_listener",
-        "XDatabaseAccessListener"
+        "XDatabaseAccessListener",
+        "x_database_access_listener_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.sdbc.XDataSource": "sdbc_x_data_source_i"
+    },
     "quote": [
-      "XDatabaseAccessListener",
-      "XConnection"
+      "x_database_access_listener_i",
+      "sdbc_x_connection_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -58,14 +65,14 @@
           "args": [
             [
               "listener",
-              "XDatabaseAccessListener",
+              "x_database_access_listener_i",
               "in"
             ]
           ]
         },
         {
           "name": "getIsolatedConnection",
-          "returns": "XConnection",
+          "returns": "sdbc_x_connection_i",
           "desc": [],
           "raises": [
             "com.sun.star.sdbc.SQLException"
@@ -98,7 +105,7 @@
           "args": [
             [
               "listener",
-              "XDatabaseAccessListener",
+              "x_database_access_listener_i",
               "in"
             ]
           ]

@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XPrimitive2DRenderer",
   "type": "interface",
   "namespace": "com.sun.star.graphic",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,36 +16,44 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
-        "..rendering.x_bitmap",
-        "XBitmap"
-      ],
-      [
         "..geometry.real_rectangle2_d",
-        "RealRectangle2D"
+        "RealRectangle2D",
+        "geometry_real_rectangle2_d_i"
       ],
       [
         ".x_primitive2_d",
-        "XPrimitive2D"
+        "XPrimitive2D",
+        "x_primitive2_d_i"
+      ],
+      [
+        "..rendering.x_bitmap",
+        "XBitmap",
+        "rendering_x_bitmap_i"
       ],
       [
         "..beans.property_value",
-        "PropertyValue"
+        "PropertyValue",
+        "beans_property_value_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "typing.List[XPrimitive2D]",
-      "XBitmap",
-      "RealRectangle2D",
-      "typing.List[PropertyValue]"
+      "geometry_real_rectangle2_d_i",
+      "typing.List[x_primitive2_d_i]",
+      "typing.List[beans_property_value_i]",
+      "rendering_x_bitmap_i"
     ],
     "typings": [
-      "typing.List[XPrimitive2D]",
-      "typing.List[PropertyValue]"
+      "typing.List[x_primitive2_d_i]",
+      "typing.List[beans_property_value_i]"
     ],
     "requires_typing": true,
     "name": "XPrimitive2DRenderer",
@@ -63,7 +72,7 @@
       "methods": [
         {
           "name": "rasterize",
-          "returns": "XBitmap",
+          "returns": "rendering_x_bitmap_i",
           "desc": [
             "return rasterized version of given XPrimitive2D",
             "",
@@ -79,12 +88,12 @@
           "args": [
             [
               "Primitive2DSequence",
-              "typing.List[XPrimitive2D]",
+              "typing.List[x_primitive2_d_i]",
               "in"
             ],
             [
               "aViewInformationSequence",
-              "typing.List[PropertyValue]",
+              "typing.List[beans_property_value_i]",
               "in"
             ],
             [
@@ -99,7 +108,7 @@
             ],
             [
               "Range",
-              "RealRectangle2D",
+              "geometry_real_rectangle2_d_i",
               "in"
             ],
             [

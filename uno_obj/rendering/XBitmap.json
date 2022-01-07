@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XBitmap",
   "type": "interface",
   "namespace": "com.sun.star.rendering",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,27 +16,34 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
+        "..geometry.integer_size2_d",
+        "IntegerSize2D",
+        "geometry_integer_size2_d_i"
+      ],
+      [
         ".x_bitmap",
-        "XBitmap"
+        "XBitmap",
+        "x_bitmap_i"
       ],
       [
         "..geometry.real_size2_d",
-        "RealSize2D"
-      ],
-      [
-        "..geometry.integer_size2_d",
-        "IntegerSize2D"
+        "RealSize2D",
+        "geometry_real_size2_d_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "XBitmap",
-      "IntegerSize2D",
-      "RealSize2D"
+      "geometry_real_size2_d_i",
+      "geometry_integer_size2_d_i",
+      "x_bitmap_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -59,7 +67,7 @@
       "methods": [
         {
           "name": "getScaledBitmap",
-          "returns": "XBitmap",
+          "returns": "x_bitmap_i",
           "desc": [
             "Query a scaled copy of the original bitmap."
           ],
@@ -70,7 +78,7 @@
           "args": [
             [
               "newSize",
-              "RealSize2D",
+              "geometry_real_size2_d_i",
               "in"
             ],
             [
@@ -82,7 +90,7 @@
         },
         {
           "name": "getSize",
-          "returns": "IntegerSize2D",
+          "returns": "geometry_integer_size2_d_i",
           "desc": [
             "Query the size of the bitmap.",
             "",

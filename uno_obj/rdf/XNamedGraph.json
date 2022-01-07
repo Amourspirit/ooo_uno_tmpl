@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XNamedGraph",
   "type": "interface",
   "namespace": "com.sun.star.rdf",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,28 +16,35 @@
     "from_imports": [
       [
         ".xuri",
-        "XURI"
+        "XURI",
+        "xuri_i"
       ]
     ],
     "from_imports_typing": [
       [
+        ".x_resource",
+        "XResource",
+        "x_resource_i"
+      ],
+      [
         "..container.x_enumeration",
-        "XEnumeration"
+        "XEnumeration",
+        "container_x_enumeration_i"
       ],
       [
         ".x_node",
-        "XNode"
-      ],
-      [
-        ".x_resource",
-        "XResource"
+        "XNode",
+        "x_node_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.rdf.XURI": "xuri_i"
+    },
     "quote": [
-      "XResource",
-      "XNode",
-      "XEnumeration",
-      "XURI"
+      "x_resource_i",
+      "xuri_i",
+      "x_node_i",
+      "container_x_enumeration_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -76,17 +84,17 @@
           "args": [
             [
               "Subject",
-              "XResource",
+              "x_resource_i",
               "in"
             ],
             [
               "Predicate",
-              "XURI",
+              "xuri_i",
               "in"
             ],
             [
               "Object",
-              "XNode",
+              "x_node_i",
               "in"
             ]
           ]
@@ -105,7 +113,7 @@
         },
         {
           "name": "getName",
-          "returns": "XURI",
+          "returns": "xuri_i",
           "desc": [
             "returns the name of the graph.",
             "",
@@ -116,7 +124,7 @@
         },
         {
           "name": "getStatements",
-          "returns": "XEnumeration",
+          "returns": "container_x_enumeration_i",
           "desc": [
             "gets matching RDF statements from a graph.",
             "",
@@ -131,17 +139,17 @@
           "args": [
             [
               "Subject",
-              "XResource",
+              "x_resource_i",
               "in"
             ],
             [
               "Predicate",
-              "XURI",
+              "xuri_i",
               "in"
             ],
             [
               "Object",
-              "XNode",
+              "x_node_i",
               "in"
             ]
           ]
@@ -163,17 +171,17 @@
           "args": [
             [
               "Subject",
-              "XResource",
+              "x_resource_i",
               "in"
             ],
             [
               "Predicate",
-              "XURI",
+              "xuri_i",
               "in"
             ],
             [
               "Object",
-              "XNode",
+              "x_node_i",
               "in"
             ]
           ]

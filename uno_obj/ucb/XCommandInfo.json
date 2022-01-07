@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XCommandInfo",
   "type": "interface",
   "namespace": "com.sun.star.ucb",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,21 +16,26 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".command_info",
-        "CommandInfo"
+        "CommandInfo",
+        "command_info_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "CommandInfo",
-      "typing.List[CommandInfo]"
+      "command_info_i",
+      "typing.List[command_info_i]"
     ],
     "typings": [
-      "typing.List[CommandInfo]"
+      "typing.List[command_info_i]"
     ],
     "requires_typing": true,
     "name": "XCommandInfo",
@@ -46,7 +52,7 @@
       "methods": [
         {
           "name": "getCommandInfoByHandle",
-          "returns": "CommandInfo",
+          "returns": "command_info_i",
           "desc": [
             "returns information for a specific command."
           ],
@@ -63,7 +69,7 @@
         },
         {
           "name": "getCommandInfoByName",
-          "returns": "CommandInfo",
+          "returns": "command_info_i",
           "desc": [
             "returns information for a specific command."
           ],
@@ -80,7 +86,7 @@
         },
         {
           "name": "getCommands",
-          "returns": "typing.List[CommandInfo]",
+          "returns": "typing.List[command_info_i]",
           "desc": [
             "obtains information for all supported commands."
           ],

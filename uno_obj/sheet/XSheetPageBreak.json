@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XSheetPageBreak",
   "type": "interface",
   "namespace": "com.sun.star.sheet",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,20 +16,25 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".table_page_break_data",
-        "TablePageBreakData"
+        "TablePageBreakData",
+        "table_page_break_data_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "typing.List[TablePageBreakData]"
+      "typing.List[table_page_break_data_i]"
     ],
     "typings": [
-      "typing.List[TablePageBreakData]"
+      "typing.List[table_page_break_data_i]"
     ],
     "requires_typing": true,
     "name": "XSheetPageBreak",
@@ -49,7 +55,7 @@
       "methods": [
         {
           "name": "getColumnPageBreaks",
-          "returns": "typing.List[TablePageBreakData]",
+          "returns": "typing.List[table_page_break_data_i]",
           "desc": [
             "returns a sequence of descriptions of all horizontal page breaks on the sheet.",
             "",
@@ -60,7 +66,7 @@
         },
         {
           "name": "getRowPageBreaks",
-          "returns": "typing.List[TablePageBreakData]",
+          "returns": "typing.List[table_page_break_data_i]",
           "desc": [
             "returns a sequence of descriptions of all vertical page breaks on the sheet.",
             "",

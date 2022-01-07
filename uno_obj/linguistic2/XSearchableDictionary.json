@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XSearchableDictionary",
   "type": "interface",
   "namespace": "com.sun.star.linguistic2",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,20 +16,25 @@
     "from_imports": [
       [
         ".x_dictionary",
-        "XDictionary"
+        "XDictionary",
+        "x_dictionary_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_dictionary_entry",
-        "XDictionaryEntry"
+        "XDictionaryEntry",
+        "x_dictionary_entry_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.linguistic2.XDictionary": "x_dictionary_i"
+    },
     "quote": [
-      "typing.List[XDictionaryEntry]"
+      "typing.List[x_dictionary_entry_i]"
     ],
     "typings": [
-      "typing.List[XDictionaryEntry]"
+      "typing.List[x_dictionary_entry_i]"
     ],
     "requires_typing": true,
     "name": "XSearchableDictionary",
@@ -49,7 +55,7 @@
       "methods": [
         {
           "name": "searchSimilarEntries",
-          "returns": "typing.List[XDictionaryEntry]",
+          "returns": "typing.List[x_dictionary_entry_i]",
           "desc": [
             "search for similar entries in the dictionary.",
             "",

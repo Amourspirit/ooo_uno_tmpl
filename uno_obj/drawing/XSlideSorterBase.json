@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XSlideSorterBase",
   "type": "interface",
   "namespace": "com.sun.star.drawing",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,27 +15,35 @@
   "data": {
     "from_imports": [
       [
-        ".x_draw_view",
-        "XDrawView"
+        ".framework.x_view",
+        "XView",
+        "framework_x_view_i"
       ],
       [
-        ".framework.x_view",
-        "XView"
+        ".x_draw_view",
+        "XDrawView",
+        "x_draw_view_i"
       ]
     ],
     "from_imports_typing": [
       [
         "..container.x_index_access",
-        "XIndexAccess"
+        "XIndexAccess",
+        "container_x_index_access_i"
       ],
       [
         "..util.color",
-        "Color"
+        "Color",
+        "util_color_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.drawing.framework.XView": "framework_x_view_i",
+      "com.sun.star.drawing.XDrawView": "x_draw_view_i"
+    },
     "quote": [
-      "XIndexAccess",
-      "Color"
+      "util_color_i",
+      "container_x_index_access_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -55,14 +64,14 @@
       "properties": [
         {
           "name": "BackgroundColor",
-          "returns": "Color",
+          "returns": "util_color_i",
           "desc": [],
           "raises_get": "",
           "raises_set": ""
         },
         {
           "name": "DocumentSlides",
-          "returns": "XIndexAccess",
+          "returns": "container_x_index_access_i",
           "desc": [
             "The set of slides that are displayed by the implementing object.",
             "",
@@ -73,7 +82,7 @@
         },
         {
           "name": "HighlightColor",
-          "returns": "Color",
+          "returns": "util_color_i",
           "desc": [],
           "raises_get": "",
           "raises_set": ""
@@ -168,14 +177,14 @@
         },
         {
           "name": "SelectionColor",
-          "returns": "Color",
+          "returns": "util_color_i",
           "desc": [],
           "raises_get": "",
           "raises_set": ""
         },
         {
           "name": "TextColor",
-          "returns": "Color",
+          "returns": "util_color_i",
           "desc": [],
           "raises_get": "",
           "raises_set": ""

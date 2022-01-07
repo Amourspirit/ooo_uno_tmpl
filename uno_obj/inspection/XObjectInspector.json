@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XObjectInspector",
   "type": "interface",
   "namespace": "com.sun.star.inspection",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,43 +15,52 @@
   "data": {
     "from_imports": [
       [
-        "..frame.x_controller",
-        "XController"
+        "..frame.x_dispatch_provider",
+        "XDispatchProvider",
+        "frame_x_dispatch_provider_i"
       ],
       [
-        "..frame.x_dispatch_provider",
-        "XDispatchProvider"
+        "..frame.x_controller",
+        "XController",
+        "frame_x_controller_i"
       ]
     ],
     "from_imports_typing": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ],
       [
         ".x_object_inspector_model",
-        "XObjectInspectorModel"
+        "XObjectInspectorModel",
+        "x_object_inspector_model_i"
       ],
       [
         ".x_object_inspector_ui",
-        "XObjectInspectorUI"
+        "XObjectInspectorUI",
+        "x_object_inspector_ui_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.frame.XDispatchProvider": "frame_x_dispatch_provider_i",
+      "com.sun.star.frame.XController": "frame_x_controller_i"
+    },
     "quote": [
-      "XObjectInspectorModel",
-      "XObjectInspectorUI",
-      "typing.List[XInterface]"
+      "x_object_inspector_model_i",
+      "x_object_inspector_ui_i",
+      "typing.List[uno_x_interface_i]"
     ],
     "typings": [
-      "typing.List[XInterface]"
+      "typing.List[uno_x_interface_i]"
     ],
     "requires_typing": true,
     "name": "XObjectInspector",
     "imports": [],
     "namespace": "com.sun.star.inspection",
     "extends": [
-      "com.sun.star.frame.XController",
-      "com.sun.star.frame.XDispatchProvider"
+      "com.sun.star.frame.XDispatchProvider",
+      "com.sun.star.frame.XController"
     ],
     "desc": [
       "describes the main interface of an ObjectInspector.",
@@ -78,7 +88,7 @@
           "args": [
             [
               "Objects",
-              "typing.List[XInterface]",
+              "typing.List[uno_x_interface_i]",
               "in"
             ]
           ]
@@ -87,7 +97,7 @@
       "properties": [
         {
           "name": "InspectorModel",
-          "returns": "XObjectInspectorModel",
+          "returns": "x_object_inspector_model_i",
           "desc": [
             "provides access to the current model of the inspector",
             "",
@@ -102,7 +112,7 @@
         },
         {
           "name": "InspectorUI",
-          "returns": "XObjectInspectorUI",
+          "returns": "x_object_inspector_ui_i",
           "desc": [
             "provides access to the user interface of the object inspector.",
             "",

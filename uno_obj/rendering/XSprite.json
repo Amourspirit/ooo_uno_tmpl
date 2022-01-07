@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XSprite",
   "type": "interface",
   "namespace": "com.sun.star.rendering",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,37 +16,46 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
-        ".view_state",
-        "ViewState"
+        ".x_poly_polygon2_d",
+        "XPolyPolygon2D",
+        "x_poly_polygon2_d_i"
       ],
       [
         "..geometry.real_point2_d",
-        "RealPoint2D"
-      ],
-      [
-        ".render_state",
-        "RenderState"
+        "RealPoint2D",
+        "geometry_real_point2_d_i"
       ],
       [
         "..geometry.affine_matrix2_d",
-        "AffineMatrix2D"
+        "AffineMatrix2D",
+        "geometry_affine_matrix2_d_i"
       ],
       [
-        ".x_poly_polygon2_d",
-        "XPolyPolygon2D"
+        ".render_state",
+        "RenderState",
+        "render_state_i"
+      ],
+      [
+        ".view_state",
+        "ViewState",
+        "view_state_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "RenderState",
-      "XPolyPolygon2D",
-      "ViewState",
-      "AffineMatrix2D",
-      "RealPoint2D"
+      "geometry_affine_matrix2_d_i",
+      "x_poly_polygon2_d_i",
+      "geometry_real_point2_d_i",
+      "view_state_i",
+      "render_state_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -79,7 +89,7 @@
           "args": [
             [
               "aClip",
-              "XPolyPolygon2D",
+              "x_poly_polygon2_d_i",
               "in"
             ]
           ]
@@ -111,17 +121,17 @@
           "args": [
             [
               "aNewPos",
-              "RealPoint2D",
+              "geometry_real_point2_d_i",
               "in"
             ],
             [
               "aViewState",
-              "ViewState",
+              "view_state_i",
               "in"
             ],
             [
               "aRenderState",
-              "RenderState",
+              "render_state_i",
               "in"
             ]
           ]
@@ -191,7 +201,7 @@
           "args": [
             [
               "aTransformation",
-              "AffineMatrix2D",
+              "geometry_affine_matrix2_d_i",
               "in"
             ]
           ]

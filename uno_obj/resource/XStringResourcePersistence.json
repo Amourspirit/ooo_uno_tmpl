@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XStringResourcePersistence",
   "type": "interface",
   "namespace": "com.sun.star.resource",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,23 +16,29 @@
     "from_imports": [
       [
         ".x_string_resource_manager",
-        "XStringResourceManager"
+        "XStringResourceManager",
+        "x_string_resource_manager_i"
       ]
     ],
     "from_imports_typing": [
       [
-        "..task.x_interaction_handler",
-        "XInteractionHandler"
+        "..embed.x_storage",
+        "XStorage",
+        "embed_x_storage_i"
       ],
       [
-        "..embed.x_storage",
-        "XStorage"
+        "..task.x_interaction_handler",
+        "XInteractionHandler",
+        "task_x_interaction_handler_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.resource.XStringResourceManager": "x_string_resource_manager_i"
+    },
     "quote": [
-      "XStorage",
       "typing.List[int]",
-      "XInteractionHandler"
+      "embed_x_storage_i",
+      "task_x_interaction_handler_i"
     ],
     "typings": [
       "typing.List[int]"
@@ -155,7 +162,7 @@
           "args": [
             [
               "Storage",
-              "XStorage",
+              "embed_x_storage_i",
               "in"
             ],
             [
@@ -201,7 +208,7 @@
             ],
             [
               "Handler",
-              "XInteractionHandler",
+              "task_x_interaction_handler_i",
               "in"
             ]
           ]

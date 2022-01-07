@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XFetchProviderForContentAccess",
   "type": "interface",
   "namespace": "com.sun.star.ucb",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,17 +16,22 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".fetch_result",
-        "FetchResult"
+        "FetchResult",
+        "fetch_result_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "FetchResult"
+      "fetch_result_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -43,7 +49,7 @@
       "methods": [
         {
           "name": "fetchContentIdentifierStrings",
-          "returns": "FetchResult",
+          "returns": "fetch_result_i",
           "desc": [
             "returns the content identifier strings of the columns of the indicated rows"
           ],
@@ -68,7 +74,7 @@
         },
         {
           "name": "fetchContentIdentifiers",
-          "returns": "FetchResult",
+          "returns": "fetch_result_i",
           "desc": [
             "returns the XContentIdentifiers of the columns of the indicated rows"
           ],
@@ -93,7 +99,7 @@
         },
         {
           "name": "fetchContents",
-          "returns": "FetchResult",
+          "returns": "fetch_result_i",
           "desc": [
             "returns the XContent s of the columns of the indicated rows"
           ],

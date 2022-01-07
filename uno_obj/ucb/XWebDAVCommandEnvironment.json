@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XWebDAVCommandEnvironment",
   "type": "interface",
   "namespace": "com.sun.star.ucb",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,25 +16,31 @@
     "from_imports": [
       [
         ".x_command_environment",
-        "XCommandEnvironment"
+        "XCommandEnvironment",
+        "x_command_environment_i"
       ]
     ],
     "from_imports_typing": [
       [
         "..beans.string_pair",
-        "StringPair"
+        "StringPair",
+        "beans_string_pair_i"
       ],
       [
         ".web_davhttp_method",
-        "WebDAVHTTPMethod"
+        "WebDAVHTTPMethod",
+        "web_davhttp_method_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.ucb.XCommandEnvironment": "x_command_environment_i"
+    },
     "quote": [
-      "WebDAVHTTPMethod",
-      "typing.List[StringPair]"
+      "typing.List[beans_string_pair_i]",
+      "web_davhttp_method_i"
     ],
     "typings": [
-      "typing.List[StringPair]"
+      "typing.List[beans_string_pair_i]"
     ],
     "requires_typing": true,
     "name": "XWebDAVCommandEnvironment",
@@ -50,7 +57,7 @@
       "methods": [
         {
           "name": "getUserRequestHeaders",
-          "returns": "typing.List[StringPair]",
+          "returns": "typing.List[beans_string_pair_i]",
           "desc": [
             "This method gets called while assembling a WebDAV/HTTP request.",
             "",
@@ -65,7 +72,7 @@
             ],
             [
               "eMethod",
-              "WebDAVHTTPMethod",
+              "web_davhttp_method_i",
               "in"
             ]
           ]

@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XReportEngine",
   "type": "interface",
   "namespace": "com.sun.star.report",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,47 +15,59 @@
   "data": {
     "from_imports": [
       [
-        "..lang.x_component",
-        "XComponent"
+        "..beans.x_property_set",
+        "XPropertySet",
+        "beans_x_property_set_i"
       ],
       [
-        "..beans.x_property_set",
-        "XPropertySet"
+        "..lang.x_component",
+        "XComponent",
+        "lang_x_component_i"
       ]
     ],
     "from_imports_typing": [
       [
-        "..sdbc.x_connection",
-        "XConnection"
-      ],
-      [
-        "..task.x_status_indicator",
-        "XStatusIndicator"
-      ],
-      [
-        "..util.url",
-        "URL"
-      ],
-      [
         "..frame.x_model",
-        "XModel"
+        "XModel",
+        "frame_x_model_i"
       ],
       [
         "..frame.x_frame",
-        "XFrame"
+        "XFrame",
+        "frame_x_frame_i"
+      ],
+      [
+        "..util.url",
+        "URL",
+        "util_url_i"
       ],
       [
         ".x_report_definition",
-        "XReportDefinition"
+        "XReportDefinition",
+        "x_report_definition_i"
+      ],
+      [
+        "..task.x_status_indicator",
+        "XStatusIndicator",
+        "task_x_status_indicator_i"
+      ],
+      [
+        "..sdbc.x_connection",
+        "XConnection",
+        "sdbc_x_connection_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.beans.XPropertySet": "beans_x_property_set_i",
+      "com.sun.star.lang.XComponent": "lang_x_component_i"
+    },
     "quote": [
-      "XReportDefinition",
-      "XFrame",
-      "URL",
-      "XStatusIndicator",
-      "XModel",
-      "XConnection"
+      "sdbc_x_connection_i",
+      "util_url_i",
+      "frame_x_model_i",
+      "task_x_status_indicator_i",
+      "x_report_definition_i",
+      "frame_x_frame_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -62,8 +75,8 @@
     "imports": [],
     "namespace": "com.sun.star.report",
     "extends": [
-      "com.sun.star.lang.XComponent",
-      "com.sun.star.beans.XPropertySet"
+      "com.sun.star.beans.XPropertySet",
+      "com.sun.star.lang.XComponent"
     ],
     "desc": [
       "identifies a XReportEngine which allows the creation of OpenDocument files.",
@@ -75,7 +88,7 @@
       "methods": [
         {
           "name": "createDocument",
-          "returns": "URL",
+          "returns": "util_url_i",
           "desc": [
             "creates a report document."
           ],
@@ -88,7 +101,7 @@
         },
         {
           "name": "createDocumentAlive",
-          "returns": "XModel",
+          "returns": "frame_x_model_i",
           "desc": [
             "creates a report document.",
             "",
@@ -102,14 +115,14 @@
           "args": [
             [
               "frame",
-              "XFrame",
+              "frame_x_frame_i",
               "in"
             ]
           ]
         },
         {
           "name": "createDocumentModel",
-          "returns": "XModel",
+          "returns": "frame_x_model_i",
           "desc": [
             "creates a report document."
           ],
@@ -136,7 +149,7 @@
       "properties": [
         {
           "name": "ActiveConnection",
-          "returns": "XConnection",
+          "returns": "sdbc_x_connection_i",
           "desc": [
             "specifies the active connection which is used to create the resulting report."
           ],
@@ -157,7 +170,7 @@
         },
         {
           "name": "ReportDefinition",
-          "returns": "XReportDefinition",
+          "returns": "x_report_definition_i",
           "desc": [
             "specifies the report definition object which is used to create the resulting report."
           ],
@@ -166,7 +179,7 @@
         },
         {
           "name": "StatusIndicator",
-          "returns": "XStatusIndicator",
+          "returns": "task_x_status_indicator_i",
           "desc": [
             "specifies the status indicator which shows the progress of the report generation process."
           ],

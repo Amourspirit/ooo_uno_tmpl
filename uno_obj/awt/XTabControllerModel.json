@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XTabControllerModel",
   "type": "interface",
   "namespace": "com.sun.star.awt",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,20 +16,25 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_control_model",
-        "XControlModel"
+        "XControlModel",
+        "x_control_model_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "typing.List[XControlModel]"
+      "typing.List[x_control_model_i]"
     ],
     "typings": [
-      "typing.List[XControlModel]"
+      "typing.List[x_control_model_i]"
     ],
     "requires_typing": true,
     "name": "XTabControllerModel",
@@ -45,7 +51,7 @@
       "methods": [
         {
           "name": "getControlModels",
-          "returns": "typing.List[XControlModel]",
+          "returns": "typing.List[x_control_model_i]",
           "desc": [
             "returns the control models."
           ],
@@ -67,7 +73,7 @@
             ],
             [
               "Group",
-              "typing.List[XControlModel]",
+              "typing.List[x_control_model_i]",
               "out"
             ],
             [
@@ -92,7 +98,7 @@
             ],
             [
               "Group",
-              "typing.List[XControlModel]",
+              "typing.List[x_control_model_i]",
               "out"
             ]
           ]
@@ -125,7 +131,7 @@
           "args": [
             [
               "Controls",
-              "typing.List[XControlModel]",
+              "typing.List[x_control_model_i]",
               "in"
             ]
           ]
@@ -140,7 +146,7 @@
           "args": [
             [
               "Group",
-              "typing.List[XControlModel]",
+              "typing.List[x_control_model_i]",
               "in"
             ],
             [

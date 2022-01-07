@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XMapping2D",
   "type": "interface",
   "namespace": "com.sun.star.geometry",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,17 +16,22 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".real_point2_d",
-        "RealPoint2D"
+        "RealPoint2D",
+        "real_point2_d_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "RealPoint2D"
+      "real_point2_d_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -49,7 +55,7 @@
       "methods": [
         {
           "name": "map",
-          "returns": "RealPoint2D",
+          "returns": "real_point2_d_i",
           "desc": [
             "Forward 2D mapping function."
           ],
@@ -57,14 +63,14 @@
           "args": [
             [
               "aPoint",
-              "RealPoint2D",
+              "real_point2_d_i",
               "in"
             ]
           ]
         },
         {
           "name": "mapInverse",
-          "returns": "RealPoint2D",
+          "returns": "real_point2_d_i",
           "desc": [
             "Inverse 2D mapping function.",
             "",
@@ -74,7 +80,7 @@
           "args": [
             [
               "aPoint",
-              "RealPoint2D",
+              "real_point2_d_i",
               "in"
             ]
           ]

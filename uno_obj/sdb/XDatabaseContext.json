@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XDatabaseContext",
   "type": "interface",
   "namespace": "com.sun.star.sdb",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,31 +15,45 @@
   "data": {
     "from_imports": [
       [
-        "..container.x_name_access",
-        "XNameAccess"
+        "..lang.x_single_service_factory",
+        "XSingleServiceFactory",
+        "lang_x_single_service_factory_i"
       ],
       [
         "..container.x_container",
-        "XContainer"
-      ],
-      [
-        "..container.x_enumeration_access",
-        "XEnumerationAccess"
+        "XContainer",
+        "container_x_container_i"
       ],
       [
         ".x_database_registrations",
-        "XDatabaseRegistrations"
+        "XDatabaseRegistrations",
+        "x_database_registrations_i"
       ],
       [
-        "..lang.x_single_service_factory",
-        "XSingleServiceFactory"
+        "..container.x_name_access",
+        "XNameAccess",
+        "container_x_name_access_i"
       ],
       [
         "..uno.x_naming_service",
-        "XNamingService"
+        "XNamingService",
+        "uno_x_naming_service_i"
+      ],
+      [
+        "..container.x_enumeration_access",
+        "XEnumerationAccess",
+        "container_x_enumeration_access_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.lang.XSingleServiceFactory": "lang_x_single_service_factory_i",
+      "com.sun.star.container.XContainer": "container_x_container_i",
+      "com.sun.star.sdb.XDatabaseRegistrations": "x_database_registrations_i",
+      "com.sun.star.container.XNameAccess": "container_x_name_access_i",
+      "com.sun.star.uno.XNamingService": "uno_x_naming_service_i",
+      "com.sun.star.container.XEnumerationAccess": "container_x_enumeration_access_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -46,12 +61,12 @@
     "imports": [],
     "namespace": "com.sun.star.sdb",
     "extends": [
-      "com.sun.star.container.XEnumerationAccess",
+      "com.sun.star.lang.XSingleServiceFactory",
+      "com.sun.star.container.XContainer",
+      "com.sun.star.sdb.XDatabaseRegistrations",
       "com.sun.star.container.XNameAccess",
       "com.sun.star.uno.XNamingService",
-      "com.sun.star.container.XContainer",
-      "com.sun.star.lang.XSingleServiceFactory",
-      "com.sun.star.sdb.XDatabaseRegistrations"
+      "com.sun.star.container.XEnumerationAccess"
     ],
     "desc": [
       "Provides an interface for the new-style DatabaseContext service to implement.",

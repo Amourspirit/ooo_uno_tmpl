@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XMultiTextMarkup",
   "type": "interface",
   "namespace": "com.sun.star.text",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -16,14 +17,16 @@
     "from_imports_typing": [
       [
         ".text_markup_descriptor",
-        "TextMarkupDescriptor"
+        "TextMarkupDescriptor",
+        "text_markup_descriptor_i"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "typing.List[TextMarkupDescriptor]"
+      "typing.List[text_markup_descriptor_i]"
     ],
     "typings": [
-      "typing.List[TextMarkupDescriptor]"
+      "typing.List[text_markup_descriptor_i]"
     ],
     "requires_typing": true,
     "name": "XMultiTextMarkup",
@@ -54,7 +57,7 @@
           "args": [
             [
               "aMarkups",
-              "typing.List[TextMarkupDescriptor]",
+              "typing.List[text_markup_descriptor_i]",
               "in"
             ]
           ]

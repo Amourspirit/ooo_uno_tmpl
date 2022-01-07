@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XReifiedStatement",
   "type": "interface",
   "namespace": "com.sun.star.rdf",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,17 +16,22 @@
     "from_imports": [
       [
         ".x_resource",
-        "XResource"
+        "XResource",
+        "x_resource_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".statement",
-        "Statement"
+        "Statement",
+        "statement_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.rdf.XResource": "x_resource_i"
+    },
     "quote": [
-      "Statement"
+      "statement_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -47,7 +53,7 @@
       "properties": [
         {
           "name": "Statement",
-          "returns": "Statement",
+          "returns": "statement_i",
           "desc": [
             "the statement that is reified"
           ],

@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XRegion",
   "type": "interface",
   "namespace": "com.sun.star.awt",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,26 +16,32 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_region",
-        "XRegion"
+        "XRegion",
+        "x_region_i"
       ],
       [
         ".rectangle",
-        "Rectangle"
+        "Rectangle",
+        "rectangle_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "Rectangle",
-      "typing.List[Rectangle]",
-      "XRegion"
+      "typing.List[rectangle_i]",
+      "rectangle_i",
+      "x_region_i"
     ],
     "typings": [
-      "typing.List[Rectangle]"
+      "typing.List[rectangle_i]"
     ],
     "requires_typing": true,
     "name": "XRegion",
@@ -68,7 +75,7 @@
           "args": [
             [
               "Rect",
-              "Rectangle",
+              "rectangle_i",
               "in"
             ]
           ]
@@ -83,14 +90,14 @@
           "args": [
             [
               "Region",
-              "XRegion",
+              "x_region_i",
               "in"
             ]
           ]
         },
         {
           "name": "getBounds",
-          "returns": "Rectangle",
+          "returns": "rectangle_i",
           "desc": [
             "returns the bounding box of the shape."
           ],
@@ -99,7 +106,7 @@
         },
         {
           "name": "getRectangles",
-          "returns": "typing.List[Rectangle]",
+          "returns": "typing.List[rectangle_i]",
           "desc": [
             "returns all rectangles which are making up this region."
           ],
@@ -116,7 +123,7 @@
           "args": [
             [
               "Region",
-              "Rectangle",
+              "rectangle_i",
               "in"
             ]
           ]
@@ -131,7 +138,7 @@
           "args": [
             [
               "Region",
-              "XRegion",
+              "x_region_i",
               "in"
             ]
           ]
@@ -166,7 +173,7 @@
           "args": [
             [
               "Rect",
-              "Rectangle",
+              "rectangle_i",
               "in"
             ]
           ]
@@ -181,7 +188,7 @@
           "args": [
             [
               "Region",
-              "XRegion",
+              "x_region_i",
               "in"
             ]
           ]
@@ -196,7 +203,7 @@
           "args": [
             [
               "Rect",
-              "Rectangle",
+              "rectangle_i",
               "in"
             ]
           ]
@@ -211,7 +218,7 @@
           "args": [
             [
               "Region",
-              "XRegion",
+              "x_region_i",
               "in"
             ]
           ]

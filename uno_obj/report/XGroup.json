@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XGroup",
   "type": "interface",
   "namespace": "com.sun.star.report",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,35 +15,47 @@
   "data": {
     "from_imports": [
       [
-        "..lang.x_component",
-        "XComponent"
-      ],
-      [
-        "..container.x_child",
-        "XChild"
-      ],
-      [
         "..beans.x_property_set",
-        "XPropertySet"
+        "XPropertySet",
+        "beans_x_property_set_i"
       ],
       [
         ".x_functions_supplier",
-        "XFunctionsSupplier"
+        "XFunctionsSupplier",
+        "x_functions_supplier_i"
+      ],
+      [
+        "..lang.x_component",
+        "XComponent",
+        "lang_x_component_i"
+      ],
+      [
+        "..container.x_child",
+        "XChild",
+        "container_x_child_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_section",
-        "XSection"
+        "XSection",
+        "x_section_i"
       ],
       [
         ".x_groups",
-        "XGroups"
+        "XGroups",
+        "x_groups_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.beans.XPropertySet": "beans_x_property_set_i",
+      "com.sun.star.report.XFunctionsSupplier": "x_functions_supplier_i",
+      "com.sun.star.lang.XComponent": "lang_x_component_i",
+      "com.sun.star.container.XChild": "container_x_child_i"
+    },
     "quote": [
-      "XSection",
-      "XGroups"
+      "x_groups_i",
+      "x_section_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -50,10 +63,10 @@
     "imports": [],
     "namespace": "com.sun.star.report",
     "extends": [
-      "com.sun.star.container.XChild",
       "com.sun.star.beans.XPropertySet",
+      "com.sun.star.report.XFunctionsSupplier",
       "com.sun.star.lang.XComponent",
-      "com.sun.star.report.XFunctionsSupplier"
+      "com.sun.star.container.XChild"
     ],
     "desc": [
       "identifies a XGroup.",
@@ -74,7 +87,7 @@
         },
         {
           "name": "Footer",
-          "returns": "XSection",
+          "returns": "x_section_i",
           "desc": [
             "returns the group footer."
           ],
@@ -110,7 +123,7 @@
         },
         {
           "name": "Groups",
-          "returns": "XGroups",
+          "returns": "x_groups_i",
           "desc": [
             "Specifies the parent of the group."
           ],
@@ -119,7 +132,7 @@
         },
         {
           "name": "Header",
-          "returns": "XSection",
+          "returns": "x_section_i",
           "desc": [
             "returns the group header."
           ],

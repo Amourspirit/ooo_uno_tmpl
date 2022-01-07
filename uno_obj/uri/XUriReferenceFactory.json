@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XUriReferenceFactory",
   "type": "interface",
   "namespace": "com.sun.star.uri",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,22 +16,28 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_uri_reference",
-        "XUriReference"
+        "XUriReference",
+        "x_uri_reference_i"
       ],
       [
         ".relative_uri_excess_parent_segments",
-        "RelativeUriExcessParentSegments"
+        "RelativeUriExcessParentSegments",
+        "relative_uri_excess_parent_segments_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "XUriReference",
-      "RelativeUriExcessParentSegments"
+      "relative_uri_excess_parent_segments_i",
+      "x_uri_reference_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -54,7 +61,7 @@
       "methods": [
         {
           "name": "makeAbsolute",
-          "returns": "XUriReference",
+          "returns": "x_uri_reference_i",
           "desc": [
             "resolves a relative URI reference to absolute form."
           ],
@@ -62,12 +69,12 @@
           "args": [
             [
               "baseUriReference",
-              "XUriReference",
+              "x_uri_reference_i",
               "in"
             ],
             [
               "uriReference",
-              "XUriReference",
+              "x_uri_reference_i",
               "in"
             ],
             [
@@ -77,14 +84,14 @@
             ],
             [
               "excessParentSegments",
-              "RelativeUriExcessParentSegments",
+              "relative_uri_excess_parent_segments_i",
               "in"
             ]
           ]
         },
         {
           "name": "makeRelative",
-          "returns": "XUriReference",
+          "returns": "x_uri_reference_i",
           "desc": [
             "changes an absolute URI reference to relative form."
           ],
@@ -92,12 +99,12 @@
           "args": [
             [
               "baseUriReference",
-              "XUriReference",
+              "x_uri_reference_i",
               "in"
             ],
             [
               "uriReference",
-              "XUriReference",
+              "x_uri_reference_i",
               "in"
             ],
             [
@@ -119,7 +126,7 @@
         },
         {
           "name": "parse",
-          "returns": "XUriReference",
+          "returns": "x_uri_reference_i",
           "desc": [
             "parses the textual representation of a URI reference."
           ],

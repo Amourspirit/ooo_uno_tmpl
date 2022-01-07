@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XAccessibleHypertext",
   "type": "interface",
   "namespace": "com.sun.star.accessibility",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,17 +16,22 @@
     "from_imports": [
       [
         ".x_accessible_text",
-        "XAccessibleText"
+        "XAccessibleText",
+        "x_accessible_text_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_accessible_hyperlink",
-        "XAccessibleHyperlink"
+        "XAccessibleHyperlink",
+        "x_accessible_hyperlink_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.accessibility.XAccessibleText": "x_accessible_text_i"
+    },
     "quote": [
-      "XAccessibleHyperlink"
+      "x_accessible_hyperlink_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -49,7 +55,7 @@
       "methods": [
         {
           "name": "getHyperLink",
-          "returns": "XAccessibleHyperlink",
+          "returns": "x_accessible_hyperlink_i",
           "desc": [
             "Return the specified link.",
             "",

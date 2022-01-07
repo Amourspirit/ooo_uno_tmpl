@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XTextLayout",
   "type": "interface",
   "namespace": "com.sun.star.rendering",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,61 +16,73 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
         "..geometry.real_rectangle2_d",
-        "RealRectangle2D"
-      ],
-      [
-        "..geometry.real_point2_d",
-        "RealPoint2D"
-      ],
-      [
-        ".caret",
-        "Caret"
-      ],
-      [
-        ".string_context",
-        "StringContext"
-      ],
-      [
-        ".x_text_layout",
-        "XTextLayout"
+        "RealRectangle2D",
+        "geometry_real_rectangle2_d_i"
       ],
       [
         ".x_poly_polygon2_d",
-        "XPolyPolygon2D"
+        "XPolyPolygon2D",
+        "x_poly_polygon2_d_i"
       ],
       [
-        ".text_hit",
-        "TextHit"
+        ".x_text_layout",
+        "XTextLayout",
+        "x_text_layout_i"
+      ],
+      [
+        "..geometry.real_point2_d",
+        "RealPoint2D",
+        "geometry_real_point2_d_i"
+      ],
+      [
+        ".string_context",
+        "StringContext",
+        "string_context_i"
       ],
       [
         ".x_canvas_font",
-        "XCanvasFont"
+        "XCanvasFont",
+        "x_canvas_font_i"
+      ],
+      [
+        ".caret",
+        "Caret",
+        "caret_i"
+      ],
+      [
+        ".text_hit",
+        "TextHit",
+        "text_hit_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "TextHit",
-      "Caret",
-      "StringContext",
-      "XPolyPolygon2D",
-      "typing.List[XPolyPolygon2D]",
-      "XCanvasFont",
+      "typing.List[x_text_layout_i]",
+      "x_canvas_font_i",
+      "geometry_real_rectangle2_d_i",
+      "text_hit_i",
+      "x_poly_polygon2_d_i",
+      "typing.List[x_poly_polygon2_d_i]",
       "typing.List[float]",
-      "typing.List[RealRectangle2D]",
-      "typing.List[XTextLayout]",
-      "RealRectangle2D",
-      "RealPoint2D"
+      "caret_i",
+      "string_context_i",
+      "geometry_real_point2_d_i",
+      "typing.List[geometry_real_rectangle2_d_i]"
     ],
     "typings": [
-      "typing.List[XTextLayout]",
-      "typing.List[XPolyPolygon2D]",
+      "typing.List[x_text_layout_i]",
+      "typing.List[x_poly_polygon2_d_i]",
       "typing.List[float]",
-      "typing.List[RealRectangle2D]"
+      "typing.List[geometry_real_rectangle2_d_i]"
     ],
     "requires_typing": true,
     "name": "XTextLayout",
@@ -125,7 +138,7 @@
           "args": [
             [
               "aNextLayouts",
-              "typing.List[XTextLayout]",
+              "typing.List[x_text_layout_i]",
               "in"
             ],
             [
@@ -148,7 +161,7 @@
         },
         {
           "name": "getCaret",
-          "returns": "Caret",
+          "returns": "caret_i",
           "desc": [
             "This method converts an insertion index to a caret.",
             "",
@@ -172,7 +185,7 @@
         },
         {
           "name": "getFont",
-          "returns": "XCanvasFont",
+          "returns": "x_canvas_font_i",
           "desc": [
             "Request the associated font for this layout."
           ],
@@ -221,7 +234,7 @@
         },
         {
           "name": "getText",
-          "returns": "StringContext",
+          "returns": "string_context_i",
           "desc": [
             "Request the text this layout contains."
           ],
@@ -230,7 +243,7 @@
         },
         {
           "name": "getTextHit",
-          "returns": "TextHit",
+          "returns": "text_hit_i",
           "desc": [
             "This method determines the hit position in the text.",
             "",
@@ -240,7 +253,7 @@
           "args": [
             [
               "aHitPoint",
-              "RealPoint2D",
+              "geometry_real_point2_d_i",
               "in"
             ]
           ]
@@ -266,7 +279,7 @@
         },
         {
           "name": "queryInkMeasures",
-          "returns": "typing.List[RealRectangle2D]",
+          "returns": "typing.List[geometry_real_rectangle2_d_i]",
           "desc": [
             "Query the ink bounding boxes for every glyph in the layouted text.",
             "",
@@ -292,7 +305,7 @@
         },
         {
           "name": "queryLogicalHighlighting",
-          "returns": "XPolyPolygon2D",
+          "returns": "x_poly_polygon2_d_i",
           "desc": [
             "This method generates a highlight polygon.",
             "",
@@ -316,7 +329,7 @@
         },
         {
           "name": "queryMeasures",
-          "returns": "typing.List[RealRectangle2D]",
+          "returns": "typing.List[geometry_real_rectangle2_d_i]",
           "desc": [
             "Query the logical bounding boxes of every character in the given text string.",
             "",
@@ -327,7 +340,7 @@
         },
         {
           "name": "queryTextBounds",
-          "returns": "RealRectangle2D",
+          "returns": "geometry_real_rectangle2_d_i",
           "desc": [
             "Query the overall bounding box of the text.",
             "",
@@ -338,7 +351,7 @@
         },
         {
           "name": "queryTextShapes",
-          "returns": "typing.List[XPolyPolygon2D]",
+          "returns": "typing.List[x_poly_polygon2_d_i]",
           "desc": [
             "Extract the polygonal shapes of the layouted text.",
             "",
@@ -349,7 +362,7 @@
         },
         {
           "name": "queryVisualHighlighting",
-          "returns": "XPolyPolygon2D",
+          "returns": "x_poly_polygon2_d_i",
           "desc": [
             "This method generates a highlight polygon.",
             "",

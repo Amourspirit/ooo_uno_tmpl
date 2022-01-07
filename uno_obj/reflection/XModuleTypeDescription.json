@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XModuleTypeDescription",
   "type": "interface",
   "namespace": "com.sun.star.reflection",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,15 +16,19 @@
     "from_imports": [
       [
         ".x_type_description",
-        "XTypeDescription"
+        "XTypeDescription",
+        "x_type_description_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.reflection.XTypeDescription": "x_type_description_i"
+    },
     "quote": [
-      "typing.List[XTypeDescription]"
+      "typing.List[x_type_description_i]"
     ],
     "typings": [
-      "typing.List[XTypeDescription]"
+      "typing.List[x_type_description_i]"
     ],
     "requires_typing": true,
     "name": "XModuleTypeDescription",
@@ -46,7 +51,7 @@
       "methods": [
         {
           "name": "getMembers",
-          "returns": "typing.List[XTypeDescription]",
+          "returns": "typing.List[x_type_description_i]",
           "desc": [
             "Returns the type descriptions for the members of this module."
           ],

@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XGlobalEventBroadcaster",
   "type": "interface",
   "namespace": "com.sun.star.frame",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,23 +15,33 @@
   "data": {
     "from_imports": [
       [
+        "..document.x_events_supplier",
+        "XEventsSupplier",
+        "document_x_events_supplier_i"
+      ],
+      [
         "..document.x_document_event_listener",
-        "XDocumentEventListener"
+        "XDocumentEventListener",
+        "document_x_document_event_listener_i"
       ],
       [
         "..container.x_set",
-        "XSet"
+        "XSet",
+        "container_x_set_i"
       ],
       [
         "..document.x_document_event_broadcaster",
-        "XDocumentEventBroadcaster"
-      ],
-      [
-        "..document.x_events_supplier",
-        "XEventsSupplier"
+        "XDocumentEventBroadcaster",
+        "document_x_document_event_broadcaster_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.document.XEventsSupplier": "document_x_events_supplier_i",
+      "com.sun.star.document.XDocumentEventListener": "document_x_document_event_listener_i",
+      "com.sun.star.container.XSet": "container_x_set_i",
+      "com.sun.star.document.XDocumentEventBroadcaster": "document_x_document_event_broadcaster_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -39,9 +50,9 @@
     "namespace": "com.sun.star.frame",
     "extends": [
       "com.sun.star.document.XEventsSupplier",
-      "com.sun.star.document.XDocumentEventBroadcaster",
+      "com.sun.star.document.XDocumentEventListener",
       "com.sun.star.container.XSet",
-      "com.sun.star.document.XDocumentEventListener"
+      "com.sun.star.document.XDocumentEventBroadcaster"
     ],
     "desc": [
       "Provides the unified interface of theGlobalEventBroadcaster singleton.",

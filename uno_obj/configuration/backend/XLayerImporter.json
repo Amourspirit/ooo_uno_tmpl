@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XLayerImporter",
   "type": "interface",
   "namespace": "com.sun.star.configuration.backend",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,22 +16,28 @@
     "from_imports": [
       [
         "...uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
-        ".x_backend",
-        "XBackend"
+        ".x_layer",
+        "XLayer",
+        "x_layer_i"
       ],
       [
-        ".x_layer",
-        "XLayer"
+        ".x_backend",
+        "XBackend",
+        "x_backend_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "XBackend",
-      "XLayer"
+      "x_layer_i",
+      "x_backend_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -52,7 +59,7 @@
       "methods": [
         {
           "name": "getTargetBackend",
-          "returns": "XBackend",
+          "returns": "x_backend_i",
           "desc": [
             "gets the target backend for importing."
           ],
@@ -76,7 +83,7 @@
           "args": [
             [
               "aLayer",
-              "XLayer",
+              "x_layer_i",
               "in"
             ]
           ]
@@ -98,7 +105,7 @@
           "args": [
             [
               "aLayer",
-              "XLayer",
+              "x_layer_i",
               "in"
             ],
             [
@@ -120,7 +127,7 @@
           "args": [
             [
               "aBackend",
-              "XBackend",
+              "x_backend_i",
               "in"
             ]
           ]

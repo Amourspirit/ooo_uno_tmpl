@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XPresentationPage",
   "type": "interface",
   "namespace": "com.sun.star.presentation",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,12 +16,16 @@
     "from_imports": [
       [
         "..drawing.x_draw_page",
-        "XDrawPage"
+        "XDrawPage",
+        "drawing_x_draw_page_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.drawing.XDrawPage": "drawing_x_draw_page_i"
+    },
     "quote": [
-      "XDrawPage"
+      "drawing_x_draw_page_i"
     ],
     "typings": [],
     "requires_typing": false,
@@ -38,7 +43,7 @@
       "methods": [
         {
           "name": "getNotesPage",
-          "returns": "XDrawPage",
+          "returns": "drawing_x_draw_page_i",
           "desc": [
             "return the note page from the current page in the presentation, the name for the note page in the user interface note view, and one of the views from a presentation page."
           ],

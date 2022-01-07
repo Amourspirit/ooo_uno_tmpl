@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XInteractionSupplyAuthentication",
   "type": "interface",
   "namespace": "com.sun.star.ucb",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,21 +16,26 @@
     "from_imports": [
       [
         "..task.x_interaction_continuation",
-        "XInteractionContinuation"
+        "XInteractionContinuation",
+        "task_x_interaction_continuation_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".remember_authentication",
-        "RememberAuthentication"
+        "RememberAuthentication",
+        "remember_authentication_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.task.XInteractionContinuation": "task_x_interaction_continuation_i"
+    },
     "quote": [
-      "RememberAuthentication",
-      "typing.List[RememberAuthentication]"
+      "remember_authentication_i",
+      "typing.List[remember_authentication_i]"
     ],
     "typings": [
-      "typing.List[RememberAuthentication]"
+      "typing.List[remember_authentication_i]"
     ],
     "requires_typing": true,
     "name": "XInteractionSupplyAuthentication",
@@ -84,7 +90,7 @@
         },
         {
           "name": "getRememberAccountModes",
-          "returns": "typing.List[RememberAuthentication]",
+          "returns": "typing.List[remember_authentication_i]",
           "desc": [
             "Specifies the available modes of how long to remember the account."
           ],
@@ -92,14 +98,14 @@
           "args": [
             [
               "Default",
-              "RememberAuthentication",
+              "remember_authentication_i",
               "out"
             ]
           ]
         },
         {
           "name": "getRememberPasswordModes",
-          "returns": "typing.List[RememberAuthentication]",
+          "returns": "typing.List[remember_authentication_i]",
           "desc": [
             "Specifies the available modes of how long to remember the password."
           ],
@@ -107,7 +113,7 @@
           "args": [
             [
               "Default",
-              "RememberAuthentication",
+              "remember_authentication_i",
               "out"
             ]
           ]
@@ -175,7 +181,7 @@
           "args": [
             [
               "Remember",
-              "RememberAuthentication",
+              "remember_authentication_i",
               "in"
             ]
           ]
@@ -192,7 +198,7 @@
           "args": [
             [
               "Remember",
-              "RememberAuthentication",
+              "remember_authentication_i",
               "in"
             ]
           ]

@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XSortableMutableGridDataModel",
   "type": "interface",
   "namespace": "com.sun.star.awt.grid",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,15 +15,21 @@
   "data": {
     "from_imports": [
       [
-        ".x_sortable_grid_data",
-        "XSortableGridData"
+        ".x_mutable_grid_data_model",
+        "XMutableGridDataModel",
+        "x_mutable_grid_data_model_i"
       ],
       [
-        ".x_mutable_grid_data_model",
-        "XMutableGridDataModel"
+        ".x_sortable_grid_data",
+        "XSortableGridData",
+        "x_sortable_grid_data_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.awt.grid.XMutableGridDataModel": "x_mutable_grid_data_model_i",
+      "com.sun.star.awt.grid.XSortableGridData": "x_sortable_grid_data_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,

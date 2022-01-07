@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XXMLEncryptionTemplate",
   "type": "interface",
   "namespace": "com.sun.star.xml.crypto",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,17 +16,22 @@
     "from_imports": [
       [
         ".xxml_security_template",
-        "XXMLSecurityTemplate"
+        "XXMLSecurityTemplate",
+        "xxml_security_template_i"
       ]
     ],
     "from_imports_typing": [
       [
         "..wrapper.xxml_element_wrapper",
-        "XXMLElementWrapper"
+        "XXMLElementWrapper",
+        "wrapper_xxml_element_wrapper_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.xml.crypto.XXMLSecurityTemplate": "xxml_security_template_i"
+    },
     "quote": [
-      "XXMLElementWrapper"
+      "wrapper_xxml_element_wrapper_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -59,7 +65,7 @@
       "methods": [
         {
           "name": "getTarget",
-          "returns": "XXMLElementWrapper",
+          "returns": "wrapper_xxml_element_wrapper_i",
           "desc": [
             "Get the target XML element, i.e.",
             "",

@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XDataReceiver",
   "type": "interface",
   "namespace": "com.sun.star.chart2.data",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,47 +16,57 @@
     "from_imports": [
       [
         "...uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
-        ".x_range_highlighter",
-        "XRangeHighlighter"
+        "...awt.x_request_callback",
+        "XRequestCallback",
+        "awt_x_request_callback_i"
       ],
       [
         "...util.x_number_formats_supplier",
-        "XNumberFormatsSupplier"
+        "XNumberFormatsSupplier",
+        "util_x_number_formats_supplier_i"
       ],
       [
-        "...awt.x_request_callback",
-        "XRequestCallback"
-      ],
-      [
-        ".x_data_source",
-        "XDataSource"
+        ".x_range_highlighter",
+        "XRangeHighlighter",
+        "x_range_highlighter_i"
       ],
       [
         ".x_data_provider",
-        "XDataProvider"
+        "XDataProvider",
+        "x_data_provider_i"
+      ],
+      [
+        ".x_data_source",
+        "XDataSource",
+        "x_data_source_i"
       ],
       [
         "...beans.property_value",
-        "PropertyValue"
+        "PropertyValue",
+        "beans_property_value_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
+      "x_range_highlighter_i",
+      "util_x_number_formats_supplier_i",
+      "x_data_provider_i",
+      "typing.List[beans_property_value_i]",
+      "x_data_source_i",
       "typing.List[str]",
-      "XDataProvider",
-      "typing.List[PropertyValue]",
-      "XRangeHighlighter",
-      "XRequestCallback",
-      "XNumberFormatsSupplier",
-      "XDataSource"
+      "awt_x_request_callback_i"
     ],
     "typings": [
       "typing.List[str]",
-      "typing.List[PropertyValue]"
+      "typing.List[beans_property_value_i]"
     ],
     "requires_typing": true,
     "name": "XDataReceiver",
@@ -85,7 +96,7 @@
           "args": [
             [
               "xProvider",
-              "XDataProvider",
+              "x_data_provider_i",
               "in"
             ]
           ]
@@ -102,14 +113,14 @@
           "args": [
             [
               "xSupplier",
-              "XNumberFormatsSupplier",
+              "util_x_number_formats_supplier_i",
               "in"
             ]
           ]
         },
         {
           "name": "getPopupRequest",
-          "returns": "XRequestCallback",
+          "returns": "awt_x_request_callback_i",
           "desc": [
             "A callback object to execute a foreign popup menu window.",
             "",
@@ -122,7 +133,7 @@
         },
         {
           "name": "getRangeHighlighter",
-          "returns": "XRangeHighlighter",
+          "returns": "x_range_highlighter_i",
           "desc": [
             "Returns a component at which a view representing the data of the attached data provider may listen for highlighting the data ranges used by the currently selected objects in the data receiver component.",
             "",
@@ -135,7 +146,7 @@
         },
         {
           "name": "getUsedData",
-          "returns": "XDataSource",
+          "returns": "x_data_source_i",
           "desc": [
             "Returns the data requested by the most recently attached data provider, that is still used."
           ],
@@ -163,7 +174,7 @@
           "args": [
             [
               "aArguments",
-              "typing.List[PropertyValue]",
+              "typing.List[beans_property_value_i]",
               "in"
             ]
           ]

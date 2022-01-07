@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XSAXSerializable",
   "type": "interface",
   "namespace": "com.sun.star.xml.sax",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -16,19 +17,22 @@
     "from_imports_typing": [
       [
         "...beans.string_pair",
-        "StringPair"
+        "StringPair",
+        "beans_string_pair_i"
       ],
       [
         ".x_document_handler",
-        "XDocumentHandler"
+        "XDocumentHandler",
+        "x_document_handler_i"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "XDocumentHandler",
-      "typing.List[StringPair]"
+      "typing.List[beans_string_pair_i]",
+      "x_document_handler_i"
     ],
     "typings": [
-      "typing.List[StringPair]"
+      "typing.List[beans_string_pair_i]"
     ],
     "requires_typing": true,
     "name": "XSAXSerializable",
@@ -61,12 +65,12 @@
           "args": [
             [
               "handler",
-              "XDocumentHandler",
+              "x_document_handler_i",
               "in"
             ],
             [
               "namespaces",
-              "typing.List[StringPair]",
+              "typing.List[beans_string_pair_i]",
               "in"
             ]
           ]

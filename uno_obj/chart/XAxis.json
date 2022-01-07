@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XAxis",
   "type": "interface",
   "namespace": "com.sun.star.chart",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,17 +16,22 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
         "..beans.x_property_set",
-        "XPropertySet"
+        "XPropertySet",
+        "beans_x_property_set_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "XPropertySet"
+      "beans_x_property_set_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -47,21 +53,21 @@
       "methods": [
         {
           "name": "getAxisTitle",
-          "returns": "XPropertySet",
+          "returns": "beans_x_property_set_i",
           "desc": [],
           "raises": [],
           "args": []
         },
         {
           "name": "getMajorGrid",
-          "returns": "XPropertySet",
+          "returns": "beans_x_property_set_i",
           "desc": [],
           "raises": [],
           "args": []
         },
         {
           "name": "getMinorGrid",
-          "returns": "XPropertySet",
+          "returns": "beans_x_property_set_i",
           "desc": [],
           "raises": [],
           "args": []

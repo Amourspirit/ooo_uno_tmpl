@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XFilterGroupManager",
   "type": "interface",
   "namespace": "com.sun.star.ui.dialogs",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,20 +16,25 @@
     "from_imports": [
       [
         "...uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
         "...beans.string_pair",
-        "StringPair"
+        "StringPair",
+        "beans_string_pair_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "typing.List[StringPair]"
+      "typing.List[beans_string_pair_i]"
     ],
     "typings": [
-      "typing.List[StringPair]"
+      "typing.List[beans_string_pair_i]"
     ],
     "requires_typing": true,
     "name": "XFilterGroupManager",
@@ -63,7 +69,7 @@
             ],
             [
               "aFilters",
-              "typing.List[StringPair]",
+              "typing.List[beans_string_pair_i]",
               "in"
             ]
           ]

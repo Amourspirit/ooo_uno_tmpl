@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XVisualObject",
   "type": "interface",
   "namespace": "com.sun.star.embed",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,22 +16,28 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
-        ".visual_representation",
-        "VisualRepresentation"
+        "..awt.size",
+        "Size",
+        "awt_size_i"
       ],
       [
-        "..awt.size",
-        "Size"
+        ".visual_representation",
+        "VisualRepresentation",
+        "visual_representation_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "Size",
-      "VisualRepresentation"
+      "awt_size_i",
+      "visual_representation_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -65,7 +72,7 @@
         },
         {
           "name": "getPreferredVisualRepresentation",
-          "returns": "VisualRepresentation",
+          "returns": "visual_representation_i",
           "desc": [
             "retrieves visual representation of the object in preferable format.",
             "",
@@ -86,7 +93,7 @@
         },
         {
           "name": "getVisualAreaSize",
-          "returns": "Size",
+          "returns": "awt_size_i",
           "desc": [
             "gets the size of object's visual area.",
             "",
@@ -128,7 +135,7 @@
             ],
             [
               "aSize",
-              "Size",
+              "awt_size_i",
               "in"
             ]
           ]

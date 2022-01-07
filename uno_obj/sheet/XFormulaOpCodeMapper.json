@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XFormulaOpCodeMapper",
   "type": "interface",
   "namespace": "com.sun.star.sheet",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,23 +16,26 @@
     "from_imports": [],
     "from_imports_typing": [
       [
-        ".formula_token",
-        "FormulaToken"
+        ".formula_op_code_map_entry",
+        "FormulaOpCodeMapEntry",
+        "formula_op_code_map_entry_i"
       ],
       [
-        ".formula_op_code_map_entry",
-        "FormulaOpCodeMapEntry"
+        ".formula_token",
+        "FormulaToken",
+        "formula_token_i"
       ]
     ],
+    "extends_map": {},
     "quote": [
+      "typing.List[formula_op_code_map_entry_i]",
       "typing.List[str]",
-      "typing.List[FormulaToken]",
-      "typing.List[FormulaOpCodeMapEntry]"
+      "typing.List[formula_token_i]"
     ],
     "typings": [
+      "typing.List[formula_op_code_map_entry_i]",
       "typing.List[str]",
-      "typing.List[FormulaToken]",
-      "typing.List[FormulaOpCodeMapEntry]"
+      "typing.List[formula_token_i]"
     ],
     "requires_typing": true,
     "name": "XFormulaOpCodeMapper",
@@ -46,7 +50,7 @@
       "methods": [
         {
           "name": "getAvailableMappings",
-          "returns": "typing.List[FormulaOpCodeMapEntry]",
+          "returns": "typing.List[formula_op_code_map_entry_i]",
           "desc": [
             "returns a sequence of map entries for all available elements of a given formula language.",
             "",
@@ -70,7 +74,7 @@
         },
         {
           "name": "getMappings",
-          "returns": "typing.List[FormulaToken]",
+          "returns": "typing.List[formula_token_i]",
           "desc": [
             "returns a sequence of tokens matching the input sequence of strings in order.",
             "",

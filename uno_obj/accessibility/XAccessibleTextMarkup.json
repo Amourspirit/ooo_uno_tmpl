@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XAccessibleTextMarkup",
   "type": "interface",
   "namespace": "com.sun.star.accessibility",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,21 +16,26 @@
     "from_imports": [
       [
         ".x_accessible_text",
-        "XAccessibleText"
+        "XAccessibleText",
+        "x_accessible_text_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".text_segment",
-        "TextSegment"
+        "TextSegment",
+        "text_segment_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.accessibility.XAccessibleText": "x_accessible_text_i"
+    },
     "quote": [
-      "TextSegment",
-      "typing.List[TextSegment]"
+      "text_segment_i",
+      "typing.List[text_segment_i]"
     ],
     "typings": [
-      "typing.List[TextSegment]"
+      "typing.List[text_segment_i]"
     ],
     "requires_typing": true,
     "name": "XAccessibleTextMarkup",
@@ -52,7 +58,7 @@
       "methods": [
         {
           "name": "getTextMarkup",
-          "returns": "TextSegment",
+          "returns": "text_segment_i",
           "desc": [
             "Returns the text segment of the text markup of the given index and of the given text mark type.",
             "",
@@ -79,7 +85,7 @@
         },
         {
           "name": "getTextMarkupAtIndex",
-          "returns": "typing.List[TextSegment]",
+          "returns": "typing.List[text_segment_i]",
           "desc": [
             "returns a sequence of the text segments of the text markups at the given character index and of the given text markup type.",
             "",

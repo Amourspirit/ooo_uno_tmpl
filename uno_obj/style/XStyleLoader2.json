@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XStyleLoader2",
   "type": "interface",
   "namespace": "com.sun.star.style",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,25 +16,31 @@
     "from_imports": [
       [
         ".x_style_loader",
-        "XStyleLoader"
+        "XStyleLoader",
+        "x_style_loader_i"
       ]
     ],
     "from_imports_typing": [
       [
-        "..lang.x_component",
-        "XComponent"
+        "..beans.property_value",
+        "PropertyValue",
+        "beans_property_value_i"
       ],
       [
-        "..beans.property_value",
-        "PropertyValue"
+        "..lang.x_component",
+        "XComponent",
+        "lang_x_component_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.style.XStyleLoader": "x_style_loader_i"
+    },
     "quote": [
-      "XComponent",
-      "typing.List[PropertyValue]"
+      "lang_x_component_i",
+      "typing.List[beans_property_value_i]"
     ],
     "typings": [
-      "typing.List[PropertyValue]"
+      "typing.List[beans_property_value_i]"
     ],
     "requires_typing": true,
     "name": "XStyleLoader2",
@@ -66,12 +73,12 @@
           "args": [
             [
               "aSourceComponent",
-              "XComponent",
+              "lang_x_component_i",
               "in"
             ],
             [
               "aOptions",
-              "typing.List[PropertyValue]",
+              "typing.List[beans_property_value_i]",
               "in"
             ]
           ]

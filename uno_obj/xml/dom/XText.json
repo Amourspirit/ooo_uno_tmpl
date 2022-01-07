@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XText",
   "type": "interface",
   "namespace": "com.sun.star.xml.dom",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,17 +16,22 @@
     "from_imports": [
       [
         ".x_character_data",
-        "XCharacterData"
+        "XCharacterData",
+        "x_character_data_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_text",
-        "XText"
+        "XText",
+        "x_text_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.xml.dom.XCharacterData": "x_character_data_i"
+    },
     "quote": [
-      "XText"
+      "x_text_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -41,7 +47,7 @@
       "methods": [
         {
           "name": "splitText",
-          "returns": "XText",
+          "returns": "x_text_i",
           "desc": [
             "Breaks this node into two nodes at the specified offset, keeping both in the tree as siblings.",
             "",

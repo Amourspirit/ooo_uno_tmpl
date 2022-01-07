@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XModel3",
   "type": "interface",
   "namespace": "com.sun.star.frame",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,22 +16,27 @@
     "from_imports": [
       [
         ".x_model2",
-        "XModel2"
+        "XModel2",
+        "x_model2_i"
       ]
     ],
     "from_imports_typing": [
       [
         "..beans.property_value",
-        "PropertyValue"
+        "PropertyValue",
+        "beans_property_value_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.frame.XModel2": "x_model2_i"
+    },
     "quote": [
       "typing.List[str]",
-      "typing.List[PropertyValue]"
+      "typing.List[beans_property_value_i]"
     ],
     "typings": [
       "typing.List[str]",
-      "typing.List[PropertyValue]"
+      "typing.List[beans_property_value_i]"
     ],
     "requires_typing": true,
     "name": "XModel3",
@@ -47,7 +53,7 @@
       "methods": [
         {
           "name": "getArgs2",
-          "returns": "typing.List[PropertyValue]",
+          "returns": "typing.List[beans_property_value_i]",
           "desc": [
             "Provides optimised read access (so we don't need to fetch expensive properties that we are not interested in) on currently representation of the com.sun.star.document.MediaDescriptor of this model which describes the model and its state.",
             "",

@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XTransitionFactory",
   "type": "interface",
   "namespace": "com.sun.star.presentation",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,27 +16,34 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_transition",
-        "XTransition"
-      ],
-      [
-        ".x_slide_show_view",
-        "XSlideShowView"
+        "XTransition",
+        "x_transition_i"
       ],
       [
         "..rendering.x_bitmap",
-        "XBitmap"
+        "XBitmap",
+        "rendering_x_bitmap_i"
+      ],
+      [
+        ".x_slide_show_view",
+        "XSlideShowView",
+        "x_slide_show_view_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "XBitmap",
-      "XTransition",
-      "XSlideShowView"
+      "x_transition_i",
+      "x_slide_show_view_i",
+      "rendering_x_bitmap_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -59,7 +67,7 @@
       "methods": [
         {
           "name": "createTransition",
-          "returns": "XTransition",
+          "returns": "x_transition_i",
           "desc": [
             "Actually create a transition for the given transition id."
           ],
@@ -82,17 +90,17 @@
             ],
             [
               "view",
-              "XSlideShowView",
+              "x_slide_show_view_i",
               "in"
             ],
             [
               "leavingBitmap",
-              "XBitmap",
+              "rendering_x_bitmap_i",
               "in"
             ],
             [
               "enteringBitmap",
-              "XBitmap",
+              "rendering_x_bitmap_i",
               "in"
             ]
           ]

@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XEmbeddedObjectCreator",
   "type": "interface",
   "namespace": "com.sun.star.embed",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,22 +16,32 @@
     "from_imports": [
       [
         ".x_link_factory",
-        "XLinkFactory"
+        "XLinkFactory",
+        "x_link_factory_i"
       ],
       [
         ".x_link_creator",
-        "XLinkCreator"
-      ],
-      [
-        ".x_embed_object_factory",
-        "XEmbedObjectFactory"
+        "XLinkCreator",
+        "x_link_creator_i"
       ],
       [
         ".x_embed_object_creator",
-        "XEmbedObjectCreator"
+        "XEmbedObjectCreator",
+        "x_embed_object_creator_i"
+      ],
+      [
+        ".x_embed_object_factory",
+        "XEmbedObjectFactory",
+        "x_embed_object_factory_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.embed.XLinkFactory": "x_link_factory_i",
+      "com.sun.star.embed.XLinkCreator": "x_link_creator_i",
+      "com.sun.star.embed.XEmbedObjectCreator": "x_embed_object_creator_i",
+      "com.sun.star.embed.XEmbedObjectFactory": "x_embed_object_factory_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -38,10 +49,10 @@
     "imports": [],
     "namespace": "com.sun.star.embed",
     "extends": [
-      "com.sun.star.embed.XEmbedObjectCreator",
-      "com.sun.star.embed.XEmbedObjectFactory",
+      "com.sun.star.embed.XLinkFactory",
       "com.sun.star.embed.XLinkCreator",
-      "com.sun.star.embed.XLinkFactory"
+      "com.sun.star.embed.XEmbedObjectCreator",
+      "com.sun.star.embed.XEmbedObjectFactory"
     ],
     "desc": [
       "",

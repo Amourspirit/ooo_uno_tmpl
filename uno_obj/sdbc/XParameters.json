@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XParameters",
   "type": "interface",
   "namespace": "com.sun.star.sdbc",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,53 +16,65 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
-        "..io.x_input_stream",
-        "XInputStream"
+        ".x_array",
+        "XArray",
+        "x_array_i"
       ],
       [
         "..util.time",
-        "Time"
+        "Time",
+        "util_time_i"
       ],
       [
         "..util.date_time",
-        "DateTime"
-      ],
-      [
-        ".x_array",
-        "XArray"
+        "DateTime",
+        "util_date_time_i"
       ],
       [
         ".x_blob",
-        "XBlob"
+        "XBlob",
+        "x_blob_i"
       ],
       [
         ".x_ref",
-        "XRef"
-      ],
-      [
-        ".x_clob",
-        "XClob"
+        "XRef",
+        "x_ref_i"
       ],
       [
         "..util.date",
-        "Date"
+        "Date",
+        "util_date_i"
+      ],
+      [
+        ".x_clob",
+        "XClob",
+        "x_clob_i"
+      ],
+      [
+        "..io.x_input_stream",
+        "XInputStream",
+        "io_x_input_stream_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "XArray",
-      "Time",
-      "XClob",
-      "Date",
-      "XRef",
-      "XBlob",
-      "XInputStream",
+      "x_clob_i",
+      "util_date_time_i",
+      "x_blob_i",
+      "x_array_i",
+      "util_date_i",
       "typing.List[int]",
-      "DateTime"
+      "io_x_input_stream_i",
+      "x_ref_i",
+      "util_time_i"
     ],
     "typings": [
       "typing.List[int]"
@@ -115,7 +128,7 @@
             ],
             [
               "x",
-              "XArray",
+              "x_array_i",
               "in"
             ]
           ]
@@ -139,7 +152,7 @@
             ],
             [
               "x",
-              "XInputStream",
+              "io_x_input_stream_i",
               "in"
             ],
             [
@@ -166,7 +179,7 @@
             ],
             [
               "x",
-              "XBlob",
+              "x_blob_i",
               "in"
             ]
           ]
@@ -262,7 +275,7 @@
             ],
             [
               "x",
-              "XInputStream",
+              "io_x_input_stream_i",
               "in"
             ],
             [
@@ -289,7 +302,7 @@
             ],
             [
               "x",
-              "XClob",
+              "x_clob_i",
               "in"
             ]
           ]
@@ -313,7 +326,7 @@
             ],
             [
               "x",
-              "Date",
+              "util_date_i",
               "in"
             ]
           ]
@@ -547,7 +560,7 @@
             ],
             [
               "x",
-              "XRef",
+              "x_ref_i",
               "in"
             ]
           ]
@@ -619,7 +632,7 @@
             ],
             [
               "x",
-              "Time",
+              "util_time_i",
               "in"
             ]
           ]
@@ -643,7 +656,7 @@
             ],
             [
               "x",
-              "DateTime",
+              "util_date_time_i",
               "in"
             ]
           ]

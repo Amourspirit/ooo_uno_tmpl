@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XTextTable",
   "type": "interface",
   "namespace": "com.sun.star.text",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,33 +16,41 @@
     "from_imports": [
       [
         ".x_text_content",
-        "XTextContent"
+        "XTextContent",
+        "x_text_content_i"
       ]
     ],
     "from_imports_typing": [
       [
-        "..table.x_cell",
-        "XCell"
-      ],
-      [
         "..table.x_table_rows",
-        "XTableRows"
+        "XTableRows",
+        "table_x_table_rows_i"
       ],
       [
         ".x_text_table_cursor",
-        "XTextTableCursor"
+        "XTextTableCursor",
+        "x_text_table_cursor_i"
+      ],
+      [
+        "..table.x_cell",
+        "XCell",
+        "table_x_cell_i"
       ],
       [
         "..table.x_table_columns",
-        "XTableColumns"
+        "XTableColumns",
+        "table_x_table_columns_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.text.XTextContent": "x_text_content_i"
+    },
     "quote": [
-      "typing.List[str]",
-      "XTextTableCursor",
-      "XCell",
-      "XTableColumns",
-      "XTableRows"
+      "table_x_cell_i",
+      "table_x_table_columns_i",
+      "table_x_table_rows_i",
+      "x_text_table_cursor_i",
+      "typing.List[str]"
     ],
     "typings": [
       "typing.List[str]"
@@ -61,7 +70,7 @@
       "methods": [
         {
           "name": "createCursorByCellName",
-          "returns": "XTextTableCursor",
+          "returns": "x_text_table_cursor_i",
           "desc": [
             "creates a text table cursor and returns the XTextTableCursor interface.",
             "",
@@ -78,7 +87,7 @@
         },
         {
           "name": "getCellByName",
-          "returns": "XCell",
+          "returns": "table_x_cell_i",
           "desc": [
             "Example: The cell in the 4th column and third row has the name \\\"D3\\\".",
             "",
@@ -104,14 +113,14 @@
         },
         {
           "name": "getColumns",
-          "returns": "XTableColumns",
+          "returns": "table_x_table_columns_i",
           "desc": [],
           "raises": [],
           "args": []
         },
         {
           "name": "getRows",
-          "returns": "XTableRows",
+          "returns": "table_x_table_rows_i",
           "desc": [],
           "raises": [],
           "args": []

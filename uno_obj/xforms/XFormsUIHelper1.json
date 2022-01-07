@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XFormsUIHelper1",
   "type": "interface",
   "namespace": "com.sun.star.xforms",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,31 +16,38 @@
     "from_imports": [],
     "from_imports_typing": [
       [
-        "..beans.x_property_set",
-        "XPropertySet"
-      ],
-      [
-        "..xml.dom.x_document",
-        "XDocument"
-      ],
-      [
-        "..xml.dom.x_node",
-        "XNode"
-      ],
-      [
         "..frame.x_model",
-        "XModel"
+        "XModel",
+        "frame_x_model_i"
       ],
       [
         ".x_model",
-        "XModel"
+        "XModel",
+        "x_model_i"
+      ],
+      [
+        "..xml.dom.x_document",
+        "XDocument",
+        "xml_dom_x_document_i"
+      ],
+      [
+        "..beans.x_property_set",
+        "XPropertySet",
+        "beans_x_property_set_i"
+      ],
+      [
+        "..xml.dom.x_node",
+        "XNode",
+        "xml_dom_x_node_i"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "XModel",
-      "XPropertySet",
-      "XDocument",
-      "XNode"
+      "xml_dom_x_document_i",
+      "beans_x_property_set_i",
+      "frame_x_model_i",
+      "x_model_i",
+      "xml_dom_x_node_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -57,26 +65,26 @@
       "methods": [
         {
           "name": "cloneBindingAsGhost",
-          "returns": "XPropertySet",
+          "returns": "beans_x_property_set_i",
           "desc": [],
           "raises": [],
           "args": [
             [
               "binding",
-              "XPropertySet",
+              "beans_x_property_set_i",
               "in"
             ]
           ]
         },
         {
           "name": "createAttribute",
-          "returns": "XNode",
+          "returns": "xml_dom_x_node_i",
           "desc": [],
           "raises": [],
           "args": [
             [
               "xParent",
-              "XNode",
+              "xml_dom_x_node_i",
               "in"
             ],
             [
@@ -88,13 +96,13 @@
         },
         {
           "name": "createElement",
-          "returns": "XNode",
+          "returns": "xml_dom_x_node_i",
           "desc": [],
           "raises": [],
           "args": [
             [
               "xParent",
-              "XNode",
+              "xml_dom_x_node_i",
               "in"
             ],
             [
@@ -106,13 +114,13 @@
         },
         {
           "name": "getBindingForNode",
-          "returns": "XPropertySet",
+          "returns": "beans_x_property_set_i",
           "desc": [],
           "raises": [],
           "args": [
             [
               "xNode",
-              "XNode",
+              "xml_dom_x_node_i",
               "in"
             ],
             [
@@ -130,7 +138,7 @@
           "args": [
             [
               "xBinding",
-              "XPropertySet",
+              "beans_x_property_set_i",
               "in"
             ],
             [
@@ -148,7 +156,7 @@
           "args": [
             [
               "xNode",
-              "XNode",
+              "xml_dom_x_node_i",
               "in"
             ]
           ]
@@ -161,7 +169,7 @@
           "args": [
             [
               "xNode",
-              "XNode",
+              "xml_dom_x_node_i",
               "in"
             ]
           ]
@@ -174,7 +182,7 @@
           "args": [
             [
               "xNode",
-              "XNode",
+              "xml_dom_x_node_i",
               "in"
             ],
             [
@@ -192,7 +200,7 @@
           "args": [
             [
               "xNode",
-              "XNode",
+              "xml_dom_x_node_i",
               "in"
             ]
           ]
@@ -205,7 +213,7 @@
           "args": [
             [
               "xBinding",
-              "XPropertySet",
+              "beans_x_property_set_i",
               "in"
             ],
             [
@@ -228,7 +236,7 @@
           "args": [
             [
               "xSubm",
-              "XPropertySet",
+              "beans_x_property_set_i",
               "in"
             ],
             [
@@ -266,7 +274,7 @@
         },
         {
           "name": "newInstance",
-          "returns": "XDocument",
+          "returns": "xml_dom_x_document_i",
           "desc": [],
           "raises": [],
           "args": [
@@ -289,13 +297,13 @@
         },
         {
           "name": "newModel",
-          "returns": "XModel",
+          "returns": "x_model_i",
           "desc": [],
           "raises": [],
           "args": [
             [
               "xModel",
-              "XModel",
+              "frame_x_model_i",
               "in"
             ],
             [
@@ -313,7 +321,7 @@
           "args": [
             [
               "xNode",
-              "XNode",
+              "xml_dom_x_node_i",
               "in"
             ]
           ]
@@ -326,7 +334,7 @@
           "args": [
             [
               "xBinding",
-              "XPropertySet",
+              "beans_x_property_set_i",
               "in"
             ]
           ]
@@ -352,7 +360,7 @@
           "args": [
             [
               "xModel",
-              "XModel",
+              "frame_x_model_i",
               "in"
             ],
             [
@@ -398,7 +406,7 @@
           "args": [
             [
               "xModel",
-              "XModel",
+              "frame_x_model_i",
               "in"
             ],
             [
@@ -415,13 +423,13 @@
         },
         {
           "name": "renameNode",
-          "returns": "XNode",
+          "returns": "xml_dom_x_node_i",
           "desc": [],
           "raises": [],
           "args": [
             [
               "xNode",
-              "XNode",
+              "xml_dom_x_node_i",
               "in"
             ],
             [
@@ -439,7 +447,7 @@
           "args": [
             [
               "xNode",
-              "XNode",
+              "xml_dom_x_node_i",
               "in"
             ],
             [

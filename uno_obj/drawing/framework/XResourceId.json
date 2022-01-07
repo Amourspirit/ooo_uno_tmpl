@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XResourceId",
   "type": "interface",
   "namespace": "com.sun.star.drawing.framework",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,23 +16,27 @@
     "from_imports": [],
     "from_imports_typing": [
       [
-        "...util.url",
-        "URL"
+        ".anchor_binding_mode",
+        "AnchorBindingMode",
+        "anchor_binding_mode_i"
       ],
       [
-        ".anchor_binding_mode",
-        "AnchorBindingMode"
+        "...util.url",
+        "URL",
+        "util_url_i"
       ],
       [
         ".x_resource_id",
-        "XResourceId"
+        "XResourceId",
+        "x_resource_id_i"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "URL",
-      "AnchorBindingMode",
+      "util_url_i",
       "typing.List[str]",
-      "XResourceId"
+      "anchor_binding_mode_i",
+      "x_resource_id_i"
     ],
     "typings": [
       "typing.List[str]"
@@ -55,7 +60,7 @@
       "methods": [
         {
           "name": "clone",
-          "returns": "XResourceId",
+          "returns": "x_resource_id_i",
           "desc": [
             "Return a copy of the called resource id.",
             "",
@@ -78,14 +83,14 @@
           "args": [
             [
               "xId",
-              "XResourceId",
+              "x_resource_id_i",
               "in"
             ]
           ]
         },
         {
           "name": "getAnchor",
-          "returns": "XResourceId",
+          "returns": "x_resource_id_i",
           "desc": [
             "Return a new XResourceId that represents the anchor resource."
           ],
@@ -105,7 +110,7 @@
         },
         {
           "name": "getFullResourceURL",
-          "returns": "URL",
+          "returns": "util_url_i",
           "desc": [
             "Return a URL object of the resource URL that may contain arguments."
           ],
@@ -159,12 +164,12 @@
           "args": [
             [
               "xAnchorId",
-              "XResourceId",
+              "x_resource_id_i",
               "in"
             ],
             [
               "eMode",
-              "AnchorBindingMode",
+              "anchor_binding_mode_i",
               "in"
             ]
           ]
@@ -186,7 +191,7 @@
             ],
             [
               "eMode",
-              "AnchorBindingMode",
+              "anchor_binding_mode_i",
               "in"
             ]
           ]

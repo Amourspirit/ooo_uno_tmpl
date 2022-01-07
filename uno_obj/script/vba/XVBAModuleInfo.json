@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XVBAModuleInfo",
   "type": "interface",
   "namespace": "com.sun.star.script.vba",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -16,11 +17,13 @@
     "from_imports_typing": [
       [
         "..module_info",
-        "ModuleInfo"
+        "ModuleInfo",
+        "module_info_i"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "ModuleInfo"
+      "module_info_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -34,7 +37,7 @@
       "methods": [
         {
           "name": "getModuleInfo",
-          "returns": "ModuleInfo",
+          "returns": "module_info_i",
           "desc": [],
           "raises": [
             "com.sun.star.container.NoSuchElementException",
@@ -78,7 +81,7 @@
             ],
             [
               "ModuleInfo",
-              "ModuleInfo",
+              "module_info_i",
               "in"
             ]
           ]

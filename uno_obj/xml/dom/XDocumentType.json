@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XDocumentType",
   "type": "interface",
   "namespace": "com.sun.star.xml.dom",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,17 +16,22 @@
     "from_imports": [
       [
         ".x_node",
-        "XNode"
+        "XNode",
+        "x_node_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_named_node_map",
-        "XNamedNodeMap"
+        "XNamedNodeMap",
+        "x_named_node_map_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.xml.dom.XNode": "x_node_i"
+    },
     "quote": [
-      "XNamedNodeMap"
+      "x_named_node_map_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -41,7 +47,7 @@
       "methods": [
         {
           "name": "getEntities",
-          "returns": "XNamedNodeMap",
+          "returns": "x_named_node_map_i",
           "desc": [
             "A NamedNodeMap containing the general entities, both external and internal, declared in the DTD."
           ],
@@ -68,7 +74,7 @@
         },
         {
           "name": "getNotations",
-          "returns": "XNamedNodeMap",
+          "returns": "x_named_node_map_i",
           "desc": [
             "A NamedNodeMap containing the notations declared in the DTD."
           ],

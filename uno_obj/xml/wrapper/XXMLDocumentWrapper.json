@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XXMLDocumentWrapper",
   "type": "interface",
   "namespace": "com.sun.star.xml.wrapper",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,26 +16,32 @@
     "from_imports": [
       [
         "...uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
-        ".xxml_element_wrapper",
-        "XXMLElementWrapper"
+        "..sax.x_document_handler",
+        "XDocumentHandler",
+        "sax_x_document_handler_i"
       ],
       [
-        "..sax.x_document_handler",
-        "XDocumentHandler"
+        ".xxml_element_wrapper",
+        "XXMLElementWrapper",
+        "xxml_element_wrapper_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "typing.List[XXMLElementWrapper]",
-      "XDocumentHandler",
-      "XXMLElementWrapper"
+      "xxml_element_wrapper_i",
+      "sax_x_document_handler_i",
+      "typing.List[xxml_element_wrapper_i]"
     ],
     "typings": [
-      "typing.List[XXMLElementWrapper]"
+      "typing.List[xxml_element_wrapper_i]"
     ],
     "requires_typing": true,
     "name": "XXMLDocumentWrapper",
@@ -65,17 +72,17 @@
           "args": [
             [
               "node",
-              "XXMLElementWrapper",
+              "xxml_element_wrapper_i",
               "in"
             ],
             [
               "reservedDescendants",
-              "typing.List[XXMLElementWrapper]",
+              "typing.List[xxml_element_wrapper_i]",
               "in"
             ],
             [
               "stopAtNode",
-              "XXMLElementWrapper",
+              "xxml_element_wrapper_i",
               "in"
             ]
           ]
@@ -92,7 +99,7 @@
           "args": [
             [
               "node",
-              "XXMLElementWrapper",
+              "xxml_element_wrapper_i",
               "in"
             ]
           ]
@@ -109,29 +116,29 @@
           "args": [
             [
               "handler",
-              "XDocumentHandler",
+              "sax_x_document_handler_i",
               "in"
             ],
             [
               "saxEventKeeperHandler",
-              "XDocumentHandler",
+              "sax_x_document_handler_i",
               "in"
             ],
             [
               "startNode",
-              "XXMLElementWrapper",
+              "xxml_element_wrapper_i",
               "in"
             ],
             [
               "endNode",
-              "XXMLElementWrapper",
+              "xxml_element_wrapper_i",
               "in"
             ]
           ]
         },
         {
           "name": "getCurrentElement",
-          "returns": "XXMLElementWrapper",
+          "returns": "xxml_element_wrapper_i",
           "desc": [
             "Gets the current element."
           ],
@@ -148,7 +155,7 @@
           "args": [
             [
               "node",
-              "XXMLElementWrapper",
+              "xxml_element_wrapper_i",
               "in"
             ]
           ]
@@ -165,7 +172,7 @@
           "args": [
             [
               "handler",
-              "XDocumentHandler",
+              "sax_x_document_handler_i",
               "in"
             ]
           ]
@@ -180,7 +187,7 @@
           "args": [
             [
               "node",
-              "XXMLElementWrapper",
+              "xxml_element_wrapper_i",
               "in"
             ]
           ]
@@ -204,7 +211,7 @@
           "args": [
             [
               "node",
-              "XXMLElementWrapper",
+              "xxml_element_wrapper_i",
               "in"
             ]
           ]
@@ -232,7 +239,7 @@
           "args": [
             [
               "element",
-              "XXMLElementWrapper",
+              "xxml_element_wrapper_i",
               "in"
             ]
           ]

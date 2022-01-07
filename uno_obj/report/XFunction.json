@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XFunction",
   "type": "interface",
   "namespace": "com.sun.star.report",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,19 +15,27 @@
   "data": {
     "from_imports": [
       [
-        "..lang.x_component",
-        "XComponent"
+        "..beans.x_property_set",
+        "XPropertySet",
+        "beans_x_property_set_i"
       ],
       [
-        "..beans.x_property_set",
-        "XPropertySet"
+        "..lang.x_component",
+        "XComponent",
+        "lang_x_component_i"
       ],
       [
         "..container.x_child",
-        "XChild"
+        "XChild",
+        "container_x_child_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.beans.XPropertySet": "beans_x_property_set_i",
+      "com.sun.star.lang.XComponent": "lang_x_component_i",
+      "com.sun.star.container.XChild": "container_x_child_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,

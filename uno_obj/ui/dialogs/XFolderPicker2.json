@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XFolderPicker2",
   "type": "interface",
   "namespace": "com.sun.star.ui.dialogs",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,14 +16,20 @@
     "from_imports": [
       [
         "...util.x_cancellable",
-        "XCancellable"
+        "XCancellable",
+        "util_x_cancellable_i"
       ],
       [
         ".x_folder_picker",
-        "XFolderPicker"
+        "XFolderPicker",
+        "x_folder_picker_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.util.XCancellable": "util_x_cancellable_i",
+      "com.sun.star.ui.dialogs.XFolderPicker": "x_folder_picker_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -30,8 +37,8 @@
     "imports": [],
     "namespace": "com.sun.star.ui.dialogs",
     "extends": [
-      "com.sun.star.ui.dialogs.XFolderPicker",
-      "com.sun.star.util.XCancellable"
+      "com.sun.star.util.XCancellable",
+      "com.sun.star.ui.dialogs.XFolderPicker"
     ],
     "desc": [
       "Provides a unified interface for the new-style FolderPicker service to implement.",

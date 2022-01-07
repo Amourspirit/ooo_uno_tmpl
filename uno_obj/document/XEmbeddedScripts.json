@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XEmbeddedScripts",
   "type": "interface",
   "namespace": "com.sun.star.document",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -16,11 +17,13 @@
     "from_imports_typing": [
       [
         "..script.x_storage_based_library_container",
-        "XStorageBasedLibraryContainer"
+        "XStorageBasedLibraryContainer",
+        "script_x_storage_based_library_container_i"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "XStorageBasedLibraryContainer"
+      "script_x_storage_based_library_container_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -51,7 +54,7 @@
         },
         {
           "name": "BasicLibraries",
-          "returns": "XStorageBasedLibraryContainer",
+          "returns": "script_x_storage_based_library_container_i",
           "desc": [
             "is the container of StarBasic macro libraries contained in the document"
           ],
@@ -60,7 +63,7 @@
         },
         {
           "name": "DialogLibraries",
-          "returns": "XStorageBasedLibraryContainer",
+          "returns": "script_x_storage_based_library_container_i",
           "desc": [
             "is the container of dialogs libraries contained in the document"
           ],

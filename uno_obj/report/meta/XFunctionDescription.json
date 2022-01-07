@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XFunctionDescription",
   "type": "interface",
   "namespace": "com.sun.star.report.meta",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,27 +16,33 @@
     "from_imports": [
       [
         "...beans.x_property_set",
-        "XPropertySet"
+        "XPropertySet",
+        "beans_x_property_set_i"
       ]
     ],
     "from_imports_typing": [
       [
         "...sheet.function_argument",
-        "FunctionArgument"
+        "FunctionArgument",
+        "sheet_function_argument_i"
       ],
       [
         ".x_function_category",
-        "XFunctionCategory"
+        "XFunctionCategory",
+        "x_function_category_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.beans.XPropertySet": "beans_x_property_set_i"
+    },
     "quote": [
+      "x_function_category_i",
       "typing.List[str]",
-      "XFunctionCategory",
-      "typing.List[FunctionArgument]"
+      "typing.List[sheet_function_argument_i]"
     ],
     "typings": [
       "typing.List[str]",
-      "typing.List[FunctionArgument]"
+      "typing.List[sheet_function_argument_i]"
     ],
     "requires_typing": true,
     "name": "XFunctionDescription",
@@ -71,7 +78,7 @@
       "types": [
         {
           "name": "Arguments",
-          "returns": "typing.List[FunctionArgument]",
+          "returns": "typing.List[sheet_function_argument_i]",
           "desc": [
             "returns a sequence of localized descriptions of the function's arguments (in the order specified by the function)."
           ],
@@ -82,7 +89,7 @@
       "properties": [
         {
           "name": "Category",
-          "returns": "XFunctionCategory",
+          "returns": "x_function_category_i",
           "desc": [
             "specifies the category number."
           ],

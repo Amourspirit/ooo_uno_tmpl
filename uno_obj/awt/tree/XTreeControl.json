@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XTreeControl",
   "type": "interface",
   "namespace": "com.sun.star.awt.tree",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,32 +16,40 @@
     "from_imports": [
       [
         "...view.x_multi_selection_supplier",
-        "XMultiSelectionSupplier"
+        "XMultiSelectionSupplier",
+        "view_x_multi_selection_supplier_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_tree_expansion_listener",
-        "XTreeExpansionListener"
-      ],
-      [
-        ".x_tree_edit_listener",
-        "XTreeEditListener"
-      ],
-      [
-        ".x_tree_node",
-        "XTreeNode"
+        "XTreeExpansionListener",
+        "x_tree_expansion_listener_i"
       ],
       [
         "..rectangle",
-        "Rectangle"
+        "Rectangle",
+        "rectangle_i"
+      ],
+      [
+        ".x_tree_node",
+        "XTreeNode",
+        "x_tree_node_i"
+      ],
+      [
+        ".x_tree_edit_listener",
+        "XTreeEditListener",
+        "x_tree_edit_listener_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.view.XMultiSelectionSupplier": "view_x_multi_selection_supplier_i"
+    },
     "quote": [
-      "Rectangle",
-      "XTreeEditListener",
-      "XTreeNode",
-      "XTreeExpansionListener"
+      "x_tree_expansion_listener_i",
+      "x_tree_edit_listener_i",
+      "x_tree_node_i",
+      "rectangle_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -66,7 +75,7 @@
           "args": [
             [
               "Listener",
-              "XTreeEditListener",
+              "x_tree_edit_listener_i",
               "in"
             ]
           ]
@@ -81,7 +90,7 @@
           "args": [
             [
               "Listener",
-              "XTreeExpansionListener",
+              "x_tree_expansion_listener_i",
               "in"
             ]
           ]
@@ -110,7 +119,7 @@
           "args": [
             [
               "Node",
-              "XTreeNode",
+              "x_tree_node_i",
               "in"
             ]
           ]
@@ -130,14 +139,14 @@
           "args": [
             [
               "Node",
-              "XTreeNode",
+              "x_tree_node_i",
               "in"
             ]
           ]
         },
         {
           "name": "getClosestNodeForLocation",
-          "returns": "XTreeNode",
+          "returns": "x_tree_node_i",
           "desc": [
             "Returns the node that is closest to x,y.",
             "",
@@ -159,7 +168,7 @@
         },
         {
           "name": "getNodeForLocation",
-          "returns": "XTreeNode",
+          "returns": "x_tree_node_i",
           "desc": [
             "Returns the node at the specified location."
           ],
@@ -179,7 +188,7 @@
         },
         {
           "name": "getNodeRect",
-          "returns": "Rectangle",
+          "returns": "rectangle_i",
           "desc": [
             "returns the rectangle occupied by the visual representation of the given node"
           ],
@@ -189,7 +198,7 @@
           "args": [
             [
               "Node",
-              "XTreeNode",
+              "x_tree_node_i",
               "in"
             ]
           ]
@@ -217,7 +226,7 @@
           "args": [
             [
               "Node",
-              "XTreeNode",
+              "x_tree_node_i",
               "in"
             ]
           ]
@@ -234,7 +243,7 @@
           "args": [
             [
               "Node",
-              "XTreeNode",
+              "x_tree_node_i",
               "in"
             ]
           ]
@@ -253,7 +262,7 @@
           "args": [
             [
               "Node",
-              "XTreeNode",
+              "x_tree_node_i",
               "in"
             ]
           ]
@@ -273,7 +282,7 @@
           "args": [
             [
               "Node",
-              "XTreeNode",
+              "x_tree_node_i",
               "in"
             ]
           ]
@@ -288,7 +297,7 @@
           "args": [
             [
               "Listener",
-              "XTreeEditListener",
+              "x_tree_edit_listener_i",
               "in"
             ]
           ]
@@ -303,7 +312,7 @@
           "args": [
             [
               "Listener",
-              "XTreeExpansionListener",
+              "x_tree_expansion_listener_i",
               "in"
             ]
           ]
@@ -324,7 +333,7 @@
           "args": [
             [
               "Node",
-              "XTreeNode",
+              "x_tree_node_i",
               "in"
             ]
           ]

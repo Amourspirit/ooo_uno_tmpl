@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XExtendedStorageStream",
   "type": "interface",
   "namespace": "com.sun.star.embed",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,35 +15,51 @@
   "data": {
     "from_imports": [
       [
-        ".x_transaction_broadcaster",
-        "XTransactionBroadcaster"
-      ],
-      [
-        ".x_transacted_object",
-        "XTransactedObject"
-      ],
-      [
-        "..lang.x_component",
-        "XComponent"
-      ],
-      [
-        "..io.x_stream",
-        "XStream"
-      ],
-      [
-        "..beans.x_property_set",
-        "XPropertySet"
-      ],
-      [
         "..io.x_seekable",
-        "XSeekable"
+        "XSeekable",
+        "io_x_seekable_i"
       ],
       [
         ".x_encryption_protected_source",
-        "XEncryptionProtectedSource"
+        "XEncryptionProtectedSource",
+        "x_encryption_protected_source_i"
+      ],
+      [
+        ".x_transaction_broadcaster",
+        "XTransactionBroadcaster",
+        "x_transaction_broadcaster_i"
+      ],
+      [
+        "..lang.x_component",
+        "XComponent",
+        "lang_x_component_i"
+      ],
+      [
+        ".x_transacted_object",
+        "XTransactedObject",
+        "x_transacted_object_i"
+      ],
+      [
+        "..beans.x_property_set",
+        "XPropertySet",
+        "beans_x_property_set_i"
+      ],
+      [
+        "..io.x_stream",
+        "XStream",
+        "io_x_stream_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.io.XSeekable": "io_x_seekable_i",
+      "com.sun.star.embed.XEncryptionProtectedSource": "x_encryption_protected_source_i",
+      "com.sun.star.embed.XTransactionBroadcaster": "x_transaction_broadcaster_i",
+      "com.sun.star.lang.XComponent": "lang_x_component_i",
+      "com.sun.star.embed.XTransactedObject": "x_transacted_object_i",
+      "com.sun.star.beans.XPropertySet": "beans_x_property_set_i",
+      "com.sun.star.io.XStream": "io_x_stream_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -50,13 +67,13 @@
     "imports": [],
     "namespace": "com.sun.star.embed",
     "extends": [
-      "com.sun.star.io.XStream",
-      "com.sun.star.lang.XComponent",
       "com.sun.star.io.XSeekable",
       "com.sun.star.embed.XEncryptionProtectedSource",
-      "com.sun.star.beans.XPropertySet",
+      "com.sun.star.embed.XTransactionBroadcaster",
+      "com.sun.star.lang.XComponent",
       "com.sun.star.embed.XTransactedObject",
-      "com.sun.star.embed.XTransactionBroadcaster"
+      "com.sun.star.beans.XPropertySet",
+      "com.sun.star.io.XStream"
     ],
     "desc": [
       "This interface allows access to an extended storage stream that might be transacted."

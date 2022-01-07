@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XContainerApproveListener",
   "type": "interface",
   "namespace": "com.sun.star.container",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -16,16 +17,19 @@
     "from_imports_typing": [
       [
         "..util.x_veto",
-        "XVeto"
+        "XVeto",
+        "util_x_veto_i"
       ],
       [
         ".container_event",
-        "ContainerEvent"
+        "ContainerEvent",
+        "container_event_i"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "XVeto",
-      "ContainerEvent"
+      "container_event_i",
+      "util_x_veto_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -41,7 +45,7 @@
       "methods": [
         {
           "name": "approveInsertElement",
-          "returns": "XVeto",
+          "returns": "util_x_veto_i",
           "desc": [
             "is called for the listener to approve an insertion into the container"
           ],
@@ -51,14 +55,14 @@
           "args": [
             [
               "Event",
-              "ContainerEvent",
+              "container_event_i",
               "in"
             ]
           ]
         },
         {
           "name": "approveRemoveElement",
-          "returns": "XVeto",
+          "returns": "util_x_veto_i",
           "desc": [
             "is called for the listener to approve a removal of an element from the container"
           ],
@@ -68,14 +72,14 @@
           "args": [
             [
               "Event",
-              "ContainerEvent",
+              "container_event_i",
               "in"
             ]
           ]
         },
         {
           "name": "approveReplaceElement",
-          "returns": "XVeto",
+          "returns": "util_x_veto_i",
           "desc": [
             "is called for the listener to approve a replacement inside the container"
           ],
@@ -85,7 +89,7 @@
           "args": [
             [
               "Event",
-              "ContainerEvent",
+              "container_event_i",
               "in"
             ]
           ]

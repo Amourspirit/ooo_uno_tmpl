@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XSolver",
   "type": "interface",
   "namespace": "com.sun.star.sheet",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,34 +16,41 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
         "..table.cell_address",
-        "CellAddress"
-      ],
-      [
-        ".solver_constraint",
-        "SolverConstraint"
+        "CellAddress",
+        "table_cell_address_i"
       ],
       [
         ".x_spreadsheet_document",
-        "XSpreadsheetDocument"
+        "XSpreadsheetDocument",
+        "x_spreadsheet_document_i"
+      ],
+      [
+        ".solver_constraint",
+        "SolverConstraint",
+        "solver_constraint_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "typing.List[SolverConstraint]",
-      "CellAddress",
+      "x_spreadsheet_document_i",
+      "typing.List[table_cell_address_i]",
+      "typing.List[solver_constraint_i]",
       "typing.List[float]",
-      "XSpreadsheetDocument",
-      "typing.List[CellAddress]"
+      "table_cell_address_i"
     ],
     "typings": [
+      "typing.List[table_cell_address_i]",
       "typing.List[float]",
-      "typing.List[CellAddress]",
-      "typing.List[SolverConstraint]"
+      "typing.List[solver_constraint_i]"
     ],
     "requires_typing": true,
     "name": "XSolver",
@@ -70,7 +78,7 @@
       "types": [
         {
           "name": "Constraints",
-          "returns": "typing.List[SolverConstraint]",
+          "returns": "typing.List[solver_constraint_i]",
           "desc": [
             "The constraints of the model."
           ],
@@ -88,7 +96,7 @@
         },
         {
           "name": "Variables",
-          "returns": "typing.List[CellAddress]",
+          "returns": "typing.List[table_cell_address_i]",
           "desc": [
             "The addresses of the cells that contain the variables."
           ],
@@ -99,7 +107,7 @@
       "properties": [
         {
           "name": "Document",
-          "returns": "XSpreadsheetDocument",
+          "returns": "x_spreadsheet_document_i",
           "desc": [
             "The spreadsheet document that contains the cells."
           ],
@@ -117,7 +125,7 @@
         },
         {
           "name": "Objective",
-          "returns": "CellAddress",
+          "returns": "table_cell_address_i",
           "desc": [
             "The address of the cell that contains the objective value."
           ],

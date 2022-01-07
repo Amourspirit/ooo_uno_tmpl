@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XSingleSelectQueryComposer",
   "type": "interface",
   "namespace": "com.sun.star.sdb",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,25 +16,31 @@
     "from_imports": [
       [
         ".x_single_select_query_analyzer",
-        "XSingleSelectQueryAnalyzer"
+        "XSingleSelectQueryAnalyzer",
+        "x_single_select_query_analyzer_i"
       ]
     ],
     "from_imports_typing": [
       [
         "..beans.x_property_set",
-        "XPropertySet"
+        "XPropertySet",
+        "beans_x_property_set_i"
       ],
       [
         "..beans.property_value",
-        "PropertyValue"
+        "PropertyValue",
+        "beans_property_value_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.sdb.XSingleSelectQueryAnalyzer": "x_single_select_query_analyzer_i"
+    },
     "quote": [
-      "XPropertySet",
-      "typing.List[typing.List[PropertyValue]]"
+      "beans_x_property_set_i",
+      "typing.List[typing.List[beans_property_value_i]]"
     ],
     "typings": [
-      "typing.List[typing.List[PropertyValue]]"
+      "typing.List[typing.List[beans_property_value_i]]"
     ],
     "requires_typing": true,
     "name": "XSingleSelectQueryComposer",
@@ -65,7 +72,7 @@
           "args": [
             [
               "column",
-              "XPropertySet",
+              "beans_x_property_set_i",
               "in"
             ],
             [
@@ -94,7 +101,7 @@
           "args": [
             [
               "column",
-              "XPropertySet",
+              "beans_x_property_set_i",
               "in"
             ]
           ]
@@ -112,7 +119,7 @@
           "args": [
             [
               "column",
-              "XPropertySet",
+              "beans_x_property_set_i",
               "in"
             ],
             [
@@ -141,7 +148,7 @@
           "args": [
             [
               "column",
-              "XPropertySet",
+              "beans_x_property_set_i",
               "in"
             ],
             [
@@ -232,7 +239,7 @@
           "args": [
             [
               "filter",
-              "typing.List[typing.List[PropertyValue]]",
+              "typing.List[typing.List[beans_property_value_i]]",
               "in"
             ]
           ]
@@ -249,7 +256,7 @@
           "args": [
             [
               "filter",
-              "typing.List[typing.List[PropertyValue]]",
+              "typing.List[typing.List[beans_property_value_i]]",
               "in"
             ]
           ]

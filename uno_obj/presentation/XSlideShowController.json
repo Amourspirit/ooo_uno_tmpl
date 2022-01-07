@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XSlideShowController",
   "type": "interface",
   "namespace": "com.sun.star.presentation",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,22 +16,26 @@
     "from_imports": [],
     "from_imports_typing": [
       [
+        ".x_slide_show",
+        "XSlideShow",
+        "x_slide_show_i"
+      ],
+      [
         ".x_slide_show_listener",
-        "XSlideShowListener"
+        "XSlideShowListener",
+        "x_slide_show_listener_i"
       ],
       [
         "..drawing.x_draw_page",
-        "XDrawPage"
-      ],
-      [
-        ".x_slide_show",
-        "XSlideShow"
+        "XDrawPage",
+        "drawing_x_draw_page_i"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "XSlideShowListener",
-      "XDrawPage",
-      "XSlideShow"
+      "x_slide_show_i",
+      "x_slide_show_listener_i",
+      "drawing_x_draw_page_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -67,7 +72,7 @@
           "args": [
             [
               "Listener",
-              "XSlideShowListener",
+              "x_slide_show_listener_i",
               "in"
             ]
           ]
@@ -102,7 +107,7 @@
         },
         {
           "name": "getCurrentSlide",
-          "returns": "XDrawPage",
+          "returns": "drawing_x_draw_page_i",
           "desc": [
             "returns slide that is currently displayed"
           ],
@@ -129,7 +134,7 @@
         },
         {
           "name": "getSlideByIndex",
-          "returns": "XDrawPage",
+          "returns": "drawing_x_draw_page_i",
           "desc": [
             "gives access to the slides that will be shown in this slide show.",
             "",
@@ -155,7 +160,7 @@
         },
         {
           "name": "getSlideShow",
-          "returns": "XSlideShow",
+          "returns": "x_slide_show_i",
           "desc": [
             "returns the actual XSlideShow instance that runs the slide show.",
             "",
@@ -257,7 +262,7 @@
           "args": [
             [
               "Page",
-              "XDrawPage",
+              "drawing_x_draw_page_i",
               "in"
             ]
           ]
@@ -347,7 +352,7 @@
           "args": [
             [
               "Listener",
-              "XSlideShowListener",
+              "x_slide_show_listener_i",
               "in"
             ]
           ]

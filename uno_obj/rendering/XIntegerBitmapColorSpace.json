@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XIntegerBitmapColorSpace",
   "type": "interface",
   "namespace": "com.sun.star.rendering",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,40 +16,48 @@
     "from_imports": [
       [
         ".x_color_space",
-        "XColorSpace"
+        "XColorSpace",
+        "x_color_space_i"
       ]
     ],
     "from_imports_typing": [
       [
-        ".color_component",
-        "ColorComponent"
-      ],
-      [
         ".rgb_color",
-        "RGBColor"
+        "RGBColor",
+        "rgb_color_i"
       ],
       [
-        ".x_integer_bitmap_color_space",
-        "XIntegerBitmapColorSpace"
+        ".color_component",
+        "ColorComponent",
+        "color_component_i"
       ],
       [
         ".argb_color",
-        "ARGBColor"
+        "ARGBColor",
+        "argb_color_i"
+      ],
+      [
+        ".x_integer_bitmap_color_space",
+        "XIntegerBitmapColorSpace",
+        "x_integer_bitmap_color_space_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.rendering.XColorSpace": "x_color_space_i"
+    },
     "quote": [
-      "XColorSpace",
-      "typing.List[RGBColor]",
-      "XIntegerBitmapColorSpace",
+      "x_color_space_i",
+      "x_integer_bitmap_color_space_i",
+      "typing.List[rgb_color_i]",
+      "typing.List[argb_color_i]",
       "typing.List[int]",
-      "typing.List[ColorComponent]",
-      "typing.List[ARGBColor]"
+      "typing.List[color_component_i]"
     ],
     "typings": [
+      "typing.List[argb_color_i]",
       "typing.List[int]",
-      "typing.List[RGBColor]",
-      "typing.List[ColorComponent]",
-      "typing.List[ARGBColor]"
+      "typing.List[color_component_i]",
+      "typing.List[rgb_color_i]"
     ],
     "requires_typing": true,
     "name": "XIntegerBitmapColorSpace",
@@ -67,7 +76,7 @@
       "methods": [
         {
           "name": "convertFromIntegerColorSpace",
-          "returns": "typing.List[ColorComponent]",
+          "returns": "typing.List[color_component_i]",
           "desc": [
             "Convert integer bitmap color to generic IEEE double device color of another color space.",
             "",
@@ -84,7 +93,7 @@
             ],
             [
               "targetColorSpace",
-              "XColorSpace",
+              "x_color_space_i",
               "in"
             ]
           ]
@@ -103,7 +112,7 @@
           "args": [
             [
               "rgbColor",
-              "typing.List[ARGBColor]",
+              "typing.List[argb_color_i]",
               "in"
             ]
           ]
@@ -122,7 +131,7 @@
           "args": [
             [
               "rgbColor",
-              "typing.List[ARGBColor]",
+              "typing.List[argb_color_i]",
               "in"
             ]
           ]
@@ -141,14 +150,14 @@
           "args": [
             [
               "rgbColor",
-              "typing.List[RGBColor]",
+              "typing.List[rgb_color_i]",
               "in"
             ]
           ]
         },
         {
           "name": "convertIntegerToARGB",
-          "returns": "typing.List[ARGBColor]",
+          "returns": "typing.List[argb_color_i]",
           "desc": [
             "Convert color value in this color space to sRGB color values, with linear alpha.",
             "",
@@ -167,7 +176,7 @@
         },
         {
           "name": "convertIntegerToPARGB",
-          "returns": "typing.List[ARGBColor]",
+          "returns": "typing.List[argb_color_i]",
           "desc": [
             "Convert color value in this color space to premultiplied sRGB color values, with linear alpha.",
             "",
@@ -186,7 +195,7 @@
         },
         {
           "name": "convertIntegerToRGB",
-          "returns": "typing.List[RGBColor]",
+          "returns": "typing.List[rgb_color_i]",
           "desc": [
             "Convert color value in this color space to sRGB color values.",
             "",
@@ -222,7 +231,7 @@
             ],
             [
               "targetColorSpace",
-              "XIntegerBitmapColorSpace",
+              "x_integer_bitmap_color_space_i",
               "in"
             ]
           ]

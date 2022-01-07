@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XDataTransferProviderAccess",
   "type": "interface",
   "namespace": "com.sun.star.awt",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,37 +16,46 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
-        "..datatransfer.dnd.x_drag_gesture_recognizer",
-        "XDragGestureRecognizer"
-      ],
-      [
         "..datatransfer.dnd.x_drop_target",
-        "XDropTarget"
-      ],
-      [
-        "..datatransfer.clipboard.x_clipboard",
-        "XClipboard"
+        "XDropTarget",
+        "datatransfer_dnd_x_drop_target_i"
       ],
       [
         ".x_window",
-        "XWindow"
+        "XWindow",
+        "x_window_i"
       ],
       [
         "..datatransfer.dnd.x_drag_source",
-        "XDragSource"
+        "XDragSource",
+        "datatransfer_dnd_x_drag_source_i"
+      ],
+      [
+        "..datatransfer.clipboard.x_clipboard",
+        "XClipboard",
+        "datatransfer_clipboard_x_clipboard_i"
+      ],
+      [
+        "..datatransfer.dnd.x_drag_gesture_recognizer",
+        "XDragGestureRecognizer",
+        "datatransfer_dnd_x_drag_gesture_recognizer_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "XDragSource",
-      "XDropTarget",
-      "XDragGestureRecognizer",
-      "XClipboard",
-      "XWindow"
+      "datatransfer_dnd_x_drop_target_i",
+      "x_window_i",
+      "datatransfer_dnd_x_drag_gesture_recognizer_i",
+      "datatransfer_dnd_x_drag_source_i",
+      "datatransfer_clipboard_x_clipboard_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -63,7 +73,7 @@
       "methods": [
         {
           "name": "getClipboard",
-          "returns": "XClipboard",
+          "returns": "datatransfer_clipboard_x_clipboard_i",
           "desc": [
             "returns the specified clipboard."
           ],
@@ -78,7 +88,7 @@
         },
         {
           "name": "getDragGestureRecognizer",
-          "returns": "XDragGestureRecognizer",
+          "returns": "datatransfer_dnd_x_drag_gesture_recognizer_i",
           "desc": [
             "returns the drag gesture recognizer of the specified window."
           ],
@@ -86,14 +96,14 @@
           "args": [
             [
               "window",
-              "XWindow",
+              "x_window_i",
               "in"
             ]
           ]
         },
         {
           "name": "getDragSource",
-          "returns": "XDragSource",
+          "returns": "datatransfer_dnd_x_drag_source_i",
           "desc": [
             "returns the drag source of the specified window."
           ],
@@ -101,14 +111,14 @@
           "args": [
             [
               "window",
-              "XWindow",
+              "x_window_i",
               "in"
             ]
           ]
         },
         {
           "name": "getDropTarget",
-          "returns": "XDropTarget",
+          "returns": "datatransfer_dnd_x_drop_target_i",
           "desc": [
             "returns the drop target of the specified window."
           ],
@@ -116,7 +126,7 @@
           "args": [
             [
               "window",
-              "XWindow",
+              "x_window_i",
               "in"
             ]
           ]

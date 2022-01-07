@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XOptimizedStorage",
   "type": "interface",
   "namespace": "com.sun.star.embed",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,30 +16,35 @@
     "from_imports": [],
     "from_imports_typing": [
       [
-        ".x_optimized_storage",
-        "XOptimizedStorage"
-      ],
-      [
-        "..io.x_stream",
-        "XStream"
-      ],
-      [
         "..io.x_input_stream",
-        "XInputStream"
+        "XInputStream",
+        "io_x_input_stream_i"
       ],
       [
         "..beans.property_value",
-        "PropertyValue"
+        "PropertyValue",
+        "beans_property_value_i"
+      ],
+      [
+        "..io.x_stream",
+        "XStream",
+        "io_x_stream_i"
+      ],
+      [
+        ".x_optimized_storage",
+        "XOptimizedStorage",
+        "x_optimized_storage_i"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "XOptimizedStorage",
-      "XInputStream",
-      "XStream",
-      "typing.List[PropertyValue]"
+      "io_x_stream_i",
+      "x_optimized_storage_i",
+      "typing.List[beans_property_value_i]",
+      "io_x_input_stream_i"
     ],
     "typings": [
-      "typing.List[PropertyValue]"
+      "typing.List[beans_property_value_i]"
     ],
     "requires_typing": true,
     "name": "XOptimizedStorage",
@@ -102,7 +108,7 @@
             ],
             [
               "xTargetStorage",
-              "XOptimizedStorage",
+              "x_optimized_storage_i",
               "in"
             ],
             [
@@ -133,7 +139,7 @@
             ],
             [
               "xTargetStream",
-              "XStream",
+              "io_x_stream_i",
               "in"
             ]
           ]
@@ -190,7 +196,7 @@
             ],
             [
               "xInStream",
-              "XInputStream",
+              "io_x_input_stream_i",
               "in"
             ]
           ]
@@ -218,12 +224,12 @@
             ],
             [
               "xInStream",
-              "XInputStream",
+              "io_x_input_stream_i",
               "in"
             ],
             [
               "aProperties",
-              "typing.List[PropertyValue]",
+              "typing.List[beans_property_value_i]",
               "in"
             ]
           ]
@@ -245,7 +251,7 @@
           "args": [
             [
               "xStream",
-              "XStream",
+              "io_x_stream_i",
               "in"
             ]
           ]

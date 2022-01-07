@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XFastAttributeList",
   "type": "interface",
   "namespace": "com.sun.star.xml.sax",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,26 +16,32 @@
     "from_imports": [
       [
         "...uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
         "..fast_attribute",
-        "FastAttribute"
+        "FastAttribute",
+        "fast_attribute_i"
       ],
       [
         "..attribute",
-        "Attribute"
+        "Attribute",
+        "attribute_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "typing.List[FastAttribute]",
-      "typing.List[Attribute]"
+      "typing.List[fast_attribute_i]",
+      "typing.List[attribute_i]"
     ],
     "typings": [
-      "typing.List[FastAttribute]",
-      "typing.List[Attribute]"
+      "typing.List[fast_attribute_i]",
+      "typing.List[attribute_i]"
     ],
     "requires_typing": true,
     "name": "XFastAttributeList",
@@ -55,7 +62,7 @@
       "methods": [
         {
           "name": "getFastAttributes",
-          "returns": "typing.List[FastAttribute]",
+          "returns": "typing.List[fast_attribute_i]",
           "desc": [
             "returns a sequence of attributes which names and or namespaces URLS are translated to tokens."
           ],
@@ -103,7 +110,7 @@
         },
         {
           "name": "getUnknownAttributes",
-          "returns": "typing.List[Attribute]",
+          "returns": "typing.List[attribute_i]",
           "desc": [
             "returns a sequence of attributes which names and or namespaces URLS can not be translated to tokens."
           ],

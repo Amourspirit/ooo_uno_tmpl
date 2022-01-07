@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XDigestContextSupplier",
   "type": "interface",
   "namespace": "com.sun.star.xml.crypto",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,25 +16,31 @@
     "from_imports": [
       [
         "...uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_digest_context",
-        "XDigestContext"
+        "XDigestContext",
+        "x_digest_context_i"
       ],
       [
         "...beans.named_value",
-        "NamedValue"
+        "NamedValue",
+        "beans_named_value_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "XDigestContext",
-      "typing.List[NamedValue]"
+      "x_digest_context_i",
+      "typing.List[beans_named_value_i]"
     ],
     "typings": [
-      "typing.List[NamedValue]"
+      "typing.List[beans_named_value_i]"
     ],
     "requires_typing": true,
     "name": "XDigestContextSupplier",
@@ -54,7 +61,7 @@
       "methods": [
         {
           "name": "getDigestContext",
-          "returns": "XDigestContext",
+          "returns": "x_digest_context_i",
           "desc": [
             "returns an object that allows to generate the specified digest."
           ],
@@ -69,7 +76,7 @@
             ],
             [
               "aParams",
-              "typing.List[NamedValue]",
+              "typing.List[beans_named_value_i]",
               "in"
             ]
           ]

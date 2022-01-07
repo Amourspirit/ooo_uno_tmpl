@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XPolyPolygon2D",
   "type": "interface",
   "namespace": "com.sun.star.rendering",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,27 +16,34 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
-        "..geometry.real_point2_d",
-        "RealPoint2D"
+        ".x_poly_polygon2_d",
+        "XPolyPolygon2D",
+        "x_poly_polygon2_d_i"
       ],
       [
         ".fill_rule",
-        "FillRule"
+        "FillRule",
+        "fill_rule_i"
       ],
       [
-        ".x_poly_polygon2_d",
-        "XPolyPolygon2D"
+        "..geometry.real_point2_d",
+        "RealPoint2D",
+        "geometry_real_point2_d_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "FillRule",
-      "XPolyPolygon2D",
-      "RealPoint2D"
+      "fill_rule_i",
+      "geometry_real_point2_d_i",
+      "x_poly_polygon2_d_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -69,19 +77,19 @@
           "args": [
             [
               "position",
-              "RealPoint2D",
+              "geometry_real_point2_d_i",
               "in"
             ],
             [
               "polyPolygon",
-              "XPolyPolygon2D",
+              "x_poly_polygon2_d_i",
               "in"
             ]
           ]
         },
         {
           "name": "getFillRule",
-          "returns": "FillRule",
+          "returns": "fill_rule_i",
           "desc": [
             "Query the rule used to determine inside and outside of the poly-polygon."
           ],
@@ -165,7 +173,7 @@
           "args": [
             [
               "fillRule",
-              "FillRule",
+              "fill_rule_i",
               "in"
             ]
           ]

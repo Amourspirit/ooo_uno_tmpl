@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XUIElementFactoryRegistration",
   "type": "interface",
   "namespace": "com.sun.star.ui",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,25 +16,31 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".xui_element_factory",
-        "XUIElementFactory"
+        "XUIElementFactory",
+        "xui_element_factory_i"
       ],
       [
         "..beans.property_value",
-        "PropertyValue"
+        "PropertyValue",
+        "beans_property_value_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "XUIElementFactory",
-      "typing.List[typing.List[PropertyValue]]"
+      "xui_element_factory_i",
+      "typing.List[typing.List[beans_property_value_i]]"
     ],
     "typings": [
-      "typing.List[typing.List[PropertyValue]]"
+      "typing.List[typing.List[beans_property_value_i]]"
     ],
     "requires_typing": true,
     "name": "XUIElementFactoryRegistration",
@@ -89,7 +96,7 @@
         },
         {
           "name": "getFactory",
-          "returns": "XUIElementFactory",
+          "returns": "xui_element_factory_i",
           "desc": [
             "function to retrieve a previously registered user interface element factory."
           ],
@@ -109,7 +116,7 @@
         },
         {
           "name": "getRegisteredFactories",
-          "returns": "typing.List[typing.List[PropertyValue]]",
+          "returns": "typing.List[typing.List[beans_property_value_i]]",
           "desc": [
             "function to retrieve a list of all registered user interface element factories",
             "",

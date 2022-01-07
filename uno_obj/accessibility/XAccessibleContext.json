@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XAccessibleContext",
   "type": "interface",
   "namespace": "com.sun.star.accessibility",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,32 +16,40 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
-        ".x_accessible",
-        "XAccessible"
+        ".x_accessible_state_set",
+        "XAccessibleStateSet",
+        "x_accessible_state_set_i"
       ],
       [
         "..lang.locale",
-        "Locale"
-      ],
-      [
-        ".x_accessible_state_set",
-        "XAccessibleStateSet"
+        "Locale",
+        "lang_locale_i"
       ],
       [
         ".x_accessible_relation_set",
-        "XAccessibleRelationSet"
+        "XAccessibleRelationSet",
+        "x_accessible_relation_set_i"
+      ],
+      [
+        ".x_accessible",
+        "XAccessible",
+        "x_accessible_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "XAccessibleStateSet",
-      "XAccessible",
-      "XAccessibleRelationSet",
-      "Locale"
+      "x_accessible_relation_set_i",
+      "lang_locale_i",
+      "x_accessible_state_set_i",
+      "x_accessible_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -64,7 +73,7 @@
       "methods": [
         {
           "name": "getAccessibleChild",
-          "returns": "XAccessible",
+          "returns": "x_accessible_i",
           "desc": [
             "Returns the i-th child of this object.",
             "",
@@ -127,7 +136,7 @@
         },
         {
           "name": "getAccessibleParent",
-          "returns": "XAccessible",
+          "returns": "x_accessible_i",
           "desc": [
             "Returns the parent of this object.",
             "",
@@ -138,7 +147,7 @@
         },
         {
           "name": "getAccessibleRelationSet",
-          "returns": "XAccessibleRelationSet",
+          "returns": "x_accessible_relation_set_i",
           "desc": [
             "Returns the set of relations defined for this object.",
             "",
@@ -162,7 +171,7 @@
         },
         {
           "name": "getAccessibleStateSet",
-          "returns": "XAccessibleStateSet",
+          "returns": "x_accessible_state_set_i",
           "desc": [
             "Returns the set of states that are currently active for this object.",
             "",
@@ -173,7 +182,7 @@
         },
         {
           "name": "getLocale",
-          "returns": "Locale",
+          "returns": "lang_locale_i",
           "desc": [
             "Returns the locale of the component.",
             "",

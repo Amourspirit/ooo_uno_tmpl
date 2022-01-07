@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XUnoControlDialog",
   "type": "interface",
   "namespace": "com.sun.star.awt",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,27 +15,39 @@
   "data": {
     "from_imports": [
       [
+        ".x_top_window",
+        "XTopWindow",
+        "x_top_window_i"
+      ],
+      [
         ".x_control_container",
-        "XControlContainer"
+        "XControlContainer",
+        "x_control_container_i"
       ],
       [
         ".x_window",
-        "XWindow"
-      ],
-      [
-        ".x_control",
-        "XControl"
+        "XWindow",
+        "x_window_i"
       ],
       [
         ".x_dialog2",
-        "XDialog2"
+        "XDialog2",
+        "x_dialog2_i"
       ],
       [
-        ".x_top_window",
-        "XTopWindow"
+        ".x_control",
+        "XControl",
+        "x_control_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.awt.XTopWindow": "x_top_window_i",
+      "com.sun.star.awt.XControlContainer": "x_control_container_i",
+      "com.sun.star.awt.XWindow": "x_window_i",
+      "com.sun.star.awt.XDialog2": "x_dialog2_i",
+      "com.sun.star.awt.XControl": "x_control_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -42,11 +55,11 @@
     "imports": [],
     "namespace": "com.sun.star.awt",
     "extends": [
-      "com.sun.star.awt.XControlContainer",
-      "com.sun.star.awt.XControl",
-      "com.sun.star.awt.XWindow",
       "com.sun.star.awt.XTopWindow",
-      "com.sun.star.awt.XDialog2"
+      "com.sun.star.awt.XControlContainer",
+      "com.sun.star.awt.XWindow",
+      "com.sun.star.awt.XDialog2",
+      "com.sun.star.awt.XControl"
     ],
     "desc": [
       "The interface for the UnoControlDialog service.",

@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XCipherContextSupplier",
   "type": "interface",
   "namespace": "com.sun.star.xml.crypto",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,27 +16,33 @@
     "from_imports": [
       [
         "...uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
-        "...beans.named_value",
-        "NamedValue"
+        ".x_cipher_context",
+        "XCipherContext",
+        "x_cipher_context_i"
       ],
       [
-        ".x_cipher_context",
-        "XCipherContext"
+        "...beans.named_value",
+        "NamedValue",
+        "beans_named_value_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "XCipherContext",
       "typing.List[int]",
-      "typing.List[NamedValue]"
+      "typing.List[beans_named_value_i]",
+      "x_cipher_context_i"
     ],
     "typings": [
       "typing.List[int]",
-      "typing.List[NamedValue]"
+      "typing.List[beans_named_value_i]"
     ],
     "requires_typing": true,
     "name": "XCipherContextSupplier",
@@ -56,7 +63,7 @@
       "methods": [
         {
           "name": "getCipherContext",
-          "returns": "XCipherContext",
+          "returns": "x_cipher_context_i",
           "desc": [
             "returns an object that allows to encrypt/decrypt data."
           ],
@@ -86,7 +93,7 @@
             ],
             [
               "aParams",
-              "typing.List[NamedValue]",
+              "typing.List[beans_named_value_i]",
               "in"
             ]
           ]

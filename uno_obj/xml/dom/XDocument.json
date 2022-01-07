@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XDocument",
   "type": "interface",
   "namespace": "com.sun.star.xml.dom",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,68 +16,83 @@
     "from_imports": [
       [
         ".x_node",
-        "XNode"
+        "XNode",
+        "x_node_i"
       ]
     ],
     "from_imports_typing": [
       [
-        ".xdom_implementation",
-        "XDOMImplementation"
-      ],
-      [
-        ".x_document_fragment",
-        "XDocumentFragment"
-      ],
-      [
-        ".x_text",
-        "XText"
-      ],
-      [
-        ".x_element",
-        "XElement"
-      ],
-      [
-        ".x_node_list",
-        "XNodeList"
-      ],
-      [
-        ".x_comment",
-        "XComment"
-      ],
-      [
-        ".x_entity_reference",
-        "XEntityReference"
-      ],
-      [
-        ".x_processing_instruction",
-        "XProcessingInstruction"
-      ],
-      [
         ".x_document_type",
-        "XDocumentType"
+        "XDocumentType",
+        "x_document_type_i"
       ],
       [
         ".x_attr",
-        "XAttr"
+        "XAttr",
+        "x_attr_i"
+      ],
+      [
+        ".x_processing_instruction",
+        "XProcessingInstruction",
+        "x_processing_instruction_i"
+      ],
+      [
+        ".x_comment",
+        "XComment",
+        "x_comment_i"
+      ],
+      [
+        ".xdom_implementation",
+        "XDOMImplementation",
+        "xdom_implementation_i"
+      ],
+      [
+        ".x_document_fragment",
+        "XDocumentFragment",
+        "x_document_fragment_i"
+      ],
+      [
+        ".x_node_list",
+        "XNodeList",
+        "x_node_list_i"
+      ],
+      [
+        ".x_entity_reference",
+        "XEntityReference",
+        "x_entity_reference_i"
       ],
       [
         ".xcdata_section",
-        "XCDATASection"
+        "XCDATASection",
+        "xcdata_section_i"
+      ],
+      [
+        ".x_element",
+        "XElement",
+        "x_element_i"
+      ],
+      [
+        ".x_text",
+        "XText",
+        "x_text_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.xml.dom.XNode": "x_node_i"
+    },
     "quote": [
-      "XText",
-      "XCDATASection",
-      "XNode",
-      "XComment",
-      "XEntityReference",
-      "XNodeList",
-      "XDocumentType",
-      "XElement",
-      "XDOMImplementation",
-      "XAttr",
-      "XProcessingInstruction",
-      "XDocumentFragment"
+      "x_comment_i",
+      "x_entity_reference_i",
+      "xdom_implementation_i",
+      "xcdata_section_i",
+      "x_element_i",
+      "x_document_type_i",
+      "x_attr_i",
+      "x_document_fragment_i",
+      "x_text_i",
+      "x_processing_instruction_i",
+      "x_node_i",
+      "x_node_list_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -92,7 +108,7 @@
       "methods": [
         {
           "name": "createAttribute",
-          "returns": "XAttr",
+          "returns": "x_attr_i",
           "desc": [
             "Creates an Attr of the given name.",
             "",
@@ -111,7 +127,7 @@
         },
         {
           "name": "createAttributeNS",
-          "returns": "XAttr",
+          "returns": "x_attr_i",
           "desc": [
             "Creates an attribute of the given qualified name and namespace URI.",
             "",
@@ -135,7 +151,7 @@
         },
         {
           "name": "createCDATASection",
-          "returns": "XCDATASection",
+          "returns": "xcdata_section_i",
           "desc": [
             "Creates a CDATASection node whose value is the specified string.",
             "",
@@ -154,7 +170,7 @@
         },
         {
           "name": "createComment",
-          "returns": "XComment",
+          "returns": "x_comment_i",
           "desc": [
             "Creates a Comment node given the specified string."
           ],
@@ -169,7 +185,7 @@
         },
         {
           "name": "createDocumentFragment",
-          "returns": "XDocumentFragment",
+          "returns": "x_document_fragment_i",
           "desc": [
             "Creates an empty DocumentFragment object."
           ],
@@ -178,7 +194,7 @@
         },
         {
           "name": "createElement",
-          "returns": "XElement",
+          "returns": "x_element_i",
           "desc": [
             "Creates an element of the type specified.",
             "",
@@ -197,7 +213,7 @@
         },
         {
           "name": "createElementNS",
-          "returns": "XElement",
+          "returns": "x_element_i",
           "desc": [
             "Creates an element of the given qualified name and namespace URI.",
             "",
@@ -221,7 +237,7 @@
         },
         {
           "name": "createEntityReference",
-          "returns": "XEntityReference",
+          "returns": "x_entity_reference_i",
           "desc": [
             "Throws: DOMException - NOT_SUPPORTED_ERR: Raised if the type of node being imported is not supported.",
             "",
@@ -240,7 +256,7 @@
         },
         {
           "name": "createProcessingInstruction",
-          "returns": "XProcessingInstruction",
+          "returns": "x_processing_instruction_i",
           "desc": [
             "Creates a ProcessingInstruction node given the specified name and data strings.",
             "",
@@ -264,7 +280,7 @@
         },
         {
           "name": "createTextNode",
-          "returns": "XText",
+          "returns": "x_text_i",
           "desc": [
             "Creates a Text node given the specified string."
           ],
@@ -279,7 +295,7 @@
         },
         {
           "name": "getDoctype",
-          "returns": "XDocumentType",
+          "returns": "x_document_type_i",
           "desc": [
             "The Document Type Declaration (see DocumentType) associated with this document."
           ],
@@ -288,7 +304,7 @@
         },
         {
           "name": "getDocumentElement",
-          "returns": "XElement",
+          "returns": "x_element_i",
           "desc": [
             "This is a convenience attribute that allows direct access to the child node that is the root element of the document."
           ],
@@ -297,7 +313,7 @@
         },
         {
           "name": "getElementById",
-          "returns": "XElement",
+          "returns": "x_element_i",
           "desc": [
             "Returns the Element whose ID is given by elementId."
           ],
@@ -312,7 +328,7 @@
         },
         {
           "name": "getElementsByTagName",
-          "returns": "XNodeList",
+          "returns": "x_node_list_i",
           "desc": [
             "Returns a NodeList of all the Elements with a given tag name in the order in which they are encountered in a preorder traversal of the Document tree."
           ],
@@ -327,7 +343,7 @@
         },
         {
           "name": "getElementsByTagNameNS",
-          "returns": "XNodeList",
+          "returns": "x_node_list_i",
           "desc": [
             "Returns a NodeList of all the Elements with a given local name and namespace URI in the order in which they are encountered in a preorder traversal of the Document tree."
           ],
@@ -347,7 +363,7 @@
         },
         {
           "name": "getImplementation",
-          "returns": "XDOMImplementation",
+          "returns": "xdom_implementation_i",
           "desc": [
             "The DOMImplementation object that handles this document."
           ],
@@ -356,7 +372,7 @@
         },
         {
           "name": "importNode",
-          "returns": "XNode",
+          "returns": "x_node_i",
           "desc": [
             "Imports a node from another document to this document.",
             "",
@@ -368,7 +384,7 @@
           "args": [
             [
               "importedNode",
-              "XNode",
+              "x_node_i",
               "in"
             ],
             [

@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XFunctions",
   "type": "interface",
   "namespace": "com.sun.star.report",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,30 +15,41 @@
   "data": {
     "from_imports": [
       [
-        "..lang.x_component",
-        "XComponent"
-      ],
-      [
-        "..container.x_child",
-        "XChild"
+        "..container.x_index_container",
+        "XIndexContainer",
+        "container_x_index_container_i"
       ],
       [
         "..container.x_container",
-        "XContainer"
+        "XContainer",
+        "container_x_container_i"
       ],
       [
-        "..container.x_index_container",
-        "XIndexContainer"
+        "..lang.x_component",
+        "XComponent",
+        "lang_x_component_i"
+      ],
+      [
+        "..container.x_child",
+        "XChild",
+        "container_x_child_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_function",
-        "XFunction"
+        "XFunction",
+        "x_function_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.container.XIndexContainer": "container_x_index_container_i",
+      "com.sun.star.container.XContainer": "container_x_container_i",
+      "com.sun.star.lang.XComponent": "lang_x_component_i",
+      "com.sun.star.container.XChild": "container_x_child_i"
+    },
     "quote": [
-      "XFunction"
+      "x_function_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -45,10 +57,10 @@
     "imports": [],
     "namespace": "com.sun.star.report",
     "extends": [
-      "com.sun.star.container.XContainer",
       "com.sun.star.container.XIndexContainer",
-      "com.sun.star.container.XChild",
-      "com.sun.star.lang.XComponent"
+      "com.sun.star.container.XContainer",
+      "com.sun.star.lang.XComponent",
+      "com.sun.star.container.XChild"
     ],
     "desc": [
       "This interface specifies the functions collections of the report definition or a group."
@@ -58,7 +70,7 @@
       "methods": [
         {
           "name": "createFunction",
-          "returns": "XFunction",
+          "returns": "x_function_i",
           "desc": [
             "factory method for XFunction."
           ],

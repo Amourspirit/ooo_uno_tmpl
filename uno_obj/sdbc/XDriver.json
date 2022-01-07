@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XDriver",
   "type": "interface",
   "namespace": "com.sun.star.sdbc",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,31 +16,38 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
-        ".x_connection",
-        "XConnection"
-      ],
-      [
         ".driver_property_info",
-        "DriverPropertyInfo"
+        "DriverPropertyInfo",
+        "driver_property_info_i"
       ],
       [
         "..beans.property_value",
-        "PropertyValue"
+        "PropertyValue",
+        "beans_property_value_i"
+      ],
+      [
+        ".x_connection",
+        "XConnection",
+        "x_connection_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "typing.List[DriverPropertyInfo]",
-      "XConnection",
-      "typing.List[PropertyValue]"
+      "typing.List[driver_property_info_i]",
+      "typing.List[beans_property_value_i]",
+      "x_connection_i"
     ],
     "typings": [
-      "typing.List[DriverPropertyInfo]",
-      "typing.List[PropertyValue]"
+      "typing.List[driver_property_info_i]",
+      "typing.List[beans_property_value_i]"
     ],
     "requires_typing": true,
     "name": "XDriver",
@@ -81,7 +89,7 @@
         },
         {
           "name": "connect",
-          "returns": "XConnection",
+          "returns": "x_connection_i",
           "desc": [
             "attempts to make a database connection to the given URL.",
             "",
@@ -102,7 +110,7 @@
             ],
             [
               "info",
-              "typing.List[PropertyValue]",
+              "typing.List[beans_property_value_i]",
               "in"
             ]
           ]
@@ -131,7 +139,7 @@
         },
         {
           "name": "getPropertyInfo",
-          "returns": "typing.List[DriverPropertyInfo]",
+          "returns": "typing.List[driver_property_info_i]",
           "desc": [
             "gets information about the possible properties for this driver.",
             "",
@@ -148,7 +156,7 @@
             ],
             [
               "info",
-              "typing.List[PropertyValue]",
+              "typing.List[beans_property_value_i]",
               "in"
             ]
           ]

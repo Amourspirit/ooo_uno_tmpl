@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XDDELinks",
   "type": "interface",
   "namespace": "com.sun.star.sheet",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,22 +16,28 @@
     "from_imports": [
       [
         "..container.x_name_access",
-        "XNameAccess"
+        "XNameAccess",
+        "container_x_name_access_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".xdde_link",
-        "XDDELink"
+        "XDDELink",
+        "xdde_link_i"
       ],
       [
         ".dde_link_mode",
-        "DDELinkMode"
+        "DDELinkMode",
+        "dde_link_mode_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.container.XNameAccess": "container_x_name_access_i"
+    },
     "quote": [
-      "DDELinkMode",
-      "XDDELink"
+      "xdde_link_i",
+      "dde_link_mode_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -52,7 +59,7 @@
       "methods": [
         {
           "name": "addDDELink",
-          "returns": "XDDELink",
+          "returns": "xdde_link_i",
           "desc": [
             "adds a DDE link to the spreadsheet without updating it.",
             "",
@@ -77,7 +84,7 @@
             ],
             [
               "nMode",
-              "DDELinkMode",
+              "dde_link_mode_i",
               "in"
             ]
           ]

@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XAsyncJob",
   "type": "interface",
   "namespace": "com.sun.star.task",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,25 +16,31 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
-        ".x_job_listener",
-        "XJobListener"
+        "..beans.named_value",
+        "NamedValue",
+        "beans_named_value_i"
       ],
       [
-        "..beans.named_value",
-        "NamedValue"
+        ".x_job_listener",
+        "XJobListener",
+        "x_job_listener_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "XJobListener",
-      "typing.List[NamedValue]"
+      "x_job_listener_i",
+      "typing.List[beans_named_value_i]"
     ],
     "typings": [
-      "typing.List[NamedValue]"
+      "typing.List[beans_named_value_i]"
     ],
     "requires_typing": true,
     "name": "XAsyncJob",
@@ -62,12 +69,12 @@
           "args": [
             [
               "Arguments",
-              "typing.List[NamedValue]",
+              "typing.List[beans_named_value_i]",
               "in"
             ],
             [
               "Listener",
-              "XJobListener",
+              "x_job_listener_i",
               "in"
             ]
           ]

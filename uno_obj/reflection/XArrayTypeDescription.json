@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XArrayTypeDescription",
   "type": "interface",
   "namespace": "com.sun.star.reflection",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,13 +16,17 @@
     "from_imports": [
       [
         ".x_type_description",
-        "XTypeDescription"
+        "XTypeDescription",
+        "x_type_description_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.reflection.XTypeDescription": "x_type_description_i"
+    },
     "quote": [
       "typing.List[int]",
-      "XTypeDescription"
+      "x_type_description_i"
     ],
     "typings": [
       "typing.List[int]"
@@ -63,7 +68,7 @@
         },
         {
           "name": "getType",
-          "returns": "XTypeDescription",
+          "returns": "x_type_description_i",
           "desc": [
             "Returns the element type of the array."
           ],

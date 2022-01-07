@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XEventAttacherManager",
   "type": "interface",
   "namespace": "com.sun.star.script",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,27 +16,33 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".script_event_descriptor",
-        "ScriptEventDescriptor"
+        "ScriptEventDescriptor",
+        "script_event_descriptor_i"
       ],
       [
         ".x_script_listener",
-        "XScriptListener"
+        "XScriptListener",
+        "x_script_listener_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "ScriptEventDescriptor",
-      "XScriptListener",
-      "typing.List[ScriptEventDescriptor]",
-      "XInterface"
+      "x_script_listener_i",
+      "typing.List[script_event_descriptor_i]",
+      "script_event_descriptor_i",
+      "uno_x_interface_i"
     ],
     "typings": [
-      "typing.List[ScriptEventDescriptor]"
+      "typing.List[script_event_descriptor_i]"
     ],
     "requires_typing": true,
     "name": "XEventAttacherManager",
@@ -66,7 +73,7 @@
           "args": [
             [
               "xListener",
-              "XScriptListener",
+              "x_script_listener_i",
               "in"
             ]
           ]
@@ -91,7 +98,7 @@
             ],
             [
               "xObject",
-              "XInterface",
+              "uno_x_interface_i",
               "in"
             ],
             [
@@ -120,14 +127,14 @@
             ],
             [
               "xObject",
-              "XInterface",
+              "uno_x_interface_i",
               "in"
             ]
           ]
         },
         {
           "name": "getScriptEvents",
-          "returns": "typing.List[ScriptEventDescriptor]",
+          "returns": "typing.List[script_event_descriptor_i]",
           "desc": [],
           "raises": [
             "com.sun.star.lang.IllegalArgumentException"
@@ -180,7 +187,7 @@
             ],
             [
               "aScriptEvent",
-              "ScriptEventDescriptor",
+              "script_event_descriptor_i",
               "in"
             ]
           ]
@@ -208,7 +215,7 @@
             ],
             [
               "aScriptEvents",
-              "typing.List[ScriptEventDescriptor]",
+              "typing.List[script_event_descriptor_i]",
               "in"
             ]
           ]
@@ -248,7 +255,7 @@
           "args": [
             [
               "Listener",
-              "XScriptListener",
+              "x_script_listener_i",
               "in"
             ]
           ]

@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XDataEditor",
   "type": "interface",
   "namespace": "com.sun.star.util",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,18 +16,23 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_data_editor_listener",
-        "XDataEditorListener"
+        "XDataEditorListener",
+        "x_data_editor_listener_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "XDataEditorListener",
-      "XInterface"
+      "uno_x_interface_i",
+      "x_data_editor_listener_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -52,14 +58,14 @@
           "args": [
             [
               "listener",
-              "XDataEditorListener",
+              "x_data_editor_listener_i",
               "in"
             ]
           ]
         },
         {
           "name": "getModel",
-          "returns": "XInterface",
+          "returns": "uno_x_interface_i",
           "desc": [],
           "raises": [],
           "args": []
@@ -74,7 +80,7 @@
           "args": [
             [
               "listener",
-              "XDataEditorListener",
+              "x_data_editor_listener_i",
               "in"
             ]
           ]
@@ -89,7 +95,7 @@
           "args": [
             [
               "model",
-              "XInterface",
+              "uno_x_interface_i",
               "in"
             ]
           ]

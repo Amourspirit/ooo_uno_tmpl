@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XNumberFormatCode",
   "type": "interface",
   "namespace": "com.sun.star.i18n",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,26 +16,32 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
-        ".number_format_code",
-        "NumberFormatCode"
+        "..lang.locale",
+        "Locale",
+        "lang_locale_i"
       ],
       [
-        "..lang.locale",
-        "Locale"
+        ".number_format_code",
+        "NumberFormatCode",
+        "number_format_code_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "NumberFormatCode",
-      "Locale",
-      "typing.List[NumberFormatCode]"
+      "lang_locale_i",
+      "typing.List[number_format_code_i]",
+      "number_format_code_i"
     ],
     "typings": [
-      "typing.List[NumberFormatCode]"
+      "typing.List[number_format_code_i]"
     ],
     "requires_typing": true,
     "name": "XNumberFormatCode",
@@ -51,7 +58,7 @@
       "methods": [
         {
           "name": "getAllFormatCode",
-          "returns": "typing.List[NumberFormatCode]",
+          "returns": "typing.List[number_format_code_i]",
           "desc": [
             "returns all format codes for a given nFormatUsage and locale."
           ],
@@ -64,14 +71,14 @@
             ],
             [
               "rLocale",
-              "Locale",
+              "lang_locale_i",
               "in"
             ]
           ]
         },
         {
           "name": "getAllFormatCodes",
-          "returns": "typing.List[NumberFormatCode]",
+          "returns": "typing.List[number_format_code_i]",
           "desc": [
             "returns all format codes for a given locale."
           ],
@@ -79,14 +86,14 @@
           "args": [
             [
               "rLocale",
-              "Locale",
+              "lang_locale_i",
               "in"
             ]
           ]
         },
         {
           "name": "getDefault",
-          "returns": "NumberFormatCode",
+          "returns": "number_format_code_i",
           "desc": [
             "returns the default number format code of a specific category (usage group) for a given locale and format length type."
           ],
@@ -104,14 +111,14 @@
             ],
             [
               "rLocale",
-              "Locale",
+              "lang_locale_i",
               "in"
             ]
           ]
         },
         {
           "name": "getFormatCode",
-          "returns": "NumberFormatCode",
+          "returns": "number_format_code_i",
           "desc": [
             "returns the number format pointed to by nFormatIndex for a given locale."
           ],
@@ -124,7 +131,7 @@
             ],
             [
               "rLocale",
-              "Locale",
+              "lang_locale_i",
               "in"
             ]
           ]

@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XDynamicResultSet",
   "type": "interface",
   "namespace": "com.sun.star.ucb",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,27 +16,34 @@
     "from_imports": [
       [
         "..lang.x_component",
-        "XComponent"
+        "XComponent",
+        "lang_x_component_i"
       ]
     ],
     "from_imports_typing": [
       [
-        ".x_dynamic_result_set",
-        "XDynamicResultSet"
-      ],
-      [
         ".x_dynamic_result_set_listener",
-        "XDynamicResultSetListener"
+        "XDynamicResultSetListener",
+        "x_dynamic_result_set_listener_i"
       ],
       [
         "..sdbc.x_result_set",
-        "XResultSet"
+        "XResultSet",
+        "sdbc_x_result_set_i"
+      ],
+      [
+        ".x_dynamic_result_set",
+        "XDynamicResultSet",
+        "x_dynamic_result_set_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.lang.XComponent": "lang_x_component_i"
+    },
     "quote": [
-      "XResultSet",
-      "XDynamicResultSetListener",
-      "XDynamicResultSet"
+      "x_dynamic_result_set_i",
+      "x_dynamic_result_set_listener_i",
+      "sdbc_x_result_set_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -85,7 +93,7 @@
           "args": [
             [
               "Cache",
-              "XDynamicResultSet",
+              "x_dynamic_result_set_i",
               "in"
             ]
           ]
@@ -101,7 +109,7 @@
         },
         {
           "name": "getStaticResultSet",
-          "returns": "XResultSet",
+          "returns": "sdbc_x_result_set_i",
           "desc": [
             "Call this, if you don't care about any changes."
           ],
@@ -124,7 +132,7 @@
           "args": [
             [
               "Listener",
-              "XDynamicResultSetListener",
+              "x_dynamic_result_set_listener_i",
               "in"
             ]
           ]

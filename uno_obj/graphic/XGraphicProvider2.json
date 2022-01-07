@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XGraphicProvider2",
   "type": "interface",
   "namespace": "com.sun.star.graphic",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,26 +16,32 @@
     "from_imports": [
       [
         ".x_graphic_provider",
-        "XGraphicProvider"
+        "XGraphicProvider",
+        "x_graphic_provider_i"
       ]
     ],
     "from_imports_typing": [
       [
-        ".x_graphic",
-        "XGraphic"
+        "..beans.property_values",
+        "PropertyValues",
+        "beans_property_values_i"
       ],
       [
-        "..beans.property_values",
-        "PropertyValues"
+        ".x_graphic",
+        "XGraphic",
+        "x_graphic_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.graphic.XGraphicProvider": "x_graphic_provider_i"
+    },
     "quote": [
-      "typing.List[PropertyValues]",
-      "typing.List[XGraphic]"
+      "typing.List[beans_property_values_i]",
+      "typing.List[x_graphic_i]"
     ],
     "typings": [
-      "typing.List[PropertyValues]",
-      "typing.List[XGraphic]"
+      "typing.List[beans_property_values_i]",
+      "typing.List[x_graphic_i]"
     ],
     "requires_typing": true,
     "name": "XGraphicProvider2",
@@ -55,7 +62,7 @@
       "methods": [
         {
           "name": "queryGraphics",
-          "returns": "typing.List[XGraphic]",
+          "returns": "typing.List[x_graphic_i]",
           "desc": [
             "Calling this method returns XGraphic interfaces that hold loaded graphics.",
             "",
@@ -71,7 +78,7 @@
           "args": [
             [
               "MediaPropertiesSeq",
-              "typing.List[PropertyValues]",
+              "typing.List[beans_property_values_i]",
               "in"
             ]
           ]

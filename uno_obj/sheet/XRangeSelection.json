@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XRangeSelection",
   "type": "interface",
   "namespace": "com.sun.star.sheet",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,30 +16,37 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
-        ".x_range_selection_listener",
-        "XRangeSelectionListener"
+        "..beans.property_value",
+        "PropertyValue",
+        "beans_property_value_i"
       ],
       [
         ".x_range_selection_change_listener",
-        "XRangeSelectionChangeListener"
+        "XRangeSelectionChangeListener",
+        "x_range_selection_change_listener_i"
       ],
       [
-        "..beans.property_value",
-        "PropertyValue"
+        ".x_range_selection_listener",
+        "XRangeSelectionListener",
+        "x_range_selection_listener_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "XRangeSelectionListener",
-      "XRangeSelectionChangeListener",
-      "typing.List[PropertyValue]"
+      "x_range_selection_listener_i",
+      "x_range_selection_change_listener_i",
+      "typing.List[beans_property_value_i]"
     ],
     "typings": [
-      "typing.List[PropertyValue]"
+      "typing.List[beans_property_value_i]"
     ],
     "requires_typing": true,
     "name": "XRangeSelection",
@@ -72,7 +80,7 @@
           "args": [
             [
               "aListener",
-              "XRangeSelectionChangeListener",
+              "x_range_selection_change_listener_i",
               "in"
             ]
           ]
@@ -87,7 +95,7 @@
           "args": [
             [
               "aListener",
-              "XRangeSelectionListener",
+              "x_range_selection_listener_i",
               "in"
             ]
           ]
@@ -102,7 +110,7 @@
           "args": [
             [
               "aListener",
-              "XRangeSelectionChangeListener",
+              "x_range_selection_change_listener_i",
               "in"
             ]
           ]
@@ -117,7 +125,7 @@
           "args": [
             [
               "aListener",
-              "XRangeSelectionListener",
+              "x_range_selection_listener_i",
               "in"
             ]
           ]
@@ -132,7 +140,7 @@
           "args": [
             [
               "aArguments",
-              "typing.List[PropertyValue]",
+              "typing.List[beans_property_value_i]",
               "in"
             ]
           ]

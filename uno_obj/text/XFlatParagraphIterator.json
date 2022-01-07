@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XFlatParagraphIterator",
   "type": "interface",
   "namespace": "com.sun.star.text",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,17 +16,22 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_flat_paragraph",
-        "XFlatParagraph"
+        "XFlatParagraph",
+        "x_flat_paragraph_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "XFlatParagraph"
+      "x_flat_paragraph_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -47,7 +53,7 @@
       "methods": [
         {
           "name": "getFirstPara",
-          "returns": "XFlatParagraph",
+          "returns": "x_flat_paragraph_i",
           "desc": [
             "get the first flat paragraph to be checked or an empty reference if there are no more paragraphs to check."
           ],
@@ -56,7 +62,7 @@
         },
         {
           "name": "getLastPara",
-          "returns": "XFlatParagraph",
+          "returns": "x_flat_paragraph_i",
           "desc": [
             "get the last flat paragraph"
           ],
@@ -65,7 +71,7 @@
         },
         {
           "name": "getNextPara",
-          "returns": "XFlatParagraph",
+          "returns": "x_flat_paragraph_i",
           "desc": [
             "get the next flat paragraph to be checked or an empty reference if there are no more paragraphs to check."
           ],
@@ -74,7 +80,7 @@
         },
         {
           "name": "getParaAfter",
-          "returns": "XFlatParagraph",
+          "returns": "x_flat_paragraph_i",
           "desc": [
             "get the flat paragraph just following this one"
           ],
@@ -84,14 +90,14 @@
           "args": [
             [
               "xPara",
-              "XFlatParagraph",
+              "x_flat_paragraph_i",
               "in"
             ]
           ]
         },
         {
           "name": "getParaBefore",
-          "returns": "XFlatParagraph",
+          "returns": "x_flat_paragraph_i",
           "desc": [
             "get the flat paragraph before this one"
           ],
@@ -101,7 +107,7 @@
           "args": [
             [
               "xPara",
-              "XFlatParagraph",
+              "x_flat_paragraph_i",
               "in"
             ]
           ]

@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XEncryptionProtectedStorage",
   "type": "interface",
   "namespace": "com.sun.star.embed",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,22 +16,27 @@
     "from_imports": [
       [
         ".x_encryption_protected_source2",
-        "XEncryptionProtectedSource2"
+        "XEncryptionProtectedSource2",
+        "x_encryption_protected_source2_i"
       ]
     ],
     "from_imports_typing": [
       [
         "..beans.named_value",
-        "NamedValue"
+        "NamedValue",
+        "beans_named_value_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.embed.XEncryptionProtectedSource2": "x_encryption_protected_source2_i"
+    },
     "quote": [
-      "typing.List[NamedValue]",
-      "typing.List[typing.List[NamedValue]]"
+      "typing.List[beans_named_value_i]",
+      "typing.List[typing.List[beans_named_value_i]]"
     ],
     "typings": [
-      "typing.List[NamedValue]",
-      "typing.List[typing.List[NamedValue]]"
+      "typing.List[beans_named_value_i]",
+      "typing.List[typing.List[beans_named_value_i]]"
     ],
     "requires_typing": true,
     "name": "XEncryptionProtectedStorage",
@@ -51,7 +57,7 @@
       "methods": [
         {
           "name": "getEncryptionAlgorithms",
-          "returns": "typing.List[NamedValue]",
+          "returns": "typing.List[beans_named_value_i]",
           "desc": [
             "allows to get the encryption algorithms of the object."
           ],
@@ -74,7 +80,7 @@
           "args": [
             [
               "aAlgorithms",
-              "typing.List[NamedValue]",
+              "typing.List[beans_named_value_i]",
               "in"
             ]
           ]
@@ -99,7 +105,7 @@
           "args": [
             [
               "aProps",
-              "typing.List[typing.List[NamedValue]]",
+              "typing.List[typing.List[beans_named_value_i]]",
               "in"
             ]
           ]

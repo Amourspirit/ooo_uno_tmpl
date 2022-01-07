@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XPlayerWindow",
   "type": "interface",
   "namespace": "com.sun.star.media",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,17 +16,22 @@
     "from_imports": [
       [
         "..awt.x_window",
-        "XWindow"
+        "XWindow",
+        "awt_x_window_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".zoom_level",
-        "ZoomLevel"
+        "ZoomLevel",
+        "zoom_level_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.awt.XWindow": "awt_x_window_i"
+    },
     "quote": [
-      "ZoomLevel"
+      "zoom_level_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -43,7 +49,7 @@
       "methods": [
         {
           "name": "getZoomLevel",
-          "returns": "ZoomLevel",
+          "returns": "zoom_level_i",
           "desc": [
             "gets the current media ratio."
           ],
@@ -75,7 +81,7 @@
           "args": [
             [
               "ZoomLevel",
-              "ZoomLevel",
+              "zoom_level_i",
               "in"
             ]
           ]

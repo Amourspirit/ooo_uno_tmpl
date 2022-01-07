@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XAnyDescriptionAccess",
   "type": "interface",
   "namespace": "com.sun.star.chart2",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,10 +16,14 @@
     "from_imports": [
       [
         "..chart.x_complex_description_access",
-        "XComplexDescriptionAccess"
+        "XComplexDescriptionAccess",
+        "chart_x_complex_description_access_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.chart.XComplexDescriptionAccess": "chart_x_complex_description_access_i"
+    },
     "quote": [
       "typing.List[typing.List[object]]"
     ],

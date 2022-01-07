@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XPipe",
   "type": "interface",
   "namespace": "com.sun.star.io",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,14 +16,20 @@
     "from_imports": [
       [
         ".x_input_stream",
-        "XInputStream"
+        "XInputStream",
+        "x_input_stream_i"
       ],
       [
         ".x_output_stream",
-        "XOutputStream"
+        "XOutputStream",
+        "x_output_stream_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.io.XInputStream": "x_input_stream_i",
+      "com.sun.star.io.XOutputStream": "x_output_stream_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -30,8 +37,8 @@
     "imports": [],
     "namespace": "com.sun.star.io",
     "extends": [
-      "com.sun.star.io.XOutputStream",
-      "com.sun.star.io.XInputStream"
+      "com.sun.star.io.XInputStream",
+      "com.sun.star.io.XOutputStream"
     ],
     "desc": [
       "The implementation of an output stream and an input stream.",

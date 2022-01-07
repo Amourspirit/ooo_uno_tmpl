@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XTypeDescriptionEnumerationAccess",
   "type": "interface",
   "namespace": "com.sun.star.reflection",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,30 +16,37 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_type_description_enumeration",
-        "XTypeDescriptionEnumeration"
+        "XTypeDescriptionEnumeration",
+        "x_type_description_enumeration_i"
       ],
       [
         "..uno.type_class",
-        "TypeClass"
+        "TypeClass",
+        "uno_type_class_i"
       ],
       [
         ".type_description_search_depth",
-        "TypeDescriptionSearchDepth"
+        "TypeDescriptionSearchDepth",
+        "type_description_search_depth_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "XTypeDescriptionEnumeration",
-      "TypeDescriptionSearchDepth",
-      "typing.List[TypeClass]"
+      "x_type_description_enumeration_i",
+      "type_description_search_depth_i",
+      "typing.List[uno_type_class_i]"
     ],
     "typings": [
-      "typing.List[TypeClass]"
+      "typing.List[uno_type_class_i]"
     ],
     "requires_typing": true,
     "name": "XTypeDescriptionEnumerationAccess",
@@ -59,7 +67,7 @@
       "methods": [
         {
           "name": "createTypeDescriptionEnumeration",
-          "returns": "XTypeDescriptionEnumeration",
+          "returns": "x_type_description_enumeration_i",
           "desc": [
             "Creates an enumeration for type descriptions.",
             "",
@@ -81,12 +89,12 @@
             ],
             [
               "types",
-              "typing.List[TypeClass]",
+              "typing.List[uno_type_class_i]",
               "in"
             ],
             [
               "depth",
-              "TypeDescriptionSearchDepth",
+              "type_description_search_depth_i",
               "in"
             ]
           ]

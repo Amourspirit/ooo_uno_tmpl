@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XMenuProxyListener",
   "type": "interface",
   "namespace": "com.sun.star.mozilla",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,26 +16,32 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".menu_single_change",
-        "MenuSingleChange"
+        "MenuSingleChange",
+        "menu_single_change_i"
       ],
       [
         ".menu_multiple_change",
-        "MenuMultipleChange"
+        "MenuMultipleChange",
+        "menu_multiple_change_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "typing.List[MenuSingleChange]",
-      "typing.List[MenuMultipleChange]"
+      "typing.List[menu_single_change_i]",
+      "typing.List[menu_multiple_change_i]"
     ],
     "typings": [
-      "typing.List[MenuSingleChange]",
-      "typing.List[MenuMultipleChange]"
+      "typing.List[menu_single_change_i]",
+      "typing.List[menu_multiple_change_i]"
     ],
     "requires_typing": true,
     "name": "XMenuProxyListener",
@@ -59,7 +66,7 @@
           "args": [
             [
               "MenuMultipleChanges",
-              "typing.List[MenuMultipleChange]",
+              "typing.List[menu_multiple_change_i]",
               "in"
             ]
           ]
@@ -74,7 +81,7 @@
           "args": [
             [
               "MenuSingleChanges",
-              "typing.List[MenuSingleChange]",
+              "typing.List[menu_single_change_i]",
               "in"
             ]
           ]

@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XAtomServer",
   "type": "interface",
   "namespace": "com.sun.star.util",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,32 +16,38 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".atom_class_request",
-        "AtomClassRequest"
+        "AtomClassRequest",
+        "atom_class_request_i"
       ],
       [
         ".atom_description",
-        "AtomDescription"
+        "AtomDescription",
+        "atom_description_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "typing.List[str]",
-      "typing.List[AtomClassRequest]",
-      "typing.List[typing.List[AtomDescription]]",
-      "typing.List[AtomDescription]",
-      "typing.List[int]"
+      "typing.List[atom_description_i]",
+      "typing.List[atom_class_request_i]",
+      "typing.List[int]",
+      "typing.List[typing.List[atom_description_i]]",
+      "typing.List[str]"
     ],
     "typings": [
-      "typing.List[str]",
-      "typing.List[AtomClassRequest]",
-      "typing.List[typing.List[AtomDescription]]",
-      "typing.List[AtomDescription]",
-      "typing.List[int]"
+      "typing.List[atom_description_i]",
+      "typing.List[atom_class_request_i]",
+      "typing.List[int]",
+      "typing.List[typing.List[atom_description_i]]",
+      "typing.List[str]"
     ],
     "requires_typing": true,
     "name": "XAtomServer",
@@ -96,14 +103,14 @@
           "args": [
             [
               "atoms",
-              "typing.List[AtomClassRequest]",
+              "typing.List[atom_class_request_i]",
               "in"
             ]
           ]
         },
         {
           "name": "getClass",
-          "returns": "typing.List[AtomDescription]",
+          "returns": "typing.List[atom_description_i]",
           "desc": [
             "returns a whole atom class"
           ],
@@ -118,7 +125,7 @@
         },
         {
           "name": "getClasses",
-          "returns": "typing.List[typing.List[AtomDescription]]",
+          "returns": "typing.List[typing.List[atom_description_i]]",
           "desc": [
             "returns multiple atom classes"
           ],
@@ -133,7 +140,7 @@
         },
         {
           "name": "getRecentAtoms",
-          "returns": "typing.List[AtomDescription]",
+          "returns": "typing.List[atom_description_i]",
           "desc": [
             "returns the atoms that have been registered to a class after an already known atom",
             "",

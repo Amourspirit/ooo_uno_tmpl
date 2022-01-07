@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XLogHandler",
   "type": "interface",
   "namespace": "com.sun.star.logging",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,22 +16,28 @@
     "from_imports": [
       [
         "..lang.x_component",
-        "XComponent"
+        "XComponent",
+        "lang_x_component_i"
       ]
     ],
     "from_imports_typing": [
       [
-        ".x_log_formatter",
-        "XLogFormatter"
+        ".log_record",
+        "LogRecord",
+        "log_record_i"
       ],
       [
-        ".log_record",
-        "LogRecord"
+        ".x_log_formatter",
+        "XLogFormatter",
+        "x_log_formatter_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.lang.XComponent": "lang_x_component_i"
+    },
     "quote": [
-      "XLogFormatter",
-      "LogRecord"
+      "log_record_i",
+      "x_log_formatter_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -71,7 +78,7 @@
           "args": [
             [
               "Record",
-              "LogRecord",
+              "log_record_i",
               "in"
             ]
           ]
@@ -91,7 +98,7 @@
         },
         {
           "name": "Formatter",
-          "returns": "XLogFormatter",
+          "returns": "x_log_formatter_i",
           "desc": [
             "specifies the formatter to be used by this handler."
           ],

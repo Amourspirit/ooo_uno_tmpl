@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XLocaleData4",
   "type": "interface",
   "namespace": "com.sun.star.i18n",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,18 +16,23 @@
     "from_imports": [
       [
         ".x_locale_data3",
-        "XLocaleData3"
+        "XLocaleData3",
+        "x_locale_data3_i"
       ]
     ],
     "from_imports_typing": [
       [
         "..lang.locale",
-        "Locale"
+        "Locale",
+        "lang_locale_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.i18n.XLocaleData3": "x_locale_data3_i"
+    },
     "quote": [
-      "typing.List[str]",
-      "Locale"
+      "lang_locale_i",
+      "typing.List[str]"
     ],
     "typings": [
       "typing.List[str]"
@@ -62,7 +68,7 @@
           "args": [
             [
               "aLocale",
-              "Locale",
+              "lang_locale_i",
               "in"
             ]
           ]

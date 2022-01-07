@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XTextContent",
   "type": "interface",
   "namespace": "com.sun.star.text",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,17 +16,22 @@
     "from_imports": [
       [
         "..lang.x_component",
-        "XComponent"
+        "XComponent",
+        "lang_x_component_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_text_range",
-        "XTextRange"
+        "XTextRange",
+        "x_text_range_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.lang.XComponent": "lang_x_component_i"
+    },
     "quote": [
-      "XTextRange"
+      "x_text_range_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -57,14 +63,14 @@
           "args": [
             [
               "xTextRange",
-              "XTextRange",
+              "x_text_range_i",
               "in"
             ]
           ]
         },
         {
           "name": "getAnchor",
-          "returns": "XTextRange",
+          "returns": "x_text_range_i",
           "desc": [
             "Note: The anchor of the actual implementation for text tables does not have a position in the text. Thus that anchor can not be used for some operation like attach() for example or com.sun.star.text.insertTextContent or other function that require the object to have a position in the text.",
             "",

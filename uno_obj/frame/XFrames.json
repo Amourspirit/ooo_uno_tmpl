@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XFrames",
   "type": "interface",
   "namespace": "com.sun.star.frame",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,21 +16,26 @@
     "from_imports": [
       [
         "..container.x_index_access",
-        "XIndexAccess"
+        "XIndexAccess",
+        "container_x_index_access_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_frame",
-        "XFrame"
+        "XFrame",
+        "x_frame_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.container.XIndexAccess": "container_x_index_access_i"
+    },
     "quote": [
-      "typing.List[XFrame]",
-      "XFrame"
+      "x_frame_i",
+      "typing.List[x_frame_i]"
     ],
     "typings": [
-      "typing.List[XFrame]"
+      "typing.List[x_frame_i]"
     ],
     "requires_typing": true,
     "name": "XFrames",
@@ -56,14 +62,14 @@
           "args": [
             [
               "xFrame",
-              "XFrame",
+              "x_frame_i",
               "in"
             ]
           ]
         },
         {
           "name": "queryFrames",
-          "returns": "typing.List[XFrame]",
+          "returns": "typing.List[x_frame_i]",
           "desc": [
             "provides access to the list of all currently existing frames inside this container and her sub frames"
           ],
@@ -88,7 +94,7 @@
           "args": [
             [
               "xFrame",
-              "XFrame",
+              "x_frame_i",
               "in"
             ]
           ]

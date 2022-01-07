@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XProofreadingIterator",
   "type": "interface",
   "namespace": "com.sun.star.linguistic2",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,33 +16,41 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
         "..text.x_flat_paragraph",
-        "XFlatParagraph"
+        "XFlatParagraph",
+        "text_x_flat_paragraph_i"
       ],
       [
         "..lang.locale",
-        "Locale"
+        "Locale",
+        "lang_locale_i"
       ],
       [
         "..text.x_flat_paragraph_iterator_provider",
-        "XFlatParagraphIteratorProvider"
+        "XFlatParagraphIteratorProvider",
+        "text_x_flat_paragraph_iterator_provider_i"
       ],
       [
         ".proofreading_result",
-        "ProofreadingResult"
+        "ProofreadingResult",
+        "proofreading_result_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "Locale",
-      "ProofreadingResult",
-      "XInterface",
-      "XFlatParagraphIteratorProvider",
-      "XFlatParagraph"
+      "text_x_flat_paragraph_iterator_provider_i",
+      "text_x_flat_paragraph_i",
+      "proofreading_result_i",
+      "uno_x_interface_i",
+      "lang_locale_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -63,7 +72,7 @@
       "methods": [
         {
           "name": "checkSentenceAtPosition",
-          "returns": "ProofreadingResult",
+          "returns": "proofreading_result_i",
           "desc": [
             "start proofreading from a given position"
           ],
@@ -73,12 +82,12 @@
           "args": [
             [
               "xDocument",
-              "XInterface",
+              "uno_x_interface_i",
               "in"
             ],
             [
               "xFlatParagraph",
-              "XFlatParagraph",
+              "text_x_flat_paragraph_i",
               "in"
             ],
             [
@@ -88,7 +97,7 @@
             ],
             [
               "aLocale",
-              "Locale",
+              "lang_locale_i",
               "in"
             ],
             [
@@ -118,7 +127,7 @@
           "args": [
             [
               "xDocument",
-              "XInterface",
+              "uno_x_interface_i",
               "in"
             ]
           ]
@@ -144,12 +153,12 @@
           "args": [
             [
               "xDocument",
-              "XInterface",
+              "uno_x_interface_i",
               "in"
             ],
             [
               "xIteratorProvider",
-              "XFlatParagraphIteratorProvider",
+              "text_x_flat_paragraph_iterator_provider_i",
               "in"
             ]
           ]

@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XVclWindowPeer",
   "type": "interface",
   "namespace": "com.sun.star.awt",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,23 +16,29 @@
     "from_imports": [
       [
         ".x_window_peer",
-        "XWindowPeer"
+        "XWindowPeer",
+        "x_window_peer_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".font_descriptor",
-        "FontDescriptor"
+        "FontDescriptor",
+        "font_descriptor_i"
       ],
       [
         "..util.color",
-        "Color"
+        "Color",
+        "util_color_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.awt.XWindowPeer": "x_window_peer_i"
+    },
     "quote": [
-      "FontDescriptor",
-      "Color",
-      "XWindowPeer"
+      "util_color_i",
+      "font_descriptor_i",
+      "x_window_peer_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -96,17 +103,17 @@
             ],
             [
               "Font",
-              "FontDescriptor",
+              "font_descriptor_i",
               "out"
             ],
             [
               "ForegroundColor",
-              "Color",
+              "util_color_i",
               "out"
             ],
             [
               "BackgroundColor",
-              "Color",
+              "util_color_i",
               "out"
             ]
           ]
@@ -121,7 +128,7 @@
           "args": [
             [
               "Peer",
-              "XWindowPeer",
+              "x_window_peer_i",
               "in"
             ]
           ]
@@ -145,7 +152,7 @@
           "args": [
             [
               "aFont",
-              "FontDescriptor",
+              "font_descriptor_i",
               "in"
             ]
           ]
@@ -175,7 +182,7 @@
           "args": [
             [
               "Color",
-              "Color",
+              "util_color_i",
               "in"
             ]
           ]

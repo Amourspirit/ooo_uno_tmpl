@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XChartShape",
   "type": "interface",
   "namespace": "com.sun.star.chart2",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,22 +16,28 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
-        "..awt.point",
-        "Point"
+        "..awt.size",
+        "Size",
+        "awt_size_i"
       ],
       [
-        "..awt.size",
-        "Size"
+        "..awt.point",
+        "Point",
+        "awt_point_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "Point",
-      "Size"
+      "awt_size_i",
+      "awt_point_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -48,7 +55,7 @@
       "methods": [
         {
           "name": "getPosition",
-          "returns": "Point",
+          "returns": "awt_point_i",
           "desc": [
             "the method corresponds to the identical methods of the interface com.sun.star.drawing.XShape"
           ],
@@ -84,7 +91,7 @@
         },
         {
           "name": "getSize",
-          "returns": "Size",
+          "returns": "awt_size_i",
           "desc": [
             "the method corresponds to the identical methods of the interface com.sun.star.drawing.XShape"
           ],
@@ -101,7 +108,7 @@
           "args": [
             [
               "aPosition",
-              "Point",
+              "awt_point_i",
               "in"
             ]
           ]
@@ -143,7 +150,7 @@
           "args": [
             [
               "aSize",
-              "Size",
+              "awt_size_i",
               "in"
             ]
           ]

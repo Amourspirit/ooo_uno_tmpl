@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XRegressionCurveCalculator",
   "type": "interface",
   "namespace": "com.sun.star.chart2",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,32 +16,39 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
-        "..geometry.real_point2_d",
-        "RealPoint2D"
-      ],
-      [
         ".x_scaling",
-        "XScaling"
+        "XScaling",
+        "x_scaling_i"
       ],
       [
         "..util.x_number_formats_supplier",
-        "XNumberFormatsSupplier"
+        "XNumberFormatsSupplier",
+        "util_x_number_formats_supplier_i"
+      ],
+      [
+        "..geometry.real_point2_d",
+        "RealPoint2D",
+        "geometry_real_point2_d_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "XScaling",
+      "typing.List[geometry_real_point2_d_i]",
+      "util_x_number_formats_supplier_i",
       "typing.List[float]",
-      "typing.List[RealPoint2D]",
-      "XNumberFormatsSupplier"
+      "x_scaling_i"
     ],
     "typings": [
-      "typing.List[float]",
-      "typing.List[RealPoint2D]"
+      "typing.List[geometry_real_point2_d_i]",
+      "typing.List[float]"
     ],
     "requires_typing": true,
     "name": "XRegressionCurveCalculator",
@@ -85,7 +93,7 @@
         },
         {
           "name": "getCurveValues",
-          "returns": "typing.List[RealPoint2D]",
+          "returns": "typing.List[geometry_real_point2_d_i]",
           "desc": [
             "calculate multiple points of a regression curve at once.",
             "",
@@ -114,12 +122,12 @@
             ],
             [
               "xScalingX",
-              "XScaling",
+              "x_scaling_i",
               "in"
             ],
             [
               "xScalingY",
-              "XScaling",
+              "x_scaling_i",
               "in"
             ],
             [
@@ -141,7 +149,7 @@
           "args": [
             [
               "xNumFmtSupplier",
-              "XNumberFormatsSupplier",
+              "util_x_number_formats_supplier_i",
               "in"
             ],
             [

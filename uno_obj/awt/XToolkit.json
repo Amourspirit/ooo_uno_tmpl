@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XToolkit",
   "type": "interface",
   "namespace": "com.sun.star.awt",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,43 +16,52 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
-        ".rectangle",
-        "Rectangle"
+        ".window_descriptor",
+        "WindowDescriptor",
+        "window_descriptor_i"
       ],
       [
         ".x_region",
-        "XRegion"
-      ],
-      [
-        ".window_descriptor",
-        "WindowDescriptor"
-      ],
-      [
-        ".x_window_peer",
-        "XWindowPeer"
+        "XRegion",
+        "x_region_i"
       ],
       [
         ".x_device",
-        "XDevice"
+        "XDevice",
+        "x_device_i"
+      ],
+      [
+        ".x_window_peer",
+        "XWindowPeer",
+        "x_window_peer_i"
+      ],
+      [
+        ".rectangle",
+        "Rectangle",
+        "rectangle_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "Rectangle",
-      "typing.List[WindowDescriptor]",
-      "XDevice",
-      "XRegion",
-      "typing.List[XWindowPeer]",
-      "XWindowPeer",
-      "WindowDescriptor"
+      "typing.List[x_window_peer_i]",
+      "typing.List[window_descriptor_i]",
+      "x_device_i",
+      "rectangle_i",
+      "x_window_peer_i",
+      "window_descriptor_i",
+      "x_region_i"
     ],
     "typings": [
-      "typing.List[WindowDescriptor]",
-      "typing.List[XWindowPeer]"
+      "typing.List[x_window_peer_i]",
+      "typing.List[window_descriptor_i]"
     ],
     "requires_typing": true,
     "name": "XToolkit",
@@ -70,7 +80,7 @@
       "methods": [
         {
           "name": "createRegion",
-          "returns": "XRegion",
+          "returns": "x_region_i",
           "desc": [
             "creates a region."
           ],
@@ -79,7 +89,7 @@
         },
         {
           "name": "createScreenCompatibleDevice",
-          "returns": "XDevice",
+          "returns": "x_device_i",
           "desc": [
             "creates a virtual device that is compatible with the screen."
           ],
@@ -99,7 +109,7 @@
         },
         {
           "name": "createWindow",
-          "returns": "XWindowPeer",
+          "returns": "x_window_peer_i",
           "desc": [
             "creates a new window using the given descriptor."
           ],
@@ -109,14 +119,14 @@
           "args": [
             [
               "Descriptor",
-              "WindowDescriptor",
+              "window_descriptor_i",
               "in"
             ]
           ]
         },
         {
           "name": "createWindows",
-          "returns": "typing.List[XWindowPeer]",
+          "returns": "typing.List[x_window_peer_i]",
           "desc": [
             "returns a sequence of windows which are newly created using the given descriptors."
           ],
@@ -126,14 +136,14 @@
           "args": [
             [
               "Descriptors",
-              "typing.List[WindowDescriptor]",
+              "typing.List[window_descriptor_i]",
               "in"
             ]
           ]
         },
         {
           "name": "getDesktopWindow",
-          "returns": "XWindowPeer",
+          "returns": "x_window_peer_i",
           "desc": [
             "returns the desktop window."
           ],
@@ -142,7 +152,7 @@
         },
         {
           "name": "getWorkArea",
-          "returns": "Rectangle",
+          "returns": "rectangle_i",
           "desc": [
             "For LibreOffice versions < 4.1, this method just returned an empty rectangle.",
             "",

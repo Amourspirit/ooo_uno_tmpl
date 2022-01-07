@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XItemListListener",
   "type": "interface",
   "namespace": "com.sun.star.awt",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,22 +16,28 @@
     "from_imports": [
       [
         "..lang.x_event_listener",
-        "XEventListener"
+        "XEventListener",
+        "lang_x_event_listener_i"
       ]
     ],
     "from_imports_typing": [
       [
         "..lang.event_object",
-        "EventObject"
+        "EventObject",
+        "lang_event_object_i"
       ],
       [
         ".item_list_event",
-        "ItemListEvent"
+        "ItemListEvent",
+        "item_list_event_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.lang.XEventListener": "lang_x_event_listener_i"
+    },
     "quote": [
-      "ItemListEvent",
-      "EventObject"
+      "item_list_event_i",
+      "lang_event_object_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -58,7 +65,7 @@
           "args": [
             [
               "Event",
-              "EventObject",
+              "lang_event_object_i",
               "in"
             ]
           ]
@@ -75,7 +82,7 @@
           "args": [
             [
               "Event",
-              "EventObject",
+              "lang_event_object_i",
               "in"
             ]
           ]
@@ -90,7 +97,7 @@
           "args": [
             [
               "Event",
-              "ItemListEvent",
+              "item_list_event_i",
               "in"
             ]
           ]
@@ -107,7 +114,7 @@
           "args": [
             [
               "Event",
-              "ItemListEvent",
+              "item_list_event_i",
               "in"
             ]
           ]
@@ -122,7 +129,7 @@
           "args": [
             [
               "Event",
-              "ItemListEvent",
+              "item_list_event_i",
               "in"
             ]
           ]

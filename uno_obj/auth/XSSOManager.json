@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XSSOManager",
   "type": "interface",
   "namespace": "com.sun.star.auth",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,22 +16,28 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".xsso_acceptor_context",
-        "XSSOAcceptorContext"
+        "XSSOAcceptorContext",
+        "xsso_acceptor_context_i"
       ],
       [
         ".xsso_initiator_context",
-        "XSSOInitiatorContext"
+        "XSSOInitiatorContext",
+        "xsso_initiator_context_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "XSSOAcceptorContext",
-      "XSSOInitiatorContext"
+      "xsso_initiator_context_i",
+      "xsso_acceptor_context_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -52,7 +59,7 @@
       "methods": [
         {
           "name": "createAcceptorContext",
-          "returns": "XSSOAcceptorContext",
+          "returns": "xsso_acceptor_context_i",
           "desc": [
             "creates an acceptor side security context."
           ],
@@ -72,7 +79,7 @@
         },
         {
           "name": "createInitiatorContext",
-          "returns": "XSSOInitiatorContext",
+          "returns": "xsso_initiator_context_i",
           "desc": [
             "creates an initiator side security context."
           ],

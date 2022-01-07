@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XXPathObject",
   "type": "interface",
   "namespace": "com.sun.star.xml.xpath",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,22 +16,28 @@
     "from_imports": [
       [
         "...uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_path_object_type",
-        "XPathObjectType"
+        "XPathObjectType",
+        "x_path_object_type_i"
       ],
       [
         "..dom.x_node_list",
-        "XNodeList"
+        "XNodeList",
+        "dom_x_node_list_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "XPathObjectType",
-      "XNodeList"
+      "dom_x_node_list_i",
+      "x_path_object_type_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -100,7 +107,7 @@
         },
         {
           "name": "getNodeList",
-          "returns": "XNodeList",
+          "returns": "dom_x_node_list_i",
           "desc": [
             "get the nodes from a node list type object"
           ],
@@ -109,7 +116,7 @@
         },
         {
           "name": "getObjectType",
-          "returns": "XPathObjectType",
+          "returns": "x_path_object_type_i",
           "desc": [
             "get object type"
           ],

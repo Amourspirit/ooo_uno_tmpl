@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XFormulaParser",
   "type": "interface",
   "namespace": "com.sun.star.sheet",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,20 +16,23 @@
     "from_imports": [],
     "from_imports_typing": [
       [
-        ".formula_token",
-        "FormulaToken"
+        "..table.cell_address",
+        "CellAddress",
+        "table_cell_address_i"
       ],
       [
-        "..table.cell_address",
-        "CellAddress"
+        ".formula_token",
+        "FormulaToken",
+        "formula_token_i"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "typing.List[FormulaToken]",
-      "CellAddress"
+      "table_cell_address_i",
+      "typing.List[formula_token_i]"
     ],
     "typings": [
-      "typing.List[FormulaToken]"
+      "typing.List[formula_token_i]"
     ],
     "requires_typing": true,
     "name": "XFormulaParser",
@@ -43,7 +47,7 @@
       "methods": [
         {
           "name": "parseFormula",
-          "returns": "typing.List[FormulaToken]",
+          "returns": "typing.List[formula_token_i]",
           "desc": [
             "parses a formula into a sequence of tokens."
           ],
@@ -56,7 +60,7 @@
             ],
             [
               "aReferencePos",
-              "CellAddress",
+              "table_cell_address_i",
               "in"
             ]
           ]
@@ -71,12 +75,12 @@
           "args": [
             [
               "aTokens",
-              "typing.List[FormulaToken]",
+              "typing.List[formula_token_i]",
               "in"
             ],
             [
               "aReferencePos",
-              "CellAddress",
+              "table_cell_address_i",
               "in"
             ]
           ]

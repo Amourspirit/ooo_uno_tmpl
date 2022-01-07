@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XObjectOutputStream",
   "type": "interface",
   "namespace": "com.sun.star.io",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,17 +16,22 @@
     "from_imports": [
       [
         ".x_data_output_stream",
-        "XDataOutputStream"
+        "XDataOutputStream",
+        "x_data_output_stream_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_persist_object",
-        "XPersistObject"
+        "XPersistObject",
+        "x_persist_object_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.io.XDataOutputStream": "x_data_output_stream_i"
+    },
     "quote": [
-      "XPersistObject"
+      "x_persist_object_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -55,7 +61,7 @@
           "args": [
             [
               "Object",
-              "XPersistObject",
+              "x_persist_object_i",
               "in"
             ]
           ]

@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XInplaceClient",
   "type": "interface",
   "namespace": "com.sun.star.embed",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,40 +16,49 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
-        "..awt.rectangle",
-        "Rectangle"
-      ],
-      [
         "..awt.size",
-        "Size"
+        "Size",
+        "awt_size_i"
       ],
       [
         "..awt.key_event",
-        "KeyEvent"
-      ],
-      [
-        "..frame.x_layout_manager",
-        "XLayoutManager"
+        "KeyEvent",
+        "awt_key_event_i"
       ],
       [
         "..frame.x_dispatch_provider",
-        "XDispatchProvider"
+        "XDispatchProvider",
+        "frame_x_dispatch_provider_i"
+      ],
+      [
+        "..frame.x_layout_manager",
+        "XLayoutManager",
+        "frame_x_layout_manager_i"
+      ],
+      [
+        "..awt.rectangle",
+        "Rectangle",
+        "awt_rectangle_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "Rectangle",
-      "typing.List[KeyEvent]",
-      "XDispatchProvider",
-      "Size",
-      "XLayoutManager"
+      "frame_x_dispatch_provider_i",
+      "awt_rectangle_i",
+      "typing.List[awt_key_event_i]",
+      "frame_x_layout_manager_i",
+      "awt_size_i"
     ],
     "typings": [
-      "typing.List[KeyEvent]"
+      "typing.List[awt_key_event_i]"
     ],
     "requires_typing": true,
     "name": "XInplaceClient",
@@ -107,7 +117,7 @@
           "args": [
             [
               "aPosRect",
-              "Rectangle",
+              "awt_rectangle_i",
               "in"
             ]
           ]
@@ -138,7 +148,7 @@
         },
         {
           "name": "getClipRectangle",
-          "returns": "Rectangle",
+          "returns": "awt_rectangle_i",
           "desc": [
             "gets the inplace object clip rectangle.",
             "",
@@ -151,7 +161,7 @@
         },
         {
           "name": "getInplaceDispatchProvider",
-          "returns": "XDispatchProvider",
+          "returns": "frame_x_dispatch_provider_i",
           "desc": [
             "allows to retrieve the container's dispatch provider."
           ],
@@ -162,7 +172,7 @@
         },
         {
           "name": "getLayoutManager",
-          "returns": "XLayoutManager",
+          "returns": "frame_x_layout_manager_i",
           "desc": [
             "allows to retrieve the com.sun.star.frame.LayoutManager of the container."
           ],
@@ -173,7 +183,7 @@
         },
         {
           "name": "getPlacement",
-          "returns": "Rectangle",
+          "returns": "awt_rectangle_i",
           "desc": [
             "gets the inplace object position rectangle.",
             "",
@@ -196,7 +206,7 @@
           "args": [
             [
               "aOffset",
-              "Size",
+              "awt_size_i",
               "in"
             ]
           ]
@@ -213,7 +223,7 @@
           "args": [
             [
               "aKeys",
-              "typing.List[KeyEvent]",
+              "typing.List[awt_key_event_i]",
               "in"
             ]
           ]

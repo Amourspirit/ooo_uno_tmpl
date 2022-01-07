@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XMessageBoxFactory",
   "type": "interface",
   "namespace": "com.sun.star.awt",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,27 +16,34 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_window_peer",
-        "XWindowPeer"
-      ],
-      [
-        ".x_message_box",
-        "XMessageBox"
+        "XWindowPeer",
+        "x_window_peer_i"
       ],
       [
         ".message_box_type",
-        "MessageBoxType"
+        "MessageBoxType",
+        "message_box_type_i"
+      ],
+      [
+        ".x_message_box",
+        "XMessageBox",
+        "x_message_box_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "MessageBoxType",
-      "XWindowPeer",
-      "XMessageBox"
+      "x_message_box_i",
+      "x_window_peer_i",
+      "message_box_type_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -53,7 +61,7 @@
       "methods": [
         {
           "name": "createMessageBox",
-          "returns": "XMessageBox",
+          "returns": "x_message_box_i",
           "desc": [
             "creates a message box.",
             "",
@@ -67,12 +75,12 @@
           "args": [
             [
               "aParent",
-              "XWindowPeer",
+              "x_window_peer_i",
               "in"
             ],
             [
               "eType",
-              "MessageBoxType",
+              "message_box_type_i",
               "in"
             ],
             [

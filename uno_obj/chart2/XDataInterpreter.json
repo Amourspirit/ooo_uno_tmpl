@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XDataInterpreter",
   "type": "interface",
   "namespace": "com.sun.star.chart2",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,36 +16,44 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
-        ".x_data_series",
-        "XDataSeries"
-      ],
-      [
         ".data.x_data_source",
-        "XDataSource"
+        "XDataSource",
+        "data_x_data_source_i"
       ],
       [
-        "..beans.property_value",
-        "PropertyValue"
+        ".x_data_series",
+        "XDataSeries",
+        "x_data_series_i"
       ],
       [
         ".interpreted_data",
-        "InterpretedData"
+        "InterpretedData",
+        "interpreted_data_i"
+      ],
+      [
+        "..beans.property_value",
+        "PropertyValue",
+        "beans_property_value_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "InterpretedData",
-      "typing.List[XDataSeries]",
-      "XDataSource",
-      "typing.List[PropertyValue]"
+      "typing.List[x_data_series_i]",
+      "interpreted_data_i",
+      "data_x_data_source_i",
+      "typing.List[beans_property_value_i]"
     ],
     "typings": [
-      "typing.List[XDataSeries]",
-      "typing.List[PropertyValue]"
+      "typing.List[x_data_series_i]",
+      "typing.List[beans_property_value_i]"
     ],
     "requires_typing": true,
     "name": "XDataInterpreter",
@@ -78,7 +87,7 @@
         },
         {
           "name": "interpretDataSource",
-          "returns": "InterpretedData",
+          "returns": "interpreted_data_i",
           "desc": [
             "Interprets the given data.",
             "",
@@ -88,17 +97,17 @@
           "args": [
             [
               "xSource",
-              "XDataSource",
+              "data_x_data_source_i",
               "in"
             ],
             [
               "aArguments",
-              "typing.List[PropertyValue]",
+              "typing.List[beans_property_value_i]",
               "in"
             ],
             [
               "aSeriesToReUse",
-              "typing.List[XDataSeries]",
+              "typing.List[x_data_series_i]",
               "in"
             ]
           ]
@@ -113,14 +122,14 @@
           "args": [
             [
               "aInterpretedData",
-              "InterpretedData",
+              "interpreted_data_i",
               "in"
             ]
           ]
         },
         {
           "name": "mergeInterpretedData",
-          "returns": "XDataSource",
+          "returns": "data_x_data_source_i",
           "desc": [
             "Try to reverse the operation done in interpretDataSource().",
             "",
@@ -130,14 +139,14 @@
           "args": [
             [
               "aInterpretedData",
-              "InterpretedData",
+              "interpreted_data_i",
               "in"
             ]
           ]
         },
         {
           "name": "reinterpretDataSeries",
-          "returns": "InterpretedData",
+          "returns": "interpreted_data_i",
           "desc": [
             "Re-interprets the data given in aInterpretedData while keeping the number of data series and the categories."
           ],
@@ -145,7 +154,7 @@
           "args": [
             [
               "aInterpretedData",
-              "InterpretedData",
+              "interpreted_data_i",
               "in"
             ]
           ]

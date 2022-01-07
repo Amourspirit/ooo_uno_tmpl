@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XInterfaceTypeDescription2",
   "type": "interface",
   "namespace": "com.sun.star.reflection",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,20 +16,25 @@
     "from_imports": [
       [
         ".x_interface_type_description",
-        "XInterfaceTypeDescription"
+        "XInterfaceTypeDescription",
+        "x_interface_type_description_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_type_description",
-        "XTypeDescription"
+        "XTypeDescription",
+        "x_type_description_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.reflection.XInterfaceTypeDescription": "x_interface_type_description_i"
+    },
     "quote": [
-      "typing.List[XTypeDescription]"
+      "typing.List[x_type_description_i]"
     ],
     "typings": [
-      "typing.List[XTypeDescription]"
+      "typing.List[x_type_description_i]"
     ],
     "requires_typing": true,
     "name": "XInterfaceTypeDescription2",
@@ -51,7 +57,7 @@
       "methods": [
         {
           "name": "getBaseTypes",
-          "returns": "typing.List[XTypeDescription]",
+          "returns": "typing.List[x_type_description_i]",
           "desc": [
             "Returns a sequence of all directly inherited (mandatory) base interface types."
           ],
@@ -60,7 +66,7 @@
         },
         {
           "name": "getOptionalBaseTypes",
-          "returns": "typing.List[XTypeDescription]",
+          "returns": "typing.List[x_type_description_i]",
           "desc": [
             "Returns a sequence of all directly inherited optional base interface types."
           ],

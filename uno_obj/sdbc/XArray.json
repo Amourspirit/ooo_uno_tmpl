@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XArray",
   "type": "interface",
   "namespace": "com.sun.star.sdbc",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,23 +16,29 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
-        "..container.x_name_access",
-        "XNameAccess"
+        ".x_result_set",
+        "XResultSet",
+        "x_result_set_i"
       ],
       [
-        ".x_result_set",
-        "XResultSet"
+        "..container.x_name_access",
+        "XNameAccess",
+        "container_x_name_access_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "XNameAccess",
-      "typing.List[object]",
-      "XResultSet"
+      "container_x_name_access_i",
+      "x_result_set_i",
+      "typing.List[object]"
     ],
     "typings": [
       "typing.List[object]"
@@ -65,7 +72,7 @@
           "args": [
             [
               "typeMap",
-              "XNameAccess",
+              "container_x_name_access_i",
               "in"
             ]
           ]
@@ -92,7 +99,7 @@
             ],
             [
               "typeMap",
-              "XNameAccess",
+              "container_x_name_access_i",
               "in"
             ]
           ]
@@ -123,7 +130,7 @@
         },
         {
           "name": "getResultSet",
-          "returns": "XResultSet",
+          "returns": "x_result_set_i",
           "desc": [
             "returns a result set that contains the elements of the array designated by this Array object and uses the given typeMap to map the array elements.",
             "",
@@ -137,14 +144,14 @@
           "args": [
             [
               "typeMap",
-              "XNameAccess",
+              "container_x_name_access_i",
               "in"
             ]
           ]
         },
         {
           "name": "getResultSetAtIndex",
-          "returns": "XResultSet",
+          "returns": "x_result_set_i",
           "desc": [
             "returns a result set holding the elements of the subarray that starts at index index and contains up to count successive elements.",
             "",
@@ -168,7 +175,7 @@
             ],
             [
               "typeMap",
-              "XNameAccess",
+              "container_x_name_access_i",
               "in"
             ]
           ]

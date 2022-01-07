@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XAutoStyle",
   "type": "interface",
   "namespace": "com.sun.star.style",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,21 +16,28 @@
     "from_imports": [
       [
         "..beans.x_multi_property_set",
-        "XMultiPropertySet"
+        "XMultiPropertySet",
+        "beans_x_multi_property_set_i"
       ],
       [
         "..beans.x_multi_property_states",
-        "XMultiPropertyStates"
+        "XMultiPropertyStates",
+        "beans_x_multi_property_states_i"
       ]
     ],
     "from_imports_typing": [
       [
         "..beans.property_values",
-        "PropertyValues"
+        "PropertyValues",
+        "beans_property_values_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.beans.XMultiPropertySet": "beans_x_multi_property_set_i",
+      "com.sun.star.beans.XMultiPropertyStates": "beans_x_multi_property_states_i"
+    },
     "quote": [
-      "PropertyValues"
+      "beans_property_values_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -48,7 +56,7 @@
       "methods": [
         {
           "name": "getProperties",
-          "returns": "PropertyValues",
+          "returns": "beans_property_values_i",
           "desc": [
             "returns a sequence of all properties that are set in the style"
           ],

@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XModel",
   "type": "interface",
   "namespace": "com.sun.star.xforms",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,37 +16,44 @@
     "from_imports": [],
     "from_imports_typing": [
       [
-        "..container.x_set",
-        "XSet"
-      ],
-      [
-        "..beans.x_property_set",
-        "XPropertySet"
-      ],
-      [
         "..xml.dom.x_document",
-        "XDocument"
-      ],
-      [
-        "..task.x_interaction_handler",
-        "XInteractionHandler"
+        "XDocument",
+        "xml_dom_x_document_i"
       ],
       [
         ".x_submission",
-        "XSubmission"
+        "XSubmission",
+        "x_submission_i"
+      ],
+      [
+        "..beans.x_property_set",
+        "XPropertySet",
+        "beans_x_property_set_i"
+      ],
+      [
+        "..container.x_set",
+        "XSet",
+        "container_x_set_i"
       ],
       [
         ".x_data_type_repository",
-        "XDataTypeRepository"
+        "XDataTypeRepository",
+        "x_data_type_repository_i"
+      ],
+      [
+        "..task.x_interaction_handler",
+        "XInteractionHandler",
+        "task_x_interaction_handler_i"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "XDataTypeRepository",
-      "XPropertySet",
-      "XInteractionHandler",
-      "XDocument",
-      "XSubmission",
-      "XSet"
+      "xml_dom_x_document_i",
+      "beans_x_property_set_i",
+      "x_data_type_repository_i",
+      "task_x_interaction_handler_i",
+      "x_submission_i",
+      "container_x_set_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -61,7 +69,7 @@
       "methods": [
         {
           "name": "cloneBinding",
-          "returns": "XPropertySet",
+          "returns": "beans_x_property_set_i",
           "desc": [
             "clone an arbitrary binding element for this model; still needs",
             "",
@@ -71,14 +79,14 @@
           "args": [
             [
               "binding",
-              "XPropertySet",
+              "beans_x_property_set_i",
               "in"
             ]
           ]
         },
         {
           "name": "cloneSubmission",
-          "returns": "XSubmission",
+          "returns": "x_submission_i",
           "desc": [
             "clone an arbitrary submission element for this model",
             "",
@@ -88,14 +96,14 @@
           "args": [
             [
               "submission",
-              "XPropertySet",
+              "beans_x_property_set_i",
               "in"
             ]
           ]
         },
         {
           "name": "createBinding",
-          "returns": "XPropertySet",
+          "returns": "beans_x_property_set_i",
           "desc": [
             "create a binding element for this model",
             "",
@@ -106,7 +114,7 @@
         },
         {
           "name": "createSubmission",
-          "returns": "XSubmission",
+          "returns": "x_submission_i",
           "desc": [
             "create a submission element for this model",
             "",
@@ -117,7 +125,7 @@
         },
         {
           "name": "getBinding",
-          "returns": "XPropertySet",
+          "returns": "beans_x_property_set_i",
           "desc": [
             "get a binding with a certain ID",
             "",
@@ -134,7 +142,7 @@
         },
         {
           "name": "getBindings",
-          "returns": "XSet",
+          "returns": "container_x_set_i",
           "desc": [
             "get a container containing all bindings; also supports XNameAccess"
           ],
@@ -143,7 +151,7 @@
         },
         {
           "name": "getDataTypeRepository",
-          "returns": "XDataTypeRepository",
+          "returns": "x_data_type_repository_i",
           "desc": [
             "provides management access to the XSD data types associated with the model"
           ],
@@ -152,7 +160,7 @@
         },
         {
           "name": "getDefaultInstance",
-          "returns": "XDocument",
+          "returns": "xml_dom_x_document_i",
           "desc": [
             "get the default instance for this model"
           ],
@@ -170,7 +178,7 @@
         },
         {
           "name": "getInstanceDocument",
-          "returns": "XDocument",
+          "returns": "xml_dom_x_document_i",
           "desc": [
             "retrieves the instance with the given id"
           ],
@@ -185,7 +193,7 @@
         },
         {
           "name": "getInstances",
-          "returns": "XSet",
+          "returns": "container_x_set_i",
           "desc": [
             "gets container containing all instances;",
             "",
@@ -196,7 +204,7 @@
         },
         {
           "name": "getSubmission",
-          "returns": "XSubmission",
+          "returns": "x_submission_i",
           "desc": [
             "get a submission with a certain ID.",
             "",
@@ -213,7 +221,7 @@
         },
         {
           "name": "getSubmissions",
-          "returns": "XSet",
+          "returns": "container_x_set_i",
           "desc": [
             "get container containing all submissions; also supports XNameAccess"
           ],
@@ -320,7 +328,7 @@
             ],
             [
               "aHandler",
-              "XInteractionHandler",
+              "task_x_interaction_handler_i",
               "in"
             ]
           ]

@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XDrawSubController",
   "type": "interface",
   "namespace": "com.sun.star.drawing",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,19 +15,27 @@
   "data": {
     "from_imports": [
       [
+        "..view.x_selection_supplier",
+        "XSelectionSupplier",
+        "view_x_selection_supplier_i"
+      ],
+      [
         "..beans.x_fast_property_set",
-        "XFastPropertySet"
+        "XFastPropertySet",
+        "beans_x_fast_property_set_i"
       ],
       [
         ".x_draw_view",
-        "XDrawView"
-      ],
-      [
-        "..view.x_selection_supplier",
-        "XSelectionSupplier"
+        "XDrawView",
+        "x_draw_view_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.view.XSelectionSupplier": "view_x_selection_supplier_i",
+      "com.sun.star.beans.XFastPropertySet": "beans_x_fast_property_set_i",
+      "com.sun.star.drawing.XDrawView": "x_draw_view_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -34,9 +43,9 @@
     "imports": [],
     "namespace": "com.sun.star.drawing",
     "extends": [
-      "com.sun.star.drawing.XDrawView",
       "com.sun.star.view.XSelectionSupplier",
-      "com.sun.star.beans.XFastPropertySet"
+      "com.sun.star.beans.XFastPropertySet",
+      "com.sun.star.drawing.XDrawView"
     ],
     "desc": [
       "View dependent part of the Draw and Impress controller.",

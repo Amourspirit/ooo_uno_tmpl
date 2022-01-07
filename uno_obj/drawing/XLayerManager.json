@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XLayerManager",
   "type": "interface",
   "namespace": "com.sun.star.drawing",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,22 +16,28 @@
     "from_imports": [
       [
         "..container.x_index_access",
-        "XIndexAccess"
+        "XIndexAccess",
+        "container_x_index_access_i"
       ]
     ],
     "from_imports_typing": [
       [
-        ".x_layer",
-        "XLayer"
+        ".x_shape",
+        "XShape",
+        "x_shape_i"
       ],
       [
-        ".x_shape",
-        "XShape"
+        ".x_layer",
+        "XLayer",
+        "x_layer_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.container.XIndexAccess": "container_x_index_access_i"
+    },
     "quote": [
-      "XShape",
-      "XLayer"
+      "x_layer_i",
+      "x_shape_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -56,19 +63,19 @@
           "args": [
             [
               "xShape",
-              "XShape",
+              "x_shape_i",
               "in"
             ],
             [
               "xLayer",
-              "XLayer",
+              "x_layer_i",
               "in"
             ]
           ]
         },
         {
           "name": "getLayerForShape",
-          "returns": "XLayer",
+          "returns": "x_layer_i",
           "desc": [
             "queries the Layer that a Shape is attached to"
           ],
@@ -76,14 +83,14 @@
           "args": [
             [
               "xShape",
-              "XShape",
+              "x_shape_i",
               "in"
             ]
           ]
         },
         {
           "name": "insertNewByIndex",
-          "returns": "XLayer",
+          "returns": "x_layer_i",
           "desc": [
             "creates a new Layer"
           ],
@@ -108,7 +115,7 @@
           "args": [
             [
               "xLayer",
-              "XLayer",
+              "x_layer_i",
               "in"
             ]
           ]

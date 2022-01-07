@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XServiceDocumenter",
   "type": "interface",
   "namespace": "com.sun.star.script",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -16,16 +17,19 @@
     "from_imports_typing": [
       [
         "..lang.x_type_provider",
-        "XTypeProvider"
+        "XTypeProvider",
+        "lang_x_type_provider_i"
       ],
       [
         "..lang.x_service_info",
-        "XServiceInfo"
+        "XServiceInfo",
+        "lang_x_service_info_i"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "XTypeProvider",
-      "XServiceInfo"
+      "lang_x_type_provider_i",
+      "lang_x_service_info_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -51,7 +55,7 @@
           "args": [
             [
               "xService",
-              "XServiceInfo",
+              "lang_x_service_info_i",
               "in"
             ]
           ]
@@ -64,7 +68,7 @@
           "args": [
             [
               "xTypeProvider",
-              "XTypeProvider",
+              "lang_x_type_provider_i",
               "in"
             ]
           ]
@@ -77,7 +81,7 @@
           "args": [
             [
               "xService",
-              "XServiceInfo",
+              "lang_x_service_info_i",
               "in"
             ]
           ]

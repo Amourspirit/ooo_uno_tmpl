@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XDataSource",
   "type": "interface",
   "namespace": "com.sun.star.chart2.data",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,20 +16,25 @@
     "from_imports": [
       [
         "...uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_labeled_data_sequence",
-        "XLabeledDataSequence"
+        "XLabeledDataSequence",
+        "x_labeled_data_sequence_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "typing.List[XLabeledDataSequence]"
+      "typing.List[x_labeled_data_sequence_i]"
     ],
     "typings": [
-      "typing.List[XLabeledDataSequence]"
+      "typing.List[x_labeled_data_sequence_i]"
     ],
     "requires_typing": true,
     "name": "XDataSource",
@@ -51,7 +57,7 @@
       "methods": [
         {
           "name": "getDataSequences",
-          "returns": "typing.List[XLabeledDataSequence]",
+          "returns": "typing.List[x_labeled_data_sequence_i]",
           "desc": [
             "returns data sequences.",
             "",

@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XContainerQuery",
   "type": "interface",
   "namespace": "com.sun.star.container",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,25 +16,31 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
-        "..beans.named_value",
-        "NamedValue"
+        ".x_enumeration",
+        "XEnumeration",
+        "x_enumeration_i"
       ],
       [
-        ".x_enumeration",
-        "XEnumeration"
+        "..beans.named_value",
+        "NamedValue",
+        "beans_named_value_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "XEnumeration",
-      "typing.List[NamedValue]"
+      "typing.List[beans_named_value_i]",
+      "x_enumeration_i"
     ],
     "typings": [
-      "typing.List[NamedValue]"
+      "typing.List[beans_named_value_i]"
     ],
     "requires_typing": true,
     "name": "XContainerQuery",
@@ -52,7 +59,7 @@
       "methods": [
         {
           "name": "createSubSetEnumerationByProperties",
-          "returns": "XEnumeration",
+          "returns": "x_enumeration_i",
           "desc": [
             "creates a sub set of container items which supports searched properties as minimum",
             "",
@@ -62,14 +69,14 @@
           "args": [
             [
               "Properties",
-              "typing.List[NamedValue]",
+              "typing.List[beans_named_value_i]",
               "in"
             ]
           ]
         },
         {
           "name": "createSubSetEnumerationByQuery",
-          "returns": "XEnumeration",
+          "returns": "x_enumeration_i",
           "desc": [
             "creates a sub set of container items which match given query command",
             "",

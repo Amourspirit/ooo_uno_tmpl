@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XStatement",
   "type": "interface",
   "namespace": "com.sun.star.sdbc",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,22 +16,28 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
-        ".x_connection",
-        "XConnection"
+        ".x_result_set",
+        "XResultSet",
+        "x_result_set_i"
       ],
       [
-        ".x_result_set",
-        "XResultSet"
+        ".x_connection",
+        "XConnection",
+        "x_connection_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "XConnection",
-      "XResultSet"
+      "x_result_set_i",
+      "x_connection_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -71,7 +78,7 @@
         },
         {
           "name": "executeQuery",
-          "returns": "XResultSet",
+          "returns": "x_result_set_i",
           "desc": [
             "executes a SQL statement that returns a single ResultSet."
           ],
@@ -107,7 +114,7 @@
         },
         {
           "name": "getConnection",
-          "returns": "XConnection",
+          "returns": "x_connection_i",
           "desc": [
             "returns the com.sun.star.sdbc.Connection object that produced this Statement object."
           ],

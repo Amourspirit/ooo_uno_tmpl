@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XPropertyReplace",
   "type": "interface",
   "namespace": "com.sun.star.util",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,20 +16,25 @@
     "from_imports": [
       [
         ".x_replace_descriptor",
-        "XReplaceDescriptor"
+        "XReplaceDescriptor",
+        "x_replace_descriptor_i"
       ]
     ],
     "from_imports_typing": [
       [
         "..beans.property_value",
-        "PropertyValue"
+        "PropertyValue",
+        "beans_property_value_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.util.XReplaceDescriptor": "x_replace_descriptor_i"
+    },
     "quote": [
-      "typing.List[PropertyValue]"
+      "typing.List[beans_property_value_i]"
     ],
     "typings": [
-      "typing.List[PropertyValue]"
+      "typing.List[beans_property_value_i]"
     ],
     "requires_typing": true,
     "name": "XPropertyReplace",
@@ -45,14 +51,14 @@
       "methods": [
         {
           "name": "getReplaceAttributes",
-          "returns": "typing.List[PropertyValue]",
+          "returns": "typing.List[beans_property_value_i]",
           "desc": [],
           "raises": [],
           "args": []
         },
         {
           "name": "getSearchAttributes",
-          "returns": "typing.List[PropertyValue]",
+          "returns": "typing.List[beans_property_value_i]",
           "desc": [],
           "raises": [],
           "args": []
@@ -79,7 +85,7 @@
           "args": [
             [
               "aSearchAttribs",
-              "typing.List[PropertyValue]",
+              "typing.List[beans_property_value_i]",
               "in"
             ]
           ]
@@ -97,7 +103,7 @@
           "args": [
             [
               "aSearchAttribs",
-              "typing.List[PropertyValue]",
+              "typing.List[beans_property_value_i]",
               "in"
             ]
           ]

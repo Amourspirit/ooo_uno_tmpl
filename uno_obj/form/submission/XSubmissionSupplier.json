@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XSubmissionSupplier",
   "type": "interface",
   "namespace": "com.sun.star.form.submission",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,17 +16,22 @@
     "from_imports": [
       [
         "...uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_submission",
-        "XSubmission"
+        "XSubmission",
+        "x_submission_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "XSubmission"
+      "x_submission_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -43,7 +49,7 @@
       "properties": [
         {
           "name": "Submission",
-          "returns": "XSubmission",
+          "returns": "x_submission_i",
           "desc": [
             "specifies the XSubmission instance to which the submission request should be delegated."
           ],

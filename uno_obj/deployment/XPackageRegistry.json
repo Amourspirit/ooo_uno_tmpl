@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XPackageRegistry",
   "type": "interface",
   "namespace": "com.sun.star.deployment",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,25 +16,29 @@
     "from_imports": [],
     "from_imports_typing": [
       [
+        ".x_package",
+        "XPackage",
+        "x_package_i"
+      ],
+      [
         ".x_package_type_info",
-        "XPackageTypeInfo"
+        "XPackageTypeInfo",
+        "x_package_type_info_i"
       ],
       [
         "..ucb.x_command_environment",
-        "XCommandEnvironment"
-      ],
-      [
-        ".x_package",
-        "XPackage"
+        "XCommandEnvironment",
+        "ucb_x_command_environment_i"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "XPackage",
-      "XCommandEnvironment",
-      "typing.List[XPackageTypeInfo]"
+      "x_package_i",
+      "ucb_x_command_environment_i",
+      "typing.List[x_package_type_info_i]"
     ],
     "typings": [
-      "typing.List[XPackageTypeInfo]"
+      "typing.List[x_package_type_info_i]"
     ],
     "requires_typing": true,
     "name": "XPackageRegistry",
@@ -52,7 +57,7 @@
       "methods": [
         {
           "name": "bindPackage",
-          "returns": "XPackage",
+          "returns": "x_package_i",
           "desc": [
             "binds a package URL to a XPackage handle.",
             "",
@@ -95,14 +100,14 @@
             ],
             [
               "xCmdEnv",
-              "XCommandEnvironment",
+              "ucb_x_command_environment_i",
               "in"
             ]
           ]
         },
         {
           "name": "getSupportedPackageTypes",
-          "returns": "typing.List[XPackageTypeInfo]",
+          "returns": "typing.List[x_package_type_info_i]",
           "desc": [
             "gets the supported XPackageTypeInfos."
           ],

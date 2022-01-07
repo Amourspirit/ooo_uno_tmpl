@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XTextPortionAppend",
   "type": "interface",
   "namespace": "com.sun.star.text",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,22 +16,28 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
         "..beans.property_values",
-        "PropertyValues"
+        "PropertyValues",
+        "beans_property_values_i"
       ],
       [
         ".x_text_range",
-        "XTextRange"
+        "XTextRange",
+        "x_text_range_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "PropertyValues",
-      "XTextRange"
+      "beans_property_values_i",
+      "x_text_range_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -52,7 +59,7 @@
       "methods": [
         {
           "name": "appendTextPortion",
-          "returns": "XTextRange",
+          "returns": "x_text_range_i",
           "desc": [
             "appends a new text portion to the paragraph at the end of the text."
           ],
@@ -69,14 +76,14 @@
             ],
             [
               "CharacterAndParagraphProperties",
-              "PropertyValues",
+              "beans_property_values_i",
               "in"
             ]
           ]
         },
         {
           "name": "insertTextPortion",
-          "returns": "XTextRange",
+          "returns": "x_text_range_i",
           "desc": [
             "inserts a new text portion to the paragraph at a given position.",
             "",
@@ -97,12 +104,12 @@
             ],
             [
               "CharacterAndParagraphProperties",
-              "PropertyValues",
+              "beans_property_values_i",
               "in"
             ],
             [
               "TextRange",
-              "XTextRange",
+              "x_text_range_i",
               "in"
             ]
           ]

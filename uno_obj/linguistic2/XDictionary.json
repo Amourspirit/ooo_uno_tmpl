@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XDictionary",
   "type": "interface",
   "namespace": "com.sun.star.linguistic2",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,36 +16,44 @@
     "from_imports": [
       [
         "..container.x_named",
-        "XNamed"
+        "XNamed",
+        "container_x_named_i"
       ]
     ],
     "from_imports_typing": [
       [
+        ".dictionary_type",
+        "DictionaryType",
+        "dictionary_type_i"
+      ],
+      [
         "..lang.locale",
-        "Locale"
+        "Locale",
+        "lang_locale_i"
       ],
       [
         ".x_dictionary_entry",
-        "XDictionaryEntry"
-      ],
-      [
-        ".dictionary_type",
-        "DictionaryType"
+        "XDictionaryEntry",
+        "x_dictionary_entry_i"
       ],
       [
         ".x_dictionary_event_listener",
-        "XDictionaryEventListener"
+        "XDictionaryEventListener",
+        "x_dictionary_event_listener_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.container.XNamed": "container_x_named_i"
+    },
     "quote": [
-      "XDictionaryEventListener",
-      "DictionaryType",
-      "Locale",
-      "XDictionaryEntry",
-      "typing.List[XDictionaryEntry]"
+      "x_dictionary_event_listener_i",
+      "typing.List[x_dictionary_entry_i]",
+      "x_dictionary_entry_i",
+      "dictionary_type_i",
+      "lang_locale_i"
     ],
     "typings": [
-      "typing.List[XDictionaryEntry]"
+      "typing.List[x_dictionary_entry_i]"
     ],
     "requires_typing": true,
     "name": "XDictionary",
@@ -102,7 +111,7 @@
           "args": [
             [
               "xListener",
-              "XDictionaryEventListener",
+              "x_dictionary_event_listener_i",
               "in"
             ]
           ]
@@ -121,7 +130,7 @@
           "args": [
             [
               "xDicEntry",
-              "XDictionaryEntry",
+              "x_dictionary_entry_i",
               "in"
             ]
           ]
@@ -144,7 +153,7 @@
         },
         {
           "name": "getDictionaryType",
-          "returns": "DictionaryType",
+          "returns": "dictionary_type_i",
           "desc": [
             "returns the type of the dictionary."
           ],
@@ -153,7 +162,7 @@
         },
         {
           "name": "getEntries",
-          "returns": "typing.List[XDictionaryEntry]",
+          "returns": "typing.List[x_dictionary_entry_i]",
           "desc": [
             "This function should no longer be used since with the expansion of the maximum number of allowed entries the result may become unreasonable large!"
           ],
@@ -162,7 +171,7 @@
         },
         {
           "name": "getEntry",
-          "returns": "XDictionaryEntry",
+          "returns": "x_dictionary_entry_i",
           "desc": [
             "searches for an entry that matches the given word."
           ],
@@ -177,7 +186,7 @@
         },
         {
           "name": "getLocale",
-          "returns": "Locale",
+          "returns": "lang_locale_i",
           "desc": [],
           "raises": [],
           "args": []
@@ -221,7 +230,7 @@
           "args": [
             [
               "xListener",
-              "XDictionaryEventListener",
+              "x_dictionary_event_listener_i",
               "in"
             ]
           ]
@@ -251,7 +260,7 @@
           "args": [
             [
               "aLocale",
-              "Locale",
+              "lang_locale_i",
               "in"
             ]
           ]

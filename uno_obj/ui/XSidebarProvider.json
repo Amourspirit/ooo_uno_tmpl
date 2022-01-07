@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XSidebarProvider",
   "type": "interface",
   "namespace": "com.sun.star.ui",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,27 +16,34 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
-        ".x_sidebar",
-        "XSidebar"
-      ],
-      [
         ".x_decks",
-        "XDecks"
+        "XDecks",
+        "x_decks_i"
       ],
       [
         "..frame.x_frame",
-        "XFrame"
+        "XFrame",
+        "frame_x_frame_i"
+      ],
+      [
+        ".x_sidebar",
+        "XSidebar",
+        "x_sidebar_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "XSidebar",
-      "XFrame",
-      "XDecks"
+      "x_sidebar_i",
+      "x_decks_i",
+      "frame_x_frame_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -57,14 +65,14 @@
       "methods": [
         {
           "name": "getDecks",
-          "returns": "XDecks",
+          "returns": "x_decks_i",
           "desc": [],
           "raises": [],
           "args": []
         },
         {
           "name": "getFrame",
-          "returns": "XFrame",
+          "returns": "frame_x_frame_i",
           "desc": [
             "Get the XFrame owner."
           ],
@@ -73,7 +81,7 @@
         },
         {
           "name": "getSidebar",
-          "returns": "XSidebar",
+          "returns": "x_sidebar_i",
           "desc": [
             "Returns the sidebar object."
           ],

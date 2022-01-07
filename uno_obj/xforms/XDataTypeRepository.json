@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XDataTypeRepository",
   "type": "interface",
   "namespace": "com.sun.star.xforms",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,21 +16,28 @@
     "from_imports": [
       [
         "..container.x_name_access",
-        "XNameAccess"
+        "XNameAccess",
+        "container_x_name_access_i"
       ],
       [
         "..container.x_enumeration_access",
-        "XEnumerationAccess"
+        "XEnumerationAccess",
+        "container_x_enumeration_access_i"
       ]
     ],
     "from_imports_typing": [
       [
         "..xsd.x_data_type",
-        "XDataType"
+        "XDataType",
+        "xsd_x_data_type_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.container.XNameAccess": "container_x_name_access_i",
+      "com.sun.star.container.XEnumerationAccess": "container_x_enumeration_access_i"
+    },
     "quote": [
-      "XDataType"
+      "xsd_x_data_type_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -37,8 +45,8 @@
     "imports": [],
     "namespace": "com.sun.star.xforms",
     "extends": [
-      "com.sun.star.container.XEnumerationAccess",
-      "com.sun.star.container.XNameAccess"
+      "com.sun.star.container.XNameAccess",
+      "com.sun.star.container.XEnumerationAccess"
     ],
     "desc": [
       "specifies a repository of XSD data types",
@@ -50,7 +58,7 @@
       "methods": [
         {
           "name": "cloneDataType",
-          "returns": "XDataType",
+          "returns": "xsd_x_data_type_i",
           "desc": [
             "creates a clone of the given data type, and inserts it into the repository"
           ],
@@ -73,7 +81,7 @@
         },
         {
           "name": "getBasicDataType",
-          "returns": "XDataType",
+          "returns": "xsd_x_data_type_i",
           "desc": [
             "retrieves the basic type for the given type class"
           ],
@@ -90,7 +98,7 @@
         },
         {
           "name": "getDataType",
-          "returns": "XDataType",
+          "returns": "xsd_x_data_type_i",
           "desc": [],
           "raises": [
             "com.sun.star.container.NoSuchElementException"

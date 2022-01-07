@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XShape",
   "type": "interface",
   "namespace": "com.sun.star.report",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,25 +16,31 @@
     "from_imports": [
       [
         ".x_report_control_model",
-        "XReportControlModel"
+        "XReportControlModel",
+        "x_report_control_model_i"
       ]
     ],
     "from_imports_typing": [
       [
-        "..drawing.homogen_matrix3",
-        "HomogenMatrix3"
+        "..beans.property_value",
+        "PropertyValue",
+        "beans_property_value_i"
       ],
       [
-        "..beans.property_value",
-        "PropertyValue"
+        "..drawing.homogen_matrix3",
+        "HomogenMatrix3",
+        "drawing_homogen_matrix3_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.report.XReportControlModel": "x_report_control_model_i"
+    },
     "quote": [
-      "HomogenMatrix3",
-      "typing.List[PropertyValue]"
+      "drawing_homogen_matrix3_i",
+      "typing.List[beans_property_value_i]"
     ],
     "typings": [
-      "typing.List[PropertyValue]"
+      "typing.List[beans_property_value_i]"
     ],
     "requires_typing": true,
     "name": "XShape",
@@ -48,7 +55,7 @@
       "types": [
         {
           "name": "CustomShapeGeometry",
-          "returns": "typing.List[PropertyValue]",
+          "returns": "typing.List[beans_property_value_i]",
           "desc": [
             "This property describes the geometry of the CustomShape.",
             "",
@@ -90,7 +97,7 @@
         },
         {
           "name": "Transformation",
-          "returns": "HomogenMatrix3",
+          "returns": "drawing_homogen_matrix3_i",
           "desc": [
             "this property lets you get and set the transformation matrix for this shape.",
             "",

@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XEmbeddedObject",
   "type": "interface",
   "namespace": "com.sun.star.embed",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,59 +16,75 @@
     "from_imports": [
       [
         "..document.x_event_broadcaster",
-        "XEventBroadcaster"
-      ],
-      [
-        "..util.x_closeable",
-        "XCloseable"
+        "XEventBroadcaster",
+        "document_x_event_broadcaster_i"
       ],
       [
         ".x_classified_object",
-        "XClassifiedObject"
+        "XClassifiedObject",
+        "x_classified_object_i"
       ],
       [
-        ".x_state_change_broadcaster",
-        "XStateChangeBroadcaster"
+        "..util.x_closeable",
+        "XCloseable",
+        "util_x_closeable_i"
       ],
       [
         ".x_component_supplier",
-        "XComponentSupplier"
+        "XComponentSupplier",
+        "x_component_supplier_i"
+      ],
+      [
+        ".x_state_change_broadcaster",
+        "XStateChangeBroadcaster",
+        "x_state_change_broadcaster_i"
       ],
       [
         ".x_visual_object",
-        "XVisualObject"
+        "XVisualObject",
+        "x_visual_object_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".verb_descriptor",
-        "VerbDescriptor"
+        "VerbDescriptor",
+        "verb_descriptor_i"
       ],
       [
         ".x_embedded_client",
-        "XEmbeddedClient"
+        "XEmbeddedClient",
+        "x_embedded_client_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.document.XEventBroadcaster": "document_x_event_broadcaster_i",
+      "com.sun.star.embed.XClassifiedObject": "x_classified_object_i",
+      "com.sun.star.util.XCloseable": "util_x_closeable_i",
+      "com.sun.star.embed.XComponentSupplier": "x_component_supplier_i",
+      "com.sun.star.embed.XStateChangeBroadcaster": "x_state_change_broadcaster_i",
+      "com.sun.star.embed.XVisualObject": "x_visual_object_i"
+    },
     "quote": [
+      "typing.List[verb_descriptor_i]",
       "typing.List[int]",
-      "XEmbeddedClient",
-      "typing.List[VerbDescriptor]"
+      "x_embedded_client_i"
     ],
     "typings": [
-      "typing.List[int]",
-      "typing.List[VerbDescriptor]"
+      "typing.List[verb_descriptor_i]",
+      "typing.List[int]"
     ],
     "requires_typing": true,
     "name": "XEmbeddedObject",
     "imports": [],
     "namespace": "com.sun.star.embed",
     "extends": [
-      "com.sun.star.embed.XVisualObject",
+      "com.sun.star.document.XEventBroadcaster",
       "com.sun.star.embed.XClassifiedObject",
+      "com.sun.star.util.XCloseable",
       "com.sun.star.embed.XComponentSupplier",
       "com.sun.star.embed.XStateChangeBroadcaster",
-      "com.sun.star.document.XEventBroadcaster",
-      "com.sun.star.util.XCloseable"
+      "com.sun.star.embed.XVisualObject"
     ],
     "desc": [
       "represents common functionality for embedded objects."
@@ -116,7 +133,7 @@
         },
         {
           "name": "getClientSite",
-          "returns": "XEmbeddedClient",
+          "returns": "x_embedded_client_i",
           "desc": [
             "provides access to the internal link to the container client."
           ],
@@ -167,7 +184,7 @@
         },
         {
           "name": "getSupportedVerbs",
-          "returns": "typing.List[VerbDescriptor]",
+          "returns": "typing.List[verb_descriptor_i]",
           "desc": [
             "returns supported verbs for the object."
           ],
@@ -189,7 +206,7 @@
           "args": [
             [
               "xClient",
-              "XEmbeddedClient",
+              "x_embedded_client_i",
               "in"
             ]
           ]

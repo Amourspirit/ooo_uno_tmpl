@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XSimpleFileAccess",
   "type": "interface",
   "namespace": "com.sun.star.ucb",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,38 +16,47 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
-        "..io.x_input_stream",
-        "XInputStream"
-      ],
-      [
-        "..io.x_output_stream",
-        "XOutputStream"
+        "..util.date_time",
+        "DateTime",
+        "util_date_time_i"
       ],
       [
         "..task.x_interaction_handler",
-        "XInteractionHandler"
+        "XInteractionHandler",
+        "task_x_interaction_handler_i"
       ],
       [
-        "..util.date_time",
-        "DateTime"
+        "..io.x_output_stream",
+        "XOutputStream",
+        "io_x_output_stream_i"
+      ],
+      [
+        "..io.x_input_stream",
+        "XInputStream",
+        "io_x_input_stream_i"
       ],
       [
         "..io.x_stream",
-        "XStream"
+        "XStream",
+        "io_x_stream_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "typing.List[str]",
-      "XInteractionHandler",
-      "XStream",
-      "XInputStream",
-      "DateTime",
-      "XOutputStream"
+      "util_date_time_i",
+      "task_x_interaction_handler_i",
+      "io_x_output_stream_i",
+      "io_x_input_stream_i",
+      "io_x_stream_i",
+      "typing.List[str]"
     ],
     "typings": [
       "typing.List[str]"
@@ -143,7 +153,7 @@
         },
         {
           "name": "getDateTimeModified",
-          "returns": "DateTime",
+          "returns": "util_date_time_i",
           "desc": [
             "Returns the last modified date for the file."
           ],
@@ -281,7 +291,7 @@
         },
         {
           "name": "openFileRead",
-          "returns": "XInputStream",
+          "returns": "io_x_input_stream_i",
           "desc": [
             "Opens file to read."
           ],
@@ -299,7 +309,7 @@
         },
         {
           "name": "openFileReadWrite",
-          "returns": "XStream",
+          "returns": "io_x_stream_i",
           "desc": [
             "Opens file to read and write."
           ],
@@ -317,7 +327,7 @@
         },
         {
           "name": "openFileWrite",
-          "returns": "XOutputStream",
+          "returns": "io_x_output_stream_i",
           "desc": [
             "Opens file to write."
           ],
@@ -345,7 +355,7 @@
           "args": [
             [
               "Handler",
-              "XInteractionHandler",
+              "task_x_interaction_handler_i",
               "in"
             ]
           ]

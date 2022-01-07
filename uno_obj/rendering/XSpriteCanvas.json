@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XSpriteCanvas",
   "type": "interface",
   "namespace": "com.sun.star.rendering",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,45 +16,55 @@
     "from_imports": [
       [
         ".x_canvas",
-        "XCanvas"
+        "XCanvas",
+        "x_canvas_i"
       ]
     ],
     "from_imports_typing": [
       [
-        ".x_animated_sprite",
-        "XAnimatedSprite"
+        ".x_custom_sprite",
+        "XCustomSprite",
+        "x_custom_sprite_i"
       ],
       [
         "..geometry.real_size2_d",
-        "RealSize2D"
+        "RealSize2D",
+        "geometry_real_size2_d_i"
       ],
       [
-        ".x_bitmap",
-        "XBitmap"
+        ".x_animated_sprite",
+        "XAnimatedSprite",
+        "x_animated_sprite_i"
       ],
       [
         ".x_animation",
-        "XAnimation"
+        "XAnimation",
+        "x_animation_i"
       ],
       [
         ".x_sprite",
-        "XSprite"
+        "XSprite",
+        "x_sprite_i"
       ],
       [
-        ".x_custom_sprite",
-        "XCustomSprite"
+        ".x_bitmap",
+        "XBitmap",
+        "x_bitmap_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.rendering.XCanvas": "x_canvas_i"
+    },
     "quote": [
-      "RealSize2D",
-      "XCustomSprite",
-      "XSprite",
-      "XAnimation",
-      "XAnimatedSprite",
-      "typing.List[XBitmap]"
+      "x_animated_sprite_i",
+      "x_sprite_i",
+      "geometry_real_size2_d_i",
+      "x_custom_sprite_i",
+      "x_animation_i",
+      "typing.List[x_bitmap_i]"
     ],
     "typings": [
-      "typing.List[XBitmap]"
+      "typing.List[x_bitmap_i]"
     ],
     "requires_typing": true,
     "name": "XSpriteCanvas",
@@ -70,7 +81,7 @@
       "methods": [
         {
           "name": "createClonedSprite",
-          "returns": "XSprite",
+          "returns": "x_sprite_i",
           "desc": [
             "Create a cloned version of an already existing sprite object.",
             "",
@@ -82,14 +93,14 @@
           "args": [
             [
               "original",
-              "XSprite",
+              "x_sprite_i",
               "in"
             ]
           ]
         },
         {
           "name": "createCustomSprite",
-          "returns": "XCustomSprite",
+          "returns": "x_custom_sprite_i",
           "desc": [
             "Create a custom, user-handles-it-all sprite object.",
             "",
@@ -101,14 +112,14 @@
           "args": [
             [
               "spriteSize",
-              "RealSize2D",
+              "geometry_real_size2_d_i",
               "in"
             ]
           ]
         },
         {
           "name": "createSpriteFromAnimation",
-          "returns": "XAnimatedSprite",
+          "returns": "x_animated_sprite_i",
           "desc": [
             "Create a sprite object from the specified animation sequence.",
             "",
@@ -120,14 +131,14 @@
           "args": [
             [
               "animation",
-              "XAnimation",
+              "x_animation_i",
               "in"
             ]
           ]
         },
         {
           "name": "createSpriteFromBitmaps",
-          "returns": "XAnimatedSprite",
+          "returns": "x_animated_sprite_i",
           "desc": [
             "Create a sprite object from the specified animation sequence.",
             "",
@@ -140,7 +151,7 @@
           "args": [
             [
               "animationBitmaps",
-              "typing.List[XBitmap]",
+              "typing.List[x_bitmap_i]",
               "in"
             ],
             [

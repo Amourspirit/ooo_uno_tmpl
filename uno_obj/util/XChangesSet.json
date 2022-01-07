@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XChangesSet",
   "type": "interface",
   "namespace": "com.sun.star.util",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,20 +16,25 @@
     "from_imports": [
       [
         "..container.x_element_access",
-        "XElementAccess"
+        "XElementAccess",
+        "container_x_element_access_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".element_change",
-        "ElementChange"
+        "ElementChange",
+        "element_change_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.container.XElementAccess": "container_x_element_access_i"
+    },
     "quote": [
-      "typing.List[ElementChange]"
+      "typing.List[element_change_i]"
     ],
     "typings": [
-      "typing.List[ElementChange]"
+      "typing.List[element_change_i]"
     ],
     "requires_typing": true,
     "name": "XChangesSet",
@@ -47,7 +53,7 @@
       "methods": [
         {
           "name": "getAllChanges",
-          "returns": "typing.List[ElementChange]",
+          "returns": "typing.List[element_change_i]",
           "desc": [
             "queries for all contained changes at once."
           ],

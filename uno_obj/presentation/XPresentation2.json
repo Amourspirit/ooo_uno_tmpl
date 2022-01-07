@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XPresentation2",
   "type": "interface",
   "namespace": "com.sun.star.presentation",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,38 +15,46 @@
   "data": {
     "from_imports": [
       [
-        ".x_presentation",
-        "XPresentation"
+        "..beans.x_property_set",
+        "XPropertySet",
+        "beans_x_property_set_i"
       ],
       [
-        "..beans.x_property_set",
-        "XPropertySet"
+        ".x_presentation",
+        "XPresentation",
+        "x_presentation_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_slide_show_controller",
-        "XSlideShowController"
+        "XSlideShowController",
+        "x_slide_show_controller_i"
       ],
       [
         "..beans.property_value",
-        "PropertyValue"
+        "PropertyValue",
+        "beans_property_value_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.beans.XPropertySet": "beans_x_property_set_i",
+      "com.sun.star.presentation.XPresentation": "x_presentation_i"
+    },
     "quote": [
-      "XSlideShowController",
-      "typing.List[PropertyValue]"
+      "x_slide_show_controller_i",
+      "typing.List[beans_property_value_i]"
     ],
     "typings": [
-      "typing.List[PropertyValue]"
+      "typing.List[beans_property_value_i]"
     ],
     "requires_typing": true,
     "name": "XPresentation2",
     "imports": [],
     "namespace": "com.sun.star.presentation",
     "extends": [
-      "com.sun.star.presentation.XPresentation",
-      "com.sun.star.beans.XPropertySet"
+      "com.sun.star.beans.XPropertySet",
+      "com.sun.star.presentation.XPresentation"
     ],
     "desc": [
       "enhances the XPresentation interface to give access to a XSlideShowController and to start a presentation with arguments.",
@@ -59,7 +68,7 @@
       "methods": [
         {
           "name": "getController",
-          "returns": "XSlideShowController",
+          "returns": "x_slide_show_controller_i",
           "desc": [
             "if the slide show is running, this returns a controller object to control the running slide show."
           ],
@@ -87,7 +96,7 @@
           "args": [
             [
               "Arguments",
-              "typing.List[PropertyValue]",
+              "typing.List[beans_property_value_i]",
               "in"
             ]
           ]

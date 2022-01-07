@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XCustomShapeEngine",
   "type": "interface",
   "namespace": "com.sun.star.drawing",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,35 +16,43 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
+        ".x_shape",
+        "XShape",
+        "x_shape_i"
+      ],
+      [
         ".poly_polygon_bezier_coords",
-        "PolyPolygonBezierCoords"
+        "PolyPolygonBezierCoords",
+        "poly_polygon_bezier_coords_i"
       ],
       [
         "..awt.rectangle",
-        "Rectangle"
+        "Rectangle",
+        "awt_rectangle_i"
       ],
       [
         ".x_custom_shape_handle",
-        "XCustomShapeHandle"
-      ],
-      [
-        ".x_shape",
-        "XShape"
+        "XCustomShapeHandle",
+        "x_custom_shape_handle_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "Rectangle",
-      "PolyPolygonBezierCoords",
-      "XShape",
-      "typing.List[XCustomShapeHandle]"
+      "poly_polygon_bezier_coords_i",
+      "typing.List[x_custom_shape_handle_i]",
+      "awt_rectangle_i",
+      "x_shape_i"
     ],
     "typings": [
-      "typing.List[XCustomShapeHandle]"
+      "typing.List[x_custom_shape_handle_i]"
     ],
     "requires_typing": true,
     "name": "XCustomShapeEngine",
@@ -60,28 +69,28 @@
       "methods": [
         {
           "name": "getInteraction",
-          "returns": "typing.List[XCustomShapeHandle]",
+          "returns": "typing.List[x_custom_shape_handle_i]",
           "desc": [],
           "raises": [],
           "args": []
         },
         {
           "name": "getLineGeometry",
-          "returns": "PolyPolygonBezierCoords",
+          "returns": "poly_polygon_bezier_coords_i",
           "desc": [],
           "raises": [],
           "args": []
         },
         {
           "name": "getTextBounds",
-          "returns": "Rectangle",
+          "returns": "awt_rectangle_i",
           "desc": [],
           "raises": [],
           "args": []
         },
         {
           "name": "render",
-          "returns": "XShape",
+          "returns": "x_shape_i",
           "desc": [],
           "raises": [],
           "args": []

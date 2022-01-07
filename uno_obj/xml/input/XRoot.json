@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XRoot",
   "type": "interface",
   "namespace": "com.sun.star.xml.input",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,32 +16,40 @@
     "from_imports": [
       [
         "...uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
-        ".x_namespace_mapping",
-        "XNamespaceMapping"
+        "..sax.x_locator",
+        "XLocator",
+        "sax_x_locator_i"
       ],
       [
-        "..sax.x_locator",
-        "XLocator"
+        ".x_namespace_mapping",
+        "XNamespaceMapping",
+        "x_namespace_mapping_i"
       ],
       [
         ".x_attributes",
-        "XAttributes"
+        "XAttributes",
+        "x_attributes_i"
       ],
       [
         ".x_element",
-        "XElement"
+        "XElement",
+        "x_element_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "XNamespaceMapping",
-      "XLocator",
-      "XAttributes",
-      "XElement"
+      "sax_x_locator_i",
+      "x_namespace_mapping_i",
+      "x_element_i",
+      "x_attributes_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -101,7 +110,7 @@
           "args": [
             [
               "locator",
-              "XLocator",
+              "sax_x_locator_i",
               "in"
             ]
           ]
@@ -118,14 +127,14 @@
           "args": [
             [
               "xMapping",
-              "XNamespaceMapping",
+              "x_namespace_mapping_i",
               "in"
             ]
           ]
         },
         {
           "name": "startRootElement",
-          "returns": "XElement",
+          "returns": "x_element_i",
           "desc": [
             "Called upon root element."
           ],
@@ -145,7 +154,7 @@
             ],
             [
               "xAttributes",
-              "XAttributes",
+              "x_attributes_i",
               "in"
             ]
           ]

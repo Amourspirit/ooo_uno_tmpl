@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XDocumentDigitalSignatures",
   "type": "interface",
   "namespace": "com.sun.star.security",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,63 +16,76 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
-        ".certificate_kind",
-        "CertificateKind"
-      ],
-      [
-        "..io.x_input_stream",
-        "XInputStream"
-      ],
-      [
         "..graphic.x_graphic",
-        "XGraphic"
-      ],
-      [
-        "..embed.x_storage",
-        "XStorage"
-      ],
-      [
-        "..io.x_stream",
-        "XStream"
+        "XGraphic",
+        "graphic_x_graphic_i"
       ],
       [
         ".x_certificate",
-        "XCertificate"
+        "XCertificate",
+        "x_certificate_i"
+      ],
+      [
+        "..embed.x_storage",
+        "XStorage",
+        "embed_x_storage_i"
+      ],
+      [
+        ".certificate_kind",
+        "CertificateKind",
+        "certificate_kind_i"
       ],
       [
         "..awt.x_window",
-        "XWindow"
+        "XWindow",
+        "awt_x_window_i"
       ],
       [
         ".document_signature_information",
-        "DocumentSignatureInformation"
+        "DocumentSignatureInformation",
+        "document_signature_information_i"
+      ],
+      [
+        "..io.x_input_stream",
+        "XInputStream",
+        "io_x_input_stream_i"
       ],
       [
         "..beans.property_value",
-        "PropertyValue"
+        "PropertyValue",
+        "beans_property_value_i"
+      ],
+      [
+        "..io.x_stream",
+        "XStream",
+        "io_x_stream_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "XStorage",
-      "CertificateKind",
-      "typing.List[PropertyValue]",
-      "XGraphic",
-      "XStream",
-      "XWindow",
-      "XInputStream",
-      "typing.List[DocumentSignatureInformation]",
-      "XCertificate",
-      "typing.List[XCertificate]"
+      "x_certificate_i",
+      "embed_x_storage_i",
+      "graphic_x_graphic_i",
+      "typing.List[x_certificate_i]",
+      "certificate_kind_i",
+      "typing.List[beans_property_value_i]",
+      "io_x_input_stream_i",
+      "io_x_stream_i",
+      "awt_x_window_i",
+      "typing.List[document_signature_information_i]"
     ],
     "typings": [
-      "typing.List[DocumentSignatureInformation]",
-      "typing.List[PropertyValue]",
-      "typing.List[XCertificate]"
+      "typing.List[beans_property_value_i]",
+      "typing.List[x_certificate_i]",
+      "typing.List[document_signature_information_i]"
     ],
     "requires_typing": true,
     "name": "XDocumentDigitalSignatures",
@@ -100,7 +114,7 @@
           "args": [
             [
               "Author",
-              "XCertificate",
+              "x_certificate_i",
               "in"
             ]
           ]
@@ -120,7 +134,7 @@
         },
         {
           "name": "chooseCertificate",
-          "returns": "XCertificate",
+          "returns": "x_certificate_i",
           "desc": [
             "This method shows the CertificateChooser dialog, used by document and PDF signing Shows only private certificates.",
             "",
@@ -139,7 +153,7 @@
         },
         {
           "name": "chooseCertificateWithProps",
-          "returns": "XCertificate",
+          "returns": "x_certificate_i",
           "desc": [
             "This method shows the CertificateChooser dialog, used by document and PDF signing Shows only private certificates and returns usage string in addition to description.",
             "",
@@ -151,14 +165,14 @@
           "args": [
             [
               "Properties",
-              "typing.List[PropertyValue]",
+              "typing.List[beans_property_value_i]",
               "out"
             ]
           ]
         },
         {
           "name": "chooseEncryptionCertificate",
-          "returns": "typing.List[XCertificate]",
+          "returns": "typing.List[x_certificate_i]",
           "desc": [
             "This method shows the CertificateChooser dialog with all certificates, private and other people's.",
             "",
@@ -173,7 +187,7 @@
         },
         {
           "name": "chooseSigningCertificate",
-          "returns": "XCertificate",
+          "returns": "x_certificate_i",
           "desc": [
             "This is an alias for 'chooseCertificate', shows the CertificateChooser dialog with private certificates.",
             "",
@@ -225,7 +239,7 @@
           "args": [
             [
               "Author",
-              "XCertificate",
+              "x_certificate_i",
               "in"
             ]
           ]
@@ -254,7 +268,7 @@
         },
         {
           "name": "selectSigningCertificate",
-          "returns": "XCertificate",
+          "returns": "x_certificate_i",
           "desc": [
             "This shows the certificate selection dialog and allows to only select the certificate without actually signing the document.",
             "",
@@ -273,7 +287,7 @@
         },
         {
           "name": "selectSigningCertificateWithType",
-          "returns": "XCertificate",
+          "returns": "x_certificate_i",
           "desc": [
             "This shows the certificate selection dialog and allows to only select the certificate without actually signing the document.",
             "",
@@ -287,7 +301,7 @@
           "args": [
             [
               "certificateKind",
-              "CertificateKind",
+              "certificate_kind_i",
               "in"
             ],
             [
@@ -311,7 +325,7 @@
           "args": [
             [
               "xParentWindow",
-              "XWindow",
+              "awt_x_window_i",
               "in"
             ]
           ]
@@ -324,7 +338,7 @@
           "args": [
             [
               "Certificate",
-              "XCertificate",
+              "x_certificate_i",
               "in"
             ]
           ]
@@ -339,12 +353,12 @@
           "args": [
             [
               "xStorage",
-              "XStorage",
+              "embed_x_storage_i",
               "in"
             ],
             [
               "xSignInStream",
-              "XInputStream",
+              "io_x_input_stream_i",
               "in"
             ]
           ]
@@ -359,12 +373,12 @@
           "args": [
             [
               "xStorage",
-              "XStorage",
+              "embed_x_storage_i",
               "in"
             ],
             [
               "xSignInStream",
-              "XInputStream",
+              "io_x_input_stream_i",
               "in"
             ]
           ]
@@ -379,12 +393,12 @@
           "args": [
             [
               "xStorage",
-              "XStorage",
+              "embed_x_storage_i",
               "in"
             ],
             [
               "xSignInStream",
-              "XInputStream",
+              "io_x_input_stream_i",
               "in"
             ]
           ]
@@ -401,12 +415,12 @@
           "args": [
             [
               "xStorage",
-              "XStorage",
+              "embed_x_storage_i",
               "in"
             ],
             [
               "xSignStream",
-              "XStream",
+              "io_x_stream_i",
               "in"
             ]
           ]
@@ -425,17 +439,17 @@
           "args": [
             [
               "xCertificate",
-              "XCertificate",
+              "x_certificate_i",
               "in"
             ],
             [
               "xStorage",
-              "XStorage",
+              "embed_x_storage_i",
               "in"
             ],
             [
               "xStream",
-              "XStream",
+              "io_x_stream_i",
               "in"
             ]
           ]
@@ -450,12 +464,12 @@
           "args": [
             [
               "Storage",
-              "XStorage",
+              "embed_x_storage_i",
               "in"
             ],
             [
               "xSignStream",
-              "XStream",
+              "io_x_stream_i",
               "in"
             ]
           ]
@@ -474,17 +488,17 @@
           "args": [
             [
               "xCertificate",
-              "XCertificate",
+              "x_certificate_i",
               "in"
             ],
             [
               "xStorage",
-              "XStorage",
+              "embed_x_storage_i",
               "in"
             ],
             [
               "xStream",
-              "XStream",
+              "io_x_stream_i",
               "in"
             ]
           ]
@@ -501,12 +515,12 @@
           "args": [
             [
               "xStorage",
-              "XStorage",
+              "embed_x_storage_i",
               "in"
             ],
             [
               "xSignStream",
-              "XStream",
+              "io_x_stream_i",
               "in"
             ]
           ]
@@ -527,17 +541,17 @@
           "args": [
             [
               "xCertificate",
-              "XCertificate",
+              "x_certificate_i",
               "in"
             ],
             [
               "xStorage",
-              "XStorage",
+              "embed_x_storage_i",
               "in"
             ],
             [
               "xStream",
-              "XStream",
+              "io_x_stream_i",
               "in"
             ]
           ]
@@ -560,12 +574,12 @@
           "args": [
             [
               "xStorage",
-              "XStorage",
+              "embed_x_storage_i",
               "in"
             ],
             [
               "xSignStream",
-              "XStream",
+              "io_x_stream_i",
               "in"
             ],
             [
@@ -575,17 +589,17 @@
             ],
             [
               "xCertificate",
-              "XCertificate",
+              "x_certificate_i",
               "in"
             ],
             [
               "xValidGraphic",
-              "XGraphic",
+              "graphic_x_graphic_i",
               "in"
             ],
             [
               "xInvalidGraphic",
-              "XGraphic",
+              "graphic_x_graphic_i",
               "in"
             ],
             [
@@ -597,7 +611,7 @@
         },
         {
           "name": "verifyDocumentContentSignatures",
-          "returns": "typing.List[DocumentSignatureInformation]",
+          "returns": "typing.List[document_signature_information_i]",
           "desc": [
             "checks for digital signatures and their status.",
             "",
@@ -607,19 +621,19 @@
           "args": [
             [
               "xStorage",
-              "XStorage",
+              "embed_x_storage_i",
               "in"
             ],
             [
               "xSignInStream",
-              "XInputStream",
+              "io_x_input_stream_i",
               "in"
             ]
           ]
         },
         {
           "name": "verifyPackageSignatures",
-          "returns": "typing.List[DocumentSignatureInformation]",
+          "returns": "typing.List[document_signature_information_i]",
           "desc": [
             "checks for digital signatures and their status.",
             "",
@@ -629,19 +643,19 @@
           "args": [
             [
               "Storage",
-              "XStorage",
+              "embed_x_storage_i",
               "in"
             ],
             [
               "xSignInStream",
-              "XInputStream",
+              "io_x_input_stream_i",
               "in"
             ]
           ]
         },
         {
           "name": "verifyScriptingContentSignatures",
-          "returns": "typing.List[DocumentSignatureInformation]",
+          "returns": "typing.List[document_signature_information_i]",
           "desc": [
             "checks for digital signatures and their status.",
             "",
@@ -651,12 +665,12 @@
           "args": [
             [
               "xStorage",
-              "XStorage",
+              "embed_x_storage_i",
               "in"
             ],
             [
               "xSignInStream",
-              "XInputStream",
+              "io_x_input_stream_i",
               "in"
             ]
           ]

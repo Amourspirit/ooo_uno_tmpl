@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XScriptEventsAttacher",
   "type": "interface",
   "namespace": "com.sun.star.script",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,21 +16,26 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_script_listener",
-        "XScriptListener"
+        "XScriptListener",
+        "x_script_listener_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "XScriptListener",
-      "typing.List[XInterface]"
+      "x_script_listener_i",
+      "typing.List[uno_x_interface_i]"
     ],
     "typings": [
-      "typing.List[XInterface]"
+      "typing.List[uno_x_interface_i]"
     ],
     "requires_typing": true,
     "name": "XScriptEventsAttacher",
@@ -59,12 +65,12 @@
           "args": [
             [
               "Objects",
-              "typing.List[XInterface]",
+              "typing.List[uno_x_interface_i]",
               "in"
             ],
             [
               "xListener",
-              "XScriptListener",
+              "x_script_listener_i",
               "in"
             ],
             [

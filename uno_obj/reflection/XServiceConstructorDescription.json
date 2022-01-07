@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XServiceConstructorDescription",
   "type": "interface",
   "namespace": "com.sun.star.reflection",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -16,20 +17,23 @@
     "from_imports_typing": [
       [
         ".x_parameter",
-        "XParameter"
+        "XParameter",
+        "x_parameter_i"
       ],
       [
         ".x_compound_type_description",
-        "XCompoundTypeDescription"
+        "XCompoundTypeDescription",
+        "x_compound_type_description_i"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "typing.List[XParameter]",
-      "typing.List[XCompoundTypeDescription]"
+      "typing.List[x_parameter_i]",
+      "typing.List[x_compound_type_description_i]"
     ],
     "typings": [
-      "typing.List[XParameter]",
-      "typing.List[XCompoundTypeDescription]"
+      "typing.List[x_parameter_i]",
+      "typing.List[x_compound_type_description_i]"
     ],
     "requires_typing": true,
     "name": "XServiceConstructorDescription",
@@ -48,7 +52,7 @@
       "methods": [
         {
           "name": "getExceptions",
-          "returns": "typing.List[XCompoundTypeDescription]",
+          "returns": "typing.List[x_compound_type_description_i]",
           "desc": [
             "Returns the exceptions that can be raised by the constructor."
           ],
@@ -66,7 +70,7 @@
         },
         {
           "name": "getParameters",
-          "returns": "typing.List[XParameter]",
+          "returns": "typing.List[x_parameter_i]",
           "desc": [
             "Returns the constructor's parameters."
           ],

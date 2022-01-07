@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XOfficeDatabaseDocument",
   "type": "interface",
   "namespace": "com.sun.star.sdb",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,25 +16,34 @@
     "from_imports": [
       [
         "..document.x_document_sub_storage_supplier",
-        "XDocumentSubStorageSupplier"
-      ],
-      [
-        ".x_report_documents_supplier",
-        "XReportDocumentsSupplier"
+        "XDocumentSubStorageSupplier",
+        "document_x_document_sub_storage_supplier_i"
       ],
       [
         ".x_form_documents_supplier",
-        "XFormDocumentsSupplier"
+        "XFormDocumentsSupplier",
+        "x_form_documents_supplier_i"
+      ],
+      [
+        ".x_report_documents_supplier",
+        "XReportDocumentsSupplier",
+        "x_report_documents_supplier_i"
       ]
     ],
     "from_imports_typing": [
       [
         "..sdbc.x_data_source",
-        "XDataSource"
+        "XDataSource",
+        "sdbc_x_data_source_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.document.XDocumentSubStorageSupplier": "document_x_document_sub_storage_supplier_i",
+      "com.sun.star.sdb.XFormDocumentsSupplier": "x_form_documents_supplier_i",
+      "com.sun.star.sdb.XReportDocumentsSupplier": "x_report_documents_supplier_i"
+    },
     "quote": [
-      "XDataSource"
+      "sdbc_x_data_source_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -41,9 +51,9 @@
     "imports": [],
     "namespace": "com.sun.star.sdb",
     "extends": [
+      "com.sun.star.document.XDocumentSubStorageSupplier",
       "com.sun.star.sdb.XFormDocumentsSupplier",
-      "com.sun.star.sdb.XReportDocumentsSupplier",
-      "com.sun.star.document.XDocumentSubStorageSupplier"
+      "com.sun.star.sdb.XReportDocumentsSupplier"
     ],
     "desc": [
       "simplifies the accessing of data sources, and it's corresponding database document and forms, and reports."
@@ -53,7 +63,7 @@
       "properties": [
         {
           "name": "DataSource",
-          "returns": "XDataSource",
+          "returns": "sdbc_x_data_source_i",
           "desc": [
             "provides access to the one and only DataSource associated with this document"
           ],

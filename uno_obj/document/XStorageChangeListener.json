@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XStorageChangeListener",
   "type": "interface",
   "namespace": "com.sun.star.document",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,22 +16,28 @@
     "from_imports": [
       [
         "..lang.x_event_listener",
-        "XEventListener"
+        "XEventListener",
+        "lang_x_event_listener_i"
       ]
     ],
     "from_imports_typing": [
       [
-        "..uno.x_interface",
-        "XInterface"
+        "..embed.x_storage",
+        "XStorage",
+        "embed_x_storage_i"
       ],
       [
-        "..embed.x_storage",
-        "XStorage"
+        "..uno.x_interface",
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.lang.XEventListener": "lang_x_event_listener_i"
+    },
     "quote": [
-      "XStorage",
-      "XInterface"
+      "uno_x_interface_i",
+      "embed_x_storage_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -56,12 +63,12 @@
           "args": [
             [
               "xDocument",
-              "XInterface",
+              "uno_x_interface_i",
               "in"
             ],
             [
               "xStorage",
-              "XStorage",
+              "embed_x_storage_i",
               "in"
             ]
           ]

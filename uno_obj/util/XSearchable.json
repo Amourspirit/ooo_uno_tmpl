@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XSearchable",
   "type": "interface",
   "namespace": "com.sun.star.util",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,23 +16,29 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
         "..container.x_index_access",
-        "XIndexAccess"
+        "XIndexAccess",
+        "container_x_index_access_i"
       ],
       [
         ".x_search_descriptor",
-        "XSearchDescriptor"
+        "XSearchDescriptor",
+        "x_search_descriptor_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "XIndexAccess",
-      "XSearchDescriptor",
-      "XInterface"
+      "uno_x_interface_i",
+      "x_search_descriptor_i",
+      "container_x_index_access_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -51,7 +58,7 @@
       "methods": [
         {
           "name": "createSearchDescriptor",
-          "returns": "XSearchDescriptor",
+          "returns": "x_search_descriptor_i",
           "desc": [
             "creates a SearchDescriptor which contains properties that specify a search in this container."
           ],
@@ -60,7 +67,7 @@
         },
         {
           "name": "findAll",
-          "returns": "XIndexAccess",
+          "returns": "container_x_index_access_i",
           "desc": [
             "searches the contained texts for all occurrences of whatever is specified."
           ],
@@ -68,14 +75,14 @@
           "args": [
             [
               "xDesc",
-              "XSearchDescriptor",
+              "x_search_descriptor_i",
               "in"
             ]
           ]
         },
         {
           "name": "findFirst",
-          "returns": "XInterface",
+          "returns": "uno_x_interface_i",
           "desc": [
             "searches the contained texts for the next occurrence of whatever is specified."
           ],
@@ -83,14 +90,14 @@
           "args": [
             [
               "xDesc",
-              "XSearchDescriptor",
+              "x_search_descriptor_i",
               "in"
             ]
           ]
         },
         {
           "name": "findNext",
-          "returns": "XInterface",
+          "returns": "uno_x_interface_i",
           "desc": [
             "searches the contained texts for the next occurrence of whatever is specified."
           ],
@@ -98,12 +105,12 @@
           "args": [
             [
               "xStartAt",
-              "XInterface",
+              "uno_x_interface_i",
               "in"
             ],
             [
               "xDesc",
-              "XSearchDescriptor",
+              "x_search_descriptor_i",
               "in"
             ]
           ]

@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XStringResourceManager",
   "type": "interface",
   "namespace": "com.sun.star.resource",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,17 +16,22 @@
     "from_imports": [
       [
         ".x_string_resource_resolver",
-        "XStringResourceResolver"
+        "XStringResourceResolver",
+        "x_string_resource_resolver_i"
       ]
     ],
     "from_imports_typing": [
       [
         "..lang.locale",
-        "Locale"
+        "Locale",
+        "lang_locale_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.resource.XStringResourceResolver": "x_string_resource_resolver_i"
+    },
     "quote": [
-      "Locale"
+      "lang_locale_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -89,7 +95,7 @@
           "args": [
             [
               "locale",
-              "Locale",
+              "lang_locale_i",
               "in"
             ]
           ]
@@ -130,7 +136,7 @@
             ],
             [
               "locale",
-              "Locale",
+              "lang_locale_i",
               "in"
             ]
           ]
@@ -148,7 +154,7 @@
           "args": [
             [
               "locale",
-              "Locale",
+              "lang_locale_i",
               "in"
             ]
           ]
@@ -171,7 +177,7 @@
           "args": [
             [
               "Locale",
-              "Locale",
+              "lang_locale_i",
               "in"
             ],
             [
@@ -194,7 +200,7 @@
           "args": [
             [
               "Locale",
-              "Locale",
+              "lang_locale_i",
               "in"
             ]
           ]
@@ -249,7 +255,7 @@
             ],
             [
               "locale",
-              "Locale",
+              "lang_locale_i",
               "in"
             ]
           ]

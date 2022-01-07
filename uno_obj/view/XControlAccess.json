@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XControlAccess",
   "type": "interface",
   "namespace": "com.sun.star.view",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,22 +16,28 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
         "..awt.x_control_model",
-        "XControlModel"
+        "XControlModel",
+        "awt_x_control_model_i"
       ],
       [
         "..awt.x_control",
-        "XControl"
+        "XControl",
+        "awt_x_control_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "XControl",
-      "XControlModel"
+      "awt_x_control_model_i",
+      "awt_x_control_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -48,7 +55,7 @@
       "methods": [
         {
           "name": "getControl",
-          "returns": "XControl",
+          "returns": "awt_x_control_i",
           "desc": [
             "is called to get the control from the specified control model."
           ],
@@ -58,7 +65,7 @@
           "args": [
             [
               "xModel",
-              "XControlModel",
+              "awt_x_control_model_i",
               "in"
             ]
           ]

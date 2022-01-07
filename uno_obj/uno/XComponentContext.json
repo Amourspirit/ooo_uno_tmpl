@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XComponentContext",
   "type": "interface",
   "namespace": "com.sun.star.uno",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,17 +16,22 @@
     "from_imports": [
       [
         ".x_interface",
-        "XInterface"
+        "XInterface",
+        "x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
         "..lang.x_multi_component_factory",
-        "XMultiComponentFactory"
+        "XMultiComponentFactory",
+        "lang_x_multi_component_factory_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "x_interface_i"
+    },
     "quote": [
-      "XMultiComponentFactory"
+      "lang_x_multi_component_factory_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -45,7 +51,7 @@
       "methods": [
         {
           "name": "getServiceManager",
-          "returns": "XMultiComponentFactory",
+          "returns": "lang_x_multi_component_factory_i",
           "desc": [
             "Gets the service manager instance to be used from key /singletons/com.sun.star.lang.theServiceManager.",
             "",

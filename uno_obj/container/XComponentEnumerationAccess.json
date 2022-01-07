@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XComponentEnumerationAccess",
   "type": "interface",
   "namespace": "com.sun.star.container",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,17 +16,22 @@
     "from_imports": [
       [
         ".x_enumeration_access",
-        "XEnumerationAccess"
+        "XEnumerationAccess",
+        "x_enumeration_access_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_component_enumeration",
-        "XComponentEnumeration"
+        "XComponentEnumeration",
+        "x_component_enumeration_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.container.XEnumerationAccess": "x_enumeration_access_i"
+    },
     "quote": [
-      "XComponentEnumeration"
+      "x_component_enumeration_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -43,7 +49,7 @@
       "methods": [
         {
           "name": "createComponentEnumeration",
-          "returns": "XComponentEnumeration",
+          "returns": "x_component_enumeration_i",
           "desc": [
             "creates a new instance of enumeration through components."
           ],

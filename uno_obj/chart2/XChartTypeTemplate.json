@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XChartTypeTemplate",
   "type": "interface",
   "namespace": "com.sun.star.chart2",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,47 +16,57 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
-        ".x_diagram",
-        "XDiagram"
-      ],
-      [
-        ".x_data_interpreter",
-        "XDataInterpreter"
-      ],
-      [
-        ".data.x_data_source",
-        "XDataSource"
-      ],
-      [
         ".x_chart_type",
-        "XChartType"
+        "XChartType",
+        "x_chart_type_i"
       ],
       [
         ".x_data_series",
-        "XDataSeries"
+        "XDataSeries",
+        "x_data_series_i"
+      ],
+      [
+        ".x_data_interpreter",
+        "XDataInterpreter",
+        "x_data_interpreter_i"
+      ],
+      [
+        ".data.x_data_source",
+        "XDataSource",
+        "data_x_data_source_i"
+      ],
+      [
+        ".x_diagram",
+        "XDiagram",
+        "x_diagram_i"
       ],
       [
         "..beans.property_value",
-        "PropertyValue"
+        "PropertyValue",
+        "beans_property_value_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "typing.List[PropertyValue]",
-      "XDiagram",
-      "typing.List[XChartType]",
-      "XDataSeries",
-      "XDataInterpreter",
-      "XChartType",
-      "XDataSource"
+      "typing.List[x_chart_type_i]",
+      "x_data_interpreter_i",
+      "x_diagram_i",
+      "x_chart_type_i",
+      "data_x_data_source_i",
+      "typing.List[beans_property_value_i]",
+      "x_data_series_i"
     ],
     "typings": [
-      "typing.List[XChartType]",
-      "typing.List[PropertyValue]"
+      "typing.List[x_chart_type_i]",
+      "typing.List[beans_property_value_i]"
     ],
     "requires_typing": true,
     "name": "XChartTypeTemplate",
@@ -80,7 +91,7 @@
           "args": [
             [
               "xSeries",
-              "XDataSeries",
+              "x_data_series_i",
               "in"
             ],
             [
@@ -112,7 +123,7 @@
           "args": [
             [
               "xDiagram",
-              "XDiagram",
+              "x_diagram_i",
               "in"
             ]
           ]
@@ -133,24 +144,24 @@
           "args": [
             [
               "xDiagram",
-              "XDiagram",
+              "x_diagram_i",
               "in"
             ],
             [
               "xDataSource",
-              "XDataSource",
+              "data_x_data_source_i",
               "in"
             ],
             [
               "aArguments",
-              "typing.List[PropertyValue]",
+              "typing.List[beans_property_value_i]",
               "in"
             ]
           ]
         },
         {
           "name": "createDiagramByDataSource",
-          "returns": "XDiagram",
+          "returns": "x_diagram_i",
           "desc": [
             "Creates a new diagram based upon the given data .",
             "",
@@ -160,19 +171,19 @@
           "args": [
             [
               "xDataSource",
-              "XDataSource",
+              "data_x_data_source_i",
               "in"
             ],
             [
               "aArguments",
-              "typing.List[PropertyValue]",
+              "typing.List[beans_property_value_i]",
               "in"
             ]
           ]
         },
         {
           "name": "getChartTypeForNewSeries",
-          "returns": "XChartType",
+          "returns": "x_chart_type_i",
           "desc": [
             "Provides a chart type object that can be used to create new series."
           ],
@@ -180,14 +191,14 @@
           "args": [
             [
               "aFormerlyUsedChartTypes",
-              "typing.List[XChartType]",
+              "typing.List[x_chart_type_i]",
               "in"
             ]
           ]
         },
         {
           "name": "getDataInterpreter",
-          "returns": "XDataInterpreter",
+          "returns": "x_data_interpreter_i",
           "desc": [],
           "raises": [],
           "args": []
@@ -206,7 +217,7 @@
           "args": [
             [
               "xDiagram",
-              "XDiagram",
+              "x_diagram_i",
               "in"
             ],
             [
@@ -230,7 +241,7 @@
           "args": [
             [
               "xDiagram",
-              "XDiagram",
+              "x_diagram_i",
               "in"
             ]
           ]

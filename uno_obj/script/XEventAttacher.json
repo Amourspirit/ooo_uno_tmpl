@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XEventAttacher",
   "type": "interface",
   "namespace": "com.sun.star.script",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,23 +16,29 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_all_listener",
-        "XAllListener"
+        "XAllListener",
+        "x_all_listener_i"
       ],
       [
         "..lang.x_event_listener",
-        "XEventListener"
+        "XEventListener",
+        "lang_x_event_listener_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "XEventListener",
-      "XAllListener",
-      "XInterface"
+      "lang_x_event_listener_i",
+      "uno_x_interface_i",
+      "x_all_listener_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -49,7 +56,7 @@
       "methods": [
         {
           "name": "attachListener",
-          "returns": "XEventListener",
+          "returns": "lang_x_event_listener_i",
           "desc": [
             "registers the given \\\"AllListener\\\" object as a listener at the given interface by creating a suitable listener adapter and calling the \\\"addListener\\\" method corresponding to the \\\"ListenerType\\\"."
           ],
@@ -62,12 +69,12 @@
           "args": [
             [
               "xTarget",
-              "XInterface",
+              "uno_x_interface_i",
               "in"
             ],
             [
               "xAllListener",
-              "XAllListener",
+              "x_all_listener_i",
               "in"
             ],
             [
@@ -89,7 +96,7 @@
         },
         {
           "name": "attachSingleEventListener",
-          "returns": "XEventListener",
+          "returns": "lang_x_event_listener_i",
           "desc": [
             "registers an object as a listener at the given interface by creating a suitable listener adapter and calling the method which corresponds to the listener type.",
             "",
@@ -104,12 +111,12 @@
           "args": [
             [
               "xTarget",
-              "XInterface",
+              "uno_x_interface_i",
               "in"
             ],
             [
               "xAllListener",
-              "XAllListener",
+              "x_all_listener_i",
               "in"
             ],
             [
@@ -149,7 +156,7 @@
           "args": [
             [
               "xTarget",
-              "XInterface",
+              "uno_x_interface_i",
               "in"
             ],
             [
@@ -164,7 +171,7 @@
             ],
             [
               "xToRemoveListener",
-              "XEventListener",
+              "lang_x_event_listener_i",
               "in"
             ]
           ]

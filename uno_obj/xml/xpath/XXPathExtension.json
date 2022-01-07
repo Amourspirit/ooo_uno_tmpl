@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XXPathExtension",
   "type": "interface",
   "namespace": "com.sun.star.xml.xpath",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,17 +16,22 @@
     "from_imports": [
       [
         "...uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".libxml2_extension_handle",
-        "Libxml2ExtensionHandle"
+        "Libxml2ExtensionHandle",
+        "libxml2_extension_handle_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "Libxml2ExtensionHandle"
+      "libxml2_extension_handle_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -41,7 +47,7 @@
       "methods": [
         {
           "name": "getLibxml2ExtensionHandle",
-          "returns": "Libxml2ExtensionHandle",
+          "returns": "libxml2_extension_handle_i",
           "desc": [],
           "raises": [],
           "args": []

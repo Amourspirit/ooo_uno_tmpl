@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XFormLayerAccess",
   "type": "interface",
   "namespace": "com.sun.star.view",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,22 +16,28 @@
     "from_imports": [
       [
         ".x_control_access",
-        "XControlAccess"
+        "XControlAccess",
+        "x_control_access_i"
       ]
     ],
     "from_imports_typing": [
       [
         "..form.runtime.x_form_controller",
-        "XFormController"
+        "XFormController",
+        "form_runtime_x_form_controller_i"
       ],
       [
         "..form.x_form",
-        "XForm"
+        "XForm",
+        "form_x_form_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.view.XControlAccess": "x_control_access_i"
+    },
     "quote": [
-      "XFormController",
-      "XForm"
+      "form_runtime_x_form_controller_i",
+      "form_x_form_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -52,7 +59,7 @@
       "methods": [
         {
           "name": "getFormController",
-          "returns": "XFormController",
+          "returns": "form_runtime_x_form_controller_i",
           "desc": [
             "returns the com.sun.star.form.FormController instance which operates on a given form.",
             "",
@@ -62,7 +69,7 @@
           "args": [
             [
               "Form",
-              "XForm",
+              "form_x_form_i",
               "in"
             ]
           ]

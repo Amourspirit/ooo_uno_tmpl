@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XUniversalContentBroker",
   "type": "interface",
   "namespace": "com.sun.star.ucb",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,27 +15,39 @@
   "data": {
     "from_imports": [
       [
-        ".x_command_processor2",
-        "XCommandProcessor2"
-      ],
-      [
-        "..lang.x_component",
-        "XComponent"
-      ],
-      [
-        ".x_content_provider_manager",
-        "XContentProviderManager"
+        ".x_content_provider",
+        "XContentProvider",
+        "x_content_provider_i"
       ],
       [
         ".x_content_identifier_factory",
-        "XContentIdentifierFactory"
+        "XContentIdentifierFactory",
+        "x_content_identifier_factory_i"
       ],
       [
-        ".x_content_provider",
-        "XContentProvider"
+        ".x_content_provider_manager",
+        "XContentProviderManager",
+        "x_content_provider_manager_i"
+      ],
+      [
+        "..lang.x_component",
+        "XComponent",
+        "lang_x_component_i"
+      ],
+      [
+        ".x_command_processor2",
+        "XCommandProcessor2",
+        "x_command_processor2_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.ucb.XContentProvider": "x_content_provider_i",
+      "com.sun.star.ucb.XContentIdentifierFactory": "x_content_identifier_factory_i",
+      "com.sun.star.ucb.XContentProviderManager": "x_content_provider_manager_i",
+      "com.sun.star.lang.XComponent": "lang_x_component_i",
+      "com.sun.star.ucb.XCommandProcessor2": "x_command_processor2_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -42,10 +55,10 @@
     "imports": [],
     "namespace": "com.sun.star.ucb",
     "extends": [
-      "com.sun.star.lang.XComponent",
       "com.sun.star.ucb.XContentProvider",
-      "com.sun.star.ucb.XContentProviderManager",
       "com.sun.star.ucb.XContentIdentifierFactory",
+      "com.sun.star.ucb.XContentProviderManager",
+      "com.sun.star.lang.XComponent",
       "com.sun.star.ucb.XCommandProcessor2"
     ],
     "desc": [

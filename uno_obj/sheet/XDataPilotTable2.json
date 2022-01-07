@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XDataPilotTable2",
   "type": "interface",
   "namespace": "com.sun.star.sheet",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,28 +16,35 @@
     "from_imports": [
       [
         ".x_data_pilot_table",
-        "XDataPilotTable"
+        "XDataPilotTable",
+        "x_data_pilot_table_i"
       ]
     ],
     "from_imports_typing": [
       [
+        "..table.cell_address",
+        "CellAddress",
+        "table_cell_address_i"
+      ],
+      [
         "..table.cell_range_address",
-        "CellRangeAddress"
+        "CellRangeAddress",
+        "table_cell_range_address_i"
       ],
       [
         ".data_pilot_table_position_data",
-        "DataPilotTablePositionData"
-      ],
-      [
-        "..table.cell_address",
-        "CellAddress"
+        "DataPilotTablePositionData",
+        "data_pilot_table_position_data_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.sheet.XDataPilotTable": "x_data_pilot_table_i"
+    },
     "quote": [
+      "table_cell_address_i",
+      "data_pilot_table_position_data_i",
       "typing.List[typing.List[object]]",
-      "CellAddress",
-      "CellRangeAddress",
-      "DataPilotTablePositionData"
+      "table_cell_range_address_i"
     ],
     "typings": [
       "typing.List[typing.List[object]]"
@@ -70,14 +78,14 @@
           "args": [
             [
               "aAddr",
-              "CellAddress",
+              "table_cell_address_i",
               "in"
             ]
           ]
         },
         {
           "name": "getOutputRangeByType",
-          "returns": "CellRangeAddress",
+          "returns": "table_cell_range_address_i",
           "desc": [
             "This method returns a different output range of a DataPilot table per specified output range type."
           ],
@@ -94,7 +102,7 @@
         },
         {
           "name": "getPositionData",
-          "returns": "DataPilotTablePositionData",
+          "returns": "data_pilot_table_position_data_i",
           "desc": [
             "Given a cell address, it returns the information about that cell.",
             "",
@@ -104,7 +112,7 @@
           "args": [
             [
               "aAddr",
-              "CellAddress",
+              "table_cell_address_i",
               "in"
             ]
           ]
@@ -121,7 +129,7 @@
           "args": [
             [
               "aAddr",
-              "CellAddress",
+              "table_cell_address_i",
               "in"
             ]
           ]

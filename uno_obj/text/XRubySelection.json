@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XRubySelection",
   "type": "interface",
   "namespace": "com.sun.star.text",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,20 +16,25 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
         "..beans.property_values",
-        "PropertyValues"
+        "PropertyValues",
+        "beans_property_values_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "typing.List[PropertyValues]"
+      "typing.List[beans_property_values_i]"
     ],
     "typings": [
-      "typing.List[PropertyValues]"
+      "typing.List[beans_property_values_i]"
     ],
     "requires_typing": true,
     "name": "XRubySelection",
@@ -45,7 +51,7 @@
       "methods": [
         {
           "name": "getRubyList",
-          "returns": "typing.List[PropertyValues]",
+          "returns": "typing.List[beans_property_values_i]",
           "desc": [
             "returns a sequence of ruby elements.",
             "",
@@ -72,7 +78,7 @@
           "args": [
             [
               "RubyList",
-              "typing.List[PropertyValues]",
+              "typing.List[beans_property_values_i]",
               "in"
             ],
             [

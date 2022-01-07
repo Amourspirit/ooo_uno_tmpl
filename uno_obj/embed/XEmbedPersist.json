@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XEmbedPersist",
   "type": "interface",
   "namespace": "com.sun.star.embed",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,25 +16,31 @@
     "from_imports": [
       [
         ".x_common_embed_persist",
-        "XCommonEmbedPersist"
+        "XCommonEmbedPersist",
+        "x_common_embed_persist_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_storage",
-        "XStorage"
+        "XStorage",
+        "x_storage_i"
       ],
       [
         "..beans.property_value",
-        "PropertyValue"
+        "PropertyValue",
+        "beans_property_value_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.embed.XCommonEmbedPersist": "x_common_embed_persist_i"
+    },
     "quote": [
-      "XStorage",
-      "typing.List[PropertyValue]"
+      "x_storage_i",
+      "typing.List[beans_property_value_i]"
     ],
     "typings": [
-      "typing.List[PropertyValue]"
+      "typing.List[beans_property_value_i]"
     ],
     "requires_typing": true,
     "name": "XEmbedPersist",
@@ -111,7 +118,7 @@
           "args": [
             [
               "xStorage",
-              "XStorage",
+              "x_storage_i",
               "in"
             ],
             [
@@ -126,12 +133,12 @@
             ],
             [
               "aMediaArgs",
-              "typing.List[PropertyValue]",
+              "typing.List[beans_property_value_i]",
               "in"
             ],
             [
               "aObjectArgs",
-              "typing.List[PropertyValue]",
+              "typing.List[beans_property_value_i]",
               "in"
             ]
           ]
@@ -153,7 +160,7 @@
           "args": [
             [
               "xStorage",
-              "XStorage",
+              "x_storage_i",
               "in"
             ],
             [
@@ -163,12 +170,12 @@
             ],
             [
               "aMediaArgs",
-              "typing.List[PropertyValue]",
+              "typing.List[beans_property_value_i]",
               "in"
             ],
             [
               "aObjectArgs",
-              "typing.List[PropertyValue]",
+              "typing.List[beans_property_value_i]",
               "in"
             ]
           ]
@@ -188,7 +195,7 @@
           "args": [
             [
               "xStorage",
-              "XStorage",
+              "x_storage_i",
               "in"
             ],
             [
@@ -198,12 +205,12 @@
             ],
             [
               "aMediaArgs",
-              "typing.List[PropertyValue]",
+              "typing.List[beans_property_value_i]",
               "in"
             ],
             [
               "aObjectArgs",
-              "typing.List[PropertyValue]",
+              "typing.List[beans_property_value_i]",
               "in"
             ]
           ]

@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XSimpleCanvas",
   "type": "interface",
   "namespace": "com.sun.star.rendering",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,77 +16,94 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
-        ".x_canvas",
-        "XCanvas"
-      ],
-      [
         "..geometry.real_rectangle2_d",
-        "RealRectangle2D"
-      ],
-      [
-        ".view_state",
-        "ViewState"
-      ],
-      [
-        "..util.color",
-        "Color"
-      ],
-      [
-        "..geometry.real_point2_d",
-        "RealPoint2D"
-      ],
-      [
-        ".x_graphic_device",
-        "XGraphicDevice"
-      ],
-      [
-        ".render_state",
-        "RenderState"
-      ],
-      [
-        ".string_context",
-        "StringContext"
-      ],
-      [
-        ".x_bitmap",
-        "XBitmap"
-      ],
-      [
-        "..geometry.affine_matrix2_d",
-        "AffineMatrix2D"
-      ],
-      [
-        ".font_metrics",
-        "FontMetrics"
+        "RealRectangle2D",
+        "geometry_real_rectangle2_d_i"
       ],
       [
         ".x_poly_polygon2_d",
-        "XPolyPolygon2D"
+        "XPolyPolygon2D",
+        "x_poly_polygon2_d_i"
+      ],
+      [
+        "..geometry.real_point2_d",
+        "RealPoint2D",
+        "geometry_real_point2_d_i"
+      ],
+      [
+        "..geometry.affine_matrix2_d",
+        "AffineMatrix2D",
+        "geometry_affine_matrix2_d_i"
+      ],
+      [
+        ".string_context",
+        "StringContext",
+        "string_context_i"
       ],
       [
         ".x_canvas_font",
-        "XCanvasFont"
+        "XCanvasFont",
+        "x_canvas_font_i"
+      ],
+      [
+        "..util.color",
+        "Color",
+        "util_color_i"
+      ],
+      [
+        ".font_metrics",
+        "FontMetrics",
+        "font_metrics_i"
+      ],
+      [
+        ".x_bitmap",
+        "XBitmap",
+        "x_bitmap_i"
+      ],
+      [
+        ".x_canvas",
+        "XCanvas",
+        "x_canvas_i"
+      ],
+      [
+        ".render_state",
+        "RenderState",
+        "render_state_i"
+      ],
+      [
+        ".view_state",
+        "ViewState",
+        "view_state_i"
+      ],
+      [
+        ".x_graphic_device",
+        "XGraphicDevice",
+        "x_graphic_device_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "FontMetrics",
-      "StringContext",
-      "RenderState",
-      "XPolyPolygon2D",
-      "ViewState",
-      "XBitmap",
-      "XCanvasFont",
-      "XCanvas",
-      "XGraphicDevice",
-      "AffineMatrix2D",
-      "Color",
-      "RealRectangle2D",
-      "RealPoint2D"
+      "x_canvas_font_i",
+      "font_metrics_i",
+      "geometry_affine_matrix2_d_i",
+      "render_state_i",
+      "geometry_real_rectangle2_d_i",
+      "x_poly_polygon2_d_i",
+      "x_canvas_i",
+      "view_state_i",
+      "x_bitmap_i",
+      "string_context_i",
+      "util_color_i",
+      "x_graphic_device_i",
+      "geometry_real_point2_d_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -115,12 +133,12 @@
           "args": [
             [
               "xBitmap",
-              "XBitmap",
+              "x_bitmap_i",
               "in"
             ],
             [
               "aLeftTop",
-              "RealPoint2D",
+              "geometry_real_point2_d_i",
               "in"
             ]
           ]
@@ -135,12 +153,12 @@
           "args": [
             [
               "aStartPoint",
-              "RealPoint2D",
+              "geometry_real_point2_d_i",
               "in"
             ],
             [
               "aEndPoint",
-              "RealPoint2D",
+              "geometry_real_point2_d_i",
               "in"
             ]
           ]
@@ -155,7 +173,7 @@
           "args": [
             [
               "aPoint",
-              "RealPoint2D",
+              "geometry_real_point2_d_i",
               "in"
             ]
           ]
@@ -170,7 +188,7 @@
           "args": [
             [
               "xPolyPolygon",
-              "XPolyPolygon2D",
+              "x_poly_polygon2_d_i",
               "in"
             ]
           ]
@@ -185,7 +203,7 @@
           "args": [
             [
               "aRect",
-              "RealRectangle2D",
+              "geometry_real_rectangle2_d_i",
               "in"
             ]
           ]
@@ -200,12 +218,12 @@
           "args": [
             [
               "aText",
-              "StringContext",
+              "string_context_i",
               "in"
             ],
             [
               "aOutPos",
-              "RealPoint2D",
+              "geometry_real_point2_d_i",
               "in"
             ],
             [
@@ -217,7 +235,7 @@
         },
         {
           "name": "getCanvas",
-          "returns": "XCanvas",
+          "returns": "x_canvas_i",
           "desc": [
             "Query the underlying XCanvas."
           ],
@@ -226,7 +244,7 @@
         },
         {
           "name": "getCurrentClipRect",
-          "returns": "RealRectangle2D",
+          "returns": "geometry_real_rectangle2_d_i",
           "desc": [
             "Retrieve current clip rect."
           ],
@@ -235,7 +253,7 @@
         },
         {
           "name": "getCurrentFillColor",
-          "returns": "Color",
+          "returns": "util_color_i",
           "desc": [
             "Retrieve color currently used for fills."
           ],
@@ -244,7 +262,7 @@
         },
         {
           "name": "getCurrentFont",
-          "returns": "XCanvasFont",
+          "returns": "x_canvas_font_i",
           "desc": [
             "Retrieve currently selected font."
           ],
@@ -253,7 +271,7 @@
         },
         {
           "name": "getCurrentPenColor",
-          "returns": "Color",
+          "returns": "util_color_i",
           "desc": [
             "Retrieve color currently used for lines."
           ],
@@ -262,7 +280,7 @@
         },
         {
           "name": "getCurrentRenderState",
-          "returns": "RenderState",
+          "returns": "render_state_i",
           "desc": [
             "Retrieve render state."
           ],
@@ -277,7 +295,7 @@
         },
         {
           "name": "getCurrentTransformation",
-          "returns": "AffineMatrix2D",
+          "returns": "geometry_affine_matrix2_d_i",
           "desc": [
             "Retrieve current transformation matrix."
           ],
@@ -286,7 +304,7 @@
         },
         {
           "name": "getCurrentViewState",
-          "returns": "ViewState",
+          "returns": "view_state_i",
           "desc": [
             "Retrieve view state."
           ],
@@ -295,7 +313,7 @@
         },
         {
           "name": "getDevice",
-          "returns": "XGraphicDevice",
+          "returns": "x_graphic_device_i",
           "desc": [
             "Request the associated graphic device for this canvas.",
             "",
@@ -306,7 +324,7 @@
         },
         {
           "name": "getFontMetrics",
-          "returns": "FontMetrics",
+          "returns": "font_metrics_i",
           "desc": [
             "Request the font metrics of the current font."
           ],
@@ -357,7 +375,7 @@
           "args": [
             [
               "nsRgbaColor",
-              "Color",
+              "util_color_i",
               "in"
             ]
           ]
@@ -374,7 +392,7 @@
           "args": [
             [
               "nsRgbaColor",
-              "Color",
+              "util_color_i",
               "in"
             ]
           ]
@@ -389,7 +407,7 @@
           "args": [
             [
               "aRect",
-              "RealRectangle2D",
+              "geometry_real_rectangle2_d_i",
               "in"
             ]
           ]
@@ -404,7 +422,7 @@
           "args": [
             [
               "aTransform",
-              "AffineMatrix2D",
+              "geometry_affine_matrix2_d_i",
               "in"
             ]
           ]

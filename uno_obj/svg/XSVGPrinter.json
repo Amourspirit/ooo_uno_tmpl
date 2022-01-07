@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XSVGPrinter",
   "type": "interface",
   "namespace": "com.sun.star.svg",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,18 +16,23 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
         "..xml.sax.x_document_handler",
-        "XDocumentHandler"
+        "XDocumentHandler",
+        "xml_sax_x_document_handler_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
       "typing.List[int]",
-      "XDocumentHandler"
+      "xml_sax_x_document_handler_i"
     ],
     "typings": [
       "typing.List[int]"
@@ -75,7 +81,7 @@
           "args": [
             [
               "aHandler",
-              "XDocumentHandler",
+              "xml_sax_x_document_handler_i",
               "in"
             ],
             [

@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XIntrospectionAccess",
   "type": "interface",
   "namespace": "com.sun.star.beans",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,31 +16,37 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
         "..reflection.x_idl_method",
-        "XIdlMethod"
+        "XIdlMethod",
+        "reflection_x_idl_method_i"
       ],
       [
         ".property",
-        "Property"
+        "Property",
+        "property_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "typing.List[Property]",
+      "property_i",
       "typing.List[object]",
-      "XIdlMethod",
-      "Property",
-      "XInterface",
-      "typing.List[XIdlMethod]"
+      "typing.List[reflection_x_idl_method_i]",
+      "typing.List[property_i]",
+      "uno_x_interface_i",
+      "reflection_x_idl_method_i"
     ],
     "typings": [
-      "typing.List[XIdlMethod]",
-      "typing.List[Property]",
-      "typing.List[object]"
+      "typing.List[object]",
+      "typing.List[reflection_x_idl_method_i]",
+      "typing.List[property_i]"
     ],
     "requires_typing": true,
     "name": "XIntrospectionAccess",
@@ -62,7 +69,7 @@
       "methods": [
         {
           "name": "getMethod",
-          "returns": "XIdlMethod",
+          "returns": "reflection_x_idl_method_i",
           "desc": [
             "returns information about a method if a method with the demanded name exists and if it accords to one of the demanded MethodConcepts.",
             "",
@@ -86,7 +93,7 @@
         },
         {
           "name": "getMethods",
-          "returns": "typing.List[XIdlMethod]",
+          "returns": "typing.List[reflection_x_idl_method_i]",
           "desc": [
             "returns a sequence of methods of the introspected object."
           ],
@@ -101,7 +108,7 @@
         },
         {
           "name": "getProperties",
-          "returns": "typing.List[Property]",
+          "returns": "typing.List[property_i]",
           "desc": [
             "returns a sequence of properties of the introspected object"
           ],
@@ -116,7 +123,7 @@
         },
         {
           "name": "getProperty",
-          "returns": "Property",
+          "returns": "property_i",
           "desc": [
             "returns information about a property if a property with the demanded name exists and if it accords to one of the demanded PropertyConcepts.",
             "",
@@ -213,7 +220,7 @@
         },
         {
           "name": "queryAdapter",
-          "returns": "XInterface",
+          "returns": "uno_x_interface_i",
           "desc": [
             "creates an adapter that implements an interface with the specified type.",
             "",

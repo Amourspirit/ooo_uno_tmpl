@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XTextColumns",
   "type": "interface",
   "namespace": "com.sun.star.text",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,20 +16,25 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".text_column",
-        "TextColumn"
+        "TextColumn",
+        "text_column_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "typing.List[TextColumn]"
+      "typing.List[text_column_i]"
     ],
     "typings": [
-      "typing.List[TextColumn]"
+      "typing.List[text_column_i]"
     ],
     "requires_typing": true,
     "name": "XTextColumns",
@@ -54,7 +60,7 @@
         },
         {
           "name": "getColumns",
-          "returns": "typing.List[TextColumn]",
+          "returns": "typing.List[text_column_i]",
           "desc": [
             "returns the column description of the object."
           ],
@@ -99,7 +105,7 @@
           "args": [
             [
               "Columns",
-              "typing.List[TextColumn]",
+              "typing.List[text_column_i]",
               "in"
             ]
           ]

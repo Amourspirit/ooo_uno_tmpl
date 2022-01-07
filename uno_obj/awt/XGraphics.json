@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XGraphics",
   "type": "interface",
   "namespace": "com.sun.star.awt",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,59 +16,72 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
-        ".x_display_bitmap",
-        "XDisplayBitmap"
+        ".raster_operation",
+        "RasterOperation",
+        "raster_operation_i"
       ],
       [
         "..util.color",
-        "Color"
-      ],
-      [
-        ".x_font",
-        "XFont"
+        "Color",
+        "util_color_i"
       ],
       [
         ".x_region",
-        "XRegion"
-      ],
-      [
-        ".simple_font_metric",
-        "SimpleFontMetric"
-      ],
-      [
-        ".gradient",
-        "Gradient"
-      ],
-      [
-        ".raster_operation",
-        "RasterOperation"
+        "XRegion",
+        "x_region_i"
       ],
       [
         ".font_descriptor",
-        "FontDescriptor"
+        "FontDescriptor",
+        "font_descriptor_i"
       ],
       [
         ".x_device",
-        "XDevice"
+        "XDevice",
+        "x_device_i"
+      ],
+      [
+        ".x_display_bitmap",
+        "XDisplayBitmap",
+        "x_display_bitmap_i"
+      ],
+      [
+        ".x_font",
+        "XFont",
+        "x_font_i"
+      ],
+      [
+        ".simple_font_metric",
+        "SimpleFontMetric",
+        "simple_font_metric_i"
+      ],
+      [
+        ".gradient",
+        "Gradient",
+        "gradient_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "XFont",
-      "FontDescriptor",
-      "Gradient",
-      "XDevice",
-      "XRegion",
-      "XDisplayBitmap",
-      "SimpleFontMetric",
-      "typing.List[typing.List[int]]",
-      "Color",
+      "simple_font_metric_i",
+      "x_display_bitmap_i",
+      "font_descriptor_i",
+      "gradient_i",
+      "x_device_i",
       "typing.List[int]",
-      "RasterOperation"
+      "x_region_i",
+      "x_font_i",
+      "util_color_i",
+      "raster_operation_i",
+      "typing.List[typing.List[int]]"
     ],
     "typings": [
       "typing.List[int]",
@@ -96,7 +110,7 @@
           "args": [
             [
               "xSource",
-              "XDevice",
+              "x_device_i",
               "in"
             ],
             [
@@ -151,7 +165,7 @@
           "args": [
             [
               "xBitmapHandle",
-              "XDisplayBitmap",
+              "x_display_bitmap_i",
               "in"
             ],
             [
@@ -358,7 +372,7 @@
             ],
             [
               "aGradient",
-              "Gradient",
+              "gradient_i",
               "in"
             ]
           ]
@@ -650,7 +664,7 @@
         },
         {
           "name": "getDevice",
-          "returns": "XDevice",
+          "returns": "x_device_i",
           "desc": [
             "returns the device of this graphics."
           ],
@@ -659,7 +673,7 @@
         },
         {
           "name": "getFontMetric",
-          "returns": "SimpleFontMetric",
+          "returns": "simple_font_metric_i",
           "desc": [
             "returns the font metric of the current font."
           ],
@@ -676,7 +690,7 @@
           "args": [
             [
               "xClipping",
-              "XRegion",
+              "x_region_i",
               "in"
             ]
           ]
@@ -709,7 +723,7 @@
           "args": [
             [
               "aDescription",
-              "FontDescriptor",
+              "font_descriptor_i",
               "in"
             ]
           ]
@@ -724,7 +738,7 @@
           "args": [
             [
               "Clipping",
-              "XRegion",
+              "x_region_i",
               "in"
             ]
           ]
@@ -739,7 +753,7 @@
           "args": [
             [
               "nColor",
-              "Color",
+              "util_color_i",
               "in"
             ]
           ]
@@ -754,7 +768,7 @@
           "args": [
             [
               "xNewFont",
-              "XFont",
+              "x_font_i",
               "in"
             ]
           ]
@@ -769,7 +783,7 @@
           "args": [
             [
               "nColor",
-              "Color",
+              "util_color_i",
               "in"
             ]
           ]
@@ -786,7 +800,7 @@
           "args": [
             [
               "ROP",
-              "RasterOperation",
+              "raster_operation_i",
               "in"
             ]
           ]
@@ -801,7 +815,7 @@
           "args": [
             [
               "nColor",
-              "Color",
+              "util_color_i",
               "in"
             ]
           ]
@@ -816,7 +830,7 @@
           "args": [
             [
               "nColor",
-              "Color",
+              "util_color_i",
               "in"
             ]
           ]

@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XSheetCondition",
   "type": "interface",
   "namespace": "com.sun.star.sheet",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,22 +16,28 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
-        ".condition_operator",
-        "ConditionOperator"
+        "..table.cell_address",
+        "CellAddress",
+        "table_cell_address_i"
       ],
       [
-        "..table.cell_address",
-        "CellAddress"
+        ".condition_operator",
+        "ConditionOperator",
+        "condition_operator_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "ConditionOperator",
-      "CellAddress"
+      "table_cell_address_i",
+      "condition_operator_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -66,7 +73,7 @@
         },
         {
           "name": "getOperator",
-          "returns": "ConditionOperator",
+          "returns": "condition_operator_i",
           "desc": [
             "returns the operator in the condition."
           ],
@@ -75,7 +82,7 @@
         },
         {
           "name": "getSourcePosition",
-          "returns": "CellAddress",
+          "returns": "table_cell_address_i",
           "desc": [
             "returns the position in the document which is used as a base for relative references in the formulas."
           ],
@@ -122,7 +129,7 @@
           "args": [
             [
               "nOperator",
-              "ConditionOperator",
+              "condition_operator_i",
               "in"
             ]
           ]
@@ -137,7 +144,7 @@
           "args": [
             [
               "aSourcePosition",
-              "CellAddress",
+              "table_cell_address_i",
               "in"
             ]
           ]

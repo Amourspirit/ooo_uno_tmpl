@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XSheetCellRangeContainer",
   "type": "interface",
   "namespace": "com.sun.star.sheet",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,21 +16,26 @@
     "from_imports": [
       [
         ".x_sheet_cell_ranges",
-        "XSheetCellRanges"
+        "XSheetCellRanges",
+        "x_sheet_cell_ranges_i"
       ]
     ],
     "from_imports_typing": [
       [
         "..table.cell_range_address",
-        "CellRangeAddress"
+        "CellRangeAddress",
+        "table_cell_range_address_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.sheet.XSheetCellRanges": "x_sheet_cell_ranges_i"
+    },
     "quote": [
-      "typing.List[CellRangeAddress]",
-      "CellRangeAddress"
+      "typing.List[table_cell_range_address_i]",
+      "table_cell_range_address_i"
     ],
     "typings": [
-      "typing.List[CellRangeAddress]"
+      "typing.List[table_cell_range_address_i]"
     ],
     "requires_typing": true,
     "name": "XSheetCellRangeContainer",
@@ -54,7 +60,7 @@
           "args": [
             [
               "aCellRangeAddress",
-              "CellRangeAddress",
+              "table_cell_range_address_i",
               "in"
             ],
             [
@@ -74,7 +80,7 @@
           "args": [
             [
               "aCellRangeAddresses",
-              "typing.List[CellRangeAddress]",
+              "typing.List[table_cell_range_address_i]",
               "in"
             ],
             [
@@ -98,7 +104,7 @@
           "args": [
             [
               "aCellRangeAddress",
-              "CellRangeAddress",
+              "table_cell_range_address_i",
               "in"
             ]
           ]
@@ -117,7 +123,7 @@
           "args": [
             [
               "aCellRangeAddresses",
-              "typing.List[CellRangeAddress]",
+              "typing.List[table_cell_range_address_i]",
               "in"
             ]
           ]

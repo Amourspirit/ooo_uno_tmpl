@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XControl",
   "type": "interface",
   "namespace": "com.sun.star.awt",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,37 +16,46 @@
     "from_imports": [
       [
         "..lang.x_component",
-        "XComponent"
+        "XComponent",
+        "lang_x_component_i"
       ]
     ],
     "from_imports_typing": [
       [
-        "..uno.x_interface",
-        "XInterface"
-      ],
-      [
-        ".x_view",
-        "XView"
-      ],
-      [
         ".x_control_model",
-        "XControlModel"
+        "XControlModel",
+        "x_control_model_i"
       ],
       [
         ".x_window_peer",
-        "XWindowPeer"
+        "XWindowPeer",
+        "x_window_peer_i"
+      ],
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "uno_x_interface_i"
       ],
       [
         ".x_toolkit",
-        "XToolkit"
+        "XToolkit",
+        "x_toolkit_i"
+      ],
+      [
+        ".x_view",
+        "XView",
+        "x_view_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.lang.XComponent": "lang_x_component_i"
+    },
     "quote": [
-      "XWindowPeer",
-      "XInterface",
-      "XToolkit",
-      "XView",
-      "XControlModel"
+      "x_control_model_i",
+      "x_toolkit_i",
+      "x_view_i",
+      "uno_x_interface_i",
+      "x_window_peer_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -77,19 +87,19 @@
           "args": [
             [
               "Toolkit",
-              "XToolkit",
+              "x_toolkit_i",
               "in"
             ],
             [
               "Parent",
-              "XWindowPeer",
+              "x_window_peer_i",
               "in"
             ]
           ]
         },
         {
           "name": "getContext",
-          "returns": "XInterface",
+          "returns": "uno_x_interface_i",
           "desc": [
             "gets the context of the control."
           ],
@@ -98,7 +108,7 @@
         },
         {
           "name": "getModel",
-          "returns": "XControlModel",
+          "returns": "x_control_model_i",
           "desc": [
             "returns the model for this control."
           ],
@@ -107,7 +117,7 @@
         },
         {
           "name": "getPeer",
-          "returns": "XWindowPeer",
+          "returns": "x_window_peer_i",
           "desc": [
             "returns the peer which was previously created or set."
           ],
@@ -116,7 +126,7 @@
         },
         {
           "name": "getView",
-          "returns": "XView",
+          "returns": "x_view_i",
           "desc": [
             "returns the view of this control."
           ],
@@ -151,7 +161,7 @@
           "args": [
             [
               "Context",
-              "XInterface",
+              "uno_x_interface_i",
               "in"
             ]
           ]
@@ -183,7 +193,7 @@
           "args": [
             [
               "Model",
-              "XControlModel",
+              "x_control_model_i",
               "in"
             ]
           ]

@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XMouseEvent",
   "type": "interface",
   "namespace": "com.sun.star.xml.dom.events",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,22 +16,28 @@
     "from_imports": [
       [
         ".xui_event",
-        "XUIEvent"
+        "XUIEvent",
+        "xui_event_i"
       ]
     ],
     "from_imports_typing": [
       [
         "..views.x_abstract_view",
-        "XAbstractView"
+        "XAbstractView",
+        "views_x_abstract_view_i"
       ],
       [
         ".x_event_target",
-        "XEventTarget"
+        "XEventTarget",
+        "x_event_target_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.xml.dom.events.XUIEvent": "xui_event_i"
+    },
     "quote": [
-      "XAbstractView",
-      "XEventTarget"
+      "views_x_abstract_view_i",
+      "x_event_target_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -88,7 +95,7 @@
         },
         {
           "name": "getRelatedTarget",
-          "returns": "XEventTarget",
+          "returns": "x_event_target_i",
           "desc": [],
           "raises": [],
           "args": []
@@ -137,7 +144,7 @@
             ],
             [
               "viewArg",
-              "XAbstractView",
+              "views_x_abstract_view_i",
               "in"
             ],
             [
@@ -192,7 +199,7 @@
             ],
             [
               "relatedTargetArg",
-              "XEventTarget",
+              "x_event_target_i",
               "in"
             ]
           ]

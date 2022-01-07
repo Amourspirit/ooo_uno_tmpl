@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XDataPilotFieldGrouping",
   "type": "interface",
   "namespace": "com.sun.star.sheet",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,23 +16,29 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
-        ".data_pilot_field_group_info",
-        "DataPilotFieldGroupInfo"
+        ".x_data_pilot_field",
+        "XDataPilotField",
+        "x_data_pilot_field_i"
       ],
       [
-        ".x_data_pilot_field",
-        "XDataPilotField"
+        ".data_pilot_field_group_info",
+        "DataPilotFieldGroupInfo",
+        "data_pilot_field_group_info_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "typing.List[str]",
-      "DataPilotFieldGroupInfo",
-      "XDataPilotField"
+      "data_pilot_field_group_info_i",
+      "x_data_pilot_field_i",
+      "typing.List[str]"
     ],
     "typings": [
       "typing.List[str]"
@@ -51,7 +58,7 @@
       "methods": [
         {
           "name": "createDateGroup",
-          "returns": "XDataPilotField",
+          "returns": "x_data_pilot_field_i",
           "desc": [
             "Groups the members of this field by dates, according to the passed settings.",
             "",
@@ -63,14 +70,14 @@
           "args": [
             [
               "aInfo",
-              "DataPilotFieldGroupInfo",
+              "data_pilot_field_group_info_i",
               "in"
             ]
           ]
         },
         {
           "name": "createNameGroup",
-          "returns": "XDataPilotField",
+          "returns": "x_data_pilot_field_i",
           "desc": [
             "Creates a new DataPilot field which contains a group containing the given DataPilot field items (members).",
             "",

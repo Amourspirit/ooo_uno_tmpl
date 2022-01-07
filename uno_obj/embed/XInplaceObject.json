@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XInplaceObject",
   "type": "interface",
   "namespace": "com.sun.star.embed",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,25 +16,31 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
         "..awt.key_event",
-        "KeyEvent"
+        "KeyEvent",
+        "awt_key_event_i"
       ],
       [
         "..awt.rectangle",
-        "Rectangle"
+        "Rectangle",
+        "awt_rectangle_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "Rectangle",
-      "typing.List[KeyEvent]"
+      "typing.List[awt_key_event_i]",
+      "awt_rectangle_i"
     ],
     "typings": [
-      "typing.List[KeyEvent]"
+      "typing.List[awt_key_event_i]"
     ],
     "requires_typing": true,
     "name": "XInplaceObject",
@@ -85,12 +92,12 @@
           "args": [
             [
               "aPosRect",
-              "Rectangle",
+              "awt_rectangle_i",
               "in"
             ],
             [
               "aClipRect",
-              "Rectangle",
+              "awt_rectangle_i",
               "in"
             ]
           ]
@@ -107,7 +114,7 @@
           "args": [
             [
               "aKeys",
-              "typing.List[KeyEvent]",
+              "typing.List[awt_key_event_i]",
               "in"
             ]
           ]

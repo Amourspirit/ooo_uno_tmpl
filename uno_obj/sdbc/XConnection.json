@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XConnection",
   "type": "interface",
   "namespace": "com.sun.star.sdbc",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,32 +16,40 @@
     "from_imports": [
       [
         ".x_closeable",
-        "XCloseable"
+        "XCloseable",
+        "x_closeable_i"
       ]
     ],
     "from_imports_typing": [
       [
-        ".x_statement",
-        "XStatement"
+        ".x_prepared_statement",
+        "XPreparedStatement",
+        "x_prepared_statement_i"
       ],
       [
         "..container.x_name_access",
-        "XNameAccess"
+        "XNameAccess",
+        "container_x_name_access_i"
+      ],
+      [
+        ".x_statement",
+        "XStatement",
+        "x_statement_i"
       ],
       [
         ".x_database_meta_data",
-        "XDatabaseMetaData"
-      ],
-      [
-        ".x_prepared_statement",
-        "XPreparedStatement"
+        "XDatabaseMetaData",
+        "x_database_meta_data_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.sdbc.XCloseable": "x_closeable_i"
+    },
     "quote": [
-      "XDatabaseMetaData",
-      "XNameAccess",
-      "XPreparedStatement",
-      "XStatement"
+      "container_x_name_access_i",
+      "x_database_meta_data_i",
+      "x_statement_i",
+      "x_prepared_statement_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -75,7 +84,7 @@
         },
         {
           "name": "createStatement",
-          "returns": "XStatement",
+          "returns": "x_statement_i",
           "desc": [
             "creates a new com.sun.star.sdbc.Statement object for sending SQL statements to the database.",
             "",
@@ -114,7 +123,7 @@
         },
         {
           "name": "getMetaData",
-          "returns": "XDatabaseMetaData",
+          "returns": "x_database_meta_data_i",
           "desc": [
             "gets the metadata regarding this connection's database.",
             "",
@@ -138,7 +147,7 @@
         },
         {
           "name": "getTypeMap",
-          "returns": "XNameAccess",
+          "returns": "container_x_name_access_i",
           "desc": [
             "gets the type map object associated with this connection.",
             "",
@@ -196,7 +205,7 @@
         },
         {
           "name": "prepareCall",
-          "returns": "XPreparedStatement",
+          "returns": "x_prepared_statement_i",
           "desc": [
             "creates a com.sun.star.sdbc.CallableStatement object for calling database stored procedures.",
             "",
@@ -218,7 +227,7 @@
         },
         {
           "name": "prepareStatement",
-          "returns": "XPreparedStatement",
+          "returns": "x_prepared_statement_i",
           "desc": [
             "creates a com.sun.star.sdbc.PreparedStatement object for sending parameterized SQL statements to the database.",
             "",
@@ -350,7 +359,7 @@
           "args": [
             [
               "typeMap",
-              "XNameAccess",
+              "container_x_name_access_i",
               "in"
             ]
           ]

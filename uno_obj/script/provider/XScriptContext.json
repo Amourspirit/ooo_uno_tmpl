@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XScriptContext",
   "type": "interface",
   "namespace": "com.sun.star.script.provider",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,32 +16,40 @@
     "from_imports": [
       [
         "...uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
         "...frame.x_model",
-        "XModel"
+        "XModel",
+        "frame_x_model_i"
       ],
       [
         "...frame.x_desktop",
-        "XDesktop"
+        "XDesktop",
+        "frame_x_desktop_i"
       ],
       [
         "...document.x_script_invocation_context",
-        "XScriptInvocationContext"
+        "XScriptInvocationContext",
+        "document_x_script_invocation_context_i"
       ],
       [
         "...uno.x_component_context",
-        "XComponentContext"
+        "XComponentContext",
+        "uno_x_component_context_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "XComponentContext",
-      "XModel",
-      "XDesktop",
-      "XScriptInvocationContext"
+      "uno_x_component_context_i",
+      "frame_x_model_i",
+      "document_x_script_invocation_context_i",
+      "frame_x_desktop_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -64,7 +73,7 @@
       "methods": [
         {
           "name": "getComponentContext",
-          "returns": "XComponentContext",
+          "returns": "uno_x_component_context_i",
           "desc": [
             "Obtain the component context which the script can use to create other uno components."
           ],
@@ -73,7 +82,7 @@
         },
         {
           "name": "getDesktop",
-          "returns": "XDesktop",
+          "returns": "frame_x_desktop_i",
           "desc": [
             "Obtain the desktop reference on which the script can operate."
           ],
@@ -82,7 +91,7 @@
         },
         {
           "name": "getDocument",
-          "returns": "XModel",
+          "returns": "frame_x_model_i",
           "desc": [
             "Obtain the document reference on which the script can operate."
           ],
@@ -91,7 +100,7 @@
         },
         {
           "name": "getInvocationContext",
-          "returns": "XScriptInvocationContext",
+          "returns": "document_x_script_invocation_context_i",
           "desc": [
             "provides access to the context where the script was invoked",
             "",

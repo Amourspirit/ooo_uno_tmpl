@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XChainable",
   "type": "interface",
   "namespace": "com.sun.star.util",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,17 +16,22 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_chainable",
-        "XChainable"
+        "XChainable",
+        "x_chainable_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "XChainable"
+      "x_chainable_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -43,14 +49,14 @@
       "methods": [
         {
           "name": "getPredecessor",
-          "returns": "XChainable",
+          "returns": "x_chainable_i",
           "desc": [],
           "raises": [],
           "args": []
         },
         {
           "name": "getSuccessor",
-          "returns": "XChainable",
+          "returns": "x_chainable_i",
           "desc": [],
           "raises": [],
           "args": []
@@ -65,7 +71,7 @@
           "args": [
             [
               "xChainable",
-              "XChainable",
+              "x_chainable_i",
               "in"
             ]
           ]
@@ -84,7 +90,7 @@
           "args": [
             [
               "xChainable",
-              "XChainable",
+              "x_chainable_i",
               "in"
             ]
           ]

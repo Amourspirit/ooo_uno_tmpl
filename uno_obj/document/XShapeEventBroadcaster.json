@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XShapeEventBroadcaster",
   "type": "interface",
   "namespace": "com.sun.star.document",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,22 +16,28 @@
     "from_imports": [
       [
         ".x_event_broadcaster",
-        "XEventBroadcaster"
+        "XEventBroadcaster",
+        "x_event_broadcaster_i"
       ]
     ],
     "from_imports_typing": [
       [
-        ".x_shape_event_listener",
-        "XShapeEventListener"
+        "..drawing.x_shape",
+        "XShape",
+        "drawing_x_shape_i"
       ],
       [
-        "..drawing.x_shape",
-        "XShape"
+        ".x_shape_event_listener",
+        "XShapeEventListener",
+        "x_shape_event_listener_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.document.XEventBroadcaster": "x_event_broadcaster_i"
+    },
     "quote": [
-      "XShapeEventListener",
-      "XShape"
+      "x_shape_event_listener_i",
+      "drawing_x_shape_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -60,12 +67,12 @@
           "args": [
             [
               "Shape",
-              "XShape",
+              "drawing_x_shape_i",
               "in"
             ],
             [
               "Listener",
-              "XShapeEventListener",
+              "x_shape_event_listener_i",
               "in"
             ]
           ]
@@ -80,12 +87,12 @@
           "args": [
             [
               "Shape",
-              "XShape",
+              "drawing_x_shape_i",
               "in"
             ],
             [
               "Listener",
-              "XShapeEventListener",
+              "x_shape_event_listener_i",
               "in"
             ]
           ]

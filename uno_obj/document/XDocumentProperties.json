@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XDocumentProperties",
   "type": "interface",
   "namespace": "com.sun.star.document",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,43 +16,50 @@
     "from_imports": [],
     "from_imports_typing": [
       [
-        "..lang.locale",
-        "Locale"
-      ],
-      [
         "..embed.x_storage",
-        "XStorage"
-      ],
-      [
-        "..beans.named_value",
-        "NamedValue"
-      ],
-      [
-        "..util.date_time",
-        "DateTime"
+        "XStorage",
+        "embed_x_storage_i"
       ],
       [
         "..beans.x_property_container",
-        "XPropertyContainer"
+        "XPropertyContainer",
+        "beans_x_property_container_i"
+      ],
+      [
+        "..util.date_time",
+        "DateTime",
+        "util_date_time_i"
+      ],
+      [
+        "..lang.locale",
+        "Locale",
+        "lang_locale_i"
       ],
       [
         "..beans.property_value",
-        "PropertyValue"
+        "PropertyValue",
+        "beans_property_value_i"
+      ],
+      [
+        "..beans.named_value",
+        "NamedValue",
+        "beans_named_value_i"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "XStorage",
-      "typing.List[str]",
-      "XPropertyContainer",
-      "typing.List[PropertyValue]",
-      "Locale",
-      "typing.List[NamedValue]",
-      "DateTime"
+      "util_date_time_i",
+      "beans_x_property_container_i",
+      "embed_x_storage_i",
+      "typing.List[beans_property_value_i]",
+      "typing.List[beans_named_value_i]",
+      "lang_locale_i",
+      "typing.List[str]"
     ],
     "typings": [
+      "typing.List[beans_named_value_i]",
       "typing.List[str]",
-      "typing.List[NamedValue]",
-      "typing.List[PropertyValue]"
+      "typing.List[beans_property_value_i]"
     ],
     "requires_typing": true,
     "name": "XDocumentProperties",
@@ -72,7 +80,7 @@
       "methods": [
         {
           "name": "getUserDefinedProperties",
-          "returns": "XPropertyContainer",
+          "returns": "beans_x_property_container_i",
           "desc": [
             "provides access to a container for user-defined properties.",
             "",
@@ -102,7 +110,7 @@
             ],
             [
               "Medium",
-              "typing.List[PropertyValue]",
+              "typing.List[beans_property_value_i]",
               "in"
             ]
           ]
@@ -126,12 +134,12 @@
           "args": [
             [
               "Storage",
-              "XStorage",
+              "embed_x_storage_i",
               "in"
             ],
             [
               "Medium",
-              "typing.List[PropertyValue]",
+              "typing.List[beans_property_value_i]",
               "in"
             ]
           ]
@@ -173,7 +181,7 @@
             ],
             [
               "Medium",
-              "typing.List[PropertyValue]",
+              "typing.List[beans_property_value_i]",
               "in"
             ]
           ]
@@ -196,12 +204,12 @@
           "args": [
             [
               "Storage",
-              "XStorage",
+              "embed_x_storage_i",
               "in"
             ],
             [
               "Medium",
-              "typing.List[PropertyValue]",
+              "typing.List[beans_property_value_i]",
               "in"
             ]
           ]
@@ -210,7 +218,7 @@
       "types": [
         {
           "name": "DocumentStatistics",
-          "returns": "typing.List[NamedValue]",
+          "returns": "typing.List[beans_named_value_i]",
           "desc": [
             "contains some statistics about the document.",
             "",
@@ -263,7 +271,7 @@
         },
         {
           "name": "CreationDate",
-          "returns": "DateTime",
+          "returns": "util_date_time_i",
           "desc": [
             "contains the date and time when the document was created."
           ],
@@ -323,7 +331,7 @@
         },
         {
           "name": "Language",
-          "returns": "Locale",
+          "returns": "lang_locale_i",
           "desc": [
             "contains the default language of the document."
           ],
@@ -332,7 +340,7 @@
         },
         {
           "name": "ModificationDate",
-          "returns": "DateTime",
+          "returns": "util_date_time_i",
           "desc": [
             "contains the date and time of the last time the document was stored.",
             "",
@@ -352,7 +360,7 @@
         },
         {
           "name": "PrintDate",
-          "returns": "DateTime",
+          "returns": "util_date_time_i",
           "desc": [
             "contains the date and time when the document was last printed.",
             "",
@@ -381,7 +389,7 @@
         },
         {
           "name": "TemplateDate",
-          "returns": "DateTime",
+          "returns": "util_date_time_i",
           "desc": [
             "contains the date and time of when the document was created or updated from the template."
           ],

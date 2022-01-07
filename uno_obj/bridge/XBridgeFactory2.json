@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XBridgeFactory2",
   "type": "interface",
   "namespace": "com.sun.star.bridge",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,15 +15,21 @@
   "data": {
     "from_imports": [
       [
-        "..lang.x_component",
-        "XComponent"
+        ".x_bridge_factory",
+        "XBridgeFactory",
+        "x_bridge_factory_i"
       ],
       [
-        ".x_bridge_factory",
-        "XBridgeFactory"
+        "..lang.x_component",
+        "XComponent",
+        "lang_x_component_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.bridge.XBridgeFactory": "x_bridge_factory_i",
+      "com.sun.star.lang.XComponent": "lang_x_component_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,

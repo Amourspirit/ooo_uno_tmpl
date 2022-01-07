@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XTextSearch2",
   "type": "interface",
   "namespace": "com.sun.star.util",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,17 +16,22 @@
     "from_imports": [
       [
         ".x_text_search",
-        "XTextSearch"
+        "XTextSearch",
+        "x_text_search_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".search_options2",
-        "SearchOptions2"
+        "SearchOptions2",
+        "search_options2_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.util.XTextSearch": "x_text_search_i"
+    },
     "quote": [
-      "SearchOptions2"
+      "search_options2_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -57,7 +63,7 @@
           "args": [
             [
               "options",
-              "SearchOptions2",
+              "search_options2_i",
               "in"
             ]
           ]

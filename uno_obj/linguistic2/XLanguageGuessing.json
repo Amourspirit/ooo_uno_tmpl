@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XLanguageGuessing",
   "type": "interface",
   "namespace": "com.sun.star.linguistic2",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -16,15 +17,17 @@
     "from_imports_typing": [
       [
         "..lang.locale",
-        "Locale"
+        "Locale",
+        "lang_locale_i"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "typing.List[Locale]",
-      "Locale"
+      "lang_locale_i",
+      "typing.List[lang_locale_i]"
     ],
     "typings": [
-      "typing.List[Locale]"
+      "typing.List[lang_locale_i]"
     ],
     "requires_typing": true,
     "name": "XLanguageGuessing",
@@ -57,7 +60,7 @@
           "args": [
             [
               "aLanguages",
-              "typing.List[Locale]",
+              "typing.List[lang_locale_i]",
               "in"
             ]
           ]
@@ -76,14 +79,14 @@
           "args": [
             [
               "aLanguages",
-              "typing.List[Locale]",
+              "typing.List[lang_locale_i]",
               "in"
             ]
           ]
         },
         {
           "name": "getAvailableLanguages",
-          "returns": "typing.List[Locale]",
+          "returns": "typing.List[lang_locale_i]",
           "desc": [
             "returns a list of all supported languages.",
             "",
@@ -94,7 +97,7 @@
         },
         {
           "name": "getDisabledLanguages",
-          "returns": "typing.List[Locale]",
+          "returns": "typing.List[lang_locale_i]",
           "desc": [
             "returns the list of all disabled languages"
           ],
@@ -103,7 +106,7 @@
         },
         {
           "name": "getEnabledLanguages",
-          "returns": "typing.List[Locale]",
+          "returns": "typing.List[lang_locale_i]",
           "desc": [
             "returns the list of all enabled languages"
           ],
@@ -112,7 +115,7 @@
         },
         {
           "name": "guessPrimaryLanguage",
-          "returns": "Locale",
+          "returns": "lang_locale_i",
           "desc": [
             "determines the single most probable language of a sub-string.",
             "",

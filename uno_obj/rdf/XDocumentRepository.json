@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XDocumentRepository",
   "type": "interface",
   "namespace": "com.sun.star.rdf",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,41 +16,50 @@
     "from_imports": [
       [
         ".x_repository",
-        "XRepository"
+        "XRepository",
+        "x_repository_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_node",
-        "XNode"
-      ],
-      [
-        ".x_resource",
-        "XResource"
-      ],
-      [
-        "..container.x_enumeration",
-        "XEnumeration"
+        "XNode",
+        "x_node_i"
       ],
       [
         ".x_metadatable",
-        "XMetadatable"
+        "XMetadatable",
+        "x_metadatable_i"
+      ],
+      [
+        ".x_resource",
+        "XResource",
+        "x_resource_i"
+      ],
+      [
+        "..container.x_enumeration",
+        "XEnumeration",
+        "container_x_enumeration_i"
       ],
       [
         ".xuri",
-        "XURI"
+        "XURI",
+        "xuri_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.rdf.XRepository": "x_repository_i"
+    },
     "quote": [
-      "XEnumeration",
-      "XNode",
-      "XResource",
-      "XMetadatable",
-      "typing.List[XURI]",
-      "XURI"
+      "xuri_i",
+      "x_node_i",
+      "x_resource_i",
+      "typing.List[xuri_i]",
+      "x_metadatable_i",
+      "container_x_enumeration_i"
     ],
     "typings": [
-      "typing.List[XURI]"
+      "typing.List[xuri_i]"
     ],
     "requires_typing": true,
     "name": "XDocumentRepository",
@@ -83,14 +93,14 @@
           "args": [
             [
               "Element",
-              "XMetadatable",
+              "x_metadatable_i",
               "in"
             ]
           ]
         },
         {
           "name": "getStatementsRDFa",
-          "returns": "XEnumeration",
+          "returns": "container_x_enumeration_i",
           "desc": [
             "gets matching RDFa statements from the repository.",
             "",
@@ -104,17 +114,17 @@
           "args": [
             [
               "Subject",
-              "XResource",
+              "x_resource_i",
               "in"
             ],
             [
               "Predicate",
-              "XURI",
+              "xuri_i",
               "in"
             ],
             [
               "Object",
-              "XNode",
+              "x_node_i",
               "in"
             ]
           ]
@@ -134,7 +144,7 @@
           "args": [
             [
               "Element",
-              "XMetadatable",
+              "x_metadatable_i",
               "in"
             ]
           ]
@@ -156,17 +166,17 @@
           "args": [
             [
               "Subject",
-              "XResource",
+              "x_resource_i",
               "in"
             ],
             [
               "Predicates",
-              "typing.List[XURI]",
+              "typing.List[xuri_i]",
               "in"
             ],
             [
               "Object",
-              "XMetadatable",
+              "x_metadatable_i",
               "in"
             ],
             [
@@ -176,7 +186,7 @@
             ],
             [
               "RDFaDatatype",
-              "XURI",
+              "xuri_i",
               "in"
             ]
           ]

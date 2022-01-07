@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XAccessibleText",
   "type": "interface",
   "namespace": "com.sun.star.accessibility",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,42 +16,51 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
-        "..awt.point",
-        "Point"
-      ],
-      [
-        "..awt.rectangle",
-        "Rectangle"
+        ".accessible_scroll_type",
+        "AccessibleScrollType",
+        "accessible_scroll_type_i"
       ],
       [
         ".text_segment",
-        "TextSegment"
+        "TextSegment",
+        "text_segment_i"
+      ],
+      [
+        "..awt.point",
+        "Point",
+        "awt_point_i"
       ],
       [
         "..beans.property_value",
-        "PropertyValue"
+        "PropertyValue",
+        "beans_property_value_i"
       ],
       [
-        ".accessible_scroll_type",
-        "AccessibleScrollType"
+        "..awt.rectangle",
+        "Rectangle",
+        "awt_rectangle_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "typing.List[str]",
-      "Rectangle",
-      "typing.List[PropertyValue]",
-      "Point",
-      "AccessibleScrollType",
-      "TextSegment"
+      "awt_point_i",
+      "awt_rectangle_i",
+      "text_segment_i",
+      "typing.List[beans_property_value_i]",
+      "accessible_scroll_type_i",
+      "typing.List[str]"
     ],
     "typings": [
       "typing.List[str]",
-      "typing.List[PropertyValue]"
+      "typing.List[beans_property_value_i]"
     ],
     "requires_typing": true,
     "name": "XAccessibleText",
@@ -133,7 +143,7 @@
         },
         {
           "name": "getCharacterAttributes",
-          "returns": "typing.List[PropertyValue]",
+          "returns": "typing.List[beans_property_value_i]",
           "desc": [
             "Get the attribute set for the specified position.",
             "",
@@ -160,7 +170,7 @@
         },
         {
           "name": "getCharacterBounds",
-          "returns": "Rectangle",
+          "returns": "awt_rectangle_i",
           "desc": [
             "Return the bounding box of the specified position.",
             "",
@@ -203,7 +213,7 @@
           "args": [
             [
               "aPoint",
-              "Point",
+              "awt_point_i",
               "in"
             ]
           ]
@@ -254,7 +264,7 @@
         },
         {
           "name": "getTextAtIndex",
-          "returns": "TextSegment",
+          "returns": "text_segment_i",
           "desc": [
             "Get a text portion around the given position.",
             "",
@@ -279,7 +289,7 @@
         },
         {
           "name": "getTextBeforeIndex",
-          "returns": "TextSegment",
+          "returns": "text_segment_i",
           "desc": [
             "Get a text portion before the given position.",
             "",
@@ -308,7 +318,7 @@
         },
         {
           "name": "getTextBehindIndex",
-          "returns": "TextSegment",
+          "returns": "text_segment_i",
           "desc": [
             "Get a text portion behind the given position.",
             "",
@@ -389,7 +399,7 @@
             ],
             [
               "aScrollType",
-              "AccessibleScrollType",
+              "accessible_scroll_type_i",
               "in"
             ]
           ]

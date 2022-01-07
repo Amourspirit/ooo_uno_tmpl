@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XUndoManagerSupplier",
   "type": "interface",
   "namespace": "com.sun.star.document",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -16,11 +17,13 @@
     "from_imports_typing": [
       [
         ".x_undo_manager",
-        "XUndoManager"
+        "XUndoManager",
+        "x_undo_manager_i"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "XUndoManager"
+      "x_undo_manager_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -40,7 +43,7 @@
       "methods": [
         {
           "name": "getUndoManager",
-          "returns": "XUndoManager",
+          "returns": "x_undo_manager_i",
           "desc": [
             "returns the Undo manager associated with the component."
           ],

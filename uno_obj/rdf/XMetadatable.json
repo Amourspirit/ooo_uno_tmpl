@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XMetadatable",
   "type": "interface",
   "namespace": "com.sun.star.rdf",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,17 +16,22 @@
     "from_imports": [
       [
         ".xuri",
-        "XURI"
+        "XURI",
+        "xuri_i"
       ]
     ],
     "from_imports_typing": [
       [
         "..beans.string_pair",
-        "StringPair"
+        "StringPair",
+        "beans_string_pair_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.rdf.XURI": "xuri_i"
+    },
     "quote": [
-      "StringPair"
+      "beans_string_pair_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -64,7 +70,7 @@
       "properties": [
         {
           "name": "MetadataReference",
-          "returns": "StringPair",
+          "returns": "beans_string_pair_i",
           "desc": [
             "a metadata reference, comprising the stream name and the XML ID.",
             "",

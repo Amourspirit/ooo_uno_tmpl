@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XSubmit",
   "type": "interface",
   "namespace": "com.sun.star.form",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,27 +16,34 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
         "..awt.mouse_event",
-        "MouseEvent"
-      ],
-      [
-        ".x_submit_listener",
-        "XSubmitListener"
+        "MouseEvent",
+        "awt_mouse_event_i"
       ],
       [
         "..awt.x_control",
-        "XControl"
+        "XControl",
+        "awt_x_control_i"
+      ],
+      [
+        ".x_submit_listener",
+        "XSubmitListener",
+        "x_submit_listener_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "MouseEvent",
-      "XSubmitListener",
-      "XControl"
+      "awt_mouse_event_i",
+      "awt_x_control_i",
+      "x_submit_listener_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -65,7 +73,7 @@
           "args": [
             [
               "aListener",
-              "XSubmitListener",
+              "x_submit_listener_i",
               "in"
             ]
           ]
@@ -80,7 +88,7 @@
           "args": [
             [
               "aListener",
-              "XSubmitListener",
+              "x_submit_listener_i",
               "in"
             ]
           ]
@@ -95,12 +103,12 @@
           "args": [
             [
               "aControl",
-              "XControl",
+              "awt_x_control_i",
               "in"
             ],
             [
               "aMouseEvt",
-              "MouseEvent",
+              "awt_mouse_event_i",
               "in"
             ]
           ]

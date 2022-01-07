@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XResourceFactoryManager",
   "type": "interface",
   "namespace": "com.sun.star.drawing.framework",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -16,11 +17,13 @@
     "from_imports_typing": [
       [
         ".x_resource_factory",
-        "XResourceFactory"
+        "XResourceFactory",
+        "x_resource_factory_i"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "XResourceFactory"
+      "x_resource_factory_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -51,14 +54,14 @@
             ],
             [
               "xResourceFactory",
-              "XResourceFactory",
+              "x_resource_factory_i",
               "in"
             ]
           ]
         },
         {
           "name": "getResourceFactory",
-          "returns": "XResourceFactory",
+          "returns": "x_resource_factory_i",
           "desc": [
             "Return the resource factory that was previously registered for the given resource type.",
             "",
@@ -85,7 +88,7 @@
           "args": [
             [
               "xResourceFactory",
-              "XResourceFactory",
+              "x_resource_factory_i",
               "in"
             ]
           ]

@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XPane2",
   "type": "interface",
   "namespace": "com.sun.star.drawing.framework",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -16,11 +17,13 @@
     "from_imports_typing": [
       [
         "...accessibility.x_accessible",
-        "XAccessible"
+        "XAccessible",
+        "accessibility_x_accessible_i"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "XAccessible"
+      "accessibility_x_accessible_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -38,7 +41,7 @@
       "methods": [
         {
           "name": "getAccessible",
-          "returns": "XAccessible",
+          "returns": "accessibility_x_accessible_i",
           "desc": [
             "Return the accessibility object that is currently associated with the windows that implement the pane."
           ],
@@ -66,7 +69,7 @@
           "args": [
             [
               "xAccessible",
-              "XAccessible",
+              "accessibility_x_accessible_i",
               "in"
             ]
           ]

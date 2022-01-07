@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XFastShapeContextHandler",
   "type": "interface",
   "namespace": "com.sun.star.xml.sax",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,50 +16,61 @@
     "from_imports": [
       [
         ".x_fast_context_handler",
-        "XFastContextHandler"
+        "XFastContextHandler",
+        "x_fast_context_handler_i"
       ]
     ],
     "from_imports_typing": [
       [
-        "...awt.point",
-        "Point"
-      ],
-      [
         "...frame.x_model",
-        "XModel"
-      ],
-      [
-        "...document.x_document_properties",
-        "XDocumentProperties"
-      ],
-      [
-        "...drawing.x_draw_page",
-        "XDrawPage"
-      ],
-      [
-        "...drawing.x_shape",
-        "XShape"
+        "XModel",
+        "frame_x_model_i"
       ],
       [
         "...graphic.x_graphic_mapper",
-        "XGraphicMapper"
+        "XGraphicMapper",
+        "graphic_x_graphic_mapper_i"
+      ],
+      [
+        "...drawing.x_draw_page",
+        "XDrawPage",
+        "drawing_x_draw_page_i"
+      ],
+      [
+        "...drawing.x_shape",
+        "XShape",
+        "drawing_x_shape_i"
+      ],
+      [
+        "...document.x_document_properties",
+        "XDocumentProperties",
+        "document_x_document_properties_i"
+      ],
+      [
+        "...awt.point",
+        "Point",
+        "awt_point_i"
       ],
       [
         "...beans.property_value",
-        "PropertyValue"
+        "PropertyValue",
+        "beans_property_value_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.xml.sax.XFastContextHandler": "x_fast_context_handler_i"
+    },
     "quote": [
-      "XDocumentProperties",
-      "XShape",
-      "typing.List[PropertyValue]",
-      "Point",
-      "XGraphicMapper",
-      "XModel",
-      "XDrawPage"
+      "document_x_document_properties_i",
+      "frame_x_model_i",
+      "graphic_x_graphic_mapper_i",
+      "awt_point_i",
+      "drawing_x_draw_page_i",
+      "typing.List[beans_property_value_i]",
+      "drawing_x_shape_i"
     ],
     "typings": [
-      "typing.List[PropertyValue]"
+      "typing.List[beans_property_value_i]"
     ],
     "requires_typing": true,
     "name": "XFastShapeContextHandler",
@@ -93,7 +105,7 @@
           "args": [
             [
               "xGraphicMapper",
-              "XGraphicMapper",
+              "graphic_x_graphic_mapper_i",
               "in"
             ]
           ]
@@ -102,7 +114,7 @@
       "types": [
         {
           "name": "MediaDescriptor",
-          "returns": "typing.List[PropertyValue]",
+          "returns": "typing.List[beans_property_value_i]",
           "desc": [],
           "raises_get": "",
           "raises_set": ""
@@ -111,28 +123,28 @@
       "properties": [
         {
           "name": "DocumentProperties",
-          "returns": "XDocumentProperties",
+          "returns": "document_x_document_properties_i",
           "desc": [],
           "raises_get": "",
           "raises_set": ""
         },
         {
           "name": "DrawPage",
-          "returns": "XDrawPage",
+          "returns": "drawing_x_draw_page_i",
           "desc": [],
           "raises_get": "",
           "raises_set": ""
         },
         {
           "name": "Model",
-          "returns": "XModel",
+          "returns": "frame_x_model_i",
           "desc": [],
           "raises_get": "",
           "raises_set": ""
         },
         {
           "name": "Position",
-          "returns": "Point",
+          "returns": "awt_point_i",
           "desc": [],
           "raises_get": "",
           "raises_set": ""
@@ -146,7 +158,7 @@
         },
         {
           "name": "Shape",
-          "returns": "XShape",
+          "returns": "drawing_x_shape_i",
           "desc": [],
           "raises_get": "",
           "raises_set": ""

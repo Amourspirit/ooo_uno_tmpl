@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XSheetCellRanges",
   "type": "interface",
   "namespace": "com.sun.star.sheet",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,25 +16,31 @@
     "from_imports": [
       [
         "..container.x_index_access",
-        "XIndexAccess"
+        "XIndexAccess",
+        "container_x_index_access_i"
       ]
     ],
     "from_imports_typing": [
       [
-        "..table.cell_range_address",
-        "CellRangeAddress"
+        "..container.x_enumeration_access",
+        "XEnumerationAccess",
+        "container_x_enumeration_access_i"
       ],
       [
-        "..container.x_enumeration_access",
-        "XEnumerationAccess"
+        "..table.cell_range_address",
+        "CellRangeAddress",
+        "table_cell_range_address_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.container.XIndexAccess": "container_x_index_access_i"
+    },
     "quote": [
-      "XEnumerationAccess",
-      "typing.List[CellRangeAddress]"
+      "container_x_enumeration_access_i",
+      "typing.List[table_cell_range_address_i]"
     ],
     "typings": [
-      "typing.List[CellRangeAddress]"
+      "typing.List[table_cell_range_address_i]"
     ],
     "requires_typing": true,
     "name": "XSheetCellRanges",
@@ -50,7 +57,7 @@
       "methods": [
         {
           "name": "getCells",
-          "returns": "XEnumerationAccess",
+          "returns": "container_x_enumeration_access_i",
           "desc": [
             "returns the collection of all used cells."
           ],
@@ -59,7 +66,7 @@
         },
         {
           "name": "getRangeAddresses",
-          "returns": "typing.List[CellRangeAddress]",
+          "returns": "typing.List[table_cell_range_address_i]",
           "desc": [
             "creates a sequence with addresses of all contained cell ranges."
           ],

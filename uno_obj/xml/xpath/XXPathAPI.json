@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XXPathAPI",
   "type": "interface",
   "namespace": "com.sun.star.xml.xpath",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,32 +16,40 @@
     "from_imports": [
       [
         "...uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
-        ".xx_path_extension",
-        "XXPathExtension"
+        ".xx_path_object",
+        "XXPathObject",
+        "xx_path_object_i"
       ],
       [
         "..dom.x_node",
-        "XNode"
+        "XNode",
+        "dom_x_node_i"
       ],
       [
-        ".xx_path_object",
-        "XXPathObject"
+        ".xx_path_extension",
+        "XXPathExtension",
+        "xx_path_extension_i"
       ],
       [
         "..dom.x_node_list",
-        "XNodeList"
+        "XNodeList",
+        "dom_x_node_list_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "XNodeList",
-      "XNode",
-      "XXPathExtension",
-      "XXPathObject"
+      "xx_path_extension_i",
+      "dom_x_node_list_i",
+      "dom_x_node_i",
+      "xx_path_object_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -56,7 +65,7 @@
       "methods": [
         {
           "name": "eval",
-          "returns": "XXPathObject",
+          "returns": "xx_path_object_i",
           "desc": [
             "Evaluate XPath Expression."
           ],
@@ -66,7 +75,7 @@
           "args": [
             [
               "contextNode",
-              "XNode",
+              "dom_x_node_i",
               "in"
             ],
             [
@@ -78,7 +87,7 @@
         },
         {
           "name": "evalNS",
-          "returns": "XXPathObject",
+          "returns": "xx_path_object_i",
           "desc": [
             "Evaluate XPath Expression."
           ],
@@ -88,7 +97,7 @@
           "args": [
             [
               "contextNode",
-              "XNode",
+              "dom_x_node_i",
               "in"
             ],
             [
@@ -98,7 +107,7 @@
             ],
             [
               "namespaceNode",
-              "XNode",
+              "dom_x_node_i",
               "in"
             ]
           ]
@@ -124,7 +133,7 @@
           "args": [
             [
               "aExtension",
-              "XXPathExtension",
+              "xx_path_extension_i",
               "in"
             ]
           ]
@@ -149,7 +158,7 @@
         },
         {
           "name": "selectNodeList",
-          "returns": "XNodeList",
+          "returns": "dom_x_node_list_i",
           "desc": [
             "Evaluate an XPath expression to select a list of nodes."
           ],
@@ -159,7 +168,7 @@
           "args": [
             [
               "contextNode",
-              "XNode",
+              "dom_x_node_i",
               "in"
             ],
             [
@@ -171,7 +180,7 @@
         },
         {
           "name": "selectNodeListNS",
-          "returns": "XNodeList",
+          "returns": "dom_x_node_list_i",
           "desc": [
             "Evaluate an XPath expression to select a list of nodes."
           ],
@@ -181,7 +190,7 @@
           "args": [
             [
               "contextNode",
-              "XNode",
+              "dom_x_node_i",
               "in"
             ],
             [
@@ -191,14 +200,14 @@
             ],
             [
               "namespaceNode",
-              "XNode",
+              "dom_x_node_i",
               "in"
             ]
           ]
         },
         {
           "name": "selectSingleNode",
-          "returns": "XNode",
+          "returns": "dom_x_node_i",
           "desc": [
             "Evaluate an XPath expression to select a single node."
           ],
@@ -208,7 +217,7 @@
           "args": [
             [
               "contextNode",
-              "XNode",
+              "dom_x_node_i",
               "in"
             ],
             [
@@ -220,7 +229,7 @@
         },
         {
           "name": "selectSingleNodeNS",
-          "returns": "XNode",
+          "returns": "dom_x_node_i",
           "desc": [
             "Evaluate an XPath expression to select a single node."
           ],
@@ -230,7 +239,7 @@
           "args": [
             [
               "contextNode",
-              "XNode",
+              "dom_x_node_i",
               "in"
             ],
             [
@@ -240,7 +249,7 @@
             ],
             [
               "namespaceNode",
-              "XNode",
+              "dom_x_node_i",
               "in"
             ]
           ]

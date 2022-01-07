@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XCanvasFont",
   "type": "interface",
   "namespace": "com.sun.star.rendering",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,42 +16,51 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
-        ".font_request",
-        "FontRequest"
-      ],
-      [
         ".string_context",
-        "StringContext"
+        "StringContext",
+        "string_context_i"
       ],
       [
-        ".x_text_layout",
-        "XTextLayout"
+        ".font_request",
+        "FontRequest",
+        "font_request_i"
       ],
       [
         ".font_metrics",
-        "FontMetrics"
+        "FontMetrics",
+        "font_metrics_i"
+      ],
+      [
+        ".x_text_layout",
+        "XTextLayout",
+        "x_text_layout_i"
       ],
       [
         "..beans.property_value",
-        "PropertyValue"
+        "PropertyValue",
+        "beans_property_value_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "FontMetrics",
-      "StringContext",
-      "typing.List[PropertyValue]",
+      "font_metrics_i",
       "typing.List[float]",
-      "XTextLayout",
-      "FontRequest"
+      "x_text_layout_i",
+      "typing.List[beans_property_value_i]",
+      "string_context_i",
+      "font_request_i"
     ],
     "typings": [
       "typing.List[float]",
-      "typing.List[PropertyValue]"
+      "typing.List[beans_property_value_i]"
     ],
     "requires_typing": true,
     "name": "XCanvasFont",
@@ -69,7 +79,7 @@
       "methods": [
         {
           "name": "createTextLayout",
-          "returns": "XTextLayout",
+          "returns": "x_text_layout_i",
           "desc": [
             "Create a text layout interface.",
             "",
@@ -79,7 +89,7 @@
           "args": [
             [
               "aText",
-              "StringContext",
+              "string_context_i",
               "in"
             ],
             [
@@ -107,7 +117,7 @@
         },
         {
           "name": "getExtraFontProperties",
-          "returns": "typing.List[PropertyValue]",
+          "returns": "typing.List[beans_property_value_i]",
           "desc": [
             "Query the list of additional font properties."
           ],
@@ -116,7 +126,7 @@
         },
         {
           "name": "getFontMetrics",
-          "returns": "FontMetrics",
+          "returns": "font_metrics_i",
           "desc": [
             "Query metric information about the font, that is generic to all its glyphs.",
             "",
@@ -127,7 +137,7 @@
         },
         {
           "name": "getFontRequest",
-          "returns": "FontRequest",
+          "returns": "font_request_i",
           "desc": [
             "Query the FontRequest that was used to generate this object."
           ],

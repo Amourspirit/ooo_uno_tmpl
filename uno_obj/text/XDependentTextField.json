@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XDependentTextField",
   "type": "interface",
   "namespace": "com.sun.star.text",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,17 +16,22 @@
     "from_imports": [
       [
         ".x_text_field",
-        "XTextField"
+        "XTextField",
+        "x_text_field_i"
       ]
     ],
     "from_imports_typing": [
       [
         "..beans.x_property_set",
-        "XPropertySet"
+        "XPropertySet",
+        "beans_x_property_set_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.text.XTextField": "x_text_field_i"
+    },
     "quote": [
-      "XPropertySet"
+      "beans_x_property_set_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -57,14 +63,14 @@
           "args": [
             [
               "xFieldMaster",
-              "XPropertySet",
+              "beans_x_property_set_i",
               "in"
             ]
           ]
         },
         {
           "name": "getTextFieldMaster",
-          "returns": "XPropertySet",
+          "returns": "beans_x_property_set_i",
           "desc": [],
           "raises": [],
           "args": []

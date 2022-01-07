@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XListBox",
   "type": "interface",
   "namespace": "com.sun.star.awt",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,28 +16,34 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_item_listener",
-        "XItemListener"
+        "XItemListener",
+        "x_item_listener_i"
       ],
       [
         ".x_action_listener",
-        "XActionListener"
+        "XActionListener",
+        "x_action_listener_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
+      "x_action_listener_i",
+      "typing.List[int]",
       "typing.List[str]",
-      "XItemListener",
-      "XActionListener",
-      "typing.List[int]"
+      "x_item_listener_i"
     ],
     "typings": [
-      "typing.List[str]",
-      "typing.List[int]"
+      "typing.List[int]",
+      "typing.List[str]"
     ],
     "requires_typing": true,
     "name": "XListBox",
@@ -61,7 +68,7 @@
           "args": [
             [
               "l",
-              "XActionListener",
+              "x_action_listener_i",
               "in"
             ]
           ]
@@ -96,7 +103,7 @@
           "args": [
             [
               "l",
-              "XItemListener",
+              "x_item_listener_i",
               "in"
             ]
           ]
@@ -237,7 +244,7 @@
           "args": [
             [
               "l",
-              "XActionListener",
+              "x_action_listener_i",
               "in"
             ]
           ]
@@ -252,7 +259,7 @@
           "args": [
             [
               "l",
-              "XItemListener",
+              "x_item_listener_i",
               "in"
             ]
           ]

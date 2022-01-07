@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XNumberFormatsSupplier",
   "type": "interface",
   "namespace": "com.sun.star.util",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,22 +16,28 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_number_formats",
-        "XNumberFormats"
+        "XNumberFormats",
+        "x_number_formats_i"
       ],
       [
         "..beans.x_property_set",
-        "XPropertySet"
+        "XPropertySet",
+        "beans_x_property_set_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "XNumberFormats",
-      "XPropertySet"
+      "beans_x_property_set_i",
+      "x_number_formats_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -48,14 +55,14 @@
       "methods": [
         {
           "name": "getNumberFormatSettings",
-          "returns": "XPropertySet",
+          "returns": "beans_x_property_set_i",
           "desc": [],
           "raises": [],
           "args": []
         },
         {
           "name": "getNumberFormats",
-          "returns": "XNumberFormats",
+          "returns": "x_number_formats_i",
           "desc": [],
           "raises": [],
           "args": []

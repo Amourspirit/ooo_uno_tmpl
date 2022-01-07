@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XAccessibleExtendedComponent",
   "type": "interface",
   "namespace": "com.sun.star.accessibility",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,17 +16,22 @@
     "from_imports": [
       [
         ".x_accessible_component",
-        "XAccessibleComponent"
+        "XAccessibleComponent",
+        "x_accessible_component_i"
       ]
     ],
     "from_imports_typing": [
       [
         "..awt.x_font",
-        "XFont"
+        "XFont",
+        "awt_x_font_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.accessibility.XAccessibleComponent": "x_accessible_component_i"
+    },
     "quote": [
-      "XFont"
+      "awt_x_font_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -51,7 +57,7 @@
       "methods": [
         {
           "name": "getFont",
-          "returns": "XFont",
+          "returns": "awt_x_font_i",
           "desc": [
             "Returns the font of this object."
           ],

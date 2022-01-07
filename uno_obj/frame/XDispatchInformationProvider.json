@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XDispatchInformationProvider",
   "type": "interface",
   "namespace": "com.sun.star.frame",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,22 +16,27 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".dispatch_information",
-        "DispatchInformation"
+        "DispatchInformation",
+        "dispatch_information_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
       "typing.List[int]",
-      "typing.List[DispatchInformation]"
+      "typing.List[dispatch_information_i]"
     ],
     "typings": [
       "typing.List[int]",
-      "typing.List[DispatchInformation]"
+      "typing.List[dispatch_information_i]"
     ],
     "requires_typing": true,
     "name": "XDispatchInformationProvider",
@@ -53,7 +59,7 @@
       "methods": [
         {
           "name": "getConfigurableDispatchInformation",
-          "returns": "typing.List[DispatchInformation]",
+          "returns": "typing.List[dispatch_information_i]",
           "desc": [
             "returns additional information about supported commands of a given command group."
           ],

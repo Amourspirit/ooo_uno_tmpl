@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XDataExporter",
   "type": "interface",
   "namespace": "com.sun.star.io",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,27 +16,34 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
         "..lang.x_component",
-        "XComponent"
-      ],
-      [
-        ".x_data_transfer_event_listener",
-        "XDataTransferEventListener"
+        "XComponent",
+        "lang_x_component_i"
       ],
       [
         ".x_output_stream",
-        "XOutputStream"
+        "XOutputStream",
+        "x_output_stream_i"
+      ],
+      [
+        ".x_data_transfer_event_listener",
+        "XDataTransferEventListener",
+        "x_data_transfer_event_listener_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "XDataTransferEventListener",
-      "XComponent",
-      "XOutputStream"
+      "x_data_transfer_event_listener_i",
+      "x_output_stream_i",
+      "lang_x_component_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -72,17 +80,17 @@
           "args": [
             [
               "aOutputStream",
-              "XOutputStream",
+              "x_output_stream_i",
               "in"
             ],
             [
               "Component",
-              "XComponent",
+              "lang_x_component_i",
               "in"
             ],
             [
               "aListener",
-              "XDataTransferEventListener",
+              "x_data_transfer_event_listener_i",
               "in"
             ]
           ]

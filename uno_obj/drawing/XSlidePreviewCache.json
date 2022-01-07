@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XSlidePreviewCache",
   "type": "interface",
   "namespace": "com.sun.star.drawing",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,37 +16,44 @@
     "from_imports": [],
     "from_imports_typing": [
       [
-        "..rendering.x_canvas",
-        "XCanvas"
-      ],
-      [
-        "..rendering.x_bitmap",
-        "XBitmap"
-      ],
-      [
-        "..uno.x_interface",
-        "XInterface"
-      ],
-      [
-        ".x_slide_preview_cache_listener",
-        "XSlidePreviewCacheListener"
-      ],
-      [
         "..container.x_index_access",
-        "XIndexAccess"
+        "XIndexAccess",
+        "container_x_index_access_i"
       ],
       [
         "..geometry.integer_size2_d",
-        "IntegerSize2D"
+        "IntegerSize2D",
+        "geometry_integer_size2_d_i"
+      ],
+      [
+        "..rendering.x_bitmap",
+        "XBitmap",
+        "rendering_x_bitmap_i"
+      ],
+      [
+        "..rendering.x_canvas",
+        "XCanvas",
+        "rendering_x_canvas_i"
+      ],
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "uno_x_interface_i"
+      ],
+      [
+        ".x_slide_preview_cache_listener",
+        "XSlidePreviewCacheListener",
+        "x_slide_preview_cache_listener_i"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "XIndexAccess",
-      "IntegerSize2D",
-      "XBitmap",
-      "XInterface",
-      "XCanvas",
-      "XSlidePreviewCacheListener"
+      "x_slide_preview_cache_listener_i",
+      "rendering_x_bitmap_i",
+      "uno_x_interface_i",
+      "geometry_integer_size2_d_i",
+      "rendering_x_canvas_i",
+      "container_x_index_access_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -73,14 +81,14 @@
           "args": [
             [
               "xListener",
-              "XSlidePreviewCacheListener",
+              "x_slide_preview_cache_listener_i",
               "in"
             ]
           ]
         },
         {
           "name": "getSlidePreview",
-          "returns": "XBitmap",
+          "returns": "rendering_x_bitmap_i",
           "desc": [
             "Return a preview for the given slide index.",
             "",
@@ -99,7 +107,7 @@
             ],
             [
               "xCanvas",
-              "XCanvas",
+              "rendering_x_canvas_i",
               "in"
             ]
           ]
@@ -125,7 +133,7 @@
           "args": [
             [
               "xListener",
-              "XSlidePreviewCacheListener",
+              "x_slide_preview_cache_listener_i",
               "in"
             ]
           ]
@@ -151,12 +159,12 @@
           "args": [
             [
               "xSlides",
-              "XIndexAccess",
+              "container_x_index_access_i",
               "in"
             ],
             [
               "xDocument",
-              "XInterface",
+              "uno_x_interface_i",
               "in"
             ]
           ]
@@ -171,7 +179,7 @@
           "args": [
             [
               "aSize",
-              "IntegerSize2D",
+              "geometry_integer_size2_d_i",
               "in"
             ]
           ]

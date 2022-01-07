@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XConfiguration",
   "type": "interface",
   "namespace": "com.sun.star.drawing.framework",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,26 +16,32 @@
     "from_imports": [
       [
         "...util.x_cloneable",
-        "XCloneable"
+        "XCloneable",
+        "util_x_cloneable_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".anchor_binding_mode",
-        "AnchorBindingMode"
+        "AnchorBindingMode",
+        "anchor_binding_mode_i"
       ],
       [
         ".x_resource_id",
-        "XResourceId"
+        "XResourceId",
+        "x_resource_id_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.util.XCloneable": "util_x_cloneable_i"
+    },
     "quote": [
-      "XResourceId",
-      "AnchorBindingMode",
-      "typing.List[XResourceId]"
+      "anchor_binding_mode_i",
+      "typing.List[x_resource_id_i]",
+      "x_resource_id_i"
     ],
     "typings": [
-      "typing.List[XResourceId]"
+      "typing.List[x_resource_id_i]"
     ],
     "requires_typing": true,
     "name": "XConfiguration",
@@ -65,14 +72,14 @@
           "args": [
             [
               "xResourceId",
-              "XResourceId",
+              "x_resource_id_i",
               "in"
             ]
           ]
         },
         {
           "name": "getResources",
-          "returns": "typing.List[XResourceId]",
+          "returns": "typing.List[x_resource_id_i]",
           "desc": [
             "Returns the list of resources that are bound directly and/or indirectly to the given anchor.",
             "",
@@ -84,7 +91,7 @@
           "args": [
             [
               "xAnchorId",
-              "XResourceId",
+              "x_resource_id_i",
               "in"
             ],
             [
@@ -94,7 +101,7 @@
             ],
             [
               "eSearchMode",
-              "AnchorBindingMode",
+              "anchor_binding_mode_i",
               "in"
             ]
           ]
@@ -111,7 +118,7 @@
           "args": [
             [
               "xResourceId",
-              "XResourceId",
+              "x_resource_id_i",
               "in"
             ]
           ]
@@ -128,7 +135,7 @@
           "args": [
             [
               "xResourceId",
-              "XResourceId",
+              "x_resource_id_i",
               "in"
             ]
           ]

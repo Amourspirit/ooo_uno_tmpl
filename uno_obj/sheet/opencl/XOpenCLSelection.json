@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XOpenCLSelection",
   "type": "interface",
   "namespace": "com.sun.star.sheet.opencl",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,20 +16,25 @@
     "from_imports": [
       [
         "...uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".open_cl_platform",
-        "OpenCLPlatform"
+        "OpenCLPlatform",
+        "open_cl_platform_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "typing.List[OpenCLPlatform]"
+      "typing.List[open_cl_platform_i]"
     ],
     "typings": [
-      "typing.List[OpenCLPlatform]"
+      "typing.List[open_cl_platform_i]"
     ],
     "requires_typing": true,
     "name": "XOpenCLSelection",
@@ -116,7 +122,7 @@
         },
         {
           "name": "getOpenCLPlatforms",
-          "returns": "typing.List[OpenCLPlatform]",
+          "returns": "typing.List[open_cl_platform_i]",
           "desc": [
             "lists all OpenCL devices and platforms"
           ],

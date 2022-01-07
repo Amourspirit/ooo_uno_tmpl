@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XGalleryTheme",
   "type": "interface",
   "namespace": "com.sun.star.gallery",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,22 +16,28 @@
     "from_imports": [
       [
         "..container.x_index_access",
-        "XIndexAccess"
+        "XIndexAccess",
+        "container_x_index_access_i"
       ]
     ],
     "from_imports_typing": [
       [
         "..graphic.x_graphic",
-        "XGraphic"
+        "XGraphic",
+        "graphic_x_graphic_i"
       ],
       [
         "..lang.x_component",
-        "XComponent"
+        "XComponent",
+        "lang_x_component_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.container.XIndexAccess": "container_x_index_access_i"
+    },
     "quote": [
-      "XGraphic",
-      "XComponent"
+      "lang_x_component_i",
+      "graphic_x_graphic_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -71,7 +78,7 @@
           "args": [
             [
               "Drawing",
-              "XComponent",
+              "lang_x_component_i",
               "in"
             ],
             [
@@ -93,7 +100,7 @@
           "args": [
             [
               "Graphic",
-              "XGraphic",
+              "graphic_x_graphic_i",
               "in"
             ],
             [

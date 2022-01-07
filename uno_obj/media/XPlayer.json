@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XPlayer",
   "type": "interface",
   "namespace": "com.sun.star.media",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,23 +16,27 @@
     "from_imports": [],
     "from_imports_typing": [
       [
-        ".x_frame_grabber",
-        "XFrameGrabber"
+        "..awt.size",
+        "Size",
+        "awt_size_i"
       ],
       [
         ".x_player_window",
-        "XPlayerWindow"
+        "XPlayerWindow",
+        "x_player_window_i"
       ],
       [
-        "..awt.size",
-        "Size"
+        ".x_frame_grabber",
+        "XFrameGrabber",
+        "x_frame_grabber_i"
       ]
     ],
+    "extends_map": {},
     "quote": [
       "typing.List[object]",
-      "XPlayerWindow",
-      "XFrameGrabber",
-      "Size"
+      "x_frame_grabber_i",
+      "awt_size_i",
+      "x_player_window_i"
     ],
     "typings": [
       "typing.List[object]"
@@ -51,7 +56,7 @@
       "methods": [
         {
           "name": "createFrameGrabber",
-          "returns": "XFrameGrabber",
+          "returns": "x_frame_grabber_i",
           "desc": [
             "gets a frame grabber for this stream."
           ],
@@ -60,7 +65,7 @@
         },
         {
           "name": "createPlayerWindow",
-          "returns": "XPlayerWindow",
+          "returns": "x_player_window_i",
           "desc": [
             "gets a new player window for this stream control"
           ],
@@ -93,7 +98,7 @@
         },
         {
           "name": "getPreferredPlayerWindowSize",
-          "returns": "Size",
+          "returns": "awt_size_i",
           "desc": [
             "gets the preferred window size"
           ],

@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XRepository",
   "type": "interface",
   "namespace": "com.sun.star.rdf",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,56 +16,66 @@
     "from_imports": [],
     "from_imports_typing": [
       [
-        "..io.x_input_stream",
-        "XInputStream"
-      ],
-      [
         ".x_node",
-        "XNode"
-      ],
-      [
-        "..io.x_output_stream",
-        "XOutputStream"
-      ],
-      [
-        ".x_resource",
-        "XResource"
-      ],
-      [
-        ".x_named_graph",
-        "XNamedGraph"
+        "XNode",
+        "x_node_i"
       ],
       [
         ".x_blank_node",
-        "XBlankNode"
+        "XBlankNode",
+        "x_blank_node_i"
       ],
       [
-        "..container.x_enumeration",
-        "XEnumeration"
+        ".x_named_graph",
+        "XNamedGraph",
+        "x_named_graph_i"
       ],
       [
         ".x_query_select_result",
-        "XQuerySelectResult"
+        "XQuerySelectResult",
+        "x_query_select_result_i"
+      ],
+      [
+        ".x_resource",
+        "XResource",
+        "x_resource_i"
+      ],
+      [
+        "..io.x_output_stream",
+        "XOutputStream",
+        "io_x_output_stream_i"
+      ],
+      [
+        "..io.x_input_stream",
+        "XInputStream",
+        "io_x_input_stream_i"
+      ],
+      [
+        "..container.x_enumeration",
+        "XEnumeration",
+        "container_x_enumeration_i"
       ],
       [
         ".xuri",
-        "XURI"
+        "XURI",
+        "xuri_i"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "XEnumeration",
-      "XQuerySelectResult",
-      "XNamedGraph",
-      "XURI",
-      "XResource",
-      "XInputStream",
-      "XNode",
-      "XBlankNode",
-      "typing.List[XURI]",
-      "XOutputStream"
+      "xuri_i",
+      "x_node_i",
+      "x_query_select_result_i",
+      "x_named_graph_i",
+      "io_x_output_stream_i",
+      "x_resource_i",
+      "io_x_input_stream_i",
+      "x_blank_node_i",
+      "typing.List[xuri_i]",
+      "container_x_enumeration_i"
     ],
     "typings": [
-      "typing.List[XURI]"
+      "typing.List[xuri_i]"
     ],
     "requires_typing": true,
     "name": "XRepository",
@@ -87,7 +98,7 @@
       "methods": [
         {
           "name": "createBlankNode",
-          "returns": "XBlankNode",
+          "returns": "x_blank_node_i",
           "desc": [
             "creates a fresh unique blank node."
           ],
@@ -96,7 +107,7 @@
         },
         {
           "name": "createGraph",
-          "returns": "XNamedGraph",
+          "returns": "x_named_graph_i",
           "desc": [
             "creates a graph with the given name.",
             "",
@@ -110,7 +121,7 @@
           "args": [
             [
               "GraphName",
-              "XURI",
+              "xuri_i",
               "in"
             ]
           ]
@@ -131,7 +142,7 @@
           "args": [
             [
               "GraphName",
-              "XURI",
+              "xuri_i",
               "in"
             ]
           ]
@@ -159,24 +170,24 @@
             ],
             [
               "OutStream",
-              "XOutputStream",
+              "io_x_output_stream_i",
               "in"
             ],
             [
               "GraphName",
-              "XURI",
+              "xuri_i",
               "in"
             ],
             [
               "BaseURI",
-              "XURI",
+              "xuri_i",
               "in"
             ]
           ]
         },
         {
           "name": "getGraph",
-          "returns": "XNamedGraph",
+          "returns": "x_named_graph_i",
           "desc": [
             "gets a graph by its name."
           ],
@@ -187,14 +198,14 @@
           "args": [
             [
               "GraphName",
-              "XURI",
+              "xuri_i",
               "in"
             ]
           ]
         },
         {
           "name": "getGraphNames",
-          "returns": "typing.List[XURI]",
+          "returns": "typing.List[xuri_i]",
           "desc": [
             "gets the names of all the graphs in the repository."
           ],
@@ -205,7 +216,7 @@
         },
         {
           "name": "getStatements",
-          "returns": "XEnumeration",
+          "returns": "container_x_enumeration_i",
           "desc": [
             "gets matching RDF statements from the repository.",
             "",
@@ -217,24 +228,24 @@
           "args": [
             [
               "Subject",
-              "XResource",
+              "x_resource_i",
               "in"
             ],
             [
               "Predicate",
-              "XURI",
+              "xuri_i",
               "in"
             ],
             [
               "Object",
-              "XNode",
+              "x_node_i",
               "in"
             ]
           ]
         },
         {
           "name": "importGraph",
-          "returns": "XNamedGraph",
+          "returns": "x_named_graph_i",
           "desc": [
             "imports a named graph into the repository.",
             "",
@@ -256,17 +267,17 @@
             ],
             [
               "InStream",
-              "XInputStream",
+              "io_x_input_stream_i",
               "in"
             ],
             [
               "GraphName",
-              "XURI",
+              "xuri_i",
               "in"
             ],
             [
               "BaseURI",
-              "XURI",
+              "xuri_i",
               "in"
             ]
           ]
@@ -293,7 +304,7 @@
         },
         {
           "name": "queryConstruct",
-          "returns": "XEnumeration",
+          "returns": "container_x_enumeration_i",
           "desc": [
             "executes a SPARQL \\\"CONSTRUCT\\\" query.",
             "",
@@ -313,7 +324,7 @@
         },
         {
           "name": "querySelect",
-          "returns": "XQuerySelectResult",
+          "returns": "x_query_select_result_i",
           "desc": [
             "executes a SPARQL \\\"SELECT\\\" query.",
             "",

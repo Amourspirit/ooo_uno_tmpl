@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XInternalDataProvider",
   "type": "interface",
   "namespace": "com.sun.star.chart2",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,18 +16,23 @@
     "from_imports": [
       [
         ".data.x_data_provider",
-        "XDataProvider"
+        "XDataProvider",
+        "data_x_data_provider_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".data.x_data_sequence",
-        "XDataSequence"
+        "XDataSequence",
+        "data_x_data_sequence_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.chart2.data.XDataProvider": "data_x_data_provider_i"
+    },
     "quote": [
-      "typing.List[object]",
-      "XDataSequence"
+      "data_x_data_sequence_i",
+      "typing.List[object]"
     ],
     "typings": [
       "typing.List[object]"
@@ -187,7 +193,7 @@
           "args": [
             [
               "xSeq",
-              "XDataSequence",
+              "data_x_data_sequence_i",
               "in"
             ]
           ]

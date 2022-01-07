@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XWizard",
   "type": "interface",
   "namespace": "com.sun.star.ui.dialogs",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,22 +16,28 @@
     "from_imports": [
       [
         ".x_executable_dialog",
-        "XExecutableDialog"
+        "XExecutableDialog",
+        "x_executable_dialog_i"
       ]
     ],
     "from_imports_typing": [
       [
-        ".x_wizard_page",
-        "XWizardPage"
+        "...awt.x_window",
+        "XWindow",
+        "awt_x_window_i"
       ],
       [
-        "...awt.x_window",
-        "XWindow"
+        ".x_wizard_page",
+        "XWizardPage",
+        "x_wizard_page_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.ui.dialogs.XExecutableDialog": "x_executable_dialog_i"
+    },
     "quote": [
-      "XWindow",
-      "XWizardPage"
+      "x_wizard_page_i",
+      "awt_x_window_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -173,7 +180,7 @@
         },
         {
           "name": "getCurrentPage",
-          "returns": "XWizardPage",
+          "returns": "x_wizard_page_i",
           "desc": [
             "provides access to the current page of the wizard"
           ],
@@ -255,7 +262,7 @@
       "properties": [
         {
           "name": "DialogWindow",
-          "returns": "XWindow",
+          "returns": "awt_x_window_i",
           "desc": [],
           "raises_get": "",
           "raises_set": ""

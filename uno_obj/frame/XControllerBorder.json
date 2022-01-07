@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XControllerBorder",
   "type": "interface",
   "namespace": "com.sun.star.frame",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,27 +16,34 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
-        ".x_border_resize_listener",
-        "XBorderResizeListener"
+        ".border_widths",
+        "BorderWidths",
+        "border_widths_i"
       ],
       [
-        ".border_widths",
-        "BorderWidths"
+        ".x_border_resize_listener",
+        "XBorderResizeListener",
+        "x_border_resize_listener_i"
       ],
       [
         "..awt.rectangle",
-        "Rectangle"
+        "Rectangle",
+        "awt_rectangle_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "Rectangle",
-      "XBorderResizeListener",
-      "BorderWidths"
+      "x_border_resize_listener_i",
+      "border_widths_i",
+      "awt_rectangle_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -61,14 +69,14 @@
           "args": [
             [
               "xListener",
-              "XBorderResizeListener",
+              "x_border_resize_listener_i",
               "in"
             ]
           ]
         },
         {
           "name": "getBorder",
-          "returns": "BorderWidths",
+          "returns": "border_widths_i",
           "desc": [
             "allows to get current border sizes of the document."
           ],
@@ -77,7 +85,7 @@
         },
         {
           "name": "queryBorderedArea",
-          "returns": "Rectangle",
+          "returns": "awt_rectangle_i",
           "desc": [
             "allows to get suggestion for resizing of object area surrounded by the border.",
             "",
@@ -87,7 +95,7 @@
           "args": [
             [
               "aPreliminaryRectangle",
-              "Rectangle",
+              "awt_rectangle_i",
               "in"
             ]
           ]
@@ -102,7 +110,7 @@
           "args": [
             [
               "xListener",
-              "XBorderResizeListener",
+              "x_border_resize_listener_i",
               "in"
             ]
           ]

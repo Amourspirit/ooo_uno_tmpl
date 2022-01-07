@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XSpreadsheet",
   "type": "interface",
   "namespace": "com.sun.star.sheet",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,18 +16,23 @@
     "from_imports": [
       [
         ".x_sheet_cell_range",
-        "XSheetCellRange"
+        "XSheetCellRange",
+        "x_sheet_cell_range_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_sheet_cell_cursor",
-        "XSheetCellCursor"
+        "XSheetCellCursor",
+        "x_sheet_cell_cursor_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.sheet.XSheetCellRange": "x_sheet_cell_range_i"
+    },
     "quote": [
-      "XSheetCellCursor",
-      "XSheetCellRange"
+      "x_sheet_cell_range_i",
+      "x_sheet_cell_cursor_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -44,7 +50,7 @@
       "methods": [
         {
           "name": "createCursor",
-          "returns": "XSheetCellCursor",
+          "returns": "x_sheet_cell_cursor_i",
           "desc": [
             "creates a cell cursor including the whole spreadsheet."
           ],
@@ -53,7 +59,7 @@
         },
         {
           "name": "createCursorByRange",
-          "returns": "XSheetCellCursor",
+          "returns": "x_sheet_cell_cursor_i",
           "desc": [
             "creates a cell cursor to travel in the given range context."
           ],
@@ -61,7 +67,7 @@
           "args": [
             [
               "aRange",
-              "XSheetCellRange",
+              "x_sheet_cell_range_i",
               "in"
             ]
           ]

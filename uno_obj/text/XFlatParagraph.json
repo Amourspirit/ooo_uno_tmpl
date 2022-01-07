@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XFlatParagraph",
   "type": "interface",
   "namespace": "com.sun.star.text",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,27 +16,33 @@
     "from_imports": [
       [
         ".x_text_markup",
-        "XTextMarkup"
+        "XTextMarkup",
+        "x_text_markup_i"
       ]
     ],
     "from_imports_typing": [
       [
         "..lang.locale",
-        "Locale"
+        "Locale",
+        "lang_locale_i"
       ],
       [
         "..beans.property_value",
-        "PropertyValue"
+        "PropertyValue",
+        "beans_property_value_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.text.XTextMarkup": "x_text_markup_i"
+    },
     "quote": [
       "typing.List[int]",
-      "Locale",
-      "typing.List[PropertyValue]"
+      "lang_locale_i",
+      "typing.List[beans_property_value_i]"
     ],
     "typings": [
       "typing.List[int]",
-      "typing.List[PropertyValue]"
+      "typing.List[beans_property_value_i]"
     ],
     "requires_typing": true,
     "name": "XFlatParagraph",
@@ -76,7 +83,7 @@
             ],
             [
               "aAttributes",
-              "typing.List[PropertyValue]",
+              "typing.List[beans_property_value_i]",
               "in"
             ]
           ]
@@ -108,14 +115,14 @@
             ],
             [
               "aAttributes",
-              "typing.List[PropertyValue]",
+              "typing.List[beans_property_value_i]",
               "in"
             ]
           ]
         },
         {
           "name": "getLanguageOfText",
-          "returns": "Locale",
+          "returns": "lang_locale_i",
           "desc": [
             "get the language of the specific text"
           ],
@@ -146,7 +153,7 @@
         },
         {
           "name": "getPrimaryLanguageOfText",
-          "returns": "Locale",
+          "returns": "lang_locale_i",
           "desc": [
             "get the single most probable language of the specific text, especially after getLanguageOfText fails"
           ],

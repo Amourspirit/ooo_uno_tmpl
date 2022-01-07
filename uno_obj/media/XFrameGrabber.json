@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XFrameGrabber",
   "type": "interface",
   "namespace": "com.sun.star.media",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -16,11 +17,13 @@
     "from_imports_typing": [
       [
         "..graphic.x_graphic",
-        "XGraphic"
+        "XGraphic",
+        "graphic_x_graphic_i"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "XGraphic"
+      "graphic_x_graphic_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -36,7 +39,7 @@
       "methods": [
         {
           "name": "grabFrame",
-          "returns": "XGraphic",
+          "returns": "graphic_x_graphic_i",
           "desc": [
             "returns the image of the underlying stream at a given position"
           ],

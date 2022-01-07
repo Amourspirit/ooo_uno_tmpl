@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XAccessibleComponent",
   "type": "interface",
   "namespace": "com.sun.star.accessibility",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,37 +16,46 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
-        "..awt.point",
-        "Point"
-      ],
-      [
-        "..util.color",
-        "Color"
-      ],
-      [
-        "..awt.rectangle",
-        "Rectangle"
-      ],
-      [
         "..awt.size",
-        "Size"
+        "Size",
+        "awt_size_i"
       ],
       [
         ".x_accessible",
-        "XAccessible"
+        "XAccessible",
+        "x_accessible_i"
+      ],
+      [
+        "..util.color",
+        "Color",
+        "util_color_i"
+      ],
+      [
+        "..awt.point",
+        "Point",
+        "awt_point_i"
+      ],
+      [
+        "..awt.rectangle",
+        "Rectangle",
+        "awt_rectangle_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "Rectangle",
-      "XAccessible",
-      "Point",
-      "Color",
-      "Size"
+      "awt_point_i",
+      "awt_rectangle_i",
+      "awt_size_i",
+      "util_color_i",
+      "x_accessible_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -85,14 +95,14 @@
           "args": [
             [
               "Point",
-              "Point",
+              "awt_point_i",
               "in"
             ]
           ]
         },
         {
           "name": "getAccessibleAtPoint",
-          "returns": "XAccessible",
+          "returns": "x_accessible_i",
           "desc": [
             "Returns the Accessible child that is rendered under the given point.",
             "",
@@ -102,14 +112,14 @@
           "args": [
             [
               "Point",
-              "Point",
+              "awt_point_i",
               "in"
             ]
           ]
         },
         {
           "name": "getBackground",
-          "returns": "Color",
+          "returns": "util_color_i",
           "desc": [
             "Returns the background color of this object."
           ],
@@ -118,7 +128,7 @@
         },
         {
           "name": "getBounds",
-          "returns": "Rectangle",
+          "returns": "awt_rectangle_i",
           "desc": [
             "Returns the bounding box of this object.",
             "",
@@ -129,7 +139,7 @@
         },
         {
           "name": "getForeground",
-          "returns": "Color",
+          "returns": "util_color_i",
           "desc": [
             "Returns the foreground color of this object."
           ],
@@ -138,7 +148,7 @@
         },
         {
           "name": "getLocation",
-          "returns": "Point",
+          "returns": "awt_point_i",
           "desc": [
             "Returns the location of the upper left corner of the object's bounding box relative to the parent.",
             "",
@@ -149,7 +159,7 @@
         },
         {
           "name": "getLocationOnScreen",
-          "returns": "Point",
+          "returns": "awt_point_i",
           "desc": [
             "Returns the location of the upper left corner of the object's bounding box in screen coordinates.",
             "",
@@ -160,7 +170,7 @@
         },
         {
           "name": "getSize",
-          "returns": "Size",
+          "returns": "awt_size_i",
           "desc": [
             "Returns the size of this object's bounding box."
           ],

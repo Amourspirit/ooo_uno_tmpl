@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XIdlMethod",
   "type": "interface",
   "namespace": "com.sun.star.reflection",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,32 +16,39 @@
     "from_imports": [
       [
         ".x_idl_member",
-        "XIdlMember"
+        "XIdlMember",
+        "x_idl_member_i"
       ]
     ],
     "from_imports_typing": [
       [
-        ".method_mode",
-        "MethodMode"
+        ".x_idl_class",
+        "XIdlClass",
+        "x_idl_class_i"
       ],
       [
         ".param_info",
-        "ParamInfo"
+        "ParamInfo",
+        "param_info_i"
       ],
       [
-        ".x_idl_class",
-        "XIdlClass"
+        ".method_mode",
+        "MethodMode",
+        "method_mode_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.reflection.XIdlMember": "x_idl_member_i"
+    },
     "quote": [
-      "XIdlClass",
-      "typing.List[ParamInfo]",
-      "typing.List[XIdlClass]",
-      "MethodMode"
+      "method_mode_i",
+      "typing.List[x_idl_class_i]",
+      "x_idl_class_i",
+      "typing.List[param_info_i]"
     ],
     "typings": [
-      "typing.List[XIdlClass]",
-      "typing.List[ParamInfo]"
+      "typing.List[x_idl_class_i]",
+      "typing.List[param_info_i]"
     ],
     "requires_typing": true,
     "name": "XIdlMethod",
@@ -57,7 +65,7 @@
       "methods": [
         {
           "name": "getExceptionTypes",
-          "returns": "typing.List[XIdlClass]",
+          "returns": "typing.List[x_idl_class_i]",
           "desc": [
             "Returns the declared exceptions types of the reflected method."
           ],
@@ -66,7 +74,7 @@
         },
         {
           "name": "getMode",
-          "returns": "MethodMode",
+          "returns": "method_mode_i",
           "desc": [
             "Returns the method mode in which calls are run, i.e.",
             "",
@@ -77,7 +85,7 @@
         },
         {
           "name": "getParameterInfos",
-          "returns": "typing.List[ParamInfo]",
+          "returns": "typing.List[param_info_i]",
           "desc": [
             "Returns formal parameter information of the reflected method in order of IDL declaration.",
             "",
@@ -88,7 +96,7 @@
         },
         {
           "name": "getParameterTypes",
-          "returns": "typing.List[XIdlClass]",
+          "returns": "typing.List[x_idl_class_i]",
           "desc": [
             "Returns the formal parameter types of the reflected method in order of IDL declaration."
           ],
@@ -97,7 +105,7 @@
         },
         {
           "name": "getReturnType",
-          "returns": "XIdlClass",
+          "returns": "x_idl_class_i",
           "desc": [
             "Returns the return type of the reflected method."
           ],

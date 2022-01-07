@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XIdlClassProvider",
   "type": "interface",
   "namespace": "com.sun.star.reflection",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,20 +16,25 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_idl_class",
-        "XIdlClass"
+        "XIdlClass",
+        "x_idl_class_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "typing.List[XIdlClass]"
+      "typing.List[x_idl_class_i]"
     ],
     "typings": [
-      "typing.List[XIdlClass]"
+      "typing.List[x_idl_class_i]"
     ],
     "requires_typing": true,
     "name": "XIdlClassProvider",
@@ -51,7 +57,7 @@
       "methods": [
         {
           "name": "getIdlClasses",
-          "returns": "typing.List[XIdlClass]",
+          "returns": "typing.List[x_idl_class_i]",
           "desc": [],
           "raises": [],
           "args": []

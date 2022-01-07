@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XSheetDataProvider",
   "type": "interface",
   "namespace": "com.sun.star.chart2.data",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,25 +16,31 @@
     "from_imports": [
       [
         "...uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
-        "...sheet.formula_token",
-        "FormulaToken"
+        ".x_data_sequence",
+        "XDataSequence",
+        "x_data_sequence_i"
       ],
       [
-        ".x_data_sequence",
-        "XDataSequence"
+        "...sheet.formula_token",
+        "FormulaToken",
+        "sheet_formula_token_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "typing.List[FormulaToken]",
-      "XDataSequence"
+      "x_data_sequence_i",
+      "typing.List[sheet_formula_token_i]"
     ],
     "typings": [
-      "typing.List[FormulaToken]"
+      "typing.List[sheet_formula_token_i]"
     ],
     "requires_typing": true,
     "name": "XSheetDataProvider",
@@ -50,7 +57,7 @@
       "methods": [
         {
           "name": "createDataSequenceByFormulaTokens",
-          "returns": "XDataSequence",
+          "returns": "x_data_sequence_i",
           "desc": [],
           "raises": [
             "com.sun.star.lang.IllegalArgumentException"
@@ -58,7 +65,7 @@
           "args": [
             [
               "aTokens",
-              "typing.List[FormulaToken]",
+              "typing.List[sheet_formula_token_i]",
               "in"
             ]
           ]
@@ -71,7 +78,7 @@
           "args": [
             [
               "aTokens",
-              "typing.List[FormulaToken]",
+              "typing.List[sheet_formula_token_i]",
               "in"
             ]
           ]

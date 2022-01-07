@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XSmartTagRecognizer",
   "type": "interface",
   "namespace": "com.sun.star.smarttags",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,37 +16,46 @@
     "from_imports": [
       [
         "..lang.x_initialization",
-        "XInitialization"
+        "XInitialization",
+        "lang_x_initialization_i"
       ]
     ],
     "from_imports_typing": [
       [
+        ".smart_tag_recognizer_mode",
+        "SmartTagRecognizerMode",
+        "smart_tag_recognizer_mode_i"
+      ],
+      [
         "..lang.locale",
-        "Locale"
+        "Locale",
+        "lang_locale_i"
       ],
       [
         "..text.x_text_markup",
-        "XTextMarkup"
-      ],
-      [
-        "..i18n.x_break_iterator",
-        "XBreakIterator"
+        "XTextMarkup",
+        "text_x_text_markup_i"
       ],
       [
         "..frame.x_controller",
-        "XController"
+        "XController",
+        "frame_x_controller_i"
       ],
       [
-        ".smart_tag_recognizer_mode",
-        "SmartTagRecognizerMode"
+        "..i18n.x_break_iterator",
+        "XBreakIterator",
+        "i18n_x_break_iterator_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.lang.XInitialization": "lang_x_initialization_i"
+    },
     "quote": [
-      "Locale",
-      "SmartTagRecognizerMode",
-      "XTextMarkup",
-      "XController",
-      "XBreakIterator"
+      "text_x_text_markup_i",
+      "frame_x_controller_i",
+      "i18n_x_break_iterator_i",
+      "smart_tag_recognizer_mode_i",
+      "lang_locale_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -82,7 +92,7 @@
             ],
             [
               "aLocale",
-              "Locale",
+              "lang_locale_i",
               "in"
             ]
           ]
@@ -97,7 +107,7 @@
           "args": [
             [
               "aLocale",
-              "Locale",
+              "lang_locale_i",
               "in"
             ]
           ]
@@ -112,7 +122,7 @@
           "args": [
             [
               "aLocale",
-              "Locale",
+              "lang_locale_i",
               "in"
             ]
           ]
@@ -168,7 +178,7 @@
             ],
             [
               "aLocale",
-              "Locale",
+              "lang_locale_i",
               "in"
             ]
           ]
@@ -198,17 +208,17 @@
             ],
             [
               "eDataType",
-              "SmartTagRecognizerMode",
+              "smart_tag_recognizer_mode_i",
               "in"
             ],
             [
               "aLocale",
-              "Locale",
+              "lang_locale_i",
               "in"
             ],
             [
               "xTextMarkup",
-              "XTextMarkup",
+              "text_x_text_markup_i",
               "in"
             ],
             [
@@ -218,12 +228,12 @@
             ],
             [
               "xController",
-              "XController",
+              "frame_x_controller_i",
               "in"
             ],
             [
               "xTokenizer",
-              "XBreakIterator",
+              "i18n_x_break_iterator_i",
               "in"
             ]
           ]

@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XNamingService",
   "type": "interface",
   "namespace": "com.sun.star.uno",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,12 +16,16 @@
     "from_imports": [
       [
         ".x_interface",
-        "XInterface"
+        "XInterface",
+        "x_interface_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "x_interface_i"
+    },
     "quote": [
-      "XInterface"
+      "x_interface_i"
     ],
     "typings": [],
     "requires_typing": false,
@@ -38,7 +43,7 @@
       "methods": [
         {
           "name": "getRegisteredObject",
-          "returns": "XInterface",
+          "returns": "x_interface_i",
           "desc": [
             "provides a previous registered object."
           ],
@@ -72,7 +77,7 @@
             ],
             [
               "Object",
-              "XInterface",
+              "x_interface_i",
               "in"
             ]
           ]

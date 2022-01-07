@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XPresenterHelper",
   "type": "interface",
   "namespace": "com.sun.star.drawing",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,32 +16,38 @@
     "from_imports": [],
     "from_imports_typing": [
       [
-        "..rendering.x_canvas",
-        "XCanvas"
-      ],
-      [
-        "..rendering.x_bitmap",
-        "XBitmap"
+        "..rendering.x_sprite_canvas",
+        "XSpriteCanvas",
+        "rendering_x_sprite_canvas_i"
       ],
       [
         "..awt.x_window",
-        "XWindow"
+        "XWindow",
+        "awt_x_window_i"
+      ],
+      [
+        "..rendering.x_bitmap",
+        "XBitmap",
+        "rendering_x_bitmap_i"
+      ],
+      [
+        "..rendering.x_canvas",
+        "XCanvas",
+        "rendering_x_canvas_i"
       ],
       [
         "..awt.rectangle",
-        "Rectangle"
-      ],
-      [
-        "..rendering.x_sprite_canvas",
-        "XSpriteCanvas"
+        "Rectangle",
+        "awt_rectangle_i"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "Rectangle",
-      "XBitmap",
-      "XWindow",
-      "XCanvas",
-      "XSpriteCanvas"
+      "awt_rectangle_i",
+      "rendering_x_bitmap_i",
+      "rendering_x_sprite_canvas_i",
+      "rendering_x_canvas_i",
+      "awt_x_window_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -70,14 +77,14 @@
           "args": [
             [
               "xWindow",
-              "XWindow",
+              "awt_x_window_i",
               "in"
             ]
           ]
         },
         {
           "name": "createCanvas",
-          "returns": "XCanvas",
+          "returns": "rendering_x_canvas_i",
           "desc": [
             "Create a new canvas for the given window."
           ],
@@ -85,7 +92,7 @@
           "args": [
             [
               "xWindow",
-              "XWindow",
+              "awt_x_window_i",
               "in"
             ],
             [
@@ -102,7 +109,7 @@
         },
         {
           "name": "createSharedCanvas",
-          "returns": "XCanvas",
+          "returns": "rendering_x_canvas_i",
           "desc": [
             "Create a new canvas for the given window.",
             "",
@@ -112,34 +119,34 @@
           "args": [
             [
               "xUpdateCanvas",
-              "XSpriteCanvas",
+              "rendering_x_sprite_canvas_i",
               "in"
             ],
             [
               "xUpdateWindow",
-              "XWindow",
+              "awt_x_window_i",
               "in"
             ],
             [
               "xSharedCanvas",
-              "XCanvas",
+              "rendering_x_canvas_i",
               "in"
             ],
             [
               "xSharedWindow",
-              "XWindow",
+              "awt_x_window_i",
               "in"
             ],
             [
               "xWindow",
-              "XWindow",
+              "awt_x_window_i",
               "in"
             ]
           ]
         },
         {
           "name": "createWindow",
-          "returns": "XWindow",
+          "returns": "awt_x_window_i",
           "desc": [
             "Create a new window as child window of the given parent window."
           ],
@@ -147,7 +154,7 @@
           "args": [
             [
               "xParentWindow",
-              "XWindow",
+              "awt_x_window_i",
               "in"
             ],
             [
@@ -174,7 +181,7 @@
         },
         {
           "name": "getWindowExtentsRelative",
-          "returns": "Rectangle",
+          "returns": "awt_rectangle_i",
           "desc": [
             "Return the bounding box of the given child window relative to the direct or indirect parent window."
           ],
@@ -182,19 +189,19 @@
           "args": [
             [
               "xChildWindow",
-              "XWindow",
+              "awt_x_window_i",
               "in"
             ],
             [
               "xParentWindow",
-              "XWindow",
+              "awt_x_window_i",
               "in"
             ]
           ]
         },
         {
           "name": "loadBitmap",
-          "returns": "XBitmap",
+          "returns": "rendering_x_bitmap_i",
           "desc": [
             "Load a bitmap with a given ID."
           ],
@@ -207,7 +214,7 @@
             ],
             [
               "xCanvas",
-              "XCanvas",
+              "rendering_x_canvas_i",
               "in"
             ]
           ]
@@ -222,7 +229,7 @@
           "args": [
             [
               "xWindow",
-              "XWindow",
+              "awt_x_window_i",
               "in"
             ]
           ]
@@ -239,7 +246,7 @@
           "args": [
             [
               "xWindow",
-              "XWindow",
+              "awt_x_window_i",
               "in"
             ]
           ]

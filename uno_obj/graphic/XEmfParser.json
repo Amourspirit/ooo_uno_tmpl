@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XEmfParser",
   "type": "interface",
   "namespace": "com.sun.star.graphic",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,30 +16,37 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
-        "..geometry.real_point2_d",
-        "RealPoint2D"
-      ],
-      [
         ".x_primitive2_d",
-        "XPrimitive2D"
+        "XPrimitive2D",
+        "x_primitive2_d_i"
       ],
       [
         "..beans.property_values",
-        "PropertyValues"
+        "PropertyValues",
+        "beans_property_values_i"
+      ],
+      [
+        "..geometry.real_point2_d",
+        "RealPoint2D",
+        "geometry_real_point2_d_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "typing.List[XPrimitive2D]",
-      "PropertyValues",
-      "RealPoint2D"
+      "beans_property_values_i",
+      "geometry_real_point2_d_i",
+      "typing.List[x_primitive2_d_i]"
     ],
     "typings": [
-      "typing.List[XPrimitive2D]"
+      "typing.List[x_primitive2_d_i]"
     ],
     "requires_typing": true,
     "name": "XEmfParser",
@@ -61,7 +69,7 @@
       "methods": [
         {
           "name": "getDecomposition",
-          "returns": "typing.List[XPrimitive2D]",
+          "returns": "typing.List[x_primitive2_d_i]",
           "desc": [
             "Retrieve decomposed list of simpler primitives."
           ],
@@ -79,7 +87,7 @@
             ],
             [
               "Properties",
-              "PropertyValues",
+              "beans_property_values_i",
               "in"
             ]
           ]
@@ -98,7 +106,7 @@
           "args": [
             [
               "Size",
-              "RealPoint2D",
+              "geometry_real_point2_d_i",
               "in"
             ]
           ]

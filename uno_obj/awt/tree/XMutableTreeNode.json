@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XMutableTreeNode",
   "type": "interface",
   "namespace": "com.sun.star.awt.tree",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,17 +16,22 @@
     "from_imports": [
       [
         ".x_tree_node",
-        "XTreeNode"
+        "XTreeNode",
+        "x_tree_node_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_mutable_tree_node",
-        "XMutableTreeNode"
+        "XMutableTreeNode",
+        "x_mutable_tree_node_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.awt.tree.XTreeNode": "x_tree_node_i"
+    },
     "quote": [
-      "XMutableTreeNode"
+      "x_mutable_tree_node_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -53,7 +59,7 @@
           "args": [
             [
               "ChildNode",
-              "XMutableTreeNode",
+              "x_mutable_tree_node_i",
               "in"
             ]
           ]
@@ -76,7 +82,7 @@
             ],
             [
               "ChildNode",
-              "XMutableTreeNode",
+              "x_mutable_tree_node_i",
               "in"
             ]
           ]

@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XXMLSignatureTemplate",
   "type": "interface",
   "namespace": "com.sun.star.xml.crypto",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,25 +16,31 @@
     "from_imports": [
       [
         ".xxml_security_template",
-        "XXMLSecurityTemplate"
+        "XXMLSecurityTemplate",
+        "xxml_security_template_i"
       ]
     ],
     "from_imports_typing": [
       [
-        "..wrapper.xxml_element_wrapper",
-        "XXMLElementWrapper"
+        ".x_uri_binding",
+        "XUriBinding",
+        "x_uri_binding_i"
       ],
       [
-        ".x_uri_binding",
-        "XUriBinding"
+        "..wrapper.xxml_element_wrapper",
+        "XXMLElementWrapper",
+        "wrapper_xxml_element_wrapper_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.xml.crypto.XXMLSecurityTemplate": "xxml_security_template_i"
+    },
     "quote": [
-      "typing.List[XXMLElementWrapper]",
-      "XUriBinding"
+      "x_uri_binding_i",
+      "typing.List[wrapper_xxml_element_wrapper_i]"
     ],
     "typings": [
-      "typing.List[XXMLElementWrapper]"
+      "typing.List[wrapper_xxml_element_wrapper_i]"
     ],
     "requires_typing": true,
     "name": "XXMLSignatureTemplate",
@@ -56,7 +63,7 @@
       "methods": [
         {
           "name": "getBinding",
-          "returns": "XUriBinding",
+          "returns": "x_uri_binding_i",
           "desc": [
             "Get the dynamic URI binding."
           ],
@@ -65,7 +72,7 @@
         },
         {
           "name": "getTargets",
-          "returns": "typing.List[XXMLElementWrapper]",
+          "returns": "typing.List[wrapper_xxml_element_wrapper_i]",
           "desc": [
             "Get the target XML element, i.e.",
             "",
@@ -86,7 +93,7 @@
           "args": [
             [
               "aUriBinding",
-              "XUriBinding",
+              "x_uri_binding_i",
               "in"
             ]
           ]

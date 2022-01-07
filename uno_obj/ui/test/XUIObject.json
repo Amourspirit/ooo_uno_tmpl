@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XUIObject",
   "type": "interface",
   "namespace": "com.sun.star.ui.test",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,18 +16,21 @@
     "from_imports": [],
     "from_imports_typing": [
       [
-        ".xui_object",
-        "XUIObject"
+        "...beans.property_values",
+        "PropertyValues",
+        "beans_property_values_i"
       ],
       [
-        "...beans.property_values",
-        "PropertyValues"
+        ".xui_object",
+        "XUIObject",
+        "xui_object_i"
       ]
     ],
+    "extends_map": {},
     "quote": [
+      "xui_object_i",
       "typing.List[str]",
-      "PropertyValues",
-      "XUIObject"
+      "beans_property_values_i"
     ],
     "typings": [
       "typing.List[str]"
@@ -53,14 +57,14 @@
             ],
             [
               "propValues",
-              "PropertyValues",
+              "beans_property_values_i",
               "in"
             ]
           ]
         },
         {
           "name": "getChild",
-          "returns": "XUIObject",
+          "returns": "xui_object_i",
           "desc": [],
           "raises": [],
           "args": [
@@ -87,7 +91,7 @@
         },
         {
           "name": "getState",
-          "returns": "PropertyValues",
+          "returns": "beans_property_values_i",
           "desc": [],
           "raises": [],
           "args": []

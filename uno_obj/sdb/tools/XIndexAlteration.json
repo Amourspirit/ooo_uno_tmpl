@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XIndexAlteration",
   "type": "interface",
   "namespace": "com.sun.star.sdb.tools",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,17 +16,22 @@
     "from_imports": [
       [
         ".x_connection_supplier",
-        "XConnectionSupplier"
+        "XConnectionSupplier",
+        "x_connection_supplier_i"
       ]
     ],
     "from_imports_typing": [
       [
         "...beans.x_property_set",
-        "XPropertySet"
+        "XPropertySet",
+        "beans_x_property_set_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.sdb.tools.XConnectionSupplier": "x_connection_supplier_i"
+    },
     "quote": [
-      "XPropertySet"
+      "beans_x_property_set_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -59,12 +65,12 @@
           "args": [
             [
               "table",
-              "XPropertySet",
+              "beans_x_property_set_i",
               "in"
             ],
             [
               "descriptor",
-              "XPropertySet",
+              "beans_x_property_set_i",
               "in"
             ]
           ]
@@ -81,7 +87,7 @@
           "args": [
             [
               "table",
-              "XPropertySet",
+              "beans_x_property_set_i",
               "in"
             ],
             [

@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XReportComponent",
   "type": "interface",
   "namespace": "com.sun.star.report",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,35 +15,48 @@
   "data": {
     "from_imports": [
       [
-        "..util.x_cloneable",
-        "XCloneable"
-      ],
-      [
-        "..lang.x_component",
-        "XComponent"
-      ],
-      [
-        "..beans.x_property_set",
-        "XPropertySet"
+        "..container.x_child",
+        "XChild",
+        "container_x_child_i"
       ],
       [
         "..drawing.x_shape",
-        "XShape"
+        "XShape",
+        "drawing_x_shape_i"
       ],
       [
-        "..container.x_child",
-        "XChild"
+        "..beans.x_property_set",
+        "XPropertySet",
+        "beans_x_property_set_i"
+      ],
+      [
+        "..util.x_cloneable",
+        "XCloneable",
+        "util_x_cloneable_i"
+      ],
+      [
+        "..lang.x_component",
+        "XComponent",
+        "lang_x_component_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_section",
-        "XSection"
+        "XSection",
+        "x_section_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.container.XChild": "container_x_child_i",
+      "com.sun.star.drawing.XShape": "drawing_x_shape_i",
+      "com.sun.star.beans.XPropertySet": "beans_x_property_set_i",
+      "com.sun.star.util.XCloneable": "util_x_cloneable_i",
+      "com.sun.star.lang.XComponent": "lang_x_component_i"
+    },
     "quote": [
-      "typing.List[str]",
-      "XSection"
+      "x_section_i",
+      "typing.List[str]"
     ],
     "typings": [
       "typing.List[str]"
@@ -52,11 +66,11 @@
     "imports": [],
     "namespace": "com.sun.star.report",
     "extends": [
-      "com.sun.star.util.XCloneable",
       "com.sun.star.container.XChild",
-      "com.sun.star.lang.XComponent",
       "com.sun.star.drawing.XShape",
-      "com.sun.star.beans.XPropertySet"
+      "com.sun.star.beans.XPropertySet",
+      "com.sun.star.util.XCloneable",
+      "com.sun.star.lang.XComponent"
     ],
     "desc": [
       "describes a component which may be part of a report."
@@ -175,7 +189,7 @@
         },
         {
           "name": "Section",
-          "returns": "XSection",
+          "returns": "x_section_i",
           "desc": [
             "Specifies the section where the control belongs to.",
             "",

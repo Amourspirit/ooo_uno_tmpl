@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XSingleComponentFactory",
   "type": "interface",
   "namespace": "com.sun.star.lang",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,19 +16,24 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
         "..uno.x_component_context",
-        "XComponentContext"
+        "XComponentContext",
+        "uno_x_component_context_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "XComponentContext",
-      "XInterface",
-      "typing.List[object]"
+      "uno_x_component_context_i",
+      "typing.List[object]",
+      "uno_x_interface_i"
     ],
     "typings": [
       "typing.List[object]"
@@ -47,7 +53,7 @@
       "methods": [
         {
           "name": "createInstanceWithArgumentsAndContext",
-          "returns": "XInterface",
+          "returns": "uno_x_interface_i",
           "desc": [
             "Creates an instance of a component and initializes the new instance with the given arguments and context."
           ],
@@ -62,14 +68,14 @@
             ],
             [
               "Context",
-              "XComponentContext",
+              "uno_x_component_context_i",
               "in"
             ]
           ]
         },
         {
           "name": "createInstanceWithContext",
-          "returns": "XInterface",
+          "returns": "uno_x_interface_i",
           "desc": [
             "Creates an instance of a service implementation."
           ],
@@ -79,7 +85,7 @@
           "args": [
             [
               "Context",
-              "XComponentContext",
+              "uno_x_component_context_i",
               "in"
             ]
           ]

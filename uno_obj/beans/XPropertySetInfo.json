@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XPropertySetInfo",
   "type": "interface",
   "namespace": "com.sun.star.beans",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,21 +16,26 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".property",
-        "Property"
+        "Property",
+        "property_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "Property",
-      "typing.List[Property]"
+      "property_i",
+      "typing.List[property_i]"
     ],
     "typings": [
-      "typing.List[Property]"
+      "typing.List[property_i]"
     ],
     "requires_typing": true,
     "name": "XPropertySetInfo",
@@ -50,14 +56,14 @@
       "methods": [
         {
           "name": "getProperties",
-          "returns": "typing.List[Property]",
+          "returns": "typing.List[property_i]",
           "desc": [],
           "raises": [],
           "args": []
         },
         {
           "name": "getPropertyByName",
-          "returns": "Property",
+          "returns": "property_i",
           "desc": [],
           "raises": [
             "com.sun.star.beans.UnknownPropertyException"

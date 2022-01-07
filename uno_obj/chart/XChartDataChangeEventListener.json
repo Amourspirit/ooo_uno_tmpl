@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XChartDataChangeEventListener",
   "type": "interface",
   "namespace": "com.sun.star.chart",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,17 +16,22 @@
     "from_imports": [
       [
         "..lang.x_event_listener",
-        "XEventListener"
+        "XEventListener",
+        "lang_x_event_listener_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".chart_data_change_event",
-        "ChartDataChangeEvent"
+        "ChartDataChangeEvent",
+        "chart_data_change_event_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.lang.XEventListener": "lang_x_event_listener_i"
+    },
     "quote": [
-      "ChartDataChangeEvent"
+      "chart_data_change_event_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -53,7 +59,7 @@
           "args": [
             [
               "aEvent",
-              "ChartDataChangeEvent",
+              "chart_data_change_event_i",
               "in"
             ]
           ]

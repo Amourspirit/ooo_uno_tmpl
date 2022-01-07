@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XBezierPolyPolygon2D",
   "type": "interface",
   "namespace": "com.sun.star.rendering",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,21 +16,26 @@
     "from_imports": [
       [
         ".x_poly_polygon2_d",
-        "XPolyPolygon2D"
+        "XPolyPolygon2D",
+        "x_poly_polygon2_d_i"
       ]
     ],
     "from_imports_typing": [
       [
         "..geometry.real_bezier_segment2_d",
-        "RealBezierSegment2D"
+        "RealBezierSegment2D",
+        "geometry_real_bezier_segment2_d_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.rendering.XPolyPolygon2D": "x_poly_polygon2_d_i"
+    },
     "quote": [
-      "typing.List[typing.List[RealBezierSegment2D]]",
-      "RealBezierSegment2D"
+      "geometry_real_bezier_segment2_d_i",
+      "typing.List[typing.List[geometry_real_bezier_segment2_d_i]]"
     ],
     "typings": [
-      "typing.List[typing.List[RealBezierSegment2D]]"
+      "typing.List[typing.List[geometry_real_bezier_segment2_d_i]]"
     ],
     "requires_typing": true,
     "name": "XBezierPolyPolygon2D",
@@ -54,7 +60,7 @@
       "methods": [
         {
           "name": "getBezierSegment",
-          "returns": "RealBezierSegment2D",
+          "returns": "geometry_real_bezier_segment2_d_i",
           "desc": [
             "Get a single point from the poly-polygon."
           ],
@@ -76,7 +82,7 @@
         },
         {
           "name": "getBezierSegments",
-          "returns": "typing.List[typing.List[RealBezierSegment2D]]",
+          "returns": "typing.List[typing.List[geometry_real_bezier_segment2_d_i]]",
           "desc": [
             "Query subset of this poly-polygon.",
             "",
@@ -122,7 +128,7 @@
           "args": [
             [
               "point",
-              "RealBezierSegment2D",
+              "geometry_real_bezier_segment2_d_i",
               "in"
             ],
             [
@@ -151,7 +157,7 @@
           "args": [
             [
               "points",
-              "typing.List[typing.List[RealBezierSegment2D]]",
+              "typing.List[typing.List[geometry_real_bezier_segment2_d_i]]",
               "in"
             ],
             [

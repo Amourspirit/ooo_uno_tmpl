@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XTreeEditListener",
   "type": "interface",
   "namespace": "com.sun.star.awt.tree",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,17 +16,22 @@
     "from_imports": [
       [
         "...lang.x_event_listener",
-        "XEventListener"
+        "XEventListener",
+        "lang_x_event_listener_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_tree_node",
-        "XTreeNode"
+        "XTreeNode",
+        "x_tree_node_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.lang.XEventListener": "lang_x_event_listener_i"
+    },
     "quote": [
-      "XTreeNode"
+      "x_tree_node_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -55,7 +61,7 @@
           "args": [
             [
               "Node",
-              "XTreeNode",
+              "x_tree_node_i",
               "in"
             ],
             [
@@ -77,7 +83,7 @@
           "args": [
             [
               "Node",
-              "XTreeNode",
+              "x_tree_node_i",
               "in"
             ]
           ]

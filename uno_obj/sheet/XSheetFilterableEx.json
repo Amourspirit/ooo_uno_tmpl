@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XSheetFilterableEx",
   "type": "interface",
   "namespace": "com.sun.star.sheet",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,18 +16,23 @@
     "from_imports": [
       [
         ".x_sheet_filterable",
-        "XSheetFilterable"
+        "XSheetFilterable",
+        "x_sheet_filterable_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_sheet_filter_descriptor",
-        "XSheetFilterDescriptor"
+        "XSheetFilterDescriptor",
+        "x_sheet_filter_descriptor_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.sheet.XSheetFilterable": "x_sheet_filterable_i"
+    },
     "quote": [
-      "XSheetFilterDescriptor",
-      "XSheetFilterable"
+      "x_sheet_filter_descriptor_i",
+      "x_sheet_filterable_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -46,7 +52,7 @@
       "methods": [
         {
           "name": "createFilterDescriptorByObject",
-          "returns": "XSheetFilterDescriptor",
+          "returns": "x_sheet_filter_descriptor_i",
           "desc": [
             "creates a filter descriptor for the specified filterable object from the contents of this object."
           ],
@@ -54,7 +60,7 @@
           "args": [
             [
               "xObject",
-              "XSheetFilterable",
+              "x_sheet_filterable_i",
               "in"
             ]
           ]

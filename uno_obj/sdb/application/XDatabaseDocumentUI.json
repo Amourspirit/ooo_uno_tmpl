@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XDatabaseDocumentUI",
   "type": "interface",
   "namespace": "com.sun.star.sdb.application",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,39 +16,45 @@
     "from_imports": [],
     "from_imports_typing": [
       [
-        "...sdbc.x_connection",
-        "XConnection"
-      ],
-      [
         "...awt.x_window",
-        "XWindow"
+        "XWindow",
+        "awt_x_window_i"
       ],
       [
-        "...sdbc.x_data_source",
-        "XDataSource"
-      ],
-      [
-        "...lang.x_component",
-        "XComponent"
+        "...sdbc.x_connection",
+        "XConnection",
+        "sdbc_x_connection_i"
       ],
       [
         "...beans.property_value",
-        "PropertyValue"
+        "PropertyValue",
+        "beans_property_value_i"
+      ],
+      [
+        "...lang.x_component",
+        "XComponent",
+        "lang_x_component_i"
+      ],
+      [
+        "...sdbc.x_data_source",
+        "XDataSource",
+        "sdbc_x_data_source_i"
       ]
     ],
+    "extends_map": {},
     "quote": [
+      "sdbc_x_connection_i",
+      "sdbc_x_data_source_i",
+      "lang_x_component_i",
       "typing.Tuple[int, str]",
-      "typing.List[PropertyValue]",
-      "XComponent",
-      "typing.List[XComponent]",
-      "XWindow",
-      "XConnection",
-      "XDataSource"
+      "typing.List[beans_property_value_i]",
+      "typing.List[lang_x_component_i]",
+      "awt_x_window_i"
     ],
     "typings": [
-      "typing.List[XComponent]",
       "typing.Tuple[int, str]",
-      "typing.List[PropertyValue]"
+      "typing.List[beans_property_value_i]",
+      "typing.List[lang_x_component_i]"
     ],
     "requires_typing": true,
     "name": "XDatabaseDocumentUI",
@@ -102,7 +109,7 @@
         },
         {
           "name": "createComponent",
-          "returns": "XComponent",
+          "returns": "lang_x_component_i",
           "desc": [
             "creates a new sub component of the given type"
           ],
@@ -118,14 +125,14 @@
             ],
             [
               "DocumentDefinition",
-              "XComponent",
+              "lang_x_component_i",
               "out"
             ]
           ]
         },
         {
           "name": "createComponentWithArguments",
-          "returns": "XComponent",
+          "returns": "lang_x_component_i",
           "desc": [
             "creates a new sub component of the given type",
             "",
@@ -144,12 +151,12 @@
             ],
             [
               "Arguments",
-              "typing.List[PropertyValue]",
+              "typing.List[beans_property_value_i]",
               "in"
             ],
             [
               "DocumentDefinition",
-              "XComponent",
+              "lang_x_component_i",
               "out"
             ]
           ]
@@ -166,7 +173,7 @@
           "args": [
             [
               "SubComponent",
-              "XComponent",
+              "lang_x_component_i",
               "in"
             ]
           ]
@@ -182,7 +189,7 @@
         },
         {
           "name": "loadComponent",
-          "returns": "XComponent",
+          "returns": "lang_x_component_i",
           "desc": [
             "loads the given sub component of the database document",
             "",
@@ -221,7 +228,7 @@
         },
         {
           "name": "loadComponentWithArguments",
-          "returns": "XComponent",
+          "returns": "lang_x_component_i",
           "desc": [
             "loads the given sub component of the database document",
             "",
@@ -252,7 +259,7 @@
             ],
             [
               "Arguments",
-              "typing.List[PropertyValue]",
+              "typing.List[beans_property_value_i]",
               "in"
             ]
           ]
@@ -261,7 +268,7 @@
       "types": [
         {
           "name": "SubComponents",
-          "returns": "typing.List[XComponent]",
+          "returns": "typing.List[lang_x_component_i]",
           "desc": [
             "contains all sub components of the database document",
             "",
@@ -280,7 +287,7 @@
       "properties": [
         {
           "name": "ActiveConnection",
-          "returns": "XConnection",
+          "returns": "sdbc_x_connection_i",
           "desc": [
             "provides access to the current connection of the application",
             "",
@@ -291,7 +298,7 @@
         },
         {
           "name": "ApplicationMainWindow",
-          "returns": "XWindow",
+          "returns": "awt_x_window_i",
           "desc": [
             "provides access to the application's main window",
             "",
@@ -302,7 +309,7 @@
         },
         {
           "name": "DataSource",
-          "returns": "XDataSource",
+          "returns": "sdbc_x_data_source_i",
           "desc": [
             "provides access to the data source belong to the database document"
           ],

@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XFastSAXSerializable",
   "type": "interface",
   "namespace": "com.sun.star.xml.sax",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,27 +16,31 @@
     "from_imports": [],
     "from_imports_typing": [
       [
-        "...beans.string_pair",
-        "StringPair"
-      ],
-      [
         ".x_fast_document_handler",
-        "XFastDocumentHandler"
+        "XFastDocumentHandler",
+        "x_fast_document_handler_i"
       ],
       [
         ".x_fast_token_handler",
-        "XFastTokenHandler"
+        "XFastTokenHandler",
+        "x_fast_token_handler_i"
+      ],
+      [
+        "...beans.string_pair",
+        "StringPair",
+        "beans_string_pair_i"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "typing.List[typing.Tuple[str, int]]",
-      "typing.List[StringPair]",
-      "XFastTokenHandler",
-      "XFastDocumentHandler"
+      "typing.List[beans_string_pair_i]",
+      "x_fast_token_handler_i",
+      "x_fast_document_handler_i",
+      "typing.List[typing.Tuple[str, int]]"
     ],
     "typings": [
-      "typing.List[typing.Tuple[str, int]]",
-      "typing.List[StringPair]"
+      "typing.List[beans_string_pair_i]",
+      "typing.List[typing.Tuple[str, int]]"
     ],
     "requires_typing": true,
     "name": "XFastSAXSerializable",
@@ -68,17 +73,17 @@
           "args": [
             [
               "handler",
-              "XFastDocumentHandler",
+              "x_fast_document_handler_i",
               "in"
             ],
             [
               "tokenHandler",
-              "XFastTokenHandler",
+              "x_fast_token_handler_i",
               "in"
             ],
             [
               "namespaces",
-              "typing.List[StringPair]",
+              "typing.List[beans_string_pair_i]",
               "in"
             ],
             [

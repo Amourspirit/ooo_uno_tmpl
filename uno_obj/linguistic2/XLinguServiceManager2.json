@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XLinguServiceManager2",
   "type": "interface",
   "namespace": "com.sun.star.linguistic2",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,19 +15,27 @@
   "data": {
     "from_imports": [
       [
+        ".x_lingu_service_manager",
+        "XLinguServiceManager",
+        "x_lingu_service_manager_i"
+      ],
+      [
         "..lang.x_component",
-        "XComponent"
+        "XComponent",
+        "lang_x_component_i"
       ],
       [
         ".x_available_locales",
-        "XAvailableLocales"
-      ],
-      [
-        ".x_lingu_service_manager",
-        "XLinguServiceManager"
+        "XAvailableLocales",
+        "x_available_locales_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.linguistic2.XLinguServiceManager": "x_lingu_service_manager_i",
+      "com.sun.star.lang.XComponent": "lang_x_component_i",
+      "com.sun.star.linguistic2.XAvailableLocales": "x_available_locales_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -35,8 +44,8 @@
     "namespace": "com.sun.star.linguistic2",
     "extends": [
       "com.sun.star.linguistic2.XLinguServiceManager",
-      "com.sun.star.linguistic2.XAvailableLocales",
-      "com.sun.star.lang.XComponent"
+      "com.sun.star.lang.XComponent",
+      "com.sun.star.linguistic2.XAvailableLocales"
     ],
     "desc": [
       "Provides a unified interface for the LinguServiceManager service to implement.",

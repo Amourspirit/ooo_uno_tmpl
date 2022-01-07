@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XModuleManager2",
   "type": "interface",
   "namespace": "com.sun.star.frame",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,14 +16,20 @@
     "from_imports": [
       [
         "..container.x_name_replace",
-        "XNameReplace"
+        "XNameReplace",
+        "container_x_name_replace_i"
       ],
       [
         ".x_module_manager",
-        "XModuleManager"
+        "XModuleManager",
+        "x_module_manager_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.container.XNameReplace": "container_x_name_replace_i",
+      "com.sun.star.frame.XModuleManager": "x_module_manager_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -30,8 +37,8 @@
     "imports": [],
     "namespace": "com.sun.star.frame",
     "extends": [
-      "com.sun.star.frame.XModuleManager",
-      "com.sun.star.container.XNameReplace"
+      "com.sun.star.container.XNameReplace",
+      "com.sun.star.frame.XModuleManager"
     ],
     "desc": [
       "This interface provides a merged single interface for the ModuleManager service to implement.",

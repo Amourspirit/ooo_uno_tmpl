@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XReadWriteAccess",
   "type": "interface",
   "namespace": "com.sun.star.configuration",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,19 +15,27 @@
   "data": {
     "from_imports": [
       [
-        "..container.x_hierarchical_name_replace",
-        "XHierarchicalNameReplace"
+        "..beans.x_hierarchical_property_set_info",
+        "XHierarchicalPropertySetInfo",
+        "beans_x_hierarchical_property_set_info_i"
       ],
       [
         "..util.x_changes_batch",
-        "XChangesBatch"
+        "XChangesBatch",
+        "util_x_changes_batch_i"
       ],
       [
-        "..beans.x_hierarchical_property_set_info",
-        "XHierarchicalPropertySetInfo"
+        "..container.x_hierarchical_name_replace",
+        "XHierarchicalNameReplace",
+        "container_x_hierarchical_name_replace_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.beans.XHierarchicalPropertySetInfo": "beans_x_hierarchical_property_set_info_i",
+      "com.sun.star.util.XChangesBatch": "util_x_changes_batch_i",
+      "com.sun.star.container.XHierarchicalNameReplace": "container_x_hierarchical_name_replace_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -34,9 +43,9 @@
     "imports": [],
     "namespace": "com.sun.star.configuration",
     "extends": [
-      "com.sun.star.container.XHierarchicalNameReplace",
+      "com.sun.star.beans.XHierarchicalPropertySetInfo",
       "com.sun.star.util.XChangesBatch",
-      "com.sun.star.beans.XHierarchicalPropertySetInfo"
+      "com.sun.star.container.XHierarchicalNameReplace"
     ],
     "desc": [],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1configuration_1_1XReadWriteAccess.html",

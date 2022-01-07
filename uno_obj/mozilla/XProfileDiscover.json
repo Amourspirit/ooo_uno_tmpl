@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XProfileDiscover",
   "type": "interface",
   "namespace": "com.sun.star.mozilla",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,18 +16,23 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".mozilla_product_type",
-        "MozillaProductType"
+        "MozillaProductType",
+        "mozilla_product_type_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
       "typing.List[str]",
-      "MozillaProductType"
+      "mozilla_product_type_i"
     ],
     "typings": [
       "typing.List[str]"
@@ -54,7 +60,7 @@
           "args": [
             [
               "product",
-              "MozillaProductType",
+              "mozilla_product_type_i",
               "in"
             ]
           ]
@@ -69,7 +75,7 @@
           "args": [
             [
               "product",
-              "MozillaProductType",
+              "mozilla_product_type_i",
               "in"
             ]
           ]
@@ -84,7 +90,7 @@
           "args": [
             [
               "product",
-              "MozillaProductType",
+              "mozilla_product_type_i",
               "in"
             ],
             [
@@ -104,7 +110,7 @@
           "args": [
             [
               "product",
-              "MozillaProductType",
+              "mozilla_product_type_i",
               "in"
             ],
             [
@@ -124,7 +130,7 @@
           "args": [
             [
               "product",
-              "MozillaProductType",
+              "mozilla_product_type_i",
               "in"
             ],
             [
@@ -144,7 +150,7 @@
           "args": [
             [
               "product",
-              "MozillaProductType",
+              "mozilla_product_type_i",
               "in"
             ],
             [

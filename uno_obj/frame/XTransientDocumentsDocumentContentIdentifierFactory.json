@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XTransientDocumentsDocumentContentIdentifierFactory",
   "type": "interface",
   "namespace": "com.sun.star.frame",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,22 +16,28 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
-        "..ucb.x_content_identifier",
-        "XContentIdentifier"
+        ".x_model",
+        "XModel",
+        "x_model_i"
       ],
       [
-        ".x_model",
-        "XModel"
+        "..ucb.x_content_identifier",
+        "XContentIdentifier",
+        "ucb_x_content_identifier_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "XContentIdentifier",
-      "XModel"
+      "x_model_i",
+      "ucb_x_content_identifier_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -52,7 +59,7 @@
       "methods": [
         {
           "name": "createDocumentContentIdentifier",
-          "returns": "XContentIdentifier",
+          "returns": "ucb_x_content_identifier_i",
           "desc": [
             "creates a com.sun.star.ucb.XContentIdentifier based on a given com.sun.star.document.OfficeDocument."
           ],
@@ -62,7 +69,7 @@
           "args": [
             [
               "Model",
-              "XModel",
+              "x_model_i",
               "in"
             ]
           ]

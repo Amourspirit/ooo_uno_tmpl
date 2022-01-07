@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XSpellChecker1",
   "type": "interface",
   "namespace": "com.sun.star.linguistic2",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,22 +16,28 @@
     "from_imports": [
       [
         ".x_supported_languages",
-        "XSupportedLanguages"
+        "XSupportedLanguages",
+        "x_supported_languages_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_spell_alternatives",
-        "XSpellAlternatives"
+        "XSpellAlternatives",
+        "x_spell_alternatives_i"
       ],
       [
         "..beans.property_values",
-        "PropertyValues"
+        "PropertyValues",
+        "beans_property_values_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.linguistic2.XSupportedLanguages": "x_supported_languages_i"
+    },
     "quote": [
-      "PropertyValues",
-      "XSpellAlternatives"
+      "beans_property_values_i",
+      "x_spell_alternatives_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -69,14 +76,14 @@
             ],
             [
               "aProperties",
-              "PropertyValues",
+              "beans_property_values_i",
               "in"
             ]
           ]
         },
         {
           "name": "spell",
-          "returns": "XSpellAlternatives",
+          "returns": "x_spell_alternatives_i",
           "desc": [],
           "raises": [
             "com.sun.star.lang.IllegalArgumentException"
@@ -94,7 +101,7 @@
             ],
             [
               "aProperties",
-              "PropertyValues",
+              "beans_property_values_i",
               "in"
             ]
           ]

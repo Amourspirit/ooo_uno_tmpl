@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XTabPageContainerModel",
   "type": "interface",
   "namespace": "com.sun.star.awt.tab",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,22 +15,29 @@
   "data": {
     "from_imports": [
       [
-        "...container.x_container",
-        "XContainer"
+        "...container.x_index_container",
+        "XIndexContainer",
+        "container_x_index_container_i"
       ],
       [
-        "...container.x_index_container",
-        "XIndexContainer"
+        "...container.x_container",
+        "XContainer",
+        "container_x_container_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_tab_page_model",
-        "XTabPageModel"
+        "XTabPageModel",
+        "x_tab_page_model_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.container.XIndexContainer": "container_x_index_container_i",
+      "com.sun.star.container.XContainer": "container_x_container_i"
+    },
     "quote": [
-      "XTabPageModel"
+      "x_tab_page_model_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -52,7 +60,7 @@
       "methods": [
         {
           "name": "createTabPage",
-          "returns": "XTabPageModel",
+          "returns": "x_tab_page_model_i",
           "desc": [
             "creates a TabPageModel which can be inserted into the container."
           ],
@@ -67,7 +75,7 @@
         },
         {
           "name": "loadTabPage",
-          "returns": "XTabPageModel",
+          "returns": "x_tab_page_model_i",
           "desc": [
             "creates a TabPageModel which can be inserted into the container, by loading it from a user interface resource file."
           ],

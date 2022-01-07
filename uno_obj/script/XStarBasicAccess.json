@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XStarBasicAccess",
   "type": "interface",
   "namespace": "com.sun.star.script",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,18 +16,23 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
         "..container.x_name_container",
-        "XNameContainer"
+        "XNameContainer",
+        "container_x_name_container_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
       "typing.List[int]",
-      "XNameContainer"
+      "container_x_name_container_i"
     ],
     "typings": [
       "typing.List[int]"
@@ -147,7 +153,7 @@
         },
         {
           "name": "getLibraryContainer",
-          "returns": "XNameContainer",
+          "returns": "container_x_name_container_i",
           "desc": [
             "returns the library container giving access to the libraries stored in a document or basic library file."
           ],

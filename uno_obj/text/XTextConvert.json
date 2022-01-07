@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XTextConvert",
   "type": "interface",
   "namespace": "com.sun.star.text",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,40 +16,48 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
         "..beans.property_values",
-        "PropertyValues"
-      ],
-      [
-        ".x_text_content",
-        "XTextContent"
+        "PropertyValues",
+        "beans_property_values_i"
       ],
       [
         ".x_text_range",
-        "XTextRange"
+        "XTextRange",
+        "x_text_range_i"
       ],
       [
         ".x_text_table",
-        "XTextTable"
+        "XTextTable",
+        "x_text_table_i"
+      ],
+      [
+        ".x_text_content",
+        "XTextContent",
+        "x_text_content_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "XTextContent",
-      "PropertyValues",
-      "typing.List[PropertyValues]",
       "typing.List[object]",
-      "XTextTable",
-      "typing.List[typing.List[PropertyValues]]",
-      "XTextRange"
+      "typing.List[beans_property_values_i]",
+      "x_text_content_i",
+      "x_text_range_i",
+      "beans_property_values_i",
+      "x_text_table_i",
+      "typing.List[typing.List[beans_property_values_i]]"
     ],
     "typings": [
+      "typing.List[typing.List[beans_property_values_i]]",
       "typing.List[object]",
-      "typing.List[PropertyValues]",
-      "typing.List[typing.List[PropertyValues]]"
+      "typing.List[beans_property_values_i]"
     ],
     "requires_typing": true,
     "name": "XTextConvert",
@@ -65,7 +74,7 @@
       "methods": [
         {
           "name": "convertToTable",
-          "returns": "XTextTable",
+          "returns": "x_text_table_i",
           "desc": [
             "converts the paragraphs marked in TableRanges into a table.",
             "",
@@ -83,24 +92,24 @@
             ],
             [
               "CellProperties",
-              "typing.List[typing.List[PropertyValues]]",
+              "typing.List[typing.List[beans_property_values_i]]",
               "in"
             ],
             [
               "RowProperties",
-              "typing.List[PropertyValues]",
+              "typing.List[beans_property_values_i]",
               "in"
             ],
             [
               "TableProperties",
-              "PropertyValues",
+              "beans_property_values_i",
               "in"
             ]
           ]
         },
         {
           "name": "convertToTextFrame",
-          "returns": "XTextContent",
+          "returns": "x_text_content_i",
           "desc": [
             "moves the paragraphs from Start to End into a text frame."
           ],
@@ -112,17 +121,17 @@
           "args": [
             [
               "Start",
-              "XTextRange",
+              "x_text_range_i",
               "in"
             ],
             [
               "End",
-              "XTextRange",
+              "x_text_range_i",
               "in"
             ],
             [
               "FrameProperties",
-              "PropertyValues",
+              "beans_property_values_i",
               "in"
             ]
           ]

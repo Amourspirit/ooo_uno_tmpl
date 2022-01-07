@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XAttr",
   "type": "interface",
   "namespace": "com.sun.star.xml.dom",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,17 +16,22 @@
     "from_imports": [
       [
         ".x_node",
-        "XNode"
+        "XNode",
+        "x_node_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_element",
-        "XElement"
+        "XElement",
+        "x_element_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.xml.dom.XNode": "x_node_i"
+    },
     "quote": [
-      "XElement"
+      "x_element_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -50,7 +56,7 @@
         },
         {
           "name": "getOwnerElement",
-          "returns": "XElement",
+          "returns": "x_element_i",
           "desc": [
             "The Element node this attribute is attached to or null if this attribute is not in use."
           ],

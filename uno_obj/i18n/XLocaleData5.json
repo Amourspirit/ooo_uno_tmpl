@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XLocaleData5",
   "type": "interface",
   "namespace": "com.sun.star.i18n",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,22 +16,28 @@
     "from_imports": [
       [
         ".x_locale_data4",
-        "XLocaleData4"
+        "XLocaleData4",
+        "x_locale_data4_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".locale_data_item2",
-        "LocaleDataItem2"
+        "LocaleDataItem2",
+        "locale_data_item2_i"
       ],
       [
         "..lang.locale",
-        "Locale"
+        "Locale",
+        "lang_locale_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.i18n.XLocaleData4": "x_locale_data4_i"
+    },
     "quote": [
-      "Locale",
-      "LocaleDataItem2"
+      "lang_locale_i",
+      "locale_data_item2_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -54,7 +61,7 @@
       "methods": [
         {
           "name": "getLocaleItem2",
-          "returns": "LocaleDataItem2",
+          "returns": "locale_data_item2_i",
           "desc": [
             "returns an instance of com.sun.star.i18n.LocaleDataItem2 for a Locale."
           ],
@@ -62,7 +69,7 @@
           "args": [
             [
               "Locale",
-              "Locale",
+              "lang_locale_i",
               "in"
             ]
           ]

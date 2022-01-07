@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XAnimatedSprite",
   "type": "interface",
   "namespace": "com.sun.star.rendering",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,27 +16,34 @@
     "from_imports": [
       [
         ".x_sprite",
-        "XSprite"
+        "XSprite",
+        "x_sprite_i"
       ]
     ],
     "from_imports_typing": [
       [
-        "..geometry.real_point2_d",
-        "RealPoint2D"
-      ],
-      [
         ".render_state",
-        "RenderState"
+        "RenderState",
+        "render_state_i"
       ],
       [
         ".view_state",
-        "ViewState"
+        "ViewState",
+        "view_state_i"
+      ],
+      [
+        "..geometry.real_point2_d",
+        "RealPoint2D",
+        "geometry_real_point2_d_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.rendering.XSprite": "x_sprite_i"
+    },
     "quote": [
-      "RenderState",
-      "ViewState",
-      "RealPoint2D"
+      "view_state_i",
+      "render_state_i",
+      "geometry_real_point2_d_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -84,17 +92,17 @@
           "args": [
             [
               "aNewPos",
-              "RealPoint2D",
+              "geometry_real_point2_d_i",
               "in"
             ],
             [
               "aViewState",
-              "ViewState",
+              "view_state_i",
               "in"
             ],
             [
               "aRenderState",
-              "RenderState",
+              "render_state_i",
               "in"
             ],
             [
@@ -123,7 +131,7 @@
           "args": [
             [
               "aViewState",
-              "ViewState",
+              "view_state_i",
               "in"
             ]
           ]

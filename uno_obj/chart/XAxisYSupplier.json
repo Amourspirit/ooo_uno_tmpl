@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XAxisYSupplier",
   "type": "interface",
   "namespace": "com.sun.star.chart",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,22 +16,28 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
-        "..beans.x_property_set",
-        "XPropertySet"
+        "..drawing.x_shape",
+        "XShape",
+        "drawing_x_shape_i"
       ],
       [
-        "..drawing.x_shape",
-        "XShape"
+        "..beans.x_property_set",
+        "XPropertySet",
+        "beans_x_property_set_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "XShape",
-      "XPropertySet"
+      "beans_x_property_set_i",
+      "drawing_x_shape_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -50,7 +57,7 @@
       "methods": [
         {
           "name": "getYAxis",
-          "returns": "XPropertySet",
+          "returns": "beans_x_property_set_i",
           "desc": [
             "The returned property set contains scaling properties as well as formatting properties."
           ],
@@ -59,21 +66,21 @@
         },
         {
           "name": "getYAxisTitle",
-          "returns": "XShape",
+          "returns": "drawing_x_shape_i",
           "desc": [],
           "raises": [],
           "args": []
         },
         {
           "name": "getYHelpGrid",
-          "returns": "XPropertySet",
+          "returns": "beans_x_property_set_i",
           "desc": [],
           "raises": [],
           "args": []
         },
         {
           "name": "getYMainGrid",
-          "returns": "XPropertySet",
+          "returns": "beans_x_property_set_i",
           "desc": [],
           "raises": [],
           "args": []

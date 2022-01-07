@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XReportControlFormat",
   "type": "interface",
   "namespace": "com.sun.star.report",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -16,31 +17,37 @@
     "from_imports_typing": [
       [
         "..awt.font_slant",
-        "FontSlant"
-      ],
-      [
-        "..lang.locale",
-        "Locale"
-      ],
-      [
-        "..util.color",
-        "Color"
-      ],
-      [
-        "..style.vertical_alignment",
-        "VerticalAlignment"
+        "FontSlant",
+        "awt_font_slant_i"
       ],
       [
         "..awt.font_descriptor",
-        "FontDescriptor"
+        "FontDescriptor",
+        "awt_font_descriptor_i"
+      ],
+      [
+        "..style.vertical_alignment",
+        "VerticalAlignment",
+        "style_vertical_alignment_i"
+      ],
+      [
+        "..lang.locale",
+        "Locale",
+        "lang_locale_i"
+      ],
+      [
+        "..util.color",
+        "Color",
+        "util_color_i"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "FontDescriptor",
-      "Locale",
-      "FontSlant",
-      "VerticalAlignment",
-      "Color"
+      "style_vertical_alignment_i",
+      "awt_font_slant_i",
+      "awt_font_descriptor_i",
+      "util_color_i",
+      "lang_locale_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -80,7 +87,7 @@
         },
         {
           "name": "CharColor",
-          "returns": "Color",
+          "returns": "util_color_i",
           "desc": [
             "specifies the text color (RGB) of the control."
           ],
@@ -367,7 +374,7 @@
         },
         {
           "name": "CharLocale",
-          "returns": "Locale",
+          "returns": "lang_locale_i",
           "desc": [
             "contains the value of the locale."
           ],
@@ -376,7 +383,7 @@
         },
         {
           "name": "CharLocaleAsian",
-          "returns": "Locale",
+          "returns": "lang_locale_i",
           "desc": [
             "contains the value of the locale."
           ],
@@ -385,7 +392,7 @@
         },
         {
           "name": "CharLocaleComplex",
-          "returns": "Locale",
+          "returns": "lang_locale_i",
           "desc": [
             "contains the value of the locale."
           ],
@@ -394,7 +401,7 @@
         },
         {
           "name": "CharPosture",
-          "returns": "FontSlant",
+          "returns": "awt_font_slant_i",
           "desc": [
             "This attribute contains the value of the posture of the document."
           ],
@@ -403,7 +410,7 @@
         },
         {
           "name": "CharPostureAsian",
-          "returns": "FontSlant",
+          "returns": "awt_font_slant_i",
           "desc": [
             "This property contains the value of the posture of the document."
           ],
@@ -412,7 +419,7 @@
         },
         {
           "name": "CharPostureComplex",
-          "returns": "FontSlant",
+          "returns": "awt_font_slant_i",
           "desc": [
             "This property contains the value of the posture of the document."
           ],
@@ -479,7 +486,7 @@
         },
         {
           "name": "CharUnderlineColor",
-          "returns": "Color",
+          "returns": "util_color_i",
           "desc": [
             "specifies the text line color (RGB) of the control."
           ],
@@ -524,7 +531,7 @@
         },
         {
           "name": "ControlBackground",
-          "returns": "Color",
+          "returns": "util_color_i",
           "desc": [
             "specifies the background color (RGB) of the control."
           ],
@@ -551,7 +558,7 @@
         },
         {
           "name": "FontDescriptor",
-          "returns": "FontDescriptor",
+          "returns": "awt_font_descriptor_i",
           "desc": [
             "specifies the font attributes of the text in the control."
           ],
@@ -560,7 +567,7 @@
         },
         {
           "name": "FontDescriptorAsian",
-          "returns": "FontDescriptor",
+          "returns": "awt_font_descriptor_i",
           "desc": [
             "specifies the font attributes of the text in the control."
           ],
@@ -569,7 +576,7 @@
         },
         {
           "name": "FontDescriptorComplex",
-          "returns": "FontDescriptor",
+          "returns": "awt_font_descriptor_i",
           "desc": [
             "specifies the font attributes of the text in the control."
           ],
@@ -623,7 +630,7 @@
         },
         {
           "name": "VerticalAlign",
-          "returns": "VerticalAlignment",
+          "returns": "style_vertical_alignment_i",
           "desc": [
             "specifies the vertical alignment of the text in the control."
           ],

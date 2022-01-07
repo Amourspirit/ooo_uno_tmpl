@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XTabBar",
   "type": "interface",
   "namespace": "com.sun.star.drawing.framework",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -16,15 +17,17 @@
     "from_imports_typing": [
       [
         ".tab_bar_button",
-        "TabBarButton"
+        "TabBarButton",
+        "tab_bar_button_i"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "TabBarButton",
-      "typing.List[TabBarButton]"
+      "typing.List[tab_bar_button_i]",
+      "tab_bar_button_i"
     ],
     "typings": [
-      "typing.List[TabBarButton]"
+      "typing.List[tab_bar_button_i]"
     ],
     "requires_typing": true,
     "name": "XTabBar",
@@ -55,12 +58,12 @@
           "args": [
             [
               "aButton",
-              "TabBarButton",
+              "tab_bar_button_i",
               "in"
             ],
             [
               "aAnchor",
-              "TabBarButton",
+              "tab_bar_button_i",
               "in"
             ]
           ]
@@ -75,14 +78,14 @@
           "args": [
             [
               "aButton",
-              "TabBarButton",
+              "tab_bar_button_i",
               "in"
             ]
           ]
         },
         {
           "name": "getTabBarButtons",
-          "returns": "typing.List[TabBarButton]",
+          "returns": "typing.List[tab_bar_button_i]",
           "desc": [
             "Return a sequence of all the tab bar buttons.",
             "",
@@ -103,7 +106,7 @@
           "args": [
             [
               "aButton",
-              "TabBarButton",
+              "tab_bar_button_i",
               "in"
             ]
           ]
@@ -118,7 +121,7 @@
           "args": [
             [
               "aButton",
-              "TabBarButton",
+              "tab_bar_button_i",
               "in"
             ]
           ]

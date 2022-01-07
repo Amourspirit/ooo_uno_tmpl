@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XHeaderFooterContent",
   "type": "interface",
   "namespace": "com.sun.star.sheet",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,17 +16,22 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
         "..text.x_text",
-        "XText"
+        "XText",
+        "text_x_text_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "XText"
+      "text_x_text_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -43,7 +49,7 @@
       "methods": [
         {
           "name": "getCenterText",
-          "returns": "XText",
+          "returns": "text_x_text_i",
           "desc": [
             "returns the text which is printed in the center part of the header or footer."
           ],
@@ -52,7 +58,7 @@
         },
         {
           "name": "getLeftText",
-          "returns": "XText",
+          "returns": "text_x_text_i",
           "desc": [
             "returns the text which is printed in the left part of the header or footer."
           ],
@@ -61,7 +67,7 @@
         },
         {
           "name": "getRightText",
-          "returns": "XText",
+          "returns": "text_x_text_i",
           "desc": [
             "returns the text which is printed in the right part of the header or footer."
           ],

@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XValidatableFormComponent",
   "type": "interface",
   "namespace": "com.sun.star.form.validation",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,17 +16,22 @@
     "from_imports": [
       [
         ".x_validatable",
-        "XValidatable"
+        "XValidatable",
+        "x_validatable_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_form_component_validity_listener",
-        "XFormComponentValidityListener"
+        "XFormComponentValidityListener",
+        "x_form_component_validity_listener_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.form.validation.XValidatable": "x_validatable_i"
+    },
     "quote": [
-      "XFormComponentValidityListener"
+      "x_form_component_validity_listener_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -61,7 +67,7 @@
           "args": [
             [
               "Listener",
-              "XFormComponentValidityListener",
+              "x_form_component_validity_listener_i",
               "in"
             ]
           ]
@@ -106,7 +112,7 @@
           "args": [
             [
               "Listener",
-              "XFormComponentValidityListener",
+              "x_form_component_validity_listener_i",
               "in"
             ]
           ]

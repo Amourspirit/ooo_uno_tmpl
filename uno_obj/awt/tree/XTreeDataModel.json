@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XTreeDataModel",
   "type": "interface",
   "namespace": "com.sun.star.awt.tree",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,22 +16,28 @@
     "from_imports": [
       [
         "...lang.x_component",
-        "XComponent"
+        "XComponent",
+        "lang_x_component_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_tree_data_model_listener",
-        "XTreeDataModelListener"
+        "XTreeDataModelListener",
+        "x_tree_data_model_listener_i"
       ],
       [
         ".x_tree_node",
-        "XTreeNode"
+        "XTreeNode",
+        "x_tree_node_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.lang.XComponent": "lang_x_component_i"
+    },
     "quote": [
-      "XTreeNode",
-      "XTreeDataModelListener"
+      "x_tree_data_model_listener_i",
+      "x_tree_node_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -60,14 +67,14 @@
           "args": [
             [
               "Listener",
-              "XTreeDataModelListener",
+              "x_tree_data_model_listener_i",
               "in"
             ]
           ]
         },
         {
           "name": "getRoot",
-          "returns": "XTreeNode",
+          "returns": "x_tree_node_i",
           "desc": [
             "Returns the root of the tree.",
             "",
@@ -86,7 +93,7 @@
           "args": [
             [
               "Listener",
-              "XTreeDataModelListener",
+              "x_tree_data_model_listener_i",
               "in"
             ]
           ]

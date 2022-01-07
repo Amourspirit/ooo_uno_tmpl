@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XWindow2",
   "type": "interface",
   "namespace": "com.sun.star.awt",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,17 +16,22 @@
     "from_imports": [
       [
         ".x_window",
-        "XWindow"
+        "XWindow",
+        "x_window_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".size",
-        "Size"
+        "Size",
+        "size_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.awt.XWindow": "x_window_i"
+    },
     "quote": [
-      "Size"
+      "size_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -45,7 +51,7 @@
       "methods": [
         {
           "name": "getOutputSize",
-          "returns": "Size",
+          "returns": "size_i",
           "desc": [
             "returns the inner bounds of the window, also known as the client size."
           ],
@@ -98,7 +104,7 @@
           "args": [
             [
               "Size",
-              "Size",
+              "size_i",
               "in"
             ]
           ]

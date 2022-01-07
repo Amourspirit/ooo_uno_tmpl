@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XInvocation2",
   "type": "interface",
   "namespace": "com.sun.star.script",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,23 +16,28 @@
     "from_imports": [
       [
         ".x_invocation",
-        "XInvocation"
+        "XInvocation",
+        "x_invocation_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".invocation_info",
-        "InvocationInfo"
+        "InvocationInfo",
+        "invocation_info_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.script.XInvocation": "x_invocation_i"
+    },
     "quote": [
-      "typing.List[str]",
-      "InvocationInfo",
-      "typing.List[InvocationInfo]"
+      "invocation_info_i",
+      "typing.List[invocation_info_i]",
+      "typing.List[str]"
     ],
     "typings": [
-      "typing.List[str]",
-      "typing.List[InvocationInfo]"
+      "typing.List[invocation_info_i]",
+      "typing.List[str]"
     ],
     "requires_typing": true,
     "name": "XInvocation2",
@@ -48,7 +54,7 @@
       "methods": [
         {
           "name": "getInfo",
-          "returns": "typing.List[InvocationInfo]",
+          "returns": "typing.List[invocation_info_i]",
           "desc": [
             "returns information items for all methods and properties accessible via XInvocation."
           ],
@@ -57,7 +63,7 @@
         },
         {
           "name": "getInfoForName",
-          "returns": "InvocationInfo",
+          "returns": "invocation_info_i",
           "desc": [
             "returns information item for the method or property defined by aName"
           ],

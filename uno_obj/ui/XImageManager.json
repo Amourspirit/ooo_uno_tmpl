@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XImageManager",
   "type": "interface",
   "namespace": "com.sun.star.ui",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,45 +15,56 @@
   "data": {
     "from_imports": [
       [
+        "..lang.x_initialization",
+        "XInitialization",
+        "lang_x_initialization_i"
+      ],
+      [
         ".xui_configuration_persistence",
-        "XUIConfigurationPersistence"
+        "XUIConfigurationPersistence",
+        "xui_configuration_persistence_i"
       ],
       [
         ".xui_configuration",
-        "XUIConfiguration"
+        "XUIConfiguration",
+        "xui_configuration_i"
       ],
       [
         "..lang.x_component",
-        "XComponent"
-      ],
-      [
-        "..lang.x_initialization",
-        "XInitialization"
+        "XComponent",
+        "lang_x_component_i"
       ]
     ],
     "from_imports_typing": [
       [
         "..graphic.x_graphic",
-        "XGraphic"
+        "XGraphic",
+        "graphic_x_graphic_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.lang.XInitialization": "lang_x_initialization_i",
+      "com.sun.star.ui.XUIConfigurationPersistence": "xui_configuration_persistence_i",
+      "com.sun.star.ui.XUIConfiguration": "xui_configuration_i",
+      "com.sun.star.lang.XComponent": "lang_x_component_i"
+    },
     "quote": [
-      "typing.List[str]",
-      "typing.List[XGraphic]"
+      "typing.List[graphic_x_graphic_i]",
+      "typing.List[str]"
     ],
     "typings": [
-      "typing.List[str]",
-      "typing.List[XGraphic]"
+      "typing.List[graphic_x_graphic_i]",
+      "typing.List[str]"
     ],
     "requires_typing": true,
     "name": "XImageManager",
     "imports": [],
     "namespace": "com.sun.star.ui",
     "extends": [
+      "com.sun.star.lang.XInitialization",
       "com.sun.star.ui.XUIConfigurationPersistence",
       "com.sun.star.ui.XUIConfiguration",
-      "com.sun.star.lang.XComponent",
-      "com.sun.star.lang.XInitialization"
+      "com.sun.star.lang.XComponent"
     ],
     "desc": [
       "specifies access functions to an images manager interface to add, replace and remove images associations to command URLs.",
@@ -79,7 +91,7 @@
         },
         {
           "name": "getImages",
-          "returns": "typing.List[XGraphic]",
+          "returns": "typing.List[graphic_x_graphic_i]",
           "desc": [
             "retrieves the associated images of command URLs."
           ],
@@ -147,7 +159,7 @@
             ],
             [
               "aGraphicSequence",
-              "typing.List[XGraphic]",
+              "typing.List[graphic_x_graphic_i]",
               "in"
             ]
           ]
@@ -202,7 +214,7 @@
             ],
             [
               "aGraphicsSequence",
-              "typing.List[XGraphic]",
+              "typing.List[graphic_x_graphic_i]",
               "in"
             ]
           ]

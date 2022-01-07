@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XHatchWindow",
   "type": "interface",
   "namespace": "com.sun.star.embed",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,22 +16,28 @@
     "from_imports": [
       [
         "..lang.x_component",
-        "XComponent"
+        "XComponent",
+        "lang_x_component_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_hatch_window_controller",
-        "XHatchWindowController"
+        "XHatchWindowController",
+        "x_hatch_window_controller_i"
       ],
       [
         "..awt.size",
-        "Size"
+        "Size",
+        "awt_size_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.lang.XComponent": "lang_x_component_i"
+    },
     "quote": [
-      "XHatchWindowController",
-      "Size"
+      "awt_size_i",
+      "x_hatch_window_controller_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -58,7 +65,7 @@
           "args": [
             [
               "xController",
-              "XHatchWindowController",
+              "x_hatch_window_controller_i",
               "in"
             ]
           ]
@@ -67,7 +74,7 @@
       "properties": [
         {
           "name": "HatchBorderSize",
-          "returns": "Size",
+          "returns": "awt_size_i",
           "desc": [],
           "raises_get": "",
           "raises_set": ""

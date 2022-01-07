@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XUnitConversion",
   "type": "interface",
   "namespace": "com.sun.star.awt",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,22 +16,28 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
-        ".point",
-        "Point"
+        ".size",
+        "Size",
+        "size_i"
       ],
       [
-        ".size",
-        "Size"
+        ".point",
+        "Point",
+        "point_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "Point",
-      "Size"
+      "size_i",
+      "point_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -52,7 +59,7 @@
       "methods": [
         {
           "name": "convertPointToLogic",
-          "returns": "Point",
+          "returns": "point_i",
           "desc": [
             "converts the given Point, which is specified in pixels, into the given logical unit"
           ],
@@ -62,7 +69,7 @@
           "args": [
             [
               "Point",
-              "Point",
+              "point_i",
               "in"
             ],
             [
@@ -74,7 +81,7 @@
         },
         {
           "name": "convertPointToPixel",
-          "returns": "Point",
+          "returns": "point_i",
           "desc": [
             "converts the given Point, which is specified in the given logical unit, into pixels"
           ],
@@ -84,7 +91,7 @@
           "args": [
             [
               "Point",
-              "Point",
+              "point_i",
               "in"
             ],
             [
@@ -96,7 +103,7 @@
         },
         {
           "name": "convertSizeToLogic",
-          "returns": "Size",
+          "returns": "size_i",
           "desc": [
             "converts the given Size, which is specified in pixels, into the given logical unit"
           ],
@@ -106,7 +113,7 @@
           "args": [
             [
               "Size",
-              "Size",
+              "size_i",
               "in"
             ],
             [
@@ -118,7 +125,7 @@
         },
         {
           "name": "convertSizeToPixel",
-          "returns": "Size",
+          "returns": "size_i",
           "desc": [
             "converts the given Size, which is specified in the given logical unit, into pixels"
           ],
@@ -128,7 +135,7 @@
           "args": [
             [
               "Size",
-              "Size",
+              "size_i",
               "in"
             ],
             [

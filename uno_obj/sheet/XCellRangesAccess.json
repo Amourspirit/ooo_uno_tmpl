@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XCellRangesAccess",
   "type": "interface",
   "namespace": "com.sun.star.sheet",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,26 +16,32 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
         "..table.x_cell",
-        "XCell"
+        "XCell",
+        "table_x_cell_i"
       ],
       [
         "..table.x_cell_range",
-        "XCellRange"
+        "XCellRange",
+        "table_x_cell_range_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "XCellRange",
-      "XCell",
-      "typing.List[XCellRange]"
+      "table_x_cell_range_i",
+      "table_x_cell_i",
+      "typing.List[table_x_cell_range_i]"
     ],
     "typings": [
-      "typing.List[XCellRange]"
+      "typing.List[table_x_cell_range_i]"
     ],
     "requires_typing": true,
     "name": "XCellRangesAccess",
@@ -51,7 +58,7 @@
       "methods": [
         {
           "name": "getCellByPosition",
-          "returns": "XCell",
+          "returns": "table_x_cell_i",
           "desc": [
             "Returns a single cell within the range."
           ],
@@ -78,7 +85,7 @@
         },
         {
           "name": "getCellRangeByPosition",
-          "returns": "XCellRange",
+          "returns": "table_x_cell_range_i",
           "desc": [
             "Returns a sub-range of cells within the range."
           ],
@@ -115,7 +122,7 @@
         },
         {
           "name": "getCellRangesByName",
-          "returns": "typing.List[XCellRange]",
+          "returns": "typing.List[table_x_cell_range_i]",
           "desc": [
             "Returns a sub-range of cells within the range.",
             "",

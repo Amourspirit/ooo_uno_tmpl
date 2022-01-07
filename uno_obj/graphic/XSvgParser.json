@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XSvgParser",
   "type": "interface",
   "namespace": "com.sun.star.graphic",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,20 +16,25 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_primitive2_d",
-        "XPrimitive2D"
+        "XPrimitive2D",
+        "x_primitive2_d_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "typing.List[XPrimitive2D]"
+      "typing.List[x_primitive2_d_i]"
     ],
     "typings": [
-      "typing.List[XPrimitive2D]"
+      "typing.List[x_primitive2_d_i]"
     ],
     "requires_typing": true,
     "name": "XSvgParser",
@@ -51,7 +57,7 @@
       "methods": [
         {
           "name": "getDecomposition",
-          "returns": "typing.List[XPrimitive2D]",
+          "returns": "typing.List[x_primitive2_d_i]",
           "desc": [
             "Retrieve decomposed list of simpler primitives."
           ],

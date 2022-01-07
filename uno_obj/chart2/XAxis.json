@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XAxis",
   "type": "interface",
   "namespace": "com.sun.star.chart2",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,26 +16,32 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
         "..beans.x_property_set",
-        "XPropertySet"
+        "XPropertySet",
+        "beans_x_property_set_i"
       ],
       [
         ".scale_data",
-        "ScaleData"
+        "ScaleData",
+        "scale_data_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "ScaleData",
-      "typing.List[XPropertySet]",
-      "XPropertySet"
+      "typing.List[beans_x_property_set_i]",
+      "beans_x_property_set_i",
+      "scale_data_i"
     ],
     "typings": [
-      "typing.List[XPropertySet]"
+      "typing.List[beans_x_property_set_i]"
     ],
     "requires_typing": true,
     "name": "XAxis",
@@ -49,7 +56,7 @@
       "methods": [
         {
           "name": "getGridProperties",
-          "returns": "XPropertySet",
+          "returns": "beans_x_property_set_i",
           "desc": [
             "the returned property set must support the service GridProperties"
           ],
@@ -58,14 +65,14 @@
         },
         {
           "name": "getScaleData",
-          "returns": "ScaleData",
+          "returns": "scale_data_i",
           "desc": [],
           "raises": [],
           "args": []
         },
         {
           "name": "getSubGridProperties",
-          "returns": "typing.List[XPropertySet]",
+          "returns": "typing.List[beans_x_property_set_i]",
           "desc": [
             "the returned property sets must support the service GridProperties",
             "",
@@ -76,7 +83,7 @@
         },
         {
           "name": "getSubTickProperties",
-          "returns": "typing.List[XPropertySet]",
+          "returns": "typing.List[beans_x_property_set_i]",
           "desc": [
             "the returned property sets must support the service TickProperties"
           ],
@@ -91,7 +98,7 @@
           "args": [
             [
               "aScale",
-              "ScaleData",
+              "scale_data_i",
               "in"
             ]
           ]

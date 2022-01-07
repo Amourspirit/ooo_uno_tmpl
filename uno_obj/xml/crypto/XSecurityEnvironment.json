@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XSecurityEnvironment",
   "type": "interface",
   "namespace": "com.sun.star.xml.crypto",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,23 +16,28 @@
     "from_imports": [
       [
         "...uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
         "...security.x_certificate",
-        "XCertificate"
+        "XCertificate",
+        "security_x_certificate_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
       "typing.List[int]",
-      "XCertificate",
-      "typing.List[XCertificate]"
+      "typing.List[security_x_certificate_i]",
+      "security_x_certificate_i"
     ],
     "typings": [
       "typing.List[int]",
-      "typing.List[XCertificate]"
+      "typing.List[security_x_certificate_i]"
     ],
     "requires_typing": true,
     "name": "XSecurityEnvironment",
@@ -52,7 +58,7 @@
       "methods": [
         {
           "name": "buildCertificatePath",
-          "returns": "typing.List[XCertificate]",
+          "returns": "typing.List[security_x_certificate_i]",
           "desc": [
             "Build certificate path from a certain certificate."
           ],
@@ -62,14 +68,14 @@
           "args": [
             [
               "beginCert",
-              "XCertificate",
+              "security_x_certificate_i",
               "in"
             ]
           ]
         },
         {
           "name": "createCertificateFromAscii",
-          "returns": "XCertificate",
+          "returns": "security_x_certificate_i",
           "desc": [
             "Create certificate interface from a Base64 encoded certificate."
           ],
@@ -86,7 +92,7 @@
         },
         {
           "name": "createCertificateFromRaw",
-          "returns": "XCertificate",
+          "returns": "security_x_certificate_i",
           "desc": [
             "Create certificate interface from raw DER encoded certificate."
           ],
@@ -103,7 +109,7 @@
         },
         {
           "name": "getAllCertificates",
-          "returns": "typing.List[XCertificate]",
+          "returns": "typing.List[security_x_certificate_i]",
           "desc": [
             "List all certificates, private (as returned by getPersonalCertificates) as well as those of other people/orgas.",
             "",
@@ -118,7 +124,7 @@
         },
         {
           "name": "getCertificate",
-          "returns": "XCertificate",
+          "returns": "security_x_certificate_i",
           "desc": [
             "Get certificate from the environment by issuer name and serial number."
           ],
@@ -154,14 +160,14 @@
           "args": [
             [
               "xCertificate",
-              "XCertificate",
+              "security_x_certificate_i",
               "in"
             ]
           ]
         },
         {
           "name": "getPersonalCertificates",
-          "returns": "typing.List[XCertificate]",
+          "returns": "typing.List[security_x_certificate_i]",
           "desc": [
             "Get personal certificates from the environment."
           ],
@@ -193,12 +199,12 @@
           "args": [
             [
               "xEECertificate",
-              "XCertificate",
+              "security_x_certificate_i",
               "in"
             ],
             [
               "intermediateCertificates",
-              "typing.List[XCertificate]",
+              "typing.List[security_x_certificate_i]",
               "in"
             ]
           ]

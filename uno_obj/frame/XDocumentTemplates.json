@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XDocumentTemplates",
   "type": "interface",
   "namespace": "com.sun.star.frame",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,22 +16,28 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
-        "..ucb.x_content",
-        "XContent"
+        ".x_storable",
+        "XStorable",
+        "x_storable_i"
       ],
       [
-        ".x_storable",
-        "XStorable"
+        "..ucb.x_content",
+        "XContent",
+        "ucb_x_content_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "XContent",
-      "XStorable"
+      "x_storable_i",
+      "ucb_x_content_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -90,7 +97,7 @@
         },
         {
           "name": "getContent",
-          "returns": "XContent",
+          "returns": "ucb_x_content_i",
           "desc": [
             "provides access to the root of internal used hierarchy",
             "",
@@ -199,7 +206,7 @@
             ],
             [
               "Storable",
-              "XStorable",
+              "x_storable_i",
               "in"
             ]
           ]

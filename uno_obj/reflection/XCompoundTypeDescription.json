@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XCompoundTypeDescription",
   "type": "interface",
   "namespace": "com.sun.star.reflection",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,18 +16,22 @@
     "from_imports": [
       [
         ".x_type_description",
-        "XTypeDescription"
+        "XTypeDescription",
+        "x_type_description_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.reflection.XTypeDescription": "x_type_description_i"
+    },
     "quote": [
+      "x_type_description_i",
       "typing.List[str]",
-      "XTypeDescription",
-      "typing.List[XTypeDescription]"
+      "typing.List[x_type_description_i]"
     ],
     "typings": [
       "typing.List[str]",
-      "typing.List[XTypeDescription]"
+      "typing.List[x_type_description_i]"
     ],
     "requires_typing": true,
     "name": "XCompoundTypeDescription",
@@ -47,7 +52,7 @@
       "methods": [
         {
           "name": "getBaseType",
-          "returns": "XTypeDescription",
+          "returns": "x_type_description_i",
           "desc": [
             "Returns the type of the base type of the compound type.",
             "",
@@ -67,7 +72,7 @@
         },
         {
           "name": "getMemberTypes",
-          "returns": "typing.List[XTypeDescription]",
+          "returns": "typing.List[x_type_description_i]",
           "desc": [
             "Returns the member types of the struct/exception in IDL declaration order.",
             "",

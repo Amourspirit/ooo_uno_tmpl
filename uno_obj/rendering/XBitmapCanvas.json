@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XBitmapCanvas",
   "type": "interface",
   "namespace": "com.sun.star.rendering",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,32 +16,40 @@
     "from_imports": [
       [
         ".x_canvas",
-        "XCanvas"
+        "XCanvas",
+        "x_canvas_i"
       ]
     ],
     "from_imports_typing": [
       [
         "..geometry.real_rectangle2_d",
-        "RealRectangle2D"
-      ],
-      [
-        ".x_bitmap_canvas",
-        "XBitmapCanvas"
-      ],
-      [
-        ".render_state",
-        "RenderState"
+        "RealRectangle2D",
+        "geometry_real_rectangle2_d_i"
       ],
       [
         ".view_state",
-        "ViewState"
+        "ViewState",
+        "view_state_i"
+      ],
+      [
+        ".x_bitmap_canvas",
+        "XBitmapCanvas",
+        "x_bitmap_canvas_i"
+      ],
+      [
+        ".render_state",
+        "RenderState",
+        "render_state_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.rendering.XCanvas": "x_canvas_i"
+    },
     "quote": [
-      "XBitmapCanvas",
-      "RenderState",
-      "ViewState",
-      "RealRectangle2D"
+      "x_bitmap_canvas_i",
+      "geometry_real_rectangle2_d_i",
+      "view_state_i",
+      "render_state_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -77,37 +86,37 @@
           "args": [
             [
               "sourceCanvas",
-              "XBitmapCanvas",
+              "x_bitmap_canvas_i",
               "in"
             ],
             [
               "sourceRect",
-              "RealRectangle2D",
+              "geometry_real_rectangle2_d_i",
               "in"
             ],
             [
               "sourceViewState",
-              "ViewState",
+              "view_state_i",
               "in"
             ],
             [
               "sourceRenderState",
-              "RenderState",
+              "render_state_i",
               "in"
             ],
             [
               "destRect",
-              "RealRectangle2D",
+              "geometry_real_rectangle2_d_i",
               "in"
             ],
             [
               "destViewState",
-              "ViewState",
+              "view_state_i",
               "in"
             ],
             [
               "destRenderState",
-              "RenderState",
+              "render_state_i",
               "in"
             ]
           ]

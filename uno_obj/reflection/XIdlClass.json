@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XIdlClass",
   "type": "interface",
   "namespace": "com.sun.star.reflection",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,50 +16,60 @@
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "uno_x_interface_i"
       ]
     ],
     "from_imports_typing": [
       [
+        ".x_idl_array",
+        "XIdlArray",
+        "x_idl_array_i"
+      ],
+      [
         ".x_idl_method",
-        "XIdlMethod"
-      ],
-      [
-        "..uno.uik",
-        "Uik"
-      ],
-      [
-        ".x_idl_field",
-        "XIdlField"
+        "XIdlMethod",
+        "x_idl_method_i"
       ],
       [
         ".x_idl_class",
-        "XIdlClass"
-      ],
-      [
-        ".x_idl_array",
-        "XIdlArray"
+        "XIdlClass",
+        "x_idl_class_i"
       ],
       [
         "..uno.type_class",
-        "TypeClass"
+        "TypeClass",
+        "uno_type_class_i"
+      ],
+      [
+        "..uno.uik",
+        "Uik",
+        "uno_uik_i"
+      ],
+      [
+        ".x_idl_field",
+        "XIdlField",
+        "x_idl_field_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "uno_x_interface_i"
+    },
     "quote": [
-      "Uik",
-      "XIdlClass",
-      "XIdlMethod",
-      "XIdlArray",
-      "typing.List[XIdlField]",
-      "XIdlField",
-      "TypeClass",
-      "typing.List[XIdlClass]",
-      "typing.List[XIdlMethod]"
+      "typing.List[x_idl_class_i]",
+      "x_idl_method_i",
+      "x_idl_array_i",
+      "typing.List[x_idl_method_i]",
+      "uno_uik_i",
+      "uno_type_class_i",
+      "x_idl_class_i",
+      "typing.List[x_idl_field_i]",
+      "x_idl_field_i"
     ],
     "typings": [
-      "typing.List[XIdlClass]",
-      "typing.List[XIdlMethod]",
-      "typing.List[XIdlField]"
+      "typing.List[x_idl_class_i]",
+      "typing.List[x_idl_field_i]",
+      "typing.List[x_idl_method_i]"
     ],
     "requires_typing": true,
     "name": "XIdlClass",
@@ -98,14 +109,14 @@
           "args": [
             [
               "Type",
-              "XIdlClass",
+              "x_idl_class_i",
               "in"
             ]
           ]
         },
         {
           "name": "getArray",
-          "returns": "XIdlArray",
+          "returns": "x_idl_array_i",
           "desc": [
             "If the reflected type is an array, then you get a XIdlArray interface to modify instances of the array type.",
             "",
@@ -116,7 +127,7 @@
         },
         {
           "name": "getClass",
-          "returns": "XIdlClass",
+          "returns": "x_idl_class_i",
           "desc": [
             "Deprecated.",
             "",
@@ -133,7 +144,7 @@
         },
         {
           "name": "getClasses",
-          "returns": "typing.List[XIdlClass]",
+          "returns": "typing.List[x_idl_class_i]",
           "desc": [
             "Deprecated.",
             "",
@@ -144,7 +155,7 @@
         },
         {
           "name": "getComponentType",
-          "returns": "XIdlClass",
+          "returns": "x_idl_class_i",
           "desc": [
             "If the reflected type is an array or sequence, then this method returns a XIdlClass interface reflecting the element."
           ],
@@ -153,7 +164,7 @@
         },
         {
           "name": "getField",
-          "returns": "XIdlField",
+          "returns": "x_idl_field_i",
           "desc": [
             "If the reflected type is an interface, struct or union, then you get a XIdlField interface reflecting the demanded field (/interface attribute) by name.",
             "",
@@ -170,7 +181,7 @@
         },
         {
           "name": "getFields",
-          "returns": "typing.List[XIdlField]",
+          "returns": "typing.List[x_idl_field_i]",
           "desc": [
             "If the reflected type is an interface, struct or union, then you get a sequence of XIdlField interfaces reflecting all fields (/interface attributes).",
             "",
@@ -182,7 +193,7 @@
         },
         {
           "name": "getInterfaces",
-          "returns": "typing.List[XIdlClass]",
+          "returns": "typing.List[x_idl_class_i]",
           "desc": [
             "Deprecated.",
             "",
@@ -193,7 +204,7 @@
         },
         {
           "name": "getMethod",
-          "returns": "XIdlMethod",
+          "returns": "x_idl_method_i",
           "desc": [
             "If the reflected type is an interface, then you get a XIdlMethod interface reflecting the demanded method by name.",
             "",
@@ -210,7 +221,7 @@
         },
         {
           "name": "getMethods",
-          "returns": "typing.List[XIdlMethod]",
+          "returns": "typing.List[x_idl_method_i]",
           "desc": [
             "If the reflected type is an interface, then you get a sequence of XIdlMethod interfaces reflecting all methods of the interface.",
             "",
@@ -231,7 +242,7 @@
         },
         {
           "name": "getSuperclasses",
-          "returns": "typing.List[XIdlClass]",
+          "returns": "typing.List[x_idl_class_i]",
           "desc": [
             "If the reflected type is an interface, then the returned sequence of XIdlClass reflect the base interfaces.",
             "",
@@ -242,7 +253,7 @@
         },
         {
           "name": "getTypeClass",
-          "returns": "TypeClass",
+          "returns": "uno_type_class_i",
           "desc": [
             "Returns the com.sun.star.uno.TypeClass of the reflected type."
           ],
@@ -251,7 +262,7 @@
         },
         {
           "name": "getUik",
-          "returns": "Uik",
+          "returns": "uno_uik_i",
           "desc": [
             "Deprecated.",
             "",
@@ -270,7 +281,7 @@
           "args": [
             [
               "xType",
-              "XIdlClass",
+              "x_idl_class_i",
               "in"
             ]
           ]
