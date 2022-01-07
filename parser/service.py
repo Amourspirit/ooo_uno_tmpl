@@ -86,7 +86,7 @@ def _main():
     # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1drawing_1_1XShape.html'
     # url = 'https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1rdf_1_1URI.html'
     url = 'https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1awt_1_1AccessibleButton.html'
-    args = ('v', 'n')
+    args = ('v', 'n', 'l')
     kwargs = {
         "u": url,
         "log_file": "debug.log"

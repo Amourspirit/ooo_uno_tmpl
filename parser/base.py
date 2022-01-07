@@ -3929,6 +3929,36 @@ class RuleAreaBase(IRuleArea):
     """Matches when there is a single parent"""
 
       # region Private Methods
+    def _get_with_parent_removed(self, first: Area, d_lst: Dict[int, List[Area]],  match_lst: List[Area]) -> None:
+        """
+        Remove any parent inherits from match_lst
+
+        Args:
+            first (Area): First Area
+            d_lst (Dict[int, List[Area]]): dict of y1 grouped Area list
+            match_lst (List[Area]): List of area that is considered inherits. Out Arg.
+        """
+        # flatten all others into a single set
+        # Any keys in d_lst that are are lower y1 then first.y1 are parent objects. Higher are child object.
+        # The lower the y1 value the closer it is to the top if image.
+        flat = set()
+        for k, v in d_lst.items():
+            if k >= first.y1:
+                continue
+            for area in v:
+                flat.add(area.ns.fullns)
+
+        # find any
+        remove: List[int] = []
+        for i, area in enumerate(match_lst):
+            if area.ns.fullns in flat:
+                remove.append(i)
+        # any entry that is found in flat then remove it.
+        if len(remove) > 0:
+            remove.sort(reverse=True)
+            for i in remove:
+                match_lst.pop(i)
+
     def _list_dict_y1(self, lst: List[Area]) -> Dict[int, List[Area]]:
         """groups lst into area y1"""
         d = {}
@@ -4059,6 +4089,7 @@ class RuleAreaMulti(RuleAreaBase):
             return False
         return True
 
+
     def get_area(self, ai: AreaInfo, alst: List[Area]) -> List[Area]:
         """
         Gets filtered Area list
@@ -4071,10 +4102,14 @@ class RuleAreaMulti(RuleAreaBase):
         """
         first = self._get_first_y1(ai=ai, alst=alst)
         d_lst: Dict[int, List[Area]] = self._list_dict_y1(lst=alst) # grouped by y1
-        match_lst: List[Area] = d_lst[first.y1] # list of y1 matches
+        # extract group I want
+        match_lst: List[Area] = [area for area in d_lst[first.y1]] # list of y1 matches
         if len(match_lst) == 0:
             return match_lst
-        self._remove_duplicates_lst(match_lst)
+        del d_lst[first.y1]
+
+        self._get_with_parent_removed(first=first,d_lst=d_lst, match_lst=match_lst)
+ 
         return match_lst
     # endregion IRuleArea Methods
 
