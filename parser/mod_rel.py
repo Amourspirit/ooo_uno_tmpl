@@ -7,7 +7,7 @@ import re
 from dataclasses import dataclass
 from typing import List, Tuple
 from kwhelp.decorator import AcceptedTypes
-
+from functools import cache
 # endregion Imports
 
 
@@ -44,6 +44,8 @@ def camel_to_snake(input: str) -> str:
     _input = re.sub('(.)([A-Z][a-z]+)', r'\1_\2', input)
     return re.sub('([a-z0-9])([A-Z])', r'\1_\2', _input).lower()
 
+@cache
+@AcceptedTypes(str, opt_all_args=True)
 def get_rel_info(in_branch: str, comp_branch: str, sep: str = '.') -> RealitiveInfo:
     """
     Gets realitive info between branches such as ``com.sun.star.configuration``
@@ -151,7 +153,7 @@ def get_rel_import_long(in_str: str, ns: str, sep: str = '.') -> Tuple[str, str,
     """
     frm, imp = get_rel_import(in_str=in_str, ns=ns, sep=sep)
     score = '_'
-    sas = frm.lstrip(sep).replace(sep, score)
+    sas = frm.lstrip(sep).replace(sep, score) + score + 'i'
     # diff = (len(s_as) - len(sas))
     # if diff > 0:
     #     sas += score * diff

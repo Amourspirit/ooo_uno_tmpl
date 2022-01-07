@@ -6,7 +6,8 @@
   "type": "interface",
   "namespace": "com.sun.star.awt.grid",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,47 +15,47 @@
   "data": {
     "from_imports": [
       [
-        "...util.x_cloneable",
-        "XCloneable",
-        "util_x_cloneable"
-      ],
-      [
         "...lang.x_component",
         "XComponent",
-        "lang_x_component"
+        "lang_x_component_i"
+      ],
+      [
+        "...util.x_cloneable",
+        "XCloneable",
+        "util_x_cloneable_i"
       ],
       [
         "...container.x_container",
         "XContainer",
-        "container_x_container"
+        "container_x_container_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_grid_column",
         "XGridColumn",
-        "x_grid_column"
+        "x_grid_column_i"
       ]
     ],
     "extends_map": {
-      "com.sun.star.util.XCloneable": "util_x_cloneable",
-      "com.sun.star.lang.XComponent": "lang_x_component",
-      "com.sun.star.container.XContainer": "container_x_container"
+      "com.sun.star.lang.XComponent": "lang_x_component_i",
+      "com.sun.star.util.XCloneable": "util_x_cloneable_i",
+      "com.sun.star.container.XContainer": "container_x_container_i"
     },
     "quote": [
-      "typing.List[x_grid_column]",
-      "x_grid_column"
+      "typing.List[x_grid_column_i]",
+      "x_grid_column_i"
     ],
     "typings": [
-      "typing.List[x_grid_column]"
+      "typing.List[x_grid_column_i]"
     ],
     "requires_typing": true,
     "name": "XGridColumnModel",
     "imports": [],
     "namespace": "com.sun.star.awt.grid",
     "extends": [
-      "com.sun.star.util.XCloneable",
       "com.sun.star.lang.XComponent",
+      "com.sun.star.util.XCloneable",
       "com.sun.star.container.XContainer"
     ],
     "desc": [
@@ -85,14 +86,14 @@
           "args": [
             [
               "column",
-              "x_grid_column",
+              "x_grid_column_i",
               "in"
             ]
           ]
         },
         {
           "name": "createColumn",
-          "returns": "x_grid_column",
+          "returns": "x_grid_column_i",
           "desc": [
             "creates a new column for use with the column model.",
             "",
@@ -103,7 +104,7 @@
         },
         {
           "name": "getColumn",
-          "returns": "x_grid_column",
+          "returns": "x_grid_column_i",
           "desc": [
             "Returns a specific column."
           ],
@@ -129,7 +130,7 @@
         },
         {
           "name": "getColumns",
-          "returns": "typing.List[x_grid_column]",
+          "returns": "typing.List[x_grid_column_i]",
           "desc": [
             "Returns all columns of the model."
           ],

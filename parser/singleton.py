@@ -59,6 +59,7 @@ def parse(*args, **kwargs):
         'no_print_clear (str, optional): Short form ``'p'``. No clearing of terminal
             when otuput to terminal. Default ``False``
         'no_desc' (str, optional): Short from ``'d'``. No description will be outputed in template. Default ``False``
+        'no_long_names' (str, optional): Short form ``'l'``. No long names. Default ``False``
         'long_template' (str, optional): Short form ``'g'``. Writes a long format template.
             Requires write_template is set. Default ``False``
         'clipboard' (str, optional): Short form ``'c'``. Copy to clipboard. Default ``False``
@@ -120,7 +121,8 @@ def main():
         write_json=args.write_json,
         clear_on_print=(not args.no_print_clear),
         write_template_long=args.long_format,
-        include_desc=args.desc
+        include_desc=args.desc,
+        long_names=args.long_names
     )
 
     if args.print_template is False and args.print_json is False:

@@ -7,6 +7,7 @@ import re
 from abc import ABC, abstractmethod, abstractproperty
 from typing import List, Match, Optional, Set, Union
 from parser import mod_rel as RelInfo
+from functools import cache
 # endregion Imports
 
 # region Maps
@@ -335,6 +336,7 @@ class TypeRules(ITypeRules):
                 break
         return match_inst
 
+    @cache
     def get_python_type(self, in_type: str) -> PythonType:
         _in = in_type.replace("::", ".").replace(':', ".").lstrip(".").strip()
         match = self._get_rule(in_type=_in)

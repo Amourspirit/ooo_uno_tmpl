@@ -41,6 +41,9 @@ class BaseSingleton(BaseJson):
         self.quote.update(quote)
         typings: List[str] = data.get('typings', [])
         self.typings.update(typings)
+        extends_map = data.get('extends_map', None)
+        if extends_map:
+            self.extends_map.update(extends_map)
 
     def _get_attribs(self, json_data: dict, sort: bool) -> dict:
         items: dict = json_data['data'].get('items', {})
