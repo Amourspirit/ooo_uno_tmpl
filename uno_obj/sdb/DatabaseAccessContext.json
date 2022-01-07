@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "DatabaseAccessContext",
   "type": "service",
   "namespace": "com.sun.star.sdb",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,23 +15,33 @@
   "data": {
     "from_imports": [
       [
-        "..container.x_name_access",
-        "XNameAccess"
-      ],
-      [
         "..util.x_localized_aliases",
-        "XLocalizedAliases"
+        "XLocalizedAliases",
+        "util_x_localized_aliases_i"
       ],
       [
         "..lang.x_localizable",
-        "XLocalizable"
+        "XLocalizable",
+        "lang_x_localizable_i"
+      ],
+      [
+        "..container.x_name_access",
+        "XNameAccess",
+        "container_x_name_access_i"
       ],
       [
         "..container.x_enumeration_access",
-        "XEnumerationAccess"
+        "XEnumerationAccess",
+        "container_x_enumeration_access_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.util.XLocalizedAliases": "util_x_localized_aliases_i",
+      "com.sun.star.lang.XLocalizable": "lang_x_localizable_i",
+      "com.sun.star.container.XNameAccess": "container_x_name_access_i",
+      "com.sun.star.container.XEnumerationAccess": "container_x_enumeration_access_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -38,10 +49,10 @@
     "imports": [],
     "namespace": "com.sun.star.sdb",
     "extends": [
-      "com.sun.star.container.XEnumerationAccess",
-      "com.sun.star.container.XNameAccess",
       "com.sun.star.util.XLocalizedAliases",
-      "com.sun.star.lang.XLocalizable"
+      "com.sun.star.lang.XLocalizable",
+      "com.sun.star.container.XNameAccess",
+      "com.sun.star.container.XEnumerationAccess"
     ],
     "desc": [
       "is the context for data access beans.",

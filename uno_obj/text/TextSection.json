@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "TextSection",
   "type": "service",
   "namespace": "com.sun.star.text",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,52 +16,70 @@
     "from_imports": [
       [
         ".x_text_section",
-        "XTextSection"
-      ],
-      [
-        ".text_content",
-        "TextContent"
-      ],
-      [
-        "..beans.x_property_set",
-        "XPropertySet"
+        "XTextSection",
+        "x_text_section_i"
       ],
       [
         "..beans.x_property_state",
-        "XPropertyState"
+        "XPropertyState",
+        "beans_x_property_state_i"
       ],
       [
-        "..container.x_named",
-        "XNamed"
+        ".text_content",
+        "TextContent",
+        "text_content_i"
       ],
       [
         "..xml.user_defined_attributes_supplier",
-        "UserDefinedAttributesSupplier"
+        "UserDefinedAttributesSupplier",
+        "xml_user_defined_attributes_supplier_i"
+      ],
+      [
+        "..beans.x_property_set",
+        "XPropertySet",
+        "beans_x_property_set_i"
+      ],
+      [
+        "..container.x_named",
+        "XNamed",
+        "container_x_named_i"
       ]
     ],
     "from_imports_typing": [
       [
-        ".x_text_columns",
-        "XTextColumns"
-      ],
-      [
         "..style.graphic_location",
-        "GraphicLocation"
+        "GraphicLocation",
+        "style_graphic_location_i"
       ],
       [
         "..graphic.x_graphic",
-        "XGraphic"
+        "XGraphic",
+        "graphic_x_graphic_i"
       ],
       [
         ".section_file_link",
-        "SectionFileLink"
+        "SectionFileLink",
+        "section_file_link_i"
+      ],
+      [
+        ".x_text_columns",
+        "XTextColumns",
+        "x_text_columns_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.text.XTextSection": "x_text_section_i",
+      "com.sun.star.beans.XPropertyState": "beans_x_property_state_i",
+      "com.sun.star.text.TextContent": "text_content_i",
+      "com.sun.star.xml.UserDefinedAttributesSupplier": "xml_user_defined_attributes_supplier_i",
+      "com.sun.star.beans.XPropertySet": "beans_x_property_set_i",
+      "com.sun.star.container.XNamed": "container_x_named_i"
+    },
     "quote": [
-      "XTextColumns",
-      "SectionFileLink",
-      "GraphicLocation",
-      "XGraphic"
+      "x_text_columns_i",
+      "style_graphic_location_i",
+      "section_file_link_i",
+      "graphic_x_graphic_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -68,12 +87,12 @@
     "imports": [],
     "namespace": "com.sun.star.text",
     "extends": [
+      "com.sun.star.text.XTextSection",
+      "com.sun.star.beans.XPropertyState",
       "com.sun.star.text.TextContent",
       "com.sun.star.xml.UserDefinedAttributesSupplier",
-      "com.sun.star.text.XTextSection",
-      "com.sun.star.container.XNamed",
       "com.sun.star.beans.XPropertySet",
-      "com.sun.star.beans.XPropertyState"
+      "com.sun.star.container.XNamed"
     ],
     "desc": [
       "A TextSection is a range of complete paragraphs within a text.",
@@ -91,7 +110,7 @@
       "properties": [
         {
           "name": "BackGraphic",
-          "returns": "XGraphic",
+          "returns": "graphic_x_graphic_i",
           "desc": [
             "contains the graphic of the background.",
             "",
@@ -113,7 +132,7 @@
         },
         {
           "name": "BackGraphicLocation",
-          "returns": "GraphicLocation",
+          "returns": "style_graphic_location_i",
           "desc": [
             "determines the position of the background graphic."
           ],
@@ -250,7 +269,7 @@
         },
         {
           "name": "FileLink",
-          "returns": "SectionFileLink",
+          "returns": "section_file_link_i",
           "desc": [
             "If this property is set, then the content of the section is read from the specified document."
           ],
@@ -390,7 +409,7 @@
         },
         {
           "name": "TextColumns",
-          "returns": "XTextColumns",
+          "returns": "x_text_columns_i",
           "desc": [
             "allows columns to be set into the text section"
           ],

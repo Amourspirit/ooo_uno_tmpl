@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "DatabasePatternField",
   "type": "service",
   "namespace": "com.sun.star.form.component",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,15 +15,21 @@
   "data": {
     "from_imports": [
       [
-        "..data_aware_control_model",
-        "DataAwareControlModel"
+        ".pattern_field",
+        "PatternField",
+        "pattern_field_i"
       ],
       [
-        ".pattern_field",
-        "PatternField"
+        "..data_aware_control_model",
+        "DataAwareControlModel",
+        "data_aware_control_model_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.form.component.PatternField": "pattern_field_i",
+      "com.sun.star.form.DataAwareControlModel": "data_aware_control_model_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,

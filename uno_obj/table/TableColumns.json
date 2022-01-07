@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "TableColumns",
   "type": "service",
   "namespace": "com.sun.star.table",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,19 +15,27 @@
   "data": {
     "from_imports": [
       [
-        "..container.x_enumeration_access",
-        "XEnumerationAccess"
+        "..container.x_name_access",
+        "XNameAccess",
+        "container_x_name_access_i"
       ],
       [
-        "..container.x_name_access",
-        "XNameAccess"
+        "..container.x_enumeration_access",
+        "XEnumerationAccess",
+        "container_x_enumeration_access_i"
       ],
       [
         ".x_table_columns",
-        "XTableColumns"
+        "XTableColumns",
+        "x_table_columns_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.container.XNameAccess": "container_x_name_access_i",
+      "com.sun.star.container.XEnumerationAccess": "container_x_enumeration_access_i",
+      "com.sun.star.table.XTableColumns": "x_table_columns_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -34,9 +43,9 @@
     "imports": [],
     "namespace": "com.sun.star.table",
     "extends": [
-      "com.sun.star.table.XTableColumns",
+      "com.sun.star.container.XNameAccess",
       "com.sun.star.container.XEnumerationAccess",
-      "com.sun.star.container.XNameAccess"
+      "com.sun.star.table.XTableColumns"
     ],
     "desc": [
       "represents a collection of all columns of a table or spreadsheet."

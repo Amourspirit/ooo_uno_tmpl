@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "AddIn",
   "type": "service",
   "namespace": "com.sun.star.sheet",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,19 +15,27 @@
   "data": {
     "from_imports": [
       [
-        "..lang.x_service_name",
-        "XServiceName"
-      ],
-      [
         ".x_add_in",
-        "XAddIn"
+        "XAddIn",
+        "x_add_in_i"
       ],
       [
         ".x_compatibility_names",
-        "XCompatibilityNames"
+        "XCompatibilityNames",
+        "x_compatibility_names_i"
+      ],
+      [
+        "..lang.x_service_name",
+        "XServiceName",
+        "lang_x_service_name_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.sheet.XAddIn": "x_add_in_i",
+      "com.sun.star.sheet.XCompatibilityNames": "x_compatibility_names_i",
+      "com.sun.star.lang.XServiceName": "lang_x_service_name_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -34,9 +43,9 @@
     "imports": [],
     "namespace": "com.sun.star.sheet",
     "extends": [
-      "com.sun.star.lang.XServiceName",
       "com.sun.star.sheet.XAddIn",
-      "com.sun.star.sheet.XCompatibilityNames"
+      "com.sun.star.sheet.XCompatibilityNames",
+      "com.sun.star.lang.XServiceName"
     ],
     "desc": [
       "is the base for AddIn services that supply functions which can be called by other components.",

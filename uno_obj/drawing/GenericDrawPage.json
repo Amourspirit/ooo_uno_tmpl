@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "GenericDrawPage",
   "type": "service",
   "namespace": "com.sun.star.drawing",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,48 +15,65 @@
   "data": {
     "from_imports": [
       [
-        ".x_shape_binder",
-        "XShapeBinder"
+        ".x_shape_grouper",
+        "XShapeGrouper",
+        "x_shape_grouper_i"
       ],
       [
         ".x_shape_combiner",
-        "XShapeCombiner"
+        "XShapeCombiner",
+        "x_shape_combiner_i"
       ],
       [
         ".x_shapes",
-        "XShapes"
+        "XShapes",
+        "x_shapes_i"
       ],
       [
-        ".x_shape_grouper",
-        "XShapeGrouper"
+        ".x_shape_binder",
+        "XShapeBinder",
+        "x_shape_binder_i"
       ],
       [
         "..beans.x_property_set",
-        "XPropertySet"
+        "XPropertySet",
+        "beans_x_property_set_i"
       ],
       [
         "..container.x_named",
-        "XNamed"
+        "XNamed",
+        "container_x_named_i"
       ]
     ],
     "from_imports_typing": [
       [
         "..container.x_index_access",
-        "XIndexAccess"
-      ],
-      [
-        "..container.x_name_container",
-        "XNameContainer"
+        "XIndexAccess",
+        "container_x_index_access_i"
       ],
       [
         "..view.paper_orientation",
-        "PaperOrientation"
+        "PaperOrientation",
+        "view_paper_orientation_i"
+      ],
+      [
+        "..container.x_name_container",
+        "XNameContainer",
+        "container_x_name_container_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.drawing.XShapeGrouper": "x_shape_grouper_i",
+      "com.sun.star.drawing.XShapeCombiner": "x_shape_combiner_i",
+      "com.sun.star.drawing.XShapes": "x_shapes_i",
+      "com.sun.star.drawing.XShapeBinder": "x_shape_binder_i",
+      "com.sun.star.beans.XPropertySet": "beans_x_property_set_i",
+      "com.sun.star.container.XNamed": "container_x_named_i"
+    },
     "quote": [
-      "XIndexAccess",
-      "XNameContainer",
-      "PaperOrientation"
+      "container_x_index_access_i",
+      "container_x_name_container_i",
+      "view_paper_orientation_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -63,12 +81,12 @@
     "imports": [],
     "namespace": "com.sun.star.drawing",
     "extends": [
-      "com.sun.star.drawing.XShapes",
       "com.sun.star.drawing.XShapeGrouper",
       "com.sun.star.drawing.XShapeCombiner",
+      "com.sun.star.drawing.XShapes",
       "com.sun.star.drawing.XShapeBinder",
-      "com.sun.star.container.XNamed",
-      "com.sun.star.beans.XPropertySet"
+      "com.sun.star.beans.XPropertySet",
+      "com.sun.star.container.XNamed"
     ],
     "desc": [
       "This abstract service is implemented by every page of a DrawingDocument.",
@@ -153,7 +171,7 @@
         },
         {
           "name": "NavigationOrder",
-          "returns": "XIndexAccess",
+          "returns": "container_x_index_access_i",
           "desc": [
             "this index access defines a navigation order for the top level shapes inside this page.",
             "",
@@ -173,7 +191,7 @@
         },
         {
           "name": "Orientation",
-          "returns": "PaperOrientation",
+          "returns": "view_paper_orientation_i",
           "desc": [
             "This is the orientation of this page."
           ],
@@ -182,7 +200,7 @@
         },
         {
           "name": "UserDefinedAttributes",
-          "returns": "XNameContainer",
+          "returns": "container_x_name_container_i",
           "desc": [
             "this property stores xml attributes.",
             "",

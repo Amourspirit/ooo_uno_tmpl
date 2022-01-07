@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "LayerParser",
   "type": "service",
   "namespace": "com.sun.star.configuration.backend.xml",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,18 +16,26 @@
     "from_imports": [
       [
         "....io.x_active_data_sink",
-        "XActiveDataSink"
-      ],
-      [
-        "....lang.x_initialization",
-        "XInitialization"
+        "XActiveDataSink",
+        "io_x_active_data_sink_i"
       ],
       [
         "..x_layer",
-        "XLayer"
+        "XLayer",
+        "x_layer_i"
+      ],
+      [
+        "....lang.x_initialization",
+        "XInitialization",
+        "lang_x_initialization_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.io.XActiveDataSink": "io_x_active_data_sink_i",
+      "com.sun.star.configuration.backend.XLayer": "x_layer_i",
+      "com.sun.star.lang.XInitialization": "lang_x_initialization_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -34,8 +43,8 @@
     "imports": [],
     "namespace": "com.sun.star.configuration.backend.xml",
     "extends": [
-      "com.sun.star.configuration.backend.XLayer",
       "com.sun.star.io.XActiveDataSink",
+      "com.sun.star.configuration.backend.XLayer",
       "com.sun.star.lang.XInitialization"
     ],
     "desc": [

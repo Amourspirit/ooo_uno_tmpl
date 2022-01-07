@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "UITest",
   "type": "service",
   "namespace": "com.sun.star.ui.test",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,10 +16,14 @@
     "from_imports": [
       [
         ".xui_test",
-        "XUITest"
+        "XUITest",
+        "xui_test_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.ui.test.XUITest": "xui_test_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,

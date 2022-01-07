@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "ValidatableBindableControlModel",
   "type": "service",
   "namespace": "com.sun.star.form.validation",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,15 +15,21 @@
   "data": {
     "from_imports": [
       [
-        "..binding.bindable_control_model",
-        "BindableControlModel"
+        ".validatable_control_model",
+        "ValidatableControlModel",
+        "validatable_control_model_i"
       ],
       [
-        ".validatable_control_model",
-        "ValidatableControlModel"
+        "..binding.bindable_control_model",
+        "BindableControlModel",
+        "binding_bindable_control_model_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.form.validation.ValidatableControlModel": "validatable_control_model_i",
+      "com.sun.star.form.binding.BindableControlModel": "binding_bindable_control_model_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,

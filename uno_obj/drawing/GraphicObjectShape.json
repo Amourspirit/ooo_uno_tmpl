@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "GraphicObjectShape",
   "type": "service",
   "namespace": "com.sun.star.drawing",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,49 +16,64 @@
     "from_imports": [
       [
         ".rotation_descriptor",
-        "RotationDescriptor"
+        "RotationDescriptor",
+        "rotation_descriptor_i"
       ],
       [
         ".shadow_properties",
-        "ShadowProperties"
-      ],
-      [
-        ".text",
-        "Text"
+        "ShadowProperties",
+        "shadow_properties_i"
       ],
       [
         ".shape",
-        "Shape"
+        "Shape",
+        "shape_i"
+      ],
+      [
+        ".text",
+        "Text",
+        "text_i"
       ]
     ],
     "from_imports_typing": [
       [
-        ".color_mode",
-        "ColorMode"
+        "..graphic.x_graphic",
+        "XGraphic",
+        "graphic_x_graphic_i"
       ],
       [
         "..container.x_index_container",
-        "XIndexContainer"
+        "XIndexContainer",
+        "container_x_index_container_i"
       ],
       [
-        "..graphic.x_graphic",
-        "XGraphic"
-      ],
-      [
-        "..awt.x_bitmap",
-        "XBitmap"
+        ".color_mode",
+        "ColorMode",
+        "color_mode_i"
       ],
       [
         ".qr_code",
-        "QRCode"
+        "QRCode",
+        "qr_code_i"
+      ],
+      [
+        "..awt.x_bitmap",
+        "XBitmap",
+        "awt_x_bitmap_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.drawing.RotationDescriptor": "rotation_descriptor_i",
+      "com.sun.star.drawing.ShadowProperties": "shadow_properties_i",
+      "com.sun.star.drawing.Shape": "shape_i",
+      "com.sun.star.drawing.Text": "text_i"
+    },
     "quote": [
-      "XIndexContainer",
-      "ColorMode",
-      "QRCode",
-      "XBitmap",
-      "XGraphic"
+      "color_mode_i",
+      "graphic_x_graphic_i",
+      "awt_x_bitmap_i",
+      "container_x_index_container_i",
+      "qr_code_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -65,10 +81,10 @@
     "imports": [],
     "namespace": "com.sun.star.drawing",
     "extends": [
-      "com.sun.star.drawing.Shape",
-      "com.sun.star.drawing.Text",
+      "com.sun.star.drawing.RotationDescriptor",
       "com.sun.star.drawing.ShadowProperties",
-      "com.sun.star.drawing.RotationDescriptor"
+      "com.sun.star.drawing.Shape",
+      "com.sun.star.drawing.Text"
     ],
     "desc": [
       "This service is for a graphic shape.",
@@ -136,7 +152,7 @@
         },
         {
           "name": "Graphic",
-          "returns": "XGraphic",
+          "returns": "graphic_x_graphic_i",
           "desc": [
             "This is the graphic that represents this graphic shape."
           ],
@@ -145,7 +161,7 @@
         },
         {
           "name": "GraphicColorMode",
-          "returns": "ColorMode",
+          "returns": "color_mode_i",
           "desc": [
             "This property selects the color mode that is used for rendering."
           ],
@@ -154,7 +170,7 @@
         },
         {
           "name": "GraphicObjectFillBitmap",
-          "returns": "XBitmap",
+          "returns": "awt_x_bitmap_i",
           "desc": [
             "This is the bitmap that represents this graphic shape."
           ],
@@ -183,7 +199,7 @@
         },
         {
           "name": "ImageMap",
-          "returns": "XIndexContainer",
+          "returns": "container_x_index_container_i",
           "desc": [
             "This property contains an image map for this graphic."
           ],
@@ -201,7 +217,7 @@
         },
         {
           "name": "QRCodeProperties",
-          "returns": "QRCode",
+          "returns": "qr_code_i",
           "desc": [
             "Shape as a QR Code.",
             "",
@@ -286,7 +302,7 @@
         },
         {
           "name": "SignatureLineUnsignedImage",
-          "returns": "XGraphic",
+          "returns": "graphic_x_graphic_i",
           "desc": [
             "Image to be displayed when the signature line is unsigned.",
             "",

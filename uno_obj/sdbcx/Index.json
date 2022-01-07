@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "Index",
   "type": "service",
   "namespace": "com.sun.star.sdbcx",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,18 +16,26 @@
     "from_imports": [
       [
         "..beans.x_property_set",
-        "XPropertySet"
+        "XPropertySet",
+        "beans_x_property_set_i"
       ],
       [
         ".x_columns_supplier",
-        "XColumnsSupplier"
+        "XColumnsSupplier",
+        "x_columns_supplier_i"
       ],
       [
         ".x_data_descriptor_factory",
-        "XDataDescriptorFactory"
+        "XDataDescriptorFactory",
+        "x_data_descriptor_factory_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.beans.XPropertySet": "beans_x_property_set_i",
+      "com.sun.star.sdbcx.XColumnsSupplier": "x_columns_supplier_i",
+      "com.sun.star.sdbcx.XDataDescriptorFactory": "x_data_descriptor_factory_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -34,9 +43,9 @@
     "imports": [],
     "namespace": "com.sun.star.sdbcx",
     "extends": [
-      "com.sun.star.sdbcx.XDataDescriptorFactory",
+      "com.sun.star.beans.XPropertySet",
       "com.sun.star.sdbcx.XColumnsSupplier",
-      "com.sun.star.beans.XPropertySet"
+      "com.sun.star.sdbcx.XDataDescriptorFactory"
     ],
     "desc": [
       "is used to specify the index for a database table.",

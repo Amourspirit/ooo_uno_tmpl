@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "ObjectInspectorModel",
   "type": "service",
   "namespace": "com.sun.star.inspection",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,10 +16,14 @@
     "from_imports": [
       [
         ".x_object_inspector_model",
-        "XObjectInspectorModel"
+        "XObjectInspectorModel",
+        "x_object_inspector_model_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.inspection.XObjectInspectorModel": "x_object_inspector_model_i"
+    },
     "quote": [
       "typing.List[object]"
     ],

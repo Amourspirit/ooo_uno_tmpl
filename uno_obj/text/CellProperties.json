@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "CellProperties",
   "type": "service",
   "namespace": "com.sun.star.text",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,46 +16,58 @@
     "from_imports": [
       [
         "..beans.x_property_set",
-        "XPropertySet"
+        "XPropertySet",
+        "beans_x_property_set_i"
       ],
       [
         "..xml.user_defined_attributes_supplier",
-        "UserDefinedAttributesSupplier"
+        "UserDefinedAttributesSupplier",
+        "xml_user_defined_attributes_supplier_i"
       ]
     ],
     "from_imports_typing": [
       [
-        ".x_text",
-        "XText"
-      ],
-      [
         "..table.border_line",
-        "BorderLine"
+        "BorderLine",
+        "table_border_line_i"
       ],
       [
         "..util.color",
-        "Color"
+        "Color",
+        "util_color_i"
       ],
       [
         "..graphic.x_graphic",
-        "XGraphic"
+        "XGraphic",
+        "graphic_x_graphic_i"
+      ],
+      [
+        ".x_text",
+        "XText",
+        "x_text_i"
       ],
       [
         ".x_text_section",
-        "XTextSection"
+        "XTextSection",
+        "x_text_section_i"
       ],
       [
         "..style.graphic_location",
-        "GraphicLocation"
+        "GraphicLocation",
+        "style_graphic_location_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.beans.XPropertySet": "beans_x_property_set_i",
+      "com.sun.star.xml.UserDefinedAttributesSupplier": "xml_user_defined_attributes_supplier_i"
+    },
     "quote": [
-      "Color",
-      "XText",
-      "GraphicLocation",
-      "XTextSection",
-      "XGraphic",
-      "BorderLine"
+      "x_text_section_i",
+      "table_border_line_i",
+      "graphic_x_graphic_i",
+      "x_text_i",
+      "util_color_i",
+      "style_graphic_location_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -62,8 +75,8 @@
     "imports": [],
     "namespace": "com.sun.star.text",
     "extends": [
-      "com.sun.star.xml.UserDefinedAttributesSupplier",
-      "com.sun.star.beans.XPropertySet"
+      "com.sun.star.beans.XPropertySet",
+      "com.sun.star.xml.UserDefinedAttributesSupplier"
     ],
     "desc": [
       "service that holds all cell properties of a text table cell in a text document.",
@@ -77,7 +90,7 @@
       "properties": [
         {
           "name": "BackColor",
-          "returns": "Color",
+          "returns": "util_color_i",
           "desc": [
             "contains the background color."
           ],
@@ -86,7 +99,7 @@
         },
         {
           "name": "BackGraphic",
-          "returns": "XGraphic",
+          "returns": "graphic_x_graphic_i",
           "desc": [
             "contains the graphic object that is displayed as background graphic.",
             "",
@@ -108,7 +121,7 @@
         },
         {
           "name": "BackGraphicLocation",
-          "returns": "GraphicLocation",
+          "returns": "style_graphic_location_i",
           "desc": [
             "determines the position of the background graphic."
           ],
@@ -137,7 +150,7 @@
         },
         {
           "name": "BottomBorder",
-          "returns": "BorderLine",
+          "returns": "table_border_line_i",
           "desc": [
             "contains the bottom border line."
           ],
@@ -173,7 +186,7 @@
         },
         {
           "name": "LeftBorder",
-          "returns": "BorderLine",
+          "returns": "table_border_line_i",
           "desc": [
             "contains the left border line."
           ],
@@ -200,7 +213,7 @@
         },
         {
           "name": "ParentText",
-          "returns": "XText",
+          "returns": "x_text_i",
           "desc": [
             "Parent text of this table cell.",
             "",
@@ -215,7 +228,7 @@
         },
         {
           "name": "RightBorder",
-          "returns": "BorderLine",
+          "returns": "table_border_line_i",
           "desc": [
             "contains the right border line."
           ],
@@ -233,7 +246,7 @@
         },
         {
           "name": "TextSection",
-          "returns": "XTextSection",
+          "returns": "x_text_section_i",
           "desc": [
             "contains the text section the text table is contained in if there is any."
           ],
@@ -242,7 +255,7 @@
         },
         {
           "name": "TopBorder",
-          "returns": "BorderLine",
+          "returns": "table_border_line_i",
           "desc": [
             "contains the top border line."
           ],

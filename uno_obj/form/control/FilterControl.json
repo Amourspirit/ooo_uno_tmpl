@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "FilterControl",
   "type": "service",
   "namespace": "com.sun.star.form.control",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,27 +16,34 @@
     "from_imports": [
       [
         "...awt.x_control",
-        "XControl"
+        "XControl",
+        "awt_x_control_i"
       ]
     ],
     "from_imports_typing": [
       [
         "...beans.x_property_set",
-        "XPropertySet"
+        "XPropertySet",
+        "beans_x_property_set_i"
       ],
       [
         "...awt.x_window",
-        "XWindow"
+        "XWindow",
+        "awt_x_window_i"
       ],
       [
         "...util.x_number_formatter",
-        "XNumberFormatter"
+        "XNumberFormatter",
+        "util_x_number_formatter_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.awt.XControl": "awt_x_control_i"
+    },
     "quote": [
-      "XWindow",
-      "XPropertySet",
-      "XNumberFormatter"
+      "util_x_number_formatter_i",
+      "beans_x_property_set_i",
+      "awt_x_window_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -61,17 +69,17 @@
           "args": [
             [
               "MessageParent",
-              "XWindow",
+              "awt_x_window_i",
               "in"
             ],
             [
               "NumberFormatter",
-              "XNumberFormatter",
+              "util_x_number_formatter_i",
               "in"
             ],
             [
               "ControlModel",
-              "XPropertySet",
+              "beans_x_property_set_i",
               "in"
             ]
           ]

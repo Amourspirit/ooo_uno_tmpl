@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "SheetCellCursor",
   "type": "service",
   "namespace": "com.sun.star.sheet",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,23 +15,33 @@
   "data": {
     "from_imports": [
       [
+        ".x_sheet_cell_cursor",
+        "XSheetCellCursor",
+        "x_sheet_cell_cursor_i"
+      ],
+      [
         ".sheet_cell_range",
-        "SheetCellRange"
+        "SheetCellRange",
+        "sheet_cell_range_i"
       ],
       [
         "..table.cell_cursor",
-        "CellCursor"
+        "CellCursor",
+        "table_cell_cursor_i"
       ],
       [
         ".x_used_area_cursor",
-        "XUsedAreaCursor"
-      ],
-      [
-        ".x_sheet_cell_cursor",
-        "XSheetCellCursor"
+        "XUsedAreaCursor",
+        "x_used_area_cursor_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.sheet.XSheetCellCursor": "x_sheet_cell_cursor_i",
+      "com.sun.star.sheet.SheetCellRange": "sheet_cell_range_i",
+      "com.sun.star.table.CellCursor": "table_cell_cursor_i",
+      "com.sun.star.sheet.XUsedAreaCursor": "x_used_area_cursor_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -38,9 +49,9 @@
     "imports": [],
     "namespace": "com.sun.star.sheet",
     "extends": [
-      "com.sun.star.table.CellCursor",
-      "com.sun.star.sheet.SheetCellRange",
       "com.sun.star.sheet.XSheetCellCursor",
+      "com.sun.star.sheet.SheetCellRange",
+      "com.sun.star.table.CellCursor",
       "com.sun.star.sheet.XUsedAreaCursor"
     ],
     "desc": [

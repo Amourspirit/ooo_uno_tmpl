@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "Style",
   "type": "service",
   "namespace": "com.sun.star.style",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,53 +16,67 @@
     "from_imports": [
       [
         "..beans.x_multi_property_states",
-        "XMultiPropertyStates"
-      ],
-      [
-        "..beans.x_property_set",
-        "XPropertySet"
-      ],
-      [
-        "..xml.user_defined_attributes_supplier",
-        "UserDefinedAttributesSupplier"
-      ],
-      [
-        ".x_style",
-        "XStyle"
+        "XMultiPropertyStates",
+        "beans_x_multi_property_states_i"
       ],
       [
         "..beans.x_multi_property_set",
-        "XMultiPropertySet"
+        "XMultiPropertySet",
+        "beans_x_multi_property_set_i"
+      ],
+      [
+        ".x_style",
+        "XStyle",
+        "x_style_i"
+      ],
+      [
+        "..xml.user_defined_attributes_supplier",
+        "UserDefinedAttributesSupplier",
+        "xml_user_defined_attributes_supplier_i"
+      ],
+      [
+        "..beans.x_property_set",
+        "XPropertySet",
+        "beans_x_property_set_i"
       ]
     ],
     "from_imports_typing": [
       [
-        "..beans.property_value",
-        "PropertyValue"
+        "..beans.named_value",
+        "NamedValue",
+        "beans_named_value_i"
       ],
       [
-        "..beans.named_value",
-        "NamedValue"
+        "..beans.property_value",
+        "PropertyValue",
+        "beans_property_value_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.beans.XMultiPropertyStates": "beans_x_multi_property_states_i",
+      "com.sun.star.beans.XMultiPropertySet": "beans_x_multi_property_set_i",
+      "com.sun.star.style.XStyle": "x_style_i",
+      "com.sun.star.xml.UserDefinedAttributesSupplier": "xml_user_defined_attributes_supplier_i",
+      "com.sun.star.beans.XPropertySet": "beans_x_property_set_i"
+    },
     "quote": [
-      "typing.List[NamedValue]",
-      "typing.List[PropertyValue]"
+      "typing.List[beans_property_value_i]",
+      "typing.List[beans_named_value_i]"
     ],
     "typings": [
-      "typing.List[NamedValue]",
-      "typing.List[PropertyValue]"
+      "typing.List[beans_property_value_i]",
+      "typing.List[beans_named_value_i]"
     ],
     "requires_typing": true,
     "name": "Style",
     "imports": [],
     "namespace": "com.sun.star.style",
     "extends": [
-      "com.sun.star.xml.UserDefinedAttributesSupplier",
-      "com.sun.star.style.XStyle",
-      "com.sun.star.beans.XPropertySet",
+      "com.sun.star.beans.XMultiPropertyStates",
       "com.sun.star.beans.XMultiPropertySet",
-      "com.sun.star.beans.XMultiPropertyStates"
+      "com.sun.star.style.XStyle",
+      "com.sun.star.xml.UserDefinedAttributesSupplier",
+      "com.sun.star.beans.XPropertySet"
     ],
     "desc": [
       "This service specifies a single style sheet.",
@@ -75,7 +90,7 @@
       "types": [
         {
           "name": "ParaStyleConditions",
-          "returns": "typing.List[NamedValue]",
+          "returns": "typing.List[beans_named_value_i]",
           "desc": [
             "defines the context and styles for conditional paragraphs.",
             "",
@@ -96,7 +111,7 @@
         },
         {
           "name": "StyleInteropGrabBag",
-          "returns": "typing.List[PropertyValue]",
+          "returns": "typing.List[beans_property_value_i]",
           "desc": [
             "Grab bag of style properties, used as a string-any map for interim interop purposes.",
             "",

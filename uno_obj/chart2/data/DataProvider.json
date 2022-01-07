@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "DataProvider",
   "type": "service",
   "namespace": "com.sun.star.chart2.data",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,14 +16,20 @@
     "from_imports": [
       [
         ".x_data_provider",
-        "XDataProvider"
+        "XDataProvider",
+        "x_data_provider_i"
       ],
       [
         ".x_range_xml_conversion",
-        "XRangeXMLConversion"
+        "XRangeXMLConversion",
+        "x_range_xml_conversion_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.chart2.data.XDataProvider": "x_data_provider_i",
+      "com.sun.star.chart2.data.XRangeXMLConversion": "x_range_xml_conversion_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,

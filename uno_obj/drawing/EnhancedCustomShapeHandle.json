@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "EnhancedCustomShapeHandle",
   "type": "service",
   "namespace": "com.sun.star.drawing",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -16,16 +17,19 @@
     "from_imports_typing": [
       [
         ".enhanced_custom_shape_parameter_pair",
-        "EnhancedCustomShapeParameterPair"
+        "EnhancedCustomShapeParameterPair",
+        "enhanced_custom_shape_parameter_pair_i"
       ],
       [
         ".enhanced_custom_shape_parameter",
-        "EnhancedCustomShapeParameter"
+        "EnhancedCustomShapeParameter",
+        "enhanced_custom_shape_parameter_i"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "EnhancedCustomShapeParameterPair",
-      "EnhancedCustomShapeParameter"
+      "enhanced_custom_shape_parameter_i",
+      "enhanced_custom_shape_parameter_pair_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -59,7 +63,7 @@
         },
         {
           "name": "Polar",
-          "returns": "EnhancedCustomShapeParameterPair",
+          "returns": "enhanced_custom_shape_parameter_pair_i",
           "desc": [
             "If this attribute is set, the handle is a polar handle.",
             "",
@@ -70,7 +74,7 @@
         },
         {
           "name": "Position",
-          "returns": "EnhancedCustomShapeParameterPair",
+          "returns": "enhanced_custom_shape_parameter_pair_i",
           "desc": [
             "If the property Polar is set, then the first value specifies the radius and the second parameter the angle of the handle.",
             "",
@@ -81,7 +85,7 @@
         },
         {
           "name": "RadiusRangeMaximum",
-          "returns": "EnhancedCustomShapeParameter",
+          "returns": "enhanced_custom_shape_parameter_i",
           "desc": [
             "If this attribute is set, it specifies the maximum radius range that can be used for a polar handle."
           ],
@@ -90,7 +94,7 @@
         },
         {
           "name": "RadiusRangeMinimum",
-          "returns": "EnhancedCustomShapeParameter",
+          "returns": "enhanced_custom_shape_parameter_i",
           "desc": [
             "If this attribute is set, it specifies the minimum radius range that can be used for a polar handle."
           ],
@@ -99,7 +103,7 @@
         },
         {
           "name": "RangeXMaximum",
-          "returns": "EnhancedCustomShapeParameter",
+          "returns": "enhanced_custom_shape_parameter_i",
           "desc": [
             "If the attribute RangeXMaximum is set, it specifies the horizontal maximum range of the handle."
           ],
@@ -108,7 +112,7 @@
         },
         {
           "name": "RangeXMinimum",
-          "returns": "EnhancedCustomShapeParameter",
+          "returns": "enhanced_custom_shape_parameter_i",
           "desc": [
             "If the attribute RangeXMinimum is set, it specifies the horizontal minimum range of the handle."
           ],
@@ -117,7 +121,7 @@
         },
         {
           "name": "RangeYMaximum",
-          "returns": "EnhancedCustomShapeParameter",
+          "returns": "enhanced_custom_shape_parameter_i",
           "desc": [
             "If the attribute RangeYMaximum is set, it specifies the vertical maximum range of the handle."
           ],
@@ -126,7 +130,7 @@
         },
         {
           "name": "RangeYMinimum",
-          "returns": "EnhancedCustomShapeParameter",
+          "returns": "enhanced_custom_shape_parameter_i",
           "desc": [
             "If the attribute RangeYMinimum is set, it specifies the vertical minimum range of the handle."
           ],

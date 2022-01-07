@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "PolyPolygonDescriptor",
   "type": "service",
   "namespace": "com.sun.star.drawing",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,17 +16,20 @@
     "from_imports": [],
     "from_imports_typing": [
       [
-        ".point_sequence_sequence",
-        "PointSequenceSequence"
+        ".polygon_kind",
+        "PolygonKind",
+        "polygon_kind_i"
       ],
       [
-        ".polygon_kind",
-        "PolygonKind"
+        ".point_sequence_sequence",
+        "PointSequenceSequence",
+        "point_sequence_sequence_i"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "PointSequenceSequence",
-      "PolygonKind"
+      "polygon_kind_i",
+      "point_sequence_sequence_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -43,7 +47,7 @@
       "properties": [
         {
           "name": "Geometry",
-          "returns": "PointSequenceSequence",
+          "returns": "point_sequence_sequence_i",
           "desc": [
             "These are the untransformed points of this polygon."
           ],
@@ -52,7 +56,7 @@
         },
         {
           "name": "PolyPolygon",
-          "returns": "PointSequenceSequence",
+          "returns": "point_sequence_sequence_i",
           "desc": [
             "These are the reference points for this polygon."
           ],
@@ -61,7 +65,7 @@
         },
         {
           "name": "PolygonKind",
-          "returns": "PolygonKind",
+          "returns": "polygon_kind_i",
           "desc": [
             "This is the type of polygon."
           ],

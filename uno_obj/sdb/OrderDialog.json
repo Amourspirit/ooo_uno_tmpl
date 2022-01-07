@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "OrderDialog",
   "type": "service",
   "namespace": "com.sun.star.sdb",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,27 +16,34 @@
     "from_imports": [
       [
         "..ui.dialogs.x_executable_dialog",
-        "XExecutableDialog"
+        "XExecutableDialog",
+        "ui_dialogs_x_executable_dialog_i"
       ]
     ],
     "from_imports_typing": [
       [
         "..beans.x_property_set",
-        "XPropertySet"
+        "XPropertySet",
+        "beans_x_property_set_i"
       ],
       [
         "..awt.x_window",
-        "XWindow"
+        "XWindow",
+        "awt_x_window_i"
       ],
       [
         ".x_single_select_query_composer",
-        "XSingleSelectQueryComposer"
+        "XSingleSelectQueryComposer",
+        "x_single_select_query_composer_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.ui.dialogs.XExecutableDialog": "ui_dialogs_x_executable_dialog_i"
+    },
     "quote": [
-      "XWindow",
-      "XSingleSelectQueryComposer",
-      "XPropertySet"
+      "beans_x_property_set_i",
+      "x_single_select_query_composer_i",
+      "awt_x_window_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -70,17 +78,17 @@
           "args": [
             [
               "QueryComposer",
-              "XSingleSelectQueryComposer",
+              "x_single_select_query_composer_i",
               "in"
             ],
             [
               "RowSet",
-              "XPropertySet",
+              "beans_x_property_set_i",
               "in"
             ],
             [
               "ParentWindow",
-              "XWindow",
+              "awt_x_window_i",
               "in"
             ]
           ]

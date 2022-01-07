@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "TableColumn",
   "type": "service",
   "namespace": "com.sun.star.table",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,19 +15,27 @@
   "data": {
     "from_imports": [
       [
-        "..beans.x_property_set",
-        "XPropertySet"
+        ".x_cell_range",
+        "XCellRange",
+        "x_cell_range_i"
       ],
       [
-        ".x_cell_range",
-        "XCellRange"
+        "..beans.x_property_set",
+        "XPropertySet",
+        "beans_x_property_set_i"
       ],
       [
         "..container.x_named",
-        "XNamed"
+        "XNamed",
+        "container_x_named_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.table.XCellRange": "x_cell_range_i",
+      "com.sun.star.beans.XPropertySet": "beans_x_property_set_i",
+      "com.sun.star.container.XNamed": "container_x_named_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,

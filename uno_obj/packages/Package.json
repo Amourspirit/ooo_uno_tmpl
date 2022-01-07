@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "Package",
   "type": "service",
   "namespace": "com.sun.star.packages",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,23 +15,33 @@
   "data": {
     "from_imports": [
       [
-        "..lang.x_initialization",
-        "XInitialization"
-      ],
-      [
-        "..util.x_changes_batch",
-        "XChangesBatch"
+        "..container.x_hierarchical_name_access",
+        "XHierarchicalNameAccess",
+        "container_x_hierarchical_name_access_i"
       ],
       [
         "..lang.x_single_service_factory",
-        "XSingleServiceFactory"
+        "XSingleServiceFactory",
+        "lang_x_single_service_factory_i"
       ],
       [
-        "..container.x_hierarchical_name_access",
-        "XHierarchicalNameAccess"
+        "..util.x_changes_batch",
+        "XChangesBatch",
+        "util_x_changes_batch_i"
+      ],
+      [
+        "..lang.x_initialization",
+        "XInitialization",
+        "lang_x_initialization_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.container.XHierarchicalNameAccess": "container_x_hierarchical_name_access_i",
+      "com.sun.star.lang.XSingleServiceFactory": "lang_x_single_service_factory_i",
+      "com.sun.star.util.XChangesBatch": "util_x_changes_batch_i",
+      "com.sun.star.lang.XInitialization": "lang_x_initialization_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -38,10 +49,10 @@
     "imports": [],
     "namespace": "com.sun.star.packages",
     "extends": [
-      "com.sun.star.lang.XInitialization",
       "com.sun.star.container.XHierarchicalNameAccess",
       "com.sun.star.lang.XSingleServiceFactory",
-      "com.sun.star.util.XChangesBatch"
+      "com.sun.star.util.XChangesBatch",
+      "com.sun.star.lang.XInitialization"
     ],
     "desc": [
       "The Package is a service that provides access to a set of files and folders contained within a Package.",

@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "TextPortion",
   "type": "service",
   "namespace": "com.sun.star.text",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,36 +15,41 @@
   "data": {
     "from_imports": [
       [
-        "..container.x_content_enumeration_access",
-        "XContentEnumerationAccess"
-      ],
-      [
         "..beans.x_tolerant_multi_property_set",
-        "XTolerantMultiPropertySet"
+        "XTolerantMultiPropertySet",
+        "beans_x_tolerant_multi_property_set_i"
       ],
       [
         ".text_range",
-        "TextRange"
+        "TextRange",
+        "text_range_i"
       ]
     ],
     "from_imports_typing": [
       [
-        ".x_footnote",
-        "XFootnote"
+        ".x_text_field",
+        "XTextField",
+        "x_text_field_i"
       ],
       [
         ".x_text_content",
-        "XTextContent"
+        "XTextContent",
+        "x_text_content_i"
       ],
       [
-        ".x_text_field",
-        "XTextField"
+        ".x_footnote",
+        "XFootnote",
+        "x_footnote_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.beans.XTolerantMultiPropertySet": "beans_x_tolerant_multi_property_set_i",
+      "com.sun.star.text.TextRange": "text_range_i"
+    },
     "quote": [
-      "XTextContent",
-      "XTextField",
-      "XFootnote"
+      "x_text_field_i",
+      "x_text_content_i",
+      "x_footnote_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -51,9 +57,8 @@
     "imports": [],
     "namespace": "com.sun.star.text",
     "extends": [
-      "com.sun.star.text.TextRange",
-      "com.sun.star.container.XContentEnumerationAccess",
-      "com.sun.star.beans.XTolerantMultiPropertySet"
+      "com.sun.star.beans.XTolerantMultiPropertySet",
+      "com.sun.star.text.TextRange"
     ],
     "desc": [
       "A TextPortion is a piece of text within a paragraph that does not contain changes of its attributes inside.",
@@ -69,7 +74,7 @@
       "properties": [
         {
           "name": "Bookmark",
-          "returns": "XTextContent",
+          "returns": "x_text_content_i",
           "desc": [
             "contains the bookmark of a text portion of type Bookmark."
           ],
@@ -87,7 +92,7 @@
         },
         {
           "name": "DocumentIndexMark",
-          "returns": "XTextContent",
+          "returns": "x_text_content_i",
           "desc": [
             "contains the document index mark of a text portion of type DocumentIndexMark."
           ],
@@ -96,7 +101,7 @@
         },
         {
           "name": "Footnote",
-          "returns": "XFootnote",
+          "returns": "x_footnote_i",
           "desc": [
             "contains the footnote of a text portion of type Footnote."
           ],
@@ -105,7 +110,7 @@
         },
         {
           "name": "InContentMetadata",
-          "returns": "XTextContent",
+          "returns": "x_text_content_i",
           "desc": [
             "contains the text range of a text portion of type InContentMetadata.",
             "",
@@ -138,7 +143,7 @@
         },
         {
           "name": "ReferenceMark",
-          "returns": "XTextContent",
+          "returns": "x_text_content_i",
           "desc": [
             "contains the bookmark of a text portion of type ReferenceMark."
           ],
@@ -147,7 +152,7 @@
         },
         {
           "name": "TextField",
-          "returns": "XTextField",
+          "returns": "x_text_field_i",
           "desc": [
             "contains the text field of a text portion of type TextField."
           ],

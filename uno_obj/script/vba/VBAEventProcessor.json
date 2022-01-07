@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "VBAEventProcessor",
   "type": "service",
   "namespace": "com.sun.star.script.vba",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,10 +16,14 @@
     "from_imports": [
       [
         ".xvba_event_processor",
-        "XVBAEventProcessor"
+        "XVBAEventProcessor",
+        "xvba_event_processor_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.script.vba.XVBAEventProcessor": "xvba_event_processor_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,

@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "FilledNetDiagram",
   "type": "service",
   "namespace": "com.sun.star.chart",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,23 +15,33 @@
   "data": {
     "from_imports": [
       [
-        ".diagram",
-        "Diagram"
-      ],
-      [
         ".chart_axis_x_supplier",
-        "ChartAxisXSupplier"
-      ],
-      [
-        ".stackable_diagram",
-        "StackableDiagram"
+        "ChartAxisXSupplier",
+        "chart_axis_x_supplier_i"
       ],
       [
         ".chart_axis_y_supplier",
-        "ChartAxisYSupplier"
+        "ChartAxisYSupplier",
+        "chart_axis_y_supplier_i"
+      ],
+      [
+        ".diagram",
+        "Diagram",
+        "diagram_i"
+      ],
+      [
+        ".stackable_diagram",
+        "StackableDiagram",
+        "stackable_diagram_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.chart.ChartAxisXSupplier": "chart_axis_x_supplier_i",
+      "com.sun.star.chart.ChartAxisYSupplier": "chart_axis_y_supplier_i",
+      "com.sun.star.chart.Diagram": "diagram_i",
+      "com.sun.star.chart.StackableDiagram": "stackable_diagram_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -38,9 +49,9 @@
     "imports": [],
     "namespace": "com.sun.star.chart",
     "extends": [
-      "com.sun.star.chart.Diagram",
       "com.sun.star.chart.ChartAxisXSupplier",
       "com.sun.star.chart.ChartAxisYSupplier",
+      "com.sun.star.chart.Diagram",
       "com.sun.star.chart.StackableDiagram"
     ],
     "desc": [

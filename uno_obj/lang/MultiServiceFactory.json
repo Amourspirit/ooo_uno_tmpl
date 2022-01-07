@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "MultiServiceFactory",
   "type": "service",
   "namespace": "com.sun.star.lang",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,14 +16,20 @@
     "from_imports": [
       [
         ".x_multi_component_factory",
-        "XMultiComponentFactory"
+        "XMultiComponentFactory",
+        "x_multi_component_factory_i"
       ],
       [
         ".x_multi_service_factory",
-        "XMultiServiceFactory"
+        "XMultiServiceFactory",
+        "x_multi_service_factory_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.lang.XMultiComponentFactory": "x_multi_component_factory_i",
+      "com.sun.star.lang.XMultiServiceFactory": "x_multi_service_factory_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -30,8 +37,8 @@
     "imports": [],
     "namespace": "com.sun.star.lang",
     "extends": [
-      "com.sun.star.lang.XMultiServiceFactory",
-      "com.sun.star.lang.XMultiComponentFactory"
+      "com.sun.star.lang.XMultiComponentFactory",
+      "com.sun.star.lang.XMultiServiceFactory"
     ],
     "desc": [
       "Provides a collection of implementations of services.",

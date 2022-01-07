@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "TablePageStyle",
   "type": "service",
   "namespace": "com.sun.star.sheet",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,17 +16,22 @@
     "from_imports": [
       [
         "..style.page_style",
-        "PageStyle"
+        "PageStyle",
+        "style_page_style_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_header_footer_content",
-        "XHeaderFooterContent"
+        "XHeaderFooterContent",
+        "x_header_footer_content_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.style.PageStyle": "style_page_style_i"
+    },
     "quote": [
-      "XHeaderFooterContent"
+      "x_header_footer_content_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -78,7 +84,7 @@
         },
         {
           "name": "LeftPageFooterContent",
-          "returns": "XHeaderFooterContent",
+          "returns": "x_header_footer_content_i",
           "desc": [
             "contains the content of the footer for left pages.",
             "",
@@ -89,7 +95,7 @@
         },
         {
           "name": "LeftPageHeaderContent",
-          "returns": "XHeaderFooterContent",
+          "returns": "x_header_footer_content_i",
           "desc": [
             "contains the content of the header for left pages.",
             "",
@@ -192,7 +198,7 @@
         },
         {
           "name": "RightPageFooterContent",
-          "returns": "XHeaderFooterContent",
+          "returns": "x_header_footer_content_i",
           "desc": [
             "contains the content of the footer for right pages.",
             "",
@@ -203,7 +209,7 @@
         },
         {
           "name": "RightPageHeaderContent",
-          "returns": "XHeaderFooterContent",
+          "returns": "x_header_footer_content_i",
           "desc": [
             "contains the content of the header for right pages.",
             "",

@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "DataForm",
   "type": "service",
   "namespace": "com.sun.star.form.component",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,44 +15,54 @@
   "data": {
     "from_imports": [
       [
-        "..x_database_parameter_broadcaster",
-        "XDatabaseParameterBroadcaster"
-      ],
-      [
         ".form",
-        "Form"
+        "Form",
+        "form_i"
       ],
       [
-        "..x_loadable",
-        "XLoadable"
-      ],
-      [
-        "...sdb.x_completed_execution",
-        "XCompletedExecution"
-      ],
-      [
-        "..x_reset",
-        "XReset"
+        "..x_database_parameter_broadcaster",
+        "XDatabaseParameterBroadcaster",
+        "x_database_parameter_broadcaster_i"
       ],
       [
         "...sdb.row_set",
-        "RowSet"
+        "RowSet",
+        "sdb_row_set_i"
+      ],
+      [
+        "..x_reset",
+        "XReset",
+        "x_reset_i"
+      ],
+      [
+        "..x_loadable",
+        "XLoadable",
+        "x_loadable_i"
       ]
     ],
     "from_imports_typing": [
       [
-        "..tabulator_cycle",
-        "TabulatorCycle"
+        "..navigation_bar_mode",
+        "NavigationBarMode",
+        "navigation_bar_mode_i"
       ],
       [
-        "..navigation_bar_mode",
-        "NavigationBarMode"
+        "..tabulator_cycle",
+        "TabulatorCycle",
+        "tabulator_cycle_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.form.component.Form": "form_i",
+      "com.sun.star.form.XDatabaseParameterBroadcaster": "x_database_parameter_broadcaster_i",
+      "com.sun.star.sdb.RowSet": "sdb_row_set_i",
+      "com.sun.star.form.XReset": "x_reset_i",
+      "com.sun.star.form.XLoadable": "x_loadable_i"
+    },
     "quote": [
-      "NavigationBarMode",
       "typing.List[str]",
-      "TabulatorCycle"
+      "navigation_bar_mode_i",
+      "tabulator_cycle_i"
     ],
     "typings": [
       "typing.List[str]"
@@ -61,12 +72,11 @@
     "imports": [],
     "namespace": "com.sun.star.form.component",
     "extends": [
-      "com.sun.star.sdb.RowSet",
       "com.sun.star.form.component.Form",
+      "com.sun.star.form.XDatabaseParameterBroadcaster",
+      "com.sun.star.sdb.RowSet",
       "com.sun.star.form.XReset",
-      "com.sun.star.form.XLoadable",
-      "com.sun.star.sdb.XCompletedExecution",
-      "com.sun.star.form.XDatabaseParameterBroadcaster"
+      "com.sun.star.form.XLoadable"
     ],
     "desc": [
       "This service specifies a form which is connected to a database and displays the results of SQL queries.",
@@ -146,7 +156,7 @@
         },
         {
           "name": "Cycle",
-          "returns": "TabulatorCycle",
+          "returns": "tabulator_cycle_i",
           "desc": [
             "returns the kind of tabulator controlling."
           ],
@@ -155,7 +165,7 @@
         },
         {
           "name": "NavigationBarMode",
-          "returns": "NavigationBarMode",
+          "returns": "navigation_bar_mode_i",
           "desc": [
             "determines how a navigation bar for this form should act."
           ],

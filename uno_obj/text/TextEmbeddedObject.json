@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "TextEmbeddedObject",
   "type": "service",
   "namespace": "com.sun.star.text",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,26 +16,34 @@
     "from_imports": [
       [
         ".base_frame",
-        "BaseFrame"
+        "BaseFrame",
+        "base_frame_i"
       ],
       [
         "..document.x_embedded_object_supplier",
-        "XEmbeddedObjectSupplier"
+        "XEmbeddedObjectSupplier",
+        "document_x_embedded_object_supplier_i"
       ]
     ],
     "from_imports_typing": [
       [
-        "..lang.x_component",
-        "XComponent"
+        "..frame.x_model",
+        "XModel",
+        "frame_x_model_i"
       ],
       [
-        "..frame.x_model",
-        "XModel"
+        "..lang.x_component",
+        "XComponent",
+        "lang_x_component_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.text.BaseFrame": "base_frame_i",
+      "com.sun.star.document.XEmbeddedObjectSupplier": "document_x_embedded_object_supplier_i"
+    },
     "quote": [
-      "XModel",
-      "XComponent"
+      "frame_x_model_i",
+      "lang_x_component_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -60,7 +69,7 @@
         },
         {
           "name": "Component",
-          "returns": "XComponent",
+          "returns": "lang_x_component_i",
           "desc": [
             "This is the component for the OLE2 object."
           ],
@@ -69,7 +78,7 @@
         },
         {
           "name": "Model",
-          "returns": "XModel",
+          "returns": "frame_x_model_i",
           "desc": [
             "This is the model for the OLE2 object.",
             "",

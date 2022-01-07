@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "ReplaceDescriptor",
   "type": "service",
   "namespace": "com.sun.star.util",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,14 +16,20 @@
     "from_imports": [
       [
         ".x_replace_descriptor",
-        "XReplaceDescriptor"
+        "XReplaceDescriptor",
+        "x_replace_descriptor_i"
       ],
       [
         ".search_descriptor",
-        "SearchDescriptor"
+        "SearchDescriptor",
+        "search_descriptor_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.util.XReplaceDescriptor": "x_replace_descriptor_i",
+      "com.sun.star.util.SearchDescriptor": "search_descriptor_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -30,8 +37,8 @@
     "imports": [],
     "namespace": "com.sun.star.util",
     "extends": [
-      "com.sun.star.util.SearchDescriptor",
-      "com.sun.star.util.XReplaceDescriptor"
+      "com.sun.star.util.XReplaceDescriptor",
+      "com.sun.star.util.SearchDescriptor"
     ],
     "desc": [
       "describes what and how to replace strings."

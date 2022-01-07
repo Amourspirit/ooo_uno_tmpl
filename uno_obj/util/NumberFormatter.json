@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "NumberFormatter",
   "type": "service",
   "namespace": "com.sun.star.util",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,10 +16,14 @@
     "from_imports": [
       [
         ".x_number_formatter2",
-        "XNumberFormatter2"
+        "XNumberFormatter2",
+        "x_number_formatter2_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.util.XNumberFormatter2": "x_number_formatter2_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,

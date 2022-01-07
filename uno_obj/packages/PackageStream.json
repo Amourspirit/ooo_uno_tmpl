@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "PackageStream",
   "type": "service",
   "namespace": "com.sun.star.packages",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,23 +15,33 @@
   "data": {
     "from_imports": [
       [
-        "..io.x_active_data_sink",
-        "XActiveDataSink"
+        "..container.x_named",
+        "XNamed",
+        "container_x_named_i"
       ],
       [
         "..container.x_child",
-        "XChild"
+        "XChild",
+        "container_x_child_i"
+      ],
+      [
+        "..io.x_active_data_sink",
+        "XActiveDataSink",
+        "io_x_active_data_sink_i"
       ],
       [
         "..beans.x_property_set",
-        "XPropertySet"
-      ],
-      [
-        "..container.x_named",
-        "XNamed"
+        "XPropertySet",
+        "beans_x_property_set_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.container.XNamed": "container_x_named_i",
+      "com.sun.star.container.XChild": "container_x_child_i",
+      "com.sun.star.io.XActiveDataSink": "io_x_active_data_sink_i",
+      "com.sun.star.beans.XPropertySet": "beans_x_property_set_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,

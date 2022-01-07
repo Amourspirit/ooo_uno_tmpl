@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "PageStyle",
   "type": "service",
   "namespace": "com.sun.star.style",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,14 +16,20 @@
     "from_imports": [
       [
         ".style",
-        "Style"
+        "Style",
+        "style_i"
       ],
       [
         ".page_properties",
-        "PageProperties"
+        "PageProperties",
+        "page_properties_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.style.Style": "style_i",
+      "com.sun.star.style.PageProperties": "page_properties_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,

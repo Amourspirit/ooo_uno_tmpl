@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "DatabaseDefinition",
   "type": "service",
   "namespace": "com.sun.star.sdbcx",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,22 +16,32 @@
     "from_imports": [
       [
         ".x_users_supplier",
-        "XUsersSupplier"
-      ],
-      [
-        ".x_views_supplier",
-        "XViewsSupplier"
+        "XUsersSupplier",
+        "x_users_supplier_i"
       ],
       [
         ".x_tables_supplier",
-        "XTablesSupplier"
+        "XTablesSupplier",
+        "x_tables_supplier_i"
+      ],
+      [
+        ".x_views_supplier",
+        "XViewsSupplier",
+        "x_views_supplier_i"
       ],
       [
         ".x_groups_supplier",
-        "XGroupsSupplier"
+        "XGroupsSupplier",
+        "x_groups_supplier_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.sdbcx.XUsersSupplier": "x_users_supplier_i",
+      "com.sun.star.sdbcx.XTablesSupplier": "x_tables_supplier_i",
+      "com.sun.star.sdbcx.XViewsSupplier": "x_views_supplier_i",
+      "com.sun.star.sdbcx.XGroupsSupplier": "x_groups_supplier_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -38,9 +49,9 @@
     "imports": [],
     "namespace": "com.sun.star.sdbcx",
     "extends": [
+      "com.sun.star.sdbcx.XUsersSupplier",
       "com.sun.star.sdbcx.XTablesSupplier",
       "com.sun.star.sdbcx.XViewsSupplier",
-      "com.sun.star.sdbcx.XUsersSupplier",
       "com.sun.star.sdbcx.XGroupsSupplier"
     ],
     "desc": [

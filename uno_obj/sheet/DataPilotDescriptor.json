@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "DataPilotDescriptor",
   "type": "service",
   "namespace": "com.sun.star.sheet",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,29 +15,38 @@
   "data": {
     "from_imports": [
       [
-        "..beans.x_property_set",
-        "XPropertySet"
+        ".x_data_pilot_descriptor",
+        "XDataPilotDescriptor",
+        "x_data_pilot_descriptor_i"
       ],
       [
-        ".x_data_pilot_descriptor",
-        "XDataPilotDescriptor"
+        "..beans.x_property_set",
+        "XPropertySet",
+        "beans_x_property_set_i"
       ],
       [
         ".x_data_pilot_data_layout_field_supplier",
-        "XDataPilotDataLayoutFieldSupplier"
+        "XDataPilotDataLayoutFieldSupplier",
+        "x_data_pilot_data_layout_field_supplier_i"
       ]
     ],
     "from_imports_typing": [
       [
         "..beans.property_value",
-        "PropertyValue"
+        "PropertyValue",
+        "beans_property_value_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.sheet.XDataPilotDescriptor": "x_data_pilot_descriptor_i",
+      "com.sun.star.beans.XPropertySet": "beans_x_property_set_i",
+      "com.sun.star.sheet.XDataPilotDataLayoutFieldSupplier": "x_data_pilot_data_layout_field_supplier_i"
+    },
     "quote": [
-      "typing.List[PropertyValue]"
+      "typing.List[beans_property_value_i]"
     ],
     "typings": [
-      "typing.List[PropertyValue]"
+      "typing.List[beans_property_value_i]"
     ],
     "requires_typing": true,
     "name": "DataPilotDescriptor",
@@ -59,7 +69,7 @@
       "types": [
         {
           "name": "ImportDescriptor",
-          "returns": "typing.List[PropertyValue]",
+          "returns": "typing.List[beans_property_value_i]",
           "desc": [
             "specifies parameters to create the data pilot table from a database.",
             "",
@@ -72,7 +82,7 @@
         },
         {
           "name": "ServiceArguments",
-          "returns": "typing.List[PropertyValue]",
+          "returns": "typing.List[beans_property_value_i]",
           "desc": [
             "specifies arguments that are passed to the implementation named by SourceServiceName.",
             "",

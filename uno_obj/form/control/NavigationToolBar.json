@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "NavigationToolBar",
   "type": "service",
   "namespace": "com.sun.star.form.control",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,10 +16,14 @@
     "from_imports": [
       [
         "...awt.uno_control",
-        "UnoControl"
+        "UnoControl",
+        "awt_uno_control_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.awt.UnoControl": "awt_uno_control_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,

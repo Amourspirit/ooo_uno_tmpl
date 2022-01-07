@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "DefinitionContent",
   "type": "service",
   "namespace": "com.sun.star.sdb",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,14 +16,20 @@
     "from_imports": [
       [
         "..container.x_hierarchical_name",
-        "XHierarchicalName"
+        "XHierarchicalName",
+        "container_x_hierarchical_name_i"
       ],
       [
         "..ucb.content",
-        "Content"
+        "Content",
+        "ucb_content_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.container.XHierarchicalName": "container_x_hierarchical_name_i",
+      "com.sun.star.ucb.Content": "ucb_content_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -30,8 +37,8 @@
     "imports": [],
     "namespace": "com.sun.star.sdb",
     "extends": [
-      "com.sun.star.ucb.Content",
-      "com.sun.star.container.XHierarchicalName"
+      "com.sun.star.container.XHierarchicalName",
+      "com.sun.star.ucb.Content"
     ],
     "desc": [
       "defines the basic functionality for an object in the hierarchy of sub documents of an OfficeDatabaseDocument.",

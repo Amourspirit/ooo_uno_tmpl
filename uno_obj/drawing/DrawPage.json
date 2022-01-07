@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "DrawPage",
   "type": "service",
   "namespace": "com.sun.star.drawing",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,18 +16,26 @@
     "from_imports": [
       [
         ".x_master_page_target",
-        "XMasterPageTarget"
-      ],
-      [
-        "..form.x_forms_supplier",
-        "XFormsSupplier"
+        "XMasterPageTarget",
+        "x_master_page_target_i"
       ],
       [
         ".generic_draw_page",
-        "GenericDrawPage"
+        "GenericDrawPage",
+        "generic_draw_page_i"
+      ],
+      [
+        "..form.x_forms_supplier",
+        "XFormsSupplier",
+        "form_x_forms_supplier_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.drawing.XMasterPageTarget": "x_master_page_target_i",
+      "com.sun.star.drawing.GenericDrawPage": "generic_draw_page_i",
+      "com.sun.star.form.XFormsSupplier": "form_x_forms_supplier_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -34,9 +43,9 @@
     "imports": [],
     "namespace": "com.sun.star.drawing",
     "extends": [
+      "com.sun.star.form.XFormsSupplier",
       "com.sun.star.drawing.GenericDrawPage",
-      "com.sun.star.drawing.XMasterPageTarget",
-      "com.sun.star.form.XFormsSupplier"
+      "com.sun.star.drawing.XMasterPageTarget"
     ],
     "desc": [
       "This service specifies a page for the actual draw pages to contain the drawings."

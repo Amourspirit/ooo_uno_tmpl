@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "ConfigurationAccess",
   "type": "service",
   "namespace": "com.sun.star.configuration",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,35 +15,39 @@
   "data": {
     "from_imports": [
       [
+        ".set_element",
+        "SetElement",
+        "set_element_i"
+      ],
+      [
         ".group_element",
-        "GroupElement"
-      ],
-      [
-        ".hierarchy_access",
-        "HierarchyAccess"
-      ],
-      [
-        ".access_root_element",
-        "AccessRootElement"
+        "GroupElement",
+        "group_element_i"
       ],
       [
         ".set_access",
-        "SetAccess"
+        "SetAccess",
+        "set_access_i"
       ],
       [
-        ".hierarchy_element",
-        "HierarchyElement"
+        ".access_root_element",
+        "AccessRootElement",
+        "access_root_element_i"
       ],
       [
         ".group_access",
-        "GroupAccess"
-      ],
-      [
-        ".set_element",
-        "SetElement"
+        "GroupAccess",
+        "group_access_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.configuration.SetElement": "set_element_i",
+      "com.sun.star.configuration.GroupElement": "group_element_i",
+      "com.sun.star.configuration.SetAccess": "set_access_i",
+      "com.sun.star.configuration.AccessRootElement": "access_root_element_i",
+      "com.sun.star.configuration.GroupAccess": "group_access_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -50,13 +55,11 @@
     "imports": [],
     "namespace": "com.sun.star.configuration",
     "extends": [
-      "com.sun.star.configuration.HierarchyAccess",
-      "com.sun.star.configuration.HierarchyElement",
-      "com.sun.star.configuration.SetAccess",
-      "com.sun.star.configuration.GroupAccess",
-      "com.sun.star.configuration.AccessRootElement",
       "com.sun.star.configuration.SetElement",
-      "com.sun.star.configuration.GroupElement"
+      "com.sun.star.configuration.GroupElement",
+      "com.sun.star.configuration.SetAccess",
+      "com.sun.star.configuration.AccessRootElement",
+      "com.sun.star.configuration.GroupAccess"
     ],
     "desc": [
       "provides read access to a fragment of the configuration hierarchy.",

@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "ClipboardManager",
   "type": "service",
   "namespace": "com.sun.star.datatransfer.clipboard",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,14 +16,20 @@
     "from_imports": [
       [
         "...lang.x_component",
-        "XComponent"
+        "XComponent",
+        "lang_x_component_i"
       ],
       [
         ".x_clipboard_manager",
-        "XClipboardManager"
+        "XClipboardManager",
+        "x_clipboard_manager_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.lang.XComponent": "lang_x_component_i",
+      "com.sun.star.datatransfer.clipboard.XClipboardManager": "x_clipboard_manager_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -30,8 +37,8 @@
     "imports": [],
     "namespace": "com.sun.star.datatransfer.clipboard",
     "extends": [
-      "com.sun.star.datatransfer.clipboard.XClipboardManager",
-      "com.sun.star.lang.XComponent"
+      "com.sun.star.lang.XComponent",
+      "com.sun.star.datatransfer.clipboard.XClipboardManager"
     ],
     "desc": [
       "The clipboard manager is a one-instance service that holds a list of all known clipboard instances."

@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "NumberFormats",
   "type": "service",
   "namespace": "com.sun.star.util",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,15 +15,21 @@
   "data": {
     "from_imports": [
       [
-        ".x_number_formats",
-        "XNumberFormats"
+        ".x_number_format_types",
+        "XNumberFormatTypes",
+        "x_number_format_types_i"
       ],
       [
-        ".x_number_format_types",
-        "XNumberFormatTypes"
+        ".x_number_formats",
+        "XNumberFormats",
+        "x_number_formats_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.util.XNumberFormatTypes": "x_number_format_types_i",
+      "com.sun.star.util.XNumberFormats": "x_number_formats_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -30,8 +37,8 @@
     "imports": [],
     "namespace": "com.sun.star.util",
     "extends": [
-      "com.sun.star.util.XNumberFormats",
-      "com.sun.star.util.XNumberFormatTypes"
+      "com.sun.star.util.XNumberFormatTypes",
+      "com.sun.star.util.XNumberFormats"
     ],
     "desc": [
       "specifies a container of number formats."

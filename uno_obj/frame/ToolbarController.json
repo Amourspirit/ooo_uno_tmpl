@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "ToolbarController",
   "type": "service",
   "namespace": "com.sun.star.frame",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,27 +15,39 @@
   "data": {
     "from_imports": [
       [
-        ".x_status_listener",
-        "XStatusListener"
-      ],
-      [
-        ".x_sub_toolbar_controller",
-        "XSubToolbarController"
-      ],
-      [
         "..util.x_updatable",
-        "XUpdatable"
+        "XUpdatable",
+        "util_x_updatable_i"
       ],
       [
         ".x_toolbar_controller",
-        "XToolbarController"
+        "XToolbarController",
+        "x_toolbar_controller_i"
       ],
       [
         "..lang.x_initialization",
-        "XInitialization"
+        "XInitialization",
+        "lang_x_initialization_i"
+      ],
+      [
+        ".x_sub_toolbar_controller",
+        "XSubToolbarController",
+        "x_sub_toolbar_controller_i"
+      ],
+      [
+        ".x_status_listener",
+        "XStatusListener",
+        "x_status_listener_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.util.XUpdatable": "util_x_updatable_i",
+      "com.sun.star.frame.XToolbarController": "x_toolbar_controller_i",
+      "com.sun.star.lang.XInitialization": "lang_x_initialization_i",
+      "com.sun.star.frame.XSubToolbarController": "x_sub_toolbar_controller_i",
+      "com.sun.star.frame.XStatusListener": "x_status_listener_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -42,11 +55,11 @@
     "imports": [],
     "namespace": "com.sun.star.frame",
     "extends": [
-      "com.sun.star.frame.XStatusListener",
-      "com.sun.star.lang.XInitialization",
       "com.sun.star.util.XUpdatable",
       "com.sun.star.frame.XToolbarController",
-      "com.sun.star.frame.XSubToolbarController"
+      "com.sun.star.lang.XInitialization",
+      "com.sun.star.frame.XSubToolbarController",
+      "com.sun.star.frame.XStatusListener"
     ],
     "desc": [
       "is an abstract service for a component which offers a more complex user interface to users within a toolbar.",

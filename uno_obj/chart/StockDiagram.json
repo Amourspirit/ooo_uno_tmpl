@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "StockDiagram",
   "type": "service",
   "namespace": "com.sun.star.chart",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,27 +15,39 @@
   "data": {
     "from_imports": [
       [
-        ".chart_axis_x_supplier",
-        "ChartAxisXSupplier"
+        ".chart_two_axis_y_supplier",
+        "ChartTwoAxisYSupplier",
+        "chart_two_axis_y_supplier_i"
       ],
       [
         ".x_statistic_display",
-        "XStatisticDisplay"
+        "XStatisticDisplay",
+        "x_statistic_display_i"
+      ],
+      [
+        ".chart_axis_x_supplier",
+        "ChartAxisXSupplier",
+        "chart_axis_x_supplier_i"
       ],
       [
         ".chart_statistics",
-        "ChartStatistics"
+        "ChartStatistics",
+        "chart_statistics_i"
       ],
       [
         ".diagram",
-        "Diagram"
-      ],
-      [
-        ".chart_two_axis_y_supplier",
-        "ChartTwoAxisYSupplier"
+        "Diagram",
+        "diagram_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.chart.ChartTwoAxisYSupplier": "chart_two_axis_y_supplier_i",
+      "com.sun.star.chart.XStatisticDisplay": "x_statistic_display_i",
+      "com.sun.star.chart.ChartAxisXSupplier": "chart_axis_x_supplier_i",
+      "com.sun.star.chart.ChartStatistics": "chart_statistics_i",
+      "com.sun.star.chart.Diagram": "diagram_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -42,11 +55,11 @@
     "imports": [],
     "namespace": "com.sun.star.chart",
     "extends": [
+      "com.sun.star.chart.ChartTwoAxisYSupplier",
       "com.sun.star.chart.XStatisticDisplay",
-      "com.sun.star.chart.ChartStatistics",
-      "com.sun.star.chart.Diagram",
       "com.sun.star.chart.ChartAxisXSupplier",
-      "com.sun.star.chart.ChartTwoAxisYSupplier"
+      "com.sun.star.chart.ChartStatistics",
+      "com.sun.star.chart.Diagram"
     ],
     "desc": [
       "specifies a diagram which can be used for presenting stock quotes.",

@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "DataPilotSource",
   "type": "service",
   "namespace": "com.sun.star.sheet",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,22 +16,32 @@
     "from_imports": [
       [
         "..beans.x_property_set",
-        "XPropertySet"
-      ],
-      [
-        "..util.x_refreshable",
-        "XRefreshable"
-      ],
-      [
-        ".x_dimensions_supplier",
-        "XDimensionsSupplier"
+        "XPropertySet",
+        "beans_x_property_set_i"
       ],
       [
         ".x_data_pilot_results",
-        "XDataPilotResults"
+        "XDataPilotResults",
+        "x_data_pilot_results_i"
+      ],
+      [
+        ".x_dimensions_supplier",
+        "XDimensionsSupplier",
+        "x_dimensions_supplier_i"
+      ],
+      [
+        "..util.x_refreshable",
+        "XRefreshable",
+        "util_x_refreshable_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.beans.XPropertySet": "beans_x_property_set_i",
+      "com.sun.star.sheet.XDataPilotResults": "x_data_pilot_results_i",
+      "com.sun.star.sheet.XDimensionsSupplier": "x_dimensions_supplier_i",
+      "com.sun.star.util.XRefreshable": "util_x_refreshable_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -38,10 +49,10 @@
     "imports": [],
     "namespace": "com.sun.star.sheet",
     "extends": [
-      "com.sun.star.sheet.XDimensionsSupplier",
+      "com.sun.star.beans.XPropertySet",
       "com.sun.star.sheet.XDataPilotResults",
-      "com.sun.star.util.XRefreshable",
-      "com.sun.star.beans.XPropertySet"
+      "com.sun.star.sheet.XDimensionsSupplier",
+      "com.sun.star.util.XRefreshable"
     ],
     "desc": [
       "represents a data pilot source.",

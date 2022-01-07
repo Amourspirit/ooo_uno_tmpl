@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "CellAnnotation",
   "type": "service",
   "namespace": "com.sun.star.sheet",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,22 +16,32 @@
     "from_imports": [
       [
         "..container.x_child",
-        "XChild"
-      ],
-      [
-        "..text.x_simple_text",
-        "XSimpleText"
+        "XChild",
+        "container_x_child_i"
       ],
       [
         ".x_sheet_annotation_shape_supplier",
-        "XSheetAnnotationShapeSupplier"
+        "XSheetAnnotationShapeSupplier",
+        "x_sheet_annotation_shape_supplier_i"
       ],
       [
         ".x_sheet_annotation",
-        "XSheetAnnotation"
+        "XSheetAnnotation",
+        "x_sheet_annotation_i"
+      ],
+      [
+        "..text.x_simple_text",
+        "XSimpleText",
+        "text_x_simple_text_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.container.XChild": "container_x_child_i",
+      "com.sun.star.sheet.XSheetAnnotationShapeSupplier": "x_sheet_annotation_shape_supplier_i",
+      "com.sun.star.sheet.XSheetAnnotation": "x_sheet_annotation_i",
+      "com.sun.star.text.XSimpleText": "text_x_simple_text_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -38,10 +49,10 @@
     "imports": [],
     "namespace": "com.sun.star.sheet",
     "extends": [
-      "com.sun.star.sheet.XSheetAnnotation",
       "com.sun.star.container.XChild",
-      "com.sun.star.text.XSimpleText",
-      "com.sun.star.sheet.XSheetAnnotationShapeSupplier"
+      "com.sun.star.sheet.XSheetAnnotationShapeSupplier",
+      "com.sun.star.sheet.XSheetAnnotation",
+      "com.sun.star.text.XSimpleText"
     ],
     "desc": [
       "represents a cell annotation object attached to a spreadsheet cell."

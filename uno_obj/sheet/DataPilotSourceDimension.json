@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "DataPilotSourceDimension",
   "type": "service",
   "namespace": "com.sun.star.sheet",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,44 +15,57 @@
   "data": {
     "from_imports": [
       [
-        "..beans.x_property_set",
-        "XPropertySet"
-      ],
-      [
-        ".x_hierarchies_supplier",
-        "XHierarchiesSupplier"
+        "..container.x_named",
+        "XNamed",
+        "container_x_named_i"
       ],
       [
         "..util.x_cloneable",
-        "XCloneable"
+        "XCloneable",
+        "util_x_cloneable_i"
       ],
       [
-        "..container.x_named",
-        "XNamed"
+        ".x_hierarchies_supplier",
+        "XHierarchiesSupplier",
+        "x_hierarchies_supplier_i"
+      ],
+      [
+        "..beans.x_property_set",
+        "XPropertySet",
+        "beans_x_property_set_i"
       ]
     ],
     "from_imports_typing": [
       [
-        ".data_pilot_field_orientation",
-        "DataPilotFieldOrientation"
+        ".table_filter_field",
+        "TableFilterField",
+        "table_filter_field_i"
       ],
       [
-        ".table_filter_field",
-        "TableFilterField"
+        ".data_pilot_field_orientation",
+        "DataPilotFieldOrientation",
+        "data_pilot_field_orientation_i"
       ],
       [
         ".general_function",
-        "GeneralFunction"
+        "GeneralFunction",
+        "general_function_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.container.XNamed": "container_x_named_i",
+      "com.sun.star.util.XCloneable": "util_x_cloneable_i",
+      "com.sun.star.sheet.XHierarchiesSupplier": "x_hierarchies_supplier_i",
+      "com.sun.star.beans.XPropertySet": "beans_x_property_set_i"
+    },
     "quote": [
-      "XNamed",
-      "GeneralFunction",
-      "DataPilotFieldOrientation",
-      "typing.List[TableFilterField]"
+      "data_pilot_field_orientation_i",
+      "general_function_i",
+      "typing.List[table_filter_field_i]",
+      "container_x_named_i"
     ],
     "typings": [
-      "typing.List[TableFilterField]"
+      "typing.List[table_filter_field_i]"
     ],
     "requires_typing": true,
     "name": "DataPilotSourceDimension",
@@ -59,8 +73,8 @@
     "namespace": "com.sun.star.sheet",
     "extends": [
       "com.sun.star.container.XNamed",
-      "com.sun.star.sheet.XHierarchiesSupplier",
       "com.sun.star.util.XCloneable",
+      "com.sun.star.sheet.XHierarchiesSupplier",
       "com.sun.star.beans.XPropertySet"
     ],
     "desc": [
@@ -81,7 +95,7 @@
       "types": [
         {
           "name": "Filter",
-          "returns": "typing.List[TableFilterField]",
+          "returns": "typing.List[table_filter_field_i]",
           "desc": [
             "specifies which values are used."
           ],
@@ -101,7 +115,7 @@
         },
         {
           "name": "Function",
-          "returns": "GeneralFunction",
+          "returns": "general_function_i",
           "desc": [
             "specifies how data are aggregated."
           ],
@@ -132,7 +146,7 @@
         },
         {
           "name": "Orientation",
-          "returns": "DataPilotFieldOrientation",
+          "returns": "data_pilot_field_orientation_i",
           "desc": [
             "specifies where the dimension is used."
           ],
@@ -141,7 +155,7 @@
         },
         {
           "name": "Original",
-          "returns": "XNamed",
+          "returns": "container_x_named_i",
           "desc": [
             "returns the name of the dimension from which this dimension was cloned, or NULL if it was not cloned."
           ],

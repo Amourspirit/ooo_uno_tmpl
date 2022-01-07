@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "Group",
   "type": "service",
   "namespace": "com.sun.star.sdbcx",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,18 +16,26 @@
     "from_imports": [
       [
         "..beans.x_property_set",
-        "XPropertySet"
+        "XPropertySet",
+        "beans_x_property_set_i"
       ],
       [
         ".x_users_supplier",
-        "XUsersSupplier"
+        "XUsersSupplier",
+        "x_users_supplier_i"
       ],
       [
         ".x_authorizable",
-        "XAuthorizable"
+        "XAuthorizable",
+        "x_authorizable_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.beans.XPropertySet": "beans_x_property_set_i",
+      "com.sun.star.sdbcx.XUsersSupplier": "x_users_supplier_i",
+      "com.sun.star.sdbcx.XAuthorizable": "x_authorizable_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -34,9 +43,9 @@
     "imports": [],
     "namespace": "com.sun.star.sdbcx",
     "extends": [
+      "com.sun.star.beans.XPropertySet",
       "com.sun.star.sdbcx.XUsersSupplier",
-      "com.sun.star.sdbcx.XAuthorizable",
-      "com.sun.star.beans.XPropertySet"
+      "com.sun.star.sdbcx.XAuthorizable"
     ],
     "desc": [
       "represents a group of users, which has certain access rights for the objects of the database."

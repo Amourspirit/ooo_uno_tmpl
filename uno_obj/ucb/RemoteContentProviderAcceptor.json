@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "RemoteContentProviderAcceptor",
   "type": "service",
   "namespace": "com.sun.star.ucb",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,15 +15,21 @@
   "data": {
     "from_imports": [
       [
-        ".x_remote_content_provider_acceptor",
-        "XRemoteContentProviderAcceptor"
+        ".x_remote_content_provider_activator",
+        "XRemoteContentProviderActivator",
+        "x_remote_content_provider_activator_i"
       ],
       [
-        ".x_remote_content_provider_activator",
-        "XRemoteContentProviderActivator"
+        ".x_remote_content_provider_acceptor",
+        "XRemoteContentProviderAcceptor",
+        "x_remote_content_provider_acceptor_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.ucb.XRemoteContentProviderActivator": "x_remote_content_provider_activator_i",
+      "com.sun.star.ucb.XRemoteContentProviderAcceptor": "x_remote_content_provider_acceptor_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -30,8 +37,8 @@
     "imports": [],
     "namespace": "com.sun.star.ucb",
     "extends": [
-      "com.sun.star.ucb.XRemoteContentProviderAcceptor",
-      "com.sun.star.ucb.XRemoteContentProviderActivator"
+      "com.sun.star.ucb.XRemoteContentProviderActivator",
+      "com.sun.star.ucb.XRemoteContentProviderAcceptor"
     ],
     "desc": [
       "allows content providers running in remote processes to be registered at the local content provider broker."

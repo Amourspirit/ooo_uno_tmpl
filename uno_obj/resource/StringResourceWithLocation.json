@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "StringResourceWithLocation",
   "type": "service",
   "namespace": "com.sun.star.resource",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,22 +16,28 @@
     "from_imports": [
       [
         ".x_string_resource_with_location",
-        "XStringResourceWithLocation"
+        "XStringResourceWithLocation",
+        "x_string_resource_with_location_i"
       ]
     ],
     "from_imports_typing": [
       [
-        "..lang.locale",
-        "Locale"
+        "..task.x_interaction_handler",
+        "XInteractionHandler",
+        "task_x_interaction_handler_i"
       ],
       [
-        "..task.x_interaction_handler",
-        "XInteractionHandler"
+        "..lang.locale",
+        "Locale",
+        "lang_locale_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.resource.XStringResourceWithLocation": "x_string_resource_with_location_i"
+    },
     "quote": [
-      "Locale",
-      "XInteractionHandler"
+      "task_x_interaction_handler_i",
+      "lang_locale_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -68,7 +75,7 @@
             ],
             [
               "locale",
-              "Locale",
+              "lang_locale_i",
               "in"
             ],
             [
@@ -83,7 +90,7 @@
             ],
             [
               "Handler",
-              "XInteractionHandler",
+              "task_x_interaction_handler_i",
               "in"
             ]
           ]

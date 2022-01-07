@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "DataSeries",
   "type": "service",
   "namespace": "com.sun.star.chart2",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,38 +16,47 @@
     "from_imports": [
       [
         ".data.x_data_sink",
-        "XDataSink"
-      ],
-      [
-        ".x_regression_curve_container",
-        "XRegressionCurveContainer"
+        "XDataSink",
+        "data_x_data_sink_i"
       ],
       [
         ".data_point_properties",
-        "DataPointProperties"
-      ],
-      [
-        "..beans.property_set",
-        "PropertySet"
+        "DataPointProperties",
+        "data_point_properties_i"
       ],
       [
         ".data.x_data_source",
-        "XDataSource"
+        "XDataSource",
+        "data_x_data_source_i"
+      ],
+      [
+        ".x_regression_curve_container",
+        "XRegressionCurveContainer",
+        "x_regression_curve_container_i"
       ],
       [
         ".x_data_series",
-        "XDataSeries"
+        "XDataSeries",
+        "x_data_series_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".stacking_direction",
-        "StackingDirection"
+        "StackingDirection",
+        "stacking_direction_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.chart2.data.XDataSink": "data_x_data_sink_i",
+      "com.sun.star.chart2.DataPointProperties": "data_point_properties_i",
+      "com.sun.star.chart2.data.XDataSource": "data_x_data_source_i",
+      "com.sun.star.chart2.XRegressionCurveContainer": "x_regression_curve_container_i",
+      "com.sun.star.chart2.XDataSeries": "x_data_series_i"
+    },
     "quote": [
-      "StackingDirection",
-      "typing.List[int]"
+      "typing.List[int]",
+      "stacking_direction_i"
     ],
     "typings": [
       "typing.List[int]"
@@ -56,12 +66,11 @@
     "imports": [],
     "namespace": "com.sun.star.chart2",
     "extends": [
-      "com.sun.star.beans.PropertySet",
-      "com.sun.star.chart2.DataPointProperties",
-      "com.sun.star.chart2.XDataSeries",
       "com.sun.star.chart2.data.XDataSink",
+      "com.sun.star.chart2.DataPointProperties",
       "com.sun.star.chart2.data.XDataSource",
-      "com.sun.star.chart2.XRegressionCurveContainer"
+      "com.sun.star.chart2.XRegressionCurveContainer",
+      "com.sun.star.chart2.XDataSeries"
     ],
     "desc": [
       "reflects the model data of the object that has all the information for a DataRenderer to create a visible data series in a chart.",
@@ -156,7 +165,7 @@
         },
         {
           "name": "StackingDirection",
-          "returns": "StackingDirection",
+          "returns": "stacking_direction_i",
           "desc": [
             "indicates whether this series should be stacked with respect to the previous series."
           ],

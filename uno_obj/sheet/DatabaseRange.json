@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "DatabaseRange",
   "type": "service",
   "namespace": "com.sun.star.sheet",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,34 +15,47 @@
   "data": {
     "from_imports": [
       [
+        ".x_database_range",
+        "XDatabaseRange",
+        "x_database_range_i"
+      ],
+      [
         ".x_cell_range_referrer",
-        "XCellRangeReferrer"
-      ],
-      [
-        "..beans.x_property_set",
-        "XPropertySet"
-      ],
-      [
-        "..util.x_refreshable",
-        "XRefreshable"
+        "XCellRangeReferrer",
+        "x_cell_range_referrer_i"
       ],
       [
         "..container.x_named",
-        "XNamed"
+        "XNamed",
+        "container_x_named_i"
       ],
       [
-        ".x_database_range",
-        "XDatabaseRange"
+        "..beans.x_property_set",
+        "XPropertySet",
+        "beans_x_property_set_i"
+      ],
+      [
+        "..util.x_refreshable",
+        "XRefreshable",
+        "util_x_refreshable_i"
       ]
     ],
     "from_imports_typing": [
       [
         "..table.cell_range_address",
-        "CellRangeAddress"
+        "CellRangeAddress",
+        "table_cell_range_address_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.sheet.XDatabaseRange": "x_database_range_i",
+      "com.sun.star.sheet.XCellRangeReferrer": "x_cell_range_referrer_i",
+      "com.sun.star.container.XNamed": "container_x_named_i",
+      "com.sun.star.beans.XPropertySet": "beans_x_property_set_i",
+      "com.sun.star.util.XRefreshable": "util_x_refreshable_i"
+    },
     "quote": [
-      "CellRangeAddress"
+      "table_cell_range_address_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -51,8 +65,8 @@
     "extends": [
       "com.sun.star.sheet.XDatabaseRange",
       "com.sun.star.sheet.XCellRangeReferrer",
-      "com.sun.star.beans.XPropertySet",
       "com.sun.star.container.XNamed",
+      "com.sun.star.beans.XPropertySet",
       "com.sun.star.util.XRefreshable"
     ],
     "desc": [
@@ -95,7 +109,7 @@
         },
         {
           "name": "FilterCriteriaSource",
-          "returns": "CellRangeAddress",
+          "returns": "table_cell_range_address_i",
           "desc": [
             "specifies the range where the filter can find the filter criteria.",
             "",

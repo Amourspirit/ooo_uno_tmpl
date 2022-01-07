@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "DesktopTask",
   "type": "service",
   "namespace": "com.sun.star.frame",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,39 +15,47 @@
   "data": {
     "from_imports": [
       [
-        ".x_desktop_task",
-        "XDesktopTask"
-      ],
-      [
         ".x_frames_supplier",
-        "XFramesSupplier"
+        "XFramesSupplier",
+        "x_frames_supplier_i"
       ],
       [
         "..beans.x_property_set",
-        "XPropertySet"
+        "XPropertySet",
+        "beans_x_property_set_i"
       ],
       [
-        ".x_frame",
-        "XFrame"
+        ".x_desktop_task",
+        "XDesktopTask",
+        "x_desktop_task_i"
       ],
       [
         ".x_window_arranger",
-        "XWindowArranger"
+        "XWindowArranger",
+        "x_window_arranger_i"
       ]
     ],
     "from_imports_typing": [
       [
-        "..awt.point",
-        "Point"
+        "..awt.size",
+        "Size",
+        "awt_size_i"
       ],
       [
-        "..awt.size",
-        "Size"
+        "..awt.point",
+        "Point",
+        "awt_point_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.frame.XFramesSupplier": "x_frames_supplier_i",
+      "com.sun.star.beans.XPropertySet": "beans_x_property_set_i",
+      "com.sun.star.frame.XDesktopTask": "x_desktop_task_i",
+      "com.sun.star.frame.XWindowArranger": "x_window_arranger_i"
+    },
     "quote": [
-      "Point",
-      "Size"
+      "awt_point_i",
+      "awt_size_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -54,11 +63,10 @@
     "imports": [],
     "namespace": "com.sun.star.frame",
     "extends": [
-      "com.sun.star.frame.XDesktopTask",
-      "com.sun.star.frame.XFrame",
+      "com.sun.star.frame.XFramesSupplier",
       "com.sun.star.beans.XPropertySet",
-      "com.sun.star.frame.XWindowArranger",
-      "com.sun.star.frame.XFramesSupplier"
+      "com.sun.star.frame.XDesktopTask",
+      "com.sun.star.frame.XWindowArranger"
     ],
     "desc": [
       "use the Frame service instead of this",
@@ -102,7 +110,7 @@
         },
         {
           "name": "Position",
-          "returns": "Point",
+          "returns": "awt_point_i",
           "desc": [
             "use the position of the frame container window instead of this"
           ],
@@ -111,7 +119,7 @@
         },
         {
           "name": "Size",
-          "returns": "Size",
+          "returns": "awt_size_i",
           "desc": [
             "use the size of the frame container window instead of this"
           ],

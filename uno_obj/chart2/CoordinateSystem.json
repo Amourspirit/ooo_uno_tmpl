@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "CoordinateSystem",
   "type": "service",
   "namespace": "com.sun.star.chart2",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,19 +15,27 @@
   "data": {
     "from_imports": [
       [
+        ".x_coordinate_system",
+        "XCoordinateSystem",
+        "x_coordinate_system_i"
+      ],
+      [
         ".x_chart_type_container",
-        "XChartTypeContainer"
+        "XChartTypeContainer",
+        "x_chart_type_container_i"
       ],
       [
         "..util.x_cloneable",
-        "XCloneable"
-      ],
-      [
-        ".x_coordinate_system",
-        "XCoordinateSystem"
+        "XCloneable",
+        "util_x_cloneable_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.chart2.XCoordinateSystem": "x_coordinate_system_i",
+      "com.sun.star.chart2.XChartTypeContainer": "x_chart_type_container_i",
+      "com.sun.star.util.XCloneable": "util_x_cloneable_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,

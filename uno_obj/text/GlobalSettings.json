@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "GlobalSettings",
   "type": "service",
   "namespace": "com.sun.star.text",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,14 +16,20 @@
     "from_imports": [
       [
         "..view.x_view_settings_supplier",
-        "XViewSettingsSupplier"
+        "XViewSettingsSupplier",
+        "view_x_view_settings_supplier_i"
       ],
       [
         "..view.x_print_settings_supplier",
-        "XPrintSettingsSupplier"
+        "XPrintSettingsSupplier",
+        "view_x_print_settings_supplier_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.view.XViewSettingsSupplier": "view_x_view_settings_supplier_i",
+      "com.sun.star.view.XPrintSettingsSupplier": "view_x_print_settings_supplier_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -30,8 +37,8 @@
     "imports": [],
     "namespace": "com.sun.star.text",
     "extends": [
-      "com.sun.star.view.XPrintSettingsSupplier",
-      "com.sun.star.view.XViewSettingsSupplier"
+      "com.sun.star.view.XViewSettingsSupplier",
+      "com.sun.star.view.XPrintSettingsSupplier"
     ],
     "desc": [
       "specifies a service that provides access to the settings of a text module."

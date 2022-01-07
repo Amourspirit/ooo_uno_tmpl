@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "Job",
   "type": "service",
   "namespace": "com.sun.star.task",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,15 +15,21 @@
   "data": {
     "from_imports": [
       [
-        "..util.x_closeable",
-        "XCloseable"
+        ".x_job",
+        "XJob",
+        "x_job_i"
       ],
       [
-        ".x_job",
-        "XJob"
+        "..util.x_closeable",
+        "XCloseable",
+        "util_x_closeable_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.task.XJob": "x_job_i",
+      "com.sun.star.util.XCloseable": "util_x_closeable_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,

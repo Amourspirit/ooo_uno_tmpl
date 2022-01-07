@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "Connection",
   "type": "service",
   "namespace": "com.sun.star.sdb",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,35 +15,51 @@
   "data": {
     "from_imports": [
       [
-        "..container.x_child",
-        "XChild"
+        ".x_command_preparation",
+        "XCommandPreparation",
+        "x_command_preparation_i"
       ],
       [
         ".x_queries_supplier",
-        "XQueriesSupplier"
+        "XQueriesSupplier",
+        "x_queries_supplier_i"
       ],
       [
-        "..lang.x_multi_service_factory",
-        "XMultiServiceFactory"
-      ],
-      [
-        ".x_command_preparation",
-        "XCommandPreparation"
-      ],
-      [
-        "..sdbcx.database_definition",
-        "DatabaseDefinition"
-      ],
-      [
-        "..sdbc.connection",
-        "Connection"
+        "..container.x_child",
+        "XChild",
+        "container_x_child_i"
       ],
       [
         ".xsql_query_composer_factory",
-        "XSQLQueryComposerFactory"
+        "XSQLQueryComposerFactory",
+        "xsql_query_composer_factory_i"
+      ],
+      [
+        "..sdbc.connection",
+        "Connection",
+        "sdbc_connection_i"
+      ],
+      [
+        "..lang.x_multi_service_factory",
+        "XMultiServiceFactory",
+        "lang_x_multi_service_factory_i"
+      ],
+      [
+        "..sdbcx.database_definition",
+        "DatabaseDefinition",
+        "sdbcx_database_definition_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.sdb.XCommandPreparation": "x_command_preparation_i",
+      "com.sun.star.sdb.XQueriesSupplier": "x_queries_supplier_i",
+      "com.sun.star.container.XChild": "container_x_child_i",
+      "com.sun.star.sdb.XSQLQueryComposerFactory": "xsql_query_composer_factory_i",
+      "com.sun.star.sdbc.Connection": "sdbc_connection_i",
+      "com.sun.star.lang.XMultiServiceFactory": "lang_x_multi_service_factory_i",
+      "com.sun.star.sdbcx.DatabaseDefinition": "sdbcx_database_definition_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -50,13 +67,13 @@
     "imports": [],
     "namespace": "com.sun.star.sdb",
     "extends": [
-      "com.sun.star.sdbc.Connection",
-      "com.sun.star.container.XChild",
       "com.sun.star.sdb.XCommandPreparation",
-      "com.sun.star.sdbcx.DatabaseDefinition",
       "com.sun.star.sdb.XQueriesSupplier",
+      "com.sun.star.container.XChild",
       "com.sun.star.sdb.XSQLQueryComposerFactory",
-      "com.sun.star.lang.XMultiServiceFactory"
+      "com.sun.star.sdbc.Connection",
+      "com.sun.star.lang.XMultiServiceFactory",
+      "com.sun.star.sdbcx.DatabaseDefinition"
     ],
     "desc": [
       "extends the com.sun.star.sdbc.Connection of SDBC by providing the data definitions of a connected database."

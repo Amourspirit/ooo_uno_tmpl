@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "AccessiblePopupMenu",
   "type": "service",
   "namespace": "com.sun.star.awt",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,27 +15,33 @@
   "data": {
     "from_imports": [
       [
-        "..accessibility.x_accessible_context",
-        "XAccessibleContext"
-      ],
-      [
-        "..accessibility.x_accessible_component",
-        "XAccessibleComponent"
-      ],
-      [
-        "..accessibility.x_accessible_event_broadcaster",
-        "XAccessibleEventBroadcaster"
-      ],
-      [
         "..accessibility.x_accessible_selection",
-        "XAccessibleSelection"
+        "XAccessibleSelection",
+        "accessibility_x_accessible_selection_i"
       ],
       [
         "..accessibility.x_accessible_extended_component",
-        "XAccessibleExtendedComponent"
+        "XAccessibleExtendedComponent",
+        "accessibility_x_accessible_extended_component_i"
+      ],
+      [
+        "..accessibility.x_accessible_context",
+        "XAccessibleContext",
+        "accessibility_x_accessible_context_i"
+      ],
+      [
+        "..accessibility.x_accessible_event_broadcaster",
+        "XAccessibleEventBroadcaster",
+        "accessibility_x_accessible_event_broadcaster_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.accessibility.XAccessibleSelection": "accessibility_x_accessible_selection_i",
+      "com.sun.star.accessibility.XAccessibleExtendedComponent": "accessibility_x_accessible_extended_component_i",
+      "com.sun.star.accessibility.XAccessibleContext": "accessibility_x_accessible_context_i",
+      "com.sun.star.accessibility.XAccessibleEventBroadcaster": "accessibility_x_accessible_event_broadcaster_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -42,11 +49,10 @@
     "imports": [],
     "namespace": "com.sun.star.awt",
     "extends": [
-      "com.sun.star.accessibility.XAccessibleContext",
-      "com.sun.star.accessibility.XAccessibleEventBroadcaster",
-      "com.sun.star.accessibility.XAccessibleComponent",
+      "com.sun.star.accessibility.XAccessibleSelection",
       "com.sun.star.accessibility.XAccessibleExtendedComponent",
-      "com.sun.star.accessibility.XAccessibleSelection"
+      "com.sun.star.accessibility.XAccessibleContext",
+      "com.sun.star.accessibility.XAccessibleEventBroadcaster"
     ],
     "desc": [
       "specifies accessibility support for a pop-up menu.",

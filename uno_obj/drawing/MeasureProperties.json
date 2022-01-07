@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "MeasureProperties",
   "type": "service",
   "namespace": "com.sun.star.drawing",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,22 +16,26 @@
     "from_imports": [],
     "from_imports_typing": [
       [
-        ".measure_text_horz_pos",
-        "MeasureTextHorzPos"
+        ".measure_kind",
+        "MeasureKind",
+        "measure_kind_i"
       ],
       [
-        ".measure_kind",
-        "MeasureKind"
+        ".measure_text_horz_pos",
+        "MeasureTextHorzPos",
+        "measure_text_horz_pos_i"
       ],
       [
         ".measure_text_vert_pos",
-        "MeasureTextVertPos"
+        "MeasureTextVertPos",
+        "measure_text_vert_pos_i"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "MeasureKind",
-      "MeasureTextHorzPos",
-      "MeasureTextVertPos"
+      "measure_kind_i",
+      "measure_text_horz_pos_i",
+      "measure_text_vert_pos_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -108,7 +113,7 @@
         },
         {
           "name": "MeasureKind",
-          "returns": "MeasureKind",
+          "returns": "measure_kind_i",
           "desc": [
             "This enumeration specifies the MeasureKind."
           ],
@@ -171,7 +176,7 @@
         },
         {
           "name": "MeasureTextHorizontalPosition",
-          "returns": "MeasureTextHorzPos",
+          "returns": "measure_text_horz_pos_i",
           "desc": [
             "This is the horizontal position of the measure text."
           ],
@@ -207,7 +212,7 @@
         },
         {
           "name": "MeasureTextVerticalPosition",
-          "returns": "MeasureTextVertPos",
+          "returns": "measure_text_vert_pos_i",
           "desc": [
             "This is the vertical position of the text."
           ],

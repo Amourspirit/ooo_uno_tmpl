@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "Cell",
   "type": "service",
   "namespace": "com.sun.star.text",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,23 +15,33 @@
   "data": {
     "from_imports": [
       [
-        "..table.x_cell",
-        "XCell"
-      ],
-      [
-        "..table.cell_properties",
-        "CellProperties"
+        ".x_text",
+        "XText",
+        "x_text_i"
       ],
       [
         ".cell_properties",
-        "CellProperties"
+        "CellProperties",
+        "cell_properties_i"
       ],
       [
-        ".x_text",
-        "XText"
+        "..table.x_cell",
+        "XCell",
+        "table_x_cell_i"
+      ],
+      [
+        "..table.cell_properties",
+        "CellProperties",
+        "table_cell_properties_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.text.XText": "x_text_i",
+      "com.sun.star.text.CellProperties": "cell_properties_i",
+      "com.sun.star.table.XCell": "table_x_cell_i",
+      "com.sun.star.table.CellProperties": "table_cell_properties_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -38,10 +49,10 @@
     "imports": [],
     "namespace": "com.sun.star.text",
     "extends": [
+      "com.sun.star.text.XText",
       "com.sun.star.text.CellProperties",
-      "com.sun.star.table.CellProperties",
       "com.sun.star.table.XCell",
-      "com.sun.star.text.XText"
+      "com.sun.star.table.CellProperties"
     ],
     "desc": [
       "represents a single cell within a text table.",

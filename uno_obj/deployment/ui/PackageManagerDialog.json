@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "PackageManagerDialog",
   "type": "service",
   "namespace": "com.sun.star.deployment.ui",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,17 +16,22 @@
     "from_imports": [
       [
         "...ui.dialogs.x_asynchronous_executable_dialog",
-        "XAsynchronousExecutableDialog"
+        "XAsynchronousExecutableDialog",
+        "ui_dialogs_x_asynchronous_executable_dialog_i"
       ]
     ],
     "from_imports_typing": [
       [
         "...awt.x_window",
-        "XWindow"
+        "XWindow",
+        "awt_x_window_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.ui.dialogs.XAsynchronousExecutableDialog": "ui_dialogs_x_asynchronous_executable_dialog_i"
+    },
     "quote": [
-      "XWindow"
+      "awt_x_window_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -55,7 +61,7 @@
           "args": [
             [
               "xParent",
-              "XWindow",
+              "awt_x_window_i",
               "in"
             ],
             [

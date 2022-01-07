@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "TextFieldMaster",
   "type": "service",
   "namespace": "com.sun.star.text",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,20 +16,25 @@
     "from_imports": [
       [
         "..beans.x_property_set",
-        "XPropertySet"
+        "XPropertySet",
+        "beans_x_property_set_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_dependent_text_field",
-        "XDependentTextField"
+        "XDependentTextField",
+        "x_dependent_text_field_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.beans.XPropertySet": "beans_x_property_set_i"
+    },
     "quote": [
-      "typing.List[XDependentTextField]"
+      "typing.List[x_dependent_text_field_i]"
     ],
     "typings": [
-      "typing.List[XDependentTextField]"
+      "typing.List[x_dependent_text_field_i]"
     ],
     "requires_typing": true,
     "name": "TextFieldMaster",
@@ -45,7 +51,7 @@
       "types": [
         {
           "name": "DependentTextFields",
-          "returns": "typing.List[XDependentTextField]",
+          "returns": "typing.List[x_dependent_text_field_i]",
           "desc": [
             "contains a sequence of all fields that depend on this master."
           ],

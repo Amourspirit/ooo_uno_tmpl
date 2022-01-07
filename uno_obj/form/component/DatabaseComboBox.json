@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "DatabaseComboBox",
   "type": "service",
   "namespace": "com.sun.star.form.component",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,22 +15,29 @@
   "data": {
     "from_imports": [
       [
-        ".combo_box",
-        "ComboBox"
+        "..data_aware_control_model",
+        "DataAwareControlModel",
+        "data_aware_control_model_i"
       ],
       [
-        "..data_aware_control_model",
-        "DataAwareControlModel"
+        ".combo_box",
+        "ComboBox",
+        "combo_box_i"
       ]
     ],
     "from_imports_typing": [
       [
         "..list_source_type",
-        "ListSourceType"
+        "ListSourceType",
+        "list_source_type_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.form.DataAwareControlModel": "data_aware_control_model_i",
+      "com.sun.star.form.component.ComboBox": "combo_box_i"
+    },
     "quote": [
-      "ListSourceType"
+      "list_source_type_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -37,8 +45,8 @@
     "imports": [],
     "namespace": "com.sun.star.form.component",
     "extends": [
-      "com.sun.star.form.component.ComboBox",
-      "com.sun.star.form.DataAwareControlModel"
+      "com.sun.star.form.DataAwareControlModel",
+      "com.sun.star.form.component.ComboBox"
     ],
     "desc": [
       "This service specifies a combo box which is data-aware, and can be bound to a database field.",
@@ -75,7 +83,7 @@
         },
         {
           "name": "ListSourceType",
-          "returns": "ListSourceType",
+          "returns": "list_source_type_i",
           "desc": [
             "specifies the kind of list source.",
             "",

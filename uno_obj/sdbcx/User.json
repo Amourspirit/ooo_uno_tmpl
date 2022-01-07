@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "User",
   "type": "service",
   "namespace": "com.sun.star.sdbcx",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,18 +16,26 @@
     "from_imports": [
       [
         "..beans.x_property_set",
-        "XPropertySet"
-      ],
-      [
-        ".x_groups_supplier",
-        "XGroupsSupplier"
+        "XPropertySet",
+        "beans_x_property_set_i"
       ],
       [
         ".x_user",
-        "XUser"
+        "XUser",
+        "x_user_i"
+      ],
+      [
+        ".x_groups_supplier",
+        "XGroupsSupplier",
+        "x_groups_supplier_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.beans.XPropertySet": "beans_x_property_set_i",
+      "com.sun.star.sdbcx.XUser": "x_user_i",
+      "com.sun.star.sdbcx.XGroupsSupplier": "x_groups_supplier_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -34,9 +43,9 @@
     "imports": [],
     "namespace": "com.sun.star.sdbcx",
     "extends": [
+      "com.sun.star.beans.XPropertySet",
       "com.sun.star.sdbcx.XUser",
-      "com.sun.star.sdbcx.XGroupsSupplier",
-      "com.sun.star.beans.XPropertySet"
+      "com.sun.star.sdbcx.XGroupsSupplier"
     ],
     "desc": [
       "represents a user of the database, who has certain access rights for the objects of the database."

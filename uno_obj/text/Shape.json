@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "Shape",
   "type": "service",
   "namespace": "com.sun.star.text",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,42 +16,52 @@
     "from_imports": [
       [
         "..drawing.shape",
-        "Shape"
+        "Shape",
+        "drawing_shape_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_text_frame",
-        "XTextFrame"
-      ],
-      [
-        ".text_content_anchor_type",
-        "TextContentAnchorType"
-      ],
-      [
-        ".wrap_text_mode",
-        "WrapTextMode"
+        "XTextFrame",
+        "x_text_frame_i"
       ],
       [
         ".x_text_range",
-        "XTextRange"
+        "XTextRange",
+        "x_text_range_i"
+      ],
+      [
+        ".text_content_anchor_type",
+        "TextContentAnchorType",
+        "text_content_anchor_type_i"
+      ],
+      [
+        ".wrap_text_mode",
+        "WrapTextMode",
+        "wrap_text_mode_i"
       ],
       [
         "..drawing.homogen_matrix3",
-        "HomogenMatrix3"
+        "HomogenMatrix3",
+        "drawing_homogen_matrix3_i"
       ],
       [
         "..awt.point",
-        "Point"
+        "Point",
+        "awt_point_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.drawing.Shape": "drawing_shape_i"
+    },
     "quote": [
-      "XTextFrame",
-      "XTextRange",
-      "TextContentAnchorType",
-      "WrapTextMode",
-      "Point",
-      "HomogenMatrix3"
+      "text_content_anchor_type_i",
+      "wrap_text_mode_i",
+      "x_text_range_i",
+      "x_text_frame_i",
+      "awt_point_i",
+      "drawing_homogen_matrix3_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -85,7 +96,7 @@
         },
         {
           "name": "AnchorFrame",
-          "returns": "XTextFrame",
+          "returns": "x_text_frame_i",
           "desc": [
             "contains the text frame the current frame is anchored to.",
             "",
@@ -107,7 +118,7 @@
         },
         {
           "name": "AnchorType",
-          "returns": "TextContentAnchorType",
+          "returns": "text_content_anchor_type_i",
           "desc": [
             "specifies how the text content is attached to its surrounding Text."
           ],
@@ -134,7 +145,7 @@
         },
         {
           "name": "EndPositionInHoriL2R",
-          "returns": "Point",
+          "returns": "awt_point_i",
           "desc": [
             "determines the end position of the shape in horizontal left-to-right layout",
             "",
@@ -220,7 +231,7 @@
         },
         {
           "name": "StartPositionInHoriL2R",
-          "returns": "Point",
+          "returns": "awt_point_i",
           "desc": [
             "determines the start position of the shape in horizontal left-to-right layout",
             "",
@@ -235,7 +246,7 @@
         },
         {
           "name": "Surround",
-          "returns": "WrapTextMode",
+          "returns": "wrap_text_mode_i",
           "desc": [
             "determines the type of the surrounding text."
           ],
@@ -262,7 +273,7 @@
         },
         {
           "name": "TextRange",
-          "returns": "XTextRange",
+          "returns": "x_text_range_i",
           "desc": [
             "contains a text range where the shape should be anchored to.",
             "",
@@ -284,7 +295,7 @@
         },
         {
           "name": "TransformationInHoriL2R",
-          "returns": "HomogenMatrix3",
+          "returns": "drawing_homogen_matrix3_i",
           "desc": [
             "determines the transformation of the shape in horizontal left-to-right layout",
             "",

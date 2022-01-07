@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "Diagram",
   "type": "service",
   "namespace": "com.sun.star.chart2",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,35 +15,47 @@
   "data": {
     "from_imports": [
       [
-        "..chart.x3_d_default_setter",
-        "X3DDefaultSetter"
+        ".x_titled",
+        "XTitled",
+        "x_titled_i"
       ],
       [
-        ".x_coordinate_system_container",
-        "XCoordinateSystemContainer"
+        "..chart.x3_d_default_setter",
+        "X3DDefaultSetter",
+        "chart_x3_d_default_setter_i"
       ],
       [
         ".x_diagram",
-        "XDiagram"
+        "XDiagram",
+        "x_diagram_i"
       ],
       [
-        ".x_titled",
-        "XTitled"
+        ".x_coordinate_system_container",
+        "XCoordinateSystemContainer",
+        "x_coordinate_system_container_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".relative_position",
-        "RelativePosition"
+        "RelativePosition",
+        "relative_position_i"
       ],
       [
         ".relative_size",
-        "RelativeSize"
+        "RelativeSize",
+        "relative_size_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.chart2.XTitled": "x_titled_i",
+      "com.sun.star.chart.X3DDefaultSetter": "chart_x3_d_default_setter_i",
+      "com.sun.star.chart2.XDiagram": "x_diagram_i",
+      "com.sun.star.chart2.XCoordinateSystemContainer": "x_coordinate_system_container_i"
+    },
     "quote": [
-      "RelativeSize",
-      "RelativePosition"
+      "relative_size_i",
+      "relative_position_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -50,10 +63,10 @@
     "imports": [],
     "namespace": "com.sun.star.chart2",
     "extends": [
-      "com.sun.star.chart2.XDiagram",
-      "com.sun.star.chart2.XCoordinateSystemContainer",
+      "com.sun.star.chart.X3DDefaultSetter",
       "com.sun.star.chart2.XTitled",
-      "com.sun.star.chart.X3DDefaultSetter"
+      "com.sun.star.chart2.XCoordinateSystemContainer",
+      "com.sun.star.chart2.XDiagram"
     ],
     "desc": [],
     "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1chart2_1_1Diagram.html",
@@ -142,7 +155,7 @@
         },
         {
           "name": "RelativePosition",
-          "returns": "RelativePosition",
+          "returns": "relative_position_i",
           "desc": [
             "The position is as a relative position on the page.",
             "",
@@ -153,7 +166,7 @@
         },
         {
           "name": "RelativeSize",
-          "returns": "RelativeSize",
+          "returns": "relative_size_i",
           "desc": [
             "The size of the diagram as relative size of the page size."
           ],

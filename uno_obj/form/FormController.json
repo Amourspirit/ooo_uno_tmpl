@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "FormController",
   "type": "service",
   "namespace": "com.sun.star.form",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,51 +15,75 @@
   "data": {
     "from_imports": [
       [
+        "..awt.x_tab_controller",
+        "XTabController",
+        "awt_x_tab_controller_i"
+      ],
+      [
         ".x_database_parameter_broadcaster",
-        "XDatabaseParameterBroadcaster"
+        "XDatabaseParameterBroadcaster",
+        "x_database_parameter_broadcaster_i"
       ],
       [
         "..container.x_child",
-        "XChild"
-      ],
-      [
-        "..awt.x_tab_controller",
-        "XTabController"
-      ],
-      [
-        "..container.x_enumeration_access",
-        "XEnumerationAccess"
-      ],
-      [
-        "..lang.x_component",
-        "XComponent"
-      ],
-      [
-        "..sdb.xsql_error_broadcaster",
-        "XSQLErrorBroadcaster"
+        "XChild",
+        "container_x_child_i"
       ],
       [
         ".form_controller_dispatcher",
-        "FormControllerDispatcher"
-      ],
-      [
-        ".x_form_controller",
-        "XFormController"
+        "FormControllerDispatcher",
+        "form_controller_dispatcher_i"
       ],
       [
         "..util.x_modify_broadcaster",
-        "XModifyBroadcaster"
+        "XModifyBroadcaster",
+        "util_x_modify_broadcaster_i"
       ],
       [
-        "..sdb.x_row_set_approve_broadcaster",
-        "XRowSetApproveBroadcaster"
+        ".x_form_controller",
+        "XFormController",
+        "x_form_controller_i"
+      ],
+      [
+        "..sdb.xsql_error_broadcaster",
+        "XSQLErrorBroadcaster",
+        "sdb_xsql_error_broadcaster_i"
+      ],
+      [
+        "..container.x_enumeration_access",
+        "XEnumerationAccess",
+        "container_x_enumeration_access_i"
       ],
       [
         ".x_confirm_delete_broadcaster",
-        "XConfirmDeleteBroadcaster"
+        "XConfirmDeleteBroadcaster",
+        "x_confirm_delete_broadcaster_i"
+      ],
+      [
+        "..sdb.x_row_set_approve_broadcaster",
+        "XRowSetApproveBroadcaster",
+        "sdb_x_row_set_approve_broadcaster_i"
+      ],
+      [
+        "..lang.x_component",
+        "XComponent",
+        "lang_x_component_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.awt.XTabController": "awt_x_tab_controller_i",
+      "com.sun.star.form.XDatabaseParameterBroadcaster": "x_database_parameter_broadcaster_i",
+      "com.sun.star.container.XChild": "container_x_child_i",
+      "com.sun.star.form.FormControllerDispatcher": "form_controller_dispatcher_i",
+      "com.sun.star.util.XModifyBroadcaster": "util_x_modify_broadcaster_i",
+      "com.sun.star.form.XFormController": "x_form_controller_i",
+      "com.sun.star.sdb.XSQLErrorBroadcaster": "sdb_xsql_error_broadcaster_i",
+      "com.sun.star.container.XEnumerationAccess": "container_x_enumeration_access_i",
+      "com.sun.star.form.XConfirmDeleteBroadcaster": "x_confirm_delete_broadcaster_i",
+      "com.sun.star.sdb.XRowSetApproveBroadcaster": "sdb_x_row_set_approve_broadcaster_i",
+      "com.sun.star.lang.XComponent": "lang_x_component_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -66,17 +91,17 @@
     "imports": [],
     "namespace": "com.sun.star.form",
     "extends": [
+      "com.sun.star.awt.XTabController",
       "com.sun.star.form.XDatabaseParameterBroadcaster",
-      "com.sun.star.sdb.XRowSetApproveBroadcaster",
-      "com.sun.star.sdb.XSQLErrorBroadcaster",
+      "com.sun.star.container.XChild",
       "com.sun.star.form.XConfirmDeleteBroadcaster",
       "com.sun.star.util.XModifyBroadcaster",
-      "com.sun.star.container.XEnumerationAccess",
-      "com.sun.star.lang.XComponent",
-      "com.sun.star.container.XChild",
-      "com.sun.star.awt.XTabController",
+      "com.sun.star.form.FormControllerDispatcher",
       "com.sun.star.form.XFormController",
-      "com.sun.star.form.FormControllerDispatcher"
+      "com.sun.star.sdb.XSQLErrorBroadcaster",
+      "com.sun.star.container.XEnumerationAccess",
+      "com.sun.star.sdb.XRowSetApproveBroadcaster",
+      "com.sun.star.lang.XComponent"
     ],
     "desc": [
       "is superseded by com.sun.star.form.runtime.FormController.",

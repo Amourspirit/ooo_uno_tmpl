@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "DatabaseRanges",
   "type": "service",
   "namespace": "com.sun.star.sheet",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,18 +16,26 @@
     "from_imports": [
       [
         "..container.x_index_access",
-        "XIndexAccess"
-      ],
-      [
-        "..container.x_enumeration_access",
-        "XEnumerationAccess"
+        "XIndexAccess",
+        "container_x_index_access_i"
       ],
       [
         ".x_database_ranges",
-        "XDatabaseRanges"
+        "XDatabaseRanges",
+        "x_database_ranges_i"
+      ],
+      [
+        "..container.x_enumeration_access",
+        "XEnumerationAccess",
+        "container_x_enumeration_access_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.container.XIndexAccess": "container_x_index_access_i",
+      "com.sun.star.sheet.XDatabaseRanges": "x_database_ranges_i",
+      "com.sun.star.container.XEnumerationAccess": "container_x_enumeration_access_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -34,9 +43,9 @@
     "imports": [],
     "namespace": "com.sun.star.sheet",
     "extends": [
+      "com.sun.star.container.XIndexAccess",
       "com.sun.star.sheet.XDatabaseRanges",
-      "com.sun.star.container.XEnumerationAccess",
-      "com.sun.star.container.XIndexAccess"
+      "com.sun.star.container.XEnumerationAccess"
     ],
     "desc": [
       "represents a collection of database ranges in a spreadsheet document."

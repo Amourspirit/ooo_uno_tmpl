@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "DriverManager",
   "type": "service",
   "namespace": "com.sun.star.sdbc",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,10 +16,14 @@
     "from_imports": [
       [
         ".x_driver_manager2",
-        "XDriverManager2"
+        "XDriverManager2",
+        "x_driver_manager2_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.sdbc.XDriverManager2": "x_driver_manager2_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,

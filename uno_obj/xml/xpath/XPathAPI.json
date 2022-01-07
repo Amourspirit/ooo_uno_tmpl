@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XPathAPI",
   "type": "service",
   "namespace": "com.sun.star.xml.xpath",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,10 +16,14 @@
     "from_imports": [
       [
         ".xx_path_api",
-        "XXPathAPI"
+        "XXPathAPI",
+        "xx_path_api_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.xml.xpath.XXPathAPI": "xx_path_api_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,

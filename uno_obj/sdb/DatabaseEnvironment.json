@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "DatabaseEnvironment",
   "type": "service",
   "namespace": "com.sun.star.sdb",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,21 +16,28 @@
     "from_imports": [
       [
         "..beans.x_property_set",
-        "XPropertySet"
+        "XPropertySet",
+        "beans_x_property_set_i"
       ],
       [
         ".x_database_environment",
-        "XDatabaseEnvironment"
+        "XDatabaseEnvironment",
+        "x_database_environment_i"
       ]
     ],
     "from_imports_typing": [
       [
         "..util.x_number_formats_supplier",
-        "XNumberFormatsSupplier"
+        "XNumberFormatsSupplier",
+        "util_x_number_formats_supplier_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.beans.XPropertySet": "beans_x_property_set_i",
+      "com.sun.star.sdb.XDatabaseEnvironment": "x_database_environment_i"
+    },
     "quote": [
-      "XNumberFormatsSupplier"
+      "util_x_number_formats_supplier_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -37,8 +45,8 @@
     "imports": [],
     "namespace": "com.sun.star.sdb",
     "extends": [
-      "com.sun.star.sdb.XDatabaseEnvironment",
-      "com.sun.star.beans.XPropertySet"
+      "com.sun.star.beans.XPropertySet",
+      "com.sun.star.sdb.XDatabaseEnvironment"
     ],
     "desc": [
       "It enables the service user to establish connections to databases or to use database access beans to gain access to database components. This service takes control over all other database services.",
@@ -52,7 +60,7 @@
       "properties": [
         {
           "name": "NumberFormatsSupplier",
-          "returns": "XNumberFormatsSupplier",
+          "returns": "util_x_number_formats_supplier_i",
           "desc": [
             "provides an object for formatting numbers."
           ],

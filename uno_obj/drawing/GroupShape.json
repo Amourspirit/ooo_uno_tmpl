@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "GroupShape",
   "type": "service",
   "namespace": "com.sun.star.drawing",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,18 +16,26 @@
     "from_imports": [
       [
         ".x_shapes",
-        "XShapes"
-      ],
-      [
-        ".x_shape_group",
-        "XShapeGroup"
+        "XShapes",
+        "x_shapes_i"
       ],
       [
         ".shape",
-        "Shape"
+        "Shape",
+        "shape_i"
+      ],
+      [
+        ".x_shape_group",
+        "XShapeGroup",
+        "x_shape_group_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.drawing.XShapes": "x_shapes_i",
+      "com.sun.star.drawing.Shape": "shape_i",
+      "com.sun.star.drawing.XShapeGroup": "x_shape_group_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -34,9 +43,9 @@
     "imports": [],
     "namespace": "com.sun.star.drawing",
     "extends": [
+      "com.sun.star.drawing.XShapes",
       "com.sun.star.drawing.Shape",
-      "com.sun.star.drawing.XShapeGroup",
-      "com.sun.star.drawing.XShapes"
+      "com.sun.star.drawing.XShapeGroup"
     ],
     "desc": [
       "This service is for a group of Shapes."

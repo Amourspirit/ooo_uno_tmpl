@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "SortableGridDataModel",
   "type": "service",
   "namespace": "com.sun.star.awt.grid",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,22 +16,28 @@
     "from_imports": [
       [
         ".x_sortable_mutable_grid_data_model",
-        "XSortableMutableGridDataModel"
+        "XSortableMutableGridDataModel",
+        "x_sortable_mutable_grid_data_model_i"
       ]
     ],
     "from_imports_typing": [
       [
         "...i18n.x_collator",
-        "XCollator"
+        "XCollator",
+        "i18n_x_collator_i"
       ],
       [
         ".x_mutable_grid_data_model",
-        "XMutableGridDataModel"
+        "XMutableGridDataModel",
+        "x_mutable_grid_data_model_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.awt.grid.XSortableMutableGridDataModel": "x_sortable_mutable_grid_data_model_i"
+    },
     "quote": [
-      "XCollator",
-      "XMutableGridDataModel"
+      "x_mutable_grid_data_model_i",
+      "i18n_x_collator_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -72,7 +79,7 @@
           "args": [
             [
               "DelegatorModel",
-              "XMutableGridDataModel",
+              "x_mutable_grid_data_model_i",
               "in"
             ]
           ]
@@ -89,12 +96,12 @@
           "args": [
             [
               "DelegatorModel",
-              "XMutableGridDataModel",
+              "x_mutable_grid_data_model_i",
               "in"
             ],
             [
               "Collator",
-              "XCollator",
+              "i18n_x_collator_i",
               "in"
             ]
           ]

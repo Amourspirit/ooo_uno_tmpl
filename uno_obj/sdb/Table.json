@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "Table",
   "type": "service",
   "namespace": "com.sun.star.sdb",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,15 +15,21 @@
   "data": {
     "from_imports": [
       [
-        "..sdbcx.table",
-        "Table"
+        ".data_settings",
+        "DataSettings",
+        "data_settings_i"
       ],
       [
-        ".data_settings",
-        "DataSettings"
+        "..sdbcx.table",
+        "Table",
+        "sdbcx_table_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.sdb.DataSettings": "data_settings_i",
+      "com.sun.star.sdbcx.Table": "sdbcx_table_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -30,8 +37,8 @@
     "imports": [],
     "namespace": "com.sun.star.sdb",
     "extends": [
-      "com.sun.star.sdbcx.Table",
-      "com.sun.star.sdb.DataSettings"
+      "com.sun.star.sdb.DataSettings",
+      "com.sun.star.sdbcx.Table"
     ],
     "desc": [
       "extends the service com.sun.star.sdbcx.Table with additional display information, sorting, and filtering criteria."

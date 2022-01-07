@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "DDELink",
   "type": "service",
   "namespace": "com.sun.star.sheet",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,23 +15,33 @@
   "data": {
     "from_imports": [
       [
-        "..util.x_refreshable",
-        "XRefreshable"
+        "..container.x_named",
+        "XNamed",
+        "container_x_named_i"
       ],
       [
         ".xdde_link",
-        "XDDELink"
-      ],
-      [
-        "..container.x_named",
-        "XNamed"
+        "XDDELink",
+        "xdde_link_i"
       ],
       [
         ".xdde_link_results",
-        "XDDELinkResults"
+        "XDDELinkResults",
+        "xdde_link_results_i"
+      ],
+      [
+        "..util.x_refreshable",
+        "XRefreshable",
+        "util_x_refreshable_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.container.XNamed": "container_x_named_i",
+      "com.sun.star.sheet.XDDELink": "xdde_link_i",
+      "com.sun.star.sheet.XDDELinkResults": "xdde_link_results_i",
+      "com.sun.star.util.XRefreshable": "util_x_refreshable_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -40,8 +51,8 @@
     "extends": [
       "com.sun.star.container.XNamed",
       "com.sun.star.sheet.XDDELink",
-      "com.sun.star.util.XRefreshable",
-      "com.sun.star.sheet.XDDELinkResults"
+      "com.sun.star.sheet.XDDELinkResults",
+      "com.sun.star.util.XRefreshable"
     ],
     "desc": [
       "represents a DDE link.",

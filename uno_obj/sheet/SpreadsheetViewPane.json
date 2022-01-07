@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "SpreadsheetViewPane",
   "type": "service",
   "namespace": "com.sun.star.sheet",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,19 +15,27 @@
   "data": {
     "from_imports": [
       [
+        ".x_view_pane",
+        "XViewPane",
+        "x_view_pane_i"
+      ],
+      [
         ".x_cell_range_referrer",
-        "XCellRangeReferrer"
+        "XCellRangeReferrer",
+        "x_cell_range_referrer_i"
       ],
       [
         "..view.x_control_access",
-        "XControlAccess"
-      ],
-      [
-        ".x_view_pane",
-        "XViewPane"
+        "XControlAccess",
+        "view_x_control_access_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.sheet.XViewPane": "x_view_pane_i",
+      "com.sun.star.sheet.XCellRangeReferrer": "x_cell_range_referrer_i",
+      "com.sun.star.view.XControlAccess": "view_x_control_access_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,

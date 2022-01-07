@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "InteractionHandler",
   "type": "service",
   "namespace": "com.sun.star.configuration.backend",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,15 +15,21 @@
   "data": {
     "from_imports": [
       [
-        "...lang.x_initialization",
-        "XInitialization"
+        "...task.x_interaction_handler",
+        "XInteractionHandler",
+        "task_x_interaction_handler_i"
       ],
       [
-        "...task.x_interaction_handler",
-        "XInteractionHandler"
+        "...lang.x_initialization",
+        "XInitialization",
+        "lang_x_initialization_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.task.XInteractionHandler": "task_x_interaction_handler_i",
+      "com.sun.star.lang.XInitialization": "lang_x_initialization_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,

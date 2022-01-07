@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "Shape",
   "type": "service",
   "namespace": "com.sun.star.drawing",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,68 +15,79 @@
   "data": {
     "from_imports": [
       [
-        ".x_shape_descriptor",
-        "XShapeDescriptor"
-      ],
-      [
-        "..lang.x_component",
-        "XComponent"
+        ".x_shape",
+        "XShape",
+        "x_shape_i"
       ],
       [
         "..beans.x_property_set",
-        "XPropertySet"
+        "XPropertySet",
+        "beans_x_property_set_i"
       ],
       [
         ".x_glue_points_supplier",
-        "XGluePointsSupplier"
+        "XGluePointsSupplier",
+        "x_glue_points_supplier_i"
       ],
       [
         "..beans.x_tolerant_multi_property_set",
-        "XTolerantMultiPropertySet"
+        "XTolerantMultiPropertySet",
+        "beans_x_tolerant_multi_property_set_i"
       ],
       [
-        ".x_shape",
-        "XShape"
+        "..lang.x_component",
+        "XComponent",
+        "lang_x_component_i"
       ]
     ],
     "from_imports_typing": [
       [
-        "..style.x_style",
-        "XStyle"
-      ],
-      [
         ".homogen_matrix3",
-        "HomogenMatrix3"
+        "HomogenMatrix3",
+        "homogen_matrix3_i"
       ],
       [
         "..container.x_name_container",
-        "XNameContainer"
+        "XNameContainer",
+        "container_x_name_container_i"
+      ],
+      [
+        "..style.x_style",
+        "XStyle",
+        "style_x_style_i"
       ],
       [
         "..beans.property_value",
-        "PropertyValue"
+        "PropertyValue",
+        "beans_property_value_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.drawing.XShape": "x_shape_i",
+      "com.sun.star.beans.XPropertySet": "beans_x_property_set_i",
+      "com.sun.star.drawing.XGluePointsSupplier": "x_glue_points_supplier_i",
+      "com.sun.star.beans.XTolerantMultiPropertySet": "beans_x_tolerant_multi_property_set_i",
+      "com.sun.star.lang.XComponent": "lang_x_component_i"
+    },
     "quote": [
-      "HomogenMatrix3",
-      "XStyle",
-      "typing.List[PropertyValue]",
-      "XNameContainer"
+      "typing.List[beans_property_value_i]",
+      "container_x_name_container_i",
+      "style_x_style_i",
+      "homogen_matrix3_i"
     ],
     "typings": [
-      "typing.List[PropertyValue]"
+      "typing.List[beans_property_value_i]"
     ],
     "requires_typing": true,
     "name": "Shape",
     "imports": [],
     "namespace": "com.sun.star.drawing",
     "extends": [
-      "com.sun.star.beans.XPropertySet",
       "com.sun.star.drawing.XShape",
-      "com.sun.star.lang.XComponent",
-      "com.sun.star.drawing.XShapeDescriptor",
+      "com.sun.star.beans.XPropertySet",
       "com.sun.star.drawing.XGluePointsSupplier",
-      "com.sun.star.beans.XTolerantMultiPropertySet"
+      "com.sun.star.beans.XTolerantMultiPropertySet",
+      "com.sun.star.lang.XComponent"
     ],
     "desc": [
       "This abstract service specifies the general characteristics of all Shapes.",
@@ -89,7 +101,7 @@
       "types": [
         {
           "name": "InteropGrabBag",
-          "returns": "typing.List[PropertyValue]",
+          "returns": "typing.List[beans_property_value_i]",
           "desc": [
             "Grab bag of shape properties, used as a string-any map for interim interop purposes.",
             "",
@@ -231,7 +243,7 @@
         },
         {
           "name": "ShapeUserDefinedAttributes",
-          "returns": "XNameContainer",
+          "returns": "container_x_name_container_i",
           "desc": [
             "this property stores xml attributes.",
             "",
@@ -251,7 +263,7 @@
         },
         {
           "name": "Style",
-          "returns": "XStyle",
+          "returns": "style_x_style_i",
           "desc": [
             "this property lets you get and set a style for this shape."
           ],
@@ -260,7 +272,7 @@
         },
         {
           "name": "Transformation",
-          "returns": "HomogenMatrix3",
+          "returns": "homogen_matrix3_i",
           "desc": [
             "this property lets you get and set the transformation matrix for this shape.",
             "",

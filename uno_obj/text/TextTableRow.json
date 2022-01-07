@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "TextTableRow",
   "type": "service",
   "namespace": "com.sun.star.text",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,41 +16,50 @@
     "from_imports": [
       [
         "..beans.x_property_set",
-        "XPropertySet"
+        "XPropertySet",
+        "beans_x_property_set_i"
       ]
     ],
     "from_imports_typing": [
       [
-        "..beans.property_value",
-        "PropertyValue"
-      ],
-      [
         "..util.color",
-        "Color"
+        "Color",
+        "util_color_i"
       ],
       [
         "..graphic.x_graphic",
-        "XGraphic"
-      ],
-      [
-        "..style.graphic_location",
-        "GraphicLocation"
+        "XGraphic",
+        "graphic_x_graphic_i"
       ],
       [
         ".table_column_separator",
-        "TableColumnSeparator"
+        "TableColumnSeparator",
+        "table_column_separator_i"
+      ],
+      [
+        "..beans.property_value",
+        "PropertyValue",
+        "beans_property_value_i"
+      ],
+      [
+        "..style.graphic_location",
+        "GraphicLocation",
+        "style_graphic_location_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.beans.XPropertySet": "beans_x_property_set_i"
+    },
     "quote": [
-      "Color",
-      "typing.List[PropertyValue]",
-      "GraphicLocation",
-      "typing.List[TableColumnSeparator]",
-      "XGraphic"
+      "typing.List[beans_property_value_i]",
+      "graphic_x_graphic_i",
+      "typing.List[table_column_separator_i]",
+      "util_color_i",
+      "style_graphic_location_i"
     ],
     "typings": [
-      "typing.List[TableColumnSeparator]",
-      "typing.List[PropertyValue]"
+      "typing.List[beans_property_value_i]",
+      "typing.List[table_column_separator_i]"
     ],
     "requires_typing": true,
     "name": "TextTableRow",
@@ -70,7 +80,7 @@
       "types": [
         {
           "name": "RowInteropGrabBag",
-          "returns": "typing.List[PropertyValue]",
+          "returns": "typing.List[beans_property_value_i]",
           "desc": [
             "Grab bag of row properties, used as a string-any map for interop purposes.",
             "",
@@ -85,7 +95,7 @@
         },
         {
           "name": "TableColumnSeparators",
-          "returns": "typing.List[TableColumnSeparator]",
+          "returns": "typing.List[table_column_separator_i]",
           "desc": [
             "contains the description of the columns in the table row."
           ],
@@ -96,7 +106,7 @@
       "properties": [
         {
           "name": "BackColor",
-          "returns": "Color",
+          "returns": "util_color_i",
           "desc": [
             "specifies the color of the background."
           ],
@@ -105,7 +115,7 @@
         },
         {
           "name": "BackGraphic",
-          "returns": "XGraphic",
+          "returns": "graphic_x_graphic_i",
           "desc": [
             "contains the graphic of the background.",
             "",
@@ -127,7 +137,7 @@
         },
         {
           "name": "BackGraphicLocation",
-          "returns": "GraphicLocation",
+          "returns": "style_graphic_location_i",
           "desc": [
             "determines the position of the background graphic."
           ],

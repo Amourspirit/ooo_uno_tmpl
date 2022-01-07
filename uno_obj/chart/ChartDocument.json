@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "ChartDocument",
   "type": "service",
   "namespace": "com.sun.star.chart",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,22 +16,32 @@
     "from_imports": [
       [
         "..beans.x_property_set",
-        "XPropertySet"
+        "XPropertySet",
+        "beans_x_property_set_i"
       ],
       [
         "..drawing.x_draw_page_supplier",
-        "XDrawPageSupplier"
+        "XDrawPageSupplier",
+        "drawing_x_draw_page_supplier_i"
       ],
       [
         ".x_chart_document",
-        "XChartDocument"
+        "XChartDocument",
+        "x_chart_document_i"
       ],
       [
         "..xml.user_defined_attributes_supplier",
-        "UserDefinedAttributesSupplier"
+        "UserDefinedAttributesSupplier",
+        "xml_user_defined_attributes_supplier_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.beans.XPropertySet": "beans_x_property_set_i",
+      "com.sun.star.drawing.XDrawPageSupplier": "drawing_x_draw_page_supplier_i",
+      "com.sun.star.chart.XChartDocument": "x_chart_document_i",
+      "com.sun.star.xml.UserDefinedAttributesSupplier": "xml_user_defined_attributes_supplier_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -38,10 +49,10 @@
     "imports": [],
     "namespace": "com.sun.star.chart",
     "extends": [
-      "com.sun.star.xml.UserDefinedAttributesSupplier",
       "com.sun.star.chart.XChartDocument",
       "com.sun.star.beans.XPropertySet",
-      "com.sun.star.drawing.XDrawPageSupplier"
+      "com.sun.star.drawing.XDrawPageSupplier",
+      "com.sun.star.xml.UserDefinedAttributesSupplier"
     ],
     "desc": [
       "is the service for a chart document.",

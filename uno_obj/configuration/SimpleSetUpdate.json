@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "SimpleSetUpdate",
   "type": "service",
   "namespace": "com.sun.star.configuration",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,23 +15,33 @@
   "data": {
     "from_imports": [
       [
-        "..lang.x_multi_service_factory",
-        "XMultiServiceFactory"
-      ],
-      [
-        ".simple_set_access",
-        "SimpleSetAccess"
+        "..lang.x_single_service_factory",
+        "XSingleServiceFactory",
+        "lang_x_single_service_factory_i"
       ],
       [
         "..container.x_name_container",
-        "XNameContainer"
+        "XNameContainer",
+        "container_x_name_container_i"
       ],
       [
-        "..lang.x_single_service_factory",
-        "XSingleServiceFactory"
+        "..lang.x_multi_service_factory",
+        "XMultiServiceFactory",
+        "lang_x_multi_service_factory_i"
+      ],
+      [
+        ".simple_set_access",
+        "SimpleSetAccess",
+        "simple_set_access_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.lang.XSingleServiceFactory": "lang_x_single_service_factory_i",
+      "com.sun.star.container.XNameContainer": "container_x_name_container_i",
+      "com.sun.star.lang.XMultiServiceFactory": "lang_x_multi_service_factory_i",
+      "com.sun.star.configuration.SimpleSetAccess": "simple_set_access_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -38,10 +49,10 @@
     "imports": [],
     "namespace": "com.sun.star.configuration",
     "extends": [
-      "com.sun.star.configuration.SimpleSetAccess",
-      "com.sun.star.container.XNameContainer",
       "com.sun.star.lang.XSingleServiceFactory",
-      "com.sun.star.lang.XMultiServiceFactory"
+      "com.sun.star.container.XNameContainer",
+      "com.sun.star.lang.XMultiServiceFactory",
+      "com.sun.star.configuration.SimpleSetAccess"
     ],
     "desc": [
       "provides write access to a dynamic, homogeneous, non-hierarchical set of values or objects.",

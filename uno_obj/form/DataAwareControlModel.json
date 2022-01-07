@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "DataAwareControlModel",
   "type": "service",
   "namespace": "com.sun.star.form",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,30 +15,41 @@
   "data": {
     "from_imports": [
       [
-        ".x_reset",
-        "XReset"
+        ".x_bound_component",
+        "XBoundComponent",
+        "x_bound_component_i"
       ],
       [
         ".form_control_model",
-        "FormControlModel"
+        "FormControlModel",
+        "form_control_model_i"
       ],
       [
         ".x_load_listener",
-        "XLoadListener"
+        "XLoadListener",
+        "x_load_listener_i"
       ],
       [
-        ".x_bound_component",
-        "XBoundComponent"
+        ".x_reset",
+        "XReset",
+        "x_reset_i"
       ]
     ],
     "from_imports_typing": [
       [
         "..beans.x_property_set",
-        "XPropertySet"
+        "XPropertySet",
+        "beans_x_property_set_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.form.XBoundComponent": "x_bound_component_i",
+      "com.sun.star.form.FormControlModel": "form_control_model_i",
+      "com.sun.star.form.XLoadListener": "x_load_listener_i",
+      "com.sun.star.form.XReset": "x_reset_i"
+    },
     "quote": [
-      "XPropertySet"
+      "beans_x_property_set_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -45,8 +57,8 @@
     "imports": [],
     "namespace": "com.sun.star.form",
     "extends": [
-      "com.sun.star.form.FormControlModel",
       "com.sun.star.form.XBoundComponent",
+      "com.sun.star.form.FormControlModel",
       "com.sun.star.form.XLoadListener",
       "com.sun.star.form.XReset"
     ],
@@ -64,7 +76,7 @@
       "properties": [
         {
           "name": "BoundField",
-          "returns": "XPropertySet",
+          "returns": "beans_x_property_set_i",
           "desc": [
             "references to the cursor field to which the control is bound.",
             "",
@@ -104,7 +116,7 @@
         },
         {
           "name": "LabelControl",
-          "returns": "XPropertySet",
+          "returns": "beans_x_property_set_i",
           "desc": [
             "references to a control model within the same document which should be used as a label.",
             "",

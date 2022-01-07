@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "EmbeddedObjectDescriptor",
   "type": "service",
   "namespace": "com.sun.star.embed",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -16,16 +17,19 @@
     "from_imports_typing": [
       [
         ".x_storage",
-        "XStorage"
+        "XStorage",
+        "x_storage_i"
       ],
       [
         "..frame.x_dispatch_provider_interceptor",
-        "XDispatchProviderInterceptor"
+        "XDispatchProviderInterceptor",
+        "frame_x_dispatch_provider_interceptor_i"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "XStorage",
-      "XDispatchProviderInterceptor"
+      "x_storage_i",
+      "frame_x_dispatch_provider_interceptor_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -43,7 +47,7 @@
       "properties": [
         {
           "name": "OutplaceDispatchInterceptor",
-          "returns": "XDispatchProviderInterceptor",
+          "returns": "frame_x_dispatch_provider_interceptor_i",
           "desc": [
             "allows to provide a dispatch interceptor for outplace activation."
           ],
@@ -52,7 +56,7 @@
         },
         {
           "name": "RecoveryStorage",
-          "returns": "XStorage",
+          "returns": "x_storage_i",
           "desc": [
             "denotes the storage from which the embedded object is to be recovered.",
             "",

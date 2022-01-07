@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "ChartLegend",
   "type": "service",
   "namespace": "com.sun.star.chart",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,26 +15,35 @@
   "data": {
     "from_imports": [
       [
-        "..style.character_properties",
-        "CharacterProperties"
+        "..drawing.shape",
+        "Shape",
+        "drawing_shape_i"
       ],
       [
         "..xml.user_defined_attributes_supplier",
-        "UserDefinedAttributesSupplier"
+        "UserDefinedAttributesSupplier",
+        "xml_user_defined_attributes_supplier_i"
       ],
       [
-        "..drawing.shape",
-        "Shape"
+        "..style.character_properties",
+        "CharacterProperties",
+        "style_character_properties_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".chart_legend_position",
-        "ChartLegendPosition"
+        "ChartLegendPosition",
+        "chart_legend_position_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.drawing.Shape": "drawing_shape_i",
+      "com.sun.star.xml.UserDefinedAttributesSupplier": "xml_user_defined_attributes_supplier_i",
+      "com.sun.star.style.CharacterProperties": "style_character_properties_i"
+    },
     "quote": [
-      "ChartLegendPosition"
+      "chart_legend_position_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -41,9 +51,9 @@
     "imports": [],
     "namespace": "com.sun.star.chart",
     "extends": [
+      "com.sun.star.xml.UserDefinedAttributesSupplier",
       "com.sun.star.drawing.Shape",
-      "com.sun.star.style.CharacterProperties",
-      "com.sun.star.xml.UserDefinedAttributesSupplier"
+      "com.sun.star.style.CharacterProperties"
     ],
     "desc": [
       "specifies the legend of a chart.",
@@ -59,7 +69,7 @@
       "properties": [
         {
           "name": "Alignment",
-          "returns": "ChartLegendPosition",
+          "returns": "chart_legend_position_i",
           "desc": [
             "determines the alignment of the legend relative to the diagram."
           ],

@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "Wizard",
   "type": "service",
   "namespace": "com.sun.star.ui.dialogs",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,19 +16,24 @@
     "from_imports": [
       [
         ".x_wizard",
-        "XWizard"
+        "XWizard",
+        "x_wizard_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_wizard_controller",
-        "XWizardController"
+        "XWizardController",
+        "x_wizard_controller_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.ui.dialogs.XWizard": "x_wizard_i"
+    },
     "quote": [
+      "x_wizard_controller_i",
       "typing.List[int]",
-      "typing.List[typing.List[int]]",
-      "XWizardController"
+      "typing.List[typing.List[int]]"
     ],
     "typings": [
       "typing.List[int]",
@@ -67,7 +73,7 @@
             ],
             [
               "Controller",
-              "XWizardController",
+              "x_wizard_controller_i",
               "in"
             ]
           ]
@@ -89,7 +95,7 @@
             ],
             [
               "Controller",
-              "XWizardController",
+              "x_wizard_controller_i",
               "in"
             ]
           ]

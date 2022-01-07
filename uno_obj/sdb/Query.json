@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "Query",
   "type": "service",
   "namespace": "com.sun.star.sdb",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,27 +15,39 @@
   "data": {
     "from_imports": [
       [
-        "..sdbcx.x_data_descriptor_factory",
-        "XDataDescriptorFactory"
-      ],
-      [
-        ".data_settings",
-        "DataSettings"
+        "..sdbcx.x_rename",
+        "XRename",
+        "sdbcx_x_rename_i"
       ],
       [
         "..sdbcx.x_columns_supplier",
-        "XColumnsSupplier"
+        "XColumnsSupplier",
+        "sdbcx_x_columns_supplier_i"
       ],
       [
         ".x_query_definition",
-        "XQueryDefinition"
+        "XQueryDefinition",
+        "x_query_definition_i"
       ],
       [
-        "..sdbcx.x_rename",
-        "XRename"
+        "..sdbcx.x_data_descriptor_factory",
+        "XDataDescriptorFactory",
+        "sdbcx_x_data_descriptor_factory_i"
+      ],
+      [
+        ".data_settings",
+        "DataSettings",
+        "data_settings_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.sdbcx.XRename": "sdbcx_x_rename_i",
+      "com.sun.star.sdbcx.XColumnsSupplier": "sdbcx_x_columns_supplier_i",
+      "com.sun.star.sdb.XQueryDefinition": "x_query_definition_i",
+      "com.sun.star.sdbcx.XDataDescriptorFactory": "sdbcx_x_data_descriptor_factory_i",
+      "com.sun.star.sdb.DataSettings": "data_settings_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -42,11 +55,11 @@
     "imports": [],
     "namespace": "com.sun.star.sdb",
     "extends": [
-      "com.sun.star.sdb.XQueryDefinition",
-      "com.sun.star.sdb.DataSettings",
-      "com.sun.star.sdbcx.XDataDescriptorFactory",
       "com.sun.star.sdbcx.XRename",
-      "com.sun.star.sdbcx.XColumnsSupplier"
+      "com.sun.star.sdbcx.XColumnsSupplier",
+      "com.sun.star.sdb.XQueryDefinition",
+      "com.sun.star.sdbcx.XDataDescriptorFactory",
+      "com.sun.star.sdb.DataSettings"
     ],
     "desc": [
       "is a stored definition of a SQL query.",

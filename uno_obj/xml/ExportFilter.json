@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "ExportFilter",
   "type": "service",
   "namespace": "com.sun.star.xml",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,15 +15,21 @@
   "data": {
     "from_imports": [
       [
-        ".sax.x_document_handler",
-        "XDocumentHandler"
+        ".x_export_filter",
+        "XExportFilter",
+        "x_export_filter_i"
       ],
       [
-        ".x_export_filter",
-        "XExportFilter"
+        ".sax.x_document_handler",
+        "XDocumentHandler",
+        "sax_x_document_handler_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.xml.XExportFilter": "x_export_filter_i",
+      "com.sun.star.xml.sax.XDocumentHandler": "sax_x_document_handler_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -30,8 +37,8 @@
     "imports": [],
     "namespace": "com.sun.star.xml",
     "extends": [
-      "com.sun.star.xml.sax.XDocumentHandler",
-      "com.sun.star.xml.XExportFilter"
+      "com.sun.star.xml.XExportFilter",
+      "com.sun.star.xml.sax.XDocumentHandler"
     ],
     "desc": [
       "describes an export filter for XML-based file formats.",

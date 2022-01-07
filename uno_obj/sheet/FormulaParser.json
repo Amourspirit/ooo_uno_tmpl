@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "FormulaParser",
   "type": "service",
   "namespace": "com.sun.star.sheet",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,39 +15,47 @@
   "data": {
     "from_imports": [
       [
-        "..beans.property_set",
-        "PropertySet"
+        ".x_formula_parser",
+        "XFormulaParser",
+        "x_formula_parser_i"
       ],
       [
-        ".x_formula_parser",
-        "XFormulaParser"
+        "..beans.property_set",
+        "PropertySet",
+        "beans_property_set_i"
       ]
     ],
     "from_imports_typing": [
       [
-        ".formula_op_code_map_entry",
-        "FormulaOpCodeMapEntry"
+        ".external_link_info",
+        "ExternalLinkInfo",
+        "external_link_info_i"
       ],
       [
-        ".external_link_info",
-        "ExternalLinkInfo"
+        ".formula_op_code_map_entry",
+        "FormulaOpCodeMapEntry",
+        "formula_op_code_map_entry_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.sheet.XFormulaParser": "x_formula_parser_i",
+      "com.sun.star.beans.PropertySet": "beans_property_set_i"
+    },
     "quote": [
-      "typing.List[FormulaOpCodeMapEntry]",
-      "typing.List[ExternalLinkInfo]"
+      "typing.List[formula_op_code_map_entry_i]",
+      "typing.List[external_link_info_i]"
     ],
     "typings": [
-      "typing.List[FormulaOpCodeMapEntry]",
-      "typing.List[ExternalLinkInfo]"
+      "typing.List[formula_op_code_map_entry_i]",
+      "typing.List[external_link_info_i]"
     ],
     "requires_typing": true,
     "name": "FormulaParser",
     "imports": [],
     "namespace": "com.sun.star.sheet",
     "extends": [
-      "com.sun.star.beans.PropertySet",
-      "com.sun.star.sheet.XFormulaParser"
+      "com.sun.star.sheet.XFormulaParser",
+      "com.sun.star.beans.PropertySet"
     ],
     "desc": [
       "",
@@ -59,7 +68,7 @@
       "types": [
         {
           "name": "ExternalLinks",
-          "returns": "typing.List[ExternalLinkInfo]",
+          "returns": "typing.List[external_link_info_i]",
           "desc": [
             "contains a list of external links referenced in formulas.",
             "",
@@ -74,7 +83,7 @@
         },
         {
           "name": "OpCodeMap",
-          "returns": "typing.List[FormulaOpCodeMapEntry]",
+          "returns": "typing.List[formula_op_code_map_entry_i]",
           "desc": [
             "contains the complete mapping of names to op-codes.",
             "",

@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "PolyPolygonBezierDescriptor",
   "type": "service",
   "namespace": "com.sun.star.drawing",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -16,16 +17,19 @@
     "from_imports_typing": [
       [
         ".poly_polygon_bezier_coords",
-        "PolyPolygonBezierCoords"
+        "PolyPolygonBezierCoords",
+        "poly_polygon_bezier_coords_i"
       ],
       [
         ".polygon_kind",
-        "PolygonKind"
+        "PolygonKind",
+        "polygon_kind_i"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "PolyPolygonBezierCoords",
-      "PolygonKind"
+      "polygon_kind_i",
+      "poly_polygon_bezier_coords_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -43,7 +47,7 @@
       "properties": [
         {
           "name": "Geometry",
-          "returns": "PolyPolygonBezierCoords",
+          "returns": "poly_polygon_bezier_coords_i",
           "desc": [
             "These are the untransformed Bezier coordinates of this polygon."
           ],
@@ -52,7 +56,7 @@
         },
         {
           "name": "PolyPolygonBezier",
-          "returns": "PolyPolygonBezierCoords",
+          "returns": "poly_polygon_bezier_coords_i",
           "desc": [
             "These are the Bezier points of this polygon."
           ],
@@ -61,7 +65,7 @@
         },
         {
           "name": "PolygonKind",
-          "returns": "PolygonKind",
+          "returns": "polygon_kind_i",
           "desc": [
             "This is the type of this polygon."
           ],

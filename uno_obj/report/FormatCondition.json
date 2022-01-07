@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "FormatCondition",
   "type": "service",
   "namespace": "com.sun.star.report",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,10 +16,14 @@
     "from_imports": [
       [
         ".x_format_condition",
-        "XFormatCondition"
+        "XFormatCondition",
+        "x_format_condition_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.report.XFormatCondition": "x_format_condition_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,

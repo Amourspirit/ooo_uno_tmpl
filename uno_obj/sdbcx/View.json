@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "View",
   "type": "service",
   "namespace": "com.sun.star.sdbcx",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,18 +16,26 @@
     "from_imports": [
       [
         "..beans.x_property_set",
-        "XPropertySet"
+        "XPropertySet",
+        "beans_x_property_set_i"
       ],
       [
         ".x_alter_view",
-        "XAlterView"
+        "XAlterView",
+        "x_alter_view_i"
       ],
       [
         ".x_rename",
-        "XRename"
+        "XRename",
+        "x_rename_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.beans.XPropertySet": "beans_x_property_set_i",
+      "com.sun.star.sdbcx.XAlterView": "x_alter_view_i",
+      "com.sun.star.sdbcx.XRename": "x_rename_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -34,9 +43,9 @@
     "imports": [],
     "namespace": "com.sun.star.sdbcx",
     "extends": [
-      "com.sun.star.sdbcx.XRename",
       "com.sun.star.beans.XPropertySet",
-      "com.sun.star.sdbcx.XAlterView"
+      "com.sun.star.sdbcx.XAlterView",
+      "com.sun.star.sdbcx.XRename"
     ],
     "desc": [
       "is used to specify views on data.",

@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "AccessibleChartDocumentView",
   "type": "service",
   "namespace": "com.sun.star.chart",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,18 +16,26 @@
     "from_imports": [
       [
         "..accessibility.x_accessible_context",
-        "XAccessibleContext"
-      ],
-      [
-        "..accessibility.x_accessible_component",
-        "XAccessibleComponent"
+        "XAccessibleContext",
+        "accessibility_x_accessible_context_i"
       ],
       [
         "..accessibility.x_accessible",
-        "XAccessible"
+        "XAccessible",
+        "accessibility_x_accessible_i"
+      ],
+      [
+        "..accessibility.x_accessible_component",
+        "XAccessibleComponent",
+        "accessibility_x_accessible_component_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.accessibility.XAccessibleContext": "accessibility_x_accessible_context_i",
+      "com.sun.star.accessibility.XAccessible": "accessibility_x_accessible_i",
+      "com.sun.star.accessibility.XAccessibleComponent": "accessibility_x_accessible_component_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -34,8 +43,8 @@
     "imports": [],
     "namespace": "com.sun.star.chart",
     "extends": [
-      "com.sun.star.accessibility.XAccessible",
       "com.sun.star.accessibility.XAccessibleContext",
+      "com.sun.star.accessibility.XAccessible",
       "com.sun.star.accessibility.XAccessibleComponent"
     ],
     "desc": [

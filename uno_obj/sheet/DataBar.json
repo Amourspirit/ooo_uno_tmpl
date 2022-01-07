@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "DataBar",
   "type": "service",
   "namespace": "com.sun.star.sheet",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,25 +16,31 @@
     "from_imports": [
       [
         ".x_condition_entry",
-        "XConditionEntry"
+        "XConditionEntry",
+        "x_condition_entry_i"
       ]
     ],
     "from_imports_typing": [
       [
-        ".x_data_bar_entry",
-        "XDataBarEntry"
+        "..util.color",
+        "Color",
+        "util_color_i"
       ],
       [
-        "..util.color",
-        "Color"
+        ".x_data_bar_entry",
+        "XDataBarEntry",
+        "x_data_bar_entry_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.sheet.XConditionEntry": "x_condition_entry_i"
+    },
     "quote": [
-      "Color",
-      "typing.List[XDataBarEntry]"
+      "typing.List[x_data_bar_entry_i]",
+      "util_color_i"
     ],
     "typings": [
-      "typing.List[XDataBarEntry]"
+      "typing.List[x_data_bar_entry_i]"
     ],
     "requires_typing": true,
     "name": "DataBar",
@@ -48,7 +55,7 @@
       "types": [
         {
           "name": "DataBarEntries",
-          "returns": "typing.List[XDataBarEntry]",
+          "returns": "typing.List[x_data_bar_entry_i]",
           "desc": [],
           "raises_get": "",
           "raises_set": ""
@@ -57,7 +64,7 @@
       "properties": [
         {
           "name": "AxisColor",
-          "returns": "Color",
+          "returns": "util_color_i",
           "desc": [],
           "raises_get": "",
           "raises_set": ""
@@ -73,7 +80,7 @@
         },
         {
           "name": "Color",
-          "returns": "Color",
+          "returns": "util_color_i",
           "desc": [],
           "raises_get": "",
           "raises_set": ""
@@ -102,7 +109,7 @@
         },
         {
           "name": "NegativeColor",
-          "returns": "Color",
+          "returns": "util_color_i",
           "desc": [],
           "raises_get": "",
           "raises_set": ""

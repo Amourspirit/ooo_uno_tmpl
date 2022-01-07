@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "DocumentIndex",
   "type": "service",
   "namespace": "com.sun.star.text",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,25 +16,31 @@
     "from_imports": [
       [
         ".base_index",
-        "BaseIndex"
+        "BaseIndex",
+        "base_index_i"
       ]
     ],
     "from_imports_typing": [
       [
         "..lang.locale",
-        "Locale"
+        "Locale",
+        "lang_locale_i"
       ],
       [
         ".x_document_index_mark",
-        "XDocumentIndexMark"
+        "XDocumentIndexMark",
+        "x_document_index_mark_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.text.BaseIndex": "base_index_i"
+    },
     "quote": [
-      "Locale",
-      "typing.List[XDocumentIndexMark]"
+      "typing.List[x_document_index_mark_i]",
+      "lang_locale_i"
     ],
     "typings": [
-      "typing.List[XDocumentIndexMark]"
+      "typing.List[x_document_index_mark_i]"
     ],
     "requires_typing": true,
     "name": "DocumentIndex",
@@ -50,7 +57,7 @@
       "types": [
         {
           "name": "DocumentIndexMarks",
-          "returns": "typing.List[XDocumentIndexMark]",
+          "returns": "typing.List[x_document_index_mark_i]",
           "desc": [
             "contains all index marks that are related to this index."
           ],
@@ -70,7 +77,7 @@
         },
         {
           "name": "Locale",
-          "returns": "Locale",
+          "returns": "lang_locale_i",
           "desc": [
             "contains the locale of the index."
           ],

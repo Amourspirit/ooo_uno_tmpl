@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "SingleBackend",
   "type": "service",
   "namespace": "com.sun.star.configuration.backend",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,19 +15,27 @@
   "data": {
     "from_imports": [
       [
+        ".x_multi_layer_stratum",
+        "XMultiLayerStratum",
+        "x_multi_layer_stratum_i"
+      ],
+      [
         ".x_schema_supplier",
-        "XSchemaSupplier"
+        "XSchemaSupplier",
+        "x_schema_supplier_i"
       ],
       [
         ".x_backend_entities",
-        "XBackendEntities"
-      ],
-      [
-        ".x_multi_layer_stratum",
-        "XMultiLayerStratum"
+        "XBackendEntities",
+        "x_backend_entities_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.configuration.backend.XMultiLayerStratum": "x_multi_layer_stratum_i",
+      "com.sun.star.configuration.backend.XSchemaSupplier": "x_schema_supplier_i",
+      "com.sun.star.configuration.backend.XBackendEntities": "x_backend_entities_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -34,8 +43,8 @@
     "imports": [],
     "namespace": "com.sun.star.configuration.backend",
     "extends": [
-      "com.sun.star.configuration.backend.XSchemaSupplier",
       "com.sun.star.configuration.backend.XMultiLayerStratum",
+      "com.sun.star.configuration.backend.XSchemaSupplier",
       "com.sun.star.configuration.backend.XBackendEntities"
     ],
     "desc": [

@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "StyleFamily",
   "type": "service",
   "namespace": "com.sun.star.style",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,18 +16,20 @@
     "from_imports": [
       [
         "..container.x_index_access",
-        "XIndexAccess"
-      ],
-      [
-        "..container.x_name_access",
-        "XNameAccess"
+        "XIndexAccess",
+        "container_x_index_access_i"
       ],
       [
         "..container.x_name_container",
-        "XNameContainer"
+        "XNameContainer",
+        "container_x_name_container_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.container.XIndexAccess": "container_x_index_access_i",
+      "com.sun.star.container.XNameContainer": "container_x_name_container_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -34,9 +37,8 @@
     "imports": [],
     "namespace": "com.sun.star.style",
     "extends": [
-      "com.sun.star.container.XNameAccess",
-      "com.sun.star.container.XNameContainer",
-      "com.sun.star.container.XIndexAccess"
+      "com.sun.star.container.XIndexAccess",
+      "com.sun.star.container.XNameContainer"
     ],
     "desc": [
       "This service is a container of style sheets of the same style family."

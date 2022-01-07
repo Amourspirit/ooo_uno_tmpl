@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "PropertySet",
   "type": "service",
   "namespace": "com.sun.star.beans",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,27 +15,39 @@
   "data": {
     "from_imports": [
       [
-        ".x_property_access",
-        "XPropertyAccess"
-      ],
-      [
-        ".x_fast_property_set",
-        "XFastPropertySet"
-      ],
-      [
-        ".x_property_set",
-        "XPropertySet"
-      ],
-      [
         ".x_property_state",
-        "XPropertyState"
+        "XPropertyState",
+        "x_property_state_i"
       ],
       [
         ".x_multi_property_set",
-        "XMultiPropertySet"
+        "XMultiPropertySet",
+        "x_multi_property_set_i"
+      ],
+      [
+        ".x_property_access",
+        "XPropertyAccess",
+        "x_property_access_i"
+      ],
+      [
+        ".x_fast_property_set",
+        "XFastPropertySet",
+        "x_fast_property_set_i"
+      ],
+      [
+        ".x_property_set",
+        "XPropertySet",
+        "x_property_set_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.beans.XPropertyState": "x_property_state_i",
+      "com.sun.star.beans.XMultiPropertySet": "x_multi_property_set_i",
+      "com.sun.star.beans.XPropertyAccess": "x_property_access_i",
+      "com.sun.star.beans.XFastPropertySet": "x_fast_property_set_i",
+      "com.sun.star.beans.XPropertySet": "x_property_set_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -42,11 +55,11 @@
     "imports": [],
     "namespace": "com.sun.star.beans",
     "extends": [
-      "com.sun.star.beans.XPropertySet",
-      "com.sun.star.beans.XFastPropertySet",
+      "com.sun.star.beans.XPropertyState",
       "com.sun.star.beans.XMultiPropertySet",
       "com.sun.star.beans.XPropertyAccess",
-      "com.sun.star.beans.XPropertyState"
+      "com.sun.star.beans.XFastPropertySet",
+      "com.sun.star.beans.XPropertySet"
     ],
     "desc": [
       "This is a generic service which should be supported by all services which have properties.",

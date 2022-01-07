@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "Footnote",
   "type": "service",
   "namespace": "com.sun.star.text",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,15 +15,21 @@
   "data": {
     "from_imports": [
       [
-        ".x_footnote",
-        "XFootnote"
+        ".x_text",
+        "XText",
+        "x_text_i"
       ],
       [
-        ".x_text",
-        "XText"
+        ".x_footnote",
+        "XFootnote",
+        "x_footnote_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.text.XText": "x_text_i",
+      "com.sun.star.text.XFootnote": "x_footnote_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -30,8 +37,8 @@
     "imports": [],
     "namespace": "com.sun.star.text",
     "extends": [
-      "com.sun.star.text.XFootnote",
-      "com.sun.star.text.XText"
+      "com.sun.star.text.XText",
+      "com.sun.star.text.XFootnote"
     ],
     "desc": [
       "This service specifies a footnote or an endnote in a TextDocument."

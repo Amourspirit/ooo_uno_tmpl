@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "BindableDatabaseNumericField",
   "type": "service",
   "namespace": "com.sun.star.form.binding",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,14 +16,20 @@
     "from_imports": [
       [
         "..component.database_numeric_field",
-        "DatabaseNumericField"
+        "DatabaseNumericField",
+        "component_database_numeric_field_i"
       ],
       [
         ".bindable_data_aware_control_model",
-        "BindableDataAwareControlModel"
+        "BindableDataAwareControlModel",
+        "bindable_data_aware_control_model_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.form.component.DatabaseNumericField": "component_database_numeric_field_i",
+      "com.sun.star.form.binding.BindableDataAwareControlModel": "bindable_data_aware_control_model_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,

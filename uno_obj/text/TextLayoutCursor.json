@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "TextLayoutCursor",
   "type": "service",
   "namespace": "com.sun.star.text",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,14 +16,20 @@
     "from_imports": [
       [
         ".text_cursor",
-        "TextCursor"
+        "TextCursor",
+        "text_cursor_i"
       ],
       [
         ".x_page_cursor",
-        "XPageCursor"
+        "XPageCursor",
+        "x_page_cursor_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.text.TextCursor": "text_cursor_i",
+      "com.sun.star.text.XPageCursor": "x_page_cursor_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,

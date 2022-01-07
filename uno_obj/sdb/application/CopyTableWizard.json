@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "CopyTableWizard",
   "type": "service",
   "namespace": "com.sun.star.sdb.application",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,22 +16,28 @@
     "from_imports": [
       [
         ".x_copy_table_wizard",
-        "XCopyTableWizard"
+        "XCopyTableWizard",
+        "x_copy_table_wizard_i"
       ]
     ],
     "from_imports_typing": [
       [
         "...beans.x_property_set",
-        "XPropertySet"
+        "XPropertySet",
+        "beans_x_property_set_i"
       ],
       [
         "...task.x_interaction_handler",
-        "XInteractionHandler"
+        "XInteractionHandler",
+        "task_x_interaction_handler_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.sdb.application.XCopyTableWizard": "x_copy_table_wizard_i"
+    },
     "quote": [
-      "XInteractionHandler",
-      "XPropertySet"
+      "task_x_interaction_handler_i",
+      "beans_x_property_set_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -82,12 +89,12 @@
           "args": [
             [
               "Source",
-              "XPropertySet",
+              "beans_x_property_set_i",
               "in"
             ],
             [
               "Destination",
-              "XPropertySet",
+              "beans_x_property_set_i",
               "in"
             ]
           ]
@@ -110,17 +117,17 @@
           "args": [
             [
               "Source",
-              "XPropertySet",
+              "beans_x_property_set_i",
               "in"
             ],
             [
               "Destination",
-              "XPropertySet",
+              "beans_x_property_set_i",
               "in"
             ],
             [
               "InteractionHandler",
-              "XInteractionHandler",
+              "task_x_interaction_handler_i",
               "in"
             ]
           ]

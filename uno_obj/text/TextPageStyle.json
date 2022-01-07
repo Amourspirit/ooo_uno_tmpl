@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "TextPageStyle",
   "type": "service",
   "namespace": "com.sun.star.text",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,22 +16,26 @@
     "from_imports": [],
     "from_imports_typing": [
       [
-        ".x_text_columns",
-        "XTextColumns"
+        "..util.color",
+        "Color",
+        "util_color_i"
       ],
       [
-        "..util.color",
-        "Color"
+        ".x_text_columns",
+        "XTextColumns",
+        "x_text_columns_i"
       ],
       [
         ".x_text",
-        "XText"
+        "XText",
+        "x_text_i"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "XText",
-      "Color",
-      "XTextColumns"
+      "util_color_i",
+      "x_text_columns_i",
+      "x_text_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -52,7 +57,7 @@
       "properties": [
         {
           "name": "FooterText",
-          "returns": "XText",
+          "returns": "x_text_i",
           "desc": [
             "contains the interface to the text of the footer."
           ],
@@ -61,7 +66,7 @@
         },
         {
           "name": "FooterTextFirst",
-          "returns": "XText",
+          "returns": "x_text_i",
           "desc": [
             "contains the interface to the text of the footer of a first page.",
             "",
@@ -74,7 +79,7 @@
         },
         {
           "name": "FooterTextLeft",
-          "returns": "XText",
+          "returns": "x_text_i",
           "desc": [
             "contains the interface to the text of the footer of a left page."
           ],
@@ -83,7 +88,7 @@
         },
         {
           "name": "FooterTextRight",
-          "returns": "XText",
+          "returns": "x_text_i",
           "desc": [
             "contains the interface to the text of the footer of a right page."
           ],
@@ -112,7 +117,7 @@
         },
         {
           "name": "FootnoteLineColor",
-          "returns": "Color",
+          "returns": "util_color_i",
           "desc": [
             "contains the color of the separator line between the text and the footnote area."
           ],
@@ -157,7 +162,7 @@
         },
         {
           "name": "HeaderText",
-          "returns": "XText",
+          "returns": "x_text_i",
           "desc": [
             "contains the interface to the text of the header."
           ],
@@ -166,7 +171,7 @@
         },
         {
           "name": "HeaderTextFirst",
-          "returns": "XText",
+          "returns": "x_text_i",
           "desc": [
             "contains the interface to the text of the header of first pages.",
             "",
@@ -179,7 +184,7 @@
         },
         {
           "name": "HeaderTextLeft",
-          "returns": "XText",
+          "returns": "x_text_i",
           "desc": [
             "contains the interface to the text of the header of left pages."
           ],
@@ -188,7 +193,7 @@
         },
         {
           "name": "HeaderTextRight",
-          "returns": "XText",
+          "returns": "x_text_i",
           "desc": [
             "contains the interface to the text of the header of right pages."
           ],
@@ -215,7 +220,7 @@
         },
         {
           "name": "TextColumns",
-          "returns": "XTextColumns",
+          "returns": "x_text_columns_i",
           "desc": [
             "contains the column settings of the page."
           ],

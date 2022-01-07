@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "ConnectorProperties",
   "type": "service",
   "namespace": "com.sun.star.drawing",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -16,11 +17,13 @@
     "from_imports_typing": [
       [
         ".connector_type",
-        "ConnectorType"
+        "ConnectorType",
+        "connector_type_i"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "ConnectorType"
+      "connector_type_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -36,7 +39,7 @@
       "properties": [
         {
           "name": "EdgeKind",
-          "returns": "ConnectorType",
+          "returns": "connector_type_i",
           "desc": [
             "This property contains the kind of the connector."
           ],

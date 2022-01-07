@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "RangeHighlightListener",
   "type": "service",
   "namespace": "com.sun.star.chart2.data",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,10 +16,14 @@
     "from_imports": [
       [
         "...view.x_selection_change_listener",
-        "XSelectionChangeListener"
+        "XSelectionChangeListener",
+        "view_x_selection_change_listener_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.view.XSelectionChangeListener": "view_x_selection_change_listener_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,

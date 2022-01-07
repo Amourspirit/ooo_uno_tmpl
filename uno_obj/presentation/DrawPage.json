@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "DrawPage",
   "type": "service",
   "namespace": "com.sun.star.presentation",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,27 +15,35 @@
   "data": {
     "from_imports": [
       [
-        "..document.link_target",
-        "LinkTarget"
+        "..drawing.draw_page",
+        "DrawPage",
+        "drawing_draw_page_i"
       ],
       [
-        "..drawing.draw_page",
-        "DrawPage"
+        "..document.link_target",
+        "LinkTarget",
+        "document_link_target_i"
       ]
     ],
     "from_imports_typing": [
       [
-        ".fade_effect",
-        "FadeEffect"
+        ".animation_speed",
+        "AnimationSpeed",
+        "animation_speed_i"
       ],
       [
-        ".animation_speed",
-        "AnimationSpeed"
+        ".fade_effect",
+        "FadeEffect",
+        "fade_effect_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.drawing.DrawPage": "drawing_draw_page_i",
+      "com.sun.star.document.LinkTarget": "document_link_target_i"
+    },
     "quote": [
-      "AnimationSpeed",
-      "FadeEffect"
+      "fade_effect_i",
+      "animation_speed_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -99,7 +108,7 @@
         },
         {
           "name": "Effect",
-          "returns": "FadeEffect",
+          "returns": "fade_effect_i",
           "desc": [
             "This is the effect that is used to fade in this page."
           ],
@@ -189,7 +198,7 @@
         },
         {
           "name": "Speed",
-          "returns": "AnimationSpeed",
+          "returns": "animation_speed_i",
           "desc": [
             "Defines the speed of the fade-in effect of this page."
           ],

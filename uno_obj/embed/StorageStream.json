@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "StorageStream",
   "type": "service",
   "namespace": "com.sun.star.embed",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,27 +15,39 @@
   "data": {
     "from_imports": [
       [
+        ".x_encryption_protected_source",
+        "XEncryptionProtectedSource",
+        "x_encryption_protected_source_i"
+      ],
+      [
         "..io.x_stream",
-        "XStream"
+        "XStream",
+        "io_x_stream_i"
       ],
       [
         "..io.x_seekable",
-        "XSeekable"
-      ],
-      [
-        "..lang.x_component",
-        "XComponent"
+        "XSeekable",
+        "io_x_seekable_i"
       ],
       [
         "..beans.x_property_set",
-        "XPropertySet"
+        "XPropertySet",
+        "beans_x_property_set_i"
       ],
       [
-        ".x_encryption_protected_source",
-        "XEncryptionProtectedSource"
+        "..lang.x_component",
+        "XComponent",
+        "lang_x_component_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.embed.XEncryptionProtectedSource": "x_encryption_protected_source_i",
+      "com.sun.star.io.XStream": "io_x_stream_i",
+      "com.sun.star.io.XSeekable": "io_x_seekable_i",
+      "com.sun.star.beans.XPropertySet": "beans_x_property_set_i",
+      "com.sun.star.lang.XComponent": "lang_x_component_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -42,11 +55,11 @@
     "imports": [],
     "namespace": "com.sun.star.embed",
     "extends": [
+      "com.sun.star.embed.XEncryptionProtectedSource",
       "com.sun.star.io.XStream",
-      "com.sun.star.lang.XComponent",
-      "com.sun.star.beans.XPropertySet",
       "com.sun.star.io.XSeekable",
-      "com.sun.star.embed.XEncryptionProtectedSource"
+      "com.sun.star.beans.XPropertySet",
+      "com.sun.star.lang.XComponent"
     ],
     "desc": [
       "This is a service that represents a stream that can be provided by XStorage.openStreamElement() call implemented by Storage service.",

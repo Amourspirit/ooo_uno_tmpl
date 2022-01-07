@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "TextGraphicObject",
   "type": "service",
   "namespace": "com.sun.star.text",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,42 +16,52 @@
     "from_imports": [
       [
         ".base_frame",
-        "BaseFrame"
+        "BaseFrame",
+        "base_frame_i"
       ]
     ],
     "from_imports_typing": [
       [
-        "..container.x_index_container",
-        "XIndexContainer"
-      ],
-      [
-        "..drawing.color_mode",
-        "ColorMode"
-      ],
-      [
-        "..drawing.point_sequence_sequence",
-        "PointSequenceSequence"
-      ],
-      [
-        "..graphic.x_graphic",
-        "XGraphic"
-      ],
-      [
         "..awt.size",
-        "Size"
+        "Size",
+        "awt_size_i"
       ],
       [
         ".graphic_crop",
-        "GraphicCrop"
+        "GraphicCrop",
+        "graphic_crop_i"
+      ],
+      [
+        "..graphic.x_graphic",
+        "XGraphic",
+        "graphic_x_graphic_i"
+      ],
+      [
+        "..container.x_index_container",
+        "XIndexContainer",
+        "container_x_index_container_i"
+      ],
+      [
+        "..drawing.color_mode",
+        "ColorMode",
+        "drawing_color_mode_i"
+      ],
+      [
+        "..drawing.point_sequence_sequence",
+        "PointSequenceSequence",
+        "drawing_point_sequence_sequence_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.text.BaseFrame": "base_frame_i"
+    },
     "quote": [
-      "PointSequenceSequence",
-      "XIndexContainer",
-      "GraphicCrop",
-      "ColorMode",
-      "XGraphic",
-      "Size"
+      "awt_size_i",
+      "graphic_x_graphic_i",
+      "drawing_point_sequence_sequence_i",
+      "drawing_color_mode_i",
+      "container_x_index_container_i",
+      "graphic_crop_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -68,7 +79,7 @@
       "properties": [
         {
           "name": "ActualSize",
-          "returns": "Size",
+          "returns": "awt_size_i",
           "desc": [
             "contains the original size of the bitmap in the graphic object."
           ],
@@ -150,7 +161,7 @@
         },
         {
           "name": "ContourPolyPolygon",
-          "returns": "PointSequenceSequence",
+          "returns": "drawing_point_sequence_sequence_i",
           "desc": [
             "contains the contour of the object as PolyPolygon."
           ],
@@ -168,7 +179,7 @@
         },
         {
           "name": "Graphic",
-          "returns": "XGraphic",
+          "returns": "graphic_x_graphic_i",
           "desc": [
             "contains the background graphic of the object."
           ],
@@ -177,7 +188,7 @@
         },
         {
           "name": "GraphicColorMode",
-          "returns": "ColorMode",
+          "returns": "drawing_color_mode_i",
           "desc": [
             "contains the ColorMode as com.sun.star.drawing.ColorMode."
           ],
@@ -186,7 +197,7 @@
         },
         {
           "name": "GraphicCrop",
-          "returns": "GraphicCrop",
+          "returns": "graphic_crop_i",
           "desc": [
             "contains the cropping of the object."
           ],
@@ -244,7 +255,7 @@
         },
         {
           "name": "ImageMap",
-          "returns": "XIndexContainer",
+          "returns": "container_x_index_container_i",
           "desc": [
             "returns the client-side image map if one is assigned to the object."
           ],

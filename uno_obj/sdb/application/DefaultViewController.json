@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "DefaultViewController",
   "type": "service",
   "namespace": "com.sun.star.sdb.application",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,35 +15,33 @@
   "data": {
     "from_imports": [
       [
-        "...ui.x_context_menu_interception",
-        "XContextMenuInterception"
-      ],
-      [
         "...frame.x_title_change_broadcaster",
-        "XTitleChangeBroadcaster"
-      ],
-      [
-        ".x_database_document_ui",
-        "XDatabaseDocumentUI"
-      ],
-      [
-        "...awt.x_user_input_interception",
-        "XUserInputInterception"
-      ],
-      [
-        "...view.x_selection_supplier",
-        "XSelectionSupplier"
+        "XTitleChangeBroadcaster",
+        "frame_x_title_change_broadcaster_i"
       ],
       [
         "...frame.x_title",
-        "XTitle"
+        "XTitle",
+        "frame_x_title_i"
       ],
       [
         "...frame.controller",
-        "Controller"
+        "Controller",
+        "frame_controller_i"
+      ],
+      [
+        ".x_database_document_ui",
+        "XDatabaseDocumentUI",
+        "x_database_document_ui_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.frame.XTitleChangeBroadcaster": "frame_x_title_change_broadcaster_i",
+      "com.sun.star.frame.XTitle": "frame_x_title_i",
+      "com.sun.star.frame.Controller": "frame_controller_i",
+      "com.sun.star.sdb.application.XDatabaseDocumentUI": "x_database_document_ui_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -50,12 +49,9 @@
     "imports": [],
     "namespace": "com.sun.star.sdb.application",
     "extends": [
-      "com.sun.star.frame.Controller",
-      "com.sun.star.ui.XContextMenuInterception",
-      "com.sun.star.awt.XUserInputInterception",
-      "com.sun.star.view.XSelectionSupplier",
-      "com.sun.star.frame.XTitle",
       "com.sun.star.frame.XTitleChangeBroadcaster",
+      "com.sun.star.frame.XTitle",
+      "com.sun.star.frame.Controller",
       "com.sun.star.sdb.application.XDatabaseDocumentUI"
     ],
     "desc": [

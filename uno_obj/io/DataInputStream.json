@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "DataInputStream",
   "type": "service",
   "namespace": "com.sun.star.io",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,19 +15,27 @@
   "data": {
     "from_imports": [
       [
+        ".x_data_input_stream",
+        "XDataInputStream",
+        "x_data_input_stream_i"
+      ],
+      [
         ".x_active_data_sink",
-        "XActiveDataSink"
+        "XActiveDataSink",
+        "x_active_data_sink_i"
       ],
       [
         ".x_connectable",
-        "XConnectable"
-      ],
-      [
-        ".x_data_input_stream",
-        "XDataInputStream"
+        "XConnectable",
+        "x_connectable_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.io.XDataInputStream": "x_data_input_stream_i",
+      "com.sun.star.io.XActiveDataSink": "x_active_data_sink_i",
+      "com.sun.star.io.XConnectable": "x_connectable_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,

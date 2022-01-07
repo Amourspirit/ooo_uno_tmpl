@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "Driver",
   "type": "service",
   "namespace": "com.sun.star.sdbcx",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,23 +15,33 @@
   "data": {
     "from_imports": [
       [
-        "..sdbc.driver",
-        "Driver"
+        ".x_drop_catalog",
+        "XDropCatalog",
+        "x_drop_catalog_i"
       ],
       [
         ".x_create_catalog",
-        "XCreateCatalog"
+        "XCreateCatalog",
+        "x_create_catalog_i"
       ],
       [
         ".x_data_definition_supplier",
-        "XDataDefinitionSupplier"
+        "XDataDefinitionSupplier",
+        "x_data_definition_supplier_i"
       ],
       [
-        ".x_drop_catalog",
-        "XDropCatalog"
+        "..sdbc.driver",
+        "Driver",
+        "sdbc_driver_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.sdbcx.XDropCatalog": "x_drop_catalog_i",
+      "com.sun.star.sdbcx.XCreateCatalog": "x_create_catalog_i",
+      "com.sun.star.sdbcx.XDataDefinitionSupplier": "x_data_definition_supplier_i",
+      "com.sun.star.sdbc.Driver": "sdbc_driver_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -38,10 +49,10 @@
     "imports": [],
     "namespace": "com.sun.star.sdbcx",
     "extends": [
-      "com.sun.star.sdbc.Driver",
-      "com.sun.star.sdbcx.XDataDefinitionSupplier",
+      "com.sun.star.sdbcx.XDropCatalog",
       "com.sun.star.sdbcx.XCreateCatalog",
-      "com.sun.star.sdbcx.XDropCatalog"
+      "com.sun.star.sdbcx.XDataDefinitionSupplier",
+      "com.sun.star.sdbc.Driver"
     ],
     "desc": [
       "extends the service com.sun.star.sdbc.Driver by beans for data definition.",

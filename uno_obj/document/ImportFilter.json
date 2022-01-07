@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "ImportFilter",
   "type": "service",
   "namespace": "com.sun.star.document",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,22 +16,32 @@
     "from_imports": [
       [
         ".x_filter",
-        "XFilter"
+        "XFilter",
+        "x_filter_i"
       ],
       [
         ".x_importer",
-        "XImporter"
-      ],
-      [
-        "..container.x_named",
-        "XNamed"
+        "XImporter",
+        "x_importer_i"
       ],
       [
         "..lang.x_initialization",
-        "XInitialization"
+        "XInitialization",
+        "lang_x_initialization_i"
+      ],
+      [
+        "..container.x_named",
+        "XNamed",
+        "container_x_named_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.document.XFilter": "x_filter_i",
+      "com.sun.star.document.XImporter": "x_importer_i",
+      "com.sun.star.lang.XInitialization": "lang_x_initialization_i",
+      "com.sun.star.container.XNamed": "container_x_named_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -38,8 +49,8 @@
     "imports": [],
     "namespace": "com.sun.star.document",
     "extends": [
-      "com.sun.star.document.XImporter",
       "com.sun.star.document.XFilter",
+      "com.sun.star.document.XImporter",
       "com.sun.star.lang.XInitialization",
       "com.sun.star.container.XNamed"
     ],

@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "Text",
   "type": "service",
   "namespace": "com.sun.star.drawing",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,14 +16,20 @@
     "from_imports": [
       [
         ".text_properties",
-        "TextProperties"
+        "TextProperties",
+        "text_properties_i"
       ],
       [
         "..text.x_text",
-        "XText"
+        "XText",
+        "text_x_text_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.drawing.TextProperties": "text_properties_i",
+      "com.sun.star.text.XText": "text_x_text_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -30,8 +37,8 @@
     "imports": [],
     "namespace": "com.sun.star.drawing",
     "extends": [
-      "com.sun.star.text.XText",
-      "com.sun.star.drawing.TextProperties"
+      "com.sun.star.drawing.TextProperties",
+      "com.sun.star.text.XText"
     ],
     "desc": [
       "This abstract service specifies the general characteristics of an optional text inside a Shape."

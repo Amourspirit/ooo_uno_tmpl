@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "AccessRootElement",
   "type": "service",
   "namespace": "com.sun.star.configuration",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,23 +15,33 @@
   "data": {
     "from_imports": [
       [
-        "..lang.x_component",
-        "XComponent"
-      ],
-      [
-        "..lang.x_localizable",
-        "XLocalizable"
-      ],
-      [
         ".hierarchy_element",
-        "HierarchyElement"
+        "HierarchyElement",
+        "hierarchy_element_i"
       ],
       [
         "..util.x_changes_notifier",
-        "XChangesNotifier"
+        "XChangesNotifier",
+        "util_x_changes_notifier_i"
+      ],
+      [
+        "..lang.x_localizable",
+        "XLocalizable",
+        "lang_x_localizable_i"
+      ],
+      [
+        "..lang.x_component",
+        "XComponent",
+        "lang_x_component_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.configuration.HierarchyElement": "hierarchy_element_i",
+      "com.sun.star.util.XChangesNotifier": "util_x_changes_notifier_i",
+      "com.sun.star.lang.XLocalizable": "lang_x_localizable_i",
+      "com.sun.star.lang.XComponent": "lang_x_component_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -39,9 +50,9 @@
     "namespace": "com.sun.star.configuration",
     "extends": [
       "com.sun.star.configuration.HierarchyElement",
-      "com.sun.star.lang.XComponent",
       "com.sun.star.util.XChangesNotifier",
-      "com.sun.star.lang.XLocalizable"
+      "com.sun.star.lang.XLocalizable",
+      "com.sun.star.lang.XComponent"
     ],
     "desc": [
       "provides information about the root element of a hierarchy and about the hierarchy as a whole.",

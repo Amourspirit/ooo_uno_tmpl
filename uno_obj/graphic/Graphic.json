@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "Graphic",
   "type": "service",
   "namespace": "com.sun.star.graphic",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,14 +16,20 @@
     "from_imports": [
       [
         ".graphic_descriptor",
-        "GraphicDescriptor"
+        "GraphicDescriptor",
+        "graphic_descriptor_i"
       ],
       [
         ".x_graphic",
-        "XGraphic"
+        "XGraphic",
+        "x_graphic_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.graphic.GraphicDescriptor": "graphic_descriptor_i",
+      "com.sun.star.graphic.XGraphic": "x_graphic_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -30,8 +37,8 @@
     "imports": [],
     "namespace": "com.sun.star.graphic",
     "extends": [
-      "com.sun.star.graphic.XGraphic",
-      "com.sun.star.graphic.GraphicDescriptor"
+      "com.sun.star.graphic.GraphicDescriptor",
+      "com.sun.star.graphic.XGraphic"
     ],
     "desc": [
       "This service acts as a container for graphics.",

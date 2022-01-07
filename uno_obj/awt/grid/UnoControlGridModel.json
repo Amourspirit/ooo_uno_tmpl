@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "UnoControlGridModel",
   "type": "service",
   "namespace": "com.sun.star.awt.grid",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,46 +16,56 @@
     "from_imports": [
       [
         "..uno_control_model",
-        "UnoControlModel"
+        "UnoControlModel",
+        "uno_control_model_i"
       ]
     ],
     "from_imports_typing": [
       [
-        "..font_descriptor",
-        "FontDescriptor"
+        "...util.color",
+        "Color",
+        "util_color_i"
       ],
       [
         "...style.vertical_alignment",
-        "VerticalAlignment"
+        "VerticalAlignment",
+        "style_vertical_alignment_i"
       ],
       [
-        "...view.selection_type",
-        "SelectionType"
+        "..font_descriptor",
+        "FontDescriptor",
+        "font_descriptor_i"
       ],
       [
         ".x_grid_column_model",
-        "XGridColumnModel"
+        "XGridColumnModel",
+        "x_grid_column_model_i"
       ],
       [
         ".x_grid_data_model",
-        "XGridDataModel"
+        "XGridDataModel",
+        "x_grid_data_model_i"
       ],
       [
-        "...util.color",
-        "Color"
+        "...view.selection_type",
+        "SelectionType",
+        "view_selection_type_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.awt.UnoControlModel": "uno_control_model_i"
+    },
     "quote": [
-      "Color",
-      "SelectionType",
-      "typing.List[Color]",
-      "XGridDataModel",
-      "VerticalAlignment",
-      "XGridColumnModel",
-      "FontDescriptor"
+      "typing.List[util_color_i]",
+      "font_descriptor_i",
+      "x_grid_data_model_i",
+      "util_color_i",
+      "style_vertical_alignment_i",
+      "x_grid_column_model_i",
+      "view_selection_type_i"
     ],
     "typings": [
-      "typing.List[Color]"
+      "typing.List[util_color_i]"
     ],
     "requires_typing": true,
     "name": "UnoControlGridModel",
@@ -75,7 +86,7 @@
       "types": [
         {
           "name": "RowBackgroundColors",
-          "returns": "typing.List[Color]",
+          "returns": "typing.List[util_color_i]",
           "desc": [
             "specifies the colors to be used as background for data rows.",
             "",
@@ -92,7 +103,7 @@
       "properties": [
         {
           "name": "ActiveSelectionBackgroundColor",
-          "returns": "Color",
+          "returns": "util_color_i",
           "desc": [
             "specifies the color to be used when drawing the background of selected cells, while the control has the focus.",
             "",
@@ -103,7 +114,7 @@
         },
         {
           "name": "ActiveSelectionTextColor",
-          "returns": "Color",
+          "returns": "util_color_i",
           "desc": [
             "specifies the color to be used when drawing the text of selected cells, while the control has the focus.",
             "",
@@ -129,7 +140,7 @@
         },
         {
           "name": "ColumnModel",
-          "returns": "XGridColumnModel",
+          "returns": "x_grid_column_model_i",
           "desc": [
             "Specifies the XGridColumnModel that is providing the column structure.",
             "",
@@ -144,7 +155,7 @@
         },
         {
           "name": "FontDescriptor",
-          "returns": "FontDescriptor",
+          "returns": "font_descriptor_i",
           "desc": [
             "specifies the font attributes of the text in the control."
           ],
@@ -171,7 +182,7 @@
         },
         {
           "name": "GridDataModel",
-          "returns": "XGridDataModel",
+          "returns": "x_grid_data_model_i",
           "desc": [
             "Specifies the XGridDataModel that is providing the hierarchical data.",
             "",
@@ -186,7 +197,7 @@
         },
         {
           "name": "GridLineColor",
-          "returns": "Color",
+          "returns": "util_color_i",
           "desc": [
             "specifies the color to be used when drawing lines between cells",
             "",
@@ -208,7 +219,7 @@
         },
         {
           "name": "HeaderBackgroundColor",
-          "returns": "Color",
+          "returns": "util_color_i",
           "desc": [
             "specifies the color to be used when drawing the background of row or column headers",
             "",
@@ -219,7 +230,7 @@
         },
         {
           "name": "HeaderTextColor",
-          "returns": "Color",
+          "returns": "util_color_i",
           "desc": [
             "specifies the color to be used when drawing the text within row or column headers",
             "",
@@ -248,7 +259,7 @@
         },
         {
           "name": "InactiveSelectionBackgroundColor",
-          "returns": "Color",
+          "returns": "util_color_i",
           "desc": [
             "specifies the color to be used when drawing the background of selected cells, while the control does not have the focus.",
             "",
@@ -259,7 +270,7 @@
         },
         {
           "name": "InactiveSelectionTextColor",
-          "returns": "Color",
+          "returns": "util_color_i",
           "desc": [
             "specifies the color to be used when drawing the text of selected cells, while the control does not have the focus.",
             "",
@@ -294,7 +305,7 @@
         },
         {
           "name": "SelectionModel",
-          "returns": "SelectionType",
+          "returns": "view_selection_type_i",
           "desc": [
             "Specifies the selection mode that is enabled for this grid control.",
             "",
@@ -336,7 +347,7 @@
         },
         {
           "name": "TextColor",
-          "returns": "Color",
+          "returns": "util_color_i",
           "desc": [
             "specifies the color to be used when drawing cell texts",
             "",
@@ -347,7 +358,7 @@
         },
         {
           "name": "TextLineColor",
-          "returns": "Color",
+          "returns": "util_color_i",
           "desc": [
             "specifies the color to be used when drawing text lines (underlining and strikethrough)",
             "",
@@ -378,7 +389,7 @@
         },
         {
           "name": "VerticalAlign",
-          "returns": "VerticalAlignment",
+          "returns": "style_vertical_alignment_i",
           "desc": [
             "specifies the vertical alignment of the content in the control."
           ],

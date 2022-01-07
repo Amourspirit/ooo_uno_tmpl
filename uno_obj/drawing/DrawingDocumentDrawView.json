@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "DrawingDocumentDrawView",
   "type": "service",
   "namespace": "com.sun.star.drawing",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,47 +16,58 @@
     "from_imports": [
       [
         "..awt.x_window",
-        "XWindow"
+        "XWindow",
+        "awt_x_window_i"
       ],
       [
         ".x_draw_view",
-        "XDrawView"
-      ],
-      [
-        "..view.x_form_layer_access",
-        "XFormLayerAccess"
-      ],
-      [
-        "..beans.x_property_set",
-        "XPropertySet"
-      ],
-      [
-        "..view.x_selection_supplier",
-        "XSelectionSupplier"
+        "XDrawView",
+        "x_draw_view_i"
       ],
       [
         "..frame.controller",
-        "Controller"
+        "Controller",
+        "frame_controller_i"
+      ],
+      [
+        "..beans.x_property_set",
+        "XPropertySet",
+        "beans_x_property_set_i"
+      ],
+      [
+        "..view.x_form_layer_access",
+        "XFormLayerAccess",
+        "view_x_form_layer_access_i"
       ]
     ],
     "from_imports_typing": [
       [
-        "..awt.rectangle",
-        "Rectangle"
+        ".x_draw_page",
+        "XDrawPage",
+        "x_draw_page_i"
       ],
       [
         "..awt.point",
-        "Point"
+        "Point",
+        "awt_point_i"
       ],
       [
-        ".x_draw_page",
-        "XDrawPage"
+        "..awt.rectangle",
+        "Rectangle",
+        "awt_rectangle_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.awt.XWindow": "awt_x_window_i",
+      "com.sun.star.drawing.XDrawView": "x_draw_view_i",
+      "com.sun.star.frame.Controller": "frame_controller_i",
+      "com.sun.star.beans.XPropertySet": "beans_x_property_set_i",
+      "com.sun.star.view.XFormLayerAccess": "view_x_form_layer_access_i"
+    },
     "quote": [
-      "XDrawPage",
-      "Point",
-      "Rectangle"
+      "awt_rectangle_i",
+      "x_draw_page_i",
+      "awt_point_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -63,12 +75,11 @@
     "imports": [],
     "namespace": "com.sun.star.drawing",
     "extends": [
-      "com.sun.star.frame.Controller",
       "com.sun.star.awt.XWindow",
-      "com.sun.star.view.XFormLayerAccess",
       "com.sun.star.drawing.XDrawView",
+      "com.sun.star.frame.Controller",
       "com.sun.star.beans.XPropertySet",
-      "com.sun.star.view.XSelectionSupplier"
+      "com.sun.star.view.XFormLayerAccess"
     ],
     "desc": [
       "This component integrates a view to a DrawPages or MasterPage from a DrawingDocument.",
@@ -82,7 +93,7 @@
       "properties": [
         {
           "name": "CurrentPage",
-          "returns": "XDrawPage",
+          "returns": "x_draw_page_i",
           "desc": [
             "This is the drawing page that is currently visible."
           ],
@@ -109,7 +120,7 @@
         },
         {
           "name": "ViewOffset",
-          "returns": "Point",
+          "returns": "awt_point_i",
           "desc": [
             "defines the offset from the top left position of the displayed page to the top left position of the view area in 100th/mm.",
             "",
@@ -122,7 +133,7 @@
         },
         {
           "name": "VisibleArea",
-          "returns": "Rectangle",
+          "returns": "awt_rectangle_i",
           "desc": [
             "This is the area that is currently visible."
           ],

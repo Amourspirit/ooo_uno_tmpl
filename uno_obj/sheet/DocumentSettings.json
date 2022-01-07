@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "DocumentSettings",
   "type": "service",
   "namespace": "com.sun.star.sheet",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,22 +15,23 @@
   "data": {
     "from_imports": [
       [
-        "..beans.x_property_set",
-        "XPropertySet"
-      ],
-      [
         "..document.settings",
-        "Settings"
+        "Settings",
+        "document_settings_i"
       ]
     ],
     "from_imports_typing": [
       [
         "..util.color",
-        "Color"
+        "Color",
+        "util_color_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.document.Settings": "document_settings_i"
+    },
     "quote": [
-      "Color"
+      "util_color_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -37,8 +39,7 @@
     "imports": [],
     "namespace": "com.sun.star.sheet",
     "extends": [
-      "com.sun.star.document.Settings",
-      "com.sun.star.beans.XPropertySet"
+      "com.sun.star.document.Settings"
     ],
     "desc": [
       "describes properties that apply to the whole spreadsheet document.",
@@ -50,7 +51,7 @@
       "properties": [
         {
           "name": "GridColor",
-          "returns": "Color",
+          "returns": "util_color_i",
           "desc": [
             "specifies the color in which the cell grid is displayed."
           ],

@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "CopyImporter",
   "type": "service",
   "namespace": "com.sun.star.configuration.backend",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,14 +16,14 @@
     "from_imports": [
       [
         ".importer",
-        "Importer"
-      ],
-      [
-        "...lang.x_initialization",
-        "XInitialization"
+        "Importer",
+        "importer_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.configuration.backend.Importer": "importer_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -30,8 +31,7 @@
     "imports": [],
     "namespace": "com.sun.star.configuration.backend",
     "extends": [
-      "com.sun.star.configuration.backend.Importer",
-      "com.sun.star.lang.XInitialization"
+      "com.sun.star.configuration.backend.Importer"
     ],
     "desc": [
       "imports data into a configuration layer by copying over existing data.",

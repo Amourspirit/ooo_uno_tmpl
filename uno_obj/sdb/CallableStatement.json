@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "CallableStatement",
   "type": "service",
   "namespace": "com.sun.star.sdb",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,14 +16,20 @@
     "from_imports": [
       [
         "..sdbc.callable_statement",
-        "CallableStatement"
+        "CallableStatement",
+        "sdbc_callable_statement_i"
       ],
       [
         ".prepared_statement",
-        "PreparedStatement"
+        "PreparedStatement",
+        "prepared_statement_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.sdbc.CallableStatement": "sdbc_callable_statement_i",
+      "com.sun.star.sdb.PreparedStatement": "prepared_statement_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,

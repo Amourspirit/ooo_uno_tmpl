@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "PageFootnoteInfo",
   "type": "service",
   "namespace": "com.sun.star.text",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -16,11 +17,13 @@
     "from_imports_typing": [
       [
         ".horizontal_adjust",
-        "HorizontalAdjust"
+        "HorizontalAdjust",
+        "horizontal_adjust_i"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "HorizontalAdjust"
+      "horizontal_adjust_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -56,7 +59,7 @@
         },
         {
           "name": "FootnoteSeparatorLineAdjust",
-          "returns": "HorizontalAdjust",
+          "returns": "horizontal_adjust_i",
           "desc": [
             "contains the adjustment of the footnote separator line."
           ],

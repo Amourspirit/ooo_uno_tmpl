@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "ChartGrid",
   "type": "service",
   "namespace": "com.sun.star.chart",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,18 +16,26 @@
     "from_imports": [
       [
         "..drawing.line_properties",
-        "LineProperties"
+        "LineProperties",
+        "drawing_line_properties_i"
       ],
       [
         "..beans.x_property_set",
-        "XPropertySet"
+        "XPropertySet",
+        "beans_x_property_set_i"
       ],
       [
         "..xml.user_defined_attributes_supplier",
-        "UserDefinedAttributesSupplier"
+        "UserDefinedAttributesSupplier",
+        "xml_user_defined_attributes_supplier_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.drawing.LineProperties": "drawing_line_properties_i",
+      "com.sun.star.beans.XPropertySet": "beans_x_property_set_i",
+      "com.sun.star.xml.UserDefinedAttributesSupplier": "xml_user_defined_attributes_supplier_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -35,8 +44,8 @@
     "namespace": "com.sun.star.chart",
     "extends": [
       "com.sun.star.drawing.LineProperties",
-      "com.sun.star.xml.UserDefinedAttributesSupplier",
-      "com.sun.star.beans.XPropertySet"
+      "com.sun.star.beans.XPropertySet",
+      "com.sun.star.xml.UserDefinedAttributesSupplier"
     ],
     "desc": [
       "specifies the grid of the diagram in a chart.",

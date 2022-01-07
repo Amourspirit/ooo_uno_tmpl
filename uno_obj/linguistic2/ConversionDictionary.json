@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "ConversionDictionary",
   "type": "service",
   "namespace": "com.sun.star.linguistic2",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,19 +15,27 @@
   "data": {
     "from_imports": [
       [
+        ".x_conversion_dictionary",
+        "XConversionDictionary",
+        "x_conversion_dictionary_i"
+      ],
+      [
         "..util.x_flushable",
-        "XFlushable"
+        "XFlushable",
+        "util_x_flushable_i"
       ],
       [
         ".x_conversion_property_type",
-        "XConversionPropertyType"
-      ],
-      [
-        ".x_conversion_dictionary",
-        "XConversionDictionary"
+        "XConversionPropertyType",
+        "x_conversion_property_type_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.linguistic2.XConversionDictionary": "x_conversion_dictionary_i",
+      "com.sun.star.util.XFlushable": "util_x_flushable_i",
+      "com.sun.star.linguistic2.XConversionPropertyType": "x_conversion_property_type_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,

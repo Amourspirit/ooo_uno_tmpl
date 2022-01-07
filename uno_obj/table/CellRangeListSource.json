@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "CellRangeListSource",
   "type": "service",
   "namespace": "com.sun.star.table",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,21 +16,28 @@
     "from_imports": [
       [
         "..form.binding.list_entry_source",
-        "ListEntrySource"
+        "ListEntrySource",
+        "form_binding_list_entry_source_i"
       ],
       [
         "..lang.x_initialization",
-        "XInitialization"
+        "XInitialization",
+        "lang_x_initialization_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".cell_range_address",
-        "CellRangeAddress"
+        "CellRangeAddress",
+        "cell_range_address_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.form.binding.ListEntrySource": "form_binding_list_entry_source_i",
+      "com.sun.star.lang.XInitialization": "lang_x_initialization_i"
+    },
     "quote": [
-      "CellRangeAddress"
+      "cell_range_address_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -50,7 +58,7 @@
       "properties": [
         {
           "name": "CellRange",
-          "returns": "CellRangeAddress",
+          "returns": "cell_range_address_i",
           "desc": [
             "specifies the cell range within a document to which the component is bound."
           ],

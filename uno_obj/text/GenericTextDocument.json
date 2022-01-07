@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "GenericTextDocument",
   "type": "service",
   "namespace": "com.sun.star.text",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,110 +15,161 @@
   "data": {
     "from_imports": [
       [
-        ".x_text_fields_supplier",
-        "XTextFieldsSupplier"
-      ],
-      [
-        "..style.x_style_families_supplier",
-        "XStyleFamiliesSupplier"
-      ],
-      [
-        ".x_page_printable",
-        "XPagePrintable"
-      ],
-      [
-        ".x_reference_marks_supplier",
-        "XReferenceMarksSupplier"
-      ],
-      [
-        ".x_endnotes_supplier",
-        "XEndnotesSupplier"
-      ],
-      [
-        ".x_text_embedded_objects_supplier",
-        "XTextEmbeddedObjectsSupplier"
-      ],
-      [
-        "..beans.x_property_set",
-        "XPropertySet"
-      ],
-      [
-        ".x_text_tables_supplier",
-        "XTextTablesSupplier"
-      ],
-      [
-        ".x_text_frames_supplier",
-        "XTextFramesSupplier"
-      ],
-      [
         ".x_bookmarks_supplier",
-        "XBookmarksSupplier"
-      ],
-      [
-        ".x_footnotes_supplier",
-        "XFootnotesSupplier"
-      ],
-      [
-        ".x_text_document",
-        "XTextDocument"
-      ],
-      [
-        "..document.office_document",
-        "OfficeDocument"
-      ],
-      [
-        ".x_text_sections_supplier",
-        "XTextSectionsSupplier"
-      ],
-      [
-        ".x_chapter_numbering_supplier",
-        "XChapterNumberingSupplier"
-      ],
-      [
-        "..tiledrendering.x_tiled_renderable",
-        "XTiledRenderable"
+        "XBookmarksSupplier",
+        "x_bookmarks_supplier_i"
       ],
       [
         "..util.x_searchable",
-        "XSearchable"
+        "XSearchable",
+        "util_x_searchable_i"
       ],
       [
-        ".web_document",
-        "WebDocument"
+        "..document.office_document",
+        "OfficeDocument",
+        "document_office_document_i"
+      ],
+      [
+        ".x_endnotes_supplier",
+        "XEndnotesSupplier",
+        "x_endnotes_supplier_i"
+      ],
+      [
+        ".x_text_embedded_objects_supplier",
+        "XTextEmbeddedObjectsSupplier",
+        "x_text_embedded_objects_supplier_i"
+      ],
+      [
+        ".x_text_document",
+        "XTextDocument",
+        "x_text_document_i"
+      ],
+      [
+        "..beans.x_property_set",
+        "XPropertySet",
+        "beans_x_property_set_i"
+      ],
+      [
+        ".x_reference_marks_supplier",
+        "XReferenceMarksSupplier",
+        "x_reference_marks_supplier_i"
+      ],
+      [
+        ".x_text_tables_supplier",
+        "XTextTablesSupplier",
+        "x_text_tables_supplier_i"
+      ],
+      [
+        ".x_text_fields_supplier",
+        "XTextFieldsSupplier",
+        "x_text_fields_supplier_i"
+      ],
+      [
+        ".x_page_printable",
+        "XPagePrintable",
+        "x_page_printable_i"
       ],
       [
         "..lang.x_multi_service_factory",
-        "XMultiServiceFactory"
+        "XMultiServiceFactory",
+        "lang_x_multi_service_factory_i"
       ],
       [
-        ".x_document_indexes_supplier",
-        "XDocumentIndexesSupplier"
+        ".x_text_frames_supplier",
+        "XTextFramesSupplier",
+        "x_text_frames_supplier_i"
       ],
       [
-        "..util.x_number_formats_supplier",
-        "XNumberFormatsSupplier"
-      ],
-      [
-        "..util.x_refreshable",
-        "XRefreshable"
+        ".web_document",
+        "WebDocument",
+        "web_document_i"
       ],
       [
         "..util.x_replaceable",
-        "XReplaceable"
+        "XReplaceable",
+        "util_x_replaceable_i"
+      ],
+      [
+        "..tiledrendering.x_tiled_renderable",
+        "XTiledRenderable",
+        "tiledrendering_x_tiled_renderable_i"
+      ],
+      [
+        "..style.x_style_families_supplier",
+        "XStyleFamiliesSupplier",
+        "style_x_style_families_supplier_i"
+      ],
+      [
+        ".x_chapter_numbering_supplier",
+        "XChapterNumberingSupplier",
+        "x_chapter_numbering_supplier_i"
+      ],
+      [
+        "..util.x_refreshable",
+        "XRefreshable",
+        "util_x_refreshable_i"
+      ],
+      [
+        ".x_document_indexes_supplier",
+        "XDocumentIndexesSupplier",
+        "x_document_indexes_supplier_i"
+      ],
+      [
+        ".x_text_sections_supplier",
+        "XTextSectionsSupplier",
+        "x_text_sections_supplier_i"
       ],
       [
         ".x_text_graphic_objects_supplier",
-        "XTextGraphicObjectsSupplier"
+        "XTextGraphicObjectsSupplier",
+        "x_text_graphic_objects_supplier_i"
+      ],
+      [
+        "..util.x_number_formats_supplier",
+        "XNumberFormatsSupplier",
+        "util_x_number_formats_supplier_i"
+      ],
+      [
+        ".x_footnotes_supplier",
+        "XFootnotesSupplier",
+        "x_footnotes_supplier_i"
       ]
     ],
     "from_imports_typing": [
       [
         "..lang.locale",
-        "Locale"
+        "Locale",
+        "lang_locale_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.text.XBookmarksSupplier": "x_bookmarks_supplier_i",
+      "com.sun.star.util.XSearchable": "util_x_searchable_i",
+      "com.sun.star.document.OfficeDocument": "document_office_document_i",
+      "com.sun.star.text.XEndnotesSupplier": "x_endnotes_supplier_i",
+      "com.sun.star.text.XTextEmbeddedObjectsSupplier": "x_text_embedded_objects_supplier_i",
+      "com.sun.star.text.XTextDocument": "x_text_document_i",
+      "com.sun.star.beans.XPropertySet": "beans_x_property_set_i",
+      "com.sun.star.text.XReferenceMarksSupplier": "x_reference_marks_supplier_i",
+      "com.sun.star.text.XTextTablesSupplier": "x_text_tables_supplier_i",
+      "com.sun.star.text.XTextFieldsSupplier": "x_text_fields_supplier_i",
+      "com.sun.star.text.XPagePrintable": "x_page_printable_i",
+      "com.sun.star.lang.XMultiServiceFactory": "lang_x_multi_service_factory_i",
+      "com.sun.star.text.XTextFramesSupplier": "x_text_frames_supplier_i",
+      "com.sun.star.text.WebDocument": "web_document_i",
+      "com.sun.star.util.XReplaceable": "util_x_replaceable_i",
+      "com.sun.star.tiledrendering.XTiledRenderable": "tiledrendering_x_tiled_renderable_i",
+      "com.sun.star.style.XStyleFamiliesSupplier": "style_x_style_families_supplier_i",
+      "com.sun.star.text.XChapterNumberingSupplier": "x_chapter_numbering_supplier_i",
+      "com.sun.star.util.XRefreshable": "util_x_refreshable_i",
+      "com.sun.star.text.XDocumentIndexesSupplier": "x_document_indexes_supplier_i",
+      "com.sun.star.text.XTextSectionsSupplier": "x_text_sections_supplier_i",
+      "com.sun.star.text.XTextGraphicObjectsSupplier": "x_text_graphic_objects_supplier_i",
+      "com.sun.star.util.XNumberFormatsSupplier": "util_x_number_formats_supplier_i",
+      "com.sun.star.text.XFootnotesSupplier": "x_footnotes_supplier_i"
+    },
     "quote": [
-      "Locale"
+      "lang_locale_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -125,30 +177,30 @@
     "imports": [],
     "namespace": "com.sun.star.text",
     "extends": [
-      "com.sun.star.util.XNumberFormatsSupplier",
-      "com.sun.star.text.XTextSectionsSupplier",
-      "com.sun.star.text.XTextFramesSupplier",
-      "com.sun.star.text.XTextFieldsSupplier",
-      "com.sun.star.text.XDocumentIndexesSupplier",
       "com.sun.star.text.XBookmarksSupplier",
-      "com.sun.star.style.XStyleFamiliesSupplier",
-      "com.sun.star.text.XTextTablesSupplier",
-      "com.sun.star.text.XTextEmbeddedObjectsSupplier",
-      "com.sun.star.text.XTextGraphicObjectsSupplier",
-      "com.sun.star.beans.XPropertySet",
-      "com.sun.star.text.XChapterNumberingSupplier",
-      "com.sun.star.text.XReferenceMarksSupplier",
-      "com.sun.star.text.XPagePrintable",
-      "com.sun.star.util.XReplaceable",
-      "com.sun.star.text.XEndnotesSupplier",
-      "com.sun.star.text.XFootnotesSupplier",
-      "com.sun.star.tiledrendering.XTiledRenderable",
-      "com.sun.star.util.XRefreshable",
       "com.sun.star.util.XSearchable",
-      "com.sun.star.text.XTextDocument",
-      "com.sun.star.lang.XMultiServiceFactory",
       "com.sun.star.document.OfficeDocument",
-      "com.sun.star.text.WebDocument"
+      "com.sun.star.text.XEndnotesSupplier",
+      "com.sun.star.text.XTextEmbeddedObjectsSupplier",
+      "com.sun.star.text.XTextDocument",
+      "com.sun.star.beans.XPropertySet",
+      "com.sun.star.text.XReferenceMarksSupplier",
+      "com.sun.star.text.XTextTablesSupplier",
+      "com.sun.star.text.XTextFieldsSupplier",
+      "com.sun.star.text.XPagePrintable",
+      "com.sun.star.lang.XMultiServiceFactory",
+      "com.sun.star.text.XTextFramesSupplier",
+      "com.sun.star.text.WebDocument",
+      "com.sun.star.util.XReplaceable",
+      "com.sun.star.tiledrendering.XTiledRenderable",
+      "com.sun.star.style.XStyleFamiliesSupplier",
+      "com.sun.star.text.XChapterNumberingSupplier",
+      "com.sun.star.util.XRefreshable",
+      "com.sun.star.text.XDocumentIndexesSupplier",
+      "com.sun.star.text.XTextSectionsSupplier",
+      "com.sun.star.text.XTextGraphicObjectsSupplier",
+      "com.sun.star.util.XNumberFormatsSupplier",
+      "com.sun.star.text.XFootnotesSupplier"
     ],
     "desc": [
       "A text document is a model component which contains text structured by paragraphs.",
@@ -168,7 +220,7 @@
       "properties": [
         {
           "name": "CharLocale",
-          "returns": "Locale",
+          "returns": "lang_locale_i",
           "desc": [
             "contains the identifier of the default locale of the document."
           ],

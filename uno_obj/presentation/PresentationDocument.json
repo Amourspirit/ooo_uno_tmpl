@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "PresentationDocument",
   "type": "service",
   "namespace": "com.sun.star.presentation",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,23 +15,33 @@
   "data": {
     "from_imports": [
       [
-        ".x_custom_presentation_supplier",
-        "XCustomPresentationSupplier"
+        "..drawing.generic_drawing_document",
+        "GenericDrawingDocument",
+        "drawing_generic_drawing_document_i"
       ],
       [
         ".x_presentation_supplier",
-        "XPresentationSupplier"
+        "XPresentationSupplier",
+        "x_presentation_supplier_i"
       ],
       [
-        "..drawing.generic_drawing_document",
-        "GenericDrawingDocument"
+        ".x_custom_presentation_supplier",
+        "XCustomPresentationSupplier",
+        "x_custom_presentation_supplier_i"
       ],
       [
         "..document.x_link_target_supplier",
-        "XLinkTargetSupplier"
+        "XLinkTargetSupplier",
+        "document_x_link_target_supplier_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.drawing.GenericDrawingDocument": "drawing_generic_drawing_document_i",
+      "com.sun.star.presentation.XPresentationSupplier": "x_presentation_supplier_i",
+      "com.sun.star.presentation.XCustomPresentationSupplier": "x_custom_presentation_supplier_i",
+      "com.sun.star.document.XLinkTargetSupplier": "document_x_link_target_supplier_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,

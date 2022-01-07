@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "OutlineView",
   "type": "service",
   "namespace": "com.sun.star.presentation",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,25 +16,34 @@
     "from_imports": [
       [
         "..beans.x_property_set",
-        "XPropertySet"
+        "XPropertySet",
+        "beans_x_property_set_i"
       ],
       [
         "..awt.x_window",
-        "XWindow"
+        "XWindow",
+        "awt_x_window_i"
       ],
       [
         "..frame.controller",
-        "Controller"
+        "Controller",
+        "frame_controller_i"
       ]
     ],
     "from_imports_typing": [
       [
         "..awt.rectangle",
-        "Rectangle"
+        "Rectangle",
+        "awt_rectangle_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.beans.XPropertySet": "beans_x_property_set_i",
+      "com.sun.star.awt.XWindow": "awt_x_window_i",
+      "com.sun.star.frame.Controller": "frame_controller_i"
+    },
     "quote": [
-      "Rectangle"
+      "awt_rectangle_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -41,9 +51,9 @@
     "imports": [],
     "namespace": "com.sun.star.presentation",
     "extends": [
-      "com.sun.star.frame.Controller",
+      "com.sun.star.beans.XPropertySet",
       "com.sun.star.awt.XWindow",
-      "com.sun.star.beans.XPropertySet"
+      "com.sun.star.frame.Controller"
     ],
     "desc": [
       "This component integrates an outline view to a presentation document into the desktop.",
@@ -59,7 +69,7 @@
       "properties": [
         {
           "name": "VisibleArea",
-          "returns": "Rectangle",
+          "returns": "awt_rectangle_i",
           "desc": [
             "This is the area that is currently visible."
           ],

@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "Dictionary",
   "type": "service",
   "namespace": "com.sun.star.linguistic2",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,19 +15,21 @@
   "data": {
     "from_imports": [
       [
-        ".x_dictionary",
-        "XDictionary"
+        ".x_searchable_dictionary",
+        "XSearchableDictionary",
+        "x_searchable_dictionary_i"
       ],
       [
         "..frame.x_storable",
-        "XStorable"
-      ],
-      [
-        ".x_searchable_dictionary",
-        "XSearchableDictionary"
+        "XStorable",
+        "frame_x_storable_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.linguistic2.XSearchableDictionary": "x_searchable_dictionary_i",
+      "com.sun.star.frame.XStorable": "frame_x_storable_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -34,7 +37,6 @@
     "imports": [],
     "namespace": "com.sun.star.linguistic2",
     "extends": [
-      "com.sun.star.linguistic2.XDictionary",
       "com.sun.star.linguistic2.XSearchableDictionary",
       "com.sun.star.frame.XStorable"
     ],

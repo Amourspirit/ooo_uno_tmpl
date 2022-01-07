@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "LayerManager",
   "type": "service",
   "namespace": "com.sun.star.drawing",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,14 +16,20 @@
     "from_imports": [
       [
         "..container.x_name_access",
-        "XNameAccess"
+        "XNameAccess",
+        "container_x_name_access_i"
       ],
       [
         ".x_layer_manager",
-        "XLayerManager"
+        "XLayerManager",
+        "x_layer_manager_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.container.XNameAccess": "container_x_name_access_i",
+      "com.sun.star.drawing.XLayerManager": "x_layer_manager_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -30,8 +37,8 @@
     "imports": [],
     "namespace": "com.sun.star.drawing",
     "extends": [
-      "com.sun.star.drawing.XLayerManager",
-      "com.sun.star.container.XNameAccess"
+      "com.sun.star.container.XNameAccess",
+      "com.sun.star.drawing.XLayerManager"
     ],
     "desc": [
       "This service is provided by documents to support Layers."

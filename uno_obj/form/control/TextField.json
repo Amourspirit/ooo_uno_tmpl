@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "TextField",
   "type": "service",
   "namespace": "com.sun.star.form.control",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,19 +15,27 @@
   "data": {
     "from_imports": [
       [
-        "..x_change_broadcaster",
-        "XChangeBroadcaster"
-      ],
-      [
         "...awt.uno_control_edit",
-        "UnoControlEdit"
+        "UnoControlEdit",
+        "awt_uno_control_edit_i"
       ],
       [
         "..x_bound_control",
-        "XBoundControl"
+        "XBoundControl",
+        "x_bound_control_i"
+      ],
+      [
+        "..x_change_broadcaster",
+        "XChangeBroadcaster",
+        "x_change_broadcaster_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.awt.UnoControlEdit": "awt_uno_control_edit_i",
+      "com.sun.star.form.XBoundControl": "x_bound_control_i",
+      "com.sun.star.form.XChangeBroadcaster": "x_change_broadcaster_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,

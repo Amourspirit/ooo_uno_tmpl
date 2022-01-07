@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "CallableStatement",
   "type": "service",
   "namespace": "com.sun.star.sdbc",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,19 +15,27 @@
   "data": {
     "from_imports": [
       [
-        ".prepared_statement",
-        "PreparedStatement"
-      ],
-      [
         ".x_row",
-        "XRow"
+        "XRow",
+        "x_row_i"
       ],
       [
         ".x_out_parameters",
-        "XOutParameters"
+        "XOutParameters",
+        "x_out_parameters_i"
+      ],
+      [
+        ".prepared_statement",
+        "PreparedStatement",
+        "prepared_statement_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.sdbc.XRow": "x_row_i",
+      "com.sun.star.sdbc.XOutParameters": "x_out_parameters_i",
+      "com.sun.star.sdbc.PreparedStatement": "prepared_statement_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -34,9 +43,9 @@
     "imports": [],
     "namespace": "com.sun.star.sdbc",
     "extends": [
-      "com.sun.star.sdbc.PreparedStatement",
       "com.sun.star.sdbc.XRow",
-      "com.sun.star.sdbc.XOutParameters"
+      "com.sun.star.sdbc.XOutParameters",
+      "com.sun.star.sdbc.PreparedStatement"
     ],
     "desc": [
       "is used to execute SQL stored procedures.",

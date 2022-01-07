@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "GroupAccess",
   "type": "service",
   "namespace": "com.sun.star.configuration",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,23 +15,21 @@
   "data": {
     "from_imports": [
       [
-        "..beans.x_multi_property_states",
-        "XMultiPropertyStates"
+        ".property_hierarchy",
+        "PropertyHierarchy",
+        "property_hierarchy_i"
       ],
       [
         ".hierarchy_access",
-        "HierarchyAccess"
-      ],
-      [
-        ".property_hierarchy",
-        "PropertyHierarchy"
-      ],
-      [
-        "..beans.x_property_state",
-        "XPropertyState"
+        "HierarchyAccess",
+        "hierarchy_access_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.configuration.PropertyHierarchy": "property_hierarchy_i",
+      "com.sun.star.configuration.HierarchyAccess": "hierarchy_access_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -38,10 +37,8 @@
     "imports": [],
     "namespace": "com.sun.star.configuration",
     "extends": [
-      "com.sun.star.configuration.HierarchyAccess",
       "com.sun.star.configuration.PropertyHierarchy",
-      "com.sun.star.beans.XPropertyState",
-      "com.sun.star.beans.XMultiPropertyStates"
+      "com.sun.star.configuration.HierarchyAccess"
     ],
     "desc": [
       "provides access to a predefined heterogeneous group of values and nested trees as part of a hierarchy.",

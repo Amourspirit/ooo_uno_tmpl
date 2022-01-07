@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "LineDiagram",
   "type": "service",
   "namespace": "com.sun.star.chart",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,47 +15,65 @@
   "data": {
     "from_imports": [
       [
-        ".chart_axis_x_supplier",
-        "ChartAxisXSupplier"
-      ],
-      [
-        ".dim3_d_diagram",
-        "Dim3DDiagram"
-      ],
-      [
-        ".stackable_diagram",
-        "StackableDiagram"
-      ],
-      [
-        ".chart_statistics",
-        "ChartStatistics"
-      ],
-      [
-        ".diagram",
-        "Diagram"
-      ],
-      [
         ".chart_axis_z_supplier",
-        "ChartAxisZSupplier"
+        "ChartAxisZSupplier",
+        "chart_axis_z_supplier_i"
       ],
       [
         ".chart_two_axis_y_supplier",
-        "ChartTwoAxisYSupplier"
+        "ChartTwoAxisYSupplier",
+        "chart_two_axis_y_supplier_i"
+      ],
+      [
+        ".dim3_d_diagram",
+        "Dim3DDiagram",
+        "dim3_d_diagram_i"
+      ],
+      [
+        ".stackable_diagram",
+        "StackableDiagram",
+        "stackable_diagram_i"
+      ],
+      [
+        ".chart_axis_x_supplier",
+        "ChartAxisXSupplier",
+        "chart_axis_x_supplier_i"
+      ],
+      [
+        ".chart_statistics",
+        "ChartStatistics",
+        "chart_statistics_i"
+      ],
+      [
+        ".diagram",
+        "Diagram",
+        "diagram_i"
       ]
     ],
     "from_imports_typing": [
       [
         "..awt.size",
-        "Size"
+        "Size",
+        "awt_size_i"
       ],
       [
         "..graphic.x_graphic",
-        "XGraphic"
+        "XGraphic",
+        "graphic_x_graphic_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.chart.ChartAxisZSupplier": "chart_axis_z_supplier_i",
+      "com.sun.star.chart.ChartTwoAxisYSupplier": "chart_two_axis_y_supplier_i",
+      "com.sun.star.chart.Dim3DDiagram": "dim3_d_diagram_i",
+      "com.sun.star.chart.StackableDiagram": "stackable_diagram_i",
+      "com.sun.star.chart.ChartAxisXSupplier": "chart_axis_x_supplier_i",
+      "com.sun.star.chart.ChartStatistics": "chart_statistics_i",
+      "com.sun.star.chart.Diagram": "diagram_i"
+    },
     "quote": [
-      "Size",
-      "XGraphic"
+      "awt_size_i",
+      "graphic_x_graphic_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -62,13 +81,13 @@
     "imports": [],
     "namespace": "com.sun.star.chart",
     "extends": [
-      "com.sun.star.chart.Diagram",
-      "com.sun.star.chart.ChartStatistics",
-      "com.sun.star.chart.ChartAxisXSupplier",
       "com.sun.star.chart.ChartTwoAxisYSupplier",
       "com.sun.star.chart.ChartAxisZSupplier",
       "com.sun.star.chart.Dim3DDiagram",
-      "com.sun.star.chart.StackableDiagram"
+      "com.sun.star.chart.StackableDiagram",
+      "com.sun.star.chart.ChartAxisXSupplier",
+      "com.sun.star.chart.ChartStatistics",
+      "com.sun.star.chart.Diagram"
     ],
     "desc": [
       "specifies line, spline and symbol diagrams.",
@@ -122,7 +141,7 @@
         },
         {
           "name": "SymbolBitmap",
-          "returns": "XGraphic",
+          "returns": "graphic_x_graphic_i",
           "desc": [
             "Set this property to a graphic object which is then used as symbol for all series.",
             "",
@@ -148,7 +167,7 @@
         },
         {
           "name": "SymbolSize",
-          "returns": "Size",
+          "returns": "awt_size_i",
           "desc": [
             "specifies the size of symbols in 1/100th of a millimeter."
           ],

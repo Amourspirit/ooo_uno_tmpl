@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "MailMessage",
   "type": "service",
   "namespace": "com.sun.star.mail",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,22 +16,28 @@
     "from_imports": [
       [
         ".x_mail_message",
-        "XMailMessage"
+        "XMailMessage",
+        "x_mail_message_i"
       ]
     ],
     "from_imports_typing": [
       [
-        ".mail_attachment",
-        "MailAttachment"
+        "..datatransfer.x_transferable",
+        "XTransferable",
+        "datatransfer_x_transferable_i"
       ],
       [
-        "..datatransfer.x_transferable",
-        "XTransferable"
+        ".mail_attachment",
+        "MailAttachment",
+        "mail_attachment_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.mail.XMailMessage": "x_mail_message_i"
+    },
     "quote": [
-      "XTransferable",
-      "MailAttachment"
+      "mail_attachment_i",
+      "datatransfer_x_transferable_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -74,7 +81,7 @@
             ],
             [
               "xBody",
-              "XTransferable",
+              "datatransfer_x_transferable_i",
               "in"
             ]
           ]
@@ -104,12 +111,12 @@
             ],
             [
               "xBody",
-              "XTransferable",
+              "datatransfer_x_transferable_i",
               "in"
             ],
             [
               "aMailAttachment",
-              "MailAttachment",
+              "mail_attachment_i",
               "in"
             ]
           ]

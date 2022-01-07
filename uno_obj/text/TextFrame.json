@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "TextFrame",
   "type": "service",
   "namespace": "com.sun.star.text",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,27 +15,35 @@
   "data": {
     "from_imports": [
       [
-        ".x_text_frame",
-        "XTextFrame"
+        ".base_frame",
+        "BaseFrame",
+        "base_frame_i"
       ],
       [
-        ".base_frame",
-        "BaseFrame"
+        ".x_text_frame",
+        "XTextFrame",
+        "x_text_frame_i"
       ]
     ],
     "from_imports_typing": [
       [
         "..drawing.text_vertical_adjust",
-        "TextVerticalAdjust"
+        "TextVerticalAdjust",
+        "drawing_text_vertical_adjust_i"
       ],
       [
         ".x_text",
-        "XText"
+        "XText",
+        "x_text_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.text.BaseFrame": "base_frame_i",
+      "com.sun.star.text.XTextFrame": "x_text_frame_i"
+    },
     "quote": [
-      "XText",
-      "TextVerticalAdjust"
+      "x_text_i",
+      "drawing_text_vertical_adjust_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -134,7 +143,7 @@
         },
         {
           "name": "ParentText",
-          "returns": "XText",
+          "returns": "x_text_i",
           "desc": [
             "Parent text of this text frame.",
             "",
@@ -158,7 +167,7 @@
         },
         {
           "name": "TextVerticalAdjust",
-          "returns": "TextVerticalAdjust",
+          "returns": "drawing_text_vertical_adjust_i",
           "desc": [
             "adjusts the vertical position of the text inside of the frame.",
             "",

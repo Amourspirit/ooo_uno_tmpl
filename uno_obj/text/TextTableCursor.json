@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "TextTableCursor",
   "type": "service",
   "namespace": "com.sun.star.text",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,34 +16,50 @@
     "from_imports": [
       [
         ".x_text_table_cursor",
-        "XTextTableCursor"
-      ],
-      [
-        "..beans.x_property_set",
-        "XPropertySet"
-      ],
-      [
-        "..style.character_properties_complex",
-        "CharacterPropertiesComplex"
-      ],
-      [
-        "..xml.user_defined_attributes_supplier",
-        "UserDefinedAttributesSupplier"
-      ],
-      [
-        "..style.character_properties_asian",
-        "CharacterPropertiesAsian"
+        "XTextTableCursor",
+        "x_text_table_cursor_i"
       ],
       [
         "..style.paragraph_properties",
-        "ParagraphProperties"
+        "ParagraphProperties",
+        "style_paragraph_properties_i"
+      ],
+      [
+        "..xml.user_defined_attributes_supplier",
+        "UserDefinedAttributesSupplier",
+        "xml_user_defined_attributes_supplier_i"
+      ],
+      [
+        "..beans.x_property_set",
+        "XPropertySet",
+        "beans_x_property_set_i"
+      ],
+      [
+        "..style.character_properties_asian",
+        "CharacterPropertiesAsian",
+        "style_character_properties_asian_i"
+      ],
+      [
+        "..style.character_properties_complex",
+        "CharacterPropertiesComplex",
+        "style_character_properties_complex_i"
       ],
       [
         "..style.character_properties",
-        "CharacterProperties"
+        "CharacterProperties",
+        "style_character_properties_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.text.XTextTableCursor": "x_text_table_cursor_i",
+      "com.sun.star.style.ParagraphProperties": "style_paragraph_properties_i",
+      "com.sun.star.xml.UserDefinedAttributesSupplier": "xml_user_defined_attributes_supplier_i",
+      "com.sun.star.beans.XPropertySet": "beans_x_property_set_i",
+      "com.sun.star.style.CharacterPropertiesAsian": "style_character_properties_asian_i",
+      "com.sun.star.style.CharacterPropertiesComplex": "style_character_properties_complex_i",
+      "com.sun.star.style.CharacterProperties": "style_character_properties_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -51,12 +68,12 @@
     "namespace": "com.sun.star.text",
     "extends": [
       "com.sun.star.text.XTextTableCursor",
+      "com.sun.star.style.ParagraphProperties",
+      "com.sun.star.xml.UserDefinedAttributesSupplier",
       "com.sun.star.beans.XPropertySet",
-      "com.sun.star.style.CharacterProperties",
       "com.sun.star.style.CharacterPropertiesAsian",
       "com.sun.star.style.CharacterPropertiesComplex",
-      "com.sun.star.style.ParagraphProperties",
-      "com.sun.star.xml.UserDefinedAttributesSupplier"
+      "com.sun.star.style.CharacterProperties"
     ],
     "desc": [
       "specifies a cursor in text tables.",

@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "CharacterProperties",
   "type": "service",
   "namespace": "com.sun.star.style",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,47 +16,55 @@
     "from_imports": [],
     "from_imports_typing": [
       [
-        "..table.shadow_format",
-        "ShadowFormat"
-      ],
-      [
-        "..awt.font_slant",
-        "FontSlant"
-      ],
-      [
-        "..lang.locale",
-        "Locale"
-      ],
-      [
-        "..container.x_name_container",
-        "XNameContainer"
-      ],
-      [
-        "..beans.property_value",
-        "PropertyValue"
-      ],
-      [
         "..util.color",
-        "Color"
+        "Color",
+        "util_color_i"
       ],
       [
         "..table.border_line2",
-        "BorderLine2"
+        "BorderLine2",
+        "table_border_line2_i"
+      ],
+      [
+        "..table.shadow_format",
+        "ShadowFormat",
+        "table_shadow_format_i"
+      ],
+      [
+        "..awt.font_slant",
+        "FontSlant",
+        "awt_font_slant_i"
+      ],
+      [
+        "..lang.locale",
+        "Locale",
+        "lang_locale_i"
+      ],
+      [
+        "..container.x_name_container",
+        "XNameContainer",
+        "container_x_name_container_i"
+      ],
+      [
+        "..beans.property_value",
+        "PropertyValue",
+        "beans_property_value_i"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "Color",
-      "typing.List[PropertyValue]",
-      "FontSlant",
-      "XNameContainer",
+      "table_border_line2_i",
       "typing.List[str]",
-      "Locale",
-      "ShadowFormat",
-      "BorderLine2"
+      "typing.List[beans_property_value_i]",
+      "table_shadow_format_i",
+      "container_x_name_container_i",
+      "util_color_i",
+      "awt_font_slant_i",
+      "lang_locale_i"
     ],
     "typings": [
       "typing.List[str]",
-      "typing.List[PropertyValue]"
+      "typing.List[beans_property_value_i]"
     ],
     "requires_typing": true,
     "name": "CharacterProperties",
@@ -74,7 +83,7 @@
       "types": [
         {
           "name": "CharInteropGrabBag",
-          "returns": "typing.List[PropertyValue]",
+          "returns": "typing.List[beans_property_value_i]",
           "desc": [
             "Grab bag of character properties, used as a string-any map for interim interop purposes.",
             "",
@@ -117,7 +126,7 @@
         },
         {
           "name": "CharBackColor",
-          "returns": "Color",
+          "returns": "util_color_i",
           "desc": [
             "This optional property contains the text background color."
           ],
@@ -148,7 +157,7 @@
         },
         {
           "name": "CharBottomBorder",
-          "returns": "BorderLine2",
+          "returns": "table_border_line2_i",
           "desc": [
             "This property contains the bottom border of the object.",
             "",
@@ -183,7 +192,7 @@
         },
         {
           "name": "CharColor",
-          "returns": "Color",
+          "returns": "util_color_i",
           "desc": [
             "This property contains the value of the text color."
           ],
@@ -363,7 +372,7 @@
         },
         {
           "name": "CharHighlight",
-          "returns": "Color",
+          "returns": "util_color_i",
           "desc": [
             "Determines the color of the highlight.",
             "",
@@ -396,7 +405,7 @@
         },
         {
           "name": "CharLeftBorder",
-          "returns": "BorderLine2",
+          "returns": "table_border_line2_i",
           "desc": [
             "This property contains the left border of the object.",
             "",
@@ -422,7 +431,7 @@
         },
         {
           "name": "CharLocale",
-          "returns": "Locale",
+          "returns": "lang_locale_i",
           "desc": [
             "This property contains the value of the locale."
           ],
@@ -451,7 +460,7 @@
         },
         {
           "name": "CharPosture",
-          "returns": "FontSlant",
+          "returns": "awt_font_slant_i",
           "desc": [
             "This property contains the value of the posture of the document."
           ],
@@ -469,7 +478,7 @@
         },
         {
           "name": "CharRightBorder",
-          "returns": "BorderLine2",
+          "returns": "table_border_line2_i",
           "desc": [
             "This property contains the right border of the object.",
             "",
@@ -535,7 +544,7 @@
         },
         {
           "name": "CharShadowFormat",
-          "returns": "ShadowFormat",
+          "returns": "table_shadow_format_i",
           "desc": [
             "Determines the type, color, and width of the shadow.",
             "",
@@ -575,7 +584,7 @@
         },
         {
           "name": "CharTopBorder",
-          "returns": "BorderLine2",
+          "returns": "table_border_line2_i",
           "desc": [
             "This property contains the top border of the object.",
             "",
@@ -625,7 +634,7 @@
         },
         {
           "name": "CharUnderlineColor",
-          "returns": "Color",
+          "returns": "util_color_i",
           "desc": [
             "This property contains the color of the underline for the characters."
           ],
@@ -739,7 +748,7 @@
         },
         {
           "name": "TextUserDefinedAttributes",
-          "returns": "XNameContainer",
+          "returns": "container_x_name_container_i",
           "desc": [
             "This property stores XML attributes.",
             "",

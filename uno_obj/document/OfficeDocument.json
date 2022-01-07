@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "OfficeDocument",
   "type": "service",
   "namespace": "com.sun.star.document",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,83 +15,110 @@
   "data": {
     "from_imports": [
       [
+        ".x_document_event_broadcaster",
+        "XDocumentEventBroadcaster",
+        "x_document_event_broadcaster_i"
+      ],
+      [
         ".x_embedded_scripts",
-        "XEmbeddedScripts"
-      ],
-      [
-        "..util.x_modifiable",
-        "XModifiable"
-      ],
-      [
-        ".x_view_data_supplier",
-        "XViewDataSupplier"
-      ],
-      [
-        ".x_undo_manager_supplier",
-        "XUndoManagerSupplier"
-      ],
-      [
-        "..frame.x_storable",
-        "XStorable"
-      ],
-      [
-        ".x_event_broadcaster",
-        "XEventBroadcaster"
-      ],
-      [
-        "..view.x_print_job_broadcaster",
-        "XPrintJobBroadcaster"
-      ],
-      [
-        "..frame.x_model",
-        "XModel"
+        "XEmbeddedScripts",
+        "x_embedded_scripts_i"
       ],
       [
         ".x_events_supplier",
-        "XEventsSupplier"
+        "XEventsSupplier",
+        "x_events_supplier_i"
+      ],
+      [
+        ".x_undo_manager_supplier",
+        "XUndoManagerSupplier",
+        "x_undo_manager_supplier_i"
+      ],
+      [
+        "..util.x_modifiable",
+        "XModifiable",
+        "util_x_modifiable_i"
       ],
       [
         "..view.x_printable",
-        "XPrintable"
+        "XPrintable",
+        "view_x_printable_i"
       ],
       [
-        ".x_document_event_broadcaster",
-        "XDocumentEventBroadcaster"
+        "..view.x_print_job_broadcaster",
+        "XPrintJobBroadcaster",
+        "view_x_print_job_broadcaster_i"
+      ],
+      [
+        "..frame.x_storable",
+        "XStorable",
+        "frame_x_storable_i"
+      ],
+      [
+        ".x_view_data_supplier",
+        "XViewDataSupplier",
+        "x_view_data_supplier_i"
+      ],
+      [
+        ".x_event_broadcaster",
+        "XEventBroadcaster",
+        "x_event_broadcaster_i"
+      ],
+      [
+        "..frame.x_model",
+        "XModel",
+        "frame_x_model_i"
       ],
       [
         ".x_document_properties_supplier",
-        "XDocumentPropertiesSupplier"
+        "XDocumentPropertiesSupplier",
+        "x_document_properties_supplier_i"
       ]
     ],
     "from_imports_typing": [
       [
         "..beans.property_value",
-        "PropertyValue"
+        "PropertyValue",
+        "beans_property_value_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.document.XDocumentEventBroadcaster": "x_document_event_broadcaster_i",
+      "com.sun.star.document.XEmbeddedScripts": "x_embedded_scripts_i",
+      "com.sun.star.document.XEventsSupplier": "x_events_supplier_i",
+      "com.sun.star.document.XUndoManagerSupplier": "x_undo_manager_supplier_i",
+      "com.sun.star.util.XModifiable": "util_x_modifiable_i",
+      "com.sun.star.view.XPrintable": "view_x_printable_i",
+      "com.sun.star.view.XPrintJobBroadcaster": "view_x_print_job_broadcaster_i",
+      "com.sun.star.frame.XStorable": "frame_x_storable_i",
+      "com.sun.star.document.XViewDataSupplier": "x_view_data_supplier_i",
+      "com.sun.star.document.XEventBroadcaster": "x_event_broadcaster_i",
+      "com.sun.star.frame.XModel": "frame_x_model_i",
+      "com.sun.star.document.XDocumentPropertiesSupplier": "x_document_properties_supplier_i"
+    },
     "quote": [
-      "typing.List[PropertyValue]"
+      "typing.List[beans_property_value_i]"
     ],
     "typings": [
-      "typing.List[PropertyValue]"
+      "typing.List[beans_property_value_i]"
     ],
     "requires_typing": true,
     "name": "OfficeDocument",
     "imports": [],
     "namespace": "com.sun.star.document",
     "extends": [
-      "com.sun.star.document.XUndoManagerSupplier",
-      "com.sun.star.document.XDocumentPropertiesSupplier",
       "com.sun.star.document.XEmbeddedScripts",
-      "com.sun.star.view.XPrintJobBroadcaster",
-      "com.sun.star.document.XViewDataSupplier",
       "com.sun.star.document.XEventsSupplier",
-      "com.sun.star.document.XDocumentEventBroadcaster",
-      "com.sun.star.document.XEventBroadcaster",
-      "com.sun.star.view.XPrintable",
       "com.sun.star.frame.XStorable",
+      "com.sun.star.document.XUndoManagerSupplier",
       "com.sun.star.util.XModifiable",
-      "com.sun.star.frame.XModel"
+      "com.sun.star.view.XPrintable",
+      "com.sun.star.view.XPrintJobBroadcaster",
+      "com.sun.star.document.XDocumentEventBroadcaster",
+      "com.sun.star.document.XViewDataSupplier",
+      "com.sun.star.document.XEventBroadcaster",
+      "com.sun.star.frame.XModel",
+      "com.sun.star.document.XDocumentPropertiesSupplier"
     ],
     "desc": [
       "abstract service which specifies a storable and printable document",
@@ -106,7 +134,7 @@
       "types": [
         {
           "name": "InteropGrabBag",
-          "returns": "typing.List[PropertyValue]",
+          "returns": "typing.List[beans_property_value_i]",
           "desc": [
             "Grab bag of document properties, used as a string-any map for interim interop purposes.",
             "",

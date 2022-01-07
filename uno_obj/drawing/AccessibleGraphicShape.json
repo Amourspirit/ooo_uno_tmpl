@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "AccessibleGraphicShape",
   "type": "service",
   "namespace": "com.sun.star.drawing",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,14 +16,20 @@
     "from_imports": [
       [
         "..accessibility.x_accessible_image",
-        "XAccessibleImage"
+        "XAccessibleImage",
+        "accessibility_x_accessible_image_i"
       ],
       [
         ".accessible_shape",
-        "AccessibleShape"
+        "AccessibleShape",
+        "accessible_shape_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.accessibility.XAccessibleImage": "accessibility_x_accessible_image_i",
+      "com.sun.star.drawing.AccessibleShape": "accessible_shape_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -30,8 +37,8 @@
     "imports": [],
     "namespace": "com.sun.star.drawing",
     "extends": [
-      "com.sun.star.drawing.AccessibleShape",
-      "com.sun.star.accessibility.XAccessibleImage"
+      "com.sun.star.accessibility.XAccessibleImage",
+      "com.sun.star.drawing.AccessibleShape"
     ],
     "desc": [
       "The AccessibleGraphicShape service is implemented by the graphic object shapes shapes com.sun.star.drawing.GraphicObjectShape and com.sun.star.presentation.GraphicObjectShape.",

@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "StringRepresentation",
   "type": "service",
   "namespace": "com.sun.star.inspection",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,18 +16,23 @@
     "from_imports": [
       [
         ".x_string_representation",
-        "XStringRepresentation"
+        "XStringRepresentation",
+        "x_string_representation_i"
       ]
     ],
     "from_imports_typing": [
       [
         "..script.x_type_converter",
-        "XTypeConverter"
+        "XTypeConverter",
+        "script_x_type_converter_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.inspection.XStringRepresentation": "x_string_representation_i"
+    },
     "quote": [
       "typing.List[str]",
-      "XTypeConverter"
+      "script_x_type_converter_i"
     ],
     "typings": [
       "typing.List[str]"
@@ -52,7 +58,7 @@
           "args": [
             [
               "TypeConverter",
-              "XTypeConverter",
+              "script_x_type_converter_i",
               "in"
             ]
           ]
@@ -67,7 +73,7 @@
           "args": [
             [
               "TypeConverter",
-              "XTypeConverter",
+              "script_x_type_converter_i",
               "in"
             ],
             [

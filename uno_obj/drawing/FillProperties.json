@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "FillProperties",
   "type": "service",
   "namespace": "com.sun.star.drawing",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,47 +16,56 @@
     "from_imports": [],
     "from_imports_typing": [
       [
-        ".bitmap_mode",
-        "BitmapMode"
-      ],
-      [
-        "..awt.gradient",
-        "Gradient"
-      ],
-      [
         "..util.color",
-        "Color"
-      ],
-      [
-        ".fill_style",
-        "FillStyle"
-      ],
-      [
-        "..awt.x_bitmap",
-        "XBitmap"
-      ],
-      [
-        "..text.graphic_crop",
-        "GraphicCrop"
-      ],
-      [
-        ".hatch",
-        "Hatch"
+        "Color",
+        "util_color_i"
       ],
       [
         ".rectangle_point",
-        "RectanglePoint"
+        "RectanglePoint",
+        "rectangle_point_i"
+      ],
+      [
+        "..text.graphic_crop",
+        "GraphicCrop",
+        "text_graphic_crop_i"
+      ],
+      [
+        "..awt.gradient",
+        "Gradient",
+        "awt_gradient_i"
+      ],
+      [
+        ".bitmap_mode",
+        "BitmapMode",
+        "bitmap_mode_i"
+      ],
+      [
+        ".hatch",
+        "Hatch",
+        "hatch_i"
+      ],
+      [
+        ".fill_style",
+        "FillStyle",
+        "fill_style_i"
+      ],
+      [
+        "..awt.x_bitmap",
+        "XBitmap",
+        "awt_x_bitmap_i"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "Color",
-      "GraphicCrop",
-      "Hatch",
-      "XBitmap",
-      "RectanglePoint",
-      "FillStyle",
-      "BitmapMode",
-      "Gradient"
+      "awt_gradient_i",
+      "text_graphic_crop_i",
+      "bitmap_mode_i",
+      "hatch_i",
+      "util_color_i",
+      "awt_x_bitmap_i",
+      "rectangle_point_i",
+      "fill_style_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -84,7 +94,7 @@
         },
         {
           "name": "FillBitmap",
-          "returns": "XBitmap",
+          "returns": "awt_x_bitmap_i",
           "desc": [
             "If the property FillStyle is set to FillStyle.BITMAP, this is the bitmap used."
           ],
@@ -104,7 +114,7 @@
         },
         {
           "name": "FillBitmapMode",
-          "returns": "BitmapMode",
+          "returns": "bitmap_mode_i",
           "desc": [
             "this enum selects how an area is filled with a single bitmap.",
             "",
@@ -170,7 +180,7 @@
         },
         {
           "name": "FillBitmapRectanglePoint",
-          "returns": "RectanglePoint",
+          "returns": "rectangle_point_i",
           "desc": [
             "The RectanglePoint specifies the position inside of the bitmap to use as the top left position for rendering."
           ],
@@ -242,7 +252,7 @@
         },
         {
           "name": "FillColor",
-          "returns": "Color",
+          "returns": "util_color_i",
           "desc": [
             "If the property FillStyle is set to FillStyle.SOLID, this is the color used."
           ],
@@ -251,7 +261,7 @@
         },
         {
           "name": "FillGradient",
-          "returns": "Gradient",
+          "returns": "awt_gradient_i",
           "desc": [
             "If the property FillStyle is set to FillStyle.GRADIENT, this describes the gradient used."
           ],
@@ -269,7 +279,7 @@
         },
         {
           "name": "FillHatch",
-          "returns": "Hatch",
+          "returns": "hatch_i",
           "desc": [
             "If the property FillStyle is set to FillStyle.HATCH, this describes the hatch used."
           ],
@@ -287,7 +297,7 @@
         },
         {
           "name": "FillStyle",
-          "returns": "FillStyle",
+          "returns": "fill_style_i",
           "desc": [
             "This enumeration selects the style the area will be filled with."
           ],
@@ -307,7 +317,7 @@
         },
         {
           "name": "FillTransparenceGradient",
-          "returns": "Gradient",
+          "returns": "awt_gradient_i",
           "desc": [
             "This describes the transparency of the fill area as a gradient."
           ],
@@ -327,7 +337,7 @@
         },
         {
           "name": "GraphicCrop",
-          "returns": "GraphicCrop",
+          "returns": "text_graphic_crop_i",
           "desc": [
             "contains the cropping of the object.",
             "",

@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "ChartType",
   "type": "service",
   "namespace": "com.sun.star.chart2",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,18 +16,26 @@
     "from_imports": [
       [
         "..beans.x_property_set",
-        "XPropertySet"
-      ],
-      [
-        ".x_chart_type",
-        "XChartType"
+        "XPropertySet",
+        "beans_x_property_set_i"
       ],
       [
         ".x_data_series_container",
-        "XDataSeriesContainer"
+        "XDataSeriesContainer",
+        "x_data_series_container_i"
+      ],
+      [
+        ".x_chart_type",
+        "XChartType",
+        "x_chart_type_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.beans.XPropertySet": "beans_x_property_set_i",
+      "com.sun.star.chart2.XDataSeriesContainer": "x_data_series_container_i",
+      "com.sun.star.chart2.XChartType": "x_chart_type_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -34,9 +43,9 @@
     "imports": [],
     "namespace": "com.sun.star.chart2",
     "extends": [
-      "com.sun.star.chart2.XChartType",
+      "com.sun.star.beans.XPropertySet",
       "com.sun.star.chart2.XDataSeriesContainer",
-      "com.sun.star.beans.XPropertySet"
+      "com.sun.star.chart2.XChartType"
     ],
     "desc": [
       "ChartType service."

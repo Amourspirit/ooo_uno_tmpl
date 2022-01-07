@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "MailMerge",
   "type": "service",
   "namespace": "com.sun.star.text",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,54 +16,70 @@
     "from_imports": [
       [
         "..task.x_job",
-        "XJob"
+        "XJob",
+        "task_x_job_i"
       ],
       [
         "..util.x_cancellable",
-        "XCancellable"
-      ],
-      [
-        "..beans.x_property_set",
-        "XPropertySet"
-      ],
-      [
-        ".x_mail_merge_broadcaster",
-        "XMailMergeBroadcaster"
+        "XCancellable",
+        "util_x_cancellable_i"
       ],
       [
         "..sdb.data_access_descriptor",
-        "DataAccessDescriptor"
+        "DataAccessDescriptor",
+        "sdb_data_access_descriptor_i"
+      ],
+      [
+        ".x_mail_merge_broadcaster",
+        "XMailMergeBroadcaster",
+        "x_mail_merge_broadcaster_i"
+      ],
+      [
+        "..beans.x_property_set",
+        "XPropertySet",
+        "beans_x_property_set_i"
       ]
     ],
     "from_imports_typing": [
       [
-        "..frame.x_model",
-        "XModel"
-      ],
-      [
         "..sdbc.x_result_set",
-        "XResultSet"
+        "XResultSet",
+        "sdbc_x_result_set_i"
       ],
       [
         "..sdbc.x_connection",
-        "XConnection"
+        "XConnection",
+        "sdbc_x_connection_i"
+      ],
+      [
+        "..frame.x_model",
+        "XModel",
+        "frame_x_model_i"
       ],
       [
         "..beans.property_value",
-        "PropertyValue"
+        "PropertyValue",
+        "beans_property_value_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.task.XJob": "task_x_job_i",
+      "com.sun.star.util.XCancellable": "util_x_cancellable_i",
+      "com.sun.star.sdb.DataAccessDescriptor": "sdb_data_access_descriptor_i",
+      "com.sun.star.text.XMailMergeBroadcaster": "x_mail_merge_broadcaster_i",
+      "com.sun.star.beans.XPropertySet": "beans_x_property_set_i"
+    },
     "quote": [
-      "XModel",
-      "typing.List[PropertyValue]",
-      "XConnection",
-      "typing.List[object]",
       "typing.List[str]",
-      "XResultSet"
+      "typing.List[beans_property_value_i]",
+      "sdbc_x_connection_i",
+      "frame_x_model_i",
+      "sdbc_x_result_set_i",
+      "typing.List[object]"
     ],
     "typings": [
       "typing.List[str]",
-      "typing.List[PropertyValue]",
+      "typing.List[beans_property_value_i]",
       "typing.List[object]"
     ],
     "requires_typing": true,
@@ -72,9 +89,9 @@
     "extends": [
       "com.sun.star.task.XJob",
       "com.sun.star.util.XCancellable",
-      "com.sun.star.beans.XPropertySet",
+      "com.sun.star.sdb.DataAccessDescriptor",
       "com.sun.star.text.XMailMergeBroadcaster",
-      "com.sun.star.sdb.DataAccessDescriptor"
+      "com.sun.star.beans.XPropertySet"
     ],
     "desc": [
       "Gives access to mail merge functionality.",
@@ -116,7 +133,7 @@
         },
         {
           "name": "PrintOptions",
-          "returns": "typing.List[PropertyValue]",
+          "returns": "typing.List[beans_property_value_i]",
           "desc": [
             "contains the properties that are defined in <com.sun.star.view.PrintOptions>.",
             "",
@@ -149,7 +166,7 @@
       "properties": [
         {
           "name": "ActiveConnection",
-          "returns": "XConnection",
+          "returns": "sdbc_x_connection_i",
           "desc": [
             "contains the connection to the database.",
             "",
@@ -335,7 +352,7 @@
         },
         {
           "name": "Model",
-          "returns": "XModel",
+          "returns": "frame_x_model_i",
           "desc": [
             "provides access to the model of the document to be processed.",
             "",
@@ -385,7 +402,7 @@
         },
         {
           "name": "ResultSet",
-          "returns": "XResultSet",
+          "returns": "sdbc_x_result_set_i",
           "desc": [
             "provides access to a com.sun.star.sdbc.XResultSet of a com.sun.star.sdbc.ResultSet service.",
             "",

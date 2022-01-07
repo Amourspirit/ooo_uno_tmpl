@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XPathExtension",
   "type": "service",
   "namespace": "com.sun.star.xml.xpath",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,22 +16,28 @@
     "from_imports": [
       [
         ".xx_path_extension",
-        "XXPathExtension"
+        "XXPathExtension",
+        "xx_path_extension_i"
       ]
     ],
     "from_imports_typing": [
       [
-        "...xforms.x_model",
-        "XModel"
+        "..dom.x_node",
+        "XNode",
+        "dom_x_node_i"
       ],
       [
-        "..dom.x_node",
-        "XNode"
+        "...xforms.x_model",
+        "XModel",
+        "xforms_x_model_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.xml.xpath.XXPathExtension": "xx_path_extension_i"
+    },
     "quote": [
-      "XModel",
-      "XNode"
+      "xforms_x_model_i",
+      "dom_x_node_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -52,12 +59,12 @@
           "args": [
             [
               "Model",
-              "XModel",
+              "xforms_x_model_i",
               "in"
             ],
             [
               "ContextNode",
-              "XNode",
+              "dom_x_node_i",
               "in"
             ]
           ]

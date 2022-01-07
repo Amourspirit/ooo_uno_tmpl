@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "TextField",
   "type": "service",
   "namespace": "com.sun.star.text",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,18 +16,26 @@
     "from_imports": [
       [
         ".text_content",
-        "TextContent"
-      ],
-      [
-        "..beans.x_property_set",
-        "XPropertySet"
+        "TextContent",
+        "text_content_i"
       ],
       [
         ".x_text_field",
-        "XTextField"
+        "XTextField",
+        "x_text_field_i"
+      ],
+      [
+        "..beans.x_property_set",
+        "XPropertySet",
+        "beans_x_property_set_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.text.TextContent": "text_content_i",
+      "com.sun.star.text.XTextField": "x_text_field_i",
+      "com.sun.star.beans.XPropertySet": "beans_x_property_set_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,

@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "ResourceId",
   "type": "service",
   "namespace": "com.sun.star.drawing.framework",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,12 +16,16 @@
     "from_imports": [
       [
         ".x_resource_id",
-        "XResourceId"
+        "XResourceId",
+        "x_resource_id_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.drawing.framework.XResourceId": "x_resource_id_i"
+    },
     "quote": [
-      "XResourceId"
+      "x_resource_id_i"
     ],
     "typings": [],
     "requires_typing": false,
@@ -83,7 +88,7 @@
             ],
             [
               "xAnchor",
-              "XResourceId",
+              "x_resource_id_i",
               "in"
             ]
           ]

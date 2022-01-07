@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "ChartDataRowProperties",
   "type": "service",
   "namespace": "com.sun.star.chart",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,36 +15,38 @@
   "data": {
     "from_imports": [
       [
-        "..beans.x_property_set",
-        "XPropertySet"
+        ".chart_data_point_properties",
+        "ChartDataPointProperties",
+        "chart_data_point_properties_i"
       ],
       [
         ".chart_statistics",
-        "ChartStatistics"
-      ],
-      [
-        "..xml.user_defined_attributes_supplier",
-        "UserDefinedAttributesSupplier"
-      ],
-      [
-        ".chart_data_point_properties",
-        "ChartDataPointProperties"
+        "ChartStatistics",
+        "chart_statistics_i"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..beans.x_property_set",
+        "XPropertySet",
+        "beans_x_property_set_i"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.chart.ChartDataPointProperties": "chart_data_point_properties_i",
+      "com.sun.star.chart.ChartStatistics": "chart_statistics_i"
+    },
     "quote": [
-      "XPropertySet"
+      "beans_x_property_set_i"
     ],
     "typings": [],
-    "requires_typing": false,
+    "requires_typing": true,
     "name": "ChartDataRowProperties",
     "imports": [],
     "namespace": "com.sun.star.chart",
     "extends": [
       "com.sun.star.chart.ChartDataPointProperties",
-      "com.sun.star.chart.ChartStatistics",
-      "com.sun.star.xml.UserDefinedAttributesSupplier",
-      "com.sun.star.beans.XPropertySet"
+      "com.sun.star.chart.ChartStatistics"
     ],
     "desc": [
       "specifies the properties for a group of graphic elements which belong to a data row (also known as data series).",
@@ -70,7 +73,7 @@
         },
         {
           "name": "DataErrorProperties",
-          "returns": "XPropertySet",
+          "returns": "beans_x_property_set_i",
           "desc": [
             "holds the properties of the error markers, if those are enabled."
           ],
@@ -79,7 +82,7 @@
         },
         {
           "name": "DataMeanValueProperties",
-          "returns": "XPropertySet",
+          "returns": "beans_x_property_set_i",
           "desc": [
             "holds the properties of the average line, if such one is enabled."
           ],
@@ -88,7 +91,7 @@
         },
         {
           "name": "DataRegressionProperties",
-          "returns": "XPropertySet",
+          "returns": "beans_x_property_set_i",
           "desc": [
             "holds the properties of the regression line, if such one is enabled."
           ],

@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "TableCharts",
   "type": "service",
   "namespace": "com.sun.star.table",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,19 +15,27 @@
   "data": {
     "from_imports": [
       [
-        "..container.x_index_access",
-        "XIndexAccess"
+        ".x_table_charts",
+        "XTableCharts",
+        "x_table_charts_i"
       ],
       [
-        ".x_table_charts",
-        "XTableCharts"
+        "..container.x_index_access",
+        "XIndexAccess",
+        "container_x_index_access_i"
       ],
       [
         "..container.x_enumeration_access",
-        "XEnumerationAccess"
+        "XEnumerationAccess",
+        "container_x_enumeration_access_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.table.XTableCharts": "x_table_charts_i",
+      "com.sun.star.container.XIndexAccess": "container_x_index_access_i",
+      "com.sun.star.container.XEnumerationAccess": "container_x_enumeration_access_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,

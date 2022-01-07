@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "AccessibleFootnoteView",
   "type": "service",
   "namespace": "com.sun.star.text",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,19 +15,27 @@
   "data": {
     "from_imports": [
       [
+        "..accessibility.x_accessible_context",
+        "XAccessibleContext",
+        "accessibility_x_accessible_context_i"
+      ],
+      [
         "..accessibility.x_accessible_event_broadcaster",
-        "XAccessibleEventBroadcaster"
+        "XAccessibleEventBroadcaster",
+        "accessibility_x_accessible_event_broadcaster_i"
       ],
       [
         "..accessibility.x_accessible_component",
-        "XAccessibleComponent"
-      ],
-      [
-        "..accessibility.x_accessible_context",
-        "XAccessibleContext"
+        "XAccessibleComponent",
+        "accessibility_x_accessible_component_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.accessibility.XAccessibleContext": "accessibility_x_accessible_context_i",
+      "com.sun.star.accessibility.XAccessibleEventBroadcaster": "accessibility_x_accessible_event_broadcaster_i",
+      "com.sun.star.accessibility.XAccessibleComponent": "accessibility_x_accessible_component_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -35,8 +44,8 @@
     "namespace": "com.sun.star.text",
     "extends": [
       "com.sun.star.accessibility.XAccessibleContext",
-      "com.sun.star.accessibility.XAccessibleComponent",
-      "com.sun.star.accessibility.XAccessibleEventBroadcaster"
+      "com.sun.star.accessibility.XAccessibleEventBroadcaster",
+      "com.sun.star.accessibility.XAccessibleComponent"
     ],
     "desc": [
       "The accessible view of footnotes.",

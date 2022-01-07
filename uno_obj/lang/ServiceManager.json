@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "ServiceManager",
   "type": "service",
   "namespace": "com.sun.star.lang",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,34 +15,47 @@
   "data": {
     "from_imports": [
       [
-        ".multi_service_factory",
-        "MultiServiceFactory"
+        "..container.x_content_enumeration_access",
+        "XContentEnumerationAccess",
+        "container_x_content_enumeration_access_i"
       ],
       [
-        ".x_component",
-        "XComponent"
+        ".multi_service_factory",
+        "MultiServiceFactory",
+        "multi_service_factory_i"
       ],
       [
         "..container.x_set",
-        "XSet"
+        "XSet",
+        "container_x_set_i"
       ],
       [
         "..beans.x_property_set",
-        "XPropertySet"
+        "XPropertySet",
+        "beans_x_property_set_i"
       ],
       [
-        "..container.x_content_enumeration_access",
-        "XContentEnumerationAccess"
+        ".x_component",
+        "XComponent",
+        "x_component_i"
       ]
     ],
     "from_imports_typing": [
       [
         "..uno.x_component_context",
-        "XComponentContext"
+        "XComponentContext",
+        "uno_x_component_context_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.container.XContentEnumerationAccess": "container_x_content_enumeration_access_i",
+      "com.sun.star.lang.MultiServiceFactory": "multi_service_factory_i",
+      "com.sun.star.container.XSet": "container_x_set_i",
+      "com.sun.star.beans.XPropertySet": "beans_x_property_set_i",
+      "com.sun.star.lang.XComponent": "x_component_i"
+    },
     "quote": [
-      "XComponentContext"
+      "uno_x_component_context_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -49,11 +63,11 @@
     "imports": [],
     "namespace": "com.sun.star.lang",
     "extends": [
-      "com.sun.star.lang.MultiServiceFactory",
-      "com.sun.star.lang.XComponent",
-      "com.sun.star.container.XSet",
       "com.sun.star.container.XContentEnumerationAccess",
-      "com.sun.star.beans.XPropertySet"
+      "com.sun.star.lang.MultiServiceFactory",
+      "com.sun.star.container.XSet",
+      "com.sun.star.beans.XPropertySet",
+      "com.sun.star.lang.XComponent"
     ],
     "desc": [
       "Provides a collection of implementations for services.",
@@ -71,7 +85,7 @@
       "properties": [
         {
           "name": "DefaultContext",
-          "returns": "XComponentContext",
+          "returns": "uno_x_component_context_i",
           "desc": [
             "specifies the default component context to be used, if instantiating services via XMultiServiceFactory"
           ],

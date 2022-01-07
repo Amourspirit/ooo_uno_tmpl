@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "GenericClipboard",
   "type": "service",
   "namespace": "com.sun.star.datatransfer.clipboard",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,22 +16,32 @@
     "from_imports": [
       [
         "...lang.x_component",
-        "XComponent"
+        "XComponent",
+        "lang_x_component_i"
       ],
       [
         "...lang.x_initialization",
-        "XInitialization"
+        "XInitialization",
+        "lang_x_initialization_i"
       ],
       [
         ".x_clipboard_notifier",
-        "XClipboardNotifier"
+        "XClipboardNotifier",
+        "x_clipboard_notifier_i"
       ],
       [
         ".x_clipboard_ex",
-        "XClipboardEx"
+        "XClipboardEx",
+        "x_clipboard_ex_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.lang.XComponent": "lang_x_component_i",
+      "com.sun.star.lang.XInitialization": "lang_x_initialization_i",
+      "com.sun.star.datatransfer.clipboard.XClipboardNotifier": "x_clipboard_notifier_i",
+      "com.sun.star.datatransfer.clipboard.XClipboardEx": "x_clipboard_ex_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -38,10 +49,10 @@
     "imports": [],
     "namespace": "com.sun.star.datatransfer.clipboard",
     "extends": [
-      "com.sun.star.datatransfer.clipboard.XClipboardEx",
-      "com.sun.star.datatransfer.clipboard.XClipboardNotifier",
+      "com.sun.star.lang.XComponent",
       "com.sun.star.lang.XInitialization",
-      "com.sun.star.lang.XComponent"
+      "com.sun.star.datatransfer.clipboard.XClipboardNotifier",
+      "com.sun.star.datatransfer.clipboard.XClipboardEx"
     ],
     "desc": [
       "A generic clipboard service is a simple container for transferable objects."

@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "SearchDescriptor",
   "type": "service",
   "namespace": "com.sun.star.util",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,15 +15,15 @@
   "data": {
     "from_imports": [
       [
-        "..beans.x_property_set",
-        "XPropertySet"
-      ],
-      [
         ".x_search_descriptor",
-        "XSearchDescriptor"
+        "XSearchDescriptor",
+        "x_search_descriptor_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.util.XSearchDescriptor": "x_search_descriptor_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -30,8 +31,7 @@
     "imports": [],
     "namespace": "com.sun.star.util",
     "extends": [
-      "com.sun.star.util.XSearchDescriptor",
-      "com.sun.star.beans.XPropertySet"
+      "com.sun.star.util.XSearchDescriptor"
     ],
     "desc": [
       "describes what and how to search within a container.",

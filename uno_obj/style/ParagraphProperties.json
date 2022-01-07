@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "ParagraphProperties",
   "type": "service",
   "namespace": "com.sun.star.style",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,76 +16,90 @@
     "from_imports": [],
     "from_imports_typing": [
       [
-        "..table.shadow_format",
-        "ShadowFormat"
-      ],
-      [
-        ".drop_cap_format",
-        "DropCapFormat"
-      ],
-      [
-        "..container.x_name_container",
-        "XNameContainer"
-      ],
-      [
         "..table.border_line",
-        "BorderLine"
-      ],
-      [
-        ".tab_stop",
-        "TabStop"
-      ],
-      [
-        "..beans.property_value",
-        "PropertyValue"
-      ],
-      [
-        ".paragraph_adjust",
-        "ParagraphAdjust"
-      ],
-      [
-        "..util.color",
-        "Color"
-      ],
-      [
-        "..graphic.x_graphic",
-        "XGraphic"
-      ],
-      [
-        ".line_spacing",
-        "LineSpacing"
-      ],
-      [
-        "..container.x_index_replace",
-        "XIndexReplace"
+        "BorderLine",
+        "table_border_line_i"
       ],
       [
         ".break_type",
-        "BreakType"
+        "BreakType",
+        "break_type_i"
+      ],
+      [
+        "..util.color",
+        "Color",
+        "util_color_i"
+      ],
+      [
+        "..graphic.x_graphic",
+        "XGraphic",
+        "graphic_x_graphic_i"
+      ],
+      [
+        "..container.x_index_replace",
+        "XIndexReplace",
+        "container_x_index_replace_i"
+      ],
+      [
+        ".tab_stop",
+        "TabStop",
+        "tab_stop_i"
+      ],
+      [
+        "..beans.property_value",
+        "PropertyValue",
+        "beans_property_value_i"
+      ],
+      [
+        ".paragraph_adjust",
+        "ParagraphAdjust",
+        "paragraph_adjust_i"
+      ],
+      [
+        ".line_spacing",
+        "LineSpacing",
+        "line_spacing_i"
+      ],
+      [
+        "..table.shadow_format",
+        "ShadowFormat",
+        "table_shadow_format_i"
+      ],
+      [
+        ".drop_cap_format",
+        "DropCapFormat",
+        "drop_cap_format_i"
       ],
       [
         ".graphic_location",
-        "GraphicLocation"
+        "GraphicLocation",
+        "graphic_location_i"
+      ],
+      [
+        "..container.x_name_container",
+        "XNameContainer",
+        "container_x_name_container_i"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "Color",
-      "typing.List[PropertyValue]",
-      "LineSpacing",
-      "BreakType",
-      "ShadowFormat",
-      "GraphicLocation",
-      "XIndexReplace",
-      "XNameContainer",
-      "XGraphic",
-      "BorderLine",
-      "ParagraphAdjust",
-      "DropCapFormat",
-      "typing.List[TabStop]"
+      "typing.List[beans_property_value_i]",
+      "break_type_i",
+      "typing.List[tab_stop_i]",
+      "paragraph_adjust_i",
+      "table_shadow_format_i",
+      "table_border_line_i",
+      "line_spacing_i",
+      "graphic_x_graphic_i",
+      "graphic_location_i",
+      "util_color_i",
+      "drop_cap_format_i",
+      "container_x_name_container_i",
+      "container_x_index_replace_i"
     ],
     "typings": [
-      "typing.List[PropertyValue]",
-      "typing.List[TabStop]"
+      "typing.List[beans_property_value_i]",
+      "typing.List[tab_stop_i]"
     ],
     "requires_typing": true,
     "name": "ParagraphProperties",
@@ -103,7 +118,7 @@
       "types": [
         {
           "name": "ParaInteropGrabBag",
-          "returns": "typing.List[PropertyValue]",
+          "returns": "typing.List[beans_property_value_i]",
           "desc": [
             "Grab bag of paragraph properties, used as a string-any map for interim interop purposes.",
             "",
@@ -118,7 +133,7 @@
         },
         {
           "name": "ParaTabStops",
-          "returns": "typing.List[TabStop]",
+          "returns": "typing.List[tab_stop_i]",
           "desc": [
             "specifies the positions and kinds of the tab stops within this paragraph."
           ],
@@ -138,7 +153,7 @@
         },
         {
           "name": "BottomBorder",
-          "returns": "BorderLine",
+          "returns": "table_border_line_i",
           "desc": [
             "contains the bottom border of the object."
           ],
@@ -156,7 +171,7 @@
         },
         {
           "name": "BreakType",
-          "returns": "BreakType",
+          "returns": "break_type_i",
           "desc": [
             "determines the type of break that is applied at the beginning of the table."
           ],
@@ -187,7 +202,7 @@
         },
         {
           "name": "DropCapFormat",
-          "returns": "DropCapFormat",
+          "returns": "drop_cap_format_i",
           "desc": [
             "specifies whether the first characters of the paragraph are displayed in capital letters and how they are formatted."
           ],
@@ -205,7 +220,7 @@
         },
         {
           "name": "LeftBorder",
-          "returns": "BorderLine",
+          "returns": "table_border_line_i",
           "desc": [
             "contains the left border of the object."
           ],
@@ -267,7 +282,7 @@
         },
         {
           "name": "NumberingRules",
-          "returns": "XIndexReplace",
+          "returns": "container_x_index_replace_i",
           "desc": [
             "contains the numbering rules applied to this paragraph."
           ],
@@ -340,7 +355,7 @@
         },
         {
           "name": "ParaAdjust",
-          "returns": "ParagraphAdjust",
+          "returns": "paragraph_adjust_i",
           "desc": [
             "determines the adjustment of a paragraph."
           ],
@@ -349,7 +364,7 @@
         },
         {
           "name": "ParaBackColor",
-          "returns": "Color",
+          "returns": "util_color_i",
           "desc": [
             "contains the paragraph background color."
           ],
@@ -358,7 +373,7 @@
         },
         {
           "name": "ParaBackGraphic",
-          "returns": "XGraphic",
+          "returns": "graphic_x_graphic_i",
           "desc": [
             "contains the graphic for the background of a paragraph.",
             "",
@@ -380,7 +395,7 @@
         },
         {
           "name": "ParaBackGraphicLocation",
-          "returns": "GraphicLocation",
+          "returns": "graphic_location_i",
           "desc": [
             "contains the value for the position of a background graphic."
           ],
@@ -586,7 +601,7 @@
         },
         {
           "name": "ParaLineSpacing",
-          "returns": "LineSpacing",
+          "returns": "line_spacing_i",
           "desc": [
             "contains the type of the line spacing of a paragraph."
           ],
@@ -624,7 +639,7 @@
         },
         {
           "name": "ParaShadowFormat",
-          "returns": "ShadowFormat",
+          "returns": "table_shadow_format_i",
           "desc": [
             "determines the type, color, and size of the shadow."
           ],
@@ -664,7 +679,7 @@
         },
         {
           "name": "ParaUserDefinedAttributes",
-          "returns": "XNameContainer",
+          "returns": "container_x_name_container_i",
           "desc": [
             "this property stores xml attributes.",
             "",
@@ -693,7 +708,7 @@
         },
         {
           "name": "RightBorder",
-          "returns": "BorderLine",
+          "returns": "table_border_line_i",
           "desc": [
             "contains the right border of the object."
           ],
@@ -711,7 +726,7 @@
         },
         {
           "name": "TopBorder",
-          "returns": "BorderLine",
+          "returns": "table_border_line_i",
           "desc": [
             "contains the top border of the object."
           ],

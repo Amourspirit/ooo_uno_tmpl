@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "ImageButton",
   "type": "service",
   "namespace": "com.sun.star.form.component",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,26 +15,35 @@
   "data": {
     "from_imports": [
       [
-        "...awt.uno_control_image_control_model",
-        "UnoControlImageControlModel"
+        "..x_image_producer_supplier",
+        "XImageProducerSupplier",
+        "x_image_producer_supplier_i"
       ],
       [
         "..form_control_model",
-        "FormControlModel"
+        "FormControlModel",
+        "form_control_model_i"
       ],
       [
-        "..x_image_producer_supplier",
-        "XImageProducerSupplier"
+        "...awt.uno_control_image_control_model",
+        "UnoControlImageControlModel",
+        "awt_uno_control_image_control_model_i"
       ]
     ],
     "from_imports_typing": [
       [
         "..form_button_type",
-        "FormButtonType"
+        "FormButtonType",
+        "form_button_type_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.form.XImageProducerSupplier": "x_image_producer_supplier_i",
+      "com.sun.star.form.FormControlModel": "form_control_model_i",
+      "com.sun.star.awt.UnoControlImageControlModel": "awt_uno_control_image_control_model_i"
+    },
     "quote": [
-      "FormButtonType"
+      "form_button_type_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -41,9 +51,9 @@
     "imports": [],
     "namespace": "com.sun.star.form.component",
     "extends": [
-      "com.sun.star.awt.UnoControlImageControlModel",
+      "com.sun.star.form.XImageProducerSupplier",
       "com.sun.star.form.FormControlModel",
-      "com.sun.star.form.XImageProducerSupplier"
+      "com.sun.star.awt.UnoControlImageControlModel"
     ],
     "desc": [
       "This service specifies the control model for a clickable button which is represented by an image.",
@@ -55,7 +65,7 @@
       "properties": [
         {
           "name": "ButtonType",
-          "returns": "FormButtonType",
+          "returns": "form_button_type_i",
           "desc": [
             "describes the action to be executed by the button when pressed."
           ],

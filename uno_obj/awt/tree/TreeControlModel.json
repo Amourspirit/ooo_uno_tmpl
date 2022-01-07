@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "TreeControlModel",
   "type": "service",
   "namespace": "com.sun.star.awt.tree",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,22 +16,28 @@
     "from_imports": [
       [
         "..uno_control_model",
-        "UnoControlModel"
+        "UnoControlModel",
+        "uno_control_model_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_tree_data_model",
-        "XTreeDataModel"
+        "XTreeDataModel",
+        "x_tree_data_model_i"
       ],
       [
         "...view.selection_type",
-        "SelectionType"
+        "SelectionType",
+        "view_selection_type_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.awt.UnoControlModel": "uno_control_model_i"
+    },
     "quote": [
-      "SelectionType",
-      "XTreeDataModel"
+      "x_tree_data_model_i",
+      "view_selection_type_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -48,7 +55,7 @@
       "properties": [
         {
           "name": "DataModel",
-          "returns": "XTreeDataModel",
+          "returns": "x_tree_data_model_i",
           "desc": [
             "Specifies the XTreeDataModel that is providing the hierarchical data.",
             "",
@@ -109,7 +116,7 @@
         },
         {
           "name": "SelectionType",
-          "returns": "SelectionType",
+          "returns": "view_selection_type_i",
           "desc": [
             "Specifies the selection mode that is enabled for this tree.",
             "",

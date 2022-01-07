@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "DataSourceBrowser",
   "type": "service",
   "namespace": "com.sun.star.sdb",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,27 +15,39 @@
   "data": {
     "from_imports": [
       [
-        "..frame.x_dispatch_provider",
-        "XDispatchProvider"
-      ],
-      [
-        "..ui.x_context_menu_interception",
-        "XContextMenuInterception"
-      ],
-      [
         "..frame.x_controller",
-        "XController"
+        "XController",
+        "frame_x_controller_i"
       ],
       [
         "..form.form_controller",
-        "FormController"
+        "FormController",
+        "form_form_controller_i"
+      ],
+      [
+        "..frame.x_dispatch_provider",
+        "XDispatchProvider",
+        "frame_x_dispatch_provider_i"
+      ],
+      [
+        "..ui.x_context_menu_interception",
+        "XContextMenuInterception",
+        "ui_x_context_menu_interception_i"
       ],
       [
         "..lang.x_initialization",
-        "XInitialization"
+        "XInitialization",
+        "lang_x_initialization_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.frame.XController": "frame_x_controller_i",
+      "com.sun.star.form.FormController": "form_form_controller_i",
+      "com.sun.star.frame.XDispatchProvider": "frame_x_dispatch_provider_i",
+      "com.sun.star.ui.XContextMenuInterception": "ui_x_context_menu_interception_i",
+      "com.sun.star.lang.XInitialization": "lang_x_initialization_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -42,11 +55,11 @@
     "imports": [],
     "namespace": "com.sun.star.sdb",
     "extends": [
-      "com.sun.star.form.FormController",
       "com.sun.star.frame.XController",
-      "com.sun.star.lang.XInitialization",
+      "com.sun.star.form.FormController",
       "com.sun.star.frame.XDispatchProvider",
-      "com.sun.star.ui.XContextMenuInterception"
+      "com.sun.star.ui.XContextMenuInterception",
+      "com.sun.star.lang.XInitialization"
     ],
     "desc": [
       "implements a component which allows browsing the data sources registered on the system.",

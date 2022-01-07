@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "TextRangeContentProperties",
   "type": "service",
   "namespace": "com.sun.star.text",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,47 +16,56 @@
     "from_imports": [],
     "from_imports_typing": [
       [
-        ".x_text_frame",
-        "XTextFrame"
-      ],
-      [
-        ".x_text_content",
-        "XTextContent"
-      ],
-      [
-        ".x_text_table",
-        "XTextTable"
-      ],
-      [
         ".x_text_section",
-        "XTextSection"
-      ],
-      [
-        ".x_document_index",
-        "XDocumentIndex"
+        "XTextSection",
+        "x_text_section_i"
       ],
       [
         "..table.x_cell",
-        "XCell"
-      ],
-      [
-        ".x_footnote",
-        "XFootnote"
+        "XCell",
+        "table_x_cell_i"
       ],
       [
         ".x_document_index_mark",
-        "XDocumentIndexMark"
+        "XDocumentIndexMark",
+        "x_document_index_mark_i"
+      ],
+      [
+        ".x_text_frame",
+        "XTextFrame",
+        "x_text_frame_i"
+      ],
+      [
+        ".x_text_content",
+        "XTextContent",
+        "x_text_content_i"
+      ],
+      [
+        ".x_footnote",
+        "XFootnote",
+        "x_footnote_i"
+      ],
+      [
+        ".x_document_index",
+        "XDocumentIndex",
+        "x_document_index_i"
+      ],
+      [
+        ".x_text_table",
+        "XTextTable",
+        "x_text_table_i"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "XTextTable",
-      "XTextFrame",
-      "XDocumentIndex",
-      "XCell",
-      "XDocumentIndexMark",
-      "XTextSection",
-      "XTextContent",
-      "XFootnote"
+      "x_document_index_mark_i",
+      "x_text_section_i",
+      "x_text_table_i",
+      "x_document_index_i",
+      "x_text_frame_i",
+      "x_text_content_i",
+      "table_x_cell_i",
+      "x_footnote_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -75,7 +85,7 @@
       "properties": [
         {
           "name": "Cell",
-          "returns": "XCell",
+          "returns": "table_x_cell_i",
           "desc": [
             "may contain a table cell."
           ],
@@ -84,7 +94,7 @@
         },
         {
           "name": "DocumentIndex",
-          "returns": "XDocumentIndex",
+          "returns": "x_document_index_i",
           "desc": [
             "may contain a document index."
           ],
@@ -93,7 +103,7 @@
         },
         {
           "name": "DocumentIndexMark",
-          "returns": "XDocumentIndexMark",
+          "returns": "x_document_index_mark_i",
           "desc": [
             "may contain a document index mark."
           ],
@@ -102,7 +112,7 @@
         },
         {
           "name": "Endnote",
-          "returns": "XFootnote",
+          "returns": "x_footnote_i",
           "desc": [
             "may contain an endnote."
           ],
@@ -111,7 +121,7 @@
         },
         {
           "name": "Footnote",
-          "returns": "XFootnote",
+          "returns": "x_footnote_i",
           "desc": [
             "may contain a footnote."
           ],
@@ -120,7 +130,7 @@
         },
         {
           "name": "NestedTextContent",
-          "returns": "XTextContent",
+          "returns": "x_text_content_i",
           "desc": [
             "may contain a nested text content.",
             "",
@@ -131,7 +141,7 @@
         },
         {
           "name": "ReferenceMark",
-          "returns": "XTextContent",
+          "returns": "x_text_content_i",
           "desc": [
             "may contain a reference mark."
           ],
@@ -140,7 +150,7 @@
         },
         {
           "name": "TextFrame",
-          "returns": "XTextFrame",
+          "returns": "x_text_frame_i",
           "desc": [
             "may contain a text frame."
           ],
@@ -149,7 +159,7 @@
         },
         {
           "name": "TextParagraph",
-          "returns": "XTextContent",
+          "returns": "x_text_content_i",
           "desc": [
             "Paragraph for the start of this range.",
             "",
@@ -162,7 +172,7 @@
         },
         {
           "name": "TextSection",
-          "returns": "XTextSection",
+          "returns": "x_text_section_i",
           "desc": [
             "may contain a text section."
           ],
@@ -171,7 +181,7 @@
         },
         {
           "name": "TextTable",
-          "returns": "XTextTable",
+          "returns": "x_text_table_i",
           "desc": [
             "may contain a text table."
           ],

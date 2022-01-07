@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "BasicViewFactory",
   "type": "service",
   "namespace": "com.sun.star.drawing.framework",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,17 +16,22 @@
     "from_imports": [
       [
         ".x_resource_factory",
-        "XResourceFactory"
+        "XResourceFactory",
+        "x_resource_factory_i"
       ]
     ],
     "from_imports_typing": [
       [
         "...frame.x_controller",
-        "XController"
+        "XController",
+        "frame_x_controller_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.drawing.framework.XResourceFactory": "x_resource_factory_i"
+    },
     "quote": [
-      "XController"
+      "frame_x_controller_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -53,7 +59,7 @@
           "args": [
             [
               "xController",
-              "XController",
+              "frame_x_controller_i",
               "in"
             ]
           ]

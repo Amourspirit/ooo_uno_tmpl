@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "SheetSortDescriptor2",
   "type": "service",
   "namespace": "com.sun.star.sheet",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,17 +16,22 @@
     "from_imports": [
       [
         "..table.table_sort_descriptor2",
-        "TableSortDescriptor2"
+        "TableSortDescriptor2",
+        "table_table_sort_descriptor2_i"
       ]
     ],
     "from_imports_typing": [
       [
         "..table.cell_address",
-        "CellAddress"
+        "CellAddress",
+        "table_cell_address_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.table.TableSortDescriptor2": "table_table_sort_descriptor2_i"
+    },
     "quote": [
-      "CellAddress"
+      "table_cell_address_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -85,7 +91,7 @@
         },
         {
           "name": "OutputPosition",
-          "returns": "CellAddress",
+          "returns": "table_cell_address_i",
           "desc": [
             "specifies the position where sorted data are to be copied.",
             "",

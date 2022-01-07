@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "FileHandler",
   "type": "service",
   "namespace": "com.sun.star.logging",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,20 +16,25 @@
     "from_imports": [
       [
         ".x_log_handler",
-        "XLogHandler"
+        "XLogHandler",
+        "x_log_handler_i"
       ]
     ],
     "from_imports_typing": [
       [
         "..beans.named_value",
-        "NamedValue"
+        "NamedValue",
+        "beans_named_value_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.logging.XLogHandler": "x_log_handler_i"
+    },
     "quote": [
-      "typing.List[NamedValue]"
+      "typing.List[beans_named_value_i]"
     ],
     "typings": [
-      "typing.List[NamedValue]"
+      "typing.List[beans_named_value_i]"
     ],
     "requires_typing": true,
     "name": "FileHandler",
@@ -82,7 +88,7 @@
           "args": [
             [
               "Settings",
-              "typing.List[NamedValue]",
+              "typing.List[beans_named_value_i]",
               "in"
             ]
           ]

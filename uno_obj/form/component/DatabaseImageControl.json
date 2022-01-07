@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "DatabaseImageControl",
   "type": "service",
   "namespace": "com.sun.star.form.component",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,19 +15,27 @@
   "data": {
     "from_imports": [
       [
-        "...awt.uno_control_image_control_model",
-        "UnoControlImageControlModel"
-      ],
-      [
         "..x_image_producer_supplier",
-        "XImageProducerSupplier"
+        "XImageProducerSupplier",
+        "x_image_producer_supplier_i"
       ],
       [
         "..data_aware_control_model",
-        "DataAwareControlModel"
+        "DataAwareControlModel",
+        "data_aware_control_model_i"
+      ],
+      [
+        "...awt.uno_control_image_control_model",
+        "UnoControlImageControlModel",
+        "awt_uno_control_image_control_model_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.form.XImageProducerSupplier": "x_image_producer_supplier_i",
+      "com.sun.star.form.DataAwareControlModel": "data_aware_control_model_i",
+      "com.sun.star.awt.UnoControlImageControlModel": "awt_uno_control_image_control_model_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -34,9 +43,9 @@
     "imports": [],
     "namespace": "com.sun.star.form.component",
     "extends": [
-      "com.sun.star.awt.UnoControlImageControlModel",
+      "com.sun.star.form.XImageProducerSupplier",
       "com.sun.star.form.DataAwareControlModel",
-      "com.sun.star.form.XImageProducerSupplier"
+      "com.sun.star.awt.UnoControlImageControlModel"
     ],
     "desc": [
       "specifies the model of a control used for displaying images stored in a database.",

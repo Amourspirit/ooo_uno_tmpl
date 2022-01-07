@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "FunctionDescription",
   "type": "service",
   "namespace": "com.sun.star.sheet",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -16,14 +17,16 @@
     "from_imports_typing": [
       [
         ".function_argument",
-        "FunctionArgument"
+        "FunctionArgument",
+        "function_argument_i"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "typing.List[FunctionArgument]"
+      "typing.List[function_argument_i]"
     ],
     "typings": [
-      "typing.List[FunctionArgument]"
+      "typing.List[function_argument_i]"
     ],
     "requires_typing": true,
     "name": "FunctionDescription",
@@ -38,7 +41,7 @@
       "types": [
         {
           "name": "Arguments",
-          "returns": "typing.List[FunctionArgument]",
+          "returns": "typing.List[function_argument_i]",
           "desc": [
             "returns a sequence of localized descriptions of the function's arguments (in the order specified by the function)."
           ],

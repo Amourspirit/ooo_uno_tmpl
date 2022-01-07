@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "ImageMapPolygonObject",
   "type": "service",
   "namespace": "com.sun.star.image",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,17 +16,22 @@
     "from_imports": [
       [
         ".image_map_object",
-        "ImageMapObject"
+        "ImageMapObject",
+        "image_map_object_i"
       ]
     ],
     "from_imports_typing": [
       [
         "..drawing.point_sequence",
-        "PointSequence"
+        "PointSequence",
+        "drawing_point_sequence_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.image.ImageMapObject": "image_map_object_i"
+    },
     "quote": [
-      "PointSequence"
+      "drawing_point_sequence_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -43,7 +49,7 @@
       "properties": [
         {
           "name": "Polygon",
-          "returns": "PointSequence",
+          "returns": "drawing_point_sequence_i",
           "desc": [
             "This sequence of points outlines the click area of this image map object."
           ],

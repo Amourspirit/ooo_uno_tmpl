@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "FunctionAccess",
   "type": "service",
   "namespace": "com.sun.star.sheet",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,15 +15,21 @@
   "data": {
     "from_imports": [
       [
-        ".x_function_access",
-        "XFunctionAccess"
+        ".spreadsheet_document_settings",
+        "SpreadsheetDocumentSettings",
+        "spreadsheet_document_settings_i"
       ],
       [
-        ".spreadsheet_document_settings",
-        "SpreadsheetDocumentSettings"
+        ".x_function_access",
+        "XFunctionAccess",
+        "x_function_access_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.sheet.SpreadsheetDocumentSettings": "spreadsheet_document_settings_i",
+      "com.sun.star.sheet.XFunctionAccess": "x_function_access_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,

@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "HeaderShape",
   "type": "service",
   "namespace": "com.sun.star.presentation",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,15 +15,21 @@
   "data": {
     "from_imports": [
       [
-        ".shape",
-        "Shape"
+        "..drawing.text_shape",
+        "TextShape",
+        "drawing_text_shape_i"
       ],
       [
-        "..drawing.text_shape",
-        "TextShape"
+        ".shape",
+        "Shape",
+        "shape_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.drawing.TextShape": "drawing_text_shape_i",
+      "com.sun.star.presentation.Shape": "shape_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -30,8 +37,8 @@
     "imports": [],
     "namespace": "com.sun.star.presentation",
     "extends": [
-      "com.sun.star.presentation.Shape",
-      "com.sun.star.drawing.TextShape"
+      "com.sun.star.drawing.TextShape",
+      "com.sun.star.presentation.Shape"
     ],
     "desc": [
       "This service is implemented by the header presentation shape.",

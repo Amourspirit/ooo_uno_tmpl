@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "UnoControlTabPageModel",
   "type": "service",
   "namespace": "com.sun.star.awt.tab",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,10 +16,14 @@
     "from_imports": [
       [
         ".x_tab_page_model",
-        "XTabPageModel"
+        "XTabPageModel",
+        "x_tab_page_model_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.awt.tab.XTabPageModel": "x_tab_page_model_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,

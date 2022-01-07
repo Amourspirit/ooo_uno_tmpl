@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "Shape",
   "type": "service",
   "namespace": "com.sun.star.presentation",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,27 +16,32 @@
     "from_imports": [],
     "from_imports_typing": [
       [
-        ".click_action",
-        "ClickAction"
+        "..util.color",
+        "Color",
+        "util_color_i"
       ],
       [
         ".animation_speed",
-        "AnimationSpeed"
-      ],
-      [
-        "..util.color",
-        "Color"
+        "AnimationSpeed",
+        "animation_speed_i"
       ],
       [
         ".animation_effect",
-        "AnimationEffect"
+        "AnimationEffect",
+        "animation_effect_i"
+      ],
+      [
+        ".click_action",
+        "ClickAction",
+        "click_action_i"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "AnimationEffect",
-      "Color",
-      "ClickAction",
-      "AnimationSpeed"
+      "animation_effect_i",
+      "click_action_i",
+      "util_color_i",
+      "animation_speed_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -62,7 +68,7 @@
         },
         {
           "name": "DimColor",
-          "returns": "Color",
+          "returns": "util_color_i",
           "desc": [
             "This is the color for dimming this shape.",
             "",
@@ -91,7 +97,7 @@
         },
         {
           "name": "Effect",
-          "returns": "AnimationEffect",
+          "returns": "animation_effect_i",
           "desc": [
             "selects the animation effect of this shape."
           ],
@@ -120,7 +126,7 @@
         },
         {
           "name": "OnClick",
-          "returns": "ClickAction",
+          "returns": "click_action_i",
           "desc": [
             "selects an action performed after the user clicks on this shape."
           ],
@@ -169,7 +175,7 @@
         },
         {
           "name": "Speed",
-          "returns": "AnimationSpeed",
+          "returns": "animation_speed_i",
           "desc": [
             "This is the speed of the animation effect."
           ],
@@ -178,7 +184,7 @@
         },
         {
           "name": "TextEffect",
-          "returns": "AnimationEffect",
+          "returns": "animation_effect_i",
           "desc": [
             "This is the animation effect for the text inside this shape."
           ],

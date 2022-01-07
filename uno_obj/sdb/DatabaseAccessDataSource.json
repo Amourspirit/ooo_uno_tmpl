@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "DatabaseAccessDataSource",
   "type": "service",
   "namespace": "com.sun.star.sdb",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,25 +16,34 @@
     "from_imports": [
       [
         "..beans.x_property_set",
-        "XPropertySet"
-      ],
-      [
-        "..sdbc.x_data_source",
-        "XDataSource"
+        "XPropertySet",
+        "beans_x_property_set_i"
       ],
       [
         ".x_completed_connection",
-        "XCompletedConnection"
+        "XCompletedConnection",
+        "x_completed_connection_i"
+      ],
+      [
+        "..sdbc.x_data_source",
+        "XDataSource",
+        "sdbc_x_data_source_i"
       ]
     ],
     "from_imports_typing": [
       [
         "..ucb.remember_authentication",
-        "RememberAuthentication"
+        "RememberAuthentication",
+        "ucb_remember_authentication_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.beans.XPropertySet": "beans_x_property_set_i",
+      "com.sun.star.sdb.XCompletedConnection": "x_completed_connection_i",
+      "com.sun.star.sdbc.XDataSource": "sdbc_x_data_source_i"
+    },
     "quote": [
-      "RememberAuthentication"
+      "ucb_remember_authentication_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -42,8 +52,8 @@
     "namespace": "com.sun.star.sdb",
     "extends": [
       "com.sun.star.beans.XPropertySet",
-      "com.sun.star.sdbc.XDataSource",
-      "com.sun.star.sdb.XCompletedConnection"
+      "com.sun.star.sdb.XCompletedConnection",
+      "com.sun.star.sdbc.XDataSource"
     ],
     "desc": [
       "is a factory to create data access beans.",
@@ -59,7 +69,7 @@
       "properties": [
         {
           "name": "PasswordMode",
-          "returns": "RememberAuthentication",
+          "returns": "ucb_remember_authentication_i",
           "desc": [
             "determines the password handling."
           ],

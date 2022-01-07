@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "MetadataField",
   "type": "service",
   "namespace": "com.sun.star.text.textfield",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,27 +15,39 @@
   "data": {
     "from_imports": [
       [
-        "...container.x_child",
-        "XChild"
-      ],
-      [
-        "...container.x_enumeration_access",
-        "XEnumerationAccess"
+        "..x_text",
+        "XText",
+        "x_text_i"
       ],
       [
         "...rdf.x_metadatable",
-        "XMetadatable"
+        "XMetadatable",
+        "rdf_x_metadatable_i"
+      ],
+      [
+        "...container.x_child",
+        "XChild",
+        "container_x_child_i"
       ],
       [
         "..text_field",
-        "TextField"
+        "TextField",
+        "text_field_i"
       ],
       [
-        "..x_text",
-        "XText"
+        "...container.x_enumeration_access",
+        "XEnumerationAccess",
+        "container_x_enumeration_access_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.text.XText": "x_text_i",
+      "com.sun.star.rdf.XMetadatable": "rdf_x_metadatable_i",
+      "com.sun.star.container.XChild": "container_x_child_i",
+      "com.sun.star.text.TextField": "text_field_i",
+      "com.sun.star.container.XEnumerationAccess": "container_x_enumeration_access_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -42,11 +55,11 @@
     "imports": [],
     "namespace": "com.sun.star.text.textfield",
     "extends": [
-      "com.sun.star.text.TextField",
-      "com.sun.star.rdf.XMetadatable",
       "com.sun.star.text.XText",
-      "com.sun.star.container.XEnumerationAccess",
-      "com.sun.star.container.XChild"
+      "com.sun.star.rdf.XMetadatable",
+      "com.sun.star.container.XChild",
+      "com.sun.star.text.TextField",
+      "com.sun.star.container.XEnumerationAccess"
     ],
     "desc": [
       "is a com.sun.star.text.TextField whose content is specified by RDF metadata.",

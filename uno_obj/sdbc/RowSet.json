@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "RowSet",
   "type": "service",
   "namespace": "com.sun.star.sdbc",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,30 +15,35 @@
   "data": {
     "from_imports": [
       [
-        ".x_parameters",
-        "XParameters"
+        ".result_set",
+        "ResultSet",
+        "result_set_i"
       ],
       [
-        ".x_column_locate",
-        "XColumnLocate"
+        ".x_parameters",
+        "XParameters",
+        "x_parameters_i"
       ],
       [
         ".x_row_set",
-        "XRowSet"
-      ],
-      [
-        ".result_set",
-        "ResultSet"
+        "XRowSet",
+        "x_row_set_i"
       ]
     ],
     "from_imports_typing": [
       [
         "..container.x_name_access",
-        "XNameAccess"
+        "XNameAccess",
+        "container_x_name_access_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.sdbc.ResultSet": "result_set_i",
+      "com.sun.star.sdbc.XParameters": "x_parameters_i",
+      "com.sun.star.sdbc.XRowSet": "x_row_set_i"
+    },
     "quote": [
-      "XNameAccess"
+      "container_x_name_access_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -46,9 +52,8 @@
     "namespace": "com.sun.star.sdbc",
     "extends": [
       "com.sun.star.sdbc.ResultSet",
-      "com.sun.star.sdbc.XRowSet",
       "com.sun.star.sdbc.XParameters",
-      "com.sun.star.sdbc.XColumnLocate"
+      "com.sun.star.sdbc.XRowSet"
     ],
     "desc": [
       "is a client side ResultSet, which combines the characteristics of a com.sun.star.sdbc.Statement and a com.sun.star.sdbc.ResultSet.",
@@ -154,7 +159,7 @@
         },
         {
           "name": "TypeMap",
-          "returns": "XNameAccess",
+          "returns": "container_x_name_access_i",
           "desc": [
             "is the type map that will be used for the custom mapping of SQL structured types and distinct types."
           ],

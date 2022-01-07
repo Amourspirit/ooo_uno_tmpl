@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "HTMLForm",
   "type": "service",
   "namespace": "com.sun.star.form.component",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,31 +15,41 @@
   "data": {
     "from_imports": [
       [
-        "..x_reset",
-        "XReset"
+        "..x_submit",
+        "XSubmit",
+        "x_submit_i"
       ],
       [
         ".form",
-        "Form"
+        "Form",
+        "form_i"
       ],
       [
-        "..x_submit",
-        "XSubmit"
+        "..x_reset",
+        "XReset",
+        "x_reset_i"
       ]
     ],
     "from_imports_typing": [
       [
-        "..form_submit_encoding",
-        "FormSubmitEncoding"
+        "..form_submit_method",
+        "FormSubmitMethod",
+        "form_submit_method_i"
       ],
       [
-        "..form_submit_method",
-        "FormSubmitMethod"
+        "..form_submit_encoding",
+        "FormSubmitEncoding",
+        "form_submit_encoding_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.form.XSubmit": "x_submit_i",
+      "com.sun.star.form.component.Form": "form_i",
+      "com.sun.star.form.XReset": "x_reset_i"
+    },
     "quote": [
-      "FormSubmitMethod",
-      "FormSubmitEncoding"
+      "form_submit_encoding_i",
+      "form_submit_method_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -46,9 +57,9 @@
     "imports": [],
     "namespace": "com.sun.star.form.component",
     "extends": [
+      "com.sun.star.form.XSubmit",
       "com.sun.star.form.component.Form",
-      "com.sun.star.form.XReset",
-      "com.sun.star.form.XSubmit"
+      "com.sun.star.form.XReset"
     ],
     "desc": [
       "This service specifies the special kind of Forms for HTML documents.",
@@ -60,7 +71,7 @@
       "properties": [
         {
           "name": "SubmitEncoding",
-          "returns": "FormSubmitEncoding",
+          "returns": "form_submit_encoding_i",
           "desc": [
             "specifies the kind of encoding for submission."
           ],
@@ -69,7 +80,7 @@
         },
         {
           "name": "SubmitMethod",
-          "returns": "FormSubmitMethod",
+          "returns": "form_submit_method_i",
           "desc": [
             "specifies the kind of submission."
           ],

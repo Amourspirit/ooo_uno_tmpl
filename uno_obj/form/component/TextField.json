@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "TextField",
   "type": "service",
   "namespace": "com.sun.star.form.component",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,22 +16,20 @@
     "from_imports": [
       [
         "..x_reset",
-        "XReset"
-      ],
-      [
-        "...awt.uno_control_edit_model",
-        "UnoControlEditModel"
-      ],
-      [
-        "..form_control_model",
-        "FormControlModel"
+        "XReset",
+        "x_reset_i"
       ],
       [
         ".rich_text_control",
-        "RichTextControl"
+        "RichTextControl",
+        "rich_text_control_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.form.XReset": "x_reset_i",
+      "com.sun.star.form.component.RichTextControl": "rich_text_control_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -38,10 +37,8 @@
     "imports": [],
     "namespace": "com.sun.star.form.component",
     "extends": [
-      "com.sun.star.awt.UnoControlEditModel",
-      "com.sun.star.form.FormControlModel",
-      "com.sun.star.form.component.RichTextControl",
-      "com.sun.star.form.XReset"
+      "com.sun.star.form.XReset",
+      "com.sun.star.form.component.RichTextControl"
     ],
     "desc": [
       "specifies a component which allows the input of text, either single- or multi-line."

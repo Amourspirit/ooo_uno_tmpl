@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "BindableDatabaseComboBox",
   "type": "service",
   "namespace": "com.sun.star.form.binding",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,15 +15,21 @@
   "data": {
     "from_imports": [
       [
-        "..component.database_combo_box",
-        "DatabaseComboBox"
+        ".bindable_data_aware_control_model",
+        "BindableDataAwareControlModel",
+        "bindable_data_aware_control_model_i"
       ],
       [
-        ".bindable_data_aware_control_model",
-        "BindableDataAwareControlModel"
+        "..component.database_combo_box",
+        "DatabaseComboBox",
+        "component_database_combo_box_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.form.binding.BindableDataAwareControlModel": "bindable_data_aware_control_model_i",
+      "com.sun.star.form.component.DatabaseComboBox": "component_database_combo_box_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -30,8 +37,8 @@
     "imports": [],
     "namespace": "com.sun.star.form.binding",
     "extends": [
-      "com.sun.star.form.component.DatabaseComboBox",
-      "com.sun.star.form.binding.BindableDataAwareControlModel"
+      "com.sun.star.form.binding.BindableDataAwareControlModel",
+      "com.sun.star.form.component.DatabaseComboBox"
     ],
     "desc": [
       "This service specifies a model of a combo box (a list box combined with a text input field) which is data-aware and thus can be bound to a database field, and additionally supports binding to arbitrary external values.",

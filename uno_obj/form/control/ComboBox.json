@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "ComboBox",
   "type": "service",
   "namespace": "com.sun.star.form.control",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,15 +15,21 @@
   "data": {
     "from_imports": [
       [
-        "...awt.uno_control_combo_box",
-        "UnoControlComboBox"
+        "..x_bound_control",
+        "XBoundControl",
+        "x_bound_control_i"
       ],
       [
-        "..x_bound_control",
-        "XBoundControl"
+        "...awt.uno_control_combo_box",
+        "UnoControlComboBox",
+        "awt_uno_control_combo_box_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.form.XBoundControl": "x_bound_control_i",
+      "com.sun.star.awt.UnoControlComboBox": "awt_uno_control_combo_box_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -30,8 +37,8 @@
     "imports": [],
     "namespace": "com.sun.star.form.control",
     "extends": [
-      "com.sun.star.awt.UnoControlComboBox",
-      "com.sun.star.form.XBoundControl"
+      "com.sun.star.form.XBoundControl",
+      "com.sun.star.awt.UnoControlComboBox"
     ],
     "desc": [
       "describes a combo box control.",

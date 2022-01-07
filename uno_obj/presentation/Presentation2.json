@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "Presentation2",
   "type": "service",
   "namespace": "com.sun.star.presentation",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,15 +15,21 @@
   "data": {
     "from_imports": [
       [
-        ".x_presentation2",
-        "XPresentation2"
+        ".presentation",
+        "Presentation",
+        "presentation_i"
       ],
       [
-        ".presentation",
-        "Presentation"
+        ".x_presentation2",
+        "XPresentation2",
+        "x_presentation2_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.presentation.Presentation": "presentation_i",
+      "com.sun.star.presentation.XPresentation2": "x_presentation2_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,

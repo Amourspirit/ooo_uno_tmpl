@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "DefinitionContainer",
   "type": "service",
   "namespace": "com.sun.star.sdb",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,31 +15,39 @@
   "data": {
     "from_imports": [
       [
-        "..container.x_name_container",
-        "XNameContainer"
+        "..lang.x_single_service_factory",
+        "XSingleServiceFactory",
+        "lang_x_single_service_factory_i"
       ],
       [
         "..container.x_enumeration_access",
-        "XEnumerationAccess"
+        "XEnumerationAccess",
+        "container_x_enumeration_access_i"
       ],
       [
         "..container.x_index_access",
-        "XIndexAccess"
+        "XIndexAccess",
+        "container_x_index_access_i"
       ],
       [
-        "..container.x_name_access",
-        "XNameAccess"
-      ],
-      [
-        "..lang.x_single_service_factory",
-        "XSingleServiceFactory"
+        "..container.x_name_container",
+        "XNameContainer",
+        "container_x_name_container_i"
       ],
       [
         "..util.x_refreshable",
-        "XRefreshable"
+        "XRefreshable",
+        "util_x_refreshable_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.lang.XSingleServiceFactory": "lang_x_single_service_factory_i",
+      "com.sun.star.container.XEnumerationAccess": "container_x_enumeration_access_i",
+      "com.sun.star.container.XIndexAccess": "container_x_index_access_i",
+      "com.sun.star.container.XNameContainer": "container_x_name_container_i",
+      "com.sun.star.util.XRefreshable": "util_x_refreshable_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -46,12 +55,11 @@
     "imports": [],
     "namespace": "com.sun.star.sdb",
     "extends": [
-      "com.sun.star.container.XNameAccess",
-      "com.sun.star.container.XNameContainer",
-      "com.sun.star.container.XIndexAccess",
+      "com.sun.star.lang.XSingleServiceFactory",
       "com.sun.star.container.XEnumerationAccess",
-      "com.sun.star.util.XRefreshable",
-      "com.sun.star.lang.XSingleServiceFactory"
+      "com.sun.star.container.XIndexAccess",
+      "com.sun.star.container.XNameContainer",
+      "com.sun.star.util.XRefreshable"
     ],
     "desc": [
       "describes a container which provides access to database related definitions like commands, forms, and reports.",

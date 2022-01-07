@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "SpreadsheetDocumentSettings",
   "type": "service",
   "namespace": "com.sun.star.sheet",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,32 +16,40 @@
     "from_imports": [
       [
         "..beans.x_property_set",
-        "XPropertySet"
+        "XPropertySet",
+        "beans_x_property_set_i"
       ]
     ],
     "from_imports_typing": [
       [
-        "..i18n.x_forbidden_characters",
-        "XForbiddenCharacters"
-      ],
-      [
         "..lang.locale",
-        "Locale"
-      ],
-      [
-        "..awt.x_device",
-        "XDevice"
+        "Locale",
+        "lang_locale_i"
       ],
       [
         "..util.date",
-        "Date"
+        "Date",
+        "util_date_i"
+      ],
+      [
+        "..i18n.x_forbidden_characters",
+        "XForbiddenCharacters",
+        "i18n_x_forbidden_characters_i"
+      ],
+      [
+        "..awt.x_device",
+        "XDevice",
+        "awt_x_device_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.beans.XPropertySet": "beans_x_property_set_i"
+    },
     "quote": [
-      "XDevice",
-      "Locale",
-      "Date",
-      "XForbiddenCharacters"
+      "awt_x_device_i",
+      "i18n_x_forbidden_characters_i",
+      "lang_locale_i",
+      "util_date_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -75,7 +84,7 @@
         },
         {
           "name": "CharLocale",
-          "returns": "Locale",
+          "returns": "lang_locale_i",
           "desc": [
             "contains the standard document language for Western text."
           ],
@@ -84,7 +93,7 @@
         },
         {
           "name": "CharLocaleAsian",
-          "returns": "Locale",
+          "returns": "lang_locale_i",
           "desc": [
             "contains the standard document language for Asian text."
           ],
@@ -93,7 +102,7 @@
         },
         {
           "name": "CharLocaleComplex",
-          "returns": "Locale",
+          "returns": "lang_locale_i",
           "desc": [
             "contains the standard document language for Complex text."
           ],
@@ -111,7 +120,7 @@
         },
         {
           "name": "ForbiddenCharacters",
-          "returns": "XForbiddenCharacters",
+          "returns": "i18n_x_forbidden_characters_i",
           "desc": [
             "contains the interface XForbiddenCharacters."
           ],
@@ -260,7 +269,7 @@
         },
         {
           "name": "NullDate",
-          "returns": "Date",
+          "returns": "util_date_i",
           "desc": [
             "specifies the date that is represented by the value zero."
           ],
@@ -284,7 +293,7 @@
         },
         {
           "name": "ReferenceDevice",
-          "returns": "XDevice",
+          "returns": "awt_x_device_i",
           "desc": [
             "contains the reference device used for formatting the document.",
             "",

@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "ChartDocumentWrapper",
   "type": "service",
   "namespace": "com.sun.star.chart2",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,15 +15,21 @@
   "data": {
     "from_imports": [
       [
-        "..uno.x_aggregation",
-        "XAggregation"
+        "..chart.chart_document",
+        "ChartDocument",
+        "chart_chart_document_i"
       ],
       [
-        "..chart.chart_document",
-        "ChartDocument"
+        "..uno.x_aggregation",
+        "XAggregation",
+        "uno_x_aggregation_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.chart.ChartDocument": "chart_chart_document_i",
+      "com.sun.star.uno.XAggregation": "uno_x_aggregation_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,

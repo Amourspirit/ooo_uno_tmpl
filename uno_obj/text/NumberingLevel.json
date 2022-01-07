@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "NumberingLevel",
   "type": "service",
   "namespace": "com.sun.star.text",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,27 +16,32 @@
     "from_imports": [],
     "from_imports_typing": [
       [
-        "..awt.x_bitmap",
-        "XBitmap"
+        "..awt.size",
+        "Size",
+        "awt_size_i"
       ],
       [
         "..awt.font_descriptor",
-        "FontDescriptor"
+        "FontDescriptor",
+        "awt_font_descriptor_i"
+      ],
+      [
+        "..awt.x_bitmap",
+        "XBitmap",
+        "awt_x_bitmap_i"
       ],
       [
         "..util.color",
-        "Color"
-      ],
-      [
-        "..awt.size",
-        "Size"
+        "Color",
+        "util_color_i"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "Color",
-      "Size",
-      "XBitmap",
-      "FontDescriptor"
+      "awt_font_descriptor_i",
+      "awt_size_i",
+      "util_color_i",
+      "awt_x_bitmap_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -75,7 +81,7 @@
         },
         {
           "name": "BulletColor",
-          "returns": "Color",
+          "returns": "util_color_i",
           "desc": [
             "contains the color for the symbol.",
             "",
@@ -86,7 +92,7 @@
         },
         {
           "name": "BulletFont",
-          "returns": "FontDescriptor",
+          "returns": "awt_font_descriptor_i",
           "desc": [
             "the font used to paint the bullet."
           ],
@@ -155,7 +161,7 @@
         },
         {
           "name": "GraphicBitmap",
-          "returns": "XBitmap",
+          "returns": "awt_x_bitmap_i",
           "desc": [
             "the graphic file that is used as the numbering symbol.",
             "",
@@ -166,7 +172,7 @@
         },
         {
           "name": "GraphicSize",
-          "returns": "Size",
+          "returns": "awt_size_i",
           "desc": [
             "size of the graphic that is used as bullet."
           ],

@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "GraphicDescriptor",
   "type": "service",
   "namespace": "com.sun.star.graphic",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,17 +16,22 @@
     "from_imports": [
       [
         "..beans.x_property_set",
-        "XPropertySet"
+        "XPropertySet",
+        "beans_x_property_set_i"
       ]
     ],
     "from_imports_typing": [
       [
         "..awt.size",
-        "Size"
+        "Size",
+        "awt_size_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.beans.XPropertySet": "beans_x_property_set_i"
+    },
     "quote": [
-      "Size"
+      "awt_size_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -128,7 +134,7 @@
         },
         {
           "name": "Size100thMM",
-          "returns": "Size",
+          "returns": "awt_size_i",
           "desc": [
             "The Size of the graphic in 100th mm.",
             "",
@@ -139,7 +145,7 @@
         },
         {
           "name": "SizePixel",
-          "returns": "Size",
+          "returns": "awt_size_i",
           "desc": [
             "The Size of the graphic in pixel.",
             "",

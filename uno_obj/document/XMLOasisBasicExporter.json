@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XMLOasisBasicExporter",
   "type": "service",
   "namespace": "com.sun.star.document",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,17 +16,22 @@
     "from_imports": [
       [
         ".xxml_basic_exporter",
-        "XXMLBasicExporter"
+        "XXMLBasicExporter",
+        "xxml_basic_exporter_i"
       ]
     ],
     "from_imports_typing": [
       [
         "..xml.sax.x_document_handler",
-        "XDocumentHandler"
+        "XDocumentHandler",
+        "xml_sax_x_document_handler_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.document.XXMLBasicExporter": "xxml_basic_exporter_i"
+    },
     "quote": [
-      "XDocumentHandler"
+      "xml_sax_x_document_handler_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -55,7 +61,7 @@
           "args": [
             [
               "DocumentHandler",
-              "XDocumentHandler",
+              "xml_sax_x_document_handler_i",
               "in"
             ]
           ]

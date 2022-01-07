@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "DataFilter",
   "type": "service",
   "namespace": "com.sun.star.chart2.data",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,14 +16,20 @@
     "from_imports": [
       [
         ".data_source",
-        "DataSource"
+        "DataSource",
+        "data_source_i"
       ],
       [
         ".data_sink",
-        "DataSink"
+        "DataSink",
+        "data_sink_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.chart2.data.DataSource": "data_source_i",
+      "com.sun.star.chart2.data.DataSink": "data_sink_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -30,8 +37,8 @@
     "imports": [],
     "namespace": "com.sun.star.chart2.data",
     "extends": [
-      "com.sun.star.chart2.data.DataSink",
-      "com.sun.star.chart2.data.DataSource"
+      "com.sun.star.chart2.data.DataSource",
+      "com.sun.star.chart2.data.DataSink"
     ],
     "desc": [
       "A filter gets some data and provides some data.",

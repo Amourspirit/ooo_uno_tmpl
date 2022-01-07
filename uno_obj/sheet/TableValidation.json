@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "TableValidation",
   "type": "service",
   "namespace": "com.sun.star.sheet",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,26 +16,34 @@
     "from_imports": [
       [
         "..beans.x_property_set",
-        "XPropertySet"
+        "XPropertySet",
+        "beans_x_property_set_i"
       ],
       [
         ".x_sheet_condition",
-        "XSheetCondition"
+        "XSheetCondition",
+        "x_sheet_condition_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".validation_type",
-        "ValidationType"
+        "ValidationType",
+        "validation_type_i"
       ],
       [
         ".validation_alert_style",
-        "ValidationAlertStyle"
+        "ValidationAlertStyle",
+        "validation_alert_style_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.beans.XPropertySet": "beans_x_property_set_i",
+      "com.sun.star.sheet.XSheetCondition": "x_sheet_condition_i"
+    },
     "quote": [
-      "ValidationType",
-      "ValidationAlertStyle"
+      "validation_type_i",
+      "validation_alert_style_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -53,7 +62,7 @@
       "properties": [
         {
           "name": "ErrorAlertStyle",
-          "returns": "ValidationAlertStyle",
+          "returns": "validation_alert_style_i",
           "desc": [
             "specifies the style of the error message.",
             "",
@@ -146,7 +155,7 @@
         },
         {
           "name": "Type",
-          "returns": "ValidationType",
+          "returns": "validation_type_i",
           "desc": [
             "specifies the type of validation."
           ],

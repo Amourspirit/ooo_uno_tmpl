@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "GroupUpdate",
   "type": "service",
   "namespace": "com.sun.star.configuration",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,14 +16,20 @@
     "from_imports": [
       [
         "..container.x_name_replace",
-        "XNameReplace"
+        "XNameReplace",
+        "container_x_name_replace_i"
       ],
       [
         ".group_access",
-        "GroupAccess"
+        "GroupAccess",
+        "group_access_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.container.XNameReplace": "container_x_name_replace_i",
+      "com.sun.star.configuration.GroupAccess": "group_access_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -30,8 +37,8 @@
     "imports": [],
     "namespace": "com.sun.star.configuration",
     "extends": [
-      "com.sun.star.configuration.GroupAccess",
-      "com.sun.star.container.XNameReplace"
+      "com.sun.star.container.XNameReplace",
+      "com.sun.star.configuration.GroupAccess"
     ],
     "desc": [
       "provides write access to a predefined heterogeneous group of values and nested trees as part of a hierarchy.",

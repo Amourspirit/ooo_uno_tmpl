@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "UnoControlContainer",
   "type": "service",
   "namespace": "com.sun.star.awt",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,23 +15,33 @@
   "data": {
     "from_imports": [
       [
-        ".uno_control",
-        "UnoControl"
+        ".x_uno_control_container",
+        "XUnoControlContainer",
+        "x_uno_control_container_i"
       ],
       [
         ".x_control_container",
-        "XControlContainer"
+        "XControlContainer",
+        "x_control_container_i"
       ],
       [
-        ".x_uno_control_container",
-        "XUnoControlContainer"
+        ".uno_control",
+        "UnoControl",
+        "uno_control_i"
       ],
       [
         "..container.x_container",
-        "XContainer"
+        "XContainer",
+        "container_x_container_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.awt.XUnoControlContainer": "x_uno_control_container_i",
+      "com.sun.star.awt.XControlContainer": "x_control_container_i",
+      "com.sun.star.awt.UnoControl": "uno_control_i",
+      "com.sun.star.container.XContainer": "container_x_container_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -38,9 +49,9 @@
     "imports": [],
     "namespace": "com.sun.star.awt",
     "extends": [
-      "com.sun.star.awt.UnoControl",
       "com.sun.star.awt.XUnoControlContainer",
       "com.sun.star.awt.XControlContainer",
+      "com.sun.star.awt.UnoControl",
       "com.sun.star.container.XContainer"
     ],
     "desc": [

@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "UnoControlRadioButtonModel",
   "type": "service",
   "namespace": "com.sun.star.awt",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,32 +16,40 @@
     "from_imports": [
       [
         ".uno_control_model",
-        "UnoControlModel"
+        "UnoControlModel",
+        "uno_control_model_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".font_descriptor",
-        "FontDescriptor"
-      ],
-      [
-        "..style.vertical_alignment",
-        "VerticalAlignment"
+        "FontDescriptor",
+        "font_descriptor_i"
       ],
       [
         "..util.color",
-        "Color"
+        "Color",
+        "util_color_i"
       ],
       [
         "..graphic.x_graphic",
-        "XGraphic"
+        "XGraphic",
+        "graphic_x_graphic_i"
+      ],
+      [
+        "..style.vertical_alignment",
+        "VerticalAlignment",
+        "style_vertical_alignment_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.awt.UnoControlModel": "uno_control_model_i"
+    },
     "quote": [
-      "Color",
-      "VerticalAlignment",
-      "FontDescriptor",
-      "XGraphic"
+      "style_vertical_alignment_i",
+      "graphic_x_graphic_i",
+      "util_color_i",
+      "font_descriptor_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -93,7 +102,7 @@
         },
         {
           "name": "FontDescriptor",
-          "returns": "FontDescriptor",
+          "returns": "font_descriptor_i",
           "desc": [
             "specifies the font attributes of the text in the control."
           ],
@@ -120,7 +129,7 @@
         },
         {
           "name": "Graphic",
-          "returns": "XGraphic",
+          "returns": "graphic_x_graphic_i",
           "desc": [
             "specifies a graphic to be displayed besides the label of the control",
             "",
@@ -222,7 +231,7 @@
         },
         {
           "name": "TextColor",
-          "returns": "Color",
+          "returns": "util_color_i",
           "desc": [
             "specifies the text color (RGB) of the control."
           ],
@@ -231,7 +240,7 @@
         },
         {
           "name": "TextLineColor",
-          "returns": "Color",
+          "returns": "util_color_i",
           "desc": [
             "specifies the text line color (RGB) of the control."
           ],
@@ -240,7 +249,7 @@
         },
         {
           "name": "VerticalAlign",
-          "returns": "VerticalAlignment",
+          "returns": "style_vertical_alignment_i",
           "desc": [
             "specifies the vertical alignment of the text in the control.",
             "",

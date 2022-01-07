@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "AutoTextGroup",
   "type": "service",
   "namespace": "com.sun.star.text",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,18 +16,26 @@
     "from_imports": [
       [
         "..container.x_index_access",
-        "XIndexAccess"
-      ],
-      [
-        ".x_auto_text_group",
-        "XAutoTextGroup"
+        "XIndexAccess",
+        "container_x_index_access_i"
       ],
       [
         "..container.x_named",
-        "XNamed"
+        "XNamed",
+        "container_x_named_i"
+      ],
+      [
+        ".x_auto_text_group",
+        "XAutoTextGroup",
+        "x_auto_text_group_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.container.XIndexAccess": "container_x_index_access_i",
+      "com.sun.star.container.XNamed": "container_x_named_i",
+      "com.sun.star.text.XAutoTextGroup": "x_auto_text_group_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -34,9 +43,9 @@
     "imports": [],
     "namespace": "com.sun.star.text",
     "extends": [
-      "com.sun.star.text.XAutoTextGroup",
       "com.sun.star.container.XIndexAccess",
-      "com.sun.star.container.XNamed"
+      "com.sun.star.container.XNamed",
+      "com.sun.star.text.XAutoTextGroup"
     ],
     "desc": [
       "provides access to text blocks in a group."

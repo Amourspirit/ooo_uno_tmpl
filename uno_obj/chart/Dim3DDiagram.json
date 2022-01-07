@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "Dim3DDiagram",
   "type": "service",
   "namespace": "com.sun.star.chart",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,15 +15,21 @@
   "data": {
     "from_imports": [
       [
-        ".x3_d_default_setter",
-        "X3DDefaultSetter"
+        ".x3_d_display",
+        "X3DDisplay",
+        "x3_d_display_i"
       ],
       [
-        ".x3_d_display",
-        "X3DDisplay"
+        ".x3_d_default_setter",
+        "X3DDefaultSetter",
+        "x3_d_default_setter_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.chart.X3DDisplay": "x3_d_display_i",
+      "com.sun.star.chart.X3DDefaultSetter": "x3_d_default_setter_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,

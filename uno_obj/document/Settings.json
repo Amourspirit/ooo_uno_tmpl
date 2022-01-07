@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "Settings",
   "type": "service",
   "namespace": "com.sun.star.document",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,18 +16,23 @@
     "from_imports": [
       [
         "..beans.x_property_set",
-        "XPropertySet"
+        "XPropertySet",
+        "beans_x_property_set_i"
       ]
     ],
     "from_imports_typing": [
       [
         "..i18n.x_forbidden_characters",
-        "XForbiddenCharacters"
+        "XForbiddenCharacters",
+        "i18n_x_forbidden_characters_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.beans.XPropertySet": "beans_x_property_set_i"
+    },
     "quote": [
-      "typing.List[int]",
-      "XForbiddenCharacters"
+      "i18n_x_forbidden_characters_i",
+      "typing.List[int]"
     ],
     "typings": [
       "typing.List[int]"
@@ -249,7 +255,7 @@
         },
         {
           "name": "ForbiddenCharacters",
-          "returns": "XForbiddenCharacters",
+          "returns": "i18n_x_forbidden_characters_i",
           "desc": [
             "gives access to the set of forbidden characters."
           ],

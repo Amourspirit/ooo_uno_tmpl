@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "PropertyBrowserController",
   "type": "service",
   "namespace": "com.sun.star.form",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,25 +15,35 @@
   "data": {
     "from_imports": [
       [
-        "..beans.x_property_set",
-        "XPropertySet"
-      ],
-      [
         "..frame.x_controller",
-        "XController"
+        "XController",
+        "frame_x_controller_i"
       ],
       [
         "..beans.x_fast_property_set",
-        "XFastPropertySet"
+        "XFastPropertySet",
+        "beans_x_fast_property_set_i"
       ],
       [
         "..beans.x_multi_property_set",
-        "XMultiPropertySet"
+        "XMultiPropertySet",
+        "beans_x_multi_property_set_i"
+      ],
+      [
+        "..beans.x_property_set",
+        "XPropertySet",
+        "beans_x_property_set_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.frame.XController": "frame_x_controller_i",
+      "com.sun.star.beans.XFastPropertySet": "beans_x_fast_property_set_i",
+      "com.sun.star.beans.XMultiPropertySet": "beans_x_multi_property_set_i",
+      "com.sun.star.beans.XPropertySet": "beans_x_property_set_i"
+    },
     "quote": [
-      "XPropertySet"
+      "beans_x_property_set_i"
     ],
     "typings": [],
     "requires_typing": false,
@@ -41,9 +52,9 @@
     "namespace": "com.sun.star.form",
     "extends": [
       "com.sun.star.frame.XController",
-      "com.sun.star.beans.XPropertySet",
       "com.sun.star.beans.XFastPropertySet",
-      "com.sun.star.beans.XMultiPropertySet"
+      "com.sun.star.beans.XMultiPropertySet",
+      "com.sun.star.beans.XPropertySet"
     ],
     "desc": [
       "describes a controller which can be used to browse and modify properties of form controls.",
@@ -78,7 +89,7 @@
         },
         {
           "name": "IntrospectedObject",
-          "returns": "XPropertySet",
+          "returns": "beans_x_property_set_i",
           "desc": [
             "contains the object to inspect.",
             "",

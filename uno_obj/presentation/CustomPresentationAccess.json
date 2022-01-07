@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "CustomPresentationAccess",
   "type": "service",
   "namespace": "com.sun.star.presentation",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,15 +15,21 @@
   "data": {
     "from_imports": [
       [
-        "..container.x_name_container",
-        "XNameContainer"
+        "..lang.x_single_service_factory",
+        "XSingleServiceFactory",
+        "lang_x_single_service_factory_i"
       ],
       [
-        "..lang.x_single_service_factory",
-        "XSingleServiceFactory"
+        "..container.x_name_container",
+        "XNameContainer",
+        "container_x_name_container_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.lang.XSingleServiceFactory": "lang_x_single_service_factory_i",
+      "com.sun.star.container.XNameContainer": "container_x_name_container_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -30,8 +37,8 @@
     "imports": [],
     "namespace": "com.sun.star.presentation",
     "extends": [
-      "com.sun.star.container.XNameContainer",
-      "com.sun.star.lang.XSingleServiceFactory"
+      "com.sun.star.lang.XSingleServiceFactory",
+      "com.sun.star.container.XNameContainer"
     ],
     "desc": [
       "This is a container for custom presentations."

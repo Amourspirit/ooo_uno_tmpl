@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "Bibliography",
   "type": "service",
   "namespace": "com.sun.star.text",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,17 +16,22 @@
     "from_imports": [
       [
         ".base_index",
-        "BaseIndex"
+        "BaseIndex",
+        "base_index_i"
       ]
     ],
     "from_imports_typing": [
       [
         "..lang.locale",
-        "Locale"
+        "Locale",
+        "lang_locale_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.text.BaseIndex": "base_index_i"
+    },
     "quote": [
-      "Locale"
+      "lang_locale_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -43,7 +49,7 @@
       "properties": [
         {
           "name": "Locale",
-          "returns": "Locale",
+          "returns": "lang_locale_i",
           "desc": [
             "contains the locale of the index."
           ],

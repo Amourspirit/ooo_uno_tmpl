@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "HierarchyDataReadWriteAccess",
   "type": "service",
   "namespace": "com.sun.star.ucb",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,23 +15,33 @@
   "data": {
     "from_imports": [
       [
-        "..container.x_name_container",
-        "XNameContainer"
-      ],
-      [
-        ".hierarchy_data_read_access",
-        "HierarchyDataReadAccess"
-      ],
-      [
         "..lang.x_single_service_factory",
-        "XSingleServiceFactory"
+        "XSingleServiceFactory",
+        "lang_x_single_service_factory_i"
       ],
       [
         "..util.x_changes_batch",
-        "XChangesBatch"
+        "XChangesBatch",
+        "util_x_changes_batch_i"
+      ],
+      [
+        "..container.x_name_container",
+        "XNameContainer",
+        "container_x_name_container_i"
+      ],
+      [
+        ".hierarchy_data_read_access",
+        "HierarchyDataReadAccess",
+        "hierarchy_data_read_access_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.lang.XSingleServiceFactory": "lang_x_single_service_factory_i",
+      "com.sun.star.util.XChangesBatch": "util_x_changes_batch_i",
+      "com.sun.star.container.XNameContainer": "container_x_name_container_i",
+      "com.sun.star.ucb.HierarchyDataReadAccess": "hierarchy_data_read_access_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -38,10 +49,10 @@
     "imports": [],
     "namespace": "com.sun.star.ucb",
     "extends": [
-      "com.sun.star.ucb.HierarchyDataReadAccess",
-      "com.sun.star.container.XNameContainer",
       "com.sun.star.lang.XSingleServiceFactory",
-      "com.sun.star.util.XChangesBatch"
+      "com.sun.star.util.XChangesBatch",
+      "com.sun.star.container.XNameContainer",
+      "com.sun.star.ucb.HierarchyDataReadAccess"
     ],
     "desc": [
       "provides read and write access to a fragment of the hierarchy data."

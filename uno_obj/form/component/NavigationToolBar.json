@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "NavigationToolBar",
   "type": "service",
   "namespace": "com.sun.star.form.component",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,17 +16,22 @@
     "from_imports": [
       [
         "..form_control_model",
-        "FormControlModel"
+        "FormControlModel",
+        "form_control_model_i"
       ]
     ],
     "from_imports_typing": [
       [
         "...awt.font_descriptor",
-        "FontDescriptor"
+        "FontDescriptor",
+        "awt_font_descriptor_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.form.FormControlModel": "form_control_model_i"
+    },
     "quote": [
-      "FontDescriptor"
+      "awt_font_descriptor_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -63,7 +69,7 @@
         },
         {
           "name": "FontDescriptor",
-          "returns": "FontDescriptor",
+          "returns": "awt_font_descriptor_i",
           "desc": [
             "contains the font attributes for the text in the control"
           ],

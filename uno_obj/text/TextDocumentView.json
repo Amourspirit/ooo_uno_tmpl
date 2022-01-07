@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "TextDocumentView",
   "type": "service",
   "namespace": "com.sun.star.text",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,23 +15,27 @@
   "data": {
     "from_imports": [
       [
-        "..view.x_view_settings_supplier",
-        "XViewSettingsSupplier"
-      ],
-      [
-        "..beans.x_property_set",
-        "XPropertySet"
+        ".x_text_view_cursor_supplier",
+        "XTextViewCursorSupplier",
+        "x_text_view_cursor_supplier_i"
       ],
       [
         "..view.office_document_view",
-        "OfficeDocumentView"
+        "OfficeDocumentView",
+        "view_office_document_view_i"
       ],
       [
-        ".x_text_view_cursor_supplier",
-        "XTextViewCursorSupplier"
+        "..beans.x_property_set",
+        "XPropertySet",
+        "beans_x_property_set_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.text.XTextViewCursorSupplier": "x_text_view_cursor_supplier_i",
+      "com.sun.star.view.OfficeDocumentView": "view_office_document_view_i",
+      "com.sun.star.beans.XPropertySet": "beans_x_property_set_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -38,9 +43,8 @@
     "imports": [],
     "namespace": "com.sun.star.text",
     "extends": [
-      "com.sun.star.view.OfficeDocumentView",
-      "com.sun.star.view.XViewSettingsSupplier",
       "com.sun.star.text.XTextViewCursorSupplier",
+      "com.sun.star.view.OfficeDocumentView",
       "com.sun.star.beans.XPropertySet"
     ],
     "desc": [

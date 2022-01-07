@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "SheetFilterDescriptor",
   "type": "service",
   "namespace": "com.sun.star.sheet",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,31 +15,41 @@
   "data": {
     "from_imports": [
       [
-        ".x_sheet_filter_descriptor2",
-        "XSheetFilterDescriptor2"
+        "..beans.x_property_set",
+        "XPropertySet",
+        "beans_x_property_set_i"
       ],
       [
-        "..beans.x_property_set",
-        "XPropertySet"
+        ".x_sheet_filter_descriptor2",
+        "XSheetFilterDescriptor2",
+        "x_sheet_filter_descriptor2_i"
       ],
       [
         ".x_sheet_filter_descriptor",
-        "XSheetFilterDescriptor"
+        "XSheetFilterDescriptor",
+        "x_sheet_filter_descriptor_i"
       ]
     ],
     "from_imports_typing": [
       [
         "..table.table_orientation",
-        "TableOrientation"
+        "TableOrientation",
+        "table_table_orientation_i"
       ],
       [
         "..table.cell_address",
-        "CellAddress"
+        "CellAddress",
+        "table_cell_address_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.beans.XPropertySet": "beans_x_property_set_i",
+      "com.sun.star.sheet.XSheetFilterDescriptor2": "x_sheet_filter_descriptor2_i",
+      "com.sun.star.sheet.XSheetFilterDescriptor": "x_sheet_filter_descriptor_i"
+    },
     "quote": [
-      "CellAddress",
-      "TableOrientation"
+      "table_table_orientation_i",
+      "table_cell_address_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -46,9 +57,9 @@
     "imports": [],
     "namespace": "com.sun.star.sheet",
     "extends": [
-      "com.sun.star.sheet.XSheetFilterDescriptor",
+      "com.sun.star.beans.XPropertySet",
       "com.sun.star.sheet.XSheetFilterDescriptor2",
-      "com.sun.star.beans.XPropertySet"
+      "com.sun.star.sheet.XSheetFilterDescriptor"
     ],
     "desc": [
       "represents a description of how a cell range is to be filtered.",
@@ -102,7 +113,7 @@
         },
         {
           "name": "Orientation",
-          "returns": "TableOrientation",
+          "returns": "table_table_orientation_i",
           "desc": [
             "specifies if columns or rows are filtered."
           ],
@@ -111,7 +122,7 @@
         },
         {
           "name": "OutputPosition",
-          "returns": "CellAddress",
+          "returns": "table_cell_address_i",
           "desc": [
             "specifies the position where filtered data are to be copied.",
             "",

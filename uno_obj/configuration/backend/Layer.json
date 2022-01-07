@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "Layer",
   "type": "service",
   "namespace": "com.sun.star.configuration.backend",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,19 +15,21 @@
   "data": {
     "from_imports": [
       [
-        ".x_composite_layer",
-        "XCompositeLayer"
-      ],
-      [
         "...util.x_time_stamped",
-        "XTimeStamped"
+        "XTimeStamped",
+        "util_x_time_stamped_i"
       ],
       [
-        ".x_layer",
-        "XLayer"
+        ".x_composite_layer",
+        "XCompositeLayer",
+        "x_composite_layer_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.util.XTimeStamped": "util_x_time_stamped_i",
+      "com.sun.star.configuration.backend.XCompositeLayer": "x_composite_layer_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -34,9 +37,8 @@
     "imports": [],
     "namespace": "com.sun.star.configuration.backend",
     "extends": [
-      "com.sun.star.configuration.backend.XLayer",
-      "com.sun.star.configuration.backend.XCompositeLayer",
-      "com.sun.star.util.XTimeStamped"
+      "com.sun.star.util.XTimeStamped",
+      "com.sun.star.configuration.backend.XCompositeLayer"
     ],
     "desc": [
       "provides read-only access to a configuration data layer.",

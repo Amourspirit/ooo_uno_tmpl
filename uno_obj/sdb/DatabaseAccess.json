@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "DatabaseAccess",
   "type": "service",
   "namespace": "com.sun.star.sdb",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,35 +16,45 @@
     "from_imports": [
       [
         "..beans.x_property_set",
-        "XPropertySet"
-      ],
-      [
-        ".x_database_access",
-        "XDatabaseAccess"
+        "XPropertySet",
+        "beans_x_property_set_i"
       ],
       [
         ".x_completed_connection",
-        "XCompletedConnection"
+        "XCompletedConnection",
+        "x_completed_connection_i"
+      ],
+      [
+        ".x_database_access",
+        "XDatabaseAccess",
+        "x_database_access_i"
       ]
     ],
     "from_imports_typing": [
       [
         "..util.x_number_formats_supplier",
-        "XNumberFormatsSupplier"
+        "XNumberFormatsSupplier",
+        "util_x_number_formats_supplier_i"
       ],
       [
         "..beans.property_value",
-        "PropertyValue"
+        "PropertyValue",
+        "beans_property_value_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.beans.XPropertySet": "beans_x_property_set_i",
+      "com.sun.star.sdb.XCompletedConnection": "x_completed_connection_i",
+      "com.sun.star.sdb.XDatabaseAccess": "x_database_access_i"
+    },
     "quote": [
-      "typing.List[str]",
-      "typing.List[PropertyValue]",
-      "XNumberFormatsSupplier"
+      "typing.List[beans_property_value_i]",
+      "util_x_number_formats_supplier_i",
+      "typing.List[str]"
     ],
     "typings": [
-      "typing.List[str]",
-      "typing.List[PropertyValue]"
+      "typing.List[beans_property_value_i]",
+      "typing.List[str]"
     ],
     "requires_typing": true,
     "name": "DatabaseAccess",
@@ -51,8 +62,8 @@
     "namespace": "com.sun.star.sdb",
     "extends": [
       "com.sun.star.beans.XPropertySet",
-      "com.sun.star.sdb.XDatabaseAccess",
-      "com.sun.star.sdb.XCompletedConnection"
+      "com.sun.star.sdb.XCompletedConnection",
+      "com.sun.star.sdb.XDatabaseAccess"
     ],
     "desc": [
       "specifies a component, which controls DatabaseAccessConnections and acts like a shared DataSource.",
@@ -66,7 +77,7 @@
       "types": [
         {
           "name": "ConnectInfo",
-          "returns": "typing.List[PropertyValue]",
+          "returns": "typing.List[beans_property_value_i]",
           "desc": [
             "is a list of arbitrary string tag/value pairs as connection arguments; normally at least a \\\"user\\\" and \\\"password\\\" property should be included."
           ],
@@ -127,7 +138,7 @@
         },
         {
           "name": "NumberFormatsSupplier",
-          "returns": "XNumberFormatsSupplier",
+          "returns": "util_x_number_formats_supplier_i",
           "desc": [
             "provides an object for formatting numbers."
           ],

@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "FormControlModel",
   "type": "service",
   "namespace": "com.sun.star.form",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,23 +15,33 @@
   "data": {
     "from_imports": [
       [
-        "..awt.uno_control_model",
-        "UnoControlModel"
-      ],
-      [
-        ".form_component",
-        "FormComponent"
+        "..beans.x_property_state",
+        "XPropertyState",
+        "beans_x_property_state_i"
       ],
       [
         "..beans.x_fast_property_set",
-        "XFastPropertySet"
+        "XFastPropertySet",
+        "beans_x_fast_property_set_i"
       ],
       [
-        "..beans.x_property_state",
-        "XPropertyState"
+        ".form_component",
+        "FormComponent",
+        "form_component_i"
+      ],
+      [
+        "..awt.uno_control_model",
+        "UnoControlModel",
+        "awt_uno_control_model_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.beans.XPropertyState": "beans_x_property_state_i",
+      "com.sun.star.beans.XFastPropertySet": "beans_x_fast_property_set_i",
+      "com.sun.star.form.FormComponent": "form_component_i",
+      "com.sun.star.awt.UnoControlModel": "awt_uno_control_model_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -38,10 +49,10 @@
     "imports": [],
     "namespace": "com.sun.star.form",
     "extends": [
-      "com.sun.star.awt.UnoControlModel",
-      "com.sun.star.form.FormComponent",
+      "com.sun.star.beans.XPropertyState",
       "com.sun.star.beans.XFastPropertySet",
-      "com.sun.star.beans.XPropertyState"
+      "com.sun.star.form.FormComponent",
+      "com.sun.star.awt.UnoControlModel"
     ],
     "desc": [
       "specifies a control model within a form.",

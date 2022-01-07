@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "AccessibleToolBox",
   "type": "service",
   "namespace": "com.sun.star.awt",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,19 +15,21 @@
   "data": {
     "from_imports": [
       [
-        "..accessibility.x_accessible_extended_component",
-        "XAccessibleExtendedComponent"
-      ],
-      [
-        "..accessibility.x_accessible_component",
-        "XAccessibleComponent"
-      ],
-      [
         "..accessibility.accessible_context",
-        "AccessibleContext"
+        "AccessibleContext",
+        "accessibility_accessible_context_i"
+      ],
+      [
+        "..accessibility.x_accessible_extended_component",
+        "XAccessibleExtendedComponent",
+        "accessibility_x_accessible_extended_component_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.accessibility.AccessibleContext": "accessibility_accessible_context_i",
+      "com.sun.star.accessibility.XAccessibleExtendedComponent": "accessibility_x_accessible_extended_component_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -35,7 +38,6 @@
     "namespace": "com.sun.star.awt",
     "extends": [
       "com.sun.star.accessibility.AccessibleContext",
-      "com.sun.star.accessibility.XAccessibleComponent",
       "com.sun.star.accessibility.XAccessibleExtendedComponent"
     ],
     "desc": [

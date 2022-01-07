@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "TabularDataProviderArguments",
   "type": "service",
   "namespace": "com.sun.star.chart2.data",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -16,12 +17,14 @@
     "from_imports_typing": [
       [
         "...chart.chart_data_row_source",
-        "ChartDataRowSource"
+        "ChartDataRowSource",
+        "chart_chart_data_row_source_i"
       ]
     ],
+    "extends_map": {},
     "quote": [
       "typing.List[int]",
-      "ChartDataRowSource"
+      "chart_chart_data_row_source_i"
     ],
     "typings": [
       "typing.List[int]"
@@ -71,7 +74,7 @@
         },
         {
           "name": "DataRowSource",
-          "returns": "ChartDataRowSource",
+          "returns": "chart_chart_data_row_source_i",
           "desc": [
             "determines, whether data sequences are created out of columns or rows in a table.",
             "",

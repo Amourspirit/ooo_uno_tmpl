@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "SingleBackendAdapter",
   "type": "service",
   "namespace": "com.sun.star.configuration.backend",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,10 +16,14 @@
     "from_imports": [
       [
         ".backend_adapter",
-        "BackendAdapter"
+        "BackendAdapter",
+        "backend_adapter_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.configuration.backend.BackendAdapter": "backend_adapter_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,

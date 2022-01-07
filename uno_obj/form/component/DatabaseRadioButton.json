@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "DatabaseRadioButton",
   "type": "service",
   "namespace": "com.sun.star.form.component",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,15 +15,21 @@
   "data": {
     "from_imports": [
       [
-        ".radio_button",
-        "RadioButton"
+        "..data_aware_control_model",
+        "DataAwareControlModel",
+        "data_aware_control_model_i"
       ],
       [
-        "..data_aware_control_model",
-        "DataAwareControlModel"
+        ".radio_button",
+        "RadioButton",
+        "radio_button_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.form.DataAwareControlModel": "data_aware_control_model_i",
+      "com.sun.star.form.component.RadioButton": "radio_button_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -30,8 +37,8 @@
     "imports": [],
     "namespace": "com.sun.star.form.component",
     "extends": [
-      "com.sun.star.form.component.RadioButton",
-      "com.sun.star.form.DataAwareControlModel"
+      "com.sun.star.form.DataAwareControlModel",
+      "com.sun.star.form.component.RadioButton"
     ],
     "desc": [
       "This service specifies a radio button which is data-aware, and can be bound to a database field."

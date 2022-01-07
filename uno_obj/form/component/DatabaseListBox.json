@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "DatabaseListBox",
   "type": "service",
   "namespace": "com.sun.star.form.component",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,22 +15,29 @@
   "data": {
     "from_imports": [
       [
-        "..data_aware_control_model",
-        "DataAwareControlModel"
+        ".list_box",
+        "ListBox",
+        "list_box_i"
       ],
       [
-        ".list_box",
-        "ListBox"
+        "..data_aware_control_model",
+        "DataAwareControlModel",
+        "data_aware_control_model_i"
       ]
     ],
     "from_imports_typing": [
       [
         "..list_source_type",
-        "ListSourceType"
+        "ListSourceType",
+        "list_source_type_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.form.component.ListBox": "list_box_i",
+      "com.sun.star.form.DataAwareControlModel": "data_aware_control_model_i"
+    },
     "quote": [
-      "ListSourceType",
+      "list_source_type_i",
       "typing.List[object]"
     ],
     "typings": [
@@ -86,7 +94,7 @@
         },
         {
           "name": "ListSourceType",
-          "returns": "ListSourceType",
+          "returns": "list_source_type_i",
           "desc": [
             "describes the kind of list source used.",
             "",

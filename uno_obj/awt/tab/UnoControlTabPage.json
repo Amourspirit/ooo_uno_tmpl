@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "UnoControlTabPage",
   "type": "service",
   "namespace": "com.sun.star.awt.tab",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,14 +16,20 @@
     "from_imports": [
       [
         "..uno_control_container",
-        "UnoControlContainer"
+        "UnoControlContainer",
+        "uno_control_container_i"
       ],
       [
         ".x_tab_page",
-        "XTabPage"
+        "XTabPage",
+        "x_tab_page_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.awt.UnoControlContainer": "uno_control_container_i",
+      "com.sun.star.awt.tab.XTabPage": "x_tab_page_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,

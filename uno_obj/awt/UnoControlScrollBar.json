@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "UnoControlScrollBar",
   "type": "service",
   "namespace": "com.sun.star.awt",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,15 +15,21 @@
   "data": {
     "from_imports": [
       [
-        ".uno_control",
-        "UnoControl"
+        ".x_scroll_bar",
+        "XScrollBar",
+        "x_scroll_bar_i"
       ],
       [
-        ".x_scroll_bar",
-        "XScrollBar"
+        ".uno_control",
+        "UnoControl",
+        "uno_control_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.awt.XScrollBar": "x_scroll_bar_i",
+      "com.sun.star.awt.UnoControl": "uno_control_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -30,8 +37,8 @@
     "imports": [],
     "namespace": "com.sun.star.awt",
     "extends": [
-      "com.sun.star.awt.UnoControl",
-      "com.sun.star.awt.XScrollBar"
+      "com.sun.star.awt.XScrollBar",
+      "com.sun.star.awt.UnoControl"
     ],
     "desc": [
       "specifies a scroll bar control."

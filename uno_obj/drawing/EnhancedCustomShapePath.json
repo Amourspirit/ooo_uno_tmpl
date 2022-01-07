@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "EnhancedCustomShapePath",
   "type": "service",
   "namespace": "com.sun.star.drawing",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,35 +16,40 @@
     "from_imports": [],
     "from_imports_typing": [
       [
-        ".enhanced_custom_shape_parameter_pair",
-        "EnhancedCustomShapeParameterPair"
-      ],
-      [
-        ".enhanced_custom_shape_segment",
-        "EnhancedCustomShapeSegment"
-      ],
-      [
         "..awt.size",
-        "Size"
+        "Size",
+        "awt_size_i"
+      ],
+      [
+        ".enhanced_custom_shape_parameter_pair",
+        "EnhancedCustomShapeParameterPair",
+        "enhanced_custom_shape_parameter_pair_i"
       ],
       [
         ".enhanced_custom_shape_text_frame",
-        "EnhancedCustomShapeTextFrame"
+        "EnhancedCustomShapeTextFrame",
+        "enhanced_custom_shape_text_frame_i"
+      ],
+      [
+        ".enhanced_custom_shape_segment",
+        "EnhancedCustomShapeSegment",
+        "enhanced_custom_shape_segment_i"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "typing.List[EnhancedCustomShapeTextFrame]",
-      "typing.List[EnhancedCustomShapeParameterPair]",
-      "typing.List[EnhancedCustomShapeSegment]",
+      "typing.List[enhanced_custom_shape_parameter_pair_i]",
+      "typing.List[enhanced_custom_shape_text_frame_i]",
       "typing.List[float]",
-      "typing.List[Size]"
+      "typing.List[awt_size_i]",
+      "typing.List[enhanced_custom_shape_segment_i]"
     ],
     "typings": [
-      "typing.List[EnhancedCustomShapeTextFrame]",
-      "typing.List[EnhancedCustomShapeParameterPair]",
-      "typing.List[EnhancedCustomShapeSegment]",
+      "typing.List[enhanced_custom_shape_parameter_pair_i]",
+      "typing.List[enhanced_custom_shape_text_frame_i]",
       "typing.List[float]",
-      "typing.List[Size]"
+      "typing.List[awt_size_i]",
+      "typing.List[enhanced_custom_shape_segment_i]"
     ],
     "requires_typing": true,
     "name": "EnhancedCustomShapePath",
@@ -58,7 +64,7 @@
       "types": [
         {
           "name": "Coordinates",
-          "returns": "typing.List[EnhancedCustomShapeParameterPair]",
+          "returns": "typing.List[enhanced_custom_shape_parameter_pair_i]",
           "desc": [
             "This property is specifying the points that makes the geometry of the shape."
           ],
@@ -76,7 +82,7 @@
         },
         {
           "name": "GluePoints",
-          "returns": "typing.List[EnhancedCustomShapeParameterPair]",
+          "returns": "typing.List[enhanced_custom_shape_parameter_pair_i]",
           "desc": [
             "This property specifies custom glue points."
           ],
@@ -85,7 +91,7 @@
         },
         {
           "name": "Segments",
-          "returns": "typing.List[EnhancedCustomShapeSegment]",
+          "returns": "typing.List[enhanced_custom_shape_segment_i]",
           "desc": [
             "This property specifies the commands and the way the Coordinates have to be interpreted."
           ],
@@ -94,7 +100,7 @@
         },
         {
           "name": "SubViewSize",
-          "returns": "typing.List[Size]",
+          "returns": "typing.List[awt_size_i]",
           "desc": [
             "This property specifies view size per sub path."
           ],
@@ -103,7 +109,7 @@
         },
         {
           "name": "TextFrames",
-          "returns": "typing.List[EnhancedCustomShapeTextFrame]",
+          "returns": "typing.List[enhanced_custom_shape_text_frame_i]",
           "desc": [
             "This property specifies the text frames that can be used with the shape.",
             "",

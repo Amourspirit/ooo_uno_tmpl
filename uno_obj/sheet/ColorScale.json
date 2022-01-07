@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "ColorScale",
   "type": "service",
   "namespace": "com.sun.star.sheet",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,20 +16,25 @@
     "from_imports": [
       [
         ".x_condition_entry",
-        "XConditionEntry"
+        "XConditionEntry",
+        "x_condition_entry_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_color_scale_entry",
-        "XColorScaleEntry"
+        "XColorScaleEntry",
+        "x_color_scale_entry_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.sheet.XConditionEntry": "x_condition_entry_i"
+    },
     "quote": [
-      "typing.List[XColorScaleEntry]"
+      "typing.List[x_color_scale_entry_i]"
     ],
     "typings": [
-      "typing.List[XColorScaleEntry]"
+      "typing.List[x_color_scale_entry_i]"
     ],
     "requires_typing": true,
     "name": "ColorScale",
@@ -43,7 +49,7 @@
       "types": [
         {
           "name": "ColorScaleEntries",
-          "returns": "typing.List[XColorScaleEntry]",
+          "returns": "typing.List[x_color_scale_entry_i]",
           "desc": [],
           "raises_get": "",
           "raises_set": ""

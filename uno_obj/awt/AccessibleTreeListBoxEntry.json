@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "AccessibleTreeListBoxEntry",
   "type": "service",
   "namespace": "com.sun.star.awt",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,26 +16,38 @@
     "from_imports": [
       [
         "..accessibility.x_accessible_component",
-        "XAccessibleComponent"
-      ],
-      [
-        "..accessibility.x_accessible_selection",
-        "XAccessibleSelection"
+        "XAccessibleComponent",
+        "accessibility_x_accessible_component_i"
       ],
       [
         "..accessibility.x_accessible_action",
-        "XAccessibleAction"
-      ],
-      [
-        "..accessibility.x_accessible_text",
-        "XAccessibleText"
+        "XAccessibleAction",
+        "accessibility_x_accessible_action_i"
       ],
       [
         "..accessibility.accessible_context",
-        "AccessibleContext"
+        "AccessibleContext",
+        "accessibility_accessible_context_i"
+      ],
+      [
+        "..accessibility.x_accessible_text",
+        "XAccessibleText",
+        "accessibility_x_accessible_text_i"
+      ],
+      [
+        "..accessibility.x_accessible_selection",
+        "XAccessibleSelection",
+        "accessibility_x_accessible_selection_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.accessibility.XAccessibleComponent": "accessibility_x_accessible_component_i",
+      "com.sun.star.accessibility.XAccessibleAction": "accessibility_x_accessible_action_i",
+      "com.sun.star.accessibility.AccessibleContext": "accessibility_accessible_context_i",
+      "com.sun.star.accessibility.XAccessibleText": "accessibility_x_accessible_text_i",
+      "com.sun.star.accessibility.XAccessibleSelection": "accessibility_x_accessible_selection_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -42,11 +55,11 @@
     "imports": [],
     "namespace": "com.sun.star.awt",
     "extends": [
-      "com.sun.star.accessibility.AccessibleContext",
       "com.sun.star.accessibility.XAccessibleComponent",
       "com.sun.star.accessibility.XAccessibleAction",
-      "com.sun.star.accessibility.XAccessibleSelection",
-      "com.sun.star.accessibility.XAccessibleText"
+      "com.sun.star.accessibility.AccessibleContext",
+      "com.sun.star.accessibility.XAccessibleText",
+      "com.sun.star.accessibility.XAccessibleSelection"
     ],
     "desc": [
       "specifies accessibility support for a treelistbox entry.",

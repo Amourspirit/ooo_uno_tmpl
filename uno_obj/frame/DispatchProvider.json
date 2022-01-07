@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "DispatchProvider",
   "type": "service",
   "namespace": "com.sun.star.frame",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,15 +15,21 @@
   "data": {
     "from_imports": [
       [
-        ".x_dispatch_provider",
-        "XDispatchProvider"
+        ".x_dispatch_provider_interception",
+        "XDispatchProviderInterception",
+        "x_dispatch_provider_interception_i"
       ],
       [
-        ".x_dispatch_provider_interception",
-        "XDispatchProviderInterception"
+        ".x_dispatch_provider",
+        "XDispatchProvider",
+        "x_dispatch_provider_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.frame.XDispatchProviderInterception": "x_dispatch_provider_interception_i",
+      "com.sun.star.frame.XDispatchProvider": "x_dispatch_provider_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -30,8 +37,8 @@
     "imports": [],
     "namespace": "com.sun.star.frame",
     "extends": [
-      "com.sun.star.frame.XDispatchProvider",
-      "com.sun.star.frame.XDispatchProviderInterception"
+      "com.sun.star.frame.XDispatchProviderInterception",
+      "com.sun.star.frame.XDispatchProvider"
     ],
     "desc": [
       "provides XDispatch objects for certain functions which are useful at the UI",

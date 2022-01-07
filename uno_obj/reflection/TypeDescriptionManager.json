@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "TypeDescriptionManager",
   "type": "service",
   "namespace": "com.sun.star.reflection",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,23 +15,33 @@
   "data": {
     "from_imports": [
       [
-        "..lang.x_component",
-        "XComponent"
+        "..container.x_hierarchical_name_access",
+        "XHierarchicalNameAccess",
+        "container_x_hierarchical_name_access_i"
       ],
       [
         "..container.x_set",
-        "XSet"
+        "XSet",
+        "container_x_set_i"
       ],
       [
         ".x_type_description_enumeration_access",
-        "XTypeDescriptionEnumerationAccess"
+        "XTypeDescriptionEnumerationAccess",
+        "x_type_description_enumeration_access_i"
       ],
       [
-        "..container.x_hierarchical_name_access",
-        "XHierarchicalNameAccess"
+        "..lang.x_component",
+        "XComponent",
+        "lang_x_component_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.container.XHierarchicalNameAccess": "container_x_hierarchical_name_access_i",
+      "com.sun.star.container.XSet": "container_x_set_i",
+      "com.sun.star.reflection.XTypeDescriptionEnumerationAccess": "x_type_description_enumeration_access_i",
+      "com.sun.star.lang.XComponent": "lang_x_component_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -40,8 +51,8 @@
     "extends": [
       "com.sun.star.container.XHierarchicalNameAccess",
       "com.sun.star.container.XSet",
-      "com.sun.star.lang.XComponent",
-      "com.sun.star.reflection.XTypeDescriptionEnumerationAccess"
+      "com.sun.star.reflection.XTypeDescriptionEnumerationAccess",
+      "com.sun.star.lang.XComponent"
     ],
     "desc": [
       "This service manages type descriptions and acts as a central access point to every type description.",

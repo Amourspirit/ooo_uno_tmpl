@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "ResultSet",
   "type": "service",
   "namespace": "com.sun.star.sdbcx",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,23 +15,33 @@
   "data": {
     "from_imports": [
       [
-        "..util.x_cancellable",
-        "XCancellable"
-      ],
-      [
-        ".x_row_locate",
-        "XRowLocate"
-      ],
-      [
         "..sdbc.result_set",
-        "ResultSet"
+        "ResultSet",
+        "sdbc_result_set_i"
+      ],
+      [
+        "..util.x_cancellable",
+        "XCancellable",
+        "util_x_cancellable_i"
       ],
       [
         ".x_delete_rows",
-        "XDeleteRows"
+        "XDeleteRows",
+        "x_delete_rows_i"
+      ],
+      [
+        ".x_row_locate",
+        "XRowLocate",
+        "x_row_locate_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.sdbc.ResultSet": "sdbc_result_set_i",
+      "com.sun.star.util.XCancellable": "util_x_cancellable_i",
+      "com.sun.star.sdbcx.XDeleteRows": "x_delete_rows_i",
+      "com.sun.star.sdbcx.XRowLocate": "x_row_locate_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -40,8 +51,8 @@
     "extends": [
       "com.sun.star.sdbc.ResultSet",
       "com.sun.star.util.XCancellable",
-      "com.sun.star.sdbcx.XRowLocate",
-      "com.sun.star.sdbcx.XDeleteRows"
+      "com.sun.star.sdbcx.XDeleteRows",
+      "com.sun.star.sdbcx.XRowLocate"
     ],
     "desc": [
       "extends the SDBC ResultSet by the possibility of bookmark positioning, canceling the positioning, and updating of rows."

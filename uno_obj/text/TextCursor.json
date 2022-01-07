@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "TextCursor",
   "type": "service",
   "namespace": "com.sun.star.text",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,47 +15,69 @@
   "data": {
     "from_imports": [
       [
-        ".x_paragraph_cursor",
-        "XParagraphCursor"
-      ],
-      [
-        "..beans.x_multi_property_states",
-        "XMultiPropertyStates"
-      ],
-      [
-        "..document.x_document_insertable",
-        "XDocumentInsertable"
+        ".x_sentence_cursor",
+        "XSentenceCursor",
+        "x_sentence_cursor_i"
       ],
       [
         ".x_text_cursor",
-        "XTextCursor"
-      ],
-      [
-        ".text_range",
-        "TextRange"
-      ],
-      [
-        "..beans.x_property_set",
-        "XPropertySet"
-      ],
-      [
-        ".x_sentence_cursor",
-        "XSentenceCursor"
-      ],
-      [
-        "..util.x_sortable",
-        "XSortable"
+        "XTextCursor",
+        "x_text_cursor_i"
       ],
       [
         "..beans.x_property_state",
-        "XPropertyState"
+        "XPropertyState",
+        "beans_x_property_state_i"
+      ],
+      [
+        "..beans.x_multi_property_states",
+        "XMultiPropertyStates",
+        "beans_x_multi_property_states_i"
+      ],
+      [
+        "..document.x_document_insertable",
+        "XDocumentInsertable",
+        "document_x_document_insertable_i"
+      ],
+      [
+        "..util.x_sortable",
+        "XSortable",
+        "util_x_sortable_i"
       ],
       [
         ".x_word_cursor",
-        "XWordCursor"
+        "XWordCursor",
+        "x_word_cursor_i"
+      ],
+      [
+        ".text_range",
+        "TextRange",
+        "text_range_i"
+      ],
+      [
+        "..beans.x_property_set",
+        "XPropertySet",
+        "beans_x_property_set_i"
+      ],
+      [
+        ".x_paragraph_cursor",
+        "XParagraphCursor",
+        "x_paragraph_cursor_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.text.XSentenceCursor": "x_sentence_cursor_i",
+      "com.sun.star.text.XTextCursor": "x_text_cursor_i",
+      "com.sun.star.beans.XPropertyState": "beans_x_property_state_i",
+      "com.sun.star.beans.XMultiPropertyStates": "beans_x_multi_property_states_i",
+      "com.sun.star.document.XDocumentInsertable": "document_x_document_insertable_i",
+      "com.sun.star.util.XSortable": "util_x_sortable_i",
+      "com.sun.star.text.XWordCursor": "x_word_cursor_i",
+      "com.sun.star.text.TextRange": "text_range_i",
+      "com.sun.star.beans.XPropertySet": "beans_x_property_set_i",
+      "com.sun.star.text.XParagraphCursor": "x_paragraph_cursor_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -62,16 +85,16 @@
     "imports": [],
     "namespace": "com.sun.star.text",
     "extends": [
-      "com.sun.star.util.XSortable",
-      "com.sun.star.document.XDocumentInsertable",
-      "com.sun.star.beans.XMultiPropertyStates",
-      "com.sun.star.beans.XPropertyState",
-      "com.sun.star.beans.XPropertySet",
-      "com.sun.star.text.XParagraphCursor",
       "com.sun.star.text.XSentenceCursor",
-      "com.sun.star.text.XWordCursor",
       "com.sun.star.text.XTextCursor",
-      "com.sun.star.text.TextRange"
+      "com.sun.star.beans.XPropertyState",
+      "com.sun.star.beans.XMultiPropertyStates",
+      "com.sun.star.document.XDocumentInsertable",
+      "com.sun.star.util.XSortable",
+      "com.sun.star.text.XWordCursor",
+      "com.sun.star.text.TextRange",
+      "com.sun.star.beans.XPropertySet",
+      "com.sun.star.text.XParagraphCursor"
     ],
     "desc": [
       "A TextCursor is a TextRange which can be moved within a Text object."

@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "DataPilotField",
   "type": "service",
   "namespace": "com.sun.star.sheet",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,66 +15,83 @@
   "data": {
     "from_imports": [
       [
-        "..beans.x_property_set",
-        "XPropertySet"
-      ],
-      [
-        ".x_data_pilot_field_grouping",
-        "XDataPilotFieldGrouping"
-      ],
-      [
         "..container.x_named",
-        "XNamed"
+        "XNamed",
+        "container_x_named_i"
       ],
       [
         ".x_data_pilot_field",
-        "XDataPilotField"
+        "XDataPilotField",
+        "x_data_pilot_field_i"
+      ],
+      [
+        ".x_data_pilot_field_grouping",
+        "XDataPilotFieldGrouping",
+        "x_data_pilot_field_grouping_i"
+      ],
+      [
+        "..beans.x_property_set",
+        "XPropertySet",
+        "beans_x_property_set_i"
       ]
     ],
     "from_imports_typing": [
       [
-        ".data_pilot_field_group_info",
-        "DataPilotFieldGroupInfo"
-      ],
-      [
-        ".data_pilot_field_layout_info",
-        "DataPilotFieldLayoutInfo"
-      ],
-      [
-        ".data_pilot_field_orientation",
-        "DataPilotFieldOrientation"
+        ".data_pilot_field_sort_info",
+        "DataPilotFieldSortInfo",
+        "data_pilot_field_sort_info_i"
       ],
       [
         ".general_function",
-        "GeneralFunction"
+        "GeneralFunction",
+        "general_function_i"
       ],
       [
         ".data_pilot_field_reference",
-        "DataPilotFieldReference"
+        "DataPilotFieldReference",
+        "data_pilot_field_reference_i"
       ],
       [
-        ".data_pilot_field_sort_info",
-        "DataPilotFieldSortInfo"
+        ".data_pilot_field_layout_info",
+        "DataPilotFieldLayoutInfo",
+        "data_pilot_field_layout_info_i"
       ],
       [
         ".data_pilot_field_auto_show_info",
-        "DataPilotFieldAutoShowInfo"
+        "DataPilotFieldAutoShowInfo",
+        "data_pilot_field_auto_show_info_i"
+      ],
+      [
+        ".data_pilot_field_group_info",
+        "DataPilotFieldGroupInfo",
+        "data_pilot_field_group_info_i"
+      ],
+      [
+        ".data_pilot_field_orientation",
+        "DataPilotFieldOrientation",
+        "data_pilot_field_orientation_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.container.XNamed": "container_x_named_i",
+      "com.sun.star.sheet.XDataPilotField": "x_data_pilot_field_i",
+      "com.sun.star.sheet.XDataPilotFieldGrouping": "x_data_pilot_field_grouping_i",
+      "com.sun.star.beans.XPropertySet": "beans_x_property_set_i"
+    },
     "quote": [
-      "GeneralFunction",
-      "DataPilotFieldReference",
-      "typing.List[GeneralFunction]",
+      "data_pilot_field_layout_info_i",
+      "typing.List[general_function_i]",
+      "data_pilot_field_group_info_i",
+      "data_pilot_field_orientation_i",
       "typing.List[int]",
-      "DataPilotFieldSortInfo",
-      "DataPilotFieldAutoShowInfo",
-      "DataPilotFieldOrientation",
-      "DataPilotFieldGroupInfo",
-      "DataPilotFieldLayoutInfo"
+      "data_pilot_field_auto_show_info_i",
+      "data_pilot_field_reference_i",
+      "general_function_i",
+      "data_pilot_field_sort_info_i"
     ],
     "typings": [
-      "typing.List[int]",
-      "typing.List[GeneralFunction]"
+      "typing.List[general_function_i]",
+      "typing.List[int]"
     ],
     "requires_typing": true,
     "name": "DataPilotField",
@@ -81,9 +99,9 @@
     "namespace": "com.sun.star.sheet",
     "extends": [
       "com.sun.star.container.XNamed",
-      "com.sun.star.beans.XPropertySet",
       "com.sun.star.sheet.XDataPilotField",
-      "com.sun.star.sheet.XDataPilotFieldGrouping"
+      "com.sun.star.sheet.XDataPilotFieldGrouping",
+      "com.sun.star.beans.XPropertySet"
     ],
     "desc": [
       "represents a single field in a data pilot table.",
@@ -99,7 +117,7 @@
       "types": [
         {
           "name": "Subtotals",
-          "returns": "typing.List[GeneralFunction]",
+          "returns": "typing.List[general_function_i]",
           "desc": [
             "specifies the functions used to calculate subtotals for this field.",
             "",
@@ -135,7 +153,7 @@
       "properties": [
         {
           "name": "AutoShowInfo",
-          "returns": "DataPilotFieldAutoShowInfo",
+          "returns": "data_pilot_field_auto_show_info_i",
           "desc": [
             "enables the automatic inclusion of only a number of items with the highest or lowest result values."
           ],
@@ -144,7 +162,7 @@
         },
         {
           "name": "Function",
-          "returns": "GeneralFunction",
+          "returns": "general_function_i",
           "desc": [
             "specifies the function used to calculate results for this field.",
             "",
@@ -170,7 +188,7 @@
         },
         {
           "name": "GroupInfo",
-          "returns": "DataPilotFieldGroupInfo",
+          "returns": "data_pilot_field_group_info_i",
           "desc": [
             "contains the grouping information of the DataPilot field.",
             "",
@@ -226,7 +244,7 @@
         },
         {
           "name": "LayoutInfo",
-          "returns": "DataPilotFieldLayoutInfo",
+          "returns": "data_pilot_field_layout_info_i",
           "desc": [
             "controls how the field's items are laid out in the result table."
           ],
@@ -235,7 +253,7 @@
         },
         {
           "name": "Orientation",
-          "returns": "DataPilotFieldOrientation",
+          "returns": "data_pilot_field_orientation_i",
           "desc": [
             "specifies the orientation of the field.",
             "",
@@ -246,7 +264,7 @@
         },
         {
           "name": "Reference",
-          "returns": "DataPilotFieldReference",
+          "returns": "data_pilot_field_reference_i",
           "desc": [
             "controls how the results are shown in relation to a selected reference result."
           ],
@@ -273,7 +291,7 @@
         },
         {
           "name": "SortInfo",
-          "returns": "DataPilotFieldSortInfo",
+          "returns": "data_pilot_field_sort_info_i",
           "desc": [
             "controls how the field's items are sorted."
           ],

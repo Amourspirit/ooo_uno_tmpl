@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "FormOperations",
   "type": "service",
   "namespace": "com.sun.star.form.runtime",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,22 +16,28 @@
     "from_imports": [
       [
         ".x_form_operations",
-        "XFormOperations"
+        "XFormOperations",
+        "x_form_operations_i"
       ]
     ],
     "from_imports_typing": [
       [
         "..x_form",
-        "XForm"
+        "XForm",
+        "x_form_i"
       ],
       [
         ".x_form_controller",
-        "XFormController"
+        "XFormController",
+        "x_form_controller_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.form.runtime.XFormOperations": "x_form_operations_i"
+    },
     "quote": [
-      "XForm",
-      "XFormController"
+      "x_form_controller_i",
+      "x_form_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -62,7 +69,7 @@
           "args": [
             [
               "Form",
-              "XForm",
+              "x_form_i",
               "in"
             ]
           ]
@@ -79,7 +86,7 @@
           "args": [
             [
               "Controller",
-              "XFormController",
+              "x_form_controller_i",
               "in"
             ]
           ]

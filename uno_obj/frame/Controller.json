@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "Controller",
   "type": "service",
   "namespace": "com.sun.star.frame",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,31 +15,45 @@
   "data": {
     "from_imports": [
       [
-        ".x_dispatch_provider",
-        "XDispatchProvider"
-      ],
-      [
-        "..datatransfer.x_transferable_supplier",
-        "XTransferableSupplier"
-      ],
-      [
-        "..ui.x_context_menu_interception",
-        "XContextMenuInterception"
-      ],
-      [
         ".x_controller",
-        "XController"
+        "XController",
+        "x_controller_i"
       ],
       [
         "..awt.x_user_input_interception",
-        "XUserInputInterception"
+        "XUserInputInterception",
+        "awt_x_user_input_interception_i"
+      ],
+      [
+        ".x_dispatch_provider",
+        "XDispatchProvider",
+        "x_dispatch_provider_i"
+      ],
+      [
+        "..ui.x_context_menu_interception",
+        "XContextMenuInterception",
+        "ui_x_context_menu_interception_i"
       ],
       [
         "..view.x_selection_supplier",
-        "XSelectionSupplier"
+        "XSelectionSupplier",
+        "view_x_selection_supplier_i"
+      ],
+      [
+        "..datatransfer.x_transferable_supplier",
+        "XTransferableSupplier",
+        "datatransfer_x_transferable_supplier_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.frame.XController": "x_controller_i",
+      "com.sun.star.awt.XUserInputInterception": "awt_x_user_input_interception_i",
+      "com.sun.star.frame.XDispatchProvider": "x_dispatch_provider_i",
+      "com.sun.star.ui.XContextMenuInterception": "ui_x_context_menu_interception_i",
+      "com.sun.star.view.XSelectionSupplier": "view_x_selection_supplier_i",
+      "com.sun.star.datatransfer.XTransferableSupplier": "datatransfer_x_transferable_supplier_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -47,9 +62,9 @@
     "namespace": "com.sun.star.frame",
     "extends": [
       "com.sun.star.frame.XController",
+      "com.sun.star.awt.XUserInputInterception",
       "com.sun.star.frame.XDispatchProvider",
       "com.sun.star.ui.XContextMenuInterception",
-      "com.sun.star.awt.XUserInputInterception",
       "com.sun.star.view.XSelectionSupplier",
       "com.sun.star.datatransfer.XTransferableSupplier"
     ],

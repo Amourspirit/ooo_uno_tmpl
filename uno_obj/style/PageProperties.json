@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "PageProperties",
   "type": "service",
   "namespace": "com.sun.star.style",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,57 +16,68 @@
     "from_imports": [],
     "from_imports_typing": [
       [
-        "..table.shadow_format",
-        "ShadowFormat"
-      ],
-      [
-        "..container.x_name_container",
-        "XNameContainer"
-      ],
-      [
         "..table.border_line",
-        "BorderLine"
-      ],
-      [
-        ".page_style_layout",
-        "PageStyleLayout"
-      ],
-      [
-        "..text.x_text_columns",
-        "XTextColumns"
-      ],
-      [
-        "..util.color",
-        "Color"
-      ],
-      [
-        "..graphic.x_graphic",
-        "XGraphic"
-      ],
-      [
-        ".graphic_location",
-        "GraphicLocation"
+        "BorderLine",
+        "table_border_line_i"
       ],
       [
         "..awt.size",
-        "Size"
+        "Size",
+        "awt_size_i"
+      ],
+      [
+        "..util.color",
+        "Color",
+        "util_color_i"
+      ],
+      [
+        "..graphic.x_graphic",
+        "XGraphic",
+        "graphic_x_graphic_i"
       ],
       [
         "..text.x_text",
-        "XText"
+        "XText",
+        "text_x_text_i"
+      ],
+      [
+        "..text.x_text_columns",
+        "XTextColumns",
+        "text_x_text_columns_i"
+      ],
+      [
+        "..table.shadow_format",
+        "ShadowFormat",
+        "table_shadow_format_i"
+      ],
+      [
+        ".page_style_layout",
+        "PageStyleLayout",
+        "page_style_layout_i"
+      ],
+      [
+        ".graphic_location",
+        "GraphicLocation",
+        "graphic_location_i"
+      ],
+      [
+        "..container.x_name_container",
+        "XNameContainer",
+        "container_x_name_container_i"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "Color",
-      "XText",
-      "GraphicLocation",
-      "Size",
-      "XNameContainer",
-      "BorderLine",
-      "XGraphic",
-      "PageStyleLayout",
-      "XTextColumns",
-      "ShadowFormat"
+      "awt_size_i",
+      "table_border_line_i",
+      "table_shadow_format_i",
+      "graphic_x_graphic_i",
+      "page_style_layout_i",
+      "graphic_location_i",
+      "util_color_i",
+      "text_x_text_columns_i",
+      "container_x_name_container_i",
+      "text_x_text_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -85,7 +97,7 @@
       "properties": [
         {
           "name": "BackColor",
-          "returns": "Color",
+          "returns": "util_color_i",
           "desc": [
             "contains the background color of the page."
           ],
@@ -94,7 +106,7 @@
         },
         {
           "name": "BackGraphic",
-          "returns": "XGraphic",
+          "returns": "graphic_x_graphic_i",
           "desc": [
             "contains the graphic of the background.",
             "",
@@ -116,7 +128,7 @@
         },
         {
           "name": "BackGraphicLocation",
-          "returns": "GraphicLocation",
+          "returns": "graphic_location_i",
           "desc": [
             "determines the location of the background graphic."
           ],
@@ -169,7 +181,7 @@
         },
         {
           "name": "BottomBorder",
-          "returns": "BorderLine",
+          "returns": "table_border_line_i",
           "desc": [
             "determines the style of the bottom border line of the page."
           ],
@@ -209,7 +221,7 @@
         },
         {
           "name": "FooterBackColor",
-          "returns": "Color",
+          "returns": "util_color_i",
           "desc": [
             "contains the color of the background of the footer."
           ],
@@ -218,7 +230,7 @@
         },
         {
           "name": "FooterBackGraphic",
-          "returns": "XGraphic",
+          "returns": "graphic_x_graphic_i",
           "desc": [
             "contains the graphic of the background of the footer.",
             "",
@@ -240,7 +252,7 @@
         },
         {
           "name": "FooterBackGraphicLocation",
-          "returns": "GraphicLocation",
+          "returns": "graphic_location_i",
           "desc": [
             "determines the location of the background graphic in the footer."
           ],
@@ -287,7 +299,7 @@
         },
         {
           "name": "FooterBottomBorder",
-          "returns": "BorderLine",
+          "returns": "table_border_line_i",
           "desc": [
             "contains the style of the bottom border line of the footer."
           ],
@@ -350,7 +362,7 @@
         },
         {
           "name": "FooterLeftBorder",
-          "returns": "BorderLine",
+          "returns": "table_border_line_i",
           "desc": [
             "contains the style of the left border line of the footer."
           ],
@@ -377,7 +389,7 @@
         },
         {
           "name": "FooterRightBorder",
-          "returns": "BorderLine",
+          "returns": "table_border_line_i",
           "desc": [
             "contains the style of the right border line of the footer."
           ],
@@ -404,7 +416,7 @@
         },
         {
           "name": "FooterShadowFormat",
-          "returns": "ShadowFormat",
+          "returns": "table_shadow_format_i",
           "desc": [
             "determines the shadow of the footer."
           ],
@@ -413,7 +425,7 @@
         },
         {
           "name": "FooterText",
-          "returns": "XText",
+          "returns": "text_x_text_i",
           "desc": [
             "contains the interface to the text of the footer."
           ],
@@ -422,7 +434,7 @@
         },
         {
           "name": "FooterTextLeft",
-          "returns": "XText",
+          "returns": "text_x_text_i",
           "desc": [
             "contains the interface to the text of the footer of a left page."
           ],
@@ -431,7 +443,7 @@
         },
         {
           "name": "FooterTextRight",
-          "returns": "XText",
+          "returns": "text_x_text_i",
           "desc": [
             "contains the interface to the text of the footer of a right page."
           ],
@@ -440,7 +452,7 @@
         },
         {
           "name": "FooterTopBorder",
-          "returns": "BorderLine",
+          "returns": "table_border_line_i",
           "desc": [
             "contains the style of the top border line of the footer."
           ],
@@ -480,7 +492,7 @@
         },
         {
           "name": "FootnoteLineColor",
-          "returns": "Color",
+          "returns": "util_color_i",
           "desc": [
             "contains the color of the separator line between the text and the footnote area."
           ],
@@ -543,7 +555,7 @@
         },
         {
           "name": "GridColor",
-          "returns": "Color",
+          "returns": "util_color_i",
           "desc": [
             "contains the display color of the text grid"
           ],
@@ -619,7 +631,7 @@
         },
         {
           "name": "HeaderBackColor",
-          "returns": "Color",
+          "returns": "util_color_i",
           "desc": [
             "contains the color of the background of the header."
           ],
@@ -628,7 +640,7 @@
         },
         {
           "name": "HeaderBackGraphic",
-          "returns": "XGraphic",
+          "returns": "graphic_x_graphic_i",
           "desc": [
             "contains the graphic of the background of the header.",
             "",
@@ -650,7 +662,7 @@
         },
         {
           "name": "HeaderBackGraphicLocation",
-          "returns": "GraphicLocation",
+          "returns": "graphic_location_i",
           "desc": [
             "determines the location of the background graphic of the header."
           ],
@@ -699,7 +711,7 @@
         },
         {
           "name": "HeaderBottomBorder",
-          "returns": "BorderLine",
+          "returns": "table_border_line_i",
           "desc": [
             "determines the style of the bottom border line of the header."
           ],
@@ -762,7 +774,7 @@
         },
         {
           "name": "HeaderLeftBorder",
-          "returns": "BorderLine",
+          "returns": "table_border_line_i",
           "desc": [
             "determines the style of the left border line of the header."
           ],
@@ -789,7 +801,7 @@
         },
         {
           "name": "HeaderRightBorder",
-          "returns": "BorderLine",
+          "returns": "table_border_line_i",
           "desc": [
             "determines the style of the right border line of the header."
           ],
@@ -816,7 +828,7 @@
         },
         {
           "name": "HeaderShadowFormat",
-          "returns": "ShadowFormat",
+          "returns": "table_shadow_format_i",
           "desc": [
             "determines the shadow of the header."
           ],
@@ -825,7 +837,7 @@
         },
         {
           "name": "HeaderText",
-          "returns": "XText",
+          "returns": "text_x_text_i",
           "desc": [
             "contains the interface to the text of the header."
           ],
@@ -834,7 +846,7 @@
         },
         {
           "name": "HeaderTextLeft",
-          "returns": "XText",
+          "returns": "text_x_text_i",
           "desc": [
             "contains the interface to the text of the header of left pages."
           ],
@@ -843,7 +855,7 @@
         },
         {
           "name": "HeaderTextRight",
-          "returns": "XText",
+          "returns": "text_x_text_i",
           "desc": [
             "contains the interface to the text of the header of right pages."
           ],
@@ -852,7 +864,7 @@
         },
         {
           "name": "HeaderTopBorder",
-          "returns": "BorderLine",
+          "returns": "table_border_line_i",
           "desc": [
             "determines the style of the top border line of the header."
           ],
@@ -888,7 +900,7 @@
         },
         {
           "name": "LeftBorder",
-          "returns": "BorderLine",
+          "returns": "table_border_line_i",
           "desc": [
             "determines the style of the left border line of the page."
           ],
@@ -924,7 +936,7 @@
         },
         {
           "name": "PageStyleLayout",
-          "returns": "PageStyleLayout",
+          "returns": "page_style_layout_i",
           "desc": [
             "determines the layout of the page."
           ],
@@ -960,7 +972,7 @@
         },
         {
           "name": "RightBorder",
-          "returns": "BorderLine",
+          "returns": "table_border_line_i",
           "desc": [
             "determines the style of the right border line of the page."
           ],
@@ -1000,7 +1012,7 @@
         },
         {
           "name": "ShadowFormat",
-          "returns": "ShadowFormat",
+          "returns": "table_shadow_format_i",
           "desc": [
             "determines the shadow of the page."
           ],
@@ -1009,7 +1021,7 @@
         },
         {
           "name": "Size",
-          "returns": "Size",
+          "returns": "awt_size_i",
           "desc": [
             "contains the paper size of the page."
           ],
@@ -1018,7 +1030,7 @@
         },
         {
           "name": "TextColumns",
-          "returns": "XTextColumns",
+          "returns": "text_x_text_columns_i",
           "desc": [
             "contains the column settings of the page."
           ],
@@ -1027,7 +1039,7 @@
         },
         {
           "name": "TopBorder",
-          "returns": "BorderLine",
+          "returns": "table_border_line_i",
           "desc": [
             "determines the style of the top border line of the page."
           ],
@@ -1054,7 +1066,7 @@
         },
         {
           "name": "UserDefinedAttributes",
-          "returns": "XNameContainer",
+          "returns": "container_x_name_container_i",
           "desc": [
             "contains user defined attributes.",
             "",

@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "DataSequence",
   "type": "service",
   "namespace": "com.sun.star.chart2.data",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,43 +15,60 @@
   "data": {
     "from_imports": [
       [
-        "...util.x_cloneable",
-        "XCloneable"
-      ],
-      [
-        ".x_numerical_data_sequence",
-        "XNumericalDataSequence"
-      ],
-      [
-        "...beans.x_property_set",
-        "XPropertySet"
-      ],
-      [
-        "...util.x_modify_broadcaster",
-        "XModifyBroadcaster"
+        ".x_textual_data_sequence",
+        "XTextualDataSequence",
+        "x_textual_data_sequence_i"
       ],
       [
         "...container.x_index_replace",
-        "XIndexReplace"
+        "XIndexReplace",
+        "container_x_index_replace_i"
       ],
       [
-        ".x_textual_data_sequence",
-        "XTextualDataSequence"
+        "...util.x_modify_broadcaster",
+        "XModifyBroadcaster",
+        "util_x_modify_broadcaster_i"
+      ],
+      [
+        ".x_numerical_data_sequence",
+        "XNumericalDataSequence",
+        "x_numerical_data_sequence_i"
+      ],
+      [
+        "...util.x_cloneable",
+        "XCloneable",
+        "util_x_cloneable_i"
+      ],
+      [
+        "...beans.x_property_set",
+        "XPropertySet",
+        "beans_x_property_set_i"
       ],
       [
         ".x_data_sequence",
-        "XDataSequence"
+        "XDataSequence",
+        "x_data_sequence_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".data_sequence_role",
-        "DataSequenceRole"
+        "DataSequenceRole",
+        "data_sequence_role_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.chart2.data.XTextualDataSequence": "x_textual_data_sequence_i",
+      "com.sun.star.container.XIndexReplace": "container_x_index_replace_i",
+      "com.sun.star.util.XModifyBroadcaster": "util_x_modify_broadcaster_i",
+      "com.sun.star.chart2.data.XNumericalDataSequence": "x_numerical_data_sequence_i",
+      "com.sun.star.util.XCloneable": "util_x_cloneable_i",
+      "com.sun.star.beans.XPropertySet": "beans_x_property_set_i",
+      "com.sun.star.chart2.data.XDataSequence": "x_data_sequence_i"
+    },
     "quote": [
-      "DataSequenceRole",
-      "typing.List[int]"
+      "typing.List[int]",
+      "data_sequence_role_i"
     ],
     "typings": [
       "typing.List[int]"
@@ -60,13 +78,13 @@
     "imports": [],
     "namespace": "com.sun.star.chart2.data",
     "extends": [
-      "com.sun.star.chart2.data.XDataSequence",
-      "com.sun.star.chart2.data.XNumericalDataSequence",
       "com.sun.star.chart2.data.XTextualDataSequence",
       "com.sun.star.container.XIndexReplace",
-      "com.sun.star.util.XCloneable",
       "com.sun.star.util.XModifyBroadcaster",
-      "com.sun.star.beans.XPropertySet"
+      "com.sun.star.chart2.data.XNumericalDataSequence",
+      "com.sun.star.util.XCloneable",
+      "com.sun.star.beans.XPropertySet",
+      "com.sun.star.chart2.data.XDataSequence"
     ],
     "desc": [
       "describes a container for a sequence of values.",
@@ -100,7 +118,7 @@
         },
         {
           "name": "Role",
-          "returns": "DataSequenceRole",
+          "returns": "data_sequence_role_i",
           "desc": [
             "The key (index) of the number format that this sequence should be formatted with.",
             "",

@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "EllipseShape",
   "type": "service",
   "namespace": "com.sun.star.drawing",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,37 +16,52 @@
     "from_imports": [
       [
         ".line_properties",
-        "LineProperties"
+        "LineProperties",
+        "line_properties_i"
       ],
       [
         ".text",
-        "Text"
-      ],
-      [
-        ".shadow_properties",
-        "ShadowProperties"
-      ],
-      [
-        ".fill_properties",
-        "FillProperties"
+        "Text",
+        "text_i"
       ],
       [
         ".rotation_descriptor",
-        "RotationDescriptor"
+        "RotationDescriptor",
+        "rotation_descriptor_i"
       ],
       [
         ".shape",
-        "Shape"
+        "Shape",
+        "shape_i"
+      ],
+      [
+        ".fill_properties",
+        "FillProperties",
+        "fill_properties_i"
+      ],
+      [
+        ".shadow_properties",
+        "ShadowProperties",
+        "shadow_properties_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".circle_kind",
-        "CircleKind"
+        "CircleKind",
+        "circle_kind_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.drawing.LineProperties": "line_properties_i",
+      "com.sun.star.drawing.Text": "text_i",
+      "com.sun.star.drawing.RotationDescriptor": "rotation_descriptor_i",
+      "com.sun.star.drawing.Shape": "shape_i",
+      "com.sun.star.drawing.FillProperties": "fill_properties_i",
+      "com.sun.star.drawing.ShadowProperties": "shadow_properties_i"
+    },
     "quote": [
-      "CircleKind"
+      "circle_kind_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -53,12 +69,12 @@
     "imports": [],
     "namespace": "com.sun.star.drawing",
     "extends": [
-      "com.sun.star.drawing.Shape",
       "com.sun.star.drawing.LineProperties",
-      "com.sun.star.drawing.FillProperties",
       "com.sun.star.drawing.Text",
-      "com.sun.star.drawing.ShadowProperties",
-      "com.sun.star.drawing.RotationDescriptor"
+      "com.sun.star.drawing.RotationDescriptor",
+      "com.sun.star.drawing.Shape",
+      "com.sun.star.drawing.FillProperties",
+      "com.sun.star.drawing.ShadowProperties"
     ],
     "desc": [
       "This service is for an ellipse or circle shape."
@@ -77,7 +93,7 @@
         },
         {
           "name": "CircleKind",
-          "returns": "CircleKind",
+          "returns": "circle_kind_i",
           "desc": [
             "This is the kind of circle."
           ],

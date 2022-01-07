@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "SheetCell",
   "type": "service",
   "namespace": "com.sun.star.sheet",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,106 +15,149 @@
   "data": {
     "from_imports": [
       [
-        "..text.x_text_fields_supplier",
-        "XTextFieldsSupplier"
-      ],
-      [
-        "..style.character_properties",
-        "CharacterProperties"
-      ],
-      [
-        "..document.x_action_lockable",
-        "XActionLockable"
-      ],
-      [
-        "..style.paragraph_properties_asian",
-        "ParagraphPropertiesAsian"
+        "..style.paragraph_properties_complex",
+        "ParagraphPropertiesComplex",
+        "style_paragraph_properties_complex_i"
       ],
       [
         "..util.x_indent",
-        "XIndent"
-      ],
-      [
-        "..table.x_column_row_range",
-        "XColumnRowRange"
-      ],
-      [
-        "..table.cell",
-        "Cell"
-      ],
-      [
-        ".x_sheet_annotation_anchor",
-        "XSheetAnnotationAnchor"
-      ],
-      [
-        "..text.text",
-        "Text"
-      ],
-      [
-        "..beans.x_tolerant_multi_property_set",
-        "XTolerantMultiPropertySet"
-      ],
-      [
-        "..style.character_properties_complex",
-        "CharacterPropertiesComplex"
-      ],
-      [
-        "..util.x_modify_broadcaster",
-        "XModifyBroadcaster"
-      ],
-      [
-        "..style.paragraph_properties_complex",
-        "ParagraphPropertiesComplex"
-      ],
-      [
-        "..style.character_properties_asian",
-        "CharacterPropertiesAsian"
-      ],
-      [
-        "..util.x_replaceable",
-        "XReplaceable"
-      ],
-      [
-        "..style.paragraph_properties",
-        "ParagraphProperties"
-      ],
-      [
-        ".sheet_ranges_query",
-        "SheetRangesQuery"
+        "XIndent",
+        "util_x_indent_i"
       ],
       [
         ".x_cell_addressable",
-        "XCellAddressable"
+        "XCellAddressable",
+        "x_cell_addressable_i"
+      ],
+      [
+        "..table.x_column_row_range",
+        "XColumnRowRange",
+        "table_x_column_row_range_i"
+      ],
+      [
+        "..text.x_text_fields_supplier",
+        "XTextFieldsSupplier",
+        "text_x_text_fields_supplier_i"
+      ],
+      [
+        "..util.x_replaceable",
+        "XReplaceable",
+        "util_x_replaceable_i"
+      ],
+      [
+        "..document.x_action_lockable",
+        "XActionLockable",
+        "document_x_action_lockable_i"
+      ],
+      [
+        "..util.x_modify_broadcaster",
+        "XModifyBroadcaster",
+        "util_x_modify_broadcaster_i"
+      ],
+      [
+        "..text.text",
+        "Text",
+        "text_text_i"
+      ],
+      [
+        ".x_sheet_annotation_anchor",
+        "XSheetAnnotationAnchor",
+        "x_sheet_annotation_anchor_i"
+      ],
+      [
+        "..style.paragraph_properties",
+        "ParagraphProperties",
+        "style_paragraph_properties_i"
+      ],
+      [
+        "..style.paragraph_properties_asian",
+        "ParagraphPropertiesAsian",
+        "style_paragraph_properties_asian_i"
+      ],
+      [
+        "..style.character_properties_asian",
+        "CharacterPropertiesAsian",
+        "style_character_properties_asian_i"
+      ],
+      [
+        ".sheet_ranges_query",
+        "SheetRangesQuery",
+        "sheet_ranges_query_i"
+      ],
+      [
+        "..style.character_properties_complex",
+        "CharacterPropertiesComplex",
+        "style_character_properties_complex_i"
+      ],
+      [
+        "..beans.x_tolerant_multi_property_set",
+        "XTolerantMultiPropertySet",
+        "beans_x_tolerant_multi_property_set_i"
+      ],
+      [
+        "..style.character_properties",
+        "CharacterProperties",
+        "style_character_properties_i"
+      ],
+      [
+        "..table.cell",
+        "Cell",
+        "table_cell_i"
       ]
     ],
     "from_imports_typing": [
       [
-        "..table.cell_content_type",
-        "CellContentType"
+        "..awt.size",
+        "Size",
+        "awt_size_i"
       ],
       [
-        "..beans.x_property_set",
-        "XPropertySet"
+        "..table.cell_content_type",
+        "CellContentType",
+        "table_cell_content_type_i"
       ],
       [
         "..awt.point",
-        "Point"
+        "Point",
+        "awt_point_i"
       ],
       [
         ".x_sheet_conditional_entries",
-        "XSheetConditionalEntries"
+        "XSheetConditionalEntries",
+        "x_sheet_conditional_entries_i"
       ],
       [
-        "..awt.size",
-        "Size"
+        "..beans.x_property_set",
+        "XPropertySet",
+        "beans_x_property_set_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.style.ParagraphPropertiesComplex": "style_paragraph_properties_complex_i",
+      "com.sun.star.util.XIndent": "util_x_indent_i",
+      "com.sun.star.sheet.XCellAddressable": "x_cell_addressable_i",
+      "com.sun.star.table.XColumnRowRange": "table_x_column_row_range_i",
+      "com.sun.star.text.XTextFieldsSupplier": "text_x_text_fields_supplier_i",
+      "com.sun.star.util.XReplaceable": "util_x_replaceable_i",
+      "com.sun.star.document.XActionLockable": "document_x_action_lockable_i",
+      "com.sun.star.util.XModifyBroadcaster": "util_x_modify_broadcaster_i",
+      "com.sun.star.text.Text": "text_text_i",
+      "com.sun.star.sheet.XSheetAnnotationAnchor": "x_sheet_annotation_anchor_i",
+      "com.sun.star.style.ParagraphProperties": "style_paragraph_properties_i",
+      "com.sun.star.style.ParagraphPropertiesAsian": "style_paragraph_properties_asian_i",
+      "com.sun.star.style.CharacterPropertiesAsian": "style_character_properties_asian_i",
+      "com.sun.star.sheet.SheetRangesQuery": "sheet_ranges_query_i",
+      "com.sun.star.style.CharacterPropertiesComplex": "style_character_properties_complex_i",
+      "com.sun.star.beans.XTolerantMultiPropertySet": "beans_x_tolerant_multi_property_set_i",
+      "com.sun.star.style.CharacterProperties": "style_character_properties_i",
+      "com.sun.star.table.Cell": "table_cell_i"
+    },
     "quote": [
-      "XSheetConditionalEntries",
-      "XPropertySet",
-      "Size",
-      "Point",
-      "CellContentType"
+      "awt_size_i",
+      "beans_x_property_set_i",
+      "x_sheet_conditional_entries_i",
+      "table_cell_content_type_i",
+      "awt_point_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -121,23 +165,23 @@
     "imports": [],
     "namespace": "com.sun.star.sheet",
     "extends": [
-      "com.sun.star.util.XModifyBroadcaster",
-      "com.sun.star.beans.XTolerantMultiPropertySet",
-      "com.sun.star.text.XTextFieldsSupplier",
-      "com.sun.star.sheet.XSheetAnnotationAnchor",
+      "com.sun.star.style.ParagraphPropertiesComplex",
+      "com.sun.star.util.XIndent",
       "com.sun.star.sheet.XCellAddressable",
       "com.sun.star.table.XColumnRowRange",
-      "com.sun.star.util.XIndent",
+      "com.sun.star.text.XTextFieldsSupplier",
       "com.sun.star.util.XReplaceable",
       "com.sun.star.document.XActionLockable",
-      "com.sun.star.sheet.SheetRangesQuery",
-      "com.sun.star.style.ParagraphPropertiesComplex",
-      "com.sun.star.style.ParagraphPropertiesAsian",
-      "com.sun.star.style.ParagraphProperties",
-      "com.sun.star.style.CharacterPropertiesComplex",
-      "com.sun.star.style.CharacterPropertiesAsian",
-      "com.sun.star.style.CharacterProperties",
+      "com.sun.star.util.XModifyBroadcaster",
       "com.sun.star.text.Text",
+      "com.sun.star.sheet.XSheetAnnotationAnchor",
+      "com.sun.star.style.ParagraphProperties",
+      "com.sun.star.style.ParagraphPropertiesAsian",
+      "com.sun.star.style.CharacterPropertiesAsian",
+      "com.sun.star.sheet.SheetRangesQuery",
+      "com.sun.star.style.CharacterPropertiesComplex",
+      "com.sun.star.beans.XTolerantMultiPropertySet",
+      "com.sun.star.style.CharacterProperties",
       "com.sun.star.table.Cell"
     ],
     "desc": [
@@ -163,7 +207,7 @@
         },
         {
           "name": "CellContentType",
-          "returns": "CellContentType",
+          "returns": "table_cell_content_type_i",
           "desc": [
             "contains the content type of the cell.",
             "",
@@ -176,7 +220,7 @@
         },
         {
           "name": "ConditionalFormat",
-          "returns": "XSheetConditionalEntries",
+          "returns": "x_sheet_conditional_entries_i",
           "desc": [
             "contains the conditional formatting settings for this cell.",
             "",
@@ -187,7 +231,7 @@
         },
         {
           "name": "ConditionalFormatLocal",
-          "returns": "XSheetConditionalEntries",
+          "returns": "x_sheet_conditional_entries_i",
           "desc": [
             "contains the conditional formatting settings for this cell, using localized formulas.",
             "",
@@ -233,7 +277,7 @@
         },
         {
           "name": "Position",
-          "returns": "Point",
+          "returns": "awt_point_i",
           "desc": [
             "contains the position of this cell in the sheet (in 1/100 mm).",
             "",
@@ -244,7 +288,7 @@
         },
         {
           "name": "Size",
-          "returns": "Size",
+          "returns": "awt_size_i",
           "desc": [
             "contains the size of this cell (in 1/100 mm)."
           ],
@@ -253,7 +297,7 @@
         },
         {
           "name": "Validation",
-          "returns": "XPropertySet",
+          "returns": "beans_x_property_set_i",
           "desc": [
             "contains the data validation settings for this cell.",
             "",
@@ -264,7 +308,7 @@
         },
         {
           "name": "ValidationLocal",
-          "returns": "XPropertySet",
+          "returns": "beans_x_property_set_i",
           "desc": [
             "contains the data validation settings for this cell, using localized formulas.",
             "",

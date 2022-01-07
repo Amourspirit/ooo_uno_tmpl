@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "Binding",
   "type": "service",
   "namespace": "com.sun.star.xforms",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,30 +15,35 @@
   "data": {
     "from_imports": [
       [
-        "..form.binding.value_binding",
-        "ValueBinding"
+        "..form.validation.x_validator",
+        "XValidator",
+        "form_validation_x_validator_i"
       ],
       [
         "..form.binding.list_entry_source",
-        "ListEntrySource"
+        "ListEntrySource",
+        "form_binding_list_entry_source_i"
       ],
       [
-        "..form.validation.x_validator",
-        "XValidator"
-      ],
-      [
-        "..util.x_modify_broadcaster",
-        "XModifyBroadcaster"
+        "..form.binding.value_binding",
+        "ValueBinding",
+        "form_binding_value_binding_i"
       ]
     ],
     "from_imports_typing": [
       [
         "..container.x_name_container",
-        "XNameContainer"
+        "XNameContainer",
+        "container_x_name_container_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.form.validation.XValidator": "form_validation_x_validator_i",
+      "com.sun.star.form.binding.ListEntrySource": "form_binding_list_entry_source_i",
+      "com.sun.star.form.binding.ValueBinding": "form_binding_value_binding_i"
+    },
     "quote": [
-      "XNameContainer"
+      "container_x_name_container_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -45,10 +51,9 @@
     "imports": [],
     "namespace": "com.sun.star.xforms",
     "extends": [
-      "com.sun.star.form.binding.ValueBinding",
-      "com.sun.star.util.XModifyBroadcaster",
       "com.sun.star.form.binding.ListEntrySource",
-      "com.sun.star.form.validation.XValidator"
+      "com.sun.star.form.validation.XValidator",
+      "com.sun.star.form.binding.ValueBinding"
     ],
     "desc": [
       "represent a binding to one or more nodes in the DOM tree of an XModel."
@@ -58,7 +63,7 @@
       "properties": [
         {
           "name": "BindingNamespaces",
-          "returns": "XNameContainer",
+          "returns": "container_x_name_container_i",
           "desc": [
             "among other properties, there is this one",
             "",

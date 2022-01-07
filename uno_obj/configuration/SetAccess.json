@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "SetAccess",
   "type": "service",
   "namespace": "com.sun.star.configuration",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,19 +15,21 @@
   "data": {
     "from_imports": [
       [
-        "..container.x_container",
-        "XContainer"
-      ],
-      [
         ".hierarchy_access",
-        "HierarchyAccess"
+        "HierarchyAccess",
+        "hierarchy_access_i"
       ],
       [
         ".simple_set_access",
-        "SimpleSetAccess"
+        "SimpleSetAccess",
+        "simple_set_access_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.configuration.HierarchyAccess": "hierarchy_access_i",
+      "com.sun.star.configuration.SimpleSetAccess": "simple_set_access_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -35,8 +38,7 @@
     "namespace": "com.sun.star.configuration",
     "extends": [
       "com.sun.star.configuration.HierarchyAccess",
-      "com.sun.star.configuration.SimpleSetAccess",
-      "com.sun.star.container.XContainer"
+      "com.sun.star.configuration.SimpleSetAccess"
     ],
     "desc": [
       "provides access to a dynamic, homogeneous set of values or nested trees within a hierarchy.",

@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "GraphicRendererVCL",
   "type": "service",
   "namespace": "com.sun.star.graphic",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,22 +15,29 @@
   "data": {
     "from_imports": [
       [
-        ".x_graphic_renderer",
-        "XGraphicRenderer"
+        "..beans.x_property_set",
+        "XPropertySet",
+        "beans_x_property_set_i"
       ],
       [
-        "..beans.x_property_set",
-        "XPropertySet"
+        ".x_graphic_renderer",
+        "XGraphicRenderer",
+        "x_graphic_renderer_i"
       ]
     ],
     "from_imports_typing": [
       [
         "..awt.rectangle",
-        "Rectangle"
+        "Rectangle",
+        "awt_rectangle_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.beans.XPropertySet": "beans_x_property_set_i",
+      "com.sun.star.graphic.XGraphicRenderer": "x_graphic_renderer_i"
+    },
     "quote": [
-      "Rectangle"
+      "awt_rectangle_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -37,8 +45,8 @@
     "imports": [],
     "namespace": "com.sun.star.graphic",
     "extends": [
-      "com.sun.star.graphic.XGraphicRenderer",
-      "com.sun.star.beans.XPropertySet"
+      "com.sun.star.beans.XPropertySet",
+      "com.sun.star.graphic.XGraphicRenderer"
     ],
     "desc": [
       "Service that describes the necessary interfaces and properties to render a graphic container of XGraphic type.",
@@ -50,7 +58,7 @@
       "properties": [
         {
           "name": "DestinationRect",
-          "returns": "Rectangle",
+          "returns": "awt_rectangle_i",
           "desc": [
             "Specifies the destination rectangle, into which the graphic content is to be rendered onto the device."
           ],

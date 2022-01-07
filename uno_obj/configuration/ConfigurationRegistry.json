@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "ConfigurationRegistry",
   "type": "service",
   "namespace": "com.sun.star.configuration",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,14 +16,20 @@
     "from_imports": [
       [
         "..util.x_flushable",
-        "XFlushable"
+        "XFlushable",
+        "util_x_flushable_i"
       ],
       [
         "..registry.x_simple_registry",
-        "XSimpleRegistry"
+        "XSimpleRegistry",
+        "registry_x_simple_registry_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.util.XFlushable": "util_x_flushable_i",
+      "com.sun.star.registry.XSimpleRegistry": "registry_x_simple_registry_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -30,8 +37,8 @@
     "imports": [],
     "namespace": "com.sun.star.configuration",
     "extends": [
-      "com.sun.star.registry.XSimpleRegistry",
-      "com.sun.star.util.XFlushable"
+      "com.sun.star.util.XFlushable",
+      "com.sun.star.registry.XSimpleRegistry"
     ],
     "desc": [],
     "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1configuration_1_1ConfigurationRegistry.html",

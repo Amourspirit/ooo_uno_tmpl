@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "UIElement",
   "type": "service",
   "namespace": "com.sun.star.ui",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,22 +16,32 @@
     "from_imports": [
       [
         ".xui_element",
-        "XUIElement"
-      ],
-      [
-        "..lang.x_initialization",
-        "XInitialization"
-      ],
-      [
-        "..util.x_updatable",
-        "XUpdatable"
+        "XUIElement",
+        "xui_element_i"
       ],
       [
         "..lang.x_component",
-        "XComponent"
+        "XComponent",
+        "lang_x_component_i"
+      ],
+      [
+        "..lang.x_initialization",
+        "XInitialization",
+        "lang_x_initialization_i"
+      ],
+      [
+        "..util.x_updatable",
+        "XUpdatable",
+        "util_x_updatable_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.ui.XUIElement": "xui_element_i",
+      "com.sun.star.lang.XComponent": "lang_x_component_i",
+      "com.sun.star.lang.XInitialization": "lang_x_initialization_i",
+      "com.sun.star.util.XUpdatable": "util_x_updatable_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -39,9 +50,9 @@
     "namespace": "com.sun.star.ui",
     "extends": [
       "com.sun.star.ui.XUIElement",
+      "com.sun.star.lang.XComponent",
       "com.sun.star.lang.XInitialization",
-      "com.sun.star.util.XUpdatable",
-      "com.sun.star.lang.XComponent"
+      "com.sun.star.util.XUpdatable"
     ],
     "desc": [
       "specifies a user interface element.",

@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "BitmapCanvas",
   "type": "service",
   "namespace": "com.sun.star.rendering",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,15 +15,21 @@
   "data": {
     "from_imports": [
       [
-        ".x_bitmap",
-        "XBitmap"
+        ".x_bitmap_canvas",
+        "XBitmapCanvas",
+        "x_bitmap_canvas_i"
       ],
       [
-        ".x_bitmap_canvas",
-        "XBitmapCanvas"
+        ".x_bitmap",
+        "XBitmap",
+        "x_bitmap_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.rendering.XBitmapCanvas": "x_bitmap_canvas_i",
+      "com.sun.star.rendering.XBitmap": "x_bitmap_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,

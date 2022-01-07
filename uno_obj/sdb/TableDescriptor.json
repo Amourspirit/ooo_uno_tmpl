@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "TableDescriptor",
   "type": "service",
   "namespace": "com.sun.star.sdb",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,15 +15,21 @@
   "data": {
     "from_imports": [
       [
-        ".data_settings",
-        "DataSettings"
+        "..sdbcx.table_descriptor",
+        "TableDescriptor",
+        "sdbcx_table_descriptor_i"
       ],
       [
-        "..sdbcx.table_descriptor",
-        "TableDescriptor"
+        ".data_settings",
+        "DataSettings",
+        "data_settings_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.sdbcx.TableDescriptor": "sdbcx_table_descriptor_i",
+      "com.sun.star.sdb.DataSettings": "data_settings_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,

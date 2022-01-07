@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "ScriptProvider",
   "type": "service",
   "namespace": "com.sun.star.script.provider",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,14 +16,20 @@
     "from_imports": [
       [
         "..browse.browse_node",
-        "BrowseNode"
+        "BrowseNode",
+        "browse_browse_node_i"
       ],
       [
         ".x_script_provider",
-        "XScriptProvider"
+        "XScriptProvider",
+        "x_script_provider_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.script.browse.BrowseNode": "browse_browse_node_i",
+      "com.sun.star.script.provider.XScriptProvider": "x_script_provider_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,

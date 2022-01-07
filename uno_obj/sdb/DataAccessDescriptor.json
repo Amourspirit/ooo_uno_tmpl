@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "DataAccessDescriptor",
   "type": "service",
   "namespace": "com.sun.star.sdb",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,31 +16,36 @@
     "from_imports": [],
     "from_imports_typing": [
       [
-        "..beans.x_property_set",
-        "XPropertySet"
+        "..sdbc.x_result_set",
+        "XResultSet",
+        "sdbc_x_result_set_i"
       ],
       [
-        "..beans.property_value",
-        "PropertyValue"
+        "..beans.x_property_set",
+        "XPropertySet",
+        "beans_x_property_set_i"
       ],
       [
         "..sdbc.x_connection",
-        "XConnection"
+        "XConnection",
+        "sdbc_x_connection_i"
       ],
       [
-        "..sdbc.x_result_set",
-        "XResultSet"
+        "..beans.property_value",
+        "PropertyValue",
+        "beans_property_value_i"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "typing.List[PropertyValue]",
-      "XPropertySet",
-      "XConnection",
-      "typing.List[object]",
-      "XResultSet"
+      "typing.List[beans_property_value_i]",
+      "beans_x_property_set_i",
+      "sdbc_x_connection_i",
+      "sdbc_x_result_set_i",
+      "typing.List[object]"
     ],
     "typings": [
-      "typing.List[PropertyValue]",
+      "typing.List[beans_property_value_i]",
       "typing.List[object]"
     ],
     "requires_typing": true,
@@ -65,7 +71,7 @@
       "types": [
         {
           "name": "ConnectionInfo",
-          "returns": "typing.List[PropertyValue]",
+          "returns": "typing.List[beans_property_value_i]",
           "desc": [
             "specifies additional info to use when creating a connection from a ConnectionResource",
             "",
@@ -96,7 +102,7 @@
       "properties": [
         {
           "name": "ActiveConnection",
-          "returns": "XConnection",
+          "returns": "sdbc_x_connection_i",
           "desc": [
             "is a connection to use.",
             "",
@@ -123,7 +129,7 @@
         },
         {
           "name": "Column",
-          "returns": "XPropertySet",
+          "returns": "beans_x_property_set_i",
           "desc": [
             "specifies a column object",
             "",
@@ -265,7 +271,7 @@
         },
         {
           "name": "ResultSet",
-          "returns": "XResultSet",
+          "returns": "sdbc_x_result_set_i",
           "desc": [
             "specifies an already existent result set to use.",
             "",

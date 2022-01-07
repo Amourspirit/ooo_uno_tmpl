@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "QueryDescriptor",
   "type": "service",
   "namespace": "com.sun.star.sdb",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,23 +15,33 @@
   "data": {
     "from_imports": [
       [
-        "..sdbcx.x_columns_supplier",
-        "XColumnsSupplier"
+        "..sdbcx.descriptor",
+        "Descriptor",
+        "sdbcx_descriptor_i"
       ],
       [
         ".data_settings",
-        "DataSettings"
+        "DataSettings",
+        "data_settings_i"
       ],
       [
-        "..sdbcx.descriptor",
-        "Descriptor"
+        "..sdbcx.x_columns_supplier",
+        "XColumnsSupplier",
+        "sdbcx_x_columns_supplier_i"
       ],
       [
         "..sdbcx.x_data_descriptor_factory",
-        "XDataDescriptorFactory"
+        "XDataDescriptorFactory",
+        "sdbcx_x_data_descriptor_factory_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.sdbcx.Descriptor": "sdbcx_descriptor_i",
+      "com.sun.star.sdb.DataSettings": "data_settings_i",
+      "com.sun.star.sdbcx.XColumnsSupplier": "sdbcx_x_columns_supplier_i",
+      "com.sun.star.sdbcx.XDataDescriptorFactory": "sdbcx_x_data_descriptor_factory_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -39,9 +50,9 @@
     "namespace": "com.sun.star.sdb",
     "extends": [
       "com.sun.star.sdbcx.Descriptor",
-      "com.sun.star.sdbcx.XDataDescriptorFactory",
       "com.sun.star.sdb.DataSettings",
-      "com.sun.star.sdbcx.XColumnsSupplier"
+      "com.sun.star.sdbcx.XColumnsSupplier",
+      "com.sun.star.sdbcx.XDataDescriptorFactory"
     ],
     "desc": [
       "is a stored definition of a SQL \\\"Select statement\\\".",

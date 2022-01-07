@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "ValueBinding",
   "type": "service",
   "namespace": "com.sun.star.form.binding",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,22 +16,32 @@
     "from_imports": [
       [
         "...beans.x_property_set",
-        "XPropertySet"
-      ],
-      [
-        "...util.x_modify_broadcaster",
-        "XModifyBroadcaster"
-      ],
-      [
-        "...lang.x_component",
-        "XComponent"
+        "XPropertySet",
+        "beans_x_property_set_i"
       ],
       [
         ".x_value_binding",
-        "XValueBinding"
+        "XValueBinding",
+        "x_value_binding_i"
+      ],
+      [
+        "...util.x_modify_broadcaster",
+        "XModifyBroadcaster",
+        "util_x_modify_broadcaster_i"
+      ],
+      [
+        "...lang.x_component",
+        "XComponent",
+        "lang_x_component_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.beans.XPropertySet": "beans_x_property_set_i",
+      "com.sun.star.form.binding.XValueBinding": "x_value_binding_i",
+      "com.sun.star.util.XModifyBroadcaster": "util_x_modify_broadcaster_i",
+      "com.sun.star.lang.XComponent": "lang_x_component_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,

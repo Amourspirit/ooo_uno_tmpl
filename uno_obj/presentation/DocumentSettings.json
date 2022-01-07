@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "DocumentSettings",
   "type": "service",
   "namespace": "com.sun.star.presentation",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,19 +15,21 @@
   "data": {
     "from_imports": [
       [
-        "..beans.x_property_set",
-        "XPropertySet"
+        "..document.header_footer_settings",
+        "HeaderFooterSettings",
+        "document_header_footer_settings_i"
       ],
       [
         "..document.settings",
-        "Settings"
-      ],
-      [
-        "..document.header_footer_settings",
-        "HeaderFooterSettings"
+        "Settings",
+        "document_settings_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.document.HeaderFooterSettings": "document_header_footer_settings_i",
+      "com.sun.star.document.Settings": "document_settings_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -34,9 +37,8 @@
     "imports": [],
     "namespace": "com.sun.star.presentation",
     "extends": [
-      "com.sun.star.document.Settings",
       "com.sun.star.document.HeaderFooterSettings",
-      "com.sun.star.beans.XPropertySet"
+      "com.sun.star.document.Settings"
     ],
     "desc": [
       "describes properties that apply to the whole presentation document."

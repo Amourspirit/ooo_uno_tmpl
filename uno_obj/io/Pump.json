@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "Pump",
   "type": "service",
   "namespace": "com.sun.star.io",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,19 +15,27 @@
   "data": {
     "from_imports": [
       [
-        ".x_active_data_control",
-        "XActiveDataControl"
+        ".x_active_data_sink",
+        "XActiveDataSink",
+        "x_active_data_sink_i"
       ],
       [
         ".x_active_data_source",
-        "XActiveDataSource"
+        "XActiveDataSource",
+        "x_active_data_source_i"
       ],
       [
-        ".x_active_data_sink",
-        "XActiveDataSink"
+        ".x_active_data_control",
+        "XActiveDataControl",
+        "x_active_data_control_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.io.XActiveDataSink": "x_active_data_sink_i",
+      "com.sun.star.io.XActiveDataSource": "x_active_data_source_i",
+      "com.sun.star.io.XActiveDataControl": "x_active_data_control_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -34,8 +43,8 @@
     "imports": [],
     "namespace": "com.sun.star.io",
     "extends": [
-      "com.sun.star.io.XActiveDataSource",
       "com.sun.star.io.XActiveDataSink",
+      "com.sun.star.io.XActiveDataSource",
       "com.sun.star.io.XActiveDataControl"
     ],
     "desc": [

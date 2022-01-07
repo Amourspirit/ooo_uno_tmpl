@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "HierarchyAccess",
   "type": "service",
   "namespace": "com.sun.star.configuration",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,35 +15,51 @@
   "data": {
     "from_imports": [
       [
-        "..beans.x_multi_property_states",
-        "XMultiPropertyStates"
-      ],
-      [
-        "..container.x_hierarchical_name_access",
-        "XHierarchicalNameAccess"
-      ],
-      [
-        "..container.x_name_access",
-        "XNameAccess"
-      ],
-      [
-        "..container.x_container",
-        "XContainer"
-      ],
-      [
         "..beans.x_property_set_info",
-        "XPropertySetInfo"
+        "XPropertySetInfo",
+        "beans_x_property_set_info_i"
       ],
       [
         "..beans.x_property_state",
-        "XPropertyState"
+        "XPropertyState",
+        "beans_x_property_state_i"
+      ],
+      [
+        "..beans.x_multi_property_states",
+        "XMultiPropertyStates",
+        "beans_x_multi_property_states_i"
+      ],
+      [
+        "..container.x_name_access",
+        "XNameAccess",
+        "container_x_name_access_i"
+      ],
+      [
+        "..container.x_hierarchical_name_access",
+        "XHierarchicalNameAccess",
+        "container_x_hierarchical_name_access_i"
       ],
       [
         "..beans.x_exact_name",
-        "XExactName"
+        "XExactName",
+        "beans_x_exact_name_i"
+      ],
+      [
+        "..container.x_container",
+        "XContainer",
+        "container_x_container_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.beans.XPropertySetInfo": "beans_x_property_set_info_i",
+      "com.sun.star.beans.XPropertyState": "beans_x_property_state_i",
+      "com.sun.star.beans.XMultiPropertyStates": "beans_x_multi_property_states_i",
+      "com.sun.star.container.XNameAccess": "container_x_name_access_i",
+      "com.sun.star.container.XHierarchicalNameAccess": "container_x_hierarchical_name_access_i",
+      "com.sun.star.beans.XExactName": "beans_x_exact_name_i",
+      "com.sun.star.container.XContainer": "container_x_container_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -50,13 +67,13 @@
     "imports": [],
     "namespace": "com.sun.star.configuration",
     "extends": [
-      "com.sun.star.container.XNameAccess",
-      "com.sun.star.container.XHierarchicalNameAccess",
-      "com.sun.star.container.XContainer",
-      "com.sun.star.beans.XExactName",
       "com.sun.star.beans.XPropertySetInfo",
       "com.sun.star.beans.XPropertyState",
-      "com.sun.star.beans.XMultiPropertyStates"
+      "com.sun.star.beans.XMultiPropertyStates",
+      "com.sun.star.container.XNameAccess",
+      "com.sun.star.container.XHierarchicalNameAccess",
+      "com.sun.star.beans.XExactName",
+      "com.sun.star.container.XContainer"
     ],
     "desc": [
       "provides access to a hierarchy of descendant elements.",

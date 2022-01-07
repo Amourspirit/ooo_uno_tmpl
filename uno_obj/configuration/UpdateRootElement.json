@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "UpdateRootElement",
   "type": "service",
   "namespace": "com.sun.star.configuration",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,14 +16,20 @@
     "from_imports": [
       [
         ".access_root_element",
-        "AccessRootElement"
+        "AccessRootElement",
+        "access_root_element_i"
       ],
       [
         "..util.x_changes_batch",
-        "XChangesBatch"
+        "XChangesBatch",
+        "util_x_changes_batch_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.configuration.AccessRootElement": "access_root_element_i",
+      "com.sun.star.util.XChangesBatch": "util_x_changes_batch_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,

@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "DialogProvider",
   "type": "service",
   "namespace": "com.sun.star.awt",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,32 +16,40 @@
     "from_imports": [
       [
         ".x_dialog_provider",
-        "XDialogProvider"
+        "XDialogProvider",
+        "x_dialog_provider_i"
       ]
     ],
     "from_imports_typing": [
       [
-        "..frame.x_model",
-        "XModel"
+        "..script.x_script_listener",
+        "XScriptListener",
+        "script_x_script_listener_i"
       ],
       [
         "..container.x_name_container",
-        "XNameContainer"
+        "XNameContainer",
+        "container_x_name_container_i"
       ],
       [
-        "..script.x_script_listener",
-        "XScriptListener"
+        "..frame.x_model",
+        "XModel",
+        "frame_x_model_i"
       ],
       [
         "..io.x_input_stream",
-        "XInputStream"
+        "XInputStream",
+        "io_x_input_stream_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.awt.XDialogProvider": "x_dialog_provider_i"
+    },
     "quote": [
-      "XModel",
-      "XNameContainer",
-      "XInputStream",
-      "XScriptListener"
+      "io_x_input_stream_i",
+      "container_x_name_container_i",
+      "frame_x_model_i",
+      "script_x_script_listener_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -64,7 +73,7 @@
           "args": [
             [
               "Model",
-              "XModel",
+              "frame_x_model_i",
               "in"
             ]
           ]
@@ -77,22 +86,22 @@
           "args": [
             [
               "Model",
-              "XModel",
+              "frame_x_model_i",
               "in"
             ],
             [
               "InStream",
-              "XInputStream",
+              "io_x_input_stream_i",
               "in"
             ],
             [
               "DialogLib",
-              "XNameContainer",
+              "container_x_name_container_i",
               "in"
             ],
             [
               "ScriptListener",
-              "XScriptListener",
+              "script_x_script_listener_i",
               "in"
             ]
           ]

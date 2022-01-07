@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "RegressionCurve",
   "type": "service",
   "namespace": "com.sun.star.chart2",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,18 +16,26 @@
     "from_imports": [
       [
         "..drawing.line_properties",
-        "LineProperties"
-      ],
-      [
-        "..beans.property_set",
-        "PropertySet"
+        "LineProperties",
+        "drawing_line_properties_i"
       ],
       [
         ".x_regression_curve",
-        "XRegressionCurve"
+        "XRegressionCurve",
+        "x_regression_curve_i"
+      ],
+      [
+        "..beans.property_set",
+        "PropertySet",
+        "beans_property_set_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.drawing.LineProperties": "drawing_line_properties_i",
+      "com.sun.star.chart2.XRegressionCurve": "x_regression_curve_i",
+      "com.sun.star.beans.PropertySet": "beans_property_set_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -34,9 +43,9 @@
     "imports": [],
     "namespace": "com.sun.star.chart2",
     "extends": [
-      "com.sun.star.beans.PropertySet",
       "com.sun.star.drawing.LineProperties",
-      "com.sun.star.chart2.XRegressionCurve"
+      "com.sun.star.chart2.XRegressionCurve",
+      "com.sun.star.beans.PropertySet"
     ],
     "desc": [],
     "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1chart2_1_1RegressionCurve.html",

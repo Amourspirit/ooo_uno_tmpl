@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "GroupElement",
   "type": "service",
   "namespace": "com.sun.star.configuration",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,15 +15,15 @@
   "data": {
     "from_imports": [
       [
-        "..container.x_child",
-        "XChild"
-      ],
-      [
         ".hierarchy_element",
-        "HierarchyElement"
+        "HierarchyElement",
+        "hierarchy_element_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.configuration.HierarchyElement": "hierarchy_element_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -30,8 +31,7 @@
     "imports": [],
     "namespace": "com.sun.star.configuration",
     "extends": [
-      "com.sun.star.configuration.HierarchyElement",
-      "com.sun.star.container.XChild"
+      "com.sun.star.configuration.HierarchyElement"
     ],
     "desc": [
       "provides information about a predefined element contained in a heterogeneous group of elements within a hierarchy.",

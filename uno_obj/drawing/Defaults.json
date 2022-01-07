@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "Defaults",
   "type": "service",
   "namespace": "com.sun.star.drawing",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,30 +16,44 @@
     "from_imports": [
       [
         ".line_properties",
-        "LineProperties"
-      ],
-      [
-        ".text_properties",
-        "TextProperties"
-      ],
-      [
-        ".shadow_properties",
-        "ShadowProperties"
-      ],
-      [
-        ".fill_properties",
-        "FillProperties"
+        "LineProperties",
+        "line_properties_i"
       ],
       [
         ".measure_properties",
-        "MeasureProperties"
+        "MeasureProperties",
+        "measure_properties_i"
       ],
       [
         ".connector_properties",
-        "ConnectorProperties"
+        "ConnectorProperties",
+        "connector_properties_i"
+      ],
+      [
+        ".text_properties",
+        "TextProperties",
+        "text_properties_i"
+      ],
+      [
+        ".fill_properties",
+        "FillProperties",
+        "fill_properties_i"
+      ],
+      [
+        ".shadow_properties",
+        "ShadowProperties",
+        "shadow_properties_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.drawing.LineProperties": "line_properties_i",
+      "com.sun.star.drawing.MeasureProperties": "measure_properties_i",
+      "com.sun.star.drawing.ConnectorProperties": "connector_properties_i",
+      "com.sun.star.drawing.TextProperties": "text_properties_i",
+      "com.sun.star.drawing.FillProperties": "fill_properties_i",
+      "com.sun.star.drawing.ShadowProperties": "shadow_properties_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -46,12 +61,12 @@
     "imports": [],
     "namespace": "com.sun.star.drawing",
     "extends": [
-      "com.sun.star.drawing.TextProperties",
       "com.sun.star.drawing.LineProperties",
-      "com.sun.star.drawing.FillProperties",
-      "com.sun.star.drawing.ShadowProperties",
+      "com.sun.star.drawing.MeasureProperties",
       "com.sun.star.drawing.ConnectorProperties",
-      "com.sun.star.drawing.MeasureProperties"
+      "com.sun.star.drawing.TextProperties",
+      "com.sun.star.drawing.FillProperties",
+      "com.sun.star.drawing.ShadowProperties"
     ],
     "desc": [
       "This is a set of properties to access the defaults of a drawing document."

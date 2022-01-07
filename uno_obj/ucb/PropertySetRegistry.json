@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "PropertySetRegistry",
   "type": "service",
   "namespace": "com.sun.star.ucb",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,15 +15,21 @@
   "data": {
     "from_imports": [
       [
-        "..container.x_name_access",
-        "XNameAccess"
+        ".x_property_set_registry",
+        "XPropertySetRegistry",
+        "x_property_set_registry_i"
       ],
       [
-        ".x_property_set_registry",
-        "XPropertySetRegistry"
+        "..container.x_name_access",
+        "XNameAccess",
+        "container_x_name_access_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.ucb.XPropertySetRegistry": "x_property_set_registry_i",
+      "com.sun.star.container.XNameAccess": "container_x_name_access_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,

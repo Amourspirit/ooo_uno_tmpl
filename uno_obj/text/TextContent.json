@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "TextContent",
   "type": "service",
   "namespace": "com.sun.star.text",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,26 +16,32 @@
     "from_imports": [
       [
         ".x_text_content",
-        "XTextContent"
+        "XTextContent",
+        "x_text_content_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".text_content_anchor_type",
-        "TextContentAnchorType"
+        "TextContentAnchorType",
+        "text_content_anchor_type_i"
       ],
       [
         ".wrap_text_mode",
-        "WrapTextMode"
+        "WrapTextMode",
+        "wrap_text_mode_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.text.XTextContent": "x_text_content_i"
+    },
     "quote": [
-      "WrapTextMode",
-      "TextContentAnchorType",
-      "typing.List[TextContentAnchorType]"
+      "text_content_anchor_type_i",
+      "typing.List[text_content_anchor_type_i]",
+      "wrap_text_mode_i"
     ],
     "typings": [
-      "typing.List[TextContentAnchorType]"
+      "typing.List[text_content_anchor_type_i]"
     ],
     "requires_typing": true,
     "name": "TextContent",
@@ -55,7 +62,7 @@
       "types": [
         {
           "name": "AnchorTypes",
-          "returns": "typing.List[TextContentAnchorType]",
+          "returns": "typing.List[text_content_anchor_type_i]",
           "desc": [
             "contains the anchor type of the text content."
           ],
@@ -66,7 +73,7 @@
       "properties": [
         {
           "name": "AnchorType",
-          "returns": "TextContentAnchorType",
+          "returns": "text_content_anchor_type_i",
           "desc": [
             "specifies how the text content is attached to its surrounding Text."
           ],
@@ -75,7 +82,7 @@
         },
         {
           "name": "TextWrap",
-          "returns": "WrapTextMode",
+          "returns": "wrap_text_mode_i",
           "desc": [
             "specifies if the text content is a shape and how the text is wrapped around the shape."
           ],

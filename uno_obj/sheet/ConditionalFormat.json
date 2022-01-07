@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "ConditionalFormat",
   "type": "service",
   "namespace": "com.sun.star.sheet",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,21 +16,28 @@
     "from_imports": [
       [
         "..beans.x_property_set",
-        "XPropertySet"
+        "XPropertySet",
+        "beans_x_property_set_i"
       ],
       [
         ".x_conditional_format",
-        "XConditionalFormat"
+        "XConditionalFormat",
+        "x_conditional_format_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_sheet_cell_ranges",
-        "XSheetCellRanges"
+        "XSheetCellRanges",
+        "x_sheet_cell_ranges_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.beans.XPropertySet": "beans_x_property_set_i",
+      "com.sun.star.sheet.XConditionalFormat": "x_conditional_format_i"
+    },
     "quote": [
-      "XSheetCellRanges"
+      "x_sheet_cell_ranges_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -55,7 +63,7 @@
         },
         {
           "name": "Range",
-          "returns": "XSheetCellRanges",
+          "returns": "x_sheet_cell_ranges_i",
           "desc": [
             "represents the range for the conditional format All ranges have to be in the same sheet."
           ],

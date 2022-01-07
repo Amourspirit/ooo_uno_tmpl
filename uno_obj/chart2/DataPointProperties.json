@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "DataPointProperties",
   "type": "service",
   "namespace": "com.sun.star.chart2",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,93 +15,112 @@
   "data": {
     "from_imports": [
       [
-        "..beans.property_set",
-        "PropertySet"
+        "..drawing.fill_properties",
+        "FillProperties",
+        "drawing_fill_properties_i"
       ],
       [
-        "..drawing.fill_properties",
-        "FillProperties"
+        "..beans.property_set",
+        "PropertySet",
+        "beans_property_set_i"
       ]
     ],
     "from_imports_typing": [
       [
-        "..drawing.line_dash",
-        "LineDash"
-      ],
-      [
-        "..drawing.bitmap_mode",
-        "BitmapMode"
-      ],
-      [
-        ".data_point_label",
-        "DataPointLabel"
-      ],
-      [
-        "..awt.gradient",
-        "Gradient"
-      ],
-      [
-        "..drawing.rectangle_point",
-        "RectanglePoint"
-      ],
-      [
-        ".relative_position",
-        "RelativePosition"
-      ],
-      [
-        "..beans.x_property_set",
-        "XPropertySet"
-      ],
-      [
-        "..drawing.fill_style",
-        "FillStyle"
-      ],
-      [
         "..awt.size",
-        "Size"
+        "Size",
+        "awt_size_i"
       ],
       [
         ".x_data_point_custom_label_field",
-        "XDataPointCustomLabelField"
+        "XDataPointCustomLabelField",
+        "x_data_point_custom_label_field_i"
       ],
       [
-        "..drawing.hatch",
-        "Hatch"
+        ".relative_position",
+        "RelativePosition",
+        "relative_position_i"
       ],
       [
-        ".symbol",
-        "Symbol"
+        "..drawing.rectangle_point",
+        "RectanglePoint",
+        "drawing_rectangle_point_i"
+      ],
+      [
+        "..drawing.line_dash",
+        "LineDash",
+        "drawing_line_dash_i"
+      ],
+      [
+        "..awt.gradient",
+        "Gradient",
+        "awt_gradient_i"
+      ],
+      [
+        "..drawing.bitmap_mode",
+        "BitmapMode",
+        "drawing_bitmap_mode_i"
+      ],
+      [
+        ".data_point_label",
+        "DataPointLabel",
+        "data_point_label_i"
       ],
       [
         "..drawing.line_style",
-        "LineStyle"
+        "LineStyle",
+        "drawing_line_style_i"
+      ],
+      [
+        "..beans.x_property_set",
+        "XPropertySet",
+        "beans_x_property_set_i"
+      ],
+      [
+        "..drawing.hatch",
+        "Hatch",
+        "drawing_hatch_i"
+      ],
+      [
+        "..drawing.fill_style",
+        "FillStyle",
+        "drawing_fill_style_i"
+      ],
+      [
+        ".symbol",
+        "Symbol",
+        "symbol_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.drawing.FillProperties": "drawing_fill_properties_i",
+      "com.sun.star.beans.PropertySet": "beans_property_set_i"
+    },
     "quote": [
-      "DataPointLabel",
-      "typing.List[XDataPointCustomLabelField]",
-      "LineStyle",
-      "Hatch",
-      "RectanglePoint",
-      "FillStyle",
-      "BitmapMode",
-      "Size",
-      "XPropertySet",
-      "Symbol",
-      "LineDash",
-      "RelativePosition",
-      "Gradient"
+      "drawing_rectangle_point_i",
+      "awt_size_i",
+      "beans_x_property_set_i",
+      "symbol_i",
+      "data_point_label_i",
+      "drawing_line_style_i",
+      "awt_gradient_i",
+      "drawing_hatch_i",
+      "relative_position_i",
+      "drawing_line_dash_i",
+      "drawing_bitmap_mode_i",
+      "typing.List[x_data_point_custom_label_field_i]",
+      "drawing_fill_style_i"
     ],
     "typings": [
-      "typing.List[XDataPointCustomLabelField]"
+      "typing.List[x_data_point_custom_label_field_i]"
     ],
     "requires_typing": true,
     "name": "DataPointProperties",
     "imports": [],
     "namespace": "com.sun.star.chart2",
     "extends": [
-      "com.sun.star.beans.PropertySet",
-      "com.sun.star.drawing.FillProperties"
+      "com.sun.star.drawing.FillProperties",
+      "com.sun.star.beans.PropertySet"
     ],
     "desc": [
       "",
@@ -113,7 +133,7 @@
       "types": [
         {
           "name": "CustomLabelFields",
-          "returns": "typing.List[XDataPointCustomLabelField]",
+          "returns": "typing.List[x_data_point_custom_label_field_i]",
           "desc": [
             "specifies a text with possible fields that is used as a data point label, if set then Label property is ignored",
             "",
@@ -139,7 +159,7 @@
         },
         {
           "name": "BorderDash",
-          "returns": "LineDash",
+          "returns": "drawing_line_dash_i",
           "desc": [
             "Is used for borders around filled objects.",
             "",
@@ -159,7 +179,7 @@
         },
         {
           "name": "BorderStyle",
-          "returns": "LineStyle",
+          "returns": "drawing_line_style_i",
           "desc": [
             "Is used for borders around filled objects.",
             "",
@@ -205,7 +225,7 @@
         },
         {
           "name": "CustomLabelPosition",
-          "returns": "RelativePosition",
+          "returns": "relative_position_i",
           "desc": [
             "Custom position on the page associated to the CUSTOM label placement.",
             "",
@@ -218,7 +238,7 @@
         },
         {
           "name": "ErrorBarX",
-          "returns": "XPropertySet",
+          "returns": "beans_x_property_set_i",
           "desc": [
             "If void, no error bars are shown for the data point in x-direction.",
             "",
@@ -229,7 +249,7 @@
         },
         {
           "name": "ErrorBarY",
-          "returns": "XPropertySet",
+          "returns": "beans_x_property_set_i",
           "desc": [
             "If void, no error bars are shown for the data point in y-direction.",
             "",
@@ -260,7 +280,7 @@
         },
         {
           "name": "FillBitmapMode",
-          "returns": "BitmapMode",
+          "returns": "drawing_bitmap_mode_i",
           "desc": [
             "this enum selects how an area is filled with a single bitmap."
           ],
@@ -316,7 +336,7 @@
         },
         {
           "name": "FillBitmapRectanglePoint",
-          "returns": "RectanglePoint",
+          "returns": "drawing_rectangle_point_i",
           "desc": [
             "The RectanglePoint specifies the position inside of the bitmap to use as the top left position for rendering."
           ],
@@ -347,7 +367,7 @@
         },
         {
           "name": "FillStyle",
-          "returns": "FillStyle",
+          "returns": "drawing_fill_style_i",
           "desc": [
             "This enumeration selects the style with which the area will be filled."
           ],
@@ -371,7 +391,7 @@
         },
         {
           "name": "Gradient",
-          "returns": "Gradient",
+          "returns": "awt_gradient_i",
           "desc": [],
           "raises_get": "",
           "raises_set": ""
@@ -385,7 +405,7 @@
         },
         {
           "name": "Hatch",
-          "returns": "Hatch",
+          "returns": "drawing_hatch_i",
           "desc": [],
           "raises_get": "",
           "raises_set": ""
@@ -399,7 +419,7 @@
         },
         {
           "name": "Label",
-          "returns": "DataPointLabel",
+          "returns": "data_point_label_i",
           "desc": [],
           "raises_get": "",
           "raises_set": ""
@@ -424,7 +444,7 @@
         },
         {
           "name": "LineDash",
-          "returns": "LineDash",
+          "returns": "drawing_line_dash_i",
           "desc": [
             "Is only used for line-chart types."
           ],
@@ -442,7 +462,7 @@
         },
         {
           "name": "LineStyle",
-          "returns": "LineStyle",
+          "returns": "drawing_line_style_i",
           "desc": [],
           "raises_get": "",
           "raises_set": ""
@@ -496,7 +516,7 @@
         },
         {
           "name": "ReferencePageSize",
-          "returns": "Size",
+          "returns": "awt_size_i",
           "desc": [
             "The size of the page at the moment when the font size for data labels was set.",
             "",
@@ -516,7 +536,7 @@
         },
         {
           "name": "Symbol",
-          "returns": "Symbol",
+          "returns": "symbol_i",
           "desc": [],
           "raises_get": "",
           "raises_set": ""
@@ -547,7 +567,7 @@
         },
         {
           "name": "TransparencyGradient",
-          "returns": "Gradient",
+          "returns": "awt_gradient_i",
           "desc": [
             "This describes the transparency of the fill area as a gradient."
           ],

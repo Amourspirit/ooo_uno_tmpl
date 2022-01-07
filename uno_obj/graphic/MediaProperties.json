@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "MediaProperties",
   "type": "service",
   "namespace": "com.sun.star.graphic",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -16,21 +17,25 @@
     "from_imports_typing": [
       [
         "..io.x_stream",
-        "XStream"
-      ],
-      [
-        "..beans.property_values",
-        "PropertyValues"
+        "XStream",
+        "io_x_stream_i"
       ],
       [
         "..io.x_input_stream",
-        "XInputStream"
+        "XInputStream",
+        "io_x_input_stream_i"
+      ],
+      [
+        "..beans.property_values",
+        "PropertyValues",
+        "beans_property_values_i"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "PropertyValues",
-      "XInputStream",
-      "XStream"
+      "io_x_stream_i",
+      "io_x_input_stream_i",
+      "beans_property_values_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -46,7 +51,7 @@
       "properties": [
         {
           "name": "FilterData",
-          "returns": "PropertyValues",
+          "returns": "beans_property_values_i",
           "desc": [
             "Additional properties that will be passed to the appropriate filter module."
           ],
@@ -55,7 +60,7 @@
         },
         {
           "name": "InputStream",
-          "returns": "XInputStream",
+          "returns": "io_x_input_stream_i",
           "desc": [
             "This property is only used for loading graphics or querying graphic descriptors.",
             "",
@@ -77,7 +82,7 @@
         },
         {
           "name": "OutputStream",
-          "returns": "XStream",
+          "returns": "io_x_stream_i",
           "desc": [
             "This property is only used for storing graphics.",
             "",

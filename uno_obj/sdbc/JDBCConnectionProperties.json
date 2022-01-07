@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "JDBCConnectionProperties",
   "type": "service",
   "namespace": "com.sun.star.sdbc",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,21 +16,26 @@
     "from_imports": [
       [
         ".connection_properties",
-        "ConnectionProperties"
+        "ConnectionProperties",
+        "connection_properties_i"
       ]
     ],
     "from_imports_typing": [
       [
         "..beans.named_value",
-        "NamedValue"
+        "NamedValue",
+        "beans_named_value_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.sdbc.ConnectionProperties": "connection_properties_i"
+    },
     "quote": [
-      "typing.List[NamedValue]",
+      "typing.List[beans_named_value_i]",
       "typing.List[object]"
     ],
     "typings": [
-      "typing.List[NamedValue]",
+      "typing.List[beans_named_value_i]",
       "typing.List[object]"
     ],
     "requires_typing": true,
@@ -55,7 +61,7 @@
       "types": [
         {
           "name": "SystemProperties",
-          "returns": "typing.List[NamedValue]",
+          "returns": "typing.List[beans_named_value_i]",
           "desc": [
             "specifies a set of properties to pass to java.lang.System.setProperty before loading the system's JDBC driver."
           ],

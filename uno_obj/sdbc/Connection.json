@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "Connection",
   "type": "service",
   "namespace": "com.sun.star.sdbc",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,19 +15,27 @@
   "data": {
     "from_imports": [
       [
-        "..lang.x_component",
-        "XComponent"
-      ],
-      [
         ".x_connection",
-        "XConnection"
+        "XConnection",
+        "x_connection_i"
       ],
       [
         ".x_warnings_supplier",
-        "XWarningsSupplier"
+        "XWarningsSupplier",
+        "x_warnings_supplier_i"
+      ],
+      [
+        "..lang.x_component",
+        "XComponent",
+        "lang_x_component_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.sdbc.XConnection": "x_connection_i",
+      "com.sun.star.sdbc.XWarningsSupplier": "x_warnings_supplier_i",
+      "com.sun.star.lang.XComponent": "lang_x_component_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -34,9 +43,9 @@
     "imports": [],
     "namespace": "com.sun.star.sdbc",
     "extends": [
-      "com.sun.star.lang.XComponent",
       "com.sun.star.sdbc.XConnection",
-      "com.sun.star.sdbc.XWarningsSupplier"
+      "com.sun.star.sdbc.XWarningsSupplier",
+      "com.sun.star.lang.XComponent"
     ],
     "desc": [
       "represents a connection (session) with a specific database.",

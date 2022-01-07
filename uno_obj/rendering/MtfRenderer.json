@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "MtfRenderer",
   "type": "service",
   "namespace": "com.sun.star.rendering",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,17 +16,22 @@
     "from_imports": [
       [
         ".x_mtf_renderer",
-        "XMtfRenderer"
+        "XMtfRenderer",
+        "x_mtf_renderer_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_bitmap_canvas",
-        "XBitmapCanvas"
+        "XBitmapCanvas",
+        "x_bitmap_canvas_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.rendering.XMtfRenderer": "x_mtf_renderer_i"
+    },
     "quote": [
-      "XBitmapCanvas"
+      "x_bitmap_canvas_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -47,7 +53,7 @@
           "args": [
             [
               "Canvas",
-              "XBitmapCanvas",
+              "x_bitmap_canvas_i",
               "in"
             ]
           ]

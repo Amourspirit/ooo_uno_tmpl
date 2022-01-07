@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "SpreadsheetDocument",
   "type": "service",
   "namespace": "com.sun.star.sheet",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,94 +15,131 @@
   "data": {
     "from_imports": [
       [
-        "..style.x_style_families_supplier",
-        "XStyleFamiliesSupplier"
-      ],
-      [
-        "..util.x_protectable",
-        "XProtectable"
-      ],
-      [
-        "..document.x_link_target_supplier",
-        "XLinkTargetSupplier"
-      ],
-      [
-        "..document.x_action_lockable",
-        "XActionLockable"
-      ],
-      [
-        ".x_spreadsheet_document",
-        "XSpreadsheetDocument"
-      ],
-      [
         ".spreadsheet_document_settings",
-        "SpreadsheetDocumentSettings"
-      ],
-      [
-        "..lang.x_multi_service_factory",
-        "XMultiServiceFactory"
-      ],
-      [
-        "..util.x_number_formats_supplier",
-        "XNumberFormatsSupplier"
-      ],
-      [
-        "..frame.x_model",
-        "XModel"
-      ],
-      [
-        ".x_consolidatable",
-        "XConsolidatable"
-      ],
-      [
-        ".x_goal_seek",
-        "XGoalSeek"
+        "SpreadsheetDocumentSettings",
+        "spreadsheet_document_settings_i"
       ],
       [
         "..drawing.x_draw_pages_supplier",
-        "XDrawPagesSupplier"
-      ],
-      [
-        ".x_document_auditing",
-        "XDocumentAuditing"
-      ],
-      [
-        ".x_calculatable",
-        "XCalculatable"
+        "XDrawPagesSupplier",
+        "drawing_x_draw_pages_supplier_i"
       ],
       [
         "..document.office_document",
-        "OfficeDocument"
+        "OfficeDocument",
+        "document_office_document_i"
+      ],
+      [
+        "..document.x_action_lockable",
+        "XActionLockable",
+        "document_x_action_lockable_i"
+      ],
+      [
+        "..util.x_protectable",
+        "XProtectable",
+        "util_x_protectable_i"
+      ],
+      [
+        ".x_document_auditing",
+        "XDocumentAuditing",
+        "x_document_auditing_i"
+      ],
+      [
+        "..style.x_style_families_supplier",
+        "XStyleFamiliesSupplier",
+        "style_x_style_families_supplier_i"
+      ],
+      [
+        ".x_goal_seek",
+        "XGoalSeek",
+        "x_goal_seek_i"
+      ],
+      [
+        "..lang.x_multi_service_factory",
+        "XMultiServiceFactory",
+        "lang_x_multi_service_factory_i"
+      ],
+      [
+        ".x_consolidatable",
+        "XConsolidatable",
+        "x_consolidatable_i"
+      ],
+      [
+        "..document.x_link_target_supplier",
+        "XLinkTargetSupplier",
+        "document_x_link_target_supplier_i"
+      ],
+      [
+        "..frame.x_model",
+        "XModel",
+        "frame_x_model_i"
+      ],
+      [
+        "..util.x_number_formats_supplier",
+        "XNumberFormatsSupplier",
+        "util_x_number_formats_supplier_i"
+      ],
+      [
+        ".x_spreadsheet_document",
+        "XSpreadsheetDocument",
+        "x_spreadsheet_document_i"
+      ],
+      [
+        ".x_calculatable",
+        "XCalculatable",
+        "x_calculatable_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_label_ranges",
-        "XLabelRanges"
-      ],
-      [
-        "..container.x_name_access",
-        "XNameAccess"
-      ],
-      [
-        ".x_database_ranges",
-        "XDatabaseRanges"
+        "XLabelRanges",
+        "x_label_ranges_i"
       ],
       [
         ".x_named_ranges",
-        "XNamedRanges"
+        "XNamedRanges",
+        "x_named_ranges_i"
+      ],
+      [
+        ".x_database_ranges",
+        "XDatabaseRanges",
+        "x_database_ranges_i"
       ],
       [
         ".x_area_links",
-        "XAreaLinks"
+        "XAreaLinks",
+        "x_area_links_i"
+      ],
+      [
+        "..container.x_name_access",
+        "XNameAccess",
+        "container_x_name_access_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.sheet.SpreadsheetDocumentSettings": "spreadsheet_document_settings_i",
+      "com.sun.star.drawing.XDrawPagesSupplier": "drawing_x_draw_pages_supplier_i",
+      "com.sun.star.document.OfficeDocument": "document_office_document_i",
+      "com.sun.star.document.XActionLockable": "document_x_action_lockable_i",
+      "com.sun.star.util.XProtectable": "util_x_protectable_i",
+      "com.sun.star.sheet.XDocumentAuditing": "x_document_auditing_i",
+      "com.sun.star.style.XStyleFamiliesSupplier": "style_x_style_families_supplier_i",
+      "com.sun.star.sheet.XGoalSeek": "x_goal_seek_i",
+      "com.sun.star.lang.XMultiServiceFactory": "lang_x_multi_service_factory_i",
+      "com.sun.star.sheet.XConsolidatable": "x_consolidatable_i",
+      "com.sun.star.document.XLinkTargetSupplier": "document_x_link_target_supplier_i",
+      "com.sun.star.frame.XModel": "frame_x_model_i",
+      "com.sun.star.util.XNumberFormatsSupplier": "util_x_number_formats_supplier_i",
+      "com.sun.star.sheet.XSpreadsheetDocument": "x_spreadsheet_document_i",
+      "com.sun.star.sheet.XCalculatable": "x_calculatable_i"
+    },
     "quote": [
-      "XDatabaseRanges",
-      "XLabelRanges",
-      "XNameAccess",
-      "XNamedRanges",
-      "XAreaLinks"
+      "x_area_links_i",
+      "x_label_ranges_i",
+      "x_named_ranges_i",
+      "x_database_ranges_i",
+      "container_x_name_access_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -109,21 +147,21 @@
     "imports": [],
     "namespace": "com.sun.star.sheet",
     "extends": [
-      "com.sun.star.util.XNumberFormatsSupplier",
-      "com.sun.star.style.XStyleFamiliesSupplier",
-      "com.sun.star.drawing.XDrawPagesSupplier",
-      "com.sun.star.sheet.XGoalSeek",
-      "com.sun.star.sheet.XConsolidatable",
-      "com.sun.star.sheet.XDocumentAuditing",
-      "com.sun.star.sheet.XCalculatable",
-      "com.sun.star.sheet.XSpreadsheetDocument",
-      "com.sun.star.util.XProtectable",
-      "com.sun.star.document.XLinkTargetSupplier",
-      "com.sun.star.document.XActionLockable",
-      "com.sun.star.frame.XModel",
-      "com.sun.star.lang.XMultiServiceFactory",
       "com.sun.star.sheet.SpreadsheetDocumentSettings",
-      "com.sun.star.document.OfficeDocument"
+      "com.sun.star.drawing.XDrawPagesSupplier",
+      "com.sun.star.document.OfficeDocument",
+      "com.sun.star.document.XActionLockable",
+      "com.sun.star.util.XProtectable",
+      "com.sun.star.sheet.XDocumentAuditing",
+      "com.sun.star.style.XStyleFamiliesSupplier",
+      "com.sun.star.sheet.XGoalSeek",
+      "com.sun.star.lang.XMultiServiceFactory",
+      "com.sun.star.sheet.XConsolidatable",
+      "com.sun.star.document.XLinkTargetSupplier",
+      "com.sun.star.frame.XModel",
+      "com.sun.star.util.XNumberFormatsSupplier",
+      "com.sun.star.sheet.XSpreadsheetDocument",
+      "com.sun.star.sheet.XCalculatable"
     ],
     "desc": [
       "represents a model component which consists of some settings and one or more spreadsheets."
@@ -133,7 +171,7 @@
       "properties": [
         {
           "name": "AreaLinks",
-          "returns": "XAreaLinks",
+          "returns": "x_area_links_i",
           "desc": [
             "contains the collection of area links in the document."
           ],
@@ -142,7 +180,7 @@
         },
         {
           "name": "ColumnLabelRanges",
-          "returns": "XLabelRanges",
+          "returns": "x_label_ranges_i",
           "desc": [
             "contains the collection of column label ranges in the document."
           ],
@@ -151,7 +189,7 @@
         },
         {
           "name": "DDELinks",
-          "returns": "XNameAccess",
+          "returns": "container_x_name_access_i",
           "desc": [
             "contains the collection of DDE links in the document."
           ],
@@ -160,7 +198,7 @@
         },
         {
           "name": "DatabaseRanges",
-          "returns": "XDatabaseRanges",
+          "returns": "x_database_ranges_i",
           "desc": [
             "contains the collection of database ranges in the document."
           ],
@@ -169,7 +207,7 @@
         },
         {
           "name": "NamedRanges",
-          "returns": "XNamedRanges",
+          "returns": "x_named_ranges_i",
           "desc": [
             "contains the collection of named ranges in the document."
           ],
@@ -178,7 +216,7 @@
         },
         {
           "name": "RowLabelRanges",
-          "returns": "XLabelRanges",
+          "returns": "x_label_ranges_i",
           "desc": [
             "contains the collection of row label ranges in the document."
           ],
@@ -187,7 +225,7 @@
         },
         {
           "name": "SheetLinks",
-          "returns": "XNameAccess",
+          "returns": "container_x_name_access_i",
           "desc": [
             "contains the collection of sheet links in the document."
           ],

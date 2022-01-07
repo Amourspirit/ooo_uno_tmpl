@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "TabOrderDialog",
   "type": "service",
   "namespace": "com.sun.star.form",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,27 +16,34 @@
     "from_imports": [
       [
         "..ui.dialogs.x_executable_dialog",
-        "XExecutableDialog"
+        "XExecutableDialog",
+        "ui_dialogs_x_executable_dialog_i"
       ]
     ],
     "from_imports_typing": [
       [
-        "..awt.x_tab_controller_model",
-        "XTabControllerModel"
-      ],
-      [
         "..awt.x_window",
-        "XWindow"
+        "XWindow",
+        "awt_x_window_i"
       ],
       [
         "..awt.x_control_container",
-        "XControlContainer"
+        "XControlContainer",
+        "awt_x_control_container_i"
+      ],
+      [
+        "..awt.x_tab_controller_model",
+        "XTabControllerModel",
+        "awt_x_tab_controller_model_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.ui.dialogs.XExecutableDialog": "ui_dialogs_x_executable_dialog_i"
+    },
     "quote": [
-      "XControlContainer",
-      "XWindow",
-      "XTabControllerModel"
+      "awt_x_control_container_i",
+      "awt_x_window_i",
+      "awt_x_tab_controller_model_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -62,17 +70,17 @@
           "args": [
             [
               "TabbingModel",
-              "XTabControllerModel",
+              "awt_x_tab_controller_model_i",
               "in"
             ],
             [
               "ControlContext",
-              "XControlContainer",
+              "awt_x_control_container_i",
               "in"
             ],
             [
               "ParentWindow",
-              "XWindow",
+              "awt_x_window_i",
               "in"
             ]
           ]

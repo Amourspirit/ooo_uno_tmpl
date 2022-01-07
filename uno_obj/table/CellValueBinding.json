@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "CellValueBinding",
   "type": "service",
   "namespace": "com.sun.star.table",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,25 +16,28 @@
     "from_imports": [
       [
         "..form.binding.value_binding",
-        "ValueBinding"
+        "ValueBinding",
+        "form_binding_value_binding_i"
       ],
       [
         "..lang.x_initialization",
-        "XInitialization"
-      ],
-      [
-        "..util.x_modify_broadcaster",
-        "XModifyBroadcaster"
+        "XInitialization",
+        "lang_x_initialization_i"
       ]
     ],
     "from_imports_typing": [
       [
         ".cell_address",
-        "CellAddress"
+        "CellAddress",
+        "cell_address_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.form.binding.ValueBinding": "form_binding_value_binding_i",
+      "com.sun.star.lang.XInitialization": "lang_x_initialization_i"
+    },
     "quote": [
-      "CellAddress"
+      "cell_address_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -42,7 +46,6 @@
     "namespace": "com.sun.star.table",
     "extends": [
       "com.sun.star.form.binding.ValueBinding",
-      "com.sun.star.util.XModifyBroadcaster",
       "com.sun.star.lang.XInitialization"
     ],
     "desc": [
@@ -59,7 +62,7 @@
       "properties": [
         {
           "name": "BoundCell",
-          "returns": "CellAddress",
+          "returns": "cell_address_i",
           "desc": [
             "specifies the cell within a document whose value is reflected by the binding."
           ],

@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "EnhancedCustomShapeGeometry",
   "type": "service",
   "namespace": "com.sun.star.drawing",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,34 +16,39 @@
     "from_imports": [],
     "from_imports_typing": [
       [
-        "..awt.rectangle",
-        "Rectangle"
+        ".enhanced_custom_shape_adjustment_value",
+        "EnhancedCustomShapeAdjustmentValue",
+        "enhanced_custom_shape_adjustment_value_i"
       ],
       [
-        ".enhanced_custom_shape_adjustment_value",
-        "EnhancedCustomShapeAdjustmentValue"
+        "..awt.rectangle",
+        "Rectangle",
+        "awt_rectangle_i"
       ],
       [
         "..beans.property_values",
-        "PropertyValues"
+        "PropertyValues",
+        "beans_property_values_i"
       ],
       [
         "..beans.property_value",
-        "PropertyValue"
+        "PropertyValue",
+        "beans_property_value_i"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "typing.List[EnhancedCustomShapeAdjustmentValue]",
-      "typing.List[PropertyValue]",
-      "typing.List[PropertyValues]",
-      "Rectangle",
-      "typing.List[str]"
+      "typing.List[str]",
+      "typing.List[beans_property_value_i]",
+      "awt_rectangle_i",
+      "typing.List[enhanced_custom_shape_adjustment_value_i]",
+      "typing.List[beans_property_values_i]"
     ],
     "typings": [
       "typing.List[str]",
-      "typing.List[EnhancedCustomShapeAdjustmentValue]",
-      "typing.List[PropertyValue]",
-      "typing.List[PropertyValues]"
+      "typing.List[enhanced_custom_shape_adjustment_value_i]",
+      "typing.List[beans_property_value_i]",
+      "typing.List[beans_property_values_i]"
     ],
     "requires_typing": true,
     "name": "EnhancedCustomShapeGeometry",
@@ -57,7 +63,7 @@
       "types": [
         {
           "name": "AdjustmentValues",
-          "returns": "typing.List[EnhancedCustomShapeAdjustmentValue]",
+          "returns": "typing.List[enhanced_custom_shape_adjustment_value_i]",
           "desc": [
             "This property specifies a sequence of Adjustment values."
           ],
@@ -75,7 +81,7 @@
         },
         {
           "name": "Extrusion",
-          "returns": "typing.List[PropertyValue]",
+          "returns": "typing.List[beans_property_value_i]",
           "desc": [
             "This property sequence is including the extrusion description, the properties are as same as specified in the service com.sun.star:drawing.EnhancedCustomShapeExtrusion."
           ],
@@ -84,7 +90,7 @@
         },
         {
           "name": "Handles",
-          "returns": "typing.List[PropertyValues]",
+          "returns": "typing.List[beans_property_values_i]",
           "desc": [
             "This property is describing the interaction handles that are used, each inner property sequence is having the same properties as they are specified in the service com.sun.star:drawing.EnhancedCustomShapeHandle."
           ],
@@ -93,7 +99,7 @@
         },
         {
           "name": "Path",
-          "returns": "typing.List[PropertyValue]",
+          "returns": "typing.List[beans_property_value_i]",
           "desc": [
             "This property sequence is including the path description, the properties are as same as specified in the service com.sun.star:drawing.EnhancedCustomShapePath."
           ],
@@ -102,7 +108,7 @@
         },
         {
           "name": "TextPath",
-          "returns": "typing.List[PropertyValue]",
+          "returns": "typing.List[beans_property_value_i]",
           "desc": [
             "This property sequence is including the text path description, the properties are as same as specified in the service com.sun.star:drawing.EnhancedCustomShapeTextPath."
           ],
@@ -153,7 +159,7 @@
         },
         {
           "name": "ViewBox",
-          "returns": "Rectangle",
+          "returns": "awt_rectangle_i",
           "desc": [
             "This property describes the user space of the shape in its canonical form."
           ],

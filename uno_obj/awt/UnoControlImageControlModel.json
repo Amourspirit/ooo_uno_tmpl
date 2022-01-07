@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "UnoControlImageControlModel",
   "type": "service",
   "namespace": "com.sun.star.awt",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,22 +16,28 @@
     "from_imports": [
       [
         ".uno_control_model",
-        "UnoControlModel"
+        "UnoControlModel",
+        "uno_control_model_i"
       ]
     ],
     "from_imports_typing": [
       [
         "..util.color",
-        "Color"
+        "Color",
+        "util_color_i"
       ],
       [
         "..graphic.x_graphic",
-        "XGraphic"
+        "XGraphic",
+        "graphic_x_graphic_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.awt.UnoControlModel": "uno_control_model_i"
+    },
     "quote": [
-      "Color",
-      "XGraphic"
+      "graphic_x_graphic_i",
+      "util_color_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -52,7 +59,7 @@
       "properties": [
         {
           "name": "BackgroundColor",
-          "returns": "Color",
+          "returns": "util_color_i",
           "desc": [
             "specifies the background color (RGB) of the control."
           ],
@@ -94,7 +101,7 @@
         },
         {
           "name": "Graphic",
-          "returns": "XGraphic",
+          "returns": "graphic_x_graphic_i",
           "desc": [
             "specifies a graphic to be displayed on the control",
             "",

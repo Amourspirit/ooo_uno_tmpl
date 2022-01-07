@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "ChartStatistics",
   "type": "service",
   "namespace": "com.sun.star.chart",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,27 +16,34 @@
     "from_imports": [
       [
         "..beans.x_property_set",
-        "XPropertySet"
+        "XPropertySet",
+        "beans_x_property_set_i"
       ]
     ],
     "from_imports_typing": [
       [
-        ".chart_regression_curve_type",
-        "ChartRegressionCurveType"
+        ".chart_error_category",
+        "ChartErrorCategory",
+        "chart_error_category_i"
       ],
       [
         ".chart_error_indicator_type",
-        "ChartErrorIndicatorType"
+        "ChartErrorIndicatorType",
+        "chart_error_indicator_type_i"
       ],
       [
-        ".chart_error_category",
-        "ChartErrorCategory"
+        ".chart_regression_curve_type",
+        "ChartRegressionCurveType",
+        "chart_regression_curve_type_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.beans.XPropertySet": "beans_x_property_set_i"
+    },
     "quote": [
-      "ChartRegressionCurveType",
-      "ChartErrorIndicatorType",
-      "ChartErrorCategory"
+      "chart_error_category_i",
+      "chart_error_indicator_type_i",
+      "chart_regression_curve_type_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -110,7 +118,7 @@
         },
         {
           "name": "ErrorCategory",
-          "returns": "ChartErrorCategory",
+          "returns": "chart_error_category_i",
           "desc": [
             "determines the type of error to indicate."
           ],
@@ -119,7 +127,7 @@
         },
         {
           "name": "ErrorIndicator",
-          "returns": "ChartErrorIndicatorType",
+          "returns": "chart_error_indicator_type_i",
           "desc": [
             "determines how the error is indicated.",
             "",
@@ -165,7 +173,7 @@
         },
         {
           "name": "RegressionCurves",
-          "returns": "ChartRegressionCurveType",
+          "returns": "chart_regression_curve_type_i",
           "desc": [
             "determines a type of regression for the data row values."
           ],

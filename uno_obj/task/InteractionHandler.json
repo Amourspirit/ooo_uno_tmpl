@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "InteractionHandler",
   "type": "service",
   "namespace": "com.sun.star.task",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,17 +16,22 @@
     "from_imports": [
       [
         ".x_interaction_handler2",
-        "XInteractionHandler2"
+        "XInteractionHandler2",
+        "x_interaction_handler2_i"
       ]
     ],
     "from_imports_typing": [
       [
         "..awt.x_window",
-        "XWindow"
+        "XWindow",
+        "awt_x_window_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.task.XInteractionHandler2": "x_interaction_handler2_i"
+    },
     "quote": [
-      "XWindow"
+      "awt_x_window_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -69,7 +75,7 @@
           "args": [
             [
               "parent",
-              "XWindow",
+              "awt_x_window_i",
               "in"
             ]
           ]
@@ -84,7 +90,7 @@
           "args": [
             [
               "parent",
-              "XWindow",
+              "awt_x_window_i",
               "in"
             ],
             [

@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "OLE2Shape",
   "type": "service",
   "namespace": "com.sun.star.drawing",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,17 +16,22 @@
     "from_imports": [
       [
         ".shape",
-        "Shape"
+        "Shape",
+        "shape_i"
       ]
     ],
     "from_imports_typing": [
       [
         "..frame.x_model",
-        "XModel"
+        "XModel",
+        "frame_x_model_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.drawing.Shape": "shape_i"
+    },
     "quote": [
-      "XModel"
+      "frame_x_model_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -63,7 +69,7 @@
         },
         {
           "name": "Model",
-          "returns": "XModel",
+          "returns": "frame_x_model_i",
           "desc": [
             "This is the model for the OLE2 inside this shape.",
             "",

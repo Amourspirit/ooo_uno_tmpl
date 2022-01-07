@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "UnoControlTabPageContainerModel",
   "type": "service",
   "namespace": "com.sun.star.awt.tab",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,14 +16,20 @@
     "from_imports": [
       [
         ".x_tab_page_container_model",
-        "XTabPageContainerModel"
+        "XTabPageContainerModel",
+        "x_tab_page_container_model_i"
       ],
       [
         "..uno_control_model",
-        "UnoControlModel"
+        "UnoControlModel",
+        "uno_control_model_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.awt.tab.XTabPageContainerModel": "x_tab_page_container_model_i",
+      "com.sun.star.awt.UnoControlModel": "uno_control_model_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -30,8 +37,8 @@
     "imports": [],
     "namespace": "com.sun.star.awt.tab",
     "extends": [
-      "com.sun.star.awt.UnoControlModel",
-      "com.sun.star.awt.tab.XTabPageContainerModel"
+      "com.sun.star.awt.tab.XTabPageContainerModel",
+      "com.sun.star.awt.UnoControlModel"
     ],
     "desc": [
       "specifies a model for a UnoControlTabPageContainer control.",

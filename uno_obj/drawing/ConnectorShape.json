@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "ConnectorShape",
   "type": "service",
   "namespace": "com.sun.star.drawing",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -15,42 +16,58 @@
     "from_imports": [
       [
         ".line_properties",
-        "LineProperties"
+        "LineProperties",
+        "line_properties_i"
       ],
       [
         ".text",
-        "Text"
-      ],
-      [
-        ".shadow_properties",
-        "ShadowProperties"
-      ],
-      [
-        ".rotation_descriptor",
-        "RotationDescriptor"
+        "Text",
+        "text_i"
       ],
       [
         ".connector_properties",
-        "ConnectorProperties"
+        "ConnectorProperties",
+        "connector_properties_i"
+      ],
+      [
+        ".rotation_descriptor",
+        "RotationDescriptor",
+        "rotation_descriptor_i"
       ],
       [
         ".shape",
-        "Shape"
+        "Shape",
+        "shape_i"
+      ],
+      [
+        ".shadow_properties",
+        "ShadowProperties",
+        "shadow_properties_i"
       ]
     ],
     "from_imports_typing": [
       [
-        "..awt.point",
-        "Point"
+        ".x_shape",
+        "XShape",
+        "x_shape_i"
       ],
       [
-        ".x_shape",
-        "XShape"
+        "..awt.point",
+        "Point",
+        "awt_point_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.drawing.LineProperties": "line_properties_i",
+      "com.sun.star.drawing.Text": "text_i",
+      "com.sun.star.drawing.ConnectorProperties": "connector_properties_i",
+      "com.sun.star.drawing.RotationDescriptor": "rotation_descriptor_i",
+      "com.sun.star.drawing.Shape": "shape_i",
+      "com.sun.star.drawing.ShadowProperties": "shadow_properties_i"
+    },
     "quote": [
-      "Point",
-      "XShape"
+      "awt_point_i",
+      "x_shape_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -58,12 +75,12 @@
     "imports": [],
     "namespace": "com.sun.star.drawing",
     "extends": [
-      "com.sun.star.drawing.Shape",
       "com.sun.star.drawing.LineProperties",
-      "com.sun.star.drawing.ConnectorProperties",
-      "com.sun.star.drawing.ShadowProperties",
       "com.sun.star.drawing.Text",
-      "com.sun.star.drawing.RotationDescriptor"
+      "com.sun.star.drawing.ConnectorProperties",
+      "com.sun.star.drawing.RotationDescriptor",
+      "com.sun.star.drawing.Shape",
+      "com.sun.star.drawing.ShadowProperties"
     ],
     "desc": [
       "This service is for a ConnectorShape, a specialized Shape, which can be connected to other Shapes or GluePoints."
@@ -111,7 +128,7 @@
         },
         {
           "name": "EndPosition",
-          "returns": "Point",
+          "returns": "awt_point_i",
           "desc": [
             "this property holds the index of the glue point the end point of this connector is glued on."
           ],
@@ -120,7 +137,7 @@
         },
         {
           "name": "EndShape",
-          "returns": "XShape",
+          "returns": "x_shape_i",
           "desc": [
             "this property either holds the shape that the end point of this connector is connected to, or is empty when the end point of the connector is not connected to a shape."
           ],
@@ -138,7 +155,7 @@
         },
         {
           "name": "StartPosition",
-          "returns": "Point",
+          "returns": "awt_point_i",
           "desc": [
             "this is the position of the connectors start point in 100th/mm.",
             "",
@@ -149,7 +166,7 @@
         },
         {
           "name": "StartShape",
-          "returns": "XShape",
+          "returns": "x_shape_i",
           "desc": [
             "this property either holds the shape that the start point of this connector is connected to, or is empty when the start point of the connector is not connected to a shape."
           ],

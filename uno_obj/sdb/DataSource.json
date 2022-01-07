@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "DataSource",
   "type": "service",
   "namespace": "com.sun.star.sdb",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,66 +15,84 @@
   "data": {
     "from_imports": [
       [
-        "..sdbc.x_isolated_connection",
-        "XIsolatedConnection"
+        ".x_query_definitions_supplier",
+        "XQueryDefinitionsSupplier",
+        "x_query_definitions_supplier_i"
       ],
       [
         ".x_completed_connection",
-        "XCompletedConnection"
+        "XCompletedConnection",
+        "x_completed_connection_i"
       ],
       [
-        "..sdbc.x_data_source",
-        "XDataSource"
-      ],
-      [
-        ".x_query_definitions_supplier",
-        "XQueryDefinitionsSupplier"
+        "..sdbc.x_isolated_connection",
+        "XIsolatedConnection",
+        "sdbc_x_isolated_connection_i"
       ],
       [
         ".x_bookmarks_supplier",
-        "XBookmarksSupplier"
+        "XBookmarksSupplier",
+        "x_bookmarks_supplier_i"
       ],
       [
-        "..beans.x_property_set",
-        "XPropertySet"
+        "..sdbc.x_data_source",
+        "XDataSource",
+        "sdbc_x_data_source_i"
       ],
       [
         "..util.x_flushable",
-        "XFlushable"
+        "XFlushable",
+        "util_x_flushable_i"
+      ],
+      [
+        "..beans.x_property_set",
+        "XPropertySet",
+        "beans_x_property_set_i"
       ]
     ],
     "from_imports_typing": [
       [
         "..util.x_number_formats_supplier",
-        "XNumberFormatsSupplier"
+        "XNumberFormatsSupplier",
+        "util_x_number_formats_supplier_i"
       ],
       [
         "..beans.property_value",
-        "PropertyValue"
+        "PropertyValue",
+        "beans_property_value_i"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.sdb.XQueryDefinitionsSupplier": "x_query_definitions_supplier_i",
+      "com.sun.star.sdb.XCompletedConnection": "x_completed_connection_i",
+      "com.sun.star.sdbc.XIsolatedConnection": "sdbc_x_isolated_connection_i",
+      "com.sun.star.sdb.XBookmarksSupplier": "x_bookmarks_supplier_i",
+      "com.sun.star.sdbc.XDataSource": "sdbc_x_data_source_i",
+      "com.sun.star.util.XFlushable": "util_x_flushable_i",
+      "com.sun.star.beans.XPropertySet": "beans_x_property_set_i"
+    },
     "quote": [
-      "typing.List[str]",
-      "typing.List[PropertyValue]",
-      "XPropertySet",
-      "XNumberFormatsSupplier"
+      "typing.List[beans_property_value_i]",
+      "beans_x_property_set_i",
+      "util_x_number_formats_supplier_i",
+      "typing.List[str]"
     ],
     "typings": [
-      "typing.List[str]",
-      "typing.List[PropertyValue]"
+      "typing.List[beans_property_value_i]",
+      "typing.List[str]"
     ],
     "requires_typing": true,
     "name": "DataSource",
     "imports": [],
     "namespace": "com.sun.star.sdb",
     "extends": [
-      "com.sun.star.beans.XPropertySet",
+      "com.sun.star.sdb.XQueryDefinitionsSupplier",
       "com.sun.star.sdb.XCompletedConnection",
       "com.sun.star.sdbc.XIsolatedConnection",
-      "com.sun.star.util.XFlushable",
-      "com.sun.star.sdb.XQueryDefinitionsSupplier",
+      "com.sun.star.sdb.XBookmarksSupplier",
       "com.sun.star.sdbc.XDataSource",
-      "com.sun.star.sdb.XBookmarksSupplier"
+      "com.sun.star.util.XFlushable",
+      "com.sun.star.beans.XPropertySet"
     ],
     "desc": [
       "is a factory to establish database connections.",
@@ -89,7 +108,7 @@
       "types": [
         {
           "name": "Info",
-          "returns": "typing.List[PropertyValue]",
+          "returns": "typing.List[beans_property_value_i]",
           "desc": [
             "is a list of arbitrary string tag/value pairs as connection arguments",
             "",
@@ -157,7 +176,7 @@
         },
         {
           "name": "NumberFormatsSupplier",
-          "returns": "XNumberFormatsSupplier",
+          "returns": "util_x_number_formats_supplier_i",
           "desc": [
             "provides an object for formatting numbers."
           ],
@@ -177,7 +196,7 @@
         },
         {
           "name": "Settings",
-          "returns": "XPropertySet",
+          "returns": "beans_x_property_set_i",
           "desc": [
             "is a convenience wrapper around the Info property.",
             "",

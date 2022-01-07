@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "NumberingStyle",
   "type": "service",
   "namespace": "com.sun.star.text",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,15 +15,21 @@
   "data": {
     "from_imports": [
       [
-        "..style.style",
-        "Style"
+        ".numbering_rules",
+        "NumberingRules",
+        "numbering_rules_i"
       ],
       [
-        ".numbering_rules",
-        "NumberingRules"
+        "..style.style",
+        "Style",
+        "style_style_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.text.NumberingRules": "numbering_rules_i",
+      "com.sun.star.style.Style": "style_style_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -30,8 +37,8 @@
     "imports": [],
     "namespace": "com.sun.star.text",
     "extends": [
-      "com.sun.star.style.Style",
-      "com.sun.star.text.NumberingRules"
+      "com.sun.star.text.NumberingRules",
+      "com.sun.star.style.Style"
     ],
     "desc": [
       "specifies a style sheet numberings within a com.sun.star.text.Text."

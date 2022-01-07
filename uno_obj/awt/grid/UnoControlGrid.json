@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "UnoControlGrid",
   "type": "service",
   "namespace": "com.sun.star.awt.grid",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,19 +15,27 @@
   "data": {
     "from_imports": [
       [
-        "..uno_control",
-        "UnoControl"
+        ".x_grid_control",
+        "XGridControl",
+        "x_grid_control_i"
       ],
       [
-        ".x_grid_control",
-        "XGridControl"
+        "..uno_control",
+        "UnoControl",
+        "uno_control_i"
       ],
       [
         ".x_grid_row_selection",
-        "XGridRowSelection"
+        "XGridRowSelection",
+        "x_grid_row_selection_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.awt.grid.XGridControl": "x_grid_control_i",
+      "com.sun.star.awt.UnoControl": "uno_control_i",
+      "com.sun.star.awt.grid.XGridRowSelection": "x_grid_row_selection_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -34,8 +43,8 @@
     "imports": [],
     "namespace": "com.sun.star.awt.grid",
     "extends": [
-      "com.sun.star.awt.UnoControl",
       "com.sun.star.awt.grid.XGridControl",
+      "com.sun.star.awt.UnoControl",
       "com.sun.star.awt.grid.XGridRowSelection"
     ],
     "desc": [

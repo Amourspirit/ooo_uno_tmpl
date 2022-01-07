@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "ConfigurationUpdateAccess",
   "type": "service",
   "namespace": "com.sun.star.configuration",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true
   },
   "writer_args": {
     "include_desc": true
@@ -14,23 +15,33 @@
   "data": {
     "from_imports": [
       [
-        ".set_update",
-        "SetUpdate"
-      ],
-      [
         ".group_update",
-        "GroupUpdate"
+        "GroupUpdate",
+        "group_update_i"
       ],
       [
-        ".configuration_access",
-        "ConfigurationAccess"
+        ".set_update",
+        "SetUpdate",
+        "set_update_i"
       ],
       [
         ".update_root_element",
-        "UpdateRootElement"
+        "UpdateRootElement",
+        "update_root_element_i"
+      ],
+      [
+        ".configuration_access",
+        "ConfigurationAccess",
+        "configuration_access_i"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.configuration.GroupUpdate": "group_update_i",
+      "com.sun.star.configuration.SetUpdate": "set_update_i",
+      "com.sun.star.configuration.UpdateRootElement": "update_root_element_i",
+      "com.sun.star.configuration.ConfigurationAccess": "configuration_access_i"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -38,10 +49,10 @@
     "imports": [],
     "namespace": "com.sun.star.configuration",
     "extends": [
-      "com.sun.star.configuration.ConfigurationAccess",
-      "com.sun.star.configuration.SetUpdate",
       "com.sun.star.configuration.GroupUpdate",
-      "com.sun.star.configuration.UpdateRootElement"
+      "com.sun.star.configuration.SetUpdate",
+      "com.sun.star.configuration.UpdateRootElement",
+      "com.sun.star.configuration.ConfigurationAccess"
     ],
     "desc": [
       "provides modifying access to a fragment of the configuration hierarchy.",
