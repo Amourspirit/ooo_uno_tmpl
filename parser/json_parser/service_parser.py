@@ -163,6 +163,9 @@ def parse(*args, **kwargs):
     bp.parse(*args, **kargs)
 
 # endregion Parse method
+def _main():
+    # /home/paul/Documents/Projects/Python/Cheeta3/ooo_uno_tmpl/tmp/module_links.json
+    parse('j', 't', f='/home/paul/Documents/Projects/Python/Cheeta3/ooo_uno_tmpl/tmp/module_links.json')
 
 def main():
     global logger

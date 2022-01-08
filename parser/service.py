@@ -85,7 +85,8 @@ def _main():
     # url = 'https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1ucb_1_1ContentResultSet.html'
     # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1drawing_1_1XShape.html'
     # url = 'https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1rdf_1_1URI.html'
-    url = 'https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1accessibility_1_1AccessibleContext.html'
+    # url = 'https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1accessibility_1_1AccessibleContext.html'
+    url = 'https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1awt_1_1AccessibleButton.html'
     args = ('v', 't')
     kwargs = {
         "u": url,
@@ -135,4 +136,4 @@ def main():
 
 
 if __name__ == '__main__':
-    _main()
+    main()

@@ -36,9 +36,19 @@ from pathlib import Path
 from typing import Any, Dict, Iterable, List, Optional, Set, Tuple, Union
 from datetime import datetime, timezone
 
-_app_root = os.environ.get('project_root', str(Path(__file__).parent.parent))
-if not _app_root in sys.path:
-    sys.path.insert(0, _app_root)
+def _set_sys_paths():
+
+    # due to the way some scritps run and cache it is required to ensure this modules path is in sys.path
+    # this has to do with pickle caching.
+    f_path = Path(__file__).parent
+    if not str(f_path) in sys.path:
+        sys.path.insert(0, str(f_path))
+    # append path to project root
+    _app_root = os.environ.get('project_root', str(f_path.parent))
+    if not _app_root in sys.path:
+        sys.path.insert(0, _app_root)
+_set_sys_paths()
+
 from parser.mod_type import TypeRules, PythonType
 from parser import mod_rel as RelInfo
 from config import AppConfig, read_config_default
@@ -374,6 +384,9 @@ class PickleCache(CacheBase):
             return content
         except IOError:
             return None
+        except Exception as e:
+            logger.exception(e, exc_info=True)
+            raise e
 
     def save_in_cache(self, filename: Union[str, Path], content: object):
         """
