@@ -237,7 +237,7 @@ def parse(*args, **kwargs):
         if 'log_file' in pkwargs:
             log_args['log_file'] = pkwargs['log_file']
         else:
-            log_args['log_file'] = 'enum_parser.log'
+            log_args['log_file'] = 'const_parser.log'
         if pargs['verbose']:
             log_args['level'] = logging.DEBUG
         _set_loggers(get_logger(logger_name=Path(__file__).stem, **log_args))
@@ -270,7 +270,7 @@ def main():
         default=False)
     parser.add_argument(
         '-L', '--log-file',
-        help='Log file to use. Defaults to linkproc.log',
+        help='Log file to use. Defaults to const_parser.log',
         type=str,
         required=False)
 
@@ -280,7 +280,7 @@ def main():
         if args.log_file:
             log_args['log_file'] = args.log_file
         else:
-            log_args['log_file'] = 'enum_parser.log'
+            log_args['log_file'] = 'const_parser.log'
         if args.verbose:
             log_args['level'] = logging.DEBUG
         _set_loggers(get_logger(logger_name=Path(__file__).stem, **log_args))
