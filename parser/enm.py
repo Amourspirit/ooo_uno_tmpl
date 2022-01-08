@@ -348,7 +348,7 @@ class ParserEnum(base.ParserBase):
             block = self._get_enum_block()
             e_obj = EnumItems(block=block, sort=self.sort)
             enums: List[EnumDataItem] = e_obj.get_data()
-            # sort for consistentancy in json
+            # sort for consistency in json
             # enum.sort()
             for e in enums:
                 result.append(

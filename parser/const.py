@@ -1069,7 +1069,7 @@ class ApiData(base.APIData):
         if key in self._cache:
             return self._cache[key]
         self.api_summaries.get_obj()
-        # sort for consistentancy in json
+        # sort for consistency in json
         lst = list(self.api_summaries.imports)
         lst.sort()
         self._cache[key] = lst
@@ -1249,7 +1249,7 @@ class Parser(base.ParserBase):
             return self._cache[key]
         result = []
         data: List[DataItem] = self._api_data.get_data_items()
-        # sort for consistentancy in json
+        # sort for consistency in json
         data.sort()
         try:
             for itm in data:
@@ -1472,7 +1472,7 @@ class ConstWriter(base.WriteBase):
         key = '_get_from_imports'
         if key in self._cache:
             return self._cache[key]
-        # sort for consistentancy in json
+        # sort for consistency in json
         sorted = list(self._p_from_imports)
         sorted.sort()
         lst = []
@@ -1555,7 +1555,7 @@ class ConstWriter(base.WriteBase):
         for t in p_lst:
             if t.requires_typing or t.is_py_type is False:
                 t_set.add(t.type)
-        # sort for consistentancy in json
+        # sort for consistency in json
         lst = list(t_set)
         lst.sort()
         self._cache[key] = lst
@@ -1576,7 +1576,7 @@ class ConstWriter(base.WriteBase):
             if itm.val.p_type:
                 if itm.val.p_type.requires_typing:
                     t_set.add(itm.val.p_type.type)
-        # sort for consistentancy in json
+        # sort for consistency in json
         lst = list(t_set)
         lst.sort()
         self._cache[key] = lst
