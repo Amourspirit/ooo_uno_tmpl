@@ -452,7 +452,10 @@ class StructWriter(base.WriteBase):
             rel_fn = base.Util.get_rel_import_long
         else:
             rel_fn = base.Util.get_rel_import
-        for ns in self._p_imports:
+        lst_im = list(self._p_imports)
+        # sort for consistency in json
+        lst_im.sort()
+        for ns in lst_im:
             lst.append([*rel_fn(ns, self._p_namespace)])
         self._cache[key] = lst
         return self._cache[key]
@@ -466,7 +469,10 @@ class StructWriter(base.WriteBase):
             rel_fn = base.Util.get_rel_import_long
         else:
             rel_fn = base.Util.get_rel_import
-        for ns in self._p_imports_typing:
+        lst_im = list(self._p_imports_typing)
+        # sort for consistency in json
+        lst_im.sort()
+        for ns in lst_im:
             lst.append([*rel_fn(ns, self._p_namespace)])
         self._cache[key] = lst
         return self._cache[key]
@@ -478,7 +484,10 @@ class StructWriter(base.WriteBase):
         results = {}
         if self._parser.long_names is False:
             return results
-        for im in self._p_imports:
+        # sort for consistency in json
+        lst = list(self._p_imports)
+        lst.sort()
+        for im in lst:
             results[im] = base.Util.get_rel_import_long_name(
                 im, ns=self._p_namespace)
         self._cache[key] = results
@@ -503,7 +512,10 @@ class StructWriter(base.WriteBase):
             t = si.p_type
             if t.requires_typing or t.is_py_type is False:
                 t_set.add(t.type)
-        self._cache[key] = list(t_set)
+        lst = list(t_set)
+        # sort for consistency in json
+        lst.sort()
+        self._cache[key] = lst
         return self._cache[key]
 
     def _get_typings(self) -> List[str]:
@@ -521,7 +533,10 @@ class StructWriter(base.WriteBase):
             t = si.p_type
             if t.requires_typing:
                 t_set.add(t.type)
-        self._cache[key] = list(t_set)
+        lst = list(t_set)
+        # sort for consistency in json
+        lst.sort()
+        self._cache[key] = lst
         return self._cache[key]
 
     # endregion quote/typing
