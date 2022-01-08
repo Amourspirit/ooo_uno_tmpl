@@ -43,79 +43,6 @@
     ],
     "items": [
       {
-        "name": "ROW_SET_OPERATION_VETOED",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 100,
-        "lines": [
-          "is used by and RowSet to indicate that an operation has been vetoed by one of its approval listeners",
-          "",
-          "This error condition results in raising a RowSetVetoException."
-        ]
-      },
-      {
-        "name": "PARSER_CYCLIC_SUB_QUERIES",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 200,
-        "lines": [
-          "indicates that while parsing an SQL statement, cyclic sub queries have been detected.",
-          "",
-          "Imagine you have a client-side query SELECT * FROM table, which is saved as \\\"query1\\\". Additionally, there is a query \\\"query2\\\" defined as SELECT * FROM query1. Now if you try to change the statement of query1 to SELECT * FROM query2, this is prohibited, because it would lead to a cyclic sub query."
-        ]
-      },
-      {
-        "name": "DB_OBJECT_NAME_WITH_SLASHES",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 300,
-        "lines": [
-          "indicates that the name of a client side database object - a query, a form, or a report - contains one or more slashes, which is forbidden."
-        ]
-      },
-      {
-        "name": "DB_INVALID_SQL_NAME",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 301,
-        "lines": [
-          "indicates that an identifier is not SQL conform."
-        ]
-      },
-      {
-        "name": "DB_QUERY_NAME_WITH_QUOTES",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 302,
-        "lines": [
-          "indicates that the name of a query contains quote characters.",
-          "",
-          "This error condition is met when the user attempts to save a query with a name which contains one of the possible database quote characters. This is an error since query names can potentially be used in SELECT statements, where quote identifiers would render the statement invalid."
-        ]
-      },
-      {
-        "name": "DB_OBJECT_NAME_IS_USED",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 303,
-        "lines": [
-          "indicates that an attempt was made to save a database object under a name which is already used in the database.",
-          "",
-          "In databases which support query names to appear in SELECT statements, this could mean that a table was attempted to be saved with the name of an existing query, or vice versa.",
-          "",
-          "Otherwise, it means an object was attempted to be saved with the name of an already existing object of the same type."
-        ]
-      },
-      {
-        "name": "DB_NOT_CONNECTED",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 304,
-        "lines": [
-          "indicates an operation was attempted which needs a connection to the database, which did not exist at that time."
-        ]
-      },
-      {
         "name": "AB_ADDRESSBOOK_NOT_FOUND",
         "type": "int",
         "value_type": "INTEGER",
@@ -137,6 +64,79 @@
           "Some database drivers are not able to SELECT from a table if the statement does not contain a WHERE clause. In this case, a statement like SELECT * FROM \\\"table\\\" will fail with the error code DATA_CANNOT_SELECT_UNFILTERED.",
           "",
           "It is also legitimate for the driver to report this error condition as warning, and provide an empty result set, instead of ungraceful failing."
+        ]
+      },
+      {
+        "name": "DB_INVALID_SQL_NAME",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 301,
+        "lines": [
+          "indicates that an identifier is not SQL conform."
+        ]
+      },
+      {
+        "name": "DB_NOT_CONNECTED",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 304,
+        "lines": [
+          "indicates an operation was attempted which needs a connection to the database, which did not exist at that time."
+        ]
+      },
+      {
+        "name": "DB_OBJECT_NAME_IS_USED",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 303,
+        "lines": [
+          "indicates that an attempt was made to save a database object under a name which is already used in the database.",
+          "",
+          "In databases which support query names to appear in SELECT statements, this could mean that a table was attempted to be saved with the name of an existing query, or vice versa.",
+          "",
+          "Otherwise, it means an object was attempted to be saved with the name of an already existing object of the same type."
+        ]
+      },
+      {
+        "name": "DB_OBJECT_NAME_WITH_SLASHES",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 300,
+        "lines": [
+          "indicates that the name of a client side database object - a query, a form, or a report - contains one or more slashes, which is forbidden."
+        ]
+      },
+      {
+        "name": "DB_QUERY_NAME_WITH_QUOTES",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 302,
+        "lines": [
+          "indicates that the name of a query contains quote characters.",
+          "",
+          "This error condition is met when the user attempts to save a query with a name which contains one of the possible database quote characters. This is an error since query names can potentially be used in SELECT statements, where quote identifiers would render the statement invalid."
+        ]
+      },
+      {
+        "name": "PARSER_CYCLIC_SUB_QUERIES",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 200,
+        "lines": [
+          "indicates that while parsing an SQL statement, cyclic sub queries have been detected.",
+          "",
+          "Imagine you have a client-side query SELECT * FROM table, which is saved as \\\"query1\\\". Additionally, there is a query \\\"query2\\\" defined as SELECT * FROM query1. Now if you try to change the statement of query1 to SELECT * FROM query2, this is prohibited, because it would lead to a cyclic sub query."
+        ]
+      },
+      {
+        "name": "ROW_SET_OPERATION_VETOED",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 100,
+        "lines": [
+          "is used by and RowSet to indicate that an operation has been vetoed by one of its approval listeners",
+          "",
+          "This error condition results in raising a RowSetVetoException."
         ]
       }
     ]

@@ -36,12 +36,34 @@
     ],
     "items": [
       {
+        "name": "NOCREATE",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 16,
+        "lines": [
+          "restricts creation of a new element on opening in case a requested one does not exist.",
+          "",
+          "This flag makes sense only in combination with ElementModes.WRITE."
+        ]
+      },
+      {
         "name": "READ",
         "type": "int",
         "value_type": "INTEGER",
         "value": 1,
         "lines": [
           "specifies opening of an element for reading."
+        ]
+      },
+      {
+        "name": "READWRITE",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 7,
+        "lines": [
+          "specifies opening of an element for reading and writing.",
+          "",
+          "For a stream element is also specifies that it must be seekable."
         ]
       },
       {
@@ -67,26 +89,6 @@
         ]
       },
       {
-        "name": "WRITE",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 4,
-        "lines": [
-          "specifies opening of an element for writing."
-        ]
-      },
-      {
-        "name": "READWRITE",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 7,
-        "lines": [
-          "specifies opening of an element for reading and writing.",
-          "",
-          "For a stream element is also specifies that it must be seekable."
-        ]
-      },
-      {
         "name": "TRUNCATE",
         "type": "int",
         "value_type": "INTEGER",
@@ -98,14 +100,12 @@
         ]
       },
       {
-        "name": "NOCREATE",
+        "name": "WRITE",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 16,
+        "value": 4,
         "lines": [
-          "restricts creation of a new element on opening in case a requested one does not exist.",
-          "",
-          "This flag makes sense only in combination with ElementModes.WRITE."
+          "specifies opening of an element for writing."
         ]
       }
     ]

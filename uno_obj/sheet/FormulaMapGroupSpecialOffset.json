@@ -36,14 +36,16 @@
     ],
     "items": [
       {
-        "name": "PUSH",
+        "name": "BAD",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 0,
+        "value": 7,
         "lines": [
-          "Formula tokens containing the op-code obtained from this offset describe a formula operand token that will be pushed onto the formula stack while the formula is interpreted.",
+          "Formula tokens containing the op-code obtained from this offset describe \\\"bad\\\" data in a formula, e.g.",
           "",
-          "The FormulaToken.Data member shall contain one of the following values:"
+          "data the formula parser was not able to parse.",
+          "",
+          "The FormulaToken.Data member shall contain a string with the bad data. This string will be displayed literally in the formula."
         ]
       },
       {
@@ -54,14 +56,21 @@
         "lines": []
       },
       {
-        "name": "STOP",
+        "name": "COL_ROW_NAME",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 2,
+        "value": 12,
+        "lines": []
+      },
+      {
+        "name": "DB_AREA",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 10,
         "lines": [
-          "Formula tokens containing the op-code obtained from this offset instruct the formula interpreter to immediately stop interpreting the formula.",
+          "Formula tokens containing the op-code obtained from this offset describe the reference to a database range used in formulas.",
           "",
-          "The FormulaToken.Data member is not used and should be empty."
+          "The FormulaToken.Data member shall contain an integer value of type long specifying the index of the database range. This index can be obtained from the database range using its DatabaseRange.TokenIndex property."
         ]
       },
       {
@@ -75,6 +84,37 @@
           "add-in function) used in formulas.",
           "",
           "The FormulaToken.Data member shall contain a string with the programmatic name of the function, e.g. \\\"com.sun.star.sheet.addin.Analysis.getEomonth\\\" for the EOMONTH function from the Analysis add-in."
+        ]
+      },
+      {
+        "name": "MACRO",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 11,
+        "lines": [
+          "Formula tokens containing the op-code obtained from this offset describe the reference to a macro function called in a formula.",
+          "",
+          "The FormulaToken.Data member shall contain a string specifying the name of the macro function."
+        ]
+      },
+      {
+        "name": "MAT_REF",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 9,
+        "lines": []
+      },
+      {
+        "name": "MISSING",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 6,
+        "lines": [
+          "Formula tokens containing the op-code obtained from this offset describe an empty function parameter.",
+          "",
+          "Example: In the formula =SUM(1;;2) the second parameter is empty and represented by a formula token containing the \\\"missing\\\" op-code.",
+          "",
+          "The FormulaToken.Data member is not used and should be empty."
         ]
       },
       {
@@ -100,29 +140,14 @@
         ]
       },
       {
-        "name": "MISSING",
+        "name": "PUSH",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 6,
+        "value": 0,
         "lines": [
-          "Formula tokens containing the op-code obtained from this offset describe an empty function parameter.",
+          "Formula tokens containing the op-code obtained from this offset describe a formula operand token that will be pushed onto the formula stack while the formula is interpreted.",
           "",
-          "Example: In the formula =SUM(1;;2) the second parameter is empty and represented by a formula token containing the \\\"missing\\\" op-code.",
-          "",
-          "The FormulaToken.Data member is not used and should be empty."
-        ]
-      },
-      {
-        "name": "BAD",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 7,
-        "lines": [
-          "Formula tokens containing the op-code obtained from this offset describe \\\"bad\\\" data in a formula, e.g.",
-          "",
-          "data the formula parser was not able to parse.",
-          "",
-          "The FormulaToken.Data member shall contain a string with the bad data. This string will be displayed literally in the formula."
+          "The FormulaToken.Data member shall contain one of the following values:"
         ]
       },
       {
@@ -141,40 +166,15 @@
         ]
       },
       {
-        "name": "MAT_REF",
+        "name": "STOP",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 9,
-        "lines": []
-      },
-      {
-        "name": "DB_AREA",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 10,
+        "value": 2,
         "lines": [
-          "Formula tokens containing the op-code obtained from this offset describe the reference to a database range used in formulas.",
+          "Formula tokens containing the op-code obtained from this offset instruct the formula interpreter to immediately stop interpreting the formula.",
           "",
-          "The FormulaToken.Data member shall contain an integer value of type long specifying the index of the database range. This index can be obtained from the database range using its DatabaseRange.TokenIndex property."
+          "The FormulaToken.Data member is not used and should be empty."
         ]
-      },
-      {
-        "name": "MACRO",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 11,
-        "lines": [
-          "Formula tokens containing the op-code obtained from this offset describe the reference to a macro function called in a formula.",
-          "",
-          "The FormulaToken.Data member shall contain a string specifying the name of the macro function."
-        ]
-      },
-      {
-        "name": "COL_ROW_NAME",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 12,
-        "lines": []
       }
     ]
   }

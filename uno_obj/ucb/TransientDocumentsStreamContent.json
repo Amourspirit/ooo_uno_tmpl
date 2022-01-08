@@ -15,6 +15,21 @@
   "data": {
     "from_imports": [
       [
+        "..beans.x_properties_change_notifier",
+        "XPropertiesChangeNotifier",
+        "beans_x_properties_change_notifier_i"
+      ],
+      [
+        "..beans.x_property_container",
+        "XPropertyContainer",
+        "beans_x_property_container_i"
+      ],
+      [
+        "..beans.x_property_set_info_change_notifier",
+        "XPropertySetInfoChangeNotifier",
+        "beans_x_property_set_info_change_notifier_i"
+      ],
+      [
         "..container.x_child",
         "XChild",
         "container_x_child_i"
@@ -25,6 +40,16 @@
         "lang_x_component_i"
       ],
       [
+        ".x_command_info_change_notifier",
+        "XCommandInfoChangeNotifier",
+        "x_command_info_change_notifier_i"
+      ],
+      [
+        ".x_command_processor",
+        "XCommandProcessor",
+        "x_command_processor_i"
+      ],
+      [
         ".x_command_processor2",
         "XCommandProcessor2",
         "x_command_processor2_i"
@@ -33,44 +58,19 @@
         ".x_content",
         "XContent",
         "x_content_i"
-      ],
-      [
-        ".x_command_processor",
-        "XCommandProcessor",
-        "x_command_processor_i"
-      ],
-      [
-        "..beans.x_properties_change_notifier",
-        "XPropertiesChangeNotifier",
-        "beans_x_properties_change_notifier_i"
-      ],
-      [
-        "..beans.x_property_set_info_change_notifier",
-        "XPropertySetInfoChangeNotifier",
-        "beans_x_property_set_info_change_notifier_i"
-      ],
-      [
-        ".x_command_info_change_notifier",
-        "XCommandInfoChangeNotifier",
-        "x_command_info_change_notifier_i"
-      ],
-      [
-        "..beans.x_property_container",
-        "XPropertyContainer",
-        "beans_x_property_container_i"
       ]
     ],
     "from_imports_typing": [],
     "extends_map": {
+      "com.sun.star.beans.XPropertiesChangeNotifier": "beans_x_properties_change_notifier_i",
+      "com.sun.star.beans.XPropertyContainer": "beans_x_property_container_i",
+      "com.sun.star.beans.XPropertySetInfoChangeNotifier": "beans_x_property_set_info_change_notifier_i",
       "com.sun.star.container.XChild": "container_x_child_i",
       "com.sun.star.lang.XComponent": "lang_x_component_i",
-      "com.sun.star.ucb.XCommandProcessor2": "x_command_processor2_i",
-      "com.sun.star.ucb.XContent": "x_content_i",
-      "com.sun.star.ucb.XCommandProcessor": "x_command_processor_i",
-      "com.sun.star.beans.XPropertiesChangeNotifier": "beans_x_properties_change_notifier_i",
-      "com.sun.star.beans.XPropertySetInfoChangeNotifier": "beans_x_property_set_info_change_notifier_i",
       "com.sun.star.ucb.XCommandInfoChangeNotifier": "x_command_info_change_notifier_i",
-      "com.sun.star.beans.XPropertyContainer": "beans_x_property_container_i"
+      "com.sun.star.ucb.XCommandProcessor": "x_command_processor_i",
+      "com.sun.star.ucb.XCommandProcessor2": "x_command_processor2_i",
+      "com.sun.star.ucb.XContent": "x_content_i"
     },
     "quote": [],
     "typings": [],
@@ -80,14 +80,14 @@
     "namespace": "com.sun.star.ucb",
     "extends": [
       "com.sun.star.container.XChild",
-      "com.sun.star.lang.XComponent",
       "com.sun.star.ucb.XCommandProcessor2",
-      "com.sun.star.ucb.XContent",
+      "com.sun.star.lang.XComponent",
       "com.sun.star.ucb.XCommandProcessor",
+      "com.sun.star.beans.XPropertyContainer",
       "com.sun.star.beans.XPropertiesChangeNotifier",
-      "com.sun.star.beans.XPropertySetInfoChangeNotifier",
       "com.sun.star.ucb.XCommandInfoChangeNotifier",
-      "com.sun.star.beans.XPropertyContainer"
+      "com.sun.star.beans.XPropertySetInfoChangeNotifier",
+      "com.sun.star.ucb.XContent"
     ],
     "desc": [
       "A TDCP Stream is a content which represents a data stream of an Office document.",

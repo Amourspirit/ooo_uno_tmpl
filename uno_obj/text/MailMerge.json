@@ -15,11 +15,6 @@
   "data": {
     "from_imports": [
       [
-        "..task.x_job",
-        "XJob",
-        "task_x_job_i"
-      ],
-      [
         "..beans.x_property_set",
         "XPropertySet",
         "beans_x_property_set_i"
@@ -28,6 +23,11 @@
         "..sdb.data_access_descriptor",
         "DataAccessDescriptor",
         "sdb_data_access_descriptor_i"
+      ],
+      [
+        "..task.x_job",
+        "XJob",
+        "task_x_job_i"
       ],
       [
         ".x_mail_merge_broadcaster",
@@ -42,6 +42,11 @@
     ],
     "from_imports_typing": [
       [
+        "..beans.property_value",
+        "PropertyValue",
+        "beans_property_value_i"
+      ],
+      [
         "..frame.x_model",
         "XModel",
         "frame_x_model_i"
@@ -55,43 +60,38 @@
         "..sdbc.x_result_set",
         "XResultSet",
         "sdbc_x_result_set_i"
-      ],
-      [
-        "..beans.property_value",
-        "PropertyValue",
-        "beans_property_value_i"
       ]
     ],
     "extends_map": {
-      "com.sun.star.task.XJob": "task_x_job_i",
       "com.sun.star.beans.XPropertySet": "beans_x_property_set_i",
       "com.sun.star.sdb.DataAccessDescriptor": "sdb_data_access_descriptor_i",
+      "com.sun.star.task.XJob": "task_x_job_i",
       "com.sun.star.text.XMailMergeBroadcaster": "x_mail_merge_broadcaster_i",
       "com.sun.star.util.XCancellable": "util_x_cancellable_i"
     },
     "quote": [
-      "typing.List[str]",
-      "typing.List[object]",
       "frame_x_model_i",
-      "sdbc_x_result_set_i",
       "sdbc_x_connection_i",
-      "typing.List[beans_property_value_i]"
+      "sdbc_x_result_set_i",
+      "typing.List[beans_property_value_i]",
+      "typing.List[object]",
+      "typing.List[str]"
     ],
     "typings": [
-      "typing.List[str]",
+      "typing.List[beans_property_value_i]",
       "typing.List[object]",
-      "typing.List[beans_property_value_i]"
+      "typing.List[str]"
     ],
     "requires_typing": true,
     "name": "MailMerge",
     "imports": [],
     "namespace": "com.sun.star.text",
     "extends": [
-      "com.sun.star.task.XJob",
       "com.sun.star.beans.XPropertySet",
-      "com.sun.star.sdb.DataAccessDescriptor",
       "com.sun.star.text.XMailMergeBroadcaster",
-      "com.sun.star.util.XCancellable"
+      "com.sun.star.util.XCancellable",
+      "com.sun.star.sdb.DataAccessDescriptor",
+      "com.sun.star.task.XJob"
     ],
     "desc": [
       "Gives access to mail merge functionality.",

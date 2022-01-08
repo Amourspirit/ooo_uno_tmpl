@@ -38,19 +38,24 @@
     ],
     "items": [
       {
-        "name": "WELCOME",
+        "name": "CLEARED",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 20,
+        "value": 23,
         "lines": [
-          "First notification to a single listener for purpose of initialization.",
+          "The whole list was destroyed and independently rebuild.",
           "",
-          "This type of notification is required to be sent first and only once to a new listener.",
+          "If \\\"CLEARED\\\" is sent you don't need to refer to the old ResultSet.",
           "",
-          "The member ListAction.ActionInfo is required to contain a struct WelcomeDynamicResultSetStruct. This struct contains two com.sun.star.sdbc.XResultSets (old and new). During and after the notification only the new set is valid for access. But the listener is required to remind both com.sun.star.sdbc.XResultSets as he will not get another chance to get them again.",
-          "",
-          "The members ListAction.Count and ListAction.Position are not used."
+          "The members ListAction.ListActionType, ListAction.Count and ListAction.Position are ignored."
         ]
+      },
+      {
+        "name": "COMPLETED",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 27,
+        "lines": []
       },
       {
         "name": "INSERTED",
@@ -65,34 +70,6 @@
           "The members ListAction.Count and ListAction.Position contain the position and count of newly inserted rows. If the count is greater than one, the inserted rows have to be one after the other.",
           "",
           "ListAction.ActionInfo could contain something but this is not required. For example, it could contain the properties of the new rows (i.e. for remote optimizing), but this is not required nor unrestrictedly recommended."
-        ]
-      },
-      {
-        "name": "REMOVED",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 22,
-        "lines": [
-          "One or more rows were removed from the list.",
-          "",
-          "This action is related to ContentAction.REMOVED.",
-          "",
-          "The members ListAction.Count and ListAction.Position contain the position and count of the removed rows. If the count is greater than one, the removed rows have to be one after the other.",
-          "",
-          "The member ListAction.ListActionType is not used."
-        ]
-      },
-      {
-        "name": "CLEARED",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 23,
-        "lines": [
-          "The whole list was destroyed and independently rebuild.",
-          "",
-          "If \\\"CLEARED\\\" is sent you don't need to refer to the old ResultSet.",
-          "",
-          "The members ListAction.ListActionType, ListAction.Count and ListAction.Position are ignored."
         ]
       },
       {
@@ -124,11 +101,34 @@
         ]
       },
       {
-        "name": "COMPLETED",
+        "name": "REMOVED",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 27,
-        "lines": []
+        "value": 22,
+        "lines": [
+          "One or more rows were removed from the list.",
+          "",
+          "This action is related to ContentAction.REMOVED.",
+          "",
+          "The members ListAction.Count and ListAction.Position contain the position and count of the removed rows. If the count is greater than one, the removed rows have to be one after the other.",
+          "",
+          "The member ListAction.ListActionType is not used."
+        ]
+      },
+      {
+        "name": "WELCOME",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 20,
+        "lines": [
+          "First notification to a single listener for purpose of initialization.",
+          "",
+          "This type of notification is required to be sent first and only once to a new listener.",
+          "",
+          "The member ListAction.ActionInfo is required to contain a struct WelcomeDynamicResultSetStruct. This struct contains two com.sun.star.sdbc.XResultSets (old and new). During and after the notification only the new set is valid for access. But the listener is required to remind both com.sun.star.sdbc.XResultSets as he will not get another chance to get them again.",
+          "",
+          "The members ListAction.Count and ListAction.Position are not used."
+        ]
       }
     ]
   }
