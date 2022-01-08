@@ -420,11 +420,12 @@ class WriterEx(base.WriteBase):
         if key in self._cache:
             return self._cache[key]
         lst = []
+        if self._parser.long_names:
+            rel_fn = base.Util.get_rel_import_long
+        else:
+            rel_fn = base.Util.get_rel_import
         for ns in self._p_imports_typing:
-            f, n = base.Util.get_rel_import(
-                i_str=ns, ns=self._p_namespace
-            )
-            lst.append([f, n])
+            lst.append([*rel_fn(ns, self._p_namespace)])
         self._cache[key] = lst
         return self._cache[key]
      
