@@ -1600,7 +1600,7 @@ class ApiMethodException(BlockObj):
 class APIData:
     """Class the brings together parts for scraping API Html pages"""
     # region Constructor
-    def __init__(self, url_soup: Union[str, SoupObj], allow_cache: bool, long_names: bool = False):
+    def __init__(self, url_soup: Union[str, SoupObj], allow_cache: bool, long_names: bool = False, remove_parent_inherited: bool = True):
         """
         Constructor
 
@@ -1639,6 +1639,7 @@ class APIData:
         self._type_summary_rows: ApiSummaryRows = None
         self._inherited: ApiInherited = None
         self._area_filter_rules_engine: IRulesArea = None
+        self._remove_parent_inherited = remove_parent_inherited
 
     # endregion Constructor
 
@@ -1961,7 +1962,7 @@ class APIData:
     @property
     def area_filter_rules_engine(self) -> 'IRulesArea':
         if self._area_filter_rules_engine is None:
-            self._area_filter_rules_engine = RulesArea()
+            self._area_filter_rules_engine = RulesArea(remove_parent_inherited=self.remove_parent_inherited)
             self._set_area_filter_rules_engine_rules(
                 rules_engine=self._area_filter_rules_engine
             )
@@ -1979,6 +1980,11 @@ class APIData:
     @allow_cache.setter
     def allow_cache(self, value: bool):
         self._allow_cache = value
+    
+    @property
+    def remove_parent_inherited(self) -> bool:
+        """Gets remove_parent_inherited value"""
+        return self._remove_parent_inherited
     # endregion Properties
 
 # endregion block and api classes
@@ -4078,8 +4084,30 @@ class RuleAreaBase(IRuleArea):
             return first
         return alst[0]
 
+    def _get_sorted_lst(self, alst: List[Area], match_lst: List[Area]) -> List[Area]:
+        """
+        Sorts match_lst in the same order of found in alst
+
+        Args:
+            alst (List[Area]): origin list
+            match_lst (List[Area]): filtered list
+
+        Returns:
+            List[Area]: list in same order found in alist
+        """
+        if len(match_lst) <= 1:
+            return [*match_lst]
+        # href is unique to each area, use it as key
+        a_set = {area.href for area in match_lst}
+        return [area for area in alst if area.href in a_set]
     # endregion Privae Methods
 
+    # region Properties
+    @property
+    def rules(self) -> IRulesArea:
+        """Gets rules value"""
+        return self._rules
+    # endregion Properties
 
 class RuleAreaSingle(RuleAreaBase):
     """Matches when there is a single parent"""
@@ -4163,10 +4191,10 @@ class RuleAreaMulti(RuleAreaBase):
         if len(match_lst) == 0:
             return match_lst
         del d_lst[first.y1]
-
-        self._get_with_parent_removed(first=first,d_lst=d_lst, match_lst=match_lst)
- 
-        return match_lst
+        if self.rules.remove_parent_inherited:
+            self._get_with_parent_removed(first=first,d_lst=d_lst, match_lst=match_lst)
+        
+        return self._get_sorted_lst(alst=alst, match_lst=match_lst)
     # endregion IRuleArea Methods
 
 class RuleAreaVertical(RuleAreaBase):
@@ -4219,8 +4247,9 @@ class RuleAreaVertical(RuleAreaBase):
         d_lst: Dict[int, List[Area]] = self._list_dict_x1(
             lst=alst)  # grouped by y1
         upper: List[Area] = d_lst[first.x1]
-        self._remove_duplicates_lst(upper)
-        return upper
+        if self.rules.remove_parent_inherited:
+            self._remove_duplicates_lst(upper)
+        return self._get_sorted_lst(alst=alst, match_lst=upper)
     # endregion IRuleArea Methods
 # endregion         Area Rules
 
