@@ -12,6 +12,7 @@ color.pyi => Color
 language.pyi => Language
 
 """
+# region Imports
 import os
 import sys
 import argparse
@@ -28,6 +29,9 @@ from dataclasses import dataclass, field
 from parser import __version__, JSON_ID
 from parser.mod_type import PythonType
 
+# endregion Imports
+
+# region Logger
 logger = None
 
 
@@ -38,6 +42,8 @@ def _set_loggers(l: Union[logging.Logger, None]):
 
 
 _set_loggers(None)
+
+# endregion Logger
 
 # region Data Classes
 @dataclass
@@ -208,6 +214,7 @@ class ApiData(base.APIData):
     # endregion Properties
 
 # endregion Data Classes
+
 # region Parse
 
 
@@ -419,7 +426,10 @@ class WriterTypeDef(base.WriteBase):
         if key in self._cache:
             return self._cache[key]
         lst = []
-        for ns in t_def.imports:
+        lst_im = list(t_def.imports)
+        # sort for consistency in json
+        lst_im.sort()
+        for ns in lst_im:
             f, n = base.Util.get_rel_import(
                 i_str=ns, ns=self._p_namespace
             )
@@ -431,6 +441,8 @@ class WriterTypeDef(base.WriteBase):
     def _get_quote_flat(self, si_id: str) -> List[str]:
         # si_id will limit this to one item max
         si_lst = self._parser.api_data.type_def_summaries.get_obj()
+        # sort for consistency in json
+        si_lst.sort()
         t_lst = []
         for si in si_lst:
             if si.id == si_id:
@@ -442,6 +454,8 @@ class WriterTypeDef(base.WriteBase):
 
     def _get_typings(self, si_id: str) -> List[str]:
         si_lst = self._parser.api_data.type_def_summaries.get_obj()
+        # sort for consistency in json
+        si_lst.sort()
         t_lst = []
         for si in si_lst:
             if si.id == si_id:
@@ -513,7 +527,7 @@ class WriterTypeDef(base.WriteBase):
         name_parts: List[str] = self._p_namespace.split('.')
         # ignore com, sun, star
         path_parts = name_parts[3:]
-        path_parts.append(_p_name + '.tppi')
+        path_parts.append(_p_name + base.APP_CONFIG.template_typedef_ext)
         obj_path = uno_obj_path.joinpath(*path_parts)
         # because all typedef are written to the same dir
         # only need ot call mkdirp once.
@@ -706,6 +720,7 @@ def parse(*args, **kwargs):
 
 # endregion Parse method
 
+# region Main
 def _main():
     global logger
 
@@ -842,3 +857,5 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+# endregion Main
