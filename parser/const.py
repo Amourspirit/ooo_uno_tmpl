@@ -1249,6 +1249,7 @@ class Parser(base.ParserBase):
             return self._cache[key]
         result = []
         data: List[DataItem] = self._api_data.get_data_items()
+        # sort for consistentancy in json
         data.sort()
         try:
             for itm in data:

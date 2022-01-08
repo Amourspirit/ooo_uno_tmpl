@@ -3,6 +3,8 @@
 """
 Process a link to a page that contains enums
 """
+from dataclasses import dataclass, field
+import enum
 import os
 import sys
 import logging
@@ -30,11 +32,17 @@ def _set_loggers(l: Union[logging.Logger, None]):
 
 _set_loggers(None)
 
-EnumDataItem = namedtuple(
-    'EnumDataItem',
-    ['name', 'value', 'desc']
-)
 
+@dataclass
+class EnumDataItem:
+    name: str
+    value: str
+    desc: List[str] = field(default_factory=list)
+
+    def __lt__(self, other: object):
+        if not isinstance(other, EnumDataItem):
+            return NotImplemented
+        return self.name < other.name
 
 class EnumUrl(base.UrlObj):
     """Gets Url data for enum"""
@@ -251,9 +259,10 @@ class EnumItems:
         name:str = tag.text.strip()
         p_lines = row.select('td.fielddoc > p')
         t_obj = base.TagsStrObj(tags=p_lines)
-        di = EnumDataItem(name=name,
-                          value=name,
-                          desc=t_obj.get_lines())
+        di = EnumDataItem(
+            name=name,
+            value=name,
+            desc=t_obj.get_lines())
         return di
 
 
@@ -338,7 +347,9 @@ class ParserEnum(base.ParserBase):
         try:
             block = self._get_enum_block()
             e_obj = EnumItems(block=block, sort=self.sort)
-            enums = e_obj.get_data()
+            enums: List[EnumDataItem] = e_obj.get_data()
+            # sort for consistentancy in json
+            # enum.sort()
             for e in enums:
                 result.append(
                     {
@@ -396,7 +407,7 @@ class EnumWriter(base.WriteBase):
             raise FileNotFoundError(f"unable to find templae file '{_path}'")
         self._template_file = _path
         self._template: str = self._get_template()
-    # enregion constructor
+    # endregion constructor
 
     def _get_template(self):
         with open(self._template_file) as f:
