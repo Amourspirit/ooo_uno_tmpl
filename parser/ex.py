@@ -560,7 +560,7 @@ class WriterEx(base.WriteBase):
         name_parts: List[str] = self._p_namespace.split('.')
         # ignore com, sun, star
         path_parts = name_parts[3:]
-        path_parts.append(self._p_name + '.tppi')
+        path_parts.append(self._p_name + base.APP_CONFIG.template_exception_ext)
         obj_path = uno_obj_path.joinpath(*path_parts)
         self._mkdirp(obj_path.parent)
         self._cache[key] = obj_path
