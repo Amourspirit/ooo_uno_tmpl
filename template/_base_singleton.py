@@ -186,5 +186,5 @@ class BaseSingleton(BaseJson):
     def get_class_end(self):
         end = ':'
         if not self.include_desc and not self._is_properties():
-            end += ' ...'
+            end += '\n pass'
         return end
