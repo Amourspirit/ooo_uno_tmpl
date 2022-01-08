@@ -104,6 +104,8 @@ class BaseSingleton(BaseJson):
                     results.append(arg[0])  # arg name, index 1 is type
         return results
 
+
+    # region Raises Methods
     def _get_raises_list(self, d: dict, key: str) -> List[Tuple[str, str]]:
         """
         Converts any raises into a list of tuple.
@@ -160,6 +162,8 @@ class BaseSingleton(BaseJson):
             return True
         return False
 
+    # endregion Raises
+
     def get_formated_meth(self, meth: dict) -> str:
         name = meth['name']
         iter_args: list = meth['args']
@@ -182,6 +186,7 @@ class BaseSingleton(BaseJson):
         if not key in self.attribs:
             return False
         return len(self.attribs[key]) > 0
+
 
     def get_class_end(self):
         end = ':'
