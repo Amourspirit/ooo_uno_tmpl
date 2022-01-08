@@ -163,6 +163,11 @@ class Ns:
     @property
     def fullns(self):
         return self.namespace + '.' + self.name
+    
+    def __lt__(self, other: object):
+        if not isinstance(other, Ns):
+            return NotImplemented
+        return self.fullns < other.fullns
 
 
 @dataclass(frozen=True)
@@ -175,6 +180,11 @@ class Area:
     x2: int
     y2: int
     title: str = ''
+    
+    def __lt__(self, other: object):
+        if not isinstance(other, Area):
+            return NotImplemented
+        return self.name < other.name
 
 
 @dataclass
@@ -190,6 +200,11 @@ class SummaryInfo:
     extra_data: object = None
     """Extra data that can be set in rules or otherwise"""
 
+    def __lt__(self, other: object):
+        if not isinstance(other, SummaryInfo):
+            return NotImplemented
+        return self.name < other.name
+
 @dataclass
 class NameInfo:
     name: str
@@ -199,6 +214,10 @@ class NameInfo:
     extra_data: Optional[object] = None
     """Extra data that can be set in rules or otherwise"""
 
+    def __lt__(self, other: object):
+        if not isinstance(other, NameInfo):
+            return NotImplemented
+        return self.name < other.name
 
 @dataclass
 class ParamInfo:
@@ -206,6 +225,11 @@ class ParamInfo:
     name: str = ''
     type: str = ''
     p_type: Optional[PythonType] = None
+    
+    def __lt__(self, other: object):
+        if not isinstance(other, ParamInfo):
+            return NotImplemented
+        return self.name < other.name
 # endregion Data Classes
 
 # region Cache

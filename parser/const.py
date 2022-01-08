@@ -45,8 +45,6 @@ pattern_hex = re.compile(r"0x[0-9A-Fa-f]+")
 # endregion Regex
 
 # region DataClass
-dataitem = namedtuple(
-    'dataitem', ['value', 'raw_value', 'name', 'datatype', 'lines'])
 
 @dataclass
 class DataItem:
@@ -55,6 +53,11 @@ class DataItem:
     type: str
     val: 'Val'
     lines: List[str] = field(default_factory=list)
+    
+    def __lt__(self, other: object):
+        if not isinstance(other, DataItem):
+            return NotImplemented
+        return self.name < other.name
 
 # endregion DataClass
 
@@ -1066,7 +1069,10 @@ class ApiData(base.APIData):
         if key in self._cache:
             return self._cache[key]
         self.api_summaries.get_obj()
-        self._cache[key] = list(self.api_summaries.imports)
+        # sort for consistentancy in json
+        lst = list(self.api_summaries.imports)
+        lst.sort()
+        self._cache[key] = lst
         return self._cache[key]
     # endregion Methods
 
@@ -1242,7 +1248,8 @@ class Parser(base.ParserBase):
         if key in self._cache:
             return self._cache[key]
         result = []
-        data = self._api_data.get_data_items()
+        data: List[DataItem] = self._api_data.get_data_items()
+        data.sort()
         try:
             for itm in data:
                 d_itm = {
@@ -1464,8 +1471,11 @@ class ConstWriter(base.WriteBase):
         key = '_get_from_imports'
         if key in self._cache:
             return self._cache[key]
+        # sort for consistentancy in json
+        sorted = list(self._p_from_imports)
+        sorted.sort()
         lst = []
-        for ns in self._p_from_imports:
+        for ns in sorted:
             f, n = base.Util.get_rel_import_full(
                 i_str=ns, ns=self._p_namespace
             )
@@ -1544,7 +1554,10 @@ class ConstWriter(base.WriteBase):
         for t in p_lst:
             if t.requires_typing or t.is_py_type is False:
                 t_set.add(t.type)
-        self._cache[key] = list(t_set)
+        # sort for consistentancy in json
+        lst = list(t_set)
+        lst.sort()
+        self._cache[key] = lst
         return self._cache[key]
 
     def _get_typings(self) -> List[str]:
@@ -1562,7 +1575,10 @@ class ConstWriter(base.WriteBase):
             if itm.val.p_type:
                 if itm.val.p_type.requires_typing:
                     t_set.add(itm.val.p_type.type)
-        self._cache[key] = list(t_set)
+        # sort for consistentancy in json
+        lst = list(t_set)
+        lst.sort()
+        self._cache[key] = lst
         return self._cache[key]
 
     # endregion quote/typing

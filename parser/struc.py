@@ -50,7 +50,9 @@ class DataItem:
     orig_type: str
     lines: List[str] = field(default_factory=list)
 
-    def __lt__(self, other: 'DataItem'):
+    def __lt__(self, other: object):
+        if not isinstance(other, DataItem):
+            return NotImplemented
         return self.name < other.name
 
 # endregion Data Class
