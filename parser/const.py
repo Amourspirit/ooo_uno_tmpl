@@ -1600,7 +1600,7 @@ class ConstWriter(base.WriteBase):
             except Exception as e:
                 logger.error(e, exc_info=True)
                 raise e
-        path_parts[index] = path_parts[index] + '.tmpl'
+        path_parts[index] = path_parts[index] + base.APP_CONFIG.template_const_ext
         obj_path = uno_obj_path.joinpath(*path_parts)
         self._mkdirp(obj_path.parent)
         self._cache[key] = obj_path
