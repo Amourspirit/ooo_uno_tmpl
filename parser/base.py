@@ -26,7 +26,7 @@ from dataclasses import dataclass, field
 from deprecated import deprecated
 from PIL import Image
 from types import ModuleType
-from abc import ABC, abstractmethod
+from abc import ABC, abstractmethod, abstractproperty
 from bs4 import BeautifulSoup
 from bs4.element import ResultSet, Tag
 from glob import glob
@@ -3918,7 +3918,35 @@ class AreaFilter:
 # region        Area Rules
 
 # region            Rule Area Interfaces
+
+
+class IRulesArea(ABC):
+
+    @abstractmethod
+    def get_area(self,  ai: AreaInfo, alst: List[Area]) -> List[Area]:
+        """
+        Gets filtered Area list
+
+        Args:
+            alst (List[Area]): Areas to filter
+
+         Returns:
+            List[Area]: Filtered Area List
+        """
+
+    @abstractmethod
+    def __len__(self) -> int:
+        """Gets the length of rules"""
+
+    @abstractproperty
+    def remove_parent_inherited(self) -> bool:
+        """Removes Parent Inherite Property"""
+
 class IRuleArea(ABC):
+    
+    @abstractmethod
+    def __init__(self, rules:IRulesArea) -> None:
+        """constructor"""
 
     @abstractmethod
     def get_is_match(self, ai: AreaInfo, alst: List[Area]) -> bool:
@@ -3942,29 +3970,14 @@ class IRuleArea(ABC):
         """
 
 
-class IRulesArea(ABC):
-    @abstractmethod
-    def get_area(self,  ai: AreaInfo, alst: List[Area]) -> List[Area]:
-        """
-        Gets filtered Area list
-
-        Args:
-            alst (List[Area]): Areas to filter
-
-         Returns:
-            List[Area]: Filtered Area List
-        """
-
-    @abstractmethod
-    def __len__(self) -> int:
-        """Gets the length of rules"""
-
 # endregion         Rule Area Interfaces
 
 # region            Area Rules
 class RuleAreaBase(IRuleArea):
     """Matches when there is a single parent"""
-
+    def __init__(self, rules:IRulesArea) -> None:
+        """constructor"""
+        self._rules = rules
       # region Private Methods
     def _get_with_parent_removed(self, first: Area, d_lst: Dict[int, List[Area]],  match_lst: List[Area]) -> None:
         """
@@ -4071,6 +4084,10 @@ class RuleAreaBase(IRuleArea):
 class RuleAreaSingle(RuleAreaBase):
     """Matches when there is a single parent"""
 
+    def __init__(self, rules: IRulesArea) -> None:
+        """constructor"""
+        super().__init__(rules=rules)
+    
     # region IRuleArea Methods
     def get_is_match(self, ai: AreaInfo, alst: List[Area]) -> bool:
         """
@@ -4108,7 +4125,9 @@ class RuleAreaSingle(RuleAreaBase):
 
 class RuleAreaMulti(RuleAreaBase):
     """Matches when there is a multiple adjacent parents"""
-
+    def __init__(self, rules: IRulesArea) -> None:
+        """constructor"""
+        super().__init__(rules=rules)
     # region IRuleArea Methods
     def get_is_match(self, ai: AreaInfo, alst: List[Area]) -> bool:
         """
@@ -4153,6 +4172,9 @@ class RuleAreaMulti(RuleAreaBase):
 class RuleAreaVertical(RuleAreaBase):
     """Matches when there is a vertical parent"""
 
+    def __init__(self, rules: IRulesArea) -> None:
+        """constructor"""
+        super().__init__(rules=rules)
     # region IRuleArea Methods
     def get_is_match(self, ai: AreaInfo, alst: List[Area]) -> bool:
         """
@@ -4208,13 +4230,16 @@ class RuleAreaVertical(RuleAreaBase):
 class RulesArea(IRulesArea):
     """Manages rules for NameInfo"""
 
-    def __init__(self) -> None:
+    def __init__(self, remove_parent_inherited) -> None:
+        self._remove_parent_inherited: bool = remove_parent_inherited
         self._rules: List[type[IRuleArea]] = []
         self._cache = {}
         self._register_known_rules()
 
     def __len__(self) -> int:
         return len(self._rules)
+
+    # region Methods
 
     def register_rule(self, rule: type[IRuleArea]) -> None:
         """
@@ -4268,7 +4293,7 @@ class RulesArea(IRulesArea):
             if key in self._cache:
                 inst = self._cache[key]
             else:
-                inst: IRuleArea = rule()
+                inst: IRuleArea = rule(rules=self)
                 self._cache[key] = inst
             if inst.get_is_match(ai=ai, alst=alst):
                 match_inst = inst
@@ -4289,7 +4314,22 @@ class RulesArea(IRulesArea):
         if match:
             return match.get_area(ai=ai, alst=alst)
         return None
+    # endregion Methods
 
+    # region Properties
+    @property
+    def remove_parent_inherited(self) -> bool:
+        """Specifies remove_parent_inherited
+
+            :getter: Gets remove_parent_inherited value.
+            :setter: Sets remove_parent_inherited value.
+        """
+        return self._remove_parent_inherited
+
+    @remove_parent_inherited.setter
+    def remove_parent_inherited(self, value: bool):
+        self._remove_parent_inherited = value
+    # endregion Properties
 # endregion         Rules Area Engine
 # endregion     Area Rules
 class ApiInherited(BlockObj):
