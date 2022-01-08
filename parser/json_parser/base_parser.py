@@ -319,6 +319,7 @@ def parse(*args, **kwargs):
         if pargs['verbose']:
             log_args['level'] = logging.DEBUG
         _set_loggers(get_logger(logger_name=Path(__file__).stem, **log_args))
+    logger.info("Processing Json File: '%s'", pkwargs['json_file'])
     p: IParser = parser(json_path=pkwargs['json_file'])
     w: IWriter = writer(parser=p)
     w.write(*args, **pkwargs)
