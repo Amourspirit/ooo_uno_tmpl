@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "libre_office_ver": "7.2",
   "name": "XGridColumnModel",
   "type": "interface",
@@ -15,6 +15,11 @@
   "data": {
     "from_imports": [
       [
+        "...container.x_container",
+        "XContainer",
+        "container_x_container_i"
+      ],
+      [
         "...lang.x_component",
         "XComponent",
         "lang_x_component_i"
@@ -23,11 +28,6 @@
         "...util.x_cloneable",
         "XCloneable",
         "util_x_cloneable_i"
-      ],
-      [
-        "...container.x_container",
-        "XContainer",
-        "container_x_container_i"
       ]
     ],
     "from_imports_typing": [
@@ -38,13 +38,13 @@
       ]
     ],
     "extends_map": {
+      "com.sun.star.container.XContainer": "container_x_container_i",
       "com.sun.star.lang.XComponent": "lang_x_component_i",
-      "com.sun.star.util.XCloneable": "util_x_cloneable_i",
-      "com.sun.star.container.XContainer": "container_x_container_i"
+      "com.sun.star.util.XCloneable": "util_x_cloneable_i"
     },
     "quote": [
-      "typing.List[x_grid_column_i]",
-      "x_grid_column_i"
+      "x_grid_column_i",
+      "typing.List[x_grid_column_i]"
     ],
     "typings": [
       "typing.List[x_grid_column_i]"
@@ -54,9 +54,9 @@
     "imports": [],
     "namespace": "com.sun.star.awt.grid",
     "extends": [
+      "com.sun.star.container.XContainer",
       "com.sun.star.lang.XComponent",
-      "com.sun.star.util.XCloneable",
-      "com.sun.star.container.XContainer"
+      "com.sun.star.util.XCloneable"
     ],
     "desc": [
       "An instance of this interface is used by the UnoControlGrid to retrieve the column structure that is displayed in the actual control.",
