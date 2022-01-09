@@ -84,9 +84,14 @@ class ApiNs(base.ApiNamespace):
 
 class ApiData(base.APIData):
     # region constructor
-    @TypeCheck((str, base.SoupObj), bool, bool, ftype=DecFuncEnum.METHOD)
-    def __init__(self, url_soup: Union[str, base.SoupObj], allow_cache: bool, long_names: bool=False):
-        super().__init__(url_soup=url_soup, allow_cache=allow_cache, long_names=long_names)
+    @TypeCheck((str, base.SoupObj), bool, bool, bool, ftype=DecFuncEnum.METHOD)
+    def __init__(self, url_soup: Union[str, base.SoupObj], allow_cache: bool, long_names: bool = False, remove_parent_inherited: bool=True):
+        super().__init__(
+            url_soup=url_soup,
+            allow_cache=allow_cache,
+            long_names=long_names,
+            remove_parent_inherited=self._remove_parent_inherited
+            )
 
         self._ns: ApiNs = None
        
@@ -132,10 +137,13 @@ class Parser(base.ParserBase):
         super().__init__(**kwargs)
         self._allow_caching: bool = kwargs.get('allow_cache', True)
         self._long_names: bool = kwargs.get('long_names', False)
+        self._remove_parent_inherited: bool = kwargs.get(
+            'remove_parent_inherited', True)
         self._api_data: ApiData = ApiData(
             url_soup=self.url,
             allow_cache=self._allow_cache,
-            long_names=self._long_names
+            long_names=self._long_names,
+            remove_parent_inherited=self._remove_parent_inherited
             )
         self._data = None
         self._imports: Set[str] = set()
@@ -823,7 +831,8 @@ def parse(*args, **kwargs):
         url=pkwargs['url'],
         sort=pargs['no_sort'],
         cache=pargs['no_cache'],
-        long_names=pargs['no_long_names']
+        long_names=pargs['no_long_names'],
+        remove_parent_inherited=base.APP_CONFIG.remove_parent_inherited
     )
     w = StructWriter(
         parser=p,
@@ -970,7 +979,8 @@ def main():
         url=args.url,
         sort=args.sort,
         cache=args.cache,
-        long_names=args.long_names
+        long_names=args.long_names,
+        remove_parent_inherited=base.APP_CONFIG.remove_parent_inherited
         )
     if args.print_template is False and args.print_json is False:
         print('')

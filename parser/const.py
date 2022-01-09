@@ -1017,8 +1017,11 @@ class ApiValues(base.BlockObj):
         return self._data
 
 class ApiData(base.APIData):
-    def __init__(self, url_soup: Union[str, base.SoupObj], allow_cache: bool):
-        super().__init__(url_soup=url_soup, allow_cache=allow_cache)
+    def __init__(self, url_soup: Union[str, base.SoupObj], allow_cache: bool, remove_parent_inherited:bool=True):
+        super().__init__(url_soup=url_soup,
+                         allow_cache=allow_cache,
+                         remove_parent_inherited=remove_parent_inherited
+                         )
         self._ns: ApiNs = None
         self._api_const_block: ApiConstBlock = None
         self._api_const_summary_rows: base.ApiSummaryRows = None
@@ -1127,10 +1130,20 @@ class ApiData(base.APIData):
 class Parser(base.ParserBase):
     
     # region init
+    @TypeCheckKw(
+        arg_info={"remove_parent_inherited": bool },
+        ftype=DecFuncEnum.METHOD
+    )
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
+        self._remove_parent_inherited: bool = kwargs.get(
+            'remove_parent_inherited', True)
         self._api_data: ApiData = ApiData(
-            url_soup=self.url, allow_cache=self.allow_cache)
+            url_soup=self.url,
+            allow_cache=self.allow_cache,
+            remove_parent_inherited=self._remove_parent_inherited
+            )
+        
         self._soup = self._api_data.soup_obj
         self._requires_typing: bool = False
         self._cache = {}
@@ -1177,7 +1190,8 @@ class Parser(base.ParserBase):
 
     def get_parser_args(self) -> dict:
         args = {
-            "sort": self.sort
+            "sort": self.sort,
+            "remove_parent_inherited": self._remove_parent_inherited
         }
         return args
     # endregion Info
@@ -1729,7 +1743,8 @@ def parse(*args, **kwargs):
     p = Parser(
         url=pkwargs['url'],
         sort=False,
-        cache=pargs['no_cache']
+        cache=pargs['no_cache'],
+        remove_parent_inherited=base.APP_CONFIG.remove_parent_inherited
     )
     w = ConstWriter(
         parser=p,
@@ -1877,7 +1892,8 @@ def main():
     p = Parser(
         url=args.url,
         sort=False,
-        cache=args.cache
+        cache=args.cache,
+        remove_parent_inherited=base.APP_CONFIG.remove_parent_inherited
     )
     if not args.print_json and not args.print_template:
         print('')

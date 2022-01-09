@@ -179,17 +179,20 @@ class Parser(base.ParserBase):
 
     # region Constructor
     @TypeCheckKw(
-        arg_info={"allow_cache": bool, "long_names": bool},
+        arg_info={
+            "long_names": 0,
+            "remove_parent_inherited": 0
+            },
+        types=[bool],
         ftype=DecFuncEnum.METHOD
     )
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self._allow_caching: bool = kwargs.get('allow_cache', True)
         self._long_names: bool = kwargs.get('long_names', False)
         self._remove_parent_inherited: bool = kwargs.get('remove_parent_inherited', True)
         self._api_data = ApiInterfaceData(
             url_soup=self.url,
-            allow_cache=self._allow_cache,
+            allow_cache=self.allow_cache,
             long_names=self._long_names,
             remove_parent_inherited=self._remove_parent_inherited
             )
