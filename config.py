@@ -57,6 +57,11 @@ class AppConfig:
     """
     module path to oenv suca as ``ooo_uno.oenv``
     """
+    remove_parent_inherited: bool
+    """
+    Determins if parsers remove classes from inhertiance if an inherited class
+    is already inherited by a parent class.
+    """
     template_struct_ext: str
     """Extension for struct files such as .tmpl"""
     template_const_ext: str

@@ -86,9 +86,10 @@ class ApiNs(base.ApiNamespace):
 
 class ApiInterfaceData(base.APIData):
     # region Constructor
-    @TypeCheck((str, base.SoupObj), bool, bool, ftype=DecFuncEnum.METHOD)
-    def __init__(self, url_soup: Union[str, base.SoupObj], allow_cache: bool, long_names: bool = False):
-        super().__init__(url_soup=url_soup, allow_cache=allow_cache, long_names=long_names)
+    @TypeCheck((str, base.SoupObj), bool, bool, bool, ftype=DecFuncEnum.METHOD)
+    def __init__(self, url_soup: Union[str, base.SoupObj], allow_cache: bool, long_names: bool = False, remove_parent_inherited=True):
+        super().__init__(url_soup=url_soup, allow_cache=allow_cache,
+                         long_names=long_names, remove_parent_inherited=remove_parent_inherited)
         self._si_key = 'summeries'
         self._detail_block_key = 'detail_block'
         self._ns: ApiNs = None
@@ -185,10 +186,12 @@ class Parser(base.ParserBase):
         super().__init__(**kwargs)
         self._allow_caching: bool = kwargs.get('allow_cache', True)
         self._long_names: bool = kwargs.get('long_names', False)
+        self._remove_parent_inherited: bool = kwargs.get('remove_parent_inherited', True)
         self._api_data = ApiInterfaceData(
             url_soup=self.url,
             allow_cache=self._allow_cache,
-            long_names=self._long_names
+            long_names=self._long_names,
+            remove_parent_inherited=self._remove_parent_inherited
             )
         self._requires_typing = False
         self._imports: Set[str] = set()
@@ -204,7 +207,8 @@ class Parser(base.ParserBase):
     def get_parser_args(self) -> dict:
         args = {
             "sort": self.sort,
-            "long_names": self.long_names
+            "long_names": self.long_names,
+            "remove_parent_inherited": self._remove_parent_inherited
         }
         return args
 
@@ -229,14 +233,14 @@ class Parser(base.ParserBase):
         for el in self._api_data.inherited.get_obj():
             ex.append(el.fullns)
         ns = self._api_data.ns
-        ex_s = base.Util.get_clean_imports(ns=ns.namespace_str, imports=ex)
+        # ex_s = base.Util.get_clean_imports(ns=ns.namespace_str, imports=ex)
         ni = self._api_data.name.get_obj()
         result = {
             # 'name': ni.name,
             'name': ni.name,
             'imports': [],
             'namespace': self._api_data.ns.namespace_str,
-            'extends': list(ex_s),
+            'extends': ex,
             'desc': self._api_data.desc.get_obj(),
             "url": self._api_data.url_obj.url,
         }
@@ -419,6 +423,11 @@ class Parser(base.ParserBase):
     def long_names(self) -> bool:
         """Gets long_names value"""
         return self._long_names
+    
+    @property
+    def remove_parent_inherited(self) -> bool:
+        """Gets remove_parent_inherited value"""
+        return self._remove_parent_inherited
     # endregion Properties
 # endregion Parse
 
@@ -942,6 +951,8 @@ class Processer:
             write_template (bool, optional): Write template file into obj_uno subfolder. Default ``False``
             write_json (bool, optional): Write json file into obj_uno subfolder. Default ``False``
             verbose (bool, optional): Verobose output. Default ``False``
+            remove_parent_inherited (bool, optional): Determins if parsers remove classes from inhertiance if an inherited class
+                is already inherited by a parent class.
         """
         self._parser = p
         self._writer = w
@@ -958,13 +969,16 @@ class Processer:
         self._verbose = bool(kwargs.get('verbose', False))
         self._include_desc = bool(kwargs.get('include_desc', True))
         self._long_names = bool(kwargs.get('long_names', False))
+        self._remove_parent_inherited = bool(
+            kwargs.get('remove_parent_inherited', base.APP_CONFIG.remove_parent_inherited))
 
     def process(self) -> None:
         parser = self._parser(
             url=self._url,
             sort=self._sort,
             cache=self._cache,
-            long_names=self._long_names
+            long_names=self._long_names,
+            remove_parent_inherited=self._remove_parent_inherited
         )
         w = self._writer(
             parser=parser,
@@ -1181,7 +1195,8 @@ def main():
         clear_on_print=(not args.no_print_clear),
         write_template_long=args.long_format,
         include_desc=args.desc,
-        long_names=args.long_names
+        long_names=args.long_names,
+        remove_parent_inherited=base.APP_CONFIG.remove_parent_inherited
     )
     if args.print_template is False and args.print_json is False:
         print('')

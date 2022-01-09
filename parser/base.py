@@ -3898,6 +3898,7 @@ class AreaFilter:
             logger.error(msg)
             raise Exception(msg)
 
+        # rules_engine determines sorting
         area_lst = self._rules_engine.get_area(ai=self._ai, alst=self._lst)
         return area_lst or []
 
@@ -3905,10 +3906,13 @@ class AreaFilter:
     def get_as_ns(self) -> List[Ns]:
         """
         Gets the current inherited list of Area as a list of ``Ns``
+        
+        Sorting if any has been determined by IRulesArea
 
         Returns:
             List[Ns]: List if inherited Namespaces
         """
+        # no sorting should be done here.
         return [el.ns for el in self._inherited]
 
     @property
@@ -3987,7 +3991,7 @@ class RuleAreaBase(IRuleArea):
       # region Private Methods
     def _get_with_parent_removed(self, first: Area, d_lst: Dict[int, List[Area]],  match_lst: List[Area]) -> None:
         """
-        Remove any parent inherits from match_lst
+        Remove any parent inherits from match_lst. This method does not affect sort order of match_lst
 
         Args:
             first (Area): First Area
@@ -4047,7 +4051,8 @@ class RuleAreaBase(IRuleArea):
 
     def _remove_duplicates_lst(self, lst: List[Area]) -> bool:
         """
-        Removes any duplicates base upon namesapce.
+        Removes any duplicates base upon namespace.
+        Method does not change the sort order of lst
 
         Args:
             clean_lst (List[Area]): List to remove duplicates from
@@ -4084,22 +4089,6 @@ class RuleAreaBase(IRuleArea):
             return first
         return alst[0]
 
-    def _get_sorted_lst(self, alst: List[Area], match_lst: List[Area]) -> List[Area]:
-        """
-        Sorts match_lst in the same order of found in alst
-
-        Args:
-            alst (List[Area]): origin list
-            match_lst (List[Area]): filtered list
-
-        Returns:
-            List[Area]: list in same order found in alist
-        """
-        if len(match_lst) <= 1:
-            return [*match_lst]
-        # href is unique to each area, use it as key
-        a_set = {area.href for area in match_lst}
-        return [area for area in alst if area.href in a_set]
     # endregion Privae Methods
 
     # region Properties
@@ -4194,7 +4183,7 @@ class RuleAreaMulti(RuleAreaBase):
         if self.rules.remove_parent_inherited:
             self._get_with_parent_removed(first=first,d_lst=d_lst, match_lst=match_lst)
         
-        return self._get_sorted_lst(alst=alst, match_lst=match_lst)
+        return match_lst
     # endregion IRuleArea Methods
 
 class RuleAreaVertical(RuleAreaBase):
@@ -4249,7 +4238,7 @@ class RuleAreaVertical(RuleAreaBase):
         upper: List[Area] = d_lst[first.x1]
         if self.rules.remove_parent_inherited:
             self._remove_duplicates_lst(upper)
-        return self._get_sorted_lst(alst=alst, match_lst=upper)
+        return upper
     # endregion IRuleArea Methods
 # endregion         Area Rules
 
@@ -4393,6 +4382,12 @@ class ApiInherited(BlockObj):
         logger.warning(msg)
 
     def get_obj(self) -> List[Ns]:
+        """
+        Gets a list of Ns objects. Sorting is dertimined by IRulesArea
+
+        Returns:
+            List[Ns]: List of Ns objects for class inherites
+        """
         if not self._data is None:
             return self._data
         self._data = []
