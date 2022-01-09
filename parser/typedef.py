@@ -69,11 +69,12 @@ class ApiTypeDefBlock(base.ApiSummaryBlock):
 class ApiSummaries(base.BlockObj):
     """Gets summary information for a public member block"""
 
-    def __init__(self, block: base.ApiSummaryRows, name_info: base.NameInfo) -> None:
+    def __init__(self, block: base.ApiSummaryRows, name_info: base.NameInfo, ns: str) -> None:
         self._block: base.ApiSummaryRows = block
         self._name_info = name_info
         super().__init__(self._block.soup)
         self._data = None
+        self._ns = ns
 
     def get_obj(self) -> List[SummaryInfo]:
         if not self._data is None:
@@ -104,7 +105,10 @@ class ApiSummaries(base.BlockObj):
                 raise Exception(msg)
             if _type:
                 p_type = base.Util.get_python_type(
-                    in_type=_type, name_info=self._name_info)
+                    in_type=_type
+                    , name_info=self._name_info
+                    ,ns=self._ns
+                    )
                 s_type =p_type.type
                 if p_type.requires_typing:
                     _req_typing = True
@@ -114,7 +118,8 @@ class ApiSummaries(base.BlockObj):
                     name=name,
                     type=s_type,
                     realtype=s_type,
-                    requires_typing=_req_typing
+                    requires_typing=_req_typing,
+                    ns=self._ns
                 )
                 msg = f"{self.__class__.__name__}.get_obj(). Missing return type for {name}. Url: {self.url_obj.url_only}"
                 logger.error(msg)
@@ -211,7 +216,8 @@ class ApiData(base.APIData):
         if self._type_def_summaries is None:
             self._type_def_summaries = ApiSummaries(
                 block=self.type_def_summary_rows,
-                name_info=self.name.get_obj()
+                name_info=self.name.get_obj(),
+                ns=self.ns.namespace_str
                 )
         return self._type_def_summaries
 
