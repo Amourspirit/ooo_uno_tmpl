@@ -4236,9 +4236,10 @@ class RuleAreaVertical(RuleAreaBase):
         d_lst: Dict[int, List[Area]] = self._list_dict_x1(
             lst=alst)  # grouped by y1
         upper: List[Area] = d_lst[first.x1]
+        sorted_u = sorted(upper, key=lambda a: a.y1)
         if self.rules.remove_parent_inherited:
-            self._remove_duplicates_lst(upper)
-        return upper
+            self._remove_duplicates_lst(sorted_u)
+        return sorted_u
     # endregion IRuleArea Methods
 # endregion         Area Rules
 
