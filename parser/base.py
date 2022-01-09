@@ -3036,7 +3036,6 @@ class Util:
 
         def is_self_import(s:str, class_name:str) -> bool:
             try:
-                Util.TYPE_RULES.long_names = False
                 p_type = Util.TYPE_RULES.get_python_type(in_type=s)
                 if not p_type.imports:
                     return False
@@ -3044,17 +3043,12 @@ class Util:
             except Exception as e:
                 logger.error(e, exc_info=True)
                 raise e
-            finally:
-                Util.TYPE_RULES.namespace = ns
-                Util.TYPE_RULES.long_names = long_names
 
         Util.TYPE_RULES.namespace = ns
         Util.TYPE_RULES.long_names = long_names
-        self_import = False
-        if ns and long_names:
-            self_import = is_self_import(in_type, name_info.name)
-            if self_import:
-                Util.TYPE_RULES.long_names = False
+        self_import = is_self_import(in_type, name_info.name)
+        if self_import:
+            Util.TYPE_RULES.long_names = False
 
         try:
             py_type = Util.TYPE_RULES.get_python_type(in_type)
