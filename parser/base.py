@@ -1894,14 +1894,10 @@ class APIData:
     def func_summaries(self) -> ApiSummaries:
         """Get Summary info list for functions"""
         if self.__func_summaries is None:
-            if self.__long_names:
-                ns = self.ns.namespace_str
-            else:
-                ns = None
             self.__func_summaries = ApiSummaries(
                 block=self.func_summary_rows,
                 name_info=self.name.get_obj(),
-                ns=ns,
+                ns=self.ns.namespace_str,
                 long_names=self.__long_names)
         return self.__func_summaries
 
@@ -1909,14 +1905,10 @@ class APIData:
     def property_summaries(self) -> ApiSummaries:
         """Get Summary info list for Properties"""
         if self.__property_summaries is None:
-            if self.__long_names:
-                ns = self.ns.namespace_str
-            else:
-                ns = None
             self.__property_summaries = ApiSummaries(
                 block=self.property_summary_rows,
                 name_info=self.name.get_obj(),
-                ns=ns,
+                ns=self.ns.namespace_str,
                 long_names=self.__long_names)
         return self.__property_summaries
 
@@ -1924,14 +1916,10 @@ class APIData:
     def exported_summaries(self) -> ApiSummaries:
         """Get Summary info list for Exported Interfaces"""
         if self.__exported_summaries is None:
-            if self.__long_names:
-                ns = self.ns.namespace_str
-            else:
-                ns = None
             self.__exported_summaries = ApiSummaries(
                 block=self.export_summary_rows,
                 name_info=self.name.get_obj(),
-                ns=ns,
+                ns=self.ns.namespace_str,
                 long_names=self.__long_names)
         return self.__exported_summaries
 
@@ -1959,14 +1947,10 @@ class APIData:
     def types_summaries(self) -> ApiSummaries:
         """Get Summary info list for Properties"""
         if self.__type_summaries is None:
-            if self.__long_names:
-                ns = self.ns.namespace_str
-            else:
-                ns = None
             self.__type_summaries = ApiSummaries(
                 block=self.types_summary_rows,
                 name_info=self.name.get_obj(),
-                ns=ns,
+                ns=self.ns.namespace_str,
                 long_names=self.__long_names)
         return self.__type_summaries
 
