@@ -62,6 +62,17 @@ class AppConfig:
     Determins if parsers remove classes from inhertiance if an inherited class
     is already inherited by a parent class.
     """
+    use_long_import_names: bool
+    """
+    Determines if Long Import Name are used.
+    
+    If ``True`` then by default import will be in a format similar to :
+        ``from ..accessibility.x_accessible_action import XAccessibleAction as accessibility_x_accessible_action_i``
+    
+    If ``False`` then by default import will be in a format similar to :
+        ``from ..accessibility.x_accessible_action import XAccessibleAction``
+    
+    """
     template_struct_ext: str
     """Extension for struct files such as .tmpl"""
     template_const_ext: str

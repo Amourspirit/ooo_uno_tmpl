@@ -871,7 +871,7 @@ def _get_parsed_args(*args) -> Dict[str, bool]:
         "no_cache": True,
         "no_desc": True,
         "no_print_clear": True,
-        "no_long_names": True,
+        "long_names": base.APP_CONFIG.use_long_import_names,
         "long_template": False,
         "clipboard": False,
         "print_json": False,
@@ -885,7 +885,7 @@ def _get_parsed_args(*args) -> Dict[str, bool]:
         "no_cache": False,
         "no_desc": False,
         "no_print_clear": False,
-        "no_long_names": False,
+        "long_names": not base.APP_CONFIG.use_long_import_names,
         "long_template": True,
         "clipboard": True,
         "print_json": True,
@@ -895,8 +895,8 @@ def _get_parsed_args(*args) -> Dict[str, bool]:
         "verbose": True
     }
     lookups = {
-        "l": "no_long_names",
-        "no_long_names": "no_long_names",
+        "l": "long_names",
+        "long_names": "no_long_names",
         "s": "no_sort",
         "no_sort": "no_sort",
         "x": "no_cache",
@@ -944,7 +944,8 @@ class Processer:
         Other Arguments:
             url (str): url to parse
             sort (bool, optional): No sorting of results. Default ``True``
-            long_names (bool, optional): No Long Names: Default ``False``
+            long_names (bool, optional): Long Names: Default set in config ``use_long_import_names`` property.
+                Toggles config value.
             cache (bool, optional): caching. Default ``False``
             clear_on_print (bool, optional): No clearing of terminal when otuput to terminal. Default ``False``
             write_template_long (bool, optional): Writes a long format template. Requires write_template is set. Default ``False``
@@ -971,7 +972,7 @@ class Processer:
         self._write_json = bool(kwargs.get('write_json', bool))
         self._verbose = bool(kwargs.get('verbose', False))
         self._include_desc = bool(kwargs.get('include_desc', True))
-        self._long_names = bool(kwargs.get('long_names', False))
+        self._long_names = bool(kwargs.get('long_names', base.APP_CONFIG.use_long_import_names))
         self._remove_parent_inherited = bool(
             kwargs.get('remove_parent_inherited', base.APP_CONFIG.remove_parent_inherited))
 
@@ -1007,7 +1008,8 @@ def parse(*args, **kwargs):
         'no_print_clear (str, optional): Short form ``'p'``. No clearing of terminal
             when otuput to terminal. Default ``False``
         'no_desc' (str, optional): Short from ``'d'``. No description will be outputed in template. Default ``False``
-        'no_long_names' (str, optional): Short form ``'l'``. No long names. Default ``False``
+        'long_names' (str, optional): Short form ``'l'``. Long names. Default set in config ``use_long_import_names`` property.
+            Toggles values set in config.
         'long_template' (str, optional): Short form ``'g'``. Writes a long format template.
             Requires write_template is set. Default ``False``
         'clipboard' (str, optional): Short form ``'c'``. Copy to clipboard. Default ``False``
@@ -1049,7 +1051,7 @@ def parse(*args, **kwargs):
         clear_on_print=(not pargs['no_print_clear']),
         write_template_long=pargs['long_template'],
         include_desc=pargs['no_desc'],
-        long_names=pargs['no_long_names']
+        long_names=pargs['long_names']
     )
     proc.process()
 
@@ -1067,7 +1069,7 @@ def _main():
     # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1report_1_1XReportControlModel.html'
     url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1grid_1_1XGridColumnModel.html'
     # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1security_1_1XPolicy.html'
-    args = ('v', 'n', 'l')
+    args = ('v', 'n')
     kwargs = {
         "u": url,
         "log_file": "debug.log"
@@ -1092,11 +1094,11 @@ def get_cmd_args() -> argparse.Namespace:
         dest='desc',
         default=True)
     parser.add_argument(
-        '-l', '--no-long-names',
-        help='Short Names such as XInterface will be generated instead of uno_x_interface',
-        action='store_false',
+        '-l', '--long-names',
+        help='Toggels default value of config. Short Names such as XInterface will be generated instead of uno_x_interface or vice versa',
+        action='store_false' if base.APP_CONFIG.use_long_import_names else 'store_true',
         dest='long_names',
-        default=True)
+        default=base.APP_CONFIG.use_long_import_names)
     parser.add_argument(
         '-s', '--no-sort',
         help='No sorting of results',
@@ -1207,5 +1209,5 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    _main()
 # endregion Main
