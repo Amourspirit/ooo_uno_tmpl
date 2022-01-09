@@ -205,7 +205,8 @@ class Parser(base.ParserBase):
     def get_parser_args(self) -> dict:
         args = {
             "sort": self._sort,
-            "long_names": self.long_names
+            "long_names": self.long_names,
+            "remove_parent_inherited": self._remove_parent_inherited
         }
         return args
 
