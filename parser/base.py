@@ -3050,6 +3050,7 @@ class Util:
 
         Util.TYPE_RULES.namespace = ns
         Util.TYPE_RULES.long_names = long_names
+        self_import = False
         if ns and long_names:
             self_import = is_self_import(in_type, name_info.name)
             if self_import:

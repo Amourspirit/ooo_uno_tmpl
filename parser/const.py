@@ -700,7 +700,7 @@ class RuleImport(RuleBase):
             im = ".".join(parts)
             p_type = base.Util.get_python_type(in_type=im, name_info=self._rules.name_info)
 
-            rel = base.Util.get_rel_import_full(p_type.imports, ns.namespace_str)
+            rel = base.Util.get_rel_import(p_type.imports, ns.namespace_str)
             
             val = f"{rel[1]}.{p_type.type}.{name}"
             result = Val(text=si.name,
@@ -877,7 +877,7 @@ class ApiSummaries(base.BlockObj):
         self._block: base.ApiSummaryRows = block
         super().__init__(self._block.soup)
         self._requires_typing = False
-        self._imports: Set[str] = set(),
+        self._imports: Set[str] = set()
         self._name_info = name_info
         self._data = None
     
@@ -986,10 +986,15 @@ class ApiSummaries(base.BlockObj):
     
     # endregion Properties
 class ApiValues(base.BlockObj):
-    def __init__(self, summary_block: base.ApiSummaryBlock, api_summaries: ApiSummaries, api_ns: ApiNs) -> None:
+    def __init__(self, summary_block: base.ApiSummaryBlock
+                 , api_summaries: ApiSummaries
+                 , api_ns: ApiNs
+                 , name_info: base.NameInfo
+                 ) -> None:
         self._summary_block: base.ApiSummaryBlock = summary_block
         self._api_summaries: ApiSummaries = api_summaries
         self._api_ns: ApiNs = api_ns
+        self._name_info: base.NameInfo = name_info
         super().__init__(self._summary_block.soup)
         self._data = None
 
@@ -1016,7 +1021,11 @@ class ApiValues(base.BlockObj):
             logger.error(msg)
             raise Exception(msg)
         self._data = {}
-        rules = Rules(si_dict=api_summaries, summary_block=self._summary_block, api_ns=self._api_ns)
+        rules = Rules(
+            si_dict=api_summaries
+            , summary_block=self._summary_block
+            , api_ns=self._api_ns
+            , name_info=self._name_info)
         for k in keys:
             si: SummaryInfo = api_summaries[k]
             try:
@@ -1124,13 +1133,21 @@ class ApiData(base.APIData):
         Get the summaries. This classes get_object() returns a list of SummaryInfo
         """
         if self._api_summaries is None:
-            self._api_summaries = ApiSummaries(self.api_summary_rows)
+            self._api_summaries = ApiSummaries(
+                block=self.api_summary_rows,
+                name_info=self.name.get_obj(),
+                )
         return self._api_summaries
 
     @property
     def api_values(self) -> ApiValues:
         if self._api_values is None:
-            self._api_values = ApiValues(self.api_const_block, self.api_summaries, self.ns)
+            self._api_values = ApiValues(
+                summary_block=self.api_const_block
+                , api_summaries=self.api_summaries
+                , api_ns=self.ns
+                , name_info=self.name.get_obj()
+                )
         return self._api_values
     
     @property
@@ -1507,7 +1524,7 @@ class ConstWriter(base.WriteBase):
         sorted.sort()
         lst = []
         for ns in sorted:
-            f, n = base.Util.get_rel_import_full(
+            f, n = base.Util.get_rel_import(
                 i_str=ns, ns=self._p_namespace
             )
             lst.append([f, n])
@@ -1927,5 +1944,5 @@ def main():
     w.write()
  
 if __name__ == '__main__':
-    _main()
+    main()
 # endregion Main
