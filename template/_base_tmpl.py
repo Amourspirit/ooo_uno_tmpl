@@ -288,11 +288,24 @@ class BaseTpml(Template):
         Returns:
             str: string formated for a from statement
         """
+        def is_self_import(path: str, name: str) -> bool:
+            if name != class_name:
+                return False
+            p_parts = path.rsplit(sep='.', maxsplit=1)
+            if len(p_parts) != 2:
+                raise Exception(
+                    "get_from_import() Expected im_parts param to have a length of two!")
+            # in the cases where there is a single . such as .x_package then
+            # im_parts will be ['', 'x_package']
+            # This indicates that class it trying to import itself
+            return p_parts[0] == ''
         im_len = len(im_data)
         if im_len < 2:
             raise Exception(f"{self.__class__.__name__}.get_from_import() Expected im_data param to have a min length of two!")
         im = im_data[0]  # .sdbcx.table_descriptor
         name = im_data[1]  # DataSettings
+        if is_self_import(im, name):
+            return ''
         if im_len == 3:
             s_as = im_data[2]
             return f"from {im} import {name} as {s_as}"
