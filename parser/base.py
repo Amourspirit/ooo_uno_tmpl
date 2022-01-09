@@ -1618,9 +1618,11 @@ class ApiMethodException(BlockObj):
 
 # endregion     Method Api
 
+# region        API Data
 class APIData:
     """Class the brings together parts for scraping API Html pages"""
     # region Constructor
+
     def __init__(self, url_soup: Union[str, SoupObj], allow_cache: bool, long_names: bool = False, remove_parent_inherited: bool = True):
         """
         Constructor
@@ -1633,34 +1635,34 @@ class APIData:
                 ``uno.XInterface``. Defaults to ``False``.
         """
         if isinstance(url_soup, str):
-            self._url = url_soup
-            self._soup_obj = SoupObj(
+            self.__url = url_soup
+            self.__soup_obj = SoupObj(
                 url=url_soup, allow_cache=allow_cache)
         else:
-            self._url = url_soup.url
-            self._soup_obj = url_soup
-            self._soup_obj.allow_cache = allow_cache
-        self._allow_cache = allow_cache
+            self.__url = url_soup.url
+            self.__soup_obj = url_soup
+            self.__soup_obj.allow_cache = allow_cache
+        self.__allow_cache = allow_cache
         self.__ns: ApiNamespace = None
-        self._long_names = long_names
-        self._api_data_public_members: ApiPublicMembers = None
-        self._api_data_name: ApiName = None
-        self._desc: ApiDesc = None
-        self._properties_block: ApiPropertiesBlock = None
-        self._func_block: ApiFunctionsBlock = None
-        self._interfaces_block: ApiInterfacesBlock = None
-        self._types_block: ApiTypesBlock = None
-        self._func_summary_rows: ApiSummaryRows = None
-        self._property_summary_rows: ApiSummaryRows = None
-        self._export_summary_rows: ApiSummaryRows = None
-        self._func_summaries: ApiSummaries = None
-        self._property_summaries: ApiSummaries = None
-        self._exported_summaries: ApiSummaries = None
-        self._type_summaries: ApiSummaries = None
-        self._type_summary_rows: ApiSummaryRows = None
-        self._inherited: ApiInherited = None
-        self._area_filter_rules_engine: IRulesArea = None
-        self._remove_parent_inherited = remove_parent_inherited
+        self.__long_names = long_names
+        self.__api_data_public_members: ApiPublicMembers = None
+        self.__api_data_name: ApiName = None
+        self.__desc: ApiDesc = None
+        self.__properties_block: ApiPropertiesBlock = None
+        self.__func_block: ApiFunctionsBlock = None
+        self.__interfaces_block: ApiInterfacesBlock = None
+        self.__types_block: ApiTypesBlock = None
+        self.__func_summary_rows: ApiSummaryRows = None
+        self.__property_summary_rows: ApiSummaryRows = None
+        self.__export_summary_rows: ApiSummaryRows = None
+        self.__func_summaries: ApiSummaries = None
+        self.__property_summaries: ApiSummaries = None
+        self.__exported_summaries: ApiSummaries = None
+        self.__type_summaries: ApiSummaries = None
+        self.__type_summary_rows: ApiSummaryRows = None
+        self.__inherited: ApiInherited = None
+        self.__area_filter_rules_engine: IRulesArea = None
+        self.__remove_parent_inherited = remove_parent_inherited
 
     # endregion Constructor
 
@@ -1674,7 +1676,7 @@ class APIData:
             [type]: None
         """
         return None
-    
+
     def _set_area_filter_rules_engine_rules(self, rules_engine: 'IRulesArea') -> None:
         """
         Registers rules for Area Filter Rules Engine.
@@ -1772,7 +1774,7 @@ class APIData:
     @AcceptedTypes(str, ftype=DecFuncEnum.METHOD)
     def get_prams_info(self, a_id: str) -> ApiMethodPramsInfo:
         """Gets parameter info for all parameters of a a method"""
-        if self._long_names:
+        if self.__long_names:
             ns = self.ns.namespace_str
         else:
             ns = None
@@ -1781,8 +1783,8 @@ class APIData:
             block=block,
             name_info=self.name.get_obj(),
             ns=ns,
-            long_names=self._long_names
-            )
+            long_names=self.__long_names
+        )
         return result
 
     @AcceptedTypes(str, ftype=DecFuncEnum.METHOD)
@@ -1815,161 +1817,161 @@ class APIData:
     # region Properties
     @property
     def name(self) -> ApiName:
-        if self._api_data_name is None:
-            self._api_data_name = ApiName(
-                soup=self._soup_obj,
+        if self.__api_data_name is None:
+            self.__api_data_name = ApiName(
+                soup=self.__soup_obj,
                 rules_engine=self._get_name_rules_engine()
-                )
-        return self._api_data_name
+            )
+        return self.__api_data_name
 
     @property
     def public_members(self) -> ApiPublicMembers:
-        if self._api_data_public_members is None:
-            self._api_data_public_members = ApiPublicMembers(self.soup_obj)
-        return self._api_data_public_members
+        if self.__api_data_public_members is None:
+            self.__api_data_public_members = ApiPublicMembers(self.soup_obj)
+        return self.__api_data_public_members
 
     @property
     def func_block(self) -> ApiFunctionsBlock:
         """Gets Summary Functions block"""
-        if self._func_block is None:
-            self._func_block = ApiFunctionsBlock(
+        if self.__func_block is None:
+            self.__func_block = ApiFunctionsBlock(
                 self.public_members)
-        return self._func_block
+        return self.__func_block
 
     @property
     def properties_block(self) -> ApiPropertiesBlock:
         """Gets Summary Properties block"""
-        if self._properties_block is None:
-            self._properties_block = ApiPropertiesBlock(
+        if self.__properties_block is None:
+            self.__properties_block = ApiPropertiesBlock(
                 self.public_members)
-        return self._properties_block
+        return self.__properties_block
 
     @property
     def interfaces_block(self) -> ApiInterfacesBlock:
         """Gets Summary Exported Interfaces block"""
-        if self._interfaces_block is None:
-            self._interfaces_block = ApiInterfacesBlock(
+        if self.__interfaces_block is None:
+            self.__interfaces_block = ApiInterfacesBlock(
                 self.public_members)
-        return self._interfaces_block
+        return self.__interfaces_block
 
     @property
     def types_block(self) -> ApiTypesBlock:
         """Gets Summary Properties block"""
-        if self._types_block is None:
-            self._types_block = ApiTypesBlock(
+        if self.__types_block is None:
+            self.__types_block = ApiTypesBlock(
                 self.public_members)
-        return self._types_block
+        return self.__types_block
 
     @property
     def func_summary_rows(self) -> ApiSummaryRows:
         """Get Summary rows for functions"""
-        if self._func_summary_rows is None:
-            self._func_summary_rows = ApiSummaryRows(
+        if self.__func_summary_rows is None:
+            self.__func_summary_rows = ApiSummaryRows(
                 self.func_block)
-        return self._func_summary_rows
+        return self.__func_summary_rows
 
     @property
     def property_summary_rows(self) -> ApiSummaryRows:
         """Get Summary rows for Properties"""
-        if self._property_summary_rows is None:
-            self._property_summary_rows = ApiSummaryRows(
+        if self.__property_summary_rows is None:
+            self.__property_summary_rows = ApiSummaryRows(
                 self.properties_block)
-        return self._property_summary_rows
+        return self.__property_summary_rows
 
     @property
     def export_summary_rows(self) -> ApiSummaryRows:
         """Get Summary rows for Exported Interfaces"""
-        if self._export_summary_rows is None:
-            self._export_summary_rows = ApiSummaryRows(
+        if self.__export_summary_rows is None:
+            self.__export_summary_rows = ApiSummaryRows(
                 self.interfaces_block)
-        return self._export_summary_rows
+        return self.__export_summary_rows
 
     @property
     def func_summaries(self) -> ApiSummaries:
         """Get Summary info list for functions"""
-        if self._func_summaries is None:
-            if self._long_names:
+        if self.__func_summaries is None:
+            if self.__long_names:
                 ns = self.ns.namespace_str
             else:
                 ns = None
-            self._func_summaries = ApiSummaries(
+            self.__func_summaries = ApiSummaries(
                 block=self.func_summary_rows,
                 name_info=self.name.get_obj(),
                 ns=ns,
-                long_names=self._long_names)
-        return self._func_summaries
+                long_names=self.__long_names)
+        return self.__func_summaries
 
     @property
     def property_summaries(self) -> ApiSummaries:
         """Get Summary info list for Properties"""
-        if self._property_summaries is None:
-            if self._long_names:
+        if self.__property_summaries is None:
+            if self.__long_names:
                 ns = self.ns.namespace_str
             else:
                 ns = None
-            self._property_summaries = ApiSummaries(
+            self.__property_summaries = ApiSummaries(
                 block=self.property_summary_rows,
                 name_info=self.name.get_obj(),
                 ns=ns,
-                long_names=self._long_names)
-        return self._property_summaries
+                long_names=self.__long_names)
+        return self.__property_summaries
 
     @property
     def exported_summaries(self) -> ApiSummaries:
         """Get Summary info list for Exported Interfaces"""
-        if self._exported_summaries is None:
-            if self._long_names:
+        if self.__exported_summaries is None:
+            if self.__long_names:
                 ns = self.ns.namespace_str
             else:
                 ns = None
-            self._exported_summaries = ApiSummaries(
+            self.__exported_summaries = ApiSummaries(
                 block=self.export_summary_rows,
                 name_info=self.name.get_obj(),
                 ns=ns,
-                long_names=self._long_names)
-        return self._exported_summaries
+                long_names=self.__long_names)
+        return self.__exported_summaries
 
     @property
     def inherited(self) -> 'ApiInherited':
         """Gets class that get all inherited value"""
-        if self._inherited is None:
-            self._inherited = ApiInherited(
+        if self.__inherited is None:
+            self.__inherited = ApiInherited(
                 soup=self.soup_obj,
                 area_filter_rules_engine=self.area_filter_rules_engine,
                 raise_error=False,
-                allow_cache = self.allow_cache
-                )
-        return self._inherited
+                allow_cache=self.allow_cache
+            )
+        return self.__inherited
 
     @property
     def types_summary_rows(self) -> ApiSummaryRows:
         """Get Summary rows for Properties"""
-        if self._type_summary_rows is None:
-            self._type_summary_rows = ApiSummaryRows(
+        if self.__type_summary_rows is None:
+            self.__type_summary_rows = ApiSummaryRows(
                 block=self.types_block)
-        return self._type_summary_rows
+        return self.__type_summary_rows
 
     @property
     def types_summaries(self) -> ApiSummaries:
         """Get Summary info list for Properties"""
-        if self._type_summaries is None:
-            if self._long_names:
+        if self.__type_summaries is None:
+            if self.__long_names:
                 ns = self.ns.namespace_str
             else:
                 ns = None
-            self._type_summaries = ApiSummaries(
+            self.__type_summaries = ApiSummaries(
                 block=self.types_summary_rows,
                 name_info=self.name.get_obj(),
                 ns=ns,
-                long_names=self._long_names)
-        return self._type_summaries
+                long_names=self.__long_names)
+        return self.__type_summaries
 
     @property
     def desc(self) -> ApiDesc:
         """Gets the interface Description object"""
-        if self._desc is None:
-            self._desc = ApiDesc(self.soup_obj)
-        return self._desc
+        if self.__desc is None:
+            self.__desc = ApiDesc(self.soup_obj)
+        return self.__desc
 
     @property
     def ns(self) -> ApiNamespace:
@@ -1979,24 +1981,24 @@ class APIData:
                 self.soup_obj)
         return self.__ns
 
-
     @property
     def soup_obj(self) -> SoupObj:
         """Gets soup_obj value"""
-        return self._soup_obj
+        return self.__soup_obj
 
     @property
     def url_obj(self) -> UrlObj:
-        return self._soup_obj.url_obj
-    
+        return self.__soup_obj.url_obj
+
     @property
     def area_filter_rules_engine(self) -> 'IRulesArea':
-        if self._area_filter_rules_engine is None:
-            self._area_filter_rules_engine = RulesArea(remove_parent_inherited=self.remove_parent_inherited)
+        if self.__area_filter_rules_engine is None:
+            self.__area_filter_rules_engine = RulesArea(
+                remove_parent_inherited=self.remove_parent_inherited)
             self._set_area_filter_rules_engine_rules(
-                rules_engine=self._area_filter_rules_engine
+                rules_engine=self.__area_filter_rules_engine
             )
-        return self._area_filter_rules_engine
+        return self.__area_filter_rules_engine
 
     @property
     def allow_cache(self) -> bool:
@@ -2005,17 +2007,19 @@ class APIData:
             :getter: Gets allow_cache value.
             :setter: Sets allow_cache value.
         """
-        return self._allow_cache
-    
+        return self.__allow_cache
+
     @allow_cache.setter
     def allow_cache(self, value: bool):
-        self._allow_cache = value
-    
+        self.__allow_cache = value
+
     @property
     def remove_parent_inherited(self) -> bool:
         """Gets remove_parent_inherited value"""
-        return self._remove_parent_inherited
+        return self.__remove_parent_inherited
     # endregion Properties
+
+# endregion     API Data
 
 # endregion block and api classes
 

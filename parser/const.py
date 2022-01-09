@@ -138,6 +138,10 @@ class IRules(ABC):
         """set or updates cached"""
 
     @abstractproperty
+    def name_info(self) -> base.NameInfo:
+        """Gets Name info"""
+
+    @abstractproperty
     def api_ns(self) -> 'ApiNs':
         """Gets api_ns value"""
 
@@ -154,7 +158,12 @@ class IRules(ABC):
         """Gets the soup object for the page"""
 
 class Rules(IRules):
-    def __init__(self, si_dict: Dict[str, base.SummaryInfo], summary_block: base.ApiSummaryBlock, api_ns: 'ApiNs') -> None:
+    def __init__(
+        self, si_dict: Dict[str, base.SummaryInfo]
+        , summary_block: base.ApiSummaryBlock
+        , api_ns: 'ApiNs'
+        , name_info: base.NameInfo
+        ) -> None:
         self._summary_block: base.ApiSummaryBlock = summary_block
         self._summaries = si_dict
         self._name_map = {}
@@ -165,6 +174,7 @@ class Rules(IRules):
         self. _cached_vals = {}
         self._cached_names = {}
         self._api_ns = api_ns
+        self._name_info = name_info
         self._register_known_rules()
         
     # region Methods
@@ -273,6 +283,11 @@ class Rules(IRules):
     # endregion Methods
 
     # region Properties
+    @property
+    def name_info(self) -> base.NameInfo:
+        """Gets name info"""
+        return self._name_info
+
     @property
     def api_ns(self) -> 'ApiNs':
         """Gets api_ns value"""
@@ -683,7 +698,7 @@ class RuleImport(RuleBase):
             parts = self._val.rsplit(sep='.', maxsplit=1)
             name = parts.pop()
             im = ".".join(parts)
-            p_type = base.Util.get_python_type(im)
+            p_type = base.Util.get_python_type(in_type=im, name_info=self._rules.name_info)
 
             rel = base.Util.get_rel_import_full(p_type.imports, ns.namespace_str)
             
@@ -858,11 +873,12 @@ class ApiNs(base.ApiNamespace):
         return self._namespace_str
 
 class ApiSummaries(base.BlockObj):
-    def __init__(self, block: base.ApiSummaryRows) -> None:
+    def __init__(self, block: base.ApiSummaryRows, name_info: base.NameInfo) -> None:
         self._block: base.ApiSummaryRows = block
         super().__init__(self._block.soup)
         self._requires_typing = False
-        self._imports: Set[str] = set()
+        self._imports: Set[str] = set(),
+        self._name_info = name_info
         self._data = None
     
     def get_obj(self) -> Dict[str, SummaryInfo]:
@@ -934,7 +950,7 @@ class ApiSummaries(base.BlockObj):
         text = tag.text.strip()
         parts = text.split()
         type_name = parts.pop()
-        p_type = base.Util.get_python_type(type_name)
+        p_type = base.Util.get_python_type(in_type=type_name, name_info=self._name_info)
         logger.debug(
             "%s._get_type(), found type: %s for name: %s",
             self.__class__.__name__, p_type.type, name)
@@ -1911,5 +1927,5 @@ def main():
     w.write()
  
 if __name__ == '__main__':
-    main()
+    _main()
 # endregion Main
