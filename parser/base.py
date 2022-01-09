@@ -1043,9 +1043,13 @@ class ApiSummaryRows(BlockObj):
 class ApiSummaries(BlockObj):
     """Gets summary information for a public member block"""
 
-    def __init__(self, block: ApiSummaryRows, name_info: NameInfo
+    def __init__(self
+                 ,block: ApiSummaryRows
+                 ,name_info: NameInfo
+                 ,ns: str
                  ,rule_engine: Optional['IRulesSummaryInfo'] = None
-                 ,ns: Optional[str] = None, long_names:bool = False) -> None:
+                 , long_names:bool = False
+                 ) -> None:
         """
         [summary]
 
@@ -3019,7 +3023,7 @@ class Util:
     @cache
     @staticmethod
     @TypeCheckKw(arg_info={"in_type": 0, "ns": 1}, types=[str, (str, type(None))], ftype=DecFuncEnum.METHOD_STATIC)
-    def get_python_type(in_type: str, name_info: NameInfo, ns: Optional[str] = None, long_names: bool = False) -> ModType.PythonType:
+    def get_python_type(in_type: str, name_info: NameInfo, ns: str, long_names: bool = False) -> ModType.PythonType:
         """
         Gets Python Type info including an required imports.
 
@@ -3039,7 +3043,8 @@ class Util:
                 p_type = Util.TYPE_RULES.get_python_type(in_type=s)
                 if not p_type.imports:
                     return False
-                return p_type.imports == class_name
+                full_name = ns + '.' + class_name
+                return p_type.imports == full_name
             except Exception as e:
                 logger.error(e, exc_info=True)
                 raise e

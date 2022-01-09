@@ -697,7 +697,7 @@ class RuleImport(RuleBase):
             parts = self._val.rsplit(sep='.', maxsplit=1)
             name = parts.pop()
             im = ".".join(parts)
-            p_type = base.Util.get_python_type(in_type=im, name_info=self._rules.name_info)
+            p_type = base.Util.get_python_type(in_type=im, name_info=self._rules.name_info, ns=self._rules.api_ns.namespace_str)
 
             rel = base.Util.get_rel_import(p_type.imports, ns.namespace_str)
             
@@ -872,12 +872,13 @@ class ApiNs(base.ApiNamespace):
         return self._namespace_str
 
 class ApiSummaries(base.BlockObj):
-    def __init__(self, block: base.ApiSummaryRows, name_info: base.NameInfo) -> None:
+    def __init__(self, block: base.ApiSummaryRows, name_info: base.NameInfo, ns: str) -> None:
         self._block: base.ApiSummaryRows = block
         super().__init__(self._block.soup)
         self._requires_typing = False
         self._imports: Set[str] = set()
         self._name_info = name_info
+        self._ns = ns
         self._data = None
     
     def get_obj(self) -> Dict[str, SummaryInfo]:
@@ -949,7 +950,7 @@ class ApiSummaries(base.BlockObj):
         text = tag.text.strip()
         parts = text.split()
         type_name = parts.pop()
-        p_type = base.Util.get_python_type(in_type=type_name, name_info=self._name_info)
+        p_type = base.Util.get_python_type(in_type=type_name, name_info=self._name_info, ns=self._ns)
         logger.debug(
             "%s._get_type(), found type: %s for name: %s",
             self.__class__.__name__, p_type.type, name)
@@ -1135,6 +1136,7 @@ class ApiData(base.APIData):
             self._api_summaries = ApiSummaries(
                 block=self.api_summary_rows,
                 name_info=self.name.get_obj(),
+                ns=self.ns.namespace_str     
                 )
         return self._api_summaries
 
