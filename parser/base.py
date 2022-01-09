@@ -1403,7 +1403,7 @@ class ApiInterfacesBlock(ApiSummaryBlock):
 class ApiMethodPramsInfo(BlockObj):
     """Gets List of Parameter information for a funciton"""
 
-    def __init__(self, block: ApiProtoBlock, name_info: NameInfo, ns: Optional[str] = None, long_names: bool = False) -> None:
+    def __init__(self, block: ApiProtoBlock, name_info: NameInfo, ns: str, long_names: bool = False) -> None:
         self._block: ApiProtoBlock = block
         super().__init__(self._block.soup)
         self._requires_typing = False
@@ -1778,15 +1778,11 @@ class APIData:
     @AcceptedTypes(str, ftype=DecFuncEnum.METHOD)
     def get_prams_info(self, a_id: str) -> ApiMethodPramsInfo:
         """Gets parameter info for all parameters of a a method"""
-        if self.__long_names:
-            ns = self.ns.namespace_str
-        else:
-            ns = None
         block = self.get_proto_block(a_id=a_id)
         result = ApiMethodPramsInfo(
             block=block,
             name_info=self.name.get_obj(),
-            ns=ns,
+            ns=self.ns.namespace_str,
             long_names=self.__long_names
         )
         return result
