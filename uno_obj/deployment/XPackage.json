@@ -7,8 +7,8 @@
   "namespace": "com.sun.star.deployment",
   "parser_args": {
     "sort": true,
-    "long_names": false,
-    "remove_parent_inherited": false
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
@@ -17,48 +17,59 @@
     "from_imports": [
       [
         "..lang.x_component",
-        "XComponent"
+        "XComponent",
+        "lang_x_component_i"
       ],
       [
         "..util.x_modify_broadcaster",
-        "XModifyBroadcaster"
+        "XModifyBroadcaster",
+        "util_x_modify_broadcaster_i"
       ]
     ],
     "from_imports_typing": [
       [
         "..beans.string_pair",
-        "StringPair"
+        "StringPair",
+        "beans_string_pair_i"
       ],
       [
         ".x_package",
-        "XPackage"
+        "XPackage",
+        "x_package_i"
       ],
       [
         ".x_package_type_info",
-        "XPackageTypeInfo"
+        "XPackageTypeInfo",
+        "x_package_type_info_i"
       ],
       [
         "..graphic.x_graphic",
-        "XGraphic"
+        "XGraphic",
+        "graphic_x_graphic_i"
       ],
       [
         "..task.x_abort_channel",
-        "XAbortChannel"
+        "XAbortChannel",
+        "task_x_abort_channel_i"
       ],
       [
         "..ucb.x_command_environment",
-        "XCommandEnvironment"
+        "XCommandEnvironment",
+        "ucb_x_command_environment_i"
       ]
     ],
-    "extends_map": {},
+    "extends_map": {
+      "com.sun.star.lang.XComponent": "lang_x_component_i",
+      "com.sun.star.util.XModifyBroadcaster": "util_x_modify_broadcaster_i"
+    },
     "quote": [
-      "StringPair",
-      "XAbortChannel",
-      "XCommandEnvironment",
-      "XGraphic",
-      "XPackageTypeInfo",
+      "beans_string_pair_i",
+      "graphic_x_graphic_i",
+      "task_x_abort_channel_i",
       "typing.List[XPackage]",
-      "typing.List[str]"
+      "typing.List[str]",
+      "ucb_x_command_environment_i",
+      "x_package_type_info_i"
     ],
     "typings": [
       "typing.List[XPackage]",
@@ -102,7 +113,7 @@
           "args": [
             [
               "xCmdEnv",
-              "XCommandEnvironment",
+              "ucb_x_command_environment_i",
               "in"
             ]
           ]
@@ -124,12 +135,12 @@
           "args": [
             [
               "xAbortChannel",
-              "XAbortChannel",
+              "task_x_abort_channel_i",
               "in"
             ],
             [
               "xCmdEnv",
-              "XCommandEnvironment",
+              "ucb_x_command_environment_i",
               "in"
             ],
             [
@@ -141,7 +152,7 @@
         },
         {
           "name": "createAbortChannel",
-          "returns": "XAbortChannel",
+          "returns": "task_x_abort_channel_i",
           "desc": [
             "creates a command channel to be used to asynchronously abort a command."
           ],
@@ -178,7 +189,7 @@
             ],
             [
               "xCmdEnv",
-              "XCommandEnvironment",
+              "ucb_x_command_environment_i",
               "in"
             ]
           ]
@@ -200,12 +211,12 @@
           "args": [
             [
               "xAbortChannel",
-              "XAbortChannel",
+              "task_x_abort_channel_i",
               "in"
             ],
             [
               "xCmdEnv",
-              "XCommandEnvironment",
+              "ucb_x_command_environment_i",
               "in"
             ]
           ]
@@ -236,7 +247,7 @@
         },
         {
           "name": "getIcon",
-          "returns": "XGraphic",
+          "returns": "graphic_x_graphic_i",
           "desc": [
             "returns an icon for a package."
           ],
@@ -283,7 +294,7 @@
         },
         {
           "name": "getPackageType",
-          "returns": "XPackageTypeInfo",
+          "returns": "x_package_type_info_i",
           "desc": [
             "returns the XPackageTypeInfo, e.g.",
             "",
@@ -294,7 +305,7 @@
         },
         {
           "name": "getPublisherInfo",
-          "returns": "StringPair",
+          "returns": "beans_string_pair_i",
           "desc": [
             "returns the publisher info for the package, the strings might be empty, if there is no publisher",
             "",
@@ -392,12 +403,12 @@
           "args": [
             [
               "xAbortChannel",
-              "XAbortChannel",
+              "task_x_abort_channel_i",
               "in"
             ],
             [
               "xCmdEnv",
-              "XCommandEnvironment",
+              "ucb_x_command_environment_i",
               "in"
             ]
           ]
@@ -436,12 +447,12 @@
             ],
             [
               "xAbortChannel",
-              "XAbortChannel",
+              "task_x_abort_channel_i",
               "in"
             ],
             [
               "xCmdEnv",
-              "XCommandEnvironment",
+              "ucb_x_command_environment_i",
               "in"
             ]
           ]
@@ -468,12 +479,12 @@
             ],
             [
               "xAbortChannel",
-              "XAbortChannel",
+              "task_x_abort_channel_i",
               "in"
             ],
             [
               "xCmdEnv",
-              "XCommandEnvironment",
+              "ucb_x_command_environment_i",
               "in"
             ]
           ]

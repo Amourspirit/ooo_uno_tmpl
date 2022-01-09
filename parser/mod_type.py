@@ -336,13 +336,17 @@ class TypeRules(ITypeRules):
                 break
         return match_inst
 
-    @cache
     def get_python_type(self, in_type: str) -> PythonType:
+        key = 'get_python_type_' + in_type + str(self.long_names) + '_' + str(self.namespace)
+        if key in self._cache:
+            return self._cache[key]
         _in = in_type.replace("::", ".").replace(':', ".").lstrip(".").strip()
         match = self._get_rule(in_type=_in)
         if match:
-            return match.get_python_type(_in)
-        return DEFAULT_PYTHON_TYPE
+            self._cache[key] = match.get_python_type(_in)
+        else:
+            self._cache[key] = DEFAULT_PYTHON_TYPE
+        return self._cache[key]
 
     def get_rule_instance(self, rule: ITypeRule) -> ITypeRule:
         if not issubclass(rule, ITypeRule):
@@ -423,9 +427,10 @@ class BaseRule(ITypeRule):
             # without namespace there can be no long names
             return name
         if self._rules.long_names is False:
-            if name.find('.') < 0:
-                return f"{self._rules.namespace}.{name}"
-            return name
+            return RelInfo.get_rel_import_short_name(
+                in_str=name,
+                ns=self._rules.namespace
+            )
         return RelInfo.get_rel_import_long_name(
             in_str=name,
             ns=self._rules.namespace

@@ -91,7 +91,7 @@ def get_rel_info(in_branch: str, comp_branch: str, sep: str = '.') -> RealitiveI
     # sep_str = sep * (diff + 1)
     return result
 
-
+@cache
 @AcceptedTypes(str, opt_all_args=True)
 def get_rel_import(in_str: str, ns: str, sep: str = '.') -> Tuple[str, str]:
     """
@@ -163,7 +163,7 @@ def get_rel_import_long(in_str: str, ns: str, sep: str = '.') -> Tuple[str, str,
 @AcceptedTypes(str, opt_all_args=True)
 def get_rel_import_long_name(in_str: str, ns: str, sep: str = '.') -> str:
     """
-    Geta a long Name. Same as getting last part of ```get_rel_import_long()```
+    Geta a long Name. Same as getting last part of ``get_rel_import_long()``
 
     Args:
         in_str (str): Namespace and object such as ``com.sun.star.uno.Exception``
@@ -176,10 +176,11 @@ def get_rel_import_long_name(in_str: str, ns: str, sep: str = '.') -> str:
     _, _, sas = get_rel_import_long(in_str=in_str, ns=ns, sep=sep)
     return sas
 
+
 @AcceptedTypes(str, opt_all_args=True)
-def get_rel_import_full(in_str: str, ns: str, sep: str = '.') -> Tuple[str, str]:
+def get_rel_import_short_name(in_str: str, ns: str, sep: str = '.') -> str:
     """
-    Gets realitive import Tuple
+    Geta a name. Same as getting last part of ``get_rel_import()``
 
     Args:
         in_str (str): Namespace and object such as ``com.sun.star.uno.Exception``
@@ -187,34 +188,7 @@ def get_rel_import_full(in_str: str, ns: str, sep: str = '.') -> Tuple[str, str]
         sep (str, optional): Namespace seperator. Defaults to ``.``
 
     Returns:
-        Tuple[str, str]: realitive import info such as ``('..uno.exception', 'Exception')``
+        str: name such as ``XInterface``
     """
-    # i_str = com.sun.star.uno.Exception
-    # ns = com.sun.star.configuration
-    # ("..uno.exception", "Exception")
-    # compare ns to ns so drop last name of i_str
-    name_parts = in_str.split(sep)
-    name = name_parts.pop()
-    camel_name = camel_to_snake(name)
-    if len(name_parts) == 0:
-        # this is a single word such as XInterface
-        # assume it is in the same namespace as this import
-        return (f'{sep}', f'{camel_name}{sep}{name}')
-    ns2 = sep.join(name_parts)
-    if ns2 == ns:
-        return (f'{sep}', f'{camel_name}{sep}{name}')
-    if len(name_parts) == 1:
-        # this is a single word
-        # assume it is in the same namespace as this import
-        return (f'{sep}', f'{camel_to_snake(in_str)}{sep}{in_str}')
-    try:
-        info = get_rel_info(in_branch=ns, comp_branch=ns2, sep=sep)
-        prefix = sep * (info.distance + 1)
-        result_parts = info.comp_branch_rel + [camel_name]
-        im_str = sep.join(result_parts)
-        # im_str = f"{im_str}{sep}{name}"
-        return (prefix, im_str)
-    except Exception as e:
-        pass
-    short = ns2.replace('com.sun.star.', '')
-    return (f'ooo_uno.uno_obj.{short}.{camel_name}', f'{name}')
+    _, sn = get_rel_import(in_str=in_str, ns=ns, sep=sep)
+    return sn
