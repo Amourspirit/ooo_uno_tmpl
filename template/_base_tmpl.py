@@ -289,6 +289,7 @@ class BaseTpml(Template):
             str: string formated for a from statement
         """
         def is_self_import(path: str, name: str) -> bool:
+            # in theory this should not happend as parser check for this condition and remove self imports.
             if name != class_name:
                 return False
             p_parts = path.rsplit(sep='.', maxsplit=1)
@@ -299,6 +300,7 @@ class BaseTpml(Template):
             # im_parts will be ['', 'x_package']
             # This indicates that class it trying to import itself
             return p_parts[0] == ''
+
         im_len = len(im_data)
         if im_len < 2:
             raise Exception(f"{self.__class__.__name__}.get_from_import() Expected im_data param to have a min length of two!")

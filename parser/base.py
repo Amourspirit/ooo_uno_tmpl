@@ -3011,6 +3011,7 @@ class Util:
         if arg_quote:
             return f"'{_u_type_clean}'"
         return _u_type_clean
+
     @cache
     @staticmethod
     @TypeCheckKw(arg_info={"in_type": 0, "ns": 1}, types=[str, (str, type(None))], ftype=DecFuncEnum.METHOD_STATIC)
@@ -3027,7 +3028,7 @@ class Util:
         if Util.TYPE_RULES is None:
             Util.TYPE_RULES = ModType.TypeRules()
 
-        # logger.debug("Util.get_python_type() in_type: '%s'", in_type)
+        logger.debug("Util.get_python_type() in_type: '%s'", in_type)
 
         def is_self_import(s:str, class_name:str) -> bool:
             try:
@@ -3046,11 +3047,15 @@ class Util:
         Util.TYPE_RULES.namespace = ns
         Util.TYPE_RULES.long_names = long_names
         if ns and long_names:
-            if is_self_import(in_type, name_info.name):
+            self_import = is_self_import(in_type, name_info.name)
+            if self_import:
                 Util.TYPE_RULES.long_names = False
 
         try:
-            return Util.TYPE_RULES.get_python_type(in_type)
+            py_type = Util.TYPE_RULES.get_python_type(in_type)
+            if self_import:
+                py_type.imports = None
+            return py_type
         except Exception as e:
             logger.error(e, exc_info=True)
             raise e
