@@ -69,8 +69,9 @@ class ApiTypeDefBlock(base.ApiSummaryBlock):
 class ApiSummaries(base.BlockObj):
     """Gets summary information for a public member block"""
 
-    def __init__(self, block: base.ApiSummaryRows) -> None:
+    def __init__(self, block: base.ApiSummaryRows, name_info: base.NameInfo) -> None:
         self._block: base.ApiSummaryRows = block
+        self._name_info = name_info
         super().__init__(self._block.soup)
         self._data = None
 
@@ -102,7 +103,8 @@ class ApiSummaries(base.BlockObj):
                 logger.error(msg)
                 raise Exception(msg)
             if _type:
-                p_type = base.Util.get_python_type(in_type=_type)
+                p_type = base.Util.get_python_type(
+                    in_type=_type, name_info=self._name_info)
                 s_type =p_type.type
                 if p_type.requires_typing:
                     _req_typing = True
@@ -208,7 +210,9 @@ class ApiData(base.APIData):
         """Get Summary info list for functions"""
         if self._type_def_summaries is None:
             self._type_def_summaries = ApiSummaries(
-                self.type_def_summary_rows)
+                block=self.type_def_summary_rows,
+                name_info=self.name.get_obj()
+                )
         return self._type_def_summaries
 
     # endregion Properties

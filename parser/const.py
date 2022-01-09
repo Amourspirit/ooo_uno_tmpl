@@ -16,7 +16,6 @@ from typing import Dict, List, Set, Union
 from dataclasses import dataclass, field
 from bs4.element import ResultSet, Tag
 from kwhelp.decorator import DecFuncEnum, TypeCheckKw
-from collections import namedtuple
 from pathlib import Path
 from abc import ABC, abstractmethod, abstractproperty
 try:
