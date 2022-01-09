@@ -621,7 +621,7 @@ def _get_parsed_args(*args) -> Dict[str, bool]:
         "no_desc": True,
         "no_print_clear": True,
         'no_sort': True,
-        "no_long_names": True,
+        "long_names": base.APP_CONFIG.use_long_import_names,
         "long_template": False,
         "clipboard": False,
         "print_json": False,
@@ -635,7 +635,7 @@ def _get_parsed_args(*args) -> Dict[str, bool]:
         "no_desc": False,
         "no_print_clear": False,
         'no_sort': False,
-        "no_long_names": False,
+        "long_names": not base.APP_CONFIG.use_long_import_names,
         "long_template": True,
         "clipboard": True,
         "print_json": True,
@@ -645,8 +645,8 @@ def _get_parsed_args(*args) -> Dict[str, bool]:
         "verbose": True
     }
     lookups = {
-        "l": "no_long_names",
-        "no_long_names": "no_long_names",
+        "l": "long_names",
+        "long_names": "long_names",
         "x": "no_cache",
         "no_cache": "no_cache",
         "d": "do_desc",
@@ -690,7 +690,8 @@ def parse(*args, **kwargs):
         'no_print_clear (str, optional): Short form ``'p'``. No clearing of terminal
             when otuput to terminal. Default ``False``
         'no_desc' (str, optional): Short from ``'d'``. No description will be outputed in template. Default ``False``
-        'no_long_names' (str, optional): Short form ``'l'``. No long names. Default ``False``
+        'long_names' (str, optional): Short form ``'l'``. Long names. Default set in config ``use_long_import_names`` property.
+            Toggles values set in config.
         'print_json' (str, optional): Short form ``'n'``. Print json to termainl. Default ``False``
         'print_template' (str, optional): Short form ``'m'``. Print template to terminal. Default ``False``
         'write_template' (str, optional): Short form ``'t'``. Write template file into obj_uno subfolder. Default ``False``
@@ -721,7 +722,7 @@ def parse(*args, **kwargs):
         url=pkwargs['url'],
         sort=pargs['no_sort'],
         cache=pargs['no_cache'],
-        long_names=pargs['no_long_names'],
+        long_names=pargs['long_names'],
         remove_parent_inherited=base.APP_CONFIG.remove_parent_inherited
     )
     w = WriterEx(
@@ -782,11 +783,11 @@ def main():
         dest='desc',
         default=True)
     parser.add_argument(
-        '-l', '--no-long-names',
-        help='Short Names such as XInterface will be generated instead of uno_x_interface',
-        action='store_false',
+        '-l', '--long-names',
+        help='Toggels default value of config. Short Names such as XInterface will be generated instead of uno_x_interface or vice versa',
+        action='store_false' if base.APP_CONFIG.use_long_import_names else 'store_true',
         dest='long_names',
-        default=True)
+        default=base.APP_CONFIG.use_long_import_names)
     parser.add_argument(
         '-p', '--no-print-clear',
         help='No clearing of terminal when output to terminal.',

@@ -896,7 +896,7 @@ def _get_parsed_args(*args) -> Dict[str, bool]:
     }
     lookups = {
         "l": "long_names",
-        "long_names": "no_long_names",
+        "long_names": "long_names",
         "s": "no_sort",
         "no_sort": "no_sort",
         "x": "no_cache",
@@ -1209,5 +1209,5 @@ def main():
 
 
 if __name__ == '__main__':
-    _main()
+    main()
 # endregion Main
