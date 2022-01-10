@@ -4453,6 +4453,7 @@ class ApiInherited(BlockObj):
             return self._data
         known = get_known_extends(ns=self._ns, class_name=self._class_name)
         if known:
+            logger.info('%s: Found Known inherites for %s.%s', self.__class__.__class__, self._ns, self._class_name)
             self._data = known
             return self._data
         self._data = []
