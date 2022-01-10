@@ -166,7 +166,8 @@ def parse(*args, **kwargs):
 # endregion Parse method
 
 def _main():
-    file = "uno_obj/inspection/module_links.json"
+    # file = "uno_obj/inspection/module_links.json"
+    file = "tmp/module_links.json"
     log = 'debug.log'
     parse('n', 'v', log_file=log, json_file=file)
 

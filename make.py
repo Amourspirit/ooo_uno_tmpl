@@ -870,6 +870,8 @@ class Make(FilesBase):
 # endregion Make
 
 # region Main
+
+# region    Main Testing
 def _main():
     sys.argv.extend(['-v', '--log-file', 'make.log', 'make'])
     main()
@@ -886,11 +888,14 @@ def _touch():
     config = read_config('./config.json')
     t = TouchFiles(config=config)
     t._touch_struct()
+# endregion Main Testing
 
 def main():
     global logger
     config = read_config('./config.json')
-    parser = argparse.ArgumentParser(description='make')
+
+    # region create parsers
+    parser = argparse.ArgumentParser(description='main')
     subparser = parser.add_subparsers(dest='command')
     ex_parser = subparser.add_parser(name='ex')
     enum_parser = subparser.add_parser(name='enum')
@@ -901,6 +906,8 @@ def main():
     service_parser = subparser.add_parser(name='service')
     typedef_parser = subparser.add_parser(name='typedef')
     touch = subparser.add_parser(name='touch')
+    # endregion create parsers
+
     # region ex args
     ex_parser.add_argument(
         '-a', '--all',
@@ -1106,8 +1113,8 @@ def main():
     )
     # endregion Touch
 
-    make_parser = subparser.add_parser(name='make')
     # region make args
+    make_parser = subparser.add_parser(name='make')
     make_parser.add_argument(
         '-f', '--force-compile',
         help='Force Compile of templates',
@@ -1129,6 +1136,7 @@ def main():
         default=4)
     # endregion make args
 
+    # region general args
     parser.add_argument(
         '-v', '--verbose',
         help='verbose logging',
@@ -1142,8 +1150,13 @@ def main():
         dest='log_file',
         type=str,
         default=None)
-    
+    # endregion general args
+
+    # region Read Args
     args = parser.parse_args()
+    # endregion Read Args
+
+    # region logger
     if logger is None:
         log_args = {}
         if args.log_file:
@@ -1151,16 +1164,25 @@ def main():
         if args.verbose:
             log_args['level'] = logging.DEBUG
         logger = get_logger(logger_name=Path(__file__).stem, **log_args)
+    # endregion logger
+
+    # region Script Start Action
     if len(sys.argv) > 1:
         logger.info('Executing command: %s', sys.argv[1:])
     else:
         logger.info('Running with no args.')
+    # endregion Script Start Action
+
+    # region Make Command
     if args.command == 'make':
         try:
-            make = Make(config=config, force_compile=args.force_compile,
+            _ = Make(config=config, force_compile=args.force_compile,
                         clean=args.clean_scratch, processes=args.processes)
         except Exception as e:
             logger.error(e)
+    # endregion Make Command
+
+    # region Compile Links Command
     if args.command == 'ex':
         if args.ex_all:
             CompileExLinks(config=config, use_subprocess=args.cmd_line_process)
@@ -1192,6 +1214,9 @@ def main():
         if args.typedef_all:
             CompileTypeDefLinks(
                 config=config, use_subprocess=args.cmd_line_process)
+    # endregion Compile Links Command
+
+    # region Touch Command
     if args.command == 'touch':
         TouchFiles(
             config=config,
@@ -1205,8 +1230,11 @@ def main():
             touch_service=args.service_all,
             touch_py_files=args.python_files
         )
-    logger.info('Finished!')
+    # endregion Touch Command
 
+    # region Script End Action
+    logger.info('Finished!')
+    # endregion Script End Action
 
 if __name__ == '__main__':
     # _touch()
