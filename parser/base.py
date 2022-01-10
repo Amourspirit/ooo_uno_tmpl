@@ -3000,7 +3000,6 @@ class Util:
             return f"'{_u_type_clean}'"
         return _u_type_clean
 
-    @cache
     @staticmethod
     @TypeCheckKw(arg_info={"in_type": 0, "ns": 1}, types=[str, (str, type(None))], ftype=DecFuncEnum.METHOD_STATIC)
     def get_python_type(in_type: str, name_info: NameInfo, ns: str, long_names: bool = False) -> ModType.PythonType:
