@@ -68,7 +68,7 @@ URL_SPLIT = '_1_1'
 """Default stirng for splitting url string into it parts"""
 TEXT_CACHE: 'TextCache' = None
 PICKLE_CACHE: 'PickleCache' = None
-_KNOWN_EXTENDS: List['Ns'] = None
+_KNOWN_EXTENDS: Dict[str, List[str]] = None
 # endregion CONST
 
 # region config
@@ -97,17 +97,9 @@ def get_known_extends(ns:str, class_name: str) -> Union[List['Ns'], None]:
     global _KNOWN_EXTENDS
     key = ns + '.' + class_name
     if _KNOWN_EXTENDS is None:
-        _KNOWN_EXTENDS = {
-            "com.sun.star.awt.AccessibleMenu": [
-                'com.sun.star.accessibility.XAccessibleContext',
-                'com.sun.star.accessibility.XAccessibleEventBroadcaster',
-                'com.sun.star.accessibility.XAccessibleExtendedComponent',
-                'com.sun.star.accessibility.XAccessibleText',
-                'com.sun.star.accessibility.XAccessibleAction',
-                'com.sun.star.accessibility.XAccessibleValue',
-                'com.sun.star.accessibility.XAccessibleSelection',
-            ]
-        }
+        json_file = Path(__file__).parent / 'known_inherits.json'
+        with open(json_file, 'r') as file:
+            _KNOWN_EXTENDS = json.load(file)
     if not key in _KNOWN_EXTENDS:
         return None
     results = []
