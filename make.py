@@ -1058,12 +1058,20 @@ def main():
     # endregion create parsers
 
     # region ex args
-    ex_parser.add_argument(
+    ex_parser_file_group = ex_parser.add_mutually_exclusive_group()
+    ex_parser_file_group.add_argument(
         '-a', '--all',
         help='Compile all exceptions recursivly',
         action='store_true',
         dest='ex_all',
         default=False
+    )
+    ex_parser_file_group.add_argument(
+        '-p', '--path',
+        help='Compile a specific path',
+        action='store',
+        dest='path',
+        type=str
     )
     ex_parser.add_argument(
         '-u', '--run-as-cmdline',
@@ -1075,12 +1083,20 @@ def main():
     # endregion ex args
 
     # region enum args
-    enum_parser.add_argument(
+    enum_parser_file_group = enum_parser.add_mutually_exclusive_group()
+    enum_parser_file_group.add_argument(
         '-a', '--all',
         help='Compile all enums recursivly',
         action='store_true',
         dest='enum_all',
         default=False
+    )
+    enum_parser_file_group.add_argument(
+        '-p', '--path',
+        help='Compile a specific path',
+        action='store',
+        dest='path',
+        type=str
     )
     enum_parser.add_argument(
         '-u', '--run-as-cmdline',
@@ -1092,12 +1108,20 @@ def main():
     # endregion enum args
 
     # region const args
-    const_parser.add_argument(
+    const_parser_file_group = const_parser.add_mutually_exclusive_group()
+    const_parser_file_group.add_argument(
         '-a', '--all',
         help='Compile all constants recursivly',
         action='store_true',
         dest='const_all',
         default=False
+    )
+    const_parser_file_group.add_argument(
+        '-p', '--path',
+        help='Compile a specific path',
+        action='store',
+        dest='path',
+        type=str
     )
     const_parser.add_argument(
         '-u', '--run-as-cmdline',
@@ -1109,12 +1133,20 @@ def main():
     # endregion const args
 
     # region struct args
-    struct_parser.add_argument(
+    struct_parser_file_group = struct_parser.add_mutually_exclusive_group()
+    struct_parser_file_group.add_argument(
         '-a', '--all',
         help='Compile all struct recursivly',
         action='store_true',
         dest='struct_all',
         default=False
+    )
+    struct_parser_file_group.add_argument(
+        '-p', '--path',
+        help='Compile a specific path',
+        action='store',
+        dest='path',
+        type=str
     )
     struct_parser.add_argument(
         '-u', '--run-as-cmdline',
@@ -1152,12 +1184,20 @@ def main():
     # endregion interface args
     
     # region singleton args
-    singleton_parser.add_argument(
+    singleton_parser_file_group = singleton_parser.add_mutually_exclusive_group()
+    singleton_parser_file_group.add_argument(
         '-a', '--all',
         help='Compile all singleton recursivly',
         action='store_true',
         dest='singleton_all',
         default=False
+    )
+    singleton_parser_file_group.add_argument(
+        '-p', '--path',
+        help='Compile a specific path',
+        action='store',
+        dest='path',
+        type=str
     )
     singleton_parser.add_argument(
         '-u', '--run-as-cmdline',
@@ -1169,13 +1209,21 @@ def main():
 
     # endregion service args
 
-    # region singleton args
-    service_parser.add_argument(
+    # region service args
+    service_parser_file_group = service_parser.add_mutually_exclusive_group()
+    service_parser_file_group.add_argument(
         '-a', '--all',
         help='Compile all service recursivly',
         action='store_true',
         dest='service_all',
         default=False
+    )
+    service_parser_file_group.add_argument(
+        '-p', '--path',
+        help='Compile a specific path',
+        action='store',
+        dest='path',
+        type=str
     )
     service_parser.add_argument(
         '-u', '--run-as-cmdline',
@@ -1188,12 +1236,20 @@ def main():
     # endregion service args
 
     # region typedef args
-    typedef_parser.add_argument(
+    typedef_parser_file_group = typedef_parser.add_mutually_exclusive_group()
+    typedef_parser_file_group.add_argument(
         '-a', '--all',
         help='Compile all struct recursivly',
         action='store_true',
         dest='typedef_all',
         default=False
+    )
+    typedef_parser_file_group.add_argument(
+        '-p', '--path',
+        help='Compile a specific path',
+        action='store',
+        dest='path',
+        type=str
     )
     typedef_parser.add_argument(
         '-u', '--run-as-cmdline',
