@@ -337,18 +337,17 @@ class TypeRules(ITypeRules):
         return match_inst
 
     def get_python_type(self, in_type: str) -> PythonType:
-        # key = 'get_python_type_' + in_type + str(self.long_names) + '_' + str(self.namespace)
-        # if key in self._cache:
-        #     return self._cache[key]
+        # note: DO NOT CACHE
+        # attempts were made to cache this method.
+        # Strange behavour with some imports being skipped when running
+        # with make.py make and running in recursive mode.
+    
         _in = in_type.replace("::", ".").replace(':', ".").lstrip(".").strip()
         match = self._get_rule(in_type=_in)
         if match:
-            # self._cache[key] = match.get_python_type(_in)
             return match.get_python_type(_in)
         else:
-            # self._cache[key] = DEFAULT_PYTHON_TYPE
             return DEFAULT_PYTHON_TYPE
-        # return self._cache[key]
 
     def get_rule_instance(self, rule: ITypeRule) -> ITypeRule:
         if not issubclass(rule, ITypeRule):
