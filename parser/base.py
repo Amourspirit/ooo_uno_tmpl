@@ -68,6 +68,7 @@ URL_SPLIT = '_1_1'
 """Default stirng for splitting url string into it parts"""
 TEXT_CACHE: 'TextCache' = None
 PICKLE_CACHE: 'PickleCache' = None
+_KNOWN_EXTENDS: List['Ns'] = None
 # endregion CONST
 
 # region config
@@ -91,6 +92,33 @@ pattern_id = re.compile(r'[a-z0-9]{28,38}')
 pattern_generic_name = re.compile(r"([a-zA-Z0-9_]+)(<[A-Z, ]+>)")
 re_dir_pattern = re.compile(r"\[((?:in)|(?:out))\]", re.IGNORECASE)
 # endregion regex
+
+def get_known_extends(ns:str, class_name: str) -> Union[List['Ns'], None]:
+    global _KNOWN_EXTENDS
+    key = ns + '.' + class_name
+    if _KNOWN_EXTENDS is None:
+        _KNOWN_EXTENDS = {
+            "com.sun.star.awt.AccessibleMenu": [
+                'com.sun.star.accessibility.XAccessibleContext',
+                'com.sun.star.accessibility.XAccessibleEventBroadcaster',
+                'com.sun.star.accessibility.XAccessibleExtendedComponent',
+                'com.sun.star.accessibility.XAccessibleText',
+                'com.sun.star.accessibility.XAccessibleAction',
+                'com.sun.star.accessibility.XAccessibleValue',
+                'com.sun.star.accessibility.XAccessibleSelection',
+            ]
+        }
+    if not key in _KNOWN_EXTENDS:
+        return None
+    results = []
+    known = _KNOWN_EXTENDS[key]
+    for s in known:
+        parts = s.rsplit(sep='.', maxsplit=1)
+        results.append(Ns(name=parts[1], namespace=parts[0]))
+    return results
+        
+    
+
 
 # region Type Map
 # TYPE_MAP and TYPE_MAP_EX are only used with deprecated method get_py_type
@@ -1923,9 +1951,12 @@ class APIData:
     def inherited(self) -> 'ApiInherited':
         """Gets class that get all inherited value"""
         if self.__inherited is None:
+            ni = self.name.get_obj()    
             self.__inherited = ApiInherited(
                 soup=self.soup_obj,
                 area_filter_rules_engine=self.area_filter_rules_engine,
+                class_name=ni.name,
+                ns=self.ns.namespace_str,
                 raise_error=False,
                 allow_cache=self.allow_cache
             )
@@ -4378,18 +4409,22 @@ class RulesArea(IRulesArea):
 # endregion     Area Rules
 class ApiInherited(BlockObj):
 
-    def __init__(self, soup: SoupObj, area_filter_rules_engine: IRulesArea, **kwargs) -> None:
+    def __init__(self, soup: SoupObj, area_filter_rules_engine: IRulesArea, ns: str, class_name: str, **kwargs) -> None:
         """
         Constructor
 
         Args:
             soup (SoupObj): Soup object
+            area_filter_rules_engine (IRulesArea): Rules engine for procesing area data.
+            ni (NameInfo): Contains name of current class being processed.
 
         Keyword Arguments:
             raise_error (bool, optional): Determines if errors will be raised when they occur: Default ``False``
         """
         super().__init__(soup)
         self._api_dy_content: ApiDyContent = ApiDyContent(self.soup)
+        self._ns: str = ns
+        self._class_name = class_name
         self._data = None
         self._raise_errors = bool(kwargs.get('raise_error', False))
         self._area_fileter_rules_engine = area_filter_rules_engine
@@ -4415,6 +4450,10 @@ class ApiInherited(BlockObj):
             List[Ns]: List of Ns objects for class inherites
         """
         if not self._data is None:
+            return self._data
+        known = get_known_extends(ns=self._ns, class_name=self._class_name)
+        if known:
+            self._data = known
             return self._data
         self._data = []
         ai = ApiImage(self._api_dy_content)
