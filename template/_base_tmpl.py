@@ -360,3 +360,24 @@ class BaseTpml(Template):
             s += im
         return s
     # endregion Class inherits and From Imports
+
+    def get_abstract_imports(self, abm: List[bool], abp: List[bool]) -> List[str]:
+        """
+        Gets a list with abstractmethod/abstractproperty appended as needed 
+
+        Args:
+            abm (List[bool]): List of bools to test for abstractmethod
+            abp (List[bool]): List of bools to test for abstractproperty
+
+        Returns:
+            List[str]: [description]
+        """
+        a_method = True in abm
+        a_prop = True in abp
+        results = []
+        if a_method:
+            results.append('abstractmethod')
+        if a_prop:
+            results.append('abstractproperty')
+        return results
+            
