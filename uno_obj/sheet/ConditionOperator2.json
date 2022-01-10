@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "ConditionOperator2",
   "type": "const",
   "namespace": "com.sun.star.sheet",
   "parser_args": {
-    "sort": false
+    "sort": false,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "hex": false,
@@ -34,21 +35,12 @@
     ],
     "items": [
       {
-        "name": "BETWEEN",
+        "name": "NONE",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 7,
+        "value": 0,
         "lines": [
-          "the value has to be between the two specified values."
-        ]
-      },
-      {
-        "name": "DUPLICATE",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 10,
-        "lines": [
-          "Conditionally format duplicate values."
+          "no condition is specified."
         ]
       },
       {
@@ -61,12 +53,12 @@
         ]
       },
       {
-        "name": "FORMULA",
+        "name": "NOT_EQUAL",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 9,
+        "value": 2,
         "lines": [
-          "the specified formula has to give a non-zero result."
+          "the value must not be equal to the specified value."
         ]
       },
       {
@@ -106,12 +98,12 @@
         ]
       },
       {
-        "name": "NONE",
+        "name": "BETWEEN",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 0,
+        "value": 7,
         "lines": [
-          "no condition is specified."
+          "the value has to be between the two specified values."
         ]
       },
       {
@@ -124,21 +116,30 @@
         ]
       },
       {
+        "name": "FORMULA",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 9,
+        "lines": [
+          "the specified formula has to give a non-zero result."
+        ]
+      },
+      {
+        "name": "DUPLICATE",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 10,
+        "lines": [
+          "Conditionally format duplicate values."
+        ]
+      },
+      {
         "name": "NOT_DUPLICATE",
         "type": "int",
         "value_type": "INTEGER",
         "value": 11,
         "lines": [
           "Conditionally format non-duplicate values."
-        ]
-      },
-      {
-        "name": "NOT_EQUAL",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 2,
-        "lines": [
-          "the value must not be equal to the specified value."
         ]
       }
     ]

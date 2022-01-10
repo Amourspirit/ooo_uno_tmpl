@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "FormComponentType",
   "type": "const",
   "namespace": "com.sun.star.form",
   "parser_args": {
-    "sort": false
+    "sort": false,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "hex": false,
@@ -34,21 +35,12 @@
     ],
     "items": [
       {
-        "name": "CHECKBOX",
+        "name": "CONTROL",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 5,
+        "value": 1,
         "lines": [
-          "specifies a control that is used to check or uncheck to turn an option on or off."
-        ]
-      },
-      {
-        "name": "COMBOBOX",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 7,
-        "lines": [
-          "specifies a control that is used when a list box combined with a static text control or an edit control is needed."
+          "This generic identifier is for controls which cannot be identified by another specific identifier."
         ]
       },
       {
@@ -61,39 +53,68 @@
         ]
       },
       {
-        "name": "CONTROL",
+        "name": "RADIOBUTTON",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 1,
+        "value": 3,
         "lines": [
-          "This generic identifier is for controls which cannot be identified by another specific identifier."
+          "specifies a control that acts like a radio button.",
+          "",
+          "Grouped together, such radio buttons present a set of two or more mutually exclusive choices to the user."
         ]
       },
       {
-        "name": "CURRENCYFIELD",
+        "name": "IMAGEBUTTON",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 18,
+        "value": 4,
         "lines": [
-          "specifies a field to display and edit a currency value."
+          "specifies a control that displays an image that responds to mouse clicks."
         ]
       },
       {
-        "name": "DATEFIELD",
+        "name": "CHECKBOX",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 15,
+        "value": 5,
         "lines": [
-          "specifies a control to display and edit a date value."
+          "specifies a control that is used to check or uncheck to turn an option on or off."
         ]
       },
       {
-        "name": "FILECONTROL",
+        "name": "LISTBOX",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 12,
+        "value": 6,
         "lines": [
-          "specifies a control which can be used to enter text, extended by an (user-startable) file dialog to browse for files."
+          "specifies a control that displays a list from which the user can select one or more items."
+        ]
+      },
+      {
+        "name": "COMBOBOX",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 7,
+        "lines": [
+          "specifies a control that is used when a list box combined with a static text control or an edit control is needed."
+        ]
+      },
+      {
+        "name": "GROUPBOX",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 8,
+        "lines": [
+          "specifies a control that displays a frame around a group of controls with or without a caption."
+        ]
+      },
+      {
+        "name": "TEXTFIELD",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 9,
+        "lines": [
+          "specifies a control that is a text component that allows for the editing of a single line of text."
         ]
       },
       {
@@ -115,12 +136,12 @@
         ]
       },
       {
-        "name": "GROUPBOX",
+        "name": "FILECONTROL",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 8,
+        "value": 12,
         "lines": [
-          "specifies a control that displays a frame around a group of controls with or without a caption."
+          "specifies a control which can be used to enter text, extended by an (user-startable) file dialog to browse for files."
         ]
       },
       {
@@ -133,15 +154,6 @@
         ]
       },
       {
-        "name": "IMAGEBUTTON",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 4,
-        "lines": [
-          "specifies a control that displays an image that responds to mouse clicks."
-        ]
-      },
-      {
         "name": "IMAGECONTROL",
         "type": "int",
         "value_type": "INTEGER",
@@ -151,21 +163,21 @@
         ]
       },
       {
-        "name": "LISTBOX",
+        "name": "DATEFIELD",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 6,
+        "value": 15,
         "lines": [
-          "specifies a control that displays a list from which the user can select one or more items."
+          "specifies a control to display and edit a date value."
         ]
       },
       {
-        "name": "NAVIGATIONBAR",
+        "name": "TIMEFIELD",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 22,
+        "value": 16,
         "lines": [
-          "specifies a control which provides controller functionality for the com.sun.star.form.component.DataForm it belongs to, such as functionality to navigate or filter this form."
+          "specifies a control to display and edit a time value."
         ]
       },
       {
@@ -178,23 +190,21 @@
         ]
       },
       {
+        "name": "CURRENCYFIELD",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 18,
+        "lines": [
+          "specifies a field to display and edit a currency value."
+        ]
+      },
+      {
         "name": "PATTERNFIELD",
         "type": "int",
         "value_type": "INTEGER",
         "value": 19,
         "lines": [
           "specifies a control to display and edit a string according to a pattern."
-        ]
-      },
-      {
-        "name": "RADIOBUTTON",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 3,
-        "lines": [
-          "specifies a control that acts like a radio button.",
-          "",
-          "Grouped together, such radio buttons present a set of two or more mutually exclusive choices to the user."
         ]
       },
       {
@@ -216,21 +226,12 @@
         ]
       },
       {
-        "name": "TEXTFIELD",
+        "name": "NAVIGATIONBAR",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 9,
+        "value": 22,
         "lines": [
-          "specifies a control that is a text component that allows for the editing of a single line of text."
-        ]
-      },
-      {
-        "name": "TIMEFIELD",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 16,
-        "lines": [
-          "specifies a control to display and edit a time value."
+          "specifies a control which provides controller functionality for the com.sun.star.form.component.DataForm it belongs to, such as functionality to navigate or filter this form."
         ]
       }
     ]

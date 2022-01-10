@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "SimpleMailClientFlags",
   "type": "const",
   "namespace": "com.sun.star.system",
   "parser_args": {
-    "sort": false
+    "sort": false,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "hex": false,
@@ -45,17 +46,6 @@
         ]
       },
       {
-        "name": "NO_LOGON_DIALOG",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 2,
-        "lines": [
-          "No logon dialog should be displayed to prompt the user for logon information if necessary.",
-          "",
-          "When this flag is specified and the user needs to logon in order to send a simple mail message via the method com.sun.star.system.XSimpleMailClient.sendSimpleMailMessage(), an Exception will be thrown."
-        ]
-      },
-      {
         "name": "NO_USER_INTERFACE",
         "type": "int",
         "value_type": "INTEGER",
@@ -64,6 +54,17 @@
           "Does not show the current configured system mail client, but sends the mail without any further user interaction.",
           "",
           "If this flag is specified, a recipient address must have been specified for the given XSimpleMailMessage object given to the method com.sun.star.system.XSimpleMailClient.sendSimpleMailMessage()."
+        ]
+      },
+      {
+        "name": "NO_LOGON_DIALOG",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 2,
+        "lines": [
+          "No logon dialog should be displayed to prompt the user for logon information if necessary.",
+          "",
+          "When this flag is specified and the user needs to logon in order to send a simple mail message via the method com.sun.star.system.XSimpleMailClient.sendSimpleMailMessage(), an Exception will be thrown."
         ]
       }
     ]

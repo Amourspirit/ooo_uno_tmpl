@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "FileSystemNotation",
   "type": "const",
   "namespace": "com.sun.star.ucb",
   "parser_args": {
-    "sort": false
+    "sort": false,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "hex": false,
@@ -34,6 +35,24 @@
     ],
     "items": [
       {
+        "name": "UNKNOWN_NOTATION",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 0,
+        "lines": [
+          "No information regarding any conventions is available."
+        ]
+      },
+      {
+        "name": "UNIX_NOTATION",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 1,
+        "lines": [
+          "The conventions of Unix like file systems (e.g., /dir1/dir2/file)."
+        ]
+      },
+      {
         "name": "DOS_NOTATION",
         "type": "int",
         "value_type": "INTEGER",
@@ -49,24 +68,6 @@
         "value": 3,
         "lines": [
           "The conventions of Mac like file systems (e.g., volume:dir1:dir2:file)."
-        ]
-      },
-      {
-        "name": "UNIX_NOTATION",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 1,
-        "lines": [
-          "The conventions of Unix like file systems (e.g., /dir1/dir2/file)."
-        ]
-      },
-      {
-        "name": "UNKNOWN_NOTATION",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 0,
-        "lines": [
-          "No information regarding any conventions is available."
         ]
       }
     ]

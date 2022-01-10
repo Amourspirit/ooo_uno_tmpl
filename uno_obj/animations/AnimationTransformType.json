@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "AnimationTransformType",
   "type": "const",
   "namespace": "com.sun.star.animations",
   "parser_args": {
-    "sort": false
+    "sort": false,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "hex": false,
@@ -34,12 +35,12 @@
     ],
     "items": [
       {
-        "name": "ROTATE",
+        "name": "TRANSLATE",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 2,
+        "value": 0,
         "lines": [
-          "defines a rotation"
+          "defines a translation"
         ]
       },
       {
@@ -49,6 +50,15 @@
         "value": 1,
         "lines": [
           "defines a scale"
+        ]
+      },
+      {
+        "name": "ROTATE",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 2,
+        "lines": [
+          "defines a rotation"
         ]
       },
       {
@@ -67,15 +77,6 @@
         "value": 4,
         "lines": [
           "defines a skew transformation for y-axis"
-        ]
-      },
-      {
-        "name": "TRANSLATE",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 0,
-        "lines": [
-          "defines a translation"
         ]
       }
     ]

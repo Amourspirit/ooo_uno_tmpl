@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "TransliterationModulesExtra",
   "type": "const",
   "namespace": "com.sun.star.i18n",
   "parser_args": {
-    "sort": false
+    "sort": false,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "hex": false,
@@ -36,35 +37,6 @@
     ],
     "items": [
       {
-        "name": "END_OF_MODULE",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 0,
-        "lines": []
-      },
-      {
-        "name": "IGNORE_DIACRITICS_CTL",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 1073741824,
-        "lines": [
-          "Ignore diacritics.",
-          "",
-          "Despite the _CTL name suffix this is not only about CTL/Arabic diacritic characters, though these are handled as well, but the transliteration decomposes and removes any diacritic from characters.",
-          "",
-          "Because we cannot extend the TransliterationModules enum we use TransliterationModulesExtra and it will act the same way."
-        ]
-      },
-      {
-        "name": "IGNORE_KASHIDA_CTL",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 2048,
-        "lines": [
-          "Ignore Kashida mark."
-        ]
-      },
-      {
         "name": "SENTENCE_CASE",
         "type": "int",
         "value_type": "INTEGER",
@@ -92,6 +64,35 @@
         "lines": [
           "All characters of the word are to change their case from small letters to capital letters and vice versa."
         ]
+      },
+      {
+        "name": "IGNORE_DIACRITICS_CTL",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 1073741824,
+        "lines": [
+          "Ignore diacritics.",
+          "",
+          "Despite the _CTL name suffix this is not only about CTL/Arabic diacritic characters, though these are handled as well, but the transliteration decomposes and removes any diacritic from characters.",
+          "",
+          "Because we cannot extend the TransliterationModules enum we use TransliterationModulesExtra and it will act the same way."
+        ]
+      },
+      {
+        "name": "IGNORE_KASHIDA_CTL",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 2048,
+        "lines": [
+          "Ignore Kashida mark."
+        ]
+      },
+      {
+        "name": "END_OF_MODULE",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 0,
+        "lines": []
       }
     ]
   }

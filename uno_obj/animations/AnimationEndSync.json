@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "AnimationEndSync",
   "type": "const",
   "namespace": "com.sun.star.animations",
   "parser_args": {
-    "sort": false
+    "sort": false,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "hex": false,
@@ -32,17 +33,6 @@
     "desc": [],
     "items": [
       {
-        "name": "ALL",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 2,
-        "lines": [
-          "The par, excl, or media element's implicit duration ends when all of the child elements have ended their respective active durations.",
-          "",
-          "Elements with indefinite or unresolved begin times will keep the simple duration of the time container from ending. When all elements have completed the active duration one or more times, the parent time container can end."
-        ]
-      },
-      {
         "name": "FIRST",
         "type": "int",
         "value_type": "INTEGER",
@@ -62,6 +52,17 @@
           "The par, excl, or media element's implicit duration ends with the last active end of the child elements.",
           "",
           "This does not refer to the lexical last child, or to the last child to start, but rather refers to the last active end of all children that have a resolved, definite begin time. If the time container has no children with a resolved begin time, the time container ends immediately. If child elements have multiple begin times, or otherwise restart, the child elements must complete all instances of active durations for resolved begin times. This is the default value for par and excl elements."
+        ]
+      },
+      {
+        "name": "ALL",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 2,
+        "lines": [
+          "The par, excl, or media element's implicit duration ends when all of the child elements have ended their respective active durations.",
+          "",
+          "Elements with indefinite or unresolved begin times will keep the simple duration of the time container from ending. When all elements have completed the active duration one or more times, the parent time container can end."
         ]
       },
       {

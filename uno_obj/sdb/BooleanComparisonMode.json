@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "BooleanComparisonMode",
   "type": "const",
   "namespace": "com.sun.star.sdb",
   "parser_args": {
-    "sort": false
+    "sort": false,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "hex": false,
@@ -34,15 +35,6 @@
     ],
     "items": [
       {
-        "name": "ACCESS_COMPAT",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 3,
-        "lines": [
-          "requires to use an Microsoft Access compatible syntax for boolean comparison."
-        ]
-      },
-      {
         "name": "EQUAL_INTEGER",
         "type": "int",
         "value_type": "INTEGER",
@@ -51,6 +43,17 @@
           "denotes the default comparison",
           "",
           "Most databases support comparing boolean expressions or column values directly with integer values: column = 0 respectively column = 1."
+        ]
+      },
+      {
+        "name": "IS_LITERAL",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 1,
+        "lines": [
+          "requires to use IS boolean_literal for boolean comparison.",
+          "",
+          "That is, the generated comparison predicates will be column IS TRUE resp. column IS FALSE."
         ]
       },
       {
@@ -65,14 +68,12 @@
         ]
       },
       {
-        "name": "IS_LITERAL",
+        "name": "ACCESS_COMPAT",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 1,
+        "value": 3,
         "lines": [
-          "requires to use IS boolean_literal for boolean comparison.",
-          "",
-          "That is, the generated comparison predicates will be column IS TRUE resp. column IS FALSE."
+          "requires to use an Microsoft Access compatible syntax for boolean comparison."
         ]
       }
     ]

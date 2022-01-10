@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "KParseType",
   "type": "const",
   "namespace": "com.sun.star.i18n",
   "parser_args": {
-    "sort": false
+    "sort": false,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "hex": false,
@@ -36,23 +37,12 @@
     ],
     "items": [
       {
-        "name": "ANY_NUMBER",
-        "type": "int",
-        "value_type": "STRING",
-        "value": "ASC_NUMBER | UNI_NUMBER",
-        "lines": [
-          "Any ASCII or Unicode number."
-        ]
-      },
-      {
-        "name": "ASC_NUMBER",
+        "name": "ONE_SINGLE_CHAR",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 32,
+        "value": 1,
         "lines": [
-          "A number where all digits are ASCII characters.",
-          "",
-          "Numerical value in ParseResult.Value."
+          "One single character like ! # ; : $ et al."
         ]
       },
       {
@@ -62,6 +52,24 @@
         "value": 2,
         "lines": [
           "A Boolean operator like <, >, <>, =, <=, >=."
+        ]
+      },
+      {
+        "name": "IDENTNAME",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 4,
+        "lines": [
+          "A name matching the conditions passed."
+        ]
+      },
+      {
+        "name": "SINGLE_QUOTE_NAME",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 8,
+        "lines": [
+          "\\\"A single-quoted name matching the conditions passed ( 'na\\'me' ).\\\" \\\"Dequoted name in ParseResult.DequotedNameOrString ( na'me ).\\\""
         ]
       },
       {
@@ -76,12 +84,25 @@
         ]
       },
       {
-        "name": "IDENTNAME",
+        "name": "ASC_NUMBER",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 4,
+        "value": 32,
         "lines": [
-          "A name matching the conditions passed."
+          "A number where all digits are ASCII characters.",
+          "",
+          "Numerical value in ParseResult.Value."
+        ]
+      },
+      {
+        "name": "UNI_NUMBER",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 64,
+        "lines": [
+          "A number where at least some digits are Unicode (and maybe ASCII) characters.",
+          "",
+          "Numerical value inKParseType ParseResult.Value."
         ]
       },
       {
@@ -94,32 +115,12 @@
         ]
       },
       {
-        "name": "ONE_SINGLE_CHAR",
+        "name": "ANY_NUMBER",
         "type": "int",
-        "value_type": "INTEGER",
-        "value": 1,
+        "value_type": "STRING",
+        "value": "ASC_NUMBER | UNI_NUMBER",
         "lines": [
-          "One single character like ! # ; : $ et al."
-        ]
-      },
-      {
-        "name": "SINGLE_QUOTE_NAME",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 8,
-        "lines": [
-          "\\\"A single-quoted name matching the conditions passed ( 'na\\'me' ).\\\" \\\"Dequoted name in ParseResult.DequotedNameOrString ( na'me ).\\\""
-        ]
-      },
-      {
-        "name": "UNI_NUMBER",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 64,
-        "lines": [
-          "A number where at least some digits are Unicode (and maybe ASCII) characters.",
-          "",
-          "Numerical value inKParseType ParseResult.Value."
+          "Any ASCII or Unicode number."
         ]
       }
     ]

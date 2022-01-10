@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "DataPilotOutputRangeType",
   "type": "const",
   "namespace": "com.sun.star.sheet",
   "parser_args": {
-    "sort": false
+    "sort": false,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "hex": false,
@@ -40,14 +41,12 @@
     ],
     "items": [
       {
-        "name": "RESULT",
+        "name": "WHOLE",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 2,
+        "value": 0,
         "lines": [
-          "result area where the result values are displayed.",
-          "",
-          "This also includes the column and row subtotal areas when they are displayed."
+          "whole DataPilot output range including the header area above the table where the filter and page field buttons are located."
         ]
       },
       {
@@ -60,12 +59,14 @@
         ]
       },
       {
-        "name": "WHOLE",
+        "name": "RESULT",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 0,
+        "value": 2,
         "lines": [
-          "whole DataPilot output range including the header area above the table where the filter and page field buttons are located."
+          "result area where the result values are displayed.",
+          "",
+          "This also includes the column and row subtotal areas when they are displayed."
         ]
       }
     ]

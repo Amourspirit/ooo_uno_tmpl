@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "ColumnSearch",
   "type": "const",
   "namespace": "com.sun.star.sdbc",
   "parser_args": {
-    "sort": false
+    "sort": false,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "hex": false,
@@ -34,14 +35,14 @@
     ],
     "items": [
       {
-        "name": "BASIC",
+        "name": "NONE",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 2,
+        "value": 0,
         "lines": [
-          "A possible value for column SEARCHABLE in the com.sun.star.sdbc.XResultSet object returned by the method com.sun.star.sdbc\\\">XDatabaseMetaData.getTypeInfo().",
+          "A possible value for column SEARCHABLE in the com.sun.star.sdbc.XResultSet object returned by the method com.sun.star.sdbc.XDatabaseMetaData.getTypeInfo().",
           "",
-          "Indicates that one can base all WHERE search clauses except WHERE...LIKE on this data type."
+          "Indicates that WHERE search clauses are not supported for this type."
         ]
       },
       {
@@ -56,6 +57,17 @@
         ]
       },
       {
+        "name": "BASIC",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 2,
+        "lines": [
+          "A possible value for column SEARCHABLE in the com.sun.star.sdbc.XResultSet object returned by the method com.sun.star.sdbc\\\">XDatabaseMetaData.getTypeInfo().",
+          "",
+          "Indicates that one can base all WHERE search clauses except WHERE...LIKE on this data type."
+        ]
+      },
+      {
         "name": "FULL",
         "type": "int",
         "value_type": "INTEGER",
@@ -64,17 +76,6 @@
           "A possible value for column SEARCHABLE in the com.sun.star.sdbc.XResultSet object returned by the method com.sun.star.sdbc\\\">XDatabaseMetaData.getTypeInfo().",
           "",
           "Indicates that all WHERE search clauses can be based on this type."
-        ]
-      },
-      {
-        "name": "NONE",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 0,
-        "lines": [
-          "A possible value for column SEARCHABLE in the com.sun.star.sdbc.XResultSet object returned by the method com.sun.star.sdbc.XDatabaseMetaData.getTypeInfo().",
-          "",
-          "Indicates that WHERE search clauses are not supported for this type."
         ]
       }
     ]

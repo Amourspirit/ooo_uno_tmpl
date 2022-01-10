@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "DatabaseObjectContainer",
   "type": "const",
   "namespace": "com.sun.star.sdb.application",
   "parser_args": {
-    "sort": false
+    "sort": false,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "hex": false,
@@ -44,39 +45,12 @@
     ],
     "items": [
       {
-        "name": "CATALOG",
+        "name": "TABLES",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 1005,
+        "value": 1000,
         "lines": [
-          "denotes a catalog in a database which supports catalogs"
-        ]
-      },
-      {
-        "name": "DATA_SOURCE",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 1004,
-        "lines": [
-          "denotes the data source itself, which effectively is the root container for all other kind of database objects, including other container types."
-        ]
-      },
-      {
-        "name": "FORMS",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 1002,
-        "lines": [
-          "denotes the virtual folder containing all forms of a database document, in a context where such a folder is displayed to the user."
-        ]
-      },
-      {
-        "name": "FORMS_FOLDER",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 1007,
-        "lines": [
-          "denotes a folder which is used to organize forms in a database document"
+          "denotes the virtual folder containing all tables of a database, in a context where such a folder is displayed to the user."
         ]
       },
       {
@@ -89,6 +63,15 @@
         ]
       },
       {
+        "name": "FORMS",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 1002,
+        "lines": [
+          "denotes the virtual folder containing all forms of a database document, in a context where such a folder is displayed to the user."
+        ]
+      },
+      {
         "name": "REPORTS",
         "type": "int",
         "value_type": "INTEGER",
@@ -98,12 +81,21 @@
         ]
       },
       {
-        "name": "REPORTS_FOLDER",
+        "name": "DATA_SOURCE",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 1008,
+        "value": 1004,
         "lines": [
-          "denotes a folder which is used to organize reports in a database document"
+          "denotes the data source itself, which effectively is the root container for all other kind of database objects, including other container types."
+        ]
+      },
+      {
+        "name": "CATALOG",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 1005,
+        "lines": [
+          "denotes a catalog in a database which supports catalogs"
         ]
       },
       {
@@ -116,12 +108,21 @@
         ]
       },
       {
-        "name": "TABLES",
+        "name": "FORMS_FOLDER",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 1000,
+        "value": 1007,
         "lines": [
-          "denotes the virtual folder containing all tables of a database, in a context where such a folder is displayed to the user."
+          "denotes a folder which is used to organize forms in a database document"
+        ]
+      },
+      {
+        "name": "REPORTS_FOLDER",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 1008,
+        "lines": [
+          "denotes a folder which is used to organize reports in a database document"
         ]
       }
     ]

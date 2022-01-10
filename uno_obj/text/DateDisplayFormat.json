@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "DateDisplayFormat",
   "type": "const",
   "namespace": "com.sun.star.text",
   "parser_args": {
-    "sort": false
+    "sort": false,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "hex": false,
@@ -40,18 +41,22 @@
     ],
     "items": [
       {
-        "name": "DDMMMMYYYY",
+        "name": "STANDARD_SHORT",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 5,
-        "lines": []
+        "value": 0,
+        "lines": [
+          "the shortest system standard"
+        ]
       },
       {
-        "name": "DDMMMYYYY",
+        "name": "STANDARD_LONG",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 4,
-        "lines": []
+        "value": 1,
+        "lines": [
+          "the longest system standard"
+        ]
       },
       {
         "name": "MMDDYY",
@@ -70,6 +75,20 @@
         "lines": [
           "22.11.1973"
         ]
+      },
+      {
+        "name": "DDMMMYYYY",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 4,
+        "lines": []
+      },
+      {
+        "name": "DDMMMMYYYY",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 5,
+        "lines": []
       },
       {
         "name": "NNDDMMMMYYYY",
@@ -91,24 +110,6 @@
           "Donnerstag, 22.",
           "",
           "November 1973"
-        ]
-      },
-      {
-        "name": "STANDARD_LONG",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 1,
-        "lines": [
-          "the longest system standard"
-        ]
-      },
-      {
-        "name": "STANDARD_SHORT",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 0,
-        "lines": [
-          "the shortest system standard"
         ]
       }
     ]

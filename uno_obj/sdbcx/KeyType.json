@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "KeyType",
   "type": "const",
   "namespace": "com.sun.star.sdbcx",
   "parser_args": {
-    "sort": false
+    "sort": false,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "hex": false,
@@ -34,15 +35,6 @@
     ],
     "items": [
       {
-        "name": "FOREIGN",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 3,
-        "lines": [
-          "indicates that the key is a foreign key of a table."
-        ]
-      },
-      {
         "name": "PRIMARY",
         "type": "int",
         "value_type": "INTEGER",
@@ -58,6 +50,15 @@
         "value": 2,
         "lines": [
           "indicates that the key is unique, NULL values are allowed."
+        ]
+      },
+      {
+        "name": "FOREIGN",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 3,
+        "lines": [
+          "indicates that the key is a foreign key of a table."
         ]
       }
     ]

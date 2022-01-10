@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "PropertyConcept",
   "type": "const",
   "namespace": "com.sun.star.beans",
   "parser_args": {
-    "sort": false
+    "sort": false,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "hex": false,
@@ -47,21 +48,30 @@
         ]
       },
       {
-        "name": "ATTRIBUTES",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 4,
-        "lines": [
-          "specifies all properties which are actually attributes of interfaces."
-        ]
-      },
-      {
         "name": "DANGEROUS",
         "type": "int",
         "value_type": "INTEGER",
         "value": 1,
         "lines": [
           "specifies that the change or retrieval of this property directly by the user can result in an unstable state (deadlock, application crash, security hole, etc.)"
+        ]
+      },
+      {
+        "name": "PROPERTYSET",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 2,
+        "lines": [
+          "specifies all properties which are reachable by XPropertySet, XFastPropertySet or XMultiPropertySet."
+        ]
+      },
+      {
+        "name": "ATTRIBUTES",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 4,
+        "lines": [
+          "specifies all properties which are actually attributes of interfaces."
         ]
       },
       {
@@ -73,15 +83,6 @@
           "specifies all properties which are represented by getter or setter methods.",
           "",
           "These methods have the signature type get...(), void set...() or boolean is...()."
-        ]
-      },
-      {
-        "name": "PROPERTYSET",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 2,
-        "lines": [
-          "specifies all properties which are reachable by XPropertySet, XFastPropertySet or XMultiPropertySet."
         ]
       }
     ]

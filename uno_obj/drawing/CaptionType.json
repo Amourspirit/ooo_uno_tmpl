@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "CaptionType",
   "type": "const",
   "namespace": "com.sun.star.drawing",
   "parser_args": {
-    "sort": false
+    "sort": false,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "hex": false,
@@ -34,6 +35,15 @@
     ],
     "items": [
       {
+        "name": "straight",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 0,
+        "lines": [
+          "the caption line is a straight line from a caption area edge to the caption point."
+        ]
+      },
+      {
         "name": "angled",
         "type": "int",
         "value_type": "INTEGER",
@@ -49,15 +59,6 @@
         "value": 2,
         "lines": [
           "the caption line is build up with a straight line from the caption area edge, followed by the shortest line to the caption area point."
-        ]
-      },
-      {
-        "name": "straight",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 0,
-        "lines": [
-          "the caption line is a straight line from a caption area edge to the caption point."
         ]
       }
     ]

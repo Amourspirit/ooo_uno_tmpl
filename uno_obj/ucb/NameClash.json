@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "NameClash",
   "type": "const",
   "namespace": "com.sun.star.ucb",
   "parser_args": {
-    "sort": false
+    "sort": false,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "hex": false,
@@ -34,32 +35,12 @@
     ],
     "items": [
       {
-        "name": "ASK",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 4,
-        "lines": [
-          "Means to use a NameClashResolveRequest in order to solve the name clash."
-        ]
-      },
-      {
         "name": "ERROR",
         "type": "int",
         "value_type": "INTEGER",
         "value": 0,
         "lines": [
           "Means to set an error and cancel the operation."
-        ]
-      },
-      {
-        "name": "KEEP",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 3,
-        "lines": [
-          "Deprecated.",
-          "",
-          "Do not use!"
         ]
       },
       {
@@ -80,6 +61,26 @@
           "Means to rename the object to transfer to solve the clash.",
           "",
           "The implementation needs to supply and set a suitable new name."
+        ]
+      },
+      {
+        "name": "KEEP",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 3,
+        "lines": [
+          "Deprecated.",
+          "",
+          "Do not use!"
+        ]
+      },
+      {
+        "name": "ASK",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 4,
+        "lines": [
+          "Means to use a NameClashResolveRequest in order to solve the name clash."
         ]
       }
     ]

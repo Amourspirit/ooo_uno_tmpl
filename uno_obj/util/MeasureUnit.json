@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "MeasureUnit",
   "type": "const",
   "namespace": "com.sun.star.util",
   "parser_args": {
-    "sort": false
+    "sort": false,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "hex": false,
@@ -36,12 +37,30 @@
     ],
     "items": [
       {
-        "name": "APPFONT",
+        "name": "MM_100TH",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 17,
+        "value": 0,
         "lines": [
-          "all measures for this component are in APPFONT"
+          "all measures for this component are in 100th millimeter"
+        ]
+      },
+      {
+        "name": "MM_10TH",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 1,
+        "lines": [
+          "all measures for this component are in 10th millimeter"
+        ]
+      },
+      {
+        "name": "MM",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 2,
+        "lines": [
+          "all measures for this component are in millimeter"
         ]
       },
       {
@@ -51,24 +70,6 @@
         "value": 3,
         "lines": [
           "all measures for this component are in centimeters"
-        ]
-      },
-      {
-        "name": "FOOT",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 13,
-        "lines": [
-          "all measures for this component are in foot"
-        ]
-      },
-      {
-        "name": "INCH",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 7,
-        "lines": [
-          "all measures for this component are in inch"
         ]
       },
       {
@@ -99,84 +100,12 @@
         ]
       },
       {
-        "name": "KM",
+        "name": "INCH",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 11,
+        "value": 7,
         "lines": [
-          "all measures for this component are in kilometers"
-        ]
-      },
-      {
-        "name": "M",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 10,
-        "lines": [
-          "all measures for this component are in meters"
-        ]
-      },
-      {
-        "name": "MILE",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 14,
-        "lines": [
-          "all measures for this component are in miles"
-        ]
-      },
-      {
-        "name": "MM",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 2,
-        "lines": [
-          "all measures for this component are in millimeter"
-        ]
-      },
-      {
-        "name": "MM_100TH",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 0,
-        "lines": [
-          "all measures for this component are in 100th millimeter"
-        ]
-      },
-      {
-        "name": "MM_10TH",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 1,
-        "lines": [
-          "all measures for this component are in 10th millimeter"
-        ]
-      },
-      {
-        "name": "PERCENT",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 15,
-        "lines": [
-          "all measures for this component are in percentage"
-        ]
-      },
-      {
-        "name": "PICA",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 12,
-        "lines": [
-          "all measures for this component are in pica"
-        ]
-      },
-      {
-        "name": "PIXEL",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 16,
-        "lines": [
-          "all measures for this component are in pixel"
+          "all measures for this component are in inch"
         ]
       },
       {
@@ -189,21 +118,93 @@
         ]
       },
       {
-        "name": "SYSFONT",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 18,
-        "lines": [
-          "all measures for this component are in SYSFONT"
-        ]
-      },
-      {
         "name": "TWIP",
         "type": "int",
         "value_type": "INTEGER",
         "value": 9,
         "lines": [
           "all measures for this component are in twips"
+        ]
+      },
+      {
+        "name": "M",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 10,
+        "lines": [
+          "all measures for this component are in meters"
+        ]
+      },
+      {
+        "name": "KM",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 11,
+        "lines": [
+          "all measures for this component are in kilometers"
+        ]
+      },
+      {
+        "name": "PICA",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 12,
+        "lines": [
+          "all measures for this component are in pica"
+        ]
+      },
+      {
+        "name": "FOOT",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 13,
+        "lines": [
+          "all measures for this component are in foot"
+        ]
+      },
+      {
+        "name": "MILE",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 14,
+        "lines": [
+          "all measures for this component are in miles"
+        ]
+      },
+      {
+        "name": "PERCENT",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 15,
+        "lines": [
+          "all measures for this component are in percentage"
+        ]
+      },
+      {
+        "name": "PIXEL",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 16,
+        "lines": [
+          "all measures for this component are in pixel"
+        ]
+      },
+      {
+        "name": "APPFONT",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 17,
+        "lines": [
+          "all measures for this component are in APPFONT"
+        ]
+      },
+      {
+        "name": "SYSFONT",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 18,
+        "lines": [
+          "all measures for this component are in SYSFONT"
         ]
       }
     ]

@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "DatabaseObject",
   "type": "const",
   "namespace": "com.sun.star.sdb.application",
   "parser_args": {
-    "sort": false
+    "sort": false,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "hex": false,
@@ -23,8 +24,8 @@
     "requires_typing": false,
     "from_imports": [
       [
-        "..",
-        "command_type"
+        "..command_type",
+        "CommandType"
       ],
       [
         "ooo_uno.base.const",
@@ -42,6 +43,26 @@
     ],
     "items": [
       {
+        "name": "TABLE",
+        "type": "int",
+        "value_type": "IMPORT",
+        "value": "CommandType.CommandType.TABLE",
+        "lines": [
+          "denotes a table in a database",
+          "",
+          "Note that table here is a more general term. In OpenOffice.org Base, views are also represented as tables, since to the user, the behave pretty much as tables do."
+        ]
+      },
+      {
+        "name": "QUERY",
+        "type": "int",
+        "value_type": "IMPORT",
+        "value": "CommandType.CommandType.QUERY",
+        "lines": [
+          "denotes a query in a database document"
+        ]
+      },
+      {
         "name": "FORM",
         "type": "int",
         "value_type": "INTEGER",
@@ -51,32 +72,12 @@
         ]
       },
       {
-        "name": "QUERY",
-        "type": "int",
-        "value_type": "IMPORT",
-        "value": "command_type.CommandType.QUERY",
-        "lines": [
-          "denotes a query in a database document"
-        ]
-      },
-      {
         "name": "REPORT",
         "type": "int",
         "value_type": "INTEGER",
         "value": 3,
         "lines": [
           "denotes a report in a database document"
-        ]
-      },
-      {
-        "name": "TABLE",
-        "type": "int",
-        "value_type": "IMPORT",
-        "value": "command_type.CommandType.TABLE",
-        "lines": [
-          "denotes a table in a database",
-          "",
-          "Note that table here is a more general term. In OpenOffice.org Base, views are also represented as tables, since to the user, the behave pretty much as tables do."
         ]
       }
     ]

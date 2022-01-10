@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "DataType",
   "type": "const",
   "namespace": "com.sun.star.sdbc",
   "parser_args": {
-    "sort": false
+    "sort": false,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "hex": false,
@@ -44,29 +45,6 @@
     ],
     "items": [
       {
-        "name": "ARRAY",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 2003,
-        "lines": [
-          "indicates a type representing an SQL ARRAY."
-        ]
-      },
-      {
-        "name": "BIGINT",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": -5,
-        "lines": []
-      },
-      {
-        "name": "BINARY",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": -2,
-        "lines": []
-      },
-      {
         "name": "BIT",
         "type": "int",
         "value_type": "INTEGER",
@@ -74,80 +52,17 @@
         "lines": []
       },
       {
-        "name": "BLOB",
+        "name": "TINYINT",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 2004,
-        "lines": [
-          "indicates a type representing an SQL Binary Large Object."
-        ]
-      },
-      {
-        "name": "BOOLEAN",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 16,
-        "lines": [
-          "identifies the generic SQL type BOOLEAN.",
-          "",
-          "**since**",
-          "",
-          "    OOo 2.0"
-        ]
-      },
-      {
-        "name": "CHAR",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 1,
+        "value": -6,
         "lines": []
       },
       {
-        "name": "CLOB",
+        "name": "SMALLINT",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 2005,
-        "lines": [
-          "indicates a type representing an SQL Character Large Object."
-        ]
-      },
-      {
-        "name": "DATE",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 91,
-        "lines": []
-      },
-      {
-        "name": "DECIMAL",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 3,
-        "lines": []
-      },
-      {
-        "name": "DISTINCT",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 2001,
-        "lines": [
-          "describes a type based on a built-in type.",
-          "",
-          "It is a user-defined data type (UDT)."
-        ]
-      },
-      {
-        "name": "DOUBLE",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 8,
-        "lines": []
-      },
-      {
-        "name": "FLOAT",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 6,
+        "value": 5,
         "lines": []
       },
       {
@@ -158,17 +73,31 @@
         "lines": []
       },
       {
-        "name": "LONGVARBINARY",
+        "name": "BIGINT",
         "type": "int",
         "value_type": "INTEGER",
-        "value": -4,
+        "value": -5,
         "lines": []
       },
       {
-        "name": "LONGVARCHAR",
+        "name": "FLOAT",
         "type": "int",
         "value_type": "INTEGER",
-        "value": -1,
+        "value": 6,
+        "lines": []
+      },
+      {
+        "name": "REAL",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 7,
+        "lines": []
+      },
+      {
+        "name": "DOUBLE",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 8,
         "lines": []
       },
       {
@@ -179,63 +108,39 @@
         "lines": []
       },
       {
-        "name": "OBJECT",
+        "name": "DECIMAL",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 2000,
-        "lines": [
-          "indicates a type which is represented by an object which implements this type."
-        ]
-      },
-      {
-        "name": "OTHER",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 1111,
-        "lines": [
-          "indicates that the SQL type is database-specific and gets mapped to an object that can be accessed via the method com.sun.star.sdbc.XRow.getObject()."
-        ]
-      },
-      {
-        "name": "REAL",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 7,
+        "value": 3,
         "lines": []
       },
       {
-        "name": "REF",
+        "name": "CHAR",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 2006,
-        "lines": [
-          "indicates a type representing an SQL REF, a referencing type."
-        ]
-      },
-      {
-        "name": "SMALLINT",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 5,
+        "value": 1,
         "lines": []
       },
       {
-        "name": "SQLNULL",
+        "name": "VARCHAR",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 0,
+        "value": 12,
         "lines": []
       },
       {
-        "name": "STRUCT",
+        "name": "LONGVARCHAR",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 2002,
-        "lines": [
-          "indicates a type consisting of attributes that may be any type.",
-          "",
-          "It is a user-defined data type (UDT)."
-        ]
+        "value": -1,
+        "lines": []
+      },
+      {
+        "name": "DATE",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 91,
+        "lines": []
       },
       {
         "name": "TIME",
@@ -252,10 +157,10 @@
         "lines": []
       },
       {
-        "name": "TINYINT",
+        "name": "BINARY",
         "type": "int",
         "value_type": "INTEGER",
-        "value": -6,
+        "value": -2,
         "lines": []
       },
       {
@@ -266,11 +171,107 @@
         "lines": []
       },
       {
-        "name": "VARCHAR",
+        "name": "LONGVARBINARY",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 12,
+        "value": -4,
         "lines": []
+      },
+      {
+        "name": "SQLNULL",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 0,
+        "lines": []
+      },
+      {
+        "name": "OTHER",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 1111,
+        "lines": [
+          "indicates that the SQL type is database-specific and gets mapped to an object that can be accessed via the method com.sun.star.sdbc.XRow.getObject()."
+        ]
+      },
+      {
+        "name": "OBJECT",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 2000,
+        "lines": [
+          "indicates a type which is represented by an object which implements this type."
+        ]
+      },
+      {
+        "name": "DISTINCT",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 2001,
+        "lines": [
+          "describes a type based on a built-in type.",
+          "",
+          "It is a user-defined data type (UDT)."
+        ]
+      },
+      {
+        "name": "STRUCT",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 2002,
+        "lines": [
+          "indicates a type consisting of attributes that may be any type.",
+          "",
+          "It is a user-defined data type (UDT)."
+        ]
+      },
+      {
+        "name": "ARRAY",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 2003,
+        "lines": [
+          "indicates a type representing an SQL ARRAY."
+        ]
+      },
+      {
+        "name": "BLOB",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 2004,
+        "lines": [
+          "indicates a type representing an SQL Binary Large Object."
+        ]
+      },
+      {
+        "name": "CLOB",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 2005,
+        "lines": [
+          "indicates a type representing an SQL Character Large Object."
+        ]
+      },
+      {
+        "name": "REF",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 2006,
+        "lines": [
+          "indicates a type representing an SQL REF, a referencing type."
+        ]
+      },
+      {
+        "name": "BOOLEAN",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 16,
+        "lines": [
+          "identifies the generic SQL type BOOLEAN.",
+          "",
+          "**since**",
+          "",
+          "    OOo 2.0"
+        ]
       }
     ]
   }

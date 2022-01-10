@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "ColorSpaceType",
   "type": "const",
   "namespace": "com.sun.star.rendering",
   "parser_args": {
-    "sort": false
+    "sort": false,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "hex": false,
@@ -34,25 +35,32 @@
     ],
     "items": [
       {
-        "name": "CIELAB",
+        "name": "DEVICE_COLOR",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 6,
+        "value": 0,
         "lines": [
-          "Standard CieLab color space.",
-          "",
-          "See Wikipedia for a thorough explanation. Preferable over CIEXYZ if perceptual uniformity is an issue."
+          "Unspecified device color space - use conversion functions to convert to standard color spaces."
         ]
       },
       {
-        "name": "CIEXYZ",
+        "name": "GREY",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 5,
+        "value": 1,
         "lines": [
-          "Standard CieXYZ color space.",
+          "Grey-value color space.",
           "",
-          "See Wikipedia for a thorough explanation."
+          "Use this for monochrome images."
+        ]
+      },
+      {
+        "name": "RGB",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 2,
+        "lines": [
+          "RGB color space."
         ]
       },
       {
@@ -78,65 +86,25 @@
         ]
       },
       {
-        "name": "DEVICE_COLOR",
+        "name": "CIEXYZ",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 0,
+        "value": 5,
         "lines": [
-          "Unspecified device color space - use conversion functions to convert to standard color spaces."
-        ]
-      },
-      {
-        "name": "GREY",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 1,
-        "lines": [
-          "Grey-value color space.",
+          "Standard CieXYZ color space.",
           "",
-          "Use this for monochrome images."
+          "See Wikipedia for a thorough explanation."
         ]
       },
       {
-        "name": "HSL",
+        "name": "CIELAB",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 9,
+        "value": 6,
         "lines": [
-          "HSL color space.",
+          "Standard CieLab color space.",
           "",
-          "Hue saturation lightness. See Wikipedia for a thorough explanation"
-        ]
-      },
-      {
-        "name": "HSV",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 8,
-        "lines": [
-          "HSV color space.",
-          "",
-          "Hue saturation value. See Wikipedia for a thorough explanation."
-        ]
-      },
-      {
-        "name": "INDEXED",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 11,
-        "lines": [
-          "Indexed color space.",
-          "",
-          "The color components of this color space are in fact indices into a color map."
-        ]
-      },
-      {
-        "name": "RGB",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 2,
-        "lines": [
-          "RGB color space."
+          "See Wikipedia for a thorough explanation. Preferable over CIEXYZ if perceptual uniformity is an issue."
         ]
       },
       {
@@ -151,6 +119,28 @@
         ]
       },
       {
+        "name": "HSV",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 8,
+        "lines": [
+          "HSV color space.",
+          "",
+          "Hue saturation value. See Wikipedia for a thorough explanation."
+        ]
+      },
+      {
+        "name": "HSL",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 9,
+        "lines": [
+          "HSL color space.",
+          "",
+          "Hue saturation lightness. See Wikipedia for a thorough explanation"
+        ]
+      },
+      {
         "name": "YCBCR",
         "type": "int",
         "value_type": "INTEGER",
@@ -159,6 +149,17 @@
           "YCbCr color space.",
           "",
           "See Wikipedia for a thorough explanation. This color space is common for digital video."
+        ]
+      },
+      {
+        "name": "INDEXED",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 11,
+        "lines": [
+          "Indexed color space.",
+          "",
+          "The color components of this color space are in fact indices into a color map."
         ]
       }
     ]

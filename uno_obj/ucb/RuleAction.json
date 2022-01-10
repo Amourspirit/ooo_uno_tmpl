@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "RuleAction",
   "type": "const",
   "namespace": "com.sun.star.ucb",
   "parser_args": {
-    "sort": false
+    "sort": false,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "hex": false,
@@ -34,30 +35,21 @@
     ],
     "items": [
       {
-        "name": "COPY",
+        "name": "NONE",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 8,
+        "value": 0,
         "lines": [
-          "\\\"Copy\\\" - Copies object to Rule.Parameter when term matches."
+          "\\\"None\\\" - Do nothing."
         ]
       },
       {
-        "name": "DELETE",
+        "name": "SHOW",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 9,
+        "value": 1,
         "lines": [
-          "\\\"Delete\\\" - Deletes object when term matches."
-        ]
-      },
-      {
-        "name": "FORWARD",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 11,
-        "lines": [
-          "\\\"Forward\\\" - Forwards object to Rule.Parameter when term matches."
+          "\\\"Show\\\" - Shows object when term matches."
         ]
       },
       {
@@ -70,21 +62,21 @@
         ]
       },
       {
-        "name": "LINK",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 10,
-        "lines": [
-          "\\\"Link\\\" - Creates a link to Rule.Parameter when term matches."
-        ]
-      },
-      {
         "name": "MARK",
         "type": "int",
         "value_type": "INTEGER",
         "value": 3,
         "lines": [
           "\\\"Mark\\\" - Marks object when term matches."
+        ]
+      },
+      {
+        "name": "UNMARK",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 4,
+        "lines": [
+          "\\\"UnMark\\\" - Removes mark from object when term matches."
         ]
       },
       {
@@ -115,30 +107,39 @@
         ]
       },
       {
-        "name": "NONE",
+        "name": "COPY",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 0,
+        "value": 8,
         "lines": [
-          "\\\"None\\\" - Do nothing."
+          "\\\"Copy\\\" - Copies object to Rule.Parameter when term matches."
         ]
       },
       {
-        "name": "SHOW",
+        "name": "DELETE",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 1,
+        "value": 9,
         "lines": [
-          "\\\"Show\\\" - Shows object when term matches."
+          "\\\"Delete\\\" - Deletes object when term matches."
         ]
       },
       {
-        "name": "UNMARK",
+        "name": "LINK",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 4,
+        "value": 10,
         "lines": [
-          "\\\"UnMark\\\" - Removes mark from object when term matches."
+          "\\\"Link\\\" - Creates a link to Rule.Parameter when term matches."
+        ]
+      },
+      {
+        "name": "FORWARD",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 11,
+        "lines": [
+          "\\\"Forward\\\" - Forwards object to Rule.Parameter when term matches."
         ]
       }
     ]

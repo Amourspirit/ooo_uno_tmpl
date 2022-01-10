@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "ConditionFormatOperator",
   "type": "const",
   "namespace": "com.sun.star.sheet",
   "parser_args": {
-    "sort": false
+    "sort": false,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "hex": false,
@@ -32,115 +33,10 @@
     "desc": [],
     "items": [
       {
-        "name": "ABOVE_AVERAGE",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 14,
-        "lines": []
-      },
-      {
-        "name": "ABOVE_EQUAL_AVERAGE",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 16,
-        "lines": []
-      },
-      {
-        "name": "BEGINS_WITH",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 20,
-        "lines": []
-      },
-      {
-        "name": "BELOW_AVERAGE",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 15,
-        "lines": []
-      },
-      {
-        "name": "BELOW_EQUAL_AVERAGE",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 17,
-        "lines": []
-      },
-      {
-        "name": "BETWEEN",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 6,
-        "lines": []
-      },
-      {
-        "name": "BOTTOM_N_ELEMENTS",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 11,
-        "lines": []
-      },
-      {
-        "name": "BOTTOM_N_PERCENT",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 13,
-        "lines": []
-      },
-      {
-        "name": "CONTAINS",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 22,
-        "lines": []
-      },
-      {
-        "name": "DUPLICATE",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 8,
-        "lines": []
-      },
-      {
-        "name": "ENDS_WITH",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 21,
-        "lines": []
-      },
-      {
         "name": "EQUAL",
         "type": "int",
         "value_type": "INTEGER",
         "value": 0,
-        "lines": []
-      },
-      {
-        "name": "ERROR",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 18,
-        "lines": []
-      },
-      {
-        "name": "EXPRESSION",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 24,
-        "lines": []
-      },
-      {
-        "name": "GREATER",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 2,
-        "lines": []
-      },
-      {
-        "name": "GREATER_EQUAL",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 4,
         "lines": []
       },
       {
@@ -151,6 +47,13 @@
         "lines": []
       },
       {
+        "name": "GREATER",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 2,
+        "lines": []
+      },
+      {
         "name": "LESS_EQUAL",
         "type": "int",
         "value_type": "INTEGER",
@@ -158,17 +61,10 @@
         "lines": []
       },
       {
-        "name": "NOT_BETWEEN",
+        "name": "GREATER_EQUAL",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 7,
-        "lines": []
-      },
-      {
-        "name": "NOT_CONTAINS",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 23,
+        "value": 4,
         "lines": []
       },
       {
@@ -179,10 +75,31 @@
         "lines": []
       },
       {
-        "name": "NO_ERROR",
+        "name": "BETWEEN",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 19,
+        "value": 6,
+        "lines": []
+      },
+      {
+        "name": "NOT_BETWEEN",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 7,
+        "lines": []
+      },
+      {
+        "name": "DUPLICATE",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 8,
+        "lines": []
+      },
+      {
+        "name": "UNIQUE",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 9,
         "lines": []
       },
       {
@@ -193,6 +110,13 @@
         "lines": []
       },
       {
+        "name": "BOTTOM_N_ELEMENTS",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 11,
+        "lines": []
+      },
+      {
         "name": "TOP_N_PERCENT",
         "type": "int",
         "value_type": "INTEGER",
@@ -200,10 +124,87 @@
         "lines": []
       },
       {
-        "name": "UNIQUE",
+        "name": "BOTTOM_N_PERCENT",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 9,
+        "value": 13,
+        "lines": []
+      },
+      {
+        "name": "ABOVE_AVERAGE",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 14,
+        "lines": []
+      },
+      {
+        "name": "BELOW_AVERAGE",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 15,
+        "lines": []
+      },
+      {
+        "name": "ABOVE_EQUAL_AVERAGE",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 16,
+        "lines": []
+      },
+      {
+        "name": "BELOW_EQUAL_AVERAGE",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 17,
+        "lines": []
+      },
+      {
+        "name": "ERROR",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 18,
+        "lines": []
+      },
+      {
+        "name": "NO_ERROR",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 19,
+        "lines": []
+      },
+      {
+        "name": "BEGINS_WITH",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 20,
+        "lines": []
+      },
+      {
+        "name": "ENDS_WITH",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 21,
+        "lines": []
+      },
+      {
+        "name": "CONTAINS",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 22,
+        "lines": []
+      },
+      {
+        "name": "NOT_CONTAINS",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 23,
+        "lines": []
+      },
+      {
+        "name": "EXPRESSION",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 24,
         "lines": []
       }
     ]

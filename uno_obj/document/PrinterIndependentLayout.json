@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "PrinterIndependentLayout",
   "type": "const",
   "namespace": "com.sun.star.document",
   "parser_args": {
-    "sort": false
+    "sort": false,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "hex": false,
@@ -47,6 +48,15 @@
         ]
       },
       {
+        "name": "LOW_RESOLUTION",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 2,
+        "lines": [
+          "use printer-independent metrics for layout, assuming a generic 600dpi printer"
+        ]
+      },
+      {
         "name": "ENABLED",
         "type": "int",
         "value_type": "CONST",
@@ -60,15 +70,6 @@
         "value": 3,
         "lines": [
           "use printer-independent metrics for layout, assuming a generic high-resolution printer (4800dpi)"
-        ]
-      },
-      {
-        "name": "LOW_RESOLUTION",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 2,
-        "lines": [
-          "use printer-independent metrics for layout, assuming a generic 600dpi printer"
         ]
       }
     ]

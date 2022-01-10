@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "ReferenceFlags",
   "type": "const",
   "namespace": "com.sun.star.sheet",
   "parser_args": {
-    "sort": false
+    "sort": false,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "hex": false,
@@ -36,15 +37,6 @@
     ],
     "items": [
       {
-        "name": "COLUMN_DELETED",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 2,
-        "lines": [
-          "marks a deleted column reference."
-        ]
-      },
-      {
         "name": "COLUMN_RELATIVE",
         "type": "int",
         "value_type": "INTEGER",
@@ -54,21 +46,12 @@
         ]
       },
       {
-        "name": "RELATIVE_NAME",
+        "name": "COLUMN_DELETED",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 128,
+        "value": 2,
         "lines": [
-          "marks a reference from a relative range name."
-        ]
-      },
-      {
-        "name": "ROW_DELETED",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 8,
-        "lines": [
-          "marks a deleted row reference."
+          "marks a deleted column reference."
         ]
       },
       {
@@ -81,12 +64,21 @@
         ]
       },
       {
-        "name": "SHEET_3D",
+        "name": "ROW_DELETED",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 64,
+        "value": 8,
         "lines": [
-          "selects a 3D sheet reference."
+          "marks a deleted row reference."
+        ]
+      },
+      {
+        "name": "SHEET_RELATIVE",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 16,
+        "lines": [
+          "selects a relative sheet reference."
         ]
       },
       {
@@ -99,12 +91,21 @@
         ]
       },
       {
-        "name": "SHEET_RELATIVE",
+        "name": "SHEET_3D",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 16,
+        "value": 64,
         "lines": [
-          "selects a relative sheet reference."
+          "selects a 3D sheet reference."
+        ]
+      },
+      {
+        "name": "RELATIVE_NAME",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 128,
+        "lines": [
+          "marks a reference from a relative range name."
         ]
       }
     ]

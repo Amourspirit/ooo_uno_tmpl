@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "FrameSearchFlag",
   "type": "const",
   "namespace": "com.sun.star.frame",
   "parser_args": {
-    "sort": false
+    "sort": false,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "hex": false,
@@ -36,15 +37,6 @@
     ],
     "items": [
       {
-        "name": "ALL",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 23,
-        "lines": [
-          "includes all frames except frames in other tasks sub trees but doesn't create any new frame"
-        ]
-      },
-      {
         "name": "AUTO",
         "type": "int",
         "value_type": "INTEGER",
@@ -53,6 +45,24 @@
           "no longer supported",
           "",
           "Using of this flag will do nothing. Use right combination of other flags instead of this one."
+        ]
+      },
+      {
+        "name": "PARENT",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 1,
+        "lines": [
+          "allows search on the parent frames"
+        ]
+      },
+      {
+        "name": "SELF",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 2,
+        "lines": [
+          "includes the start frame himself"
         ]
       },
       {
@@ -76,33 +86,6 @@
         ]
       },
       {
-        "name": "GLOBAL",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 55,
-        "lines": [
-          "searches in the whole hierarchy of frames but doesn't create any new frame"
-        ]
-      },
-      {
-        "name": "PARENT",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 1,
-        "lines": [
-          "allows search on the parent frames"
-        ]
-      },
-      {
-        "name": "SELF",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 2,
-        "lines": [
-          "includes the start frame himself"
-        ]
-      },
-      {
         "name": "SIBLINGS",
         "type": "int",
         "value_type": "INTEGER",
@@ -122,6 +105,24 @@
           "allow the search outside the current sub task tree of the whole possible frame tree",
           "",
           "If this flag isn't present, any search from bottom to top has to stop, if a top frame will be reached. It doesn't influence a search from top to bottom. But it can be used at the root of the frame tree to search on direct children of it only. Because the direct children of the root node are the root's of the task sub trees, which are top frames too. Instead of using the CHILDREN flag there, it's possible so to suppress a deeper search so."
+        ]
+      },
+      {
+        "name": "ALL",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 23,
+        "lines": [
+          "includes all frames except frames in other tasks sub trees but doesn't create any new frame"
+        ]
+      },
+      {
+        "name": "GLOBAL",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 55,
+        "lines": [
+          "searches in the whole hierarchy of frames but doesn't create any new frame"
         ]
       }
     ]

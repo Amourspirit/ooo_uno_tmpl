@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "IndexType",
   "type": "const",
   "namespace": "com.sun.star.sdbc",
   "parser_args": {
-    "sort": false
+    "sort": false,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "hex": false,
@@ -33,6 +34,17 @@
       "indicates the type of index."
     ],
     "items": [
+      {
+        "name": "STATISTIC",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 0,
+        "lines": [
+          "A possible value for column TYPE in the com.sun.star.sdbc.XResultSet object returned by the method com.sun.star.sdbc.XDatabaseMetaData.getIndexInfo().",
+          "",
+          "Identifies table statistics that are returned in conjunction with a table's index description."
+        ]
+      },
       {
         "name": "CLUSTERED",
         "type": "int",
@@ -64,17 +76,6 @@
           "A possible value for column TYPE in the com.sun.star.sdbc.XResultSet object returned by the method com.sun.star.sdbc.XDatabaseMetaData.getIndexInfo().",
           "",
           "Indicates that this table index is not a clustered index, a hashed index, or table statistics; it is something other than these."
-        ]
-      },
-      {
-        "name": "STATISTIC",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 0,
-        "lines": [
-          "A possible value for column TYPE in the com.sun.star.sdbc.XResultSet object returned by the method com.sun.star.sdbc.XDatabaseMetaData.getIndexInfo().",
-          "",
-          "Identifies table statistics that are returned in conjunction with a table's index description."
         ]
       }
     ]

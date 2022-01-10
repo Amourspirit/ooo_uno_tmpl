@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "ItemStyle",
   "type": "const",
   "namespace": "com.sun.star.ui",
   "parser_args": {
-    "sort": false
+    "sort": false,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "hex": false,
@@ -43,17 +44,6 @@
     ],
     "items": [
       {
-        "name": "ALIGN_CENTER",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 2,
-        "lines": [
-          "specifies how the output of the item is aligned in the bounding box of the user interface element.",
-          "",
-          "This style is only valid for an item which describes a statusbar item. Draw item with a centered aligned output."
-        ]
-      },
-      {
         "name": "ALIGN_LEFT",
         "type": "int",
         "value_type": "INTEGER",
@@ -62,6 +52,17 @@
           "specifies how the output of the item is aligned in the bounding box of the user interface element.",
           "",
           "This style is only valid for an item which describes a statusbar item. Draw item with a left aligned output."
+        ]
+      },
+      {
+        "name": "ALIGN_CENTER",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 2,
+        "lines": [
+          "specifies how the output of the item is aligned in the bounding box of the user interface element.",
+          "",
+          "This style is only valid for an item which describes a statusbar item. Draw item with a centered aligned output."
         ]
       },
       {
@@ -76,25 +77,14 @@
         ]
       },
       {
-        "name": "AUTO_SIZE",
+        "name": "DRAW_OUT3D",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 32,
-        "lines": [
-          "specifies whether or not the size of the item is set automatically by the parent user interface element.",
-          "",
-          "This style is only valid if the item describes a toolbar or statusbar item."
-        ]
-      },
-      {
-        "name": "DRAW_FLAT",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 12,
+        "value": 4,
         "lines": [
           "specifies how the implementation should draw the item.",
           "",
-          "This style is only valid for an item which describes a statusbar item. Draw item without an 3D effect."
+          "This style is only valid for an item which describes a statusbar item. Draw item with an embossed 3D effect."
         ]
       },
       {
@@ -109,36 +99,45 @@
         ]
       },
       {
-        "name": "DRAW_OUT3D",
+        "name": "DRAW_FLAT",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 4,
+        "value": 12,
         "lines": [
           "specifies how the implementation should draw the item.",
           "",
-          "This style is only valid for an item which describes a statusbar item. Draw item with an embossed 3D effect."
+          "This style is only valid for an item which describes a statusbar item. Draw item without an 3D effect."
         ]
       },
       {
-        "name": "DROPDOWN_ONLY",
+        "name": "OWNER_DRAW",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 1024,
+        "value": 16,
         "lines": [
-          "indicates that the item only supports a dropdown menu or toolbar for additional functions.",
+          "specifies whether or not an item is displayed using an external function.",
           "",
-          "There is no function on the button itself.",
-          "",
-          "This style is only valid if the item describes a toolbar item."
+          "This style is only valid if the item describes a statusbar item."
         ]
       },
       {
-        "name": "DROP_DOWN",
+        "name": "AUTO_SIZE",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 256,
+        "value": 32,
         "lines": [
-          "specifies that the item supports a dropdown menu or toolbar for additional functions.",
+          "specifies whether or not the size of the item is set automatically by the parent user interface element.",
+          "",
+          "This style is only valid if the item describes a toolbar or statusbar item."
+        ]
+      },
+      {
+        "name": "RADIO_CHECK",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 64,
+        "lines": [
+          "determines whether the item unchecks neighbor entries which have also this style set.",
           "",
           "This style is only valid if the item describes a toolbar item."
         ]
@@ -157,36 +156,12 @@
         ]
       },
       {
-        "name": "MANDATORY",
+        "name": "DROP_DOWN",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 4096,
+        "value": 256,
         "lines": [
-          "marks always visible element which can not be removed when statusbar width is not sufficient.",
-          "",
-          "**since**",
-          "",
-          "    LibreOffice 6.1"
-        ]
-      },
-      {
-        "name": "OWNER_DRAW",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 16,
-        "lines": [
-          "specifies whether or not an item is displayed using an external function.",
-          "",
-          "This style is only valid if the item describes a statusbar item."
-        ]
-      },
-      {
-        "name": "RADIO_CHECK",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 64,
-        "lines": [
-          "determines whether the item unchecks neighbor entries which have also this style set.",
+          "specifies that the item supports a dropdown menu or toolbar for additional functions.",
           "",
           "This style is only valid if the item describes a toolbar item."
         ]
@@ -203,6 +178,19 @@
         ]
       },
       {
+        "name": "DROPDOWN_ONLY",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 1024,
+        "lines": [
+          "indicates that the item only supports a dropdown menu or toolbar for additional functions.",
+          "",
+          "There is no function on the button itself.",
+          "",
+          "This style is only valid if the item describes a toolbar item."
+        ]
+      },
+      {
         "name": "TEXT",
         "type": "int",
         "value_type": "INTEGER",
@@ -211,6 +199,19 @@
           "indicates if icon, text or text+icon is displayed for the item.",
           "",
           "This style can be used for custom toolbars and menus, in a custom toolbar an item's Style setting can used to override the toolbar container setting, the style can be bitwise OR-ed with com.sun.star.ui.ItemStyle.ICON to define text, text+icon or icon only is to be displayed. Similarly for menu items, an items Style can override the application setting to display either text or icon (note: for menu an icon only setting interpreted as icon+text)"
+        ]
+      },
+      {
+        "name": "MANDATORY",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 4096,
+        "lines": [
+          "marks always visible element which can not be removed when statusbar width is not sufficient.",
+          "",
+          "**since**",
+          "",
+          "    LibreOffice 6.1"
         ]
       }
     ]

@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "WindowAttribute",
   "type": "const",
   "namespace": "com.sun.star.awt",
   "parser_args": {
-    "sort": false
+    "sort": false,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "hex": false,
@@ -36,25 +37,12 @@
     ],
     "items": [
       {
-        "name": "BORDER",
+        "name": "SHOW",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 16,
+        "value": 1,
         "lines": [
-          "specifies that the window has visible borders.",
-          "",
-          "This applies only to top windows."
-        ]
-      },
-      {
-        "name": "CLOSEABLE",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 128,
-        "lines": [
-          "specifies that the window can be closed by the user.",
-          "",
-          "This applies only to top windows."
+          "specifies that the window is initially visible."
         ]
       },
       {
@@ -64,6 +52,17 @@
         "value": 2,
         "lines": [
           "specifies that the window fills the complete desktop area.",
+          "",
+          "This applies only to top windows."
+        ]
+      },
+      {
+        "name": "OPTIMUMSIZE",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 4,
+        "lines": [
+          "specifies that the window is optimum size.",
           "",
           "This applies only to top windows."
         ]
@@ -80,43 +79,14 @@
         ]
       },
       {
-        "name": "MOVEABLE",
+        "name": "BORDER",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 64,
+        "value": 16,
         "lines": [
-          "specifies that the window can be moved by the user.",
+          "specifies that the window has visible borders.",
           "",
           "This applies only to top windows."
-        ]
-      },
-      {
-        "name": "NODECORATION",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 512,
-        "lines": [
-          "specifies that the window should have no decoration."
-        ]
-      },
-      {
-        "name": "OPTIMUMSIZE",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 4,
-        "lines": [
-          "specifies that the window is optimum size.",
-          "",
-          "This applies only to top windows."
-        ]
-      },
-      {
-        "name": "SHOW",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 1,
-        "lines": [
-          "specifies that the window is initially visible."
         ]
       },
       {
@@ -131,6 +101,28 @@
         ]
       },
       {
+        "name": "MOVEABLE",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 64,
+        "lines": [
+          "specifies that the window can be moved by the user.",
+          "",
+          "This applies only to top windows."
+        ]
+      },
+      {
+        "name": "CLOSEABLE",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 128,
+        "lines": [
+          "specifies that the window can be closed by the user.",
+          "",
+          "This applies only to top windows."
+        ]
+      },
+      {
         "name": "SYSTEMDEPENDENT",
         "type": "int",
         "value_type": "INTEGER",
@@ -139,6 +131,15 @@
           "specifies that the window should support the com.sun.star.awt.XSystemDependentWindowPeer interface.",
           "",
           "This flag may be ignored, but in this case no system-dependent extension works."
+        ]
+      },
+      {
+        "name": "NODECORATION",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 512,
+        "lines": [
+          "specifies that the window should have no decoration."
         ]
       }
     ]

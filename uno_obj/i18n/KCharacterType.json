@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "KCharacterType",
   "type": "const",
   "namespace": "com.sun.star.i18n",
   "parser_args": {
-    "sort": false
+    "sort": false,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "hex": false,
@@ -36,33 +37,6 @@
     ],
     "items": [
       {
-        "name": "ALPHA",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 14,
-        "lines": [
-          "any alpha, ALPHA = UPPER | LOWER | TITLE_CASE"
-        ]
-      },
-      {
-        "name": "BASE_FORM",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 64,
-        "lines": [
-          "base form"
-        ]
-      },
-      {
-        "name": "CONTROL",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 16,
-        "lines": [
-          "control character"
-        ]
-      },
-      {
         "name": "DIGIT",
         "type": "int",
         "value_type": "INTEGER",
@@ -72,14 +46,12 @@
         ]
       },
       {
-        "name": "LETTER",
+        "name": "UPPER",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 128,
+        "value": 2,
         "lines": [
-          "any UnicodeType...._LETTER.",
-          "",
-          "Note that a LETTER must not necessarily be ALPHA"
+          "upper case alpha letter"
         ]
       },
       {
@@ -92,15 +64,6 @@
         ]
       },
       {
-        "name": "PRINTABLE",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 32,
-        "lines": [
-          "printable character"
-        ]
-      },
-      {
         "name": "TITLE_CASE",
         "type": "int",
         "value_type": "INTEGER",
@@ -110,12 +73,50 @@
         ]
       },
       {
-        "name": "UPPER",
+        "name": "ALPHA",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 2,
+        "value": 14,
         "lines": [
-          "upper case alpha letter"
+          "any alpha, ALPHA = UPPER | LOWER | TITLE_CASE"
+        ]
+      },
+      {
+        "name": "CONTROL",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 16,
+        "lines": [
+          "control character"
+        ]
+      },
+      {
+        "name": "PRINTABLE",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 32,
+        "lines": [
+          "printable character"
+        ]
+      },
+      {
+        "name": "BASE_FORM",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 64,
+        "lines": [
+          "base form"
+        ]
+      },
+      {
+        "name": "LETTER",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 128,
+        "lines": [
+          "any UnicodeType...._LETTER.",
+          "",
+          "Note that a LETTER must not necessarily be ALPHA"
         ]
       }
     ]

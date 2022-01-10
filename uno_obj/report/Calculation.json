@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "Calculation",
   "type": "const",
   "namespace": "com.sun.star.report",
   "parser_args": {
-    "sort": false
+    "sort": false,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "hex": false,
@@ -33,6 +34,15 @@
       "Specifies how to calculate a value."
     ],
     "items": [
+      {
+        "name": "NONE",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 0,
+        "lines": [
+          "returns the average of a field."
+        ]
+      },
       {
         "name": "AVERAGE",
         "type": "int",
@@ -112,15 +122,6 @@
         "value": 9,
         "lines": [
           "returns the most frequently returning value from the field."
-        ]
-      },
-      {
-        "name": "NONE",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 0,
-        "lines": [
-          "returns the average of a field."
         ]
       },
       {

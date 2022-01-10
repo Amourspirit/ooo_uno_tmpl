@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "CopyTableOperation",
   "type": "const",
   "namespace": "com.sun.star.sdb.application",
   "parser_args": {
-    "sort": false
+    "sort": false,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "hex": false,
@@ -38,15 +39,6 @@
     ],
     "items": [
       {
-        "name": "AppendData",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 3,
-        "lines": [
-          "specifies the wizard should append the source table's data to an existing table in the target database."
-        ]
-      },
-      {
         "name": "CopyDefinitionAndData",
         "type": "int",
         "value_type": "INTEGER",
@@ -73,6 +65,15 @@
           "specifies the wizard should create the source table as view",
           "",
           "This option is not available if the target database does not support views."
+        ]
+      },
+      {
+        "name": "AppendData",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 3,
+        "lines": [
+          "specifies the wizard should append the source table's data to an existing table in the target database."
         ]
       }
     ]

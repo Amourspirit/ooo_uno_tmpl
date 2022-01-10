@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "Privilege",
   "type": "const",
   "namespace": "com.sun.star.sdbcx",
   "parser_args": {
-    "sort": false
+    "sort": false,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "hex": false,
@@ -36,39 +37,12 @@
     ],
     "items": [
       {
-        "name": "ALTER",
+        "name": "SELECT",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 64,
+        "value": 1,
         "lines": [
-          "indicates that a user is allowed to alter an existing object."
-        ]
-      },
-      {
-        "name": "CREATE",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 32,
-        "lines": [
-          "indicates that a user is allowed to create a definition object."
-        ]
-      },
-      {
-        "name": "DELETE",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 8,
-        "lines": [
-          "indicates that a user is allowed to delete data."
-        ]
-      },
-      {
-        "name": "DROP",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 256,
-        "lines": [
-          "indicates that a user is allowed to drop a definition object."
+          "indicates that a user is allowed to read the data."
         ]
       },
       {
@@ -81,12 +55,48 @@
         ]
       },
       {
+        "name": "UPDATE",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 4,
+        "lines": [
+          "indicates that a user is allowed to update data."
+        ]
+      },
+      {
+        "name": "DELETE",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 8,
+        "lines": [
+          "indicates that a user is allowed to delete data."
+        ]
+      },
+      {
         "name": "READ",
         "type": "int",
         "value_type": "INTEGER",
         "value": 16,
         "lines": [
           "indicates that a user is allowed to read the structure of a definition object."
+        ]
+      },
+      {
+        "name": "CREATE",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 32,
+        "lines": [
+          "indicates that a user is allowed to create a definition object."
+        ]
+      },
+      {
+        "name": "ALTER",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 64,
+        "lines": [
+          "indicates that a user is allowed to alter an existing object."
         ]
       },
       {
@@ -99,21 +109,12 @@
         ]
       },
       {
-        "name": "SELECT",
+        "name": "DROP",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 1,
+        "value": 256,
         "lines": [
-          "indicates that a user is allowed to read the data."
-        ]
-      },
-      {
-        "name": "UPDATE",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 4,
-        "lines": [
-          "indicates that a user is allowed to update data."
+          "indicates that a user is allowed to drop a definition object."
         ]
       }
     ]

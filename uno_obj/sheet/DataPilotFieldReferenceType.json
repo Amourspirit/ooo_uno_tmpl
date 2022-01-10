@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "DataPilotFieldReferenceType",
   "type": "const",
   "namespace": "com.sun.star.sheet",
   "parser_args": {
-    "sort": false
+    "sort": false,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "hex": false,
@@ -34,25 +35,12 @@
     ],
     "items": [
       {
-        "name": "COLUMN_PERCENTAGE",
+        "name": "NONE",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 6,
+        "value": 0,
         "lines": [
-          "Same as com.sun.star.sheet.DataPilotFieldReferenceType.ROW_PERCENTAGE, but the total for the result's column is used."
-        ]
-      },
-      {
-        "name": "INDEX",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 8,
-        "lines": [
-          "The row and column totals and the grand total, following the same rules as above, are used to calculate the following expression.",
-          "",
-          "( original result * grand total ) / ( row total * column total )",
-          "",
-          "Division by zero results in an error. Otherwise, empty results remain empty."
+          "This type means, that the results in the data fields are displayed like they are."
         ]
       },
       {
@@ -111,12 +99,18 @@
         ]
       },
       {
-        "name": "NONE",
+        "name": "RUNNING_TOTAL",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 0,
+        "value": 4,
         "lines": [
-          "This type means, that the results in the data fields are displayed like they are."
+          "Each result is added to the sum of the results for preceding items in the base field, in the base field's sort order, and the total sum is shown.",
+          "",
+          "If details for one item in the base field are hidden, that item isn't included in calculating the sum, and results for that item are shown as error, to ensure consistency between details and subtotals for the following items.",
+          "",
+          "Results are always summed, even if a different summary function was used to get each result.",
+          "",
+          "Totals outside of the base field are shown as empty results."
         ]
       },
       {
@@ -137,18 +131,12 @@
         ]
       },
       {
-        "name": "RUNNING_TOTAL",
+        "name": "COLUMN_PERCENTAGE",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 4,
+        "value": 6,
         "lines": [
-          "Each result is added to the sum of the results for preceding items in the base field, in the base field's sort order, and the total sum is shown.",
-          "",
-          "If details for one item in the base field are hidden, that item isn't included in calculating the sum, and results for that item are shown as error, to ensure consistency between details and subtotals for the following items.",
-          "",
-          "Results are always summed, even if a different summary function was used to get each result.",
-          "",
-          "Totals outside of the base field are shown as empty results."
+          "Same as com.sun.star.sheet.DataPilotFieldReferenceType.ROW_PERCENTAGE, but the total for the result's column is used."
         ]
       },
       {
@@ -158,6 +146,19 @@
         "value": 7,
         "lines": [
           "Same as com.sun.star.sheet.DataPilotFieldReferenceType.ROW_PERCENTAGE, but the grand total for the result's data field is used."
+        ]
+      },
+      {
+        "name": "INDEX",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 8,
+        "lines": [
+          "The row and column totals and the grand total, following the same rules as above, are used to calculate the following expression.",
+          "",
+          "( original result * grand total ) / ( row total * column total )",
+          "",
+          "Division by zero results in an error. Otherwise, empty results remain empty."
         ]
       }
     ]

@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "SQLFilterOperator",
   "type": "const",
   "namespace": "com.sun.star.sdb",
   "parser_args": {
-    "sort": false
+    "sort": false,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "hex": false,
@@ -43,21 +44,12 @@
         ]
       },
       {
-        "name": "GREATER",
+        "name": "NOT_EQUAL",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 4,
+        "value": 2,
         "lines": [
-          "greater than"
-        ]
-      },
-      {
-        "name": "GREATER_EQUAL",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 6,
-        "lines": [
-          "greater or equal than"
+          "not equal to"
         ]
       },
       {
@@ -70,12 +62,30 @@
         ]
       },
       {
+        "name": "GREATER",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 4,
+        "lines": [
+          "greater than"
+        ]
+      },
+      {
         "name": "LESS_EQUAL",
         "type": "int",
         "value_type": "INTEGER",
         "value": 5,
         "lines": [
           "less or equal than"
+        ]
+      },
+      {
+        "name": "GREATER_EQUAL",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 6,
+        "lines": [
+          "greater or equal than"
         ]
       },
       {
@@ -88,15 +98,6 @@
         ]
       },
       {
-        "name": "NOT_EQUAL",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 2,
-        "lines": [
-          "not equal to"
-        ]
-      },
-      {
         "name": "NOT_LIKE",
         "type": "int",
         "value_type": "INTEGER",
@@ -106,21 +107,21 @@
         ]
       },
       {
-        "name": "NOT_SQLNULL",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 10,
-        "lines": [
-          "is not null"
-        ]
-      },
-      {
         "name": "SQLNULL",
         "type": "int",
         "value_type": "INTEGER",
         "value": 9,
         "lines": [
           "is null"
+        ]
+      },
+      {
+        "name": "NOT_SQLNULL",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 10,
+        "lines": [
+          "is not null"
         ]
       }
     ]

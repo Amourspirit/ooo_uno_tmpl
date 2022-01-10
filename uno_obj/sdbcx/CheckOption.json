@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "CheckOption",
   "type": "const",
   "namespace": "com.sun.star.sdbcx",
   "parser_args": {
-    "sort": false
+    "sort": false,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "hex": false,
@@ -34,6 +35,15 @@
     ],
     "items": [
       {
+        "name": "NONE",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 0,
+        "lines": [
+          "indicates that no value checking is applied during updates of view data."
+        ]
+      },
+      {
         "name": "CASCADE",
         "type": "int",
         "value_type": "INTEGER",
@@ -49,15 +59,6 @@
         "value": 3,
         "lines": [
           "indicates that the value checking is applied only for the view."
-        ]
-      },
-      {
-        "name": "NONE",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 0,
-        "lines": [
-          "indicates that no value checking is applied during updates of view data."
         ]
       }
     ]

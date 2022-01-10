@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "RenderingIntent",
   "type": "const",
   "namespace": "com.sun.star.rendering",
   "parser_args": {
-    "sort": false
+    "sort": false,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "hex": false,
@@ -40,17 +41,6 @@
     ],
     "items": [
       {
-        "name": "ABSOLUTE_COLORIMETRIC",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 3,
-        "lines": [
-          "The rendering intent that leaves colors that fall inside the destination gamut unchanged.",
-          "",
-          "Out of gamut colors are clipped. No scaling of colors to destination white point is performed. This intent aims to maintain color accuracy at the expense of preserving relationships between colors, and is useful for seeing how output will look on a non-neutral substrate."
-        ]
-      },
-      {
         "name": "PERCEPTUAL",
         "type": "int",
         "value_type": "INTEGER",
@@ -59,6 +49,17 @@
           "Also known as the image intent, this rendering intent aims to preserve the visual relationship between colors in a way that is perceived as natural to the human eye, although the color values themselves may change.",
           "",
           "This intent is most suitable for photographic images."
+        ]
+      },
+      {
+        "name": "SATURATION",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 1,
+        "lines": [
+          "The rendering intent for business graphics that maintains vivid color at the expense of accurate color.",
+          "",
+          "It scales the source gamut to the destination gamut but preserves relative saturation instead of hue, so when scaling to a smaller gamut, hues may shift. This rendering intent is primarily designed for business graphics, where bright saturated colors are more important than the exact relationship between colors (such as in a photographic image)."
         ]
       },
       {
@@ -71,14 +72,14 @@
         ]
       },
       {
-        "name": "SATURATION",
+        "name": "ABSOLUTE_COLORIMETRIC",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 1,
+        "value": 3,
         "lines": [
-          "The rendering intent for business graphics that maintains vivid color at the expense of accurate color.",
+          "The rendering intent that leaves colors that fall inside the destination gamut unchanged.",
           "",
-          "It scales the source gamut to the destination gamut but preserves relative saturation instead of hue, so when scaling to a smaller gamut, hues may shift. This rendering intent is primarily designed for business graphics, where bright saturated colors are more important than the exact relationship between colors (such as in a photographic image)."
+          "Out of gamut colors are clipped. No scaling of colors to destination white point is performed. This intent aims to maintain color accuracy at the expense of preserving relationships between colors, and is useful for seeing how output will look on a non-neutral substrate."
         ]
       }
     ]

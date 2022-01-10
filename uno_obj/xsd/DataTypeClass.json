@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "DataTypeClass",
   "type": "const",
   "namespace": "com.sun.star.xsd",
   "parser_args": {
-    "sort": false
+    "sort": false,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "hex": false,
@@ -34,6 +35,15 @@
     ],
     "items": [
       {
+        "name": "STRING",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 1,
+        "lines": [
+          "specifies an XSD compliant string type"
+        ]
+      },
+      {
         "name": "BOOLEAN",
         "type": "int",
         "value_type": "INTEGER",
@@ -43,30 +53,21 @@
         ]
       },
       {
-        "name": "DATE",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 9,
-        "lines": [
-          "specifies an XSD compliant date type"
-        ]
-      },
-      {
-        "name": "DATETIME",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 7,
-        "lines": [
-          "specifies an XSD compliant datetime type"
-        ]
-      },
-      {
         "name": "DECIMAL",
         "type": "int",
         "value_type": "INTEGER",
         "value": 3,
         "lines": [
           "specifies an XSD compliant decimal type"
+        ]
+      },
+      {
+        "name": "FLOAT",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 4,
+        "lines": [
+          "specifies an XSD compliant float type"
         ]
       },
       {
@@ -88,39 +89,12 @@
         ]
       },
       {
-        "name": "FLOAT",
+        "name": "DATETIME",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 4,
+        "value": 7,
         "lines": [
-          "specifies an XSD compliant float type"
-        ]
-      },
-      {
-        "name": "NOTATION",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 19,
-        "lines": [
-          "specifies an XSD compliant NOTATION type"
-        ]
-      },
-      {
-        "name": "QName",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 18,
-        "lines": [
-          "specifies an XSD compliant QName type"
-        ]
-      },
-      {
-        "name": "STRING",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 1,
-        "lines": [
-          "specifies an XSD compliant string type"
+          "specifies an XSD compliant datetime type"
         ]
       },
       {
@@ -133,21 +107,39 @@
         ]
       },
       {
-        "name": "anyURI",
+        "name": "DATE",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 17,
+        "value": 9,
         "lines": [
-          "specifies an XSD compliant anyURI type"
+          "specifies an XSD compliant date type"
         ]
       },
       {
-        "name": "base64Binary",
+        "name": "gYearMonth",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 16,
+        "value": 10,
         "lines": [
-          "specifies an XSD compliant base64Binary type"
+          "specifies an XSD compliant gYearMonth type"
+        ]
+      },
+      {
+        "name": "gYear",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 11,
+        "lines": [
+          "specifies an XSD compliant gYear type"
+        ]
+      },
+      {
+        "name": "gMonthDay",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 12,
+        "lines": [
+          "specifies an XSD compliant gMonthDay type"
         ]
       },
       {
@@ -169,39 +161,48 @@
         ]
       },
       {
-        "name": "gMonthDay",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 12,
-        "lines": [
-          "specifies an XSD compliant gMonthDay type"
-        ]
-      },
-      {
-        "name": "gYear",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 11,
-        "lines": [
-          "specifies an XSD compliant gYear type"
-        ]
-      },
-      {
-        "name": "gYearMonth",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 10,
-        "lines": [
-          "specifies an XSD compliant gYearMonth type"
-        ]
-      },
-      {
         "name": "hexBinary",
         "type": "int",
         "value_type": "INTEGER",
         "value": 15,
         "lines": [
           "specifies an XSD compliant hexBinary type"
+        ]
+      },
+      {
+        "name": "base64Binary",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 16,
+        "lines": [
+          "specifies an XSD compliant base64Binary type"
+        ]
+      },
+      {
+        "name": "anyURI",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 17,
+        "lines": [
+          "specifies an XSD compliant anyURI type"
+        ]
+      },
+      {
+        "name": "QName",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 18,
+        "lines": [
+          "specifies an XSD compliant QName type"
+        ]
+      },
+      {
+        "name": "NOTATION",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 19,
+        "lines": [
+          "specifies an XSD compliant NOTATION type"
         ]
       }
     ]

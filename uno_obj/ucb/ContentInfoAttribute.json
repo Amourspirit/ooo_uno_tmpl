@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "ContentInfoAttribute",
   "type": "const",
   "namespace": "com.sun.star.ucb",
   "parser_args": {
-    "sort": false
+    "sort": false,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "hex": false,
@@ -33,6 +34,15 @@
       "These are the possible values for ContentInfo.Attributes."
     ],
     "items": [
+      {
+        "name": "NONE",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 0,
+        "lines": [
+          "No extra attributes."
+        ]
+      },
       {
         "name": "INSERT_WITH_INPUTSTREAM",
         "type": "int",
@@ -73,15 +83,6 @@
           "The new content is of kind link.",
           "",
           "It will support the property \\\"TargetURL\\\" ( which identifies it as a link )."
-        ]
-      },
-      {
-        "name": "NONE",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 0,
-        "lines": [
-          "No extra attributes."
         ]
       }
     ]

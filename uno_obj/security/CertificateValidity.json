@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "CertificateValidity",
   "type": "const",
   "namespace": "com.sun.star.security",
   "parser_args": {
-    "sort": false
+    "sort": false,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "hex": false,
@@ -36,31 +37,11 @@
     ],
     "items": [
       {
-        "name": "CHAIN_INCOMPLETE",
+        "name": "VALID",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 131072,
-        "lines": [
-          "The certificate chain is incomplete."
-        ]
-      },
-      {
-        "name": "EXTENSION_INVALID",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 128,
-        "lines": [
-          "The certificate has invalid extensions."
-        ]
-      },
-      {
-        "name": "EXTENSION_UNKNOWN",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 256,
-        "lines": [
-          "The certificate has critical unknown extensions."
-        ]
+        "value": 0,
+        "lines": []
       },
       {
         "name": "INVALID",
@@ -72,30 +53,21 @@
         ]
       },
       {
-        "name": "ISSUER_INVALID",
+        "name": "UNTRUSTED",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 4096,
+        "value": 2,
         "lines": [
-          "The certificate issuer is invalid."
+          "The certificate itself is untrusted."
         ]
       },
       {
-        "name": "ISSUER_UNKNOWN",
+        "name": "TIME_INVALID",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 512,
+        "value": 4,
         "lines": [
-          "The certificate issuer is unknown."
-        ]
-      },
-      {
-        "name": "ISSUER_UNTRUSTED",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 1024,
-        "lines": [
-          "The certificate issuer is untrusted."
+          "The current time is not in the range of time for which the certificate is valid."
         ]
       },
       {
@@ -117,12 +89,66 @@
         ]
       },
       {
-        "name": "ROOT_INVALID",
+        "name": "UNKNOWN_REVOKATION",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 65536,
+        "value": 32,
         "lines": [
-          "The root certificate is invalid."
+          "The certificate revocation status is unknown."
+        ]
+      },
+      {
+        "name": "SIGNATURE_INVALID",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 64,
+        "lines": [
+          "The certificate signature is invalid."
+        ]
+      },
+      {
+        "name": "EXTENSION_INVALID",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 128,
+        "lines": [
+          "The certificate has invalid extensions."
+        ]
+      },
+      {
+        "name": "EXTENSION_UNKNOWN",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 256,
+        "lines": [
+          "The certificate has critical unknown extensions."
+        ]
+      },
+      {
+        "name": "ISSUER_UNKNOWN",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 512,
+        "lines": [
+          "The certificate issuer is unknown."
+        ]
+      },
+      {
+        "name": "ISSUER_UNTRUSTED",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 1024,
+        "lines": [
+          "The certificate issuer is untrusted."
+        ]
+      },
+      {
+        "name": "ISSUER_INVALID",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 4096,
+        "lines": [
+          "The certificate issuer is invalid."
         ]
       },
       {
@@ -144,47 +170,22 @@
         ]
       },
       {
-        "name": "SIGNATURE_INVALID",
+        "name": "ROOT_INVALID",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 64,
+        "value": 65536,
         "lines": [
-          "The certificate signature is invalid."
+          "The root certificate is invalid."
         ]
       },
       {
-        "name": "TIME_INVALID",
+        "name": "CHAIN_INCOMPLETE",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 4,
+        "value": 131072,
         "lines": [
-          "The current time is not in the range of time for which the certificate is valid."
+          "The certificate chain is incomplete."
         ]
-      },
-      {
-        "name": "UNKNOWN_REVOKATION",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 32,
-        "lines": [
-          "The certificate revocation status is unknown."
-        ]
-      },
-      {
-        "name": "UNTRUSTED",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 2,
-        "lines": [
-          "The certificate itself is untrusted."
-        ]
-      },
-      {
-        "name": "VALID",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 0,
-        "lines": []
       }
     ]
   }

@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "CompositionType",
   "type": "const",
   "namespace": "com.sun.star.sdb.tools",
   "parser_args": {
-    "sort": false
+    "sort": false,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "hex": false,
@@ -38,21 +39,12 @@
     ],
     "items": [
       {
-        "name": "Complete",
+        "name": "ForTableDefinitions",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 5,
+        "value": 0,
         "lines": [
-          "specifies complete composition of a table name, including catalog and schema (if present), disregarding any database support for catalog and schema in any particular statements"
-        ]
-      },
-      {
-        "name": "ForDataManipulation",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 2,
-        "lines": [
-          "specifies composition of a name to be used in data manipulation"
+          "specifies composition of a name to be used in table definitions"
         ]
       },
       {
@@ -65,12 +57,12 @@
         ]
       },
       {
-        "name": "ForPrivilegeDefinitions",
+        "name": "ForDataManipulation",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 4,
+        "value": 2,
         "lines": [
-          "specifies composition of a name to be used in privilege definitions"
+          "specifies composition of a name to be used in data manipulation"
         ]
       },
       {
@@ -83,12 +75,21 @@
         ]
       },
       {
-        "name": "ForTableDefinitions",
+        "name": "ForPrivilegeDefinitions",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 0,
+        "value": 4,
         "lines": [
-          "specifies composition of a name to be used in table definitions"
+          "specifies composition of a name to be used in privilege definitions"
+        ]
+      },
+      {
+        "name": "Complete",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 5,
+        "lines": [
+          "specifies complete composition of a table name, including catalog and schema (if present), disregarding any database support for catalog and schema in any particular statements"
         ]
       }
     ]

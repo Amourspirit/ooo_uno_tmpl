@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "InterpolationMode",
   "type": "const",
   "namespace": "com.sun.star.rendering",
   "parser_args": {
-    "sort": false
+    "sort": false,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "hex": false,
@@ -40,6 +41,39 @@
     ],
     "items": [
       {
+        "name": "NEAREST_NEIGHBOR",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 1,
+        "lines": [
+          "Perform a nearest neighbor interpolation.",
+          "",
+          "That is, when interpolating between two values v0 and v1, positioned at t0 and t1, take the one which has the closest t coordinate."
+        ]
+      },
+      {
+        "name": "LINEAR",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 2,
+        "lines": [
+          "Perform a linear interpolation.",
+          "",
+          "That is, when interpolating at position t between two values v0 and v1, positioned at t0 and t1, take the sum of v0 weighted with (t-t0) and v1 weighted with (t1-t)."
+        ]
+      },
+      {
+        "name": "CUBIC",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 3,
+        "lines": [
+          "Perform a cubic interpolation.",
+          "",
+          "That is, when interpolating at position t, take the four closest data points v0, v1, v2, and v3, fit a cubic curve through them, and take the interpolated value from this cubic curve."
+        ]
+      },
+      {
         "name": "BEZIERSPLINE3",
         "type": "int",
         "value_type": "INTEGER",
@@ -59,39 +93,6 @@
           "Perform a quadric Bezier spline interpolation.",
           "",
           "That is, when interpolating at position t, take the four closest data points v0, v1, v2, and v3, fit a quadric Bezier spline through them, and take the interpolated value from this quadric curve."
-        ]
-      },
-      {
-        "name": "CUBIC",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 3,
-        "lines": [
-          "Perform a cubic interpolation.",
-          "",
-          "That is, when interpolating at position t, take the four closest data points v0, v1, v2, and v3, fit a cubic curve through them, and take the interpolated value from this cubic curve."
-        ]
-      },
-      {
-        "name": "LINEAR",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 2,
-        "lines": [
-          "Perform a linear interpolation.",
-          "",
-          "That is, when interpolating at position t between two values v0 and v1, positioned at t0 and t1, take the sum of v0 weighted with (t-t0) and v1 weighted with (t1-t)."
-        ]
-      },
-      {
-        "name": "NEAREST_NEIGHBOR",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 1,
-        "lines": [
-          "Perform a nearest neighbor interpolation.",
-          "",
-          "That is, when interpolating between two values v0 and v1, positioned at t0 and t1, take the one which has the closest t coordinate."
         ]
       }
     ]

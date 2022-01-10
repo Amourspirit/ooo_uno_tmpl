@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "BorderLineStyle",
   "type": "const",
   "namespace": "com.sun.star.table",
   "parser_args": {
-    "sort": false
+    "sort": false,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "hex": false,
@@ -32,39 +33,21 @@
     "desc": [],
     "items": [
       {
-        "name": "BORDER_LINE_STYLE_MAX",
+        "name": "NONE",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 17,
+        "value": 32767,
         "lines": [
-          "Maximum valid border line style value."
+          "No border line."
         ]
       },
       {
-        "name": "DASHED",
+        "name": "SOLID",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 2,
+        "value": 0,
         "lines": [
-          "Dashed border line."
-        ]
-      },
-      {
-        "name": "DASH_DOT",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 16,
-        "lines": [
-          "Line consisting of a repetition of one dash and one dot."
-        ]
-      },
-      {
-        "name": "DASH_DOT_DOT",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 17,
-        "lines": [
-          "Line consisting of a repetition of one dash and 2 dots."
+          "Solid border line."
         ]
       },
       {
@@ -74,6 +57,15 @@
         "value": 1,
         "lines": [
           "Dotted border line."
+        ]
+      },
+      {
+        "name": "DASHED",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 2,
+        "lines": [
+          "Dashed border line."
         ]
       },
       {
@@ -88,12 +80,57 @@
         ]
       },
       {
-        "name": "DOUBLE_THIN",
+        "name": "THINTHICK_SMALLGAP",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 15,
+        "value": 4,
         "lines": [
-          "Double border line consisting of two fixed thin lines separated by a variable gap."
+          "Double border line with a thin line outside and a thick line inside separated by a small gap."
+        ]
+      },
+      {
+        "name": "THINTHICK_MEDIUMGAP",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 5,
+        "lines": [
+          "Double border line with a thin line outside and a thick line inside separated by a medium gap."
+        ]
+      },
+      {
+        "name": "THINTHICK_LARGEGAP",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 6,
+        "lines": [
+          "Double border line with a thin line outside and a thick line inside separated by a large gap."
+        ]
+      },
+      {
+        "name": "THICKTHIN_SMALLGAP",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 7,
+        "lines": [
+          "Double border line with a thick line outside and a thin line inside separated by a small gap."
+        ]
+      },
+      {
+        "name": "THICKTHIN_MEDIUMGAP",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 8,
+        "lines": [
+          "Double border line with a thick line outside and a thin line inside separated by a medium gap."
+        ]
+      },
+      {
+        "name": "THICKTHIN_LARGEGAP",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 9,
+        "lines": [
+          "Double border line with a thick line outside and a thin line inside separated by a large gap."
         ]
       },
       {
@@ -115,12 +152,12 @@
         ]
       },
       {
-        "name": "FINE_DASHED",
+        "name": "OUTSET",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 14,
+        "value": 12,
         "lines": [
-          "Finely dashed border line."
+          "Outset border line."
         ]
       },
       {
@@ -133,84 +170,48 @@
         ]
       },
       {
-        "name": "NONE",
+        "name": "FINE_DASHED",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 32767,
+        "value": 14,
         "lines": [
-          "No border line."
+          "Finely dashed border line."
         ]
       },
       {
-        "name": "OUTSET",
+        "name": "DOUBLE_THIN",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 12,
+        "value": 15,
         "lines": [
-          "Outset border line."
+          "Double border line consisting of two fixed thin lines separated by a variable gap."
         ]
       },
       {
-        "name": "SOLID",
+        "name": "DASH_DOT",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 0,
+        "value": 16,
         "lines": [
-          "Solid border line."
+          "Line consisting of a repetition of one dash and one dot."
         ]
       },
       {
-        "name": "THICKTHIN_LARGEGAP",
+        "name": "DASH_DOT_DOT",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 9,
+        "value": 17,
         "lines": [
-          "Double border line with a thick line outside and a thin line inside separated by a large gap."
+          "Line consisting of a repetition of one dash and 2 dots."
         ]
       },
       {
-        "name": "THICKTHIN_MEDIUMGAP",
+        "name": "BORDER_LINE_STYLE_MAX",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 8,
+        "value": 17,
         "lines": [
-          "Double border line with a thick line outside and a thin line inside separated by a medium gap."
-        ]
-      },
-      {
-        "name": "THICKTHIN_SMALLGAP",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 7,
-        "lines": [
-          "Double border line with a thick line outside and a thin line inside separated by a small gap."
-        ]
-      },
-      {
-        "name": "THINTHICK_LARGEGAP",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 6,
-        "lines": [
-          "Double border line with a thin line outside and a thick line inside separated by a large gap."
-        ]
-      },
-      {
-        "name": "THINTHICK_MEDIUMGAP",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 5,
-        "lines": [
-          "Double border line with a thin line outside and a thick line inside separated by a medium gap."
-        ]
-      },
-      {
-        "name": "THINTHICK_SMALLGAP",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 4,
-        "lines": [
-          "Double border line with a thin line outside and a thick line inside separated by a small gap."
+          "Maximum valid border line style value."
         ]
       }
     ]

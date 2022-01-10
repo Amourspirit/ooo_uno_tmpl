@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "WritingMode2",
   "type": "const",
   "namespace": "com.sun.star.text",
   "parser_args": {
-    "sort": false
+    "sort": false,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "hex": false,
@@ -40,30 +41,6 @@
     ],
     "items": [
       {
-        "name": "BT_LR",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 5,
-        "lines": [
-          "text within a line is written bottom-to-top.",
-          "",
-          "Lines and blocks are placed left-to-right.",
-          "",
-          "**since**",
-          "",
-          "    LibreOffice 6.3"
-        ]
-      },
-      {
-        "name": "CONTEXT",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 4,
-        "lines": [
-          "obtain actual writing mode from the context of the object."
-        ]
-      },
-      {
         "name": "LR_TB",
         "type": "int",
         "value_type": "INTEGER",
@@ -74,17 +51,6 @@
           "Lines and blocks are placed top-to-bottom.",
           "",
           "Typically, this is the writing mode for normal \\\"alphabetic\\\" text."
-        ]
-      },
-      {
-        "name": "PAGE",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 4,
-        "lines": [
-          "obtain writing mode from the current page.",
-          "",
-          "May not be used in page styles."
         ]
       },
       {
@@ -101,6 +67,19 @@
         ]
       },
       {
+        "name": "TB_RL",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 2,
+        "lines": [
+          "text within a line is written top-to-bottom.",
+          "",
+          "Lines and blocks are placed right-to-left.",
+          "",
+          "Typically, this writing mode is used in Chinese and Japanese text."
+        ]
+      },
+      {
         "name": "TB_LR",
         "type": "int",
         "value_type": "INTEGER",
@@ -114,16 +93,38 @@
         ]
       },
       {
-        "name": "TB_RL",
+        "name": "PAGE",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 2,
+        "value": 4,
         "lines": [
-          "text within a line is written top-to-bottom.",
+          "obtain writing mode from the current page.",
           "",
-          "Lines and blocks are placed right-to-left.",
+          "May not be used in page styles."
+        ]
+      },
+      {
+        "name": "CONTEXT",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 4,
+        "lines": [
+          "obtain actual writing mode from the context of the object."
+        ]
+      },
+      {
+        "name": "BT_LR",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 5,
+        "lines": [
+          "text within a line is written bottom-to-top.",
           "",
-          "Typically, this writing mode is used in Chinese and Japanese text."
+          "Lines and blocks are placed left-to-right.",
+          "",
+          "**since**",
+          "",
+          "    LibreOffice 6.3"
         ]
       }
     ]

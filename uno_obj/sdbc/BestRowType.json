@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "BestRowType",
   "type": "const",
   "namespace": "com.sun.star.sdbc",
   "parser_args": {
-    "sort": false
+    "sort": false,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "hex": false,
@@ -34,6 +35,17 @@
     ],
     "items": [
       {
+        "name": "UNKNOWN",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 0,
+        "lines": [
+          "indicates that the best row identifier may or may not be a pseudo-column.",
+          "",
+          "A possible value for the column PSEUDO_COLUMN in the com.sun.star.sdbc.XResultSet object returned by the method XDatabaseMetaData.getBestRowIdentifier()."
+        ]
+      },
+      {
         "name": "NOT_PSEUDO",
         "type": "int",
         "value_type": "INTEGER",
@@ -51,17 +63,6 @@
         "value": 2,
         "lines": [
           "indicates that the best row identifier is a pseudo-column.",
-          "",
-          "A possible value for the column PSEUDO_COLUMN in the com.sun.star.sdbc.XResultSet object returned by the method XDatabaseMetaData.getBestRowIdentifier()."
-        ]
-      },
-      {
-        "name": "UNKNOWN",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 0,
-        "lines": [
-          "indicates that the best row identifier may or may not be a pseudo-column.",
           "",
           "A possible value for the column PSEUDO_COLUMN in the com.sun.star.sdbc.XResultSet object returned by the method XDatabaseMetaData.getBestRowIdentifier()."
         ]

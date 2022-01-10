@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "ReferenceFieldPart",
   "type": "const",
   "namespace": "com.sun.star.text",
   "parser_args": {
-    "sort": false
+    "sort": false,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "hex": false,
@@ -38,14 +39,12 @@
     ],
     "items": [
       {
-        "name": "CATEGORY_AND_NUMBER",
+        "name": "PAGE",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 5,
+        "value": 0,
         "lines": [
-          "The category and the number of a caption is displayed.",
-          "",
-          "This option is only valid if the source of the reference is a sequence field."
+          "The page number is displayed using Arabic numbers."
         ]
       },
       {
@@ -58,54 +57,43 @@
         ]
       },
       {
-        "name": "NUMBER",
+        "name": "TEXT",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 8,
+        "value": 2,
         "lines": [
-          "The numbering label and depending of the reference field context numbering labels of superior list levels of the reference are displayed.",
+          "The reference text is displayed.",
           "",
-          "This option is only valid, if the source of the reference is a bookmark or a set reference.",
-          "",
-          "The contents of the list label of the paragraph, at which the bookmark respectively the set reference starts - named \\\"referenced item\\\" in the following - is displayed. To unambiguous identify the referenced item at the document position of the reference text field, the content of all needed superior levels are added in front. The needed superior levels of the referenced item are the ones, which differ from the superior levels of the document position of the reference text field. Additional condition, which suppresses the addition of a superior level's list label content: The list label of the referenced item can already contain numbers of a superior levels. Assume X be the level of the most superior level, then no list label content of superior levels greater or equal than X are added. If the referenced item isn't numbered, nothing is displayed.",
-          "",
-          "**since**",
-          "",
-          "    OOo 3.0"
+          "If the source of the reference is a sequence field, then the complete text of the paragraph is displayed. This is useful to reference to captions."
         ]
       },
       {
-        "name": "NUMBER_FULL_CONTEXT",
+        "name": "UP_DOWN",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 10,
+        "value": 3,
         "lines": [
-          "The numbering label and numbering labels of superior list levels of the reference are displayed.",
-          "",
-          "This option is only valid, if the source of the reference is a bookmark or a set reference.",
-          "",
-          "The contents of the list label of the paragraph, at which the bookmark respectively the set reference starts - named \\\"referenced item\\\" in the following - is displayed and the contents of all list labels of superior levels are added in front of it. Additional condition, which suppresses the addition of a superior level's list label content: The list label of the referenced item can already contain numbers of a superior levels. Assume X be the level of the most superior level, then no list label content of superior levels greater or equal than X are added. If the referenced item is numbered nothing is displayed.",
-          "",
-          "**since**",
-          "",
-          "    OOo 3.0"
+          "The reference is displayed as one of the (localized) words, \\\"above\\\" or \\\"below\\\"."
         ]
       },
       {
-        "name": "NUMBER_NO_CONTEXT",
+        "name": "PAGE_DESC",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 9,
+        "value": 4,
         "lines": [
-          "The numbering label of the reference is displayed.",
+          "The page number is displayed using the numbering type defined in the page style of the reference position."
+        ]
+      },
+      {
+        "name": "CATEGORY_AND_NUMBER",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 5,
+        "lines": [
+          "The category and the number of a caption is displayed.",
           "",
-          "This option is only valid, if the source of the reference is a bookmark or a set reference.",
-          "",
-          "The contents of the list label of the paragraph, at which the bookmark respectively the set reference starts, is displayed. If this paragraph isn't numbered, nothing is displayed.",
-          "",
-          "**since**",
-          "",
-          "    OOo 3.0"
+          "This option is only valid if the source of the reference is a sequence field."
         ]
       },
       {
@@ -131,41 +119,54 @@
         ]
       },
       {
-        "name": "PAGE",
+        "name": "NUMBER",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 0,
+        "value": 8,
         "lines": [
-          "The page number is displayed using Arabic numbers."
-        ]
-      },
-      {
-        "name": "PAGE_DESC",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 4,
-        "lines": [
-          "The page number is displayed using the numbering type defined in the page style of the reference position."
-        ]
-      },
-      {
-        "name": "TEXT",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 2,
-        "lines": [
-          "The reference text is displayed.",
+          "The numbering label and depending of the reference field context numbering labels of superior list levels of the reference are displayed.",
           "",
-          "If the source of the reference is a sequence field, then the complete text of the paragraph is displayed. This is useful to reference to captions."
+          "This option is only valid, if the source of the reference is a bookmark or a set reference.",
+          "",
+          "The contents of the list label of the paragraph, at which the bookmark respectively the set reference starts - named \\\"referenced item\\\" in the following - is displayed. To unambiguous identify the referenced item at the document position of the reference text field, the content of all needed superior levels are added in front. The needed superior levels of the referenced item are the ones, which differ from the superior levels of the document position of the reference text field. Additional condition, which suppresses the addition of a superior level's list label content: The list label of the referenced item can already contain numbers of a superior levels. Assume X be the level of the most superior level, then no list label content of superior levels greater or equal than X are added. If the referenced item isn't numbered, nothing is displayed.",
+          "",
+          "**since**",
+          "",
+          "    OOo 3.0"
         ]
       },
       {
-        "name": "UP_DOWN",
+        "name": "NUMBER_NO_CONTEXT",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 3,
+        "value": 9,
         "lines": [
-          "The reference is displayed as one of the (localized) words, \\\"above\\\" or \\\"below\\\"."
+          "The numbering label of the reference is displayed.",
+          "",
+          "This option is only valid, if the source of the reference is a bookmark or a set reference.",
+          "",
+          "The contents of the list label of the paragraph, at which the bookmark respectively the set reference starts, is displayed. If this paragraph isn't numbered, nothing is displayed.",
+          "",
+          "**since**",
+          "",
+          "    OOo 3.0"
+        ]
+      },
+      {
+        "name": "NUMBER_FULL_CONTEXT",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 10,
+        "lines": [
+          "The numbering label and numbering labels of superior list levels of the reference are displayed.",
+          "",
+          "This option is only valid, if the source of the reference is a bookmark or a set reference.",
+          "",
+          "The contents of the list label of the paragraph, at which the bookmark respectively the set reference starts - named \\\"referenced item\\\" in the following - is displayed and the contents of all list labels of superior levels are added in front of it. Additional condition, which suppresses the addition of a superior level's list label content: The list label of the referenced item can already contain numbers of a superior levels. Assume X be the level of the most superior level, then no list label content of superior levels greater or equal than X are added. If the referenced item is numbered nothing is displayed.",
+          "",
+          "**since**",
+          "",
+          "    OOo 3.0"
         ]
       }
     ]

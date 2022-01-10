@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "FootnoteNumbering",
   "type": "const",
   "namespace": "com.sun.star.text",
   "parser_args": {
-    "sort": false
+    "sort": false,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "hex": false,
@@ -34,6 +35,15 @@
     ],
     "items": [
       {
+        "name": "PER_PAGE",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 0,
+        "lines": [
+          "The counter of the automatic footnote numbering restarts each page."
+        ]
+      },
+      {
         "name": "PER_CHAPTER",
         "type": "int",
         "value_type": "INTEGER",
@@ -49,15 +59,6 @@
         "value": 2,
         "lines": [
           "The counter of the automatic footnote numbering does not restart."
-        ]
-      },
-      {
-        "name": "PER_PAGE",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 0,
-        "lines": [
-          "The counter of the automatic footnote numbering restarts each page."
         ]
       }
     ]

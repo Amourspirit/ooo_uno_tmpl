@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "CharSet",
   "type": "const",
   "namespace": "com.sun.star.awt",
   "parser_args": {
-    "sort": false
+    "sort": false,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "hex": false,
@@ -40,6 +41,15 @@
     ],
     "items": [
       {
+        "name": "DONTKNOW",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 0,
+        "lines": [
+          "specifies an unknown character set."
+        ]
+      },
+      {
         "name": "ANSI",
         "type": "int",
         "value_type": "INTEGER",
@@ -49,12 +59,12 @@
         ]
       },
       {
-        "name": "DONTKNOW",
+        "name": "MAC",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 0,
+        "value": 2,
         "lines": [
-          "specifies an unknown character set."
+          "specifies the Apple Macintosh character set."
         ]
       },
       {
@@ -112,12 +122,12 @@
         ]
       },
       {
-        "name": "MAC",
+        "name": "SYSTEM",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 2,
+        "value": 9,
         "lines": [
-          "specifies the Apple Macintosh character set."
+          "specifies the system character set."
         ]
       },
       {
@@ -127,15 +137,6 @@
         "value": 10,
         "lines": [
           "specifies a set of symbols."
-        ]
-      },
-      {
-        "name": "SYSTEM",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 9,
-        "lines": [
-          "specifies the system character set."
         ]
       }
     ]

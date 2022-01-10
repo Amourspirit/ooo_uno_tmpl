@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "NumberFormat",
   "type": "const",
   "namespace": "com.sun.star.util",
   "parser_args": {
-    "sort": false
+    "sort": false,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "hex": false,
@@ -43,12 +44,12 @@
         ]
       },
       {
-        "name": "CURRENCY",
+        "name": "DEFINED",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 8,
+        "value": 1,
         "lines": [
-          "selects currency formats."
+          "selects only user-defined number formats."
         ]
       },
       {
@@ -61,53 +62,21 @@
         ]
       },
       {
-        "name": "DATETIME",
+        "name": "TIME",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 6,
+        "value": 4,
         "lines": [
-          "selects number formats which contain date and time."
+          "selects time formats."
         ]
       },
       {
-        "name": "DEFINED",
+        "name": "CURRENCY",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 1,
+        "value": 8,
         "lines": [
-          "selects only user-defined number formats."
-        ]
-      },
-      {
-        "name": "DURATION",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 8196,
-        "lines": []
-      },
-      {
-        "name": "EMPTY",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 4096,
-        "lines": []
-      },
-      {
-        "name": "FRACTION",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 64,
-        "lines": [
-          "selects number formats for fractions."
-        ]
-      },
-      {
-        "name": "LOGICAL",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 1024,
-        "lines": [
-          "selects boolean number formats."
+          "selects currency formats."
         ]
       },
       {
@@ -120,21 +89,30 @@
         ]
       },
       {
-        "name": "PERCENT",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 128,
-        "lines": [
-          "selects percentage number formats."
-        ]
-      },
-      {
         "name": "SCIENTIFIC",
         "type": "int",
         "value_type": "INTEGER",
         "value": 32,
         "lines": [
           "selects scientific number formats."
+        ]
+      },
+      {
+        "name": "FRACTION",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 64,
+        "lines": [
+          "selects number formats for fractions."
+        ]
+      },
+      {
+        "name": "PERCENT",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 128,
+        "lines": [
+          "selects percentage number formats."
         ]
       },
       {
@@ -147,12 +125,21 @@
         ]
       },
       {
-        "name": "TIME",
+        "name": "DATETIME",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 4,
+        "value": 6,
         "lines": [
-          "selects time formats."
+          "selects number formats which contain date and time."
+        ]
+      },
+      {
+        "name": "LOGICAL",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 1024,
+        "lines": [
+          "selects boolean number formats."
         ]
       },
       {
@@ -163,6 +150,20 @@
         "lines": [
           "is used as a return value if no format exists."
         ]
+      },
+      {
+        "name": "EMPTY",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 4096,
+        "lines": []
+      },
+      {
+        "name": "DURATION",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 8196,
+        "lines": []
       }
     ]
   }

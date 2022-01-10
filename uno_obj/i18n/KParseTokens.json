@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "KParseTokens",
   "type": "const",
   "namespace": "com.sun.star.i18n",
   "parser_args": {
-    "sort": false
+    "sort": false,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "hex": false,
@@ -40,104 +41,21 @@
     ],
     "items": [
       {
-        "name": "ANY_ALNUM",
-        "type": "int",
-        "value_type": "STRING",
-        "value": "ASC_ALNUM | UNI_ALNUM",
-        "lines": [
-          "any (ASCII or Unicode) alphanumeric"
-        ]
-      },
-      {
-        "name": "ANY_ALPHA",
-        "type": "int",
-        "value_type": "STRING",
-        "value": "ASC_ALPHA | UNI_ALPHA",
-        "lines": [
-          "any (ASCII or Unicode) alpha"
-        ]
-      },
-      {
-        "name": "ANY_DIGIT",
-        "type": "int",
-        "value_type": "STRING",
-        "value": "ASC_DIGIT | UNI_DIGIT",
-        "lines": [
-          "any (ASCII or Unicode) digit"
-        ]
-      },
-      {
-        "name": "ANY_LETTER",
-        "type": "int",
-        "value_type": "STRING",
-        "value": "ASC_ALPHA | UNI_LETTER",
-        "lines": [
-          "any (ASCII or Unicode) letter"
-        ]
-      },
-      {
-        "name": "ANY_LETTER_OR_NUMBER",
-        "type": "int",
-        "value_type": "STRING",
-        "value": "ANY_LETTER | ANY_NUMBER",
-        "lines": [
-          "any (ASCII or Unicode) letter or number"
-        ]
-      },
-      {
-        "name": "ANY_NUMBER",
-        "type": "int",
-        "value_type": "STRING",
-        "value": "ASC_DIGIT | UNI_NUMBER",
-        "lines": [
-          "any (ASCII or Unicode) number"
-        ]
-      },
-      {
-        "name": "ASC_ALNUM",
-        "type": "int",
-        "value_type": "STRING",
-        "value": "ASC_ALPHA | ASC_DIGIT",
-        "lines": [
-          "ASCII a-zA-Z0-9 alphanumeric."
-        ]
-      },
-      {
-        "name": "ASC_ALPHA",
-        "type": "int",
-        "value_type": "STRING",
-        "value": "ASC_UPALPHA | ASC_LOALPHA",
-        "lines": [
-          "ASCII a-zA-Z lower or upper alpha."
-        ]
-      },
-      {
-        "name": "ASC_ANY_BUT_CONTROL",
+        "name": "ASC_UPALPHA",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 1024,
+        "value": 1,
         "lines": [
-          "Special value to allow anything below 128 except control characters.",
-          "",
-          "Not set in ParseResult."
+          "ASCII A-Z upper alpha."
         ]
       },
       {
-        "name": "ASC_COLON",
+        "name": "ASC_LOALPHA",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 64,
+        "value": 2,
         "lines": [
-          "ASCII ':' colon."
-        ]
-      },
-      {
-        "name": "ASC_CONTROL",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 512,
-        "lines": [
-          "Special value to allow control characters (0x00 < char < 0x20)"
+          "ASCII a-z lower alpha."
         ]
       },
       {
@@ -147,6 +65,15 @@
         "value": 4,
         "lines": [
           "ASCII 0-9 digit."
+        ]
+      },
+      {
+        "name": "ASC_UNDERSCORE",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 8,
+        "lines": [
+          "ASCII '_' underscore."
         ]
       },
       {
@@ -168,12 +95,32 @@
         ]
       },
       {
-        "name": "ASC_LOALPHA",
+        "name": "ASC_COLON",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 2,
+        "value": 64,
         "lines": [
-          "ASCII a-z lower alpha."
+          "ASCII ':' colon."
+        ]
+      },
+      {
+        "name": "ASC_CONTROL",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 512,
+        "lines": [
+          "Special value to allow control characters (0x00 < char < 0x20)"
+        ]
+      },
+      {
+        "name": "ASC_ANY_BUT_CONTROL",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 1024,
+        "lines": [
+          "Special value to allow anything below 128 except control characters.",
+          "",
+          "Not set in ParseResult."
         ]
       },
       {
@@ -188,21 +135,75 @@
         ]
       },
       {
-        "name": "ASC_UNDERSCORE",
+        "name": "UNI_UPALPHA",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 8,
+        "value": 4096,
         "lines": [
-          "ASCII '_' underscore."
+          "Unicode (above 127) upper case letter."
         ]
       },
       {
-        "name": "ASC_UPALPHA",
+        "name": "UNI_LOALPHA",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 1,
+        "value": 8192,
         "lines": [
-          "ASCII A-Z upper alpha."
+          "Unicode (above 127) lower case letter."
+        ]
+      },
+      {
+        "name": "UNI_DIGIT",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 16384,
+        "lines": [
+          "Unicode (above 127) decimal digit number."
+        ]
+      },
+      {
+        "name": "UNI_TITLE_ALPHA",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 32768,
+        "lines": [
+          "Unicode (above 127) title case letter."
+        ]
+      },
+      {
+        "name": "UNI_MODIFIER_LETTER",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 65536,
+        "lines": [
+          "Unicode (above 127) modifier letter."
+        ]
+      },
+      {
+        "name": "UNI_OTHER_LETTER",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 131072,
+        "lines": [
+          "Unicode (above 127) other letter."
+        ]
+      },
+      {
+        "name": "UNI_LETTER_NUMBER",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 262144,
+        "lines": [
+          "Unicode (above 127) letter number."
+        ]
+      },
+      {
+        "name": "UNI_OTHER_NUMBER",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 524288,
+        "lines": [
+          "Unicode (above 127) other number."
         ]
       },
       {
@@ -223,17 +224,6 @@
         ]
       },
       {
-        "name": "IGNORE_LEADING_WS",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 1073741824,
-        "lines": [
-          "Only valid for nStartCharFlags parameter to CharacterClassification.parseAnyToken() and CharacterClassification.parsePredefinedToken(), ignored on nContCharFlags parameter.",
-          "",
-          "Not set in ParseResult."
-        ]
-      },
-      {
         "name": "TWO_DOUBLE_QUOTES_BREAK_STRING",
         "type": "int",
         "value_type": "INTEGER",
@@ -249,12 +239,43 @@
         ]
       },
       {
-        "name": "UNI_ALNUM",
+        "name": "UNI_OTHER",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 536870912,
+        "lines": [
+          "Additional flag set in ParseResult.StartFlags or ParseResult.ContFlags.",
+          "",
+          "Set if none of the above UNI_... single values match a Unicode character parsed."
+        ]
+      },
+      {
+        "name": "IGNORE_LEADING_WS",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 1073741824,
+        "lines": [
+          "Only valid for nStartCharFlags parameter to CharacterClassification.parseAnyToken() and CharacterClassification.parsePredefinedToken(), ignored on nContCharFlags parameter.",
+          "",
+          "Not set in ParseResult."
+        ]
+      },
+      {
+        "name": "ASC_ALPHA",
         "type": "int",
         "value_type": "STRING",
-        "value": "UNI_ALPHA | UNI_DIGIT",
+        "value": "ASC_UPALPHA | ASC_LOALPHA",
         "lines": [
-          "Unicode (above 127) alphanumeric."
+          "ASCII a-zA-Z lower or upper alpha."
+        ]
+      },
+      {
+        "name": "ASC_ALNUM",
+        "type": "int",
+        "value_type": "STRING",
+        "value": "ASC_ALPHA | ASC_DIGIT",
+        "lines": [
+          "ASCII a-zA-Z0-9 alphanumeric."
         ]
       },
       {
@@ -267,12 +288,12 @@
         ]
       },
       {
-        "name": "UNI_DIGIT",
+        "name": "UNI_ALNUM",
         "type": "int",
-        "value_type": "INTEGER",
-        "value": 16384,
+        "value_type": "STRING",
+        "value": "UNI_ALPHA | UNI_DIGIT",
         "lines": [
-          "Unicode (above 127) decimal digit number."
+          "Unicode (above 127) alphanumeric."
         ]
       },
       {
@@ -285,33 +306,6 @@
         ]
       },
       {
-        "name": "UNI_LETTER_NUMBER",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 262144,
-        "lines": [
-          "Unicode (above 127) letter number."
-        ]
-      },
-      {
-        "name": "UNI_LOALPHA",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 8192,
-        "lines": [
-          "Unicode (above 127) lower case letter."
-        ]
-      },
-      {
-        "name": "UNI_MODIFIER_LETTER",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 65536,
-        "lines": [
-          "Unicode (above 127) modifier letter."
-        ]
-      },
-      {
         "name": "UNI_NUMBER",
         "type": "int",
         "value_type": "STRING",
@@ -321,50 +315,57 @@
         ]
       },
       {
-        "name": "UNI_OTHER",
+        "name": "ANY_ALPHA",
         "type": "int",
-        "value_type": "INTEGER",
-        "value": 536870912,
+        "value_type": "STRING",
+        "value": "ASC_ALPHA | UNI_ALPHA",
         "lines": [
-          "Additional flag set in ParseResult.StartFlags or ParseResult.ContFlags.",
-          "",
-          "Set if none of the above UNI_... single values match a Unicode character parsed."
+          "any (ASCII or Unicode) alpha"
         ]
       },
       {
-        "name": "UNI_OTHER_LETTER",
+        "name": "ANY_DIGIT",
         "type": "int",
-        "value_type": "INTEGER",
-        "value": 131072,
+        "value_type": "STRING",
+        "value": "ASC_DIGIT | UNI_DIGIT",
         "lines": [
-          "Unicode (above 127) other letter."
+          "any (ASCII or Unicode) digit"
         ]
       },
       {
-        "name": "UNI_OTHER_NUMBER",
+        "name": "ANY_ALNUM",
         "type": "int",
-        "value_type": "INTEGER",
-        "value": 524288,
+        "value_type": "STRING",
+        "value": "ASC_ALNUM | UNI_ALNUM",
         "lines": [
-          "Unicode (above 127) other number."
+          "any (ASCII or Unicode) alphanumeric"
         ]
       },
       {
-        "name": "UNI_TITLE_ALPHA",
+        "name": "ANY_LETTER",
         "type": "int",
-        "value_type": "INTEGER",
-        "value": 32768,
+        "value_type": "STRING",
+        "value": "ASC_ALPHA | UNI_LETTER",
         "lines": [
-          "Unicode (above 127) title case letter."
+          "any (ASCII or Unicode) letter"
         ]
       },
       {
-        "name": "UNI_UPALPHA",
+        "name": "ANY_NUMBER",
         "type": "int",
-        "value_type": "INTEGER",
-        "value": 4096,
+        "value_type": "STRING",
+        "value": "ASC_DIGIT | UNI_NUMBER",
         "lines": [
-          "Unicode (above 127) upper case letter."
+          "any (ASCII or Unicode) number"
+        ]
+      },
+      {
+        "name": "ANY_LETTER_OR_NUMBER",
+        "type": "int",
+        "value_type": "STRING",
+        "value": "ANY_LETTER | ANY_NUMBER",
+        "lines": [
+          "any (ASCII or Unicode) letter or number"
         ]
       }
     ]

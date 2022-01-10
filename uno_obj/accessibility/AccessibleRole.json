@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "AccessibleRole",
   "type": "const",
   "namespace": "com.sun.star.accessibility",
   "parser_args": {
-    "sort": false
+    "sort": false,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "hex": false,
@@ -44,6 +45,17 @@
     ],
     "items": [
       {
+        "name": "UNKNOWN",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 0,
+        "lines": [
+          "Unknown role.",
+          "",
+          "The object contains some Accessible information, but its role is not known."
+        ]
+      },
+      {
         "name": "ALERT",
         "type": "int",
         "value_type": "INTEGER",
@@ -53,37 +65,12 @@
         ]
       },
       {
-        "name": "BUTTON_DROPDOWN",
+        "name": "COLUMN_HEADER",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 68,
+        "value": 2,
         "lines": [
-          "Button dropdown role.",
-          "",
-          "The object represents a button that drops down a list of items.",
-          "",
-          "See also PUSH_BUTTON and BUTTON_MENU.",
-          "",
-          "**since**",
-          "",
-          "    OOo 3.0"
-        ]
-      },
-      {
-        "name": "BUTTON_MENU",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 69,
-        "lines": [
-          "Button menu role.",
-          "",
-          "The object represents a button that drops down a menu.",
-          "",
-          "See also PUSH_BUTTON and BUTTON_DROPDOWN.",
-          "",
-          "**since**",
-          "",
-          "    OOo 3.0"
+          "The header for a column of data."
         ]
       },
       {
@@ -95,38 +82,6 @@
           "Object that can be drawn into and is used to trap events.",
           "",
           "See also FRAME, GLASS_PANE, and LAYERED_PANE."
-        ]
-      },
-      {
-        "name": "CAPTION",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 70,
-        "lines": [
-          "Caption role.",
-          "",
-          "The object contains descriptive information, usually textual, about another user interface element such as a table, chart, or image.",
-          "",
-          ".",
-          "",
-          "**since**",
-          "",
-          "    OOo 3.0"
-        ]
-      },
-      {
-        "name": "CHART",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 71,
-        "lines": [
-          "Chart role.",
-          "",
-          "The object is a graphical depiction of quantitative data. It may contain multiple subelements whose attributes and/or description may be queried to obtain both the quantitative data and information about how the data is being presented.",
-          "",
-          "**since**",
-          "",
-          "    OOo 3.0"
         ]
       },
       {
@@ -161,15 +116,6 @@
         ]
       },
       {
-        "name": "COLUMN_HEADER",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 2,
-        "lines": [
-          "The header for a column of data."
-        ]
-      },
-      {
         "name": "COMBO_BOX",
         "type": "int",
         "value_type": "INTEGER",
@@ -178,42 +124,6 @@
           "Combo box role.",
           "",
           "A list of choices the user can select from. Also optionally allows the user to enter a choice of their own."
-        ]
-      },
-      {
-        "name": "COMMENT",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 81,
-        "lines": [
-          "Comment role.",
-          "",
-          "An object which represents a comment.",
-          "",
-          "A comment is anchored at a certain content position in the document and annotates this document content position or a certain text range of the document content. In the OpenDocument file format a comment is known as an annotation.",
-          "",
-          "See also COMMENT_END.",
-          "",
-          "**since**",
-          "",
-          "    OOo 3.2"
-        ]
-      },
-      {
-        "name": "COMMENT_END",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 82,
-        "lines": [
-          "Comment end role.",
-          "",
-          "An invisible object which represents the end position of a text range which is annotated by a comment - see COMMENT.",
-          "",
-          "This object and the corresponding object representing the comment shall be in relation of type MEMBER_OF.",
-          "",
-          "**since**",
-          "",
-          "    OOo 3.2"
         ]
       },
       {
@@ -250,19 +160,6 @@
         ]
       },
       {
-        "name": "DIALOG",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 12,
-        "lines": [
-          "Dialog box role.",
-          "",
-          "A top level window with title bar and a border. A dialog is similar to a frame, but it has fewer properties and is often used as a secondary window for an application.",
-          "",
-          "See also FRAME and WINDOW."
-        ]
-      },
-      {
         "name": "DIRECTORY_PANE",
         "type": "int",
         "value_type": "INTEGER",
@@ -276,6 +173,19 @@
         ]
       },
       {
+        "name": "DIALOG",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 12,
+        "lines": [
+          "Dialog box role.",
+          "",
+          "A top level window with title bar and a border. A dialog is similar to a frame, but it has fewer properties and is often used as a secondary window for an application.",
+          "",
+          "See also FRAME and WINDOW."
+        ]
+      },
+      {
         "name": "DOCUMENT",
         "type": "int",
         "value_type": "INTEGER",
@@ -284,66 +194,6 @@
           "View of a document.",
           "",
           "The view of an actual document. Its content depends on the document type."
-        ]
-      },
-      {
-        "name": "DOCUMENT_PRESENTATION",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 83,
-        "lines": [
-          "View of a presentation document.",
-          "",
-          "It's an specific variation of DOCUMENT for presentations.",
-          "",
-          "**since**",
-          "",
-          "    LibreOffice 4.3"
-        ]
-      },
-      {
-        "name": "DOCUMENT_SPREADSHEET",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 84,
-        "lines": [
-          "View of an spreadsheet document.",
-          "",
-          "It's an specific variation of DOCUMENT for spreadsheets.",
-          "",
-          "**since**",
-          "",
-          "    LibreOffice 4.3"
-        ]
-      },
-      {
-        "name": "DOCUMENT_TEXT",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 85,
-        "lines": [
-          "View of a text document.",
-          "",
-          "It's an specific variation of DOCUMENT for text.",
-          "",
-          "**since**",
-          "",
-          "    LibreOffice 4.3"
-        ]
-      },
-      {
-        "name": "EDIT_BAR",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 72,
-        "lines": [
-          "Edit bar role.",
-          "",
-          "A role indicating the object acts as a formula for calculating a value.",
-          "",
-          "**since**",
-          "",
-          "    OOo 3.0"
         ]
       },
       {
@@ -415,21 +265,6 @@
         "value": 20,
         "lines": [
           "Text that is used as a footnote."
-        ]
-      },
-      {
-        "name": "FORM",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 73,
-        "lines": [
-          "Form role.",
-          "",
-          "The object is a container for form controls, for instance as part of a web form or user-input form within a document.",
-          "",
-          "**since**",
-          "",
-          "    OOo 3.0"
         ]
       },
       {
@@ -512,21 +347,6 @@
         "value": 28,
         "lines": [
           "A small fixed size picture, typically used to decorate components."
-        ]
-      },
-      {
-        "name": "IMAGE_MAP",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 74,
-        "lines": [
-          "Image map role.",
-          "",
-          "Usually a graphic with multiple hotspots, where each hotspot can be activated resulting in the loading of another document or section of a document.",
-          "",
-          "**since**",
-          "",
-          "    OOo 3.0"
         ]
       },
       {
@@ -632,21 +452,6 @@
         ]
       },
       {
-        "name": "NOTE",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 75,
-        "lines": [
-          "Note role.",
-          "",
-          "An embedded note which is not visible until activated.",
-          "",
-          "**since**",
-          "",
-          "    OOo 3.0"
-        ]
-      },
-      {
         "name": "OPTION_PANE",
         "type": "int",
         "value_type": "INTEGER",
@@ -655,21 +460,6 @@
           "A specialized pane whose primary use is inside a DIALOG.",
           "",
           "See also DIALOG."
-        ]
-      },
-      {
-        "name": "PAGE",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 76,
-        "lines": [
-          "Page role.",
-          "",
-          "An object representing a page of document content. It is used in documents which are accessed by the user on a page by page basis.",
-          "",
-          "**since**",
-          "",
-          "    OOo 3.0"
         ]
       },
       {
@@ -741,15 +531,6 @@
         ]
       },
       {
-        "name": "PROGRESS_BAR",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 45,
-        "lines": [
-          "An object used to indicate how much of a task has been completed."
-        ]
-      },
-      {
         "name": "PUSH_BUTTON",
         "type": "int",
         "value_type": "INTEGER",
@@ -760,6 +541,15 @@
           "An object the user can manipulate to tell the application to do something.",
           "",
           "See also CHECK_BOX, TOGGLE_BUTTON, RADIO_BUTTON, BUTTON_MENU and BUTTON_DROPDOWN."
+        ]
+      },
+      {
+        "name": "PROGRESS_BAR",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 45,
+        "lines": [
+          "An object used to indicate how much of a task has been completed."
         ]
       },
       {
@@ -785,6 +575,15 @@
         ]
       },
       {
+        "name": "ROW_HEADER",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 48,
+        "lines": [
+          "The header for a row of data."
+        ]
+      },
+      {
         "name": "ROOT_PANE",
         "type": "int",
         "value_type": "INTEGER",
@@ -795,30 +594,6 @@
           "A specialized pane that has a glass pane and a layered pane as its children.",
           "",
           "See also GLASS_PANE and LAYERED_PANE."
-        ]
-      },
-      {
-        "name": "ROW_HEADER",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 48,
-        "lines": [
-          "The header for a row of data."
-        ]
-      },
-      {
-        "name": "RULER",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 77,
-        "lines": [
-          "Ruler role.",
-          "",
-          "An object which describes margins and tab stops, etc. for text objects which it controls.",
-          "",
-          "**since**",
-          "",
-          "    OOo 3.0"
         ]
       },
       {
@@ -848,18 +623,12 @@
         ]
       },
       {
-        "name": "SECTION",
+        "name": "SHAPE",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 78,
+        "value": 52,
         "lines": [
-          "Section role.",
-          "",
-          "The object is a containing instance of document content which constitutes a particular \\\"logical\\\" section of the document.",
-          "",
-          "**since**",
-          "",
-          "    OOo 3.0"
+          "Object with graphical representation used to represent content on draw pages."
         ]
       },
       {
@@ -873,15 +642,6 @@
           "An object usually contained in a menu to provide a visual and logical separation of the contents in a menu. For example, the \\\"File\\\" menu of an application might contain menu items for \\\"Open,\\\" \\\"Close,\\\" and \\\"Exit,\\\" and will place a separator between \\\"Close\\\" and \\\"Exit\\\" menu items.",
           "",
           "See also MENU and MENU_ITEM."
-        ]
-      },
-      {
-        "name": "SHAPE",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 52,
-        "lines": [
-          "Object with graphical representation used to represent content on draw pages."
         ]
       },
       {
@@ -915,19 +675,6 @@
           "Split pane role.",
           "",
           "A specialized panel that presents two other panels at the same time. Between the two panels is a divider the user can manipulate to make one panel larger and the other panel smaller."
-        ]
-      },
-      {
-        "name": "STATIC",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 86,
-        "lines": [
-          "Static text role.",
-          "",
-          "An object that presents a brief amount of information to the user. The text is not editable by the user as opposed to a text, and not meant to have a relation with another object as opposed to a label.",
-          "",
-          "See also LABEL and TEXT."
         ]
       },
       {
@@ -1030,6 +777,201 @@
         ]
       },
       {
+        "name": "VIEW_PORT",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 66,
+        "lines": [
+          "Viewport role.",
+          "",
+          "An object usually used in a scroll pane. It represents the portion of the entire data that the user can see. As the user manipulates the scroll bars, the contents of the viewport can change.",
+          "",
+          "See also SCROLL_PANE."
+        ]
+      },
+      {
+        "name": "WINDOW",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 67,
+        "lines": [
+          "A top level window with no title or border.",
+          "",
+          "See also FRAME and DIALOG."
+        ]
+      },
+      {
+        "name": "BUTTON_DROPDOWN",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 68,
+        "lines": [
+          "Button dropdown role.",
+          "",
+          "The object represents a button that drops down a list of items.",
+          "",
+          "See also PUSH_BUTTON and BUTTON_MENU.",
+          "",
+          "**since**",
+          "",
+          "    OOo 3.0"
+        ]
+      },
+      {
+        "name": "BUTTON_MENU",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 69,
+        "lines": [
+          "Button menu role.",
+          "",
+          "The object represents a button that drops down a menu.",
+          "",
+          "See also PUSH_BUTTON and BUTTON_DROPDOWN.",
+          "",
+          "**since**",
+          "",
+          "    OOo 3.0"
+        ]
+      },
+      {
+        "name": "CAPTION",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 70,
+        "lines": [
+          "Caption role.",
+          "",
+          "The object contains descriptive information, usually textual, about another user interface element such as a table, chart, or image.",
+          "",
+          ".",
+          "",
+          "**since**",
+          "",
+          "    OOo 3.0"
+        ]
+      },
+      {
+        "name": "CHART",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 71,
+        "lines": [
+          "Chart role.",
+          "",
+          "The object is a graphical depiction of quantitative data. It may contain multiple subelements whose attributes and/or description may be queried to obtain both the quantitative data and information about how the data is being presented.",
+          "",
+          "**since**",
+          "",
+          "    OOo 3.0"
+        ]
+      },
+      {
+        "name": "EDIT_BAR",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 72,
+        "lines": [
+          "Edit bar role.",
+          "",
+          "A role indicating the object acts as a formula for calculating a value.",
+          "",
+          "**since**",
+          "",
+          "    OOo 3.0"
+        ]
+      },
+      {
+        "name": "FORM",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 73,
+        "lines": [
+          "Form role.",
+          "",
+          "The object is a container for form controls, for instance as part of a web form or user-input form within a document.",
+          "",
+          "**since**",
+          "",
+          "    OOo 3.0"
+        ]
+      },
+      {
+        "name": "IMAGE_MAP",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 74,
+        "lines": [
+          "Image map role.",
+          "",
+          "Usually a graphic with multiple hotspots, where each hotspot can be activated resulting in the loading of another document or section of a document.",
+          "",
+          "**since**",
+          "",
+          "    OOo 3.0"
+        ]
+      },
+      {
+        "name": "NOTE",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 75,
+        "lines": [
+          "Note role.",
+          "",
+          "An embedded note which is not visible until activated.",
+          "",
+          "**since**",
+          "",
+          "    OOo 3.0"
+        ]
+      },
+      {
+        "name": "PAGE",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 76,
+        "lines": [
+          "Page role.",
+          "",
+          "An object representing a page of document content. It is used in documents which are accessed by the user on a page by page basis.",
+          "",
+          "**since**",
+          "",
+          "    OOo 3.0"
+        ]
+      },
+      {
+        "name": "RULER",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 77,
+        "lines": [
+          "Ruler role.",
+          "",
+          "An object which describes margins and tab stops, etc. for text objects which it controls.",
+          "",
+          "**since**",
+          "",
+          "    OOo 3.0"
+        ]
+      },
+      {
+        "name": "SECTION",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 78,
+        "lines": [
+          "Section role.",
+          "",
+          "The object is a containing instance of document content which constitutes a particular \\\"logical\\\" section of the document.",
+          "",
+          "**since**",
+          "",
+          "    OOo 3.0"
+        ]
+      },
+      {
         "name": "TREE_ITEM",
         "type": "int",
         "value_type": "INTEGER",
@@ -1062,38 +1004,97 @@
         ]
       },
       {
-        "name": "UNKNOWN",
+        "name": "COMMENT",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 0,
+        "value": 81,
         "lines": [
-          "Unknown role.",
+          "Comment role.",
           "",
-          "The object contains some Accessible information, but its role is not known."
+          "An object which represents a comment.",
+          "",
+          "A comment is anchored at a certain content position in the document and annotates this document content position or a certain text range of the document content. In the OpenDocument file format a comment is known as an annotation.",
+          "",
+          "See also COMMENT_END.",
+          "",
+          "**since**",
+          "",
+          "    OOo 3.2"
         ]
       },
       {
-        "name": "VIEW_PORT",
+        "name": "COMMENT_END",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 66,
+        "value": 82,
         "lines": [
-          "Viewport role.",
+          "Comment end role.",
           "",
-          "An object usually used in a scroll pane. It represents the portion of the entire data that the user can see. As the user manipulates the scroll bars, the contents of the viewport can change.",
+          "An invisible object which represents the end position of a text range which is annotated by a comment - see COMMENT.",
           "",
-          "See also SCROLL_PANE."
+          "This object and the corresponding object representing the comment shall be in relation of type MEMBER_OF.",
+          "",
+          "**since**",
+          "",
+          "    OOo 3.2"
         ]
       },
       {
-        "name": "WINDOW",
+        "name": "DOCUMENT_PRESENTATION",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 67,
+        "value": 83,
         "lines": [
-          "A top level window with no title or border.",
+          "View of a presentation document.",
           "",
-          "See also FRAME and DIALOG."
+          "It's an specific variation of DOCUMENT for presentations.",
+          "",
+          "**since**",
+          "",
+          "    LibreOffice 4.3"
+        ]
+      },
+      {
+        "name": "DOCUMENT_SPREADSHEET",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 84,
+        "lines": [
+          "View of an spreadsheet document.",
+          "",
+          "It's an specific variation of DOCUMENT for spreadsheets.",
+          "",
+          "**since**",
+          "",
+          "    LibreOffice 4.3"
+        ]
+      },
+      {
+        "name": "DOCUMENT_TEXT",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 85,
+        "lines": [
+          "View of a text document.",
+          "",
+          "It's an specific variation of DOCUMENT for text.",
+          "",
+          "**since**",
+          "",
+          "    LibreOffice 4.3"
+        ]
+      },
+      {
+        "name": "STATIC",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 86,
+        "lines": [
+          "Static text role.",
+          "",
+          "An object that presents a brief amount of information to the user. The text is not editable by the user as opposed to a text, and not meant to have a relation with another object as opposed to a label.",
+          "",
+          "See also LABEL and TEXT."
         ]
       }
     ]

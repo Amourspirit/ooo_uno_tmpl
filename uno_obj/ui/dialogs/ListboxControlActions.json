@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "ListboxControlActions",
   "type": "const",
   "namespace": "com.sun.star.ui.dialogs",
   "parser_args": {
-    "sort": false
+    "sort": false,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "hex": false,
@@ -80,6 +81,17 @@
         ]
       },
       {
+        "name": "SET_SELECT_ITEM",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 5,
+        "lines": [
+          "Selects an item in a listbox.",
+          "",
+          "The given value has to be a position. The index of the first position is 0. A value of -1 removes the selection. If the given position is invalid an exception will be thrown. The value should be a sal_Int32."
+        ]
+      },
+      {
         "name": "GET_ITEMS",
         "type": "int",
         "value_type": "INTEGER",
@@ -97,17 +109,6 @@
           "Returns the currently selected item.",
           "",
           "The returned item is an empty string if the listbox is empty or no item is selected."
-        ]
-      },
-      {
-        "name": "SET_SELECT_ITEM",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 5,
-        "lines": [
-          "Selects an item in a listbox.",
-          "",
-          "The given value has to be a position. The index of the first position is 0. A value of -1 removes the selection. If the given position is invalid an exception will be thrown. The value should be a sal_Int32."
         ]
       }
     ]

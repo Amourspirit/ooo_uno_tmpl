@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "CellFlags",
   "type": "const",
   "namespace": "com.sun.star.sheet",
   "parser_args": {
-    "sort": false
+    "sort": false,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "hex": false,
@@ -36,12 +37,12 @@
     ],
     "items": [
       {
-        "name": "ANNOTATION",
+        "name": "VALUE",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 8,
+        "value": 1,
         "lines": [
-          "selects cell annotations."
+          "selects constant numeric values that are not formatted as dates or times."
         ]
       },
       {
@@ -54,21 +55,21 @@
         ]
       },
       {
-        "name": "EDITATTR",
+        "name": "STRING",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 256,
+        "value": 4,
         "lines": [
-          "selects formatting within parts of the cell contents."
+          "selects constant strings."
         ]
       },
       {
-        "name": "FORMATTED",
+        "name": "ANNOTATION",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 512,
+        "value": 8,
         "lines": [
-          "selects cells with formatting within the cells or cells with more than one paragraph within the cells."
+          "selects cell annotations."
         ]
       },
       {
@@ -90,24 +91,6 @@
         ]
       },
       {
-        "name": "OBJECTS",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 128,
-        "lines": [
-          "selects drawing objects."
-        ]
-      },
-      {
-        "name": "STRING",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 4,
-        "lines": [
-          "selects constant strings."
-        ]
-      },
-      {
         "name": "STYLES",
         "type": "int",
         "value_type": "INTEGER",
@@ -117,12 +100,30 @@
         ]
       },
       {
-        "name": "VALUE",
+        "name": "OBJECTS",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 1,
+        "value": 128,
         "lines": [
-          "selects constant numeric values that are not formatted as dates or times."
+          "selects drawing objects."
+        ]
+      },
+      {
+        "name": "EDITATTR",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 256,
+        "lines": [
+          "selects formatting within parts of the cell contents."
+        ]
+      },
+      {
+        "name": "FORMATTED",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 512,
+        "lines": [
+          "selects cells with formatting within the cells or cells with more than one paragraph within the cells."
         ]
       }
     ]

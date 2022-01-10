@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "AccessibleStateType",
   "type": "const",
   "namespace": "com.sun.star.accessibility",
   "parser_args": {
-    "sort": false
+    "sort": false,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "hex": false,
@@ -44,6 +45,15 @@
     ],
     "items": [
       {
+        "name": "INVALID",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 0,
+        "lines": [
+          "Indicates an invalid state."
+        ]
+      },
+      {
         "name": "ACTIVE",
         "type": "int",
         "value_type": "INTEGER",
@@ -77,24 +87,6 @@
         "value": 4,
         "lines": [
           "Indicates this object is currently checked."
-        ]
-      },
-      {
-        "name": "COLLAPSE",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 34,
-        "lines": [
-          "Indicates that the object is collapsed."
-        ]
-      },
-      {
-        "name": "DEFAULT",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 32,
-        "lines": [
-          "Indicates the object is the default button in a window."
         ]
       },
       {
@@ -194,15 +186,6 @@
         ]
       },
       {
-        "name": "INVALID",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 0,
-        "lines": [
-          "Indicates an invalid state."
-        ]
-      },
-      {
         "name": "MANAGES_DESCENDANTS",
         "type": "int",
         "value_type": "INTEGER",
@@ -227,15 +210,6 @@
         ]
       },
       {
-        "name": "MOVEABLE",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 31,
-        "lines": [
-          "Indicates the position of the object is not fixed."
-        ]
-      },
-      {
         "name": "MULTI_LINE",
         "type": "int",
         "value_type": "INTEGER",
@@ -253,15 +227,6 @@
           "More than one child may be selected at the same time.",
           "",
           "Indicates this object allows more than one of its children to be selected at the same time."
-        ]
-      },
-      {
-        "name": "OFFSCREEN",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 33,
-        "lines": [
-          "Indicates the object is outside of the screen area."
         ]
       },
       {
@@ -380,6 +345,42 @@
           "Object wants to be displayed on the screen.",
           "",
           "A set VISIBLE state indicates that an object wants to be displayed on the screen. It is displayed, as indicated by a set SHOWING state, if all of its parents have also set the VISIBLE state and the object lies at least partly in the visible area of its parent."
+        ]
+      },
+      {
+        "name": "MOVEABLE",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 31,
+        "lines": [
+          "Indicates the position of the object is not fixed."
+        ]
+      },
+      {
+        "name": "DEFAULT",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 32,
+        "lines": [
+          "Indicates the object is the default button in a window."
+        ]
+      },
+      {
+        "name": "OFFSCREEN",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 33,
+        "lines": [
+          "Indicates the object is outside of the screen area."
+        ]
+      },
+      {
+        "name": "COLLAPSE",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 34,
+        "lines": [
+          "Indicates that the object is collapsed."
         ]
       }
     ]

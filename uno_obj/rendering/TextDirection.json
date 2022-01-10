@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "TextDirection",
   "type": "const",
   "namespace": "com.sun.star.rendering",
   "parser_args": {
-    "sort": false
+    "sort": false,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "hex": false,
@@ -40,24 +41,6 @@
     ],
     "items": [
       {
-        "name": "STRONG_LEFT_TO_RIGHT",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 2,
-        "lines": [
-          "Reference point is left, main direction is from left to right."
-        ]
-      },
-      {
-        "name": "STRONG_RIGHT_TO_LEFT",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 3,
-        "lines": [
-          "Reference point is right, main direction is from right to left."
-        ]
-      },
-      {
         "name": "WEAK_LEFT_TO_RIGHT",
         "type": "int",
         "value_type": "INTEGER",
@@ -67,10 +50,28 @@
         ]
       },
       {
+        "name": "STRONG_LEFT_TO_RIGHT",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 2,
+        "lines": [
+          "Reference point is left, main direction is from left to right."
+        ]
+      },
+      {
         "name": "WEAK_RIGHT_TO_LEFT",
         "type": "int",
         "value_type": "INTEGER",
         "value": 1,
+        "lines": [
+          "Reference point is right, main direction is from right to left."
+        ]
+      },
+      {
+        "name": "STRONG_RIGHT_TO_LEFT",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 3,
         "lines": [
           "Reference point is right, main direction is from right to left."
         ]

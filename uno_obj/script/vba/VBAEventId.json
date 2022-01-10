@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "VBAEventId",
   "type": "const",
   "namespace": "com.sun.star.script.vba",
   "parser_args": {
-    "sort": false
+    "sort": false,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "hex": false,
@@ -37,6 +38,37 @@
       "Each event expects some specific arguments to be passed to XVBAEventProcessor.processVbaEvent()."
     ],
     "items": [
+      {
+        "name": "NO_EVENT",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": -1,
+        "lines": [
+          "An identifier not corresponding to any VBA document event."
+        ]
+      },
+      {
+        "name": "AUTO_NEW",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 1,
+        "lines": [
+          "New document opened from template.",
+          "",
+          "No arguments."
+        ]
+      },
+      {
+        "name": "AUTO_OPEN",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 2,
+        "lines": [
+          "Document opened (loaded).",
+          "",
+          "No arguments."
+        ]
+      },
       {
         "name": "AUTO_CLOSE",
         "type": "int",
@@ -71,39 +103,6 @@
         ]
       },
       {
-        "name": "AUTO_NEW",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 1,
-        "lines": [
-          "New document opened from template.",
-          "",
-          "No arguments."
-        ]
-      },
-      {
-        "name": "AUTO_OPEN",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 2,
-        "lines": [
-          "Document opened (loaded).",
-          "",
-          "No arguments."
-        ]
-      },
-      {
-        "name": "DOCUMENT_CLOSE",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 1003,
-        "lines": [
-          "Document about to be closed.",
-          "",
-          "No arguments."
-        ]
-      },
-      {
         "name": "DOCUMENT_NEW",
         "type": "int",
         "value_type": "INTEGER",
@@ -126,21 +125,14 @@
         ]
       },
       {
-        "name": "NO_EVENT",
+        "name": "DOCUMENT_CLOSE",
         "type": "int",
         "value_type": "INTEGER",
-        "value": -1,
+        "value": 1003,
         "lines": [
-          "An identifier not corresponding to any VBA document event."
-        ]
-      },
-      {
-        "name": "USERDEFINED_START",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 1000000,
-        "lines": [
-          "Implementations are allowed to use identifiers above this value for any internal purpose."
+          "Document about to be closed.",
+          "",
+          "No arguments."
         ]
       },
       {
@@ -155,14 +147,25 @@
         ]
       },
       {
-        "name": "WORKBOOK_AFTERSAVE",
+        "name": "WORKBOOK_DEACTIVATE",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 2007,
+        "value": 2002,
         "lines": [
-          "Document has been saved.",
+          "Document deactivated.",
           "",
-          "Arguments: boolean bSuccess."
+          "No arguments."
+        ]
+      },
+      {
+        "name": "WORKBOOK_OPEN",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 2003,
+        "lines": [
+          "Document opened (loaded).",
+          "",
+          "No arguments."
         ]
       },
       {
@@ -199,14 +202,14 @@
         ]
       },
       {
-        "name": "WORKBOOK_DEACTIVATE",
+        "name": "WORKBOOK_AFTERSAVE",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 2002,
+        "value": 2007,
         "lines": [
-          "Document deactivated.",
+          "Document has been saved.",
           "",
-          "No arguments."
+          "Arguments: boolean bSuccess."
         ]
       },
       {
@@ -218,17 +221,6 @@
           "New sheet inserted.",
           "",
           "Arguments: short nSheet."
-        ]
-      },
-      {
-        "name": "WORKBOOK_OPEN",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 2003,
-        "lines": [
-          "Document opened (loaded).",
-          "",
-          "No arguments."
         ]
       },
       {
@@ -269,6 +261,17 @@
         "type": "int",
         "value_type": "INTEGER",
         "value": 2101,
+        "lines": [
+          "Worksheet has been activated (made visible).",
+          "",
+          "Arguments: short nSheet."
+        ]
+      },
+      {
+        "name": "WORKSHEET_DEACTIVATE",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 2102,
         "lines": [
           "Worksheet has been activated (made visible).",
           "",
@@ -320,14 +323,14 @@
         ]
       },
       {
-        "name": "WORKSHEET_DEACTIVATE",
+        "name": "WORKSHEET_SELECTIONCHANGE",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 2102,
+        "value": 2107,
         "lines": [
-          "Worksheet has been activated (made visible).",
+          "Selection in sheet has been changed.",
           "",
-          "Arguments: short nSheet."
+          "Arguments: XRange/XSheetCellRangeContainer aRange."
         ]
       },
       {
@@ -342,14 +345,12 @@
         ]
       },
       {
-        "name": "WORKSHEET_SELECTIONCHANGE",
+        "name": "USERDEFINED_START",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 2107,
+        "value": 1000000,
         "lines": [
-          "Selection in sheet has been changed.",
-          "",
-          "Arguments: XRange/XSheetCellRangeContainer aRange."
+          "Implementations are allowed to use identifiers above this value for any internal purpose."
         ]
       }
     ]

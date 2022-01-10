@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "InvalidateStyle",
   "type": "const",
   "namespace": "com.sun.star.awt",
   "parser_args": {
-    "sort": false
+    "sort": false,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "hex": false,
@@ -52,15 +53,6 @@
         ]
       },
       {
-        "name": "NOCLIPCHILDREN",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 16384,
-        "lines": [
-          "The area is invalidated regardless of overlapping child windows."
-        ]
-      },
-      {
         "name": "NOERASE",
         "type": "int",
         "value_type": "INTEGER",
@@ -70,12 +62,12 @@
         ]
       },
       {
-        "name": "NOTRANSPARENT",
+        "name": "UPDATE",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 32,
+        "value": 8,
         "lines": [
-          "The parent window is not invalidated."
+          "The invalidated area is updated immediately."
         ]
       },
       {
@@ -88,12 +80,21 @@
         ]
       },
       {
-        "name": "UPDATE",
+        "name": "NOTRANSPARENT",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 8,
+        "value": 32,
         "lines": [
-          "The invalidated area is updated immediately."
+          "The parent window is not invalidated."
+        ]
+      },
+      {
+        "name": "NOCLIPCHILDREN",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 16384,
+        "lines": [
+          "The area is invalidated regardless of overlapping child windows."
         ]
       }
     ]

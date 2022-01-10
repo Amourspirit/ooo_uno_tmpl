@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "Endianness",
   "type": "const",
   "namespace": "com.sun.star.util",
   "parser_args": {
-    "sort": false
+    "sort": false,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "hex": false,
@@ -40,17 +41,6 @@
     ],
     "items": [
       {
-        "name": "BIG",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 1,
-        "lines": [
-          "Big endian.",
-          "",
-          "The values are stored in big endian format, i.e. the bytes of the long word 0xAABBCCDD are laid out like 0xAA, 0xBB, 0xCC, 0xDD in memory. That is, data of arbitrary machine word lengths always start with the most significant byte, and ends with the least significant one."
-        ]
-      },
-      {
         "name": "LITTLE",
         "type": "int",
         "value_type": "INTEGER",
@@ -59,6 +49,17 @@
           "Little endian.",
           "",
           "The values are stored in little endian format, i.e. the bytes of the long word 0xAABBCCDD are laid out like 0xDD, 0xCC, 0xBB, 0xAA in memory. That is, data of arbitrary machine word lengths always starts with the least significant byte, and ends with the most significant one."
+        ]
+      },
+      {
+        "name": "BIG",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 1,
+        "lines": [
+          "Big endian.",
+          "",
+          "The values are stored in big endian format, i.e. the bytes of the long word 0xAABBCCDD are laid out like 0xAA, 0xBB, 0xCC, 0xDD in memory. That is, data of arbitrary machine word lengths always start with the most significant byte, and ends with the least significant one."
         ]
       }
     ]

@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "FloatingPointBitmapFormat",
   "type": "const",
   "namespace": "com.sun.star.rendering",
   "parser_args": {
-    "sort": false
+    "sort": false,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "hex": false,
@@ -38,14 +39,14 @@
     ],
     "items": [
       {
-        "name": "DOUBLE",
+        "name": "HALFFLOAT",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 2,
+        "value": 0,
         "lines": [
-          "IEEE double format.",
+          "Half-float format.",
           "",
-          "The color components are stored in the IEEE double-precision floating point format, i.e. in a 64 bit value, with 16 bit exponent, 47 bit mantissa and a sign bit."
+          "The color components are stored in the half-float format, i.e. in a 16 bit value, with 5 bit exponent, 10 bit mantissa and a sign bit. See also OpenEXR for a format employing half-floats."
         ]
       },
       {
@@ -60,14 +61,14 @@
         ]
       },
       {
-        "name": "HALFFLOAT",
+        "name": "DOUBLE",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 0,
+        "value": 2,
         "lines": [
-          "Half-float format.",
+          "IEEE double format.",
           "",
-          "The color components are stored in the half-float format, i.e. in a 16 bit value, with 5 bit exponent, 10 bit mantissa and a sign bit. See also OpenEXR for a format employing half-floats."
+          "The color components are stored in the IEEE double-precision floating point format, i.e. in a 64 bit value, with 16 bit exponent, 47 bit mantissa and a sign bit."
         ]
       }
     ]

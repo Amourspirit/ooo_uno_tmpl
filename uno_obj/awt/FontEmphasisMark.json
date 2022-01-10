@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "FontEmphasisMark",
   "type": "const",
   "namespace": "com.sun.star.awt",
   "parser_args": {
-    "sort": false
+    "sort": false,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "hex": false,
@@ -36,30 +37,21 @@
     ],
     "items": [
       {
-        "name": "ABOVE",
+        "name": "NONE",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 4096,
+        "value": 0,
         "lines": [
-          "specifies that the emphasis mark should be positioned above the characters."
+          "specifies no emphasis mark."
         ]
       },
       {
-        "name": "ACCENT",
+        "name": "DOT",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 4,
+        "value": 1,
         "lines": [
-          "specifies emphasis mark accent."
-        ]
-      },
-      {
-        "name": "BELOW",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 8192,
-        "lines": [
-          "specifies that the emphasis mark should be positioned below the characters."
+          "specifies emphasis mark dot."
         ]
       },
       {
@@ -81,21 +73,30 @@
         ]
       },
       {
-        "name": "DOT",
+        "name": "ACCENT",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 1,
+        "value": 4,
         "lines": [
-          "specifies emphasis mark dot."
+          "specifies emphasis mark accent."
         ]
       },
       {
-        "name": "NONE",
+        "name": "ABOVE",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 0,
+        "value": 4096,
         "lines": [
-          "specifies no emphasis mark."
+          "specifies that the emphasis mark should be positioned above the characters."
+        ]
+      },
+      {
+        "name": "BELOW",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 8192,
+        "lines": [
+          "specifies that the emphasis mark should be positioned below the characters."
         ]
       }
     ]

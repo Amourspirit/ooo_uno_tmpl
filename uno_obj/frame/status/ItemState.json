@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "ItemState",
   "type": "const",
   "namespace": "com.sun.star.frame.status",
   "parser_args": {
-    "sort": false
+    "sort": false,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "hex": false,
@@ -38,12 +39,12 @@
     ],
     "items": [
       {
-        "name": "DEFAULT_VALUE",
+        "name": "UNKNOWN",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 32,
+        "value": 0,
         "lines": [
-          "specifies that the property is currently in a default state."
+          "specifies an unknown state."
         ]
       },
       {
@@ -53,17 +54,6 @@
         "value": 1,
         "lines": [
           "specifies that the property is currently disabled."
-        ]
-      },
-      {
-        "name": "DONT_CARE",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 16,
-        "lines": [
-          "specifies that the property is currently in a don't care state.",
-          "",
-          "This is normally used if a selection provides more than one state for a property at the same time."
         ]
       },
       {
@@ -80,21 +70,32 @@
         ]
       },
       {
+        "name": "DONT_CARE",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 16,
+        "lines": [
+          "specifies that the property is currently in a don't care state.",
+          "",
+          "This is normally used if a selection provides more than one state for a property at the same time."
+        ]
+      },
+      {
+        "name": "DEFAULT_VALUE",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 32,
+        "lines": [
+          "specifies that the property is currently in a default state."
+        ]
+      },
+      {
         "name": "SET",
         "type": "int",
         "value_type": "INTEGER",
         "value": 64,
         "lines": [
           "specifies that the property is currently in a set state."
-        ]
-      },
-      {
-        "name": "UNKNOWN",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 0,
-        "lines": [
-          "specifies an unknown state."
         ]
       }
     ]

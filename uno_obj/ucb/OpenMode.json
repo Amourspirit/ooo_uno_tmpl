@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "OpenMode",
   "type": "const",
   "namespace": "com.sun.star.ucb",
   "parser_args": {
-    "sort": false
+    "sort": false,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "hex": false,
@@ -43,6 +44,24 @@
         ]
       },
       {
+        "name": "FOLDERS",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 1,
+        "lines": [
+          "open a folder, include only children, that are folders, in result set."
+        ]
+      },
+      {
+        "name": "DOCUMENTS",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 3,
+        "lines": [
+          "open a folder, include only children, that are documents, in result set."
+        ]
+      },
+      {
         "name": "DOCUMENT",
         "type": "int",
         "value_type": "INTEGER",
@@ -53,15 +72,6 @@
           "There are no special requirements for data access sharing.",
           "",
           "Note: There must be a data sink supplied in the OpenCommandArgument struct, if this value is set. This sink will be used by the content implementation to supply the document data."
-        ]
-      },
-      {
-        "name": "DOCUMENTS",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 3,
-        "lines": [
-          "open a folder, include only children, that are documents, in result set."
         ]
       },
       {
@@ -88,15 +98,6 @@
           "Deny shared write access.",
           "",
           "Note: There must be a data sink supplied in the OpenCommandArgument struct, if this value is set. This sink will be used by the content implementation to supply the document data."
-        ]
-      },
-      {
-        "name": "FOLDERS",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 1,
-        "lines": [
-          "open a folder, include only children, that are folders, in result set."
         ]
       }
     ]

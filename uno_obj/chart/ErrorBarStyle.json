@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "ErrorBarStyle",
   "type": "const",
   "namespace": "com.sun.star.chart",
   "parser_args": {
-    "sort": false
+    "sort": false,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "hex": false,
@@ -34,37 +35,6 @@
     ],
     "items": [
       {
-        "name": "ABSOLUTE",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 3,
-        "lines": [
-          "the error indicators for all data points have the same absolute value as length for either direction.",
-          "",
-          "The values for these are given as absolute numbers in ChartStatistics.ConstantErrorLow and ChartStatistics.ConstantErrorHigh"
-        ]
-      },
-      {
-        "name": "ERROR_MARGIN",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 5,
-        "lines": [
-          "The length of the error indicators for all data points is calculated by taking the percentage given as ChartStatistics.ErrorMargin of the largest data point value."
-        ]
-      },
-      {
-        "name": "FROM_DATA",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 7,
-        "lines": [
-          "Uses values given by cell ranges of the container document.",
-          "",
-          "The values for the cell ranges are given in the properties ChartStatistics.ErrorBarRangePositive for positive indicators and ChartStatistics.ErrorBarRangeNegative for negative indicators."
-        ]
-      },
-      {
         "name": "NONE",
         "type": "int",
         "value_type": "INTEGER",
@@ -74,12 +44,12 @@
         ]
       },
       {
-        "name": "RELATIVE",
+        "name": "VARIANCE",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 4,
+        "value": 1,
         "lines": [
-          "The length of the error indicators is calculated for each data point by taking the percentage given as ChartStatistics.PercentageError of its value."
+          "displays error indicators for the variance of the data."
         ]
       },
       {
@@ -92,6 +62,35 @@
         ]
       },
       {
+        "name": "ABSOLUTE",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 3,
+        "lines": [
+          "the error indicators for all data points have the same absolute value as length for either direction.",
+          "",
+          "The values for these are given as absolute numbers in ChartStatistics.ConstantErrorLow and ChartStatistics.ConstantErrorHigh"
+        ]
+      },
+      {
+        "name": "RELATIVE",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 4,
+        "lines": [
+          "The length of the error indicators is calculated for each data point by taking the percentage given as ChartStatistics.PercentageError of its value."
+        ]
+      },
+      {
+        "name": "ERROR_MARGIN",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 5,
+        "lines": [
+          "The length of the error indicators for all data points is calculated by taking the percentage given as ChartStatistics.ErrorMargin of the largest data point value."
+        ]
+      },
+      {
         "name": "STANDARD_ERROR",
         "type": "int",
         "value_type": "INTEGER",
@@ -101,12 +100,14 @@
         ]
       },
       {
-        "name": "VARIANCE",
+        "name": "FROM_DATA",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 1,
+        "value": 7,
         "lines": [
-          "displays error indicators for the variance of the data."
+          "Uses values given by cell ranges of the container document.",
+          "",
+          "The values for the cell ranges are given in the properties ChartStatistics.ErrorBarRangePositive for positive indicators and ChartStatistics.ErrorBarRangeNegative for negative indicators."
         ]
       }
     ]

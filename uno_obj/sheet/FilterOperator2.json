@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "FilterOperator2",
   "type": "const",
   "namespace": "com.sun.star.sheet",
   "parser_args": {
-    "sort": false
+    "sort": false,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "hex": false,
@@ -40,69 +41,6 @@
     ],
     "items": [
       {
-        "name": "BEGINS_WITH",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 14,
-        "lines": [
-          "selects begins-with entries."
-        ]
-      },
-      {
-        "name": "BOTTOM_PERCENT",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 11,
-        "lines": [
-          "selects a specified percentage of entries with the lowest values."
-        ]
-      },
-      {
-        "name": "BOTTOM_VALUES",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 10,
-        "lines": [
-          "selects a specified number of entries with the lowest values."
-        ]
-      },
-      {
-        "name": "CONTAINS",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 12,
-        "lines": [
-          "selects contains entries."
-        ]
-      },
-      {
-        "name": "DOES_NOT_BEGIN_WITH",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 15,
-        "lines": [
-          "selects does-not-begin-with entries."
-        ]
-      },
-      {
-        "name": "DOES_NOT_CONTAIN",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 13,
-        "lines": [
-          "selects does-not-contain entries."
-        ]
-      },
-      {
-        "name": "DOES_NOT_END_WITH",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 17,
-        "lines": [
-          "selects does-not-end-with entries."
-        ]
-      },
-      {
         "name": "EMPTY",
         "type": "int",
         "value_type": "INTEGER",
@@ -112,12 +50,12 @@
         ]
       },
       {
-        "name": "ENDS_WITH",
+        "name": "NOT_EMPTY",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 16,
+        "value": 1,
         "lines": [
-          "selects ends-with entries."
+          "selects non-empty entries."
         ]
       },
       {
@@ -127,6 +65,15 @@
         "value": 2,
         "lines": [
           "value has to be equal to the specified value."
+        ]
+      },
+      {
+        "name": "NOT_EQUAL",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 3,
+        "lines": [
+          "value must not be equal to the specified value."
         ]
       },
       {
@@ -166,21 +113,12 @@
         ]
       },
       {
-        "name": "NOT_EMPTY",
+        "name": "TOP_VALUES",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 1,
+        "value": 8,
         "lines": [
-          "selects non-empty entries."
-        ]
-      },
-      {
-        "name": "NOT_EQUAL",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 3,
-        "lines": [
-          "value must not be equal to the specified value."
+          "selects a specified number of entries with the greatest values."
         ]
       },
       {
@@ -193,12 +131,75 @@
         ]
       },
       {
-        "name": "TOP_VALUES",
+        "name": "BOTTOM_VALUES",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 8,
+        "value": 10,
         "lines": [
-          "selects a specified number of entries with the greatest values."
+          "selects a specified number of entries with the lowest values."
+        ]
+      },
+      {
+        "name": "BOTTOM_PERCENT",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 11,
+        "lines": [
+          "selects a specified percentage of entries with the lowest values."
+        ]
+      },
+      {
+        "name": "CONTAINS",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 12,
+        "lines": [
+          "selects contains entries."
+        ]
+      },
+      {
+        "name": "DOES_NOT_CONTAIN",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 13,
+        "lines": [
+          "selects does-not-contain entries."
+        ]
+      },
+      {
+        "name": "BEGINS_WITH",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 14,
+        "lines": [
+          "selects begins-with entries."
+        ]
+      },
+      {
+        "name": "DOES_NOT_BEGIN_WITH",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 15,
+        "lines": [
+          "selects does-not-begin-with entries."
+        ]
+      },
+      {
+        "name": "ENDS_WITH",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 16,
+        "lines": [
+          "selects ends-with entries."
+        ]
+      },
+      {
+        "name": "DOES_NOT_END_WITH",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 17,
+        "lines": [
+          "selects does-not-end-with entries."
         ]
       }
     ]

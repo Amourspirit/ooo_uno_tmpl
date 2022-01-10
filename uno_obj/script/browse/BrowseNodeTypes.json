@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "BrowseNodeTypes",
   "type": "const",
   "namespace": "com.sun.star.script.browse",
   "parser_args": {
-    "sort": false
+    "sort": false,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "hex": false,
@@ -34,6 +35,15 @@
     ],
     "items": [
       {
+        "name": "SCRIPT",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 0,
+        "lines": [
+          "Indicates node is a script."
+        ]
+      },
+      {
         "name": "CONTAINER",
         "type": "int",
         "value_type": "INTEGER",
@@ -49,15 +59,6 @@
         "value": 2,
         "lines": [
           "Indicates node is root of the tree."
-        ]
-      },
-      {
-        "name": "SCRIPT",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 0,
-        "lines": [
-          "Indicates node is a script."
         ]
       }
     ]

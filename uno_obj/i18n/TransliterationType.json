@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "TransliterationType",
   "type": "const",
   "namespace": "com.sun.star.i18n",
   "parser_args": {
-    "sort": false
+    "sort": false,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "hex": false,
@@ -37,40 +38,11 @@
     ],
     "items": [
       {
-        "name": "CASCADE",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 8,
-        "lines": [
-          "If the transliteration is cascaded (uses more than one algorithm)."
-        ]
-      },
-      {
-        "name": "IGNORE",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 4,
-        "lines": [
-          "With a transliteration IGNORE case, the regular expression A-Z can be transformed to a-z, for example."
-        ]
-      },
-      {
         "name": "NONE",
         "type": "int",
         "value_type": "INTEGER",
         "value": 0,
         "lines": []
-      },
-      {
-        "name": "NUMERIC",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 2,
-        "lines": [
-          "A transliteration module can have attribute NUMERIC if it transliterates numbers in different languages like Chinese numbers to Arabic numbers and vice versa.",
-          "",
-          "This mapping need not be one to one, it should be primarily used by number formatting and parsing methods."
-        ]
       },
       {
         "name": "ONE_TO_ONE",
@@ -84,12 +56,41 @@
         ]
       },
       {
+        "name": "NUMERIC",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 2,
+        "lines": [
+          "A transliteration module can have attribute NUMERIC if it transliterates numbers in different languages like Chinese numbers to Arabic numbers and vice versa.",
+          "",
+          "This mapping need not be one to one, it should be primarily used by number formatting and parsing methods."
+        ]
+      },
+      {
         "name": "ONE_TO_ONE_NUMERIC",
         "type": "int",
         "value_type": "INTEGER",
         "value": 3,
         "lines": [
           "A transliteration module is ONE_TO_ONE_NUMERIC if it offers both one to one mapping and handles number also."
+        ]
+      },
+      {
+        "name": "IGNORE",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 4,
+        "lines": [
+          "With a transliteration IGNORE case, the regular expression A-Z can be transformed to a-z, for example."
+        ]
+      },
+      {
+        "name": "CASCADE",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 8,
+        "lines": [
+          "If the transliteration is cascaded (uses more than one algorithm)."
         ]
       }
     ]

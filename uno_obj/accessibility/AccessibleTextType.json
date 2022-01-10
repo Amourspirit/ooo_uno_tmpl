@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "AccessibleTextType",
   "type": "const",
   "namespace": "com.sun.star.accessibility",
   "parser_args": {
-    "sort": false
+    "sort": false,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "hex": false,
@@ -40,17 +41,6 @@
     ],
     "items": [
       {
-        "name": "ATTRIBUTE_RUN",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 7,
-        "lines": [
-          "Attribute run.",
-          "",
-          "Each attribute run is a character run of maximal length where all characters have the same attributes set."
-        ]
-      },
-      {
         "name": "CHARACTER",
         "type": "int",
         "value_type": "INTEGER",
@@ -62,36 +52,14 @@
         ]
       },
       {
-        "name": "GLYPH",
+        "name": "WORD",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 6,
+        "value": 2,
         "lines": [
-          "Single glyph.",
+          "Single word.",
           "",
-          "Glyphs are runs of one or more (multibyte) characters which are displayed as one symbol."
-        ]
-      },
-      {
-        "name": "LINE",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 5,
-        "lines": [
-          "Single line.",
-          "",
-          "Indicates that single lines, as displayed on the screen, are used. In contrast to the constants CHARACTER, WORD, SENTENCE, and PARAGRAPH which are content oriented this constant is view oriented. It can be used to retrieve hyphenation information."
-        ]
-      },
-      {
-        "name": "PARAGRAPH",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 4,
-        "lines": [
-          "Single paragraph.",
-          "",
-          "Indicates that single paragraphs are used. The definition of what a paragraph is, is implementation and language/locale dependent."
+          "Indicates that single words are used. The definition of what a word is, is implementation and language/locale dependent. While in English a word is ended by a space or a special character like a comma or a period, this is not necessarily true in other languages."
         ]
       },
       {
@@ -106,14 +74,47 @@
         ]
       },
       {
-        "name": "WORD",
+        "name": "PARAGRAPH",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 2,
+        "value": 4,
         "lines": [
-          "Single word.",
+          "Single paragraph.",
           "",
-          "Indicates that single words are used. The definition of what a word is, is implementation and language/locale dependent. While in English a word is ended by a space or a special character like a comma or a period, this is not necessarily true in other languages."
+          "Indicates that single paragraphs are used. The definition of what a paragraph is, is implementation and language/locale dependent."
+        ]
+      },
+      {
+        "name": "LINE",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 5,
+        "lines": [
+          "Single line.",
+          "",
+          "Indicates that single lines, as displayed on the screen, are used. In contrast to the constants CHARACTER, WORD, SENTENCE, and PARAGRAPH which are content oriented this constant is view oriented. It can be used to retrieve hyphenation information."
+        ]
+      },
+      {
+        "name": "GLYPH",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 6,
+        "lines": [
+          "Single glyph.",
+          "",
+          "Glyphs are runs of one or more (multibyte) characters which are displayed as one symbol."
+        ]
+      },
+      {
+        "name": "ATTRIBUTE_RUN",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 7,
+        "lines": [
+          "Attribute run.",
+          "",
+          "Each attribute run is a character run of maximal length where all characters have the same attributes set."
         ]
       }
     ]

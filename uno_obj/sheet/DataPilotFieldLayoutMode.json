@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "DataPilotFieldLayoutMode",
   "type": "const",
   "namespace": "com.sun.star.sheet",
   "parser_args": {
-    "sort": false
+    "sort": false,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "hex": false,
@@ -34,14 +35,14 @@
     ],
     "items": [
       {
-        "name": "OUTLINE_SUBTOTALS_BOTTOM",
+        "name": "TABULAR_LAYOUT",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 2,
+        "value": 0,
         "lines": [
-          "In outline layout mode, the items from the following field start in the row below an item's name, like in traditional database reports.",
+          "Tabular layout mode is the layout, where each item's name is on the same row as the first item from the following field.",
           "",
-          "Subtotals are shown at the bottom (below the item's data, as in tabular layout mode). When the subtotals take up more than one row (manually selected, or because there are several data fields), they are always shown below the item's data, regardless of the setting."
+          "Subtotals are always shown below an item's data in this mode."
         ]
       },
       {
@@ -56,14 +57,14 @@
         ]
       },
       {
-        "name": "TABULAR_LAYOUT",
+        "name": "OUTLINE_SUBTOTALS_BOTTOM",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 0,
+        "value": 2,
         "lines": [
-          "Tabular layout mode is the layout, where each item's name is on the same row as the first item from the following field.",
+          "In outline layout mode, the items from the following field start in the row below an item's name, like in traditional database reports.",
           "",
-          "Subtotals are always shown below an item's data in this mode."
+          "Subtotals are shown at the bottom (below the item's data, as in tabular layout mode). When the subtotals take up more than one row (manually selected, or because there are several data fields), they are always shown below the item's data, regardless of the setting."
         ]
       }
     ]

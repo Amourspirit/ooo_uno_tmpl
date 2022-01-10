@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "NodeAttribute",
   "type": "const",
   "namespace": "com.sun.star.configuration.backend",
   "parser_args": {
-    "sort": false
+    "sort": false,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "hex": false,
@@ -49,6 +50,24 @@
         ]
       },
       {
+        "name": "MANDATORY",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 512,
+        "lines": [
+          "indicates that a set item may not be removed or replaced in subsequent layers."
+        ]
+      },
+      {
+        "name": "READONLY",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 1024,
+        "lines": [
+          "indicates that a node or property may not be changed in this or subsequent layer."
+        ]
+      },
+      {
         "name": "FUSE",
         "type": "int",
         "value_type": "INTEGER",
@@ -64,30 +83,12 @@
         ]
       },
       {
-        "name": "MANDATORY",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 512,
-        "lines": [
-          "indicates that a set item may not be removed or replaced in subsequent layers."
-        ]
-      },
-      {
         "name": "MASK",
         "type": "int",
         "value_type": "INTEGER",
         "value": 32512,
         "lines": [
           "can be used to mask the node attributes from merged attributes"
-        ]
-      },
-      {
-        "name": "READONLY",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 1024,
-        "lines": [
-          "indicates that a node or property may not be changed in this or subsequent layer."
         ]
       }
     ]

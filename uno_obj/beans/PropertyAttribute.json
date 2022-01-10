@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "PropertyAttribute",
   "type": "const",
   "namespace": "com.sun.star.beans",
   "parser_args": {
-    "sort": false
+    "sort": false,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "hex": false,
@@ -38,6 +39,17 @@
     ],
     "items": [
       {
+        "name": "MAYBEVOID",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 1,
+        "lines": [
+          "indicates that a property value can be void.",
+          "",
+          "It does not mean that the type of the property is void!"
+        ]
+      },
+      {
         "name": "BOUND",
         "type": "int",
         "value_type": "INTEGER",
@@ -53,6 +65,24 @@
         "value": 4,
         "lines": [
           "indicates that a PropertyChangeEvent will be fired to all registered XVetoableChangeListeners whenever the value of this property is about to change."
+        ]
+      },
+      {
+        "name": "TRANSIENT",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 8,
+        "lines": [
+          "indicates that the value of the property is not persistent."
+        ]
+      },
+      {
+        "name": "READONLY",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 16,
+        "lines": [
+          "indicates that the value of the property is read-only."
         ]
       },
       {
@@ -74,41 +104,6 @@
         ]
       },
       {
-        "name": "MAYBEVOID",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 1,
-        "lines": [
-          "indicates that a property value can be void.",
-          "",
-          "It does not mean that the type of the property is void!"
-        ]
-      },
-      {
-        "name": "OPTIONAL",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 256,
-        "lines": [
-          "indicates that a property is optional.",
-          "",
-          "This attribute is not of interest for concrete property implementations. It's needed for property specifications inside service specifications in UNOIDL.",
-          "",
-          "**since**",
-          "",
-          "    OOo 1.1.2"
-        ]
-      },
-      {
-        "name": "READONLY",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 16,
-        "lines": [
-          "indicates that the value of the property is read-only."
-        ]
-      },
-      {
         "name": "REMOVABLE",
         "type": "int",
         "value_type": "INTEGER",
@@ -125,12 +120,18 @@
         "lines": []
       },
       {
-        "name": "TRANSIENT",
+        "name": "OPTIONAL",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 8,
+        "value": 256,
         "lines": [
-          "indicates that the value of the property is not persistent."
+          "indicates that a property is optional.",
+          "",
+          "This attribute is not of interest for concrete property implementations. It's needed for property specifications inside service specifications in UNOIDL.",
+          "",
+          "**since**",
+          "",
+          "    OOo 1.1.2"
         ]
       }
     ]

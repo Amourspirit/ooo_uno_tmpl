@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "FormulaMapGroup",
   "type": "const",
   "namespace": "com.sun.star.sheet",
   "parser_args": {
-    "sort": false
+    "sort": false,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "hex": false,
@@ -36,12 +37,21 @@
     ],
     "items": [
       {
-        "name": "ALL_EXCEPT_SPECIAL",
+        "name": "SPECIAL",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 2147483647,
+        "value": 0,
         "lines": [
-          "All groups except SPECIAL."
+          "Group of op-codes without a string symbol."
+        ]
+      },
+      {
+        "name": "SEPARATORS",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 1,
+        "lines": [
+          "Separators and parentheses."
         ]
       },
       {
@@ -51,6 +61,15 @@
         "value": 2,
         "lines": [
           "Separators and parentheses for constant arrays."
+        ]
+      },
+      {
+        "name": "UNARY_OPERATORS",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 4,
+        "lines": [
+          "Unary operators."
         ]
       },
       {
@@ -72,30 +91,12 @@
         ]
       },
       {
-        "name": "SEPARATORS",
+        "name": "ALL_EXCEPT_SPECIAL",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 1,
+        "value": 2147483647,
         "lines": [
-          "Separators and parentheses."
-        ]
-      },
-      {
-        "name": "SPECIAL",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 0,
-        "lines": [
-          "Group of op-codes without a string symbol."
-        ]
-      },
-      {
-        "name": "UNARY_OPERATORS",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 4,
-        "lines": [
-          "Unary operators."
+          "All groups except SPECIAL."
         ]
       }
     ]

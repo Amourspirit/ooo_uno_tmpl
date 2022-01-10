@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "CalendarFieldIndex",
   "type": "const",
   "namespace": "com.sun.star.i18n",
   "parser_args": {
-    "sort": false
+    "sort": false,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "hex": false,
@@ -95,67 +96,12 @@
         ]
       },
       {
-        "name": "DST_OFFSET_SECOND_MILLIS",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 16,
-        "lines": [
-          "Get additional offset in milliseconds that adds to the value of DST_OFFSET.",
-          "",
-          "This may be necessary to correctly interpret historical timezone data that consists of fractions of minutes, e.g. seconds. 1 minute == 60000 milliseconds.",
-          "",
-          "**since**",
-          "",
-          "    OOo 3.1"
-        ]
-      },
-      {
-        "name": "ERA",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 13,
-        "lines": [
-          "Get/Set era, for example, 0:= Before Christ, 1:= After Christ."
-        ]
-      },
-      {
-        "name": "FIELD_COUNT",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 15,
-        "lines": [
-          "Total number of fields for < OOo 3.1."
-        ]
-      },
-      {
-        "name": "FIELD_COUNT2",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 17,
-        "lines": [
-          "Total number of fields as of OOo 3.1.",
-          "",
-          "**since**",
-          "",
-          "    OOo 3.1"
-        ]
-      },
-      {
         "name": "HOUR",
         "type": "int",
         "value_type": "INTEGER",
         "value": 5,
         "lines": [
           "Get/Set hour [0-23]."
-        ]
-      },
-      {
-        "name": "MILLISECOND",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 8,
-        "lines": [
-          "Get/Set milliseconds [0-999]."
         ]
       },
       {
@@ -168,23 +114,21 @@
         ]
       },
       {
-        "name": "MONTH",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 12,
-        "lines": [
-          "Get/Set month [0-...].",
-          "",
-          "Note that the maximum value is not necessarily 11 for December but depends on the calendar used instead."
-        ]
-      },
-      {
         "name": "SECOND",
         "type": "int",
         "value_type": "INTEGER",
         "value": 7,
         "lines": [
           "Get/Set second [0-59]."
+        ]
+      },
+      {
+        "name": "MILLISECOND",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 8,
+        "lines": [
+          "Get/Set milliseconds [0-999]."
         ]
       },
       {
@@ -215,12 +159,41 @@
         ]
       },
       {
+        "name": "MONTH",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 12,
+        "lines": [
+          "Get/Set month [0-...].",
+          "",
+          "Note that the maximum value is not necessarily 11 for December but depends on the calendar used instead."
+        ]
+      },
+      {
+        "name": "ERA",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 13,
+        "lines": [
+          "Get/Set era, for example, 0:= Before Christ, 1:= After Christ."
+        ]
+      },
+      {
         "name": "ZONE_OFFSET",
         "type": "int",
         "value_type": "INTEGER",
         "value": 14,
         "lines": [
           "Get/Set time zone offset in minutes, e.g. [-14*60..14*60]."
+        ]
+      },
+      {
+        "name": "FIELD_COUNT",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 15,
+        "lines": [
+          "Total number of fields for < OOo 3.1."
         ]
       },
       {
@@ -232,6 +205,34 @@
           "Get/Set additional offset in milliseconds that adds to the value of ZONE_OFFSET.",
           "",
           "This may be necessary to correctly interpret historical timezone data that consists of fractions of minutes, e.g. seconds. 1 minute == 60000 milliseconds.",
+          "",
+          "**since**",
+          "",
+          "    OOo 3.1"
+        ]
+      },
+      {
+        "name": "DST_OFFSET_SECOND_MILLIS",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 16,
+        "lines": [
+          "Get additional offset in milliseconds that adds to the value of DST_OFFSET.",
+          "",
+          "This may be necessary to correctly interpret historical timezone data that consists of fractions of minutes, e.g. seconds. 1 minute == 60000 milliseconds.",
+          "",
+          "**since**",
+          "",
+          "    OOo 3.1"
+        ]
+      },
+      {
+        "name": "FIELD_COUNT2",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 17,
+        "lines": [
+          "Total number of fields as of OOo 3.1.",
           "",
           "**since**",
           "",

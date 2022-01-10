@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "CommandGroup",
   "type": "const",
   "namespace": "com.sun.star.frame",
   "parser_args": {
-    "sort": false
+    "sort": false,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "hex": false,
@@ -38,6 +39,15 @@
     ],
     "items": [
       {
+        "name": "INTERNAL",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 0,
+        "lines": [
+          "specifies internal commands."
+        ]
+      },
+      {
         "name": "APPLICATION",
         "type": "int",
         "value_type": "INTEGER",
@@ -47,39 +57,12 @@
         ]
       },
       {
-        "name": "CHART",
+        "name": "VIEW",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 20,
+        "value": 2,
         "lines": [
-          "specifies chart specific commands."
-        ]
-      },
-      {
-        "name": "CONNECTOR",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 22,
-        "lines": [
-          "specifies commands that are related to connectors."
-        ]
-      },
-      {
-        "name": "CONTROLS",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 25,
-        "lines": [
-          "specifies commands that are related to controls."
-        ]
-      },
-      {
-        "name": "DATA",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 17,
-        "lines": [
-          "specifies commands that are related to data."
+          "specifies view specific commands."
         ]
       },
       {
@@ -92,93 +75,12 @@
         ]
       },
       {
-        "name": "DRAWING",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 24,
-        "lines": [
-          "specifies commands that are related to drawing."
-        ]
-      },
-      {
         "name": "EDIT",
         "type": "int",
         "value_type": "INTEGER",
         "value": 4,
         "lines": [
           "specifies edit specific commands."
-        ]
-      },
-      {
-        "name": "ENUMERATION",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 16,
-        "lines": [
-          "specifies commands that are related to bullets and numbering."
-        ]
-      },
-      {
-        "name": "EXPLORER",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 21,
-        "lines": [
-          "specifies explorer specific commands."
-        ]
-      },
-      {
-        "name": "FORMAT",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 10,
-        "lines": [
-          "specifies commands that are related to formats."
-        ]
-      },
-      {
-        "name": "FRAME",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 13,
-        "lines": [
-          "specifies frame specific commands."
-        ]
-      },
-      {
-        "name": "GRAPHIC",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 14,
-        "lines": [
-          "specifies commands that are related to graphical data."
-        ]
-      },
-      {
-        "name": "IMAGE",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 19,
-        "lines": [
-          "specifies commands that are related to images."
-        ]
-      },
-      {
-        "name": "INSERT",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 9,
-        "lines": [
-          "specifies insert commands."
-        ]
-      },
-      {
-        "name": "INTERNAL",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 0,
-        "lines": [
-          "specifies internal commands."
         ]
       },
       {
@@ -191,21 +93,21 @@
         ]
       },
       {
+        "name": "OPTIONS",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 6,
+        "lines": [
+          "specifies commands to change options."
+        ]
+      },
+      {
         "name": "MATH",
         "type": "int",
         "value_type": "INTEGER",
         "value": 7,
         "lines": [
           "specifies math specific commands."
-        ]
-      },
-      {
-        "name": "MODIFY",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 23,
-        "lines": [
-          "specifies commands that are related to modifications."
         ]
       },
       {
@@ -218,30 +120,21 @@
         ]
       },
       {
-        "name": "OPTIONS",
+        "name": "INSERT",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 6,
+        "value": 9,
         "lines": [
-          "specifies commands to change options."
+          "specifies insert commands."
         ]
       },
       {
-        "name": "SPECIAL",
+        "name": "FORMAT",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 18,
+        "value": 10,
         "lines": [
-          "specifies special commands."
-        ]
-      },
-      {
-        "name": "TABLE",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 15,
-        "lines": [
-          "specifies commands that are related to tables."
+          "specifies commands that are related to formats."
         ]
       },
       {
@@ -263,12 +156,120 @@
         ]
       },
       {
-        "name": "VIEW",
+        "name": "FRAME",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 2,
+        "value": 13,
         "lines": [
-          "specifies view specific commands."
+          "specifies frame specific commands."
+        ]
+      },
+      {
+        "name": "GRAPHIC",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 14,
+        "lines": [
+          "specifies commands that are related to graphical data."
+        ]
+      },
+      {
+        "name": "TABLE",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 15,
+        "lines": [
+          "specifies commands that are related to tables."
+        ]
+      },
+      {
+        "name": "ENUMERATION",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 16,
+        "lines": [
+          "specifies commands that are related to bullets and numbering."
+        ]
+      },
+      {
+        "name": "DATA",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 17,
+        "lines": [
+          "specifies commands that are related to data."
+        ]
+      },
+      {
+        "name": "SPECIAL",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 18,
+        "lines": [
+          "specifies special commands."
+        ]
+      },
+      {
+        "name": "IMAGE",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 19,
+        "lines": [
+          "specifies commands that are related to images."
+        ]
+      },
+      {
+        "name": "CHART",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 20,
+        "lines": [
+          "specifies chart specific commands."
+        ]
+      },
+      {
+        "name": "EXPLORER",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 21,
+        "lines": [
+          "specifies explorer specific commands."
+        ]
+      },
+      {
+        "name": "CONNECTOR",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 22,
+        "lines": [
+          "specifies commands that are related to connectors."
+        ]
+      },
+      {
+        "name": "MODIFY",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 23,
+        "lines": [
+          "specifies commands that are related to modifications."
+        ]
+      },
+      {
+        "name": "DRAWING",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 24,
+        "lines": [
+          "specifies commands that are related to drawing."
+        ]
+      },
+      {
+        "name": "CONTROLS",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 25,
+        "lines": [
+          "specifies commands that are related to controls."
         ]
       }
     ]

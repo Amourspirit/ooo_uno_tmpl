@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "StatusBarFunction",
   "type": "const",
   "namespace": "com.sun.star.sheet",
   "parser_args": {
-    "sort": false
+    "sort": false,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "hex": false,
@@ -34,6 +35,15 @@
     ],
     "items": [
       {
+        "name": "NONE",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 0,
+        "lines": [
+          "nothing is calculated."
+        ]
+      },
+      {
         "name": "AVERAGE",
         "type": "int",
         "value_type": "INTEGER",
@@ -43,21 +53,21 @@
         ]
       },
       {
-        "name": "COUNT",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 3,
-        "lines": [
-          "numerical values are counted."
-        ]
-      },
-      {
         "name": "COUNTNUMS",
         "type": "int",
         "value_type": "INTEGER",
         "value": 2,
         "lines": [
           "all values, including non-numerical values, are counted."
+        ]
+      },
+      {
+        "name": "COUNT",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 3,
+        "lines": [
+          "numerical values are counted."
         ]
       },
       {
@@ -76,15 +86,6 @@
         "value": 5,
         "lines": [
           "minimum value of all numerical values is calculated."
-        ]
-      },
-      {
-        "name": "NONE",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 0,
-        "lines": [
-          "nothing is calculated."
         ]
       },
       {

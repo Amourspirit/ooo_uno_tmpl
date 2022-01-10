@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "DataPilotFieldGroupBy",
   "type": "const",
   "namespace": "com.sun.star.sheet",
   "parser_args": {
-    "sort": false
+    "sort": false,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "hex": false,
@@ -34,16 +35,25 @@
     ],
     "items": [
       {
-        "name": "DAYS",
+        "name": "SECONDS",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 8,
+        "value": 1,
         "lines": [
-          "Groups all members of a DataPilot field containing a date/time value by their calendar day, or by ranges of days.",
+          "Groups all members of a DataPilot field containing a date/time value by their current value for seconds.",
           "",
-          "Examples:",
+          "Example: The group :02 will contain all members that contain a time with a seconds value of 2, regardless of the date, hours and minutes of the member, e.g. 2002-Jan-03 00:00:02 or 1999-May-02 12:45:02."
+        ]
+      },
+      {
+        "name": "MINUTES",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 2,
+        "lines": [
+          "Groups all members of a DataPilot field containing a date/time value by their current value for minutes.",
           "",
-          "See descriptions for XDataPilotFieldGrouping.createDateGroup() for more details about day grouping."
+          "Example: The group :02 will contain all members that contain a time with a minutes value of 2, regardless of the date, hours and seconds of the member, e.g. 2002-Jan-03 00:02:00 or 1999-May-02 12:02:45."
         ]
       },
       {
@@ -58,14 +68,16 @@
         ]
       },
       {
-        "name": "MINUTES",
+        "name": "DAYS",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 2,
+        "value": 8,
         "lines": [
-          "Groups all members of a DataPilot field containing a date/time value by their current value for minutes.",
+          "Groups all members of a DataPilot field containing a date/time value by their calendar day, or by ranges of days.",
           "",
-          "Example: The group :02 will contain all members that contain a time with a minutes value of 2, regardless of the date, hours and seconds of the member, e.g. 2002-Jan-03 00:02:00 or 1999-May-02 12:02:45."
+          "Examples:",
+          "",
+          "See descriptions for XDataPilotFieldGrouping.createDateGroup() for more details about day grouping."
         ]
       },
       {
@@ -88,17 +100,6 @@
           "Groups all members of a DataPilot field containing a date/time value by their quarter.",
           "",
           "Example: The group Q1 will contain all members with a date in the first quarter of a year (i.e. the months January, February, and march), regardless of the year, day, or time of the member, e.g. 2002-Jan-03 00:00:00 or 1999-Mar-02 02:12:45."
-        ]
-      },
-      {
-        "name": "SECONDS",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 1,
-        "lines": [
-          "Groups all members of a DataPilot field containing a date/time value by their current value for seconds.",
-          "",
-          "Example: The group :02 will contain all members that contain a time with a seconds value of 2, regardless of the date, hours and minutes of the member, e.g. 2002-Jan-03 00:00:02 or 1999-May-02 12:45:02."
         ]
       },
       {

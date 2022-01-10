@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "ImageDrawMode",
   "type": "const",
   "namespace": "com.sun.star.awt",
   "parser_args": {
-    "sort": false
+    "sort": false,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "hex": false,
@@ -38,14 +39,12 @@
     ],
     "items": [
       {
-        "name": "DEACTIVE",
+        "name": "NONE",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 4,
+        "value": 0,
         "lines": [
-          "the image is drawn as being deactivated.",
-          "",
-          "See com.sun.star.awt.XStyleSettings.DeactiveColor."
+          "the image is drawn as is, without any color transformation."
         ]
       },
       {
@@ -69,12 +68,14 @@
         ]
       },
       {
-        "name": "NONE",
+        "name": "DEACTIVE",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 0,
+        "value": 4,
         "lines": [
-          "the image is drawn as is, without any color transformation."
+          "the image is drawn as being deactivated.",
+          "",
+          "See com.sun.star.awt.XStyleSettings.DeactiveColor."
         ]
       },
       {

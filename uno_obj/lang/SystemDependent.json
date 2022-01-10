@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "SystemDependent",
   "type": "const",
   "namespace": "com.sun.star.lang",
   "parser_args": {
-    "sort": false
+    "sort": false,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "hex": false,
@@ -42,21 +43,25 @@
     ],
     "items": [
       {
-        "name": "SYSTEM_ANDROID",
+        "name": "SYSTEM_WIN32",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 8,
+        "value": 1,
         "lines": [
-          "The called interface method returns a value specified for Android."
+          "The called interface method returns a value specified for Windows.",
+          "",
+          "These are Windows XP or higher."
         ]
       },
       {
-        "name": "SYSTEM_IOS",
+        "name": "SYSTEM_WIN16",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 7,
+        "value": 2,
         "lines": [
-          "The called interface method returns a value specified for iOS."
+          "The called interface method returns a value specified for 16-bit Windows.",
+          "",
+          "This is Windows 3.11."
         ]
       },
       {
@@ -73,15 +78,6 @@
         ]
       },
       {
-        "name": "SYSTEM_MAC",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 5,
-        "lines": [
-          "The called interface method returns a value specified for macOS."
-        ]
-      },
-      {
         "name": "SYSTEM_OS2",
         "type": "int",
         "value_type": "INTEGER",
@@ -91,25 +87,12 @@
         ]
       },
       {
-        "name": "SYSTEM_WIN16",
+        "name": "SYSTEM_MAC",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 2,
+        "value": 5,
         "lines": [
-          "The called interface method returns a value specified for 16-bit Windows.",
-          "",
-          "This is Windows 3.11."
-        ]
-      },
-      {
-        "name": "SYSTEM_WIN32",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 1,
-        "lines": [
-          "The called interface method returns a value specified for Windows.",
-          "",
-          "These are Windows XP or higher."
+          "The called interface method returns a value specified for macOS."
         ]
       },
       {
@@ -119,6 +102,24 @@
         "value": 6,
         "lines": [
           "The called interface method returns a value specified for the X Window System."
+        ]
+      },
+      {
+        "name": "SYSTEM_IOS",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 7,
+        "lines": [
+          "The called interface method returns a value specified for iOS."
+        ]
+      },
+      {
+        "name": "SYSTEM_ANDROID",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 8,
+        "lines": [
+          "The called interface method returns a value specified for Android."
         ]
       }
     ]

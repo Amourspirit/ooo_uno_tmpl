@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "CompareBookmark",
   "type": "const",
   "namespace": "com.sun.star.sdbcx",
   "parser_args": {
-    "sort": false
+    "sort": false,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "hex": false,
@@ -34,6 +35,15 @@
     ],
     "items": [
       {
+        "name": "LESS",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": -1,
+        "lines": [
+          "the first bookmark is before the second."
+        ]
+      },
+      {
         "name": "EQUAL",
         "type": "int",
         "value_type": "INTEGER",
@@ -52,12 +62,12 @@
         ]
       },
       {
-        "name": "LESS",
+        "name": "NOT_EQUAL",
         "type": "int",
         "value_type": "INTEGER",
-        "value": -1,
+        "value": 2,
         "lines": [
-          "the first bookmark is before the second."
+          "the first bookmark is not the same as the second one."
         ]
       },
       {
@@ -67,15 +77,6 @@
         "value": 3,
         "lines": [
           "the two bookmarks are not comparable."
-        ]
-      },
-      {
-        "name": "NOT_EQUAL",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 2,
-        "lines": [
-          "the first bookmark is not the same as the second one."
         ]
       }
     ]

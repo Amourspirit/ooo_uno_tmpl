@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "CopyTableContinuation",
   "type": "const",
   "namespace": "com.sun.star.sdb.application",
   "parser_args": {
-    "sort": false
+    "sort": false,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "hex": false,
@@ -34,14 +35,12 @@
     ],
     "items": [
       {
-        "name": "AskUser",
+        "name": "Proceed",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 3,
+        "value": 0,
         "lines": [
-          "asks the user how the handle the error.",
-          "",
-          "The user can choose between ignoring the error and canceling the copy operation."
+          "indicates the error should be ignored, and copying should be continued."
         ]
       },
       {
@@ -63,12 +62,14 @@
         ]
       },
       {
-        "name": "Proceed",
+        "name": "AskUser",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 0,
+        "value": 3,
         "lines": [
-          "indicates the error should be ignored, and copying should be continued."
+          "asks the user how the handle the error.",
+          "",
+          "The user can choose between ignoring the error and canceling the copy operation."
         ]
       }
     ]

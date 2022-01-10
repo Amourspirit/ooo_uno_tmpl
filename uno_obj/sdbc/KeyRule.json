@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "KeyRule",
   "type": "const",
   "namespace": "com.sun.star.sdbc",
   "parser_args": {
-    "sort": false
+    "sort": false,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "hex": false,
@@ -47,17 +48,6 @@
         ]
       },
       {
-        "name": "NO_ACTION",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 3,
-        "lines": [
-          "a possible value for the column's UPDATE_RULE and DELETE_RULE in the com.sun.star.sdbc.XResultSet objects returned by the methods com.sun.star.sdbc.XDatabaseMetaData.getImportedKeys(), com.sun.star.sdbc.XDatabaseMetaData.getExportedKeys(), and com.sun.star.sdbc.XDatabaseMetaData.getCrossReference().",
-          "",
-          "For the columns UPDATE_RULE and DELETE_RULE , it indicates that if the primary key has been imported, it cannot be updated or deleted."
-        ]
-      },
-      {
         "name": "RESTRICT",
         "type": "int",
         "value_type": "INTEGER",
@@ -71,17 +61,6 @@
         ]
       },
       {
-        "name": "SET_DEFAULT",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 4,
-        "lines": [
-          "a possible value for the column's UPDATE_RULE and DELETE_RULE in the com.sun.star.sdbc.XResultSet objects returned by the methods com.sun.star.sdbc.XDatabaseMetaData.getImportedKeys(), com.sun.star.sdbc.XDatabaseMetaData.getExportedKeys(), and com.sun.star.sdbc.XDatabaseMetaData.getCrossReference().",
-          "",
-          "For the columns UPDATE_RULE and DELETE_RULE , it indicates that if the primary key is updated or deleted, the foreign key (imported key) is set to the default value."
-        ]
-      },
-      {
         "name": "SET_NULL",
         "type": "int",
         "value_type": "INTEGER",
@@ -90,6 +69,28 @@
           "a possible value for the column's UPDATE_RULE and DELETE_RULE in the com.sun.star.sdbc.XResultSet objects returned by the methods com.sun.star.sdbc.XDatabaseMetaData.getImportedKeys(), com.sun.star.sdbc.XDatabaseMetaData.getExportedKeys(), and com.sun.star.sdbc.XDatabaseMetaData.getCrossReference().",
           "",
           "For the columns UPDATE_RULE and DELETE_RULE , it indicates that when the primary key is updated or deleted, the foreign key (imported key) is changed to NULL."
+        ]
+      },
+      {
+        "name": "NO_ACTION",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 3,
+        "lines": [
+          "a possible value for the column's UPDATE_RULE and DELETE_RULE in the com.sun.star.sdbc.XResultSet objects returned by the methods com.sun.star.sdbc.XDatabaseMetaData.getImportedKeys(), com.sun.star.sdbc.XDatabaseMetaData.getExportedKeys(), and com.sun.star.sdbc.XDatabaseMetaData.getCrossReference().",
+          "",
+          "For the columns UPDATE_RULE and DELETE_RULE , it indicates that if the primary key has been imported, it cannot be updated or deleted."
+        ]
+      },
+      {
+        "name": "SET_DEFAULT",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 4,
+        "lines": [
+          "a possible value for the column's UPDATE_RULE and DELETE_RULE in the com.sun.star.sdbc.XResultSet objects returned by the methods com.sun.star.sdbc.XDatabaseMetaData.getImportedKeys(), com.sun.star.sdbc.XDatabaseMetaData.getExportedKeys(), and com.sun.star.sdbc.XDatabaseMetaData.getCrossReference().",
+          "",
+          "For the columns UPDATE_RULE and DELETE_RULE , it indicates that if the primary key is updated or deleted, the foreign key (imported key) is set to the default value."
         ]
       }
     ]

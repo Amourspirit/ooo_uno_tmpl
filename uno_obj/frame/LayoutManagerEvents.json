@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "LayoutManagerEvents",
   "type": "const",
   "namespace": "com.sun.star.frame",
   "parser_args": {
-    "sort": false
+    "sort": false,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "hex": false,
@@ -40,28 +41,6 @@
     ],
     "items": [
       {
-        "name": "INVISIBLE",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 4,
-        "lines": [
-          "specifies that the layout manager container frame window becomes invisible.",
-          "",
-          "This event sends no additional information."
-        ]
-      },
-      {
-        "name": "LAYOUT",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 2,
-        "lines": [
-          "specifies that the layout manager refreshed the layout of the frame.",
-          "",
-          "This event sends no additional information."
-        ]
-      },
-      {
         "name": "LOCK",
         "type": "int",
         "value_type": "INTEGER",
@@ -70,39 +49,6 @@
           "specifies that the layout manager processed a lock call, which prevents it from doing layouts.",
           "",
           "This event sends the current lock count as additional information."
-        ]
-      },
-      {
-        "name": "MERGEDMENUBAR",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 5,
-        "lines": [
-          "A merged menu bar has been set at the layout manager.",
-          "",
-          "This event sends no additional information."
-        ]
-      },
-      {
-        "name": "UIELEMENT_INVISIBLE",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 7,
-        "lines": [
-          "specifies that a certain user interface element has been made invisible",
-          "",
-          "This event sends the resource url of the invisible user interface element."
-        ]
-      },
-      {
-        "name": "UIELEMENT_VISIBLE",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 6,
-        "lines": [
-          "specifies that a certain user interface element has been made visible",
-          "",
-          "This event sends the resource url of the newly visible user interface element."
         ]
       },
       {
@@ -117,6 +63,17 @@
         ]
       },
       {
+        "name": "LAYOUT",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 2,
+        "lines": [
+          "specifies that the layout manager refreshed the layout of the frame.",
+          "",
+          "This event sends no additional information."
+        ]
+      },
+      {
         "name": "VISIBLE",
         "type": "int",
         "value_type": "INTEGER",
@@ -125,6 +82,50 @@
           "specifies that the layout manager container frame window becomes visible.",
           "",
           "This event sends no additional information."
+        ]
+      },
+      {
+        "name": "INVISIBLE",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 4,
+        "lines": [
+          "specifies that the layout manager container frame window becomes invisible.",
+          "",
+          "This event sends no additional information."
+        ]
+      },
+      {
+        "name": "MERGEDMENUBAR",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 5,
+        "lines": [
+          "A merged menu bar has been set at the layout manager.",
+          "",
+          "This event sends no additional information."
+        ]
+      },
+      {
+        "name": "UIELEMENT_VISIBLE",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 6,
+        "lines": [
+          "specifies that a certain user interface element has been made visible",
+          "",
+          "This event sends the resource url of the newly visible user interface element."
+        ]
+      },
+      {
+        "name": "UIELEMENT_INVISIBLE",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 7,
+        "lines": [
+          "specifies that a certain user interface element has been made invisible",
+          "",
+          "This event sends the resource url of the invisible user interface element."
         ]
       }
     ]

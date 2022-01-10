@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "TransactionIsolation",
   "type": "const",
   "namespace": "com.sun.star.sdbc",
   "parser_args": {
-    "sort": false
+    "sort": false,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "hex": false,
@@ -43,17 +44,6 @@
         ]
       },
       {
-        "name": "READ_COMMITTED",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 2,
-        "lines": [
-          "Dirty reads are prevented; non-repeatable reads and phantom reads can occur.",
-          "",
-          "This level only prohibits a transaction from reading a row with uncommitted changes in it."
-        ]
-      },
-      {
         "name": "READ_UNCOMMITTED",
         "type": "int",
         "value_type": "INTEGER",
@@ -62,6 +52,17 @@
           "Dirty reads, non-repeatable reads and phantom reads can occur.",
           "",
           "This level allows a row changed by one transaction to be read by another transaction before any changes in that row have been committed (a \\\"dirty read\\\"). If any of the changes are rolled back, the second transaction will have retrieved an invalid row."
+        ]
+      },
+      {
+        "name": "READ_COMMITTED",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 2,
+        "lines": [
+          "Dirty reads are prevented; non-repeatable reads and phantom reads can occur.",
+          "",
+          "This level only prohibits a transaction from reading a row with uncommitted changes in it."
         ]
       },
       {

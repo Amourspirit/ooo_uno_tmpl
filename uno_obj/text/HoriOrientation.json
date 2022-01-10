@@ -1,12 +1,13 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "HoriOrientation",
   "type": "const",
   "namespace": "com.sun.star.text",
   "parser_args": {
-    "sort": false
+    "sort": false,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "hex": false,
@@ -34,30 +35,30 @@
     ],
     "items": [
       {
+        "name": "NONE",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 0,
+        "lines": [
+          "no hard alignment is applied."
+        ]
+      },
+      {
+        "name": "RIGHT",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 1,
+        "lines": [
+          "The object is aligned at the right side."
+        ]
+      },
+      {
         "name": "CENTER",
         "type": "int",
         "value_type": "INTEGER",
         "value": 2,
         "lines": [
           "The object is aligned at the middle."
-        ]
-      },
-      {
-        "name": "FULL",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 6,
-        "lines": [
-          "The object uses the full space (for text tables only)."
-        ]
-      },
-      {
-        "name": "INSIDE",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 4,
-        "lines": [
-          "TODO."
         ]
       },
       {
@@ -70,23 +71,12 @@
         ]
       },
       {
-        "name": "LEFT_AND_WIDTH",
+        "name": "INSIDE",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 7,
+        "value": 4,
         "lines": [
-          "The left offset and the width of the object are defined.",
-          "",
-          "For text tables this means that the tables position is defined by the left margin and the width."
-        ]
-      },
-      {
-        "name": "NONE",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 0,
-        "lines": [
-          "no hard alignment is applied."
+          "TODO."
         ]
       },
       {
@@ -99,12 +89,23 @@
         ]
       },
       {
-        "name": "RIGHT",
+        "name": "FULL",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 1,
+        "value": 6,
         "lines": [
-          "The object is aligned at the right side."
+          "The object uses the full space (for text tables only)."
+        ]
+      },
+      {
+        "name": "LEFT_AND_WIDTH",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 7,
+        "lines": [
+          "The left offset and the width of the object are defined.",
+          "",
+          "For text tables this means that the tables position is defined by the left margin and the width."
         ]
       }
     ]
