@@ -3023,6 +3023,8 @@ class Util:
                 p_type = Util.TYPE_RULES.get_python_type(in_type=s)
                 if not p_type.imports:
                     return False
+                if p_type.imports == class_name:
+                    return True
                 full_name = ns + '.' + class_name
                 return p_type.imports == full_name
             except Exception as e:
