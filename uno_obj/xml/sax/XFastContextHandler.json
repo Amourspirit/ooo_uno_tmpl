@@ -1,13 +1,14 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "XFastContextHandler",
   "type": "interface",
   "namespace": "com.sun.star.xml.sax",
   "parser_args": {
     "sort": true,
-    "long_names": true
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
@@ -25,19 +26,14 @@
         ".x_fast_attribute_list",
         "XFastAttributeList",
         "x_fast_attribute_list_i"
-      ],
-      [
-        ".x_fast_context_handler",
-        "XFastContextHandler",
-        "x_fast_context_handler_i"
       ]
     ],
     "extends_map": {
       "com.sun.star.uno.XInterface": "uno_x_interface_i"
     },
     "quote": [
-      "x_fast_attribute_list_i",
-      "x_fast_context_handler_i"
+      "XFastContextHandler",
+      "x_fast_attribute_list_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -72,7 +68,7 @@
         },
         {
           "name": "createFastChildContext",
-          "returns": "x_fast_context_handler_i",
+          "returns": "XFastContextHandler",
           "desc": [
             "receives notification of the beginning of a known child element.",
             "",
@@ -96,7 +92,7 @@
         },
         {
           "name": "createUnknownChildContext",
-          "returns": "x_fast_context_handler_i",
+          "returns": "XFastContextHandler",
           "desc": [
             "receives notification of the beginning of an unknown child element ."
           ],

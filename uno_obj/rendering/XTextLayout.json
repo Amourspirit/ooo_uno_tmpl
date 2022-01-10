@@ -1,13 +1,14 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "XTextLayout",
   "type": "interface",
   "namespace": "com.sun.star.rendering",
   "parser_args": {
     "sort": true,
-    "long_names": true
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
@@ -55,11 +56,6 @@
         ".x_poly_polygon2_d",
         "XPolyPolygon2D",
         "x_poly_polygon2_d_i"
-      ],
-      [
-        ".x_text_layout",
-        "XTextLayout",
-        "x_text_layout_i"
       ]
     ],
     "extends_map": {
@@ -71,18 +67,18 @@
       "geometry_real_rectangle2_d_i",
       "string_context_i",
       "text_hit_i",
+      "typing.List[XTextLayout]",
       "typing.List[float]",
       "typing.List[geometry_real_rectangle2_d_i]",
       "typing.List[x_poly_polygon2_d_i]",
-      "typing.List[x_text_layout_i]",
       "x_canvas_font_i",
       "x_poly_polygon2_d_i"
     ],
     "typings": [
+      "typing.List[XTextLayout]",
       "typing.List[float]",
       "typing.List[geometry_real_rectangle2_d_i]",
-      "typing.List[x_poly_polygon2_d_i]",
-      "typing.List[x_text_layout_i]"
+      "typing.List[x_poly_polygon2_d_i]"
     ],
     "requires_typing": true,
     "name": "XTextLayout",
@@ -138,7 +134,7 @@
           "args": [
             [
               "aNextLayouts",
-              "typing.List[x_text_layout_i]",
+              "typing.List[XTextLayout]",
               "in"
             ],
             [

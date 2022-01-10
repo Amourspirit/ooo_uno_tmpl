@@ -1,13 +1,14 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "XBitmapCanvas",
   "type": "interface",
   "namespace": "com.sun.star.rendering",
   "parser_args": {
     "sort": true,
-    "long_names": true
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
@@ -35,21 +36,16 @@
         ".view_state",
         "ViewState",
         "view_state_i"
-      ],
-      [
-        ".x_bitmap_canvas",
-        "XBitmapCanvas",
-        "x_bitmap_canvas_i"
       ]
     ],
     "extends_map": {
       "com.sun.star.rendering.XCanvas": "x_canvas_i"
     },
     "quote": [
+      "XBitmapCanvas",
       "geometry_real_rectangle2_d_i",
       "render_state_i",
-      "view_state_i",
-      "x_bitmap_canvas_i"
+      "view_state_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -86,7 +82,7 @@
           "args": [
             [
               "sourceCanvas",
-              "x_bitmap_canvas_i",
+              "XBitmapCanvas",
               "in"
             ],
             [

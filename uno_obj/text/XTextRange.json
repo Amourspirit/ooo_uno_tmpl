@@ -1,13 +1,14 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "XTextRange",
   "type": "interface",
   "namespace": "com.sun.star.text",
   "parser_args": {
     "sort": true,
-    "long_names": true
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
@@ -25,19 +26,14 @@
         ".x_text",
         "XText",
         "x_text_i"
-      ],
-      [
-        ".x_text_range",
-        "XTextRange",
-        "x_text_range_i"
       ]
     ],
     "extends_map": {
       "com.sun.star.uno.XInterface": "uno_x_interface_i"
     },
     "quote": [
-      "x_text_i",
-      "x_text_range_i"
+      "XTextRange",
+      "x_text_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -57,14 +53,14 @@
       "methods": [
         {
           "name": "getEnd",
-          "returns": "x_text_range_i",
+          "returns": "XTextRange",
           "desc": [],
           "raises": [],
           "args": []
         },
         {
           "name": "getStart",
-          "returns": "x_text_range_i",
+          "returns": "XTextRange",
           "desc": [],
           "raises": [],
           "args": []

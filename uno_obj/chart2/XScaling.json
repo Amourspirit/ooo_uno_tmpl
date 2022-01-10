@@ -1,13 +1,14 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "XScaling",
   "type": "interface",
   "namespace": "com.sun.star.chart2",
   "parser_args": {
     "sort": true,
-    "long_names": true
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
@@ -20,21 +21,15 @@
         "uno_x_interface_i"
       ]
     ],
-    "from_imports_typing": [
-      [
-        ".x_scaling",
-        "XScaling",
-        "x_scaling_i"
-      ]
-    ],
+    "from_imports_typing": [],
     "extends_map": {
       "com.sun.star.uno.XInterface": "uno_x_interface_i"
     },
     "quote": [
-      "x_scaling_i"
+      "XScaling"
     ],
     "typings": [],
-    "requires_typing": true,
+    "requires_typing": false,
     "name": "XScaling",
     "imports": [],
     "namespace": "com.sun.star.chart2",
@@ -64,7 +59,7 @@
         },
         {
           "name": "getInverseScaling",
-          "returns": "x_scaling_i",
+          "returns": "XScaling",
           "desc": [
             "Get an interface object that conforms to a scaling rule that is the reverse of the original scaling rule."
           ],

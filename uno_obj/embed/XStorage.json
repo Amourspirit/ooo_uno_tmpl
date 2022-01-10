@@ -1,13 +1,14 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "XStorage",
   "type": "interface",
   "namespace": "com.sun.star.embed",
   "parser_args": {
     "sort": true,
-    "long_names": true
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
@@ -27,11 +28,6 @@
     ],
     "from_imports_typing": [
       [
-        ".x_storage",
-        "XStorage",
-        "x_storage_i"
-      ],
-      [
         "..io.x_stream",
         "XStream",
         "io_x_stream_i"
@@ -42,8 +38,8 @@
       "com.sun.star.lang.XComponent": "lang_x_component_i"
     },
     "quote": [
-      "io_x_stream_i",
-      "x_storage_i"
+      "XStorage",
+      "io_x_stream_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -140,7 +136,7 @@
             ],
             [
               "xDest",
-              "x_storage_i",
+              "XStorage",
               "in"
             ],
             [
@@ -167,7 +163,7 @@
           "args": [
             [
               "xTargetStorage",
-              "x_storage_i",
+              "XStorage",
               "in"
             ]
           ]
@@ -194,7 +190,7 @@
             ],
             [
               "xTargetStorage",
-              "x_storage_i",
+              "XStorage",
               "in"
             ]
           ]
@@ -216,7 +212,7 @@
           "args": [
             [
               "xDest",
-              "x_storage_i",
+              "XStorage",
               "in"
             ]
           ]
@@ -287,7 +283,7 @@
             ],
             [
               "xDest",
-              "x_storage_i",
+              "XStorage",
               "in"
             ],
             [
@@ -335,7 +331,7 @@
         },
         {
           "name": "openStorageElement",
-          "returns": "x_storage_i",
+          "returns": "XStorage",
           "desc": [
             "allows to get access to a child storage.",
             "",

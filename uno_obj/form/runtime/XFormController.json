@@ -1,13 +1,14 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "XFormController",
   "type": "interface",
   "namespace": "com.sun.star.form.runtime",
   "parser_args": {
     "sort": true,
-    "long_names": true
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
@@ -87,11 +88,6 @@
         "x_form_controller_listener_i"
       ],
       [
-        ".x_form_controller",
-        "XFormController",
-        "x_form_controller_i"
-      ],
-      [
         ".x_form_controller_context",
         "XFormControllerContext",
         "x_form_controller_context_i"
@@ -122,10 +118,10 @@
       "com.sun.star.util.XModifyBroadcaster": "util_x_modify_broadcaster_i"
     },
     "quote": [
+      "XFormController",
       "awt_x_control_i",
       "task_x_interaction_handler_i",
       "x_form_controller_context_i",
-      "x_form_controller_i",
       "x_form_controller_listener_i",
       "x_form_operations_i"
     ],
@@ -135,18 +131,18 @@
     "imports": [],
     "namespace": "com.sun.star.form.runtime",
     "extends": [
-      "com.sun.star.util.XModifyBroadcaster",
-      "com.sun.star.sdb.XSQLErrorBroadcaster",
-      "com.sun.star.container.XEnumerationAccess",
       "com.sun.star.awt.XTabController",
-      "com.sun.star.container.XIndexAccess",
-      "com.sun.star.util.XModeSelector",
-      "com.sun.star.form.XConfirmDeleteBroadcaster",
       "com.sun.star.container.XChild",
-      "com.sun.star.form.XDatabaseParameterBroadcaster2",
-      "com.sun.star.form.runtime.XFilterController",
+      "com.sun.star.container.XIndexAccess",
+      "com.sun.star.container.XEnumerationAccess",
       "com.sun.star.lang.XComponent",
-      "com.sun.star.sdb.XRowSetApproveBroadcaster"
+      "com.sun.star.util.XModifyBroadcaster",
+      "com.sun.star.form.XConfirmDeleteBroadcaster",
+      "com.sun.star.sdb.XSQLErrorBroadcaster",
+      "com.sun.star.sdb.XRowSetApproveBroadcaster",
+      "com.sun.star.form.XDatabaseParameterBroadcaster2",
+      "com.sun.star.util.XModeSelector",
+      "com.sun.star.form.runtime.XFilterController"
     ],
     "desc": [
       "specifies a component controlling the interaction between the user and form functionality.",
@@ -220,7 +216,7 @@
           "args": [
             [
               "ChildController",
-              "x_form_controller_i",
+              "XFormController",
               "in"
             ]
           ]

@@ -1,13 +1,14 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "XPrimitive3D",
   "type": "interface",
   "namespace": "com.sun.star.graphic",
   "parser_args": {
     "sort": true,
-    "long_names": true
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
@@ -30,11 +31,6 @@
         "..geometry.real_rectangle3_d",
         "RealRectangle3D",
         "geometry_real_rectangle3_d_i"
-      ],
-      [
-        ".x_primitive3_d",
-        "XPrimitive3D",
-        "x_primitive3_d_i"
       ]
     ],
     "extends_map": {
@@ -42,12 +38,12 @@
     },
     "quote": [
       "geometry_real_rectangle3_d_i",
-      "typing.List[beans_property_value_i]",
-      "typing.List[x_primitive3_d_i]"
+      "typing.List[XPrimitive3D]",
+      "typing.List[beans_property_value_i]"
     ],
     "typings": [
-      "typing.List[beans_property_value_i]",
-      "typing.List[x_primitive3_d_i]"
+      "typing.List[XPrimitive3D]",
+      "typing.List[beans_property_value_i]"
     ],
     "requires_typing": true,
     "name": "XPrimitive3D",
@@ -66,7 +62,7 @@
       "methods": [
         {
           "name": "getDecomposition",
-          "returns": "typing.List[x_primitive3_d_i]",
+          "returns": "typing.List[XPrimitive3D]",
           "desc": [
             "Retrieve decomposed list of simpler primitives.",
             "",

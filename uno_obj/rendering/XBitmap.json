@@ -1,13 +1,14 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "XBitmap",
   "type": "interface",
   "namespace": "com.sun.star.rendering",
   "parser_args": {
     "sort": true,
-    "long_names": true
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
@@ -30,20 +31,15 @@
         "..geometry.real_size2_d",
         "RealSize2D",
         "geometry_real_size2_d_i"
-      ],
-      [
-        ".x_bitmap",
-        "XBitmap",
-        "x_bitmap_i"
       ]
     ],
     "extends_map": {
       "com.sun.star.uno.XInterface": "uno_x_interface_i"
     },
     "quote": [
+      "XBitmap",
       "geometry_integer_size2_d_i",
-      "geometry_real_size2_d_i",
-      "x_bitmap_i"
+      "geometry_real_size2_d_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -67,7 +63,7 @@
       "methods": [
         {
           "name": "getScaledBitmap",
-          "returns": "x_bitmap_i",
+          "returns": "XBitmap",
           "desc": [
             "Query a scaled copy of the original bitmap."
           ],

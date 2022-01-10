@@ -1,13 +1,14 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "XNode",
   "type": "interface",
   "namespace": "com.sun.star.xml.dom",
   "parser_args": {
     "sort": true,
-    "long_names": true
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
@@ -37,11 +38,6 @@
         "x_named_node_map_i"
       ],
       [
-        ".x_node",
-        "XNode",
-        "x_node_i"
-      ],
-      [
         ".x_node_list",
         "XNodeList",
         "x_node_list_i"
@@ -51,10 +47,10 @@
       "com.sun.star.uno.XInterface": "uno_x_interface_i"
     },
     "quote": [
+      "XNode",
       "node_type_i",
       "x_document_i",
       "x_named_node_map_i",
-      "x_node_i",
       "x_node_list_i"
     ],
     "typings": [],
@@ -83,7 +79,7 @@
       "methods": [
         {
           "name": "appendChild",
-          "returns": "x_node_i",
+          "returns": "XNode",
           "desc": [
             "Adds the node newChild to the end of the list of children of this node.",
             "",
@@ -99,14 +95,14 @@
           "args": [
             [
               "newChild",
-              "x_node_i",
+              "XNode",
               "in"
             ]
           ]
         },
         {
           "name": "cloneNode",
-          "returns": "x_node_i",
+          "returns": "XNode",
           "desc": [
             "Returns a duplicate of this node, i.e., serves as a generic copy constructor for nodes."
           ],
@@ -139,7 +135,7 @@
         },
         {
           "name": "getFirstChild",
-          "returns": "x_node_i",
+          "returns": "XNode",
           "desc": [
             "The first child of this node."
           ],
@@ -148,7 +144,7 @@
         },
         {
           "name": "getLastChild",
-          "returns": "x_node_i",
+          "returns": "XNode",
           "desc": [
             "The last child of this node."
           ],
@@ -175,7 +171,7 @@
         },
         {
           "name": "getNextSibling",
-          "returns": "x_node_i",
+          "returns": "XNode",
           "desc": [
             "The node immediately following this node."
           ],
@@ -224,7 +220,7 @@
         },
         {
           "name": "getParentNode",
-          "returns": "x_node_i",
+          "returns": "XNode",
           "desc": [
             "The parent of this node."
           ],
@@ -242,7 +238,7 @@
         },
         {
           "name": "getPreviousSibling",
-          "returns": "x_node_i",
+          "returns": "XNode",
           "desc": [
             "The node immediately preceding this node."
           ],
@@ -269,7 +265,7 @@
         },
         {
           "name": "insertBefore",
-          "returns": "x_node_i",
+          "returns": "XNode",
           "desc": [
             "Inserts the node newChild before the existing child node refChild.",
             "",
@@ -287,12 +283,12 @@
           "args": [
             [
               "newChild",
-              "x_node_i",
+              "XNode",
               "in"
             ],
             [
               "refChild",
-              "x_node_i",
+              "XNode",
               "in"
             ]
           ]
@@ -328,7 +324,7 @@
         },
         {
           "name": "removeChild",
-          "returns": "x_node_i",
+          "returns": "XNode",
           "desc": [
             "Removes the child node indicated by oldChild from the list of children, and returns it.",
             "",
@@ -342,14 +338,14 @@
           "args": [
             [
               "oldChild",
-              "x_node_i",
+              "XNode",
               "in"
             ]
           ]
         },
         {
           "name": "replaceChild",
-          "returns": "x_node_i",
+          "returns": "XNode",
           "desc": [
             "Replaces the child node oldChild with newChild in the list of children, and returns the oldChild node.",
             "",
@@ -367,12 +363,12 @@
           "args": [
             [
               "newChild",
-              "x_node_i",
+              "XNode",
               "in"
             ],
             [
               "oldChild",
-              "x_node_i",
+              "XNode",
               "in"
             ]
           ]

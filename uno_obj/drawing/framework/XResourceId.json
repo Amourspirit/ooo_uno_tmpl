@@ -1,13 +1,14 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "XResourceId",
   "type": "interface",
   "namespace": "com.sun.star.drawing.framework",
   "parser_args": {
     "sort": true,
-    "long_names": true
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
@@ -21,11 +22,6 @@
         "anchor_binding_mode_i"
       ],
       [
-        ".x_resource_id",
-        "XResourceId",
-        "x_resource_id_i"
-      ],
-      [
         "...util.url",
         "URL",
         "util_url_i"
@@ -33,10 +29,10 @@
     ],
     "extends_map": {},
     "quote": [
+      "XResourceId",
       "anchor_binding_mode_i",
       "typing.List[str]",
-      "util_url_i",
-      "x_resource_id_i"
+      "util_url_i"
     ],
     "typings": [
       "typing.List[str]"
@@ -60,7 +56,7 @@
       "methods": [
         {
           "name": "clone",
-          "returns": "x_resource_id_i",
+          "returns": "XResourceId",
           "desc": [
             "Return a copy of the called resource id.",
             "",
@@ -83,14 +79,14 @@
           "args": [
             [
               "xId",
-              "x_resource_id_i",
+              "XResourceId",
               "in"
             ]
           ]
         },
         {
           "name": "getAnchor",
-          "returns": "x_resource_id_i",
+          "returns": "XResourceId",
           "desc": [
             "Return a new XResourceId that represents the anchor resource."
           ],
@@ -164,7 +160,7 @@
           "args": [
             [
               "xAnchorId",
-              "x_resource_id_i",
+              "XResourceId",
               "in"
             ],
             [

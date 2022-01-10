@@ -1,13 +1,14 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "XAccessibleTable",
   "type": "interface",
   "namespace": "com.sun.star.accessibility",
   "parser_args": {
     "sort": true,
-    "long_names": true
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
@@ -25,20 +26,15 @@
         ".x_accessible",
         "XAccessible",
         "x_accessible_i"
-      ],
-      [
-        ".x_accessible_table",
-        "XAccessibleTable",
-        "x_accessible_table_i"
       ]
     ],
     "extends_map": {
       "com.sun.star.uno.XInterface": "uno_x_interface_i"
     },
     "quote": [
+      "XAccessibleTable",
       "typing.List[int]",
-      "x_accessible_i",
-      "x_accessible_table_i"
+      "x_accessible_i"
     ],
     "typings": [
       "typing.List[int]"
@@ -170,7 +166,7 @@
         },
         {
           "name": "getAccessibleColumnHeaders",
-          "returns": "x_accessible_table_i",
+          "returns": "XAccessibleTable",
           "desc": [
             "Returns the column headers as an XAccessibleTable object.",
             "",
@@ -274,7 +270,7 @@
         },
         {
           "name": "getAccessibleRowHeaders",
-          "returns": "x_accessible_table_i",
+          "returns": "XAccessibleTable",
           "desc": [
             "Returns the row headers as an XAccessibleTable object.",
             "",

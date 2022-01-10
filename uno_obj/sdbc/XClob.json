@@ -1,13 +1,14 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "XClob",
   "type": "interface",
   "namespace": "com.sun.star.sdbc",
   "parser_args": {
     "sort": true,
-    "long_names": true
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
@@ -25,19 +26,14 @@
         "..io.x_input_stream",
         "XInputStream",
         "io_x_input_stream_i"
-      ],
-      [
-        ".x_clob",
-        "XClob",
-        "x_clob_i"
       ]
     ],
     "extends_map": {
       "com.sun.star.uno.XInterface": "uno_x_interface_i"
     },
     "quote": [
-      "io_x_input_stream_i",
-      "x_clob_i"
+      "XClob",
+      "io_x_input_stream_i"
     ],
     "typings": [],
     "requires_typing": true,
@@ -143,7 +139,7 @@
           "args": [
             [
               "pattern",
-              "x_clob_i",
+              "XClob",
               "in"
             ],
             [

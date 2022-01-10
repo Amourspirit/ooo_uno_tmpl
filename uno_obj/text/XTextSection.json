@@ -1,13 +1,14 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "XTextSection",
   "type": "interface",
   "namespace": "com.sun.star.text",
   "parser_args": {
     "sort": true,
-    "long_names": true
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
@@ -20,22 +21,16 @@
         "x_text_content_i"
       ]
     ],
-    "from_imports_typing": [
-      [
-        ".x_text_section",
-        "XTextSection",
-        "x_text_section_i"
-      ]
-    ],
+    "from_imports_typing": [],
     "extends_map": {
       "com.sun.star.text.XTextContent": "x_text_content_i"
     },
     "quote": [
-      "typing.List[x_text_section_i]",
-      "x_text_section_i"
+      "XTextSection",
+      "typing.List[XTextSection]"
     ],
     "typings": [
-      "typing.List[x_text_section_i]"
+      "typing.List[XTextSection]"
     ],
     "requires_typing": true,
     "name": "XTextSection",
@@ -52,14 +47,14 @@
       "methods": [
         {
           "name": "getChildSections",
-          "returns": "typing.List[x_text_section_i]",
+          "returns": "typing.List[XTextSection]",
           "desc": [],
           "raises": [],
           "args": []
         },
         {
           "name": "getParentSection",
-          "returns": "x_text_section_i",
+          "returns": "XTextSection",
           "desc": [
             "If the object is a child section, then this method returns the parent text section."
           ],

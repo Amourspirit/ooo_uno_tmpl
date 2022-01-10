@@ -1,13 +1,14 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "XUIObject",
   "type": "interface",
   "namespace": "com.sun.star.ui.test",
   "parser_args": {
     "sort": true,
-    "long_names": true
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
@@ -19,18 +20,13 @@
         "...beans.property_values",
         "PropertyValues",
         "beans_property_values_i"
-      ],
-      [
-        ".xui_object",
-        "XUIObject",
-        "xui_object_i"
       ]
     ],
     "extends_map": {},
     "quote": [
+      "XUIObject",
       "beans_property_values_i",
-      "typing.List[str]",
-      "xui_object_i"
+      "typing.List[str]"
     ],
     "typings": [
       "typing.List[str]"
@@ -64,7 +60,7 @@
         },
         {
           "name": "getChild",
-          "returns": "xui_object_i",
+          "returns": "XUIObject",
           "desc": [],
           "raises": [],
           "args": [

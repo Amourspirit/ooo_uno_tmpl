@@ -1,13 +1,14 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "XSelectionFunction",
   "type": "interface",
   "namespace": "com.sun.star.drawing",
   "parser_args": {
     "sort": true,
-    "long_names": true
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
@@ -67,13 +68,13 @@
     "imports": [],
     "namespace": "com.sun.star.drawing",
     "extends": [
+      "com.sun.star.lang.XComponent",
+      "com.sun.star.lang.XServiceInfo",
+      "com.sun.star.frame.XDispatch",
+      "com.sun.star.awt.XKeyHandler",
       "com.sun.star.awt.XMouseClickHandler",
       "com.sun.star.awt.XMouseMotionHandler",
-      "com.sun.star.awt.XKeyHandler",
-      "com.sun.star.frame.XDispatch",
-      "com.sun.star.view.XSelectionChangeListener",
-      "com.sun.star.lang.XServiceInfo",
-      "com.sun.star.lang.XComponent"
+      "com.sun.star.view.XSelectionChangeListener"
     ],
     "desc": [],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1drawing_1_1XSelectionFunction.html",

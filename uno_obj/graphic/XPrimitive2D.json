@@ -1,13 +1,14 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "XPrimitive2D",
   "type": "interface",
   "namespace": "com.sun.star.graphic",
   "parser_args": {
     "sort": true,
-    "long_names": true
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
@@ -30,11 +31,6 @@
         "..geometry.real_rectangle2_d",
         "RealRectangle2D",
         "geometry_real_rectangle2_d_i"
-      ],
-      [
-        ".x_primitive2_d",
-        "XPrimitive2D",
-        "x_primitive2_d_i"
       ]
     ],
     "extends_map": {
@@ -42,12 +38,12 @@
     },
     "quote": [
       "geometry_real_rectangle2_d_i",
-      "typing.List[beans_property_value_i]",
-      "typing.List[x_primitive2_d_i]"
+      "typing.List[XPrimitive2D]",
+      "typing.List[beans_property_value_i]"
     ],
     "typings": [
-      "typing.List[beans_property_value_i]",
-      "typing.List[x_primitive2_d_i]"
+      "typing.List[XPrimitive2D]",
+      "typing.List[beans_property_value_i]"
     ],
     "requires_typing": true,
     "name": "XPrimitive2D",
@@ -66,7 +62,7 @@
       "methods": [
         {
           "name": "getDecomposition",
-          "returns": "typing.List[x_primitive2_d_i]",
+          "returns": "typing.List[XPrimitive2D]",
           "desc": [
             "Retrieve decomposed list of simpler primitives.",
             "",

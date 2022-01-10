@@ -1,13 +1,14 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "XImageManager",
   "type": "interface",
   "namespace": "com.sun.star.ui",
   "parser_args": {
     "sort": true,
-    "long_names": true
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
@@ -61,10 +62,10 @@
     "imports": [],
     "namespace": "com.sun.star.ui",
     "extends": [
+      "com.sun.star.ui.XUIConfigurationPersistence",
       "com.sun.star.ui.XUIConfiguration",
-      "com.sun.star.lang.XInitialization",
       "com.sun.star.lang.XComponent",
-      "com.sun.star.ui.XUIConfigurationPersistence"
+      "com.sun.star.lang.XInitialization"
     ],
     "desc": [
       "specifies access functions to an images manager interface to add, replace and remove images associations to command URLs.",

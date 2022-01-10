@@ -1,13 +1,14 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "XIdlClass",
   "type": "interface",
   "namespace": "com.sun.star.reflection",
   "parser_args": {
     "sort": true,
-    "long_names": true
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
@@ -25,11 +26,6 @@
         ".x_idl_array",
         "XIdlArray",
         "x_idl_array_i"
-      ],
-      [
-        ".x_idl_class",
-        "XIdlClass",
-        "x_idl_class_i"
       ],
       [
         ".x_idl_field",
@@ -56,18 +52,18 @@
       "com.sun.star.uno.XInterface": "uno_x_interface_i"
     },
     "quote": [
-      "typing.List[x_idl_class_i]",
+      "XIdlClass",
+      "typing.List[XIdlClass]",
       "typing.List[x_idl_field_i]",
       "typing.List[x_idl_method_i]",
       "uno_type_class_i",
       "uno_uik_i",
       "x_idl_array_i",
-      "x_idl_class_i",
       "x_idl_field_i",
       "x_idl_method_i"
     ],
     "typings": [
-      "typing.List[x_idl_class_i]",
+      "typing.List[XIdlClass]",
       "typing.List[x_idl_field_i]",
       "typing.List[x_idl_method_i]"
     ],
@@ -109,7 +105,7 @@
           "args": [
             [
               "Type",
-              "x_idl_class_i",
+              "XIdlClass",
               "in"
             ]
           ]
@@ -127,7 +123,7 @@
         },
         {
           "name": "getClass",
-          "returns": "x_idl_class_i",
+          "returns": "XIdlClass",
           "desc": [
             "Deprecated.",
             "",
@@ -144,7 +140,7 @@
         },
         {
           "name": "getClasses",
-          "returns": "typing.List[x_idl_class_i]",
+          "returns": "typing.List[XIdlClass]",
           "desc": [
             "Deprecated.",
             "",
@@ -155,7 +151,7 @@
         },
         {
           "name": "getComponentType",
-          "returns": "x_idl_class_i",
+          "returns": "XIdlClass",
           "desc": [
             "If the reflected type is an array or sequence, then this method returns a XIdlClass interface reflecting the element."
           ],
@@ -193,7 +189,7 @@
         },
         {
           "name": "getInterfaces",
-          "returns": "typing.List[x_idl_class_i]",
+          "returns": "typing.List[XIdlClass]",
           "desc": [
             "Deprecated.",
             "",
@@ -242,7 +238,7 @@
         },
         {
           "name": "getSuperclasses",
-          "returns": "typing.List[x_idl_class_i]",
+          "returns": "typing.List[XIdlClass]",
           "desc": [
             "If the reflected type is an interface, then the returned sequence of XIdlClass reflect the base interfaces.",
             "",
@@ -281,7 +277,7 @@
           "args": [
             [
               "xType",
-              "x_idl_class_i",
+              "XIdlClass",
               "in"
             ]
           ]

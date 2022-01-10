@@ -1,13 +1,14 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "XIntegerBitmapColorSpace",
   "type": "interface",
   "namespace": "com.sun.star.rendering",
   "parser_args": {
     "sort": true,
-    "long_names": true
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
@@ -35,23 +36,18 @@
         ".rgb_color",
         "RGBColor",
         "rgb_color_i"
-      ],
-      [
-        ".x_integer_bitmap_color_space",
-        "XIntegerBitmapColorSpace",
-        "x_integer_bitmap_color_space_i"
       ]
     ],
     "extends_map": {
       "com.sun.star.rendering.XColorSpace": "x_color_space_i"
     },
     "quote": [
+      "XIntegerBitmapColorSpace",
       "typing.List[argb_color_i]",
       "typing.List[color_component_i]",
       "typing.List[int]",
       "typing.List[rgb_color_i]",
-      "x_color_space_i",
-      "x_integer_bitmap_color_space_i"
+      "x_color_space_i"
     ],
     "typings": [
       "typing.List[argb_color_i]",
@@ -231,7 +227,7 @@
             ],
             [
               "targetColorSpace",
-              "x_integer_bitmap_color_space_i",
+              "XIntegerBitmapColorSpace",
               "in"
             ]
           ]

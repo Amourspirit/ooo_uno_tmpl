@@ -1,13 +1,14 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "XRegistryKey",
   "type": "interface",
   "namespace": "com.sun.star.registry",
   "parser_args": {
     "sort": true,
-    "long_names": true
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
@@ -30,28 +31,23 @@
         ".registry_value_type",
         "RegistryValueType",
         "registry_value_type_i"
-      ],
-      [
-        ".x_registry_key",
-        "XRegistryKey",
-        "x_registry_key_i"
       ]
     ],
     "extends_map": {
       "com.sun.star.uno.XInterface": "uno_x_interface_i"
     },
     "quote": [
+      "XRegistryKey",
       "registry_key_type_i",
       "registry_value_type_i",
+      "typing.List[XRegistryKey]",
       "typing.List[int]",
-      "typing.List[str]",
-      "typing.List[x_registry_key_i]",
-      "x_registry_key_i"
+      "typing.List[str]"
     ],
     "typings": [
+      "typing.List[XRegistryKey]",
       "typing.List[int]",
-      "typing.List[str]",
-      "typing.List[x_registry_key_i]"
+      "typing.List[str]"
     ],
     "requires_typing": true,
     "name": "XRegistryKey",
@@ -81,7 +77,7 @@
         },
         {
           "name": "createKey",
-          "returns": "x_registry_key_i",
+          "returns": "XRegistryKey",
           "desc": [
             "creates a new key in the registry.",
             "",
@@ -309,7 +305,7 @@
         },
         {
           "name": "openKey",
-          "returns": "x_registry_key_i",
+          "returns": "XRegistryKey",
           "desc": [
             "opens a sub key of the key.",
             "",
@@ -328,7 +324,7 @@
         },
         {
           "name": "openKeys",
-          "returns": "typing.List[x_registry_key_i]",
+          "returns": "typing.List[XRegistryKey]",
           "desc": [
             "opens all subkeys of the key.",
             "",

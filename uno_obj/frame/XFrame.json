@@ -1,13 +1,14 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "XFrame",
   "type": "interface",
   "namespace": "com.sun.star.frame",
   "parser_args": {
     "sort": true,
-    "long_names": true
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
@@ -32,11 +33,6 @@
         "x_controller_i"
       ],
       [
-        ".x_frame",
-        "XFrame",
-        "x_frame_i"
-      ],
-      [
         ".x_frame_action_listener",
         "XFrameActionListener",
         "x_frame_action_listener_i"
@@ -51,10 +47,10 @@
       "com.sun.star.lang.XComponent": "lang_x_component_i"
     },
     "quote": [
+      "XFrame",
       "awt_x_window_i",
       "x_controller_i",
       "x_frame_action_listener_i",
-      "x_frame_i",
       "x_frames_supplier_i"
     ],
     "typings": [],
@@ -129,7 +125,7 @@
         },
         {
           "name": "findFrame",
-          "returns": "x_frame_i",
+          "returns": "XFrame",
           "desc": [
             "searches for a frame with the specified name.",
             "",
