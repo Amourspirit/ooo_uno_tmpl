@@ -97,7 +97,7 @@ def get_known_extends(ns:str, class_name: str) -> Union[List['Ns'], None]:
     global _KNOWN_EXTENDS
     key = ns + '.' + class_name
     if _KNOWN_EXTENDS is None:
-        json_file = Path(__file__).parent / 'known_inherits.json'
+        json_file = Path(__file__).parent / 'config' / 'known_extends.json'
         with open(json_file, 'r') as file:
             _KNOWN_EXTENDS = json.load(file)
     if not key in _KNOWN_EXTENDS:
