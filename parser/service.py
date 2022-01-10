@@ -106,7 +106,7 @@ def main():
         if args.log_file:
             log_args['log_file'] = args.log_file
         else:
-            log_args['log_file'] = 'singleton.log'
+            log_args['log_file'] = 'service.log'
         if args.verbose:
             log_args['level'] = logging.DEBUG
         _set_loggers(get_logger(logger_name=Path(__file__).stem, **log_args))

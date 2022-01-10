@@ -1,5 +1,4 @@
 # coding: utf-8
-import enum
 import os
 import sys
 import re
@@ -7,10 +6,15 @@ import importlib
 import logging
 import time
 import calendar
+import tempfile
+import json
+import pickle
+from pathlib import Path
 from datetime import datetime, timezone
 from types import ModuleType
-from typing import Dict, Iterable, Tuple, List, Union
+from typing import Iterable, Set, Tuple, List, Union, Optional
 from Cheetah.Template import Template
+
 
 # set up path for importing modules from main app
 _project_root = os.environ.get('project_root', None)
@@ -29,6 +33,223 @@ RESERVER_WORDS = {
     'not', 'or', 'pass', 'raise', 'return',
     'True', 'try', 'while', 'with', 'yield'
     }
+
+
+# region MRO Related Classes
+# region Cache
+class DictCache(dict):
+    def __init__(self, *args, **kw):
+        super(DictCache, self).__init__(*args, **kw)
+        self._has_changed = False
+
+    def __setitem__(self, item, value):
+        super(DictCache, self).__setitem__(item, value)
+        self._has_changed = True
+
+    @property
+    def has_changed(self) -> bool:
+        return self._has_changed
+
+
+class PickleCache(object):
+    """
+    Caches files and retreives cached files.
+    Cached file are in a subfolder of system tmp dir.
+    """
+
+    def __init__(self, tmp_dir: str, lifetime: Optional[float] = None) -> None:
+        """
+        Constructor
+
+        Args:
+            tmp_dir (str, optional): Dir name to create in tmp folder. Defaults to 'ooo_uno_tmpl'.
+            lifetime (float, optional): Time in seconds that cache is good for. Defaults to 60 seconds.
+        """
+        t_path = Path(tempfile.gettempdir())
+        self._cache_path = t_path / tmp_dir
+        self.mkdirp(self._cache_path)
+        self._lifetime = lifetime or 1800
+
+    def fetch_from_cache(self, filename: Union[str, Path]) -> Union[object, None]:
+        """
+        Fetches file contents from cache if it exist and is not expired
+
+        Args:
+            filename (Union[str, Path]): File to retrieve
+
+        Returns:
+            Union[object, None]: File contents if retrieved; Otherwise, ``None``
+        """
+        if self.seconds <= 0:
+            return None
+        f = Path(self.path, filename)
+        if not f.exists():
+            return None
+
+        f_stat = f.stat()
+        if f_stat.st_size == 0:
+            # shoud not be zero byte file.
+            try:
+                self.del_from_cache(f)
+            except Exception as e:
+                pass
+            return None
+        ti_m = f_stat.st_mtime
+        age = time.time() - ti_m
+        if age >= self.seconds:
+            return None
+
+        try:
+            # Open the file in binary mode
+            with open(f, 'rb') as file:
+                # Call load method to deserialze
+                content = pickle.load(file)
+            return content
+        except IOError:
+            return None
+        except Exception as e:
+            raise e
+
+    def save_in_cache(self, filename: Union[str, Path], content: object):
+        """
+        Saves file contents into cache
+
+        Args:
+            filename (Union[str, Path]): filename to write.
+            content (object): Contents to write into file.
+        """
+        f = Path(self.path, filename)
+        with open(f, 'wb') as file:
+            pickle.dump(content, file)
+
+    def mkdirp(self, dest_dir: Union[str, Path]):
+        """
+        Creates directory and all child directories if needed
+
+        Args:
+            dest_dir (Union[str, Path]): path to create directories for.
+                Must be dir path only. No checking is done for file names.
+        """
+        # Python ≥ 3.5
+        if isinstance(dest_dir, Path):
+            dest_dir.mkdir(parents=True, exist_ok=True)
+        else:
+            Path(dest_dir).mkdir(parents=True, exist_ok=True)
+
+    def del_from_cache(self,  filename: Union[str, Path]) -> None:
+        """
+        Deletes a file from cache if it exist
+
+        Args:
+            filename (Union[str, Path]): file to delete.
+        """
+        try:
+            f = Path(self.path, filename)
+            if os.path.exists(f):
+                os.remove(f)
+        except Exception as e:
+            pass
+
+    @property
+    def seconds(self) -> float:
+        """Gets/Sets cache time in seconds"""
+        return self._lifetime
+
+    @seconds.setter
+    def seconds(self, value: float) -> None:
+        self._lifetime = float(value)
+
+    @property
+    def path(self) -> Path:
+        """Gets cache path"""
+        return self._cache_path
+
+# endregion Cache
+
+# region Order Inherits
+
+
+class OrderedInherits:
+    def __init__(self, app_root: str) -> None:
+        self._uno_obj_root = Path(app_root) / 'uno_obj'
+        self._pk_cache = PickleCache('ooo_uno_tmpl', 1800)
+        self._cache_file = 'tmpl_ordered_extends.pkl'
+        self._cache = DictCache()
+
+    def __enter__(self):
+        # enter is after init in context manager
+        try:
+            cache = self._pk_cache.fetch_from_cache(self._cache_file)
+            if cache:
+                self._cache.update(cache)
+        except Exception:
+            self._cache = {}
+            pass
+        return self
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        if not exc_type and self._cache.has_changed:
+            self._pk_cache.save_in_cache(self._cache_file, self._cache)
+
+    def get_ordered(self, imports: List[str]) -> Union[List[str], None]:
+
+        def get_Unique_ns(ns: str):
+            self._cache['unique_first_loop'] = True
+
+            def get_ns(ns_key: str, ns_set: set):
+                first_loop = self._cache['unique_first_loop']
+                if first_loop:
+                    self._cache['unique_first_loop'] = False
+                if ns_key in self._cache:
+                    return self._cache[ns_key]
+                p = self._ns_to_path(ns=ns_key)
+                if p is None:
+                    raise FileNotFoundError
+                with open(p, 'r') as file:
+                    j_data = json.load(file)
+                j_extends = j_data['data']['extends']
+                self._cache[ns_key] = j_extends
+                for s in j_extends:
+                    if not s in ns_st:
+                        get_ns(s, ns_set)
+                ns_st.update(j_extends)
+            ns_st = set()
+            get_ns(ns, ns_st)
+            return ns_st
+
+        def get_order_inherit_order(ex_lst: List[str]):
+            extends = tuple(ex_lst)  # list
+            unique: Set[str] = set(ex_lst)
+            for ex in extends:
+                unique.update(get_Unique_ns(ex))
+
+            ns_lst = list(unique)
+            ns_lst.sort()
+            results = []
+            for ns in ns_lst:
+                if ns in extends:
+                    results.append(ns)
+            # ns_lst = [ns, i, for i, ns in enumerante()]
+            return results
+        try:
+            ordered = get_order_inherit_order(ex_lst=imports)
+            return ordered
+        except Exception:
+            return None
+
+    def _ns_to_path(self, ns: str) -> Union[Path, None]:
+        s = ns.removeprefix('com.sun.star.')
+        s = s.replace('.', os.sep)
+        s += '.json'
+        p = Path(self._uno_obj_root, s)
+        if p.exists():
+            return p
+        return None
+
+# endregion Order Inherits
+
+# endregion MRO Related Classes
+
 class BaseTpml(Template):
 
 
@@ -53,6 +274,8 @@ class BaseTpml(Template):
                 logger_name="Template — " + self.__class__.__name__,
                 add_handler_console=False
                 )
+        self._app_root = os.environ.get('project_root', None)
+ 
 
     def init_data(self):
         self._is_class_init = True
@@ -349,8 +572,13 @@ class BaseTpml(Template):
         if isinstance(imports, str):
             return get_import(imports)
         im_lst: List[str] = []
-        imports.sort()
-        for s in imports:
+        o_imports = None
+        if self._app_root:
+            with OrderedInherits(self._app_root) as o:
+                o_imports = o.get_ordered(imports)
+        if o_imports is None:
+            o_imports = imports
+        for s in o_imports:
             im_lst.append(get_import(s))
         s = 'object'
         for i, im in enumerate(im_lst):
