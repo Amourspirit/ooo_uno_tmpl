@@ -36,6 +36,12 @@ class WriteInfo:
     file: str
     py_file: str
     scratch_path: Path
+
+@dataclass(frozen=True, eq=True)
+class CompileLinkArgs:
+    config: AppConfig
+    path: Optional[str] = None
+    use_sub_process: bool = True
 # endregion Data Class
 
 # region Logger / Env
@@ -134,26 +140,79 @@ class FilesBase:
 
 # region Compile Links
 class BaseCompile(FilesBase):
-    def __init__(self, config:AppConfig) -> None:
-        super().__init__(config=config)
+    def __init__(self, args: CompileLinkArgs) -> None:
+        super().__init__(config=args.config)
+        self._args = args
         self._json_parser_path = Path(self._root_dir, 'parser', 'json_parser')
 
-    
+    def _get_args_module_links(self) -> Path:
+        """
+        Gets module links file from args.
+        If ``args.path`` is a dir then ``module_links.json`` is appended
+
+        Raises:
+            Exception: If args.path is not set
+            FileNotFoundError: If File not found
+
+        Returns:
+            Path: file path object
+        """
+        if not self._args.path:
+            msg = f"{self.__class__.__name__}._get_args_module_links(): Required arg args.path not set"
+            logger.error(msg)
+            raise Exception(msg)
+        p = Path(self.args.path)
+
+        if not p.is_absolute():
+            try:
+                # might raise FileNotFoundError
+                # https://stackoverflow.com/a/44569249/1171746
+                p = p.resolve(strict=True)
+            except FileNotFoundError:
+                msg = f"{self.__class__.__name__}._get_args_module_links(): File not found: {p}"
+                logger.error(msg)
+                raise FileNotFoundError(msg)
+
+        if p.is_dir():
+            p = p / self._config.module_links_file
+
+        if not p.exists():
+            msg = f"{self.__class__.__name__}._get_args_module_links(): File not found: {p}"
+            logger.error(msg)
+            raise FileNotFoundError(msg)
+        return p
+
     @property
     def json_parser_path(self) -> Path:
         """Gets json_parser_path value"""
         return self._json_parser_path
 
+    @property
+    def args(self) -> CompileLinkArgs:
+        """Gets Args"""
+        return self._args
+
 class CompileEnumLinks(BaseCompile):
-    def __init__(self, config: AppConfig, use_subprocess: bool) -> None:
-        super().__init__(config=config)
-        self._do_sub = use_subprocess
+    def __init__(self, args: CompileLinkArgs) -> None:
+        super().__init__(args=args)
+        self._do_sub = args.use_sub_process
         if self._do_sub:
             self._processer = str(
                 Path(self.json_parser_path, 'enum_parser.py'))
         else:
             self._processer = ''
-        self._process_files()
+        if self.args.path:
+            self._process_path()
+        else:
+            self._process_files()
+
+    def _process_path(self) -> None:
+        p = self._get_args_module_links()
+        file = str(p)
+        if self._do_sub:
+            self._subprocess(file)
+        else:
+            self._process_direct(file)
 
     def _subprocess(self, file: str):
         cmd_str = f"{self._processer} -f {file}"
@@ -180,15 +239,26 @@ class CompileEnumLinks(BaseCompile):
 
 
 class CompileConstLinks(BaseCompile):
-    def __init__(self, config: AppConfig, use_subprocess: bool) -> None:
-        super().__init__(config=config)
-        self._do_sub = use_subprocess
+    def __init__(self, args: CompileLinkArgs) -> None:
+        super().__init__(args=args)
+        self._do_sub = args.use_sub_process
         if self._do_sub:
             self._processer = str(
                 Path(self.json_parser_path, 'const_parser.py'))
         else:
             self._processer = ''
-        self._process_files()
+        if self.args.path:
+            self._process_path()
+        else:
+            self._process_files()
+
+    def _process_path(self) -> None:
+        p = self._get_args_module_links()
+        file = str(p)
+        if self._do_sub:
+            self._subprocess(file)
+        else:
+            self._process_direct(file)
 
     def _subprocess(self, file: str):
         cmd_str = f"{self._processer} -f {file}"
@@ -215,14 +285,25 @@ class CompileConstLinks(BaseCompile):
 
 
 class CompileTypeDefLinks(BaseCompile):
-    def __init__(self, config: AppConfig, use_subprocess: bool) -> None:
-        super().__init__(config=config)
-        self._do_sub = use_subprocess
+    def __init__(self, args: CompileLinkArgs) -> None:
+        super().__init__(args=args)
+        self._do_sub = args.use_sub_process
         if self._do_sub:
             self._processer = str(Path(self.json_parser_path, 'typedef_parser.py'))
         else:
             self._processer = ''
-        self._process_files()
+        if self.args.path:
+            self._process_path()
+        else:
+            self._process_files()
+
+    def _process_path(self) -> None:
+        p = self._get_args_module_links()
+        file = str(p)
+        if self._do_sub:
+            self._subprocess(file)
+        else:
+            self._process_direct(file)
 
     def _subprocess(self, file:str):
         cmd_str = f"{self._processer} -f {file}"
@@ -249,14 +330,25 @@ class CompileTypeDefLinks(BaseCompile):
 
 
 class CompileStructLinks(BaseCompile):
-    def __init__(self, config: AppConfig, use_subprocess: bool) -> None:
-        super().__init__(config=config)
-        self._do_sub = use_subprocess
+    def __init__(self, args: CompileLinkArgs) -> None:
+        super().__init__(args=args)
+        self._do_sub = args.use_sub_process
         if self._do_sub:
             self._processer = str(Path(self.json_parser_path, 'struct_parser.py'))
         else:
             self._processer = ''
-        self._process_files()
+        if self.args.path:
+            self._process_path()
+        else:
+            self._process_files()
+
+    def _process_path(self) -> None:
+        p = self._get_args_module_links()
+        file = str(p)
+        if self._do_sub:
+            self._subprocess(file)
+        else:
+            self._process_direct(file)
 
     def _subprocess(self, file: str):
         cmd_str = f"{self._processer} -f {file}"
@@ -283,14 +375,28 @@ class CompileStructLinks(BaseCompile):
 
 class CompileInterfaceLinks(BaseCompile):
 
-    def __init__(self, config: AppConfig, use_subprocess: bool) -> None:
-        super().__init__(config=config)
-        self._do_sub = use_subprocess
+    def __init__(self, args: CompileLinkArgs) -> None:
+        super().__init__(args=args)
+        self._do_sub = args.use_sub_process
         if self._do_sub:
             self._processer = str(Path(self.json_parser_path, 'interface_parser.py'))
         else:
             self._processer = ''
-        self._process_files()
+
+        if self.args.path:
+            self._process_path()
+        else:
+            self._process_files()
+    
+
+    def _process_path(self) -> None:
+        p = self._get_args_module_links()
+        file = str(p)
+        if self._do_sub:
+            self._subprocess(file)
+        else:
+            self._process_direct(file)
+
 
     def _subprocess(self, file: str):
         cmd_str = f"{self._processer} -f {file}"
@@ -319,15 +425,26 @@ class CompileInterfaceLinks(BaseCompile):
 
 class CompileSingletonLinks(BaseCompile):
 
-    def __init__(self, config: AppConfig, use_subprocess: bool) -> None:
-        super().__init__(config=config)
-        self._do_sub = use_subprocess
+    def __init__(self, args: CompileLinkArgs) -> None:
+        super().__init__(args=args)
+        self._do_sub = args.use_sub_process
         if self._do_sub:
             self._processer = str(
                 Path(self.json_parser_path, 'singleton_parser.py'))
         else:
             self._processer = ''
-        self._process_files()
+        if self.args.path:
+            self._process_path()
+        else:
+            self._process_files()
+
+    def _process_path(self) -> None:
+        p = self._get_args_module_links()
+        file = str(p)
+        if self._do_sub:
+            self._subprocess(file)
+        else:
+            self._process_direct(file)
 
     def _subprocess(self, file: str):
         cmd_str = f"{self._processer} -f {file}"
@@ -356,15 +473,26 @@ class CompileSingletonLinks(BaseCompile):
 
 class CompileServiceLinks(BaseCompile):
 
-    def __init__(self, config: AppConfig, use_subprocess: bool) -> None:
-        super().__init__(config=config)
-        self._do_sub = use_subprocess
+    def __init__(self, args: CompileLinkArgs) -> None:
+        super().__init__(args=args)
+        self._do_sub = args.use_sub_process
         if self._do_sub:
             self._processer = str(
                 Path(self.json_parser_path, 'service_parser.py'))
         else:
             self._processer = ''
-        self._process_files()
+        if self.args.path:
+            self._process_path()
+        else:
+            self._process_files()
+
+    def _process_path(self) -> None:
+        p = self._get_args_module_links()
+        file = str(p)
+        if self._do_sub:
+            self._subprocess(file)
+        else:
+            self._process_direct(file)
 
     def _subprocess(self, file: str):
         cmd_str = f"{self._processer} -f {file}"
@@ -391,15 +519,26 @@ class CompileServiceLinks(BaseCompile):
                 self._process_direct(file)
 
 class CompileExLinks(BaseCompile):
-    def __init__(self, config: AppConfig, use_subprocess: bool) -> None:
-        super().__init__(config=config)
-        self._do_sub = use_subprocess
+    def __init__(self, args: CompileLinkArgs) -> None:
+        super().__init__(args=args)
+        self._do_sub = args.use_sub_process
         if self._do_sub:
             self._processer = str(
                 Path(self.json_parser_path, 'exception_parser.py'))
         else:
             self._processer = ''
-        self._process_files()
+        if self.args.path:
+            self._process_path()
+        else:
+            self._process_files()
+
+    def _process_path(self) -> None:
+        p = self._get_args_module_links()
+        file = str(p)
+        if self._do_sub:
+            self._subprocess(file)
+        else:
+            self._process_direct(file)
 
     def _subprocess(self, file: str):
         cmd_str = f"{self._processer} -f {file}"
@@ -873,7 +1012,7 @@ class Make(FilesBase):
 
 # region    Main Testing
 def _main():
-    sys.argv.extend(['-v', '--log-file', 'make.log', 'make'])
+    sys.argv.extend(['-v', '--log-file', 'make.log', 'interface', '-p', 'tmp/'])
     main()
 
 def _touch():
@@ -893,6 +1032,16 @@ def _touch():
 def main():
     global logger
     config = read_config('./config.json')
+
+    def get_compile_args(args:argparse.Namespace) -> CompileLinkArgs:
+        path = getattr(args, 'path', None)
+        cmd_line_process = getattr(args, 'cmd_line_process', True)
+        c_args = CompileLinkArgs(
+            config=config,
+            path=path,
+            use_sub_process=cmd_line_process
+            )
+        return c_args
 
     # region create parsers
     parser = argparse.ArgumentParser(description='main')
@@ -977,12 +1126,20 @@ def main():
     # endregion struct args
 
     # region interface args
-    interface_parser.add_argument(
+    interface_parser_file_group = interface_parser.add_mutually_exclusive_group()
+    interface_parser_file_group.add_argument(
         '-a', '--all',
         help='Compile all interface recursivly',
         action='store_true',
         dest='interface_all',
         default=False
+    )
+    interface_parser_file_group.add_argument(
+        '-p', '--path',
+        help='Compile a specific path',
+        action='store',
+        dest='path',
+        type=str
     )
     interface_parser.add_argument(
         '-u', '--run-as-cmdline',
@@ -1184,36 +1341,40 @@ def main():
 
     # region Compile Links Command
     if args.command == 'ex':
+        c_args = get_compile_args(args=args)
         if args.ex_all:
-            CompileExLinks(config=config, use_subprocess=args.cmd_line_process)
+            CompileExLinks(args=c_args)
     if args.command == 'enum':
+        c_args = get_compile_args(args=args)
         if args.enum_all:
-            CompileEnumLinks(
-                config=config, use_subprocess=args.cmd_line_process)
+            CompileEnumLinks(args=c_args)
     if args.command == 'const':
+        c_args = get_compile_args(args=args)
         if args.const_all:
-            CompileConstLinks(
-                config=config, use_subprocess=args.cmd_line_process)
+            CompileConstLinks(args=c_args)
     if args.command == 'struct':
+        c_args = get_compile_args(args=args)
         if args.struct_all:
-            CompileStructLinks(
-                config=config, use_subprocess=args.cmd_line_process)
+            CompileStructLinks(args=c_args)
     if args.command == 'interface':
+        c_args = get_compile_args(args=args)
         if args.interface_all:
-            CompileInterfaceLinks(
-                config=config, use_subprocess=args.cmd_line_process)
+            CompileInterfaceLinks(args=c_args)
+        elif args.path:
+            CompileInterfaceLinks(args=c_args)
     if args.command == 'singleton':
+        c_args = get_compile_args(args=args)
         if args.singleton_all:
-            CompileSingletonLinks(
-                config=config, use_subprocess=args.cmd_line_process)
+            CompileSingletonLinks(args=c_args)
     if args.command == 'service':
+        c_args = get_compile_args(args=args)
         if args.service_all:
-            CompileServiceLinks(
-                config=config, use_subprocess=args.cmd_line_process)
+            c_args = get_compile_args(args=args)
+            CompileServiceLinks(args=c_args)
     if args.command == 'typedef':
+        c_args = get_compile_args(args=args)
         if args.typedef_all:
-            CompileTypeDefLinks(
-                config=config, use_subprocess=args.cmd_line_process)
+            CompileTypeDefLinks(args=c_args)
     # endregion Compile Links Command
 
     # region Touch Command
