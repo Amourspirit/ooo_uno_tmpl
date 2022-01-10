@@ -349,6 +349,7 @@ class BaseTpml(Template):
         if isinstance(imports, str):
             return get_import(imports)
         im_lst: List[str] = []
+        imports.sort()
         for s in imports:
             im_lst.append(get_import(s))
         s = 'object'
