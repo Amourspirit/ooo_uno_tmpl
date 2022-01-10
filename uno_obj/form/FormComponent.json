@@ -1,13 +1,14 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "FormComponent",
   "type": "service",
   "namespace": "com.sun.star.form",
   "parser_args": {
     "sort": true,
-    "long_names": true
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
@@ -55,11 +56,11 @@
     "imports": [],
     "namespace": "com.sun.star.form",
     "extends": [
-      "com.sun.star.container.XNamed",
-      "com.sun.star.beans.XPropertyBag",
+      "com.sun.star.form.XFormComponent",
       "com.sun.star.lang.XComponent",
+      "com.sun.star.container.XNamed",
       "com.sun.star.io.XPersistObject",
-      "com.sun.star.form.XFormComponent"
+      "com.sun.star.beans.XPropertyBag"
     ],
     "desc": [
       "specifies a component which can be part of a form.",

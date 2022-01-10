@@ -1,13 +1,14 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "PropertyHierarchy",
   "type": "service",
   "namespace": "com.sun.star.configuration",
   "parser_args": {
     "sort": true,
-    "long_names": true
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
@@ -51,8 +52,8 @@
     "extends": [
       "com.sun.star.beans.XPropertySet",
       "com.sun.star.beans.XMultiPropertySet",
-      "com.sun.star.beans.XMultiHierarchicalPropertySet",
-      "com.sun.star.beans.XHierarchicalPropertySet"
+      "com.sun.star.beans.XHierarchicalPropertySet",
+      "com.sun.star.beans.XMultiHierarchicalPropertySet"
     ],
     "desc": [
       "provides access to and information about properties and subproperties of an implementation.",

@@ -1,13 +1,14 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "InContentMetadata",
   "type": "service",
   "namespace": "com.sun.star.text",
   "parser_args": {
     "sort": true,
-    "long_names": true
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
@@ -49,10 +50,10 @@
     "imports": [],
     "namespace": "com.sun.star.text",
     "extends": [
-      "com.sun.star.rdf.XMetadatable",
-      "com.sun.star.container.XChild",
       "com.sun.star.text.TextContent",
-      "com.sun.star.container.XEnumerationAccess"
+      "com.sun.star.rdf.XMetadatable",
+      "com.sun.star.container.XEnumerationAccess",
+      "com.sun.star.container.XChild"
     ],
     "desc": [
       "is a TextContent that can be used to attach RDF metadata to a range of text.",

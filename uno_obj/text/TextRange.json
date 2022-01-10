@@ -1,13 +1,14 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "TextRange",
   "type": "service",
   "namespace": "com.sun.star.text",
   "parser_args": {
     "sort": true,
-    "long_names": true
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
@@ -97,18 +98,18 @@
     "imports": [],
     "namespace": "com.sun.star.text",
     "extends": [
+      "com.sun.star.text.XTextRange",
       "com.sun.star.beans.XPropertySet",
-      "com.sun.star.style.ParagraphPropertiesComplex",
-      "com.sun.star.container.XContentEnumerationAccess",
       "com.sun.star.beans.XPropertyState",
-      "com.sun.star.style.CharacterPropertiesComplex",
-      "com.sun.star.text.TextPortion",
-      "com.sun.star.text.RedlinePortion",
+      "com.sun.star.container.XContentEnumerationAccess",
       "com.sun.star.style.CharacterProperties",
       "com.sun.star.style.CharacterPropertiesAsian",
-      "com.sun.star.text.XTextRange",
+      "com.sun.star.style.CharacterPropertiesComplex",
+      "com.sun.star.style.ParagraphProperties",
       "com.sun.star.style.ParagraphPropertiesAsian",
-      "com.sun.star.style.ParagraphProperties"
+      "com.sun.star.style.ParagraphPropertiesComplex",
+      "com.sun.star.text.TextPortion",
+      "com.sun.star.text.RedlinePortion"
     ],
     "desc": [
       "points to a sequence of characters within a Text.",

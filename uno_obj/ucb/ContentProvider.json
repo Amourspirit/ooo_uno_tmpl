@@ -1,13 +1,14 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "ContentProvider",
   "type": "service",
   "namespace": "com.sun.star.ucb",
   "parser_args": {
     "sort": true,
-    "long_names": true
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
@@ -44,8 +45,8 @@
     "namespace": "com.sun.star.ucb",
     "extends": [
       "com.sun.star.ucb.XContentProvider",
-      "com.sun.star.ucb.XParameterizedContentProvider",
-      "com.sun.star.ucb.XContentIdentifierFactory"
+      "com.sun.star.ucb.XContentIdentifierFactory",
+      "com.sun.star.ucb.XParameterizedContentProvider"
     ],
     "desc": [
       "provides access to a set of Contents."

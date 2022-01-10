@@ -1,13 +1,14 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "TextSection",
   "type": "service",
   "namespace": "com.sun.star.text",
   "parser_args": {
     "sort": true,
-    "long_names": true
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
@@ -87,12 +88,12 @@
     "imports": [],
     "namespace": "com.sun.star.text",
     "extends": [
-      "com.sun.star.beans.XPropertySet",
       "com.sun.star.text.TextContent",
-      "com.sun.star.container.XNamed",
-      "com.sun.star.beans.XPropertyState",
       "com.sun.star.xml.UserDefinedAttributesSupplier",
-      "com.sun.star.text.XTextSection"
+      "com.sun.star.text.XTextSection",
+      "com.sun.star.container.XNamed",
+      "com.sun.star.beans.XPropertySet",
+      "com.sun.star.beans.XPropertyState"
     ],
     "desc": [
       "A TextSection is a range of complete paragraphs within a text.",

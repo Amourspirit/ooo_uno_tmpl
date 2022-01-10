@@ -1,13 +1,14 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "ConfigurationAccess",
   "type": "service",
   "namespace": "com.sun.star.configuration",
   "parser_args": {
     "sort": true,
-    "long_names": true
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
@@ -55,11 +56,11 @@
     "imports": [],
     "namespace": "com.sun.star.configuration",
     "extends": [
-      "com.sun.star.configuration.SetElement",
-      "com.sun.star.configuration.GroupElement",
-      "com.sun.star.configuration.GroupAccess",
       "com.sun.star.configuration.SetAccess",
-      "com.sun.star.configuration.AccessRootElement"
+      "com.sun.star.configuration.GroupAccess",
+      "com.sun.star.configuration.AccessRootElement",
+      "com.sun.star.configuration.SetElement",
+      "com.sun.star.configuration.GroupElement"
     ],
     "desc": [
       "provides read access to a fragment of the configuration hierarchy.",

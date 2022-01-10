@@ -1,13 +1,14 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "TableCellStyle",
   "type": "service",
   "namespace": "com.sun.star.sheet",
   "parser_args": {
     "sort": true,
-    "long_names": true
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
@@ -61,11 +62,11 @@
     "imports": [],
     "namespace": "com.sun.star.sheet",
     "extends": [
+      "com.sun.star.table.CellProperties",
       "com.sun.star.style.CellStyle",
-      "com.sun.star.style.CharacterPropertiesComplex",
       "com.sun.star.style.CharacterProperties",
       "com.sun.star.style.CharacterPropertiesAsian",
-      "com.sun.star.table.CellProperties",
+      "com.sun.star.style.CharacterPropertiesComplex",
       "com.sun.star.style.ParagraphProperties"
     ],
     "desc": [

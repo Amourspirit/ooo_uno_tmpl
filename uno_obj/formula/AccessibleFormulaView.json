@@ -1,13 +1,14 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "AccessibleFormulaView",
   "type": "service",
   "namespace": "com.sun.star.formula",
   "parser_args": {
     "sort": true,
-    "long_names": true
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
@@ -56,10 +57,10 @@
     "namespace": "com.sun.star.formula",
     "extends": [
       "com.sun.star.accessibility.XAccessible",
-      "com.sun.star.accessibility.XAccessibleContext",
       "com.sun.star.accessibility.XAccessibleComponent",
-      "com.sun.star.accessibility.XAccessibleEventBroadcaster",
-      "com.sun.star.accessibility.XAccessibleText"
+      "com.sun.star.accessibility.XAccessibleContext",
+      "com.sun.star.accessibility.XAccessibleText",
+      "com.sun.star.accessibility.XAccessibleEventBroadcaster"
     ],
     "desc": [
       "The accessible view of a formula documents visual representation.",

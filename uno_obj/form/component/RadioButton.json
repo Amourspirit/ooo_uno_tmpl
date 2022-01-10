@@ -1,13 +1,14 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "RadioButton",
   "type": "service",
   "namespace": "com.sun.star.form.component",
   "parser_args": {
     "sort": true,
-    "long_names": true
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
@@ -43,9 +44,9 @@
     "imports": [],
     "namespace": "com.sun.star.form.component",
     "extends": [
+      "com.sun.star.awt.UnoControlRadioButtonModel",
       "com.sun.star.form.FormControlModel",
-      "com.sun.star.form.XReset",
-      "com.sun.star.awt.UnoControlRadioButtonModel"
+      "com.sun.star.form.XReset"
     ],
     "desc": [
       "specifies a component which acts as a radio button as needed in HTMLForms.",

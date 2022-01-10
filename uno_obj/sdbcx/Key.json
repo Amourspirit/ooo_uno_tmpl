@@ -1,13 +1,14 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "Key",
   "type": "service",
   "namespace": "com.sun.star.sdbcx",
   "parser_args": {
     "sort": true,
-    "long_names": true
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
@@ -43,9 +44,9 @@
     "imports": [],
     "namespace": "com.sun.star.sdbcx",
     "extends": [
-      "com.sun.star.beans.XPropertySet",
+      "com.sun.star.sdbcx.XDataDescriptorFactory",
       "com.sun.star.sdbcx.XColumnsSupplier",
-      "com.sun.star.sdbcx.XDataDescriptorFactory"
+      "com.sun.star.beans.XPropertySet"
     ],
     "desc": [
       "is used to define a new key for a table."

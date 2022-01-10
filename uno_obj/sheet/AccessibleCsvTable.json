@@ -1,13 +1,14 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "AccessibleCsvTable",
   "type": "service",
   "namespace": "com.sun.star.sheet",
   "parser_args": {
     "sort": true,
-    "long_names": true
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
@@ -50,9 +51,9 @@
     "namespace": "com.sun.star.sheet",
     "extends": [
       "com.sun.star.accessibility.XAccessibleContext",
-      "com.sun.star.accessibility.XAccessibleSelection",
+      "com.sun.star.accessibility.XAccessibleComponent",
       "com.sun.star.accessibility.XAccessibleTable",
-      "com.sun.star.accessibility.XAccessibleComponent"
+      "com.sun.star.accessibility.XAccessibleSelection"
     ],
     "desc": [
       "The accessible object of the data table in the CSV import dialog.",

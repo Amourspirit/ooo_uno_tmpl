@@ -1,13 +1,14 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "HierarchyAccess",
   "type": "service",
   "namespace": "com.sun.star.configuration",
   "parser_args": {
     "sort": true,
-    "long_names": true
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
@@ -68,12 +69,12 @@
     "namespace": "com.sun.star.configuration",
     "extends": [
       "com.sun.star.container.XNameAccess",
-      "com.sun.star.beans.XPropertySetInfo",
-      "com.sun.star.beans.XExactName",
-      "com.sun.star.beans.XPropertyState",
+      "com.sun.star.container.XHierarchicalNameAccess",
       "com.sun.star.container.XContainer",
-      "com.sun.star.beans.XMultiPropertyStates",
-      "com.sun.star.container.XHierarchicalNameAccess"
+      "com.sun.star.beans.XExactName",
+      "com.sun.star.beans.XPropertySetInfo",
+      "com.sun.star.beans.XPropertyState",
+      "com.sun.star.beans.XMultiPropertyStates"
     ],
     "desc": [
       "provides access to a hierarchy of descendant elements.",

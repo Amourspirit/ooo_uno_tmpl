@@ -1,13 +1,14 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "BindableDatabaseDateField",
   "type": "service",
   "namespace": "com.sun.star.form.binding",
   "parser_args": {
     "sort": true,
-    "long_names": true
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
@@ -37,8 +38,8 @@
     "imports": [],
     "namespace": "com.sun.star.form.binding",
     "extends": [
-      "com.sun.star.form.binding.BindableDataAwareControlModel",
-      "com.sun.star.form.component.DatabaseDateField"
+      "com.sun.star.form.component.DatabaseDateField",
+      "com.sun.star.form.binding.BindableDataAwareControlModel"
     ],
     "desc": [
       "This service specifies a date input field which is data-aware and thus can be bound to a database field, and additionally supports binding to arbitrary external values.",

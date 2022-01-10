@@ -1,13 +1,14 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "AccessibleSlideView",
   "type": "service",
   "namespace": "com.sun.star.drawing",
   "parser_args": {
     "sort": true,
-    "long_names": true
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
@@ -55,11 +56,11 @@
     "imports": [],
     "namespace": "com.sun.star.drawing",
     "extends": [
-      "com.sun.star.accessibility.XAccessibleSelection",
       "com.sun.star.accessibility.XAccessible",
       "com.sun.star.accessibility.XAccessibleContext",
+      "com.sun.star.accessibility.XAccessibleEventBroadcaster",
       "com.sun.star.accessibility.XAccessibleComponent",
-      "com.sun.star.accessibility.XAccessibleEventBroadcaster"
+      "com.sun.star.accessibility.XAccessibleSelection"
     ],
     "desc": [
       "The AccessibleSlideView service is implemented by slide views of Impress documents.",

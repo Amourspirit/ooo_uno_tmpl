@@ -1,13 +1,14 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "SpellChecker",
   "type": "service",
   "namespace": "com.sun.star.linguistic2",
   "parser_args": {
     "sort": true,
-    "long_names": true
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
@@ -55,11 +56,11 @@
     "imports": [],
     "namespace": "com.sun.star.linguistic2",
     "extends": [
-      "com.sun.star.lang.XComponent",
-      "com.sun.star.lang.XServiceDisplayName",
       "com.sun.star.linguistic2.XSpellChecker",
       "com.sun.star.linguistic2.XLinguServiceEventBroadcaster",
-      "com.sun.star.lang.XInitialization"
+      "com.sun.star.lang.XInitialization",
+      "com.sun.star.lang.XComponent",
+      "com.sun.star.lang.XServiceDisplayName"
     ],
     "desc": [
       "offers spell checking functionality."

@@ -1,13 +1,14 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "Text",
   "type": "service",
   "namespace": "com.sun.star.text",
   "parser_args": {
     "sort": true,
-    "long_names": true
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
@@ -63,9 +64,9 @@
     "imports": [],
     "namespace": "com.sun.star.text",
     "extends": [
+      "com.sun.star.container.XEnumerationAccess",
       "com.sun.star.text.XText",
       "com.sun.star.text.XTextRangeCompare",
-      "com.sun.star.container.XEnumerationAccess",
       "com.sun.star.text.XTextRangeMover",
       "com.sun.star.text.XRelativeTextContentInsert"
     ],

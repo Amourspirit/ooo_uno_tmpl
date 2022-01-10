@@ -1,13 +1,14 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "GenericDrawingDocument",
   "type": "service",
   "namespace": "com.sun.star.drawing",
   "parser_args": {
     "sort": true,
-    "long_names": true
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
@@ -93,14 +94,14 @@
     "imports": [],
     "namespace": "com.sun.star.drawing",
     "extends": [
-      "com.sun.star.beans.XPropertySet",
       "com.sun.star.document.OfficeDocument",
-      "com.sun.star.drawing.XDrawPagesSupplier",
-      "com.sun.star.drawing.XLayerSupplier",
+      "com.sun.star.lang.XMultiServiceFactory",
+      "com.sun.star.beans.XPropertySet",
       "com.sun.star.drawing.XDrawPageDuplicator",
+      "com.sun.star.drawing.XDrawPagesSupplier",
       "com.sun.star.drawing.XMasterPagesSupplier",
-      "com.sun.star.style.XStyleFamiliesSupplier",
-      "com.sun.star.lang.XMultiServiceFactory"
+      "com.sun.star.drawing.XLayerSupplier",
+      "com.sun.star.style.XStyleFamiliesSupplier"
     ],
     "desc": [
       "specifies a document which consists of multiple pages with drawings.",

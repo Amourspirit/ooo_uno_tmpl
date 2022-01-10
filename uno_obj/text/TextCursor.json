@@ -1,13 +1,14 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "TextCursor",
   "type": "service",
   "namespace": "com.sun.star.text",
   "parser_args": {
     "sort": true,
-    "long_names": true
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
@@ -85,16 +86,16 @@
     "imports": [],
     "namespace": "com.sun.star.text",
     "extends": [
-      "com.sun.star.beans.XPropertySet",
-      "com.sun.star.text.XSentenceCursor",
       "com.sun.star.text.TextRange",
+      "com.sun.star.text.XTextCursor",
+      "com.sun.star.text.XWordCursor",
+      "com.sun.star.text.XSentenceCursor",
+      "com.sun.star.text.XParagraphCursor",
+      "com.sun.star.beans.XPropertySet",
       "com.sun.star.beans.XPropertyState",
       "com.sun.star.beans.XMultiPropertyStates",
-      "com.sun.star.util.XSortable",
       "com.sun.star.document.XDocumentInsertable",
-      "com.sun.star.text.XParagraphCursor",
-      "com.sun.star.text.XTextCursor",
-      "com.sun.star.text.XWordCursor"
+      "com.sun.star.util.XSortable"
     ],
     "desc": [
       "A TextCursor is a TextRange which can be moved within a Text object."

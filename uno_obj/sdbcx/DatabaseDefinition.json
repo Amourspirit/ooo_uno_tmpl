@@ -1,13 +1,14 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "DatabaseDefinition",
   "type": "service",
   "namespace": "com.sun.star.sdbcx",
   "parser_args": {
     "sort": true,
-    "long_names": true
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
@@ -49,10 +50,10 @@
     "imports": [],
     "namespace": "com.sun.star.sdbcx",
     "extends": [
-      "com.sun.star.sdbcx.XGroupsSupplier",
       "com.sun.star.sdbcx.XTablesSupplier",
       "com.sun.star.sdbcx.XViewsSupplier",
-      "com.sun.star.sdbcx.XUsersSupplier"
+      "com.sun.star.sdbcx.XUsersSupplier",
+      "com.sun.star.sdbcx.XGroupsSupplier"
     ],
     "desc": [
       "could be used as an extension for performing data definition tasks on databases, and to control the access rights on database objects.",

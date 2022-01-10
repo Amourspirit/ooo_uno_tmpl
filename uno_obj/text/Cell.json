@@ -1,13 +1,14 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "Cell",
   "type": "service",
   "namespace": "com.sun.star.text",
   "parser_args": {
     "sort": true,
-    "long_names": true
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
@@ -50,9 +51,9 @@
     "namespace": "com.sun.star.text",
     "extends": [
       "com.sun.star.text.CellProperties",
-      "com.sun.star.text.XText",
+      "com.sun.star.table.CellProperties",
       "com.sun.star.table.XCell",
-      "com.sun.star.table.CellProperties"
+      "com.sun.star.text.XText"
     ],
     "desc": [
       "represents a single cell within a text table.",

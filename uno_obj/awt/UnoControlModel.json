@@ -1,13 +1,14 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "UnoControlModel",
   "type": "service",
   "namespace": "com.sun.star.awt",
   "parser_args": {
     "sort": true,
-    "long_names": true
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
@@ -67,13 +68,13 @@
     "imports": [],
     "namespace": "com.sun.star.awt",
     "extends": [
+      "com.sun.star.awt.UnoControlDialogElement",
+      "com.sun.star.awt.XControlModel",
+      "com.sun.star.lang.XComponent",
       "com.sun.star.beans.XPropertySet",
       "com.sun.star.beans.XMultiPropertySet",
-      "com.sun.star.awt.UnoControlDialogElement",
-      "com.sun.star.util.XCloneable",
-      "com.sun.star.lang.XComponent",
-      "com.sun.star.awt.XControlModel",
-      "com.sun.star.io.XPersistObject"
+      "com.sun.star.io.XPersistObject",
+      "com.sun.star.util.XCloneable"
     ],
     "desc": [
       "specifies the standard model of a UnoControl in the Smalltalk model view controller design.",

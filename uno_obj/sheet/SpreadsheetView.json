@@ -1,13 +1,14 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "SpreadsheetView",
   "type": "service",
   "namespace": "com.sun.star.sheet",
   "parser_args": {
     "sort": true,
-    "long_names": true
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
@@ -97,18 +98,18 @@
     "imports": [],
     "namespace": "com.sun.star.sheet",
     "extends": [
-      "com.sun.star.sheet.XViewFreezable",
-      "com.sun.star.sheet.XRangeSelection",
-      "com.sun.star.sheet.XEnhancedMouseClickBroadcaster",
+      "com.sun.star.frame.Controller",
+      "com.sun.star.sheet.SpreadsheetViewSettings",
+      "com.sun.star.sheet.SpreadsheetViewPane",
+      "com.sun.star.sheet.XSpreadsheetView",
       "com.sun.star.container.XIndexAccess",
       "com.sun.star.container.XEnumerationAccess",
       "com.sun.star.view.XSelectionSupplier",
-      "com.sun.star.sheet.SpreadsheetViewSettings",
-      "com.sun.star.sheet.XSpreadsheetView",
-      "com.sun.star.sheet.SpreadsheetViewPane",
       "com.sun.star.sheet.XViewSplitable",
-      "com.sun.star.sheet.XActivationBroadcaster",
-      "com.sun.star.frame.Controller"
+      "com.sun.star.sheet.XViewFreezable",
+      "com.sun.star.sheet.XRangeSelection",
+      "com.sun.star.sheet.XEnhancedMouseClickBroadcaster",
+      "com.sun.star.sheet.XActivationBroadcaster"
     ],
     "desc": [
       "represents a view of a spreadsheet document."

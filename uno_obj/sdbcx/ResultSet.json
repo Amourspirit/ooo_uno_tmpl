@@ -1,13 +1,14 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "ResultSet",
   "type": "service",
   "namespace": "com.sun.star.sdbcx",
   "parser_args": {
     "sort": true,
-    "long_names": true
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
@@ -49,10 +50,10 @@
     "imports": [],
     "namespace": "com.sun.star.sdbcx",
     "extends": [
-      "com.sun.star.sdbcx.XRowLocate",
-      "com.sun.star.sdbcx.XDeleteRows",
+      "com.sun.star.sdbc.ResultSet",
       "com.sun.star.util.XCancellable",
-      "com.sun.star.sdbc.ResultSet"
+      "com.sun.star.sdbcx.XRowLocate",
+      "com.sun.star.sdbcx.XDeleteRows"
     ],
     "desc": [
       "extends the SDBC ResultSet by the possibility of bookmark positioning, canceling the positioning, and updating of rows."

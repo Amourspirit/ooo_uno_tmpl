@@ -1,13 +1,14 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "ObjectOutputStream",
   "type": "service",
   "namespace": "com.sun.star.io",
   "parser_args": {
     "sort": true,
-    "long_names": true
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
@@ -43,9 +44,9 @@
     "imports": [],
     "namespace": "com.sun.star.io",
     "extends": [
-      "com.sun.star.io.XConnectable",
       "com.sun.star.io.XObjectOutputStream",
-      "com.sun.star.io.XActiveDataSource"
+      "com.sun.star.io.XActiveDataSource",
+      "com.sun.star.io.XConnectable"
     ],
     "desc": [
       "is a stream which allows writing the data of persistent objects.",

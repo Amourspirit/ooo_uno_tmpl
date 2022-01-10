@@ -1,13 +1,14 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "Shape",
   "type": "service",
   "namespace": "com.sun.star.drawing",
   "parser_args": {
     "sort": true,
-    "long_names": true
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
@@ -83,11 +84,11 @@
     "imports": [],
     "namespace": "com.sun.star.drawing",
     "extends": [
-      "com.sun.star.drawing.XShape",
       "com.sun.star.beans.XPropertySet",
-      "com.sun.star.beans.XTolerantMultiPropertySet",
+      "com.sun.star.drawing.XShape",
       "com.sun.star.lang.XComponent",
-      "com.sun.star.drawing.XGluePointsSupplier"
+      "com.sun.star.drawing.XGluePointsSupplier",
+      "com.sun.star.beans.XTolerantMultiPropertySet"
     ],
     "desc": [
       "This abstract service specifies the general characteristics of all Shapes.",

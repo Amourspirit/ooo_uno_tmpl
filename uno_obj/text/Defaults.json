@@ -1,13 +1,14 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "Defaults",
   "type": "service",
   "namespace": "com.sun.star.text",
   "parser_args": {
     "sort": true,
-    "long_names": true
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
@@ -67,13 +68,13 @@
     "imports": [],
     "namespace": "com.sun.star.text",
     "extends": [
-      "com.sun.star.beans.XPropertySet",
-      "com.sun.star.style.ParagraphPropertiesComplex",
-      "com.sun.star.style.CharacterPropertiesComplex",
       "com.sun.star.style.CharacterProperties",
+      "com.sun.star.style.ParagraphProperties",
       "com.sun.star.style.CharacterPropertiesAsian",
+      "com.sun.star.style.CharacterPropertiesComplex",
       "com.sun.star.style.ParagraphPropertiesAsian",
-      "com.sun.star.style.ParagraphProperties"
+      "com.sun.star.style.ParagraphPropertiesComplex",
+      "com.sun.star.beans.XPropertySet"
     ],
     "desc": [
       "provides default settings of a text component for paragraph and character properties."

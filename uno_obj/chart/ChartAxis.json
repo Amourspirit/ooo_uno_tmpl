@@ -1,13 +1,14 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "ChartAxis",
   "type": "service",
   "namespace": "com.sun.star.chart",
   "parser_args": {
     "sort": true,
-    "long_names": true
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
@@ -87,11 +88,11 @@
     "imports": [],
     "namespace": "com.sun.star.chart",
     "extends": [
-      "com.sun.star.beans.XPropertySet",
-      "com.sun.star.chart.XAxis",
+      "com.sun.star.drawing.LineProperties",
       "com.sun.star.style.CharacterProperties",
       "com.sun.star.xml.UserDefinedAttributesSupplier",
-      "com.sun.star.drawing.LineProperties"
+      "com.sun.star.chart.XAxis",
+      "com.sun.star.beans.XPropertySet"
     ],
     "desc": [
       "Specifies the axes in a diagram.",

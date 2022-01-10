@@ -1,13 +1,14 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "OfficeDocument",
   "type": "service",
   "namespace": "com.sun.star.document",
   "parser_args": {
     "sort": true,
-    "long_names": true
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
@@ -107,18 +108,18 @@
     "imports": [],
     "namespace": "com.sun.star.document",
     "extends": [
-      "com.sun.star.document.XDocumentPropertiesSupplier",
-      "com.sun.star.document.XUndoManagerSupplier",
-      "com.sun.star.util.XModifiable",
-      "com.sun.star.document.XDocumentEventBroadcaster",
-      "com.sun.star.document.XEventBroadcaster",
-      "com.sun.star.document.XViewDataSupplier",
-      "com.sun.star.document.XEventsSupplier",
       "com.sun.star.frame.XModel",
-      "com.sun.star.document.XEmbeddedScripts",
+      "com.sun.star.util.XModifiable",
+      "com.sun.star.frame.XStorable",
       "com.sun.star.view.XPrintable",
+      "com.sun.star.document.XEventBroadcaster",
+      "com.sun.star.document.XDocumentEventBroadcaster",
+      "com.sun.star.document.XEventsSupplier",
+      "com.sun.star.document.XViewDataSupplier",
       "com.sun.star.view.XPrintJobBroadcaster",
-      "com.sun.star.frame.XStorable"
+      "com.sun.star.document.XEmbeddedScripts",
+      "com.sun.star.document.XDocumentPropertiesSupplier",
+      "com.sun.star.document.XUndoManagerSupplier"
     ],
     "desc": [
       "abstract service which specifies a storable and printable document",

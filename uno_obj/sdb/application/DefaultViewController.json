@@ -1,13 +1,14 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "DefaultViewController",
   "type": "service",
   "namespace": "com.sun.star.sdb.application",
   "parser_args": {
     "sort": true,
-    "long_names": true
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
@@ -49,10 +50,10 @@
     "imports": [],
     "namespace": "com.sun.star.sdb.application",
     "extends": [
-      "com.sun.star.frame.XTitleChangeBroadcaster",
-      "com.sun.star.sdb.application.XDatabaseDocumentUI",
       "com.sun.star.frame.Controller",
-      "com.sun.star.frame.XTitle"
+      "com.sun.star.frame.XTitle",
+      "com.sun.star.frame.XTitleChangeBroadcaster",
+      "com.sun.star.sdb.application.XDatabaseDocumentUI"
     ],
     "desc": [
       "is the default controller implementation for OpenOffice.org's database application."

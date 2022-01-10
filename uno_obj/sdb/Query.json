@@ -1,13 +1,14 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "Query",
   "type": "service",
   "namespace": "com.sun.star.sdb",
   "parser_args": {
     "sort": true,
-    "long_names": true
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
@@ -55,11 +56,11 @@
     "imports": [],
     "namespace": "com.sun.star.sdb",
     "extends": [
-      "com.sun.star.sdb.DataSettings",
-      "com.sun.star.sdbcx.XColumnsSupplier",
       "com.sun.star.sdb.XQueryDefinition",
+      "com.sun.star.sdb.DataSettings",
       "com.sun.star.sdbcx.XDataDescriptorFactory",
-      "com.sun.star.sdbcx.XRename"
+      "com.sun.star.sdbcx.XRename",
+      "com.sun.star.sdbcx.XColumnsSupplier"
     ],
     "desc": [
       "is a stored definition of a SQL query.",

@@ -1,13 +1,14 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "TextProperties",
   "type": "service",
   "namespace": "com.sun.star.drawing",
   "parser_args": {
     "sort": true,
-    "long_names": true
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
@@ -111,12 +112,12 @@
     "imports": [],
     "namespace": "com.sun.star.drawing",
     "extends": [
-      "com.sun.star.style.ParagraphPropertiesComplex",
-      "com.sun.star.style.CharacterPropertiesComplex",
       "com.sun.star.style.CharacterProperties",
       "com.sun.star.style.CharacterPropertiesAsian",
+      "com.sun.star.style.CharacterPropertiesComplex",
+      "com.sun.star.style.ParagraphProperties",
       "com.sun.star.style.ParagraphPropertiesAsian",
-      "com.sun.star.style.ParagraphProperties"
+      "com.sun.star.style.ParagraphPropertiesComplex"
     ],
     "desc": [
       "This is a set of properties to describe the style for rendering the text area inside a shape.",

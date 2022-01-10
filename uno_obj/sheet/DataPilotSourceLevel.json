@@ -1,13 +1,14 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "DataPilotSourceLevel",
   "type": "service",
   "namespace": "com.sun.star.sheet",
   "parser_args": {
     "sort": true,
-    "long_names": true
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
@@ -61,10 +62,10 @@
     "imports": [],
     "namespace": "com.sun.star.sheet",
     "extends": [
+      "com.sun.star.container.XNamed",
       "com.sun.star.sheet.XMembersSupplier",
-      "com.sun.star.beans.XPropertySet",
       "com.sun.star.sheet.XDataPilotMemberResults",
-      "com.sun.star.container.XNamed"
+      "com.sun.star.beans.XPropertySet"
     ],
     "desc": [
       "represents a level in a data pilot source hierarchy.",

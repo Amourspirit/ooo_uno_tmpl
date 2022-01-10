@@ -1,13 +1,14 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "SheetCellRanges",
   "type": "service",
   "namespace": "com.sun.star.sheet",
   "parser_args": {
     "sort": true,
-    "long_names": true
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
@@ -117,19 +118,19 @@
     "imports": [],
     "namespace": "com.sun.star.sheet",
     "extends": [
-      "com.sun.star.util.XIndent",
-      "com.sun.star.sheet.SheetRangesQuery",
       "com.sun.star.table.CellProperties",
+      "com.sun.star.style.CharacterProperties",
       "com.sun.star.style.CharacterPropertiesAsian",
       "com.sun.star.style.CharacterPropertiesComplex",
-      "com.sun.star.container.XEnumerationAccess",
-      "com.sun.star.sheet.XSheetOperation",
+      "com.sun.star.style.ParagraphProperties",
+      "com.sun.star.sheet.SheetRangesQuery",
       "com.sun.star.util.XReplaceable",
-      "com.sun.star.style.CharacterProperties",
-      "com.sun.star.sheet.XSheetCellRangeContainer",
+      "com.sun.star.util.XIndent",
+      "com.sun.star.sheet.XSheetOperation",
       "com.sun.star.chart.XChartDataArray",
-      "com.sun.star.container.XNameContainer",
-      "com.sun.star.style.ParagraphProperties"
+      "com.sun.star.sheet.XSheetCellRangeContainer",
+      "com.sun.star.container.XEnumerationAccess",
+      "com.sun.star.container.XNameContainer"
     ],
     "desc": [
       "represents a collection of cell ranges in a spreadsheet document."

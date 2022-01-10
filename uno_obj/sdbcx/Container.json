@@ -1,13 +1,14 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "Container",
   "type": "service",
   "namespace": "com.sun.star.sdbcx",
   "parser_args": {
     "sort": true,
-    "long_names": true
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
@@ -68,12 +69,12 @@
     "namespace": "com.sun.star.sdbcx",
     "extends": [
       "com.sun.star.container.XNameAccess",
-      "com.sun.star.sdbcx.XAppend",
       "com.sun.star.container.XIndexAccess",
       "com.sun.star.container.XEnumerationAccess",
-      "com.sun.star.sdbcx.XDrop",
       "com.sun.star.util.XRefreshable",
-      "com.sun.star.sdbcx.XDataDescriptorFactory"
+      "com.sun.star.sdbcx.XDataDescriptorFactory",
+      "com.sun.star.sdbcx.XAppend",
+      "com.sun.star.sdbcx.XDrop"
     ],
     "desc": [
       "describes every container which is used for data definition.",

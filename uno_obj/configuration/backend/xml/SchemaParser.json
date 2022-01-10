@@ -1,13 +1,14 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "SchemaParser",
   "type": "service",
   "namespace": "com.sun.star.configuration.backend.xml",
   "parser_args": {
     "sort": true,
-    "long_names": true
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
@@ -43,9 +44,9 @@
     "imports": [],
     "namespace": "com.sun.star.configuration.backend.xml",
     "extends": [
-      "com.sun.star.lang.XInitialization",
       "com.sun.star.configuration.backend.XSchema",
-      "com.sun.star.io.XActiveDataSink"
+      "com.sun.star.io.XActiveDataSink",
+      "com.sun.star.lang.XInitialization"
     ],
     "desc": [
       "represents a configuration schema that is stored in a stream in OOR Schema XML format.",

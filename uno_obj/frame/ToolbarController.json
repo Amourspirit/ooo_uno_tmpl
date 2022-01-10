@@ -1,13 +1,14 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "ToolbarController",
   "type": "service",
   "namespace": "com.sun.star.frame",
   "parser_args": {
     "sort": true,
-    "long_names": true
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
@@ -55,11 +56,11 @@
     "imports": [],
     "namespace": "com.sun.star.frame",
     "extends": [
+      "com.sun.star.frame.XStatusListener",
+      "com.sun.star.lang.XInitialization",
       "com.sun.star.util.XUpdatable",
       "com.sun.star.frame.XToolbarController",
-      "com.sun.star.frame.XSubToolbarController",
-      "com.sun.star.frame.XStatusListener",
-      "com.sun.star.lang.XInitialization"
+      "com.sun.star.frame.XSubToolbarController"
     ],
     "desc": [
       "is an abstract service for a component which offers a more complex user interface to users within a toolbar.",

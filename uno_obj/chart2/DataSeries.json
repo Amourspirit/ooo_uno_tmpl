@@ -1,13 +1,14 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "libre_office_ver": "7.2",
   "name": "DataSeries",
   "type": "service",
   "namespace": "com.sun.star.chart2",
   "parser_args": {
     "sort": true,
-    "long_names": true
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
@@ -66,11 +67,11 @@
     "imports": [],
     "namespace": "com.sun.star.chart2",
     "extends": [
-      "com.sun.star.chart2.data.XDataSource",
       "com.sun.star.chart2.DataPointProperties",
-      "com.sun.star.chart2.XRegressionCurveContainer",
+      "com.sun.star.chart2.XDataSeries",
       "com.sun.star.chart2.data.XDataSink",
-      "com.sun.star.chart2.XDataSeries"
+      "com.sun.star.chart2.data.XDataSource",
+      "com.sun.star.chart2.XRegressionCurveContainer"
     ],
     "desc": [
       "reflects the model data of the object that has all the information for a DataRenderer to create a visible data series in a chart.",
