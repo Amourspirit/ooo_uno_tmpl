@@ -1297,8 +1297,10 @@ class Parser(base.ParserBase):
             return self._cache[key]
         result = []
         data: List[DataItem] = self._api_data.get_data_items()
-        # sort for consistency in json
-        data.sort()
+        # Const data should never be sorted. It conflicts with
+        # some of the constants that rely on order on the original html.
+        # see: https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1i18n_1_1KParseTokens.html
+        # data.sort()
         try:
             for itm in data:
                 d_itm = {
