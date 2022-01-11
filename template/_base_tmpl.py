@@ -7,9 +7,10 @@ import logging
 import time
 import calendar
 import tempfile
+from datetime import datetime, timedelta
 import json
 import pickle
-import errno
+import sqlite3 as sql
 from pathlib import Path
 from datetime import datetime, timezone
 from types import ModuleType
@@ -43,167 +44,127 @@ RESERVER_WORDS = {
 # region File Locking
 # https://github.com/dmfrey/FileLock
 # https://stackoverflow.com/questions/489861/locking-a-file-in-python
-class FileLockException(Exception):
-    pass
 
 
-class FileLock(object):
-    """ A file locking mechanism that has context-manager support so 
-        you can use it in a with statement. This should be relatively cross
-        compatible as it doesn't rely on msvcrt or fcntl for the locking.
-    """
 
-    def __init__(self, file_name, timeout=10, delay=.05):
-        """ Prepare the file locker. Specify the file to lock and optionally
-            the maximum timeout and the delay between each attempt to lock.
-        """
-        if timeout is not None and delay is None:
-            raise ValueError(
-                "If timeout is not None, then delay must not be None.")
-        self.is_locked = False
-        self.lockfile = os.path.join(os.getcwd(), "%s.lock" % file_name)
-        self.file_name = file_name
-        self.timeout = timeout
-        self.delay = delay
-
-    def acquire(self):
-        """ Acquire the lock, if possible. If the lock is in use, it check again
-            every `wait` seconds. It does this until it either gets the lock or
-            exceeds `timeout` number of seconds, in which case it throws 
-            an exception.
-        """
-        start_time = time.time()
-        while True:
-            try:
-                self.fd = os.open(self.lockfile, os.O_CREAT |
-                                  os.O_EXCL | os.O_RDWR)
-                self.is_locked = True  # moved to ensure tag only when locked
-                break
-            except OSError as e:
-                if e.errno != errno.EEXIST:
-                    raise
-                if self.timeout is None:
-                    raise FileLockException(
-                        "Could not acquire lock on {}".format(self.file_name))
-                if (time.time() - start_time) >= self.timeout:
-                    raise FileLockException("Timeout occured.")
-                time.sleep(self.delay)
-        # self.is_locked = True
-
-    def release(self):
-        """ Get rid of the lock by deleting the lockfile. 
-            When working in a `with` statement, this gets automatically 
-            called at the end.
-        """
-        if self.is_locked:
-            os.close(self.fd)
-            os.unlink(self.lockfile)
-            self.is_locked = False
-
-    def __enter__(self):
-        """ Activated when used in the with statement. 
-            Should automatically acquire a lock to be used in the with block.
-        """
-        if not self.is_locked:
-            self.acquire()
-        return self
-
-    def __exit__(self, type, value, traceback):
-        """ Activated at the end of the with statement.
-            It automatically releases the lock if it isn't locked.
-        """
-        if self.is_locked:
-            self.release()
-
-    def __del__(self):
-        """ Make sure that the FileLock instance doesn't leave a lockfile
-            lying around.
-        """
-        self.release()
-
-# endregion File Locking
+# region SQL Cache
 
 
-# region Cache
-class DictCache(dict):
-    def __init__(self, *args, **kw):
-        super(DictCache, self).__init__(*args, **kw)
+class SqlCache:
+    class CtxConnect:
+        # https://stackoverflow.com/questions/26793753/using-a-context-manager-for-connecting-to-a-sqlite3-database
+        def __init__(self, connect_str: str) -> None:
+            self._cstr = connect_str
 
-    def __setitem__(self, item, value):
-        super(DictCache, self).__setitem__(item, value)
-        super(DictCache, self).__setitem__("has_changed", True)
+        def __enter__(self):
+            # DateTime for sqlite:
+            #   See: https://stackoverflow.com/a/37222799/1171746
+            #   See: https://stackoverflow.com/a/1830499/1171746
+            self.connection: sql.Connection = sql.connect(
+                self._cstr, detect_types=sql.PARSE_DECLTYPES)
+            self.connection.row_factory = sql.Row
+            self.cursor: sql.Cursor = self.connection.cursor()
+            return self
+
+        def __exit__(self, exc_type, exc_value, traceback):
+            self.connection.close()
+
+        def get_connection(self) -> sql.Connection:
+            return self._conn
+
+    def __init__(self, connect_str: str, lifetime: float) -> None:
+        self._conn_str = connect_str
+        self._lifetime = lifetime
+        self._is_init = False
+        self._is_init_update = False
+        if self._is_init is False:
+            self._init()
+
+    def _init(self) -> None:
+        with SqlCache.CtxConnect(self._conn_str) as db:
+            # limit to one row: https://stackoverflow.com/a/33104119/1171746
+            db.cursor.execute("""CREATE TABLE IF NOT EXISTS pickle (
+            id INTEGER PRIMARY KEY CHECK (id = 1),
+            created TIMESTAMP,
+            updated TIMESTAMP,
+            data BLOB NOT NULL
+            )""")
+        self._is_init = True
+
+    def fetch(self) -> object:
+        if self._lifetime <= 0.0:
+            return None
+        data = None
+        created: datetime = None
+        with SqlCache.CtxConnect(self._conn_str) as db:
+            db.cursor.execute("SELECT created, data FROM pickle limit 1")
+            for row in db.cursor:
+                created = row['created']
+                data = pickle.loads(row['data'])
+        if not created or not data:
+            return None
+        now_time = datetime.utcnow()
+        expire_time = created + timedelta(seconds=self._lifetime)
+        if now_time > expire_time:
+            self._delete()
+            return None
+        return data
+
+    def _update(self, pdata: object) -> None:
+        with SqlCache.CtxConnect(self._conn_str) as db:
+            with db.connection:
+                db.cursor.execute("""UPDATE pickle SET updated=:updated, data=:data
+                                        WHERE id=1""",
+                                  {
+                                      "updated": datetime.utcnow(),
+                                      "data": sql.Binary(pdata)
+                                  })
+
+    def _insert(self, pdata: object) -> None:
+        with SqlCache.CtxConnect(self._conn_str) as db:
+            with db.connection:
+                db.cursor.execute("INSERT INTO pickle VALUES (:id, :created, :updated, :data)",
+                                  {
+                                      "id": 1,
+                                      "created": datetime.utcnow(),
+                                      "updated": datetime.utcnow(),
+                                      "data": sql.Binary(pdata)
+                                  })
+
+    def _delete(self) -> None:
+        with SqlCache.CtxConnect(self._conn_str) as db:
+            with db.connection:
+                db.cursor.execute("DELETE FROM pickle WHERE id=1")
+        self._is_init_update = False
+
+    def update(self, data: object) -> None:
+        pdata = pickle.dumps(data, pickle.HIGHEST_PROTOCOL)
+        if not self._is_init_update:
+            has_data = False
+            with SqlCache.CtxConnect(self._conn_str) as db:
+                db.cursor.execute("SELECT id from pickle where id=1")
+                for _ in db.cursor:
+                    has_data = True
+            if has_data:
+                self._update(pdata)
+            else:
+                self._insert(pdata)
+            self._is_init_update = True
+
+        else:
+            self._update(pdata)
 
 
-class PickleCache(object):
-    """
-    Caches files and retreives cached files.
-    Cached file are in a subfolder of system tmp dir.
-    """
-
-    def __init__(self, tmp_dir: str, lifetime: Optional[float] = None) -> None:
-        """
-        Constructor
-
-        Args:
-            tmp_dir (str, optional): Dir name to create in tmp folder. Defaults to 'ooo_uno_tmpl'.
-            lifetime (float, optional): Time in seconds that cache is good for. Defaults to 60 seconds.
-        """
+class DbCache:
+    def __init__(self, tmp_dir: str, db_name: str, lifetime: Optional[float] = None) -> None:
         t_path = Path(tempfile.gettempdir())
         self._cache_path = t_path / tmp_dir
+        
+        # self._cache_path = Path('./tmp')
         self.mkdirp(self._cache_path)
         self._lifetime = lifetime or 1800
-
-    def fetch_from_cache(self, filename: Union[str, Path]) -> Union[object, None]:
-        """
-        Fetches file contents from cache if it exist and is not expired
-
-        Args:
-            filename (Union[str, Path]): File to retrieve
-
-        Returns:
-            Union[object, None]: File contents if retrieved; Otherwise, ``None``
-        """
-        if self.seconds <= 0:
-            return None
-        f = Path(self.path, filename)
-        if not f.exists():
-            return None
-
-        f_stat = f.stat()
-        if f_stat.st_size == 0:
-            # shoud not be zero byte file.
-            try:
-                self.del_from_cache(f)
-            except Exception as e:
-                pass
-            return None
-        ti_m = f_stat.st_mtime
-        age = time.time() - ti_m
-        if age >= self.seconds:
-            return None
-
-        try:
-            # Open the file in binary mode
-            with open(f, 'rb') as file:
-                # Call load method to deserialze
-                content = pickle.load(file)
-            return content
-        except IOError:
-            return None
-        except Exception as e:
-            raise e
-
-    def save_in_cache(self, filename: Union[str, Path], content: object):
-        """
-        Saves file contents into cache
-
-        Args:
-            filename (Union[str, Path]): filename to write.
-            content (object): Contents to write into file.
-        """
-        f = Path(self.path, filename)
-        with open(f, 'wb') as file:
-            pickle.dump(content, file)
+        self._db_file = self._cache_path / (db_name + '.sqlite')
+        self._sql_cache = SqlCache(self._db_file, self._lifetime)
 
     def mkdirp(self, dest_dir: Union[str, Path]):
         """
@@ -219,50 +180,35 @@ class PickleCache(object):
         else:
             Path(dest_dir).mkdir(parents=True, exist_ok=True)
 
-    def del_from_cache(self,  filename: Union[str, Path]) -> None:
-        """
-        Deletes a file from cache if it exist
+    def fetch_from_cache(self) -> Union[object, None]:
+        return self._sql_cache.fetch()
 
-        Args:
-            filename (Union[str, Path]): file to delete.
-        """
-        try:
-            f = Path(self.path, filename)
-            if os.path.exists(f):
-                os.remove(f)
-        except Exception as e:
-            pass
-
-    @property
-    def seconds(self) -> float:
-        """Gets/Sets cache time in seconds"""
-        return self._lifetime
-
-    @seconds.setter
-    def seconds(self, value: float) -> None:
-        self._lifetime = float(value)
-
-    @property
-    def path(self) -> Path:
-        """Gets cache path"""
-        return self._cache_path
-
-# endregion Cache
-
+    def save_in_cache(self, contents: object) -> None:
+        self._sql_cache.update(contents)
+# endregion SQL Cache
 # region Order Inherits
 
+
+class DictCache(dict):
+    def __init__(self, *args, **kw):
+        super(DictCache, self).__init__(*args, **kw)
+
+    def __setitem__(self, item, value):
+        super(DictCache, self).__setitem__(item, value)
+        super(DictCache, self).__setitem__("has_changed", True)
 
 class OrderedInherits:
     def __init__(self, app_root: str) -> None:
         self._uno_obj_root = Path(app_root) / 'uno_obj'
-        self._pk_cache = PickleCache('ooo_uno_tmpl', 1800)
-        self._cache_file = 'tmpl_ordered_extends.pkl'
+        # self._pk_cache = PickleCache('ooo_uno_tmpl', 1800)
         self._cache = DictCache()
+        tmp_dir = os.environ.get('config_cache_dir', 'ooo_cace')
+        self._db_cache = DbCache(tmp_dir, "ordered_inherits", 3600)
 
     def __enter__(self):
         # enter is after init in context manager
         try:
-            cache = self._pk_cache.fetch_from_cache(self._cache_file)
+            cache = self._db_cache.fetch_from_cache()
             if cache:
                 self._cache.update(cache)
                 self._cache.update({"has_changed": False})
@@ -274,8 +220,8 @@ class OrderedInherits:
     def __exit__(self, exc_type, exc_value, traceback):
         if not exc_type and "has_changed" in self._cache:
             if self._cache['has_changed']:
-                with FileLock(self._cache_file):
-                    self._pk_cache.save_in_cache(self._cache_file, self._cache)
+                self._db_cache.save_in_cache(self._cache)
+        pass
 
 
     def get_ordered(self, imports: List[str]) -> Union[List[str], None]:

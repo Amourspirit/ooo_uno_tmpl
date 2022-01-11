@@ -44,13 +44,12 @@ class CompileLinkArgs:
     use_sub_process: bool = True
 # endregion Data Class
 
-# region Logger / Env
+# region Logger
 logger = None
 
-os.environ['project_root'] = str(Path(__file__).parent)
 # logger/log_handle.py
 
-# endregion Logger / Env
+# endregion Logger
 
 # region Compare
 class CompareEnum(IntEnum):
@@ -1032,7 +1031,9 @@ def _touch():
 def main():
     global logger
     config = read_config('./config.json')
-
+    os.environ['config_cache_dir'] = config.cache_dir
+    os.environ['config_cache_duration'] = str(config.cache_duration)
+    os.environ['project_root'] = str(Path(__file__).parent)
     def get_compile_args(args:argparse.Namespace) -> CompileLinkArgs:
         path = getattr(args, 'path', None)
         cmd_line_process = getattr(args, 'cmd_line_process', True)
