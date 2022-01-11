@@ -40,15 +40,10 @@ RESERVER_WORDS = {
 class DictCache(dict):
     def __init__(self, *args, **kw):
         super(DictCache, self).__init__(*args, **kw)
-        self._has_changed = False
 
     def __setitem__(self, item, value):
         super(DictCache, self).__setitem__(item, value)
-        self._has_changed = True
-
-    @property
-    def has_changed(self) -> bool:
-        return self._has_changed
+        super(DictCache, self).__setitem__("has_changed", True)
 
 
 class PickleCache(object):
@@ -182,24 +177,22 @@ class OrderedInherits:
             cache = self._pk_cache.fetch_from_cache(self._cache_file)
             if cache:
                 self._cache.update(cache)
+                self._cache.update({"has_changed": False})
         except Exception:
             self._cache = {}
             pass
         return self
 
     def __exit__(self, exc_type, exc_value, traceback):
-        if not exc_type and self._cache.has_changed:
-            self._pk_cache.save_in_cache(self._cache_file, self._cache)
+        if not exc_type and "has_changed" in self._cache:
+            if self._cache['has_changed']:
+                self._pk_cache.save_in_cache(self._cache_file, self._cache)
+
 
     def get_ordered(self, imports: List[str]) -> Union[List[str], None]:
 
         def get_Unique_ns(ns: str):
-            self._cache['unique_first_loop'] = True
-
             def get_ns(ns_key: str, ns_set: set):
-                first_loop = self._cache['unique_first_loop']
-                if first_loop:
-                    self._cache['unique_first_loop'] = False
                 if ns_key in self._cache:
                     return self._cache[ns_key]
                 p = self._ns_to_path(ns=ns_key)
