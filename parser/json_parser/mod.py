@@ -471,14 +471,14 @@ class WriterMod():
         key = '_get_uno_obj_path'
         if key in self._cache:
             return self._cache[key]
-        uno_obj_path = Path(self._path_dir.parent,
+        uno_obj_path = Path(self._path_dir.parent.parent,
                             base.APP_CONFIG.uno_base_dir)
         name_parts: List[str] = self._parser.api_data.url_obj.namespace
         # ignore com, sun, star
         path_parts = name_parts[3:]
         path_parts.append('module_links.json')
         obj_path = uno_obj_path.joinpath(*path_parts)
-        base.Util.mkdirp(dest_dir=obj_path.parent)
+        base.Util.mkdirp(dest_dir=obj_path.parent.parent)
         self._cache[key] = obj_path
         return self._cache[key]
 # endregion Writer Class
