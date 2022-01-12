@@ -118,7 +118,6 @@ class ParserLinks:
 class WriterLinks:
     def __init__(self, parser: ParserLinks) -> None:
         self._parser = parser
-    
 
     def _process_direct(self, url_data: urldata, *args, **kwargs) -> Tuple[bool, str]:
         flags = [arg for arg in args if isinstance(arg, str)]
@@ -137,6 +136,9 @@ class WriterLinks:
     
     def Write(self, *args, **kwargs):
         links = self._parser.get_links()
+        # for lnk in links:
+        #     self._process_direct(lnk,*args, **kwargs)
+        # return
         with concurrent.futures.ProcessPoolExecutor() as executor:
             results = [executor.submit(self._process_direct, link, *args, **kwargs)
                        for link in links]
@@ -203,7 +205,7 @@ def main():
 
     p = ParserLinks(json_path=args.json_file)
     w = WriterLinks(parser=p)
-    w.Write()
+    w.Write('r', 'j')
 
 if __name__ == "__main__":
     main()

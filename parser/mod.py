@@ -610,7 +610,7 @@ def parse(*args, **kwargs):
         print_json=pargs['print_json'],
         write_json=pargs['write_json'],
         clear_on_print=pargs['no-print-clear'],
-        recursive=args.pargs['recursive']
+        recursive=pargs['recursive']
     )
 
 # endregion Parse method
