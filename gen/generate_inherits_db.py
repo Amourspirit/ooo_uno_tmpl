@@ -83,11 +83,11 @@ class BaseSql:
         """Create Table if it does not exsit"""
     
     @abstractmethod
-    def _get_table_name(self) -> str:
+    def get_table_name(self) -> str:
         """Table Name"""
 
     def _drop_table_if_exist(self) -> None:
-        query = 'DROP TABLE IF EXISTS ' + self._get_table_name()
+        query = 'DROP TABLE IF EXISTS ' + self.get_table_name()
         with SqlCtx(self._conn_str) as db:
             with db.connection:
                 db.cursor.execute(query)
@@ -95,7 +95,7 @@ class BaseSql:
     def get_row_count(self) -> int:
         if self.has_data is False:
             return 0
-        query = 'SELECT count() FROM ' + self._get_table_name()
+        query = 'SELECT count() FROM ' + self.get_table_name()
         with SqlCtx(self._conn_str) as db:
             db.cursor.execute(query)
             num_of_rows = db.cursor.fetchone()[0]
@@ -106,7 +106,7 @@ class BaseSql:
         self._create_table_if_not_exist()
 
     def has_data(self) -> bool:
-        query = f"SELECT * FROM {self._get_table_name()} limit 1"
+        query = f"SELECT * FROM {self.get_table_name()} limit 1"
         has_data = False
         with SqlCtx(self._conn_str) as db:
             db.cursor.execute(query)
@@ -201,16 +201,10 @@ class SqlInitDb:
 class SqlModuleDetail(BaseSql):
     def __init__(self, connect_str: str) -> None:
         super().__init__(connect_str=connect_str)
-        self._is_init = False
-        self._is_init_update = False
-        if self._is_init is False:
-            self._init()
 
-    def _get_table_name(self) -> str:
+    def get_table_name(self) -> str:
+        """Gets the current table name"""
         return 'module_detail'
-
-    def _init(self) -> None:
-        self._is_init = True
 
     # region Table Create
 
@@ -218,9 +212,15 @@ class SqlModuleDetail(BaseSql):
     # endregion Table Create
 
     def insert(self, data: List[ModuleDetail]) -> None:
+        """
+        Inserts/updates data. Handles inserting and updating
+
+        Args:
+            data (List[ModuleDetail]): data to update
+        """
         # SQLite UPSERT / UPDATE OR INSERT
         # https://stackoverflow.com/questions/15277373/sqlite-upsert-update-or-insert
-        values = [asdict(ns) for ns in data]
+        values = [asdict(itm) for itm in data]
         with SqlCtx(self.conn_str) as db:
             query = """INSERT INTO module_detail
             VALUES (:id_namespace, :name, :namespace, :href, :component_type, :sort)
@@ -233,6 +233,12 @@ class SqlModuleDetail(BaseSql):
                 db.cursor.executemany(query, values)
 
     def update(self, data: List[ModuleDetail]) -> None:
+        """
+        Updates data. Handles updating
+
+        Args:
+            data (List[ModuleDetail]): data to update
+        """
         # self.remove_all()
         self.insert(data)
 
@@ -241,36 +247,39 @@ class SqlModuleDetail(BaseSql):
 # region SQL Extends
 
 
-class SqlExtends(BaseSql):
+class SqlModuleInfo(BaseSql):
     def __init__(self, connect_str: str) -> None:
         super().__init__(connect_str=connect_str)
-        self._is_init = False
-        self._is_init_update = False
-        if self._is_init is False:
-            self._init()
 
-    def _get_table_name(self) -> str:
-        return 'component'
+    def get_table_name(self) -> str:
+        """Gets the current table name"""
+        return 'module_info'
 
-    def _init(self) -> None:
-        self._create_table_if_not_exist()
-        self._is_init = True
+    def insert(self, data: List[ModuleInfo]) -> None:
+        """
+        Inserts/updates data. Handles inserting and updating
 
-    # region Table Create
-
-    def _create_table_if_not_exist(self) -> None:
-        query = """CREATE TABLE IF NOT EXISTS component (
-            id_component TEXT PRIMARY KEY,
-            type TEXT,
-            version TEXT,
-            name TEXT,
-            ns TEXT,
-            lo_ver TEXT
-            )"""
+        Args:
+            data (List[ModuleInfo]): data to update
+        """
+        values = [asdict(itm) for itm in data]
         with SqlCtx(self.conn_str) as db:
-            db.cursor.execute(query)
+            query = """INSERT INTO module_info
+            VALUES (:id_module_info, :url_base)
+            ON CONFLICT(id_module_info) 
+            DO UPDATE SET url_base=excluded.url_base;
+            """
+            with db.connection:
+                db.cursor.executemany(query, values)
+    
+    def update(self, data: List[ModuleInfo]) -> None:
+        """
+        Updates data. Handles updating
 
-    # endregion Table Create
+        Args:
+            data (List[ModuleInfo]): data to update
+        """
+        self.insert(data)
 # endregion SQL Extends
 
 class DbConnect:
@@ -299,12 +308,14 @@ class ParseModuleLinks:
 
     def __init__(self, config: AppConfig) -> None:
         self._app_config = config
-        self._imports: List[ModuleDetail] = []
+        self._module_details: List[ModuleDetail] = []
+        self._module_infos: List[ModuleInfo] =[]
         self._min_ver = verr.Version.parse(config.min_module_links_ver)
         conn = DbConnect(self._app_config)
         self._db_cnn = conn.connection_str
         self._root_dir = conn.root_dir
-        self._ns_db = SqlModuleDetail(connect_str=self._db_cnn)
+        self._module_detail_tbl = SqlModuleDetail(connect_str=self._db_cnn)
+        self._module_info_tbl = SqlModuleInfo(connect_str=self._db_cnn)
 
     def get_module_link_files(self) -> Set[str]:
         dirname = str(self._root_dir / self._app_config.uno_base_dir)
@@ -323,13 +334,9 @@ class ParseModuleLinks:
     def get_count_details(self) -> int:
         return self._ns_db.get_row_count()
 
-    def write_all_details(self) -> None:
-        # this can be done multi thread
-        self._imports.clear()
-        if self._ns_db.has_data():
-            msg = f"{self.__class__.__name__}.write_all_ns() Can not write because there is already data in the database for namespace"
-            raise Exception(msg)
-
+    def _write_all(self) -> None:
+        self._module_details.clear()
+        self._module_infos.clear()
         m_files = self.get_module_link_files()
         for j_file in m_files:
             with open(j_file, 'r') as file:
@@ -337,16 +344,27 @@ class ParseModuleLinks:
             self._validite_json(file=file, data=j_data)
             self._read(json_data=j_data)
 
-        sorted_lst = self._get_ns_lst()
-        self._ns_db.insert(data=sorted_lst)
+        sorted_lst = self._get_detail_lst()
+        
+        self._module_detail_tbl.insert(data=sorted_lst)
+        self._module_info_tbl.insert(data=self._module_infos)
+
+    def write_all_details(self) -> None:
+        if self._module_detail_tbl.has_data():
+            msg = f"{self.__class__.__name__}.write_all_details() Can not write because there is already data in the database for {self._module_detail_tbl.get_table_name()}"
+            raise Exception(msg)
+        if self._module_info_tbl.has_data():
+            msg = f"{self.__class__.__name__}.write_all_details() Can not write because there is already data in the database for {self._module_detail_tbl.get_table_name()}"
+            raise Exception(msg)
+        self._write_all()
+       
 
     def update_all_details(self) -> None:
-        # self._ns_db.remove_all()
-        self.write_all_details()
+        self._write_all()
         
-    def _get_ns_lst(self) -> List[ModuleDetail]:
-        self._imports
-        _sorted = sorted(self._imports, key=lambda im: im.id_namespace)
+    def _get_detail_lst(self) -> List[ModuleDetail]:
+        self._module_details
+        _sorted = sorted(self._module_details, key=lambda im: im.id_namespace)
         lst = []
         for i, el in enumerate(_sorted):
             lst.append(ModuleDetail(
@@ -370,13 +388,17 @@ class ParseModuleLinks:
         self._read_const(ns, json_data)
         self._read_enums(ns, json_data)
         self._read_typedef(ns, json_data)
+        self._module_infos.append(ModuleInfo(
+            id_module_info=ns,
+            url_base=json_data['url_base']
+        ))
         
 
     def _read_enums(self, ns: str, json_data: dict) -> None:
         lst: List[Dict[str, str]] = json_data['data'].get('enums', [])
         for itm in lst:
             name: str = itm['name']
-            self._imports.append(ModuleDetail(
+            self._module_details.append(ModuleDetail(
                 id_namespace=f"{ns}.{name}",
                 name=name,
                 namespace=ns,
@@ -389,7 +411,7 @@ class ParseModuleLinks:
         lst: List[Dict[str, str]] = json_data['data'].get('constants', [])
         for itm in lst:
             name: str = itm['name']
-            self._imports.append(ModuleDetail(
+            self._module_details.append(ModuleDetail(
                 id_namespace=f"{ns}.{name}",
                 name=name,
                 namespace=ns,
@@ -401,7 +423,7 @@ class ParseModuleLinks:
         lst: List[Dict[str, str]] = json_data['data'].get('typedef', [])
         for itm in lst:
             name: str = itm['name']
-            self._imports.append(ModuleDetail(
+            self._module_details.append(ModuleDetail(
                 id_namespace=f"{ns}.{name}",
                 name=name,
                 namespace=ns,
@@ -414,7 +436,7 @@ class ParseModuleLinks:
             'service', [])
         for itm in lst:
             name: str = itm['name']
-            self._imports.append(ModuleDetail(
+            self._module_details.append(ModuleDetail(
                 id_namespace=f"{ns}.{name}",
                 name=name,
                 namespace=ns,
@@ -427,7 +449,7 @@ class ParseModuleLinks:
             'struct', [])
         for itm in lst:
             name: str = itm['name']
-            self._imports.append(ModuleDetail(
+            self._module_details.append(ModuleDetail(
                 id_namespace=f"{ns}.{name}",
                 name=name,
                 namespace=ns,
@@ -440,19 +462,20 @@ class ParseModuleLinks:
             'exception', [])
         for itm in lst:
             name: str = itm['name']
-            self._imports.append(ModuleDetail(
+            self._module_details.append(ModuleDetail(
                 id_namespace=f"{ns}.{name}",
                 name=name,
                 namespace=ns,
                 href=itm['href'],
                 component_type='exception'
                 ))
+
     def _read_classes_interface(self, ns: str, json_data: dict) -> None:
         lst: List[Dict[str, str]] = json_data['data']['classes'].get(
             'interface', [])
         for itm in lst:
             name: str = itm['name']
-            self._imports.append(ModuleDetail(
+            self._module_details.append(ModuleDetail(
                 id_namespace=f"{ns}.{name}",
                 name=name,
                 namespace=ns,
@@ -465,7 +488,7 @@ class ParseModuleLinks:
             'singleton', [])
         for itm in lst:
             name: str = itm['name']
-            self._imports.append(ModuleDetail(
+            self._module_details.append(ModuleDetail(
                 id_namespace=f"{ns}.{name}",
                 name=name,
                 namespace=ns,
