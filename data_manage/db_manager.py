@@ -28,10 +28,10 @@ class ComponentType:
 @dataclass(frozen=True, eq=True)
 class Component:
     id_component: str
-    type: str
-    version: str
     name: str
     namespace: str
+    type: str
+    version: str
     lo_ver: str
 @dataclass(frozen=True, eq=True)
 class ModuleInfo:
@@ -353,6 +353,10 @@ class ParseModuleJson:
         self._components: List[Component] = []
         self._min_ver = verr.Version.parse(config.min_json_data_ver)
         self._valid_types = tuple(self._app_config.component_types)
+        conn = DbConnect(self._app_config)
+        self._db_cnn = conn.connection_str
+        self._root_dir = conn.root_dir
+        self._component_tbl = SqlComponent(connect_str=self._db_cnn)
 
     def get_module_json_files(self) -> List[str]:
         def filter_fn(name) -> bool:
@@ -361,18 +365,13 @@ class ParseModuleJson:
                 return False
             return True
         dirname = str(self._root_dir / self._app_config.uno_base_dir)
-        # https://stackoverflow.com/questions/20638040/glob-exclude-pattern
-        # module_links.json needs to be remove from listing.
-        # it will not need any processing here.
-        # using sets and deduct seem the simplist way.
-        pattern = dirname + '/**/.json'
+        pattern = dirname + '/**/*.json'
         all_files = glob.glob(pattern, recursive=True)
         files = filter(filter_fn, all_files)
         return files
 
     def _write_all(self) -> None:
         self._components.clear()
-        self._module_infos.clear()
         m_files = self.get_module_json_files()
         for j_file in m_files:
             with open(j_file, 'r') as file:
@@ -380,7 +379,7 @@ class ParseModuleJson:
             self._validite_json(file=file, data=j_data)
             self._read(json_data=j_data)
 
-        self._module_info_tbl.insert(data=self._components)
+        self._component_tbl.insert(data=self._components)
 
     def update_all_details(self) -> None:
         self._write_all()
@@ -393,6 +392,8 @@ class ParseModuleJson:
         name = json_data['name']
         self._components.append(Component(
             id_component=f"{ns}.{name}",
+            name=name,
+            namespace=ns,
             type=json_data['type'],
             version=json_data['version'],
             lo_ver=json_data['libre_office_ver']
@@ -412,7 +413,7 @@ class ParseModuleJson:
         if not key in data:
             _msg = f"{msg} Json missing type field. File: {file}"
             raise Exception(_msg)
-        if not key in self._valid_types:
+        if not data[key] in self._valid_types:
             _msg = f"{msg} Json data bad id field. Expected: one of {self._valid_types}, got: {data[key]}. File: {file}"
             raise Exception(_msg)
         key = 'version'

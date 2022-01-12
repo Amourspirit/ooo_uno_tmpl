@@ -1042,7 +1042,7 @@ def query_yes_no(question, default="yes"):
                 "Please respond with 'yes' or 'no' " "(or 'y' or 'n').\n")
 # region    Main Testing
 def _main():
-    sys.argv.extend(['-v', '--log-file', 'make.log', 'data_ns', '-a'])
+    sys.argv.extend(['-v', '--log-file', 'make.log', 'data', 'component', '-a'])
     main()
 
 def _touch():
