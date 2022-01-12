@@ -9,7 +9,7 @@ import shutil
 import glob
 import argparse
 import subprocess
-import gen.generate_inherits_db as gen_db
+from data_manage import db_manager
 from multiprocessing import Pool, TimeoutError
 from typing import List, Optional, Set
 from kwhelp import rules
@@ -1018,6 +1018,8 @@ def query_yes_no(question, default="yes"):
 
     The "answer" return value is True for "yes" or False for "no".
     """
+    # https://tinyurl.com/yyg38fp2
+    # https://tinyurl.com/y2pv2cdh
     valid = {"yes": True, "y": True, "ye": True, "no": False, "n": False}
     if default is None:
         prompt = " [y/n] "
@@ -1520,7 +1522,7 @@ def main():
     
     if args.command == 'data':
         if args.command_data == 'module':
-            mlc = gen_db.ModuleLinksControler(
+            mlc = db_manager.ModuleLinksControler(
                 config=config,
                 write_all=args.write_all,
                 update_all=args.update_all,
