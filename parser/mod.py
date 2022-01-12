@@ -3,12 +3,12 @@
 """
 Process a link to a page that contains links to modules.
 Modules data is writen in json format into namespace converted to directories.
+This file writes module_links.json files.
 """
 # region Imports
 import sys
 import os
 import argparse
-import base
 import re
 import logging
 from dataclasses import dataclass
@@ -18,6 +18,10 @@ from bs4.element import ResultSet, Tag
 from kwhelp.decorator import DecFuncEnum, RequireArgs, RuleCheckAllKw, TypeCheckKw, TypeCheck
 from kwhelp import rules
 from pathlib import Path
+try:
+    import base
+except ModuleNotFoundError:
+    import parser.base as base
 from logger.log_handle import get_logger
 from parser import __version__, JSON_ID
 # endregion Imports
@@ -494,7 +498,122 @@ def work(url: str, **kwargs):
                 href: str = mod['href']
                 _url = f"{base_url}/{href}"
                 work(url=_url, **kwargs)
+# region Parse method
 
+
+def _get_parsed_kwargs(**kwargs) -> Dict[str, str]:
+    required = ("url",)
+    lookups = {
+        "u": "url",
+        "url": "url",
+        "L": "log_file",
+        "log_file": "log_file"
+    }
+    result = {}
+    for k, v in kwargs.items():
+        if not isinstance(k, str):
+            continue
+        if k in lookups:
+            key = lookups[k]
+            result[key] = v
+    for k in required:
+        if not k in result:
+            # k is missing from kwargs
+            raise base.RequiredError(f"Missing required arg {k}.")
+    return result
+
+
+def _get_parsed_args(*args) -> Dict[str, bool]:
+    # key, value and value is a key into defaults
+    defaults = {
+        "no_cache": True,
+        "no-print-clear": False,
+        "print_json": False,
+        "print_template": False,
+        "write_template": False,
+        "write_json": False,
+        "recursive": False,
+        "verbose": False
+    }
+    found = {
+        "no_cache": False,
+        "no-print-clear": True,
+        "print_json": True,
+        "print_template": True,
+        "write_template": True,
+        "write_json": True,
+        "recursive": True,
+        "verbose": True
+    }
+    lookups = {
+        "x": "no_cache",
+        "no_cache": "no_cache",
+        "p": "no-print-clear",
+        "no-print-clear": "no-print-clear",
+        "n": "print_json",
+        "print_json": "print_json",
+        "m": "print_template",
+        "print_template": "print_template",
+        "t": "write_template",
+        "write_template": "write_template",
+        "j": "write_json",
+        "write_json": "write_json",
+        "r": "recursive",
+        "recursive": "recursive",
+        "v": "verbose",
+        "verbose": "verbose"
+    }
+    result = {k: v for k, v in defaults.items()}
+    for arg in args:
+        if not isinstance(arg, str):
+            continue
+        if arg in lookups:
+            key = lookups[arg]
+            result[key] = found[key]
+    return result
+
+
+def parse(*args, **kwargs):
+    """
+    Parses data, alternative to running on command line.
+
+    Other Arguments:
+        'no_cache' (str, optional): Short form ``'x'``. No caching. Default ``False``
+        'no_print_clear (str, optional): Short form ``'p'``. No clearing of terminal
+            when otuput to terminal. Default ``False``
+        'print_json' (str, optional): Short form ``'n'``. Print json to termainl. Default ``False``
+        'write_json' (str, optional): Short form ``'j'``. Write json file into obj_uno subfolder. Default ``False``
+        'verbose' (str, optional): Short form ``'v'``. Verobose output.
+        'recursive' (str, optional): Short form ``'r'``. Recursivly process modules. If url contains links other modules they will be processed.
+            Default ``False``
+
+    Keyword Arguments:
+        url (str): Short form ``u``. url to parse
+        log_file (str, optional): Short form ``L``. Log File
+    """
+    global logger
+    pkwargs = _get_parsed_kwargs(**kwargs)
+    pargs = _get_parsed_args(*args)
+    if logger is None:
+        log_args = {}
+        if 'log_file' in pkwargs:
+            log_args['log_file'] = pkwargs['log_file']
+        else:
+            log_args['log_file'] = 'mod.log'
+        if pargs['verbose']:
+            log_args['level'] = logging.DEBUG
+        _set_loggers(get_logger(logger_name=Path(__file__).stem, **log_args))
+
+    work(
+        url=pkwargs['url'],
+        cache=pargs['no_cache'],
+        print_json=pargs['print_json'],
+        write_json=pargs['write_json'],
+        clear_on_print=pargs['no-print-clear'],
+        recursive=args.pargs['recursive']
+    )
+
+# endregion Parse method
 def _main():
     # url = 'https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1awt.html'
     url = 'https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star.html'

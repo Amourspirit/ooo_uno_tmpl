@@ -3,6 +3,7 @@
 """
 Module reads a json file of links that contain links to modules.
 This module then parses each link and calls the correct module to process each link.
+This module reads star.json and calls mod.py to write module_links.json files.
 """
 # region imports
 import sys
@@ -14,10 +15,11 @@ import subprocess
 import json
 import concurrent.futures
 from collections import namedtuple
-from typing import List, Union
+from typing import List, Tuple, Union
 from pathlib import Path
 from logger.log_handle import get_logger
 from parser import __version__, JSON_ID
+from parser import mod
 from verr import Version
 # endregion imports
 
@@ -116,29 +118,34 @@ class ParserLinks:
 class WriterLinks:
     def __init__(self, parser: ParserLinks) -> None:
         self._parser = parser
-        self._dir = Path(__file__).parent
-        self._mod = Path(self._dir, 'mod.py')
     
-    def _process_link(self, url_data: urldata) -> bool:
-        cmd_str = f"{self._mod} -r -j -u {url_data.href}"
-        logger.info('Running subprocess: %s', cmd_str)
-        cmd = [sys.executable] + cmd_str.split()
-        res = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        result = f"{url_data.name}, Success"
-        if res.stdout:
-            logger.info(res.stdout)
-        if res.stderr:
-            result = f"{url_data.name}, Fail"
-            logger.error(res.stderr)
-        return result
 
-    def Write(self):
+    def _process_direct(self, url_data: urldata, *args, **kwargs) -> Tuple[bool, str]:
+        flags = [arg for arg in args if isinstance(arg, str)]
+        if len(flags) == 0:
+            flags.append('r')
+            flags.append('j')
+        kargs = kwargs.copy()
+        kargs['url'] = url_data.href
+        result = True
+        try:
+            mod.parse(*flags, **kargs)
+        except Exception:
+            result = False
+        return result, url_data.name
+
+    
+    def Write(self, *args, **kwargs):
         links = self._parser.get_links()
         with concurrent.futures.ProcessPoolExecutor() as executor:
-            results = [executor.submit(self._process_link, link) for link in links]
+            results = [executor.submit(self._process_direct, link, *args, **kwargs)
+                       for link in links]
             for f in concurrent.futures.as_completed(results):
-                logger.info(f.result())
-        # self._process_link(links[1].href)
+                state, name = f.result()
+                if state:
+                    logger.info(f"Success processing: {name}")
+                else:
+                    logger.error(f"Failed processing: {name}")
         
 
 def _main():
