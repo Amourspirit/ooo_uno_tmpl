@@ -447,7 +447,8 @@ class WriterMod():
         json_dict = {
             "id": JSON_ID,
             "version": __version__,
-            "timestamp": str(base.Util.get_timestamp_utc()),
+            # "timestamp": str(base.Util.get_timestamp_utc()),
+            "libre_office_ver": base.APP_CONFIG.libre_office_ver,
             "name": name,
             "namespace": name,
             "type": "module_links",
