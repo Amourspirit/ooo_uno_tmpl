@@ -9,7 +9,7 @@ import shutil
 import glob
 import argparse
 import subprocess
-import time
+import gen.generate_inherits_db as gen_db
 from multiprocessing import Pool, TimeoutError
 from typing import List, Optional, Set
 from kwhelp import rules
@@ -1011,7 +1011,7 @@ class Make(FilesBase):
 
 # region    Main Testing
 def _main():
-    sys.argv.extend(['-v', '--log-file', 'make.log', 'interface', '-p', 'tmp/'])
+    sys.argv.extend(['-v', '--log-file', 'make.log', 'data_ns', '-c'])
     main()
 
 def _touch():
@@ -1056,6 +1056,7 @@ def main():
     service_parser = subparser.add_parser(name='service')
     typedef_parser = subparser.add_parser(name='typedef')
     touch = subparser.add_parser(name='touch')
+    data_ns = subparser.add_parser(name='data_ns')
     # endregion create parsers
 
     # region ex args
@@ -1350,6 +1351,31 @@ def main():
         default=4)
     # endregion make args
 
+    # region data args
+    data_ns_write_group = data_ns.add_mutually_exclusive_group()
+    data_ns_write_group.add_argument(
+        '-a', '--write-all',
+        help='Write all namespace data',
+        action='store_true',
+        dest='write_all',
+        default=False
+    )
+    data_ns_write_group.add_argument(
+        '-u', '--udate-all',
+        help='Overwrite namesapce data',
+        action='store_true',
+        dest='update_all',
+        default=False
+    )
+    data_ns_write_group.add_argument(
+        '-c', '--get-count',
+        help='Get count of namesapce data',
+        action='store_true',
+        dest='count_all',
+        default=False
+    )
+    # endregion data args
+
     # region general args
     parser.add_argument(
         '-v', '--verbose',
@@ -1449,6 +1475,19 @@ def main():
             touch_py_files=args.python_files
         )
     # endregion Touch Command
+
+    # region data_ns Command
+    if args.command == 'data_ns':
+        mlc = gen_db.ModuleLinksControler(
+            config=config,
+            write_all=args.write_all,
+            update_all=args.update_all,
+            count_all=args.count_all
+            )
+        mlc_result = mlc.results()
+        if mlc_result:
+            print(mlc_result)
+    # endregion data_ns Command
 
     # region Script End Action
     logger.info('Finished!')

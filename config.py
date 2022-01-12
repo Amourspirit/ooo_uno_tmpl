@@ -5,16 +5,22 @@ from pathlib import Path
 class AppConfig:
     libre_office_ver: str
     """Version of Libre Office that is being built such as 7.2"""
-    uno_base_dir: str
-    """Base Directory for Uno such as uno_obj"""
+    min_module_links_ver: str
+    """Min version that can be parsed for module_links.json files"""
     module_links_file: str
     """Json file name for module links such as module_links.json"""
+    uno_base_dir: str
+    """Base Directory for Uno such as uno_obj"""
     cache_dir: str
     """The cache directory to use. This is generally used in creating a cache directory is system temp dir."""
     uno_obj_dir: str
     """Uno obj dir such as uno_obj. This is the directory that templates and json data file are written to."""
     builld_dir: str
     """Output build dir such as scratch"""
+    resource_dir: str
+    """App Resources dir such as resources"""
+    db_mod_info: str
+    """Name of Module Info database in ``resource_dir`` such as ``mod_info.sqlite``"""
     cache_duration: float
     """
     The amount of time in seconds to keep files in cache.

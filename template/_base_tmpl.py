@@ -41,11 +41,6 @@ RESERVER_WORDS = {
 
 # region MRO Related Classes
 
-# region File Locking
-# https://github.com/dmfrey/FileLock
-# https://stackoverflow.com/questions/489861/locking-a-file-in-python
-
-
 
 # region SQL Cache
 
@@ -226,7 +221,7 @@ class OrderedInherits:
 
     def get_ordered(self, imports: List[str]) -> Union[List[str], None]:
 
-        def get_Unique_ns(ns: str):
+        def get_unique_ns(ns: str):
             def get_ns(ns_key: str, ns_set: set):
                 if ns_key in self._cache:
                     return self._cache[ns_key]
@@ -249,7 +244,7 @@ class OrderedInherits:
             extends = tuple(ex_lst)  # list
             unique: Set[str] = set(ex_lst)
             for ex in extends:
-                unique.update(get_Unique_ns(ex))
+                unique.update(get_unique_ns(ex))
 
             ns_lst = list(unique)
             ns_lst.sort()
