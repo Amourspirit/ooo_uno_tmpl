@@ -9,17 +9,16 @@ This module reads star.json and calls mod.py to write module_links.json files.
 import sys
 import argparse
 import logging
-import base
-import re
-import subprocess
 import json
 import concurrent.futures
+from parser import base
 from collections import namedtuple
-from typing import List, Tuple, Union
+from typing import Dict, List, Tuple, Union
 from pathlib import Path
 from logger.log_handle import get_logger
 from parser import __version__, JSON_ID
-from parser import mod
+from parser import json_parser
+from parser.json_parser import mod
 from verr import Version
 # endregion imports
 
@@ -121,9 +120,9 @@ class WriterLinks:
 
     def _process_direct(self, url_data: urldata, *args, **kwargs) -> Tuple[bool, str]:
         flags = [arg for arg in args if isinstance(arg, str)]
-        if len(flags) == 0:
-            flags.append('r')
-            flags.append('j')
+        # if len(flags) == 0:
+        #     flags.append('r')
+        #     flags.append('j')
         kargs = kwargs.copy()
         kargs['url'] = url_data.href
         result = True
@@ -162,12 +161,52 @@ def _main():
     p = ParserLinks(json_path=data_link)
     w = WriterLinks(parser=p)
     w.Write()
+# region Parse method
 
+def parse(*args, **kwargs):
+    """
+    Parses data, and runs commands
+
+    Keyword Arguments:
+        json_file (str, optional): Json file to parse. Default ``resources/star.json``
+        no_cache (bool, optional): No caching. Default ``False``.
+        no_print_clear (bool, optional): No clearing of terminal
+            when otuput to terminal. Default ``False``.
+        print_json (bool, optional): Print json to termainl. Default ``False``.
+        write_json (bool, optional): Write json file into obj_uno subfolder. Default ``False``.
+        verbose (bool, optional): Verobose output. Default ``False``.
+        recursive (bool, optional): Recursivly process modules. If url contains links other modules they will be processed.
+            Default ``False``
+        log_file (str, optional): Short form ``L``. Log File
+    """
+    global logger
+    json_file = "../resources/star.json"
+
+    if logger is None:
+        log_args = {}
+        log_args['log_file'] = str(kwargs.get('log_file', 'linkproc.log'))
+        if bool(kwargs.get('verbose', False)):
+            log_args['level'] = logging.DEBUG
+        _set_loggers(get_logger(logger_name=Path(__file__).stem, **log_args))
+    j_path = kwargs.get('json_file', None)
+    if j_path is None:
+        j_path = json_file
+    p = ParserLinks(json_path=j_path)
+    w = WriterLinks(parser=p)
+    kargs = kwargs.copy()
+    if 'json_file' in kargs:
+        del kargs['json_file']
+    w.Write(*args, **kargs)
+
+
+# endregion Parse method
+
+# region Main
 
 def main():
     global logger
     # region Parser
-    json_file = "resources/star.json"
+    json_file = "../resources/star.json"
     parser = argparse.ArgumentParser(description='interface')
     parser.add_argument(
         '-f', '--json-file',
@@ -209,3 +248,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+# endregion Main

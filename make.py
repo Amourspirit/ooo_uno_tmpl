@@ -28,6 +28,7 @@ from parser.json_parser.enum_parser import parse as parse_enm, ParserEnum
 from parser.json_parser.exception_parser import parse as parse_ex, ParserException
 from parser.json_parser.typedef_parser import parse as parse_typedef, ParserTypeDef
 from parser.json_parser.const_parser import parse as parse_const, ParserConst
+from parser.json_parser import linkproc
 # endregion Imports
 
 # region Data Class
@@ -1042,7 +1043,7 @@ def query_yes_no(question, default="yes"):
                 "Please respond with 'yes' or 'no' " "(or 'y' or 'n').\n")
 # region    Main Testing
 def _main():
-    sys.argv.extend(['-v', '--log-file', 'make.log', 'data', 'component', '-a'])
+    sys.argv.extend(['-v', '--log-file', 'debug.log', 'mod_links', '-a'])
     main()
 
 def _touch():
@@ -1087,7 +1088,8 @@ def main():
     service_parser = subparser.add_parser(name='service')
     typedef_parser = subparser.add_parser(name='typedef')
     touch = subparser.add_parser(name='touch')
-    
+    mod_links = subparser.add_parser(name='mod_links')
+
     data_subparser = subparser.add_parser(name='data')
     data = data_subparser.add_subparsers(dest='command_data')
     # data = data_subparser.add_parser(name='data')
@@ -1365,6 +1367,38 @@ def main():
     )
     # endregion Touch
 
+    # region Module Links
+    mod_links.add_argument(
+        '-a', '--all',
+        help='Compile moddule_link json files',
+        action='store_true',
+        dest='mod_links_all',
+        default=False
+    )
+    mod_links.add_argument(
+        '-f', '--json-file',
+        help='Optonal json file to parse such as resources/star.json',
+        action='store',
+        dest='json_file',
+        default=None
+    )
+    mod_links.add_argument(
+        '-r', '--no-recursive',
+        help='Run as command line suprocess. Default False',
+        action='store_true',
+        dest='no_recursive',
+        default=False
+    )
+    mod_links.add_argument(
+        '-x', '--no-cache',
+        help='No caching',
+        action='store_false',
+        dest='cache',
+        default=True)
+
+
+    # endregion Module Links
+
     # region make args
     make_parser = subparser.add_parser(name='make')
     make_parser.add_argument(
@@ -1541,6 +1575,20 @@ def main():
             touch_py_files=args.python_files
         )
     # endregion Touch Command
+
+    # region Module Links Command
+    if args.command == 'mod_links':
+        if args.mod_links_all:
+            if not query_yes_no(f"Are you sure you want to rebuild all {config.module_links_file} files?", 'no'):
+                return
+            linkproc.parse(
+                json_file=args.json_file,
+                recursive=not args.no_recursive,
+                cache=args.cache,
+                write_json=True,
+                
+            )
+    # endregion Module Links Command
 
     # region data Command
     
