@@ -1011,7 +1011,7 @@ class Make(FilesBase):
 
 # region    Main Testing
 def _main():
-    sys.argv.extend(['-v', '--log-file', 'make.log', 'data_ns', '-c'])
+    sys.argv.extend(['-v', '--log-file', 'make.log', 'data_ns', '-a'])
     main()
 
 def _touch():
@@ -1374,6 +1374,13 @@ def main():
         dest='count_all',
         default=False
     )
+    data_ns_write_group.add_argument(
+        '-i', '--init-db',
+        help='Initialize database',
+        action='store_true',
+        dest='init_db',
+        default=False
+    )
     # endregion data args
 
     # region general args
@@ -1482,7 +1489,8 @@ def main():
             config=config,
             write_all=args.write_all,
             update_all=args.update_all,
-            count_all=args.count_all
+            count_all=args.count_all,
+            init_db=args.init_db
             )
         mlc_result = mlc.results()
         if mlc_result:
