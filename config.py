@@ -1,6 +1,7 @@
 import json
 from dataclasses import dataclass
 from pathlib import Path
+from typing import List
 @dataclass
 class AppConfig:
     libre_office_ver: str
@@ -9,6 +10,8 @@ class AppConfig:
     """Min version that can be parsed for module_links.json files"""
     module_links_file: str
     """Json file name for module links such as module_links.json"""
+    min_json_data_ver: str
+    """Min version that can be parsed for .json files of Module Components"""
     uno_base_dir: str
     """Base Directory for Uno such as uno_obj"""
     cache_dir: str
@@ -95,6 +98,7 @@ class AppConfig:
     """Extension for typedef files such as .tppi"""
     template_service_ext: str
     """Extension for service files such as .tppi"""
+    component_types: List[str]
 
 def read_config(config_file: str) -> AppConfig:
     """

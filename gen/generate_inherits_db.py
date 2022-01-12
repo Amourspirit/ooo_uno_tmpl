@@ -2,6 +2,7 @@
 """
 Reads module_links.json file and writes all naespaces and clases in to a database.
 """
+# region Imports
 from abc import abstractmethod
 from dataclasses import dataclass, asdict
 import os
@@ -14,6 +15,8 @@ from datetime import datetime
 from typing import Any, Dict, Set, List
 from config import AppConfig
 from parser import __version__, JSON_ID
+# endregion Imports
+
 # region Dataclass
 
 
@@ -118,7 +121,6 @@ class BaseSql:
     def conn_str(self) -> str:
         """Gets connect_str value"""
         return self._conn_str
-# region SQL Namespace
 
 class SqlInitDb:
     def __init__(self, connect_str: str) -> None:
@@ -198,6 +200,51 @@ class SqlInitDb:
                 has_data = True
         return has_data
 
+# region    Table Classes
+# region        SQL Component
+
+
+class SqlComponent(BaseSql):
+    def __init__(self, connect_str: str) -> None:
+        super().__init__(connect_str=connect_str)
+
+    def get_table_name(self) -> str:
+        """Gets the current table name"""
+        return 'component'
+
+    def insert(self, data: List[Component]) -> None:
+        """
+        Inserts/updates data. Handles inserting and updating
+
+        Args:
+            data (List[Component]): data to update
+        """
+        # SQLite UPSERT / UPDATE OR INSERT
+        # https://stackoverflow.com/questions/15277373/sqlite-upsert-update-or-insert
+        values = [asdict(itm) for itm in data]
+        with SqlCtx(self.conn_str) as db:
+            query = """INSERT INTO component
+            VALUES (:id_component, :type, :version, :name, :namespace, :lo_ver)
+            ON CONFLICT(id_component) 
+            DO UPDATE SET type=excluded.type, version=excluded.version,
+            name=excluded.name, namespace=excluded.namespace, lo_ver=excluded.lo_ver;
+            """
+            # query = "INSERT INTO module_details VALUES (:id_namespace, :name, :namespace, :href, :component_type, :sort)"
+            with db.connection:
+                db.cursor.executemany(query, values)
+
+    def update(self, data: List[Component]) -> None:
+        """
+        Updates data. Handles updating
+
+        Args:
+            data (List[Component]): data to update
+        """
+        # self.remove_all()
+        self.insert(data)
+
+# endregion     SQL Component
+# region        SQL Module Detail
 class SqlModuleDetail(BaseSql):
     def __init__(self, connect_str: str) -> None:
         super().__init__(connect_str=connect_str)
@@ -206,10 +253,6 @@ class SqlModuleDetail(BaseSql):
         """Gets the current table name"""
         return 'module_detail'
 
-    # region Table Create
-
-
-    # endregion Table Create
 
     def insert(self, data: List[ModuleDetail]) -> None:
         """
@@ -242,9 +285,9 @@ class SqlModuleDetail(BaseSql):
         # self.remove_all()
         self.insert(data)
 
-# endregion SQL Namespace
+# endregion     SQL Module Detail
 
-# region SQL Extends
+# region        SQL Module Info
 
 
 class SqlModuleInfo(BaseSql):
@@ -280,8 +323,9 @@ class SqlModuleInfo(BaseSql):
             data (List[ModuleInfo]): data to update
         """
         self.insert(data)
-# endregion SQL Extends
+# endregion         SQL Module Info
 
+# endregion Table Classes
 class DbConnect:
     def __init__(self, config: AppConfig) -> None:
         self._app_config = config
@@ -303,6 +347,90 @@ class DbConnect:
         return self._root_dir
 # endregion Database
 
+class ParseModuleJson:
+    def __init__(self, config: AppConfig) -> None:
+        self._app_config = config
+        self._components: List[Component] = []
+        self._min_ver = verr.Version.parse(config.min_json_data_ver)
+        self._valid_types = tuple(self._app_config.component_types)
+
+    def get_module_json_files(self) -> List[str]:
+        def filter_fn(name) -> bool:
+            p_name = Path(name).name
+            if p_name == self._app_config.module_links_file:
+                return False
+            return True
+        dirname = str(self._root_dir / self._app_config.uno_base_dir)
+        # https://stackoverflow.com/questions/20638040/glob-exclude-pattern
+        # module_links.json needs to be remove from listing.
+        # it will not need any processing here.
+        # using sets and deduct seem the simplist way.
+        pattern = dirname + '/**/.json'
+        all_files = glob.glob(pattern, recursive=True)
+        files = filter(filter_fn, all_files)
+        return files
+
+    def _write_all(self) -> None:
+        self._components.clear()
+        self._module_infos.clear()
+        m_files = self.get_module_json_files()
+        for j_file in m_files:
+            with open(j_file, 'r') as file:
+                j_data = json.load(file)
+            self._validite_json(file=file, data=j_data)
+            self._read(json_data=j_data)
+
+        self._module_info_tbl.insert(data=self._components)
+
+    def update_all_details(self) -> None:
+        self._write_all()
+
+    def _read(self, json_data: dict) -> None:
+        self._read_main(json_data=json_data)
+
+    def _read_main(self, json_data: dict) -> None:
+        ns = json_data['namespace']
+        name = json_data['name']
+        self._components.append(Component(
+            id_component=f"{ns}.{name}",
+            type=json_data['type'],
+            version=json_data['version'],
+            lo_ver=json_data['libre_office_ver']
+        ))
+    # region Validation
+    def _validite_json(self, file: str, data: dict):
+        msg = f"{self.__class__.__name__}._validite_json() "
+
+        key = 'id'
+        if not key in data:
+            _msg = f"{msg} Json missing id field. File: {file}"
+            raise Exception(_msg)
+        if data[key] != 'uno-ooo-parser':
+            _msg = f"{msg} Json data bad id field. Expected: uno-ooo-parser, got: {data[key]}. File: {file}"
+            raise Exception(_msg)
+        key = 'type'
+        if not key in data:
+            _msg = f"{msg} Json missing type field. File: {file}"
+            raise Exception(_msg)
+        if not key in self._valid_types:
+            _msg = f"{msg} Json data bad id field. Expected: one of {self._valid_types}, got: {data[key]}. File: {file}"
+            raise Exception(_msg)
+        key = 'version'
+        if not key in data:
+            _msg = f"{msg} Json missing version field. File: {file}"
+            raise Exception(_msg)
+        json_ver = verr.Version.parse(data[key])
+        if json_ver < self._min_ver:
+            _msg = f"{msg} Version fail Expect a min version of '{self._min_ver}', got '{json_ver}'. File: {file}"
+            raise Exception(_msg)
+        key = 'data'
+        if not key in data:
+            _msg = f"{msg} Json missing data field. File: {file}"
+            raise Exception(_msg)
+        if not isinstance(data[key], dict):
+            _msg = f"{msg} Json data field is not a dictionary. File: {file}"
+            raise Exception(_msg)
+    # endregion Validation
 
 class ParseModuleLinks:
 
@@ -316,6 +444,7 @@ class ParseModuleLinks:
         self._root_dir = conn.root_dir
         self._module_detail_tbl = SqlModuleDetail(connect_str=self._db_cnn)
         self._module_info_tbl = SqlModuleInfo(connect_str=self._db_cnn)
+
 
     def get_module_link_files(self) -> Set[str]:
         dirname = str(self._root_dir / self._app_config.uno_base_dir)
@@ -332,7 +461,7 @@ class ParseModuleLinks:
         return files - ex_files
     
     def get_count_details(self) -> int:
-        return self._ns_db.get_row_count()
+        return self._module_detail_tbl.get_row_count()
 
     def _write_all(self) -> None:
         self._module_details.clear()
@@ -560,4 +689,15 @@ class ModuleLinksControler:
     def _init_database(self) -> None:
         db = SqlInitDb(self._conn.connection_str)
         db.init_db()
-        
+
+
+class ComponentControler:
+    def __init__(self, config: AppConfig, **kwargs) -> None:
+        self._parser = ParseModuleJson(config=config)
+        self._update_all = bool(kwargs.get('update_all', False))
+
+    def results(self) -> Any:
+        if self._update_all:
+            self._parser.update_all_details()
+        return None
+

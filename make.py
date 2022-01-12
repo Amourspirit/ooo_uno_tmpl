@@ -1008,7 +1008,36 @@ class Make(FilesBase):
 # endregion Make
 
 # region Main
+def query_yes_no(question, default="yes"):
+    """Ask a yes/no question via raw_input() and return their answer.
 
+    "question" is a string that is presented to the user.
+    "default" is the presumed answer if the user just hits <Enter>.
+            It must be "yes" (the default), "no" or None (meaning
+            an answer is required of the user).
+
+    The "answer" return value is True for "yes" or False for "no".
+    """
+    valid = {"yes": True, "y": True, "ye": True, "no": False, "n": False}
+    if default is None:
+        prompt = " [y/n] "
+    elif default == "yes":
+        prompt = " [Y/n] "
+    elif default == "no":
+        prompt = " [y/N] "
+    else:
+        raise ValueError("invalid default answer: '%s'" % default)
+
+    while True:
+        sys.stdout.write(question + prompt)
+        choice = input().lower()
+        if default is not None and choice == "":
+            return valid[default]
+        elif choice in valid:
+            return valid[choice]
+        else:
+            sys.stdout.write(
+                "Please respond with 'yes' or 'no' " "(or 'y' or 'n').\n")
 # region    Main Testing
 def _main():
     sys.argv.extend(['-v', '--log-file', 'make.log', 'data_ns', '-a'])
@@ -1056,7 +1085,11 @@ def main():
     service_parser = subparser.add_parser(name='service')
     typedef_parser = subparser.add_parser(name='typedef')
     touch = subparser.add_parser(name='touch')
-    data_ns = subparser.add_parser(name='data_ns')
+    
+    data_subparser = subparser.add_parser(name='data')
+    data = data_subparser.add_subparsers(dest='command_data')
+    # data = data_subparser.add_parser(name='data')
+    data_module = data.add_parser(name='module')
     # endregion create parsers
 
     # region ex args
@@ -1352,29 +1385,29 @@ def main():
     # endregion make args
 
     # region data args
-    data_ns_write_group = data_ns.add_mutually_exclusive_group()
-    data_ns_write_group.add_argument(
+    data_module_group = data_module.add_mutually_exclusive_group()
+    data_module_group.add_argument(
         '-a', '--write-all',
         help='Write all namespace data',
         action='store_true',
         dest='write_all',
         default=False
     )
-    data_ns_write_group.add_argument(
+    data_module_group.add_argument(
         '-u', '--udate-all',
         help='Overwrite namesapce data',
         action='store_true',
         dest='update_all',
         default=False
     )
-    data_ns_write_group.add_argument(
+    data_module_group.add_argument(
         '-c', '--get-count',
         help='Get count of namesapce data',
         action='store_true',
         dest='count_all',
         default=False
     )
-    data_ns_write_group.add_argument(
+    data_module_group.add_argument(
         '-i', '--init-db',
         help='Initialize database',
         action='store_true',
@@ -1484,17 +1517,22 @@ def main():
     # endregion Touch Command
 
     # region data_ns Command
-    if args.command == 'data_ns':
-        mlc = gen_db.ModuleLinksControler(
-            config=config,
-            write_all=args.write_all,
-            update_all=args.update_all,
-            count_all=args.count_all,
-            init_db=args.init_db
-            )
-        mlc_result = mlc.results()
-        if mlc_result:
-            print(mlc_result)
+    
+    if args.command == 'data':
+        if args.command_data == 'module':
+            mlc = gen_db.ModuleLinksControler(
+                config=config,
+                write_all=args.write_all,
+                update_all=args.update_all,
+                count_all=args.count_all,
+                init_db=args.init_db
+                )
+            if args.write_all or args.update_all:
+                if not query_yes_no(f"Are you sure you want to read all {config.module_links_file} files and write to database?", 'no'):
+                    return
+            mlc_result = mlc.results()
+            if mlc_result:
+                print(mlc_result)
     # endregion data_ns Command
 
     # region Script End Action
