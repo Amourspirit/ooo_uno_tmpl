@@ -1093,6 +1093,7 @@ def main():
     # data = data_subparser.add_parser(name='data')
     data_module = data.add_parser(name='module')
     data_init = data.add_parser(name='init')
+    data_component = data.add_parser(name='component')
     # endregion create parsers
 
     # region ex args
@@ -1401,14 +1402,14 @@ def main():
     data_module_group = data_module.add_mutually_exclusive_group()
     data_module_group.add_argument(
         '-a', '--write-all',
-        help='Write all namespace data',
+        help=f"Write all {config.module_links_file} files to database",
         action='store_true',
         dest='write_all',
         default=False
     )
     data_module_group.add_argument(
         '-u', '--udate-all',
-        help='Overwrite namesapce data',
+        help=f"Overwrite all {config.module_links_file} files to database",
         action='store_true',
         dest='update_all',
         default=False
@@ -1422,7 +1423,23 @@ def main():
     )
     
     # endregion module
-    
+    # region    component
+    data_component_group = data_component.add_mutually_exclusive_group()
+    data_component_group.add_argument(
+        '-a', '--write-all',
+        help='Write all component json files data to database',
+        action='store_true',
+        dest='write_all',
+        default=False
+    )
+    data_component_group.add_argument(
+        '-u', '--udate-all',
+        help='Overwrite all component json files data in database',
+        action='store_true',
+        dest='update_all',
+        default=False
+    )
+    # endregion    component
     # endregion data args
 
     # region general args
@@ -1554,6 +1571,20 @@ def main():
             if mlc_result:
                 print(mlc_result)
         # endregion Module
+        # region Component
+        if args.command_data == 'component':
+            mlc = db_manager.ComponentControler(
+                config=config,
+                write_all=args.write_all,
+                update_all=args.update_all
+            )
+            if args.write_all or args.update_all:
+                if not query_yes_no(f"Are you sure you want to read all component json files and write to database?", 'no'):
+                    return
+            mlc_result = mlc.results()
+            if mlc_result:
+                print(mlc_result)
+        # endregion Component
     # endregion data Command
 
     # region Script End Action
