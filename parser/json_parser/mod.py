@@ -478,7 +478,7 @@ class WriterMod():
         path_parts = name_parts[3:]
         path_parts.append('module_links.json')
         obj_path = uno_obj_path.joinpath(*path_parts)
-        base.Util.mkdirp(dest_dir=obj_path.parent.parent)
+        base.Util.mkdirp(dest_dir=obj_path.parent)
         self._cache[key] = obj_path
         return self._cache[key]
 # endregion Writer Class
