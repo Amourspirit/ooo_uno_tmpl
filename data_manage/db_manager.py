@@ -672,8 +672,6 @@ class ModuleLinksControler:
         self._write_all = bool(kwargs.get('write_all', False))
         self._update_all = bool(kwargs.get('update_all', False))
         self._count = bool(kwargs.get('count_all', False))
-        self._init_db = bool(kwargs.get('init_db', False))
-        self._conn = DbConnect(config)
 
     def results(self) -> Any:
         if self._count:
@@ -682,10 +680,23 @@ class ModuleLinksControler:
             self._parser.write_all_details()
         elif self._update_all:
             self._parser.update_all_details()
-        elif self._init_db:
-            self._init_database()
         return None
     
+    def _init_database(self) -> None:
+        db = SqlInitDb(self._conn.connection_str)
+        db.init_db()
+
+
+class DatabaseControler:
+    def __init__(self, config: AppConfig, **kwargs) -> None:
+        self._parser = ParseModuleLinks(config=config)
+        self._init_db = bool(kwargs.get('init_db', False))
+        self._conn = DbConnect(config)
+
+    def results(self) -> None:
+        if self._init_db:
+            self._init_database()
+
     def _init_database(self) -> None:
         db = SqlInitDb(self._conn.connection_str)
         db.init_db()

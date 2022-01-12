@@ -1092,6 +1092,7 @@ def main():
     data = data_subparser.add_subparsers(dest='command_data')
     # data = data_subparser.add_parser(name='data')
     data_module = data.add_parser(name='module')
+    data_init = data.add_parser(name='init')
     # endregion create parsers
 
     # region ex args
@@ -1387,6 +1388,16 @@ def main():
     # endregion make args
 
     # region data args
+    # region    init
+    data_init.add_argument(
+        '-i', '--init-db',
+        help='Initialize database',
+        action='store_true',
+        dest='init_db',
+        default=False
+    )
+    # endregion init
+    # region    module
     data_module_group = data_module.add_mutually_exclusive_group()
     data_module_group.add_argument(
         '-a', '--write-all',
@@ -1409,13 +1420,9 @@ def main():
         dest='count_all',
         default=False
     )
-    data_module_group.add_argument(
-        '-i', '--init-db',
-        help='Initialize database',
-        action='store_true',
-        dest='init_db',
-        default=False
-    )
+    
+    # endregion module
+    
     # endregion data args
 
     # region general args
@@ -1518,16 +1525,27 @@ def main():
         )
     # endregion Touch Command
 
-    # region data_ns Command
+    # region data Command
     
     if args.command == 'data':
+        # region Init
+        if args.command_data == 'init':
+            dbc = db_manager.DatabaseControler(
+                config=config,
+                init_db=args.init_db
+            )
+            if args.init_db:
+                if not query_yes_no(f"Are you sure you want initialize the database '{config.db_mod_info}'?", 'no'):
+                    return
+            dbc.results()
+        # endregion Init
+        # region Module
         if args.command_data == 'module':
             mlc = db_manager.ModuleLinksControler(
                 config=config,
                 write_all=args.write_all,
                 update_all=args.update_all,
-                count_all=args.count_all,
-                init_db=args.init_db
+                count_all=args.count_all
                 )
             if args.write_all or args.update_all:
                 if not query_yes_no(f"Are you sure you want to read all {config.module_links_file} files and write to database?", 'no'):
@@ -1535,7 +1553,8 @@ def main():
             mlc_result = mlc.results()
             if mlc_result:
                 print(mlc_result)
-    # endregion data_ns Command
+        # endregion Module
+    # endregion data Command
 
     # region Script End Action
     logger.info('Finished!')
