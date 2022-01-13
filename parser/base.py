@@ -225,7 +225,7 @@ class SummaryInfo:
             return NotImplemented
         return self.name < other.name
 
-@dataclass(frozen=True, eq=True)
+@dataclass
 class NameInfo:
     name: str
     "Name to use in code gen"
