@@ -719,7 +719,7 @@ class BaseTpml(Template):
             s += im
         return s
     
-    def get_class_inherits_from_db(self) -> str:
+    def get_class_inherits_from_db(self, default: str = 'object') -> str:
         """
         Gets class inherits taking into accout if an inherit is the same name as the class.
 
@@ -746,7 +746,7 @@ class BaseTpml(Template):
         extends = sql_entends.get_extends(namespace=ns)
         len_ent = len(extends)
         if len_ent == 0:
-            return ''
+            return default
         if len_ent == 1:
             return get_import(extends[0])
         extends.sort() # sort, gets it sort order from database
