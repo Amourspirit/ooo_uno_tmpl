@@ -1,6 +1,8 @@
 # coding: utf-8
 """
-Reads module_links.json file and writes all naespaces and clases in to a database.
+Creates a datbase if not existing. Database must be init. See DatabaseControler
+Reads module_links.json file and writes info in a database.
+Reads Component json files and writes info in a database.
 """
 # region Imports
 from abc import abstractmethod
@@ -12,12 +14,19 @@ import verr
 import sqlite3 as sql
 from pathlib import Path
 from datetime import datetime
-from typing import Any, Dict, Set, List
+from typing import Any, Dict, Set, List, Union
 from config import AppConfig
 from parser import __version__, JSON_ID
 # endregion Imports
 
 # region Dataclass
+
+
+@dataclass(frozen=True, eq=True)
+class Extends:
+    namespace: str
+    fk_component_id: str
+    id_extends: Union[int, None] = None
 
 
 @dataclass(frozen=True, eq=True)
@@ -34,11 +43,14 @@ class Component:
     version: str
     lo_ver: str
     file: str
+
+
 @dataclass(frozen=True, eq=True)
 class ModuleInfo:
     id_module_info: str
     url_base: str
     file: str
+
 
 @dataclass(frozen=True, eq=True)
 class ModuleDetail:
@@ -48,7 +60,7 @@ class ModuleDetail:
     href: str
     component_type: str
     sort: int = -1
-    
+
     def __lt__(self, other: object):
         if not isinstance(other, ModuleDetail):
             return NotImplemented
@@ -79,6 +91,7 @@ class SqlCtx:
     def get_connection(self) -> sql.Connection:
         return self._conn
 
+
 class BaseSql:
     def __init__(self, connect_str: str) -> None:
         self._conn_str = connect_str
@@ -86,7 +99,7 @@ class BaseSql:
     @abstractmethod
     def _create_table_if_not_exist(self) -> None:
         """Create Table if it does not exsit"""
-    
+
     @abstractmethod
     def get_table_name(self) -> str:
         """Table Name"""
@@ -96,7 +109,7 @@ class BaseSql:
         with SqlCtx(self._conn_str) as db:
             with db.connection:
                 db.cursor.execute(query)
-    
+
     def get_row_count(self) -> int:
         if self.has_data is False:
             return 0
@@ -124,11 +137,12 @@ class BaseSql:
         """Gets connect_str value"""
         return self._conn_str
 
+
 class SqlInitDb:
     def __init__(self, connect_str: str) -> None:
         self._conn_str = connect_str
         self._is_init = False
-    
+
     def init_db(self) -> None:
         if self._is_init:
             return
@@ -136,8 +150,18 @@ class SqlInitDb:
         self._create_module_details()
         self._create_component_type()
         self._create_component()
-        
+        self._create_extends()
         self._is_init = True
+
+    def _create_extends(self) -> None:
+        # auto primary key: https://stackoverflow.com/a/26652736/1171746
+        query = """CREATE TABLE IF NOT EXISTS extends (
+            id_extends INT PRIMARY KEY,
+            namespace TEXT,
+            fk_component_id TEXT
+            )"""
+        with SqlCtx(self._conn_str) as db:
+            db.cursor.execute(query)
 
     def _create_module_info(self) -> None:
         query = """CREATE TABLE IF NOT EXISTS module_info (
@@ -176,7 +200,7 @@ class SqlInitDb:
                 ('service',),
                 ('struct',),
                 ('typedef',)
-                ]
+            ]
             with SqlCtx(self._conn_str) as db:
                 with db.connection:
                     db.cursor.executemany(
@@ -194,7 +218,7 @@ class SqlInitDb:
             )"""
         with SqlCtx(self._conn_str) as db:
             db.cursor.execute(query)
-    
+
     def has_data(self, table: str) -> bool:
         query = f"SELECT * FROM {table} limit 1"
         has_data = False
@@ -246,9 +270,53 @@ class SqlComponent(BaseSql):
         """
         # self.remove_all()
         self.insert(data)
-
 # endregion     SQL Component
+
+# region        SQL ComponentExtends
+
+
+class SqlComponentExtends(BaseSql):
+    def __init__(self, connect_str: str) -> None:
+        super().__init__(connect_str=connect_str)
+
+    def get_table_name(self) -> str:
+        """Gets the current table name"""
+        return 'component'
+
+    def insert(self, data: List[Extends]) -> None:
+        """
+        Inserts/updates data. Handles inserting and updating
+
+        Args:
+            data (List[Component]): data to update
+        """
+        # SQLite UPSERT / UPDATE OR INSERT
+        # https://stackoverflow.com/questions/15277373/sqlite-upsert-update-or-insert
+        values = [asdict(itm) for itm in data]
+        with SqlCtx(self.conn_str) as db:
+            query = """INSERT INTO extends
+            VALUES (:id_extends, :namespace, :fk_component_id)
+            ON CONFLICT(id_extends) 
+            DO UPDATE SET namespace=excluded.namespace, fk_component_id=excluded.fk_component_id;
+            """
+            # query = "INSERT INTO module_details VALUES (:id_namespace, :name, :namespace, :href, :component_type, :sort)"
+            with db.connection:
+                db.cursor.executemany(query, values)
+
+    def update(self, data: List[Extends]) -> None:
+        """
+        Updates data. Handles updating
+
+        Args:
+            data (List[Component]): data to update
+        """
+        # self.remove_all()
+        self.insert(data)
+# endregion     SQL ComponentExtends
+
 # region        SQL Module Detail
+
+
 class SqlModuleDetail(BaseSql):
     def __init__(self, connect_str: str) -> None:
         super().__init__(connect_str=connect_str)
@@ -256,7 +324,6 @@ class SqlModuleDetail(BaseSql):
     def get_table_name(self) -> str:
         """Gets the current table name"""
         return 'module_detail'
-
 
     def insert(self, data: List[ModuleDetail]) -> None:
         """
@@ -318,7 +385,7 @@ class SqlModuleInfo(BaseSql):
             """
             with db.connection:
                 db.cursor.executemany(query, values)
-    
+
     def update(self, data: List[ModuleInfo]) -> None:
         """
         Updates data. Handles updating
@@ -330,6 +397,8 @@ class SqlModuleInfo(BaseSql):
 # endregion         SQL Module Info
 
 # endregion Table Classes
+
+
 class DbConnect:
     def __init__(self, config: AppConfig) -> None:
         self._app_config = config
@@ -338,29 +407,35 @@ class DbConnect:
             self._root_dir = Path(root_dir)
         else:
             self._root_dir = Path(__file__).parent.parent
-        self._conn = str(self._root_dir / config.resource_dir / config.db_mod_info)
+        self._conn = str(self._root_dir /
+                         config.resource_dir / config.db_mod_info)
 
     @property
     def connection_str(self) -> str:
         """Gets connection_str value"""
         return self._conn
-    
+
     @property
     def root_dir(self) -> Path:
         """Gets root_dir value"""
         return self._root_dir
 # endregion Database
 
+# region Parse
+
+
 class ParseModuleJson:
     def __init__(self, config: AppConfig) -> None:
         self._app_config = config
         self._components: List[Component] = []
+        self._extends: List[Extends] = []
         self._min_ver = verr.Version.parse(config.min_json_data_ver)
         self._valid_types = tuple(self._app_config.component_types)
         conn = DbConnect(self._app_config)
         self._db_cnn = conn.connection_str
         self._root_dir = conn.root_dir
         self._component_tbl = SqlComponent(connect_str=self._db_cnn)
+        self._extends_tbl = SqlComponentExtends(connect_str=self._db_cnn)
 
     def get_module_json_files(self) -> List[str]:
         def filter_fn(name) -> bool:
@@ -384,6 +459,7 @@ class ParseModuleJson:
             self._read(json_data=j_data, file=j_file)
 
         self._component_tbl.insert(data=self._components)
+        self._extends_tbl.insert(data=self._component_tbl)
 
     def update_all_details(self) -> None:
         self._write_all()
@@ -395,7 +471,7 @@ class ParseModuleJson:
         rel = Path(file).relative_to(self._root_dir)
         ns = json_data['namespace']
         name = json_data['name']
-        self._components.append(Component(
+        c = Component(
             id_component=f"{ns}.{name}",
             name=name,
             namespace=ns,
@@ -403,7 +479,16 @@ class ParseModuleJson:
             version=json_data['version'],
             lo_ver=json_data['libre_office_ver'],
             file=str(rel)
-        ))
+        )
+        self._read_extends(json_data=json_data, comp=c)
+        self._components.append(c)
+
+    def _read_extends(self, json_data: dict, comp: Component) -> None:
+        j_extends: List[str] = json_data['data'].get('extends', [])
+        for ext in j_extends:
+            self._extends.append(
+                Extends(namespace=ext, fk_component_id=comp.id_component))
+
     # region Validation
     def _validite_json(self, file: str, data: dict):
         msg = f"{self.__class__.__name__}._validite_json() "
@@ -439,19 +524,19 @@ class ParseModuleJson:
             raise Exception(_msg)
     # endregion Validation
 
+
 class ParseModuleLinks:
 
     def __init__(self, config: AppConfig) -> None:
         self._app_config = config
         self._module_details: List[ModuleDetail] = []
-        self._module_infos: List[ModuleInfo] =[]
+        self._module_infos: List[ModuleInfo] = []
         self._min_ver = verr.Version.parse(config.min_module_links_ver)
         conn = DbConnect(self._app_config)
         self._db_cnn = conn.connection_str
         self._root_dir = conn.root_dir
         self._module_detail_tbl = SqlModuleDetail(connect_str=self._db_cnn)
         self._module_info_tbl = SqlModuleInfo(connect_str=self._db_cnn)
-
 
     def get_module_link_files(self) -> Set[str]:
         dirname = str(self._root_dir / self._app_config.uno_base_dir)
@@ -466,7 +551,7 @@ class ParseModuleLinks:
         ex_files.add(str(root_json))
         # deduct sets:
         return files - ex_files
-    
+
     def get_count_details(self) -> int:
         return self._module_detail_tbl.get_row_count()
 
@@ -481,7 +566,7 @@ class ParseModuleLinks:
             self._read(json_data=j_data, file=j_file)
 
         sorted_lst = self._get_detail_lst()
-        
+
         self._module_detail_tbl.insert(data=sorted_lst)
         self._module_info_tbl.insert(data=self._module_infos)
 
@@ -493,11 +578,10 @@ class ParseModuleLinks:
             msg = f"{self.__class__.__name__}.write_all_details() Can not write because there is already data in the database for {self._module_detail_tbl.get_table_name()}"
             raise Exception(msg)
         self._write_all()
-       
 
     def update_all_details(self) -> None:
         self._write_all()
-        
+
     def _get_detail_lst(self) -> List[ModuleDetail]:
         self._module_details
         _sorted = sorted(self._module_details, key=lambda im: im.id_namespace)
@@ -505,12 +589,12 @@ class ParseModuleLinks:
         for i, el in enumerate(_sorted):
             lst.append(ModuleDetail(
                 id_namespace=el.id_namespace,
-                name = el.name,
+                name=el.name,
                 namespace=el.namespace,
                 href=el.href,
                 component_type=el.component_type,
                 sort=i
-                ))
+            ))
         return lst
 
     # region Read Json into Imports
@@ -530,7 +614,6 @@ class ParseModuleLinks:
             url_base=json_data['url_base'],
             file=str(rel)
         ))
-        
 
     def _read_enums(self, ns: str, json_data: dict) -> None:
         lst: List[Dict[str, str]] = json_data['data'].get('enums', [])
@@ -542,8 +625,7 @@ class ParseModuleLinks:
                 namespace=ns,
                 href=itm['href'],
                 component_type='enum'
-                ))
-
+            ))
 
     def _read_const(self, ns: str, json_data: dict) -> None:
         lst: List[Dict[str, str]] = json_data['data'].get('constants', [])
@@ -555,7 +637,7 @@ class ParseModuleLinks:
                 namespace=ns,
                 href=itm['href'],
                 component_type='const'
-                ))
+            ))
 
     def _read_typedef(self, ns: str, json_data: dict) -> None:
         lst: List[Dict[str, str]] = json_data['data'].get('typedef', [])
@@ -567,7 +649,7 @@ class ParseModuleLinks:
                 namespace=ns,
                 href=itm['href'],
                 component_type='typedef'
-                ))
+            ))
 
     def _read_classes_service(self, ns: str, json_data: dict) -> None:
         lst: List[Dict[str, str]] = json_data['data']['classes'].get(
@@ -580,7 +662,7 @@ class ParseModuleLinks:
                 namespace=ns,
                 href=itm['href'],
                 component_type='service'
-                ))
+            ))
 
     def _read_classes_struct(self, ns: str, json_data: dict) -> None:
         lst: List[Dict[str, str]] = json_data['data']['classes'].get(
@@ -593,7 +675,7 @@ class ParseModuleLinks:
                 namespace=ns,
                 href=itm['href'],
                 component_type='struct'
-                ))
+            ))
 
     def _read_classes_ex(self, ns: str, json_data: dict) -> None:
         lst: List[Dict[str, str]] = json_data['data']['classes'].get(
@@ -606,7 +688,7 @@ class ParseModuleLinks:
                 namespace=ns,
                 href=itm['href'],
                 component_type='exception'
-                ))
+            ))
 
     def _read_classes_interface(self, ns: str, json_data: dict) -> None:
         lst: List[Dict[str, str]] = json_data['data']['classes'].get(
@@ -635,7 +717,7 @@ class ParseModuleLinks:
             ))
 
     # endregion Read Json into Imports
-    
+
     # region Validation
     def _validite_json(self, file: str, data: dict):
         msg = f"{self.__class__.__name__}._validite_json() "
@@ -675,6 +757,11 @@ class ParseModuleLinks:
             raise Exception(_msg)
     # endregion Validation
 
+# endregion Parse
+
+# region Controller
+
+
 class ModuleLinksControler:
     def __init__(self, config: AppConfig, **kwargs) -> None:
         self._parser = ParseModuleLinks(config=config)
@@ -690,7 +777,7 @@ class ModuleLinksControler:
         elif self._update_all:
             self._parser.update_all_details()
         return None
-    
+
     def _init_database(self) -> None:
         db = SqlInitDb(self._conn.connection_str)
         db.init_db()
@@ -722,3 +809,4 @@ class ComponentControler:
             self._parser.update_all_details()
         return None
 
+# endregion Controller
