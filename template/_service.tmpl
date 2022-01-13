@@ -55,7 +55,8 @@ if typing.TYPE_CHECKING:
 #end if
 
 
-class ${safe_name}($self.get_class_inherits($name, $inherits)):
+## class ${safe_name}($self.get_class_inherits($name, $inherits)):
+class ${safe_name}($self.get_class_inherits_from_db()):
     """
     #for $line in $self.line_gen($desc)
     $line

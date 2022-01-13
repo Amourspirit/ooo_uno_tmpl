@@ -5,6 +5,7 @@ $self.init_data()#slurp
 #attr $dynamic_struct = False
 #attr $sort = True ## set is attribs is sorted
 #attr $name = ""
+#attr $namespace = ''
 #attr $libre_office_ver = False
 #attr $desc = "" ## str, list, tupple
 #attr $include_desc = True
@@ -21,7 +22,6 @@ $self.init_data()#slurp
 $self.load_data()#slurp
 ## Main Template
 #set $safe_name = $self.get_safe_word($name)
-#set $namespace = ''
 #set $sorted = $self.get_sorted_names()
 # coding: utf-8
 # Struct Class
@@ -50,7 +50,8 @@ if typing.TYPE_CHECKING:
 #end if
 
 
-class ${safe_name}($self.get_class_inherits($name, $inherits)):
+## class ${safe_name}($self.get_class_inherits($name, $inherits)):
+class ${safe_name}($self.get_class_inherits_from_db()):
 #if $include_desc
     """
     #if isinstance($desc, str)

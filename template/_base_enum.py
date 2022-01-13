@@ -20,7 +20,7 @@ class BaseEnum(BaseJson):
                 setattr(self, attr_name, val)
 
         set_data('name')
-        set_data('ns')
+        set_data('namespace')
         set_data('desc')
         set_data('url', 'link')
         # get lo ver if it exist. Defaut to False

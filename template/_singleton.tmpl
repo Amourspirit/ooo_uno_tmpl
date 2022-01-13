@@ -52,7 +52,8 @@ if typing.TYPE_CHECKING:
 #end if
 
 
-class ${safe_name}($self.get_class_inherits($name, $inherits))$self.get_class_end()
+## class ${safe_name}($self.get_class_inherits($name, $inherits))$self.get_class_end()
+class ${safe_name}($self.get_class_inherits_from_db())$self.get_class_end()
 #if $include_desc
     """
     #for $line in $self.line_gen($desc)
