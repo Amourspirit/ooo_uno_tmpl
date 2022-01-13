@@ -123,20 +123,25 @@ class SqlExtends(BaseSql):
     
     def get_extends(self, namespace: str) -> List[ExtendsInfo]:
         results: List[ExtendsInfo] = []
-        query = """SELECT extends.namespace as ns,
-        extends.map_name as map_name, module_detail.sort as sort FROM module_detail
-        LEFT JOIN component on module_detail.id_namespace = component.id_component
-        LEFT JOIN extends on component.id_component = extends.fk_component_id
-        WHERE module_detail.id_namespace = :namespace"""
+        query = """SELECT extends.namespace as ns, extends.map_name as map_name FROM extends
+        LEFT JOIN component on component.id_component = extends.fk_component_id
+        WHERE component.id_component = :namespace"""
+        
+        qry_sort = """SELECT module_detail.sort as sort FROM module_detail
+        WHERE module_detail.id_namespace = :namespace LIMIT 1"""
         with SqlCtx(self.conn_str) as db:
             db.cursor.execute(query, {"namespace": namespace})
             for row in db.cursor:
                 results.append(ExtendsInfo(
                     namespace=row['ns'],
-                    sort=int(row['sort']),
+                    sort=-1,
                     map_name=row['map_name'],
                     parent=namespace
                 ))
+            for ei in results:
+                db.cursor.execute(qry_sort, {"namespace": ei.namespace})
+                for row in db.cursor:
+                    ei.sort = int(row['sort'])
         return results
 
 # endregion Resource DB Related
