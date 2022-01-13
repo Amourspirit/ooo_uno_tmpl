@@ -25,10 +25,16 @@ from parser import __version__, JSON_ID
 @dataclass(frozen=True, eq=True)
 class Extends:
     namespace: str
+    map_name: Union[str, None]
     fk_component_id: str
     id_extends: Union[int, None] = None
 
 
+@dataclass(frozen=True, eq=True)
+class ExtendsMap:
+    name: str
+    fk_extends_id: int
+    id_extends_map: Union[int, None] = None
 @dataclass(frozen=True, eq=True)
 class ComponentType:
     id_component_type: str
@@ -156,37 +162,39 @@ class SqlInitDb:
     def _create_extends(self) -> None:
         # auto primary key: https://stackoverflow.com/a/26652736/1171746
         query = """CREATE TABLE IF NOT EXISTS extends (
-            id_extends INT PRIMARY KEY,
-            namespace TEXT,
-            fk_component_id TEXT
+            id_extends INTEGER PRIMARY KEY AUTOINCREMENT,
+            namespace VARCHAR(255) NOT NULL,
+            map_name VARCHAR(255),
+            fk_component_id VARCHAR(255) NOT NULL
             )"""
         with SqlCtx(self._conn_str) as db:
             db.cursor.execute(query)
+    
 
     def _create_module_info(self) -> None:
         query = """CREATE TABLE IF NOT EXISTS module_info (
-            id_module_info TEXT PRIMARY KEY,
-            url_base TEXT,
-            file TEXT
+            id_module_info VARCHAR(255) PRIMARY KEY,
+            url_base TEXT NOT NULL,
+            file VARCHAR(255) NOT NULL
             )"""
         with SqlCtx(self._conn_str) as db:
             db.cursor.execute(query)
 
     def _create_module_details(self) -> None:
         query = """CREATE TABLE IF NOT EXISTS module_detail (
-            id_namespace TEXT PRIMARY KEY,
-            name TEXT,
-            namespace TEXT,
+            id_namespace VARCHAR(255) PRIMARY KEY,
+            name VARCHAR(255) NOT NULL,
+            namespace VARCHAR(255) NOT NULL,
             href TEXT,
-            component_type TEXT,
-            sort INTEGER
+            component_type VARCHAR(20) NOT NULL,
+            sort INTEGER NOT NULL
             )"""
         with SqlCtx(self._conn_str) as db:
             db.cursor.execute(query)
 
     def _create_component_type(self) -> None:
         query = """CREATE TABLE IF NOT EXISTS component_type (
-            id_component_type TEXT PRIMARY KEY
+            id_component_type VARCHAR(20) PRIMARY KEY
             )"""
         with SqlCtx(self._conn_str) as db:
             db.cursor.execute(query)
@@ -208,13 +216,13 @@ class SqlInitDb:
 
     def _create_component(self) -> None:
         query = """CREATE TABLE IF NOT EXISTS component (
-            id_component TEXT PRIMARY KEY,
-            type TEXT,
-            version TEXT,
-            name TEXT,
-            namespace TEXT,
-            lo_ver TEXT,
-            file TEXT
+            id_component VARCHAR(50) PRIMARY KEY,
+            type VARCHAR(20) NOT NULL,
+            version VARCHAR(20) NOT NULL,
+            name VARCHAR(50) NOT NULL,
+            namespace VARCHAR(255) NOT NULL,
+            lo_ver VARCHAR(50) NOT NULL,
+            file VARCHAR(255) NOT NULL
             )"""
         with SqlCtx(self._conn_str) as db:
             db.cursor.execute(query)
@@ -252,7 +260,7 @@ class SqlComponent(BaseSql):
         values = [asdict(itm) for itm in data]
         with SqlCtx(self.conn_str) as db:
             query = """INSERT INTO component
-            VALUES (:id_component, :type, :version, :name, :namespace, :lo_ver :file)
+            VALUES (:id_component, :type, :version, :name, :namespace, :lo_ver, :file)
             ON CONFLICT(id_component) 
             DO UPDATE SET type=excluded.type, version=excluded.version,
             name=excluded.name, namespace=excluded.namespace, lo_ver=excluded.lo_ver, file=excluded.file;
@@ -288,18 +296,17 @@ class SqlComponentExtends(BaseSql):
         Inserts/updates data. Handles inserting and updating
 
         Args:
-            data (List[Component]): data to update
+            data (List[Extends]): data to update
         """
-        # SQLite UPSERT / UPDATE OR INSERT
-        # https://stackoverflow.com/questions/15277373/sqlite-upsert-update-or-insert
         values = [asdict(itm) for itm in data]
+
         with SqlCtx(self.conn_str) as db:
             query = """INSERT INTO extends
-            VALUES (:id_extends, :namespace, :fk_component_id)
+            VALUES (:id_extends, :namespace, :map_name, :fk_component_id)
             ON CONFLICT(id_extends) 
-            DO UPDATE SET namespace=excluded.namespace, fk_component_id=excluded.fk_component_id;
+            DO UPDATE SET namespace=excluded.namespace, map_name=excluded.map_name,
+            fk_component_id=excluded.fk_component_id;
             """
-            # query = "INSERT INTO module_details VALUES (:id_namespace, :name, :namespace, :href, :component_type, :sort)"
             with db.connection:
                 db.cursor.executemany(query, values)
 
@@ -308,11 +315,11 @@ class SqlComponentExtends(BaseSql):
         Updates data. Handles updating
 
         Args:
-            data (List[Component]): data to update
+            data (List[Extends]): data to update
         """
-        # self.remove_all()
-        self.insert(data)
+        self.insert(data=data)
 # endregion     SQL ComponentExtends
+
 
 # region        SQL Module Detail
 
@@ -379,7 +386,7 @@ class SqlModuleInfo(BaseSql):
         values = [asdict(itm) for itm in data]
         with SqlCtx(self.conn_str) as db:
             query = """INSERT INTO module_info
-            VALUES (:id_module_info, :url_base)
+            VALUES (:id_module_info, :url_base, :file)
             ON CONFLICT(id_module_info) 
             DO UPDATE SET url_base=excluded.url_base, file=excluded.file;
             """
@@ -459,7 +466,7 @@ class ParseModuleJson:
             self._read(json_data=j_data, file=j_file)
 
         self._component_tbl.insert(data=self._components)
-        self._extends_tbl.insert(data=self._component_tbl)
+        self._extends_tbl.insert(data=self._extends)
 
     def update_all_details(self) -> None:
         self._write_all()
@@ -485,9 +492,11 @@ class ParseModuleJson:
 
     def _read_extends(self, json_data: dict, comp: Component) -> None:
         j_extends: List[str] = json_data['data'].get('extends', [])
+        j_extends_map: Dict[str, str] = json_data['data'].get('extends_map', {})
         for ext in j_extends:
+            map_name = j_extends_map.get(ext, None)
             self._extends.append(
-                Extends(namespace=ext, fk_component_id=comp.id_component))
+                Extends(namespace=ext, map_name=map_name, fk_component_id=comp.id_component))
 
     # region Validation
     def _validite_json(self, file: str, data: dict):
