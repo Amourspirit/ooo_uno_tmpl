@@ -16,7 +16,7 @@ from datetime import datetime, timezone
 from types import ModuleType
 from typing import Iterable, Set, Tuple, List, Union, Optional
 from Cheetah.Template import Template
-
+from dataclasses import dataclass
 
 
 
@@ -38,6 +38,108 @@ RESERVER_WORDS = {
     'True', 'try', 'while', 'with', 'yield'
     }
 
+# region Resource DB Related
+
+@dataclass
+class ExtendsInfo:
+    parent: str
+    namespace: str
+    sort: int
+    map_name: Union[str, None]
+    
+    def __lt__(self, other: object):
+        if not isinstance(other, ExtendsInfo):
+            return NotImplemented
+        return self.sort < other.sort
+
+class DbConnect:
+    def __init__(self) -> None:
+        root_dir: Union[str, None] = os.environ.get('project_root', None)
+        resource_dir: Union[str, None] = os.environ.get(
+            'config_resource_dir', None)
+        db_name: Union[str, None] = os.environ.get(
+            'config_db_mod_info', None)
+
+        if root_dir is None:
+            raise ValueError(
+                'DbConnect: Resource project_root environment value is not set')
+        if resource_dir is None:
+            raise ValueError(
+                'DbConnect: Resource config_resource_dir environment value is not set')
+        if db_name is None:
+            raise ValueError(
+                'DbConnect: Resource config_db_mod_info environment value is not set')
+        self._db_name = db_name
+        self._root_dir = Path(root_dir)
+        self._resource_dir = resource_dir
+        self._conn = str(self._root_dir /
+                         self._resource_dir / self._db_name)
+
+    @property
+    def connection_str(self) -> str:
+        """Gets connection_str value"""
+        return self._conn
+
+    @property
+    def root_dir(self) -> Path:
+        """Gets root_dir value"""
+        return self._root_dir
+
+
+class SqlCtx:
+    # Using a context manager: https://tinyurl.com/y8dplak5
+    def __init__(self, connect_str: str) -> None:
+        self._cstr = connect_str
+
+    def __enter__(self):
+        # DateTime for sqlite:
+        #   See: https://stackoverflow.com/a/37222799/1171746
+        #   See: https://stackoverflow.com/a/1830499/1171746
+        self.connection: sql.Connection = sql.connect(
+            self._cstr, detect_types=sql.PARSE_DECLTYPES)
+        self.connection.row_factory = sql.Row
+        self.cursor: sql.Cursor = self.connection.cursor()
+        return self
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        self.connection.close()
+
+    def get_connection(self) -> sql.Connection:
+        return self._conn
+
+
+class BaseSql:
+    def __init__(self) -> None:
+        self._db_connect = DbConnect()
+
+    @property
+    def conn_str(self) -> str:
+        """Gets connect_str value"""
+        return self._db_connect.connection_str
+
+class SqlExtends(BaseSql):
+    def __init__(self) -> None:
+        super().__init__()
+    
+    def get_extends(self, namespace: str) -> List[ExtendsInfo]:
+        results: List[ExtendsInfo] = []
+        query = """SELECT extends.namespace as ns,
+        extends.map_name as map_name, module_detail.sort as sort FROM module_detail
+        LEFT JOIN component on module_detail.id_namespace = component.id_component
+        LEFT JOIN extends on component.id_component = extends.fk_component_id
+        WHERE module_detail.id_namespace = :namespace"""
+        with SqlCtx(self.conn_str) as db:
+            db.cursor.execute(query, {"namespace": namespace})
+            for row in db.cursor:
+                results.append(ExtendsInfo(
+                    namespace=row['ns'],
+                    sort=int(row['sort']),
+                    map_name=row['map_name'],
+                    parent=namespace
+                ))
+        return results
+
+# endregion Resource DB Related
 
 # region MRO Related Classes
 
@@ -603,6 +705,51 @@ class BaseTpml(Template):
             o_imports = imports
         for s in o_imports:
             im_lst.append(get_import(s))
+        s = 'object'
+        for i, im in enumerate(im_lst):
+            if i == 0:
+                s = ''
+            if i > 0:
+                s += ', '
+            s += im
+        return s
+    
+    def get_class_inherits_from_db(self) -> str:
+        """
+        Gets class inherits taking into accout if an inherit is the same name as the class.
+
+        Args:
+            class_name (str): Name of the class inheriting
+            imports (Union[str, List[str]]): string or list of strings of class inherits
+
+        Returns:
+            str: comma sep string of inherits.
+        """
+        def get_import(extend: ExtendsInfo) -> str:
+            def is_mapped() -> bool:
+                return not extend.map_name is None
+
+            def get_mapped() -> bool:
+                return extend.map_name
+            if is_mapped():
+                return get_mapped()
+            _name = self.get_last_part(extend.namespace)
+            return _name
+        
+        ns = f"{self.namespace}.{self.name}"
+        sql_entends = SqlExtends()
+        extends = sql_entends.get_extends(namespace=ns)
+        len_ent = len(extends)
+        if len_ent == 0:
+            return ''
+        if len_ent == 1:
+            return get_import(extends[0])
+        extends.sort() # sort, gets it sort order from database
+        
+        im_lst: List[str] = []
+ 
+        for ex in extends:
+            im_lst.append(get_import(ex))
         s = 'object'
         for i, im in enumerate(im_lst):
             if i == 0:

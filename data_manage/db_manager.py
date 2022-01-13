@@ -13,7 +13,6 @@ import json
 import verr
 import sqlite3 as sql
 from pathlib import Path
-from datetime import datetime
 from typing import Any, Dict, Set, List, Union
 from config import AppConfig
 from parser import __version__, JSON_ID
@@ -77,7 +76,7 @@ class ModuleDetail:
 
 
 class SqlCtx:
-    # https://stackoverflow.com/questions/26793753/using-a-context-manager-for-connecting-to-a-sqlite3-database
+    # Using a context manager: https://tinyurl.com/y8dplak5
     def __init__(self, connect_str: str) -> None:
         self._cstr = connect_str
 
@@ -258,14 +257,13 @@ class SqlComponent(BaseSql):
         # SQLite UPSERT / UPDATE OR INSERT
         # https://stackoverflow.com/questions/15277373/sqlite-upsert-update-or-insert
         values = [asdict(itm) for itm in data]
+        query = """INSERT INTO component
+        VALUES (:id_component, :type, :version, :name, :namespace, :lo_ver, :file)
+        ON CONFLICT(id_component) 
+        DO UPDATE SET type=excluded.type, version=excluded.version,
+        name=excluded.name, namespace=excluded.namespace, lo_ver=excluded.lo_ver, file=excluded.file;
+        """
         with SqlCtx(self.conn_str) as db:
-            query = """INSERT INTO component
-            VALUES (:id_component, :type, :version, :name, :namespace, :lo_ver, :file)
-            ON CONFLICT(id_component) 
-            DO UPDATE SET type=excluded.type, version=excluded.version,
-            name=excluded.name, namespace=excluded.namespace, lo_ver=excluded.lo_ver, file=excluded.file;
-            """
-            # query = "INSERT INTO module_details VALUES (:id_namespace, :name, :namespace, :href, :component_type, :sort)"
             with db.connection:
                 db.cursor.executemany(query, values)
 

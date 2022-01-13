@@ -1066,6 +1066,8 @@ def main():
     os.environ['config_cache_dir'] = config.cache_dir
     os.environ['config_cache_duration'] = str(config.cache_duration)
     os.environ['project_root'] = str(Path(__file__).parent)
+    os.environ['config_resource_dir'] = config.resource_dir
+    os.environ['config_db_mod_info'] = config.db_mod_info
     def get_compile_args(args:argparse.Namespace) -> CompileLinkArgs:
         path = getattr(args, 'path', None)
         cmd_line_process = getattr(args, 'cmd_line_process', True)
