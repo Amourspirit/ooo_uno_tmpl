@@ -33,10 +33,12 @@ class Component:
     type: str
     version: str
     lo_ver: str
+    file: str
 @dataclass(frozen=True, eq=True)
 class ModuleInfo:
     id_module_info: str
     url_base: str
+    file: str
 
 @dataclass(frozen=True, eq=True)
 class ModuleDetail:
@@ -140,7 +142,8 @@ class SqlInitDb:
     def _create_module_info(self) -> None:
         query = """CREATE TABLE IF NOT EXISTS module_info (
             id_module_info TEXT PRIMARY KEY,
-            url_base TEXT
+            url_base TEXT,
+            file TEXT
             )"""
         with SqlCtx(self._conn_str) as db:
             db.cursor.execute(query)
@@ -186,7 +189,8 @@ class SqlInitDb:
             version TEXT,
             name TEXT,
             namespace TEXT,
-            lo_ver TEXT
+            lo_ver TEXT,
+            file TEXT
             )"""
         with SqlCtx(self._conn_str) as db:
             db.cursor.execute(query)
@@ -224,10 +228,10 @@ class SqlComponent(BaseSql):
         values = [asdict(itm) for itm in data]
         with SqlCtx(self.conn_str) as db:
             query = """INSERT INTO component
-            VALUES (:id_component, :type, :version, :name, :namespace, :lo_ver)
+            VALUES (:id_component, :type, :version, :name, :namespace, :lo_ver :file)
             ON CONFLICT(id_component) 
             DO UPDATE SET type=excluded.type, version=excluded.version,
-            name=excluded.name, namespace=excluded.namespace, lo_ver=excluded.lo_ver;
+            name=excluded.name, namespace=excluded.namespace, lo_ver=excluded.lo_ver, file=excluded.file;
             """
             # query = "INSERT INTO module_details VALUES (:id_namespace, :name, :namespace, :href, :component_type, :sort)"
             with db.connection:
@@ -310,7 +314,7 @@ class SqlModuleInfo(BaseSql):
             query = """INSERT INTO module_info
             VALUES (:id_module_info, :url_base)
             ON CONFLICT(id_module_info) 
-            DO UPDATE SET url_base=excluded.url_base;
+            DO UPDATE SET url_base=excluded.url_base, file=excluded.file;
             """
             with db.connection:
                 db.cursor.executemany(query, values)
@@ -377,17 +381,18 @@ class ParseModuleJson:
             with open(j_file, 'r') as file:
                 j_data = json.load(file)
             self._validite_json(file=file, data=j_data)
-            self._read(json_data=j_data)
+            self._read(json_data=j_data, file=j_file)
 
         self._component_tbl.insert(data=self._components)
 
     def update_all_details(self) -> None:
         self._write_all()
 
-    def _read(self, json_data: dict) -> None:
-        self._read_main(json_data=json_data)
+    def _read(self, json_data: dict, file: str) -> None:
+        self._read_main(json_data=json_data, file=file)
 
-    def _read_main(self, json_data: dict) -> None:
+    def _read_main(self, json_data: dict, file: str) -> None:
+        rel = Path(file).relative_to(self._root_dir)
         ns = json_data['namespace']
         name = json_data['name']
         self._components.append(Component(
@@ -396,7 +401,8 @@ class ParseModuleJson:
             namespace=ns,
             type=json_data['type'],
             version=json_data['version'],
-            lo_ver=json_data['libre_office_ver']
+            lo_ver=json_data['libre_office_ver'],
+            file=str(rel)
         ))
     # region Validation
     def _validite_json(self, file: str, data: dict):
@@ -472,7 +478,7 @@ class ParseModuleLinks:
             with open(j_file, 'r') as file:
                 j_data = json.load(file)
             self._validite_json(file=file, data=j_data)
-            self._read(json_data=j_data)
+            self._read(json_data=j_data, file=j_file)
 
         sorted_lst = self._get_detail_lst()
         
@@ -508,7 +514,8 @@ class ParseModuleLinks:
         return lst
 
     # region Read Json into Imports
-    def _read(self, json_data: dict) -> None:
+    def _read(self, json_data: dict, file: str) -> None:
+        rel = Path(file).relative_to(self._root_dir)
         ns: str = json_data['namespace']
         self._read_classes_ex(ns, json_data)
         self._read_classes_interface(ns, json_data)
@@ -520,7 +527,8 @@ class ParseModuleLinks:
         self._read_typedef(ns, json_data)
         self._module_infos.append(ModuleInfo(
             id_module_info=ns,
-            url_base=json_data['url_base']
+            url_base=json_data['url_base'],
+            file=str(rel)
         ))
         
 
