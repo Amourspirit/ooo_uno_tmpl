@@ -6,12 +6,13 @@ Reads Component json files and writes info in a database.
 """
 # region Imports
 from abc import abstractmethod
-from dataclasses import dataclass, asdict
+from dataclasses import dataclass, asdict, field
 import os
 import glob
 import json
 import verr
 import sqlite3 as sql
+import textwrap
 from pathlib import Path
 from typing import Any, Dict, Set, List, Union
 from config import AppConfig
@@ -28,6 +29,11 @@ class Extends:
     fk_component_id: str
     id_extends: Union[int, None] = None
 
+   
+@dataclass
+class NamespaceTree:
+    namespace: str
+    children: 'List[NamespaceTree]' = field(default_factory=list)
 
 @dataclass(frozen=True, eq=True)
 class ExtendsMap:
@@ -101,6 +107,16 @@ class BaseSql:
     def __init__(self, connect_str: str) -> None:
         self._conn_str = connect_str
 
+    @property
+    def conn_str(self) -> str:
+        """Gets connect_str value"""
+        return self._conn_str
+
+
+class BaseSqlTable(BaseSql):
+    def __init__(self, connect_str: str) -> None:
+        super().__init__(connect_str=connect_str)
+
     @abstractmethod
     def _create_table_if_not_exist(self) -> None:
         """Create Table if it does not exsit"""
@@ -137,10 +153,7 @@ class BaseSql:
                 has_data = True
         return has_data
 
-    @property
-    def conn_str(self) -> str:
-        """Gets connect_str value"""
-        return self._conn_str
+    
 
 
 class SqlInitDb:
@@ -239,7 +252,7 @@ class SqlInitDb:
 # region        SQL Component
 
 
-class SqlComponent(BaseSql):
+class SqlComponent(BaseSqlTable):
     def __init__(self, connect_str: str) -> None:
         super().__init__(connect_str=connect_str)
 
@@ -281,7 +294,7 @@ class SqlComponent(BaseSql):
 # region        SQL ComponentExtends
 
 
-class SqlComponentExtends(BaseSql):
+class SqlComponentExtends(BaseSqlTable):
     def __init__(self, connect_str: str) -> None:
         super().__init__(connect_str=connect_str)
 
@@ -322,7 +335,7 @@ class SqlComponentExtends(BaseSql):
 # region        SQL Module Detail
 
 
-class SqlModuleDetail(BaseSql):
+class SqlModuleDetail(BaseSqlTable):
     def __init__(self, connect_str: str) -> None:
         super().__init__(connect_str=connect_str)
 
@@ -366,7 +379,7 @@ class SqlModuleDetail(BaseSql):
 # region        SQL Module Info
 
 
-class SqlModuleInfo(BaseSql):
+class SqlModuleInfo(BaseSqlTable):
     def __init__(self, connect_str: str) -> None:
         super().__init__(connect_str=connect_str)
 
@@ -403,6 +416,36 @@ class SqlModuleInfo(BaseSql):
 
 # endregion Table Classes
 
+# region    Query
+class QryNsTree(BaseSql):
+    def __init__(self, connect_str: str) -> None:
+        super().__init__(connect_str=connect_str)
+
+
+    def get_ns_tree(self, namespace: str) -> NamespaceTree:
+        query = """SELECT extends.namespace as ns FROM extends
+        WHERE extends.fk_component_id = :namespace"""
+        def process_ns(db: SqlCtx, tree: NamespaceTree) -> None:
+            for itm in tree.children:
+                db.cursor.execute(query, {"namespace": itm.namespace})
+                for row in db.cursor:
+                    new_itm = NamespaceTree(
+                        namespace=row['ns']
+                        )
+                    itm.children.append(new_itm)
+                    process_ns(db=db, tree=itm)
+
+        tree = NamespaceTree(namespace=namespace)
+        with SqlCtx(self.conn_str) as db:
+            db.cursor.execute(query, {"namespace": namespace})
+            for row in db.cursor:
+                tree.children.append(NamespaceTree(
+                    namespace=row['ns']                ))
+            process_ns(db=db, tree=tree)
+        return tree
+        
+            
+# endregion Query
 
 class DbConnect:
     def __init__(self, config: AppConfig) -> None:
@@ -804,6 +847,34 @@ class DatabaseControler:
         db = SqlInitDb(self._conn.connection_str)
         db.init_db()
 
+class QueryControler:
+    def __init__(self, config: AppConfig, **kwargs) -> None:
+        self._conn = DbConnect(config)
+        self._ns_name: Union[str, None] = kwargs.get('ns_name', None)
+    
+    def results(self):
+        if self._ns_name:
+            return self._process_ns_tree()
+    def _process_ns_tree(self) -> str:
+        indent_amt = 4
+        qry = QryNsTree(self._conn.connection_str)
+        def get_str(nt: NamespaceTree, in_str: str, indent: int) -> str:
+            ns_str = in_str
+            
+            for ns_itm in nt.children:
+                s = ns_itm.namespace
+                s = textwrap.indent(s, ' ' * indent)
+                s = '\n' + s
+                ns_str += s
+                ns_str = get_str(nt=ns_itm, in_str=ns_str,
+                                 indent=indent + indent_amt)
+            return ns_str
+    
+        n_tree = qry.get_ns_tree(namespace=self._ns_name)
+        # return str(n_tree)
+        s_result = get_str(
+            nt=n_tree, in_str=n_tree.namespace, indent=indent_amt)
+        return s_result
 
 class ComponentControler:
     def __init__(self, config: AppConfig, **kwargs) -> None:

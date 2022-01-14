@@ -1009,6 +1009,7 @@ class Make(FilesBase):
 # endregion Make
 
 # region Main
+# region    Question Yes No
 def query_yes_no(question, default="yes"):
     """Ask a yes/no question via raw_input() and return their answer.
 
@@ -1041,9 +1042,12 @@ def query_yes_no(question, default="yes"):
         else:
             sys.stdout.write(
                 "Please respond with 'yes' or 'no' " "(or 'y' or 'n').\n")
+# endregion Question Yes No
+
 # region    Main Testing
 def _main():
-    sys.argv.extend(['-v', '--log-file', 'debug.log', 'mod_links', '-a'])
+    sys.argv.extend(['-v', '--log-file', 'debug.log', 'data', 'qry',
+                    '-n', 'com.sun.star.form.component.DatabaseTextField'])
     main()
 
 def _touch():
@@ -1098,6 +1102,7 @@ def main():
     data_module = data.add_parser(name='module')
     data_init = data.add_parser(name='init')
     data_component = data.add_parser(name='component')
+    data_qry = data.add_parser(name='qry')
     # endregion create parsers
 
     # region ex args
@@ -1475,7 +1480,16 @@ def main():
         dest='update_all',
         default=False
     )
-    # endregion    component
+    # endregion component
+    # region    qry
+    data_qry.add_argument(
+        '-n', '--name-space',
+        help='Genereate Namespace Data for a given namespace object',
+        action='store',
+        dest='ns_name',
+        default=None
+    )
+    # endregion qry
     # endregion data args
 
     # region general args
@@ -1635,6 +1649,16 @@ def main():
             if mlc_result:
                 print(mlc_result)
         # endregion Component
+        # region Namespace
+        if args.command_data == 'qry':
+            qc = db_manager.QueryControler(
+                config=config,
+                ns_name=args.ns_name
+            )
+            qc_result = qc.results()
+            if qc_result:
+                print(qc_result)
+        # endregion Namespace
     # endregion data Command
 
     # region Script End Action
