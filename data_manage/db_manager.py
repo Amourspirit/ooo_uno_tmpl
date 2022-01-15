@@ -30,15 +30,17 @@ class Extends:
     map_name: Union[str, None]
     fk_component_id: str
     id_extends: Union[int, None] = None
-
+   
 @dataclass
-class NamespaceItem:
+class NamespaceTree:
     namespace: str
     sort: int = -1
-@dataclass
-class NamespaceTree(NamespaceItem):
     children: 'List[NamespaceTree]' = field(default_factory=list)
 
+    def __lt__(self, other: object):
+        if not isinstance(other, NamespaceTree):
+            return NotImplemented
+        return self.sort < other.sort
 
 @dataclass(frozen=True, eq=True)
 class ExtendsMap:
@@ -433,7 +435,17 @@ class QryNsTree(BaseSql):
         WHERE extends.fk_component_id like :namespace"""
         ns_dict = {}
 
-        def get_namespace_children(db: SqlCtx, ns_tree: NamespaceTree) -> List[NamespaceTree]:
+        def set_namespace_children(db: SqlCtx, ns_tree: NamespaceTree):
+            """
+            Sets children for ``ns_tree``. Children are automatically appended to ``ns_tree``
+            
+            As children are found they are cached. On subsequent calls if namespace is in cached it is returned.
+
+            Args:
+                db (SqlCtx): Database connection
+                ns_tree (NamespaceTree): namespace info
+
+            """
             if ns_tree.namespace in ns_dict:
                 ns_tree.children = [
                     ns_obj for ns_obj in ns_dict[ns_tree.namespace]]
@@ -449,9 +461,14 @@ class QryNsTree(BaseSql):
             ns_dict[ns_tree.namespace] = ns_tree.children
             return ns_tree.children
  
-
-        # region build_tree
         def build_tree(db: SqlCtx, tree_obj: NamespaceTree) -> None:
+            """
+            Recursivly finds all children for ``tree_obj`` and appends them to children.
+
+            Args:
+                db (SqlCtx): database connection
+                tree_obj (NamespaceTree): namespace info
+            """
             que = queue.Queue()
             def recurse(q: queue.Queue) -> None:
                 # q contain siblings that have been aded to a parent already
@@ -460,19 +477,15 @@ class QryNsTree(BaseSql):
                 while not q.empty():
                     # sibling is not a parent
                     parent: NamespaceTree = q.get()
-                    _children = get_namespace_children(db=db, ns_tree=parent)
-                    for child in _children:
-                        # parent.children.append(child)
+                    set_namespace_children(db=db, ns_tree=parent)
+                    for child in parent.children:
                         sibling_que.put(child)
                 if not sibling_que.empty():
                     recurse(q=sibling_que)
-            children = get_namespace_children(db=db, ns_tree=tree_obj)
-            for child in children:
-                # tree_obj.children.append(child)
+            set_namespace_children(db=db, ns_tree=tree_obj)
+            for child in tree_obj.children:
                 que.put(child)
             recurse(q=que)
-
-        # endregion build_tree
 
         with SqlCtx(self.conn_str) as db:
             qry_sort = """SELECT module_detail.sort FROM module_detail
@@ -902,7 +915,7 @@ class QueryControler:
         qry = QryNsTree(self._conn.connection_str)
         def get_str(nt: NamespaceTree, in_str: str, indent: int) -> str:
             ns_str = in_str
-            
+            nt.children.sort()
             for ns_itm in nt.children:
                 s = ns_itm.namespace
                 s = textwrap.indent(s, ' ' * indent)

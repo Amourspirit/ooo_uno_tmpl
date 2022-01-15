@@ -1069,12 +1069,15 @@ def _touch():
 
 def main():
     global logger
+    # region Config
     config = read_config('./config.json')
     os.environ['config_cache_dir'] = config.cache_dir
     os.environ['config_cache_duration'] = str(config.cache_duration)
     os.environ['project_root'] = str(Path(__file__).parent)
     os.environ['config_resource_dir'] = config.resource_dir
     os.environ['config_db_mod_info'] = config.db_mod_info
+    # endregion Config
+
     def get_compile_args(args:argparse.Namespace) -> CompileLinkArgs:
         path = getattr(args, 'path', None)
         cmd_line_process = getattr(args, 'cmd_line_process', True)
@@ -1085,6 +1088,19 @@ def main():
             )
         return c_args
 
+    # region Script Start Action
+    def log_start_action() -> None:
+        if len(sys.argv) > 1:
+            logger.info('Executing command: %s', sys.argv[1:])
+        else:
+            logger.info('Running with no args.')
+    # endregion Script Start Action
+
+    # region Script End Action
+    def log_end_action() -> None:
+        logger.info('Finished!')
+    # endregion Script End Action
+    
     # region create parsers
     parser = argparse.ArgumentParser(description='main')
     subparser = parser.add_subparsers(dest='command')
@@ -1525,62 +1541,74 @@ def main():
         logger = get_logger(logger_name=Path(__file__).stem, **log_args)
     # endregion logger
 
-    # region Script Start Action
-    if len(sys.argv) > 1:
-        logger.info('Executing command: %s', sys.argv[1:])
-    else:
-        logger.info('Running with no args.')
-    # endregion Script Start Action
-
     # region Make Command
     if args.command == 'make':
+        log_start_action()
         try:
             _ = Make(config=config, force_compile=args.force_compile,
                         clean=args.clean_scratch, processes=args.processes)
         except Exception as e:
             logger.error(e)
+        log_end_action()
     # endregion Make Command
 
     # region Compile Links Command
     if args.command == 'ex':
+        log_start_action()
         c_args = get_compile_args(args=args)
         if args.ex_all:
             CompileExLinks(args=c_args)
+        log_end_action()
     if args.command == 'enum':
+        log_start_action()
         c_args = get_compile_args(args=args)
         if args.enum_all:
             CompileEnumLinks(args=c_args)
+        log_end_action()
     if args.command == 'const':
+        log_start_action()
         c_args = get_compile_args(args=args)
         if args.const_all:
             CompileConstLinks(args=c_args)
+        log_end_action()
     if args.command == 'struct':
+        log_start_action()
         c_args = get_compile_args(args=args)
         if args.struct_all:
             CompileStructLinks(args=c_args)
+        log_end_action()
     if args.command == 'interface':
+        log_start_action()
         c_args = get_compile_args(args=args)
         if args.interface_all:
             CompileInterfaceLinks(args=c_args)
         elif args.path:
             CompileInterfaceLinks(args=c_args)
+        log_end_action()
     if args.command == 'singleton':
+        log_start_action()
         c_args = get_compile_args(args=args)
         if args.singleton_all:
             CompileSingletonLinks(args=c_args)
+        log_end_action()
     if args.command == 'service':
+        log_start_action()
         c_args = get_compile_args(args=args)
         if args.service_all:
             c_args = get_compile_args(args=args)
             CompileServiceLinks(args=c_args)
+        log_end_action()
     if args.command == 'typedef':
+        log_start_action()
         c_args = get_compile_args(args=args)
         if args.typedef_all:
             CompileTypeDefLinks(args=c_args)
+        log_end_action()
     # endregion Compile Links Command
 
     # region Touch Command
     if args.command == 'touch':
+        log_start_action()
         TouchFiles(
             config=config,
             touch_struct=args.struct_all,
@@ -1593,10 +1621,12 @@ def main():
             touch_service=args.service_all,
             touch_py_files=args.python_files
         )
+        log_end_action()
     # endregion Touch Command
 
     # region Module Links Command
     if args.command == 'mod_links':
+        log_start_action()
         if args.mod_links_all:
             if not query_yes_no(f"Are you sure you want to rebuild all {config.module_links_file} files?", 'no'):
                 return
@@ -1607,6 +1637,7 @@ def main():
                 write_json=True,
                 
             )
+        log_end_action()
     # endregion Module Links Command
 
     # region data Command
@@ -1664,12 +1695,10 @@ def main():
         # endregion Namespace
     # endregion data Command
 
-    # region Script End Action
-    logger.info('Finished!')
-    # endregion Script End Action
+    
 
 if __name__ == '__main__':
     # _touch()
-    _main()
+    main()
 
 # endregion Main
