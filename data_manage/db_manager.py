@@ -6,9 +6,7 @@ Reads Component json files and writes info in a database.
 """
 # region Imports
 from abc import abstractmethod
-from ast import Tuple
 from dataclasses import dataclass, asdict, field
-from hashlib import new
 import os
 import glob
 import json
@@ -19,26 +17,10 @@ from pathlib import Path
 from typing import Any, Dict, Set, List, Union
 from config import AppConfig
 from parser import __version__, JSON_ID
-from collections import OrderedDict
-from recviz import recviz
 import queue
 # endregion Imports
 
 
-class Hierarchy(object):
-    def __init__(self) -> None:
-        self._children = []
-        self.namespace = ''
-        self.sort = -1
-    
-    def add_child(self, child):
-        self._children.append(child)
-    
-    @property
-    def children(self) -> list:
-        """Gets children value"""
-        return self._children
-    
 # region Dataclass
 
 
@@ -56,11 +38,7 @@ class NamespaceItem:
 @dataclass
 class NamespaceTree(NamespaceItem):
     children: 'List[NamespaceTree]' = field(default_factory=list)
-    def get_children(db: 'SqlCtx') -> 'List[NamespaceTree]':
-        query = """SELECT extends.namespace as ns, module_detail.sort as sort FROM extends
-        LEFT JOIN module_detail on module_detail.id_namespace = extends.namespace
-        WHERE extends.fk_component_id like :namespace"""
-        
+
 
 @dataclass(frozen=True, eq=True)
 class ExtendsMap:
@@ -470,134 +448,24 @@ class QryNsTree(BaseSql):
             ns_tree.children = results
             ns_dict[ns_tree.namespace] = ns_tree.children
             return ns_tree.children
-            
-        def process_children(db: SqlCtx, tree: NamespaceTree) -> None:
-            db.cursor.execute(query, {"namespace": tree.namespace})
-            for row in db.cursor:
-                new_itm = NamespaceTree(
-                    namespace=row['ns']
-                )
-                tree.children.append(new_itm)  # adjacent items
-
-        
-
-        def process_ns(db: SqlCtx, tree: NamespaceTree) -> None:
-            for itm in tree.children:
-                db.cursor.execute(query, {"namespace": itm.namespace})
-                for row in db.cursor:
-                    new_itm = NamespaceTree(
-                        namespace=row['ns']
-                        )
-                    itm.children.append(new_itm) # adjacent items
-                process_ns(db=db, tree=itm)
-            for itm in tree.children:
-                for child in itm.children:
-                    process_children(db=db, tree=child)
-                    # process_ns(db=db, tree=child)
-
-   
-
-        def get_ns_children(db:SqlCtx, ns:str) -> List[NamespaceTree]:
-            results = []
-            if ns in ns_dict:
-                for d in ns_dict[ns]:
-                    results.append(NamespaceTree(
-                        namespace=d['ns'],
-                        sort=d['sort']
-                    ))
-                return results
-            ns_dict[ns] = [] # list of dict
-            db.cursor.execute(query, {"namespace": ns})
-            for row in db.cursor:
-                ns_dict[ns].append({
-                    "ns": row['ns'],
-                    "sort": row['sort']
-                    })
-            return get_ns_children(db=db, ns=ns)
-        
-        def getTree(db: SqlCtx, ns: str):
-            arr = OrderedDict([])
-            db.cursor.execute(query, {"namespace": ns})
-            for row in db.cursor:
-                arr[ns] = OrderedDict(
-                    [("ns", row["ns"]), ("sort", row["sort"]), ("Children", getTree(db, row["ns"]))])
-            return arr
-        
-        def traverse(db: SqlCtx, ns: str):
-            children = get_ns_children(db=db, ns=ns)
-            for itm in children:
-                print("transverse:", itm.namespace)
-                rTraverse(db=db, ns=itm.namespace)
-        
-        def rTraverse(db: SqlCtx, ns: str):
-            children = get_ns_children(db=db, ns=ns)
-            for itm in children:
-                print("rtransverse:", itm.namespace)
-                rTraverse(db=db, ns=itm.namespace)
-                
-        def process_ns_tree(db: SqlCtx, tree: NamespaceTree) -> List[NamespaceTree]:
-            # while the parent can find a child,
-            # append all children
-            # make each child the parent and search again
-            parents: List[NamespaceTree] = []
-            db.cursor.execute(query, {"namespace": tree.namespace})
-            for row in db.cursor:
-                parents.extend(get_ns_children(db=db, ns=row['ns']))
-            # return parents
-            # for itm in parents:
-            #     process_ns_tree(db=db, tree=itm)
-            return parents
-
-
-
-        def get_children(db: SqlCtx, tree: NamespaceTree):
-            # while the parent can find a child,
-            # append all children
-            # make each child the parent and search again
-            # parents: List[NamespaceTree] = []
-            tree.children.extend(get_ns_children(db=db, ns=tree.namespace))
-            for child in tree.children:
-                parent = child
-                get_children(db=db, tree=parent)
-            return
-            
-        def get_tree(db: SqlCtx, ns: str, d: dict = None) -> List[NamespaceTree]:
-            trees = []
-            tmp = []
-            dic = {} if d is None else d
-            if ns in dic:
-                return dic[ns]
-            db.cursor.execute(query, {"namespace": ns})
-            for row in db.cursor:
-                tmp.append(row['ns'])
-            for s in tmp:
-                trees.append(NamespaceTree(
-                    namespace=row['ns'],
-                    children=get_tree(db, s)
-                ))
-            dic[ns] = trees
-            return trees
-        result = None
+ 
 
         # region build_tree
         def build_tree(db: SqlCtx, tree_obj: NamespaceTree) -> None:
             que = queue.Queue()
             def recurse(q: queue.Queue) -> None:
-                print('')
                 # q contain siblings that have been aded to a parent already
                 # now each sibling need to find it children
                 sibling_que = queue.Queue()
                 while not q.empty():
                     # sibling is not a parent
-                    print('')
                     parent: NamespaceTree = q.get()
-                    print("Parent", parent.namespace)
                     _children = get_namespace_children(db=db, ns_tree=parent)
                     for child in _children:
-                        print('child', child.namespace)
                         # parent.children.append(child)
                         sibling_que.put(child)
-                recurse(q=sibling_que)
+                if not sibling_que.empty():
+                    recurse(q=sibling_que)
             children = get_namespace_children(db=db, ns_tree=tree_obj)
             for child in children:
                 # tree_obj.children.append(child)
@@ -609,16 +477,13 @@ class QryNsTree(BaseSql):
         with SqlCtx(self.conn_str) as db:
             qry_sort = """SELECT module_detail.sort FROM module_detail
             WHERE module_detail.id_namespace like :namespace LIMIT 1;"""
-            # result = getTree(db=db, ns=namespace)
-            # traverse(db=db, ns=namespace)
             db.cursor.execute(qry_sort, {"namespace": namespace})
             for row in db.cursor:
                 tree =NamespaceTree(
                     namespace=namespace,
                     sort=row['sort'])
-                result = build_tree(db=db, tree_obj=tree)
-            # # process_ns(db=db, tree=tree)
-            # get_children(db=db, tree=tree)
+                build_tree(db=db, tree_obj=tree)
+                result = tree
         return result
         
             
@@ -1048,8 +913,8 @@ class QueryControler:
             return ns_str
     
         n_tree = qry.get_ns_tree(namespace=self._ns_name)
-        return None
-        return str(n_tree)
+        # return None
+        # return str(n_tree)
         s_result = get_str(
             nt=n_tree, in_str=n_tree.namespace, indent=indent_amt)
         return s_result

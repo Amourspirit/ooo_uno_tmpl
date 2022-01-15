@@ -1046,9 +1046,9 @@ def query_yes_no(question, default="yes"):
 
 # region    Main Testing
 def _main():
-    # ns = 'com.sun.star.form.component.DatabaseTextField'
+    ns = 'com.sun.star.form.component.DatabaseTextField'
     # ns = 'com.sun.star.text.TextRange'
-    ns = 'com.sun.star.text.TextRange'
+    # ns = 'com.sun.star.text.TextRange'
     sys.argv.extend(['-v', '--log-file', 'debug.log', 'data', 'qry',
                     '-n', ns])
     main()
@@ -1670,6 +1670,6 @@ def main():
 
 if __name__ == '__main__':
     # _touch()
-    main()
+    _main()
 
 # endregion Main
