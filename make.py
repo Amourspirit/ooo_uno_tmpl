@@ -1708,6 +1708,6 @@ def main():
 
 if __name__ == '__main__':
     # _touch()
-    main()
+    _main()
 
 # endregion Main

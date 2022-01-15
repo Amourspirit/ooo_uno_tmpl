@@ -7,6 +7,7 @@ Reads Component json files and writes info in a database.
 # region Imports
 from abc import abstractmethod
 from dataclasses import dataclass, asdict, field
+from enum import unique
 import os
 import glob
 import json
@@ -159,8 +160,6 @@ class BaseSqlTable(BaseSql):
             for _ in db.cursor:
                 has_data = True
         return has_data
-
-    
 
 
 class SqlInitDb:
@@ -424,6 +423,7 @@ class SqlModuleInfo(BaseSqlTable):
 # endregion Table Classes
 
 # region    Query
+
 class QryNsTree(BaseSql):
     def __init__(self, connect_str: str) -> None:
         super().__init__(connect_str=connect_str)
@@ -513,6 +513,7 @@ class QryNsTree(BaseSql):
         return result
 
     def get_ns_flat(self, namespace: str) -> List[Tuple[int, str]]:
+
         query = self._get_qry_ns()
         ns_dict = {}
         
@@ -537,8 +538,40 @@ class QryNsTree(BaseSql):
                 ))
             set_cache(ns=ns, lst=children)
             return children
+        
+        def process_flat(db: SqlCtx, flats: set[Tuple[int, str]]) -> List[Tuple[int, str]]:
+            # Lookup each namespaces children, perferably as unique only.
+            # remove any child match from main list that is in namespace children.
+            #
+            # Loop through the list again, ignoring any namespace already processed.
+            #
+            # Keep in mind that a processed namespace could be removed by a match later down the list.
+            # This means the list of done items needs to be checked and if match, removed.
+            processed: Set[Tuple[int, str]] = set()
+            flats_set: Set[Tuple[int, str]] = set(list(flats))
+            
+            for flat in flats:
+                children = get_ns_children(db=db, ns=flat[1])
+                for child in children:
+                    if child in processed:
+                        continue
+                    if child in flats_set:
+                        flats_set.remove(child)
+                    flat_children = get_unique(db=db, ns=child[1])
+                    for flat_child in flat_children:
+                        if flat_child in processed:
+                            continue
+                        if flat_child in flat_children:
+                            if flat_child in flats_set:
+                                flats_set.remove(flat_child)
+                        processed.add(flat_child)
+                    processed.add(child)
+            lst = list(flats_set)
+            lst.sort()
+            return lst
                 
-        def build_flat(db: SqlCtx, ns: str) -> List[Tuple[int, str]]:
+        
+        def get_unique(db: SqlCtx, ns: str) -> set[Tuple[int, str]]:
             que = queue.Queue()
             flat_set: Set[Tuple[int, str]] = set()
             def recurse(q: queue.Queue) -> None:
@@ -563,9 +596,22 @@ class QryNsTree(BaseSql):
                 flat_set.add(root_child)
             recurse(q=que)
 
-            results = list(flat_set)
-            results.sort()
-            return results
+            # results = list(flat_set)
+            # results.sort()
+            return flat_set
+
+        def build_flat(db: SqlCtx, ns: str) -> List[Tuple[int, str]]:
+            flats = set()
+            children: List[str] = []
+            # getting child namespaces first leaves the direct
+            # children out of results. This is perfered.
+            db.cursor.execute(query, {"namespace": ns})
+            for row in db.cursor:
+                children.append(row['ns'])
+            for child in children:
+                c_flat = get_unique(db=db, ns=child)
+                flats.update(c_flat)
+            return process_flat(db=db, flats=flats)
 
         with SqlCtx(self.conn_str) as db:
             result = build_flat(db=db, ns=namespace)
