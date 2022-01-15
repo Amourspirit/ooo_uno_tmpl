@@ -519,22 +519,21 @@ class QryNsTree(BaseSql):
         def is_cache(ns: str) -> bool:
             return ns in ns_dict
         
-        def get_cache(ns: str) -> List[NamespaceTree]:
+        def get_cache(ns: str) -> List[Tuple[int, str]]:
             return ns_dict[ns]
         
-        def set_cache(ns: str, lst: List[NamespaceTree]) -> None:
+        def set_cache(ns: str, lst: List[Tuple[int, str]]) -> None:
             ns_dict[ns] = lst
 
-         
         def get_ns_children(db: SqlCtx, ns: str) -> List[Tuple[int, str]]:
             if is_cache(ns):
-                return [(t.sort, t.namespace) for t in get_cache(ns)]
+                return [itm for itm in get_cache(ns)]
             db.cursor.execute(query, {"namespace": ns})
             children = []
             for row in db.cursor:
-                children.append(NamespaceTree(
-                    namespace=row['ns'],
-                    sort=row['sort']
+                children.append((
+                    row['sort'],
+                    row['ns']
                 ))
             set_cache(ns=ns, lst=children)
             return children
@@ -549,12 +548,11 @@ class QryNsTree(BaseSql):
                 while not q.empty():
                     # sibling is not a parent
                     parent: Set[Tuple[int, str]] = q.get()
-                    if parent in flat_set:
-                        continue
                     children = get_ns_children(db=db, ns=parent[1])
                     for child in children:
                         if child in flat_set:
                             continue
+                        flat_set.add(child)
                         sibling_que.put(child)
                 if not sibling_que.empty():
                     recurse(q=sibling_que)
@@ -562,10 +560,11 @@ class QryNsTree(BaseSql):
             root_children = get_ns_children(db=db, ns=ns)
             for root_child in root_children:
                 que.put(root_child)
+                flat_set.add(root_child)
             recurse(q=que)
 
             results = list(flat_set)
-            result.sort()
+            results.sort()
             return results
 
         with SqlCtx(self.conn_str) as db:
@@ -1010,25 +1009,15 @@ class QueryControler:
         return s_result
 
     def _get_flat_unique_ns(self) -> str:
-        ns_set = set()
-        def set_ns_values(nt: NamespaceTree):
-            for ns_itm in nt.children:
-                ns_set.add((ns_itm.sort, ns_itm.namespace))
-                set_ns_values(nt=ns_itm)
-
         qry = QryNsTree(self._conn.connection_str)
-        n_tree = qry.get_ns_tree(namespace=self._ns_flat)
-        # don't add root
-        # ns_set.add((n_tree.sort, n_tree.namespace))
-        set_ns_values(nt=n_tree)
-        ns_lst = list(ns_set)
-        ns_lst.sort()
+        n_flat = qry.get_ns_flat(namespace=self._ns_flat)
         s = ''
-        for i, itm in enumerate(ns_lst):
+        for i, itm in enumerate(n_flat):
             if i > 0:
                 s += ', '
             s += itm[1]
         return s
+
 class ComponentControler:
     def __init__(self, config: AppConfig, **kwargs) -> None:
         self._parser = ParseModuleJson(config=config)
