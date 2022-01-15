@@ -9,8 +9,9 @@ import shutil
 import glob
 import argparse
 import subprocess
+import tempfile
 from data_manage import db_manager
-from multiprocessing import Pool, TimeoutError
+from multiprocessing import Pool
 from typing import List, Optional, Set
 from kwhelp import rules
 from kwhelp.decorator import DecFuncEnum, RuleCheckAll
@@ -577,6 +578,8 @@ class TouchFiles(FilesBase):
         self._touch_ex: bool = bool(kwargs.get('touch_ex', False))
         self._touch_typedef: bool = bool(kwargs.get('touch_typedef', False))
         self._touch_py_files: bool = bool(kwargs.get('touch_py_files', False))
+        self._touch_cache: bool = bool(kwargs.get('touch_cache_files', False))
+
         self._touch_interface: bool = bool(
             kwargs.get('touch_interface', False))
         self._touch_singleton: bool = bool(
@@ -601,6 +604,9 @@ class TouchFiles(FilesBase):
             self._touch_service_files()
         if self._touch_typedef:
             self._touch_typedef_files()
+        if self._touch_cache:
+            self._touch_cache_files()
+
         logger.info('Touched a total of %d files.', self._touch_count)
     
     def _get_module_links(self) -> List[str]:
@@ -830,6 +836,28 @@ class TouchFiles(FilesBase):
             process(file)
         logger.info('Touched %d TypeDef files', touched)
         self._touch_count += touched
+
+    def _touch_cache_files(self) -> None:
+        touched = 0
+        t_path = Path(tempfile.gettempdir())
+        cache_path = t_path / self._config.cache_dir
+        if not cache_path.exists():
+            logger.info('Touched %d Cache files', touched)
+            return
+
+        def process(f: str):
+            nonlocal touched
+            t_path = Path(f)
+            t_path.touch(exist_ok=True)
+            touched += 1
+        pattern = str(cache_path) + '/*'
+        files = glob.glob(pattern)
+        for file in files:
+            process(file)
+        logger.info('Touched %d Cache files', touched)
+        self._touch_count += touched
+        
+        
 # endregion Touch Files
 
 # region Make
@@ -1391,6 +1419,13 @@ def main():
         dest='python_files',
         default=False
     )
+    touch.add_argument(
+        '--cache-files',
+        help='Touch cached files. Resets cache file expire times',
+        action='store_true',
+        dest='cache_files',
+        default=False
+    )
     # endregion Touch
 
     # region Module Links
@@ -1627,7 +1662,8 @@ def main():
             touch_typedef=args.typedef_all,
             touch_singleton=args.singleton_all,
             touch_service=args.service_all,
-            touch_py_files=args.python_files
+            touch_py_files=args.python_files,
+            touch_cache_files=args.cache_files
         )
         log_end_action()
     # endregion Touch Command
@@ -1708,6 +1744,6 @@ def main():
 
 if __name__ == '__main__':
     # _touch()
-    _main()
+    main()
 
 # endregion Main
