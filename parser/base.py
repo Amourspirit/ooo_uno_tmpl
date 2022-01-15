@@ -4283,7 +4283,13 @@ class RuleAreaVertical(RuleAreaBase):
         first = self._get_first_y1(ai=ai, alst=alst)
         d_lst: Dict[int, List[Area]] = self._list_dict_x1(
             lst=alst)  # grouped by y1
-        upper: List[Area] = d_lst[first.x1]
+        # filtering upper by shape or first is a bug fix.
+        # in cases such as https://tinyurl.com/yaqul3gs
+        # some of child classes have the exact same y1 as the parrent classes
+        if ai.shape:
+            upper: List[Area] = [a for a in d_lst[first.x1] if a.y1 < ai.shape.y1]
+        else:
+            upper: List[Area] = [a for a in d_lst[first.x1] if a.y1 <= first.y1]
         sorted_u = sorted(upper, key=lambda a: a.y1)
         if self.rules.remove_parent_inherited:
             self._remove_duplicates_lst(sorted_u)
