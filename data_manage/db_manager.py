@@ -14,7 +14,7 @@ import verr
 import sqlite3 as sql
 import textwrap
 from pathlib import Path
-from typing import Any, Dict, Set, List, Union
+from typing import Any, Dict, Set, List, Union, Tuple
 from config import AppConfig
 from parser import __version__, JSON_ID
 import queue
@@ -428,23 +428,26 @@ class QryNsTree(BaseSql):
     def __init__(self, connect_str: str) -> None:
         super().__init__(connect_str=connect_str)
 
-
-    def get_ns_tree(self, namespace: str) -> NamespaceTree:
+    def _get_qry_ns(self) -> str:
         query = """SELECT extends.namespace as ns, module_detail.sort as sort FROM extends
         LEFT JOIN module_detail on module_detail.id_namespace = extends.namespace
         WHERE extends.fk_component_id like :namespace"""
+        return query
+
+    def get_ns_tree(self, namespace: str) -> NamespaceTree:
+        query = self._get_qry_ns()
         ns_dict = {}
-        
+
         def is_cache(ns: str) -> bool:
             return ns in ns_dict
-        
-        def get_cache(ns: str) -> list:
+
+        def get_cache(ns: str) -> List[NamespaceTree]:
             return ns_dict[ns]
-        
-        def set_cache(ns: str, lst: list) -> None:
+
+        def set_cache(ns: str, lst: List[NamespaceTree]) -> None:
             ns_dict[ns] = lst
 
-        def set_namespace_children(db: SqlCtx, ns_tree: NamespaceTree):
+        def set_tree_children(db: SqlCtx, ns_tree: NamespaceTree):
             """
             Sets children for ``ns_tree``. Children are automatically appended to ``ns_tree``
             
@@ -469,7 +472,7 @@ class QryNsTree(BaseSql):
             ns_tree.children = results
             set_cache(ns=ns_tree.namespace, lst=ns_tree.children)
             return ns_tree.children
- 
+
         def build_tree(db: SqlCtx, tree_obj: NamespaceTree) -> None:
             """
             Recursivly finds all children for ``tree_obj`` and appends them to children.
@@ -479,25 +482,6 @@ class QryNsTree(BaseSql):
                 tree_obj (NamespaceTree): namespace info
             """
             que = queue.Queue()
-            def recurse(q: queue.Queue) -> None:
-                # q contain siblings that have been aded to a parent already
-                # now each sibling need to find it children
-                sibling_que = queue.Queue()
-                while not q.empty():
-                    # sibling is not a parent
-                    parent: NamespaceTree = q.get()
-                    set_namespace_children(db=db, ns_tree=parent)
-                    for child in parent.children:
-                        sibling_que.put(child)
-                if not sibling_que.empty():
-                    recurse(q=sibling_que)
-            set_namespace_children(db=db, ns_tree=tree_obj)
-            for child in tree_obj.children:
-                que.put(child)
-            recurse(q=que)
-        
-        def build_flat(db: SqlCtx, tree_obj: NamespaceTree) -> set:
-            que = queue.Queue()
 
             def recurse(q: queue.Queue) -> None:
                 # q contain siblings that have been aded to a parent already
@@ -506,12 +490,12 @@ class QryNsTree(BaseSql):
                 while not q.empty():
                     # sibling is not a parent
                     parent: NamespaceTree = q.get()
-                    set_namespace_children(db=db, ns_tree=parent)
+                    set_tree_children(db=db, ns_tree=parent)
                     for child in parent.children:
                         sibling_que.put(child)
                 if not sibling_que.empty():
                     recurse(q=sibling_que)
-            set_namespace_children(db=db, ns_tree=tree_obj)
+            set_tree_children(db=db, ns_tree=tree_obj)
             for child in tree_obj.children:
                 que.put(child)
             recurse(q=que)
@@ -521,11 +505,71 @@ class QryNsTree(BaseSql):
             WHERE module_detail.id_namespace like :namespace LIMIT 1;"""
             db.cursor.execute(qry_sort, {"namespace": namespace})
             for row in db.cursor:
-                tree =NamespaceTree(
+                tree = NamespaceTree(
                     namespace=namespace,
                     sort=row['sort'])
                 build_tree(db=db, tree_obj=tree)
                 result = tree
+        return result
+
+    def get_ns_flat(self, namespace: str) -> List[Tuple[int, str]]:
+        query = self._get_qry_ns()
+        ns_dict = {}
+        
+        def is_cache(ns: str) -> bool:
+            return ns in ns_dict
+        
+        def get_cache(ns: str) -> List[NamespaceTree]:
+            return ns_dict[ns]
+        
+        def set_cache(ns: str, lst: List[NamespaceTree]) -> None:
+            ns_dict[ns] = lst
+
+         
+        def get_ns_children(db: SqlCtx, ns: str) -> List[Tuple[int, str]]:
+            if is_cache(ns):
+                return [(t.sort, t.namespace) for t in get_cache(ns)]
+            db.cursor.execute(query, {"namespace": ns})
+            children = []
+            for row in db.cursor:
+                children.append(NamespaceTree(
+                    namespace=row['ns'],
+                    sort=row['sort']
+                ))
+            set_cache(ns=ns, lst=children)
+            return children
+                
+        def build_flat(db: SqlCtx, ns: str) -> List[Tuple[int, str]]:
+            que = queue.Queue()
+            flat_set: Set[Tuple[int, str]] = set()
+            def recurse(q: queue.Queue) -> None:
+                # q contain siblings that have been aded to a parent already
+                # now each sibling need to find it children
+                sibling_que = queue.Queue()
+                while not q.empty():
+                    # sibling is not a parent
+                    parent: Set[Tuple[int, str]] = q.get()
+                    if parent in flat_set:
+                        continue
+                    children = get_ns_children(db=db, ns=parent[1])
+                    for child in children:
+                        if child in flat_set:
+                            continue
+                        sibling_que.put(child)
+                if not sibling_que.empty():
+                    recurse(q=sibling_que)
+            
+            root_children = get_ns_children(db=db, ns=ns)
+            for root_child in root_children:
+                que.put(root_child)
+            recurse(q=que)
+
+            results = list(flat_set)
+            result.sort()
+            return results
+
+        with SqlCtx(self.conn_str) as db:
+            result = build_flat(db=db, ns=namespace)
         return result
         
             
@@ -942,6 +986,7 @@ class QueryControler:
             return self._process_ns_tree()
         elif self._ns_flat:
             return self._get_flat_unique_ns()
+
     def _process_ns_tree(self) -> str:
         indent_amt = 4
         qry = QryNsTree(self._conn.connection_str)
