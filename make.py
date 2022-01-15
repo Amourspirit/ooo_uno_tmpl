@@ -1046,11 +1046,10 @@ def query_yes_no(question, default="yes"):
 
 # region    Main Testing
 def _main():
-    ns = 'com.sun.star.form.component.DatabaseTextField'
-    # ns = 'com.sun.star.text.TextRange'
-    # ns = 'com.sun.star.text.TextRange'
+    # ns = 'com.sun.star.form.component.DatabaseTextField'
+    ns = 'com.sun.star.text.TextRange'
     sys.argv.extend(['-v', '--log-file', 'debug.log', 'data', 'qry',
-                    '-n', ns])
+                    '-f', ns])
     main()
 
 def _touch():
@@ -1501,11 +1500,19 @@ def main():
     )
     # endregion component
     # region    qry
-    data_qry.add_argument(
+    data_qry_group = data_qry.add_mutually_exclusive_group()
+    data_qry_group.add_argument(
         '-n', '--name-space',
         help='Genereate Namespace Data for a given namespace object',
         action='store',
         dest='ns_name',
+        default=None
+    )
+    data_qry_group.add_argument(
+        '-f', '--flat-name-space',
+        help='Genereate flat unique namespace data for a given namespace object',
+        action='store',
+        dest='ns_flat',
         default=None
     )
     # endregion qry
@@ -1687,7 +1694,8 @@ def main():
         if args.command_data == 'qry':
             qc = db_manager.QueryControler(
                 config=config,
-                ns_name=args.ns_name
+                ns_name=args.ns_name,
+                ns_flat=args.ns_flat
             )
             qc_result = qc.results()
             if qc_result:

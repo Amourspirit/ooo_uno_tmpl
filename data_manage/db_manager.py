@@ -906,10 +906,13 @@ class QueryControler:
     def __init__(self, config: AppConfig, **kwargs) -> None:
         self._conn = DbConnect(config)
         self._ns_name: Union[str, None] = kwargs.get('ns_name', None)
+        self._ns_flat: Union[str, None] = kwargs.get('ns_flat', None)
     
     def results(self):
         if self._ns_name:
             return self._process_ns_tree()
+        elif self._ns_flat:
+            return self._get_flat_unique_ns()
     def _process_ns_tree(self) -> str:
         indent_amt = 4
         qry = QryNsTree(self._conn.connection_str)
@@ -932,6 +935,26 @@ class QueryControler:
             nt=n_tree, in_str=n_tree.namespace, indent=indent_amt)
         return s_result
 
+    def _get_flat_unique_ns(self) -> str:
+        ns_set = set()
+        def set_ns_values(nt: NamespaceTree):
+            for ns_itm in nt.children:
+                ns_set.add((ns_itm.sort, ns_itm.namespace))
+                set_ns_values(nt=ns_itm)
+
+        qry = QryNsTree(self._conn.connection_str)
+        n_tree = qry.get_ns_tree(namespace=self._ns_flat)
+        # don't add root
+        # ns_set.add((n_tree.sort, n_tree.namespace))
+        set_ns_values(nt=n_tree)
+        ns_lst = list(ns_set)
+        ns_lst.sort()
+        s = ''
+        for i, itm in enumerate(ns_lst):
+            if i > 0:
+                s += ', '
+            s += itm[1]
+        return s
 class ComponentControler:
     def __init__(self, config: AppConfig, **kwargs) -> None:
         self._parser = ParseModuleJson(config=config)
