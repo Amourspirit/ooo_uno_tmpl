@@ -1149,8 +1149,9 @@ def main():
     # data = data_subparser.add_parser(name='data')
     data_update = data.add_parser(name='db-update')
     data_init = data.add_parser(name='db-init')
-    data_imports_flat = data.add_parser(name='db-extends-flat')
-    data_imports_tree = data.add_parser(name='db-extends-tree')
+    data_extends_flat = data.add_parser(name='db-extends-flat')
+    data_extends_tree = data.add_parser(name='db-extends-tree')
+    data_imports = data.add_parser(name='db-imports')
     data_qry = data.add_parser(name='db-qry')
     
     # endregion create parsers
@@ -1519,17 +1520,17 @@ def main():
     # endregion db_update
 
     # region    imports
-    # region        Data Imports Tree
-    data_imports_tree.add_argument(
+    # region        Data Extends Tree
+    data_extends_tree.add_argument(
         '-n', '--name-space',
         help='Genereate Namespace Data for a given namespace object',
         action='store',
         dest='ns_name',
         default=None
     )
-    # endregion     Data Imports Tree
-    # region        Data Imports Flat
-    data_imports_flat_group = data_imports_flat.add_mutually_exclusive_group()
+    # endregion     Data Extends Tree
+    # region        Data Extends Flat
+    data_imports_flat_group = data_extends_flat.add_mutually_exclusive_group()
     data_imports_flat_group.add_argument(
         '-f', '--flat-name-space',
         help='Genereate flat unique namespace data for a given namespace object',
@@ -1565,14 +1566,38 @@ def main():
         dest='ns_url',
         default=None
     )
-    data_imports_flat.add_argument(
+    data_extends_flat.add_argument(
         '-c', '--child',
         help='Process only direct children if namespace',
         action='store_true',
         dest='ns_child',
         default=False
     )
-    # endregion     Data Imports Flat
+    # endregion     Data Extends Flat
+    # region        Data Imports
+    data_imports.add_argument(
+        '-n', '--name-space',
+        help='Genereate Namespace Data for a given namespace object',
+        action='store',
+        dest='ns_import_name',
+        default=None
+    )
+    data_imports_group = data_imports.add_mutually_exclusive_group()
+    data_imports_group.add_argument(
+        '-t', '--typing',
+        help='Only imports that require typing',
+        action='store_true',
+        dest='import_typing',
+        default=False
+    )
+    data_imports_group.add_argument(
+        '-f', '--no-typing',
+        help='Only imports that do NOT require typing',
+        action='store_true',
+        dest='import_no_typing',
+        default=False
+    )
+    # endregion     Data Imports
     # endregion imports
     # endregion data args
 
@@ -1763,6 +1788,20 @@ def main():
             qc = db_manager.NamespaceControler(
                 config=config,
                 ns_link=args.ns_url
+            )
+            qc_result = qc.results()
+            if qc_result:
+                print(qc_result)
+        if args.command_data == 'db-imports':
+            require_typing = None
+            if args.import_typing:
+                require_typing = True
+            elif args.import_no_typing:
+                require_typing = False
+            qc = db_manager.NamespaceControler(
+                config=config,
+                ns_full_import=args.ns_import_name,
+                ns_full_import_typing=require_typing
             )
             qc_result = qc.results()
             if qc_result:

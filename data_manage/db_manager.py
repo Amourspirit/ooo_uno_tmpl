@@ -16,7 +16,7 @@ import sqlite3 as sql
 import textwrap
 import queue
 from pathlib import Path
-from typing import Any, Dict, Set, List, Union, Tuple
+from typing import Any, Dict, Optional, Set, List, Union, Tuple
 from config import AppConfig
 from parser import __version__, JSON_ID, mod_rel as RelInfo
 # endregion Imports
@@ -495,12 +495,17 @@ class NsImports(BaseSql):
     def __init__(self, connect_str: str) -> None:
         super().__init__(connect_str=connect_str)
 
+    # region    Flat/ Flat Related
+    
+    # region        Query
     def _get_qry_ns(self) -> str:
         query = """SELECT extend.namespace as ns, module_detail.sort as sort FROM extend
         LEFT JOIN module_detail on module_detail.id_namespace = extend.namespace
         WHERE extend.fk_component_id like :namespace"""
         return query
-
+    # endregion     Queries
+    
+    # region        Tree
     def get_ns_tree(self, namespace: str) -> NamespaceTree:
         """
         Gets a tree of namesapce
@@ -594,6 +599,8 @@ class NsImports(BaseSql):
                 build_tree(db=db, tree_obj=tree)
                 result = tree
         return result
+    # endregion     Tree
+
 
     def get_flat_ns(self, namespace: str, full:bool) -> List[Tuple[int, str]]:
 
@@ -779,6 +786,50 @@ class NsImports(BaseSql):
                 in_str=flat[1], ns=ns)
             results.append(lng)
         return results
+    # endregion Flat/ Flat Related
+
+    # region IMPORTS
+    # region    Query
+    def _get_imports_qry(self, typing:bool) -> str:
+        """
+        Gets Query string for querying full_import Table
+
+        Args:
+            typing (bool): If True then requires_typing parameter is included in query string
+
+        Returns:
+            str: query string
+        """
+        qry = 'SELECT full_import.id_full_import, full_import.namespace, full_import.requires_typing FROM full_import WHERE full_import.fk_component_id like :namespace'
+        if typing is True:
+            qry += ' AND full_import.requires_typing = :requires_typing'
+        qry += ';'
+        return qry
+    # endregion Query
+
+    def get_imports(self, full_ns: str, typing: Optional[bool] = None) -> List[FullImport]:
+        args = {"namespace": full_ns}
+        if typing is None:
+            qry_str = self._get_imports_qry(False)
+        else:
+            qry_str = self._get_imports_qry(True)
+            args['requires_typing'] = 1 if typing is True else 0
+        results = []
+        with SqlCtx(self.conn_str) as db:
+            db.cursor.execute(qry_str, args)
+            for row in db.cursor:
+                namesapce: str = row['namespace']
+                id_full_import: int = row['id_full_import']
+                requires_typing: bool = bool(row['requires_typing'])
+                results.append(FullImport(
+                    namespace=namesapce,
+                    requires_typing=requires_typing,
+                    fk_component_id=full_ns,
+                    id_full_import=id_full_import
+                ))
+        return results
+    
+    # endregion IMPORTS
 # endregion Query
 
 class DbConnect:
@@ -1217,6 +1268,9 @@ class NamespaceControler:
         self._ns_extends_short: Union[str, None] = kwargs.get(
             'extends_short', None)
         self._link: Union[str, None] = kwargs.get('ns_link', None)
+        self._ns_full_import: Union[str, None] = kwargs.get('ns_full_import', None)
+        self._ns_full_import_typing: Union[bool, None] = kwargs.get(
+            'ns_full_import_typing', None)
 
     def results(self):
         if self._ns_name:
@@ -1231,6 +1285,8 @@ class NamespaceControler:
             return self._get_extends(long=False)
         elif self._link:
             return self._get_link()
+        elif self._ns_full_import:
+            return self._get_imports()
 
     def _process_ns_tree(self) -> str:
         """
@@ -1307,6 +1363,16 @@ class NamespaceControler:
     def _get_link(self) -> str:
         qry = NsImports(self._conn.connection_str)
         return qry.get_ns_link(full_ns=self._link)
+
+    def _get_imports(self) -> str:
+        qry = NsImports(self._conn.connection_str)
+        ims = qry.get_imports(full_ns=self._ns_full_import, typing=self._ns_full_import_typing)
+        s = ''
+        for i, im in enumerate(ims):
+            if i > 0:
+                s += '\n'
+            s += im.namespace
+        return s
 
 class ComponentControler:
     def __init__(self, config: AppConfig, **kwargs) -> None:
