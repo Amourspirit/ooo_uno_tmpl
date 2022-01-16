@@ -1147,9 +1147,8 @@ def main():
     data_subparser = subparser.add_parser(name='data')
     data = data_subparser.add_subparsers(dest='command_data')
     # data = data_subparser.add_parser(name='data')
-    data_module = data.add_parser(name='module')
-    data_init = data.add_parser(name='init')
-    data_component = data.add_parser(name='component')
+    data_update = data.add_parser(name='db_update')
+    data_init = data.add_parser(name='db_init')
     data_imports_flat = data.add_parser(name='imports_flat')
     data_imports_tree = data.add_parser(name='imports_tree')
     
@@ -1487,7 +1486,7 @@ def main():
     # endregion make args
 
     # region data args
-    # region    init
+    # region    db_init
     data_init.add_argument(
         '-i', '--init-db',
         help='Initialize database',
@@ -1495,49 +1494,18 @@ def main():
         dest='init_db',
         default=False
     )
-    # endregion init
-    # region    module
-    data_module_group = data_module.add_mutually_exclusive_group()
-    data_module_group.add_argument(
+    # endregion db_init
+
+    # region    db_update
+    data_update.add_argument(
         '-a', '--write-all',
-        help=f"Write all {config.module_links_file} files to database",
+        help='Write data from json files in database. Update/insert',
         action='store_true',
         dest='write_all',
         default=False
     )
-    data_module_group.add_argument(
-        '-u', '--udate-all',
-        help=f"Overwrite all {config.module_links_file} files to database",
-        action='store_true',
-        dest='update_all',
-        default=False
-    )
-    data_module_group.add_argument(
-        '-c', '--get-count',
-        help='Get count of namesapce data',
-        action='store_true',
-        dest='count_all',
-        default=False
-    )
-    
-    # endregion module
-    # region    component
-    data_component_group = data_component.add_mutually_exclusive_group()
-    data_component_group.add_argument(
-        '-a', '--write-all',
-        help='Write all component json files data to database',
-        action='store_true',
-        dest='write_all',
-        default=False
-    )
-    data_component_group.add_argument(
-        '-u', '--udate-all',
-        help='Overwrite all component json files data in database',
-        action='store_true',
-        dest='update_all',
-        default=False
-    )
-    # endregion component
+    # endregion db_update
+
     # region    imports
     # region        Data Imports Tree
     data_imports_tree.add_argument(
@@ -1715,8 +1683,8 @@ def main():
     # region data Command
     
     if args.command == 'data':
-        # region Init
-        if args.command_data == 'init':
+        # region db_init
+        if args.command_data == 'db_init':
             dbc = db_manager.DatabaseControler(
                 config=config,
                 init_db=args.init_db
@@ -1725,36 +1693,23 @@ def main():
                 if not query_yes_no(f"Are you sure you want initialize the database '{config.db_mod_info}'?", 'no'):
                     return
             dbc.results()
-        # endregion Init
-        # region Module
-        if args.command_data == 'module':
+        # endregion db_init
+        # region db_update
+        if args.command_data == 'db_update':
             mlc = db_manager.ModuleLinksControler(
                 config=config,
-                write_all=args.write_all,
-                update_all=args.update_all,
-                count_all=args.count_all
+                write_all=args.write_all
                 )
-            if args.write_all or args.update_all:
-                if not query_yes_no(f"Are you sure you want to read all {config.module_links_file} files and write to database?", 'no'):
-                    return
-            mlc_result = mlc.results()
-            if mlc_result:
-                print(mlc_result)
-        # endregion Module
-        # region Component
-        if args.command_data == 'component':
-            mlc = db_manager.ComponentControler(
+            mcc = db_manager.ComponentControler(
                 config=config,
-                write_all=args.write_all,
-                update_all=args.update_all
+                write_all=args.write_all
             )
             if args.write_all or args.update_all:
-                if not query_yes_no(f"Are you sure you want to read all component json files and write to database?", 'no'):
+                if not query_yes_no(f"Are you sure you want to read all json files and write data in database?", 'no'):
                     return
-            mlc_result = mlc.results()
-            if mlc_result:
-                print(mlc_result)
-        # endregion Component
+            _ = mlc.results()
+            _ = mcc.results()
+        # endregion db_update
         # region Namespace
         if args.command_data == 'imports_tree':
             qc = db_manager.ImportControler(
