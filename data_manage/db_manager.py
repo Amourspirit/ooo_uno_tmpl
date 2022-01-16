@@ -424,7 +424,7 @@ class SqlModuleInfo(BaseSqlTable):
 
 # region    Query
 
-class QryNsTree(BaseSql):
+class NsImports(BaseSql):
     def __init__(self, connect_str: str) -> None:
         super().__init__(connect_str=connect_str)
 
@@ -634,6 +634,28 @@ class QryNsTree(BaseSql):
         for flat in flats:
             from_, cls_, lng = RelInfo.get_rel_import_long(in_str=flat[1], ns=ns)
             results.append((from_, cls_, lng))
+        return results
+
+    def get_extends_long(self, namespace: str) -> List[str]:
+        flats = self.get_flat_ns(namespace=namespace)
+        
+        ns = self.get_ns_from_full(full_ns = namespace)
+        results = []
+        for flat in flats:
+            lng = RelInfo.get_rel_import_long_name(
+                in_str=flat[1], ns=ns)
+            results.append(lng)
+        return results
+
+    def get_extends_short(self, namespace: str) -> List[str]:
+        flats = self.get_flat_ns(namespace=namespace)
+        
+        ns = self.get_ns_from_full(full_ns = namespace)
+        results = []
+        for flat in flats:
+            lng = RelInfo.get_rel_import_short_name(
+                in_str=flat[1], ns=ns)
+            results.append(lng)
         return results
 # endregion Query
 
@@ -1043,6 +1065,10 @@ class ImportControler:
         self._ns_name: Union[str, None] = kwargs.get('ns_name', None)
         self._ns_flat: Union[str, None] = kwargs.get('ns_flat', None)
         self._ns_flat_frm: Union[str, None] = kwargs.get('ns_flat_frm', None)
+        self._ns_extends_lng: Union[str, None] = kwargs.get(
+            'extends_long', None)
+        self._ns_extends_short: Union[str, None] = kwargs.get(
+            'extends_short', None)
 
     def results(self):
         if self._ns_name:
@@ -1051,10 +1077,14 @@ class ImportControler:
             return self._get_flat_unique_ns()
         elif self._ns_flat_frm:
             return self._get_flat_frm()
+        elif self._ns_extends_lng:
+            return self._get_extends(long=True)
+        elif self._ns_extends_short:
+            return self._get_extends(long=False)
 
     def _process_ns_tree(self) -> str:
         indent_amt = 4
-        qry = QryNsTree(self._conn.connection_str)
+        qry = NsImports(self._conn.connection_str)
 
         def get_str(nt: NamespaceTree, in_str: str, indent: int) -> str:
             ns_str = in_str
@@ -1076,7 +1106,7 @@ class ImportControler:
         return s_result
 
     def _get_flat_unique_ns(self) -> str:
-        qry = QryNsTree(self._conn.connection_str)
+        qry = NsImports(self._conn.connection_str)
         n_flat = qry.get_flat_ns(namespace=self._ns_flat)
         s = ''
         for i, itm in enumerate(n_flat):
@@ -1086,13 +1116,26 @@ class ImportControler:
         return s
     
     def _get_flat_frm(self) -> str:
-        qry = QryNsTree(self._conn.connection_str)
+        qry = NsImports(self._conn.connection_str)
         froms = qry.get_flat_imports(namespace=self._ns_flat_frm)
         s = ''
         for i, frm in enumerate(froms):
             if i > 0:
                 s += '\n'
             s += f"from {frm[0]} import {frm[1]} as {frm[2]}"
+        return s
+    
+    def _get_extends(self, long: bool) -> str:
+        qry = NsImports(self._conn.connection_str)
+        if long:
+            extends = qry.get_extends_long(namespace=self._ns_extends_lng)
+        else:
+            extends = qry.get_extends_short(namespace=self._ns_extends_short)
+        s = ''
+        for i, ex in enumerate(extends):
+            if i > 0:
+                s += ', '
+            s += ex
         return s
 class ComponentControler:
     def __init__(self, config: AppConfig, **kwargs) -> None:

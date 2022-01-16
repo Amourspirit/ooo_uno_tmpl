@@ -1564,6 +1564,20 @@ def main():
         dest='ns_from_imports',
         default=None
     )
+    data_imports_flat_group.add_argument(
+        '-e', '--extends-short',
+        help='Generates line of short extends such as: XTextRange, XInterface',
+        action='store',
+        dest='ns_extends_short',
+        default=None
+    )
+    data_imports_flat_group.add_argument(
+        '-x', '--extends-long',
+        help='Generates line of short extends such as: text_x_text_range_i, uno_x_interface_i',
+        action='store',
+        dest='ns_extends_long',
+        default=None
+    )
     # endregion     Data Imports Flat
     # endregion imports
     # endregion data args
@@ -1754,7 +1768,9 @@ def main():
             qc = db_manager.ImportControler(
                 config=config,
                 ns_flat=args.ns_flat,
-                ns_flat_frm=args.ns_from_imports
+                ns_flat_frm=args.ns_from_imports,
+                extends_long=args.ns_extends_long,
+                extends_short=args.ns_extends_short
             )
             qc_result = qc.results()
             if qc_result:
