@@ -496,9 +496,9 @@ class NsImports(BaseSql):
         super().__init__(connect_str=connect_str)
 
     def _get_qry_ns(self) -> str:
-        query = """SELECT extends.namespace as ns, module_detail.sort as sort FROM extends
-        LEFT JOIN module_detail on module_detail.id_namespace = extends.namespace
-        WHERE extends.fk_component_id like :namespace"""
+        query = """SELECT extend.namespace as ns, module_detail.sort as sort FROM extend
+        LEFT JOIN module_detail on module_detail.id_namespace = extend.namespace
+        WHERE extend.fk_component_id like :namespace"""
         return query
 
     def get_ns_tree(self, namespace: str) -> NamespaceTree:
