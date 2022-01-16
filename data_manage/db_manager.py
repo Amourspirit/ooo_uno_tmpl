@@ -811,6 +811,7 @@ class ParseModuleJson:
             file=str(rel)
         )
         self._read_extends(json_data=json_data, comp=c)
+        self._read_full_imports(json_data=json_data, comp=c)
         self._components.append(c)
 
     def _read_extends(self, json_data: dict, comp: Component) -> None:

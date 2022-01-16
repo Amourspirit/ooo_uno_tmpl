@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.17",
+  "version": "0.1.18",
   "libre_office_ver": "7.2",
   "name": "DependencyException",
   "type": "exception",
@@ -21,16 +21,34 @@
         "uno_exception_i"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..xml.dom.x_element",
+        "XElement",
+        "xml_dom_x_element_i"
+      ]
+    ],
     "extends_map": {
       "com.sun.star.uno.Exception": "uno_exception_i"
     },
-    "quote": [],
-    "typings": [],
-    "requires_typing": false,
+    "quote": [
+      "typing.List[xml_dom_x_element_i]"
+    ],
+    "typings": [
+      "typing.List[xml_dom_x_element_i]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.Exception"
+      ],
+      "typing": [
+        "com.sun.star.xml.dom.XElement"
+      ]
+    },
     "name": "DependencyException",
-    "namespace": "com.sun.star.deployment",
     "imports": [],
+    "namespace": "com.sun.star.deployment",
     "extends": [
       "com.sun.star.uno.Exception"
     ],
@@ -44,6 +62,22 @@
       "    OOo 2.0.4"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/exceptioncom_1_1sun_1_1star_1_1deployment_1_1DependencyException.html",
-    "items": {}
+    "items": {
+      "types": [
+        {
+          "name": "UnsatisfiedDependencies",
+          "returns": "typing.List[xml_dom_x_element_i]",
+          "desc": [
+            "a sequence of dependencies represented by XML elements.",
+            "",
+            "The exact nature of those XML elements is deliberately left open, so that new kinds of dependencies can be defined in the future. OOo\u00a02.0.4 does not define any kinds of dependencies. Each such XML element should have an attribute whose global name consists of the namespace name http://openoffice.org/extensions/description/2006 and the local part name and whose value is a human-readable (English) description of the dependency. If an instance of OOo does not know more about a specific kind of dependency, it should display the value of that attribute to the user.",
+            "",
+            "The sequence must not be empty, and none of the elements may be NULL."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
   }
 }

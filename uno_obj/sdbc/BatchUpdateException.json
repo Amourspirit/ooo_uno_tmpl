@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.17",
+  "version": "0.1.18",
   "libre_office_ver": "7.2",
   "name": "BatchUpdateException",
   "type": "exception",
@@ -25,12 +25,22 @@
     "extends_map": {
       "com.sun.star.sdbc.SQLException": "sql_exception_i"
     },
-    "quote": [],
-    "typings": [],
-    "requires_typing": false,
+    "quote": [
+      "typing.List[int]"
+    ],
+    "typings": [
+      "typing.List[int]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.sdbc.SQLException"
+      ],
+      "typing": []
+    },
     "name": "BatchUpdateException",
-    "namespace": "com.sun.star.sdbc",
     "imports": [],
+    "namespace": "com.sun.star.sdbc",
     "extends": [
       "com.sun.star.sdbc.SQLException"
     ],
@@ -40,6 +50,18 @@
       "In addition to the information provided by com.sun.star.sdbc.SQLException , a BatchUpdateException provides the update counts for all commands that were executed successfully during the batch update, that is, all commands that were executed before the error occurred. The order of elements in an array of update counts corresponds to the order in which commands were added to the batch."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/exceptioncom_1_1sun_1_1star_1_1sdbc_1_1BatchUpdateException.html",
-    "items": {}
+    "items": {
+      "types": [
+        {
+          "name": "UpdateCounts",
+          "returns": "typing.List[int]",
+          "desc": [
+            "is an array of long , with each element indicating the update count for a SQL command that executed successfully before the exception was thrown."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
   }
 }

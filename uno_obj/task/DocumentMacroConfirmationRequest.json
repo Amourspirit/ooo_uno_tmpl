@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.17",
+  "version": "0.1.18",
   "libre_office_ver": "7.2",
   "name": "DocumentMacroConfirmationRequest",
   "type": "exception",
@@ -26,19 +26,36 @@
         "..embed.x_storage",
         "XStorage",
         "embed_x_storage_i"
+      ],
+      [
+        "..security.document_signature_information",
+        "DocumentSignatureInformation",
+        "security_document_signature_information_i"
       ]
     ],
     "extends_map": {
       "com.sun.star.task.ClassifiedInteractionRequest": "classified_interaction_request_i"
     },
     "quote": [
-      "embed_x_storage_i"
+      "embed_x_storage_i",
+      "typing.List[security_document_signature_information_i]"
     ],
-    "typings": [],
+    "typings": [
+      "typing.List[security_document_signature_information_i]"
+    ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.task.ClassifiedInteractionRequest"
+      ],
+      "typing": [
+        "com.sun.star.embed.XStorage",
+        "com.sun.star.security.DocumentSignatureInformation"
+      ]
+    },
     "name": "DocumentMacroConfirmationRequest",
-    "namespace": "com.sun.star.task",
     "imports": [],
+    "namespace": "com.sun.star.task",
     "extends": [
       "com.sun.star.task.ClassifiedInteractionRequest"
     ],
@@ -47,6 +64,17 @@
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/exceptioncom_1_1sun_1_1star_1_1task_1_1DocumentMacroConfirmationRequest.html",
     "items": {
+      "types": [
+        {
+          "name": "DocumentSignatureInformation",
+          "returns": "typing.List[security_document_signature_information_i]",
+          "desc": [
+            "contains information about the signatures in the document"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ],
       "properties": [
         {
           "name": "DocumentStorage",
