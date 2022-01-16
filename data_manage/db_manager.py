@@ -26,12 +26,19 @@ from parser import __version__, JSON_ID, mod_rel as RelInfo
 
 
 @dataclass(frozen=True, eq=True)
-class Extends:
+class Extend:
     namespace: str
     map_name: Union[str, None]
     fk_component_id: str
-    id_extends: Union[int, None] = None
-   
+    id_extend: Union[int, None] = None
+
+
+@dataclass(frozen=True, eq=True)
+class FullImport:
+    namespace: str
+    requires_typing: bool
+    fk_component_id: str
+    id_full_import: Union[int, None] = None
 @dataclass
 class NamespaceTree:
     namespace: str
@@ -174,13 +181,14 @@ class SqlInitDb:
         self._create_module_details()
         self._create_component_type()
         self._create_component()
-        self._create_extends()
+        self._create_extend()
+        self._create_full_import()
         self._is_init = True
 
-    def _create_extends(self) -> None:
+    def _create_extend(self) -> None:
         # auto primary key: https://stackoverflow.com/a/26652736/1171746
-        query = """CREATE TABLE IF NOT EXISTS extends (
-            id_extends INTEGER PRIMARY KEY AUTOINCREMENT,
+        query = """CREATE TABLE IF NOT EXISTS extend (
+            id_extend INTEGER PRIMARY KEY AUTOINCREMENT,
             namespace VARCHAR(255) NOT NULL,
             map_name VARCHAR(255),
             fk_component_id VARCHAR(255) NOT NULL
@@ -188,6 +196,16 @@ class SqlInitDb:
         with SqlCtx(self._conn_str) as db:
             db.cursor.execute(query)
     
+    def _create_full_import(self) -> None:
+        # bool : https://tinyurl.com/y9yocjx5
+        query = """CREATE TABLE IF NOT EXISTS full_import (
+            id_full_import INTEGER PRIMARY KEY AUTOINCREMENT,
+            namespace VARCHAR(255) NOT NULL,
+            requires_typing BOOLEAN NOT NULL CHECK (requires_typing IN (0, 1)),
+            fk_component_id VARCHAR(255) NOT NULL
+            )"""
+        with SqlCtx(self._conn_str) as db:
+            db.cursor.execute(query)
 
     def _create_module_info(self) -> None:
         query = """CREATE TABLE IF NOT EXISTS module_info (
@@ -273,6 +291,8 @@ class SqlComponent(BaseSqlTable):
         Args:
             data (List[Component]): data to update
         """
+        if len(data) == 0:
+            return
         # SQLite UPSERT / UPDATE OR INSERT
         # https://stackoverflow.com/questions/15277373/sqlite-upsert-update-or-insert
         values = [asdict(itm) for itm in data]
@@ -300,43 +320,86 @@ class SqlComponent(BaseSqlTable):
 # region        SQL ComponentExtends
 
 
-class SqlComponentExtends(BaseSqlTable):
+class SqlComponentExtend(BaseSqlTable):
     def __init__(self, connect_str: str) -> None:
         super().__init__(connect_str=connect_str)
 
     def get_table_name(self) -> str:
         """Gets the current table name"""
-        return 'component'
+        return 'extend'
 
-    def insert(self, data: List[Extends]) -> None:
+    def insert(self, data: List[Extend]) -> None:
         """
         Inserts/updates data. Handles inserting and updating
 
         Args:
-            data (List[Extends]): data to update
+            data (List[Extend]): data to update
         """
+        if len(data) == 0:
+            return
         values = [asdict(itm) for itm in data]
 
         with SqlCtx(self.conn_str) as db:
-            query = """INSERT INTO extends
-            VALUES (:id_extends, :namespace, :map_name, :fk_component_id)
-            ON CONFLICT(id_extends) 
+            query = """INSERT INTO extend
+            VALUES (:id_extend, :namespace, :map_name, :fk_component_id)
+            ON CONFLICT(id_extend) 
             DO UPDATE SET namespace=excluded.namespace, map_name=excluded.map_name,
             fk_component_id=excluded.fk_component_id;
             """
             with db.connection:
                 db.cursor.executemany(query, values)
 
-    def update(self, data: List[Extends]) -> None:
+    def update(self, data: List[Extend]) -> None:
         """
         Updates data. Handles updating
 
         Args:
-            data (List[Extends]): data to update
+            data (List[Extend]): data to update
         """
         self.insert(data=data)
 # endregion     SQL ComponentExtends
 
+# region        SQL SqlComponentFullImports
+
+
+class SqlComponentFullImport(BaseSqlTable):
+    def __init__(self, connect_str: str) -> None:
+        super().__init__(connect_str=connect_str)
+
+    def get_table_name(self) -> str:
+        """Gets the current table name"""
+        return 'full_import'
+
+    def insert(self, data: List[FullImport]) -> None:
+        """
+        Inserts/updates data. Handles inserting and updating
+
+        Args:
+            data (List[FullImport]): data to update
+        """
+        if len(data) == 0:
+            return
+        values = [asdict(itm) for itm in data]
+
+        with SqlCtx(self.conn_str) as db:
+            query = """INSERT INTO full_import
+            VALUES (:id_full_import, :namespace, :requires_typing, :fk_component_id)
+            ON CONFLICT(id_full_import) 
+            DO UPDATE SET namespace=excluded.namespace, requires_typing=excluded.requires_typing,
+            fk_component_id=excluded.fk_component_id;
+            """
+            with db.connection:
+                db.cursor.executemany(query, values)
+
+    def update(self, data: List[FullImport]) -> None:
+        """
+        Updates data. Handles updating
+
+        Args:
+            data (List[FullImport]): data to update
+        """
+        self.insert(data=data)
+# endregion     SQL SqlComponentFullImports
 
 # region        SQL Module Detail
 
@@ -356,6 +419,8 @@ class SqlModuleDetail(BaseSqlTable):
         Args:
             data (List[ModuleDetail]): data to update
         """
+        if len(data) == 0:
+            return
         # SQLite UPSERT / UPDATE OR INSERT
         # https://stackoverflow.com/questions/15277373/sqlite-upsert-update-or-insert
         values = [asdict(itm) for itm in data]
@@ -400,6 +465,8 @@ class SqlModuleInfo(BaseSqlTable):
         Args:
             data (List[ModuleInfo]): data to update
         """
+        if len(data) == 0:
+            return
         values = [asdict(itm) for itm in data]
         with SqlCtx(self.conn_str) as db:
             query = """INSERT INTO module_info
@@ -688,14 +755,16 @@ class ParseModuleJson:
     def __init__(self, config: AppConfig) -> None:
         self._app_config = config
         self._components: List[Component] = []
-        self._extends: List[Extends] = []
+        self._extends: List[Extend] = []
+        self._full_imports: List[FullImport] = []
         self._min_ver = verr.Version.parse(config.min_json_data_ver)
         self._valid_types = tuple(self._app_config.component_types)
         conn = DbConnect(self._app_config)
         self._db_cnn = conn.connection_str
         self._root_dir = conn.root_dir
         self._component_tbl = SqlComponent(connect_str=self._db_cnn)
-        self._extends_tbl = SqlComponentExtends(connect_str=self._db_cnn)
+        self._extend_tbl = SqlComponentExtend(connect_str=self._db_cnn)
+        self._full_import_tbl = SqlComponentFullImport(connect_str=self._db_cnn)
 
     def get_module_json_files(self) -> List[str]:
         def filter_fn(name) -> bool:
@@ -719,7 +788,8 @@ class ParseModuleJson:
             self._read(json_data=j_data, file=j_file)
 
         self._component_tbl.insert(data=self._components)
-        self._extends_tbl.insert(data=self._extends)
+        self._extend_tbl.insert(data=self._extends)
+        self._full_import_tbl.insert(data=self._full_imports)
 
     def update_all_details(self) -> None:
         self._write_all()
@@ -749,7 +819,27 @@ class ParseModuleJson:
         for ext in j_extends:
             map_name = j_extends_map.get(ext, None)
             self._extends.append(
-                Extends(namespace=ext, map_name=map_name, fk_component_id=comp.id_component))
+                Extend(namespace=ext, map_name=map_name, fk_component_id=comp.id_component))
+
+    def _read_full_imports(self, json_data: dict, comp: Component) -> None:
+        j_imports: Dict[List[str]] = json_data['data'].get('full_imports', {})
+        gen_lst: List[str] = j_imports.get('general', [])
+        type_lst: List[str] = j_imports.get('typing', [])
+        for ns in gen_lst:
+            self._full_imports.append(FullImport(
+                namespace=ns,
+                requires_typing=False,
+                fk_component_id=comp.id_component
+            ))
+        for ns in type_lst:
+            self._full_imports.append(FullImport(
+                namespace=ns,
+                requires_typing=True,
+                fk_component_id=comp.id_component
+            ))
+        
+        
+    
 
     # region Validation
     def _validite_json(self, file: str, data: dict):
