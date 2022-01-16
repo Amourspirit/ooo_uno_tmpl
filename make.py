@@ -1074,11 +1074,12 @@ def query_yes_no(question, default="yes"):
 
 # region    Main Testing
 def _main():
-    ns = 'com.sun.star.form.component.DatabaseTextField'
+    # ns = 'com.sun.star.form.component.DatabaseTextField'
+    ns = 'com.sun.star.form.component.RichTextControl'
     # ns = 'com.sun.star.form.DataAwareControlModel'
     # ns = 'com.sun.star.text.TextRange'
-    sys.argv.extend(['-v', '--log-file', 'debug.log', 'data', 'qry',
-                    '-f', ns])
+    sys.argv.extend(['-v', '--log-file', 'debug.log', 'data', 'imports_flat',
+                    '-i', ns])
     main()
 
 def _touch():
@@ -1149,7 +1150,9 @@ def main():
     data_module = data.add_parser(name='module')
     data_init = data.add_parser(name='init')
     data_component = data.add_parser(name='component')
-    data_qry = data.add_parser(name='qry')
+    data_imports_flat = data.add_parser(name='imports_flat')
+    data_imports_tree = data.add_parser(name='imports_tree')
+    
     # endregion create parsers
 
     # region ex args
@@ -1535,23 +1538,34 @@ def main():
         default=False
     )
     # endregion component
-    # region    qry
-    data_qry_group = data_qry.add_mutually_exclusive_group()
-    data_qry_group.add_argument(
+    # region    imports
+    # region        Data Imports Tree
+    data_imports_tree.add_argument(
         '-n', '--name-space',
         help='Genereate Namespace Data for a given namespace object',
         action='store',
         dest='ns_name',
         default=None
     )
-    data_qry_group.add_argument(
+    # endregion     Data Imports Tree
+    # region        Data Imports Flat
+    data_imports_flat_group = data_imports_flat.add_mutually_exclusive_group()
+    data_imports_flat_group.add_argument(
         '-f', '--flat-name-space',
         help='Genereate flat unique namespace data for a given namespace object',
         action='store',
         dest='ns_flat',
         default=None
     )
-    # endregion qry
+    data_imports_flat_group.add_argument(
+        '-i', '--flat-imports',
+        help='Genereate imports if format of from ... import ... as ...',
+        action='store',
+        dest='ns_from_imports',
+        default=None
+    )
+    # endregion     Data Imports Flat
+    # endregion imports
     # endregion data args
 
     # region general args
@@ -1728,11 +1742,19 @@ def main():
                 print(mlc_result)
         # endregion Component
         # region Namespace
-        if args.command_data == 'qry':
-            qc = db_manager.QueryControler(
+        if args.command_data == 'imports_tree':
+            qc = db_manager.ImportControler(
                 config=config,
                 ns_name=args.ns_name,
-                ns_flat=args.ns_flat
+            )
+            qc_result = qc.results()
+            if qc_result:
+                print(qc_result)
+        if args.command_data == 'imports_flat':
+            qc = db_manager.ImportControler(
+                config=config,
+                ns_flat=args.ns_flat,
+                ns_flat_frm=args.ns_from_imports
             )
             qc_result = qc.results()
             if qc_result:

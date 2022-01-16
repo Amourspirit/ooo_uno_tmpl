@@ -14,11 +14,11 @@ import json
 import verr
 import sqlite3 as sql
 import textwrap
+import queue
 from pathlib import Path
 from typing import Any, Dict, Set, List, Union, Tuple
 from config import AppConfig
-from parser import __version__, JSON_ID
-import queue
+from parser import __version__, JSON_ID, mod_rel as RelInfo
 # endregion Imports
 
 
@@ -512,7 +512,7 @@ class QryNsTree(BaseSql):
                 result = tree
         return result
 
-    def get_ns_flat(self, namespace: str) -> List[Tuple[int, str]]:
+    def get_flat_ns(self, namespace: str) -> List[Tuple[int, str]]:
 
         query = self._get_qry_ns()
         ns_dict = {}
@@ -616,8 +616,25 @@ class QryNsTree(BaseSql):
         with SqlCtx(self.conn_str) as db:
             result = build_flat(db=db, ns=namespace)
         return result
-        
-            
+
+    def get_ns_from_full(self, full_ns: str) -> str:
+        qry = """SELECT module_detail.namespace as ns FROM module_detail
+            WHERE module_detail.id_namespace like :namespace LIMIT 1;"""
+        result = ''
+        with SqlCtx(self.conn_str) as db:
+            db.cursor.execute(qry, {"namespace": full_ns})
+            for row in db.cursor:
+                result = row['ns']
+        return result
+    
+    def get_flat_imports(self, namespace: str) -> List[Tuple[str, str, str]]:
+        flats = self.get_flat_ns(namespace=namespace)
+        ns = self.get_ns_from_full(full_ns = namespace)
+        results = []
+        for flat in flats:
+            from_, cls_, lng = RelInfo.get_rel_import_long(in_str=flat[1], ns=ns)
+            results.append((from_, cls_, lng))
+        return results
 # endregion Query
 
 class DbConnect:
@@ -1020,21 +1037,25 @@ class DatabaseControler:
         db = SqlInitDb(self._conn.connection_str)
         db.init_db()
 
-class QueryControler:
+class ImportControler:
     def __init__(self, config: AppConfig, **kwargs) -> None:
         self._conn = DbConnect(config)
         self._ns_name: Union[str, None] = kwargs.get('ns_name', None)
         self._ns_flat: Union[str, None] = kwargs.get('ns_flat', None)
-    
+        self._ns_flat_frm: Union[str, None] = kwargs.get('ns_flat_frm', None)
+
     def results(self):
         if self._ns_name:
             return self._process_ns_tree()
         elif self._ns_flat:
             return self._get_flat_unique_ns()
+        elif self._ns_flat_frm:
+            return self._get_flat_frm()
 
     def _process_ns_tree(self) -> str:
         indent_amt = 4
         qry = QryNsTree(self._conn.connection_str)
+
         def get_str(nt: NamespaceTree, in_str: str, indent: int) -> str:
             ns_str = in_str
             nt.children.sort()
@@ -1046,7 +1067,7 @@ class QueryControler:
                 ns_str = get_str(nt=ns_itm, in_str=ns_str,
                                  indent=indent + indent_amt)
             return ns_str
-    
+
         n_tree = qry.get_ns_tree(namespace=self._ns_name)
         # return None
         # return str(n_tree)
@@ -1056,14 +1077,23 @@ class QueryControler:
 
     def _get_flat_unique_ns(self) -> str:
         qry = QryNsTree(self._conn.connection_str)
-        n_flat = qry.get_ns_flat(namespace=self._ns_flat)
+        n_flat = qry.get_flat_ns(namespace=self._ns_flat)
         s = ''
         for i, itm in enumerate(n_flat):
             if i > 0:
                 s += ', '
             s += itm[1]
         return s
-
+    
+    def _get_flat_frm(self) -> str:
+        qry = QryNsTree(self._conn.connection_str)
+        froms = qry.get_flat_imports(namespace=self._ns_flat_frm)
+        s = ''
+        for i, frm in enumerate(froms):
+            if i > 0:
+                s += '\n'
+            s += f"from {frm[0]} import {frm[1]} as {frm[2]}"
+        return s
 class ComponentControler:
     def __init__(self, config: AppConfig, **kwargs) -> None:
         self._parser = ParseModuleJson(config=config)
