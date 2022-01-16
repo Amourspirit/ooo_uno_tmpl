@@ -749,6 +749,7 @@ class NsImports(BaseSql):
         return result
     
     def get_flat_imports(self, namespace: str, full: bool) -> List[Tuple[str, str, str]]:
+        # if importing form children. The children imports need to be relative this namespace
         flats = self.get_flat_ns(namespace=namespace, full=full)
         ns = self.get_ns_from_full(full_ns = namespace)
         results = []

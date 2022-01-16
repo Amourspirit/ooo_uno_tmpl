@@ -1147,11 +1147,11 @@ def main():
     data_subparser = subparser.add_parser(name='data')
     data = data_subparser.add_subparsers(dest='command_data')
     # data = data_subparser.add_parser(name='data')
-    data_update = data.add_parser(name='db_update')
-    data_init = data.add_parser(name='db_init')
-    data_imports_flat = data.add_parser(name='imports_flat')
-    data_imports_tree = data.add_parser(name='imports_tree')
-    data_qry = data.add_parser(name='db_qry')
+    data_update = data.add_parser(name='db-update')
+    data_init = data.add_parser(name='db-init')
+    data_imports_flat = data.add_parser(name='db-extends-flat')
+    data_imports_tree = data.add_parser(name='db-extends-tree')
+    data_qry = data.add_parser(name='db-qry')
     
     # endregion create parsers
 
@@ -1710,7 +1710,7 @@ def main():
     
     if args.command == 'data':
         # region db_init
-        if args.command_data == 'db_init':
+        if args.command_data == 'db-init':
             dbc = db_manager.DatabaseControler(
                 config=config,
                 init_db=args.init_db
@@ -1721,7 +1721,7 @@ def main():
             dbc.results()
         # endregion db_init
         # region db_update
-        if args.command_data == 'db_update':
+        if args.command_data == 'db-update':
             mlc = db_manager.ModuleLinksControler(
                 config=config,
                 write_all=args.write_all
@@ -1737,7 +1737,7 @@ def main():
             _ = mcc.results()
         # endregion db_update
         # region Namespace
-        if args.command_data == 'imports_tree':
+        if args.command_data == 'db-extends-tree':
             qc = db_manager.NamespaceControler(
                 config=config,
                 ns_name=args.ns_name,
@@ -1746,7 +1746,7 @@ def main():
             qc_result = qc.results()
             if qc_result:
                 print(qc_result)
-        if args.command_data == 'imports_flat':
+        if args.command_data == 'db-extends-flat':
             qc = db_manager.NamespaceControler(
                 config=config,
                 ns_flat=args.ns_flat,
@@ -1759,7 +1759,7 @@ def main():
             qc_result = qc.results()
             if qc_result:
                 print(qc_result)
-        if args.command_data == 'db_qry':
+        if args.command_data == 'db-qry':
             qc = db_manager.NamespaceControler(
                 config=config,
                 ns_link=args.ns_url
