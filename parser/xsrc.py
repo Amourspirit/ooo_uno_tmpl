@@ -534,6 +534,7 @@ class Writer(base.WriteBase):
         p_dict['quote'] = self._get_quote_flat()
         p_dict['typings'] = self._get_typings()
         p_dict['requires_typing'] = self._p_requires_typing
+        p_dict['full_imports'] = self._get_full_imports()
         p_dict.update(self._parser.get_dict_data())
 
         json_dict = {
@@ -558,8 +559,35 @@ class Writer(base.WriteBase):
         with open(self._template_file) as f:
             contents = f.read()
         return contents
-
+       
     # region get Imports
+    def _get_full_imports(self) -> Dict[str, List[str]]:
+        key = '_get_full_imports'
+        if key in self._cache:
+            return self._cache[key]
+        def get_imports() -> List[str]:
+            ims = []
+            lst_im = list(self._p_imports)
+            # sort for consistency in json
+            lst_im.sort()
+            for ns in lst_im:
+                ims.append(base.Util.get_full_import(ns=self._p_namespace, name=ns))
+            return ims
+        def get_imports_typing() -> List[str]:
+            ims = []
+            lst_im = list(self._p_imports_typing)
+            # sort for consistency in json
+            lst_im.sort()
+            for ns in lst_im:
+                ims.append(base.Util.get_full_import(ns=self._p_namespace, name=ns))
+            return ims
+        result = {
+            "general": get_imports(),
+            "typing": get_imports_typing()
+        }
+        self._cache[key] = result
+        return self._cache[key]
+    
     def _get_from_imports(self) -> List[List[str]]:
         key = '_get_from_imports'
         if key in self._cache:

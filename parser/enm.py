@@ -301,7 +301,7 @@ class ParserEnum(base.ParserBase):
                 "name": "name of enum",
                 "desc": "Description of enum",
                 "url": "Url of Enum",
-                "ns": "Namesapce of Enum"
+                "namespace": "Namesapce of Enum"
             }
         """
         try:
@@ -316,7 +316,7 @@ class ParserEnum(base.ParserBase):
                 "desc": desc,
                 "url": self._url,
                 # 'ns': self._block.url_obj.namespace_str
-                'ns': ns.namespace_str
+                'namespace': ns.namespace_str
             }
             return result
         except Exception as e:
@@ -441,7 +441,7 @@ class EnumWriter(base.WriteBase):
             return self._json_str
         p_dict = {
             "name": 'place holder',
-            "ns": 'place holder',
+            "namespace": 'place holder',
             "url": 'place holder',
             "quote": [],
             "typings": []
@@ -454,7 +454,7 @@ class EnumWriter(base.WriteBase):
             "libre_office_ver": base.APP_CONFIG.libre_office_ver,
             "name": p_dict['name'],
             "type": "enum",
-            "namespace": p_dict['ns'],
+            "namespace": p_dict['namespace'],
             "parser_args": self._parser.get_parser_args(),
             "writer_args": {},
             "data": p_dict
@@ -496,7 +496,7 @@ class EnumWriter(base.WriteBase):
         self._p_name = data['name']
         self._p_desc = data['desc']
         self._p_url = data['url']
-        self._p_namespace = data['ns']
+        self._p_namespace = data['namespace']
         self._p_data = self._parser.get_formated_data()
         if self._write_file or self._write_json:
             self._file_full_path = self._get_uno_obj_path()

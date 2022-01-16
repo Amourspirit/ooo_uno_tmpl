@@ -2423,6 +2423,23 @@ class Util:
         return ".".join(parts)
 
     @staticmethod
+    @RuleCheckAllKw(arg_info={'ns': 0, "name": 0}, rules=[rules.RuleStrNotNullOrEmpty], ftype=DecFuncEnum.METHOD_STATIC)
+    def get_full_import(ns: str, name: str) -> str:
+        """
+        Get a full import name such as ``com.sun.star.uno.XInterface``
+
+        Args:
+            ns (str): Namespace to prepend to name if it is not a full namespace
+            name (str): name or namespace
+
+        Returns:
+            str: full namesapce such as ``com.sun.star.uno.XInterface``
+        """
+        if not name.startswith('com.'):
+            return ns + '.' + name
+        return name
+
+    @staticmethod
     def get_ns_from_a_tag(a_tag: Tag) -> Union[str, None]:
         """
         Gets a namespace from an anchor tag
@@ -2466,8 +2483,8 @@ class Util:
         ts = calendar.timegm(current_GMT)
         return datetime.fromtimestamp(ts, tz=timezone.utc)
 
-    @AcceptedTypes(str, ftype=DecFuncEnum.METHOD_STATIC)
     @staticmethod
+    @AcceptedTypes(str, ftype=DecFuncEnum.METHOD_STATIC)
     def get_timestamp_from_str(input:str) -> datetime:
         """
         Converts input in the format of ``2021-12-16 11:37:50+00:00`` into datetime
