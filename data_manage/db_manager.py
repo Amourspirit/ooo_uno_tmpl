@@ -502,6 +502,22 @@ class NsImports(BaseSql):
         return query
 
     def get_ns_tree(self, namespace: str) -> NamespaceTree:
+        """
+        Gets a tree of namesapce
+
+        Args:
+            namespace (str): Input namesapce
+
+        Returns:
+            NamespaceTree: Tree Object that contains children.
+        
+        Example:
+            com.sun.star.registry.NestedRegistry
+                com.sun.star.lang.XInitialization
+                    com.sun.star.uno.XInterface
+                com.sun.star.registry.XSimpleRegistry
+                    com.sun.star.uno.XInterface
+        """
         query = self._get_qry_ns()
         ns_dict = {}
 
@@ -579,7 +595,7 @@ class NsImports(BaseSql):
                 result = tree
         return result
 
-    def get_flat_ns(self, namespace: str) -> List[Tuple[int, str]]:
+    def get_flat_ns(self, namespace: str, full:bool) -> List[Tuple[int, str]]:
 
         query = self._get_qry_ns()
         ns_dict = {}
@@ -605,7 +621,7 @@ class NsImports(BaseSql):
                 ))
             set_cache(ns=ns, lst=children)
             return children
-        
+
         def process_flat(db: SqlCtx, flats: set[Tuple[int, str]]) -> List[Tuple[int, str]]:
             # Lookup each namespaces children, perferably as unique only.
             # remove any child match from main list that is in namespace children.
@@ -680,11 +696,28 @@ class NsImports(BaseSql):
                 flats.update(c_flat)
             return process_flat(db=db, flats=flats)
 
+        def build_flat_full(db: SqlCtx, ns: str) -> List[Tuple[int, str]]:
+            flats = get_unique(db=db, ns=ns)
+            return process_flat(db=db, flats=flats)
+
+
         with SqlCtx(self.conn_str) as db:
-            result = build_flat(db=db, ns=namespace)
+            if full:
+                result = build_flat_full(db=db, ns=namespace)
+            else:
+                result = build_flat(db=db, ns=namespace)
         return result
 
     def get_ns_from_full(self, full_ns: str) -> str:
+        """
+        Gets full namespace from a full namespace
+
+        Args:
+            full_ns (str): Full namespace such as ``com.sun.star.uno.XInterface``
+
+        Returns:
+            str: namespace such as ``com.sun.star.uno``
+        """
         qry = """SELECT module_detail.namespace as ns FROM module_detail
             WHERE module_detail.id_namespace like :namespace LIMIT 1;"""
         result = ''
@@ -694,8 +727,29 @@ class NsImports(BaseSql):
                 result = row['ns']
         return result
     
-    def get_flat_imports(self, namespace: str) -> List[Tuple[str, str, str]]:
-        flats = self.get_flat_ns(namespace=namespace)
+    def get_ns_link(self, full_ns: str) -> str:
+        """
+        Gets URL for a namespace
+
+        Args:
+            full_ns (str): Full Namespace such as ``com.sun.star.uno.XInterface``
+
+        Returns:
+            str: Url link
+        """
+        qry = """SELECT module_info.url_base || '/' || module_detail.href as link
+            FROM module_detail
+            JOIN module_info on module_detail.namespace = module_info.id_module_info
+            WHERE module_detail.id_namespace like :namespace LIMIT 1;"""
+        result = ''
+        with SqlCtx(self.conn_str) as db:
+            db.cursor.execute(qry, {"namespace": full_ns})
+            for row in db.cursor:
+                result = row['link']
+        return result
+    
+    def get_flat_imports(self, namespace: str, full: bool) -> List[Tuple[str, str, str]]:
+        flats = self.get_flat_ns(namespace=namespace, full=full)
         ns = self.get_ns_from_full(full_ns = namespace)
         results = []
         for flat in flats:
@@ -703,8 +757,8 @@ class NsImports(BaseSql):
             results.append((from_, cls_, lng))
         return results
 
-    def get_extends_long(self, namespace: str) -> List[str]:
-        flats = self.get_flat_ns(namespace=namespace)
+    def get_extends_long(self, namespace: str, full: bool) -> List[str]:
+        flats = self.get_flat_ns(namespace=namespace, full=full)
         
         ns = self.get_ns_from_full(full_ns = namespace)
         results = []
@@ -714,8 +768,8 @@ class NsImports(BaseSql):
             results.append(lng)
         return results
 
-    def get_extends_short(self, namespace: str) -> List[str]:
-        flats = self.get_flat_ns(namespace=namespace)
+    def get_extends_short(self, namespace: str, full: bool) -> List[str]:
+        flats = self.get_flat_ns(namespace=namespace, full=full)
         
         ns = self.get_ns_from_full(full_ns = namespace)
         results = []
@@ -1150,16 +1204,18 @@ class DatabaseControler:
         db = SqlInitDb(self._conn.connection_str)
         db.init_db()
 
-class ImportControler:
+class NamespaceControler:
     def __init__(self, config: AppConfig, **kwargs) -> None:
         self._conn = DbConnect(config)
         self._ns_name: Union[str, None] = kwargs.get('ns_name', None)
         self._ns_flat: Union[str, None] = kwargs.get('ns_flat', None)
+        self._ns_child_only: Union[str, None] = bool(kwargs.get('ns_child_only', True))
         self._ns_flat_frm: Union[str, None] = kwargs.get('ns_flat_frm', None)
         self._ns_extends_lng: Union[str, None] = kwargs.get(
             'extends_long', None)
         self._ns_extends_short: Union[str, None] = kwargs.get(
             'extends_short', None)
+        self._link: Union[str, None] = kwargs.get('ns_link', None)
 
     def results(self):
         if self._ns_name:
@@ -1172,8 +1228,23 @@ class ImportControler:
             return self._get_extends(long=True)
         elif self._ns_extends_short:
             return self._get_extends(long=False)
+        elif self._link:
+            return self._get_link()
 
     def _process_ns_tree(self) -> str:
+        """
+        Gets Namespace Tree as str
+
+        Returns:
+            str: See Example
+        
+        Examle:
+            com.sun.star.registry.NestedRegistry
+                com.sun.star.lang.XInitialization
+                    com.sun.star.uno.XInterface
+                com.sun.star.registry.XSimpleRegistry
+                    com.sun.star.uno.XInterface
+        """
         indent_amt = 4
         qry = NsImports(self._conn.connection_str)
 
@@ -1198,7 +1269,8 @@ class ImportControler:
 
     def _get_flat_unique_ns(self) -> str:
         qry = NsImports(self._conn.connection_str)
-        n_flat = qry.get_flat_ns(namespace=self._ns_flat)
+        flat_full = not self._ns_child_only
+        n_flat = qry.get_flat_ns(namespace=self._ns_flat, full=flat_full)
         s = ''
         for i, itm in enumerate(n_flat):
             if i > 0:
@@ -1208,7 +1280,8 @@ class ImportControler:
     
     def _get_flat_frm(self) -> str:
         qry = NsImports(self._conn.connection_str)
-        froms = qry.get_flat_imports(namespace=self._ns_flat_frm)
+        full = not self._ns_child_only
+        froms = qry.get_flat_imports(namespace=self._ns_flat_frm, full=full)
         s = ''
         for i, frm in enumerate(froms):
             if i > 0:
@@ -1218,16 +1291,22 @@ class ImportControler:
     
     def _get_extends(self, long: bool) -> str:
         qry = NsImports(self._conn.connection_str)
+        full = not self._ns_child_only
         if long:
-            extends = qry.get_extends_long(namespace=self._ns_extends_lng)
+            extends = qry.get_extends_long(namespace=self._ns_extends_lng, full=full)
         else:
-            extends = qry.get_extends_short(namespace=self._ns_extends_short)
+            extends = qry.get_extends_short(namespace=self._ns_extends_short, full=full)
         s = ''
         for i, ex in enumerate(extends):
             if i > 0:
                 s += ', '
             s += ex
         return s
+    
+    def _get_link(self) -> str:
+        qry = NsImports(self._conn.connection_str)
+        return qry.get_ns_link(full_ns=self._link)
+
 class ComponentControler:
     def __init__(self, config: AppConfig, **kwargs) -> None:
         self._parser = ParseModuleJson(config=config)

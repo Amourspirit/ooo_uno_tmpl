@@ -1151,6 +1151,7 @@ def main():
     data_init = data.add_parser(name='db_init')
     data_imports_flat = data.add_parser(name='imports_flat')
     data_imports_tree = data.add_parser(name='imports_tree')
+    data_qry = data.add_parser(name='db_qry')
     
     # endregion create parsers
 
@@ -1486,6 +1487,7 @@ def main():
     # endregion make args
 
     # region data args
+
     # region    db_init
     data_init.add_argument(
         '-i', '--init-db',
@@ -1495,6 +1497,16 @@ def main():
         default=False
     )
     # endregion db_init
+
+    # region    db_qry
+    data_qry.add_argument(
+        '-u', '--url',
+        help='Get url for a full namespace.',
+        action='store',
+        dest='ns_url',
+        default=None
+    )
+    # endregion db_qry
 
     # region    db_update
     data_update.add_argument(
@@ -1545,6 +1557,20 @@ def main():
         action='store',
         dest='ns_extends_long',
         default=None
+    )
+    data_imports_flat_group.add_argument(
+        '-u', '--url',
+        help='Get url for a full namespace.',
+        action='store',
+        dest='ns_url',
+        default=None
+    )
+    data_imports_flat.add_argument(
+        '-c', '--child',
+        help='Process only direct children if namespace',
+        action='store_true',
+        dest='ns_child',
+        default=False
     )
     # endregion     Data Imports Flat
     # endregion imports
@@ -1712,20 +1738,31 @@ def main():
         # endregion db_update
         # region Namespace
         if args.command_data == 'imports_tree':
-            qc = db_manager.ImportControler(
+            qc = db_manager.NamespaceControler(
                 config=config,
                 ns_name=args.ns_name,
+                ns_child_only=args.ns_child
             )
             qc_result = qc.results()
             if qc_result:
                 print(qc_result)
         if args.command_data == 'imports_flat':
-            qc = db_manager.ImportControler(
+            qc = db_manager.NamespaceControler(
                 config=config,
                 ns_flat=args.ns_flat,
                 ns_flat_frm=args.ns_from_imports,
                 extends_long=args.ns_extends_long,
-                extends_short=args.ns_extends_short
+                extends_short=args.ns_extends_short,
+                ns_child_only=args.ns_child,
+                ns_link=args.ns_url
+            )
+            qc_result = qc.results()
+            if qc_result:
+                print(qc_result)
+        if args.command_data == 'db_qry':
+            qc = db_manager.NamespaceControler(
+                config=config,
+                ns_link=args.ns_url
             )
             qc_result = qc.results()
             if qc_result:
