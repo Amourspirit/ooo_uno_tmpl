@@ -10,6 +10,7 @@ class BaseService(BaseJson):
         super().__init__(*args, **kwargs)
 
     def _hydrate_data(self, json_data: dict):
+        self._validate_data(json_data)
         data: Dict[str, object] = json_data['data']
 
         def set_data(_key: str, a_name=None):

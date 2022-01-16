@@ -9,7 +9,7 @@ class BaseTypeDef(BaseJson):
         super().__init__(*args, **kwargs)
 
     def _hydrate_data(self, json_data: dict):
-        # print('# _hydrate_data()')
+        self._validate_data(json_data)
         data = json_data['data']
 
         def set_data(_key: str, a_name=None):

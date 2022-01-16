@@ -10,7 +10,7 @@ class BaseConst(BaseJson):
         # self._linfo('hello')
 
     def _hydrate_data(self, json_data: dict):
-        # print('# _hydrate_data()')
+        self._validate_data(json_data)
         data: Dict[str, object] = json_data['data']
 
         def set_data(_key: str, a_name=None):

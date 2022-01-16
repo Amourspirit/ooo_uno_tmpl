@@ -1,5 +1,4 @@
 # coding: utf-8
-import json
 from typing import Dict, Tuple, List
 from _base_json import BaseJson
 from verr import Version
@@ -10,6 +9,7 @@ class BaseSingleton(BaseJson):
         super().__init__(*args, **kwargs)
 
     def _hydrate_data(self, json_data: dict):
+        self._validate_data(json_data)
         data: Dict[str, object] = json_data['data']
 
         def set_data(_key: str, a_name=None):
@@ -78,7 +78,7 @@ class BaseSingleton(BaseJson):
 
         if not data['name']:
             raise Exception('Invalid Data: name attribute is not valid')
-        min_ver = Version(0, 1, 9)
+        min_ver = Version(0, 1, 16)
         ver = Version.parse(data.get('version', None))
         if ver < min_ver:
             raise Exception(
