@@ -8,6 +8,7 @@ Reads Component json files and writes info in a database.
 from abc import abstractmethod
 from dataclasses import dataclass, asdict, field
 from enum import unique
+from optparse import Option
 import os
 import glob
 import json
@@ -32,7 +33,16 @@ class Extend:
     fk_component_id: str
     id_extend: Union[int, None] = None
 
+@dataclass(frozen=True, eq=True)
+class NamespaceChild:
+    namespace: str
+    parent: str
+    sort: int = -1
 
+    def __lt__(self, other: object):
+        if not isinstance(other, NamespaceChild):
+            return NotImplemented
+        return self.sort < other.sort
 @dataclass(frozen=True, eq=True)
 class FullImport:
     namespace: str
@@ -608,7 +618,7 @@ class NsImports(BaseSql):
     # endregion     Tree
 
 
-    def get_flat_ns(self, namespace: str, full:bool) -> List[Tuple[int, str]]:
+    def get_flat_ns(self, namespace: str, full:bool) -> List[NamespaceChild]:
         """
         Gets direct extends of an object or the extends of 2nd level children.
 
@@ -654,26 +664,27 @@ class NsImports(BaseSql):
         def is_cache(ns: str) -> bool:
             return ns in ns_dict
         
-        def get_cache(ns: str) -> List[Tuple[int, str]]:
+        def get_cache(ns: str) -> List[NamespaceChild]:
             return ns_dict[ns]
         
-        def set_cache(ns: str, lst: List[Tuple[int, str]]) -> None:
+        def set_cache(ns: str, lst: List[NamespaceChild]) -> None:
             ns_dict[ns] = lst
 
-        def get_ns_children(db: SqlCtx, ns: str) -> List[Tuple[int, str]]:
+        def get_ns_children(db: SqlCtx, ns: str) -> List[NamespaceChild]:
             if is_cache(ns):
                 return [itm for itm in get_cache(ns)]
             db.cursor.execute(query, {"namespace": ns})
             children = []
             for row in db.cursor:
-                children.append((
-                    row['sort'],
-                    row['ns']
+                children.append(NamespaceChild(
+                    namespace=row['ns'],
+                    parent=ns,
+                    sort=row['sort']
                 ))
             set_cache(ns=ns, lst=children)
             return children
 
-        def process_flat(db: SqlCtx, flats: set[Tuple[int, str]]) -> List[Tuple[int, str]]:
+        def process_flat(db: SqlCtx, flats: Set[NamespaceChild]) -> List[NamespaceChild]:
             # Lookup each namespaces children, perferably as unique only.
             # remove any child match from main list that is in namespace children.
             #
@@ -681,17 +692,17 @@ class NsImports(BaseSql):
             #
             # Keep in mind that a processed namespace could be removed by a match later down the list.
             # This means the list of done items needs to be checked and if match, removed.
-            processed: Set[Tuple[int, str]] = set()
-            flats_set: Set[Tuple[int, str]] = set(list(flats))
+            processed: Set[NamespaceChild] = set()
+            flats_set: Set[NamespaceChild] = set(list(flats))
             
             for flat in flats:
-                children = get_ns_children(db=db, ns=flat[1])
+                children = get_ns_children(db=db, ns=flat.namespace)
                 for child in children:
                     if child in processed:
                         continue
                     if child in flats_set:
                         flats_set.remove(child)
-                    flat_children = get_unique(db=db, ns=child[1])
+                    flat_children = get_unique(db=db, ns=child.namespace)
                     for flat_child in flat_children:
                         if flat_child in processed:
                             continue
@@ -704,18 +715,17 @@ class NsImports(BaseSql):
             lst.sort()
             return lst
                 
-        
-        def get_unique(db: SqlCtx, ns: str) -> set[Tuple[int, str]]:
+        def get_unique(db: SqlCtx, ns: str) -> Set[NamespaceChild]:
             que = queue.Queue()
-            flat_set: Set[Tuple[int, str]] = set()
+            flat_set: Set[NamespaceChild] = set()
             def recurse(q: queue.Queue) -> None:
                 # q contain siblings that have been aded to a parent already
                 # now each sibling need to find it children
                 sibling_que = queue.Queue()
                 while not q.empty():
                     # sibling is not a parent
-                    parent: Set[Tuple[int, str]] = q.get()
-                    children = get_ns_children(db=db, ns=parent[1])
+                    parent: NamespaceChild = q.get()
+                    children = get_ns_children(db=db, ns=parent.namespace)
                     for child in children:
                         if child in flat_set:
                             continue
@@ -734,8 +744,8 @@ class NsImports(BaseSql):
             # results.sort()
             return flat_set
 
-        def build_flat(db: SqlCtx, ns: str) -> List[Tuple[int, str]]:
-            flats = set()
+        def build_flat(db: SqlCtx, ns: str) -> List[NamespaceChild]:
+            flats: Set[NamespaceChild] = set()
             children: List[str] = []
             # getting child namespaces first leaves the direct
             # children out of results. This is perfered.
@@ -747,8 +757,8 @@ class NsImports(BaseSql):
                 flats.update(c_flat)
             return process_flat(db=db, flats=flats)
 
-        def build_flat_full(db: SqlCtx, ns: str) -> List[Tuple[int, str]]:
-            flats = get_unique(db=db, ns=ns)
+        def build_flat_full(db: SqlCtx, ns: str) -> List[NamespaceChild]:
+            flats: Set[NamespaceChild] = get_unique(db=db, ns=ns)
             return process_flat(db=db, flats=flats)
 
 
@@ -799,13 +809,14 @@ class NsImports(BaseSql):
                 result = row['link']
         return result
     
-    def get_flat_imports(self, namespace: str, full: bool) -> List[Tuple[str, str, str]]:
+    def get_flat_imports(self, namespace: str, full: bool) -> Tuple[str, str, str]:
         # if importing from children. The children imports need to be relative this namespace
-        flats = self.get_flat_ns(namespace=namespace, full=full)
+        flats: List[NamespaceChild] = self.get_flat_ns(
+            namespace=namespace, full=full)
         ns = self.get_ns_from_full(full_ns = namespace)
         results = []
         for flat in flats:
-            from_, cls_, lng = RelInfo.get_rel_import_long(in_str=flat[1], ns=ns)
+            from_, cls_, lng = RelInfo.get_rel_import_long(in_str=flat.namespace, ns=ns)
             results.append((from_, cls_, lng))
         return results
 
@@ -816,7 +827,7 @@ class NsImports(BaseSql):
         results = []
         for flat in flats:
             lng = RelInfo.get_rel_import_long_name(
-                in_str=flat[1], ns=ns)
+                in_str=flat.namespace, ns=ns)
             results.append(lng)
         return results
 
@@ -827,7 +838,7 @@ class NsImports(BaseSql):
         results = []
         for flat in flats:
             lng = RelInfo.get_rel_import_short_name(
-                in_str=flat[1], ns=ns)
+                in_str=flat.namespace, ns=ns)
             results.append(lng)
         return results
     # endregion Flat/ Flat Related
@@ -936,48 +947,24 @@ class NsImports(BaseSql):
         # get all extends imports
         # if Typing get all typing import
         # ignore any typing import that are imported with extends imports
-        qry_fi = """SELECT full_import.id_full_import, full_import.namespace as ns, full_import.requires_typing,
-            full_import.fk_component_id, module_detail.sort as sort
+        qry_fi = """SELECT full_import.id_full_import, full_import.namespace as ns, full_import.requires_typing, full_import.fk_component_id, module_detail.sort as sort
             FROM full_import
             LEFT JOIN module_detail on module_detail.id_namespace = full_import.namespace
-            WHERE full_import.namespace in (SELECT extend.namespace
-                FROM extend
-                WHERE extend.fk_component_id like :parent_ns
-                AND extend.namespace like :child_ns)
+            WHERE full_import.namespace like :child_ns
+            and full_import.fk_component_id = :parent_ns
             LIMIT 1;"""
-        def get_full_import(db:SqlCtx, child_ns: str) -> FullImport:
+        def get_full_import(db:SqlCtx, ns_child: NamespaceChild) -> FullImport:
 
-
-            # 1. get child import name
-            # full_ns   = 'com.sun.star.form.component.RichTextControl'
-            # child_ns  = 'com.sun.star.awt.UnoControlModel'
-            #   SELECT * FROM full_import WHERE full_import.fk_component_id like 'com.sun.star.form.component.RichTextControl'
-            #       id_full_import  namespace                               requires_typing fk_component_id
-            #       4370            com.sun.star.awt.UnoControlEditModel    0               com.sun.star.form.component.RichTextControl
-            #       4371            com.sun.star.form.FormControlModel      0               com.sun.star.form.component.RichTextControl
-            #       4372            com.sun.star.text.TextRange             0               com.sun.star.form.component.RichTextControl
-            # 2. get child children
-            #       SELECT * FROM full_import 
-            #           WHERE full_import.namespace like 'com.sun.star.awt.UnoControlModel'
-            #               AND full_import.fk_component_id in ('com.sun.star.awt.UnoControlEditModel', 'com.sun.star.awt.FontDescriptor', 'com.sun.star.style.VerticalAlignment', 'com.sun.star.util.Color')
-            #       id_full_import  namespace                               requires_typing fk_component_id
-            #       1830            com.sun.star.awt.UnoControlModel        0               com.sun.star.awt.UnoControlEditModel
-            
-            
-            args = {"parent_ns": full_ns, "child_ns": child_ns}
+            args = {"parent_ns": ns_child.parent, "child_ns": ns_child.namespace}
             fi = None
             db.cursor.execute(qry_fi, args)
             for row in db.cursor:
-                namesapce: str = row['ns']
-                id_full_import: int = int(row.get['id_full_import'])
-                requires_typing: bool = bool(row['requires_typing'])
-                sort_ = int(row['sort'])
                 fi = FullImport(
-                    namespace=namesapce,
-                    requires_typing=requires_typing,
-                    fk_component_id=full_ns,
-                    sort=sort_,
-                    id_full_import=id_full_import
+                    namespace=row['ns'],
+                    requires_typing=bool(row['requires_typing']),
+                    fk_component_id=row['fk_component_id'],
+                    sort=int(row['sort']),
+                    id_full_import=int(row['id_full_import'])
                 )
             if fi is None:
                 msg = f"{self.__class__.__name__}.get_imports_child().get_full_import() Failed to get Full Inport data from database"
@@ -989,7 +976,7 @@ class NsImports(BaseSql):
         with SqlCtx(self.conn_str) as db:
             for flat in flats:
                 ims.append(get_full_import(
-                    db=db, child_ns=flat[1]
+                    db=db, ns_child=flat
                 ))
         ims.sort()
         return ims
@@ -1503,7 +1490,7 @@ class NamespaceControler:
         for i, itm in enumerate(n_flat):
             if i > 0:
                 s += ', '
-            s += itm[1]
+            s += itm.namespace
         return s
     
     def _get_flat_frm(self) -> str:
