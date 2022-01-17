@@ -36,7 +36,6 @@ class Extend:
 @dataclass(frozen=True, eq=True)
 class NamespaceChild:
     namespace: str
-    parent: str
     sort: int = -1
 
     def __lt__(self, other: object):
@@ -678,7 +677,6 @@ class NsImports(BaseSql):
             for row in db.cursor:
                 children.append(NamespaceChild(
                     namespace=row['ns'],
-                    parent=ns,
                     sort=row['sort']
                 ))
             set_cache(ns=ns, lst=children)
@@ -943,43 +941,10 @@ class NsImports(BaseSql):
         """
         return self._get_imports(full_ns=full_ns, children=False, typing=typing)
     
-    def get_imports_child(self, full_ns: str) -> List[FullImport]:
-        # get all extends imports
-        # if Typing get all typing import
-        # ignore any typing import that are imported with extends imports
-        qry_fi = """SELECT full_import.id_full_import, full_import.namespace as ns, full_import.requires_typing, full_import.fk_component_id, module_detail.sort as sort
-            FROM full_import
-            LEFT JOIN module_detail on module_detail.id_namespace = full_import.namespace
-            WHERE full_import.namespace like :child_ns
-            and full_import.fk_component_id = :parent_ns
-            LIMIT 1;"""
-        def get_full_import(db:SqlCtx, ns_child: NamespaceChild) -> FullImport:
-
-            args = {"parent_ns": ns_child.parent, "child_ns": ns_child.namespace}
-            fi = None
-            db.cursor.execute(qry_fi, args)
-            for row in db.cursor:
-                fi = FullImport(
-                    namespace=row['ns'],
-                    requires_typing=bool(row['requires_typing']),
-                    fk_component_id=row['fk_component_id'],
-                    sort=int(row['sort']),
-                    id_full_import=int(row['id_full_import'])
-                )
-            if fi is None:
-                msg = f"{self.__class__.__name__}.get_imports_child().get_full_import() Failed to get Full Inport data from database"
-                raise Exception(msg)
-            return fi
-
-        flats = self.get_flat_ns(namespace=full_ns, full=False)
-        ims = []
-        with SqlCtx(self.conn_str) as db:
-            for flat in flats:
-                ims.append(get_full_import(
-                    db=db, ns_child=flat
-                ))
-        ims.sort()
-        return ims
+    def get_imports_child(self, full_ns: str) -> List[NamespaceChild]:
+        flats = self.get_flat_ns(namespace=full_ns, full=False)       
+        flats.sort()
+        return flats
     
     # endregion IMPORTS
 # endregion Query
@@ -1444,6 +1409,8 @@ class NamespaceControler:
         elif self._link:
             return self._get_link()
         elif self._ns_full_import:
+            if self._ns_full_import_child:
+                return self._get_imports_child()
             return self._get_imports()
 
     def _process_ns_tree(self) -> str:
@@ -1522,6 +1489,50 @@ class NamespaceControler:
         qry = NsImports(self._conn.connection_str)
         return qry.get_ns_link(full_ns=self._link)
 
+    def _get_imports_child(self) -> str:
+        qry = NsImports(self._conn.connection_str)
+
+        def get_full_imports_str(imports: List[NamespaceChild]) -> str:
+            s = ''
+            for i, im in enumerate(imports):
+                if i > 0:
+                    s += '\n'
+                s += im.namespace
+            return s
+
+        def get_from_imports_short(imports: List[NamespaceChild]) -> str:
+            ns = self._ns_full_import.rsplit(sep='.', maxsplit=1)[0]
+            s = ''
+            for i, im in enumerate(imports):
+                if i > 0:
+                    s += '\n'
+                rel = RelInfo.get_rel_import(
+                    in_str=im.namespace, ns=ns)
+
+                s += f"from {rel[0]} import {rel[1]}"
+            return s
+
+        def get_from_imports_long(imports: List[NamespaceChild]) -> str:
+            ns = self._ns_full_import.rsplit(sep='.', maxsplit=1)[0]
+            s = ''
+            for i, im in enumerate(imports):
+                if i > 0:
+                    s += '\n'
+                rel = RelInfo.get_rel_import_long(
+                    in_str=im.namespace, ns=ns)
+
+                s += f"from {rel[0]} import {rel[1]} as {rel[2]}"
+            return s
+        ims = qry.get_imports_child(
+            full_ns=self._ns_full_import)
+        if len(ims) == 0:
+            return ''
+        if self._ns_full_import_from:
+            if self._ns_full_import_from_long:
+                return get_from_imports_long(imports=ims)
+            return get_from_imports_short(imports=ims)
+        return get_full_imports_str(imports=ims)
+
     def _get_imports(self) -> str:
         qry = NsImports(self._conn.connection_str)
         def get_full_imports_str(imports: List[FullImport]) -> str:
@@ -1554,12 +1565,8 @@ class NamespaceControler:
 
                 s += f"from {rel[0]} import {rel[1]} as {rel[2]}"
             return s
-        if self._ns_full_import_child:
-            ims = qry.get_imports_child(
-                full_ns=self._ns_full_import)
-        else:
-            ims = qry.get_imports(
-                full_ns=self._ns_full_import, typing=self._ns_full_import_typing)
+        ims = qry.get_imports(
+            full_ns=self._ns_full_import, typing=self._ns_full_import_typing)
         if len(ims) == 0:
             return ''
         if self._ns_full_import_from:
