@@ -39,6 +39,12 @@ class FullImport:
     requires_typing: bool
     fk_component_id: str
     id_full_import: Union[int, None] = None
+    sort: int = -1
+
+    def __lt__(self, other: object):
+        if not isinstance(other, FullImport):
+            return NotImplemented
+        return self.sort < other.sort
 @dataclass
 class NamespaceTree:
     namespace: str
@@ -603,7 +609,31 @@ class NsImports(BaseSql):
 
 
     def get_flat_ns(self, namespace: str, full:bool) -> List[Tuple[int, str]]:
+        """
+        Gets direct extends of an object or the extends of 2nd level children.
 
+        Args:
+            namespace (str): Names of geit extends of.
+            full (bool): If ``True`` gets extends for 1st level inherits;
+                Otherwise, Gets extends for 2nd level children.
+
+        Returns:
+            List[Tuple[int, str]]: List of tuple containing entries for sort and then namesapce
+        
+        Notes:
+            Importing com.sun.star.awt.grid.UnoControlGridModel as full=True returns the following namespaces:
+                com.sun.star.awt.UnoControlModel
+            Importing as full=False:
+                com.sun.star.awt.UnoControlDialogElement,
+                com.sun.star.awt.XControlModel,
+                com.sun.star.beans.XMultiPropertySet,
+                com.sun.star.beans.XPropertySet,
+                com.sun.star.io.XPersistObject,
+                com.sun.star.lang.XComponent,
+                com.sun.star.util.XCloneable
+                
+                See Model `here <https://tinyurl.com/ycu65ytj>`_
+        """
         query = self._get_qry_ns()
         ns_dict = {}
         
@@ -756,7 +786,7 @@ class NsImports(BaseSql):
         return result
     
     def get_flat_imports(self, namespace: str, full: bool) -> List[Tuple[str, str, str]]:
-        # if importing form children. The children imports need to be relative this namespace
+        # if importing from children. The children imports need to be relative this namespace
         flats = self.get_flat_ns(namespace=namespace, full=full)
         ns = self.get_ns_from_full(full_ns = namespace)
         results = []
@@ -800,34 +830,96 @@ class NsImports(BaseSql):
         Returns:
             str: query string
         """
-        qry = 'SELECT full_import.id_full_import, full_import.namespace, full_import.requires_typing FROM full_import WHERE full_import.fk_component_id like :namespace'
+        qry = """SELECT full_import.id_full_import, full_import.namespace as ns, full_import.requires_typing as requires_typing, module_detail.sort as sort
+            FROM full_import
+            LEFT JOIN module_detail on module_detail.id_namespace = full_import.namespace
+            WHERE full_import.fk_component_id like :namespace"""
         if typing is True:
             qry += ' AND full_import.requires_typing = :requires_typing'
         qry += ';'
         return qry
+    
+    def _get_imports_children_qry(self, typing:bool) -> str:
+        """
+        Gets Query string for querying full_import Table for all 2nd level import from given namesapce
+
+        Args:
+            typing (bool): If True then requires_typing parameter is included in query string
+
+        Returns:
+            str: query string
+        """
+        qry = """SELECT DISTINCT full_import.namespace as ns, full_import.requires_typing as requires_typing, module_detail.sort as sort
+            FROM full_import
+            LEFT JOIN module_detail on module_detail.id_namespace = full_import.namespace
+            WHERE full_import.fk_component_id in (SELECT full_import.namespace FROM full_import
+                WHERE full_import.fk_component_id like :namespace)"""
+        if typing is True:
+            qry += ' AND full_import.requires_typing = :requires_typing'
+        qry += ' ORDER by sort;'
+        return qry
     # endregion Query
 
-    def get_imports(self, full_ns: str, typing: Optional[bool] = None) -> List[FullImport]:
+    def _get_imports(self, full_ns: str, children:bool, typing: Optional[bool] = None) -> List[FullImport]:
+        """
+        Gets imports for a given namespace.
+
+        Args:
+            full_ns (str): Namespace to get imports for
+            children (bool): If True then 2nd level childre are imported; Otherwise 1st level.
+            typing (Optional[bool], optional): If ``True`` only imports that requre typing are returned.
+                If ``False`` only imports that do not requrine typing are retruned.
+                If None all imports for ``full_ns`` are returned. Defaults to ``None``.
+
+        Returns:
+            List[FullImport]: Import Information
+        """
         args = {"namespace": full_ns}
         if typing is None:
-            qry_str = self._get_imports_qry(False)
+            if children:
+                qry_str = self._get_imports_children_qry(False)
+            else:
+                qry_str = self._get_imports_qry(False)
         else:
-            qry_str = self._get_imports_qry(True)
+            if children:
+                qry_str = self._get_imports_children_qry(True)
+            else:
+                qry_str = self._get_imports_qry(True)
             args['requires_typing'] = 1 if typing is True else 0
         results = []
         with SqlCtx(self.conn_str) as db:
             db.cursor.execute(qry_str, args)
             for row in db.cursor:
-                namesapce: str = row['namespace']
-                id_full_import: int = row['id_full_import']
+                namesapce: str = row['ns']
+                id_full_import: int = -1 if children else row.get['id_full_import']
                 requires_typing: bool = bool(row['requires_typing'])
+                sort_ = int(row['sort'])
                 results.append(FullImport(
                     namespace=namesapce,
                     requires_typing=requires_typing,
                     fk_component_id=full_ns,
+                    sort=sort_,
                     id_full_import=id_full_import
                 ))
+        results.sort()
         return results
+    def get_imports(self, full_ns: str, typing: Optional[bool] = None) -> List[FullImport]:
+        """
+        Gets imports for a given namespace.
+
+        Args:
+            full_ns (str): Namespace to get imports for
+            typing (Optional[bool], optional): If ``True`` only imports that requre typing are returned.
+                If ``False`` only imports that do not requrine typing are retruned.
+                If None all imports for ``full_ns`` are returned. Defaults to ``None``.
+
+        Returns:
+            List[FullImport]: Import Information
+        """
+        return self._get_imports(full_ns=full_ns, children=False, typing=typing)
+    
+    def get_imports_from_children(self, full_ns: str, typing: Optional[bool] = None) -> List[FullImport]:
+        return self._get_imports(full_ns=full_ns, children=True, typing=typing)
     
     # endregion IMPORTS
 # endregion Query
@@ -1271,6 +1363,12 @@ class NamespaceControler:
         self._ns_full_import: Union[str, None] = kwargs.get('ns_full_import', None)
         self._ns_full_import_typing: Union[bool, None] = kwargs.get(
             'ns_full_import_typing', None)
+        self._ns_full_import_child: bool = bool(
+            kwargs.get('ns_full_import_child', False))
+        self._ns_full_import_from: bool = bool(
+            kwargs.get('ns_full_import_from', False))
+        self._ns_full_import_from_long: bool = bool(
+            kwargs.get('ns_full_import_from_long', False))
 
     def results(self):
         if self._ns_name:
@@ -1366,13 +1464,49 @@ class NamespaceControler:
 
     def _get_imports(self) -> str:
         qry = NsImports(self._conn.connection_str)
-        ims = qry.get_imports(full_ns=self._ns_full_import, typing=self._ns_full_import_typing)
-        s = ''
-        for i, im in enumerate(ims):
-            if i > 0:
-                s += '\n'
-            s += im.namespace
-        return s
+        def get_full_imports_str(imports: List[FullImport]) -> str:
+            s = ''
+            for i, im in enumerate(imports):
+                if i > 0:
+                    s += '\n'
+                s += im.namespace
+            return s
+        def get_from_imports_short(imports: List[FullImport]) -> str:
+            ns = self._ns_full_import.rsplit(sep='.', maxsplit=1)[0]
+            s = ''
+            for i, im in enumerate(imports):
+                if i > 0:
+                    s += '\n'
+                rel = RelInfo.get_rel_import(
+                    in_str=im.namespace, ns=ns)
+                    
+                s += f"from {rel[0]} import {rel[1]}"
+            return s
+
+        def get_from_imports_long(imports: List[FullImport]) -> str:
+            ns = self._ns_full_import.rsplit(sep='.', maxsplit=1)[0]
+            s = ''
+            for i, im in enumerate(imports):
+                if i > 0:
+                    s += '\n'
+                rel = RelInfo.get_rel_import_long(
+                    in_str=im.namespace, ns=ns)
+
+                s += f"from {rel[0]} import {rel[1]} as {rel[2]}"
+            return s
+        if self._ns_full_import_child:
+            ims = qry.get_imports_from_children(
+                full_ns=self._ns_full_import, typing=self._ns_full_import_typing)
+        else:
+            ims = qry.get_imports(
+                full_ns=self._ns_full_import, typing=self._ns_full_import_typing)
+        if len(ims) == 0:
+            return ''
+        if self._ns_full_import_from:
+            if self._ns_full_import_from_long:
+                return get_from_imports_long(imports=ims)
+            return get_from_imports_short(imports=ims)
+        return get_full_imports_str(imports=ims)
 
 class ComponentControler:
     def __init__(self, config: AppConfig, **kwargs) -> None:

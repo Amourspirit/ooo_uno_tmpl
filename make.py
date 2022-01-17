@@ -1575,22 +1575,45 @@ def main():
     )
     # endregion     Data Extends Flat
     # region        Data Imports
-    data_imports.add_argument(
+    data_imports_group = data_imports.add_argument_group()
+    # data_imports_group_rel = data_imports_group.add_argument_group()
+    data_imports_group.add_argument(
         '-n', '--name-space',
         help='Genereate Namespace Data for a given namespace object',
         action='store',
         dest='ns_import_name',
         default=None
     )
-    data_imports_group = data_imports.add_mutually_exclusive_group()
     data_imports_group.add_argument(
+        '-c', '--child',
+        help='Process only direct children if namespace',
+        action='store_true',
+        dest='ns_import_child',
+        default=False
+    )
+    data_imports_group.add_argument(
+        '-r', '--as-rel-from',
+        help='Get as realitive from import strings',
+        action='store_true',
+        dest='ns_import_from',
+        default=False
+    )
+    data_imports_group.add_argument(
+        '-l', '--as-long',
+        help='Get as realitive im',
+        action='store_true',
+        dest='ns_import_from_long',
+        default=False
+    )
+    exclusive_data_imports_group = data_imports_group.add_mutually_exclusive_group()
+    exclusive_data_imports_group.add_argument(
         '-t', '--typing',
         help='Only imports that require typing',
         action='store_true',
         dest='import_typing',
         default=False
     )
-    data_imports_group.add_argument(
+    exclusive_data_imports_group.add_argument(
         '-f', '--no-typing',
         help='Only imports that do NOT require typing',
         action='store_true',
@@ -1801,7 +1824,10 @@ def main():
             qc = db_manager.NamespaceControler(
                 config=config,
                 ns_full_import=args.ns_import_name,
-                ns_full_import_typing=require_typing
+                ns_full_import_child=args.ns_import_child,
+                ns_full_import_typing=require_typing,
+                ns_full_import_from=args.ns_import_from,
+                ns_full_import_from_long=args.ns_import_from_long
             )
             qc_result = qc.results()
             if qc_result:
