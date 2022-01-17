@@ -1078,8 +1078,8 @@ def _main():
     ns = 'com.sun.star.form.component.RichTextControl'
     # ns = 'com.sun.star.form.DataAwareControlModel'
     # ns = 'com.sun.star.text.TextRange'
-    sys.argv.extend(['-v', '--log-file', 'debug.log', 'data', 'imports_flat',
-                    '-i', ns])
+    sys.argv.extend(['-v', '--log-file', 'debug.log', 'data', 'db-imports',
+                    '--child', '-n', ns])
     main()
 
 def _touch():
@@ -1831,6 +1831,6 @@ def main():
 
 if __name__ == '__main__':
     # _touch()
-    main()
+    _main()
 
 # endregion Main

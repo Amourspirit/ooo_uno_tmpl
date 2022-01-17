@@ -932,8 +932,67 @@ class NsImports(BaseSql):
         """
         return self._get_imports(full_ns=full_ns, children=False, typing=typing)
     
-    def get_imports_from_children(self, full_ns: str, typing: Optional[bool] = None) -> List[FullImport]:
-        return self._get_imports(full_ns=full_ns, children=True, typing=typing)
+    def get_imports_child(self, full_ns: str) -> List[FullImport]:
+        # get all extends imports
+        # if Typing get all typing import
+        # ignore any typing import that are imported with extends imports
+        qry_fi = """SELECT full_import.id_full_import, full_import.namespace as ns, full_import.requires_typing,
+            full_import.fk_component_id, module_detail.sort as sort
+            FROM full_import
+            LEFT JOIN module_detail on module_detail.id_namespace = full_import.namespace
+            WHERE full_import.namespace in (SELECT extend.namespace
+                FROM extend
+                WHERE extend.fk_component_id like :parent_ns
+                AND extend.namespace like :child_ns)
+            LIMIT 1;"""
+        def get_full_import(db:SqlCtx, child_ns: str) -> FullImport:
+
+
+            # 1. get child import name
+            # full_ns   = 'com.sun.star.form.component.RichTextControl'
+            # child_ns  = 'com.sun.star.awt.UnoControlModel'
+            #   SELECT * FROM full_import WHERE full_import.fk_component_id like 'com.sun.star.form.component.RichTextControl'
+            #       id_full_import  namespace                               requires_typing fk_component_id
+            #       4370            com.sun.star.awt.UnoControlEditModel    0               com.sun.star.form.component.RichTextControl
+            #       4371            com.sun.star.form.FormControlModel      0               com.sun.star.form.component.RichTextControl
+            #       4372            com.sun.star.text.TextRange             0               com.sun.star.form.component.RichTextControl
+            # 2. get child children
+            #       SELECT * FROM full_import 
+            #           WHERE full_import.namespace like 'com.sun.star.awt.UnoControlModel'
+            #               AND full_import.fk_component_id in ('com.sun.star.awt.UnoControlEditModel', 'com.sun.star.awt.FontDescriptor', 'com.sun.star.style.VerticalAlignment', 'com.sun.star.util.Color')
+            #       id_full_import  namespace                               requires_typing fk_component_id
+            #       1830            com.sun.star.awt.UnoControlModel        0               com.sun.star.awt.UnoControlEditModel
+            
+            
+            args = {"parent_ns": full_ns, "child_ns": child_ns}
+            fi = None
+            db.cursor.execute(qry_fi, args)
+            for row in db.cursor:
+                namesapce: str = row['ns']
+                id_full_import: int = int(row.get['id_full_import'])
+                requires_typing: bool = bool(row['requires_typing'])
+                sort_ = int(row['sort'])
+                fi = FullImport(
+                    namespace=namesapce,
+                    requires_typing=requires_typing,
+                    fk_component_id=full_ns,
+                    sort=sort_,
+                    id_full_import=id_full_import
+                )
+            if fi is None:
+                msg = f"{self.__class__.__name__}.get_imports_child().get_full_import() Failed to get Full Inport data from database"
+                raise Exception(msg)
+            return fi
+
+        flats = self.get_flat_ns(namespace=full_ns, full=False)
+        ims = []
+        with SqlCtx(self.conn_str) as db:
+            for flat in flats:
+                ims.append(get_full_import(
+                    db=db, child_ns=flat[1]
+                ))
+        ims.sort()
+        return ims
     
     # endregion IMPORTS
 # endregion Query
@@ -1509,8 +1568,8 @@ class NamespaceControler:
                 s += f"from {rel[0]} import {rel[1]} as {rel[2]}"
             return s
         if self._ns_full_import_child:
-            ims = qry.get_imports_from_children(
-                full_ns=self._ns_full_import, typing=self._ns_full_import_typing)
+            ims = qry.get_imports_child(
+                full_ns=self._ns_full_import)
         else:
             ims = qry.get_imports(
                 full_ns=self._ns_full_import, typing=self._ns_full_import_typing)
