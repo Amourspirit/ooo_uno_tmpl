@@ -621,18 +621,32 @@ class NsImports(BaseSql):
             List[Tuple[int, str]]: List of tuple containing entries for sort and then namesapce
         
         Notes:
-            Importing com.sun.star.awt.grid.UnoControlGridModel as full=True returns the following namespaces:
-                com.sun.star.awt.UnoControlModel
-            Importing as full=False:
-                com.sun.star.awt.UnoControlDialogElement,
-                com.sun.star.awt.XControlModel,
-                com.sun.star.beans.XMultiPropertySet,
-                com.sun.star.beans.XPropertySet,
-                com.sun.star.io.XPersistObject,
-                com.sun.star.lang.XComponent,
-                com.sun.star.util.XCloneable
-                
-                See Model `here <https://tinyurl.com/ycu65ytj>`_
+            On second level (``full=False``) results, there is a filter applied that removes duplicate inherits.
+            Only a pure list of inherits are returned. For instance XInterface would not be imported more thant onece.
+            This is on purpose to remove any potential pythpon MRO issues.
+        
+            Importing com.sun.star.form.component.RichTextControl as ``full=True`` returns the following namespaces:
+                com.sun.star.awt.UnoControlEditModel,
+                com.sun.star.form.FormControlModel,
+                com.sun.star.text.TextRange
+            Importing as ``full=False``:
+                com.sun.star.awt.UnoControlModel,
+                com.sun.star.beans.XFastPropertySet,
+                com.sun.star.beans.XPropertyState,
+                com.sun.star.container.XContentEnumerationAccess,
+                com.sun.star.form.FormComponent,
+                com.sun.star.style.CharacterProperties,
+                com.sun.star.style.CharacterPropertiesAsian,
+                com.sun.star.style.CharacterPropertiesComplex,
+                com.sun.star.style.ParagraphProperties,
+                com.sun.star.style.ParagraphPropertiesAsian,
+                com.sun.star.style.ParagraphPropertiesComplex,
+                com.sun.star.text.XTextRange
+            
+            Notice that in the model there are a total of 15 child imports. This method returns 12 becuase duplicates
+            are merged and/or removed.
+            
+            See Model `here <https://tinyurl.com/yb3eu5ng>`_
         """
         query = self._get_qry_ns()
         ns_dict = {}

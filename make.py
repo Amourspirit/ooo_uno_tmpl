@@ -1559,13 +1559,6 @@ def main():
         dest='ns_extends_long',
         default=None
     )
-    data_imports_flat_group.add_argument(
-        '-u', '--url',
-        help='Get url for a full namespace.',
-        action='store',
-        dest='ns_url',
-        default=None
-    )
     data_extends_flat.add_argument(
         '-c', '--child',
         help='Process only direct children if namespace',
@@ -1801,8 +1794,7 @@ def main():
                 ns_flat_frm=args.ns_from_imports,
                 extends_long=args.ns_extends_long,
                 extends_short=args.ns_extends_short,
-                ns_child_only=args.ns_child,
-                ns_link=args.ns_url
+                ns_child_only=args.ns_child
             )
             qc_result = qc.results()
             if qc_result:
