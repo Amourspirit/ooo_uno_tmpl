@@ -123,8 +123,8 @@ class SqlExtends(BaseSql):
     
     def get_extends(self, namespace: str) -> List[ExtendsInfo]:
         results: List[ExtendsInfo] = []
-        query = """SELECT extends.namespace as ns, extends.map_name as map_name FROM extends
-        LEFT JOIN component on component.id_component = extends.fk_component_id
+        query = """SELECT extend.namespace as ns, extend.map_name as map_name FROM extend
+        LEFT JOIN component on component.id_component = extend.fk_component_id
         WHERE component.id_component = :namespace"""
         
         qry_sort = """SELECT module_detail.sort as sort FROM module_detail
