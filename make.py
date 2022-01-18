@@ -1152,6 +1152,7 @@ def main():
     data_extends_flat = data.add_parser(name='db-extends-flat')
     data_extends_tree = data.add_parser(name='db-extends-tree')
     data_imports = data.add_parser(name='db-imports')
+    data_imports_typing_child = data.add_parser(name='db-imports-typing-child')
     data_qry = data.add_parser(name='db-qry')
     
     # endregion create parsers
@@ -1614,6 +1615,31 @@ def main():
         default=False
     )
     # endregion     Data Imports
+    # region        Data Imports Child
+    data_imports_child_typing_group = data_imports_typing_child.add_argument_group()
+    # data_imports_group_rel = data_imports_group.add_argument_group()
+    data_imports_child_typing_group.add_argument(
+        '-n', '--name-space',
+        help='Genereate Namespace Data for a given namespace object',
+        action='store',
+        dest='namespace',
+        default=None
+    )
+    data_imports_child_typing_group.add_argument(
+        '-r', '--as-rel-from',
+        help='Get as realitive from import strings',
+        action='store_true',
+        dest='ns_import_from',
+        default=False
+    )
+    data_imports_child_typing_group.add_argument(
+        '-l', '--as-long',
+        help='Get as realitive im',
+        action='store_true',
+        dest='ns_import_from_long',
+        default=False
+    )
+    # endregion     Data Imports Child
     # endregion imports
     # endregion data args
 
@@ -1820,6 +1846,16 @@ def main():
                 ns_full_import_typing=require_typing,
                 ns_full_import_from=args.ns_import_from,
                 ns_full_import_from_long=args.ns_import_from_long
+            )
+            qc_result = qc.results()
+            if qc_result:
+                print(qc_result)
+        if args.command_data == 'db-imports-typing-child':
+            qc = db_manager.NamespaceControler(
+                config=config,
+                ns_import_typing_child=args.namespace,
+                ns_import_typing_from=args.ns_import_from,
+                ns_import_typing_from_long=args.ns_import_from_long
             )
             qc_result = qc.results()
             if qc_result:

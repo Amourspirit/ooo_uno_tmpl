@@ -23,6 +23,7 @@ from parser import __version__, JSON_ID, mod_rel as RelInfo
 # endregion Imports
 
 
+
 # region Dataclass
 
 
@@ -93,7 +94,7 @@ class ModuleInfo:
     file: str
 
 
-@dataclass(frozen=True, eq=True)
+@dataclass
 class ModuleDetail:
     id_namespace: str
     name: str
@@ -946,6 +947,25 @@ class NsImports(BaseSql):
         flats.sort()
         return flats
     
+    def get_imports_child_typing(self, full_ns: str) -> List[NamespaceChild]:
+        qry_str = """SELECT DISTINCT full_import.namespace as ns, module_detail.sort
+            FROM full_import
+            left JOIN module_detail on full_import.namespace = module_detail.id_namespace
+            WHERE full_import.requires_typing
+            AND full_import.fk_component_id in (SELECT DISTINCT full_import.namespace FROM full_import
+            WHERE full_import.fk_component_id like :namespace)
+            ORDER by sort"""
+        results = []
+        with SqlCtx(self.conn_str) as db:
+            db.cursor.execute(qry_str, {"namespace": full_ns})
+            for row in db.cursor:
+                namesapce: str = row['ns']
+                sort_ = int(row['sort'])
+                results.append(NamespaceChild(
+                    namespace=namesapce,
+                    sort=sort_,
+                ))
+        return results
     # endregion IMPORTS
 # endregion Query
 
@@ -1160,9 +1180,24 @@ class ParseModuleLinks:
 
     def _get_detail_lst(self) -> List[ModuleDetail]:
         self._module_details
-        _sorted = sorted(self._module_details, key=lambda im: im.id_namespace)
+        sort_dic = {
+            "exception": 1,
+            "singleton": 2,
+            "service": 3,
+            "interface": 4,
+            "enum": 20,
+            "const": 21,
+            "typedef": 22,
+            "struct": 23
+            
+        }
+        for el in self._module_details:
+            el.sort = sort_dic.get(el.component_type, 99)
+        
+        _sorted = sorted(self._module_details, key=lambda im: (im.sort, im.id_namespace))
         lst = []
-        for i, el in enumerate(_sorted):
+        i = 1
+        for el in _sorted:
             lst.append(ModuleDetail(
                 id_namespace=el.id_namespace,
                 name=el.name,
@@ -1171,6 +1206,7 @@ class ParseModuleLinks:
                 component_type=el.component_type,
                 sort=i
             ))
+            i += 2
         return lst
 
     # region Read Json into Imports
@@ -1380,20 +1416,30 @@ class NamespaceControler:
         self._ns_flat: Union[str, None] = kwargs.get('ns_flat', None)
         self._ns_child_only: Union[str, None] = bool(kwargs.get('ns_child_only', True))
         self._ns_flat_frm: Union[str, None] = kwargs.get('ns_flat_frm', None)
+
         self._ns_extends_lng: Union[str, None] = kwargs.get(
             'extends_long', None)
         self._ns_extends_short: Union[str, None] = kwargs.get(
             'extends_short', None)
         self._link: Union[str, None] = kwargs.get('ns_link', None)
+
         self._ns_full_import: Union[str, None] = kwargs.get('ns_full_import', None)
         self._ns_full_import_typing: Union[bool, None] = kwargs.get(
             'ns_full_import_typing', None)
+
         self._ns_full_import_child: bool = bool(
             kwargs.get('ns_full_import_child', False))
         self._ns_full_import_from: bool = bool(
             kwargs.get('ns_full_import_from', False))
         self._ns_full_import_from_long: bool = bool(
             kwargs.get('ns_full_import_from_long', False))
+
+        self._ns_import_typing_child: Union[str, None] = kwargs.get(
+            'ns_import_typing_child', None)
+        self._ns_import_typing_from: bool = bool(
+            kwargs.get('ns_import_typing_from', False))
+        self._ns_import_typing_from_long: bool = bool(
+            kwargs.get('ns_import_typing_from_long', False))
 
     def results(self):
         if self._ns_name:
@@ -1412,7 +1458,8 @@ class NamespaceControler:
             if self._ns_full_import_child:
                 return self._get_imports_child()
             return self._get_imports()
-
+        elif self._ns_import_typing_child:
+            return self._get_imports_typing_child()
     def _process_ns_tree(self) -> str:
         """
         Gets Namespace Tree as str
@@ -1489,49 +1536,61 @@ class NamespaceControler:
         qry = NsImports(self._conn.connection_str)
         return qry.get_ns_link(full_ns=self._link)
 
+    def _ns_child_lst_to_lines(self, lst: List[NamespaceChild]) -> str:
+        s = ''
+        for i, im in enumerate(lst):
+            if i > 0:
+                s += '\n'
+            s += im.namespace
+        return s
+
+    def _ns_child_lst_to_from(self, lst: List[NamespaceChild], namespace: str) -> str:
+        ns = namespace.rsplit(sep='.', maxsplit=1)[0]
+        s = ''
+        for i, im in enumerate(lst):
+            if i > 0:
+                s += '\n'
+            rel = RelInfo.get_rel_import(
+                in_str=im.namespace, ns=ns)
+
+            s += f"from {rel[0]} import {rel[1]}"
+        return s
+
+    def _ns_child_lst_to_from_long(self, lst: List[NamespaceChild], namespace: str) -> str:
+        ns = namespace.rsplit(sep='.', maxsplit=1)[0]
+        s = ''
+        for i, im in enumerate(lst):
+            if i > 0:
+                s += '\n'
+            rel = RelInfo.get_rel_import_long(
+                in_str=im.namespace, ns=ns)
+
+            s += f"from {rel[0]} import {rel[1]} as {rel[2]}"
+        return s
+
     def _get_imports_child(self) -> str:
         qry = NsImports(self._conn.connection_str)
-
-        def get_full_imports_str(imports: List[NamespaceChild]) -> str:
-            s = ''
-            for i, im in enumerate(imports):
-                if i > 0:
-                    s += '\n'
-                s += im.namespace
-            return s
-
-        def get_from_imports_short(imports: List[NamespaceChild]) -> str:
-            ns = self._ns_full_import.rsplit(sep='.', maxsplit=1)[0]
-            s = ''
-            for i, im in enumerate(imports):
-                if i > 0:
-                    s += '\n'
-                rel = RelInfo.get_rel_import(
-                    in_str=im.namespace, ns=ns)
-
-                s += f"from {rel[0]} import {rel[1]}"
-            return s
-
-        def get_from_imports_long(imports: List[NamespaceChild]) -> str:
-            ns = self._ns_full_import.rsplit(sep='.', maxsplit=1)[0]
-            s = ''
-            for i, im in enumerate(imports):
-                if i > 0:
-                    s += '\n'
-                rel = RelInfo.get_rel_import_long(
-                    in_str=im.namespace, ns=ns)
-
-                s += f"from {rel[0]} import {rel[1]} as {rel[2]}"
-            return s
         ims = qry.get_imports_child(
             full_ns=self._ns_full_import)
         if len(ims) == 0:
             return ''
         if self._ns_full_import_from:
             if self._ns_full_import_from_long:
-                return get_from_imports_long(imports=ims)
-            return get_from_imports_short(imports=ims)
-        return get_full_imports_str(imports=ims)
+                return self._ns_child_lst_to_from_long(ims, self._ns_full_import)
+            return self._ns_child_lst_to_from(ims, self._ns_full_import)
+        return self._ns_child_lst_to_lines(ims)
+    
+    def _get_imports_typing_child(self) -> str:
+        qry = NsImports(self._conn.connection_str)
+        ims = qry.get_imports_child_typing(
+            full_ns=self._ns_import_typing_child)
+        if len(ims) == 0:
+            return ''
+        if self._ns_import_typing_from:
+            if self._ns_import_typing_from_long:
+                return self._ns_child_lst_to_from_long(ims, self._ns_import_typing_child)
+            return self._ns_child_lst_to_from(ims, self._ns_import_typing_child)
+        return self._ns_child_lst_to_lines(ims)
 
     def _get_imports(self) -> str:
         qry = NsImports(self._conn.connection_str)
