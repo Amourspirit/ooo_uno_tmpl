@@ -8,6 +8,7 @@ from dataclasses import dataclass
 from typing import List, Tuple
 from kwhelp.decorator import AcceptedTypes
 from functools import cache
+import zlib
 # endregion Imports
 
 
@@ -137,7 +138,7 @@ def get_rel_import(in_str: str, ns: str, sep: str = '.') -> Tuple[str, str]:
     # logger.warn(f"get_rel_import(): Last ditch effort. Returning: (ooo_uno.uno_obj.{short}.{camel_name}', {name})")
     return (f'ooo_uno.uno_obj.{short}.{camel_name}', f'{name}')
 
-
+@cache
 @AcceptedTypes(str, opt_all_args=True)
 def get_rel_import_long(in_str: str, ns: str, sep: str = '.') -> Tuple[str, str, str]:
     """
@@ -151,12 +152,14 @@ def get_rel_import_long(in_str: str, ns: str, sep: str = '.') -> Tuple[str, str,
     Returns:
         Tuple[str, str]: realitive import info such as ``('..uno.exception', 'Exception', 'uno_exception')``
     """
+    if in_str.startswith('com.'):
+        full_name = in_str
+    else:
+        full_name = ns + sep + in_str
     frm, imp = get_rel_import(in_str=in_str, ns=ns, sep=sep)
-    score = '_'
-    sas = frm.lstrip(sep).replace(sep, score) + score + 'i'
-    # diff = (len(s_as) - len(sas))
-    # if diff > 0:
-    #     sas += score * diff
+    
+    res = bytes(full_name, 'utf-8')
+    sas = imp + '_' + hex(zlib.adler32(res))[2:]
     return frm, imp, sas
 
 
