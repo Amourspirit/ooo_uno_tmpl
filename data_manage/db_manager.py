@@ -808,7 +808,7 @@ class NsImports(BaseSql):
                 result = row['link']
         return result
     
-    def get_flat_imports(self, namespace: str, full: bool) -> Tuple[str, str, str]:
+    def get_flat_imports(self, namespace: str, full: bool) -> List[Tuple[str, str, str]]:
         # if importing from children. The children imports need to be relative this namespace
         flats: List[NamespaceChild] = self.get_flat_ns(
             namespace=namespace, full=full)
@@ -1371,6 +1371,24 @@ class ParseModuleLinks:
 
 # endregion Parse
 
+class Util:
+    @staticmethod
+    def get_formated_dict_list_str(obj: Union[dict, list], indent=2) -> str:
+        """
+        Get a formated dictionary or list
+
+        Args:
+            obj (Union[dict, list]): Dict or list to get formats string for.
+            indent (int, optional): The number of spaces to indent string.. Defaults to ``2``.
+
+        Returns:
+            str: string of formated dictionary properties and values
+        """
+        if not isinstance(obj, dict) and not isinstance(obj, list):
+            return "{}"
+        _indent = 4 if indent < 0 else indent
+        formatted = json.dumps(obj, indent=_indent)
+        return formatted
 # region Controller
 
 
@@ -1441,6 +1459,8 @@ class NamespaceControler:
         self._ns_import_typing_from_long: bool = bool(
             kwargs.get('ns_import_typing_from_long', False))
 
+        self._as_json: bool = bool(kwargs.get('as_json', False))
+
     def results(self):
         if self._ns_name:
             return self._process_ns_tree()
@@ -1497,26 +1517,34 @@ class NamespaceControler:
         return s_result
 
     def _get_flat_unique_ns(self) -> str:
+        def get_lines(lst: List[NamespaceChild]) -> List[str]:
+            lines_lst = []
+            for itm in lst:
+                lines_lst.append(itm.namespace)
+            return lines_lst
         qry = NsImports(self._conn.connection_str)
         flat_full = not self._ns_child_only
         n_flat = qry.get_flat_ns(namespace=self._ns_flat, full=flat_full)
-        s = ''
-        for i, itm in enumerate(n_flat):
-            if i > 0:
-                s += ', '
-            s += itm.namespace
-        return s
+        lines = get_lines(n_flat)
+        if self._as_json:
+            return Util.get_formated_dict_list_str(lines)
+        else:
+            return ", ".join(lines)
     
     def _get_flat_frm(self) -> str:
+        def get_lines(lst:List[tuple]) -> List[str]:
+            lines_lst = []
+            for frm in lst:
+                lines_lst.append(f"from {frm[0]} import {frm[1]} as {frm[2]}")
+            return lines_lst
         qry = NsImports(self._conn.connection_str)
         full = not self._ns_child_only
         froms = qry.get_flat_imports(namespace=self._ns_flat_frm, full=full)
-        s = ''
-        for i, frm in enumerate(froms):
-            if i > 0:
-                s += '\n'
-            s += f"from {frm[0]} import {frm[1]} as {frm[2]}"
-        return s
+        if self._as_json:
+            return Util.get_formated_dict_list_str(froms)
+        else:
+            lines = get_lines(froms)
+            return "\n".join(lines)
     
     def _get_extends(self, long: bool) -> str:
         qry = NsImports(self._conn.connection_str)
@@ -1525,48 +1553,76 @@ class NamespaceControler:
             extends = qry.get_extends_long(namespace=self._ns_extends_lng, full=full)
         else:
             extends = qry.get_extends_short(namespace=self._ns_extends_short, full=full)
-        s = ''
-        for i, ex in enumerate(extends):
-            if i > 0:
-                s += ', '
-            s += ex
-        return s
+        if self._as_json:
+            return Util.get_formated_dict_list_str(extends)
+        else:
+            return ", ".join(extends)
     
     def _get_link(self) -> str:
         qry = NsImports(self._conn.connection_str)
         return qry.get_ns_link(full_ns=self._link)
 
     def _ns_child_lst_to_lines(self, lst: List[NamespaceChild]) -> str:
-        s = ''
-        for i, im in enumerate(lst):
-            if i > 0:
-                s += '\n'
-            s += im.namespace
-        return s
+        def get_lines() -> List[str]:
+            lines_lst = []
+            for im in lst:
+                lines_lst.append(im.namespace)
+            return lines_lst
+        lines = get_lines()
+        if self._as_json:
+            return Util.get_formated_dict_list_str(lines)
+        else:
+            return "\n".join(lines)
 
     def _ns_child_lst_to_from(self, lst: List[NamespaceChild], namespace: str) -> str:
-        ns = namespace.rsplit(sep='.', maxsplit=1)[0]
-        s = ''
-        for i, im in enumerate(lst):
-            if i > 0:
-                s += '\n'
-            rel = RelInfo.get_rel_import(
-                in_str=im.namespace, ns=ns)
+        def get_lines() -> List[str]:
+            ns = namespace.rsplit(sep='.', maxsplit=1)[0]
+            lines_lst = []
+            for im in lst:
+                rel = RelInfo.get_rel_import(
+                    in_str=im.namespace, ns=ns)
+                lines_lst.append(f"from {rel[0]} import {rel[1]}")
+            return lines_lst
 
-            s += f"from {rel[0]} import {rel[1]}"
-        return s
+        def get_json() -> str:
+            ns = namespace.rsplit(sep='.', maxsplit=1)[0]
+            lines_lst = []
+            for im in lst:
+                rel = RelInfo.get_rel_import(
+                    in_str=im.namespace, ns=ns)
+                lines_lst.append((rel[0], rel[1]))
+            return Util.get_formated_dict_list_str(lines_lst)
+
+        if self._as_json:
+            return get_json()
+        else:
+            lines = get_lines()
+            return "\n".join(lines)
 
     def _ns_child_lst_to_from_long(self, lst: List[NamespaceChild], namespace: str) -> str:
-        ns = namespace.rsplit(sep='.', maxsplit=1)[0]
-        s = ''
-        for i, im in enumerate(lst):
-            if i > 0:
-                s += '\n'
-            rel = RelInfo.get_rel_import_long(
-                in_str=im.namespace, ns=ns)
+        def get_lines() -> List[str]:
+            ns = namespace.rsplit(sep='.', maxsplit=1)[0]
+            lines_lst = []
+            for im in lst:
+                rel = RelInfo.get_rel_import_long(
+                    in_str=im.namespace, ns=ns)
+                lines_lst.append(f"from {rel[0]} import {rel[1]} as {rel[2]}")
+            return lines_lst
 
-            s += f"from {rel[0]} import {rel[1]} as {rel[2]}"
-        return s
+        def get_json() -> str:
+            ns = namespace.rsplit(sep='.', maxsplit=1)[0]
+            lines_lst = []
+            for im in lst:
+                rel = RelInfo.get_rel_import_long(
+                    in_str=im.namespace, ns=ns)
+                lines_lst.append((rel[0], rel[1], rel[2]))
+            return Util.get_formated_dict_list_str(lines_lst)
+
+        if self._as_json:
+            return get_json()
+        else:
+            lines = get_lines()
+            return "\n".join(lines)
 
     def _get_imports_child(self) -> str:
         qry = NsImports(self._conn.connection_str)

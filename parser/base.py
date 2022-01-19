@@ -93,6 +93,7 @@ pattern_generic_name = re.compile(r"([a-zA-Z0-9_]+)(<[A-Z, ]+>)")
 re_dir_pattern = re.compile(r"\[((?:in)|(?:out))\]", re.IGNORECASE)
 # endregion regex
 
+# region Known Extends
 def get_known_extends(ns:str, class_name: str) -> Union[List['Ns'], None]:
     global _KNOWN_EXTENDS
     key = ns + '.' + class_name
@@ -109,8 +110,7 @@ def get_known_extends(ns:str, class_name: str) -> Union[List['Ns'], None]:
         results.append(Ns(name=parts[1], namespace=parts[0]))
     return results
         
-    
-
+# endregion Known Extends
 
 # region Type Map
 # TYPE_MAP and TYPE_MAP_EX are only used with deprecated method get_py_type

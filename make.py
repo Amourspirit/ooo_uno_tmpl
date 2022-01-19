@@ -1532,7 +1532,7 @@ def main():
     # endregion     Data Extends Tree
     # region        Data Extends Flat
     data_imports_flat_group = data_extends_flat.add_mutually_exclusive_group()
-    data_imports_flat_group.add_argument(
+    data_extends_flat.add_argument(
         '-n', '--namespace',
         help='Genereate flat unique namespace data for a given namespace object',
         action='store',
@@ -1542,29 +1542,36 @@ def main():
     data_imports_flat_group.add_argument(
         '-i', '--flat-imports',
         help='Genereate imports if format of from ... import ... as ...',
-        action='store',
+        action='store_true',
         dest='ns_from_imports',
-        default=None
+        default=False
     )
     data_imports_flat_group.add_argument(
         '-e', '--extends-short',
         help='Generates line of short extends such as: XTextRange, XInterface',
-        action='store',
+        action='store_true',
         dest='ns_extends_short',
-        default=None
+        default=False
     )
     data_imports_flat_group.add_argument(
         '-x', '--extends-long',
         help='Generates line of short extends such as: text_x_text_range_i, uno_x_interface_i',
-        action='store',
+        action='store_true',
         dest='ns_extends_long',
-        default=None
+        default=False
     )
     data_extends_flat.add_argument(
         '-c', '--child',
         help='Process only direct children if namespace',
         action='store_true',
         dest='ns_child',
+        default=False
+    )
+    data_extends_flat.add_argument(
+        '-j', '--json',
+        help='Output in json format',
+        action='store_true',
+        dest='as_json',
         default=False
     )
     # endregion     Data Extends Flat
@@ -1813,17 +1820,38 @@ def main():
             if qc_result:
                 print(qc_result)
         if args.command_data == 'db-extends-flat':
-            qc = db_manager.NamespaceControler(
-                config=config,
-                ns_flat=args.namespace,
-                ns_flat_frm=args.ns_from_imports,
-                extends_long=args.ns_extends_long,
-                extends_short=args.ns_extends_short,
-                ns_child_only=args.ns_child
-            )
-            qc_result = qc.results()
-            if qc_result:
-                print(qc_result)
+            if args.namespace:
+                if args.ns_from_imports:
+                    qc = db_manager.NamespaceControler(
+                        config=config,
+                        ns_flat_frm=args.namespace,
+                        ns_child_only=args.ns_child,
+                        as_json=args.as_json
+                    )
+                elif args.ns_extends_short:
+                    qc = db_manager.NamespaceControler(
+                        config=config,
+                        extends_short=args.namespace,
+                        ns_child_only=args.ns_child,
+                        as_json=args.as_json
+                    )
+                elif args.ns_extends_long:
+                    qc = db_manager.NamespaceControler(
+                        config=config,
+                        extends_short=args.namespace,
+                        ns_child_only=args.ns_child,
+                        as_json=args.as_json
+                    )
+                else:
+                    qc = db_manager.NamespaceControler(
+                        config=config,
+                        ns_flat=args.namespace,
+                        ns_child_only=args.ns_child,
+                        as_json=args.as_json
+                    )
+                qc_result = qc.results()
+                if qc_result:
+                    print(qc_result)
         if args.command_data == 'db-qry':
             qc = db_manager.NamespaceControler(
                 config=config,
