@@ -76,6 +76,16 @@ def interface_data(module_types):
         results.append(name)
     return results
 
+
+@pytest.fixture(scope='session')
+def service_data(module_types):
+    lst = module_types["service"]
+    results = []
+    for data in lst:
+        name = f"{data['ns']}.{data['c_name']}.{data['name']}"
+        results.append(name)
+    return results
+
 def test_imp_singleton(singlton_data: str):
     # https://github.com/pytest-dev/pytest/issues/6374
     imc = ImportCheck()
@@ -110,3 +120,8 @@ def test_imp_struct(struct_data: str):
 def test_imp_interface(interface_data: str):
     imc = ImportCheck()
     assert imc.load_import(interface_data) == True
+
+
+def test_imp_service(service_data: str):
+    imc = ImportCheck()
+    assert imc.load_import(service_data) == True

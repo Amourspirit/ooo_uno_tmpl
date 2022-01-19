@@ -1526,17 +1526,17 @@ def main():
         '-n', '--name-space',
         help='Genereate Namespace Data for a given namespace object',
         action='store',
-        dest='ns_name',
+        dest='namespace',
         default=None
     )
     # endregion     Data Extends Tree
     # region        Data Extends Flat
     data_imports_flat_group = data_extends_flat.add_mutually_exclusive_group()
     data_imports_flat_group.add_argument(
-        '-f', '--flat-name-space',
+        '-n', '--namespace',
         help='Genereate flat unique namespace data for a given namespace object',
         action='store',
-        dest='ns_flat',
+        dest='namespace',
         default=None
     )
     data_imports_flat_group.add_argument(
@@ -1807,8 +1807,7 @@ def main():
         if args.command_data == 'db-extends-tree':
             qc = db_manager.NamespaceControler(
                 config=config,
-                ns_name=args.ns_name,
-                ns_child_only=args.ns_child
+                ns_name=args.namespace
             )
             qc_result = qc.results()
             if qc_result:
@@ -1816,7 +1815,7 @@ def main():
         if args.command_data == 'db-extends-flat':
             qc = db_manager.NamespaceControler(
                 config=config,
-                ns_flat=args.ns_flat,
+                ns_flat=args.namespace,
                 ns_flat_frm=args.ns_from_imports,
                 extends_long=args.ns_extends_long,
                 extends_short=args.ns_extends_short,

@@ -212,3 +212,7 @@ def pytest_generate_tests(metafunc):
         metafunc.parametrize(
             "interface_data", metafunc.module.interface_data.__wrapped__(
                 MODULE_TYPES))
+    elif metafunc.function.__name__ == "test_imp_service" and "service_data" in dir(metafunc.module):
+        metafunc.parametrize(
+            "service_data", metafunc.module.service_data.__wrapped__(
+                MODULE_TYPES))
