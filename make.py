@@ -1832,29 +1832,29 @@ def main():
                     qc = db_manager.NamespaceControler(
                         config=config,
                         ns_flat_frm=args.namespace,
-                        ns_child_only=args.ns_child,
-                        as_json=args.as_json
+                        b_child=args.ns_child,
+                        b_json=args.as_json
                     )
                 elif args.ns_extends_short:
                     qc = db_manager.NamespaceControler(
                         config=config,
                         extends_short=args.namespace,
-                        ns_child_only=args.ns_child,
-                        as_json=args.as_json
+                        b_child=args.ns_child,
+                        b_json=args.as_json
                     )
                 elif args.ns_extends_long:
                     qc = db_manager.NamespaceControler(
                         config=config,
                         extends_short=args.namespace,
-                        ns_child_only=args.ns_child,
-                        as_json=args.as_json
+                        b_child=args.ns_child,
+                        b_json=args.as_json
                     )
                 else:
                     qc = db_manager.NamespaceControler(
                         config=config,
                         ns_flat=args.namespace,
-                        ns_child_only=args.ns_child,
-                        as_json=args.as_json
+                        b_child=args.ns_child,
+                        b_json=args.as_json
                     )
                 qc_result = qc.results()
                 if qc_result:
@@ -1875,12 +1875,12 @@ def main():
                 require_typing = False
             qc = db_manager.NamespaceControler(
                 config=config,
-                ns_full_import=args.ns_import_name,
+                ns_import=args.ns_import_name,
                 b_child=args.ns_import_child,
-                b_import_typing=require_typing,
+                b_typing=require_typing,
                 b_from=args.ns_import_from,
                 b_from_long=args.ns_import_from_long,
-                as_json=args.as_json
+                b_json=args.as_json
             )
             qc_result = qc.results()
             if qc_result:
@@ -1890,7 +1890,8 @@ def main():
                 config=config,
                 ns_import_typing_child=args.namespace,
                 b_from=args.ns_import_from,
-                b_from_long=args.ns_import_from_long
+                b_from_long=args.ns_import_from_long,
+                 b_json=args.as_json
             )
             qc_result = qc.results()
             if qc_result:

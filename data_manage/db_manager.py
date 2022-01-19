@@ -1462,17 +1462,20 @@ class NamespaceControler:
         
         Keyword Arguments:
             ns_name (str, optional): Namesapce, get tree data for namesapce.
-            ns_flat (str, optional): Namesapce, get flat unique inherits. Other Opt - ns_child_only
-            ns_child_only (bool, optional): Determins if returns chiild namespaces. Default True
-            extends_long (str, optional): Namesapce, gets extends in long format. Other Opt - ns_child_only
-            extends_short (str, optional): Namesapce, gets extends in short format. Other Opt - ns_child_only
+            ns_flat (str, optional): Namesapce, get flat unique inherits. Other Opt - b_child, b_json
+            ns_flat_frm (str, optional): Namesapce, get flat unique inherits in from format. Other Opt - b_child, b_json
+            extends_long (str, optional): Namesapce, gets extends in long format. Other Opt - b_child, b_json
+            extends_short (str, optional): Namesapce, gets extends in short format. Other Opt - b_child, b_json
+            ns_import (str, optional): Namespace, get imports.  Other Opt - b_child, b_typing, b_from, b_from_long, b_json
+            ns_import_typing_child (str, optional): Namespace, get child imports.  Other Opt - b_from, b_from_long, b_json
             ns_link (str, optional): Namesapce, get url for a given namespace.
+            b_child (bool, optional): Determins if returns chiild namespaces. Default True
+            b_json (bool, optional): Determsin if result is json str.
             
         """
         self._conn = DbConnect(config)
         self._ns_name: Union[str, None] = kwargs.get('ns_name', None)
         self._ns_flat: Union[str, None] = kwargs.get('ns_flat', None)
-        self._ns_child_only: Union[str, None] = bool(kwargs.get('ns_child_only', True))
         self._ns_flat_frm: Union[str, None] = kwargs.get('ns_flat_frm', None)
 
         self._ns_extends_lng: Union[str, None] = kwargs.get(
@@ -1481,15 +1484,15 @@ class NamespaceControler:
             'extends_short', None)
         self._link: Union[str, None] = kwargs.get('ns_link', None)
 
-        self._ns_full_import: Union[str, None] = kwargs.get('ns_full_import', None)
+        self._ns_import: Union[str, None] = kwargs.get('ns_import', None)
         self._ns_import_typing_child: Union[str, None] = kwargs.get(
             'ns_import_typing_child', None)
 
-        self._b_typing: Union[bool, None] = kwargs.get('b_import_typing', None)
+        self._b_typing: Union[bool, None] = kwargs.get('b_typing', None)
         self._b_child: bool = bool(kwargs.get('b_child', False))
         self._b_from: bool = bool(kwargs.get('b_from', False))
         self._b_from_long: bool = bool(kwargs.get('b_from_long', False))
-        self._as_json: bool = bool(kwargs.get('as_json', False))
+        self._b_json: bool = bool(kwargs.get('b_json', False))
 
     def results(self):
         if self._ns_name:
@@ -1504,7 +1507,7 @@ class NamespaceControler:
             return self._get_extends(long=False)
         elif self._link:
             return self._get_link()
-        elif self._ns_full_import:
+        elif self._ns_import:
             if self._b_child:
                 return self._get_imports_child()
             return self._get_imports()
@@ -1553,10 +1556,10 @@ class NamespaceControler:
                 lines_lst.append(itm.namespace)
             return lines_lst
         qry = QryNsImports(self._conn.connection_str)
-        flat_full = not self._ns_child_only
+        flat_full = not self._b_child
         n_flat = qry.get_flat_ns(namespace=self._ns_flat, full=flat_full)
         lines = get_lines(n_flat)
-        if self._as_json:
+        if self._b_json:
             return Util.get_formated_dict_list_str(lines)
         else:
             return ", ".join(lines)
@@ -1568,9 +1571,9 @@ class NamespaceControler:
                 lines_lst.append(f"from {frm[0]} import {frm[1]} as {frm[2]}")
             return lines_lst
         qry = QryNsImports(self._conn.connection_str)
-        full = not self._ns_child_only
+        full = not self._b_child
         froms = qry.get_flat_imports(namespace=self._ns_flat_frm, full=full)
-        if self._as_json:
+        if self._b_json:
             return Util.get_formated_dict_list_str(froms)
         else:
             lines = get_lines(froms)
@@ -1578,12 +1581,12 @@ class NamespaceControler:
     
     def _get_extends(self, long: bool) -> str:
         qry = QryNsImports(self._conn.connection_str)
-        full = not self._ns_child_only
+        full = not self._b_child
         if long:
             extends = qry.get_extends_long(namespace=self._ns_extends_lng, full=full)
         else:
             extends = qry.get_extends_short(namespace=self._ns_extends_short, full=full)
-        if self._as_json:
+        if self._b_json:
             return Util.get_formated_dict_list_str(extends)
         else:
             return ", ".join(extends)
@@ -1599,7 +1602,7 @@ class NamespaceControler:
                 lines_lst.append(im.namespace)
             return lines_lst
         lines = get_lines()
-        if self._as_json:
+        if self._b_json:
             return Util.get_formated_dict_list_str(lines)
         else:
             return "\n".join(lines)
@@ -1623,7 +1626,7 @@ class NamespaceControler:
                 lines_lst.append((rel[0], rel[1]))
             return Util.get_formated_dict_list_str(lines_lst)
 
-        if self._as_json:
+        if self._b_json:
             return get_json()
         else:
             lines = get_lines()
@@ -1648,7 +1651,7 @@ class NamespaceControler:
                 lines_lst.append((rel[0], rel[1], rel[2]))
             return Util.get_formated_dict_list_str(lines_lst)
 
-        if self._as_json:
+        if self._b_json:
             return get_json()
         else:
             lines = get_lines()
@@ -1657,13 +1660,13 @@ class NamespaceControler:
     def _get_imports_child(self) -> str:
         qry = QryNsImports(self._conn.connection_str)
         ims = qry.get_imports_child(
-            full_ns=self._ns_full_import)
+            full_ns=self._ns_import)
         if len(ims) == 0:
             return ''
         if self._b_from:
             if self._b_from_long:
-                return self._ns_child_lst_to_from_long(ims, self._ns_full_import)
-            return self._ns_child_lst_to_from(ims, self._ns_full_import)
+                return self._ns_child_lst_to_from_long(ims, self._ns_import)
+            return self._ns_child_lst_to_from(ims, self._ns_import)
         return self._ns_child_lst_to_lines(ims)
     
     def _get_imports_typing_child(self) -> str:
@@ -1688,12 +1691,12 @@ class NamespaceControler:
             return lines_lst
         def get_full_imports_str(imports: List[FullImport]) -> str:
             lines = get_lines(imports)
-            if self._as_json:
+            if self._b_json:
                 return Util.get_formated_dict_list_str(lines)
             return "\n".join(lines)
 
         def get_from_imports_short(imports: List[FullImport]) -> str:
-            ns = self._ns_full_import.rsplit(sep='.', maxsplit=1)[0]
+            ns = self._ns_import.rsplit(sep='.', maxsplit=1)[0]
             def get_rel_lst() -> List[Tuple[str, str]]:
                 rel_lst = []
                 for im in imports:
@@ -1701,7 +1704,7 @@ class NamespaceControler:
                         in_str=im.namespace, ns=ns))
                 return rel_lst
             rels = get_rel_lst()
-            if self._as_json:
+            if self._b_json:
                 return Util.get_formated_dict_list_str(rels)
             frm_lst = []
             for rel in rels:
@@ -1709,7 +1712,7 @@ class NamespaceControler:
             return "\n".join(frm_lst)
 
         def get_from_imports_long(imports: List[FullImport]) -> str:
-            ns = self._ns_full_import.rsplit(sep='.', maxsplit=1)[0]
+            ns = self._ns_import.rsplit(sep='.', maxsplit=1)[0]
 
             def get_rel_lst() -> List[Tuple[str, str, str]]:
                 rel_lst = []
@@ -1718,7 +1721,7 @@ class NamespaceControler:
                         in_str=im.namespace, ns=ns))
                 return rel_lst
             rels = get_rel_lst()
-            if self._as_json:
+            if self._b_json:
                 return Util.get_formated_dict_list_str(rels)
             frm_lst = []
             for rel in rels:
@@ -1726,7 +1729,7 @@ class NamespaceControler:
             return "\n".join(frm_lst)
 
         ims = qry.get_imports(
-            full_ns=self._ns_full_import, typing=self._b_typing)
+            full_ns=self._ns_import, typing=self._b_typing)
         if len(ims) == 0:
             return ''
         if self._b_from:
