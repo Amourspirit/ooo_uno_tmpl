@@ -1586,6 +1586,13 @@ def main():
         default=None
     )
     data_imports_group.add_argument(
+        '-j', '--json',
+        help='Output in json format',
+        action='store_true',
+        dest='as_json',
+        default=False
+    )
+    data_imports_group.add_argument(
         '-c', '--child',
         help='Process only direct children if namespace',
         action='store_true',
@@ -1872,7 +1879,8 @@ def main():
                 ns_full_import_child=args.ns_import_child,
                 ns_full_import_typing=require_typing,
                 ns_full_import_from=args.ns_import_from,
-                ns_full_import_from_long=args.ns_import_from_long
+                ns_full_import_from_long=args.ns_import_from_long,
+                as_json=args.as_json
             )
             qc_result = qc.results()
             if qc_result:

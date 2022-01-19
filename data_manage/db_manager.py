@@ -915,7 +915,7 @@ class NsImports(BaseSql):
             db.cursor.execute(qry_str, args)
             for row in db.cursor:
                 namesapce: str = row['ns']
-                id_full_import: int = -1 if children else row.get['id_full_import']
+                id_full_import: int = -1 if children else row['id_full_import']
                 requires_typing: bool = bool(row['requires_typing'])
                 sort_ = int(row['sort'])
                 results.append(FullImport(
@@ -1650,36 +1650,51 @@ class NamespaceControler:
 
     def _get_imports(self) -> str:
         qry = NsImports(self._conn.connection_str)
+
+        def get_lines(imports: List[FullImport]) -> List[str]:
+            lines_lst = []
+            for im in imports:
+                lines_lst.append(im.namespace)
+            return lines_lst
         def get_full_imports_str(imports: List[FullImport]) -> str:
-            s = ''
-            for i, im in enumerate(imports):
-                if i > 0:
-                    s += '\n'
-                s += im.namespace
-            return s
+            lines = get_lines(imports)
+            if self._as_json:
+                return Util.get_formated_dict_list_str(lines)
+            return "\n".join(lines)
+
         def get_from_imports_short(imports: List[FullImport]) -> str:
             ns = self._ns_full_import.rsplit(sep='.', maxsplit=1)[0]
-            s = ''
-            for i, im in enumerate(imports):
-                if i > 0:
-                    s += '\n'
-                rel = RelInfo.get_rel_import(
-                    in_str=im.namespace, ns=ns)
-                    
-                s += f"from {rel[0]} import {rel[1]}"
-            return s
+            def get_rel_lst() -> List[Tuple[str, str]]:
+                rel_lst = []
+                for im in imports:
+                    rel_lst.append(RelInfo.get_rel_import(
+                        in_str=im.namespace, ns=ns))
+                return rel_lst
+            rels = get_rel_lst()
+            if self._as_json:
+                return Util.get_formated_dict_list_str(rels)
+            frm_lst = []
+            for rel in rels:
+                frm_lst.append(f"from {rel[0]} import {rel[1]}")
+            return "\n".join(frm_lst)
 
         def get_from_imports_long(imports: List[FullImport]) -> str:
             ns = self._ns_full_import.rsplit(sep='.', maxsplit=1)[0]
-            s = ''
-            for i, im in enumerate(imports):
-                if i > 0:
-                    s += '\n'
-                rel = RelInfo.get_rel_import_long(
-                    in_str=im.namespace, ns=ns)
 
-                s += f"from {rel[0]} import {rel[1]} as {rel[2]}"
-            return s
+            def get_rel_lst() -> List[Tuple[str, str, str]]:
+                rel_lst = []
+                for im in imports:
+                    rel_lst.append(RelInfo.get_rel_import_long(
+                        in_str=im.namespace, ns=ns))
+                return rel_lst
+            rels = get_rel_lst()
+            if self._as_json:
+                return Util.get_formated_dict_list_str(rels)
+            frm_lst = []
+            for rel in rels:
+                frm_lst.append(f"from {rel[0]} import {rel[1]} as {rel[2]}")
+            return "\n".join(frm_lst)
+
         ims = qry.get_imports(
             full_ns=self._ns_full_import, typing=self._ns_full_import_typing)
         if len(ims) == 0:
