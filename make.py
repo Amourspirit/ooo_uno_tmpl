@@ -1891,7 +1891,7 @@ def main():
                 ns_import_typing_child=args.namespace,
                 b_from=args.ns_import_from,
                 b_from_long=args.ns_import_from_long,
-                 b_json=args.as_json
+                b_json=args.as_json
             )
             qc_result = qc.results()
             if qc_result:
