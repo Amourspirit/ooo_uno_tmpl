@@ -701,7 +701,6 @@ class RuleImport(RuleBase):
 
             rel = base.Util.get_rel_import(p_type.imports, ns.namespace_str)
             
-            # val = f"{rel[1]}.{p_type.type}.{name}"
             val = f"{rel[1]}.{name}"
             result = Val(text=si.name,
                          identity=self.identity, is_flags=False,

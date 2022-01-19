@@ -837,6 +837,7 @@ class TagsStrObj:
         i = 0
         for ln in self._tags:
             s = ln.text.strip().replace("::", '.')
+            s = s.replace('\\', '\\\\')
             if not s:
                 continue
             if self._clean:
