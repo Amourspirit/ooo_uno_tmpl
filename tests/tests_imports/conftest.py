@@ -14,6 +14,21 @@ def get_module_types() -> dict:
     s_uno_obj = str(Path('scratch') / 'uno_obj').replace(os.sep, '.')
     module_links_file = 'module_links.json'
     app_root = Path(__file__).parent.parent.parent
+    pattern_generic_name = re.compile(r"([a-zA-Z0-9_]+)(<[A-Z, ]+>)")
+    def get_clean_classname(input: str) -> str:
+        """
+        Clean a class name and changes name suah as ``Pair< T, U >`` to ``Pair``
+
+        Args:
+            input (str): name
+
+        Returns:
+            str: cleaned name
+        """
+        # convert 'Pair< T, U >' to 'Pair'
+        s = pattern_generic_name.sub(r'\g<1>', input)
+        s = s.replace(" ", "_")
+        return s
     def get_module_link_files() -> Set[str]:
         dirname = app_root
         # https://stackoverflow.com/questions/20638040/glob-exclude-pattern
@@ -36,12 +51,13 @@ def get_module_types() -> dict:
         m_dir = str(Path(lnk_path).parent)
         s = ns.removeprefix('com.sun.star')
         s = s_uno_obj + s
+        c_name = get_clean_classname(name)
         return {
             "dir": m_dir,
-            "name": name,
+            "name": c_name,
             "href": href,
             "ns": s,
-            "c_name": camel_to_snake(name)
+            "c_name": camel_to_snake(c_name)
         }
 
     result: dict = {
@@ -172,11 +188,23 @@ def pytest_generate_tests(metafunc):
         metafunc.parametrize(
             "singlton_data", metafunc.module.singlton_data.__wrapped__(
                 MODULE_TYPES))
-    if metafunc.function.__name__ == "test_imp_enum" and "enum_data" in dir(metafunc.module):
+    elif metafunc.function.__name__ == "test_imp_enum" and "enum_data" in dir(metafunc.module):
         metafunc.parametrize(
             "enum_data", metafunc.module.enum_data.__wrapped__(
                 MODULE_TYPES))
-    if metafunc.function.__name__ == "test_imp_const" and "const_data" in dir(metafunc.module):
+    elif metafunc.function.__name__ == "test_imp_const" and "const_data" in dir(metafunc.module):
         metafunc.parametrize(
             "const_data", metafunc.module.const_data.__wrapped__(
+                MODULE_TYPES))
+    elif metafunc.function.__name__ == "test_imp_ex" and "ex_data" in dir(metafunc.module):
+        metafunc.parametrize(
+            "ex_data", metafunc.module.ex_data.__wrapped__(
+                MODULE_TYPES))
+    elif metafunc.function.__name__ == "test_imp_typedef" and "typedef_data" in dir(metafunc.module):
+        metafunc.parametrize(
+            "typedef_data", metafunc.module.typedef_data.__wrapped__(
+                MODULE_TYPES))
+    elif metafunc.function.__name__ == "test_imp_struct" and "struct_data" in dir(metafunc.module):
+        metafunc.parametrize(
+            "struct_data", metafunc.module.struct_data.__wrapped__(
                 MODULE_TYPES))
