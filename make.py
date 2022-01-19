@@ -1876,10 +1876,10 @@ def main():
             qc = db_manager.NamespaceControler(
                 config=config,
                 ns_full_import=args.ns_import_name,
-                ns_full_import_child=args.ns_import_child,
-                ns_full_import_typing=require_typing,
-                ns_full_import_from=args.ns_import_from,
-                ns_full_import_from_long=args.ns_import_from_long,
+                b_child=args.ns_import_child,
+                b_import_typing=require_typing,
+                b_from=args.ns_import_from,
+                b_from_long=args.ns_import_from_long,
                 as_json=args.as_json
             )
             qc_result = qc.results()
@@ -1889,8 +1889,8 @@ def main():
             qc = db_manager.NamespaceControler(
                 config=config,
                 ns_import_typing_child=args.namespace,
-                ns_import_typing_from=args.ns_import_from,
-                ns_import_typing_from_long=args.ns_import_from_long
+                b_from=args.ns_import_from,
+                b_from_long=args.ns_import_from_long
             )
             qc_result = qc.results()
             if qc_result:

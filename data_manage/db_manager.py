@@ -1482,23 +1482,13 @@ class NamespaceControler:
         self._link: Union[str, None] = kwargs.get('ns_link', None)
 
         self._ns_full_import: Union[str, None] = kwargs.get('ns_full_import', None)
-        self._ns_full_import_typing: Union[bool, None] = kwargs.get(
-            'ns_full_import_typing', None)
-
-        self._ns_full_import_child: bool = bool(
-            kwargs.get('ns_full_import_child', False))
-        self._ns_full_import_from: bool = bool(
-            kwargs.get('ns_full_import_from', False))
-        self._ns_full_import_from_long: bool = bool(
-            kwargs.get('ns_full_import_from_long', False))
-
         self._ns_import_typing_child: Union[str, None] = kwargs.get(
             'ns_import_typing_child', None)
-        self._ns_import_typing_from: bool = bool(
-            kwargs.get('ns_import_typing_from', False))
-        self._ns_import_typing_from_long: bool = bool(
-            kwargs.get('ns_import_typing_from_long', False))
 
+        self._b_typing: Union[bool, None] = kwargs.get('b_import_typing', None)
+        self._b_child: bool = bool(kwargs.get('b_child', False))
+        self._b_from: bool = bool(kwargs.get('b_from', False))
+        self._b_from_long: bool = bool(kwargs.get('b_from_long', False))
         self._as_json: bool = bool(kwargs.get('as_json', False))
 
     def results(self):
@@ -1515,7 +1505,7 @@ class NamespaceControler:
         elif self._link:
             return self._get_link()
         elif self._ns_full_import:
-            if self._ns_full_import_child:
+            if self._b_child:
                 return self._get_imports_child()
             return self._get_imports()
         elif self._ns_import_typing_child:
@@ -1670,8 +1660,8 @@ class NamespaceControler:
             full_ns=self._ns_full_import)
         if len(ims) == 0:
             return ''
-        if self._ns_full_import_from:
-            if self._ns_full_import_from_long:
+        if self._b_from:
+            if self._b_from_long:
                 return self._ns_child_lst_to_from_long(ims, self._ns_full_import)
             return self._ns_child_lst_to_from(ims, self._ns_full_import)
         return self._ns_child_lst_to_lines(ims)
@@ -1682,8 +1672,8 @@ class NamespaceControler:
             full_ns=self._ns_import_typing_child)
         if len(ims) == 0:
             return ''
-        if self._ns_import_typing_from:
-            if self._ns_import_typing_from_long:
+        if self._b_from:
+            if self._b_from_long:
                 return self._ns_child_lst_to_from_long(ims, self._ns_import_typing_child)
             return self._ns_child_lst_to_from(ims, self._ns_import_typing_child)
         return self._ns_child_lst_to_lines(ims)
@@ -1736,11 +1726,11 @@ class NamespaceControler:
             return "\n".join(frm_lst)
 
         ims = qry.get_imports(
-            full_ns=self._ns_full_import, typing=self._ns_full_import_typing)
+            full_ns=self._ns_full_import, typing=self._b_typing)
         if len(ims) == 0:
             return ''
-        if self._ns_full_import_from:
-            if self._ns_full_import_from_long:
+        if self._b_from:
+            if self._b_from_long:
                 return get_from_imports_long(imports=ims)
             return get_from_imports_short(imports=ims)
         return get_full_imports_str(imports=ims)
