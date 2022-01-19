@@ -7,8 +7,6 @@ Reads Component json files and writes info in a database.
 # region Imports
 from abc import abstractmethod
 from dataclasses import dataclass, asdict, field
-from enum import unique
-from optparse import Option
 import os
 import glob
 import json
@@ -20,8 +18,8 @@ from pathlib import Path
 from typing import Any, Dict, Optional, Set, List, Union, Tuple
 from config import AppConfig
 from parser import __version__, JSON_ID, mod_rel as RelInfo
+from .json_merge import JsonMerge
 # endregion Imports
-
 
 
 # region Dataclass
@@ -507,7 +505,30 @@ class SqlModuleInfo(BaseSqlTable):
 
 # region    Query
 
-class NsImports(BaseSql):
+class QryFile(BaseSql):
+    def __init__(self, connect_str: str) -> None:
+        super().__init__(connect_str=connect_str)
+    
+    def get_file_path(self, full_ns: str) -> str:
+        """
+        Gets a file path from database for a given component namespace
+
+        Args:
+            full_ns (str): namespace such as ``com.sun.star.util.MeasureUnit``
+
+        Returns:
+            str: File path
+        """
+        qry = "SELECT component.file FROM component WHERE component.id_component like :namespace LIMIT 1"
+        path = ''
+        with SqlCtx(self.conn_str) as db:
+            db.cursor.execute(qry, {"namespace": full_ns})
+            for row in db.cursor:
+               path = row['file']
+        return path
+    
+class QryNsImports(BaseSql):
+    """Namespace related Query"""
     def __init__(self, connect_str: str) -> None:
         super().__init__(connect_str=connect_str)
 
@@ -1371,6 +1392,7 @@ class ParseModuleLinks:
 
 # endregion Parse
 
+# region Util
 class Util:
     @staticmethod
     def get_formated_dict_list_str(obj: Union[dict, list], indent=2) -> str:
@@ -1389,6 +1411,9 @@ class Util:
         _indent = 4 if indent < 0 else indent
         formatted = json.dumps(obj, indent=_indent)
         return formatted
+
+# endregion Util
+
 # region Controller
 
 
@@ -1429,6 +1454,21 @@ class DatabaseControler:
 
 class NamespaceControler:
     def __init__(self, config: AppConfig, **kwargs) -> None:
+        """
+        Constructor
+
+        Args:
+            config (AppConfig): App Config
+        
+        Keyword Arguments:
+            ns_name (str, optional): Namesapce, get tree data for namesapce.
+            ns_flat (str, optional): Namesapce, get flat unique inherits. Other Opt - ns_child_only
+            ns_child_only (bool, optional): Determins if returns chiild namespaces. Default True
+            extends_long (str, optional): Namesapce, gets extends in long format. Other Opt - ns_child_only
+            extends_short (str, optional): Namesapce, gets extends in short format. Other Opt - ns_child_only
+            ns_link (str, optional): Namesapce, get url for a given namespace.
+            
+        """
         self._conn = DbConnect(config)
         self._ns_name: Union[str, None] = kwargs.get('ns_name', None)
         self._ns_flat: Union[str, None] = kwargs.get('ns_flat', None)
@@ -1495,7 +1535,7 @@ class NamespaceControler:
                     com.sun.star.uno.XInterface
         """
         indent_amt = 4
-        qry = NsImports(self._conn.connection_str)
+        qry = QryNsImports(self._conn.connection_str)
 
         def get_str(nt: NamespaceTree, in_str: str, indent: int) -> str:
             ns_str = in_str
@@ -1522,7 +1562,7 @@ class NamespaceControler:
             for itm in lst:
                 lines_lst.append(itm.namespace)
             return lines_lst
-        qry = NsImports(self._conn.connection_str)
+        qry = QryNsImports(self._conn.connection_str)
         flat_full = not self._ns_child_only
         n_flat = qry.get_flat_ns(namespace=self._ns_flat, full=flat_full)
         lines = get_lines(n_flat)
@@ -1537,7 +1577,7 @@ class NamespaceControler:
             for frm in lst:
                 lines_lst.append(f"from {frm[0]} import {frm[1]} as {frm[2]}")
             return lines_lst
-        qry = NsImports(self._conn.connection_str)
+        qry = QryNsImports(self._conn.connection_str)
         full = not self._ns_child_only
         froms = qry.get_flat_imports(namespace=self._ns_flat_frm, full=full)
         if self._as_json:
@@ -1547,7 +1587,7 @@ class NamespaceControler:
             return "\n".join(lines)
     
     def _get_extends(self, long: bool) -> str:
-        qry = NsImports(self._conn.connection_str)
+        qry = QryNsImports(self._conn.connection_str)
         full = not self._ns_child_only
         if long:
             extends = qry.get_extends_long(namespace=self._ns_extends_lng, full=full)
@@ -1559,7 +1599,7 @@ class NamespaceControler:
             return ", ".join(extends)
     
     def _get_link(self) -> str:
-        qry = NsImports(self._conn.connection_str)
+        qry = QryNsImports(self._conn.connection_str)
         return qry.get_ns_link(full_ns=self._link)
 
     def _ns_child_lst_to_lines(self, lst: List[NamespaceChild]) -> str:
@@ -1625,7 +1665,7 @@ class NamespaceControler:
             return "\n".join(lines)
 
     def _get_imports_child(self) -> str:
-        qry = NsImports(self._conn.connection_str)
+        qry = QryNsImports(self._conn.connection_str)
         ims = qry.get_imports_child(
             full_ns=self._ns_full_import)
         if len(ims) == 0:
@@ -1637,7 +1677,7 @@ class NamespaceControler:
         return self._ns_child_lst_to_lines(ims)
     
     def _get_imports_typing_child(self) -> str:
-        qry = NsImports(self._conn.connection_str)
+        qry = QryNsImports(self._conn.connection_str)
         ims = qry.get_imports_child_typing(
             full_ns=self._ns_import_typing_child)
         if len(ims) == 0:
@@ -1649,7 +1689,7 @@ class NamespaceControler:
         return self._ns_child_lst_to_lines(ims)
 
     def _get_imports(self) -> str:
-        qry = NsImports(self._conn.connection_str)
+        qry = QryNsImports(self._conn.connection_str)
 
         def get_lines(imports: List[FullImport]) -> List[str]:
             lines_lst = []
@@ -1716,4 +1756,15 @@ class ComponentControler:
             self._parser.update_all_details()
         return None
 
+class JsonController:
+    def __init__(self, config: AppConfig, **kwargs) -> None:
+        self._config = config
+        self._namespace: Union[str, None] = kwargs.get('namespace', None)
+    
+    def results(self) -> Any:
+        if self._namespace:
+            pass
+    
+    
+    
 # endregion Controller
