@@ -208,3 +208,7 @@ def pytest_generate_tests(metafunc):
         metafunc.parametrize(
             "struct_data", metafunc.module.struct_data.__wrapped__(
                 MODULE_TYPES))
+    elif metafunc.function.__name__ == "test_imp_interface" and "interface_data" in dir(metafunc.module):
+        metafunc.parametrize(
+            "interface_data", metafunc.module.interface_data.__wrapped__(
+                MODULE_TYPES))

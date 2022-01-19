@@ -57,7 +57,6 @@ def typedef_data(module_types):
         results.append(name)
     return results
 
-
 @pytest.fixture(scope='session')
 def struct_data(module_types):
     lst = module_types["struct"]
@@ -66,6 +65,17 @@ def struct_data(module_types):
         name = f"{data['ns']}.{data['c_name']}.{data['name']}"
         results.append(name)
     return results
+
+
+@pytest.fixture(scope='session')
+def interface_data(module_types):
+    lst = module_types["interface"]
+    results = []
+    for data in lst:
+        name = f"{data['ns']}.{data['c_name']}.{data['name']}"
+        results.append(name)
+    return results
+
 def test_imp_singleton(singlton_data: str):
     # https://github.com/pytest-dev/pytest/issues/6374
     imc = ImportCheck()
@@ -95,3 +105,8 @@ def test_imp_typedef(typedef_data: str):
 def test_imp_struct(struct_data: str):
     imc = ImportCheck()
     assert imc.load_import(struct_data) == True
+
+
+def test_imp_interface(interface_data: str):
+    imc = ImportCheck()
+    assert imc.load_import(interface_data) == True
