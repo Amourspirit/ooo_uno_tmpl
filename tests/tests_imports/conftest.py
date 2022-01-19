@@ -1,7 +1,6 @@
 # coding: utf-8
 from typing import Set
 import pytest
-import logging
 import os
 import sys
 import glob
@@ -9,25 +8,12 @@ import re
 import json
 from pathlib import Path
 sys.path.append(os.path.realpath('.'))
-from logger.log_handle import get_logger
 
-@pytest.fixture(scope='session')
-def test_log():
-    log = get_logger('test', log_file='test.log', log_level=logging.DEBUG, add_handler_file=False)
-    return log
 
-@pytest.fixture(scope="session")
-def scrtch_uno_path() -> Path:
-    return Path('scratch') / 'uno_obj'
-
-@pytest.fixture(scope='session')
-def app_root() -> Path:
-    return Path(__file__).parent.parent
-
-@pytest.fixture(scope='session')
-def module_types(app_root, scrtch_uno_path) -> dict:
-    s_uno_obj = str(scrtch_uno_path).replace(os.sep, '.')
+def get_module_types() -> dict:
+    s_uno_obj = str(Path('scratch') / 'uno_obj').replace(os.sep, '.')
     module_links_file = 'module_links.json'
+    app_root = Path(__file__).parent.parent.parent
     def get_module_link_files() -> Set[str]:
         dirname = app_root
         # https://stackoverflow.com/questions/20638040/glob-exclude-pattern
@@ -56,8 +42,8 @@ def module_types(app_root, scrtch_uno_path) -> dict:
             "href": href,
             "ns": s,
             "c_name": camel_to_snake(name)
-            }
-    
+        }
+
     result: dict = {
         "enum": [],
         "const": [],
@@ -68,13 +54,13 @@ def module_types(app_root, scrtch_uno_path) -> dict:
         "interface": [],
         "singleton": []
     }
-    
-    def load_enum(lnk_path:str, j_data:dict):
-        ns:str = j_data['namespace']
-        lst = j_data['data'].get('enum', [])
+
+    def load_enum(lnk_path: str, j_data: dict):
+        ns: str = j_data['namespace']
+        lst = j_data['data'].get('enums', [])
         for el in lst:
-            
-            result['enums'].append(get_module_link_details(
+
+            result['enum'].append(get_module_link_details(
                 lnk_path=lnk_path,
                 name=el['name'],
                 href=el['href'],
@@ -104,7 +90,7 @@ def module_types(app_root, scrtch_uno_path) -> dict:
                 href=el['href'],
                 ns=ns
             ))
-    
+
     def load_service(lnk_path: str, j_data: dict):
         ns = j_data['namespace']
         lst = j_data['data']['classes'].get('service', [])
@@ -116,7 +102,7 @@ def module_types(app_root, scrtch_uno_path) -> dict:
                 href=el['href'],
                 ns=ns
             ))
-    
+
     def load_struct(lnk_path: str, j_data: dict):
         ns = j_data['namespace']
         lst = j_data['data']['classes'].get('struct', [])
@@ -140,7 +126,7 @@ def module_types(app_root, scrtch_uno_path) -> dict:
                 href=el['href'],
                 ns=ns
             ))
-    
+
     def load_interface(lnk_path: str, j_data: dict):
         ns = j_data['namespace']
         lst = j_data['data']['classes'].get('interface', [])
@@ -164,7 +150,7 @@ def module_types(app_root, scrtch_uno_path) -> dict:
                 href=el['href'],
                 ns=ns
             ))
-    
+
     for j_file in get_module_link_files():
         with open(j_file, 'r') as file:
             j_data = json.load(file)
@@ -179,4 +165,18 @@ def module_types(app_root, scrtch_uno_path) -> dict:
 
     return result
 
+MODULE_TYPES = get_module_types()
 
+def pytest_generate_tests(metafunc):
+    if metafunc.function.__name__ == "test_imp_singleton" and "singlton_data" in dir(metafunc.module):
+        metafunc.parametrize(
+            "singlton_data", metafunc.module.singlton_data.__wrapped__(
+                MODULE_TYPES))
+    if metafunc.function.__name__ == "test_imp_enum" and "enum_data" in dir(metafunc.module):
+        metafunc.parametrize(
+            "enum_data", metafunc.module.enum_data.__wrapped__(
+                MODULE_TYPES))
+    if metafunc.function.__name__ == "test_imp_const" and "const_data" in dir(metafunc.module):
+        metafunc.parametrize(
+            "const_data", metafunc.module.const_data.__wrapped__(
+                MODULE_TYPES))

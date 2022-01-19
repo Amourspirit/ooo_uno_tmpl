@@ -3129,7 +3129,7 @@ class ImportCheck:
     services do not inherit classes that are already inherited by a
     child class.
     """
-    # https://stackoverflow.com/questions/31028237/getting-all-superclasses-in-python-3
+    # https://tinyurl.com/y6veetog
     @AcceptedTypes(str, ftype=DecFuncEnum.METHOD)
     def __init__(self, ns: str):
         """

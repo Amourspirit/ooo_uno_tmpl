@@ -1,12 +1,13 @@
 # coding: utf-8
 import pytest
+
 if __name__ == "__main__":
     import sys
     import os
     # sys.path.append(os.path.realpath('..'))
     pytest.main([__file__])
 
-import parser.type_mod as tm
+import parser.mod_type as tm
 
 
 def test_rule_primative():
