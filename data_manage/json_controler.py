@@ -53,6 +53,7 @@ class JsonController:
         data = self._get_ns_data()
         data['data']['name'] = merged_data['name']
         data['data']['namespace'] = merged_data['namespace']
+        data['data']['allow_db'] = merged_data['allow_db']
         data['data']['quote'] = merged_data['quote']
         data['data']['typings'] = merged_data['typings']
         data['data']['requires_typing'] = merged_data['requires_typing']

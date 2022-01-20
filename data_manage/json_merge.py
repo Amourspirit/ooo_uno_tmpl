@@ -35,6 +35,7 @@ class JsonMerge:
         result_data = {
             "name": self._c_name,
             "namespace": self._namespace,
+            "allow_db": False,
             "quote": [],
             "typings": [],
             "requires_typing": False,

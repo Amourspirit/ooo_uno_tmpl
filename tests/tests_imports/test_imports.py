@@ -125,3 +125,8 @@ def test_imp_interface(interface_data: str):
 def test_imp_service(service_data: str):
     imc = ImportCheck()
     assert imc.load_import(service_data) == True
+
+def _test_FormController():
+    ns= 'scratch.uno_obj.form.form_controller.FormController'
+    imc = ImportCheck()
+    assert imc.load_import(ns) == True

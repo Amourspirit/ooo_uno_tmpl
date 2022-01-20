@@ -1861,7 +1861,7 @@ def main():
                 elif args.ns_extends_long:
                     qc = db_manager.NamespaceControler(
                         config=config,
-                        extends_short=args.namespace,
+                        extends_long=args.namespace,
                         b_child=args.ns_child,
                         b_json=args.as_json
                     )

@@ -20,7 +20,7 @@ class BaseStruct(BaseJson):
         def set_data(_key: str, a_name=None):
             attr_name = _key if not a_name else a_name
             val = data.get(_key, None)
-            if val:
+            if not val is None:
                 setattr(self, attr_name, val)
         # validation ensures min version of 0.1.1
         set_data('name')
