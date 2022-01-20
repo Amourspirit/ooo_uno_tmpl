@@ -70,12 +70,9 @@ class JsonController:
     def _get_from_imports(self) -> List[List[str]]:
         nc = db.NamespaceControler(
             config=self._config,
-            ns_import=self._namespace,
+            ns_flat_frm=self._namespace,
             b_json=True,
-            b_from=True,
-            b_from_long=True,
             b_child=False,
-            b_typing=False
         )
         return json.loads(nc.results())
 
