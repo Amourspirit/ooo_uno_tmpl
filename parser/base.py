@@ -35,9 +35,11 @@ from kwhelp import rules
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Optional, Set, Tuple, Union
 from datetime import datetime, timezone
-from functools import cache
-def _set_sys_paths():
 
+APP_ROOT: str = None
+
+def _set_sys_paths():
+    global APP_ROOT
     # due to the way some scritps run and cache it is required to ensure this modules path is in sys.path
     # this has to do with pickle caching.
     f_path = Path(__file__).parent
@@ -45,6 +47,8 @@ def _set_sys_paths():
         sys.path.insert(0, str(f_path))
     # append path to project root
     _app_root = os.environ.get('project_root', str(f_path.parent))
+    if APP_ROOT is None:
+        APP_ROOT = _app_root
     if not _app_root in sys.path:
         sys.path.insert(0, _app_root)
 _set_sys_paths()
@@ -69,6 +73,7 @@ URL_SPLIT = '_1_1'
 TEXT_CACHE: 'TextCache' = None
 PICKLE_CACHE: 'PickleCache' = None
 _KNOWN_EXTENDS: Dict[str, List[str]] = None
+_KNOWN_JSON: Dict[str, List[str]] = None
 # endregion CONST
 
 # region config
@@ -110,6 +115,26 @@ def get_known_extends(ns:str, class_name: str) -> Union[List['Ns'], None]:
         results.append(Ns(name=parts[1], namespace=parts[0]))
     return results
         
+# endregion Known Extends
+
+# region Known Extends
+
+
+def get_known_json(full_ns: str) -> Union[str, None]:
+    global _KNOWN_JSON
+    key = full_ns
+    if _KNOWN_JSON is None:
+        json_file = Path(__file__).parent / 'config' / 'known_json.json'
+        with open(json_file, 'r') as file:
+            _KNOWN_JSON = json.load(file)
+    if not key in _KNOWN_JSON:
+        return None
+    file = _KNOWN_JSON[full_ns]
+    json_file = Path(APP_ROOT) / 'parser' / 'known_json' / file
+    with open(json_file, 'r') as file:
+        j_data = json.load(file)
+    return Util.get_formated_dict_list_str(j_data, indent=2)
+
 # endregion Known Extends
 
 # region Type Map

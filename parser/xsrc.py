@@ -215,6 +215,11 @@ class Parser(base.ParserBase):
         }
         return args
 
+    def get_full_name(self) -> str:
+        ni = self._api_data.name.get_obj()
+        return self._api_data.ns.namespace_str + '.' + ni.name
+        
+
     def get_info(self) -> Dict[str, object]:
         """
         Gets info
@@ -235,7 +240,6 @@ class Parser(base.ParserBase):
         ex = []
         for el in self._api_data.inherited.get_obj():
             ex.append(el.fullns)
-        ns = self._api_data.ns
         # ex_s = base.Util.get_clean_imports(ns=ns.namespace_str, imports=ex)
         ni = self._api_data.name.get_obj()
         result = {
@@ -461,6 +465,7 @@ class Writer(base.WriteBase):
         self._json_out: bool = kwargs.get('json_out', True)
         self._write_template_long: bool = kwargs.get(
             'write_template_long', False)
+        self._allow_known_json: bool = bool(kwargs.get('allow_known_json', True))
         self._indent_amt = 4
         self._json_str = None
         self._p_name: str = None
@@ -536,6 +541,12 @@ class Writer(base.WriteBase):
     def _get_json(self) -> str:
         if not self._json_str is None:
             return self._json_str
+        if self._allow_known_json:
+            full_ns = self._parser.get_full_name()
+            known_json = base.get_known_json(full_ns=full_ns)
+            if known_json:
+                self._json_str = known_json
+                return self._json_str
         p_dict = {}
         p_dict['from_imports'] = self._get_from_imports()
         p_dict['from_imports_typing'] = self._get_from_imports_typing()
@@ -907,6 +918,7 @@ class Processer:
             print_template (str, optional): Print template to terminal. Default ``False``
             write_template (str, optional): Write template file into obj_uno subfolder. Default ``False``
             write_json (str, optional): Write json file into obj_uno subfolder. Default ``False``
+            allow_known_json (bool, optional): Allow Known Json to be used
             verbose (str, optional): Verobose output.
             log_file (str, optional): Log File
             remove_parent_inherited (bool, optional): Determins if parsers remove classes from inhertiance if an inherited class
@@ -930,6 +942,7 @@ class Processer:
         self._long_names = bool(kwargs.get('long_names', base.APP_CONFIG.use_long_import_names))
         self._remove_parent_inherited = bool(
             kwargs.get('remove_parent_inherited', base.APP_CONFIG.remove_parent_inherited))
+        self._allow_know_json = bool(kwargs.get('allow_known_json', False))
 
     def process(self) -> Union[str, None]:
         parser = self._parser(
@@ -949,7 +962,8 @@ class Processer:
             clear_on_print=self._print_clear,
             write_template_long=self._long_template,
             include_desc=self._include_desc,
-            json_out=self._json_out
+            json_out=self._json_out,
+            allow_known_json=self._allow_know_json
         )
         return w.write()
 
@@ -974,6 +988,7 @@ def parse(**kwargs) -> Union[str, None]:
         print_template (str, optional): Print template to terminal. Default ``False``
         write_template (str, optional): Write template file into obj_uno subfolder. Default ``False``
         write_json (str, optional): Write json file into obj_uno subfolder. Default ``False``
+        allow_known_json (bool, optional): Allow Known Json to be used
         verbose (str, optional): Verobose output.
         log_file (str, optional): Log File
     
@@ -997,6 +1012,8 @@ def parse(**kwargs) -> Union[str, None]:
     _include_desc = bool(kwargs.get('include_desc', True))
     _long_names = bool(kwargs.get(
         'long_names', base.APP_CONFIG.use_long_import_names))
+    _allow_know_json = bool(kwargs.get('allow_known_json', False))
+
     if logger is None:
         log_args = {}
         if _log_file:
@@ -1023,7 +1040,8 @@ def parse(**kwargs) -> Union[str, None]:
         write_template_long=_long_template,
         include_desc=_include_desc,
         long_names=_long_names,
-        json_out=_json_out
+        json_out=_json_out,
+        allow_know_json=_allow_know_json
     )
     return proc.process()
 
