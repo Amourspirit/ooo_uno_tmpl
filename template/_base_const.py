@@ -22,6 +22,7 @@ class BaseConst(BaseJson):
 
         set_data('name')
         set_data('namespace')
+        set_data('allow_db')
         set_data('desc')
         set_data('url', 'link')
         set_data('imports')
