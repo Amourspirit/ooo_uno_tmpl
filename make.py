@@ -10,7 +10,7 @@ import glob
 import argparse
 import subprocess
 import tempfile
-from data_manage import db_manager
+from data_manage import db_manager, json_controler
 from multiprocessing import Pool
 from typing import List, Optional, Set
 from kwhelp import rules
@@ -1915,7 +1915,7 @@ def main():
         # endregion Namespace
         # region JSON
         if args.command_data == 'db-json':
-            qc = db_manager.JsonController(
+            qc = json_controler.JsonController(
                 config=config,
                 namespace=args.namespace
             )

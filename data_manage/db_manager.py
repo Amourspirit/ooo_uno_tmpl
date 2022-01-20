@@ -18,7 +18,7 @@ from pathlib import Path
 from typing import Any, Dict, Optional, Set, List, Union, Tuple
 from config import AppConfig
 from parser import __version__, JSON_ID, mod_rel as RelInfo
-from .json_merge import JsonMerge
+
 # endregion Imports
 
 
@@ -1756,63 +1756,5 @@ class ComponentControler:
             self._parser.update_all_details()
         return None
 
-class JsonController:
-    def __init__(self, config: AppConfig, **kwargs) -> None:
-        self._config = config
-        self._namespace: Union[str, None] = kwargs.get('namespace', None)
-        self._conn = DbConnect(config)
-        
-    def results(self) -> Any:
-        if self._namespace:
-            return Util.get_formated_dict_list_str(self._get_data())
-    
-    def _get_files(self) -> List[str]:
-        qry_file = QryFile(self._conn.connection_str)
-        qry_ns = QryNsImports(self._conn.connection_str)
-        ns_lst = qry_ns.get_flat_ns(self._namespace, False)
-        files = []
-        for ns in ns_lst:
-            files.append(qry_file.get_file_path(ns.namespace))
-        return files       
-    
-    def _get_data(self) -> dict:
-        files = self._get_files()
-        j_merge = JsonMerge(config=self._config, files=files, full_ns=self._namespace)
-        data = j_merge.get_merged_data()
-        data['extends'] = self._get_extends()
-        data['extends_map'] = self._get_extends_map(data['extends'])
-        data['from_imports'] = self._get_from_imports()
-        return data
-    
-    def _get_from_imports(self) -> List[List[str]]:
-        nc = NamespaceControler(
-            config=self._config,
-            ns_import=self._namespace,
-            b_json=True,
-            b_from=True,
-            b_from_long=True,
-            b_child=False,
-            b_typing=False
-        )
-        return json.loads(nc.results())
 
-    
-    def _get_extends(self) -> List[str]:
-        nc = NamespaceControler(
-            config=self._config,
-            ns_flat=self._namespace,
-            b_json=True,
-            b_child=False
-            )
-        return json.loads(nc.results())
-    
-    def _get_extends_map(self, extends: List[str]) -> Dict[str, str]:
-        e_map = {}
-        for ex in extends:
-            name = RelInfo.get_rel_import_long_name(
-                in_str=ex,
-                ns=self._namespace
-            )
-            e_map[ex] = name
-        return e_map
 # endregion Controller
