@@ -463,6 +463,7 @@ class Writer(base.WriteBase):
         self._clear_on_print: bool = kwargs.get('clear_on_print', True)
         self._include_desc: bool = kwargs.get('include_desc', True)
         self._json_out: bool = kwargs.get('json_out', True)
+        self._allow_db = kwargs.get('allow_db', True)
         self._write_template_long: bool = kwargs.get(
             'write_template_long', False)
         self._allow_known_json: bool = bool(kwargs.get('allow_known_json', True))
@@ -548,6 +549,7 @@ class Writer(base.WriteBase):
                 self._json_str = known_json
                 return self._json_str
         p_dict = {}
+        p_dict['allow_db'] = self._allow_db
         p_dict['from_imports'] = self._get_from_imports()
         p_dict['from_imports_typing'] = self._get_from_imports_typing()
         p_dict['extends_map'] = self._get_imports_map()
@@ -753,7 +755,8 @@ class Writer(base.WriteBase):
         self._template = self._template.replace('{name}', self._p_name)
         self._template = self._template.replace('{ns}', str(self._p_namespace))
         self._template = self._template.replace('{link}', self._p_url)
-
+        self._template = self._template.replace(
+            '{allow_db}', str(self._allow_db))
         self._template = self._template.replace(
             '{extends_map}', base.Util.get_formated_dict_list_str(self._get_imports_map()))
         self._template = self._template.replace(

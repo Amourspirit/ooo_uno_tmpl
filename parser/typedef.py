@@ -345,6 +345,7 @@ class WriterTypeDef(base.WriteBase):
         self._write_file: bool = kwargs.get('write_template', False)
         self._print_json: bool = kwargs.get('print_json', True)
         self._write_json: bool = kwargs.get('write_json', False)
+        self._allow_db = kwargs.get('allow_db', True)
         self._clear_on_print: bool = kwargs.get('clear_on_print', True)
         self._write_template_long: bool = kwargs.get(
             'write_template_long', False)
@@ -396,6 +397,7 @@ class WriterTypeDef(base.WriteBase):
             "name": t_def.name,
             "namespace": d_data['namespace'],
             "url": d_data['url'],
+            "allow_db": self._allow_db,
             "type": t_def.type,
             "requires_typing": t_def.requires_typing
         }
@@ -479,6 +481,7 @@ class WriterTypeDef(base.WriteBase):
         if self._write_template_long is False:
             return self._template
         t = self._template
+        t = t.replace('{allow_db}', str(self._allow_db))
         t = t.replace('{libre_office_ver}', base.APP_CONFIG.libre_office_ver)
         t = t.replace('{name}', t_def.name)
         t = t.replace('{ns}', str(self._p_namespace))

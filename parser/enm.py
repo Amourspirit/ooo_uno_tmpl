@@ -388,6 +388,7 @@ class EnumWriter(base.WriteBase):
         self._write_json = kwargs.get('write_json', False)
         self._include_desc: bool = kwargs.get('include_desc', True)
         self._json_out: bool = kwargs.get('json_out', True)
+        self._allow_db = kwargs.get('allow_db', True)
         self._write_template_long: bool = kwargs.get(
             'write_template_long', False)
         self._indent_amt = 4
@@ -453,6 +454,7 @@ class EnumWriter(base.WriteBase):
             "name": 'place holder',
             "namespace": 'place holder',
             "url": 'place holder',
+            "allow_db": self._allow_db,
             "quote": [],
             "typings": []
         }
@@ -494,6 +496,8 @@ class EnumWriter(base.WriteBase):
         self._template = self._template.replace(
             '{libre_office_ver}', base.APP_CONFIG.libre_office_ver)
         self._template = self._template.replace('{sort}', str(self._sort))
+        self._template = self._template.replace(
+            '{allow_db}', str(self._allow_db))
         self._template = self._template.replace('{ns}', str(self._p_namespace))
         self._template = self._template.replace('{name}', self._p_name)
         self._template = self._template.replace('{link}', self._p_url)

@@ -6,6 +6,7 @@
 $self.init_data()#slurp
 #attr $name = ""
 #attr $namespace = ""
+#attr $allow_db = True
 #attr $libre_office_ver = False
 #attr $desc = []
 #attr $quote = set()
@@ -52,9 +53,11 @@ if typing.TYPE_CHECKING:
 #end for
 #end if
 
-
-## class ${safe_name}($self.get_class_inherits($name, $inherits))$self.get_class_end()
+#if $allow_db:
 class ${safe_name}($self.get_class_inherits_from_db())$self.get_class_end()
+#else
+class ${safe_name}($self.get_class_inherits($name, $inherits))$self.get_class_end()
+#end if
 #if $include_desc
     """
     #for $line in $self.line_gen($desc)

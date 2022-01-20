@@ -1401,6 +1401,7 @@ class ConstWriter(base.WriteBase):
         self._print_json = kwargs.get('print_json', True)
         self._write_json = kwargs.get('write_json', False)
         self._json_out = kwargs.get('json_out', False)
+        self._allow_db = kwargs.get('allow_db', True)
         self._include_desc: bool = kwargs.get('include_desc', True)
         self._write_template_long: bool = kwargs.get(
             'write_template_long', False)
@@ -1480,6 +1481,7 @@ class ConstWriter(base.WriteBase):
             "url": 'place holder',
             'flags': self._flags,
             "base_class": self._get_const_base_class(),
+            "allow_db": self._allow_db,
             "quote": [],
             "typings": []
         }
@@ -1567,6 +1569,7 @@ class ConstWriter(base.WriteBase):
             return
         self._template = self._template.replace(
             '{libre_office_ver}', base.APP_CONFIG.libre_office_ver)
+        self._template = self._template.replace('{allow_db}', str(self._allow_db))
         self._template = self._template.replace('{hex}', str(self._hex))
         self._template = self._template.replace('{flags}', str(self._flags))
         self._template = self._template.replace('{name}', self._p_name)
