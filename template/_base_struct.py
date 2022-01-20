@@ -24,11 +24,12 @@ class BaseStruct(BaseJson):
                 setattr(self, attr_name, val)
         # validation ensures min version of 0.1.1
         set_data('name')
+        set_data('namespace')
+        set_data('allow_db')
         set_data('desc')
         set_data('url', 'link')
         setattr(self, 'inherits', data.get('extends', []))
         set_data('imports')
-        set_data('namespace')
         set_data('from_imports')
         set_data('from_imports_typing')
         # get lo ver if it exist. Defaut to False

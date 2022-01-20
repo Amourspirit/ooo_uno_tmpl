@@ -19,9 +19,10 @@ class BaseTypeDef(BaseJson):
                 setattr(self, attr_name, val)
 
         set_data('name')
+        set_data('namespace')
+        set_data('allow_db')
         set_data('type')
         set_data('requires_typing')
-        set_data('namespace')
         set_data('desc')
         set_data('url', 'link')
         set_data('from_imports')

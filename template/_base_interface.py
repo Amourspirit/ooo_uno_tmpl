@@ -20,12 +20,13 @@ class BaseInterface(BaseJson):
                 setattr(self, attr_name, val)
     
         set_data('name')
+        set_data('namespace')
+        set_data('allow_db')
         set_data('desc')
         set_data('url', 'link')
         # _inherits = self.convert_lst_last(data.get('extends', []))
         setattr(self, 'inherits', data.get('extends', []))
         set_data('imports')
-        set_data('namespace')
         extends_map = data.get('extends_map', None)
         if extends_map:
             self.extends_map.update(extends_map)

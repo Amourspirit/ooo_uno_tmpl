@@ -18,11 +18,12 @@ class BaseEx(BaseJson):
                 setattr(self, attr_name, val)
 
         set_data('name')
+        set_data('namespace')
+        set_data('allow_db')
         set_data('desc')
         set_data('url', 'link')
         setattr(self, 'inherits', data.get('extends', []))
         set_data('imports')
-        set_data('namespace')
         # get lo ver if it exist. Defaut to False
         self.libre_office_ver = json_data.get('libre_office_ver', False)
         sort = bool(json_data['parser_args'].get('sort', False))
