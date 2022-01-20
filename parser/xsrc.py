@@ -918,7 +918,7 @@ class Processer:
             print_template (str, optional): Print template to terminal. Default ``False``
             write_template (str, optional): Write template file into obj_uno subfolder. Default ``False``
             write_json (str, optional): Write json file into obj_uno subfolder. Default ``False``
-            allow_known_json (bool, optional): Allow Known Json to be used
+            allow_known_json (bool, optional): Allow Known Json to be used. Default ``True``
             verbose (str, optional): Verobose output.
             log_file (str, optional): Log File
             remove_parent_inherited (bool, optional): Determins if parsers remove classes from inhertiance if an inherited class
@@ -942,7 +942,7 @@ class Processer:
         self._long_names = bool(kwargs.get('long_names', base.APP_CONFIG.use_long_import_names))
         self._remove_parent_inherited = bool(
             kwargs.get('remove_parent_inherited', base.APP_CONFIG.remove_parent_inherited))
-        self._allow_know_json = bool(kwargs.get('allow_known_json', False))
+        self._allow_know_json = bool(kwargs.get('allow_known_json', True))
 
     def process(self) -> Union[str, None]:
         parser = self._parser(
@@ -988,7 +988,7 @@ def parse(**kwargs) -> Union[str, None]:
         print_template (str, optional): Print template to terminal. Default ``False``
         write_template (str, optional): Write template file into obj_uno subfolder. Default ``False``
         write_json (str, optional): Write json file into obj_uno subfolder. Default ``False``
-        allow_known_json (bool, optional): Allow Known Json to be used
+        allow_known_json (bool, optional): Allow Known Json to be used. Default ``True``
         verbose (str, optional): Verobose output.
         log_file (str, optional): Log File
     
@@ -1012,7 +1012,7 @@ def parse(**kwargs) -> Union[str, None]:
     _include_desc = bool(kwargs.get('include_desc', True))
     _long_names = bool(kwargs.get(
         'long_names', base.APP_CONFIG.use_long_import_names))
-    _allow_know_json = bool(kwargs.get('allow_known_json', False))
+    _allow_know_json = bool(kwargs.get('allow_known_json', True))
 
     if logger is None:
         log_args = {}
