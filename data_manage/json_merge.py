@@ -7,16 +7,20 @@ import json
 from pathlib import Path
 from typing import List
 from config import AppConfig
+from parser import mod_rel as RelInfo
 
 
 class JsonMerge:
-    def __init__(self, config: AppConfig, files: List[str]) -> None:
+    def __init__(self, config: AppConfig, files: List[str], full_ns: str) -> None:
         self._config = config
         self._files = files
         project_root = os.environ.get('project_root', None)
         if project_root is None:
             raise Exception("project_root environment variable not set")
         self._project_root = Path(project_root)
+        ns_parts = full_ns.rsplit(sep='.', maxsplit=1)
+        self._namespace = ns_parts[0]
+        self._c_name = ns_parts[1]
 
     def _get_file_json(self, file: str) -> dict:
         file_path = self._project_root.joinpath(file)
@@ -29,6 +33,8 @@ class JsonMerge:
         requires_typing = False
 
         result_data = {
+            "name": self._c_name,
+            "namespace": self._namespace,
             "quote": [],
             "typings": [],
             "requires_typing": False,
@@ -36,12 +42,16 @@ class JsonMerge:
                 "general": [],
                 "typing": []
             },
+            "from_imports_typing": [],
+            "from_imports": [],
+            "imports": [],
             "items": {}
         }
 
         # region SETS
         quotes = set()
         typings = set()
+        from_imports_typing = set()
         full_imp_general = set()
         full_imp_typing = set()
         itm_methods = set()
@@ -116,10 +126,20 @@ class JsonMerge:
             req = bool(data.get('requires_typing', False))
             if req:
                 requires_typing = True
+
+        def process_from_imports_typing(ns: str, data: dict) -> None:
+            lst = data.get('from_imports_typing', [])
+            for frm in lst:
+                from_imports_typing.add(RelInfo.get_ns_from_rel(
+                    full_ns=ns,
+                    rel_from=frm[0],
+                    comp=frm[1]
+                ))
         # endregion process Methods
 
         for file in self._files:
             j_data_dict = self._get_file_json(file)
+            namespace = j_data_dict['namespace']
             j_data: dict = j_data_dict['data']
             process_quote_data(j_data)
             process_typings_data(j_data)
@@ -129,6 +149,7 @@ class JsonMerge:
             process_requires_typing(j_data)
             process_itm_types(j_data)
             process_itm_properties(j_data)
+            process_from_imports_typing(namespace, j_data)
 
         if len(quotes) > 0:
             result_data['quote'].extend(quotes)
@@ -142,6 +163,14 @@ class JsonMerge:
         if len(full_imp_typing) > 0:
             result_data['full_imports']['typing'].extend(full_imp_typing)
 
+        if len(from_imports_typing) > 0:
+            for ns in from_imports_typing:
+                # from_imports_typing
+                result_data['from_imports_typing'].append(
+                    RelInfo.get_rel_import_long(
+                        in_str=ns,
+                        ns=self._namespace
+                    ))
         result_data['requires_typing'] = requires_typing
 
         return result_data

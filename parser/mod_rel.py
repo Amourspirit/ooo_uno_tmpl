@@ -195,3 +195,45 @@ def get_rel_import_short_name(in_str: str, ns: str, sep: str = '.') -> str:
     """
     _, sn = get_rel_import(in_str=in_str, ns=ns, sep=sep)
     return sn
+
+
+@AcceptedTypes(str, opt_all_args=True)
+def get_ns_from_rel(full_ns:str, rel_from:str, comp:str, sep: str = '.') -> str:
+    """
+    Converts a relative import into a full namespace
+
+    Args:
+        full_ns (str): The namespace that import is relative to
+        rel_from (str): from part of import such as ``..uno.x_interface``
+        comp (str): Component name such as ``XInterface``
+        sep (str, optional): Seperator. Defaults to ``.``.
+
+    Returns:
+        str: full namespace such as ``com.sun.star.uno.XInterface``
+    """
+    s = rel_from
+    sep_count = 0
+    while s.startswith(sep):
+        s = s[1:]
+        sep_count += 1
+    if sep_count == 1:
+        # import is in the same namespace
+        return full_ns + sep + comp
+    s_parts = s.rsplit(sep=sep, maxsplit=1) # drop camel module name
+    if len(s_parts) == 1:
+        # import is in the same namespace
+        return full_ns + sep + comp
+    else:
+        s = s_parts[0]
+    if sep_count == 0:
+        return full_ns + sep + s + sep + comp
+    ns_parts = full_ns.split(sep)
+    if sep_count > len(ns_parts):
+        return s + sep + comp
+    slice = 1 - sep_count # ignore first . and convert to neg
+    if slice >= 0:
+        return sep.join(ns_parts) + sep + comp
+    ns = sep.join(ns_parts[:slice])
+    return ns + sep + s + sep + comp
+    
+    

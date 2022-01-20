@@ -1075,11 +1075,11 @@ def query_yes_no(question, default="yes"):
 # region    Main Testing
 def _main():
     # ns = 'com.sun.star.form.component.DatabaseTextField'
-    ns = 'com.sun.star.form.component.RichTextControl'
+    # ns = 'com.sun.star.form.component.RichTextControl'
+    ns = 'com.sun.star.form.FormController'
     # ns = 'com.sun.star.form.DataAwareControlModel'
     # ns = 'com.sun.star.text.TextRange'
-    sys.argv.extend(['-v', '--log-file', 'debug.log', 'data', 'db-imports',
-                    '--child', '-n', ns])
+    sys.argv.extend(['-v', '--log-file', 'debug.log', 'data', 'db-json', '-n', ns])
     main()
 
 def _touch():
@@ -1146,7 +1146,6 @@ def main():
 
     data_subparser = subparser.add_parser(name='data')
     data = data_subparser.add_subparsers(dest='command_data')
-    # data = data_subparser.add_parser(name='data')
     data_update = data.add_parser(name='db-update')
     data_init = data.add_parser(name='db-init')
     data_extends_flat = data.add_parser(name='db-extends-flat')
@@ -1154,7 +1153,7 @@ def main():
     data_imports = data.add_parser(name='db-imports')
     data_imports_typing_child = data.add_parser(name='db-imports-typing-child')
     data_qry = data.add_parser(name='db-qry')
-    
+    data_json = data.add_parser(name='db-json')
     # endregion create parsers
 
     # region ex args
@@ -1653,8 +1652,25 @@ def main():
         dest='ns_import_from_long',
         default=False
     )
+    data_imports_child_typing_group.add_argument(
+        '-j', '--json',
+        help='Output in json format',
+        action='store_true',
+        dest='as_json',
+        default=False
+    )
     # endregion     Data Imports Child
     # endregion imports
+
+    # region    JSON
+    data_json.add_argument(
+        '-n', '--name-space',
+        help='Genereate Json for a given namespace',
+        action='store',
+        dest='namespace',
+        default=None
+    )
+    # endregion JSON
     # endregion data args
 
     # region general args
@@ -1897,6 +1913,16 @@ def main():
             if qc_result:
                 print(qc_result)
         # endregion Namespace
+        # region JSON
+        if args.command_data == 'db-json':
+            qc = db_manager.JsonController(
+                config=config,
+                namespace=args.namespace
+            )
+            qc_result = qc.results()
+            if qc_result:
+                print(qc_result)
+        # endregion JSON
     # endregion data Command
 
     
