@@ -74,94 +74,47 @@ class Writer(bp.Writer):
 
 # region Parse method
 
-def _get_parsed_kwargs(**kwargs) -> Dict[str, str]:
-    required = ("json_file",)
-    lookups = {
-        "f": "json_file",
-        "json_file": "json_file",
-        "L": "log_file",
-        "log_file": "log_file"
-    }
-    result = {}
-    for k, v in kwargs.items():
-        if not isinstance(k, str):
-            continue
-        if k in lookups:
-            key = lookups[k]
-            result[key] = v
-        else:
-            result[k] = v
-    for k in required:
-        if not k in result:
-            # k is missing from kwargs
-            raise base.RequiredError(f"Missing required arg {k}.")
-    return result
-
-
-def _get_parsed_args(*args) -> Dict[str, bool]:
-    # key, value and value is a key into defaults
-    defaults = {
-        "verbose": False
-    }
-    found = {
-        "verbose": True
-    }
-    lookups = {
-        "v": "verbose",
-        "verbose": "verbose"
-    }
-    result = {k: v for k, v in defaults.items()}
-    for arg in args:
-        if not isinstance(arg, str):
-            continue
-        if arg in lookups:
-            key = lookups[arg]
-            result[key] = found[key]
-    return result
-
-
-def parse(*args, **kwargs):
+def parse(**kwargs):
     """
     Parses data, alternative to running on command line.
 
-    Other Arguments:
-        'no_sort' (str, optional): Short form ``'s'``. No sorting of results. Default ``False``
-        'no_cache' (str, optional): Short form ``'x'``. No caching. Default ``False``
-        'no_print_clear (str, optional): Short form ``'p'``. No clearing of terminal
-            when otuput to terminal. Default ``False``
-        'no_desc' (str, optional): Short from ``'d'``. No description will be outputed in template. Default ``False``
-        'long_names' (str, optional): Short form ``'l'``. Long names. Default set in config ``use_long_import_names`` property.
-            Toggles values set in config.
-        'long_template' (str, optional): Short form ``'g'``. Writes a long format template.
-            Requires write_template is set. Default ``False``
-        'clipboard' (str, optional): Short form ``'c'``. Copy to clipboard. Default ``False``
-        'print_json' (str, optional): Short form ``'n'``. Print json to termainl. Default ``False``
-        'print_template' (str, optional): Short form ``'m'``. Print template to terminal. Default ``False``
-        'write_template' (str, optional): Short form ``'t'``. Write template file into obj_uno subfolder. Default ``False``
-        'write_json' (str, optional): Short form ``'j'``. Write json file into obj_uno subfolder. Default ``False``
-        'verbose' (str, optional): Short form ``'v'``. Verobose output.
-
     Keyword Arguments:
-        json_file (str): Short form ``f``. url to parse
-        log_file (str, optional): Short form ``L``. Log File
+        json_file (str): file to parse
+        url (str): url to parse
+        sort (str, optional): Sorting of results. Default ``True``
+        cache (str, optional): Caching. Default ``False``
+        clear_on_print (str, optional): Clearing of terminal when otuput to terminal. Default ``False``
+        include_desc (str, optional): Description will be outputed in template. Default ``True``
+        json_out (bool, optional): returns json to caller if ``True``. Default ``False``
+        long_names (str, optional): Long names. Default set in config ``use_long_import_names`` property.
+            Toggles values set in config.
+        write_template_long (str, optional): Writes a long format template.
+            Requires write_template is set. Default ``False``
+        copy_clipboard (str, optional): Copy to clipboard. Default ``False``
+        print_json (str, optional): Print json to termainl. Default ``False``
+        print_template (str, optional): Print template to terminal. Default ``False``
+        write_template (str, optional): Write template file into obj_uno subfolder. Default ``False``
+        write_json (str, optional): Write json file into obj_uno subfolder. Default ``False``
+        verbose (str, optional): Verobose output.
+        log_file (str, optional): Log File
     """
     global logger
-    pkwargs = _get_parsed_kwargs(**kwargs)
-    pargs = _get_parsed_args(*args)
+    verbose = bool(kwargs.get('verbose', False))
+    log_file = kwargs.get('log_file', None)
 
     if logger is None:
         log_args = {}
-        if 'log_file' in pkwargs:
-            log_args['log_file'] = pkwargs['log_file']
+        if log_file:
+            log_args['log_file'] = log_file
         else:
             log_args['log_file'] = 'singleton_parse.log'
-        if pargs['verbose']:
+        if verbose:
             log_args['level'] = logging.DEBUG
         _set_loggers(get_logger(logger_name=Path(__file__).stem, **log_args))
-    kargs = pkwargs.copy()
+    kargs = kwargs.copy()
     kargs['iparser'] = Parser
     kargs['iwriter'] = Writer
-    bp.parse(*args, **kargs)
+    bp.parse(**kargs)
 
 # endregion Parse method
 
@@ -183,7 +136,7 @@ def main():
 
     p = Parser(json_path=args.json_file)
     w = Writer(parser=p)
-    w.Write('t', 'j')
+    w.Write(write_json=True, write_template=True)
 
 
 if __name__ == "__main__":

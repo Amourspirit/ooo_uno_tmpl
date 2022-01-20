@@ -15,6 +15,7 @@ import concurrent.futures
 from collections import namedtuple
 from typing import Dict, List, Tuple, Union
 from pathlib import Path
+from kwhelp.decorator import RequireArgs
 from verr import Version
 _app_root = os.environ.get('project_root', str(Path(__file__).parent.parent.parent))
 if not _app_root in sys.path:
@@ -137,24 +138,20 @@ class WriterConst:
             logger.error(res.stderr)
         return result
 
-    def _process_direct(self, url_data: urldata, *args, **kwargs) -> Tuple[bool, str]:
-        flags = [arg for arg in args if isinstance(arg, str)]
-        if len(flags) == 0:
-            flags.append('t')
-            flags.append('j')
+    def _process_direct(self, url_data: urldata,**kwargs) -> Tuple[bool, str]:
         kargs = kwargs.copy()
         kargs['url'] = url_data.href
         result = True
         try:
-            const.parse(*flags, **kargs)
+            const.parse(**kargs)
         except Exception:
             result = False
         return result, url_data.name
 
-    def Write(self, *args, **kwargs):
+    def Write(self, **kwargs):
         links = self._parser.get_links()
         with concurrent.futures.ProcessPoolExecutor() as executor:
-            results = [executor.submit(self._process_direct, link, *args, **kwargs)
+            results = [executor.submit(self._process_direct, link, **kwargs)
                        for link in links]
             for f in concurrent.futures.as_completed(results):
                 state, name = f.result()
@@ -165,86 +162,48 @@ class WriterConst:
 
 
 # region Parse method
-def _get_parsed_kwargs(**kwargs) -> Dict[str, str]:
-    required = ("json_file",)
-    lookups = {
-        "f": "json_file",
-        "json_file": "json_file",
-        "L": "log_file",
-        "log_file": "log_file"
-    }
-    result = {}
-    for k, v in kwargs.items():
-        if not isinstance(k, str):
-            continue
-        if k in lookups:
-            key = lookups[k]
-            result[key] = v
-    for k in required:
-        if not k in result:
-            # k is missing from kwargs
-            raise base.RequiredError(f"Missing required arg {k}.")
-    return result
 
-
-def _get_parsed_args(*args) -> Dict[str, bool]:
-    # key, value and value is a key into defaults
-    defaults = {
-        "verbose": False
-    }
-    found = {
-        "verbose": True
-    }
-    lookups = {
-        "v": "verbose",
-        "verbose": "verbose"
-    }
-    result = {k: v for k, v in defaults.items()}
-    for arg in args:
-        if not isinstance(arg, str):
-            continue
-        if arg in lookups:
-            key = lookups[arg]
-            result[key] = found[key]
-    return result
-
-
-def parse(*args, **kwargs):
+@RequireArgs('json_file')
+def parse(**kwargs):
     """
     Parses data, alternative to running on command line.
 
-    Other Arguments:
-        'no_cache' (str, optional): Short form ``'x'``. No caching. Default ``False``
-        'print_json' (str, optional): Short form ``'n'``. Print json to termainl. Default ``False``
-        'print_template' (str, optional): Short form ``'m'``. Print template to terminal. Default ``False``
-        'write_template' (str, optional): Short form ``'t'``. Write template file into obj_uno subfolder. Default ``False``
-        'long_template' (str, optional): Short form ``'g'``. Writes a long format template.
-            Requires write_template is set. Default ``False``
-        'clipboard' (str, optional): Short form ``'c'``. Copy to clipboard. Default ``False``
-        'write_json' (str, optional): Short form ``'j'``. Write json file into obj_uno subfolder. Default ``False``
-        'verbose' (str, optional): Short form ``'v'``. Verobose output.
-
     Keyword Arguments:
-        json_file (str): Short form ``f``. url to parse
-        log_file (str, optional): Short form ``L``. Log File
+        json_file (str): file to parse
+        url (str): url to parse
+        cache (str, optional): Caching. Default ``True``
+        include_desc (str, optional): Description will be outputed in template. Default ``True``
+        flags (str, optional): Treat as flags. Default ``False``
+        hex (str, optional): Treat as hex. Default ``False``
+        long_names (str, optional): Long names. Default set in config ``use_long_import_names`` property.
+            Toggles values set in config.
+        long_template (str, optional): Writes a long format template.
+            Requires write_template is set. Default ``False``
+        clipboard (str, optional): Copy to clipboard. Default ``False``
+        print_json (str, optional): Print json to termainl. Default ``False``
+        print_template (str, optional): Print template to terminal. Default ``False``
+        write_template (str, optional): Write template file into obj_uno subfolder. Default ``False``
+        write_json (str, optional): Write json file into obj_uno subfolder. Default ``False``
+        verbose (str, optional): Verobose output.
+        log_file (str, optional): Log File
     """
     global logger
-    pkwargs = _get_parsed_kwargs(**kwargs)
-    pargs = _get_parsed_args(*args)
-
+    _verbose = bool(kwargs.get('verbose', False))
+    _log_file = kwargs.get('log_file', None)
+    _json_file = str(kwargs['json_file'])
     if logger is None:
         log_args = {}
-        if 'log_file' in pkwargs:
-            log_args['log_file'] = pkwargs['log_file']
+        if _log_file:
+            log_args['log_file'] = _log_file
         else:
             log_args['log_file'] = 'const_parser.log'
-        if pargs['verbose']:
+        if _verbose:
             log_args['level'] = logging.DEBUG
         _set_loggers(get_logger(logger_name=Path(__file__).stem, **log_args))
 
-    p = ParserConst(json_path=pkwargs['json_file'])
+    p = ParserConst(json_path=_json_file)
     w = WriterConst(parser=p)
-    w.Write(*args, **kwargs)
+    w.Write(**kwargs)
 
 # endregion Parse method
 
@@ -291,7 +250,7 @@ def main():
 
     p = ParserConst(json_path=args.json_file)
     w = WriterConst(parser=p)
-    w.Write('t', 'j')
+    w.Write(write_json=True, write_template=True)
 
 
 if __name__ == "__main__":

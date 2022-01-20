@@ -184,11 +184,32 @@ class IWriter(ABC):
         """Gets parser name sucha as xsrc or struc"""
 
     @abstractmethod
-    def write(self, *args, **kwargs) -> None:
-        """Writes data"""
+    def write(self, **kwargs) -> None:
+        """
+        Writes data
+        
+        Keyword Arguments:
+            url (str): url to parse
+            no_sort (str, optional): No sorting of results. Default ``False``
+            no_cache (str, optional): No caching. Default ``False``
+            no_print_clear (str, optional):No clearing of terminal when otuput to terminal. Default ``False``
+            no_desc (str, optional): No description will be outputed in template. Default ``False``
+            json_out (bool, optional): returns json to caller if ``True``. Default ``False``
+            long_names (str, optional): Long names. Default set in config ``use_long_import_names`` property.
+                Toggles values set in config.
+            long_template (str, optional): Writes a long format template.
+                Requires write_template is set. Default ``False``
+            clipboard (str, optional): Copy to clipboard. Default ``False``
+            print_json (str, optional): Print json to termainl. Default ``False``
+            print_template (str, optional): Print template to terminal. Default ``False``
+            write_template (str, optional): Write template file into obj_uno subfolder. Default ``False``
+            write_json (str, optional): Write json file into obj_uno subfolder. Default ``False``
+            verbose (str, optional): Verobose output.
+            log_file (str, optional): Log File
+        """
 
     @abstractmethod
-    def get_parse_fn(seff) -> Callable:
+    def get_parse_fn(self) -> Callable:
         """Gets parse function such as xsrc.parse"""
 
 class Writer(IWriter):
@@ -210,28 +231,45 @@ class Writer(IWriter):
             logger.error(res.stderr)
         return result
 
-    def _process_direct(self, url_data: urldata, fn: Callable, *args, **kwargs) -> Tuple[bool, str]:
-        flags = [arg for arg in args if isinstance(arg, str)]
-        if len(flags) == 0:
-            flags.append('t')
-            flags.append('j')
+    def _process_direct(self, url_data: urldata, fn: Callable, **kwargs) -> Tuple[bool, str]:
         kargs = kwargs.copy()
         kargs['url'] = url_data.href
         result = True
         try:
-            fn(*flags, **kargs)
+            fn(**kargs)
         except Exception:
             result = False
         return result, url_data.name
 
-    def write(self, *args, **kwargs):
+    def write(self, **kwargs):
+        """
+        Writes data
+
+        Keyword Arguments:
+            url (str): url to parse
+            no_sort (str, optional): No sorting of results. Default ``False``
+            no_cache (str, optional): No caching. Default ``False``
+            no_print_clear (str, optional):No clearing of terminal when otuput to terminal. Default ``False``
+            no_desc (str, optional): No description will be outputed in template. Default ``False``
+            long_names (str, optional): Long names. Default set in config ``use_long_import_names`` property.
+                Toggles values set in config.
+            long_template (str, optional): Writes a long format template.
+                Requires write_template is set. Default ``False``
+            clipboard (str, optional): Copy to clipboard. Default ``False``
+            print_json (str, optional): Print json to termainl. Default ``False``
+            print_template (str, optional): Print template to terminal. Default ``False``
+            write_template (str, optional): Write template file into obj_uno subfolder. Default ``False``
+            write_json (str, optional): Write json file into obj_uno subfolder. Default ``False``
+            verbose (str, optional): Verobose output.
+            log_file (str, optional): Log File
+        """
         links = self._parser.get_links()
         fn = self.get_parse_fn()
         # for link in links:
         #     self._process_direct(link, fn, *args, **kwargs)
         # return
         with concurrent.futures.ProcessPoolExecutor() as executor:
-            results = [executor.submit(self._process_direct, link, fn, *args, **kwargs)
+            results = [executor.submit(self._process_direct, link, fn, **kwargs)
                        for link in links]
             for f in concurrent.futures.as_completed(results):
                 state, name = f.result()
@@ -243,86 +281,54 @@ class Writer(IWriter):
 # endregion IWriter class
 # region Parse method
 
-def _get_parsed_kwargs(**kwargs) -> Dict[str, str]:
-    required = ("json_file",)
-    ignore = ("iparser", "iwriter")
-    lookups = {
-        "f": "json_file",
-        "json_file": "json_file",
-        "L": "log_file",
-        "log_file": "log_file"
-    }
-    result = {}
-    for k, v in kwargs.items():
-        if not isinstance(k, str):
-            continue
-        if k in lookups:
-            key = lookups[k]
-            result[key] = v
-        else:
-            if not k in ignore:
-                result[k] = v
-    for k in required:
-        if not k in result:
-            # k is missing from kwargs
-            raise base.RequiredError(f"Missing required arg {k}.")
-    return result
 
-
-def _get_parsed_args(*args) -> Dict[str, bool]:
-    # key, value and value is a key into defaults
-    defaults = {
-        "verbose": False
-    }
-    found = {
-        "verbose": True
-    }
-    lookups = {
-        "v": "verbose",
-        "verbose": "verbose"
-    }
-    result = {k: v for k, v in defaults.items()}
-    for arg in args:
-        if not isinstance(arg, str):
-            continue
-        if arg in lookups:
-            key = lookups[arg]
-            result[key] = found[key]
-    return result
-
-@RequireArgs('iparser','iwriter')
-def parse(*args, **kwargs):
+@RequireArgs('iparser', 'iwriter', 'json_file')
+def parse(**kwargs):
     """
     Parses data, alternative to running on command line.
     Any extra ``kwargs`` values are passet to ``IWriter.write()`` method
 
-    Other Arguments:
+    Keyword Arguments:
         iparser (type[IParser]): IParser subclass
         iwriter (type[IWriter]): IWriter subclass
-
-    Keyword Arguments:
-        json_file (str): Short form ``f``. url to parse
-        log_file (str, optional): Short form ``L``. Log File
+        json_file (str): file to parse
+        url (str): url to parse
+        no_sort (str, optional): No sorting of results. Default ``False``
+        no_cache (str, optional): No caching. Default ``False``
+        no_print_clear (str, optional):No clearing of terminal when otuput to terminal. Default ``False``
+        no_desc (str, optional): No description will be outputed in template. Default ``False``
+        long_names (str, optional): Long names. Default set in config ``use_long_import_names`` property.
+            Toggles values set in config.
+        long_template (str, optional): Writes a long format template.
+            Requires write_template is set. Default ``False``
+        clipboard (str, optional): Copy to clipboard. Default ``False``
+        print_json (str, optional): Print json to termainl. Default ``False``
+        print_template (str, optional): Print template to terminal. Default ``False``
+        write_template (str, optional): Write template file into obj_uno subfolder. Default ``False``
+        write_json (str, optional): Write json file into obj_uno subfolder. Default ``False``
+        verbose (str, optional): Verobose output.
+        log_file (str, optional): Log File
     """
     global logger
     parser: type[IParser] = kwargs.get('iparser')
     writer: type[IWriter] = kwargs.get('iwriter')
-    pkwargs = _get_parsed_kwargs(**kwargs)
-    pargs = _get_parsed_args(*args)
+    json_file: str = str(kwargs['json_file'])
+    log_file = kwargs.get('log_file', None)
+    verbose = bool(kwargs.get('verbose', False))
 
     if logger is None:
         log_args = {}
-        if 'log_file' in pkwargs:
-            log_args['log_file'] = pkwargs['log_file']
+        if log_file:
+            log_args['log_file'] = log_file
         else:
             log_args['log_file'] = 'base_parse.log'
-        if pargs['verbose']:
+        if verbose:
             log_args['level'] = logging.DEBUG
         _set_loggers(get_logger(logger_name=Path(__file__).stem, **log_args))
-    logger.info("Processing Json File: %s", pkwargs['json_file'])
-    p: IParser = parser(json_path=pkwargs['json_file'])
+    logger.info("Processing Json File: %s", json_file)
+    p: IParser = parser(json_path=json_file)
     w: IWriter = writer(parser=p)
-    w.write(*args, **pkwargs)
+    w.write(**kwargs)
 
 # endregion Parse method
 

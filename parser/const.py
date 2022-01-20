@@ -1400,6 +1400,8 @@ class ConstWriter(base.WriteBase):
         self._write_file = kwargs.get('write_template', False)
         self._print_json = kwargs.get('print_json', True)
         self._write_json = kwargs.get('write_json', False)
+        self._json_out = kwargs.get('json_out', False)
+        self._include_desc: bool = kwargs.get('include_desc', True)
         self._write_template_long: bool = kwargs.get(
             'write_template_long', False)
         self._indent_amt = 4
@@ -1438,7 +1440,13 @@ class ConstWriter(base.WriteBase):
             contents = f.read()
         return contents
 
-    def write(self):
+    def write(self) -> Union[str, None]:
+        """
+        Writes files/templates according to parameters
+
+        Returns:
+            Union[str, None]: Returns json string if ``json_out`` is ``True``
+        """
         self._set_info()
         self._set_template_data()
         logger.info("Processing %s", self._p_fullname)
@@ -1457,6 +1465,8 @@ class ConstWriter(base.WriteBase):
                 self._write_to_file()
             if self._write_json:
                 self._write_to_json()
+            if self._json_out:
+                return self._get_json()
         except Exception as e:
             logger.exception(e)
 
@@ -1507,7 +1517,8 @@ class ConstWriter(base.WriteBase):
             return self._cache[key]
         self._cache[key] = {
             "hex": self._hex,
-            "flags": self._flags
+            "flags": self._flags,
+            "include_desc": self._include_desc
         }
         return self._cache[key]
     
@@ -1660,140 +1671,76 @@ class ConstWriter(base.WriteBase):
 
 # region Parse method
 
-
-def _get_parsed_kwargs(**kwargs) -> Dict[str, str]:
-    required = ("url",)
-    lookups = {
-        "u": "url",
-        "url": "url",
-        "L": "log_file",
-        "log_file": "log_file"
-    }
-    result = {}
-    for k, v in kwargs.items():
-        if not isinstance(k, str):
-            continue
-        if k in lookups:
-            key = lookups[k]
-            result[key] = v
-    for k in required:
-        if not k in result:
-            # k is missing from kwargs
-            raise base.RequiredError(f"Missing required arg {k}.")
-    return result
-
-
-def _get_parsed_args(*args) -> Dict[str, bool]:
-    # key, value and value is a key into defaults
-    defaults = {
-        "no_cache": True,
-        "long_template": False,
-        "clipboard": False,
-        "print_json": False,
-        "print_template": False,
-        "write_template": False,
-        "write_json": False,
-        "verbose": False,
-        "flags": None,
-        "hex": False
-    }
-    found = {
-        "no_cache": False,
-        "long_template": True,
-        "clipboard": True,
-        "print_json": True,
-        "print_template": True,
-        "write_template": True,
-        "write_json": True,
-        "verbose": True,
-        "flags": True,
-        "hex": False
-    }
-    lookups = {
-        "x": "no_cache",
-        "no_cache": "no_cache",
-        "g": "long_template",
-        "long_template": "long_template",
-        "c": "clipboard",
-        "clipboard": "clipboard",
-        "n": "print_json",
-        "print_json": "print_json",
-        "m": "print_template",
-        "print_template": "print_template",
-        "t": "write_template",
-        "write_template": "write_template",
-        "j": "write_json",
-        "write_json": "write_json",
-        "v": "verbose",
-        "verbose": "verbose",
-        "f": "flags",
-        "flags": "flags",
-        "y": "hex",
-        "hex": "hex"
-    }
-    result = {k: v for k, v in defaults.items()}
-    for arg in args:
-        if not isinstance(arg, str):
-            continue
-        if arg in lookups:
-            key = lookups[arg]
-            result[key] = found[key]
-    return result
-
-
-def parse(*args, **kwargs):
+def parse(**kwargs):
     """
     Parses data, alternative to running on command line.
 
-    Other Arguments:
-        'no_cache' (str, optional): Short form ``'x'``. No caching. Default ``False``
-        'no_print_clear (str, optional): Short form ``'p'``. No clearing of terminal
-            when otuput to terminal. Default ``False``
-        'long_template' (str, optional): Short form ``'g'``. Writes a long format template.
-            Requires write_template is set. Default ``False``
-        'clipboard' (str, optional): Short form ``'c'``. Copy to clipboard. Default ``False``
-        'flags' (str, optional): Short form ``'f'``. Treat as flags. Default ``False``
-        'hex' (str, optional): Short form ``'y```. Treat as hex. Default ``False``
-        'print_json' (str, optional): Short form ``'n'``. Print json to termainl. Default ``False``
-        'print_template' (str, optional): Short form ``'m'``. Print template to terminal. Default ``False``
-        'write_template' (str, optional): Short form ``'t'``. Write template file into obj_uno subfolder. Default ``False``
-        'write_json' (str, optional): Short form ``'j'``. Write json file into obj_uno subfolder. Default ``False``
-        'verbose' (str, optional): Short form ``'v'``. Verobose output.
-
     Keyword Arguments:
-        url (str): Short form ``u``. url to parse
-        log_file (str, optional): Short form ``L``. Log File
+        url (str): url to parse
+        cache (str, optional): Caching. Default ``True``
+        include_desc (str, optional): Sescription will be outputed in template. Default ``True``
+        flags (str, optional): Treat as flags. Default ``False``
+        hex (str, optional): Treat as hex. Default ``False``
+        json_out (bool, optional): returns json to caller if ``True``. Default ``False``
+        long_names (str, optional): Long names. Default set in config ``use_long_import_names`` property.
+            Toggles values set in config.
+        long_template (str, optional): Writes a long format template.
+            Requires write_template is set. Default ``False``
+        clipboard (str, optional): Copy to clipboard. Default ``False``
+        print_json (str, optional): Print json to termainl. Default ``False``
+        print_template (str, optional): Print template to terminal. Default ``False``
+        write_template (str, optional): Write template file into obj_uno subfolder. Default ``False``
+        write_json (str, optional): Write json file into obj_uno subfolder. Default ``False``
+        verbose (str, optional): Verobose output.
+        log_file (str, optional): Log File
+    
+    Returns:
+        Union[str, None]: Returns json string if json_out is ``True``
     """
     global logger
-    pkwargs = _get_parsed_kwargs(**kwargs)
-    pargs = _get_parsed_args(*args)
+    _url = str(kwargs['url'])
+    _cache = bool(kwargs.get('cache', True))
+    _json_out = bool(kwargs.get('json_out', False))
+    _long_template = bool(kwargs.get('write_template_long', False))
+    _clipboard = bool(kwargs.get('copy_clipboard', False))
+    _print_json = bool(kwargs.get('print_json', False))
+    _print_template = bool(kwargs.get('print_template', False))
+    _write_template = bool(kwargs.get('write_template', False))
+    _write_json = bool(kwargs.get('write_json', False))
+    _verbose = bool(kwargs.get('verbose', False))
+    _log_file = kwargs.get('log_file', None)
+    _include_desc = bool(kwargs.get('include_desc', True))
+    _flags = bool(kwargs.get('flags', False))
+    _hex = bool(kwargs.get('hex', False))
     if logger is None:
         log_args = {}
-        if 'log_file' in pkwargs:
-            log_args['log_file'] = pkwargs['log_file']
+        if _log_file:
+            log_args['log_file'] = _log_file
         else:
             log_args['log_file'] = 'const.log'
-        if pargs['verbose']:
+        if _verbose:
             log_args['level'] = logging.DEBUG
         _set_loggers(get_logger(logger_name=Path(__file__).stem, **log_args))
     p = Parser(
-        url=pkwargs['url'],
+        url=_url,
         sort=False,
-        cache=pargs['no_cache'],
-        remove_parent_inherited=base.APP_CONFIG.remove_parent_inherited
+        cache=_cache,
+        remove_parent_inherited=base.APP_CONFIG.remove_parent_inherited,
     )
     w = ConstWriter(
         parser=p,
-        copy_clipboard=pargs['clipboard'],
-        print_template=pargs['print_template'],
-        print_json=pargs['print_json'],
-        flags=pargs['flags'],
-        hex=pargs['hex'],
-        write_template=pargs['write_template'],
-        write_json=pargs['write_json'],
-        write_template_long=pargs['long_template']
+        copy_clipboard=_clipboard,
+        print_template=_print_template,
+        print_json=_print_json,
+        flags=_flags,
+        hex=_hex,
+        write_template=_write_template,
+        write_json=_write_json,
+        write_template_long=_long_template,
+        include_desc=_include_desc,
+        json_out=_json_out
     )
-    w.write()
+    return w.write()
 # endregion Parse method
 
 # region Main

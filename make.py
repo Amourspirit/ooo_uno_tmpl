@@ -228,7 +228,7 @@ class CompileEnumLinks(BaseCompile):
     def _process_direct(self, file: str):
         logger.info(
             "CompileEnumLinks: Processing interface in file: %s", file)
-        parse_enm('t', 'j', f=file)
+        parse_enm(write_template=True, write_json=True, json_file=file)
 
     def _process_files(self):
         link_files = self.get_module_link_files()
@@ -274,7 +274,7 @@ class CompileConstLinks(BaseCompile):
     def _process_direct(self, file: str):
         logger.info(
             "CompileConstLinks: Processing interface in file: %s", file)
-        parse_const('t', 'j', f=file)
+        parse_const(write_template=True, write_json=True, json_file=file)
 
     def _process_files(self):
         link_files = self.get_module_link_files()
@@ -319,7 +319,7 @@ class CompileTypeDefLinks(BaseCompile):
     def _process_direct(self, file: str):
         logger.info(
             "CompileTypeDefLinks: Processing interface in file: %s", file)
-        parse_typedef('t', 'j', f=file)
+        parse_typedef(write_template=True, write_json=True, json_file=file)
 
     def _process_files(self):
         link_files = self.get_module_link_files()
@@ -364,7 +364,7 @@ class CompileStructLinks(BaseCompile):
     def _process_direct(self, file: str):
         logger.info(
             "CompileStructLinks: Processing interface in file: %s", file)
-        parse_struct('t', 'j', f=file)
+        parse_struct(write_template=True, write_json=True, json_file=file)
 
     def _process_files(self):
         link_files = self.get_module_link_files()
@@ -413,7 +413,7 @@ class CompileInterfaceLinks(BaseCompile):
     def _process_direct(self, file: str):
         logger.info(
             "CompileInterfaceLinks: Processing interface in file: %s", file)
-        parse_interface('t', 'j', f=file)
+        parse_interface(write_template=True, write_json=True, json_file=file)
 
     def _process_files(self):
         link_files = self.get_module_link_files()
@@ -461,7 +461,7 @@ class CompileSingletonLinks(BaseCompile):
     def _process_direct(self, file: str):
         logger.info(
             "CompileSingletonLinks: Processing singleton in file: %s", file)
-        parse_singleton('t', 'j', f=file)
+        parse_singleton(write_template=True, write_json=True, json_file=file)
 
     def _process_files(self):
         link_files = self.get_module_link_files()
@@ -509,7 +509,7 @@ class CompileServiceLinks(BaseCompile):
     def _process_direct(self, file: str):
         logger.info(
             "CompileServiceLinks: Processing service in file: %s", file)
-        parse_service('t', 'j', f=file)
+        parse_service(write_template=True, write_json=True, json_file=file)
 
     def _process_files(self):
         link_files = self.get_module_link_files()
@@ -555,7 +555,7 @@ class CompileExLinks(BaseCompile):
     def _process_direct(self, file: str):
         logger.info(
             "CompileExLinks: Processing interface in file: %s", file)
-        parse_ex('t', 'j', f=file)
+        parse_ex(write_template=True, write_json=True, json_file=file)
 
     def _process_files(self):
         link_files = self.get_module_link_files()

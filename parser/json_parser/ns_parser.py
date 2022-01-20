@@ -1,6 +1,6 @@
 # coding: utf-8
 """
-This module is not currently uses.
+This module is not currently used.
 """
 import os
 import sys

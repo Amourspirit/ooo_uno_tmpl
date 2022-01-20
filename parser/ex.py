@@ -51,48 +51,50 @@ class Writer(xsrc.Writer):
         return 'exception'
 
 
-def parse(*args, **kwargs):
+def parse(**kwargs) -> Union[str, None]:
     """
     Parses data, alternative to running on command line.
 
-    Other Arguments:
-        'no_sort' (str, optional): Short form ``'s'``. No sorting of results. Default ``False``
-        'no_cache' (str, optional): Short form ``'x'``. No caching. Default ``False``
-        'no_print_clear (str, optional): Short form ``'p'``. No clearing of terminal
-            when otuput to terminal. Default ``False``
-        'no_desc' (str, optional): Short from ``'d'``. No description will be outputed in template. Default ``False``
-        long_names (bool, optional): Long Names: Default set in config ``use_long_import_names`` property.
-                Toggles config value.
-        'long_template' (str, optional): Short form ``'g'``. Writes a long format template.
-            Requires write_template is set. Default ``False``
-        'clipboard' (str, optional): Short form ``'c'``. Copy to clipboard. Default ``False``
-        'print_json' (str, optional): Short form ``'n'``. Print json to termainl. Default ``False``
-        'print_template' (str, optional): Short form ``'m'``. Print template to terminal. Default ``False``
-        'write_template' (str, optional): Short form ``'t'``. Write template file into obj_uno subfolder. Default ``False``
-        'write_json' (str, optional): Short form ``'j'``. Write json file into obj_uno subfolder. Default ``False``
-        'verbose' (str, optional): Short form ``'v'``. Verobose output.
-
     Keyword Arguments:
-        url (str): Short form ``u``. url to parse
-        log_file (str, optional): Short form ``L``. Log File
+        url (str): url to parse
+        sort (str, optional): Sorting of results. Default ``True``
+        cache (str, optional): Caching. Default ``False``
+        clear_on_print (str, optional): Clearing of terminal when otuput to terminal. Default ``False``
+        include_desc (str, optional): Description will be outputed in template. Default ``True``
+        json_out (bool, optional): returns json to caller if ``True``. Default ``False``
+        long_names (str, optional): Long names. Default set in config ``use_long_import_names`` property.
+            Toggles values set in config.
+        write_template_long (str, optional): Writes a long format template.
+            Requires write_template is set. Default ``False``
+        copy_clipboard (str, optional): Copy to clipboard. Default ``False``
+        print_json (str, optional): Print json to termainl. Default ``False``
+        print_template (str, optional): Print template to terminal. Default ``False``
+        write_template (str, optional): Write template file into obj_uno subfolder. Default ``False``
+        write_json (str, optional): Write json file into obj_uno subfolder. Default ``False``
+        verbose (str, optional): Verobose output.
+        log_file (str, optional): Log File
+    
+    Returns:
+        Union[str, None]: Returns json string if json_out is ``True``
     """
     kargs = kwargs.copy()
     kargs['class_parser'] = Parser
     kargs['class_writer'] = Writer
-    xsrc.parse(*args, **kargs)
+    return xsrc.parse(**kargs)
 
 
 def _main():
     os.system('cls' if os.name == 'nt' else 'clear')
     url = 'https://api.libreoffice.org/docs/idl/ref/exceptioncom_1_1sun_1_1star_1_1beans_1_1IntrospectionException.html'  # singleton
-    args = ('v', 'n')
     kwargs = {
-        "u": url,
-        "log_file": "debug.log"
+        "url": url,
+        "log_file": "debug.log",
+        'verbose': True,
+        "write_json": True
     }
     # sys.argv.extend(['--log-file', 'debug.log', '-v', '-n', '-u', url])
     # main()
-    parse(*args, **kwargs)
+    parse(**kwargs)
 
 
 def main():

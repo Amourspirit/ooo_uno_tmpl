@@ -458,6 +458,7 @@ class Writer(base.WriteBase):
         self._write_json: bool = kwargs.get('write_json', False)
         self._clear_on_print: bool = kwargs.get('clear_on_print', True)
         self._include_desc: bool = kwargs.get('include_desc', True)
+        self._json_out: bool = kwargs.get('json_out', True)
         self._write_template_long: bool = kwargs.get(
             'write_template_long', False)
         self._indent_amt = 4
@@ -499,7 +500,13 @@ class Writer(base.WriteBase):
         """
         return 'interface'
 
-    def write(self):
+    def write(self) -> Union[str, None]:
+        """
+        Writes files/templates according to parameters
+
+        Returns:
+            Union[str, None]: Returns json string if ``json_out`` is ``True``
+        """
         self._set_info()
         self._set_template_data()
         logger.info("Processing %s.%s", self._p_namespace, self._p_name)
@@ -518,6 +525,8 @@ class Writer(base.WriteBase):
                 self._write_to_file()
             if self._write_json:
                 self._write_to_json()
+            if self._json_out:
+                return self._get_json()
         except Exception as e:
             logger.exception(e)
 
@@ -870,93 +879,6 @@ class Writer(base.WriteBase):
 # endregion Writer
 
 # region Parse method
-def _get_parsed_kwargs(**kwargs) -> Dict[str, str]:
-    required = ("url",)
-    lookups = {
-        "u": "url",
-        "url": "url",
-        "L": "log_file",
-        "log_file": "log_file"
-    }
-    result = {}
-    for k, v in kwargs.items():
-        if not isinstance(k, str):
-            continue
-        if k in lookups:
-            key = lookups[k]
-            result[key] = v
-    for k in required:
-        if not k in result:
-            # k is missing from kwargs
-            raise base.RequiredError(f"Missing required arg {k}.")
-    return result
-
-
-def _get_parsed_args(*args) -> Dict[str, bool]:
-    # key, value and value is a key into defaults
-    defaults = {
-        'no_sort': True,
-        "no_cache": True,
-        "no_desc": True,
-        "no_print_clear": True,
-        "long_names": base.APP_CONFIG.use_long_import_names,
-        "long_template": False,
-        "clipboard": False,
-        "print_json": False,
-        "print_template": False,
-        "write_template": False,
-        "write_json": False,
-        "verbose": False
-    }
-    found = {
-        'no_sort': False,
-        "no_cache": False,
-        "no_desc": False,
-        "no_print_clear": False,
-        "long_names": not base.APP_CONFIG.use_long_import_names,
-        "long_template": True,
-        "clipboard": True,
-        "print_json": True,
-        "print_template": True,
-        "write_template": True,
-        "write_json": True,
-        "verbose": True
-    }
-    lookups = {
-        "l": "long_names",
-        "long_names": "long_names",
-        "s": "no_sort",
-        "no_sort": "no_sort",
-        "x": "no_cache",
-        "no_cache": "no_cache",
-        "d": "do_desc",
-        "no_desc": "no_desc",
-        "p": "no_print_clear",
-        "no_print_clear": "no_print_clear",
-        "g": "long_template",
-        "long_template": "long_template",
-        "c": "clipboard",
-        "clipboard": "clipboard",
-        "n": "print_json",
-        "print_json": "print_json",
-        "m": "print_template",
-        "print_template": "print_template",
-        "t": "write_template",
-        "write_template": "write_template",
-        "j": "write_json",
-        "write_json": "write_json",
-        "v": "verbose",
-        "verbose": "verbose"
-    }
-    result = {k: v for k, v in defaults.items()}
-    for arg in args:
-        if not isinstance(arg, str):
-            continue
-        if arg in lookups:
-            key = lookups[arg]
-            result[key] = found[key]
-    return result
-
 
 class Processer:
     """Processes parsing and writing"""
@@ -969,20 +891,24 @@ class Processer:
             p (type[Parser]): Parser class
             w (type[Writer]): Writer class
 
-        Other Arguments:
+        Keyword Arguments:
             url (str): url to parse
-            sort (bool, optional): No sorting of results. Default ``True``
-            long_names (bool, optional): Long Names: Default set in config ``use_long_import_names`` property.
-                Toggles config value.
-            cache (bool, optional): caching. Default ``False``
-            clear_on_print (bool, optional): No clearing of terminal when otuput to terminal. Default ``False``
-            write_template_long (bool, optional): Writes a long format template. Requires write_template is set. Default ``False``
-            copy_clipboard (bool, optional): Copy to clipboard. Default ``False``
-            print_json (bool, optional):Print json to termainl. Default ``False``
-            print_template (bool, optional): Print template to terminal. Default ``False``
-            write_template (bool, optional): Write template file into obj_uno subfolder. Default ``False``
-            write_json (bool, optional): Write json file into obj_uno subfolder. Default ``False``
-            verbose (bool, optional): Verobose output. Default ``False``
+            sort (str, optional): Sorting of results. Default ``True``
+            cache (str, optional): Caching. Default ``False``
+            clear_on_print (str, optional): Clearing of terminal when otuput to terminal. Default ``False``
+            include_desc (str, optional): Description will be outputed in template. Default ``True``
+            json_out (bool, optional): returns json to caller if ``True``. Default ``False``
+            long_names (str, optional): Long names. Default set in config ``use_long_import_names`` property.
+                Toggles values set in config.
+            write_template_long (str, optional): Writes a long format template.
+                Requires write_template is set. Default ``False``
+            copy_clipboard (str, optional): Copy to clipboard. Default ``False``
+            print_json (str, optional): Print json to termainl. Default ``False``
+            print_template (str, optional): Print template to terminal. Default ``False``
+            write_template (str, optional): Write template file into obj_uno subfolder. Default ``False``
+            write_json (str, optional): Write json file into obj_uno subfolder. Default ``False``
+            verbose (str, optional): Verobose output.
+            log_file (str, optional): Log File
             remove_parent_inherited (bool, optional): Determins if parsers remove classes from inhertiance if an inherited class
                 is already inherited by a parent class.
         """
@@ -991,20 +917,21 @@ class Processer:
         self._url = str(kwargs['url'])
         self._sort = bool(kwargs.get('sort', True))
         self._cache = bool(kwargs.get('cache', False))
+        self._json_out = bool(kwargs.get('json_out', False))
         self._print_clear = bool(kwargs.get('clear_on_print', False))
         self._long_template = bool(kwargs.get('write_template_long', False))
         self._clipboard = bool(kwargs.get('copy_clipboard', False))
         self._print_json = bool(kwargs.get('print_json', False))
         self._print_template = bool(kwargs.get('print_template', False))
         self._write_template = bool(kwargs.get('write_template', False))
-        self._write_json = bool(kwargs.get('write_json', bool))
+        self._write_json = bool(kwargs.get('write_json', False))
         self._verbose = bool(kwargs.get('verbose', False))
         self._include_desc = bool(kwargs.get('include_desc', True))
         self._long_names = bool(kwargs.get('long_names', base.APP_CONFIG.use_long_import_names))
         self._remove_parent_inherited = bool(
             kwargs.get('remove_parent_inherited', base.APP_CONFIG.remove_parent_inherited))
 
-    def process(self) -> None:
+    def process(self) -> Union[str, None]:
         parser = self._parser(
             url=self._url,
             sort=self._sort,
@@ -1021,46 +948,62 @@ class Processer:
             write_json=self._write_json,
             clear_on_print=self._print_clear,
             write_template_long=self._long_template,
-            include_desc=self._include_desc
+            include_desc=self._include_desc,
+            json_out=self._json_out
         )
-        w.write()
+        return w.write()
 
 
-def parse(*args, **kwargs):
+def parse(**kwargs) -> Union[str, None]:
     """
     Parses data, alternative to running on command line.
 
-    Other Arguments:
-        'no_sort' (str, optional): Short form ``'s'``. No sorting of results. Default ``False``
-        'no_cache' (str, optional): Short form ``'x'``. No caching. Default ``False``
-        'no_print_clear (str, optional): Short form ``'p'``. No clearing of terminal
-            when otuput to terminal. Default ``False``
-        'no_desc' (str, optional): Short from ``'d'``. No description will be outputed in template. Default ``False``
-        'long_names' (str, optional): Short form ``'l'``. Long names. Default set in config ``use_long_import_names`` property.
-            Toggles values set in config.
-        'long_template' (str, optional): Short form ``'g'``. Writes a long format template.
-            Requires write_template is set. Default ``False``
-        'clipboard' (str, optional): Short form ``'c'``. Copy to clipboard. Default ``False``
-        'print_json' (str, optional): Short form ``'n'``. Print json to termainl. Default ``False``
-        'print_template' (str, optional): Short form ``'m'``. Print template to terminal. Default ``False``
-        'write_template' (str, optional): Short form ``'t'``. Write template file into obj_uno subfolder. Default ``False``
-        'write_json' (str, optional): Short form ``'j'``. Write json file into obj_uno subfolder. Default ``False``
-        'verbose' (str, optional): Short form ``'v'``. Verobose output.
-
     Keyword Arguments:
-        url (str): Short form ``u``. url to parse
-        log_file (str, optional): Short form ``L``. Log File
+        url (str): url to parse
+        sort (str, optional): Sorting of results. Default ``True``
+        cache (str, optional): Caching. Default ``False``
+        clear_on_print (str, optional): Clearing of terminal when otuput to terminal. Default ``False``
+        include_desc (str, optional): Description will be outputed in template. Default ``True``
+        json_out (bool, optional): returns json to caller if ``True``. Default ``False``
+        long_names (str, optional): Long names. Default set in config ``use_long_import_names`` property.
+            Toggles values set in config.
+        write_template_long (str, optional): Writes a long format template.
+            Requires write_template is set. Default ``False``
+        copy_clipboard (str, optional): Copy to clipboard. Default ``False``
+        print_json (str, optional): Print json to termainl. Default ``False``
+        print_template (str, optional): Print template to terminal. Default ``False``
+        write_template (str, optional): Write template file into obj_uno subfolder. Default ``False``
+        write_json (str, optional): Write json file into obj_uno subfolder. Default ``False``
+        verbose (str, optional): Verobose output.
+        log_file (str, optional): Log File
+    
+    Returns:
+        Union[str, None]: Returns json string if json_out is ``True``
     """
     global logger
-    pkwargs = _get_parsed_kwargs(**kwargs)
-    pargs = _get_parsed_args(*args)
+    _url = str(kwargs['url'])
+    _sort = bool(kwargs.get('sort', True))
+    _cache = bool(kwargs.get('cache', True))
+    _json_out = bool(kwargs.get('json_out', False))
+    _print_clear = bool(kwargs.get('clear_on_print', False))
+    _long_template = bool(kwargs.get('write_template_long', False))
+    _clipboard = bool(kwargs.get('copy_clipboard', False))
+    _print_json = bool(kwargs.get('print_json', False))
+    _print_template = bool(kwargs.get('print_template', False))
+    _write_template = bool(kwargs.get('write_template', False))
+    _write_json = bool(kwargs.get('write_json', bool))
+    _verbose = bool(kwargs.get('verbose', False))
+    _log_file = kwargs.get('log_file', None)
+    _include_desc = bool(kwargs.get('include_desc', True))
+    _long_names = bool(kwargs.get(
+        'long_names', base.APP_CONFIG.use_long_import_names))
     if logger is None:
         log_args = {}
-        if 'log_file' in pkwargs:
-            log_args['log_file'] = pkwargs['log_file']
+        if _log_file:
+            log_args['log_file'] = _log_file
         else:
             log_args['log_file'] = 'interface.log'
-        if pargs['verbose']:
+        if _verbose:
             log_args['level'] = logging.DEBUG
         _set_loggers(get_logger(logger_name=Path(__file__).stem, **log_args))
     parser: Parser = kwargs.get('class_parser', Parser)
@@ -1068,20 +1011,21 @@ def parse(*args, **kwargs):
     proc = Processer(
         p=parser,
         w=writer,
-        url=pkwargs['url'],
-        sort=pargs['no_sort'],
-        cache=pargs['no_cache'],
-        print_template=pargs['print_template'],
-        print_json=pargs['print_json'],
-        copy_clipboard=pargs['clipboard'],
-        write_template=pargs['write_template'],
-        write_json=pargs['write_json'],
-        clear_on_print=(not pargs['no_print_clear']),
-        write_template_long=pargs['long_template'],
-        include_desc=pargs['no_desc'],
-        long_names=pargs['long_names']
+        url=_url,
+        sort=_sort,
+        cache=_cache,
+        print_template=_print_template,
+        print_json=_print_json,
+        copy_clipboard=_clipboard,
+        write_template=_write_template,
+        write_json=_write_json,
+        clear_on_print=_print_clear,
+        write_template_long=_long_template,
+        include_desc=_include_desc,
+        long_names=_long_names,
+        json_out=_json_out
     )
-    proc.process()
+    return proc.process()
 
 # endregion Parse method
 
@@ -1094,14 +1038,15 @@ def _main():
     # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1deployment_1_1XPackage.html'
     # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1tree_1_1XMutableTreeNode.html'
     url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XDevice.html'
-    args = ('v', 'n')
     kwargs = {
-        "u": url,
-        "log_file": "debug.log"
+        "url": url,
+        "log_file": "debug.log",
+        'verbose': True,
+        "write_json": True
     }
     # sys.argv.extend(['--log-file', 'debug.log', '-v', '-n', '-u', url])
     # main()
-    parse(*args, **kwargs)
+    parse(**kwargs)
 
 
 def get_cmd_args() -> argparse.Namespace:

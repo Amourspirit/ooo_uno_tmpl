@@ -352,6 +352,7 @@ class StructWriter(base.WriteBase):
         self._print_json = kwargs.get('print_json', True)
         self._write_json = kwargs.get('write_json', False)
         self._dynamic_struct = kwargs.get('dynamic_struct', False)
+        self._json_out: bool = kwargs.get('json_out', True)
         self._include_desc: bool = kwargs.get('include_desc', True)
         self._write_template_long: bool = kwargs.get(
             'write_template_long', False)
@@ -391,7 +392,13 @@ class StructWriter(base.WriteBase):
             contents = f.read()
         return contents
 
-    def write(self):
+    def write(self) -> Union[str, None]:
+        """
+        Writes files/templates according to parameters
+
+        Returns:
+            Union[str, None]: Returns json string if ``json_out`` is ``True``
+        """
         self._set_info()
         self._set_template_data()
         logger.info("Processing %s", self._p_fullname)
@@ -410,6 +417,8 @@ class StructWriter(base.WriteBase):
                 self._write_to_file()
             if self._write_json:
                 self._write_to_json()
+            if self._json_out:
+                return self._get_json()
         except Exception as e:
             logger.exception(e)
 
@@ -694,160 +703,82 @@ class StructWriter(base.WriteBase):
 # region Parse method
 
 
-def _get_parsed_kwargs(**kwargs) -> Dict[str, str]:
-    required = ("url",)
-    lookups = {
-        "u": "url",
-        "url": "url",
-        "L": "log_file",
-        "log_file": "log_file"
-    }
-    result = {}
-    for k, v in kwargs.items():
-        if not isinstance(k, str):
-            continue
-        if k in lookups:
-            key = lookups[k]
-            result[key] = v
-    for k in required:
-        if not k in result:
-            # k is missing from kwargs
-            raise base.RequiredError(f"Missing required arg {k}.")
-    return result
-
-
-def _get_parsed_args(*args) -> Dict[str, bool]:
-    # key, value and value is a key into defaults
-    defaults = {
-        'no_sort': True,
-        "no_cache": True,
-        "no_desc": True,
-        "no_print_clear": True,
-        "long_names": base.APP_CONFIG.use_long_import_names,
-        "long_template": False,
-        "clipboard": False,
-        "print_json": False,
-        "print_template": False,
-        "write_template": False,
-        "write_json": False,
-        "verbose": False,
-        "dynamic_struct": False,
-        "no_auto_import": True
-    }
-    found = {
-        'no_sort': False,
-        "no_cache": False,
-        "no_desc": False,
-        "no_print_clear": False,
-        "long_names": not base.APP_CONFIG.use_long_import_names,
-        "long_template": True,
-        "clipboard": True,
-        "print_json": True,
-        "print_template": True,
-        "write_template": True,
-        "write_json": True,
-        "verbose": True,
-        "dynamic_struct": True,
-        "no_auto_import": False
-    }
-    lookups = {
-        "l": "long_names",
-        "long_names": "long_names",
-        "s": "no_sort",
-        "no_sort": "no_sort",
-        "x": "no_cache",
-        "no_cache": "no_cache",
-        "d": "do_desc",
-        "no_desc": "no_desc",
-        "p": "no_print_clear",
-        "no_print_clear": "no_print_clear",
-        "g": "long_template",
-        "long_template": "long_template",
-        "c": "clipboard",
-        "clipboard": "clipboard",
-        "n": "print_json",
-        "print_json": "print_json",
-        "m": "print_template",
-        "print_template": "print_template",
-        "t": "write_template",
-        "write_template": "write_template",
-        "j": "write_json",
-        "write_json": "write_json",
-        "v": "verbose",
-        "verbose": "verbose",
-        "y": "dynamic_struct",
-        "dynamic_struct": "dynamic_struct",
-        "a": "no_auto_import",
-        "no_auto_import": "no_auto_import"
-    }
-    result = {k: v for k, v in defaults.items()}
-    for arg in args:
-        if not isinstance(arg, str):
-            continue
-        if arg in lookups:
-            key = lookups[arg]
-            result[key] = found[key]
-    return result
-
-
-def parse(*args, **kwargs):
+def parse(**kwargs) -> Union[str, None]:
     """
     Parses data, alternative to running on command line.
 
-    Other Arguments:
-        'no_sort' (str, optional): Short form ``'s'``. No sorting of results. Default ``False``
-        'no_cache' (str, optional): Short form ``'x'``. No caching. Default ``False``
-        'no_print_clear (str, optional): Short form ``'p'``. No clearing of terminal
-            when otuput to terminal. Default ``False``
-        'no_desc' (str, optional): Short from ``'d'``. No description will be outputed in template. Default ``False``
-        'long_names' (str, optional): Short form ``'l'``. Long names. Default set in config ``use_long_import_names`` property.
-            Toggles values set in config.
-        'dynamic_struct' (str, optional): Short form ``'d'``. Template will generate dynameic struct conten. Default ``False``
-        'print_json' (str, optional): Short form ``'n'``. Print json to termainl. Default ``False``
-        'print_template' (str, optional): Short form ``'m'``. Print template to terminal. Default ``False``
-        'write_template' (str, optional): Short form ``'t'``. Write template file into obj_uno subfolder. Default ``False``
-        'long_template' (str, optional): Short form ``'g'``. Writes a long format template.
-            Requires write_template is set. Default ``False``
-        'clipboard' (str, optional): Short form ``'c'``. Copy to clipboard. Default ``False``
-        'write_json' (str, optional): Short form ``'j'``. Write json file into obj_uno subfolder. Default ``False``
-        'verbose' (str, optional): Short form ``'v'``. Verobose output.
-
     Keyword Arguments:
-        url (str): Short form ``u``. url to parse
-        log_file (str, optional): Short form ``L``. Log File
+        url (str): url to parse
+        sort (str, optional): Sorting of results. Default ``True``
+        cache (str, optional): Caching. Default ``False``
+        clear_on_print (str, optional): Clearing of terminal when otuput to terminal. Default ``False``
+        dynamic_struct (str, optional): Template will generate dynameic struct content. Default ``False``
+        include_desc (str, optional): Description will be outputed in template. Default ``True``
+        json_out (bool, optional): returns json to caller if ``True``. Default ``False``
+        long_names (str, optional): Long names. Default set in config ``use_long_import_names`` property.
+            Toggles values set in config.
+        write_template_long (str, optional): Writes a long format template.
+            Requires write_template is set. Default ``False``
+        copy_clipboard (str, optional): Copy to clipboard. Default ``False``
+        print_json (str, optional): Print json to termainl. Default ``False``
+        print_template (str, optional): Print template to terminal. Default ``False``
+        write_template (str, optional): Write template file into obj_uno subfolder. Default ``False``
+        write_json (str, optional): Write json file into obj_uno subfolder. Default ``False``
+        verbose (str, optional): Verobose output.
+        log_file (str, optional): Log File
+
+    Returns:
+        Union[str, None]: Returns json string if ``json_out`` is ``True``
     """
     global logger
-    pkwargs = _get_parsed_kwargs(**kwargs)
-    pargs = _get_parsed_args(*args)
+    _url = str(kwargs['url'])
+    _sort = bool(kwargs.get('sort', True))
+    _cache = bool(kwargs.get('cache', True))
+    _json_out = bool(kwargs.get('json_out', False))
+    _print_clear = bool(kwargs.get('clear_on_print', False))
+    _long_template = bool(kwargs.get('write_template_long', False))
+    _clipboard = bool(kwargs.get('copy_clipboard', False))
+    _print_json = bool(kwargs.get('print_json', False))
+    _print_template = bool(kwargs.get('print_template', False))
+    _write_template = bool(kwargs.get('write_template', False))
+    _write_json = bool(kwargs.get('write_json', bool))
+    _verbose = bool(kwargs.get('verbose', False))
+    _log_file = kwargs.get('log_file', None)
+    _include_desc = bool(kwargs.get('include_desc', True))
+    _long_names = bool(kwargs.get(
+        'long_names', base.APP_CONFIG.use_long_import_names))
+    _dynamic_struct = bool(kwargs.get('dynamic_struct', False))
     if logger is None:
         log_args = {}
-        if 'log_file' in pkwargs:
-            log_args['log_file'] = pkwargs['log_file']
+        if _log_file:
+            log_args['log_file'] = _log_file
         else:
             log_args['log_file'] = 'struct.log'
-        if pargs['verbose']:
+        if _verbose:
             log_args['level'] = logging.DEBUG
         _set_loggers(get_logger(logger_name=Path(__file__).stem, **log_args))
 
     p = Parser(
-        url=pkwargs['url'],
-        sort=pargs['no_sort'],
-        cache=pargs['no_cache'],
-        long_names=pargs['long_names'],
+        url=_url,
+        sort=_sort,
+        cache=_cache,
+        long_names=_long_names,
         remove_parent_inherited=base.APP_CONFIG.remove_parent_inherited
     )
     w = StructWriter(
         parser=p,
-        copy_clipboard=pargs['clipboard'],
-        print_template=pargs['print_template'],
-        print_json=pargs['print_json'],
-        write_template=pargs['write_template'],
-        write_json=pargs['write_json'],
-        write_template_long=pargs['long_template'],
-        clear_on_print=(not pargs['no_print_clear']),
-        dynamic_struct=pargs['dynamic_struct']
+        copy_clipboard=_clipboard,
+        print_template=_print_template,
+        print_json=_print_json,
+        write_template=_write_template,
+        write_json=_write_json,
+        write_template_long=_long_template,
+        clear_on_print=_print_clear,
+        dynamic_struct=_dynamic_struct,
+        include_desc=_include_desc,
+        json_out=_json_out
     )
-    w.write()
+    return w.write()
 # endregion Parse method
 
 # region Main
