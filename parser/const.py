@@ -1425,9 +1425,9 @@ class ConstWriter(base.WriteBase):
         self._template_file = _path
         self._template: str = self._get_template()
         self._cache = {}
+        self._set_flags()
         # call _get_writer_args() to ensure it is cached before args get changed.
         self._get_writer_args()
-        self._set_flags()
     # endregion Constructor
     def _set_flags(self):
         # if flags is not specifically set in constructor then get flags from parser
