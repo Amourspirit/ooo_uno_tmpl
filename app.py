@@ -1316,6 +1316,16 @@ def _args_data_update(parser: argparse.ArgumentParser) -> None:
         dest='write_all',
         default=False
     )
+
+def _args_data_json(parser: argparse.ArgumentParser) -> None:
+    parser.add_argument(
+        '-n', '--name-space',
+        help='Genereate Json for a given namespace',
+        action='store',
+        dest='namespace',
+        default=None
+    )
+
 # region Imports
 def _args_data_imports(parser: argparse.ArgumentParser) -> None:
     data_group = parser.add_argument_group()
@@ -1459,6 +1469,23 @@ def _args_data_imports_extends_flat(parser: argparse.ArgumentParser) -> None:
     )
 # endregion Imports
 # endregion data args
+
+# region General Args
+def _args_general(parser: argparse.ArgumentParser) -> None:
+    parser.add_argument(
+        '-v', '--verbose',
+        help='verbose logging',
+        action='store_true',
+        dest='verbose',
+        default=False)
+    parser.add_argument(
+        '-L', '--log-file',
+        help='Log file to use',
+        action='store',
+        dest='log_file',
+        type=str,
+        default=None)
+# endregion General Args
 # endregion parser
 
 def main():
@@ -1522,6 +1549,8 @@ def main():
     data_json = data.add_parser(name='db-json')
     # endregion create parsers
 
+    # region Set Args
+
     # region compile links args
     _args_links_ex(parser=ex_parser)
     _args_links_enum(parser=enum_parser)
@@ -1534,6 +1563,7 @@ def main():
     # endregion compile links args
 
     # region Other Args
+    _args_general(parser=parser)
     _args_touch(parser=touch)
     _args_module_links(parser=mod_links)
     _args_make(parser=make_parser)
@@ -1543,39 +1573,13 @@ def main():
     _args_data_init(parser=data_init)
     _args_data_qry(parser=data_qry)
     _args_data_update(parser=data_update)
-    # region Imports
+    _args_data_json(parser=data_json)
     _args_data_imports(parser=data_imports)
     _args_data_imports_child(parser=data_imports_typing_child)
     _args_data_imports_extends_tree(parser=data_extends_tree)
     _args_data_imports_extends_flat(parser=data_extends_flat)
-    # endregion Imports
-
-    # region    JSON
-    data_json.add_argument(
-        '-n', '--name-space',
-        help='Genereate Json for a given namespace',
-        action='store',
-        dest='namespace',
-        default=None
-    )
-    # endregion JSON
     # endregion data args
-
-    # region general args
-    parser.add_argument(
-        '-v', '--verbose',
-        help='verbose logging',
-        action='store_true',
-        dest='verbose',
-        default=False)
-    parser.add_argument(
-        '-L', '--log-file',
-        help='Log file to use',
-        action='store',
-        dest='log_file',
-        type=str,
-        default=None)
-    # endregion general args
+    # endregion Set Args
 
     # region Read Args
     args = parser.parse_args()
