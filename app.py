@@ -30,6 +30,7 @@ from parser.json_parser.exception_parser import parse as parse_ex, ParserExcepti
 from parser.json_parser.typedef_parser import parse as parse_typedef, ParserTypeDef
 from parser.json_parser.const_parser import parse as parse_const, ParserConst
 from parser.json_parser import linkproc
+from parser import xsrc as url_parser_interface
 # endregion Imports
 
 # region Data Class
@@ -1138,6 +1139,12 @@ def _create_parser(name: str) -> argparse.ArgumentParser:
     return argparse.ArgumentParser(description=name)
 
 # endregion     Create Parsers
+# region        Url Parsers
+
+
+def _args_url_interface(parser: argparse.ArgumentParser) -> None:
+    url_parser_interface.set_cmd_args(parser)
+# endregion     Url Parsers
 # region        Compile Links
 
 
@@ -1879,7 +1886,11 @@ def main():
     singleton_parser = compile.add_parser(name='singleton')
     service_parser = compile.add_parser(name='service')
     typedef_parser = compile.add_parser(name='typedef')
-
+    
+    url_parser_subparser = subparser.add_parser(name='url-parse')
+    url_parser = url_parser_subparser.add_subparsers(dest='command_data')
+    link_interface = url_parser.add_parser(name='interface')
+    
     touch = subparser.add_parser(name='touch')
     mod_links = subparser.add_parser(name='mod-links')
 
@@ -1908,6 +1919,10 @@ def main():
     _args_links_typedef(parser=typedef_parser)
     # endregion compile links args
 
+    # region url parser
+    _args_url_interface(parser=link_interface)
+    # endregion url parser
+    
     # region Other Args
     _args_general(parser=parser)
     _args_touch(parser=touch)

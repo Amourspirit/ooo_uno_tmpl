@@ -971,6 +971,35 @@ class Processer:
         return w.write()
 
 
+def get_kwargs_from_args(args: argparse.ArgumentParser) -> dict:
+    """
+    Converts argparse args into dictionary that can be passed to ``parse()``
+
+    Args:
+        args (argparse.ArgumentParser): args
+
+    Returns:
+        dict: dictionary that contain key values matching ``parser()`` args.
+    """
+    d = {
+        "url": args.url,
+        "sort": args.sort,
+        "cache": args.cache,
+        "clear_on_print": (not args.no_print_clear),
+        "copy_clipboard": args.clipboard,
+        "print_template": args.print_template,
+        "write_template": args.write_template,
+        "write_template_long": args.long_format,
+        "print_json": args.print_json,
+        "write_json": args.write_json,
+        "include_desc": args.desc,
+        "long_names": args.long_names,
+        "allow_known_json": args.allow_know_json,
+        "log_file": args.log_file,
+        "verbose": args.verbose
+    }
+    return d
+
 def parse(**kwargs) -> Union[str, None]:
     """
     Parses data, alternative to running on command line.
@@ -1004,18 +1033,18 @@ def parse(**kwargs) -> Union[str, None]:
     _cache = bool(kwargs.get('cache', True))
     _json_out = bool(kwargs.get('json_out', False))
     _print_clear = bool(kwargs.get('clear_on_print', False))
-    _long_template = bool(kwargs.get('write_template_long', False))
     _clipboard = bool(kwargs.get('copy_clipboard', False))
-    _print_json = bool(kwargs.get('print_json', False))
     _print_template = bool(kwargs.get('print_template', False))
     _write_template = bool(kwargs.get('write_template', False))
+    _long_template = bool(kwargs.get('write_template_long', False))
+    _print_json = bool(kwargs.get('print_json', False))
     _write_json = bool(kwargs.get('write_json', bool))
-    _verbose = bool(kwargs.get('verbose', False))
-    _log_file = kwargs.get('log_file', None)
     _include_desc = bool(kwargs.get('include_desc', True))
     _long_names = bool(kwargs.get(
         'long_names', base.APP_CONFIG.use_long_import_names))
     _allow_know_json = bool(kwargs.get('allow_known_json', True))
+    _log_file = kwargs.get('log_file', None)
+    _verbose = bool(kwargs.get('verbose', False))
 
     if logger is None:
         log_args = {}
@@ -1143,7 +1172,12 @@ def set_cmd_args(parser) -> None:
         action='store_true',
         dest='write_json',
         default=False)
-    
+    parser.add_argument(
+        '-k', '--no-allow-known-json',
+        help='Do not allow Known Json',
+        action='store_false',
+        dest='allow_know_json',
+        default=True)
 
 
 def set_cmd_args_local(parser) -> None:
@@ -1181,26 +1215,11 @@ def main():
         os.system('cls' if os.name == 'nt' else 'clear')
     logger.info('Executing command: %s', sys.argv[1:])
     logger.info('Parsing Url %s' % args.url)
+    args_dict = get_kwargs_from_args(args)
 
-    proc = Processer(
-        p=Parser,
-        w=Writer,
-        url=args.url,
-        sort=args.sort,
-        print_template=args.print_template,
-        print_json=args.print_json,
-        copy_clipboard=args.clipboard,
-        write_template=args.write_template,
-        write_json=args.write_json,
-        clear_on_print=(not args.no_print_clear),
-        write_template_long=args.long_format,
-        include_desc=args.desc,
-        long_names=args.long_names,
-        remove_parent_inherited=base.APP_CONFIG.remove_parent_inherited
-    )
     if args.print_template is False and args.print_json is False:
         print('')
-    proc.process()
+    parse(**args_dict)
 
 
 if __name__ == '__main__':
