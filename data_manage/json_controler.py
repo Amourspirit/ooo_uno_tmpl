@@ -38,8 +38,10 @@ class JsonController:
 
 
     def _get_files(self) -> List[str]:
+        # need to merge any extend methods that was previouly
+        # inherited by the class
         qry_ns = db.QryNsImports(self._conn.connection_str)
-        ns_lst = qry_ns.get_flat_ns(self._namespace, False)
+        ns_lst = qry_ns.get_flat_ns(self._namespace, True)
         files = []
         for ns in ns_lst:
             files.append(self._db_qry_file.get_file_path(ns.namespace))
