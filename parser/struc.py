@@ -797,11 +797,9 @@ def _main():
     # sys.argv.extend(['--log-file', 'debug.log', '-v', '-n', '-u', url])
     # main()
 
-def main():
-    global logger
+# region Parser
 
-    # http://pymotw.com/2/argparse/
-    parser = argparse.ArgumentParser(description='const')
+def set_cmd_args(parser) -> None:
     parser.add_argument(
         '-u', '--url',
         help='Source Url',
@@ -879,6 +877,8 @@ def main():
         action='store_true',
         dest='write_json',
         default=False)
+
+def set_cmd_args_local(parser) -> None:
     parser.add_argument(
         '-v', '--verbose',
         help='verbose logging',
@@ -890,7 +890,15 @@ def main():
         help='Log file to use. Default to struct.log',
         type=str,
         required=False)
+ # endregion Parser
+ 
+def main():
+    global logger
 
+    # http://pymotw.com/2/argparse/
+    parser = argparse.ArgumentParser(description='const')
+    set_cmd_args(parser)
+    set_cmd_args_local(parser)
     args = parser.parse_args()
 
     if logger is None:

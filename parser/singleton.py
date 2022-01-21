@@ -3,6 +3,7 @@
 """
 Process a link to a page that contains a singleton class
 """
+import argparse
 import os
 import sys
 import logging
@@ -96,7 +97,10 @@ def _main():
 
 def main():
     global logger
-    args = xsrc.get_cmd_args()
+    parser = argparse.ArgumentParser(description='singleton')
+    xsrc.set_cmd_args(parser)
+    xsrc.set_cmd_args_local(parser)
+    args = parser.parse_args()
     if logger is None:
         log_args = {}
         if args.log_file:

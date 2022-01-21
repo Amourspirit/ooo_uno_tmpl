@@ -1070,9 +1070,8 @@ def _main():
     parse(**kwargs)
 
 
-def get_cmd_args() -> argparse.Namespace:
-    # region Parser
-    parser = argparse.ArgumentParser(description='interface')
+# region Parser
+def set_cmd_args(parser) -> None:
     parser.add_argument(
         '-u', '--url',
         help='Source Url',
@@ -1144,6 +1143,10 @@ def get_cmd_args() -> argparse.Namespace:
         action='store_true',
         dest='write_json',
         default=False)
+    
+
+
+def set_cmd_args_local(parser) -> None:
     parser.add_argument(
         '-v', '--verbose',
         help='verbose logging',
@@ -1155,14 +1158,15 @@ def get_cmd_args() -> argparse.Namespace:
         help='Log file to use. Defaults to interface.log',
         type=str,
         required=False)
-    # endregion Parser
-    args = parser.parse_args()
-    return args
 
+# endregion Parser
 
 def main():
     global logger
-    args = get_cmd_args()
+    parser = argparse.ArgumentParser(description='interface')
+    set_cmd_args(parser)
+    set_cmd_args_local(parser)
+    args = parser.parse_args()
     if logger is None:
         log_args = {}
         if args.log_file:

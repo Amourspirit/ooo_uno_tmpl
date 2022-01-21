@@ -680,14 +680,8 @@ def _main():
         "log_file": "debug.log"
     }
     parse(*args, **kwargs)
-
-# region main
-
-def main():
-    global logger
-
-    # region Parser
-    parser = argparse.ArgumentParser(description='interface')
+# region Parser
+def set_cmd_args(parser) -> None:
     parser.add_argument(
         '-u', '--url',
         help='Source Url',
@@ -747,7 +741,9 @@ def main():
         action='store_true',
         dest='write_json',
         default=False)
-    # region Dummy Args for Logging
+
+
+def set_cmd_args_local(parser) -> None:
     parser.add_argument(
         '-v', '--verbose',
         help='verbose logging',
@@ -759,8 +755,19 @@ def main():
         help='Log file to use. Defaults to service.log',
         type=str,
         required=False)
-    # endregion Dummy Args for Logging
+# endregion Parser
+
+# region main
+
+def main():
+    global logger
+
+    # region Parser
+    parser = argparse.ArgumentParser(description='typedef')
+    set_cmd_args(parser)
+    set_cmd_args_local(parser)
     args = parser.parse_args()
+
     if logger is None:
         log_args = {}
         if args.log_file:

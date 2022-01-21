@@ -625,10 +625,8 @@ def _main():
     # sys.argv.extend(['--log-file', 'debug.log', '-v', '-n', '-u', url])
     # main()
 
-def main():
-    global logger
-
-    parser = argparse.ArgumentParser(description='enum')
+# region Parser
+def set_cmd_args(parser) -> None:
     parser.add_argument(
         '-u', '--url',
         help='Source Url',
@@ -694,6 +692,8 @@ def main():
         action='store_true',
         dest='write_json',
         default=False)
+
+def set_cmd_args_local(parser) -> None:
     parser.add_argument(
         '-v', '--verbose',
         help='verbose logging',
@@ -706,7 +706,16 @@ def main():
         type=str,
         required=False)
 
+# endregion Parser
+
+def main():
+    global logger
+
+    parser = argparse.ArgumentParser(description='enum')
+    set_cmd_args(parser)
+    set_cmd_args_local(parser)
     args = parser.parse_args()
+
     if logger is None:
         log_args = {}
         if args.log_file:

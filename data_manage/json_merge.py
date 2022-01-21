@@ -8,11 +8,25 @@ from pathlib import Path
 from typing import List
 from config import AppConfig
 from parser import mod_rel as RelInfo
+from . import db_manager as db
 
-
+# NOTE:
+#   When origin json data has been overwritten this class will not work properly becuase
+#   it will read json data from a modifiled json file. Therefore data is not valid to run
+#   this class on.
+#   
+# class purpose:
+#
+#   merge data that is dropped when a components inherits is flattened
+# * read current inherits
+# * read flattend child inherits.
+# * drop any 1st level inherits that are in 2nd level inherits
+# * from 1st level get all from_typing imports that are not in 2nd level
+# * drop all 1st level import are for extends
 class JsonMerge:
-    def __init__(self, config: AppConfig, files: List[str], full_ns: str) -> None:
+    def __init__(self, config: AppConfig, full_ns: str) -> None:
         self._config = config
+        self._namespace = full_ns
         self._files = files
         project_root = os.environ.get('project_root', None)
         if project_root is None:
@@ -175,3 +189,11 @@ class JsonMerge:
         result_data['requires_typing'] = requires_typing
 
         return result_data
+
+    def _get_files(self, namespace:str, full: bool) -> List[str]:
+        qry_ns = db.QryNsImports(self._conn.connection_str)
+        ns_lst = qry_ns.get_flat_ns(namespace, full)
+        files = []
+        for ns in ns_lst:
+            files.append(self._db_qry_file.get_file_path(ns.namespace))
+        return files
