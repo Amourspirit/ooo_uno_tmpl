@@ -12,7 +12,7 @@ import subprocess
 import tempfile
 from data_manage import db_manager, json_controler
 from multiprocessing import Pool
-from typing import List, Optional, Set
+from typing import List, Optional, Set, Type
 from kwhelp import rules
 from kwhelp.decorator import DecFuncEnum, RuleCheckAll
 from kwhelp.exceptions import RuleError
@@ -33,11 +33,14 @@ from parser.json_parser import linkproc
 # endregion Imports
 
 # region Data Class
+
+
 @dataclass
 class WriteInfo:
     file: str
     py_file: str
     scratch_path: Path
+
 
 @dataclass(frozen=True, eq=True)
 class CompileLinkArgs:
@@ -45,6 +48,7 @@ class CompileLinkArgs:
     path: Optional[str] = None
     use_sub_process: bool = True
 # endregion Data Class
+
 
 # region Logger
 logger = None
@@ -54,6 +58,8 @@ logger = None
 # endregion Logger
 
 # region Compare
+
+
 class CompareEnum(IntEnum):
     Before = -1
     Equal = 0
@@ -77,12 +83,11 @@ class CompareFile:
 
 # region FilesBase
 
+
 class FilesBase:
     def __init__(self, config: AppConfig) -> None:
         self._config: AppConfig = config
         self._root_dir = Path(__file__).parent
-
-    
 
     def _mkdirp(self, dest_dir):
         # Python ≥ 3.5
@@ -140,6 +145,8 @@ class FilesBase:
 # endregion FilesBase
 
 # region Compile Links
+
+
 class BaseCompile(FilesBase):
     def __init__(self, args: CompileLinkArgs) -> None:
         super().__init__(config=args.config)
@@ -192,6 +199,7 @@ class BaseCompile(FilesBase):
     def args(self) -> CompileLinkArgs:
         """Gets Args"""
         return self._args
+
 
 class CompileEnumLinks(BaseCompile):
     def __init__(self, args: CompileLinkArgs) -> None:
@@ -290,7 +298,8 @@ class CompileTypeDefLinks(BaseCompile):
         super().__init__(args=args)
         self._do_sub = args.use_sub_process
         if self._do_sub:
-            self._processer = str(Path(self.json_parser_path, 'typedef_parser.py'))
+            self._processer = str(
+                Path(self.json_parser_path, 'typedef_parser.py'))
         else:
             self._processer = ''
         if self.args.path:
@@ -306,7 +315,7 @@ class CompileTypeDefLinks(BaseCompile):
         else:
             self._process_direct(file)
 
-    def _subprocess(self, file:str):
+    def _subprocess(self, file: str):
         cmd_str = f"{self._processer} -f {file}"
         cmd = [sys.executable] + cmd_str.split()
         logger.info("CompileTypeDefLinks: Processing enums in file: %s", file)
@@ -335,7 +344,8 @@ class CompileStructLinks(BaseCompile):
         super().__init__(args=args)
         self._do_sub = args.use_sub_process
         if self._do_sub:
-            self._processer = str(Path(self.json_parser_path, 'struct_parser.py'))
+            self._processer = str(
+                Path(self.json_parser_path, 'struct_parser.py'))
         else:
             self._processer = ''
         if self.args.path:
@@ -374,13 +384,15 @@ class CompileStructLinks(BaseCompile):
             else:
                 self._process_direct(file)
 
+
 class CompileInterfaceLinks(BaseCompile):
 
     def __init__(self, args: CompileLinkArgs) -> None:
         super().__init__(args=args)
         self._do_sub = args.use_sub_process
         if self._do_sub:
-            self._processer = str(Path(self.json_parser_path, 'interface_parser.py'))
+            self._processer = str(
+                Path(self.json_parser_path, 'interface_parser.py'))
         else:
             self._processer = ''
 
@@ -388,7 +400,6 @@ class CompileInterfaceLinks(BaseCompile):
             self._process_path()
         else:
             self._process_files()
-    
 
     def _process_path(self) -> None:
         p = self._get_args_module_links()
@@ -397,7 +408,6 @@ class CompileInterfaceLinks(BaseCompile):
             self._subprocess(file)
         else:
             self._process_direct(file)
-
 
     def _subprocess(self, file: str):
         cmd_str = f"{self._processer} -f {file}"
@@ -519,6 +529,7 @@ class CompileServiceLinks(BaseCompile):
             else:
                 self._process_direct(file)
 
+
 class CompileExLinks(BaseCompile):
     def __init__(self, args: CompileLinkArgs) -> None:
         super().__init__(args=args)
@@ -568,8 +579,10 @@ class CompileExLinks(BaseCompile):
 # endregion Compile Links
 
 # region Touch Files
+
+
 class TouchFiles(FilesBase):
-    def __init__(self,config: AppConfig, **kwargs) -> None:
+    def __init__(self, config: AppConfig, **kwargs) -> None:
         super().__init__(config=config)
         self._check_exist: bool = bool(kwargs.get('check_exist', True))
         self._touch_struct: bool = bool(kwargs.get('touch_struct', False))
@@ -608,17 +621,18 @@ class TouchFiles(FilesBase):
             self._touch_cache_files()
 
         logger.info('Touched a total of %d files.', self._touch_count)
-    
+
     def _get_module_links(self) -> List[str]:
         key = '_get_module_links'
         if key in self._cache:
             return self._cache[key]
         self._cache[key] = self.get_module_link_files()
         return self._cache[key]
-        
+
     def _touch_struct_files(self):
         link_files = self._get_module_links()
         touched = 0
+
         def process(f: str):
             nonlocal touched
             p: ParserStruct = ParserStruct(json_path=f)
@@ -642,10 +656,11 @@ class TouchFiles(FilesBase):
             process(file)
         logger.info('Touched %d Struct files', touched)
         self._touch_count += touched
-    
+
     def _touch_const_files(self):
         link_files = self._get_module_links()
         touched = 0
+
         def process(f: str):
             nonlocal touched
             p: ParserConst = ParserConst(json_path=f)
@@ -673,6 +688,7 @@ class TouchFiles(FilesBase):
     def _touch_enum_files(self):
         link_files = self._get_module_links()
         touched = 0
+
         def process(f: str):
             nonlocal touched
             p: ParserEnum = ParserEnum(json_path=f)
@@ -696,7 +712,7 @@ class TouchFiles(FilesBase):
             process(file)
         logger.info('Touched %d Enum files', touched)
         self._touch_count += touched
-    
+
     def _touch_exception_files(self):
         link_files = self._get_module_links()
         touched = 0
@@ -780,7 +796,7 @@ class TouchFiles(FilesBase):
             process(file)
         logger.info('Touched %d Singleton files', touched)
         self._touch_count += touched
-    
+
     def _touch_service_files(self):
         link_files = self._get_module_links()
         touched = 0
@@ -808,7 +824,7 @@ class TouchFiles(FilesBase):
             process(file)
         logger.info('Touched %d Service files', touched)
         self._touch_count += touched
-    
+
     def _touch_typedef_files(self):
         link_files = self._get_module_links()
         touched = 0
@@ -856,8 +872,8 @@ class TouchFiles(FilesBase):
             process(file)
         logger.info('Touched %d Cache files', touched)
         self._touch_count += touched
-        
-        
+
+
 # endregion Touch Files
 
 # region Make
@@ -871,8 +887,8 @@ class Make(FilesBase):
         self._processed_dirs: Set[str] = set()
         self._processes = int(kwargs.get('processes', 4))
         # exclude files that start with _
-        pattern = str(self._root_dir.joinpath('template'))  + '/[_]*.py'
-        self._template_py_files=glob.glob(pattern)
+        pattern = str(self._root_dir.joinpath('template')) + '/[_]*.py'
+        self._template_py_files = glob.glob(pattern)
         if os.path.exists(str(self._scratch)):
             if self._clean:
                 logger.info('Deleting %s', str(self._scratch))
@@ -884,14 +900,15 @@ class Make(FilesBase):
         # rel = Path('../../template')
         for file in self._template_py_files:
             try:
-                
+
                 p_file = Path(file)
                 dst_file = dest / p_file.name
-                
+
                 root_rel = dst_file.relative_to(self._root_dir)
-                rel_str = '../' * (len(root_rel.parts) -1)
+                rel_str = '../' * (len(root_rel.parts) - 1)
                 rel = Path(rel_str + 'template')
-                logger.debug("_create_sys_links() rel to template: %s", str(rel))
+                logger.debug(
+                    "_create_sys_links() rel to template: %s", str(rel))
                 rel_file = rel.joinpath(p_file.name)
                 # logger.debug("_create_sys_links() file rel to root: %s", str(root_rel))
                 # logger.debug("create_sys_links() file rel parts: %s", str(root_rel.parts))
@@ -910,7 +927,7 @@ class Make(FilesBase):
         self._make_tmpl()
         self._make_tppi()
 
-    def _compile_tmpl(self, w_info:WriteInfo):
+    def _compile_tmpl(self, w_info: WriteInfo):
         logger.debug('Compiling file: %s', w_info.file)
         cmd_str = f"cheetah compile --nobackup {w_info.file}"
         logger.info('Running subprocess: %s', cmd_str)
@@ -934,12 +951,11 @@ class Make(FilesBase):
                         self._processed_dirs.add(f_dir)
                         # logger.debug("_make() current dir: %s", f_dir)
                         self._create_sys_links(f_dir)
-                    
-                    
+
                     py_file = self._get_py_path(tmpl_file=file)
-                   
+
                     w_info = WriteInfo(
-                        file = file,
+                        file=file,
                         py_file=py_file,
                         scratch_path=self._get_scratch_path(tmpl_file=py_file)
                     )
@@ -1009,9 +1025,8 @@ class Make(FilesBase):
             logger.debug("Including File due to no py file: %s", str(p_file))
             return False
 
-
     def _get_scratch_path(self, tmpl_file) -> Path:
-        
+
         p_file = Path(tmpl_file)
         ext = p_file.suffix
         p_dir = p_file.parent
@@ -1073,14 +1088,18 @@ def query_yes_no(question, default="yes"):
 # endregion Question Yes No
 
 # region    Main Testing
+
+
 def _main():
     # ns = 'com.sun.star.form.component.DatabaseTextField'
     # ns = 'com.sun.star.form.component.RichTextControl'
     ns = 'com.sun.star.form.FormController'
     # ns = 'com.sun.star.form.DataAwareControlModel'
     # ns = 'com.sun.star.text.TextRange'
-    sys.argv.extend(['-v', '--log-file', 'debug.log', 'data', 'db-json', '-n', ns])
+    sys.argv.extend(['-v', '--log-file', 'debug.log',
+                    'data', 'db-json', '-n', ns])
     main()
+
 
 def _touch():
     global logger
@@ -1098,11 +1117,13 @@ def _touch():
 
 # region Logging
 
+
 def _log_start_action() -> None:
     if len(sys.argv) > 1:
         logger.info('Executing command: %s', sys.argv[1:])
     else:
         logger.info('Running with no args.')
+
 
 def _log_end_action() -> None:
     logger.info('Finished!')
@@ -1144,8 +1165,10 @@ def _args_links_general(parser: argparse.ArgumentParser, name: str) -> None:
         default=False
     )
 
+
 def _args_links_ex(parser: argparse.ArgumentParser) -> None:
     _args_links_general(parser=parser, name='exceptions')
+
 
 def _args_links_enum(parser: argparse.ArgumentParser) -> None:
     _args_links_general(parser=parser, name='enums')
@@ -1155,9 +1178,9 @@ def _args_links_const(parser: argparse.ArgumentParser) -> None:
     _args_links_general(parser=parser, name='constants')
 
 
-
 def _args_links_struct(parser: argparse.ArgumentParser) -> None:
     _args_links_general(parser=parser, name='struct')
+
 
 def _args_links_interface(parser: argparse.ArgumentParser) -> None:
     _args_links_general(parser=parser, name='interface')
@@ -1175,6 +1198,8 @@ def _args_links_typedef(parser: argparse.ArgumentParser) -> None:
     _args_links_general(parser=parser, name='typedef')
 # endregion     Compile Links
 # region        Touch Parser
+
+
 def _args_touch(parser: argparse.ArgumentParser) -> None:
     parser.add_argument(
         '-s', '--struct',
@@ -1248,6 +1273,8 @@ def _args_touch(parser: argparse.ArgumentParser) -> None:
     )
 # endregion     Touch Parser
 # region        Module Links Parser
+
+
 def _args_module_links(parser: argparse.ArgumentParser) -> None:
     parser.add_argument(
         '-a', '--all',
@@ -1278,6 +1305,8 @@ def _args_module_links(parser: argparse.ArgumentParser) -> None:
         default=True)
 # endregion     Module Links Parser
 # region        Make Parser
+
+
 def _args_make(parser: argparse.ArgumentParser) -> None:
     parser.add_argument(
         '-f', '--force-compile',
@@ -1300,6 +1329,8 @@ def _args_make(parser: argparse.ArgumentParser) -> None:
         default=4)
 # endregion     Make Parser
 # region        data args
+
+
 def _args_data_init(parser: argparse.ArgumentParser) -> None:
     parser.add_argument(
         '-i', '--init-db',
@@ -1308,6 +1339,7 @@ def _args_data_init(parser: argparse.ArgumentParser) -> None:
         dest='init_db',
         default=False
     )
+
 
 def _args_data_qry(parser: argparse.ArgumentParser) -> None:
     parser.add_argument(
@@ -1318,6 +1350,7 @@ def _args_data_qry(parser: argparse.ArgumentParser) -> None:
         default=None
     )
 
+
 def _args_data_update(parser: argparse.ArgumentParser) -> None:
     parser.add_argument(
         '-a', '--write-all',
@@ -1326,6 +1359,7 @@ def _args_data_update(parser: argparse.ArgumentParser) -> None:
         dest='write_all',
         default=False
     )
+
 
 def _args_data_json(parser: argparse.ArgumentParser) -> None:
     parser.add_argument(
@@ -1337,6 +1371,8 @@ def _args_data_json(parser: argparse.ArgumentParser) -> None:
     )
 
 # region            Imports
+
+
 def _args_data_imports(parser: argparse.ArgumentParser) -> None:
     data_group = parser.add_argument_group()
     # data_imports_group_rel = data_imports_group.add_argument_group()
@@ -1424,6 +1460,7 @@ def _args_data_imports_child(parser: argparse.ArgumentParser) -> None:
         default=False
     )
 
+
 def _args_data_imports_extends_tree(parser: argparse.ArgumentParser) -> None:
     parser.add_argument(
         '-n', '--name-space',
@@ -1432,6 +1469,7 @@ def _args_data_imports_extends_tree(parser: argparse.ArgumentParser) -> None:
         dest='namespace',
         default=None
     )
+
 
 def _args_data_imports_extends_flat(parser: argparse.ArgumentParser) -> None:
     data_group = parser.add_mutually_exclusive_group()
@@ -1480,6 +1518,8 @@ def _args_data_imports_extends_flat(parser: argparse.ArgumentParser) -> None:
 # endregion         Imports
 # endregion     data args
 # region        General Args
+
+
 def _args_general(parser: argparse.ArgumentParser) -> None:
     parser.add_argument(
         '-v', '--verbose',
@@ -1513,80 +1553,59 @@ def _get_compile_args(args: argparse.Namespace, config: AppConfig) -> CompileLin
     return c_args
 # endregion     Args Helpers
 # region    Make
+
+
 def _args_action_make(args: argparse.Namespace, config: AppConfig) -> None:
     _log_start_action()
     try:
         _ = Make(config=config, force_compile=args.force_compile,
-                    clean=args.clean_scratch, processes=args.processes)
+                 clean=args.clean_scratch, processes=args.processes)
     except Exception as e:
         logger.error(e)
     _log_end_action()
 # endregion Make
 # region    Compile Links Command
-def _args_action_links_ex(args: argparse.Namespace) -> None:
+
+
+def _args_action_compile_links(args: argparse.Namespace, compiler: Type[BaseCompile]) -> None:
     _log_start_action()
     c_args = _get_compile_args(args=args)
-    if args.cmd_all:
-        CompileExLinks(args=c_args)
+    if args.cmd_all or args.args.path:
+        compiler(args=c_args)
     _log_end_action()
+
+
+def _args_action_links_ex(args: argparse.Namespace) -> None:
+    _args_action_compile_links(args, CompileExLinks)
 
 
 def _args_action_links_enum(args: argparse.Namespace) -> None:
-    _log_start_action()
-    c_args = _get_compile_args(args=args)
-    if args.cmd_all:
-        CompileEnumLinks(args=c_args)
-    _log_end_action()
+    _args_action_compile_links(args, CompileEnumLinks)
 
 
 def _args_action_links_const(args: argparse.Namespace) -> None:
-    _log_start_action()
-    c_args = _get_compile_args(args=args)
-    if args.cmd_all:
-        CompileConstLinks(args=c_args)
-    _log_end_action()
+    _args_action_compile_links(args, CompileConstLinks)
 
 
 def _args_action_links_struct(args: argparse.Namespace) -> None:
-    _log_start_action()
-    c_args = _get_compile_args(args=args)
-    if args.cmd_all:
-        CompileStructLinks(args=c_args)
-    _log_end_action()
+    _args_action_compile_links(args, CompileStructLinks)
 
 
 def _args_action_links_interface(args: argparse.Namespace) -> None:
-    _log_start_action()
-    c_args = _get_compile_args(args=args)
-    if args.cmd_all:
-        CompileInterfaceLinks(args=c_args)
-    elif args.path:
-        CompileInterfaceLinks(args=c_args)
-    _log_end_action()
+    _args_action_compile_links(args, CompileInterfaceLinks)
 
 
 def _args_action_links_singleton(args: argparse.Namespace) -> None:
-    _log_start_action()
-    c_args = _get_compile_args(args=args)
-    if args.cmd_all:
-        CompileSingletonLinks(args=c_args)
-    _log_end_action()
+    _args_action_compile_links(args, CompileSingletonLinks)
 
 
 def _args_action_links_service(args: argparse.Namespace) -> None:
-    _log_start_action()
-    c_args = _get_compile_args(args=args)
-    if args.cmd_all:
-        CompileServiceLinks(args=c_args)
-    _log_end_action()
+    _args_action_compile_links(args, CompileServiceLinks)
 
 
 def _args_action_links_typedef(args: argparse.Namespace) -> None:
+    _args_action_compile_links(args, CompileTypeDefLinks)
     _log_start_action()
-    c_args = _get_compile_args(args=args)
-    if args.cmd_all:
-        CompileTypeDefLinks(args=c_args)
-    _log_end_action()
 
 
 def _args_process_compile_cmd_data(args: argparse.Namespace, config: AppConfig) -> None:
@@ -1610,6 +1629,8 @@ def _args_process_compile_cmd_data(args: argparse.Namespace, config: AppConfig) 
         _args_action_touch(args=args, config=config)
 # endregion Compile Links Command
 # region    Touch
+
+
 def _args_action_touch(args: argparse.Namespace, config: AppConfig) -> None:
     _log_start_action()
     TouchFiles(
@@ -1629,6 +1650,7 @@ def _args_action_touch(args: argparse.Namespace, config: AppConfig) -> None:
 # endregion Touch
 # region    Module Links
 
+
 def _args_action_module_links(args: argparse.Namespace, config: AppConfig) -> None:
     _log_start_action()
     if args.mod_links_all:
@@ -1645,6 +1667,8 @@ def _args_action_module_links(args: argparse.Namespace, config: AppConfig) -> No
 # endregion Module Links
 # region    data Command
 # region        Init
+
+
 def _args_action_db_init(args: argparse.Namespace, config: AppConfig) -> None:
     dbc = db_manager.DatabaseControler(
         config=config,
@@ -1656,6 +1680,8 @@ def _args_action_db_init(args: argparse.Namespace, config: AppConfig) -> None:
     dbc.results()
 # endregion     Init
 # region        Update
+
+
 def _args_action_db_update(args: argparse.Namespace, config: AppConfig) -> None:
     mlc = db_manager.ModuleLinksControler(
         config=config,
@@ -1672,6 +1698,8 @@ def _args_action_db_update(args: argparse.Namespace, config: AppConfig) -> None:
     _ = mcc.results()
 # endregion     Update
 # region        Namespace
+
+
 def _args_action_db_extends_tree(args: argparse.Namespace, config: AppConfig) -> None:
     qc = db_manager.NamespaceControler(
         config=config,
@@ -1716,6 +1744,7 @@ def _args_action_db_extends_flat(args: argparse.Namespace, config: AppConfig) ->
         if qc_result:
             print(qc_result)
 
+
 def _args_action_db_qry(args: argparse.Namespace, config: AppConfig) -> None:
     qc = db_manager.NamespaceControler(
         config=config,
@@ -1724,7 +1753,7 @@ def _args_action_db_qry(args: argparse.Namespace, config: AppConfig) -> None:
     qc_result = qc.results()
     if qc_result:
         print(qc_result)
-        
+
 
 def _args_action_db_imports(args: argparse.Namespace, config: AppConfig) -> None:
     require_typing = None
@@ -1745,6 +1774,7 @@ def _args_action_db_imports(args: argparse.Namespace, config: AppConfig) -> None
     if qc_result:
         print(qc_result)
 
+
 def _args_action_db_imports_typing_child(args: argparse.Namespace, config: AppConfig) -> None:
     qc = db_manager.NamespaceControler(
         config=config,
@@ -1758,6 +1788,8 @@ def _args_action_db_imports_typing_child(args: argparse.Namespace, config: AppCo
         print(qc_result)
 # endregion     Namespace
 # region        Json
+
+
 def _args_action_db_json(args: argparse.Namespace, config: AppConfig) -> None:
     qc = json_controler.JsonController(
         config=config,
@@ -1789,6 +1821,7 @@ def _args_process_data_cmd_data(args: argparse.Namespace, config: AppConfig) -> 
 
 # endregion data Command
 
+
 def _args_process_cmd(args: argparse.Namespace, config: AppConfig) -> None:
     if args.command == 'make':
         _args_action_make(args=args, config=config)
@@ -1819,6 +1852,7 @@ def _args_process_cmd(args: argparse.Namespace, config: AppConfig) -> None:
 # endregion ARGS COMMANDS
 # endregion parser
 
+
 def main():
     global logger
     # region Config
@@ -1830,12 +1864,11 @@ def main():
     os.environ['config_db_mod_info'] = config.db_mod_info
     # endregion Config
 
-
     # region create parsers
     parser = _create_parser('main')
     subparser = parser.add_subparsers(dest='command')
     make_parser = subparser.add_parser(name='make')
-    
+
     compile_subparser = subparser.add_parser(name='compile')
     compile = compile_subparser.add_subparsers(dest='command_data')
     ex_parser = compile.add_parser(name='ex')
@@ -1909,7 +1942,6 @@ def main():
     # endregion logger
 
     _args_process_cmd(args=args, config=config)
-
 
 
 if __name__ == '__main__':
