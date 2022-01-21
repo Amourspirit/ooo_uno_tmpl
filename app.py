@@ -1096,6 +1096,148 @@ def _touch():
     t._touch_struct()
 # endregion Main Testing
 
+# region parser
+# region Create Parsers
+
+
+def _create_parser(name: str) -> argparse.ArgumentParser:
+    return argparse.ArgumentParser(description=name)
+
+# endregion Create Parsers
+
+# region Compile Links
+
+
+def _args_links_general(parser: argparse.ArgumentParser, name: str, dest: str) -> None:
+    parser_group = parser.add_mutually_exclusive_group()
+    parser_group.add_argument(
+        '-a', '--all',
+        help=f"Compile all {name} recursivly",
+        action='store_true',
+        dest=dest,
+        default=False
+    )
+    parser_group.add_argument(
+        '-p', '--path',
+        help='Compile a specific path',
+        action='store',
+        dest='path',
+        type=str
+    )
+    parser.add_argument(
+        '-u', '--run-as-cmdline',
+        help='Run as command line suprocess. Default False',
+        action='store_true',
+        dest='cmd_line_process',
+        default=False
+    )
+
+def _args_links_ex(parser: argparse.ArgumentParser) -> None:
+    _args_links_general(parser=parser, name='exceptions', dest='ex_all')
+
+def _args_links_enum(parser: argparse.ArgumentParser) -> None:
+    _args_links_general(parser=parser, name='enums', dest='enum_all')
+
+
+def _args_links_const(parser: argparse.ArgumentParser) -> None:
+    _args_links_general(parser=parser, name='constants', dest='const_all')
+
+
+
+def _args_links_struct(parser: argparse.ArgumentParser) -> None:
+    _args_links_general(parser=parser, name='struct', dest='struct_all')
+
+def _args_links_interface(parser: argparse.ArgumentParser) -> None:
+    _args_links_general(parser=parser, name='interface', dest='interface_all')
+
+
+def _args_links_singleton(parser: argparse.ArgumentParser) -> None:
+    _args_links_general(parser=parser, name='singleton', dest='singleton_all')
+
+
+def _args_links_service(parser: argparse.ArgumentParser) -> None:
+    _args_links_general(parser=parser, name='service', dest='service_all')
+
+
+def _args_links_typedef(parser: argparse.ArgumentParser) -> None:
+    _args_links_general(parser=parser, name='typedef', dest='typedef_all')
+# endregion Compile Links
+
+# region Touch Parser
+def _args_touch(parser: argparse.ArgumentParser) -> None:
+    parser.add_argument(
+        '-s', '--struct',
+        help='Touch all struct files',
+        action='store_true',
+        dest='struct_all',
+        default=False
+    )
+    parser.add_argument(
+        '-g', '--singleton',
+        help='Touch all singleton files',
+        action='store_true',
+        dest='singleton_all',
+        default=False
+    )
+    parser.add_argument(
+        '-r', '--service',
+        help='Touch all service files',
+        action='store_true',
+        dest='service_all',
+        default=False
+    )
+    parser.add_argument(
+        '-c', '--const',
+        help='Touch all const files',
+        action='store_true',
+        dest='const_all',
+        default=False
+    )
+    parser.add_argument(
+        '-e', '--enum',
+        help='Touch all enum files',
+        action='store_true',
+        dest='enum_all',
+        default=False
+    )
+    parser.add_argument(
+        '-x', '--exception',
+        help='Touch all enum files',
+        action='store_true',
+        dest='ex_all',
+        default=False
+    )
+    parser.add_argument(
+        '-i', '--interface',
+        help='Touch all interface files',
+        action='store_true',
+        dest='interface_all',
+        default=False
+    )
+    parser.add_argument(
+        '-t', '--typedef',
+        help='Touch all interface files',
+        action='store_true',
+        dest='typedef_all',
+        default=False
+    )
+    parser.add_argument(
+        '-p', '--python',
+        help='Touch python files instead of template files',
+        action='store_true',
+        dest='python_files',
+        default=False
+    )
+    parser.add_argument(
+        '--cache-files',
+        help='Touch cached files. Resets cache file expire times',
+        action='store_true',
+        dest='cache_files',
+        default=False
+    )
+# endregion Touch Parser
+# endregion parser
+
 def main():
     global logger
     # region Config
@@ -1131,7 +1273,7 @@ def main():
     # endregion Script End Action
     
     # region create parsers
-    parser = argparse.ArgumentParser(description='main')
+    parser = _create_parser('main')
     subparser = parser.add_subparsers(dest='command')
     ex_parser = subparser.add_parser(name='ex')
     enum_parser = subparser.add_parser(name='enum')
@@ -1156,280 +1298,19 @@ def main():
     data_json = data.add_parser(name='db-json')
     # endregion create parsers
 
-    # region ex args
-    ex_parser_file_group = ex_parser.add_mutually_exclusive_group()
-    ex_parser_file_group.add_argument(
-        '-a', '--all',
-        help='Compile all exceptions recursivly',
-        action='store_true',
-        dest='ex_all',
-        default=False
-    )
-    ex_parser_file_group.add_argument(
-        '-p', '--path',
-        help='Compile a specific path',
-        action='store',
-        dest='path',
-        type=str
-    )
-    ex_parser.add_argument(
-        '-u', '--run-as-cmdline',
-        help='Run as command line suprocess. Default False',
-        action='store_true',
-        dest='cmd_line_process',
-        default=False
-    )
-    # endregion ex args
-
-    # region enum args
-    enum_parser_file_group = enum_parser.add_mutually_exclusive_group()
-    enum_parser_file_group.add_argument(
-        '-a', '--all',
-        help='Compile all enums recursivly',
-        action='store_true',
-        dest='enum_all',
-        default=False
-    )
-    enum_parser_file_group.add_argument(
-        '-p', '--path',
-        help='Compile a specific path',
-        action='store',
-        dest='path',
-        type=str
-    )
-    enum_parser.add_argument(
-        '-u', '--run-as-cmdline',
-        help='Run as command line suprocess. Default False',
-        action='store_true',
-        dest='cmd_line_process',
-        default=False
-    )
-    # endregion enum args
-
-    # region const args
-    const_parser_file_group = const_parser.add_mutually_exclusive_group()
-    const_parser_file_group.add_argument(
-        '-a', '--all',
-        help='Compile all constants recursivly',
-        action='store_true',
-        dest='const_all',
-        default=False
-    )
-    const_parser_file_group.add_argument(
-        '-p', '--path',
-        help='Compile a specific path',
-        action='store',
-        dest='path',
-        type=str
-    )
-    const_parser.add_argument(
-        '-u', '--run-as-cmdline',
-        help='Run as command line suprocess. Default False',
-        action='store_true',
-        dest='cmd_line_process',
-        default=False
-    )
-    # endregion const args
-
-    # region struct args
-    struct_parser_file_group = struct_parser.add_mutually_exclusive_group()
-    struct_parser_file_group.add_argument(
-        '-a', '--all',
-        help='Compile all struct recursivly',
-        action='store_true',
-        dest='struct_all',
-        default=False
-    )
-    struct_parser_file_group.add_argument(
-        '-p', '--path',
-        help='Compile a specific path',
-        action='store',
-        dest='path',
-        type=str
-    )
-    struct_parser.add_argument(
-        '-u', '--run-as-cmdline',
-        help='Run as command line suprocess. Default False',
-        action='store_true',
-        dest='cmd_line_process',
-        default=False
-    )
-    # endregion struct args
-
-    # region interface args
-    interface_parser_file_group = interface_parser.add_mutually_exclusive_group()
-    interface_parser_file_group.add_argument(
-        '-a', '--all',
-        help='Compile all interface recursivly',
-        action='store_true',
-        dest='interface_all',
-        default=False
-    )
-    interface_parser_file_group.add_argument(
-        '-p', '--path',
-        help='Compile a specific path',
-        action='store',
-        dest='path',
-        type=str
-    )
-    interface_parser.add_argument(
-        '-u', '--run-as-cmdline',
-        help='Run as command line suprocess. Default False',
-        action='store_true',
-        dest='cmd_line_process',
-        default=False
-    )
-
-    # endregion interface args
-    
-    # region singleton args
-    singleton_parser_file_group = singleton_parser.add_mutually_exclusive_group()
-    singleton_parser_file_group.add_argument(
-        '-a', '--all',
-        help='Compile all singleton recursivly',
-        action='store_true',
-        dest='singleton_all',
-        default=False
-    )
-    singleton_parser_file_group.add_argument(
-        '-p', '--path',
-        help='Compile a specific path',
-        action='store',
-        dest='path',
-        type=str
-    )
-    singleton_parser.add_argument(
-        '-u', '--run-as-cmdline',
-        help='Run as command line suprocess. Default False',
-        action='store_true',
-        dest='cmd_line_process',
-        default=False
-    )
-
-    # endregion service args
-
-    # region service args
-    service_parser_file_group = service_parser.add_mutually_exclusive_group()
-    service_parser_file_group.add_argument(
-        '-a', '--all',
-        help='Compile all service recursivly',
-        action='store_true',
-        dest='service_all',
-        default=False
-    )
-    service_parser_file_group.add_argument(
-        '-p', '--path',
-        help='Compile a specific path',
-        action='store',
-        dest='path',
-        type=str
-    )
-    service_parser.add_argument(
-        '-u', '--run-as-cmdline',
-        help='Run as command line suprocess. Default False',
-        action='store_true',
-        dest='cmd_line_process',
-        default=False
-    )
-
-    # endregion service args
-
-    # region typedef args
-    typedef_parser_file_group = typedef_parser.add_mutually_exclusive_group()
-    typedef_parser_file_group.add_argument(
-        '-a', '--all',
-        help='Compile all struct recursivly',
-        action='store_true',
-        dest='typedef_all',
-        default=False
-    )
-    typedef_parser_file_group.add_argument(
-        '-p', '--path',
-        help='Compile a specific path',
-        action='store',
-        dest='path',
-        type=str
-    )
-    typedef_parser.add_argument(
-        '-u', '--run-as-cmdline',
-        help='Run as command line suprocess. Default False',
-        action='store_true',
-        dest='cmd_line_process',
-        default=False
-    )
-    # endregion typedef args
+    # region compile links args
+    _args_links_ex(parser=ex_parser)
+    _args_links_enum(parser=enum_parser)
+    _args_links_const(parser=const_parser)
+    _args_links_struct(parser=struct_parser)
+    _args_links_interface(parser=interface_parser)
+    _args_links_singleton(parser=singleton_parser)
+    _args_links_service(parser=service_parser)
+    _args_links_typedef(parser=typedef_parser)
+    # endregion compile links args
 
     # region Touch
-    touch.add_argument(
-        '-s', '--struct',
-        help='Touch all struct files',
-        action='store_true',
-        dest='struct_all',
-        default=False
-    )
-    touch.add_argument(
-        '-g', '--singleton',
-        help='Touch all singleton files',
-        action='store_true',
-        dest='singleton_all',
-        default=False
-    )
-    touch.add_argument(
-        '-r', '--service',
-        help='Touch all service files',
-        action='store_true',
-        dest='service_all',
-        default=False
-    )
-    touch.add_argument(
-        '-c', '--const',
-        help='Touch all const files',
-        action='store_true',
-        dest='const_all',
-        default=False
-    )
-    touch.add_argument(
-        '-e', '--enum',
-        help='Touch all enum files',
-        action='store_true',
-        dest='enum_all',
-        default=False
-    )
-    touch.add_argument(
-        '-x', '--exception',
-        help='Touch all enum files',
-        action='store_true',
-        dest='ex_all',
-        default=False
-    )
-    touch.add_argument(
-        '-i', '--interface',
-        help='Touch all interface files',
-        action='store_true',
-        dest='interface_all',
-        default=False
-    )
-    touch.add_argument(
-        '-t', '--typedef',
-        help='Touch all interface files',
-        action='store_true',
-        dest='typedef_all',
-        default=False
-    )
-    touch.add_argument(
-        '-p', '--python',
-        help='Touch python files instead of template files',
-        action='store_true',
-        dest='python_files',
-        default=False
-    )
-    touch.add_argument(
-        '--cache-files',
-        help='Touch cached files. Resets cache file expire times',
-        action='store_true',
-        dest='cache_files',
-        default=False
-    )
+    _args_touch(parser=touch)
     # endregion Touch
 
     # region Module Links
