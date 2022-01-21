@@ -1587,6 +1587,27 @@ def _args_action_links_typedef(args: argparse.Namespace) -> None:
     if args.cmd_all:
         CompileTypeDefLinks(args=c_args)
     _log_end_action()
+
+
+def _args_process_compile_cmd_data(args: argparse.Namespace, config: AppConfig) -> None:
+    if args.command_data == 'ex':
+        _args_action_links_ex(args=args)
+    elif args.command_data == 'enum':
+        _args_action_links_enum(args=args)
+    elif args.command_data == 'const':
+        _args_action_links_const(args=args)
+    elif args.command_data == 'struct':
+        _args_action_links_struct(args=args)
+    elif args.command_data == 'interface':
+        _args_action_links_interface(args=args)
+    elif args.command_data == 'singleton':
+        _args_action_links_singleton(args=args)
+    elif args.command_data == 'service':
+        _args_action_links_service(args=args)
+    elif args.command_data == 'typedef':
+        _args_action_links_typedef(args=args)
+    elif args.command_data == 'typedef':
+        _args_action_touch(args=args, config=config)
 # endregion Compile Links Command
 # region    Touch
 def _args_action_touch(args: argparse.Namespace, config: AppConfig) -> None:
@@ -1748,7 +1769,7 @@ def _args_action_db_json(args: argparse.Namespace, config: AppConfig) -> None:
 # endregion     Json
 
 
-def _args_process_cmd_data(args: argparse.Namespace, config: AppConfig) -> None:
+def _args_process_data_cmd_data(args: argparse.Namespace, config: AppConfig) -> None:
     if args.command_data == 'db-init':
         _args_action_db_init(args=args, config=config)
     elif args.command_data == 'db-update':
@@ -1792,7 +1813,9 @@ def _args_process_cmd(args: argparse.Namespace, config: AppConfig) -> None:
     elif args.command == 'mod-links':
         _args_action_module_links(args=args, config=config)
     elif args.command == 'data':
-        _args_process_cmd_data(args=args, config=config)
+        _args_process_data_cmd_data(args=args, config=config)
+    elif args.command == 'compile':
+        _args_process_compile_cmd_data(args=args, config=config)
 # endregion ARGS COMMANDS
 # endregion parser
 
@@ -1812,14 +1835,18 @@ def main():
     parser = _create_parser('main')
     subparser = parser.add_subparsers(dest='command')
     make_parser = subparser.add_parser(name='make')
-    ex_parser = subparser.add_parser(name='ex')
-    enum_parser = subparser.add_parser(name='enum')
-    const_parser = subparser.add_parser(name='const')
-    struct_parser = subparser.add_parser(name='struct')
-    interface_parser = subparser.add_parser(name='interface')
-    singleton_parser = subparser.add_parser(name='singleton')
-    service_parser = subparser.add_parser(name='service')
-    typedef_parser = subparser.add_parser(name='typedef')
+    
+    compile_subparser = subparser.add_parser(name='compile')
+    compile = compile_subparser.add_subparsers(dest='command_data')
+    ex_parser = compile.add_parser(name='ex')
+    enum_parser = compile.add_parser(name='enum')
+    const_parser = compile.add_parser(name='const')
+    struct_parser = compile.add_parser(name='struct')
+    interface_parser = compile.add_parser(name='interface')
+    singleton_parser = compile.add_parser(name='singleton')
+    service_parser = compile.add_parser(name='service')
+    typedef_parser = compile.add_parser(name='typedef')
+
     touch = subparser.add_parser(name='touch')
     mod_links = subparser.add_parser(name='mod-links')
 
