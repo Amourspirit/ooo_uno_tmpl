@@ -1236,6 +1236,229 @@ def _args_touch(parser: argparse.ArgumentParser) -> None:
         default=False
     )
 # endregion Touch Parser
+
+# region Module Links Parser
+def _args_module_links(parser: argparse.ArgumentParser) -> None:
+    parser.add_argument(
+        '-a', '--all',
+        help='Compile moddule_link json files',
+        action='store_true',
+        dest='mod_links_all',
+        default=False
+    )
+    parser.add_argument(
+        '-f', '--json-file',
+        help='Optonal json file to parse such as resources/star.json',
+        action='store',
+        dest='json_file',
+        default=None
+    )
+    parser.add_argument(
+        '-r', '--no-recursive',
+        help='Run as command line suprocess. Default False',
+        action='store_true',
+        dest='no_recursive',
+        default=False
+    )
+    parser.add_argument(
+        '-x', '--no-cache',
+        help='No caching',
+        action='store_false',
+        dest='cache',
+        default=True)
+# endregion Module Links Parser
+# region Make Parser
+def _args_make(parser: argparse.ArgumentParser) -> None:
+    parser.add_argument(
+        '-f', '--force-compile',
+        help='Force Compile of templates',
+        action='store_true',
+        dest='force_compile',
+        default=False)
+    parser.add_argument(
+        '-c', '--clean-scratch',
+        help='Wipes all files in scratch',
+        action='store_true',
+        dest='clean_scratch',
+        default=False)
+    parser.add_argument(
+        '-p', '--processes',
+        help='Number of Process to us for make.',
+        action='store',
+        dest='processes',
+        type=int,
+        default=4)
+# endregion Make Parser
+# region data args
+def _args_data_init(parser: argparse.ArgumentParser) -> None:
+    parser.add_argument(
+        '-i', '--init-db',
+        help='Initialize database',
+        action='store_true',
+        dest='init_db',
+        default=False
+    )
+
+def _args_data_qry(parser: argparse.ArgumentParser) -> None:
+    parser.add_argument(
+        '-u', '--url',
+        help='Get url for a full namespace.',
+        action='store',
+        dest='ns_url',
+        default=None
+    )
+
+def _args_data_update(parser: argparse.ArgumentParser) -> None:
+    parser.add_argument(
+        '-a', '--write-all',
+        help='Write data from json files in database. Update/insert',
+        action='store_true',
+        dest='write_all',
+        default=False
+    )
+# region Imports
+def _args_data_imports(parser: argparse.ArgumentParser) -> None:
+    data_group = parser.add_argument_group()
+    # data_imports_group_rel = data_imports_group.add_argument_group()
+    data_group.add_argument(
+        '-n', '--name-space',
+        help='Genereate Namespace Data for a given namespace object',
+        action='store',
+        dest='ns_import_name',
+        default=None
+    )
+    data_group.add_argument(
+        '-j', '--json',
+        help='Output in json format',
+        action='store_true',
+        dest='as_json',
+        default=False
+    )
+    data_group.add_argument(
+        '-c', '--child',
+        help='Process only direct children if namespace',
+        action='store_true',
+        dest='ns_import_child',
+        default=False
+    )
+    data_group.add_argument(
+        '-r', '--as-rel-from',
+        help='Get as realitive from import strings',
+        action='store_true',
+        dest='ns_import_from',
+        default=False
+    )
+    data_group.add_argument(
+        '-l', '--as-long',
+        help='Get as realitive im',
+        action='store_true',
+        dest='ns_import_from_long',
+        default=False
+    )
+    exclusive_group = data_group.add_mutually_exclusive_group()
+    exclusive_group.add_argument(
+        '-t', '--typing',
+        help='Only imports that require typing',
+        action='store_true',
+        dest='import_typing',
+        default=False
+    )
+    exclusive_group.add_argument(
+        '-f', '--no-typing',
+        help='Only imports that do NOT require typing',
+        action='store_true',
+        dest='import_no_typing',
+        default=False
+    )
+
+
+def _args_data_imports_child(parser: argparse.ArgumentParser) -> None:
+    data_group = parser.add_argument_group()
+    # data_imports_group_rel = data_imports_group.add_argument_group()
+    data_group.add_argument(
+        '-n', '--name-space',
+        help='Genereate Namespace Data for a given namespace object',
+        action='store',
+        dest='namespace',
+        default=None
+    )
+    data_group.add_argument(
+        '-r', '--as-rel-from',
+        help='Get as realitive from import strings',
+        action='store_true',
+        dest='ns_import_from',
+        default=False
+    )
+    data_group.add_argument(
+        '-l', '--as-long',
+        help='Get as realitive im',
+        action='store_true',
+        dest='ns_import_from_long',
+        default=False
+    )
+    data_group.add_argument(
+        '-j', '--json',
+        help='Output in json format',
+        action='store_true',
+        dest='as_json',
+        default=False
+    )
+
+def _args_data_imports_extends_tree(parser: argparse.ArgumentParser) -> None:
+    parser.add_argument(
+        '-n', '--name-space',
+        help='Genereate Namespace Data for a given namespace object',
+        action='store',
+        dest='namespace',
+        default=None
+    )
+
+def _args_data_imports_extends_flat(parser: argparse.ArgumentParser) -> None:
+    data_group = parser.add_mutually_exclusive_group()
+    parser.add_argument(
+        '-n', '--namespace',
+        help='Genereate flat unique namespace data for a given namespace object',
+        action='store',
+        dest='namespace',
+        default=None
+    )
+    data_group.add_argument(
+        '-i', '--flat-imports',
+        help='Genereate imports if format of from ... import ... as ...',
+        action='store_true',
+        dest='ns_from_imports',
+        default=False
+    )
+    data_group.add_argument(
+        '-e', '--extends-short',
+        help='Generates line of short extends such as: XTextRange, XInterface',
+        action='store_true',
+        dest='ns_extends_short',
+        default=False
+    )
+    data_group.add_argument(
+        '-x', '--extends-long',
+        help='Generates line of short extends such as: text_x_text_range_i, uno_x_interface_i',
+        action='store_true',
+        dest='ns_extends_long',
+        default=False
+    )
+    parser.add_argument(
+        '-c', '--child',
+        help='Process only direct children if namespace',
+        action='store_true',
+        dest='ns_child',
+        default=False
+    )
+    parser.add_argument(
+        '-j', '--json',
+        help='Output in json format',
+        action='store_true',
+        dest='as_json',
+        default=False
+    )
+# endregion Imports
+# endregion data args
 # endregion parser
 
 def main():
@@ -1275,6 +1498,7 @@ def main():
     # region create parsers
     parser = _create_parser('main')
     subparser = parser.add_subparsers(dest='command')
+    make_parser = subparser.add_parser(name='make')
     ex_parser = subparser.add_parser(name='ex')
     enum_parser = subparser.add_parser(name='enum')
     const_parser = subparser.add_parser(name='const')
@@ -1309,239 +1533,22 @@ def main():
     _args_links_typedef(parser=typedef_parser)
     # endregion compile links args
 
-    # region Touch
+    # region Other Args
     _args_touch(parser=touch)
-    # endregion Touch
-
-    # region Module Links
-    mod_links.add_argument(
-        '-a', '--all',
-        help='Compile moddule_link json files',
-        action='store_true',
-        dest='mod_links_all',
-        default=False
-    )
-    mod_links.add_argument(
-        '-f', '--json-file',
-        help='Optonal json file to parse such as resources/star.json',
-        action='store',
-        dest='json_file',
-        default=None
-    )
-    mod_links.add_argument(
-        '-r', '--no-recursive',
-        help='Run as command line suprocess. Default False',
-        action='store_true',
-        dest='no_recursive',
-        default=False
-    )
-    mod_links.add_argument(
-        '-x', '--no-cache',
-        help='No caching',
-        action='store_false',
-        dest='cache',
-        default=True)
-
-
-    # endregion Module Links
-
-    # region make args
-    make_parser = subparser.add_parser(name='make')
-    make_parser.add_argument(
-        '-f', '--force-compile',
-        help='Force Compile of templates',
-        action='store_true',
-        dest='force_compile',
-        default=False)
-    make_parser.add_argument(
-        '-c', '--clean-scratch',
-        help='Wipes all files in scratch',
-        action='store_true',
-        dest='clean_scratch',
-        default=False)
-    make_parser.add_argument(
-        '-p', '--processes',
-        help='Number of Process to us for make.',
-        action='store',
-        dest='processes',
-        type=int,
-        default=4)
-    # endregion make args
+    _args_module_links(parser=mod_links)
+    _args_make(parser=make_parser)
+    # endregion Other Args
 
     # region data args
-
-    # region    db_init
-    data_init.add_argument(
-        '-i', '--init-db',
-        help='Initialize database',
-        action='store_true',
-        dest='init_db',
-        default=False
-    )
-    # endregion db_init
-
-    # region    db_qry
-    data_qry.add_argument(
-        '-u', '--url',
-        help='Get url for a full namespace.',
-        action='store',
-        dest='ns_url',
-        default=None
-    )
-    # endregion db_qry
-
-    # region    db_update
-    data_update.add_argument(
-        '-a', '--write-all',
-        help='Write data from json files in database. Update/insert',
-        action='store_true',
-        dest='write_all',
-        default=False
-    )
-    # endregion db_update
-
-    # region    imports
-    # region        Data Extends Tree
-    data_extends_tree.add_argument(
-        '-n', '--name-space',
-        help='Genereate Namespace Data for a given namespace object',
-        action='store',
-        dest='namespace',
-        default=None
-    )
-    # endregion     Data Extends Tree
-    # region        Data Extends Flat
-    data_imports_flat_group = data_extends_flat.add_mutually_exclusive_group()
-    data_extends_flat.add_argument(
-        '-n', '--namespace',
-        help='Genereate flat unique namespace data for a given namespace object',
-        action='store',
-        dest='namespace',
-        default=None
-    )
-    data_imports_flat_group.add_argument(
-        '-i', '--flat-imports',
-        help='Genereate imports if format of from ... import ... as ...',
-        action='store_true',
-        dest='ns_from_imports',
-        default=False
-    )
-    data_imports_flat_group.add_argument(
-        '-e', '--extends-short',
-        help='Generates line of short extends such as: XTextRange, XInterface',
-        action='store_true',
-        dest='ns_extends_short',
-        default=False
-    )
-    data_imports_flat_group.add_argument(
-        '-x', '--extends-long',
-        help='Generates line of short extends such as: text_x_text_range_i, uno_x_interface_i',
-        action='store_true',
-        dest='ns_extends_long',
-        default=False
-    )
-    data_extends_flat.add_argument(
-        '-c', '--child',
-        help='Process only direct children if namespace',
-        action='store_true',
-        dest='ns_child',
-        default=False
-    )
-    data_extends_flat.add_argument(
-        '-j', '--json',
-        help='Output in json format',
-        action='store_true',
-        dest='as_json',
-        default=False
-    )
-    # endregion     Data Extends Flat
-    # region        Data Imports
-    data_imports_group = data_imports.add_argument_group()
-    # data_imports_group_rel = data_imports_group.add_argument_group()
-    data_imports_group.add_argument(
-        '-n', '--name-space',
-        help='Genereate Namespace Data for a given namespace object',
-        action='store',
-        dest='ns_import_name',
-        default=None
-    )
-    data_imports_group.add_argument(
-        '-j', '--json',
-        help='Output in json format',
-        action='store_true',
-        dest='as_json',
-        default=False
-    )
-    data_imports_group.add_argument(
-        '-c', '--child',
-        help='Process only direct children if namespace',
-        action='store_true',
-        dest='ns_import_child',
-        default=False
-    )
-    data_imports_group.add_argument(
-        '-r', '--as-rel-from',
-        help='Get as realitive from import strings',
-        action='store_true',
-        dest='ns_import_from',
-        default=False
-    )
-    data_imports_group.add_argument(
-        '-l', '--as-long',
-        help='Get as realitive im',
-        action='store_true',
-        dest='ns_import_from_long',
-        default=False
-    )
-    exclusive_data_imports_group = data_imports_group.add_mutually_exclusive_group()
-    exclusive_data_imports_group.add_argument(
-        '-t', '--typing',
-        help='Only imports that require typing',
-        action='store_true',
-        dest='import_typing',
-        default=False
-    )
-    exclusive_data_imports_group.add_argument(
-        '-f', '--no-typing',
-        help='Only imports that do NOT require typing',
-        action='store_true',
-        dest='import_no_typing',
-        default=False
-    )
-    # endregion     Data Imports
-    # region        Data Imports Child
-    data_imports_child_typing_group = data_imports_typing_child.add_argument_group()
-    # data_imports_group_rel = data_imports_group.add_argument_group()
-    data_imports_child_typing_group.add_argument(
-        '-n', '--name-space',
-        help='Genereate Namespace Data for a given namespace object',
-        action='store',
-        dest='namespace',
-        default=None
-    )
-    data_imports_child_typing_group.add_argument(
-        '-r', '--as-rel-from',
-        help='Get as realitive from import strings',
-        action='store_true',
-        dest='ns_import_from',
-        default=False
-    )
-    data_imports_child_typing_group.add_argument(
-        '-l', '--as-long',
-        help='Get as realitive im',
-        action='store_true',
-        dest='ns_import_from_long',
-        default=False
-    )
-    data_imports_child_typing_group.add_argument(
-        '-j', '--json',
-        help='Output in json format',
-        action='store_true',
-        dest='as_json',
-        default=False
-    )
-    # endregion     Data Imports Child
-    # endregion imports
+    _args_data_init(parser=data_init)
+    _args_data_qry(parser=data_qry)
+    _args_data_update(parser=data_update)
+    # region Imports
+    _args_data_imports(parser=data_imports)
+    _args_data_imports_child(parser=data_imports_typing_child)
+    _args_data_imports_extends_tree(parser=data_extends_tree)
+    _args_data_imports_extends_flat(parser=data_extends_flat)
+    # endregion Imports
 
     # region    JSON
     data_json.add_argument(
