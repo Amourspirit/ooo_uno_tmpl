@@ -56,7 +56,7 @@ def get_kwargs_from_args(args: argparse.ArgumentParser) -> dict:
     return xsrc.get_kwargs_from_args(args)
 
 
-def set_cmd_args(parser: argparse.Namespace) -> None:
+def set_cmd_args(parser: argparse.ArgumentParser) -> None:
     return xsrc.set_cmd_args(parser)
 # endregion Parser
 

@@ -20,6 +20,8 @@ class AppConfig:
     """Uno obj dir such as uno_obj. This is the directory that templates and json data file are written to."""
     builld_dir: str
     """Output build dir such as build"""
+    data_dir: str
+    """Output data dir such as data"""
     scratch_dir: str
     """Output scratch dir such as scratch"""
     resource_dir: str

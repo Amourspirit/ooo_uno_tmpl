@@ -836,7 +836,8 @@ def _main():
 
 # region Parser
 
-def set_cmd_args(parser) -> None:
+
+def set_cmd_args(parser: argparse.ArgumentParser) -> None:
     parser.add_argument(
         '-u', '--url',
         help='Source Url',
