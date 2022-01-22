@@ -1890,7 +1890,8 @@ def set_cmd_args(parser: argparse.ArgumentParser) -> None:
         dest='write_json',
         default=False)
 
-def set_cmd_args_local(parser) -> None:
+
+def set_cmd_args_local(parser: argparse.ArgumentParser) -> None:
     parser.add_argument(
         '-v', '--verbose',
         help='verbose logging',

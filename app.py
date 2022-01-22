@@ -43,11 +43,12 @@ class WriteInfo:
     scratch_path: Path
 
 
-@dataclass(frozen=True, eq=True)
+@dataclass
 class CompileLinkArgs:
     config: AppConfig
     path: Optional[str] = None
     use_sub_process: bool = True
+    out_dir: Optional[str] = None
 # endregion Data Class
 
 
@@ -118,8 +119,11 @@ class FilesBase:
         p_file = Path(t_file.parent, str(t_file.stem) + '.py')
         return p_file
 
-    def get_module_link_files(self) -> Set[str]:
-        dirname = str(self._root_dir / self._config.uno_base_dir)
+    def get_module_link_files(self, dir_name: Optional[str] = None) -> Set[str]:
+        if dir_name:
+            dirname = str(self._root_dir / dir_name)
+        else:
+            dirname = str(self._root_dir / self._config.uno_base_dir)
         # https://stackoverflow.com/questions/20638040/glob-exclude-pattern
         # root module_links.json needs to be remove from listing.
         # it will not need any processing here.
@@ -240,7 +244,7 @@ class CompileEnumLinks(BaseCompile):
         parse_enm(write_template=True, write_json=True, json_file=file)
 
     def _process_files(self):
-        link_files = self.get_module_link_files()
+        link_files = self.get_module_link_files(dir_name=self.args.out_dir)
         for file in link_files:
             if self._do_sub:
                 self._subprocess(file)
@@ -286,7 +290,7 @@ class CompileConstLinks(BaseCompile):
         parse_const(write_template=True, write_json=True, json_file=file)
 
     def _process_files(self):
-        link_files = self.get_module_link_files()
+        link_files = self.get_module_link_files(dir_name=self.args.out_dir)
         for file in link_files:
             if self._do_sub:
                 self._subprocess(file)
@@ -332,7 +336,7 @@ class CompileTypeDefLinks(BaseCompile):
         parse_typedef(write_template=True, write_json=True, json_file=file)
 
     def _process_files(self):
-        link_files = self.get_module_link_files()
+        link_files = self.get_module_link_files(dir_name=self.args.out_dir)
         for file in link_files:
             if self._do_sub:
                 self._subprocess(file)
@@ -378,7 +382,7 @@ class CompileStructLinks(BaseCompile):
         parse_struct(write_template=True, write_json=True, json_file=file)
 
     def _process_files(self):
-        link_files = self.get_module_link_files()
+        link_files = self.get_module_link_files(dir_name=self.args.out_dir)
         for file in link_files:
             if self._do_sub:
                 self._subprocess(file)
@@ -427,7 +431,7 @@ class CompileInterfaceLinks(BaseCompile):
         parse_interface(write_template=True, write_json=True, json_file=file)
 
     def _process_files(self):
-        link_files = self.get_module_link_files()
+        link_files = self.get_module_link_files(dir_name=self.args.out_dir)
         for file in link_files:
             if self._do_sub:
                 self._subprocess(file)
@@ -475,7 +479,7 @@ class CompileSingletonLinks(BaseCompile):
         parse_singleton(write_template=True, write_json=True, json_file=file)
 
     def _process_files(self):
-        link_files = self.get_module_link_files()
+        link_files = self.get_module_link_files(dir_name=self.args.out_dir)
         for file in link_files:
             if self._do_sub:
                 self._subprocess(file)
@@ -523,7 +527,7 @@ class CompileServiceLinks(BaseCompile):
         parse_service(write_template=True, write_json=True, json_file=file)
 
     def _process_files(self):
-        link_files = self.get_module_link_files()
+        link_files = self.get_module_link_files(dir_name=self.args.out_dir)
         for file in link_files:
             if self._do_sub:
                 self._subprocess(file)
@@ -570,7 +574,7 @@ class CompileExLinks(BaseCompile):
         parse_ex(write_template=True, write_json=True, json_file=file)
 
     def _process_files(self):
-        link_files = self.get_module_link_files()
+        link_files = self.get_module_link_files(dir_name=self.args.out_dir)
         for file in link_files:
             if self._do_sub:
                 self._subprocess(file)
@@ -1097,8 +1101,9 @@ def _main():
     # ns = 'com.sun.star.form.FormController'
     # ns = 'com.sun.star.form.DataAwareControlModel'
     # ns = 'com.sun.star.text.TextRange'
+    args = 'link-json mod-links --data -a'
     url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XDevice.html'
-    sys.argv.extend(['-v', "link-json", "star-links", '-j', "-d", "tmp"])
+    sys.argv.extend(args.split())
     main()
 
 
@@ -1196,7 +1201,6 @@ def _args_links_general(parser: argparse.ArgumentParser, name: str) -> None:
         dest='cmd_line_process',
         default=False
     )
-
 
 def _args_links_ex(parser: argparse.ArgumentParser) -> None:
     _args_links_general(parser=parser, name='exceptions')
@@ -1307,35 +1311,30 @@ def _args_touch(parser: argparse.ArgumentParser) -> None:
 
 # region        Module Links Parser
 
-
+def args_remove_options(parser, options):
+    for option in options:
+        for action in parser._actions:
+            if vars(action)['option_strings'][0] == option:
+                parser._handle_conflict_resolve(None,[(option,action)])
+                break
 def _args_module_links(parser: argparse.ArgumentParser) -> None:
     parser.add_argument(
         '-a', '--all',
-        help='Compile moddule_link json files',
+        help='Compile module_link json files',
         action='store_true',
         dest='mod_links_all',
         default=False
     )
+    linkproc.set_cmd_args(parser)
+    
     parser.add_argument(
-        '-f', '--json-file',
-        help='Optonal json file to parse such as resources/star.json',
-        action='store',
-        dest='json_file',
-        default=None
-    )
-    parser.add_argument(
-        '-r', '--no-recursive',
-        help='Run as command line suprocess. Default False',
+        '--data',
+        help='Write to data folder',
         action='store_true',
-        dest='no_recursive',
-        default=False
-    )
-    parser.add_argument(
-        '-x', '--no-cache',
-        help='No caching',
-        action='store_false',
-        dest='cache',
-        default=True)
+        dest='write_data_dir',
+        default=False)
+    args_remove_options(parser, ['-u', '--url'])
+
 # endregion     Module Links Parser
 # region        Star Linkes Parser
 
@@ -1648,6 +1647,8 @@ def _args_action_links_typedef(args: argparse.Namespace, config: AppConfig) -> N
 
 
 def _args_process_compile_cmd_data(args: argparse.Namespace, config: AppConfig) -> None:
+    if args.write_data_dir:
+        args.write_path = config.data_dir
     if args.command_data == 'ex':
         _args_action_links_ex(args=args, config=config)
     elif args.command_data == 'enum':
@@ -1849,12 +1850,16 @@ def _args_action_module_links(args: argparse.Namespace, config: AppConfig) -> No
     if args.mod_links_all:
         if not query_yes_no(f"Are you sure you want to rebuild all {config.module_links_file} files?", 'no'):
             return
+        if args.write_data_dir:
+            write_path = config.scratch_dir
+        else:
+            write_path = None
         linkproc.parse(
             json_file=args.json_file,
-            recursive=not args.no_recursive,
+            recursive=not args.recursive,
             cache=args.cache,
             write_json=True,
-
+            write_path=write_path
         )
     _log_end_action()
 
@@ -1985,6 +1990,7 @@ def main():
     links_singleton_parser = compile.add_parser(name='singleton')
     links_struct_parser = compile.add_parser(name='struct')
     links_typedef_parser = compile.add_parser(name='typedef')
+    
 
     url_parser_subparser = subparser.add_parser(name='url-parse')
     url_parser = url_parser_subparser.add_subparsers(dest='command_data')

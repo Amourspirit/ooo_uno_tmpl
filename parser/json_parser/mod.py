@@ -423,6 +423,7 @@ class WriterMod():
         self._write_json: bool = kwargs.get('write_json', False)
         self._clear_on_print: bool = kwargs.get('clear_on_print', True)
         self._clear_on_print: bool = kwargs.get('clear_on_print', True)
+        self._write_path: Union[str, None] = kwargs.get('write_path', None)
         self._path_dir = Path(__file__).parent
         self._cache = {}
 
@@ -471,8 +472,11 @@ class WriterMod():
         key = '_get_uno_obj_path'
         if key in self._cache:
             return self._cache[key]
-        uno_obj_path = Path(self._path_dir.parent.parent,
-                            base.APP_CONFIG.uno_base_dir)
+        if self._write_path:
+            write_path = self._write_path
+        else:
+            write_path = base.APP_CONFIG.uno_base_dir
+        uno_obj_path = Path(self._path_dir.parent.parent, write_path)
         name_parts: List[str] = self._parser.api_data.url_obj.namespace
         # ignore com, sun, star
         path_parts = name_parts[3:]
@@ -502,57 +506,88 @@ def work(url: str, **kwargs):
 
 # region Parse method
 
+def get_kwargs_from_args(args: argparse.ArgumentParser) -> dict:
+    """
+    Converts argparse args into dictionary that can be passed to ``parse()``
 
-def parse(*args, **kwargs):
+    Args:
+        args (argparse.ArgumentParser): args
+
+    Returns:
+        dict: dictionary that contain key values matching ``parser()`` args.
+    """
+    d = {
+        "url": args.url,
+        "cache": args.cache,
+        "print_clear": args.print_clear,
+        "print_json": args.print_json,
+        "write_json": args.write_json,
+        "log_file": args.log_file,
+        "verbose": args.verbose
+    }
+    if args.write_path:
+        d['write_path'] = args.write_path
+    return d
+
+def parse(**kwargs):
     """
     Parses data, alternative to running on command line.
 
     Keyword Arguments:
         url (str): Url to parse
-        no_cache (bool, optional): Short form ``'x'``. No caching. Default ``False``.
-        no_print_clear (bool, optional): No clearing of terminal
+        cache (bool, optional): Determines caching. Default ``False``.
+        print_clear (bool, optional): Determines clearing of terminal
             when otuput to terminal. Default ``False``.
         print_json (bool, optional): Print json to termainl. Default ``False``.
         write_json (bool, optional): Write json file into obj_uno subfolder. Default ``False``.
+        write_path (str, optional): The root path to write data files (json, tmpl) into. Defaut set in config ``uno_base_dir``
         verbose (bool, optional): Verobose output. Default ``False``.
         recursive (bool, optional): Recursivly process modules. If url contains links other modules they will be processed.
             Default ``False``
-        log_file (str, optional): Short form ``L``. Log File
+        log_file (str, optional): Log File
     """
     global logger
+    _url = str(kwargs['url'])
+    _cache = bool(kwargs.get('cache', False))
+    _print_clear = bool(kwargs.get('print-clear', False))
+    _print_json = bool(kwargs.get('print_json', False))
+    _write_json = bool(kwargs.get('write_json', False))
+    _write_path = kwargs.get('write_path', None)
+    _verbose = bool(kwargs.get('verbose', False))
+    _recursive = bool(kwargs.get('recursive', False))
+    _log_file = str(kwargs.get('log_file', 'mod.log'))
+
     if logger is None:
         log_args = {}
-        log_args['log_file'] = str(kwargs.get('log_file', 'mod.log'))
-        if bool(kwargs.get('verbose', False)):
+        log_args['log_file'] = _log_file
+        if _verbose:
             log_args['level'] = logging.DEBUG
         _set_loggers(get_logger(logger_name=Path(__file__).stem, **log_args))
 
     work(
-        url=str(kwargs['url']),
-        cache=not bool(kwargs.get('no_cache', False)),
-        print_json=bool(kwargs.get('print_json', False)),
-        write_json=bool(kwargs.get('write_json', False)),
-        clear_on_print=not bool(kwargs.get('no-print-clear', False)),
-        recursive=bool(kwargs.get('recursive', False)),
+        url= _url,
+        cache=_cache,
+        print_json=_print_json,
+        write_json=_write_json,
+        clear_on_print=_print_clear,
+        recursive=_recursive,
+        write_path=_write_path
     )
 
-# endregion Parse method
-def _main():
-    # url = 'https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1awt.html'
-    url = 'https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star.html'
-    sys.argv.extend(['--log-file', 'debug.log', '-v', '-n', '-u', url])
-    main()
 
-
-def main():
-    global logger
-    # region Parser
-    parser = argparse.ArgumentParser(description='interface')
+def set_cmd_args(parser: argparse.ArgumentParser) -> None:
     parser.add_argument(
         '-u', '--url',
         help='Source Url',
         type=str,
         required=True)
+    parser.add_argument(
+        '-o', '--out',
+        help=f"Out path of templates and json data. Default: '{base.APP_CONFIG.uno_base_dir}'",
+        type=str,
+        dest='write_path',
+        default=None,
+        required=False)
     parser.add_argument(
         '-x', '--no-cache',
         help='No caching',
@@ -563,7 +598,7 @@ def main():
         '-p', '--no-print-clear',
         help='No clearing of terminal when output to terminal.',
         action='store_false',
-        dest='no_print_clear',
+        dest='print_clear',
         default=True)
     parser.add_argument(
         '-n', '--print-json',
@@ -583,6 +618,35 @@ def main():
         action='store_true',
         dest='recursive',
         default=False)
+
+
+def set_cmd_args_local(parser: argparse.ArgumentParser) -> None:
+    parser.add_argument(
+        '-v', '--verbose',
+        help='verbose logging',
+        action='store_true',
+        dest='verbose',
+        default=False)
+    parser.add_argument(
+        '-L', '--log-file',
+        help='Log file to use. Defaults to const.log',
+        type=str,
+        required=False)
+# endregion Parse method
+def _main():
+    # url = 'https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1awt.html'
+    url = 'https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star.html'
+    sys.argv.extend(['--log-file', 'debug.log', '-v', '-n', '-u', url])
+    main()
+
+
+def main():
+    global logger
+    # region Parser
+    parser = argparse.ArgumentParser(description='interface')
+    set_cmd_args(parser)
+    set_cmd_args_local(parser)
+    
     parser.add_argument(
         '-v', '--verbose',
         help='verbose logging',
@@ -606,18 +670,11 @@ def main():
             log_args['level'] = logging.DEBUG
         _set_loggers(get_logger(logger_name=Path(__file__).stem, **log_args))
     # endregion Parser
-    if not args.no_print_clear:
+    if not args.print_clear:
         os.system('cls' if os.name == 'nt' else 'clear')
     logger.info('Executing command: %s', sys.argv[1:])
-    work(
-        url=args.url,
-        cache=args.cache,
-        print_json=args.print_json,
-        write_json=args.write_json,
-        clear_on_print=(not args.no_print_clear),
-        recursive=args.recursive
-    )
- 
+    args_dict = get_kwargs_from_args(args)
+    parse(**args_dict)
 
 if __name__ == '__main__':
     main()
