@@ -516,18 +516,29 @@ def get_kwargs_from_args(args: argparse.ArgumentParser) -> dict:
     Returns:
         dict: dictionary that contain key values matching ``parser()`` args.
     """
-    d = {
-        "url": args.url,
-        "cache": args.cache,
-        "print_clear": args.print_clear,
-        "print_json": args.print_json,
-        "write_json": args.write_json,
-        "log_file": args.log_file,
-        "verbose": args.verbose
+    defaults = {
+        "url": None,
+        "cache": True,
+        "write_path": None,
+        "print_clear": True,
+        "print_json": False,
+        "write_json": False,
+        "verbose": False
     }
-    if args.write_path:
-        d['write_path'] = args.write_path
-    return d
+    # d = {
+    #     "url": args.url,
+    #     "cache": args.cache,
+    #     "print_clear": args.print_clear,
+    #     "print_json": args.print_json,
+    #     "write_json": args.write_json,
+    #     "log_file": args.log_file,
+    #     "verbose": args.verbose
+    # }
+    # if args.write_path:
+    #     d['write_path'] = args.write_path
+    command_line_args = {k:v for k, v in vars(args).items()}
+    defaults.update(command_line_args)
+    return defaults
 
 def parse(**kwargs):
     """

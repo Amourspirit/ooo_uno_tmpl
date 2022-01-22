@@ -1136,6 +1136,12 @@ def _log_end_action() -> None:
 # endregion Logging
 
 # region parser
+def args_remove_options(parser, options):
+    for option in options:
+        for action in parser._actions:
+            if vars(action)['option_strings'][0] == option:
+                parser._handle_conflict_resolve(None,[(option,action)])
+                break
 # region    SET ARGS
 # region        Create Parsers
 
@@ -1311,13 +1317,9 @@ def _args_touch(parser: argparse.ArgumentParser) -> None:
 
 # region        Module Links Parser
 
-def args_remove_options(parser, options):
-    for option in options:
-        for action in parser._actions:
-            if vars(action)['option_strings'][0] == option:
-                parser._handle_conflict_resolve(None,[(option,action)])
-                break
 def _args_module_links(parser: argparse.ArgumentParser) -> None:
+    # usually run with: link-json mod-links --data -r -j -a
+
     parser.add_argument(
         '-a', '--all',
         help='Compile module_link json files',
@@ -1848,19 +1850,17 @@ def _args_process_data_cmd_data(args: argparse.Namespace, config: AppConfig) -> 
 def _args_action_module_links(args: argparse.Namespace, config: AppConfig) -> None:
     _log_start_action()
     if args.mod_links_all:
+        # usually run with: link-json mod-links --data -r -j -a
         if not query_yes_no(f"Are you sure you want to rebuild all {config.module_links_file} files?", 'no'):
             return
         if args.write_data_dir:
-            write_path = config.scratch_dir
+            write_path = config.data_dir
         else:
             write_path = None
-        linkproc.parse(
-            json_file=args.json_file,
-            recursive=not args.recursive,
-            cache=args.cache,
-            write_json=True,
-            write_path=write_path
-        )
+        parsed_args = linkproc.get_kwargs_from_args(args)
+        parsed_args['write_path'] = write_path
+        linkproc.parse(**parsed_args)
+        return
     _log_end_action()
 
 def _args_action_link_json_star_links(args: argparse.Namespace) -> None:

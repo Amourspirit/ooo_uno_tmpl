@@ -177,8 +177,8 @@ def get_kwargs_from_args(args: argparse.ArgumentParser) -> dict:
     }
     if args.write_path:
         d['write_path'] = args.write_path
-    d = ChainMap(d, mod_d)
-    return d
+    mod_d.update(d)
+    return mod_d
 
 def parse(**kwargs):
     """
