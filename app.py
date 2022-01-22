@@ -1599,66 +1599,64 @@ def _args_action_make(args: argparse.Namespace, config: AppConfig) -> None:
 # region    Compile Links Command
 
 
-def _args_action_compile_links(args: argparse.Namespace, compiler: Type[BaseCompile]) -> None:
+def _args_action_compile_links(args: argparse.Namespace, compiler: Type[BaseCompile], config: AppConfig) -> None:
     _log_start_action()
-    c_args = _get_compile_args(args=args)
+    c_args = _get_compile_args(args=args, config=config)
     if args.cmd_all or args.args.path:
         compiler(args=c_args)
     _log_end_action()
 
 
-def _args_action_links_ex(args: argparse.Namespace) -> None:
-    _args_action_compile_links(args, CompileExLinks)
+def _args_action_links_ex(args: argparse.Namespace, config: AppConfig) -> None:
+    _args_action_compile_links(args, CompileExLinks, config)
 
 
-def _args_action_links_enum(args: argparse.Namespace) -> None:
-    _args_action_compile_links(args, CompileEnumLinks)
+def _args_action_links_enum(args: argparse.Namespace, config: AppConfig) -> None:
+    _args_action_compile_links(args, CompileEnumLinks, config)
 
 
-def _args_action_links_const(args: argparse.Namespace) -> None:
-    _args_action_compile_links(args, CompileConstLinks)
+def _args_action_links_const(args: argparse.Namespace, config: AppConfig) -> None:
+    _args_action_compile_links(args, CompileConstLinks, config)
 
 
-def _args_action_links_struct(args: argparse.Namespace) -> None:
-    _args_action_compile_links(args, CompileStructLinks)
+def _args_action_links_struct(args: argparse.Namespace, config: AppConfig) -> None:
+    _args_action_compile_links(args, CompileStructLinks, config)
 
 
-def _args_action_links_interface(args: argparse.Namespace) -> None:
-    _args_action_compile_links(args, CompileInterfaceLinks)
+def _args_action_links_interface(args: argparse.Namespace, config: AppConfig) -> None:
+    _args_action_compile_links(args, CompileInterfaceLinks, config)
 
 
-def _args_action_links_singleton(args: argparse.Namespace) -> None:
-    _args_action_compile_links(args, CompileSingletonLinks)
+def _args_action_links_singleton(args: argparse.Namespace, config: AppConfig) -> None:
+    _args_action_compile_links(args, CompileSingletonLinks, config)
 
 
-def _args_action_links_service(args: argparse.Namespace) -> None:
-    _args_action_compile_links(args, CompileServiceLinks)
+def _args_action_links_service(args: argparse.Namespace, config: AppConfig) -> None:
+    _args_action_compile_links(args, CompileServiceLinks, config)
 
 
-def _args_action_links_typedef(args: argparse.Namespace) -> None:
-    _args_action_compile_links(args, CompileTypeDefLinks)
+def _args_action_links_typedef(args: argparse.Namespace, config: AppConfig) -> None:
+    _args_action_compile_links(args, CompileTypeDefLinks, config)
     _log_start_action()
 
 
 def _args_process_compile_cmd_data(args: argparse.Namespace, config: AppConfig) -> None:
     if args.command_data == 'ex':
-        _args_action_links_ex(args=args)
+        _args_action_links_ex(args=args, config=config)
     elif args.command_data == 'enum':
-        _args_action_links_enum(args=args)
+        _args_action_links_enum(args=args, config=config)
     elif args.command_data == 'const':
-        _args_action_links_const(args=args)
+        _args_action_links_const(args=args, config=config)
     elif args.command_data == 'struct':
-        _args_action_links_struct(args=args)
+        _args_action_links_struct(args=args, config=config)
     elif args.command_data == 'interface':
-        _args_action_links_interface(args=args)
+        _args_action_links_interface(args=args, config=config)
     elif args.command_data == 'singleton':
-        _args_action_links_singleton(args=args)
+        _args_action_links_singleton(args=args, config=config)
     elif args.command_data == 'service':
-        _args_action_links_service(args=args)
+        _args_action_links_service(args=args, config=config)
     elif args.command_data == 'typedef':
-        _args_action_links_typedef(args=args)
-    elif args.command_data == 'typedef':
-        _args_action_touch(args=args, config=config)
+        _args_action_links_typedef(args=args, config=config)
 # endregion Compile Links Command
 # region    Touch
 
