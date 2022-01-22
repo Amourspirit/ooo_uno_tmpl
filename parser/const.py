@@ -1673,6 +1673,32 @@ class ConstWriter(base.WriteBase):
 # endregion Writer
 
 # region Parse method
+def get_kwargs_from_args(args: argparse.ArgumentParser) -> dict:
+    """
+    Converts argparse args into dictionary that can be passed to ``parse()``
+
+    Args:
+        args (argparse.ArgumentParser): args
+
+    Returns:
+        dict: dictionary that contain key values matching ``parser()`` args.
+    """
+    d = {
+        "url": args.url,
+        "cache": args.cache,
+        "copy_clipboard": args.clipboard,
+        "print_template": args.print_template,
+        "write_template": args.write_template,
+        "write_template_long": args.long_format,
+        "print_json": args.print_json,
+        "write_json": args.write_json,
+        "include_desc": args.desc,
+        "log_file": args.log_file,
+        "verbose": args.verbose,
+        "flags": args.flags,
+        "hex": args.hex
+    }
+    return d
 
 def parse(**kwargs):
     """
@@ -1703,18 +1729,18 @@ def parse(**kwargs):
     global logger
     _url = str(kwargs['url'])
     _cache = bool(kwargs.get('cache', True))
-    _json_out = bool(kwargs.get('json_out', False))
-    _long_template = bool(kwargs.get('write_template_long', False))
     _clipboard = bool(kwargs.get('copy_clipboard', False))
-    _print_json = bool(kwargs.get('print_json', False))
     _print_template = bool(kwargs.get('print_template', False))
     _write_template = bool(kwargs.get('write_template', False))
+    _long_template = bool(kwargs.get('write_template_long', False))
+    _print_json = bool(kwargs.get('print_json', False))
     _write_json = bool(kwargs.get('write_json', False))
-    _verbose = bool(kwargs.get('verbose', False))
-    _log_file = kwargs.get('log_file', None)
     _include_desc = bool(kwargs.get('include_desc', True))
+    _log_file = kwargs.get('log_file', None)
+    _verbose = bool(kwargs.get('verbose', False))
     _flags = bool(kwargs.get('flags', False))
     _hex = bool(kwargs.get('hex', False))
+    _json_out = bool(kwargs.get('json_out', False))
     if logger is None:
         log_args = {}
         if _log_file:
@@ -1799,7 +1825,7 @@ def set_cmd_args(parser) -> None:
         '-p', '--no-print-clear',
         help='No clearing of terminal when output to terminal.',
         action='store_false',
-        dest='no_print_clear',
+        dest='print_clear',
         default=True)
     parser.add_argument(
         '-y', '--hex',
@@ -1881,26 +1907,10 @@ def main():
     logger.info('Executing command: %s', sys.argv[1:])
     logger.info('Parsing Url %s' % args.url)
 
-    p = Parser(
-        url=args.url,
-        sort=False,
-        cache=args.cache,
-        remove_parent_inherited=base.APP_CONFIG.remove_parent_inherited
-    )
+    args_dict = get_kwargs_from_args(args)
     if not args.print_json and not args.print_template:
         print('')
-    w = ConstWriter(
-        parser=p,
-        copy_clipboard=args.clipboard,
-        print_template=args.print_template,
-        print_json=args.print_json,
-        flags=args.flags,
-        hex=args.hex,
-        write_template=args.write_template,
-        write_json=args.write_json,
-        write_template_long=args.long_format
-        )
-    w.write()
+    parse(**args_dict)
  
 if __name__ == '__main__':
     main()

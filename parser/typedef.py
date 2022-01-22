@@ -598,8 +598,33 @@ class WriterTypeDef(base.WriteBase):
 # endregion Writer
 
 # region Parse method
+def get_kwargs_from_args(args: argparse.ArgumentParser) -> dict:
+    """
+    Converts argparse args into dictionary that can be passed to ``parse()``
 
-def parse(*args, **kwargs):
+    Args:
+        args (argparse.ArgumentParser): args
+
+    Returns:
+        dict: dictionary that contain key values matching ``parser()`` args.
+    """
+    d = {
+        "url": args.url,
+        "sort": args.sort,
+        "cache": args.cache,
+        "clear_on_print": args.print_clear,
+        "print_template": args.print_template,
+        "write_template": args.write_template,
+        "write_template_long": args.long_format,
+        "print_json": args.print_json,
+        "write_json": args.write_json,
+        "include_desc": args.desc,
+        "log_file": args.log_file,
+        "verbose": args.verbose
+    }
+    return d
+
+def parse(**kwargs):
     """
     Parses data, alternative to running on command line.
 
@@ -625,14 +650,14 @@ def parse(*args, **kwargs):
     _sort = bool(kwargs.get('sort', True))
     _cache = bool(kwargs.get('cache', True))
     _print_clear = bool(kwargs.get('clear_on_print', False))
-    _long_template = bool(kwargs.get('write_template_long', False))
-    _print_json = bool(kwargs.get('print_json', False))
     _print_template = bool(kwargs.get('print_template', False))
     _write_template = bool(kwargs.get('write_template', False))
+    _long_template = bool(kwargs.get('write_template_long', False))
+    _print_json = bool(kwargs.get('print_json', False))
     _write_json = bool(kwargs.get('write_json', bool))
-    _verbose = bool(kwargs.get('verbose', False))
-    _log_file = kwargs.get('log_file', None)
     _include_desc = bool(kwargs.get('include_desc', True))
+    _log_file = kwargs.get('log_file', None)
+    _verbose = bool(kwargs.get('verbose', False))
 
     if logger is None:
         log_args = {}
@@ -709,7 +734,7 @@ def set_cmd_args(parser) -> None:
         '-p', '--no-print-clear',
         help='No clearing of terminal when output to terminal.',
         action='store_false',
-        dest='no_print_clear',
+        dest='print_clear',
         default=True)
     parser.add_argument(
         '-g', '--long-template',
@@ -783,24 +808,10 @@ def main():
     logger.info('Executing command: %s', sys.argv[1:])
     logger.info('Parsing Url %s' % args.url)
 
-    p = ParserTypeDef(
-        url=args.url,
-        sort=args.sort,
-        cache=args.cache
-    )
-    w = WriterTypeDef(
-        parser=p,
-        print_template=args.print_template,
-        print_json=args.print_json,
-        write_template=args.write_template,
-        write_json=args.write_json,
-        clear_on_print=(not args.no_print_clear),
-        write_template_long=args.long_format,
-        include_desc=args.desc
-    )
+    args_dict = get_kwargs_from_args(args)
     if args.print_template is False and args.print_json is False:
         print('')
-    w.write()
+    parse(**args_dict)
 # endregion Main
 
 

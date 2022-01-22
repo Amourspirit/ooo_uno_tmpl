@@ -9,11 +9,8 @@ import sys
 import logging
 import argparse
 from dataclasses import dataclass, field
-from typing import Dict, List, Set, Tuple, Union
-from bs4 import BeautifulSoup
-from bs4.element import ResultSet, Tag
-from kwhelp.decorator import DecFuncEnum, RuleCheckAllKw, TypeCheck, TypeCheckKw
-from kwhelp import rules
+from typing import Dict, List, Set, Union
+from kwhelp.decorator import DecFuncEnum, TypeCheck, TypeCheckKw
 from pathlib import Path
 import textwrap
 import xerox # requires xclip - sudo apt-get install xclip
@@ -703,6 +700,35 @@ class StructWriter(base.WriteBase):
 # region Parse method
 
 
+def get_kwargs_from_args(args: argparse.ArgumentParser) -> dict:
+    """
+    Converts argparse args into dictionary that can be passed to ``parse()``
+
+    Args:
+        args (argparse.ArgumentParser): args
+
+    Returns:
+        dict: dictionary that contain key values matching ``parser()`` args.
+    """
+    d = {
+        "url": args.url,
+        "sort": args.sort,
+        "cache": args.cache,
+        "clear_on_print": args.print_clear,
+        "copy_clipboard": args.clipboard,
+        "print_template": args.print_template,
+        "write_template": args.write_template,
+        "write_template_long": args.long_format,
+        "print_json": args.print_json,
+        "write_json": args.write_json,
+        "include_desc": args.desc,
+        "long_names": args.long_names,
+        "log_file": args.log_file,
+        "verbose": args.verbose,
+        "dynamic_struct": args.dynamic_struct
+    }
+    return d
+
 def parse(**kwargs) -> Union[str, None]:
     """
     Parses data, alternative to running on command line.
@@ -734,19 +760,19 @@ def parse(**kwargs) -> Union[str, None]:
     _url = str(kwargs['url'])
     _sort = bool(kwargs.get('sort', True))
     _cache = bool(kwargs.get('cache', True))
-    _json_out = bool(kwargs.get('json_out', False))
     _print_clear = bool(kwargs.get('clear_on_print', False))
-    _long_template = bool(kwargs.get('write_template_long', False))
     _clipboard = bool(kwargs.get('copy_clipboard', False))
-    _print_json = bool(kwargs.get('print_json', False))
     _print_template = bool(kwargs.get('print_template', False))
     _write_template = bool(kwargs.get('write_template', False))
+    _long_template = bool(kwargs.get('write_template_long', False))
+    _print_json = bool(kwargs.get('print_json', False))
     _write_json = bool(kwargs.get('write_json', bool))
-    _verbose = bool(kwargs.get('verbose', False))
-    _log_file = kwargs.get('log_file', None)
-    _include_desc = bool(kwargs.get('include_desc', True))
     _long_names = bool(kwargs.get(
         'long_names', base.APP_CONFIG.use_long_import_names))
+    _json_out = bool(kwargs.get('json_out', False))
+    _log_file = kwargs.get('log_file', None)
+    _verbose = bool(kwargs.get('verbose', False))
+    _include_desc = bool(kwargs.get('include_desc', True))
     _dynamic_struct = bool(kwargs.get('dynamic_struct', False))
     if logger is None:
         log_args = {}
@@ -815,7 +841,7 @@ def set_cmd_args(parser) -> None:
         '-p', '--no-print-clear',
         help='No clearing of terminal when output to terminal.',
         action='store_false',
-        dest='no_print_clear',
+        dest='print_clear',
         default=True)
     parser.add_argument(
         '-s', '--no-sort',
@@ -837,7 +863,7 @@ def set_cmd_args(parser) -> None:
         default=True)
     parser.add_argument(
         '-l', '--long-names',
-        help='Toggels default value of config. Short Names such as XInterface will be generated instead of uno_x_interface or vice versa',
+        help='Toggels default value of config. Short Names such as XInterface will be generated instead of XInterface_8f010a43 or vice versa',
         action='store_false' if base.APP_CONFIG.use_long_import_names else 'store_true',
         dest='long_names',
         default=base.APP_CONFIG.use_long_import_names)
@@ -911,31 +937,15 @@ def main():
             log_args['level'] = logging.DEBUG
         _set_loggers(get_logger(logger_name=Path(__file__).stem, **log_args))
 
-    if not args.no_print_clear:
+    if not args.print_clear:
         os.system('cls' if os.name == 'nt' else 'clear')
 
     logger.info('Executing command: %s', sys.argv[1:])
     logger.info('Parsing Url %s' % args.url)
-    p = Parser(
-        url=args.url,
-        sort=args.sort,
-        cache=args.cache,
-        long_names=args.long_names,
-        remove_parent_inherited=base.APP_CONFIG.remove_parent_inherited
-        )
+    args_dict = get_kwargs_from_args(args)
     if args.print_template is False and args.print_json is False:
         print('')
-    w = StructWriter(
-        parser=p,
-        copy_clipboard=args.clipboard,
-        print_template=args.print_template,
-        print_json=args.print_json,
-        write_template=args.write_template,
-        write_json=args.write_json,
-        write_template_long=args.long_format,
-        dynamic_struct=args.dynamic_struct
-        )
-    w.write()
+    parse(**args_dict)
     
 if __name__ == '__main__':
     main()

@@ -19,7 +19,7 @@ from kwhelp.exceptions import RuleError
 from enum import IntEnum
 from pathlib import Path
 from logger.log_handle import get_logger
-from parser import __version__, JSON_ID
+from parser import __version__, JSON_ID, const as url_parser_const, enm as url_parser_enum, ex as url_parser_ex, xsrc as url_parser_interface, service as url_parser_service, singleton as url_parser_singleton, struc as url_parser_struct, typedef as url_parser_typedef
 from config import AppConfig, read_config
 from parser.json_parser.interface_parser import parse as parse_interface, Parser as ParserInterface
 from parser.json_parser.singleton_parser import parse as parse_singleton, Parser as ParserSingleton
@@ -30,7 +30,7 @@ from parser.json_parser.exception_parser import parse as parse_ex, ParserExcepti
 from parser.json_parser.typedef_parser import parse as parse_typedef, ParserTypeDef
 from parser.json_parser.const_parser import parse as parse_const, ParserConst
 from parser.json_parser import linkproc
-from parser import xsrc as url_parser_interface
+
 # endregion Imports
 
 # region Data Class
@@ -1142,8 +1142,33 @@ def _create_parser(name: str) -> argparse.ArgumentParser:
 # region        Url Parsers
 
 
+def _args_url_const(parser: argparse.ArgumentParser) -> None:
+    url_parser_const.set_cmd_args(parser)
+
+def _args_url_enum(parser: argparse.ArgumentParser) -> None:
+    url_parser_enum.set_cmd_args(parser)
+
+def _args_url_exception(parser: argparse.ArgumentParser) -> None:
+    url_parser_ex.set_cmd_args(parser)
+
 def _args_url_interface(parser: argparse.ArgumentParser) -> None:
     url_parser_interface.set_cmd_args(parser)
+
+def _args_url_service(parser: argparse.ArgumentParser) -> None:
+    url_parser_service.set_cmd_args(parser)
+
+def _args_url_singleton(parser: argparse.ArgumentParser) -> None:
+    url_parser_singleton.set_cmd_args(parser)
+
+def _args_url_struct(parser: argparse.ArgumentParser) -> None:
+    url_parser_struct.set_cmd_args(parser)
+
+def _args_url_typedef(parser: argparse.ArgumentParser) -> None:
+    url_parser_typedef.set_cmd_args(parser)
+
+
+
+
 # endregion     Url Parsers
 # region        Compile Links
 
@@ -1827,12 +1852,66 @@ def _args_process_data_cmd_data(args: argparse.Namespace, config: AppConfig) -> 
         _args_action_db_json(args=args, config=config)
 
 # endregion data Command
+# region    Url Parsers
+
+def _args_action_url_const(args: argparse.Namespace) -> None:
+    d_args = url_parser_const.get_kwargs_from_args(args)
+    url_parser_const.parse(**d_args)
+
+def _args_action_url_enum(args: argparse.Namespace) -> None:
+    d_args = url_parser_enum.get_kwargs_from_args(args)
+    url_parser_enum.parse(**d_args)
+
+def _args_action_url_exception(args: argparse.Namespace) -> None:
+    d_args = url_parser_ex.get_kwargs_from_args(args)
+    url_parser_ex.parse(**d_args)
+
+def _args_action_url_interface(args: argparse.Namespace) -> None:
+    d_args = url_parser_interface.get_kwargs_from_args(args)
+    url_parser_interface.parse(**d_args)
+
+
+def _args_action_url_service(args: argparse.Namespace) -> None:
+    d_args = url_parser_service.get_kwargs_from_args(args)
+    url_parser_service.parse(**d_args)
+
+
+def _args_action_url_singleton(args: argparse.Namespace) -> None:
+    d_args = url_parser_singleton.get_kwargs_from_args(args)
+    url_parser_singleton.parse(**d_args)
+
+def _args_action_url_struct(args: argparse.Namespace) -> None:
+    d_args = url_parser_struct.get_kwargs_from_args(args)
+    url_parser_struct.parse(**d_args)
+
+def _args_action_url_typedef(args: argparse.Namespace) -> None:
+    d_args = url_parser_typedef.get_kwargs_from_args(args)
+    url_parser_typedef.parse(**d_args)
+
+def _args_process_url_parser_cmd_data(args: argparse.Namespace) -> None:
+    if args.command_data == 'const':
+        _args_action_url_const(args=args)
+    elif args.command_data == 'enum':
+        _args_action_url_enum(args=args)
+    elif args.command_data == 'exception':
+        _args_action_url_exception(args=args)
+    elif args.command_data == 'interface':
+        _args_action_url_interface(args=args)
+    elif args.command_data == 'service':
+        _args_action_url_service(args=args)
+    elif args.command_data == 'singleton':
+        _args_action_url_singleton(args=args)
+    elif args.command_data == 'struct':
+        _args_action_url_struct(args=args)
+    elif args.command_data == 'typedef':
+        _args_action_url_typedef(args=args)
+# endregion Url Parsers
 
 
 def _args_process_cmd(args: argparse.Namespace, config: AppConfig) -> None:
     if args.command == 'make':
         _args_action_make(args=args, config=config)
-    elif args.command == 'ex':
+    elif args.command == 'exception':
         _args_action_links_ex(args=args)
     elif args.command == 'enum':
         _args_action_links_enum(args=args)
@@ -1856,6 +1935,8 @@ def _args_process_cmd(args: argparse.Namespace, config: AppConfig) -> None:
         _args_process_data_cmd_data(args=args, config=config)
     elif args.command == 'compile':
         _args_process_compile_cmd_data(args=args, config=config)
+    elif args.command == 'url-parse':
+        _args_process_url_parser_cmd_data(args=args)
 # endregion ARGS COMMANDS
 # endregion parser
 
@@ -1878,19 +1959,26 @@ def main():
 
     compile_subparser = subparser.add_parser(name='compile')
     compile = compile_subparser.add_subparsers(dest='command_data')
-    ex_parser = compile.add_parser(name='ex')
-    enum_parser = compile.add_parser(name='enum')
-    const_parser = compile.add_parser(name='const')
-    struct_parser = compile.add_parser(name='struct')
-    interface_parser = compile.add_parser(name='interface')
-    singleton_parser = compile.add_parser(name='singleton')
-    service_parser = compile.add_parser(name='service')
-    typedef_parser = compile.add_parser(name='typedef')
-    
+    links_const_parser = compile.add_parser(name='const')
+    links_enum_parser = compile.add_parser(name='enum')
+    links_ex_parser = compile.add_parser(name='exception')
+    links_interface_parser = compile.add_parser(name='interface')
+    links_service_parser = compile.add_parser(name='service')
+    links_singleton_parser = compile.add_parser(name='singleton')
+    links_struct_parser = compile.add_parser(name='struct')
+    links_typedef_parser = compile.add_parser(name='typedef')
+
     url_parser_subparser = subparser.add_parser(name='url-parse')
     url_parser = url_parser_subparser.add_subparsers(dest='command_data')
-    link_interface = url_parser.add_parser(name='interface')
-    
+    url_const = url_parser.add_parser(name='const')
+    url_enum = url_parser.add_parser(name='enum')
+    url_exception = url_parser.add_parser(name='exception')
+    url_interface = url_parser.add_parser(name='interface')
+    url_service = url_parser.add_parser(name='service')
+    url_singleton = url_parser.add_parser(name='singleton')
+    url_struct = url_parser.add_parser(name='struct')
+    url_typedef = url_parser.add_parser(name='typedef')
+
     touch = subparser.add_parser(name='touch')
     mod_links = subparser.add_parser(name='mod-links')
 
@@ -1909,20 +1997,27 @@ def main():
     # region Set Args
 
     # region compile links args
-    _args_links_ex(parser=ex_parser)
-    _args_links_enum(parser=enum_parser)
-    _args_links_const(parser=const_parser)
-    _args_links_struct(parser=struct_parser)
-    _args_links_interface(parser=interface_parser)
-    _args_links_singleton(parser=singleton_parser)
-    _args_links_service(parser=service_parser)
-    _args_links_typedef(parser=typedef_parser)
+    _args_links_const(parser=links_const_parser)
+    _args_links_enum(parser=links_enum_parser)
+    _args_links_ex(parser=links_ex_parser)
+    _args_links_interface(parser=links_interface_parser)
+    _args_links_service(parser=links_service_parser)
+    _args_links_singleton(parser=links_singleton_parser)
+    _args_links_struct(parser=links_struct_parser)
+    _args_links_typedef(parser=links_typedef_parser)
     # endregion compile links args
 
     # region url parser
-    _args_url_interface(parser=link_interface)
+    _args_url_const(parser=url_const)
+    _args_url_enum(parser=url_enum)
+    _args_url_exception(parser=url_exception)
+    _args_url_interface(parser=url_interface)
+    _args_url_service(parser=url_service)
+    _args_url_singleton(parser=url_singleton)
+    _args_url_struct(parser=url_struct)
+    _args_url_typedef(parser=url_typedef)
     # endregion url parser
-    
+
     # region Other Args
     _args_general(parser=parser)
     _args_touch(parser=touch)

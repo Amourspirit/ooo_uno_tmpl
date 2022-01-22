@@ -49,6 +49,16 @@ class Writer(xsrc.Writer):
         """
         return 'service'
 
+# region Parser
+
+
+def get_kwargs_from_args(args: argparse.ArgumentParser) -> dict:
+    return xsrc.get_kwargs_from_args(args)
+
+
+def set_cmd_args(parser: argparse.Namespace) -> None:
+    return xsrc.set_cmd_args(parser)
+# endregion Parser
 
 def parse(**kwargs) -> Union[str, None]:
     """
@@ -70,6 +80,7 @@ def parse(**kwargs) -> Union[str, None]:
         print_template (str, optional): Print template to terminal. Default ``False``
         write_template (str, optional): Write template file into obj_uno subfolder. Default ``False``
         write_json (str, optional): Write json file into obj_uno subfolder. Default ``False``
+        allow_known_json (bool, optional): Allow Known Json to be used. Default ``True``
         verbose (str, optional): Verobose output.
         log_file (str, optional): Log File
     """
@@ -120,25 +131,11 @@ def main():
         os.system('cls' if os.name == 'nt' else 'clear')
     logger.info('Executing command: %s', sys.argv[1:])
     logger.info('Parsing Url %s' % args.url)
-    proc = xsrc.Processer(
-        p=Parser,
-        w=Writer,
-        url=args.url,
-        sort=args.sort,
-        print_template=args.print_template,
-        print_json=args.print_json,
-        copy_clipboard=args.clipboard,
-        write_template=args.write_template,
-        write_json=args.write_json,
-        clear_on_print=(not args.no_print_clear),
-        write_template_long=args.long_format,
-        include_desc=args.desc,
-        long_names=args.long_names
-    )
+    args_dict = get_kwargs_from_args(args)
 
     if args.print_template is False and args.print_json is False:
         print('')
-    proc.process()
+    parse(**args_dict)
 
 
 if __name__ == '__main__':

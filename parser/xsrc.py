@@ -985,7 +985,7 @@ def get_kwargs_from_args(args: argparse.ArgumentParser) -> dict:
         "url": args.url,
         "sort": args.sort,
         "cache": args.cache,
-        "clear_on_print": (not args.no_print_clear),
+        "clear_on_print": args.print_clear,
         "copy_clipboard": args.clipboard,
         "print_template": args.print_template,
         "write_template": args.write_template,
@@ -1100,7 +1100,7 @@ def _main():
 
 
 # region Parser
-def set_cmd_args(parser) -> None:
+def set_cmd_args(parser: argparse.Namespace) -> None:
     parser.add_argument(
         '-u', '--url',
         help='Source Url',
@@ -1114,7 +1114,7 @@ def set_cmd_args(parser) -> None:
         default=True)
     parser.add_argument(
         '-l', '--long-names',
-        help='Toggels default value of config. Short Names such as XInterface will be generated instead of uno_x_interface or vice versa',
+        help='Toggels default value of config. Short Names such as XInterface will be generated instead of XInterface_8f010a43 or vice versa',
         action='store_false' if base.APP_CONFIG.use_long_import_names else 'store_true',
         dest='long_names',
         default=base.APP_CONFIG.use_long_import_names)
@@ -1134,7 +1134,7 @@ def set_cmd_args(parser) -> None:
         '-p', '--no-print-clear',
         help='No clearing of terminal when output to terminal.',
         action='store_false',
-        dest='no_print_clear',
+        dest='print_clear',
         default=True)
     parser.add_argument(
         '-g', '--long-template',
@@ -1211,7 +1211,7 @@ def main():
             log_args['level'] = logging.DEBUG
         _set_loggers(get_logger(logger_name=Path(__file__).stem, **log_args))
 
-    if not args.no_print_clear:
+    if not args.print_clear:
         os.system('cls' if os.name == 'nt' else 'clear')
     logger.info('Executing command: %s', sys.argv[1:])
     logger.info('Parsing Url %s' % args.url)
