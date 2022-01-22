@@ -279,14 +279,12 @@ def get_kwargs_from_args(args: argparse.ArgumentParser) -> dict:
         "url": args.url,
         "cache": args.cache,
         "file_name": args.file_name,
-        "dir_name": args.dir_name,
+        "write_path": args.dir_name,
         "print_json": args.print_json,
         "write_json": args.write_json,
         "log_file": args.log_file,
         "verbose": args.verbose
     }
-    if args.write_path:
-        d['write_path'] = args.write_path
     return d
 
 
@@ -299,8 +297,9 @@ def parse(**kwargs) -> Union[str, None]:
         cache (str, optional): Caching. Default ``True``
         print_json (str, optional): Print json to termainl. Default ``False``
         write_json (str, optional): Write json file into obj_uno subfolder. Default ``False``
-        verbose (str, optional): Verobose output.
+        write_path (str, optional): The root path to write json data file.
         log_file (str, optional): Log File
+        verbose (str, optional): Verobose output.
     
     Returns:
         Union[str, None]: Returns json string if json_out is ``True``
@@ -310,8 +309,8 @@ def parse(**kwargs) -> Union[str, None]:
     _cache = bool(kwargs.get('cache', True))
     _file_name = str(kwargs['file_name'])
     _print_json = bool(kwargs.get('print_json', False))
-    _write_json = bool(kwargs.get('write_json', bool))
-    _dir_name: str(kwargs['dir_name'])
+    _write_json = bool(kwargs.get('write_json', False))
+    _dir_name = str(kwargs['write_path'])
     _log_file = kwargs.get('log_file', None)
     _verbose = bool(kwargs.get('verbose', False))
 
@@ -327,13 +326,13 @@ def parse(**kwargs) -> Union[str, None]:
 
     p = ParserStar(
         url=_url,
-        cache=_cache,
-        filename=_file_name,
-        dirname=_dir_name
+        cache=_cache
     )
 
     w = WriteStar(
         parser=p,
+        dirname=_dir_name,
+        filename=_file_name,
         write_json=_write_json,
         print_json=_print_json
     )
@@ -345,20 +344,20 @@ def set_cmd_args(parser: argparse.ArgumentParser) -> None:
     dir_name = 'resources'
     parser.add_argument(
         '-u', '--url',
-        help='Source Url',
+        help='Optional, Source Url',
         type=str,
         required=False,
         default=url)
     parser.add_argument(
         '-f', '--file-name',
-        help='Dest file',
+        help=f"Optional, Dest file. Default '{file_name}'",
         type=str,
         dest='file_name',
         required=False,
         default=file_name)
     parser.add_argument(
-        '-d', '--dir-name',
-        help='Dest directory',
+        '-o', '--out',
+        help=f"Optional, Dest directory. Default '{dir_name}'",
         type=str,
         dest='dir_name',
         required=False,

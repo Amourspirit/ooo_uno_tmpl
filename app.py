@@ -19,7 +19,7 @@ from kwhelp.exceptions import RuleError
 from enum import IntEnum
 from pathlib import Path
 from logger.log_handle import get_logger
-from parser import __version__, JSON_ID, const as url_parser_const, enm as url_parser_enum, ex as url_parser_ex, xsrc as url_parser_interface, service as url_parser_service, singleton as url_parser_singleton, struc as url_parser_struct, typedef as url_parser_typedef
+from parser import __version__, JSON_ID, const as url_parser_const, enm as url_parser_enum, ex as url_parser_ex, xsrc as url_parser_interface, service as url_parser_service, singleton as url_parser_singleton, struc as url_parser_struct, typedef as url_parser_typedef, star as json_parser_star
 from config import AppConfig, read_config
 from parser.json_parser.interface_parser import parse as parse_interface, Parser as ParserInterface
 from parser.json_parser.singleton_parser import parse as parse_singleton, Parser as ParserSingleton
@@ -1098,7 +1098,7 @@ def _main():
     # ns = 'com.sun.star.form.DataAwareControlModel'
     # ns = 'com.sun.star.text.TextRange'
     url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XDevice.html'
-    sys.argv.extend(['-v', 'url-parse', 'interface', '-j', '-k', '-o', 'scratch/uno_obj', '-u', url])
+    sys.argv.extend(['-v', "link-json", "star-links", '-j', "-d", "tmp"])
     main()
 
 
@@ -1304,6 +1304,7 @@ def _args_touch(parser: argparse.ArgumentParser) -> None:
         default=False
     )
 # endregion     Touch Parser
+
 # region        Module Links Parser
 
 
@@ -1336,6 +1337,12 @@ def _args_module_links(parser: argparse.ArgumentParser) -> None:
         dest='cache',
         default=True)
 # endregion     Module Links Parser
+# region        Star Linkes Parser
+
+
+def _args_links_parser_url(parser: argparse.ArgumentParser) -> None:
+    json_parser_star.set_cmd_args(parser)
+# endregion     Star Linkes Parser
 # region        Make Parser
 
 
@@ -1678,23 +1685,7 @@ def _args_action_touch(args: argparse.Namespace, config: AppConfig) -> None:
     )
     _log_end_action()
 # endregion Touch
-# region    Module Links
 
-
-def _args_action_module_links(args: argparse.Namespace, config: AppConfig) -> None:
-    _log_start_action()
-    if args.mod_links_all:
-        if not query_yes_no(f"Are you sure you want to rebuild all {config.module_links_file} files?", 'no'):
-            return
-        linkproc.parse(
-            json_file=args.json_file,
-            recursive=not args.no_recursive,
-            cache=args.cache,
-            write_json=True,
-
-        )
-    _log_end_action()
-# endregion Module Links
 # region    data Command
 # region        Init
 
@@ -1850,6 +1841,34 @@ def _args_process_data_cmd_data(args: argparse.Namespace, config: AppConfig) -> 
         _args_action_db_json(args=args, config=config)
 
 # endregion data Command
+
+# region    Link Json Command
+
+def _args_action_module_links(args: argparse.Namespace, config: AppConfig) -> None:
+    _log_start_action()
+    if args.mod_links_all:
+        if not query_yes_no(f"Are you sure you want to rebuild all {config.module_links_file} files?", 'no'):
+            return
+        linkproc.parse(
+            json_file=args.json_file,
+            recursive=not args.no_recursive,
+            cache=args.cache,
+            write_json=True,
+
+        )
+    _log_end_action()
+
+def _args_action_link_json_star_links(args: argparse.Namespace) -> None:
+    d_args = json_parser_star.get_kwargs_from_args(args)
+    json_parser_star.parse(**d_args)
+
+def _args_process_link_json_cmd_data(args: argparse.Namespace, config: AppConfig) -> None:
+    if args.command_data == 'mod-links':
+        _args_action_module_links(args=args, config=config)
+    elif args.command_data == 'star-links':
+        _args_action_link_json_star_links(args=args)
+# endregion Link Json Command
+
 # region    Url Parsers
 
 def _args_action_url_const(args: argparse.Namespace) -> None:
@@ -1906,6 +1925,7 @@ def _args_process_url_parser_cmd_data(args: argparse.Namespace) -> None:
 # endregion Url Parsers
 
 
+
 def _args_process_cmd(args: argparse.Namespace, config: AppConfig) -> None:
     if args.command == 'make':
         _args_action_make(args=args, config=config)
@@ -1927,8 +1947,8 @@ def _args_process_cmd(args: argparse.Namespace, config: AppConfig) -> None:
         _args_action_links_typedef(args=args)
     elif args.command == 'touch':
         _args_action_touch(args=args, config=config)
-    elif args.command == 'mod-links':
-        _args_action_module_links(args=args, config=config)
+    elif args.command == 'link-json':
+        _args_process_link_json_cmd_data(args=args, config=config)
     elif args.command == 'data':
         _args_process_data_cmd_data(args=args, config=config)
     elif args.command == 'compile':
@@ -1978,7 +1998,11 @@ def main():
     url_typedef = url_parser.add_parser(name='typedef')
 
     touch = subparser.add_parser(name='touch')
-    mod_links = subparser.add_parser(name='mod-links')
+    
+    link_json_subparser = subparser.add_parser(name='link-json')
+    link_json_parser = link_json_subparser.add_subparsers(dest='command_data')
+    link_json_mod_links = link_json_parser.add_parser(name='mod-links')
+    link_json_star_links = link_json_parser.add_parser(name='star-links')
 
     data_subparser = subparser.add_parser(name='data')
     data = data_subparser.add_subparsers(dest='command_data')
@@ -2016,10 +2040,15 @@ def main():
     _args_url_typedef(parser=url_typedef)
     # endregion url parser
 
+    # region Link Json args
+    _args_module_links(parser=link_json_mod_links)
+    _args_links_parser_url(parser=link_json_star_links)
+    
+    # endregion Link Json args
+
     # region Other Args
     _args_general(parser=parser)
     _args_touch(parser=touch)
-    _args_module_links(parser=mod_links)
     _args_make(parser=make_parser)
     # endregion Other Args
 
