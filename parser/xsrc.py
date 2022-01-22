@@ -467,6 +467,7 @@ class Writer(base.WriteBase):
         self._write_template_long: bool = kwargs.get(
             'write_template_long', False)
         self._allow_known_json: bool = bool(kwargs.get('allow_known_json', True))
+        self._write_path: Union[str, None] = kwargs.get('write_path', None)
         self._indent_amt = 4
         self._json_str = None
         self._p_name: str = None
@@ -866,9 +867,11 @@ class Writer(base.WriteBase):
             except Exception as e:
                 logger.error(e, exc_info=True)
                 raise e
-
-        uno_obj_path = Path(self._path_dir.parent,
-                            base.APP_CONFIG.uno_base_dir)
+        if self._write_path:
+            write_path = self._write_path
+        else:
+            write_path = base.APP_CONFIG.uno_base_dir
+        uno_obj_path = Path(self._path_dir.parent, write_path)
         name_parts: List[str] = self._p_namespace.split('.')
         # ignore com, sun, star
         path_parts = name_parts[3:]
@@ -921,6 +924,7 @@ class Processer:
             print_template (str, optional): Print template to terminal. Default ``False``
             write_template (str, optional): Write template file into obj_uno subfolder. Default ``False``
             write_json (str, optional): Write json file into obj_uno subfolder. Default ``False``
+            write_path (str, optional): The root path to write data files (json, tmpl) into. Defaut set in config ``uno_base_dir``
             allow_known_json (bool, optional): Allow Known Json to be used. Default ``True``
             verbose (str, optional): Verobose output.
             log_file (str, optional): Log File
@@ -946,6 +950,7 @@ class Processer:
         self._remove_parent_inherited = bool(
             kwargs.get('remove_parent_inherited', base.APP_CONFIG.remove_parent_inherited))
         self._allow_know_json = bool(kwargs.get('allow_known_json', True))
+        self._write_path: Union[str, None] = kwargs.get('write_path', None)
 
     def process(self) -> Union[str, None]:
         parser = self._parser(
@@ -966,7 +971,8 @@ class Processer:
             write_template_long=self._long_template,
             include_desc=self._include_desc,
             json_out=self._json_out,
-            allow_known_json=self._allow_know_json
+            allow_known_json=self._allow_know_json,
+            write_path=self._write_path
         )
         return w.write()
 
@@ -998,6 +1004,8 @@ def get_kwargs_from_args(args: argparse.ArgumentParser) -> dict:
         "log_file": args.log_file,
         "verbose": args.verbose
     }
+    if args.write_path:
+        d['write_path'] = args.write_path
     return d
 
 def parse(**kwargs) -> Union[str, None]:
@@ -1020,6 +1028,7 @@ def parse(**kwargs) -> Union[str, None]:
         print_template (str, optional): Print template to terminal. Default ``False``
         write_template (str, optional): Write template file into obj_uno subfolder. Default ``False``
         write_json (str, optional): Write json file into obj_uno subfolder. Default ``False``
+        write_path (str, optional): The root path to write data files (json, tmpl) into. Defaut set in config ``uno_base_dir``
         allow_known_json (bool, optional): Allow Known Json to be used. Default ``True``
         verbose (str, optional): Verobose output.
         log_file (str, optional): Log File
@@ -1045,6 +1054,7 @@ def parse(**kwargs) -> Union[str, None]:
     _allow_know_json = bool(kwargs.get('allow_known_json', True))
     _log_file = kwargs.get('log_file', None)
     _verbose = bool(kwargs.get('verbose', False))
+    _write_path= kwargs.get('write_path', None)
 
     if logger is None:
         log_args = {}
@@ -1073,7 +1083,8 @@ def parse(**kwargs) -> Union[str, None]:
         include_desc=_include_desc,
         long_names=_long_names,
         json_out=_json_out,
-        allow_know_json=_allow_know_json
+        allow_know_json=_allow_know_json,
+        write_path=_write_path
     )
     return proc.process()
 
@@ -1092,7 +1103,8 @@ def _main():
         "url": url,
         "log_file": "debug.log",
         'verbose': True,
-        "write_json": True
+        "write_json": True,
+        "write_path": 'scratch/uno_obj'
     }
     # sys.argv.extend(['--log-file', 'debug.log', '-v', '-n', '-u', url])
     # main()
@@ -1106,6 +1118,13 @@ def set_cmd_args(parser: argparse.Namespace) -> None:
         help='Source Url',
         type=str,
         required=True)
+    parser.add_argument(
+        '-o', '--out',
+        help=f"Out path of templates and json data. Default: '{base.APP_CONFIG.uno_base_dir}'",
+        type=str,
+        dest='write_path',
+        default=None,
+        required=False)
     parser.add_argument(
         '-d', '--no-desc',
         help='No description will be outputed in template',

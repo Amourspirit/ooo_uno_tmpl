@@ -1094,11 +1094,11 @@ def query_yes_no(question, default="yes"):
 def _main():
     # ns = 'com.sun.star.form.component.DatabaseTextField'
     # ns = 'com.sun.star.form.component.RichTextControl'
-    ns = 'com.sun.star.form.FormController'
+    # ns = 'com.sun.star.form.FormController'
     # ns = 'com.sun.star.form.DataAwareControlModel'
     # ns = 'com.sun.star.text.TextRange'
-    sys.argv.extend(['-v', '--log-file', 'debug.log',
-                    'data', 'db-json', '-n', ns])
+    url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XDevice.html'
+    sys.argv.extend(['-v', 'url-parse', 'interface', '-j', '-k', '-o', 'scratch/uno_obj', '-u', url])
     main()
 
 
@@ -1925,7 +1925,7 @@ def _args_process_cmd(args: argparse.Namespace, config: AppConfig) -> None:
         _args_action_links_service(args=args)
     elif args.command == 'typedef':
         _args_action_links_typedef(args=args)
-    elif args.command == 'typedef':
+    elif args.command == 'touch':
         _args_action_touch(args=args, config=config)
     elif args.command == 'mod-links':
         _args_action_module_links(args=args, config=config)
@@ -2044,6 +2044,8 @@ def main():
         log_args = {}
         if args.log_file:
             log_args['log_file'] = args.log_file
+        else:
+            log_args['log_file'] = 'app.log'
         if args.verbose:
             log_args['level'] = logging.DEBUG
         logger = get_logger(logger_name=Path(__file__).stem, **log_args)

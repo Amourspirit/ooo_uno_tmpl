@@ -353,6 +353,7 @@ class StructWriter(base.WriteBase):
         self._include_desc: bool = kwargs.get('include_desc', True)
         self._write_template_long: bool = kwargs.get(
             'write_template_long', False)
+        self._write_path: Union[str, None] = kwargs.get('write_path', None)
         self._indent_amt = 4
         self._cache: Dict[str, object] = {}
         self._json_str = None
@@ -676,8 +677,11 @@ class StructWriter(base.WriteBase):
         key = '_get_uno_obj_path'
         if key in self._cache:
             return self._cache[key]
-        uno_obj_path = Path(self._path_dir.parent,
-                            base.APP_CONFIG.uno_base_dir)
+        if self._write_path:
+            write_path = self._write_path
+        else:
+            write_path = base.APP_CONFIG.uno_base_dir
+        uno_obj_path = Path(self._path_dir.parent, write_path)
         name_parts = self._p_fullname.split('.')
         # ignore com, sun, star
         path_parts = name_parts[3:]
@@ -689,6 +693,7 @@ class StructWriter(base.WriteBase):
             except Exception as e:
                 logger.error(e, exc_info=True)
                 raise e
+        
         path_parts[index] = base.Util.get_clean_filename(path_parts[index]) + base.APP_CONFIG.template_struct_ext
         obj_path = uno_obj_path.joinpath(*path_parts)
         self._mkdirp(obj_path.parent)
@@ -727,6 +732,8 @@ def get_kwargs_from_args(args: argparse.ArgumentParser) -> dict:
         "verbose": args.verbose,
         "dynamic_struct": args.dynamic_struct
     }
+    if args.write_path:
+        d['write_path'] = args.write_path
     return d
 
 def parse(**kwargs) -> Union[str, None]:
@@ -750,6 +757,7 @@ def parse(**kwargs) -> Union[str, None]:
         print_template (str, optional): Print template to terminal. Default ``False``
         write_template (str, optional): Write template file into obj_uno subfolder. Default ``False``
         write_json (str, optional): Write json file into obj_uno subfolder. Default ``False``
+        write_path (str, optional): The root path to write data files (json, tmpl) into. Defaut set in config ``uno_base_dir``
         verbose (str, optional): Verobose output.
         log_file (str, optional): Log File
 
@@ -774,6 +782,8 @@ def parse(**kwargs) -> Union[str, None]:
     _verbose = bool(kwargs.get('verbose', False))
     _include_desc = bool(kwargs.get('include_desc', True))
     _dynamic_struct = bool(kwargs.get('dynamic_struct', False))
+    _write_path= kwargs.get('write_path', None)
+
     if logger is None:
         log_args = {}
         if _log_file:
@@ -802,7 +812,8 @@ def parse(**kwargs) -> Union[str, None]:
         clear_on_print=_print_clear,
         dynamic_struct=_dynamic_struct,
         include_desc=_include_desc,
-        json_out=_json_out
+        json_out=_json_out,
+        write_path=_write_path
     )
     return w.write()
 # endregion Parse method
@@ -831,6 +842,13 @@ def set_cmd_args(parser) -> None:
         help='Source Url',
         type=str,
         required=True)
+    parser.add_argument(
+        '-o', '--out',
+        help=f"Out path of templates and json data. Default: '{base.APP_CONFIG.uno_base_dir}'",
+        type=str,
+        dest='write_path',
+        default=None,
+        required=False)
     parser.add_argument(
         '-x', '--no-cache',
         help='No caching',

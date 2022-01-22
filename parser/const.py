@@ -1405,6 +1405,7 @@ class ConstWriter(base.WriteBase):
         self._include_desc: bool = kwargs.get('include_desc', True)
         self._write_template_long: bool = kwargs.get(
             'write_template_long', False)
+        self._write_path: Union[str, None] = kwargs.get('write_path', None)
         self._indent_amt = 4
         self._file_full_path = None
         self._p_name: str = None
@@ -1652,7 +1653,11 @@ class ConstWriter(base.WriteBase):
         key = '_get_uno_obj_path'
         if key in self._cache:
             return self._cache[key]
-        uno_obj_path = Path(self._path_dir.parent, base.APP_CONFIG.uno_base_dir)
+        if self._write_path:
+            write_path = self._write_path
+        else:
+            write_path = base.APP_CONFIG.uno_base_dir
+        uno_obj_path = Path(self._path_dir.parent, write_path)
         name_parts = self._p_fullname.split('.')
         # ignore com, sun, star
         path_parts = name_parts[3:]
@@ -1664,6 +1669,7 @@ class ConstWriter(base.WriteBase):
             except Exception as e:
                 logger.error(e, exc_info=True)
                 raise e
+        
         path_parts[index] = path_parts[index] + base.APP_CONFIG.template_const_ext
         obj_path = uno_obj_path.joinpath(*path_parts)
         self._mkdirp(obj_path.parent)
@@ -1698,6 +1704,8 @@ def get_kwargs_from_args(args: argparse.ArgumentParser) -> dict:
         "flags": args.flags,
         "hex": args.hex
     }
+    if args.write_path:
+        d['write_path'] = args.write_path
     return d
 
 def parse(**kwargs):
@@ -1720,6 +1728,7 @@ def parse(**kwargs):
         print_template (str, optional): Print template to terminal. Default ``False``
         write_template (str, optional): Write template file into obj_uno subfolder. Default ``False``
         write_json (str, optional): Write json file into obj_uno subfolder. Default ``False``
+        write_path (str, optional): The root path to write data files (json, tmpl) into. Defaut set in config ``uno_base_dir``
         verbose (str, optional): Verobose output.
         log_file (str, optional): Log File
     
@@ -1741,6 +1750,7 @@ def parse(**kwargs):
     _flags = bool(kwargs.get('flags', False))
     _hex = bool(kwargs.get('hex', False))
     _json_out = bool(kwargs.get('json_out', False))
+    _write_path = kwargs.get('write_path', None)
     if logger is None:
         log_args = {}
         if _log_file:
@@ -1767,7 +1777,8 @@ def parse(**kwargs):
         write_json=_write_json,
         write_template_long=_long_template,
         include_desc=_include_desc,
-        json_out=_json_out
+        json_out=_json_out,
+        write_path=_write_path
     )
     return w.write()
 # endregion Parse method
@@ -1809,6 +1820,13 @@ def set_cmd_args(parser) -> None:
         help='Source Url',
         type=str,
         required=True)
+    parser.add_argument(
+        '-o', '--out',
+        help=f"Out path of templates and json data. Default: '{base.APP_CONFIG.uno_base_dir}'",
+        type=str,
+        dest='write_path',
+        default=None,
+        required=False)
     parser.add_argument(
         '-f', '--flags',
         help='Treat as flags',

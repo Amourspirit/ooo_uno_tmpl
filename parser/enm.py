@@ -391,6 +391,7 @@ class EnumWriter(base.WriteBase):
         self._allow_db = kwargs.get('allow_db', True)
         self._write_template_long: bool = kwargs.get(
             'write_template_long', False)
+        self._write_path: Union[str, None] = kwargs.get('write_path', None)
         self._indent_amt = 4
         self._cache = {}
         self._json_str = None
@@ -529,8 +530,11 @@ class EnumWriter(base.WriteBase):
             except Exception as e:
                 logger.error(e, exc_info=True)
                 raise e
-        uno_obj_path = Path(self._path_dir.parent,
-                            base.APP_CONFIG.uno_base_dir)
+        if self._write_path:
+            write_path = self._write_path
+        else:
+            write_path = base.APP_CONFIG.uno_base_dir
+        uno_obj_path = Path(self._path_dir.parent, write_path)
         name_parts:List[str] = self._p_namespace.split('.')
         # ignore com, sun, star
         path_parts = name_parts[3:]
@@ -565,6 +569,8 @@ def get_kwargs_from_args(args: argparse.ArgumentParser) -> dict:
         "log_file": args.log_file,
         "verbose": args.verbose
     }
+    if args.write_path:
+        d['write_path'] = args.write_path
     return d
 
 def parse(**kwargs) -> Union[str, None]:
@@ -584,6 +590,7 @@ def parse(**kwargs) -> Union[str, None]:
         print_template (str, optional): Print template to terminal. Default ``False``
         write_template (str, optional): Write template file into obj_uno subfolder. Default ``False``
         write_json (str, optional): Write json file into obj_uno subfolder. Default ``False``
+        write_path (str, optional): The root path to write data files (json, tmpl) into. Defaut set in config ``uno_base_dir``
         verbose (str, optional): Verobose output.
         log_file (str, optional): Log File
     
@@ -604,6 +611,8 @@ def parse(**kwargs) -> Union[str, None]:
     _log_file = kwargs.get('log_file', None)
     _verbose = bool(kwargs.get('verbose', False))
     _json_out = bool(kwargs.get('json_out', False))
+    _write_path= kwargs.get('write_path', None)
+
     if logger is None:
         log_args = {}
         if _log_file:
@@ -630,7 +639,8 @@ def parse(**kwargs) -> Union[str, None]:
         write_json=_write_json,
         write_template_long=_long_template,
         include_desc=_include_desc,
-        json_out=_json_out
+        json_out=_json_out,
+        write_path=_write_path
     )
     return w.write()
 # endregion Parse method
@@ -657,6 +667,13 @@ def set_cmd_args(parser) -> None:
         help='Source Url',
         type=str,
         required=True)
+    parser.add_argument(
+        '-o', '--out',
+        help=f"Out path of templates and json data. Default: '{base.APP_CONFIG.uno_base_dir}'",
+        type=str,
+        dest='write_path',
+        default=None,
+        required=False)
     parser.add_argument(
         '-x', '--no-cache',
         help='No caching',
