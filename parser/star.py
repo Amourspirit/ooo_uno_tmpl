@@ -262,17 +262,87 @@ class WriteStar:
         logger.info("Created file: %s", jsn_p)
 
 # region Writer Class
+# region Parse
 
-# region Main
 
-def main():
-    global logger
+def get_kwargs_from_args(args: argparse.ArgumentParser) -> dict:
+    """
+    Converts argparse args into dictionary that can be passed to ``parse()``
+
+    Args:
+        args (argparse.ArgumentParser): args
+
+    Returns:
+        dict: dictionary that contain key values matching ``parser()`` args.
+    """
+    d = {
+        "url": args.url,
+        "cache": args.cache,
+        "file_name": args.file_name,
+        "dir_name": args.dir_name,
+        "print_json": args.print_json,
+        "write_json": args.write_json,
+        "log_file": args.log_file,
+        "verbose": args.verbose
+    }
+    if args.write_path:
+        d['write_path'] = args.write_path
+    return d
+
+
+def parse(**kwargs) -> Union[str, None]:
+    """
+    Parses data, alternative to running on command line.
+
+    Keyword Arguments:
+        url (str): url to parse
+        cache (str, optional): Caching. Default ``True``
+        print_json (str, optional): Print json to termainl. Default ``False``
+        write_json (str, optional): Write json file into obj_uno subfolder. Default ``False``
+        verbose (str, optional): Verobose output.
+        log_file (str, optional): Log File
     
+    Returns:
+        Union[str, None]: Returns json string if json_out is ``True``
+    """
+    global logger
+    _url = str(kwargs['url'])
+    _cache = bool(kwargs.get('cache', True))
+    _file_name = str(kwargs['file_name'])
+    _print_json = bool(kwargs.get('print_json', False))
+    _write_json = bool(kwargs.get('write_json', bool))
+    _dir_name: str(kwargs['dir_name'])
+    _log_file = kwargs.get('log_file', None)
+    _verbose = bool(kwargs.get('verbose', False))
+
+    if logger is None:
+        log_args = {}
+        if _log_file:
+            log_args['log_file'] = _log_file
+        else:
+            log_args['log_file'] = 'star.log'
+        if _verbose:
+            log_args['level'] = logging.DEBUG
+        _set_loggers(get_logger(logger_name=Path(__file__).stem, **log_args))
+
+    p = ParserStar(
+        url=_url,
+        cache=_cache,
+        filename=_file_name,
+        dirname=_dir_name
+    )
+
+    w = WriteStar(
+        parser=p,
+        write_json=_write_json,
+        print_json=_print_json
+    )
+    w.write()
+
+def set_cmd_args(parser: argparse.ArgumentParser) -> None:
     url = 'https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star.html'
     file_name = 'star.json'
     dir_name = 'resources'
-    # region Parser
-    parser = argparse.ArgumentParser(description='star')
     parser.add_argument(
         '-u', '--url',
         help='Source Url',
@@ -311,6 +381,9 @@ def main():
         action='store_true',
         dest='write_json',
         default=False)
+
+
+def set_cmd_args_local(parser) -> None:
     parser.add_argument(
         '-v', '--verbose',
         help='verbose logging',
@@ -319,34 +392,37 @@ def main():
         default=False)
     parser.add_argument(
         '-L', '--log-file',
-        help='Log file to use. Defaults to app.log',
+        help='Log file to use. Defaults to enum.log',
         type=str,
         required=False)
+# endregion Parse
+# region Main
+
+def main():
+    global logger
+    
+    
+    # region Parser
+    parser = argparse.ArgumentParser(description='star')
+    set_cmd_args(parser)
+    set_cmd_args_local(parser)
     args = parser.parse_args()
     # endregion Parser
     if logger is None:
         log_args = {}
         if args.log_file:
             log_args['log_file'] = args.log_file
+        else:
+            log_args['log_file'] = 'star.log'
         if args.verbose:
             log_args['level'] = logging.DEBUG
         _set_loggers(get_logger(logger_name=Path(__file__).stem, **log_args))
     if len(sys.argv) > 1:
         logger.info('Executing command: %s', sys.argv[1:])
     logger.info('Parsing Url %s' % args.url)
-    p = ParserStar(
-        url=args.url,
-        cache=args.cache,
-        filename=args.file_name,
-        dirname=args.dir_name
-        )
-    
-    w = WriteStar(
-        parser=p,
-        write_json=args.write_json,
-        print_json=args.print_json
-        )
-    w.write()
+    args_dict = get_kwargs_from_args(args)
+    parse(**args_dict)
+
 
 # endregion Main
 
