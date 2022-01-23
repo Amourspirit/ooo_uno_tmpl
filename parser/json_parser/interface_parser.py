@@ -98,6 +98,7 @@ def parse(**kwargs):
         write_template (str, optional): Write template file into obj_uno subfolder. Default ``False``
         write_json (str, optional): Write json file into obj_uno subfolder. Default ``False``
         write_path (str, optional): The root path to write data files (json, tmpl) into. Defaut set in config ``uno_base_dir``
+        allow_known_json (bool, optional): Allow Known Json to be used. Default ``True``
         verbose (str, optional): Verobose output.
         log_file (str, optional): Log File
     """

@@ -49,6 +49,7 @@ class CompileLinkArgs:
     write_json:bool = True
     write_template: bool = True
     path: Optional[str] = None
+    allow_known_json = True
     use_sub_process: bool = True
     out_dir: Optional[str] = None
 # endregion Data Class
@@ -466,9 +467,13 @@ class CompileInterfaceLinks(BaseCompile):
             self._process_direct(file)
 
     def _subprocess(self, file: str):
-        cmd_str = f"{self._processer} -f {file}"
+        cmd_str = ''
+        if not self.args.allow_known_json:
+            cmd_str += ' --no-allow-known-json'
         if self.args.out_dir:
             cmd_str += f" --out {self.args.out_dir}"
+        cmd_str += f" {self._processer} -f {file}"
+        cmd_str = cmd_str.lstrip()
         cmd = [sys.executable] + cmd_str.split()
         logger.info(
             "CompileInterfaceLinks: Processing interface in file: %s", file)
@@ -489,7 +494,8 @@ class CompileInterfaceLinks(BaseCompile):
             write_template=self.args.write_template,
             write_json=self.args.write_json,
             json_file=file,
-            write_path=write_path
+            write_path=write_path,
+            allow_known_json=self.args.allow_known_json
         )
 
     def _process_files(self):
@@ -525,9 +531,13 @@ class CompileSingletonLinks(BaseCompile):
             self._process_direct(file)
 
     def _subprocess(self, file: str):
-        cmd_str = f"{self._processer} -f {file}"
+        cmd_str = ''
+        if not self.args.allow_known_json:
+            cmd_str += ' --no-allow-known-json'
         if self.args.out_dir:
             cmd_str += f" --out {self.args.out_dir}"
+        cmd_str += f" {self._processer} -f {file}"
+        cmd_str = cmd_str.lstrip()
         cmd = [sys.executable] + cmd_str.split()
         logger.info(
             "CompileSingletonLinks: Processing singleton in file: %s", file)
@@ -548,7 +558,8 @@ class CompileSingletonLinks(BaseCompile):
             write_template=self.args.write_template,
             write_json=self.args.write_json,
             json_file=file,
-            write_path=write_path
+            write_path=write_path,
+            allow_known_json=self.args.allow_known_json
         )
 
     def _process_files(self):
@@ -584,9 +595,13 @@ class CompileServiceLinks(BaseCompile):
             self._process_direct(file)
 
     def _subprocess(self, file: str):
-        cmd_str = f"{self._processer} -f {file}"
+        cmd_str = ''
+        if not self.args.allow_known_json:
+            cmd_str += ' --no-allow-known-json'
         if self.args.out_dir:
             cmd_str += f" --out {self.args.out_dir}"
+        cmd_str += f" {self._processer} -f {file}"
+        cmd_str = cmd_str.lstrip()
         cmd = [sys.executable] + cmd_str.split()
         logger.info(
             "CompileServiceLinks: Processing service in file: %s", file)
@@ -607,7 +622,8 @@ class CompileServiceLinks(BaseCompile):
             write_template=self.args.write_template,
             write_json=self.args.write_json,
             json_file=file,
-            write_path=write_path
+            write_path=write_path,
+            allow_known_json=self.args.allow_known_json
         )
 
     def _process_files(self):
@@ -642,9 +658,13 @@ class CompileExLinks(BaseCompile):
             self._process_direct(file)
 
     def _subprocess(self, file: str):
-        cmd_str = f"{self._processer} -f {file}"
+        cmd_str = ''
+        if not self.args.allow_known_json:
+            cmd_str += ' --no-allow-known-json'
         if self.args.out_dir:
             cmd_str += f" --out {self.args.out_dir}"
+        cmd_str += f" {self._processer} -f {file}"
+        cmd_str = cmd_str.lstrip()
         cmd = [sys.executable] + cmd_str.split()
         logger.info(
             "CompileExLinks: Processing interface in file: %s", file)
@@ -665,7 +685,8 @@ class CompileExLinks(BaseCompile):
             write_template=self.args.write_template,
             write_json=self.args.write_json,
             json_file=file,
-            write_path=write_path
+            write_path=write_path,
+            allow_known_json=self.args.allow_known_json
         )
 
     def _process_files(self):
@@ -1717,6 +1738,7 @@ def _args_action_compile_links(args: argparse.Namespace, compiler: Type[BaseComp
     if args.write_data_dir:
         c_args.out_dir = config.data_dir
         c_args.write_template = False
+        c_args.allow_known_json = False
     if args.cmd_all or args.args.path:
         compiler(args=c_args)
     _log_end_action()
