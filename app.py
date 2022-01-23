@@ -46,6 +46,8 @@ class WriteInfo:
 @dataclass
 class CompileLinkArgs:
     config: AppConfig
+    write_json:bool = True
+    write_template: bool = True
     path: Optional[str] = None
     use_sub_process: bool = True
     out_dir: Optional[str] = None
@@ -145,6 +147,11 @@ class FilesBase:
     def root_dir(self) -> Path:
         """Gets root_dir value"""
         return self._root_dir
+
+    @property
+    def config(self) -> AppConfig:
+        """Gets config value"""
+        return self._config
     # endregion Properties
 
 # endregion FilesBase
@@ -230,6 +237,8 @@ class CompileEnumLinks(BaseCompile):
 
     def _subprocess(self, file: str):
         cmd_str = f"{self._processer} -f {file}"
+        if self.args.out_dir:
+            cmd_str += f" --out {self.args.out_dir}"
         cmd = [sys.executable] + cmd_str.split()
         logger.info("CompileEnumLinks: Processing enums in file: %s", file)
         res = subprocess.run(cmd)
@@ -241,7 +250,16 @@ class CompileEnumLinks(BaseCompile):
     def _process_direct(self, file: str):
         logger.info(
             "CompileEnumLinks: Processing interface in file: %s", file)
-        parse_enm(write_template=True, write_json=True, json_file=file)
+        if self.args.out_dir:
+            write_path = self.config.data_dir
+        else:
+            write_path = None
+        parse_enm(
+            write_template=self.args.write_template,
+            write_json=self.args.write_json,
+            json_file=file,
+            write_path=write_path
+            )
 
     def _process_files(self):
         link_files = self.get_module_link_files(dir_name=self.args.out_dir)
@@ -276,6 +294,8 @@ class CompileConstLinks(BaseCompile):
 
     def _subprocess(self, file: str):
         cmd_str = f"{self._processer} -f {file}"
+        if self.args.out_dir:
+            cmd_str += f" --out {self.args.out_dir}"
         cmd = [sys.executable] + cmd_str.split()
         logger.info("CompileConstLinks: Processing enums in file: %s", file)
         res = subprocess.run(cmd)
@@ -287,7 +307,16 @@ class CompileConstLinks(BaseCompile):
     def _process_direct(self, file: str):
         logger.info(
             "CompileConstLinks: Processing interface in file: %s", file)
-        parse_const(write_template=True, write_json=True, json_file=file)
+        if self.args.out_dir:
+            write_path = self.config.data_dir
+        else:
+            write_path = None
+        parse_const(
+            write_template=self.args.write_template,
+            write_json=self.args.write_json,
+            json_file=file,
+            write_path=write_path
+        )
 
     def _process_files(self):
         link_files = self.get_module_link_files(dir_name=self.args.out_dir)
@@ -322,6 +351,8 @@ class CompileTypeDefLinks(BaseCompile):
 
     def _subprocess(self, file: str):
         cmd_str = f"{self._processer} -f {file}"
+        if self.args.out_dir:
+            cmd_str += f" --out {self.args.out_dir}"
         cmd = [sys.executable] + cmd_str.split()
         logger.info("CompileTypeDefLinks: Processing enums in file: %s", file)
         res = subprocess.run(cmd)
@@ -333,7 +364,16 @@ class CompileTypeDefLinks(BaseCompile):
     def _process_direct(self, file: str):
         logger.info(
             "CompileTypeDefLinks: Processing interface in file: %s", file)
-        parse_typedef(write_template=True, write_json=True, json_file=file)
+        if self.args.out_dir:
+            write_path = self.config.data_dir
+        else:
+            write_path = None
+        parse_typedef(
+            write_template=self.args.write_template,
+            write_json=self.args.write_json,
+            json_file=file,
+            write_path=write_path
+        )
 
     def _process_files(self):
         link_files = self.get_module_link_files(dir_name=self.args.out_dir)
@@ -368,6 +408,8 @@ class CompileStructLinks(BaseCompile):
 
     def _subprocess(self, file: str):
         cmd_str = f"{self._processer} -f {file}"
+        if self.args.out_dir:
+            cmd_str += f" --out {self.args.out_dir}"
         cmd = [sys.executable] + cmd_str.split()
         logger.info("CompileStructLinks: Processing struct in file: %s", file)
         res = subprocess.run(cmd)
@@ -379,7 +421,16 @@ class CompileStructLinks(BaseCompile):
     def _process_direct(self, file: str):
         logger.info(
             "CompileStructLinks: Processing interface in file: %s", file)
-        parse_struct(write_template=True, write_json=True, json_file=file)
+        if self.args.out_dir:
+            write_path = self.config.data_dir
+        else:
+            write_path = None
+        parse_struct(
+            write_template=self.args.write_template,
+            write_json=self.args.write_json,
+            json_file=file,
+            write_path=write_path
+        )
 
     def _process_files(self):
         link_files = self.get_module_link_files(dir_name=self.args.out_dir)
@@ -416,6 +467,8 @@ class CompileInterfaceLinks(BaseCompile):
 
     def _subprocess(self, file: str):
         cmd_str = f"{self._processer} -f {file}"
+        if self.args.out_dir:
+            cmd_str += f" --out {self.args.out_dir}"
         cmd = [sys.executable] + cmd_str.split()
         logger.info(
             "CompileInterfaceLinks: Processing interface in file: %s", file)
@@ -428,7 +481,16 @@ class CompileInterfaceLinks(BaseCompile):
     def _process_direct(self, file: str):
         logger.info(
             "CompileInterfaceLinks: Processing interface in file: %s", file)
-        parse_interface(write_template=True, write_json=True, json_file=file)
+        if self.args.out_dir:
+            write_path = self.config.data_dir
+        else:
+            write_path = None
+        parse_interface(
+            write_template=self.args.write_template,
+            write_json=self.args.write_json,
+            json_file=file,
+            write_path=write_path
+        )
 
     def _process_files(self):
         link_files = self.get_module_link_files(dir_name=self.args.out_dir)
@@ -464,6 +526,8 @@ class CompileSingletonLinks(BaseCompile):
 
     def _subprocess(self, file: str):
         cmd_str = f"{self._processer} -f {file}"
+        if self.args.out_dir:
+            cmd_str += f" --out {self.args.out_dir}"
         cmd = [sys.executable] + cmd_str.split()
         logger.info(
             "CompileSingletonLinks: Processing singleton in file: %s", file)
@@ -476,7 +540,16 @@ class CompileSingletonLinks(BaseCompile):
     def _process_direct(self, file: str):
         logger.info(
             "CompileSingletonLinks: Processing singleton in file: %s", file)
-        parse_singleton(write_template=True, write_json=True, json_file=file)
+        if self.args.out_dir:
+            write_path = self.config.data_dir
+        else:
+            write_path = None
+        parse_singleton(
+            write_template=self.args.write_template,
+            write_json=self.args.write_json,
+            json_file=file,
+            write_path=write_path
+        )
 
     def _process_files(self):
         link_files = self.get_module_link_files(dir_name=self.args.out_dir)
@@ -512,6 +585,8 @@ class CompileServiceLinks(BaseCompile):
 
     def _subprocess(self, file: str):
         cmd_str = f"{self._processer} -f {file}"
+        if self.args.out_dir:
+            cmd_str += f" --out {self.args.out_dir}"
         cmd = [sys.executable] + cmd_str.split()
         logger.info(
             "CompileServiceLinks: Processing service in file: %s", file)
@@ -524,7 +599,16 @@ class CompileServiceLinks(BaseCompile):
     def _process_direct(self, file: str):
         logger.info(
             "CompileServiceLinks: Processing service in file: %s", file)
-        parse_service(write_template=True, write_json=True, json_file=file)
+        if self.args.out_dir:
+            write_path = self.config.data_dir
+        else:
+            write_path = None
+        parse_service(
+            write_template=self.args.write_template,
+            write_json=self.args.write_json,
+            json_file=file,
+            write_path=write_path
+        )
 
     def _process_files(self):
         link_files = self.get_module_link_files(dir_name=self.args.out_dir)
@@ -559,6 +643,8 @@ class CompileExLinks(BaseCompile):
 
     def _subprocess(self, file: str):
         cmd_str = f"{self._processer} -f {file}"
+        if self.args.out_dir:
+            cmd_str += f" --out {self.args.out_dir}"
         cmd = [sys.executable] + cmd_str.split()
         logger.info(
             "CompileExLinks: Processing interface in file: %s", file)
@@ -571,7 +657,16 @@ class CompileExLinks(BaseCompile):
     def _process_direct(self, file: str):
         logger.info(
             "CompileExLinks: Processing interface in file: %s", file)
-        parse_ex(write_template=True, write_json=True, json_file=file)
+        if self.args.out_dir:
+            write_path = self.config.data_dir
+        else:
+            write_path = None
+        parse_ex(
+            write_template=self.args.write_template,
+            write_json=self.args.write_json,
+            json_file=file,
+            write_path=write_path
+        )
 
     def _process_files(self):
         link_files = self.get_module_link_files(dir_name=self.args.out_dir)
@@ -1136,12 +1231,15 @@ def _log_end_action() -> None:
 # endregion Logging
 
 # region parser
+# region    Parser UTIL Methods
 def args_remove_options(parser, options):
+    # https://tinyurl.com/yagn2yvj
     for option in options:
         for action in parser._actions:
             if vars(action)['option_strings'][0] == option:
                 parser._handle_conflict_resolve(None,[(option,action)])
                 break
+# endregion Parser UTIL Methods
 # region    SET ARGS
 # region        Create Parsers
 
@@ -1200,6 +1298,12 @@ def _args_links_general(parser: argparse.ArgumentParser, name: str) -> None:
         dest='path',
         type=str
     )
+    parser.add_argument(
+        '--data',
+        help='Write to data folder',
+        action='store_true',
+        dest='write_data_dir',
+        default=False)
     parser.add_argument(
         '-u', '--run-as-cmdline',
         help='Run as command line suprocess. Default False',
@@ -1338,7 +1442,7 @@ def _args_module_links(parser: argparse.ArgumentParser) -> None:
     args_remove_options(parser, ['-u', '--url'])
 
 # endregion     Module Links Parser
-# region        Star Linkes Parser
+# region        Star Links Parser
 
 
 def _args_links_parser_url(parser: argparse.ArgumentParser) -> None:
@@ -1610,6 +1714,9 @@ def _args_action_make(args: argparse.Namespace, config: AppConfig) -> None:
 def _args_action_compile_links(args: argparse.Namespace, compiler: Type[BaseCompile], config: AppConfig) -> None:
     _log_start_action()
     c_args = _get_compile_args(args=args, config=config)
+    if args.write_data_dir:
+        c_args.out_dir = config.data_dir
+        c_args.write_template = False
     if args.cmd_all or args.args.path:
         compiler(args=c_args)
     _log_end_action()
