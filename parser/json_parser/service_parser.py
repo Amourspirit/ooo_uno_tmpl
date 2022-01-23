@@ -188,7 +188,7 @@ def main():
 
     p = Parser(json_path=args.json_file)
     w = Writer(parser=p)
-    w.Write(write_json=True, write_template=True)
+    w.write(write_json=True, write_template=True)
 
 
 if __name__ == "__main__":

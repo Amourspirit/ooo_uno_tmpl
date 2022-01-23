@@ -50,7 +50,7 @@ class CompileLinkArgs:
     write_template: bool = True
     path: Optional[str] = None
     allow_known_json = True
-    use_sub_process: bool = True
+    use_sub_process: bool = False
     out_dir: Optional[str] = None
 # endregion Data Class
 
@@ -467,13 +467,11 @@ class CompileInterfaceLinks(BaseCompile):
             self._process_direct(file)
 
     def _subprocess(self, file: str):
-        cmd_str = ''
+        cmd_str = f"{self._processer} -f {file}"
         if not self.args.allow_known_json:
             cmd_str += ' --no-allow-known-json'
         if self.args.out_dir:
             cmd_str += f" --out {self.args.out_dir}"
-        cmd_str += f" {self._processer} -f {file}"
-        cmd_str = cmd_str.lstrip()
         cmd = [sys.executable] + cmd_str.split()
         logger.info(
             "CompileInterfaceLinks: Processing interface in file: %s", file)
@@ -531,13 +529,11 @@ class CompileSingletonLinks(BaseCompile):
             self._process_direct(file)
 
     def _subprocess(self, file: str):
-        cmd_str = ''
+        cmd_str = f"{self._processer} -f {file}"
         if not self.args.allow_known_json:
             cmd_str += ' --no-allow-known-json'
         if self.args.out_dir:
             cmd_str += f" --out {self.args.out_dir}"
-        cmd_str += f" {self._processer} -f {file}"
-        cmd_str = cmd_str.lstrip()
         cmd = [sys.executable] + cmd_str.split()
         logger.info(
             "CompileSingletonLinks: Processing singleton in file: %s", file)
@@ -595,13 +591,11 @@ class CompileServiceLinks(BaseCompile):
             self._process_direct(file)
 
     def _subprocess(self, file: str):
-        cmd_str = ''
+        cmd_str = f"{self._processer} -f {file}"
         if not self.args.allow_known_json:
             cmd_str += ' --no-allow-known-json'
         if self.args.out_dir:
             cmd_str += f" --out {self.args.out_dir}"
-        cmd_str += f" {self._processer} -f {file}"
-        cmd_str = cmd_str.lstrip()
         cmd = [sys.executable] + cmd_str.split()
         logger.info(
             "CompileServiceLinks: Processing service in file: %s", file)
@@ -658,13 +652,11 @@ class CompileExLinks(BaseCompile):
             self._process_direct(file)
 
     def _subprocess(self, file: str):
-        cmd_str = ''
+        cmd_str = f"{self._processer} -f {file}"
         if not self.args.allow_known_json:
             cmd_str += ' --no-allow-known-json'
         if self.args.out_dir:
             cmd_str += f" --out {self.args.out_dir}"
-        cmd_str += f" {self._processer} -f {file}"
-        cmd_str = cmd_str.lstrip()
         cmd = [sys.executable] + cmd_str.split()
         logger.info(
             "CompileExLinks: Processing interface in file: %s", file)
@@ -1217,7 +1209,7 @@ def _main():
     # ns = 'com.sun.star.form.FormController'
     # ns = 'com.sun.star.form.DataAwareControlModel'
     # ns = 'com.sun.star.text.TextRange'
-    args = 'link-json mod-links --data -a'
+    args = 'compile compile-batch --data -g -t'
     url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XDevice.html'
     sys.argv.extend(args.split())
     main()
@@ -1363,6 +1355,88 @@ def _args_links_service(parser: argparse.ArgumentParser) -> None:
 
 def _args_links_typedef(parser: argparse.ArgumentParser) -> None:
     _args_links_general(parser=parser, name='typedef')
+
+
+def _args_links_batch(parser: argparse.ArgumentParser) -> None:
+    parser.add_argument(
+        '--data',
+        help='Write to data folder',
+        action='store_true',
+        dest='write_data_dir',
+        default=False)
+    # grp = parser.add_mutually_exclusive_group()
+    parser_group = parser.add_argument_group()
+    parser_group.add_argument(
+        '-a', '--all',
+        help=f"Compile all groups recursivly",
+        action='store_true',
+        dest='cmd_all',
+        default=False
+    )
+    opt_group = parser.add_argument_group()
+    opt_group.add_argument(
+        '-s', '--struct',
+        help=f"Compile all struct recursivly",
+        action='store_true',
+        dest='all_struct',
+        default=False
+    )
+    opt_group.add_argument(
+        '-g', '--singleton',
+        help=f"Compile all singleton recursivly",
+        action='store_true',
+        dest='all_singleton',
+        default=False
+    )
+    opt_group.add_argument(
+        '-r', '--service',
+        help=f"Compile all service recursivly",
+        action='store_true',
+        dest='all_service',
+        default=False
+    )
+    opt_group.add_argument(
+        '-c', '--const',
+        help=f"Compile all const recursivly",
+        action='store_true',
+        dest='all_const',
+        default=False
+    )
+    opt_group.add_argument(
+        '-e', '--enum',
+        help=f"Compile all enum recursivly",
+        action='store_true',
+        dest='all_enum',
+        default=False
+    )
+    opt_group.add_argument(
+        '-x', '--exception',
+        help=f"Compile all exception recursivly",
+        action='store_true',
+        dest='all_exception',
+        default=False
+    )
+    opt_group.add_argument(
+        '-i', '--interface',
+        help=f"Compile all interface recursivly",
+        action='store_true',
+        dest='all_interface',
+        default=False
+    )
+    opt_group.add_argument(
+        '-t', '--typedef',
+        help=f"Compile all typedef recursivly",
+        action='store_true',
+        dest='all_typedef',
+        default=False
+    )
+    parser.add_argument(
+        '-u', '--run-as-cmdline',
+        help='Run as command line suprocess. Default False',
+        action='store_true',
+        dest='cmd_line_process',
+        default=False
+    )
 # endregion     Compile Links
 # region        Touch Parser
 
@@ -1735,11 +1809,12 @@ def _args_action_make(args: argparse.Namespace, config: AppConfig) -> None:
 def _args_action_compile_links(args: argparse.Namespace, compiler: Type[BaseCompile], config: AppConfig) -> None:
     _log_start_action()
     c_args = _get_compile_args(args=args, config=config)
+    c_args.use_sub_process = args.cmd_line_process
     if args.write_data_dir:
         c_args.out_dir = config.data_dir
         c_args.write_template = False
         c_args.allow_known_json = False
-    if args.cmd_all or args.args.path:
+    # if args.cmd_all or args.args.path:
         compiler(args=c_args)
     _log_end_action()
 
@@ -1777,6 +1852,39 @@ def _args_action_links_typedef(args: argparse.Namespace, config: AppConfig) -> N
     _log_start_action()
 
 
+def _args_action_links_batch(args: argparse.Namespace, config: AppConfig) -> None:
+    fn_map = {
+        "exception": _args_action_links_ex,
+        "enum": _args_action_links_enum,
+        "const": _args_action_links_const,
+        "struct": _args_action_links_struct,
+        "interface": _args_action_links_interface,
+        "singleton": _args_action_links_singleton,
+        "service": _args_action_links_service,
+        "typedef": _args_action_links_typedef
+    }
+    if args.cmd_all:
+        for _, fn in fn_map.items():
+            fn(args=args, config=config)
+        return
+    if args.all_struct:
+        fn_map['struct'](args=args, config=config)
+    if args.all_singleton:
+        fn_map['singleton'](args=args, config=config)
+    if args.all_service:
+        fn_map['service'](args=args, config=config)
+    if args.all_const:
+        fn_map['const'](args=args, config=config)
+    if args.all_enum:
+        fn_map['enum'](args=args, config=config)
+    if args.all_exception:
+        fn_map['exception'](args=args, config=config)
+    if args.all_interface:
+        fn_map['interface'](args=args, config=config)
+    if args.all_typedef:
+        fn_map['typedef'](args=args, config=config)
+
+
 def _args_process_compile_cmd_data(args: argparse.Namespace, config: AppConfig) -> None:
     if args.write_data_dir:
         args.write_path = config.data_dir
@@ -1796,6 +1904,8 @@ def _args_process_compile_cmd_data(args: argparse.Namespace, config: AppConfig) 
         _args_action_links_service(args=args, config=config)
     elif args.command_data == 'typedef':
         _args_action_links_typedef(args=args, config=config)
+    elif args.command_data == 'compile-batch':
+        _args_action_links_batch(args=args, config=config)
 # endregion Compile Links Command
 # region    Touch
 
@@ -2089,6 +2199,7 @@ def _args_process_cmd(args: argparse.Namespace, config: AppConfig) -> None:
         _args_process_compile_cmd_data(args=args, config=config)
     elif args.command == 'url-parse':
         _args_process_url_parser_cmd_data(args=args)
+
 # endregion ARGS COMMANDS
 # endregion parser
 
@@ -2119,6 +2230,7 @@ def main():
     links_singleton_parser = compile.add_parser(name='singleton')
     links_struct_parser = compile.add_parser(name='struct')
     links_typedef_parser = compile.add_parser(name='typedef')
+    links_batch_parser = compile.add_parser(name='compile-batch')
     
 
     url_parser_subparser = subparser.add_parser(name='url-parse')
@@ -2162,6 +2274,7 @@ def main():
     _args_links_singleton(parser=links_singleton_parser)
     _args_links_struct(parser=links_struct_parser)
     _args_links_typedef(parser=links_typedef_parser)
+    _args_links_batch(parser=links_batch_parser)
     # endregion compile links args
 
     # region url parser

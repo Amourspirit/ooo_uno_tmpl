@@ -349,6 +349,19 @@ def get_cmd_args() -> argparse.Namespace:
         dest='verbose',
         default=False)
     parser.add_argument(
+        '-k', '--no-allow-known-json',
+        help='Do not allow Known Json',
+        action='store_false',
+        dest='allow_know_json',
+        default=True)
+    parser.add_argument(
+        '-o', '--out',
+        help=f"Out path of templates and json data. Default: '{base.APP_CONFIG.uno_base_dir}'",
+        type=str,
+        dest='write_path',
+        default=None,
+        required=False)
+    parser.add_argument(
         '-L', '--log-file',
         help='Log file to use. Defaults to interface_parse.log',
         type=str,
