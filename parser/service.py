@@ -100,16 +100,23 @@ def _main():
     # url = 'https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1configuration_1_1HierarchyAccess.html'
     # url = 'https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1awt_1_1AccessibleMenu.html'
     # url = 'https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1text_1_1TextRange.html'
-    url = 'https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1form_1_1FormController.html'
+    # url = 'https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1form_1_1FormController.html'
+    url = 'https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1form_1_1control_1_1GridControl.html'
+    
+    args = '--log-file debug.log'
+    args += ' -n -k -o data -u'
+    args += ' ' + url
+    sys.argv.extend(args.split())
+    main()
+    return
     kwargs = {
         "url": url,
         "log_file": "debug.log",
         'verbose': True,
         "write_json": True
     }
-    # sys.argv.extend(['--log-file', 'debug.log', '-v', '-n', '-u', url])
-    # main()
     parse(**kwargs)
+    
 
 def main():
     global logger
@@ -127,7 +134,7 @@ def main():
             log_args['level'] = logging.DEBUG
         _set_loggers(get_logger(logger_name=Path(__file__).stem, **log_args))
 
-    if not args.no_print_clear:
+    if args.print_clear:
         os.system('cls' if os.name == 'nt' else 'clear')
     logger.info('Executing command: %s', sys.argv[1:])
     logger.info('Parsing Url %s' % args.url)
@@ -139,4 +146,4 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    _main()

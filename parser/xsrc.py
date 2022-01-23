@@ -1083,7 +1083,7 @@ def parse(**kwargs) -> Union[str, None]:
         include_desc=_include_desc,
         long_names=_long_names,
         json_out=_json_out,
-        allow_know_json=_allow_know_json,
+        allow_known_json=_allow_know_json,
         write_path=_write_path
     )
     return proc.process()
@@ -1230,7 +1230,7 @@ def main():
             log_args['level'] = logging.DEBUG
         _set_loggers(get_logger(logger_name=Path(__file__).stem, **log_args))
 
-    if not args.print_clear:
+    if args.print_clear:
         os.system('cls' if os.name == 'nt' else 'clear')
     logger.info('Executing command: %s', sys.argv[1:])
     logger.info('Parsing Url %s' % args.url)
