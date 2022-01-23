@@ -2218,8 +2218,11 @@ def main():
     # region create parsers
     parser = _create_parser('main')
     subparser = parser.add_subparsers(dest='command')
+    # region    make
     make_parser = subparser.add_parser(name='make')
-
+    # endregion make
+    
+    # region    compile
     compile_subparser = subparser.add_parser(name='compile')
     compile = compile_subparser.add_subparsers(dest='command_data')
     links_const_parser = compile.add_parser(name='const')
@@ -2231,8 +2234,9 @@ def main():
     links_struct_parser = compile.add_parser(name='struct')
     links_typedef_parser = compile.add_parser(name='typedef')
     links_batch_parser = compile.add_parser(name='compile-batch')
-    
+    # endregion compile
 
+    # region    url-parse
     url_parser_subparser = subparser.add_parser(name='url-parse')
     url_parser = url_parser_subparser.add_subparsers(dest='command_data')
     url_const = url_parser.add_parser(name='const')
@@ -2243,14 +2247,20 @@ def main():
     url_singleton = url_parser.add_parser(name='singleton')
     url_struct = url_parser.add_parser(name='struct')
     url_typedef = url_parser.add_parser(name='typedef')
-
-    touch = subparser.add_parser(name='touch')
+    # endregion url-parse
     
+    # region    touch
+    touch = subparser.add_parser(name='touch')
+    # endregion touch
+
+    # region    link-json
     link_json_subparser = subparser.add_parser(name='link-json')
     link_json_parser = link_json_subparser.add_subparsers(dest='command_data')
     link_json_mod_links = link_json_parser.add_parser(name='mod-links')
     link_json_star_links = link_json_parser.add_parser(name='star-links')
+    # endregion link-json
 
+    # region    data
     data_subparser = subparser.add_parser(name='data')
     data = data_subparser.add_subparsers(dest='command_data')
     data_update = data.add_parser(name='db-update')
@@ -2261,6 +2271,8 @@ def main():
     data_imports_typing_child = data.add_parser(name='db-imports-typing-child')
     data_qry = data.add_parser(name='db-qry')
     data_json = data.add_parser(name='db-json')
+    # endregion data
+
     # endregion create parsers
 
     # region Set Args
