@@ -1037,7 +1037,7 @@ class ParseModuleJson:
             if p_name == self._app_config.module_links_file:
                 return False
             return True
-        dirname = str(self._root_dir / self._app_config.uno_base_dir)
+        dirname = str(self._root_dir / self._app_config.data_dir)
         pattern = dirname + '/**/*.json'
         all_files = glob.glob(pattern, recursive=True)
         files = filter(filter_fn, all_files)
@@ -1157,7 +1157,7 @@ class ParseModuleLinks:
         self._module_info_tbl = SqlModuleInfo(connect_str=self._db_cnn)
 
     def get_module_link_files(self) -> Set[str]:
-        dirname = str(self._root_dir / self._app_config.uno_base_dir)
+        dirname = str(self._root_dir / self._app_config.data_dir)
         # https://stackoverflow.com/questions/20638040/glob-exclude-pattern
         # root module_links.json needs to be remove from listing.
         # it will not need any processing here.
