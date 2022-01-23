@@ -1030,6 +1030,7 @@ class ParseModuleJson:
         self._component_tbl = SqlComponent(connect_str=self._db_cnn)
         self._extend_tbl = SqlComponentExtend(connect_str=self._db_cnn)
         self._full_import_tbl = SqlComponentFullImport(connect_str=self._db_cnn)
+        self._json_data_dir: Path = self._root_dir.joinpath(self._app_config.data_dir)
 
     def get_module_json_files(self) -> List[str]:
         def filter_fn(name) -> bool:
@@ -1037,7 +1038,7 @@ class ParseModuleJson:
             if p_name == self._app_config.module_links_file:
                 return False
             return True
-        dirname = str(self._root_dir / self._app_config.data_dir)
+        dirname = str(self._json_data_dir)
         pattern = dirname + '/**/*.json'
         all_files = glob.glob(pattern, recursive=True)
         files = filter(filter_fn, all_files)
@@ -1063,7 +1064,7 @@ class ParseModuleJson:
         self._read_main(json_data=json_data, file=file)
 
     def _read_main(self, json_data: dict, file: str) -> None:
-        rel = Path(file).relative_to(self._root_dir)
+        rel = Path(file).relative_to(self._json_data_dir)
         ns = json_data['namespace']
         name = json_data['name']
         c = Component(
@@ -1104,8 +1105,6 @@ class ParseModuleJson:
                 fk_component_id=comp.id_component
             ))
         
-        
-    
 
     # region Validation
     def _validite_json(self, file: str, data: dict):
@@ -1189,12 +1188,12 @@ class ParseModuleLinks:
         self._module_info_tbl.insert(data=self._module_infos)
 
     def write_all_details(self) -> None:
-        if self._module_detail_tbl.has_data():
-            msg = f"{self.__class__.__name__}.write_all_details() Can not write because there is already data in the database for {self._module_detail_tbl.get_table_name()}"
-            raise Exception(msg)
-        if self._module_info_tbl.has_data():
-            msg = f"{self.__class__.__name__}.write_all_details() Can not write because there is already data in the database for {self._module_detail_tbl.get_table_name()}"
-            raise Exception(msg)
+        # if self._module_detail_tbl.has_data():
+        #     msg = f"{self.__class__.__name__}.write_all_details() Can not write because there is already data in the database for {self._module_detail_tbl.get_table_name()}"
+        #     raise Exception(msg)
+        # if self._module_info_tbl.has_data():
+        #     msg = f"{self.__class__.__name__}.write_all_details() Can not write because there is already data in the database for {self._module_detail_tbl.get_table_name()}"
+        #     raise Exception(msg)
         self._write_all()
 
     def update_all_details(self) -> None:
