@@ -295,7 +295,7 @@ class SqlInitDb:
 # region        SQL Component
 
 
-class SqlComponent(BaseSqlTable):
+class TblComponent(BaseSqlTable):
     def __init__(self, connect_str: str) -> None:
         super().__init__(connect_str=connect_str)
 
@@ -339,7 +339,7 @@ class SqlComponent(BaseSqlTable):
 # region        SQL ComponentExtends
 
 
-class SqlComponentExtend(BaseSqlTable):
+class TblComponentExtend(BaseSqlTable):
     def __init__(self, connect_str: str) -> None:
         super().__init__(connect_str=connect_str)
 
@@ -381,7 +381,7 @@ class SqlComponentExtend(BaseSqlTable):
 # region        SQL SqlComponentFullImports
 
 
-class SqlComponentFullImport(BaseSqlTable):
+class TblComponentFullImport(BaseSqlTable):
     def __init__(self, connect_str: str) -> None:
         super().__init__(connect_str=connect_str)
 
@@ -423,7 +423,7 @@ class SqlComponentFullImport(BaseSqlTable):
 # region        SQL Module Detail
 
 
-class SqlModuleDetail(BaseSqlTable):
+class TblModuleDetail(BaseSqlTable):
     def __init__(self, connect_str: str) -> None:
         super().__init__(connect_str=connect_str)
 
@@ -469,7 +469,7 @@ class SqlModuleDetail(BaseSqlTable):
 # region        SQL Module Info
 
 
-class SqlModuleInfo(BaseSqlTable):
+class TblModuleInfo(BaseSqlTable):
     def __init__(self, connect_str: str) -> None:
         super().__init__(connect_str=connect_str)
 
@@ -1054,9 +1054,9 @@ class ParseModuleJson:
         conn = DbConnect(self._app_config)
         self._db_cnn = conn.connection_str
         self._root_dir = conn.root_dir
-        self._component_tbl = SqlComponent(connect_str=self._db_cnn)
-        self._extend_tbl = SqlComponentExtend(connect_str=self._db_cnn)
-        self._full_import_tbl = SqlComponentFullImport(connect_str=self._db_cnn)
+        self._component_tbl = TblComponent(connect_str=self._db_cnn)
+        self._extend_tbl = TblComponentExtend(connect_str=self._db_cnn)
+        self._full_import_tbl = TblComponentFullImport(connect_str=self._db_cnn)
         self._json_data_dir: Path = self._root_dir.joinpath(self._app_config.data_dir)
 
     def get_module_json_files(self) -> List[str]:
@@ -1179,8 +1179,8 @@ class ParseModuleLinks:
         conn = DbConnect(self._app_config)
         self._db_cnn = conn.connection_str
         self._root_dir = conn.root_dir
-        self._module_detail_tbl = SqlModuleDetail(connect_str=self._db_cnn)
-        self._module_info_tbl = SqlModuleInfo(connect_str=self._db_cnn)
+        self._module_detail_tbl = TblModuleDetail(connect_str=self._db_cnn)
+        self._module_info_tbl = TblModuleInfo(connect_str=self._db_cnn)
 
     def get_module_link_files(self) -> Set[str]:
         dirname = str(self._root_dir / self._app_config.data_dir)
