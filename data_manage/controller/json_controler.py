@@ -1,8 +1,8 @@
 # coding: utf-8
 from typing import Any, Union
 from config import AppConfig
-from .json_merge import JsonMerge
-from . import db_manager as db
+from ..json_merge import JsonMerge
+from ..util import Util
 
 
 class JsonController:
@@ -12,7 +12,7 @@ class JsonController:
 
     def results(self) -> Any:
         if self._namespace:
-            return db.Util.get_formated_dict_list_str(self._get_data())
+            return Util.get_formated_dict_list_str(self._get_data())
 
     def _get_data(self) -> dict:
         j_merge = JsonMerge(

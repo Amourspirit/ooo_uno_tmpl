@@ -8,7 +8,10 @@ from pathlib import Path
 from typing import Dict, List, Set
 from config import AppConfig
 from parser import mod_rel as RelInfo
-from . import db_manager as db
+from .db_class.db_connect import DbConnect
+from .db_class.qry_extends import QryExtends
+from .db_class.qry_ns_imports import QryNsImports
+from .db_class.qry_file import QryFile
 
 # NOTE:
 #   When origin json data has been overwritten this class will not work properly becuase
@@ -33,13 +36,13 @@ class JsonMerge:
         if project_root is None:
             raise Exception("project_root environment variable not set")
         self._project_root = Path(project_root)
-        self._conn = db.DbConnect(config=self._config)
+        self._conn = DbConnect(config=self._config)
         self._origin_extends: Set[str] = self._get_original_extends()
         self._files: List[str] = self._get_files()
         self._cache: Dict[str, object] = {}
 
     def _get_original_extends(self) -> Set[str]:
-        qry_ext = db.QryExtends(self._conn.connection_str)
+        qry_ext = QryExtends(self._conn.connection_str)
         exts = qry_ext.get_extends(self._namespace)
         return set([e.namespace for e in exts])
 
@@ -47,7 +50,7 @@ class JsonMerge:
         key = '_get_child_extends'
         if key in self._cache:
             return self._cache[key]
-        qry = db.QryNsImports(self._conn.connection_str)
+        qry = QryNsImports(self._conn.connection_str)
         n_flat = qry.get_flat_ns(namespace=self._namespace, full=False)
         ext = set()
         for ns in n_flat:
@@ -63,14 +66,14 @@ class JsonMerge:
         return data
 
     def _get_files(self) -> List[str]:
-        qry_f = db.QryFile(self._conn.connection_str)
+        qry_f = QryFile(self._conn.connection_str)
         files = []
         for ns in self._origin_extends:
             files.append(qry_f.get_file_path(ns))
         return files
 
     def _get_orig_json(self) -> dict:
-        qry_f = db.QryFile(self._conn.connection_str)
+        qry_f = QryFile(self._conn.connection_str)
         file_name = qry_f.get_file_path(self._namespace)
         return self._get_file_json(file_name)
 

@@ -10,7 +10,6 @@ import glob
 import argparse
 import subprocess
 import tempfile
-from data_manage import db_manager, json_controler
 from multiprocessing import Pool
 from typing import List, Optional, Set, Type
 from kwhelp import rules
@@ -18,8 +17,14 @@ from kwhelp.decorator import DecFuncEnum, RuleCheckAll
 from kwhelp.exceptions import RuleError
 from enum import IntEnum
 from pathlib import Path
+from data_manage.controller import json_controler
+from data_manage.controller.database_controler import DatabaseControler
+from data_manage.controller.component_controler import ComponentControler
+from data_manage.controller.namespace_controler import NamespaceControler
+from data_manage.controller.module_links_controler import ModuleLinksControler
+
 from logger.log_handle import get_logger
-from parser import __version__, JSON_ID, const as url_parser_const, enm as url_parser_enum, ex as url_parser_ex, xsrc as url_parser_interface, service as url_parser_service, singleton as url_parser_singleton, struc as url_parser_struct, typedef as url_parser_typedef, star as json_parser_star
+from parser import const as url_parser_const, enm as url_parser_enum, ex as url_parser_ex, xsrc as url_parser_interface, service as url_parser_service, singleton as url_parser_singleton, struc as url_parser_struct, typedef as url_parser_typedef, star as json_parser_star
 from config import AppConfig, read_config
 from parser.json_parser.interface_parser import parse as parse_interface, Parser as ParserInterface
 from parser.json_parser.singleton_parser import parse as parse_singleton, Parser as ParserSingleton
@@ -1934,7 +1939,7 @@ def _args_action_touch(args: argparse.Namespace, config: AppConfig) -> None:
 
 
 def _args_action_db_init(args: argparse.Namespace, config: AppConfig) -> None:
-    dbc = db_manager.DatabaseControler(
+    dbc = DatabaseControler(
         config=config,
         init_db=args.init_db
     )
@@ -1947,11 +1952,11 @@ def _args_action_db_init(args: argparse.Namespace, config: AppConfig) -> None:
 
 
 def _args_action_db_update(args: argparse.Namespace, config: AppConfig) -> None:
-    mlc = db_manager.ModuleLinksControler(
+    mlc = ModuleLinksControler(
         config=config,
         write_all=args.write_all
     )
-    mcc = db_manager.ComponentControler(
+    mcc = ComponentControler(
         config=config,
         write_all=args.write_all
     )
@@ -1965,7 +1970,7 @@ def _args_action_db_update(args: argparse.Namespace, config: AppConfig) -> None:
 
 
 def _args_action_db_extends_tree(args: argparse.Namespace, config: AppConfig) -> None:
-    qc = db_manager.NamespaceControler(
+    qc = NamespaceControler(
         config=config,
         ns_name=args.namespace
     )
@@ -1977,28 +1982,28 @@ def _args_action_db_extends_tree(args: argparse.Namespace, config: AppConfig) ->
 def _args_action_db_extends_flat(args: argparse.Namespace, config: AppConfig) -> None:
     if args.namespace:
         if args.ns_from_imports:
-            qc = db_manager.NamespaceControler(
+            qc = NamespaceControler(
                 config=config,
                 ns_flat_frm=args.namespace,
                 b_child=args.ns_child,
                 b_json=args.as_json
             )
         elif args.ns_extends_short:
-            qc = db_manager.NamespaceControler(
+            qc = NamespaceControler(
                 config=config,
                 extends_short=args.namespace,
                 b_child=args.ns_child,
                 b_json=args.as_json
             )
         elif args.ns_extends_long:
-            qc = db_manager.NamespaceControler(
+            qc = NamespaceControler(
                 config=config,
                 extends_long=args.namespace,
                 b_child=args.ns_child,
                 b_json=args.as_json
             )
         else:
-            qc = db_manager.NamespaceControler(
+            qc = NamespaceControler(
                 config=config,
                 ns_flat=args.namespace,
                 b_child=args.ns_child,
@@ -2010,7 +2015,7 @@ def _args_action_db_extends_flat(args: argparse.Namespace, config: AppConfig) ->
 
 
 def _args_action_db_qry(args: argparse.Namespace, config: AppConfig) -> None:
-    qc = db_manager.NamespaceControler(
+    qc = NamespaceControler(
         config=config,
         ns_link=args.ns_url
     )
@@ -2025,7 +2030,7 @@ def _args_action_db_imports(args: argparse.Namespace, config: AppConfig) -> None
         require_typing = True
     elif args.import_no_typing:
         require_typing = False
-    qc = db_manager.NamespaceControler(
+    qc = NamespaceControler(
         config=config,
         ns_import=args.ns_import_name,
         b_child=args.ns_import_child,
@@ -2040,7 +2045,7 @@ def _args_action_db_imports(args: argparse.Namespace, config: AppConfig) -> None
 
 
 def _args_action_db_imports_typing_child(args: argparse.Namespace, config: AppConfig) -> None:
-    qc = db_manager.NamespaceControler(
+    qc = NamespaceControler(
         config=config,
         ns_import_typing_child=args.namespace,
         b_from=args.ns_import_from,
