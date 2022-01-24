@@ -1209,8 +1209,9 @@ def _main():
     # ns = 'com.sun.star.form.FormController'
     # ns = 'com.sun.star.form.DataAwareControlModel'
     # ns = 'com.sun.star.text.TextRange'
-    args = 'compile compile-batch --data -g -t'
-    url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XDevice.html'
+    # args = 'data db-json -n com.sun.star.form.control.GridControl'
+    url = 'https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1text_1_1Paragraph.html'
+    args = 'url-parse service -n -k -u ' + url
     sys.argv.extend(args.split())
     main()
 
@@ -2345,6 +2346,6 @@ def main():
 
 if __name__ == '__main__':
     # _touch()
-    main()
+    _main()
 
 # endregion Main
