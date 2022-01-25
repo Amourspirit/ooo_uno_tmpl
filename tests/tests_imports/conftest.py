@@ -12,9 +12,13 @@ sys.path.append(os.path.realpath('.'))
 
 
 def get_module_types() -> dict:
-    s_uno_obj = str(Path('build') / 'uno_obj').replace(os.sep, '.')
+    build_dir_name = 'build'
+    uno_obj_dir_name = 'uno_obj'
+    s_uno_obj = str(Path(build_dir_name) /
+                    uno_obj_dir_name).replace(os.sep, '.')
     module_links_file = 'module_links.json'
     app_root = Path(__file__).parent.parent.parent
+    src_uno_obj = app_root / uno_obj_dir_name
     pattern_generic_name = re.compile(r"([a-zA-Z0-9_]+)(<[A-Z, ]+>)")
     def get_clean_classname(input: str) -> str:
         """
@@ -31,7 +35,7 @@ def get_module_types() -> dict:
         s = s.replace(" ", "_")
         return s
     def get_module_link_files() -> Set[str]:
-        dirname = app_root
+        dirname = src_uno_obj
         # https://stackoverflow.com/questions/20638040/glob-exclude-pattern
         # root module_links.json needs to be remove from listing.
         # it will not need any processing here.
