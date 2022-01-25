@@ -105,14 +105,13 @@ class JsonMerge:
 
     def _process_from_imports(self, j_orig: dict) -> None:
         namespace = j_orig['namespace']
-        j_orig_imp: List[str] = j_orig['data']['full_imports'].get(
-            'general', [])
-        full_imports = []
-        for im in j_orig_imp:
-            full_imports.append(RelInfo.get_rel_import_long(
-                in_str=im, ns=namespace
+        extends = list(self._get_child_extends())
+        from_imports = []
+        for ex in extends:
+            from_imports.append(RelInfo.get_rel_import_long(
+                in_str=ex, ns=namespace
             ))
-        j_orig['data']['from_imports'] = full_imports
+        j_orig['data']['from_imports'] = from_imports
 
     def _process_from_imports_typing(self, j_orig: dict) -> None:
         namespace = j_orig['namespace']
@@ -185,7 +184,7 @@ class JsonMerge:
         if 'properties' in j_orig['data']['items']:
             for d in j_orig['data']['items']['properties']:
                 name = d['name']
-                itm_types.add(name)
+                itm_properties.add(name)
             result_data['items']['properties'] = j_orig['data']['items']['properties']
 
         if 'quote' in j_orig['data']:
@@ -243,7 +242,7 @@ class JsonMerge:
                 result_data['items']['types'].append(d)
 
         def process_itm_properties(data: dict) -> None:
-            lst = data['items'].get('types', [])
+            lst = data['items'].get('properties', [])
             is_init = False
             for d in lst:
                 name = d['name']
@@ -274,7 +273,7 @@ class JsonMerge:
             j_data: dict = j_data_dict['data']
             process_quote_data(j_data)
             process_typings_data(j_data)
-            process_full_imp_gen_data(j_data)
+            # process_full_imp_gen_data(j_data)
             process_full_imp_typing_data(j_data)
             process_itm_methods(j_data)
             process_requires_typing(j_data)
