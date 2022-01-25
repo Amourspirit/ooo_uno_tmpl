@@ -1216,7 +1216,7 @@ def _main():
     # ns = 'com.sun.star.text.TextRange'
     # args = 'data db-json -n com.sun.star.form.control.GridControl'
     url = 'https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1text_1_1Paragraph.html'
-    args = 'url-parse service -n -k -u ' + url
+    args = 'compile compile-batch -g'
     sys.argv.extend(args.split())
     main()
 
@@ -1873,7 +1873,7 @@ def _args_action_compile_links(args: argparse.Namespace, compiler: Type[BaseComp
         c_args.write_template = False
         c_args.allow_known_json = False
     # if args.cmd_all or args.args.path:
-        compiler(args=c_args)
+    compiler(args=c_args)
     _log_end_action()
 
 
