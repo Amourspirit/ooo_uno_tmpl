@@ -71,22 +71,35 @@ class ParseModuleLinks:
 
     def _get_detail_lst(self) -> List[ModuleDetail]:
         self._module_details
+        # sort_dic = {
+        #     "exception": 1,
+        #     "singleton": 2,
+        #     "service": 3,
+        #     "interface": 4,
+        #     "enum": 20,
+        #     "const": 21,
+        #     "typedef": 22,
+        #     "struct": 23
+
+        # }
+
+        # sort for reverse
         sort_dic = {
-            "exception": 1,
-            "singleton": 2,
-            "service": 3,
-            "interface": 4,
-            "enum": 20,
-            "const": 21,
-            "typedef": 22,
-            "struct": 23
+            "exception": 80,
+            "singleton": 70,
+            "service": 60,
+            "interface": 50,
+            "enum": 40,
+            "const": 30,
+            "typedef": 20,
+            "struct": 10
 
         }
         for el in self._module_details:
             el.sort = sort_dic.get(el.component_type, 99)
 
         _sorted = sorted(self._module_details,
-                         key=lambda im: (im.sort, im.id_namespace))
+                         key=lambda im: (im.sort, im.id_namespace), reverse=True)
         lst = []
         i = 1
         for el in _sorted:
