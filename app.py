@@ -1596,6 +1596,22 @@ def _args_data_qry(parser: argparse.ArgumentParser) -> None:
     )
 
 
+def _args_data_component(parser: argparse.ArgumentParser) -> None:
+    parser.add_argument(
+        '-n', '--name-space',
+        help='Genereate Json for a given namespace wildcards %% and _ suporrted',
+        action='store',
+        dest='namespace',
+        default=None
+    )
+    parser.add_argument(
+        '-j', '--json',
+        help='Output in json format',
+        action='store_true',
+        dest='as_json',
+        default=False
+    )
+
 def _args_data_update(parser: argparse.ArgumentParser) -> None:
     parser.add_argument(
         '-a', '--write-all',
@@ -2055,6 +2071,17 @@ def _args_action_db_imports_typing_child(args: argparse.Namespace, config: AppCo
     qc_result = qc.results()
     if qc_result:
         print(qc_result)
+
+
+def _args_action_db_component(args: argparse.Namespace, config: AppConfig) -> None:
+    qc = NamespaceControler(
+        config=config,
+        ns_commponent=args.namespace,
+        b_json=args.as_json
+    )
+    qc_result = qc.results()
+    if qc_result:
+        print(qc_result)
 # endregion     Namespace
 # region        Json
 
@@ -2087,6 +2114,8 @@ def _args_process_data_cmd_data(args: argparse.Namespace, config: AppConfig) -> 
         _args_action_db_imports_typing_child(args=args, config=config)
     elif args.command_data == 'db-json':
         _args_action_db_json(args=args, config=config)
+    elif args.command_data == 'db-component':
+        _args_action_db_component(args=args, config=config)
 
 # endregion data Command
 
@@ -2277,6 +2306,7 @@ def main():
     data_imports_typing_child = data.add_parser(name='db-imports-typing-child')
     data_qry = data.add_parser(name='db-qry')
     data_json = data.add_parser(name='db-json')
+    data_component = data.add_parser(name='db-component')
     # endregion data
 
     # endregion create parsers
@@ -2327,6 +2357,7 @@ def main():
     _args_data_imports_child(parser=data_imports_typing_child)
     _args_data_imports_extends_tree(parser=data_extends_tree)
     _args_data_imports_extends_flat(parser=data_extends_flat)
+    _args_data_component(parser=data_component)
     # endregion data args
     # endregion Set Args
 

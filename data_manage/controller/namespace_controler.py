@@ -7,8 +7,11 @@ from ..db_class.qry_ns_imports import QryNsImports
 from ..data_class.namespace_tree import NamespaceTree
 from ..data_class.namespace_child import NamespaceChild
 from ..data_class.full_import import FullImport
+from ..data_class.component import Component
 from ..util import Util
 from parser import mod_rel as RelInfo
+from tabulate import tabulate
+from dataclasses import astuple, asdict, fields
 
 class NamespaceControler:
     def __init__(self, config: AppConfig, **kwargs) -> None:
@@ -24,6 +27,7 @@ class NamespaceControler:
             ns_flat_frm (str, optional): Namesapce, get flat unique inherits in from format. Other Opt - b_child, b_json
             extends_long (str, optional): Namesapce, gets extends in long format. Other Opt - b_child, b_json
             extends_short (str, optional): Namesapce, gets extends in short format. Other Opt - b_child, b_json
+            ns_commponent (str, optional): Namespace, get Components that match passed in namesapce.
             ns_import (str, optional): Namespace, get imports.  Other Opt - b_child, b_typing, b_from, b_from_long, b_json
             ns_import_typing_child (str, optional): Namespace, get child imports.  Other Opt - b_from, b_from_long, b_json
             ns_link (str, optional): Namesapce, get url for a given namespace.
@@ -35,6 +39,7 @@ class NamespaceControler:
         self._ns_name: Union[str, None] = kwargs.get('ns_name', None)
         self._ns_flat: Union[str, None] = kwargs.get('ns_flat', None)
         self._ns_flat_frm: Union[str, None] = kwargs.get('ns_flat_frm', None)
+        self._ns_component: Union[str, None] = kwargs.get('ns_commponent', None)
 
         self._ns_extends_lng: Union[str, None] = kwargs.get(
             'extends_long', None)
@@ -71,6 +76,27 @@ class NamespaceControler:
             return self._get_imports()
         elif self._ns_import_typing_child:
             return self._get_imports_typing_child()
+        elif self._ns_component:
+            return self._get_componets()
+
+    def _get_componets(self) -> str:
+        qry = QryNsImports(self._conn.connection_str)
+        lst = qry.get_components(full_ns=self._ns_component)
+        def get_format_str() -> str:
+            # id_width = max(len(itm.id_component) for itm in lst)
+            # headers = ['id_component', 'name', 'namespace',
+            #            'type', 'version', 'lo_ver', 'file', 'sort']
+            headers = [field.name for field in fields(Component)]
+            data = [astuple(itm) for itm in lst]
+            
+            return tabulate(data, headers=headers, tablefmt='simple')
+
+        def get_format_json() -> str:
+            data = [asdict(itm) for itm in lst]
+            return Util.get_formated_dict_list_str(data)
+        if self._b_json:
+            return get_format_json()
+        return get_format_str()
 
     def _process_ns_tree(self) -> str:
         """
