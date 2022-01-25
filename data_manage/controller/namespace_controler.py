@@ -29,6 +29,8 @@ class NamespaceControler:
             extends_long (str, optional): Namesapce, gets extends in long format. Other Opt - b_child, b_json
             extends_short (str, optional): Namesapce, gets extends in short format. Other Opt - b_child, b_json
             ns_commponent (str, optional): Namespace, get Components that match passed in namesapce.
+            ns_rel (str, optional): Namespace, get realitve info for a namespace. requires ``ns_rel_to``
+            ns_rel_to (str, optional): Namespace, get realitve info for a namespace. requires ``ns_rel``
             ns_import (str, optional): Namespace, get imports.  Other Opt - b_child, b_typing, b_from, b_from_long, b_json
             ns_import_typing_child (str, optional): Namespace, get child imports.  Other Opt - b_from, b_from_long, b_json
             ns_link (str, optional): Namesapce, get url for a given namespace.
@@ -42,6 +44,9 @@ class NamespaceControler:
         self._ns_flat_frm: Union[str, None] = kwargs.get('ns_flat_frm', None)
         self._ns_component: Union[str, None] = kwargs.get(
             'ns_commponent', None)
+        self._ns_rel: Union[str, None] = kwargs.get('ns_rel', None)
+        self._ns_rel_to: Union[str, None] = kwargs.get('ns_rel_to', None)
+
 
         self._ns_extends_lng: Union[str, None] = kwargs.get(
             'extends_long', None)
@@ -80,6 +85,27 @@ class NamespaceControler:
             return self._get_imports_typing_child()
         elif self._ns_component:
             return self._get_componets()
+        elif self._ns_rel and self._ns_rel_to:
+            return self._get_rel()
+
+    def _get_rel(self) -> str:
+        rel = RelInfo.get_rel_import_long(
+            in_str=self._ns_rel,
+            ns=self._ns_rel_to
+        )
+        def get_format_str() -> str:
+            if self._b_from:
+                if self._b_from_long:
+                    return f"from {rel[0]} import {rel[1]} as {rel[2]}"
+                return f"from {rel[0]} import {rel[1]}"
+            return f"{rel[0]}.{rel[1]} -> {self._ns_rel}"
+        def get_format_json() -> str:
+            if self._b_from_long:
+                return Util.get_formated_dict_list_str([rel])
+            return Util.get_formated_dict_list_str([rel[0], rel[1]])
+        if self._b_json:
+            return get_format_json()
+        return get_format_str()
 
     def _get_componets(self) -> str:
         qry = QryNsImports(self._conn.connection_str)

@@ -1599,10 +1599,10 @@ def _args_data_url(parser: argparse.ArgumentParser) -> None:
 def _args_data_component(parser: argparse.ArgumentParser) -> None:
     parser.add_argument(
         '-n', '--name-space',
-        help='Genereate Json for a given namespace wildcards %% and _ suporrted',
+        help='Genereate component info for a given namespace wildcards %% and _ suporrted',
         action='store',
         dest='namespace',
-        default=None
+        required=True
     )
     parser.add_argument(
         '-j', '--json',
@@ -1631,6 +1631,42 @@ def _args_data_json(parser: argparse.ArgumentParser) -> None:
         default=None
     )
 
+def _args_data_rel(parser: argparse.ArgumentParser) -> None:
+    parser.add_argument(
+        '-n', '--namespace',
+        help='Full Namesapce. Genereate Relative info for a given namespace.',
+        action='store',
+        dest='namespace',
+        required=True
+    )
+    parser.add_argument(
+        '-r', '--relative',
+        help="Short ns such as 'com.sun.star.text'. Relative Namespace",
+        action='store',
+        dest='rel',
+        required=True
+    )
+    parser.add_argument(
+        '-f', '--as-rel-from',
+        help='Get as realitive from import strings',
+        action='store_true',
+        dest='ns_import_from',
+        default=False
+    )
+    parser.add_argument(
+        '-l', '--as-long',
+        help='Get as realitive im',
+        action='store_true',
+        dest='ns_import_from_long',
+        default=False
+    )
+    parser.add_argument(
+        '-j', '--json',
+        help='Output in json format',
+        action='store_true',
+        dest='as_json',
+        default=False
+    )
 # region            Imports
 
 
@@ -2082,6 +2118,20 @@ def _args_action_db_component(args: argparse.Namespace, config: AppConfig) -> No
     qc_result = qc.results()
     if qc_result:
         print(qc_result)
+
+
+def _args_action_db_rel(args: argparse.Namespace, config: AppConfig) -> None:
+    qc = NamespaceControler(
+        config=config,
+        ns_rel=args.namespace,
+        ns_rel_to=args.rel,
+        b_from=args.ns_import_from,
+        b_from_long=args.ns_import_from_long,
+        b_json=args.as_json
+    )
+    qc_result = qc.results()
+    if qc_result:
+        print(qc_result)
 # endregion     Namespace
 # region        Json
 
@@ -2116,6 +2166,8 @@ def _args_process_data_cmd_data(args: argparse.Namespace, config: AppConfig) -> 
         _args_action_db_json(args=args, config=config)
     elif args.command_data == 'component':
         _args_action_db_component(args=args, config=config)
+    elif args.command_data == 'rel':
+        _args_action_db_rel(args=args, config=config)
 
 # endregion data Command
 
@@ -2307,6 +2359,7 @@ def main():
     data_url = data.add_parser(name='url')
     data_json = data.add_parser(name='json')
     data_component = data.add_parser(name='component')
+    data_rel = data.add_parser(name='rel')
     # endregion data
 
     # endregion create parsers
@@ -2358,6 +2411,7 @@ def main():
     _args_data_imports_extends_tree(parser=data_extends_tree)
     _args_data_imports_extends_flat(parser=data_extends_flat)
     _args_data_component(parser=data_component)
+    _args_data_rel(parser=data_rel)
     # endregion data args
     # endregion Set Args
 
