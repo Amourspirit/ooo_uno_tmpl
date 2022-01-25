@@ -13,6 +13,7 @@ from parser import mod_rel as RelInfo
 from tabulate import tabulate
 from dataclasses import astuple, asdict, fields
 
+
 class NamespaceControler:
     def __init__(self, config: AppConfig, **kwargs) -> None:
         """
@@ -39,7 +40,8 @@ class NamespaceControler:
         self._ns_name: Union[str, None] = kwargs.get('ns_name', None)
         self._ns_flat: Union[str, None] = kwargs.get('ns_flat', None)
         self._ns_flat_frm: Union[str, None] = kwargs.get('ns_flat_frm', None)
-        self._ns_component: Union[str, None] = kwargs.get('ns_commponent', None)
+        self._ns_component: Union[str, None] = kwargs.get(
+            'ns_commponent', None)
 
         self._ns_extends_lng: Union[str, None] = kwargs.get(
             'extends_long', None)
@@ -82,13 +84,14 @@ class NamespaceControler:
     def _get_componets(self) -> str:
         qry = QryNsImports(self._conn.connection_str)
         lst = qry.get_components(full_ns=self._ns_component)
+
         def get_format_str() -> str:
             # id_width = max(len(itm.id_component) for itm in lst)
             # headers = ['id_component', 'name', 'namespace',
             #            'type', 'version', 'lo_ver', 'file', 'sort']
             headers = [field.name for field in fields(Component)]
             data = [astuple(itm) for itm in lst]
-            
+
             return tabulate(data, headers=headers, tablefmt='simple')
 
         def get_format_json() -> str:

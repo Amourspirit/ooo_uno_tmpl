@@ -1586,7 +1586,7 @@ def _args_data_init(parser: argparse.ArgumentParser) -> None:
     )
 
 
-def _args_data_qry(parser: argparse.ArgumentParser) -> None:
+def _args_data_url(parser: argparse.ArgumentParser) -> None:
     parser.add_argument(
         '-u', '--url',
         help='Get url for a full namespace.',
@@ -2098,23 +2098,23 @@ def _args_action_db_json(args: argparse.Namespace, config: AppConfig) -> None:
 
 
 def _args_process_data_cmd_data(args: argparse.Namespace, config: AppConfig) -> None:
-    if args.command_data == 'db-init':
+    if args.command_data == 'init':
         _args_action_db_init(args=args, config=config)
-    elif args.command_data == 'db-update':
+    elif args.command_data == 'update':
         _args_action_db_update(args=args, config=config)
-    elif args.command_data == 'db-extends-tree':
+    elif args.command_data == 'extends-tree':
         _args_action_db_extends_tree(args=args, config=config)
-    elif args.command_data == 'db-extends-flat':
+    elif args.command_data == 'extends-flat':
         _args_action_db_extends_flat(args=args, config=config)
-    elif args.command_data == 'db-qry':
+    elif args.command_data == 'url':
         _args_action_db_qry(args=args, config=config)
-    elif args.command_data == 'db-imports':
+    elif args.command_data == 'imports':
         _args_action_db_imports(args=args, config=config)
-    elif args.command_data == 'db-imports-typing-child':
+    elif args.command_data == 'imports-typing-child':
         _args_action_db_imports_typing_child(args=args, config=config)
-    elif args.command_data == 'db-json':
+    elif args.command_data == 'json':
         _args_action_db_json(args=args, config=config)
-    elif args.command_data == 'db-component':
+    elif args.command_data == 'component':
         _args_action_db_component(args=args, config=config)
 
 # endregion data Command
@@ -2298,15 +2298,15 @@ def main():
     # region    data
     data_subparser = subparser.add_parser(name='data')
     data = data_subparser.add_subparsers(dest='command_data')
-    data_update = data.add_parser(name='db-update')
-    data_init = data.add_parser(name='db-init')
-    data_extends_flat = data.add_parser(name='db-extends-flat')
-    data_extends_tree = data.add_parser(name='db-extends-tree')
-    data_imports = data.add_parser(name='db-imports')
-    data_imports_typing_child = data.add_parser(name='db-imports-typing-child')
-    data_qry = data.add_parser(name='db-qry')
-    data_json = data.add_parser(name='db-json')
-    data_component = data.add_parser(name='db-component')
+    data_update = data.add_parser(name='update')
+    data_init = data.add_parser(name='init')
+    data_extends_flat = data.add_parser(name='extends-flat')
+    data_extends_tree = data.add_parser(name='extends-tree')
+    data_imports = data.add_parser(name='imports')
+    data_imports_typing_child = data.add_parser(name='imports-typing-child')
+    data_url = data.add_parser(name='url')
+    data_json = data.add_parser(name='json')
+    data_component = data.add_parser(name='component')
     # endregion data
 
     # endregion create parsers
@@ -2350,7 +2350,7 @@ def main():
 
     # region data args
     _args_data_init(parser=data_init)
-    _args_data_qry(parser=data_qry)
+    _args_data_url(parser=data_url)
     _args_data_update(parser=data_update)
     _args_data_json(parser=data_json)
     _args_data_imports(parser=data_imports)
