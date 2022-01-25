@@ -7,11 +7,12 @@ import glob
 import re
 import json
 from pathlib import Path
+
 sys.path.append(os.path.realpath('.'))
 
 
 def get_module_types() -> dict:
-    s_uno_obj = str(Path('scratch') / 'uno_obj').replace(os.sep, '.')
+    s_uno_obj = str(Path('build') / 'uno_obj').replace(os.sep, '.')
     module_links_file = 'module_links.json'
     app_root = Path(__file__).parent.parent.parent
     pattern_generic_name = re.compile(r"([a-zA-Z0-9_]+)(<[A-Z, ]+>)")

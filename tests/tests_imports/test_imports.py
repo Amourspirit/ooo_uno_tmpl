@@ -127,6 +127,6 @@ def test_imp_service(service_data: str):
     assert imc.load_import(service_data) == True
 
 def _test_FormController():
-    ns = 'scratch.uno_obj.sdb.definition_content.DefinitionContent'
+    ns = 'build.uno_obj.sdb.definition_content.DefinitionContent'
     imc = ImportCheck()
     assert imc.load_import(ns) == True
