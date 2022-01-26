@@ -9,12 +9,11 @@ class GenerateStarNs:
         self._c_data = c_data
         self._config = config
 
-    def gen(self) -> str:
+    def gen_lines(self) -> List[str]:
         def build_line(c: Component) -> str:
             ns = c.namespace.removeprefix('com.sun.star.')
             return f"from {self._config.uno_obj_dir}.{ns}.{c.c_name} import {c.name}"
-        lines: List[str] = ['# coding: utf-8']
+        lines: List[str] = []
         for comp in self._c_data:
             lines.append(build_line(comp))
-        lines.append('')
-        return "\n".join(lines)
+        return lines

@@ -103,6 +103,8 @@ class AppConfig:
     template_service_ext: str
     """Extension for service files such as .tppi"""
     component_types: List[str]
+    inc_lic: str
+    """Path to License Include File"""
 
 def read_config(config_file: str) -> AppConfig:
     """

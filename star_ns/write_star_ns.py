@@ -21,12 +21,19 @@ class WriteStarNs:
     
 
     def write(self) -> None:
+        header_lines = ['# coding: utf-8']
+        with open(Path(self._root_dir, self._config.inc_lic), 'r') as f_lic:
+            header_lines.extend(f_lic.read().splitlines())
+        
         for ns, c_data in self._data.items():
+            lines = [ln for ln in header_lines]
             write_path = self._write_root.joinpath(Path(*ns.split('.')))
             self._mkdirp(dest_dir=write_path)
             write_path = write_path.joinpath('__init__.py')
             gen_star = GenerateStarNs(config=self._config, c_data=c_data)
-            text = gen_star.gen()
+            lines.extend(gen_star.gen_lines())
+            lines.append('')
+            text = "\n".join(lines)
             with open(write_path, 'w') as f:
                 f.write(text)
             if self._log:
