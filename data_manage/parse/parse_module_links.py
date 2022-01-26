@@ -2,6 +2,7 @@
 import verr
 import json
 import glob
+import re
 from pathlib import Path
 from typing import List, Dict, Set
 from config import AppConfig
@@ -11,7 +12,7 @@ from ..db_class.db_connect import DbConnect
 from ..db_class.tbl_module_detail import TblModuleDetail
 from ..db_class.tbl_module_info import TblModuleInfo
 from parser import JSON_ID
-
+from collections import namedtuple
 class ParseModuleLinks:
 
     def __init__(self, config: AppConfig) -> None:
@@ -71,35 +72,66 @@ class ParseModuleLinks:
 
     def _get_detail_lst(self) -> List[ModuleDetail]:
         self._module_details
-        # sort_dic = {
-        #     "exception": 1,
-        #     "singleton": 2,
-        #     "service": 3,
-        #     "interface": 4,
-        #     "enum": 20,
-        #     "const": 21,
-        #     "typedef": 22,
-        #     "struct": 23
-
-        # }
-
-        # sort for reverse
+        re_end = re.compile(r".*?([0-9]+)$")
+        m_detail = namedtuple('m_detail', [
+            'id_namespace',
+            'name',
+            'namespace',
+            'href',
+            'component_type',
+            'sort',
+            'name_part',
+            'ver_part'
+        ])
         sort_dic = {
-            "exception": 80,
-            "singleton": 70,
-            "service": 60,
-            "interface": 50,
-            "enum": 40,
-            "const": 30,
-            "typedef": 20,
-            "struct": 10
-
+            "exception": 1,
+            "singleton": 2,
+            "service": 3,
+            "interface": 4,
+            "enum": 20,
+            "const": 21,
+            "typedef": 22,
+            "struct": 23
         }
-        for el in self._module_details:
-            el.sort = sort_dic.get(el.component_type, 99)
 
-        _sorted = sorted(self._module_details,
-                         key=lambda im: (im.sort, im.id_namespace), reverse=True)
+
+        # break down name to move version number into seperate field for sorting purposes.
+        # this reorders sorting.
+        #   Berfore sorting:
+        # id_namespace                          name                namespace       href                                                            component_type  sort
+        # com.sun.star.io.XTextOutputStream     XTextOutputStream   com.sun.star.io interfacecom_1_1sun_1_1star_1_1io_1_1XTextOutputStream.html     interface       4811
+        # com.sun.star.io.XTextOutputStream2    XTextOutputStream2  com.sun.star.io interfacecom_1_1sun_1_1star_1_1io_1_1XTextOutputStream2.html    interface       4813
+        #   After Sort
+        # id_namespace                          name                namespace       href                                                            component_type  sort
+        # com.sun.star.io.XTextOutputStream2    XTextOutputStream2  com.sun.star.io interfacecom_1_1sun_1_1star_1_1io_1_1XTextOutputStream2.html    interface       4811
+        # com.sun.star.io.XTextOutputStream     XTextOutputStream   com.sun.star.io interfacecom_1_1sun_1_1star_1_1io_1_1XTextOutputStream.html     interface       4813
+        #
+        # this sorting results in fewer python mro issues.
+        m_details: List[m_detail] = []
+        for el in self._module_details:
+            m = re_end.match(el.name)
+            name_part = el.name
+            if m:
+                ver_str = m.group(1)
+                name_part = name_part[:-len(ver_str)]
+                ver_part = -int(ver_str)
+            else:
+                ver_part = 0
+            m_details.append(m_detail(
+                id_namespace=el.id_namespace,
+                name=el.name,
+                namespace=el.namespace,
+                href=el.href,
+                component_type=el.component_type,
+                sort=sort_dic.get(el.component_type, 99),
+                name_part=name_part,
+                ver_part=ver_part
+            ))
+
+
+        _sorted: List[m_detail] = sorted(m_details,
+                                        key=lambda im: (im.sort, im.namespace, im.name_part, im.ver_part))
+        
         lst = []
         i = 1
         for el in _sorted:
