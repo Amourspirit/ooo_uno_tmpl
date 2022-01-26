@@ -1,43 +1,68 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "StorageStream",
   "type": "service",
   "namespace": "com.sun.star.embed",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
-        "..io.x_stream",
-        "XStream"
-      ],
-      [
-        "..io.x_seekable",
-        "XSeekable"
-      ],
-      [
-        "..lang.x_component",
-        "XComponent"
-      ],
-      [
         "..beans.x_property_set",
-        "XPropertySet"
+        "XPropertySet",
+        "XPropertySet_bc180bfa"
       ],
       [
         ".x_encryption_protected_source",
-        "XEncryptionProtectedSource"
+        "XEncryptionProtectedSource",
+        "XEncryptionProtectedSource_8cdf11a3"
+      ],
+      [
+        "..io.x_seekable",
+        "XSeekable",
+        "XSeekable_79540954"
+      ],
+      [
+        "..io.x_stream",
+        "XStream",
+        "XStream_678908a4"
+      ],
+      [
+        "..lang.x_component",
+        "XComponent",
+        "XComponent_98dc0ab5"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.beans.XPropertySet": "XPropertySet_bc180bfa",
+      "com.sun.star.embed.XEncryptionProtectedSource": "XEncryptionProtectedSource_8cdf11a3",
+      "com.sun.star.io.XSeekable": "XSeekable_79540954",
+      "com.sun.star.io.XStream": "XStream_678908a4",
+      "com.sun.star.lang.XComponent": "XComponent_98dc0ab5"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
+    "full_imports": {
+      "general": [
+        "com.sun.star.beans.XPropertySet",
+        "com.sun.star.embed.XEncryptionProtectedSource",
+        "com.sun.star.io.XSeekable",
+        "com.sun.star.io.XStream",
+        "com.sun.star.lang.XComponent"
+      ],
+      "typing": []
+    },
     "name": "StorageStream",
     "imports": [],
     "namespace": "com.sun.star.embed",

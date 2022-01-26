@@ -1,43 +1,64 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "GalleryItem",
   "type": "service",
   "namespace": "com.sun.star.gallery",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..beans.x_property_set",
-        "XPropertySet"
+        "XPropertySet",
+        "XPropertySet_bc180bfa"
       ],
       [
         ".x_gallery_item",
-        "XGalleryItem"
+        "XGalleryItem",
+        "XGalleryItem_d5730caf"
       ]
     ],
     "from_imports_typing": [
       [
-        "..lang.x_component",
-        "XComponent"
+        "..graphic.x_graphic",
+        "XGraphic",
+        "XGraphic_a4da0afc"
       ],
       [
-        "..graphic.x_graphic",
-        "XGraphic"
+        "..lang.x_component",
+        "XComponent",
+        "XComponent_98dc0ab5"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.beans.XPropertySet": "XPropertySet_bc180bfa",
+      "com.sun.star.gallery.XGalleryItem": "XGalleryItem_d5730caf"
+    },
     "quote": [
-      "XComponent",
-      "XGraphic"
+      "XComponent_98dc0ab5",
+      "XGraphic_a4da0afc"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.beans.XPropertySet",
+        "com.sun.star.gallery.XGalleryItem"
+      ],
+      "typing": [
+        "com.sun.star.graphic.XGraphic",
+        "com.sun.star.lang.XComponent"
+      ]
+    },
     "name": "GalleryItem",
     "imports": [],
     "namespace": "com.sun.star.gallery",
@@ -53,7 +74,7 @@
       "properties": [
         {
           "name": "Drawing",
-          "returns": "XComponent",
+          "returns": "XComponent_98dc0ab5",
           "desc": [
             "the drawing content of the Gallery item",
             "",
@@ -73,7 +94,7 @@
         },
         {
           "name": "Graphic",
-          "returns": "XGraphic",
+          "returns": "XGraphic_a4da0afc",
           "desc": [
             "the graphic content of the Gallery item",
             "",
@@ -84,7 +105,7 @@
         },
         {
           "name": "Thumbnail",
-          "returns": "XGraphic",
+          "returns": "XGraphic_a4da0afc",
           "desc": [
             "the thumbnail of the Gallery item",
             "",

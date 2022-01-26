@@ -1,39 +1,57 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XSearchableDictionaryList",
   "type": "interface",
   "namespace": "com.sun.star.linguistic2",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         ".x_dictionary_list",
-        "XDictionaryList"
+        "XDictionaryList",
+        "XDictionaryList_3a070f7f"
       ]
     ],
     "from_imports_typing": [
       [
-        ".x_dictionary_entry",
-        "XDictionaryEntry"
+        "..lang.locale",
+        "Locale",
+        "Locale_70d308fa"
       ],
       [
-        "..lang.locale",
-        "Locale"
+        ".x_dictionary_entry",
+        "XDictionaryEntry",
+        "XDictionaryEntry_49ef0ff5"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.linguistic2.XDictionaryList": "XDictionaryList_3a070f7f"
+    },
     "quote": [
-      "XDictionaryEntry",
-      "Locale"
+      "Locale_70d308fa",
+      "XDictionaryEntry_49ef0ff5"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.linguistic2.XDictionaryList"
+      ],
+      "typing": [
+        "com.sun.star.lang.Locale",
+        "com.sun.star.linguistic2.XDictionaryEntry"
+      ]
+    },
     "name": "XSearchableDictionaryList",
     "imports": [],
     "namespace": "com.sun.star.linguistic2",
@@ -50,7 +68,7 @@
       "methods": [
         {
           "name": "queryDictionaryEntry",
-          "returns": "XDictionaryEntry",
+          "returns": "XDictionaryEntry_49ef0ff5",
           "desc": [
             "looks for an entry for a given word in the list of dictionaries."
           ],
@@ -63,7 +81,7 @@
             ],
             [
               "aLocale",
-              "Locale",
+              "Locale_70d308fa",
               "in"
             ],
             [

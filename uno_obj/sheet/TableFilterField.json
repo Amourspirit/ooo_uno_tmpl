@@ -1,12 +1,14 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "TableFilterField",
   "namespace": "com.sun.star.sheet",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "sort": true,
@@ -21,16 +23,19 @@
     "from_imports_typing": [
       [
         ".filter_connection",
-        "FilterConnection"
+        "FilterConnection",
+        "FilterConnection_f01f0d97"
       ],
       [
         ".filter_operator",
-        "FilterOperator"
+        "FilterOperator",
+        "FilterOperator_d5c60cd3"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "FilterConnection",
-      "FilterOperator"
+      "FilterConnection_f01f0d97",
+      "FilterOperator_d5c60cd3"
     ],
     "typings": [],
     "requires_typing": true,
@@ -43,7 +48,7 @@
     "items": [
       {
         "name": "Connection",
-        "type": "FilterConnection",
+        "type": "FilterConnection_f01f0d97",
         "lines": [
           "specifies how the condition is connected to the previous condition."
         ]
@@ -71,7 +76,7 @@
       },
       {
         "name": "Operator",
-        "type": "FilterOperator",
+        "type": "FilterOperator_d5c60cd3",
         "lines": [
           "specifies the type of the condition."
         ]

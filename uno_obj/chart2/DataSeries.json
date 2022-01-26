@@ -1,62 +1,85 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "DataSeries",
   "type": "service",
   "namespace": "com.sun.star.chart2",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
-        ".data.x_data_sink",
-        "XDataSink"
-      ],
-      [
-        ".x_regression_curve_container",
-        "XRegressionCurveContainer"
-      ],
-      [
         ".data_point_properties",
-        "DataPointProperties"
-      ],
-      [
-        "..beans.property_set",
-        "PropertySet"
-      ],
-      [
-        ".data.x_data_source",
-        "XDataSource"
+        "DataPointProperties",
+        "DataPointProperties_24a00efd"
       ],
       [
         ".x_data_series",
-        "XDataSeries"
+        "XDataSeries",
+        "XDataSeries_b8150b89"
+      ],
+      [
+        ".x_regression_curve_container",
+        "XRegressionCurveContainer",
+        "XRegressionCurveContainer_8801116d"
+      ],
+      [
+        ".data.x_data_sink",
+        "XDataSink",
+        "XDataSink_dbc40c7b"
+      ],
+      [
+        ".data.x_data_source",
+        "XDataSource",
+        "XDataSource_f6340d57"
       ]
     ],
     "from_imports_typing": [
       [
         ".stacking_direction",
-        "StackingDirection"
+        "StackingDirection",
+        "StackingDirection_8060e21"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.chart2.DataPointProperties": "DataPointProperties_24a00efd",
+      "com.sun.star.chart2.XDataSeries": "XDataSeries_b8150b89",
+      "com.sun.star.chart2.XRegressionCurveContainer": "XRegressionCurveContainer_8801116d",
+      "com.sun.star.chart2.data.XDataSink": "XDataSink_dbc40c7b",
+      "com.sun.star.chart2.data.XDataSource": "XDataSource_f6340d57"
+    },
     "quote": [
-      "StackingDirection",
+      "StackingDirection_8060e21",
       "typing.List[int]"
     ],
     "typings": [
       "typing.List[int]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.chart2.DataPointProperties",
+        "com.sun.star.chart2.XDataSeries",
+        "com.sun.star.chart2.XRegressionCurveContainer",
+        "com.sun.star.chart2.data.XDataSink",
+        "com.sun.star.chart2.data.XDataSource"
+      ],
+      "typing": [
+        "com.sun.star.chart2.StackingDirection"
+      ]
+    },
     "name": "DataSeries",
     "imports": [],
     "namespace": "com.sun.star.chart2",
     "extends": [
-      "com.sun.star.beans.PropertySet",
       "com.sun.star.chart2.DataPointProperties",
       "com.sun.star.chart2.XDataSeries",
       "com.sun.star.chart2.data.XDataSink",
@@ -156,7 +179,7 @@
         },
         {
           "name": "StackingDirection",
-          "returns": "StackingDirection",
+          "returns": "StackingDirection_8060e21",
           "desc": [
             "indicates whether this series should be stacked with respect to the previous series."
           ],

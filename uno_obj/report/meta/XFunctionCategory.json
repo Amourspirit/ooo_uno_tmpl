@@ -1,38 +1,57 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XFunctionCategory",
   "type": "interface",
   "namespace": "com.sun.star.report.meta",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
-        "...container.x_index_access",
-        "XIndexAccess"
+        "...beans.x_property_set",
+        "XPropertySet",
+        "XPropertySet_bc180bfa"
       ],
       [
-        "...beans.x_property_set",
-        "XPropertySet"
+        "...container.x_index_access",
+        "XIndexAccess",
+        "XIndexAccess_f0910d6d"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_function_description",
-        "XFunctionDescription"
+        "XFunctionDescription",
+        "XFunctionDescription_8d8d119b"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.beans.XPropertySet": "XPropertySet_bc180bfa",
+      "com.sun.star.container.XIndexAccess": "XIndexAccess_f0910d6d"
+    },
     "quote": [
-      "XFunctionDescription"
+      "XFunctionDescription_8d8d119b"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.beans.XPropertySet",
+        "com.sun.star.container.XIndexAccess"
+      ],
+      "typing": [
+        "com.sun.star.report.meta.XFunctionDescription"
+      ]
+    },
     "name": "XFunctionCategory",
     "imports": [],
     "namespace": "com.sun.star.report.meta",
@@ -48,7 +67,7 @@
       "methods": [
         {
           "name": "getFunction",
-          "returns": "XFunctionDescription",
+          "returns": "XFunctionDescription_8d8d119b",
           "desc": [
             "same as getByIndex."
           ],

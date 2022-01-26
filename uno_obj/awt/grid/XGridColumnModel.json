@@ -1,45 +1,67 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XGridColumnModel",
   "type": "interface",
   "namespace": "com.sun.star.awt.grid",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
-        "...lang.x_component",
-        "XComponent"
+        "...container.x_container",
+        "XContainer",
+        "XContainer_d6fb0cc6"
       ],
       [
-        "...container.x_container",
-        "XContainer"
+        "...lang.x_component",
+        "XComponent",
+        "XComponent_98dc0ab5"
       ],
       [
         "...util.x_cloneable",
-        "XCloneable"
+        "XCloneable",
+        "XCloneable_99d00aa3"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_grid_column",
-        "XGridColumn"
+        "XGridColumn",
+        "XGridColumn_d2370c74"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.container.XContainer": "XContainer_d6fb0cc6",
+      "com.sun.star.lang.XComponent": "XComponent_98dc0ab5",
+      "com.sun.star.util.XCloneable": "XCloneable_99d00aa3"
+    },
     "quote": [
-      "XGridColumn",
-      "typing.List[XGridColumn]"
+      "XGridColumn_d2370c74",
+      "typing.List[XGridColumn_d2370c74]"
     ],
     "typings": [
-      "typing.List[XGridColumn]"
+      "typing.List[XGridColumn_d2370c74]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.container.XContainer",
+        "com.sun.star.lang.XComponent",
+        "com.sun.star.util.XCloneable"
+      ],
+      "typing": [
+        "com.sun.star.awt.grid.XGridColumn"
+      ]
+    },
     "name": "XGridColumnModel",
     "imports": [],
     "namespace": "com.sun.star.awt.grid",
@@ -76,14 +98,14 @@
           "args": [
             [
               "column",
-              "XGridColumn",
+              "XGridColumn_d2370c74",
               "in"
             ]
           ]
         },
         {
           "name": "createColumn",
-          "returns": "XGridColumn",
+          "returns": "XGridColumn_d2370c74",
           "desc": [
             "creates a new column for use with the column model.",
             "",
@@ -94,7 +116,7 @@
         },
         {
           "name": "getColumn",
-          "returns": "XGridColumn",
+          "returns": "XGridColumn_d2370c74",
           "desc": [
             "Returns a specific column."
           ],
@@ -120,7 +142,7 @@
         },
         {
           "name": "getColumns",
-          "returns": "typing.List[XGridColumn]",
+          "returns": "typing.List[XGridColumn_d2370c74]",
           "desc": [
             "Returns all columns of the model."
           ],

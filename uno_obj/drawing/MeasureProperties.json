@@ -1,39 +1,54 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "MeasureProperties",
   "type": "service",
   "namespace": "com.sun.star.drawing",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [],
     "from_imports_typing": [
       [
-        ".measure_text_horz_pos",
-        "MeasureTextHorzPos"
+        ".measure_kind",
+        "MeasureKind",
+        "MeasureKind_c99e0c4c"
       ],
       [
-        ".measure_kind",
-        "MeasureKind"
+        ".measure_text_horz_pos",
+        "MeasureTextHorzPos",
+        "MeasureTextHorzPos_2bcb0f40"
       ],
       [
         ".measure_text_vert_pos",
-        "MeasureTextVertPos"
+        "MeasureTextVertPos",
+        "MeasureTextVertPos_2bd90f3e"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "MeasureKind",
-      "MeasureTextHorzPos",
-      "MeasureTextVertPos"
+      "MeasureKind_c99e0c4c",
+      "MeasureTextHorzPos_2bcb0f40",
+      "MeasureTextVertPos_2bd90f3e"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [],
+      "typing": [
+        "com.sun.star.drawing.MeasureKind",
+        "com.sun.star.drawing.MeasureTextHorzPos",
+        "com.sun.star.drawing.MeasureTextVertPos"
+      ]
+    },
     "name": "MeasureProperties",
     "imports": [],
     "namespace": "com.sun.star.drawing",
@@ -108,7 +123,7 @@
         },
         {
           "name": "MeasureKind",
-          "returns": "MeasureKind",
+          "returns": "MeasureKind_c99e0c4c",
           "desc": [
             "This enumeration specifies the MeasureKind."
           ],
@@ -171,7 +186,7 @@
         },
         {
           "name": "MeasureTextHorizontalPosition",
-          "returns": "MeasureTextHorzPos",
+          "returns": "MeasureTextHorzPos_2bcb0f40",
           "desc": [
             "This is the horizontal position of the measure text."
           ],
@@ -207,7 +222,7 @@
         },
         {
           "name": "MeasureTextVerticalPosition",
-          "returns": "MeasureTextVertPos",
+          "returns": "MeasureTextVertPos_2bd90f3e",
           "desc": [
             "This is the vertical position of the text."
           ],

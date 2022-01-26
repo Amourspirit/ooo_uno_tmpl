@@ -1,66 +1,86 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XIdlClass",
   "type": "interface",
   "namespace": "com.sun.star.reflection",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "XInterface_8f010a43"
       ]
     ],
     "from_imports_typing": [
       [
-        ".x_idl_method",
-        "XIdlMethod"
-      ],
-      [
-        "..uno.uik",
-        "Uik"
+        ".x_idl_array",
+        "XIdlArray",
+        "XIdlArray_d65d0ca3"
       ],
       [
         ".x_idl_field",
-        "XIdlField"
+        "XIdlField",
+        "XIdlField_d62c0c88"
       ],
       [
-        ".x_idl_class",
-        "XIdlClass"
-      ],
-      [
-        ".x_idl_array",
-        "XIdlArray"
+        ".x_idl_method",
+        "XIdlMethod",
+        "XIdlMethod_e3740d05"
       ],
       [
         "..uno.type_class",
-        "TypeClass"
+        "TypeClass",
+        "TypeClass_853109f2"
+      ],
+      [
+        "..uno.uik",
+        "Uik",
+        "Uik_4fac0783"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
     "quote": [
-      "Uik",
+      "TypeClass_853109f2",
+      "Uik_4fac0783",
+      "XIdlArray_d65d0ca3",
       "XIdlClass",
-      "XIdlMethod",
-      "XIdlArray",
-      "typing.List[XIdlField]",
-      "XIdlField",
-      "TypeClass",
+      "XIdlField_d62c0c88",
+      "XIdlMethod_e3740d05",
       "typing.List[XIdlClass]",
-      "typing.List[XIdlMethod]"
+      "typing.List[XIdlField_d62c0c88]",
+      "typing.List[XIdlMethod_e3740d05]"
     ],
     "typings": [
       "typing.List[XIdlClass]",
-      "typing.List[XIdlMethod]",
-      "typing.List[XIdlField]"
+      "typing.List[XIdlField_d62c0c88]",
+      "typing.List[XIdlMethod_e3740d05]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.reflection.XIdlArray",
+        "com.sun.star.reflection.XIdlField",
+        "com.sun.star.reflection.XIdlMethod",
+        "com.sun.star.uno.TypeClass",
+        "com.sun.star.uno.Uik"
+      ]
+    },
     "name": "XIdlClass",
     "imports": [],
     "namespace": "com.sun.star.reflection",
@@ -105,7 +125,7 @@
         },
         {
           "name": "getArray",
-          "returns": "XIdlArray",
+          "returns": "XIdlArray_d65d0ca3",
           "desc": [
             "If the reflected type is an array, then you get a XIdlArray interface to modify instances of the array type.",
             "",
@@ -153,7 +173,7 @@
         },
         {
           "name": "getField",
-          "returns": "XIdlField",
+          "returns": "XIdlField_d62c0c88",
           "desc": [
             "If the reflected type is an interface, struct or union, then you get a XIdlField interface reflecting the demanded field (/interface attribute) by name.",
             "",
@@ -170,7 +190,7 @@
         },
         {
           "name": "getFields",
-          "returns": "typing.List[XIdlField]",
+          "returns": "typing.List[XIdlField_d62c0c88]",
           "desc": [
             "If the reflected type is an interface, struct or union, then you get a sequence of XIdlField interfaces reflecting all fields (/interface attributes).",
             "",
@@ -193,7 +213,7 @@
         },
         {
           "name": "getMethod",
-          "returns": "XIdlMethod",
+          "returns": "XIdlMethod_e3740d05",
           "desc": [
             "If the reflected type is an interface, then you get a XIdlMethod interface reflecting the demanded method by name.",
             "",
@@ -210,7 +230,7 @@
         },
         {
           "name": "getMethods",
-          "returns": "typing.List[XIdlMethod]",
+          "returns": "typing.List[XIdlMethod_e3740d05]",
           "desc": [
             "If the reflected type is an interface, then you get a sequence of XIdlMethod interfaces reflecting all methods of the interface.",
             "",
@@ -242,7 +262,7 @@
         },
         {
           "name": "getTypeClass",
-          "returns": "TypeClass",
+          "returns": "TypeClass_853109f2",
           "desc": [
             "Returns the com.sun.star.uno.TypeClass of the reflected type."
           ],
@@ -251,7 +271,7 @@
         },
         {
           "name": "getUik",
-          "returns": "Uik",
+          "returns": "Uik_4fac0783",
           "desc": [
             "Deprecated.",
             "",

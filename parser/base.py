@@ -26,7 +26,7 @@ from dataclasses import dataclass, field
 from deprecated import deprecated
 from PIL import Image
 from types import ModuleType
-from abc import ABC, abstractmethod
+from abc import ABC, abstractmethod, abstractproperty
 from bs4 import BeautifulSoup
 from bs4.element import ResultSet, Tag
 from glob import glob
@@ -36,10 +36,25 @@ from pathlib import Path
 from typing import Any, Dict, Iterable, List, Optional, Set, Tuple, Union
 from datetime import datetime, timezone
 
-_app_root = os.environ.get('project_root', str(Path(__file__).parent.parent))
-if not _app_root in sys.path:
-    sys.path.insert(0, _app_root)
-from parser.type_mod import TypeRules, PythonType
+APP_ROOT: str = None
+
+def _set_sys_paths():
+    global APP_ROOT
+    # due to the way some scritps run and cache it is required to ensure this modules path is in sys.path
+    # this has to do with pickle caching.
+    f_path = Path(__file__).parent
+    if not str(f_path) in sys.path:
+        sys.path.insert(0, str(f_path))
+    # append path to project root
+    _app_root = os.environ.get('project_root', str(f_path.parent))
+    if APP_ROOT is None:
+        APP_ROOT = _app_root
+    if not _app_root in sys.path:
+        sys.path.insert(0, _app_root)
+_set_sys_paths()
+
+from parser import mod_type as ModType
+from parser import mod_rel as RelInfo
 from config import AppConfig, read_config_default
 # endregion imports
 
@@ -57,6 +72,8 @@ URL_SPLIT = '_1_1'
 """Default stirng for splitting url string into it parts"""
 TEXT_CACHE: 'TextCache' = None
 PICKLE_CACHE: 'PickleCache' = None
+_KNOWN_EXTENDS: Dict[str, List[str]] = None
+_KNOWN_JSON: Dict[str, List[str]] = None
 # endregion CONST
 
 # region config
@@ -80,6 +97,45 @@ pattern_id = re.compile(r'[a-z0-9]{28,38}')
 pattern_generic_name = re.compile(r"([a-zA-Z0-9_]+)(<[A-Z, ]+>)")
 re_dir_pattern = re.compile(r"\[((?:in)|(?:out))\]", re.IGNORECASE)
 # endregion regex
+
+# region Known Extends
+def get_known_extends(ns:str, class_name: str) -> Union[List['Ns'], None]:
+    global _KNOWN_EXTENDS
+    key = ns + '.' + class_name
+    if _KNOWN_EXTENDS is None:
+        json_file = Path(__file__).parent / 'config' / 'known_extends.json'
+        with open(json_file, 'r') as file:
+            _KNOWN_EXTENDS = json.load(file)
+    if not key in _KNOWN_EXTENDS:
+        return None
+    results = []
+    known = _KNOWN_EXTENDS[key]
+    for s in known:
+        parts = s.rsplit(sep='.', maxsplit=1)
+        results.append(Ns(name=parts[1], namespace=parts[0]))
+    return results
+        
+# endregion Known Extends
+
+# region Known Extends
+
+
+def get_known_json(full_ns: str) -> Union[str, None]:
+    global _KNOWN_JSON
+    key = full_ns
+    if _KNOWN_JSON is None:
+        json_file = Path(__file__).parent / 'config' / 'known_json.json'
+        with open(json_file, 'r') as file:
+            _KNOWN_JSON = json.load(file)
+    if not key in _KNOWN_JSON:
+        return None
+    file = _KNOWN_JSON[full_ns]
+    json_file = Path(APP_ROOT) / 'parser' / 'known_json' / file
+    with open(json_file, 'r') as file:
+        j_data = json.load(file)
+    return Util.get_formated_dict_list_str(j_data, indent=2)
+
+# endregion Known Extends
 
 # region Type Map
 # TYPE_MAP and TYPE_MAP_EX are only used with deprecated method get_py_type
@@ -152,6 +208,11 @@ class Ns:
     @property
     def fullns(self):
         return self.namespace + '.' + self.name
+    
+    def __lt__(self, other: object):
+        if not isinstance(other, Ns):
+            return NotImplemented
+        return self.fullns < other.fullns
 
 
 @dataclass(frozen=True)
@@ -164,6 +225,11 @@ class Area:
     x2: int
     y2: int
     title: str = ''
+    
+    def __lt__(self, other: object):
+        if not isinstance(other, Area):
+            return NotImplemented
+        return self.name < other.name
 
 
 @dataclass
@@ -174,10 +240,15 @@ class SummaryInfo:
     """Name from page summary"""
     type: str
     """Type from page summary"""
-    p_type: PythonType
+    p_type: ModType.PythonType
     """Python Type obtaind usually from Util.get_python_type()"""
     extra_data: object = None
     """Extra data that can be set in rules or otherwise"""
+
+    def __lt__(self, other: object):
+        if not isinstance(other, SummaryInfo):
+            return NotImplemented
+        return self.name < other.name
 
 @dataclass
 class NameInfo:
@@ -188,13 +259,22 @@ class NameInfo:
     extra_data: Optional[object] = None
     """Extra data that can be set in rules or otherwise"""
 
+    def __lt__(self, other: object):
+        if not isinstance(other, NameInfo):
+            return NotImplemented
+        return self.name < other.name
 
 @dataclass
 class ParamInfo:
     direction: str = ''
     name: str = ''
     type: str = ''
-    p_type: Optional[PythonType] = None
+    p_type: Optional[ModType.PythonType] = None
+    
+    def __lt__(self, other: object):
+        if not isinstance(other, ParamInfo):
+            return NotImplemented
+        return self.name < other.name
 # endregion Data Classes
 
 # region Cache
@@ -246,9 +326,13 @@ class CacheBase(ABC):
         Args:
             filename (Union[str, Path]): file to delete.
         """
-        f = Path(self.path, filename)
-        if os.path.exists(f):
-            os.remove(f)
+        try:
+            f = Path(self.path, filename)
+            if os.path.exists(f):
+                os.remove(f)
+        except Exception as e:
+            logger.warning(
+                'Not able to delete file: %s, error: %s', filename, str(e))
 
     @property
     def seconds(self) -> float:
@@ -281,26 +365,26 @@ class TextCache(CacheBase):
         Returns:
             Union[str, None]: File contents if retrieved; Otherwise, ``None``
         """
+        if self.seconds <= 0:
+            return None
         f = Path(self.path, filename)
         if not f.exists():
             return None
 
-        if self.seconds > 0:
-            f_stat = f.stat()
-            if f_stat.st_size == 0:
-                # shoud not be zero byte file.
-                try:
-                    self.del_from_cache(f)
-                except Exception as e:
-                    logger.warning(
-                        'Not able to delete 0 byte file: %s, error: %s', filename, str(e))
-                return None
-            ti_m = f_stat.st_mtime
-            age = time.time() - ti_m
-            if age >= self.seconds:
-                return None
-        else:
+        f_stat = f.stat()
+        if f_stat.st_size == 0:
+            # shoud not be zero byte file.
+            try:
+                self.del_from_cache(f)
+            except Exception as e:
+                logger.warning(
+                    'Not able to delete 0 byte file: %s, error: %s', filename, str(e))
             return None
+        ti_m = f_stat.st_mtime
+        age = time.time() - ti_m
+        if age >= self.seconds:
+            return None
+
         try:
             # Check if we have this file locally
             
@@ -341,26 +425,26 @@ class PickleCache(CacheBase):
         Returns:
             Union[object, None]: File contents if retrieved; Otherwise, ``None``
         """
+        if self.seconds <= 0:
+            return None
         f = Path(self.path, filename)
         if not f.exists():
             return None
 
-        if self.seconds > 0:
-            f_stat = f.stat()
-            if f_stat.st_size == 0:
-                # shoud not be zero byte file.
-                try:
-                    self.del_from_cache(f)
-                except Exception as e:
-                    logger.warning(
-                        'Not able to delete 0 byte file: %s, error: %s', filename, str(e))
-                return None
-            ti_m = f_stat.st_mtime
-            age = time.time() - ti_m
-            if age >= self.seconds:
-                return None
-        else:
+        f_stat = f.stat()
+        if f_stat.st_size == 0:
+            # shoud not be zero byte file.
+            try:
+                self.del_from_cache(f)
+            except Exception as e:
+                logger.warning(
+                    'Not able to delete 0 byte file: %s, error: %s', filename, str(e))
             return None
+        ti_m = f_stat.st_mtime
+        age = time.time() - ti_m
+        if age >= self.seconds:
+            return None
+
         try:
             # Open the file in binary mode
             with open(f, 'rb') as file:
@@ -369,6 +453,9 @@ class PickleCache(CacheBase):
             return content
         except IOError:
             return None
+        except Exception as e:
+            logger.exception(e, exc_info=True)
+            raise e
 
     def save_in_cache(self, filename: Union[str, Path], content: object):
         """
@@ -775,6 +862,7 @@ class TagsStrObj:
         i = 0
         for ln in self._tags:
             s = ln.text.strip().replace("::", '.')
+            s = s.replace('\\', '\\\\')
             if not s:
                 continue
             if self._clean:
@@ -875,6 +963,8 @@ class ApiNamespace(BlockObj):
     def __init__(self, soup: SoupObj):
         super().__init__(soup)
         self._data = None
+        self.__namespace_str = None
+        self.__namespace = None
 
     def get_obj(self) -> List[str]:
         if not self._data is None:
@@ -892,6 +982,18 @@ class ApiNamespace(BlockObj):
                 "ApiNamespace.get_obj() Error getting Namespace.", exc_info=True)
             raise e
 
+    @property
+    def namespace(self) -> List[str]:
+        """Gets namespace value"""
+        if self.__namespace is None:
+            self.__namespace = self.get_obj()
+        return self.__namespace
+
+    @property
+    def namespace_str(self) -> str:
+        if self.__namespace_str is None:
+            self.__namespace_str = '.'.join(self.namespace)
+        return self.__namespace_str
 
 class ApiPublicMembers(BlockObj):
     """Gets all blocks with condensed info such as Public Member Functions"""
@@ -987,7 +1089,13 @@ class ApiSummaryRows(BlockObj):
 class ApiSummaries(BlockObj):
     """Gets summary information for a public member block"""
 
-    def __init__(self, block: ApiSummaryRows, rule_engine: 'IRulesSummaryInfo' = None) -> None:
+    def __init__(self
+                 ,block: ApiSummaryRows
+                 ,name_info: NameInfo
+                 ,ns: str
+                 ,rule_engine: Optional['IRulesSummaryInfo'] = None
+                 , long_names:bool = False
+                 ) -> None:
         """
         [summary]
 
@@ -1000,6 +1108,9 @@ class ApiSummaries(BlockObj):
         self._requires_typing = False
         self._imports: Set[str] = set()
         self._rule_engine = rule_engine
+        self._ns = ns
+        self._long_names = long_names
+        self._name_info = name_info
         self._data = None
     
     def _get_type_from_inner_link(self, mem_item_left: Tag, name:str) -> Union[str, None]:
@@ -1046,7 +1157,12 @@ class ApiSummaries(BlockObj):
                     name = itm_name.text.strip()
                     name = Util.get_clean_method_name(name)
             # logger.debug('ApiSummaries.get_obj() r_type in: %s', r_type)
-            p_type = Util.get_python_type(in_type=r_type)
+            p_type = Util.get_python_type(
+                in_type=r_type,
+                name_info=self._name_info,
+                ns=self._ns,
+                long_names=self._long_names
+                )
             # logger.debug('ApiSummaries.get_obj() p_type in: %s', p_type.type)
             if p_type.is_default():
                 logger.debug(
@@ -1056,7 +1172,12 @@ class ApiSummaries(BlockObj):
                 # test for link and namespace and try again.
                 r2_type = self._get_type_from_inner_link(itm_lft, r_type)
                 if r2_type:
-                    p2_type = Util.get_python_type(r2_type)
+                    p2_type = Util.get_python_type(
+                        in_type=r2_type,
+                        name_info=self._name_info,
+                        ns=self._ns,
+                        long_names=self._long_names
+                        )
                     if not p2_type.is_default():
                         p_type = p2_type
                         logger.debug(
@@ -1328,11 +1449,14 @@ class ApiInterfacesBlock(ApiSummaryBlock):
 class ApiMethodPramsInfo(BlockObj):
     """Gets List of Parameter information for a funciton"""
 
-    def __init__(self, block: ApiProtoBlock) -> None:
+    def __init__(self, block: ApiProtoBlock, name_info: NameInfo, ns: str, long_names: bool = False) -> None:
         self._block: ApiProtoBlock = block
         super().__init__(self._block.soup)
         self._requires_typing = False
         self._imports: Set[str] = set()
+        self._ns = ns
+        self._long_names = long_names
+        self._name_info = name_info
         self._data = None
 
     def get_obj(self) -> List[ParamInfo]:
@@ -1397,13 +1521,23 @@ class ApiMethodPramsInfo(BlockObj):
             pinfo.direction = g_dir  # in or out
             dir_str = dir_str.split(maxsplit=1)[1]
         _type = dir_str.replace("::", '.').lstrip('.')
-        t_info: PythonType = Util.get_python_type(in_type=_type)
+        t_info: ModType.PythonType = Util.get_python_type(
+            in_type=_type,
+            ns=self._ns,
+            name_info=self._name_info,
+            long_names=self._long_names
+            )
         if t_info.is_default():
             logger.debug(
                 'ApiFnPramsInfo._process_type_tag() %s type is Default. Looking for %s', pinfo.name, _type)
             t2_type = self._get_type_from_inner_link(type_tag, _type)
             if t2_type:
-                t2_info = Util.get_python_type(t2_type)
+                t2_info = Util.get_python_type(
+                    t2_type,
+                    ns=self._ns,
+                    name_info=self._name_info,
+                    long_names=self._long_names
+                    )
                 if not t2_info.is_default():
                     t_info = t2_info
         logger.debug(
@@ -1534,35 +1668,51 @@ class ApiMethodException(BlockObj):
 
 # endregion     Method Api
 
+# region        API Data
 class APIData:
+    """Class the brings together parts for scraping API Html pages"""
     # region Constructor
-    def __init__(self, url_soup: Union[str, SoupObj], allow_cache: bool):
+
+    def __init__(self, url_soup: Union[str, SoupObj], allow_cache: bool, long_names: bool = False, remove_parent_inherited: bool = True):
+        """
+        Constructor
+
+        Args:
+            url_soup (Union[str, SoupObj]): Soup Object
+            allow_cache (bool): Determines if cache is used
+            long_names (bool, optional): Determsin if name are short or long in various components.
+                Short name may look like ``XInterface`` whereas a long name might look like
+                ``uno.XInterface``. Defaults to ``False``.
+        """
         if isinstance(url_soup, str):
-            self._url = url_soup
-            self._soup_obj = SoupObj(
+            self.__url = url_soup
+            self.__soup_obj = SoupObj(
                 url=url_soup, allow_cache=allow_cache)
         else:
-            self._url = url_soup.url
-            self._soup_obj = url_soup
-            self._soup_obj.allow_cache = allow_cache
-        self._allow_cache = allow_cache
-        self._api_data_public_members: ApiPublicMembers = None
-        self._api_data_name: ApiName = None
-        self._desc: ApiDesc = None
-        self._properties_block: ApiPropertiesBlock = None
-        self._func_block: ApiFunctionsBlock = None
-        self._interfaces_block: ApiInterfacesBlock = None
-        self._types_block: ApiTypesBlock = None
-        self._func_summary_rows: ApiSummaryRows = None
-        self._property_summary_rows: ApiSummaryRows = None
-        self._export_summary_rows: ApiSummaryRows = None
-        self._func_summaries: ApiSummaries = None
-        self._property_summaries: ApiSummaries = None
-        self._exported_summaries: ApiSummaries = None
-        self._type_summaries: ApiSummaries = None
-        self._type_summary_rows: ApiSummaryRows = None
-        self._inherited: ApiInherited = None
-        self._area_filter_rules_engine: IRulesArea = None
+            self.__url = url_soup.url
+            self.__soup_obj = url_soup
+            self.__soup_obj.allow_cache = allow_cache
+        self.__allow_cache = allow_cache
+        self.__ns: ApiNamespace = None
+        self.__long_names = long_names
+        self.__api_data_public_members: ApiPublicMembers = None
+        self.__api_data_name: ApiName = None
+        self.__desc: ApiDesc = None
+        self.__properties_block: ApiPropertiesBlock = None
+        self.__func_block: ApiFunctionsBlock = None
+        self.__interfaces_block: ApiInterfacesBlock = None
+        self.__types_block: ApiTypesBlock = None
+        self.__func_summary_rows: ApiSummaryRows = None
+        self.__property_summary_rows: ApiSummaryRows = None
+        self.__export_summary_rows: ApiSummaryRows = None
+        self.__func_summaries: ApiSummaries = None
+        self.__property_summaries: ApiSummaries = None
+        self.__exported_summaries: ApiSummaries = None
+        self.__type_summaries: ApiSummaries = None
+        self.__type_summary_rows: ApiSummaryRows = None
+        self.__inherited: ApiInherited = None
+        self.__area_filter_rules_engine: IRulesArea = None
+        self.__remove_parent_inherited = remove_parent_inherited
 
     # endregion Constructor
 
@@ -1576,7 +1726,7 @@ class APIData:
             [type]: None
         """
         return None
-    
+
     def _set_area_filter_rules_engine_rules(self, rules_engine: 'IRulesArea') -> None:
         """
         Registers rules for Area Filter Rules Engine.
@@ -1675,7 +1825,12 @@ class APIData:
     def get_prams_info(self, a_id: str) -> ApiMethodPramsInfo:
         """Gets parameter info for all parameters of a a method"""
         block = self.get_proto_block(a_id=a_id)
-        result = ApiMethodPramsInfo(block=block)
+        result = ApiMethodPramsInfo(
+            block=block,
+            name_info=self.name.get_obj(),
+            ns=self.ns.namespace_str,
+            long_names=self.__long_names
+        )
         return result
 
     @AcceptedTypes(str, ftype=DecFuncEnum.METHOD)
@@ -1708,151 +1863,175 @@ class APIData:
     # region Properties
     @property
     def name(self) -> ApiName:
-        if self._api_data_name is None:
-            self._api_data_name = ApiName(
-                soup=self._soup_obj,
+        if self.__api_data_name is None:
+            self.__api_data_name = ApiName(
+                soup=self.__soup_obj,
                 rules_engine=self._get_name_rules_engine()
-                )
-        return self._api_data_name
+            )
+        return self.__api_data_name
 
     @property
     def public_members(self) -> ApiPublicMembers:
-        if self._api_data_public_members is None:
-            self._api_data_public_members = ApiPublicMembers(self.soup_obj)
-        return self._api_data_public_members
+        if self.__api_data_public_members is None:
+            self.__api_data_public_members = ApiPublicMembers(self.soup_obj)
+        return self.__api_data_public_members
 
     @property
     def func_block(self) -> ApiFunctionsBlock:
         """Gets Summary Functions block"""
-        if self._func_block is None:
-            self._func_block = ApiFunctionsBlock(
+        if self.__func_block is None:
+            self.__func_block = ApiFunctionsBlock(
                 self.public_members)
-        return self._func_block
+        return self.__func_block
 
     @property
     def properties_block(self) -> ApiPropertiesBlock:
         """Gets Summary Properties block"""
-        if self._properties_block is None:
-            self._properties_block = ApiPropertiesBlock(
+        if self.__properties_block is None:
+            self.__properties_block = ApiPropertiesBlock(
                 self.public_members)
-        return self._properties_block
+        return self.__properties_block
 
     @property
     def interfaces_block(self) -> ApiInterfacesBlock:
         """Gets Summary Exported Interfaces block"""
-        if self._interfaces_block is None:
-            self._interfaces_block = ApiInterfacesBlock(
+        if self.__interfaces_block is None:
+            self.__interfaces_block = ApiInterfacesBlock(
                 self.public_members)
-        return self._interfaces_block
+        return self.__interfaces_block
 
     @property
     def types_block(self) -> ApiTypesBlock:
         """Gets Summary Properties block"""
-        if self._types_block is None:
-            self._types_block = ApiTypesBlock(
+        if self.__types_block is None:
+            self.__types_block = ApiTypesBlock(
                 self.public_members)
-        return self._types_block
+        return self.__types_block
 
     @property
     def func_summary_rows(self) -> ApiSummaryRows:
         """Get Summary rows for functions"""
-        if self._func_summary_rows is None:
-            self._func_summary_rows = ApiSummaryRows(
+        if self.__func_summary_rows is None:
+            self.__func_summary_rows = ApiSummaryRows(
                 self.func_block)
-        return self._func_summary_rows
+        return self.__func_summary_rows
 
     @property
     def property_summary_rows(self) -> ApiSummaryRows:
         """Get Summary rows for Properties"""
-        if self._property_summary_rows is None:
-            self._property_summary_rows = ApiSummaryRows(
+        if self.__property_summary_rows is None:
+            self.__property_summary_rows = ApiSummaryRows(
                 self.properties_block)
-        return self._property_summary_rows
+        return self.__property_summary_rows
 
     @property
     def export_summary_rows(self) -> ApiSummaryRows:
         """Get Summary rows for Exported Interfaces"""
-        if self._export_summary_rows is None:
-            self._export_summary_rows = ApiSummaryRows(
+        if self.__export_summary_rows is None:
+            self.__export_summary_rows = ApiSummaryRows(
                 self.interfaces_block)
-        return self._export_summary_rows
+        return self.__export_summary_rows
 
     @property
     def func_summaries(self) -> ApiSummaries:
         """Get Summary info list for functions"""
-        if self._func_summaries is None:
-            self._func_summaries = ApiSummaries(
-                self.func_summary_rows)
-        return self._func_summaries
+        if self.__func_summaries is None:
+            self.__func_summaries = ApiSummaries(
+                block=self.func_summary_rows,
+                name_info=self.name.get_obj(),
+                ns=self.ns.namespace_str,
+                long_names=self.__long_names)
+        return self.__func_summaries
 
     @property
     def property_summaries(self) -> ApiSummaries:
         """Get Summary info list for Properties"""
-        if self._property_summaries is None:
-            self._property_summaries = ApiSummaries(
-                self.property_summary_rows)
-        return self._property_summaries
+        if self.__property_summaries is None:
+            self.__property_summaries = ApiSummaries(
+                block=self.property_summary_rows,
+                name_info=self.name.get_obj(),
+                ns=self.ns.namespace_str,
+                long_names=self.__long_names)
+        return self.__property_summaries
 
     @property
     def exported_summaries(self) -> ApiSummaries:
         """Get Summary info list for Exported Interfaces"""
-        if self._exported_summaries is None:
-            self._exported_summaries = ApiSummaries(
-                self.export_summary_rows)
-        return self._exported_summaries
+        if self.__exported_summaries is None:
+            self.__exported_summaries = ApiSummaries(
+                block=self.export_summary_rows,
+                name_info=self.name.get_obj(),
+                ns=self.ns.namespace_str,
+                long_names=self.__long_names)
+        return self.__exported_summaries
 
     @property
     def inherited(self) -> 'ApiInherited':
         """Gets class that get all inherited value"""
-        if self._inherited is None:
-            self._inherited = ApiInherited(
+        if self.__inherited is None:
+            ni = self.name.get_obj()    
+            self.__inherited = ApiInherited(
                 soup=self.soup_obj,
                 area_filter_rules_engine=self.area_filter_rules_engine,
+                class_name=ni.name,
+                ns=self.ns.namespace_str,
                 raise_error=False,
-                allow_cache = self.allow_cache
-                )
-        return self._inherited
+                allow_cache=self.allow_cache
+            )
+        return self.__inherited
 
     @property
     def types_summary_rows(self) -> ApiSummaryRows:
         """Get Summary rows for Properties"""
-        if self._type_summary_rows is None:
-            self._type_summary_rows = ApiSummaryRows(
-                self.types_block)
-        return self._type_summary_rows
+        if self.__type_summary_rows is None:
+            self.__type_summary_rows = ApiSummaryRows(
+                block=self.types_block)
+        return self.__type_summary_rows
 
     @property
     def types_summaries(self) -> ApiSummaries:
         """Get Summary info list for Properties"""
-        if self._type_summaries is None:
-            self._type_summaries = ApiSummaries(
-                self.types_summary_rows)
-        return self._type_summaries
+        if self.__type_summaries is None:
+            self.__type_summaries = ApiSummaries(
+                block=self.types_summary_rows,
+                name_info=self.name.get_obj(),
+                ns=self.ns.namespace_str,
+                long_names=self.__long_names)
+        return self.__type_summaries
 
     @property
     def desc(self) -> ApiDesc:
         """Gets the interface Description object"""
-        if self._desc is None:
-            self._desc = ApiDesc(self.soup_obj)
-        return self._desc
+        if self.__desc is None:
+            self.__desc = ApiDesc(self.soup_obj)
+        return self.__desc
+
+    @property
+    def ns(self) -> ApiNamespace:
+        """Gets the interface Description object"""
+        if self.__ns is None:
+            self.__ns = ApiNamespace(
+                self.soup_obj)
+        return self.__ns
 
     @property
     def soup_obj(self) -> SoupObj:
         """Gets soup_obj value"""
-        return self._soup_obj
+        return self.__soup_obj
 
     @property
     def url_obj(self) -> UrlObj:
-        return self._soup_obj.url_obj
-    
+        return self.__soup_obj.url_obj
+
     @property
     def area_filter_rules_engine(self) -> 'IRulesArea':
-        if self._area_filter_rules_engine is None:
-            self._area_filter_rules_engine = RulesArea()
+        if self.__area_filter_rules_engine is None:
+            self.__area_filter_rules_engine = RulesArea(
+                remove_parent_inherited=self.remove_parent_inherited)
             self._set_area_filter_rules_engine_rules(
-                rules_engine=self._area_filter_rules_engine
+                rules_engine=self.__area_filter_rules_engine
             )
-        return self._area_filter_rules_engine
+        return self.__area_filter_rules_engine
 
     @property
     def allow_cache(self) -> bool:
@@ -1861,12 +2040,19 @@ class APIData:
             :getter: Gets allow_cache value.
             :setter: Sets allow_cache value.
         """
-        return self._allow_cache
-    
+        return self.__allow_cache
+
     @allow_cache.setter
     def allow_cache(self, value: bool):
-        self._allow_cache = value
+        self.__allow_cache = value
+
+    @property
+    def remove_parent_inherited(self) -> bool:
+        """Gets remove_parent_inherited value"""
+        return self.__remove_parent_inherited
     # endregion Properties
+
+# endregion     API Data
 
 # endregion block and api classes
 
@@ -2202,26 +2388,7 @@ def str_clean(input: str, **kwargs) -> str:
 class Util:
     """Utility class of static methods for operations"""
     
-    TYPE_RULES: TypeRules = None
-    @dataclass
-    class RealitiveInfo:
-        """
-        Realitive info
-        """
-        in_branch: str
-        """Original input branch"""
-        comp_branch: str
-        """Original branch to compare to in_branch"""
-        sep: str
-        """Seperator"""
-        in_branch_rel: List[str]
-        """Compare result relative part of in_branch"""
-        comp_branch_rel: List[str]
-        """Compare result relative part of comp_branch"""
-        distance: int
-        """Distance between branches"""
-        common_parts: List[str]
-        """part that in_branch and comp_branch have in common"""
+    TYPE_RULES: ModType.TypeRules = None
 
     @staticmethod
     def is_fragment_url(in_str: str) -> bool:
@@ -2282,6 +2449,23 @@ class Util:
         return ".".join(parts)
 
     @staticmethod
+    @RuleCheckAllKw(arg_info={'ns': 0, "name": 0}, rules=[rules.RuleStrNotNullOrEmpty], ftype=DecFuncEnum.METHOD_STATIC)
+    def get_full_import(ns: str, name: str) -> str:
+        """
+        Get a full import name such as ``com.sun.star.uno.XInterface``
+
+        Args:
+            ns (str): Namespace to prepend to name if it is not a full namespace
+            name (str): name or namespace
+
+        Returns:
+            str: full namesapce such as ``com.sun.star.uno.XInterface``
+        """
+        if not name.startswith('com.'):
+            return ns + '.' + name
+        return name
+
+    @staticmethod
     def get_ns_from_a_tag(a_tag: Tag) -> Union[str, None]:
         """
         Gets a namespace from an anchor tag
@@ -2308,54 +2492,6 @@ class Util:
         return Util.get_ns_from_url(url=href, name=name)
 
     @staticmethod
-    def get_rel_info(in_branch: str, comp_branch: str, sep: str = '.') -> RealitiveInfo:
-        """
-        Gets realitive info between branches such as ``com.sun.star.configuration``
-        and ``com.sun.star.uno``
-
-        Args:
-            in_branch (str): branch to compare
-            comp_branch (str): branch to get realitive information from compared to ``in_branch``
-            sep (str, optional): Branch seperator. Defaults to ``.``
-
-        Returns:
-            RealitiveInfo: Class instance containing realitive info.
-        """
-        in_branch_parts = in_branch.split(sep)
-        comp_branch_parts = comp_branch.split(sep)
-        rel_len = len(comp_branch_parts)
-        common_roots = 0
-        for i, b in enumerate(in_branch_parts):
-            if i > rel_len:
-                break
-            try:
-                if b == comp_branch_parts[i]:
-                    common_roots += 1
-                    continue
-            except IndexError:
-                break
-            break
-        # comp_branch_rel = in_branch_parts[common_roots:]
-        comp_branch_rel = comp_branch_parts[common_roots:]
-        in_branch_rel = in_branch_parts[common_roots:]
-        diff = len(in_branch_rel)
-        distance = diff
-        common_parts = in_branch_parts[:common_roots]
-        # result = ((diff + 1), sep.join(comp_branch_rel))
-        result = Util.RealitiveInfo(
-            in_branch=in_branch,
-            comp_branch=comp_branch,
-            sep=sep,
-            in_branch_rel=in_branch_rel,
-            comp_branch_rel=comp_branch_rel,
-            distance=distance,
-            common_parts=common_parts
-        )
-        # sep_str = sep * (diff + 1)
-        logger.debug("Util.get_rel_info(): %s", str(result))
-        return result
-    
-    @staticmethod
     def encode_file_name(name: Union[Path, str]) -> str:
         _name = str(name)
         _name = _name.replace(' ', '_').replace('<', '').replace('>', '')
@@ -2373,8 +2509,8 @@ class Util:
         ts = calendar.timegm(current_GMT)
         return datetime.fromtimestamp(ts, tz=timezone.utc)
 
-    @AcceptedTypes(str, ftype=DecFuncEnum.METHOD_STATIC)
     @staticmethod
+    @AcceptedTypes(str, ftype=DecFuncEnum.METHOD_STATIC)
     def get_timestamp_from_str(input:str) -> datetime:
         """
         Converts input in the format of ``2021-12-16 11:37:50+00:00`` into datetime
@@ -2645,8 +2781,7 @@ class Util:
         Returns:
             str: snake case
         """
-        _input = re.sub('(.)([A-Z][a-z]+)', r'\1_\2', input)
-        return re.sub('([a-z0-9])([A-Z])', r'\1_\2', _input).lower()
+        return RelInfo.camel_to_snake(input=input)
 
     @staticmethod
     def get_clean_imports(ns: str, imports: Iterable[str]) -> Set[str]:
@@ -2671,7 +2806,6 @@ class Util:
         return results
 
 
-    @AcceptedTypes(str, opt_all_args=True, ftype=DecFuncEnum.METHOD_STATIC)
     @staticmethod
     def get_rel_import(i_str: str, ns: str, sep: str = '.') -> Tuple[str, str]:
         """
@@ -2685,47 +2819,10 @@ class Util:
         Returns:
             Tuple[str, str]: realitive import info such as ``('..uno.exception', 'Exception')``
         """
-        # i_str = com.sun.star.uno.Exception
-        # ns = com.sun.star.configuration
-        # ("..uno.exception", "Exception")
-        # compare ns to ns so drop last name of i_str
-        name_parts = i_str.split(sep)
-        name = name_parts.pop()
-        camel_name = Util.camel_to_snake(name)
-        if len(name_parts) == 0:
-            # this is a single word such as XInterface
-            # assume it is in the same namespace as this import
-            logger.debug(
-                "get_rel_import(): '%s', single word. Converting to from import and returning", name)
-            return (f'.{camel_name}', f'{name}')
-        ns2 = sep.join(name_parts)
-        if ns2 == ns:
-            logger.debug("get_rel_import(): Names are equal: '%s'", ns)
-            logger.debug(f"get_rel_import(): Returning (.{camel_name}', '{name})")
-            return (f'.{camel_name}', f'{name}')
-        if len(name_parts) == 1:
-            # this is a single word
-            # assume it is in the same namespace as this import
-            logger.debug(
-                "get_rel_import(): '%s', single word. Converting to from import and returning", i_str)
-            return (f'.{Util.camel_to_snake(i_str)}', f'{i_str}')
-        try:
-            info = Util.get_rel_info(in_branch=ns, comp_branch=ns2, sep=sep)
-            prefix = sep * (info.distance + 1)
-            result_parts = info.comp_branch_rel + [camel_name]
-            from_str = prefix
-            from_str = from_str + sep.join(result_parts)
-            return (from_str, name)
-        except Exception as e:
-            logger.error(e, exc_info=True)
-        short = ns2.replace('com.sun.star.', '')
-        logger.warn(
-            f"get_rel_import(): Last ditch effort. Returning: (ooo_uno.uno_obj.{short}.{camel_name}', {name})")
-        return (f'ooo_uno.uno_obj.{short}.{camel_name}', f'{name}')
+        return RelInfo.get_rel_import(in_str=i_str,ns=ns, sep=sep)
     
-    @AcceptedTypes(str, opt_all_args=True, ftype=DecFuncEnum.METHOD_STATIC)
     @staticmethod
-    def get_rel_import_full(i_str: str, ns: str, sep: str = '.') -> Tuple[str, str]:
+    def get_rel_import_long(i_str: str, ns: str, sep: str = '.') -> Tuple[str, str, str]:
         """
         Gets realitive import Tuple
 
@@ -2737,44 +2834,25 @@ class Util:
         Returns:
             Tuple[str, str]: realitive import info such as ``('..uno.exception', 'Exception')``
         """
-        # i_str = com.sun.star.uno.Exception
-        # ns = com.sun.star.configuration
-        # ("..uno.exception", "Exception")
-        # compare ns to ns so drop last name of i_str
-        name_parts = i_str.split(sep)
-        name = name_parts.pop()
-        camel_name = Util.camel_to_snake(name)
-        if len(name_parts) == 0:
-            # this is a single word such as XInterface
-            # assume it is in the same namespace as this import
-            logger.debug(
-                "get_rel_import_full(): '%s', single word. Converting to from import and returning", name)
-            return (f'{sep}', f'{camel_name}{sep}{name}')
-        ns2 = sep.join(name_parts)
-        if ns2 == ns:
-            logger.debug("get_rel_import_full(): Names are equal: '%s'", ns)
-            logger.debug(
-                f"get_rel_import_full(): Returning (.{camel_name}', '{name})")
-            return (f'{sep}', f'{camel_name}{sep}{name}')
-        if len(name_parts) == 1:
-            # this is a single word
-            # assume it is in the same namespace as this import
-            logger.debug(
-                "get_rel_import_full(): '%s', single word. Converting to from import and returning", i_str)
-            return (f'{sep}', f'{Util.camel_to_snake(i_str)}{sep}{i_str}')
-        try:
-            info = Util.get_rel_info(in_branch=ns, comp_branch=ns2, sep=sep)
-            prefix = sep * (info.distance + 1)
-            result_parts = info.comp_branch_rel + [camel_name]
-            im_str = sep.join(result_parts)
-            # im_str = f"{im_str}{sep}{name}"
-            return (prefix, im_str)
-        except Exception as e:
-            logger.error(e, exc_info=True)
-        short = ns2.replace('com.sun.star.', '')
-        logger.warn(
-            f"get_rel_import_full(): Last ditch effort. Returning: (ooo_uno.uno_obj.{short}.{camel_name}', {name})")
-        return (f'ooo_uno.uno_obj.{short}.{camel_name}', f'{name}')
+        return RelInfo.get_rel_import_long(in_str=i_str,ns=ns, sep=sep)
+
+    def get_rel_import_long_name(i_str: str, ns: str, sep: str = '.') -> str:
+        """
+        Geta a long Name. Same as getting last part of ```get_rel_import_long()```
+
+        Args:
+            in_str (str): Namespace and object such as ``com.sun.star.uno.Exception``
+            ns (str): Namespace used to get realitive postion such as ``com.sun.star.awt``
+            sep (str, optional): Namespace seperator. Defaults to ``.``
+
+        Returns:
+            str: Long name such as ``uno_exception``
+        """
+        return RelInfo.get_rel_import_long_name(
+            in_str=i_str,
+            ns=ns,
+            sep=sep
+        )
 
     @AcceptedTypes(str, opt_all_args=True, ftype=DecFuncEnum.METHOD_STATIC)
     @staticmethod
@@ -2989,10 +3067,10 @@ class Util:
         return _u_type_clean
 
     @staticmethod
-    def get_python_type(in_type: str) -> PythonType:
+    @TypeCheckKw(arg_info={"in_type": 0, "ns": 1}, types=[str, (str, type(None))], ftype=DecFuncEnum.METHOD_STATIC)
+    def get_python_type(in_type: str, name_info: NameInfo, ns: str, long_names: bool = False) -> ModType.PythonType:
         """
         Gets Python Type info including an required imports.
-        This method simplifies ``get_py_type`` when a callback is needed.
 
         Args:
             in_type (str): uno type
@@ -3001,15 +3079,40 @@ class Util:
             PythonType: class that contains type, requires typing and imporst info.
         """
         if Util.TYPE_RULES is None:
-            Util.TYPE_RULES = TypeRules()
+            Util.TYPE_RULES = ModType.TypeRules()
+
+        logger.debug("Util.get_python_type() in_type: '%s'", in_type)
+
+        def is_self_import(s:str, class_name:str) -> bool:
+            try:
+                p_type = Util.TYPE_RULES.get_python_type(in_type=s)
+                if not p_type.imports:
+                    return False
+                if p_type.imports == class_name:
+                    return True
+                full_name = ns + '.' + class_name
+                return p_type.imports == full_name
+            except Exception as e:
+                logger.error(e, exc_info=True)
+                raise e
+
+        Util.TYPE_RULES.namespace = ns
+        Util.TYPE_RULES.long_names = long_names
+        self_import = is_self_import(in_type, name_info.name)
+        if self_import:
+            Util.TYPE_RULES.long_names = False
+
         try:
-            return Util.TYPE_RULES.get_python_type(in_type)
+            py_type = Util.TYPE_RULES.get_python_type(in_type)
+            if self_import:
+                py_type.imports = None
+            return py_type
         except Exception as e:
             logger.error(e, exc_info=True)
             raise e
 
-    @AcceptedTypes((str, Path), ftype=DecFuncEnum.METHOD_STATIC)
     @staticmethod
+    @AcceptedTypes((str, Path), ftype=DecFuncEnum.METHOD_STATIC)
     def mkdirp(dest_dir: Union[str, Path]):
         """
         Creates directory and all child directories if needed
@@ -3052,7 +3155,7 @@ class ImportCheck:
     services do not inherit classes that are already inherited by a
     child class.
     """
-    # https://stackoverflow.com/questions/31028237/getting-all-superclasses-in-python-3
+    # https://tinyurl.com/y6veetog
     @AcceptedTypes(str, ftype=DecFuncEnum.METHOD)
     def __init__(self, ns: str):
         """
@@ -3402,26 +3505,26 @@ class ImageCache(CacheBase):
         Returns:
             Union[str, None]: File contents if retrieved; Otherwise, ``None``
         """
+        if self.seconds <= 0:
+            return None
         f = Path(self.path, filename)
         if not f.exists():
             return None
 
-        if self.seconds > 0:
-            f_stat = f.stat()
-            if f_stat.st_size == 0:
-                # shoud not be zero byte file.
-                try:
-                    self.del_from_cache(f)
-                except Exception as e:
-                    logger.warning(
-                        'Not able to delete 0 byte file: %s, error: %s', filename, str(e))
-                return None
-            ti_m = f_stat.st_mtime
-            age = time.time() - ti_m
-            if age >= self.seconds:
-                return None
-        else:
+        f_stat = f.stat()
+        if f_stat.st_size == 0:
+            # shoud not be zero byte file.
+            try:
+                self.del_from_cache(f)
+            except Exception as e:
+                logger.warning(
+                    'Not able to delete 0 byte file: %s, error: %s', filename, str(e))
             return None
+        ti_m = f_stat.st_mtime
+        age = time.time() - ti_m
+        if age >= self.seconds:
+            return None
+
         try:
             # Check if we have this file locally
             with Image.open(f) as img:
@@ -3886,6 +3989,7 @@ class AreaFilter:
             logger.error(msg)
             raise Exception(msg)
 
+        # rules_engine determines sorting
         area_lst = self._rules_engine.get_area(ai=self._ai, alst=self._lst)
         return area_lst or []
 
@@ -3893,10 +3997,13 @@ class AreaFilter:
     def get_as_ns(self) -> List[Ns]:
         """
         Gets the current inherited list of Area as a list of ``Ns``
+        
+        Sorting if any has been determined by IRulesArea
 
         Returns:
             List[Ns]: List if inherited Namespaces
         """
+        # no sorting should be done here.
         return [el.ns for el in self._inherited]
 
     @property
@@ -3912,7 +4019,35 @@ class AreaFilter:
 # region        Area Rules
 
 # region            Rule Area Interfaces
+
+
+class IRulesArea(ABC):
+
+    @abstractmethod
+    def get_area(self,  ai: AreaInfo, alst: List[Area]) -> List[Area]:
+        """
+        Gets filtered Area list
+
+        Args:
+            alst (List[Area]): Areas to filter
+
+         Returns:
+            List[Area]: Filtered Area List
+        """
+
+    @abstractmethod
+    def __len__(self) -> int:
+        """Gets the length of rules"""
+
+    @abstractproperty
+    def remove_parent_inherited(self) -> bool:
+        """Removes Parent Inherite Property"""
+
 class IRuleArea(ABC):
+    
+    @abstractmethod
+    def __init__(self, rules:IRulesArea) -> None:
+        """constructor"""
 
     @abstractmethod
     def get_is_match(self, ai: AreaInfo, alst: List[Area]) -> bool:
@@ -3936,30 +4071,45 @@ class IRuleArea(ABC):
         """
 
 
-class IRulesArea(ABC):
-    @abstractmethod
-    def get_area(self,  ai: AreaInfo, alst: List[Area]) -> List[Area]:
-        """
-        Gets filtered Area list
-
-        Args:
-            alst (List[Area]): Areas to filter
-
-         Returns:
-            List[Area]: Filtered Area List
-        """
-
-    @abstractmethod
-    def __len__(self) -> int:
-        """Gets the length of rules"""
-
 # endregion         Rule Area Interfaces
 
 # region            Area Rules
 class RuleAreaBase(IRuleArea):
     """Matches when there is a single parent"""
-
+    def __init__(self, rules:IRulesArea) -> None:
+        """constructor"""
+        self._rules = rules
       # region Private Methods
+    def _get_with_parent_removed(self, first: Area, d_lst: Dict[int, List[Area]],  match_lst: List[Area]) -> None:
+        """
+        Remove any parent inherits from match_lst. This method does not affect sort order of match_lst
+
+        Args:
+            first (Area): First Area
+            d_lst (Dict[int, List[Area]]): dict of y1 grouped Area list
+            match_lst (List[Area]): List of area that is considered inherits. Out Arg.
+        """
+        # flatten all others into a single set
+        # Any keys in d_lst that are are lower y1 then first.y1 are parent objects. Higher are child object.
+        # The lower the y1 value the closer it is to the top if image.
+        flat = set()
+        for k, v in d_lst.items():
+            if k >= first.y1:
+                continue
+            for area in v:
+                flat.add(area.ns.fullns)
+
+        # find any
+        remove: List[int] = []
+        for i, area in enumerate(match_lst):
+            if area.ns.fullns in flat:
+                remove.append(i)
+        # any entry that is found in flat then remove it.
+        if len(remove) > 0:
+            remove.sort(reverse=True)
+            for i in remove:
+                match_lst.pop(i)
+
     def _list_dict_y1(self, lst: List[Area]) -> Dict[int, List[Area]]:
         """groups lst into area y1"""
         d = {}
@@ -3992,7 +4142,8 @@ class RuleAreaBase(IRuleArea):
 
     def _remove_duplicates_lst(self, lst: List[Area]) -> bool:
         """
-        Removes any duplicates base upon namesapce.
+        Removes any duplicates base upon namespace.
+        Method does not change the sort order of lst
 
         Args:
             clean_lst (List[Area]): List to remove duplicates from
@@ -4031,10 +4182,20 @@ class RuleAreaBase(IRuleArea):
 
     # endregion Privae Methods
 
+    # region Properties
+    @property
+    def rules(self) -> IRulesArea:
+        """Gets rules value"""
+        return self._rules
+    # endregion Properties
 
 class RuleAreaSingle(RuleAreaBase):
     """Matches when there is a single parent"""
 
+    def __init__(self, rules: IRulesArea) -> None:
+        """constructor"""
+        super().__init__(rules=rules)
+    
     # region IRuleArea Methods
     def get_is_match(self, ai: AreaInfo, alst: List[Area]) -> bool:
         """
@@ -4072,7 +4233,9 @@ class RuleAreaSingle(RuleAreaBase):
 
 class RuleAreaMulti(RuleAreaBase):
     """Matches when there is a multiple adjacent parents"""
-
+    def __init__(self, rules: IRulesArea) -> None:
+        """constructor"""
+        super().__init__(rules=rules)
     # region IRuleArea Methods
     def get_is_match(self, ai: AreaInfo, alst: List[Area]) -> bool:
         """
@@ -4090,6 +4253,7 @@ class RuleAreaMulti(RuleAreaBase):
             return False
         return True
 
+
     def get_area(self, ai: AreaInfo, alst: List[Area]) -> List[Area]:
         """
         Gets filtered Area list
@@ -4102,16 +4266,23 @@ class RuleAreaMulti(RuleAreaBase):
         """
         first = self._get_first_y1(ai=ai, alst=alst)
         d_lst: Dict[int, List[Area]] = self._list_dict_y1(lst=alst) # grouped by y1
-        match_lst: List[Area] = d_lst[first.y1] # list of y1 matches
+        # extract group I want
+        match_lst: List[Area] = [area for area in d_lst[first.y1]] # list of y1 matches
         if len(match_lst) == 0:
             return match_lst
-        self._remove_duplicates_lst(match_lst)
+        del d_lst[first.y1]
+        if self.rules.remove_parent_inherited:
+            self._get_with_parent_removed(first=first,d_lst=d_lst, match_lst=match_lst)
+        
         return match_lst
     # endregion IRuleArea Methods
 
 class RuleAreaVertical(RuleAreaBase):
     """Matches when there is a vertical parent"""
 
+    def __init__(self, rules: IRulesArea) -> None:
+        """constructor"""
+        super().__init__(rules=rules)
     # region IRuleArea Methods
     def get_is_match(self, ai: AreaInfo, alst: List[Area]) -> bool:
         """
@@ -4155,9 +4326,17 @@ class RuleAreaVertical(RuleAreaBase):
         first = self._get_first_y1(ai=ai, alst=alst)
         d_lst: Dict[int, List[Area]] = self._list_dict_x1(
             lst=alst)  # grouped by y1
-        upper: List[Area] = d_lst[first.x1]
-        self._remove_duplicates_lst(upper)
-        return upper
+        # filtering upper by shape or first is a bug fix.
+        # in cases such as https://tinyurl.com/yaqul3gs
+        # some of child classes have the exact same y1 as the parrent classes
+        if ai.shape:
+            upper: List[Area] = [a for a in d_lst[first.x1] if a.y1 < ai.shape.y1]
+        else:
+            upper: List[Area] = [a for a in d_lst[first.x1] if a.y1 <= first.y1]
+        sorted_u = sorted(upper, key=lambda a: a.y1)
+        if self.rules.remove_parent_inherited:
+            self._remove_duplicates_lst(sorted_u)
+        return sorted_u
     # endregion IRuleArea Methods
 # endregion         Area Rules
 
@@ -4167,13 +4346,16 @@ class RuleAreaVertical(RuleAreaBase):
 class RulesArea(IRulesArea):
     """Manages rules for NameInfo"""
 
-    def __init__(self) -> None:
+    def __init__(self, remove_parent_inherited) -> None:
+        self._remove_parent_inherited: bool = remove_parent_inherited
         self._rules: List[type[IRuleArea]] = []
         self._cache = {}
         self._register_known_rules()
 
     def __len__(self) -> int:
         return len(self._rules)
+
+    # region Methods
 
     def register_rule(self, rule: type[IRuleArea]) -> None:
         """
@@ -4227,7 +4409,7 @@ class RulesArea(IRulesArea):
             if key in self._cache:
                 inst = self._cache[key]
             else:
-                inst: IRuleArea = rule()
+                inst: IRuleArea = rule(rules=self)
                 self._cache[key] = inst
             if inst.get_is_match(ai=ai, alst=alst):
                 match_inst = inst
@@ -4248,23 +4430,42 @@ class RulesArea(IRulesArea):
         if match:
             return match.get_area(ai=ai, alst=alst)
         return None
+    # endregion Methods
 
+    # region Properties
+    @property
+    def remove_parent_inherited(self) -> bool:
+        """Specifies remove_parent_inherited
+
+            :getter: Gets remove_parent_inherited value.
+            :setter: Sets remove_parent_inherited value.
+        """
+        return self._remove_parent_inherited
+
+    @remove_parent_inherited.setter
+    def remove_parent_inherited(self, value: bool):
+        self._remove_parent_inherited = value
+    # endregion Properties
 # endregion         Rules Area Engine
 # endregion     Area Rules
 class ApiInherited(BlockObj):
 
-    def __init__(self, soup: SoupObj, area_filter_rules_engine: IRulesArea, **kwargs) -> None:
+    def __init__(self, soup: SoupObj, area_filter_rules_engine: IRulesArea, ns: str, class_name: str, **kwargs) -> None:
         """
         Constructor
 
         Args:
             soup (SoupObj): Soup object
+            area_filter_rules_engine (IRulesArea): Rules engine for procesing area data.
+            ni (NameInfo): Contains name of current class being processed.
 
         Keyword Arguments:
             raise_error (bool, optional): Determines if errors will be raised when they occur: Default ``False``
         """
         super().__init__(soup)
         self._api_dy_content: ApiDyContent = ApiDyContent(self.soup)
+        self._ns: str = ns
+        self._class_name = class_name
         self._data = None
         self._raise_errors = bool(kwargs.get('raise_error', False))
         self._area_fileter_rules_engine = area_filter_rules_engine
@@ -4283,7 +4484,18 @@ class ApiInherited(BlockObj):
         logger.warning(msg)
 
     def get_obj(self) -> List[Ns]:
+        """
+        Gets a list of Ns objects. Sorting is dertimined by IRulesArea
+
+        Returns:
+            List[Ns]: List of Ns objects for class inherites
+        """
         if not self._data is None:
+            return self._data
+        known = get_known_extends(ns=self._ns, class_name=self._class_name)
+        if known:
+            logger.info('%s: Found Known inherits for %s.%s', self.__class__.__name__, self._ns, self._class_name)
+            self._data = known
             return self._data
         self._data = []
         ai = ApiImage(self._api_dy_content)

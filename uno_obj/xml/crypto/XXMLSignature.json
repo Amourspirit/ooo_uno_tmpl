@@ -1,44 +1,64 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XXMLSignature",
   "type": "interface",
   "namespace": "com.sun.star.xml.crypto",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "...uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "XInterface_8f010a43"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_security_environment",
-        "XSecurityEnvironment"
+        "XSecurityEnvironment",
+        "XSecurityEnvironment_7ead116d"
       ],
       [
         ".xxml_security_context",
-        "XXMLSecurityContext"
+        "XXMLSecurityContext",
+        "XXMLSecurityContext_681010ae"
       ],
       [
         ".xxml_signature_template",
-        "XXMLSignatureTemplate"
+        "XXMLSignatureTemplate",
+        "XXMLSignatureTemplate_89fe115f"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
     "quote": [
-      "XXMLSecurityContext",
-      "XSecurityEnvironment",
-      "XXMLSignatureTemplate"
+      "XSecurityEnvironment_7ead116d",
+      "XXMLSecurityContext_681010ae",
+      "XXMLSignatureTemplate_89fe115f"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.xml.crypto.XSecurityEnvironment",
+        "com.sun.star.xml.crypto.XXMLSecurityContext",
+        "com.sun.star.xml.crypto.XXMLSignatureTemplate"
+      ]
+    },
     "name": "XXMLSignature",
     "imports": [],
     "namespace": "com.sun.star.xml.crypto",
@@ -61,7 +81,7 @@
       "methods": [
         {
           "name": "generate",
-          "returns": "XXMLSignatureTemplate",
+          "returns": "XXMLSignatureTemplate_89fe115f",
           "desc": [
             "Perform signature in the environment of signature template and context."
           ],
@@ -72,19 +92,19 @@
           "args": [
             [
               "aTemplate",
-              "XXMLSignatureTemplate",
+              "XXMLSignatureTemplate_89fe115f",
               "in"
             ],
             [
               "aEnvironment",
-              "XSecurityEnvironment",
+              "XSecurityEnvironment_7ead116d",
               "in"
             ]
           ]
         },
         {
           "name": "validate",
-          "returns": "XXMLSignatureTemplate",
+          "returns": "XXMLSignatureTemplate_89fe115f",
           "desc": [
             "Perform validation in the environment of signature template and context."
           ],
@@ -95,12 +115,12 @@
           "args": [
             [
               "aTemplate",
-              "XXMLSignatureTemplate",
+              "XXMLSignatureTemplate_89fe115f",
               "in"
             ],
             [
               "aContext",
-              "XXMLSecurityContext",
+              "XXMLSecurityContext_681010ae",
               "in"
             ]
           ]

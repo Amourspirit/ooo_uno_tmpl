@@ -1,44 +1,62 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XLinkFactory",
   "type": "interface",
   "namespace": "com.sun.star.embed",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "XInterface_8f010a43"
       ]
     ],
     "from_imports_typing": [
       [
-        ".x_storage",
-        "XStorage"
+        "..beans.property_value",
+        "PropertyValue",
+        "PropertyValue_c9610c73"
       ],
       [
-        "..beans.property_value",
-        "PropertyValue"
+        ".x_storage",
+        "XStorage",
+        "XStorage_8e460a32"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
     "quote": [
-      "typing.List[int]",
-      "XInterface",
-      "typing.List[PropertyValue]",
-      "XStorage"
+      "XInterface_8f010a43",
+      "XStorage_8e460a32",
+      "typing.List[PropertyValue_c9610c73]",
+      "typing.List[int]"
     ],
     "typings": [
-      "typing.List[int]",
-      "typing.List[PropertyValue]"
+      "typing.List[PropertyValue_c9610c73]",
+      "typing.List[int]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.beans.PropertyValue",
+        "com.sun.star.embed.XStorage"
+      ]
+    },
     "name": "XLinkFactory",
     "imports": [],
     "namespace": "com.sun.star.embed",
@@ -53,7 +71,7 @@
       "methods": [
         {
           "name": "createInstanceLinkUserInit",
-          "returns": "XInterface",
+          "returns": "XInterface_8f010a43",
           "desc": [
             "creates a new link and transport parameters for persistent initialization.",
             "",
@@ -77,7 +95,7 @@
             ],
             [
               "xStorage",
-              "XStorage",
+              "XStorage_8e460a32",
               "in"
             ],
             [
@@ -87,12 +105,12 @@
             ],
             [
               "aArgs",
-              "typing.List[PropertyValue]",
+              "typing.List[PropertyValue_c9610c73]",
               "in"
             ],
             [
               "aObjectArgs",
-              "typing.List[PropertyValue]",
+              "typing.List[PropertyValue_c9610c73]",
               "in"
             ]
           ]

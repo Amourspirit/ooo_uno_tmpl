@@ -1,54 +1,85 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "Diagram",
   "type": "service",
   "namespace": "com.sun.star.chart",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
-        ".x_diagram_positioning",
-        "XDiagramPositioning"
-      ],
-      [
-        ".x_second_axis_title_supplier",
-        "XSecondAxisTitleSupplier"
-      ],
-      [
         "..beans.x_property_set",
-        "XPropertySet"
+        "XPropertySet",
+        "XPropertySet_bc180bfa"
       ],
       [
         ".x_axis_supplier",
-        "XAxisSupplier"
-      ],
-      [
-        "..xml.user_defined_attributes_supplier",
-        "UserDefinedAttributesSupplier"
+        "XAxisSupplier",
+        "XAxisSupplier_c81b0c5b"
       ],
       [
         ".x_diagram",
-        "XDiagram"
+        "XDiagram",
+        "XDiagram_8e1e0a27"
+      ],
+      [
+        ".x_diagram_positioning",
+        "XDiagramPositioning",
+        "XDiagramPositioning_18f60eba"
+      ],
+      [
+        ".x_second_axis_title_supplier",
+        "XSecondAxisTitleSupplier",
+        "XSecondAxisTitleSupplier_680a10b9"
+      ],
+      [
+        "..xml.user_defined_attributes_supplier",
+        "UserDefinedAttributesSupplier",
+        "UserDefinedAttributesSupplier_9fbe1222"
       ]
     ],
     "from_imports_typing": [
       [
         ".chart_data_row_source",
-        "ChartDataRowSource"
+        "ChartDataRowSource",
+        "ChartDataRowSource_9a00e2f"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.beans.XPropertySet": "XPropertySet_bc180bfa",
+      "com.sun.star.chart.XAxisSupplier": "XAxisSupplier_c81b0c5b",
+      "com.sun.star.chart.XDiagram": "XDiagram_8e1e0a27",
+      "com.sun.star.chart.XDiagramPositioning": "XDiagramPositioning_18f60eba",
+      "com.sun.star.chart.XSecondAxisTitleSupplier": "XSecondAxisTitleSupplier_680a10b9",
+      "com.sun.star.xml.UserDefinedAttributesSupplier": "UserDefinedAttributesSupplier_9fbe1222"
+    },
     "quote": [
-      "ChartDataRowSource"
+      "ChartDataRowSource_9a00e2f"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.beans.XPropertySet",
+        "com.sun.star.chart.XAxisSupplier",
+        "com.sun.star.chart.XDiagram",
+        "com.sun.star.chart.XDiagramPositioning",
+        "com.sun.star.chart.XSecondAxisTitleSupplier",
+        "com.sun.star.xml.UserDefinedAttributesSupplier"
+      ],
+      "typing": [
+        "com.sun.star.chart.ChartDataRowSource"
+      ]
+    },
     "name": "Diagram",
     "imports": [],
     "namespace": "com.sun.star.chart",
@@ -107,7 +138,7 @@
         },
         {
           "name": "DataRowSource",
-          "returns": "ChartDataRowSource",
+          "returns": "ChartDataRowSource_9a00e2f",
           "desc": [
             "determines if the data for a data row is contained in the columns or in the rows of the data array."
           ],

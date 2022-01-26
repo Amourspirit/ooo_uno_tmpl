@@ -1,46 +1,66 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XConsolidationDescriptor",
   "type": "interface",
   "namespace": "com.sun.star.sheet",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "XInterface_8f010a43"
       ]
     ],
     "from_imports_typing": [
       [
         ".general_function",
-        "GeneralFunction"
-      ],
-      [
-        "..table.cell_range_address",
-        "CellRangeAddress"
+        "GeneralFunction",
+        "GeneralFunction_e2280d25"
       ],
       [
         "..table.cell_address",
-        "CellAddress"
+        "CellAddress",
+        "CellAddress_ae5f0b56"
+      ],
+      [
+        "..table.cell_range_address",
+        "CellRangeAddress",
+        "CellRangeAddress_ec450d43"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
     "quote": [
-      "typing.List[CellRangeAddress]",
-      "GeneralFunction",
-      "CellAddress"
+      "CellAddress_ae5f0b56",
+      "GeneralFunction_e2280d25",
+      "typing.List[CellRangeAddress_ec450d43]"
     ],
     "typings": [
-      "typing.List[CellRangeAddress]"
+      "typing.List[CellRangeAddress_ec450d43]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.sheet.GeneralFunction",
+        "com.sun.star.table.CellAddress",
+        "com.sun.star.table.CellRangeAddress"
+      ]
+    },
     "name": "XConsolidationDescriptor",
     "imports": [],
     "namespace": "com.sun.star.sheet",
@@ -59,7 +79,7 @@
       "methods": [
         {
           "name": "getFunction",
-          "returns": "GeneralFunction",
+          "returns": "GeneralFunction_e2280d25",
           "desc": [
             "returns the function by which the ranges are consolidated."
           ],
@@ -77,7 +97,7 @@
         },
         {
           "name": "getSources",
-          "returns": "typing.List[CellRangeAddress]",
+          "returns": "typing.List[CellRangeAddress_ec450d43]",
           "desc": [
             "returns the cell ranges which are consolidated."
           ],
@@ -86,7 +106,7 @@
         },
         {
           "name": "getStartOutputPosition",
-          "returns": "CellAddress",
+          "returns": "CellAddress_ae5f0b56",
           "desc": [
             "returns the position of the top left cell of the cell range where the consolidated data are copied."
           ],
@@ -121,7 +141,7 @@
           "args": [
             [
               "nFunction",
-              "GeneralFunction",
+              "GeneralFunction_e2280d25",
               "in"
             ]
           ]
@@ -151,7 +171,7 @@
           "args": [
             [
               "aSources",
-              "typing.List[CellRangeAddress]",
+              "typing.List[CellRangeAddress_ec450d43]",
               "in"
             ]
           ]
@@ -166,7 +186,7 @@
           "args": [
             [
               "aStartOutputPosition",
-              "CellAddress",
+              "CellAddress_ae5f0b56",
               "in"
             ]
           ]

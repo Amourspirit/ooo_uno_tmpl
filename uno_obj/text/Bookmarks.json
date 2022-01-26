@@ -1,31 +1,47 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "Bookmarks",
   "type": "service",
   "namespace": "com.sun.star.text",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..container.x_index_access",
-        "XIndexAccess"
+        "XIndexAccess",
+        "XIndexAccess_f0910d6d"
       ],
       [
         "..container.x_name_access",
-        "XNameAccess"
+        "XNameAccess",
+        "XNameAccess_e2ab0cf6"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.container.XIndexAccess": "XIndexAccess_f0910d6d",
+      "com.sun.star.container.XNameAccess": "XNameAccess_e2ab0cf6"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
+    "full_imports": {
+      "general": [
+        "com.sun.star.container.XIndexAccess",
+        "com.sun.star.container.XNameAccess"
+      ],
+      "typing": []
+    },
     "name": "Bookmarks",
     "imports": [],
     "namespace": "com.sun.star.text",

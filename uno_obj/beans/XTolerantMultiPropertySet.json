@@ -1,52 +1,72 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XTolerantMultiPropertySet",
   "type": "interface",
   "namespace": "com.sun.star.beans",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "XInterface_8f010a43"
       ]
     ],
     "from_imports_typing": [
       [
-        ".set_property_tolerant_failed",
-        "SetPropertyTolerantFailed"
-      ],
-      [
         ".get_direct_property_tolerant_result",
-        "GetDirectPropertyTolerantResult"
+        "GetDirectPropertyTolerantResult",
+        "GetDirectPropertyTolerantResult_e91c13b9"
       ],
       [
         ".get_property_tolerant_result",
-        "GetPropertyTolerantResult"
+        "GetPropertyTolerantResult",
+        "GetPropertyTolerantResult_7c4e115e"
+      ],
+      [
+        ".set_property_tolerant_failed",
+        "SetPropertyTolerantFailed",
+        "SetPropertyTolerantFailed_7cbd1130"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
     "quote": [
-      "typing.List[str]",
-      "typing.List[GetDirectPropertyTolerantResult]",
-      "typing.List[GetPropertyTolerantResult]",
+      "typing.List[GetDirectPropertyTolerantResult_e91c13b9]",
+      "typing.List[GetPropertyTolerantResult_7c4e115e]",
+      "typing.List[SetPropertyTolerantFailed_7cbd1130]",
       "typing.List[object]",
-      "typing.List[SetPropertyTolerantFailed]"
+      "typing.List[str]"
     ],
     "typings": [
-      "typing.List[str]",
-      "typing.List[GetDirectPropertyTolerantResult]",
-      "typing.List[GetPropertyTolerantResult]",
+      "typing.List[GetDirectPropertyTolerantResult_e91c13b9]",
+      "typing.List[GetPropertyTolerantResult_7c4e115e]",
+      "typing.List[SetPropertyTolerantFailed_7cbd1130]",
       "typing.List[object]",
-      "typing.List[SetPropertyTolerantFailed]"
+      "typing.List[str]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.beans.GetDirectPropertyTolerantResult",
+        "com.sun.star.beans.GetPropertyTolerantResult",
+        "com.sun.star.beans.SetPropertyTolerantFailed"
+      ]
+    },
     "name": "XTolerantMultiPropertySet",
     "imports": [],
     "namespace": "com.sun.star.beans",
@@ -65,7 +85,7 @@
       "methods": [
         {
           "name": "getDirectPropertyValuesTolerant",
-          "returns": "typing.List[GetDirectPropertyTolerantResult]",
+          "returns": "typing.List[GetDirectPropertyTolerantResult_e91c13b9]",
           "desc": [
             "retrieve only those values of the specified properties which are direct values.",
             "",
@@ -84,7 +104,7 @@
         },
         {
           "name": "getPropertyValuesTolerant",
-          "returns": "typing.List[GetPropertyTolerantResult]",
+          "returns": "typing.List[GetPropertyTolerantResult_7c4e115e]",
           "desc": [
             "retrieve the values of the specified properties",
             "",
@@ -103,7 +123,7 @@
         },
         {
           "name": "setPropertyValuesTolerant",
-          "returns": "typing.List[SetPropertyTolerantFailed]",
+          "returns": "typing.List[SetPropertyTolerantFailed_7cbd1130]",
           "desc": [
             "sets the values to the properties with the specified names.",
             "",

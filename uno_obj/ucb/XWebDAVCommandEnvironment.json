@@ -1,41 +1,59 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XWebDAVCommandEnvironment",
   "type": "interface",
   "namespace": "com.sun.star.ucb",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         ".x_command_environment",
-        "XCommandEnvironment"
+        "XCommandEnvironment",
+        "XCommandEnvironment_fb330dee"
       ]
     ],
     "from_imports_typing": [
       [
         "..beans.string_pair",
-        "StringPair"
+        "StringPair",
+        "StringPair_a4bc0b14"
       ],
       [
         ".web_davhttp_method",
-        "WebDAVHTTPMethod"
+        "WebDAVHTTPMethod",
+        "WebDAVHTTPMethod_cbd50bdc"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.ucb.XCommandEnvironment": "XCommandEnvironment_fb330dee"
+    },
     "quote": [
-      "WebDAVHTTPMethod",
-      "typing.List[StringPair]"
+      "WebDAVHTTPMethod_cbd50bdc",
+      "typing.List[StringPair_a4bc0b14]"
     ],
     "typings": [
-      "typing.List[StringPair]"
+      "typing.List[StringPair_a4bc0b14]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.ucb.XCommandEnvironment"
+      ],
+      "typing": [
+        "com.sun.star.beans.StringPair",
+        "com.sun.star.ucb.WebDAVHTTPMethod"
+      ]
+    },
     "name": "XWebDAVCommandEnvironment",
     "imports": [],
     "namespace": "com.sun.star.ucb",
@@ -50,7 +68,7 @@
       "methods": [
         {
           "name": "getUserRequestHeaders",
-          "returns": "typing.List[StringPair]",
+          "returns": "typing.List[StringPair_a4bc0b14]",
           "desc": [
             "This method gets called while assembling a WebDAV/HTTP request.",
             "",
@@ -65,7 +83,7 @@
             ],
             [
               "eMethod",
-              "WebDAVHTTPMethod",
+              "WebDAVHTTPMethod_cbd50bdc",
               "in"
             ]
           ]

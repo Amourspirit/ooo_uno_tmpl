@@ -1,38 +1,54 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XStructTypeDescription",
   "type": "interface",
   "namespace": "com.sun.star.reflection",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         ".x_compound_type_description",
-        "XCompoundTypeDescription"
+        "XCompoundTypeDescription",
+        "XCompoundTypeDescription_c7be12f6"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_type_description",
-        "XTypeDescription"
+        "XTypeDescription",
+        "XTypeDescription_3c210fb1"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.reflection.XCompoundTypeDescription": "XCompoundTypeDescription_c7be12f6"
+    },
     "quote": [
-      "typing.List[str]",
-      "typing.List[XTypeDescription]"
+      "typing.List[XTypeDescription_3c210fb1]",
+      "typing.List[str]"
     ],
     "typings": [
-      "typing.List[str]",
-      "typing.List[XTypeDescription]"
+      "typing.List[XTypeDescription_3c210fb1]",
+      "typing.List[str]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.reflection.XCompoundTypeDescription"
+      ],
+      "typing": [
+        "com.sun.star.reflection.XTypeDescription"
+      ]
+    },
     "name": "XStructTypeDescription",
     "imports": [],
     "namespace": "com.sun.star.reflection",
@@ -55,7 +71,7 @@
       "methods": [
         {
           "name": "getTypeArguments",
-          "returns": "typing.List[XTypeDescription]",
+          "returns": "typing.List[XTypeDescription_3c210fb1]",
           "desc": [
             "Returns the type arguments of an instantiated polymorphic struct type."
           ],

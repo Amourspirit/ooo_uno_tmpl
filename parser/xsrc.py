@@ -13,14 +13,14 @@ import textwrap
 import xerox  # requires xclip - sudo apt-get install xclip
 import re
 from typing import Dict, List, Set, Union
-from kwhelp.decorator import AcceptedTypes, DecFuncEnum, RequireArgs, TypeCheckKw
+from kwhelp.decorator import AcceptedTypes, DecFuncEnum, RequireArgs, TypeCheck, TypeCheckKw
 from pathlib import Path
 try:
     import base
 except ModuleNotFoundError:
     import parser.base as base
 from logger.log_handle import get_logger
-from parser.base import SummaryInfo
+from parser.base import SummaryInfo, Util
 from parser import __version__, JSON_ID
 # endregion Imports
 
@@ -59,7 +59,6 @@ re_property_pattern = re.compile(
 re_comment_start_pattern = re.compile(r"(?:(\/\*)|(?:\*)\s)")
 # endregion SDK API Reference
 
-
 # region API Interface classes
 
 
@@ -87,8 +86,10 @@ class ApiNs(base.ApiNamespace):
 
 class ApiInterfaceData(base.APIData):
     # region Constructor
-    def __init__(self, url_soup: Union[str, base.SoupObj], allow_cache: bool):
-        super().__init__(url_soup=url_soup, allow_cache=allow_cache)
+    @TypeCheck((str, base.SoupObj), bool, bool, bool, ftype=DecFuncEnum.METHOD)
+    def __init__(self, url_soup: Union[str, base.SoupObj], allow_cache: bool, long_names: bool = False, remove_parent_inherited=True):
+        super().__init__(url_soup=url_soup, allow_cache=allow_cache,
+                         long_names=long_names, remove_parent_inherited=remove_parent_inherited)
         self._si_key = 'summeries'
         self._detail_block_key = 'detail_block'
         self._ns: ApiNs = None
@@ -161,14 +162,12 @@ class ApiInterfaceData(base.APIData):
     # region Properties
 
     @property
-    def ns(self) -> ApiNs:
+    def ns(self) -> base.ApiNamespace:
         """Gets the interface Description object"""
         if self._ns is None:
             self._ns = ApiNs(
                 self.soup_obj)
         return self._ns
-
-    
 
     # endregion Properties
 # endregion API Interface classes
@@ -180,14 +179,23 @@ class Parser(base.ParserBase):
 
     # region Constructor
     @TypeCheckKw(
-        arg_info={"allow_cache": bool},
+        arg_info={
+            "long_names": 0,
+            "remove_parent_inherited": 0
+            },
+        types=[bool],
         ftype=DecFuncEnum.METHOD
     )
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self._allow_caching = kwargs.get('allow_cache', True)
+        self._long_names: bool = kwargs.get('long_names', False)
+        self._remove_parent_inherited: bool = kwargs.get('remove_parent_inherited', True)
         self._api_data = ApiInterfaceData(
-            url_soup=self.url, allow_cache=self._allow_cache)
+            url_soup=self.url,
+            allow_cache=self.allow_cache,
+            long_names=self._long_names,
+            remove_parent_inherited=self._remove_parent_inherited
+            )
         self._requires_typing = False
         self._imports: Set[str] = set()
         self._cache = {}
@@ -201,9 +209,16 @@ class Parser(base.ParserBase):
 
     def get_parser_args(self) -> dict:
         args = {
-            "sort": self.sort
+            "sort": self.sort,
+            "long_names": self.long_names,
+            "remove_parent_inherited": self._remove_parent_inherited
         }
         return args
+
+    def get_full_name(self) -> str:
+        ni = self._api_data.name.get_obj()
+        return self._api_data.ns.namespace_str + '.' + ni.name
+        
 
     def get_info(self) -> Dict[str, object]:
         """
@@ -225,12 +240,11 @@ class Parser(base.ParserBase):
         ex = []
         for el in self._api_data.inherited.get_obj():
             ex.append(el.fullns)
+        # ex_s = base.Util.get_clean_imports(ns=ns.namespace_str, imports=ex)
         ni = self._api_data.name.get_obj()
         result = {
             # 'name': ni.name,
             'name': ni.name,
-            # convert set to list for json
-            # 'imports': list(im.get_obj()),
             'imports': [],
             'namespace': self._api_data.ns.namespace_str,
             'extends': ex,
@@ -411,6 +425,16 @@ class Parser(base.ParserBase):
     def api_data(self) -> ApiInterfaceData:
         return self._api_data
 
+
+    @property
+    def long_names(self) -> bool:
+        """Gets long_names value"""
+        return self._long_names
+    
+    @property
+    def remove_parent_inherited(self) -> bool:
+        """Gets remove_parent_inherited value"""
+        return self._remove_parent_inherited
     # endregion Properties
 # endregion Parse
 
@@ -438,8 +462,12 @@ class Writer(base.WriteBase):
         self._write_json: bool = kwargs.get('write_json', False)
         self._clear_on_print: bool = kwargs.get('clear_on_print', True)
         self._include_desc: bool = kwargs.get('include_desc', True)
+        self._json_out: bool = kwargs.get('json_out', True)
+        self._allow_db = kwargs.get('allow_db', True)
         self._write_template_long: bool = kwargs.get(
             'write_template_long', False)
+        self._allow_known_json: bool = bool(kwargs.get('allow_known_json', True))
+        self._write_path: Union[str, None] = kwargs.get('write_path', None)
         self._indent_amt = 4
         self._json_str = None
         self._p_name: str = None
@@ -479,7 +507,13 @@ class Writer(base.WriteBase):
         """
         return 'interface'
 
-    def write(self):
+    def write(self) -> Union[str, None]:
+        """
+        Writes files/templates according to parameters
+
+        Returns:
+            Union[str, None]: Returns json string if ``json_out`` is ``True``
+        """
         self._set_info()
         self._set_template_data()
         logger.info("Processing %s.%s", self._p_namespace, self._p_name)
@@ -498,6 +532,8 @@ class Writer(base.WriteBase):
                 self._write_to_file()
             if self._write_json:
                 self._write_to_json()
+            if self._json_out:
+                return self._get_json()
         except Exception as e:
             logger.exception(e)
 
@@ -507,12 +543,21 @@ class Writer(base.WriteBase):
     def _get_json(self) -> str:
         if not self._json_str is None:
             return self._json_str
+        if self._allow_known_json:
+            full_ns = self._parser.get_full_name()
+            known_json = base.get_known_json(full_ns=full_ns)
+            if known_json:
+                self._json_str = known_json
+                return self._json_str
         p_dict = {}
+        p_dict['allow_db'] = self._allow_db
         p_dict['from_imports'] = self._get_from_imports()
         p_dict['from_imports_typing'] = self._get_from_imports_typing()
+        p_dict['extends_map'] = self._get_imports_map()
         p_dict['quote'] = self._get_quote_flat()
         p_dict['typings'] = self._get_typings()
         p_dict['requires_typing'] = self._p_requires_typing
+        p_dict['full_imports'] = self._get_full_imports()
         p_dict.update(self._parser.get_dict_data())
 
         json_dict = {
@@ -537,18 +582,51 @@ class Writer(base.WriteBase):
         with open(self._template_file) as f:
             contents = f.read()
         return contents
-
+       
     # region get Imports
+    def _get_full_imports(self) -> Dict[str, List[str]]:
+        key = '_get_full_imports'
+        if key in self._cache:
+            return self._cache[key]
+        def get_imports() -> List[str]:
+            ims = []
+            lst_im = list(self._p_imports)
+            # sort for consistency in json
+            lst_im.sort()
+            for ns in lst_im:
+                ims.append(base.Util.get_full_import(ns=self._p_namespace, name=ns))
+            return ims
+        def get_imports_typing() -> List[str]:
+            ims = []
+            lst_im = list(self._p_imports_typing)
+            # sort for consistency in json
+            lst_im.sort()
+            for ns in lst_im:
+                ims.append(base.Util.get_full_import(ns=self._p_namespace, name=ns))
+            return ims
+        result = {
+            "general": get_imports(),
+            "typing": get_imports_typing()
+        }
+        self._cache[key] = result
+        return self._cache[key]
+    
     def _get_from_imports(self) -> List[List[str]]:
         key = '_get_from_imports'
         if key in self._cache:
             return self._cache[key]
         lst = []
-        for ns in self._p_imports:
-            f, n = base.Util.get_rel_import(
-                i_str=ns, ns=self._p_namespace
-            )
-            lst.append([f, n])
+        if self._parser.long_names:
+            rel_fn = base.Util.get_rel_import_long
+        else:
+            rel_fn = base.Util.get_rel_import
+        lst_im = list(self._p_imports)
+        # sort for consistency in json
+        lst_im.sort()
+        for ns in lst_im:
+            # f, n = rel_fn(ns, self._p_namespace)
+            # lst.append([f, n])
+            lst.append([*rel_fn(ns, self._p_namespace)])
         self._cache[key] = lst
         return self._cache[key]
 
@@ -557,14 +635,33 @@ class Writer(base.WriteBase):
         if key in self._cache:
             return self._cache[key]
         lst = []
-        for ns in self._p_imports_typing:
-            f, n = base.Util.get_rel_import(
-                i_str=ns, ns=self._p_namespace
-            )
-            # lst.append(f)
-            # lst.append(n)
-            lst.append([f, n])
+        if self._parser.long_names:
+            rel_fn = base.Util.get_rel_import_long
+        else:
+            rel_fn = base.Util.get_rel_import
+        lst_im = list(self._p_imports_typing)
+        # sort for consistency in json
+        lst_im.sort()
+        for ns in lst_im:
+            # f, n = rel_fn(ns, self._p_namespace)
+            # lst.append([f, n])
+            lst.append([*rel_fn(ns, self._p_namespace)])
         self._cache[key] = lst
+        return self._cache[key]
+
+    def _get_imports_map(self) -> Dict[str, str]:
+        key = '_get_imports_map'
+        if key in self._cache:
+            return self._cache[key]
+        results = {}
+        if self._parser.long_names is False:
+            return results
+        # sort for consistency in json
+        lst = list(self._p_imports)
+        lst.sort()
+        for im in lst:
+            results[im] = base.Util.get_rel_import_long_name(im, ns=self._p_namespace)
+        self._cache[key] = results
         return self._cache[key]
 
     def _get_quote_flat(self) -> List[str]:
@@ -608,7 +705,10 @@ class Writer(base.WriteBase):
             if t.requires_typing or t.is_py_type is False:
                 t_set.add(t.type)
 
-        self._cache[key] = list(t_set)
+        lst = list(t_set)
+        # sort for consistency in json
+        lst.sort()
+        self._cache[key] = lst
         return self._cache[key]
 
     def _get_typings(self) -> List[str]:
@@ -643,7 +743,10 @@ class Writer(base.WriteBase):
             t = si.p_type
             if t.requires_typing:
                 t_set.add(t.type)
-        self._cache[key] = list(t_set)
+        lst = list(t_set)
+        # sort for consistency in json
+        lst.sort()
+        self._cache[key] = lst
         return self._cache[key]
     # endregion get Imports
 
@@ -653,7 +756,12 @@ class Writer(base.WriteBase):
         self._template = self._template.replace('{name}', self._p_name)
         self._template = self._template.replace('{ns}', str(self._p_namespace))
         self._template = self._template.replace('{link}', self._p_url)
-
+        self._template = self._template.replace(
+            '{allow_db}', str(self._allow_db))
+        self._template = self._template.replace(
+            '{extends_map}', base.Util.get_formated_dict_list_str(self._get_imports_map()))
+        self._template = self._template.replace(
+            '{libre_office_ver}', base.APP_CONFIG.libre_office_ver)
         self._template = self._template.replace(
             '{quote}',
             str(set(self._get_quote_flat())))
@@ -695,13 +803,10 @@ class Writer(base.WriteBase):
         if key in self._cache:
             return
 
-        def get_extends(lst: List[str]) -> List[str]:
-            return [base.Util.get_last_part(s) for s in lst]
-            # return [s.rsplit('.', 1)[1] for s in lst]
         data = self._parser.get_info()
         self._p_name = data['name']
         self._p_namespace = data['namespace']
-        self._p_extends = get_extends(data['extends'])
+        self._p_extends = data['extends']
         self._p_desc = data['desc']
         self._p_url = data['url']
         self._p_data = self._parser.get_formated_data()
@@ -711,6 +816,14 @@ class Writer(base.WriteBase):
         self._p_imports.update(_imports)
         self._p_imports.update(data['extends'])
         self._p_imports_typing.update(self._parser.imports)
+        self._p_imports = base.Util.get_clean_imports(
+            ns=self._p_namespace,
+            imports=self._p_imports
+        )
+        self._p_imports_typing = base.Util.get_clean_imports(
+            ns=self._p_namespace,
+            imports=self._p_imports_typing
+        )
         # in some cases such as XIntrospectionAccess
         # https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1beans_1_1XIntrospectionAccess.html
         # class is a subclass of XInterface and has a method the has return type XInterface.
@@ -754,9 +867,11 @@ class Writer(base.WriteBase):
             except Exception as e:
                 logger.error(e, exc_info=True)
                 raise e
-
-        uno_obj_path = Path(self._path_dir.parent,
-                            base.APP_CONFIG.uno_base_dir)
+        if self._write_path:
+            write_path = self._write_path
+        else:
+            write_path = base.APP_CONFIG.uno_base_dir
+        uno_obj_path = Path(self._path_dir.parent, write_path)
         name_parts: List[str] = self._p_namespace.split('.')
         # ignore com, sun, star
         path_parts = name_parts[3:]
@@ -781,89 +896,6 @@ class Writer(base.WriteBase):
 # endregion Writer
 
 # region Parse method
-def _get_parsed_kwargs(**kwargs) -> Dict[str, str]:
-    required = ("url",)
-    lookups = {
-        "u": "url",
-        "url": "url",
-        "L": "log_file",
-        "log_file": "log_file"
-    }
-    result = {}
-    for k, v in kwargs.items():
-        if not isinstance(k, str):
-            continue
-        if k in lookups:
-            key = lookups[k]
-            result[key] = v
-    for k in required:
-        if not k in result:
-            # k is missing from kwargs
-            raise base.RequiredError(f"Missing required arg {k}.")
-    return result
-
-
-def _get_parsed_args(*args) -> Dict[str, bool]:
-    # key, value and value is a key into defaults
-    defaults = {
-        'no_sort': True,
-        "no_cache": True,
-        "no_desc": True,
-        "no_print_clear": True,
-        "long_template": False,
-        "clipboard": False,
-        "print_json": False,
-        "print_template": False,
-        "write_template": False,
-        "write_json": False,
-        "verbose": False
-    }
-    found = {
-        'no_sort': False,
-        "no_cache": False,
-        "no_desc": False,
-        "no_print_clear": False,
-        "long_template": True,
-        "clipboard": True,
-        "print_json": True,
-        "print_template": True,
-        "write_template": True,
-        "write_json": True,
-        "verbose": True
-    }
-    lookups = {
-        "s": "no_sort",
-        "no_sort": "no_sort",
-        "x": "no_cache",
-        "no_cache": "no_cache",
-        "d": "do_desc",
-        "no_desc": "no_desc",
-        "p": "no_print_clear",
-        "no_print_clear": "no_print_clear",
-        "g": "long_template",
-        "long_template": "long_template",
-        "c": "clipboard",
-        "clipboard": "clipboard",
-        "n": "print_json",
-        "print_json": "print_json",
-        "m": "print_template",
-        "print_template": "print_template",
-        "t": "write_template",
-        "write_template": "write_template",
-        "j": "write_json",
-        "write_json": "write_json",
-        "v": "verbose",
-        "verbose": "verbose"
-    }
-    result = {k: v for k, v in defaults.items()}
-    for arg in args:
-        if not isinstance(arg, str):
-            continue
-        if arg in lookups:
-            key = lookups[arg]
-            result[key] = found[key]
-    return result
-
 
 class Processer:
     """Processes parsing and writing"""
@@ -876,39 +908,57 @@ class Processer:
             p (type[Parser]): Parser class
             w (type[Writer]): Writer class
 
-        Other Arguments:
+        Keyword Arguments:
             url (str): url to parse
-            sort (bool, optional): No sorting of results. Default ``True``
-            cache (bool, optional): caching. Default ``False``
-            clear_on_print (bool, optional): No clearing of terminal when otuput to terminal. Default ``False``
-            write_template_long (bool, optional): Writes a long format template. Requires write_template is set. Default ``False``
-            copy_clipboard (bool, optional): Copy to clipboard. Default ``False``
-            print_json (bool, optional):Print json to termainl. Default ``False``
-            print_template (bool, optional): Print template to terminal. Default ``False``
-            write_template (bool, optional): Write template file into obj_uno subfolder. Default ``False``
-            write_json (bool, optional): Write json file into obj_uno subfolder. Default ``False``
-            verbose (bool, optional): Verobose output. Default ``False``
+            sort (str, optional): Sorting of results. Default ``True``
+            cache (str, optional): Caching. Default ``False``
+            clear_on_print (str, optional): Clearing of terminal when otuput to terminal. Default ``False``
+            include_desc (str, optional): Description will be outputed in template. Default ``True``
+            json_out (bool, optional): returns json to caller if ``True``. Default ``False``
+            long_names (str, optional): Long names. Default set in config ``use_long_import_names`` property.
+                Toggles values set in config.
+            write_template_long (str, optional): Writes a long format template.
+                Requires write_template is set. Default ``False``
+            copy_clipboard (str, optional): Copy to clipboard. Default ``False``
+            print_json (str, optional): Print json to termainl. Default ``False``
+            print_template (str, optional): Print template to terminal. Default ``False``
+            write_template (str, optional): Write template file into obj_uno subfolder. Default ``False``
+            write_json (str, optional): Write json file into obj_uno subfolder. Default ``False``
+            write_path (str, optional): The root path to write data files (json, tmpl) into. Defaut set in config ``uno_base_dir``
+            allow_known_json (bool, optional): Allow Known Json to be used. Default ``True``
+            verbose (str, optional): Verobose output.
+            log_file (str, optional): Log File
+            remove_parent_inherited (bool, optional): Determins if parsers remove classes from inhertiance if an inherited class
+                is already inherited by a parent class.
         """
         self._parser = p
         self._writer = w
         self._url = str(kwargs['url'])
         self._sort = bool(kwargs.get('sort', True))
         self._cache = bool(kwargs.get('cache', False))
+        self._json_out = bool(kwargs.get('json_out', False))
         self._print_clear = bool(kwargs.get('clear_on_print', False))
         self._long_template = bool(kwargs.get('write_template_long', False))
         self._clipboard = bool(kwargs.get('copy_clipboard', False))
         self._print_json = bool(kwargs.get('print_json', False))
         self._print_template = bool(kwargs.get('print_template', False))
         self._write_template = bool(kwargs.get('write_template', False))
-        self._write_json = bool(kwargs.get('write_json', bool))
+        self._write_json = bool(kwargs.get('write_json', False))
         self._verbose = bool(kwargs.get('verbose', False))
         self._include_desc = bool(kwargs.get('include_desc', True))
+        self._long_names = bool(kwargs.get('long_names', base.APP_CONFIG.use_long_import_names))
+        self._remove_parent_inherited = bool(
+            kwargs.get('remove_parent_inherited', base.APP_CONFIG.remove_parent_inherited))
+        self._allow_know_json = bool(kwargs.get('allow_known_json', True))
+        self._write_path: Union[str, None] = kwargs.get('write_path', None)
 
-    def process(self) -> None:
+    def process(self) -> Union[str, None]:
         parser = self._parser(
             url=self._url,
             sort=self._sort,
-            cache=self._cache
+            cache=self._cache,
+            long_names=self._long_names,
+            remove_parent_inherited=self._remove_parent_inherited
         )
         w = self._writer(
             parser=parser,
@@ -919,44 +969,100 @@ class Processer:
             write_json=self._write_json,
             clear_on_print=self._print_clear,
             write_template_long=self._long_template,
-            include_desc=self._include_desc
+            include_desc=self._include_desc,
+            json_out=self._json_out,
+            allow_known_json=self._allow_know_json,
+            write_path=self._write_path
         )
-        w.write()
+        return w.write()
 
 
-def parse(*args, **kwargs):
+def get_kwargs_from_args(args: argparse.ArgumentParser) -> dict:
+    """
+    Converts argparse args into dictionary that can be passed to ``parse()``
+
+    Args:
+        args (argparse.ArgumentParser): args
+
+    Returns:
+        dict: dictionary that contain key values matching ``parser()`` args.
+    """
+    d = {
+        "url": args.url,
+        "sort": args.sort,
+        "cache": args.cache,
+        "clear_on_print": args.print_clear,
+        "copy_clipboard": args.clipboard,
+        "print_template": args.print_template,
+        "write_template": args.write_template,
+        "write_template_long": args.long_format,
+        "print_json": args.print_json,
+        "write_json": args.write_json,
+        "include_desc": args.desc,
+        "long_names": args.long_names,
+        "allow_known_json": args.allow_know_json,
+        "log_file": args.log_file,
+        "verbose": args.verbose
+    }
+    if args.write_path:
+        d['write_path'] = args.write_path
+    return d
+
+def parse(**kwargs) -> Union[str, None]:
     """
     Parses data, alternative to running on command line.
 
-    Other Arguments:
-        'no_sort' (str, optional): Short form ``'s'``. No sorting of results. Default ``False``
-        'no_cache' (str, optional): Short form ``'x'``. No caching. Default ``False``
-        'no_print_clear (str, optional): Short form ``'p'``. No clearing of terminal
-            when otuput to terminal. Default ``False``
-        'no_desc' (str, optional): Short from ``'d'``. No description will be outputed in template. Default ``False``
-        'long_template' (str, optional): Short form ``'g'``. Writes a long format template.
-            Requires write_template is set. Default ``False``
-        'clipboard' (str, optional): Short form ``'c'``. Copy to clipboard. Default ``False``
-        'print_json' (str, optional): Short form ``'n'``. Print json to termainl. Default ``False``
-        'print_template' (str, optional): Short form ``'m'``. Print template to terminal. Default ``False``
-        'write_template' (str, optional): Short form ``'t'``. Write template file into obj_uno subfolder. Default ``False``
-        'write_json' (str, optional): Short form ``'j'``. Write json file into obj_uno subfolder. Default ``False``
-        'verbose' (str, optional): Short form ``'v'``. Verobose output.
-
     Keyword Arguments:
-        url (str): Short form ``u``. url to parse
-        log_file (str, optional): Short form ``L``. Log File
+        url (str): url to parse
+        sort (str, optional): Sorting of results. Default ``True``
+        cache (str, optional): Caching. Default ``False``
+        clear_on_print (str, optional): Clearing of terminal when otuput to terminal. Default ``False``
+        include_desc (str, optional): Description will be outputed in template. Default ``True``
+        json_out (bool, optional): returns json to caller if ``True``. Default ``False``
+        long_names (str, optional): Long names. Default set in config ``use_long_import_names`` property.
+            Toggles values set in config.
+        write_template_long (str, optional): Writes a long format template.
+            Requires write_template is set. Default ``False``
+        copy_clipboard (str, optional): Copy to clipboard. Default ``False``
+        print_json (str, optional): Print json to termainl. Default ``False``
+        print_template (str, optional): Print template to terminal. Default ``False``
+        write_template (str, optional): Write template file into obj_uno subfolder. Default ``False``
+        write_json (str, optional): Write json file into obj_uno subfolder. Default ``False``
+        write_path (str, optional): The root path to write data files (json, tmpl) into. Defaut set in config ``uno_base_dir``
+        allow_known_json (bool, optional): Allow Known Json to be used. Default ``True``
+        verbose (str, optional): Verobose output.
+        log_file (str, optional): Log File
+    
+    Returns:
+        Union[str, None]: Returns json string if json_out is ``True``
     """
     global logger
-    pkwargs = _get_parsed_kwargs(**kwargs)
-    pargs = _get_parsed_args(*args)
+    _url = str(kwargs['url'])
+    _sort = bool(kwargs.get('sort', True))
+    _cache = bool(kwargs.get('cache', True))
+    _json_out = bool(kwargs.get('json_out', False))
+    _print_clear = bool(kwargs.get('clear_on_print', False))
+    _clipboard = bool(kwargs.get('copy_clipboard', False))
+    _print_template = bool(kwargs.get('print_template', False))
+    _write_template = bool(kwargs.get('write_template', False))
+    _long_template = bool(kwargs.get('write_template_long', False))
+    _print_json = bool(kwargs.get('print_json', False))
+    _write_json = bool(kwargs.get('write_json', bool))
+    _include_desc = bool(kwargs.get('include_desc', True))
+    _long_names = bool(kwargs.get(
+        'long_names', base.APP_CONFIG.use_long_import_names))
+    _allow_know_json = bool(kwargs.get('allow_known_json', True))
+    _log_file = kwargs.get('log_file', None)
+    _verbose = bool(kwargs.get('verbose', False))
+    _write_path= kwargs.get('write_path', None)
+
     if logger is None:
         log_args = {}
-        if 'log_file' in pkwargs:
-            log_args['log_file'] = pkwargs['log_file']
+        if _log_file:
+            log_args['log_file'] = _log_file
         else:
             log_args['log_file'] = 'interface.log'
-        if pargs['verbose']:
+        if _verbose:
             log_args['level'] = logging.DEBUG
         _set_loggers(get_logger(logger_name=Path(__file__).stem, **log_args))
     parser: Parser = kwargs.get('class_parser', Parser)
@@ -964,58 +1070,73 @@ def parse(*args, **kwargs):
     proc = Processer(
         p=parser,
         w=writer,
-        url=pkwargs['url'],
-        sort=pargs['no_sort'],
-        cache=pargs['no_cache'],
-        print_template=pargs['print_template'],
-        print_json=pargs['print_json'],
-        copy_clipboard=pargs['clipboard'],
-        write_template=pargs['write_template'],
-        write_json=pargs['write_json'],
-        clear_on_print=(not pargs['no_print_clear']),
-        write_template_long=pargs['long_template'],
-        include_desc=pargs['no_desc']
+        url=_url,
+        sort=_sort,
+        cache=_cache,
+        print_template=_print_template,
+        print_json=_print_json,
+        copy_clipboard=_clipboard,
+        write_template=_write_template,
+        write_json=_write_json,
+        clear_on_print=_print_clear,
+        write_template_long=_long_template,
+        include_desc=_include_desc,
+        long_names=_long_names,
+        json_out=_json_out,
+        allow_known_json=_allow_know_json,
+        write_path=_write_path
     )
-    proc.process()
+    return proc.process()
 
 # endregion Parse method
 
 # region Main
 def _main():
     os.system('cls' if os.name == 'nt' else 'clear')
-    # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1beans_1_1XHierarchicalPropertySet.html'
     # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1beans_1_1XIntrospectionAccess.html' # has a sequence
-    # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1accessibility_1_1XAccessibleTextSelection.html'
-    # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XStyleSettings.html'
     # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1inspection_1_1XPropertyControl.html'  # no import
-    # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XMessageBoxFactory.html'
-    # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1report_1_1XReportControlModel.html'
     # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1grid_1_1XGridColumnModel.html'
-    url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1security_1_1XPolicy.html'
-    args = ('v', 'n', 'x')
+    # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1deployment_1_1XPackage.html'
+    # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1tree_1_1XMutableTreeNode.html'
+    url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XDevice.html'
     kwargs = {
-        "u": url,
-        "log_file": "debug.log"
+        "url": url,
+        "log_file": "debug.log",
+        'verbose': True,
+        "write_json": True,
+        "write_path": 'scratch/uno_obj'
     }
     # sys.argv.extend(['--log-file', 'debug.log', '-v', '-n', '-u', url])
     # main()
-    parse(*args, **kwargs)
+    parse(**kwargs)
 
 
-def get_cmd_args() -> argparse.Namespace:
-    # region Parser
-    parser = argparse.ArgumentParser(description='interface')
+# region Parser
+def set_cmd_args(parser: argparse.ArgumentParser) -> None:
     parser.add_argument(
         '-u', '--url',
         help='Source Url',
         type=str,
         required=True)
     parser.add_argument(
+        '-o', '--out',
+        help=f"Out path of templates and json data. Default: '{base.APP_CONFIG.uno_base_dir}'",
+        type=str,
+        dest='write_path',
+        default=None,
+        required=False)
+    parser.add_argument(
         '-d', '--no-desc',
         help='No description will be outputed in template',
         action='store_false',
         dest='desc',
         default=True)
+    parser.add_argument(
+        '-l', '--long-names',
+        help='Toggels default value of config. Short Names such as XInterface will be generated instead of XInterface_8f010a43 or vice versa',
+        action='store_false' if base.APP_CONFIG.use_long_import_names else 'store_true',
+        dest='long_names',
+        default=base.APP_CONFIG.use_long_import_names)
     parser.add_argument(
         '-s', '--no-sort',
         help='No sorting of results',
@@ -1032,7 +1153,7 @@ def get_cmd_args() -> argparse.Namespace:
         '-p', '--no-print-clear',
         help='No clearing of terminal when output to terminal.',
         action='store_false',
-        dest='no_print_clear',
+        dest='print_clear',
         default=True)
     parser.add_argument(
         '-g', '--long-template',
@@ -1071,6 +1192,15 @@ def get_cmd_args() -> argparse.Namespace:
         dest='write_json',
         default=False)
     parser.add_argument(
+        '-k', '--no-allow-known-json',
+        help='Do not allow Known Json',
+        action='store_false',
+        dest='allow_know_json',
+        default=True)
+
+
+def set_cmd_args_local(parser) -> None:
+    parser.add_argument(
         '-v', '--verbose',
         help='verbose logging',
         action='store_true',
@@ -1081,14 +1211,15 @@ def get_cmd_args() -> argparse.Namespace:
         help='Log file to use. Defaults to interface.log',
         type=str,
         required=False)
-    # endregion Parser
-    args = parser.parse_args()
-    return args
 
+# endregion Parser
 
 def main():
     global logger
-    args = get_cmd_args()
+    parser = argparse.ArgumentParser(description='interface')
+    set_cmd_args(parser)
+    set_cmd_args_local(parser)
+    args = parser.parse_args()
     if logger is None:
         log_args = {}
         if args.log_file:
@@ -1099,28 +1230,15 @@ def main():
             log_args['level'] = logging.DEBUG
         _set_loggers(get_logger(logger_name=Path(__file__).stem, **log_args))
 
-    if not args.no_print_clear:
+    if args.print_clear:
         os.system('cls' if os.name == 'nt' else 'clear')
     logger.info('Executing command: %s', sys.argv[1:])
     logger.info('Parsing Url %s' % args.url)
+    args_dict = get_kwargs_from_args(args)
 
-    proc = Processer(
-        p=Parser,
-        w=Writer,
-        url=args.url,
-        sort=args.sort,
-        print_template=args.print_template,
-        print_json=args.print_json,
-        copy_clipboard=args.clipboard,
-        write_template=args.write_template,
-        write_json=args.write_json,
-        clear_on_print=(not args.no_print_clear),
-        write_template_long=args.long_format,
-        include_desc=args.desc
-    )
     if args.print_template is False and args.print_json is False:
         print('')
-    proc.process()
+    parse(**args_dict)
 
 
 if __name__ == '__main__':

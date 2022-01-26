@@ -1,46 +1,66 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XDialogProvider2",
   "type": "interface",
   "namespace": "com.sun.star.awt",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         ".x_dialog_provider",
-        "XDialogProvider"
+        "XDialogProvider",
+        "XDialogProvider_c70f0c47"
       ]
     ],
     "from_imports_typing": [
       [
+        ".x_dialog",
+        "XDialog",
+        "XDialog_709d08fc"
+      ],
+      [
         "..beans.named_value",
-        "NamedValue"
+        "NamedValue",
+        "NamedValue_a37a0af3"
       ],
       [
         "..uno.x_interface",
-        "XInterface"
-      ],
-      [
-        ".x_dialog",
-        "XDialog"
+        "XInterface",
+        "XInterface_8f010a43"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.awt.XDialogProvider": "XDialogProvider_c70f0c47"
+    },
     "quote": [
-      "XInterface",
-      "typing.List[NamedValue]",
-      "XDialog"
+      "XDialog_709d08fc",
+      "XInterface_8f010a43",
+      "typing.List[NamedValue_a37a0af3]"
     ],
     "typings": [
-      "typing.List[NamedValue]"
+      "typing.List[NamedValue_a37a0af3]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.awt.XDialogProvider"
+      ],
+      "typing": [
+        "com.sun.star.awt.XDialog",
+        "com.sun.star.beans.NamedValue",
+        "com.sun.star.uno.XInterface"
+      ]
+    },
     "name": "XDialogProvider2",
     "imports": [],
     "namespace": "com.sun.star.awt",
@@ -55,7 +75,7 @@
       "methods": [
         {
           "name": "createDialogWithArguments",
-          "returns": "XDialog",
+          "returns": "XDialog_709d08fc",
           "desc": [
             "creates a dialog for the given URL, accepting additional creation parameters",
             "",
@@ -72,14 +92,14 @@
             ],
             [
               "Arguments",
-              "typing.List[NamedValue]",
+              "typing.List[NamedValue_a37a0af3]",
               "in"
             ]
           ]
         },
         {
           "name": "createDialogWithHandler",
-          "returns": "XDialog",
+          "returns": "XDialog_709d08fc",
           "desc": [
             "creates a dialog for the given URL accepting an Interface used to handle dialog events.",
             "",
@@ -110,7 +130,7 @@
             ],
             [
               "xHandler",
-              "XInterface",
+              "XInterface_8f010a43",
               "in"
             ]
           ]

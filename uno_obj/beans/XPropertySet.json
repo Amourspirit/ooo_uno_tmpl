@@ -1,44 +1,64 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XPropertySet",
   "type": "interface",
   "namespace": "com.sun.star.beans",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "XInterface_8f010a43"
       ]
     ],
     "from_imports_typing": [
       [
+        ".x_property_change_listener",
+        "XPropertyChangeListener",
+        "XPropertyChangeListener_58e4105a"
+      ],
+      [
         ".x_property_set_info",
-        "XPropertySetInfo"
+        "XPropertySetInfo",
+        "XPropertySetInfo_efa90d86"
       ],
       [
         ".x_vetoable_change_listener",
-        "XVetoableChangeListener"
-      ],
-      [
-        ".x_property_change_listener",
-        "XPropertyChangeListener"
+        "XVetoableChangeListener",
+        "XVetoableChangeListener_55a41027"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
     "quote": [
-      "XPropertyChangeListener",
-      "XPropertySetInfo",
-      "XVetoableChangeListener"
+      "XPropertyChangeListener_58e4105a",
+      "XPropertySetInfo_efa90d86",
+      "XVetoableChangeListener_55a41027"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.beans.XPropertyChangeListener",
+        "com.sun.star.beans.XPropertySetInfo",
+        "com.sun.star.beans.XVetoableChangeListener"
+      ]
+    },
     "name": "XPropertySet",
     "imports": [],
     "namespace": "com.sun.star.beans",
@@ -79,7 +99,7 @@
             ],
             [
               "xListener",
-              "XPropertyChangeListener",
+              "XPropertyChangeListener_58e4105a",
               "in"
             ]
           ]
@@ -104,14 +124,14 @@
             ],
             [
               "aListener",
-              "XVetoableChangeListener",
+              "XVetoableChangeListener_55a41027",
               "in"
             ]
           ]
         },
         {
           "name": "getPropertySetInfo",
-          "returns": "XPropertySetInfo",
+          "returns": "XPropertySetInfo_efa90d86",
           "desc": [],
           "raises": [],
           "args": []
@@ -154,7 +174,7 @@
             ],
             [
               "aListener",
-              "XPropertyChangeListener",
+              "XPropertyChangeListener_58e4105a",
               "in"
             ]
           ]
@@ -179,7 +199,7 @@
             ],
             [
               "aListener",
-              "XVetoableChangeListener",
+              "XVetoableChangeListener_55a41027",
               "in"
             ]
           ]

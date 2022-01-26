@@ -1,31 +1,47 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "GroupUpdate",
   "type": "service",
   "namespace": "com.sun.star.configuration",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
-        "..container.x_name_replace",
-        "XNameReplace"
+        ".group_access",
+        "GroupAccess",
+        "GroupAccess_1f8f0edf"
       ],
       [
-        ".group_access",
-        "GroupAccess"
+        "..container.x_name_replace",
+        "XNameReplace",
+        "XNameReplace_f0900d60"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.configuration.GroupAccess": "GroupAccess_1f8f0edf",
+      "com.sun.star.container.XNameReplace": "XNameReplace_f0900d60"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
+    "full_imports": {
+      "general": [
+        "com.sun.star.configuration.GroupAccess",
+        "com.sun.star.container.XNameReplace"
+      ],
+      "typing": []
+    },
     "name": "GroupUpdate",
     "imports": [],
     "namespace": "com.sun.star.configuration",

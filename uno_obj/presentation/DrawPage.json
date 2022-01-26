@@ -1,43 +1,64 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "DrawPage",
   "type": "service",
   "namespace": "com.sun.star.presentation",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..document.link_target",
-        "LinkTarget"
+        "LinkTarget",
+        "LinkTarget_ca220c5c"
       ],
       [
         "..drawing.draw_page",
-        "DrawPage"
+        "DrawPage",
+        "DrawPage_a56e0aff"
       ]
     ],
     "from_imports_typing": [
       [
-        ".fade_effect",
-        "FadeEffect"
+        ".animation_speed",
+        "AnimationSpeed",
+        "AnimationSpeed_3fb20fb5"
       ],
       [
-        ".animation_speed",
-        "AnimationSpeed"
+        ".fade_effect",
+        "FadeEffect",
+        "FadeEffect_1890de1"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.document.LinkTarget": "LinkTarget_ca220c5c",
+      "com.sun.star.drawing.DrawPage": "DrawPage_a56e0aff"
+    },
     "quote": [
-      "AnimationSpeed",
-      "FadeEffect"
+      "AnimationSpeed_3fb20fb5",
+      "FadeEffect_1890de1"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.document.LinkTarget",
+        "com.sun.star.drawing.DrawPage"
+      ],
+      "typing": [
+        "com.sun.star.presentation.AnimationSpeed",
+        "com.sun.star.presentation.FadeEffect"
+      ]
+    },
     "name": "DrawPage",
     "imports": [],
     "namespace": "com.sun.star.presentation",
@@ -99,7 +120,7 @@
         },
         {
           "name": "Effect",
-          "returns": "FadeEffect",
+          "returns": "FadeEffect_1890de1",
           "desc": [
             "This is the effect that is used to fade in this page."
           ],
@@ -189,7 +210,7 @@
         },
         {
           "name": "Speed",
-          "returns": "AnimationSpeed",
+          "returns": "AnimationSpeed_3fb20fb5",
           "desc": [
             "Defines the speed of the fade-in effect of this page."
           ],

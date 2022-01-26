@@ -1,12 +1,14 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "IntegerBitmapLayout",
   "namespace": "com.sun.star.rendering",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "sort": true,
@@ -21,16 +23,19 @@
     "from_imports_typing": [
       [
         ".x_bitmap_palette",
-        "XBitmapPalette"
+        "XBitmapPalette",
+        "XBitmapPalette_cf20e4a"
       ],
       [
         ".x_integer_bitmap_color_space",
-        "XIntegerBitmapColorSpace"
+        "XIntegerBitmapColorSpace",
+        "XIntegerBitmapColorSpace_b1691234"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "XBitmapPalette",
-      "XIntegerBitmapColorSpace"
+      "XBitmapPalette_cf20e4a",
+      "XIntegerBitmapColorSpace_b1691234"
     ],
     "typings": [],
     "requires_typing": true,
@@ -49,7 +54,7 @@
     "items": [
       {
         "name": "ColorSpace",
-        "type": "XIntegerBitmapColorSpace",
+        "type": "XIntegerBitmapColorSpace_b1691234",
         "lines": [
           "Color space the bitmap colors shall be interpreted within.",
           "",
@@ -69,7 +74,7 @@
       },
       {
         "name": "Palette",
-        "type": "XBitmapPalette",
+        "type": "XBitmapPalette_cf20e4a",
         "lines": [
           "This member determines whether the bitmap data are actually indices into a color map.",
           "",

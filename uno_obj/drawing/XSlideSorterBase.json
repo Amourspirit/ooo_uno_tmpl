@@ -1,43 +1,64 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XSlideSorterBase",
   "type": "interface",
   "namespace": "com.sun.star.drawing",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         ".x_draw_view",
-        "XDrawView"
+        "XDrawView",
+        "XDrawView_b0b80b75"
       ],
       [
         ".framework.x_view",
-        "XView"
+        "XView",
+        "XView_ffed0de3"
       ]
     ],
     "from_imports_typing": [
       [
         "..container.x_index_access",
-        "XIndexAccess"
+        "XIndexAccess",
+        "XIndexAccess_f0910d6d"
       ],
       [
         "..util.color",
-        "Color"
+        "Color",
+        "Color_68e908c5"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.drawing.XDrawView": "XDrawView_b0b80b75",
+      "com.sun.star.drawing.framework.XView": "XView_ffed0de3"
+    },
     "quote": [
-      "XIndexAccess",
-      "Color"
+      "Color_68e908c5",
+      "XIndexAccess_f0910d6d"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.drawing.XDrawView",
+        "com.sun.star.drawing.framework.XView"
+      ],
+      "typing": [
+        "com.sun.star.container.XIndexAccess",
+        "com.sun.star.util.Color"
+      ]
+    },
     "name": "XSlideSorterBase",
     "imports": [],
     "namespace": "com.sun.star.drawing",
@@ -55,14 +76,14 @@
       "properties": [
         {
           "name": "BackgroundColor",
-          "returns": "Color",
+          "returns": "Color_68e908c5",
           "desc": [],
           "raises_get": "",
           "raises_set": ""
         },
         {
           "name": "DocumentSlides",
-          "returns": "XIndexAccess",
+          "returns": "XIndexAccess_f0910d6d",
           "desc": [
             "The set of slides that are displayed by the implementing object.",
             "",
@@ -73,7 +94,7 @@
         },
         {
           "name": "HighlightColor",
-          "returns": "Color",
+          "returns": "Color_68e908c5",
           "desc": [],
           "raises_get": "",
           "raises_set": ""
@@ -168,14 +189,14 @@
         },
         {
           "name": "SelectionColor",
-          "returns": "Color",
+          "returns": "Color_68e908c5",
           "desc": [],
           "raises_get": "",
           "raises_set": ""
         },
         {
           "name": "TextColor",
-          "returns": "Color",
+          "returns": "Color_68e908c5",
           "desc": [],
           "raises_get": "",
           "raises_set": ""

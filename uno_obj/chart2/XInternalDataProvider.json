@@ -1,37 +1,53 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XInternalDataProvider",
   "type": "interface",
   "namespace": "com.sun.star.chart2",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         ".data.x_data_provider",
-        "XDataProvider"
+        "XDataProvider",
+        "XDataProvider_122f0e31"
       ]
     ],
     "from_imports_typing": [
       [
         ".data.x_data_sequence",
-        "XDataSequence"
+        "XDataSequence",
+        "XDataSequence_11f00e1f"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.chart2.data.XDataProvider": "XDataProvider_122f0e31"
+    },
     "quote": [
-      "typing.List[object]",
-      "XDataSequence"
+      "XDataSequence_11f00e1f",
+      "typing.List[object]"
     ],
     "typings": [
       "typing.List[object]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.chart2.data.XDataProvider"
+      ],
+      "typing": [
+        "com.sun.star.chart2.data.XDataSequence"
+      ]
+    },
     "name": "XInternalDataProvider",
     "imports": [],
     "namespace": "com.sun.star.chart2",
@@ -187,7 +203,7 @@
           "args": [
             [
               "xSeq",
-              "XDataSequence",
+              "XDataSequence_11f00e1f",
               "in"
             ]
           ]

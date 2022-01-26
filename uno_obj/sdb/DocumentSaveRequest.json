@@ -1,37 +1,53 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "DocumentSaveRequest",
   "type": "exception",
   "namespace": "com.sun.star.sdb",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..task.classified_interaction_request",
-        "ClassifiedInteractionRequest"
+        "ClassifiedInteractionRequest",
+        "ClassifiedInteractionRequest_9f72121b"
       ]
     ],
     "from_imports_typing": [
       [
         "..ucb.x_content",
-        "XContent"
+        "XContent",
+        "XContent_79db0975"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.task.ClassifiedInteractionRequest": "ClassifiedInteractionRequest_9f72121b"
+    },
     "quote": [
-      "XContent"
+      "XContent_79db0975"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.task.ClassifiedInteractionRequest"
+      ],
+      "typing": [
+        "com.sun.star.ucb.XContent"
+      ]
+    },
     "name": "DocumentSaveRequest",
-    "namespace": "com.sun.star.sdb",
     "imports": [],
+    "namespace": "com.sun.star.sdb",
     "extends": [
       "com.sun.star.task.ClassifiedInteractionRequest"
     ],
@@ -49,7 +65,7 @@
       "properties": [
         {
           "name": "Content",
-          "returns": "XContent",
+          "returns": "XContent_79db0975",
           "desc": [
             "specifies the content where the document should save inside.",
             "",

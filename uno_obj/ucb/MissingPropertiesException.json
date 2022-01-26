@@ -1,30 +1,47 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "MissingPropertiesException",
   "type": "exception",
   "namespace": "com.sun.star.ucb",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..uno.exception",
-        "Exception"
+        "Exception",
+        "Exception_85530a09"
       ]
     ],
     "from_imports_typing": [],
-    "quote": [],
-    "typings": [],
-    "requires_typing": false,
+    "extends_map": {
+      "com.sun.star.uno.Exception": "Exception_85530a09"
+    },
+    "quote": [
+      "typing.List[str]"
+    ],
+    "typings": [
+      "typing.List[str]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.Exception"
+      ],
+      "typing": []
+    },
     "name": "MissingPropertiesException",
-    "namespace": "com.sun.star.ucb",
     "imports": [],
+    "namespace": "com.sun.star.ucb",
     "extends": [
       "com.sun.star.uno.Exception"
     ],
@@ -34,6 +51,18 @@
       "For example, to create a new resource, usually one ore more property values must be set prior to executing the command \\\"insert\\\", which makes the new resource persistent."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/exceptioncom_1_1sun_1_1star_1_1ucb_1_1MissingPropertiesException.html",
-    "items": {}
+    "items": {
+      "types": [
+        {
+          "name": "Properties",
+          "returns": "typing.List[str]",
+          "desc": [
+            "contains the names of the missing properties."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
   }
 }

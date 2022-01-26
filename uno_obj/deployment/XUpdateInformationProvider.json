@@ -1,43 +1,58 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XUpdateInformationProvider",
   "type": "interface",
   "namespace": "com.sun.star.deployment",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [],
     "from_imports_typing": [
       [
-        "..xml.dom.x_element",
-        "XElement"
-      ],
-      [
         "..container.x_enumeration",
-        "XEnumeration"
+        "XEnumeration",
+        "XEnumeration_f2180daa"
       ],
       [
         "..task.x_interaction_handler",
-        "XInteractionHandler"
+        "XInteractionHandler",
+        "XInteractionHandler_bf80e51"
+      ],
+      [
+        "..xml.dom.x_element",
+        "XElement",
+        "XElement_a33d0ae9"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "typing.List[str]",
-      "XEnumeration",
-      "typing.List[XElement]",
-      "XInteractionHandler"
+      "XEnumeration_f2180daa",
+      "XInteractionHandler_bf80e51",
+      "typing.List[XElement_a33d0ae9]",
+      "typing.List[str]"
     ],
     "typings": [
-      "typing.List[str]",
-      "typing.List[XElement]"
+      "typing.List[XElement_a33d0ae9]",
+      "typing.List[str]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [],
+      "typing": [
+        "com.sun.star.container.XEnumeration",
+        "com.sun.star.task.XInteractionHandler",
+        "com.sun.star.xml.dom.XElement"
+      ]
+    },
     "name": "XUpdateInformationProvider",
     "imports": [],
     "namespace": "com.sun.star.deployment",
@@ -63,7 +78,7 @@
         },
         {
           "name": "getUpdateInformation",
-          "returns": "typing.List[XElement]",
+          "returns": "typing.List[XElement_a33d0ae9]",
           "desc": [
             "get update information for a specific extension or all available information from a repository."
           ],
@@ -85,7 +100,7 @@
         },
         {
           "name": "getUpdateInformationEnumeration",
-          "returns": "XEnumeration",
+          "returns": "XEnumeration_f2180daa",
           "desc": [
             "get update information for a specific extension or all available information from a repository."
           ],
@@ -117,7 +132,7 @@
           "args": [
             [
               "handler",
-              "XInteractionHandler",
+              "XInteractionHandler_bf80e51",
               "in"
             ]
           ]

@@ -1,34 +1,50 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "ImageMapCircleObject",
   "type": "service",
   "namespace": "com.sun.star.image",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         ".image_map_object",
-        "ImageMapObject"
+        "ImageMapObject",
+        "ImageMapObject_d1e20c63"
       ]
     ],
     "from_imports_typing": [
       [
         "..awt.point",
-        "Point"
+        "Point",
+        "Point_5fb2085e"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.image.ImageMapObject": "ImageMapObject_d1e20c63"
+    },
     "quote": [
-      "Point"
+      "Point_5fb2085e"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.image.ImageMapObject"
+      ],
+      "typing": [
+        "com.sun.star.awt.Point"
+      ]
+    },
     "name": "ImageMapCircleObject",
     "imports": [],
     "namespace": "com.sun.star.image",
@@ -43,7 +59,7 @@
       "properties": [
         {
           "name": "Center",
-          "returns": "Point",
+          "returns": "Point_5fb2085e",
           "desc": [
             "This is the center point of the circle in pixels."
           ],

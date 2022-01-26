@@ -1,12 +1,14 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "ListEvent",
   "namespace": "com.sun.star.ucb",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "sort": true,
@@ -20,20 +22,25 @@
     "from_imports": [
       [
         "..lang.event_object",
-        "EventObject"
+        "EventObject",
+        "EventObject_a3d70b03"
       ]
     ],
     "from_imports_typing": [
       [
         ".list_action",
-        "ListAction"
+        "ListAction",
+        "ListAction_8df40a3c"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.lang.EventObject": "EventObject_a3d70b03"
+    },
     "quote": [
-      "typing.List[ListAction]"
+      "typing.List[ListAction_8df40a3c]"
     ],
     "typings": [
-      "typing.List[ListAction]"
+      "typing.List[ListAction_8df40a3c]"
     ],
     "requires_typing": true,
     "fullname": "com.sun.star.ucb.ListEvent",
@@ -47,7 +54,7 @@
     "items": [
       {
         "name": "Changes",
-        "type": "typing.List[ListAction]",
+        "type": "typing.List[ListAction_8df40a3c]",
         "lines": [
           "If you apply the given ListActions one after the other to the old version of a result set in given order, you will get the positions in the new version."
         ]

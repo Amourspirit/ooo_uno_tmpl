@@ -1,34 +1,50 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XDiagram",
   "type": "interface",
   "namespace": "com.sun.star.chart",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..drawing.x_shape",
-        "XShape"
+        "XShape",
+        "XShape_8fd00a3d"
       ]
     ],
     "from_imports_typing": [
       [
         "..beans.x_property_set",
-        "XPropertySet"
+        "XPropertySet",
+        "XPropertySet_bc180bfa"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.drawing.XShape": "XShape_8fd00a3d"
+    },
     "quote": [
-      "XPropertySet"
+      "XPropertySet_bc180bfa"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.drawing.XShape"
+      ],
+      "typing": [
+        "com.sun.star.beans.XPropertySet"
+      ]
+    },
     "name": "XDiagram",
     "imports": [],
     "namespace": "com.sun.star.chart",
@@ -43,7 +59,7 @@
       "methods": [
         {
           "name": "getDataPointProperties",
-          "returns": "XPropertySet",
+          "returns": "XPropertySet_bc180bfa",
           "desc": [],
           "raises": [
             "com.sun.star.lang.IndexOutOfBoundsException"
@@ -63,7 +79,7 @@
         },
         {
           "name": "getDataRowProperties",
-          "returns": "XPropertySet",
+          "returns": "XPropertySet_bc180bfa",
           "desc": [],
           "raises": [
             "com.sun.star.lang.IndexOutOfBoundsException"

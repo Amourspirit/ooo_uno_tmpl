@@ -1,12 +1,14 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "FocusEvent",
   "namespace": "com.sun.star.awt",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "sort": true,
@@ -20,17 +22,22 @@
     "from_imports": [
       [
         "..lang.event_object",
-        "EventObject"
+        "EventObject",
+        "EventObject_a3d70b03"
       ]
     ],
     "from_imports_typing": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "XInterface_8f010a43"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.lang.EventObject": "EventObject_a3d70b03"
+    },
     "quote": [
-      "XInterface"
+      "XInterface_8f010a43"
     ],
     "typings": [],
     "requires_typing": true,
@@ -54,7 +61,7 @@
       },
       {
         "name": "NextFocus",
-        "type": "XInterface",
+        "type": "XInterface_8f010a43",
         "lines": [
           "contains the window which gets the focus on a lose focus event."
         ]

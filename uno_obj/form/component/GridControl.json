@@ -1,55 +1,85 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "GridControl",
   "type": "service",
   "namespace": "com.sun.star.form.component",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..form_components",
-        "FormComponents"
+        "FormComponents",
+        "FormComponents_c8e60c76"
       ],
       [
         "..form_control_model",
-        "FormControlModel"
+        "FormControlModel",
+        "FormControlModel_e2990d22"
       ],
       [
         "..x_grid_column_factory",
-        "XGridColumnFactory"
+        "XGridColumnFactory",
+        "XGridColumnFactory_fbb70de0"
       ],
       [
         "..x_reset",
-        "XReset"
+        "XReset",
+        "XReset_71670917"
       ],
       [
         "...view.x_selection_supplier",
-        "XSelectionSupplier"
+        "XSelectionSupplier",
+        "XSelectionSupplier_fed20e15"
       ]
     ],
     "from_imports_typing": [
       [
         "...awt.font_descriptor",
-        "FontDescriptor"
+        "FontDescriptor",
+        "FontDescriptor_bc110c0a"
       ],
       [
         "...util.color",
-        "Color"
+        "Color",
+        "Color_68e908c5"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.form.FormComponents": "FormComponents_c8e60c76",
+      "com.sun.star.form.FormControlModel": "FormControlModel_e2990d22",
+      "com.sun.star.form.XGridColumnFactory": "XGridColumnFactory_fbb70de0",
+      "com.sun.star.form.XReset": "XReset_71670917",
+      "com.sun.star.view.XSelectionSupplier": "XSelectionSupplier_fed20e15"
+    },
     "quote": [
-      "Color",
-      "FontDescriptor"
+      "Color_68e908c5",
+      "FontDescriptor_bc110c0a"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.form.FormComponents",
+        "com.sun.star.form.FormControlModel",
+        "com.sun.star.form.XGridColumnFactory",
+        "com.sun.star.form.XReset",
+        "com.sun.star.view.XSelectionSupplier"
+      ],
+      "typing": [
+        "com.sun.star.awt.FontDescriptor",
+        "com.sun.star.util.Color"
+      ]
+    },
     "name": "GridControl",
     "imports": [],
     "namespace": "com.sun.star.form.component",
@@ -111,7 +141,7 @@
         },
         {
           "name": "FontDescriptor",
-          "returns": "FontDescriptor",
+          "returns": "FontDescriptor_bc110c0a",
           "desc": [
             "contains the font attributes of the text in the control."
           ],
@@ -140,7 +170,7 @@
         },
         {
           "name": "TextColor",
-          "returns": "Color",
+          "returns": "Color_68e908c5",
           "desc": [
             "specifies the text color (RGB) of the control."
           ],

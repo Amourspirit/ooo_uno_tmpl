@@ -1,49 +1,69 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XCertificate",
   "type": "interface",
   "namespace": "com.sun.star.security",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "XInterface_8f010a43"
       ]
     ],
     "from_imports_typing": [
       [
         ".certificate_kind",
-        "CertificateKind"
-      ],
-      [
-        "..util.date_time",
-        "DateTime"
+        "CertificateKind",
+        "CertificateKind_ffd0e69"
       ],
       [
         ".x_certificate_extension",
-        "XCertificateExtension"
+        "XCertificateExtension",
+        "XCertificateExtension_6ead10f8"
+      ],
+      [
+        "..util.date_time",
+        "DateTime",
+        "DateTime_84de09d3"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
     "quote": [
-      "CertificateKind",
-      "typing.List[int]",
-      "typing.List[XCertificateExtension]",
-      "XCertificateExtension",
-      "DateTime"
+      "CertificateKind_ffd0e69",
+      "DateTime_84de09d3",
+      "XCertificateExtension_6ead10f8",
+      "typing.List[XCertificateExtension_6ead10f8]",
+      "typing.List[int]"
     ],
     "typings": [
-      "typing.List[int]",
-      "typing.List[XCertificateExtension]"
+      "typing.List[XCertificateExtension_6ead10f8]",
+      "typing.List[int]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.security.CertificateKind",
+        "com.sun.star.security.XCertificateExtension",
+        "com.sun.star.util.DateTime"
+      ]
+    },
     "name": "XCertificate",
     "imports": [],
     "namespace": "com.sun.star.security",
@@ -64,7 +84,7 @@
       "methods": [
         {
           "name": "findCertificateExtension",
-          "returns": "XCertificateExtension",
+          "returns": "XCertificateExtension_6ead10f8",
           "desc": [
             "Find an extension with an object identifier."
           ],
@@ -101,7 +121,7 @@
         },
         {
           "name": "Extensions",
-          "returns": "typing.List[XCertificateExtension]",
+          "returns": "typing.List[XCertificateExtension_6ead10f8]",
           "desc": [
             "all extensions of a certificate."
           ],
@@ -166,7 +186,7 @@
       "properties": [
         {
           "name": "CertificateKind",
-          "returns": "CertificateKind",
+          "returns": "CertificateKind_ffd0e69",
           "desc": [
             "the kind of certificate, X.509 or OpenPGP",
             "",
@@ -188,7 +208,7 @@
         },
         {
           "name": "NotValidAfter",
-          "returns": "DateTime",
+          "returns": "DateTime_84de09d3",
           "desc": [
             "the validity NotAfter date attribute of the certificate."
           ],
@@ -197,7 +217,7 @@
         },
         {
           "name": "NotValidBefore",
-          "returns": "DateTime",
+          "returns": "DateTime_84de09d3",
           "desc": [
             "the validity NotBefore date attribute of the certificate."
           ],

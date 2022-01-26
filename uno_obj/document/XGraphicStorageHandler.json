@@ -1,44 +1,64 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XGraphicStorageHandler",
   "type": "interface",
   "namespace": "com.sun.star.document",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "XInterface_8f010a43"
       ]
     ],
     "from_imports_typing": [
       [
         "..graphic.x_graphic",
-        "XGraphic"
+        "XGraphic",
+        "XGraphic_a4da0afc"
       ],
       [
         "..io.x_input_stream",
-        "XInputStream"
+        "XInputStream",
+        "XInputStream_98d40ab4"
       ],
       [
         "..io.x_output_stream",
-        "XOutputStream"
+        "XOutputStream",
+        "XOutputStream_a4e00b35"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
     "quote": [
-      "XGraphic",
-      "XInputStream",
-      "XOutputStream"
+      "XGraphic_a4da0afc",
+      "XInputStream_98d40ab4",
+      "XOutputStream_a4e00b35"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.graphic.XGraphic",
+        "com.sun.star.io.XInputStream",
+        "com.sun.star.io.XOutputStream"
+      ]
+    },
     "name": "XGraphicStorageHandler",
     "imports": [],
     "namespace": "com.sun.star.document",
@@ -57,7 +77,7 @@
       "methods": [
         {
           "name": "createInputStream",
-          "returns": "XInputStream",
+          "returns": "XInputStream_98d40ab4",
           "desc": [
             "create an input stream from the input graphic"
           ],
@@ -65,14 +85,14 @@
           "args": [
             [
               "xGraphic",
-              "XGraphic",
+              "XGraphic_a4da0afc",
               "in"
             ]
           ]
         },
         {
           "name": "loadGraphic",
-          "returns": "XGraphic",
+          "returns": "XGraphic_a4da0afc",
           "desc": [
             "load a graphic defined by the URL from the storage"
           ],
@@ -87,7 +107,7 @@
         },
         {
           "name": "loadGraphicFromOutputStream",
-          "returns": "XGraphic",
+          "returns": "XGraphic_a4da0afc",
           "desc": [
             "load a graphic from the output stream"
           ],
@@ -95,7 +115,7 @@
           "args": [
             [
               "xOutputStream",
-              "XOutputStream",
+              "XOutputStream_a4e00b35",
               "in"
             ]
           ]
@@ -110,7 +130,7 @@
           "args": [
             [
               "xGraphic",
-              "XGraphic",
+              "XGraphic_a4da0afc",
               "in"
             ]
           ]
@@ -125,7 +145,7 @@
           "args": [
             [
               "xGraphic",
-              "XGraphic",
+              "XGraphic_a4da0afc",
               "in"
             ],
             [

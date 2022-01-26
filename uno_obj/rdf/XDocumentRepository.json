@@ -1,57 +1,81 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XDocumentRepository",
   "type": "interface",
   "namespace": "com.sun.star.rdf",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         ".x_repository",
-        "XRepository"
+        "XRepository",
+        "XRepository_995d0adc"
       ]
     ],
     "from_imports_typing": [
       [
-        ".x_node",
-        "XNode"
-      ],
-      [
-        ".x_resource",
-        "XResource"
-      ],
-      [
         "..container.x_enumeration",
-        "XEnumeration"
+        "XEnumeration",
+        "XEnumeration_f2180daa"
       ],
       [
         ".x_metadatable",
-        "XMetadatable"
+        "XMetadatable",
+        "XMetadatable_a3000af0"
+      ],
+      [
+        ".x_node",
+        "XNode",
+        "XNode_5ee40822"
+      ],
+      [
+        ".x_resource",
+        "XResource",
+        "XResource_842709e4"
       ],
       [
         ".xuri",
-        "XURI"
+        "XURI",
+        "XURI_5682078c"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.rdf.XRepository": "XRepository_995d0adc"
+    },
     "quote": [
-      "XEnumeration",
-      "XNode",
-      "XResource",
-      "XMetadatable",
-      "typing.List[XURI]",
-      "XURI"
+      "XEnumeration_f2180daa",
+      "XMetadatable_a3000af0",
+      "XNode_5ee40822",
+      "XResource_842709e4",
+      "XURI_5682078c",
+      "typing.List[XURI_5682078c]"
     ],
     "typings": [
-      "typing.List[XURI]"
+      "typing.List[XURI_5682078c]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.rdf.XRepository"
+      ],
+      "typing": [
+        "com.sun.star.container.XEnumeration",
+        "com.sun.star.rdf.XMetadatable",
+        "com.sun.star.rdf.XNode",
+        "com.sun.star.rdf.XResource",
+        "com.sun.star.rdf.XURI"
+      ]
+    },
     "name": "XDocumentRepository",
     "imports": [],
     "namespace": "com.sun.star.rdf",
@@ -83,14 +107,14 @@
           "args": [
             [
               "Element",
-              "XMetadatable",
+              "XMetadatable_a3000af0",
               "in"
             ]
           ]
         },
         {
           "name": "getStatementsRDFa",
-          "returns": "XEnumeration",
+          "returns": "XEnumeration_f2180daa",
           "desc": [
             "gets matching RDFa statements from the repository.",
             "",
@@ -104,17 +128,17 @@
           "args": [
             [
               "Subject",
-              "XResource",
+              "XResource_842709e4",
               "in"
             ],
             [
               "Predicate",
-              "XURI",
+              "XURI_5682078c",
               "in"
             ],
             [
               "Object",
-              "XNode",
+              "XNode_5ee40822",
               "in"
             ]
           ]
@@ -134,7 +158,7 @@
           "args": [
             [
               "Element",
-              "XMetadatable",
+              "XMetadatable_a3000af0",
               "in"
             ]
           ]
@@ -156,17 +180,17 @@
           "args": [
             [
               "Subject",
-              "XResource",
+              "XResource_842709e4",
               "in"
             ],
             [
               "Predicates",
-              "typing.List[XURI]",
+              "typing.List[XURI_5682078c]",
               "in"
             ],
             [
               "Object",
-              "XMetadatable",
+              "XMetadatable_a3000af0",
               "in"
             ],
             [
@@ -176,7 +200,7 @@
             ],
             [
               "RDFaDatatype",
-              "XURI",
+              "XURI_5682078c",
               "in"
             ]
           ]

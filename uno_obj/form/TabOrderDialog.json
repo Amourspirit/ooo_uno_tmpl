@@ -1,44 +1,64 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "TabOrderDialog",
   "type": "service",
   "namespace": "com.sun.star.form",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..ui.dialogs.x_executable_dialog",
-        "XExecutableDialog"
+        "XExecutableDialog",
+        "XExecutableDialog_450f0fa1"
       ]
     ],
     "from_imports_typing": [
       [
+        "..awt.x_control_container",
+        "XControlContainer",
+        "XControlContainer_e22d0d30"
+      ],
+      [
         "..awt.x_tab_controller_model",
-        "XTabControllerModel"
+        "XTabControllerModel",
+        "XTabControllerModel_fbef0dd8"
       ],
       [
         "..awt.x_window",
-        "XWindow"
-      ],
-      [
-        "..awt.x_control_container",
-        "XControlContainer"
+        "XWindow",
+        "XWindow_713b0924"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.ui.dialogs.XExecutableDialog": "XExecutableDialog_450f0fa1"
+    },
     "quote": [
-      "XControlContainer",
-      "XWindow",
-      "XTabControllerModel"
+      "XControlContainer_e22d0d30",
+      "XTabControllerModel_fbef0dd8",
+      "XWindow_713b0924"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.ui.dialogs.XExecutableDialog"
+      ],
+      "typing": [
+        "com.sun.star.awt.XControlContainer",
+        "com.sun.star.awt.XTabControllerModel",
+        "com.sun.star.awt.XWindow"
+      ]
+    },
     "name": "TabOrderDialog",
     "imports": [],
     "namespace": "com.sun.star.form",
@@ -62,17 +82,17 @@
           "args": [
             [
               "TabbingModel",
-              "XTabControllerModel",
+              "XTabControllerModel_fbef0dd8",
               "in"
             ],
             [
               "ControlContext",
-              "XControlContainer",
+              "XControlContainer_e22d0d30",
               "in"
             ],
             [
               "ParentWindow",
-              "XWindow",
+              "XWindow_713b0924",
               "in"
             ]
           ]

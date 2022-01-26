@@ -1,77 +1,109 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XColumn",
   "type": "interface",
   "namespace": "com.sun.star.sdb",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "XInterface_8f010a43"
       ]
     ],
     "from_imports_typing": [
       [
         "..container.x_name_access",
-        "XNameAccess"
-      ],
-      [
-        "..sdbc.x_clob",
-        "XClob"
+        "XNameAccess",
+        "XNameAccess_e2ab0cf6"
       ],
       [
         "..io.x_input_stream",
-        "XInputStream"
-      ],
-      [
-        "..util.date_time",
-        "DateTime"
+        "XInputStream",
+        "XInputStream_98d40ab4"
       ],
       [
         "..sdbc.x_array",
-        "XArray"
+        "XArray",
+        "XArray_708108fb"
       ],
       [
         "..sdbc.x_blob",
-        "XBlob"
+        "XBlob",
+        "XBlob_6773087b"
+      ],
+      [
+        "..sdbc.x_clob",
+        "XClob",
+        "XClob_6777087c"
       ],
       [
         "..sdbc.x_ref",
-        "XRef"
-      ],
-      [
-        "..util.time",
-        "Time"
+        "XRef",
+        "XRef_5f110819"
       ],
       [
         "..util.date",
-        "Date"
+        "Date",
+        "Date_60040844"
+      ],
+      [
+        "..util.date_time",
+        "DateTime",
+        "DateTime_84de09d3"
+      ],
+      [
+        "..util.time",
+        "Time",
+        "Time_604e0855"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
     "quote": [
-      "XArray",
-      "Time",
-      "XClob",
-      "XNameAccess",
-      "Date",
-      "XRef",
-      "XBlob",
-      "XInputStream",
-      "typing.List[int]",
-      "DateTime"
+      "DateTime_84de09d3",
+      "Date_60040844",
+      "Time_604e0855",
+      "XArray_708108fb",
+      "XBlob_6773087b",
+      "XClob_6777087c",
+      "XInputStream_98d40ab4",
+      "XNameAccess_e2ab0cf6",
+      "XRef_5f110819",
+      "typing.List[int]"
     ],
     "typings": [
       "typing.List[int]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.container.XNameAccess",
+        "com.sun.star.io.XInputStream",
+        "com.sun.star.sdbc.XArray",
+        "com.sun.star.sdbc.XBlob",
+        "com.sun.star.sdbc.XClob",
+        "com.sun.star.sdbc.XRef",
+        "com.sun.star.util.Date",
+        "com.sun.star.util.DateTime",
+        "com.sun.star.util.Time"
+      ]
+    },
     "name": "XColumn",
     "imports": [],
     "namespace": "com.sun.star.sdb",
@@ -86,7 +118,7 @@
       "methods": [
         {
           "name": "getArray",
-          "returns": "XArray",
+          "returns": "XArray_708108fb",
           "desc": [
             "gets a SQL ARRAY value from the current row."
           ],
@@ -97,7 +129,7 @@
         },
         {
           "name": "getBinaryStream",
-          "returns": "XInputStream",
+          "returns": "XInputStream_98d40ab4",
           "desc": [
             "gets the value of a column in the current row as a stream of uninterpreted bytes.",
             "",
@@ -112,7 +144,7 @@
         },
         {
           "name": "getBlob",
-          "returns": "XBlob",
+          "returns": "XBlob_6773087b",
           "desc": [
             "gets a BLOB (Binary Large OBject) value in the current row."
           ],
@@ -158,7 +190,7 @@
         },
         {
           "name": "getCharacterStream",
-          "returns": "XInputStream",
+          "returns": "XInputStream_98d40ab4",
           "desc": [
             "gets the value of a column in the current row as a stream of uninterpreted bytes.",
             "",
@@ -173,7 +205,7 @@
         },
         {
           "name": "getClob",
-          "returns": "XClob",
+          "returns": "XClob_6777087c",
           "desc": [
             "gets a CLOB value in the current row of this ResultSet object."
           ],
@@ -184,7 +216,7 @@
         },
         {
           "name": "getDate",
-          "returns": "Date",
+          "returns": "Date_60040844",
           "desc": [
             "gets the value of a column in the current row as a date object."
           ],
@@ -247,14 +279,14 @@
           "args": [
             [
               "typeMap",
-              "XNameAccess",
+              "XNameAccess_e2ab0cf6",
               "in"
             ]
           ]
         },
         {
           "name": "getRef",
-          "returns": "XRef",
+          "returns": "XRef_5f110819",
           "desc": [
             "gets a REF(<structured-type&gt) column value from the current row."
           ],
@@ -287,7 +319,7 @@
         },
         {
           "name": "getTime",
-          "returns": "Time",
+          "returns": "Time_604e0855",
           "desc": [
             "gets the value of a column in the current row as a time object."
           ],
@@ -298,7 +330,7 @@
         },
         {
           "name": "getTimestamp",
-          "returns": "DateTime",
+          "returns": "DateTime_84de09d3",
           "desc": [
             "gets the value of a column in the current row as a datetime object."
           ],

@@ -1,64 +1,99 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "GenericDrawPage",
   "type": "service",
   "namespace": "com.sun.star.drawing",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
-        ".x_shape_binder",
-        "XShapeBinder"
-      ],
-      [
-        ".x_shape_combiner",
-        "XShapeCombiner"
-      ],
-      [
-        ".x_shapes",
-        "XShapes"
-      ],
-      [
-        ".x_shape_grouper",
-        "XShapeGrouper"
-      ],
-      [
         "..beans.x_property_set",
-        "XPropertySet"
+        "XPropertySet",
+        "XPropertySet_bc180bfa"
       ],
       [
         "..container.x_named",
-        "XNamed"
+        "XNamed",
+        "XNamed_a6520b08"
+      ],
+      [
+        ".x_shape_binder",
+        "XShapeBinder",
+        "XShapeBinder_d4f70c91"
+      ],
+      [
+        ".x_shape_combiner",
+        "XShapeCombiner",
+        "XShapeCombiner_ef7b0d6c"
+      ],
+      [
+        ".x_shape_grouper",
+        "XShapeGrouper",
+        "XShapeGrouper_e2a30d21"
+      ],
+      [
+        ".x_shapes",
+        "XShapes",
+        "XShapes_9a800ab0"
       ]
     ],
     "from_imports_typing": [
       [
         "..container.x_index_access",
-        "XIndexAccess"
+        "XIndexAccess",
+        "XIndexAccess_f0910d6d"
       ],
       [
         "..container.x_name_container",
-        "XNameContainer"
+        "XNameContainer",
+        "XNameContainer_cb90e47"
       ],
       [
         "..view.paper_orientation",
-        "PaperOrientation"
+        "PaperOrientation",
+        "PaperOrientation_e36f0d47"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.beans.XPropertySet": "XPropertySet_bc180bfa",
+      "com.sun.star.container.XNamed": "XNamed_a6520b08",
+      "com.sun.star.drawing.XShapeBinder": "XShapeBinder_d4f70c91",
+      "com.sun.star.drawing.XShapeCombiner": "XShapeCombiner_ef7b0d6c",
+      "com.sun.star.drawing.XShapeGrouper": "XShapeGrouper_e2a30d21",
+      "com.sun.star.drawing.XShapes": "XShapes_9a800ab0"
+    },
     "quote": [
-      "XIndexAccess",
-      "XNameContainer",
-      "PaperOrientation"
+      "PaperOrientation_e36f0d47",
+      "XIndexAccess_f0910d6d",
+      "XNameContainer_cb90e47"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.beans.XPropertySet",
+        "com.sun.star.container.XNamed",
+        "com.sun.star.drawing.XShapeBinder",
+        "com.sun.star.drawing.XShapeCombiner",
+        "com.sun.star.drawing.XShapeGrouper",
+        "com.sun.star.drawing.XShapes"
+      ],
+      "typing": [
+        "com.sun.star.container.XIndexAccess",
+        "com.sun.star.container.XNameContainer",
+        "com.sun.star.view.PaperOrientation"
+      ]
+    },
     "name": "GenericDrawPage",
     "imports": [],
     "namespace": "com.sun.star.drawing",
@@ -153,7 +188,7 @@
         },
         {
           "name": "NavigationOrder",
-          "returns": "XIndexAccess",
+          "returns": "XIndexAccess_f0910d6d",
           "desc": [
             "this index access defines a navigation order for the top level shapes inside this page.",
             "",
@@ -173,7 +208,7 @@
         },
         {
           "name": "Orientation",
-          "returns": "PaperOrientation",
+          "returns": "PaperOrientation_e36f0d47",
           "desc": [
             "This is the orientation of this page."
           ],
@@ -182,7 +217,7 @@
         },
         {
           "name": "UserDefinedAttributes",
-          "returns": "XNameContainer",
+          "returns": "XNameContainer_cb90e47",
           "desc": [
             "this property stores xml attributes.",
             "",

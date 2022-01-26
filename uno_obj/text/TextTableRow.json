@@ -1,57 +1,81 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "TextTableRow",
   "type": "service",
   "namespace": "com.sun.star.text",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..beans.x_property_set",
-        "XPropertySet"
+        "XPropertySet",
+        "XPropertySet_bc180bfa"
       ]
     ],
     "from_imports_typing": [
       [
         "..beans.property_value",
-        "PropertyValue"
-      ],
-      [
-        "..util.color",
-        "Color"
+        "PropertyValue",
+        "PropertyValue_c9610c73"
       ],
       [
         "..graphic.x_graphic",
-        "XGraphic"
+        "XGraphic",
+        "XGraphic_a4da0afc"
       ],
       [
         "..style.graphic_location",
-        "GraphicLocation"
+        "GraphicLocation",
+        "GraphicLocation_e3ef0d30"
       ],
       [
         ".table_column_separator",
-        "TableColumnSeparator"
+        "TableColumnSeparator",
+        "TableColumnSeparator_1b630ed4"
+      ],
+      [
+        "..util.color",
+        "Color",
+        "Color_68e908c5"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.beans.XPropertySet": "XPropertySet_bc180bfa"
+    },
     "quote": [
-      "Color",
-      "typing.List[PropertyValue]",
-      "GraphicLocation",
-      "typing.List[TableColumnSeparator]",
-      "XGraphic"
+      "Color_68e908c5",
+      "GraphicLocation_e3ef0d30",
+      "XGraphic_a4da0afc",
+      "typing.List[PropertyValue_c9610c73]",
+      "typing.List[TableColumnSeparator_1b630ed4]"
     ],
     "typings": [
-      "typing.List[TableColumnSeparator]",
-      "typing.List[PropertyValue]"
+      "typing.List[PropertyValue_c9610c73]",
+      "typing.List[TableColumnSeparator_1b630ed4]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.beans.XPropertySet"
+      ],
+      "typing": [
+        "com.sun.star.beans.PropertyValue",
+        "com.sun.star.graphic.XGraphic",
+        "com.sun.star.style.GraphicLocation",
+        "com.sun.star.text.TableColumnSeparator",
+        "com.sun.star.util.Color"
+      ]
+    },
     "name": "TextTableRow",
     "imports": [],
     "namespace": "com.sun.star.text",
@@ -70,7 +94,7 @@
       "types": [
         {
           "name": "RowInteropGrabBag",
-          "returns": "typing.List[PropertyValue]",
+          "returns": "typing.List[PropertyValue_c9610c73]",
           "desc": [
             "Grab bag of row properties, used as a string-any map for interop purposes.",
             "",
@@ -85,7 +109,7 @@
         },
         {
           "name": "TableColumnSeparators",
-          "returns": "typing.List[TableColumnSeparator]",
+          "returns": "typing.List[TableColumnSeparator_1b630ed4]",
           "desc": [
             "contains the description of the columns in the table row."
           ],
@@ -96,7 +120,7 @@
       "properties": [
         {
           "name": "BackColor",
-          "returns": "Color",
+          "returns": "Color_68e908c5",
           "desc": [
             "specifies the color of the background."
           ],
@@ -105,7 +129,7 @@
         },
         {
           "name": "BackGraphic",
-          "returns": "XGraphic",
+          "returns": "XGraphic_a4da0afc",
           "desc": [
             "contains the graphic of the background.",
             "",
@@ -127,7 +151,7 @@
         },
         {
           "name": "BackGraphicLocation",
-          "returns": "GraphicLocation",
+          "returns": "GraphicLocation_e3ef0d30",
           "desc": [
             "determines the position of the background graphic."
           ],

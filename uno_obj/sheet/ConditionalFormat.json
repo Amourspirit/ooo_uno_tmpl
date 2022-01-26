@@ -1,38 +1,57 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "ConditionalFormat",
   "type": "service",
   "namespace": "com.sun.star.sheet",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..beans.x_property_set",
-        "XPropertySet"
+        "XPropertySet",
+        "XPropertySet_bc180bfa"
       ],
       [
         ".x_conditional_format",
-        "XConditionalFormat"
+        "XConditionalFormat",
+        "XConditionalFormat_be90e56"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_sheet_cell_ranges",
-        "XSheetCellRanges"
+        "XSheetCellRanges",
+        "XSheetCellRanges_edef0d52"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.beans.XPropertySet": "XPropertySet_bc180bfa",
+      "com.sun.star.sheet.XConditionalFormat": "XConditionalFormat_be90e56"
+    },
     "quote": [
-      "XSheetCellRanges"
+      "XSheetCellRanges_edef0d52"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.beans.XPropertySet",
+        "com.sun.star.sheet.XConditionalFormat"
+      ],
+      "typing": [
+        "com.sun.star.sheet.XSheetCellRanges"
+      ]
+    },
     "name": "ConditionalFormat",
     "imports": [],
     "namespace": "com.sun.star.sheet",
@@ -55,7 +74,7 @@
         },
         {
           "name": "Range",
-          "returns": "XSheetCellRanges",
+          "returns": "XSheetCellRanges_edef0d52",
           "desc": [
             "represents the range for the conditional format All ranges have to be in the same sheet."
           ],

@@ -1,12 +1,14 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "ViewState",
   "namespace": "com.sun.star.rendering",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "sort": true,
@@ -20,17 +22,20 @@
     "from_imports": [],
     "from_imports_typing": [
       [
-        ".x_poly_polygon2_d",
-        "XPolyPolygon2D"
+        "..geometry.affine_matrix2_d",
+        "AffineMatrix2D",
+        "AffineMatrix2D_ff040da8"
       ],
       [
-        "..geometry.affine_matrix2_d",
-        "AffineMatrix2D"
+        ".x_poly_polygon2_d",
+        "XPolyPolygon2D",
+        "XPolyPolygon2D_e1b0e20"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "AffineMatrix2D",
-      "XPolyPolygon2D"
+      "AffineMatrix2D_ff040da8",
+      "XPolyPolygon2D_e1b0e20"
     ],
     "typings": [],
     "requires_typing": true,
@@ -49,7 +54,7 @@
     "items": [
       {
         "name": "AffineTransform",
-        "type": "AffineMatrix2D",
+        "type": "AffineMatrix2D_ff040da8",
         "lines": [
           "The affine transform associated with the view.",
           "",
@@ -58,7 +63,7 @@
       },
       {
         "name": "Clip",
-        "type": "XPolyPolygon2D",
+        "type": "XPolyPolygon2D_e1b0e20",
         "lines": [
           "The clipping area associated with the view.",
           "",

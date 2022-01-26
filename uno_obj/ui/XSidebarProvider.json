@@ -1,44 +1,64 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XSidebarProvider",
   "type": "interface",
   "namespace": "com.sun.star.ui",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "XInterface_8f010a43"
       ]
     ],
     "from_imports_typing": [
       [
-        ".x_sidebar",
-        "XSidebar"
+        "..frame.x_frame",
+        "XFrame",
+        "XFrame_7a570956"
       ],
       [
         ".x_decks",
-        "XDecks"
+        "XDecks",
+        "XDecks_5e8b0828"
       ],
       [
-        "..frame.x_frame",
-        "XFrame"
+        ".x_sidebar",
+        "XSidebar",
+        "XSidebar_704a08f8"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
     "quote": [
-      "XSidebar",
-      "XFrame",
-      "XDecks"
+      "XDecks_5e8b0828",
+      "XFrame_7a570956",
+      "XSidebar_704a08f8"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.frame.XFrame",
+        "com.sun.star.ui.XDecks",
+        "com.sun.star.ui.XSidebar"
+      ]
+    },
     "name": "XSidebarProvider",
     "imports": [],
     "namespace": "com.sun.star.ui",
@@ -57,14 +77,14 @@
       "methods": [
         {
           "name": "getDecks",
-          "returns": "XDecks",
+          "returns": "XDecks_5e8b0828",
           "desc": [],
           "raises": [],
           "args": []
         },
         {
           "name": "getFrame",
-          "returns": "XFrame",
+          "returns": "XFrame_7a570956",
           "desc": [
             "Get the XFrame owner."
           ],
@@ -73,7 +93,7 @@
         },
         {
           "name": "getSidebar",
-          "returns": "XSidebar",
+          "returns": "XSidebar_704a08f8",
           "desc": [
             "Returns the sidebar object."
           ],

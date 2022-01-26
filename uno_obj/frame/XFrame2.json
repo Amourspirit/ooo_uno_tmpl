@@ -1,60 +1,92 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XFrame2",
   "type": "interface",
   "namespace": "com.sun.star.frame",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         ".x_dispatch_information_provider",
-        "XDispatchInformationProvider"
-      ],
-      [
-        ".x_frames_supplier",
-        "XFramesSupplier"
-      ],
-      [
-        "..task.x_status_indicator_factory",
-        "XStatusIndicatorFactory"
+        "XDispatchInformationProvider",
+        "XDispatchInformationProvider_afb6126c"
       ],
       [
         ".x_dispatch_provider",
-        "XDispatchProvider"
+        "XDispatchProvider",
+        "XDispatchProvider_fc690de6"
       ],
       [
         ".x_dispatch_provider_interception",
-        "XDispatchProviderInterception"
+        "XDispatchProviderInterception",
+        "XDispatchProviderInterception_c2a512da"
+      ],
+      [
+        ".x_frames_supplier",
+        "XFramesSupplier",
+        "XFramesSupplier_e12a0d1d"
+      ],
+      [
+        "..task.x_status_indicator_factory",
+        "XStatusIndicatorFactory",
+        "XStatusIndicatorFactory_49e4100c"
       ]
     ],
     "from_imports_typing": [
       [
-        "..uno.x_interface",
-        "XInterface"
-      ],
-      [
         "..container.x_name_container",
-        "XNameContainer"
+        "XNameContainer",
+        "XNameContainer_cb90e47"
       ],
       [
         ".x_dispatch_recorder_supplier",
-        "XDispatchRecorderSupplier"
+        "XDispatchRecorderSupplier",
+        "XDispatchRecorderSupplier_79301125"
+      ],
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.frame.XDispatchInformationProvider": "XDispatchInformationProvider_afb6126c",
+      "com.sun.star.frame.XDispatchProvider": "XDispatchProvider_fc690de6",
+      "com.sun.star.frame.XDispatchProviderInterception": "XDispatchProviderInterception_c2a512da",
+      "com.sun.star.frame.XFramesSupplier": "XFramesSupplier_e12a0d1d",
+      "com.sun.star.task.XStatusIndicatorFactory": "XStatusIndicatorFactory_49e4100c"
+    },
     "quote": [
-      "XNameContainer",
-      "XInterface",
-      "XDispatchRecorderSupplier"
+      "XDispatchRecorderSupplier_79301125",
+      "XInterface_8f010a43",
+      "XNameContainer_cb90e47"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.frame.XDispatchInformationProvider",
+        "com.sun.star.frame.XDispatchProvider",
+        "com.sun.star.frame.XDispatchProviderInterception",
+        "com.sun.star.frame.XFramesSupplier",
+        "com.sun.star.task.XStatusIndicatorFactory"
+      ],
+      "typing": [
+        "com.sun.star.container.XNameContainer",
+        "com.sun.star.frame.XDispatchRecorderSupplier",
+        "com.sun.star.uno.XInterface"
+      ]
+    },
     "name": "XFrame2",
     "imports": [],
     "namespace": "com.sun.star.frame",
@@ -76,7 +108,7 @@
       "properties": [
         {
           "name": "DispatchRecorderSupplier",
-          "returns": "XDispatchRecorderSupplier",
+          "returns": "XDispatchRecorderSupplier_79301125",
           "desc": [
             "provides access to the dispatch recorder of the frame",
             "",
@@ -94,7 +126,7 @@
         },
         {
           "name": "LayoutManager",
-          "returns": "XInterface",
+          "returns": "XInterface_8f010a43",
           "desc": [
             "Provides access to the LayoutManager of the frame.",
             "",
@@ -116,7 +148,7 @@
         },
         {
           "name": "UserDefinedAttributes",
-          "returns": "XNameContainer",
+          "returns": "XNameContainer_cb90e47",
           "desc": [
             "contains user defined attributes."
           ],

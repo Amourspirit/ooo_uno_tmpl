@@ -1,41 +1,59 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XVclContainer",
   "type": "interface",
   "namespace": "com.sun.star.awt",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "XInterface_8f010a43"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_vcl_container_listener",
-        "XVclContainerListener"
+        "XVclContainerListener",
+        "XVclContainerListener_190e0eba"
       ],
       [
         ".x_window",
-        "XWindow"
+        "XWindow",
+        "XWindow_713b0924"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
     "quote": [
-      "typing.List[XWindow]",
-      "XVclContainerListener"
+      "XVclContainerListener_190e0eba",
+      "typing.List[XWindow_713b0924]"
     ],
     "typings": [
-      "typing.List[XWindow]"
+      "typing.List[XWindow_713b0924]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.awt.XVclContainerListener",
+        "com.sun.star.awt.XWindow"
+      ]
+    },
     "name": "XVclContainer",
     "imports": [],
     "namespace": "com.sun.star.awt",
@@ -62,14 +80,14 @@
           "args": [
             [
               "l",
-              "XVclContainerListener",
+              "XVclContainerListener_190e0eba",
               "in"
             ]
           ]
         },
         {
           "name": "getWindows",
-          "returns": "typing.List[XWindow]",
+          "returns": "typing.List[XWindow_713b0924]",
           "desc": [
             "returns all windows."
           ],
@@ -86,7 +104,7 @@
           "args": [
             [
               "l",
-              "XVclContainerListener",
+              "XVclContainerListener_190e0eba",
               "in"
             ]
           ]

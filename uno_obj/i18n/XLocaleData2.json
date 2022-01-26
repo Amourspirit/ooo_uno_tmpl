@@ -1,41 +1,59 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XLocaleData2",
   "type": "interface",
   "namespace": "com.sun.star.i18n",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         ".x_locale_data",
-        "XLocaleData"
+        "XLocaleData",
+        "XLocaleData_9d100a6a"
       ]
     ],
     "from_imports_typing": [
       [
         ".currency2",
-        "Currency2"
+        "Currency2",
+        "Currency2_89e809c5"
       ],
       [
         "..lang.locale",
-        "Locale"
+        "Locale",
+        "Locale_70d308fa"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.i18n.XLocaleData": "XLocaleData_9d100a6a"
+    },
     "quote": [
-      "Locale",
-      "typing.List[Currency2]"
+      "Locale_70d308fa",
+      "typing.List[Currency2_89e809c5]"
     ],
     "typings": [
-      "typing.List[Currency2]"
+      "typing.List[Currency2_89e809c5]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.i18n.XLocaleData"
+      ],
+      "typing": [
+        "com.sun.star.i18n.Currency2",
+        "com.sun.star.lang.Locale"
+      ]
+    },
     "name": "XLocaleData2",
     "imports": [],
     "namespace": "com.sun.star.i18n",
@@ -56,7 +74,7 @@
       "methods": [
         {
           "name": "getAllCurrencies2",
-          "returns": "typing.List[Currency2]",
+          "returns": "typing.List[Currency2_89e809c5]",
           "desc": [
             "returns all LC_CURRENCY currencies for a locale."
           ],
@@ -64,7 +82,7 @@
           "args": [
             [
               "aLocale",
-              "Locale",
+              "Locale_70d308fa",
               "in"
             ]
           ]

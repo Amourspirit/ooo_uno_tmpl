@@ -1,52 +1,74 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XPrimitiveFactory2D",
   "type": "interface",
   "namespace": "com.sun.star.graphic",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "XInterface_8f010a43"
       ]
     ],
     "from_imports_typing": [
       [
-        "..drawing.x_draw_page",
-        "XDrawPage"
-      ],
-      [
-        ".x_primitive2_d",
-        "XPrimitive2D"
-      ],
-      [
         "..beans.property_value",
-        "PropertyValue"
+        "PropertyValue",
+        "PropertyValue_c9610c73"
+      ],
+      [
+        "..drawing.x_draw_page",
+        "XDrawPage",
+        "XDrawPage_b07a0b57"
       ],
       [
         "..drawing.x_shape",
-        "XShape"
+        "XShape",
+        "XShape_8fd00a3d"
+      ],
+      [
+        ".x_primitive2_d",
+        "XPrimitive2D",
+        "XPrimitive2D_d5730c6d"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
     "quote": [
-      "typing.List[XPrimitive2D]",
-      "XShape",
-      "XDrawPage",
-      "typing.List[PropertyValue]"
+      "XDrawPage_b07a0b57",
+      "XShape_8fd00a3d",
+      "typing.List[PropertyValue_c9610c73]",
+      "typing.List[XPrimitive2D_d5730c6d]"
     ],
     "typings": [
-      "typing.List[XPrimitive2D]",
-      "typing.List[PropertyValue]"
+      "typing.List[PropertyValue_c9610c73]",
+      "typing.List[XPrimitive2D_d5730c6d]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.beans.PropertyValue",
+        "com.sun.star.drawing.XDrawPage",
+        "com.sun.star.drawing.XShape",
+        "com.sun.star.graphic.XPrimitive2D"
+      ]
+    },
     "name": "XPrimitiveFactory2D",
     "imports": [],
     "namespace": "com.sun.star.graphic",
@@ -63,7 +85,7 @@
       "methods": [
         {
           "name": "createPrimitivesFromXDrawPage",
-          "returns": "typing.List[XPrimitive2D]",
+          "returns": "typing.List[XPrimitive2D_d5730c6d]",
           "desc": [
             "Create primitives from com.sun.star.drawing.XDrawPage."
           ],
@@ -71,19 +93,19 @@
           "args": [
             [
               "xDrawPage",
-              "XDrawPage",
+              "XDrawPage_b07a0b57",
               "in"
             ],
             [
               "aParms",
-              "typing.List[PropertyValue]",
+              "typing.List[PropertyValue_c9610c73]",
               "in"
             ]
           ]
         },
         {
           "name": "createPrimitivesFromXShape",
-          "returns": "typing.List[XPrimitive2D]",
+          "returns": "typing.List[XPrimitive2D_d5730c6d]",
           "desc": [
             "Create primitives from com.sun.star.drawing.XShape."
           ],
@@ -91,12 +113,12 @@
           "args": [
             [
               "xShape",
-              "XShape",
+              "XShape_8fd00a3d",
               "in"
             ],
             [
               "aParms",
-              "typing.List[PropertyValue]",
+              "typing.List[PropertyValue_c9610c73]",
               "in"
             ]
           ]

@@ -1,69 +1,99 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XSlideShowView",
   "type": "interface",
   "namespace": "com.sun.star.presentation",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "XInterface_8f010a43"
       ]
     ],
     "from_imports_typing": [
       [
         "..awt.rectangle",
-        "Rectangle"
-      ],
-      [
-        "..rendering.x_sprite_canvas",
-        "XSpriteCanvas"
-      ],
-      [
-        "..util.x_modify_listener",
-        "XModifyListener"
-      ],
-      [
-        "..awt.x_mouse_motion_listener",
-        "XMouseMotionListener"
+        "Rectangle",
+        "Rectangle_84b109e9"
       ],
       [
         "..awt.x_mouse_listener",
-        "XMouseListener"
+        "XMouseListener",
+        "XMouseListener_bc1d0bfb"
       ],
       [
-        "..geometry.affine_matrix2_d",
-        "AffineMatrix2D"
+        "..awt.x_mouse_motion_listener",
+        "XMouseMotionListener",
+        "XMouseMotionListener_c6a0e71"
       ],
       [
         "..awt.x_paint_listener",
-        "XPaintListener"
+        "XPaintListener",
+        "XPaintListener_bb6d0bee"
+      ],
+      [
+        "..geometry.affine_matrix2_d",
+        "AffineMatrix2D",
+        "AffineMatrix2D_ff040da8"
       ],
       [
         "..geometry.integer_size2_d",
-        "IntegerSize2D"
+        "IntegerSize2D",
+        "IntegerSize2D_f2690d53"
+      ],
+      [
+        "..rendering.x_sprite_canvas",
+        "XSpriteCanvas",
+        "XSpriteCanvas_ff8b0df1"
+      ],
+      [
+        "..util.x_modify_listener",
+        "XModifyListener",
+        "XModifyListener_d5c60ccc"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
     "quote": [
-      "Rectangle",
-      "IntegerSize2D",
-      "XModifyListener",
-      "XMouseListener",
-      "XPaintListener",
-      "AffineMatrix2D",
-      "XMouseMotionListener",
-      "XSpriteCanvas"
+      "AffineMatrix2D_ff040da8",
+      "IntegerSize2D_f2690d53",
+      "Rectangle_84b109e9",
+      "XModifyListener_d5c60ccc",
+      "XMouseListener_bc1d0bfb",
+      "XMouseMotionListener_c6a0e71",
+      "XPaintListener_bb6d0bee",
+      "XSpriteCanvas_ff8b0df1"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.awt.Rectangle",
+        "com.sun.star.awt.XMouseListener",
+        "com.sun.star.awt.XMouseMotionListener",
+        "com.sun.star.awt.XPaintListener",
+        "com.sun.star.geometry.AffineMatrix2D",
+        "com.sun.star.geometry.IntegerSize2D",
+        "com.sun.star.rendering.XSpriteCanvas",
+        "com.sun.star.util.XModifyListener"
+      ]
+    },
     "name": "XSlideShowView",
     "imports": [],
     "namespace": "com.sun.star.presentation",
@@ -94,7 +124,7 @@
           "args": [
             [
               "xListener",
-              "XMouseListener",
+              "XMouseListener_bc1d0bfb",
               "in"
             ]
           ]
@@ -111,7 +141,7 @@
           "args": [
             [
               "xListener",
-              "XMouseMotionListener",
+              "XMouseMotionListener_c6a0e71",
               "in"
             ]
           ]
@@ -128,7 +158,7 @@
           "args": [
             [
               "xListener",
-              "XPaintListener",
+              "XPaintListener_bb6d0bee",
               "in"
             ]
           ]
@@ -145,7 +175,7 @@
           "args": [
             [
               "xListener",
-              "XModifyListener",
+              "XModifyListener_d5c60ccc",
               "in"
             ]
           ]
@@ -163,7 +193,7 @@
         },
         {
           "name": "getCanvas",
-          "returns": "XSpriteCanvas",
+          "returns": "XSpriteCanvas_ff8b0df1",
           "desc": [
             "Get view canvas.",
             "",
@@ -174,7 +204,7 @@
         },
         {
           "name": "getCanvasArea",
-          "returns": "Rectangle",
+          "returns": "Rectangle_84b109e9",
           "desc": [
             "Get rectangle defining area inside of canvas device which this slide show view uses."
           ],
@@ -183,7 +213,7 @@
         },
         {
           "name": "getTransformation",
-          "returns": "AffineMatrix2D",
+          "returns": "AffineMatrix2D_ff040da8",
           "desc": [
             "Query the current transformation matrix for this view.",
             "",
@@ -194,7 +224,7 @@
         },
         {
           "name": "getTranslationOffset",
-          "returns": "IntegerSize2D",
+          "returns": "IntegerSize2D_f2690d53",
           "desc": [
             "Query the current translation offset used to fill the physical screen while keeping aspect ratio.",
             "",
@@ -213,7 +243,7 @@
           "args": [
             [
               "xListener",
-              "XMouseListener",
+              "XMouseListener_bc1d0bfb",
               "in"
             ]
           ]
@@ -228,7 +258,7 @@
           "args": [
             [
               "xListener",
-              "XMouseMotionListener",
+              "XMouseMotionListener_c6a0e71",
               "in"
             ]
           ]
@@ -243,7 +273,7 @@
           "args": [
             [
               "xListener",
-              "XPaintListener",
+              "XPaintListener_bb6d0bee",
               "in"
             ]
           ]
@@ -258,7 +288,7 @@
           "args": [
             [
               "xListener",
-              "XModifyListener",
+              "XModifyListener_d5c60ccc",
               "in"
             ]
           ]

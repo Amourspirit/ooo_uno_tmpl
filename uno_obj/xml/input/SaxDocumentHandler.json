@@ -1,31 +1,47 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "SaxDocumentHandler",
   "type": "service",
   "namespace": "com.sun.star.xml.input",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
-        "..sax.x_document_handler",
-        "XDocumentHandler"
+        "...lang.x_initialization",
+        "XInitialization",
+        "XInitialization_d46c0cca"
       ],
       [
-        "...lang.x_initialization",
-        "XInitialization"
+        "..sax.x_document_handler",
+        "XDocumentHandler",
+        "XDocumentHandler_9b90e28"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.lang.XInitialization": "XInitialization_d46c0cca",
+      "com.sun.star.xml.sax.XDocumentHandler": "XDocumentHandler_9b90e28"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
+    "full_imports": {
+      "general": [
+        "com.sun.star.lang.XInitialization",
+        "com.sun.star.xml.sax.XDocumentHandler"
+      ],
+      "typing": []
+    },
     "name": "SaxDocumentHandler",
     "imports": [],
     "namespace": "com.sun.star.xml.input",

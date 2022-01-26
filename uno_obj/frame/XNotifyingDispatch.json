@@ -1,46 +1,66 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XNotifyingDispatch",
   "type": "interface",
   "namespace": "com.sun.star.frame",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         ".x_dispatch",
-        "XDispatch"
+        "XDispatch",
+        "XDispatch_98ff0a9b"
       ]
     ],
     "from_imports_typing": [
       [
-        "..util.url",
-        "URL"
+        "..beans.property_value",
+        "PropertyValue",
+        "PropertyValue_c9610c73"
       ],
       [
         ".x_dispatch_result_listener",
-        "XDispatchResultListener"
+        "XDispatchResultListener",
+        "XDispatchResultListener_582b1060"
       ],
       [
-        "..beans.property_value",
-        "PropertyValue"
+        "..util.url",
+        "URL",
+        "URL_57ad07b9"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.frame.XDispatch": "XDispatch_98ff0a9b"
+    },
     "quote": [
-      "URL",
-      "XDispatchResultListener",
-      "typing.List[PropertyValue]"
+      "URL_57ad07b9",
+      "XDispatchResultListener_582b1060",
+      "typing.List[PropertyValue_c9610c73]"
     ],
     "typings": [
-      "typing.List[PropertyValue]"
+      "typing.List[PropertyValue_c9610c73]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.frame.XDispatch"
+      ],
+      "typing": [
+        "com.sun.star.beans.PropertyValue",
+        "com.sun.star.frame.XDispatchResultListener",
+        "com.sun.star.util.URL"
+      ]
+    },
     "name": "XNotifyingDispatch",
     "imports": [],
     "namespace": "com.sun.star.frame",
@@ -65,17 +85,17 @@
           "args": [
             [
               "URL",
-              "URL",
+              "URL_57ad07b9",
               "in"
             ],
             [
               "Arguments",
-              "typing.List[PropertyValue]",
+              "typing.List[PropertyValue_c9610c73]",
               "in"
             ],
             [
               "Listener",
-              "XDispatchResultListener",
+              "XDispatchResultListener_582b1060",
               "in"
             ]
           ]

@@ -1,39 +1,57 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XSingleLayerStratum",
   "type": "interface",
   "namespace": "com.sun.star.configuration.backend",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "...uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "XInterface_8f010a43"
       ]
     ],
     "from_imports_typing": [
       [
-        ".x_updatable_layer",
-        "XUpdatableLayer"
+        ".x_layer",
+        "XLayer",
+        "XLayer_4cd50fcb"
       ],
       [
-        ".x_layer",
-        "XLayer"
+        ".x_updatable_layer",
+        "XUpdatableLayer",
+        "XUpdatableLayer_ec97135d"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
     "quote": [
-      "XUpdatableLayer",
-      "XLayer"
+      "XLayer_4cd50fcb",
+      "XUpdatableLayer_ec97135d"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.configuration.backend.XLayer",
+        "com.sun.star.configuration.backend.XUpdatableLayer"
+      ]
+    },
     "name": "XSingleLayerStratum",
     "imports": [],
     "namespace": "com.sun.star.configuration.backend",
@@ -54,7 +72,7 @@
       "methods": [
         {
           "name": "getLayer",
-          "returns": "XLayer",
+          "returns": "XLayer_4cd50fcb",
           "desc": [
             "retrieves the layer data for a component, if newer than indicated.",
             "",
@@ -83,7 +101,7 @@
         },
         {
           "name": "getUpdatableLayer",
-          "returns": "XUpdatableLayer",
+          "returns": "XUpdatableLayer_ec97135d",
           "desc": [
             "retrieves a writable representation of the layer for a component."
           ],

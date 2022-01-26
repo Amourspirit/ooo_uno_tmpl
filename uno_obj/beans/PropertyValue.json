@@ -1,12 +1,14 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "PropertyValue",
   "namespace": "com.sun.star.beans",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "sort": true,
@@ -21,11 +23,13 @@
     "from_imports_typing": [
       [
         ".property_state",
-        "PropertyState"
+        "PropertyState",
+        "PropertyState_c97b0c77"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "PropertyState"
+      "PropertyState_c97b0c77"
     ],
     "typings": [],
     "requires_typing": true,
@@ -56,7 +60,7 @@
       },
       {
         "name": "State",
-        "type": "PropertyState",
+        "type": "PropertyState_c97b0c77",
         "lines": [
           "determines if the value comes from the object itself or from a default and if the value cannot be determined exactly."
         ]

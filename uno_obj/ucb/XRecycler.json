@@ -1,39 +1,57 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XRecycler",
   "type": "interface",
   "namespace": "com.sun.star.ucb",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "XInterface_8f010a43"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_command_processor",
-        "XCommandProcessor"
+        "XCommandProcessor",
+        "XCommandProcessor_dfe80d19"
       ],
       [
         ".x_content_identifier",
-        "XContentIdentifier"
+        "XContentIdentifier",
+        "XContentIdentifier_edc90d78"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
     "quote": [
-      "XCommandProcessor",
-      "XContentIdentifier"
+      "XCommandProcessor_dfe80d19",
+      "XContentIdentifier_edc90d78"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.ucb.XCommandProcessor",
+        "com.sun.star.ucb.XContentIdentifier"
+      ]
+    },
     "name": "XRecycler",
     "imports": [],
     "namespace": "com.sun.star.ucb",
@@ -58,12 +76,12 @@
           "args": [
             [
               "Properties",
-              "XCommandProcessor",
+              "XCommandProcessor_dfe80d19",
               "in"
             ],
             [
               "Identifier",
-              "XContentIdentifier",
+              "XContentIdentifier_edc90d78",
               "in"
             ]
           ]

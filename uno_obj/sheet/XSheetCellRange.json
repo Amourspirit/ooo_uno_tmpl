@@ -1,34 +1,50 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XSheetCellRange",
   "type": "interface",
   "namespace": "com.sun.star.sheet",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..table.x_cell_range",
-        "XCellRange"
+        "XCellRange",
+        "XCellRange_a2f70ad5"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_spreadsheet",
-        "XSpreadsheet"
+        "XSpreadsheet",
+        "XSpreadsheet_bc910bf1"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.table.XCellRange": "XCellRange_a2f70ad5"
+    },
     "quote": [
-      "XSpreadsheet"
+      "XSpreadsheet_bc910bf1"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.table.XCellRange"
+      ],
+      "typing": [
+        "com.sun.star.sheet.XSpreadsheet"
+      ]
+    },
     "name": "XSheetCellRange",
     "imports": [],
     "namespace": "com.sun.star.sheet",
@@ -43,7 +59,7 @@
       "methods": [
         {
           "name": "getSpreadsheet",
-          "returns": "XSpreadsheet",
+          "returns": "XSpreadsheet_bc910bf1",
           "desc": [
             "returns the spreadsheet interface which contains the cell range."
           ],

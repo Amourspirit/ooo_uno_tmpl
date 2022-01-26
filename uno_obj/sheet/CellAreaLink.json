@@ -1,35 +1,54 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "CellAreaLink",
   "type": "service",
   "namespace": "com.sun.star.sheet",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..beans.x_property_set",
-        "XPropertySet"
-      ],
-      [
-        "..util.x_refreshable",
-        "XRefreshable"
+        "XPropertySet",
+        "XPropertySet_bc180bfa"
       ],
       [
         ".x_area_link",
-        "XAreaLink"
+        "XAreaLink",
+        "XAreaLink_98db0a80"
+      ],
+      [
+        "..util.x_refreshable",
+        "XRefreshable",
+        "XRefreshable_b0d60b81"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.beans.XPropertySet": "XPropertySet_bc180bfa",
+      "com.sun.star.sheet.XAreaLink": "XAreaLink_98db0a80",
+      "com.sun.star.util.XRefreshable": "XRefreshable_b0d60b81"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
+    "full_imports": {
+      "general": [
+        "com.sun.star.beans.XPropertySet",
+        "com.sun.star.sheet.XAreaLink",
+        "com.sun.star.util.XRefreshable"
+      ],
+      "typing": []
+    },
     "name": "CellAreaLink",
     "imports": [],
     "namespace": "com.sun.star.sheet",

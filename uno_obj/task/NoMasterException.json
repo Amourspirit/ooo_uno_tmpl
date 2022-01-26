@@ -1,37 +1,53 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "NoMasterException",
   "type": "exception",
   "namespace": "com.sun.star.task",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..uno.runtime_exception",
-        "RuntimeException"
+        "RuntimeException",
+        "RuntimeException_d7390ced"
       ]
     ],
     "from_imports_typing": [
       [
         ".password_request_mode",
-        "PasswordRequestMode"
+        "PasswordRequestMode",
+        "PasswordRequestMode_ec10e7c"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.RuntimeException": "RuntimeException_d7390ced"
+    },
     "quote": [
-      "PasswordRequestMode"
+      "PasswordRequestMode_ec10e7c"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.RuntimeException"
+      ],
+      "typing": [
+        "com.sun.star.task.PasswordRequestMode"
+      ]
+    },
     "name": "NoMasterException",
-    "namespace": "com.sun.star.task",
     "imports": [],
+    "namespace": "com.sun.star.task",
     "extends": [
       "com.sun.star.uno.RuntimeException"
     ],
@@ -43,7 +59,7 @@
       "properties": [
         {
           "name": "Mode",
-          "returns": "PasswordRequestMode",
+          "returns": "PasswordRequestMode_ec10e7c",
           "desc": [
             "specifies the mode in which password should be queried."
           ],

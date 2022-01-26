@@ -1,46 +1,66 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XController2",
   "type": "interface",
   "namespace": "com.sun.star.frame",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         ".x_controller",
-        "XController"
+        "XController",
+        "XController_b00e0b8f"
       ]
     ],
     "from_imports_typing": [
       [
-        "..ui.x_sidebar_provider",
-        "XSidebarProvider"
-      ],
-      [
         "..awt.x_window",
-        "XWindow"
+        "XWindow",
+        "XWindow_713b0924"
       ],
       [
         "..beans.property_value",
-        "PropertyValue"
+        "PropertyValue",
+        "PropertyValue_c9610c73"
+      ],
+      [
+        "..ui.x_sidebar_provider",
+        "XSidebarProvider",
+        "XSidebarProvider_c69c0c43"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.frame.XController": "XController_b00e0b8f"
+    },
     "quote": [
-      "XWindow",
-      "typing.List[PropertyValue]",
-      "XSidebarProvider"
+      "XSidebarProvider_c69c0c43",
+      "XWindow_713b0924",
+      "typing.List[PropertyValue_c9610c73]"
     ],
     "typings": [
-      "typing.List[PropertyValue]"
+      "typing.List[PropertyValue_c9610c73]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.frame.XController"
+      ],
+      "typing": [
+        "com.sun.star.awt.XWindow",
+        "com.sun.star.beans.PropertyValue",
+        "com.sun.star.ui.XSidebarProvider"
+      ]
+    },
     "name": "XController2",
     "imports": [],
     "namespace": "com.sun.star.frame",
@@ -59,7 +79,7 @@
       "methods": [
         {
           "name": "getSidebar",
-          "returns": "XSidebarProvider",
+          "returns": "XSidebarProvider_c69c0c43",
           "desc": [
             "get the sidebar if exists",
             "",
@@ -74,7 +94,7 @@
       "types": [
         {
           "name": "CreationArguments",
-          "returns": "typing.List[PropertyValue]",
+          "returns": "typing.List[PropertyValue_c9610c73]",
           "desc": [
             "denotes the arguments used to create the instance.",
             "",
@@ -87,7 +107,7 @@
       "properties": [
         {
           "name": "ComponentWindow",
-          "returns": "XWindow",
+          "returns": "XWindow_713b0924",
           "desc": [
             "denotes the \\\"root window\\\" of the controller.",
             "",

@@ -1,36 +1,52 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XConstantsTypeDescription",
   "type": "interface",
   "namespace": "com.sun.star.reflection",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         ".x_type_description",
-        "XTypeDescription"
+        "XTypeDescription",
+        "XTypeDescription_3c210fb1"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_constant_type_description",
-        "XConstantTypeDescription"
+        "XConstantTypeDescription",
+        "XConstantTypeDescription_c80612fb"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.reflection.XTypeDescription": "XTypeDescription_3c210fb1"
+    },
     "quote": [
-      "typing.List[XConstantTypeDescription]"
+      "typing.List[XConstantTypeDescription_c80612fb]"
     ],
     "typings": [
-      "typing.List[XConstantTypeDescription]"
+      "typing.List[XConstantTypeDescription_c80612fb]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.reflection.XTypeDescription"
+      ],
+      "typing": [
+        "com.sun.star.reflection.XConstantTypeDescription"
+      ]
+    },
     "name": "XConstantsTypeDescription",
     "imports": [],
     "namespace": "com.sun.star.reflection",
@@ -51,7 +67,7 @@
       "methods": [
         {
           "name": "getConstants",
-          "returns": "typing.List[XConstantTypeDescription]",
+          "returns": "typing.List[XConstantTypeDescription_c80612fb]",
           "desc": [
             "Returns the constants defined for this constants group."
           ],

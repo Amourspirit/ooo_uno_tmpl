@@ -1,52 +1,74 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XScannerManager",
   "type": "interface",
   "namespace": "com.sun.star.scanner",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "XInterface_8f010a43"
       ]
     ],
     "from_imports_typing": [
       [
         "..awt.x_bitmap",
-        "XBitmap"
-      ],
-      [
-        ".scanner_context",
-        "ScannerContext"
-      ],
-      [
-        ".scan_error",
-        "ScanError"
+        "XBitmap",
+        "XBitmap_70cd0909"
       ],
       [
         "..lang.x_event_listener",
-        "XEventListener"
+        "XEventListener",
+        "XEventListener_c7230c4a"
+      ],
+      [
+        ".scan_error",
+        "ScanError",
+        "ScanError_b0d90b81"
+      ],
+      [
+        ".scanner_context",
+        "ScannerContext",
+        "ScannerContext_f0c60da1"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
     "quote": [
-      "XBitmap",
-      "XEventListener",
-      "typing.List[ScannerContext]",
-      "ScannerContext",
-      "ScanError"
+      "ScanError_b0d90b81",
+      "ScannerContext_f0c60da1",
+      "XBitmap_70cd0909",
+      "XEventListener_c7230c4a",
+      "typing.List[ScannerContext_f0c60da1]"
     ],
     "typings": [
-      "typing.List[ScannerContext]"
+      "typing.List[ScannerContext_f0c60da1]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.awt.XBitmap",
+        "com.sun.star.lang.XEventListener",
+        "com.sun.star.scanner.ScanError",
+        "com.sun.star.scanner.ScannerContext"
+      ]
+    },
     "name": "XScannerManager",
     "imports": [],
     "namespace": "com.sun.star.scanner",
@@ -76,7 +98,7 @@
         },
         {
           "name": "getAvailableScanners",
-          "returns": "typing.List[ScannerContext]",
+          "returns": "typing.List[ScannerContext_f0c60da1]",
           "desc": [
             "returns all available scanner devices"
           ],
@@ -85,7 +107,7 @@
         },
         {
           "name": "getBitmap",
-          "returns": "XBitmap",
+          "returns": "XBitmap_70cd0909",
           "desc": [
             "get the image after completion of scan"
           ],
@@ -95,14 +117,14 @@
           "args": [
             [
               "scannerContext",
-              "ScannerContext",
+              "ScannerContext_f0c60da1",
               "in"
             ]
           ]
         },
         {
           "name": "getError",
-          "returns": "ScanError",
+          "returns": "ScanError_b0d90b81",
           "desc": [
             "get the state of scanning after completion of scan"
           ],
@@ -112,7 +134,7 @@
           "args": [
             [
               "scannerContext",
-              "ScannerContext",
+              "ScannerContext_f0c60da1",
               "in"
             ]
           ]
@@ -129,12 +151,12 @@
           "args": [
             [
               "scannerContext",
-              "ScannerContext",
+              "ScannerContext_f0c60da1",
               "in"
             ],
             [
               "listener",
-              "XEventListener",
+              "XEventListener_c7230c4a",
               "in"
             ]
           ]

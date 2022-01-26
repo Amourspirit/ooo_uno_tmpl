@@ -1,31 +1,47 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "DependentTextField",
   "type": "service",
   "namespace": "com.sun.star.text",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
-        ".x_dependent_text_field",
-        "XDependentTextField"
+        ".text_field",
+        "TextField",
+        "TextField_90260a56"
       ],
       [
-        ".text_field",
-        "TextField"
+        ".x_dependent_text_field",
+        "XDependentTextField",
+        "XDependentTextField_c3d0e45"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.text.TextField": "TextField_90260a56",
+      "com.sun.star.text.XDependentTextField": "XDependentTextField_c3d0e45"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
+    "full_imports": {
+      "general": [
+        "com.sun.star.text.TextField",
+        "com.sun.star.text.XDependentTextField"
+      ],
+      "typing": []
+    },
     "name": "DependentTextField",
     "imports": [],
     "namespace": "com.sun.star.text",

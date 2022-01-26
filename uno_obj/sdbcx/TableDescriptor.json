@@ -1,35 +1,54 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "TableDescriptor",
   "type": "service",
   "namespace": "com.sun.star.sdbcx",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
-        ".x_columns_supplier",
-        "XColumnsSupplier"
+        ".descriptor",
+        "Descriptor",
+        "Descriptor_a5200b3b"
       ],
       [
-        ".descriptor",
-        "Descriptor"
+        ".x_columns_supplier",
+        "XColumnsSupplier",
+        "XColumnsSupplier_f0600da9"
       ],
       [
         ".x_keys_supplier",
-        "XKeysSupplier"
+        "XKeysSupplier",
+        "XKeysSupplier_c8a70c64"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.sdbcx.Descriptor": "Descriptor_a5200b3b",
+      "com.sun.star.sdbcx.XColumnsSupplier": "XColumnsSupplier_f0600da9",
+      "com.sun.star.sdbcx.XKeysSupplier": "XKeysSupplier_c8a70c64"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
+    "full_imports": {
+      "general": [
+        "com.sun.star.sdbcx.Descriptor",
+        "com.sun.star.sdbcx.XColumnsSupplier",
+        "com.sun.star.sdbcx.XKeysSupplier"
+      ],
+      "typing": []
+    },
     "name": "TableDescriptor",
     "imports": [],
     "namespace": "com.sun.star.sdbcx",

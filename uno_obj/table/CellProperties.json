@@ -1,86 +1,122 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "CellProperties",
   "type": "service",
   "namespace": "com.sun.star.table",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..beans.x_property_set",
-        "XPropertySet"
+        "XPropertySet",
+        "XPropertySet_bc180bfa"
       ]
     ],
     "from_imports_typing": [
       [
-        ".shadow_format",
-        "ShadowFormat"
-      ],
-      [
-        "..util.cell_protection",
-        "CellProtection"
-      ],
-      [
-        ".table_border2",
-        "TableBorder2"
+        "..beans.property_value",
+        "PropertyValue",
+        "PropertyValue_c9610c73"
       ],
       [
         "..container.x_name_container",
-        "XNameContainer"
-      ],
-      [
-        ".cell_orientation",
-        "CellOrientation"
-      ],
-      [
-        ".table_border",
-        "TableBorder"
+        "XNameContainer",
+        "XNameContainer_cb90e47"
       ],
       [
         ".border_line",
-        "BorderLine"
-      ],
-      [
-        "..beans.property_value",
-        "PropertyValue"
-      ],
-      [
-        "..util.color",
-        "Color"
-      ],
-      [
-        ".cell_hori_justify",
-        "CellHoriJustify"
+        "BorderLine",
+        "BorderLine_a3f80af6"
       ],
       [
         ".border_line2",
-        "BorderLine2"
+        "BorderLine2",
+        "BorderLine2_af200b28"
+      ],
+      [
+        ".cell_hori_justify",
+        "CellHoriJustify",
+        "CellHoriJustify_e0470d10"
+      ],
+      [
+        ".cell_orientation",
+        "CellOrientation",
+        "CellOrientation_e0e40d1c"
+      ],
+      [
+        ".shadow_format",
+        "ShadowFormat",
+        "ShadowFormat_bb840bdf"
+      ],
+      [
+        ".table_border",
+        "TableBorder",
+        "TableBorder_aedf0b56"
+      ],
+      [
+        ".table_border2",
+        "TableBorder2",
+        "TableBorder2_ba670b88"
+      ],
+      [
+        "..util.cell_protection",
+        "CellProtection",
+        "CellProtection_c9290c6d"
+      ],
+      [
+        "..util.color",
+        "Color",
+        "Color_68e908c5"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.beans.XPropertySet": "XPropertySet_bc180bfa"
+    },
     "quote": [
-      "CellHoriJustify",
-      "Color",
-      "TableBorder",
-      "typing.List[PropertyValue]",
-      "CellProtection",
-      "CellOrientation",
-      "XNameContainer",
-      "BorderLine",
-      "TableBorder2",
-      "ShadowFormat",
-      "BorderLine2"
+      "BorderLine2_af200b28",
+      "BorderLine_a3f80af6",
+      "CellHoriJustify_e0470d10",
+      "CellOrientation_e0e40d1c",
+      "CellProtection_c9290c6d",
+      "Color_68e908c5",
+      "ShadowFormat_bb840bdf",
+      "TableBorder2_ba670b88",
+      "TableBorder_aedf0b56",
+      "XNameContainer_cb90e47",
+      "typing.List[PropertyValue_c9610c73]"
     ],
     "typings": [
-      "typing.List[PropertyValue]"
+      "typing.List[PropertyValue_c9610c73]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.beans.XPropertySet"
+      ],
+      "typing": [
+        "com.sun.star.beans.PropertyValue",
+        "com.sun.star.container.XNameContainer",
+        "com.sun.star.table.BorderLine",
+        "com.sun.star.table.BorderLine2",
+        "com.sun.star.table.CellHoriJustify",
+        "com.sun.star.table.CellOrientation",
+        "com.sun.star.table.ShadowFormat",
+        "com.sun.star.table.TableBorder",
+        "com.sun.star.table.TableBorder2",
+        "com.sun.star.util.CellProtection",
+        "com.sun.star.util.Color"
+      ]
+    },
     "name": "CellProperties",
     "imports": [],
     "namespace": "com.sun.star.table",
@@ -99,7 +135,7 @@
       "types": [
         {
           "name": "CellInteropGrabBag",
-          "returns": "typing.List[PropertyValue]",
+          "returns": "typing.List[PropertyValue_c9610c73]",
           "desc": [
             "Grab bag of cell properties, used as a string-any map for interim interop purposes.",
             "",
@@ -127,7 +163,7 @@
         },
         {
           "name": "BottomBorder",
-          "returns": "BorderLine",
+          "returns": "BorderLine_a3f80af6",
           "desc": [
             "contains a description of the bottom border line of each cell."
           ],
@@ -136,7 +172,7 @@
         },
         {
           "name": "BottomBorder2",
-          "returns": "BorderLine2",
+          "returns": "BorderLine2_af200b28",
           "desc": [
             "contains a description of the bottom border line of each cell.",
             "",
@@ -151,7 +187,7 @@
         },
         {
           "name": "CellBackColor",
-          "returns": "Color",
+          "returns": "Color_68e908c5",
           "desc": [
             "contains the cell background color."
           ],
@@ -160,7 +196,7 @@
         },
         {
           "name": "CellProtection",
-          "returns": "CellProtection",
+          "returns": "CellProtection_c9290c6d",
           "desc": [
             "contains a description of the cell protection.",
             "",
@@ -180,7 +216,7 @@
         },
         {
           "name": "DiagonalBLTR",
-          "returns": "BorderLine",
+          "returns": "BorderLine_a3f80af6",
           "desc": [
             "contains a description of the bottom left to top right diagonal line of each cell."
           ],
@@ -189,7 +225,7 @@
         },
         {
           "name": "DiagonalBLTR2",
-          "returns": "BorderLine2",
+          "returns": "BorderLine2_af200b28",
           "desc": [
             "contains a description of the bottom left to top right diagonal line of each cell.",
             "",
@@ -204,7 +240,7 @@
         },
         {
           "name": "DiagonalTLBR",
-          "returns": "BorderLine",
+          "returns": "BorderLine_a3f80af6",
           "desc": [
             "contains a description of the top left to bottom right diagonal line of each cell."
           ],
@@ -213,7 +249,7 @@
         },
         {
           "name": "DiagonalTLBR2",
-          "returns": "BorderLine2",
+          "returns": "BorderLine2_af200b28",
           "desc": [
             "contains a description of the top left to bottom right diagonal line of each cell.",
             "",
@@ -228,7 +264,7 @@
         },
         {
           "name": "HoriJustify",
-          "returns": "CellHoriJustify",
+          "returns": "CellHoriJustify_e0470d10",
           "desc": [
             "contains the horizontal alignment of the cell contents."
           ],
@@ -257,7 +293,7 @@
         },
         {
           "name": "LeftBorder",
-          "returns": "BorderLine",
+          "returns": "BorderLine_a3f80af6",
           "desc": [
             "contains a description of the left border line of each cell."
           ],
@@ -266,7 +302,7 @@
         },
         {
           "name": "LeftBorder2",
-          "returns": "BorderLine2",
+          "returns": "BorderLine2_af200b28",
           "desc": [
             "contains a description of the left border line of each cell.",
             "",
@@ -292,7 +328,7 @@
         },
         {
           "name": "Orientation",
-          "returns": "CellOrientation",
+          "returns": "CellOrientation_e0e40d1c",
           "desc": [
             "contains the orientation of the cell contents.",
             "",
@@ -312,7 +348,7 @@
         },
         {
           "name": "RightBorder",
-          "returns": "BorderLine",
+          "returns": "BorderLine_a3f80af6",
           "desc": [
             "contains a description of the right border line of each cell."
           ],
@@ -321,7 +357,7 @@
         },
         {
           "name": "RightBorder2",
-          "returns": "BorderLine2",
+          "returns": "BorderLine2_af200b28",
           "desc": [
             "contains a description of the right border line of each cell.",
             "",
@@ -356,7 +392,7 @@
         },
         {
           "name": "ShadowFormat",
-          "returns": "ShadowFormat",
+          "returns": "ShadowFormat_bb840bdf",
           "desc": [
             "contains a description of the shadow."
           ],
@@ -374,7 +410,7 @@
         },
         {
           "name": "TableBorder",
-          "returns": "TableBorder",
+          "returns": "TableBorder_aedf0b56",
           "desc": [
             "contains a description of the cell or cell range border.",
             "",
@@ -385,7 +421,7 @@
         },
         {
           "name": "TableBorder2",
-          "returns": "TableBorder2",
+          "returns": "TableBorder2_ba670b88",
           "desc": [
             "contains a description of the cell or cell range border.",
             "",
@@ -402,7 +438,7 @@
         },
         {
           "name": "TopBorder",
-          "returns": "BorderLine",
+          "returns": "BorderLine_a3f80af6",
           "desc": [
             "contains a description of the top border line of each cell."
           ],
@@ -411,7 +447,7 @@
         },
         {
           "name": "TopBorder2",
-          "returns": "BorderLine2",
+          "returns": "BorderLine2_af200b28",
           "desc": [
             "contains a description of the top border line of each cell.",
             "",
@@ -426,7 +462,7 @@
         },
         {
           "name": "UserDefinedAttributes",
-          "returns": "XNameContainer",
+          "returns": "XNameContainer_cb90e47",
           "desc": [
             "stores additional attributes.",
             "",

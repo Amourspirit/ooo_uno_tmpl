@@ -1,38 +1,57 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "DatabaseComboBox",
   "type": "service",
   "namespace": "com.sun.star.form.component",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
-        ".combo_box",
-        "ComboBox"
+        "..data_aware_control_model",
+        "DataAwareControlModel",
+        "DataAwareControlModel_27110ef8"
       ],
       [
-        "..data_aware_control_model",
-        "DataAwareControlModel"
+        ".combo_box",
+        "ComboBox",
+        "ComboBox_fecc0dd6"
       ]
     ],
     "from_imports_typing": [
       [
         "..list_source_type",
-        "ListSourceType"
+        "ListSourceType",
+        "ListSourceType_c9850c6b"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.form.DataAwareControlModel": "DataAwareControlModel_27110ef8",
+      "com.sun.star.form.component.ComboBox": "ComboBox_fecc0dd6"
+    },
     "quote": [
-      "ListSourceType"
+      "ListSourceType_c9850c6b"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.form.DataAwareControlModel",
+        "com.sun.star.form.component.ComboBox"
+      ],
+      "typing": [
+        "com.sun.star.form.ListSourceType"
+      ]
+    },
     "name": "DatabaseComboBox",
     "imports": [],
     "namespace": "com.sun.star.form.component",
@@ -75,7 +94,7 @@
         },
         {
           "name": "ListSourceType",
-          "returns": "ListSourceType",
+          "returns": "ListSourceType_c9850c6b",
           "desc": [
             "specifies the kind of list source.",
             "",

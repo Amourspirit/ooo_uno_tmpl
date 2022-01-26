@@ -1,37 +1,45 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "ChartPieSegmentProperties",
   "type": "service",
   "namespace": "com.sun.star.chart",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
-        "..beans.x_property_set",
-        "XPropertySet"
-      ],
-      [
         ".chart_data_point_properties",
-        "ChartDataPointProperties"
+        "ChartDataPointProperties",
+        "ChartDataPointProperties_677c10bd"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.chart.ChartDataPointProperties": "ChartDataPointProperties_677c10bd"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
+    "full_imports": {
+      "general": [
+        "com.sun.star.chart.ChartDataPointProperties"
+      ],
+      "typing": []
+    },
     "name": "ChartPieSegmentProperties",
     "imports": [],
     "namespace": "com.sun.star.chart",
     "extends": [
-      "com.sun.star.chart.ChartDataPointProperties",
-      "com.sun.star.beans.XPropertySet"
+      "com.sun.star.chart.ChartDataPointProperties"
     ],
     "desc": [
       "specifies all the properties for the graphic object of a pie segment."

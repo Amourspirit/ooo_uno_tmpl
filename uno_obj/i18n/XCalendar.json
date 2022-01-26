@@ -1,48 +1,68 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XCalendar",
   "type": "interface",
   "namespace": "com.sun.star.i18n",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "XInterface_8f010a43"
       ]
     ],
     "from_imports_typing": [
       [
-        "..lang.locale",
-        "Locale"
-      ],
-      [
         ".calendar",
-        "Calendar"
+        "Calendar",
+        "Calendar_7f2d0962"
       ],
       [
         ".calendar_item",
-        "CalendarItem"
+        "CalendarItem",
+        "CalendarItem_a86c0af1"
+      ],
+      [
+        "..lang.locale",
+        "Locale",
+        "Locale_70d308fa"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
     "quote": [
-      "Calendar",
-      "typing.List[str]",
-      "Locale",
-      "typing.List[CalendarItem]"
+      "Calendar_7f2d0962",
+      "Locale_70d308fa",
+      "typing.List[CalendarItem_a86c0af1]",
+      "typing.List[str]"
     ],
     "typings": [
-      "typing.List[str]",
-      "typing.List[CalendarItem]"
+      "typing.List[CalendarItem_a86c0af1]",
+      "typing.List[str]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.i18n.Calendar",
+        "com.sun.star.i18n.CalendarItem",
+        "com.sun.star.lang.Locale"
+      ]
+    },
     "name": "XCalendar",
     "imports": [],
     "namespace": "com.sun.star.i18n",
@@ -89,7 +109,7 @@
           "args": [
             [
               "rLocale",
-              "Locale",
+              "Locale_70d308fa",
               "in"
             ]
           ]
@@ -107,7 +127,7 @@
         },
         {
           "name": "getDays",
-          "returns": "typing.List[CalendarItem]",
+          "returns": "typing.List[CalendarItem_a86c0af1]",
           "desc": [
             "returns a sequence of CalendarItem describing the day names."
           ],
@@ -158,7 +178,7 @@
         },
         {
           "name": "getLoadedCalendar",
-          "returns": "Calendar",
+          "returns": "Calendar_7f2d0962",
           "desc": [
             "Get the currently loaded Calendar."
           ],
@@ -176,7 +196,7 @@
         },
         {
           "name": "getMonths",
-          "returns": "typing.List[CalendarItem]",
+          "returns": "typing.List[CalendarItem_a86c0af1]",
           "desc": [
             "returns a sequence of CalendarItem describing the month names."
           ],
@@ -251,7 +271,7 @@
             ],
             [
               "rLocale",
-              "Locale",
+              "Locale_70d308fa",
               "in"
             ]
           ]
@@ -266,7 +286,7 @@
           "args": [
             [
               "rLocale",
-              "Locale",
+              "Locale_70d308fa",
               "in"
             ]
           ]

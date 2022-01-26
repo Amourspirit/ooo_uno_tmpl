@@ -1,41 +1,59 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XPrintJob",
   "type": "interface",
   "namespace": "com.sun.star.view",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "XInterface_8f010a43"
       ]
     ],
     "from_imports_typing": [
       [
-        ".x_printable",
-        "XPrintable"
+        "..beans.property_value",
+        "PropertyValue",
+        "PropertyValue_c9610c73"
       ],
       [
-        "..beans.property_value",
-        "PropertyValue"
+        ".x_printable",
+        "XPrintable",
+        "XPrintable_9a5b0abc"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
     "quote": [
-      "XPrintable",
-      "typing.List[PropertyValue]"
+      "XPrintable_9a5b0abc",
+      "typing.List[PropertyValue_c9610c73]"
     ],
     "typings": [
-      "typing.List[PropertyValue]"
+      "typing.List[PropertyValue_c9610c73]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.beans.PropertyValue",
+        "com.sun.star.view.XPrintable"
+      ]
+    },
     "name": "XPrintJob",
     "imports": [],
     "namespace": "com.sun.star.view",
@@ -63,7 +81,7 @@
         },
         {
           "name": "getPrintOptions",
-          "returns": "typing.List[PropertyValue]",
+          "returns": "typing.List[PropertyValue_c9610c73]",
           "desc": [
             "returns the PrintOptions used for the print job"
           ],
@@ -72,7 +90,7 @@
         },
         {
           "name": "getPrintable",
-          "returns": "XPrintable",
+          "returns": "XPrintable_9a5b0abc",
           "desc": [
             "returns the printed object used for the print job"
           ],
@@ -81,7 +99,7 @@
         },
         {
           "name": "getPrinter",
-          "returns": "typing.List[PropertyValue]",
+          "returns": "typing.List[PropertyValue_c9610c73]",
           "desc": [
             "returns the Printer used for the print job"
           ],

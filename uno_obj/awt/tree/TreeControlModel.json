@@ -1,39 +1,57 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "TreeControlModel",
   "type": "service",
   "namespace": "com.sun.star.awt.tree",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..uno_control_model",
-        "UnoControlModel"
+        "UnoControlModel",
+        "UnoControlModel_c8ce0c58"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_tree_data_model",
-        "XTreeDataModel"
+        "XTreeDataModel",
+        "XTreeDataModel_f9fc0d85"
       ],
       [
         "...view.selection_type",
-        "SelectionType"
+        "SelectionType",
+        "SelectionType_bd790c0b"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.awt.UnoControlModel": "UnoControlModel_c8ce0c58"
+    },
     "quote": [
-      "SelectionType",
-      "XTreeDataModel"
+      "SelectionType_bd790c0b",
+      "XTreeDataModel_f9fc0d85"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.awt.UnoControlModel"
+      ],
+      "typing": [
+        "com.sun.star.awt.tree.XTreeDataModel",
+        "com.sun.star.view.SelectionType"
+      ]
+    },
     "name": "TreeControlModel",
     "imports": [],
     "namespace": "com.sun.star.awt.tree",
@@ -48,7 +66,7 @@
       "properties": [
         {
           "name": "DataModel",
-          "returns": "XTreeDataModel",
+          "returns": "XTreeDataModel_f9fc0d85",
           "desc": [
             "Specifies the XTreeDataModel that is providing the hierarchical data.",
             "",
@@ -109,7 +127,7 @@
         },
         {
           "name": "SelectionType",
-          "returns": "SelectionType",
+          "returns": "SelectionType_bd790c0b",
           "desc": [
             "Specifies the selection mode that is enabled for this tree.",
             "",

@@ -1,39 +1,57 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "CommandEnvironment",
   "type": "service",
   "namespace": "com.sun.star.ucb",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         ".x_command_environment",
-        "XCommandEnvironment"
+        "XCommandEnvironment",
+        "XCommandEnvironment_fb330dee"
       ]
     ],
     "from_imports_typing": [
       [
-        ".x_progress_handler",
-        "XProgressHandler"
+        "..task.x_interaction_handler",
+        "XInteractionHandler",
+        "XInteractionHandler_bf80e51"
       ],
       [
-        "..task.x_interaction_handler",
-        "XInteractionHandler"
+        ".x_progress_handler",
+        "XProgressHandler",
+        "XProgressHandler_d4190cad"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.ucb.XCommandEnvironment": "XCommandEnvironment_fb330dee"
+    },
     "quote": [
-      "XProgressHandler",
-      "XInteractionHandler"
+      "XInteractionHandler_bf80e51",
+      "XProgressHandler_d4190cad"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.ucb.XCommandEnvironment"
+      ],
+      "typing": [
+        "com.sun.star.task.XInteractionHandler",
+        "com.sun.star.ucb.XProgressHandler"
+      ]
+    },
     "name": "CommandEnvironment",
     "imports": [],
     "namespace": "com.sun.star.ucb",
@@ -54,12 +72,12 @@
           "args": [
             [
               "InteractionHandler",
-              "XInteractionHandler",
+              "XInteractionHandler_bf80e51",
               "in"
             ],
             [
               "ProgressHandler",
-              "XProgressHandler",
+              "XProgressHandler_d4190cad",
               "in"
             ]
           ]

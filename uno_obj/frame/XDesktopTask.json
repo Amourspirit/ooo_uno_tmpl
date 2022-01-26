@@ -1,34 +1,50 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XDesktopTask",
   "type": "interface",
   "namespace": "com.sun.star.frame",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..lang.x_component",
-        "XComponent"
+        "XComponent",
+        "XComponent_98dc0ab5"
       ]
     ],
     "from_imports_typing": [
       [
         "..awt.x_window",
-        "XWindow"
+        "XWindow",
+        "XWindow_713b0924"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.lang.XComponent": "XComponent_98dc0ab5"
+    },
     "quote": [
-      "XWindow"
+      "XWindow_713b0924"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.lang.XComponent"
+      ],
+      "typing": [
+        "com.sun.star.awt.XWindow"
+      ]
+    },
     "name": "XDesktopTask",
     "imports": [],
     "namespace": "com.sun.star.frame",
@@ -64,7 +80,7 @@
           "args": [
             [
               "TaskWindow",
-              "XWindow",
+              "XWindow_713b0924",
               "in"
             ]
           ]

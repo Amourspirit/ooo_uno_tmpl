@@ -1,34 +1,50 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XTwoAxisYSupplier",
   "type": "interface",
   "namespace": "com.sun.star.chart",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         ".x_axis_y_supplier",
-        "XAxisYSupplier"
+        "XAxisYSupplier",
+        "XAxisYSupplier_d4430cb4"
       ]
     ],
     "from_imports_typing": [
       [
         "..beans.x_property_set",
-        "XPropertySet"
+        "XPropertySet",
+        "XPropertySet_bc180bfa"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.chart.XAxisYSupplier": "XAxisYSupplier_d4430cb4"
+    },
     "quote": [
-      "XPropertySet"
+      "XPropertySet_bc180bfa"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.chart.XAxisYSupplier"
+      ],
+      "typing": [
+        "com.sun.star.beans.XPropertySet"
+      ]
+    },
     "name": "XTwoAxisYSupplier",
     "imports": [],
     "namespace": "com.sun.star.chart",
@@ -43,7 +59,7 @@
       "methods": [
         {
           "name": "getSecondaryYAxis",
-          "returns": "XPropertySet",
+          "returns": "XPropertySet_bc180bfa",
           "desc": [
             "The returned property set contains scaling properties as well as formatting properties."
           ],

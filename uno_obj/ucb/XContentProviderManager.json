@@ -1,41 +1,59 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XContentProviderManager",
   "type": "interface",
   "namespace": "com.sun.star.ucb",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "XInterface_8f010a43"
       ]
     ],
     "from_imports_typing": [
       [
-        ".x_content_provider",
-        "XContentProvider"
+        ".content_provider_info",
+        "ContentProviderInfo",
+        "ContentProviderInfo_fd9c0df4"
       ],
       [
-        ".content_provider_info",
-        "ContentProviderInfo"
+        ".x_content_provider",
+        "XContentProvider",
+        "XContentProvider_d4150cc0"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
     "quote": [
-      "typing.List[ContentProviderInfo]",
-      "XContentProvider"
+      "XContentProvider_d4150cc0",
+      "typing.List[ContentProviderInfo_fd9c0df4]"
     ],
     "typings": [
-      "typing.List[ContentProviderInfo]"
+      "typing.List[ContentProviderInfo_fd9c0df4]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.ucb.ContentProviderInfo",
+        "com.sun.star.ucb.XContentProvider"
+      ]
+    },
     "name": "XContentProviderManager",
     "imports": [],
     "namespace": "com.sun.star.ucb",
@@ -58,7 +76,7 @@
           "args": [
             [
               "Provider",
-              "XContentProvider",
+              "XContentProvider_d4150cc0",
               "in"
             ],
             [
@@ -70,7 +88,7 @@
         },
         {
           "name": "queryContentProvider",
-          "returns": "XContentProvider",
+          "returns": "XContentProvider_d4150cc0",
           "desc": [
             "returns the currently active content provider for a content identifier."
           ],
@@ -85,7 +103,7 @@
         },
         {
           "name": "queryContentProviders",
-          "returns": "typing.List[ContentProviderInfo]",
+          "returns": "typing.List[ContentProviderInfo_fd9c0df4]",
           "desc": [
             "returns a list of information on all registered content providers."
           ],
@@ -94,7 +112,7 @@
         },
         {
           "name": "registerContentProvider",
-          "returns": "XContentProvider",
+          "returns": "XContentProvider_d4150cc0",
           "desc": [
             "registers a content provider for a specific URL template.",
             "",
@@ -112,7 +130,7 @@
           "args": [
             [
               "Provider",
-              "XContentProvider",
+              "XContentProvider_d4150cc0",
               "in"
             ],
             [

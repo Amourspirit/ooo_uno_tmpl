@@ -1,38 +1,57 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "GraphicRendererVCL",
   "type": "service",
   "namespace": "com.sun.star.graphic",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
-        ".x_graphic_renderer",
-        "XGraphicRenderer"
+        "..beans.x_property_set",
+        "XPropertySet",
+        "XPropertySet_bc180bfa"
       ],
       [
-        "..beans.x_property_set",
-        "XPropertySet"
+        ".x_graphic_renderer",
+        "XGraphicRenderer",
+        "XGraphicRenderer_aca0e33"
       ]
     ],
     "from_imports_typing": [
       [
         "..awt.rectangle",
-        "Rectangle"
+        "Rectangle",
+        "Rectangle_84b109e9"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.beans.XPropertySet": "XPropertySet_bc180bfa",
+      "com.sun.star.graphic.XGraphicRenderer": "XGraphicRenderer_aca0e33"
+    },
     "quote": [
-      "Rectangle"
+      "Rectangle_84b109e9"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.beans.XPropertySet",
+        "com.sun.star.graphic.XGraphicRenderer"
+      ],
+      "typing": [
+        "com.sun.star.awt.Rectangle"
+      ]
+    },
     "name": "GraphicRendererVCL",
     "imports": [],
     "namespace": "com.sun.star.graphic",
@@ -50,7 +69,7 @@
       "properties": [
         {
           "name": "DestinationRect",
-          "returns": "Rectangle",
+          "returns": "Rectangle_84b109e9",
           "desc": [
             "Specifies the destination rectangle, into which the graphic content is to be rendered onto the device."
           ],

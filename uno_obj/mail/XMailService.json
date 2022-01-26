@@ -1,47 +1,67 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XMailService",
   "type": "interface",
   "namespace": "com.sun.star.mail",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "XInterface_8f010a43"
       ]
     ],
     "from_imports_typing": [
       [
-        ".x_connection_listener",
-        "XConnectionListener"
+        ".x_authenticator",
+        "XAuthenticator",
+        "XAuthenticator_c7b50c5e"
       ],
       [
-        ".x_authenticator",
-        "XAuthenticator"
+        ".x_connection_listener",
+        "XConnectionListener",
+        "XConnectionListener_aaa0e59"
       ],
       [
         "..uno.x_current_context",
-        "XCurrentContext"
+        "XCurrentContext",
+        "XCurrentContext_c9110c7a"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
     "quote": [
-      "typing.List[str]",
-      "XConnectionListener",
-      "XAuthenticator",
-      "XCurrentContext"
+      "XAuthenticator_c7b50c5e",
+      "XConnectionListener_aaa0e59",
+      "XCurrentContext_c9110c7a",
+      "typing.List[str]"
     ],
     "typings": [
       "typing.List[str]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.mail.XAuthenticator",
+        "com.sun.star.mail.XConnectionListener",
+        "com.sun.star.uno.XCurrentContext"
+      ]
+    },
     "name": "XMailService",
     "imports": [],
     "namespace": "com.sun.star.mail",
@@ -68,7 +88,7 @@
           "args": [
             [
               "xListener",
-              "XConnectionListener",
+              "XConnectionListener_aaa0e59",
               "in"
             ]
           ]
@@ -93,12 +113,12 @@
           "args": [
             [
               "xConnectionContext",
-              "XCurrentContext",
+              "XCurrentContext_c9110c7a",
               "in"
             ],
             [
               "xAuthenticator",
-              "XAuthenticator",
+              "XAuthenticator_c7b50c5e",
               "in"
             ]
           ]
@@ -116,7 +136,7 @@
         },
         {
           "name": "getCurrentConnectionContext",
-          "returns": "XCurrentContext",
+          "returns": "XCurrentContext_c9110c7a",
           "desc": [
             "Return the context of the current connection.",
             "",
@@ -157,7 +177,7 @@
           "args": [
             [
               "xListener",
-              "XConnectionListener",
+              "XConnectionListener_aaa0e59",
               "in"
             ]
           ]

@@ -1,31 +1,42 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "ChartTableAddressSupplier",
   "type": "service",
   "namespace": "com.sun.star.chart",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [],
     "from_imports_typing": [
       [
         ".chart_series_address",
-        "ChartSeriesAddress"
+        "ChartSeriesAddress",
+        "ChartSeriesAddress_a480e3d"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "typing.List[ChartSeriesAddress]"
+      "typing.List[ChartSeriesAddress_a480e3d]"
     ],
     "typings": [
-      "typing.List[ChartSeriesAddress]"
+      "typing.List[ChartSeriesAddress_a480e3d]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [],
+      "typing": [
+        "com.sun.star.chart.ChartSeriesAddress"
+      ]
+    },
     "name": "ChartTableAddressSupplier",
     "imports": [],
     "namespace": "com.sun.star.chart",
@@ -40,7 +51,7 @@
       "types": [
         {
           "name": "SeriesAddresses",
-          "returns": "typing.List[ChartSeriesAddress]",
+          "returns": "typing.List[ChartSeriesAddress_a480e3d]",
           "desc": [
             "contains the addresses to the elements of a series.",
             "",

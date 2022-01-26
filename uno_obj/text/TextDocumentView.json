@@ -1,45 +1,59 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "TextDocumentView",
   "type": "service",
   "namespace": "com.sun.star.text",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
-        "..view.x_view_settings_supplier",
-        "XViewSettingsSupplier"
-      ],
-      [
         "..beans.x_property_set",
-        "XPropertySet"
-      ],
-      [
-        "..view.office_document_view",
-        "OfficeDocumentView"
+        "XPropertySet",
+        "XPropertySet_bc180bfa"
       ],
       [
         ".x_text_view_cursor_supplier",
-        "XTextViewCursorSupplier"
+        "XTextViewCursorSupplier",
+        "XTextViewCursorSupplier_4c931037"
+      ],
+      [
+        "..view.office_document_view",
+        "OfficeDocumentView",
+        "OfficeDocumentView_fd320de9"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.beans.XPropertySet": "XPropertySet_bc180bfa",
+      "com.sun.star.text.XTextViewCursorSupplier": "XTextViewCursorSupplier_4c931037",
+      "com.sun.star.view.OfficeDocumentView": "OfficeDocumentView_fd320de9"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
+    "full_imports": {
+      "general": [
+        "com.sun.star.beans.XPropertySet",
+        "com.sun.star.text.XTextViewCursorSupplier",
+        "com.sun.star.view.OfficeDocumentView"
+      ],
+      "typing": []
+    },
     "name": "TextDocumentView",
     "imports": [],
     "namespace": "com.sun.star.text",
     "extends": [
       "com.sun.star.view.OfficeDocumentView",
-      "com.sun.star.view.XViewSettingsSupplier",
       "com.sun.star.text.XTextViewCursorSupplier",
       "com.sun.star.beans.XPropertySet"
     ],

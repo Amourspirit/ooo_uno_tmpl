@@ -1,79 +1,111 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XDocumentDigitalSignatures",
   "type": "interface",
   "namespace": "com.sun.star.security",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "XInterface_8f010a43"
       ]
     ],
     "from_imports_typing": [
       [
-        ".certificate_kind",
-        "CertificateKind"
-      ],
-      [
-        "..io.x_input_stream",
-        "XInputStream"
-      ],
-      [
-        "..graphic.x_graphic",
-        "XGraphic"
-      ],
-      [
-        "..embed.x_storage",
-        "XStorage"
-      ],
-      [
-        "..io.x_stream",
-        "XStream"
-      ],
-      [
-        ".x_certificate",
-        "XCertificate"
-      ],
-      [
         "..awt.x_window",
-        "XWindow"
-      ],
-      [
-        ".document_signature_information",
-        "DocumentSignatureInformation"
+        "XWindow",
+        "XWindow_713b0924"
       ],
       [
         "..beans.property_value",
-        "PropertyValue"
+        "PropertyValue",
+        "PropertyValue_c9610c73"
+      ],
+      [
+        "..embed.x_storage",
+        "XStorage",
+        "XStorage_8e460a32"
+      ],
+      [
+        "..graphic.x_graphic",
+        "XGraphic",
+        "XGraphic_a4da0afc"
+      ],
+      [
+        "..io.x_input_stream",
+        "XInputStream",
+        "XInputStream_98d40ab4"
+      ],
+      [
+        "..io.x_stream",
+        "XStream",
+        "XStream_678908a4"
+      ],
+      [
+        ".certificate_kind",
+        "CertificateKind",
+        "CertificateKind_ffd0e69"
+      ],
+      [
+        ".document_signature_information",
+        "DocumentSignatureInformation",
+        "DocumentSignatureInformation_f36c13f7"
+      ],
+      [
+        ".x_certificate",
+        "XCertificate",
+        "XCertificate_e55b0d3b"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
     "quote": [
-      "XStorage",
-      "CertificateKind",
-      "typing.List[PropertyValue]",
-      "XGraphic",
-      "XStream",
-      "XWindow",
-      "XInputStream",
-      "typing.List[DocumentSignatureInformation]",
-      "XCertificate",
-      "typing.List[XCertificate]"
+      "CertificateKind_ffd0e69",
+      "XCertificate_e55b0d3b",
+      "XGraphic_a4da0afc",
+      "XInputStream_98d40ab4",
+      "XStorage_8e460a32",
+      "XStream_678908a4",
+      "XWindow_713b0924",
+      "typing.List[DocumentSignatureInformation_f36c13f7]",
+      "typing.List[PropertyValue_c9610c73]",
+      "typing.List[XCertificate_e55b0d3b]"
     ],
     "typings": [
-      "typing.List[DocumentSignatureInformation]",
-      "typing.List[PropertyValue]",
-      "typing.List[XCertificate]"
+      "typing.List[DocumentSignatureInformation_f36c13f7]",
+      "typing.List[PropertyValue_c9610c73]",
+      "typing.List[XCertificate_e55b0d3b]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.awt.XWindow",
+        "com.sun.star.beans.PropertyValue",
+        "com.sun.star.embed.XStorage",
+        "com.sun.star.graphic.XGraphic",
+        "com.sun.star.io.XInputStream",
+        "com.sun.star.io.XStream",
+        "com.sun.star.security.CertificateKind",
+        "com.sun.star.security.DocumentSignatureInformation",
+        "com.sun.star.security.XCertificate"
+      ]
+    },
     "name": "XDocumentDigitalSignatures",
     "imports": [],
     "namespace": "com.sun.star.security",
@@ -100,7 +132,7 @@
           "args": [
             [
               "Author",
-              "XCertificate",
+              "XCertificate_e55b0d3b",
               "in"
             ]
           ]
@@ -120,7 +152,7 @@
         },
         {
           "name": "chooseCertificate",
-          "returns": "XCertificate",
+          "returns": "XCertificate_e55b0d3b",
           "desc": [
             "This method shows the CertificateChooser dialog, used by document and PDF signing Shows only private certificates.",
             "",
@@ -139,7 +171,7 @@
         },
         {
           "name": "chooseCertificateWithProps",
-          "returns": "XCertificate",
+          "returns": "XCertificate_e55b0d3b",
           "desc": [
             "This method shows the CertificateChooser dialog, used by document and PDF signing Shows only private certificates and returns usage string in addition to description.",
             "",
@@ -151,14 +183,14 @@
           "args": [
             [
               "Properties",
-              "typing.List[PropertyValue]",
+              "typing.List[PropertyValue_c9610c73]",
               "out"
             ]
           ]
         },
         {
           "name": "chooseEncryptionCertificate",
-          "returns": "typing.List[XCertificate]",
+          "returns": "typing.List[XCertificate_e55b0d3b]",
           "desc": [
             "This method shows the CertificateChooser dialog with all certificates, private and other people's.",
             "",
@@ -173,7 +205,7 @@
         },
         {
           "name": "chooseSigningCertificate",
-          "returns": "XCertificate",
+          "returns": "XCertificate_e55b0d3b",
           "desc": [
             "This is an alias for 'chooseCertificate', shows the CertificateChooser dialog with private certificates.",
             "",
@@ -225,7 +257,7 @@
           "args": [
             [
               "Author",
-              "XCertificate",
+              "XCertificate_e55b0d3b",
               "in"
             ]
           ]
@@ -254,7 +286,7 @@
         },
         {
           "name": "selectSigningCertificate",
-          "returns": "XCertificate",
+          "returns": "XCertificate_e55b0d3b",
           "desc": [
             "This shows the certificate selection dialog and allows to only select the certificate without actually signing the document.",
             "",
@@ -273,7 +305,7 @@
         },
         {
           "name": "selectSigningCertificateWithType",
-          "returns": "XCertificate",
+          "returns": "XCertificate_e55b0d3b",
           "desc": [
             "This shows the certificate selection dialog and allows to only select the certificate without actually signing the document.",
             "",
@@ -287,7 +319,7 @@
           "args": [
             [
               "certificateKind",
-              "CertificateKind",
+              "CertificateKind_ffd0e69",
               "in"
             ],
             [
@@ -311,7 +343,7 @@
           "args": [
             [
               "xParentWindow",
-              "XWindow",
+              "XWindow_713b0924",
               "in"
             ]
           ]
@@ -324,7 +356,7 @@
           "args": [
             [
               "Certificate",
-              "XCertificate",
+              "XCertificate_e55b0d3b",
               "in"
             ]
           ]
@@ -339,12 +371,12 @@
           "args": [
             [
               "xStorage",
-              "XStorage",
+              "XStorage_8e460a32",
               "in"
             ],
             [
               "xSignInStream",
-              "XInputStream",
+              "XInputStream_98d40ab4",
               "in"
             ]
           ]
@@ -359,12 +391,12 @@
           "args": [
             [
               "xStorage",
-              "XStorage",
+              "XStorage_8e460a32",
               "in"
             ],
             [
               "xSignInStream",
-              "XInputStream",
+              "XInputStream_98d40ab4",
               "in"
             ]
           ]
@@ -379,12 +411,12 @@
           "args": [
             [
               "xStorage",
-              "XStorage",
+              "XStorage_8e460a32",
               "in"
             ],
             [
               "xSignInStream",
-              "XInputStream",
+              "XInputStream_98d40ab4",
               "in"
             ]
           ]
@@ -401,12 +433,12 @@
           "args": [
             [
               "xStorage",
-              "XStorage",
+              "XStorage_8e460a32",
               "in"
             ],
             [
               "xSignStream",
-              "XStream",
+              "XStream_678908a4",
               "in"
             ]
           ]
@@ -425,17 +457,17 @@
           "args": [
             [
               "xCertificate",
-              "XCertificate",
+              "XCertificate_e55b0d3b",
               "in"
             ],
             [
               "xStorage",
-              "XStorage",
+              "XStorage_8e460a32",
               "in"
             ],
             [
               "xStream",
-              "XStream",
+              "XStream_678908a4",
               "in"
             ]
           ]
@@ -450,12 +482,12 @@
           "args": [
             [
               "Storage",
-              "XStorage",
+              "XStorage_8e460a32",
               "in"
             ],
             [
               "xSignStream",
-              "XStream",
+              "XStream_678908a4",
               "in"
             ]
           ]
@@ -474,17 +506,17 @@
           "args": [
             [
               "xCertificate",
-              "XCertificate",
+              "XCertificate_e55b0d3b",
               "in"
             ],
             [
               "xStorage",
-              "XStorage",
+              "XStorage_8e460a32",
               "in"
             ],
             [
               "xStream",
-              "XStream",
+              "XStream_678908a4",
               "in"
             ]
           ]
@@ -501,12 +533,12 @@
           "args": [
             [
               "xStorage",
-              "XStorage",
+              "XStorage_8e460a32",
               "in"
             ],
             [
               "xSignStream",
-              "XStream",
+              "XStream_678908a4",
               "in"
             ]
           ]
@@ -527,17 +559,17 @@
           "args": [
             [
               "xCertificate",
-              "XCertificate",
+              "XCertificate_e55b0d3b",
               "in"
             ],
             [
               "xStorage",
-              "XStorage",
+              "XStorage_8e460a32",
               "in"
             ],
             [
               "xStream",
-              "XStream",
+              "XStream_678908a4",
               "in"
             ]
           ]
@@ -560,12 +592,12 @@
           "args": [
             [
               "xStorage",
-              "XStorage",
+              "XStorage_8e460a32",
               "in"
             ],
             [
               "xSignStream",
-              "XStream",
+              "XStream_678908a4",
               "in"
             ],
             [
@@ -575,17 +607,17 @@
             ],
             [
               "xCertificate",
-              "XCertificate",
+              "XCertificate_e55b0d3b",
               "in"
             ],
             [
               "xValidGraphic",
-              "XGraphic",
+              "XGraphic_a4da0afc",
               "in"
             ],
             [
               "xInvalidGraphic",
-              "XGraphic",
+              "XGraphic_a4da0afc",
               "in"
             ],
             [
@@ -597,7 +629,7 @@
         },
         {
           "name": "verifyDocumentContentSignatures",
-          "returns": "typing.List[DocumentSignatureInformation]",
+          "returns": "typing.List[DocumentSignatureInformation_f36c13f7]",
           "desc": [
             "checks for digital signatures and their status.",
             "",
@@ -607,19 +639,19 @@
           "args": [
             [
               "xStorage",
-              "XStorage",
+              "XStorage_8e460a32",
               "in"
             ],
             [
               "xSignInStream",
-              "XInputStream",
+              "XInputStream_98d40ab4",
               "in"
             ]
           ]
         },
         {
           "name": "verifyPackageSignatures",
-          "returns": "typing.List[DocumentSignatureInformation]",
+          "returns": "typing.List[DocumentSignatureInformation_f36c13f7]",
           "desc": [
             "checks for digital signatures and their status.",
             "",
@@ -629,19 +661,19 @@
           "args": [
             [
               "Storage",
-              "XStorage",
+              "XStorage_8e460a32",
               "in"
             ],
             [
               "xSignInStream",
-              "XInputStream",
+              "XInputStream_98d40ab4",
               "in"
             ]
           ]
         },
         {
           "name": "verifyScriptingContentSignatures",
-          "returns": "typing.List[DocumentSignatureInformation]",
+          "returns": "typing.List[DocumentSignatureInformation_f36c13f7]",
           "desc": [
             "checks for digital signatures and their status.",
             "",
@@ -651,12 +683,12 @@
           "args": [
             [
               "xStorage",
-              "XStorage",
+              "XStorage_8e460a32",
               "in"
             ],
             [
               "xSignInStream",
-              "XInputStream",
+              "XInputStream_98d40ab4",
               "in"
             ]
           ]

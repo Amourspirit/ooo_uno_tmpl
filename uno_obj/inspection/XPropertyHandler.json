@@ -1,73 +1,103 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XPropertyHandler",
   "type": "interface",
   "namespace": "com.sun.star.inspection",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..lang.x_component",
-        "XComponent"
+        "XComponent",
+        "XComponent_98dc0ab5"
       ]
     ],
     "from_imports_typing": [
       [
-        "..uno.x_interface",
-        "XInterface"
-      ],
-      [
-        ".x_object_inspector_ui",
-        "XObjectInspectorUI"
-      ],
-      [
         "..beans.property",
-        "Property"
-      ],
-      [
-        ".x_property_control_factory",
-        "XPropertyControlFactory"
-      ],
-      [
-        ".interactive_selection_result",
-        "InteractiveSelectionResult"
-      ],
-      [
-        ".line_descriptor",
-        "LineDescriptor"
+        "Property",
+        "Property_8f4e0a76"
       ],
       [
         "..beans.property_state",
-        "PropertyState"
+        "PropertyState",
+        "PropertyState_c97b0c77"
       ],
       [
         "..beans.x_property_change_listener",
-        "XPropertyChangeListener"
+        "XPropertyChangeListener",
+        "XPropertyChangeListener_58e4105a"
+      ],
+      [
+        ".interactive_selection_result",
+        "InteractiveSelectionResult",
+        "InteractiveSelectionResult_f27a13e7"
+      ],
+      [
+        ".line_descriptor",
+        "LineDescriptor",
+        "LineDescriptor_1e460eeb"
+      ],
+      [
+        ".x_object_inspector_ui",
+        "XObjectInspectorUI",
+        "XObjectInspectorUI_5ccd1048"
+      ],
+      [
+        ".x_property_control_factory",
+        "XPropertyControlFactory",
+        "XPropertyControlFactory_b8ed12ba"
+      ],
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.lang.XComponent": "XComponent_98dc0ab5"
+    },
     "quote": [
-      "typing.List[str]",
-      "LineDescriptor",
-      "typing.List[Property]",
-      "XPropertyControlFactory",
-      "PropertyState",
-      "InteractiveSelectionResult",
-      "XInterface",
-      "XPropertyChangeListener",
-      "XObjectInspectorUI"
+      "InteractiveSelectionResult_f27a13e7",
+      "LineDescriptor_1e460eeb",
+      "PropertyState_c97b0c77",
+      "XInterface_8f010a43",
+      "XObjectInspectorUI_5ccd1048",
+      "XPropertyChangeListener_58e4105a",
+      "XPropertyControlFactory_b8ed12ba",
+      "typing.List[Property_8f4e0a76]",
+      "typing.List[str]"
     ],
     "typings": [
-      "typing.List[str]",
-      "typing.List[Property]"
+      "typing.List[Property_8f4e0a76]",
+      "typing.List[str]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.lang.XComponent"
+      ],
+      "typing": [
+        "com.sun.star.beans.Property",
+        "com.sun.star.beans.PropertyState",
+        "com.sun.star.beans.XPropertyChangeListener",
+        "com.sun.star.inspection.InteractiveSelectionResult",
+        "com.sun.star.inspection.LineDescriptor",
+        "com.sun.star.inspection.XObjectInspectorUI",
+        "com.sun.star.inspection.XPropertyControlFactory",
+        "com.sun.star.uno.XInterface"
+      ]
+    },
     "name": "XPropertyHandler",
     "imports": [],
     "namespace": "com.sun.star.inspection",
@@ -115,7 +145,7 @@
             ],
             [
               "InspectorUI",
-              "XObjectInspectorUI",
+              "XObjectInspectorUI_5ccd1048",
               "in"
             ],
             [
@@ -141,7 +171,7 @@
           "args": [
             [
               "Listener",
-              "XPropertyChangeListener",
+              "XPropertyChangeListener_58e4105a",
               "in"
             ]
           ]
@@ -209,7 +239,7 @@
         },
         {
           "name": "describePropertyLine",
-          "returns": "LineDescriptor",
+          "returns": "LineDescriptor_1e460eeb",
           "desc": [
             "describes the UI to be used to represent the property"
           ],
@@ -225,7 +255,7 @@
             ],
             [
               "ControlFactory",
-              "XPropertyControlFactory",
+              "XPropertyControlFactory_b8ed12ba",
               "in"
             ]
           ]
@@ -249,7 +279,7 @@
         },
         {
           "name": "getPropertyState",
-          "returns": "PropertyState",
+          "returns": "PropertyState_c97b0c77",
           "desc": [
             "returns the state of a property"
           ],
@@ -306,7 +336,7 @@
         },
         {
           "name": "getSupportedProperties",
-          "returns": "typing.List[Property]",
+          "returns": "typing.List[Property_8f4e0a76]",
           "desc": [
             "returns the properties which the handler can handle",
             "",
@@ -329,7 +359,7 @@
           "args": [
             [
               "Component",
-              "XInterface",
+              "XInterface_8f010a43",
               "in"
             ]
           ]
@@ -355,7 +385,7 @@
         },
         {
           "name": "onInteractivePropertySelection",
-          "returns": "InteractiveSelectionResult",
+          "returns": "InteractiveSelectionResult_f27a13e7",
           "desc": [
             "called when a browse button belonging to a property UI representation has been clicked",
             "",
@@ -393,7 +423,7 @@
             ],
             [
               "InspectorUI",
-              "XObjectInspectorUI",
+              "XObjectInspectorUI_5ccd1048",
               "in"
             ]
           ]
@@ -408,7 +438,7 @@
           "args": [
             [
               "Listener",
-              "XPropertyChangeListener",
+              "XPropertyChangeListener_58e4105a",
               "in"
             ]
           ]

@@ -1,54 +1,72 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XFrame",
   "type": "interface",
   "namespace": "com.sun.star.frame",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..lang.x_component",
-        "XComponent"
+        "XComponent",
+        "XComponent_98dc0ab5"
       ]
     ],
     "from_imports_typing": [
       [
-        ".x_frame",
-        "XFrame"
-      ],
-      [
-        ".x_frames_supplier",
-        "XFramesSupplier"
-      ],
-      [
         "..awt.x_window",
-        "XWindow"
-      ],
-      [
-        ".x_frame_action_listener",
-        "XFrameActionListener"
+        "XWindow",
+        "XWindow_713b0924"
       ],
       [
         ".x_controller",
-        "XController"
+        "XController",
+        "XController_b00e0b8f"
+      ],
+      [
+        ".x_frame_action_listener",
+        "XFrameActionListener",
+        "XFrameActionListener_26250efa"
+      ],
+      [
+        ".x_frames_supplier",
+        "XFramesSupplier",
+        "XFramesSupplier_e12a0d1d"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.lang.XComponent": "XComponent_98dc0ab5"
+    },
     "quote": [
-      "XFramesSupplier",
+      "XController_b00e0b8f",
       "XFrame",
-      "XFrameActionListener",
-      "XWindow",
-      "XController"
+      "XFrameActionListener_26250efa",
+      "XFramesSupplier_e12a0d1d",
+      "XWindow_713b0924"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.lang.XComponent"
+      ],
+      "typing": [
+        "com.sun.star.awt.XWindow",
+        "com.sun.star.frame.XController",
+        "com.sun.star.frame.XFrameActionListener",
+        "com.sun.star.frame.XFramesSupplier"
+      ]
+    },
     "name": "XFrame",
     "imports": [],
     "namespace": "com.sun.star.frame",
@@ -88,7 +106,7 @@
           "args": [
             [
               "xListener",
-              "XFrameActionListener",
+              "XFrameActionListener_26250efa",
               "in"
             ]
           ]
@@ -145,7 +163,7 @@
         },
         {
           "name": "getComponentWindow",
-          "returns": "XWindow",
+          "returns": "XWindow_713b0924",
           "desc": [
             "provides access to the component window",
             "",
@@ -156,7 +174,7 @@
         },
         {
           "name": "getContainerWindow",
-          "returns": "XWindow",
+          "returns": "XWindow_713b0924",
           "desc": [
             "provides access to the container window of the frame.",
             "",
@@ -167,7 +185,7 @@
         },
         {
           "name": "getController",
-          "returns": "XController",
+          "returns": "XController_b00e0b8f",
           "desc": [
             "provides access to the controller",
             "",
@@ -178,7 +196,7 @@
         },
         {
           "name": "getCreator",
-          "returns": "XFramesSupplier",
+          "returns": "XFramesSupplier_e12a0d1d",
           "desc": [
             "provides access to the creator (parent) of this frame"
           ],
@@ -208,7 +226,7 @@
           "args": [
             [
               "xWindow",
-              "XWindow",
+              "XWindow_713b0924",
               "in"
             ]
           ]
@@ -243,7 +261,7 @@
           "args": [
             [
               "xListener",
-              "XFrameActionListener",
+              "XFrameActionListener_26250efa",
               "in"
             ]
           ]
@@ -262,12 +280,12 @@
           "args": [
             [
               "xComponentWindow",
-              "XWindow",
+              "XWindow_713b0924",
               "in"
             ],
             [
               "xController",
-              "XController",
+              "XController_b00e0b8f",
               "in"
             ]
           ]
@@ -284,7 +302,7 @@
           "args": [
             [
               "Creator",
-              "XFramesSupplier",
+              "XFramesSupplier_e12a0d1d",
               "in"
             ]
           ]

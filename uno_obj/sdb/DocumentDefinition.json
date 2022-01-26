@@ -1,35 +1,54 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "DocumentDefinition",
   "type": "service",
   "namespace": "com.sun.star.sdb",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..beans.x_property_set",
-        "XPropertySet"
-      ],
-      [
-        ".x_sub_document",
-        "XSubDocument"
+        "XPropertySet",
+        "XPropertySet_bc180bfa"
       ],
       [
         ".definition_content",
-        "DefinitionContent"
+        "DefinitionContent",
+        "DefinitionContent_e0d20d25"
+      ],
+      [
+        ".x_sub_document",
+        "XSubDocument",
+        "XSubDocument_a2da0b02"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.beans.XPropertySet": "XPropertySet_bc180bfa",
+      "com.sun.star.sdb.DefinitionContent": "DefinitionContent_e0d20d25",
+      "com.sun.star.sdb.XSubDocument": "XSubDocument_a2da0b02"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
+    "full_imports": {
+      "general": [
+        "com.sun.star.beans.XPropertySet",
+        "com.sun.star.sdb.DefinitionContent",
+        "com.sun.star.sdb.XSubDocument"
+      ],
+      "typing": []
+    },
     "name": "DocumentDefinition",
     "imports": [],
     "namespace": "com.sun.star.sdb",

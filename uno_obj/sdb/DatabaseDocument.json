@@ -1,35 +1,54 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "DatabaseDocument",
   "type": "service",
   "namespace": "com.sun.star.sdb",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..beans.x_property_set",
-        "XPropertySet"
-      ],
-      [
-        "..sdbcx.x_rename",
-        "XRename"
+        "XPropertySet",
+        "XPropertySet_bc180bfa"
       ],
       [
         "..sdbcx.x_data_descriptor_factory",
-        "XDataDescriptorFactory"
+        "XDataDescriptorFactory",
+        "XDataDescriptorFactory_46170fe5"
+      ],
+      [
+        "..sdbcx.x_rename",
+        "XRename",
+        "XRename_848c09cc"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.beans.XPropertySet": "XPropertySet_bc180bfa",
+      "com.sun.star.sdbcx.XDataDescriptorFactory": "XDataDescriptorFactory_46170fe5",
+      "com.sun.star.sdbcx.XRename": "XRename_848c09cc"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
+    "full_imports": {
+      "general": [
+        "com.sun.star.beans.XPropertySet",
+        "com.sun.star.sdbcx.XDataDescriptorFactory",
+        "com.sun.star.sdbcx.XRename"
+      ],
+      "typing": []
+    },
     "name": "DatabaseDocument",
     "imports": [],
     "namespace": "com.sun.star.sdb",

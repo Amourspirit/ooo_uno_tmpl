@@ -1,39 +1,57 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XShapeCombiner",
   "type": "interface",
   "namespace": "com.sun.star.drawing",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "XInterface_8f010a43"
       ]
     ],
     "from_imports_typing": [
       [
-        ".x_shapes",
-        "XShapes"
+        ".x_shape",
+        "XShape",
+        "XShape_8fd00a3d"
       ],
       [
-        ".x_shape",
-        "XShape"
+        ".x_shapes",
+        "XShapes",
+        "XShapes_9a800ab0"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
     "quote": [
-      "XShapes",
-      "XShape"
+      "XShape_8fd00a3d",
+      "XShapes_9a800ab0"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.drawing.XShape",
+        "com.sun.star.drawing.XShapes"
+      ]
+    },
     "name": "XShapeCombiner",
     "imports": [],
     "namespace": "com.sun.star.drawing",
@@ -48,7 +66,7 @@
       "methods": [
         {
           "name": "combine",
-          "returns": "XShape",
+          "returns": "XShape_8fd00a3d",
           "desc": [
             "combines Shapes"
           ],
@@ -56,7 +74,7 @@
           "args": [
             [
               "xShapes",
-              "XShapes",
+              "XShapes_9a800ab0",
               "in"
             ]
           ]
@@ -71,7 +89,7 @@
           "args": [
             [
               "Group",
-              "XShape",
+              "XShape_8fd00a3d",
               "in"
             ]
           ]

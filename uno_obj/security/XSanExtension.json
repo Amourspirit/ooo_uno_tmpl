@@ -1,36 +1,52 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XSanExtension",
   "type": "interface",
   "namespace": "com.sun.star.security",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         ".x_certificate_extension",
-        "XCertificateExtension"
+        "XCertificateExtension",
+        "XCertificateExtension_6ead10f8"
       ]
     ],
     "from_imports_typing": [
       [
         ".cert_alt_name_entry",
-        "CertAltNameEntry"
+        "CertAltNameEntry",
+        "CertAltNameEntry_1ce50ec2"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.security.XCertificateExtension": "XCertificateExtension_6ead10f8"
+    },
     "quote": [
-      "typing.List[CertAltNameEntry]"
+      "typing.List[CertAltNameEntry_1ce50ec2]"
     ],
     "typings": [
-      "typing.List[CertAltNameEntry]"
+      "typing.List[CertAltNameEntry_1ce50ec2]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.security.XCertificateExtension"
+      ],
+      "typing": [
+        "com.sun.star.security.CertAltNameEntry"
+      ]
+    },
     "name": "XSanExtension",
     "imports": [],
     "namespace": "com.sun.star.security",
@@ -47,7 +63,7 @@
       "types": [
         {
           "name": "AlternativeNames",
-          "returns": "typing.List[CertAltNameEntry]",
+          "returns": "typing.List[CertAltNameEntry_1ce50ec2]",
           "desc": [
             "Contains the alternative names of a certificate."
           ],

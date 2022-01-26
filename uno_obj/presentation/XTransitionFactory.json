@@ -1,44 +1,64 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XTransitionFactory",
   "type": "interface",
   "namespace": "com.sun.star.presentation",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "XInterface_8f010a43"
       ]
     ],
     "from_imports_typing": [
       [
-        ".x_transition",
-        "XTransition"
+        ".x_slide_show_view",
+        "XSlideShowView",
+        "XSlideShowView_3eb40fa9"
       ],
       [
-        ".x_slide_show_view",
-        "XSlideShowView"
+        ".x_transition",
+        "XTransition",
+        "XTransition_123a0ea7"
       ],
       [
         "..rendering.x_bitmap",
-        "XBitmap"
+        "XBitmap",
+        "XBitmap_b1b70b7b"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
     "quote": [
-      "XBitmap",
-      "XTransition",
-      "XSlideShowView"
+      "XBitmap_b1b70b7b",
+      "XSlideShowView_3eb40fa9",
+      "XTransition_123a0ea7"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.presentation.XSlideShowView",
+        "com.sun.star.presentation.XTransition",
+        "com.sun.star.rendering.XBitmap"
+      ]
+    },
     "name": "XTransitionFactory",
     "imports": [],
     "namespace": "com.sun.star.presentation",
@@ -59,7 +79,7 @@
       "methods": [
         {
           "name": "createTransition",
-          "returns": "XTransition",
+          "returns": "XTransition_123a0ea7",
           "desc": [
             "Actually create a transition for the given transition id."
           ],
@@ -82,17 +102,17 @@
             ],
             [
               "view",
-              "XSlideShowView",
+              "XSlideShowView_3eb40fa9",
               "in"
             ],
             [
               "leavingBitmap",
-              "XBitmap",
+              "XBitmap_b1b70b7b",
               "in"
             ],
             [
               "enteringBitmap",
-              "XBitmap",
+              "XBitmap_b1b70b7b",
               "in"
             ]
           ]

@@ -1,30 +1,47 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "SendMailMessageFailedException",
   "type": "exception",
   "namespace": "com.sun.star.mail",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         ".mail_exception",
-        "MailException"
+        "MailException",
+        "MailException_ba9e0bdd"
       ]
     ],
     "from_imports_typing": [],
-    "quote": [],
-    "typings": [],
-    "requires_typing": false,
+    "extends_map": {
+      "com.sun.star.mail.MailException": "MailException_ba9e0bdd"
+    },
+    "quote": [
+      "typing.List[str]"
+    ],
+    "typings": [
+      "typing.List[str]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.mail.MailException"
+      ],
+      "typing": []
+    },
     "name": "SendMailMessageFailedException",
-    "namespace": "com.sun.star.mail",
     "imports": [],
+    "namespace": "com.sun.star.mail",
     "extends": [
       "com.sun.star.mail.MailException"
     ],
@@ -38,6 +55,36 @@
       "    OOo 2.0"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/exceptioncom_1_1sun_1_1star_1_1mail_1_1SendMailMessageFailedException.html",
-    "items": {}
+    "items": {
+      "types": [
+        {
+          "name": "InvalidAddresses",
+          "returns": "typing.List[str]",
+          "desc": [
+            "The addresses which are invalid because they do not conform to RFC\u00a0822."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ValidSentAddresses",
+          "returns": "typing.List[str]",
+          "desc": [
+            "The addresses to which the mail message was sent successfully."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ValidUnsentAddresses",
+          "returns": "typing.List[str]",
+          "desc": [
+            "The addresses which are valid but to which the message was not sent."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
   }
 }

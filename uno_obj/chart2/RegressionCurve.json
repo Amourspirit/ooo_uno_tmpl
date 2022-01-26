@@ -1,35 +1,54 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "RegressionCurve",
   "type": "service",
   "namespace": "com.sun.star.chart2",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
-        "..drawing.line_properties",
-        "LineProperties"
-      ],
-      [
         "..beans.property_set",
-        "PropertySet"
+        "PropertySet",
+        "PropertySet_b0e70ba2"
       ],
       [
         ".x_regression_curve",
-        "XRegressionCurve"
+        "XRegressionCurve",
+        "XRegressionCurve_fa3c0dca"
+      ],
+      [
+        "..drawing.line_properties",
+        "LineProperties",
+        "LineProperties_f13f0da9"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.beans.PropertySet": "PropertySet_b0e70ba2",
+      "com.sun.star.chart2.XRegressionCurve": "XRegressionCurve_fa3c0dca",
+      "com.sun.star.drawing.LineProperties": "LineProperties_f13f0da9"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
+    "full_imports": {
+      "general": [
+        "com.sun.star.beans.PropertySet",
+        "com.sun.star.chart2.XRegressionCurve",
+        "com.sun.star.drawing.LineProperties"
+      ],
+      "typing": []
+    },
     "name": "RegressionCurve",
     "imports": [],
     "namespace": "com.sun.star.chart2",

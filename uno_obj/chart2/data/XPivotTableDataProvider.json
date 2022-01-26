@@ -1,41 +1,59 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XPivotTableDataProvider",
   "type": "interface",
   "namespace": "com.sun.star.chart2.data",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "...uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "XInterface_8f010a43"
       ]
     ],
     "from_imports_typing": [
       [
         ".pivot_table_field_entry",
-        "PivotTableFieldEntry"
+        "PivotTableFieldEntry",
+        "PivotTableFieldEntry_81a11104"
       ],
       [
         ".x_data_sequence",
-        "XDataSequence"
+        "XDataSequence",
+        "XDataSequence_11f00e1f"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
     "quote": [
-      "XDataSequence",
-      "typing.List[PivotTableFieldEntry]"
+      "XDataSequence_11f00e1f",
+      "typing.List[PivotTableFieldEntry_81a11104]"
     ],
     "typings": [
-      "typing.List[PivotTableFieldEntry]"
+      "typing.List[PivotTableFieldEntry_81a11104]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.chart2.data.PivotTableFieldEntry",
+        "com.sun.star.chart2.data.XDataSequence"
+      ]
+    },
     "name": "XPivotTableDataProvider",
     "imports": [],
     "namespace": "com.sun.star.chart2.data",
@@ -54,7 +72,7 @@
       "methods": [
         {
           "name": "createDataSequenceOfCategories",
-          "returns": "XDataSequence",
+          "returns": "XDataSequence_11f00e1f",
           "desc": [
             "creates a single data sequence of categories."
           ],
@@ -63,7 +81,7 @@
         },
         {
           "name": "createDataSequenceOfLabelsByIndex",
-          "returns": "XDataSequence",
+          "returns": "XDataSequence_11f00e1f",
           "desc": [
             "creates a single data sequence of label(s) for the given data series index."
           ],
@@ -78,7 +96,7 @@
         },
         {
           "name": "createDataSequenceOfValuesByIndex",
-          "returns": "XDataSequence",
+          "returns": "XDataSequence_11f00e1f",
           "desc": [
             "creates a single data sequence of values for the given data series index."
           ],
@@ -93,7 +111,7 @@
         },
         {
           "name": "getColumnFields",
-          "returns": "typing.List[PivotTableFieldEntry]",
+          "returns": "typing.List[PivotTableFieldEntry_81a11104]",
           "desc": [
             "names of column fields from the associated pivot table"
           ],
@@ -102,7 +120,7 @@
         },
         {
           "name": "getDataFields",
-          "returns": "typing.List[PivotTableFieldEntry]",
+          "returns": "typing.List[PivotTableFieldEntry_81a11104]",
           "desc": [
             "names of data fields from the associated pivot table"
           ],
@@ -126,7 +144,7 @@
         },
         {
           "name": "getPageFields",
-          "returns": "typing.List[PivotTableFieldEntry]",
+          "returns": "typing.List[PivotTableFieldEntry_81a11104]",
           "desc": [
             "names of page fields from the associated pivot table"
           ],
@@ -144,7 +162,7 @@
         },
         {
           "name": "getRowFields",
-          "returns": "typing.List[PivotTableFieldEntry]",
+          "returns": "typing.List[PivotTableFieldEntry_81a11104]",
           "desc": [
             "names of row fields from the associated pivot table"
           ],

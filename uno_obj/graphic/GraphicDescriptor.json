@@ -1,34 +1,50 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "GraphicDescriptor",
   "type": "service",
   "namespace": "com.sun.star.graphic",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..beans.x_property_set",
-        "XPropertySet"
+        "XPropertySet",
+        "XPropertySet_bc180bfa"
       ]
     ],
     "from_imports_typing": [
       [
         "..awt.size",
-        "Size"
+        "Size",
+        "Size_576707ef"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.beans.XPropertySet": "XPropertySet_bc180bfa"
+    },
     "quote": [
-      "Size"
+      "Size_576707ef"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.beans.XPropertySet"
+      ],
+      "typing": [
+        "com.sun.star.awt.Size"
+      ]
+    },
     "name": "GraphicDescriptor",
     "imports": [],
     "namespace": "com.sun.star.graphic",
@@ -128,7 +144,7 @@
         },
         {
           "name": "Size100thMM",
-          "returns": "Size",
+          "returns": "Size_576707ef",
           "desc": [
             "The Size of the graphic in 100th mm.",
             "",
@@ -139,7 +155,7 @@
         },
         {
           "name": "SizePixel",
-          "returns": "Size",
+          "returns": "Size_576707ef",
           "desc": [
             "The Size of the graphic in pixel.",
             "",

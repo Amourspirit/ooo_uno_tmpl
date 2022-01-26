@@ -1,31 +1,42 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "LogicTargetModel",
   "type": "service",
   "namespace": "com.sun.star.chart2",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [],
     "from_imports_typing": [
       [
         "..beans.x_property_set",
-        "XPropertySet"
+        "XPropertySet",
+        "XPropertySet_bc180bfa"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "typing.List[XPropertySet]"
+      "typing.List[XPropertySet_bc180bfa]"
     ],
     "typings": [
-      "typing.List[XPropertySet]"
+      "typing.List[XPropertySet_bc180bfa]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [],
+      "typing": [
+        "com.sun.star.beans.XPropertySet"
+      ]
+    },
     "name": "LogicTargetModel",
     "imports": [],
     "namespace": "com.sun.star.chart2",
@@ -38,7 +49,7 @@
       "types": [
         {
           "name": "CoordinateSystems",
-          "returns": "typing.List[XPropertySet]",
+          "returns": "typing.List[XPropertySet_bc180bfa]",
           "desc": [
             "not BOUND nor CONSTRAINED in terms of Listener notifications, each element in the sequence must implement the service com.sun.star.chart2.CoordinateSystem"
           ],
@@ -47,7 +58,7 @@
         },
         {
           "name": "LogicTargetModels",
-          "returns": "typing.List[XPropertySet]",
+          "returns": "typing.List[XPropertySet_bc180bfa]",
           "desc": [
             "MAYBEVOID, not BOUND nor CONSTRAINED in terms of Listener notifications, each element in the sequence must implement the service com.sun.star.chart2.LogicTargetModel."
           ],

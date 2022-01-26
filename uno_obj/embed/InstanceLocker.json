@@ -1,39 +1,57 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "InstanceLocker",
   "type": "service",
   "namespace": "com.sun.star.embed",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..lang.x_component",
-        "XComponent"
+        "XComponent",
+        "XComponent_98dc0ab5"
       ]
     ],
     "from_imports_typing": [
       [
-        "..uno.x_interface",
-        "XInterface"
+        ".x_actions_approval",
+        "XActionsApproval",
+        "XActionsApproval_ed4b0d73"
       ],
       [
-        ".x_actions_approval",
-        "XActionsApproval"
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.lang.XComponent": "XComponent_98dc0ab5"
+    },
     "quote": [
-      "XInterface",
-      "XActionsApproval"
+      "XActionsApproval_ed4b0d73",
+      "XInterface_8f010a43"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.lang.XComponent"
+      ],
+      "typing": [
+        "com.sun.star.embed.XActionsApproval",
+        "com.sun.star.uno.XInterface"
+      ]
+    },
     "name": "InstanceLocker",
     "imports": [],
     "namespace": "com.sun.star.embed",
@@ -64,7 +82,7 @@
           "args": [
             [
               "xInstance",
-              "XInterface",
+              "XInterface_8f010a43",
               "in"
             ],
             [
@@ -88,7 +106,7 @@
           "args": [
             [
               "xInstance",
-              "XInterface",
+              "XInterface_8f010a43",
               "in"
             ],
             [
@@ -98,7 +116,7 @@
             ],
             [
               "xApprove",
-              "XActionsApproval",
+              "XActionsApproval_ed4b0d73",
               "in"
             ]
           ]

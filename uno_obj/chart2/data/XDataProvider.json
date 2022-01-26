@@ -1,51 +1,73 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XDataProvider",
   "type": "interface",
   "namespace": "com.sun.star.chart2.data",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "...uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "XInterface_8f010a43"
       ]
     ],
     "from_imports_typing": [
       [
-        ".x_data_source",
-        "XDataSource"
+        "...beans.property_value",
+        "PropertyValue",
+        "PropertyValue_c9610c73"
       ],
       [
         ".x_data_sequence",
-        "XDataSequence"
+        "XDataSequence",
+        "XDataSequence_11f00e1f"
       ],
       [
-        "...beans.property_value",
-        "PropertyValue"
+        ".x_data_source",
+        "XDataSource",
+        "XDataSource_f6340d57"
       ],
       [
         "...sheet.x_range_selection",
-        "XRangeSelection"
+        "XRangeSelection",
+        "XRangeSelection_e1310d0c"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
     "quote": [
-      "XDataSequence",
-      "XRangeSelection",
-      "XDataSource",
-      "typing.List[PropertyValue]"
+      "XDataSequence_11f00e1f",
+      "XDataSource_f6340d57",
+      "XRangeSelection_e1310d0c",
+      "typing.List[PropertyValue_c9610c73]"
     ],
     "typings": [
-      "typing.List[PropertyValue]"
+      "typing.List[PropertyValue_c9610c73]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.beans.PropertyValue",
+        "com.sun.star.chart2.data.XDataSequence",
+        "com.sun.star.chart2.data.XDataSource",
+        "com.sun.star.sheet.XRangeSelection"
+      ]
+    },
     "name": "XDataProvider",
     "imports": [],
     "namespace": "com.sun.star.chart2.data",
@@ -60,7 +82,7 @@
       "methods": [
         {
           "name": "createDataSequenceByRangeRepresentation",
-          "returns": "XDataSequence",
+          "returns": "XDataSequence_11f00e1f",
           "desc": [
             "creates a single data sequence for the given data range."
           ],
@@ -94,7 +116,7 @@
         },
         {
           "name": "createDataSequenceByValueArray",
-          "returns": "XDataSequence",
+          "returns": "XDataSequence_11f00e1f",
           "desc": [],
           "raises": [
             "com.sun.star.lang.IllegalArgumentException"
@@ -114,7 +136,7 @@
         },
         {
           "name": "createDataSource",
-          "returns": "XDataSource",
+          "returns": "XDataSource_f6340d57",
           "desc": [
             "Creates a data source object that matches the given range representation string.",
             "",
@@ -128,7 +150,7 @@
           "args": [
             [
               "aArguments",
-              "typing.List[PropertyValue]",
+              "typing.List[PropertyValue_c9610c73]",
               "in"
             ]
           ]
@@ -145,14 +167,14 @@
           "args": [
             [
               "aArguments",
-              "typing.List[PropertyValue]",
+              "typing.List[PropertyValue_c9610c73]",
               "in"
             ]
           ]
         },
         {
           "name": "detectArguments",
-          "returns": "typing.List[PropertyValue]",
+          "returns": "typing.List[PropertyValue_c9610c73]",
           "desc": [
             "Tries to find out with what parameters the passed DataSource most probably was created.",
             "",
@@ -164,14 +186,14 @@
           "args": [
             [
               "xDataSource",
-              "XDataSource",
+              "XDataSource_f6340d57",
               "in"
             ]
           ]
         },
         {
           "name": "getRangeSelection",
-          "returns": "XRangeSelection",
+          "returns": "XRangeSelection_e1310d0c",
           "desc": [
             "Returns a component that is able to change a given range representation to another one.",
             "",

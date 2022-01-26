@@ -1,39 +1,57 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XAccessController",
   "type": "interface",
   "namespace": "com.sun.star.security",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "XInterface_8f010a43"
       ]
     ],
     "from_imports_typing": [
       [
-        ".x_action",
-        "XAction"
+        ".x_access_control_context",
+        "XAccessControlContext",
+        "XAccessControlContext_6d6a10f0"
       ],
       [
-        ".x_access_control_context",
-        "XAccessControlContext"
+        ".x_action",
+        "XAction",
+        "XAction_a72e0b36"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
     "quote": [
-      "XAction",
-      "XAccessControlContext"
+      "XAccessControlContext_6d6a10f0",
+      "XAction_a72e0b36"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.security.XAccessControlContext",
+        "com.sun.star.security.XAction"
+      ]
+    },
     "name": "XAccessController",
     "imports": [],
     "namespace": "com.sun.star.security",
@@ -87,12 +105,12 @@
           "args": [
             [
               "action",
-              "XAction",
+              "XAction_a72e0b36",
               "in"
             ],
             [
               "restriction",
-              "XAccessControlContext",
+              "XAccessControlContext_6d6a10f0",
               "in"
             ]
           ]
@@ -113,19 +131,19 @@
           "args": [
             [
               "action",
-              "XAction",
+              "XAction_a72e0b36",
               "in"
             ],
             [
               "restriction",
-              "XAccessControlContext",
+              "XAccessControlContext_6d6a10f0",
               "in"
             ]
           ]
         },
         {
           "name": "getContext",
-          "returns": "XAccessControlContext",
+          "returns": "XAccessControlContext_6d6a10f0",
           "desc": [
             "This method takes a \\\"snapshot\\\" of the current calling context and returns it.",
             "",

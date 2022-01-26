@@ -1,64 +1,99 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XSection",
   "type": "interface",
   "namespace": "com.sun.star.report",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
-        "..container.x_container",
-        "XContainer"
-      ],
-      [
-        "..container.x_enumeration_access",
-        "XEnumerationAccess"
-      ],
-      [
-        "..lang.x_component",
-        "XComponent"
-      ],
-      [
-        "..drawing.x_shapes",
-        "XShapes"
-      ],
-      [
         "..beans.x_property_set",
-        "XPropertySet"
+        "XPropertySet",
+        "XPropertySet_bc180bfa"
       ],
       [
         "..container.x_child",
-        "XChild"
+        "XChild",
+        "XChild_a6390b07"
+      ],
+      [
+        "..container.x_container",
+        "XContainer",
+        "XContainer_d6fb0cc6"
+      ],
+      [
+        "..container.x_enumeration_access",
+        "XEnumerationAccess",
+        "XEnumerationAccess_4bac0ffc"
+      ],
+      [
+        "..drawing.x_shapes",
+        "XShapes",
+        "XShapes_9a800ab0"
+      ],
+      [
+        "..lang.x_component",
+        "XComponent",
+        "XComponent_98dc0ab5"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_group",
-        "XGroup"
+        "XGroup",
+        "XGroup_86540a09"
       ],
       [
         ".x_report_definition",
-        "XReportDefinition"
+        "XReportDefinition",
+        "XReportDefinition_ec30e81"
       ],
       [
         "..util.color",
-        "Color"
+        "Color",
+        "Color_68e908c5"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.beans.XPropertySet": "XPropertySet_bc180bfa",
+      "com.sun.star.container.XChild": "XChild_a6390b07",
+      "com.sun.star.container.XContainer": "XContainer_d6fb0cc6",
+      "com.sun.star.container.XEnumerationAccess": "XEnumerationAccess_4bac0ffc",
+      "com.sun.star.drawing.XShapes": "XShapes_9a800ab0",
+      "com.sun.star.lang.XComponent": "XComponent_98dc0ab5"
+    },
     "quote": [
-      "XGroup",
-      "XReportDefinition",
-      "Color"
+      "Color_68e908c5",
+      "XGroup_86540a09",
+      "XReportDefinition_ec30e81"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.beans.XPropertySet",
+        "com.sun.star.container.XChild",
+        "com.sun.star.container.XContainer",
+        "com.sun.star.container.XEnumerationAccess",
+        "com.sun.star.drawing.XShapes",
+        "com.sun.star.lang.XComponent"
+      ],
+      "typing": [
+        "com.sun.star.report.XGroup",
+        "com.sun.star.report.XReportDefinition",
+        "com.sun.star.util.Color"
+      ]
+    },
     "name": "XSection",
     "imports": [],
     "namespace": "com.sun.star.report",
@@ -80,7 +115,7 @@
       "properties": [
         {
           "name": "BackColor",
-          "returns": "Color",
+          "returns": "Color_68e908c5",
           "desc": [
             "Defines the background color of the section."
           ],
@@ -140,7 +175,7 @@
         },
         {
           "name": "Group",
-          "returns": "XGroup",
+          "returns": "XGroup_86540a09",
           "desc": [
             "Specifies the parent of the section if it is a group header or group footer."
           ],
@@ -200,7 +235,7 @@
         },
         {
           "name": "ReportDefinition",
-          "returns": "XReportDefinition",
+          "returns": "XReportDefinition_ec30e81",
           "desc": [
             "Specifies the parent of the section if it is a page header or page footer."
           ],

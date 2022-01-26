@@ -1,40 +1,56 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XAnimate",
   "type": "interface",
   "namespace": "com.sun.star.animations",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         ".x_animation_node",
-        "XAnimationNode"
+        "XAnimationNode",
+        "XAnimationNode_1cf10eb9"
       ]
     ],
     "from_imports_typing": [
       [
         ".time_filter_pair",
-        "TimeFilterPair"
+        "TimeFilterPair",
+        "TimeFilterPair_1d250ebc"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.animations.XAnimationNode": "XAnimationNode_1cf10eb9"
+    },
     "quote": [
-      "typing.List[TimeFilterPair]",
-      "typing.List[object]",
-      "typing.List[float]"
+      "typing.List[TimeFilterPair_1d250ebc]",
+      "typing.List[float]",
+      "typing.List[object]"
     ],
     "typings": [
-      "typing.List[TimeFilterPair]",
-      "typing.List[object]",
-      "typing.List[float]"
+      "typing.List[TimeFilterPair_1d250ebc]",
+      "typing.List[float]",
+      "typing.List[object]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.animations.XAnimationNode"
+      ],
+      "typing": [
+        "com.sun.star.animations.TimeFilterPair"
+      ]
+    },
     "name": "XAnimate",
     "imports": [],
     "namespace": "com.sun.star.animations",
@@ -56,7 +72,7 @@
         },
         {
           "name": "TimeFilter",
-          "returns": "typing.List[TimeFilterPair]",
+          "returns": "typing.List[TimeFilterPair_1d250ebc]",
           "desc": [
             "todo: timeFilter=\\\"0,0; 0.14,0.36; 0.43,0.73; 0.71,0.91; 1.0,1.0\\\" ?"
           ],

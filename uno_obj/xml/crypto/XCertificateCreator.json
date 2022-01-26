@@ -1,37 +1,53 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XCertificateCreator",
   "type": "interface",
   "namespace": "com.sun.star.xml.crypto",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "...uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "XInterface_8f010a43"
       ]
     ],
     "from_imports_typing": [
       [
         "...security.x_certificate",
-        "XCertificate"
+        "XCertificate",
+        "XCertificate_e55b0d3b"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
     "quote": [
-      "typing.List[int]",
-      "XCertificate"
+      "XCertificate_e55b0d3b",
+      "typing.List[int]"
     ],
     "typings": [
       "typing.List[int]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.security.XCertificate"
+      ]
+    },
     "name": "XCertificateCreator",
     "imports": [],
     "namespace": "com.sun.star.xml.crypto",
@@ -50,7 +66,7 @@
       "methods": [
         {
           "name": "addDERCertificateToTheDatabase",
-          "returns": "XCertificate",
+          "returns": "XCertificate_e55b0d3b",
           "desc": [
             "Adds a certificate to the certificate database with the trust provided by the trust string."
           ],
@@ -70,7 +86,7 @@
         },
         {
           "name": "createDERCertificateWithPrivateKey",
-          "returns": "XCertificate",
+          "returns": "XCertificate_e55b0d3b",
           "desc": [
             "Create certificate from raw DER encoded certificate and associate the private key with the certificate."
           ],

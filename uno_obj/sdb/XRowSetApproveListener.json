@@ -1,39 +1,57 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XRowSetApproveListener",
   "type": "interface",
   "namespace": "com.sun.star.sdb",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..lang.x_event_listener",
-        "XEventListener"
+        "XEventListener",
+        "XEventListener_c7230c4a"
       ]
     ],
     "from_imports_typing": [
       [
-        ".row_change_event",
-        "RowChangeEvent"
+        "..lang.event_object",
+        "EventObject",
+        "EventObject_a3d70b03"
       ],
       [
-        "..lang.event_object",
-        "EventObject"
+        ".row_change_event",
+        "RowChangeEvent",
+        "RowChangeEvent_ba0c0bc1"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.lang.XEventListener": "XEventListener_c7230c4a"
+    },
     "quote": [
-      "EventObject",
-      "RowChangeEvent"
+      "EventObject_a3d70b03",
+      "RowChangeEvent_ba0c0bc1"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.lang.XEventListener"
+      ],
+      "typing": [
+        "com.sun.star.lang.EventObject",
+        "com.sun.star.sdb.RowChangeEvent"
+      ]
+    },
     "name": "XRowSetApproveListener",
     "imports": [],
     "namespace": "com.sun.star.sdb",
@@ -56,7 +74,7 @@
           "args": [
             [
               "event",
-              "EventObject",
+              "EventObject_a3d70b03",
               "in"
             ]
           ]
@@ -71,7 +89,7 @@
           "args": [
             [
               "event",
-              "RowChangeEvent",
+              "RowChangeEvent_ba0c0bc1",
               "in"
             ]
           ]
@@ -86,7 +104,7 @@
           "args": [
             [
               "event",
-              "EventObject",
+              "EventObject_a3d70b03",
               "in"
             ]
           ]

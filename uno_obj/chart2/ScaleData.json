@@ -1,12 +1,14 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "ScaleData",
   "namespace": "com.sun.star.chart2",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "sort": true,
@@ -20,32 +22,38 @@
     "from_imports": [],
     "from_imports_typing": [
       [
+        "..chart.time_increment",
+        "TimeIncrement",
+        "TimeIncrement_c7e70c4e"
+      ],
+      [
         ".axis_orientation",
-        "AxisOrientation"
+        "AxisOrientation",
+        "AxisOrientation_ecba0d6d"
       ],
       [
         ".increment_data",
-        "IncrementData"
+        "IncrementData",
+        "IncrementData_d2000c6b"
       ],
       [
         ".x_scaling",
-        "XScaling"
+        "XScaling",
+        "XScaling_97500a65"
       ],
       [
         ".data.x_labeled_data_sequence",
-        "XLabeledDataSequence"
-      ],
-      [
-        "..chart.time_increment",
-        "TimeIncrement"
+        "XLabeledDataSequence",
+        "XLabeledDataSequence_7e1a10c8"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "TimeIncrement",
-      "AxisOrientation",
-      "IncrementData",
-      "XScaling",
-      "XLabeledDataSequence"
+      "AxisOrientation_ecba0d6d",
+      "IncrementData_d2000c6b",
+      "TimeIncrement_c7e70c4e",
+      "XLabeledDataSequence_7e1a10c8",
+      "XScaling_97500a65"
     ],
     "typings": [],
     "requires_typing": true,
@@ -72,12 +80,12 @@
       },
       {
         "name": "Categories",
-        "type": "XLabeledDataSequence",
+        "type": "XLabeledDataSequence_7e1a10c8",
         "lines": []
       },
       {
         "name": "IncrementData",
-        "type": "IncrementData",
+        "type": "IncrementData_d2000c6b",
         "lines": [
           "increment data to be used for not date-time axis"
         ]
@@ -106,7 +114,7 @@
       },
       {
         "name": "Orientation",
-        "type": "AxisOrientation",
+        "type": "AxisOrientation_ecba0d6d",
         "lines": [
           "Axis orientation (standard or reversed).",
           "",
@@ -126,7 +134,7 @@
       },
       {
         "name": "Scaling",
-        "type": "XScaling",
+        "type": "XScaling_97500a65",
         "lines": []
       },
       {
@@ -138,7 +146,7 @@
       },
       {
         "name": "TimeIncrement",
-        "type": "TimeIncrement",
+        "type": "TimeIncrement_c7e70c4e",
         "lines": [
           "increment data to be used in case of date-time axis"
         ]

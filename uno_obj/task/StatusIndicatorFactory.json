@@ -1,39 +1,57 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "StatusIndicatorFactory",
   "type": "service",
   "namespace": "com.sun.star.task",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         ".x_status_indicator_factory",
-        "XStatusIndicatorFactory"
+        "XStatusIndicatorFactory",
+        "XStatusIndicatorFactory_49e4100c"
       ]
     ],
     "from_imports_typing": [
       [
-        "..frame.x_frame",
-        "XFrame"
+        "..awt.x_window",
+        "XWindow",
+        "XWindow_713b0924"
       ],
       [
-        "..awt.x_window",
-        "XWindow"
+        "..frame.x_frame",
+        "XFrame",
+        "XFrame_7a570956"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.task.XStatusIndicatorFactory": "XStatusIndicatorFactory_49e4100c"
+    },
     "quote": [
-      "XFrame",
-      "XWindow"
+      "XFrame_7a570956",
+      "XWindow_713b0924"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.task.XStatusIndicatorFactory"
+      ],
+      "typing": [
+        "com.sun.star.awt.XWindow",
+        "com.sun.star.frame.XFrame"
+      ]
+    },
     "name": "StatusIndicatorFactory",
     "imports": [],
     "namespace": "com.sun.star.task",
@@ -57,7 +75,7 @@
           "args": [
             [
               "Frame",
-              "XFrame",
+              "XFrame_7a570956",
               "in"
             ],
             [
@@ -80,7 +98,7 @@
           "args": [
             [
               "ParentWindow",
-              "XWindow",
+              "XWindow_713b0924",
               "in"
             ],
             [

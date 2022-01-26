@@ -1,49 +1,73 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XFormulaParser",
   "type": "interface",
   "namespace": "com.sun.star.report.meta",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
-        "...lang.x_component",
-        "XComponent"
+        "...beans.x_property_set",
+        "XPropertySet",
+        "XPropertySet_bc180bfa"
       ],
       [
-        "...beans.x_property_set",
-        "XPropertySet"
+        "...lang.x_component",
+        "XComponent",
+        "XComponent_98dc0ab5"
       ],
       [
         "...sheet.x_formula_parser",
-        "XFormulaParser"
+        "XFormulaParser",
+        "XFormulaParser_d54d0cbc"
       ]
     ],
     "from_imports_typing": [
       [
-        "...sheet.x_formula_op_code_mapper",
-        "XFormulaOpCodeMapper"
+        "...sheet.formula_op_code_map_entry",
+        "FormulaOpCodeMapEntry",
+        "FormulaOpCodeMapEntry_37da0f61"
       ],
       [
-        "...sheet.formula_op_code_map_entry",
-        "FormulaOpCodeMapEntry"
+        "...sheet.x_formula_op_code_mapper",
+        "XFormulaOpCodeMapper",
+        "XFormulaOpCodeMapper_27ff0eee"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.beans.XPropertySet": "XPropertySet_bc180bfa",
+      "com.sun.star.lang.XComponent": "XComponent_98dc0ab5",
+      "com.sun.star.sheet.XFormulaParser": "XFormulaParser_d54d0cbc"
+    },
     "quote": [
-      "XFormulaOpCodeMapper",
-      "typing.List[FormulaOpCodeMapEntry]"
+      "XFormulaOpCodeMapper_27ff0eee",
+      "typing.List[FormulaOpCodeMapEntry_37da0f61]"
     ],
     "typings": [
-      "typing.List[FormulaOpCodeMapEntry]"
+      "typing.List[FormulaOpCodeMapEntry_37da0f61]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.beans.XPropertySet",
+        "com.sun.star.lang.XComponent",
+        "com.sun.star.sheet.XFormulaParser"
+      ],
+      "typing": [
+        "com.sun.star.sheet.FormulaOpCodeMapEntry",
+        "com.sun.star.sheet.XFormulaOpCodeMapper"
+      ]
+    },
     "name": "XFormulaParser",
     "imports": [],
     "namespace": "com.sun.star.report.meta",
@@ -60,7 +84,7 @@
       "types": [
         {
           "name": "OpCodeMap",
-          "returns": "typing.List[FormulaOpCodeMapEntry]",
+          "returns": "typing.List[FormulaOpCodeMapEntry_37da0f61]",
           "desc": [
             "The complete mapping of Names to OpCodes.",
             "",
@@ -73,7 +97,7 @@
       "properties": [
         {
           "name": "FormulaOpCodeMapper",
-          "returns": "XFormulaOpCodeMapper",
+          "returns": "XFormulaOpCodeMapper_27ff0eee",
           "desc": [
             "return the mapper for op codes."
           ],

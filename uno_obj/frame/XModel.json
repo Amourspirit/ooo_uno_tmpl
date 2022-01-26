@@ -1,46 +1,66 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XModel",
   "type": "interface",
   "namespace": "com.sun.star.frame",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..lang.x_component",
-        "XComponent"
+        "XComponent",
+        "XComponent_98dc0ab5"
       ]
     ],
     "from_imports_typing": [
       [
-        ".x_controller",
-        "XController"
+        "..beans.property_value",
+        "PropertyValue",
+        "PropertyValue_c9610c73"
       ],
       [
-        "..beans.property_value",
-        "PropertyValue"
+        ".x_controller",
+        "XController",
+        "XController_b00e0b8f"
       ],
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "XInterface_8f010a43"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.lang.XComponent": "XComponent_98dc0ab5"
+    },
     "quote": [
-      "XInterface",
-      "XController",
-      "typing.List[PropertyValue]"
+      "XController_b00e0b8f",
+      "XInterface_8f010a43",
+      "typing.List[PropertyValue_c9610c73]"
     ],
     "typings": [
-      "typing.List[PropertyValue]"
+      "typing.List[PropertyValue_c9610c73]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.lang.XComponent"
+      ],
+      "typing": [
+        "com.sun.star.beans.PropertyValue",
+        "com.sun.star.frame.XController",
+        "com.sun.star.uno.XInterface"
+      ]
+    },
     "name": "XModel",
     "imports": [],
     "namespace": "com.sun.star.frame",
@@ -74,7 +94,7 @@
             ],
             [
               "Arguments",
-              "typing.List[PropertyValue]",
+              "typing.List[PropertyValue_c9610c73]",
               "in"
             ]
           ]
@@ -91,7 +111,7 @@
           "args": [
             [
               "Controller",
-              "XController",
+              "XController_b00e0b8f",
               "in"
             ]
           ]
@@ -108,14 +128,14 @@
           "args": [
             [
               "Controller",
-              "XController",
+              "XController_b00e0b8f",
               "in"
             ]
           ]
         },
         {
           "name": "getArgs",
-          "returns": "typing.List[PropertyValue]",
+          "returns": "typing.List[PropertyValue_c9610c73]",
           "desc": [
             "provides read access on currently representation of the com.sun.star.document.MediaDescriptor of this model which describes the model and its state"
           ],
@@ -124,7 +144,7 @@
         },
         {
           "name": "getCurrentController",
-          "returns": "XController",
+          "returns": "XController_b00e0b8f",
           "desc": [
             "provides access to the controller which currently controls this model"
           ],
@@ -133,7 +153,7 @@
         },
         {
           "name": "getCurrentSelection",
-          "returns": "XInterface",
+          "returns": "XInterface_8f010a43",
           "desc": [
             "provides read access on current selection on controller"
           ],
@@ -183,7 +203,7 @@
           "args": [
             [
               "Controller",
-              "XController",
+              "XController_b00e0b8f",
               "in"
             ]
           ]

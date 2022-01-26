@@ -1,12 +1,14 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "ContentEvent",
   "namespace": "com.sun.star.ucb",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "sort": true,
@@ -20,22 +22,28 @@
     "from_imports": [
       [
         "..lang.event_object",
-        "EventObject"
+        "EventObject",
+        "EventObject_a3d70b03"
       ]
     ],
     "from_imports_typing": [
       [
-        ".x_content_identifier",
-        "XContentIdentifier"
+        ".x_content",
+        "XContent",
+        "XContent_79db0975"
       ],
       [
-        ".x_content",
-        "XContent"
+        ".x_content_identifier",
+        "XContentIdentifier",
+        "XContentIdentifier_edc90d78"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.lang.EventObject": "EventObject_a3d70b03"
+    },
     "quote": [
-      "XContent",
-      "XContentIdentifier"
+      "XContentIdentifier_edc90d78",
+      "XContent_79db0975"
     ],
     "typings": [],
     "requires_typing": true,
@@ -59,7 +67,7 @@
       },
       {
         "name": "Content",
-        "type": "XContent",
+        "type": "XContent_79db0975",
         "lines": [
           "The content to that the action is related (e.g., the content that was just physically destroyed, the content that was just inserted into a folder content).",
           "",
@@ -68,7 +76,7 @@
       },
       {
         "name": "Id",
-        "type": "XContentIdentifier",
+        "type": "XContentIdentifier_edc90d78",
         "lines": [
           "A content identifier, which must be filled according to the action notified (e.g., the id of the folder content into which another content was inserted).",
           "",

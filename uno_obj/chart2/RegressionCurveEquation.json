@@ -1,51 +1,78 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "RegressionCurveEquation",
   "type": "service",
   "namespace": "com.sun.star.chart2",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
-        "..drawing.line_properties",
-        "LineProperties"
-      ],
-      [
-        "..style.character_properties",
-        "CharacterProperties"
-      ],
-      [
         "..beans.property_set",
-        "PropertySet"
+        "PropertySet",
+        "PropertySet_b0e70ba2"
       ],
       [
         "..drawing.fill_properties",
-        "FillProperties"
+        "FillProperties",
+        "FillProperties_f1200da8"
+      ],
+      [
+        "..drawing.line_properties",
+        "LineProperties",
+        "LineProperties_f13f0da9"
+      ],
+      [
+        "..style.character_properties",
+        "CharacterProperties",
+        "CharacterProperties_1d4f0ef3"
       ]
     ],
     "from_imports_typing": [
       [
-        ".relative_position",
-        "RelativePosition"
+        "..awt.size",
+        "Size",
+        "Size_576707ef"
       ],
       [
-        "..awt.size",
-        "Size"
+        ".relative_position",
+        "RelativePosition",
+        "RelativePosition_fae10ddd"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.beans.PropertySet": "PropertySet_b0e70ba2",
+      "com.sun.star.drawing.FillProperties": "FillProperties_f1200da8",
+      "com.sun.star.drawing.LineProperties": "LineProperties_f13f0da9",
+      "com.sun.star.style.CharacterProperties": "CharacterProperties_1d4f0ef3"
+    },
     "quote": [
-      "Size",
-      "RelativePosition"
+      "RelativePosition_fae10ddd",
+      "Size_576707ef"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.beans.PropertySet",
+        "com.sun.star.drawing.FillProperties",
+        "com.sun.star.drawing.LineProperties",
+        "com.sun.star.style.CharacterProperties"
+      ],
+      "typing": [
+        "com.sun.star.awt.Size",
+        "com.sun.star.chart2.RelativePosition"
+      ]
+    },
     "name": "RegressionCurveEquation",
     "imports": [],
     "namespace": "com.sun.star.chart2",
@@ -68,14 +95,14 @@
         },
         {
           "name": "ReferencePageSize",
-          "returns": "Size",
+          "returns": "Size_576707ef",
           "desc": [],
           "raises_get": "",
           "raises_set": ""
         },
         {
           "name": "RelativePosition",
-          "returns": "RelativePosition",
+          "returns": "RelativePosition_fae10ddd",
           "desc": [],
           "raises_get": "",
           "raises_set": ""

@@ -1,39 +1,57 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XBinaryStreamResolver",
   "type": "interface",
   "namespace": "com.sun.star.document",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "XInterface_8f010a43"
       ]
     ],
     "from_imports_typing": [
       [
         "..io.x_input_stream",
-        "XInputStream"
+        "XInputStream",
+        "XInputStream_98d40ab4"
       ],
       [
         "..io.x_output_stream",
-        "XOutputStream"
+        "XOutputStream",
+        "XOutputStream_a4e00b35"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
     "quote": [
-      "XInputStream",
-      "XOutputStream"
+      "XInputStream_98d40ab4",
+      "XOutputStream_a4e00b35"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.io.XInputStream",
+        "com.sun.star.io.XOutputStream"
+      ]
+    },
     "name": "XBinaryStreamResolver",
     "imports": [],
     "namespace": "com.sun.star.document",
@@ -52,7 +70,7 @@
       "methods": [
         {
           "name": "createOutputStream",
-          "returns": "XOutputStream",
+          "returns": "XOutputStream_a4e00b35",
           "desc": [
             "creates an output stream, to which binary data can be written.",
             "",
@@ -63,7 +81,7 @@
         },
         {
           "name": "getInputStream",
-          "returns": "XInputStream",
+          "returns": "XInputStream_98d40ab4",
           "desc": [
             "converts the given URL from the source URL namespace to an input stream, from which binary data can be read"
           ],
@@ -86,7 +104,7 @@
           "args": [
             [
               "aBinaryStream",
-              "XOutputStream",
+              "XOutputStream_a4e00b35",
               "in"
             ]
           ]

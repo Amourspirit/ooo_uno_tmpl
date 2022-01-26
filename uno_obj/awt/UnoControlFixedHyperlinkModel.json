@@ -1,44 +1,64 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "UnoControlFixedHyperlinkModel",
   "type": "service",
   "namespace": "com.sun.star.awt",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         ".uno_control_model",
-        "UnoControlModel"
+        "UnoControlModel",
+        "UnoControlModel_c8ce0c58"
       ]
     ],
     "from_imports_typing": [
       [
         ".font_descriptor",
-        "FontDescriptor"
+        "FontDescriptor",
+        "FontDescriptor_bc110c0a"
       ],
       [
         "..style.vertical_alignment",
-        "VerticalAlignment"
+        "VerticalAlignment",
+        "VerticalAlignment_8d0e12"
       ],
       [
         "..util.color",
-        "Color"
+        "Color",
+        "Color_68e908c5"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.awt.UnoControlModel": "UnoControlModel_c8ce0c58"
+    },
     "quote": [
-      "Color",
-      "FontDescriptor",
-      "VerticalAlignment"
+      "Color_68e908c5",
+      "FontDescriptor_bc110c0a",
+      "VerticalAlignment_8d0e12"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.awt.UnoControlModel"
+      ],
+      "typing": [
+        "com.sun.star.awt.FontDescriptor",
+        "com.sun.star.style.VerticalAlignment",
+        "com.sun.star.util.Color"
+      ]
+    },
     "name": "UnoControlFixedHyperlinkModel",
     "imports": [],
     "namespace": "com.sun.star.awt",
@@ -66,7 +86,7 @@
         },
         {
           "name": "BackgroundColor",
-          "returns": "Color",
+          "returns": "Color_68e908c5",
           "desc": [
             "specifies the background color (RGB) of the control."
           ],
@@ -108,7 +128,7 @@
         },
         {
           "name": "FontDescriptor",
-          "returns": "FontDescriptor",
+          "returns": "FontDescriptor_bc110c0a",
           "desc": [
             "specifies the font attributes of the text in the control."
           ],
@@ -180,7 +200,7 @@
         },
         {
           "name": "TextColor",
-          "returns": "Color",
+          "returns": "Color_68e908c5",
           "desc": [
             "specifies the text color (RGB) of the control."
           ],
@@ -189,7 +209,7 @@
         },
         {
           "name": "TextLineColor",
-          "returns": "Color",
+          "returns": "Color_68e908c5",
           "desc": [
             "specifies the text line color (RGB) of the control."
           ],
@@ -207,7 +227,7 @@
         },
         {
           "name": "VerticalAlign",
-          "returns": "VerticalAlignment",
+          "returns": "VerticalAlignment_8d0e12",
           "desc": [
             "specifies the vertical alignment of the text in the control.",
             "",

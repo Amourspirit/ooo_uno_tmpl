@@ -1,43 +1,64 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XFunctionManager",
   "type": "interface",
   "namespace": "com.sun.star.report.meta",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
-        "...lang.x_component",
-        "XComponent"
+        "...container.x_index_access",
+        "XIndexAccess",
+        "XIndexAccess_f0910d6d"
       ],
       [
-        "...container.x_index_access",
-        "XIndexAccess"
+        "...lang.x_component",
+        "XComponent",
+        "XComponent_98dc0ab5"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_function_category",
-        "XFunctionCategory"
+        "XFunctionCategory",
+        "XFunctionCategory_59e21055"
       ],
       [
         ".x_function_description",
-        "XFunctionDescription"
+        "XFunctionDescription",
+        "XFunctionDescription_8d8d119b"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.container.XIndexAccess": "XIndexAccess_f0910d6d",
+      "com.sun.star.lang.XComponent": "XComponent_98dc0ab5"
+    },
     "quote": [
-      "XFunctionCategory",
-      "XFunctionDescription"
+      "XFunctionCategory_59e21055",
+      "XFunctionDescription_8d8d119b"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.container.XIndexAccess",
+        "com.sun.star.lang.XComponent"
+      ],
+      "typing": [
+        "com.sun.star.report.meta.XFunctionCategory",
+        "com.sun.star.report.meta.XFunctionDescription"
+      ]
+    },
     "name": "XFunctionManager",
     "imports": [],
     "namespace": "com.sun.star.report.meta",
@@ -53,7 +74,7 @@
       "methods": [
         {
           "name": "getCategory",
-          "returns": "XFunctionCategory",
+          "returns": "XFunctionCategory_59e21055",
           "desc": [
             "same as getByIndex."
           ],
@@ -71,7 +92,7 @@
         },
         {
           "name": "getFunctionByName",
-          "returns": "XFunctionDescription",
+          "returns": "XFunctionDescription_8d8d119b",
           "desc": [
             "get the function description by name"
           ],

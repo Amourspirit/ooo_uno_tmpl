@@ -1,29 +1,42 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "ColumnSettings",
   "type": "service",
   "namespace": "com.sun.star.sdb",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..beans.x_property_set",
-        "XPropertySet"
+        "XPropertySet",
+        "XPropertySet_bc180bfa"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.beans.XPropertySet": "XPropertySet_bc180bfa"
+    },
     "quote": [
-      "XPropertySet"
+      "XPropertySet_bc180bfa"
     ],
     "typings": [],
     "requires_typing": false,
+    "full_imports": {
+      "general": [
+        "com.sun.star.beans.XPropertySet"
+      ],
+      "typing": []
+    },
     "name": "ColumnSettings",
     "imports": [],
     "namespace": "com.sun.star.sdb",
@@ -62,7 +75,7 @@
         },
         {
           "name": "ControlModel",
-          "returns": "XPropertySet",
+          "returns": "XPropertySet_bc180bfa",
           "desc": [
             "indicates a control model which defines the settings for layouting.",
             "",

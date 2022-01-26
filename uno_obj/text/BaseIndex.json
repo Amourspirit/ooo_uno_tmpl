@@ -1,63 +1,92 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "BaseIndex",
   "type": "service",
   "namespace": "com.sun.star.text",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         ".x_document_index",
-        "XDocumentIndex"
+        "XDocumentIndex",
+        "XDocumentIndex_c9330c5c"
       ],
       [
         "..util.x_refreshable",
-        "XRefreshable"
+        "XRefreshable",
+        "XRefreshable_b0d60b81"
       ]
     ],
     "from_imports_typing": [
       [
-        ".x_text_columns",
-        "XTextColumns"
-      ],
-      [
-        "..util.color",
-        "Color"
+        "..container.x_index_replace",
+        "XIndexReplace",
+        "XIndexReplace_feed0dd7"
       ],
       [
         "..graphic.x_graphic",
-        "XGraphic"
-      ],
-      [
-        ".x_text_section",
-        "XTextSection"
-      ],
-      [
-        "..container.x_index_replace",
-        "XIndexReplace"
+        "XGraphic",
+        "XGraphic_a4da0afc"
       ],
       [
         "..style.graphic_location",
-        "GraphicLocation"
+        "GraphicLocation",
+        "GraphicLocation_e3ef0d30"
+      ],
+      [
+        ".x_text_columns",
+        "XTextColumns",
+        "XTextColumns_b17f0bab"
+      ],
+      [
+        ".x_text_section",
+        "XTextSection",
+        "XTextSection_b1730b9f"
+      ],
+      [
+        "..util.color",
+        "Color",
+        "Color_68e908c5"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.text.XDocumentIndex": "XDocumentIndex_c9330c5c",
+      "com.sun.star.util.XRefreshable": "XRefreshable_b0d60b81"
+    },
     "quote": [
-      "Color",
-      "GraphicLocation",
-      "XTextSection",
-      "XIndexReplace",
-      "XGraphic",
-      "XTextColumns"
+      "Color_68e908c5",
+      "GraphicLocation_e3ef0d30",
+      "XGraphic_a4da0afc",
+      "XIndexReplace_feed0dd7",
+      "XTextColumns_b17f0bab",
+      "XTextSection_b1730b9f"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.text.XDocumentIndex",
+        "com.sun.star.util.XRefreshable"
+      ],
+      "typing": [
+        "com.sun.star.container.XIndexReplace",
+        "com.sun.star.graphic.XGraphic",
+        "com.sun.star.style.GraphicLocation",
+        "com.sun.star.text.XTextColumns",
+        "com.sun.star.text.XTextSection",
+        "com.sun.star.util.Color"
+      ]
+    },
     "name": "BaseIndex",
     "imports": [],
     "namespace": "com.sun.star.text",
@@ -77,7 +106,7 @@
       "properties": [
         {
           "name": "BackColor",
-          "returns": "Color",
+          "returns": "Color_68e908c5",
           "desc": [
             "specifies the color of the background."
           ],
@@ -86,7 +115,7 @@
         },
         {
           "name": "BackGraphic",
-          "returns": "XGraphic",
+          "returns": "XGraphic_a4da0afc",
           "desc": [
             "contains the graphic object that is displayed as background graphic.",
             "",
@@ -108,7 +137,7 @@
         },
         {
           "name": "BackGraphicLocation",
-          "returns": "GraphicLocation",
+          "returns": "GraphicLocation_e3ef0d30",
           "desc": [
             "determines the position of the background graphic."
           ],
@@ -137,7 +166,7 @@
         },
         {
           "name": "ContentSection",
-          "returns": "XTextSection",
+          "returns": "XTextSection_b1730b9f",
           "desc": [
             "the text section containing the content of the index"
           ],
@@ -157,7 +186,7 @@
         },
         {
           "name": "HeaderSection",
-          "returns": "XTextSection",
+          "returns": "XTextSection_b1730b9f",
           "desc": [
             "the text section containing the header of the index"
           ],
@@ -175,7 +204,7 @@
         },
         {
           "name": "LevelFormat",
-          "returns": "XIndexReplace",
+          "returns": "XIndexReplace_feed0dd7",
           "desc": [
             "returns the interface of the level format of the index.",
             "",
@@ -294,7 +323,7 @@
         },
         {
           "name": "TextColumns",
-          "returns": "XTextColumns",
+          "returns": "XTextColumns_b17f0bab",
           "desc": [
             "contains the column interface."
           ],

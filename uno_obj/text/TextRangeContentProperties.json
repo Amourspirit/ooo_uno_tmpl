@@ -1,64 +1,89 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "TextRangeContentProperties",
   "type": "service",
   "namespace": "com.sun.star.text",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [],
     "from_imports_typing": [
       [
-        ".x_text_frame",
-        "XTextFrame"
-      ],
-      [
-        ".x_text_content",
-        "XTextContent"
-      ],
-      [
-        ".x_text_table",
-        "XTextTable"
-      ],
-      [
-        ".x_text_section",
-        "XTextSection"
+        "..table.x_cell",
+        "XCell",
+        "XCell_70d408e8"
       ],
       [
         ".x_document_index",
-        "XDocumentIndex"
-      ],
-      [
-        "..table.x_cell",
-        "XCell"
-      ],
-      [
-        ".x_footnote",
-        "XFootnote"
+        "XDocumentIndex",
+        "XDocumentIndex_c9330c5c"
       ],
       [
         ".x_document_index_mark",
-        "XDocumentIndexMark"
+        "XDocumentIndexMark",
+        "XDocumentIndexMark_fe490de7"
+      ],
+      [
+        ".x_footnote",
+        "XFootnote",
+        "XFootnote_901e0a73"
+      ],
+      [
+        ".x_text_content",
+        "XTextContent",
+        "XTextContent_b16e0ba5"
+      ],
+      [
+        ".x_text_frame",
+        "XTextFrame",
+        "XTextFrame_9a7e0ab5"
+      ],
+      [
+        ".x_text_section",
+        "XTextSection",
+        "XTextSection_b1730b9f"
+      ],
+      [
+        ".x_text_table",
+        "XTextTable",
+        "XTextTable_9a810ab2"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "XTextTable",
-      "XTextFrame",
-      "XDocumentIndex",
-      "XCell",
-      "XDocumentIndexMark",
-      "XTextSection",
-      "XTextContent",
-      "XFootnote"
+      "XCell_70d408e8",
+      "XDocumentIndexMark_fe490de7",
+      "XDocumentIndex_c9330c5c",
+      "XFootnote_901e0a73",
+      "XTextContent_b16e0ba5",
+      "XTextFrame_9a7e0ab5",
+      "XTextSection_b1730b9f",
+      "XTextTable_9a810ab2"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [],
+      "typing": [
+        "com.sun.star.table.XCell",
+        "com.sun.star.text.XDocumentIndex",
+        "com.sun.star.text.XDocumentIndexMark",
+        "com.sun.star.text.XFootnote",
+        "com.sun.star.text.XTextContent",
+        "com.sun.star.text.XTextFrame",
+        "com.sun.star.text.XTextSection",
+        "com.sun.star.text.XTextTable"
+      ]
+    },
     "name": "TextRangeContentProperties",
     "imports": [],
     "namespace": "com.sun.star.text",
@@ -75,7 +100,7 @@
       "properties": [
         {
           "name": "Cell",
-          "returns": "XCell",
+          "returns": "XCell_70d408e8",
           "desc": [
             "may contain a table cell."
           ],
@@ -84,7 +109,7 @@
         },
         {
           "name": "DocumentIndex",
-          "returns": "XDocumentIndex",
+          "returns": "XDocumentIndex_c9330c5c",
           "desc": [
             "may contain a document index."
           ],
@@ -93,7 +118,7 @@
         },
         {
           "name": "DocumentIndexMark",
-          "returns": "XDocumentIndexMark",
+          "returns": "XDocumentIndexMark_fe490de7",
           "desc": [
             "may contain a document index mark."
           ],
@@ -102,7 +127,7 @@
         },
         {
           "name": "Endnote",
-          "returns": "XFootnote",
+          "returns": "XFootnote_901e0a73",
           "desc": [
             "may contain an endnote."
           ],
@@ -111,7 +136,7 @@
         },
         {
           "name": "Footnote",
-          "returns": "XFootnote",
+          "returns": "XFootnote_901e0a73",
           "desc": [
             "may contain a footnote."
           ],
@@ -120,7 +145,7 @@
         },
         {
           "name": "NestedTextContent",
-          "returns": "XTextContent",
+          "returns": "XTextContent_b16e0ba5",
           "desc": [
             "may contain a nested text content.",
             "",
@@ -131,7 +156,7 @@
         },
         {
           "name": "ReferenceMark",
-          "returns": "XTextContent",
+          "returns": "XTextContent_b16e0ba5",
           "desc": [
             "may contain a reference mark."
           ],
@@ -140,7 +165,7 @@
         },
         {
           "name": "TextFrame",
-          "returns": "XTextFrame",
+          "returns": "XTextFrame_9a7e0ab5",
           "desc": [
             "may contain a text frame."
           ],
@@ -149,7 +174,7 @@
         },
         {
           "name": "TextParagraph",
-          "returns": "XTextContent",
+          "returns": "XTextContent_b16e0ba5",
           "desc": [
             "Paragraph for the start of this range.",
             "",
@@ -162,7 +187,7 @@
         },
         {
           "name": "TextSection",
-          "returns": "XTextSection",
+          "returns": "XTextSection_b1730b9f",
           "desc": [
             "may contain a text section."
           ],
@@ -171,7 +196,7 @@
         },
         {
           "name": "TextTable",
-          "returns": "XTextTable",
+          "returns": "XTextTable_9a810ab2",
           "desc": [
             "may contain a text table."
           ],

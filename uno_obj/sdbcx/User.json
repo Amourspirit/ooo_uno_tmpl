@@ -1,35 +1,54 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "User",
   "type": "service",
   "namespace": "com.sun.star.sdbcx",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..beans.x_property_set",
-        "XPropertySet"
+        "XPropertySet",
+        "XPropertySet_bc180bfa"
       ],
       [
         ".x_groups_supplier",
-        "XGroupsSupplier"
+        "XGroupsSupplier",
+        "XGroupsSupplier_e3410d48"
       ],
       [
         ".x_user",
-        "XUser"
+        "XUser",
+        "XUser_718e0913"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.beans.XPropertySet": "XPropertySet_bc180bfa",
+      "com.sun.star.sdbcx.XGroupsSupplier": "XGroupsSupplier_e3410d48",
+      "com.sun.star.sdbcx.XUser": "XUser_718e0913"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
+    "full_imports": {
+      "general": [
+        "com.sun.star.beans.XPropertySet",
+        "com.sun.star.sdbcx.XGroupsSupplier",
+        "com.sun.star.sdbcx.XUser"
+      ],
+      "typing": []
+    },
     "name": "User",
     "imports": [],
     "namespace": "com.sun.star.sdbcx",

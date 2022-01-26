@@ -1,39 +1,57 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XSpellChecker1",
   "type": "interface",
   "namespace": "com.sun.star.linguistic2",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         ".x_supported_languages",
-        "XSupportedLanguages"
+        "XSupportedLanguages",
+        "XSupportedLanguages_7dbd112a"
       ]
     ],
     "from_imports_typing": [
       [
-        ".x_spell_alternatives",
-        "XSpellAlternatives"
+        "..beans.property_values",
+        "PropertyValues",
+        "PropertyValues_d6470ce6"
       ],
       [
-        "..beans.property_values",
-        "PropertyValues"
+        ".x_spell_alternatives",
+        "XSpellAlternatives",
+        "XSpellAlternatives_6ad110bf"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.linguistic2.XSupportedLanguages": "XSupportedLanguages_7dbd112a"
+    },
     "quote": [
-      "PropertyValues",
-      "XSpellAlternatives"
+      "PropertyValues_d6470ce6",
+      "XSpellAlternatives_6ad110bf"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.linguistic2.XSupportedLanguages"
+      ],
+      "typing": [
+        "com.sun.star.beans.PropertyValues",
+        "com.sun.star.linguistic2.XSpellAlternatives"
+      ]
+    },
     "name": "XSpellChecker1",
     "imports": [],
     "namespace": "com.sun.star.linguistic2",
@@ -69,14 +87,14 @@
             ],
             [
               "aProperties",
-              "PropertyValues",
+              "PropertyValues_d6470ce6",
               "in"
             ]
           ]
         },
         {
           "name": "spell",
-          "returns": "XSpellAlternatives",
+          "returns": "XSpellAlternatives_6ad110bf",
           "desc": [],
           "raises": [
             "com.sun.star.lang.IllegalArgumentException"
@@ -94,7 +112,7 @@
             ],
             [
               "aProperties",
-              "PropertyValues",
+              "PropertyValues_d6470ce6",
               "in"
             ]
           ]

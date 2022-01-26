@@ -1,31 +1,47 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XMLImportFilter",
   "type": "service",
   "namespace": "com.sun.star.xml",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
-        ".sax.x_document_handler",
-        "XDocumentHandler"
+        "..document.import_filter",
+        "ImportFilter",
+        "ImportFilter_e4e90d48"
       ],
       [
-        "..document.import_filter",
-        "ImportFilter"
+        ".sax.x_document_handler",
+        "XDocumentHandler",
+        "XDocumentHandler_9b90e28"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.document.ImportFilter": "ImportFilter_e4e90d48",
+      "com.sun.star.xml.sax.XDocumentHandler": "XDocumentHandler_9b90e28"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
+    "full_imports": {
+      "general": [
+        "com.sun.star.document.ImportFilter",
+        "com.sun.star.xml.sax.XDocumentHandler"
+      ],
+      "typing": []
+    },
     "name": "XMLImportFilter",
     "imports": [],
     "namespace": "com.sun.star.xml",

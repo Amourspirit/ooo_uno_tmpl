@@ -1,39 +1,57 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XController",
   "type": "interface",
   "namespace": "com.sun.star.frame",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..lang.x_component",
-        "XComponent"
+        "XComponent",
+        "XComponent_98dc0ab5"
       ]
     ],
     "from_imports_typing": [
       [
-        ".x_model",
-        "XModel"
+        ".x_frame",
+        "XFrame",
+        "XFrame_7a570956"
       ],
       [
-        ".x_frame",
-        "XFrame"
+        ".x_model",
+        "XModel",
+        "XModel_7a6e095c"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.lang.XComponent": "XComponent_98dc0ab5"
+    },
     "quote": [
-      "XModel",
-      "XFrame"
+      "XFrame_7a570956",
+      "XModel_7a6e095c"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.lang.XComponent"
+      ],
+      "typing": [
+        "com.sun.star.frame.XFrame",
+        "com.sun.star.frame.XModel"
+      ]
+    },
     "name": "XController",
     "imports": [],
     "namespace": "com.sun.star.frame",
@@ -56,7 +74,7 @@
           "args": [
             [
               "Frame",
-              "XFrame",
+              "XFrame_7a570956",
               "in"
             ]
           ]
@@ -71,14 +89,14 @@
           "args": [
             [
               "Model",
-              "XModel",
+              "XModel_7a6e095c",
               "in"
             ]
           ]
         },
         {
           "name": "getFrame",
-          "returns": "XFrame",
+          "returns": "XFrame_7a570956",
           "desc": [
             "provides access to owner frame of this controller"
           ],
@@ -87,7 +105,7 @@
         },
         {
           "name": "getModel",
-          "returns": "XModel",
+          "returns": "XModel_7a6e095c",
           "desc": [
             "provides access to currently attached model"
           ],

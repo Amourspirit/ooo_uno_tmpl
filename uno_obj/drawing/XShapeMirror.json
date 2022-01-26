@@ -1,39 +1,57 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XShapeMirror",
   "type": "interface",
   "namespace": "com.sun.star.drawing",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "XInterface_8f010a43"
       ]
     ],
     "from_imports_typing": [
       [
-        ".x_shape",
-        "XShape"
+        ".mirror_axis",
+        "MirrorAxis",
+        "MirrorAxis_bdcf0c04"
       ],
       [
-        ".mirror_axis",
-        "MirrorAxis"
+        ".x_shape",
+        "XShape",
+        "XShape_8fd00a3d"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
     "quote": [
-      "XShape",
-      "MirrorAxis"
+      "MirrorAxis_bdcf0c04",
+      "XShape_8fd00a3d"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.drawing.MirrorAxis",
+        "com.sun.star.drawing.XShape"
+      ]
+    },
     "name": "XShapeMirror",
     "imports": [],
     "namespace": "com.sun.star.drawing",
@@ -65,7 +83,7 @@
             ],
             [
               "eAxis",
-              "MirrorAxis",
+              "MirrorAxis_bdcf0c04",
               "in"
             ]
           ]
@@ -85,7 +103,7 @@
             ],
             [
               "aLine",
-              "XShape",
+              "XShape_8fd00a3d",
               "in"
             ]
           ]

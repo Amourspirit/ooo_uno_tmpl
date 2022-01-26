@@ -1,12 +1,14 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "Hatch",
   "namespace": "com.sun.star.drawing",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "sort": true,
@@ -20,17 +22,20 @@
     "from_imports": [],
     "from_imports_typing": [
       [
-        "..util.color",
-        "Color"
+        ".hatch_style",
+        "HatchStyle",
+        "HatchStyle_bcfe0bed"
       ],
       [
-        ".hatch_style",
-        "HatchStyle"
+        "..util.color",
+        "Color",
+        "Color_68e908c5"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "Color",
-      "HatchStyle"
+      "Color_68e908c5",
+      "HatchStyle_bcfe0bed"
     ],
     "typings": [],
     "requires_typing": true,
@@ -54,7 +59,7 @@
       },
       {
         "name": "Color",
-        "type": "Color",
+        "type": "Color_68e908c5",
         "lines": [
           "This is the color of the hatch lines."
         ]
@@ -68,7 +73,7 @@
       },
       {
         "name": "Style",
-        "type": "HatchStyle",
+        "type": "HatchStyle_bcfe0bed",
         "lines": [
           "The HatchStyle defines the kind of lines used to draw this hatch."
         ]

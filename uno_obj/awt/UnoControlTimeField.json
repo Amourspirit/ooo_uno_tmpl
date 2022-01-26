@@ -1,35 +1,54 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "UnoControlTimeField",
   "type": "service",
   "namespace": "com.sun.star.awt",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
-        ".x_time_field",
-        "XTimeField"
+        ".uno_control_edit",
+        "UnoControlEdit",
+        "UnoControlEdit_bc4e0bed"
       ],
       [
         ".x_spin_field",
-        "XSpinField"
+        "XSpinField",
+        "XSpinField_8e3a0a2a"
       ],
       [
-        ".uno_control_edit",
-        "UnoControlEdit"
+        ".x_time_field",
+        "XTimeField",
+        "XTimeField_8df10a1f"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.awt.UnoControlEdit": "UnoControlEdit_bc4e0bed",
+      "com.sun.star.awt.XSpinField": "XSpinField_8e3a0a2a",
+      "com.sun.star.awt.XTimeField": "XTimeField_8df10a1f"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
+    "full_imports": {
+      "general": [
+        "com.sun.star.awt.UnoControlEdit",
+        "com.sun.star.awt.XSpinField",
+        "com.sun.star.awt.XTimeField"
+      ],
+      "typing": []
+    },
     "name": "UnoControlTimeField",
     "imports": [],
     "namespace": "com.sun.star.awt",

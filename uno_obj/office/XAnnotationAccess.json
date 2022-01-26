@@ -1,34 +1,47 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XAnnotationAccess",
   "type": "interface",
   "namespace": "com.sun.star.office",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [],
     "from_imports_typing": [
       [
-        ".x_annotation_enumeration",
-        "XAnnotationEnumeration"
+        ".x_annotation",
+        "XAnnotation",
+        "XAnnotation_bb8f0be7"
       ],
       [
-        ".x_annotation",
-        "XAnnotation"
+        ".x_annotation_enumeration",
+        "XAnnotationEnumeration",
+        "XAnnotationEnumeration_58fe106e"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "XAnnotation",
-      "XAnnotationEnumeration"
+      "XAnnotationEnumeration_58fe106e",
+      "XAnnotation_bb8f0be7"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [],
+      "typing": [
+        "com.sun.star.office.XAnnotation",
+        "com.sun.star.office.XAnnotationEnumeration"
+      ]
+    },
     "name": "XAnnotationAccess",
     "imports": [],
     "namespace": "com.sun.star.office",
@@ -41,7 +54,7 @@
       "methods": [
         {
           "name": "createAndInsertAnnotation",
-          "returns": "XAnnotation",
+          "returns": "XAnnotation_bb8f0be7",
           "desc": [
             "creates a new annotation and inserts it into the document content."
           ],
@@ -50,7 +63,7 @@
         },
         {
           "name": "createAnnotationEnumeration",
-          "returns": "XAnnotationEnumeration",
+          "returns": "XAnnotationEnumeration_58fe106e",
           "desc": [],
           "raises": [],
           "args": []
@@ -67,7 +80,7 @@
           "args": [
             [
               "annotation",
-              "XAnnotation",
+              "XAnnotation_bb8f0be7",
               "in"
             ]
           ]

@@ -1,36 +1,49 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XUnionTypeDescription",
   "type": "interface",
   "namespace": "com.sun.star.reflection",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         ".x_type_description",
-        "XTypeDescription"
+        "XTypeDescription",
+        "XTypeDescription_3c210fb1"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.reflection.XTypeDescription": "XTypeDescription_3c210fb1"
+    },
     "quote": [
-      "typing.List[str]",
-      "XTypeDescription",
-      "typing.List[XTypeDescription]",
-      "typing.List[object]"
+      "XTypeDescription_3c210fb1",
+      "typing.List[XTypeDescription_3c210fb1]",
+      "typing.List[object]",
+      "typing.List[str]"
     ],
     "typings": [
-      "typing.List[str]",
+      "typing.List[XTypeDescription_3c210fb1]",
       "typing.List[object]",
-      "typing.List[XTypeDescription]"
+      "typing.List[str]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.reflection.XTypeDescription"
+      ],
+      "typing": []
+    },
     "name": "XUnionTypeDescription",
     "imports": [],
     "namespace": "com.sun.star.reflection",
@@ -58,7 +71,7 @@
         },
         {
           "name": "getDefaultMemberType",
-          "returns": "XTypeDescription",
+          "returns": "XTypeDescription_3c210fb1",
           "desc": [
             "Returns the type of the default value."
           ],
@@ -67,7 +80,7 @@
         },
         {
           "name": "getDiscriminantType",
-          "returns": "XTypeDescription",
+          "returns": "XTypeDescription_3c210fb1",
           "desc": [
             "Returns the (ordinal) discriminant type."
           ],
@@ -94,7 +107,7 @@
         },
         {
           "name": "getMemberTypes",
-          "returns": "typing.List[XTypeDescription]",
+          "returns": "typing.List[XTypeDescription_3c210fb1]",
           "desc": [
             "Returns types of all members in order of IDL declaration."
           ],

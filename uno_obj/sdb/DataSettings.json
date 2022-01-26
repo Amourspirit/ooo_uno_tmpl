@@ -1,34 +1,47 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "DataSettings",
   "type": "service",
   "namespace": "com.sun.star.sdb",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [],
     "from_imports_typing": [
       [
         "..awt.font_descriptor",
-        "FontDescriptor"
+        "FontDescriptor",
+        "FontDescriptor_bc110c0a"
       ],
       [
         "..util.color",
-        "Color"
+        "Color",
+        "Color_68e908c5"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "Color",
-      "FontDescriptor"
+      "Color_68e908c5",
+      "FontDescriptor_bc110c0a"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [],
+      "typing": [
+        "com.sun.star.awt.FontDescriptor",
+        "com.sun.star.util.Color"
+      ]
+    },
     "name": "DataSettings",
     "imports": [],
     "namespace": "com.sun.star.sdb",
@@ -59,7 +72,7 @@
         },
         {
           "name": "FontDescriptor",
-          "returns": "FontDescriptor",
+          "returns": "FontDescriptor_bc110c0a",
           "desc": [
             "specifies the font attributes for data displaying."
           ],
@@ -104,7 +117,7 @@
         },
         {
           "name": "TextColor",
-          "returns": "Color",
+          "returns": "Color_68e908c5",
           "desc": [
             "specifies the text color (RGB) for displaying text."
           ],

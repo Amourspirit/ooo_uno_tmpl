@@ -1,42 +1,60 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XInterfaceTypeDescription",
   "type": "interface",
   "namespace": "com.sun.star.reflection",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         ".x_type_description",
-        "XTypeDescription"
+        "XTypeDescription",
+        "XTypeDescription_3c210fb1"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_interface_member_type_description",
-        "XInterfaceMemberTypeDescription"
+        "XInterfaceMemberTypeDescription",
+        "XInterfaceMemberTypeDescription_52ea159a"
       ],
       [
         "..uno.uik",
-        "Uik"
+        "Uik",
+        "Uik_4fac0783"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.reflection.XTypeDescription": "XTypeDescription_3c210fb1"
+    },
     "quote": [
-      "typing.List[XInterfaceMemberTypeDescription]",
-      "XTypeDescription",
-      "Uik"
+      "Uik_4fac0783",
+      "XTypeDescription_3c210fb1",
+      "typing.List[XInterfaceMemberTypeDescription_52ea159a]"
     ],
     "typings": [
-      "typing.List[XInterfaceMemberTypeDescription]"
+      "typing.List[XInterfaceMemberTypeDescription_52ea159a]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.reflection.XTypeDescription"
+      ],
+      "typing": [
+        "com.sun.star.reflection.XInterfaceMemberTypeDescription",
+        "com.sun.star.uno.Uik"
+      ]
+    },
     "name": "XInterfaceTypeDescription",
     "imports": [],
     "namespace": "com.sun.star.reflection",
@@ -53,7 +71,7 @@
       "methods": [
         {
           "name": "getBaseType",
-          "returns": "XTypeDescription",
+          "returns": "XTypeDescription_3c210fb1",
           "desc": [
             "Returns the base interface or null, if the reflected interface is not inherited from another.",
             "",
@@ -64,7 +82,7 @@
         },
         {
           "name": "getMembers",
-          "returns": "typing.List[XInterfaceMemberTypeDescription]",
+          "returns": "typing.List[XInterfaceMemberTypeDescription_52ea159a]",
           "desc": [
             "Returns the members of the interfaces, i.e.",
             "",
@@ -75,7 +93,7 @@
         },
         {
           "name": "getUik",
-          "returns": "Uik",
+          "returns": "Uik_4fac0783",
           "desc": [
             "Deprecated.",
             "",

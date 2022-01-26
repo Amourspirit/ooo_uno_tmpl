@@ -1,35 +1,54 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "ErrorBar",
   "type": "service",
   "namespace": "com.sun.star.chart2",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
-        "..drawing.line_properties",
-        "LineProperties"
+        ".data.x_data_sink",
+        "XDataSink",
+        "XDataSink_dbc40c7b"
       ],
       [
         ".data.x_data_source",
-        "XDataSource"
+        "XDataSource",
+        "XDataSource_f6340d57"
       ],
       [
-        ".data.x_data_sink",
-        "XDataSink"
+        "..drawing.line_properties",
+        "LineProperties",
+        "LineProperties_f13f0da9"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.chart2.data.XDataSink": "XDataSink_dbc40c7b",
+      "com.sun.star.chart2.data.XDataSource": "XDataSource_f6340d57",
+      "com.sun.star.drawing.LineProperties": "LineProperties_f13f0da9"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
+    "full_imports": {
+      "general": [
+        "com.sun.star.chart2.data.XDataSink",
+        "com.sun.star.chart2.data.XDataSource",
+        "com.sun.star.drawing.LineProperties"
+      ],
+      "typing": []
+    },
     "name": "ErrorBar",
     "imports": [],
     "namespace": "com.sun.star.chart2",

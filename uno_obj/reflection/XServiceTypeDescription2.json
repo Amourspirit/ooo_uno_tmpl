@@ -1,41 +1,59 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XServiceTypeDescription2",
   "type": "interface",
   "namespace": "com.sun.star.reflection",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         ".x_service_type_description",
-        "XServiceTypeDescription"
+        "XServiceTypeDescription",
+        "XServiceTypeDescription_b4481282"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_service_constructor_description",
-        "XServiceConstructorDescription"
+        "XServiceConstructorDescription",
+        "XServiceConstructorDescription_430d1586"
       ],
       [
         ".x_type_description",
-        "XTypeDescription"
+        "XTypeDescription",
+        "XTypeDescription_3c210fb1"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.reflection.XServiceTypeDescription": "XServiceTypeDescription_b4481282"
+    },
     "quote": [
-      "XTypeDescription",
-      "typing.List[XServiceConstructorDescription]"
+      "XTypeDescription_3c210fb1",
+      "typing.List[XServiceConstructorDescription_430d1586]"
     ],
     "typings": [
-      "typing.List[XServiceConstructorDescription]"
+      "typing.List[XServiceConstructorDescription_430d1586]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.reflection.XServiceTypeDescription"
+      ],
+      "typing": [
+        "com.sun.star.reflection.XServiceConstructorDescription",
+        "com.sun.star.reflection.XTypeDescription"
+      ]
+    },
     "name": "XServiceTypeDescription2",
     "imports": [],
     "namespace": "com.sun.star.reflection",
@@ -56,7 +74,7 @@
       "methods": [
         {
           "name": "getConstructors",
-          "returns": "typing.List[XServiceConstructorDescription]",
+          "returns": "typing.List[XServiceConstructorDescription_430d1586]",
           "desc": [
             "Returns the constructors of the service."
           ],
@@ -65,7 +83,7 @@
         },
         {
           "name": "getInterface",
-          "returns": "XTypeDescription",
+          "returns": "XTypeDescription_3c210fb1",
           "desc": [
             "Returns the interface type associated with the service."
           ],

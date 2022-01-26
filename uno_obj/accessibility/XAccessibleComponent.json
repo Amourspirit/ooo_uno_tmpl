@@ -1,54 +1,78 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XAccessibleComponent",
   "type": "interface",
   "namespace": "com.sun.star.accessibility",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "XInterface_8f010a43"
       ]
     ],
     "from_imports_typing": [
       [
-        "..awt.point",
-        "Point"
+        ".x_accessible",
+        "XAccessible",
+        "XAccessible_1cbc0eb6"
       ],
       [
-        "..util.color",
-        "Color"
+        "..awt.point",
+        "Point",
+        "Point_5fb2085e"
       ],
       [
         "..awt.rectangle",
-        "Rectangle"
+        "Rectangle",
+        "Rectangle_84b109e9"
       ],
       [
         "..awt.size",
-        "Size"
+        "Size",
+        "Size_576707ef"
       ],
       [
-        ".x_accessible",
-        "XAccessible"
+        "..util.color",
+        "Color",
+        "Color_68e908c5"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
     "quote": [
-      "Rectangle",
-      "XAccessible",
-      "Point",
-      "Color",
-      "Size"
+      "Color_68e908c5",
+      "Point_5fb2085e",
+      "Rectangle_84b109e9",
+      "Size_576707ef",
+      "XAccessible_1cbc0eb6"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.accessibility.XAccessible",
+        "com.sun.star.awt.Point",
+        "com.sun.star.awt.Rectangle",
+        "com.sun.star.awt.Size",
+        "com.sun.star.util.Color"
+      ]
+    },
     "name": "XAccessibleComponent",
     "imports": [],
     "namespace": "com.sun.star.accessibility",
@@ -85,14 +109,14 @@
           "args": [
             [
               "Point",
-              "Point",
+              "Point_5fb2085e",
               "in"
             ]
           ]
         },
         {
           "name": "getAccessibleAtPoint",
-          "returns": "XAccessible",
+          "returns": "XAccessible_1cbc0eb6",
           "desc": [
             "Returns the Accessible child that is rendered under the given point.",
             "",
@@ -102,14 +126,14 @@
           "args": [
             [
               "Point",
-              "Point",
+              "Point_5fb2085e",
               "in"
             ]
           ]
         },
         {
           "name": "getBackground",
-          "returns": "Color",
+          "returns": "Color_68e908c5",
           "desc": [
             "Returns the background color of this object."
           ],
@@ -118,7 +142,7 @@
         },
         {
           "name": "getBounds",
-          "returns": "Rectangle",
+          "returns": "Rectangle_84b109e9",
           "desc": [
             "Returns the bounding box of this object.",
             "",
@@ -129,7 +153,7 @@
         },
         {
           "name": "getForeground",
-          "returns": "Color",
+          "returns": "Color_68e908c5",
           "desc": [
             "Returns the foreground color of this object."
           ],
@@ -138,7 +162,7 @@
         },
         {
           "name": "getLocation",
-          "returns": "Point",
+          "returns": "Point_5fb2085e",
           "desc": [
             "Returns the location of the upper left corner of the object's bounding box relative to the parent.",
             "",
@@ -149,7 +173,7 @@
         },
         {
           "name": "getLocationOnScreen",
-          "returns": "Point",
+          "returns": "Point_5fb2085e",
           "desc": [
             "Returns the location of the upper left corner of the object's bounding box in screen coordinates.",
             "",
@@ -160,7 +184,7 @@
         },
         {
           "name": "getSize",
-          "returns": "Size",
+          "returns": "Size_576707ef",
           "desc": [
             "Returns the size of this object's bounding box."
           ],

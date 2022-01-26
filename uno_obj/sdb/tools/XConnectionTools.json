@@ -1,54 +1,75 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XConnectionTools",
   "type": "interface",
   "namespace": "com.sun.star.sdb.tools",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [],
     "from_imports_typing": [
       [
         "...container.x_name_access",
-        "XNameAccess"
-      ],
-      [
-        ".x_data_source_meta_data",
-        "XDataSourceMetaData"
-      ],
-      [
-        "..x_single_select_query_composer",
-        "XSingleSelectQueryComposer"
+        "XNameAccess",
+        "XNameAccess_e2ab0cf6"
       ],
       [
         "...lang.x_component",
-        "XComponent"
+        "XComponent",
+        "XComponent_98dc0ab5"
       ],
       [
-        ".x_table_name",
-        "XTableName"
+        "..x_single_select_query_composer",
+        "XSingleSelectQueryComposer",
+        "XSingleSelectQueryComposer_66e310b9"
+      ],
+      [
+        ".x_data_source_meta_data",
+        "XDataSourceMetaData",
+        "XDataSourceMetaData_547c0fe4"
       ],
       [
         ".x_object_names",
-        "XObjectNames"
+        "XObjectNames",
+        "XObjectNames_ed550d43"
+      ],
+      [
+        ".x_table_name",
+        "XTableName",
+        "XTableName_d3140c61"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "XComponent",
-      "XNameAccess",
-      "XObjectNames",
-      "XSingleSelectQueryComposer",
-      "XTableName",
-      "XDataSourceMetaData"
+      "XComponent_98dc0ab5",
+      "XDataSourceMetaData_547c0fe4",
+      "XNameAccess_e2ab0cf6",
+      "XObjectNames_ed550d43",
+      "XSingleSelectQueryComposer_66e310b9",
+      "XTableName_d3140c61"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [],
+      "typing": [
+        "com.sun.star.container.XNameAccess",
+        "com.sun.star.lang.XComponent",
+        "com.sun.star.sdb.XSingleSelectQueryComposer",
+        "com.sun.star.sdb.tools.XDataSourceMetaData",
+        "com.sun.star.sdb.tools.XObjectNames",
+        "com.sun.star.sdb.tools.XTableName"
+      ]
+    },
     "name": "XConnectionTools",
     "imports": [],
     "namespace": "com.sun.star.sdb.tools",
@@ -69,7 +90,7 @@
       "methods": [
         {
           "name": "createTableName",
-          "returns": "XTableName",
+          "returns": "XTableName_d3140c61",
           "desc": [
             "creates an instance supporting the XTableName interface, which can be used to manipulate table names for various purposes.",
             "",
@@ -80,7 +101,7 @@
         },
         {
           "name": "getComposer",
-          "returns": "XSingleSelectQueryComposer",
+          "returns": "XSingleSelectQueryComposer_66e310b9",
           "desc": [
             "get the composer initialized with a command and command type."
           ],
@@ -100,7 +121,7 @@
         },
         {
           "name": "getDataSourceMetaData",
-          "returns": "XDataSourceMetaData",
+          "returns": "XDataSourceMetaData_547c0fe4",
           "desc": [
             "provides access to the application-level data source meta data"
           ],
@@ -109,7 +130,7 @@
         },
         {
           "name": "getFieldsByCommandDescriptor",
-          "returns": "XNameAccess",
+          "returns": "XNameAccess_e2ab0cf6",
           "desc": [
             "get fields for a result set given by a \\\"command descriptor\\\"",
             "",
@@ -131,14 +152,14 @@
             ],
             [
               "keepFieldsAlive",
-              "XComponent",
+              "XComponent_98dc0ab5",
               "out"
             ]
           ]
         },
         {
           "name": "getObjectNames",
-          "returns": "XObjectNames",
+          "returns": "XObjectNames_ed550d43",
           "desc": [
             "returns an instance supporting the XObjectNames interface, which provides access to functionality around table and query names.",
             "",

@@ -1,49 +1,71 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XDesktop",
   "type": "interface",
   "namespace": "com.sun.star.frame",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "XInterface_8f010a43"
       ]
     ],
     "from_imports_typing": [
       [
-        "..lang.x_component",
-        "XComponent"
-      ],
-      [
-        ".x_terminate_listener",
-        "XTerminateListener"
+        "..container.x_enumeration_access",
+        "XEnumerationAccess",
+        "XEnumerationAccess_4bac0ffc"
       ],
       [
         ".x_frame",
-        "XFrame"
+        "XFrame",
+        "XFrame_7a570956"
       ],
       [
-        "..container.x_enumeration_access",
-        "XEnumerationAccess"
+        ".x_terminate_listener",
+        "XTerminateListener",
+        "XTerminateListener_b760e5a"
+      ],
+      [
+        "..lang.x_component",
+        "XComponent",
+        "XComponent_98dc0ab5"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
     "quote": [
-      "XEnumerationAccess",
-      "XTerminateListener",
-      "XComponent",
-      "XFrame"
+      "XComponent_98dc0ab5",
+      "XEnumerationAccess_4bac0ffc",
+      "XFrame_7a570956",
+      "XTerminateListener_b760e5a"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.container.XEnumerationAccess",
+        "com.sun.star.frame.XFrame",
+        "com.sun.star.frame.XTerminateListener",
+        "com.sun.star.lang.XComponent"
+      ]
+    },
     "name": "XDesktop",
     "imports": [],
     "namespace": "com.sun.star.frame",
@@ -68,14 +90,14 @@
           "args": [
             [
               "Listener",
-              "XTerminateListener",
+              "XTerminateListener_b760e5a",
               "in"
             ]
           ]
         },
         {
           "name": "getComponents",
-          "returns": "XEnumerationAccess",
+          "returns": "XEnumerationAccess_4bac0ffc",
           "desc": [
             "provides read access to collection of all currently loaded components inside the frame tree",
             "",
@@ -86,7 +108,7 @@
         },
         {
           "name": "getCurrentComponent",
-          "returns": "XComponent",
+          "returns": "XComponent_98dc0ab5",
           "desc": [
             "provides read access to the component inside the tree which has the UI focus",
             "",
@@ -97,7 +119,7 @@
         },
         {
           "name": "getCurrentFrame",
-          "returns": "XFrame",
+          "returns": "XFrame_7a570956",
           "desc": [
             "provides read access to the frame which contains the current component"
           ],
@@ -114,7 +136,7 @@
           "args": [
             [
               "Listener",
-              "XTerminateListener",
+              "XTerminateListener_b760e5a",
               "in"
             ]
           ]

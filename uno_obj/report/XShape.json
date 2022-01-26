@@ -1,41 +1,59 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XShape",
   "type": "interface",
   "namespace": "com.sun.star.report",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         ".x_report_control_model",
-        "XReportControlModel"
+        "XReportControlModel",
+        "XReportControlModel_2d800f4a"
       ]
     ],
     "from_imports_typing": [
       [
-        "..drawing.homogen_matrix3",
-        "HomogenMatrix3"
+        "..beans.property_value",
+        "PropertyValue",
+        "PropertyValue_c9610c73"
       ],
       [
-        "..beans.property_value",
-        "PropertyValue"
+        "..drawing.homogen_matrix3",
+        "HomogenMatrix3",
+        "HomogenMatrix3_f0fb0d69"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.report.XReportControlModel": "XReportControlModel_2d800f4a"
+    },
     "quote": [
-      "HomogenMatrix3",
-      "typing.List[PropertyValue]"
+      "HomogenMatrix3_f0fb0d69",
+      "typing.List[PropertyValue_c9610c73]"
     ],
     "typings": [
-      "typing.List[PropertyValue]"
+      "typing.List[PropertyValue_c9610c73]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.report.XReportControlModel"
+      ],
+      "typing": [
+        "com.sun.star.beans.PropertyValue",
+        "com.sun.star.drawing.HomogenMatrix3"
+      ]
+    },
     "name": "XShape",
     "imports": [],
     "namespace": "com.sun.star.report",
@@ -48,7 +66,7 @@
       "types": [
         {
           "name": "CustomShapeGeometry",
-          "returns": "typing.List[PropertyValue]",
+          "returns": "typing.List[PropertyValue_c9610c73]",
           "desc": [
             "This property describes the geometry of the CustomShape.",
             "",
@@ -90,7 +108,7 @@
         },
         {
           "name": "Transformation",
-          "returns": "HomogenMatrix3",
+          "returns": "HomogenMatrix3_f0fb0d69",
           "desc": [
             "this property lets you get and set the transformation matrix for this shape.",
             "",

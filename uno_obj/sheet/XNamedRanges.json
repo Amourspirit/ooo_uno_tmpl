@@ -1,44 +1,64 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XNamedRanges",
   "type": "interface",
   "namespace": "com.sun.star.sheet",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..container.x_name_access",
-        "XNameAccess"
+        "XNameAccess",
+        "XNameAccess_e2ab0cf6"
       ]
     ],
     "from_imports_typing": [
       [
         ".border",
-        "Border"
+        "Border",
+        "Border_7b2c097f"
       ],
       [
         "..table.cell_address",
-        "CellAddress"
+        "CellAddress",
+        "CellAddress_ae5f0b56"
       ],
       [
         "..table.cell_range_address",
-        "CellRangeAddress"
+        "CellRangeAddress",
+        "CellRangeAddress_ec450d43"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.container.XNameAccess": "XNameAccess_e2ab0cf6"
+    },
     "quote": [
-      "CellAddress",
-      "CellRangeAddress",
-      "Border"
+      "Border_7b2c097f",
+      "CellAddress_ae5f0b56",
+      "CellRangeAddress_ec450d43"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.container.XNameAccess"
+      ],
+      "typing": [
+        "com.sun.star.sheet.Border",
+        "com.sun.star.table.CellAddress",
+        "com.sun.star.table.CellRangeAddress"
+      ]
+    },
     "name": "XNamedRanges",
     "imports": [],
     "namespace": "com.sun.star.sheet",
@@ -75,7 +95,7 @@
             ],
             [
               "aPosition",
-              "CellAddress",
+              "CellAddress_ae5f0b56",
               "in"
             ],
             [
@@ -99,12 +119,12 @@
           "args": [
             [
               "aSource",
-              "CellRangeAddress",
+              "CellRangeAddress_ec450d43",
               "in"
             ],
             [
               "aBorder",
-              "Border",
+              "Border_7b2c097f",
               "in"
             ]
           ]
@@ -121,7 +141,7 @@
           "args": [
             [
               "aOutputPosition",
-              "CellAddress",
+              "CellAddress_ae5f0b56",
               "in"
             ]
           ]

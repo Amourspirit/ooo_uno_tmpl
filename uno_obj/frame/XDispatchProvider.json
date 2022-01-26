@@ -1,48 +1,68 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XDispatchProvider",
   "type": "interface",
   "namespace": "com.sun.star.frame",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "XInterface_8f010a43"
       ]
     ],
     "from_imports_typing": [
       [
-        "..util.url",
-        "URL"
-      ],
-      [
         ".dispatch_descriptor",
-        "DispatchDescriptor"
+        "DispatchDescriptor",
+        "DispatchDescriptor_b280e62"
       ],
       [
         ".x_dispatch",
-        "XDispatch"
+        "XDispatch",
+        "XDispatch_98ff0a9b"
+      ],
+      [
+        "..util.url",
+        "URL",
+        "URL_57ad07b9"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
     "quote": [
-      "URL",
-      "typing.List[DispatchDescriptor]",
-      "XDispatch",
-      "typing.List[XDispatch]"
+      "URL_57ad07b9",
+      "XDispatch_98ff0a9b",
+      "typing.List[DispatchDescriptor_b280e62]",
+      "typing.List[XDispatch_98ff0a9b]"
     ],
     "typings": [
-      "typing.List[XDispatch]",
-      "typing.List[DispatchDescriptor]"
+      "typing.List[DispatchDescriptor_b280e62]",
+      "typing.List[XDispatch_98ff0a9b]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.frame.DispatchDescriptor",
+        "com.sun.star.frame.XDispatch",
+        "com.sun.star.util.URL"
+      ]
+    },
     "name": "XDispatchProvider",
     "imports": [],
     "namespace": "com.sun.star.frame",
@@ -57,7 +77,7 @@
       "methods": [
         {
           "name": "queryDispatch",
-          "returns": "XDispatch",
+          "returns": "XDispatch_98ff0a9b",
           "desc": [
             "searches for an XDispatch for the specified URL within the specified target frame."
           ],
@@ -65,7 +85,7 @@
           "args": [
             [
               "URL",
-              "URL",
+              "URL_57ad07b9",
               "in"
             ],
             [
@@ -82,7 +102,7 @@
         },
         {
           "name": "queryDispatches",
-          "returns": "typing.List[XDispatch]",
+          "returns": "typing.List[XDispatch_98ff0a9b]",
           "desc": [
             "actually this method is redundant to XDispatchProvider.queryDispatch() to avoid multiple remote calls.",
             "",
@@ -92,7 +112,7 @@
           "args": [
             [
               "Requests",
-              "typing.List[DispatchDescriptor]",
+              "typing.List[DispatchDescriptor_b280e62]",
               "in"
             ]
           ]

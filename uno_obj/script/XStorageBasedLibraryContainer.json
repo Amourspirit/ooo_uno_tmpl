@@ -1,34 +1,50 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XStorageBasedLibraryContainer",
   "type": "interface",
   "namespace": "com.sun.star.script",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         ".x_persistent_library_container",
-        "XPersistentLibraryContainer"
+        "XPersistentLibraryContainer",
+        "XPersistentLibraryContainer_b6b2129e"
       ]
     ],
     "from_imports_typing": [
       [
         "..embed.x_storage",
-        "XStorage"
+        "XStorage",
+        "XStorage_8e460a32"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.script.XPersistentLibraryContainer": "XPersistentLibraryContainer_b6b2129e"
+    },
     "quote": [
-      "XStorage"
+      "XStorage_8e460a32"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.script.XPersistentLibraryContainer"
+      ],
+      "typing": [
+        "com.sun.star.embed.XStorage"
+      ]
+    },
     "name": "XStorageBasedLibraryContainer",
     "imports": [],
     "namespace": "com.sun.star.script",
@@ -62,7 +78,7 @@
           "args": [
             [
               "RootStorage",
-              "XStorage",
+              "XStorage_8e460a32",
               "in"
             ]
           ]
@@ -71,7 +87,7 @@
       "properties": [
         {
           "name": "RootStorage",
-          "returns": "XStorage",
+          "returns": "XStorage_8e460a32",
           "desc": [
             "denotes the root storage associated with the container.",
             "",

@@ -1,89 +1,134 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "TextProperties",
   "type": "service",
   "namespace": "com.sun.star.drawing",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
-        "..style.paragraph_properties_asian",
-        "ParagraphPropertiesAsian"
-      ],
-      [
-        "..style.character_properties_complex",
-        "CharacterPropertiesComplex"
-      ],
-      [
-        "..style.paragraph_properties_complex",
-        "ParagraphPropertiesComplex"
+        "..style.character_properties",
+        "CharacterProperties",
+        "CharacterProperties_1d4f0ef3"
       ],
       [
         "..style.character_properties_asian",
-        "CharacterPropertiesAsian"
+        "CharacterPropertiesAsian",
+        "CharacterPropertiesAsian_6d8a10df"
+      ],
+      [
+        "..style.character_properties_complex",
+        "CharacterPropertiesComplex",
+        "CharacterPropertiesComplex_90ca11cb"
       ],
       [
         "..style.paragraph_properties",
-        "ParagraphProperties"
+        "ParagraphProperties",
+        "ParagraphProperties_1e240efc"
       ],
       [
-        "..style.character_properties",
-        "CharacterProperties"
+        "..style.paragraph_properties_asian",
+        "ParagraphPropertiesAsian",
+        "ParagraphPropertiesAsian_6e8c10e8"
+      ],
+      [
+        "..style.paragraph_properties_complex",
+        "ParagraphPropertiesComplex",
+        "ParagraphPropertiesComplex_91de11d4"
       ]
     ],
     "from_imports_typing": [
       [
         "..container.x_index_replace",
-        "XIndexReplace"
+        "XIndexReplace",
+        "XIndexReplace_feed0dd7"
       ],
       [
         ".text_animation_direction",
-        "TextAnimationDirection"
-      ],
-      [
-        ".text_vertical_adjust",
-        "TextVerticalAdjust"
-      ],
-      [
-        "..text.x_text_columns",
-        "XTextColumns"
-      ],
-      [
-        "..text.writing_mode",
-        "WritingMode"
-      ],
-      [
-        ".text_horizontal_adjust",
-        "TextHorizontalAdjust"
-      ],
-      [
-        ".text_fit_to_size_type",
-        "TextFitToSizeType"
+        "TextAnimationDirection",
+        "TextAnimationDirection_6c5510da"
       ],
       [
         ".text_animation_kind",
-        "TextAnimationKind"
+        "TextAnimationKind",
+        "TextAnimationKind_1c710ebf"
+      ],
+      [
+        ".text_fit_to_size_type",
+        "TextFitToSizeType",
+        "TextFitToSizeType_1bd90ebc"
+      ],
+      [
+        ".text_horizontal_adjust",
+        "TextHorizontalAdjust",
+        "TextHorizontalAdjust_4cf9102e"
+      ],
+      [
+        ".text_vertical_adjust",
+        "TextVerticalAdjust",
+        "TextVerticalAdjust_2c160f3e"
+      ],
+      [
+        "..text.writing_mode",
+        "WritingMode",
+        "WritingMode_a6dd0b36"
+      ],
+      [
+        "..text.x_text_columns",
+        "XTextColumns",
+        "XTextColumns_b17f0bab"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.style.CharacterProperties": "CharacterProperties_1d4f0ef3",
+      "com.sun.star.style.CharacterPropertiesAsian": "CharacterPropertiesAsian_6d8a10df",
+      "com.sun.star.style.CharacterPropertiesComplex": "CharacterPropertiesComplex_90ca11cb",
+      "com.sun.star.style.ParagraphProperties": "ParagraphProperties_1e240efc",
+      "com.sun.star.style.ParagraphPropertiesAsian": "ParagraphPropertiesAsian_6e8c10e8",
+      "com.sun.star.style.ParagraphPropertiesComplex": "ParagraphPropertiesComplex_91de11d4"
+    },
     "quote": [
-      "TextAnimationDirection",
-      "XTextColumns",
-      "XIndexReplace",
-      "TextVerticalAdjust",
-      "TextAnimationKind",
-      "TextHorizontalAdjust",
-      "TextFitToSizeType",
-      "WritingMode"
+      "TextAnimationDirection_6c5510da",
+      "TextAnimationKind_1c710ebf",
+      "TextFitToSizeType_1bd90ebc",
+      "TextHorizontalAdjust_4cf9102e",
+      "TextVerticalAdjust_2c160f3e",
+      "WritingMode_a6dd0b36",
+      "XIndexReplace_feed0dd7",
+      "XTextColumns_b17f0bab"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.style.CharacterProperties",
+        "com.sun.star.style.CharacterPropertiesAsian",
+        "com.sun.star.style.CharacterPropertiesComplex",
+        "com.sun.star.style.ParagraphProperties",
+        "com.sun.star.style.ParagraphPropertiesAsian",
+        "com.sun.star.style.ParagraphPropertiesComplex"
+      ],
+      "typing": [
+        "com.sun.star.container.XIndexReplace",
+        "com.sun.star.drawing.TextAnimationDirection",
+        "com.sun.star.drawing.TextAnimationKind",
+        "com.sun.star.drawing.TextFitToSizeType",
+        "com.sun.star.drawing.TextHorizontalAdjust",
+        "com.sun.star.drawing.TextVerticalAdjust",
+        "com.sun.star.text.WritingMode",
+        "com.sun.star.text.XTextColumns"
+      ]
+    },
     "name": "TextProperties",
     "imports": [],
     "namespace": "com.sun.star.drawing",
@@ -116,7 +161,7 @@
         },
         {
           "name": "NumberingRules",
-          "returns": "XIndexReplace",
+          "returns": "XIndexReplace_feed0dd7",
           "desc": [
             "describes the numbering levels.",
             "",
@@ -156,7 +201,7 @@
         },
         {
           "name": "TextAnimationDirection",
-          "returns": "TextAnimationDirection",
+          "returns": "TextAnimationDirection_6c5510da",
           "desc": [
             "This enumeration defines the direction in which the text moves."
           ],
@@ -165,7 +210,7 @@
         },
         {
           "name": "TextAnimationKind",
-          "returns": "TextAnimationKind",
+          "returns": "TextAnimationKind_1c710ebf",
           "desc": [
             "This value defines the type of animation."
           ],
@@ -210,7 +255,7 @@
         },
         {
           "name": "TextColumns",
-          "returns": "XTextColumns",
+          "returns": "XTextColumns_b17f0bab",
           "desc": [
             "Column layout properties for the text.",
             "",
@@ -232,7 +277,7 @@
         },
         {
           "name": "TextFitToSize",
-          "returns": "TextFitToSizeType",
+          "returns": "TextFitToSizeType_1bd90ebc",
           "desc": [
             "With this set to a value other than NONE, the text inside of the Shape is stretched or scaled to fit into the Shape."
           ],
@@ -241,7 +286,7 @@
         },
         {
           "name": "TextHorizontalAdjust",
-          "returns": "TextHorizontalAdjust",
+          "returns": "TextHorizontalAdjust_4cf9102e",
           "desc": [
             "adjusts the horizontal position of the text inside of the Shape."
           ],
@@ -338,7 +383,7 @@
         },
         {
           "name": "TextVerticalAdjust",
-          "returns": "TextVerticalAdjust",
+          "returns": "TextVerticalAdjust_2c160f3e",
           "desc": [
             "adjusts the vertical position of the text inside of the Shape."
           ],
@@ -347,7 +392,7 @@
         },
         {
           "name": "TextWritingMode",
-          "returns": "WritingMode",
+          "returns": "WritingMode_a6dd0b36",
           "desc": [
             "This value selects the writing mode for the text."
           ],

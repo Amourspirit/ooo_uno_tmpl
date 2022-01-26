@@ -1,12 +1,14 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "RemoteContentProviderChangeEvent",
   "namespace": "com.sun.star.ucb",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "sort": true,
@@ -20,17 +22,22 @@
     "from_imports": [
       [
         "..lang.event_object",
-        "EventObject"
+        "EventObject",
+        "EventObject_a3d70b03"
       ]
     ],
     "from_imports_typing": [
       [
         ".remote_content_provider_change_action",
-        "RemoteContentProviderChangeAction"
+        "RemoteContentProviderChangeAction",
+        "RemoteContentProviderChangeAction_e9701378"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.lang.EventObject": "EventObject_a3d70b03"
+    },
     "quote": [
-      "RemoteContentProviderChangeAction"
+      "RemoteContentProviderChangeAction_e9701378"
     ],
     "typings": [],
     "requires_typing": true,
@@ -45,7 +52,7 @@
     "items": [
       {
         "name": "Action",
-        "type": "RemoteContentProviderChangeAction",
+        "type": "RemoteContentProviderChangeAction_e9701378",
         "lines": [
           "An indicator whether a remote content provider has been added or removed."
         ]

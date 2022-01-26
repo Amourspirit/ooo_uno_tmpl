@@ -1,34 +1,50 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "BasicToolBarFactory",
   "type": "service",
   "namespace": "com.sun.star.drawing.framework",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         ".x_resource_factory",
-        "XResourceFactory"
+        "XResourceFactory",
+        "XResourceFactory_b3561268"
       ]
     ],
     "from_imports_typing": [
       [
         "...frame.x_controller",
-        "XController"
+        "XController",
+        "XController_b00e0b8f"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.drawing.framework.XResourceFactory": "XResourceFactory_b3561268"
+    },
     "quote": [
-      "XController"
+      "XController_b00e0b8f"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.drawing.framework.XResourceFactory"
+      ],
+      "typing": [
+        "com.sun.star.frame.XController"
+      ]
+    },
     "name": "BasicToolBarFactory",
     "imports": [],
     "namespace": "com.sun.star.drawing.framework",
@@ -57,7 +73,7 @@
           "args": [
             [
               "xController",
-              "XController",
+              "XController_b00e0b8f",
               "in"
             ]
           ]

@@ -1,44 +1,62 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XDatabaseMetaData",
   "type": "interface",
   "namespace": "com.sun.star.sdbc",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "XInterface_8f010a43"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_connection",
-        "XConnection"
+        "XConnection",
+        "XConnection_a36a0b0c"
       ],
       [
         ".x_result_set",
-        "XResultSet"
+        "XResultSet",
+        "XResultSet_98e30aa7"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
     "quote": [
-      "typing.List[str]",
-      "XConnection",
-      "XResultSet",
-      "typing.List[int]"
+      "XConnection_a36a0b0c",
+      "XResultSet_98e30aa7",
+      "typing.List[int]",
+      "typing.List[str]"
     ],
     "typings": [
-      "typing.List[str]",
-      "typing.List[int]"
+      "typing.List[int]",
+      "typing.List[str]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.sdbc.XConnection",
+        "com.sun.star.sdbc.XResultSet"
+      ]
+    },
     "name": "XDatabaseMetaData",
     "imports": [],
     "namespace": "com.sun.star.sdbc",
@@ -133,7 +151,7 @@
         },
         {
           "name": "getBestRowIdentifier",
-          "returns": "XResultSet",
+          "returns": "XResultSet_98e30aa7",
           "desc": [
             "gets a description of a table's optimal set of columns that uniquely identifies a row.",
             "",
@@ -196,7 +214,7 @@
         },
         {
           "name": "getCatalogs",
-          "returns": "XResultSet",
+          "returns": "XResultSet_98e30aa7",
           "desc": [
             "gets the catalog names available in this database.",
             "",
@@ -211,7 +229,7 @@
         },
         {
           "name": "getColumnPrivileges",
-          "returns": "XResultSet",
+          "returns": "XResultSet_98e30aa7",
           "desc": [
             "gets a description of the access rights for a table's columns.",
             "",
@@ -247,7 +265,7 @@
         },
         {
           "name": "getColumns",
-          "returns": "XResultSet",
+          "returns": "XResultSet_98e30aa7",
           "desc": [
             "gets a description of table columns available in the specified catalog.",
             "",
@@ -283,7 +301,7 @@
         },
         {
           "name": "getConnection",
-          "returns": "XConnection",
+          "returns": "XConnection_a36a0b0c",
           "desc": [
             "retrieves the connection that produced this metadata object."
           ],
@@ -294,7 +312,7 @@
         },
         {
           "name": "getCrossReference",
-          "returns": "XResultSet",
+          "returns": "XResultSet_98e30aa7",
           "desc": [
             "gets a description of the foreign key columns in the foreign key table that reference the primary key columns of the primary key table (describe how one table imports another's key.) This should normally return a single foreign key/primary key pair (most tables only import a foreign key from a table once.).",
             "",
@@ -415,7 +433,7 @@
         },
         {
           "name": "getExportedKeys",
-          "returns": "XResultSet",
+          "returns": "XResultSet_98e30aa7",
           "desc": [
             "gets a description of the foreign key columns that reference a table's primary key columns (the foreign keys exported by a table).",
             "",
@@ -468,7 +486,7 @@
         },
         {
           "name": "getImportedKeys",
-          "returns": "XResultSet",
+          "returns": "XResultSet_98e30aa7",
           "desc": [
             "gets a description of the primary key columns that are referenced by a table's foreign key columns (the primary keys imported by a table).",
             "",
@@ -499,7 +517,7 @@
         },
         {
           "name": "getIndexInfo",
-          "returns": "XResultSet",
+          "returns": "XResultSet_98e30aa7",
           "desc": [
             "gets a description of a table's indices and statistics.",
             "",
@@ -773,7 +791,7 @@
         },
         {
           "name": "getPrimaryKeys",
-          "returns": "XResultSet",
+          "returns": "XResultSet_98e30aa7",
           "desc": [
             "gets a description of a table's primary key columns.",
             "",
@@ -804,7 +822,7 @@
         },
         {
           "name": "getProcedureColumns",
-          "returns": "XResultSet",
+          "returns": "XResultSet_98e30aa7",
           "desc": [
             "gets a description of a catalog's stored procedure parameters and result columns.",
             "",
@@ -853,7 +871,7 @@
         },
         {
           "name": "getProcedures",
-          "returns": "XResultSet",
+          "returns": "XResultSet_98e30aa7",
           "desc": [
             "Gets a description of the stored procedures available in a catalog.",
             "",
@@ -906,7 +924,7 @@
         },
         {
           "name": "getSchemas",
-          "returns": "XResultSet",
+          "returns": "XResultSet_98e30aa7",
           "desc": [
             "Gets the schema names available in this database.",
             "",
@@ -964,7 +982,7 @@
         },
         {
           "name": "getTablePrivileges",
-          "returns": "XResultSet",
+          "returns": "XResultSet_98e30aa7",
           "desc": [
             "gets a description of the access rights for each table available in a catalog.",
             "",
@@ -997,7 +1015,7 @@
         },
         {
           "name": "getTableTypes",
-          "returns": "XResultSet",
+          "returns": "XResultSet_98e30aa7",
           "desc": [
             "gets the table types available in this database.",
             "",
@@ -1012,7 +1030,7 @@
         },
         {
           "name": "getTables",
-          "returns": "XResultSet",
+          "returns": "XResultSet_98e30aa7",
           "desc": [
             "gets a description of tables available in a catalog.",
             "",
@@ -1061,7 +1079,7 @@
         },
         {
           "name": "getTypeInfo",
-          "returns": "XResultSet",
+          "returns": "XResultSet_98e30aa7",
           "desc": [
             "gets a description of all the standard SQL types supported by this database.",
             "",
@@ -1076,7 +1094,7 @@
         },
         {
           "name": "getUDTs",
-          "returns": "XResultSet",
+          "returns": "XResultSet_98e30aa7",
           "desc": [
             "Gets a description of the user-defined types defined in a particular schema.",
             "",
@@ -1138,7 +1156,7 @@
         },
         {
           "name": "getVersionColumns",
-          "returns": "XResultSet",
+          "returns": "XResultSet_98e30aa7",
           "desc": [
             "gets a description of a table's columns that are automatically updated when any value in a row is updated.",
             "",

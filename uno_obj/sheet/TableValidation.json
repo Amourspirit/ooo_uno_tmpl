@@ -1,43 +1,64 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "TableValidation",
   "type": "service",
   "namespace": "com.sun.star.sheet",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..beans.x_property_set",
-        "XPropertySet"
+        "XPropertySet",
+        "XPropertySet_bc180bfa"
       ],
       [
         ".x_sheet_condition",
-        "XSheetCondition"
+        "XSheetCondition",
+        "XSheetCondition_e1940d19"
       ]
     ],
     "from_imports_typing": [
       [
-        ".validation_type",
-        "ValidationType"
+        ".validation_alert_style",
+        "ValidationAlertStyle",
+        "ValidationAlertStyle_2a930f35"
       ],
       [
-        ".validation_alert_style",
-        "ValidationAlertStyle"
+        ".validation_type",
+        "ValidationType",
+        "ValidationType_d6110cce"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.beans.XPropertySet": "XPropertySet_bc180bfa",
+      "com.sun.star.sheet.XSheetCondition": "XSheetCondition_e1940d19"
+    },
     "quote": [
-      "ValidationType",
-      "ValidationAlertStyle"
+      "ValidationAlertStyle_2a930f35",
+      "ValidationType_d6110cce"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.beans.XPropertySet",
+        "com.sun.star.sheet.XSheetCondition"
+      ],
+      "typing": [
+        "com.sun.star.sheet.ValidationAlertStyle",
+        "com.sun.star.sheet.ValidationType"
+      ]
+    },
     "name": "TableValidation",
     "imports": [],
     "namespace": "com.sun.star.sheet",
@@ -53,7 +74,7 @@
       "properties": [
         {
           "name": "ErrorAlertStyle",
-          "returns": "ValidationAlertStyle",
+          "returns": "ValidationAlertStyle_2a930f35",
           "desc": [
             "specifies the style of the error message.",
             "",
@@ -146,7 +167,7 @@
         },
         {
           "name": "Type",
-          "returns": "ValidationType",
+          "returns": "ValidationType_d6110cce",
           "desc": [
             "specifies the type of validation."
           ],

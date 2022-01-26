@@ -1,56 +1,72 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XIntegerBitmapColorSpace",
   "type": "interface",
   "namespace": "com.sun.star.rendering",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         ".x_color_space",
-        "XColorSpace"
+        "XColorSpace",
+        "XColorSpace_e3940d09"
       ]
     ],
     "from_imports_typing": [
       [
+        ".argb_color",
+        "ARGBColor",
+        "ARGBColor_c6ee0be1"
+      ],
+      [
         ".color_component",
-        "ColorComponent"
+        "ColorComponent",
+        "ColorComponent_e4c0e78"
       ],
       [
         ".rgb_color",
-        "RGBColor"
-      ],
-      [
-        ".x_integer_bitmap_color_space",
-        "XIntegerBitmapColorSpace"
-      ],
-      [
-        ".argb_color",
-        "ARGBColor"
+        "RGBColor",
+        "RGBColor_bbdf0ba0"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.rendering.XColorSpace": "XColorSpace_e3940d09"
+    },
     "quote": [
-      "XColorSpace",
-      "typing.List[RGBColor]",
+      "XColorSpace_e3940d09",
       "XIntegerBitmapColorSpace",
-      "typing.List[int]",
-      "typing.List[ColorComponent]",
-      "typing.List[ARGBColor]"
+      "typing.List[ARGBColor_c6ee0be1]",
+      "typing.List[ColorComponent_e4c0e78]",
+      "typing.List[RGBColor_bbdf0ba0]",
+      "typing.List[int]"
     ],
     "typings": [
-      "typing.List[int]",
-      "typing.List[RGBColor]",
-      "typing.List[ColorComponent]",
-      "typing.List[ARGBColor]"
+      "typing.List[ARGBColor_c6ee0be1]",
+      "typing.List[ColorComponent_e4c0e78]",
+      "typing.List[RGBColor_bbdf0ba0]",
+      "typing.List[int]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.rendering.XColorSpace"
+      ],
+      "typing": [
+        "com.sun.star.rendering.ARGBColor",
+        "com.sun.star.rendering.ColorComponent",
+        "com.sun.star.rendering.RGBColor"
+      ]
+    },
     "name": "XIntegerBitmapColorSpace",
     "imports": [],
     "namespace": "com.sun.star.rendering",
@@ -67,7 +83,7 @@
       "methods": [
         {
           "name": "convertFromIntegerColorSpace",
-          "returns": "typing.List[ColorComponent]",
+          "returns": "typing.List[ColorComponent_e4c0e78]",
           "desc": [
             "Convert integer bitmap color to generic IEEE double device color of another color space.",
             "",
@@ -84,7 +100,7 @@
             ],
             [
               "targetColorSpace",
-              "XColorSpace",
+              "XColorSpace_e3940d09",
               "in"
             ]
           ]
@@ -103,7 +119,7 @@
           "args": [
             [
               "rgbColor",
-              "typing.List[ARGBColor]",
+              "typing.List[ARGBColor_c6ee0be1]",
               "in"
             ]
           ]
@@ -122,7 +138,7 @@
           "args": [
             [
               "rgbColor",
-              "typing.List[ARGBColor]",
+              "typing.List[ARGBColor_c6ee0be1]",
               "in"
             ]
           ]
@@ -141,14 +157,14 @@
           "args": [
             [
               "rgbColor",
-              "typing.List[RGBColor]",
+              "typing.List[RGBColor_bbdf0ba0]",
               "in"
             ]
           ]
         },
         {
           "name": "convertIntegerToARGB",
-          "returns": "typing.List[ARGBColor]",
+          "returns": "typing.List[ARGBColor_c6ee0be1]",
           "desc": [
             "Convert color value in this color space to sRGB color values, with linear alpha.",
             "",
@@ -167,7 +183,7 @@
         },
         {
           "name": "convertIntegerToPARGB",
-          "returns": "typing.List[ARGBColor]",
+          "returns": "typing.List[ARGBColor_c6ee0be1]",
           "desc": [
             "Convert color value in this color space to premultiplied sRGB color values, with linear alpha.",
             "",
@@ -186,7 +202,7 @@
         },
         {
           "name": "convertIntegerToRGB",
-          "returns": "typing.List[RGBColor]",
+          "returns": "typing.List[RGBColor_bbdf0ba0]",
           "desc": [
             "Convert color value in this color space to sRGB color values.",
             "",

@@ -1,44 +1,64 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XSpellChecker",
   "type": "interface",
   "namespace": "com.sun.star.linguistic2",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         ".x_supported_locales",
-        "XSupportedLocales"
+        "XSupportedLocales",
+        "XSupportedLocales_5bda1056"
       ]
     ],
     "from_imports_typing": [
       [
-        ".x_spell_alternatives",
-        "XSpellAlternatives"
-      ],
-      [
         "..beans.property_values",
-        "PropertyValues"
+        "PropertyValues",
+        "PropertyValues_d6470ce6"
       ],
       [
         "..lang.locale",
-        "Locale"
+        "Locale",
+        "Locale_70d308fa"
+      ],
+      [
+        ".x_spell_alternatives",
+        "XSpellAlternatives",
+        "XSpellAlternatives_6ad110bf"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.linguistic2.XSupportedLocales": "XSupportedLocales_5bda1056"
+    },
     "quote": [
-      "PropertyValues",
-      "Locale",
-      "XSpellAlternatives"
+      "Locale_70d308fa",
+      "PropertyValues_d6470ce6",
+      "XSpellAlternatives_6ad110bf"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.linguistic2.XSupportedLocales"
+      ],
+      "typing": [
+        "com.sun.star.beans.PropertyValues",
+        "com.sun.star.lang.Locale",
+        "com.sun.star.linguistic2.XSpellAlternatives"
+      ]
+    },
     "name": "XSpellChecker",
     "imports": [],
     "namespace": "com.sun.star.linguistic2",
@@ -72,19 +92,19 @@
             ],
             [
               "aLocale",
-              "Locale",
+              "Locale_70d308fa",
               "in"
             ],
             [
               "aProperties",
-              "PropertyValues",
+              "PropertyValues_d6470ce6",
               "in"
             ]
           ]
         },
         {
           "name": "spell",
-          "returns": "XSpellAlternatives",
+          "returns": "XSpellAlternatives_6ad110bf",
           "desc": [
             "This method checks if a word is spelled correctly in a given language.",
             "",
@@ -101,12 +121,12 @@
             ],
             [
               "aLocale",
-              "Locale",
+              "Locale_70d308fa",
               "in"
             ],
             [
               "aProperties",
-              "PropertyValues",
+              "PropertyValues_d6470ce6",
               "in"
             ]
           ]

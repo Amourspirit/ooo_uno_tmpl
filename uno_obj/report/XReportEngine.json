@@ -1,63 +1,92 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XReportEngine",
   "type": "interface",
   "namespace": "com.sun.star.report",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
-        "..lang.x_component",
-        "XComponent"
+        "..beans.x_property_set",
+        "XPropertySet",
+        "XPropertySet_bc180bfa"
       ],
       [
-        "..beans.x_property_set",
-        "XPropertySet"
+        "..lang.x_component",
+        "XComponent",
+        "XComponent_98dc0ab5"
       ]
     ],
     "from_imports_typing": [
       [
-        "..sdbc.x_connection",
-        "XConnection"
-      ],
-      [
-        "..task.x_status_indicator",
-        "XStatusIndicator"
-      ],
-      [
-        "..util.url",
-        "URL"
+        "..frame.x_frame",
+        "XFrame",
+        "XFrame_7a570956"
       ],
       [
         "..frame.x_model",
-        "XModel"
-      ],
-      [
-        "..frame.x_frame",
-        "XFrame"
+        "XModel",
+        "XModel_7a6e095c"
       ],
       [
         ".x_report_definition",
-        "XReportDefinition"
+        "XReportDefinition",
+        "XReportDefinition_ec30e81"
+      ],
+      [
+        "..sdbc.x_connection",
+        "XConnection",
+        "XConnection_a36a0b0c"
+      ],
+      [
+        "..task.x_status_indicator",
+        "XStatusIndicator",
+        "XStatusIndicator_e2d00d34"
+      ],
+      [
+        "..util.url",
+        "URL",
+        "URL_57ad07b9"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.beans.XPropertySet": "XPropertySet_bc180bfa",
+      "com.sun.star.lang.XComponent": "XComponent_98dc0ab5"
+    },
     "quote": [
-      "XReportDefinition",
-      "XFrame",
-      "URL",
-      "XStatusIndicator",
-      "XModel",
-      "XConnection"
+      "URL_57ad07b9",
+      "XConnection_a36a0b0c",
+      "XFrame_7a570956",
+      "XModel_7a6e095c",
+      "XReportDefinition_ec30e81",
+      "XStatusIndicator_e2d00d34"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.beans.XPropertySet",
+        "com.sun.star.lang.XComponent"
+      ],
+      "typing": [
+        "com.sun.star.frame.XFrame",
+        "com.sun.star.frame.XModel",
+        "com.sun.star.report.XReportDefinition",
+        "com.sun.star.sdbc.XConnection",
+        "com.sun.star.task.XStatusIndicator",
+        "com.sun.star.util.URL"
+      ]
+    },
     "name": "XReportEngine",
     "imports": [],
     "namespace": "com.sun.star.report",
@@ -75,7 +104,7 @@
       "methods": [
         {
           "name": "createDocument",
-          "returns": "URL",
+          "returns": "URL_57ad07b9",
           "desc": [
             "creates a report document."
           ],
@@ -88,7 +117,7 @@
         },
         {
           "name": "createDocumentAlive",
-          "returns": "XModel",
+          "returns": "XModel_7a6e095c",
           "desc": [
             "creates a report document.",
             "",
@@ -102,14 +131,14 @@
           "args": [
             [
               "frame",
-              "XFrame",
+              "XFrame_7a570956",
               "in"
             ]
           ]
         },
         {
           "name": "createDocumentModel",
-          "returns": "XModel",
+          "returns": "XModel_7a6e095c",
           "desc": [
             "creates a report document."
           ],
@@ -136,7 +165,7 @@
       "properties": [
         {
           "name": "ActiveConnection",
-          "returns": "XConnection",
+          "returns": "XConnection_a36a0b0c",
           "desc": [
             "specifies the active connection which is used to create the resulting report."
           ],
@@ -157,7 +186,7 @@
         },
         {
           "name": "ReportDefinition",
-          "returns": "XReportDefinition",
+          "returns": "XReportDefinition_ec30e81",
           "desc": [
             "specifies the report definition object which is used to create the resulting report."
           ],
@@ -166,7 +195,7 @@
         },
         {
           "name": "StatusIndicator",
-          "returns": "XStatusIndicator",
+          "returns": "XStatusIndicator_e2d00d34",
           "desc": [
             "specifies the status indicator which shows the progress of the report generation process."
           ],

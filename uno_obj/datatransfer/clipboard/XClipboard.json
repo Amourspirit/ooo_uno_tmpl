@@ -1,39 +1,57 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XClipboard",
   "type": "interface",
   "namespace": "com.sun.star.datatransfer.clipboard",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "...uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "XInterface_8f010a43"
       ]
     ],
     "from_imports_typing": [
       [
-        ".x_clipboard_owner",
-        "XClipboardOwner"
+        "..x_transferable",
+        "XTransferable",
+        "XTransferable_2d800f38"
       ],
       [
-        "..x_transferable",
-        "XTransferable"
+        ".x_clipboard_owner",
+        "XClipboardOwner",
+        "XClipboardOwner_8713d8"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
     "quote": [
-      "XClipboardOwner",
-      "XTransferable"
+      "XClipboardOwner_8713d8",
+      "XTransferable_2d800f38"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.datatransfer.XTransferable",
+        "com.sun.star.datatransfer.clipboard.XClipboardOwner"
+      ]
+    },
     "name": "XClipboard",
     "imports": [],
     "namespace": "com.sun.star.datatransfer.clipboard",
@@ -46,7 +64,7 @@
       "methods": [
         {
           "name": "getContents",
-          "returns": "XTransferable",
+          "returns": "XTransferable_2d800f38",
           "desc": [
             "To get the current content of the clipboard."
           ],
@@ -80,12 +98,12 @@
           "args": [
             [
               "xTrans",
-              "XTransferable",
+              "XTransferable_2d800f38",
               "in"
             ],
             [
               "xClipboardOwner",
-              "XClipboardOwner",
+              "XClipboardOwner_8713d8",
               "in"
             ]
           ]

@@ -1,36 +1,52 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XSubTotalField",
   "type": "interface",
   "namespace": "com.sun.star.sheet",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "XInterface_8f010a43"
       ]
     ],
     "from_imports_typing": [
       [
         ".sub_total_column",
-        "SubTotalColumn"
+        "SubTotalColumn",
+        "SubTotalColumn_d5760cbd"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
     "quote": [
-      "typing.List[SubTotalColumn]"
+      "typing.List[SubTotalColumn_d5760cbd]"
     ],
     "typings": [
-      "typing.List[SubTotalColumn]"
+      "typing.List[SubTotalColumn_d5760cbd]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.sheet.SubTotalColumn"
+      ]
+    },
     "name": "XSubTotalField",
     "imports": [],
     "namespace": "com.sun.star.sheet",
@@ -54,7 +70,7 @@
         },
         {
           "name": "getSubTotalColumns",
-          "returns": "typing.List[SubTotalColumn]",
+          "returns": "typing.List[SubTotalColumn_d5760cbd]",
           "desc": [
             "returns the definitions of which columns should have subtotals added to them."
           ],
@@ -86,7 +102,7 @@
           "args": [
             [
               "aSubTotalColumns",
-              "typing.List[SubTotalColumn]",
+              "typing.List[SubTotalColumn_d5760cbd]",
               "in"
             ]
           ]

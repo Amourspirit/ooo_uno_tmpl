@@ -1,12 +1,14 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "InvocationInfo",
   "namespace": "com.sun.star.script",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "sort": true,
@@ -21,20 +23,23 @@
     "from_imports_typing": [
       [
         "..reflection.param_mode",
-        "ParamMode"
+        "ParamMode",
+        "ParamMode_d7260ca9"
       ],
       [
         ".member_type",
-        "MemberType"
+        "MemberType",
+        "MemberType_b1e00b97"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "typing.List[ParamMode]",
-      "MemberType",
+      "MemberType_b1e00b97",
+      "typing.List[ParamMode_d7260ca9]",
       "typing.List[object]"
     ],
     "typings": [
-      "typing.List[ParamMode]",
+      "typing.List[ParamMode_d7260ca9]",
       "typing.List[object]"
     ],
     "requires_typing": true,
@@ -72,14 +77,14 @@
       },
       {
         "name": "eMemberType",
-        "type": "MemberType",
+        "type": "MemberType_b1e00b97",
         "lines": [
           "Kind of the member (method or property)."
         ]
       },
       {
         "name": "aParamModes",
-        "type": "typing.List[ParamMode]",
+        "type": "typing.List[ParamMode_d7260ca9]",
         "lines": [
           "Mode of method parameters (IN, OUT, INOUT), for properties this sequence is empty."
         ]

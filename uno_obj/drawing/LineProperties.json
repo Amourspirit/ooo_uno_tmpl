@@ -1,54 +1,75 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "LineProperties",
   "type": "service",
   "namespace": "com.sun.star.drawing",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [],
     "from_imports_typing": [
       [
-        ".line_dash",
-        "LineDash"
+        ".line_cap",
+        "LineCap",
+        "LineCap_9a4c0a90"
       ],
       [
-        ".line_cap",
-        "LineCap"
+        ".line_dash",
+        "LineDash",
+        "LineDash_a54e0afc"
       ],
       [
         ".line_joint",
-        "LineJoint"
-      ],
-      [
-        ".poly_polygon_bezier_coords",
-        "PolyPolygonBezierCoords"
-      ],
-      [
-        "..util.color",
-        "Color"
+        "LineJoint",
+        "LineJoint_b1020b80"
       ],
       [
         ".line_style",
-        "LineStyle"
+        "LineStyle",
+        "LineStyle_b1600b8d"
+      ],
+      [
+        ".poly_polygon_bezier_coords",
+        "PolyPolygonBezierCoords",
+        "PolyPolygonBezierCoords_7ec5114b"
+      ],
+      [
+        "..util.color",
+        "Color",
+        "Color_68e908c5"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "Color",
-      "LineStyle",
-      "LineCap",
-      "PolyPolygonBezierCoords",
-      "LineJoint",
-      "LineDash"
+      "Color_68e908c5",
+      "LineCap_9a4c0a90",
+      "LineDash_a54e0afc",
+      "LineJoint_b1020b80",
+      "LineStyle_b1600b8d",
+      "PolyPolygonBezierCoords_7ec5114b"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [],
+      "typing": [
+        "com.sun.star.drawing.LineCap",
+        "com.sun.star.drawing.LineDash",
+        "com.sun.star.drawing.LineJoint",
+        "com.sun.star.drawing.LineStyle",
+        "com.sun.star.drawing.PolyPolygonBezierCoords",
+        "com.sun.star.util.Color"
+      ]
+    },
     "name": "LineProperties",
     "imports": [],
     "namespace": "com.sun.star.drawing",
@@ -63,7 +84,7 @@
       "properties": [
         {
           "name": "LineCap",
-          "returns": "LineCap",
+          "returns": "LineCap_9a4c0a90",
           "desc": [
             "This property defines the rendering of ends of thick lines."
           ],
@@ -72,7 +93,7 @@
         },
         {
           "name": "LineColor",
-          "returns": "Color",
+          "returns": "Color_68e908c5",
           "desc": [
             "This property contains the line color."
           ],
@@ -81,7 +102,7 @@
         },
         {
           "name": "LineDash",
-          "returns": "LineDash",
+          "returns": "LineDash_a54e0afc",
           "desc": [
             "This property contains the dash of the line."
           ],
@@ -99,7 +120,7 @@
         },
         {
           "name": "LineEnd",
-          "returns": "PolyPolygonBezierCoords",
+          "returns": "PolyPolygonBezierCoords_7ec5114b",
           "desc": [
             "This property contains the line end in the form of a poly polygon Bezier."
           ],
@@ -137,7 +158,7 @@
         },
         {
           "name": "LineJoint",
-          "returns": "LineJoint",
+          "returns": "LineJoint_b1020b80",
           "desc": [
             "This property defines the rendering of joints between thick lines."
           ],
@@ -146,7 +167,7 @@
         },
         {
           "name": "LineStart",
-          "returns": "PolyPolygonBezierCoords",
+          "returns": "PolyPolygonBezierCoords_7ec5114b",
           "desc": [
             "This property contains the line start in the form of a poly polygon Bezier."
           ],
@@ -184,7 +205,7 @@
         },
         {
           "name": "LineStyle",
-          "returns": "LineStyle",
+          "returns": "LineStyle_b1600b8d",
           "desc": [
             "This property contains the type of the line."
           ],

@@ -1,41 +1,59 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "DocumentIndex",
   "type": "service",
   "namespace": "com.sun.star.text",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         ".base_index",
-        "BaseIndex"
+        "BaseIndex",
+        "BaseIndex_8f0d0a40"
       ]
     ],
     "from_imports_typing": [
       [
         "..lang.locale",
-        "Locale"
+        "Locale",
+        "Locale_70d308fa"
       ],
       [
         ".x_document_index_mark",
-        "XDocumentIndexMark"
+        "XDocumentIndexMark",
+        "XDocumentIndexMark_fe490de7"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.text.BaseIndex": "BaseIndex_8f0d0a40"
+    },
     "quote": [
-      "Locale",
-      "typing.List[XDocumentIndexMark]"
+      "Locale_70d308fa",
+      "typing.List[XDocumentIndexMark_fe490de7]"
     ],
     "typings": [
-      "typing.List[XDocumentIndexMark]"
+      "typing.List[XDocumentIndexMark_fe490de7]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.text.BaseIndex"
+      ],
+      "typing": [
+        "com.sun.star.lang.Locale",
+        "com.sun.star.text.XDocumentIndexMark"
+      ]
+    },
     "name": "DocumentIndex",
     "imports": [],
     "namespace": "com.sun.star.text",
@@ -50,7 +68,7 @@
       "types": [
         {
           "name": "DocumentIndexMarks",
-          "returns": "typing.List[XDocumentIndexMark]",
+          "returns": "typing.List[XDocumentIndexMark_fe490de7]",
           "desc": [
             "contains all index marks that are related to this index."
           ],
@@ -70,7 +88,7 @@
         },
         {
           "name": "Locale",
-          "returns": "Locale",
+          "returns": "Locale_70d308fa",
           "desc": [
             "contains the locale of the index."
           ],

@@ -1,35 +1,51 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XFramesSupplier",
   "type": "interface",
   "namespace": "com.sun.star.frame",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         ".x_frame",
-        "XFrame"
+        "XFrame",
+        "XFrame_7a570956"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_frames",
-        "XFrames"
+        "XFrames",
+        "XFrames_842009c9"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.frame.XFrame": "XFrame_7a570956"
+    },
     "quote": [
-      "XFrames",
-      "XFrame"
+      "XFrame_7a570956",
+      "XFrames_842009c9"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.frame.XFrame"
+      ],
+      "typing": [
+        "com.sun.star.frame.XFrames"
+      ]
+    },
     "name": "XFramesSupplier",
     "imports": [],
     "namespace": "com.sun.star.frame",
@@ -44,7 +60,7 @@
       "methods": [
         {
           "name": "getActiveFrame",
-          "returns": "XFrame",
+          "returns": "XFrame_7a570956",
           "desc": [
             "gets the current active frame of this container (not of any other available supplier)",
             "",
@@ -55,7 +71,7 @@
         },
         {
           "name": "getFrames",
-          "returns": "XFrames",
+          "returns": "XFrames_842009c9",
           "desc": [
             "provides access to this container and to all other XFramesSupplier which are available from this node of frame tree"
           ],
@@ -78,7 +94,7 @@
           "args": [
             [
               "Frame",
-              "XFrame",
+              "XFrame_7a570956",
               "in"
             ]
           ]

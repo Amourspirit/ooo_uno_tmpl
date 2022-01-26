@@ -1,51 +1,73 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XDispatchRecorderSupplier",
   "type": "interface",
   "namespace": "com.sun.star.frame",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "XInterface_8f010a43"
       ]
     ],
     "from_imports_typing": [
       [
-        "..util.url",
-        "URL"
+        "..beans.property_value",
+        "PropertyValue",
+        "PropertyValue_c9610c73"
       ],
       [
         ".x_dispatch",
-        "XDispatch"
-      ],
-      [
-        "..beans.property_value",
-        "PropertyValue"
+        "XDispatch",
+        "XDispatch_98ff0a9b"
       ],
       [
         ".x_dispatch_recorder",
-        "XDispatchRecorder"
+        "XDispatchRecorder",
+        "XDispatchRecorder_fbd70dd1"
+      ],
+      [
+        "..util.url",
+        "URL",
+        "URL_57ad07b9"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
     "quote": [
-      "URL",
-      "XDispatchRecorder",
-      "XDispatch",
-      "typing.List[PropertyValue]"
+      "URL_57ad07b9",
+      "XDispatchRecorder_fbd70dd1",
+      "XDispatch_98ff0a9b",
+      "typing.List[PropertyValue_c9610c73]"
     ],
     "typings": [
-      "typing.List[PropertyValue]"
+      "typing.List[PropertyValue_c9610c73]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.beans.PropertyValue",
+        "com.sun.star.frame.XDispatch",
+        "com.sun.star.frame.XDispatchRecorder",
+        "com.sun.star.util.URL"
+      ]
+    },
     "name": "XDispatchRecorderSupplier",
     "imports": [],
     "namespace": "com.sun.star.frame",
@@ -76,24 +98,24 @@
           "args": [
             [
               "URL",
-              "URL",
+              "URL_57ad07b9",
               "in"
             ],
             [
               "Arguments",
-              "typing.List[PropertyValue]",
+              "typing.List[PropertyValue_c9610c73]",
               "in"
             ],
             [
               "Dispatcher",
-              "XDispatch",
+              "XDispatch_98ff0a9b",
               "in"
             ]
           ]
         },
         {
           "name": "getDispatchRecorder",
-          "returns": "XDispatchRecorder",
+          "returns": "XDispatchRecorder_fbd70dd1",
           "desc": [
             "provides access on the recorder of this supplier",
             "",
@@ -114,7 +136,7 @@
           "args": [
             [
               "Recorder",
-              "XDispatchRecorder",
+              "XDispatchRecorder_fbd70dd1",
               "in"
             ]
           ]

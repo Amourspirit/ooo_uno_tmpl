@@ -1,52 +1,69 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "Binding",
   "type": "service",
   "namespace": "com.sun.star.xforms",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
-        "..form.binding.value_binding",
-        "ValueBinding"
+        "..form.binding.list_entry_source",
+        "ListEntrySource",
+        "ListEntrySource_48260fe4"
       ],
       [
-        "..form.binding.list_entry_source",
-        "ListEntrySource"
+        "..form.binding.value_binding",
+        "ValueBinding",
+        "ValueBinding_18de0e7d"
       ],
       [
         "..form.validation.x_validator",
-        "XValidator"
-      ],
-      [
-        "..util.x_modify_broadcaster",
-        "XModifyBroadcaster"
+        "XValidator",
+        "XValidator_2a5c0f13"
       ]
     ],
     "from_imports_typing": [
       [
         "..container.x_name_container",
-        "XNameContainer"
+        "XNameContainer",
+        "XNameContainer_cb90e47"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.form.binding.ListEntrySource": "ListEntrySource_48260fe4",
+      "com.sun.star.form.binding.ValueBinding": "ValueBinding_18de0e7d",
+      "com.sun.star.form.validation.XValidator": "XValidator_2a5c0f13"
+    },
     "quote": [
-      "XNameContainer"
+      "XNameContainer_cb90e47"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.form.binding.ListEntrySource",
+        "com.sun.star.form.binding.ValueBinding",
+        "com.sun.star.form.validation.XValidator"
+      ],
+      "typing": [
+        "com.sun.star.container.XNameContainer"
+      ]
+    },
     "name": "Binding",
     "imports": [],
     "namespace": "com.sun.star.xforms",
     "extends": [
       "com.sun.star.form.binding.ValueBinding",
-      "com.sun.star.util.XModifyBroadcaster",
       "com.sun.star.form.binding.ListEntrySource",
       "com.sun.star.form.validation.XValidator"
     ],
@@ -58,7 +75,7 @@
       "properties": [
         {
           "name": "BindingNamespaces",
-          "returns": "XNameContainer",
+          "returns": "XNameContainer_cb90e47",
           "desc": [
             "among other properties, there is this one",
             "",

@@ -1,41 +1,59 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "Bibliography",
   "type": "service",
   "namespace": "com.sun.star.text.fieldmaster",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..text_field_master",
-        "TextFieldMaster"
+        "TextFieldMaster",
+        "TextFieldMaster_d6410cc2"
       ]
     ],
     "from_imports_typing": [
       [
-        "...lang.locale",
-        "Locale"
+        "...beans.property_values",
+        "PropertyValues",
+        "PropertyValues_d6470ce6"
       ],
       [
-        "...beans.property_values",
-        "PropertyValues"
+        "...lang.locale",
+        "Locale",
+        "Locale_70d308fa"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.text.TextFieldMaster": "TextFieldMaster_d6410cc2"
+    },
     "quote": [
-      "Locale",
-      "typing.List[PropertyValues]"
+      "Locale_70d308fa",
+      "typing.List[PropertyValues_d6470ce6]"
     ],
     "typings": [
-      "typing.List[PropertyValues]"
+      "typing.List[PropertyValues_d6470ce6]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.text.TextFieldMaster"
+      ],
+      "typing": [
+        "com.sun.star.beans.PropertyValues",
+        "com.sun.star.lang.Locale"
+      ]
+    },
     "name": "Bibliography",
     "imports": [],
     "namespace": "com.sun.star.text.fieldmaster",
@@ -50,7 +68,7 @@
       "types": [
         {
           "name": "SortKeys",
-          "returns": "typing.List[PropertyValues]",
+          "returns": "typing.List[PropertyValues_d6470ce6]",
           "desc": [
             "determines the sorting of the bibliography entries in a bibliography index.",
             "",
@@ -103,7 +121,7 @@
         },
         {
           "name": "Locale",
-          "returns": "Locale",
+          "returns": "Locale_70d308fa",
           "desc": [
             "contains the locale of the field master"
           ],

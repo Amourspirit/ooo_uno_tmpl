@@ -1,37 +1,53 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XChartType",
   "type": "interface",
   "namespace": "com.sun.star.chart2",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "XInterface_8f010a43"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_coordinate_system",
-        "XCoordinateSystem"
+        "XCoordinateSystem",
+        "XCoordinateSystem_7ff0e31"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
     "quote": [
-      "typing.List[str]",
-      "XCoordinateSystem"
+      "XCoordinateSystem_7ff0e31",
+      "typing.List[str]"
     ],
     "typings": [
       "typing.List[str]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.chart2.XCoordinateSystem"
+      ]
+    },
     "name": "XChartType",
     "imports": [],
     "namespace": "com.sun.star.chart2",
@@ -44,7 +60,7 @@
       "methods": [
         {
           "name": "createCoordinateSystem",
-          "returns": "XCoordinateSystem",
+          "returns": "XCoordinateSystem_7ff0e31",
           "desc": [
             "Creates a coordinate systems that fits the chart-type with its current settings and for the given dimension."
           ],

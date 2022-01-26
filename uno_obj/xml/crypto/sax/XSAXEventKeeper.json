@@ -1,39 +1,57 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XSAXEventKeeper",
   "type": "interface",
   "namespace": "com.sun.star.xml.crypto.sax",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "....uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "XInterface_8f010a43"
       ]
     ],
     "from_imports_typing": [
       [
-        "...wrapper.xxml_element_wrapper",
-        "XXMLElementWrapper"
+        "...sax.x_document_handler",
+        "XDocumentHandler",
+        "XDocumentHandler_9b90e28"
       ],
       [
-        "...sax.x_document_handler",
-        "XDocumentHandler"
+        "...wrapper.xxml_element_wrapper",
+        "XXMLElementWrapper",
+        "XXMLElementWrapper_66c0107c"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
     "quote": [
-      "XDocumentHandler",
-      "XXMLElementWrapper"
+      "XDocumentHandler_9b90e28",
+      "XXMLElementWrapper_66c0107c"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.xml.sax.XDocumentHandler",
+        "com.sun.star.xml.wrapper.XXMLElementWrapper"
+      ]
+    },
     "name": "XSAXEventKeeper",
     "imports": [],
     "namespace": "com.sun.star.xml.crypto.sax",
@@ -72,7 +90,7 @@
         },
         {
           "name": "getCurrentBlockingNode",
-          "returns": "XXMLElementWrapper",
+          "returns": "XXMLElementWrapper_66c0107c",
           "desc": [
             "Gets the element which current blocking happens.",
             "",
@@ -83,7 +101,7 @@
         },
         {
           "name": "getElement",
-          "returns": "XXMLElementWrapper",
+          "returns": "XXMLElementWrapper_66c0107c",
           "desc": [
             "Gets the element of an element mark."
           ],
@@ -161,14 +179,14 @@
             ],
             [
               "aElement",
-              "XXMLElementWrapper",
+              "XXMLElementWrapper_66c0107c",
               "in"
             ]
           ]
         },
         {
           "name": "setNextHandler",
-          "returns": "XDocumentHandler",
+          "returns": "XDocumentHandler_9b90e28",
           "desc": [
             "Sets the next document handler in the SAX chain.",
             "",
@@ -178,7 +196,7 @@
           "args": [
             [
               "nextHandler",
-              "XDocumentHandler",
+              "XDocumentHandler_9b90e28",
               "in"
             ]
           ]

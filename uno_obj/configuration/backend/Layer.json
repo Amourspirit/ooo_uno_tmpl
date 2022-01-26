@@ -1,40 +1,51 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "Layer",
   "type": "service",
   "namespace": "com.sun.star.configuration.backend",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         ".x_composite_layer",
-        "XCompositeLayer"
+        "XCompositeLayer",
+        "XCompositeLayer_ed7f137e"
       ],
       [
         "...util.x_time_stamped",
-        "XTimeStamped"
-      ],
-      [
-        ".x_layer",
-        "XLayer"
+        "XTimeStamped",
+        "XTimeStamped_b09b0b7b"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.configuration.backend.XCompositeLayer": "XCompositeLayer_ed7f137e",
+      "com.sun.star.util.XTimeStamped": "XTimeStamped_b09b0b7b"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
+    "full_imports": {
+      "general": [
+        "com.sun.star.configuration.backend.XCompositeLayer",
+        "com.sun.star.util.XTimeStamped"
+      ],
+      "typing": []
+    },
     "name": "Layer",
     "imports": [],
     "namespace": "com.sun.star.configuration.backend",
     "extends": [
-      "com.sun.star.configuration.backend.XLayer",
       "com.sun.star.configuration.backend.XCompositeLayer",
       "com.sun.star.util.XTimeStamped"
     ],

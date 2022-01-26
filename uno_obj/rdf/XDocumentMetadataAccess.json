@@ -1,68 +1,97 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XDocumentMetadataAccess",
   "type": "interface",
   "namespace": "com.sun.star.rdf",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         ".x_repository_supplier",
-        "XRepositorySupplier"
+        "XRepositorySupplier",
+        "XRepositorySupplier_feff0e30"
       ],
       [
         ".xuri",
-        "XURI"
+        "XURI",
+        "XURI_5682078c"
       ]
     ],
     "from_imports_typing": [
       [
-        "..io.x_input_stream",
-        "XInputStream"
-      ],
-      [
-        "..task.x_interaction_handler",
-        "XInteractionHandler"
-      ],
-      [
-        "..embed.x_storage",
-        "XStorage"
-      ],
-      [
-        ".x_metadatable",
-        "XMetadatable"
+        "..beans.property_value",
+        "PropertyValue",
+        "PropertyValue_c9610c73"
       ],
       [
         "..beans.string_pair",
-        "StringPair"
+        "StringPair",
+        "StringPair_a4bc0b14"
       ],
       [
-        "..beans.property_value",
-        "PropertyValue"
+        "..embed.x_storage",
+        "XStorage",
+        "XStorage_8e460a32"
+      ],
+      [
+        "..io.x_input_stream",
+        "XInputStream",
+        "XInputStream_98d40ab4"
+      ],
+      [
+        ".x_metadatable",
+        "XMetadatable",
+        "XMetadatable_a3000af0"
+      ],
+      [
+        "..task.x_interaction_handler",
+        "XInteractionHandler",
+        "XInteractionHandler_bf80e51"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.rdf.XRepositorySupplier": "XRepositorySupplier_feff0e30",
+      "com.sun.star.rdf.XURI": "XURI_5682078c"
+    },
     "quote": [
-      "XStorage",
-      "StringPair",
-      "XInteractionHandler",
-      "typing.List[PropertyValue]",
-      "XInputStream",
-      "XMetadatable",
-      "typing.List[XURI]",
-      "XURI"
+      "StringPair_a4bc0b14",
+      "XInputStream_98d40ab4",
+      "XInteractionHandler_bf80e51",
+      "XMetadatable_a3000af0",
+      "XStorage_8e460a32",
+      "XURI_5682078c",
+      "typing.List[PropertyValue_c9610c73]",
+      "typing.List[XURI_5682078c]"
     ],
     "typings": [
-      "typing.List[XURI]",
-      "typing.List[PropertyValue]"
+      "typing.List[PropertyValue_c9610c73]",
+      "typing.List[XURI_5682078c]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.rdf.XRepositorySupplier",
+        "com.sun.star.rdf.XURI"
+      ],
+      "typing": [
+        "com.sun.star.beans.PropertyValue",
+        "com.sun.star.beans.StringPair",
+        "com.sun.star.embed.XStorage",
+        "com.sun.star.io.XInputStream",
+        "com.sun.star.rdf.XMetadatable",
+        "com.sun.star.task.XInteractionHandler"
+      ]
+    },
     "name": "XDocumentMetadataAccess",
     "imports": [],
     "namespace": "com.sun.star.rdf",
@@ -106,7 +135,7 @@
         },
         {
           "name": "addMetadataFile",
-          "returns": "XURI",
+          "returns": "XURI_5682078c",
           "desc": [
             "add a metadata file to the manifest.",
             "",
@@ -124,14 +153,14 @@
             ],
             [
               "Types",
-              "typing.List[XURI]",
+              "typing.List[XURI_5682078c]",
               "in"
             ]
           ]
         },
         {
           "name": "getElementByMetadataReference",
-          "returns": "XMetadatable",
+          "returns": "XMetadatable_a3000af0",
           "desc": [
             "get the unique ODF element with the given metadata reference."
           ],
@@ -139,14 +168,14 @@
           "args": [
             [
               "MetadataReference",
-              "StringPair",
+              "StringPair_a4bc0b14",
               "in"
             ]
           ]
         },
         {
           "name": "getElementByURI",
-          "returns": "XMetadatable",
+          "returns": "XMetadatable_a3000af0",
           "desc": [
             "get the ODF element that corresponds to a URI."
           ],
@@ -156,14 +185,14 @@
           "args": [
             [
               "URI",
-              "XURI",
+              "XURI_5682078c",
               "in"
             ]
           ]
         },
         {
           "name": "getMetadataGraphsWithType",
-          "returns": "typing.List[XURI]",
+          "returns": "typing.List[XURI_5682078c]",
           "desc": [
             "get the names of all metadata files with a given type."
           ],
@@ -173,14 +202,14 @@
           "args": [
             [
               "Type",
-              "XURI",
+              "XURI_5682078c",
               "in"
             ]
           ]
         },
         {
           "name": "importMetadataFile",
-          "returns": "XURI",
+          "returns": "XURI_5682078c",
           "desc": [
             "import a metadata file into the document repository, and add it to the manifest.",
             "",
@@ -201,7 +230,7 @@
             ],
             [
               "InStream",
-              "XInputStream",
+              "XInputStream_98d40ab4",
               "in"
             ],
             [
@@ -211,12 +240,12 @@
             ],
             [
               "BaseURI",
-              "XURI",
+              "XURI_5682078c",
               "in"
             ],
             [
               "Types",
-              "typing.List[XURI]",
+              "typing.List[XURI_5682078c]",
               "in"
             ]
           ]
@@ -236,7 +265,7 @@
           "args": [
             [
               "Medium",
-              "typing.List[PropertyValue]",
+              "typing.List[PropertyValue_c9610c73]",
               "in"
             ]
           ]
@@ -262,17 +291,17 @@
           "args": [
             [
               "Storage",
-              "XStorage",
+              "XStorage_8e460a32",
               "in"
             ],
             [
               "BaseURI",
-              "XURI",
+              "XURI_5682078c",
               "in"
             ],
             [
               "InteractionHandler",
-              "XInteractionHandler",
+              "XInteractionHandler_bf80e51",
               "in"
             ]
           ]
@@ -312,7 +341,7 @@
           "args": [
             [
               "GraphName",
-              "XURI",
+              "XURI_5682078c",
               "in"
             ]
           ]
@@ -330,7 +359,7 @@
           "args": [
             [
               "Medium",
-              "typing.List[PropertyValue]",
+              "typing.List[PropertyValue_c9610c73]",
               "in"
             ]
           ]
@@ -352,7 +381,7 @@
           "args": [
             [
               "Storage",
-              "XStorage",
+              "XStorage_8e460a32",
               "in"
             ]
           ]

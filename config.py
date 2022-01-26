@@ -1,20 +1,33 @@
 import json
 from dataclasses import dataclass
 from pathlib import Path
+from typing import List
 @dataclass
 class AppConfig:
     libre_office_ver: str
     """Version of Libre Office that is being built such as 7.2"""
-    uno_base_dir: str
-    """Base Directory for Uno such as uno_obj"""
+    min_module_links_ver: str
+    """Min version that can be parsed for module_links.json files"""
     module_links_file: str
     """Json file name for module links such as module_links.json"""
+    min_json_data_ver: str
+    """Min version that can be parsed for .json files of Module Components"""
+    uno_base_dir: str
+    """Base Directory for Uno such as uno_obj"""
     cache_dir: str
     """The cache directory to use. This is generally used in creating a cache directory is system temp dir."""
     uno_obj_dir: str
     """Uno obj dir such as uno_obj. This is the directory that templates and json data file are written to."""
     builld_dir: str
-    """Output build dir such as scratch"""
+    """Output build dir such as build"""
+    data_dir: str
+    """Output data dir such as data"""
+    scratch_dir: str
+    """Output scratch dir such as scratch"""
+    resource_dir: str
+    """App Resources dir such as resources"""
+    db_mod_info: str
+    """Name of Module Info database in ``resource_dir`` such as ``mod_info.sqlite``"""
     cache_duration: float
     """
     The amount of time in seconds to keep files in cache.
@@ -57,6 +70,22 @@ class AppConfig:
     """
     module path to oenv suca as ``ooo_uno.oenv``
     """
+    remove_parent_inherited: bool
+    """
+    Determins if parsers remove classes from inhertiance if an inherited class
+    is already inherited by a parent class.
+    """
+    use_long_import_names: bool
+    """
+    Determines if Long Import Name are used.
+    
+    If ``True`` then by default import will be in a format similar to :
+        ``from ..accessibility.x_accessible_action import XAccessibleAction as accessibility_x_accessible_action_i``
+    
+    If ``False`` then by default import will be in a format similar to :
+        ``from ..accessibility.x_accessible_action import XAccessibleAction``
+    
+    """
     template_struct_ext: str
     """Extension for struct files such as .tmpl"""
     template_const_ext: str
@@ -73,6 +102,7 @@ class AppConfig:
     """Extension for typedef files such as .tppi"""
     template_service_ext: str
     """Extension for service files such as .tppi"""
+    component_types: List[str]
 
 def read_config(config_file: str) -> AppConfig:
     """

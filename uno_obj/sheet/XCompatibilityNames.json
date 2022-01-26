@@ -1,36 +1,52 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XCompatibilityNames",
   "type": "interface",
   "namespace": "com.sun.star.sheet",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "XInterface_8f010a43"
       ]
     ],
     "from_imports_typing": [
       [
         ".localized_name",
-        "LocalizedName"
+        "LocalizedName",
+        "LocalizedName_c89d0c39"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
     "quote": [
-      "typing.List[LocalizedName]"
+      "typing.List[LocalizedName_c89d0c39]"
     ],
     "typings": [
-      "typing.List[LocalizedName]"
+      "typing.List[LocalizedName_c89d0c39]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.sheet.LocalizedName"
+      ]
+    },
     "name": "XCompatibilityNames",
     "imports": [],
     "namespace": "com.sun.star.sheet",
@@ -45,7 +61,7 @@
       "methods": [
         {
           "name": "getCompatibilityNames",
-          "returns": "typing.List[LocalizedName]",
+          "returns": "typing.List[LocalizedName_c89d0c39]",
           "desc": [
             "returns the compatibility names of the specified function.",
             "",

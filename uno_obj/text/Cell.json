@@ -1,39 +1,61 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "Cell",
   "type": "service",
   "namespace": "com.sun.star.text",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
-        "..table.x_cell",
-        "XCell"
+        "..table.cell_properties",
+        "CellProperties",
+        "CellProperties_d4360cbd"
       ],
       [
-        "..table.cell_properties",
-        "CellProperties"
+        "..table.x_cell",
+        "XCell",
+        "XCell_70d408e8"
       ],
       [
         ".cell_properties",
-        "CellProperties"
+        "CellProperties",
+        "CellProperties_c9a70c7a"
       ],
       [
         ".x_text",
-        "XText"
+        "XText",
+        "XText_690408ca"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.table.CellProperties": "CellProperties_d4360cbd",
+      "com.sun.star.table.XCell": "XCell_70d408e8",
+      "com.sun.star.text.CellProperties": "CellProperties_c9a70c7a",
+      "com.sun.star.text.XText": "XText_690408ca"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
+    "full_imports": {
+      "general": [
+        "com.sun.star.table.CellProperties",
+        "com.sun.star.table.XCell",
+        "com.sun.star.text.CellProperties",
+        "com.sun.star.text.XText"
+      ],
+      "typing": []
+    },
     "name": "Cell",
     "imports": [],
     "namespace": "com.sun.star.text",

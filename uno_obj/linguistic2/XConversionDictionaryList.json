@@ -1,52 +1,74 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XConversionDictionaryList",
   "type": "interface",
   "namespace": "com.sun.star.linguistic2",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "XInterface_8f010a43"
       ]
     ],
     "from_imports_typing": [
       [
-        ".x_conversion_dictionary",
-        "XConversionDictionary"
+        "..container.x_name_container",
+        "XNameContainer",
+        "XNameContainer_cb90e47"
       ],
       [
         "..lang.locale",
-        "Locale"
+        "Locale",
+        "Locale_70d308fa"
       ],
       [
         ".conversion_direction",
-        "ConversionDirection"
+        "ConversionDirection",
+        "ConversionDirection_7dfe113c"
       ],
       [
-        "..container.x_name_container",
-        "XNameContainer"
+        ".x_conversion_dictionary",
+        "XConversionDictionary",
+        "XConversionDictionary_a04e1209"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
     "quote": [
-      "typing.List[str]",
-      "XNameContainer",
-      "Locale",
-      "XConversionDictionary",
-      "ConversionDirection"
+      "ConversionDirection_7dfe113c",
+      "Locale_70d308fa",
+      "XConversionDictionary_a04e1209",
+      "XNameContainer_cb90e47",
+      "typing.List[str]"
     ],
     "typings": [
       "typing.List[str]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.container.XNameContainer",
+        "com.sun.star.lang.Locale",
+        "com.sun.star.linguistic2.ConversionDirection",
+        "com.sun.star.linguistic2.XConversionDictionary"
+      ]
+    },
     "name": "XConversionDictionaryList",
     "imports": [],
     "namespace": "com.sun.star.linguistic2",
@@ -67,7 +89,7 @@
       "methods": [
         {
           "name": "addNewDictionary",
-          "returns": "XConversionDictionary",
+          "returns": "XConversionDictionary_a04e1209",
           "desc": [
             "creates a new dictionary and adds it to the dictionary list.",
             "",
@@ -85,7 +107,7 @@
             ],
             [
               "aLocale",
-              "Locale",
+              "Locale_70d308fa",
               "in"
             ],
             [
@@ -97,7 +119,7 @@
         },
         {
           "name": "getDictionaryContainer",
-          "returns": "XNameContainer",
+          "returns": "XNameContainer_cb90e47",
           "desc": [
             "The interface can be used to add, remove or retrieve dictionaries from the list by specifying the name of the dictionary, and (in case of inserting) the interface to the dictionary as second parameter.",
             "",
@@ -140,7 +162,7 @@
             ],
             [
               "aLocale",
-              "Locale",
+              "Locale_70d308fa",
               "in"
             ],
             [
@@ -150,7 +172,7 @@
             ],
             [
               "eDirection",
-              "ConversionDirection",
+              "ConversionDirection_7dfe113c",
               "in"
             ],
             [
@@ -174,7 +196,7 @@
           "args": [
             [
               "aLocale",
-              "Locale",
+              "Locale_70d308fa",
               "in"
             ],
             [
@@ -184,7 +206,7 @@
             ],
             [
               "eDirection",
-              "ConversionDirection",
+              "ConversionDirection_7dfe113c",
               "in"
             ]
           ]

@@ -1,49 +1,71 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XConnection",
   "type": "interface",
   "namespace": "com.sun.star.sdbc",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         ".x_closeable",
-        "XCloseable"
+        "XCloseable",
+        "XCloseable_98290a86"
       ]
     ],
     "from_imports_typing": [
       [
-        ".x_statement",
-        "XStatement"
-      ],
-      [
         "..container.x_name_access",
-        "XNameAccess"
+        "XNameAccess",
+        "XNameAccess_e2ab0cf6"
       ],
       [
         ".x_database_meta_data",
-        "XDatabaseMetaData"
+        "XDatabaseMetaData",
+        "XDatabaseMetaData_eafd0d12"
       ],
       [
         ".x_prepared_statement",
-        "XPreparedStatement"
+        "XPreparedStatement",
+        "XPreparedStatement_fbc80de4"
+      ],
+      [
+        ".x_statement",
+        "XStatement",
+        "XStatement_98e90ab1"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.sdbc.XCloseable": "XCloseable_98290a86"
+    },
     "quote": [
-      "XDatabaseMetaData",
-      "XNameAccess",
-      "XPreparedStatement",
-      "XStatement"
+      "XDatabaseMetaData_eafd0d12",
+      "XNameAccess_e2ab0cf6",
+      "XPreparedStatement_fbc80de4",
+      "XStatement_98e90ab1"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.sdbc.XCloseable"
+      ],
+      "typing": [
+        "com.sun.star.container.XNameAccess",
+        "com.sun.star.sdbc.XDatabaseMetaData",
+        "com.sun.star.sdbc.XPreparedStatement",
+        "com.sun.star.sdbc.XStatement"
+      ]
+    },
     "name": "XConnection",
     "imports": [],
     "namespace": "com.sun.star.sdbc",
@@ -75,7 +97,7 @@
         },
         {
           "name": "createStatement",
-          "returns": "XStatement",
+          "returns": "XStatement_98e90ab1",
           "desc": [
             "creates a new com.sun.star.sdbc.Statement object for sending SQL statements to the database.",
             "",
@@ -114,7 +136,7 @@
         },
         {
           "name": "getMetaData",
-          "returns": "XDatabaseMetaData",
+          "returns": "XDatabaseMetaData_eafd0d12",
           "desc": [
             "gets the metadata regarding this connection's database.",
             "",
@@ -138,7 +160,7 @@
         },
         {
           "name": "getTypeMap",
-          "returns": "XNameAccess",
+          "returns": "XNameAccess_e2ab0cf6",
           "desc": [
             "gets the type map object associated with this connection.",
             "",
@@ -196,7 +218,7 @@
         },
         {
           "name": "prepareCall",
-          "returns": "XPreparedStatement",
+          "returns": "XPreparedStatement_fbc80de4",
           "desc": [
             "creates a com.sun.star.sdbc.CallableStatement object for calling database stored procedures.",
             "",
@@ -218,7 +240,7 @@
         },
         {
           "name": "prepareStatement",
-          "returns": "XPreparedStatement",
+          "returns": "XPreparedStatement_fbc80de4",
           "desc": [
             "creates a com.sun.star.sdbc.PreparedStatement object for sending parameterized SQL statements to the database.",
             "",
@@ -350,7 +372,7 @@
           "args": [
             [
               "typeMap",
-              "XNameAccess",
+              "XNameAccess_e2ab0cf6",
               "in"
             ]
           ]

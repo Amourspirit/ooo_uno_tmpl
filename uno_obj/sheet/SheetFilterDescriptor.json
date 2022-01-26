@@ -1,47 +1,71 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "SheetFilterDescriptor",
   "type": "service",
   "namespace": "com.sun.star.sheet",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
-        ".x_sheet_filter_descriptor2",
-        "XSheetFilterDescriptor2"
-      ],
-      [
         "..beans.x_property_set",
-        "XPropertySet"
+        "XPropertySet",
+        "XPropertySet_bc180bfa"
       ],
       [
         ".x_sheet_filter_descriptor",
-        "XSheetFilterDescriptor"
+        "XSheetFilterDescriptor",
+        "XSheetFilterDescriptor_47cc0ff7"
+      ],
+      [
+        ".x_sheet_filter_descriptor2",
+        "XSheetFilterDescriptor2",
+        "XSheetFilterDescriptor2_57f51029"
       ]
     ],
     "from_imports_typing": [
       [
-        "..table.table_orientation",
-        "TableOrientation"
+        "..table.cell_address",
+        "CellAddress",
+        "CellAddress_ae5f0b56"
       ],
       [
-        "..table.cell_address",
-        "CellAddress"
+        "..table.table_orientation",
+        "TableOrientation",
+        "TableOrientation_ee780d84"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.beans.XPropertySet": "XPropertySet_bc180bfa",
+      "com.sun.star.sheet.XSheetFilterDescriptor": "XSheetFilterDescriptor_47cc0ff7",
+      "com.sun.star.sheet.XSheetFilterDescriptor2": "XSheetFilterDescriptor2_57f51029"
+    },
     "quote": [
-      "CellAddress",
-      "TableOrientation"
+      "CellAddress_ae5f0b56",
+      "TableOrientation_ee780d84"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.beans.XPropertySet",
+        "com.sun.star.sheet.XSheetFilterDescriptor",
+        "com.sun.star.sheet.XSheetFilterDescriptor2"
+      ],
+      "typing": [
+        "com.sun.star.table.CellAddress",
+        "com.sun.star.table.TableOrientation"
+      ]
+    },
     "name": "SheetFilterDescriptor",
     "imports": [],
     "namespace": "com.sun.star.sheet",
@@ -102,7 +126,7 @@
         },
         {
           "name": "Orientation",
-          "returns": "TableOrientation",
+          "returns": "TableOrientation_ee780d84",
           "desc": [
             "specifies if columns or rows are filtered."
           ],
@@ -111,7 +135,7 @@
         },
         {
           "name": "OutputPosition",
-          "returns": "CellAddress",
+          "returns": "CellAddress_ae5f0b56",
           "desc": [
             "specifies the position where filtered data are to be copied.",
             "",

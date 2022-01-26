@@ -1,12 +1,14 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "DocumentEvent",
   "namespace": "com.sun.star.document",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "sort": true,
@@ -20,17 +22,22 @@
     "from_imports": [
       [
         "..lang.event_object",
-        "EventObject"
+        "EventObject",
+        "EventObject_a3d70b03"
       ]
     ],
     "from_imports_typing": [
       [
         "..frame.x_controller2",
-        "XController2"
+        "XController2",
+        "XController2_bbcf0bc1"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.lang.EventObject": "EventObject_a3d70b03"
+    },
     "quote": [
-      "XController2"
+      "XController2_bbcf0bc1"
     ],
     "typings": [],
     "requires_typing": true,
@@ -71,7 +78,7 @@
       },
       {
         "name": "ViewController",
-        "type": "XController2",
+        "type": "XController2_bbcf0bc1",
         "lines": [
           "denotes the view respectively controller which the event applies to.",
           "",

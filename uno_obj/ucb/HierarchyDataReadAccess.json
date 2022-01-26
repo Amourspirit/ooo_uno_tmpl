@@ -1,39 +1,61 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "HierarchyDataReadAccess",
   "type": "service",
   "namespace": "com.sun.star.ucb",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
-        "..lang.x_component",
-        "XComponent"
+        "..container.x_hierarchical_name_access",
+        "XHierarchicalNameAccess",
+        "XHierarchicalNameAccess_9e2611b5"
       ],
       [
         "..container.x_name_access",
-        "XNameAccess"
+        "XNameAccess",
+        "XNameAccess_e2ab0cf6"
+      ],
+      [
+        "..lang.x_component",
+        "XComponent",
+        "XComponent_98dc0ab5"
       ],
       [
         "..util.x_changes_notifier",
-        "XChangesNotifier"
-      ],
-      [
-        "..container.x_hierarchical_name_access",
-        "XHierarchicalNameAccess"
+        "XChangesNotifier",
+        "XChangesNotifier_e1b50d17"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.container.XHierarchicalNameAccess": "XHierarchicalNameAccess_9e2611b5",
+      "com.sun.star.container.XNameAccess": "XNameAccess_e2ab0cf6",
+      "com.sun.star.lang.XComponent": "XComponent_98dc0ab5",
+      "com.sun.star.util.XChangesNotifier": "XChangesNotifier_e1b50d17"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
+    "full_imports": {
+      "general": [
+        "com.sun.star.container.XHierarchicalNameAccess",
+        "com.sun.star.container.XNameAccess",
+        "com.sun.star.lang.XComponent",
+        "com.sun.star.util.XChangesNotifier"
+      ],
+      "typing": []
+    },
     "name": "HierarchyDataReadAccess",
     "imports": [],
     "namespace": "com.sun.star.ucb",

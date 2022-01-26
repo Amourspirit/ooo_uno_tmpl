@@ -1,38 +1,57 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "ConfigurableUIElement",
   "type": "service",
   "namespace": "com.sun.star.ui",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         ".ui_element",
-        "UIElement"
+        "UIElement",
+        "UIElement_78af094e"
       ],
       [
         ".xui_element_settings",
-        "XUIElementSettings"
+        "XUIElementSettings",
+        "XUIElementSettings_ddbb0cf7"
       ]
     ],
     "from_imports_typing": [
       [
         ".xui_configuration_manager",
-        "XUIConfigurationManager"
+        "XUIConfigurationManager",
+        "XUIConfigurationManager_24e20eef"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.ui.UIElement": "UIElement_78af094e",
+      "com.sun.star.ui.XUIElementSettings": "XUIElementSettings_ddbb0cf7"
+    },
     "quote": [
-      "XUIConfigurationManager"
+      "XUIConfigurationManager_24e20eef"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.ui.UIElement",
+        "com.sun.star.ui.XUIElementSettings"
+      ],
+      "typing": [
+        "com.sun.star.ui.XUIConfigurationManager"
+      ]
+    },
     "name": "ConfigurableUIElement",
     "imports": [],
     "namespace": "com.sun.star.ui",
@@ -54,7 +73,7 @@
       "properties": [
         {
           "name": "ConfigurationSource",
-          "returns": "XUIConfigurationManager",
+          "returns": "XUIConfigurationManager_24e20eef",
           "desc": [
             "specifies the configuration source of this user interface element.",
             "",

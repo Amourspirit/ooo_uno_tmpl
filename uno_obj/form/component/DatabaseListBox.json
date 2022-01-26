@@ -1,41 +1,60 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "DatabaseListBox",
   "type": "service",
   "namespace": "com.sun.star.form.component",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..data_aware_control_model",
-        "DataAwareControlModel"
+        "DataAwareControlModel",
+        "DataAwareControlModel_27110ef8"
       ],
       [
         ".list_box",
-        "ListBox"
+        "ListBox",
+        "ListBox_f1530d82"
       ]
     ],
     "from_imports_typing": [
       [
         "..list_source_type",
-        "ListSourceType"
+        "ListSourceType",
+        "ListSourceType_c9850c6b"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.form.DataAwareControlModel": "DataAwareControlModel_27110ef8",
+      "com.sun.star.form.component.ListBox": "ListBox_f1530d82"
+    },
     "quote": [
-      "ListSourceType",
+      "ListSourceType_c9850c6b",
       "typing.List[object]"
     ],
     "typings": [
       "typing.List[object]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.form.DataAwareControlModel",
+        "com.sun.star.form.component.ListBox"
+      ],
+      "typing": [
+        "com.sun.star.form.ListSourceType"
+      ]
+    },
     "name": "DatabaseListBox",
     "imports": [],
     "namespace": "com.sun.star.form.component",
@@ -86,7 +105,7 @@
         },
         {
           "name": "ListSourceType",
-          "returns": "ListSourceType",
+          "returns": "ListSourceType_c9850c6b",
           "desc": [
             "describes the kind of list source used.",
             "",

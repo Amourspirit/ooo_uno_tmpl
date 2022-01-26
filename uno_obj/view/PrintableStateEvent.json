@@ -1,12 +1,14 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "PrintableStateEvent",
   "namespace": "com.sun.star.view",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "sort": true,
@@ -20,17 +22,22 @@
     "from_imports": [
       [
         "..lang.event_object",
-        "EventObject"
+        "EventObject",
+        "EventObject_a3d70b03"
       ]
     ],
     "from_imports_typing": [
       [
         ".printable_state",
-        "PrintableState"
+        "PrintableState",
+        "PrintableState_c9fb0c65"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.lang.EventObject": "EventObject_a3d70b03"
+    },
     "quote": [
-      "PrintableState"
+      "PrintableState_c9fb0c65"
     ],
     "typings": [],
     "requires_typing": true,
@@ -49,7 +56,7 @@
     "items": [
       {
         "name": "State",
-        "type": "PrintableState",
+        "type": "PrintableState_c9fb0c65",
         "lines": [
           "contains the current state."
         ]

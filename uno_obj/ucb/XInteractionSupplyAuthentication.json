@@ -1,37 +1,53 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XInteractionSupplyAuthentication",
   "type": "interface",
   "namespace": "com.sun.star.ucb",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..task.x_interaction_continuation",
-        "XInteractionContinuation"
+        "XInteractionContinuation",
+        "XInteractionContinuation_5af0108e"
       ]
     ],
     "from_imports_typing": [
       [
         ".remember_authentication",
-        "RememberAuthentication"
+        "RememberAuthentication",
+        "RememberAuthentication_28a80f31"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.task.XInteractionContinuation": "XInteractionContinuation_5af0108e"
+    },
     "quote": [
-      "RememberAuthentication",
-      "typing.List[RememberAuthentication]"
+      "RememberAuthentication_28a80f31",
+      "typing.List[RememberAuthentication_28a80f31]"
     ],
     "typings": [
-      "typing.List[RememberAuthentication]"
+      "typing.List[RememberAuthentication_28a80f31]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.task.XInteractionContinuation"
+      ],
+      "typing": [
+        "com.sun.star.ucb.RememberAuthentication"
+      ]
+    },
     "name": "XInteractionSupplyAuthentication",
     "imports": [],
     "namespace": "com.sun.star.ucb",
@@ -84,7 +100,7 @@
         },
         {
           "name": "getRememberAccountModes",
-          "returns": "typing.List[RememberAuthentication]",
+          "returns": "typing.List[RememberAuthentication_28a80f31]",
           "desc": [
             "Specifies the available modes of how long to remember the account."
           ],
@@ -92,14 +108,14 @@
           "args": [
             [
               "Default",
-              "RememberAuthentication",
+              "RememberAuthentication_28a80f31",
               "out"
             ]
           ]
         },
         {
           "name": "getRememberPasswordModes",
-          "returns": "typing.List[RememberAuthentication]",
+          "returns": "typing.List[RememberAuthentication_28a80f31]",
           "desc": [
             "Specifies the available modes of how long to remember the password."
           ],
@@ -107,7 +123,7 @@
           "args": [
             [
               "Default",
-              "RememberAuthentication",
+              "RememberAuthentication_28a80f31",
               "out"
             ]
           ]
@@ -175,7 +191,7 @@
           "args": [
             [
               "Remember",
-              "RememberAuthentication",
+              "RememberAuthentication_28a80f31",
               "in"
             ]
           ]
@@ -192,7 +208,7 @@
           "args": [
             [
               "Remember",
-              "RememberAuthentication",
+              "RememberAuthentication_28a80f31",
               "in"
             ]
           ]

@@ -1,52 +1,74 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XTextTable",
   "type": "interface",
   "namespace": "com.sun.star.text",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         ".x_text_content",
-        "XTextContent"
+        "XTextContent",
+        "XTextContent_b16e0ba5"
       ]
     ],
     "from_imports_typing": [
       [
         "..table.x_cell",
-        "XCell"
-      ],
-      [
-        "..table.x_table_rows",
-        "XTableRows"
-      ],
-      [
-        ".x_text_table_cursor",
-        "XTextTableCursor"
+        "XCell",
+        "XCell_70d408e8"
       ],
       [
         "..table.x_table_columns",
-        "XTableColumns"
+        "XTableColumns",
+        "XTableColumns_c66d0c31"
+      ],
+      [
+        "..table.x_table_rows",
+        "XTableRows",
+        "XTableRows_a37e0afb"
+      ],
+      [
+        ".x_text_table_cursor",
+        "XTextTableCursor",
+        "XTextTableCursor_e2f90d30"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.text.XTextContent": "XTextContent_b16e0ba5"
+    },
     "quote": [
-      "typing.List[str]",
-      "XTextTableCursor",
-      "XCell",
-      "XTableColumns",
-      "XTableRows"
+      "XCell_70d408e8",
+      "XTableColumns_c66d0c31",
+      "XTableRows_a37e0afb",
+      "XTextTableCursor_e2f90d30",
+      "typing.List[str]"
     ],
     "typings": [
       "typing.List[str]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.text.XTextContent"
+      ],
+      "typing": [
+        "com.sun.star.table.XCell",
+        "com.sun.star.table.XTableColumns",
+        "com.sun.star.table.XTableRows",
+        "com.sun.star.text.XTextTableCursor"
+      ]
+    },
     "name": "XTextTable",
     "imports": [],
     "namespace": "com.sun.star.text",
@@ -61,7 +83,7 @@
       "methods": [
         {
           "name": "createCursorByCellName",
-          "returns": "XTextTableCursor",
+          "returns": "XTextTableCursor_e2f90d30",
           "desc": [
             "creates a text table cursor and returns the XTextTableCursor interface.",
             "",
@@ -78,7 +100,7 @@
         },
         {
           "name": "getCellByName",
-          "returns": "XCell",
+          "returns": "XCell_70d408e8",
           "desc": [
             "Example: The cell in the 4th column and third row has the name \\\"D3\\\".",
             "",
@@ -104,14 +126,14 @@
         },
         {
           "name": "getColumns",
-          "returns": "XTableColumns",
+          "returns": "XTableColumns_c66d0c31",
           "desc": [],
           "raises": [],
           "args": []
         },
         {
           "name": "getRows",
-          "returns": "XTableRows",
+          "returns": "XTableRows_a37e0afb",
           "desc": [],
           "raises": [],
           "args": []

@@ -1,61 +1,87 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XFormOperations",
   "type": "interface",
   "namespace": "com.sun.star.form.runtime",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "...lang.x_component",
-        "XComponent"
+        "XComponent",
+        "XComponent_98dc0ab5"
       ]
     ],
     "from_imports_typing": [
       [
-        ".feature_state",
-        "FeatureState"
+        "...beans.named_value",
+        "NamedValue",
+        "NamedValue_a37a0af3"
       ],
       [
-        "...beans.named_value",
-        "NamedValue"
+        ".feature_state",
+        "FeatureState",
+        "FeatureState_1c3f0ebb"
       ],
       [
         ".x_feature_invalidation",
-        "XFeatureInvalidation"
+        "XFeatureInvalidation",
+        "XFeatureInvalidation_9f4211f4"
       ],
       [
         ".x_form_controller",
-        "XFormController"
-      ],
-      [
-        "...sdbc.x_row_set",
-        "XRowSet"
+        "XFormController",
+        "XFormController_4a570ffe"
       ],
       [
         "...sdbc.x_result_set_update",
-        "XResultSetUpdate"
+        "XResultSetUpdate",
+        "XResultSetUpdate_e0fb0d0a"
+      ],
+      [
+        "...sdbc.x_row_set",
+        "XRowSet",
+        "XRowSet_7a090960"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.lang.XComponent": "XComponent_98dc0ab5"
+    },
     "quote": [
-      "FeatureState",
-      "XRowSet",
-      "XResultSetUpdate",
-      "typing.List[NamedValue]",
-      "XFeatureInvalidation",
-      "XFormController"
+      "FeatureState_1c3f0ebb",
+      "XFeatureInvalidation_9f4211f4",
+      "XFormController_4a570ffe",
+      "XResultSetUpdate_e0fb0d0a",
+      "XRowSet_7a090960",
+      "typing.List[NamedValue_a37a0af3]"
     ],
     "typings": [
-      "typing.List[NamedValue]"
+      "typing.List[NamedValue_a37a0af3]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.lang.XComponent"
+      ],
+      "typing": [
+        "com.sun.star.beans.NamedValue",
+        "com.sun.star.form.runtime.FeatureState",
+        "com.sun.star.form.runtime.XFeatureInvalidation",
+        "com.sun.star.form.runtime.XFormController",
+        "com.sun.star.sdbc.XResultSetUpdate",
+        "com.sun.star.sdbc.XRowSet"
+      ]
+    },
     "name": "XFormOperations",
     "imports": [],
     "namespace": "com.sun.star.form.runtime",
@@ -150,14 +176,14 @@
             ],
             [
               "Arguments",
-              "typing.List[NamedValue]",
+              "typing.List[NamedValue_a37a0af3]",
               "in"
             ]
           ]
         },
         {
           "name": "getState",
-          "returns": "FeatureState",
+          "returns": "FeatureState_1c3f0ebb",
           "desc": [
             "retrieves the current state of the given feature",
             "",
@@ -219,7 +245,7 @@
       "properties": [
         {
           "name": "Controller",
-          "returns": "XFormController",
+          "returns": "XFormController_4a570ffe",
           "desc": [
             "provides access to the form controller which the instance is operating on.",
             "",
@@ -230,7 +256,7 @@
         },
         {
           "name": "Cursor",
-          "returns": "XRowSet",
+          "returns": "XRowSet_7a090960",
           "desc": [
             "provides access to the cursor of the form the instance is operating on."
           ],
@@ -239,7 +265,7 @@
         },
         {
           "name": "FeatureInvalidation",
-          "returns": "XFeatureInvalidation",
+          "returns": "XFeatureInvalidation_9f4211f4",
           "desc": [
             "denotes the instance which should be notified about features whose state might have changed.",
             "",
@@ -254,7 +280,7 @@
         },
         {
           "name": "UpdateCursor",
-          "returns": "XResultSetUpdate",
+          "returns": "XResultSetUpdate_e0fb0d0a",
           "desc": [
             "provides access to the update cursor of the form the instance is operating on."
           ],

@@ -1,34 +1,50 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "DocumentCloser",
   "type": "service",
   "namespace": "com.sun.star.embed",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..lang.x_component",
-        "XComponent"
+        "XComponent",
+        "XComponent_98dc0ab5"
       ]
     ],
     "from_imports_typing": [
       [
         "..frame.x_frame",
-        "XFrame"
+        "XFrame",
+        "XFrame_7a570956"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.lang.XComponent": "XComponent_98dc0ab5"
+    },
     "quote": [
-      "XFrame"
+      "XFrame_7a570956"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.lang.XComponent"
+      ],
+      "typing": [
+        "com.sun.star.frame.XFrame"
+      ]
+    },
     "name": "DocumentCloser",
     "imports": [],
     "namespace": "com.sun.star.embed",
@@ -59,7 +75,7 @@
           "args": [
             [
               "xFrame",
-              "XFrame",
+              "XFrame_7a570956",
               "in"
             ]
           ]

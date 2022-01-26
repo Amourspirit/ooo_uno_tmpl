@@ -1,12 +1,14 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "RowsChangeEvent",
   "namespace": "com.sun.star.sdb",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "sort": true,
@@ -20,10 +22,14 @@
     "from_imports": [
       [
         ".row_change_event",
-        "RowChangeEvent"
+        "RowChangeEvent",
+        "RowChangeEvent_ba0c0bc1"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.sdb.RowChangeEvent": "RowChangeEvent_ba0c0bc1"
+    },
     "quote": [
       "typing.List[object]"
     ],

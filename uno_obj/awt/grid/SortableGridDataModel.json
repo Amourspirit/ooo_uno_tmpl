@@ -1,39 +1,57 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "SortableGridDataModel",
   "type": "service",
   "namespace": "com.sun.star.awt.grid",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         ".x_sortable_mutable_grid_data_model",
-        "XSortableMutableGridDataModel"
+        "XSortableMutableGridDataModel",
+        "XSortableMutableGridDataModel_f6af1377"
       ]
     ],
     "from_imports_typing": [
       [
-        "...i18n.x_collator",
-        "XCollator"
+        ".x_mutable_grid_data_model",
+        "XMutableGridDataModel",
+        "XMutableGridDataModel_6387103b"
       ],
       [
-        ".x_mutable_grid_data_model",
-        "XMutableGridDataModel"
+        "...i18n.x_collator",
+        "XCollator",
+        "XCollator_892a09e0"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.awt.grid.XSortableMutableGridDataModel": "XSortableMutableGridDataModel_f6af1377"
+    },
     "quote": [
-      "XCollator",
-      "XMutableGridDataModel"
+      "XCollator_892a09e0",
+      "XMutableGridDataModel_6387103b"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.awt.grid.XSortableMutableGridDataModel"
+      ],
+      "typing": [
+        "com.sun.star.awt.grid.XMutableGridDataModel",
+        "com.sun.star.i18n.XCollator"
+      ]
+    },
     "name": "SortableGridDataModel",
     "imports": [],
     "namespace": "com.sun.star.awt.grid",
@@ -72,7 +90,7 @@
           "args": [
             [
               "DelegatorModel",
-              "XMutableGridDataModel",
+              "XMutableGridDataModel_6387103b",
               "in"
             ]
           ]
@@ -89,12 +107,12 @@
           "args": [
             [
               "DelegatorModel",
-              "XMutableGridDataModel",
+              "XMutableGridDataModel_6387103b",
               "in"
             ],
             [
               "Collator",
-              "XCollator",
+              "XCollator_892a09e0",
               "in"
             ]
           ]

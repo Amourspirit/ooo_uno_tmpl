@@ -1,46 +1,66 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XThesaurus",
   "type": "interface",
   "namespace": "com.sun.star.linguistic2",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         ".x_supported_locales",
-        "XSupportedLocales"
+        "XSupportedLocales",
+        "XSupportedLocales_5bda1056"
       ]
     ],
     "from_imports_typing": [
       [
         "..beans.property_values",
-        "PropertyValues"
-      ],
-      [
-        ".x_meaning",
-        "XMeaning"
+        "PropertyValues",
+        "PropertyValues_d6470ce6"
       ],
       [
         "..lang.locale",
-        "Locale"
+        "Locale",
+        "Locale_70d308fa"
+      ],
+      [
+        ".x_meaning",
+        "XMeaning",
+        "XMeaning_d65e0c8c"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.linguistic2.XSupportedLocales": "XSupportedLocales_5bda1056"
+    },
     "quote": [
-      "PropertyValues",
-      "typing.List[XMeaning]",
-      "Locale"
+      "Locale_70d308fa",
+      "PropertyValues_d6470ce6",
+      "typing.List[XMeaning_d65e0c8c]"
     ],
     "typings": [
-      "typing.List[XMeaning]"
+      "typing.List[XMeaning_d65e0c8c]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.linguistic2.XSupportedLocales"
+      ],
+      "typing": [
+        "com.sun.star.beans.PropertyValues",
+        "com.sun.star.lang.Locale",
+        "com.sun.star.linguistic2.XMeaning"
+      ]
+    },
     "name": "XThesaurus",
     "imports": [],
     "namespace": "com.sun.star.linguistic2",
@@ -57,7 +77,7 @@
       "methods": [
         {
           "name": "queryMeanings",
-          "returns": "typing.List[XMeaning]",
+          "returns": "typing.List[XMeaning_d65e0c8c]",
           "desc": [
             "If the language is not supported, an com.sun.star.lang.IllegalArgumentException exception is raised."
           ],
@@ -72,12 +92,12 @@
             ],
             [
               "aLocale",
-              "Locale",
+              "Locale_70d308fa",
               "in"
             ],
             [
               "aProperties",
-              "PropertyValues",
+              "PropertyValues_d6470ce6",
               "in"
             ]
           ]

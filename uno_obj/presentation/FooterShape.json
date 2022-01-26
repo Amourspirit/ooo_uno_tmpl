@@ -1,31 +1,47 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "FooterShape",
   "type": "service",
   "namespace": "com.sun.star.presentation",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
-        ".shape",
-        "Shape"
+        "..drawing.text_shape",
+        "TextShape",
+        "TextShape_b1b80b8a"
       ],
       [
-        "..drawing.text_shape",
-        "TextShape"
+        ".shape",
+        "Shape",
+        "Shape_c0c80c15"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.drawing.TextShape": "TextShape_b1b80b8a",
+      "com.sun.star.presentation.Shape": "Shape_c0c80c15"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
+    "full_imports": {
+      "general": [
+        "com.sun.star.drawing.TextShape",
+        "com.sun.star.presentation.Shape"
+      ],
+      "typing": []
+    },
     "name": "FooterShape",
     "imports": [],
     "namespace": "com.sun.star.presentation",

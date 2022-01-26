@@ -1,12 +1,14 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "LockEntry",
   "namespace": "com.sun.star.ucb",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "sort": true,
@@ -20,17 +22,20 @@
     "from_imports": [],
     "from_imports_typing": [
       [
-        ".lock_type",
-        "LockType"
+        ".lock_scope",
+        "LockScope",
+        "LockScope_839109c5"
       ],
       [
-        ".lock_scope",
-        "LockScope"
+        ".lock_type",
+        "LockType",
+        "LockType_7a09096d"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "LockType",
-      "LockScope"
+      "LockScope_839109c5",
+      "LockType_7a09096d"
     ],
     "typings": [],
     "requires_typing": true,
@@ -43,14 +48,14 @@
     "items": [
       {
         "name": "Scope",
-        "type": "LockScope",
+        "type": "LockScope_839109c5",
         "lines": [
           "defines the lock's scope."
         ]
       },
       {
         "name": "Type",
-        "type": "LockType",
+        "type": "LockType_7a09096d",
         "lines": [
           "defines the type of the lock."
         ]

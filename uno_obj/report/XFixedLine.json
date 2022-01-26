@@ -1,44 +1,64 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XFixedLine",
   "type": "interface",
   "namespace": "com.sun.star.report",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         ".x_report_control_model",
-        "XReportControlModel"
+        "XReportControlModel",
+        "XReportControlModel_2d800f4a"
       ]
     ],
     "from_imports_typing": [
       [
         "..drawing.line_dash",
-        "LineDash"
-      ],
-      [
-        "..util.color",
-        "Color"
+        "LineDash",
+        "LineDash_a54e0afc"
       ],
       [
         "..drawing.line_style",
-        "LineStyle"
+        "LineStyle",
+        "LineStyle_b1600b8d"
+      ],
+      [
+        "..util.color",
+        "Color",
+        "Color_68e908c5"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.report.XReportControlModel": "XReportControlModel_2d800f4a"
+    },
     "quote": [
-      "LineDash",
-      "LineStyle",
-      "Color"
+      "Color_68e908c5",
+      "LineDash_a54e0afc",
+      "LineStyle_b1600b8d"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.report.XReportControlModel"
+      ],
+      "typing": [
+        "com.sun.star.drawing.LineDash",
+        "com.sun.star.drawing.LineStyle",
+        "com.sun.star.util.Color"
+      ]
+    },
     "name": "XFixedLine",
     "imports": [],
     "namespace": "com.sun.star.report",
@@ -51,7 +71,7 @@
       "properties": [
         {
           "name": "LineColor",
-          "returns": "Color",
+          "returns": "Color_68e908c5",
           "desc": [
             "This property contains the line color."
           ],
@@ -60,7 +80,7 @@
         },
         {
           "name": "LineDash",
-          "returns": "LineDash",
+          "returns": "LineDash_a54e0afc",
           "desc": [
             "This property contains the dash of the line."
           ],
@@ -69,7 +89,7 @@
         },
         {
           "name": "LineStyle",
-          "returns": "LineStyle",
+          "returns": "LineStyle_b1600b8d",
           "desc": [
             "This property contains the type of the line."
           ],

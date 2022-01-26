@@ -1,44 +1,64 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XGraphicProvider",
   "type": "interface",
   "namespace": "com.sun.star.graphic",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "XInterface_8f010a43"
       ]
     ],
     "from_imports_typing": [
       [
-        ".x_graphic",
-        "XGraphic"
+        "..beans.property_values",
+        "PropertyValues",
+        "PropertyValues_d6470ce6"
       ],
       [
         "..beans.x_property_set",
-        "XPropertySet"
+        "XPropertySet",
+        "XPropertySet_bc180bfa"
       ],
       [
-        "..beans.property_values",
-        "PropertyValues"
+        ".x_graphic",
+        "XGraphic",
+        "XGraphic_a4da0afc"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
     "quote": [
-      "XGraphic",
-      "PropertyValues",
-      "XPropertySet"
+      "PropertyValues_d6470ce6",
+      "XGraphic_a4da0afc",
+      "XPropertySet_bc180bfa"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.beans.PropertyValues",
+        "com.sun.star.beans.XPropertySet",
+        "com.sun.star.graphic.XGraphic"
+      ]
+    },
     "name": "XGraphicProvider",
     "imports": [],
     "namespace": "com.sun.star.graphic",
@@ -55,7 +75,7 @@
       "methods": [
         {
           "name": "queryGraphic",
-          "returns": "XGraphic",
+          "returns": "XGraphic_a4da0afc",
           "desc": [
             "Calling this method returns a XGraphic interface that holds the graphic content after loading the graphic."
           ],
@@ -67,14 +87,14 @@
           "args": [
             [
               "MediaProperties",
-              "PropertyValues",
+              "PropertyValues_d6470ce6",
               "in"
             ]
           ]
         },
         {
           "name": "queryGraphicDescriptor",
-          "returns": "XPropertySet",
+          "returns": "XPropertySet_bc180bfa",
           "desc": [
             "Calling this method returns a com.sun.star.beans.XPropertySet interface that gives access to the properties of the unloaded graphic.",
             "",
@@ -88,7 +108,7 @@
           "args": [
             [
               "MediaProperties",
-              "PropertyValues",
+              "PropertyValues_d6470ce6",
               "in"
             ]
           ]
@@ -107,12 +127,12 @@
           "args": [
             [
               "Graphic",
-              "XGraphic",
+              "XGraphic_a4da0afc",
               "in"
             ],
             [
               "MediaProperties",
-              "PropertyValues",
+              "PropertyValues_d6470ce6",
               "in"
             ]
           ]

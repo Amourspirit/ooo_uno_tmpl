@@ -1,61 +1,76 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "OfficeDatabaseDocument",
   "type": "service",
   "namespace": "com.sun.star.sdb",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
-        "..document.x_embedded_scripts",
-        "XEmbeddedScripts"
+        "..document.office_document",
+        "OfficeDocument",
+        "OfficeDocument_fecd0df2"
       ],
       [
         "..frame.x_loadable",
-        "XLoadable"
+        "XLoadable",
+        "XLoadable_989a0a7f"
       ],
       [
         "..script.provider.x_script_provider_supplier",
-        "XScriptProviderSupplier"
+        "XScriptProviderSupplier",
+        "XScriptProviderSupplier_194514a2"
       ],
       [
         ".x_office_database_document",
-        "XOfficeDatabaseDocument"
-      ],
-      [
-        "..document.x_document_event_broadcaster",
-        "XDocumentEventBroadcaster"
+        "XOfficeDatabaseDocument",
+        "XOfficeDatabaseDocument_327f0f39"
       ],
       [
         "..util.x_closeable",
-        "XCloseable"
-      ],
-      [
-        "..document.office_document",
-        "OfficeDocument"
+        "XCloseable",
+        "XCloseable_99ee0aa8"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.document.OfficeDocument": "OfficeDocument_fecd0df2",
+      "com.sun.star.frame.XLoadable": "XLoadable_989a0a7f",
+      "com.sun.star.script.provider.XScriptProviderSupplier": "XScriptProviderSupplier_194514a2",
+      "com.sun.star.sdb.XOfficeDatabaseDocument": "XOfficeDatabaseDocument_327f0f39",
+      "com.sun.star.util.XCloseable": "XCloseable_99ee0aa8"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
+    "full_imports": {
+      "general": [
+        "com.sun.star.document.OfficeDocument",
+        "com.sun.star.frame.XLoadable",
+        "com.sun.star.script.provider.XScriptProviderSupplier",
+        "com.sun.star.sdb.XOfficeDatabaseDocument",
+        "com.sun.star.util.XCloseable"
+      ],
+      "typing": []
+    },
     "name": "OfficeDatabaseDocument",
     "imports": [],
     "namespace": "com.sun.star.sdb",
     "extends": [
       "com.sun.star.document.OfficeDocument",
       "com.sun.star.sdb.XOfficeDatabaseDocument",
-      "com.sun.star.document.XEmbeddedScripts",
       "com.sun.star.script.provider.XScriptProviderSupplier",
       "com.sun.star.frame.XLoadable",
-      "com.sun.star.document.XDocumentEventBroadcaster",
       "com.sun.star.util.XCloseable"
     ],
     "desc": [

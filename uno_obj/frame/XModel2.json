@@ -1,53 +1,75 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XModel2",
   "type": "interface",
   "namespace": "com.sun.star.frame",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         ".x_model",
-        "XModel"
+        "XModel",
+        "XModel_7a6e095c"
       ]
     ],
     "from_imports_typing": [
       [
-        ".x_controller2",
-        "XController2"
+        "..beans.property_value",
+        "PropertyValue",
+        "PropertyValue_c9610c73"
       ],
       [
         "..container.x_enumeration",
-        "XEnumeration"
+        "XEnumeration",
+        "XEnumeration_f2180daa"
+      ],
+      [
+        ".x_controller2",
+        "XController2",
+        "XController2_bbcf0bc1"
       ],
       [
         ".x_frame",
-        "XFrame"
-      ],
-      [
-        "..beans.property_value",
-        "PropertyValue"
+        "XFrame",
+        "XFrame_7a570956"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.frame.XModel": "XModel_7a6e095c"
+    },
     "quote": [
-      "typing.List[str]",
-      "XEnumeration",
-      "XFrame",
-      "typing.List[PropertyValue]",
-      "XController2"
+      "XController2_bbcf0bc1",
+      "XEnumeration_f2180daa",
+      "XFrame_7a570956",
+      "typing.List[PropertyValue_c9610c73]",
+      "typing.List[str]"
     ],
     "typings": [
-      "typing.List[str]",
-      "typing.List[PropertyValue]"
+      "typing.List[PropertyValue_c9610c73]",
+      "typing.List[str]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.frame.XModel"
+      ],
+      "typing": [
+        "com.sun.star.beans.PropertyValue",
+        "com.sun.star.container.XEnumeration",
+        "com.sun.star.frame.XController2",
+        "com.sun.star.frame.XFrame"
+      ]
+    },
     "name": "XModel2",
     "imports": [],
     "namespace": "com.sun.star.frame",
@@ -68,7 +90,7 @@
       "methods": [
         {
           "name": "createDefaultViewController",
-          "returns": "XController2",
+          "returns": "XController2_bbcf0bc1",
           "desc": [
             "creates the default view instance for this model.",
             "",
@@ -81,14 +103,14 @@
           "args": [
             [
               "Frame",
-              "XFrame",
+              "XFrame_7a570956",
               "in"
             ]
           ]
         },
         {
           "name": "createViewController",
-          "returns": "XController2",
+          "returns": "XController2_bbcf0bc1",
           "desc": [
             "creates a new view instance classified by the specified name and arguments.",
             "",
@@ -106,12 +128,12 @@
             ],
             [
               "Arguments",
-              "typing.List[PropertyValue]",
+              "typing.List[PropertyValue_c9610c73]",
               "in"
             ],
             [
               "Frame",
-              "XFrame",
+              "XFrame_7a570956",
               "in"
             ]
           ]
@@ -131,7 +153,7 @@
         },
         {
           "name": "getControllers",
-          "returns": "XEnumeration",
+          "returns": "XEnumeration_f2180daa",
           "desc": [
             "provides list of all currently connected controller objects.",
             "",
@@ -157,7 +179,7 @@
           "args": [
             [
               "Arguments",
-              "typing.List[PropertyValue]",
+              "typing.List[PropertyValue_c9610c73]",
               "in"
             ]
           ]

@@ -1,34 +1,50 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "UnoControlScrollBarModel",
   "type": "service",
   "namespace": "com.sun.star.awt",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         ".uno_control_model",
-        "UnoControlModel"
+        "UnoControlModel",
+        "UnoControlModel_c8ce0c58"
       ]
     ],
     "from_imports_typing": [
       [
         "..util.color",
-        "Color"
+        "Color",
+        "Color_68e908c5"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.awt.UnoControlModel": "UnoControlModel_c8ce0c58"
+    },
     "quote": [
-      "Color"
+      "Color_68e908c5"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.awt.UnoControlModel"
+      ],
+      "typing": [
+        "com.sun.star.util.Color"
+      ]
+    },
     "name": "UnoControlScrollBarModel",
     "imports": [],
     "namespace": "com.sun.star.awt",
@@ -47,7 +63,7 @@
       "properties": [
         {
           "name": "BackgroundColor",
-          "returns": "Color",
+          "returns": "Color_68e908c5",
           "desc": [
             "specifies the RGB color to be used for the control.",
             "",
@@ -206,7 +222,7 @@
         },
         {
           "name": "SymbolColor",
-          "returns": "Color",
+          "returns": "Color_68e908c5",
           "desc": [
             "specifies the RGB color to be used when painting symbols which are part of the control's appearance, such as the arrow buttons.",
             "",

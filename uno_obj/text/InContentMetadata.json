@@ -1,39 +1,61 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "InContentMetadata",
   "type": "service",
   "namespace": "com.sun.star.text",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
-        ".text_content",
-        "TextContent"
-      ],
-      [
         "..container.x_child",
-        "XChild"
-      ],
-      [
-        "..rdf.x_metadatable",
-        "XMetadatable"
+        "XChild",
+        "XChild_a6390b07"
       ],
       [
         "..container.x_enumeration_access",
-        "XEnumerationAccess"
+        "XEnumerationAccess",
+        "XEnumerationAccess_4bac0ffc"
+      ],
+      [
+        "..rdf.x_metadatable",
+        "XMetadatable",
+        "XMetadatable_a3000af0"
+      ],
+      [
+        ".text_content",
+        "TextContent",
+        "TextContent_a6810b4d"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.container.XChild": "XChild_a6390b07",
+      "com.sun.star.container.XEnumerationAccess": "XEnumerationAccess_4bac0ffc",
+      "com.sun.star.rdf.XMetadatable": "XMetadatable_a3000af0",
+      "com.sun.star.text.TextContent": "TextContent_a6810b4d"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
+    "full_imports": {
+      "general": [
+        "com.sun.star.container.XChild",
+        "com.sun.star.container.XEnumerationAccess",
+        "com.sun.star.rdf.XMetadatable",
+        "com.sun.star.text.TextContent"
+      ],
+      "typing": []
+    },
     "name": "InContentMetadata",
     "imports": [],
     "namespace": "com.sun.star.text",

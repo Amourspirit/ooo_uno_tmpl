@@ -1,34 +1,50 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XAccessibleHypertext",
   "type": "interface",
   "namespace": "com.sun.star.accessibility",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         ".x_accessible_text",
-        "XAccessibleText"
+        "XAccessibleText",
+        "XAccessibleText_5b77105b"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_accessible_hyperlink",
-        "XAccessibleHyperlink"
+        "XAccessibleHyperlink",
+        "XAccessibleHyperlink_b34c126c"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.accessibility.XAccessibleText": "XAccessibleText_5b77105b"
+    },
     "quote": [
-      "XAccessibleHyperlink"
+      "XAccessibleHyperlink_b34c126c"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.accessibility.XAccessibleText"
+      ],
+      "typing": [
+        "com.sun.star.accessibility.XAccessibleHyperlink"
+      ]
+    },
     "name": "XAccessibleHypertext",
     "imports": [],
     "namespace": "com.sun.star.accessibility",
@@ -49,7 +65,7 @@
       "methods": [
         {
           "name": "getHyperLink",
-          "returns": "XAccessibleHyperlink",
+          "returns": "XAccessibleHyperlink_b34c126c",
           "desc": [
             "Return the specified link.",
             "",

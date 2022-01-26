@@ -1,38 +1,57 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "UnoControlRoadmapModel",
   "type": "service",
   "namespace": "com.sun.star.awt",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
-        "..container.x_index_container",
-        "XIndexContainer"
+        ".uno_control_model",
+        "UnoControlModel",
+        "UnoControlModel_c8ce0c58"
       ],
       [
-        ".uno_control_model",
-        "UnoControlModel"
+        "..container.x_index_container",
+        "XIndexContainer",
+        "XIndexContainer_1c040ebe"
       ]
     ],
     "from_imports_typing": [
       [
         "..graphic.x_graphic",
-        "XGraphic"
+        "XGraphic",
+        "XGraphic_a4da0afc"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.awt.UnoControlModel": "UnoControlModel_c8ce0c58",
+      "com.sun.star.container.XIndexContainer": "XIndexContainer_1c040ebe"
+    },
     "quote": [
-      "XGraphic"
+      "XGraphic_a4da0afc"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.awt.UnoControlModel",
+        "com.sun.star.container.XIndexContainer"
+      ],
+      "typing": [
+        "com.sun.star.graphic.XGraphic"
+      ]
+    },
     "name": "UnoControlRoadmapModel",
     "imports": [],
     "namespace": "com.sun.star.awt",
@@ -94,7 +113,7 @@
         },
         {
           "name": "Graphic",
-          "returns": "XGraphic",
+          "returns": "XGraphic_a4da0afc",
           "desc": [
             "specifies a graphic to be displayed on the control",
             "",

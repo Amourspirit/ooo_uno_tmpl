@@ -1,42 +1,54 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XAccessibleTable",
   "type": "interface",
   "namespace": "com.sun.star.accessibility",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "XInterface_8f010a43"
       ]
     ],
     "from_imports_typing": [
       [
-        ".x_accessible_table",
-        "XAccessibleTable"
-      ],
-      [
         ".x_accessible",
-        "XAccessible"
+        "XAccessible",
+        "XAccessible_1cbc0eb6"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
     "quote": [
-      "typing.List[int]",
-      "XAccessible",
-      "XAccessibleTable"
+      "XAccessibleTable",
+      "XAccessible_1cbc0eb6",
+      "typing.List[int]"
     ],
     "typings": [
       "typing.List[int]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.accessibility.XAccessible"
+      ]
+    },
     "name": "XAccessibleTable",
     "imports": [],
     "namespace": "com.sun.star.accessibility",
@@ -61,7 +73,7 @@
       "methods": [
         {
           "name": "getAccessibleCaption",
-          "returns": "XAccessible",
+          "returns": "XAccessible_1cbc0eb6",
           "desc": [
             "Returns the caption for the table."
           ],
@@ -70,7 +82,7 @@
         },
         {
           "name": "getAccessibleCellAt",
-          "returns": "XAccessible",
+          "returns": "XAccessible_1cbc0eb6",
           "desc": [
             "Returns the XAccessible object at the specified row and column in the table.",
             "",
@@ -278,7 +290,7 @@
         },
         {
           "name": "getAccessibleSummary",
-          "returns": "XAccessible",
+          "returns": "XAccessible_1cbc0eb6",
           "desc": [
             "Returns the summary description of the table."
           ],

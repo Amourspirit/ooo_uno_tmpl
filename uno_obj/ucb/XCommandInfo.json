@@ -1,37 +1,53 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XCommandInfo",
   "type": "interface",
   "namespace": "com.sun.star.ucb",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "XInterface_8f010a43"
       ]
     ],
     "from_imports_typing": [
       [
         ".command_info",
-        "CommandInfo"
+        "CommandInfo",
+        "CommandInfo_98490a8d"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
     "quote": [
-      "CommandInfo",
-      "typing.List[CommandInfo]"
+      "CommandInfo_98490a8d",
+      "typing.List[CommandInfo_98490a8d]"
     ],
     "typings": [
-      "typing.List[CommandInfo]"
+      "typing.List[CommandInfo_98490a8d]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.ucb.CommandInfo"
+      ]
+    },
     "name": "XCommandInfo",
     "imports": [],
     "namespace": "com.sun.star.ucb",
@@ -46,7 +62,7 @@
       "methods": [
         {
           "name": "getCommandInfoByHandle",
-          "returns": "CommandInfo",
+          "returns": "CommandInfo_98490a8d",
           "desc": [
             "returns information for a specific command."
           ],
@@ -63,7 +79,7 @@
         },
         {
           "name": "getCommandInfoByName",
-          "returns": "CommandInfo",
+          "returns": "CommandInfo_98490a8d",
           "desc": [
             "returns information for a specific command."
           ],
@@ -80,7 +96,7 @@
         },
         {
           "name": "getCommands",
-          "returns": "typing.List[CommandInfo]",
+          "returns": "typing.List[CommandInfo_98490a8d]",
           "desc": [
             "obtains information for all supported commands."
           ],

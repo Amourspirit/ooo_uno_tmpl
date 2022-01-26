@@ -1,41 +1,59 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XDriverManager",
   "type": "interface",
   "namespace": "com.sun.star.sdbc",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "XInterface_8f010a43"
       ]
     ],
     "from_imports_typing": [
       [
-        ".x_connection",
-        "XConnection"
+        "..beans.property_value",
+        "PropertyValue",
+        "PropertyValue_c9610c73"
       ],
       [
-        "..beans.property_value",
-        "PropertyValue"
+        ".x_connection",
+        "XConnection",
+        "XConnection_a36a0b0c"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
     "quote": [
-      "XConnection",
-      "typing.List[PropertyValue]"
+      "XConnection_a36a0b0c",
+      "typing.List[PropertyValue_c9610c73]"
     ],
     "typings": [
-      "typing.List[PropertyValue]"
+      "typing.List[PropertyValue_c9610c73]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.beans.PropertyValue",
+        "com.sun.star.sdbc.XConnection"
+      ]
+    },
     "name": "XDriverManager",
     "imports": [],
     "namespace": "com.sun.star.sdbc",
@@ -52,7 +70,7 @@
       "methods": [
         {
           "name": "getConnection",
-          "returns": "XConnection",
+          "returns": "XConnection_a36a0b0c",
           "desc": [
             "attempts to establish a connection to the given database URL.",
             "",
@@ -71,7 +89,7 @@
         },
         {
           "name": "getConnectionWithInfo",
-          "returns": "XConnection",
+          "returns": "XConnection_a36a0b0c",
           "desc": [
             "attempts to establish a connection to the given database URL.",
             "",
@@ -88,7 +106,7 @@
             ],
             [
               "info",
-              "typing.List[PropertyValue]",
+              "typing.List[PropertyValue_c9610c73]",
               "in"
             ]
           ]

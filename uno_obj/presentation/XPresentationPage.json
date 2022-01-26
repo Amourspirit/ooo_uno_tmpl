@@ -1,29 +1,42 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XPresentationPage",
   "type": "interface",
   "namespace": "com.sun.star.presentation",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..drawing.x_draw_page",
-        "XDrawPage"
+        "XDrawPage",
+        "XDrawPage_b07a0b57"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.drawing.XDrawPage": "XDrawPage_b07a0b57"
+    },
     "quote": [
-      "XDrawPage"
+      "XDrawPage_b07a0b57"
     ],
     "typings": [],
     "requires_typing": false,
+    "full_imports": {
+      "general": [
+        "com.sun.star.drawing.XDrawPage"
+      ],
+      "typing": []
+    },
     "name": "XPresentationPage",
     "imports": [],
     "namespace": "com.sun.star.presentation",
@@ -38,7 +51,7 @@
       "methods": [
         {
           "name": "getNotesPage",
-          "returns": "XDrawPage",
+          "returns": "XDrawPage_b07a0b57",
           "desc": [
             "return the note page from the current page in the presentation, the name for the note page in the user interface note view, and one of the views from a presentation page."
           ],

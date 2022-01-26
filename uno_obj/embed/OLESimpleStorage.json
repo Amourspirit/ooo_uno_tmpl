@@ -1,39 +1,57 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "OLESimpleStorage",
   "type": "service",
   "namespace": "com.sun.star.embed",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         ".xole_simple_storage",
-        "XOLESimpleStorage"
+        "XOLESimpleStorage",
+        "XOLESimpleStorage_f6db0d7c"
       ]
     ],
     "from_imports_typing": [
       [
-        "..io.x_stream",
-        "XStream"
+        "..io.x_input_stream",
+        "XInputStream",
+        "XInputStream_98d40ab4"
       ],
       [
-        "..io.x_input_stream",
-        "XInputStream"
+        "..io.x_stream",
+        "XStream",
+        "XStream_678908a4"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.embed.XOLESimpleStorage": "XOLESimpleStorage_f6db0d7c"
+    },
     "quote": [
-      "XInputStream",
-      "XStream"
+      "XInputStream_98d40ab4",
+      "XStream_678908a4"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.embed.XOLESimpleStorage"
+      ],
+      "typing": [
+        "com.sun.star.io.XInputStream",
+        "com.sun.star.io.XStream"
+      ]
+    },
     "name": "OLESimpleStorage",
     "imports": [],
     "namespace": "com.sun.star.embed",
@@ -56,7 +74,7 @@
           "args": [
             [
               "xInputStream",
-              "XInputStream",
+              "XInputStream_98d40ab4",
               "in"
             ],
             [
@@ -76,7 +94,7 @@
           "args": [
             [
               "xStream",
-              "XStream",
+              "XStream_678908a4",
               "in"
             ],
             [

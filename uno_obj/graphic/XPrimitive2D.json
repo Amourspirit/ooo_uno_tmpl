@@ -1,47 +1,61 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XPrimitive2D",
   "type": "interface",
   "namespace": "com.sun.star.graphic",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "XInterface_8f010a43"
       ]
     ],
     "from_imports_typing": [
       [
-        ".x_primitive2_d",
-        "XPrimitive2D"
+        "..beans.property_value",
+        "PropertyValue",
+        "PropertyValue_c9610c73"
       ],
       [
         "..geometry.real_rectangle2_d",
-        "RealRectangle2D"
-      ],
-      [
-        "..beans.property_value",
-        "PropertyValue"
+        "RealRectangle2D",
+        "RealRectangle2D_d9b0e03"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
     "quote": [
-      "typing.List[XPrimitive2D]",
-      "RealRectangle2D",
-      "typing.List[PropertyValue]"
+      "RealRectangle2D_d9b0e03",
+      "typing.List[PropertyValue_c9610c73]",
+      "typing.List[XPrimitive2D]"
     ],
     "typings": [
-      "typing.List[XPrimitive2D]",
-      "typing.List[PropertyValue]"
+      "typing.List[PropertyValue_c9610c73]",
+      "typing.List[XPrimitive2D]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.beans.PropertyValue",
+        "com.sun.star.geometry.RealRectangle2D"
+      ]
+    },
     "name": "XPrimitive2D",
     "imports": [],
     "namespace": "com.sun.star.graphic",
@@ -78,14 +92,14 @@
           "args": [
             [
               "aViewParameters",
-              "typing.List[PropertyValue]",
+              "typing.List[PropertyValue_c9610c73]",
               "in"
             ]
           ]
         },
         {
           "name": "getRange",
-          "returns": "RealRectangle2D",
+          "returns": "RealRectangle2D_d9b0e03",
           "desc": [
             "Retrieve bound rect of primitive.",
             "",
@@ -95,7 +109,7 @@
           "args": [
             [
               "aViewParameters",
-              "typing.List[PropertyValue]",
+              "typing.List[PropertyValue_c9610c73]",
               "in"
             ]
           ]

@@ -1,34 +1,47 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "EmbeddedObjectDescriptor",
   "type": "service",
   "namespace": "com.sun.star.embed",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [],
     "from_imports_typing": [
       [
         ".x_storage",
-        "XStorage"
+        "XStorage",
+        "XStorage_8e460a32"
       ],
       [
         "..frame.x_dispatch_provider_interceptor",
-        "XDispatchProviderInterceptor"
+        "XDispatchProviderInterceptor",
+        "XDispatchProviderInterceptor_afda1275"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "XStorage",
-      "XDispatchProviderInterceptor"
+      "XDispatchProviderInterceptor_afda1275",
+      "XStorage_8e460a32"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [],
+      "typing": [
+        "com.sun.star.embed.XStorage",
+        "com.sun.star.frame.XDispatchProviderInterceptor"
+      ]
+    },
     "name": "EmbeddedObjectDescriptor",
     "imports": [],
     "namespace": "com.sun.star.embed",
@@ -43,7 +56,7 @@
       "properties": [
         {
           "name": "OutplaceDispatchInterceptor",
-          "returns": "XDispatchProviderInterceptor",
+          "returns": "XDispatchProviderInterceptor_afda1275",
           "desc": [
             "allows to provide a dispatch interceptor for outplace activation."
           ],
@@ -52,7 +65,7 @@
         },
         {
           "name": "RecoveryStorage",
-          "returns": "XStorage",
+          "returns": "XStorage_8e460a32",
           "desc": [
             "denotes the storage from which the embedded object is to be recovered.",
             "",

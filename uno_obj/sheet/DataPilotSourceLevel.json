@@ -1,50 +1,75 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "DataPilotSourceLevel",
   "type": "service",
   "namespace": "com.sun.star.sheet",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..beans.x_property_set",
-        "XPropertySet"
-      ],
-      [
-        ".x_members_supplier",
-        "XMembersSupplier"
+        "XPropertySet",
+        "XPropertySet_bc180bfa"
       ],
       [
         "..container.x_named",
-        "XNamed"
+        "XNamed",
+        "XNamed_a6520b08"
       ],
       [
         ".x_data_pilot_member_results",
-        "XDataPilotMemberResults"
+        "XDataPilotMemberResults",
+        "XDataPilotMemberResults_56421045"
+      ],
+      [
+        ".x_members_supplier",
+        "XMembersSupplier",
+        "XMembersSupplier_efd10d98"
       ]
     ],
     "from_imports_typing": [
       [
         ".general_function",
-        "GeneralFunction"
+        "GeneralFunction",
+        "GeneralFunction_e2280d25"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.beans.XPropertySet": "XPropertySet_bc180bfa",
+      "com.sun.star.container.XNamed": "XNamed_a6520b08",
+      "com.sun.star.sheet.XDataPilotMemberResults": "XDataPilotMemberResults_56421045",
+      "com.sun.star.sheet.XMembersSupplier": "XMembersSupplier_efd10d98"
+    },
     "quote": [
-      "typing.List[int]",
-      "typing.List[GeneralFunction]"
+      "typing.List[GeneralFunction_e2280d25]",
+      "typing.List[int]"
     ],
     "typings": [
-      "typing.List[int]",
-      "typing.List[GeneralFunction]"
+      "typing.List[GeneralFunction_e2280d25]",
+      "typing.List[int]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.beans.XPropertySet",
+        "com.sun.star.container.XNamed",
+        "com.sun.star.sheet.XDataPilotMemberResults",
+        "com.sun.star.sheet.XMembersSupplier"
+      ],
+      "typing": [
+        "com.sun.star.sheet.GeneralFunction"
+      ]
+    },
     "name": "DataPilotSourceLevel",
     "imports": [],
     "namespace": "com.sun.star.sheet",
@@ -66,7 +91,7 @@
       "types": [
         {
           "name": "SubTotals",
-          "returns": "typing.List[GeneralFunction]",
+          "returns": "typing.List[GeneralFunction_e2280d25]",
           "desc": [
             "specifies the subtotals that are inserted for the level.",
             "",

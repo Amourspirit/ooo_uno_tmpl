@@ -1,12 +1,14 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "SearchOptions2",
   "namespace": "com.sun.star.util",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "sort": true,
@@ -20,10 +22,14 @@
     "from_imports": [
       [
         ".search_options",
-        "SearchOptions"
+        "SearchOptions",
+        "SearchOptions_bd140c08"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.util.SearchOptions": "SearchOptions_bd140c08"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
@@ -57,7 +63,7 @@
           "",
           "A Unicode character, if not 0 escapes the special meaning of a question mark, asterisk or escape character that follows immediately after the escape character. If 0 defines no escape character is used.",
           "",
-          "Common values are '\\' (U+005C REVERSE SOLIDUS) aka backslash in text processing context, or '~' (U+007E TILDE) in spreadsheet processing context."
+          "Common values are '\\\\' (U+005C REVERSE SOLIDUS) aka backslash in text processing context, or '~' (U+007E TILDE) in spreadsheet processing context."
         ]
       }
     ]

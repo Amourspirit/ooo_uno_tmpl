@@ -1,5 +1,4 @@
 # coding: utf-8
-import enum
 import os
 import sys
 import re
@@ -7,10 +6,19 @@ import importlib
 import logging
 import time
 import calendar
+import tempfile
+from datetime import datetime, timedelta
+import json
+import pickle
+import sqlite3 as sql
+from pathlib import Path
 from datetime import datetime, timezone
 from types import ModuleType
-from typing import Dict, Tuple, List, Union
+from typing import Iterable, Set, Tuple, List, Union, Optional
 from Cheetah.Template import Template
+from dataclasses import dataclass
+
+
 
 # set up path for importing modules from main app
 _project_root = os.environ.get('project_root', None)
@@ -29,13 +37,271 @@ RESERVER_WORDS = {
     'not', 'or', 'pass', 'raise', 'return',
     'True', 'try', 'while', 'with', 'yield'
     }
+
+# region Resource DB Related
+
+@dataclass
+class ExtendsInfo:
+    parent: str
+    namespace: str
+    sort: int
+    map_name: Union[str, None]
+    
+    def __lt__(self, other: object):
+        if not isinstance(other, ExtendsInfo):
+            return NotImplemented
+        return self.sort < other.sort
+
+class DbConnect:
+    def __init__(self) -> None:
+        root_dir: Union[str, None] = os.environ.get('project_root', None)
+        resource_dir: Union[str, None] = os.environ.get(
+            'config_resource_dir', None)
+        db_name: Union[str, None] = os.environ.get(
+            'config_db_mod_info', None)
+
+        if root_dir is None:
+            raise ValueError(
+                'DbConnect: Resource project_root environment value is not set')
+        if resource_dir is None:
+            raise ValueError(
+                'DbConnect: Resource config_resource_dir environment value is not set')
+        if db_name is None:
+            raise ValueError(
+                'DbConnect: Resource config_db_mod_info environment value is not set')
+        self._db_name = db_name
+        self._root_dir = Path(root_dir)
+        self._resource_dir = resource_dir
+        self._conn = str(self._root_dir /
+                         self._resource_dir / self._db_name)
+
+    @property
+    def connection_str(self) -> str:
+        """Gets connection_str value"""
+        return self._conn
+
+    @property
+    def root_dir(self) -> Path:
+        """Gets root_dir value"""
+        return self._root_dir
+
+
+class SqlCtx:
+    # Using a context manager: https://tinyurl.com/y8dplak5
+    def __init__(self, connect_str: str) -> None:
+        self._cstr = connect_str
+
+    def __enter__(self):
+        # DateTime for sqlite:
+        #   See: https://stackoverflow.com/a/37222799/1171746
+        #   See: https://stackoverflow.com/a/1830499/1171746
+        self.connection: sql.Connection = sql.connect(
+            self._cstr, detect_types=sql.PARSE_DECLTYPES)
+        self.connection.row_factory = sql.Row
+        self.cursor: sql.Cursor = self.connection.cursor()
+        return self
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        self.connection.close()
+
+    def get_connection(self) -> sql.Connection:
+        return self._conn
+
+
+class BaseSql:
+    def __init__(self) -> None:
+        self._db_connect = DbConnect()
+
+    @property
+    def conn_str(self) -> str:
+        """Gets connect_str value"""
+        return self._db_connect.connection_str
+
+class SqlExtends(BaseSql):
+    def __init__(self) -> None:
+        super().__init__()
+    
+    def get_extends(self, namespace: str) -> List[ExtendsInfo]:
+        results: List[ExtendsInfo] = []
+        query = """SELECT extend.namespace as ns, extend.map_name as map_name FROM extend
+        LEFT JOIN component on component.id_component = extend.fk_component_id
+        WHERE component.id_component = :namespace"""
+        
+        qry_sort = """SELECT module_detail.sort as sort FROM module_detail
+        WHERE module_detail.id_namespace = :namespace LIMIT 1"""
+        with SqlCtx(self.conn_str) as db:
+            db.cursor.execute(query, {"namespace": namespace})
+            for row in db.cursor:
+                results.append(ExtendsInfo(
+                    namespace=row['ns'],
+                    sort=-1,
+                    map_name=row['map_name'],
+                    parent=namespace
+                ))
+            for ei in results:
+                db.cursor.execute(qry_sort, {"namespace": ei.namespace})
+                for row in db.cursor:
+                    ei.sort = int(row['sort'])
+        return results
+
+# endregion Resource DB Related
+
+# region MRO Related Classes
+
+
+# region SQL Cache
+
+
+class SqlCache:
+    class CtxConnect:
+        # https://stackoverflow.com/questions/26793753/using-a-context-manager-for-connecting-to-a-sqlite3-database
+        def __init__(self, connect_str: str) -> None:
+            self._cstr = connect_str
+
+        def __enter__(self):
+            # DateTime for sqlite:
+            #   See: https://stackoverflow.com/a/37222799/1171746
+            #   See: https://stackoverflow.com/a/1830499/1171746
+            self.connection: sql.Connection = sql.connect(
+                self._cstr, detect_types=sql.PARSE_DECLTYPES)
+            self.connection.row_factory = sql.Row
+            self.cursor: sql.Cursor = self.connection.cursor()
+            return self
+
+        def __exit__(self, exc_type, exc_value, traceback):
+            self.connection.close()
+
+        def get_connection(self) -> sql.Connection:
+            return self._conn
+
+    def __init__(self, connect_str: str, lifetime: float) -> None:
+        self._conn_str = connect_str
+        self._lifetime = lifetime
+        self._is_init = False
+        self._is_init_update = False
+        if self._is_init is False:
+            self._init()
+
+    def _init(self) -> None:
+        with SqlCache.CtxConnect(self._conn_str) as db:
+            # limit to one row: https://stackoverflow.com/a/33104119/1171746
+            db.cursor.execute("""CREATE TABLE IF NOT EXISTS pickle (
+            id INTEGER PRIMARY KEY CHECK (id = 1),
+            created TIMESTAMP,
+            updated TIMESTAMP,
+            data BLOB NOT NULL
+            )""")
+        self._is_init = True
+
+    def fetch(self) -> object:
+        if self._lifetime <= 0.0:
+            return None
+        data = None
+        created: datetime = None
+        with SqlCache.CtxConnect(self._conn_str) as db:
+            db.cursor.execute("SELECT created, data FROM pickle limit 1")
+            for row in db.cursor:
+                created = row['created']
+                data = pickle.loads(row['data'])
+        if not created or not data:
+            return None
+        now_time = datetime.utcnow()
+        expire_time = created + timedelta(seconds=self._lifetime)
+        if now_time > expire_time:
+            self._delete()
+            return None
+        return data
+
+    def _update(self, pdata: object) -> None:
+        with SqlCache.CtxConnect(self._conn_str) as db:
+            with db.connection:
+                db.cursor.execute("""UPDATE pickle SET updated=:updated, data=:data
+                                        WHERE id=1""",
+                                  {
+                                      "updated": datetime.utcnow(),
+                                      "data": sql.Binary(pdata)
+                                  })
+
+    def _insert(self, pdata: object) -> None:
+        with SqlCache.CtxConnect(self._conn_str) as db:
+            with db.connection:
+                db.cursor.execute("INSERT INTO pickle VALUES (:id, :created, :updated, :data)",
+                                  {
+                                      "id": 1,
+                                      "created": datetime.utcnow(),
+                                      "updated": datetime.utcnow(),
+                                      "data": sql.Binary(pdata)
+                                  })
+
+    def _delete(self) -> None:
+        with SqlCache.CtxConnect(self._conn_str) as db:
+            with db.connection:
+                db.cursor.execute("DELETE FROM pickle WHERE id=1")
+        self._is_init_update = False
+
+    def update(self, data: object) -> None:
+        pdata = pickle.dumps(data, pickle.HIGHEST_PROTOCOL)
+        if not self._is_init_update:
+            has_data = False
+            with SqlCache.CtxConnect(self._conn_str) as db:
+                db.cursor.execute("SELECT id from pickle where id=1")
+                for _ in db.cursor:
+                    has_data = True
+            if has_data:
+                self._update(pdata)
+            else:
+                self._insert(pdata)
+            self._is_init_update = True
+
+        else:
+            self._update(pdata)
+
+
+class DbCache:
+    def __init__(self, tmp_dir: str, db_name: str, lifetime: Optional[float] = None) -> None:
+        t_path = Path(tempfile.gettempdir())
+        self._cache_path = t_path / tmp_dir
+        
+        # self._cache_path = Path('./tmp')
+        self.mkdirp(self._cache_path)
+        self._lifetime = lifetime or 1800
+        self._db_file = self._cache_path / (db_name + '.sqlite')
+        self._sql_cache = SqlCache(self._db_file, self._lifetime)
+
+    def mkdirp(self, dest_dir: Union[str, Path]):
+        """
+        Creates directory and all child directories if needed
+
+        Args:
+            dest_dir (Union[str, Path]): path to create directories for.
+                Must be dir path only. No checking is done for file names.
+        """
+        # Python ≥ 3.5
+        if isinstance(dest_dir, Path):
+            dest_dir.mkdir(parents=True, exist_ok=True)
+        else:
+            Path(dest_dir).mkdir(parents=True, exist_ok=True)
+
+    def fetch_from_cache(self) -> Union[object, None]:
+        return self._sql_cache.fetch()
+
+    def save_in_cache(self, contents: object) -> None:
+        self._sql_cache.update(contents)
+# endregion SQL Cache
+
+# endregion MRO Related Classes
+
 class BaseTpml(Template):
+
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self._is_class_init = True
         self._is_class_data = False
         self._logger = None
         get_logger = None
+        if not hasattr(self, "extends_map"):
+            setattr(self, 'extends_map', {})
         self._logger: logging.Logger = None
         try:
             _, get_logger = self.dynamic_imp(
@@ -49,6 +315,8 @@ class BaseTpml(Template):
                 logger_name="Template — " + self.__class__.__name__,
                 add_handler_console=False
                 )
+        self._app_root = os.environ.get('project_root', None)
+ 
 
     def init_data(self):
         self._is_class_init = True
@@ -170,8 +438,8 @@ class BaseTpml(Template):
         """
         if not input:
             return ''
-        _parts = input.rsplit(sep, 1)
-        return _parts[0] if len(_parts) == 1 else _parts[1]
+        _parts = input.rsplit(sep=sep, maxsplit=1)
+        return _parts.pop()
 
     def convert_lst_last(self, lst: List[str], sep='.') -> List[str]:
         """
@@ -273,7 +541,7 @@ class BaseTpml(Template):
 
     # region Class inherits and From Imports
 
-    def get_from_import(self, class_name: str, im_data: List[str]) -> str:
+    def get_from_import(self, class_name: str, im_data: Iterable[str]) -> str:
         """
         Get a from string such as 'from ..sdbcx.table_descriptor import DataSettings`
 
@@ -284,10 +552,29 @@ class BaseTpml(Template):
         Returns:
             str: string formated for a from statement
         """
-        if len(im_data) < 2:
+        def is_self_import(path: str, name: str) -> bool:
+            # in theory this should not happend as parser check for this condition and remove self imports.
+            if name != class_name:
+                return False
+            p_parts = path.rsplit(sep='.', maxsplit=1)
+            if len(p_parts) != 2:
+                raise Exception(
+                    "get_from_import() Expected im_parts param to have a length of two!")
+            # in the cases where there is a single . such as .x_package then
+            # im_parts will be ['', 'x_package']
+            # This indicates that class it trying to import itself
+            return p_parts[0] == ''
+
+        im_len = len(im_data)
+        if im_len < 2:
             raise Exception(f"{self.__class__.__name__}.get_from_import() Expected im_data param to have a min length of two!")
         im = im_data[0]  # .sdbcx.table_descriptor
         name = im_data[1]  # DataSettings
+        if is_self_import(im, name):
+            return ''
+        if im_len == 3:
+            s_as = im_data[2]
+            return f"from {im} import {name} as {s_as}"
         if name == class_name:
             # can not extend a class with the same name.
             # Change the from import and elsewhere change the extends name to match
@@ -311,17 +598,22 @@ class BaseTpml(Template):
         Returns:
             str: comma sep string of inherits.
         """
-        # imports should only be a list of names without namespace prepended.
-        # in case will process anyways
         def get_import(name: str) -> str:
+            def is_mapped(name: str) -> bool:
+                return name in self.extends_map
+            def get_mapped(name: str) -> bool:
+                return self.extends_map[name]
+            if is_mapped(name):
+                return get_mapped(name)
             _name = self.get_last_part(input=name)
             if class_name == _name:
                 return f"{self.camel_to_snake(_name)}.{_name}"
             else:
-                return name
+                return _name
         if isinstance(imports, str):
             return get_import(imports)
         im_lst: List[str] = []
+
         for s in imports:
             im_lst.append(get_import(s))
         s = 'object'
@@ -332,4 +624,70 @@ class BaseTpml(Template):
                 s += ', '
             s += im
         return s
+    
+    def get_class_inherits_from_db(self, default: str = 'object') -> str:
+        """
+        Gets class inherits taking into accout if an inherit is the same name as the class.
+
+        Args:
+            class_name (str): Name of the class inheriting
+            imports (Union[str, List[str]]): string or list of strings of class inherits
+
+        Returns:
+            str: comma sep string of inherits.
+        """
+        def get_import(extend: ExtendsInfo) -> str:
+            def is_mapped() -> bool:
+                return not extend.map_name is None
+
+            def get_mapped() -> bool:
+                return extend.map_name
+            if is_mapped():
+                return get_mapped()
+            _name = self.get_last_part(extend.namespace)
+            return _name
+        
+        ns = f"{self.namespace}.{self.name}"
+        sql_entends = SqlExtends()
+        extends = sql_entends.get_extends(namespace=ns)
+        len_ent = len(extends)
+        if len_ent == 0:
+            return default
+        if len_ent == 1:
+            return get_import(extends[0])
+        extends.sort() # sort, gets it sort order from database
+        
+        im_lst: List[str] = []
+ 
+        for ex in extends:
+            im_lst.append(get_import(ex))
+        s = 'object'
+        for i, im in enumerate(im_lst):
+            if i == 0:
+                s = ''
+            if i > 0:
+                s += ', '
+            s += im
+        return s
     # endregion Class inherits and From Imports
+
+    def get_abstract_imports(self, abm: List[bool], abp: List[bool]) -> List[str]:
+        """
+        Gets a list with abstractmethod/abstractproperty appended as needed 
+
+        Args:
+            abm (List[bool]): List of bools to test for abstractmethod
+            abp (List[bool]): List of bools to test for abstractproperty
+
+        Returns:
+            List[str]: [description]
+        """
+        a_method = True in abm
+        a_prop = True in abp
+        results = []
+        if a_method:
+            results.append('abstractmethod')
+        if a_prop:
+            results.append('abstractproperty')
+        return results
+            

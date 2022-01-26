@@ -1,42 +1,64 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XOfficeDatabaseDocument",
   "type": "interface",
   "namespace": "com.sun.star.sdb",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..document.x_document_sub_storage_supplier",
-        "XDocumentSubStorageSupplier"
-      ],
-      [
-        ".x_report_documents_supplier",
-        "XReportDocumentsSupplier"
+        "XDocumentSubStorageSupplier",
+        "XDocumentSubStorageSupplier_da021351"
       ],
       [
         ".x_form_documents_supplier",
-        "XFormDocumentsSupplier"
+        "XFormDocumentsSupplier",
+        "XFormDocumentsSupplier_27dc0f33"
+      ],
+      [
+        ".x_report_documents_supplier",
+        "XReportDocumentsSupplier",
+        "XReportDocumentsSupplier_490a101b"
       ]
     ],
     "from_imports_typing": [
       [
         "..sdbc.x_data_source",
-        "XDataSource"
+        "XDataSource",
+        "XDataSource_a2990ae7"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.document.XDocumentSubStorageSupplier": "XDocumentSubStorageSupplier_da021351",
+      "com.sun.star.sdb.XFormDocumentsSupplier": "XFormDocumentsSupplier_27dc0f33",
+      "com.sun.star.sdb.XReportDocumentsSupplier": "XReportDocumentsSupplier_490a101b"
+    },
     "quote": [
-      "XDataSource"
+      "XDataSource_a2990ae7"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.document.XDocumentSubStorageSupplier",
+        "com.sun.star.sdb.XFormDocumentsSupplier",
+        "com.sun.star.sdb.XReportDocumentsSupplier"
+      ],
+      "typing": [
+        "com.sun.star.sdbc.XDataSource"
+      ]
+    },
     "name": "XOfficeDatabaseDocument",
     "imports": [],
     "namespace": "com.sun.star.sdb",
@@ -53,7 +75,7 @@
       "properties": [
         {
           "name": "DataSource",
-          "returns": "XDataSource",
+          "returns": "XDataSource_a2990ae7",
           "desc": [
             "provides access to the one and only DataSource associated with this document"
           ],

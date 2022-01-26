@@ -1,50 +1,73 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XObjectInspector",
   "type": "interface",
   "namespace": "com.sun.star.inspection",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..frame.x_controller",
-        "XController"
+        "XController",
+        "XController_b00e0b8f"
       ],
       [
         "..frame.x_dispatch_provider",
-        "XDispatchProvider"
+        "XDispatchProvider",
+        "XDispatchProvider_fc690de6"
       ]
     ],
     "from_imports_typing": [
       [
-        "..uno.x_interface",
-        "XInterface"
-      ],
-      [
         ".x_object_inspector_model",
-        "XObjectInspectorModel"
+        "XObjectInspectorModel",
+        "XObjectInspectorModel_9077119b"
       ],
       [
         ".x_object_inspector_ui",
-        "XObjectInspectorUI"
+        "XObjectInspectorUI",
+        "XObjectInspectorUI_5ccd1048"
+      ],
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.frame.XController": "XController_b00e0b8f",
+      "com.sun.star.frame.XDispatchProvider": "XDispatchProvider_fc690de6"
+    },
     "quote": [
-      "XObjectInspectorModel",
-      "XObjectInspectorUI",
-      "typing.List[XInterface]"
+      "XObjectInspectorModel_9077119b",
+      "XObjectInspectorUI_5ccd1048",
+      "typing.List[XInterface_8f010a43]"
     ],
     "typings": [
-      "typing.List[XInterface]"
+      "typing.List[XInterface_8f010a43]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.frame.XController",
+        "com.sun.star.frame.XDispatchProvider"
+      ],
+      "typing": [
+        "com.sun.star.inspection.XObjectInspectorModel",
+        "com.sun.star.inspection.XObjectInspectorUI",
+        "com.sun.star.uno.XInterface"
+      ]
+    },
     "name": "XObjectInspector",
     "imports": [],
     "namespace": "com.sun.star.inspection",
@@ -78,7 +101,7 @@
           "args": [
             [
               "Objects",
-              "typing.List[XInterface]",
+              "typing.List[XInterface_8f010a43]",
               "in"
             ]
           ]
@@ -87,7 +110,7 @@
       "properties": [
         {
           "name": "InspectorModel",
-          "returns": "XObjectInspectorModel",
+          "returns": "XObjectInspectorModel_9077119b",
           "desc": [
             "provides access to the current model of the inspector",
             "",
@@ -102,7 +125,7 @@
         },
         {
           "name": "InspectorUI",
-          "returns": "XObjectInspectorUI",
+          "returns": "XObjectInspectorUI_5ccd1048",
           "desc": [
             "provides access to the user interface of the object inspector.",
             "",

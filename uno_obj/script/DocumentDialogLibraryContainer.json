@@ -1,34 +1,50 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "DocumentDialogLibraryContainer",
   "type": "service",
   "namespace": "com.sun.star.script",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         ".x_storage_based_library_container",
-        "XStorageBasedLibraryContainer"
+        "XStorageBasedLibraryContainer",
+        "XStorageBasedLibraryContainer_d72a1321"
       ]
     ],
     "from_imports_typing": [
       [
         "..document.x_storage_based_document",
-        "XStorageBasedDocument"
+        "XStorageBasedDocument",
+        "XStorageBasedDocument_6b1310b2"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.script.XStorageBasedLibraryContainer": "XStorageBasedLibraryContainer_d72a1321"
+    },
     "quote": [
-      "XStorageBasedDocument"
+      "XStorageBasedDocument_6b1310b2"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.script.XStorageBasedLibraryContainer"
+      ],
+      "typing": [
+        "com.sun.star.document.XStorageBasedDocument"
+      ]
+    },
     "name": "DocumentDialogLibraryContainer",
     "imports": [],
     "namespace": "com.sun.star.script",
@@ -61,7 +77,7 @@
           "args": [
             [
               "Document",
-              "XStorageBasedDocument",
+              "XStorageBasedDocument_6b1310b2",
               "in"
             ]
           ]

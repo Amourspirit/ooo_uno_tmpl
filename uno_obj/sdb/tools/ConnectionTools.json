@@ -1,34 +1,50 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "ConnectionTools",
   "type": "service",
   "namespace": "com.sun.star.sdb.tools",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         ".x_connection_tools",
-        "XConnectionTools"
+        "XConnectionTools",
+        "XConnectionTools_28110f19"
       ]
     ],
     "from_imports_typing": [
       [
         "...sdbc.x_connection",
-        "XConnection"
+        "XConnection",
+        "XConnection_a36a0b0c"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.sdb.tools.XConnectionTools": "XConnectionTools_28110f19"
+    },
     "quote": [
-      "XConnection"
+      "XConnection_a36a0b0c"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.sdb.tools.XConnectionTools"
+      ],
+      "typing": [
+        "com.sun.star.sdbc.XConnection"
+      ]
+    },
     "name": "ConnectionTools",
     "imports": [],
     "namespace": "com.sun.star.sdb.tools",
@@ -52,7 +68,7 @@
           "args": [
             [
               "Connection",
-              "XConnection",
+              "XConnection_a36a0b0c",
               "in"
             ]
           ]

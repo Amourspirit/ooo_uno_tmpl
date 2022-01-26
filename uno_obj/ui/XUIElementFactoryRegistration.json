@@ -1,41 +1,59 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XUIElementFactoryRegistration",
   "type": "interface",
   "namespace": "com.sun.star.ui",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "XInterface_8f010a43"
       ]
     ],
     "from_imports_typing": [
       [
-        ".xui_element_factory",
-        "XUIElementFactory"
+        "..beans.property_value",
+        "PropertyValue",
+        "PropertyValue_c9610c73"
       ],
       [
-        "..beans.property_value",
-        "PropertyValue"
+        ".xui_element_factory",
+        "XUIElementFactory",
+        "XUIElementFactory_d0280c7e"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
     "quote": [
-      "XUIElementFactory",
-      "typing.List[typing.List[PropertyValue]]"
+      "XUIElementFactory_d0280c7e",
+      "typing.List[typing.List[PropertyValue_c9610c73]]"
     ],
     "typings": [
-      "typing.List[typing.List[PropertyValue]]"
+      "typing.List[typing.List[PropertyValue_c9610c73]]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.beans.PropertyValue",
+        "com.sun.star.ui.XUIElementFactory"
+      ]
+    },
     "name": "XUIElementFactoryRegistration",
     "imports": [],
     "namespace": "com.sun.star.ui",
@@ -89,7 +107,7 @@
         },
         {
           "name": "getFactory",
-          "returns": "XUIElementFactory",
+          "returns": "XUIElementFactory_d0280c7e",
           "desc": [
             "function to retrieve a previously registered user interface element factory."
           ],
@@ -109,7 +127,7 @@
         },
         {
           "name": "getRegisteredFactories",
-          "returns": "typing.List[typing.List[PropertyValue]]",
+          "returns": "typing.List[typing.List[PropertyValue_c9610c73]]",
           "desc": [
             "function to retrieve a list of all registered user interface element factories",
             "",

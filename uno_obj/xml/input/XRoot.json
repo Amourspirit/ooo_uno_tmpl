@@ -1,49 +1,71 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XRoot",
   "type": "interface",
   "namespace": "com.sun.star.xml.input",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "...uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "XInterface_8f010a43"
       ]
     ],
     "from_imports_typing": [
       [
-        ".x_namespace_mapping",
-        "XNamespaceMapping"
-      ],
-      [
-        "..sax.x_locator",
-        "XLocator"
-      ],
-      [
         ".x_attributes",
-        "XAttributes"
+        "XAttributes",
+        "XAttributes_e31a0d36"
       ],
       [
         ".x_element",
-        "XElement"
+        "XElement",
+        "XElement_bc5b0bd9"
+      ],
+      [
+        ".x_namespace_mapping",
+        "XNamespaceMapping",
+        "XNamespaceMapping_38700f68"
+      ],
+      [
+        "..sax.x_locator",
+        "XLocator",
+        "XLocator_a3fb0aff"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
     "quote": [
-      "XNamespaceMapping",
-      "XLocator",
-      "XAttributes",
-      "XElement"
+      "XAttributes_e31a0d36",
+      "XElement_bc5b0bd9",
+      "XLocator_a3fb0aff",
+      "XNamespaceMapping_38700f68"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.xml.input.XAttributes",
+        "com.sun.star.xml.input.XElement",
+        "com.sun.star.xml.input.XNamespaceMapping",
+        "com.sun.star.xml.sax.XLocator"
+      ]
+    },
     "name": "XRoot",
     "imports": [],
     "namespace": "com.sun.star.xml.input",
@@ -101,7 +123,7 @@
           "args": [
             [
               "locator",
-              "XLocator",
+              "XLocator_a3fb0aff",
               "in"
             ]
           ]
@@ -118,14 +140,14 @@
           "args": [
             [
               "xMapping",
-              "XNamespaceMapping",
+              "XNamespaceMapping_38700f68",
               "in"
             ]
           ]
         },
         {
           "name": "startRootElement",
-          "returns": "XElement",
+          "returns": "XElement_bc5b0bd9",
           "desc": [
             "Called upon root element."
           ],
@@ -145,7 +167,7 @@
             ],
             [
               "xAttributes",
-              "XAttributes",
+              "XAttributes_e31a0d36",
               "in"
             ]
           ]

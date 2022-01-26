@@ -1,51 +1,78 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XGroup",
   "type": "interface",
   "namespace": "com.sun.star.report",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
-        "..lang.x_component",
-        "XComponent"
+        "..beans.x_property_set",
+        "XPropertySet",
+        "XPropertySet_bc180bfa"
       ],
       [
         "..container.x_child",
-        "XChild"
+        "XChild",
+        "XChild_a6390b07"
       ],
       [
-        "..beans.x_property_set",
-        "XPropertySet"
+        "..lang.x_component",
+        "XComponent",
+        "XComponent_98dc0ab5"
       ],
       [
         ".x_functions_supplier",
-        "XFunctionsSupplier"
+        "XFunctionsSupplier",
+        "XFunctionsSupplier_1ee10f09"
       ]
     ],
     "from_imports_typing": [
       [
-        ".x_section",
-        "XSection"
+        ".x_groups",
+        "XGroups",
+        "XGroups_90d00a7c"
       ],
       [
-        ".x_groups",
-        "XGroups"
+        ".x_section",
+        "XSection",
+        "XSection_9b630ad1"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.beans.XPropertySet": "XPropertySet_bc180bfa",
+      "com.sun.star.container.XChild": "XChild_a6390b07",
+      "com.sun.star.lang.XComponent": "XComponent_98dc0ab5",
+      "com.sun.star.report.XFunctionsSupplier": "XFunctionsSupplier_1ee10f09"
+    },
     "quote": [
-      "XSection",
-      "XGroups"
+      "XGroups_90d00a7c",
+      "XSection_9b630ad1"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.beans.XPropertySet",
+        "com.sun.star.container.XChild",
+        "com.sun.star.lang.XComponent",
+        "com.sun.star.report.XFunctionsSupplier"
+      ],
+      "typing": [
+        "com.sun.star.report.XGroups",
+        "com.sun.star.report.XSection"
+      ]
+    },
     "name": "XGroup",
     "imports": [],
     "namespace": "com.sun.star.report",
@@ -74,7 +101,7 @@
         },
         {
           "name": "Footer",
-          "returns": "XSection",
+          "returns": "XSection_9b630ad1",
           "desc": [
             "returns the group footer."
           ],
@@ -110,7 +137,7 @@
         },
         {
           "name": "Groups",
-          "returns": "XGroups",
+          "returns": "XGroups_90d00a7c",
           "desc": [
             "Specifies the parent of the group."
           ],
@@ -119,7 +146,7 @@
         },
         {
           "name": "Header",
-          "returns": "XSection",
+          "returns": "XSection_9b630ad1",
           "desc": [
             "returns the group header."
           ],

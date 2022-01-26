@@ -1,39 +1,57 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XAutoStyleFamily",
   "type": "interface",
   "namespace": "com.sun.star.style",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..container.x_enumeration_access",
-        "XEnumerationAccess"
+        "XEnumerationAccess",
+        "XEnumerationAccess_4bac0ffc"
       ]
     ],
     "from_imports_typing": [
       [
-        ".x_auto_style",
-        "XAutoStyle"
+        "..beans.property_values",
+        "PropertyValues",
+        "PropertyValues_d6470ce6"
       ],
       [
-        "..beans.property_values",
-        "PropertyValues"
+        ".x_auto_style",
+        "XAutoStyle",
+        "XAutoStyle_a67a0b3b"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.container.XEnumerationAccess": "XEnumerationAccess_4bac0ffc"
+    },
     "quote": [
-      "PropertyValues",
-      "XAutoStyle"
+      "PropertyValues_d6470ce6",
+      "XAutoStyle_a67a0b3b"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.container.XEnumerationAccess"
+      ],
+      "typing": [
+        "com.sun.star.beans.PropertyValues",
+        "com.sun.star.style.XAutoStyle"
+      ]
+    },
     "name": "XAutoStyleFamily",
     "imports": [],
     "namespace": "com.sun.star.style",
@@ -48,13 +66,13 @@
       "methods": [
         {
           "name": "insertStyle",
-          "returns": "XAutoStyle",
+          "returns": "XAutoStyle_a67a0b3b",
           "desc": [],
           "raises": [],
           "args": [
             [
               "Values",
-              "PropertyValues",
+              "PropertyValues_d6470ce6",
               "in"
             ]
           ]

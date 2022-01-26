@@ -1,34 +1,50 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XFormattedField",
   "type": "interface",
   "namespace": "com.sun.star.report",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         ".x_report_control_model",
-        "XReportControlModel"
+        "XReportControlModel",
+        "XReportControlModel_2d800f4a"
       ]
     ],
     "from_imports_typing": [
       [
         "..util.x_number_formats_supplier",
-        "XNumberFormatsSupplier"
+        "XNumberFormatsSupplier",
+        "XNumberFormatsSupplier_3afb0fb7"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.report.XReportControlModel": "XReportControlModel_2d800f4a"
+    },
     "quote": [
-      "XNumberFormatsSupplier"
+      "XNumberFormatsSupplier_3afb0fb7"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.report.XReportControlModel"
+      ],
+      "typing": [
+        "com.sun.star.util.XNumberFormatsSupplier"
+      ]
+    },
     "name": "XFormattedField",
     "imports": [],
     "namespace": "com.sun.star.report",
@@ -54,7 +70,7 @@
         },
         {
           "name": "FormatsSupplier",
-          "returns": "XNumberFormatsSupplier",
+          "returns": "XNumberFormatsSupplier_3afb0fb7",
           "desc": [
             "supplies the formats the field should work with."
           ],

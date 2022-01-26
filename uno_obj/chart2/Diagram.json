@@ -1,51 +1,78 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "Diagram",
   "type": "service",
   "namespace": "com.sun.star.chart2",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..chart.x3_d_default_setter",
-        "X3DDefaultSetter"
+        "X3DDefaultSetter",
+        "X3DDefaultSetter_e9630d25"
       ],
       [
         ".x_coordinate_system_container",
-        "XCoordinateSystemContainer"
+        "XCoordinateSystemContainer",
+        "XCoordinateSystemContainer_995411d4"
       ],
       [
         ".x_diagram",
-        "XDiagram"
+        "XDiagram",
+        "XDiagram_96fe0a59"
       ],
       [
         ".x_titled",
-        "XTitled"
+        "XTitled",
+        "XTitled_8d490a0a"
       ]
     ],
     "from_imports_typing": [
       [
         ".relative_position",
-        "RelativePosition"
+        "RelativePosition",
+        "RelativePosition_fae10ddd"
       ],
       [
         ".relative_size",
-        "RelativeSize"
+        "RelativeSize",
+        "RelativeSize_c6020c23"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.chart.X3DDefaultSetter": "X3DDefaultSetter_e9630d25",
+      "com.sun.star.chart2.XCoordinateSystemContainer": "XCoordinateSystemContainer_995411d4",
+      "com.sun.star.chart2.XDiagram": "XDiagram_96fe0a59",
+      "com.sun.star.chart2.XTitled": "XTitled_8d490a0a"
+    },
     "quote": [
-      "RelativeSize",
-      "RelativePosition"
+      "RelativePosition_fae10ddd",
+      "RelativeSize_c6020c23"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.chart.X3DDefaultSetter",
+        "com.sun.star.chart2.XCoordinateSystemContainer",
+        "com.sun.star.chart2.XDiagram",
+        "com.sun.star.chart2.XTitled"
+      ],
+      "typing": [
+        "com.sun.star.chart2.RelativePosition",
+        "com.sun.star.chart2.RelativeSize"
+      ]
+    },
     "name": "Diagram",
     "imports": [],
     "namespace": "com.sun.star.chart2",
@@ -142,7 +169,7 @@
         },
         {
           "name": "RelativePosition",
-          "returns": "RelativePosition",
+          "returns": "RelativePosition_fae10ddd",
           "desc": [
             "The position is as a relative position on the page.",
             "",
@@ -153,7 +180,7 @@
         },
         {
           "name": "RelativeSize",
-          "returns": "RelativeSize",
+          "returns": "RelativeSize_c6020c23",
           "desc": [
             "The size of the diagram as relative size of the page size."
           ],

@@ -1,48 +1,68 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XRegressionCurveCalculator",
   "type": "interface",
   "namespace": "com.sun.star.chart2",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "XInterface_8f010a43"
       ]
     ],
     "from_imports_typing": [
       [
-        "..geometry.real_point2_d",
-        "RealPoint2D"
+        ".x_scaling",
+        "XScaling",
+        "XScaling_97500a65"
       ],
       [
-        ".x_scaling",
-        "XScaling"
+        "..geometry.real_point2_d",
+        "RealPoint2D",
+        "RealPoint2D_d6e70c78"
       ],
       [
         "..util.x_number_formats_supplier",
-        "XNumberFormatsSupplier"
+        "XNumberFormatsSupplier",
+        "XNumberFormatsSupplier_3afb0fb7"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
     "quote": [
-      "XScaling",
-      "typing.List[float]",
-      "typing.List[RealPoint2D]",
-      "XNumberFormatsSupplier"
+      "XNumberFormatsSupplier_3afb0fb7",
+      "XScaling_97500a65",
+      "typing.List[RealPoint2D_d6e70c78]",
+      "typing.List[float]"
     ],
     "typings": [
-      "typing.List[float]",
-      "typing.List[RealPoint2D]"
+      "typing.List[RealPoint2D_d6e70c78]",
+      "typing.List[float]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.chart2.XScaling",
+        "com.sun.star.geometry.RealPoint2D",
+        "com.sun.star.util.XNumberFormatsSupplier"
+      ]
+    },
     "name": "XRegressionCurveCalculator",
     "imports": [],
     "namespace": "com.sun.star.chart2",
@@ -85,7 +105,7 @@
         },
         {
           "name": "getCurveValues",
-          "returns": "typing.List[RealPoint2D]",
+          "returns": "typing.List[RealPoint2D_d6e70c78]",
           "desc": [
             "calculate multiple points of a regression curve at once.",
             "",
@@ -114,12 +134,12 @@
             ],
             [
               "xScalingX",
-              "XScaling",
+              "XScaling_97500a65",
               "in"
             ],
             [
               "xScalingY",
-              "XScaling",
+              "XScaling_97500a65",
               "in"
             ],
             [
@@ -141,7 +161,7 @@
           "args": [
             [
               "xNumFmtSupplier",
-              "XNumberFormatsSupplier",
+              "XNumberFormatsSupplier_3afb0fb7",
               "in"
             ],
             [

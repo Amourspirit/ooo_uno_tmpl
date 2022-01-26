@@ -1,12 +1,14 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "PropertyValueInfo",
   "namespace": "com.sun.star.ucb",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "sort": true,
@@ -20,17 +22,22 @@
     "from_imports": [
       [
         "..beans.property_value",
-        "PropertyValue"
+        "PropertyValue",
+        "PropertyValue_c9610c73"
       ]
     ],
     "from_imports_typing": [
       [
         ".property_value_state",
-        "PropertyValueState"
+        "PropertyValueState",
+        "PropertyValueState_f1050da5"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.beans.PropertyValue": "PropertyValue_c9610c73"
+    },
     "quote": [
-      "PropertyValueState"
+      "PropertyValueState_f1050da5"
     ],
     "typings": [],
     "requires_typing": true,
@@ -45,7 +52,7 @@
     "items": [
       {
         "name": "ValueState",
-        "type": "PropertyValueState",
+        "type": "PropertyValueState_f1050da5",
         "lines": [
           "the state of the property value."
         ]

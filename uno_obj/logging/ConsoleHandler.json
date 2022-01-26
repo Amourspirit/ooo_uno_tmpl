@@ -1,36 +1,52 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "ConsoleHandler",
   "type": "service",
   "namespace": "com.sun.star.logging",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         ".x_console_handler",
-        "XConsoleHandler"
+        "XConsoleHandler",
+        "XConsoleHandler_fdad0dd8"
       ]
     ],
     "from_imports_typing": [
       [
         "..beans.named_value",
-        "NamedValue"
+        "NamedValue",
+        "NamedValue_a37a0af3"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.logging.XConsoleHandler": "XConsoleHandler_fdad0dd8"
+    },
     "quote": [
-      "typing.List[NamedValue]"
+      "typing.List[NamedValue_a37a0af3]"
     ],
     "typings": [
-      "typing.List[NamedValue]"
+      "typing.List[NamedValue_a37a0af3]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.logging.XConsoleHandler"
+      ],
+      "typing": [
+        "com.sun.star.beans.NamedValue"
+      ]
+    },
     "name": "ConsoleHandler",
     "imports": [],
     "namespace": "com.sun.star.logging",
@@ -70,7 +86,7 @@
           "args": [
             [
               "Settings",
-              "typing.List[NamedValue]",
+              "typing.List[NamedValue_a37a0af3]",
               "in"
             ]
           ]

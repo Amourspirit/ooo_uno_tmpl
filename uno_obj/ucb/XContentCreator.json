@@ -1,42 +1,60 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XContentCreator",
   "type": "interface",
   "namespace": "com.sun.star.ucb",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "XInterface_8f010a43"
       ]
     ],
     "from_imports_typing": [
       [
-        ".x_content",
-        "XContent"
+        ".content_info",
+        "ContentInfo",
+        "ContentInfo_98f60aa9"
       ],
       [
-        ".content_info",
-        "ContentInfo"
+        ".x_content",
+        "XContent",
+        "XContent_79db0975"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
     "quote": [
-      "typing.List[ContentInfo]",
-      "ContentInfo",
-      "XContent"
+      "ContentInfo_98f60aa9",
+      "XContent_79db0975",
+      "typing.List[ContentInfo_98f60aa9]"
     ],
     "typings": [
-      "typing.List[ContentInfo]"
+      "typing.List[ContentInfo_98f60aa9]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.ucb.ContentInfo",
+        "com.sun.star.ucb.XContent"
+      ]
+    },
     "name": "XContentCreator",
     "imports": [],
     "namespace": "com.sun.star.ucb",
@@ -59,7 +77,7 @@
       "methods": [
         {
           "name": "createNewContent",
-          "returns": "XContent",
+          "returns": "XContent_79db0975",
           "desc": [
             "creates a new content of given type."
           ],
@@ -67,14 +85,14 @@
           "args": [
             [
               "Info",
-              "ContentInfo",
+              "ContentInfo_98f60aa9",
               "in"
             ]
           ]
         },
         {
           "name": "queryCreatableContentsInfo",
-          "returns": "typing.List[ContentInfo]",
+          "returns": "typing.List[ContentInfo_98f60aa9]",
           "desc": [
             "returns a list with information about the creatable contents."
           ],

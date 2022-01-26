@@ -1,31 +1,42 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XMultiFormulaTokens",
   "type": "interface",
   "namespace": "com.sun.star.sheet",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [],
     "from_imports_typing": [
       [
         ".formula_token",
-        "FormulaToken"
+        "FormulaToken",
+        "FormulaToken_bd1c0bf8"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "typing.List[FormulaToken]"
+      "typing.List[FormulaToken_bd1c0bf8]"
     ],
     "typings": [
-      "typing.List[FormulaToken]"
+      "typing.List[FormulaToken_bd1c0bf8]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [],
+      "typing": [
+        "com.sun.star.sheet.FormulaToken"
+      ]
+    },
     "name": "XMultiFormulaTokens",
     "imports": [],
     "namespace": "com.sun.star.sheet",
@@ -49,7 +60,7 @@
         },
         {
           "name": "getTokens",
-          "returns": "typing.List[FormulaToken]",
+          "returns": "typing.List[FormulaToken_bd1c0bf8]",
           "desc": [
             "returns the formula at specified index as sequence of tokens."
           ],
@@ -81,7 +92,7 @@
             ],
             [
               "aTokens",
-              "typing.List[FormulaToken]",
+              "typing.List[FormulaToken_bd1c0bf8]",
               "in"
             ]
           ]

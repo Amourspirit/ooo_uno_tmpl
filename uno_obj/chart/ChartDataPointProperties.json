@@ -1,54 +1,78 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "ChartDataPointProperties",
   "type": "service",
   "namespace": "com.sun.star.chart",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
-        "..drawing.line_properties",
-        "LineProperties"
-      ],
-      [
-        "..beans.x_property_set",
-        "XPropertySet"
-      ],
-      [
-        "..xml.user_defined_attributes_supplier",
-        "UserDefinedAttributesSupplier"
+        ".chart3_d_bar_properties",
+        "Chart3DBarProperties",
+        "Chart3DBarProperties_22f00ec5"
       ],
       [
         "..drawing.fill_properties",
-        "FillProperties"
+        "FillProperties",
+        "FillProperties_f1200da8"
+      ],
+      [
+        "..drawing.line_properties",
+        "LineProperties",
+        "LineProperties_f13f0da9"
       ],
       [
         "..style.character_properties",
-        "CharacterProperties"
+        "CharacterProperties",
+        "CharacterProperties_1d4f0ef3"
       ],
       [
-        ".chart3_d_bar_properties",
-        "Chart3DBarProperties"
+        "..xml.user_defined_attributes_supplier",
+        "UserDefinedAttributesSupplier",
+        "UserDefinedAttributesSupplier_9fbe1222"
       ]
     ],
     "from_imports_typing": [
       [
         "..graphic.x_graphic",
-        "XGraphic"
+        "XGraphic",
+        "XGraphic_a4da0afc"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.chart.Chart3DBarProperties": "Chart3DBarProperties_22f00ec5",
+      "com.sun.star.drawing.FillProperties": "FillProperties_f1200da8",
+      "com.sun.star.drawing.LineProperties": "LineProperties_f13f0da9",
+      "com.sun.star.style.CharacterProperties": "CharacterProperties_1d4f0ef3",
+      "com.sun.star.xml.UserDefinedAttributesSupplier": "UserDefinedAttributesSupplier_9fbe1222"
+    },
     "quote": [
-      "XGraphic"
+      "XGraphic_a4da0afc"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.chart.Chart3DBarProperties",
+        "com.sun.star.drawing.FillProperties",
+        "com.sun.star.drawing.LineProperties",
+        "com.sun.star.style.CharacterProperties",
+        "com.sun.star.xml.UserDefinedAttributesSupplier"
+      ],
+      "typing": [
+        "com.sun.star.graphic.XGraphic"
+      ]
+    },
     "name": "ChartDataPointProperties",
     "imports": [],
     "namespace": "com.sun.star.chart",
@@ -57,8 +81,7 @@
       "com.sun.star.drawing.LineProperties",
       "com.sun.star.style.CharacterProperties",
       "com.sun.star.xml.UserDefinedAttributesSupplier",
-      "com.sun.star.chart.Chart3DBarProperties",
-      "com.sun.star.beans.XPropertySet"
+      "com.sun.star.chart.Chart3DBarProperties"
     ],
     "desc": [
       "specifies all the properties for the graphic object of a data point (e.g., a single bar in a bar chart).",
@@ -130,7 +153,7 @@
         },
         {
           "name": "SymbolBitmap",
-          "returns": "XGraphic",
+          "returns": "XGraphic_a4da0afc",
           "desc": [
             "In charts that support symbols, you can set this property to a graphic object.",
             "",

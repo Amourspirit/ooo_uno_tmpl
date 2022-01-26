@@ -1,51 +1,78 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "PreviewView",
   "type": "service",
   "namespace": "com.sun.star.presentation",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
-        "..beans.x_property_set",
-        "XPropertySet"
+        "..awt.x_window",
+        "XWindow",
+        "XWindow_713b0924"
       ],
       [
-        "..awt.x_window",
-        "XWindow"
+        "..beans.x_property_set",
+        "XPropertySet",
+        "XPropertySet_bc180bfa"
       ],
       [
         "..drawing.x_draw_view",
-        "XDrawView"
+        "XDrawView",
+        "XDrawView_b0b80b75"
       ],
       [
         "..frame.controller",
-        "Controller"
+        "Controller",
+        "Controller_a5330b37"
       ]
     ],
     "from_imports_typing": [
       [
         "..awt.rectangle",
-        "Rectangle"
+        "Rectangle",
+        "Rectangle_84b109e9"
       ],
       [
         "..drawing.x_draw_page",
-        "XDrawPage"
+        "XDrawPage",
+        "XDrawPage_b07a0b57"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.awt.XWindow": "XWindow_713b0924",
+      "com.sun.star.beans.XPropertySet": "XPropertySet_bc180bfa",
+      "com.sun.star.drawing.XDrawView": "XDrawView_b0b80b75",
+      "com.sun.star.frame.Controller": "Controller_a5330b37"
+    },
     "quote": [
-      "XDrawPage",
-      "Rectangle"
+      "Rectangle_84b109e9",
+      "XDrawPage_b07a0b57"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.awt.XWindow",
+        "com.sun.star.beans.XPropertySet",
+        "com.sun.star.drawing.XDrawView",
+        "com.sun.star.frame.Controller"
+      ],
+      "typing": [
+        "com.sun.star.awt.Rectangle",
+        "com.sun.star.drawing.XDrawPage"
+      ]
+    },
     "name": "PreviewView",
     "imports": [],
     "namespace": "com.sun.star.presentation",
@@ -67,7 +94,7 @@
       "properties": [
         {
           "name": "CurrentPage",
-          "returns": "XDrawPage",
+          "returns": "XDrawPage_b07a0b57",
           "desc": [
             "This is the drawing page that is currently visible."
           ],
@@ -76,7 +103,7 @@
         },
         {
           "name": "VisibleArea",
-          "returns": "Rectangle",
+          "returns": "Rectangle_84b109e9",
           "desc": [
             "This is the area that is currently visible."
           ],

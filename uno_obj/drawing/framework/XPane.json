@@ -1,39 +1,57 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XPane",
   "type": "interface",
   "namespace": "com.sun.star.drawing.framework",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         ".x_resource",
-        "XResource"
+        "XResource",
+        "XResource_3bcd0f90"
       ]
     ],
     "from_imports_typing": [
       [
-        "...rendering.x_canvas",
-        "XCanvas"
+        "...awt.x_window",
+        "XWindow",
+        "XWindow_713b0924"
       ],
       [
-        "...awt.x_window",
-        "XWindow"
+        "...rendering.x_canvas",
+        "XCanvas",
+        "XCanvas_b19b0b7a"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.drawing.framework.XResource": "XResource_3bcd0f90"
+    },
     "quote": [
-      "XWindow",
-      "XCanvas"
+      "XCanvas_b19b0b7a",
+      "XWindow_713b0924"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.drawing.framework.XResource"
+      ],
+      "typing": [
+        "com.sun.star.awt.XWindow",
+        "com.sun.star.rendering.XCanvas"
+      ]
+    },
     "name": "XPane",
     "imports": [],
     "namespace": "com.sun.star.drawing.framework",
@@ -52,7 +70,7 @@
       "methods": [
         {
           "name": "getCanvas",
-          "returns": "XCanvas",
+          "returns": "XCanvas_b19b0b7a",
           "desc": [
             "Return the com.sun.star.awt.XCanvas of the pane.",
             "",
@@ -63,7 +81,7 @@
         },
         {
           "name": "getWindow",
-          "returns": "XWindow",
+          "returns": "XWindow_713b0924",
           "desc": [
             "Return the com.sun.star.awt.XWindow of the pane that is used to display a view."
           ],

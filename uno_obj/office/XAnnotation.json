@@ -1,53 +1,78 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XAnnotation",
   "type": "interface",
   "namespace": "com.sun.star.office",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
-        "..lang.x_component",
-        "XComponent"
+        "..beans.x_property_set",
+        "XPropertySet",
+        "XPropertySet_bc180bfa"
       ],
       [
-        "..beans.x_property_set",
-        "XPropertySet"
+        "..lang.x_component",
+        "XComponent",
+        "XComponent_98dc0ab5"
       ]
     ],
     "from_imports_typing": [
       [
         "..geometry.real_point2_d",
-        "RealPoint2D"
-      ],
-      [
-        "..util.date_time",
-        "DateTime"
-      ],
-      [
-        "..text.x_text",
-        "XText"
+        "RealPoint2D",
+        "RealPoint2D_d6e70c78"
       ],
       [
         "..geometry.real_size2_d",
-        "RealSize2D"
+        "RealSize2D",
+        "RealSize2D_ca1a0c09"
+      ],
+      [
+        "..text.x_text",
+        "XText",
+        "XText_690408ca"
+      ],
+      [
+        "..util.date_time",
+        "DateTime",
+        "DateTime_84de09d3"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.beans.XPropertySet": "XPropertySet_bc180bfa",
+      "com.sun.star.lang.XComponent": "XComponent_98dc0ab5"
+    },
     "quote": [
-      "RealSize2D",
-      "DateTime",
-      "XText",
-      "RealPoint2D"
+      "DateTime_84de09d3",
+      "RealPoint2D_d6e70c78",
+      "RealSize2D_ca1a0c09",
+      "XText_690408ca"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.beans.XPropertySet",
+        "com.sun.star.lang.XComponent"
+      ],
+      "typing": [
+        "com.sun.star.geometry.RealPoint2D",
+        "com.sun.star.geometry.RealSize2D",
+        "com.sun.star.text.XText",
+        "com.sun.star.util.DateTime"
+      ]
+    },
     "name": "XAnnotation",
     "imports": [],
     "namespace": "com.sun.star.office",
@@ -81,7 +106,7 @@
         },
         {
           "name": "DateTime",
-          "returns": "DateTime",
+          "returns": "DateTime_84de09d3",
           "desc": [
             "stores the date and time this annotation was last edited."
           ],
@@ -99,7 +124,7 @@
         },
         {
           "name": "Position",
-          "returns": "RealPoint2D",
+          "returns": "RealPoint2D_d6e70c78",
           "desc": [
             "this is an optional position that gives the user interface a hint where the annotation should be rendered.",
             "",
@@ -110,7 +135,7 @@
         },
         {
           "name": "Size",
-          "returns": "RealSize2D",
+          "returns": "RealSize2D_ca1a0c09",
           "desc": [
             "this is an optional size that gives the user interface a hint how large the annotation should be rendered."
           ],
@@ -119,7 +144,7 @@
         },
         {
           "name": "TextRange",
-          "returns": "XText",
+          "returns": "XText_690408ca",
           "desc": [
             "gives access to the annotations text."
           ],

@@ -1,42 +1,60 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XCellRangesAccess",
   "type": "interface",
   "namespace": "com.sun.star.sheet",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "XInterface_8f010a43"
       ]
     ],
     "from_imports_typing": [
       [
         "..table.x_cell",
-        "XCell"
+        "XCell",
+        "XCell_70d408e8"
       ],
       [
         "..table.x_cell_range",
-        "XCellRange"
+        "XCellRange",
+        "XCellRange_a2f70ad5"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
     "quote": [
-      "XCellRange",
-      "XCell",
-      "typing.List[XCellRange]"
+      "XCellRange_a2f70ad5",
+      "XCell_70d408e8",
+      "typing.List[XCellRange_a2f70ad5]"
     ],
     "typings": [
-      "typing.List[XCellRange]"
+      "typing.List[XCellRange_a2f70ad5]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.table.XCell",
+        "com.sun.star.table.XCellRange"
+      ]
+    },
     "name": "XCellRangesAccess",
     "imports": [],
     "namespace": "com.sun.star.sheet",
@@ -51,7 +69,7 @@
       "methods": [
         {
           "name": "getCellByPosition",
-          "returns": "XCell",
+          "returns": "XCell_70d408e8",
           "desc": [
             "Returns a single cell within the range."
           ],
@@ -78,7 +96,7 @@
         },
         {
           "name": "getCellRangeByPosition",
-          "returns": "XCellRange",
+          "returns": "XCellRange_a2f70ad5",
           "desc": [
             "Returns a sub-range of cells within the range."
           ],
@@ -115,7 +133,7 @@
         },
         {
           "name": "getCellRangesByName",
-          "returns": "typing.List[XCellRange]",
+          "returns": "typing.List[XCellRange_a2f70ad5]",
           "desc": [
             "Returns a sub-range of cells within the range.",
             "",

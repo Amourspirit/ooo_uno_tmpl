@@ -1,58 +1,82 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XAccessibleText",
   "type": "interface",
   "namespace": "com.sun.star.accessibility",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "XInterface_8f010a43"
       ]
     ],
     "from_imports_typing": [
       [
-        "..awt.point",
-        "Point"
-      ],
-      [
-        "..awt.rectangle",
-        "Rectangle"
+        ".accessible_scroll_type",
+        "AccessibleScrollType",
+        "AccessibleScrollType_b426126f"
       ],
       [
         ".text_segment",
-        "TextSegment"
+        "TextSegment",
+        "TextSegment_1e5b0ee8"
+      ],
+      [
+        "..awt.point",
+        "Point",
+        "Point_5fb2085e"
+      ],
+      [
+        "..awt.rectangle",
+        "Rectangle",
+        "Rectangle_84b109e9"
       ],
       [
         "..beans.property_value",
-        "PropertyValue"
-      ],
-      [
-        ".accessible_scroll_type",
-        "AccessibleScrollType"
+        "PropertyValue",
+        "PropertyValue_c9610c73"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
     "quote": [
-      "typing.List[str]",
-      "Rectangle",
-      "typing.List[PropertyValue]",
-      "Point",
-      "AccessibleScrollType",
-      "TextSegment"
+      "AccessibleScrollType_b426126f",
+      "Point_5fb2085e",
+      "Rectangle_84b109e9",
+      "TextSegment_1e5b0ee8",
+      "typing.List[PropertyValue_c9610c73]",
+      "typing.List[str]"
     ],
     "typings": [
-      "typing.List[str]",
-      "typing.List[PropertyValue]"
+      "typing.List[PropertyValue_c9610c73]",
+      "typing.List[str]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.accessibility.AccessibleScrollType",
+        "com.sun.star.accessibility.TextSegment",
+        "com.sun.star.awt.Point",
+        "com.sun.star.awt.Rectangle",
+        "com.sun.star.beans.PropertyValue"
+      ]
+    },
     "name": "XAccessibleText",
     "imports": [],
     "namespace": "com.sun.star.accessibility",
@@ -133,7 +157,7 @@
         },
         {
           "name": "getCharacterAttributes",
-          "returns": "typing.List[PropertyValue]",
+          "returns": "typing.List[PropertyValue_c9610c73]",
           "desc": [
             "Get the attribute set for the specified position.",
             "",
@@ -160,7 +184,7 @@
         },
         {
           "name": "getCharacterBounds",
-          "returns": "Rectangle",
+          "returns": "Rectangle_84b109e9",
           "desc": [
             "Return the bounding box of the specified position.",
             "",
@@ -203,7 +227,7 @@
           "args": [
             [
               "aPoint",
-              "Point",
+              "Point_5fb2085e",
               "in"
             ]
           ]
@@ -254,7 +278,7 @@
         },
         {
           "name": "getTextAtIndex",
-          "returns": "TextSegment",
+          "returns": "TextSegment_1e5b0ee8",
           "desc": [
             "Get a text portion around the given position.",
             "",
@@ -279,7 +303,7 @@
         },
         {
           "name": "getTextBeforeIndex",
-          "returns": "TextSegment",
+          "returns": "TextSegment_1e5b0ee8",
           "desc": [
             "Get a text portion before the given position.",
             "",
@@ -308,7 +332,7 @@
         },
         {
           "name": "getTextBehindIndex",
-          "returns": "TextSegment",
+          "returns": "TextSegment_1e5b0ee8",
           "desc": [
             "Get a text portion behind the given position.",
             "",
@@ -389,7 +413,7 @@
             ],
             [
               "aScrollType",
-              "AccessibleScrollType",
+              "AccessibleScrollType_b426126f",
               "in"
             ]
           ]

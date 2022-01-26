@@ -1,27 +1,40 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "TransientDocumentsContentProvider",
   "type": "service",
   "namespace": "com.sun.star.ucb",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         ".x_content_provider",
-        "XContentProvider"
+        "XContentProvider",
+        "XContentProvider_d4150cc0"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.ucb.XContentProvider": "XContentProvider_d4150cc0"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
+    "full_imports": {
+      "general": [
+        "com.sun.star.ucb.XContentProvider"
+      ],
+      "typing": []
+    },
     "name": "TransientDocumentsContentProvider",
     "imports": [],
     "namespace": "com.sun.star.ucb",

@@ -1,41 +1,59 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XXMLSignatureTemplate",
   "type": "interface",
   "namespace": "com.sun.star.xml.crypto",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         ".xxml_security_template",
-        "XXMLSecurityTemplate"
+        "XXMLSecurityTemplate",
+        "XXMLSecurityTemplate_79221105"
       ]
     ],
     "from_imports_typing": [
       [
-        "..wrapper.xxml_element_wrapper",
-        "XXMLElementWrapper"
+        ".x_uri_binding",
+        "XUriBinding",
+        "XUriBinding_f04e0d6b"
       ],
       [
-        ".x_uri_binding",
-        "XUriBinding"
+        "..wrapper.xxml_element_wrapper",
+        "XXMLElementWrapper",
+        "XXMLElementWrapper_66c0107c"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.xml.crypto.XXMLSecurityTemplate": "XXMLSecurityTemplate_79221105"
+    },
     "quote": [
-      "typing.List[XXMLElementWrapper]",
-      "XUriBinding"
+      "XUriBinding_f04e0d6b",
+      "typing.List[XXMLElementWrapper_66c0107c]"
     ],
     "typings": [
-      "typing.List[XXMLElementWrapper]"
+      "typing.List[XXMLElementWrapper_66c0107c]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.xml.crypto.XXMLSecurityTemplate"
+      ],
+      "typing": [
+        "com.sun.star.xml.crypto.XUriBinding",
+        "com.sun.star.xml.wrapper.XXMLElementWrapper"
+      ]
+    },
     "name": "XXMLSignatureTemplate",
     "imports": [],
     "namespace": "com.sun.star.xml.crypto",
@@ -56,7 +74,7 @@
       "methods": [
         {
           "name": "getBinding",
-          "returns": "XUriBinding",
+          "returns": "XUriBinding_f04e0d6b",
           "desc": [
             "Get the dynamic URI binding."
           ],
@@ -65,7 +83,7 @@
         },
         {
           "name": "getTargets",
-          "returns": "typing.List[XXMLElementWrapper]",
+          "returns": "typing.List[XXMLElementWrapper_66c0107c]",
           "desc": [
             "Get the target XML element, i.e.",
             "",
@@ -86,7 +104,7 @@
           "args": [
             [
               "aUriBinding",
-              "XUriBinding",
+              "XUriBinding_f04e0d6b",
               "in"
             ]
           ]

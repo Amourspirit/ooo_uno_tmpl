@@ -1,39 +1,54 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "PrinterDescriptor",
   "type": "service",
   "namespace": "com.sun.star.view",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [],
     "from_imports_typing": [
       [
-        ".paper_format",
-        "PaperFormat"
+        "..awt.size",
+        "Size",
+        "Size_576707ef"
       ],
       [
-        "..awt.size",
-        "Size"
+        ".paper_format",
+        "PaperFormat",
+        "PaperFormat_a5340b24"
       ],
       [
         ".paper_orientation",
-        "PaperOrientation"
+        "PaperOrientation",
+        "PaperOrientation_e36f0d47"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "Size",
-      "PaperFormat",
-      "PaperOrientation"
+      "PaperFormat_a5340b24",
+      "PaperOrientation_e36f0d47",
+      "Size_576707ef"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [],
+      "typing": [
+        "com.sun.star.awt.Size",
+        "com.sun.star.view.PaperFormat",
+        "com.sun.star.view.PaperOrientation"
+      ]
+    },
     "name": "PrinterDescriptor",
     "imports": [],
     "namespace": "com.sun.star.view",
@@ -95,7 +110,7 @@
         },
         {
           "name": "PaperFormat",
-          "returns": "PaperFormat",
+          "returns": "PaperFormat_a5340b24",
           "desc": [
             "specifies a predefined paper size or if the paper size is a user-defined size.",
             "",
@@ -106,7 +121,7 @@
         },
         {
           "name": "PaperOrientation",
-          "returns": "PaperOrientation",
+          "returns": "PaperOrientation_e36f0d47",
           "desc": [
             "specifies the orientation of the paper."
           ],
@@ -115,7 +130,7 @@
         },
         {
           "name": "PaperSize",
-          "returns": "Size",
+          "returns": "Size_576707ef",
           "desc": [
             "specifies the size of the paper in 100th mm.",
             "",

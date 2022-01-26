@@ -1,54 +1,71 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "RowSet",
   "type": "service",
   "namespace": "com.sun.star.sdbc",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
-        ".x_parameters",
-        "XParameters"
+        ".result_set",
+        "ResultSet",
+        "ResultSet_8ecf0a4f"
       ],
       [
-        ".x_column_locate",
-        "XColumnLocate"
+        ".x_parameters",
+        "XParameters",
+        "XParameters_a36c0b10"
       ],
       [
         ".x_row_set",
-        "XRowSet"
-      ],
-      [
-        ".result_set",
-        "ResultSet"
+        "XRowSet",
+        "XRowSet_7a090960"
       ]
     ],
     "from_imports_typing": [
       [
         "..container.x_name_access",
-        "XNameAccess"
+        "XNameAccess",
+        "XNameAccess_e2ab0cf6"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.sdbc.ResultSet": "ResultSet_8ecf0a4f",
+      "com.sun.star.sdbc.XParameters": "XParameters_a36c0b10",
+      "com.sun.star.sdbc.XRowSet": "XRowSet_7a090960"
+    },
     "quote": [
-      "XNameAccess"
+      "XNameAccess_e2ab0cf6"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.sdbc.ResultSet",
+        "com.sun.star.sdbc.XParameters",
+        "com.sun.star.sdbc.XRowSet"
+      ],
+      "typing": [
+        "com.sun.star.container.XNameAccess"
+      ]
+    },
     "name": "RowSet",
     "imports": [],
     "namespace": "com.sun.star.sdbc",
     "extends": [
       "com.sun.star.sdbc.ResultSet",
       "com.sun.star.sdbc.XRowSet",
-      "com.sun.star.sdbc.XParameters",
-      "com.sun.star.sdbc.XColumnLocate"
+      "com.sun.star.sdbc.XParameters"
     ],
     "desc": [
       "is a client side ResultSet, which combines the characteristics of a com.sun.star.sdbc.Statement and a com.sun.star.sdbc.ResultSet.",
@@ -154,7 +171,7 @@
         },
         {
           "name": "TypeMap",
-          "returns": "XNameAccess",
+          "returns": "XNameAccess_e2ab0cf6",
           "desc": [
             "is the type map that will be used for the custom mapping of SQL structured types and distinct types."
           ],

@@ -1,44 +1,64 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "FilterDialog",
   "type": "service",
   "namespace": "com.sun.star.sdb",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..ui.dialogs.x_executable_dialog",
-        "XExecutableDialog"
+        "XExecutableDialog",
+        "XExecutableDialog_450f0fa1"
       ]
     ],
     "from_imports_typing": [
       [
         "..awt.x_window",
-        "XWindow"
+        "XWindow",
+        "XWindow_713b0924"
       ],
       [
         ".x_single_select_query_composer",
-        "XSingleSelectQueryComposer"
+        "XSingleSelectQueryComposer",
+        "XSingleSelectQueryComposer_66e310b9"
       ],
       [
         "..sdbc.x_row_set",
-        "XRowSet"
+        "XRowSet",
+        "XRowSet_7a090960"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.ui.dialogs.XExecutableDialog": "XExecutableDialog_450f0fa1"
+    },
     "quote": [
-      "XRowSet",
-      "XWindow",
-      "XSingleSelectQueryComposer"
+      "XRowSet_7a090960",
+      "XSingleSelectQueryComposer_66e310b9",
+      "XWindow_713b0924"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.ui.dialogs.XExecutableDialog"
+      ],
+      "typing": [
+        "com.sun.star.awt.XWindow",
+        "com.sun.star.sdb.XSingleSelectQueryComposer",
+        "com.sun.star.sdbc.XRowSet"
+      ]
+    },
     "name": "FilterDialog",
     "imports": [],
     "namespace": "com.sun.star.sdb",
@@ -70,17 +90,17 @@
           "args": [
             [
               "QueryComposer",
-              "XSingleSelectQueryComposer",
+              "XSingleSelectQueryComposer_66e310b9",
               "in"
             ],
             [
               "RowSet",
-              "XRowSet",
+              "XRowSet_7a090960",
               "in"
             ],
             [
               "ParentWindow",
-              "XWindow",
+              "XWindow_713b0924",
               "in"
             ]
           ]

@@ -1,42 +1,57 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XPlayer",
   "type": "interface",
   "namespace": "com.sun.star.media",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [],
     "from_imports_typing": [
       [
+        "..awt.size",
+        "Size",
+        "Size_576707ef"
+      ],
+      [
         ".x_frame_grabber",
-        "XFrameGrabber"
+        "XFrameGrabber",
+        "XFrameGrabber_c56f0c00"
       ],
       [
         ".x_player_window",
-        "XPlayerWindow"
-      ],
-      [
-        "..awt.size",
-        "Size"
+        "XPlayerWindow",
+        "XPlayerWindow_c7130c45"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "typing.List[object]",
-      "XPlayerWindow",
-      "XFrameGrabber",
-      "Size"
+      "Size_576707ef",
+      "XFrameGrabber_c56f0c00",
+      "XPlayerWindow_c7130c45",
+      "typing.List[object]"
     ],
     "typings": [
       "typing.List[object]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [],
+      "typing": [
+        "com.sun.star.awt.Size",
+        "com.sun.star.media.XFrameGrabber",
+        "com.sun.star.media.XPlayerWindow"
+      ]
+    },
     "name": "XPlayer",
     "imports": [],
     "namespace": "com.sun.star.media",
@@ -51,7 +66,7 @@
       "methods": [
         {
           "name": "createFrameGrabber",
-          "returns": "XFrameGrabber",
+          "returns": "XFrameGrabber_c56f0c00",
           "desc": [
             "gets a frame grabber for this stream."
           ],
@@ -60,7 +75,7 @@
         },
         {
           "name": "createPlayerWindow",
-          "returns": "XPlayerWindow",
+          "returns": "XPlayerWindow_c7130c45",
           "desc": [
             "gets a new player window for this stream control"
           ],
@@ -93,7 +108,7 @@
         },
         {
           "name": "getPreferredPlayerWindowSize",
-          "returns": "Size",
+          "returns": "Size_576707ef",
           "desc": [
             "gets the preferred window size"
           ],

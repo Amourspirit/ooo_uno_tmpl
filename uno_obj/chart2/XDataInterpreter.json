@@ -1,52 +1,74 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XDataInterpreter",
   "type": "interface",
   "namespace": "com.sun.star.chart2",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "XInterface_8f010a43"
       ]
     ],
     "from_imports_typing": [
       [
-        ".x_data_series",
-        "XDataSeries"
-      ],
-      [
-        ".data.x_data_source",
-        "XDataSource"
-      ],
-      [
         "..beans.property_value",
-        "PropertyValue"
+        "PropertyValue",
+        "PropertyValue_c9610c73"
       ],
       [
         ".interpreted_data",
-        "InterpretedData"
+        "InterpretedData",
+        "InterpretedData_ed4f0d4c"
+      ],
+      [
+        ".x_data_series",
+        "XDataSeries",
+        "XDataSeries_b8150b89"
+      ],
+      [
+        ".data.x_data_source",
+        "XDataSource",
+        "XDataSource_f6340d57"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
     "quote": [
-      "InterpretedData",
-      "typing.List[XDataSeries]",
-      "XDataSource",
-      "typing.List[PropertyValue]"
+      "InterpretedData_ed4f0d4c",
+      "XDataSource_f6340d57",
+      "typing.List[PropertyValue_c9610c73]",
+      "typing.List[XDataSeries_b8150b89]"
     ],
     "typings": [
-      "typing.List[XDataSeries]",
-      "typing.List[PropertyValue]"
+      "typing.List[PropertyValue_c9610c73]",
+      "typing.List[XDataSeries_b8150b89]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.beans.PropertyValue",
+        "com.sun.star.chart2.InterpretedData",
+        "com.sun.star.chart2.XDataSeries",
+        "com.sun.star.chart2.data.XDataSource"
+      ]
+    },
     "name": "XDataInterpreter",
     "imports": [],
     "namespace": "com.sun.star.chart2",
@@ -78,7 +100,7 @@
         },
         {
           "name": "interpretDataSource",
-          "returns": "InterpretedData",
+          "returns": "InterpretedData_ed4f0d4c",
           "desc": [
             "Interprets the given data.",
             "",
@@ -88,17 +110,17 @@
           "args": [
             [
               "xSource",
-              "XDataSource",
+              "XDataSource_f6340d57",
               "in"
             ],
             [
               "aArguments",
-              "typing.List[PropertyValue]",
+              "typing.List[PropertyValue_c9610c73]",
               "in"
             ],
             [
               "aSeriesToReUse",
-              "typing.List[XDataSeries]",
+              "typing.List[XDataSeries_b8150b89]",
               "in"
             ]
           ]
@@ -113,14 +135,14 @@
           "args": [
             [
               "aInterpretedData",
-              "InterpretedData",
+              "InterpretedData_ed4f0d4c",
               "in"
             ]
           ]
         },
         {
           "name": "mergeInterpretedData",
-          "returns": "XDataSource",
+          "returns": "XDataSource_f6340d57",
           "desc": [
             "Try to reverse the operation done in interpretDataSource().",
             "",
@@ -130,14 +152,14 @@
           "args": [
             [
               "aInterpretedData",
-              "InterpretedData",
+              "InterpretedData_ed4f0d4c",
               "in"
             ]
           ]
         },
         {
           "name": "reinterpretDataSeries",
-          "returns": "InterpretedData",
+          "returns": "InterpretedData_ed4f0d4c",
           "desc": [
             "Re-interprets the data given in aInterpretedData while keeping the number of data series and the categories."
           ],
@@ -145,7 +167,7 @@
           "args": [
             [
               "aInterpretedData",
-              "InterpretedData",
+              "InterpretedData_ed4f0d4c",
               "in"
             ]
           ]

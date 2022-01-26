@@ -1,39 +1,57 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "CopyTableWizard",
   "type": "service",
   "namespace": "com.sun.star.sdb.application",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         ".x_copy_table_wizard",
-        "XCopyTableWizard"
+        "XCopyTableWizard",
+        "XCopyTableWizard_89b7114f"
       ]
     ],
     "from_imports_typing": [
       [
         "...beans.x_property_set",
-        "XPropertySet"
+        "XPropertySet",
+        "XPropertySet_bc180bfa"
       ],
       [
         "...task.x_interaction_handler",
-        "XInteractionHandler"
+        "XInteractionHandler",
+        "XInteractionHandler_bf80e51"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.sdb.application.XCopyTableWizard": "XCopyTableWizard_89b7114f"
+    },
     "quote": [
-      "XInteractionHandler",
-      "XPropertySet"
+      "XInteractionHandler_bf80e51",
+      "XPropertySet_bc180bfa"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.sdb.application.XCopyTableWizard"
+      ],
+      "typing": [
+        "com.sun.star.beans.XPropertySet",
+        "com.sun.star.task.XInteractionHandler"
+      ]
+    },
     "name": "CopyTableWizard",
     "imports": [],
     "namespace": "com.sun.star.sdb.application",
@@ -82,12 +100,12 @@
           "args": [
             [
               "Source",
-              "XPropertySet",
+              "XPropertySet_bc180bfa",
               "in"
             ],
             [
               "Destination",
-              "XPropertySet",
+              "XPropertySet_bc180bfa",
               "in"
             ]
           ]
@@ -110,17 +128,17 @@
           "args": [
             [
               "Source",
-              "XPropertySet",
+              "XPropertySet_bc180bfa",
               "in"
             ],
             [
               "Destination",
-              "XPropertySet",
+              "XPropertySet_bc180bfa",
               "in"
             ],
             [
               "InteractionHandler",
-              "XInteractionHandler",
+              "XInteractionHandler_bf80e51",
               "in"
             ]
           ]

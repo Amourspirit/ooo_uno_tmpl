@@ -1,34 +1,50 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "CandleStickChartType",
   "type": "service",
   "namespace": "com.sun.star.chart2",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         ".chart_type",
-        "ChartType"
+        "ChartType",
+        "ChartType_a2640ae0"
       ]
     ],
     "from_imports_typing": [
       [
         "..beans.x_property_set",
-        "XPropertySet"
+        "XPropertySet",
+        "XPropertySet_bc180bfa"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.chart2.ChartType": "ChartType_a2640ae0"
+    },
     "quote": [
-      "XPropertySet"
+      "XPropertySet_bc180bfa"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.chart2.ChartType"
+      ],
+      "typing": [
+        "com.sun.star.beans.XPropertySet"
+      ]
+    },
     "name": "CandleStickChartType",
     "imports": [],
     "namespace": "com.sun.star.chart2",
@@ -43,7 +59,7 @@
       "properties": [
         {
           "name": "BlackDay",
-          "returns": "XPropertySet",
+          "returns": "XPropertySet_bc180bfa",
           "desc": [
             "If the candlestick chart shows Japanese candlesticks, that is the property Japanese is TRUE, the property set given here contains the formatting attributes of the black boxes, i.e.",
             "",
@@ -99,7 +115,7 @@
         },
         {
           "name": "WhiteDay",
-          "returns": "XPropertySet",
+          "returns": "XPropertySet_bc180bfa",
           "desc": [
             "If the candlestick chart shows Japanese candlesticks, that is the property Japanese is TRUE, the property set given here contains the formatting attributes of the white boxes, i.e.",
             "",

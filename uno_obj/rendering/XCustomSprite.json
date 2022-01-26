@@ -1,34 +1,50 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XCustomSprite",
   "type": "interface",
   "namespace": "com.sun.star.rendering",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         ".x_sprite",
-        "XSprite"
+        "XSprite",
+        "XSprite_b2470b95"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_canvas",
-        "XCanvas"
+        "XCanvas",
+        "XCanvas_b19b0b7a"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.rendering.XSprite": "XSprite_b2470b95"
+    },
     "quote": [
-      "XCanvas"
+      "XCanvas_b19b0b7a"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.rendering.XSprite"
+      ],
+      "typing": [
+        "com.sun.star.rendering.XCanvas"
+      ]
+    },
     "name": "XCustomSprite",
     "imports": [],
     "namespace": "com.sun.star.rendering",
@@ -47,7 +63,7 @@
       "methods": [
         {
           "name": "getContentCanvas",
-          "returns": "XCanvas",
+          "returns": "XCanvas_b19b0b7a",
           "desc": [
             "Query a render canvas for this sprite's content.",
             "",

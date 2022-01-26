@@ -1,41 +1,59 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XBitmapPalette",
   "type": "interface",
   "namespace": "com.sun.star.rendering",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "XInterface_8f010a43"
       ]
     ],
     "from_imports_typing": [
       [
         ".color_component",
-        "ColorComponent"
+        "ColorComponent",
+        "ColorComponent_e4c0e78"
       ],
       [
         ".x_color_space",
-        "XColorSpace"
+        "XColorSpace",
+        "XColorSpace_e3940d09"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
     "quote": [
-      "typing.List[ColorComponent]",
-      "XColorSpace"
+      "XColorSpace_e3940d09",
+      "typing.List[ColorComponent_e4c0e78]"
     ],
     "typings": [
-      "typing.List[ColorComponent]"
+      "typing.List[ColorComponent_e4c0e78]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.rendering.ColorComponent",
+        "com.sun.star.rendering.XColorSpace"
+      ]
+    },
     "name": "XBitmapPalette",
     "imports": [],
     "namespace": "com.sun.star.rendering",
@@ -54,7 +72,7 @@
       "methods": [
         {
           "name": "getColorSpace",
-          "returns": "XColorSpace",
+          "returns": "XColorSpace_e3940d09",
           "desc": [
             "Query associated color space."
           ],
@@ -73,7 +91,7 @@
           "args": [
             [
               "entry",
-              "typing.List[ColorComponent]",
+              "typing.List[ColorComponent_e4c0e78]",
               "out"
             ],
             [
@@ -105,7 +123,7 @@
           "args": [
             [
               "color",
-              "typing.List[ColorComponent]",
+              "typing.List[ColorComponent_e4c0e78]",
               "in"
             ],
             [

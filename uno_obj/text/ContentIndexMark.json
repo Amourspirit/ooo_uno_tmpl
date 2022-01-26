@@ -1,36 +1,44 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "ContentIndexMark",
   "type": "service",
   "namespace": "com.sun.star.text",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
-        ".text_content",
-        "TextContent"
-      ],
-      [
         ".base_index_mark",
-        "BaseIndexMark"
+        "BaseIndexMark",
+        "BaseIndexMark_bbb30bcb"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.text.BaseIndexMark": "BaseIndexMark_bbb30bcb"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
+    "full_imports": {
+      "general": [
+        "com.sun.star.text.BaseIndexMark"
+      ],
+      "typing": []
+    },
     "name": "ContentIndexMark",
     "imports": [],
     "namespace": "com.sun.star.text",
     "extends": [
-      "com.sun.star.text.TextContent",
       "com.sun.star.text.BaseIndexMark"
     ],
     "desc": [

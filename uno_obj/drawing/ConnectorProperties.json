@@ -1,29 +1,40 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "ConnectorProperties",
   "type": "service",
   "namespace": "com.sun.star.drawing",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [],
     "from_imports_typing": [
       [
         ".connector_type",
-        "ConnectorType"
+        "ConnectorType",
+        "ConnectorType_e40b0d41"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "ConnectorType"
+      "ConnectorType_e40b0d41"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [],
+      "typing": [
+        "com.sun.star.drawing.ConnectorType"
+      ]
+    },
     "name": "ConnectorProperties",
     "imports": [],
     "namespace": "com.sun.star.drawing",
@@ -36,7 +47,7 @@
       "properties": [
         {
           "name": "EdgeKind",
-          "returns": "ConnectorType",
+          "returns": "ConnectorType_e40b0d41",
           "desc": [
             "This property contains the kind of the connector."
           ],

@@ -1,67 +1,90 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XPackage",
   "type": "interface",
   "namespace": "com.sun.star.deployment",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..lang.x_component",
-        "XComponent"
+        "XComponent",
+        "XComponent_98dc0ab5"
       ],
       [
         "..util.x_modify_broadcaster",
-        "XModifyBroadcaster"
+        "XModifyBroadcaster",
+        "XModifyBroadcaster_fd990df0"
       ]
     ],
     "from_imports_typing": [
       [
-        "..ucb.x_command_environment",
-        "XCommandEnvironment"
-      ],
-      [
-        ".x_package",
-        "XPackage"
-      ],
-      [
-        "..graphic.x_graphic",
-        "XGraphic"
+        "..beans.string_pair",
+        "StringPair",
+        "StringPair_a4bc0b14"
       ],
       [
         ".x_package_type_info",
-        "XPackageTypeInfo"
+        "XPackageTypeInfo",
+        "XPackageTypeInfo_3bc70f7b"
       ],
       [
-        "..beans.string_pair",
-        "StringPair"
+        "..graphic.x_graphic",
+        "XGraphic",
+        "XGraphic_a4da0afc"
       ],
       [
         "..task.x_abort_channel",
-        "XAbortChannel"
+        "XAbortChannel",
+        "XAbortChannel_baca0bc4"
+      ],
+      [
+        "..ucb.x_command_environment",
+        "XCommandEnvironment",
+        "XCommandEnvironment_fb330dee"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.lang.XComponent": "XComponent_98dc0ab5",
+      "com.sun.star.util.XModifyBroadcaster": "XModifyBroadcaster_fd990df0"
+    },
     "quote": [
-      "typing.List[str]",
-      "StringPair",
-      "XGraphic",
-      "XCommandEnvironment",
+      "StringPair_a4bc0b14",
+      "XAbortChannel_baca0bc4",
+      "XCommandEnvironment_fb330dee",
+      "XGraphic_a4da0afc",
+      "XPackageTypeInfo_3bc70f7b",
       "typing.List[XPackage]",
-      "XPackageTypeInfo",
-      "XAbortChannel"
+      "typing.List[str]"
     ],
     "typings": [
-      "typing.List[str]",
-      "typing.List[XPackage]"
+      "typing.List[XPackage]",
+      "typing.List[str]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.lang.XComponent",
+        "com.sun.star.util.XModifyBroadcaster"
+      ],
+      "typing": [
+        "com.sun.star.beans.StringPair",
+        "com.sun.star.deployment.XPackageTypeInfo",
+        "com.sun.star.graphic.XGraphic",
+        "com.sun.star.task.XAbortChannel",
+        "com.sun.star.ucb.XCommandEnvironment"
+      ]
+    },
     "name": "XPackage",
     "imports": [],
     "namespace": "com.sun.star.deployment",
@@ -99,7 +122,7 @@
           "args": [
             [
               "xCmdEnv",
-              "XCommandEnvironment",
+              "XCommandEnvironment_fb330dee",
               "in"
             ]
           ]
@@ -121,12 +144,12 @@
           "args": [
             [
               "xAbortChannel",
-              "XAbortChannel",
+              "XAbortChannel_baca0bc4",
               "in"
             ],
             [
               "xCmdEnv",
-              "XCommandEnvironment",
+              "XCommandEnvironment_fb330dee",
               "in"
             ],
             [
@@ -138,7 +161,7 @@
         },
         {
           "name": "createAbortChannel",
-          "returns": "XAbortChannel",
+          "returns": "XAbortChannel_baca0bc4",
           "desc": [
             "creates a command channel to be used to asynchronously abort a command."
           ],
@@ -175,7 +198,7 @@
             ],
             [
               "xCmdEnv",
-              "XCommandEnvironment",
+              "XCommandEnvironment_fb330dee",
               "in"
             ]
           ]
@@ -197,12 +220,12 @@
           "args": [
             [
               "xAbortChannel",
-              "XAbortChannel",
+              "XAbortChannel_baca0bc4",
               "in"
             ],
             [
               "xCmdEnv",
-              "XCommandEnvironment",
+              "XCommandEnvironment_fb330dee",
               "in"
             ]
           ]
@@ -233,7 +256,7 @@
         },
         {
           "name": "getIcon",
-          "returns": "XGraphic",
+          "returns": "XGraphic_a4da0afc",
           "desc": [
             "returns an icon for a package."
           ],
@@ -280,7 +303,7 @@
         },
         {
           "name": "getPackageType",
-          "returns": "XPackageTypeInfo",
+          "returns": "XPackageTypeInfo_3bc70f7b",
           "desc": [
             "returns the XPackageTypeInfo, e.g.",
             "",
@@ -291,7 +314,7 @@
         },
         {
           "name": "getPublisherInfo",
-          "returns": "StringPair",
+          "returns": "StringPair_a4bc0b14",
           "desc": [
             "returns the publisher info for the package, the strings might be empty, if there is no publisher",
             "",
@@ -389,12 +412,12 @@
           "args": [
             [
               "xAbortChannel",
-              "XAbortChannel",
+              "XAbortChannel_baca0bc4",
               "in"
             ],
             [
               "xCmdEnv",
-              "XCommandEnvironment",
+              "XCommandEnvironment_fb330dee",
               "in"
             ]
           ]
@@ -433,12 +456,12 @@
             ],
             [
               "xAbortChannel",
-              "XAbortChannel",
+              "XAbortChannel_baca0bc4",
               "in"
             ],
             [
               "xCmdEnv",
-              "XCommandEnvironment",
+              "XCommandEnvironment_fb330dee",
               "in"
             ]
           ]
@@ -465,12 +488,12 @@
             ],
             [
               "xAbortChannel",
-              "XAbortChannel",
+              "XAbortChannel_baca0bc4",
               "in"
             ],
             [
               "xCmdEnv",
-              "XCommandEnvironment",
+              "XCommandEnvironment_fb330dee",
               "in"
             ]
           ]

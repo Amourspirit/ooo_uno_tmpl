@@ -1,48 +1,68 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XSlideRenderer",
   "type": "interface",
   "namespace": "com.sun.star.drawing",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [],
     "from_imports_typing": [
       [
-        "..rendering.x_canvas",
-        "XCanvas"
+        "..awt.size",
+        "Size",
+        "Size_576707ef"
       ],
       [
         "..awt.x_bitmap",
-        "XBitmap"
-      ],
-      [
-        "..rendering.x_bitmap",
-        "XBitmap"
+        "XBitmap",
+        "XBitmap_70cd0909"
       ],
       [
         ".x_draw_page",
-        "XDrawPage"
+        "XDrawPage",
+        "XDrawPage_b07a0b57"
       ],
       [
-        "..awt.size",
-        "Size"
+        "..rendering.x_bitmap",
+        "XBitmap",
+        "XBitmap_b1b70b7b"
+      ],
+      [
+        "..rendering.x_canvas",
+        "XCanvas",
+        "XCanvas_b19b0b7a"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "XBitmap",
-      "Size",
-      "XDrawPage",
-      "XCanvas"
+      "Size_576707ef",
+      "XBitmap_70cd0909",
+      "XBitmap_b1b70b7b",
+      "XCanvas_b19b0b7a",
+      "XDrawPage_b07a0b57"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [],
+      "typing": [
+        "com.sun.star.awt.Size",
+        "com.sun.star.awt.XBitmap",
+        "com.sun.star.drawing.XDrawPage",
+        "com.sun.star.rendering.XBitmap",
+        "com.sun.star.rendering.XCanvas"
+      ]
+    },
     "name": "XSlideRenderer",
     "imports": [],
     "namespace": "com.sun.star.drawing",
@@ -55,7 +75,7 @@
       "methods": [
         {
           "name": "calculatePreviewSize",
-          "returns": "Size",
+          "returns": "Size_576707ef",
           "desc": [
             "Return a size that has the given aspect ratio and shares either the width or the height with the given maximum size."
           ],
@@ -68,14 +88,14 @@
             ],
             [
               "aMaximumPreviewPixelSize",
-              "Size",
+              "Size_576707ef",
               "in"
             ]
           ]
         },
         {
           "name": "createPreview",
-          "returns": "XBitmap",
+          "returns": "XBitmap_70cd0909",
           "desc": [
             "Create a preview for the given slide that has the same aspect ratio as the page and is as large as possible but not larger than the specified size.",
             "",
@@ -85,12 +105,12 @@
           "args": [
             [
               "xSlide",
-              "XDrawPage",
+              "XDrawPage_b07a0b57",
               "in"
             ],
             [
               "aMaximumPreviewPixelSize",
-              "Size",
+              "Size_576707ef",
               "in"
             ],
             [
@@ -102,7 +122,7 @@
         },
         {
           "name": "createPreviewForCanvas",
-          "returns": "XBitmap",
+          "returns": "XBitmap_b1b70b7b",
           "desc": [
             "Exactly the same functionality as createPreview(), only a different return type: com.sun.star.rendering.XBitmap instead of com.sun.star.awt.XBitmap."
           ],
@@ -110,12 +130,12 @@
           "args": [
             [
               "xSlide",
-              "XDrawPage",
+              "XDrawPage_b07a0b57",
               "in"
             ],
             [
               "aMaximumPreviewPixelSize",
-              "Size",
+              "Size_576707ef",
               "in"
             ],
             [
@@ -125,7 +145,7 @@
             ],
             [
               "xCanvas",
-              "XCanvas",
+              "XCanvas_b19b0b7a",
               "in"
             ]
           ]

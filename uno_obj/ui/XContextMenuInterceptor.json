@@ -1,39 +1,57 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XContextMenuInterceptor",
   "type": "interface",
   "namespace": "com.sun.star.ui",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "XInterface_8f010a43"
       ]
     ],
     "from_imports_typing": [
       [
-        ".context_menu_interceptor_action",
-        "ContextMenuInterceptorAction"
+        ".context_menu_execute_event",
+        "ContextMenuExecuteEvent",
+        "ContextMenuExecuteEvent_2a210f35"
       ],
       [
-        ".context_menu_execute_event",
-        "ContextMenuExecuteEvent"
+        ".context_menu_interceptor_action",
+        "ContextMenuInterceptorAction",
+        "ContextMenuInterceptorAction_7cf4114d"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
     "quote": [
-      "ContextMenuInterceptorAction",
-      "ContextMenuExecuteEvent"
+      "ContextMenuExecuteEvent_2a210f35",
+      "ContextMenuInterceptorAction_7cf4114d"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.ui.ContextMenuExecuteEvent",
+        "com.sun.star.ui.ContextMenuInterceptorAction"
+      ]
+    },
     "name": "XContextMenuInterceptor",
     "imports": [],
     "namespace": "com.sun.star.ui",
@@ -48,7 +66,7 @@
       "methods": [
         {
           "name": "notifyContextMenuExecute",
-          "returns": "ContextMenuInterceptorAction",
+          "returns": "ContextMenuInterceptorAction_7cf4114d",
           "desc": [
             "notifies the interceptor about the request to execute a ContextMenu.",
             "",
@@ -58,7 +76,7 @@
           "args": [
             [
               "aEvent",
-              "ContextMenuExecuteEvent",
+              "ContextMenuExecuteEvent_2a210f35",
               "in"
             ]
           ]

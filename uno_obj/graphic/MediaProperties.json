@@ -1,39 +1,54 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "MediaProperties",
   "type": "service",
   "namespace": "com.sun.star.graphic",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [],
     "from_imports_typing": [
       [
-        "..io.x_stream",
-        "XStream"
-      ],
-      [
         "..beans.property_values",
-        "PropertyValues"
+        "PropertyValues",
+        "PropertyValues_d6470ce6"
       ],
       [
         "..io.x_input_stream",
-        "XInputStream"
+        "XInputStream",
+        "XInputStream_98d40ab4"
+      ],
+      [
+        "..io.x_stream",
+        "XStream",
+        "XStream_678908a4"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "PropertyValues",
-      "XInputStream",
-      "XStream"
+      "PropertyValues_d6470ce6",
+      "XInputStream_98d40ab4",
+      "XStream_678908a4"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [],
+      "typing": [
+        "com.sun.star.beans.PropertyValues",
+        "com.sun.star.io.XInputStream",
+        "com.sun.star.io.XStream"
+      ]
+    },
     "name": "MediaProperties",
     "imports": [],
     "namespace": "com.sun.star.graphic",
@@ -46,7 +61,7 @@
       "properties": [
         {
           "name": "FilterData",
-          "returns": "PropertyValues",
+          "returns": "PropertyValues_d6470ce6",
           "desc": [
             "Additional properties that will be passed to the appropriate filter module."
           ],
@@ -55,7 +70,7 @@
         },
         {
           "name": "InputStream",
-          "returns": "XInputStream",
+          "returns": "XInputStream_98d40ab4",
           "desc": [
             "This property is only used for loading graphics or querying graphic descriptors.",
             "",
@@ -77,7 +92,7 @@
         },
         {
           "name": "OutputStream",
-          "returns": "XStream",
+          "returns": "XStream_678908a4",
           "desc": [
             "This property is only used for storing graphics.",
             "",

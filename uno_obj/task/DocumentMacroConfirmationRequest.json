@@ -1,37 +1,62 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "DocumentMacroConfirmationRequest",
   "type": "exception",
   "namespace": "com.sun.star.task",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         ".classified_interaction_request",
-        "ClassifiedInteractionRequest"
+        "ClassifiedInteractionRequest",
+        "ClassifiedInteractionRequest_9f72121b"
       ]
     ],
     "from_imports_typing": [
       [
         "..embed.x_storage",
-        "XStorage"
+        "XStorage",
+        "XStorage_8e460a32"
+      ],
+      [
+        "..security.document_signature_information",
+        "DocumentSignatureInformation",
+        "DocumentSignatureInformation_f36c13f7"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.task.ClassifiedInteractionRequest": "ClassifiedInteractionRequest_9f72121b"
+    },
     "quote": [
-      "XStorage"
+      "XStorage_8e460a32",
+      "typing.List[DocumentSignatureInformation_f36c13f7]"
     ],
-    "typings": [],
+    "typings": [
+      "typing.List[DocumentSignatureInformation_f36c13f7]"
+    ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.task.ClassifiedInteractionRequest"
+      ],
+      "typing": [
+        "com.sun.star.embed.XStorage",
+        "com.sun.star.security.DocumentSignatureInformation"
+      ]
+    },
     "name": "DocumentMacroConfirmationRequest",
-    "namespace": "com.sun.star.task",
     "imports": [],
+    "namespace": "com.sun.star.task",
     "extends": [
       "com.sun.star.task.ClassifiedInteractionRequest"
     ],
@@ -40,10 +65,21 @@
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/exceptioncom_1_1sun_1_1star_1_1task_1_1DocumentMacroConfirmationRequest.html",
     "items": {
+      "types": [
+        {
+          "name": "DocumentSignatureInformation",
+          "returns": "typing.List[DocumentSignatureInformation_f36c13f7]",
+          "desc": [
+            "contains information about the signatures in the document"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ],
       "properties": [
         {
           "name": "DocumentStorage",
-          "returns": "XStorage",
+          "returns": "XStorage_8e460a32",
           "desc": [
             "refers to the storage related to the last committed version of the document.",
             "",

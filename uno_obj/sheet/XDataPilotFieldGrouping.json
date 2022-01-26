@@ -1,42 +1,60 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XDataPilotFieldGrouping",
   "type": "interface",
   "namespace": "com.sun.star.sheet",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "XInterface_8f010a43"
       ]
     ],
     "from_imports_typing": [
       [
         ".data_pilot_field_group_info",
-        "DataPilotFieldGroupInfo"
+        "DataPilotFieldGroupInfo",
+        "DataPilotFieldGroupInfo_56691020"
       ],
       [
         ".x_data_pilot_field",
-        "XDataPilotField"
+        "XDataPilotField",
+        "XDataPilotField_e0350cdf"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
     "quote": [
-      "typing.List[str]",
-      "DataPilotFieldGroupInfo",
-      "XDataPilotField"
+      "DataPilotFieldGroupInfo_56691020",
+      "XDataPilotField_e0350cdf",
+      "typing.List[str]"
     ],
     "typings": [
       "typing.List[str]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.sheet.DataPilotFieldGroupInfo",
+        "com.sun.star.sheet.XDataPilotField"
+      ]
+    },
     "name": "XDataPilotFieldGrouping",
     "imports": [],
     "namespace": "com.sun.star.sheet",
@@ -51,7 +69,7 @@
       "methods": [
         {
           "name": "createDateGroup",
-          "returns": "XDataPilotField",
+          "returns": "XDataPilotField_e0350cdf",
           "desc": [
             "Groups the members of this field by dates, according to the passed settings.",
             "",
@@ -63,14 +81,14 @@
           "args": [
             [
               "aInfo",
-              "DataPilotFieldGroupInfo",
+              "DataPilotFieldGroupInfo_56691020",
               "in"
             ]
           ]
         },
         {
           "name": "createNameGroup",
-          "returns": "XDataPilotField",
+          "returns": "XDataPilotField_e0350cdf",
           "desc": [
             "Creates a new DataPilot field which contains a group containing the given DataPilot field items (members).",
             "",

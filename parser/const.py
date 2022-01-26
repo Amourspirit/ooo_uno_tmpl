@@ -3,6 +3,7 @@
 """
 Process a link to a page that contains a constant
 """
+# region Imports
 from enum import IntEnum, auto
 import os
 import sys
@@ -15,7 +16,6 @@ from typing import Dict, List, Set, Union
 from dataclasses import dataclass, field
 from bs4.element import ResultSet, Tag
 from kwhelp.decorator import DecFuncEnum, TypeCheckKw
-from collections import namedtuple
 from pathlib import Path
 from abc import ABC, abstractmethod, abstractproperty
 try:
@@ -25,8 +25,10 @@ except ModuleNotFoundError:
 from parser.base import SoupObj, SummaryInfo
 from logger.log_handle import get_logger
 from parser import __version__, JSON_ID
-from parser.type_mod import PythonType
+from parser.mod_type import PythonType
+# endregion Imports
 
+# region Logger
 logger = None
 
 def _set_loggers(l: Union[logging.Logger, None]):
@@ -35,11 +37,13 @@ def _set_loggers(l: Union[logging.Logger, None]):
     base.logger = l
 
 _set_loggers(None)
+# endregion Logger
 
+# region Regex
 pattern_hex = re.compile(r"0x[0-9A-Fa-f]+")
+# endregion Regex
 
-dataitem = namedtuple(
-    'dataitem', ['value', 'raw_value', 'name', 'datatype', 'lines'])
+# region DataClass
 
 @dataclass
 class DataItem:
@@ -48,6 +52,13 @@ class DataItem:
     type: str
     val: 'Val'
     lines: List[str] = field(default_factory=list)
+    
+    def __lt__(self, other: object):
+        if not isinstance(other, DataItem):
+            return NotImplemented
+        return self.name < other.name
+
+# endregion DataClass
 
 # region Rule Engine
 class ValTypeEnum(IntEnum):
@@ -126,6 +137,10 @@ class IRules(ABC):
         """set or updates cached"""
 
     @abstractproperty
+    def name_info(self) -> base.NameInfo:
+        """Gets Name info"""
+
+    @abstractproperty
     def api_ns(self) -> 'ApiNs':
         """Gets api_ns value"""
 
@@ -142,7 +157,12 @@ class IRules(ABC):
         """Gets the soup object for the page"""
 
 class Rules(IRules):
-    def __init__(self, si_dict: Dict[str, base.SummaryInfo], summary_block: base.ApiSummaryBlock, api_ns: 'ApiNs') -> None:
+    def __init__(
+        self, si_dict: Dict[str, base.SummaryInfo]
+        , summary_block: base.ApiSummaryBlock
+        , api_ns: 'ApiNs'
+        , name_info: base.NameInfo
+        ) -> None:
         self._summary_block: base.ApiSummaryBlock = summary_block
         self._summaries = si_dict
         self._name_map = {}
@@ -153,6 +173,7 @@ class Rules(IRules):
         self. _cached_vals = {}
         self._cached_names = {}
         self._api_ns = api_ns
+        self._name_info = name_info
         self._register_known_rules()
         
     # region Methods
@@ -261,6 +282,11 @@ class Rules(IRules):
     # endregion Methods
 
     # region Properties
+    @property
+    def name_info(self) -> base.NameInfo:
+        """Gets name info"""
+        return self._name_info
+
     @property
     def api_ns(self) -> 'ApiNs':
         """Gets api_ns value"""
@@ -671,11 +697,11 @@ class RuleImport(RuleBase):
             parts = self._val.rsplit(sep='.', maxsplit=1)
             name = parts.pop()
             im = ".".join(parts)
-            p_type = base.Util.get_python_type(im)
+            p_type = base.Util.get_python_type(in_type=im, name_info=self._rules.name_info, ns=self._rules.api_ns.namespace_str)
 
-            rel = base.Util.get_rel_import_full(p_type.imports, ns.namespace_str)
+            rel = base.Util.get_rel_import(p_type.imports, ns.namespace_str)
             
-            val = f"{rel[1]}.{p_type.type}.{name}"
+            val = f"{rel[1]}.{name}"
             result = Val(text=si.name,
                          identity=self.identity, is_flags=False,
                          val_type=ValTypeEnum.IMPORT, values=[val],
@@ -846,11 +872,13 @@ class ApiNs(base.ApiNamespace):
         return self._namespace_str
 
 class ApiSummaries(base.BlockObj):
-    def __init__(self, block: base.ApiSummaryRows) -> None:
+    def __init__(self, block: base.ApiSummaryRows, name_info: base.NameInfo, ns: str) -> None:
         self._block: base.ApiSummaryRows = block
         super().__init__(self._block.soup)
         self._requires_typing = False
         self._imports: Set[str] = set()
+        self._name_info = name_info
+        self._ns = ns
         self._data = None
     
     def get_obj(self) -> Dict[str, SummaryInfo]:
@@ -922,7 +950,7 @@ class ApiSummaries(base.BlockObj):
         text = tag.text.strip()
         parts = text.split()
         type_name = parts.pop()
-        p_type = base.Util.get_python_type(type_name)
+        p_type = base.Util.get_python_type(in_type=type_name, name_info=self._name_info, ns=self._ns)
         logger.debug(
             "%s._get_type(), found type: %s for name: %s",
             self.__class__.__name__, p_type.type, name)
@@ -958,10 +986,15 @@ class ApiSummaries(base.BlockObj):
     
     # endregion Properties
 class ApiValues(base.BlockObj):
-    def __init__(self, summary_block: base.ApiSummaryBlock, api_summaries: ApiSummaries, api_ns: ApiNs) -> None:
+    def __init__(self, summary_block: base.ApiSummaryBlock
+                 , api_summaries: ApiSummaries
+                 , api_ns: ApiNs
+                 , name_info: base.NameInfo
+                 ) -> None:
         self._summary_block: base.ApiSummaryBlock = summary_block
         self._api_summaries: ApiSummaries = api_summaries
         self._api_ns: ApiNs = api_ns
+        self._name_info: base.NameInfo = name_info
         super().__init__(self._summary_block.soup)
         self._data = None
 
@@ -988,7 +1021,11 @@ class ApiValues(base.BlockObj):
             logger.error(msg)
             raise Exception(msg)
         self._data = {}
-        rules = Rules(si_dict=api_summaries, summary_block=self._summary_block, api_ns=self._api_ns)
+        rules = Rules(
+            si_dict=api_summaries
+            , summary_block=self._summary_block
+            , api_ns=self._api_ns
+            , name_info=self._name_info)
         for k in keys:
             si: SummaryInfo = api_summaries[k]
             try:
@@ -1005,8 +1042,11 @@ class ApiValues(base.BlockObj):
         return self._data
 
 class ApiData(base.APIData):
-    def __init__(self, url_soup: Union[str, base.SoupObj], allow_cache: bool):
-        super().__init__(url_soup=url_soup, allow_cache=allow_cache)
+    def __init__(self, url_soup: Union[str, base.SoupObj], allow_cache: bool, remove_parent_inherited:bool=True):
+        super().__init__(url_soup=url_soup,
+                         allow_cache=allow_cache,
+                         remove_parent_inherited=remove_parent_inherited
+                         )
         self._ns: ApiNs = None
         self._api_const_block: ApiConstBlock = None
         self._api_const_summary_rows: base.ApiSummaryRows = None
@@ -1057,7 +1097,10 @@ class ApiData(base.APIData):
         if key in self._cache:
             return self._cache[key]
         self.api_summaries.get_obj()
-        self._cache[key] = list(self.api_summaries.imports)
+        # sort for consistency in json
+        lst = list(self.api_summaries.imports)
+        lst.sort()
+        self._cache[key] = lst
         return self._cache[key]
     # endregion Methods
 
@@ -1090,13 +1133,22 @@ class ApiData(base.APIData):
         Get the summaries. This classes get_object() returns a list of SummaryInfo
         """
         if self._api_summaries is None:
-            self._api_summaries = ApiSummaries(self.api_summary_rows)
+            self._api_summaries = ApiSummaries(
+                block=self.api_summary_rows,
+                name_info=self.name.get_obj(),
+                ns=self.ns.namespace_str     
+                )
         return self._api_summaries
 
     @property
     def api_values(self) -> ApiValues:
         if self._api_values is None:
-            self._api_values = ApiValues(self.api_const_block, self.api_summaries, self.ns)
+            self._api_values = ApiValues(
+                summary_block=self.api_const_block
+                , api_summaries=self.api_summaries
+                , api_ns=self.ns
+                , name_info=self.name.get_obj()
+                )
         return self._api_values
     
     @property
@@ -1108,13 +1160,24 @@ class ApiData(base.APIData):
 
 # endregion API classes
 
+# region Parser
 class Parser(base.ParserBase):
     
     # region init
+    @TypeCheckKw(
+        arg_info={"remove_parent_inherited": bool },
+        ftype=DecFuncEnum.METHOD
+    )
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
+        self._remove_parent_inherited: bool = kwargs.get(
+            'remove_parent_inherited', True)
         self._api_data: ApiData = ApiData(
-            url_soup=self.url, allow_cache=self.allow_cache)
+            url_soup=self.url,
+            allow_cache=self.allow_cache,
+            remove_parent_inherited=self._remove_parent_inherited
+            )
+        
         self._soup = self._api_data.soup_obj
         self._requires_typing: bool = False
         self._cache = {}
@@ -1161,7 +1224,8 @@ class Parser(base.ParserBase):
 
     def get_parser_args(self) -> dict:
         args = {
-            "sort": self.sort
+            "sort": self.sort,
+            "remove_parent_inherited": self._remove_parent_inherited
         }
         return args
     # endregion Info
@@ -1232,7 +1296,11 @@ class Parser(base.ParserBase):
         if key in self._cache:
             return self._cache[key]
         result = []
-        data = self._api_data.get_data_items()
+        data: List[DataItem] = self._api_data.get_data_items()
+        # Const data should never be sorted. It conflicts with
+        # some of the constants that rely on order on the original html.
+        # see: https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1i18n_1_1KParseTokens.html
+        # data.sort()
         try:
             for itm in data:
                 d_itm = {
@@ -1304,7 +1372,9 @@ class Parser(base.ParserBase):
         return self._cache[key]
     # endregion Properties
 
+# endregion Parser
 
+# region Writer
 class ConstWriter(base.WriteBase):
     # region Constructor
     @TypeCheckKw(arg_info={
@@ -1330,8 +1400,12 @@ class ConstWriter(base.WriteBase):
         self._write_file = kwargs.get('write_template', False)
         self._print_json = kwargs.get('print_json', True)
         self._write_json = kwargs.get('write_json', False)
+        self._json_out = kwargs.get('json_out', False)
+        self._allow_db = kwargs.get('allow_db', True)
+        self._include_desc: bool = kwargs.get('include_desc', True)
         self._write_template_long: bool = kwargs.get(
             'write_template_long', False)
+        self._write_path: Union[str, None] = kwargs.get('write_path', None)
         self._indent_amt = 4
         self._file_full_path = None
         self._p_name: str = None
@@ -1353,9 +1427,9 @@ class ConstWriter(base.WriteBase):
         self._template_file = _path
         self._template: str = self._get_template()
         self._cache = {}
+        self._set_flags()
         # call _get_writer_args() to ensure it is cached before args get changed.
         self._get_writer_args()
-        self._set_flags()
     # endregion Constructor
     def _set_flags(self):
         # if flags is not specifically set in constructor then get flags from parser
@@ -1368,7 +1442,13 @@ class ConstWriter(base.WriteBase):
             contents = f.read()
         return contents
 
-    def write(self):
+    def write(self) -> Union[str, None]:
+        """
+        Writes files/templates according to parameters
+
+        Returns:
+            Union[str, None]: Returns json string if ``json_out`` is ``True``
+        """
         self._set_info()
         self._set_template_data()
         logger.info("Processing %s", self._p_fullname)
@@ -1387,6 +1467,8 @@ class ConstWriter(base.WriteBase):
                 self._write_to_file()
             if self._write_json:
                 self._write_to_json()
+            if self._json_out:
+                return self._get_json()
         except Exception as e:
             logger.exception(e)
 
@@ -1400,6 +1482,7 @@ class ConstWriter(base.WriteBase):
             "url": 'place holder',
             'flags': self._flags,
             "base_class": self._get_const_base_class(),
+            "allow_db": self._allow_db,
             "quote": [],
             "typings": []
         }
@@ -1437,7 +1520,8 @@ class ConstWriter(base.WriteBase):
             return self._cache[key]
         self._cache[key] = {
             "hex": self._hex,
-            "flags": self._flags
+            "flags": self._flags,
+            "include_desc": self._include_desc
         }
         return self._cache[key]
     
@@ -1452,9 +1536,12 @@ class ConstWriter(base.WriteBase):
         key = '_get_from_imports'
         if key in self._cache:
             return self._cache[key]
+        # sort for consistency in json
+        sorted = list(self._p_from_imports)
+        sorted.sort()
         lst = []
-        for ns in self._p_from_imports:
-            f, n = base.Util.get_rel_import_full(
+        for ns in sorted:
+            f, n = base.Util.get_rel_import(
                 i_str=ns, ns=self._p_namespace
             )
             lst.append([f, n])
@@ -1483,6 +1570,7 @@ class ConstWriter(base.WriteBase):
             return
         self._template = self._template.replace(
             '{libre_office_ver}', base.APP_CONFIG.libre_office_ver)
+        self._template = self._template.replace('{allow_db}', str(self._allow_db))
         self._template = self._template.replace('{hex}', str(self._hex))
         self._template = self._template.replace('{flags}', str(self._flags))
         self._template = self._template.replace('{name}', self._p_name)
@@ -1532,7 +1620,10 @@ class ConstWriter(base.WriteBase):
         for t in p_lst:
             if t.requires_typing or t.is_py_type is False:
                 t_set.add(t.type)
-        self._cache[key] = list(t_set)
+        # sort for consistency in json
+        lst = list(t_set)
+        lst.sort()
+        self._cache[key] = lst
         return self._cache[key]
 
     def _get_typings(self) -> List[str]:
@@ -1550,7 +1641,10 @@ class ConstWriter(base.WriteBase):
             if itm.val.p_type:
                 if itm.val.p_type.requires_typing:
                     t_set.add(itm.val.p_type.type)
-        self._cache[key] = list(t_set)
+        # sort for consistency in json
+        lst = list(t_set)
+        lst.sort()
+        self._cache[key] = lst
         return self._cache[key]
 
     # endregion quote/typing
@@ -1559,7 +1653,11 @@ class ConstWriter(base.WriteBase):
         key = '_get_uno_obj_path'
         if key in self._cache:
             return self._cache[key]
-        uno_obj_path = Path(self._path_dir.parent, base.APP_CONFIG.uno_base_dir)
+        if self._write_path:
+            write_path = self._write_path
+        else:
+            write_path = base.APP_CONFIG.uno_base_dir
+        uno_obj_path = Path(self._path_dir.parent, write_path)
         name_parts = self._p_fullname.split('.')
         # ignore com, sun, star
         path_parts = name_parts[3:]
@@ -1571,148 +1669,121 @@ class ConstWriter(base.WriteBase):
             except Exception as e:
                 logger.error(e, exc_info=True)
                 raise e
-        path_parts[index] = path_parts[index] + '.tmpl'
+        
+        path_parts[index] = path_parts[index] + base.APP_CONFIG.template_const_ext
         obj_path = uno_obj_path.joinpath(*path_parts)
         self._mkdirp(obj_path.parent)
         self._cache[key] = obj_path
         return self._cache[key]
 
+# endregion Writer
+
 # region Parse method
+def get_kwargs_from_args(args: argparse.ArgumentParser) -> dict:
+    """
+    Converts argparse args into dictionary that can be passed to ``parse()``
 
+    Args:
+        args (argparse.ArgumentParser): args
 
-def _get_parsed_kwargs(**kwargs) -> Dict[str, str]:
-    required = ("url",)
-    lookups = {
-        "u": "url",
-        "url": "url",
-        "L": "log_file",
-        "log_file": "log_file"
+    Returns:
+        dict: dictionary that contain key values matching ``parser()`` args.
+    """
+    d = {
+        "url": args.url,
+        "cache": args.cache,
+        "copy_clipboard": args.clipboard,
+        "print_template": args.print_template,
+        "write_template": args.write_template,
+        "write_template_long": args.long_format,
+        "print_json": args.print_json,
+        "write_json": args.write_json,
+        "include_desc": args.desc,
+        "log_file": args.log_file,
+        "verbose": args.verbose,
+        "flags": args.flags,
+        "hex": args.hex
     }
-    result = {}
-    for k, v in kwargs.items():
-        if not isinstance(k, str):
-            continue
-        if k in lookups:
-            key = lookups[k]
-            result[key] = v
-    for k in required:
-        if not k in result:
-            # k is missing from kwargs
-            raise base.RequiredError(f"Missing required arg {k}.")
-    return result
+    if args.write_path:
+        d['write_path'] = args.write_path
+    return d
 
-
-def _get_parsed_args(*args) -> Dict[str, bool]:
-    # key, value and value is a key into defaults
-    defaults = {
-        "no_cache": True,
-        "long_template": False,
-        "clipboard": False,
-        "print_json": False,
-        "print_template": False,
-        "write_template": False,
-        "write_json": False,
-        "verbose": False,
-        "flags": None,
-        "hex": False
-    }
-    found = {
-        "no_cache": False,
-        "long_template": True,
-        "clipboard": True,
-        "print_json": True,
-        "print_template": True,
-        "write_template": True,
-        "write_json": True,
-        "verbose": True,
-        "flags": True,
-        "hex": False
-    }
-    lookups = {
-        "x": "no_cache",
-        "no_cache": "no_cache",
-        "g": "long_template",
-        "long_template": "long_template",
-        "c": "clipboard",
-        "clipboard": "clipboard",
-        "n": "print_json",
-        "print_json": "print_json",
-        "m": "print_template",
-        "print_template": "print_template",
-        "t": "write_template",
-        "write_template": "write_template",
-        "j": "write_json",
-        "write_json": "write_json",
-        "v": "verbose",
-        "verbose": "verbose",
-        "f": "flags",
-        "flags": "flags",
-        "y": "hex",
-        "hex": "hex"
-    }
-    result = {k: v for k, v in defaults.items()}
-    for arg in args:
-        if not isinstance(arg, str):
-            continue
-        if arg in lookups:
-            key = lookups[arg]
-            result[key] = found[key]
-    return result
-
-
-def parse(*args, **kwargs):
+def parse(**kwargs):
     """
     Parses data, alternative to running on command line.
 
-    Other Arguments:
-        'no_cache' (str, optional): Short form ``'x'``. No caching. Default ``False``
-        'no_print_clear (str, optional): Short form ``'p'``. No clearing of terminal
-            when otuput to terminal. Default ``False``
-        'long_template' (str, optional): Short form ``'g'``. Writes a long format template.
-            Requires write_template is set. Default ``False``
-        'clipboard' (str, optional): Short form ``'c'``. Copy to clipboard. Default ``False``
-        'flags' (str, optional): Short form ``'f'``. Treat as flags. Default ``False``
-        'hex' (str, optional): Short form ``'y```. Treat as hex. Default ``False``
-        'print_json' (str, optional): Short form ``'n'``. Print json to termainl. Default ``False``
-        'print_template' (str, optional): Short form ``'m'``. Print template to terminal. Default ``False``
-        'write_template' (str, optional): Short form ``'t'``. Write template file into obj_uno subfolder. Default ``False``
-        'write_json' (str, optional): Short form ``'j'``. Write json file into obj_uno subfolder. Default ``False``
-        'verbose' (str, optional): Short form ``'v'``. Verobose output.
-
     Keyword Arguments:
-        url (str): Short form ``u``. url to parse
-        log_file (str, optional): Short form ``L``. Log File
+        url (str): url to parse
+        cache (str, optional): Caching. Default ``True``
+        include_desc (str, optional): Sescription will be outputed in template. Default ``True``
+        flags (str, optional): Treat as flags. Default ``False``
+        hex (str, optional): Treat as hex. Default ``False``
+        json_out (bool, optional): returns json to caller if ``True``. Default ``False``
+        long_names (str, optional): Long names. Default set in config ``use_long_import_names`` property.
+            Toggles values set in config.
+        long_template (str, optional): Writes a long format template.
+            Requires write_template is set. Default ``False``
+        clipboard (str, optional): Copy to clipboard. Default ``False``
+        print_json (str, optional): Print json to termainl. Default ``False``
+        print_template (str, optional): Print template to terminal. Default ``False``
+        write_template (str, optional): Write template file into obj_uno subfolder. Default ``False``
+        write_json (str, optional): Write json file into obj_uno subfolder. Default ``False``
+        write_path (str, optional): The root path to write data files (json, tmpl) into. Defaut set in config ``uno_base_dir``
+        verbose (str, optional): Verobose output.
+        log_file (str, optional): Log File
+    
+    Returns:
+        Union[str, None]: Returns json string if json_out is ``True``
     """
     global logger
-    pkwargs = _get_parsed_kwargs(**kwargs)
-    pargs = _get_parsed_args(*args)
+    _url = str(kwargs['url'])
+    _cache = bool(kwargs.get('cache', True))
+    _clipboard = bool(kwargs.get('copy_clipboard', False))
+    _print_template = bool(kwargs.get('print_template', False))
+    _write_template = bool(kwargs.get('write_template', False))
+    _long_template = bool(kwargs.get('write_template_long', False))
+    _print_json = bool(kwargs.get('print_json', False))
+    _write_json = bool(kwargs.get('write_json', False))
+    _include_desc = bool(kwargs.get('include_desc', True))
+    _log_file = kwargs.get('log_file', None)
+    _verbose = bool(kwargs.get('verbose', False))
+    _flags = bool(kwargs.get('flags', False))
+    _hex = bool(kwargs.get('hex', False))
+    _json_out = bool(kwargs.get('json_out', False))
+    _write_path = kwargs.get('write_path', None)
     if logger is None:
         log_args = {}
-        if 'log_file' in pkwargs:
-            log_args['log_file'] = pkwargs['log_file']
+        if _log_file:
+            log_args['log_file'] = _log_file
         else:
             log_args['log_file'] = 'const.log'
-        if pargs['verbose']:
+        if _verbose:
             log_args['level'] = logging.DEBUG
         _set_loggers(get_logger(logger_name=Path(__file__).stem, **log_args))
     p = Parser(
-        url=pkwargs['url'],
+        url=_url,
         sort=False,
-        cache=pargs['no_cache']
+        cache=_cache,
+        remove_parent_inherited=base.APP_CONFIG.remove_parent_inherited,
     )
     w = ConstWriter(
         parser=p,
-        copy_clipboard=pargs['clipboard'],
-        print_template=pargs['print_template'],
-        print_json=pargs['print_json'],
-        flags=pargs['flags'],
-        hex=pargs['hex'],
-        write_template=pargs['write_template'],
-        write_json=pargs['write_json'],
-        write_template_long=pargs['long_template']
+        copy_clipboard=_clipboard,
+        print_template=_print_template,
+        print_json=_print_json,
+        flags=_flags,
+        hex=_hex,
+        write_template=_write_template,
+        write_json=_write_json,
+        write_template_long=_long_template,
+        include_desc=_include_desc,
+        json_out=_json_out,
+        write_path=_write_path
     )
-    w.write()
+    return w.write()
 # endregion Parse method
+
+# region Main
 
 def _api():
     global logger
@@ -1742,16 +1813,22 @@ def _main():
         "log_file": "debug.log"
     }
     parse(*args, **kwargs)
+# region Parser
 
-def main():
-    global logger
-    
-    parser = argparse.ArgumentParser(description='const')
+
+def set_cmd_args(parser: argparse.ArgumentParser) -> None:
     parser.add_argument(
         '-u', '--url',
         help='Source Url',
         type=str,
         required=True)
+    parser.add_argument(
+        '-o', '--out',
+        help=f"Out path of templates and json data. Default: '{base.APP_CONFIG.uno_base_dir}'",
+        type=str,
+        dest='write_path',
+        default=None,
+        required=False)
     parser.add_argument(
         '-f', '--flags',
         help='Treat as flags',
@@ -1768,7 +1845,7 @@ def main():
         '-p', '--no-print-clear',
         help='No clearing of terminal when output to terminal.',
         action='store_false',
-        dest='no_print_clear',
+        dest='print_clear',
         default=True)
     parser.add_argument(
         '-y', '--hex',
@@ -1812,6 +1889,9 @@ def main():
         action='store_true',
         dest='write_json',
         default=False)
+
+
+def set_cmd_args_local(parser: argparse.ArgumentParser) -> None:
     parser.add_argument(
         '-v', '--verbose',
         help='verbose logging',
@@ -1823,8 +1903,15 @@ def main():
         help='Log file to use. Defaults to const.log',
         type=str,
         required=False)
+# endregion Parser
 
+def main():
+    global logger
+    parser = argparse.ArgumentParser(description='const')
+    set_cmd_args(parser)
+    set_cmd_args_local(parser)
     args = parser.parse_args()
+
     if logger is None:
         log_args = {}
         if args.log_file:
@@ -1841,25 +1928,11 @@ def main():
     logger.info('Executing command: %s', sys.argv[1:])
     logger.info('Parsing Url %s' % args.url)
 
-    p = Parser(
-        url=args.url,
-        sort=False,
-        cache=args.cache
-    )
+    args_dict = get_kwargs_from_args(args)
     if not args.print_json and not args.print_template:
         print('')
-    w = ConstWriter(
-        parser=p,
-        copy_clipboard=args.clipboard,
-        print_template=args.print_template,
-        print_json=args.print_json,
-        flags=args.flags,
-        hex=args.hex,
-        write_template=args.write_template,
-        write_json=args.write_json,
-        write_template_long=args.long_format
-        )
-    w.write()
+    parse(**args_dict)
  
 if __name__ == '__main__':
     main()
+# endregion Main

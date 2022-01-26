@@ -1,34 +1,50 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XGalleryThemeProvider",
   "type": "interface",
   "namespace": "com.sun.star.gallery",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..container.x_name_access",
-        "XNameAccess"
+        "XNameAccess",
+        "XNameAccess_e2ab0cf6"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_gallery_theme",
-        "XGalleryTheme"
+        "XGalleryTheme",
+        "XGalleryTheme_e28e0d13"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.container.XNameAccess": "XNameAccess_e2ab0cf6"
+    },
     "quote": [
-      "XGalleryTheme"
+      "XGalleryTheme_e28e0d13"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.container.XNameAccess"
+      ],
+      "typing": [
+        "com.sun.star.gallery.XGalleryTheme"
+      ]
+    },
     "name": "XGalleryThemeProvider",
     "imports": [],
     "namespace": "com.sun.star.gallery",
@@ -47,7 +63,7 @@
       "methods": [
         {
           "name": "insertNewByName",
-          "returns": "XGalleryTheme",
+          "returns": "XGalleryTheme_e28e0d13",
           "desc": [
             "creates a new Gallery theme and adds it to the collection."
           ],

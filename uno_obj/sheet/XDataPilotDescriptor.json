@@ -1,44 +1,64 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XDataPilotDescriptor",
   "type": "interface",
   "namespace": "com.sun.star.sheet",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..container.x_named",
-        "XNamed"
+        "XNamed",
+        "XNamed_a6520b08"
       ]
     ],
     "from_imports_typing": [
       [
         "..container.x_index_access",
-        "XIndexAccess"
-      ],
-      [
-        "..table.cell_range_address",
-        "CellRangeAddress"
+        "XIndexAccess",
+        "XIndexAccess_f0910d6d"
       ],
       [
         ".x_sheet_filter_descriptor",
-        "XSheetFilterDescriptor"
+        "XSheetFilterDescriptor",
+        "XSheetFilterDescriptor_47cc0ff7"
+      ],
+      [
+        "..table.cell_range_address",
+        "CellRangeAddress",
+        "CellRangeAddress_ec450d43"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.container.XNamed": "XNamed_a6520b08"
+    },
     "quote": [
-      "XIndexAccess",
-      "XSheetFilterDescriptor",
-      "CellRangeAddress"
+      "CellRangeAddress_ec450d43",
+      "XIndexAccess_f0910d6d",
+      "XSheetFilterDescriptor_47cc0ff7"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.container.XNamed"
+      ],
+      "typing": [
+        "com.sun.star.container.XIndexAccess",
+        "com.sun.star.sheet.XSheetFilterDescriptor",
+        "com.sun.star.table.CellRangeAddress"
+      ]
+    },
     "name": "XDataPilotDescriptor",
     "imports": [],
     "namespace": "com.sun.star.sheet",
@@ -55,7 +75,7 @@
       "methods": [
         {
           "name": "getColumnFields",
-          "returns": "XIndexAccess",
+          "returns": "XIndexAccess_f0910d6d",
           "desc": [
             "returns the collection of the data pilot fields used as column fields."
           ],
@@ -64,7 +84,7 @@
         },
         {
           "name": "getDataFields",
-          "returns": "XIndexAccess",
+          "returns": "XIndexAccess_f0910d6d",
           "desc": [
             "returns the collection of the data pilot fields used as data fields."
           ],
@@ -73,7 +93,7 @@
         },
         {
           "name": "getDataPilotFields",
-          "returns": "XIndexAccess",
+          "returns": "XIndexAccess_f0910d6d",
           "desc": [
             "returns the collection of all the data pilot fields."
           ],
@@ -82,7 +102,7 @@
         },
         {
           "name": "getFilterDescriptor",
-          "returns": "XSheetFilterDescriptor",
+          "returns": "XSheetFilterDescriptor_47cc0ff7",
           "desc": [
             "returns the filter descriptor specifying which data from the source cell range are used for the data pilot table."
           ],
@@ -91,7 +111,7 @@
         },
         {
           "name": "getHiddenFields",
-          "returns": "XIndexAccess",
+          "returns": "XIndexAccess_f0910d6d",
           "desc": [
             "returns the collection of the data pilot fields not used as column, row, page, or data fields."
           ],
@@ -100,7 +120,7 @@
         },
         {
           "name": "getPageFields",
-          "returns": "XIndexAccess",
+          "returns": "XIndexAccess_f0910d6d",
           "desc": [
             "returns the collection of the data pilot fields used as page fields."
           ],
@@ -109,7 +129,7 @@
         },
         {
           "name": "getRowFields",
-          "returns": "XIndexAccess",
+          "returns": "XIndexAccess_f0910d6d",
           "desc": [
             "returns the collection of the data pilot fields used as row fields."
           ],
@@ -118,7 +138,7 @@
         },
         {
           "name": "getSourceRange",
-          "returns": "CellRangeAddress",
+          "returns": "CellRangeAddress_ec450d43",
           "desc": [
             "returns the cell range containing the data for the data pilot table."
           ],
@@ -144,7 +164,7 @@
           "args": [
             [
               "aSourceRange",
-              "CellRangeAddress",
+              "CellRangeAddress_ec450d43",
               "in"
             ]
           ]

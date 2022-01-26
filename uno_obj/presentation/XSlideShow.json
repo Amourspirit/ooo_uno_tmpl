@@ -1,77 +1,109 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XSlideShow",
   "type": "interface",
   "namespace": "com.sun.star.presentation",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "XInterface_8f010a43"
       ]
     ],
     "from_imports_typing": [
       [
-        "..drawing.x_draw_pages_supplier",
-        "XDrawPagesSupplier"
-      ],
-      [
         "..animations.x_animation_node",
-        "XAnimationNode"
-      ],
-      [
-        "..lang.x_multi_service_factory",
-        "XMultiServiceFactory"
-      ],
-      [
-        ".x_slide_show_listener",
-        "XSlideShowListener"
-      ],
-      [
-        ".x_slide_show_view",
-        "XSlideShowView"
-      ],
-      [
-        "..drawing.x_draw_page",
-        "XDrawPage"
-      ],
-      [
-        "..drawing.x_shape",
-        "XShape"
+        "XAnimationNode",
+        "XAnimationNode_1cf10eb9"
       ],
       [
         "..beans.property_value",
-        "PropertyValue"
+        "PropertyValue",
+        "PropertyValue_c9610c73"
+      ],
+      [
+        "..drawing.x_draw_page",
+        "XDrawPage",
+        "XDrawPage_b07a0b57"
+      ],
+      [
+        "..drawing.x_draw_pages_supplier",
+        "XDrawPagesSupplier",
+        "XDrawPagesSupplier_29650f1e"
+      ],
+      [
+        "..drawing.x_shape",
+        "XShape",
+        "XShape_8fd00a3d"
+      ],
+      [
+        "..lang.x_multi_service_factory",
+        "XMultiServiceFactory",
+        "XMultiServiceFactory_191e0eb6"
       ],
       [
         ".x_shape_event_listener",
-        "XShapeEventListener"
+        "XShapeEventListener",
+        "XShapeEventListener_92a311b5"
+      ],
+      [
+        ".x_slide_show_listener",
+        "XSlideShowListener",
+        "XSlideShowListener_81671154"
+      ],
+      [
+        ".x_slide_show_view",
+        "XSlideShowView",
+        "XSlideShowView_3eb40fa9"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
     "quote": [
-      "XSlideShowView",
-      "XShape",
-      "typing.List[PropertyValue]",
-      "XShapeEventListener",
-      "PropertyValue",
-      "XMultiServiceFactory",
-      "XAnimationNode",
-      "XDrawPage",
-      "XSlideShowListener",
-      "XDrawPagesSupplier"
+      "PropertyValue_c9610c73",
+      "XAnimationNode_1cf10eb9",
+      "XDrawPage_b07a0b57",
+      "XDrawPagesSupplier_29650f1e",
+      "XMultiServiceFactory_191e0eb6",
+      "XShapeEventListener_92a311b5",
+      "XShape_8fd00a3d",
+      "XSlideShowListener_81671154",
+      "XSlideShowView_3eb40fa9",
+      "typing.List[PropertyValue_c9610c73]"
     ],
     "typings": [
-      "typing.List[PropertyValue]"
+      "typing.List[PropertyValue_c9610c73]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.animations.XAnimationNode",
+        "com.sun.star.beans.PropertyValue",
+        "com.sun.star.drawing.XDrawPage",
+        "com.sun.star.drawing.XDrawPagesSupplier",
+        "com.sun.star.drawing.XShape",
+        "com.sun.star.lang.XMultiServiceFactory",
+        "com.sun.star.presentation.XShapeEventListener",
+        "com.sun.star.presentation.XSlideShowListener",
+        "com.sun.star.presentation.XSlideShowView"
+      ]
+    },
     "name": "XSlideShow",
     "imports": [],
     "namespace": "com.sun.star.presentation",
@@ -104,12 +136,12 @@
           "args": [
             [
               "xListener",
-              "XShapeEventListener",
+              "XShapeEventListener_92a311b5",
               "in"
             ],
             [
               "xShape",
-              "XShape",
+              "XShape_8fd00a3d",
               "in"
             ]
           ]
@@ -126,7 +158,7 @@
           "args": [
             [
               "xListener",
-              "XSlideShowListener",
+              "XSlideShowListener_81671154",
               "in"
             ]
           ]
@@ -143,7 +175,7 @@
           "args": [
             [
               "xView",
-              "XSlideShowView",
+              "XSlideShowView_3eb40fa9",
               "in"
             ]
           ]
@@ -160,29 +192,29 @@
           "args": [
             [
               "xSlide",
-              "XDrawPage",
+              "XDrawPage_b07a0b57",
               "in"
             ],
             [
               "xDrawPages",
-              "XDrawPagesSupplier",
+              "XDrawPagesSupplier_29650f1e",
               "in"
             ],
             [
               "AnimationNode",
-              "XAnimationNode",
+              "XAnimationNode_1cf10eb9",
               "in"
             ],
             [
               "aProperties",
-              "typing.List[PropertyValue]",
+              "typing.List[PropertyValue_c9610c73]",
               "in"
             ]
           ]
         },
         {
           "name": "getCurrentSlide",
-          "returns": "XDrawPage",
+          "returns": "XDrawPage_b07a0b57",
           "desc": [
             "Query the currently displayed slide."
           ],
@@ -238,7 +270,7 @@
           "args": [
             [
               "xDocFactory",
-              "XMultiServiceFactory",
+              "XMultiServiceFactory_191e0eb6",
               "in"
             ]
           ]
@@ -253,12 +285,12 @@
           "args": [
             [
               "xListener",
-              "XShapeEventListener",
+              "XShapeEventListener_92a311b5",
               "in"
             ],
             [
               "xShape",
-              "XShape",
+              "XShape_8fd00a3d",
               "in"
             ]
           ]
@@ -273,7 +305,7 @@
           "args": [
             [
               "xListener",
-              "XSlideShowListener",
+              "XSlideShowListener_81671154",
               "in"
             ]
           ]
@@ -290,7 +322,7 @@
           "args": [
             [
               "xView",
-              "XSlideShowView",
+              "XSlideShowView_3eb40fa9",
               "in"
             ]
           ]
@@ -305,7 +337,7 @@
           "args": [
             [
               "aShowProperty",
-              "PropertyValue",
+              "PropertyValue_c9610c73",
               "in"
             ]
           ]
@@ -322,7 +354,7 @@
           "args": [
             [
               "xShape",
-              "XShape",
+              "XShape_8fd00a3d",
               "in"
             ],
             [
@@ -344,7 +376,7 @@
           "args": [
             [
               "xShape",
-              "XShape",
+              "XShape_8fd00a3d",
               "in"
             ]
           ]
@@ -361,7 +393,7 @@
           "args": [
             [
               "xShape",
-              "XShape",
+              "XShape_8fd00a3d",
               "in"
             ]
           ]

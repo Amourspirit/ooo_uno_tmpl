@@ -1,71 +1,101 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "Shape",
   "type": "service",
   "namespace": "com.sun.star.drawing",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
-        ".x_shape_descriptor",
-        "XShapeDescriptor"
-      ],
-      [
-        "..lang.x_component",
-        "XComponent"
-      ],
-      [
         "..beans.x_property_set",
-        "XPropertySet"
-      ],
-      [
-        ".x_glue_points_supplier",
-        "XGluePointsSupplier"
+        "XPropertySet",
+        "XPropertySet_bc180bfa"
       ],
       [
         "..beans.x_tolerant_multi_property_set",
-        "XTolerantMultiPropertySet"
+        "XTolerantMultiPropertySet",
+        "XTolerantMultiPropertySet_7bd4114e"
+      ],
+      [
+        ".x_glue_points_supplier",
+        "XGluePointsSupplier",
+        "XGluePointsSupplier_3a770faa"
       ],
       [
         ".x_shape",
-        "XShape"
+        "XShape",
+        "XShape_8fd00a3d"
+      ],
+      [
+        "..lang.x_component",
+        "XComponent",
+        "XComponent_98dc0ab5"
       ]
     ],
     "from_imports_typing": [
       [
-        "..style.x_style",
-        "XStyle"
-      ],
-      [
-        ".homogen_matrix3",
-        "HomogenMatrix3"
+        "..beans.property_value",
+        "PropertyValue",
+        "PropertyValue_c9610c73"
       ],
       [
         "..container.x_name_container",
-        "XNameContainer"
+        "XNameContainer",
+        "XNameContainer_cb90e47"
       ],
       [
-        "..beans.property_value",
-        "PropertyValue"
+        ".homogen_matrix3",
+        "HomogenMatrix3",
+        "HomogenMatrix3_f0fb0d69"
+      ],
+      [
+        "..style.x_style",
+        "XStyle",
+        "XStyle_7c7f09a2"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.beans.XPropertySet": "XPropertySet_bc180bfa",
+      "com.sun.star.beans.XTolerantMultiPropertySet": "XTolerantMultiPropertySet_7bd4114e",
+      "com.sun.star.drawing.XGluePointsSupplier": "XGluePointsSupplier_3a770faa",
+      "com.sun.star.drawing.XShape": "XShape_8fd00a3d",
+      "com.sun.star.lang.XComponent": "XComponent_98dc0ab5"
+    },
     "quote": [
-      "HomogenMatrix3",
-      "XStyle",
-      "typing.List[PropertyValue]",
-      "XNameContainer"
+      "HomogenMatrix3_f0fb0d69",
+      "XNameContainer_cb90e47",
+      "XStyle_7c7f09a2",
+      "typing.List[PropertyValue_c9610c73]"
     ],
     "typings": [
-      "typing.List[PropertyValue]"
+      "typing.List[PropertyValue_c9610c73]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.beans.XPropertySet",
+        "com.sun.star.beans.XTolerantMultiPropertySet",
+        "com.sun.star.drawing.XGluePointsSupplier",
+        "com.sun.star.drawing.XShape",
+        "com.sun.star.lang.XComponent"
+      ],
+      "typing": [
+        "com.sun.star.beans.PropertyValue",
+        "com.sun.star.container.XNameContainer",
+        "com.sun.star.drawing.HomogenMatrix3",
+        "com.sun.star.style.XStyle"
+      ]
+    },
     "name": "Shape",
     "imports": [],
     "namespace": "com.sun.star.drawing",
@@ -73,7 +103,6 @@
       "com.sun.star.beans.XPropertySet",
       "com.sun.star.drawing.XShape",
       "com.sun.star.lang.XComponent",
-      "com.sun.star.drawing.XShapeDescriptor",
       "com.sun.star.drawing.XGluePointsSupplier",
       "com.sun.star.beans.XTolerantMultiPropertySet"
     ],
@@ -89,7 +118,7 @@
       "types": [
         {
           "name": "InteropGrabBag",
-          "returns": "typing.List[PropertyValue]",
+          "returns": "typing.List[PropertyValue_c9610c73]",
           "desc": [
             "Grab bag of shape properties, used as a string-any map for interim interop purposes.",
             "",
@@ -231,7 +260,7 @@
         },
         {
           "name": "ShapeUserDefinedAttributes",
-          "returns": "XNameContainer",
+          "returns": "XNameContainer_cb90e47",
           "desc": [
             "this property stores xml attributes.",
             "",
@@ -251,7 +280,7 @@
         },
         {
           "name": "Style",
-          "returns": "XStyle",
+          "returns": "XStyle_7c7f09a2",
           "desc": [
             "this property lets you get and set a style for this shape."
           ],
@@ -260,7 +289,7 @@
         },
         {
           "name": "Transformation",
-          "returns": "HomogenMatrix3",
+          "returns": "HomogenMatrix3_f0fb0d69",
           "desc": [
             "this property lets you get and set the transformation matrix for this shape.",
             "",

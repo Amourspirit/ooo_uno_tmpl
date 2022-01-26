@@ -1,46 +1,67 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XUndoManager",
   "type": "interface",
   "namespace": "com.sun.star.document",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..container.x_child",
-        "XChild"
+        "XChild",
+        "XChild_a6390b07"
       ],
       [
         "..util.x_lockable",
-        "XLockable"
+        "XLockable",
+        "XLockable_8f330a3b"
       ]
     ],
     "from_imports_typing": [
       [
-        ".x_undo_manager_listener",
-        "XUndoManagerListener"
+        ".x_undo_action",
+        "XUndoAction",
+        "XUndoAction_d6580cb3"
       ],
       [
-        ".x_undo_action",
-        "XUndoAction"
+        ".x_undo_manager_listener",
+        "XUndoManagerListener",
+        "XUndoManagerListener_5a3b1056"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.container.XChild": "XChild_a6390b07",
+      "com.sun.star.util.XLockable": "XLockable_8f330a3b"
+    },
     "quote": [
-      "typing.List[str]",
-      "XUndoManagerListener",
-      "XUndoAction"
+      "XUndoAction_d6580cb3",
+      "XUndoManagerListener_5a3b1056",
+      "typing.List[str]"
     ],
     "typings": [
       "typing.List[str]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.container.XChild",
+        "com.sun.star.util.XLockable"
+      ],
+      "typing": [
+        "com.sun.star.document.XUndoAction",
+        "com.sun.star.document.XUndoManagerListener"
+      ]
+    },
     "name": "XUndoManager",
     "imports": [],
     "namespace": "com.sun.star.document",
@@ -88,7 +109,7 @@
           "args": [
             [
               "iAction",
-              "XUndoAction",
+              "XUndoAction_d6580cb3",
               "in"
             ]
           ]
@@ -103,7 +124,7 @@
           "args": [
             [
               "iListener",
-              "XUndoManagerListener",
+              "XUndoManagerListener_5a3b1056",
               "in"
             ]
           ]
@@ -272,7 +293,7 @@
           "args": [
             [
               "iListener",
-              "XUndoManagerListener",
+              "XUndoManagerListener_5a3b1056",
               "in"
             ]
           ]

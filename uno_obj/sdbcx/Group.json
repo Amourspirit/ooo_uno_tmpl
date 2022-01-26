@@ -1,35 +1,54 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "Group",
   "type": "service",
   "namespace": "com.sun.star.sdbcx",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..beans.x_property_set",
-        "XPropertySet"
-      ],
-      [
-        ".x_users_supplier",
-        "XUsersSupplier"
+        "XPropertySet",
+        "XPropertySet_bc180bfa"
       ],
       [
         ".x_authorizable",
-        "XAuthorizable"
+        "XAuthorizable",
+        "XAuthorizable_c8dd0c5e"
+      ],
+      [
+        ".x_users_supplier",
+        "XUsersSupplier",
+        "XUsersSupplier_d6060cda"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.beans.XPropertySet": "XPropertySet_bc180bfa",
+      "com.sun.star.sdbcx.XAuthorizable": "XAuthorizable_c8dd0c5e",
+      "com.sun.star.sdbcx.XUsersSupplier": "XUsersSupplier_d6060cda"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
+    "full_imports": {
+      "general": [
+        "com.sun.star.beans.XPropertySet",
+        "com.sun.star.sdbcx.XAuthorizable",
+        "com.sun.star.sdbcx.XUsersSupplier"
+      ],
+      "typing": []
+    },
     "name": "Group",
     "imports": [],
     "namespace": "com.sun.star.sdbcx",

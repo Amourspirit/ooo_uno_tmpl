@@ -1,12 +1,14 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "DockingEvent",
   "namespace": "com.sun.star.awt",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "sort": true,
@@ -20,22 +22,28 @@
     "from_imports": [
       [
         "..lang.event_object",
-        "EventObject"
+        "EventObject",
+        "EventObject_a3d70b03"
       ]
     ],
     "from_imports_typing": [
       [
-        ".rectangle",
-        "Rectangle"
+        ".point",
+        "Point",
+        "Point_5fb2085e"
       ],
       [
-        ".point",
-        "Point"
+        ".rectangle",
+        "Rectangle",
+        "Rectangle_84b109e9"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.lang.EventObject": "EventObject_a3d70b03"
+    },
     "quote": [
-      "Rectangle",
-      "Point"
+      "Point_5fb2085e",
+      "Rectangle_84b109e9"
     ],
     "typings": [],
     "requires_typing": true,
@@ -50,14 +58,14 @@
     "items": [
       {
         "name": "MousePos",
-        "type": "Point",
+        "type": "Point_5fb2085e",
         "lines": [
           "specifies the current mouse position in frame coordinates"
         ]
       },
       {
         "name": "TrackingRectangle",
-        "type": "Rectangle",
+        "type": "Rectangle_84b109e9",
         "lines": [
           "specifies the current tracking rectangle"
         ]

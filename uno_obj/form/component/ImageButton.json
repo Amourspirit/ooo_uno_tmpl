@@ -1,42 +1,64 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "ImageButton",
   "type": "service",
   "namespace": "com.sun.star.form.component",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "...awt.uno_control_image_control_model",
-        "UnoControlImageControlModel"
+        "UnoControlImageControlModel",
+        "UnoControlImageControlModel_7b36111c"
       ],
       [
         "..form_control_model",
-        "FormControlModel"
+        "FormControlModel",
+        "FormControlModel_e2990d22"
       ],
       [
         "..x_image_producer_supplier",
-        "XImageProducerSupplier"
+        "XImageProducerSupplier",
+        "XImageProducerSupplier_37df0f8f"
       ]
     ],
     "from_imports_typing": [
       [
         "..form_button_type",
-        "FormButtonType"
+        "FormButtonType",
+        "FormButtonType_c92d0c6e"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.awt.UnoControlImageControlModel": "UnoControlImageControlModel_7b36111c",
+      "com.sun.star.form.FormControlModel": "FormControlModel_e2990d22",
+      "com.sun.star.form.XImageProducerSupplier": "XImageProducerSupplier_37df0f8f"
+    },
     "quote": [
-      "FormButtonType"
+      "FormButtonType_c92d0c6e"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.awt.UnoControlImageControlModel",
+        "com.sun.star.form.FormControlModel",
+        "com.sun.star.form.XImageProducerSupplier"
+      ],
+      "typing": [
+        "com.sun.star.form.FormButtonType"
+      ]
+    },
     "name": "ImageButton",
     "imports": [],
     "namespace": "com.sun.star.form.component",
@@ -55,7 +77,7 @@
       "properties": [
         {
           "name": "ButtonType",
-          "returns": "FormButtonType",
+          "returns": "FormButtonType_c92d0c6e",
           "desc": [
             "describes the action to be executed by the button when pressed."
           ],

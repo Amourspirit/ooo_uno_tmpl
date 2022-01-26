@@ -1,48 +1,62 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XServiceTypeDescription",
   "type": "interface",
   "namespace": "com.sun.star.reflection",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         ".x_type_description",
-        "XTypeDescription"
+        "XTypeDescription",
+        "XTypeDescription_3c210fb1"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_interface_type_description",
-        "XInterfaceTypeDescription"
-      ],
-      [
-        ".x_service_type_description",
-        "XServiceTypeDescription"
+        "XInterfaceTypeDescription",
+        "XInterfaceTypeDescription_d92e1342"
       ],
       [
         ".x_property_type_description",
-        "XPropertyTypeDescription"
+        "XPropertyTypeDescription",
+        "XPropertyTypeDescription_ca171316"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.reflection.XTypeDescription": "XTypeDescription_3c210fb1"
+    },
     "quote": [
-      "typing.List[XPropertyTypeDescription]",
-      "typing.List[XInterfaceTypeDescription]",
+      "typing.List[XInterfaceTypeDescription_d92e1342]",
+      "typing.List[XPropertyTypeDescription_ca171316]",
       "typing.List[XServiceTypeDescription]"
     ],
     "typings": [
-      "typing.List[XPropertyTypeDescription]",
-      "typing.List[XInterfaceTypeDescription]",
+      "typing.List[XInterfaceTypeDescription_d92e1342]",
+      "typing.List[XPropertyTypeDescription_ca171316]",
       "typing.List[XServiceTypeDescription]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.reflection.XTypeDescription"
+      ],
+      "typing": [
+        "com.sun.star.reflection.XInterfaceTypeDescription",
+        "com.sun.star.reflection.XPropertyTypeDescription"
+      ]
+    },
     "name": "XServiceTypeDescription",
     "imports": [],
     "namespace": "com.sun.star.reflection",
@@ -65,7 +79,7 @@
       "methods": [
         {
           "name": "getMandatoryInterfaces",
-          "returns": "typing.List[XInterfaceTypeDescription]",
+          "returns": "typing.List[XInterfaceTypeDescription_d92e1342]",
           "desc": [
             "Returns the type descriptions of the mandatory interfaces defined for this service."
           ],
@@ -83,7 +97,7 @@
         },
         {
           "name": "getOptionalInterfaces",
-          "returns": "typing.List[XInterfaceTypeDescription]",
+          "returns": "typing.List[XInterfaceTypeDescription_d92e1342]",
           "desc": [
             "Returns the type descriptions of the optional interface defined for this service."
           ],
@@ -101,7 +115,7 @@
         },
         {
           "name": "getProperties",
-          "returns": "typing.List[XPropertyTypeDescription]",
+          "returns": "typing.List[XPropertyTypeDescription_ca171316]",
           "desc": [
             "Returns the properties defined for this service."
           ],

@@ -1,31 +1,47 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "DataPilotSourceHierarchy",
   "type": "service",
   "namespace": "com.sun.star.sheet",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
-        ".x_levels_supplier",
-        "XLevelsSupplier"
+        "..container.x_named",
+        "XNamed",
+        "XNamed_a6520b08"
       ],
       [
-        "..container.x_named",
-        "XNamed"
+        ".x_levels_supplier",
+        "XLevelsSupplier",
+        "XLevelsSupplier_e2c30d38"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.container.XNamed": "XNamed_a6520b08",
+      "com.sun.star.sheet.XLevelsSupplier": "XLevelsSupplier_e2c30d38"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
+    "full_imports": {
+      "general": [
+        "com.sun.star.container.XNamed",
+        "com.sun.star.sheet.XLevelsSupplier"
+      ],
+      "typing": []
+    },
     "name": "DataPilotSourceHierarchy",
     "imports": [],
     "namespace": "com.sun.star.sheet",

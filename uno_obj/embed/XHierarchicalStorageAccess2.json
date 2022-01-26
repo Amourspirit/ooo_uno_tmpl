@@ -1,41 +1,59 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XHierarchicalStorageAccess2",
   "type": "interface",
   "namespace": "com.sun.star.embed",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         ".x_hierarchical_storage_access",
-        "XHierarchicalStorageAccess"
+        "XHierarchicalStorageAccess",
+        "XHierarchicalStorageAccess_876b1143"
       ]
     ],
     "from_imports_typing": [
       [
         "..beans.named_value",
-        "NamedValue"
+        "NamedValue",
+        "NamedValue_a37a0af3"
       ],
       [
         ".x_extended_storage_stream",
-        "XExtendedStorageStream"
+        "XExtendedStorageStream",
+        "XExtendedStorageStream_46750fcf"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.embed.XHierarchicalStorageAccess": "XHierarchicalStorageAccess_876b1143"
+    },
     "quote": [
-      "XExtendedStorageStream",
-      "typing.List[NamedValue]"
+      "XExtendedStorageStream_46750fcf",
+      "typing.List[NamedValue_a37a0af3]"
     ],
     "typings": [
-      "typing.List[NamedValue]"
+      "typing.List[NamedValue_a37a0af3]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.embed.XHierarchicalStorageAccess"
+      ],
+      "typing": [
+        "com.sun.star.beans.NamedValue",
+        "com.sun.star.embed.XExtendedStorageStream"
+      ]
+    },
     "name": "XHierarchicalStorageAccess2",
     "imports": [],
     "namespace": "com.sun.star.embed",
@@ -50,7 +68,7 @@
       "methods": [
         {
           "name": "openEncryptedStreamByHierarchicalName",
-          "returns": "XExtendedStorageStream",
+          "returns": "XExtendedStorageStream_46750fcf",
           "desc": [
             "allows to get access to a child encrypted stream with encryption data using hierarchical path.",
             "",
@@ -80,7 +98,7 @@
             ],
             [
               "aEncryptionData",
-              "typing.List[NamedValue]",
+              "typing.List[NamedValue_a37a0af3]",
               "in"
             ]
           ]

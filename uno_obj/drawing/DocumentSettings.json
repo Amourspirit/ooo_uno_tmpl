@@ -1,42 +1,53 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "DocumentSettings",
   "type": "service",
   "namespace": "com.sun.star.drawing",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
-        "..beans.x_property_set",
-        "XPropertySet"
+        "..document.header_footer_settings",
+        "HeaderFooterSettings",
+        "HeaderFooterSettings_5acd1070"
       ],
       [
         "..document.settings",
-        "Settings"
-      ],
-      [
-        "..document.header_footer_settings",
-        "HeaderFooterSettings"
+        "Settings",
+        "Settings_b2bc0bb8"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.document.HeaderFooterSettings": "HeaderFooterSettings_5acd1070",
+      "com.sun.star.document.Settings": "Settings_b2bc0bb8"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
+    "full_imports": {
+      "general": [
+        "com.sun.star.document.HeaderFooterSettings",
+        "com.sun.star.document.Settings"
+      ],
+      "typing": []
+    },
     "name": "DocumentSettings",
     "imports": [],
     "namespace": "com.sun.star.drawing",
     "extends": [
       "com.sun.star.document.Settings",
-      "com.sun.star.document.HeaderFooterSettings",
-      "com.sun.star.beans.XPropertySet"
+      "com.sun.star.document.HeaderFooterSettings"
     ],
     "desc": [
       "describes properties that apply to the whole drawing document."

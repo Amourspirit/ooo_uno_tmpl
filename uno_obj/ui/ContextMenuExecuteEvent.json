@@ -1,12 +1,14 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "ContextMenuExecuteEvent",
   "namespace": "com.sun.star.ui",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "sort": true,
@@ -20,27 +22,32 @@
     "from_imports": [],
     "from_imports_typing": [
       [
-        "..view.x_selection_supplier",
-        "XSelectionSupplier"
-      ],
-      [
         "..awt.point",
-        "Point"
+        "Point",
+        "Point_5fb2085e"
       ],
       [
         "..awt.x_window",
-        "XWindow"
+        "XWindow",
+        "XWindow_713b0924"
       ],
       [
         "..container.x_index_container",
-        "XIndexContainer"
+        "XIndexContainer",
+        "XIndexContainer_1c040ebe"
+      ],
+      [
+        "..view.x_selection_supplier",
+        "XSelectionSupplier",
+        "XSelectionSupplier_fed20e15"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "XIndexContainer",
-      "Point",
-      "XSelectionSupplier",
-      "XWindow"
+      "Point_5fb2085e",
+      "XIndexContainer_1c040ebe",
+      "XSelectionSupplier_fed20e15",
+      "XWindow_713b0924"
     ],
     "typings": [],
     "requires_typing": true,
@@ -53,7 +60,7 @@
     "items": [
       {
         "name": "ActionTriggerContainer",
-        "type": "XIndexContainer",
+        "type": "XIndexContainer_1c040ebe",
         "lines": [
           "enables the access to the menu content.",
           "",
@@ -62,21 +69,21 @@
       },
       {
         "name": "ExecutePosition",
-        "type": "Point",
+        "type": "Point_5fb2085e",
         "lines": [
           "contains the position the context menu will be executed at."
         ]
       },
       {
         "name": "Selection",
-        "type": "XSelectionSupplier",
+        "type": "XSelectionSupplier_fed20e15",
         "lines": [
           "provides the current selection inside the source window."
         ]
       },
       {
         "name": "SourceWindow",
-        "type": "XWindow",
+        "type": "XWindow_713b0924",
         "lines": [
           "contains the window where the context menu has been requested"
         ]

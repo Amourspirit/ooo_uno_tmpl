@@ -1,58 +1,76 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "TextPortion",
   "type": "service",
   "namespace": "com.sun.star.text",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
-        "..container.x_content_enumeration_access",
-        "XContentEnumerationAccess"
-      ],
-      [
         "..beans.x_tolerant_multi_property_set",
-        "XTolerantMultiPropertySet"
+        "XTolerantMultiPropertySet",
+        "XTolerantMultiPropertySet_7bd4114e"
       ],
       [
         ".text_range",
-        "TextRange"
+        "TextRange",
+        "TextRange_90540a5f"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_footnote",
-        "XFootnote"
+        "XFootnote",
+        "XFootnote_901e0a73"
       ],
       [
         ".x_text_content",
-        "XTextContent"
+        "XTextContent",
+        "XTextContent_b16e0ba5"
       ],
       [
         ".x_text_field",
-        "XTextField"
+        "XTextField",
+        "XTextField_9a630aae"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.beans.XTolerantMultiPropertySet": "XTolerantMultiPropertySet_7bd4114e",
+      "com.sun.star.text.TextRange": "TextRange_90540a5f"
+    },
     "quote": [
-      "XTextContent",
-      "XTextField",
-      "XFootnote"
+      "XFootnote_901e0a73",
+      "XTextContent_b16e0ba5",
+      "XTextField_9a630aae"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.beans.XTolerantMultiPropertySet",
+        "com.sun.star.text.TextRange"
+      ],
+      "typing": [
+        "com.sun.star.text.XFootnote",
+        "com.sun.star.text.XTextContent",
+        "com.sun.star.text.XTextField"
+      ]
+    },
     "name": "TextPortion",
     "imports": [],
     "namespace": "com.sun.star.text",
     "extends": [
       "com.sun.star.text.TextRange",
-      "com.sun.star.container.XContentEnumerationAccess",
       "com.sun.star.beans.XTolerantMultiPropertySet"
     ],
     "desc": [
@@ -69,7 +87,7 @@
       "properties": [
         {
           "name": "Bookmark",
-          "returns": "XTextContent",
+          "returns": "XTextContent_b16e0ba5",
           "desc": [
             "contains the bookmark of a text portion of type Bookmark."
           ],
@@ -87,7 +105,7 @@
         },
         {
           "name": "DocumentIndexMark",
-          "returns": "XTextContent",
+          "returns": "XTextContent_b16e0ba5",
           "desc": [
             "contains the document index mark of a text portion of type DocumentIndexMark."
           ],
@@ -96,7 +114,7 @@
         },
         {
           "name": "Footnote",
-          "returns": "XFootnote",
+          "returns": "XFootnote_901e0a73",
           "desc": [
             "contains the footnote of a text portion of type Footnote."
           ],
@@ -105,7 +123,7 @@
         },
         {
           "name": "InContentMetadata",
-          "returns": "XTextContent",
+          "returns": "XTextContent_b16e0ba5",
           "desc": [
             "contains the text range of a text portion of type InContentMetadata.",
             "",
@@ -138,7 +156,7 @@
         },
         {
           "name": "ReferenceMark",
-          "returns": "XTextContent",
+          "returns": "XTextContent_b16e0ba5",
           "desc": [
             "contains the bookmark of a text portion of type ReferenceMark."
           ],
@@ -147,7 +165,7 @@
         },
         {
           "name": "TextField",
-          "returns": "XTextField",
+          "returns": "XTextField_9a630aae",
           "desc": [
             "contains the text field of a text portion of type TextField."
           ],

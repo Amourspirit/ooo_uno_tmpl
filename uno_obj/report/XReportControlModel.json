@@ -1,46 +1,71 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XReportControlModel",
   "type": "interface",
   "namespace": "com.sun.star.report",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
-        ".x_report_control_format",
-        "XReportControlFormat"
-      ],
-      [
         "..container.x_container",
-        "XContainer"
+        "XContainer",
+        "XContainer_d6fb0cc6"
       ],
       [
         "..container.x_index_container",
-        "XIndexContainer"
+        "XIndexContainer",
+        "XIndexContainer_1c040ebe"
       ],
       [
         ".x_report_component",
-        "XReportComponent"
+        "XReportComponent",
+        "XReportComponent_df0e2b"
+      ],
+      [
+        ".x_report_control_format",
+        "XReportControlFormat",
+        "XReportControlFormat_3d4e0fc2"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_format_condition",
-        "XFormatCondition"
+        "XFormatCondition",
+        "XFormatCondition_ffb00e0c"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.container.XContainer": "XContainer_d6fb0cc6",
+      "com.sun.star.container.XIndexContainer": "XIndexContainer_1c040ebe",
+      "com.sun.star.report.XReportComponent": "XReportComponent_df0e2b",
+      "com.sun.star.report.XReportControlFormat": "XReportControlFormat_3d4e0fc2"
+    },
     "quote": [
-      "XFormatCondition"
+      "XFormatCondition_ffb00e0c"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.container.XContainer",
+        "com.sun.star.container.XIndexContainer",
+        "com.sun.star.report.XReportComponent",
+        "com.sun.star.report.XReportControlFormat"
+      ],
+      "typing": [
+        "com.sun.star.report.XFormatCondition"
+      ]
+    },
     "name": "XReportControlModel",
     "imports": [],
     "namespace": "com.sun.star.report",
@@ -56,7 +81,7 @@
       "methods": [
         {
           "name": "createFormatCondition",
-          "returns": "XFormatCondition",
+          "returns": "XFormatCondition_ffb00e0c",
           "desc": [
             "Creates a format condition."
           ],

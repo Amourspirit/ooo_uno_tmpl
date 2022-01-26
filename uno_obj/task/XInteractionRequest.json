@@ -1,36 +1,52 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XInteractionRequest",
   "type": "interface",
   "namespace": "com.sun.star.task",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "XInterface_8f010a43"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_interaction_continuation",
-        "XInteractionContinuation"
+        "XInteractionContinuation",
+        "XInteractionContinuation_5af0108e"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
     "quote": [
-      "typing.List[XInteractionContinuation]"
+      "typing.List[XInteractionContinuation_5af0108e]"
     ],
     "typings": [
-      "typing.List[XInteractionContinuation]"
+      "typing.List[XInteractionContinuation_5af0108e]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.task.XInteractionContinuation"
+      ]
+    },
     "name": "XInteractionRequest",
     "imports": [],
     "namespace": "com.sun.star.task",
@@ -45,7 +61,7 @@
       "methods": [
         {
           "name": "getContinuations",
-          "returns": "typing.List[XInteractionContinuation]",
+          "returns": "typing.List[XInteractionContinuation_5af0108e]",
           "desc": [
             "Get the set of com.sun.star.task.XInteractionContinuations the client supports for this request."
           ],

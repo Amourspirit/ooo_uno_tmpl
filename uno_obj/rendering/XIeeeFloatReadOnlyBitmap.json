@@ -1,47 +1,67 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XIeeeFloatReadOnlyBitmap",
   "type": "interface",
   "namespace": "com.sun.star.rendering",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         ".x_bitmap",
-        "XBitmap"
+        "XBitmap",
+        "XBitmap_b1b70b7b"
       ]
     ],
     "from_imports_typing": [
       [
-        "..geometry.integer_rectangle2_d",
-        "IntegerRectangle2D"
+        "..geometry.integer_point2_d",
+        "IntegerPoint2D",
+        "IntegerPoint2D_8f0dc2"
       ],
       [
-        "..geometry.integer_point2_d",
-        "IntegerPoint2D"
+        "..geometry.integer_rectangle2_d",
+        "IntegerRectangle2D",
+        "IntegerRectangle2D_3c5c0f4d"
       ],
       [
         ".floating_point_bitmap_layout",
-        "FloatingPointBitmapLayout"
+        "FloatingPointBitmapLayout",
+        "FloatingPointBitmapLayout_c66812df"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.rendering.XBitmap": "XBitmap_b1b70b7b"
+    },
     "quote": [
-      "FloatingPointBitmapLayout",
-      "IntegerPoint2D",
-      "typing.List[float]",
-      "IntegerRectangle2D"
+      "FloatingPointBitmapLayout_c66812df",
+      "IntegerPoint2D_8f0dc2",
+      "IntegerRectangle2D_3c5c0f4d",
+      "typing.List[float]"
     ],
     "typings": [
       "typing.List[float]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.rendering.XBitmap"
+      ],
+      "typing": [
+        "com.sun.star.geometry.IntegerPoint2D",
+        "com.sun.star.geometry.IntegerRectangle2D",
+        "com.sun.star.rendering.FloatingPointBitmapLayout"
+      ]
+    },
     "name": "XIeeeFloatReadOnlyBitmap",
     "imports": [],
     "namespace": "com.sun.star.rendering",
@@ -77,19 +97,19 @@
           "args": [
             [
               "bitmapLayout",
-              "FloatingPointBitmapLayout",
+              "FloatingPointBitmapLayout_c66812df",
               "out"
             ],
             [
               "rect",
-              "IntegerRectangle2D",
+              "IntegerRectangle2D_3c5c0f4d",
               "in"
             ]
           ]
         },
         {
           "name": "getMemoryLayout",
-          "returns": "FloatingPointBitmapLayout",
+          "returns": "FloatingPointBitmapLayout_c66812df",
           "desc": [
             "Query the memory layout for this bitmap.",
             "",
@@ -113,12 +133,12 @@
           "args": [
             [
               "bitmapLayout",
-              "FloatingPointBitmapLayout",
+              "FloatingPointBitmapLayout_c66812df",
               "out"
             ],
             [
               "pos",
-              "IntegerPoint2D",
+              "IntegerPoint2D_8f0dc2",
               "in"
             ]
           ]

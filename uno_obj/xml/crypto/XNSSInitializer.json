@@ -1,40 +1,59 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XNSSInitializer",
   "type": "interface",
   "namespace": "com.sun.star.xml.crypto",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         ".x_cipher_context_supplier",
-        "XCipherContextSupplier"
+        "XCipherContextSupplier",
+        "XCipherContextSupplier_9fd31214"
       ],
       [
         ".x_digest_context_supplier",
-        "XDigestContextSupplier"
+        "XDigestContextSupplier",
+        "XDigestContextSupplier_a0151219"
       ]
     ],
     "from_imports_typing": [
       [
         ".nss_profile",
-        "NSSProfile"
+        "NSSProfile",
+        "NSSProfile_e1f00ced"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.xml.crypto.XCipherContextSupplier": "XCipherContextSupplier_9fd31214",
+      "com.sun.star.xml.crypto.XDigestContextSupplier": "XDigestContextSupplier_a0151219"
+    },
     "quote": [
-      "typing.List[NSSProfile]"
+      "typing.List[NSSProfile_e1f00ced]"
     ],
     "typings": [
-      "typing.List[NSSProfile]"
+      "typing.List[NSSProfile_e1f00ced]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.xml.crypto.XCipherContextSupplier",
+        "com.sun.star.xml.crypto.XDigestContextSupplier"
+      ],
+      "typing": [
+        "com.sun.star.xml.crypto.NSSProfile"
+      ]
+    },
     "name": "XNSSInitializer",
     "imports": [],
     "namespace": "com.sun.star.xml.crypto",
@@ -53,7 +72,7 @@
       "methods": [
         {
           "name": "getNSSProfiles",
-          "returns": "typing.List[NSSProfile]",
+          "returns": "typing.List[NSSProfile_e1f00ced]",
           "desc": [
             "get the current profile list",
             "",

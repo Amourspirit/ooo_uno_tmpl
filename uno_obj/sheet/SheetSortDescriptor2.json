@@ -1,34 +1,50 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "SheetSortDescriptor2",
   "type": "service",
   "namespace": "com.sun.star.sheet",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..table.table_sort_descriptor2",
-        "TableSortDescriptor2"
+        "TableSortDescriptor2",
+        "TableSortDescriptor2_27e00ef1"
       ]
     ],
     "from_imports_typing": [
       [
         "..table.cell_address",
-        "CellAddress"
+        "CellAddress",
+        "CellAddress_ae5f0b56"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.table.TableSortDescriptor2": "TableSortDescriptor2_27e00ef1"
+    },
     "quote": [
-      "CellAddress"
+      "CellAddress_ae5f0b56"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.table.TableSortDescriptor2"
+      ],
+      "typing": [
+        "com.sun.star.table.CellAddress"
+      ]
+    },
     "name": "SheetSortDescriptor2",
     "imports": [],
     "namespace": "com.sun.star.sheet",
@@ -85,7 +101,7 @@
         },
         {
           "name": "OutputPosition",
-          "returns": "CellAddress",
+          "returns": "CellAddress_ae5f0b56",
           "desc": [
             "specifies the position where sorted data are to be copied.",
             "",

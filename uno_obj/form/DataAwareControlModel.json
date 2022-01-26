@@ -1,46 +1,71 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "DataAwareControlModel",
   "type": "service",
   "namespace": "com.sun.star.form",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
-        ".x_reset",
-        "XReset"
-      ],
-      [
         ".form_control_model",
-        "FormControlModel"
-      ],
-      [
-        ".x_load_listener",
-        "XLoadListener"
+        "FormControlModel",
+        "FormControlModel_e2990d22"
       ],
       [
         ".x_bound_component",
-        "XBoundComponent"
+        "XBoundComponent",
+        "XBoundComponent_d4830cbf"
+      ],
+      [
+        ".x_load_listener",
+        "XLoadListener",
+        "XLoadListener_bb200bda"
+      ],
+      [
+        ".x_reset",
+        "XReset",
+        "XReset_71670917"
       ]
     ],
     "from_imports_typing": [
       [
         "..beans.x_property_set",
-        "XPropertySet"
+        "XPropertySet",
+        "XPropertySet_bc180bfa"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.form.FormControlModel": "FormControlModel_e2990d22",
+      "com.sun.star.form.XBoundComponent": "XBoundComponent_d4830cbf",
+      "com.sun.star.form.XLoadListener": "XLoadListener_bb200bda",
+      "com.sun.star.form.XReset": "XReset_71670917"
+    },
     "quote": [
-      "XPropertySet"
+      "XPropertySet_bc180bfa"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.form.FormControlModel",
+        "com.sun.star.form.XBoundComponent",
+        "com.sun.star.form.XLoadListener",
+        "com.sun.star.form.XReset"
+      ],
+      "typing": [
+        "com.sun.star.beans.XPropertySet"
+      ]
+    },
     "name": "DataAwareControlModel",
     "imports": [],
     "namespace": "com.sun.star.form",
@@ -64,7 +89,7 @@
       "properties": [
         {
           "name": "BoundField",
-          "returns": "XPropertySet",
+          "returns": "XPropertySet_bc180bfa",
           "desc": [
             "references to the cursor field to which the control is bound.",
             "",
@@ -104,7 +129,7 @@
         },
         {
           "name": "LabelControl",
-          "returns": "XPropertySet",
+          "returns": "XPropertySet_bc180bfa",
           "desc": [
             "references to a control model within the same document which should be used as a label.",
             "",

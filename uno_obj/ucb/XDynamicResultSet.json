@@ -1,44 +1,58 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XDynamicResultSet",
   "type": "interface",
   "namespace": "com.sun.star.ucb",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..lang.x_component",
-        "XComponent"
+        "XComponent",
+        "XComponent_98dc0ab5"
       ]
     ],
     "from_imports_typing": [
       [
-        ".x_dynamic_result_set",
-        "XDynamicResultSet"
+        "..sdbc.x_result_set",
+        "XResultSet",
+        "XResultSet_98e30aa7"
       ],
       [
         ".x_dynamic_result_set_listener",
-        "XDynamicResultSetListener"
-      ],
-      [
-        "..sdbc.x_result_set",
-        "XResultSet"
+        "XDynamicResultSetListener",
+        "XDynamicResultSetListener_56e41050"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.lang.XComponent": "XComponent_98dc0ab5"
+    },
     "quote": [
-      "XResultSet",
-      "XDynamicResultSetListener",
-      "XDynamicResultSet"
+      "XDynamicResultSet",
+      "XDynamicResultSetListener_56e41050",
+      "XResultSet_98e30aa7"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.lang.XComponent"
+      ],
+      "typing": [
+        "com.sun.star.sdbc.XResultSet",
+        "com.sun.star.ucb.XDynamicResultSetListener"
+      ]
+    },
     "name": "XDynamicResultSet",
     "imports": [],
     "namespace": "com.sun.star.ucb",
@@ -101,7 +115,7 @@
         },
         {
           "name": "getStaticResultSet",
-          "returns": "XResultSet",
+          "returns": "XResultSet_98e30aa7",
           "desc": [
             "Call this, if you don't care about any changes."
           ],
@@ -124,7 +138,7 @@
           "args": [
             [
               "Listener",
-              "XDynamicResultSetListener",
+              "XDynamicResultSetListener_56e41050",
               "in"
             ]
           ]

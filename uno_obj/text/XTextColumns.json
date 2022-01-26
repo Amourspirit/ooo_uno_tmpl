@@ -1,36 +1,52 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XTextColumns",
   "type": "interface",
   "namespace": "com.sun.star.text",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "XInterface_8f010a43"
       ]
     ],
     "from_imports_typing": [
       [
         ".text_column",
-        "TextColumn"
+        "TextColumn",
+        "TextColumn_9b3f0ae0"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
     "quote": [
-      "typing.List[TextColumn]"
+      "typing.List[TextColumn_9b3f0ae0]"
     ],
     "typings": [
-      "typing.List[TextColumn]"
+      "typing.List[TextColumn_9b3f0ae0]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.text.TextColumn"
+      ]
+    },
     "name": "XTextColumns",
     "imports": [],
     "namespace": "com.sun.star.text",
@@ -54,7 +70,7 @@
         },
         {
           "name": "getColumns",
-          "returns": "typing.List[TextColumn]",
+          "returns": "typing.List[TextColumn_9b3f0ae0]",
           "desc": [
             "returns the column description of the object."
           ],
@@ -99,7 +115,7 @@
           "args": [
             [
               "Columns",
-              "typing.List[TextColumn]",
+              "typing.List[TextColumn_9b3f0ae0]",
               "in"
             ]
           ]

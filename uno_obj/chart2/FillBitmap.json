@@ -1,12 +1,14 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "FillBitmap",
   "namespace": "com.sun.star.chart2",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "sort": true,
@@ -20,27 +22,32 @@
     "from_imports": [],
     "from_imports_typing": [
       [
-        "..drawing.rectangle_point",
-        "RectanglePoint"
-      ],
-      [
         "..awt.point",
-        "Point"
-      ],
-      [
-        "..drawing.bitmap_mode",
-        "BitmapMode"
+        "Point",
+        "Point_5fb2085e"
       ],
       [
         "..awt.size",
-        "Size"
+        "Size",
+        "Size_576707ef"
+      ],
+      [
+        "..drawing.bitmap_mode",
+        "BitmapMode",
+        "BitmapMode_bced0bd6"
+      ],
+      [
+        "..drawing.rectangle_point",
+        "RectanglePoint",
+        "RectanglePoint_f0ff0d93"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "RectanglePoint",
-      "Point",
-      "Size",
-      "BitmapMode"
+      "BitmapMode_bced0bd6",
+      "Point_5fb2085e",
+      "RectanglePoint_f0ff0d93",
+      "Size_576707ef"
     ],
     "typings": [],
     "requires_typing": true,
@@ -53,7 +60,7 @@
     "items": [
       {
         "name": "aBitmapMode",
-        "type": "BitmapMode",
+        "type": "BitmapMode_bced0bd6",
         "lines": [
           "this enum selects how an area is filled with a single bitmap.",
           "",
@@ -62,7 +69,7 @@
       },
       {
         "name": "aOffset",
-        "type": "Point",
+        "type": "Point_5fb2085e",
         "lines": [
           "This is the horizontal and vertical offset where the tile starts.",
           "",
@@ -71,21 +78,21 @@
       },
       {
         "name": "aPositionOffset",
-        "type": "Point",
+        "type": "Point_5fb2085e",
         "lines": [
           "Every second line (X) / row (Y) of tiles is moved the given percent of the width of the bitmap."
         ]
       },
       {
         "name": "aRectanglePoint",
-        "type": "RectanglePoint",
+        "type": "RectanglePoint_f0ff0d93",
         "lines": [
           "The RectanglePoint specifies the position inside of the bitmap to use as the top left position for rendering."
         ]
       },
       {
         "name": "aSize",
-        "type": "Size",
+        "type": "Size_576707ef",
         "lines": [
           "This is the size of the tile for filling.",
           "",

@@ -1,34 +1,50 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XInteractionDocumentSave",
   "type": "interface",
   "namespace": "com.sun.star.sdb",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..task.x_interaction_continuation",
-        "XInteractionContinuation"
+        "XInteractionContinuation",
+        "XInteractionContinuation_5af0108e"
       ]
     ],
     "from_imports_typing": [
       [
         "..ucb.x_content",
-        "XContent"
+        "XContent",
+        "XContent_79db0975"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.task.XInteractionContinuation": "XInteractionContinuation_5af0108e"
+    },
     "quote": [
-      "XContent"
+      "XContent_79db0975"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.task.XInteractionContinuation"
+      ],
+      "typing": [
+        "com.sun.star.ucb.XContent"
+      ]
+    },
     "name": "XInteractionDocumentSave",
     "imports": [],
     "namespace": "com.sun.star.sdb",
@@ -62,7 +78,7 @@
             ],
             [
               "Content",
-              "XContent",
+              "XContent_79db0975",
               "in"
             ]
           ]

@@ -1,31 +1,47 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "DocumentDataSource",
   "type": "service",
   "namespace": "com.sun.star.sdb",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         ".data_source",
-        "DataSource"
+        "DataSource",
+        "DataSource_8d760a2c"
       ],
       [
         ".x_document_data_source",
-        "XDocumentDataSource"
+        "XDocumentDataSource",
+        "XDocumentDataSource_fab40dc3"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.sdb.DataSource": "DataSource_8d760a2c",
+      "com.sun.star.sdb.XDocumentDataSource": "XDocumentDataSource_fab40dc3"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
+    "full_imports": {
+      "general": [
+        "com.sun.star.sdb.DataSource",
+        "com.sun.star.sdb.XDocumentDataSource"
+      ],
+      "typing": []
+    },
     "name": "DocumentDataSource",
     "imports": [],
     "namespace": "com.sun.star.sdb",

@@ -12,6 +12,7 @@ color.pyi => Color
 language.pyi => Language
 
 """
+# region Imports
 import os
 import sys
 import argparse
@@ -26,8 +27,11 @@ except ModuleNotFoundError:
 from logger.log_handle import get_logger
 from dataclasses import dataclass, field
 from parser import __version__, JSON_ID
-from parser.type_mod import PythonType
+from parser.mod_type import PythonType
 
+# endregion Imports
+
+# region Logger
 logger = None
 
 
@@ -38,6 +42,8 @@ def _set_loggers(l: Union[logging.Logger, None]):
 
 
 _set_loggers(None)
+
+# endregion Logger
 
 # region Data Classes
 @dataclass
@@ -63,10 +69,12 @@ class ApiTypeDefBlock(base.ApiSummaryBlock):
 class ApiSummaries(base.BlockObj):
     """Gets summary information for a public member block"""
 
-    def __init__(self, block: base.ApiSummaryRows) -> None:
+    def __init__(self, block: base.ApiSummaryRows, name_info: base.NameInfo, ns: str) -> None:
         self._block: base.ApiSummaryRows = block
+        self._name_info = name_info
         super().__init__(self._block.soup)
         self._data = None
+        self._ns = ns
 
     def get_obj(self) -> List[SummaryInfo]:
         if not self._data is None:
@@ -96,7 +104,11 @@ class ApiSummaries(base.BlockObj):
                 logger.error(msg)
                 raise Exception(msg)
             if _type:
-                p_type = base.Util.get_python_type(in_type=_type)
+                p_type = base.Util.get_python_type(
+                    in_type=_type
+                    , name_info=self._name_info
+                    ,ns=self._ns
+                    )
                 s_type =p_type.type
                 if p_type.requires_typing:
                     _req_typing = True
@@ -106,7 +118,8 @@ class ApiSummaries(base.BlockObj):
                     name=name,
                     type=s_type,
                     realtype=s_type,
-                    requires_typing=_req_typing
+                    requires_typing=_req_typing,
+                    ns=self._ns
                 )
                 msg = f"{self.__class__.__name__}.get_obj(). Missing return type for {name}. Url: {self.url_obj.url_only}"
                 logger.error(msg)
@@ -202,12 +215,16 @@ class ApiData(base.APIData):
         """Get Summary info list for functions"""
         if self._type_def_summaries is None:
             self._type_def_summaries = ApiSummaries(
-                self.type_def_summary_rows)
+                block=self.type_def_summary_rows,
+                name_info=self.name.get_obj(),
+                ns=self.ns.namespace_str
+                )
         return self._type_def_summaries
 
     # endregion Properties
 
 # endregion Data Classes
+
 # region Parse
 
 
@@ -328,9 +345,11 @@ class WriterTypeDef(base.WriteBase):
         self._write_file: bool = kwargs.get('write_template', False)
         self._print_json: bool = kwargs.get('print_json', True)
         self._write_json: bool = kwargs.get('write_json', False)
+        self._allow_db = kwargs.get('allow_db', True)
         self._clear_on_print: bool = kwargs.get('clear_on_print', True)
         self._write_template_long: bool = kwargs.get(
             'write_template_long', False)
+        self._write_path: Union[str, None] = kwargs.get('write_path', None)
         self._include_desc: bool = kwargs.get('include_desc', True)
         self._indent_amt = 4
         self._p_namespace: str = None
@@ -379,6 +398,7 @@ class WriterTypeDef(base.WriteBase):
             "name": t_def.name,
             "namespace": d_data['namespace'],
             "url": d_data['url'],
+            "allow_db": self._allow_db,
             "type": t_def.type,
             "requires_typing": t_def.requires_typing
         }
@@ -419,7 +439,10 @@ class WriterTypeDef(base.WriteBase):
         if key in self._cache:
             return self._cache[key]
         lst = []
-        for ns in t_def.imports:
+        lst_im = list(t_def.imports)
+        # sort for consistency in json
+        lst_im.sort()
+        for ns in lst_im:
             f, n = base.Util.get_rel_import(
                 i_str=ns, ns=self._p_namespace
             )
@@ -431,6 +454,8 @@ class WriterTypeDef(base.WriteBase):
     def _get_quote_flat(self, si_id: str) -> List[str]:
         # si_id will limit this to one item max
         si_lst = self._parser.api_data.type_def_summaries.get_obj()
+        # sort for consistency in json
+        si_lst.sort()
         t_lst = []
         for si in si_lst:
             if si.id == si_id:
@@ -442,6 +467,8 @@ class WriterTypeDef(base.WriteBase):
 
     def _get_typings(self, si_id: str) -> List[str]:
         si_lst = self._parser.api_data.type_def_summaries.get_obj()
+        # sort for consistency in json
+        si_lst.sort()
         t_lst = []
         for si in si_lst:
             if si.id == si_id:
@@ -455,6 +482,7 @@ class WriterTypeDef(base.WriteBase):
         if self._write_template_long is False:
             return self._template
         t = self._template
+        t = t.replace('{allow_db}', str(self._allow_db))
         t = t.replace('{libre_office_ver}', base.APP_CONFIG.libre_office_ver)
         t = t.replace('{name}', t_def.name)
         t = t.replace('{ns}', str(self._p_namespace))
@@ -508,12 +536,15 @@ class WriterTypeDef(base.WriteBase):
             return self._cache[key]
         # _p_name = base.Util.camel_to_snake(t_def.name)
         _p_name = t_def.name
-        uno_obj_path = Path(self._path_dir.parent,
-                            base.APP_CONFIG.uno_base_dir)
+        if self._write_path:
+            write_path = self._write_path
+        else:
+            write_path = base.APP_CONFIG.uno_base_dir
+        uno_obj_path = Path(self._path_dir.parent, write_path)
         name_parts: List[str] = self._p_namespace.split('.')
         # ignore com, sun, star
         path_parts = name_parts[3:]
-        path_parts.append(_p_name + '.tppi')
+        path_parts.append(_p_name + base.APP_CONFIG.template_typedef_ext)
         obj_path = uno_obj_path.joinpath(*path_parts)
         # because all typedef are written to the same dir
         # only need ot call mkdirp once.
@@ -571,141 +602,101 @@ class WriterTypeDef(base.WriteBase):
 # endregion Writer
 
 # region Parse method
+def get_kwargs_from_args(args: argparse.ArgumentParser) -> dict:
+    """
+    Converts argparse args into dictionary that can be passed to ``parse()``
 
+    Args:
+        args (argparse.ArgumentParser): args
 
-def _get_parsed_kwargs(**kwargs) -> Dict[str, str]:
-    required = ("url",)
-    lookups = {
-        "u": "url",
-        "url": "url",
-        "L": "log_file",
-        "log_file": "log_file"
+    Returns:
+        dict: dictionary that contain key values matching ``parser()`` args.
+    """
+    d = {
+        "url": args.url,
+        "sort": args.sort,
+        "cache": args.cache,
+        "clear_on_print": args.print_clear,
+        "print_template": args.print_template,
+        "write_template": args.write_template,
+        "write_template_long": args.long_format,
+        "print_json": args.print_json,
+        "write_json": args.write_json,
+        "include_desc": args.desc,
+        "log_file": args.log_file,
+        "verbose": args.verbose
     }
-    result = {}
-    for k, v in kwargs.items():
-        if not isinstance(k, str):
-            continue
-        if k in lookups:
-            key = lookups[k]
-            result[key] = v
-    for k in required:
-        if not k in result:
-            # k is missing from kwargs
-            raise base.RequiredError(f"Missing required arg {k}.")
-    return result
+    if args.write_path:
+        d['write_path'] = args.write_path
+    return d
 
-
-def _get_parsed_args(*args) -> Dict[str, bool]:
-    # key, value and value is a key into defaults
-    defaults = {
-        'no_sort': True,
-        "no_cache": True,
-        'no_desc': True,
-        "no_print_clear": True,
-        "long_template": False,
-        "print_json": False,
-        "print_template": False,
-        "write_template": False,
-        "write_json": False,
-        "verbose": False,
-    }
-    found = {
-        'no_sort': False,
-        "no_cache": False,
-        'no_desc': False,
-        "no_print_clear": False,
-        "long_template": True,
-        "print_json": True,
-        "print_template": True,
-        "write_template": True,
-        "write_json": True,
-        "verbose": True
-    }
-    lookups = {
-        "s": "no_sort",
-        "no_sort": "no_sort",
-        "x": "no_cache",
-        "no_cache": "no_cache",
-        "d": "no_desc",
-        "no_desc": "no_desc",
-        "p": "no_print_clear",
-        "no_print_clear": "no_print_clear",
-        "g": "long_template",
-        "long_template": "long_template",
-        "n": "print_json",
-        "print_json": "print_json",
-        "m": "print_template",
-        "print_template": "print_template",
-        "t": "write_template",
-        "write_template": "write_template",
-        "j": "write_json",
-        "write_json": "write_json",
-        "v": "verbose",
-        "verbose": "verbose"
-    }
-    result = {k: v for k, v in defaults.items()}
-    for arg in args:
-        if not isinstance(arg, str):
-            continue
-        if arg in lookups:
-            key = lookups[arg]
-            result[key] = found[key]
-    return result
-
-
-def parse(*args, **kwargs):
+def parse(**kwargs):
     """
     Parses data, alternative to running on command line.
 
-    Other Arguments:
-        'no_sort' (str, optional): Short form ``'s'``. No sorting of results. Default ``False``
-        'no_cache' (str, optional): Short form ``'x'``. No caching. Default ``False``
-        'no_desc' (str, optional): Short form ``'d'``. No desctiption will be outputed in template. Default ``False``.
-        'no_print_clear (str, optional): Short form ``'p'``. No clearing of terminal
-            when otuput to terminal. Default ``False``
-        'long_template' (str, optional): Short form ``'g'``. Writes a long format template.
-            Requires write_template is set. Default ``False``
-        'print_json' (str, optional): Short form ``'n'``. Print json to termainl. Default ``False``
-        'print_template' (str, optional): Short form ``'m'``. Print template to terminal. Default ``False``
-        'write_template' (str, optional): Short form ``'t'``. Write template file into obj_uno subfolder. Default ``False``
-        'write_json' (str, optional): Short form ``'j'``. Write json file into obj_uno subfolder. Default ``False``
-        'verbose' (str, optional): Short form ``'v'``. Verobose output.
-
     Keyword Arguments:
-        url (str): Short form ``u``. url to parse
-        log_file (str, optional): Short form ``L``. Log File
+        url (str): url to parse
+        sort (str, optional): Sorting of results. Default ``True``
+        cache (str, optional): Caching. Default ``False``
+        clear_on_print (str, optional): Clearing of terminal when otuput to terminal. Default ``False``
+        include_desc (str, optional): Description will be outputed in template. Default ``True``
+        long_names (str, optional): Long names. Default set in config ``use_long_import_names`` property.
+            Toggles values set in config.
+        write_template_long (str, optional): Writes a long format template.
+            Requires write_template is set. Default ``False``
+        print_json (str, optional): Print json to termainl. Default ``False``
+        print_template (str, optional): Print template to terminal. Default ``False``
+        write_template (str, optional): Write template file into obj_uno subfolder. Default ``False``
+        write_json (str, optional): Write json file into obj_uno subfolder. Default ``False``
+        write_path (str, optional): The root path to write data files (json, tmpl) into. Defaut set in config ``uno_base_dir``
+        verbose (str, optional): Verobose output.
+        log_file (str, optional): Log File
     """
     global logger
-    pkwargs = _get_parsed_kwargs(**kwargs)
-    pargs = _get_parsed_args(*args)
+    _url = str(kwargs['url'])
+    _sort = bool(kwargs.get('sort', True))
+    _cache = bool(kwargs.get('cache', True))
+    _print_clear = bool(kwargs.get('clear_on_print', False))
+    _print_template = bool(kwargs.get('print_template', False))
+    _write_template = bool(kwargs.get('write_template', False))
+    _long_template = bool(kwargs.get('write_template_long', False))
+    _print_json = bool(kwargs.get('print_json', False))
+    _write_json = bool(kwargs.get('write_json', bool))
+    _include_desc = bool(kwargs.get('include_desc', True))
+    _log_file = kwargs.get('log_file', None)
+    _verbose = bool(kwargs.get('verbose', False))
+    _write_path= kwargs.get('write_path', None)
+
     if logger is None:
         log_args = {}
-        if 'log_file' in pkwargs:
-            log_args['log_file'] = pkwargs['log_file']
+        if _log_file:
+            log_args['log_file'] = _log_file
         else:
-            log_args['log_file'] = 'interface.log'
-        if pargs['verbose']:
+            log_args['log_file'] = 'typedef.log'
+        if _verbose:
             log_args['level'] = logging.DEBUG
         _set_loggers(get_logger(logger_name=Path(__file__).stem, **log_args))
     p = ParserTypeDef(
-        url=pkwargs['url'],
-        sort=pargs['no_sort'],
-        cache=pargs['no_cache']
+        url=_url,
+        sort=_sort,
+        cache=_cache
     )
     w = WriterTypeDef(
         parser=p,
-        print_template=pargs['print_template'],
-        print_json=pargs['print_json'],
-        write_template=pargs['write_template'],
-        write_json=pargs['write_json'],
-        clear_on_print=(not pargs['no_print_clear']),
-        write_template_long=pargs['long_template'],
-        include_desc=pargs['no_desc']
+        print_template=_print_template,
+        print_json=_print_json,
+        write_template=_write_template,
+        write_json=_write_json,
+        clear_on_print=_print_clear,
+        write_template_long=_long_template,
+        include_desc=_include_desc,
+        write_path=_write_path
     )
     w.write()
 
 # endregion Parse method
 
+# region Main
 def _main():
     global logger
 
@@ -723,19 +714,22 @@ def _main():
         "log_file": "debug.log"
     }
     parse(*args, **kwargs)
+# region Parser
 
-# region main
 
-def main():
-    global logger
-
-    # region Parser
-    parser = argparse.ArgumentParser(description='interface')
+def set_cmd_args(parser: argparse.ArgumentParser) -> None:
     parser.add_argument(
         '-u', '--url',
         help='Source Url',
         type=str,
         required=True)
+    parser.add_argument(
+        '-o', '--out',
+        help=f"Out path of templates and json data. Default: '{base.APP_CONFIG.uno_base_dir}'",
+        type=str,
+        dest='write_path',
+        default=None,
+        required=False)
     parser.add_argument(
         '-s', '--no-sort',
         help='No sorting of results',
@@ -758,7 +752,7 @@ def main():
         '-p', '--no-print-clear',
         help='No clearing of terminal when output to terminal.',
         action='store_false',
-        dest='no_print_clear',
+        dest='print_clear',
         default=True)
     parser.add_argument(
         '-g', '--long-template',
@@ -790,7 +784,9 @@ def main():
         action='store_true',
         dest='write_json',
         default=False)
-    # region Dummy Args for Logging
+
+
+def set_cmd_args_local(parser) -> None:
     parser.add_argument(
         '-v', '--verbose',
         help='verbose logging',
@@ -802,8 +798,19 @@ def main():
         help='Log file to use. Defaults to service.log',
         type=str,
         required=False)
-    # endregion Dummy Args for Logging
+# endregion Parser
+
+# region main
+
+def main():
+    global logger
+
+    # region Parser
+    parser = argparse.ArgumentParser(description='typedef')
+    set_cmd_args(parser)
+    set_cmd_args_local(parser)
     args = parser.parse_args()
+
     if logger is None:
         log_args = {}
         if args.log_file:
@@ -819,26 +826,14 @@ def main():
     logger.info('Executing command: %s', sys.argv[1:])
     logger.info('Parsing Url %s' % args.url)
 
-    p = ParserTypeDef(
-        url=args.url,
-        sort=args.sort,
-        cache=args.cache
-    )
-    w = WriterTypeDef(
-        parser=p,
-        print_template=args.print_template,
-        print_json=args.print_json,
-        write_template=args.write_template,
-        write_json=args.write_json,
-        clear_on_print=(not args.no_print_clear),
-        write_template_long=args.long_format,
-        include_desc=args.desc
-    )
+    args_dict = get_kwargs_from_args(args)
     if args.print_template is False and args.print_json is False:
         print('')
-    w.write()
+    parse(**args_dict)
 # endregion Main
 
 
 if __name__ == '__main__':
     main()
+
+# endregion Main

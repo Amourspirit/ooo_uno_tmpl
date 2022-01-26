@@ -1,51 +1,73 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XDatabaseRange",
   "type": "interface",
   "namespace": "com.sun.star.sheet",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "XInterface_8f010a43"
       ]
     ],
     "from_imports_typing": [
       [
-        "..table.cell_range_address",
-        "CellRangeAddress"
+        "..beans.property_value",
+        "PropertyValue",
+        "PropertyValue_c9610c73"
       ],
       [
         ".x_sheet_filter_descriptor",
-        "XSheetFilterDescriptor"
+        "XSheetFilterDescriptor",
+        "XSheetFilterDescriptor_47cc0ff7"
       ],
       [
         ".x_sub_total_descriptor",
-        "XSubTotalDescriptor"
+        "XSubTotalDescriptor",
+        "XSubTotalDescriptor_19fd0ec6"
       ],
       [
-        "..beans.property_value",
-        "PropertyValue"
+        "..table.cell_range_address",
+        "CellRangeAddress",
+        "CellRangeAddress_ec450d43"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
     "quote": [
-      "XSheetFilterDescriptor",
-      "CellRangeAddress",
-      "XSubTotalDescriptor",
-      "typing.List[PropertyValue]"
+      "CellRangeAddress_ec450d43",
+      "XSheetFilterDescriptor_47cc0ff7",
+      "XSubTotalDescriptor_19fd0ec6",
+      "typing.List[PropertyValue_c9610c73]"
     ],
     "typings": [
-      "typing.List[PropertyValue]"
+      "typing.List[PropertyValue_c9610c73]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.beans.PropertyValue",
+        "com.sun.star.sheet.XSheetFilterDescriptor",
+        "com.sun.star.sheet.XSubTotalDescriptor",
+        "com.sun.star.table.CellRangeAddress"
+      ]
+    },
     "name": "XDatabaseRange",
     "imports": [],
     "namespace": "com.sun.star.sheet",
@@ -60,7 +82,7 @@
       "methods": [
         {
           "name": "getDataArea",
-          "returns": "CellRangeAddress",
+          "returns": "CellRangeAddress_ec450d43",
           "desc": [
             "returns the data area of the database range in the spreadsheet document."
           ],
@@ -69,7 +91,7 @@
         },
         {
           "name": "getFilterDescriptor",
-          "returns": "XSheetFilterDescriptor",
+          "returns": "XSheetFilterDescriptor_47cc0ff7",
           "desc": [
             "returns the filter descriptor stored with the database range.",
             "",
@@ -80,7 +102,7 @@
         },
         {
           "name": "getImportDescriptor",
-          "returns": "typing.List[PropertyValue]",
+          "returns": "typing.List[PropertyValue_c9610c73]",
           "desc": [
             "returns the database import descriptor stored with this database range."
           ],
@@ -89,7 +111,7 @@
         },
         {
           "name": "getSortDescriptor",
-          "returns": "typing.List[PropertyValue]",
+          "returns": "typing.List[PropertyValue_c9610c73]",
           "desc": [
             "returns the sort descriptor stored with the database range."
           ],
@@ -98,7 +120,7 @@
         },
         {
           "name": "getSubTotalDescriptor",
-          "returns": "XSubTotalDescriptor",
+          "returns": "XSubTotalDescriptor_19fd0ec6",
           "desc": [
             "returns the subtotal descriptor stored with the database range.",
             "",
@@ -126,7 +148,7 @@
           "args": [
             [
               "aDataArea",
-              "CellRangeAddress",
+              "CellRangeAddress_ec450d43",
               "in"
             ]
           ]

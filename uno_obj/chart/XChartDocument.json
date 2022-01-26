@@ -1,49 +1,71 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XChartDocument",
   "type": "interface",
   "namespace": "com.sun.star.chart",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..frame.x_model",
-        "XModel"
+        "XModel",
+        "XModel_7a6e095c"
       ]
     ],
     "from_imports_typing": [
       [
         "..beans.x_property_set",
-        "XPropertySet"
+        "XPropertySet",
+        "XPropertySet_bc180bfa"
       ],
       [
         ".x_chart_data",
-        "XChartData"
+        "XChartData",
+        "XChartData_a3580ade"
       ],
       [
         ".x_diagram",
-        "XDiagram"
+        "XDiagram",
+        "XDiagram_8e1e0a27"
       ],
       [
         "..drawing.x_shape",
-        "XShape"
+        "XShape",
+        "XShape_8fd00a3d"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.frame.XModel": "XModel_7a6e095c"
+    },
     "quote": [
-      "XChartData",
-      "XDiagram",
-      "XShape",
-      "XPropertySet"
+      "XChartData_a3580ade",
+      "XDiagram_8e1e0a27",
+      "XPropertySet_bc180bfa",
+      "XShape_8fd00a3d"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.frame.XModel"
+      ],
+      "typing": [
+        "com.sun.star.beans.XPropertySet",
+        "com.sun.star.chart.XChartData",
+        "com.sun.star.chart.XDiagram",
+        "com.sun.star.drawing.XShape"
+      ]
+    },
     "name": "XChartDocument",
     "imports": [],
     "namespace": "com.sun.star.chart",
@@ -74,14 +96,14 @@
           "args": [
             [
               "xData",
-              "XChartData",
+              "XChartData_a3580ade",
               "in"
             ]
           ]
         },
         {
           "name": "getArea",
-          "returns": "XPropertySet",
+          "returns": "XPropertySet_bc180bfa",
           "desc": [
             "The area's extent is equal to the document size. If you want to access properties of the background area of the diagram, in which the actual data is represented, you have to change the chart wall which you get from the X3DDisplay."
           ],
@@ -90,7 +112,7 @@
         },
         {
           "name": "getData",
-          "returns": "XChartData",
+          "returns": "XChartData_a3580ade",
           "desc": [
             "The returned object supports interface XChartDataArray which can be used to access the concrete data.",
             "",
@@ -103,21 +125,21 @@
         },
         {
           "name": "getDiagram",
-          "returns": "XDiagram",
+          "returns": "XDiagram_8e1e0a27",
           "desc": [],
           "raises": [],
           "args": []
         },
         {
           "name": "getLegend",
-          "returns": "XShape",
+          "returns": "XShape_8fd00a3d",
           "desc": [],
           "raises": [],
           "args": []
         },
         {
           "name": "getSubTitle",
-          "returns": "XShape",
+          "returns": "XShape_8fd00a3d",
           "desc": [
             "Usually the subtitle is smaller than the main title by default. And it is most commonly placed below the main title by default."
           ],
@@ -126,7 +148,7 @@
         },
         {
           "name": "getTitle",
-          "returns": "XShape",
+          "returns": "XShape_8fd00a3d",
           "desc": [],
           "raises": [],
           "args": []
@@ -143,7 +165,7 @@
           "args": [
             [
               "xDiagram",
-              "XDiagram",
+              "XDiagram_8e1e0a27",
               "in"
             ]
           ]

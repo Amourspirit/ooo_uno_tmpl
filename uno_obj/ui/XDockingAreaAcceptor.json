@@ -1,39 +1,57 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XDockingAreaAcceptor",
   "type": "interface",
   "namespace": "com.sun.star.ui",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "XInterface_8f010a43"
       ]
     ],
     "from_imports_typing": [
       [
-        "..awt.x_window",
-        "XWindow"
+        "..awt.rectangle",
+        "Rectangle",
+        "Rectangle_84b109e9"
       ],
       [
-        "..awt.rectangle",
-        "Rectangle"
+        "..awt.x_window",
+        "XWindow",
+        "XWindow_713b0924"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
     "quote": [
-      "Rectangle",
-      "XWindow"
+      "Rectangle_84b109e9",
+      "XWindow_713b0924"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.awt.Rectangle",
+        "com.sun.star.awt.XWindow"
+      ]
+    },
     "name": "XDockingAreaAcceptor",
     "imports": [],
     "namespace": "com.sun.star.ui",
@@ -54,7 +72,7 @@
       "methods": [
         {
           "name": "getContainerWindow",
-          "returns": "XWindow",
+          "returns": "XWindow_713b0924",
           "desc": [
             "provide the container window where the layout manager can request border space for docking windows.",
             "",
@@ -75,7 +93,7 @@
           "args": [
             [
               "RequestedSpace",
-              "Rectangle",
+              "Rectangle_84b109e9",
               "in"
             ]
           ]
@@ -92,7 +110,7 @@
           "args": [
             [
               "BorderSpace",
-              "Rectangle",
+              "Rectangle_84b109e9",
               "in"
             ]
           ]

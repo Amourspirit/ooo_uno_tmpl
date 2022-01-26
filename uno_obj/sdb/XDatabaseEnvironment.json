@@ -1,34 +1,50 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XDatabaseEnvironment",
   "type": "interface",
   "namespace": "com.sun.star.sdb",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..sdbc.x_driver_manager",
-        "XDriverManager"
+        "XDriverManager",
+        "XDriverManager_c6470c23"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_database_access",
-        "XDatabaseAccess"
+        "XDatabaseAccess",
+        "XDatabaseAccess_c47a0c00"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.sdbc.XDriverManager": "XDriverManager_c6470c23"
+    },
     "quote": [
-      "XDatabaseAccess"
+      "XDatabaseAccess_c47a0c00"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.sdbc.XDriverManager"
+      ],
+      "typing": [
+        "com.sun.star.sdb.XDatabaseAccess"
+      ]
+    },
     "name": "XDatabaseEnvironment",
     "imports": [],
     "namespace": "com.sun.star.sdb",
@@ -47,7 +63,7 @@
       "methods": [
         {
           "name": "createDatabaseAccess",
-          "returns": "XDatabaseAccess",
+          "returns": "XDatabaseAccess_c47a0c00",
           "desc": [],
           "raises": [
             "com.sun.star.sdbc.SQLException"
@@ -67,7 +83,7 @@
         },
         {
           "name": "getDatabaseAccess",
-          "returns": "XDatabaseAccess",
+          "returns": "XDatabaseAccess_c47a0c00",
           "desc": [],
           "raises": [
             "com.sun.star.sdbc.SQLException"

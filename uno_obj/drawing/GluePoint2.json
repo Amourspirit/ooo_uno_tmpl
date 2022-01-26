@@ -1,12 +1,14 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "GluePoint2",
   "namespace": "com.sun.star.drawing",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "sort": true,
@@ -20,22 +22,26 @@
     "from_imports": [],
     "from_imports_typing": [
       [
-        ".escape_direction",
-        "EscapeDirection"
+        "..awt.point",
+        "Point",
+        "Point_5fb2085e"
       ],
       [
         ".alignment",
-        "Alignment"
+        "Alignment",
+        "Alignment_b1400b93"
       ],
       [
-        "..awt.point",
-        "Point"
+        ".escape_direction",
+        "EscapeDirection",
+        "EscapeDirection_fdc50de6"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "EscapeDirection",
-      "Alignment",
-      "Point"
+      "Alignment_b1400b93",
+      "EscapeDirection_fdc50de6",
+      "Point_5fb2085e"
     ],
     "typings": [],
     "requires_typing": true,
@@ -50,7 +56,7 @@
     "items": [
       {
         "name": "Escape",
-        "type": "EscapeDirection",
+        "type": "EscapeDirection_fdc50de6",
         "lines": [
           "this member specifies the escape direction for a glue point.",
           "",
@@ -75,7 +81,7 @@
       },
       {
         "name": "Position",
-        "type": "Point",
+        "type": "Point_5fb2085e",
         "lines": [
           "This is the position of this glue point.",
           "",
@@ -84,7 +90,7 @@
       },
       {
         "name": "PositionAlignment",
-        "type": "Alignment",
+        "type": "Alignment_b1400b93",
         "lines": [
           "if this glue points position is not relative, this enum specifies the vertical and horizontal alignment of this point.",
           "",

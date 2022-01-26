@@ -1,34 +1,50 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XCellAddressable",
   "type": "interface",
   "namespace": "com.sun.star.sheet",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "XInterface_8f010a43"
       ]
     ],
     "from_imports_typing": [
       [
         "..table.cell_address",
-        "CellAddress"
+        "CellAddress",
+        "CellAddress_ae5f0b56"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
     "quote": [
-      "CellAddress"
+      "CellAddress_ae5f0b56"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.table.CellAddress"
+      ]
+    },
     "name": "XCellAddressable",
     "imports": [],
     "namespace": "com.sun.star.sheet",
@@ -43,7 +59,7 @@
       "methods": [
         {
           "name": "getCellAddress",
-          "returns": "CellAddress",
+          "returns": "CellAddress_ae5f0b56",
           "desc": [
             "returns the address of the cell in the spreadsheet document.",
             "",

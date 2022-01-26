@@ -1,48 +1,65 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "DataAccessDescriptor",
   "type": "service",
   "namespace": "com.sun.star.sdb",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [],
     "from_imports_typing": [
       [
-        "..beans.x_property_set",
-        "XPropertySet"
+        "..beans.property_value",
+        "PropertyValue",
+        "PropertyValue_c9610c73"
       ],
       [
-        "..beans.property_value",
-        "PropertyValue"
+        "..beans.x_property_set",
+        "XPropertySet",
+        "XPropertySet_bc180bfa"
       ],
       [
         "..sdbc.x_connection",
-        "XConnection"
+        "XConnection",
+        "XConnection_a36a0b0c"
       ],
       [
         "..sdbc.x_result_set",
-        "XResultSet"
+        "XResultSet",
+        "XResultSet_98e30aa7"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "typing.List[PropertyValue]",
-      "XPropertySet",
-      "XConnection",
-      "typing.List[object]",
-      "XResultSet"
+      "XConnection_a36a0b0c",
+      "XPropertySet_bc180bfa",
+      "XResultSet_98e30aa7",
+      "typing.List[PropertyValue_c9610c73]",
+      "typing.List[object]"
     ],
     "typings": [
-      "typing.List[PropertyValue]",
+      "typing.List[PropertyValue_c9610c73]",
       "typing.List[object]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [],
+      "typing": [
+        "com.sun.star.beans.PropertyValue",
+        "com.sun.star.beans.XPropertySet",
+        "com.sun.star.sdbc.XConnection",
+        "com.sun.star.sdbc.XResultSet"
+      ]
+    },
     "name": "DataAccessDescriptor",
     "imports": [],
     "namespace": "com.sun.star.sdb",
@@ -65,7 +82,7 @@
       "types": [
         {
           "name": "ConnectionInfo",
-          "returns": "typing.List[PropertyValue]",
+          "returns": "typing.List[PropertyValue_c9610c73]",
           "desc": [
             "specifies additional info to use when creating a connection from a ConnectionResource",
             "",
@@ -96,7 +113,7 @@
       "properties": [
         {
           "name": "ActiveConnection",
-          "returns": "XConnection",
+          "returns": "XConnection_a36a0b0c",
           "desc": [
             "is a connection to use.",
             "",
@@ -123,7 +140,7 @@
         },
         {
           "name": "Column",
-          "returns": "XPropertySet",
+          "returns": "XPropertySet_bc180bfa",
           "desc": [
             "specifies a column object",
             "",
@@ -265,7 +282,7 @@
         },
         {
           "name": "ResultSet",
-          "returns": "XResultSet",
+          "returns": "XResultSet_98e30aa7",
           "desc": [
             "specifies an already existent result set to use.",
             "",

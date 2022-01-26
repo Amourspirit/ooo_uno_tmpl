@@ -1,44 +1,64 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "RedlinePortion",
   "type": "service",
   "namespace": "com.sun.star.text",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         ".text_portion",
-        "TextPortion"
+        "TextPortion",
+        "TextPortion_a6f80b5d"
       ]
     ],
     "from_imports_typing": [
       [
-        "..util.date_time",
-        "DateTime"
+        "..beans.property_values",
+        "PropertyValues",
+        "PropertyValues_d6470ce6"
       ],
       [
         ".x_text",
-        "XText"
+        "XText",
+        "XText_690408ca"
       ],
       [
-        "..beans.property_values",
-        "PropertyValues"
+        "..util.date_time",
+        "DateTime",
+        "DateTime_84de09d3"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.text.TextPortion": "TextPortion_a6f80b5d"
+    },
     "quote": [
-      "XText",
-      "PropertyValues",
-      "DateTime"
+      "DateTime_84de09d3",
+      "PropertyValues_d6470ce6",
+      "XText_690408ca"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.text.TextPortion"
+      ],
+      "typing": [
+        "com.sun.star.beans.PropertyValues",
+        "com.sun.star.text.XText",
+        "com.sun.star.util.DateTime"
+      ]
+    },
     "name": "RedlinePortion",
     "imports": [],
     "namespace": "com.sun.star.text",
@@ -91,7 +111,7 @@
         },
         {
           "name": "RedlineDateTime",
-          "returns": "DateTime",
+          "returns": "DateTime_84de09d3",
           "desc": [
             "contains the date and time of the change."
           ],
@@ -111,7 +131,7 @@
         },
         {
           "name": "RedlineSuccessorData",
-          "returns": "PropertyValues",
+          "returns": "PropertyValues_d6470ce6",
           "desc": [
             "contains the data of a second level redline data",
             "",
@@ -122,7 +142,7 @@
         },
         {
           "name": "RedlineText",
-          "returns": "XText",
+          "returns": "XText_690408ca",
           "desc": [
             "provides access to the text of the redline.",
             "",

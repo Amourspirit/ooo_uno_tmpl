@@ -1,49 +1,71 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XAcceleratorConfiguration",
   "type": "interface",
   "namespace": "com.sun.star.ui",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
+        ".xui_configuration",
+        "XUIConfiguration",
+        "XUIConfiguration_c4eb0c34"
+      ],
+      [
         ".xui_configuration_persistence",
-        "XUIConfigurationPersistence"
+        "XUIConfigurationPersistence",
+        "XUIConfigurationPersistence_661010b9"
       ],
       [
         ".xui_configuration_storage",
-        "XUIConfigurationStorage"
-      ],
-      [
-        ".xui_configuration",
-        "XUIConfiguration"
+        "XUIConfigurationStorage",
+        "XUIConfigurationStorage_25ac0f09"
       ]
     ],
     "from_imports_typing": [
       [
         "..awt.key_event",
-        "KeyEvent"
+        "KeyEvent",
+        "KeyEvent_7a78097f"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.ui.XUIConfiguration": "XUIConfiguration_c4eb0c34",
+      "com.sun.star.ui.XUIConfigurationPersistence": "XUIConfigurationPersistence_661010b9",
+      "com.sun.star.ui.XUIConfigurationStorage": "XUIConfigurationStorage_25ac0f09"
+    },
     "quote": [
-      "typing.List[str]",
-      "KeyEvent",
-      "typing.List[KeyEvent]",
-      "typing.List[object]"
+      "KeyEvent_7a78097f",
+      "typing.List[KeyEvent_7a78097f]",
+      "typing.List[object]",
+      "typing.List[str]"
     ],
     "typings": [
-      "typing.List[str]",
+      "typing.List[KeyEvent_7a78097f]",
       "typing.List[object]",
-      "typing.List[KeyEvent]"
+      "typing.List[str]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.ui.XUIConfiguration",
+        "com.sun.star.ui.XUIConfigurationPersistence",
+        "com.sun.star.ui.XUIConfigurationStorage"
+      ],
+      "typing": [
+        "com.sun.star.awt.KeyEvent"
+      ]
+    },
     "name": "XAcceleratorConfiguration",
     "imports": [],
     "namespace": "com.sun.star.ui",
@@ -69,7 +91,7 @@
       "methods": [
         {
           "name": "getAllKeyEvents",
-          "returns": "typing.List[KeyEvent]",
+          "returns": "typing.List[KeyEvent_7a78097f]",
           "desc": [
             "return the list of all key events, which are available at this configuration set.",
             "",
@@ -94,14 +116,14 @@
           "args": [
             [
               "aKeyEvent",
-              "KeyEvent",
+              "KeyEvent_7a78097f",
               "in"
             ]
           ]
         },
         {
           "name": "getKeyEventsByCommand",
-          "returns": "typing.List[KeyEvent]",
+          "returns": "typing.List[KeyEvent_7a78097f]",
           "desc": [
             "optimized access to the relation \\\"command-key\\\" instead of \\\"key-command\\\" which is provided normally by this interface.",
             "",
@@ -175,7 +197,7 @@
           "args": [
             [
               "aKeyEvent",
-              "KeyEvent",
+              "KeyEvent_7a78097f",
               "in"
             ]
           ]
@@ -199,7 +221,7 @@
           "args": [
             [
               "aKeyEvent",
-              "KeyEvent",
+              "KeyEvent_7a78097f",
               "in"
             ],
             [

@@ -1,45 +1,66 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XPresentation2",
   "type": "interface",
   "namespace": "com.sun.star.presentation",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
-        ".x_presentation",
-        "XPresentation"
+        "..beans.x_property_set",
+        "XPropertySet",
+        "XPropertySet_bc180bfa"
       ],
       [
-        "..beans.x_property_set",
-        "XPropertySet"
+        ".x_presentation",
+        "XPresentation",
+        "XPresentation_30890f78"
       ]
     ],
     "from_imports_typing": [
       [
-        ".x_slide_show_controller",
-        "XSlideShowController"
+        "..beans.property_value",
+        "PropertyValue",
+        "PropertyValue_c9610c73"
       ],
       [
-        "..beans.property_value",
-        "PropertyValue"
+        ".x_slide_show_controller",
+        "XSlideShowController",
+        "XSlideShowController_a55c1232"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.beans.XPropertySet": "XPropertySet_bc180bfa",
+      "com.sun.star.presentation.XPresentation": "XPresentation_30890f78"
+    },
     "quote": [
-      "XSlideShowController",
-      "typing.List[PropertyValue]"
+      "XSlideShowController_a55c1232",
+      "typing.List[PropertyValue_c9610c73]"
     ],
     "typings": [
-      "typing.List[PropertyValue]"
+      "typing.List[PropertyValue_c9610c73]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.beans.XPropertySet",
+        "com.sun.star.presentation.XPresentation"
+      ],
+      "typing": [
+        "com.sun.star.beans.PropertyValue",
+        "com.sun.star.presentation.XSlideShowController"
+      ]
+    },
     "name": "XPresentation2",
     "imports": [],
     "namespace": "com.sun.star.presentation",
@@ -59,7 +80,7 @@
       "methods": [
         {
           "name": "getController",
-          "returns": "XSlideShowController",
+          "returns": "XSlideShowController_a55c1232",
           "desc": [
             "if the slide show is running, this returns a controller object to control the running slide show."
           ],
@@ -87,7 +108,7 @@
           "args": [
             [
               "Arguments",
-              "typing.List[PropertyValue]",
+              "typing.List[PropertyValue_c9610c73]",
               "in"
             ]
           ]

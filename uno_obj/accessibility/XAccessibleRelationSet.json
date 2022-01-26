@@ -1,34 +1,50 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XAccessibleRelationSet",
   "type": "interface",
   "namespace": "com.sun.star.accessibility",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "XInterface_8f010a43"
       ]
     ],
     "from_imports_typing": [
       [
         ".accessible_relation",
-        "AccessibleRelation"
+        "AccessibleRelation",
+        "AccessibleRelation_8f8b119c"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
     "quote": [
-      "AccessibleRelation"
+      "AccessibleRelation_8f8b119c"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.accessibility.AccessibleRelation"
+      ]
+    },
     "name": "XAccessibleRelationSet",
     "imports": [],
     "namespace": "com.sun.star.accessibility",
@@ -64,7 +80,7 @@
         },
         {
           "name": "getRelation",
-          "returns": "AccessibleRelation",
+          "returns": "AccessibleRelation_8f8b119c",
           "desc": [
             "Returns the relation of this relation set that is specified by the given index."
           ],
@@ -81,7 +97,7 @@
         },
         {
           "name": "getRelationByType",
-          "returns": "AccessibleRelation",
+          "returns": "AccessibleRelation_8f8b119c",
           "desc": [
             "Retrieve and return the relation with the given relation type."
           ],

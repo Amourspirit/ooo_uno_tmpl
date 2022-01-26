@@ -1,43 +1,61 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XEngine",
   "type": "interface",
   "namespace": "com.sun.star.script",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "XInterface_8f010a43"
       ]
     ],
     "from_imports_typing": [
       [
-        ".x_library_access",
-        "XLibraryAccess"
+        ".x_engine_listener",
+        "XEngineListener",
+        "XEngineListener_f0b70d91"
       ],
       [
-        ".x_engine_listener",
-        "XEngineListener"
+        ".x_library_access",
+        "XLibraryAccess",
+        "XLibraryAccess_e32a0d1c"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
     "quote": [
-      "typing.List[object]",
-      "XEngineListener",
-      "XLibraryAccess",
-      "XInterface"
+      "XEngineListener_f0b70d91",
+      "XInterface_8f010a43",
+      "XLibraryAccess_e32a0d1c",
+      "typing.List[object]"
     ],
     "typings": [
       "typing.List[object]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.script.XEngineListener",
+        "com.sun.star.script.XLibraryAccess"
+      ]
+    },
     "name": "XEngine",
     "imports": [],
     "namespace": "com.sun.star.script",
@@ -66,7 +84,7 @@
           "args": [
             [
               "Listener",
-              "XEngineListener",
+              "XEngineListener_f0b70d91",
               "in"
             ]
           ]
@@ -109,7 +127,7 @@
         },
         {
           "name": "getRoot",
-          "returns": "XInterface",
+          "returns": "XInterface_8f010a43",
           "desc": [
             "gets an interface to the object which is the scripting root."
           ],
@@ -128,7 +146,7 @@
           "args": [
             [
               "Listener",
-              "XEngineListener",
+              "XEngineListener_f0b70d91",
               "in"
             ]
           ]
@@ -150,7 +168,7 @@
             ],
             [
               "xThis",
-              "XInterface",
+              "XInterface_8f010a43",
               "in"
             ],
             [
@@ -177,7 +195,7 @@
             ],
             [
               "xThis",
-              "XInterface",
+              "XInterface_8f010a43",
               "in"
             ],
             [
@@ -187,7 +205,7 @@
             ],
             [
               "xCallback",
-              "XEngineListener",
+              "XEngineListener_f0b70d91",
               "in"
             ]
           ]
@@ -202,7 +220,7 @@
           "args": [
             [
               "Library",
-              "XLibraryAccess",
+              "XLibraryAccess_e32a0d1c",
               "in"
             ]
           ]
@@ -219,7 +237,7 @@
           "args": [
             [
               "xRoot",
-              "XInterface",
+              "XInterface_8f010a43",
               "in"
             ]
           ]

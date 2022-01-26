@@ -1,12 +1,14 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "Gradient",
   "namespace": "com.sun.star.awt",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "sort": true,
@@ -20,17 +22,20 @@
     "from_imports": [],
     "from_imports_typing": [
       [
-        "..util.color",
-        "Color"
+        ".gradient_style",
+        "GradientStyle",
+        "GradientStyle_b02b0b93"
       ],
       [
-        ".gradient_style",
-        "GradientStyle"
+        "..util.color",
+        "Color",
+        "Color_68e908c5"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "Color",
-      "GradientStyle"
+      "Color_68e908c5",
+      "GradientStyle_b02b0b93"
     ],
     "typings": [],
     "requires_typing": true,
@@ -59,7 +64,7 @@
       },
       {
         "name": "EndColor",
-        "type": "Color",
+        "type": "Color_68e908c5",
         "lines": [
           "specifies the color at the end point of the gradient."
         ]
@@ -73,7 +78,7 @@
       },
       {
         "name": "StartColor",
-        "type": "Color",
+        "type": "Color_68e908c5",
         "lines": [
           "specifies the color at the start point of the gradient."
         ]
@@ -98,7 +103,7 @@
       },
       {
         "name": "Style",
-        "type": "GradientStyle",
+        "type": "GradientStyle_b02b0b93",
         "lines": [
           "specifies the style of the gradient."
         ]

@@ -1,39 +1,55 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XSecurityEnvironment",
   "type": "interface",
   "namespace": "com.sun.star.xml.crypto",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "...uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "XInterface_8f010a43"
       ]
     ],
     "from_imports_typing": [
       [
         "...security.x_certificate",
-        "XCertificate"
+        "XCertificate",
+        "XCertificate_e55b0d3b"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
     "quote": [
-      "typing.List[int]",
-      "XCertificate",
-      "typing.List[XCertificate]"
+      "XCertificate_e55b0d3b",
+      "typing.List[XCertificate_e55b0d3b]",
+      "typing.List[int]"
     ],
     "typings": [
-      "typing.List[int]",
-      "typing.List[XCertificate]"
+      "typing.List[XCertificate_e55b0d3b]",
+      "typing.List[int]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.security.XCertificate"
+      ]
+    },
     "name": "XSecurityEnvironment",
     "imports": [],
     "namespace": "com.sun.star.xml.crypto",
@@ -52,7 +68,7 @@
       "methods": [
         {
           "name": "buildCertificatePath",
-          "returns": "typing.List[XCertificate]",
+          "returns": "typing.List[XCertificate_e55b0d3b]",
           "desc": [
             "Build certificate path from a certain certificate."
           ],
@@ -62,14 +78,14 @@
           "args": [
             [
               "beginCert",
-              "XCertificate",
+              "XCertificate_e55b0d3b",
               "in"
             ]
           ]
         },
         {
           "name": "createCertificateFromAscii",
-          "returns": "XCertificate",
+          "returns": "XCertificate_e55b0d3b",
           "desc": [
             "Create certificate interface from a Base64 encoded certificate."
           ],
@@ -86,7 +102,7 @@
         },
         {
           "name": "createCertificateFromRaw",
-          "returns": "XCertificate",
+          "returns": "XCertificate_e55b0d3b",
           "desc": [
             "Create certificate interface from raw DER encoded certificate."
           ],
@@ -103,7 +119,7 @@
         },
         {
           "name": "getAllCertificates",
-          "returns": "typing.List[XCertificate]",
+          "returns": "typing.List[XCertificate_e55b0d3b]",
           "desc": [
             "List all certificates, private (as returned by getPersonalCertificates) as well as those of other people/orgas.",
             "",
@@ -118,7 +134,7 @@
         },
         {
           "name": "getCertificate",
-          "returns": "XCertificate",
+          "returns": "XCertificate_e55b0d3b",
           "desc": [
             "Get certificate from the environment by issuer name and serial number."
           ],
@@ -154,14 +170,14 @@
           "args": [
             [
               "xCertificate",
-              "XCertificate",
+              "XCertificate_e55b0d3b",
               "in"
             ]
           ]
         },
         {
           "name": "getPersonalCertificates",
-          "returns": "typing.List[XCertificate]",
+          "returns": "typing.List[XCertificate_e55b0d3b]",
           "desc": [
             "Get personal certificates from the environment."
           ],
@@ -193,12 +209,12 @@
           "args": [
             [
               "xEECertificate",
-              "XCertificate",
+              "XCertificate_e55b0d3b",
               "in"
             ],
             [
               "intermediateCertificates",
-              "typing.List[XCertificate]",
+              "typing.List[XCertificate_e55b0d3b]",
               "in"
             ]
           ]

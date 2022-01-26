@@ -1,41 +1,59 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "TableSortDescriptor",
   "type": "service",
   "namespace": "com.sun.star.table",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..util.sort_descriptor",
-        "SortDescriptor"
+        "SortDescriptor",
+        "SortDescriptor_ca680c8d"
       ]
     ],
     "from_imports_typing": [
       [
         ".table_orientation",
-        "TableOrientation"
+        "TableOrientation",
+        "TableOrientation_ee780d84"
       ],
       [
         "..util.sort_field",
-        "SortField"
+        "SortField",
+        "SortField_90080a52"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.util.SortDescriptor": "SortDescriptor_ca680c8d"
+    },
     "quote": [
-      "TableOrientation",
-      "typing.List[SortField]"
+      "TableOrientation_ee780d84",
+      "typing.List[SortField_90080a52]"
     ],
     "typings": [
-      "typing.List[SortField]"
+      "typing.List[SortField_90080a52]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.util.SortDescriptor"
+      ],
+      "typing": [
+        "com.sun.star.table.TableOrientation",
+        "com.sun.star.util.SortField"
+      ]
+    },
     "name": "TableSortDescriptor",
     "imports": [],
     "namespace": "com.sun.star.table",
@@ -56,7 +74,7 @@
       "types": [
         {
           "name": "SortFields",
-          "returns": "typing.List[SortField]",
+          "returns": "typing.List[SortField_90080a52]",
           "desc": [
             "specifies the descriptions of the individual sort fields."
           ],
@@ -85,7 +103,7 @@
         },
         {
           "name": "Orientation",
-          "returns": "TableOrientation",
+          "returns": "TableOrientation_ee780d84",
           "desc": [
             "specifies the sorting orientation (sort rows or columns).",
             "",

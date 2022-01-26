@@ -1,70 +1,106 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "ChartAxis",
   "type": "service",
   "namespace": "com.sun.star.chart",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
-        "..drawing.line_properties",
-        "LineProperties"
-      ],
-      [
         "..beans.x_property_set",
-        "XPropertySet"
+        "XPropertySet",
+        "XPropertySet_bc180bfa"
       ],
       [
         ".x_axis",
-        "XAxis"
+        "XAxis",
+        "XAxis_71210907"
       ],
       [
-        "..xml.user_defined_attributes_supplier",
-        "UserDefinedAttributesSupplier"
+        "..drawing.line_properties",
+        "LineProperties",
+        "LineProperties_f13f0da9"
       ],
       [
         "..style.character_properties",
-        "CharacterProperties"
+        "CharacterProperties",
+        "CharacterProperties_1d4f0ef3"
+      ],
+      [
+        "..xml.user_defined_attributes_supplier",
+        "UserDefinedAttributesSupplier",
+        "UserDefinedAttributesSupplier_9fbe1222"
       ]
     ],
     "from_imports_typing": [
       [
-        ".chart_axis_mark_position",
-        "ChartAxisMarkPosition"
+        ".chart_axis_arrange_order_type",
+        "ChartAxisArrangeOrderType",
+        "ChartAxisArrangeOrderType_783b10ff"
       ],
       [
         ".chart_axis_label_position",
-        "ChartAxisLabelPosition"
+        "ChartAxisLabelPosition",
+        "ChartAxisLabelPosition_463a0fd6"
       ],
       [
-        ".time_increment",
-        "TimeIncrement"
-      ],
-      [
-        ".chart_axis_arrange_order_type",
-        "ChartAxisArrangeOrderType"
+        ".chart_axis_mark_position",
+        "ChartAxisMarkPosition",
+        "ChartAxisMarkPosition_373b0f81"
       ],
       [
         ".chart_axis_position",
-        "ChartAxisPosition"
+        "ChartAxisPosition",
+        "ChartAxisPosition_fcaa0df6"
+      ],
+      [
+        ".time_increment",
+        "TimeIncrement",
+        "TimeIncrement_c7e70c4e"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.beans.XPropertySet": "XPropertySet_bc180bfa",
+      "com.sun.star.chart.XAxis": "XAxis_71210907",
+      "com.sun.star.drawing.LineProperties": "LineProperties_f13f0da9",
+      "com.sun.star.style.CharacterProperties": "CharacterProperties_1d4f0ef3",
+      "com.sun.star.xml.UserDefinedAttributesSupplier": "UserDefinedAttributesSupplier_9fbe1222"
+    },
     "quote": [
-      "ChartAxisMarkPosition",
-      "TimeIncrement",
-      "ChartAxisArrangeOrderType",
-      "ChartAxisPosition",
-      "ChartAxisLabelPosition"
+      "ChartAxisArrangeOrderType_783b10ff",
+      "ChartAxisLabelPosition_463a0fd6",
+      "ChartAxisMarkPosition_373b0f81",
+      "ChartAxisPosition_fcaa0df6",
+      "TimeIncrement_c7e70c4e"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.beans.XPropertySet",
+        "com.sun.star.chart.XAxis",
+        "com.sun.star.drawing.LineProperties",
+        "com.sun.star.style.CharacterProperties",
+        "com.sun.star.xml.UserDefinedAttributesSupplier"
+      ],
+      "typing": [
+        "com.sun.star.chart.ChartAxisArrangeOrderType",
+        "com.sun.star.chart.ChartAxisLabelPosition",
+        "com.sun.star.chart.ChartAxisMarkPosition",
+        "com.sun.star.chart.ChartAxisPosition",
+        "com.sun.star.chart.TimeIncrement"
+      ]
+    },
     "name": "ChartAxis",
     "imports": [],
     "namespace": "com.sun.star.chart",
@@ -89,7 +125,7 @@
       "properties": [
         {
           "name": "ArrangeOrder",
-          "returns": "ChartAxisArrangeOrderType",
+          "returns": "ChartAxisArrangeOrderType_783b10ff",
           "desc": [
             "The axis description may be arranged in a special order for a better placement."
           ],
@@ -158,7 +194,7 @@
         },
         {
           "name": "CrossoverPosition",
-          "returns": "ChartAxisPosition",
+          "returns": "ChartAxisPosition_fcaa0df6",
           "desc": [
             "Determines where the axis crosses the other axis."
           ],
@@ -207,7 +243,7 @@
         },
         {
           "name": "LabelPosition",
-          "returns": "ChartAxisLabelPosition",
+          "returns": "ChartAxisLabelPosition_463a0fd6",
           "desc": [
             "Determines where the axis labels are placed."
           ],
@@ -236,7 +272,7 @@
         },
         {
           "name": "MarkPosition",
-          "returns": "ChartAxisMarkPosition",
+          "returns": "ChartAxisMarkPosition_373b0f81",
           "desc": [
             "Determines where the interval marks are placed."
           ],
@@ -374,7 +410,7 @@
         },
         {
           "name": "TimeIncrement",
-          "returns": "TimeIncrement",
+          "returns": "TimeIncrement_c7e70c4e",
           "desc": [
             "if the current axis is a date-axis the intervals are chosen as given with TimeIncrement",
             "",

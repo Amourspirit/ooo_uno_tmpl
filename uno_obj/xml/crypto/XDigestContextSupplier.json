@@ -1,41 +1,59 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XDigestContextSupplier",
   "type": "interface",
   "namespace": "com.sun.star.xml.crypto",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "...uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "XInterface_8f010a43"
       ]
     ],
     "from_imports_typing": [
       [
-        ".x_digest_context",
-        "XDigestContext"
+        "...beans.named_value",
+        "NamedValue",
+        "NamedValue_a37a0af3"
       ],
       [
-        "...beans.named_value",
-        "NamedValue"
+        ".x_digest_context",
+        "XDigestContext",
+        "XDigestContext_1b2b0ec5"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
     "quote": [
-      "XDigestContext",
-      "typing.List[NamedValue]"
+      "XDigestContext_1b2b0ec5",
+      "typing.List[NamedValue_a37a0af3]"
     ],
     "typings": [
-      "typing.List[NamedValue]"
+      "typing.List[NamedValue_a37a0af3]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.beans.NamedValue",
+        "com.sun.star.xml.crypto.XDigestContext"
+      ]
+    },
     "name": "XDigestContextSupplier",
     "imports": [],
     "namespace": "com.sun.star.xml.crypto",
@@ -54,7 +72,7 @@
       "methods": [
         {
           "name": "getDigestContext",
-          "returns": "XDigestContext",
+          "returns": "XDigestContext_1b2b0ec5",
           "desc": [
             "returns an object that allows to generate the specified digest."
           ],
@@ -69,7 +87,7 @@
             ],
             [
               "aParams",
-              "typing.List[NamedValue]",
+              "typing.List[NamedValue_a37a0af3]",
               "in"
             ]
           ]

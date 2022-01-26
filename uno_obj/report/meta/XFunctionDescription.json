@@ -1,43 +1,61 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XFunctionDescription",
   "type": "interface",
   "namespace": "com.sun.star.report.meta",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "...beans.x_property_set",
-        "XPropertySet"
+        "XPropertySet",
+        "XPropertySet_bc180bfa"
       ]
     ],
     "from_imports_typing": [
       [
-        "...sheet.function_argument",
-        "FunctionArgument"
+        ".x_function_category",
+        "XFunctionCategory",
+        "XFunctionCategory_59e21055"
       ],
       [
-        ".x_function_category",
-        "XFunctionCategory"
+        "...sheet.function_argument",
+        "FunctionArgument",
+        "FunctionArgument_f1080daa"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.beans.XPropertySet": "XPropertySet_bc180bfa"
+    },
     "quote": [
-      "typing.List[str]",
-      "XFunctionCategory",
-      "typing.List[FunctionArgument]"
+      "XFunctionCategory_59e21055",
+      "typing.List[FunctionArgument_f1080daa]",
+      "typing.List[str]"
     ],
     "typings": [
-      "typing.List[str]",
-      "typing.List[FunctionArgument]"
+      "typing.List[FunctionArgument_f1080daa]",
+      "typing.List[str]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.beans.XPropertySet"
+      ],
+      "typing": [
+        "com.sun.star.report.meta.XFunctionCategory",
+        "com.sun.star.sheet.FunctionArgument"
+      ]
+    },
     "name": "XFunctionDescription",
     "imports": [],
     "namespace": "com.sun.star.report.meta",
@@ -71,7 +89,7 @@
       "types": [
         {
           "name": "Arguments",
-          "returns": "typing.List[FunctionArgument]",
+          "returns": "typing.List[FunctionArgument_f1080daa]",
           "desc": [
             "returns a sequence of localized descriptions of the function's arguments (in the order specified by the function)."
           ],
@@ -82,7 +100,7 @@
       "properties": [
         {
           "name": "Category",
-          "returns": "XFunctionCategory",
+          "returns": "XFunctionCategory_59e21055",
           "desc": [
             "specifies the category number."
           ],

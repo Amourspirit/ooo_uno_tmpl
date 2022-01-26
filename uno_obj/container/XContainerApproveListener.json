@@ -1,34 +1,47 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XContainerApproveListener",
   "type": "interface",
   "namespace": "com.sun.star.container",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [],
     "from_imports_typing": [
       [
-        "..util.x_veto",
-        "XVeto"
+        ".container_event",
+        "ContainerEvent",
+        "ContainerEvent_ea50e70"
       ],
       [
-        ".container_event",
-        "ContainerEvent"
+        "..util.x_veto",
+        "XVeto",
+        "XVeto_68e008bc"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "XVeto",
-      "ContainerEvent"
+      "ContainerEvent_ea50e70",
+      "XVeto_68e008bc"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [],
+      "typing": [
+        "com.sun.star.container.ContainerEvent",
+        "com.sun.star.util.XVeto"
+      ]
+    },
     "name": "XContainerApproveListener",
     "imports": [],
     "namespace": "com.sun.star.container",
@@ -41,7 +54,7 @@
       "methods": [
         {
           "name": "approveInsertElement",
-          "returns": "XVeto",
+          "returns": "XVeto_68e008bc",
           "desc": [
             "is called for the listener to approve an insertion into the container"
           ],
@@ -51,14 +64,14 @@
           "args": [
             [
               "Event",
-              "ContainerEvent",
+              "ContainerEvent_ea50e70",
               "in"
             ]
           ]
         },
         {
           "name": "approveRemoveElement",
-          "returns": "XVeto",
+          "returns": "XVeto_68e008bc",
           "desc": [
             "is called for the listener to approve a removal of an element from the container"
           ],
@@ -68,14 +81,14 @@
           "args": [
             [
               "Event",
-              "ContainerEvent",
+              "ContainerEvent_ea50e70",
               "in"
             ]
           ]
         },
         {
           "name": "approveReplaceElement",
-          "returns": "XVeto",
+          "returns": "XVeto_68e008bc",
           "desc": [
             "is called for the listener to approve a replacement inside the container"
           ],
@@ -85,7 +98,7 @@
           "args": [
             [
               "Event",
-              "ContainerEvent",
+              "ContainerEvent_ea50e70",
               "in"
             ]
           ]

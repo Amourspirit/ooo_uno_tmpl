@@ -1,31 +1,47 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "CellAnnotations",
   "type": "service",
   "namespace": "com.sun.star.sheet",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
-        ".x_sheet_annotations",
-        "XSheetAnnotations"
+        "..container.x_enumeration_access",
+        "XEnumerationAccess",
+        "XEnumerationAccess_4bac0ffc"
       ],
       [
-        "..container.x_enumeration_access",
-        "XEnumerationAccess"
+        ".x_sheet_annotations",
+        "XSheetAnnotations",
+        "XSheetAnnotations_fd4a0e00"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.container.XEnumerationAccess": "XEnumerationAccess_4bac0ffc",
+      "com.sun.star.sheet.XSheetAnnotations": "XSheetAnnotations_fd4a0e00"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
+    "full_imports": {
+      "general": [
+        "com.sun.star.container.XEnumerationAccess",
+        "com.sun.star.sheet.XSheetAnnotations"
+      ],
+      "typing": []
+    },
     "name": "CellAnnotations",
     "imports": [],
     "namespace": "com.sun.star.sheet",

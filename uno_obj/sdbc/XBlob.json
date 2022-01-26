@@ -1,42 +1,54 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XBlob",
   "type": "interface",
   "namespace": "com.sun.star.sdbc",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "XInterface_8f010a43"
       ]
     ],
     "from_imports_typing": [
       [
-        ".x_blob",
-        "XBlob"
-      ],
-      [
         "..io.x_input_stream",
-        "XInputStream"
+        "XInputStream",
+        "XInputStream_98d40ab4"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
     "quote": [
-      "typing.List[int]",
-      "XInputStream",
-      "XBlob"
+      "XBlob",
+      "XInputStream_98d40ab4",
+      "typing.List[int]"
     ],
     "typings": [
       "typing.List[int]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.io.XInputStream"
+      ]
+    },
     "name": "XBlob",
     "imports": [],
     "namespace": "com.sun.star.sdbc",
@@ -57,7 +69,7 @@
       "methods": [
         {
           "name": "getBinaryStream",
-          "returns": "XInputStream",
+          "returns": "XInputStream_98d40ab4",
           "desc": [
             "retrieves the  BLOB  designated by this Blob instance as a stream."
           ],

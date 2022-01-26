@@ -1,47 +1,61 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XPrimitive3D",
   "type": "interface",
   "namespace": "com.sun.star.graphic",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "XInterface_8f010a43"
       ]
     ],
     "from_imports_typing": [
       [
-        "..geometry.real_rectangle3_d",
-        "RealRectangle3D"
-      ],
-      [
         "..beans.property_value",
-        "PropertyValue"
+        "PropertyValue",
+        "PropertyValue_c9610c73"
       ],
       [
-        ".x_primitive3_d",
-        "XPrimitive3D"
+        "..geometry.real_rectangle3_d",
+        "RealRectangle3D",
+        "RealRectangle3D_d9d0e04"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
     "quote": [
-      "RealRectangle3D",
-      "typing.List[XPrimitive3D]",
-      "typing.List[PropertyValue]"
+      "RealRectangle3D_d9d0e04",
+      "typing.List[PropertyValue_c9610c73]",
+      "typing.List[XPrimitive3D]"
     ],
     "typings": [
-      "typing.List[XPrimitive3D]",
-      "typing.List[PropertyValue]"
+      "typing.List[PropertyValue_c9610c73]",
+      "typing.List[XPrimitive3D]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.beans.PropertyValue",
+        "com.sun.star.geometry.RealRectangle3D"
+      ]
+    },
     "name": "XPrimitive3D",
     "imports": [],
     "namespace": "com.sun.star.graphic",
@@ -70,14 +84,14 @@
           "args": [
             [
               "aViewParameters",
-              "typing.List[PropertyValue]",
+              "typing.List[PropertyValue_c9610c73]",
               "in"
             ]
           ]
         },
         {
           "name": "getRange",
-          "returns": "RealRectangle3D",
+          "returns": "RealRectangle3D_d9d0e04",
           "desc": [
             "Retrieve bound rect of primitive.",
             "",
@@ -87,7 +101,7 @@
           "args": [
             [
               "aViewParameters",
-              "typing.List[PropertyValue]",
+              "typing.List[PropertyValue_c9610c73]",
               "in"
             ]
           ]

@@ -1,42 +1,53 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "SetAccess",
   "type": "service",
   "namespace": "com.sun.star.configuration",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
-        "..container.x_container",
-        "XContainer"
-      ],
-      [
         ".hierarchy_access",
-        "HierarchyAccess"
+        "HierarchyAccess",
+        "HierarchyAccess_5e871071"
       ],
       [
         ".simple_set_access",
-        "SimpleSetAccess"
+        "SimpleSetAccess",
+        "SimpleSetAccess_5ea81068"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.configuration.HierarchyAccess": "HierarchyAccess_5e871071",
+      "com.sun.star.configuration.SimpleSetAccess": "SimpleSetAccess_5ea81068"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
+    "full_imports": {
+      "general": [
+        "com.sun.star.configuration.HierarchyAccess",
+        "com.sun.star.configuration.SimpleSetAccess"
+      ],
+      "typing": []
+    },
     "name": "SetAccess",
     "imports": [],
     "namespace": "com.sun.star.configuration",
     "extends": [
       "com.sun.star.configuration.HierarchyAccess",
-      "com.sun.star.configuration.SimpleSetAccess",
-      "com.sun.star.container.XContainer"
+      "com.sun.star.configuration.SimpleSetAccess"
     ],
     "desc": [
       "provides access to a dynamic, homogeneous set of values or nested trees within a hierarchy.",

@@ -1,51 +1,65 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XRegistryKey",
   "type": "interface",
   "namespace": "com.sun.star.registry",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "XInterface_8f010a43"
       ]
     ],
     "from_imports_typing": [
       [
-        ".x_registry_key",
-        "XRegistryKey"
-      ],
-      [
         ".registry_key_type",
-        "RegistryKeyType"
+        "RegistryKeyType",
+        "RegistryKeyType_11940ea5"
       ],
       [
         ".registry_value_type",
-        "RegistryValueType"
+        "RegistryValueType",
+        "RegistryValueType_30390f79"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
     "quote": [
-      "typing.List[str]",
-      "RegistryKeyType",
+      "RegistryKeyType_11940ea5",
+      "RegistryValueType_30390f79",
+      "XRegistryKey",
       "typing.List[XRegistryKey]",
       "typing.List[int]",
-      "RegistryValueType",
-      "XRegistryKey"
+      "typing.List[str]"
     ],
     "typings": [
+      "typing.List[XRegistryKey]",
       "typing.List[int]",
-      "typing.List[str]",
-      "typing.List[XRegistryKey]"
+      "typing.List[str]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.registry.RegistryKeyType",
+        "com.sun.star.registry.RegistryValueType"
+      ]
+    },
     "name": "XRegistryKey",
     "imports": [],
     "namespace": "com.sun.star.registry",
@@ -187,7 +201,7 @@
         },
         {
           "name": "getKeyType",
-          "returns": "RegistryKeyType",
+          "returns": "RegistryKeyType_11940ea5",
           "desc": [],
           "raises": [
             "com.sun.star.registry.InvalidRegistryException"
@@ -272,7 +286,7 @@
         },
         {
           "name": "getValueType",
-          "returns": "RegistryValueType",
+          "returns": "RegistryValueType_30390f79",
           "desc": [],
           "raises": [
             "com.sun.star.registry.InvalidRegistryException"

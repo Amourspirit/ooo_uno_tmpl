@@ -1,43 +1,61 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XFlatParagraph",
   "type": "interface",
   "namespace": "com.sun.star.text",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         ".x_text_markup",
-        "XTextMarkup"
+        "XTextMarkup",
+        "XTextMarkup_a5d60b3a"
       ]
     ],
     "from_imports_typing": [
       [
-        "..lang.locale",
-        "Locale"
+        "..beans.property_value",
+        "PropertyValue",
+        "PropertyValue_c9610c73"
       ],
       [
-        "..beans.property_value",
-        "PropertyValue"
+        "..lang.locale",
+        "Locale",
+        "Locale_70d308fa"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.text.XTextMarkup": "XTextMarkup_a5d60b3a"
+    },
     "quote": [
-      "typing.List[int]",
-      "Locale",
-      "typing.List[PropertyValue]"
+      "Locale_70d308fa",
+      "typing.List[PropertyValue_c9610c73]",
+      "typing.List[int]"
     ],
     "typings": [
-      "typing.List[int]",
-      "typing.List[PropertyValue]"
+      "typing.List[PropertyValue_c9610c73]",
+      "typing.List[int]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.text.XTextMarkup"
+      ],
+      "typing": [
+        "com.sun.star.beans.PropertyValue",
+        "com.sun.star.lang.Locale"
+      ]
+    },
     "name": "XFlatParagraph",
     "imports": [],
     "namespace": "com.sun.star.text",
@@ -76,7 +94,7 @@
             ],
             [
               "aAttributes",
-              "typing.List[PropertyValue]",
+              "typing.List[PropertyValue_c9610c73]",
               "in"
             ]
           ]
@@ -108,14 +126,14 @@
             ],
             [
               "aAttributes",
-              "typing.List[PropertyValue]",
+              "typing.List[PropertyValue_c9610c73]",
               "in"
             ]
           ]
         },
         {
           "name": "getLanguageOfText",
-          "returns": "Locale",
+          "returns": "Locale_70d308fa",
           "desc": [
             "get the language of the specific text"
           ],
@@ -146,7 +164,7 @@
         },
         {
           "name": "getPrimaryLanguageOfText",
-          "returns": "Locale",
+          "returns": "Locale_70d308fa",
           "desc": [
             "get the single most probable language of the specific text, especially after getLanguageOfText fails"
           ],

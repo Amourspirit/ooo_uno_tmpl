@@ -1,43 +1,64 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "TextFrame",
   "type": "service",
   "namespace": "com.sun.star.text",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
-        ".x_text_frame",
-        "XTextFrame"
+        ".base_frame",
+        "BaseFrame",
+        "BaseFrame_8f020a33"
       ],
       [
-        ".base_frame",
-        "BaseFrame"
+        ".x_text_frame",
+        "XTextFrame",
+        "XTextFrame_9a7e0ab5"
       ]
     ],
     "from_imports_typing": [
       [
         "..drawing.text_vertical_adjust",
-        "TextVerticalAdjust"
+        "TextVerticalAdjust",
+        "TextVerticalAdjust_2c160f3e"
       ],
       [
         ".x_text",
-        "XText"
+        "XText",
+        "XText_690408ca"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.text.BaseFrame": "BaseFrame_8f020a33",
+      "com.sun.star.text.XTextFrame": "XTextFrame_9a7e0ab5"
+    },
     "quote": [
-      "XText",
-      "TextVerticalAdjust"
+      "TextVerticalAdjust_2c160f3e",
+      "XText_690408ca"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.text.BaseFrame",
+        "com.sun.star.text.XTextFrame"
+      ],
+      "typing": [
+        "com.sun.star.drawing.TextVerticalAdjust",
+        "com.sun.star.text.XText"
+      ]
+    },
     "name": "TextFrame",
     "imports": [],
     "namespace": "com.sun.star.text",
@@ -134,7 +155,7 @@
         },
         {
           "name": "ParentText",
-          "returns": "XText",
+          "returns": "XText_690408ca",
           "desc": [
             "Parent text of this text frame.",
             "",
@@ -158,7 +179,7 @@
         },
         {
           "name": "TextVerticalAdjust",
-          "returns": "TextVerticalAdjust",
+          "returns": "TextVerticalAdjust_2c160f3e",
           "desc": [
             "adjusts the vertical position of the text inside of the frame.",
             "",

@@ -1,39 +1,57 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XVisualObject",
   "type": "interface",
   "namespace": "com.sun.star.embed",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "XInterface_8f010a43"
       ]
     ],
     "from_imports_typing": [
       [
-        ".visual_representation",
-        "VisualRepresentation"
+        "..awt.size",
+        "Size",
+        "Size_576707ef"
       ],
       [
-        "..awt.size",
-        "Size"
+        ".visual_representation",
+        "VisualRepresentation",
+        "VisualRepresentation_2a2b0f4c"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
     "quote": [
-      "Size",
-      "VisualRepresentation"
+      "Size_576707ef",
+      "VisualRepresentation_2a2b0f4c"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.awt.Size",
+        "com.sun.star.embed.VisualRepresentation"
+      ]
+    },
     "name": "XVisualObject",
     "imports": [],
     "namespace": "com.sun.star.embed",
@@ -65,7 +83,7 @@
         },
         {
           "name": "getPreferredVisualRepresentation",
-          "returns": "VisualRepresentation",
+          "returns": "VisualRepresentation_2a2b0f4c",
           "desc": [
             "retrieves visual representation of the object in preferable format.",
             "",
@@ -86,7 +104,7 @@
         },
         {
           "name": "getVisualAreaSize",
-          "returns": "Size",
+          "returns": "Size_576707ef",
           "desc": [
             "gets the size of object's visual area.",
             "",
@@ -128,7 +146,7 @@
             ],
             [
               "aSize",
-              "Size",
+              "Size_576707ef",
               "in"
             ]
           ]

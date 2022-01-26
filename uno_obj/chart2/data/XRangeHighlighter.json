@@ -1,41 +1,59 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XRangeHighlighter",
   "type": "interface",
   "namespace": "com.sun.star.chart2.data",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "...uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "XInterface_8f010a43"
       ]
     ],
     "from_imports_typing": [
       [
-        "...view.x_selection_change_listener",
-        "XSelectionChangeListener"
+        ".highlighted_range",
+        "HighlightedRange",
+        "HighlightedRange_403d0f62"
       ],
       [
-        ".highlighted_range",
-        "HighlightedRange"
+        "...view.x_selection_change_listener",
+        "XSelectionChangeListener",
+        "XSelectionChangeListener_58bf104d"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
     "quote": [
-      "typing.List[HighlightedRange]",
-      "XSelectionChangeListener"
+      "XSelectionChangeListener_58bf104d",
+      "typing.List[HighlightedRange_403d0f62]"
     ],
     "typings": [
-      "typing.List[HighlightedRange]"
+      "typing.List[HighlightedRange_403d0f62]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.chart2.data.HighlightedRange",
+        "com.sun.star.view.XSelectionChangeListener"
+      ]
+    },
     "name": "XRangeHighlighter",
     "imports": [],
     "namespace": "com.sun.star.chart2.data",
@@ -56,14 +74,14 @@
           "args": [
             [
               "xListener",
-              "XSelectionChangeListener",
+              "XSelectionChangeListener_58bf104d",
               "in"
             ]
           ]
         },
         {
           "name": "getSelectedRanges",
-          "returns": "typing.List[HighlightedRange]",
+          "returns": "typing.List[HighlightedRange_403d0f62]",
           "desc": [
             "Returns a list of ranges that are used by objects that are currently selected."
           ],
@@ -80,7 +98,7 @@
           "args": [
             [
               "xListener",
-              "XSelectionChangeListener",
+              "XSelectionChangeListener_58bf104d",
               "in"
             ]
           ]

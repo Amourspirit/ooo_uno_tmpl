@@ -1,39 +1,54 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XTableUIProvider",
   "type": "interface",
   "namespace": "com.sun.star.sdb.application",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [],
     "from_imports_typing": [
       [
         "...graphic.x_graphic",
-        "XGraphic"
+        "XGraphic",
+        "XGraphic_a4da0afc"
       ],
       [
         ".x_database_document_ui",
-        "XDatabaseDocumentUI"
+        "XDatabaseDocumentUI",
+        "XDatabaseDocumentUI_be9c124d"
       ],
       [
         "...uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "XInterface_8f010a43"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "XGraphic",
-      "XDatabaseDocumentUI",
-      "XInterface"
+      "XDatabaseDocumentUI_be9c124d",
+      "XGraphic_a4da0afc",
+      "XInterface_8f010a43"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [],
+      "typing": [
+        "com.sun.star.graphic.XGraphic",
+        "com.sun.star.sdb.application.XDatabaseDocumentUI",
+        "com.sun.star.uno.XInterface"
+      ]
+    },
     "name": "XTableUIProvider",
     "imports": [],
     "namespace": "com.sun.star.sdb.application",
@@ -50,7 +65,7 @@
       "methods": [
         {
           "name": "getTableEditor",
-          "returns": "XInterface",
+          "returns": "XInterface_8f010a43",
           "desc": [
             "returns a component which can be used to edit the definition of an existing table."
           ],
@@ -61,7 +76,7 @@
           "args": [
             [
               "DocumentUI",
-              "XDatabaseDocumentUI",
+              "XDatabaseDocumentUI_be9c124d",
               "in"
             ],
             [
@@ -73,7 +88,7 @@
         },
         {
           "name": "getTableIcon",
-          "returns": "XGraphic",
+          "returns": "XGraphic_a4da0afc",
           "desc": [
             "provides the icon which should be used to represent the table in the database application window.",
             "",

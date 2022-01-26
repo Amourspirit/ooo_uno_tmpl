@@ -1,49 +1,66 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "FilterFactory",
   "type": "service",
   "namespace": "com.sun.star.document",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
-        "..util.x_flushable",
-        "XFlushable"
+        "..container.x_container_query",
+        "XContainerQuery",
+        "XContainerQuery_1cdd0edc"
       ],
       [
         "..container.x_name_container",
-        "XNameContainer"
-      ],
-      [
-        "..container.x_name_access",
-        "XNameAccess"
+        "XNameContainer",
+        "XNameContainer_cb90e47"
       ],
       [
         "..lang.x_multi_service_factory",
-        "XMultiServiceFactory"
+        "XMultiServiceFactory",
+        "XMultiServiceFactory_191e0eb6"
       ],
       [
-        "..container.x_container_query",
-        "XContainerQuery"
+        "..util.x_flushable",
+        "XFlushable",
+        "XFlushable_9a420ab4"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.container.XContainerQuery": "XContainerQuery_1cdd0edc",
+      "com.sun.star.container.XNameContainer": "XNameContainer_cb90e47",
+      "com.sun.star.lang.XMultiServiceFactory": "XMultiServiceFactory_191e0eb6",
+      "com.sun.star.util.XFlushable": "XFlushable_9a420ab4"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
+    "full_imports": {
+      "general": [
+        "com.sun.star.container.XContainerQuery",
+        "com.sun.star.container.XNameContainer",
+        "com.sun.star.lang.XMultiServiceFactory",
+        "com.sun.star.util.XFlushable"
+      ],
+      "typing": []
+    },
     "name": "FilterFactory",
     "imports": [],
     "namespace": "com.sun.star.document",
     "extends": [
       "com.sun.star.lang.XMultiServiceFactory",
-      "com.sun.star.container.XNameAccess",
       "com.sun.star.container.XNameContainer",
       "com.sun.star.container.XContainerQuery",
       "com.sun.star.util.XFlushable"

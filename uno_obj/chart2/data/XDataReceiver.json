@@ -1,63 +1,89 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XDataReceiver",
   "type": "interface",
   "namespace": "com.sun.star.chart2.data",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "...uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "XInterface_8f010a43"
       ]
     ],
     "from_imports_typing": [
       [
-        ".x_range_highlighter",
-        "XRangeHighlighter"
-      ],
-      [
-        "...util.x_number_formats_supplier",
-        "XNumberFormatsSupplier"
-      ],
-      [
         "...awt.x_request_callback",
-        "XRequestCallback"
-      ],
-      [
-        ".x_data_source",
-        "XDataSource"
-      ],
-      [
-        ".x_data_provider",
-        "XDataProvider"
+        "XRequestCallback",
+        "XRequestCallback_d4ac0ca2"
       ],
       [
         "...beans.property_value",
-        "PropertyValue"
+        "PropertyValue",
+        "PropertyValue_c9610c73"
+      ],
+      [
+        ".x_data_provider",
+        "XDataProvider",
+        "XDataProvider_122f0e31"
+      ],
+      [
+        ".x_data_source",
+        "XDataSource",
+        "XDataSource_f6340d57"
+      ],
+      [
+        ".x_range_highlighter",
+        "XRangeHighlighter",
+        "XRangeHighlighter_4e810fc8"
+      ],
+      [
+        "...util.x_number_formats_supplier",
+        "XNumberFormatsSupplier",
+        "XNumberFormatsSupplier_3afb0fb7"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
     "quote": [
-      "typing.List[str]",
-      "XDataProvider",
-      "typing.List[PropertyValue]",
-      "XRangeHighlighter",
-      "XRequestCallback",
-      "XNumberFormatsSupplier",
-      "XDataSource"
+      "XDataProvider_122f0e31",
+      "XDataSource_f6340d57",
+      "XNumberFormatsSupplier_3afb0fb7",
+      "XRangeHighlighter_4e810fc8",
+      "XRequestCallback_d4ac0ca2",
+      "typing.List[PropertyValue_c9610c73]",
+      "typing.List[str]"
     ],
     "typings": [
-      "typing.List[str]",
-      "typing.List[PropertyValue]"
+      "typing.List[PropertyValue_c9610c73]",
+      "typing.List[str]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.awt.XRequestCallback",
+        "com.sun.star.beans.PropertyValue",
+        "com.sun.star.chart2.data.XDataProvider",
+        "com.sun.star.chart2.data.XDataSource",
+        "com.sun.star.chart2.data.XRangeHighlighter",
+        "com.sun.star.util.XNumberFormatsSupplier"
+      ]
+    },
     "name": "XDataReceiver",
     "imports": [],
     "namespace": "com.sun.star.chart2.data",
@@ -85,7 +111,7 @@
           "args": [
             [
               "xProvider",
-              "XDataProvider",
+              "XDataProvider_122f0e31",
               "in"
             ]
           ]
@@ -102,14 +128,14 @@
           "args": [
             [
               "xSupplier",
-              "XNumberFormatsSupplier",
+              "XNumberFormatsSupplier_3afb0fb7",
               "in"
             ]
           ]
         },
         {
           "name": "getPopupRequest",
-          "returns": "XRequestCallback",
+          "returns": "XRequestCallback_d4ac0ca2",
           "desc": [
             "A callback object to execute a foreign popup menu window.",
             "",
@@ -122,7 +148,7 @@
         },
         {
           "name": "getRangeHighlighter",
-          "returns": "XRangeHighlighter",
+          "returns": "XRangeHighlighter_4e810fc8",
           "desc": [
             "Returns a component at which a view representing the data of the attached data provider may listen for highlighting the data ranges used by the currently selected objects in the data receiver component.",
             "",
@@ -135,7 +161,7 @@
         },
         {
           "name": "getUsedData",
-          "returns": "XDataSource",
+          "returns": "XDataSource_f6340d57",
           "desc": [
             "Returns the data requested by the most recently attached data provider, that is still used."
           ],
@@ -163,7 +189,7 @@
           "args": [
             [
               "aArguments",
-              "typing.List[PropertyValue]",
+              "typing.List[PropertyValue_c9610c73]",
               "in"
             ]
           ]

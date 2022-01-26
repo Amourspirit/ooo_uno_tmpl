@@ -1,63 +1,89 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XChartTypeTemplate",
   "type": "interface",
   "namespace": "com.sun.star.chart2",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "XInterface_8f010a43"
       ]
     ],
     "from_imports_typing": [
       [
-        ".x_diagram",
-        "XDiagram"
-      ],
-      [
-        ".x_data_interpreter",
-        "XDataInterpreter"
-      ],
-      [
-        ".data.x_data_source",
-        "XDataSource"
+        "..beans.property_value",
+        "PropertyValue",
+        "PropertyValue_c9610c73"
       ],
       [
         ".x_chart_type",
-        "XChartType"
+        "XChartType",
+        "XChartType_ad200b38"
+      ],
+      [
+        ".x_data_interpreter",
+        "XDataInterpreter",
+        "XDataInterpreter_f84f0db2"
       ],
       [
         ".x_data_series",
-        "XDataSeries"
+        "XDataSeries",
+        "XDataSeries_b8150b89"
       ],
       [
-        "..beans.property_value",
-        "PropertyValue"
+        ".x_diagram",
+        "XDiagram",
+        "XDiagram_96fe0a59"
+      ],
+      [
+        ".data.x_data_source",
+        "XDataSource",
+        "XDataSource_f6340d57"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
     "quote": [
-      "typing.List[PropertyValue]",
-      "XDiagram",
-      "typing.List[XChartType]",
-      "XDataSeries",
-      "XDataInterpreter",
-      "XChartType",
-      "XDataSource"
+      "XChartType_ad200b38",
+      "XDataInterpreter_f84f0db2",
+      "XDataSeries_b8150b89",
+      "XDataSource_f6340d57",
+      "XDiagram_96fe0a59",
+      "typing.List[PropertyValue_c9610c73]",
+      "typing.List[XChartType_ad200b38]"
     ],
     "typings": [
-      "typing.List[XChartType]",
-      "typing.List[PropertyValue]"
+      "typing.List[PropertyValue_c9610c73]",
+      "typing.List[XChartType_ad200b38]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.beans.PropertyValue",
+        "com.sun.star.chart2.XChartType",
+        "com.sun.star.chart2.XDataInterpreter",
+        "com.sun.star.chart2.XDataSeries",
+        "com.sun.star.chart2.XDiagram",
+        "com.sun.star.chart2.data.XDataSource"
+      ]
+    },
     "name": "XChartTypeTemplate",
     "imports": [],
     "namespace": "com.sun.star.chart2",
@@ -80,7 +106,7 @@
           "args": [
             [
               "xSeries",
-              "XDataSeries",
+              "XDataSeries_b8150b89",
               "in"
             ],
             [
@@ -112,7 +138,7 @@
           "args": [
             [
               "xDiagram",
-              "XDiagram",
+              "XDiagram_96fe0a59",
               "in"
             ]
           ]
@@ -133,24 +159,24 @@
           "args": [
             [
               "xDiagram",
-              "XDiagram",
+              "XDiagram_96fe0a59",
               "in"
             ],
             [
               "xDataSource",
-              "XDataSource",
+              "XDataSource_f6340d57",
               "in"
             ],
             [
               "aArguments",
-              "typing.List[PropertyValue]",
+              "typing.List[PropertyValue_c9610c73]",
               "in"
             ]
           ]
         },
         {
           "name": "createDiagramByDataSource",
-          "returns": "XDiagram",
+          "returns": "XDiagram_96fe0a59",
           "desc": [
             "Creates a new diagram based upon the given data .",
             "",
@@ -160,19 +186,19 @@
           "args": [
             [
               "xDataSource",
-              "XDataSource",
+              "XDataSource_f6340d57",
               "in"
             ],
             [
               "aArguments",
-              "typing.List[PropertyValue]",
+              "typing.List[PropertyValue_c9610c73]",
               "in"
             ]
           ]
         },
         {
           "name": "getChartTypeForNewSeries",
-          "returns": "XChartType",
+          "returns": "XChartType_ad200b38",
           "desc": [
             "Provides a chart type object that can be used to create new series."
           ],
@@ -180,14 +206,14 @@
           "args": [
             [
               "aFormerlyUsedChartTypes",
-              "typing.List[XChartType]",
+              "typing.List[XChartType_ad200b38]",
               "in"
             ]
           ]
         },
         {
           "name": "getDataInterpreter",
-          "returns": "XDataInterpreter",
+          "returns": "XDataInterpreter_f84f0db2",
           "desc": [],
           "raises": [],
           "args": []
@@ -206,7 +232,7 @@
           "args": [
             [
               "xDiagram",
-              "XDiagram",
+              "XDiagram_96fe0a59",
               "in"
             ],
             [
@@ -230,7 +256,7 @@
           "args": [
             [
               "xDiagram",
-              "XDiagram",
+              "XDiagram_96fe0a59",
               "in"
             ]
           ]

@@ -1,54 +1,78 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XDocumentBuilder",
   "type": "interface",
   "namespace": "com.sun.star.xml.dom",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "...uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "XInterface_8f010a43"
       ]
     ],
     "from_imports_typing": [
       [
-        ".xdom_implementation",
-        "XDOMImplementation"
+        "...io.x_input_stream",
+        "XInputStream",
+        "XInputStream_98d40ab4"
       ],
       [
-        "...io.x_input_stream",
-        "XInputStream"
+        ".xdom_implementation",
+        "XDOMImplementation",
+        "XDOMImplementation_22320ec5"
       ],
       [
         ".x_document",
-        "XDocument"
+        "XDocument",
+        "XDocument_aebc0b5e"
       ],
       [
         "..sax.x_entity_resolver",
-        "XEntityResolver"
+        "XEntityResolver",
+        "XEntityResolver_fcf10dfa"
       ],
       [
         "..sax.x_error_handler",
-        "XErrorHandler"
+        "XErrorHandler",
+        "XErrorHandler_e0860cf3"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
     "quote": [
-      "XEntityResolver",
-      "XDocument",
-      "XInputStream",
-      "XErrorHandler",
-      "XDOMImplementation"
+      "XDOMImplementation_22320ec5",
+      "XDocument_aebc0b5e",
+      "XEntityResolver_fcf10dfa",
+      "XErrorHandler_e0860cf3",
+      "XInputStream_98d40ab4"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.io.XInputStream",
+        "com.sun.star.xml.dom.XDOMImplementation",
+        "com.sun.star.xml.dom.XDocument",
+        "com.sun.star.xml.sax.XEntityResolver",
+        "com.sun.star.xml.sax.XErrorHandler"
+      ]
+    },
     "name": "XDocumentBuilder",
     "imports": [],
     "namespace": "com.sun.star.xml.dom",
@@ -63,7 +87,7 @@
       "methods": [
         {
           "name": "getDOMImplementation",
-          "returns": "XDOMImplementation",
+          "returns": "XDOMImplementation_22320ec5",
           "desc": [
             "Obtain an instance of a DOMImplementation object."
           ],
@@ -90,7 +114,7 @@
         },
         {
           "name": "newDocument",
-          "returns": "XDocument",
+          "returns": "XDocument_aebc0b5e",
           "desc": [
             "Obtain a new instance of a DOM Document object to build a DOM tree with."
           ],
@@ -99,7 +123,7 @@
         },
         {
           "name": "parse",
-          "returns": "XDocument",
+          "returns": "XDocument_aebc0b5e",
           "desc": [
             "Parse the content of the given InputStream as an XML document and return a new DOM Document object."
           ],
@@ -110,14 +134,14 @@
           "args": [
             [
               "is",
-              "XInputStream",
+              "XInputStream_98d40ab4",
               "in"
             ]
           ]
         },
         {
           "name": "parseURI",
-          "returns": "XDocument",
+          "returns": "XDocument_aebc0b5e",
           "desc": [
             "Parse the content of the given URI as an XML document and return a new DOM Document object."
           ],
@@ -143,7 +167,7 @@
           "args": [
             [
               "er",
-              "XEntityResolver",
+              "XEntityResolver_fcf10dfa",
               "in"
             ]
           ]
@@ -158,7 +182,7 @@
           "args": [
             [
               "eh",
-              "XErrorHandler",
+              "XErrorHandler_e0860cf3",
               "in"
             ]
           ]

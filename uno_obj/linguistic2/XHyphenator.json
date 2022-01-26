@@ -1,49 +1,71 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XHyphenator",
   "type": "interface",
   "namespace": "com.sun.star.linguistic2",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         ".x_supported_locales",
-        "XSupportedLocales"
+        "XSupportedLocales",
+        "XSupportedLocales_5bda1056"
       ]
     ],
     "from_imports_typing": [
       [
         "..beans.property_values",
-        "PropertyValues"
+        "PropertyValues",
+        "PropertyValues_d6470ce6"
       ],
       [
         "..lang.locale",
-        "Locale"
+        "Locale",
+        "Locale_70d308fa"
       ],
       [
         ".x_hyphenated_word",
-        "XHyphenatedWord"
+        "XHyphenatedWord",
+        "XHyphenatedWord_3a880f73"
       ],
       [
         ".x_possible_hyphens",
-        "XPossibleHyphens"
+        "XPossibleHyphens",
+        "XPossibleHyphens_4aa50fed"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.linguistic2.XSupportedLocales": "XSupportedLocales_5bda1056"
+    },
     "quote": [
-      "PropertyValues",
-      "XHyphenatedWord",
-      "Locale",
-      "XPossibleHyphens"
+      "Locale_70d308fa",
+      "PropertyValues_d6470ce6",
+      "XHyphenatedWord_3a880f73",
+      "XPossibleHyphens_4aa50fed"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.linguistic2.XSupportedLocales"
+      ],
+      "typing": [
+        "com.sun.star.beans.PropertyValues",
+        "com.sun.star.lang.Locale",
+        "com.sun.star.linguistic2.XHyphenatedWord",
+        "com.sun.star.linguistic2.XPossibleHyphens"
+      ]
+    },
     "name": "XHyphenator",
     "imports": [],
     "namespace": "com.sun.star.linguistic2",
@@ -64,7 +86,7 @@
       "methods": [
         {
           "name": "createPossibleHyphens",
-          "returns": "XPossibleHyphens",
+          "returns": "XPossibleHyphens_4aa50fed",
           "desc": [
             "returns information about all possible hyphenation positions of a word.",
             "",
@@ -81,19 +103,19 @@
             ],
             [
               "aLocale",
-              "Locale",
+              "Locale_70d308fa",
               "in"
             ],
             [
               "aProperties",
-              "PropertyValues",
+              "PropertyValues_d6470ce6",
               "in"
             ]
           ]
         },
         {
           "name": "hyphenate",
-          "returns": "XHyphenatedWord",
+          "returns": "XHyphenatedWord_3a880f73",
           "desc": [
             "tries to find a valid hyphenation position relative to the beginning of a word.",
             "",
@@ -114,7 +136,7 @@
             ],
             [
               "aLocale",
-              "Locale",
+              "Locale_70d308fa",
               "in"
             ],
             [
@@ -124,14 +146,14 @@
             ],
             [
               "aProperties",
-              "PropertyValues",
+              "PropertyValues_d6470ce6",
               "in"
             ]
           ]
         },
         {
           "name": "queryAlternativeSpelling",
-          "returns": "XHyphenatedWord",
+          "returns": "XHyphenatedWord_3a880f73",
           "desc": [
             "checks whether hyphenation at a position in a word will result in an alternative spelling or not.",
             "",
@@ -154,7 +176,7 @@
             ],
             [
               "aLocale",
-              "Locale",
+              "Locale_70d308fa",
               "in"
             ],
             [
@@ -164,7 +186,7 @@
             ],
             [
               "aProperties",
-              "PropertyValues",
+              "PropertyValues_d6470ce6",
               "in"
             ]
           ]

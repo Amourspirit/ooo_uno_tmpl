@@ -1,66 +1,99 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "GraphicObjectShape",
   "type": "service",
   "namespace": "com.sun.star.drawing",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         ".rotation_descriptor",
-        "RotationDescriptor"
+        "RotationDescriptor",
+        "RotationDescriptor_2cec0f63"
       ],
       [
         ".shadow_properties",
-        "ShadowProperties"
-      ],
-      [
-        ".text",
-        "Text"
+        "ShadowProperties",
+        "ShadowProperties_e350e87"
       ],
       [
         ".shape",
-        "Shape"
+        "Shape",
+        "Shape_85cc09e5"
+      ],
+      [
+        ".text",
+        "Text",
+        "Text_7c140999"
       ]
     ],
     "from_imports_typing": [
       [
-        ".color_mode",
-        "ColorMode"
+        "..awt.x_bitmap",
+        "XBitmap",
+        "XBitmap_70cd0909"
       ],
       [
         "..container.x_index_container",
-        "XIndexContainer"
+        "XIndexContainer",
+        "XIndexContainer_1c040ebe"
       ],
       [
-        "..graphic.x_graphic",
-        "XGraphic"
-      ],
-      [
-        "..awt.x_bitmap",
-        "XBitmap"
+        ".color_mode",
+        "ColorMode",
+        "ColorMode_b13e0b78"
       ],
       [
         ".qr_code",
-        "QRCode"
+        "QRCode",
+        "QRCode_8f1f0a12"
+      ],
+      [
+        "..graphic.x_graphic",
+        "XGraphic",
+        "XGraphic_a4da0afc"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.drawing.RotationDescriptor": "RotationDescriptor_2cec0f63",
+      "com.sun.star.drawing.ShadowProperties": "ShadowProperties_e350e87",
+      "com.sun.star.drawing.Shape": "Shape_85cc09e5",
+      "com.sun.star.drawing.Text": "Text_7c140999"
+    },
     "quote": [
-      "XIndexContainer",
-      "ColorMode",
-      "QRCode",
-      "XBitmap",
-      "XGraphic"
+      "ColorMode_b13e0b78",
+      "QRCode_8f1f0a12",
+      "XBitmap_70cd0909",
+      "XGraphic_a4da0afc",
+      "XIndexContainer_1c040ebe"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.drawing.RotationDescriptor",
+        "com.sun.star.drawing.ShadowProperties",
+        "com.sun.star.drawing.Shape",
+        "com.sun.star.drawing.Text"
+      ],
+      "typing": [
+        "com.sun.star.awt.XBitmap",
+        "com.sun.star.container.XIndexContainer",
+        "com.sun.star.drawing.ColorMode",
+        "com.sun.star.drawing.QRCode",
+        "com.sun.star.graphic.XGraphic"
+      ]
+    },
     "name": "GraphicObjectShape",
     "imports": [],
     "namespace": "com.sun.star.drawing",
@@ -136,7 +169,7 @@
         },
         {
           "name": "Graphic",
-          "returns": "XGraphic",
+          "returns": "XGraphic_a4da0afc",
           "desc": [
             "This is the graphic that represents this graphic shape."
           ],
@@ -145,7 +178,7 @@
         },
         {
           "name": "GraphicColorMode",
-          "returns": "ColorMode",
+          "returns": "ColorMode_b13e0b78",
           "desc": [
             "This property selects the color mode that is used for rendering."
           ],
@@ -154,7 +187,7 @@
         },
         {
           "name": "GraphicObjectFillBitmap",
-          "returns": "XBitmap",
+          "returns": "XBitmap_70cd0909",
           "desc": [
             "This is the bitmap that represents this graphic shape."
           ],
@@ -183,7 +216,7 @@
         },
         {
           "name": "ImageMap",
-          "returns": "XIndexContainer",
+          "returns": "XIndexContainer_1c040ebe",
           "desc": [
             "This property contains an image map for this graphic."
           ],
@@ -201,7 +234,7 @@
         },
         {
           "name": "QRCodeProperties",
-          "returns": "QRCode",
+          "returns": "QRCode_8f1f0a12",
           "desc": [
             "Shape as a QR Code.",
             "",
@@ -286,7 +319,7 @@
         },
         {
           "name": "SignatureLineUnsignedImage",
-          "returns": "XGraphic",
+          "returns": "XGraphic_a4da0afc",
           "desc": [
             "Image to be displayed when the signature line is unsigned.",
             "",

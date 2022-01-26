@@ -1,31 +1,47 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "NumberingRule",
   "type": "service",
   "namespace": "com.sun.star.style",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
-        ".numbering_level",
-        "NumberingLevel"
+        ".numbering_alignment",
+        "NumberingAlignment",
+        "NumberingAlignment_f290e7f"
       ],
       [
-        ".numbering_alignment",
-        "NumberingAlignment"
+        ".numbering_level",
+        "NumberingLevel",
+        "NumberingLevel_d7f70cd8"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.style.NumberingAlignment": "NumberingAlignment_f290e7f",
+      "com.sun.star.style.NumberingLevel": "NumberingLevel_d7f70cd8"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
+    "full_imports": {
+      "general": [
+        "com.sun.star.style.NumberingAlignment",
+        "com.sun.star.style.NumberingLevel"
+      ],
+      "typing": []
+    },
     "name": "NumberingRule",
     "imports": [],
     "namespace": "com.sun.star.style",

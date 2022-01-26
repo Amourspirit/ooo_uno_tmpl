@@ -1,46 +1,67 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "FormulaParser",
   "type": "service",
   "namespace": "com.sun.star.sheet",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..beans.property_set",
-        "PropertySet"
+        "PropertySet",
+        "PropertySet_b0e70ba2"
       ],
       [
         ".x_formula_parser",
-        "XFormulaParser"
+        "XFormulaParser",
+        "XFormulaParser_d54d0cbc"
       ]
     ],
     "from_imports_typing": [
       [
-        ".formula_op_code_map_entry",
-        "FormulaOpCodeMapEntry"
+        ".external_link_info",
+        "ExternalLinkInfo",
+        "ExternalLinkInfo_f09b0d7e"
       ],
       [
-        ".external_link_info",
-        "ExternalLinkInfo"
+        ".formula_op_code_map_entry",
+        "FormulaOpCodeMapEntry",
+        "FormulaOpCodeMapEntry_37da0f61"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.beans.PropertySet": "PropertySet_b0e70ba2",
+      "com.sun.star.sheet.XFormulaParser": "XFormulaParser_d54d0cbc"
+    },
     "quote": [
-      "typing.List[FormulaOpCodeMapEntry]",
-      "typing.List[ExternalLinkInfo]"
+      "typing.List[ExternalLinkInfo_f09b0d7e]",
+      "typing.List[FormulaOpCodeMapEntry_37da0f61]"
     ],
     "typings": [
-      "typing.List[FormulaOpCodeMapEntry]",
-      "typing.List[ExternalLinkInfo]"
+      "typing.List[ExternalLinkInfo_f09b0d7e]",
+      "typing.List[FormulaOpCodeMapEntry_37da0f61]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.beans.PropertySet",
+        "com.sun.star.sheet.XFormulaParser"
+      ],
+      "typing": [
+        "com.sun.star.sheet.ExternalLinkInfo",
+        "com.sun.star.sheet.FormulaOpCodeMapEntry"
+      ]
+    },
     "name": "FormulaParser",
     "imports": [],
     "namespace": "com.sun.star.sheet",
@@ -59,7 +80,7 @@
       "types": [
         {
           "name": "ExternalLinks",
-          "returns": "typing.List[ExternalLinkInfo]",
+          "returns": "typing.List[ExternalLinkInfo_f09b0d7e]",
           "desc": [
             "contains a list of external links referenced in formulas.",
             "",
@@ -74,7 +95,7 @@
         },
         {
           "name": "OpCodeMap",
-          "returns": "typing.List[FormulaOpCodeMapEntry]",
+          "returns": "typing.List[FormulaOpCodeMapEntry_37da0f61]",
           "desc": [
             "contains the complete mapping of names to op-codes.",
             "",

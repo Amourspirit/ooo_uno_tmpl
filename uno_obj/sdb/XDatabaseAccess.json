@@ -1,39 +1,57 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XDatabaseAccess",
   "type": "interface",
   "namespace": "com.sun.star.sdb",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..sdbc.x_data_source",
-        "XDataSource"
+        "XDataSource",
+        "XDataSource_a2990ae7"
       ]
     ],
     "from_imports_typing": [
       [
-        "..sdbc.x_connection",
-        "XConnection"
+        ".x_database_access_listener",
+        "XDatabaseAccessListener",
+        "XDatabaseAccessListener_32d80f46"
       ],
       [
-        ".x_database_access_listener",
-        "XDatabaseAccessListener"
+        "..sdbc.x_connection",
+        "XConnection",
+        "XConnection_a36a0b0c"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.sdbc.XDataSource": "XDataSource_a2990ae7"
+    },
     "quote": [
-      "XDatabaseAccessListener",
-      "XConnection"
+      "XConnection_a36a0b0c",
+      "XDatabaseAccessListener_32d80f46"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.sdbc.XDataSource"
+      ],
+      "typing": [
+        "com.sun.star.sdb.XDatabaseAccessListener",
+        "com.sun.star.sdbc.XConnection"
+      ]
+    },
     "name": "XDatabaseAccess",
     "imports": [],
     "namespace": "com.sun.star.sdb",
@@ -58,14 +76,14 @@
           "args": [
             [
               "listener",
-              "XDatabaseAccessListener",
+              "XDatabaseAccessListener_32d80f46",
               "in"
             ]
           ]
         },
         {
           "name": "getIsolatedConnection",
-          "returns": "XConnection",
+          "returns": "XConnection_a36a0b0c",
           "desc": [],
           "raises": [
             "com.sun.star.sdbc.SQLException"
@@ -98,7 +116,7 @@
           "args": [
             [
               "listener",
-              "XDatabaseAccessListener",
+              "XDatabaseAccessListener_32d80f46",
               "in"
             ]
           ]

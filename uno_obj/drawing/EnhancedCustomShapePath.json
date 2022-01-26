@@ -1,51 +1,68 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "EnhancedCustomShapePath",
   "type": "service",
   "namespace": "com.sun.star.drawing",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [],
     "from_imports_typing": [
       [
+        "..awt.size",
+        "Size",
+        "Size_576707ef"
+      ],
+      [
         ".enhanced_custom_shape_parameter_pair",
-        "EnhancedCustomShapeParameterPair"
+        "EnhancedCustomShapeParameterPair",
+        "EnhancedCustomShapeParameterPair_262914a3"
       ],
       [
         ".enhanced_custom_shape_segment",
-        "EnhancedCustomShapeSegment"
-      ],
-      [
-        "..awt.size",
-        "Size"
+        "EnhancedCustomShapeSegment",
+        "EnhancedCustomShapeSegment_b07b1249"
       ],
       [
         ".enhanced_custom_shape_text_frame",
-        "EnhancedCustomShapeTextFrame"
+        "EnhancedCustomShapeTextFrame",
+        "EnhancedCustomShapeTextFrame_d6321306"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "typing.List[EnhancedCustomShapeTextFrame]",
-      "typing.List[EnhancedCustomShapeParameterPair]",
-      "typing.List[EnhancedCustomShapeSegment]",
-      "typing.List[float]",
-      "typing.List[Size]"
+      "typing.List[EnhancedCustomShapeParameterPair_262914a3]",
+      "typing.List[EnhancedCustomShapeSegment_b07b1249]",
+      "typing.List[EnhancedCustomShapeTextFrame_d6321306]",
+      "typing.List[Size_576707ef]",
+      "typing.List[float]"
     ],
     "typings": [
-      "typing.List[EnhancedCustomShapeTextFrame]",
-      "typing.List[EnhancedCustomShapeParameterPair]",
-      "typing.List[EnhancedCustomShapeSegment]",
-      "typing.List[float]",
-      "typing.List[Size]"
+      "typing.List[EnhancedCustomShapeParameterPair_262914a3]",
+      "typing.List[EnhancedCustomShapeSegment_b07b1249]",
+      "typing.List[EnhancedCustomShapeTextFrame_d6321306]",
+      "typing.List[Size_576707ef]",
+      "typing.List[float]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [],
+      "typing": [
+        "com.sun.star.awt.Size",
+        "com.sun.star.drawing.EnhancedCustomShapeParameterPair",
+        "com.sun.star.drawing.EnhancedCustomShapeSegment",
+        "com.sun.star.drawing.EnhancedCustomShapeTextFrame"
+      ]
+    },
     "name": "EnhancedCustomShapePath",
     "imports": [],
     "namespace": "com.sun.star.drawing",
@@ -58,7 +75,7 @@
       "types": [
         {
           "name": "Coordinates",
-          "returns": "typing.List[EnhancedCustomShapeParameterPair]",
+          "returns": "typing.List[EnhancedCustomShapeParameterPair_262914a3]",
           "desc": [
             "This property is specifying the points that makes the geometry of the shape."
           ],
@@ -76,7 +93,7 @@
         },
         {
           "name": "GluePoints",
-          "returns": "typing.List[EnhancedCustomShapeParameterPair]",
+          "returns": "typing.List[EnhancedCustomShapeParameterPair_262914a3]",
           "desc": [
             "This property specifies custom glue points."
           ],
@@ -85,7 +102,7 @@
         },
         {
           "name": "Segments",
-          "returns": "typing.List[EnhancedCustomShapeSegment]",
+          "returns": "typing.List[EnhancedCustomShapeSegment_b07b1249]",
           "desc": [
             "This property specifies the commands and the way the Coordinates have to be interpreted."
           ],
@@ -94,7 +111,7 @@
         },
         {
           "name": "SubViewSize",
-          "returns": "typing.List[Size]",
+          "returns": "typing.List[Size_576707ef]",
           "desc": [
             "This property specifies view size per sub path."
           ],
@@ -103,7 +120,7 @@
         },
         {
           "name": "TextFrames",
-          "returns": "typing.List[EnhancedCustomShapeTextFrame]",
+          "returns": "typing.List[EnhancedCustomShapeTextFrame_d6321306]",
           "desc": [
             "This property specifies the text frames that can be used with the shape.",
             "",

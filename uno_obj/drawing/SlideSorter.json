@@ -1,39 +1,57 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "SlideSorter",
   "type": "service",
   "namespace": "com.sun.star.drawing",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         ".x_slide_sorter_base",
-        "XSlideSorterBase"
+        "XSlideSorterBase",
+        "XSlideSorterBase_c400e37"
       ]
     ],
     "from_imports_typing": [
       [
-        "..frame.x_controller",
-        "XController"
+        "..awt.x_window",
+        "XWindow",
+        "XWindow_713b0924"
       ],
       [
-        "..awt.x_window",
-        "XWindow"
+        "..frame.x_controller",
+        "XController",
+        "XController_b00e0b8f"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.drawing.XSlideSorterBase": "XSlideSorterBase_c400e37"
+    },
     "quote": [
-      "XController",
-      "XWindow"
+      "XController_b00e0b8f",
+      "XWindow_713b0924"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.drawing.XSlideSorterBase"
+      ],
+      "typing": [
+        "com.sun.star.awt.XWindow",
+        "com.sun.star.frame.XController"
+      ]
+    },
     "name": "SlideSorter",
     "imports": [],
     "namespace": "com.sun.star.drawing",
@@ -63,12 +81,12 @@
             ],
             [
               "xController",
-              "XController",
+              "XController_b00e0b8f",
               "in"
             ],
             [
               "xParentWindow",
-              "XWindow",
+              "XWindow_713b0924",
               "in"
             ]
           ]

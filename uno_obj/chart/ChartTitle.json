@@ -1,31 +1,47 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "ChartTitle",
   "type": "service",
   "namespace": "com.sun.star.chart",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
-        "..xml.user_defined_attributes_supplier",
-        "UserDefinedAttributesSupplier"
+        "..drawing.shape",
+        "Shape",
+        "Shape_85cc09e5"
       ],
       [
-        "..drawing.shape",
-        "Shape"
+        "..xml.user_defined_attributes_supplier",
+        "UserDefinedAttributesSupplier",
+        "UserDefinedAttributesSupplier_9fbe1222"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.drawing.Shape": "Shape_85cc09e5",
+      "com.sun.star.xml.UserDefinedAttributesSupplier": "UserDefinedAttributesSupplier_9fbe1222"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
+    "full_imports": {
+      "general": [
+        "com.sun.star.drawing.Shape",
+        "com.sun.star.xml.UserDefinedAttributesSupplier"
+      ],
+      "typing": []
+    },
     "name": "ChartTitle",
     "imports": [],
     "namespace": "com.sun.star.chart",

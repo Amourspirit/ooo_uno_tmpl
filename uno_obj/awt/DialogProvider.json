@@ -1,49 +1,71 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "DialogProvider",
   "type": "service",
   "namespace": "com.sun.star.awt",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         ".x_dialog_provider",
-        "XDialogProvider"
+        "XDialogProvider",
+        "XDialogProvider_c70f0c47"
       ]
     ],
     "from_imports_typing": [
       [
-        "..frame.x_model",
-        "XModel"
-      ],
-      [
         "..container.x_name_container",
-        "XNameContainer"
+        "XNameContainer",
+        "XNameContainer_cb90e47"
       ],
       [
-        "..script.x_script_listener",
-        "XScriptListener"
+        "..frame.x_model",
+        "XModel",
+        "XModel_7a6e095c"
       ],
       [
         "..io.x_input_stream",
-        "XInputStream"
+        "XInputStream",
+        "XInputStream_98d40ab4"
+      ],
+      [
+        "..script.x_script_listener",
+        "XScriptListener",
+        "XScriptListener_f20b0db0"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.awt.XDialogProvider": "XDialogProvider_c70f0c47"
+    },
     "quote": [
-      "XModel",
-      "XNameContainer",
-      "XInputStream",
-      "XScriptListener"
+      "XInputStream_98d40ab4",
+      "XModel_7a6e095c",
+      "XNameContainer_cb90e47",
+      "XScriptListener_f20b0db0"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.awt.XDialogProvider"
+      ],
+      "typing": [
+        "com.sun.star.container.XNameContainer",
+        "com.sun.star.frame.XModel",
+        "com.sun.star.io.XInputStream",
+        "com.sun.star.script.XScriptListener"
+      ]
+    },
     "name": "DialogProvider",
     "imports": [],
     "namespace": "com.sun.star.awt",
@@ -64,7 +86,7 @@
           "args": [
             [
               "Model",
-              "XModel",
+              "XModel_7a6e095c",
               "in"
             ]
           ]
@@ -77,22 +99,22 @@
           "args": [
             [
               "Model",
-              "XModel",
+              "XModel_7a6e095c",
               "in"
             ],
             [
               "InStream",
-              "XInputStream",
+              "XInputStream_98d40ab4",
               "in"
             ],
             [
               "DialogLib",
-              "XNameContainer",
+              "XNameContainer_cb90e47",
               "in"
             ],
             [
               "ScriptListener",
-              "XScriptListener",
+              "XScriptListener_f20b0db0",
               "in"
             ]
           ]

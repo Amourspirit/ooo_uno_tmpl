@@ -1,12 +1,14 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "FontRequest",
   "namespace": "com.sun.star.rendering",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "sort": true,
@@ -20,17 +22,20 @@
     "from_imports": [],
     "from_imports_typing": [
       [
-        ".font_info",
-        "FontInfo"
+        "..lang.locale",
+        "Locale",
+        "Locale_70d308fa"
       ],
       [
-        "..lang.locale",
-        "Locale"
+        ".font_info",
+        "FontInfo",
+        "FontInfo_bded0be9"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "FontInfo",
-      "Locale"
+      "FontInfo_bded0be9",
+      "Locale_70d308fa"
     ],
     "typings": [],
     "requires_typing": true,
@@ -66,7 +71,7 @@
       },
       {
         "name": "FontDescription",
-        "type": "FontInfo",
+        "type": "FontInfo_bded0be9",
         "lines": [
           "The description of the font.",
           "",
@@ -75,7 +80,7 @@
       },
       {
         "name": "Locale",
-        "type": "Locale",
+        "type": "Locale_70d308fa",
         "lines": [
           "The locale this font should be able to render.",
           "",

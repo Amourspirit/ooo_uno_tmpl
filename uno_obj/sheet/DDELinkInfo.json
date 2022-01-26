@@ -1,12 +1,14 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "DDELinkInfo",
   "namespace": "com.sun.star.sheet",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "sort": true,
@@ -21,14 +23,16 @@
     "from_imports_typing": [
       [
         ".dde_item_info",
-        "DDEItemInfo"
+        "DDEItemInfo",
+        "DDEItemInfo_ac870b09"
       ]
     ],
+    "extends_map": {},
     "quote": [
-      "typing.List[DDEItemInfo]"
+      "typing.List[DDEItemInfo_ac870b09]"
     ],
     "typings": [
-      "typing.List[DDEItemInfo]"
+      "typing.List[DDEItemInfo_ac870b09]"
     ],
     "requires_typing": true,
     "fullname": "com.sun.star.sheet.DDELinkInfo",
@@ -37,7 +41,7 @@
       "",
       "A DDE connection consists of the DDE service name, the DDE topic and a list of DDE items which may contain results cached from the last update.",
       "",
-      "The formula that would need this information for example would contain =[1]!'R1C1' or =[2]!'Sheet1.A1' where [1] is an external link with DDE service name \\\"excel\\\" and the topic \\\"X:\\PATH\\[FILE.XLSX]Sheet1\\\", and [2] contains service \\\"soffice\\\" and topic \\\"file:///X:/PATH/FILE.ODS\\\". The service name is stored in DDELinkInfo.Service, the topic is stored in DDELinkInfo.Topic. Note that if the DDE item contains single quotes they are escaped by doubling them, as usual, for example =[2]!'''Sheet name''.A1' in a \\\"soffice\\\" service.",
+      "The formula that would need this information for example would contain =[1]!'R1C1' or =[2]!'Sheet1.A1' where [1] is an external link with DDE service name \\\"excel\\\" and the topic \\\"X:\\\\PATH\\\\[FILE.XLSX]Sheet1\\\", and [2] contains service \\\"soffice\\\" and topic \\\"file:///X:/PATH/FILE.ODS\\\". The service name is stored in DDELinkInfo.Service, the topic is stored in DDELinkInfo.Topic. Note that if the DDE item contains single quotes they are escaped by doubling them, as usual, for example =[2]!'''Sheet name''.A1' in a \\\"soffice\\\" service.",
       "",
       "**since**",
       "",
@@ -62,7 +66,7 @@
       },
       {
         "name": "Items",
-        "type": "typing.List[DDEItemInfo]",
+        "type": "typing.List[DDEItemInfo_ac870b09]",
         "lines": [
           "A list of DDE items.",
           "",

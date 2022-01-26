@@ -1,49 +1,71 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XCellRangeMovement",
   "type": "interface",
   "namespace": "com.sun.star.sheet",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "XInterface_8f010a43"
       ]
     ],
     "from_imports_typing": [
       [
         ".cell_delete_mode",
-        "CellDeleteMode"
-      ],
-      [
-        "..table.cell_range_address",
-        "CellRangeAddress"
-      ],
-      [
-        "..table.cell_address",
-        "CellAddress"
+        "CellDeleteMode",
+        "CellDeleteMode_d3830c79"
       ],
       [
         ".cell_insert_mode",
-        "CellInsertMode"
+        "CellInsertMode",
+        "CellInsertMode_d47d0c9b"
+      ],
+      [
+        "..table.cell_address",
+        "CellAddress",
+        "CellAddress_ae5f0b56"
+      ],
+      [
+        "..table.cell_range_address",
+        "CellRangeAddress",
+        "CellRangeAddress_ec450d43"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
     "quote": [
-      "CellAddress",
-      "CellRangeAddress",
-      "CellInsertMode",
-      "CellDeleteMode"
+      "CellAddress_ae5f0b56",
+      "CellDeleteMode_d3830c79",
+      "CellInsertMode_d47d0c9b",
+      "CellRangeAddress_ec450d43"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.sheet.CellDeleteMode",
+        "com.sun.star.sheet.CellInsertMode",
+        "com.sun.star.table.CellAddress",
+        "com.sun.star.table.CellRangeAddress"
+      ]
+    },
     "name": "XCellRangeMovement",
     "imports": [],
     "namespace": "com.sun.star.sheet",
@@ -68,12 +90,12 @@
           "args": [
             [
               "aDestination",
-              "CellAddress",
+              "CellAddress_ae5f0b56",
               "in"
             ],
             [
               "aSource",
-              "CellRangeAddress",
+              "CellRangeAddress_ec450d43",
               "in"
             ]
           ]
@@ -90,12 +112,12 @@
           "args": [
             [
               "aRange",
-              "CellRangeAddress",
+              "CellRangeAddress_ec450d43",
               "in"
             ],
             [
               "nMode",
-              "CellInsertMode",
+              "CellInsertMode_d47d0c9b",
               "in"
             ]
           ]
@@ -112,12 +134,12 @@
           "args": [
             [
               "aDestination",
-              "CellAddress",
+              "CellAddress_ae5f0b56",
               "in"
             ],
             [
               "aSource",
-              "CellRangeAddress",
+              "CellRangeAddress_ec450d43",
               "in"
             ]
           ]
@@ -132,12 +154,12 @@
           "args": [
             [
               "aRange",
-              "CellRangeAddress",
+              "CellRangeAddress_ec450d43",
               "in"
             ],
             [
               "nMode",
-              "CellDeleteMode",
+              "CellDeleteMode_d3830c79",
               "in"
             ]
           ]

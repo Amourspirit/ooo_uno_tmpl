@@ -1,39 +1,55 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "Wizard",
   "type": "service",
   "namespace": "com.sun.star.ui.dialogs",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         ".x_wizard",
-        "XWizard"
+        "XWizard",
+        "XWizard_bae60bc0"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_wizard_controller",
-        "XWizardController"
+        "XWizardController",
+        "XWizardController_469d0fe4"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.ui.dialogs.XWizard": "XWizard_bae60bc0"
+    },
     "quote": [
+      "XWizardController_469d0fe4",
       "typing.List[int]",
-      "typing.List[typing.List[int]]",
-      "XWizardController"
+      "typing.List[typing.List[int]]"
     ],
     "typings": [
       "typing.List[int]",
       "typing.List[typing.List[int]]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.ui.dialogs.XWizard"
+      ],
+      "typing": [
+        "com.sun.star.ui.dialogs.XWizardController"
+      ]
+    },
     "name": "Wizard",
     "imports": [],
     "namespace": "com.sun.star.ui.dialogs",
@@ -67,7 +83,7 @@
             ],
             [
               "Controller",
-              "XWizardController",
+              "XWizardController_469d0fe4",
               "in"
             ]
           ]
@@ -89,7 +105,7 @@
             ],
             [
               "Controller",
-              "XWizardController",
+              "XWizardController_469d0fe4",
               "in"
             ]
           ]

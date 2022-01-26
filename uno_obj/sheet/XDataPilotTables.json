@@ -1,39 +1,57 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XDataPilotTables",
   "type": "interface",
   "namespace": "com.sun.star.sheet",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..container.x_name_access",
-        "XNameAccess"
+        "XNameAccess",
+        "XNameAccess_e2ab0cf6"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_data_pilot_descriptor",
-        "XDataPilotDescriptor"
+        "XDataPilotDescriptor",
+        "XDataPilotDescriptor_27650f1a"
       ],
       [
         "..table.cell_address",
-        "CellAddress"
+        "CellAddress",
+        "CellAddress_ae5f0b56"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.container.XNameAccess": "XNameAccess_e2ab0cf6"
+    },
     "quote": [
-      "XDataPilotDescriptor",
-      "CellAddress"
+      "CellAddress_ae5f0b56",
+      "XDataPilotDescriptor_27650f1a"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.container.XNameAccess"
+      ],
+      "typing": [
+        "com.sun.star.sheet.XDataPilotDescriptor",
+        "com.sun.star.table.CellAddress"
+      ]
+    },
     "name": "XDataPilotTables",
     "imports": [],
     "namespace": "com.sun.star.sheet",
@@ -50,7 +68,7 @@
       "methods": [
         {
           "name": "createDataPilotDescriptor",
-          "returns": "XDataPilotDescriptor",
+          "returns": "XDataPilotDescriptor_27650f1a",
           "desc": [
             "creates a data pilot descriptor.",
             "",
@@ -74,12 +92,12 @@
             ],
             [
               "OutputAddress",
-              "CellAddress",
+              "CellAddress_ae5f0b56",
               "in"
             ],
             [
               "xDescriptor",
-              "XDataPilotDescriptor",
+              "XDataPilotDescriptor_27650f1a",
               "in"
             ]
           ]

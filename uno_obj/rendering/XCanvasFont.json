@@ -1,58 +1,82 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XCanvasFont",
   "type": "interface",
   "namespace": "com.sun.star.rendering",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "XInterface_8f010a43"
       ]
     ],
     "from_imports_typing": [
       [
-        ".font_request",
-        "FontRequest"
-      ],
-      [
-        ".string_context",
-        "StringContext"
-      ],
-      [
-        ".x_text_layout",
-        "XTextLayout"
+        "..beans.property_value",
+        "PropertyValue",
+        "PropertyValue_c9610c73"
       ],
       [
         ".font_metrics",
-        "FontMetrics"
+        "FontMetrics",
+        "FontMetrics_e4540d34"
       ],
       [
-        "..beans.property_value",
-        "PropertyValue"
+        ".font_request",
+        "FontRequest",
+        "FontRequest_e4890d46"
+      ],
+      [
+        ".string_context",
+        "StringContext",
+        "StringContext_d50e22"
+      ],
+      [
+        ".x_text_layout",
+        "XTextLayout",
+        "XTextLayout_e44a0d41"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
     "quote": [
-      "FontMetrics",
-      "StringContext",
-      "typing.List[PropertyValue]",
-      "typing.List[float]",
-      "XTextLayout",
-      "FontRequest"
+      "FontMetrics_e4540d34",
+      "FontRequest_e4890d46",
+      "StringContext_d50e22",
+      "XTextLayout_e44a0d41",
+      "typing.List[PropertyValue_c9610c73]",
+      "typing.List[float]"
     ],
     "typings": [
-      "typing.List[float]",
-      "typing.List[PropertyValue]"
+      "typing.List[PropertyValue_c9610c73]",
+      "typing.List[float]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.beans.PropertyValue",
+        "com.sun.star.rendering.FontMetrics",
+        "com.sun.star.rendering.FontRequest",
+        "com.sun.star.rendering.StringContext",
+        "com.sun.star.rendering.XTextLayout"
+      ]
+    },
     "name": "XCanvasFont",
     "imports": [],
     "namespace": "com.sun.star.rendering",
@@ -69,7 +93,7 @@
       "methods": [
         {
           "name": "createTextLayout",
-          "returns": "XTextLayout",
+          "returns": "XTextLayout_e44a0d41",
           "desc": [
             "Create a text layout interface.",
             "",
@@ -79,7 +103,7 @@
           "args": [
             [
               "aText",
-              "StringContext",
+              "StringContext_d50e22",
               "in"
             ],
             [
@@ -107,7 +131,7 @@
         },
         {
           "name": "getExtraFontProperties",
-          "returns": "typing.List[PropertyValue]",
+          "returns": "typing.List[PropertyValue_c9610c73]",
           "desc": [
             "Query the list of additional font properties."
           ],
@@ -116,7 +140,7 @@
         },
         {
           "name": "getFontMetrics",
-          "returns": "FontMetrics",
+          "returns": "FontMetrics_e4540d34",
           "desc": [
             "Query metric information about the font, that is generic to all its glyphs.",
             "",
@@ -127,7 +151,7 @@
         },
         {
           "name": "getFontRequest",
-          "returns": "FontRequest",
+          "returns": "FontRequest_e4890d46",
           "desc": [
             "Query the FontRequest that was used to generate this object."
           ],

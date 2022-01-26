@@ -1,34 +1,50 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "DatabaseDataProvider",
   "type": "service",
   "namespace": "com.sun.star.chart2.data",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         ".x_database_data_provider",
-        "XDatabaseDataProvider"
+        "XDatabaseDataProvider",
+        "XDatabaseDataProvider_8fe51146"
       ]
     ],
     "from_imports_typing": [
       [
         "...sdbc.x_connection",
-        "XConnection"
+        "XConnection",
+        "XConnection_a36a0b0c"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.chart2.data.XDatabaseDataProvider": "XDatabaseDataProvider_8fe51146"
+    },
     "quote": [
-      "XConnection"
+      "XConnection_a36a0b0c"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.chart2.data.XDatabaseDataProvider"
+      ],
+      "typing": [
+        "com.sun.star.sdbc.XConnection"
+      ]
+    },
     "name": "DatabaseDataProvider",
     "imports": [],
     "namespace": "com.sun.star.chart2.data",
@@ -47,7 +63,7 @@
           "args": [
             [
               "connection",
-              "XConnection",
+              "XConnection_a36a0b0c",
               "in"
             ]
           ]

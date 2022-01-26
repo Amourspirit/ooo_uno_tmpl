@@ -1,44 +1,64 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "OrderDialog",
   "type": "service",
   "namespace": "com.sun.star.sdb",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..ui.dialogs.x_executable_dialog",
-        "XExecutableDialog"
+        "XExecutableDialog",
+        "XExecutableDialog_450f0fa1"
       ]
     ],
     "from_imports_typing": [
       [
-        "..beans.x_property_set",
-        "XPropertySet"
+        "..awt.x_window",
+        "XWindow",
+        "XWindow_713b0924"
       ],
       [
-        "..awt.x_window",
-        "XWindow"
+        "..beans.x_property_set",
+        "XPropertySet",
+        "XPropertySet_bc180bfa"
       ],
       [
         ".x_single_select_query_composer",
-        "XSingleSelectQueryComposer"
+        "XSingleSelectQueryComposer",
+        "XSingleSelectQueryComposer_66e310b9"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.ui.dialogs.XExecutableDialog": "XExecutableDialog_450f0fa1"
+    },
     "quote": [
-      "XWindow",
-      "XSingleSelectQueryComposer",
-      "XPropertySet"
+      "XPropertySet_bc180bfa",
+      "XSingleSelectQueryComposer_66e310b9",
+      "XWindow_713b0924"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.ui.dialogs.XExecutableDialog"
+      ],
+      "typing": [
+        "com.sun.star.awt.XWindow",
+        "com.sun.star.beans.XPropertySet",
+        "com.sun.star.sdb.XSingleSelectQueryComposer"
+      ]
+    },
     "name": "OrderDialog",
     "imports": [],
     "namespace": "com.sun.star.sdb",
@@ -70,17 +90,17 @@
           "args": [
             [
               "QueryComposer",
-              "XSingleSelectQueryComposer",
+              "XSingleSelectQueryComposer_66e310b9",
               "in"
             ],
             [
               "RowSet",
-              "XPropertySet",
+              "XPropertySet_bc180bfa",
               "in"
             ],
             [
               "ParentWindow",
-              "XWindow",
+              "XWindow_713b0924",
               "in"
             ]
           ]

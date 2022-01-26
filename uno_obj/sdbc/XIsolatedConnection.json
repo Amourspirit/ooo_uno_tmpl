@@ -1,39 +1,57 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XIsolatedConnection",
   "type": "interface",
   "namespace": "com.sun.star.sdbc",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "XInterface_8f010a43"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_connection",
-        "XConnection"
+        "XConnection",
+        "XConnection_a36a0b0c"
       ],
       [
         "..task.x_interaction_handler",
-        "XInteractionHandler"
+        "XInteractionHandler",
+        "XInteractionHandler_bf80e51"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
     "quote": [
-      "XConnection",
-      "XInteractionHandler"
+      "XConnection_a36a0b0c",
+      "XInteractionHandler_bf80e51"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.sdbc.XConnection",
+        "com.sun.star.task.XInteractionHandler"
+      ]
+    },
     "name": "XIsolatedConnection",
     "imports": [],
     "namespace": "com.sun.star.sdbc",
@@ -54,7 +72,7 @@
       "methods": [
         {
           "name": "getIsolatedConnection",
-          "returns": "XConnection",
+          "returns": "XConnection_a36a0b0c",
           "desc": [
             "attempts to establish a database connection."
           ],
@@ -76,7 +94,7 @@
         },
         {
           "name": "getIsolatedConnectionWithCompletion",
-          "returns": "XConnection",
+          "returns": "XConnection_a36a0b0c",
           "desc": [
             "attempts to establish a database connection.",
             "",
@@ -88,7 +106,7 @@
           "args": [
             [
               "handler",
-              "XInteractionHandler",
+              "XInteractionHandler_bf80e51",
               "in"
             ]
           ]

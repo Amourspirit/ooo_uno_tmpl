@@ -1,59 +1,88 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "DataPilotSourceDimension",
   "type": "service",
   "namespace": "com.sun.star.sheet",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..beans.x_property_set",
-        "XPropertySet"
-      ],
-      [
-        ".x_hierarchies_supplier",
-        "XHierarchiesSupplier"
-      ],
-      [
-        "..util.x_cloneable",
-        "XCloneable"
+        "XPropertySet",
+        "XPropertySet_bc180bfa"
       ],
       [
         "..container.x_named",
-        "XNamed"
+        "XNamed",
+        "XNamed_a6520b08"
+      ],
+      [
+        ".x_hierarchies_supplier",
+        "XHierarchiesSupplier",
+        "XHierarchiesSupplier_29a50f34"
+      ],
+      [
+        "..util.x_cloneable",
+        "XCloneable",
+        "XCloneable_99d00aa3"
       ]
     ],
     "from_imports_typing": [
       [
         ".data_pilot_field_orientation",
-        "DataPilotFieldOrientation"
-      ],
-      [
-        ".table_filter_field",
-        "TableFilterField"
+        "DataPilotFieldOrientation",
+        "DataPilotFieldOrientation_78701113"
       ],
       [
         ".general_function",
-        "GeneralFunction"
+        "GeneralFunction",
+        "GeneralFunction_e2280d25"
+      ],
+      [
+        ".table_filter_field",
+        "TableFilterField",
+        "TableFilterField_ee760d53"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.beans.XPropertySet": "XPropertySet_bc180bfa",
+      "com.sun.star.container.XNamed": "XNamed_a6520b08",
+      "com.sun.star.sheet.XHierarchiesSupplier": "XHierarchiesSupplier_29a50f34",
+      "com.sun.star.util.XCloneable": "XCloneable_99d00aa3"
+    },
     "quote": [
-      "XNamed",
-      "GeneralFunction",
-      "DataPilotFieldOrientation",
-      "typing.List[TableFilterField]"
+      "DataPilotFieldOrientation_78701113",
+      "GeneralFunction_e2280d25",
+      "XNamed_a6520b08",
+      "typing.List[TableFilterField_ee760d53]"
     ],
     "typings": [
-      "typing.List[TableFilterField]"
+      "typing.List[TableFilterField_ee760d53]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.beans.XPropertySet",
+        "com.sun.star.container.XNamed",
+        "com.sun.star.sheet.XHierarchiesSupplier",
+        "com.sun.star.util.XCloneable"
+      ],
+      "typing": [
+        "com.sun.star.sheet.DataPilotFieldOrientation",
+        "com.sun.star.sheet.GeneralFunction",
+        "com.sun.star.sheet.TableFilterField"
+      ]
+    },
     "name": "DataPilotSourceDimension",
     "imports": [],
     "namespace": "com.sun.star.sheet",
@@ -81,7 +110,7 @@
       "types": [
         {
           "name": "Filter",
-          "returns": "typing.List[TableFilterField]",
+          "returns": "typing.List[TableFilterField_ee760d53]",
           "desc": [
             "specifies which values are used."
           ],
@@ -101,7 +130,7 @@
         },
         {
           "name": "Function",
-          "returns": "GeneralFunction",
+          "returns": "GeneralFunction_e2280d25",
           "desc": [
             "specifies how data are aggregated."
           ],
@@ -132,7 +161,7 @@
         },
         {
           "name": "Orientation",
-          "returns": "DataPilotFieldOrientation",
+          "returns": "DataPilotFieldOrientation_78701113",
           "desc": [
             "specifies where the dimension is used."
           ],
@@ -141,7 +170,7 @@
         },
         {
           "name": "Original",
-          "returns": "XNamed",
+          "returns": "XNamed_a6520b08",
           "desc": [
             "returns the name of the dimension from which this dimension was cloned, or NULL if it was not cloned."
           ],

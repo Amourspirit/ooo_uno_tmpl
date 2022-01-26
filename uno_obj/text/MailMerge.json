@@ -1,71 +1,105 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "MailMerge",
   "type": "service",
   "namespace": "com.sun.star.text",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
-        "..task.x_job",
-        "XJob"
-      ],
-      [
-        "..util.x_cancellable",
-        "XCancellable"
-      ],
-      [
         "..beans.x_property_set",
-        "XPropertySet"
-      ],
-      [
-        ".x_mail_merge_broadcaster",
-        "XMailMergeBroadcaster"
+        "XPropertySet",
+        "XPropertySet_bc180bfa"
       ],
       [
         "..sdb.data_access_descriptor",
-        "DataAccessDescriptor"
+        "DataAccessDescriptor",
+        "DataAccessDescriptor_6c50e2c"
+      ],
+      [
+        "..task.x_job",
+        "XJob",
+        "XJob_5fa1082e"
+      ],
+      [
+        ".x_mail_merge_broadcaster",
+        "XMailMergeBroadcaster",
+        "XMailMergeBroadcaster_27c30f02"
+      ],
+      [
+        "..util.x_cancellable",
+        "XCancellable",
+        "XCancellable_afc30b64"
       ]
     ],
     "from_imports_typing": [
       [
-        "..frame.x_model",
-        "XModel"
+        "..beans.property_value",
+        "PropertyValue",
+        "PropertyValue_c9610c73"
       ],
       [
-        "..sdbc.x_result_set",
-        "XResultSet"
+        "..frame.x_model",
+        "XModel",
+        "XModel_7a6e095c"
       ],
       [
         "..sdbc.x_connection",
-        "XConnection"
+        "XConnection",
+        "XConnection_a36a0b0c"
       ],
       [
-        "..beans.property_value",
-        "PropertyValue"
+        "..sdbc.x_result_set",
+        "XResultSet",
+        "XResultSet_98e30aa7"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.beans.XPropertySet": "XPropertySet_bc180bfa",
+      "com.sun.star.sdb.DataAccessDescriptor": "DataAccessDescriptor_6c50e2c",
+      "com.sun.star.task.XJob": "XJob_5fa1082e",
+      "com.sun.star.text.XMailMergeBroadcaster": "XMailMergeBroadcaster_27c30f02",
+      "com.sun.star.util.XCancellable": "XCancellable_afc30b64"
+    },
     "quote": [
-      "XModel",
-      "typing.List[PropertyValue]",
-      "XConnection",
+      "XConnection_a36a0b0c",
+      "XModel_7a6e095c",
+      "XResultSet_98e30aa7",
+      "typing.List[PropertyValue_c9610c73]",
       "typing.List[object]",
-      "typing.List[str]",
-      "XResultSet"
+      "typing.List[str]"
     ],
     "typings": [
-      "typing.List[str]",
-      "typing.List[PropertyValue]",
-      "typing.List[object]"
+      "typing.List[PropertyValue_c9610c73]",
+      "typing.List[object]",
+      "typing.List[str]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.beans.XPropertySet",
+        "com.sun.star.sdb.DataAccessDescriptor",
+        "com.sun.star.task.XJob",
+        "com.sun.star.text.XMailMergeBroadcaster",
+        "com.sun.star.util.XCancellable"
+      ],
+      "typing": [
+        "com.sun.star.beans.PropertyValue",
+        "com.sun.star.frame.XModel",
+        "com.sun.star.sdbc.XConnection",
+        "com.sun.star.sdbc.XResultSet"
+      ]
+    },
     "name": "MailMerge",
     "imports": [],
     "namespace": "com.sun.star.text",
@@ -116,7 +150,7 @@
         },
         {
           "name": "PrintOptions",
-          "returns": "typing.List[PropertyValue]",
+          "returns": "typing.List[PropertyValue_c9610c73]",
           "desc": [
             "contains the properties that are defined in <com.sun.star.view.PrintOptions>.",
             "",
@@ -149,7 +183,7 @@
       "properties": [
         {
           "name": "ActiveConnection",
-          "returns": "XConnection",
+          "returns": "XConnection_a36a0b0c",
           "desc": [
             "contains the connection to the database.",
             "",
@@ -335,7 +369,7 @@
         },
         {
           "name": "Model",
-          "returns": "XModel",
+          "returns": "XModel_7a6e095c",
           "desc": [
             "provides access to the model of the document to be processed.",
             "",
@@ -385,7 +419,7 @@
         },
         {
           "name": "ResultSet",
-          "returns": "XResultSet",
+          "returns": "XResultSet_98e30aa7",
           "desc": [
             "provides access to a com.sun.star.sdbc.XResultSet of a com.sun.star.sdbc.ResultSet service.",
             "",

@@ -1,42 +1,60 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "TextContent",
   "type": "service",
   "namespace": "com.sun.star.text",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         ".x_text_content",
-        "XTextContent"
+        "XTextContent",
+        "XTextContent_b16e0ba5"
       ]
     ],
     "from_imports_typing": [
       [
         ".text_content_anchor_type",
-        "TextContentAnchorType"
+        "TextContentAnchorType",
+        "TextContentAnchorType_2cbe0f4a"
       ],
       [
         ".wrap_text_mode",
-        "WrapTextMode"
+        "WrapTextMode",
+        "WrapTextMode_b1dd0b91"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.text.XTextContent": "XTextContent_b16e0ba5"
+    },
     "quote": [
-      "WrapTextMode",
-      "TextContentAnchorType",
-      "typing.List[TextContentAnchorType]"
+      "TextContentAnchorType_2cbe0f4a",
+      "WrapTextMode_b1dd0b91",
+      "typing.List[TextContentAnchorType_2cbe0f4a]"
     ],
     "typings": [
-      "typing.List[TextContentAnchorType]"
+      "typing.List[TextContentAnchorType_2cbe0f4a]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.text.XTextContent"
+      ],
+      "typing": [
+        "com.sun.star.text.TextContentAnchorType",
+        "com.sun.star.text.WrapTextMode"
+      ]
+    },
     "name": "TextContent",
     "imports": [],
     "namespace": "com.sun.star.text",
@@ -55,7 +73,7 @@
       "types": [
         {
           "name": "AnchorTypes",
-          "returns": "typing.List[TextContentAnchorType]",
+          "returns": "typing.List[TextContentAnchorType_2cbe0f4a]",
           "desc": [
             "contains the anchor type of the text content."
           ],
@@ -66,7 +84,7 @@
       "properties": [
         {
           "name": "AnchorType",
-          "returns": "TextContentAnchorType",
+          "returns": "TextContentAnchorType_2cbe0f4a",
           "desc": [
             "specifies how the text content is attached to its surrounding Text."
           ],
@@ -75,7 +93,7 @@
         },
         {
           "name": "TextWrap",
-          "returns": "WrapTextMode",
+          "returns": "WrapTextMode_b1dd0b91",
           "desc": [
             "specifies if the text content is a shape and how the text is wrapped around the shape."
           ],

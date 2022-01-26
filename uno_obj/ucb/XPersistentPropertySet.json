@@ -1,34 +1,50 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XPersistentPropertySet",
   "type": "interface",
   "namespace": "com.sun.star.ucb",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..beans.x_property_set",
-        "XPropertySet"
+        "XPropertySet",
+        "XPropertySet_bc180bfa"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_property_set_registry",
-        "XPropertySetRegistry"
+        "XPropertySetRegistry",
+        "XPropertySetRegistry_c2e0e84"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.beans.XPropertySet": "XPropertySet_bc180bfa"
+    },
     "quote": [
-      "XPropertySetRegistry"
+      "XPropertySetRegistry_c2e0e84"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.beans.XPropertySet"
+      ],
+      "typing": [
+        "com.sun.star.ucb.XPropertySetRegistry"
+      ]
+    },
     "name": "XPersistentPropertySet",
     "imports": [],
     "namespace": "com.sun.star.ucb",
@@ -52,7 +68,7 @@
         },
         {
           "name": "getRegistry",
-          "returns": "XPropertySetRegistry",
+          "returns": "XPropertySetRegistry_c2e0e84",
           "desc": [
             "returns the registry used to store the property set."
           ],

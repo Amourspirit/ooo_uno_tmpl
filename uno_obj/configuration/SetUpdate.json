@@ -1,31 +1,47 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "SetUpdate",
   "type": "service",
   "namespace": "com.sun.star.configuration",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
-        ".simple_set_update",
-        "SimpleSetUpdate"
+        ".set_access",
+        "SetAccess",
+        "SetAccess_1ae0dfe"
       ],
       [
-        ".set_access",
-        "SetAccess"
+        ".simple_set_update",
+        "SimpleSetUpdate",
+        "SimpleSetUpdate_5f4d1079"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.configuration.SetAccess": "SetAccess_1ae0dfe",
+      "com.sun.star.configuration.SimpleSetUpdate": "SimpleSetUpdate_5f4d1079"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
+    "full_imports": {
+      "general": [
+        "com.sun.star.configuration.SetAccess",
+        "com.sun.star.configuration.SimpleSetUpdate"
+      ],
+      "typing": []
+    },
     "name": "SetUpdate",
     "imports": [],
     "namespace": "com.sun.star.configuration",

@@ -1,34 +1,50 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XSimpleRegistry",
   "type": "interface",
   "namespace": "com.sun.star.registry",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "XInterface_8f010a43"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_registry_key",
-        "XRegistryKey"
+        "XRegistryKey",
+        "XRegistryKey_e61a0d5b"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
     "quote": [
-      "XRegistryKey"
+      "XRegistryKey_e61a0d5b"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.registry.XRegistryKey"
+      ]
+    },
     "name": "XSimpleRegistry",
     "imports": [],
     "namespace": "com.sun.star.registry",
@@ -67,7 +83,7 @@
         },
         {
           "name": "getRootKey",
-          "returns": "XRegistryKey",
+          "returns": "XRegistryKey_e61a0d5b",
           "desc": [],
           "raises": [
             "com.sun.star.registry.InvalidRegistryException"

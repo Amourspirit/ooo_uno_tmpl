@@ -1,42 +1,60 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XRemoteContentProviderAcceptor",
   "type": "interface",
   "namespace": "com.sun.star.ucb",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "XInterface_8f010a43"
       ]
     ],
     "from_imports_typing": [
       [
-        ".x_remote_content_provider_done_listener",
-        "XRemoteContentProviderDoneListener"
+        "..lang.x_multi_service_factory",
+        "XMultiServiceFactory",
+        "XMultiServiceFactory_191e0eb6"
       ],
       [
-        "..lang.x_multi_service_factory",
-        "XMultiServiceFactory"
+        ".x_remote_content_provider_done_listener",
+        "XRemoteContentProviderDoneListener",
+        "XRemoteContentProviderDoneListener_fc7413f8"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
     "quote": [
-      "XMultiServiceFactory",
-      "XRemoteContentProviderDoneListener",
+      "XMultiServiceFactory_191e0eb6",
+      "XRemoteContentProviderDoneListener_fc7413f8",
       "typing.List[str]"
     ],
     "typings": [
       "typing.List[str]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.lang.XMultiServiceFactory",
+        "com.sun.star.ucb.XRemoteContentProviderDoneListener"
+      ]
+    },
     "name": "XRemoteContentProviderAcceptor",
     "imports": [],
     "namespace": "com.sun.star.ucb",
@@ -66,7 +84,7 @@
             ],
             [
               "Factory",
-              "XMultiServiceFactory",
+              "XMultiServiceFactory_191e0eb6",
               "in"
             ],
             [
@@ -76,7 +94,7 @@
             ],
             [
               "DoneListener",
-              "XRemoteContentProviderDoneListener",
+              "XRemoteContentProviderDoneListener_fc7413f8",
               "in"
             ]
           ]

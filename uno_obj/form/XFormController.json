@@ -1,39 +1,57 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XFormController",
   "type": "interface",
   "namespace": "com.sun.star.form",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..awt.x_tab_controller",
-        "XTabController"
+        "XTabController",
+        "XTabController_bacd0be7"
       ]
     ],
     "from_imports_typing": [
       [
-        ".x_form_controller_listener",
-        "XFormControllerListener"
+        "..awt.x_control",
+        "XControl",
+        "XControl_7a9c098d"
       ],
       [
-        "..awt.x_control",
-        "XControl"
+        ".x_form_controller_listener",
+        "XFormControllerListener",
+        "XFormControllerListener_49ba1012"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.awt.XTabController": "XTabController_bacd0be7"
+    },
     "quote": [
-      "XControl",
-      "XFormControllerListener"
+      "XControl_7a9c098d",
+      "XFormControllerListener_49ba1012"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.awt.XTabController"
+      ],
+      "typing": [
+        "com.sun.star.awt.XControl",
+        "com.sun.star.form.XFormControllerListener"
+      ]
+    },
     "name": "XFormController",
     "imports": [],
     "namespace": "com.sun.star.form",
@@ -58,14 +76,14 @@
           "args": [
             [
               "l",
-              "XFormControllerListener",
+              "XFormControllerListener_49ba1012",
               "in"
             ]
           ]
         },
         {
           "name": "getCurrentControl",
-          "returns": "XControl",
+          "returns": "XControl_7a9c098d",
           "desc": [],
           "raises": [],
           "args": []
@@ -78,7 +96,7 @@
           "args": [
             [
               "l",
-              "XFormControllerListener",
+              "XFormControllerListener_49ba1012",
               "in"
             ]
           ]

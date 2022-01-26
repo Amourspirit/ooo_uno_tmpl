@@ -1,35 +1,51 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XImplementationLoader",
   "type": "interface",
   "namespace": "com.sun.star.loader",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "XInterface_8f010a43"
       ]
     ],
     "from_imports_typing": [
       [
         "..registry.x_registry_key",
-        "XRegistryKey"
+        "XRegistryKey",
+        "XRegistryKey_e61a0d5b"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
     "quote": [
-      "XRegistryKey",
-      "XInterface"
+      "XInterface_8f010a43",
+      "XRegistryKey_e61a0d5b"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.registry.XRegistryKey"
+      ]
+    },
     "name": "XImplementationLoader",
     "imports": [],
     "namespace": "com.sun.star.loader",
@@ -44,7 +60,7 @@
       "methods": [
         {
           "name": "activate",
-          "returns": "XInterface",
+          "returns": "XInterface_8f010a43",
           "desc": [
             "activates a concrete implementation within a component.",
             "",
@@ -71,7 +87,7 @@
             ],
             [
               "xKey",
-              "XRegistryKey",
+              "XRegistryKey_e61a0d5b",
               "in"
             ]
           ]
@@ -92,7 +108,7 @@
           "args": [
             [
               "xKey",
-              "XRegistryKey",
+              "XRegistryKey_e61a0d5b",
               "in"
             ],
             [

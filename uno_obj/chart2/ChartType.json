@@ -1,35 +1,54 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "ChartType",
   "type": "service",
   "namespace": "com.sun.star.chart2",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..beans.x_property_set",
-        "XPropertySet"
+        "XPropertySet",
+        "XPropertySet_bc180bfa"
       ],
       [
         ".x_chart_type",
-        "XChartType"
+        "XChartType",
+        "XChartType_ad200b38"
       ],
       [
         ".x_data_series_container",
-        "XDataSeriesContainer"
+        "XDataSeriesContainer",
+        "XDataSeriesContainer_31910f2c"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.beans.XPropertySet": "XPropertySet_bc180bfa",
+      "com.sun.star.chart2.XChartType": "XChartType_ad200b38",
+      "com.sun.star.chart2.XDataSeriesContainer": "XDataSeriesContainer_31910f2c"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
+    "full_imports": {
+      "general": [
+        "com.sun.star.beans.XPropertySet",
+        "com.sun.star.chart2.XChartType",
+        "com.sun.star.chart2.XDataSeriesContainer"
+      ],
+      "typing": []
+    },
     "name": "ChartType",
     "imports": [],
     "namespace": "com.sun.star.chart2",

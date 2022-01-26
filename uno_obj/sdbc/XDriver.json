@@ -1,47 +1,67 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XDriver",
   "type": "interface",
   "namespace": "com.sun.star.sdbc",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "XInterface_8f010a43"
       ]
     ],
     "from_imports_typing": [
       [
-        ".x_connection",
-        "XConnection"
+        "..beans.property_value",
+        "PropertyValue",
+        "PropertyValue_c9610c73"
       ],
       [
         ".driver_property_info",
-        "DriverPropertyInfo"
+        "DriverPropertyInfo",
+        "DriverPropertyInfo_fd970e01"
       ],
       [
-        "..beans.property_value",
-        "PropertyValue"
+        ".x_connection",
+        "XConnection",
+        "XConnection_a36a0b0c"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
     "quote": [
-      "typing.List[DriverPropertyInfo]",
-      "XConnection",
-      "typing.List[PropertyValue]"
+      "XConnection_a36a0b0c",
+      "typing.List[DriverPropertyInfo_fd970e01]",
+      "typing.List[PropertyValue_c9610c73]"
     ],
     "typings": [
-      "typing.List[DriverPropertyInfo]",
-      "typing.List[PropertyValue]"
+      "typing.List[DriverPropertyInfo_fd970e01]",
+      "typing.List[PropertyValue_c9610c73]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.beans.PropertyValue",
+        "com.sun.star.sdbc.DriverPropertyInfo",
+        "com.sun.star.sdbc.XConnection"
+      ]
+    },
     "name": "XDriver",
     "imports": [],
     "namespace": "com.sun.star.sdbc",
@@ -81,7 +101,7 @@
         },
         {
           "name": "connect",
-          "returns": "XConnection",
+          "returns": "XConnection_a36a0b0c",
           "desc": [
             "attempts to make a database connection to the given URL.",
             "",
@@ -102,7 +122,7 @@
             ],
             [
               "info",
-              "typing.List[PropertyValue]",
+              "typing.List[PropertyValue_c9610c73]",
               "in"
             ]
           ]
@@ -131,7 +151,7 @@
         },
         {
           "name": "getPropertyInfo",
-          "returns": "typing.List[DriverPropertyInfo]",
+          "returns": "typing.List[DriverPropertyInfo_fd970e01]",
           "desc": [
             "gets information about the possible properties for this driver.",
             "",
@@ -148,7 +168,7 @@
             ],
             [
               "info",
-              "typing.List[PropertyValue]",
+              "typing.List[PropertyValue_c9610c73]",
               "in"
             ]
           ]

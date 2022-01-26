@@ -1,44 +1,64 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "FilterControl",
   "type": "service",
   "namespace": "com.sun.star.form.control",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "...awt.x_control",
-        "XControl"
+        "XControl",
+        "XControl_7a9c098d"
       ]
     ],
     "from_imports_typing": [
       [
-        "...beans.x_property_set",
-        "XPropertySet"
+        "...awt.x_window",
+        "XWindow",
+        "XWindow_713b0924"
       ],
       [
-        "...awt.x_window",
-        "XWindow"
+        "...beans.x_property_set",
+        "XPropertySet",
+        "XPropertySet_bc180bfa"
       ],
       [
         "...util.x_number_formatter",
-        "XNumberFormatter"
+        "XNumberFormatter",
+        "XNumberFormatter_e3170d3b"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.awt.XControl": "XControl_7a9c098d"
+    },
     "quote": [
-      "XWindow",
-      "XPropertySet",
-      "XNumberFormatter"
+      "XNumberFormatter_e3170d3b",
+      "XPropertySet_bc180bfa",
+      "XWindow_713b0924"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.awt.XControl"
+      ],
+      "typing": [
+        "com.sun.star.awt.XWindow",
+        "com.sun.star.beans.XPropertySet",
+        "com.sun.star.util.XNumberFormatter"
+      ]
+    },
     "name": "FilterControl",
     "imports": [],
     "namespace": "com.sun.star.form.control",
@@ -61,17 +81,17 @@
           "args": [
             [
               "MessageParent",
-              "XWindow",
+              "XWindow_713b0924",
               "in"
             ],
             [
               "NumberFormatter",
-              "XNumberFormatter",
+              "XNumberFormatter_e3170d3b",
               "in"
             ],
             [
               "ControlModel",
-              "XPropertySet",
+              "XPropertySet_bc180bfa",
               "in"
             ]
           ]

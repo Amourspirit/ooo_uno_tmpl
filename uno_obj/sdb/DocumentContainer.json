@@ -1,43 +1,68 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "DocumentContainer",
   "type": "service",
   "namespace": "com.sun.star.sdb",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
-        ".definition_container",
-        "DefinitionContainer"
+        "..container.x_hierarchical_name_container",
+        "XHierarchicalNameContainer",
+        "XHierarchicalNameContainer_d6621306"
       ],
       [
         "..frame.x_component_loader",
-        "XComponentLoader"
+        "XComponentLoader",
+        "XComponentLoader_eede0d75"
       ],
       [
         "..lang.x_multi_service_factory",
-        "XMultiServiceFactory"
+        "XMultiServiceFactory",
+        "XMultiServiceFactory_191e0eb6"
       ],
       [
-        "..container.x_hierarchical_name_container",
-        "XHierarchicalNameContainer"
+        ".definition_container",
+        "DefinitionContainer",
+        "DefinitionContainer_fc1e0ded"
       ],
       [
         ".definition_content",
-        "DefinitionContent"
+        "DefinitionContent",
+        "DefinitionContent_e0d20d25"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.container.XHierarchicalNameContainer": "XHierarchicalNameContainer_d6621306",
+      "com.sun.star.frame.XComponentLoader": "XComponentLoader_eede0d75",
+      "com.sun.star.lang.XMultiServiceFactory": "XMultiServiceFactory_191e0eb6",
+      "com.sun.star.sdb.DefinitionContainer": "DefinitionContainer_fc1e0ded",
+      "com.sun.star.sdb.DefinitionContent": "DefinitionContent_e0d20d25"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
+    "full_imports": {
+      "general": [
+        "com.sun.star.container.XHierarchicalNameContainer",
+        "com.sun.star.frame.XComponentLoader",
+        "com.sun.star.lang.XMultiServiceFactory",
+        "com.sun.star.sdb.DefinitionContainer",
+        "com.sun.star.sdb.DefinitionContent"
+      ],
+      "typing": []
+    },
     "name": "DocumentContainer",
     "imports": [],
     "namespace": "com.sun.star.sdb",

@@ -1,48 +1,65 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "UnoControl",
   "type": "service",
   "namespace": "com.sun.star.awt",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
-        ".x_control",
-        "XControl"
-      ],
-      [
-        ".x_window",
-        "XWindow"
-      ],
-      [
         "..accessibility.x_accessible",
-        "XAccessible"
+        "XAccessible",
+        "XAccessible_1cbc0eb6"
       ],
       [
-        "..lang.x_component",
-        "XComponent"
+        ".x_control",
+        "XControl",
+        "XControl_7a9c098d"
       ],
       [
         ".x_view",
-        "XView"
+        "XView",
+        "XView_5f670847"
+      ],
+      [
+        ".x_window",
+        "XWindow",
+        "XWindow_713b0924"
       ]
     ],
     "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.accessibility.XAccessible": "XAccessible_1cbc0eb6",
+      "com.sun.star.awt.XControl": "XControl_7a9c098d",
+      "com.sun.star.awt.XView": "XView_5f670847",
+      "com.sun.star.awt.XWindow": "XWindow_713b0924"
+    },
     "quote": [],
     "typings": [],
     "requires_typing": false,
+    "full_imports": {
+      "general": [
+        "com.sun.star.accessibility.XAccessible",
+        "com.sun.star.awt.XControl",
+        "com.sun.star.awt.XView",
+        "com.sun.star.awt.XWindow"
+      ],
+      "typing": []
+    },
     "name": "UnoControl",
     "imports": [],
     "namespace": "com.sun.star.awt",
     "extends": [
-      "com.sun.star.lang.XComponent",
       "com.sun.star.awt.XControl",
       "com.sun.star.awt.XWindow",
       "com.sun.star.awt.XView",

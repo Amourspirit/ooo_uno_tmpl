@@ -1,39 +1,57 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "AddressBookSourceDialog",
   "type": "service",
   "namespace": "com.sun.star.ui",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         ".dialogs.x_executable_dialog",
-        "XExecutableDialog"
+        "XExecutableDialog",
+        "XExecutableDialog_450f0fa1"
       ]
     ],
     "from_imports_typing": [
       [
-        "..beans.x_property_set",
-        "XPropertySet"
+        "..awt.x_window",
+        "XWindow",
+        "XWindow_713b0924"
       ],
       [
-        "..awt.x_window",
-        "XWindow"
+        "..beans.x_property_set",
+        "XPropertySet",
+        "XPropertySet_bc180bfa"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.ui.dialogs.XExecutableDialog": "XExecutableDialog_450f0fa1"
+    },
     "quote": [
-      "XWindow",
-      "XPropertySet"
+      "XPropertySet_bc180bfa",
+      "XWindow_713b0924"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.ui.dialogs.XExecutableDialog"
+      ],
+      "typing": [
+        "com.sun.star.awt.XWindow",
+        "com.sun.star.beans.XPropertySet"
+      ]
+    },
     "name": "AddressBookSourceDialog",
     "imports": [],
     "namespace": "com.sun.star.ui",
@@ -58,12 +76,12 @@
           "args": [
             [
               "ParentWindow",
-              "XWindow",
+              "XWindow_713b0924",
               "in"
             ],
             [
               "DataSource",
-              "XPropertySet",
+              "XPropertySet_bc180bfa",
               "in"
             ],
             [

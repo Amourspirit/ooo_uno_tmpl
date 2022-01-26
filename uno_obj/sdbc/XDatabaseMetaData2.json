@@ -1,36 +1,52 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XDatabaseMetaData2",
   "type": "interface",
   "namespace": "com.sun.star.sdbc",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         ".x_database_meta_data",
-        "XDatabaseMetaData"
+        "XDatabaseMetaData",
+        "XDatabaseMetaData_eafd0d12"
       ]
     ],
     "from_imports_typing": [
       [
         "..beans.property_value",
-        "PropertyValue"
+        "PropertyValue",
+        "PropertyValue_c9610c73"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.sdbc.XDatabaseMetaData": "XDatabaseMetaData_eafd0d12"
+    },
     "quote": [
-      "typing.List[PropertyValue]"
+      "typing.List[PropertyValue_c9610c73]"
     ],
     "typings": [
-      "typing.List[PropertyValue]"
+      "typing.List[PropertyValue_c9610c73]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.sdbc.XDatabaseMetaData"
+      ],
+      "typing": [
+        "com.sun.star.beans.PropertyValue"
+      ]
+    },
     "name": "XDatabaseMetaData2",
     "imports": [],
     "namespace": "com.sun.star.sdbc",
@@ -45,7 +61,7 @@
       "methods": [
         {
           "name": "getConnectionInfo",
-          "returns": "typing.List[PropertyValue]",
+          "returns": "typing.List[PropertyValue_c9610c73]",
           "desc": [
             "complements XDatabaseMetaData.getURL by returning the settings which, upon construction of the connection, have been used besides the connection URL."
           ],

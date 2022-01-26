@@ -1,37 +1,53 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XPrintAreas",
   "type": "interface",
   "namespace": "com.sun.star.sheet",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..uno.x_interface",
-        "XInterface"
+        "XInterface",
+        "XInterface_8f010a43"
       ]
     ],
     "from_imports_typing": [
       [
         "..table.cell_range_address",
-        "CellRangeAddress"
+        "CellRangeAddress",
+        "CellRangeAddress_ec450d43"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
     "quote": [
-      "typing.List[CellRangeAddress]",
-      "CellRangeAddress"
+      "CellRangeAddress_ec450d43",
+      "typing.List[CellRangeAddress_ec450d43]"
     ],
     "typings": [
-      "typing.List[CellRangeAddress]"
+      "typing.List[CellRangeAddress_ec450d43]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.table.CellRangeAddress"
+      ]
+    },
     "name": "XPrintAreas",
     "imports": [],
     "namespace": "com.sun.star.sheet",
@@ -46,7 +62,7 @@
       "methods": [
         {
           "name": "getPrintAreas",
-          "returns": "typing.List[CellRangeAddress]",
+          "returns": "typing.List[CellRangeAddress_ec450d43]",
           "desc": [
             "returns a sequence containing all print areas of the sheet."
           ],
@@ -73,7 +89,7 @@
         },
         {
           "name": "getTitleColumns",
-          "returns": "CellRangeAddress",
+          "returns": "CellRangeAddress_ec450d43",
           "desc": [
             "returns the range that is specified as title columns range.",
             "",
@@ -84,7 +100,7 @@
         },
         {
           "name": "getTitleRows",
-          "returns": "CellRangeAddress",
+          "returns": "CellRangeAddress_ec450d43",
           "desc": [
             "returns the range that is specified as title rows range.",
             "",
@@ -105,7 +121,7 @@
           "args": [
             [
               "aPrintAreas",
-              "typing.List[CellRangeAddress]",
+              "typing.List[CellRangeAddress_ec450d43]",
               "in"
             ]
           ]
@@ -154,7 +170,7 @@
           "args": [
             [
               "aTitleColumns",
-              "CellRangeAddress",
+              "CellRangeAddress_ec450d43",
               "in"
             ]
           ]
@@ -173,7 +189,7 @@
           "args": [
             [
               "aTitleRows",
-              "CellRangeAddress",
+              "CellRangeAddress_ec450d43",
               "in"
             ]
           ]

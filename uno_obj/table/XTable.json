@@ -1,55 +1,86 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XTable",
   "type": "interface",
   "namespace": "com.sun.star.table",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
-        "..lang.x_component",
-        "XComponent"
-      ],
-      [
-        "..util.x_modifiable",
-        "XModifiable"
-      ],
-      [
         "..beans.x_fast_property_set",
-        "XFastPropertySet"
-      ],
-      [
-        ".x_column_row_range",
-        "XColumnRowRange"
+        "XFastPropertySet",
+        "XFastPropertySet_ee6b0d88"
       ],
       [
         "..beans.x_property_set",
-        "XPropertySet"
+        "XPropertySet",
+        "XPropertySet_bc180bfa"
+      ],
+      [
+        "..lang.x_component",
+        "XComponent",
+        "XComponent_98dc0ab5"
       ],
       [
         ".x_cell_range",
-        "XCellRange"
+        "XCellRange",
+        "XCellRange_a2f70ad5"
+      ],
+      [
+        ".x_column_row_range",
+        "XColumnRowRange",
+        "XColumnRowRange_e0e70cfb"
+      ],
+      [
+        "..util.x_modifiable",
+        "XModifiable",
+        "XModifiable_a4f60b0a"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_cell_cursor",
-        "XCellCursor"
+        "XCellCursor",
+        "XCellCursor_ae900b66"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.beans.XFastPropertySet": "XFastPropertySet_ee6b0d88",
+      "com.sun.star.beans.XPropertySet": "XPropertySet_bc180bfa",
+      "com.sun.star.lang.XComponent": "XComponent_98dc0ab5",
+      "com.sun.star.table.XCellRange": "XCellRange_a2f70ad5",
+      "com.sun.star.table.XColumnRowRange": "XColumnRowRange_e0e70cfb",
+      "com.sun.star.util.XModifiable": "XModifiable_a4f60b0a"
+    },
     "quote": [
-      "XCellCursor",
-      "XCellRange"
+      "XCellCursor_ae900b66",
+      "XCellRange_a2f70ad5"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.beans.XFastPropertySet",
+        "com.sun.star.beans.XPropertySet",
+        "com.sun.star.lang.XComponent",
+        "com.sun.star.table.XCellRange",
+        "com.sun.star.table.XColumnRowRange",
+        "com.sun.star.util.XModifiable"
+      ],
+      "typing": [
+        "com.sun.star.table.XCellCursor"
+      ]
+    },
     "name": "XTable",
     "imports": [],
     "namespace": "com.sun.star.table",
@@ -67,7 +98,7 @@
       "methods": [
         {
           "name": "createCursor",
-          "returns": "XCellCursor",
+          "returns": "XCellCursor_ae900b66",
           "desc": [
             "creates a cell cursor including the whole table"
           ],
@@ -76,7 +107,7 @@
         },
         {
           "name": "createCursorByRange",
-          "returns": "XCellCursor",
+          "returns": "XCellCursor_ae900b66",
           "desc": [
             "creates a cell cursor to travel in the given range context."
           ],
@@ -86,7 +117,7 @@
           "args": [
             [
               "Range",
-              "XCellRange",
+              "XCellRange_a2f70ad5",
               "in"
             ]
           ]

@@ -1,47 +1,67 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "XDictionary1",
   "type": "interface",
   "namespace": "com.sun.star.linguistic2",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..container.x_named",
-        "XNamed"
+        "XNamed",
+        "XNamed_a6520b08"
       ]
     ],
     "from_imports_typing": [
       [
-        ".x_dictionary_entry",
-        "XDictionaryEntry"
+        ".dictionary_type",
+        "DictionaryType",
+        "DictionaryType_2ba50f2d"
       ],
       [
-        ".dictionary_type",
-        "DictionaryType"
+        ".x_dictionary_entry",
+        "XDictionaryEntry",
+        "XDictionaryEntry_49ef0ff5"
       ],
       [
         ".x_dictionary_event_listener",
-        "XDictionaryEventListener"
+        "XDictionaryEventListener",
+        "XDictionaryEventListener_d74c132b"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.container.XNamed": "XNamed_a6520b08"
+    },
     "quote": [
-      "XDictionaryEventListener",
-      "DictionaryType",
-      "XDictionaryEntry",
-      "typing.List[XDictionaryEntry]"
+      "DictionaryType_2ba50f2d",
+      "XDictionaryEntry_49ef0ff5",
+      "XDictionaryEventListener_d74c132b",
+      "typing.List[XDictionaryEntry_49ef0ff5]"
     ],
     "typings": [
-      "typing.List[XDictionaryEntry]"
+      "typing.List[XDictionaryEntry_49ef0ff5]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.container.XNamed"
+      ],
+      "typing": [
+        "com.sun.star.linguistic2.DictionaryType",
+        "com.sun.star.linguistic2.XDictionaryEntry",
+        "com.sun.star.linguistic2.XDictionaryEventListener"
+      ]
+    },
     "name": "XDictionary1",
     "imports": [],
     "namespace": "com.sun.star.linguistic2",
@@ -88,7 +108,7 @@
           "args": [
             [
               "xListener",
-              "XDictionaryEventListener",
+              "XDictionaryEventListener_d74c132b",
               "in"
             ]
           ]
@@ -101,7 +121,7 @@
           "args": [
             [
               "xDicEntry",
-              "XDictionaryEntry",
+              "XDictionaryEntry_49ef0ff5",
               "in"
             ]
           ]
@@ -122,21 +142,21 @@
         },
         {
           "name": "getDictionaryType",
-          "returns": "DictionaryType",
+          "returns": "DictionaryType_2ba50f2d",
           "desc": [],
           "raises": [],
           "args": []
         },
         {
           "name": "getEntries",
-          "returns": "typing.List[XDictionaryEntry]",
+          "returns": "typing.List[XDictionaryEntry_49ef0ff5]",
           "desc": [],
           "raises": [],
           "args": []
         },
         {
           "name": "getEntry",
-          "returns": "XDictionaryEntry",
+          "returns": "XDictionaryEntry_49ef0ff5",
           "desc": [],
           "raises": [],
           "args": [
@@ -189,7 +209,7 @@
           "args": [
             [
               "xListener",
-              "XDictionaryEventListener",
+              "XDictionaryEventListener_d74c132b",
               "in"
             ]
           ]

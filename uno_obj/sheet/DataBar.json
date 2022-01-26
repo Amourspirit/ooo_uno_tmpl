@@ -1,41 +1,59 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "DataBar",
   "type": "service",
   "namespace": "com.sun.star.sheet",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         ".x_condition_entry",
-        "XConditionEntry"
+        "XConditionEntry",
+        "XConditionEntry_e2340d32"
       ]
     ],
     "from_imports_typing": [
       [
         ".x_data_bar_entry",
-        "XDataBarEntry"
+        "XDataBarEntry",
+        "XDataBarEntry_c61d0c1a"
       ],
       [
         "..util.color",
-        "Color"
+        "Color",
+        "Color_68e908c5"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.sheet.XConditionEntry": "XConditionEntry_e2340d32"
+    },
     "quote": [
-      "Color",
-      "typing.List[XDataBarEntry]"
+      "Color_68e908c5",
+      "typing.List[XDataBarEntry_c61d0c1a]"
     ],
     "typings": [
-      "typing.List[XDataBarEntry]"
+      "typing.List[XDataBarEntry_c61d0c1a]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.sheet.XConditionEntry"
+      ],
+      "typing": [
+        "com.sun.star.sheet.XDataBarEntry",
+        "com.sun.star.util.Color"
+      ]
+    },
     "name": "DataBar",
     "imports": [],
     "namespace": "com.sun.star.sheet",
@@ -48,7 +66,7 @@
       "types": [
         {
           "name": "DataBarEntries",
-          "returns": "typing.List[XDataBarEntry]",
+          "returns": "typing.List[XDataBarEntry_c61d0c1a]",
           "desc": [],
           "raises_get": "",
           "raises_set": ""
@@ -57,7 +75,7 @@
       "properties": [
         {
           "name": "AxisColor",
-          "returns": "Color",
+          "returns": "Color_68e908c5",
           "desc": [],
           "raises_get": "",
           "raises_set": ""
@@ -73,7 +91,7 @@
         },
         {
           "name": "Color",
-          "returns": "Color",
+          "returns": "Color_68e908c5",
           "desc": [],
           "raises_get": "",
           "raises_set": ""
@@ -102,7 +120,7 @@
         },
         {
           "name": "NegativeColor",
-          "returns": "Color",
+          "returns": "Color_68e908c5",
           "desc": [],
           "raises_get": "",
           "raises_set": ""

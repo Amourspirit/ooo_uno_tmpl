@@ -1,37 +1,53 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "libre_office_ver": "7.2",
   "name": "ScannerException",
   "type": "exception",
   "namespace": "com.sun.star.scanner",
   "parser_args": {
-    "sort": true
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
   },
   "writer_args": {
     "include_desc": true
   },
   "data": {
+    "allow_db": true,
     "from_imports": [
       [
         "..uno.exception",
-        "Exception"
+        "Exception",
+        "Exception_85530a09"
       ]
     ],
     "from_imports_typing": [
       [
         ".scan_error",
-        "ScanError"
+        "ScanError",
+        "ScanError_b0d90b81"
       ]
     ],
+    "extends_map": {
+      "com.sun.star.uno.Exception": "Exception_85530a09"
+    },
     "quote": [
-      "ScanError"
+      "ScanError_b0d90b81"
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.Exception"
+      ],
+      "typing": [
+        "com.sun.star.scanner.ScanError"
+      ]
+    },
     "name": "ScannerException",
-    "namespace": "com.sun.star.scanner",
     "imports": [],
+    "namespace": "com.sun.star.scanner",
     "extends": [
       "com.sun.star.uno.Exception"
     ],
@@ -43,7 +59,7 @@
       "properties": [
         {
           "name": "Error",
-          "returns": "ScanError",
+          "returns": "ScanError_b0d90b81",
           "desc": [
             "Error: contains the specific reason for failure."
           ],
