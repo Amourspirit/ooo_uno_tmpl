@@ -126,7 +126,7 @@ def test_imp_service(service_data: str):
     imc = ImportCheck()
     assert imc.load_import(service_data) == True
 
-def _test_generic():
+def test_generic():
     ns = 'build.uno_obj.text.text_view_cursor.TextViewCursor'
     imc = ImportCheck()
     assert imc.load_import(ns) == True

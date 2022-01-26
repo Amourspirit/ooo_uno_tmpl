@@ -288,95 +288,6 @@ class DbCache:
     def save_in_cache(self, contents: object) -> None:
         self._sql_cache.update(contents)
 # endregion SQL Cache
-# region Order Inherits
-
-
-class DictCache(dict):
-    def __init__(self, *args, **kw):
-        super(DictCache, self).__init__(*args, **kw)
-
-    def __setitem__(self, item, value):
-        super(DictCache, self).__setitem__(item, value)
-        super(DictCache, self).__setitem__("has_changed", True)
-
-class OrderedInherits:
-    def __init__(self, app_root: str) -> None:
-        self._uno_obj_root = Path(app_root) / 'uno_obj'
-        # self._pk_cache = PickleCache('ooo_uno_tmpl', 1800)
-        self._cache = DictCache()
-        tmp_dir = os.environ.get('config_cache_dir', 'ooo_cace')
-        self._db_cache = DbCache(tmp_dir, "ordered_inherits", 3600)
-
-    def __enter__(self):
-        # enter is after init in context manager
-        try:
-            cache = self._db_cache.fetch_from_cache()
-            if cache:
-                self._cache.update(cache)
-                self._cache.update({"has_changed": False})
-        except Exception:
-            self._cache = {}
-            pass
-        return self
-
-    def __exit__(self, exc_type, exc_value, traceback):
-        if not exc_type and "has_changed" in self._cache:
-            if self._cache['has_changed']:
-                self._db_cache.save_in_cache(self._cache)
-        pass
-
-
-    def get_ordered(self, imports: List[str]) -> Union[List[str], None]:
-
-        def get_unique_ns(ns: str):
-            def get_ns(ns_key: str, ns_set: set):
-                if ns_key in self._cache:
-                    return self._cache[ns_key]
-                p = self._ns_to_path(ns=ns_key)
-                if p is None:
-                    raise FileNotFoundError
-                with open(p, 'r') as file:
-                    j_data = json.load(file)
-                j_extends = j_data['data']['extends']
-                self._cache[ns_key] = j_extends
-                for s in j_extends:
-                    if not s in ns_st:
-                        get_ns(s, ns_set)
-                ns_st.update(j_extends)
-            ns_st = set()
-            get_ns(ns, ns_st)
-            return ns_st
-
-        def get_order_inherit_order(ex_lst: List[str]):
-            extends = tuple(ex_lst)  # list
-            unique: Set[str] = set(ex_lst)
-            for ex in extends:
-                unique.update(get_unique_ns(ex))
-
-            ns_lst = list(unique)
-            ns_lst.sort()
-            results = []
-            for ns in ns_lst:
-                if ns in extends:
-                    results.append(ns)
-            # ns_lst = [ns, i, for i, ns in enumerante()]
-            return results
-        try:
-            ordered = get_order_inherit_order(ex_lst=imports)
-            return ordered
-        except Exception:
-            return None
-
-    def _ns_to_path(self, ns: str) -> Union[Path, None]:
-        s = ns.removeprefix('com.sun.star.')
-        s = s.replace('.', os.sep)
-        s += '.json'
-        p = Path(self._uno_obj_root, s)
-        if p.exists():
-            return p
-        return None
-
-# endregion Order Inherits
 
 # endregion MRO Related Classes
 
@@ -702,13 +613,8 @@ class BaseTpml(Template):
         if isinstance(imports, str):
             return get_import(imports)
         im_lst: List[str] = []
-        o_imports = None
-        if self._app_root:
-            with OrderedInherits(self._app_root) as o:
-                o_imports = o.get_ordered(imports)
-        if o_imports is None:
-            o_imports = imports
-        for s in o_imports:
+
+        for s in imports:
             im_lst.append(get_import(s))
         s = 'object'
         for i, im in enumerate(im_lst):
