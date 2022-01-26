@@ -89,7 +89,8 @@ class InitDb:
             name VARCHAR(50) NOT NULL,
             namespace VARCHAR(255) NOT NULL,
             lo_ver VARCHAR(50) NOT NULL,
-            file VARCHAR(255) NOT NULL
+            file VARCHAR(255) NOT NULL,
+            c_name VARCHAR(50) NOT NULL
             )"""
         with SqlCtx(self._conn_str) as db:
             db.cursor.execute(query)

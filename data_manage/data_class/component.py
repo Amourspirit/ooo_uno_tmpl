@@ -11,6 +11,7 @@ class Component:
     version: str
     lo_ver: str
     file: str
+    c_name: str
     sort: int = -1
 
     def __lt__(self, other: object):

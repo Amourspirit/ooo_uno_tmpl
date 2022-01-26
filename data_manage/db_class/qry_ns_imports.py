@@ -50,7 +50,7 @@ class QryNsImports(BaseSql):
             str: Url link
         """
         qry = """SELECT component.id_component, component.type, component.version, component.name, component.namespace as ns,
-            component.lo_ver, component.file, module_detail.sort as sort
+            component.lo_ver, component.file, component.c_name, module_detail.sort as sort
             FROM component
             LEFT JOIN module_detail on module_detail.id_namespace = component.id_component
             where component.id_component like :namespace
@@ -67,7 +67,8 @@ class QryNsImports(BaseSql):
                     version=row['version'],
                     lo_ver=row['lo_ver'],
                     file=row['file'],
-                    sort=row['sort']
+                    sort=row['sort'],
+                    c_name=row['c_name']
                 ))
         return results
     # endregion qry Copmponent

@@ -12,6 +12,7 @@ from ..db_class.tbl_component import TblComponent
 from ..db_class.tbl_component_extend import TblComponentExtend
 from ..db_class.tbl_component_full_import import TblComponentFullImport
 from ..db_class.db_connect import DbConnect
+from parser import mod_rel as RelInfo
 
 class ParseModuleJson:
     def __init__(self, config: AppConfig) -> None:
@@ -73,7 +74,8 @@ class ParseModuleJson:
             type=json_data['type'],
             version=json_data['version'],
             lo_ver=json_data['libre_office_ver'],
-            file=str(rel)
+            file=str(rel),
+            c_name=RelInfo(RelInfo.camel_to_snake(name))
         )
         self._read_extends(json_data=json_data, comp=c)
         self._read_full_imports(json_data=json_data, comp=c)
