@@ -32,11 +32,8 @@ from runners.data_class import CompileLinkArgs
 # endregion Imports
 
 
-
 # region Logger
 logger = None
-
-# logger/log_handle.py
 
 # endregion Logger
 
