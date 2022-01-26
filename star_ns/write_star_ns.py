@@ -23,7 +23,7 @@ class WriteStarNs:
     def write(self) -> None:
         for ns, c_data in self._data.items():
             write_path = self._write_root.joinpath(Path(*ns.split('.')))
-            self._mkdirp(write_path)
+            self._mkdirp(dest_dir=write_path)
             write_path = write_path.joinpath('__init__.py')
             gen_star = GenerateStarNs(config=self._config, c_data=c_data)
             text = gen_star.gen()
@@ -33,7 +33,7 @@ class WriteStarNs:
                 rel_path = write_path.relative_to(self._root_dir)
                 self._log.info('Wrote file %s', str(rel_path))
     
-    def _mkdirp(dest_dir: Union[str, Path]):
+    def _mkdirp(self, dest_dir: Union[str, Path]):
         """
         Creates directory and all child directories if needed
 
