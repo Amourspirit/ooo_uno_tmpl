@@ -6,7 +6,6 @@ from .sql_ctx import SqlCtx
 from ..data_class.namespace_tree import NamespaceTree
 from ..data_class.namespace_child import NamespaceChild
 from ..data_class.full_import import FullImport
-from ..data_class.component import Component
 from parser import mod_rel as RelInfo
 
 class QryNsImports(BaseSql):
@@ -37,41 +36,6 @@ class QryNsImports(BaseSql):
                 result = row['link']
         return result
     # endregion LINK
-
-    # region    qry Copmponent
-    def get_components(self, full_ns: str) -> List[Component]:
-        """
-        Gets URL for a namespace
-
-        Args:
-            full_ns (str): Full Namespace such as ``com.sun.star.uno.XInterface``
-
-        Returns:
-            str: Url link
-        """
-        qry = """SELECT component.id_component, component.type, component.version, component.name, component.namespace as ns,
-            component.lo_ver, component.file, component.c_name, module_detail.sort as sort
-            FROM component
-            LEFT JOIN module_detail on module_detail.id_namespace = component.id_component
-            where component.id_component like :namespace
-            ORDER by module_detail.sort"""
-        results = []
-        with SqlCtx(self.conn_str) as db:
-            db.cursor.execute(qry, {"namespace": full_ns})
-            for row in db.cursor:
-                results.append(Component(
-                    id_component=row['id_component'],
-                    name=row['name'],
-                    namespace=row['ns'],
-                    type=row['type'],
-                    version=row['version'],
-                    lo_ver=row['lo_ver'],
-                    file=row['file'],
-                    sort=row['sort'],
-                    c_name=row['c_name']
-                ))
-        return results
-    # endregion qry Copmponent
     
     # region    Flat/ Flat Related
 

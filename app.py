@@ -22,7 +22,7 @@ from data_manage.controller.database_controler import DatabaseControler
 from data_manage.controller.component_controler import ComponentControler
 from data_manage.controller.namespace_controler import NamespaceControler
 from data_manage.controller.module_links_controler import ModuleLinksControler
-
+from data_manage.controller.star_ns_controller import StarNsControler
 from logger.log_handle import get_logger
 from parser import const as url_parser_const, enm as url_parser_enum, ex as url_parser_ex, xsrc as url_parser_interface, service as url_parser_service, singleton as url_parser_singleton, struc as url_parser_struct, typedef as url_parser_typedef, star as json_parser_star
 from config import AppConfig, read_config
@@ -1598,7 +1598,7 @@ def _args_data_url(parser: argparse.ArgumentParser) -> None:
 
 def _args_data_component(parser: argparse.ArgumentParser) -> None:
     parser.add_argument(
-        '-n', '--name-space',
+        '-n', '--namespace',
         help='Genereate component info for a given namespace wildcards %% and _ suporrted',
         action='store',
         dest='namespace',
@@ -1624,11 +1624,21 @@ def _args_data_update(parser: argparse.ArgumentParser) -> None:
 
 def _args_data_json(parser: argparse.ArgumentParser) -> None:
     parser.add_argument(
-        '-n', '--name-space',
+        '-n', '--namespace',
         help='Genereate Json for a given namespace',
         action='store',
         dest='namespace',
         default=None
+    )
+
+
+def _args_data_star(parser: argparse.ArgumentParser) -> None:
+    parser.add_argument(
+        '-s', '--write-star',
+        help='Write all Star import file into data directory',
+        action='store_true',
+        dest='write_star_ns',
+        default=False
     )
 
 def _args_data_rel(parser: argparse.ArgumentParser) -> None:
@@ -1674,7 +1684,7 @@ def _args_data_imports(parser: argparse.ArgumentParser) -> None:
     data_group = parser.add_argument_group()
     # data_imports_group_rel = data_imports_group.add_argument_group()
     data_group.add_argument(
-        '-n', '--name-space',
+        '-n', '--namespace',
         help='Genereate Namespace Data for a given namespace object',
         action='store',
         dest='ns_import_name',
@@ -1729,7 +1739,7 @@ def _args_data_imports_child(parser: argparse.ArgumentParser) -> None:
     data_group = parser.add_argument_group()
     # data_imports_group_rel = data_imports_group.add_argument_group()
     data_group.add_argument(
-        '-n', '--name-space',
+        '-n', '--namespace',
         help='Genereate Namespace Data for a given namespace object',
         action='store',
         dest='namespace',
@@ -1760,7 +1770,7 @@ def _args_data_imports_child(parser: argparse.ArgumentParser) -> None:
 
 def _args_data_imports_extends_tree(parser: argparse.ArgumentParser) -> None:
     parser.add_argument(
-        '-n', '--name-space',
+        '-n', '--namespace',
         help='Genereate Namespace Data for a given namespace object',
         action='store',
         dest='namespace',
@@ -2145,7 +2155,22 @@ def _args_action_db_json(args: argparse.Namespace, config: AppConfig) -> None:
     if qc_result:
         print(qc_result)
 # endregion     Json
+# region        Star
 
+
+def _args_action_db_star(args: argparse.Namespace, config: AppConfig) -> None:
+    if args.write_star_ns:
+        if not query_yes_no(f"Are you sure write all star namespace import files into {config.data_dir}?", 'no'):
+            return
+    qc = StarNsControler(
+        config=config,
+        logger=logger,
+        write_star_ns=args.write_star_ns
+    )
+    qc_result = qc.results()
+    if qc_result:
+        print(qc_result)
+# endregion     Star
 
 def _args_process_data_cmd_data(args: argparse.Namespace, config: AppConfig) -> None:
     if args.command_data == 'init':
@@ -2168,6 +2193,8 @@ def _args_process_data_cmd_data(args: argparse.Namespace, config: AppConfig) -> 
         _args_action_db_component(args=args, config=config)
     elif args.command_data == 'rel':
         _args_action_db_rel(args=args, config=config)
+    elif args.command_data == 'star':
+        _args_action_db_star(args=args, config=config)
 
 # endregion data Command
 
@@ -2360,6 +2387,7 @@ def main():
     data_json = data.add_parser(name='json')
     data_component = data.add_parser(name='component')
     data_rel = data.add_parser(name='rel')
+    data_star = data.add_parser(name='star')
     # endregion data
 
     # endregion create parsers
@@ -2412,6 +2440,7 @@ def main():
     _args_data_imports_extends_flat(parser=data_extends_flat)
     _args_data_component(parser=data_component)
     _args_data_rel(parser=data_rel)
+    _args_data_star(parser=data_star)
     # endregion data args
     # endregion Set Args
 

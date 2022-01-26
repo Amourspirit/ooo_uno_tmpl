@@ -12,7 +12,7 @@ from ..util import Util
 from parser import mod_rel as RelInfo
 from tabulate import tabulate
 from dataclasses import astuple, asdict, fields
-
+from ..db_class.qry_component import QryComponent
 
 class NamespaceControler:
     def __init__(self, config: AppConfig, **kwargs) -> None:
@@ -108,8 +108,8 @@ class NamespaceControler:
         return get_format_str()
 
     def _get_componets(self) -> str:
-        qry = QryNsImports(self._conn.connection_str)
-        lst = qry.get_components(full_ns=self._ns_component)
+        qry = QryComponent(self._conn.connection_str)
+        lst = qry.get_components(search_str=self._ns_component)
 
         def get_format_str() -> str:
             # id_width = max(len(itm.id_component) for itm in lst)

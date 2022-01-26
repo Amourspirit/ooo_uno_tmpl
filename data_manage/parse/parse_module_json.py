@@ -75,7 +75,7 @@ class ParseModuleJson:
             version=json_data['version'],
             lo_ver=json_data['libre_office_ver'],
             file=str(rel),
-            c_name=RelInfo(RelInfo.camel_to_snake(name))
+            c_name=RelInfo.camel_to_snake(name)
         )
         self._read_extends(json_data=json_data, comp=c)
         self._read_full_imports(json_data=json_data, comp=c)

@@ -86,11 +86,11 @@ class InitDb:
             id_component VARCHAR(50) PRIMARY KEY,
             type VARCHAR(20) NOT NULL,
             version VARCHAR(20) NOT NULL,
-            name VARCHAR(50) NOT NULL,
+            name VARCHAR(100) NOT NULL,
             namespace VARCHAR(255) NOT NULL,
             lo_ver VARCHAR(50) NOT NULL,
             file VARCHAR(255) NOT NULL,
-            c_name VARCHAR(50) NOT NULL
+            c_name VARCHAR(100) NOT NULL
             )"""
         with SqlCtx(self._conn_str) as db:
             db.cursor.execute(query)
