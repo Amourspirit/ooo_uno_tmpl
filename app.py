@@ -87,8 +87,8 @@ def _main():
     # ns = 'com.sun.star.form.DataAwareControlModel'
     # ns = 'com.sun.star.text.TextRange'
     # args = 'data db-json -n com.sun.star.form.control.GridControl'
-    url = 'https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1text_1_1Paragraph.html'
-    args = 'compile compile-batch -g'
+    url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1tree_1_1XMutableTreeNode.html'
+    args = 'data url -u ' + url
     sys.argv.extend(args.split())
     main()
 
@@ -460,7 +460,7 @@ def _args_data_init(parser: argparse.ArgumentParser) -> None:
 
 def _args_data_url(parser: argparse.ArgumentParser) -> None:
     parser.add_argument(
-        '-u', '--url',
+        '-n', '--namespace',
         help='Get url for a full namespace.',
         action='store',
         dest='ns_url',
@@ -497,17 +497,17 @@ def _args_data_update(parser: argparse.ArgumentParser) -> None:
 def _args_data_json(parser: argparse.ArgumentParser) -> None:
     parser.add_argument(
         '-n', '--namespace',
-        help='Genereate Json for a given namespace',
+        help='Genereate Json for a given namespace, ignores direct extends and uses child flattened extends but includes original extends methods and properties.',
         action='store',
         dest='namespace',
         default=None
     )
 
 
-def _args_data_star(parser: argparse.ArgumentParser) -> None:
+def _args_data_star(parser: argparse.ArgumentParser, config: AppConfig) -> None:
     parser.add_argument(
         '-s', '--write-star',
-        help='Write all Star import file into data directory',
+        help=f"Writes imports for all '{config.builld_dir}/{config.uno_obj_dir}' files into  com.sun.star... __init__.py files.",
         action='store_true',
         dest='write_star_ns',
         default=False
@@ -1279,16 +1279,24 @@ def main():
         name='init', help=f"Create a new database if it does not yet exits. Default location is '{config.resource_dir}/{config.db_mod_info}'.")
     data_update = data.add_parser(
         name='update', help=f"Read json data from '{config.data_dir}' directory and write revelant data into '{config.resource_dir}/{config.db_mod_info}' database. Will add data if not existing. Requires that json file have been generated in directory '{config.data_dir}'.")
+    data_component = data.add_parser(
+        name='component', help="Queries database for component info.")
+    data_url = data.add_parser(
+        name='url', help="Queries database and gets info such as url for a namespace.")
+    data_rel = data.add_parser(
+        name='rel', help="Generated relative import info for given namespaces.")
+    data_json = data.add_parser(
+        name='json', help="Generates json file, ignores direct extends and uses child flattened extends but includes original extends methods and properties. Used for MRO issues.")
     data_extends_tree = data.add_parser(
-        name='extends-tree', help="Queries database and gets extends tree format.")
-    data_extends_flat = data.add_parser(name='extends-flat')
-    data_imports = data.add_parser(name='imports')
-    data_imports_typing_child = data.add_parser(name='imports-typing-child')
-    data_url = data.add_parser(name='url')
-    data_json = data.add_parser(name='json')
-    data_component = data.add_parser(name='component')
-    data_rel = data.add_parser(name='rel')
-    data_star = data.add_parser(name='star')
+        name='extends-tree', help="Queries database and gets extends tree format for a given namespace.")
+    data_extends_flat = data.add_parser(
+        name='extends-flat', help="Queries database and gets extends flat formats for a given namespace. Can get flat child extends as well.")
+    data_imports = data.add_parser(
+        name='imports', help="Queries database and gets import information for a given namespace.")
+    data_imports_typing_child = data.add_parser(
+        name='imports-typing-child', help="Queries database and get import information for imports typing child.")
+    data_star = data.add_parser(
+        name='star', help=f"Writes imports for all '{config.builld_dir}/{config.uno_obj_dir}' files into  com.sun.star... __init__.py files.")
     # endregion data
 
     # endregion create parsers
@@ -1341,7 +1349,7 @@ def main():
     _args_data_imports_extends_flat(parser=data_extends_flat)
     _args_data_component(parser=data_component)
     _args_data_rel(parser=data_rel)
-    _args_data_star(parser=data_star)
+    _args_data_star(parser=data_star, config=config)
     # endregion data args
     # endregion Set Args
 
