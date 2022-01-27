@@ -1,9 +1,115 @@
 #!/usr/bin/env python
+"""
+OOO_UNO_TMPL
+
+Libre Office API to Python code generator.
+Parses Libre Office API webiste and converts to Python classes and types.
+Libre Office API consist of more than 4500 classes and types.
+
+Requirements:
+    This project requires cheeta to be installed.
+    Cheetah is used as the template generation engine.
+    https://cheetahtemplate.org/
+
+Getting Started:
+
+    This project already has data compiled of the entire LO API.
+    The file are compiled as *.JSON files and *.tmpl files in project root directorty 'uno_obj'.
+
+    API file generation groups api into the following categories:
+        const:      Constant classes
+        enum:       Enumeration classes
+        exception:  Error classes
+        interface:  Interface abstract classes
+        service:    Service abstract classes
+        struct:     Structure classes
+        typedef:    Type aliases
+
+    Template files require compiling to generate python files.
+    Compiling template files is done on the command line via the 'make' option.
+
+Make Command:
+    make does not require any arguments by default.
+    running 'python app.py make' will build all templates that require building.
+    running 'python app.py make -h' will show help for make.
+    make processes all template and json file in 'uno_obj' directory recursivly.
+    make compiles any templates that have not yet been compiled.
+    make writes the python file for each template out to 'data'
+        directory keeping the same directory structure.
+    make by default will only compile templates that have been
+        updated since compile was last run.
+    make writes output to app.log in the project root directory.
+    Compiled files are written in place.
+        For Example: 'uno_obj/uno/XInterface.tmpl' once compiled
+            creates 'uno_obj/uno/XInterface.py'.
+    In place compiled files such as 'uno_obj/uno/XInterface.py' are cheetah
+        classes that are then written into that actual
+        python representation of the tmpl file.
+    On first run expect make to take some time to process as all templates must
+        be compiled and written on first run.
+
+    Example:
+        'uno_obj/uno/XInterface.tmpl' is compiled to
+            'uno_obj/uno/XInterface.py' and then
+            'build/uno_obj/uno/XInterface.py' is generated.
+
+
+Modifying Templates:
+    Code generation templates are found in the template directory.
+    *.tmpl files are cheetah template files.
+    Template files starting with _base_ can be modified.
+    Changes to files starting with _base_ are automatically picked up on next
+        command line make (python app.py make)
+    Any modification to *.tmpl files in the template directory requires
+        make to be run on the command line in the template directory.
+        Eg: user@user-pc:~/Projects/ooo_uno_tmpl/template$ make
+
+
+Sequence of Build:
+    star.json links are parsed to generate all module_links.json files.
+    module_links.json files are parsed to obtain and write all component
+        template files and json files.
+
+    Templates rely on 'resources/mod_info.sqlite' database for build.
+        When templates are regenerated with updated data then
+        database should also be updated.
+
+
+    star.json is the jumping off point for reading all api data.
+    star.json is located at `resources/star.json'.
+    star.json contains links to all modules of LO api.
+    star.json file can be regenerated using link-json star-links
+        command line options.
+
+    module_links.json file are created for all namespaces.
+    module_links.json files are writte into every sub directory of 'uno_obj'.
+    module_links.json files can regenerated using link-json mod-links
+        command line options.
+
+Regeneration of Database:
+    'resources/mod_info.sqlite' database is required for templates to build.
+    Database must exist before make command line option is invoked.
+    
+    Database is built from various json files that are generated in 'data' directory.
+    1. Write all module_links.json into data directory.
+        This is done by running the following on the command line.
+        python app.py link-json mod-links --data --all --recursive --write-json
+        The --data flag instructs to write into data directory.
+    2. Write all component json files into data directory.
+        This is done by running the following on the command line.
+        python app.py compile compile-batch --data --all
+        The --data flag instructs to write into data directory.
+    3. Created database if it does not exist.
+        This is done by running the following on the command line.
+        python app.py data init --init-db
+        If database is already existing this comamnd has no effect.
+    4. Update database with 'data/**/*.json' files.
+        This is done by running the following on the command line.
+        python app.py data update --write-all
+        Command reads 'data' folder and add/updates database.
+        Any preexisting data in the database will be updated.
+"""
 # region Imports
-"""
-Module Help
-"""
-from dataclasses import dataclass
 import logging
 import os
 import sys
@@ -1278,7 +1384,7 @@ def main():
     data_init = data.add_parser(
         name='init', help=f"Create a new database if it does not yet exits. Default location is '{config.resource_dir}/{config.db_mod_info}'.")
     data_update = data.add_parser(
-        name='update', help=f"Read json data from '{config.data_dir}' directory and write revelant data into '{config.resource_dir}/{config.db_mod_info}' database. Will add data if not existing. Requires that json file have been generated in directory '{config.data_dir}'.")
+        name='update', help=f"Read json data from '{config.data_dir}' directory and write revelant data into '{config.resource_dir}/{config.db_mod_info}' database. Will add data if not existing. Requires that json file have been generated in '{config.data_dir}' directory.")
     data_component = data.add_parser(
         name='component', help="Queries database for component info.")
     data_url = data.add_parser(
