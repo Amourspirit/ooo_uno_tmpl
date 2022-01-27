@@ -23,7 +23,11 @@ class Make(FilesBase):
         super().__init__(config=config)
         self._log = log
         self._clean = bool(kwargs.get('clean', False))
-        self._root_dir = Path(__file__).parent
+        root_dir = os.environ.get('project_root', None)
+        if root_dir:
+            self._root_dir = Path(root_dir)
+        else:
+            self._root_dir = Path(__file__).parent.parent
         self._scratch = self._root_dir / self._config.builld_dir
         self._force_compile = bool(kwargs.get('force_compile', False))
         self._processed_dirs: Set[str] = set()
