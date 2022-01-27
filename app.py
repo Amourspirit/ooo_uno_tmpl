@@ -1,5 +1,8 @@
 #!/usr/bin/env python
 # region Imports
+"""
+Module Help
+"""
 from dataclasses import dataclass
 import logging
 import os
@@ -316,73 +319,73 @@ def _args_links_batch(parser: argparse.ArgumentParser) -> None:
 # region        Touch Parser
 
 
-def _args_touch(parser: argparse.ArgumentParser) -> None:
+def _args_touch(parser: argparse.ArgumentParser, config: AppConfig) -> None:
     parser.add_argument(
         '-s', '--struct',
-        help='Touch all struct files',
+        help=f"Touch all struct *.tmpl or *.py files in {config.uno_obj_dir} direcotry recursivly.",
         action='store_true',
         dest='struct_all',
         default=False
     )
     parser.add_argument(
         '-g', '--singleton',
-        help='Touch all singleton files',
+        help=f"Touch all singleton *.tmpl or *.py files in {config.uno_obj_dir} direcotry recursivly.",
         action='store_true',
         dest='singleton_all',
         default=False
     )
     parser.add_argument(
         '-r', '--service',
-        help='Touch all service files',
+        help=f"Touch all service *.tmpl or *.py files in {config.uno_obj_dir} direcotry recursivly.",
         action='store_true',
         dest='service_all',
         default=False
     )
     parser.add_argument(
         '-c', '--const',
-        help='Touch all const files',
+        help=f"Touch all const *.tmpl or *.py files in {config.uno_obj_dir} direcotry recursivly.",
         action='store_true',
         dest='const_all',
         default=False
     )
     parser.add_argument(
         '-e', '--enum',
-        help='Touch all enum files',
+        help=f"Touch all enum *.tmpl or *.py files in {config.uno_obj_dir} direcotry recursivly.",
         action='store_true',
         dest='enum_all',
         default=False
     )
     parser.add_argument(
         '-x', '--exception',
-        help='Touch all enum files',
+        help=f"Touch all exception *.tmpl or *.py files in {config.uno_obj_dir} direcotry recursivly.",
         action='store_true',
         dest='ex_all',
         default=False
     )
     parser.add_argument(
         '-i', '--interface',
-        help='Touch all interface files',
+        help=f"Touch all interface *.tmpl or *.py files in {config.uno_obj_dir} direcotry recursivly.",
         action='store_true',
         dest='interface_all',
         default=False
     )
     parser.add_argument(
         '-t', '--typedef',
-        help='Touch all interface files',
+        help=f"Touch all typedef *.tmpl or *.py files in {config.uno_obj_dir} direcotry recursivly.",
         action='store_true',
         dest='typedef_all',
         default=False
     )
     parser.add_argument(
         '-p', '--python',
-        help='Touch python files instead of template files',
+        help='Touch *.py files instead of *.tmpl files.',
         action='store_true',
         dest='python_files',
         default=False
     )
     parser.add_argument(
         '--cache-files',
-        help='Touch cached files. Resets cache file expire times',
+        help='Touch cached files in the system tmp dir and resets cache file expire times.',
         action='store_true',
         dest='cache_files',
         default=False
@@ -1203,54 +1206,82 @@ def main():
     parser = _create_parser('main')
     subparser = parser.add_subparsers(dest='command')
     # region    make
-    make_parser = subparser.add_parser(name='make')
+    make_parser = subparser.add_parser(
+        name='make', help=f"Once files have been compiled (written to {config.uno_obj_dir})")
     # endregion make
     
     # region    compile
-    compile_subparser = subparser.add_parser(name='compile')
+    compile_subparser = subparser.add_parser(
+        name='compile', help=f"Batch compiles html urls found {config.module_links_file} files into json and tmpl files.")
     compile = compile_subparser.add_subparsers(dest='command_data')
-    links_const_parser = compile.add_parser(name='const')
-    links_enum_parser = compile.add_parser(name='enum')
-    links_ex_parser = compile.add_parser(name='exception')
-    links_interface_parser = compile.add_parser(name='interface')
-    links_service_parser = compile.add_parser(name='service')
-    links_singleton_parser = compile.add_parser(name='singleton')
-    links_struct_parser = compile.add_parser(name='struct')
-    links_typedef_parser = compile.add_parser(name='typedef')
-    links_batch_parser = compile.add_parser(name='compile-batch')
+    links_const_parser = compile.add_parser(
+        name='const', help=f"Compile Const components found in {config.module_links_file} files.")
+    links_enum_parser = compile.add_parser(
+        name='enum', help=f"Compile enum components found in {config.module_links_file} files.")
+    links_ex_parser = compile.add_parser(
+        name='exception', help=f"Compile exception components found in {config.module_links_file} files.")
+    links_interface_parser = compile.add_parser(
+        name='interface', help=f"Compile interface components found in {config.module_links_file} files.")
+    links_service_parser = compile.add_parser(
+        name='service', help=f"Compile service components found in {config.module_links_file} files.")
+    links_singleton_parser = compile.add_parser(
+        name='singleton', help=f"Compile singleton components found in {config.module_links_file} files.")
+    links_struct_parser = compile.add_parser(
+        name='struct', help=f"Compile struct components found in {config.module_links_file} files.")
+    links_typedef_parser = compile.add_parser(
+        name='typedef', help=f"Compile typedef components found in {config.module_links_file} files.")
+    links_batch_parser = compile.add_parser(
+        name='compile-batch', help="Batch compile one or more at once")
     # endregion compile
 
     # region    url-parse
-    url_parser_subparser = subparser.add_parser(name='url-parse')
+    url_parser_subparser = subparser.add_parser(
+        name='url-parse', help=f"Parse url of a component into template/json files (compile singele class). Outputs to {config.uno_obj_dir} directory.")
     url_parser = url_parser_subparser.add_subparsers(dest='command_data')
-    url_const = url_parser.add_parser(name='const')
-    url_enum = url_parser.add_parser(name='enum')
-    url_exception = url_parser.add_parser(name='exception')
-    url_interface = url_parser.add_parser(name='interface')
-    url_service = url_parser.add_parser(name='service')
-    url_singleton = url_parser.add_parser(name='singleton')
-    url_struct = url_parser.add_parser(name='struct')
-    url_typedef = url_parser.add_parser(name='typedef')
+    url_const = url_parser.add_parser(
+        name='const', help="Parse url to a const component into template/json file.")
+    url_enum = url_parser.add_parser(
+        name='enum', help="Parse url to a enum component into template/json file.")
+    url_exception = url_parser.add_parser(
+        name='exception', help="Parse url to a exception component into template/json file.")
+    url_interface = url_parser.add_parser(
+        name='interface', help="Parse url to a interface component into template/json file.")
+    url_service = url_parser.add_parser(
+        name='service', help="Parse url to a service component into template/json file.")
+    url_singleton = url_parser.add_parser(
+        name='singleton', help="Parse url to a singleton component into template/json file.")
+    url_struct = url_parser.add_parser(
+        name='struct', help="Parse url to a struct component into template/json file.")
+    url_typedef = url_parser.add_parser(
+        name='typedef', help="Parse url to a typedef component into template/json file.")
     # endregion url-parse
     
     # region    touch
-    touch = subparser.add_parser(name='touch')
+    touch = subparser.add_parser(
+        name='touch', help="Touches files updating their modifiled date")
     # endregion touch
 
     # region    link-json
-    link_json_subparser = subparser.add_parser(name='link-json')
+    link_json_subparser = subparser.add_parser(
+        name='link-json', help=f"Generate json link files such as {config.module_links_file} files or star.json file.")
     link_json_parser = link_json_subparser.add_subparsers(dest='command_data')
-    link_json_mod_links = link_json_parser.add_parser(name='mod-links')
-    link_json_star_links = link_json_parser.add_parser(name='star-links')
+    link_json_mod_links = link_json_parser.add_parser(
+        name='mod-links', help=f"Reads a namespace_url type json file such as resources/star.json and writes {config.module_links_file} files.")
+    link_json_star_links = link_json_parser.add_parser(
+        name='star-links', help="Generates a namespace_url type json file such as resources/star.json.")
     # endregion link-json
 
     # region    data
-    data_subparser = subparser.add_parser(name='data')
+    data_subparser = subparser.add_parser(
+        name='data', help="Various database commands and queries.")
     data = data_subparser.add_subparsers(dest='command_data')
-    data_update = data.add_parser(name='update')
-    data_init = data.add_parser(name='init')
+    data_init = data.add_parser(
+        name='init', help=f"Create a new database if it does not yet exits. Default location is '{config.resource_dir}/{config.db_mod_info}'.")
+    data_update = data.add_parser(
+        name='update', help=f"Read json data from '{config.data_dir}' directory and write revelant data into '{config.resource_dir}/{config.db_mod_info}' database. Will add data if not existing. Requires that json file have been generated in directory '{config.data_dir}'.")
+    data_extends_tree = data.add_parser(
+        name='extends-tree', help="Queries database and gets extends tree format.")
     data_extends_flat = data.add_parser(name='extends-flat')
-    data_extends_tree = data.add_parser(name='extends-tree')
     data_imports = data.add_parser(name='imports')
     data_imports_typing_child = data.add_parser(name='imports-typing-child')
     data_url = data.add_parser(name='url')
@@ -1295,7 +1326,7 @@ def main():
 
     # region Other Args
     _args_general(parser=parser)
-    _args_touch(parser=touch)
+    _args_touch(parser=touch, config=config)
     _args_make(parser=make_parser)
     # endregion Other Args
 
