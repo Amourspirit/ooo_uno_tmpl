@@ -103,6 +103,10 @@ class AppConfig:
     template_service_ext: str
     """Extension for service files such as .tppi"""
     component_types: List[str]
+    com_sun_star: List[str]
+    """
+    Path Like structure that will be used for namespace imports in build dir.
+    """
     inc_lic: str
     """Path to License Include File"""
 

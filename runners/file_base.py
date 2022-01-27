@@ -1,5 +1,7 @@
 # coding: utf-8
 # region Imports
+import os
+import __main__
 import re
 import glob
 from typing import Optional, Set
@@ -13,7 +15,11 @@ from config import AppConfig
 class FilesBase:
     def __init__(self, config: AppConfig) -> None:
         self._config: AppConfig = config
-        self._root_dir = Path(__file__).parent
+        root_dir = os.environ.get('project_root', None)
+        if root_dir:
+            self._root_dir = Path(root_dir)
+        else:
+            self._root_dir = Path(__main__.__file__).parent
 
     def _mkdirp(self, dest_dir):
         # Python ≥ 3.5
