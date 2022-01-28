@@ -611,14 +611,21 @@ def _args_data_json(parser: argparse.ArgumentParser) -> None:
 
 
 def _args_data_star(parser: argparse.ArgumentParser, config: AppConfig) -> None:
+    css_dir = config.builld_dir + '/' + '/'.join(config.com_sun_star)
     parser.add_argument(
         '-s', '--write-star',
-        help=f"Writes imports for all '{config.builld_dir}/{config.uno_obj_dir}' files into  com.sun.star... __init__.py files.",
+        help=f"Writes imports for all '{config.builld_dir}/{config.uno_obj_dir}' files into  {css_dir}... __init__.py files.",
         action='store_true',
         dest='write_star_ns',
-        default=False
+        required=True
     )
-
+    parser.add_argument(
+        '-r', '--no-rel-import',
+        help=f"No relative import",
+        action='store_false',
+        dest='rel_import',
+        default=True
+    )
 def _args_data_rel(parser: argparse.ArgumentParser) -> None:
     parser.add_argument(
         '-n', '--namespace',
@@ -1144,7 +1151,8 @@ def _args_action_db_star(args: argparse.Namespace, config: AppConfig) -> None:
     qc = StarNsControler(
         config=config,
         logger=logger,
-        write_star_ns=args.write_star_ns
+        write_star_ns=args.write_star_ns,
+        rel_import=args.rel_import
     )
     qc_result = qc.results()
     if qc_result:
