@@ -4,7 +4,7 @@ OOO_UNO_TMPL
 
 Libre Office API to Python code generator.
 Parses Libre Office API webiste and converts to Python classes and types.
-Libre Office API consist of more than 4500 classes and types.
+Libre Office API consist of more than 4300 classes and types.
 
 Requirements:
     This project requires cheeta to be installed.
@@ -851,7 +851,7 @@ def _get_compile_args(args: argparse.Namespace, config: AppConfig) -> CompileLin
 def _args_action_make(args: argparse.Namespace, config: AppConfig) -> None:
     _log_start_action()
     try:
-        _ = Make(config=config, force_compile=args.force_compile,
+        _ = Make(config=config,log=logger, force_compile=args.force_compile,
                  clean=args.clean_scratch, processes=args.processes)
     except Exception as e:
         logger.error(e)
@@ -968,6 +968,7 @@ def _args_action_touch(args: argparse.Namespace, config: AppConfig) -> None:
     _log_start_action()
     TouchFiles(
         config=config,
+        log=logger,
         touch_struct=args.struct_all,
         touch_const=args.const_all,
         touch_enum=args.enum_all,
