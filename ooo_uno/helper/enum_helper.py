@@ -1,4 +1,6 @@
-import uno
+from ..oenv import UNO_ENVIRONMENT
+if UNO_ENVIRONMENT:
+    import uno
 
 # coding: utf-8
 
@@ -37,3 +39,7 @@ def uno_enum_class_new(cls, value):
     if _type is cls:
         return value
     raise ValueError("%r is not a valid %s" % (value, cls.__name__))
+
+
+def uno_enum_class_ne(self, other):
+    return not self.__eq__(other)
