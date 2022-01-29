@@ -179,7 +179,7 @@ def parse(**kwargs):
         sort (str, optional): Sorting of results. Default ``True``
         cache (str, optional): Caching. Default ``False``
         clear_on_print (str, optional): Clearing of terminal when otuput to terminal. Default ``False``
-        dynamic_struct (str, optional): Template will generate dynameic struct content. Default ``False``
+        dynamic_struct (str, optional): Template will generate dynameic struct content. Default ``True``
         include_desc (str, optional): Description will be outputed in template. Default ``True``
         json_out (bool, optional): returns json to caller if ``True``. Default ``False``
         long_names (str, optional): Long names. Default set in config ``use_long_import_names`` property.

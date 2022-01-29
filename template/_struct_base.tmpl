@@ -2,7 +2,7 @@
 #extends BaseStruct
 #implements respond
 $self.init_data()#slurp
-#attr $dynamic_struct = False
+#attr $dynamic_struct = True
 #attr $sort = True ## set is attribs is sorted
 #attr $name = ""
 #attr $namespace = ''
@@ -24,6 +24,7 @@ $self.load_data()#slurp
 ## Main Template
 #set $safe_name = $self.get_safe_word($name)
 #set $sorted = $self.get_sorted_names()
+#set $fullname = $namespace + '.' + $name
 # coding: utf-8
 #include raw "resources/inc_lic.txt"
 # Struct Class
@@ -34,7 +35,6 @@ $self.load_data()#slurp
 #end if
 #if $dynamic_struct:
 import os
-from collections import namedtuple
 #end if
 #for $imp in $imports
 import $imp
@@ -51,6 +51,12 @@ if typing.TYPE_CHECKING:
     $self.get_from_import($name, $imp)
 #end for
 #end if
+#if $dynamic_struct:
+from ooo_uno.oenv import UNO_ENVIRONMENT
+if (not typing.TYPE_CHECKING) and UNO_ENVIRONMENT:
+    from ooo_uno.helper import uno_helper
+#end if
+
 
 #if $allow_db:
 class ${safe_name}($self.get_class_inherits_from_db()):
@@ -59,6 +65,8 @@ class ${safe_name}($self.get_class_inherits($name, $inherits)):
 #end if
 #if $include_desc
     """
+    Struct Class
+
     #if isinstance($desc, str)
     $desc
     #else
@@ -75,14 +83,14 @@ class ${safe_name}($self.get_class_inherits($name, $inherits)):
     #if $dynamic_struct:
 
     Note:
-        | At runtime this will be a `namedtuple <https://docs.python.org/3/library/collections.html#collections.namedtuple>`_ and not a class.
+        | At runtime $name will be an actual uno struct however can seamlessly be treated as a regualr class.
         | At design time a class is presumed. This allows for better typings.
-        | Effectively functionallity is the same and namedtuple is more efficient than a class.
+        | $name is a callable and can be treatead as a class and create instances.
     #end if
     """
 
 #end if
-    def __init__(self, $self.get_constructor_str()):
+    def __init__(self, $self.get_constructor_str(opt=True)):
 #for $i, $tpl in enumerate($sorted)
 #set $index = tpl[1]
 #set $itm = $attribs[$index]
@@ -115,18 +123,26 @@ class ${safe_name}($self.get_class_inherits($name, $inherits)):
 #end for
 #if $dynamic_struct:
 
-def _dynamic_struct():
-    # Dynamically create nametuple that is more efficient as stand in for struct
-
+def _dynamic_struct() -> None:
+    # Dynamically create uno struct using uno
     global $safe_name
     ignore = os.environ.get('ooouno_ignore_runtime', 'False')
     if ignore == 'True':
         return
-    # if statment is to stop VS Code from reporting errors
-    if not typing.TYPE_CHECKING:
-        ${safe_name} = namedtuple('$safe_name', [$self.get_nt_names_str()])
+    if (not typing.TYPE_CHECKING) and UNO_ENVIRONMENT:
+        order = ($self.get_nt_names_str())
+        def _struct_init(*args, **kwargs):
+            struct = uno_helper.create_uno_struct('${fullname}')
+            for i, arg in enumerate(args):
+                if arg is None:
+                    continue
+                setattr(struct, order[i], arg)
+            for k, v in kwargs.items():
+                setattr(struct, k, v)
+            return struct
+        $safe_name = _struct_init
 
-if not typing.TYPE_CHECKING:
+if (not typing.TYPE_CHECKING) and UNO_ENVIRONMENT:
     _dynamic_struct()
 #end if
 

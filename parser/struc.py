@@ -745,7 +745,7 @@ def parse(**kwargs) -> Union[str, None]:
         sort (str, optional): Sorting of results. Default ``True``
         cache (str, optional): Caching. Default ``False``
         clear_on_print (str, optional): Clearing of terminal when otuput to terminal. Default ``False``
-        dynamic_struct (str, optional): Template will generate dynameic struct content. Default ``False``
+        dynamic_struct (str, optional): Template will generate dynameic struct content. Default ``True``
         include_desc (str, optional): Description will be outputed in template. Default ``True``
         json_out (bool, optional): returns json to caller if ``True``. Default ``False``
         long_names (str, optional): Long names. Default set in config ``use_long_import_names`` property.
@@ -781,7 +781,7 @@ def parse(**kwargs) -> Union[str, None]:
     _log_file = kwargs.get('log_file', None)
     _verbose = bool(kwargs.get('verbose', False))
     _include_desc = bool(kwargs.get('include_desc', True))
-    _dynamic_struct = bool(kwargs.get('dynamic_struct', False))
+    _dynamic_struct = bool(kwargs.get('dynamic_struct', True))
     _write_path= kwargs.get('write_path', None)
 
     if logger is None:
@@ -869,11 +869,11 @@ def set_cmd_args(parser: argparse.ArgumentParser) -> None:
         dest='sort',
         default=True)
     parser.add_argument(
-        '-y', '--dynamic-struct',
+        '-y', '--no-dynamic-struct',
         help='Template will generate dynamic struct content',
-        action='store_true',
+        action='store_false',
         dest='dynamic_struct',
-        default=False)
+        default=True)
     parser.add_argument(
         '-d', '--no-desc',
         help='No description will be outputed in template',
