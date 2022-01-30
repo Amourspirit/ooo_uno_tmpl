@@ -33,9 +33,6 @@ $self.load_data()#slurp
 #if $libre_office_ver:
 # Libre Office Version: $libre_office_ver
 #end if
-#if $dynamic_struct:
-import os
-#end if
 #for $imp in $imports
 import $imp
 #end for
@@ -52,85 +49,87 @@ if typing.TYPE_CHECKING:
 #end for
 #end if
 #if $dynamic_struct:
-from ooo_uno.oenv import UNO_ENVIRONMENT
-if (not typing.TYPE_CHECKING) and UNO_ENVIRONMENT:
+from ooo_uno.oenv import UNO_ENVIRONMENT, UNO_RUNTIME
+if (not typing.TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
     from ooo_uno.helper import uno_helper
 #end if
 
-
-#if $allow_db:
-class ${safe_name}($self.get_class_inherits_from_db()):
+#if $dynamic_struct:
+if not ((not typing.TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT):
 #else
-class ${safe_name}($self.get_class_inherits($name, $inherits)):
+if True:
+#end if
+#if $allow_db:
+    class ${safe_name}($self.get_class_inherits_from_db()):
+#else
+    class ${safe_name}($self.get_class_inherits($name, $inherits)):
 #end if
 #if $include_desc
-    """
-    Struct Class
+        """
+        Struct Class
 
-    #if isinstance($desc, str)
-    $desc
-    #else
-        #for $line in $desc
-    $line
-        #end for
-    #end if
-    #if $link:
+        #if isinstance($desc, str)
+        $desc
+        #else
+            #for $line in $desc
+        $line
+            #end for
+        #end if
+        #if $link:
 
-    See Also:
-        `API $name <$link>`_
-    #end if
+        See Also:
+            `API $name <$link>`_
+        #end if
 
-    #if $dynamic_struct:
+        #if $dynamic_struct:
 
-    Note:
-        | At runtime $name will be an actual uno struct however can seamlessly be treated as a regualr class.
-        | At design time a class is presumed. This allows for better typings.
-        | $name is a callable and can be treatead as a class and create instances.
-    #end if
-    """
+        Note:
+            | At runtime $name will be an actual uno struct however can seamlessly be treated as a regualr class.
+            | At design time a class is presumed. This allows for better typings.
+            | $name is a callable and can be treatead as a class and create instances.
+        #end if
+        """
 
 #end if
-    def __init__(self, $self.get_constructor_str(opt=True)):
+        def __init__(self, $self.get_constructor_str(opt=True)):
 #for $i, $tpl in enumerate($sorted)
 #set $index = tpl[1]
 #set $itm = $attribs[$index]
 #set $itm_name = $self.get_safe_word($itm.name)
-        self._$self.camel_to_snake($itm_name) = $itm_name
+            self._$self.camel_to_snake($itm_name) = $itm_name
 #end for
 #for $i, $tpl in enumerate($sorted)
 #set $index = tpl[1]
 #set $itm = $self.get_attrib_for_prop($index)
 #set $itm_name = $self.get_safe_word($itm.name)
 
-    @property
-    def ${itm_name}(self) -> $itm.type:
+        @property
+        def ${itm_name}(self) -> $itm.type:
     #if $include_desc and $itm.lines
-        """
+            """
         #if isinstance($itm.lines, str):
-        $itm.lines
+            $itm.lines
         #else
             #for $line in $itm.lines
-        $line
+            $line
             #end for
         #end if
-        """
+            """
     #end if
-        return self._$self.camel_to_snake($itm_name)
-    
-    @${itm_name}.setter
-    def ${itm_name}(self, value: $itm.type) -> None:
-        self._$self.camel_to_snake($itm_name) = value
+            return self._$self.camel_to_snake($itm_name)
+        
+        @${itm_name}.setter
+        def ${itm_name}(self, value: $itm.type) -> None:
+            self._$self.camel_to_snake($itm_name) = value
 #end for
-#if $dynamic_struct:
 
-def _dynamic_struct() -> None:
-    # Dynamically create uno struct using uno
-    global $safe_name
-    ignore = os.environ.get('ooouno_ignore_runtime', 'False')
-    if ignore == 'True':
-        return
-    if (not typing.TYPE_CHECKING) and UNO_ENVIRONMENT:
+#if $dynamic_struct:
+else:
+    def _dynamic_struct() -> None:
+        # Dynamically create uno struct using uno
+        global $safe_name
         order = ($self.get_nt_names_str())
+
         def _struct_init(*args, **kwargs):
             struct = uno_helper.create_uno_struct('${fullname}')
             for i, arg in enumerate(args):
@@ -142,7 +141,6 @@ def _dynamic_struct() -> None:
             return struct
         $safe_name = _struct_init
 
-if (not typing.TYPE_CHECKING) and UNO_ENVIRONMENT:
     _dynamic_struct()
 #end if
 
