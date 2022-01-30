@@ -5,7 +5,7 @@ if __name__ == "__main__":
     # import sys
     # sys.path.append(os.path.realpath('..'))
     pytest.main([__file__])
-from tests.tests_imports.import_check import ImportCheck
+from tests.import_check import ImportCheck
 
 
 @pytest.fixture(scope='session')

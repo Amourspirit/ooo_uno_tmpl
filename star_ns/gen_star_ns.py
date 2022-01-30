@@ -32,11 +32,11 @@ class GenerateStarNs:
             in_str = self._config.uno_obj_dir + '.' + ns + '.' + c.name
             ns_im = RelInfo.get_rel_import(in_str=in_str, ns=self._rel)
             # ns = c.namespace.removeprefix('com.sun.star.')
-            return f"from {ns_im.frm} import {ns_im.imp}"
+            return f"from {ns_im.frm} import {ns_im.imp} as {ns_im.imp}"
         
         def build_line(c: Component) -> str:
             ns = c.namespace.removeprefix('com.sun.star.')
-            return f"from {self._config.uno_obj_dir}.{ns}.{c.c_name} import {c.name}"
+            return f"from {self._config.uno_obj_dir}.{ns}.{c.c_name} import {c.name} as {c.name}"
         lines: List[str] = []
         for comp in self._c_data:
             if self._is_rel:
