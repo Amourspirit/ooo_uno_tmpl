@@ -1545,7 +1545,6 @@ class ConstWriter(base.WriteBase):
                 i_str=ns, ns=self._p_namespace
             )
             lst.append([f, n])
-        lst.append([base.APP_CONFIG.base_const, self._get_const_base_class()])
         self._cache[key] = lst
         return self._cache[key]
 
@@ -1747,7 +1746,7 @@ def parse(**kwargs):
     _include_desc = bool(kwargs.get('include_desc', True))
     _log_file = kwargs.get('log_file', None)
     _verbose = bool(kwargs.get('verbose', False))
-    _flags = bool(kwargs.get('flags', False))
+    _flags = kwargs.get('flags', None)
     _hex = bool(kwargs.get('hex', False))
     _json_out = bool(kwargs.get('json_out', False))
     _write_path = kwargs.get('write_path', None)
@@ -1804,15 +1803,17 @@ def _main():
     # url = 'https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1security_1_1KeyUsage.html'
     # url = 'https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1awt_1_1FontWeight.html'
     # url = 'https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1i18n_1_1NumberFormatIndex.html'
-    url = 'https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1sdb_1_1application_1_1DatabaseObject.html'
+    # url = 'https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1sdb_1_1application_1_1DatabaseObject.html'
+    url = 'https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1linguistic2_1_1DictionaryListEventFlags.html' # flags
     # sys.argv.extend(['--log-file', 'debug.log', '-v', '-n', '-u', url])
     # main()
-    args = ('v', 'n')
     kwargs = {
-        "u": url,
+        "url": url,
+        "verbose": True,
+        "print_json": True,
         "log_file": "debug.log"
     }
-    parse(*args, **kwargs)
+    parse(**kwargs)
 # region Parser
 
 
@@ -1840,6 +1841,12 @@ def set_cmd_args(parser: argparse.ArgumentParser) -> None:
         help='No caching',
         action='store_false',
         dest='cache',
+        default=True)
+    parser.add_argument(
+        '-d', '--no-desc',
+        help='No description will be outputed in template',
+        action='store_false',
+        dest='desc',
         default=True)
     parser.add_argument(
         '-p', '--no-print-clear',
