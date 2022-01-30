@@ -689,10 +689,10 @@ def set_cmd_args(parser: argparse.ArgumentParser) -> None:
         dest='sort',
         default=True)
     parser.add_argument(
-        '-d', '--no-dual',
-        help='Do NOT replace :: with .',
+        '-d', '--no-desc',
+        help='No description will be outputed in template',
         action='store_false',
-        dest='dual_colon',
+        dest='desc',
         default=True)
     parser.add_argument(
         '-c', '--clipboard',

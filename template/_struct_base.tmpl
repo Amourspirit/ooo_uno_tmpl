@@ -50,15 +50,19 @@ if typing.TYPE_CHECKING:
 #end if
 #if $dynamic_struct:
 from ooo_uno.oenv import UNO_ENVIRONMENT, UNO_RUNTIME
+_DYNAMIC = False
 if (not typing.TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
+    _DYNAMIC = True
     from ooo_uno.helper import uno_helper
 #end if
 
 #if $dynamic_struct:
-if not ((not typing.TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT):
+if typing.TYPE_CHECKING or _DYNAMIC is False:
 #else
 if True:
 #end if
+
+
 #if $allow_db:
     class ${safe_name}($self.get_class_inherits_from_db()):
 #else
@@ -124,7 +128,7 @@ if True:
 #end for
 
 #if $dynamic_struct:
-else:
+if not typing.TYPE_CHECKING and _DYNAMIC:
     def _dynamic_struct() -> None:
         # Dynamically create uno struct using uno
         global $safe_name
