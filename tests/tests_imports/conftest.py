@@ -1,6 +1,5 @@
 # coding: utf-8
 from typing import Set
-import pytest
 import os
 import sys
 import glob

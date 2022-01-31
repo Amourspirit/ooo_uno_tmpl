@@ -30,7 +30,12 @@ Conda
 Set up env
 ----------
 
-$ conda create --prefix ./env --file environment.yml
+$ conda env create -f  environment.yml
+
+Set up new env
+--------------
+
+$ conda create --prefix ./env python=3.10
 
 Write env to Yaml
 -----------------

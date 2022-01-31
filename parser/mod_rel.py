@@ -5,13 +5,24 @@ Handles conversion of realitive imports
 # region Imports
 import re
 from dataclasses import dataclass
-from typing import List, Tuple
+from typing import List, NamedTuple, Tuple
 from kwhelp.decorator import AcceptedTypes
 from functools import cache
 import zlib
 # endregion Imports
 
 
+class rimport(NamedTuple):
+    # python ≥ 3.6
+    frm: str
+    imp: str
+
+
+class rimport_lng(NamedTuple):
+    # python ≥ 3.6
+    frm: str
+    imp: str
+    as_: str
 @dataclass
 class RealitiveInfo:
     """Realitive info"""
@@ -94,7 +105,7 @@ def get_rel_info(in_branch: str, comp_branch: str, sep: str = '.') -> RealitiveI
 
 @cache
 @AcceptedTypes(str, opt_all_args=True)
-def get_rel_import(in_str: str, ns: str, sep: str = '.') -> Tuple[str, str]:
+def get_rel_import(in_str: str, ns: str, sep: str = '.') -> rimport:
     """
     Gets realitive import Tuple
 
@@ -116,31 +127,31 @@ def get_rel_import(in_str: str, ns: str, sep: str = '.') -> Tuple[str, str]:
     if len(name_parts) == 0:
         # this is a single word such as XInterface
         # assume it is in the same namespace as this import
-        return (f'.{camel_name}', f'{name}')
+        return rimport(f'.{camel_name}', f'{name}')
     ns2 = sep.join(name_parts)
     if ns2 == ns:
         return (f'.{camel_name}', f'{name}')
     if len(name_parts) == 1:
         # this is a single word
         # assume it is in the same namespace as this import
-        return (f'.{camel_to_snake(in_str)}', f'{in_str}')
+        return rimport(f'.{camel_to_snake(in_str)}', f'{in_str}')
     try:
         info = get_rel_info(in_branch=ns, comp_branch=ns2, sep=sep)
         prefix = sep * (info.distance + 1)
         result_parts = info.comp_branch_rel + [camel_name]
         from_str = prefix
         from_str = from_str + sep.join(result_parts)
-        return (from_str, name)
+        return rimport(from_str, name)
     except Exception:
         # logger.error(e, exc_info=True)
         pass
     short = ns2.replace('com.sun.star.', '')
     # logger.warn(f"get_rel_import(): Last ditch effort. Returning: (ooo_uno.uno_obj.{short}.{camel_name}', {name})")
-    return (f'ooo_uno.uno_obj.{short}.{camel_name}', f'{name}')
+    return rimport(f'ooo_uno.uno_obj.{short}.{camel_name}', f'{name}')
 
 @cache
 @AcceptedTypes(str, opt_all_args=True)
-def get_rel_import_long(in_str: str, ns: str, sep: str = '.') -> Tuple[str, str, str]:
+def get_rel_import_long(in_str: str, ns: str, sep: str = '.') -> rimport_lng:
     """
     Gets realitive import Tuple
 
@@ -160,7 +171,7 @@ def get_rel_import_long(in_str: str, ns: str, sep: str = '.') -> Tuple[str, str,
     
     res = bytes(full_name, 'utf-8')
     sas = imp + '_' + hex(zlib.adler32(res))[2:]
-    return frm, imp, sas
+    return rimport_lng(frm, imp, sas)
 
 
 @AcceptedTypes(str, opt_all_args=True)

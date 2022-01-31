@@ -3,11 +3,36 @@ from ..file_base import FilesBase
 from ..data_class import CompileLinkArgs
 from pathlib import Path
 
+
 class BaseCompile(FilesBase):
     def __init__(self, args: CompileLinkArgs) -> None:
         super().__init__(config=args.config)
         self._args = args
         self._json_parser_path = Path(self._root_dir, 'parser', 'json_parser')
+        self._ensure_build_init()
+
+    def _ensure_build_init(self) -> None:
+        # ensure build/uno_obj/__init__.py exist
+        p = Path(self._config.builld_dir, self._config.uno_obj_dir)
+        if not p.is_absolute():
+            p = self.root_dir.joinpath(p)
+        self._mkdirp(p)
+        init_file = Path(p, '__init__.py')
+        try:
+            init_file.touch(exist_ok=False)
+        except FileExistsError:
+            # file already exist so just ignore
+            pass
+    
+    def _get_absolute_path(self, rel_path: Path) -> Path:
+        # might raise FileNotFoundError
+        # https://stackoverflow.com/a/44569249/1171746
+        if rel_path.is_absolute():
+            return rel_path
+        p = self.root_dir.joinpath(rel_path)
+        if not p.is_absolute():
+            p = p.resolve(strict=True)
+        return p
 
     def _get_args_module_links(self) -> Path:
         """
@@ -29,9 +54,7 @@ class BaseCompile(FilesBase):
 
         if not p.is_absolute():
             try:
-                # might raise FileNotFoundError
-                # https://stackoverflow.com/a/44569249/1171746
-                p = p.resolve(strict=True)
+                p = self._get_absolute_path(rel_path=p)
             except FileNotFoundError:
                 msg = f"{self.__class__.__name__}._get_args_module_links(): File not found: {p}"
                 self._args.log.error(msg)

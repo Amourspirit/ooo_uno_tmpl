@@ -84,7 +84,7 @@ class BaseStruct(BaseJson):
         self._sorted_key_index = sorted
         return self._sorted_key_index
 
-    def get_constructor_str(self) -> str:
+    def get_constructor_str(self, opt: bool) -> str:
         sorted = self.get_sorted_names()
         d_lst: List[Dict[str, object]] = getattr(self, 'attribs', [])
         
@@ -95,24 +95,40 @@ class BaseStruct(BaseJson):
             index = tpl[1]
             itm: Dict[str, object] = d_lst[index]
             name: str = itm['name']
-            t: str = self.get_q_type(itm['type'])
-            s = f"{name}: {t}"
+            
+            if opt:
+                t: str = self.get_q_type_opt(itm['type'])
+                s = f"{name}: {t} = None"
+            else:
+                t: str = self.get_q_type(itm['type'])
+                s = f"{name}: {t}"
             c_str += s
             
         return c_str
+
+    def get_q_type_opt(self, in_type: object) -> object:
+        """If in_type is in quote then it is quoted.  Otherwise in_type is returned"""
+        if not isinstance(in_type, str):
+            return in_type
+        if in_type in self.quote:
+            return f"'typing.Optional[{in_type}]'"
+        return f"typing.Optional[{in_type}]"
     
     def get_nt_names_str(self) -> str:
         sorted = self.get_sorted_names()
         d_lst: List[Dict[str, object]] = getattr(self, 'attribs', [])
 
         c_str = ''
-        for i, tpl in enumerate(sorted):
+        i = 0
+        for tpl in sorted:
             if i > 0:
                c_str += ', '
             index = tpl[1]
             itm: Dict[str, object] = d_lst[index]
             c_str += "'" + self.get_safe_word(itm['name']) + "'"
-
+            i += 1
+        if i <= 1:
+            c_str += ',' # add so tuple is not mistaken as brackets
         return c_str
     
     def get_attrib_for_prop(self, index: int) -> Dict[str, object]:
