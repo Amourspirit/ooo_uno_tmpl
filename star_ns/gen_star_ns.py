@@ -27,20 +27,30 @@ class GenerateStarNs:
         Returns:
             List[str]: generated import statement in format of from ... import ...
         """
-        def buld_line_rel(c: Component) -> str:
+        def buld_lines_rel(c: Component) -> List[str]:
             ns = c.namespace.removeprefix('com.sun.star.')
             in_str = self._config.uno_obj_dir + '.' + ns + '.' + c.name
             ns_im = RelInfo.get_rel_import(in_str=in_str, ns=self._rel)
-            # ns = c.namespace.removeprefix('com.sun.star.')
-            return f"from {ns_im.frm} import {ns_im.imp} as {ns_im.imp}"
+            results = []
+            results.append(f"from {ns_im.frm} import {ns_im.imp} as {ns_im.imp}")
+            if c.type == 'const':
+                results.append(
+                    f"from {ns_im.frm} import {ns_im.imp}Enum as {ns_im.imp}Enum")
+            return results
         
-        def build_line(c: Component) -> str:
+        def build_lines(c: Component) -> List[str]:
             ns = c.namespace.removeprefix('com.sun.star.')
-            return f"from {self._config.uno_obj_dir}.{ns}.{c.c_name} import {c.name} as {c.name}"
+            results = []
+            results.append(f"from {self._config.uno_obj_dir}.{ns}.{c.c_name} import {c.name} as {c.name}")
+            if c.type == 'const':
+                results.append(
+                    f"from {self._config.uno_obj_dir}.{ns}.{c.c_name} import {c.name}Enum as {c.name}Enum")
+            return results
+
         lines: List[str] = []
         for comp in self._c_data:
             if self._is_rel:
-                lines.append(buld_line_rel(comp))
+                lines.extend(buld_lines_rel(comp))
             else:
-                lines.append(build_line(comp))
+                lines.extend(build_lines(comp))
         return lines
