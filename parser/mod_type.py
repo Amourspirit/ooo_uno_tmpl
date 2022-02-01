@@ -6,8 +6,7 @@ Handles conversion of LibreOffice types to Python Types
 import re
 from abc import ABC, abstractmethod, abstractproperty
 from typing import List, Match, Optional, Set, Union
-from parser import mod_rel as RelInfo
-from functools import cache
+from rel import mod_rel as RelInfo
 # endregion Imports
 
 # region Maps

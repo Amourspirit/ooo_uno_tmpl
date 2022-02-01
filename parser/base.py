@@ -54,7 +54,7 @@ def _set_sys_paths():
 _set_sys_paths()
 
 from parser import mod_type as ModType
-from parser import mod_rel as RelInfo
+from rel import mod_rel as RelInfo
 from config import AppConfig, read_config_default
 # endregion imports
 

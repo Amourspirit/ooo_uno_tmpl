@@ -6,7 +6,7 @@ from .sql_ctx import SqlCtx
 from ..data_class.namespace_tree import NamespaceTree
 from ..data_class.namespace_child import NamespaceChild
 from ..data_class.full_import import FullImport
-from parser import mod_rel as RelInfo
+from rel import mod_rel as RelInfo
 
 class QryNsImports(BaseSql):
     """Namespace related Query"""

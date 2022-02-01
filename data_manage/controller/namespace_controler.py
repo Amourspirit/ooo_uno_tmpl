@@ -9,7 +9,7 @@ from ..data_class.namespace_child import NamespaceChild
 from ..data_class.full_import import FullImport
 from ..data_class.component import Component
 from ..util import Util
-from parser import mod_rel as RelInfo
+from rel import mod_rel as RelInfo
 from tabulate import tabulate
 from dataclasses import astuple, asdict, fields
 from ..db_class.qry_component import QryComponent

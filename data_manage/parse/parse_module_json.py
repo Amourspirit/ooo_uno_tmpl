@@ -12,7 +12,7 @@ from ..db_class.tbl_component import TblComponent
 from ..db_class.tbl_component_extend import TblComponentExtend
 from ..db_class.tbl_component_full_import import TblComponentFullImport
 from ..db_class.db_connect import DbConnect
-from parser import mod_rel as RelInfo
+from rel import mod_rel as RelInfo
 
 class ParseModuleJson:
     def __init__(self, config: AppConfig) -> None:

@@ -1,5 +1,4 @@
 # coding: utf-8
-import json
 from typing import Dict, Tuple, List
 from _base_json import BaseJson
 from verr import Version
