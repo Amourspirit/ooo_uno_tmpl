@@ -6,15 +6,13 @@ import importlib
 import logging
 import time
 import calendar
-import tempfile
-from datetime import datetime, timedelta
-import json
-import pickle
+from datetime import datetime
+from rel import mod_rel as RelInfo
 import sqlite3 as sql
 from pathlib import Path
 from datetime import datetime, timezone
 from types import ModuleType
-from typing import Iterable, Set, Tuple, List, Union, Optional
+from typing import Iterable, Tuple, List, Union, Optional
 from Cheetah.Template import Template
 from dataclasses import dataclass
 
@@ -146,151 +144,6 @@ class SqlExtends(BaseSql):
 
 # endregion Resource DB Related
 
-# region MRO Related Classes
-
-
-# region SQL Cache
-
-
-class SqlCache:
-    class CtxConnect:
-        # https://stackoverflow.com/questions/26793753/using-a-context-manager-for-connecting-to-a-sqlite3-database
-        def __init__(self, connect_str: str) -> None:
-            self._cstr = connect_str
-
-        def __enter__(self):
-            # DateTime for sqlite:
-            #   See: https://stackoverflow.com/a/37222799/1171746
-            #   See: https://stackoverflow.com/a/1830499/1171746
-            self.connection: sql.Connection = sql.connect(
-                self._cstr, detect_types=sql.PARSE_DECLTYPES)
-            self.connection.row_factory = sql.Row
-            self.cursor: sql.Cursor = self.connection.cursor()
-            return self
-
-        def __exit__(self, exc_type, exc_value, traceback):
-            self.connection.close()
-
-        def get_connection(self) -> sql.Connection:
-            return self._conn
-
-    def __init__(self, connect_str: str, lifetime: float) -> None:
-        self._conn_str = connect_str
-        self._lifetime = lifetime
-        self._is_init = False
-        self._is_init_update = False
-        if self._is_init is False:
-            self._init()
-
-    def _init(self) -> None:
-        with SqlCache.CtxConnect(self._conn_str) as db:
-            # limit to one row: https://stackoverflow.com/a/33104119/1171746
-            db.cursor.execute("""CREATE TABLE IF NOT EXISTS pickle (
-            id INTEGER PRIMARY KEY CHECK (id = 1),
-            created TIMESTAMP,
-            updated TIMESTAMP,
-            data BLOB NOT NULL
-            )""")
-        self._is_init = True
-
-    def fetch(self) -> object:
-        if self._lifetime <= 0.0:
-            return None
-        data = None
-        created: datetime = None
-        with SqlCache.CtxConnect(self._conn_str) as db:
-            db.cursor.execute("SELECT created, data FROM pickle limit 1")
-            for row in db.cursor:
-                created = row['created']
-                data = pickle.loads(row['data'])
-        if not created or not data:
-            return None
-        now_time = datetime.utcnow()
-        expire_time = created + timedelta(seconds=self._lifetime)
-        if now_time > expire_time:
-            self._delete()
-            return None
-        return data
-
-    def _update(self, pdata: object) -> None:
-        with SqlCache.CtxConnect(self._conn_str) as db:
-            with db.connection:
-                db.cursor.execute("""UPDATE pickle SET updated=:updated, data=:data
-                                        WHERE id=1""",
-                                  {
-                                      "updated": datetime.utcnow(),
-                                      "data": sql.Binary(pdata)
-                                  })
-
-    def _insert(self, pdata: object) -> None:
-        with SqlCache.CtxConnect(self._conn_str) as db:
-            with db.connection:
-                db.cursor.execute("INSERT INTO pickle VALUES (:id, :created, :updated, :data)",
-                                  {
-                                      "id": 1,
-                                      "created": datetime.utcnow(),
-                                      "updated": datetime.utcnow(),
-                                      "data": sql.Binary(pdata)
-                                  })
-
-    def _delete(self) -> None:
-        with SqlCache.CtxConnect(self._conn_str) as db:
-            with db.connection:
-                db.cursor.execute("DELETE FROM pickle WHERE id=1")
-        self._is_init_update = False
-
-    def update(self, data: object) -> None:
-        pdata = pickle.dumps(data, pickle.HIGHEST_PROTOCOL)
-        if not self._is_init_update:
-            has_data = False
-            with SqlCache.CtxConnect(self._conn_str) as db:
-                db.cursor.execute("SELECT id from pickle where id=1")
-                for _ in db.cursor:
-                    has_data = True
-            if has_data:
-                self._update(pdata)
-            else:
-                self._insert(pdata)
-            self._is_init_update = True
-
-        else:
-            self._update(pdata)
-
-
-class DbCache:
-    def __init__(self, tmp_dir: str, db_name: str, lifetime: Optional[float] = None) -> None:
-        t_path = Path(tempfile.gettempdir())
-        self._cache_path = t_path / tmp_dir
-        
-        # self._cache_path = Path('./tmp')
-        self.mkdirp(self._cache_path)
-        self._lifetime = lifetime or 1800
-        self._db_file = self._cache_path / (db_name + '.sqlite')
-        self._sql_cache = SqlCache(self._db_file, self._lifetime)
-
-    def mkdirp(self, dest_dir: Union[str, Path]):
-        """
-        Creates directory and all child directories if needed
-
-        Args:
-            dest_dir (Union[str, Path]): path to create directories for.
-                Must be dir path only. No checking is done for file names.
-        """
-        # Python ≥ 3.5
-        if isinstance(dest_dir, Path):
-            dest_dir.mkdir(parents=True, exist_ok=True)
-        else:
-            Path(dest_dir).mkdir(parents=True, exist_ok=True)
-
-    def fetch_from_cache(self) -> Union[object, None]:
-        return self._sql_cache.fetch()
-
-    def save_in_cache(self, contents: object) -> None:
-        self._sql_cache.update(contents)
-# endregion SQL Cache
-
-# endregion MRO Related Classes
-
 class BaseTpml(Template):
 
 
@@ -353,8 +206,7 @@ class BaseTpml(Template):
         Returns:
             str: snake case
         """
-        _input = re.sub('(.)([A-Z][a-z]+)', r'\1_\2', input)
-        return re.sub('([a-z0-9])([A-Z])', r'\1_\2', _input).lower()
+        return RelInfo.camel_to_snake(input)
     
     def get_clean_name(self, input: str) -> str:
         """
@@ -690,4 +542,11 @@ class BaseTpml(Template):
         if a_prop:
             results.append('abstractproperty')
         return results
-            
+    
+    def get_rel_import(self, in_str:str, ns:str, sep: str = '.') -> str:
+        ri = RelInfo.get_rel_import(in_str=in_str, ns=ns, sep=sep)
+        return f"from {ri.frm} import {ri.imp}"
+    
+    def get_rel_import_long(self, in_str: str, ns: str, sep: str = '.') -> str:
+        ri = RelInfo.get_rel_import_long(in_str=in_str, ns=ns, sep=sep)
+        return f"from {ri.frm} import {ri.imp} as {ri.as_}"
