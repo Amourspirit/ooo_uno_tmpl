@@ -814,7 +814,10 @@ class Writer(base.WriteBase):
         self._validate_p_info()
         _imports = data['imports']
         self._p_imports.update(_imports)
-        self._p_imports.update(data['extends'])
+        for el in self._parser.api_data.inherited.get_obj():
+            if el.python_import:
+                continue
+            self._p_imports.add(el.fullns)
         self._p_imports_typing.update(self._parser.imports)
         self._p_imports = base.Util.get_clean_imports(
             ns=self._p_namespace,
