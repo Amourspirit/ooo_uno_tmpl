@@ -7,7 +7,7 @@ class Extend:
     namespace: str
     map_name: Union[str, None]
     fk_component_id: str
-    id_extend: Union[int, None] = None
+    id_extend: Union[str, None] = None
     sort: int = -1
 
     def __lt__(self, other: object):

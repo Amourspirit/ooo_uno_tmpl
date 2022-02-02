@@ -7,7 +7,7 @@ class FullImport:
     namespace: str
     requires_typing: bool
     fk_component_id: str
-    id_full_import: Union[int, None] = None
+    id_full_import: Union[str, None] = None
     sort: int = -1
 
     def __lt__(self, other: object):
