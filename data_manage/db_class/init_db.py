@@ -19,7 +19,7 @@ class InitDb:
     def _create_extend(self) -> None:
         # auto primary key: https://stackoverflow.com/a/26652736/1171746
         query = """CREATE TABLE IF NOT EXISTS extend (
-            id_extend INTEGER PRIMARY KEY AUTOINCREMENT,
+            id_extend VARCHAR(255) PRIMARY KEY,
             namespace VARCHAR(255) NOT NULL,
             map_name VARCHAR(255),
             fk_component_id VARCHAR(255) NOT NULL
@@ -30,7 +30,7 @@ class InitDb:
     def _create_full_import(self) -> None:
         # bool : https://tinyurl.com/y9yocjx5
         query = """CREATE TABLE IF NOT EXISTS full_import (
-            id_full_import INTEGER PRIMARY KEY AUTOINCREMENT,
+            id_full_import VARCHAR(255) PRIMARY KEY,
             namespace VARCHAR(255) NOT NULL,
             requires_typing BOOLEAN NOT NULL CHECK (requires_typing IN (0, 1)),
             fk_component_id VARCHAR(255) NOT NULL

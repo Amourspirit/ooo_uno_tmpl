@@ -54,13 +54,16 @@ if typing.TYPE_CHECKING:
 #end for
 #end if
 
+
 #if $allow_db:
-class ${safe_name}($self.get_class_inherits_from_db())$self.get_class_end()
+class ${safe_name}($self.get_class_inherits_from_db()):
 #else
-class ${safe_name}($self.get_class_inherits($name, $inherits))$self.get_class_end()
+class ${safe_name}($self.get_class_inherits($name, $inherits)):
 #end if
 #if $include_desc
     """
+    Singleton Class
+
     #for $line in $self.line_gen($desc)
     $line
     #end for
@@ -72,6 +75,13 @@ class ${safe_name}($self.get_class_inherits($name, $inherits))$self.get_class_en
     """
 
 #end if
+    _instance = None
+
+    def __new__(cls, *args, **kwargs):
+        if cls._instance is None:
+            cls._instance = super().__new__(cls, *args, **kwargs)
+        return cls._instance
+
 #if $is_properties
 #set $properties = $attribs['properties']
 #for $property in $properties

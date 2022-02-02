@@ -54,7 +54,7 @@ def _set_sys_paths():
 _set_sys_paths()
 
 from parser import mod_type as ModType
-from parser import mod_rel as RelInfo
+from rel import mod_rel as RelInfo
 from config import AppConfig, read_config_default
 # endregion imports
 
@@ -112,7 +112,11 @@ def get_known_extends(ns:str, class_name: str) -> Union[List['Ns'], None]:
     known = _KNOWN_EXTENDS[key]
     for s in known:
         parts = s.rsplit(sep='.', maxsplit=1)
-        results.append(Ns(name=parts[1], namespace=parts[0]))
+        if parts[1] == '_':
+            # python import such as Exception
+            results.append(Ns(name=parts[0], namespace='', python_import=True))
+        else:
+            results.append(Ns(name=parts[1], namespace=parts[0]))
     return results
         
 # endregion Known Extends
@@ -204,9 +208,12 @@ class ImportInfo:
 class Ns:
     name: str
     namespace: str
+    python_import: bool = False
 
     @property
     def fullns(self):
+        if self.python_import:
+            return self.name
         return self.namespace + '.' + self.name
     
     def __lt__(self, other: object):

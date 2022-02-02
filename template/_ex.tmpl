@@ -25,7 +25,8 @@ $self.load_data()#slurp
 #set $is_method = 'methods' in $attribs
 #set $is_properties = 'properties' in $attribs
 #set $is_types = 'types' in $attribs
-#set $abc_imports = $self.get_abstract_imports([$is_method],[$is_properties, $is_types])
+##set $abc_imports = $self.get_abstract_imports([$is_method],[$is_properties, $is_types])
+#set $abc_imports = []
 # coding: utf-8
 #include raw "resources/inc_lic.txt"
 # Exception Class
@@ -105,24 +106,24 @@ class ${safe_name}($self.get_class_inherits($name, $inherits))$self.get_class_en
 #set $p_name = $self.get_safe_word($property['name'])
 #set $p_return = $self.get_q_type($property['returns'])
 #set $p_desc = $property['desc']
-    @abstractproperty
-    def ${p_name}(self) -> $p_return:
-        """
+    $p_name: $p_return = None
+    """
     #for $line in $self.line_gen($p_desc)
         $line
     #end for
     #if $self.get_prop_has_errors($property)
 
-        Raises:
+    Raises:
 
     #for $long, $short in $self.get_prop_get_raises($property)
-            $long: get raises ``$short``
+        $long: get raises ``$short``
     #end for
     #for $long, $short in $self.get_prop_set_raises($property)
-            $long: set raises ``$short``
+        $long: set raises ``$short``
     #end for
     #end if
-        """
+    """
+
 #end for
 #end if
 #if $is_types
@@ -131,23 +132,23 @@ class ${safe_name}($self.get_class_inherits($name, $inherits))$self.get_class_en
 #set $p_name = $self.get_safe_word($property['name'])
 #set $p_return = $self.get_q_type($property['returns'])
 #set $p_desc = $property['desc']
-    @abstractproperty
-    def ${p_name}(self) -> $p_return:
-        """
+    $p_name: $p_return = None
+    """
     #for $line in $self.line_gen($p_desc)
-        $line
+    $line
     #end for
     #if $self.get_prop_has_errors($property)
 
-        Raises:
+    Raises:
 
     #for $long, $short in $self.get_prop_get_raises($property)
-            $long: get raises ``$short``
+        $long: get raises ``$short``
     #end for
     #for $long, $short in $self.get_prop_set_raises($property)
-            $long: set raises ``$short``
+        $long: set raises ``$short``
     #end for
     #end if
-        """
+    """
+
 #end for
 #end if

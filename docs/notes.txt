@@ -53,3 +53,33 @@ Also all folder containing modules need to have an __init__.py in them in order 
 Re-exporting a module in pyi.
 To re-export a module the following redundant format is used.
 from .uno import XInterface as XInterface
+
+multiple-inheritance
+--------------------
+
+https://wiki.openoffice.org/wiki/Documentation/DevGuide/ProUNO/Services
+
+Apache OpenOffice objects can inherit services, including interfaces, from only one parent object.
+However, objects can implement multiple interfaces. Inherited methods can be provided by the parent of the object;
+implemented methods must be provided by the object itself.
+Although Apache OpenOffice does not support true multiple-inheritance, objects can implement multiple interfaces,
+which gives them the appearance of having inherited methods from several other objects.
+When the term multiple-inheritance interface is used in Apache OpenOffice, it actually refers to multiple interface implementation.
+
+Referencing Interfaces
+
+References to interfaces in a service definition mean that an implementation of this service must offer the specified interfaces.
+However, optional interfaces are possible. If a multiple-inheritance interface inherits an optional interface,
+or an old-style service contains an optional interface, any given UNO object may or may not support this interface. 
+If you utilize an optional interface of a UNO object, always check if the result of queryInterface()
+is equal to null and react accordingly - otherwise your code will not be compatible with implementations without the optional
+interface and you might end up with null pointer exceptions. 
+
+Such a RemoteTV component could be a jar file or a shared library. It would contain two service implementations,
+TVSet and RemoteControl. Once the RemoteTV component is registered with the global service manager, users can call the
+factory method of the service manager and ask for a TVSet or a RemoteControl service.
+Then they could use their functionality over the interfaces XPower, XChannel and XStandby.
+When a new implementation of these services with better performance or new features is available later on,
+the old component can be replaced without breaking existing code, provided that the new features are introduced by adding interfaces.
+
+Sequenes are tuples in python

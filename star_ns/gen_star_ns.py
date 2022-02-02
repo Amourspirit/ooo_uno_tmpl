@@ -2,7 +2,7 @@
 from typing import List, Optional
 from data_manage.data_class.component import Component
 from config import AppConfig
-from parser import mod_rel as RelInfo
+from rel import mod_rel as RelInfo
 
 class GenerateStarNs:
     """Generates import lines in format of from ... import ..."""

@@ -24,6 +24,56 @@ python make.py --help
 output is copied into scratch folder with the same dir structure as uno_obj
 
 
+Parser
+======
+
+Config
+------
+
+known_json.json
++++++++++++++++
+
+This file contains mappings to full known json data files in the parser/known_json dir.
+
+When a parser find a match it will use the json data found in parser/known_json instead of
+generating json.
+
+If a parser command inline includes ``--no-allow-known-json`` or parser parse method
+``allow_known_json=False`` then know is ignored and json is built from parser.
+
+In the output dir ``uno_obj`` the json is outputed respecting known by defalut.
+
+In the output dir ``data`` the json is outputed ignoring known by default.
+The ``data`` dir is used to generate database and therefore requires raw data
+and thus it is preferred to ignore known json.
+
+known_extends.json
+++++++++++++++++++
+
+This file contains mappings that are the extends for classes that match full namespace.
+When a mapping ends with ._ it indicates that it is a python matching
+
+The following example directs com.sun.star.uno.Exception import form python builtin Exception class.
+
+.. code::
+
+    {
+      "com.sun.star.uno.Exception": [
+        "Exception._"
+      ]
+    }
+
+Example full imports. Directs **DatabaseTextField** to only import *TextField* and *DataAwareControlModel*.
+
+.. code::
+
+    {
+      "com.sun.star.form.component.DatabaseTextField": [
+      "com.sun.star.form.component.TextField",
+      "com.sun.star.form.DataAwareControlModel"
+      ]
+    }
+
 Conda
 =====
 

@@ -2,6 +2,7 @@
 import verr
 import json
 import glob
+import hashlib
 from pathlib import Path
 from typing import List, Dict
 from config import AppConfig
@@ -12,8 +13,7 @@ from ..db_class.tbl_component import TblComponent
 from ..db_class.tbl_component_extend import TblComponentExtend
 from ..db_class.tbl_component_full_import import TblComponentFullImport
 from ..db_class.db_connect import DbConnect
-from parser import mod_rel as RelInfo
-
+from rel import mod_rel as RelInfo
 class ParseModuleJson:
     def __init__(self, config: AppConfig) -> None:
         self._app_config = config
@@ -87,21 +87,31 @@ class ParseModuleJson:
             'extends_map', {})
         for ext in j_extends:
             map_name = j_extends_map.get(ext, None)
+            key = comp.id_component + ext
+            id_ = hashlib.md5(key.encode('utf-8')).hexdigest()
             self._extends.append(
-                Extend(namespace=ext, map_name=map_name, fk_component_id=comp.id_component))
+                Extend(id_extend=id_, namespace=ext, map_name=map_name, fk_component_id=comp.id_component))
 
     def _read_full_imports(self, json_data: dict, comp: Component) -> None:
+        def get_id(ns: str) -> str:
+            key = comp.id_component + ns
+            result = hashlib.md5(key.encode('utf-8')).hexdigest()
+            return result
         j_imports: Dict[List[str]] = json_data['data'].get('full_imports', {})
         gen_lst: List[str] = j_imports.get('general', [])
         type_lst: List[str] = j_imports.get('typing', [])
         for ns in gen_lst:
+            id_ = get_id(ns)
             self._full_imports.append(FullImport(
+                id_full_import=id_,
                 namespace=ns,
                 requires_typing=False,
                 fk_component_id=comp.id_component
             ))
         for ns in type_lst:
+            id_ = get_id(ns)
             self._full_imports.append(FullImport(
+                id_full_import=id_,
                 namespace=ns,
                 requires_typing=True,
                 fk_component_id=comp.id_component
