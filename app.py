@@ -193,8 +193,8 @@ def _main():
     # ns = 'com.sun.star.form.DataAwareControlModel'
     # ns = 'com.sun.star.text.TextRange'
     # args = 'data db-json -n com.sun.star.form.control.GridControl'
-    url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1tree_1_1XMutableTreeNode.html'
-    args = 'data url -u ' + url
+    url = 'https://api.libreoffice.org/docs/idl/ref/exceptioncom_1_1sun_1_1star_1_1uno_1_1Exception.html'
+    args = 'compile exception -a'
     sys.argv.extend(args.split())
     main()
 
@@ -942,7 +942,7 @@ def _args_action_links_batch(args: argparse.Namespace, config: AppConfig) -> Non
 def _args_process_compile_cmd_data(args: argparse.Namespace, config: AppConfig) -> None:
     if args.write_data_dir:
         args.write_path = config.data_dir
-    if args.command_data == 'ex':
+    if args.command_data == 'exception':
         _args_action_links_ex(args=args, config=config)
     elif args.command_data == 'enum':
         _args_action_links_enum(args=args, config=config)
@@ -1275,22 +1275,6 @@ def _args_process_url_parser_cmd_data(args: argparse.Namespace) -> None:
 def _args_process_cmd(args: argparse.Namespace, config: AppConfig) -> None:
     if args.command == 'make':
         _args_action_make(args=args, config=config)
-    elif args.command == 'exception':
-        _args_action_links_ex(args=args)
-    elif args.command == 'enum':
-        _args_action_links_enum(args=args)
-    elif args.command == 'const':
-        _args_action_links_const(args=args)
-    elif args.command == 'struct':
-        _args_action_links_struct(args=args)
-    elif args.command == 'interface':
-        _args_action_links_interface(args=args)
-    elif args.command == 'singleton':
-        _args_action_links_singleton(args=args)
-    elif args.command == 'service':
-        _args_action_links_service(args=args)
-    elif args.command == 'typedef':
-        _args_action_links_typedef(args=args)
     elif args.command == 'touch':
         _args_action_touch(args=args, config=config)
     elif args.command == 'link-json':

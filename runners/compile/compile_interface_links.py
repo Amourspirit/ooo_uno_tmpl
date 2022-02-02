@@ -58,7 +58,8 @@ class CompileInterfaceLinks(BaseCompile):
             write_json=self.args.write_json,
             json_file=file,
             write_path=write_path,
-            allow_known_json=self.args.allow_known_json
+            allow_known_json=self.args.allow_known_json,
+            log_file='interface.log'
         )
 
     def _process_files(self):

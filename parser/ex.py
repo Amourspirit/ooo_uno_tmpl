@@ -41,6 +41,9 @@ class Writer(xsrc.Writer):
 
     def _get_template_ext(self) -> str:
         return base.APP_CONFIG.template_singleton_ext
+    
+    def _get_template_dyn(self) -> Union[str, None]:
+        return 'exception_dyn.tmpl'
 
     def _get_template_name(self) -> str:
         """
@@ -118,7 +121,7 @@ def main():
         if args.log_file:
             log_args['log_file'] = args.log_file
         else:
-            log_args['log_file'] = 'singleton.log'
+            log_args['log_file'] = 'exception.log'
         if args.verbose:
             log_args['level'] = logging.DEBUG
         _set_loggers(get_logger(logger_name=Path(__file__).stem, **log_args))
