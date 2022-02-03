@@ -483,12 +483,13 @@ def _args_touch(parser: argparse.ArgumentParser, config: AppConfig) -> None:
         default=False
     )
     parser.add_argument(
-        '-p', '--python',
-        help='Touch *.py files instead of *.tmpl files.',
-        action='store_true',
-        dest='python_files',
-        default=False
-    )
+        '-o',
+        '--option',
+        default='tmpl',
+        const='tmpl',
+        nargs='?',
+        choices=['py', 'dyn', 'tmpl'],
+        help='touch *.py, *.dyn, *.tmpl files (default: %(default)s)')
     parser.add_argument(
         '--cache-files',
         help='Touch cached files in the system tmp dir and resets cache file expire times.',
@@ -965,7 +966,15 @@ def _args_process_compile_cmd_data(args: argparse.Namespace, config: AppConfig) 
 
 
 def _args_action_touch(args: argparse.Namespace, config: AppConfig) -> None:
+    touch_py_files = False
+    touch_dyn_files = False
+    if args.option == 'dyn':
+        touch_dyn_files = True
+    elif args.option == 'py':
+        touch_dyn_files = True
+        
     _log_start_action()
+    
     TouchFiles(
         config=config,
         log=logger,
@@ -977,7 +986,8 @@ def _args_action_touch(args: argparse.Namespace, config: AppConfig) -> None:
         touch_typedef=args.typedef_all,
         touch_singleton=args.singleton_all,
         touch_service=args.service_all,
-        touch_py_files=args.python_files,
+        touch_py_files=touch_py_files,
+        touch_dyn_files=touch_dyn_files,
         touch_cache_files=args.cache_files
     )
     _log_end_action()
