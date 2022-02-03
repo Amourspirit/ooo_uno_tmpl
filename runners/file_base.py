@@ -43,10 +43,22 @@ class FilesBase:
         files = glob.glob(pattern, recursive=True)
         # print('files', files)
         return files
+    
+    def _get_template_dyn_files(self):
+        dirname = str(self._root_dir / self._config.uno_obj_dir)
+        pattern = dirname + '/**/*.dyn'
+        files = glob.glob(pattern, recursive=True)
+        # print('files', files)
+        return files
 
     def _get_py_path(self, tmpl_file) -> Path:
         t_file = Path(tmpl_file)
         p_file = Path(t_file.parent, str(t_file.stem) + '.py')
+        return p_file
+    
+    def _get_py_dyn_path(self, tmpl_file) -> Path:
+        t_file = Path(tmpl_file)
+        p_file = Path(t_file.parent, str(t_file.stem) + '.dynpy')
         return p_file
 
     def get_module_link_files(self, dir_name: Optional[str] = None) -> Set[str]:

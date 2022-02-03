@@ -22,6 +22,12 @@ class AppConfig:
     """Output build dir such as build"""
     data_dir: str
     """Output data dir such as data"""
+    dyn_dir: str
+    """
+    Dynamic ouptput directory such as ``dyn``.
+    
+    This will usually be a subdirectory of ``builld_dir``
+    """
     scratch_dir: str
     """Output scratch dir such as scratch"""
     resource_dir: str
@@ -102,6 +108,8 @@ class AppConfig:
     """Extension for typedef files such as .tppi"""
     template_service_ext: str
     """Extension for service files such as .tppi"""
+    template_dyn_ext: str
+    """Extension for dynamic templagtes such as .dyn"""
     component_types: List[str]
     com_sun_star: List[str]
     """

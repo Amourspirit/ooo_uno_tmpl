@@ -19,7 +19,6 @@ $self.init_data()#slurp
 #attr $attribs = []
 $self.load_data()#slurp
 ## Main Template
-#set $enum_class = 'IntFlag' if $flags else 'IntEnum'
 #set $safe_name = $self.get_safe_word($name)
 # coding: utf-8
 #include raw "resources/inc_lic.txt"
@@ -35,7 +34,6 @@ import typing
 #for $imp in $imports
 import $imp
 #end for
-from enum import $enum_class
 #for $frm, $imp in $from_imports
 from $frm import $imp
 #end for
@@ -76,32 +74,4 @@ class ${safe_name}(object):
     #end if
 #end for
 
-
-class ${safe_name}Enum($enum_class):
-    """
-    Enum of Const Class $self.get_safe_word($name)
-
-    #if isinstance($desc, str)
-    $desc
-    #else
-        #for $line in $desc
-    $line
-        #end for
-    #end if
-    """
-#for $item in $attribs
-    $self.get_safe_word($item['name']) = ${safe_name}.$self.get_safe_word($item['name'])
-    #if len($item['lines']) > 0
-    """
-        #if isinstance($item['lines'], str)
-    $item['lines']
-        #else
-            #for $line in $item['lines']
-    $line
-            #end for
-        #end if
-    """
-    #end if
-#end for
-
-__all__ = ['${safe_name}', '${safe_name}Enum']
+__all__ = ['${safe_name}']

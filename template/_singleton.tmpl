@@ -78,6 +78,7 @@ class ${safe_name}($self.get_class_inherits($name, $inherits)):
     _instance = None
 
     def __new__(cls, *args, **kwargs):
+        # single instance only allowed
         if cls._instance is None:
             cls._instance = super().__new__(cls, *args, **kwargs)
         return cls._instance

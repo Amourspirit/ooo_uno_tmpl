@@ -26,8 +26,9 @@ TYPE_MAP_PRIMITIVE = {
     "void": "None"
 }
 
+# sequence is a tuple.
 TYPE_MAP_KNOWN_ITTER = {
-    "sequence": "list",
+    "sequence": "tuple",
     "aDXArray": "list",
     "com.sun.star.beans.Pair": "tuple"
 }
@@ -636,9 +637,10 @@ class RuleSeqLikePrimative(BaseRule):
         if self._wrapper_type.type in TYPE_MAP_PY_WRAPPER:
             w = TYPE_MAP_PY_WRAPPER[self._wrapper_type.type]
             realtype = self._wrapper_type.type
-            w += f"[{p_type.type}]"
+            w += f"[{p_type.type}, ...]"
         else:
-            w = f"typing.List[{p_type.type}]"
+            # w = f"typing.List[{p_type.type}]"
+            w = f"typing.Tuple[{p_type.type}, ...]"
             realtype = 'list'
         result = PythonType(
             type=w,
@@ -758,10 +760,12 @@ class RuleSeqLikeNonPrim(BaseRule):
         if self._wrapper_type.type in TYPE_MAP_PY_WRAPPER:
             realtype = self._wrapper_type.type
             s = TYPE_MAP_PY_WRAPPER[self._wrapper_type.type]
-            w = f"{s}[{child.type}]"
+            w = f"{s}[{child.type}, ...]"
         else:
-            realtype = 'list'
-            w = f"typing.List[{child.type}]"
+            # realtype = 'list'
+            # w = f"typing.List[{child.type}]"
+            realtype = 'tuple'
+            w = f"typing.tuple[{child.type}, ...]"
 
         p_type = PythonType(
             type=w,

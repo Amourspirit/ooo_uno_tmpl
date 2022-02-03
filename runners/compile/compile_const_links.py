@@ -53,7 +53,8 @@ class CompileConstLinks(BaseCompile):
             write_template=self.args.write_template,
             write_json=self.args.write_json,
             json_file=file,
-            write_path=write_path
+            write_path=write_path,
+            log_file='const.log'
         )
 
     def _process_files(self):
