@@ -127,7 +127,7 @@ class BaseStruct(BaseJson):
             itm: Dict[str, object] = d_lst[index]
             c_str += "'" + self.get_safe_word(itm['name']) + "'"
             i += 1
-        if i <= 1:
+        if i == 1:
             c_str += ',' # add so tuple is not mistaken as brackets
         return c_str
     
