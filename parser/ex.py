@@ -98,7 +98,7 @@ def parse(**kwargs) -> Union[str, None]:
 
 def _main():
     os.system('cls' if os.name == 'nt' else 'clear')
-    url = 'https://api.libreoffice.org/docs/idl/ref/exceptioncom_1_1sun_1_1star_1_1beans_1_1IntrospectionException.html'  # singleton
+    url = 'https://api.libreoffice.org/docs/idl/ref/exceptioncom_1_1sun_1_1star_1_1beans_1_1IntrospectionException.html'
     kwargs = {
         "url": url,
         "log_file": "debug.log",
