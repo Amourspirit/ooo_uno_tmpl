@@ -1,8 +1,8 @@
 # coding: utf-8
 import os
-from _base_ex import BaseEx
+from _base_service import BaseService
 
-class BaseExDyn(BaseEx):
+class BaseServiceDyn(BaseService):
 
     def _hydrate_data(self, json_data: dict):
         super()._hydrate_data(json_data=json_data)
