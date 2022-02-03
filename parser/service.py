@@ -39,6 +39,9 @@ class Writer(xsrc.Writer):
 
     def _get_template_ext(self) -> str:
         return base.APP_CONFIG.template_singleton_ext
+
+    def _get_template_dyn(self) -> Union[str, None]:
+        return 'service_dyn.tmpl'
     
     def _get_template_name(self) -> str:
         """

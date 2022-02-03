@@ -1299,6 +1299,8 @@ def main():
     os.environ['project_root'] = str(Path(__file__).parent)
     os.environ['config_resource_dir'] = config.resource_dir
     os.environ['config_db_mod_info'] = config.db_mod_info
+    os.environ['config_uno_obj_dir'] = config.uno_obj_dir
+    os.environ['config_dyn_dir'] = config.dyn_dir
     # endregion Config
 
     # region create parsers
