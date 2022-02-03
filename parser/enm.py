@@ -406,7 +406,8 @@ class EnumWriter(base.WriteBase):
         if not self._write_template_long:
             t_file += '_stub'
         t_file += '.tmpl'
-        _path = Path(self._path_dir, 'template', t_file)
+        self._template_dir = Path(self._path_dir, 'template')
+        _path = Path(self._template_dir, t_file)
         if not _path.exists():
             raise FileNotFoundError(f"unable to find templae file '{_path}'")
         self._template_file = _path
@@ -417,6 +418,9 @@ class EnumWriter(base.WriteBase):
         with open(self._template_file) as f:
             contents = f.read()
         return contents
+
+    def _get_template_dyn(self) -> Union[str, None]:
+        return 'enum_dyn.tmpl'
 
     def write(self) -> Union[str, None]:
         """
@@ -441,6 +445,7 @@ class EnumWriter(base.WriteBase):
                 print(self._get_json())
             if self._write_file:
                 self._write_to_file()
+                self._write_to_file_dyn()
             if self._write_json:
                 self._write_to_json()
             if self._json_out:
@@ -482,7 +487,21 @@ class EnumWriter(base.WriteBase):
         with open(self._file_full_path, 'w') as f:
             f.write(self._template)
         logger.info("Created file: %s", self._file_full_path)
-    
+
+    def _write_to_file_dyn(self):
+        dyn_name = self._get_template_dyn()
+        if dyn_name is None:
+            return
+        dyn_path = self._template_dir / dyn_name
+        with open(dyn_path, 'r') as t_file:
+            dyn_contents = t_file.read()
+
+        dyn_out_file = self._file_full_path.stem + base.APP_CONFIG.template_dyn_ext
+        write_path = self._file_full_path.parent / dyn_out_file
+        with open(write_path, 'w') as out_file:
+            out_file.write(dyn_contents)
+        logger.info('create file: %s', write_path)
+
     def _write_to_json(self):
         p = self._file_full_path.parent
         jsn_p = p / (str(self._file_full_path.stem) + '.json')

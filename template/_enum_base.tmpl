@@ -34,67 +34,38 @@ $self.load_data()#slurp
 #if $libre_office_ver:
 # Libre Office Version: $libre_office_ver
 #end if
-from typing import TYPE_CHECKING
 from enum import Enum
-from ooo_uno.oenv import UNO_ENVIRONMENT, UNO_RUNTIME
-_DYNAMIC = False
-if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
-    _DYNAMIC = True
-    from ooo_uno.helper.enum_helper import uno_enum_class_new
-    from $full_name import ($s_enum)
-
-if TYPE_CHECKING or _DYNAMIC is False:
 
 
-    class ${safe_name}(Enum):
-        """
-        Enum Class
+class ${safe_name}(Enum):
+    """
+    Enum Class
 
-        #if isinstance($desc, str)
-        $desc
-        #else
-            #for $line in $desc
-        $line
-            #end for
-        #end if
+    #if isinstance($desc, str)
+    $desc
+    #else
+        #for $line in $desc
+    $line
+        #end for
+    #end if
 #if $link:
 
-        See Also:
-            `API $name <$link>`_
+    See Also:
+        `API $name <$link>`_
 #end if
-        """
+    """
 #for $key in $key_list
 #set $value = $enum_dict[$key]
-        $self.get_safe_word($key) = '$key'
-        """
+    $self.get_safe_word($key) = '$key'
+    """
 #if isinstance($value, str):
-        $value
+    $value
 #else
-        #for $line in $value
-        $line
-        #end for
+    #for $line in $value
+    $line
+    #end for
 #end if
-        """
+    """
 #end for
-
-if not TYPE_CHECKING and _DYNAMIC:
-    def _dynamic_enum():
-        # Dynamically create class that actually contains UNO enum instances
-        global $safe_name
-        _dict = {
-#for $key in $key_list
-#set $safe_key = $self.get_safe_word($key)
-            "$safe_key": ${safe_key},
-#end for
-        }
-
-        $safe_name = type('$safe_name', (object,), {
-            '__doc__': 'class created dynamically. Class loosly mimics Enum',
-            "__new__": uno_enum_class_new
-        })
-        for k, v in _dict.items():
-            setattr($safe_name, k, v)
-
-    _dynamic_enum()
 
 __all__ = ['$safe_name']
