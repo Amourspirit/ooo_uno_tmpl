@@ -1,4 +1,5 @@
 #from _base_struct import BaseStruct
+#import re
 #extends BaseStruct
 #implements respond
 $self.init_data()#slurp
@@ -22,6 +23,7 @@ $self.init_data()#slurp
 #attr $attribs = []
 $self.load_data()#slurp
 ## Main Template
+#set $re_underscore_hex = r"(_[0-9A-Fa-f]*)"
 #set $safe_name = $self.get_safe_word($name)
 #set $sorted = $self.get_sorted_names()
 #set $fullname = $namespace + '.' + $name
@@ -74,13 +76,37 @@ class ${safe_name}($self.get_class_inherits($name, $inherits)):
     """
 
 #end if
-    def __init__(self, $self.get_constructor_str(opt=True)):
+##    def __init__(self, $self.get_constructor_str(opt=True)):
+    def __init__(self, *args, **kwargs):
+        """
+        Constructor
+
+        Keyword Arguments:
 #for $i, $tpl in enumerate($sorted)
 #set $index = tpl[1]
 #set $itm = $attribs[$index]
 #set $itm_name = $self.get_safe_word($itm.name)
-        self._$self.camel_to_snake($itm_name) = $itm_name
+#set $itm_type = $itm.type.removeprefix('typing.')
+#set $itm_type = re.sub(re_underscore_hex, '', $itm_type, 1)
+            $itm_name ($itm_type, optional): $itm_name value
 #end for
+        """
+#for $i, $tpl in enumerate($sorted)
+#set $index = tpl[1]
+#set $itm = $attribs[$index]
+#set $itm_name = $self.get_safe_word($itm.name)
+        self._$self.camel_to_snake($itm_name) = None
+#end for
+
+        key_order = ($self.get_nt_names_str())
+        if len(args) > len(key_order):
+            raise ValueError("${safe_name}.__init__() To many parameters")
+        for i, arg in enumerate(args):
+            setattr(self, key_order[i], arg)
+        for k, v in kwargs.items():
+            if k in key_order:
+                setattr(self, k, v)
+
 #for $i, $tpl in enumerate($sorted)
 #set $index = tpl[1]
 #set $itm = $self.get_attrib_for_prop($index)
