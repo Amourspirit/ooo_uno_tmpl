@@ -1,5 +1,5 @@
-#from _base_const import BaseConst
-#extends BaseConst
+#from _base_const_dyn import BaseConstDyn
+#extends BaseConstDyn
 #implements respond
 $self.init_data()#slurp
 #attr $hex = False
@@ -17,9 +17,16 @@ $self.init_data()#slurp
 #attr $from_typing_imports = []
 #attr $requires_typing = False
 #attr $attribs = []
+##  following attr will get values from BaseEnumDyn class
+#attr $uno_obj = 'uno_obj'
+#attr $dyn = 'dyn'
 $self.load_data()#slurp
 ## Main Template
 #set $safe_name = $self.get_safe_word($name)
+#set $full_name = $namespace + '.' + $name
+#set $uno_obj_ns = $dyn + $full_name.removeprefix('com.sun.star').rsplit(sep='.', maxsplit=1)[0]
+#set $uno_obj_in = $uno_obj + $full_name.removeprefix('com.sun.star')
+#set $enum_class = 'IntFlag' if $flags else 'IntEnum'
 # coding: utf-8
 #include raw "resources/inc_lic.txt"
 # Const Class
@@ -28,23 +35,13 @@ $self.load_data()#slurp
 # Libre Office Version: $libre_office_ver
 #end if
 # Namespace: $namespace
-#if $requires_typing
-import typing
-#end if
-#for $imp in $imports
-import $imp
-#end for
-#for $frm, $imp in $from_imports
-from $frm import $imp
-#end for
-#for $frm, $imp in $from_typing_imports
-from $frm import $imp
-#end for
+from enum import $enum_class
+$self.get_rel_import(in_str=$uno_obj_in, ns=$uno_obj_ns) as $safe_name
 
 
-class ${safe_name}(object):
+class ${safe_name}Enum($enum_class):
     """
-    Const Class
+    Enum of Const Class $self.get_safe_word($name)
 
     #if isinstance($desc, str)
     $desc
@@ -53,14 +50,9 @@ class ${safe_name}(object):
     $line
         #end for
     #end if
-#if $link:
-
-    See Also:
-        `API $name <$link>`_
-#end if
     """
 #for $item in $attribs
-    $self.get_safe_word($item['name']) = $self.get_q_type($item['value'])
+    $self.get_safe_word($item['name']) = ${safe_name}.$self.get_safe_word($item['name'])
     #if len($item['lines']) > 0
     """
         #if isinstance($item['lines'], str)
@@ -74,4 +66,4 @@ class ${safe_name}(object):
     #end if
 #end for
 
-__all__ = ['${safe_name}']
+__all__ = ['${safe_name}', '${safe_name}Enum']
