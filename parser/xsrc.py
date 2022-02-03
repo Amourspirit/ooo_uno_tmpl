@@ -509,7 +509,7 @@ class Writer(base.WriteBase):
         return 'interface'
     
     def _get_template_dyn(self) -> Union[str, None]:
-        return None
+        return 'interface_dyn.tmpl'
 
     def write(self) -> Union[str, None]:
         """
