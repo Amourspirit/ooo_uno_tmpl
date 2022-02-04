@@ -881,11 +881,11 @@ def set_cmd_args(parser: argparse.ArgumentParser) -> None:
         dest='print_clear',
         default=True)
     parser.add_argument(
-        '-s', '--no-sort',
-        help='No sorting of results',
-        action='store_false',
+        '-s', '--sort',
+        help='sorting of results',
+        action='store_true',
         dest='sort',
-        default=True)
+        default=False)
     parser.add_argument(
         '-y', '--no-dynamic-struct',
         help='Template will generate dynamic struct content',
