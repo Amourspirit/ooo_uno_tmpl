@@ -6,7 +6,7 @@
   "name": "Calendar",
   "namespace": "com.sun.star.i18n",
   "parser_args": {
-    "sort": true,
+    "sort": false,
     "long_names": true,
     "remove_parent_inherited": true
   },
@@ -43,10 +43,10 @@
     "extends": [],
     "items": [
       {
-        "name": "Default",
-        "type": "bool",
+        "name": "StartOfWeek",
+        "type": "str",
         "lines": [
-          "if this is the default calendar for a given locale."
+          "the ID of the day with which the week begins."
         ]
       },
       {
@@ -57,17 +57,17 @@
         ]
       },
       {
+        "name": "Default",
+        "type": "bool",
+        "lines": [
+          "if this is the default calendar for a given locale."
+        ]
+      },
+      {
         "name": "Name",
         "type": "str",
         "lines": [
           "the name of the calendar, for example, Gregorian."
-        ]
-      },
-      {
-        "name": "StartOfWeek",
-        "type": "str",
-        "lines": [
-          "the ID of the day with which the week begins."
         ]
       },
       {
@@ -78,17 +78,17 @@
         ]
       },
       {
-        "name": "Eras",
-        "type": "typing.Tuple[CalendarItem_a86c0af1, ...]",
-        "lines": [
-          "the possible eras, see also CalendarItem."
-        ]
-      },
-      {
         "name": "Months",
         "type": "typing.Tuple[CalendarItem_a86c0af1, ...]",
         "lines": [
           "the months of the year, see also CalendarItem."
+        ]
+      },
+      {
+        "name": "Eras",
+        "type": "typing.Tuple[CalendarItem_a86c0af1, ...]",
+        "lines": [
+          "the possible eras, see also CalendarItem."
         ]
       }
     ]

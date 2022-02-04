@@ -6,7 +6,7 @@
   "name": "MenuMultipleChange",
   "namespace": "com.sun.star.mozilla",
   "parser_args": {
-    "sort": true,
+    "sort": false,
     "long_names": true,
     "remove_parent_inherited": true
   },
@@ -37,6 +37,13 @@
     "extends": [],
     "items": [
       {
+        "name": "ID",
+        "type": "int",
+        "lines": [
+          "unique ID of this menu item"
+        ]
+      },
+      {
         "name": "GroupID",
         "type": "int",
         "lines": [
@@ -44,10 +51,24 @@
         ]
       },
       {
-        "name": "ID",
+        "name": "PreItemID",
         "type": "int",
         "lines": [
-          "unique ID of this menu item"
+          "unique ID of the item directly above this menu item, used for fuzzy placement"
+        ]
+      },
+      {
+        "name": "ItemText",
+        "type": "str",
+        "lines": [
+          "text of the menu item"
+        ]
+      },
+      {
+        "name": "IsVisible",
+        "type": "bool",
+        "lines": [
+          "true if visible"
         ]
       },
       {
@@ -69,27 +90,6 @@
         "type": "bool",
         "lines": [
           "true if there is a checkmark"
-        ]
-      },
-      {
-        "name": "IsVisible",
-        "type": "bool",
-        "lines": [
-          "true if visible"
-        ]
-      },
-      {
-        "name": "ItemText",
-        "type": "str",
-        "lines": [
-          "text of the menu item"
-        ]
-      },
-      {
-        "name": "PreItemID",
-        "type": "int",
-        "lines": [
-          "unique ID of the item directly above this menu item, used for fuzzy placement"
         ]
       },
       {

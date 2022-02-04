@@ -6,7 +6,7 @@
   "name": "PropertyChangeEvent",
   "namespace": "com.sun.star.beans",
   "parser_args": {
-    "sort": true,
+    "sort": false,
     "long_names": true,
     "remove_parent_inherited": true
   },
@@ -49,24 +49,17 @@
     ],
     "items": [
       {
+        "name": "PropertyName",
+        "type": "str",
+        "lines": [
+          "contains the unique name of the property which changes its value."
+        ]
+      },
+      {
         "name": "Further",
         "type": "bool",
         "lines": [
           "contains TRUE if further events in the same transaction occur."
-        ]
-      },
-      {
-        "name": "NewValue",
-        "type": "object",
-        "lines": [
-          "contains the new value of the property."
-        ]
-      },
-      {
-        "name": "OldValue",
-        "type": "object",
-        "lines": [
-          "contains the old value of the property."
         ]
       },
       {
@@ -79,10 +72,17 @@
         ]
       },
       {
-        "name": "PropertyName",
-        "type": "str",
+        "name": "OldValue",
+        "type": "object",
         "lines": [
-          "contains the unique name of the property which changes its value."
+          "contains the old value of the property."
+        ]
+      },
+      {
+        "name": "NewValue",
+        "type": "object",
+        "lines": [
+          "contains the new value of the property."
         ]
       }
     ]

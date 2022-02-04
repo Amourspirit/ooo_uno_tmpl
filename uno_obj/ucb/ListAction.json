@@ -6,7 +6,7 @@
   "name": "ListAction",
   "namespace": "com.sun.star.ucb",
   "parser_args": {
-    "sort": true,
+    "sort": false,
     "long_names": true,
     "remove_parent_inherited": true
   },
@@ -33,10 +33,12 @@
     "extends": [],
     "items": [
       {
-        "name": "ActionInfo",
-        "type": "object",
+        "name": "Position",
+        "type": "int",
         "lines": [
-          "depending on the content of ListAction.ListActionType the ListAction.ActionInfo could contain additional information about the changes happened (see table above)."
+          "The position where something has happened (index begins with 1 as usual with JDBC ).",
+          "",
+          "Its value does not necessary indicate the new position in the new com.sun.star.sdbc.XResultSet, but a position while doing the changes step by step beginning with the old com.sun.star.sdbc.XResultSet."
         ]
       },
       {
@@ -56,12 +58,10 @@
         ]
       },
       {
-        "name": "Position",
-        "type": "int",
+        "name": "ActionInfo",
+        "type": "object",
         "lines": [
-          "The position where something has happened (index begins with 1 as usual with JDBC ).",
-          "",
-          "Its value does not necessary indicate the new position in the new com.sun.star.sdbc.XResultSet, but a position while doing the changes step by step beginning with the old com.sun.star.sdbc.XResultSet."
+          "depending on the content of ListAction.ListActionType the ListAction.ActionInfo could contain additional information about the changes happened (see table above)."
         ]
       }
     ]

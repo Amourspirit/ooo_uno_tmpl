@@ -760,7 +760,7 @@ def parse(**kwargs) -> Union[str, None]:
 
     Keyword Arguments:
         url (str): url to parse
-        sort (str, optional): Sorting of results. Default ``True``
+        sort (str, optional): Sorting of results. Default ``False``
         cache (str, optional): Caching. Default ``False``
         clear_on_print (str, optional): Clearing of terminal when otuput to terminal. Default ``False``
         dynamic_struct (str, optional): Template will generate dynameic struct content. Default ``True``
@@ -784,7 +784,7 @@ def parse(**kwargs) -> Union[str, None]:
     """
     global logger
     _url = str(kwargs['url'])
-    _sort = bool(kwargs.get('sort', True))
+    _sort = bool(kwargs.get('sort', False))
     _cache = bool(kwargs.get('cache', True))
     _print_clear = bool(kwargs.get('clear_on_print', False))
     _clipboard = bool(kwargs.get('copy_clipboard', False))

@@ -48,7 +48,6 @@ if not TYPE_CHECKING and _DYNAMIC:
         import uno
         # Dynamically create uno struct using uno
         global $safe_name
-        key_order = ($self.get_nt_names_str())
 
         def _struct_init(*args, **kwargs):
             arg_len = len(args)
@@ -59,8 +58,9 @@ if not TYPE_CHECKING and _DYNAMIC:
                         '${full_name}', args[0])
                 return struct
 
+            key_order = ($self.get_nt_names_str())
             struct = uno.createUnoStruct('${full_name}')
-            if len(args) > len(key_order):
+            if arg_len > len(key_order):
                 raise ValueError("${safe_name}.__init__() To many parameters")
             for i, arg in enumerate(args):
                 setattr(struct, key_order[i], arg)

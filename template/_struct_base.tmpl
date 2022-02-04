@@ -107,7 +107,15 @@ class ${safe_name}($self.get_class_inherits($name, $inherits)):
 #end for
 
         key_order = ($self.get_nt_names_str())
-        if len(args) > len(key_order):
+        arg_len = len(args)
+        if arg_len == 1:
+            if isinstance(args[0], $safe_name):
+                oth = args[0]
+                for key in key_order:
+                    setattr(self, key, getattr(oth, key))
+                return
+
+        if  arg_len > len(key_order):
             raise ValueError("${safe_name}.__init__() To many parameters")
         for i, arg in enumerate(args):
             setattr(self, key_order[i], arg)

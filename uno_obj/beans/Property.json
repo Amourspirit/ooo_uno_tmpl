@@ -6,7 +6,7 @@
   "name": "Property",
   "namespace": "com.sun.star.beans",
   "parser_args": {
-    "sort": true,
+    "sort": false,
     "long_names": true,
     "remove_parent_inherited": true
   },
@@ -35,10 +35,12 @@
     "extends": [],
     "items": [
       {
-        "name": "Attributes",
-        "type": "int",
+        "name": "Name",
+        "type": "str",
         "lines": [
-          "This field may contain zero or more constants of the PropertyAttribute constants group."
+          "specifies the name of the property.",
+          "",
+          "The name is unique within an XPropertySet. Upper and lower case are distinguished."
         ]
       },
       {
@@ -51,21 +53,19 @@
         ]
       },
       {
-        "name": "Name",
-        "type": "str",
-        "lines": [
-          "specifies the name of the property.",
-          "",
-          "The name is unique within an XPropertySet. Upper and lower case are distinguished."
-        ]
-      },
-      {
         "name": "Type",
         "type": "object",
         "lines": [
           "contains an object that identifies the declared type for the property.",
           "",
           "If the property has multiple types or the type is not known, but not an any, then void must be returned."
+        ]
+      },
+      {
+        "name": "Attributes",
+        "type": "int",
+        "lines": [
+          "This field may contain zero or more constants of the PropertyAttribute constants group."
         ]
       }
     ]

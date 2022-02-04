@@ -6,7 +6,7 @@
   "name": "TextSegment",
   "namespace": "com.sun.star.accessibility",
   "parser_args": {
-    "sort": true,
+    "sort": false,
     "long_names": true,
     "remove_parent_inherited": true
   },
@@ -45,12 +45,12 @@
     "extends": [],
     "items": [
       {
-        "name": "SegmentEnd",
-        "type": "int",
+        "name": "SegmentText",
+        "type": "str",
         "lines": [
-          "Index of the character directly behind the last character of the text segment represented by this structure.",
+          "A copy of the text segment of the enclosing text delimited by the text indices TextSegment.SegmentStart and TextSegment.SegmentEnd.",
           "",
-          "The index refers to the enclosing text."
+          "Modifying it does not alter the enclosing text."
         ]
       },
       {
@@ -63,12 +63,12 @@
         ]
       },
       {
-        "name": "SegmentText",
-        "type": "str",
+        "name": "SegmentEnd",
+        "type": "int",
         "lines": [
-          "A copy of the text segment of the enclosing text delimited by the text indices TextSegment.SegmentStart and TextSegment.SegmentEnd.",
+          "Index of the character directly behind the last character of the text segment represented by this structure.",
           "",
-          "Modifying it does not alter the enclosing text."
+          "The index refers to the enclosing text."
         ]
       }
     ]

@@ -6,7 +6,7 @@
   "name": "StrokeAttributes",
   "namespace": "com.sun.star.rendering",
   "parser_args": {
-    "sort": true,
+    "sort": false,
     "long_names": true,
     "remove_parent_inherited": true
   },
@@ -39,21 +39,12 @@
     "extends": [],
     "items": [
       {
-        "name": "EndCapType",
-        "type": "int",
+        "name": "StrokeWidth",
+        "type": "float",
         "lines": [
-          "The end shape of the stroke.",
+          "Defines the width of the stroke, measured in user coordinate space.",
           "",
-          "The end point is the last point of every polygon of the path poly-polygon."
-        ]
-      },
-      {
-        "name": "JoinType",
-        "type": "int",
-        "lines": [
-          "The join shape of the stroke.",
-          "",
-          "After every sub-stroke, i.e. after every line or curve segment within a single path polygon, a shape of this type is inserted into the stroke to glue the segments together. Please note that distinct polygons within the path poly-polygon are not connected, and therefore also not joined via the shape specified here."
+          "This value must be positive (or 0.0)"
         ]
       },
       {
@@ -77,12 +68,21 @@
         ]
       },
       {
-        "name": "StrokeWidth",
-        "type": "float",
+        "name": "EndCapType",
+        "type": "int",
         "lines": [
-          "Defines the width of the stroke, measured in user coordinate space.",
+          "The end shape of the stroke.",
           "",
-          "This value must be positive (or 0.0)"
+          "The end point is the last point of every polygon of the path poly-polygon."
+        ]
+      },
+      {
+        "name": "JoinType",
+        "type": "int",
+        "lines": [
+          "The join shape of the stroke.",
+          "",
+          "After every sub-stroke, i.e. after every line or curve segment within a single path polygon, a shape of this type is inserted into the stroke to glue the segments together. Please note that distinct polygons within the path poly-polygon are not connected, and therefore also not joined via the shape specified here."
         ]
       },
       {

@@ -6,7 +6,7 @@
   "name": "DataFlavor",
   "namespace": "com.sun.star.datatransfer",
   "parser_args": {
-    "sort": true,
+    "sort": false,
     "long_names": true,
     "remove_parent_inherited": true
   },
@@ -33,10 +33,12 @@
     "extends": [],
     "items": [
       {
-        "name": "DataType",
-        "type": "object",
+        "name": "MimeType",
+        "type": "str",
         "lines": [
-          "The type of the object to transfer, for example, XOutputStream."
+          "The MIME content-type (type/subtype) string describing the data format of the object to transfer.",
+          "",
+          "MimeType must conform to Rfc2045 and Rfc2046)"
         ]
       },
       {
@@ -47,12 +49,10 @@
         ]
       },
       {
-        "name": "MimeType",
-        "type": "str",
+        "name": "DataType",
+        "type": "object",
         "lines": [
-          "The MIME content-type (type/subtype) string describing the data format of the object to transfer.",
-          "",
-          "MimeType must conform to Rfc2045 and Rfc2046)"
+          "The type of the object to transfer, for example, XOutputStream."
         ]
       }
     ]
