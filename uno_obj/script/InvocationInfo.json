@@ -6,7 +6,7 @@
   "name": "InvocationInfo",
   "namespace": "com.sun.star.script",
   "parser_args": {
-    "sort": true,
+    "sort": false,
     "long_names": true,
     "remove_parent_inherited": true
   },
@@ -51,6 +51,20 @@
     "extends": [],
     "items": [
       {
+        "name": "aName",
+        "type": "str",
+        "lines": [
+          "Name of the method or property."
+        ]
+      },
+      {
+        "name": "eMemberType",
+        "type": "MemberType_b1e00b97",
+        "lines": [
+          "Kind of the member (method or property)."
+        ]
+      },
+      {
         "name": "PropertyAttribute",
         "type": "int",
         "lines": [
@@ -62,13 +76,6 @@
         ]
       },
       {
-        "name": "aName",
-        "type": "str",
-        "lines": [
-          "Name of the method or property."
-        ]
-      },
-      {
         "name": "aType",
         "type": "object",
         "lines": [
@@ -76,10 +83,10 @@
         ]
       },
       {
-        "name": "eMemberType",
-        "type": "MemberType_b1e00b97",
+        "name": "aParamTypes",
+        "type": "typing.Tuple[object, ...]",
         "lines": [
-          "Kind of the member (method or property)."
+          "Types method parameters, for properties this sequence is empty."
         ]
       },
       {
@@ -87,13 +94,6 @@
         "type": "typing.Tuple[ParamMode_d7260ca9, ...]",
         "lines": [
           "Mode of method parameters (IN, OUT, INOUT), for properties this sequence is empty."
-        ]
-      },
-      {
-        "name": "aParamTypes",
-        "type": "typing.Tuple[object, ...]",
-        "lines": [
-          "Types method parameters, for properties this sequence is empty."
         ]
       }
     ]

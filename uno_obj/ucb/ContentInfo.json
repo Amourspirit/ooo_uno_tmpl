@@ -6,7 +6,7 @@
   "name": "ContentInfo",
   "namespace": "com.sun.star.ucb",
   "parser_args": {
-    "sort": true,
+    "sort": false,
     "long_names": true,
     "remove_parent_inherited": true
   },
@@ -43,6 +43,15 @@
     "extends": [],
     "items": [
       {
+        "name": "Type",
+        "type": "str",
+        "lines": [
+          "A type identifier string for a content.",
+          "",
+          "This is an implementation specific string characterizing the kind of a content (e.g. \\\"application/vnd.sun.star.hierarchy-link\\\"). The value of this member should match the value returned by XContent.getContentType() of an appropriate content."
+        ]
+      },
+      {
         "name": "Attributes",
         "type": "int",
         "lines": [
@@ -53,15 +62,6 @@
           "It is highly recommended to fill these flags very accurately, as they are very important when transferring contents between different ContentProviders.",
           "",
           "The value can be one of the ContentInfoAttribute constants."
-        ]
-      },
-      {
-        "name": "Type",
-        "type": "str",
-        "lines": [
-          "A type identifier string for a content.",
-          "",
-          "This is an implementation specific string characterizing the kind of a content (e.g. \\\"application/vnd.sun.star.hierarchy-link\\\"). The value of this member should match the value returned by XContent.getContentType() of an appropriate content."
         ]
       },
       {

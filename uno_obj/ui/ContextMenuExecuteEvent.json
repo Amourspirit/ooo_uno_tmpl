@@ -6,7 +6,7 @@
   "name": "ContextMenuExecuteEvent",
   "namespace": "com.sun.star.ui",
   "parser_args": {
-    "sort": true,
+    "sort": false,
     "long_names": true,
     "remove_parent_inherited": true
   },
@@ -59,12 +59,10 @@
     "extends": [],
     "items": [
       {
-        "name": "ActionTriggerContainer",
-        "type": "XIndexContainer_1c040ebe",
+        "name": "SourceWindow",
+        "type": "XWindow_713b0924",
         "lines": [
-          "enables the access to the menu content.",
-          "",
-          "The implementing object has to support the service com.sun.star.ui.ActionTriggerContainer;"
+          "contains the window where the context menu has been requested"
         ]
       },
       {
@@ -75,17 +73,19 @@
         ]
       },
       {
+        "name": "ActionTriggerContainer",
+        "type": "XIndexContainer_1c040ebe",
+        "lines": [
+          "enables the access to the menu content.",
+          "",
+          "The implementing object has to support the service com.sun.star.ui.ActionTriggerContainer;"
+        ]
+      },
+      {
         "name": "Selection",
         "type": "XSelectionSupplier_fed20e15",
         "lines": [
           "provides the current selection inside the source window."
-        ]
-      },
-      {
-        "name": "SourceWindow",
-        "type": "XWindow_713b0924",
-        "lines": [
-          "contains the window where the context menu has been requested"
         ]
       }
     ]

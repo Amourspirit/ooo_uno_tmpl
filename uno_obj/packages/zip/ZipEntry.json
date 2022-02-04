@@ -6,7 +6,7 @@
   "name": "ZipEntry",
   "namespace": "com.sun.star.packages.zip",
   "parser_args": {
-    "sort": true,
+    "sort": false,
     "long_names": true,
     "remove_parent_inherited": true
   },
@@ -39,24 +39,10 @@
     "extends": [],
     "items": [
       {
-        "name": "nCompressedSize",
+        "name": "nVersion",
         "type": "int",
         "lines": [
-          "uncompressed size of entry data"
-        ]
-      },
-      {
-        "name": "nCrc",
-        "type": "int",
-        "lines": [
-          "CRC-32 of entry data."
-        ]
-      },
-      {
-        "name": "nDiskNumber",
-        "type": "int",
-        "lines": [
-          "The number of the disk this entry is saved on."
+          "version needed to extract"
         ]
       },
       {
@@ -74,10 +60,24 @@
         ]
       },
       {
-        "name": "nOffset",
+        "name": "nTime",
         "type": "int",
         "lines": [
-          "offset of LOC header"
+          "modification time"
+        ]
+      },
+      {
+        "name": "nCrc",
+        "type": "int",
+        "lines": [
+          "CRC-32 of entry data."
+        ]
+      },
+      {
+        "name": "nCompressedSize",
+        "type": "int",
+        "lines": [
+          "uncompressed size of entry data"
         ]
       },
       {
@@ -88,24 +88,17 @@
         ]
       },
       {
-        "name": "nTime",
+        "name": "nOffset",
         "type": "int",
         "lines": [
-          "modification time"
+          "offset of LOC header"
         ]
       },
       {
-        "name": "nVersion",
+        "name": "nDiskNumber",
         "type": "int",
         "lines": [
-          "version needed to extract"
-        ]
-      },
-      {
-        "name": "sComment",
-        "type": "str",
-        "lines": [
-          "optional comment"
+          "The number of the disk this entry is saved on."
         ]
       },
       {
@@ -113,6 +106,13 @@
         "type": "str",
         "lines": [
           "the entry name"
+        ]
+      },
+      {
+        "name": "sComment",
+        "type": "str",
+        "lines": [
+          "optional comment"
         ]
       },
       {

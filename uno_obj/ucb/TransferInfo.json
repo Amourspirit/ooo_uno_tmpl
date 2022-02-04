@@ -6,7 +6,7 @@
   "name": "TransferInfo",
   "namespace": "com.sun.star.ucb",
   "parser_args": {
-    "sort": true,
+    "sort": false,
     "long_names": true,
     "remove_parent_inherited": true
   },
@@ -42,16 +42,12 @@
         ]
       },
       {
-        "name": "NameClash",
-        "type": "int",
+        "name": "SourceURL",
+        "type": "str",
         "lines": [
-          "describes how to act in case of title clashes while transferring the data.",
+          "contains the URL of the source of the action (e.g.",
           "",
-          "A title clash for instance occurs, if a file named \\\"foo.txt\\\" is to be transferred to a folder already containing another file named \\\"foo.txt\\\".",
-          "",
-          "The value can be one of the NameClash constants.",
-          "",
-          "Implementations that are not able to detect whether there is a clashing resource may ignore NameClash.ERROR and NameClash.RENAME always write the new data."
+          "the URL of a file to move)."
         ]
       },
       {
@@ -64,12 +60,16 @@
         ]
       },
       {
-        "name": "SourceURL",
-        "type": "str",
+        "name": "NameClash",
+        "type": "int",
         "lines": [
-          "contains the URL of the source of the action (e.g.",
+          "describes how to act in case of title clashes while transferring the data.",
           "",
-          "the URL of a file to move)."
+          "A title clash for instance occurs, if a file named \\\"foo.txt\\\" is to be transferred to a folder already containing another file named \\\"foo.txt\\\".",
+          "",
+          "The value can be one of the NameClash constants.",
+          "",
+          "Implementations that are not able to detect whether there is a clashing resource may ignore NameClash.ERROR and NameClash.RENAME always write the new data."
         ]
       }
     ]

@@ -25,11 +25,11 @@ value: string or list, tuple of strings
 $self.load_data()#slurp
 ## Main Template
 #set $safe_name = $self.get_safe_word($name)
+#set $fullname = $namespace + '.' + $safe_name
 #set s_enum = ''
 #set $key_list = list($enum_dict.keys())
-#set $full_name = $namespace + '.' + $name
-#set $uno_obj_ns = $dyn + $full_name.removeprefix('com.sun.star').rsplit(sep='.', maxsplit=1)[0]
-#set $uno_obj_in = $uno_obj + $full_name.removeprefix('com.sun.star')
+#set $uno_obj_ns = $dyn + $fullname.removeprefix('com.sun.star').rsplit(sep='.', maxsplit=1)[0]
+#set $uno_obj_in = $uno_obj + $fullname.removeprefix('com.sun.star')
 #set $s_enum = $self.dict_keys_to_str($enum_dict)
 # coding: utf-8
 #include raw "resources/inc_lic.txt"
@@ -48,7 +48,7 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 if not TYPE_CHECKING and _DYNAMIC:
     from ooo_uno.helper.enum_helper import uno_enum_class_new
-    from $full_name import ($s_enum)
+    from $fullname import ($s_enum)
 
     def _dynamic_enum():
         # Dynamically create class that actually contains UNO enum instances

@@ -1,4 +1,5 @@
 #from _base_struct import BaseStruct
+#import re
 #extends BaseStruct
 #implements respond
 $self.init_data()#slurp
@@ -22,9 +23,10 @@ $self.init_data()#slurp
 #attr $attribs = []
 $self.load_data()#slurp
 ## Main Template
+#set $re_underscore_hex = r"(_[0-9A-Fa-f]*)"
 #set $safe_name = $self.get_safe_word($name)
 #set $sorted = $self.get_sorted_names()
-#set $fullname = $namespace + '.' + $name
+#set $fullname = $namespace + '.' + $safe_name
 # coding: utf-8
 #include raw "resources/inc_lic.txt"
 # Struct Class
@@ -72,15 +74,55 @@ class ${safe_name}($self.get_class_inherits($name, $inherits)):
         `API $name <$link>`_
     #end if
     """
-
 #end if
-    def __init__(self, $self.get_constructor_str(opt=True)):
+## typeName: Literal requires python >= 3.8
+    typeName: str = '$fullname'
+    """Literal Constant ``$fullname``"""
+
+    def __init__(self, *args, **kwargs):
+        """
+        Constructor
+
+        Other Arguments:
+            First positinal arg can be another ``$safe_name`` instance,
+                if it is the only argument passed to contructor;
+                Otherwise, postitional arguments are treated as ``$safe_name``
+                values. Following the order of ``Keyword Arguments``.
+
+        Keyword Arguments:
 #for $i, $tpl in enumerate($sorted)
 #set $index = tpl[1]
 #set $itm = $attribs[$index]
 #set $itm_name = $self.get_safe_word($itm.name)
-        self._$self.camel_to_snake($itm_name) = $itm_name
+#set $itm_type = $itm.type.removeprefix('typing.')
+#set $itm_type = re.sub(re_underscore_hex, '', $itm_type, 1)
+            $itm_name ($itm_type, optional): $itm_name value
 #end for
+        """
+#for $i, $tpl in enumerate($sorted)
+#set $index = tpl[1]
+#set $itm = $attribs[$index]
+#set $itm_name = $self.get_safe_word($itm.name)
+        self._$self.camel_to_snake($itm_name) = None
+#end for
+
+        key_order = ($self.get_nt_names_str())
+        arg_len = len(args)
+        if arg_len == 1:
+            if isinstance(args[0], $safe_name):
+                oth = args[0]
+                for key in key_order:
+                    setattr(self, key, getattr(oth, key))
+                return
+
+        if  arg_len > len(key_order):
+            raise ValueError("${safe_name}.__init__() To many parameters")
+        for i, arg in enumerate(args):
+            setattr(self, key_order[i], arg)
+        for k, v in kwargs.items():
+            if k in key_order:
+                setattr(self, k, v)
+
 #for $i, $tpl in enumerate($sorted)
 #set $index = tpl[1]
 #set $itm = $self.get_attrib_for_prop($index)

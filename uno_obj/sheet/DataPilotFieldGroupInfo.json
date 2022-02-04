@@ -6,7 +6,7 @@
   "name": "DataPilotFieldGroupInfo",
   "namespace": "com.sun.star.sheet",
   "parser_args": {
-    "sort": true,
+    "sort": false,
     "long_names": true,
     "remove_parent_inherited": true
   },
@@ -47,26 +47,10 @@
     "extends": [],
     "items": [
       {
-        "name": "End",
-        "type": "float",
+        "name": "HasAutoStart",
+        "type": "bool",
         "lines": [
-          "specifies the end value for the grouping if HasAutoEnd is set to FALSE."
-        ]
-      },
-      {
-        "name": "GroupBy",
-        "type": "int",
-        "lines": [
-          "specifies the grouping of the date values."
-        ]
-      },
-      {
-        "name": "Groups",
-        "type": "XNameAccess_e2ab0cf6",
-        "lines": [
-          "specifies the named groups in this field if there are some.",
-          "",
-          "The returned object is an instance of DataPilotFieldGroups . The collection of groups can be modified by inserting, removing, replacing, or renaming single groups or item names in the groups. When writing back this struct containing such a changed collection of groups to the DataPilotField.GroupInfo property, the modified grouping settings are applied at the DataPilot field."
+          "specifies whether the start value for the grouping is taken automatically from the minimum of the item values."
         ]
       },
       {
@@ -77,17 +61,40 @@
         ]
       },
       {
-        "name": "HasAutoStart",
-        "type": "bool",
-        "lines": [
-          "specifies whether the start value for the grouping is taken automatically from the minimum of the item values."
-        ]
-      },
-      {
         "name": "HasDateValues",
         "type": "bool",
         "lines": [
           "specifies whether date values are grouped by ranges of days."
+        ]
+      },
+      {
+        "name": "Start",
+        "type": "float",
+        "lines": [
+          "specifies the start value for the grouping if HasAutoStart is set to FALSE."
+        ]
+      },
+      {
+        "name": "End",
+        "type": "float",
+        "lines": [
+          "specifies the end value for the grouping if HasAutoEnd is set to FALSE."
+        ]
+      },
+      {
+        "name": "Step",
+        "type": "float",
+        "lines": [
+          "specifies the size of the ranges for numeric or day grouping.",
+          "",
+          "Example: With HasAutoStart set to FALSE, Start set to 2, and Step set to 3, the first group will contain all values greater than or equal to 2 and less than 5. The second group will contain all values greater than or equal to 5 and less than 8, and so on."
+        ]
+      },
+      {
+        "name": "GroupBy",
+        "type": "int",
+        "lines": [
+          "specifies the grouping of the date values."
         ]
       },
       {
@@ -100,19 +107,12 @@
         ]
       },
       {
-        "name": "Start",
-        "type": "float",
+        "name": "Groups",
+        "type": "XNameAccess_e2ab0cf6",
         "lines": [
-          "specifies the start value for the grouping if HasAutoStart is set to FALSE."
-        ]
-      },
-      {
-        "name": "Step",
-        "type": "float",
-        "lines": [
-          "specifies the size of the ranges for numeric or day grouping.",
+          "specifies the named groups in this field if there are some.",
           "",
-          "Example: With HasAutoStart set to FALSE, Start set to 2, and Step set to 3, the first group will contain all values greater than or equal to 2 and less than 5. The second group will contain all values greater than or equal to 5 and less than 8, and so on."
+          "The returned object is an instance of DataPilotFieldGroups . The collection of groups can be modified by inserting, removing, replacing, or renaming single groups or item names in the groups. When writing back this struct containing such a changed collection of groups to the DataPilotField.GroupInfo property, the modified grouping settings are applied at the DataPilot field."
         ]
       }
     ]

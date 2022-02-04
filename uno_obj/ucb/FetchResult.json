@@ -6,7 +6,7 @@
   "name": "FetchResult",
   "namespace": "com.sun.star.ucb",
   "parser_args": {
-    "sort": true,
+    "sort": false,
     "long_names": true,
     "remove_parent_inherited": true
   },
@@ -39,12 +39,14 @@
     "extends": [],
     "items": [
       {
-        "name": "FetchError",
+        "name": "StartIndex",
         "type": "int",
         "lines": [
-          "indicates whether and which error has occurred, while fetching.",
+          "indicates the index of the first row contained in FetchResult.Rows in the original result set.",
           "",
-          "The value may contain zero or more constants of the FetchError constants group."
+          "So if FetchResult.StartIndex equals 3, the first element in the sequence FetchResult.Rows contains the data of the index 3 in the original result set.",
+          "",
+          "The following rows are one after the other, but the direction depends on the value of FetchResult.Direction"
         ]
       },
       {
@@ -57,14 +59,12 @@
         ]
       },
       {
-        "name": "StartIndex",
+        "name": "FetchError",
         "type": "int",
         "lines": [
-          "indicates the index of the first row contained in FetchResult.Rows in the original result set.",
+          "indicates whether and which error has occurred, while fetching.",
           "",
-          "So if FetchResult.StartIndex equals 3, the first element in the sequence FetchResult.Rows contains the data of the index 3 in the original result set.",
-          "",
-          "The following rows are one after the other, but the direction depends on the value of FetchResult.Direction"
+          "The value may contain zero or more constants of the FetchError constants group."
         ]
       },
       {

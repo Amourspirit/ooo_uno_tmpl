@@ -6,7 +6,7 @@
   "name": "GluePoint2",
   "namespace": "com.sun.star.drawing",
   "parser_args": {
-    "sort": true,
+    "sort": false,
     "long_names": true,
     "remove_parent_inherited": true
   },
@@ -55,12 +55,12 @@
     "extends": [],
     "items": [
       {
-        "name": "Escape",
-        "type": "EscapeDirection_fdc50de6",
+        "name": "Position",
+        "type": "Point_5fb2085e",
         "lines": [
-          "this member specifies the escape direction for a glue point.",
+          "This is the position of this glue point.",
           "",
-          "The escape direction is the direction the connecting line escapes the shape."
+          "Depending on the flag IsRelative, this is either in 1/100cm or in 1/100%."
         ]
       },
       {
@@ -71,30 +71,30 @@
         ]
       },
       {
-        "name": "IsUserDefined",
-        "type": "bool",
-        "lines": [
-          "if this flag is set to false, this is a default glue point.",
-          "",
-          "Some shapes may have default glue points attached to them which cannot be altered or removed."
-        ]
-      },
-      {
-        "name": "Position",
-        "type": "Point_5fb2085e",
-        "lines": [
-          "This is the position of this glue point.",
-          "",
-          "Depending on the flag IsRelative, this is either in 1/100cm or in 1/100%."
-        ]
-      },
-      {
         "name": "PositionAlignment",
         "type": "Alignment_b1400b93",
         "lines": [
           "if this glue points position is not relative, this enum specifies the vertical and horizontal alignment of this point.",
           "",
           "The alignment specifies how the glue point is moved if the shape is resized."
+        ]
+      },
+      {
+        "name": "Escape",
+        "type": "EscapeDirection_fdc50de6",
+        "lines": [
+          "this member specifies the escape direction for a glue point.",
+          "",
+          "The escape direction is the direction the connecting line escapes the shape."
+        ]
+      },
+      {
+        "name": "IsUserDefined",
+        "type": "bool",
+        "lines": [
+          "if this flag is set to false, this is a default glue point.",
+          "",
+          "Some shapes may have default glue points attached to them which cannot be altered or removed."
         ]
       }
     ]

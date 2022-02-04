@@ -6,7 +6,7 @@
   "name": "WindowDescriptor",
   "namespace": "com.sun.star.awt",
   "parser_args": {
-    "sort": true,
+    "sort": false,
     "long_names": true,
     "remove_parent_inherited": true
   },
@@ -53,12 +53,19 @@
     "extends": [],
     "items": [
       {
-        "name": "Bounds",
-        "type": "Rectangle_84b109e9",
+        "name": "Type",
+        "type": "WindowClass_99f60ac2",
         "lines": [
-          "specifies the position and size of the window.",
+          "specifies the type of window."
+        ]
+      },
+      {
+        "name": "WindowServiceName",
+        "type": "str",
+        "lines": [
+          "specifies the name of the component service.",
           "",
-          "This member is ignored if the window attribute is com.sun.star.awt.WindowAttribute.FULLSIZE."
+          "A zero length name means that the VCL creates a blank top, a container, or a simple window. The following service names are defined:"
         ]
       },
       {
@@ -80,10 +87,12 @@
         ]
       },
       {
-        "name": "Type",
-        "type": "WindowClass_99f60ac2",
+        "name": "Bounds",
+        "type": "Rectangle_84b109e9",
         "lines": [
-          "specifies the type of window."
+          "specifies the position and size of the window.",
+          "",
+          "This member is ignored if the window attribute is com.sun.star.awt.WindowAttribute.FULLSIZE."
         ]
       },
       {
@@ -93,15 +102,6 @@
           "specifies the window attributes.",
           "",
           "Use one value out of the constant group com.sun.star.awt.WindowAttribute."
-        ]
-      },
-      {
-        "name": "WindowServiceName",
-        "type": "str",
-        "lines": [
-          "specifies the name of the component service.",
-          "",
-          "A zero length name means that the VCL creates a blank top, a container, or a simple window. The following service names are defined:"
         ]
       }
     ]

@@ -6,7 +6,7 @@
   "name": "Texture",
   "namespace": "com.sun.star.rendering",
   "parser_args": {
-    "sort": true,
+    "sort": false,
     "long_names": true,
     "remove_parent_inherited": true
   },
@@ -85,6 +85,15 @@
         ]
       },
       {
+        "name": "NumberOfHatchPolygons",
+        "type": "int",
+        "lines": [
+          "Specifies the number of parameterized polygons used for the texture.",
+          "",
+          "This member specifies the number of polygons the parametric polygon interface is queried. The continuous range [0,1] of the XParametricPolyPolygon.getOutline() method is divided up into numberOfHatchPolygons equal parts, and for everyone of these parts, the start of the interval is plugged into the getOutline method. For example, if numberOfHatchPolygons is 2, then getOutline is called twice, once with 0.0 and once with 0.5. Use this parameter to control the density of the hatching."
+        ]
+      },
+      {
         "name": "Bitmap",
         "type": "XBitmap_b1b70b7b",
         "lines": [
@@ -105,15 +114,6 @@
         ]
       },
       {
-        "name": "HatchAttributes",
-        "type": "StrokeAttributes_2dd10f65",
-        "lines": [
-          "Specifies the stroke attributes used for hatching.",
-          "",
-          "Use 0.0 as the strokeWidth here to indicate hair lines."
-        ]
-      },
-      {
         "name": "Hatching",
         "type": "XParametricPolyPolygon2D_b3511228",
         "lines": [
@@ -123,12 +123,12 @@
         ]
       },
       {
-        "name": "NumberOfHatchPolygons",
-        "type": "int",
+        "name": "HatchAttributes",
+        "type": "StrokeAttributes_2dd10f65",
         "lines": [
-          "Specifies the number of parameterized polygons used for the texture.",
+          "Specifies the stroke attributes used for hatching.",
           "",
-          "This member specifies the number of polygons the parametric polygon interface is queried. The continuous range [0,1] of the XParametricPolyPolygon.getOutline() method is divided up into numberOfHatchPolygons equal parts, and for everyone of these parts, the start of the interval is plugged into the getOutline method. For example, if numberOfHatchPolygons is 2, then getOutline is called twice, once with 0.0 and once with 0.5. Use this parameter to control the density of the hatching."
+          "Use 0.0 as the strokeWidth here to indicate hair lines."
         ]
       },
       {

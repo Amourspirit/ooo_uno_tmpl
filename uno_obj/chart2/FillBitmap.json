@@ -6,7 +6,7 @@
   "name": "FillBitmap",
   "namespace": "com.sun.star.chart2",
   "parser_args": {
-    "sort": true,
+    "sort": false,
     "long_names": true,
     "remove_parent_inherited": true
   },
@@ -59,12 +59,12 @@
     "extends": [],
     "items": [
       {
-        "name": "aBitmapMode",
-        "type": "BitmapMode_bced0bd6",
+        "name": "aURL",
+        "type": "str",
         "lines": [
-          "this enum selects how an area is filled with a single bitmap.",
+          "a URL to the bitmap used.",
           "",
-          "It may be repeated, stretched or displayed with blank space around it."
+          "This may be an internal URL of the graphics manager."
         ]
       },
       {
@@ -91,6 +91,15 @@
         ]
       },
       {
+        "name": "bLogicalSize",
+        "type": "bool",
+        "lines": [
+          "specifies if the size is given in percentage or as an absolute value.",
+          "",
+          "If this is TRUE, the properties SizeX and SizeY contain the size of the tile in percent of the size of the original bitmap. If this is FALSE, the size of the tile is specified with 1/100th mm."
+        ]
+      },
+      {
         "name": "aSize",
         "type": "Size_576707ef",
         "lines": [
@@ -100,21 +109,12 @@
         ]
       },
       {
-        "name": "aURL",
-        "type": "str",
+        "name": "aBitmapMode",
+        "type": "BitmapMode_bced0bd6",
         "lines": [
-          "a URL to the bitmap used.",
+          "this enum selects how an area is filled with a single bitmap.",
           "",
-          "This may be an internal URL of the graphics manager."
-        ]
-      },
-      {
-        "name": "bLogicalSize",
-        "type": "bool",
-        "lines": [
-          "specifies if the size is given in percentage or as an absolute value.",
-          "",
-          "If this is TRUE, the properties SizeX and SizeY contain the size of the tile in percent of the size of the original bitmap. If this is FALSE, the size of the tile is specified with 1/100th mm."
+          "It may be repeated, stretched or displayed with blank space around it."
         ]
       }
     ]

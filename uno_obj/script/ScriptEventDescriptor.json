@@ -6,7 +6,7 @@
   "name": "ScriptEventDescriptor",
   "namespace": "com.sun.star.script",
   "parser_args": {
-    "sort": true,
+    "sort": false,
     "long_names": true,
     "remove_parent_inherited": true
   },
@@ -33,12 +33,10 @@
     "extends": [],
     "items": [
       {
-        "name": "AddListenerParam",
+        "name": "ListenerType",
         "type": "str",
         "lines": [
-          "data to be used if the addListener method needs an additional parameter.",
-          "",
-          "If the type of this parameter is different from string, it will be converted, when added."
+          "listener type as string, same as listener-XIdlClass.getName()."
         ]
       },
       {
@@ -49,17 +47,12 @@
         ]
       },
       {
-        "name": "ListenerType",
+        "name": "AddListenerParam",
         "type": "str",
         "lines": [
-          "listener type as string, same as listener-XIdlClass.getName()."
-        ]
-      },
-      {
-        "name": "ScriptCode",
-        "type": "str",
-        "lines": [
-          "script code as string (the code has to correspond with the language defined by ScriptType)."
+          "data to be used if the addListener method needs an additional parameter.",
+          "",
+          "If the type of this parameter is different from string, it will be converted, when added."
         ]
       },
       {
@@ -67,6 +60,13 @@
         "type": "str",
         "lines": [
           "type of the script language as string; for example, \\\"Basic\\\" or \\\"StarScript\\\"."
+        ]
+      },
+      {
+        "name": "ScriptCode",
+        "type": "str",
+        "lines": [
+          "script code as string (the code has to correspond with the language defined by ScriptType)."
         ]
       }
     ]

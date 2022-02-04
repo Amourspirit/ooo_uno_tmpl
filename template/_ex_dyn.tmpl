@@ -25,9 +25,9 @@ $self.init_data()#slurp
 $self.load_data()#slurp
 ## main Template
 #set $safe_name = $self.get_safe_word($name)
-#set $full_name = $namespace + '.' + $name
-#set $uno_obj_ns = $dyn + $full_name.removeprefix('com.sun.star').rsplit(sep='.', maxsplit=1)[0]
-#set $uno_obj_in = $uno_obj + $full_name.removeprefix('com.sun.star')
+#set $fullname = $namespace + '.' + $safe_name
+#set $uno_obj_ns = $dyn + $fullname.removeprefix('com.sun.star').rsplit(sep='.', maxsplit=1)[0]
+#set $uno_obj_in = $uno_obj + $fullname.removeprefix('com.sun.star')
 # coding: utf-8
 #include raw "resources/inc_lic.txt"
 # Exception Class
@@ -48,7 +48,7 @@ if not TYPE_CHECKING and _DYNAMIC:
         # Dynamically create uno exception using uno
         global $safe_name
         $safe_name = unoclass(
-            '${full_name}')
+            '${fullname}')
 
     _dynamic_exception()
 else:

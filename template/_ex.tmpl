@@ -22,6 +22,7 @@ $self.init_data()#slurp
 $self.load_data()#slurp
 ## main Template
 #set $safe_name = $self.get_safe_word($name)
+#set $fullname = $namespace + '.' + $safe_name
 #set $is_method = 'methods' in $attribs
 #set $is_properties = 'properties' in $attribs
 #set $is_types = 'types' in $attribs
@@ -72,6 +73,12 @@ class ${safe_name}($self.get_class_inherits($name, $inherits))$self.get_class_en
     """
 
 #end if
+    typeName: str = '$fullname'
+    """Literal Constant ``$fullname``"""
+
+    __pyunointerface__: str = typeName
+    __pyunostruct__: str = typeName
+ 
 #if $is_method
 #set $methods = $attribs['methods']
     #for $method in $methods

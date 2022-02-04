@@ -6,7 +6,7 @@
   "name": "ContextInformation",
   "namespace": "com.sun.star.script",
   "parser_args": {
-    "sort": true,
+    "sort": false,
     "long_names": true,
     "remove_parent_inherited": true
   },
@@ -41,20 +41,6 @@
     "extends": [],
     "items": [
       {
-        "name": "EndColumn",
-        "type": "int",
-        "lines": [
-          "contains the first column in the EndLine that is NOT associated with the context."
-        ]
-      },
-      {
-        "name": "EndLine",
-        "type": "int",
-        "lines": [
-          "contains the last line in the module's source code associated with the context."
-        ]
-      },
-      {
         "name": "Name",
         "type": "str",
         "lines": [
@@ -73,6 +59,15 @@
         ]
       },
       {
+        "name": "StartLine",
+        "type": "int",
+        "lines": [
+          "contains the first line in the module's source code associated with the context.",
+          "",
+          "If \\\"name\\\" addresses a function, all line and column values are nevertheless given relative to the module's source. If source code is not available, this value addresses a binary position in the compiled code."
+        ]
+      },
+      {
         "name": "StartColumn",
         "type": "int",
         "lines": [
@@ -80,12 +75,17 @@
         ]
       },
       {
-        "name": "StartLine",
+        "name": "EndLine",
         "type": "int",
         "lines": [
-          "contains the first line in the module's source code associated with the context.",
-          "",
-          "If \\\"name\\\" addresses a function, all line and column values are nevertheless given relative to the module's source. If source code is not available, this value addresses a binary position in the compiled code."
+          "contains the last line in the module's source code associated with the context."
+        ]
+      },
+      {
+        "name": "EndColumn",
+        "type": "int",
+        "lines": [
+          "contains the first column in the EndLine that is NOT associated with the context."
         ]
       },
       {

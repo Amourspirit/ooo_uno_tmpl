@@ -6,7 +6,7 @@
   "name": "TableSortField",
   "namespace": "com.sun.star.table",
   "parser_args": {
-    "sort": true,
+    "sort": false,
     "long_names": true,
     "remove_parent_inherited": true
   },
@@ -51,37 +51,10 @@
     "extends": [],
     "items": [
       {
-        "name": "CollatorAlgorithm",
-        "type": "str",
-        "lines": [
-          "the algorithm used by the collator when comparing/sorting text.",
-          "",
-          "This property will not be used when the \\\"FieldType\\\" is com.sun.star.table.TableSortFieldType.NUMERIC"
-        ]
-      },
-      {
-        "name": "CollatorLocale",
-        "type": "Locale_70d308fa",
-        "lines": [
-          "the locale used by the collator when comparing/sorting text.",
-          "",
-          "This property will not be used when the \\\"FieldType\\\" is com.sun.star.table.TableSortFieldType.NUMERIC"
-        ]
-      },
-      {
         "name": "Field",
         "type": "int",
         "lines": [
           "index of the row or column in the table to be sorted; 0-based."
-        ]
-      },
-      {
-        "name": "FieldType",
-        "type": "TableSortFieldType_9a50e26",
-        "lines": [
-          "type of contents in the field.",
-          "",
-          "If the value is com.sun.star.table.TableSortFieldType.AUTOMATIC the algorithm used for sorting is application specific. Especially it may or may not use the values given by \\\"CollatorLocale\\\" and \\\"CollatorAlgorithm\\\"."
         ]
       },
       {
@@ -96,6 +69,33 @@
         "type": "bool",
         "lines": [
           "specifies if the case of letters is important when comparing entries."
+        ]
+      },
+      {
+        "name": "FieldType",
+        "type": "TableSortFieldType_9a50e26",
+        "lines": [
+          "type of contents in the field.",
+          "",
+          "If the value is com.sun.star.table.TableSortFieldType.AUTOMATIC the algorithm used for sorting is application specific. Especially it may or may not use the values given by \\\"CollatorLocale\\\" and \\\"CollatorAlgorithm\\\"."
+        ]
+      },
+      {
+        "name": "CollatorLocale",
+        "type": "Locale_70d308fa",
+        "lines": [
+          "the locale used by the collator when comparing/sorting text.",
+          "",
+          "This property will not be used when the \\\"FieldType\\\" is com.sun.star.table.TableSortFieldType.NUMERIC"
+        ]
+      },
+      {
+        "name": "CollatorAlgorithm",
+        "type": "str",
+        "lines": [
+          "the algorithm used by the collator when comparing/sorting text.",
+          "",
+          "This property will not be used when the \\\"FieldType\\\" is com.sun.star.table.TableSortFieldType.NUMERIC"
         ]
       }
     ]
