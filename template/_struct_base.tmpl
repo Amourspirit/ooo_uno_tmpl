@@ -26,7 +26,7 @@ $self.load_data()#slurp
 #set $re_underscore_hex = r"(_[0-9A-Fa-f]*)"
 #set $safe_name = $self.get_safe_word($name)
 #set $sorted = $self.get_sorted_names()
-#set $fullname = $namespace + '.' + $name
+#set $fullname = $namespace + '.' + $safe_name
 # coding: utf-8
 #include raw "resources/inc_lic.txt"
 # Struct Class
@@ -74,9 +74,11 @@ class ${safe_name}($self.get_class_inherits($name, $inherits)):
         `API $name <$link>`_
     #end if
     """
-
 #end if
-##    def __init__(self, $self.get_constructor_str(opt=True)):
+## typeName: Literal requires python >= 3.8
+    typeName: str = '$fullname'
+    """Literal Constant ``$fullname``"""
+
     def __init__(self, *args, **kwargs):
         """
         Constructor

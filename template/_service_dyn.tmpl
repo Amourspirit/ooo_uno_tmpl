@@ -23,9 +23,9 @@ $self.init_data()#slurp
 $self.load_data()#slurp
 ## main Template
 #set $safe_name = $self.get_safe_word($name)
-#set $full_name = $namespace + '.' + $name
-#set $uno_obj_ns = $dyn + $full_name.removeprefix('com.sun.star').rsplit(sep='.', maxsplit=1)[0]
-#set $uno_obj_in = $uno_obj + $full_name.removeprefix('com.sun.star')
+#set $fullname = $namespace + '.' + $safe_name
+#set $uno_obj_ns = $dyn + $fullname.removeprefix('com.sun.star').rsplit(sep='.', maxsplit=1)[0]
+#set $uno_obj_in = $uno_obj + $fullname.removeprefix('com.sun.star')
 # coding: utf-8
 #include raw "resources/inc_lic.txt"
 # Service Class
@@ -54,6 +54,6 @@ def create_service(ctx: 'Optional[XComponentContext]' = None, args: Optional[Ite
     Returns:
         Union[${safe_name}, None]: Service if it is available; Otherwise, ``None``
     """
-    return uno_helper.create_uno_service(cClass='${full_name}', ctx=ctx, args=args)
+    return uno_helper.create_uno_service(cClass='${fullname}', ctx=ctx, args=args)
 
 __all__ = ['${safe_name}', 'create_service']

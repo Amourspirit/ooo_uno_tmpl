@@ -23,6 +23,7 @@ $self.init_data()#slurp
 $self.load_data()#slurp
 ## main Template
 #set $safe_name = $self.get_safe_word($name)
+#set $fullname = $namespace + '.' + $safe_name
 #set $is_method = 'methods' in $attribs
 #set $is_properties = 'properties' in $attribs
 #set $is_types = 'types' in $attribs
@@ -73,6 +74,7 @@ class ${safe_name}($self.get_class_inherits($name, $inherits)):
         `API $name <$link>`_
 #end if
     """
+    __pyunointerface__: str = '$fullname'
 
 #if $is_method
 #set $methods = $attribs['methods']
