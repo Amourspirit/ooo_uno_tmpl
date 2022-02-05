@@ -1,4 +1,5 @@
 # coding: utf-8
+from distutils.command.build import build
 from typing import Set
 import os
 import sys
@@ -10,7 +11,7 @@ from tests.mod_types import get_module_types
 sys.path.append(os.path.realpath('.'))
 
 
-MODULE_TYPES = get_module_types()
+MODULE_TYPES = get_module_types(build_dir=['build', 'dyn'])
 
 def pytest_generate_tests(metafunc):
     if metafunc.function.__name__ == "test_imp_singleton" and "singlton_data" in dir(metafunc.module):

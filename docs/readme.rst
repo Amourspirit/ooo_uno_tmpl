@@ -95,7 +95,7 @@ $ conda env export > environment.yml
 active from command line
 ------------------------
 
-$ conda activate $(pwd)/env
+$ conda activate $PWD/env
 
 Links of intrest
 ================
