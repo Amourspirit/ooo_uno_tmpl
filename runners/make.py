@@ -123,7 +123,7 @@ class Make(FilesBase):
 
     def _compile_dyn(self, w_info: d_cls.WriteInfo):
         self._log.debug('Compiling file: %s', w_info.file)
-        cmd_str = f"cheetah compile --nobackup --iext=.dyn --oext=.dynpy {w_info.file}"
+        cmd_str = f"cheetah compile --nobackup --iext={self.config.template_dyn_ext} --oext={self.config.template_dyn_py_ext} {w_info.file}"
         self._log.info('Running subprocess: %s', cmd_str)
         p = subprocess.run(
             cmd_str.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
@@ -139,7 +139,7 @@ class Make(FilesBase):
         c_lst: List[d_cls.WriteInfo] = []
         for file in files:
             try:
-                if not self._is_skip_compile(tmpl_file=file, ext='.dynpy'):
+                if not self._is_skip_compile(tmpl_file=file, ext=self.config.template_dyn_py_ext):
                     f_dir = Path(file).parent
                     if not f_dir in self._processed_dirs:
                         self._processed_dirs.add(f_dir)

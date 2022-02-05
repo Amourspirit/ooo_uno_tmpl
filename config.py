@@ -121,7 +121,9 @@ class AppConfig:
     template_service_ext: str
     """Extension for service files such as .tppi"""
     template_dyn_ext: str
-    """Extension for dynamic templagtes such as .dyn"""
+    """Extension for dynamic templates such as .dyn"""
+    template_dyn_py_ext: str
+    """Extensiong for dynamic templates py ext sucha as .dynpy"""
     component_types: List[str]
     com_sun_star: List[str]
     """

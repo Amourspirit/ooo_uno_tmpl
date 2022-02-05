@@ -194,7 +194,7 @@ def _main():
     # ns = 'com.sun.star.text.TextRange'
     # args = 'data db-json -n com.sun.star.form.control.GridControl'
     url = 'https://api.libreoffice.org/docs/idl/ref/exceptioncom_1_1sun_1_1star_1_1uno_1_1Exception.html'
-    args = 'compile exception -a'
+    args = 'touch -i -o dyn'
     sys.argv.extend(args.split())
     main()
 
@@ -488,7 +488,7 @@ def _args_touch(parser: argparse.ArgumentParser, config: AppConfig) -> None:
         default='tmpl',
         const='tmpl',
         nargs='?',
-        choices=['py', 'dyn', 'tmpl'],
+        choices=['py', 'dyn','dynpy', 'tmpl'],
         help='touch *.py, *.dyn, *.tmpl files (default: %(default)s)')
     parser.add_argument(
         '--cache-files',
@@ -968,8 +968,11 @@ def _args_process_compile_cmd_data(args: argparse.Namespace, config: AppConfig) 
 def _args_action_touch(args: argparse.Namespace, config: AppConfig) -> None:
     touch_py_files = False
     touch_dyn_files = False
+    touch_dyn_py_files = False
     if args.option == 'dyn':
         touch_dyn_files = True
+    if args.option == 'dynpy':
+        touch_dyn_py_files = True
     elif args.option == 'py':
         touch_dyn_files = True
         
@@ -988,6 +991,7 @@ def _args_action_touch(args: argparse.Namespace, config: AppConfig) -> None:
         touch_service=args.service_all,
         touch_py_files=touch_py_files,
         touch_dyn_files=touch_dyn_files,
+        touch_dyn_py_files=touch_dyn_py_files,
         touch_cache_files=args.cache_files
     )
     _log_end_action()
