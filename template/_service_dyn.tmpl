@@ -18,8 +18,8 @@ $self.init_data()#slurp
 #attr $from_imports_typing = []
 #attr $attribs = {}
 ##  following attr will get values from BaseServiceDyn class
-#attr $uno_obj = 'uno_obj'
-#attr $dyn = 'dyn'
+#attr $uno_obj = ''
+#attr $dyn = ''
 $self.load_data()#slurp
 ## main Template
 #set $safe_name = $self.get_safe_word($name)
@@ -35,25 +35,6 @@ $self.load_data()#slurp
 # Namespace: $namespace
 #end if
 
-from typing import TYPE_CHECKING, Optional, Iterable, Union
 $self.get_rel_import(in_str=$uno_obj_in, ns=$uno_obj_ns) as $safe_name
-## from ...uno_obj.accessibility.accessible_context import AccessibleContext as AccessibleContext
-from ooo_uno.helper import uno_helper
-if TYPE_CHECKING:
-## from ...uno_obj.uno.x_component_context import XComponentContext
-    $self.get_rel_import(in_str='uno_obj.uno.XComponentContext', ns=$uno_obj_ns) as XComponentContext
 
-def create_service(ctx: 'Optional[XComponentContext]' = None, args: Optional[Iterable[object]] = None) -> Union[$safe_name, None]:
-    """
-    Create $safe_name service using ServiceManager Factory
-
-    Args:
-        ctx (XComponentContext, optional): context used to create service. Defaults to ``None``.
-        args (Iterable[object], optional): args that are passed to ServiceManager . Defaults to ``None``.
-
-    Returns:
-        Union[${safe_name}, None]: Service if it is available; Otherwise, ``None``
-    """
-    return uno_helper.create_uno_service(cClass='${fullname}', ctx=ctx, args=args)
-
-__all__ = ['${safe_name}', 'create_service']
+__all__ = ['${safe_name}']

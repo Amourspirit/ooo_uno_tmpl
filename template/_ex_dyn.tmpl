@@ -20,14 +20,18 @@ $self.init_data()#slurp
 #attr $from_imports_typing = []
 #attr $attribs = {}
 ##  following attr will get values from BaseExDyn class
-#attr $uno_obj = 'uno_obj'
-#attr $dyn = 'dyn'
+#attr $uno_obj = ''
+#attr $dyn = ''
+#attr $oenv = ''
+#attr $helper_ns = ''
+#attr $helper_mod = ''
 $self.load_data()#slurp
 ## main Template
 #set $safe_name = $self.get_safe_word($name)
 #set $fullname = $namespace + '.' + $safe_name
 #set $uno_obj_ns = $dyn + $fullname.removeprefix('com.sun.star').rsplit(sep='.', maxsplit=1)[0]
 #set $uno_obj_in = $uno_obj + $fullname.removeprefix('com.sun.star')
+#set $uno_helper_namespace = $helper_ns + '.' + $helper_mod
 # coding: utf-8
 #include raw "resources/inc_lic.txt"
 # Exception Class
@@ -37,13 +41,13 @@ $self.load_data()#slurp
 # Libre Office Version: $libre_office_ver
 #end if
 from typing import TYPE_CHECKING
-from ooo_uno.oenv import UNO_ENVIRONMENT, UNO_RUNTIME
+from $oenv import UNO_ENVIRONMENT, UNO_RUNTIME
 _DYNAMIC = False
 if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
     _DYNAMIC = True
 
 if not TYPE_CHECKING and _DYNAMIC:
-    from ooo_uno.helper.uno_helper import unoclass
+    from $uno_helper_namespace import unoclass
     def _dynamic_exception() -> None:
         # Dynamically create uno exception using uno
         global $safe_name

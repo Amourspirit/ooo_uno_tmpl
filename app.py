@@ -1311,6 +1311,10 @@ def main():
     os.environ['config_db_mod_info'] = config.db_mod_info
     os.environ['config_uno_obj_dir'] = config.uno_obj_dir
     os.environ['config_dyn_dir'] = config.dyn_dir
+    os.environ['config_helper_ns'] = config.helper_ns
+    os.environ['config_helper_mod'] = config.helper_mod
+    os.environ['config_enum_mod'] = config.enum_mod
+    os.environ['config_oenv_ns'] = config.env
     # endregion Config
 
     # region create parsers

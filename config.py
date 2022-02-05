@@ -16,6 +16,12 @@ class AppConfig:
     """Base Directory for Uno such as uno"""
     cache_dir: str
     """The cache directory to use. This is generally used in creating a cache directory is system temp dir."""
+    base_dir: str
+    """
+    Base dir for project such as ooo
+    
+    This the root dir for helper modules
+    """
     uno_obj_dir: str
     """Uno obj dir such as uno. This is the directory that templates and json data file are written to."""
     builld_dir: str
@@ -72,6 +78,12 @@ class AppConfig:
     """
     Base class for constants of int flags type such as ``ConstIntFlagsBase``
     """
+    helper_ns: str
+    """helper namespace such as ooo.helper"""
+    helper_mod: str
+    """helper module name such as uno_helper"""
+    enum_mod: str
+    """enum helper mod name such as enum_helper"""
     env: str
     """
     module path to oenv suca as ``ooo_uno.oenv``
