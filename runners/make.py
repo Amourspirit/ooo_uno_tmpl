@@ -231,8 +231,8 @@ class Make(FilesBase):
             return False
 
     def _get_scratch_path(self, tmpl_file) -> Path:
-        # reading uno_obj/...['.py' or '.pyi'] file
-        # setting write path to build/uno_obj/...
+        # reading uno/...['.py' or '.pyi'] file
+        # setting write path to build/uno/...
         p_file = Path(tmpl_file)
         ext = p_file.suffix
         p_dir = p_file.parent
@@ -244,7 +244,7 @@ class Make(FilesBase):
         return p_scratch
     
     def _get_dyn_write_path(self, tmpl_file) -> Path:
-        # reading uno_obj/...['.py' or '.pyi'] file
+        # reading uno/...['.py' or '.pyi'] file
         # setting write path to build/dyn/...
         
         p_file = Path(tmpl_file)
@@ -252,11 +252,11 @@ class Make(FilesBase):
         p_dir = p_file.parent
         p_rel = p_dir.relative_to(self._root_dir)
         # need to drop uno_dir form start of rel
-        # expecing parts to be tuple starting with uno_obj
+        # expecing parts to be tuple starting with uno
         # when there is a root it is at the start of the tuple
         # https://tinyurl.com/lfl7fwd
         parts = list(p_rel.parts)
-        parts[0] = self._config.dyn_dir # replace uno_obj with dyn
+        parts[0] = self._config.dyn_dir # replace uno with dyn
         # build up to build/dyn/somepath/somefile.py
         p_scratch_dir = Path(self._build, *parts)
         self._mkdirp(p_scratch_dir)

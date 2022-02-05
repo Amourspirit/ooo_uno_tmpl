@@ -13,11 +13,11 @@ class AppConfig:
     min_json_data_ver: str
     """Min version that can be parsed for .json files of Module Components"""
     uno_base_dir: str
-    """Base Directory for Uno such as uno_obj"""
+    """Base Directory for Uno such as uno"""
     cache_dir: str
     """The cache directory to use. This is generally used in creating a cache directory is system temp dir."""
     uno_obj_dir: str
-    """Uno obj dir such as uno_obj. This is the directory that templates and json data file are written to."""
+    """Uno obj dir such as uno. This is the directory that templates and json data file are written to."""
     builld_dir: str
     """Output build dir such as build"""
     data_dir: str
