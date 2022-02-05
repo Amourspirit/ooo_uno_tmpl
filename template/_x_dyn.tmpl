@@ -23,12 +23,15 @@ $self.init_data()#slurp
 #attr $uno_obj = ''
 #attr $dyn = ''
 #attr $oenv = ''
+#attr $helper_ns = ''
+#attr $helper_mod = ''
 $self.load_data()#slurp
 ## main Template
 #set $safe_name = $self.get_safe_word($name)
 #set $full_name = $namespace + '.' + $name
 #set $uno_obj_ns = $dyn + $full_name.removeprefix('com.sun.star').rsplit(sep='.', maxsplit=1)[0]
 #set $uno_obj_in = $uno_obj + $full_name.removeprefix('com.sun.star')
+#set $uno_helper_namespace = $helper_ns + '.' + $helper_mod
 #set $abc_imports = []
 # coding: utf-8
 #include raw "resources/inc_lic.txt"
@@ -45,7 +48,7 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
     _DYNAMIC = True
 
 if not TYPE_CHECKING and _DYNAMIC:
-    from ooo_uno.helper.uno_helper import unoclass
+    from $uno_helper_namespace import unoclass
     def _dynamic_interface() -> None:
         # Dynamically create uno interface using uno
         global $safe_name

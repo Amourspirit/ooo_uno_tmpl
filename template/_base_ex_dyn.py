@@ -11,4 +11,4 @@ class BaseExDyn(BaseEx):
         self.dyn = self.config.dyn_dir
         self.oenv = self.config.env
         self.helper_ns = self.config.helper_ns
-        self.enum_mod = self.config.enum_mod
+        self.helper_mod = self.config.helper_mod
