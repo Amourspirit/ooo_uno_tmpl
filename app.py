@@ -193,8 +193,8 @@ def _main():
     # ns = 'com.sun.star.form.DataAwareControlModel'
     # ns = 'com.sun.star.text.TextRange'
     # args = 'data db-json -n com.sun.star.form.control.GridControl'
-    url = 'https://api.libreoffice.org/docs/idl/ref/exceptioncom_1_1sun_1_1star_1_1uno_1_1Exception.html'
-    args = 'touch -i -o dyn'
+    url = 'https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1util.html'
+    args = 'url-parse typedef -t -u ' + url
     sys.argv.extend(args.split())
     main()
 

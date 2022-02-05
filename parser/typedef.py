@@ -20,6 +20,7 @@ import logging
 from typing import Dict, List, Set, Union
 from kwhelp.decorator import DecFuncEnum, TypeCheckKw
 from pathlib import Path
+
 try:
     import base
 except ModuleNotFoundError:
@@ -361,7 +362,8 @@ class WriterTypeDef(base.WriteBase):
         if not self._write_template_long:
             t_file += '_stub'
         t_file += '.tmpl'
-        _path = Path(self._path_dir, 'template', t_file)
+        self._template_dir = Path(self._path_dir, 'template')
+        _path = Path(self._template_dir, t_file)
         try:
             if not _path.exists():
                 raise FileNotFoundError(
@@ -386,6 +388,7 @@ class WriterTypeDef(base.WriteBase):
                 self._print_json_to_terminal()
             if self._write_file:
                 self._write_to_file()
+                self._write_to_file_dyn()
             if self._write_json:
                 self._write_to_json()
         except Exception as e:
@@ -432,6 +435,9 @@ class WriterTypeDef(base.WriteBase):
         with open(self._template_file) as f:
             contents = f.read()
         return contents
+    
+    def _get_template_dyn(self) -> Union[str, None]:
+        return 'typedef_dyn.tmpl'
 
     # region get Imports
     def _get_from_imports(self, t_def: TypeDef) -> List[List[str]]:
@@ -582,6 +588,24 @@ class WriterTypeDef(base.WriteBase):
                 f.write(t_str)
             logger.info("Created file: %s", file_path)
 
+    def _write_to_file_dyn(self):
+        dyn_name = self._get_template_dyn()
+        if dyn_name is None:
+            return
+        dyn_path = self._template_dir / dyn_name
+        with open(dyn_path, 'r') as t_file:
+            dyn_contents = t_file.read()
+
+        t_defs = self._get_t_def_lst()
+        for t_def in t_defs:
+            tmpl_file_path = self._get_uno_obj_path(t_def)
+            file_path = tmpl_file_path.parent
+            file_path = file_path.joinpath(tmpl_file_path.stem + base.APP_CONFIG.template_dyn_ext)
+            with open(file_path, 'w') as f:
+                f.write(dyn_contents)
+            logger.info("Created file: %s", file_path)
+
+
     def _print_json_to_terminal(self):
         t_defs = self._get_t_def_lst()
         for t_def in t_defs:
@@ -708,12 +732,13 @@ def _main():
         _set_loggers(get_logger(logger_name=Path(__file__).stem, **log_args))
 
     url = 'https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1util.html'
-    args = ('v', 'n')
     kwargs = {
-        "u": url,
-        "log_file": "debug.log"
+        "url": url,
+        "log_file": "debug.log",
+        "verbose": True,
+        "print_json": True
     }
-    parse(*args, **kwargs)
+    parse(**kwargs)
 # region Parser
 
 
