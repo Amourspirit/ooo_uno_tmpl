@@ -6,7 +6,7 @@ from rel import mod_rel as RelInfo
 
 class GenerateStarNs:
     """Generates import lines in format of from ... import ..."""
-    def __init__(self, config: AppConfig, c_data: List[Component], rel_ns: Optional[str] = None) -> None:
+    def __init__(self, config: AppConfig, c_data: List[Component], rel_ns: Optional[str] = None, include_const_enum: Optional[bool] = False) -> None:
         """
         Constructor
 
@@ -19,6 +19,7 @@ class GenerateStarNs:
         self._config = config
         self._is_rel = rel_ns is not None
         self._rel = rel_ns
+        self._include_const_enum = include_const_enum
 
     def gen_lines(self) -> List[str]:
         """
@@ -33,7 +34,7 @@ class GenerateStarNs:
             ns_im = RelInfo.get_rel_import(in_str=in_str, ns=self._rel)
             results = []
             results.append(f"from {ns_im.frm} import {ns_im.imp} as {ns_im.imp}")
-            if c.type == 'const':
+            if self._include_const_enum and c.type == 'const':
                 results.append(
                     f"from {ns_im.frm} import {ns_im.imp}Enum as {ns_im.imp}Enum")
             return results
@@ -42,7 +43,7 @@ class GenerateStarNs:
             ns = c.namespace.removeprefix('com.sun.star.')
             results = []
             results.append(f"from {self._config.uno_obj_dir}.{ns}.{c.c_name} import {c.name} as {c.name}")
-            if c.type == 'const':
+            if self._include_const_enum and c.type == 'const':
                 results.append(
                     f"from {self._config.uno_obj_dir}.{ns}.{c.c_name} import {c.name}Enum as {c.name}Enum")
             return results
