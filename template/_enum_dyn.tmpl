@@ -29,11 +29,11 @@ $self.load_data()#slurp
 ## Main Template
 #set $safe_name = $self.get_safe_word($name)
 #set $fullname = $namespace + '.' + $safe_name
-#set s_enum = ''
+##set s_enum = ''
 #set $key_list = list($enum_dict.keys())
 #set $uno_obj_ns = $dyn + $fullname.removeprefix('com.sun.star').rsplit(sep='.', maxsplit=1)[0]
 #set $uno_obj_in = $uno_obj + $fullname.removeprefix('com.sun.star')
-#set $s_enum = $self.dict_keys_to_str($enum_dict)
+##set $s_enum = $self.dict_keys_to_str($enum_dict)
 #set $uno_enum_namespace = $helper_ns + '.' + $enum_mod
 # coding: utf-8
 #include raw "resources/inc_lic.txt"
@@ -52,7 +52,7 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 if not TYPE_CHECKING and _DYNAMIC:
     from $uno_enum_namespace import uno_enum_class_new
-    from $fullname import ($s_enum)
+    from $namespace import $safe_name as U${safe_name}
 
     def _dynamic_enum():
         # Dynamically create class that actually contains UNO enum instances
@@ -60,7 +60,7 @@ if not TYPE_CHECKING and _DYNAMIC:
         _dict = {
 #for $key in $key_list
 #set $safe_key = $self.get_safe_word($key)
-            "$safe_key": ${safe_key},
+            "$safe_key": U${safe_name}.${safe_key},
 #end for
         }
 
