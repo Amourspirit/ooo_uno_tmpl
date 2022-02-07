@@ -1,5 +1,5 @@
 # coding: utf-8
-from typing import List, Optional
+from typing import List, Optional, Tuple, Union
 import uno
 StarDesktop=None
 # The ServiceManager of the running OOo.
@@ -35,30 +35,66 @@ def get_service_manager() -> object:
 #------------------------------------------------------------
 
 
-# This is the same as ServiceManager.createInstance( ... )
-def create_uno_service(cClass: str, ctx:Optional[object] = None, args: Optional[List[object]] = None):
+def create_uno_service(clazz: Union[str, object], ctx: object = None, args: Optional[Tuple[object]] = None) -> object:
     """A handy way to create a global objects within the running OOo. 
     Similar to the function of the same name in OOo Basic. 
     
     Args:
-        cClass (str): name of the service to be instanciated.
+        clazz (str, object): name of the service to be instanciated or object that contains __ooo_full_ns__ attribute.
+        ctx (XComponentContext, optional): the context if required.
+        args (Typle[object], optional): the arguments when needed.
+    
+    Returns:
+        object: component instance
+
+    Notes:
+        A service signals that it expects parameters during instantiation by supporting the com.sun.star.lang.XInitialization interface.
+        There maybe services which can only be instantiated with parameters
+    """
+    is_class = False
+    if isinstance(clazz, str):
+        _cls = clazz
+    elif hasattr(clazz, '__ooo_full_ns__'):
+        # _cls = 'com.sun.star.io.SequenceInputStream'
+        _cls = clazz.__ooo_full_ns__
+        is_class = True
+    else:
+        raise TypeError('create_uno_service() cClass incorrect type')
+    return _create_uno_service(clazz=_cls, ctx=ctx, args=args)
+
+# This is the same as ServiceManager.createInstance( ... )
+
+
+def _create_uno_service(clazz: str, ctx: obj = None, args: tuple = None) -> object:
+    """Creates a global objects within the running OOo. 
+    Similar to the function of the same name in OOo Basic. 
+    
+    Args:
+        clazz (str): name of the service to be instanciated.
         ctx (XComponentContext, optional): the context if required.
         args (List[object], optional): the arguments when needed.
     
     Returns:
         object: component instance
+
+    Notes:
+        A service signals that it expects parameters during instantiation by supporting the com.sun.star.lang.XInitialization interface.
+        There maybe services which can only be instantiated with parameters
     """
+    # https://wiki.openoffice.org/wiki/Documentation/DevGuide/ProUNO/Service_Manager
+    # In case the service manager does not provide an implementation for a request,
+    # a null reference is returned, so it is mandatory to check.
+    # Every UNO exception may be thrown during instantiation.
     smgr = get_service_manager()
     if ctx and args:
-        oObj = smgr.createInstanceWithArgumentsAndContext(cClass, args, ctx)
+        oObj = smgr.createInstanceWithArgumentsAndContext(clazz, args, ctx)
     elif args:
-        oObj = smgr.createInstanceWithArguments(cClass, args)
+        oObj = smgr.createInstanceWithArguments(clazz, args)
     elif ctx:
-        oObj = smgr.createInstanceWithContext(cClass, ctx)
+        oObj = smgr.createInstanceWithContext(clazz, ctx)
     else:
-        oObj = smgr.createInstance(cClass)
+        oObj = smgr.createInstance(clazz)
     return oObj
-
 
 def get_desktop() -> object:
     """An easy way to obtain the Desktop object from a running OOo.
