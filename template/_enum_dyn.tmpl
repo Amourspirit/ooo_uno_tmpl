@@ -70,7 +70,9 @@ if not TYPE_CHECKING and _DYNAMIC:
         })
         for k, v in _dict.items():
             setattr($safe_name, k, v)
-
+        setattr($safe_name, ' __ooo_ns__', '$namespace')
+        setattr($safe_name, ' __ooo_full_ns__', '$fullname')
+        setattr($safe_name, ' __ooo_type_name__', 'enum')
     _dynamic_enum()
 else:
     $self.get_rel_import(in_str=$uno_obj_in, ns=$uno_obj_ns) as $safe_name

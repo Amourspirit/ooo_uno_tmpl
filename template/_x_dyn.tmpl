@@ -28,9 +28,9 @@ $self.init_data()#slurp
 $self.load_data()#slurp
 ## main Template
 #set $safe_name = $self.get_safe_word($name)
-#set $full_name = $namespace + '.' + $name
-#set $uno_obj_ns = $dyn + $full_name.removeprefix('com.sun.star').rsplit(sep='.', maxsplit=1)[0]
-#set $uno_obj_in = $uno_obj + $full_name.removeprefix('com.sun.star')
+#set $fullname = $namespace + '.' + $name
+#set $uno_obj_ns = $dyn + $fullname.removeprefix('com.sun.star').rsplit(sep='.', maxsplit=1)[0]
+#set $uno_obj_in = $uno_obj + $fullname.removeprefix('com.sun.star')
 #set $uno_helper_namespace = $helper_ns + '.' + $helper_mod
 #set $abc_imports = []
 # coding: utf-8
@@ -52,8 +52,10 @@ if not TYPE_CHECKING and _DYNAMIC:
     def _dynamic_interface() -> None:
         # Dynamically create uno interface using uno
         global $safe_name
-        $safe_name = unoclass(
-            '${full_name}')
+        $safe_name = unoclass('$fullname')
+        setattr($safe_name, ' __ooo_ns__', '$namespace')
+        setattr($safe_name, ' __ooo_full_ns__', '$fullname')
+        setattr($safe_name, ' __ooo_type_name__', 'interface')
 
     _dynamic_interface()
 else:

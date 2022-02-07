@@ -51,8 +51,10 @@ if not TYPE_CHECKING and _DYNAMIC:
     def _dynamic_exception() -> None:
         # Dynamically create uno exception using uno
         global $safe_name
-        $safe_name = unoclass(
-            '${fullname}')
+        $safe_name = unoclass('$fullname')
+        setattr($safe_name, ' __ooo_ns__', '$namespace')
+        setattr($safe_name, ' __ooo_full_ns__', '$fullname')
+        setattr($safe_name, ' __ooo_type_name__', 'exception')
 
     _dynamic_exception()
 else:

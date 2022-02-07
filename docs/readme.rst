@@ -21,8 +21,16 @@ python make.py --force-compile true --clean-scratch true
 for help run:
 python make.py --help
 
-output is copied into scratch folder with the same dir structure as uno_obj
+output is copied into build/lo folder with the same dir structure as lo
 
+
+UNO
+===
+
+General info
+------------
+
+UNO objects only accept positional arguments
 
 Parser
 ======
