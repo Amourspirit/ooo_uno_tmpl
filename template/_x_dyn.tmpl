@@ -48,16 +48,10 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
     _DYNAMIC = True
 
 if not TYPE_CHECKING and _DYNAMIC:
-    from $uno_helper_namespace import unoclass
-    def _dynamic_interface() -> None:
-        # Dynamically create uno interface using uno
-        global $safe_name
-        $safe_name = unoclass('$fullname')
-        setattr($safe_name, ' __ooo_ns__', '$namespace')
-        setattr($safe_name, ' __ooo_full_ns__', '$fullname')
-        setattr($safe_name, ' __ooo_type_name__', 'interface')
-
-    _dynamic_interface()
+    from $namespace import $safe_name
+    setattr($safe_name, '__ooo_ns__', '$namespace')
+    setattr($safe_name, '__ooo_full_ns__', '$fullname')
+    setattr($safe_name, '__ooo_type_name__', 'interface')
 else:
     $self.get_rel_import(in_str=$uno_obj_in, ns=$uno_obj_ns) as $safe_name
 

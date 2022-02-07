@@ -51,9 +51,9 @@ if not TYPE_CHECKING and _DYNAMIC:
         global $safe_name
 
         def _set_attr(struct):
-            setattr(struct, ' __ooo_ns__', '$namespace')
-            setattr(struct, ' __ooo_full_ns__', '$fullname')
-            setattr(struct, ' __ooo_type_name__', 'struct')
+            struct.__dict__['__ooo_ns__'] = '$namespace'
+            struct.__dict__['__ooo_full_ns__'] = '$fullname'
+            struct.__dict__['__ooo_type_name__'] = 'struct'
 
         def _struct_init(*args, **kwargs):
             arg_len = len(args)
