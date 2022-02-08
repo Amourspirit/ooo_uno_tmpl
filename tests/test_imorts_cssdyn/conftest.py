@@ -12,7 +12,7 @@ sys.path.append(os.path.realpath('.'))
 
 def get_modules() -> List[str]:
     app_root = Path(__file__).parent.parent.parent
-    dirname = app_root / 'build' / 'css'
+    dirname = app_root / 'build' / 'cssdyn'
     pattern = str(dirname) + f'/**/__init__.py'
     files = glob.glob(pattern, recursive=True)
     mods = []
