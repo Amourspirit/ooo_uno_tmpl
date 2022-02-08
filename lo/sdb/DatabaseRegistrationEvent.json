@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.20",
+  "version": "0.1.21",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "DatabaseRegistrationEvent",
@@ -32,7 +32,7 @@
     },
     "quote": [],
     "typings": [],
-    "requires_typing": false,
+    "requires_typing": true,
     "fullname": "com.sun.star.sdb.DatabaseRegistrationEvent",
     "desc": [
       "describes a change in a database registration",
@@ -45,28 +45,30 @@
     "extends": [
       "com.sun.star.lang.EventObject"
     ],
-    "items": [
-      {
-        "name": "Name",
-        "type": "str",
-        "lines": [
-          "is the name of the database registration affected by the event"
-        ]
-      },
-      {
-        "name": "OldLocation",
-        "type": "str",
-        "lines": [
-          "is the old location of the database which is affected by the event"
-        ]
-      },
-      {
-        "name": "NewLocation",
-        "type": "str",
-        "lines": [
-          "is the new location of the database which is affected by the event"
-        ]
-      }
-    ]
+    "items": {
+      "properties": [
+        {
+          "name": "Name",
+          "returns": "str",
+          "desc": [
+            "is the name of the database registration affected by the event"
+          ]
+        },
+        {
+          "name": "OldLocation",
+          "returns": "str",
+          "desc": [
+            "is the old location of the database which is affected by the event"
+          ]
+        },
+        {
+          "name": "NewLocation",
+          "returns": "str",
+          "desc": [
+            "is the new location of the database which is affected by the event"
+          ]
+        }
+      ]
+    }
   }
 }

@@ -20,13 +20,15 @@ $self.init_data()#slurp
 #attr $from_imports_typing = []
 #attr $quote = set()
 #attr $typings = set()
-#attr $attribs = []
+#attr $attribs = {}
 $self.load_data()#slurp
 ## Main Template
 #set $re_underscore_hex = r"(_[0-9A-Fa-f]*)"
 #set $safe_name = $self.get_safe_word($name)
 #set $sorted = $self.get_sorted_names()
 #set $fullname = $namespace + '.' + $safe_name
+#set $is_properties = 'properties' in $attribs
+#set $is_types = 'types' in $attribs
 # coding: utf-8
 #include raw "resources/inc_lic.txt"
 # Struct Class
@@ -38,12 +40,12 @@ $self.load_data()#slurp
 #for $imp in $imports
 import $imp
 #end for
-#for $imp in $from_imports
-$self.get_from_import($name, $imp)
-#end for
 #if $requires_typing:
 import typing
 #end if
+#for $imp in $from_imports
+$self.get_from_import($name, $imp)
+#end for
 #if len($from_imports_typing) > 0:
 if typing.TYPE_CHECKING:
 #for $imp in $from_imports_typing
@@ -82,6 +84,21 @@ class ${safe_name}($self.get_class_inherits($name, $inherits)):
     typeName: str = '$fullname'
     """Literal Constant ``$fullname``"""
 
+#if $is_types
+#set $properties = $attribs['types']
+#for $property in $properties
+#set $p_name = $self.get_safe_word($property['name'])
+#set $p_return = $self.get_q_type($property['returns'])
+#set $p_desc = $property['desc']
+    ${p_name}: typing.TypeAlias = $p_return
+    """
+    #for $line in $self.line_gen($p_desc)
+    $line
+    #end for
+    """
+#end for
+#end if
+
     def __init__(self, *args, **kwargs):
         """
         Constructor
@@ -93,18 +110,19 @@ class ${safe_name}($self.get_class_inherits($name, $inherits)):
                 values. Following the order of ``Keyword Arguments``.
 
         Keyword Arguments:
+##set $nada = $print($sorted)
 #for $i, $tpl in enumerate($sorted)
 #set $index = tpl[1]
-#set $itm = $attribs[$index]
+#set $itm = $attribs['properties'][$index]
 #set $itm_name = $self.get_safe_word($itm.name)
-#set $itm_type = $itm.type.removeprefix('typing.')
+#set $itm_type = $itm.returns.removeprefix('typing.')
 #set $itm_type = re.sub(re_underscore_hex, '', $itm_type, 1)
             $itm_name ($itm_type, optional): $itm_name value
 #end for
         """
 #for $i, $tpl in enumerate($sorted)
 #set $index = tpl[1]
-#set $itm = $attribs[$index]
+#set $itm = $attribs['properties'][$index]
 #set $itm_name = $self.get_safe_word($itm.name)
         self._$self.camel_to_snake($itm_name) = None
 #end for
@@ -126,30 +144,29 @@ class ${safe_name}($self.get_class_inherits($name, $inherits)):
             if k in key_order:
                 setattr(self, k, v)
 
-#for $i, $tpl in enumerate($sorted)
-#set $index = tpl[1]
-#set $itm = $self.get_attrib_for_prop($index)
-#set $itm_name = $self.get_safe_word($itm.name)
 
+
+#if $is_properties
+#set $properties = $attribs['properties']
+#for $property in $properties
+#set $p_name = $self.get_safe_word($property['name'])
+#set $p_return = $self.get_q_type($property['returns'])
+#set $p_desc = $property['desc']
     @property
-    def ${itm_name}(self) -> $itm.type:
-#if $include_desc and $itm.lines
+    def ${p_name}(self) -> $p_return:
         """
-    #if isinstance($itm.lines, str):
-        $itm.lines
-    #else
-        #for $line in $itm.lines
+    #for $line in $self.line_gen($p_desc)
         $line
-        #end for
-    #end if
+    #end for
         """
-#end if
-        return self._$self.camel_to_snake($itm_name)
+        return self._$self.camel_to_snake($p_name)
     
-    @${itm_name}.setter
-    def ${itm_name}(self, value: $itm.type) -> None:
-        self._$self.camel_to_snake($itm_name) = value
+    @${p_name}.setter
+    def ${p_name}(self, value: $p_return) -> None:
+        self._$self.camel_to_snake($p_name) = value
 #end for
+#end if
+
 
 
 __all__ = ['$safe_name']

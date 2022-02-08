@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.20",
+  "version": "0.1.21",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "AttributeData",
@@ -24,39 +24,41 @@
     "extends_map": {},
     "quote": [],
     "typings": [],
-    "requires_typing": false,
+    "requires_typing": true,
     "fullname": "com.sun.star.xml.AttributeData",
     "desc": [
       "store the type and value of an XML attribute inside a XNameContainer"
     ],
     "imports": [],
     "extends": [],
-    "items": [
-      {
-        "name": "Namespace",
-        "type": "str",
-        "lines": [
-          "the namespace of this XML attribute.",
-          "",
-          "This string can be empty if you are not using namespaces."
-        ]
-      },
-      {
-        "name": "Type",
-        "type": "str",
-        "lines": [
-          "the type of this XML attribute.",
-          "",
-          "For non validating parsers this must be CDATA."
-        ]
-      },
-      {
-        "name": "Value",
-        "type": "str",
-        "lines": [
-          "the string value of this XML attribute."
-        ]
-      }
-    ]
+    "items": {
+      "properties": [
+        {
+          "name": "Namespace",
+          "returns": "str",
+          "desc": [
+            "the namespace of this XML attribute.",
+            "",
+            "This string can be empty if you are not using namespaces."
+          ]
+        },
+        {
+          "name": "Type",
+          "returns": "str",
+          "desc": [
+            "the type of this XML attribute.",
+            "",
+            "For non validating parsers this must be CDATA."
+          ]
+        },
+        {
+          "name": "Value",
+          "returns": "str",
+          "desc": [
+            "the string value of this XML attribute."
+          ]
+        }
+      ]
+    }
   }
 }

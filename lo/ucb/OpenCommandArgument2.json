@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.20",
+  "version": "0.1.21",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "OpenCommandArgument2",
@@ -21,24 +21,22 @@
     "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1ucb_1_1OpenCommandArgument2.html",
     "from_imports": [
       [
+        ".numbered_sorting_info",
+        "NumberedSortingInfo",
+        "NumberedSortingInfo_fd0e0de6"
+      ],
+      [
         ".open_command_argument",
         "OpenCommandArgument",
         "OpenCommandArgument_fb0a0dd6"
       ]
     ],
-    "from_imports_typing": [
-      [
-        ".numbered_sorting_info",
-        "NumberedSortingInfo",
-        "NumberedSortingInfo_fd0e0de6"
-      ]
-    ],
+    "from_imports_typing": [],
     "extends_map": {
+      "com.sun.star.ucb.NumberedSortingInfo": "NumberedSortingInfo_fd0e0de6",
       "com.sun.star.ucb.OpenCommandArgument": "OpenCommandArgument_fb0a0dd6"
     },
-    "quote": [
-      "typing.Tuple[NumberedSortingInfo_fd0e0de6, ...]"
-    ],
+    "quote": [],
     "typings": [
       "typing.Tuple[NumberedSortingInfo_fd0e0de6, ...]"
     ],
@@ -53,16 +51,18 @@
     "extends": [
       "com.sun.star.ucb.OpenCommandArgument"
     ],
-    "items": [
-      {
-        "name": "SortingInfo",
-        "type": "typing.Tuple[NumberedSortingInfo_fd0e0de6, ...]",
-        "lines": [
-          "The sort criteria for the rows of the returned ContentResultSet.",
-          "",
-          "The result set implementation may ignore this parameter, if it cannot sort the data by the given criteria in an efficient way (i.e. directly using the underlying data source -> SQL-database -> ORDER BY)."
-        ]
-      }
-    ]
+    "items": {
+      "types": [
+        {
+          "name": "SortingInfo",
+          "returns": "typing.Tuple[NumberedSortingInfo_fd0e0de6, ...]",
+          "desc": [
+            "The sort criteria for the rows of the returned ContentResultSet.",
+            "",
+            "The result set implementation may ignore this parameter, if it cannot sort the data by the given criteria in an efficient way (i.e. directly using the underlying data source -> SQL-database -> ORDER BY)."
+          ]
+        }
+      ]
+    }
   }
 }

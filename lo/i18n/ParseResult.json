@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.20",
+  "version": "0.1.21",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "ParseResult",
@@ -24,72 +24,74 @@
     "extends_map": {},
     "quote": [],
     "typings": [],
-    "requires_typing": false,
+    "requires_typing": true,
     "fullname": "com.sun.star.i18n.ParseResult",
     "desc": [
       "Parser results returned by XCharacterClassification.parseAnyToken() and XCharacterClassification.parsePredefinedToken()."
     ],
     "imports": [],
     "extends": [],
-    "items": [
-      {
-        "name": "LeadingWhiteSpace",
-        "type": "int",
-        "lines": [
-          "Count of ignored leading whitespace, in UTF-16 code units, not Unicode code points."
-        ]
-      },
-      {
-        "name": "EndPos",
-        "type": "int",
-        "lines": [
-          "UTF-16 code unit index of first unprocessed character."
-        ]
-      },
-      {
-        "name": "CharLen",
-        "type": "int",
-        "lines": [
-          "Number of code points (not UTF-16 code units) of the parsed token, not including leading whitespace."
-        ]
-      },
-      {
-        "name": "Value",
-        "type": "float",
-        "lines": [
-          "Value of token in case of numeric."
-        ]
-      },
-      {
-        "name": "TokenType",
-        "type": "int",
-        "lines": [
-          "KParseType token type like KParseType.IDENTNAME."
-        ]
-      },
-      {
-        "name": "StartFlags",
-        "type": "int",
-        "lines": [
-          "KParseTokens flags of first character of actual token matched.",
-          "",
-          "If TokenType is a KParseType.SINGLE_QUOTE_NAME or a KParseType.DOUBLE_QUOTE_STRING the first character is the first character inside the quotes, not the quote itself."
-        ]
-      },
-      {
-        "name": "ContFlags",
-        "type": "int",
-        "lines": [
-          "KParseTokens flags of remaining characters of actual token matched."
-        ]
-      },
-      {
-        "name": "DequotedNameOrString",
-        "type": "str",
-        "lines": [
-          "If a quoted name or string is encountered the dequoted result goes here."
-        ]
-      }
-    ]
+    "items": {
+      "properties": [
+        {
+          "name": "LeadingWhiteSpace",
+          "returns": "int",
+          "desc": [
+            "Count of ignored leading whitespace, in UTF-16 code units, not Unicode code points."
+          ]
+        },
+        {
+          "name": "EndPos",
+          "returns": "int",
+          "desc": [
+            "UTF-16 code unit index of first unprocessed character."
+          ]
+        },
+        {
+          "name": "CharLen",
+          "returns": "int",
+          "desc": [
+            "Number of code points (not UTF-16 code units) of the parsed token, not including leading whitespace."
+          ]
+        },
+        {
+          "name": "Value",
+          "returns": "float",
+          "desc": [
+            "Value of token in case of numeric."
+          ]
+        },
+        {
+          "name": "TokenType",
+          "returns": "int",
+          "desc": [
+            "KParseType token type like KParseType.IDENTNAME."
+          ]
+        },
+        {
+          "name": "StartFlags",
+          "returns": "int",
+          "desc": [
+            "KParseTokens flags of first character of actual token matched.",
+            "",
+            "If TokenType is a KParseType.SINGLE_QUOTE_NAME or a KParseType.DOUBLE_QUOTE_STRING the first character is the first character inside the quotes, not the quote itself."
+          ]
+        },
+        {
+          "name": "ContFlags",
+          "returns": "int",
+          "desc": [
+            "KParseTokens flags of remaining characters of actual token matched."
+          ]
+        },
+        {
+          "name": "DequotedNameOrString",
+          "returns": "str",
+          "desc": [
+            "If a quoted name or string is encountered the dequoted result goes here."
+          ]
+        }
+      ]
+    }
   }
 }

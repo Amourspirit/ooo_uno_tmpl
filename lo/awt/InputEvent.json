@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.20",
+  "version": "0.1.21",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "InputEvent",
@@ -32,7 +32,7 @@
     },
     "quote": [],
     "typings": [],
-    "requires_typing": false,
+    "requires_typing": true,
     "fullname": "com.sun.star.awt.InputEvent",
     "desc": [
       "the root event class for all component-level input events.",
@@ -43,16 +43,18 @@
     "extends": [
       "com.sun.star.lang.EventObject"
     ],
-    "items": [
-      {
-        "name": "Modifiers",
-        "type": "int",
-        "lines": [
-          "contains the modifier keys which were pressed while the event occurred.",
-          "",
-          "Zero or more constants from the com.sun.star.awt.KeyModifier group."
-        ]
-      }
-    ]
+    "items": {
+      "properties": [
+        {
+          "name": "Modifiers",
+          "returns": "int",
+          "desc": [
+            "contains the modifier keys which were pressed while the event occurred.",
+            "",
+            "Zero or more constants from the com.sun.star.awt.KeyModifier group."
+          ]
+        }
+      ]
+    }
   }
 }

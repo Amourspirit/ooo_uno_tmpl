@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.20",
+  "version": "0.1.21",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "LogRecord",
@@ -43,69 +43,71 @@
     ],
     "imports": [],
     "extends": [],
-    "items": [
-      {
-        "name": "LoggerName",
-        "type": "str",
-        "lines": [
-          "specifies the name of the logger at which the record is logged"
-        ]
-      },
-      {
-        "name": "SourceClassName",
-        "type": "str",
-        "lines": [
-          "specifies the name of the class, in which the record was logged.",
-          "",
-          "This name might be empty, in case the caller to one of the various log methods of XLogger did not specify it."
-        ]
-      },
-      {
-        "name": "SourceMethodName",
-        "type": "str",
-        "lines": [
-          "specifies the name of the method, in which the record was logged.",
-          "",
-          "This name might be empty, in case the caller to one of the various log methods of XLogger did not specify it."
-        ]
-      },
-      {
-        "name": "Message",
-        "type": "str",
-        "lines": [
-          "specifies the to-be-logged message"
-        ]
-      },
-      {
-        "name": "LogTime",
-        "type": "DateTime_84de09d3",
-        "lines": [
-          "specifies the time at which the event was logged"
-        ]
-      },
-      {
-        "name": "SequenceNumber",
-        "type": "int",
-        "lines": [
-          "specifies the number of the log event.",
-          "",
-          "Subsequent events get assigned increasing sequence numbers by the XLogger at which they're logged."
-        ]
-      },
-      {
-        "name": "ThreadID",
-        "type": "str",
-        "lines": [
-          "specifies the ID of the thread in which the event was logged"
-        ]
-      },
-      {
-        "name": "Level",
-        "type": "int",
-        "lines": [
-          "specifies the level of the log event"
-        ]
-      }
-    ]
+    "items": {
+      "properties": [
+        {
+          "name": "LoggerName",
+          "returns": "str",
+          "desc": [
+            "specifies the name of the logger at which the record is logged"
+          ]
+        },
+        {
+          "name": "SourceClassName",
+          "returns": "str",
+          "desc": [
+            "specifies the name of the class, in which the record was logged.",
+            "",
+            "This name might be empty, in case the caller to one of the various log methods of XLogger did not specify it."
+          ]
+        },
+        {
+          "name": "SourceMethodName",
+          "returns": "str",
+          "desc": [
+            "specifies the name of the method, in which the record was logged.",
+            "",
+            "This name might be empty, in case the caller to one of the various log methods of XLogger did not specify it."
+          ]
+        },
+        {
+          "name": "Message",
+          "returns": "str",
+          "desc": [
+            "specifies the to-be-logged message"
+          ]
+        },
+        {
+          "name": "LogTime",
+          "returns": "DateTime_84de09d3",
+          "desc": [
+            "specifies the time at which the event was logged"
+          ]
+        },
+        {
+          "name": "SequenceNumber",
+          "returns": "int",
+          "desc": [
+            "specifies the number of the log event.",
+            "",
+            "Subsequent events get assigned increasing sequence numbers by the XLogger at which they're logged."
+          ]
+        },
+        {
+          "name": "ThreadID",
+          "returns": "str",
+          "desc": [
+            "specifies the ID of the thread in which the event was logged"
+          ]
+        },
+        {
+          "name": "Level",
+          "returns": "int",
+          "desc": [
+            "specifies the level of the log event"
+          ]
+        }
+      ]
+    }
   }
 }

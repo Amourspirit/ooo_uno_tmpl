@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.20",
+  "version": "0.1.21",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "Event",
@@ -24,46 +24,48 @@
     "extends_map": {},
     "quote": [],
     "typings": [],
-    "requires_typing": false,
+    "requires_typing": true,
     "fullname": "com.sun.star.animations.Event",
     "desc": [
       "an event has a source that causes an event to be fired and a trigger that defines under which condition an event should be raised and an offset if the event should be raised a defined amount of time after the event is triggered."
     ],
     "imports": [],
     "extends": [],
-    "items": [
-      {
-        "name": "Source",
-        "type": "object",
-        "lines": [
-          "this is the source for this event."
-        ]
-      },
-      {
-        "name": "Trigger",
-        "type": "int",
-        "lines": [
-          "this is the trigger that fires this event."
-        ]
-      },
-      {
-        "name": "Offset",
-        "type": "object",
-        "lines": [
-          "an optional offset in seconds or Timing.INDEFINITE.",
-          "",
-          "This is the timespan between the triggering of the event and actually raising the event"
-        ]
-      },
-      {
-        "name": "Repeat",
-        "type": "int",
-        "lines": [
-          "an option repeat value.",
-          "",
-          "If the Trigger is EventTrigger, this is the number of repeats after which the event is initially raised."
-        ]
-      }
-    ]
+    "items": {
+      "properties": [
+        {
+          "name": "Source",
+          "returns": "object",
+          "desc": [
+            "this is the source for this event."
+          ]
+        },
+        {
+          "name": "Trigger",
+          "returns": "int",
+          "desc": [
+            "this is the trigger that fires this event."
+          ]
+        },
+        {
+          "name": "Offset",
+          "returns": "object",
+          "desc": [
+            "an optional offset in seconds or Timing.INDEFINITE.",
+            "",
+            "This is the timespan between the triggering of the event and actually raising the event"
+          ]
+        },
+        {
+          "name": "Repeat",
+          "returns": "int",
+          "desc": [
+            "an option repeat value.",
+            "",
+            "If the Trigger is EventTrigger, this is the number of repeats after which the event is initially raised."
+          ]
+        }
+      ]
+    }
   }
 }

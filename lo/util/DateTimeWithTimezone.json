@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.20",
+  "version": "0.1.21",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "DateTimeWithTimezone",
@@ -43,23 +43,25 @@
     ],
     "imports": [],
     "extends": [],
-    "items": [
-      {
-        "name": "DateTimeInTZ",
-        "type": "DateTime_84de09d3",
-        "lines": [
-          "the date and time (in TimeZone)"
-        ]
-      },
-      {
-        "name": "Timezone",
-        "type": "int",
-        "lines": [
-          "contains the time zone, as signed offset in minutes from UTC, that is east of UTC, that is the amount of minutes that should be added to UTC time to obtain the time in that timezone.",
-          "",
-          "To obtain UTC datetime from DateTimeInTZ, you need to subtract TimeZone minutes."
-        ]
-      }
-    ]
+    "items": {
+      "properties": [
+        {
+          "name": "DateTimeInTZ",
+          "returns": "DateTime_84de09d3",
+          "desc": [
+            "the date and time (in TimeZone)"
+          ]
+        },
+        {
+          "name": "Timezone",
+          "returns": "int",
+          "desc": [
+            "contains the time zone, as signed offset in minutes from UTC, that is east of UTC, that is the amount of minutes that should be added to UTC time to obtain the time in that timezone.",
+            "",
+            "To obtain UTC datetime from DateTimeInTZ, you need to subtract TimeZone minutes."
+          ]
+        }
+      ]
+    }
   }
 }

@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.20",
+  "version": "0.1.21",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "ScriptEvent",
@@ -32,7 +32,7 @@
     },
     "quote": [],
     "typings": [],
-    "requires_typing": false,
+    "requires_typing": true,
     "fullname": "com.sun.star.script.ScriptEvent",
     "desc": [
       "script event that gets delivered whenever a script event takes place.",
@@ -43,23 +43,25 @@
     "extends": [
       "com.sun.star.script.AllEventObject"
     ],
-    "items": [
-      {
-        "name": "ScriptType",
-        "type": "str",
-        "lines": [
-          "type of the script language as string; for example, \\\"Basic\\\" or \\\"StarScript\\\"."
-        ]
-      },
-      {
-        "name": "ScriptCode",
-        "type": "str",
-        "lines": [
-          "script code as string.",
-          "",
-          "The code has to correspond with the language defined by ScriptType."
-        ]
-      }
-    ]
+    "items": {
+      "properties": [
+        {
+          "name": "ScriptType",
+          "returns": "str",
+          "desc": [
+            "type of the script language as string; for example, \\\"Basic\\\" or \\\"StarScript\\\"."
+          ]
+        },
+        {
+          "name": "ScriptCode",
+          "returns": "str",
+          "desc": [
+            "script code as string.",
+            "",
+            "The code has to correspond with the language defined by ScriptType."
+          ]
+        }
+      ]
+    }
   }
 }

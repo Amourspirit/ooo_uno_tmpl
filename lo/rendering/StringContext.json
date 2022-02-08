@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.20",
+  "version": "0.1.21",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "StringContext",
@@ -24,7 +24,7 @@
     "extends_map": {},
     "quote": [],
     "typings": [],
-    "requires_typing": false,
+    "requires_typing": true,
     "fullname": "com.sun.star.rendering.StringContext",
     "desc": [
       "Collection of string-related arguments used on all canvas text interfaces.",
@@ -37,32 +37,34 @@
     ],
     "imports": [],
     "extends": [],
-    "items": [
-      {
-        "name": "Text",
-        "type": "str",
-        "lines": [
-          "The complete text, from which a subset is selected by the parameters below."
-        ]
-      },
-      {
-        "name": "StartPosition",
-        "type": "int",
-        "lines": [
-          "Start position within the string.",
-          "",
-          "The first character has index 0."
-        ]
-      },
-      {
-        "name": "Length",
-        "type": "int",
-        "lines": [
-          "Length of the substring to actually use.",
-          "",
-          "Must be within the range [0,INTMAX]."
-        ]
-      }
-    ]
+    "items": {
+      "properties": [
+        {
+          "name": "Text",
+          "returns": "str",
+          "desc": [
+            "The complete text, from which a subset is selected by the parameters below."
+          ]
+        },
+        {
+          "name": "StartPosition",
+          "returns": "int",
+          "desc": [
+            "Start position within the string.",
+            "",
+            "The first character has index 0."
+          ]
+        },
+        {
+          "name": "Length",
+          "returns": "int",
+          "desc": [
+            "Length of the substring to actually use.",
+            "",
+            "Must be within the range [0,INTMAX]."
+          ]
+        }
+      ]
+    }
   }
 }

@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.20",
+  "version": "0.1.21",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "DragSourceDropEvent",
@@ -32,7 +32,7 @@
     },
     "quote": [],
     "typings": [],
-    "requires_typing": false,
+    "requires_typing": true,
     "fullname": "com.sun.star.datatransfer.dnd.DragSourceDropEvent",
     "desc": [
       "The DragSourceDropEvent is delivered from an object that implements XDragSourceContext to its currently registered drag source listener's.",
@@ -43,21 +43,23 @@
     "extends": [
       "com.sun.star.datatransfer.dnd.DragSourceEvent"
     ],
-    "items": [
-      {
-        "name": "DropAction",
-        "type": "int",
-        "lines": [
-          "The action performed by the target on the subject of the drop."
-        ]
-      },
-      {
-        "name": "DropSuccess",
-        "type": "bool",
-        "lines": [
-          "Indicates if the drop was successful."
-        ]
-      }
-    ]
+    "items": {
+      "properties": [
+        {
+          "name": "DropAction",
+          "returns": "int",
+          "desc": [
+            "The action performed by the target on the subject of the drop."
+          ]
+        },
+        {
+          "name": "DropSuccess",
+          "returns": "bool",
+          "desc": [
+            "Indicates if the drop was successful."
+          ]
+        }
+      ]
+    }
   }
 }

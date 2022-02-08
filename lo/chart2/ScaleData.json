@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.20",
+  "version": "0.1.21",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "ScaleData",
@@ -61,96 +61,98 @@
     "desc": [],
     "imports": [],
     "extends": [],
-    "items": [
-      {
-        "name": "Minimum",
-        "type": "object",
-        "lines": [
-          "if the any contains a double value this is used as a fixed maximum.",
-          "",
-          "Otherwise, if the any is empty or contains an incompatible type, the maximum is automatic.",
-          "",
-          "If the maximum is automatic, this means, each view that represents the model containing this scale, has to calculate a maximum by its own means."
-        ]
-      },
-      {
-        "name": "Maximum",
-        "type": "object",
-        "lines": [
-          "if the any contains a double value this is used as a fixed minimum.",
-          "",
-          "Otherwise, if the any is empty or contains an incompatible type, the minimum is automatic.",
-          "",
-          "If the minimum is automatic, this means, each view that represents the model containing this scale, has to calculate a minimum by its own means."
-        ]
-      },
-      {
-        "name": "Origin",
-        "type": "object",
-        "lines": [
-          "The Origin indicates where other axes cross this axis.",
-          "",
-          "If the any contains a double value that value is used. Otherwise an appropriate value has to be calculated by that instances using Origin."
-        ]
-      },
-      {
-        "name": "Orientation",
-        "type": "AxisOrientation_ecba0d6d",
-        "lines": [
-          "Axis orientation (standard or reversed).",
-          "",
-          "If used at the Y axis in pie charts or doughnut charts, specifies the rotation direction of the pie. The value AxisOrientation.MATHEMATICAL rotates the pie counterclockwise, the value AxisOrientation.REVERSE rotates the pie clockwise.",
-          "",
-          "Note: Is this a good place for the axis orientation? Two axes may use the same scale, but point into two different directions."
-        ]
-      },
-      {
-        "name": "Scaling",
-        "type": "XScaling_97500a65",
-        "lines": []
-      },
-      {
-        "name": "Categories",
-        "type": "XLabeledDataSequence_7e1a10c8",
-        "lines": []
-      },
-      {
-        "name": "AxisType",
-        "type": "int",
-        "lines": [
-          "describes the type of the axis.",
-          "",
-          "It can be a real number axis or a category axis or something else. AxisType is one value out of the constant group AxisType."
-        ]
-      },
-      {
-        "name": "AutoDateAxis",
-        "type": "bool",
-        "lines": [
-          "if true an AxisType CATEGORY is interpreted as DATE if the underlying data given in Categories are dates"
-        ]
-      },
-      {
-        "name": "ShiftedCategoryPosition",
-        "type": "bool",
-        "lines": [
-          "describes whether data points on category or date axis are placed between tickmarks or not if true the maximum on the scale will be expanded for one interval"
-        ]
-      },
-      {
-        "name": "IncrementData",
-        "type": "IncrementData_d2000c6b",
-        "lines": [
-          "increment data to be used for not date-time axis"
-        ]
-      },
-      {
-        "name": "TimeIncrement",
-        "type": "TimeIncrement_c7e70c4e",
-        "lines": [
-          "increment data to be used in case of date-time axis"
-        ]
-      }
-    ]
+    "items": {
+      "properties": [
+        {
+          "name": "Minimum",
+          "returns": "object",
+          "desc": [
+            "if the any contains a double value this is used as a fixed maximum.",
+            "",
+            "Otherwise, if the any is empty or contains an incompatible type, the maximum is automatic.",
+            "",
+            "If the maximum is automatic, this means, each view that represents the model containing this scale, has to calculate a maximum by its own means."
+          ]
+        },
+        {
+          "name": "Maximum",
+          "returns": "object",
+          "desc": [
+            "if the any contains a double value this is used as a fixed minimum.",
+            "",
+            "Otherwise, if the any is empty or contains an incompatible type, the minimum is automatic.",
+            "",
+            "If the minimum is automatic, this means, each view that represents the model containing this scale, has to calculate a minimum by its own means."
+          ]
+        },
+        {
+          "name": "Origin",
+          "returns": "object",
+          "desc": [
+            "The Origin indicates where other axes cross this axis.",
+            "",
+            "If the any contains a double value that value is used. Otherwise an appropriate value has to be calculated by that instances using Origin."
+          ]
+        },
+        {
+          "name": "Orientation",
+          "returns": "AxisOrientation_ecba0d6d",
+          "desc": [
+            "Axis orientation (standard or reversed).",
+            "",
+            "If used at the Y axis in pie charts or doughnut charts, specifies the rotation direction of the pie. The value AxisOrientation.MATHEMATICAL rotates the pie counterclockwise, the value AxisOrientation.REVERSE rotates the pie clockwise.",
+            "",
+            "Note: Is this a good place for the axis orientation? Two axes may use the same scale, but point into two different directions."
+          ]
+        },
+        {
+          "name": "Scaling",
+          "returns": "XScaling_97500a65",
+          "desc": []
+        },
+        {
+          "name": "Categories",
+          "returns": "XLabeledDataSequence_7e1a10c8",
+          "desc": []
+        },
+        {
+          "name": "AxisType",
+          "returns": "int",
+          "desc": [
+            "describes the type of the axis.",
+            "",
+            "It can be a real number axis or a category axis or something else. AxisType is one value out of the constant group AxisType."
+          ]
+        },
+        {
+          "name": "AutoDateAxis",
+          "returns": "bool",
+          "desc": [
+            "if true an AxisType CATEGORY is interpreted as DATE if the underlying data given in Categories are dates"
+          ]
+        },
+        {
+          "name": "ShiftedCategoryPosition",
+          "returns": "bool",
+          "desc": [
+            "describes whether data points on category or date axis are placed between tickmarks or not if true the maximum on the scale will be expanded for one interval"
+          ]
+        },
+        {
+          "name": "IncrementData",
+          "returns": "IncrementData_d2000c6b",
+          "desc": [
+            "increment data to be used for not date-time axis"
+          ]
+        },
+        {
+          "name": "TimeIncrement",
+          "returns": "TimeIncrement_c7e70c4e",
+          "desc": [
+            "increment data to be used in case of date-time axis"
+          ]
+        }
+      ]
+    }
   }
 }

@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.20",
+  "version": "0.1.21",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "ContextMenuExecuteEvent",
@@ -57,37 +57,39 @@
     ],
     "imports": [],
     "extends": [],
-    "items": [
-      {
-        "name": "SourceWindow",
-        "type": "XWindow_713b0924",
-        "lines": [
-          "contains the window where the context menu has been requested"
-        ]
-      },
-      {
-        "name": "ExecutePosition",
-        "type": "Point_5fb2085e",
-        "lines": [
-          "contains the position the context menu will be executed at."
-        ]
-      },
-      {
-        "name": "ActionTriggerContainer",
-        "type": "XIndexContainer_1c040ebe",
-        "lines": [
-          "enables the access to the menu content.",
-          "",
-          "The implementing object has to support the service com.sun.star.ui.ActionTriggerContainer;"
-        ]
-      },
-      {
-        "name": "Selection",
-        "type": "XSelectionSupplier_fed20e15",
-        "lines": [
-          "provides the current selection inside the source window."
-        ]
-      }
-    ]
+    "items": {
+      "properties": [
+        {
+          "name": "SourceWindow",
+          "returns": "XWindow_713b0924",
+          "desc": [
+            "contains the window where the context menu has been requested"
+          ]
+        },
+        {
+          "name": "ExecutePosition",
+          "returns": "Point_5fb2085e",
+          "desc": [
+            "contains the position the context menu will be executed at."
+          ]
+        },
+        {
+          "name": "ActionTriggerContainer",
+          "returns": "XIndexContainer_1c040ebe",
+          "desc": [
+            "enables the access to the menu content.",
+            "",
+            "The implementing object has to support the service com.sun.star.ui.ActionTriggerContainer;"
+          ]
+        },
+        {
+          "name": "Selection",
+          "returns": "XSelectionSupplier_fed20e15",
+          "desc": [
+            "provides the current selection inside the source window."
+          ]
+        }
+      ]
+    }
   }
 }

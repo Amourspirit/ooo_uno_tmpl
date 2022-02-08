@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.20",
+  "version": "0.1.21",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "FinishEngineEvent",
@@ -53,32 +53,34 @@
     "extends": [
       "com.sun.star.lang.EventObject"
     ],
-    "items": [
-      {
-        "name": "Finish",
-        "type": "FinishReason_ca230c66",
-        "lines": [
-          "specifies why the script terminates."
-        ]
-      },
-      {
-        "name": "ErrorMessage",
-        "type": "str",
-        "lines": [
-          "error message.",
-          "",
-          "Only valid if Reason is RuntimeError or CompileError."
-        ]
-      },
-      {
-        "name": "Return",
-        "type": "object",
-        "lines": [
-          "contains the return value.",
-          "",
-          "This field is only valid if FinishEngineEvent.Finish is FinishReason.OK."
-        ]
-      }
-    ]
+    "items": {
+      "properties": [
+        {
+          "name": "Finish",
+          "returns": "FinishReason_ca230c66",
+          "desc": [
+            "specifies why the script terminates."
+          ]
+        },
+        {
+          "name": "ErrorMessage",
+          "returns": "str",
+          "desc": [
+            "error message.",
+            "",
+            "Only valid if Reason is RuntimeError or CompileError."
+          ]
+        },
+        {
+          "name": "Return",
+          "returns": "object",
+          "desc": [
+            "contains the return value.",
+            "",
+            "This field is only valid if FinishEngineEvent.Finish is FinishReason.OK."
+          ]
+        }
+      ]
+    }
   }
 }

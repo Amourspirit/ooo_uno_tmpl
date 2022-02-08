@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.20",
+  "version": "0.1.21",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "Command",
@@ -24,37 +24,39 @@
     "extends_map": {},
     "quote": [],
     "typings": [],
-    "requires_typing": false,
+    "requires_typing": true,
     "fullname": "com.sun.star.ucb.Command",
     "desc": [
       "contains a command."
     ],
     "imports": [],
     "extends": [],
-    "items": [
-      {
-        "name": "Name",
-        "type": "str",
-        "lines": [
-          "contains the name of the command."
-        ]
-      },
-      {
-        "name": "Handle",
-        "type": "int",
-        "lines": [
-          "contains an implementation specific handle for the command.",
-          "",
-          "It must be -1 if the implementation has no handle. 0 is a valid command handle."
-        ]
-      },
-      {
-        "name": "Argument",
-        "type": "object",
-        "lines": [
-          "contains the argument of the command"
-        ]
-      }
-    ]
+    "items": {
+      "properties": [
+        {
+          "name": "Name",
+          "returns": "str",
+          "desc": [
+            "contains the name of the command."
+          ]
+        },
+        {
+          "name": "Handle",
+          "returns": "int",
+          "desc": [
+            "contains an implementation specific handle for the command.",
+            "",
+            "It must be -1 if the implementation has no handle. 0 is a valid command handle."
+          ]
+        },
+        {
+          "name": "Argument",
+          "returns": "object",
+          "desc": [
+            "contains the argument of the command"
+          ]
+        }
+      ]
+    }
   }
 }

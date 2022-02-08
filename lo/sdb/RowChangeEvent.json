@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.20",
+  "version": "0.1.21",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "RowChangeEvent",
@@ -32,7 +32,7 @@
     },
     "quote": [],
     "typings": [],
-    "requires_typing": false,
+    "requires_typing": true,
     "fullname": "com.sun.star.sdb.RowChangeEvent",
     "desc": [
       "indicates the type of change action on the data source."
@@ -41,21 +41,23 @@
     "extends": [
       "com.sun.star.lang.EventObject"
     ],
-    "items": [
-      {
-        "name": "Action",
-        "type": "int",
-        "lines": [
-          "indicates the type of change."
-        ]
-      },
-      {
-        "name": "Rows",
-        "type": "int",
-        "lines": [
-          "indicates the number of rows affected by the change."
-        ]
-      }
-    ]
+    "items": {
+      "properties": [
+        {
+          "name": "Action",
+          "returns": "int",
+          "desc": [
+            "indicates the type of change."
+          ]
+        },
+        {
+          "name": "Rows",
+          "returns": "int",
+          "desc": [
+            "indicates the number of rows affected by the change."
+          ]
+        }
+      ]
+    }
   }
 }

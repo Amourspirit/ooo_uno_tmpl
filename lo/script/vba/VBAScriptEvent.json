@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.20",
+  "version": "0.1.21",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "VBAScriptEvent",
@@ -32,7 +32,7 @@
     },
     "quote": [],
     "typings": [],
-    "requires_typing": false,
+    "requires_typing": true,
     "fullname": "com.sun.star.script.vba.VBAScriptEvent",
     "desc": [
       "Describes a VBA script event fired via XVBACompatibility.broadcastVBAScriptEvent(), and received by XVBAScriptListener.notifyVBAScriptEvent()."
@@ -41,21 +41,23 @@
     "extends": [
       "com.sun.star.lang.EventObject"
     ],
-    "items": [
-      {
-        "name": "Identifier",
-        "type": "int",
-        "lines": [
-          "Identifies the type of the event."
-        ]
-      },
-      {
-        "name": "ModuleName",
-        "type": "str",
-        "lines": [
-          "Contains the name of the involved VBA module."
-        ]
-      }
-    ]
+    "items": {
+      "properties": [
+        {
+          "name": "Identifier",
+          "returns": "int",
+          "desc": [
+            "Identifies the type of the event."
+          ]
+        },
+        {
+          "name": "ModuleName",
+          "returns": "str",
+          "desc": [
+            "Contains the name of the involved VBA module."
+          ]
+        }
+      ]
+    }
   }
 }

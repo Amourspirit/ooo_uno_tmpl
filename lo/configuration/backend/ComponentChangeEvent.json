@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.20",
+  "version": "0.1.21",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "ComponentChangeEvent",
@@ -32,7 +32,7 @@
     },
     "quote": [],
     "typings": [],
-    "requires_typing": false,
+    "requires_typing": true,
     "fullname": "com.sun.star.configuration.backend.ComponentChangeEvent",
     "desc": [
       "This event is fired when a change becomes effective on the source of the event."
@@ -41,14 +41,16 @@
     "extends": [
       "com.sun.star.lang.EventObject"
     ],
-    "items": [
-      {
-        "name": "Component",
-        "type": "str",
-        "lines": [
-          "The name of the Component that changed."
-        ]
-      }
-    ]
+    "items": {
+      "properties": [
+        {
+          "name": "Component",
+          "returns": "str",
+          "desc": [
+            "The name of the Component that changed."
+          ]
+        }
+      ]
+    }
   }
 }

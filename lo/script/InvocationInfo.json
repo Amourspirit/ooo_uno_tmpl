@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.20",
+  "version": "0.1.21",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "InvocationInfo",
@@ -19,24 +19,25 @@
     "name": "InvocationInfo",
     "namespace": "com.sun.star.script",
     "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1script_1_1InvocationInfo.html",
-    "from_imports": [],
-    "from_imports_typing": [
+    "from_imports": [
       [
         "..reflection.param_mode",
         "ParamMode",
         "ParamMode_d7260ca9"
-      ],
+      ]
+    ],
+    "from_imports_typing": [
       [
         ".member_type",
         "MemberType",
         "MemberType_b1e00b97"
       ]
     ],
-    "extends_map": {},
+    "extends_map": {
+      "com.sun.star.reflection.ParamMode": "ParamMode_d7260ca9"
+    },
     "quote": [
-      "MemberType_b1e00b97",
-      "typing.Tuple[ParamMode_d7260ca9, ...]",
-      "typing.Tuple[object, ...]"
+      "MemberType_b1e00b97"
     ],
     "typings": [
       "typing.Tuple[ParamMode_d7260ca9, ...]",
@@ -49,53 +50,57 @@
     ],
     "imports": [],
     "extends": [],
-    "items": [
-      {
-        "name": "aName",
-        "type": "str",
-        "lines": [
-          "Name of the method or property."
-        ]
-      },
-      {
-        "name": "eMemberType",
-        "type": "MemberType_b1e00b97",
-        "lines": [
-          "Kind of the member (method or property)."
-        ]
-      },
-      {
-        "name": "PropertyAttribute",
-        "type": "int",
-        "lines": [
-          "Only for property members: This field may contain zero or more constants of the com.sun.star.beans.PropertyAttribute constants group.",
-          "",
-          "It is not guaranteed that all necessary constants are set to describe the property completely, but a flag will only be set, if the corresponding charac- teristic really exists. Example: If the READONLY flag is set, the property is readonly. If it isn't set, the property nevertheless can be readonly.",
-          "",
-          "For methods this field is irrelevant and is set to 0."
-        ]
-      },
-      {
-        "name": "aType",
-        "type": "object",
-        "lines": [
-          "Type of the member, for methods the return type."
-        ]
-      },
-      {
-        "name": "aParamTypes",
-        "type": "typing.Tuple[object, ...]",
-        "lines": [
-          "Types method parameters, for properties this sequence is empty."
-        ]
-      },
-      {
-        "name": "aParamModes",
-        "type": "typing.Tuple[ParamMode_d7260ca9, ...]",
-        "lines": [
-          "Mode of method parameters (IN, OUT, INOUT), for properties this sequence is empty."
-        ]
-      }
-    ]
+    "items": {
+      "properties": [
+        {
+          "name": "aName",
+          "returns": "str",
+          "desc": [
+            "Name of the method or property."
+          ]
+        },
+        {
+          "name": "eMemberType",
+          "returns": "MemberType_b1e00b97",
+          "desc": [
+            "Kind of the member (method or property)."
+          ]
+        },
+        {
+          "name": "PropertyAttribute",
+          "returns": "int",
+          "desc": [
+            "Only for property members: This field may contain zero or more constants of the com.sun.star.beans.PropertyAttribute constants group.",
+            "",
+            "It is not guaranteed that all necessary constants are set to describe the property completely, but a flag will only be set, if the corresponding charac- teristic really exists. Example: If the READONLY flag is set, the property is readonly. If it isn't set, the property nevertheless can be readonly.",
+            "",
+            "For methods this field is irrelevant and is set to 0."
+          ]
+        },
+        {
+          "name": "aType",
+          "returns": "object",
+          "desc": [
+            "Type of the member, for methods the return type."
+          ]
+        }
+      ],
+      "types": [
+        {
+          "name": "aParamTypes",
+          "returns": "typing.Tuple[object, ...]",
+          "desc": [
+            "Types method parameters, for properties this sequence is empty."
+          ]
+        },
+        {
+          "name": "aParamModes",
+          "returns": "typing.Tuple[ParamMode_d7260ca9, ...]",
+          "desc": [
+            "Mode of method parameters (IN, OUT, INOUT), for properties this sequence is empty."
+          ]
+        }
+      ]
+    }
   }
 }

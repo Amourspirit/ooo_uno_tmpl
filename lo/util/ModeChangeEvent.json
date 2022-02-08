@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.20",
+  "version": "0.1.21",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "ModeChangeEvent",
@@ -32,7 +32,7 @@
     },
     "quote": [],
     "typings": [],
-    "requires_typing": false,
+    "requires_typing": true,
     "fullname": "com.sun.star.util.ModeChangeEvent",
     "desc": [
       "allows to veto changes in an object's internal mode.",
@@ -45,16 +45,18 @@
     "extends": [
       "com.sun.star.lang.EventObject"
     ],
-    "items": [
-      {
-        "name": "NewMode",
-        "type": "str",
-        "lines": [
-          "denotes the new internal mode of a component",
-          "",
-          "The semantics of the mode string is to be defined by the component broadcasting this event."
-        ]
-      }
-    ]
+    "items": {
+      "properties": [
+        {
+          "name": "NewMode",
+          "returns": "str",
+          "desc": [
+            "denotes the new internal mode of a component",
+            "",
+            "The semantics of the mode string is to be defined by the component broadcasting this event."
+          ]
+        }
+      ]
+    }
   }
 }

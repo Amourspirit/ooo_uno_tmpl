@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.20",
+  "version": "0.1.21",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "ConfigurationEvent",
@@ -32,7 +32,7 @@
     },
     "quote": [],
     "typings": [],
-    "requires_typing": false,
+    "requires_typing": true,
     "fullname": "com.sun.star.ui.ConfigurationEvent",
     "desc": [
       "this event is broadcasted by a configuration manager whenever the state of user interface element has changed.",
@@ -45,23 +45,25 @@
     "extends": [
       "com.sun.star.container.ContainerEvent"
     ],
-    "items": [
-      {
-        "name": "ResourceURL",
-        "type": "str",
-        "lines": [
-          "contains the resource URL of the user interface element or a configuration manager, which has been changed, inserted or replaced."
-        ]
-      },
-      {
-        "name": "aInfo",
-        "type": "object",
-        "lines": [
-          "contains additional information about this configuration event.",
-          "",
-          "The type depends on the specific implementation."
-        ]
-      }
-    ]
+    "items": {
+      "properties": [
+        {
+          "name": "ResourceURL",
+          "returns": "str",
+          "desc": [
+            "contains the resource URL of the user interface element or a configuration manager, which has been changed, inserted or replaced."
+          ]
+        },
+        {
+          "name": "aInfo",
+          "returns": "object",
+          "desc": [
+            "contains additional information about this configuration event.",
+            "",
+            "The type depends on the specific implementation."
+          ]
+        }
+      ]
+    }
   }
 }

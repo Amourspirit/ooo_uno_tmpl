@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.20",
+  "version": "0.1.21",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "SearchCriterium",
@@ -19,18 +19,18 @@
     "name": "SearchCriterium",
     "namespace": "com.sun.star.ucb",
     "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1ucb_1_1SearchCriterium.html",
-    "from_imports": [],
-    "from_imports_typing": [
+    "from_imports": [
       [
         ".rule_term",
         "RuleTerm",
         "RuleTerm_7a4b0972"
       ]
     ],
-    "extends_map": {},
-    "quote": [
-      "typing.Tuple[RuleTerm_7a4b0972, ...]"
-    ],
+    "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.ucb.RuleTerm": "RuleTerm_7a4b0972"
+    },
+    "quote": [],
     "typings": [
       "typing.Tuple[RuleTerm_7a4b0972, ...]"
     ],
@@ -41,14 +41,16 @@
     ],
     "imports": [],
     "extends": [],
-    "items": [
-      {
-        "name": "Terms",
-        "type": "typing.Tuple[RuleTerm_7a4b0972, ...]",
-        "lines": [
-          "a number of rule terms."
-        ]
-      }
-    ]
+    "items": {
+      "types": [
+        {
+          "name": "Terms",
+          "returns": "typing.Tuple[RuleTerm_7a4b0972, ...]",
+          "desc": [
+            "a number of rule terms."
+          ]
+        }
+      ]
+    }
   }
 }

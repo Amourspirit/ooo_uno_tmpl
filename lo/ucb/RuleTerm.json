@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.20",
+  "version": "0.1.21",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "RuleTerm",
@@ -24,7 +24,7 @@
     "extends_map": {},
     "quote": [],
     "typings": [],
-    "requires_typing": false,
+    "requires_typing": true,
     "fullname": "com.sun.star.ucb.RuleTerm",
     "desc": [
       "describes a term.",
@@ -33,46 +33,48 @@
     ],
     "imports": [],
     "extends": [],
-    "items": [
-      {
-        "name": "Property",
-        "type": "str",
-        "lines": [
-          "the name of the property used to match the term."
-        ]
-      },
-      {
-        "name": "Operand",
-        "type": "object",
-        "lines": [
-          "the value of the property used to compare with the document property."
-        ]
-      },
-      {
-        "name": "Operator",
-        "type": "int",
-        "lines": [
-          "the operator used to compare the property of the document with the given value (e.g.",
-          "",
-          "\\\"contains\\\" or \\\"greater equal\\\").",
-          "",
-          "The value can be one of the RuleOperator constants."
-        ]
-      },
-      {
-        "name": "CaseSensitive",
-        "type": "bool",
-        "lines": [
-          "this flag indicates whether a string \\\"operand\\\" shall be compared case sensitive."
-        ]
-      },
-      {
-        "name": "RegularExpression",
-        "type": "bool",
-        "lines": [
-          "this flag indicates whether a string \\\"operand\\\" shall be treated as a regular expression."
-        ]
-      }
-    ]
+    "items": {
+      "properties": [
+        {
+          "name": "Property",
+          "returns": "str",
+          "desc": [
+            "the name of the property used to match the term."
+          ]
+        },
+        {
+          "name": "Operand",
+          "returns": "object",
+          "desc": [
+            "the value of the property used to compare with the document property."
+          ]
+        },
+        {
+          "name": "Operator",
+          "returns": "int",
+          "desc": [
+            "the operator used to compare the property of the document with the given value (e.g.",
+            "",
+            "\\\"contains\\\" or \\\"greater equal\\\").",
+            "",
+            "The value can be one of the RuleOperator constants."
+          ]
+        },
+        {
+          "name": "CaseSensitive",
+          "returns": "bool",
+          "desc": [
+            "this flag indicates whether a string \\\"operand\\\" shall be compared case sensitive."
+          ]
+        },
+        {
+          "name": "RegularExpression",
+          "returns": "bool",
+          "desc": [
+            "this flag indicates whether a string \\\"operand\\\" shall be treated as a regular expression."
+          ]
+        }
+      ]
+    }
   }
 }

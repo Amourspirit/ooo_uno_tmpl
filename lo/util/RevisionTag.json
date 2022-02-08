@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.20",
+  "version": "0.1.21",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "RevisionTag",
@@ -39,37 +39,39 @@
     ],
     "imports": [],
     "extends": [],
-    "items": [
-      {
-        "name": "TimeStamp",
-        "type": "DateTime_84de09d3",
-        "lines": [
-          "contains the time when the revision was created ( can be invalid )"
-        ]
-      },
-      {
-        "name": "Author",
-        "type": "str",
-        "lines": [
-          "contains an identifier for the author that created the revision( can be empty )"
-        ]
-      },
-      {
-        "name": "Comment",
-        "type": "str",
-        "lines": [
-          "contains a comment that the author has left for this revision ( can be empty )"
-        ]
-      },
-      {
-        "name": "Identifier",
-        "type": "str",
-        "lines": [
-          "contains a unique identifier for the revision and must not be empty",
-          "",
-          "This identifier can have any form. It can be something like \\\"1.2.3\\\" or \\\"Version 1\\\" etc. It depends on the revision control system how it names the revisions."
-        ]
-      }
-    ]
+    "items": {
+      "properties": [
+        {
+          "name": "TimeStamp",
+          "returns": "DateTime_84de09d3",
+          "desc": [
+            "contains the time when the revision was created ( can be invalid )"
+          ]
+        },
+        {
+          "name": "Author",
+          "returns": "str",
+          "desc": [
+            "contains an identifier for the author that created the revision( can be empty )"
+          ]
+        },
+        {
+          "name": "Comment",
+          "returns": "str",
+          "desc": [
+            "contains a comment that the author has left for this revision ( can be empty )"
+          ]
+        },
+        {
+          "name": "Identifier",
+          "returns": "str",
+          "desc": [
+            "contains a unique identifier for the revision and must not be empty",
+            "",
+            "This identifier can have any form. It can be something like \\\"1.2.3\\\" or \\\"Version 1\\\" etc. It depends on the revision control system how it names the revisions."
+          ]
+        }
+      ]
+    }
   }
 }

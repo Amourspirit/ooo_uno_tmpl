@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.20",
+  "version": "0.1.21",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "SearchInfo",
@@ -19,23 +19,25 @@
     "name": "SearchInfo",
     "namespace": "com.sun.star.ucb",
     "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1ucb_1_1SearchInfo.html",
-    "from_imports": [],
-    "from_imports_typing": [
+    "from_imports": [
       [
         ".search_criterium",
         "SearchCriterium",
         "SearchCriterium_c6d30c4c"
-      ],
+      ]
+    ],
+    "from_imports_typing": [
       [
         ".search_recursion",
         "SearchRecursion",
         "SearchRecursion_c7080c52"
       ]
     ],
-    "extends_map": {},
+    "extends_map": {
+      "com.sun.star.ucb.SearchCriterium": "SearchCriterium_c6d30c4c"
+    },
     "quote": [
-      "SearchRecursion_c7080c52",
-      "typing.Tuple[SearchCriterium_c6d30c4c, ...]"
+      "SearchRecursion_c7080c52"
     ],
     "typings": [
       "typing.Tuple[SearchCriterium_c6d30c4c, ...]"
@@ -47,49 +49,53 @@
     ],
     "imports": [],
     "extends": [],
-    "items": [
-      {
-        "name": "Recursion",
-        "type": "SearchRecursion_c7080c52",
-        "lines": [
-          "the mode of recursion to use."
-        ]
-      },
-      {
-        "name": "IncludeBase",
-        "type": "bool",
-        "lines": [
-          "whether to include the object itself in the search or only (some of) its sub-objects."
-        ]
-      },
-      {
-        "name": "RespectFolderViewRestrictions",
-        "type": "bool",
-        "lines": [
-          "whether to respect the \\\"view restrictions\\\" specified for the folders hierarchically contained within an object (e.g., only searches through subscribed folders)."
-        ]
-      },
-      {
-        "name": "RespectDocViewRestrictions",
-        "type": "bool",
-        "lines": [
-          "whether to respect the \\\"view restrictions\\\" specified for the documents hierarchically contained within an object (e.g., only searches through marked documents)."
-        ]
-      },
-      {
-        "name": "FollowIndirections",
-        "type": "bool",
-        "lines": [
-          "whether to follow indirections (link objects) and search through their respective targets also."
-        ]
-      },
-      {
-        "name": "Criteria",
-        "type": "typing.Tuple[SearchCriterium_c6d30c4c, ...]",
-        "lines": [
-          "the search criteria."
-        ]
-      }
-    ]
+    "items": {
+      "properties": [
+        {
+          "name": "Recursion",
+          "returns": "SearchRecursion_c7080c52",
+          "desc": [
+            "the mode of recursion to use."
+          ]
+        },
+        {
+          "name": "IncludeBase",
+          "returns": "bool",
+          "desc": [
+            "whether to include the object itself in the search or only (some of) its sub-objects."
+          ]
+        },
+        {
+          "name": "RespectFolderViewRestrictions",
+          "returns": "bool",
+          "desc": [
+            "whether to respect the \\\"view restrictions\\\" specified for the folders hierarchically contained within an object (e.g., only searches through subscribed folders)."
+          ]
+        },
+        {
+          "name": "RespectDocViewRestrictions",
+          "returns": "bool",
+          "desc": [
+            "whether to respect the \\\"view restrictions\\\" specified for the documents hierarchically contained within an object (e.g., only searches through marked documents)."
+          ]
+        },
+        {
+          "name": "FollowIndirections",
+          "returns": "bool",
+          "desc": [
+            "whether to follow indirections (link objects) and search through their respective targets also."
+          ]
+        }
+      ],
+      "types": [
+        {
+          "name": "Criteria",
+          "returns": "typing.Tuple[SearchCriterium_c6d30c4c, ...]",
+          "desc": [
+            "the search criteria."
+          ]
+        }
+      ]
+    }
   }
 }

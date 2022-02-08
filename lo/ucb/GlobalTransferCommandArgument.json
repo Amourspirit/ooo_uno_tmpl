@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.20",
+  "version": "0.1.21",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "GlobalTransferCommandArgument",
@@ -39,46 +39,48 @@
     ],
     "imports": [],
     "extends": [],
-    "items": [
-      {
-        "name": "Operation",
-        "type": "TransferCommandOperation_486a0ff7",
-        "lines": [
-          "contains the action to perform ( COPY, MOVE, LINK )."
-        ]
-      },
-      {
-        "name": "SourceURL",
-        "type": "str",
-        "lines": [
-          "contains the URL of the source object."
-        ]
-      },
-      {
-        "name": "TargetURL",
-        "type": "str",
-        "lines": [
-          "contains the URL of the target folder."
-        ]
-      },
-      {
-        "name": "NewTitle",
-        "type": "str",
-        "lines": [
-          "contains the title of the transferred object, if it is different from the original one.",
-          "",
-          "If this field is filled, for example, a file will be renamed while it is being transferred."
-        ]
-      },
-      {
-        "name": "NameClash",
-        "type": "int",
-        "lines": [
-          "describes how to act in case of title clashes while transferring the data.",
-          "",
-          "A title clash for instance occurs, if a file named \\\"foo.txt\\\" is to be transferred to a folder already containing another file named \\\"foo.txt\\\". Refer to NameClash for possible values for this field."
-        ]
-      }
-    ]
+    "items": {
+      "properties": [
+        {
+          "name": "Operation",
+          "returns": "TransferCommandOperation_486a0ff7",
+          "desc": [
+            "contains the action to perform ( COPY, MOVE, LINK )."
+          ]
+        },
+        {
+          "name": "SourceURL",
+          "returns": "str",
+          "desc": [
+            "contains the URL of the source object."
+          ]
+        },
+        {
+          "name": "TargetURL",
+          "returns": "str",
+          "desc": [
+            "contains the URL of the target folder."
+          ]
+        },
+        {
+          "name": "NewTitle",
+          "returns": "str",
+          "desc": [
+            "contains the title of the transferred object, if it is different from the original one.",
+            "",
+            "If this field is filled, for example, a file will be renamed while it is being transferred."
+          ]
+        },
+        {
+          "name": "NameClash",
+          "returns": "int",
+          "desc": [
+            "describes how to act in case of title clashes while transferring the data.",
+            "",
+            "A title clash for instance occurs, if a file named \\\"foo.txt\\\" is to be transferred to a folder already containing another file named \\\"foo.txt\\\". Refer to NameClash for possible values for this field."
+          ]
+        }
+      ]
+    }
   }
 }

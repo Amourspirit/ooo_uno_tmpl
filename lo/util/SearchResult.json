@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.20",
+  "version": "0.1.21",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "SearchResult",
@@ -22,9 +22,7 @@
     "from_imports": [],
     "from_imports_typing": [],
     "extends_map": {},
-    "quote": [
-      "typing.Tuple[int, ...]"
-    ],
+    "quote": [],
     "typings": [
       "typing.Tuple[int, ...]"
     ],
@@ -33,32 +31,36 @@
     "desc": [],
     "imports": [],
     "extends": [],
-    "items": [
-      {
-        "name": "subRegExpressions",
-        "type": "int",
-        "lines": [
-          "Number of subexpressions.",
-          "",
-          "If it is 0, then no match found; this value is 1 for ABSOLUTE and APPROXIMATE match. The start and endOffset are always dependent on the search direction.",
-          "",
-          "For example, if you search \\\"X\\\" in the text \\\"-X-\\\" the offsets are:",
-          "",
-          "Forward, the startOffset is inclusive, the endOffset exclusive. Backward, the startOffset is exclusive, the endOffset inclusive.",
-          "",
-          "For regular expressions it can be greater than 1. If the value is 1, startoffset[0] and endoffset[0] points to the matching sub string if value is > 1, still startoffset[0] and endoffset[0] points to the matching substring for whole regular expression startoffset[i] and endoffset[i] points to the matching substring of i th matching substring."
-        ]
-      },
-      {
-        "name": "startOffset",
-        "type": "typing.Tuple[int, ...]",
-        "lines": []
-      },
-      {
-        "name": "endOffset",
-        "type": "typing.Tuple[int, ...]",
-        "lines": []
-      }
-    ]
+    "items": {
+      "properties": [
+        {
+          "name": "subRegExpressions",
+          "returns": "int",
+          "desc": [
+            "Number of subexpressions.",
+            "",
+            "If it is 0, then no match found; this value is 1 for ABSOLUTE and APPROXIMATE match. The start and endOffset are always dependent on the search direction.",
+            "",
+            "For example, if you search \\\"X\\\" in the text \\\"-X-\\\" the offsets are:",
+            "",
+            "Forward, the startOffset is inclusive, the endOffset exclusive. Backward, the startOffset is exclusive, the endOffset inclusive.",
+            "",
+            "For regular expressions it can be greater than 1. If the value is 1, startoffset[0] and endoffset[0] points to the matching sub string if value is > 1, still startoffset[0] and endoffset[0] points to the matching substring for whole regular expression startoffset[i] and endoffset[i] points to the matching substring of i th matching substring."
+          ]
+        }
+      ],
+      "types": [
+        {
+          "name": "startOffset",
+          "returns": "typing.Tuple[int, ...]",
+          "desc": []
+        },
+        {
+          "name": "endOffset",
+          "returns": "typing.Tuple[int, ...]",
+          "desc": []
+        }
+      ]
+    }
   }
 }

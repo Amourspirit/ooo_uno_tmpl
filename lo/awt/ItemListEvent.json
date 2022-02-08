@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.20",
+  "version": "0.1.21",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "ItemListEvent",
@@ -32,7 +32,7 @@
     },
     "quote": [],
     "typings": [],
-    "requires_typing": false,
+    "requires_typing": true,
     "fullname": "com.sun.star.awt.ItemListEvent",
     "desc": [
       "is the event broadcasted by a XListItems implementation for changes in its item list."
@@ -41,34 +41,36 @@
     "extends": [
       "com.sun.star.lang.EventObject"
     ],
-    "items": [
-      {
-        "name": "ItemPosition",
-        "type": "int",
-        "lines": [
-          "specifies the position of the item which is affected by the event",
-          "",
-          "In case the event is not related to a single item, but to the complete list, the value of this member is undefined."
-        ]
-      },
-      {
-        "name": "ItemText",
-        "type": "object",
-        "lines": [
-          "the text of the item.",
-          "",
-          "If the event being notified did not touch the text of an item, this member is empty. For instance, upon invocation of XItemList.setItemImage(), only ItemImageURL will be set, and ItemText will be empty."
-        ]
-      },
-      {
-        "name": "ItemImageURL",
-        "type": "object",
-        "lines": [
-          "the URL of the image of the item",
-          "",
-          "If the event being notified did not touch the image of an item, this member is empty. For instance, upon invocation of XItemList.setItemText(), only ItemText will be set, and ItemImageURL will be empty."
-        ]
-      }
-    ]
+    "items": {
+      "properties": [
+        {
+          "name": "ItemPosition",
+          "returns": "int",
+          "desc": [
+            "specifies the position of the item which is affected by the event",
+            "",
+            "In case the event is not related to a single item, but to the complete list, the value of this member is undefined."
+          ]
+        },
+        {
+          "name": "ItemText",
+          "returns": "object",
+          "desc": [
+            "the text of the item.",
+            "",
+            "If the event being notified did not touch the text of an item, this member is empty. For instance, upon invocation of XItemList.setItemImage(), only ItemImageURL will be set, and ItemText will be empty."
+          ]
+        },
+        {
+          "name": "ItemImageURL",
+          "returns": "object",
+          "desc": [
+            "the URL of the image of the item",
+            "",
+            "If the event being notified did not touch the image of an item, this member is empty. For instance, upon invocation of XItemList.setItemText(), only ItemText will be set, and ItemImageURL will be empty."
+          ]
+        }
+      ]
+    }
   }
 }

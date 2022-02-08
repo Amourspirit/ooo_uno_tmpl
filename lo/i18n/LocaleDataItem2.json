@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.20",
+  "version": "0.1.21",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "LocaleDataItem2",
@@ -32,7 +32,7 @@
     },
     "quote": [],
     "typings": [],
-    "requires_typing": false,
+    "requires_typing": true,
     "fullname": "com.sun.star.i18n.LocaleDataItem2",
     "desc": [
       "Locale specific data, derived from LocaleDataItem adding an alternative input decimal separator.",
@@ -45,16 +45,18 @@
     "extends": [
       "com.sun.star.i18n.LocaleDataItem"
     ],
-    "items": [
-      {
-        "name": "decimalSeparatorAlternative",
-        "type": "str",
-        "lines": [
-          "Alternative input decimal separator, for example, \\\".\\\" if the regular locale dependent separator usually is not present on keyboards used with that locale.",
-          "",
-          "This separator is optional, an empty string denotes no alternative decimal separator shall be used."
-        ]
-      }
-    ]
+    "items": {
+      "properties": [
+        {
+          "name": "decimalSeparatorAlternative",
+          "returns": "str",
+          "desc": [
+            "Alternative input decimal separator, for example, \\\".\\\" if the regular locale dependent separator usually is not present on keyboards used with that locale.",
+            "",
+            "This separator is optional, an empty string denotes no alternative decimal separator shall be used."
+          ]
+        }
+      ]
+    }
   }
 }

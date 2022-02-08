@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.20",
+  "version": "0.1.21",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "DispatchInformation",
@@ -24,7 +24,7 @@
     "extends_map": {},
     "quote": [],
     "typings": [],
-    "requires_typing": false,
+    "requires_typing": true,
     "fullname": "com.sun.star.frame.DispatchInformation",
     "desc": [
       "provides information about a supported command",
@@ -35,21 +35,23 @@
     ],
     "imports": [],
     "extends": [],
-    "items": [
-      {
-        "name": "Command",
-        "type": "str",
-        "lines": [
-          "command URL of a supported command."
-        ]
-      },
-      {
-        "name": "GroupId",
-        "type": "int",
-        "lines": [
-          "group identifier to which the supported command belong."
-        ]
-      }
-    ]
+    "items": {
+      "properties": [
+        {
+          "name": "Command",
+          "returns": "str",
+          "desc": [
+            "command URL of a supported command."
+          ]
+        },
+        {
+          "name": "GroupId",
+          "returns": "int",
+          "desc": [
+            "group identifier to which the supported command belong."
+          ]
+        }
+      ]
+    }
   }
 }
