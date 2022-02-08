@@ -144,8 +144,6 @@ class ${safe_name}($self.get_class_inherits($name, $inherits)):
             if k in key_order:
                 setattr(self, k, v)
 
-
-
 #if $is_properties
 #set $properties = $attribs['properties']
 #for $property in $properties
@@ -164,9 +162,8 @@ class ${safe_name}($self.get_class_inherits($name, $inherits)):
     @${p_name}.setter
     def ${p_name}(self, value: $p_return) -> None:
         self._$self.camel_to_snake($p_name) = value
+
 #end for
 #end if
-
-
 
 __all__ = ['$safe_name']
