@@ -125,7 +125,7 @@ class AppConfig:
     template_dyn_py_ext: str
     """Extensiong for dynamic templates py ext sucha as .dynpy"""
     component_types: List[str]
-    com_sun_star: List[str]
+    com_sun_star_lo: List[str]
     """
     Path Like structure that will be used for namespace imports in build dir.
     """

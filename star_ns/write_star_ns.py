@@ -28,13 +28,13 @@ class WriteStarNs:
             self._root_dir = Path(root_dir)
         else:
             self._root_dir = Path(__main__.__file__).parent
-        self._write_root = Path(self._root_dir, self._config.builld_dir, *self._config.com_sun_star)
+        self._write_root = Path(self._root_dir, self._config.builld_dir, *self._config.com_sun_star_lo)
         self._rel_import = rel_import
     
     def _ensure_init_py(self) -> None:
         # ensure build/com/sun/star/__init__.py exist
         p = Path(self._config.builld_dir)
-        for name in self._config.com_sun_star:
+        for name in self._config.com_sun_star_lo:
             p = Path(p, name)
             if not p.is_absolute():
                 p = self._root_dir.joinpath(p)
@@ -60,7 +60,7 @@ class WriteStarNs:
             ns_path = ns.removeprefix('com.sun.star.')
             ns_parts = ns_path.split('.')
             if self._rel_import:
-                rel_ns_parts = [f_name for f_name in self._config.com_sun_star]
+                rel_ns_parts = [f_name for f_name in self._config.com_sun_star_lo]
                 rel_ns_parts.extend(ns_parts)
                 rel_ns = '.'.join(rel_ns_parts)
             else:

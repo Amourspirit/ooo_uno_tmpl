@@ -613,7 +613,7 @@ def _args_data_json(parser: argparse.ArgumentParser) -> None:
 
 
 def _args_data_star(parser: argparse.ArgumentParser, config: AppConfig) -> None:
-    css_dir = config.builld_dir + '/' + '/'.join(config.com_sun_star)
+    css_dir = config.builld_dir + '/' + '/'.join(config.com_sun_star_lo)
     parser.add_argument(
         '-s', '--write-star',
         help=f"Writes imports for all '{config.builld_dir}/{config.uno_obj_dir}' files into  {css_dir}... __init__.py files.",
