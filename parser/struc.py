@@ -276,9 +276,11 @@ class Parser(base.ParserBase):
         return self._get_summary_data(si_lst=si_lst, key=key)
     
     def _get_types_data(self) -> dict:
-        self._requires_typing = True # all typedef require typing
         si_lst = self._api_data.types_summaries.get_obj()
         key = 'types'
+        if len(si_lst) == 0:
+            return {key:[]}
+        self._requires_typing = True # all typedef require typing
         return self._get_summary_data(si_lst=si_lst, key=key)
 
     # endregion Data
@@ -836,14 +838,14 @@ def _main():
     # url = 'https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1text_1_1TextMarkupDescriptor.html'
     # url = 'https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1beans_1_1Pair_3_01T_00_01U_01_4.html' # generics
     # url = 'https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1accessibility_1_1AccessibleRelation.html'
-    url = 'https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1chart2_1_1InterpretedData.html'
+    url = 'https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1chart2_1_1SubIncrement.html'
     kwargs = {
         "url": url,
         "log_file": "debug.log",
         "verbose": True,
-        "print_json": False,
-        "print_template": True,
-        "write_template_long": True
+        "print_json": True,
+        "print_template": False,
+        "write_template_long": False
     }
     parse(**kwargs)
     # sys.argv.extend(['--log-file', 'debug.log', '-v', '-n', '-u', url])
