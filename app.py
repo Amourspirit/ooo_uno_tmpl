@@ -613,13 +613,24 @@ def _args_data_json(parser: argparse.ArgumentParser) -> None:
 
 
 def _args_data_star(parser: argparse.ArgumentParser, config: AppConfig) -> None:
-    css_dir = config.builld_dir + '/' + '/'.join(config.com_sun_star_lo)
-    parser.add_argument(
-        '-s', '--write-star',
-        help=f"Writes imports for all '{config.builld_dir}/{config.uno_obj_dir}' files into  {css_dir}... __init__.py files.",
+    opt_group = parser.add_argument_group()
+    css_dir_lo = config.builld_dir + '/' + '/'.join(config.com_sun_star_lo)
+    css_dir_dyn = config.builld_dir + '/' + '/'.join(config.com_sun_star_dyn)
+    opt_group.add_argument(
+        '-l', '--css-lo',
+        help=f"Writes imports for all '{config.builld_dir}/{config.uno_obj_dir}' files into  {css_dir_lo}... __init__.py files.",
         action='store_true',
-        dest='write_star_ns',
-        required=True
+        dest='write_lo',
+        default=False,
+        required=False
+    )
+    opt_group.add_argument(
+        '-d', '--css-dyn',
+        help=f"Writes imports for all '{config.builld_dir}/{config.dyn_dir}' files into  {css_dir_dyn}... __init__.py files.",
+        action='store_true',
+        dest='write_dyn',
+        default=False,
+        required=False
     )
     parser.add_argument(
         '-r', '--no-rel-import',
@@ -1161,13 +1172,14 @@ def _args_action_db_json(args: argparse.Namespace, config: AppConfig) -> None:
 
 
 def _args_action_db_star(args: argparse.Namespace, config: AppConfig) -> None:
-    if args.write_star_ns:
+    if args.write_lo or args.write_dyn:
         if not query_yes_no(f"Are you sure write all star namespace import files into {config.data_dir}?", 'no'):
             return
     qc = StarNsControler(
         config=config,
         logger=logger,
-        write_star_ns=args.write_star_ns,
+        write_lo=args.write_lo,
+        write_dyn=args.write_dyn,
         rel_import=args.rel_import
     )
     qc_result = qc.results()

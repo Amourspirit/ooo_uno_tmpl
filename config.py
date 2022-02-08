@@ -127,7 +127,11 @@ class AppConfig:
     component_types: List[str]
     com_sun_star_lo: List[str]
     """
-    Path Like structure that will be used for namespace imports in build dir.
+    Path Like structure that will be used for LO namespace imports in build dir such as ['csslo'].
+    """
+    com_sun_star_dyn: List[str]
+    """
+    Path Like structure that will be used for DYN namespace imports in build dir such as ['cssdyn'].
     """
     inc_lic: str
     """Path to License Include File"""
