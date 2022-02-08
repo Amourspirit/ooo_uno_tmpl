@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 if not TYPE_CHECKING and _DYNAMIC:
     from $namespace import $safe_name
-    setattr(Exception, '__ooo_ns__', '$namespace')
-    setattr(Exception, '__ooo_full_ns__', '$fullname')
-    setattr(Exception, '__ooo_type_name__', 'exception')
+    setattr($safe_name, '__ooo_ns__', '$namespace')
+    setattr($safe_name, '__ooo_full_ns__', '$fullname')
+    setattr($safe_name, '__ooo_type_name__', 'exception')
 else:
     $self.get_rel_import(in_str=$uno_obj_in, ns=$uno_obj_ns) as $safe_name
     
