@@ -1,0 +1,126 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.20",
+  "libre_office_ver": "7.2",
+  "name": "XTextInputStream",
+  "type": "interface",
+  "namespace": "com.sun.star.io",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        ".x_input_stream",
+        "XInputStream",
+        "XInputStream_98d40ab4"
+      ]
+    ],
+    "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.io.XInputStream": "XInputStream_98d40ab4"
+    },
+    "quote": [
+      "typing.Tuple[str, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[str, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.io.XInputStream"
+      ],
+      "typing": []
+    },
+    "name": "XTextInputStream",
+    "imports": [],
+    "namespace": "com.sun.star.io",
+    "extends": [
+      "com.sun.star.io.XInputStream"
+    ],
+    "desc": [
+      "Interface to read strings from a stream.",
+      "",
+      "This interfaces allows to read strings separated by delimiters and to read lines. The character encoding to be used can be set by setEncoding(). Default encoding is \\\"utf8\\\"."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1io_1_1XTextInputStream.html",
+    "items": {
+      "methods": [
+        {
+          "name": "isEOF",
+          "returns": "bool",
+          "desc": [
+            "Returns the EOF status.",
+            "",
+            "This method has to be used to detect if the end of the stream is reached.",
+            "",
+            "Important: This cannot be detected by asking for an empty string because that can be a valid return value of readLine() (if the line is empty) and readString() (if a delimiter is directly followed by the next one)."
+          ],
+          "raises": [
+            "com.sun.star.io.IOException"
+          ],
+          "args": []
+        },
+        {
+          "name": "readLine",
+          "returns": "str",
+          "desc": [
+            "reads text until a line break (CR, LF, or CR/LF) or EOF is found and returns it as string (without CR, LF).",
+            "",
+            "The read characters are converted according to the encoding defined by setEncoding(). If EOF is already reached before calling this method an empty string is returned."
+          ],
+          "raises": [
+            "com.sun.star.io.IOException"
+          ],
+          "args": []
+        },
+        {
+          "name": "readString",
+          "returns": "str",
+          "desc": [
+            "reads text until one of the given delimiter characters or EOF is found and returns it as string (without delimiter).",
+            "",
+            "Important: CR/LF is not used as default delimiter! So if no delimiter is defined or none of the delimiters is found, the stream will be read to EOF. The read characters are converted according to the encoding defined by setEncoding(). If EOF is already reached before calling this method an empty string is returned."
+          ],
+          "raises": [
+            "com.sun.star.io.IOException"
+          ],
+          "args": [
+            [
+              "Delimiters",
+              "typing.Tuple[str, ...]",
+              "in"
+            ],
+            [
+              "bRemoveDelimiter",
+              "bool",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setEncoding",
+          "returns": "None",
+          "desc": [
+            "sets character encoding."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "Encoding",
+              "str",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

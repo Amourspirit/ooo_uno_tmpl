@@ -1,0 +1,252 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.20",
+  "libre_office_ver": "7.2",
+  "name": "XImageManager",
+  "type": "interface",
+  "namespace": "com.sun.star.ui",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..lang.x_component",
+        "XComponent",
+        "XComponent_98dc0ab5"
+      ],
+      [
+        "..lang.x_initialization",
+        "XInitialization",
+        "XInitialization_d46c0cca"
+      ],
+      [
+        ".xui_configuration",
+        "XUIConfiguration",
+        "XUIConfiguration_c4eb0c34"
+      ],
+      [
+        ".xui_configuration_persistence",
+        "XUIConfigurationPersistence",
+        "XUIConfigurationPersistence_661010b9"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..graphic.x_graphic",
+        "XGraphic",
+        "XGraphic_a4da0afc"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.lang.XComponent": "XComponent_98dc0ab5",
+      "com.sun.star.lang.XInitialization": "XInitialization_d46c0cca",
+      "com.sun.star.ui.XUIConfiguration": "XUIConfiguration_c4eb0c34",
+      "com.sun.star.ui.XUIConfigurationPersistence": "XUIConfigurationPersistence_661010b9"
+    },
+    "quote": [
+      "typing.Tuple[XGraphic_a4da0afc, ...]",
+      "typing.Tuple[str, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[XGraphic_a4da0afc, ...]",
+      "typing.Tuple[str, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.lang.XComponent",
+        "com.sun.star.lang.XInitialization",
+        "com.sun.star.ui.XUIConfiguration",
+        "com.sun.star.ui.XUIConfigurationPersistence"
+      ],
+      "typing": [
+        "com.sun.star.graphic.XGraphic"
+      ]
+    },
+    "name": "XImageManager",
+    "imports": [],
+    "namespace": "com.sun.star.ui",
+    "extends": [
+      "com.sun.star.ui.XUIConfigurationPersistence",
+      "com.sun.star.ui.XUIConfiguration",
+      "com.sun.star.lang.XComponent",
+      "com.sun.star.lang.XInitialization"
+    ],
+    "desc": [
+      "specifies access functions to an images manager interface to add, replace and remove images associations to command URLs.",
+      "",
+      "An image manager controls a number of image sets which are specified by an ImageType."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1ui_1_1XImageManager.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getAllImageNames",
+          "returns": "typing.Tuple[str, ...]",
+          "desc": [
+            "retrieves the list of command URLs which have images associated."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "nImageType",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getImages",
+          "returns": "typing.Tuple[XGraphic_a4da0afc, ...]",
+          "desc": [
+            "retrieves the associated images of command URLs."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "nImageType",
+              "int",
+              "in"
+            ],
+            [
+              "aCommandURLSequence",
+              "typing.Tuple[str, ...]",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "hasImage",
+          "returns": "bool",
+          "desc": [
+            "determines if a command URL has an associated image."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "nImageType",
+              "int",
+              "in"
+            ],
+            [
+              "CommandURL",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "insertImages",
+          "returns": "None",
+          "desc": [
+            "inserts new image/command associations to an image manager.",
+            "",
+            "If an association is already present it is replaced. If aCommandURLSequence contains an invalid command URL a com.sun.star.lang.IllegalArgumentException is thrown. If the configuration manager is read-only a com.sun.star.lang.IllegalAccessException is thrown."
+          ],
+          "raises": [
+            "com.sun.star.container.ElementExistException",
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.lang.IllegalAccessException"
+          ],
+          "args": [
+            [
+              "nImageType",
+              "int",
+              "in"
+            ],
+            [
+              "aCommandURLSequence",
+              "typing.Tuple[str, ...]",
+              "in"
+            ],
+            [
+              "aGraphicSequence",
+              "typing.Tuple[XGraphic_a4da0afc, ...]",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "removeImages",
+          "returns": "None",
+          "desc": [
+            "removes associated images to a command URL.",
+            "",
+            "If the aCommandURLSequence contains an invalid command URL a com.sun.star.lang.IllegalArgumentException is thrown. If the image manager is associated with a read-only configuration manager a com.sun.star.lang.IllegalAccessException is thrown."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.lang.IllegalAccessException"
+          ],
+          "args": [
+            [
+              "nImageType",
+              "int",
+              "in"
+            ],
+            [
+              "CommandURLs",
+              "typing.Tuple[str, ...]",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "replaceImages",
+          "returns": "None",
+          "desc": [
+            "replaces the associated images of command URLs.",
+            "",
+            "If a command URL cannot be found the replace call will be omitted. If aCommandURLSequence contains an invalid command URL a com.sun.star.lang.IllegalArgumentException is thrown. If the image manager is associated with a read-only configuration manager a com.sun.star.lang.IllegalAccessException is thrown."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.lang.IllegalAccessException"
+          ],
+          "args": [
+            [
+              "nImageType",
+              "int",
+              "in"
+            ],
+            [
+              "aCommandURLSequence",
+              "typing.Tuple[str, ...]",
+              "in"
+            ],
+            [
+              "aGraphicsSequence",
+              "typing.Tuple[XGraphic_a4da0afc, ...]",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "reset",
+          "returns": "None",
+          "desc": [
+            "resets the image manager to default data.",
+            "",
+            "This means that all user images of the instance will be removed."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.lang.IllegalAccessException"
+          ],
+          "args": []
+        }
+      ]
+    }
+  }
+}

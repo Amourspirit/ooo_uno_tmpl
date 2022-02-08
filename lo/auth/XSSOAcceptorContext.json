@@ -1,0 +1,85 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.20",
+  "libre_office_ver": "7.2",
+  "name": "XSSOAcceptorContext",
+  "type": "interface",
+  "namespace": "com.sun.star.auth",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        ".xsso_context",
+        "XSSOContext",
+        "XSSOContext_a2840aec"
+      ]
+    ],
+    "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.auth.XSSOContext": "XSSOContext_a2840aec"
+    },
+    "quote": [
+      "typing.Tuple[int, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[int, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.auth.XSSOContext"
+      ],
+      "typing": []
+    },
+    "name": "XSSOAcceptorContext",
+    "imports": [],
+    "namespace": "com.sun.star.auth",
+    "extends": [
+      "com.sun.star.auth.XSSOContext"
+    ],
+    "desc": [
+      "represents an acceptor side security context.",
+      "",
+      "This context may be used to authenticate a Single Sign-on initiator based on a security token sent by the initiator and to generate a token to be sent back to the initiator so that it can authenticate the acceptor.",
+      "",
+      "**since**",
+      "",
+      "    OOo 1.1.2"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1auth_1_1XSSOAcceptorContext.html",
+    "items": {
+      "methods": [
+        {
+          "name": "accept",
+          "returns": "typing.Tuple[int, ...]",
+          "desc": [
+            "accepts/authenticates an SSO token sent from the context initiator side.",
+            "",
+            "accept() should be called only once. Subsequent calls produce undefined results."
+          ],
+          "raises": [
+            "InvalidArgumentException",
+            "InvalidCredentialException",
+            "InvalidContextException",
+            "AuthenticationFailedException"
+          ],
+          "args": [
+            [
+              "Token",
+              "typing.Tuple[int, ...]",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

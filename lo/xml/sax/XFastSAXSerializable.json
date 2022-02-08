@@ -1,0 +1,109 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.20",
+  "libre_office_ver": "7.2",
+  "name": "XFastSAXSerializable",
+  "type": "interface",
+  "namespace": "com.sun.star.xml.sax",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [],
+    "from_imports_typing": [
+      [
+        "...beans.string_pair",
+        "StringPair",
+        "StringPair_a4bc0b14"
+      ],
+      [
+        ".x_fast_document_handler",
+        "XFastDocumentHandler",
+        "XFastDocumentHandler_454c0fb6"
+      ],
+      [
+        ".x_fast_token_handler",
+        "XFastTokenHandler",
+        "XFastTokenHandler_17510e78"
+      ]
+    ],
+    "extends_map": {},
+    "quote": [
+      "XFastDocumentHandler_454c0fb6",
+      "XFastTokenHandler_17510e78",
+      "typing.Tuple[StringPair_a4bc0b14, ...]",
+      "typing.Tuple[typing.Tuple[str, int]]"
+    ],
+    "typings": [
+      "typing.Tuple[StringPair_a4bc0b14, ...]",
+      "typing.Tuple[typing.Tuple[str, int]]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [],
+      "typing": [
+        "com.sun.star.beans.StringPair",
+        "com.sun.star.xml.sax.XFastDocumentHandler",
+        "com.sun.star.xml.sax.XFastTokenHandler"
+      ]
+    },
+    "name": "XFastSAXSerializable",
+    "imports": [],
+    "namespace": "com.sun.star.xml.sax",
+    "extends": [],
+    "desc": [
+      "serializes a DOM tree by generating FastSAX events.",
+      "",
+      "**since**",
+      "",
+      "    OOo 3.1"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1xml_1_1sax_1_1XFastSAXSerializable.html",
+    "items": {
+      "methods": [
+        {
+          "name": "fastSerialize",
+          "returns": "None",
+          "desc": [
+            "serializes an object (e.g.",
+            "",
+            "a DOM tree) that represents an XML document by generating fast SAX events.",
+            "",
+            "This is necessary mostly because the DOM implementation does not permit attaching namespaces declarations directly to nodes, which may lead to duplicate namespace declarations on export, and thus larger documents. Note that the first part of each tuple is the prefix, e.g. \\\"office\\\", and the second is the numeric namespace identifier."
+          ],
+          "raises": [
+            "com.sun.star.xml.sax.SAXException"
+          ],
+          "args": [
+            [
+              "handler",
+              "XFastDocumentHandler_454c0fb6",
+              "in"
+            ],
+            [
+              "tokenHandler",
+              "XFastTokenHandler_17510e78",
+              "in"
+            ],
+            [
+              "namespaces",
+              "typing.Tuple[StringPair_a4bc0b14, ...]",
+              "in"
+            ],
+            [
+              "registerNamespaces",
+              "typing.Tuple[typing.Tuple[str, int]]",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

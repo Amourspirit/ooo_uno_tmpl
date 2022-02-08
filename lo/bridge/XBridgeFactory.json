@@ -1,0 +1,141 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.20",
+  "libre_office_ver": "7.2",
+  "name": "XBridgeFactory",
+  "type": "interface",
+  "namespace": "com.sun.star.bridge",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".x_bridge",
+        "XBridge",
+        "XBridge_8e4e0a1a"
+      ],
+      [
+        ".x_instance_provider",
+        "XInstanceProvider",
+        "XInstanceProvider_b090e4d"
+      ],
+      [
+        "..connection.x_connection",
+        "XConnection",
+        "XConnection_f2320da0"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "XBridge_8e4e0a1a",
+      "XConnection_f2320da0",
+      "XInstanceProvider_b090e4d",
+      "typing.Tuple[XBridge_8e4e0a1a, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[XBridge_8e4e0a1a, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.bridge.XBridge",
+        "com.sun.star.bridge.XInstanceProvider",
+        "com.sun.star.connection.XConnection"
+      ]
+    },
+    "name": "XBridgeFactory",
+    "imports": [],
+    "namespace": "com.sun.star.bridge",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "factory to create interprocess bridges."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1bridge_1_1XBridgeFactory.html",
+    "items": {
+      "methods": [
+        {
+          "name": "createBridge",
+          "returns": "XBridge_8e4e0a1a",
+          "desc": [
+            "tries to create a UNO interprocess bridge.",
+            "",
+            "If empty, an anonymous bridge is created, which cannot be retrieved with getBridge(). No BridgeExistsException can be thrown in this case."
+          ],
+          "raises": [
+            "",
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "sName",
+              "str",
+              "in"
+            ],
+            [
+              "sProtocol",
+              "str",
+              "in"
+            ],
+            [
+              "aConnection",
+              "XConnection_f2320da0",
+              "in"
+            ],
+            [
+              "anInstanceProvider",
+              "XInstanceProvider_b090e4d",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getBridge",
+          "returns": "XBridge_8e4e0a1a",
+          "desc": [
+            "tries to get a bridge by this name.",
+            "",
+            "Cannot be retrieved, when the bridge got disposed before."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "sName",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getExistingBridges",
+          "returns": "typing.Tuple[XBridge_8e4e0a1a, ...]",
+          "desc": [
+            "returns the sequence of all named and unnamed UNO interprocess bridges that are instantiated at the time the call is made."
+          ],
+          "raises": [],
+          "args": []
+        }
+      ]
+    }
+  }
+}

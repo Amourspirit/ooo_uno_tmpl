@@ -1,0 +1,95 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.20",
+  "libre_office_ver": "7.2",
+  "name": "XNumberText",
+  "type": "interface",
+  "namespace": "com.sun.star.linguistic2",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [],
+    "from_imports_typing": [
+      [
+        "..lang.locale",
+        "Locale",
+        "Locale_70d308fa"
+      ]
+    ],
+    "extends_map": {},
+    "quote": [
+      "Locale_70d308fa",
+      "typing.Tuple[Locale_70d308fa, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[Locale_70d308fa, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [],
+      "typing": [
+        "com.sun.star.lang.Locale"
+      ]
+    },
+    "name": "XNumberText",
+    "imports": [],
+    "namespace": "com.sun.star.linguistic2",
+    "extends": [],
+    "desc": [
+      "This interface allows to spell out numbers and money amounts.",
+      "",
+      "The current set of supported languages is:",
+      "",
+      "**since**",
+      "",
+      "    LibreOffice 6.1"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1linguistic2_1_1XNumberText.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getAvailableLanguages",
+          "returns": "typing.Tuple[Locale_70d308fa, ...]",
+          "desc": [
+            "returns a list of all supported languages."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getNumberText",
+          "returns": "str",
+          "desc": [
+            "spell out numbers and money amounts",
+            "",
+            "Please note that text argument can contain prefixes separated by space, for example \\\"ordinal\\\" for ordinal numbers, \\\"ordinal-number\\\" for ordinal indicators and ISO 4217 currency codes.",
+            "",
+            "Language modules list the supported prefixes by the input text \\\"help\\\"."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "aText",
+              "str",
+              "in"
+            ],
+            [
+              "aLocale",
+              "Locale_70d308fa",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

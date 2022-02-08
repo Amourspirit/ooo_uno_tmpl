@@ -144,9 +144,19 @@ class SqlExtends(BaseSql):
 
 # endregion Resource DB Related
 
+@dataclass
+class TmplConfig:
+    project_root: str
+    resource_dir: str
+    uno_obj_dir: str
+    dyn_dir: str
+    helper_ns: str
+    helper_mod: str
+    enum_mod: str
+    env: str
+
 class BaseTpml(Template):
-
-
+    
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self._is_class_init = True
@@ -168,8 +178,30 @@ class BaseTpml(Template):
                 logger_name="Template — " + self.__class__.__name__,
                 add_handler_console=False
                 )
-        self._app_root = os.environ.get('project_root', None)
+        self._config = self._get_config()
+        self._app_root = self._config.project_root
  
+    def _get_config(self) -> TmplConfig:
+        
+        project_root = os.environ['project_root']
+        resource_dir = os.environ['config_resource_dir']
+        uno_obj_dir = os.environ['config_uno_obj_dir']
+        dyn_dir = os.environ['config_dyn_dir']
+        helper_ns = os.environ['config_helper_ns']
+        helper_mod = os.environ['config_helper_mod']
+        enum_mod = os.environ['config_enum_mod']
+        env = os.environ['config_oenv_ns']
+        
+        return TmplConfig(
+            project_root=project_root,
+            resource_dir=resource_dir,
+            uno_obj_dir=uno_obj_dir,
+            dyn_dir=dyn_dir,
+            helper_ns=helper_ns,
+            helper_mod=helper_mod,
+            enum_mod=enum_mod,
+            env=env
+        )
 
     def init_data(self):
         self._is_class_init = True
@@ -550,3 +582,9 @@ class BaseTpml(Template):
     def get_rel_import_long(self, in_str: str, ns: str, sep: str = '.') -> str:
         ri = RelInfo.get_rel_import_long(in_str=in_str, ns=ns, sep=sep)
         return f"from {ri.frm} import {ri.imp} as {ri.as_}"
+
+    # region Properties
+    @property
+    def config(self) -> TmplConfig:
+        return self._config
+    # endregion Properties

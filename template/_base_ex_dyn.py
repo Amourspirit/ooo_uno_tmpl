@@ -1,10 +1,14 @@
 # coding: utf-8
 import os
 from _base_ex import BaseEx
+from _base_json import EventArgs
 
 class BaseExDyn(BaseEx):
 
-    def _hydrate_data(self, json_data: dict):
-        super()._hydrate_data(json_data=json_data)
-        self.uno_obj = os.environ.get('config_uno_obj_dir', 'uno_obj')
-        self.dyn = os.environ.get('config_dyn_dir', 'dyn')
+    def on_after_init_data(self, args: EventArgs) -> None:
+        super().on_after_init_data(args=args)
+        self.uno_obj = self.config.uno_obj_dir
+        self.dyn = self.config.dyn_dir
+        self.oenv = self.config.env
+        self.helper_ns = self.config.helper_ns
+        self.helper_mod = self.config.helper_mod

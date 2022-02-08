@@ -21,8 +21,33 @@ python make.py --force-compile true --clean-scratch true
 for help run:
 python make.py --help
 
-output is copied into scratch folder with the same dir structure as uno_obj
+output is copied into build/lo folder with the same dir structure as lo
 
+
+UNO
+===
+
+General info
+------------
+
+UNO objects only accept positional arguments. For this reason when calling uno function and methods
+only positional args should be used.
+The exceptions that allow both positional and keyword args in the ooo.dyn namespace are as follows:
+
+Struct instances
+++++++++++++++++
+
+All Pair instnces below are functionally equal.
+
+.. code::
+
+    from ooo.dyn.beans.pair import Pair
+    
+    pair1 = Pair(First='Hello', Second='World')
+    pair2 = Pair("Hello", "World")
+    pair3 = Pair()
+    pair3.First = 'Hello'
+    pair3.Second = 'World'
 
 Parser
 ======
@@ -95,7 +120,7 @@ $ conda env export > environment.yml
 active from command line
 ------------------------
 
-$ conda activate $(pwd)/env
+$ conda activate $PWD/env
 
 Links of intrest
 ================

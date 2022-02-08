@@ -1,0 +1,274 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.20",
+  "libre_office_ver": "7.2",
+  "name": "XChartTypeTemplate",
+  "type": "interface",
+  "namespace": "com.sun.star.chart2",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..beans.property_value",
+        "PropertyValue",
+        "PropertyValue_c9610c73"
+      ],
+      [
+        ".x_chart_type",
+        "XChartType",
+        "XChartType_ad200b38"
+      ],
+      [
+        ".x_data_interpreter",
+        "XDataInterpreter",
+        "XDataInterpreter_f84f0db2"
+      ],
+      [
+        ".x_data_series",
+        "XDataSeries",
+        "XDataSeries_b8150b89"
+      ],
+      [
+        ".x_diagram",
+        "XDiagram",
+        "XDiagram_96fe0a59"
+      ],
+      [
+        ".data.x_data_source",
+        "XDataSource",
+        "XDataSource_f6340d57"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "XChartType_ad200b38",
+      "XDataInterpreter_f84f0db2",
+      "XDataSeries_b8150b89",
+      "XDataSource_f6340d57",
+      "XDiagram_96fe0a59",
+      "typing.Tuple[PropertyValue_c9610c73, ...]",
+      "typing.Tuple[XChartType_ad200b38, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[PropertyValue_c9610c73, ...]",
+      "typing.Tuple[XChartType_ad200b38, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.beans.PropertyValue",
+        "com.sun.star.chart2.XChartType",
+        "com.sun.star.chart2.XDataInterpreter",
+        "com.sun.star.chart2.XDataSeries",
+        "com.sun.star.chart2.XDiagram",
+        "com.sun.star.chart2.data.XDataSource"
+      ]
+    },
+    "name": "XChartTypeTemplate",
+    "imports": [],
+    "namespace": "com.sun.star.chart2",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1chart2_1_1XChartTypeTemplate.html",
+    "items": {
+      "methods": [
+        {
+          "name": "applyStyle",
+          "returns": "None",
+          "desc": [
+            "Applies a chart-type specific style (e.g.",
+            "",
+            "symbols) to all series in the sequence aSeries."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xSeries",
+              "XDataSeries_b8150b89",
+              "in"
+            ],
+            [
+              "nChartTypeGroupIndex",
+              "int",
+              "in"
+            ],
+            [
+              "nSeriesIndex",
+              "int",
+              "in"
+            ],
+            [
+              "nSeriesCount",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "changeDiagram",
+          "returns": "None",
+          "desc": [
+            "Analyses the given diagram and reinterprets its DataSeries and Categories and creates a new diagram based on these series.",
+            "",
+            "Note, that if matchesTemplate() returns TRUE for the given XDiagram, the latter should not be changed."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xDiagram",
+              "XDiagram_96fe0a59",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "changeDiagramData",
+          "returns": "None",
+          "desc": [
+            "Changes the given diagram xDiagram by using the new data given in xDataSource.",
+            "",
+            "Note that the data is interpreted in a way that fits this template, but not necessarily the chart-types of the diagram. This method should only be called if the data-format of the diagram is compatible with the data-format of this template.",
+            "",
+            "Ideally a matchesTemplate() call for the given diagram should return TRUE before this method is called.",
+            "",
+            "For standard parameters that may be used, see the service StandardDiagramCreationParameters."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xDiagram",
+              "XDiagram_96fe0a59",
+              "in"
+            ],
+            [
+              "xDataSource",
+              "XDataSource_f6340d57",
+              "in"
+            ],
+            [
+              "aArguments",
+              "typing.Tuple[PropertyValue_c9610c73, ...]",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "createDiagramByDataSource",
+          "returns": "XDiagram_96fe0a59",
+          "desc": [
+            "Creates a new diagram based upon the given data .",
+            "",
+            "For standard parameters that may be used, see the service StandardDiagramCreationParameters."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xDataSource",
+              "XDataSource_f6340d57",
+              "in"
+            ],
+            [
+              "aArguments",
+              "typing.Tuple[PropertyValue_c9610c73, ...]",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getChartTypeForNewSeries",
+          "returns": "XChartType_ad200b38",
+          "desc": [
+            "Provides a chart type object that can be used to create new series."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aFormerlyUsedChartTypes",
+              "typing.Tuple[XChartType_ad200b38, ...]",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getDataInterpreter",
+          "returns": "XDataInterpreter_f84f0db2",
+          "desc": [],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "matchesTemplate",
+          "returns": "bool",
+          "desc": [
+            "States whether the given diagram could have been created by the template.",
+            "",
+            "The template will parse the DataSeriesTree of the diagram to determine if the structure matches the one which would have been created by createDiagramByDataSource().",
+            "",
+            "For analysis all parts of the diagram may be used, e.g. also properties set at the data series (like symbols)./p>"
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xDiagram",
+              "XDiagram_96fe0a59",
+              "in"
+            ],
+            [
+              "bAdaptProperties",
+              "bool",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "resetStyles",
+          "returns": "None",
+          "desc": [
+            "Resets all styles that were changed from the default at any object in the chart and have not been later modified.",
+            "",
+            "In createDiagramByDataSource() or changeDiagram() a template might e.g. change the page background color or the line style of all data series. This method should reset all objects that still have the changed settings to the default.",
+            "",
+            "If for example the template changed the com.sun.star.drawing.LineStyle of all series to NONE, this method should reset all series with LineStyle NONE back to SOLID. If a series has a style DASH, it must not be changed."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xDiagram",
+              "XDiagram_96fe0a59",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "supportsCategories",
+          "returns": "bool",
+          "desc": [],
+          "raises": [],
+          "args": []
+        }
+      ]
+    }
+  }
+}

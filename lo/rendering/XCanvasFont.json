@@ -1,0 +1,164 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.20",
+  "libre_office_ver": "7.2",
+  "name": "XCanvasFont",
+  "type": "interface",
+  "namespace": "com.sun.star.rendering",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..beans.property_value",
+        "PropertyValue",
+        "PropertyValue_c9610c73"
+      ],
+      [
+        ".font_metrics",
+        "FontMetrics",
+        "FontMetrics_e4540d34"
+      ],
+      [
+        ".font_request",
+        "FontRequest",
+        "FontRequest_e4890d46"
+      ],
+      [
+        ".string_context",
+        "StringContext",
+        "StringContext_d50e22"
+      ],
+      [
+        ".x_text_layout",
+        "XTextLayout",
+        "XTextLayout_e44a0d41"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "FontMetrics_e4540d34",
+      "FontRequest_e4890d46",
+      "StringContext_d50e22",
+      "XTextLayout_e44a0d41",
+      "typing.Tuple[PropertyValue_c9610c73, ...]",
+      "typing.Tuple[float, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[PropertyValue_c9610c73, ...]",
+      "typing.Tuple[float, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.beans.PropertyValue",
+        "com.sun.star.rendering.FontMetrics",
+        "com.sun.star.rendering.FontRequest",
+        "com.sun.star.rendering.StringContext",
+        "com.sun.star.rendering.XTextLayout"
+      ]
+    },
+    "name": "XCanvasFont",
+    "imports": [],
+    "namespace": "com.sun.star.rendering",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "This interface provides access to a specific, XCanvas-dependent font incarnation.",
+      "",
+      "This font is not universally usable, but belongs to the XCanvas it was queried from."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1rendering_1_1XCanvasFont.html",
+    "items": {
+      "methods": [
+        {
+          "name": "createTextLayout",
+          "returns": "XTextLayout_e44a0d41",
+          "desc": [
+            "Create a text layout interface.",
+            "",
+            "Create a text layout interface for the given string, using this font to generate the glyphs from."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aText",
+              "StringContext_d50e22",
+              "in"
+            ],
+            [
+              "nDirection",
+              "int",
+              "in"
+            ],
+            [
+              "nRandomSeed",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getAvailableSizes",
+          "returns": "typing.Tuple[float, ...]",
+          "desc": [
+            "Query the list of available font sizes.",
+            "",
+            "This method queries the list of available font sizes (in device units) for this font. For scalable fonts that are not restricted to discrete sizes, this list is empty, meaning that every size is possible. Fonts that do restrict the device size to certain discrete values, setting an overall transformation that scales the FontRequest.CellSize to something not contained in the list returned by this method can lead to visible disturbances."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getExtraFontProperties",
+          "returns": "typing.Tuple[PropertyValue_c9610c73, ...]",
+          "desc": [
+            "Query the list of additional font properties."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getFontMetrics",
+          "returns": "FontMetrics_e4540d34",
+          "desc": [
+            "Query metric information about the font, that is generic to all its glyphs.",
+            "",
+            "Note that the metric values in the returned result are in the font coordinate system, i.e. relative to the corresponding size of this font. That is, when this font was created with a cell size of 20 units, the metrics returned are calculated relative to this size."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getFontRequest",
+          "returns": "FontRequest_e4890d46",
+          "desc": [
+            "Query the FontRequest that was used to generate this object."
+          ],
+          "raises": [],
+          "args": []
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,126 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.20",
+  "libre_office_ver": "7.2",
+  "name": "XEncryptionProtectedStorage",
+  "type": "interface",
+  "namespace": "com.sun.star.embed",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        ".x_encryption_protected_source2",
+        "XEncryptionProtectedSource2",
+        "XEncryptionProtectedSource2_9eb411d5"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..beans.named_value",
+        "NamedValue",
+        "NamedValue_a37a0af3"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.embed.XEncryptionProtectedSource2": "XEncryptionProtectedSource2_9eb411d5"
+    },
+    "quote": [
+      "typing.Tuple[NamedValue_a37a0af3, ...]",
+      "typing.Tuple[typing.Tuple[NamedValue_a37a0af3, ...]]"
+    ],
+    "typings": [
+      "typing.Tuple[NamedValue_a37a0af3, ...]",
+      "typing.Tuple[typing.Tuple[NamedValue_a37a0af3, ...]]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.embed.XEncryptionProtectedSource2"
+      ],
+      "typing": [
+        "com.sun.star.beans.NamedValue"
+      ]
+    },
+    "name": "XEncryptionProtectedStorage",
+    "imports": [],
+    "namespace": "com.sun.star.embed",
+    "extends": [
+      "com.sun.star.embed.XEncryptionProtectedSource2"
+    ],
+    "desc": [
+      "This interface allows to set a password for an object.",
+      "",
+      "**since**",
+      "",
+      "    OOo 3.4"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1embed_1_1XEncryptionProtectedStorage.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getEncryptionAlgorithms",
+          "returns": "typing.Tuple[NamedValue_a37a0af3, ...]",
+          "desc": [
+            "allows to get the encryption algorithms of the object."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "setEncryptionAlgorithms",
+          "returns": "None",
+          "desc": [
+            "allows to set the encryption algorithms for the object.",
+            "",
+            "The algorithms will of course be used only for streams that have been marked to be encrypted. If no stream in the storage is marked to be encrypted, the algorithms-related information may have no effect to the result package.",
+            "",
+            "The following values could be part of the provided sequence:"
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "aAlgorithms",
+              "typing.Tuple[NamedValue_a37a0af3, ...]",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setGpgProperties",
+          "returns": "None",
+          "desc": [
+            "set OpenPGP-specific encryption properties",
+            "",
+            "When provided, switch ODF package encryption to OpenPGP.",
+            "",
+            "For each recipient, add one sequence of named values, each of the same structure. The following values could be part of that provided sequence:",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 6.0"
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "aProps",
+              "typing.Tuple[typing.Tuple[NamedValue_a37a0af3, ...]]",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

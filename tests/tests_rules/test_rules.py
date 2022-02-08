@@ -35,10 +35,10 @@ def test_rule_primative_seq():
     tester = tm.TypeRules()
     seq = 'sequence< long >'
     p_type = tester.get_python_type(seq)
-    assert p_type.type == 'typing.List[int]'
+    assert p_type.type == 'typing.Tuple[int, ...]'
     assert p_type.requires_typing
     assert p_type.is_py_type
-    assert p_type.realtype == 'list'
+    assert p_type.realtype == 'tuple'
     assert len(p_type.children) == 1
     p_child = p_type.children[0]
     assert p_child.type == 'int'
@@ -50,7 +50,7 @@ def test_rule_primative_seq():
 
     seq = 'sequence<string>'
     p_type = tester.get_python_type(seq)
-    assert p_type.type == 'typing.List[str]'
+    assert p_type.type == 'typing.Tuple[str, ...]'
     assert p_type.requires_typing
     assert p_type.is_py_type
     seq = 'aDXArray<string>'

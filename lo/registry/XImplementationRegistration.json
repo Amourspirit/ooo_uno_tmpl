@@ -1,0 +1,144 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.20",
+  "libre_office_ver": "7.2",
+  "name": "XImplementationRegistration",
+  "type": "interface",
+  "namespace": "com.sun.star.registry",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".x_simple_registry",
+        "XSimpleRegistry",
+        "XSimpleRegistry_10150e9c"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "XSimpleRegistry_10150e9c",
+      "typing.Tuple[str, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[str, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.registry.XSimpleRegistry"
+      ]
+    },
+    "name": "XImplementationRegistration",
+    "imports": [],
+    "namespace": "com.sun.star.registry",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "offers a registry for implementation objects and provides information about the registered implementations."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1registry_1_1XImplementationRegistration.html",
+    "items": {
+      "methods": [
+        {
+          "name": "checkInstantiation",
+          "returns": "typing.Tuple[str, ...]",
+          "desc": [],
+          "raises": [],
+          "args": [
+            [
+              "implementationName",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getImplementations",
+          "returns": "typing.Tuple[str, ...]",
+          "desc": [],
+          "raises": [],
+          "args": [
+            [
+              "aImplementationLoader",
+              "str",
+              "in"
+            ],
+            [
+              "aLocation",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "registerImplementation",
+          "returns": "None",
+          "desc": [
+            "registers a component which provides one or more implementations."
+          ],
+          "raises": [
+            "com.sun.star.registry.CannotRegisterImplementationException"
+          ],
+          "args": [
+            [
+              "aImplementationLoader",
+              "str",
+              "in"
+            ],
+            [
+              "aLocation",
+              "str",
+              "in"
+            ],
+            [
+              "xReg",
+              "XSimpleRegistry_10150e9c",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "revokeImplementation",
+          "returns": "bool",
+          "desc": [
+            "revokes a component and all their provided implementations from the registry."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aLocation",
+              "str",
+              "in"
+            ],
+            [
+              "xReg",
+              "XSimpleRegistry_10150e9c",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

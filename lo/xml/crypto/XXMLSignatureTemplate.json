@@ -1,0 +1,115 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.20",
+  "libre_office_ver": "7.2",
+  "name": "XXMLSignatureTemplate",
+  "type": "interface",
+  "namespace": "com.sun.star.xml.crypto",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        ".xxml_security_template",
+        "XXMLSecurityTemplate",
+        "XXMLSecurityTemplate_79221105"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".x_uri_binding",
+        "XUriBinding",
+        "XUriBinding_f04e0d6b"
+      ],
+      [
+        "..wrapper.xxml_element_wrapper",
+        "XXMLElementWrapper",
+        "XXMLElementWrapper_66c0107c"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.xml.crypto.XXMLSecurityTemplate": "XXMLSecurityTemplate_79221105"
+    },
+    "quote": [
+      "XUriBinding_f04e0d6b",
+      "typing.Tuple[XXMLElementWrapper_66c0107c, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[XXMLElementWrapper_66c0107c, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.xml.crypto.XXMLSecurityTemplate"
+      ],
+      "typing": [
+        "com.sun.star.xml.crypto.XUriBinding",
+        "com.sun.star.xml.wrapper.XXMLElementWrapper"
+      ]
+    },
+    "name": "XXMLSignatureTemplate",
+    "imports": [],
+    "namespace": "com.sun.star.xml.crypto",
+    "extends": [
+      "com.sun.star.xml.crypto.XXMLSecurityTemplate"
+    ],
+    "desc": [
+      "Interface of XML signature template.",
+      "",
+      "This interface represents a signature template, which is the same as the desired XML signature element but some of the nodes may be empty. The empty entities include digest value and signature value. Empty entities are not allowed in a signature template when performing validation.",
+      "",
+      "In some cases, the signer or verifier can determine and locate the contents to be signed from the template by dereference the URI.",
+      "",
+      "With the help of signature context, the signer or verifier specifies the key from the KeyInfo in the signature template."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1xml_1_1crypto_1_1XXMLSignatureTemplate.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getBinding",
+          "returns": "XUriBinding_f04e0d6b",
+          "desc": [
+            "Get the dynamic URI binding."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getTargets",
+          "returns": "typing.Tuple[XXMLElementWrapper_66c0107c, ...]",
+          "desc": [
+            "Get the target XML element, i.e.",
+            "",
+            "the element to be signed"
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "setBinding",
+          "returns": "None",
+          "desc": [
+            "Set the dynamic URI binding."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "aUriBinding",
+              "XUriBinding_f04e0d6b",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

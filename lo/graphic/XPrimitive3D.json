@@ -1,0 +1,112 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.20",
+  "libre_office_ver": "7.2",
+  "name": "XPrimitive3D",
+  "type": "interface",
+  "namespace": "com.sun.star.graphic",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..beans.property_value",
+        "PropertyValue",
+        "PropertyValue_c9610c73"
+      ],
+      [
+        "..geometry.real_rectangle3_d",
+        "RealRectangle3D",
+        "RealRectangle3D_d9d0e04"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "RealRectangle3D_d9d0e04",
+      "typing.Tuple[PropertyValue_c9610c73, ...]",
+      "typing.Tuple[XPrimitive3D, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[PropertyValue_c9610c73, ...]",
+      "typing.Tuple[XPrimitive3D, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.beans.PropertyValue",
+        "com.sun.star.geometry.RealRectangle3D"
+      ]
+    },
+    "name": "XPrimitive3D",
+    "imports": [],
+    "namespace": "com.sun.star.graphic",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "XPrimitive3D interface.",
+      "",
+      "This is the basic interface for graphic 3D primitives. They need to be able"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1graphic_1_1XPrimitive3D.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getDecomposition",
+          "returns": "typing.Tuple[XPrimitive3D, ...]",
+          "desc": [
+            "Retrieve decomposed list of simpler primitives.",
+            "",
+            "double Time",
+            "",
+            "Defines the point in time for which the geometry is defined. This may lead to varied results for animated objects. This value is defined in the range [0.0 .. n[, negative values are not allowed. If not given, a value of 0.0 is implied."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aViewParameters",
+              "typing.Tuple[PropertyValue_c9610c73, ...]",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getRange",
+          "returns": "RealRectangle3D_d9d0e04",
+          "desc": [
+            "Retrieve bound rect of primitive.",
+            "",
+            "This method calculates the actual bound rect of the area in world coordinates. Note that for view-dependent primitives, the necessary pixel adjustments are taken into account. For that reason the ViewParameters need to be given."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aViewParameters",
+              "typing.Tuple[PropertyValue_c9610c73, ...]",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

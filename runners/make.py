@@ -123,7 +123,7 @@ class Make(FilesBase):
 
     def _compile_dyn(self, w_info: d_cls.WriteInfo):
         self._log.debug('Compiling file: %s', w_info.file)
-        cmd_str = f"cheetah compile --nobackup --iext=.dyn --oext=.dynpy {w_info.file}"
+        cmd_str = f"cheetah compile --nobackup --iext={self.config.template_dyn_ext} --oext={self.config.template_dyn_py_ext} {w_info.file}"
         self._log.info('Running subprocess: %s', cmd_str)
         p = subprocess.run(
             cmd_str.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
@@ -139,7 +139,7 @@ class Make(FilesBase):
         c_lst: List[d_cls.WriteInfo] = []
         for file in files:
             try:
-                if not self._is_skip_compile(tmpl_file=file, ext='.dynpy'):
+                if not self._is_skip_compile(tmpl_file=file, ext=self.config.template_dyn_py_ext):
                     f_dir = Path(file).parent
                     if not f_dir in self._processed_dirs:
                         self._processed_dirs.add(f_dir)
@@ -231,8 +231,8 @@ class Make(FilesBase):
             return False
 
     def _get_scratch_path(self, tmpl_file) -> Path:
-        # reading uno_obj/...['.py' or '.pyi'] file
-        # setting write path to build/uno_obj/...
+        # reading uno/...['.py' or '.pyi'] file
+        # setting write path to build/uno/...
         p_file = Path(tmpl_file)
         ext = p_file.suffix
         p_dir = p_file.parent
@@ -244,7 +244,7 @@ class Make(FilesBase):
         return p_scratch
     
     def _get_dyn_write_path(self, tmpl_file) -> Path:
-        # reading uno_obj/...['.py' or '.pyi'] file
+        # reading uno/...['.py' or '.pyi'] file
         # setting write path to build/dyn/...
         
         p_file = Path(tmpl_file)
@@ -252,11 +252,11 @@ class Make(FilesBase):
         p_dir = p_file.parent
         p_rel = p_dir.relative_to(self._root_dir)
         # need to drop uno_dir form start of rel
-        # expecing parts to be tuple starting with uno_obj
+        # expecing parts to be tuple starting with uno
         # when there is a root it is at the start of the tuple
         # https://tinyurl.com/lfl7fwd
         parts = list(p_rel.parts)
-        parts[0] = self._config.dyn_dir # replace uno_obj with dyn
+        parts[0] = self._config.dyn_dir # replace uno with dyn
         # build up to build/dyn/somepath/somefile.py
         p_scratch_dir = Path(self._build, *parts)
         self._mkdirp(p_scratch_dir)

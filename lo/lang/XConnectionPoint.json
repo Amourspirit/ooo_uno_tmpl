@@ -1,0 +1,137 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.20",
+  "libre_office_ver": "7.2",
+  "name": "XConnectionPoint",
+  "type": "interface",
+  "namespace": "com.sun.star.lang",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".x_connection_point_container",
+        "XConnectionPointContainer",
+        "XConnectionPointContainer_688110bf"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "XConnectionPointContainer_688110bf",
+      "XInterface_8f010a43",
+      "typing.Tuple[XInterface_8f010a43, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[XInterface_8f010a43, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.lang.XConnectionPointContainer"
+      ]
+    },
+    "name": "XConnectionPoint",
+    "imports": [],
+    "namespace": "com.sun.star.lang",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "supports connection points for connectable objects.",
+      "",
+      "Connectable objects support the following features:",
+      "",
+      "To create a connectable object, you need to implement objects that provide two related interfaces:",
+      "",
+      "The XConnectionPointContainer interface is implemented on the connectable object to indicate the existence of the outgoing interfaces. It provides a sequence of sub-objects. It also provides access to all the connection point sub-objects, each of which implements the XConnectionPoint interface. The XConnectionPoint interface provides a sequence of sub-objects.",
+      "",
+      "Each connection point is a separate sub-object to avoid circular reference counting problems. A connection point controls how many connections (one or more) it will allow in its implementation of XConnectionPoint.advise().",
+      "",
+      "A client can use the XConnectionPointContainer interface:"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1lang_1_1XConnectionPoint.html",
+    "items": {
+      "methods": [
+        {
+          "name": "advise",
+          "returns": "None",
+          "desc": [
+            "creates a connection between a connection point and a client's sink, where the sink implements the outgoing interface supported by this connection point.",
+            "",
+            "A few add...Listener methods need additional parameters to add listeners or throw exceptions. One of these methods is com.sun.star.beans.XPropertySet.addPropertyChangeListener(). We ignore the problem in this interface. A solution must be provided in an additional XConnectionPoint interface."
+          ],
+          "raises": [
+            "com.sun.star.lang.ListenerExistException",
+            "com.sun.star.lang.InvalidListenerException"
+          ],
+          "args": [
+            [
+              "xListener",
+              "XInterface_8f010a43",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getConnectionPointContainer",
+          "returns": "XConnectionPointContainer_688110bf",
+          "desc": [],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getConnectionType",
+          "returns": "object",
+          "desc": [
+            "Using the XConnectionPointContainer.getConnectionPoints() method, a client can obtain an XConnectionPoint interface. Using that interface and this method, the client can determine the type of each connection point enumerated. The type returned from this method must enable the caller to access this same connection point through XConnectionPointContainer.findConnectionPoint()."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getConnections",
+          "returns": "typing.Tuple[XInterface_8f010a43, ...]",
+          "desc": [],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "unadvise",
+          "returns": "None",
+          "desc": [
+            "terminates a notification previously set up with advise.",
+            "",
+            "A few remove...Listener methods need additional parameters to add listeners or throw exceptions. One of these methods is com.sun.star.beans.XPropertySet.removePropertyChangeListener(). We ignore the problem in this interface. A solution must be provided in an additional XConnectionPoint interface."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xListener",
+              "XInterface_8f010a43",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

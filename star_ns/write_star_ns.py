@@ -7,10 +7,13 @@ from .gen_star_ns import GenerateStarNs
 from typing import Dict, Optional, Union
 from data_manage.data_class.component import Component
 from config import AppConfig
+from .opt import WriteNsEnum as WriteNsEnum
+
 
 class WriteStarNs:
     """Writes imports for all 'build/uno_obj' (paths set in config.json) files into  css... __init__.py files."""
-    def __init__(self, config: AppConfig, data: Dict[str, Component], rel_import:bool, log: Optional[logging.Logger] = None) -> None:
+
+    def __init__(self, config: AppConfig, data: Dict[str, Component], rel_import: bool, write_ns: WriteNsEnum, log: Optional[logging.Logger] = None) -> None:
         """
         Constructor
 
@@ -28,13 +31,27 @@ class WriteStarNs:
             self._root_dir = Path(root_dir)
         else:
             self._root_dir = Path(__main__.__file__).parent
-        self._write_root = Path(self._root_dir, self._config.builld_dir, *self._config.com_sun_star)
+        self._write_ns = write_ns
+        if self._write_ns == WriteNsEnum.CSS_LO:
+            self._write_root = Path(
+                self._root_dir, self._config.builld_dir, *self._config.com_sun_star_lo)
+        elif self._write_ns == WriteNsEnum.CSS_DYN:
+            self._write_root = Path(
+                self._root_dir, self._config.builld_dir, *self._config.com_sun_star_dyn)
+        else:
+            raise ValueError(
+                "WriteStarNs.__init__() invalid option for write_ns")
         self._rel_import = rel_import
-    
+
     def _ensure_init_py(self) -> None:
         # ensure build/com/sun/star/__init__.py exist
         p = Path(self._config.builld_dir)
-        for name in self._config.com_sun_star:
+        if self._write_ns == WriteNsEnum.CSS_LO:
+            names = self._config.com_sun_star_lo
+        else:
+            names = self._config.com_sun_star_dyn
+
+        for name in names:
             p = Path(p, name)
             if not p.is_absolute():
                 p = self._root_dir.joinpath(p)
@@ -52,15 +69,21 @@ class WriteStarNs:
         """
         self._ensure_init_py()
         header_lines = ['# coding: utf-8']
+
         with open(Path(self._root_dir, self._config.inc_lic), 'r') as f_lic:
             header_lines.extend(f_lic.read().splitlines())
-        
+
         for ns, c_data in self._data.items():
             lines = [ln for ln in header_lines]
             ns_path = ns.removeprefix('com.sun.star.')
             ns_parts = ns_path.split('.')
             if self._rel_import:
-                rel_ns_parts = [f_name for f_name in self._config.com_sun_star]
+                if self._write_ns == WriteNsEnum.CSS_LO:
+                    rel_ns_parts = [
+                        f_name for f_name in self._config.com_sun_star_lo]
+                else:
+                    rel_ns_parts = [
+                        f_name for f_name in self._config.com_sun_star_dyn]
                 rel_ns_parts.extend(ns_parts)
                 rel_ns = '.'.join(rel_ns_parts)
             else:
@@ -68,8 +91,10 @@ class WriteStarNs:
             write_path = self._write_root.joinpath(Path(*ns_parts))
             self._mkdirp(dest_dir=write_path)
             write_path = write_path.joinpath('__init__.py')
+
             gen_star = GenerateStarNs(
-                config=self._config, c_data=c_data, rel_ns=rel_ns)
+                config=self._config, c_data=c_data,
+                write_ns=self._write_ns,  rel_ns=rel_ns)
             lines.extend(gen_star.gen_lines())
             lines.append('')
             text = "\n".join(lines)
@@ -78,7 +103,7 @@ class WriteStarNs:
             if self._log:
                 rel_path = write_path.relative_to(self._root_dir)
                 self._log.info('Wrote file %s', str(rel_path))
-    
+
     def _mkdirp(self, dest_dir: Union[str, Path]):
         """
         Creates directory and all child directories if needed

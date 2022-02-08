@@ -29,6 +29,8 @@ class TouchFiles(FilesBase):
         self._touch_typedef: bool = bool(kwargs.get('touch_typedef', False))
         self._touch_py_files: bool = bool(kwargs.get('touch_py_files', False))
         self._touch_dyn_files: bool = bool(kwargs.get('touch_dyn_files', False))
+        self._touch_dyn_py_files: bool = bool(
+            kwargs.get('touch_dyn_py_files', False))
         self._touch_cache: bool = bool(kwargs.get('touch_cache_files', False))
         
 
@@ -83,6 +85,8 @@ class TouchFiles(FilesBase):
                     name += '.py'
                 elif self._touch_dyn_files:
                     name += self._config.template_dyn_ext
+                elif self._touch_dyn_py_files:
+                    name += self._config.template_dyn_py_ext
                 else:
                     name += self._config.template_struct_ext
                 t_path = Path(f_path, name)
@@ -113,6 +117,8 @@ class TouchFiles(FilesBase):
                     name += '.py'
                 elif self._touch_dyn_files:
                     name += self._config.template_dyn_ext
+                elif self._touch_dyn_py_files:
+                    name += self._config.template_dyn_py_ext
                 else:
                     name += self._config.template_const_ext
                 t_path = Path(f_path, name)
@@ -143,6 +149,8 @@ class TouchFiles(FilesBase):
                     name += '.py'
                 elif self._touch_dyn_files:
                     name += self._config.template_dyn_ext
+                elif self._touch_dyn_py_files:
+                    name += self._config.template_dyn_py_ext
                 else:
                     name += self._config.template_enum_ext
                 t_path = Path(f_path, name)
@@ -173,6 +181,8 @@ class TouchFiles(FilesBase):
                     name += '.py'
                 elif self._touch_dyn_files:
                     name += self._config.template_dyn_ext
+                elif self._touch_dyn_py_files:
+                    name += self._config.template_dyn_py_ext
                 else:
                     name += self._config.template_exception_ext
                 t_path = Path(f_path, name)
@@ -203,6 +213,8 @@ class TouchFiles(FilesBase):
                     name += '.py'
                 elif self._touch_dyn_files:
                     name += self._config.template_dyn_ext
+                elif self._touch_dyn_py_files:
+                    name += self._config.template_dyn_py_ext
                 else:
                     name += self._config.template_interface_ext
                 t_path = Path(f_path, name)
@@ -233,6 +245,8 @@ class TouchFiles(FilesBase):
                     name += '.py'
                 elif self._touch_dyn_files:
                     name += self._config.template_dyn_ext
+                elif self._touch_dyn_py_files:
+                    name += self._config.template_dyn_py_ext
                 else:
                     name += self._config.template_singleton_ext
                 t_path = Path(f_path, name)
@@ -263,6 +277,8 @@ class TouchFiles(FilesBase):
                     name += '.py'
                 elif self._touch_dyn_files:
                     name += self._config.template_dyn_ext
+                elif self._touch_dyn_py_files:
+                    name += self._config.template_dyn_py_ext
                 else:
                     name += self._config.template_service_ext
                 t_path = Path(f_path, name)
@@ -293,6 +309,8 @@ class TouchFiles(FilesBase):
                     name += '.py'
                 elif self._touch_dyn_files:
                     name += self._config.template_dyn_ext
+                elif self._touch_dyn_py_files:
+                    name += self._config.template_dyn_py_ext
                 else:
                     name += self._config.template_typedef_ext
                 t_path = Path(f_path, name)

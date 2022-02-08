@@ -1,0 +1,164 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.20",
+  "libre_office_ver": "7.2",
+  "name": "XBackend",
+  "type": "interface",
+  "namespace": "com.sun.star.configuration.backend",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "...uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".x_layer",
+        "XLayer",
+        "XLayer_4cd50fcb"
+      ],
+      [
+        ".x_update_handler",
+        "XUpdateHandler",
+        "XUpdateHandler_d8f512ef"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "XUpdateHandler_d8f512ef",
+      "typing.Tuple[XLayer_4cd50fcb, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[XLayer_4cd50fcb, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.configuration.backend.XLayer",
+        "com.sun.star.configuration.backend.XUpdateHandler"
+      ]
+    },
+    "name": "XBackend",
+    "imports": [],
+    "namespace": "com.sun.star.configuration.backend",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "Handles access to layered data stored in a repository.",
+      "",
+      "Data can be retrieved on behalf of one or more entities.",
+      "",
+      "There is an implied owner entity associated to the object when it is created. This entity should be used for normal data access. For administrative operations data of other entities can be accessed.",
+      "",
+      "**since**",
+      "",
+      "    OOo 1.1.2"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1configuration_1_1backend_1_1XBackend.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getOwnUpdateHandler",
+          "returns": "XUpdateHandler_d8f512ef",
+          "desc": [
+            "creates an update handler for the owner entity layer for a component."
+          ],
+          "raises": [
+            "BackendAccessException",
+            "com.sun.star.lang.NoSupportException",
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "aComponent",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getUpdateHandler",
+          "returns": "XUpdateHandler_d8f512ef",
+          "desc": [
+            "creates an update handler on an entity's layer for a component."
+          ],
+          "raises": [
+            "BackendAccessException",
+            "com.sun.star.lang.NoSupportException",
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "aComponent",
+              "str",
+              "in"
+            ],
+            [
+              "aEntity",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "listLayers",
+          "returns": "typing.Tuple[XLayer_4cd50fcb, ...]",
+          "desc": [
+            "retrieves the layers associated to an entity for a component."
+          ],
+          "raises": [
+            "BackendAccessException",
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "aComponent",
+              "str",
+              "in"
+            ],
+            [
+              "aEntity",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "listOwnLayers",
+          "returns": "typing.Tuple[XLayer_4cd50fcb, ...]",
+          "desc": [
+            "retrieves the layers associated to the owner entity for a component."
+          ],
+          "raises": [
+            "BackendAccessException",
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "aComponent",
+              "str",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

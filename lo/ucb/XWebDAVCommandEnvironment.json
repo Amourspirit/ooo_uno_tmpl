@@ -1,0 +1,94 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.20",
+  "libre_office_ver": "7.2",
+  "name": "XWebDAVCommandEnvironment",
+  "type": "interface",
+  "namespace": "com.sun.star.ucb",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        ".x_command_environment",
+        "XCommandEnvironment",
+        "XCommandEnvironment_fb330dee"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..beans.string_pair",
+        "StringPair",
+        "StringPair_a4bc0b14"
+      ],
+      [
+        ".web_davhttp_method",
+        "WebDAVHTTPMethod",
+        "WebDAVHTTPMethod_cbd50bdc"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.ucb.XCommandEnvironment": "XCommandEnvironment_fb330dee"
+    },
+    "quote": [
+      "WebDAVHTTPMethod_cbd50bdc",
+      "typing.Tuple[StringPair_a4bc0b14, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[StringPair_a4bc0b14, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.ucb.XCommandEnvironment"
+      ],
+      "typing": [
+        "com.sun.star.beans.StringPair",
+        "com.sun.star.ucb.WebDAVHTTPMethod"
+      ]
+    },
+    "name": "XWebDAVCommandEnvironment",
+    "imports": [],
+    "namespace": "com.sun.star.ucb",
+    "extends": [
+      "com.sun.star.ucb.XCommandEnvironment"
+    ],
+    "desc": [
+      "A command environment that can be used to deal with WebDAV/HTTP specific commands."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1ucb_1_1XWebDAVCommandEnvironment.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getUserRequestHeaders",
+          "returns": "typing.Tuple[StringPair_a4bc0b14, ...]",
+          "desc": [
+            "This method gets called while assembling a WebDAV/HTTP request.",
+            "",
+            "The returned headername-headervalue pairs will be appended to the list of request headers before the request is dispatched."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aURI",
+              "str",
+              "in"
+            ],
+            [
+              "eMethod",
+              "WebDAVHTTPMethod_cbd50bdc",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

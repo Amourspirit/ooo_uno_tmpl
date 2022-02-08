@@ -1,0 +1,141 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.20",
+  "libre_office_ver": "7.2",
+  "name": "XDriverManager",
+  "type": "interface",
+  "namespace": "com.sun.star.sdbc",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..beans.property_value",
+        "PropertyValue",
+        "PropertyValue_c9610c73"
+      ],
+      [
+        ".x_connection",
+        "XConnection",
+        "XConnection_a36a0b0c"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "XConnection_a36a0b0c",
+      "typing.Tuple[PropertyValue_c9610c73, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[PropertyValue_c9610c73, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.beans.PropertyValue",
+        "com.sun.star.sdbc.XConnection"
+      ]
+    },
+    "name": "XDriverManager",
+    "imports": [],
+    "namespace": "com.sun.star.sdbc",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "is the basic interface for managing a set of SDBC drivers.",
+      "",
+      "When the method com.sun.star.sdbc.XDriverManager.getConnection() is called, the DriverManager will attempt to locate a suitable driver."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1sdbc_1_1XDriverManager.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getConnection",
+          "returns": "XConnection_a36a0b0c",
+          "desc": [
+            "attempts to establish a connection to the given database URL.",
+            "",
+            "The DriverManager attempts to select an appropriate driver from the set of registered JDBC/SDBC drivers."
+          ],
+          "raises": [
+            "SQLException"
+          ],
+          "args": [
+            [
+              "url",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getConnectionWithInfo",
+          "returns": "XConnection_a36a0b0c",
+          "desc": [
+            "attempts to establish a connection to the given database URL.",
+            "",
+            "The DriverManager attempts to select an appropriate driver from the set of registered JDBC/SDBC drivers."
+          ],
+          "raises": [
+            "SQLException"
+          ],
+          "args": [
+            [
+              "url",
+              "str",
+              "in"
+            ],
+            [
+              "info",
+              "typing.Tuple[PropertyValue_c9610c73, ...]",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getLoginTimeout",
+          "returns": "int",
+          "desc": [
+            "gets the maximum time in seconds that a driver can wait when attempting to login to a database."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "setLoginTimeout",
+          "returns": "None",
+          "desc": [
+            "sets the maximum time in seconds that a driver will wait while attempting to connect to a database."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "seconds",
+              "int",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

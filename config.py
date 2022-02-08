@@ -13,11 +13,17 @@ class AppConfig:
     min_json_data_ver: str
     """Min version that can be parsed for .json files of Module Components"""
     uno_base_dir: str
-    """Base Directory for Uno such as uno_obj"""
+    """Base Directory for Uno such as uno"""
     cache_dir: str
     """The cache directory to use. This is generally used in creating a cache directory is system temp dir."""
+    base_dir: str
+    """
+    Base dir for project such as ooo
+    
+    This the root dir for helper modules
+    """
     uno_obj_dir: str
-    """Uno obj dir such as uno_obj. This is the directory that templates and json data file are written to."""
+    """Uno obj dir such as uno. This is the directory that templates and json data file are written to."""
     builld_dir: str
     """Output build dir such as build"""
     data_dir: str
@@ -72,6 +78,12 @@ class AppConfig:
     """
     Base class for constants of int flags type such as ``ConstIntFlagsBase``
     """
+    helper_ns: str
+    """helper namespace such as ooo.helper"""
+    helper_mod: str
+    """helper module name such as uno_helper"""
+    enum_mod: str
+    """enum helper mod name such as enum_helper"""
     env: str
     """
     module path to oenv suca as ``ooo_uno.oenv``
@@ -109,11 +121,17 @@ class AppConfig:
     template_service_ext: str
     """Extension for service files such as .tppi"""
     template_dyn_ext: str
-    """Extension for dynamic templagtes such as .dyn"""
+    """Extension for dynamic templates such as .dyn"""
+    template_dyn_py_ext: str
+    """Extensiong for dynamic templates py ext sucha as .dynpy"""
     component_types: List[str]
-    com_sun_star: List[str]
+    com_sun_star_lo: List[str]
     """
-    Path Like structure that will be used for namespace imports in build dir.
+    Path Like structure that will be used for LO namespace imports in build dir such as ['csslo'].
+    """
+    com_sun_star_dyn: List[str]
+    """
+    Path Like structure that will be used for DYN namespace imports in build dir such as ['cssdyn'].
     """
     inc_lic: str
     """Path to License Include File"""

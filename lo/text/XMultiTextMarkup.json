@@ -1,0 +1,76 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.20",
+  "libre_office_ver": "7.2",
+  "name": "XMultiTextMarkup",
+  "type": "interface",
+  "namespace": "com.sun.star.text",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [],
+    "from_imports_typing": [
+      [
+        ".text_markup_descriptor",
+        "TextMarkupDescriptor",
+        "TextMarkupDescriptor_1dcb0f01"
+      ]
+    ],
+    "extends_map": {},
+    "quote": [
+      "typing.Tuple[TextMarkupDescriptor_1dcb0f01, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[TextMarkupDescriptor_1dcb0f01, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [],
+      "typing": [
+        "com.sun.star.text.TextMarkupDescriptor"
+      ]
+    },
+    "name": "XMultiTextMarkup",
+    "imports": [],
+    "namespace": "com.sun.star.text",
+    "extends": [],
+    "desc": [
+      "provides functionality to apply multiple text markups in one call.",
+      "",
+      "**since**",
+      "",
+      "    OOo 3.0.1"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1text_1_1XMultiTextMarkup.html",
+    "items": {
+      "methods": [
+        {
+          "name": "commitMultiTextMarkup",
+          "returns": "None",
+          "desc": [
+            "submits multiple new markup ranges.",
+            "",
+            "The main use of this function will probably be for proofreading to allow for setting the markup of all found errors in a sentence in a single call. For this the sequence needs to provide the markups for all errors along with the markup for the identified sentence boundaries. The order of those entries is arbitrary."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "aMarkups",
+              "typing.Tuple[TextMarkupDescriptor_1dcb0f01, ...]",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,179 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.20",
+  "libre_office_ver": "7.2",
+  "name": "XGridDataModel",
+  "type": "interface",
+  "namespace": "com.sun.star.awt.grid",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "...lang.x_component",
+        "XComponent",
+        "XComponent_98dc0ab5"
+      ],
+      [
+        "...util.x_cloneable",
+        "XCloneable",
+        "XCloneable_99d00aa3"
+      ]
+    ],
+    "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.lang.XComponent": "XComponent_98dc0ab5",
+      "com.sun.star.util.XCloneable": "XCloneable_99d00aa3"
+    },
+    "quote": [
+      "typing.Tuple[object, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[object, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.lang.XComponent",
+        "com.sun.star.util.XCloneable"
+      ],
+      "typing": []
+    },
+    "name": "XGridDataModel",
+    "imports": [],
+    "namespace": "com.sun.star.awt.grid",
+    "extends": [
+      "com.sun.star.lang.XComponent",
+      "com.sun.star.util.XCloneable"
+    ],
+    "desc": [
+      "An instance of this interface is used by the UnoControlGrid to retrieve the content data that is displayed in the actual control.",
+      "",
+      "If you do not need your own model implementation, you can also use the DefaultGridDataModel.",
+      "",
+      "**since**",
+      "",
+      "    OOo 3.3"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1grid_1_1XGridDataModel.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getCellData",
+          "returns": "object",
+          "desc": [
+            "retrieves the data for a given cell"
+          ],
+          "raises": [
+            "com.sun.star.lang.IndexOutOfBoundsException"
+          ],
+          "args": [
+            [
+              "Column",
+              "int",
+              "in"
+            ],
+            [
+              "RowIndex",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getCellToolTip",
+          "returns": "object",
+          "desc": [
+            "retrieves the tool tip to be displayed when the mouse hovers over a given cell",
+            "",
+            "At the moment, only string tool tips are supported.",
+            "",
+            "If VOID is returned here, the cell's content will be displayed as tip, but only if it does not fit into the cell."
+          ],
+          "raises": [
+            "com.sun.star.lang.IndexOutOfBoundsException"
+          ],
+          "args": [
+            [
+              "Column",
+              "int",
+              "in"
+            ],
+            [
+              "RowIndex",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getRowData",
+          "returns": "typing.Tuple[object, ...]",
+          "desc": [
+            "retrieves the data for a complete row",
+            "",
+            "This method is provided for performance and convenience reasons, it delivers the same result as subsequent calls to getCellData() would."
+          ],
+          "raises": [
+            "com.sun.star.lang.IndexOutOfBoundsException"
+          ],
+          "args": [
+            [
+              "RowIndex",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getRowHeading",
+          "returns": "object",
+          "desc": [
+            "retrieves the heading of a given row",
+            "",
+            "A grid control will usually paint a row's title in the header column of the respective row.",
+            "",
+            "At the moment, only strings are supported as row headings."
+          ],
+          "raises": [
+            "com.sun.star.lang.IndexOutOfBoundsException"
+          ],
+          "args": [
+            [
+              "RowIndex",
+              "int",
+              "in"
+            ]
+          ]
+        }
+      ],
+      "properties": [
+        {
+          "name": "ColumnCount",
+          "returns": "int",
+          "desc": [
+            "denotes the number of columns for which the model can provide data"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "RowCount",
+          "returns": "int",
+          "desc": [
+            "denotes the number of rows for which the model can provide data"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,266 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.20",
+  "libre_office_ver": "7.2",
+  "name": "XCertificate",
+  "type": "interface",
+  "namespace": "com.sun.star.security",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".certificate_kind",
+        "CertificateKind",
+        "CertificateKind_ffd0e69"
+      ],
+      [
+        ".x_certificate_extension",
+        "XCertificateExtension",
+        "XCertificateExtension_6ead10f8"
+      ],
+      [
+        "..util.date_time",
+        "DateTime",
+        "DateTime_84de09d3"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "CertificateKind_ffd0e69",
+      "DateTime_84de09d3",
+      "XCertificateExtension_6ead10f8",
+      "typing.Tuple[XCertificateExtension_6ead10f8, ...]",
+      "typing.Tuple[int, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[XCertificateExtension_6ead10f8, ...]",
+      "typing.Tuple[int, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.security.CertificateKind",
+        "com.sun.star.security.XCertificateExtension",
+        "com.sun.star.util.DateTime"
+      ]
+    },
+    "name": "XCertificate",
+    "imports": [],
+    "namespace": "com.sun.star.security",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "Interface of a PKI Certificate.",
+      "",
+      "This interface represents a certificate (X.509 or OpenPGP) .",
+      "",
+      "**since**",
+      "",
+      "    LibreOffice 5.4"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1security_1_1XCertificate.html",
+    "items": {
+      "methods": [
+        {
+          "name": "findCertificateExtension",
+          "returns": "XCertificateExtension_6ead10f8",
+          "desc": [
+            "Find an extension with an object identifier."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "oid",
+              "typing.Tuple[int, ...]",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getCertificateUsage",
+          "returns": "int",
+          "desc": [
+            "get the certificate usage.",
+            "",
+            "The return value is a set of bits, as defined in RFC3280 for the KeyUsage BIT STRING. Note the bit and byte order used in ASN.1, so for instance the bit dataEncipherment in KeyUsage, \\\"bit 3\\\", corresponds to CERT_DATA_ENCIPHERMENT_KEY_USAGE in Win32 and KU_DATA_ENCIPHERMENT in NSS, both with value 0x10."
+          ],
+          "raises": [],
+          "args": []
+        }
+      ],
+      "types": [
+        {
+          "name": "Encoded",
+          "returns": "typing.Tuple[int, ...]",
+          "desc": [
+            "the DER encoded form of the certificate"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Extensions",
+          "returns": "typing.Tuple[XCertificateExtension_6ead10f8, ...]",
+          "desc": [
+            "all extensions of a certificate."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "IssuerUniqueID",
+          "returns": "typing.Tuple[int, ...]",
+          "desc": [
+            "the issuer unique ID attribute of the certificate."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "MD5Thumbprint",
+          "returns": "typing.Tuple[int, ...]",
+          "desc": [
+            "the MD5 thumbprint"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "SHA1Thumbprint",
+          "returns": "typing.Tuple[int, ...]",
+          "desc": [
+            "the SHA-1 thumbprint"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "SerialNumber",
+          "returns": "typing.Tuple[int, ...]",
+          "desc": [
+            "the serial number attribute of the certificate."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "SubjectPublicKeyValue",
+          "returns": "typing.Tuple[int, ...]",
+          "desc": [
+            "the value of the subject public key"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "SubjectUniqueID",
+          "returns": "typing.Tuple[int, ...]",
+          "desc": [
+            "the subject unique ID attribute of the certificate."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ],
+      "properties": [
+        {
+          "name": "CertificateKind",
+          "returns": "CertificateKind_ffd0e69",
+          "desc": [
+            "the kind of certificate, X.509 or OpenPGP",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 5.4"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "IssuerName",
+          "returns": "str",
+          "desc": [
+            "the issuer name attribute of the certificate."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "NotValidAfter",
+          "returns": "DateTime_84de09d3",
+          "desc": [
+            "the validity NotAfter date attribute of the certificate."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "NotValidBefore",
+          "returns": "DateTime_84de09d3",
+          "desc": [
+            "the validity NotBefore date attribute of the certificate."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "SignatureAlgorithm",
+          "returns": "str",
+          "desc": [
+            "the signature algorithm"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "SubjectName",
+          "returns": "str",
+          "desc": [
+            "the subject name attribute of the certificate."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "SubjectPublicKeyAlgorithm",
+          "returns": "str",
+          "desc": [
+            "the algorithm of the subject public key"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Version",
+          "returns": "int",
+          "desc": [
+            "the version number attribute of the certificate."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
+  }
+}

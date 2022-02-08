@@ -22,6 +22,7 @@ value: string or list, tuple of strings
 $self.load_data()#slurp
 ## Main Template
 #set $safe_name = $self.get_safe_word($name)
+#set $fullname = $namespace + '.' + $safe_name
 #set s_enum = ''
 #set $key_list = list($enum_dict.keys())
 #set $s_enum = $self.dict_keys_to_str($enum_dict)
@@ -53,6 +54,10 @@ class ${safe_name}(Enum):
         `API $name <$link>`_
 #end if
     """
+    __ooo_ns__: str = '$namespace'
+    __ooo_full_ns__: str = '$fullname'
+    __ooo_type_name__: str = 'enum'
+
 #for $key in $key_list
 #set $value = $enum_dict[$key]
     $self.get_safe_word($key) = '$key'

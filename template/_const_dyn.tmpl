@@ -18,8 +18,8 @@ $self.init_data()#slurp
 #attr $requires_typing = False
 #attr $attribs = []
 ##  following attr will get values from BaseEnumDyn class
-#attr $uno_obj = 'uno_obj'
-#attr $dyn = 'dyn'
+#attr $uno_obj = ''
+#attr $dyn = ''
 $self.load_data()#slurp
 ## Main Template
 #set $safe_name = $self.get_safe_word($name)
@@ -36,7 +36,16 @@ $self.load_data()#slurp
 #end if
 # Namespace: $namespace
 from enum import $enum_class
-$self.get_rel_import(in_str=$uno_obj_in, ns=$uno_obj_ns) as $safe_name
+from typing import TYPE_CHECKING
+from ooo.oenv import UNO_ENVIRONMENT, UNO_RUNTIME
+_DYNAMIC = False
+if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
+    _DYNAMIC = True
+
+if not TYPE_CHECKING and _DYNAMIC:
+    from $namespace import $safe_name
+else:
+    $self.get_rel_import(in_str=$uno_obj_in, ns=$uno_obj_ns) as $safe_name
 
 
 class ${safe_name}Enum($enum_class):

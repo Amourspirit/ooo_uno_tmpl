@@ -1,0 +1,78 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.20",
+  "libre_office_ver": "7.2",
+  "name": "XSystemTransferable",
+  "type": "interface",
+  "namespace": "com.sun.star.datatransfer",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "typing.Tuple[int, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[int, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": []
+    },
+    "name": "XSystemTransferable",
+    "imports": [],
+    "namespace": "com.sun.star.datatransfer",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "Interface to be implemented by objects used to provide system dependent data for a transfer operation.",
+      "",
+      "Those objects usually also implement XTransferable."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1datatransfer_1_1XSystemTransferable.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getData",
+          "returns": "object",
+          "desc": [
+            "Called by a data consumer to obtain a system specific data object from the source.",
+            "",
+            "The data object is returned in an any. The contained type may differ on different platforms.",
+            "",
+            "Notes:Under Windows the returned any contains an unsigned long which represents a pointer to an IDataObject interface. The caller of getData has to release the data object (IDataObject.Release) if it is no longer needed. The caller must also make sure that the current thread has been initialized for OLE (use OleInitialize)."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aProcessId",
+              "typing.Tuple[int, ...]",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

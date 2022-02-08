@@ -1,0 +1,169 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.20",
+  "libre_office_ver": "7.2",
+  "name": "XProofreader",
+  "type": "interface",
+  "namespace": "com.sun.star.linguistic2",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        ".x_supported_locales",
+        "XSupportedLocales",
+        "XSupportedLocales_5bda1056"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..beans.property_value",
+        "PropertyValue",
+        "PropertyValue_c9610c73"
+      ],
+      [
+        "..lang.locale",
+        "Locale",
+        "Locale_70d308fa"
+      ],
+      [
+        ".proofreading_result",
+        "ProofreadingResult",
+        "ProofreadingResult_6cc910d4"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.linguistic2.XSupportedLocales": "XSupportedLocales_5bda1056"
+    },
+    "quote": [
+      "Locale_70d308fa",
+      "ProofreadingResult_6cc910d4",
+      "typing.Tuple[PropertyValue_c9610c73, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[PropertyValue_c9610c73, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.linguistic2.XSupportedLocales"
+      ],
+      "typing": [
+        "com.sun.star.beans.PropertyValue",
+        "com.sun.star.lang.Locale",
+        "com.sun.star.linguistic2.ProofreadingResult"
+      ]
+    },
+    "name": "XProofreader",
+    "imports": [],
+    "namespace": "com.sun.star.linguistic2",
+    "extends": [
+      "com.sun.star.linguistic2.XSupportedLocales"
+    ],
+    "desc": [
+      "API for proofreading a text.",
+      "",
+      "**since**",
+      "",
+      "    OOo 3.0.1"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1linguistic2_1_1XProofreader.html",
+    "items": {
+      "methods": [
+        {
+          "name": "doProofreading",
+          "returns": "ProofreadingResult_6cc910d4",
+          "desc": [
+            "start checking",
+            "",
+            "Currently the following properties may be supported:"
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "aDocumentIdentifier",
+              "str",
+              "in"
+            ],
+            [
+              "aText",
+              "str",
+              "in"
+            ],
+            [
+              "aLocale",
+              "Locale_70d308fa",
+              "in"
+            ],
+            [
+              "nStartOfSentencePosition",
+              "int",
+              "in"
+            ],
+            [
+              "nSuggestedBehindEndOfSentencePosition",
+              "int",
+              "in"
+            ],
+            [
+              "aProperties",
+              "typing.Tuple[PropertyValue_c9610c73, ...]",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "ignoreRule",
+          "returns": "None",
+          "desc": [
+            "disables a specific rule for a given locale.",
+            "",
+            "If the locale is empty the rule should be ignored for all languages."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "aRuleIdentifier",
+              "str",
+              "in"
+            ],
+            [
+              "aLocale",
+              "Locale_70d308fa",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "isSpellChecker",
+          "returns": "bool",
+          "desc": [
+            "whether is the text checked by the spell checker"
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "resetIgnoreRules",
+          "returns": "None",
+          "desc": [
+            "sets all rules back to their default settings."
+          ],
+          "raises": [],
+          "args": []
+        }
+      ]
+    }
+  }
+}

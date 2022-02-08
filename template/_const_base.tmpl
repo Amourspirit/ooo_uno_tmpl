@@ -20,6 +20,7 @@ $self.init_data()#slurp
 $self.load_data()#slurp
 ## Main Template
 #set $safe_name = $self.get_safe_word($name)
+#set $fullname = $namespace + '.' + $safe_name
 # coding: utf-8
 #include raw "resources/inc_lic.txt"
 # Const Class
@@ -59,6 +60,10 @@ class ${safe_name}(object):
         `API $name <$link>`_
 #end if
     """
+    __ooo_ns__: str = '$namespace'
+    __ooo_full_ns__: str = '$fullname'
+    __ooo_type_name__: str = 'const'
+
 #for $item in $attribs
     $self.get_safe_word($item['name']) = $self.get_q_type($item['value'])
     #if len($item['lines']) > 0

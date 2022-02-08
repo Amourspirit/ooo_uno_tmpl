@@ -193,8 +193,9 @@ def _main():
     # ns = 'com.sun.star.form.DataAwareControlModel'
     # ns = 'com.sun.star.text.TextRange'
     # args = 'data db-json -n com.sun.star.form.control.GridControl'
-    url = 'https://api.libreoffice.org/docs/idl/ref/exceptioncom_1_1sun_1_1star_1_1uno_1_1Exception.html'
-    args = 'compile exception -a'
+    url = 'https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1util.html'
+    args = 'data star -r -s'
+    # args += url
     sys.argv.extend(args.split())
     main()
 
@@ -488,7 +489,7 @@ def _args_touch(parser: argparse.ArgumentParser, config: AppConfig) -> None:
         default='tmpl',
         const='tmpl',
         nargs='?',
-        choices=['py', 'dyn', 'tmpl'],
+        choices=['py', 'dyn','dynpy', 'tmpl'],
         help='touch *.py, *.dyn, *.tmpl files (default: %(default)s)')
     parser.add_argument(
         '--cache-files',
@@ -612,13 +613,24 @@ def _args_data_json(parser: argparse.ArgumentParser) -> None:
 
 
 def _args_data_star(parser: argparse.ArgumentParser, config: AppConfig) -> None:
-    css_dir = config.builld_dir + '/' + '/'.join(config.com_sun_star)
-    parser.add_argument(
-        '-s', '--write-star',
-        help=f"Writes imports for all '{config.builld_dir}/{config.uno_obj_dir}' files into  {css_dir}... __init__.py files.",
+    opt_group = parser.add_argument_group()
+    css_dir_lo = config.builld_dir + '/' + '/'.join(config.com_sun_star_lo)
+    css_dir_dyn = config.builld_dir + '/' + '/'.join(config.com_sun_star_dyn)
+    opt_group.add_argument(
+        '-l', '--css-lo',
+        help=f"Writes imports for all '{config.builld_dir}/{config.uno_obj_dir}' files into  {css_dir_lo}... __init__.py files.",
         action='store_true',
-        dest='write_star_ns',
-        required=True
+        dest='write_lo',
+        default=False,
+        required=False
+    )
+    opt_group.add_argument(
+        '-d', '--css-dyn',
+        help=f"Writes imports for all '{config.builld_dir}/{config.dyn_dir}' files into  {css_dir_dyn}... __init__.py files.",
+        action='store_true',
+        dest='write_dyn',
+        default=False,
+        required=False
     )
     parser.add_argument(
         '-r', '--no-rel-import',
@@ -968,8 +980,11 @@ def _args_process_compile_cmd_data(args: argparse.Namespace, config: AppConfig) 
 def _args_action_touch(args: argparse.Namespace, config: AppConfig) -> None:
     touch_py_files = False
     touch_dyn_files = False
+    touch_dyn_py_files = False
     if args.option == 'dyn':
         touch_dyn_files = True
+    if args.option == 'dynpy':
+        touch_dyn_py_files = True
     elif args.option == 'py':
         touch_dyn_files = True
         
@@ -988,6 +1003,7 @@ def _args_action_touch(args: argparse.Namespace, config: AppConfig) -> None:
         touch_service=args.service_all,
         touch_py_files=touch_py_files,
         touch_dyn_files=touch_dyn_files,
+        touch_dyn_py_files=touch_dyn_py_files,
         touch_cache_files=args.cache_files
     )
     _log_end_action()
@@ -1156,13 +1172,14 @@ def _args_action_db_json(args: argparse.Namespace, config: AppConfig) -> None:
 
 
 def _args_action_db_star(args: argparse.Namespace, config: AppConfig) -> None:
-    if args.write_star_ns:
+    if args.write_lo or args.write_dyn:
         if not query_yes_no(f"Are you sure write all star namespace import files into {config.data_dir}?", 'no'):
             return
     qc = StarNsControler(
         config=config,
         logger=logger,
-        write_star_ns=args.write_star_ns,
+        write_lo=args.write_lo,
+        write_dyn=args.write_dyn,
         rel_import=args.rel_import
     )
     qc_result = qc.results()
@@ -1311,6 +1328,10 @@ def main():
     os.environ['config_db_mod_info'] = config.db_mod_info
     os.environ['config_uno_obj_dir'] = config.uno_obj_dir
     os.environ['config_dyn_dir'] = config.dyn_dir
+    os.environ['config_helper_ns'] = config.helper_ns
+    os.environ['config_helper_mod'] = config.helper_mod
+    os.environ['config_enum_mod'] = config.enum_mod
+    os.environ['config_oenv_ns'] = config.env
     # endregion Config
 
     # region create parsers

@@ -1,0 +1,237 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.20",
+  "libre_office_ver": "7.2",
+  "name": "XPlayer",
+  "type": "interface",
+  "namespace": "com.sun.star.media",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [],
+    "from_imports_typing": [
+      [
+        "..awt.size",
+        "Size",
+        "Size_576707ef"
+      ],
+      [
+        ".x_frame_grabber",
+        "XFrameGrabber",
+        "XFrameGrabber_c56f0c00"
+      ],
+      [
+        ".x_player_window",
+        "XPlayerWindow",
+        "XPlayerWindow_c7130c45"
+      ]
+    ],
+    "extends_map": {},
+    "quote": [
+      "Size_576707ef",
+      "XFrameGrabber_c56f0c00",
+      "XPlayerWindow_c7130c45",
+      "typing.Tuple[object, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[object, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [],
+      "typing": [
+        "com.sun.star.awt.Size",
+        "com.sun.star.media.XFrameGrabber",
+        "com.sun.star.media.XPlayerWindow"
+      ]
+    },
+    "name": "XPlayer",
+    "imports": [],
+    "namespace": "com.sun.star.media",
+    "extends": [],
+    "desc": [
+      "is the multimedia stream handling interface.",
+      "",
+      "This allows to perform every basic operation on videos and sounds."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1media_1_1XPlayer.html",
+    "items": {
+      "methods": [
+        {
+          "name": "createFrameGrabber",
+          "returns": "XFrameGrabber_c56f0c00",
+          "desc": [
+            "gets a frame grabber for this stream."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "createPlayerWindow",
+          "returns": "XPlayerWindow_c7130c45",
+          "desc": [
+            "gets a new player window for this stream control"
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aArguments",
+              "typing.Tuple[object, ...]",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getDuration",
+          "returns": "float",
+          "desc": [
+            "gets the stream length"
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getMediaTime",
+          "returns": "float",
+          "desc": [
+            "gets the current position of the cursor in the stream"
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getPreferredPlayerWindowSize",
+          "returns": "Size_576707ef",
+          "desc": [
+            "gets the preferred window size"
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getVolumeDB",
+          "returns": "int",
+          "desc": [
+            "gets the current audio volume in decibel"
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "isMute",
+          "returns": "bool",
+          "desc": [
+            "gets whether the volume is temporarily down to 0 or not."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "isPlaybackLoop",
+          "returns": "bool",
+          "desc": [
+            "indicates whether the stream reading will restart after the end of the stream."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "isPlaying",
+          "returns": "bool",
+          "desc": [
+            "indicates whether the stream is played or not."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "setMediaTime",
+          "returns": "None",
+          "desc": [
+            "sets the new cursor position in the media stream.",
+            "",
+            "After using this method the stream is stopped."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "fTime",
+              "float",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setMute",
+          "returns": "None",
+          "desc": [
+            "sets the volume to 0 or to its previous value."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "bSet",
+              "bool",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setPlaybackLoop",
+          "returns": "None",
+          "desc": [
+            "sets whether the stream reading should restart at the stream start after the end of the stream."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "bSet",
+              "bool",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setVolumeDB",
+          "returns": "None",
+          "desc": [
+            "sets the audio volume in decibel."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "nDB",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "start",
+          "returns": "None",
+          "desc": [
+            "starts reading the stream from the current position."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "stop",
+          "returns": "None",
+          "desc": [
+            "stops reading the stream and leave the cursor at its current position."
+          ],
+          "raises": [],
+          "args": []
+        }
+      ]
+    }
+  }
+}
