@@ -42,6 +42,13 @@ TYPE_MAP_PY_WRAPPER = {
     "list": "typing.List",
     "tuple": "typing.Tuple"
 }
+
+TYPE_MAP_PY_WRAPPER_REPEAT = {"tuple"}
+"""
+Wrappers the repeat such as tuple
+
+Repeating wrappers are generally formated as 'typing.tuple[str, ...]'
+"""
 # endregion Maps
 
 # region PythonType
@@ -637,7 +644,10 @@ class RuleSeqLikePrimative(BaseRule):
         if self._wrapper_type.type in TYPE_MAP_PY_WRAPPER:
             w = TYPE_MAP_PY_WRAPPER[self._wrapper_type.type]
             realtype = self._wrapper_type.type
-            w += f"[{p_type.type}, ...]"
+            if self._wrapper_type.type in TYPE_MAP_PY_WRAPPER_REPEAT:
+                w += f"[{p_type.type}, ...]"
+            else:
+                w += f"[{p_type.type}]"
         else:
             # w = f"typing.List[{p_type.type}]"
             w = f"typing.Tuple[{p_type.type}, ...]"
@@ -760,7 +770,10 @@ class RuleSeqLikeNonPrim(BaseRule):
         if self._wrapper_type.type in TYPE_MAP_PY_WRAPPER:
             realtype = self._wrapper_type.type
             s = TYPE_MAP_PY_WRAPPER[self._wrapper_type.type]
-            w = f"{s}[{child.type}, ...]"
+            if self._wrapper_type.type in TYPE_MAP_PY_WRAPPER_REPEAT:
+                w = f"{s}[{child.type}, ...]"
+            else:
+                w = f"{s}[{child.type}]"
         else:
             # realtype = 'list'
             # w = f"typing.List[{child.type}]"
@@ -855,7 +868,10 @@ class RuleSeqLikePair(BaseRule):
         if self._wrapper_type.type in TYPE_MAP_PY_WRAPPER:
             realtype = self._wrapper_type.type
             s = TYPE_MAP_PY_WRAPPER[self._wrapper_type.type]
-            w = f"{s}[{p_inner.type}]"
+            if self._wrapper_type.type in TYPE_MAP_PY_WRAPPER_REPEAT:
+                w = f"{s}[{p_inner.type}, ...]"
+            else:
+                w = f"{s}[{p_inner.type}]"
         else:
             realtype = 'list'
             w = f"typing.List[{p_inner.type}]"
