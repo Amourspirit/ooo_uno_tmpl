@@ -97,7 +97,7 @@ Regeneration of Database:
         The --data flag instructs to write into data directory.
     2. Write all component json files into data directory.
         This is done by running the following on the command line.
-        python app.py compile compile-batch --data --all
+        python app.py compile batch --data --all
         The --data flag instructs to write into data directory.
     3. Created database if it does not exist.
         This is done by running the following on the command line.
@@ -971,7 +971,7 @@ def _args_process_compile_cmd_data(args: argparse.Namespace, config: AppConfig) 
         _args_action_links_service(args=args, config=config)
     elif args.command_data == 'typedef':
         _args_action_links_typedef(args=args, config=config)
-    elif args.command_data == 'compile-batch':
+    elif args.command_data == 'batch':
         _args_action_links_batch(args=args, config=config)
 # endregion Compile Links Command
 # region    Touch
@@ -1363,7 +1363,7 @@ def main():
     links_typedef_parser = compile.add_parser(
         name='typedef', help=f"Compile typedef components found in {config.module_links_file} files.")
     links_batch_parser = compile.add_parser(
-        name='compile-batch', help="Batch compile one or more at once")
+        name='batch', help="Batch compile one or more at once")
     # endregion compile
 
     # region    url-parse
