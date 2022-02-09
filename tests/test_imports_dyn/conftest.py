@@ -1,10 +1,7 @@
 # coding: utf-8
-from distutils.command.build import build
 from typing import Set
 import os
 import sys
-from pathlib import Path
-from rel import mod_rel as RelInfo
 
 from tests.mod_types import get_module_types
 

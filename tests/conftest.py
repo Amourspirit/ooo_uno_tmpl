@@ -4,9 +4,6 @@ import pytest
 import logging
 import os
 import sys
-import glob
-import re
-import json
 from pathlib import Path
 sys.path.append(os.path.realpath('.'))
 from logger.log_handle import get_logger
