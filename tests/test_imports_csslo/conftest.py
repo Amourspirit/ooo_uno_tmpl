@@ -3,8 +3,6 @@ from typing import List
 import os
 import sys
 import glob
-import re
-import json
 from pathlib import Path
 
 sys.path.append(os.path.realpath('.'))

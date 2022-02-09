@@ -2,9 +2,6 @@
 from typing import Set
 import os
 import sys
-from pathlib import Path
-from rel import mod_rel as RelInfo
-
 from tests.mod_types import get_module_types
 
 sys.path.append(os.path.realpath('.'))
