@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.20",
+  "version": "0.1.21",
   "libre_office_ver": "7.2",
   "name": "CharacterProperties",
   "type": "service",
@@ -15,17 +15,18 @@
   },
   "data": {
     "allow_db": true,
-    "from_imports": [],
+    "from_imports": [
+      [
+        "..beans.property_value",
+        "PropertyValue",
+        "PropertyValue_c9610c73"
+      ]
+    ],
     "from_imports_typing": [
       [
         "..awt.font_slant",
         "FontSlant",
         "FontSlant_849509ed"
-      ],
-      [
-        "..beans.property_value",
-        "PropertyValue",
-        "PropertyValue_c9610c73"
       ],
       [
         "..container.x_name_container",
@@ -53,16 +54,16 @@
         "Color_68e908c5"
       ]
     ],
-    "extends_map": {},
+    "extends_map": {
+      "com.sun.star.beans.PropertyValue": "PropertyValue_c9610c73"
+    },
     "quote": [
       "BorderLine2_af200b28",
       "Color_68e908c5",
       "FontSlant_849509ed",
       "Locale_70d308fa",
       "ShadowFormat_bb840bdf",
-      "XNameContainer_cb90e47",
-      "typing.Tuple[PropertyValue_c9610c73, ...]",
-      "typing.Tuple[str, ...]"
+      "XNameContainer_cb90e47"
     ],
     "typings": [
       "typing.Tuple[PropertyValue_c9610c73, ...]",
@@ -70,10 +71,11 @@
     ],
     "requires_typing": true,
     "full_imports": {
-      "general": [],
+      "general": [
+        "com.sun.star.beans.PropertyValue"
+      ],
       "typing": [
         "com.sun.star.awt.FontSlant",
-        "com.sun.star.beans.PropertyValue",
         "com.sun.star.container.XNameContainer",
         "com.sun.star.lang.Locale",
         "com.sun.star.table.BorderLine2",

@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.20",
+  "version": "0.1.21",
   "libre_office_ver": "7.2",
   "name": "XCertificate",
   "type": "interface",
@@ -17,6 +17,11 @@
     "allow_db": true,
     "from_imports": [
       [
+        ".x_certificate_extension",
+        "XCertificateExtension",
+        "XCertificateExtension_6ead10f8"
+      ],
+      [
         "..uno.x_interface",
         "XInterface",
         "XInterface_8f010a43"
@@ -29,24 +34,19 @@
         "CertificateKind_ffd0e69"
       ],
       [
-        ".x_certificate_extension",
-        "XCertificateExtension",
-        "XCertificateExtension_6ead10f8"
-      ],
-      [
         "..util.date_time",
         "DateTime",
         "DateTime_84de09d3"
       ]
     ],
     "extends_map": {
+      "com.sun.star.security.XCertificateExtension": "XCertificateExtension_6ead10f8",
       "com.sun.star.uno.XInterface": "XInterface_8f010a43"
     },
     "quote": [
       "CertificateKind_ffd0e69",
       "DateTime_84de09d3",
       "XCertificateExtension_6ead10f8",
-      "typing.Tuple[XCertificateExtension_6ead10f8, ...]",
       "typing.Tuple[int, ...]"
     ],
     "typings": [
@@ -56,11 +56,11 @@
     "requires_typing": true,
     "full_imports": {
       "general": [
+        "com.sun.star.security.XCertificateExtension",
         "com.sun.star.uno.XInterface"
       ],
       "typing": [
         "com.sun.star.security.CertificateKind",
-        "com.sun.star.security.XCertificateExtension",
         "com.sun.star.util.DateTime"
       ]
     },

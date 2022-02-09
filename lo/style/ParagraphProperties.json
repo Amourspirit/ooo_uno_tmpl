@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.20",
+  "version": "0.1.21",
   "libre_office_ver": "7.2",
   "name": "ParagraphProperties",
   "type": "service",
@@ -15,13 +15,19 @@
   },
   "data": {
     "allow_db": true,
-    "from_imports": [],
-    "from_imports_typing": [
+    "from_imports": [
       [
         "..beans.property_value",
         "PropertyValue",
         "PropertyValue_c9610c73"
       ],
+      [
+        ".tab_stop",
+        "TabStop",
+        "TabStop_860309f6"
+      ]
+    ],
+    "from_imports_typing": [
       [
         "..container.x_index_replace",
         "XIndexReplace",
@@ -63,11 +69,6 @@
         "ParagraphAdjust_e42a0d3a"
       ],
       [
-        ".tab_stop",
-        "TabStop",
-        "TabStop_860309f6"
-      ],
-      [
         "..table.border_line",
         "BorderLine",
         "BorderLine_a3f80af6"
@@ -83,7 +84,10 @@
         "Color_68e908c5"
       ]
     ],
-    "extends_map": {},
+    "extends_map": {
+      "com.sun.star.beans.PropertyValue": "PropertyValue_c9610c73",
+      "com.sun.star.style.TabStop": "TabStop_860309f6"
+    },
     "quote": [
       "BorderLine_a3f80af6",
       "BreakType_9b050ac0",
@@ -95,9 +99,7 @@
       "ShadowFormat_bb840bdf",
       "XGraphic_a4da0afc",
       "XIndexReplace_feed0dd7",
-      "XNameContainer_cb90e47",
-      "typing.Tuple[PropertyValue_c9610c73, ...]",
-      "typing.Tuple[TabStop_860309f6, ...]"
+      "XNameContainer_cb90e47"
     ],
     "typings": [
       "typing.Tuple[PropertyValue_c9610c73, ...]",
@@ -105,9 +107,11 @@
     ],
     "requires_typing": true,
     "full_imports": {
-      "general": [],
-      "typing": [
+      "general": [
         "com.sun.star.beans.PropertyValue",
+        "com.sun.star.style.TabStop"
+      ],
+      "typing": [
         "com.sun.star.container.XIndexReplace",
         "com.sun.star.container.XNameContainer",
         "com.sun.star.graphic.XGraphic",
@@ -116,7 +120,6 @@
         "com.sun.star.style.GraphicLocation",
         "com.sun.star.style.LineSpacing",
         "com.sun.star.style.ParagraphAdjust",
-        "com.sun.star.style.TabStop",
         "com.sun.star.table.BorderLine",
         "com.sun.star.table.ShadowFormat",
         "com.sun.star.util.Color"
